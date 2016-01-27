@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="advert" creation_time="1442572936" table_version="0.01" module_version="1.00" table_class="Application_Advert" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES advert_title="INPUTTEXT" advert_content="INPUTTEXT" advert_url="INPUTTEXT" advert_image_url="INPUTTEXT" advert_owner_user_id="INPUTTEXT" advert_creation_date="INT" advert_modified_date="INT" advert_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

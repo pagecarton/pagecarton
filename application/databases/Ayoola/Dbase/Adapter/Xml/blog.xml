@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DOCUMENT_ELEMENT table_name="blog" creation_time="1340214089" creation_ip="2130706433">
+  <RECORDS autoId="2">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="blog_creation_date"><![CDATA[1340215465]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="blog_name"><![CDATA[ltarelquotshadowboxchangeElementIdthis-gtgetObjectNamequothrefquottoolsclassplayergetobject_nameblogCreatorquotgtCreateltagt]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="blog_creator_user_id"><![CDATA[7]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="blog_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="blog_title"><![CDATA[ayoola]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="blog_content"><![CDATA[&lt;a rel=&quot;shadowbox;changeElementId=' . $this-&gt;getObjectName() . '&quot; href=&quot;/tools/classplayer/get/object_name/blogCreator/&quot;&gt;Create&lt;/a&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="blog_description"><![CDATA[&lt;a rel=&quot;shadowbox;changeElementId=' . $this-&gt;getObjectName() . '&quot; href=&quot;/tools/classplayer/get/object_name/blogCreator/&quot;&gt;Create&lt;/a&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="blog_tags"><![CDATA[&lt;a rel=&quot;shadowbox;changeElementId=]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="blog_modified_date"><![CDATA[1340222958]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_id"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_id"><![CDATA[54]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="blog_editor_user_id"><![CDATA[7]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES blog_name="INPUTTEXT, UNIQUE" blog_title="INPUTTEXT" blog_description="TEXTAREA" blog_content="TEXTAREA" blog_tags="INPUTTEXT" blog_creation_date="INT" blog_modified_date="INT" blog_creator_user_id="INT" blog_editor_user_id="INT" enabled="INT" document_id="INT, FOREIGN_KEYS = Ayoola_Doc_Document" category_id="INT, FOREIGN_KEYS = Application_Category" auth_level="INT, FOREIGN_KEYS = Ayoola_Access_AuthLevel" blog_id="INT"/>
+    <FOREIGN_KEYS Ayoola_Doc_Document="document_id" Application_Category="category_id" Ayoola_Access_AuthLevel="auth_level"/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

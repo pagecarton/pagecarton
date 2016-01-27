@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="log" creation_time="1407514372" table_version="0.02" module_version="1.00" table_class="Application_Log_View_Error_Log" creation_ip="2130706433">
+  <RECORDS autoId="9">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407514372]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-1]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407514830]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-2]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407514884]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-3]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407514909]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-4]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407515114]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-5]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407515361]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-6]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="7">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(186): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407515451]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-7]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="8">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(186): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407515466]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-8]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES error_message="INPUTTEXT" error_time="INPUTTEXT" log_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

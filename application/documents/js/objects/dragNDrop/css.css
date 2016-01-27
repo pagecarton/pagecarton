@@ -1,0 +1,64 @@
+.dragboxContainer, .masterDragboxContainer, .mouseoverDragboxContainer {
+	border-radius: .4em;
+	border: 2px groove #ccc;
+	background: white;
+	padding:.5em;
+	position: relative;
+	font-size: small;
+}
+
+.masterDragboxContainer {
+	background-color: #ffd;
+	position: fixed;
+	max-height: 100%;
+	top: 0px;
+	overflow: auto;
+}
+
+.mouseoverDragboxContainer {
+	background-color: #ffff99;
+}
+
+.dragBox, .mouseoverDragbox, .mousedownDragbox, .mousemoveDragbox, .draggedDragbox {
+	border-radius: .4em;
+	border: .1em groove #ccc;
+	cursor: move;
+	background-color: #eee;
+	position: relative;
+	padding: .3em;
+	margin: .3em;
+}
+
+.draggedDragbox {
+  background-color: #ffe;
+}
+
+.mouseoverDragbox {
+  background-color: #ffff99;
+}
+
+.mousedownDragbox {
+  background-color: green;
+}
+
+.mousemoveDragbox {
+  background-color: red;
+}
+
+.dragboxPlaceholder {
+	filter: alpha(opacity=0);
+}
+
+.dragboxDemo {
+	position: absolute;
+	z-index: 10000;
+	filter: alpha(opacity=50);
+	opacity: 0.5; 
+}
+
+.miniDragbox {
+  float: left;
+  margin: 0 5px 5px 0;
+  width: 20px;
+  height: 20px;
+}

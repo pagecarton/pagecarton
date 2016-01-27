@@ -1,0 +1,46 @@
+@charset "utf-8";
+/* FORM */
+@import "/css/default/form.css";
+
+/* CLASSES */
+@import "/css/default/classes.css";
+
+/* LINKS */
+@import "/css/default/links.css";
+
+/* TABLE */
+@import "/css/default/table.css";
+
+html, body{
+}
+.Ayoola_Page_Layout_Edit_File_header{
+	/* display: none; */
+}
+.Ayoola_Page_Layout_Edit_File_headerContainer{
+	/* display: none; */
+}
+.Ayoola_Page_Layout_Edit_File_content{
+	max-width: inherit;
+	max-height: inherit;
+}
+.Ayoola_Page_Layout_Edit_File_contentContainer{
+	max-width: inherit;
+	max-height: inherit;
+}
+.Ayoola_Page_Layout_Edit_File_footer{
+/* 	display: none;
+ */}
+.Ayoola_Page_Layout_Edit_File_footerContainer{
+	/* display: none; */
+}
+
+.Ayoola_Page_Layout_Edit_File_left{
+	/* display: none; */
+}
+.Ayoola_Page_Layout_Edit_File_right {
+/* 	display: none;
+ */}
+.Ayoola_Page_Layout_Edit_File_middle{
+	padding:1em;
+	background-color: #fff;
+}

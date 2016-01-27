@@ -1,0 +1,222 @@
+<?php
+/**
+ * PageCarton Content Management System
+ *
+ * LICENSE
+ *
+ * @category   PageCarton CMS
+ * @package    Ayoola_Page_Creator
+ * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @version    $Id: filename.php date time username $ 
+ */
+
+/**
+ * @see Ayoola_Page_Abstract
+ */
+ 
+require_once 'Ayoola/Page/Abstract.php';
+
+
+/**
+ * @category   PageCarton CMS
+ * @package    Ayoola_Page_Creator
+ * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
+class Ayoola_Page_Creator extends Ayoola_Page_Abstract
+{
+	
+    /**
+     * Attempts to delete a file
+     *
+     * @param void
+     * @return null
+     */
+    protected function _rollbackFile()
+    {
+		$files = $this->getPageFilesPaths();
+		foreach( $files as $file )
+		{
+			if( is_file( $file ) )
+			{
+				unlink( $file );
+				Ayoola_Doc::removeDirectory( basename( $file ) );
+			}
+		}
+    } 
+	
+    /**
+     * Attempts to delete a record from the db
+     *
+     * @param void
+     * @return mixed
+     */
+    public function _rollbackDb()
+    {
+		$table = $this->getDbTable();
+		$values = $this->_form->getValues();
+		
+		return $table->delete( array( 'url' => $values['url'] ) );
+		
+    } 
+	
+    /**
+     * Attempts to clean-up the process incase something goes wrong along the line
+     * So as to create a clean error free interface 
+     * 
+     * @param void
+     * @return boolean
+     */
+    public function rollback()
+    {
+        // DB
+		$this->_rollbackDb();
+		$this->_rollbackFile();
+    } 
+	
+    /**
+     * Performs the creation process
+     *
+     * @param void
+     * @return void
+     */	
+    public function init()
+    {
+		try
+		{
+			$this->createForm( 'Continue..', 'Create a new page' );
+			$this->setViewContent( $this->getForm()->view() );
+		//	self::v( $_POST );
+			if( ! $values = $this->getForm()->getValues() ){ return false; }
+	//		self::v( $values );
+			//	Default settings 
+			$values['auth_level'] = (array) ( isset( $values['auth_level'] ) ? $values['auth_level'] : 0 );
+		//	self::v( $values );
+		//	return false;
+			
+			
+			//	Notify Admin
+			$mailInfo = array();
+			$mailInfo['subject'] = 'A new page created';
+			$mailInfo['body'] = 'A new page have been created on your application with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			
+			Preview the page on: http://' . Ayoola_Page::getDefaultDomain() . $values['url'] . '/
+			Page administration options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/page/.
+			';
+			self::resetCacheForPage( $values['url'] ); 
+			$isLayoutPage = stripos( $values['url'], '/layout/' ) === 0;
+			if( $isLayoutPage )
+			{
+				//	Only admin should be able to view template files
+				$values['auth_level'] = array( 99 );
+			}
+			try
+			{
+		//		var_export( $mailInfo );
+				@Ayoola_Application_Notification::mail( $mailInfo );
+			}
+			catch( Ayoola_Exception $e ){ null; }
+			if( ! $this->insertDb( $values ) ){ return false; }
+			if( $this->_createFile() )
+		//	if( $this->insertDb() )
+			{
+/* 				$class = new Ayoola_Page_Editor_Layout();
+				$class->setPageInfo( array( 'url' => $values['url'] ) );
+				$class->setPagePaths();
+				$class->setValues();
+				$class->updateLayoutOnEveryLoad = true;
+				$class->init(); // invoke the template update for this page.
+ */		
+				$this->setViewContent( '<span class="boxednews normalnews centerednews">Page created successfully. It is not yet accessible until you add content.</span>', true ); 
+				$this->setViewContent( '<a class="boxednews goodnews centerednews" href="' . Ayoola_Application::getUrlPrefix() . '/ayoola/page/edit/layout/?url=' . $values['url'] . '"> Add Content!</a>' ); 
+			}
+			else
+			{ 
+				$this->getForm()->setBadnews( 'Error encountered while creating a new page' ); 
+			}
+		}
+		catch( Exception $e )
+		{ 
+			$this->_parameter['markup_template'] = null;
+			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+		}
+    } 
+	
+    /**
+     * 
+     * @param array
+     * @return string
+     */
+    public static function getLayoutTemplateFilePath( array $pageInfo )
+    {
+		require_once 'Ayoola/Filter/LayoutIdToPath.php';
+		$filter = new Ayoola_Filter_LayoutIdToPath;
+		if( ! Ayoola_Loader::checkFile( @$pageInfo['pagelayout_filename'] ) )	//	Compatibility
+		{
+			$pageInfo['pagelayout_filename'] = $filter->filter( $pageInfo['layout_name'] );
+		}
+		if( ! $filePath = Ayoola_Loader::checkFile( $pageInfo['pagelayout_filename'] ) )
+		{ 
+			if( $defaultLayout = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) )
+			{
+				$filePath = Ayoola_Loader::checkFile( $filter->filter( $defaultLayout ) );
+			}
+		}
+		return $filePath;
+	}
+ 	
+    /**
+     * Creates the file
+     * For the page and for template
+     * @param void
+     * @return boolean
+     */
+    public function _createFile()
+    {
+		//	creates the the page data file
+	//	if( ! $this->_createXml( true ) ){ return false; }
+	//	if( ! $this->insertDb() ){ return false; }
+		if( ! $values = $this->getForm()->getValues() ){ return false; }
+		$table = new Ayoola_Page_Page;
+		$pageInfo = $table->selectOne( null, array( 'url' => $values['url'] ) );
+
+		//	var_export( $pageInfo );
+		$pageInfo['pagelayout_filename'] = self::getLayoutTemplateFilePath( $pageInfo );
+		$default = self::getDefaultPageFiles( @$values['default_url'] );
+		
+		if( ! @$values['default_url'] )
+		{
+			//	if we are not cloning, use the template instead.
+			$default['template'] = $pageInfo['pagelayout_filename'] ? : $default['template'];
+		}
+	//	$values['default_url'] = $values['default_url'] == '/' ? '' : $values['default_url'];
+		$files = $this->getPageFilesPaths();
+	//	var_export( $pageInfo );
+	//	var_export( $values );
+	//	var_export( $default );
+		require_once 'Ayoola/Loader.php';  
+		foreach( $files as $key => $file )
+		{			
+			//	Create the Directory
+			Ayoola_Doc::createDirectory( dirname( $file ) );
+			if( $filePath = Ayoola_Loader::checkFile( $default[$key] ) ){ $default[$key] = $filePath; }
+			if( ! is_file( $file ) )
+			{
+				if( ! file_put_contents( $file, preg_replace( '/{?[%@]{2,3}([a-zA-Z1-9]{3,18})[%@]{2,3}}?/', '', file_get_contents( $default[$key] ) ) ) )
+				{
+					// If copying fail, open new file
+					if( false === file_put_contents( $file, '' ) )
+					{						
+						// Attempts a rollback
+						$this->rollback();
+						return false;
+					}
+				}
+			}
+		
+		}
+		return true;
+	} 
+}

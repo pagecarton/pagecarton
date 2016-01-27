@@ -1,0 +1,1662 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="log" creation_time="1446365848" table_version="0.04" module_version="1.00" table_class="Application_Log_View_Access_Log" creation_ip="3318952974">
+  <RECORDS autoId="119">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Fobject%2Fname%2FAyoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.14::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446365847]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-1]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.14::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446365848]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-2]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/ayoola/page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.14::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446366903]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-3]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/ayoola/page/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/ayoola/page/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[7]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.14::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446366904]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-4]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/ayoola/page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.14::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446366968]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-5]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/ayoola/page/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/ayoola/page/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.14::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446366969]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-6]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="7">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/ayoola/page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[10]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.14::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446367044]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-7]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="8">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/ayoola/page/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/ayoola/page/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[11]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.14::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446367046]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-8]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="9">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/about]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/ayoola/page/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[12]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.14::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446367191]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-9]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="10">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/about]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[13]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.14::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446367192]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-10]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="11">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.1::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446444277]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[61a9e]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-11]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="12">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=%2Fayoola%2Fbackup%2F%3F]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.1::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446444279]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[61a9e]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-12]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="13">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[accessLogin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=%2Fayoola%2Fbackup%2F%3F]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.1::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446444289]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cf0a39442b8a1d7685ee028f30cb840b75244d60&quot;:&quot;joywealth&quot;,&quot;ae1a6a6794ba7a39c743f35203c633fdb8c558ed&quot;:[&quot;1&quot;],&quot;c372906b36d1cba58e3fc13ec2a86cfbfaa706&quot;:&quot;Login&quot;,&quot;b7a4e23dfcdcbb3545067f0942536c1e3bc0&quot;:&quot;accessLogin&quot;,&quot;f5ebdfe2af9a8d6bf9ea4eb49ba637236c0ef&quot;:&quot;107374182&quot;,&quot;cc3c44757004bb3944c2a70cdc0dd9fafdd354b2&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-13]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="14">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/ayoola/backup]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=%2Fayoola%2Fbackup%2F%3F]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.1::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446444290]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-14]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="15">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/ayoola/backup/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/ayoola/backup/?]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.1::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446444291]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-15]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="16">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Application_Backup_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/ayoola/backup/?]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.1::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446444336]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-16]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="17">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Application_Backup_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Application_Backup_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[7]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.1::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446444340]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;b27f611da5d2032cdcecc1e6b427bbde7d3d2&quot;:&quot;&quot;,&quot;f0210e865387013efe04625f5a9b00a8874c31&quot;:&quot;installer&quot;,&quot;cb86cf2ac83d77c6b10b1a0f2b642c1d7cf9b6c8&quot;:[&quot;\/application\/databases\/&quot;,&quot;\/application\/modules\/&quot;,&quot;\/application\/module_files\/&quot;,&quot;\/application\/pages\/&quot;,&quot;\/application\/documents\/&quot;,&quot;\/library\/&quot;],&quot;c6be80d39207cf94dcf5380250132a2d7f70c&quot;:&quot;&quot;,&quot;e3405b9c57a87486daf1f1a119b002bfee320864&quot;:&quot;Create&quot;,&quot;a9305cdaaf276a3d2f215f568028df04085a32&quot;:&quot;Application_Backup_Creator&quot;,&quot;f5ebdfe2af9a8d6bf9ea4eb49ba637236c0ef&quot;:&quot;107374182&quot;,&quot;cc3c44757004bb3944c2a70cdc0dd9fafdd354b2&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-17]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="18">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/pc_installer.php]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Application_Backup_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.1::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446444787]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-18]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="19">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/pc_installer.php]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[162.243.223.103::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446444924]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[4dd83]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-19]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="20">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/article/category/fashion]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[66.249.64.32::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446519432]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[02e97]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-20]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="21">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/article/category/subscription]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[66.249.64.32::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446526682]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[b3930]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-21]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="22">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/article/category/fashion/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[66.249.64.32::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446532154]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[f4b05]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-22]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="23">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/article/category/subscription/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[66.249.67.145::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446706437]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[0ae3a]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-23]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="24">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/article/category/subscription]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[66.249.67.136::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446714310]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[f65ba]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-24]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="25">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/Ayoola_Extension_Build]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717247]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[536a9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-25]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="26">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/Ayoola_Extension_Build/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_Build/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717249]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[536a9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-26]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="27">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_Build/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717257]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[536a9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-27]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="28">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=%2Fobject%2Fname%2FAyoola_Extension_Build%2F%3Fname%3DAyoola_Extension_Build]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717258]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[536a9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-28]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="29">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[accessLogin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=%2Fobject%2Fname%2FAyoola_Extension_Build%2F%3Fname%3DAyoola_Extension_Build]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717264]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;d55b7cce12e6502db91deb4be91a3cb32605f7&quot;:&quot;joywealth&quot;,&quot;b227b623cad5097f0c51bfaeca9592c143aa27&quot;:[&quot;1&quot;],&quot;b43a0d1a82b3a273bdb8a49b303f07a2544e0c2d&quot;:&quot;Login&quot;,&quot;e7737868af078d1f29259449d19386613c057bf&quot;:&quot;accessLogin&quot;,&quot;d00f3866d49e2507a5b329c7461528aedaba08&quot;:&quot;107374182&quot;,&quot;e2cd10ddf164a17ebba2d17fddc1d8744464c83&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-29]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="30">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/Ayoola_Extension_Build]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=%2Fobject%2Fname%2FAyoola_Extension_Build%2F%3Fname%3DAyoola_Extension_Build]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717265]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-30]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="31">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/Ayoola_Extension_Build/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_Build/?name=Ayoola_Extension_Build]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[7]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717265]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-31]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="32">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717272]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-32]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="33">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717273]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-33]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="34">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signout]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[10]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717280]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[ecc99]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-34]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="35">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_Creator/?name=Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[11]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717283]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[6ffbc]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-35]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="36">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Fobject%2Fname%2FAyoola_Extension_Creator%2F%3Fname%3DAyoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[12]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717283]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[6ffbc]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-36]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="37">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[accessLogin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Fobject%2Fname%2FAyoola_Extension_Creator%2F%3Fname%3DAyoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[13]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717290]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;d55b7cce12e6502db91deb4be91a3cb32605f7&quot;:&quot;joywealth&quot;,&quot;b227b623cad5097f0c51bfaeca9592c143aa27&quot;:[&quot;1&quot;],&quot;b43a0d1a82b3a273bdb8a49b303f07a2544e0c2d&quot;:&quot;Login&quot;,&quot;e7737868af078d1f29259449d19386613c057bf&quot;:&quot;accessLogin&quot;,&quot;d00f3866d49e2507a5b329c7461528aedaba08&quot;:&quot;107374182&quot;,&quot;e2cd10ddf164a17ebba2d17fddc1d8744464c83&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-37]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="38">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Fobject%2Fname%2FAyoola_Extension_Creator%2F%3Fname%3DAyoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[14]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717290]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-38]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="39">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/Ayoola_Extension_Creator/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_Creator/?name=Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[15]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717292]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-39]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="40">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[16]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717307]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-40]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="41">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[17]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717309]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-41]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="42">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[18]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717333]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-42]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="43">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?extension_name=example_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[19]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717336]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;d1d2be44660a6f3377c5a555b5c235d9d0e1b7d&quot;:&quot;Example Extension&quot;,&quot;e61f8716982760a2b94dcf9c6cfb8c77ddf&quot;:[&quot;modules&quot;,&quot;databases&quot;],&quot;be3a86c465988baab1ef0e71af6800dd9c8bc&quot;:&quot;Continue...&quot;,&quot;e3731c55f6e6774ec94251b9ba4928ad6eb211c0&quot;:&quot;Ayoola_Extension_Editor&quot;,&quot;d00f3866d49e2507a5b329c7461528aedaba08&quot;:&quot;107374182&quot;,&quot;e2cd10ddf164a17ebba2d17fddc1d8744464c83&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-43]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="44">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[20]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717543]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-44]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="45">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/object/name/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[21]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717543]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-45]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="46">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Import]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[22]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446717554]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-46]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="47">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/object/name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[23]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446719761]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-47]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="48">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?extension_name=example_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446723217]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[d176c]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-48]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="49">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_Editor%2F%3Fextension_name%3Dexample_extension%23Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446723218]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[d176c]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-49]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="50">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[accessLogin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_Editor%2F%3Fextension_name%3Dexample_extension%23Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446723223]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;d55b7cce12e6502db91deb4be91a3cb32605f7&quot;:&quot;joywealth&quot;,&quot;b227b623cad5097f0c51bfaeca9592c143aa27&quot;:[&quot;1&quot;],&quot;b43a0d1a82b3a273bdb8a49b303f07a2544e0c2d&quot;:&quot;Login&quot;,&quot;e7737868af078d1f29259449d19386613c057bf&quot;:&quot;accessLogin&quot;,&quot;d00f3866d49e2507a5b329c7461528aedaba08&quot;:&quot;107374182&quot;,&quot;e2cd10ddf164a17ebba2d17fddc1d8744464c83&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-50]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="51">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_Editor%2F%3Fextension_name%3Dexample_extension%23Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446723224]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-51]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="52">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?extension_name=example_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446723237]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;d1d2be44660a6f3377c5a555b5c235d9d0e1b7d&quot;:&quot;Example Extension&quot;,&quot;e61f8716982760a2b94dcf9c6cfb8c77ddf&quot;:[&quot;modules&quot;,&quot;databases&quot;],&quot;be3a86c465988baab1ef0e71af6800dd9c8bc&quot;:&quot;Continue...&quot;,&quot;e3731c55f6e6774ec94251b9ba4928ad6eb211c0&quot;:&quot;Ayoola_Extension_Editor&quot;,&quot;d00f3866d49e2507a5b329c7461528aedaba08&quot;:&quot;107374182&quot;,&quot;e2cd10ddf164a17ebba2d17fddc1d8744464c83&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-52]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="53">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?extension_name=example_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446723246]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;d1d2be44660a6f3377c5a555b5c235d9d0e1b7d&quot;:&quot;Example Extension&quot;,&quot;e61f8716982760a2b94dcf9c6cfb8c77ddf&quot;:[&quot;modules&quot;,&quot;databases&quot;,&quot;documents&quot;,&quot;plugins&quot;,&quot;pages&quot;,&quot;templates&quot;],&quot;f8bf47d9c04506eb4cd4efe2793491f0e4fefb9&quot;:[&quot;CountDown.php&quot;],&quot;c5938237cd851e81c1409b378ebea8403e94c3a0&quot;:[&quot;Ayoola&quot;],&quot;be3a86c465988baab1ef0e71af6800dd9c8bc&quot;:&quot;Continue...&quot;,&quot;e3731c55f6e6774ec94251b9ba4928ad6eb211c0&quot;:&quot;Ayoola_Extension_Editor&quot;,&quot;d00f3866d49e2507a5b329c7461528aedaba08&quot;:&quot;107374182&quot;,&quot;e2cd10ddf164a17ebba2d17fddc1d8744464c83&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-53]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="54">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[7]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.242.99.114::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446723328]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-54]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="55">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/article]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[66.249.67.154::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (iPhone; CPU iPhone OS 8_3 like Mac OS X) AppleWebKit/600.1.4 (KHTML, like Gecko) Version/8.0 Mobile/12F70 Safari/600.1.4 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446725314]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[490a9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-55]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="56">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/article/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/article/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[66.249.67.136::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446726541]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[490a9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-56]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="57">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.166.207::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446738599]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[25212]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-57]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="58">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_Creator%2F]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.166.207::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446738601]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[25212]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-58]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="59">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[accessLogin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_Creator%2F]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.166.207::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446738610]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;d55b7cce12e6502db91deb4be91a3cb32605f7&quot;:&quot;joywealth&quot;,&quot;b227b623cad5097f0c51bfaeca9592c143aa27&quot;:[&quot;1&quot;],&quot;b43a0d1a82b3a273bdb8a49b303f07a2544e0c2d&quot;:&quot;Login&quot;,&quot;e7737868af078d1f29259449d19386613c057bf&quot;:&quot;accessLogin&quot;,&quot;d00f3866d49e2507a5b329c7461528aedaba08&quot;:&quot;107374182&quot;,&quot;e2cd10ddf164a17ebba2d17fddc1d8744464c83&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-59]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="60">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_Creator%2F]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.166.207::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446738611]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-60]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="61">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446800222]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[daa9b]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-61]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="62">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_Creator%2F]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446800223]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[daa9b]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-62]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="63">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[accessLogin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_Creator%2F]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446800229]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;ccc4efced0148f7c5285a4afaa6d2a3cdc232&quot;:&quot;joywealth&quot;,&quot;daafa9b2e9dc8397abc0e5b6a9e9ea3856838&quot;:[&quot;1&quot;],&quot;d87a8b0bdecd5693eb58a358d2597f11da&quot;:&quot;Login&quot;,&quot;c150cf931ec4d07048bb5da3ec1c5b0d9e744721&quot;:&quot;accessLogin&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-63]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="64">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_Creator%2F]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446800230]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-64]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="65">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446800239]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-65]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="66">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446801780]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-66]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="67">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[7]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446801783]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-67]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="68">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446801788]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-68]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="69">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?extension_name=example_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446801791]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Example Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;modules&quot;,&quot;databases&quot;],&quot;bec60fb797f46b07ae243312cda246ef5d1100a&quot;:&quot;Continue...&quot;,&quot;d9c39c4713a481b82fd9e82fa781fa5f6e753f4&quot;:&quot;Ayoola_Extension_Editor&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-69]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="70">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?extension_name=example_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[10]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446801796]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Example Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;modules&quot;,&quot;databases&quot;],&quot;c3aedea1486fa160a7af07d1014e5e168e10ef&quot;:[&quot;CountDown.php&quot;],&quot;aad6f7a3b867a954237447b6bb34b536cf6d82&quot;:[&quot;Ayoola&quot;],&quot;bec60fb797f46b07ae243312cda246ef5d1100a&quot;:&quot;Continue...&quot;,&quot;d9c39c4713a481b82fd9e82fa781fa5f6e753f4&quot;:&quot;Ayoola_Extension_Editor&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-70]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="71">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[11]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446801995]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-71]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="72">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[12]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802029]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-72]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="73">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[13]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802034]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-73]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="74">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[14]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802057]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;documents&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-74]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="75">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[15]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802067]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;documents&quot;,&quot;templates&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-75]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="76">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[16]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802096]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Light Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;documents&quot;,&quot;templates&quot;],&quot;b77aabe3b1fc9ba1eeb06cb80bfccb0a0d4ec14&quot;:[&quot;\/public\/drag_and_drop.png&quot;,&quot;\/robots.txt&quot;],&quot;c9c5b7718dceaeede311afc12508c978e1a2407&quot;:[&quot;bootstrapmini&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-76]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="77">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[17]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802112]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-77]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="78">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[18]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802116]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-78]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="79">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?extension_name=light_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[19]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802119]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Light Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;documents&quot;,&quot;templates&quot;],&quot;bec60fb797f46b07ae243312cda246ef5d1100a&quot;:&quot;Continue...&quot;,&quot;d9c39c4713a481b82fd9e82fa781fa5f6e753f4&quot;:&quot;Ayoola_Extension_Editor&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-79]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="80">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?extension_name=light_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[20]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802145]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Light Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;documents&quot;,&quot;templates&quot;],&quot;b77aabe3b1fc9ba1eeb06cb80bfccb0a0d4ec14&quot;:[&quot;\/robots.txt&quot;],&quot;c9c5b7718dceaeede311afc12508c978e1a2407&quot;:[&quot;bootstrapmini&quot;],&quot;bec60fb797f46b07ae243312cda246ef5d1100a&quot;:&quot;Continue...&quot;,&quot;d9c39c4713a481b82fd9e82fa781fa5f6e753f4&quot;:&quot;Ayoola_Extension_Editor&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-80]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="81">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[21]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802165]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-81]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="82">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?extension_name=light_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[22]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802170]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Light Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;documents&quot;,&quot;templates&quot;],&quot;bec60fb797f46b07ae243312cda246ef5d1100a&quot;:&quot;Continue...&quot;,&quot;d9c39c4713a481b82fd9e82fa781fa5f6e753f4&quot;:&quot;Ayoola_Extension_Editor&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-82]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="83">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?extension_name=light_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[23]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802184]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Light Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;documents&quot;],&quot;b77aabe3b1fc9ba1eeb06cb80bfccb0a0d4ec14&quot;:[&quot;\/robots.txt&quot;],&quot;bec60fb797f46b07ae243312cda246ef5d1100a&quot;:&quot;Continue...&quot;,&quot;d9c39c4713a481b82fd9e82fa781fa5f6e753f4&quot;:&quot;Ayoola_Extension_Editor&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-83]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="84">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[24]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802291]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-84]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="85">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Delete/?extension_name=light_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[25]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802296]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;e61d5e7236c4853cbec40a8d0083feddb023c22b&quot;:&quot;Delete &quot;,&quot;e200b8d8d67e13b3f527424e9cdb609267e6744&quot;:&quot;Ayoola_Extension_Delete&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-85]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="86">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[26]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802300]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-86]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="87">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[27]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802303]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-87]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="88">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[28]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802308]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-88]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="89">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[29]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802316]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Light Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;documents&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-89]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="90">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[30]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.255.173.90::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446802328]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Light Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;documents&quot;],&quot;b77aabe3b1fc9ba1eeb06cb80bfccb0a0d4ec14&quot;:[&quot;\/robots.txt&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-90]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="91">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836159]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[642b4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-91]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="92">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[/accounts/signin/'%20.%20Ayoola_Application::getUrlPrefix()%20.%20'/BootstrapBlogPost/font-awesome/css/font-awesome.min.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836160]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[642b4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-92]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="93">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[accessLogin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836176]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;ccc4efced0148f7c5285a4afaa6d2a3cdc232&quot;:&quot;joywealth&quot;,&quot;daafa9b2e9dc8397abc0e5b6a9e9ea3856838&quot;:[&quot;1&quot;],&quot;d87a8b0bdecd5693eb58a358d2597f11da&quot;:&quot;Login&quot;,&quot;c150cf931ec4d07048bb5da3ec1c5b0d9e744721&quot;:&quot;accessLogin&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-93]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="94">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836177]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-94]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="95">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836189]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-95]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="96">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Delete/?extension_name=light_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836192]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;e61d5e7236c4853cbec40a8d0083feddb023c22b&quot;:&quot;Delete &quot;,&quot;e200b8d8d67e13b3f527424e9cdb609267e6744&quot;:&quot;Ayoola_Extension_Delete&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-96]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="97">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[7]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836199]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-97]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="98">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836201]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-98]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="99">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836207]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-99]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="100">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Delete/?extension_name=example_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[10]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836211]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;e61d5e7236c4853cbec40a8d0083feddb023c22b&quot;:&quot;Delete &quot;,&quot;e200b8d8d67e13b3f527424e9cdb609267e6744&quot;:&quot;Ayoola_Extension_Delete&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-100]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="101">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[11]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836214]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-101]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="102">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[12]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836214]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-102]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="103">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[13]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836215]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-103]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="104">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/accounts/signin/?previous_url=http%3A%2F%2Fproduction.cmf.ayoo.la%2Ftools%2Fclassplayer%2Fget%2Fobject_name%2FAyoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[14]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836216]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-104]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="105">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[15]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836219]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-105]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="106">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[16]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836269]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Light Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;modules&quot;,&quot;documents&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-106]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="107">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[17]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446836299]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Light Extension&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;modules&quot;,&quot;documents&quot;],&quot;c3aedea1486fa160a7af07d1014e5e168e10ef&quot;:[&quot;Application.php&quot;,&quot;CountDown.php&quot;],&quot;b77aabe3b1fc9ba1eeb06cb80bfccb0a0d4ec14&quot;:[&quot;\/ayoola\/framework\/sshd_config.txt&quot;,&quot;\/readme.txt&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-107]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="108">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[18]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446837729]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-108]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="109">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[19]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446837747]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-109]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="110">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Delete/?extension_name=light_extension]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[20]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446837750]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;e61d5e7236c4853cbec40a8d0083feddb023c22b&quot;:&quot;Delete &quot;,&quot;e200b8d8d67e13b3f527424e9cdb609267e6744&quot;:&quot;Ayoola_Extension_Delete&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-110]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="111">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[21]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446837771]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-111]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="112">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[22]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[GET]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446837774]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[[]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-112]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="113">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[23]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446837807]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Modules, Database and Documents&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;modules&quot;,&quot;databases&quot;,&quot;documents&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-113]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="114">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[24]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446837999]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Modules, Database and Documents&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;modules&quot;,&quot;databases&quot;,&quot;documents&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-114]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="115">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[25]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446838010]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Modules, Database and Documents&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;modules&quot;,&quot;databases&quot;,&quot;documents&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-115]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="116">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[26]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446838027]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Modules, Database and Documents&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;modules&quot;,&quot;databases&quot;,&quot;documents&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-116]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="117">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[27]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446838059]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Modules, Database and Documents&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;modules&quot;,&quot;databases&quot;,&quot;documents&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-117]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="118">
+      <TABLE_FIELD FIELD_KEY="uri"><![CDATA[Ayoola_Extension_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_referer"><![CDATA[http://production.cmf.ayoo.la/tools/classplayer/get/object_name/Ayoola_Extension_Creator/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="NPS"><![CDATA[28]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="ip"><![CDATA[197.211.52.11::]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_host"><![CDATA[production.cmf.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="http_user_agent"><![CDATA[Mozilla/5.0 (Windows NT 10.0; WOW64; rv:41.0) Gecko/20100101 Firefox/41.0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_method"><![CDATA[POST]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request_time"><![CDATA[1446838143]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="total_run_time"><![CDATA[1.00]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="user_id"><![CDATA[320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="request"><![CDATA[{&quot;cff32159bef1754c15e4bb8e88e675921c3030f1&quot;:&quot;Modules, Database and Documents&quot;,&quot;c6f0624482dc89aafbc104d32318897f2dd26615&quot;:[&quot;modules&quot;,&quot;databases&quot;,&quot;documents&quot;,&quot;pages&quot;,&quot;templates&quot;],&quot;e69ec391a2e188e8a93da2f545bb8f7b5ae22e48&quot;:&quot;Continue&quot;,&quot;ebdcf2553c4520d29d8c7493e8f7d698f197b13f&quot;:&quot;Ayoola_Extension_Creator&quot;,&quot;b47151efef44f3ef34e1b5d890738b8b42b66a&quot;:&quot;107374182&quot;,&quot;faf8be35311fa2ccccfd0d9d0b383a75453bc9&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-19-118]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES uri="INPUTTEXT" http_referer="INPUTTEXT" NPS="INPUTTEXT" ip="INPUTTEXT" http_host="INPUTTEXT" http_user_agent="INPUTTEXT" request_method="INPUTTEXT" request_time="INPUTTEXT" total_run_time="INPUTTEXT" user_id="INPUTTEXT" request="JSON" log_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

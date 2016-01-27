@@ -1,0 +1,225 @@
+/*
+* Lemar Theme Stylesheet, based on Skeleton Framework
+/*
+* Skeleton V1.2
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 6/20/2012
+*/
+
+/* #Media Queries
+================================================== */
+
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 959px) {
+	.rightnav {display:none;float:none;} 
+	.footertext {float:none;}
+	.form-wrapper input {width:40%;}
+	#nav { width:100%; }
+	.header {width:100%;}
+	
+	}
+
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {}
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {.rightnav {display:none;}}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) {}
+	
+	
+
+
+/* #Tablet (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 768px */
+
+    @media only screen and (min-width: 768px) and (max-width: 959px) {
+        .container                                  { width: 768px;}
+        .container .column,
+        .container .columns                         { margin-left: 10px; margin-right: 10px;  }
+        .column.alpha, .columns.alpha               { margin-left: 0; margin-right: 10px; }
+        .column.omega, .columns.omega               { margin-right: 0; margin-left: 10px; }
+        .alpha.omega                                { margin-left: 0; margin-right: 0; }
+
+        .container .one.column,
+        .container .one.columns                     { width: 28px; }
+        .container .two.columns                     { width: 76px; }
+        .container .three.columns                   { width: 124px; }
+        .container .four.columns                    { width: 172px; }
+        .container .five.columns                    { width: 220px; }
+        .container .six.columns                     { width: 268px; }
+        .container .seven.columns                   { width: 316px; }
+        .container .eight.columns                   { width: 364px; }
+        .container .nine.columns                    { width: 412px; }
+        .container .ten.columns                     { width: 460px; }
+        .container .eleven.columns                  { width: 508px; }
+        .container .twelve.columns                  { width: 556px; }
+        .container .thirteen.columns                { width: 604px; }
+        .container .fourteen.columns                { width: 652px; }
+        .container .fifteen.columns                 { width: 700px; }
+        .container .sixteen.columns                 { width: 748px; }
+
+        .container .one-third.column                { width: 236px; }
+        .container .two-thirds.column               { width: 492px; }
+
+        /* Offsets */
+        .container .offset-by-one                   { padding-left: 48px; }
+        .container .offset-by-two                   { padding-left: 96px; }
+        .container .offset-by-three                 { padding-left: 144px; }
+        .container .offset-by-four                  { padding-left: 192px; }
+        .container .offset-by-five                  { padding-left: 240px; }
+        .container .offset-by-six                   { padding-left: 288px; }
+        .container .offset-by-seven                 { padding-left: 336px; }
+        .container .offset-by-eight                 { padding-left: 384px; }
+        .container .offset-by-nine                  { padding-left: 432px; }
+        .container .offset-by-ten                   { padding-left: 480px; }
+        .container .offset-by-eleven                { padding-left: 528px; }
+        .container .offset-by-twelve                { padding-left: 576px; }
+        .container .offset-by-thirteen              { padding-left: 624px; }
+        .container .offset-by-fourteen              { padding-left: 672px; }
+        .container .offset-by-fifteen               { padding-left: 720px; }
+    }
+
+	
+	/*  #Mobile (Portrait)
+================================================== */
+
+    /* Note: Design for a width of 320px */
+
+    @media only screen and (max-width: 767px) {
+	   
+        .container { width: 300px;}
+        .container .columns,
+        .container .column { margin: 0; }
+
+        .container .one.column,
+        .container .one.columns,
+        .container .two.columns,
+        .container .three.columns,
+        .container .four.columns,
+        .container .five.columns,
+        .container .six.columns,
+        .container .seven.columns,
+        .container .eight.columns,
+        .container .nine.columns,
+        .container .ten.columns,
+        .container .eleven.columns,
+        .container .twelve.columns,
+        .container .thirteen.columns,
+        .container .fourteen.columns,
+        .container .fifteen.columns,
+        .container .sixteen.columns,
+        .container .one-third.column,
+        .container .two-thirds.column  { width: 300px; }
+
+        /* Offsets */
+        .container .offset-by-one,
+        .container .offset-by-two,
+        .container .offset-by-three,
+        .container .offset-by-four,
+        .container .offset-by-five,
+        .container .offset-by-six,
+        .container .offset-by-seven,
+        .container .offset-by-eight,
+        .container .offset-by-nine,
+        .container .offset-by-ten,
+        .container .offset-by-eleven,
+        .container .offset-by-twelve,
+        .container .offset-by-thirteen,
+        .container .offset-by-fourteen,
+        .container .offset-by-fifteen { padding-left: 0; }
+		
+		div.block { width: 90%;margin-left:10px; }
+		div.block .input_text { padding: 10px 10px; width: 90%; display: block; margin-bottom:10px; }
+		div.block .message { padding: 7px 7px; width: 93%; height: 80px;}
+		div.block .contactbutton {margin: 0 0 10px 0; position: relative; top: 5px;  padding: 8px 25px 5px; }
+		div.block label {   display: block;  float:none;  padding: 10px 0 0;   width: 90%;}
+        div.block label span {  display: block;  float:none; padding: 5px 20px 0 0;    width: 90%;}
+		div.block .contactbutton {left:20px;}
+	    .newsletter {width:90%; padding:0px 10px;}
+		.floatright {float:none;}
+		.header, .header a {color:#fff; text-shadow:none;height:auto;}
+		.header h1 {color:#fff; text-shadow:none;margin-top:-40px; margin-left:10px;}
+		.rslides_container {background:none; height: auto; margin-left: 10px; width: 93%;margin-top: -30px;}
+		.slidepic { border: 2px solid #CCCCCC;  height: 150px !important;   margin-top: 40px;   width: 100% !important;}
+		.form-wrapper, .cf {width:100%;}
+		.footertext{width:80%; padding:0px 10px; }
+		.footer h1 {margin-left:0px;}
+		.footerwrap {background:none;}
+		.copyright {width:100%;}
+		.menuitems li, .menuitems li a  {text-shadow:none;}
+		.rightpad {display:block;}
+		.mobilerightpad { display:block; padding-right:20px;}
+		.rightnav {float:none;display:none;}
+		.header, .header a { color: #fff; }
+		#nav {height:180px; background-position:center;}
+		.form-wrapper input {border-right:1px solid #ddd !important;width:70%;}
+		a.headerbutton { color:#333;margin-top:0px;margin-left:10px;}
+		.negdown {margin-bottom:0px;}
+		#jcornerSmall, #jcornerBig {display:none;}
+		.menu,.menu a {font-size:15px; float:right;position:absolute;top:2px;right:5px;}
+		.menuitems li {padding-right:15px;display: block;}
+		.logo, .subheader {margin-left:10px; }		
+		.rslides_container {}
+		.centered-btns_tabs a, .transparent-btns_tabs a, .large-btns_tabs a {height: 9px !important;}
+		.header {padding:0 !important;}
+		.afterheader {height:20px;}
+		p { padding:0 10px; }
+		h1, h2, h3, h4, h5, h6 {margin-left:10px;}
+		.facebook {margin-left:10px;}
+		.scrollpause {height:0px;}	
+		.back-top {bottom:700px;}
+		.spotlight {margin: 0px 15px;}
+		.center {text-align:left;}		
+		select {height:30px;width:170px;padding:5px;} 
+		#wrapnav{/* height:60px; */}
+		.alert-success {margin-left:0px;}
+		.gototopmobile {display:block;}
+		.pricebadge { margin-left:-60px;}
+		.download {padding-top:40px;}
+    }  
+	
+	 
+/* #Mobile (Landscape)
+================================================== */
+
+    /* Note: Design for a width of 480px */
+
+    @media only screen and (min-width: 480px) and (max-width: 767px) {
+        .container { width: 420px; }
+        .container .columns,
+        .container .column { margin: 0; }
+
+        .container .one.column,
+        .container .one.columns,
+        .container .two.columns,
+        .container .three.columns,
+        .container .four.columns,
+        .container .five.columns,
+        .container .six.columns,
+        .container .seven.columns,
+        .container .eight.columns,
+        .container .nine.columns,
+        .container .ten.columns,
+        .container .eleven.columns,
+        .container .twelve.columns,
+        .container .thirteen.columns,
+        .container .fourteen.columns,
+        .container .fifteen.columns,
+        .container .sixteen.columns,
+        .container .one-third.column,
+        .container .two-thirds.column { width: 420px; }
+    }
+		@media (max-width: 960px) { 
+		nav ul     { display: none; }
+		nav select { display: inline-block; }
+		}

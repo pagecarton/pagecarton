@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="accessinformation" creation_time="1410869258" table_version="0.03" module_version="1.00" table_class="Ayoola_Access_AccessInformation" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES username="INPUTTEXT,UNIQUE" access_information="JSON" accessinformation_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

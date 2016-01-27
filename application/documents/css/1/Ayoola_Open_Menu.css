@@ -1,0 +1,85 @@
+@charset "utf-8";
+
+/* 
+	Ayoola_Open_Menu menu css file
+*/
+
+/* 
+	The Container of the whole menu
+*/
+
+.Ayoola_MenuAyoola_Open_MenuContainer {
+	color: #fff;
+}
+
+/* 
+	Each option box
+*/
+
+.Ayoola_MenuAyoola_Open_Menu,
+.Ayoola_MenuAyoola_Open_Menu a,
+.Ayoola_MenuAyoola_Open_Menu a:active,
+.Ayoola_MenuAyoola_Open_Menu a:focus,
+.Ayoola_MenuAyoola_Open_Menu a:hover,
+.Ayoola_MenuAyoola_Open_Menu a:visited,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:active,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:focus,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:hover,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:visited
+{
+	color: #fff;
+	line-height:3em;
+	text-align:center;
+	text-decoration: none;
+	border: 1px solid #fff;
+	border-radius: 5px;
+	background-color: #9bc8ff;
+	padding: 5px;
+}
+
+/* 
+	Each option box outside the link
+*/
+
+.Ayoola_MenuAyoola_Open_Menu,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption
+{
+	text-decoration: none;
+	color: #fff;
+	background-color: #fff;
+}
+
+/* 
+	The active option
+*/
+
+.Ayoola_MenuAyoola_Open_MenuSelectedOption,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:visited,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:hover,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:active,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:focus
+{
+	background-color: #9bc8ff;
+	text-decoration: none;
+	color: #fff;
+}
+
+
+/* 
+	What happens onmouseover option
+*/
+
+.Ayoola_MenuAyoola_Open_Menu a:active,
+.Ayoola_MenuAyoola_Open_Menu a:focus,
+.Ayoola_MenuAyoola_Open_Menu a:hover,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:active,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:hover,
+.Ayoola_MenuAyoola_Open_MenuSelectedOption a:focus
+{
+	text-decoration: none;
+	color: #9bc8ff;
+	background-color: #fff;
+}

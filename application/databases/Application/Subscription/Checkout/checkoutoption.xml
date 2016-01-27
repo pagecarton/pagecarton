@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="checkoutoption" creation_time="1397840124" table_version="0.02" module_version="1.00" table_class="Application_Subscription_Checkout_CheckoutOption" creation_ip="2130706433">
+  <RECORDS>
+    <TABLE_ROW ROW_ID="2">     
+      <TABLE_FIELD FIELD_KEY="checkoutoption_name"><![CDATA[Paypal]]></TABLE_FIELD>    
+      <TABLE_FIELD FIELD_KEY="checkoutoption_id"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_logo"><![CDATA[&lt;span style=&quot;display:inline-block;&quot;&gt;Paypal&lt;/span&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[Application_Subscription_Checkout_Paypal]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>     
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="checkoutoption_name"><![CDATA[Google]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_logo"><![CDATA[&lt;span style=&quot;display:inline-block;&quot;&gt;Google Wallet&lt;/span&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[Application_Subscription_Checkout_Google]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="checkoutoption_name"><![CDATA[VoguePay]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_id"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_logo"><![CDATA[&lt;span style=&quot;display:inline-block;&quot;&gt;VoguePay&lt;/span&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[Application_Subscription_Checkout_VoguePay]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>   
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="checkoutoption_name"><![CDATA[DirectDeposit]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_id"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_logo"><![CDATA[&lt;span style=&quot;display:inline-block;&quot;&gt;Direct or Bank Deposit&lt;/span&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[Application_Subscription_Checkout_DirectDeposit]]></TABLE_FIELD> 
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="checkoutoption_name"><![CDATA[SimplePay]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_id"><![CDATA[5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_logo"><![CDATA[&lt;span style=&quot;display:inline-block;&quot;&gt;Credit or Debit Card (SimplePay)&lt;/span&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[Application_Subscription_Checkout_SimplePay]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="checkoutoption_name"><![CDATA[CashOnDelivery]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_id"><![CDATA[6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="checkoutoption_logo"><![CDATA[&lt;span style=&quot;display:inline-block;&quot;&gt;Cash on Delivery&lt;/span&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[Application_Subscription_Checkout_CashOnDelivery]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES checkoutoption_name="INPUTTEXT, UNIQUE" checkoutoption_logo="TEXTAREA" object_name="INPUTTEXT" enabled="INT" checkoutoption_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

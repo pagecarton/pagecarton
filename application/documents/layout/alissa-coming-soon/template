@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+<!-- CSS --><link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,700">
+<link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/css/style.css">
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements --><!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]--><!-- Favicon and touch icons --><link rel="shortcut icon" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/ico/favicon.ico">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/ico/apple-touch-icon-57-precomposed.png">
+<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/js/jquery-1.8.2.min.js"></script>
+<?php
+	if( Application_Settings_CompanyInfo::getSettings( 'Page', 'background_image' ) )
+	{
+?>
+		<style>  
+		body
+		{
+			background-image: url(<?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'background_image' ); ?>);
+		}
+		</style>
+<?php
+	}
+?>
+
+</head>
+<body style="border-top-color: transparent;">
+		@@@splashScreen@@@
+        <!-- Header -->
+        <div class="container" style="padding:1em;">
+            <div class="header row">
+                <div class="logo span4">
+					<?php
+						echo '<a class="" style="vertical-align:middle;" href="' . Ayoola_Application::getUrlPrefix() . '/"><img style="max-height:200px;max-width:100%;" src="' . Ayoola_Doc::uriToDedicatedUrl( '/img/logo.png' ) . '" alt="' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . '" title="Our logo" /></a>';
+						echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Logo" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Logo/"> x </a>' : null;
+					?>	            
+                </div>
+                <div class="call-us span8">
+					<div style="margin-top:2em;">
+					  @@@menu@@@
+					</div>
+                </div>
+            </div>
+        </div>
+
+		        <!--  -->
+        <div class="" style="padding:1em;">
+			<div class="container " >
+				<div class="row">
+					<div class="span12">
+						%%HEADER%%
+					</div>
+				</div>
+			</div>
+        </div>
+
+        <!-- Coming Soon -->
+		<div>
+			@@@splash@@@
+			{@@@splash
+			<div class="coming-soon">
+				<div class="inner-bg">
+					<div class="container">
+						<div class="row">
+							<div class="span12">
+								<h2>We're Coming Soon</h2>
+								<p>We are working very hard on the new version of this page. It will bring a lot of new features. Stay tuned!</p>
+								<div class="timer">
+									<div class="days-wrapper">
+										<span class="days"></span> <br>days
+									</div>
+									<div class="hours-wrapper">
+										<span class="hours"></span> <br>hours
+									</div>
+									<div class="minutes-wrapper">
+										<span class="minutes"></span> <br>minutes
+									</div>
+									<div class="seconds-wrapper">
+										<span class="seconds"></span> <br>seconds
+									</div>
+								</div>
+							</div>
+						</div> 
+					</div>
+				</div>
+			</div>
+			splash@@@}
+		</div>
+
+
+        <!--  -->
+        <div class="container" style="margin-top:1em;margin-bottom:1em;">
+            <div class="row">
+                <div class="span4">
+					%%RIGHTBAR%%
+					%%LEFTBAR%%
+                </div>
+                <div class="span8">
+					%%MIDDLEBAR%%
+                </div>
+            </div>
+        </div>
+
+        <!--  -->
+        <div class="" style="padding:1em;">
+			<div class="container " >
+				<div class="row">
+					<div class="span12">
+						%%FOOTER%%
+					</div>
+				</div>
+			</div>
+        </div>
+
+        <!-- Content -->
+        <div class="container">
+            <div class="row">
+                <div class="span12 subscribe">
+					@@@subscribe@@@
+					{@@@subscribe
+                    <h3>Subscribe to our newsletter</h3>
+                    <p>Sign up now to our newsletter and you'll be one of the first to know about any update on our site:</p>
+					subscribe@@@}
+					<?php echo Application_User_UserEmail_Creator::viewInLine( 
+						array( 
+						//		'markup_template_namespace' => 'newsletter',
+								'markup_template' => 
+								'<span name="{{{template_object_name}}}_container">
+									<span style="display:block;">
+										{{{template_form_badnews}}}
+										{{{template_form_goodnews}}}
+									</span>
+									<form class="form-inline" role="form" name="{{{template_object_name}}}" method="POST">
+										<input type="email" name="' . Ayoola_Form::hashElementName( 'email' ) . '" placeholder="Enter your email..." value="{{{email}}}" {{{template_form_disable}}}>
+										<input type="hidden" name="' . Ayoola_Form::hashElementName( 'add_email_to_mailing_list' ) . '" id="add_email_to_mailing_list" value="Yes" {{{template_form_disable}}} >
+										<button name="dummy_name_to_disable_this_using_js" type="submit" class="btn" {{{template_form_disable}}}>Subscribe</button>
+										<span style="display:none;">{{{template_form_requirements}}}</span>
+									</form>
+								  </span>'
+							) ); 
+					?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12 social">
+                    <a href="https://www.facebook.com/<?php echo ( Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'facebook_page_url' ) ? : 'AyoolaFramework' ); ?>" class="facebook" rel="tooltip" data-placement="top" data-original-title="Facebook"></a>
+                    <a href="https://www.twitter.com/<?php echo ( array_shift( explode( ',', Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'twitter_username' ) ) ) ? : 'AyoolaFramework' ); ?>" class="twitter" rel="tooltip" data-placement="top" data-original-title="Twitter"></a>
+                    <a href="javascript:" class="dribbble" rel="tooltip" data-placement="top" data-original-title="Dribbble"></a>
+                    <a href="https://plus.google.com/<?php echo ( Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'googleplus_id' ) ? : '106833210591385672079' ); ?>" class="googleplus" rel="tooltip" data-placement="top" data-original-title="Google Plus"></a>
+                    <a href="javascript:" class="pinterest" rel="tooltip" data-placement="top" data-original-title="Pinterest"></a>
+                    <a href="javascript:" class="flickr" rel="tooltip" data-placement="top" data-original-title="Flickr"></a>
+					<p>
+						<?php echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Social Media Info" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SocialMedia/"> Change Social Media Info </a>' : null; ?>
+					</p>
+					<p>
+						Copyright &copy <?php echo date( 'Y' ) ?> <?php echo Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain(); ?> | <a href="http://pagecarton.com/" target="parent">CMS</a>: PageCarton | <a href="http://comeriver.com/" target="parent">Website Design</a>: ComeRiver.com
+					</p>
+                </div>
+           </div>
+        </div>
+
+        <!-- Javascript -->
+        <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/bootstrap/js/bootstrap.min.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/js/jquery.backstretch.min.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/js/jquery.countdown.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/alissa-coming-soon/assets/js/scripts.js"></script>
+<script type='text/javascript'>
+<!--
+
+jQuery(document).ready(function() {
+
+    /*
+        Background slideshow
+    */
+    $('.coming-soon').backstretch([
+      "/layout/alissa-coming-soon/assets/img/backgrounds/1.jpg"
+    , "/layout/alissa-coming-soon/assets/img/backgrounds/2.jpg"
+    , "/layout/alissa-coming-soon/assets/img/backgrounds/3.jpg"
+    ], {duration: 3000, fade: 750});
+
+    /*
+        Countdown initializer
+    */
+    var now = new Date();
+    var countTo = 25 * 24 * 60 * 60 * 1000 + now.valueOf();
+    $('.timer').countdown(countTo, function(event) {
+        var $this = $(this);
+        switch(event.type) {
+            case "seconds":
+            case "minutes":
+            case "hours":
+            case "days":
+            case "weeks":
+            case "daysLeft":
+                $this.find('span.'+event.type).html(event.value);
+                break;
+            case "finished":
+                $this.hide();
+                break;
+        }
+    });
+
+    /*
+        Tooltips
+    */
+    $('.social a.facebook').tooltip();
+    $('.social a.twitter').tooltip();
+    $('.social a.dribbble').tooltip();
+    $('.social a.googleplus').tooltip();
+    $('.social a.pinterest').tooltip();
+    $('.social a.flickr').tooltip();
+
+    /*
+        Subscription form
+    */
+    $('.success-message').hide();
+    $('.error-message').hide();
+
+    $('.subscribe form').submit(function() {
+        var postdata = $('.subscribe form').serialize();
+        $.ajax({
+            type: 'POST',
+            url: '/layout/alissa-coming-soon/assets/sendmail.php',
+            data: postdata,
+            dataType: 'json',
+            success: function(json) {
+                if(json.valid == 0) {
+                    $('.success-message').hide();
+                    $('.error-message').hide();
+                    $('.error-message').html(json.message);
+                    $('.error-message').fadeIn();
+                }
+                else {
+                    $('.error-message').hide();
+                    $('.success-message').hide();
+                    $('.subscribe form').hide();
+                    $('.success-message').html(json.message);
+                    $('.success-message').fadeIn();
+                }
+            }
+        });
+        return false;
+    });
+
+});
+											
+//-->
+</script>
+</body>
+
+<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+
+</html>

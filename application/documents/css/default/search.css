@@ -1,0 +1,56 @@
+@charset "utf-8";
+
+/* LINKS */
+
+.searchQuery_container 
+{
+	padding: 5px;
+	margin: 5px;
+}
+
+.searchQuery_subcontainer
+{
+
+}
+
+.searchQuery_keywords
+{
+
+}
+
+.searchQuery_keyword
+{
+	font-weight: bold;
+}
+
+.searchQuery_result_info
+{
+
+}
+
+.searchQuery_no_records
+{
+	color: red;
+	font-size: 12px;
+}
+
+.searchQuery_title
+{
+	font-weight: bold;
+	line-height: 2em;
+    font-size: 16px;
+	color: blue;
+	margin: 0px;
+	padding: 0px;
+	margin-top: 5px;
+}
+
+.searchQuery_description
+{
+    font-size: 14px;
+}
+
+.searchQuery_link
+{
+	color: green;
+}

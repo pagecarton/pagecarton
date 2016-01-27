@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="order" creation_time="1397840104" table_version="0.01" module_version="1.00" table_class="Application_Subscription_Checkout_Order" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES order="TEXTAREA" order_api="INPUTTEXT" order_status="INPUTTEXT" order_random_code="INPUTTEXT" currency="INPUTTEXT" username="INPUTTEXT" order_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

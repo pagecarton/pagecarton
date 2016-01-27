@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="subscriptionlevel" creation_time="1404405375" table_version="0.07" module_version="1.00" table_class="Application_Subscription_SubscriptionLevel" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES subscriptionlevel_id="INPUTTEXT, RELATIVES = Application_Subscription_Price" subscriptionlevel_name="INPUTTEXT" subscriptionlevel_description="TEXTAREA" subscription_id="INPUTTEXT, FOREIGN_KEYS = Application_Subscription_Subscription" document_url="INPUTTEXT" enabled="INT"/>
+    <FOREIGN_KEYS Application_Subscription_Subscription="subscription_id"/>
+    <RELATIVES Application_Subscription_Price="subscriptionlevel_id"/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

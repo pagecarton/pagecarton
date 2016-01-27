@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="hashtag" creation_time="1397737868" table_version="0.01" module_version="1.00" table_class="Application_HashTag" creation_ip="2130706433">
+  <RECORDS>
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="application_name"><![CDATA[articles]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="hashtag_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="hash_tags"><![CDATA[a:2:{s:4:&quot;tags&quot;;a:1:{s:16:&quot;ayoola-framework&quot;;a:1:{s:43:&quot;/2013/12/10/ayoola-framework-installer.html&quot;;a:1:{s:4:&quot;time&quot;;i:1386699147;}}}s:3:&quot;cue&quot;;a:0:{}}]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES application_name="INPUTTEXT, UNIQUE" hash_tags="ARRAY" hashtag_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

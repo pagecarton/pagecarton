@@ -1,0 +1,132 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,300);
+.cssmenuHorizontalWhite {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+  font-size: 10px;
+  line-height: 15px;
+  text-transform: uppercase;
+  text-align: left;
+}
+.cssmenuHorizontalWhite > ul {
+  width: auto;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  background: #ffffff;
+  border: 1px solid #ece6e8;
+  border-bottom: 3px solid #d9ced2;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+}
+.cssmenuHorizontalWhite > ul li#responsive-tab {
+  display: none;
+  /* Hide for large screens */
+
+}
+.cssmenuHorizontalWhite > ul li {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+}
+.cssmenuHorizontalWhite > ul li.right {
+  float: right;
+}
+.cssmenuHorizontalWhite > ul li.dropdown {
+  position: relative;
+}
+.cssmenuHorizontalWhite > ul li.dropdown:hover ul {
+  display: block;
+}
+.cssmenuHorizontalWhite > ul li.dropdown ul {
+  display: none;
+  width: 250px;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  background: #ffffff;
+  border: 1px solid #ece6e8;
+  border-bottom: 3px solid #d9ced2;
+  border-top: 0 none;
+}
+.cssmenuHorizontalWhite > ul li.dropdown ul li {
+  display: block;
+}
+.cssmenuHorizontalWhite > ul li.dropdown > a {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAA4CAYAAADevImVAAAAOElEQVQ4je3L2wkAMAxCUYd2ADe3H31A00xQPJAfLwFJkXQ5AQBKnOO24j1GRPzJtvxSF9V9nnEAsK9GIS4GfgUAAAAASUVORK5CYII=");
+  background-repeat: no-repeat;
+  background-position: 90% -95%;
+}
+.cssmenuHorizontalWhite > ul li.dropdown > a.active,
+.cssmenuHorizontalWhite > ul li.dropdown > a:hover {
+  background: #d80041 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAA4CAYAAADevImVAAAAOElEQVQ4je3L2wkAMAxCUYd2ADe3H31A00xQPJAfLwFJkXQ5AQBKnOO24j1GRPzJtvxSF9V9nnEAsK9GIS4GfgUAAAAASUVORK5CYII=") no-repeat;
+  background-color: #d80041; 
+  background-position: 90% 195%;
+}
+.cssmenuHorizontalWhite > ul li a {
+  display: block;
+  padding: 12px 24px 11px 24px;
+  text-decoration: none;
+  color: #747474;
+  text-shadow: 0px 1px 0px #fff;
+}
+.cssmenuHorizontalWhite > ul li a.active,
+.cssmenuHorizontalWhite > ul li a:hover {
+  background: #d80041;
+  color: #fff;
+  text-shadow: 0px 1px 0px #000;
+}
+@media (max-width: 600px) {
+  .cssmenuHorizontalWhite > ul {
+    width: 100%;
+  }
+  .cssmenuHorizontalWhite > ul li#responsive-tab {
+    display: block;
+  }
+  .cssmenuHorizontalWhite > ul li#responsive-tab a {
+     background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAABMCAYAAACClvypAAAAQklEQVRYhe3RsQ3AQAwDsd9/QY/zWSIuLiEBtwIkn5m5b9/phHZ0NvWoyKY/fxQAAADwPXdBKLRjpX4ntGOlfib0ARIKicyA4plUAAAAAElFTkSuQmCC") no-repeat;
+     background-position: 95% -35%;
+  }
+  .cssmenuHorizontalWhite > ul li#responsive-tab a:hover {
+    background-color: #d80041;
+    background-position: 95% 135%;
+  }
+  .cssmenuHorizontalWhite > ul li {
+    display: none;
+  }
+  .cssmenuHorizontalWhite > ul li.right {
+    float: none;
+  }
+  .cssmenuHorizontalWhite > ul li.dropdown {
+    position: relative;
+  }
+  .cssmenuHorizontalWhite > ul li.dropdown ul {
+    display: block;
+    position: static;
+    width: 100%;
+    background: #ffffff;
+    border: 0 none;
+  }
+  .cssmenuHorizontalWhite > ul li.dropdown ul li {
+    display: block !important;
+  }
+  .cssmenuHorizontalWhite > ul li.dropdown ul li a span {
+    display: block;
+    padding-left: 24px;
+  }
+  .cssmenuHorizontalWhite > ul li.dropdown > a {
+    background-image: none;
+  }
+}
+/* Make sure they show even if hidden in mobile view by JS */
+@media (min-width: 600px) {
+  .cssmenuHorizontalWhite > ul > li.collapsed {
+    display: inline-block !important;
+    *display: inline;
+    zoom: 1;
+  }
+  .cssmenuHorizontalWhite > ul ul li.collapsed {
+    display: block !important;
+  }
+}

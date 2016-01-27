@@ -1,0 +1,18 @@
+.editableDiv
+{
+	border-radius: .4em;
+	border: .1em groove #ccc;
+	cursor: pointer;
+	background-color: #ffe;
+	position: relative;
+	padding: .3em;
+}
+
+.deleteDiv
+ {
+	color: red;
+	font-size: 2em;
+/* 	position: fixed;
+	top: 90%;
+	left: 90%; */
+}

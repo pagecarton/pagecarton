@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="link" creation_time="1397737876" table_version="0.01" module_version="1.00" table_class="Application_Link" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES link_name="INPUTTEXT, UNIQUE" link_url="INPUTTEXT, UNIQUE" link_domain="INPUTTEXT" link_priority="INT" link_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="authlevel" creation_time="1411592993" table_version="0.09" module_version="1.00" table_class="Ayoola_Access_AuthLevel" creation_ip="2130706433">
+  <RECORDS autoId="7">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="authlevel_id"><![CDATA[6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[99]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_name"><![CDATA[Super User]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_description"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="authlevel_id"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_name"><![CDATA[Moderator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_description"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="authlevel_id"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_name"><![CDATA[Standard]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_description"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="authlevel_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_name"><![CDATA[Public]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_description"><![CDATA[This user group is the default level. It indicates that the user is not currently logged in.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[[&quot;display_picture&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[/public/2014/09/05/default_user_256_png.png]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="auth_name"><![CDATA[Profile or Post Owner]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[98]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_description"><![CDATA[This grants a profile or post owner privileges on a Profile Page or Post that they own]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="authlevel_id"><![CDATA[1496-0-6]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES auth_level="INT,UNIQUE" auth_name="TEXTAREA,UNIQUE" auth_description="TEXTAREA" display_picture="INPUTTEXT" parent_access_level="JSON" additional_forms="JSON" auth_options="JSON" authlevel_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DOCUMENT_ELEMENT table_name="searchengine" creation_time="1347273098" table_version="0.01" table_class="Application_Link_SearchEngine" creation_ip="2130706433">
+  <RECORDS>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="searchengine_name"><![CDATA[Moreover]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_url"><![CDATA[www.moreover.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_sitemap_url"><![CDATA[http://api.moreover.com/ping?u=sitemap_url]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_id"><![CDATA[5]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="searchengine_name"><![CDATA[Yahoo.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_id"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_url"><![CDATA[www.yahoo.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_sitemap_url"><![CDATA[http://search.yahooapis.com/SiteExplorerService/V1/ping/?sitemap=sitemap_url]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="searchengine_name"><![CDATA[Bing.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_id"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_url"><![CDATA[www.bing.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_sitemap_url"><![CDATA[http://www.bing.com/webmaster/ping.aspx?siteMap=sitemap_url]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="searchengine_name"><![CDATA[Ask.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_url"><![CDATA[www.ask.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_sitemap_url"><![CDATA[http://submissions.ask.com/ping?sitemap=sitemap_url]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_id"><![CDATA[2]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="searchengine_name"><![CDATA[Google]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_url"><![CDATA[www.google.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="searchengine_sitemap_url"><![CDATA[http://www.google.com/webmasters/tools/ping?sitemap=sitemap_url]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES searchengine_name="INPUTTEXT, UNIQUE" searchengine_url="INPUTTEXT" searchengine_sitemap_url="INPUTTEXT" searchengine_id="INT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

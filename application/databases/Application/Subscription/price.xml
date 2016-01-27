@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="price" creation_time="1404405376" table_version="0.06" module_version="1.00" table_class="Application_Subscription_Price" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES subscriptionlevel_id="INPUTTEXT, FOREIGN_KEYS = Application_Subscription_SubscriptionLevel" cycle_id="INPUTTEXT, FOREIGN_KEYS = Application_Subscription_Cycle" min_quantity="INT" max_quantity="INT" allowed_multiples="INT" price="FLOAT" price_id="INPUTTEXT"/>
+    <FOREIGN_KEYS Application_Subscription_SubscriptionLevel="subscriptionlevel_id" Application_Subscription_Cycle="cycle_id"/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

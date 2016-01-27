@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+/* 
+	VerticalLight menu css file
+*/
+
+/* 
+	The Container of the whole menu
+*/
+
+.Ayoola_MenuVerticalLightContainer 
+{
+	list-style:none;
+/* 	border: 0.1em groove #ccc;
+ */	overflow: hidden;
+	line-height:2em;
+	padding: 0;
+}
+
+/* 
+	Each option box
+*/
+
+.Ayoola_MenuVerticalLight,
+.Ayoola_MenuVerticalLight a,
+.Ayoola_MenuVerticalLight a:active,
+.Ayoola_MenuVerticalLight a:focus,
+.Ayoola_MenuVerticalLight a:hover,
+.Ayoola_MenuVerticalLight a:visited,
+.Ayoola_MenuVerticalLightSelectedOption,
+.Ayoola_MenuVerticalLightSelectedOption a,
+.Ayoola_MenuVerticalLightSelectedOption a:active,
+.Ayoola_MenuVerticalLightSelectedOption a:focus,
+.Ayoola_MenuVerticalLightSelectedOption a:hover,
+.Ayoola_MenuVerticalLightSelectedOption a:visited
+{
+	text-align:left;
+	margin: 0.3em;
+	padding-left: 10px;
+	display: block;
+}
+
+/* 
+	Each option box outside the link
+*/
+
+.Ayoola_MenuVerticalLight,
+.Ayoola_MenuVerticalLightSelectedOption
+{
+	border-bottom: 0.1em solid #ccc;
+}
+
+/* 
+	The active option
+*/
+
+.Ayoola_MenuVerticalLightSelectedOption,
+.Ayoola_MenuVerticalLightSelectedOption a,
+.Ayoola_MenuVerticalLightSelectedOption a:visited,
+.Ayoola_MenuVerticalLightSelectedOption a:hover,
+.Ayoola_MenuVerticalLightSelectedOption a:active,
+.Ayoola_MenuVerticalLightSelectedOption a:focus
+{
+	background-color: #FFF;
+	color: green;
+}
+
+
+/* 
+	What happens onmouseover option
+*/
+
+.Ayoola_MenuVerticalLight a:active,
+.Ayoola_MenuVerticalLight a:focus,
+.Ayoola_MenuVerticalLight a:hover,
+.Ayoola_MenuVerticalLightSelectedOption a:active,
+.Ayoola_MenuVerticalLightSelectedOption a:hover,
+.Ayoola_MenuVerticalLightSelectedOption a:focus
+{
+	text-decoration: none;
+	color:#FFd;
+	background-color:#172c43;
+	padding-left: 10px;
+}

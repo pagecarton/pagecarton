@@ -1,0 +1,13 @@
+/*
+* Lemar Theme - Skin Fuchsia
+*/
+.menu, .menu a , .menu a:visited, .menu a:focus { color: #d51c3f; }
+.slidepic { border: 2px solid #ccc !important;}
+.header { background: #d51c3f; }
+.copyright, .copyright a { background: #d51c3f; }
+.spotlight { background: #d51c3f; }
+.colorme { color: #d51c3f; }
+a.actionbutton { color: #666 !important; text-shadow:0 1px 1px #fff; background-color: #ddd; background-image: -moz-linear-gradient(center top,#F1F1F1,#ddd); background-image: -webkit-linear-gradient(top,#F1F1F1,#ddd); background-image: -moz-linear-gradient(top,#F1F1F1,#ddd); background-image: -ms-linear-gradient(top,#F1F1F1,#ddd); background-image: -o-linear-gradient(top,#F1F1F1,#ddd); background-image: linear-gradient(top,#F1F1F1,#ddd); filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1f1f1',EndColorStr='#ddd'); background-repeat: no-repeat; }
+a.actionbutton:hover { background: #fff; }
+.centered-btns_tabs a,.transparent-btns_tabs a,.large-btns_tabs a { background: #fff !important; }
+.centered-btns_here a,.transparent-btns_here a,.large-btns_here a { background: #ddd !important; }

@@ -1,0 +1,136 @@
+<?php include_once( LAYOUT_PATH . DS . 'htmlNamespace' . TPL ) ?>
+<head>
+<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+  <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/DesignCompany/css/reset.css" type="text/css" media="all">
+  <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/DesignCompany/css/style.css" type="text/css" media="all">
+  <!--[if lt IE 7]>
+  	<link rel="stylesheet" href="css/ie/ie6.css" type="text/css" media="all">
+  <![endif]-->
+  <!--[if lt IE 9]>
+  	<script type="text/javascript" src="js/html5.js"></script>
+    <script type="text/javascript" src="js/IE9.js"></script>
+  <![endif]-->
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<?php
+	if( Application_Settings_CompanyInfo::getSettings( 'Page', 'background_image' ) )
+	{
+?>
+		<style>  
+		body
+		{
+			background-image: url(<?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'background_image' ); ?>);
+		}
+		</style>
+<?php
+	}
+?>
+<style>
+<?php
+	if( Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ) )
+	{
+?>
+.xcoloring, header, footer
+{
+	background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ); ?>;
+	color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'font_color' ); ?>;
+}
+.xcoloring a:link,.xcoloring a:visited, .xcoloring a:hover,.xcoloring a:active
+{
+    color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color' ); ?>;
+}
+<?php
+	}
+?>
+</style>
+</head>
+
+<body>
+	<!-- header -->
+	<header>
+		<div class="container">
+ 				<?php
+					echo '<a class="" style="vertical-align:middle;" href="' . Ayoola_Application::getUrlPrefix() . '/"><img style="max-height:75px;max-width:100%;" src="' . Ayoola_Doc::uriToDedicatedUrl( '/img/logo.png' ) . '" alt="' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . '" title="Our logo" /></a>';
+					echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Logo" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Logo/"> x </a>' : null;
+				?>	            
+		  <nav>
+			<?php
+				if( stripos( Ayoola_Application::getPresentUri(), '/ayoola' ) === 0 )
+				{
+					echo Ayoola_Menu_Demo::viewInLine( null, 'headerAdmin' );
+				}
+				else
+				{
+					echo Ayoola_Menu_Demo::viewInLine( null, 'headerMain' );
+				}
+			?>
+			<?php
+		//		echo Ayoola_Menu_Demo::viewInLine( null, 'accessMain' );
+			?>
+		  </nav>
+		</div>
+	</header>
+  <!-- #gallery -->
+  @@@slideshow@@@
+  <!-- /#gallery -->
+  <div class="main-box">
+    <div class="container">
+      <div class="inside">
+        <div class="wrapper">
+			%%HEADER%% 
+        	<!-- aside -->
+          <aside>
+				<div class="Ayoola_Page_Layout_Edit_File_left">
+					%%RIGHTBAR%%
+					%%LEFTBAR%%
+				</div>
+			<!-- Start Latest Tweets -->
+<!-- 			<div id="latest-tweets">
+				<h2>Twitter <span>Updates</span></h2>
+				<?php 
+				//	if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
+				//	echo '<div><p><a rel="spotlight;height=300px;width=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SocialMedia/"> Update Twitter username</a></div>';
+				?>
+				<?php
+				//	echo Application_Twitter_EzTweet_View::viewInLine( null, null );
+				?>
+			</div>
+ -->			<!-- End Latest Tweets -->
+          </aside>
+          <!-- content -->
+          <section id="content">
+            <article>
+				<div class="Ayoola_Page_Layout_Edit_File_middle">
+					%%MIDDLEBAR%%
+				</div>
+            </article> 
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- footer -->
+  <footer class="xcoloring">
+    <div class="container">
+		<div style="padding-bottom: 4em;">
+			<?php echo Ayoola_Menu::viewInLine( null, 'footerMain' ); ?>
+    	</div>
+    	<div class="wrapper">
+			<div class="fleft">Copyright <?php echo ' 2011-' . date( 'Y' ) ?> <?php echo Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain(); ?>.</div>
+			<div class="fright"><a rel="nofollow" href="http://www.templatemonster.com/" target="_blank">Website template</a> designed by TemplateMonster.com for <a href="http://ayoo.la/cmf/">Ayoola CMF</a></div>
+		</div>
+    	<div class="wrapper">
+			%%FOOTER%%
+		</div>
+    </div>
+  </footer>
+<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+  <script type="text/javascript" src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/DesignCompany/js/cufon-yui.js"></script>
+  <script type="text/javascript" src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/DesignCompany/js/Humanst521_BT_400.font.js"></script>
+  <script type="text/javascript" src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/DesignCompany/js/Humanst521_Lt_BT_400.font.js"></script>
+  <script type="text/javascript" src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/DesignCompany/js/roundabout.js"></script>
+  <script type="text/javascript" src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/DesignCompany/js/roundabout_shapes.js"></script>
+  <script type="text/javascript" src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/DesignCompany/js/gallery_init.js"></script>
+  <script type="text/javascript" src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/DesignCompany/js/cufon-replace.js"></script>
+  <script type="text/javascript"> Cufon.now(); </script>
+</body>
+</html>

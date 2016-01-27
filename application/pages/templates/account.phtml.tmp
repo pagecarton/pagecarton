@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/BootstrapBlogPost/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/BootstrapBlogPost/css/modern-business.css" rel="stylesheet">
+    <link href="' . Ayoola_Application::getUrlPrefix() . '/BootstrapBlogPost/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<?php
+	if( Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ) )
+	{
+?>
+<style>
+	.navbar .sidebar-toggle .icon-bar, .navbar-inverse .navbar-toggle
+	{
+		background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color' ); ?>;
+	} 
+	.navbar-inverse .navbar-toggle .icon-bar
+	{
+		background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ); ?>;
+	} 
+	.navbar .sidebar-toggle:hover .icon-bar
+	{
+		background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'font_color' );  ?> !important;
+	}
+	.navbar
+	{
+		background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ); ?>;
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'font_color' ); ?>;
+	}
+	.navbar-nav > .user-menu > .dropdown-menu > li.user-header > p
+	{
+		background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ); ?>;
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'font_color' ); ?>;
+	}
+	.navbar .nav a
+	{
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color' ); ?>;
+	}
+	.navbar .nav a:link
+	{
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color' ); ?>;
+	}
+	.navbar .nav a:active
+	{
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color_active' ); ?>;
+	}
+	.navbar .nav a:hover
+	{
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color_hover' ); ?>;
+	}
+	.navbar .nav a:visited
+	{
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color_visited' ); ?>;
+	}
+	.navbar .nav > li > a:hover,
+	.navbar .nav > li > a:active,
+	.navbar .nav > li > a:focus,
+	.navbar .nav .open > a,
+	.navbar .nav .open > a:hover,
+	.navbar .nav .open > a:focus 
+	{
+		background: rgba(0, 0, 0, 0.1);
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color_hover' ); ?>;
+	}
+</style>
+<?php
+	}
+?>
+    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/BootstrapBlogPost/js/jquery.js"></script>
+  </head>
+
+  <body>
+
+    <nav class="pc-bg-color navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+				<?php
+					echo '<a class="" style="vertical-align:middle;" href="' . Ayoola_Application::getUrlPrefix() . '/"><img style="max-height:50px;max-width:100%;" src="' . Ayoola_Doc::uriToDedicatedUrl( '/img/logo.png' ) . '" alt="' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . '" title="Our logo" /></a>';
+					echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Logo" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Logo/"> x </a>' : null;
+				?>	            
+		  
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-right"> 
+			<?php 
+			if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
+			{
+				echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>';  
+					//	if( stripos( Ayoola_Application::getPresentUri(), '/ayoola' ) === 0 )
+						{
+							echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'headerAdmin', 'ul-class' => 'dropdown-menu pc-bg-color', 'li-active-class' => 'active', 'ul-1-class' => 'dropdown-menu pc-bg-color', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+						}
+				echo '</li>';
+			}
+			?>
+			<?php 
+	//		if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
+			{
+				echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>';  
+					//	if( stripos( Ayoola_Application::getPresentUri(), '/ayoola' ) === 0 )
+						{
+							echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'accessMain', 'ul-class' => 'dropdown-menu pc-bg-color', 'li-active-class' => 'active', 'ul-1-class' => 'dropdown-menu pc-bg-color', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+						}
+				echo '</li>';
+			}
+			?>
+			<?php
+				//	On the fly Menu
+				foreach( Ayoola_Menu::getRawMenuOptions() as $key => $each )
+				{
+					echo '<li class="dropdown">
+						  <a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $key . ' <b class="caret"></b></a>';
+					echo Ayoola_Menu_Demo::viewInLine( array( 'raw-options' => $each, 'ul-class' => 'dropdown-menu  pc-bg-color', 'li-active-class' => 'active', 'ul-1-class' => 'dropdown-menu  pc-bg-color', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+					echo '</li>';
+				}
+			?>
+		  </ul>
+			<?php	
+				//	Insert the header menu
+				echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'headerMain', 'ul-class' => 'nav navbar-nav navbar-left', 'ul-1-class' => 'dropdown-menu  pc-bg-color', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+			?>
+			<?php
+				//	Put the homepage link
+			?>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+    
+    <div class="container">
+      <div class="row">
+		<div style="text-align:left;" class="col-md-12">
+			<?php	
+				echo Application_Breadcrumb::viewInLine
+				( 
+
+				);
+			?>
+		</div>
+        <div style="padding:1em;" class="xcoloring col-md-12">
+		  <div title='This is the "header" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__header'><div class='DragBox' id='bef8994c7ff72d072ace0a0f132f47bc431' title='Move this object by dragging it around - Photo' data-object_name='pageEditorImage' ><div style="" title="Photo" class="title_bar" data-parameter_name="parent"><span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode );"> x </span><a class="title_button" name="advanced_parameters_bef8994c7ff72d072ace0a0f132f47bc431" href="javascript:;" class="" title="Click to show or hide advanced settings" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> &square; </a><a class="title_button" name="advanced_parameters_bef8994c7ff72d072ace0a0f132f47bc431_interior" href="javascript:;" class="" title="Minimize or open the body of this object" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> _ </a><span style="">Photo</span><div style="clear:both;"></div></div><div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;" title="" class="status_bar" data-parameter_name="parent"><div style="clear:both;display:none;" name="advanced_parameters_bef8994c7ff72d072ace0a0f132f47bc431"><strong>Inject some parameters to this object...</strong></div><form name='advanced_parameters_bef8994c7ff72d072ace0a0f132f47bc431'  method='post'  enctype='application/x-www-form-urlencoded'  data-parameter_name='advanced_parameters'  style='display:none;'  id='advanced_parameters_bef8994c7ff72d072ace0a0f132f47bc431_form_id'  action='#advanced_parameters_bef8994c7ff72d072ace0a0f132f47bc431' >
+<div>
+<input type="text"  name = "advanced_parameter_name[]"  placeholder = "Parameter Name"  title = ": Parameter Name"  id = "advanced_parameter_name[]"  />
+<input type="text"  name = "advanced_parameter_value[]"  placeholder = "Parameter Value"  title = ": Parameter Value"  id = "advanced_parameter_value[]"  />
+<button class='boxednews  ' type='button' title='Duplicate this fieldset' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.cloneNode( true ); var fieldtags= [ "input", "textarea", "select"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= ""; } } this.parentNode.parentNode.insertBefore( fieldset, this.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name="" '>+</button>
+<button class='boxednews' type='button' title='Remove this fieldset' onClick='confirm( "Delete all the elements in these fieldset?") ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;'>-</button>
+</div>
+<p><strong>Which user groups can view this object...</strong></p><label style='' for='object_access_level[]'> </label>
+<span style='display:inline-block;'><input type='checkbox' style='' id='bef8994c7ff72d072ace0a0f132f47bc431_object_access_level1' value='3' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='bef8994c7ff72d072ace0a0f132f47bc431_object_access_level1'>Moderator </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='bef8994c7ff72d072ace0a0f132f47bc431_object_access_level2' value='98' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='bef8994c7ff72d072ace0a0f132f47bc431_object_access_level2'>Profile or Post Owner </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='bef8994c7ff72d072ace0a0f132f47bc431_object_access_level3' value='0' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='bef8994c7ff72d072ace0a0f132f47bc431_object_access_level3'>Public </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='bef8994c7ff72d072ace0a0f132f47bc431_object_access_level4' value='1' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='bef8994c7ff72d072ace0a0f132f47bc431_object_access_level4'>Standard </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='bef8994c7ff72d072ace0a0f132f47bc431_object_access_level5' value='99' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='bef8994c7ff72d072ace0a0f132f47bc431_object_access_level5'>Super User </label></span>
+<input type='hidden' name='eece2f45689e1d2990cbbad1347a637c36' id='eece2f45689e1d2990cbbad1347a637c36' value='advanced_parameters_bef8994c7ff72d072ace0a0f132f47bc431' />
+<input type='hidden' name='bee8dbb9028a7506cec17f942c9262f90c26' id='bee8dbb9028a7506cec17f942c9262f90c26' value='107374182' />
+<div class='hidden'><label for='e03b67519c32e2dcd06d0d201bb63a3acd92f1'>Delicious</label>
+<input type='text' id='e03b67519c32e2dcd06d0d201bb63a3acd92f1' name='e03b67519c32e2dcd06d0d201bb63a3acd92f1' value='' /></div></form>
+ </div><div  title="Photo" style=" padding-top:0.5em;padding-bottom:0.5em;cursor: default;" name="advanced_parameters_bef8994c7ff72d072ace0a0f132f47bc431_interior" class="" data-parameter_name="parent"><span data-parameter_name='view' >Photo</span><span>  
+					<img name="Ayoola_Page_Editor_Image_1_preview_zone_image" src="/public/2014/09/05/Cloud_banner_jpg.jpg"  class="defaultnews blocknews centerednews" onClick="" style=""  > 
+				</span><input data-parameter_name="image_url" title="Enter the image link here" onClick="ayoola.image.formElement = this; ayoola.image.fieldNameValue = 'url'; ayoola.image.fieldName = 'Ayoola_Page_Editor_Image_1';  ayoola.image.cropping.crop = false; ayoola.image.clickBrowseButton( { accept: 'image/*' } );" type='button' value="/public/2014/09/05/Cloud_banner_jpg.jpg" /></div><div name="advanced_parameters_bef8994c7ff72d072ace0a0f132f47bc431_interior" style="" title="Photo" class="status_bar"><a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var a = window.prompt( 'Copy to clipboard: Ctrl+C, Enter', this.parentNode.parentNode.outerHTML ); if( a ){ this.parentNode.parentNode.outerHTML = a; }">&#8635;</a><a class="title_button" title="Seek help on how to use this page editor" name="" href="http://pagecarton.com" onclick="this.target='_new'">?</a><div style="clear:both;"></div></div></div></div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class=" col-md-8">      
+		  <div title='This is the "middlebar" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__middlebar'><div class='DragBox' id='0721cc50002c2868277f502ddd6f2aca658' title='Move this object by dragging it around - Login Form or Personalization Bar' data-object_name='accessBar' ><div style="" title="Login Form or Personalization Bar" class="title_bar" data-parameter_name="parent"><span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode );"> x </span><a class="title_button" name="advanced_parameters_0721cc50002c2868277f502ddd6f2aca658" href="javascript:;" class="" title="Click to show or hide advanced settings" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> &square; </a><a class="title_button" name="advanced_parameters_0721cc50002c2868277f502ddd6f2aca658_interior" href="javascript:;" class="" title="Minimize or open the body of this object" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> _ </a><span style="">Login Form or Personalization Bar</span><div style="clear:both;"></div></div><div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;" title="" class="status_bar" data-parameter_name="parent"><div style="clear:both;display:none;" name="advanced_parameters_0721cc50002c2868277f502ddd6f2aca658"><strong>Inject some parameters to this object...</strong></div><form name='advanced_parameters_0721cc50002c2868277f502ddd6f2aca658'  method='post'  enctype='application/x-www-form-urlencoded'  data-parameter_name='advanced_parameters'  style='display:none;'  id='advanced_parameters_0721cc50002c2868277f502ddd6f2aca658_form_id'  action='#advanced_parameters_0721cc50002c2868277f502ddd6f2aca658' >
+<div>
+<input type="text"  name = "advanced_parameter_name[]"  placeholder = "Parameter Name"  title = ": Parameter Name"  id = "advanced_parameter_name[]"  />
+<input type="text"  name = "advanced_parameter_value[]"  placeholder = "Parameter Value"  title = ": Parameter Value"  id = "advanced_parameter_value[]"  />
+<button class='boxednews  ' type='button' title='Duplicate this fieldset' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.cloneNode( true ); var fieldtags= [ "input", "textarea", "select"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= ""; } } this.parentNode.parentNode.insertBefore( fieldset, this.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name="" '>+</button>
+<button class='boxednews' type='button' title='Remove this fieldset' onClick='confirm( "Delete all the elements in these fieldset?") ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;'>-</button>
+</div>
+<p><strong>Which user groups can view this object...</strong></p><label style='' for='object_access_level[]'> </label>
+<span style='display:inline-block;'><input type='checkbox' style='' id='0721cc50002c2868277f502ddd6f2aca658_object_access_level1' value='3' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='0721cc50002c2868277f502ddd6f2aca658_object_access_level1'>Moderator </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='0721cc50002c2868277f502ddd6f2aca658_object_access_level2' value='98' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='0721cc50002c2868277f502ddd6f2aca658_object_access_level2'>Profile or Post Owner </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='0721cc50002c2868277f502ddd6f2aca658_object_access_level3' value='0' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='0721cc50002c2868277f502ddd6f2aca658_object_access_level3'>Public </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='0721cc50002c2868277f502ddd6f2aca658_object_access_level4' value='1' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='0721cc50002c2868277f502ddd6f2aca658_object_access_level4'>Standard </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='0721cc50002c2868277f502ddd6f2aca658_object_access_level5' value='99' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='0721cc50002c2868277f502ddd6f2aca658_object_access_level5'>Super User </label></span>
+<input type='hidden' name='b1340cce7ce1c93e06e0de4430ba2df49f4cc' id='b1340cce7ce1c93e06e0de4430ba2df49f4cc' value='advanced_parameters_0721cc50002c2868277f502ddd6f2aca658' />
+<input type='hidden' name='bee8dbb9028a7506cec17f942c9262f90c26' id='bee8dbb9028a7506cec17f942c9262f90c26' value='107374182' />
+<div class='hidden'><label for='e03b67519c32e2dcd06d0d201bb63a3acd92f1'>Delicious</label>
+<input type='text' id='e03b67519c32e2dcd06d0d201bb63a3acd92f1' name='e03b67519c32e2dcd06d0d201bb63a3acd92f1' value='' /></div></form>
+ </div><div  title="Login Form or Personalization Bar" style=" padding-top:0.5em;padding-bottom:0.5em;cursor: default;" name="advanced_parameters_0721cc50002c2868277f502ddd6f2aca658_interior" class="" data-parameter_name="parent"><select data-parameter_name="option"><option value="Dark Bottom">Dark Bottom</option><option value="Dark Top">Dark Top</option><option value="In-line Dark">In-line Dark</option><option value="Transparent Top">Transparent Top</option><option value="Transparent" selected = selected >Transparent</option></select></div><div name="advanced_parameters_0721cc50002c2868277f502ddd6f2aca658_interior" style="" title="Login Form or Personalization Bar" class="status_bar"><a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var a = window.prompt( 'Copy to clipboard: Ctrl+C, Enter', this.parentNode.parentNode.outerHTML ); if( a ){ this.parentNode.parentNode.outerHTML = a; }">&#8635;</a><a class="title_button" title="Seek help on how to use this page editor" name="" href="http://pagecarton.com" onclick="this.target='_new'">?</a><div style="clear:both;"></div></div></div><div class='DragBox' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12585' title='Move this object by dragging it around - PHP Object' data-object_name='objectEmbed' ><div style="" title="PHP Object" class="title_bar" data-parameter_name="parent"><span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode );"> x </span><a class="title_button" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12585" href="javascript:;" class="" title="Click to show or hide advanced settings" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> &square; </a><a class="title_button" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12585_interior" href="javascript:;" class="" title="Minimize or open the body of this object" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> _ </a><span style="">PHP Object</span><div style="clear:both;"></div></div><div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;" title="" class="status_bar" data-parameter_name="parent"><div style="clear:both;display:none;" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12585"><strong>Inject some parameters to this object...</strong></div><form name='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12585'  method='post'  enctype='application/x-www-form-urlencoded'  data-parameter_name='advanced_parameters'  style='display:none;'  id='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12585_form_id'  action='#advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12585' >
+<div>
+<input type="text"  name = "advanced_parameter_name[]"  placeholder = "Parameter Name"  value = "markup_template"  title = ": Parameter Name"  id = "advanced_parameter_name[]"  />
+<input type="text"  name = "advanced_parameter_value[]"  placeholder = "Parameter Value"  value = "		&lt;img src=&quot;{{{display_picture}}}&quot; style=&quot;float:right;max-height:160px;&quot; &gt; 		&lt;h2&gt;Account Summary&lt;/h2&gt;  		&lt;p&gt;&lt;strong&gt;{{{auth_name}}}&lt;/strong&gt;&lt;/p&gt;  		&lt;p&gt;{{{auth_description}}}&lt;/p&gt;  		&lt;p&gt;Account has been in existence since {{{creation_date}}}.&lt;/p&gt; 		&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;"  title = ": Parameter Value"  id = "advanced_parameter_value[]"  />
+<button class='boxednews  ' type='button' title='Duplicate this fieldset' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.cloneNode( true ); var fieldtags= [ "input", "textarea", "select"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= ""; } } this.parentNode.parentNode.insertBefore( fieldset, this.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name="" '>+</button>
+<button class='boxednews' type='button' title='Remove this fieldset' onClick='confirm( "Delete all the elements in these fieldset?") ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;'>-</button>
+</div>
+<div>
+<input type="text"  name = "advanced_parameter_name[]"  placeholder = "Parameter Name"  value = "markup_template_namespace"  title = ": Parameter Name"  id = "advanced_parameter_name[]"  />
+<input type="text"  name = "advanced_parameter_value[]"  placeholder = "Parameter Value"  value = "dashboard"  title = ": Parameter Value"  id = "advanced_parameter_value[]"  />
+<button class='boxednews  ' type='button' title='Duplicate this fieldset' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.cloneNode( true ); var fieldtags= [ "input", "textarea", "select"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= ""; } } this.parentNode.parentNode.insertBefore( fieldset, this.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name="" '>+</button>
+<button class='boxednews' type='button' title='Remove this fieldset' onClick='confirm( "Delete all the elements in these fieldset?") ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;'>-</button>
+</div>
+<p><strong>Which user groups can view this object...</strong></p><label style='' for='object_access_level[]'> </label>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12585_object_access_level1' value='3' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12585_object_access_level1'>Moderator </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12585_object_access_level2' value='98' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12585_object_access_level2'>Profile or Post Owner </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12585_object_access_level3' value='0' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12585_object_access_level3'>Public </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12585_object_access_level4' value='1' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12585_object_access_level4'>Standard </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12585_object_access_level5' value='99' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12585_object_access_level5'>Super User </label></span>
+<input type='hidden' name='d2ae585b0eb571d3047aae69acf311e3219fc2a6' id='d2ae585b0eb571d3047aae69acf311e3219fc2a6' value='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12585' />
+<input type='hidden' name='bee8dbb9028a7506cec17f942c9262f90c26' id='bee8dbb9028a7506cec17f942c9262f90c26' value='107374182' />
+<div class='hidden'><label for='e03b67519c32e2dcd06d0d201bb63a3acd92f1'>Delicious</label>
+<input type='text' id='e03b67519c32e2dcd06d0d201bb63a3acd92f1' name='e03b67519c32e2dcd06d0d201bb63a3acd92f1' value='' /></div></form>
+ </div><div  title="PHP Object" style=" padding-top:0.5em;padding-bottom:0.5em;cursor: default;" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12585_interior" class="" data-parameter_name="parent"><span data-parameter_name="editable" style="display:block;min-height:1em;" contentEditable=true onclick="" >Ayoola_Access_Dashboard</span></div><div name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12585_interior" style="" title="PHP Object" class="status_bar"><a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var a = window.prompt( 'Copy to clipboard: Ctrl+C, Enter', this.parentNode.parentNode.outerHTML ); if( a ){ this.parentNode.parentNode.outerHTML = a; }">&#8635;</a><a class="title_button" title="Seek help on how to use this page editor" name="" href="http://pagecarton.com" onclick="this.target='_new'">?</a><div style="clear:both;"></div></div></div><div class='DragBox' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12481' title='Move this object by dragging it around - PHP Object' data-object_name='objectEmbed' ><div style="" title="PHP Object" class="title_bar" data-parameter_name="parent"><span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode );"> x </span><a class="title_button" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12481" href="javascript:;" class="" title="Click to show or hide advanced settings" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> &square; </a><a class="title_button" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12481_interior" href="javascript:;" class="" title="Minimize or open the body of this object" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> _ </a><span style="">PHP Object</span><div style="clear:both;"></div></div><div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;" title="" class="status_bar" data-parameter_name="parent"><div style="clear:both;display:none;" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12481"><strong>Inject some parameters to this object...</strong></div><form name='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12481'  method='post'  enctype='application/x-www-form-urlencoded'  data-parameter_name='advanced_parameters'  style='display:none;'  id='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12481_form_id'  action='#advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12481' >
+<div>
+<input type="text"  name = "advanced_parameter_name[]"  placeholder = "Parameter Name"  value = "markup_template"  title = ": Parameter Name"  id = "advanced_parameter_name[]"  />
+<input type="text"  name = "advanced_parameter_value[]"  placeholder = "Parameter Value"  value = "		&lt;h3&gt;Wallet Balance&lt;/h3&gt; 		&lt;h2&gt;{{{wallet_balance}}}&lt;/h2&gt;"  title = ": Parameter Value"  id = "advanced_parameter_value[]"  />
+<button class='boxednews  ' type='button' title='Duplicate this fieldset' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.cloneNode( true ); var fieldtags= [ "input", "textarea", "select"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= ""; } } this.parentNode.parentNode.insertBefore( fieldset, this.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name="" '>+</button>
+<button class='boxednews' type='button' title='Remove this fieldset' onClick='confirm( "Delete all the elements in these fieldset?") ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;'>-</button>
+</div>
+<div>
+<input type="text"  name = "advanced_parameter_name[]"  placeholder = "Parameter Name"  value = "markup_template_namespace"  title = ": Parameter Name"  id = "advanced_parameter_name[]"  />
+<input type="text"  name = "advanced_parameter_value[]"  placeholder = "Parameter Value"  value = "dashboard wallet"  title = ": Parameter Value"  id = "advanced_parameter_value[]"  />
+<button class='boxednews  ' type='button' title='Duplicate this fieldset' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.cloneNode( true ); var fieldtags= [ "input", "textarea", "select"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= ""; } } this.parentNode.parentNode.insertBefore( fieldset, this.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name="" '>+</button>
+<button class='boxednews' type='button' title='Remove this fieldset' onClick='confirm( "Delete all the elements in these fieldset?") ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;'>-</button>
+</div>
+<p><strong>Which user groups can view this object...</strong></p><label style='' for='object_access_level[]'> </label>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12481_object_access_level1' value='3' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12481_object_access_level1'>Moderator </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12481_object_access_level2' value='98' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12481_object_access_level2'>Profile or Post Owner </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12481_object_access_level3' value='0' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12481_object_access_level3'>Public </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12481_object_access_level4' value='1' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12481_object_access_level4'>Standard </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12481_object_access_level5' value='99' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12481_object_access_level5'>Super User </label></span>
+<input type='hidden' name='a056c060fa65985081b449b8a927a28c1bc7a1a2' id='a056c060fa65985081b449b8a927a28c1bc7a1a2' value='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12481' />
+<input type='hidden' name='bee8dbb9028a7506cec17f942c9262f90c26' id='bee8dbb9028a7506cec17f942c9262f90c26' value='107374182' />
+<div class='hidden'><label for='e03b67519c32e2dcd06d0d201bb63a3acd92f1'>Delicious</label>
+<input type='text' id='e03b67519c32e2dcd06d0d201bb63a3acd92f1' name='e03b67519c32e2dcd06d0d201bb63a3acd92f1' value='' /></div></form>
+ </div><div  title="PHP Object" style=" padding-top:0.5em;padding-bottom:0.5em;cursor: default;" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12481_interior" class="" data-parameter_name="parent"><span data-parameter_name="editable" style="display:block;min-height:1em;" contentEditable=true onclick="" >Ayoola_Access_Dashboard</span></div><div name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12481_interior" style="" title="PHP Object" class="status_bar"><a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var a = window.prompt( 'Copy to clipboard: Ctrl+C, Enter', this.parentNode.parentNode.outerHTML ); if( a ){ this.parentNode.parentNode.outerHTML = a; }">&#8635;</a><a class="title_button" title="Seek help on how to use this page editor" name="" href="http://pagecarton.com" onclick="this.target='_new'">?</a><div style="clear:both;"></div></div></div><div class='DragBox' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12299' title='Move this object by dragging it around - PHP Object' data-object_name='objectEmbed' ><div style="" title="PHP Object" class="title_bar" data-parameter_name="parent"><span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode );"> x </span><a class="title_button" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12299" href="javascript:;" class="" title="Click to show or hide advanced settings" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> &square; </a><a class="title_button" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12299_interior" href="javascript:;" class="" title="Minimize or open the body of this object" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> _ </a><span style="">PHP Object</span><div style="clear:both;"></div></div><div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;" title="" class="status_bar" data-parameter_name="parent"><div style="clear:both;display:none;" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12299"><strong>Inject some parameters to this object...</strong></div><form name='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12299'  method='post'  enctype='application/x-www-form-urlencoded'  data-parameter_name='advanced_parameters'  style='display:none;'  id='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12299_form_id'  action='#advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12299' >
+<div>
+<input type="text"  name = "advanced_parameter_name[]"  placeholder = "Parameter Name"  title = ": Parameter Name"  id = "advanced_parameter_name[]"  />
+<input type="text"  name = "advanced_parameter_value[]"  placeholder = "Parameter Value"  title = ": Parameter Value"  id = "advanced_parameter_value[]"  />
+<button class='boxednews  ' type='button' title='Duplicate this fieldset' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.cloneNode( true ); var fieldtags= [ "input", "textarea", "select"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= ""; } } this.parentNode.parentNode.insertBefore( fieldset, this.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name="" '>+</button>
+<button class='boxednews' type='button' title='Remove this fieldset' onClick='confirm( "Delete all the elements in these fieldset?") ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;'>-</button>
+</div>
+<p><strong>Which user groups can view this object...</strong></p><label style='' for='object_access_level[]'> </label>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12299_object_access_level1' value='3' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12299_object_access_level1'>Moderator </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12299_object_access_level2' value='98' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12299_object_access_level2'>Profile or Post Owner </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12299_object_access_level3' value='0' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12299_object_access_level3'>Public </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12299_object_access_level4' value='1' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12299_object_access_level4'>Standard </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12299_object_access_level5' value='99' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='1b7462e8a4eb7f1ca0c6f3ca337b6f12299_object_access_level5'>Super User </label></span>
+<input type='hidden' name='c35c0c44b8e23edbd83ed43033565a3a9ca8af8' id='c35c0c44b8e23edbd83ed43033565a3a9ca8af8' value='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12299' />
+<input type='hidden' name='bee8dbb9028a7506cec17f942c9262f90c26' id='bee8dbb9028a7506cec17f942c9262f90c26' value='107374182' />
+<div class='hidden'><label for='e03b67519c32e2dcd06d0d201bb63a3acd92f1'>Delicious</label>
+<input type='text' id='e03b67519c32e2dcd06d0d201bb63a3acd92f1' name='e03b67519c32e2dcd06d0d201bb63a3acd92f1' value='' /></div></form>
+ </div><div  title="PHP Object" style=" padding-top:0.5em;padding-bottom:0.5em;cursor: default;" name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12299_interior" class="" data-parameter_name="parent"><span data-parameter_name="editable" style="display:block;min-height:1em;" contentEditable=true onclick="" >Application_Wallet_Fund</span></div><div name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12299_interior" style="" title="PHP Object" class="status_bar"><a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var a = window.prompt( 'Copy to clipboard: Ctrl+C, Enter', this.parentNode.parentNode.outerHTML ); if( a ){ this.parentNode.parentNode.outerHTML = a; }">&#8635;</a><a class="title_button" title="Seek help on how to use this page editor" name="" href="http://pagecarton.com" onclick="this.target='_new'">?</a><div style="clear:both;"></div></div></div></div>
+
+
+          <!-- the comment box -->
+          <div class="">
+			<div title='This is the "comments" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__comments'></div>
+
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="">
+			<div title='This is the "rightbar" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__rightbar'></div>
+
+			<div title='This is the "leftbar" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__leftbar'><div class='DragBox' id='9cbabf00532a0aafa02cc612dc280824281' title='Move this object by dragging it around - Menu' data-object_name='menuView' ><div style="" title="Menu" class="title_bar" data-parameter_name="parent"><span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode );"> x </span><a class="title_button" name="advanced_parameters_9cbabf00532a0aafa02cc612dc280824281" href="javascript:;" class="" title="Click to show or hide advanced settings" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> &square; </a><a class="title_button" name="advanced_parameters_9cbabf00532a0aafa02cc612dc280824281_interior" href="javascript:;" class="" title="Minimize or open the body of this object" onclick="  var b = document.getElementsByName( this.name );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == 'none' ) ? '' : 'none'; this.style.display = ''; } "> _ </a><span style="">Menu</span><div style="clear:both;"></div></div><div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;" title="" class="status_bar" data-parameter_name="parent"><div style="clear:both;display:none;" name="advanced_parameters_9cbabf00532a0aafa02cc612dc280824281"><strong>Inject some parameters to this object...</strong></div><form name='advanced_parameters_9cbabf00532a0aafa02cc612dc280824281'  method='post'  enctype='application/x-www-form-urlencoded'  data-parameter_name='advanced_parameters'  style='display:none;'  id='advanced_parameters_9cbabf00532a0aafa02cc612dc280824281_form_id'  action='#advanced_parameters_9cbabf00532a0aafa02cc612dc280824281' >
+<div>
+<input type="text"  name = "advanced_parameter_name[]"  placeholder = "Parameter Name"  title = ": Parameter Name"  id = "advanced_parameter_name[]"  />
+<input type="text"  name = "advanced_parameter_value[]"  placeholder = "Parameter Value"  title = ": Parameter Value"  id = "advanced_parameter_value[]"  />
+<button class='boxednews  ' type='button' title='Duplicate this fieldset' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.cloneNode( true ); var fieldtags= [ "input", "textarea", "select"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= ""; } } this.parentNode.parentNode.insertBefore( fieldset, this.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name="" '>+</button>
+<button class='boxednews' type='button' title='Remove this fieldset' onClick='confirm( "Delete all the elements in these fieldset?") ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;'>-</button>
+</div>
+<p><strong>Which user groups can view this object...</strong></p><label style='' for='object_access_level[]'> </label>
+<span style='display:inline-block;'><input type='checkbox' style='' id='9cbabf00532a0aafa02cc612dc280824281_object_access_level1' value='3' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='9cbabf00532a0aafa02cc612dc280824281_object_access_level1'>Moderator </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='9cbabf00532a0aafa02cc612dc280824281_object_access_level2' value='98' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='9cbabf00532a0aafa02cc612dc280824281_object_access_level2'>Profile or Post Owner </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='9cbabf00532a0aafa02cc612dc280824281_object_access_level3' value='0' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='9cbabf00532a0aafa02cc612dc280824281_object_access_level3'>Public </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='9cbabf00532a0aafa02cc612dc280824281_object_access_level4' value='1' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='9cbabf00532a0aafa02cc612dc280824281_object_access_level4'>Standard </label></span>
+<span style='display:inline-block;'><input type='checkbox' style='' id='9cbabf00532a0aafa02cc612dc280824281_object_access_level5' value='99' name='object_access_level[]'  /> <label style='display:inline;font-weight:normal;' for='9cbabf00532a0aafa02cc612dc280824281_object_access_level5'>Super User </label></span>
+<input type='hidden' name='b968e79fdf8156eff654726901de216a05e020c' id='b968e79fdf8156eff654726901de216a05e020c' value='advanced_parameters_9cbabf00532a0aafa02cc612dc280824281' />
+<input type='hidden' name='bee8dbb9028a7506cec17f942c9262f90c26' id='bee8dbb9028a7506cec17f942c9262f90c26' value='107374182' />
+<div class='hidden'><label for='e03b67519c32e2dcd06d0d201bb63a3acd92f1'>Delicious</label>
+<input type='text' id='e03b67519c32e2dcd06d0d201bb63a3acd92f1' name='e03b67519c32e2dcd06d0d201bb63a3acd92f1' value='' /></div></form>
+ </div><div  title="Menu" style=" padding-top:0.5em;padding-bottom:0.5em;cursor: default;" name="advanced_parameters_9cbabf00532a0aafa02cc612dc280824281_interior" class="" data-parameter_name="parent"><span style=""> Show  </span><span style=""> existing menu:  </span><select data-parameter_name="option"><option value="">select an existing menu...</option><option value="Accounts">User Account Options</option><option value="Articles">Post Options</option><option value="DevelopersLounge">Developers Lounge</option><option value="MyAccount" selected = selected >My Account Options</option><option value="Products">Products</option><option value="Services">Services</option><option value="accessMain">Account Access Options</option><option value="admin">Control Panel Options</option><option value="blog">Blog</option><option value="developers">Advanced "Developer's" Settings</option><option value="documents">Documents</option><option value="footerMain">Footer Options</option><option value="headerAdmin">Admin Options</option><option value="headerMain">Header Options</option><option value="onlinestore">Online Store</option><option value="page">Page Options</option><option value="side-bar-options">Side Bar Options</option><option value="subscription">E-Commerce</option></select><span style=""> or </span><span style=""> new menu:  </span><input value="" type="text" placeholder="new menu name in lowercase" data-parameter_name="new_menu_name"><span style=""> in </span><select data-parameter_name="template_name"><option value="BlackAccordionSide-menu" selected = selected >Black Accordion Side Menu Style</option><option value="HorizontalGrayish">Horizontal Grayish Menu Style</option><option value="HorizontalWhite">Horizontal White Menu Style</option><option value="WhiteSidebarMenu">White Sidebar Menu Style</option></select><span style=""> style. </span></div><div name="advanced_parameters_9cbabf00532a0aafa02cc612dc280824281_interior" style="" title="Menu" class="status_bar"><a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var a = window.prompt( 'Copy to clipboard: Ctrl+C, Enter', this.parentNode.parentNode.outerHTML ); if( a ){ this.parentNode.parentNode.outerHTML = a; }">&#8635;</a><a class="title_button" title="Seek help on how to use this page editor" name="" href="http://pagecarton.com" onclick="this.target='_new'">?</a><div style="clear:both;"></div></div></div></div>
+
+          </div><!-- /well -->
+        </div>
+      </div>
+      
+      <hr>
+      
+
+    </div><!-- /.container -->
+    <div class="pc-bg-color"><!-- /.container -->
+		<div class="container"><!-- /.container -->
+		  <footer>
+			<div class=" row">
+			  <div class="col-md-12"> 
+				<div title='This is the "footer" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__footer'></div>
+
+				<br>
+				<p style="text-align:center;">
+					Copyright &copy; <?php echo Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain(); ?> <?php echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Organization Info" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/CompanyInformation/"> x </a>' : null; ?> <?php echo ' 2012 - ' . date( 'Y' ) ?> &middot; <a href="https://www.facebook.com/<?php echo ( Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'facebook_page_url' ) ? : 'AyoolaFramework' ); ?>">Facebook</a> &middot; <a href="https://www.twitter.com/<?php echo ( array_shift( explode( ',', Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'twitter_username' ) ) ) ? : 'AyoolaFramework' ); ?>">Twitter</a> &middot; <a href="https://plus.google.com/<?php echo ( Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'googleplus_id' ) ? : '106833210591385672079' ); ?>" rel="publisher">Google+</a> &middot; Built with: <a href="http://www.PageCarton.com/"> PageCarton</a> on Bootstrap &middot; <?php echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Social Media Info" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SocialMedia/"> x </a>' : null; ?>
+				</p>
+			  </div>
+			</div>
+		  </footer>
+		
+		</div><!-- /.container -->
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/BootstrapBlogPost/js/bootstrap.js"></script>
+    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/BootstrapBlogPost/js/modern-business.js"></script>
+	<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+	<script type="text/javascript">
+
+	  //	Add top margin to scrollToView
+	  ayoola.scrollToViewMargin = '50px';
+	</script>
+  </body>
+</html>

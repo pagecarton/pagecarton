@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="api" creation_time="1442567099" table_version="0.04" module_version="1.00" table_class="Ayoola_Api_Api" creation_ip="2130706433">
+  <RECORDS autoId="2">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="application_id"><![CDATA[1496]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="public_key"><![CDATA[4a0ab3893f6d33138d3f97679ba2ee6891ba70d6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="private_key"><![CDATA[c4abadb185140880d02a93d604c999c5ea787588]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="application_salt"><![CDATA[943f6b3e36add963737d7aef6ddfaa086932b1ff]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="api_url"><![CDATA[http://account.ayoo.la/tools/classplayer/get/object_name/Ayoola_Api/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="api_label"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="api_id"><![CDATA[0-0-1]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES api_url="INPUTTEXT" api_label="INPUTTEXT" public_key="INPUTTEXT" private_key="INPUTTEXT" application_id="INPUTTEXT" application_salt="INPUTTEXT" api_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

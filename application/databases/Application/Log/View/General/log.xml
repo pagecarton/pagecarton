@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="log" creation_time="1398117129" table_version="0.02" module_version="1.00" table_class="Application_Log_View_General_Log" creation_ip="2130706433">
+  <RECORDS autoId="2">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="type"><![CDATA[New Post]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="info"><![CDATA[[{&quot;article_type&quot;:&quot;article&quot;,&quot;article_title&quot;:&quot;Create a new post&quot;,&quot;document_url&quot;:&quot;\/public\/2014\/04\/21\/5968_1169062517359_1551853842_.jpg&quot;,&quot;x&quot;:&quot;&quot;,&quot;article_content&quot;:&quot;\u003Cp\u003EThis document contains proprietary and confidential information. All data submitted to Federal College of Agriculture, Moor Plantation, Ibadan is provided in reliance upon her consent not to use or disclose any information contained herein except in the context of its business dealings with Avalanche Nigeria Global Concept LTD .The recipient of this document agrees to inform present and future employees of Federal College of Agriculture, her affiliates and subsidiaries who may view or have access to its content of its confidential nature.\u003C\/p\u003E\n\n\u003Cp\u003EThe recipient agrees to instruct the employees that they must not disclose any information concerning this document to others except to the extent that such matter are generally known to and are available for use by the public. The recipient also agrees not to duplicate, distribute or permit others to duplicate or distribute any material contained herein.\u003C\/p\u003E\n\n\u003Cp\u003EAvalanche Nigeria Global Concept Limited retains all titles, ownership and intellectual property rights to the material and trademark contained herein, including all supporting documentation, files, marketing material and multimedia.\u003C\/p\u003E\n\n\u003Cp\u003E&amp;nbsp;\u003C\/p\u003E\n\n\u003Cp\u003EBY ACCEPTANCE OF THIS DOCUMENT, THE RECEIPIENT AGREES TO BE BOUND BY THE AFOREMENTIONED STATEMENT.\u003C\/p\u003E&quot;,&quot;article_description&quot;:&quot;Avalanche Nigeria Global Concept Limited retains all titles, ownership and intellectual property rights to the material and trademark contained herein, including all supporting documentation, files, marketing material and multimedia.&quot;,&quot;article_tags&quot;:&quot;&quot;,&quot;article_modified_date&quot;:&quot;1398117125&quot;,&quot;category_id&quot;:[&quot;23&quot;,&quot;2&quot;,&quot;9&quot;,&quot;11&quot;],&quot;auth_level&quot;:[&quot;4&quot;,&quot;3&quot;,&quot;0&quot;,&quot;1&quot;,&quot;99&quot;],&quot;article_requirements&quot;:[&quot;phone-number&quot;],&quot;publish&quot;:&quot;1&quot;,&quot;article_url&quot;:&quot;\/2014\/04\/21\/create-a-new-post.html&quot;,&quot;user_id&quot;:&quot;320&quot;,&quot;username&quot;:&quot;joywealth&quot;,&quot;article_id&quot;:34}]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[0-0-1]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES type="INPUTTEXT" info="JSON" log_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

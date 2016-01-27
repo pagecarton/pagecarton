@@ -1,0 +1,44 @@
+
+.DragContainer, .OverDragContainer {
+  display:block;
+  border: #669999 2px solid;
+  min-height:2em;
+}
+.DragBox, .OverDragBox, .DragDragBox, .miniDragBox {  
+  border: #000 1px solid;
+  display:block;
+  padding:0.5em; 
+  cursor: move;
+  font-family: verdana, tahoma, arial;
+  /* background-color: #eee; */
+}
+.OverDragContainer {
+/* 	background-color: #eee;
+ */}
+.OverDragBox, .DragDragBox {
+   background-color: #ffff99;
+ }
+.DragDragBox {
+  filter: alpha(opacity=50);
+  background-color: #ff99cc;
+}
+/* .History {
+  font-size: 10px;
+  overflow: auto;
+  width: 100%;
+  font-family: verdana, tahoma, arial;
+  height: 82px;
+}
+#DragContainer8 {
+  border: #669999 1px solid;
+  padding: 5px 0 0 5px
+  width: 110px;
+  height: 110px;
+}
+.miniDragBox {
+  float: left;
+  margin: 0 5px 5px 0;
+  width: 20px;
+  height: 20px;
+}
+ */

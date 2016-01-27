@@ -1,0 +1,224 @@
+@charset "utf-8";
+
+/* CLASSES */
+.pc-hide-children-parent:hover > .pc-hide-children-children
+{
+	display: inline-block;
+}  
+.pc-hide-children-children
+{
+	display: none;
+}  
+.pc-btn {
+  background: #3498db;
+  color: #ffffff;
+  font-size: larger;
+  padding: 0.5em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  text-decoration: none;
+  cursor: pointer;  
+  display:inline-block;
+/*   float:left;
+ */}  
+
+.pc-btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);  
+  text-decoration: none;
+  color: #ffffff; 
+}
+.noRecord {
+	border-radius: .4em;
+	border: 1px groove red;
+	margin: 10px ;
+	padding: 10px ;
+	color: red;
+}
+.defaultnews, .goodnews, .normalnews, .boxednews, .selectednews, .fullnews, .centerednews
+{
+	display: inline-block;
+	border: 0.2em solid white;
+	border-radius: 0.5em;
+	padding: 0.1em;
+	max-width:100%;
+}
+.section_editable
+{
+	display: block;
+	padding: 0.5em;
+	margin: 0.5em;
+	
+	
+}
+.section_editable:hover
+{
+	
+}
+.fullnews {
+	width: 100%;
+}
+.centerednews {
+	text-align: center;
+}
+.boxednews {
+/* 	border-color: #90F;
+	color: #000;
+	background: #fff;
+ */	cursor:pointer;
+	margin:0.5em;
+	padding:0.5em;
+	display: inline-block;
+}
+.blocknews {
+	display: block;
+}
+.badnews {
+	color: red;
+	border-color: red;
+}
+.defaultnews, .goodnews
+{
+	border-color:#C2E254;
+	background: #FFFCBE;
+	border-radius: 0.5em;
+	color: #000 !important;
+}
+.goodnews {
+	border-color: #5FD915;
+	color: #5FD915;
+	background: #fff;
+}
+.normalnews {
+	border-color: transparent;
+	color: initial;
+	background: initial;
+	cursor:initial;
+}
+.greynews {
+	border-color: #999;
+	color: #999;
+	background: #fff;
+}
+.greynews:hover {
+	border-color: #000;
+	color: #999;
+	background: #eee;
+}
+.selectednews {  
+	border-color: #172c43;
+	color: #000;
+	background: #eee;
+}
+.hidden {
+	display: none;
+}
+
+/* Small Forms Elements */
+.smallFormElements {
+}
+
+.smallFormElements input[type=text],.smallFormElements input[type=password],.smallFormElements input[type=submit],.smallFormElements select{
+	max-width: 180px;
+}
+
+.smallFormElements label{
+	display: inline;
+}
+
+.title_bar, .status_bar
+{  
+	background-color:#ebebeb;
+	padding: 0.5em;
+	color:#000;
+ 	border-top: 1px solid #ccc;
+ 	border-right: 1px solid #ccc;
+ 	border-left: 1px solid #ccc;
+	cursor: default; 
+/* 	display:none;
+ */	opacity:0.1;
+}
+.title_bar:hover
+{  
+	background-color:#618bd4;
+}
+.status_bar
+{  
+	padding: 2px;
+ 	border-top: 0 solid transparent;
+ 	border-bottom: 1px solid #ccc;
+ 	border-right: 1px solid #ccc;
+ 	border-left: 1px solid #ccc;
+}
+.title_button, a.title_button,  a.title_button:link,  a.title_button:active,  a.title_button:hover,  a.title_button:visited
+{  
+	background-color:transparent;
+	float:right;
+	color:#000 !important;
+	padding:0 0.5em 0 0.5em;
+	text-decoration:none;
+}
+.title_button:hover, a.title_button:hover
+{  
+	background-color:#3366cc;
+	color:#fff !important;
+	text-decoration:none;
+	cursor: pointer; 
+	cursor: hand;
+}
+.status_bar >.title_button:hover
+{  
+	background-color:#333;
+	color:#fff !important;
+	cursor: pointer; 
+	cursor: hand;
+}
+
+.close_button
+{  
+	padding:0 1em 0 1em;
+	background-color:#777;
+	color:#fff  !important;
+}
+
+.title_bar:hover >.close_button
+{  
+	padding:0 1em 0 1em;
+	background-color:#c75050;
+	color:#fff  !important;
+}
+.close_button:hover
+{  
+	background-color:#cc3333;
+	cursor: pointer; 
+	cursor: hand;
+}
+.DragContainer, .OverDragContainer {
+  display:block;
+  z-index: 10000;
+	/*   border: #ddd 1px solid;
+ */  min-height:2em;
+/*   padding:0.5em;
+ */}
+.DragBox, .OverDragBox, .DragDragBox, .miniDragBox {  
+  /* border: #ccc 1px solid; */
+  display:block;
+  cursor: move;
+  padding-top:0.5em;
+  padding-bottom:0.5em;
+}
+.DragBox:hover > .title_bar, .DragBox:hover > .status_bar{  
+/* 	display:block;
+ */	opacity:1;
+}
+.OverDragBox, .DragDragBox {
+   background-color: #ffff99;
+ }
+.DragDragBox {
+  filter: alpha(opacity=50);
+  background-color: #ff99cc;
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pageData>
+  <pageLayout><![CDATA[{"ay__leftbar0":"objectEmbed","ay__leftbar0view":"Embed PHP Class","ay__leftbar0editable":"Application_Subscription","ay__leftbar0_parameters":"view,editable","ay__leftbar1":"menuView","ay__leftbar1view":"Display a Menu","ay__leftbar1option":"onlinestore","ay__leftbar1_parameters":"view,option","ay__middlebar0":"objectEmbed","ay__middlebar0view":"Embed PHP Class","ay__middlebar0editable":"Application_Subscription_ShowLabel, Application_Subscription_ShowImage, Application_Subscription_ShowDescription, Application_Subscription_Detail","ay__middlebar0_parameters":"view,editable","ay__middlebar1":"facebookComment","ay__middlebar1view":"Insert Facebook Comment","ay__middlebar1_parameters":"view"}]]></pageLayout>
+</pageData>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="mailinglist" creation_time="1397759611" table_version="0.02" module_version="1.00" table_class="Application_User_UserEmail_MailingList" creation_ip="2130706433">
+  <RECORDS>
+    <TABLE_ROW ROW_ID="7131">
+      <TABLE_FIELD FIELD_KEY="email"><![CDATA[facebook@ayoola.com.ng]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="mailinglist_id"><![CDATA[7131]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="7132">
+      <TABLE_FIELD FIELD_KEY="email"><![CDATA[ayoo.la@a.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="mailinglist_id"><![CDATA[7132]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES email="INPUTTEXT, UNIQUE" mailinglist_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

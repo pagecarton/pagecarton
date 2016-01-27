@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="account" creation_time="1397840098" table_version="0.02" module_version="1.00" table_class="Application_Subscription_Checkout_DirectDeposit_Account" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES account_info="TEXTAREA" account_name="TEXTAREA, UNIQUE" account_country_code="INPUTTEXT" account_currency="INPUTTEXT" account_enabled="INPUTTEXT" account_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

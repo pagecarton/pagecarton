@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="contactus" creation_time="1397842074" table_version="0.02" module_version="1.00" table_class="Application_ContactUs" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES contactus_firstname="INPUTTEXT" contactus_lastname="INPUTTEXT" contactus_company="INPUTTEXT" contactus_email="INPUTTEXT" contactus_web_address="INPUTTEXT" contactus_phone_number="INPUTTEXT" contactus_subject="INPUTTEXT" contactus_message="TEXTAREA" contactus_creation_date="INT" contactus_first_view_date="INT" contactus_last_view_date="INT" contactus_creator_user_id="INT" contactus_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

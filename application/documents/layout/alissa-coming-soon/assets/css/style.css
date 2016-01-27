@@ -1,0 +1,366 @@
+/*
+ *
+ * Template Name: Alissa
+ * Template URI: http://azmind.com
+ * Description: Alissa - Responsive Coming Soon Template
+ * Author: Anli Zaimi
+ * Author URI: http://azmind.com
+ *
+ */
+
+
+body {
+    background: #f8f8f8 url(../img/pattern.jpg);
+    text-align: left;
+    font-family: 'Lato', Arial, sans-serif;
+    color: #555;
+    font-weight: 400;
+    border-top: 2px solid #e75967;
+}
+
+strong { font-weight: 700; }
+a:hover { text-decoration: none; }
+
+::-moz-selection { background: #e75967; color: #fff; text-shadow: none; }
+::selection { background: #e75967; color: #fff; text-shadow: none; }
+
+.logo h1 {
+    margin-top: 7px;
+    padding-left: 50px;
+    font-family: 'Lobster', cursive;
+    font-size: 38px;
+    font-weight: 400;
+    color: #555;
+}
+
+.logo h1 span { color: #e75967; }
+
+.logo a {
+    color: #555;
+    text-decoration: none;
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+.logo a:hover { color: #e75967; }
+
+.call-us {
+    font-size: 18px;
+    text-align: right;
+}
+
+.call-us p {
+    margin-top: 18px;
+    padding-right: 50px;
+}
+
+.call-us p span { color: #888; }
+
+
+/***** Coming Soon *****/
+
+.coming-soon {
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+}
+
+.inner-bg {
+    padding: 55px 0 60px 0;
+    background: url(../img/pattern-3.png);
+    -moz-box-shadow: 0 1px 5px 0 rgba(0,0,0,.3) inset;
+    -webkit-box-shadow: 0 1px 5px 0 rgba(0,0,0,.3) inset;
+    box-shadow: 0 1px 5px 0 rgba(0,0,0,.3) inset;
+}
+
+.coming-soon h2 {
+    font-size: 40px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-shadow: 0 1px 7px rgba(0,0,0,.2);
+}
+
+.coming-soon p {
+    margin-top: 20px;
+    font-size: 18px;
+    line-height: 36px;
+    text-shadow: 0 1px 7px rgba(0,0,0,.2);
+}
+
+.timer {
+    margin-top: 40px;
+    text-shadow: 0 1px 5px rgba(0,0,0,.1);
+}
+
+.timer .days-wrapper,
+.timer .hours-wrapper,
+.timer .minutes-wrapper,
+.timer .seconds-wrapper {
+    display: inline-block;
+    width: 160px;
+    height: 140px;
+    margin: 0 10px;
+    padding-top: 20px;
+    background: #2d2d2d; /* browsers that don't support rgba */
+    background: rgba(45,45,45,.7);
+    font-size: 18px;
+    -moz-border-radius: 80px;
+    -webkit-border-radius: 80px;
+    border-radius: 80px;
+}
+
+.timer .days-wrapper:hover,
+.timer .hours-wrapper:hover,
+.timer .minutes-wrapper:hover,
+.timer .seconds-wrapper:hover {
+    background: #e75967 url(../img/pattern-2.png);
+    text-shadow: none;
+}
+
+.timer .days,
+.timer .hours,
+.timer .minutes,
+.timer .seconds {
+    font-size: 80px;
+    line-height: 90px;
+}
+
+
+/***** Content *****/
+
+.subscribe {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.subscribe h3 {
+    font-size: 32px;
+    font-weight: 400;
+    color: #4d4d4d;
+    line-height: 40px;
+    text-transform: uppercase;
+    text-shadow: 1px 2px 1px #fff;
+}
+
+.subscribe p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 36px;
+}
+
+.subscribe form {
+    margin-top: 24px;
+}
+
+.subscribe form input {
+    width: 310px;
+    height: 46px;
+    margin: 0;
+    padding: 0 10px;
+    background: #fff;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 46px;
+    color: #888;
+    border: 0;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
+}
+
+.subscribe form input:focus {
+    -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
+}
+
+.subscribe form input:-moz-placeholder { color: #888; }
+.subscribe form input:-ms-input-placeholder { color: #888; }
+.subscribe form input::-webkit-input-placeholder { color: #888; }
+
+.subscribe form button {
+    width: 130px;
+    height: 46px;
+    margin: 0;
+    padding: 0;
+    background: #e75967;
+    border: 0;
+    font-family: 'Lato', Arial, sans-serif;
+    font-size: 18px;
+    line-height: 46px;
+    color: #fff;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -moz-box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.25);
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+}
+
+.subscribe form button:hover {
+    background: #e75967;
+    color: #fff;
+}
+
+.subscribe form button:active {
+    background: #e75967;
+    color: #fff;
+}
+
+.success-message, .error-message {
+    font-size: 18px;
+}
+
+.error-message {
+    color: #e75967;
+}
+
+.social {
+    margin-top: 30px;
+    padding-bottom: 30px;
+    text-align: center;
+}
+
+.social a {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    margin: 3px;
+}
+
+.social a.facebook { background: url(../img/social-icons/facebook.png); }
+.social a.twitter { background: url(../img/social-icons/twitter.png); }
+.social a.dribbble { background: url(../img/social-icons/dribbble.png); }
+.social a.googleplus { background: url(../img/social-icons/googleplus.png); }
+.social a.pinterest { background: url(../img/social-icons/pinterest.png); }
+.social a.flickr { background: url(../img/social-icons/flickr.png); }
+
+
+/***** Media Queries *****/
+
+@media (min-width: 768px) and (max-width: 979px) {
+
+    .logo h1 {
+        padding-left: 0;
+    }
+
+    .call-us p {
+        padding-right: 0;
+    }
+
+    .timer .days-wrapper,
+    .timer .hours-wrapper,
+    .timer .minutes-wrapper,
+    .timer .seconds-wrapper {
+        width: 140px;
+        height: 120px;
+        margin: 0 7px;
+        padding-top: 20px;
+        -moz-border-radius: 70px;
+        -webkit-border-radius: 70px;
+        border-radius: 70px;
+    }
+
+    .timer .days,
+    .timer .hours,
+    .timer .minutes,
+    .timer .seconds {
+        font-size: 60px;
+        line-height: 70px;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    body {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .logo h1 {
+        padding-left: 0;
+        text-align: center;
+    }
+
+    .call-us {
+        padding-bottom: 7px;
+        text-align: center;
+    }
+
+    .call-us p {
+        padding-right: 0;
+    }
+
+    .inner-bg {
+        padding: 45px 0 50px 0;
+    }
+
+    .coming-soon h2 {
+        font-size: 36px;
+        padding: 0 20px;
+    }
+
+    .coming-soon p {
+        padding: 0 20px;
+    }
+
+    .timer .days-wrapper,
+    .timer .hours-wrapper,
+    .timer .minutes-wrapper,
+    .timer .seconds-wrapper {
+        width: 140px;
+        height: 120px;
+        margin: 7px;
+        padding-top: 20px;
+        -moz-border-radius: 70px;
+        -webkit-border-radius: 70px;
+        border-radius: 70px;
+    }
+
+    .timer .days,
+    .timer .hours,
+    .timer .minutes,
+    .timer .seconds {
+        font-size: 60px;
+        line-height: 70px;
+    }
+
+    .subscribe h3 {
+        padding: 0 20px;
+        font-size: 28px;
+    }
+
+    .subscribe p {
+        padding: 0 20px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .subscribe form {
+        padding: 0 20px;
+    }
+
+    .subscribe form input {
+        width: 90%;
+    }
+
+    .subscribe form button {
+        width: 90%;
+        margin-top: 10px;
+    }
+
+}
+

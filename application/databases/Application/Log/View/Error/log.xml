@@ -1,0 +1,838 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="log" creation_time="1407514372" table_version="0.02" module_version="1.00" table_class="Application_Log_View_Error_Log" creation_ip="2130706433">
+  <RECORDS autoId="43">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407514372]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-1]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407514830]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-2]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407514884]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-3]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407514909]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-4]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407515114]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-5]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(185): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407515361]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-6]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="7">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(186): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407515451]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-7]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="8">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception InvalidArgumentException with message Image type  not supported in  E:\www\default\library\ImageManipulator.php on line 69 Stack trace: #0 E:\www\default\library\ImageManipulator.php(32): ImageManipulator-&gt;setImageFile('E:\www\default\...')
+#1 E:\www\default\library\Ayoola\Doc\Upload\Ajax.php(186): ImageManipulator-&gt;__construct('E:\www\default\...')
+#2 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Doc_Upload_Ajax-&gt;init()
+#3 E:\www\default\library\Ayoola\Abstract\Viewable.php(162): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 E:\www\default\library\Ayoola\Object\Play.php(72): Ayoola_Abstract_Playable::viewInLine()
+#6 E:\www\default\library\Ayoola\Abstract\Playable.php(239): Ayoola_Object_Play-&gt;__construct(Array)
+#7 E:\www\default\library\Ayoola\Object\Embed.php(122): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 E:\www\default\library\Ayoola\Object\Embed.php(83): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...')
+#9 E:\www\default\library\Ayoola\Abstract\Viewable.php(174): Ayoola_Object_Embed-&gt;init()
+#10 E:\www\default\library\Ayoola\Object\Embed.php(164): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 E:\www\default\library\Ayoola\Abstract\Viewable.php(161): Ayoola_Object_Embed-&gt;setParameter(Array)
+#12 E:\www\default\application\pages\includes\tools\classplayer.php(19): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#13 E:\www\default\library\Ayoola\Application.php(680): require_once('E:\www\default\...')
+#14 E:\www\default\library\Ayoola\Application.php(503): Ayoola_Application::view('/tools/classpla...')
+#15 E:\www\default\library\Ayoola\Application.php(388): Ayoola_Application::display()
+#16 E:\www\default\public_html\index.php(21): Ayoola_Application::run()
+#17 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1407515466]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1077-0-8]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="9">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(950): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442581242]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-9]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="10">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442581889]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-10]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="11">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442581898]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-11]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="12">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442581909]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-12]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="13">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442581924]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-13]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="14">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442581931]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-14]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="15">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442581940]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-15]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="16">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442581969]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-16]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="17">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442582020]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-17]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="18">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442584846]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-18]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="19">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442584855]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-19]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="20">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442584867]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-20]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="21">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442584874]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-21]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="22">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442584883]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-22]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="23">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442584892]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-23]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="24">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442584941]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-24]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="25">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442584979]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-25]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="26">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442584989]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-26]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="27">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442584999]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-27]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="28">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442585008]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-28]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="29">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442585016]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-29]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="30">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442585022]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-30]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="31">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442585030]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-31]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="32">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442585059]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-32]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="33">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442585079]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-33]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="34">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 1.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(952): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(448): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1442585749]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-34]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="35">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 2.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(969): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(455): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1443460020]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-35]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="36">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 2.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(969): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(455): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1443460029]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-36]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="37">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 2.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(969): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(455): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1443460080]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-37]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="38">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 2.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(969): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(455): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1443460124]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-38]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="39">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception Ayoola_Xml_Exception with message Error while saving 2.xml in  /ayoola/cmf/library/Ayoola/Xml.php on line 216 Stack trace: #0 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(654): Ayoola_Xml-&gt;save('/ayoola/cmf/app...')
+#1 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table/Insert.php(160): Ayoola_Dbase_Adapter_Xml-&gt;saveFile('/ayoola/cmf/app...')
+#2 [internal function]: Ayoola_Dbase_Adapter_Xml_Table_Insert-&gt;init(Array, NULL)
+#3 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml/Table.php(78): call_user_func_array(Array, Array)
+#4 [internal function]: Ayoola_Dbase_Adapter_Xml_Table-&gt;query('INSERT', Array, NULL)
+#5 /ayoola/cmf/library/Ayoola/Dbase/Adapter/Xml.php(731): call_user_func_array(Array, Array)
+#6 [internal function]: Ayoola_Dbase_Adapter_Xml-&gt;query('TABLE', 'INSERT', Array, NULL)
+#7 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract.php(203): call_user_func_array(Array, Array)
+#8 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Ayoola_Dbase_Table_Abstract-&gt;__call('query', Array)
+#9 /ayoola/cmf/library/Ayoola/Dbase/Table/Abstract/Xml.php(241): Application_Log_View_Access_Log-&gt;query('TABLE', 'INSERT', Array, NULL)
+#10 /ayoola/cmf/application/modules/Application/Log/View/Access.php(90): Ayoola_Dbase_Table_Abstract_Xml-&gt;insert(Array)
+#11 /ayoola/cmf/library/Ayoola/Application.php(969): Application_Log_View_Access::log()
+#12 /ayoola/cmf/library/Ayoola/Application.php(455): Ayoola_Application::log()
+#13 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#14 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1443460130]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-39]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="40">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception PharException with message tar-based phar &quot;/ayoola/cmf/backup/_CMF_production-cmf-ayoo-la_1453818704.tar&quot; cannot be created, filename &quot;public_html/cache/production.cmf.ayoo.la/XMLDB/Fetch/Ayoola/Page/page/a1i0a1i0a1i0a3i0Ni1a1s3urla6i0s1i1s7ayoolai2s17ayoolaframeworki3s34ayoolaframeworkinstallertargzi4s39ayoolaframeworkinstallertargzinfoi5s44ayoolaframeworkinstallertargzinforefsi2a1s16workarround333b1&quot; is too long for tar file format in  /ayoola/cmf/application/modules/Application/Backup/Creator.php on line 503 Stack trace: #0 /ayoola/cmf/application/modules/Application/Backup/Creator.php(503): PharData-&gt;buildFromDirectory('/ayoola/cmf', '#(cmf/public_ht...')
+#1 /ayoola/cmf/application/modules/Application/Backup/Creator.php(414): Application_Backup_Creator-&gt;createFile()
+#2 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(200): Application_Backup_Creator-&gt;init()
+#3 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(175): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 /ayoola/cmf/library/Ayoola/Abstract/Playable.php(206): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 /ayoola/cmf/library/Ayoola/Object/Play.php(81): Ayoola_Abstract_Playable::viewInLine()
+#6 /ayoola/cmf/library/Ayoola/Abstract/Playable.php(206): Ayoola_Object_Play-&gt;__construct(Array)
+#7 /ayoola/cmf/library/Ayoola/Object/Embed.php(133): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 /ayoola/cmf/library/Ayoola/Object/Embed.php(85): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...', Array)
+#9 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(200): Ayoola_Object_Embed-&gt;init()
+#10 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(175): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 /ayoola/cmf/application/pages/includes/tools/classplayer.php(29): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#12 /ayoola/cmf/library/Ayoola/Application.php(902): require_once('/ayoola/cmf/app...')
+#13 /ayoola/cmf/library/Ayoola/Application.php(642): Ayoola_Application::view('/tools/classpla...')
+#14 /ayoola/cmf/library/Ayoola/Application.php(454): Ayoola_Application::display()
+#15 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#16 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1453818708]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-40]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="41">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception PharException with message tar-based phar &quot;/ayoola/cmf/backup/_CMF_production-cmf-ayoo-la_1453818727.tar&quot; cannot be created, filename &quot;public_html/cache/production.cmf.ayoo.la/XMLDB/Fetch/Ayoola/Page/page/a1i0a1i0a1i0a3i0Ni1a1s3urla6i0s1i1s7ayoolai2s17ayoolaframeworki3s34ayoolaframeworkinstallertargzi4s39ayoolaframeworkinstallertargzinfoi5s44ayoolaframeworkinstallertargzinforefsi2a1s16workarround333b1&quot; is too long for tar file format in  /ayoola/cmf/application/modules/Application/Backup/Creator.php on line 503 Stack trace: #0 /ayoola/cmf/application/modules/Application/Backup/Creator.php(503): PharData-&gt;buildFromDirectory('/ayoola/cmf', '#(cmf/public_ht...')
+#1 /ayoola/cmf/application/modules/Application/Backup/Creator.php(414): Application_Backup_Creator-&gt;createFile()
+#2 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(200): Application_Backup_Creator-&gt;init()
+#3 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(175): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 /ayoola/cmf/library/Ayoola/Abstract/Playable.php(206): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 /ayoola/cmf/library/Ayoola/Object/Play.php(81): Ayoola_Abstract_Playable::viewInLine()
+#6 /ayoola/cmf/library/Ayoola/Abstract/Playable.php(206): Ayoola_Object_Play-&gt;__construct(Array)
+#7 /ayoola/cmf/library/Ayoola/Object/Embed.php(133): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 /ayoola/cmf/library/Ayoola/Object/Embed.php(85): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...', Array)
+#9 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(200): Ayoola_Object_Embed-&gt;init()
+#10 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(175): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 /ayoola/cmf/application/pages/includes/tools/classplayer.php(29): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#12 /ayoola/cmf/library/Ayoola/Application.php(902): require_once('/ayoola/cmf/app...')
+#13 /ayoola/cmf/library/Ayoola/Application.php(642): Ayoola_Application::view('/tools/classpla...')
+#14 /ayoola/cmf/library/Ayoola/Application.php(454): Ayoola_Application::display()
+#15 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#16 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1453818729]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-41]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="42">
+      <TABLE_FIELD FIELD_KEY="error_message"><![CDATA[Uncaught Exception PharException with message tar-based phar &quot;/ayoola/cmf/backup/_CMF_production-cmf-ayoo-la_1453818812.tar&quot; cannot be created, filename &quot;public_html/cache/production.cmf.ayoo.la/XMLDB/Fetch/Ayoola/Page/page/a1i0a1i0a1i0a3i0Ni1a1s3urla6i0s1i1s7ayoolai2s17ayoolaframeworki3s34ayoolaframeworkinstallertargzi4s39ayoolaframeworkinstallertargzinfoi5s44ayoolaframeworkinstallertargzinforefsi2a1s16workarround333b1&quot; is too long for tar file format in  /ayoola/cmf/application/modules/Application/Backup/Creator.php on line 503 Stack trace: #0 /ayoola/cmf/application/modules/Application/Backup/Creator.php(503): PharData-&gt;buildFromDirectory('/ayoola/cmf', '#(cmf/public_ht...')
+#1 /ayoola/cmf/application/modules/Application/Backup/Creator.php(414): Application_Backup_Creator-&gt;createFile()
+#2 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(200): Application_Backup_Creator-&gt;init()
+#3 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(175): Ayoola_Abstract_Viewable-&gt;initOnce()
+#4 /ayoola/cmf/library/Ayoola/Abstract/Playable.php(206): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#5 /ayoola/cmf/library/Ayoola/Object/Play.php(81): Ayoola_Abstract_Playable::viewInLine()
+#6 /ayoola/cmf/library/Ayoola/Abstract/Playable.php(206): Ayoola_Object_Play-&gt;__construct(Array)
+#7 /ayoola/cmf/library/Ayoola/Object/Embed.php(133): Ayoola_Abstract_Playable::viewInLine(Array)
+#8 /ayoola/cmf/library/Ayoola/Object/Embed.php(85): Ayoola_Object_Embed-&gt;play('Ayoola_Object_P...', Array)
+#9 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(200): Ayoola_Object_Embed-&gt;init()
+#10 /ayoola/cmf/library/Ayoola/Abstract/Viewable.php(175): Ayoola_Abstract_Viewable-&gt;initOnce()
+#11 /ayoola/cmf/application/pages/includes/tools/classplayer.php(29): Ayoola_Abstract_Viewable-&gt;__construct(Array)
+#12 /ayoola/cmf/library/Ayoola/Application.php(902): require_once('/ayoola/cmf/app...')
+#13 /ayoola/cmf/library/Ayoola/Application.php(642): Ayoola_Application::view('/tools/classpla...')
+#14 /ayoola/cmf/library/Ayoola/Application.php(454): Ayoola_Application::display()
+#15 /ayoola/cmf/public_html/index.php(23): Ayoola_Application::run()
+#16 {main}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="error_time"><![CDATA[1453818813]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1496-0-42]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES error_message="INPUTTEXT" error_time="INPUTTEXT" log_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

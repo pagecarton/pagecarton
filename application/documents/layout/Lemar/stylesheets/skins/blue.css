@@ -1,0 +1,13 @@
+/*
+* Lemar Theme - Blue Skin
+*/
+.menu, .menu a , .menu a:visited, .menu a:focus { color: #20789c; }
+.slidepic { border: 2px solid #ccc !important;}
+.header { background: #01668e url(../../images/transp.png) repeat; }
+.copyright, .copyright a { background: #01668e url(../../images/transp.png) repeat;}
+.spotlight { background: #20789c url(../../images/spotlight.png) repeat; }
+.colorme { color: #20789c; }
+a.actionbutton { color: #ffffff; background-color: #427500; background-image: -moz-linear-gradient(center top,#77BC33,#427500); background-image: -webkit-gradient(linear,left top,left bottom,from(#77BC33),to(#427500)); background-image: -webkit-linear-gradient(top,#77BC33,#427500); background-image: -o-linear-gradient(top,#77BC33,#427500); background-image: -ms-linear-gradient(top,#77BC33,#427500); background-image: -moz-linear-gradient(top,#77BC33,#427500); background-image: linear-gradient(top,#77BC33,#427500);}
+a.actionbutton:hover { background: #5fa800; }
+.centered-btns_tabs a,.transparent-btns_tabs a,.large-btns_tabs a { background: #fff !important; }
+.centered-btns_here a,.transparent-btns_here a,.large-btns_here a { background: #ddd !important; }

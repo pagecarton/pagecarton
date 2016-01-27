@@ -1,0 +1,39 @@
+<?php
+/**
+ * PageCarton Content Management System
+ *
+ * LICENSE
+ *
+ * @category   PageCarton CMS
+ * @package    Application_Slideshow_Template_Editor_Abstract
+ * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @version    $Id: Abstract.php 10-26-2011 9.13pm ayoola $
+ */
+
+/**
+ * @see 
+ */
+  
+require_once 'Ayoola/Abstract/Table.php';
+
+
+/**
+ * @category   PageCarton CMS
+ * @package    Application_Slideshow_Template_Editor_Abstract
+ * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ */
+
+abstract class Application_Slideshow_Template_Abstract extends Ayoola_Abstract_Template
+{	
+	
+    /**
+     * Identifier for the column to edit
+     * 
+     * @var string 
+     */
+	protected $_tableClass = 'Application_Slideshow_Template';
+	
+	// END OF CLASS
+}

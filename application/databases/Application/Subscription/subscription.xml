@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="subscription" creation_time="1398351277" table_version="0.10" module_version="1.00" table_class="Application_Subscription_Subscription" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES subscription_id="INPUTTEXT, RELATIVES = Application_Subscription_SubscriptionLevel" subscription_name="INPUTTEXT,UNIQUE" subscription_label="INPUTTEXT" subscription_object_name="INPUTTEXT" subscription_requirements="JSON" checkout_requirements="JSON" subscription_description="TEXTAREA" document_url="INPUTTEXT" auth_level="INT, FOREIGN_KEYS = Ayoola_Access_AuthLevel" enabled="INT" creation_date="INT" modified_date="INT"/>
+    <FOREIGN_KEYS Ayoola_Access_AuthLevel="auth_level"/>
+    <RELATIVES Application_Subscription_SubscriptionLevel="subscription_id"/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

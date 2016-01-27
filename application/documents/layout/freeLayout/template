@@ -1,0 +1,26 @@
+<?php if( ! Ayoola_Application::isXmlHttpRequest() && $_SERVER['HTTP_USER_AGENT'] !== Ayoola_Abstract_Viewable::$userAgent ): // Only show this if this is not a ajax call ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ); ?>
+<link rel='stylesheet' type='text/css' href='/css/6/0_bars_100Percent.css' />
+</head>
+<body>
+	<div class="Ayoola_Page_Layout_Edit_File_contentContainer">
+		<div class="Ayoola_Page_Layout_Edit_File_content">
+		       <div class="Ayoola_Page_Layout_Edit_File_middle">
+<?php endif; ?>
+				%%HEADER%%
+				%%MIDDLEBAR%%
+				%%LEFTBAR%%
+				%%RIGHTBAR%%
+				%%FOOTER%%
+<?php if( ! Ayoola_Application::isXmlHttpRequest() && $_SERVER['HTTP_USER_AGENT'] !== Ayoola_Abstract_Viewable::$userAgent ): // Only show this if this is not a ajax call ?>
+			</div>
+		</div>
+	</div>
+</body>
+<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+</html>
+<?php endif; ?>

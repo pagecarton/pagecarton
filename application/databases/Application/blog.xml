@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="blog" creation_time="1400093525" table_version="0.01" module_version="1.00" table_class="Application_Blog" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES blog_name="INPUTTEXT, UNIQUE" blog_title="INPUTTEXT" blog_description="TEXTAREA" blog_directory="TEXTAREA" blog_tags="INPUTTEXT" blog_creation_date="INT" blog_modified_date="INT" blog_creator_user_id="INT" blog_editor_user_id="INT" enabled="INT" document_id="INT, FOREIGN_KEYS = Ayoola_Doc_Document" category_id="INT, FOREIGN_KEYS = Application_Category" auth_level="INT, FOREIGN_KEYS = Ayoola_Access_AuthLevel" blog_id="INPUTTEXT"/>
+    <FOREIGN_KEYS Ayoola_Doc_Document="document_id" Application_Category="category_id" Ayoola_Access_AuthLevel="auth_level"/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

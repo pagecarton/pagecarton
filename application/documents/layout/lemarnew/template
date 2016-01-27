@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]--><!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]--><!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]--><!--[if (gte IE 9)|!(IE)]><!--><html lang="en">
+<!--<![endif]--><head>
+
+<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+<!-- Basic Page Needs
+  ================================================== --><meta charset="utf-8">
+<meta name="author" content="">
+<!-- Mobile Specific Metas
+  ================================================== --><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!-- Skin (you can set a different color skin here - just change the name of the color)
+  ================================================== --><link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/stylesheets/skins/grayoil.css">
+<!-- CSS
+  ================================================== --><link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/stylesheets/style.css">
+<link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/stylesheets/styleresponsive.css">
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]--><!-- Favicons
+	================================================== --><link rel="shortcut icon" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/images/favicon.ico">
+<link rel="apple-touch-icon" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/images/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/images/apple-touch-icon-114x114.png">
+<style>
+.menuitems li  { float: left; padding-right: 0; padding-left: 30px; text-shadow: 0px 1px 1px white;}
+</style>
+</head>
+<body>
+<!-- Navigation
+	================================================== -->
+	<div class="container" id="">
+		<div class="sixteen columns">
+			@@@superheader@@@
+		</div>
+	</div>
+<div id="wrapnav" style="background-position:center bottom;height:unset;height:initial;padding-top: 0;">
+	<div class="container">
+		<div class="three columns alpha">
+			<div id="top" style="display:inline;">
+				<span style="text-align:center;" class="logo">
+					<?php
+						echo '<a style="" href="' . Ayoola_Application::getUrlPrefix() . '/"><img style="max-height:200px;" src="' . Ayoola_Doc::uriToDedicatedUrl( '/img/logo.png' ) . '" alt="' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . '" title="Logo" /></a>';
+					?>			  
+				</span>
+				<br>
+				<?php
+					echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a class="badnews" title="Change Logo" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Logo/"> Change logo... </a>' : null;
+				?>			  
+			</div>
+		</div>
+		<div class="thirteen columns omega" style="padding: 0px 0px 0;">
+			<div class="menu" style="float:right;">
+				<nav>
+					<?php	
+						//	Insert the header menu
+						echo Ayoola_Menu_Demo::viewInLine( array( 'option' => ( stripos( Ayoola_Application::getPresentUri(), '/ayoola' ) === 0 ) ? 'headerAdmin'  : 'headerMain', 'li-active-class' => 'current', 'ul-class' => 'menuitems',  ) );
+					?>
+				</nav>
+			</div>
+<!-- 			<div class="rightnav">
+				<span class="rightnavtext">Got any Questions?</span>
+				<br>Call: <a  style="color:#000;" title="Click to speak to us" href="tel:<?php echo Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'phone_number' ); ?>"><i class="fa fa-mobile-phone"></i><?php echo Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'phone_number' ) ? : '202-555-12345'; ?></a> 
+				<?php 
+					if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
+					{ 
+				?>
+						<a style="badnews" rel="spotlight;" title="Change organization contact information" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/CompanyInformation/"> x </a>
+				<?php 
+					}   
+				?>
+			</div>
+ -->		</div>
+	</div>
+</div>
+<!-- Header
+	================================================== -->
+<div class="header pc-bg-color">
+	<div class="container" id="">
+		<div class="sixteen columns ">
+			<div style="text-align:right;" class="col-md-12">
+				<?php	
+					echo Application_Breadcrumb::viewInLine
+					( 
+						array( 
+								'markup_template_prefix' => '
+									<style>
+									.breadcrumb {
+										list-style: none;
+										border-radius: 4px;
+										margin-bottom: 20px;
+									}
+									.breadcrumb > li {
+										display: inline-block;
+									}
+									.breadcrumb > li + li::before {
+										padding: 0px 5px;
+										content: "/\00a0";
+									}
+									.breadcrumb > .active {
+									}
+									</style>
+
+									<ol class="breadcrumb">
+										<li title="Go to the home page" ><a href="' . Ayoola_Application::getUrlPrefix() . '/">Home</a></li>
+								',
+								'markup_template_suffix' => '</ol>', 
+								'markup_template_active' => '<li title="{{{description}}}" class="active">{{{title}}}</li>', 
+								'markup_template' => '
+									<li title="{{{description}}}" ><a href="{{{url}}}">{{{title}}}</a></li>
+								', 
+							) 
+					);
+				?>
+			</div>
+			%%header%%
+		</div>
+	</div>
+</div>
+
+<!-- Features Section
+================================================== -->
+<div class="scrollpause">
+</div>
+<!-- Guarantee Section
+================================================== -->
+<div class="scrollpause">
+</div>
+<div class="container">
+	<div class="two-thirds column omega">
+		%%middlebar%%
+	</div>
+	<div class="one-third column " >	  
+		<div style="border-left: 1em groove #ccc; padding-left:2em;" >	  
+			%%rightbar%%
+			%%leftbar%%
+		</div>
+	</div>
+</div>
+<div class="container" id="">
+	<div class="sixteen columns neg">
+		%%footer%%
+	</div>
+</div>
+	<!-- Testimonials
+================================================== -->
+<div class="container" id="download">
+	<div class="sixteen columns">
+		<div class="titleborder">
+			<span class="title colorme">Testimonials</span>
+		</div>
+	</div>
+</div>
+<div class="container">
+			<?php 
+				echo Application_Testimonial_View::viewInLine  
+				( 
+					array( 
+							'markup_template_namespace' => 'testimonials',
+							'max_testimanials' => 3,  
+							'markup_template' => 
+													'
+														<div class="one-third column">
+															<h5>{{{city}}}</h5>
+															<p class="testimonial">
+																<img style="max-width:48px;" src="{{{document_url}}}" class="leftpic" alt=""> {{{testimonial}}}
+															<span class="author">- {{{full_name}}}, {{{city}}}-</span>
+															</p>
+															
+														</div>
+													'
+						) 
+				); 
+			?>	
+<div style="text-align:center;">
+			<?php 
+				if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
+				{
+					echo '<a class="pc-btn" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Testimonial_List/">Edit Testimonials</a>';
+				}
+				echo '<a class="pc-btn pc-bg-color" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Testimonial_Creator/">Add a testimonial</a>';
+			?>
+
+</div>
+</div>
+	<!-- Contact Section
+================================================== -->
+	<div class="scrollpause">
+	</div>
+	<div class="footerwrap">
+		<div class="footer">
+			<p class="back-top floatright">
+				<a href="#top"><span></span></a>
+			</p>
+			<div class="container negdown">
+				<div class="sixteen columns negdown">
+					<div class="four columns alpha">
+						<div class="footertext">
+							<h1>Newsletter</h1>
+							 Stay notified! Enter your e-mail address to subscribe to our latest news.
+							<div class="newsletter">
+								<div class="newsletterdone">
+									<button type="button" class="close" data-dismiss="alert">x</button>
+									<div class="newsletteralert">
+										<b>You have been subscribed!</b>
+									</div>
+									<br>
+							</div>
+								<?php echo Application_User_UserEmail_Creator::viewInLine( 
+									array( 
+									//		'markup_template_namespace' => 'newsletter', 
+											'markup_template' => 
+											'<span name="{{{template_object_name}}}_container">
+												<span style="display:block;">
+													{{{template_form_badnews}}}
+													{{{template_form_goodnews}}}
+												</span>
+												<form method="POST" name="{{{template_object_name}}}" class="form-wrapper cf">
+													<input type="email" id="newsemail" placeholder="Enter your e-mail address" autocomplete="off" name="' . Ayoola_Form::hashElementName( 'email' ) . '" value="{{{email}}}" {{{template_form_disable}}}>
+													<button  type="submit" name="dummy_name_to_disable_this_using_js" class="remove-bottom" {{{template_form_disable}}}>Go</button>
+													<input type="hidden" name="' . Ayoola_Form::hashElementName( 'add_email_to_mailing_list' ) . '" id="add_email_to_mailing_list" value="Yes" {{{template_form_disable}}} >
+													<span style="display:none;">{{{template_form_requirements}}}</span>
+												</form>
+											  </span>'
+										) ); 
+								?>
+							</div>
+						</div>
+					</div>
+				<div class="four columns">
+						<div class="footertext floatright">
+							@@@links1@@@
+							<?php	
+								echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'memberarea', ) );
+							?>
+						</div>
+					</div>
+					<div class="four columns">
+						<div class="footertext floatright">
+							@@@links3@@@
+							<?php	
+								echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'aboutus', ) );
+							?>
+						</div>
+					</div>
+					<div class="four columns omega">
+						<div class="footertext floatright">
+							@@@links4@@@
+							<?php	
+								echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'ourblog', ) );
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="copyright pc-bg-color">
+		<div class="gototopmobile">
+			<a href="#top">Go to Top</a>
+		</div>
+		<div style="text-align:center;" class="container" id="contact">
+			<div class="sixteen columns">
+				<div class="left">Copyright &copy <?php echo date( 'Y' ) ?> <?php echo Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain(); ?> | <a href="http://pagecarton.com/" target="parent">CMS</a>: PageCarton | <a href="http://comeriver.com/" target="parent">Website Design</a>: ComeRiver.com</div>
+			</div>
+		</div>
+	</div>
+	<!-- Scripts
+================================================== -->
+	<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/js/jquery.min.js"></script>
+<!-- 	<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/js/responsiveslides.min.js"></script>
+ -->	<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/js/smoothscroll.js"></script>
+	<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/peel/peel.js"></script>
+	<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/js/alert.js"></script>
+	<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/js/responsivemenu.js"></script>
+	<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/lemarnew/js/formsvalidation.js"></script><!-- End Document
+================================================== -->
+</body>
+
+<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+
+</html>

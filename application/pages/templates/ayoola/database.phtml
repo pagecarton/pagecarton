@@ -1,0 +1,254 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /ayoola/database
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: database.php	Wednesday 20th of January 2016 11:02:14 AM	 $ 
+*/
+//	Template Content ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/BootstrapBlogPost/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/BootstrapBlogPost/css/modern-business.css" rel="stylesheet">
+    <link href="' . Ayoola_Application::getUrlPrefix() . '/BootstrapBlogPost/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<?php
+	if( Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ) )
+	{
+?>
+<style>
+	.navbar .sidebar-toggle .icon-bar, .navbar-inverse .navbar-toggle
+	{
+		background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color' ); ?>;
+	} 
+	.navbar-inverse .navbar-toggle .icon-bar
+	{
+		background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ); ?>;
+	} 
+	.navbar .sidebar-toggle:hover .icon-bar
+	{
+		background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'font_color' );  ?> !important;
+	}
+	.navbar
+	{
+		background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ); ?>;
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'font_color' ); ?>;
+	}
+	.navbar-nav > .user-menu > .dropdown-menu > li.user-header > p
+	{
+		background-color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ); ?>;
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'font_color' ); ?>;
+	}
+	.navbar .nav a
+	{
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color' ); ?>;
+	}
+	.navbar .nav a:link
+	{
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color' ); ?>;
+	}
+	.navbar .nav a:active
+	{
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color_active' ); ?>;
+	}
+	.navbar .nav a:hover
+	{
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color_hover' ); ?>;
+	}
+	.navbar .nav a:visited
+	{
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color_visited' ); ?>;
+	}
+	.navbar .nav > li > a:hover,
+	.navbar .nav > li > a:active,
+	.navbar .nav > li > a:focus,
+	.navbar .nav .open > a,
+	.navbar .nav .open > a:hover,
+	.navbar .nav .open > a:focus 
+	{
+		background: rgba(0, 0, 0, 0.1);
+		color: <?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'link_color_hover' ); ?>;
+	}
+</style>
+<?php
+	}
+?>
+    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/BootstrapBlogPost/js/jquery.js"></script>
+  </head>
+
+  <body>
+
+    <nav class="pc-bg-color navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+				<?php
+					echo '<a class="" style="vertical-align:middle;" href="' . Ayoola_Application::getUrlPrefix() . '/"><img style="max-height:50px;max-width:100%;" src="' . Ayoola_Doc::uriToDedicatedUrl( '/img/logo.png' ) . '" alt="' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . '" title="Our logo" /></a>';
+					echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Logo" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Logo/"> x </a>' : null;
+				?>	            
+		  
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-right"> 
+			<?php 
+			if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
+			{
+				echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>';  
+					//	if( stripos( Ayoola_Application::getPresentUri(), '/ayoola' ) === 0 )
+						{
+							echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'headerAdmin', 'ul-class' => 'dropdown-menu pc-bg-color', 'li-active-class' => 'active', 'ul-1-class' => 'dropdown-menu pc-bg-color', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+						}
+				echo '</li>';
+			}
+			?>
+			<?php 
+	//		if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
+			{
+				echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>';  
+					//	if( stripos( Ayoola_Application::getPresentUri(), '/ayoola' ) === 0 )
+						{
+							echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'accessMain', 'ul-class' => 'dropdown-menu pc-bg-color', 'li-active-class' => 'active', 'ul-1-class' => 'dropdown-menu pc-bg-color', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+						}
+				echo '</li>';
+			}
+			?>
+			<?php
+				//	On the fly Menu
+				foreach( Ayoola_Menu::getRawMenuOptions() as $key => $each )
+				{
+					echo '<li class="dropdown">
+						  <a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $key . ' <b class="caret"></b></a>';
+					echo Ayoola_Menu_Demo::viewInLine( array( 'raw-options' => $each, 'ul-class' => 'dropdown-menu  pc-bg-color', 'li-active-class' => 'active', 'ul-1-class' => 'dropdown-menu  pc-bg-color', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+					echo '</li>';
+				}
+			?>
+		  </ul>
+			<?php	
+				//	Insert the header menu
+				echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'headerMain', 'ul-class' => 'nav navbar-nav navbar-left', 'ul-1-class' => 'dropdown-menu  pc-bg-color', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+			?>
+			<?php
+				//	Put the homepage link
+			?>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+    
+    <div class="container">
+      <div class="row">
+		<div style="text-align:left;" class="col-md-12">
+			<?php	
+				echo Application_Breadcrumb::viewInLine
+				( 
+
+				);
+			?>
+		</div>
+        <div style="padding:1em;" class="xcoloring col-md-12">
+		  <?php
+//header Begins Here
+
+//header Ends Here
+?>
+        </div>
+      </div>
+      <div class="row">
+        <div class=" col-md-8">      
+		  <?php
+//middlebar Begins Here
+
+echo ( ! empty( $objay__middlebar0objectEmbed ) &&  is_object( $objay__middlebar0objectEmbed ) ? $objay__middlebar0objectEmbed->view() : null );
+
+//middlebar Ends Here
+?>
+
+          <!-- the comment box -->
+          <div class="">
+			<?php
+//comments Begins Here
+
+//comments Ends Here
+?>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="">
+			<?php
+//rightbar Begins Here
+
+//rightbar Ends Here
+?>
+			<?php
+//leftbar Begins Here
+
+echo ( ! empty( $objay__leftbar0menuView ) &&  is_object( $objay__leftbar0menuView ) ? $objay__leftbar0menuView->view() : null );
+
+//leftbar Ends Here
+?>
+          </div><!-- /well -->
+        </div>
+      </div>
+      
+      <hr>
+      
+
+    </div><!-- /.container -->
+    <div class="pc-bg-color"><!-- /.container -->
+		<div class="container"><!-- /.container -->
+		  <footer>
+			<div class=" row">
+			  <div class="col-md-12"> 
+				<?php
+//footer Begins Here
+
+//footer Ends Here
+?>
+				<br>
+				<p style="text-align:center;">
+					Copyright &copy; <?php echo Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain(); ?> <?php echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Organization Info" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/CompanyInformation/"> x </a>' : null; ?> <?php echo ' 2012 - ' . date( 'Y' ) ?> &middot; <a href="https://www.facebook.com/<?php echo ( Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'facebook_page_url' ) ? : 'AyoolaFramework' ); ?>">Facebook</a> &middot; <a href="https://www.twitter.com/<?php echo ( array_shift( explode( ',', Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'twitter_username' ) ) ) ? : 'AyoolaFramework' ); ?>">Twitter</a> &middot; <a href="https://plus.google.com/<?php echo ( Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'googleplus_id' ) ? : '106833210591385672079' ); ?>" rel="publisher">Google+</a> &middot; Built with: <a href="http://www.PageCarton.com/"> PageCarton</a> on Bootstrap &middot; <?php echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Social Media Info" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SocialMedia/"> x </a>' : null; ?>
+				</p>
+			  </div>
+			</div>
+		  </footer>
+		
+		</div><!-- /.container -->
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/BootstrapBlogPost/js/bootstrap.js"></script>
+    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/BootstrapBlogPost/js/modern-business.js"></script>
+	<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+	<script type="text/javascript">
+
+	  //	Add top margin to scrollToView
+	  ayoola.scrollToViewMargin = '50px';
+	</script>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DOCUMENT_ELEMENT table_name="yearbook" creation_time="1355256553" table_version="0.01" table_class="YearBook" creation_ip="2130706433">
+  <RECORDS autoId="5"/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES name="INPUTTEXT" nickname="INPUTTEXT" home_address="INPUTTEXT" office_address="INPUTTEXT" email="INPUTTEXT" phone_number1="INPUTTEXT" phone_number2="INPUTTEXT" marital_status="INPUTTEXT" date_of_birth="INPUTTEXT" state_of_origin="INPUTTEXT" membership="INPUTTEXT" current_job="INPUTTEXT" higher_institution1="INPUTTEXT" higher_institution2="INPUTTEXT" burning_desire="INPUTTEXT" hobbies="INPUTTEXT" likes="INPUTTEXT" dislikes="INPUTTEXT" why_urp="INPUTTEXT" why_ui="INPUTTEXT" protect_topic="INPUTTEXT" best_course_mate="INPUTTEXT" best_course="INPUTTEXT" what_next="INPUTTEXT" area_of_specialization="INPUTTEXT" opinion_about_department="INPUTTEXT" changes_you_would_love_to_see="INPUTTEXT" opinion_about_urp="INPUTTEXT" opinion_about_class="INPUTTEXT" happiest_moment="INPUTTEXT" most_embarassing_day="INPUTTEXT" regrets="INPUTTEXT" where_will_you_be_in_10yrs="INPUTTEXT" best_quotes="INPUTTEXT" yearbook_id="INT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

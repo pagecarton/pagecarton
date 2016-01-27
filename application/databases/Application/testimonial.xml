@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DOCUMENT_ELEMENT table_name="testimonial" creation_time="1386908963" table_version="0.01" table_class="Application_Testimonial" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES testimonial="INPUTTEXT" full_name="INPUTTEXT" city="INPUTTEXT" verified="INPUTTEXT" testimonial_id="INT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

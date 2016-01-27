@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="">
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<?php
+	if( Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ) )
+	{
+?>
+<style>    
+
+</style>
+<?php 
+	}
+?>
+  </head>
+
+  <body style="background-color:<?php echo Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ); ?>;" >
+	<nav class="navbar navbar-default navbar-static-top" style="margin-bottom:0;padding-bottom:0.5em;background-image: linear-gradient(to bottom, #fff 0px, #fff 100%);">
+      <div  class="container">
+		<div class="row">
+		  <div style="margin:1em;" class="col-md-12">
+			@@@topbar@@@
+			<div id="" class="navbar-collapse collapse">
+			  <ul class="nav navbar-nav navbar-right">
+				<?php	
+					echo Ayoola_Menu_Demo::viewInLine
+					( 
+						array( 
+								'markup_template_namespace' => 'top menu 3',
+								'option' => 'headertop', 
+								'auto_sub_menu' => true, 
+								'add_option_text' => '<i class="fa fa-plus"></i>',
+								'edit_option_text' => '<i class="fa fa-edit"></i>',
+								'ul-class' => 'dropdown-menu', 'li-active-class' => 'active', 'ul-1-class' => 'dropdown-menu', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ),
+								'markup_template' => '
+									<li class="{{{li-active-class}}}">											
+										<a onClick="{{{ayoola_spotlight}}}" href="{{{url}}}">{{{option_name}}}</a>
+										{{{sub_menu}}}
+									</li>
+								', 
+							) 
+					);
+				?>
+			  </ul>
+			</div><!--/.nav-collapse -->
+		  </div><!-- /.col-md-12 -->
+		</div><!-- /.row -->
+		<div class="row">
+		  <div class="col-md-2"> 
+			<div class="navbar-header">
+			  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			  </button>
+			  <a class="navbar-brand" style="padding:0;" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/">
+					<?php
+						echo '<img style="max-height:50px;max-width:100%;" src="' . Ayoola_Doc::uriToDedicatedUrl( '/img/logo.png' ) . '" alt="' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . '" title="Our logo" />';
+					?>	            
+			  </a>
+			<?php
+				echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Logo" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Logo/"> x </a>' : null;
+			?>	            
+			</div>
+		  </div><!-- /.col-md-12 -->
+		  <div class="col-md-8">  
+			<div id="navbar" class="navbar-collapse collapse">
+			<?php	
+				//	Insert the header menu
+				echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'headerMain',
+								'auto_sub_menu' => true, 
+
+				'ul-class' => 'nav navbar-nav', 'ul-1-class' => 'dropdown-menu', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+			?>
+			</div><!--/.nav-collapse -->
+		  </div><!-- /.col-md-12 -->
+		  <div class="col-md-2">
+            <form data-not-playable="true" action="/search" method="get" class="sidebar-form">
+				<div class="input-group">
+				  <input name="q" type="text" class="form-control" placeholder="Search for...">
+				  <span class="input-group-btn">
+					<button class="btn btn-default" type="submit">
+						<i class="fa fa-search" title="Search"></i>
+					</button>
+				  </span>
+				</div><!-- /input-group -->
+			</form>
+		  
+		  </div><!-- /.col-md-12 -->
+		</div><!-- /.row -->
+      </div>
+    </nav>    
+    <div class="" style="background-image: linear-gradient(to bottom, #F8F8F8 0px, #e6e6e6 100%);background-repeat: repeat-x; padding-top:2em; padding-bottom:2em;1px solid transparent;0px 0px 1px;border-color: #fff;box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.15) inset, 0px 1px 5px rgba(0, 0, 0, 0.075);">
+		<div class="container">
+			<div class="row">
+				<div style="text-align:left;" class="col-md-12">
+					<?php	
+						echo Application_Breadcrumb::viewInLine
+						( 
+
+						);
+					?>
+				</div>
+				<div  style="padding:1em;" class="col-md-12">
+				  %%HEADER%%
+				</div>
+			</div>
+		</div>
+		<div class="container">
+		  <div class="row">
+			<div class="col-md-9" >      
+				<div style="background-color:#fff;padding:1em;border-top: thick solid <?php echo ( Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ) ? : '#ff0000' ); ?>;">      
+				  %%MIDDLEBAR%%
+				  @@@STARMIDDLE@@@   
+				</div>
+			</div>
+			<div class="col-md-3" style="">
+			  <div style="background-color:#fff;padding:1em;border-top: thick solid <?php echo ( Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ) ? : '#ff0000' ); ?>; margin-bottom:1em;">
+					%%RIGHTBAR%%
+					%%LEFTBAR%%
+			  </div><!-- /well -->
+			</div>
+		  </div>
+		</div><!-- /.container -->
+    </div>
+    <div class="pc-bg-color" style="padding:2em;"><!-- /.container --> 
+		<div class="container"><!-- /.container -->
+		  <footer>
+			<div class=" row">
+			  <div class="col-md-12">
+				%%FOOTER%%
+			  </div>
+			</div>
+			<div class=" row">
+			  <div class="col-md-8">
+				<p id="" class="" style="margin-top:1em;margin-bottom:1em;">
+					<?php	
+						echo Ayoola_Menu_Demo::viewInLine
+						( 
+							array( 
+									'markup_template_namespace' => 'top menu 3',
+									'option' => 'footermenu',
+									'add_option_text' => '<i class="fa fa-plus"></i>',
+									'edit_option_text' => '<i class="fa fa-edit"></i>',
+									'li-active-class' => 'active', 
+									'markup_template' => '
+
+										<a onClick="{{{ayoola_spotlight}}}" href="{{{url}}}" style="padding-right:1em;" >{{{option_name}}}</a> 
+										{{{sub_menu}}}
+									', 
+								) 
+						);
+					?>
+
+				</p>
+				<p style="">
+					Copyright &copy; <?php echo Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain(); ?> <?php echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Organization Info" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/CompanyInformation/"> x </a>' : null; ?> <?php echo ' ' . date( 'Y' ) ?> &middot; <a href="https://www.facebook.com/<?php echo ( Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'facebook_page_url' ) ? : 'AyoolaFramework' ); ?>">Facebook</a> &middot; <a href="https://www.twitter.com/<?php echo ( array_shift( explode( ',', Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'twitter_username' ) ) ) ? : 'AyoolaFramework' ); ?>">Twitter</a> &middot; <a href="https://plus.google.com/<?php echo ( Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'googleplus_id' ) ? : '106833210591385672079' ); ?>" rel="publisher">Google+</a> &middot; Built with: <a href="http://www.PageCarton.com/"> PageCarton</a> on Bootstrap &middot; <?php echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Social Media Info" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SocialMedia/"> x </a>' : null; ?>
+				</p>
+			  </div>
+			  <div class="col-md-4">
+				<p><strong>Subscribe for updates</strong></p>
+				<form data-not-playable="true" action="/search" method="get" class="sidebar-form">
+					<div class="input-group">
+					  <input type="text" class="form-control" placeholder="Enter your e-mail...">
+					  <span class="input-group-btn">
+						<button class="btn btn-default" type="button">
+							<i class="fa fa-plus" title="Search"></i>
+						</button>
+					  </span>
+					</div><!-- /input-group -->
+				</form>
+			  </div>
+			</div>  
+		  </footer>
+		
+		</div><!-- /.container -->
+    </div><!-- /.container -->
+
+
+	<!-- jQuery 2.0.2 -->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script><!-- jQuery UI 1.10.3 -->
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+	<script type="text/javascript">
+
+	  //	Add top margin to scrollToView
+	  ayoola.scrollToViewMargin = '50px';
+	</script>
+  </body>
+</html>

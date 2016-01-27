@@ -1,0 +1,13 @@
+/*
+* Lemar Theme - Dark Blue
+*/
+.menu, .menu a , .menu a:visited, .menu a:focus { color: #51756b; }
+.slidepic { border: 2px solid #fff !important;}
+.header { background: #51756b url(../../images/transp.png) repeat; }
+.copyright, .copyright a { background: #51756b url(../../images/transp.png) repeat;}
+.spotlight { background: #51756b url(../../images/transp.png) repeat; }
+.colorme { color: #51756b; }
+a.actionbutton { color: #51756b !important; text-shadow:0 1px 1px #fff; background-color: #ccc; background-image: -moz-linear-gradient(center top,#F1F1F1,#bbb); background-image: -webkit-linear-gradient(top,#F1F1F1,#bbb); background-image: -moz-linear-gradient(top,#F1F1F1,#bbb); background-image: -ms-linear-gradient(top,#F1F1F1,#bbb); background-image: -o-linear-gradient(top,#F1F1F1,#bbb); background-image: linear-gradient(top,#F1F1F1,#bbb); filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1f1f1',EndColorStr='#bbb'); background-repeat: no-repeat; }
+a.actionbutton:hover { background: #fff; }
+.centered-btns_tabs a,.transparent-btns_tabs a,.large-btns_tabs a { background: #fff !important; }
+.centered-btns_here a,.transparent-btns_here a,.large-btns_here a { background: #ccc !important; }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="mode" creation_time="1397839331" table_version="0.01" module_version="1.00" table_class="Application_User_NotificationMessage_Mode" creation_ip="2130706433">
+  <RECORDS>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="mode_name"><![CDATA[SMS]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[2]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="mode_name"><![CDATA[Email]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES mode_id="INT, RELATIVES = Application_User_NotificationMessage" mode_name="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES Application_User_NotificationMessage="mode_id"/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

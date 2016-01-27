@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="settings" creation_time="1442996157" table_version="0.0.1" module_version="1.00" table_class="Application_Settings" creation_ip="1123633922">
+  <RECORDS autoId="7">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings_id"><![CDATA[1077-0-1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings"><![CDATA[a:10:{s:14:&quot;default_layout&quot;;s:17:&quot;BootstrapBlogPost&quot;;s:16:&quot;background_color&quot;;s:0:&quot;&quot;;s:16:&quot;background_image&quot;;s:0:&quot;&quot;;s:1:&quot;x&quot;;N;s:10:&quot;font_color&quot;;s:0:&quot;&quot;;s:10:&quot;link_color&quot;;s:0:&quot;&quot;;s:17:&quot;link_color_active&quot;;s:0:&quot;&quot;;s:16:&quot;link_color_hover&quot;;s:0:&quot;&quot;;s:18:&quot;link_color_visited&quot;;s:0:&quot;&quot;;s:0:&quot;&quot;;s:0:&quot;&quot;;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings_id"><![CDATA[1077-0-2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings"><![CDATA[a:6:{s:12:&quot;company_name&quot;;s:0:&quot;&quot;;s:8:&quot;about_us&quot;;s:0:&quot;&quot;;s:12:&quot;phone_number&quot;;s:0:&quot;&quot;;s:5:&quot;email&quot;;s:0:&quot;&quot;;s:12:&quot;full_address&quot;;s:0:&quot;&quot;;s:0:&quot;&quot;;s:0:&quot;&quot;;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[10]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings_id"><![CDATA[1077-0-3]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[11]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings_id"><![CDATA[1077-0-4]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings_id"><![CDATA[1077-0-5]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings_id"><![CDATA[1077-0-6]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES settings="INPUTTEXT" settingsname_id="INT, UNIQUE, FOREIGN_KEYS = Application_Settings_SettingsName" settings_id="INPUTTEXT"/>
+    <FOREIGN_KEYS Application_Settings_SettingsName="settingsname_id"/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

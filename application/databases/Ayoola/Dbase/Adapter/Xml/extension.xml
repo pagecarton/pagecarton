@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="extension" creation_time="1446836177" table_version="0.11" module_version="1.00" table_class="Ayoola_Extension" creation_ip="3318952971">
+  <RECORDS autoId="6">
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="extension_title"><![CDATA[Modules, Database and Documents]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="components"><![CDATA[[&quot;modules&quot;,&quot;databases&quot;,&quot;documents&quot;,&quot;pages&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modules"><![CDATA[[&quot;\/Application.php&quot;,&quot;\/Application\/ContactUs\/Creator.php&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="databases"><![CDATA[[&quot;\/Application\/blog.xml&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="documents"><![CDATA[[&quot;\/ayoola\/framework\/sshd_config.txt&quot;,&quot;\/robots.txt&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/sms&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="extension_name"><![CDATA[modules_database_and_documents]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="status"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="plugins"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="templates"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="extension_id"><![CDATA[1496-0-4]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="extension_name"><![CDATA[next_big]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="status"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="plugins"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="extension_id"><![CDATA[1496-0-5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="extension_title"><![CDATA[Next Big]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="components"><![CDATA[[&quot;modules&quot;,&quot;databases&quot;,&quot;documents&quot;,&quot;plugins&quot;,&quot;pages&quot;,&quot;templates&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modules"><![CDATA[[&quot;\/Application\/Advert\/Creator.php&quot;,&quot;\/tmhUtilities.php&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="databases"><![CDATA[[&quot;\/Application\/Article\/template.xml&quot;,&quot;\/Ayoola\/Page\/page.xml&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="documents"><![CDATA[[&quot;\/open-iconic\/png\/calculator.png&quot;,&quot;\/public\/2015\/10\/21\/ajax-loader.gif&quot;,&quot;\/readme.txt&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/404&quot;,&quot;\/site\/testimonial&quot;,&quot;\/tools\/captcha&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="templates"><![CDATA[[&quot;bootstrapmini&quot;]]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES extension_name="INPUTTEXT, UNIQUE" extension_title="INPUTTEXT" status="INPUTTEXT" components="JSON" modules="JSON" databases="JSON" documents="JSON" plugins="JSON" pages="JSON" templates="JSON" extension_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>
