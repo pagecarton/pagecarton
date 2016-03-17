@@ -53,4 +53,4 @@ MORE INFORMATION
 ----------------
 
  * See the PageCarton.com site:
-   http://www.PageCarton.com/
+   http://www.PageCarton.com
