@@ -1,0 +1,382 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /pc-admin
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: pc-admin.php	Friday 8th of September 2017 12:02:10 PM	 $ 
+*/
+//	Template Content ?>
+<!DOCTYPE HTML>
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+--><html>
+<head>
+<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script><!-- Bootstrap Core CSS --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/bootstrap.css" rel="stylesheet" type="text/css">
+<!-- Custom CSS --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/style.css" rel="stylesheet" type="text/css">
+<!-- font CSS --><!-- font-awesome icons --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/font-awesome.css" rel="stylesheet">  
+<!-- //font-awesome icons --><!-- js--><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/jquery-1.11.1.min.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/modernizr.custom.js"></script><!--webfonts--><link href="//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
+<!--//webfonts--><!--animate--><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/wow.min.js"></script><script>
+		 new WOW().init();
+	</script><!--//end-animate--><!-- chart --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/Chart.js"></script><!-- //chart -->
+<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/underscore-min.js" type="text/javascript"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/moment-2.2.1.js" type="text/javascript"></script>
+<!-- Metis Menu --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/metisMenu.min.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/custom.js"></script><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/custom.css" rel="stylesheet">
+<!--//Metis Menu -->
+</head>
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+		<!--left-fixed -navigation-->
+		<div class=" sidebar" role="navigation">
+            <div class="navbar-collapse">
+				<nav data-pc-menu-ignore="1" class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1"><ul class="nav" id="side-menu">
+<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/" class="active"><i class="fa fa-home nav_icon"></i>Dashboard</a>
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-cogs nav_icon"></i>Settings <span class="nav-badge">8</span> <span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level collapse">
+<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Settings_SettingsName_List/">Options</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Access_AuthLevel_List/">Priviledges</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Object_List/">Widgets</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Domain_List/">Domains</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Backup_List/">Back up</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Log/">Logs</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Cache_Clear/">Clear Cache</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Upgrade/">Upgrades</a>
+								</li>
+							</ul>
+<!-- /nav-second-level -->
+</li>
+						<li>
+							<a href="#"><i class="fa fa-file-text-o nav_icon"></i>Pages &amp; Themes<span class="nav-badge">3</span><span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level collapse">
+<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_List/">Pages</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_Layout_List/">Themes</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_Menu_List/">Navigation</a>
+								</li>
+							</ul>
+<!-- //nav-second-level -->
+</li>
+						<li class="">
+							<a href="#"><i class="fa fa-users nav_icon"></i>Users  <span class="nav-badge">3</span> <span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level collapse">
+<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_User_List/">User Accounts</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_XmlTableViewer/table_name/Application_User_UserEmail_MailingList/">Mailing List</a>
+								</li>
+							</ul>
+<!-- /nav-second-level -->
+</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Form_List/"><i class="fa fa-check-square-o nav_icon"></i>Forms </a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Article_List/"><i class="fa fa-th-large nav_icon"></i>Posts </a>
+</li>						
+<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Extension_Import_List/"><i class="fa fa-circle nav_icon"></i>Extensions </a>
+</li>
+						<li>
+							<a href="#"><i class="fa fa-envelope nav_icon"></i>Mailbox <span class="nav-badge">2</span> <span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level collapse">
+<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_ContactUs_ShowAll/">Contact Form Feedbacks</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_User_NotificationMessage_List/">Manage Bulk Mails</a>
+								</li>
+							</ul>
+<!-- //nav-second-level -->
+</li>
+						
+					</ul>
+<!-- //sidebar-collapse --></nav>
+</div>
+		</div>
+		<!--left-fixed -navigation-->
+		<!-- header-starts -->
+		<div class="sticky-header header-section ">
+			<div class="header-left">
+				<!--toggle button start-->
+				<button id="showLeftPush"><i class="fa fa-bars"></i></button>
+				<!--toggle button end-->
+				<!--logo -->
+				<div class="logo">
+					<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/">
+						<h1>PageCarton</h1>
+						<span>AdminPanel</span>
+					</a>				
+				</div>
+				<!--//logo-->
+				<!--search-box-->
+				<div class="search-box"> 
+					<form action="<?php echo Ayoola_Application::getUrlPrefix(); ?>/search/" class="input">
+						<input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31"><label class="input__label" for="input-31">
+							<svg class="graphic" width="100%" height="100%" viewbox="0 0 404 77" preserveaspectratio="none"><path d="m0,0l404,0l0,77l-404,0l0,-77z"></path></svg></label>
+					</form>
+				</div>
+<!--//end-search-box-->
+				<div class="clearfix"> </div>
+			</div>
+			<div class="header-right">
+			
+				<!--notification menu end -->
+				<?php echo Ayoola_Abstract_Viewable::viewObject( 'Ayoola_Access_Dashboard', array (
+  'object_interior' => true,
+  'markup_template' => '<section><div class="profile_details">		&#13;
+					<ul><li class="dropdown profile_details_drop">&#13;
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">&#13;
+								<div class="profile_img">	&#13;
+									<span class="prfil-img"><img style="max-height:50px;" src="{{{display_picture}}}" alt=""></img></span> &#13;
+									<div class="user-name">&#13;
+										<p>{{{display_name}}}</p>&#13;
+										<span>{{{auth_name}}}</span>&#13;
+									</div>&#13;
+									<i class="fa fa-angle-down lnr"></i>&#13;
+									<i class="fa fa-angle-up lnr"></i>&#13;
+									<div class="clearfix"></div>	&#13;
+								</div>	&#13;
+							</a>&#13;
+							<ul class="dropdown-menu drp-mnu"><li> <a href="' . Ayoola_Application::getUrlPrefix() . '/account"><i class="fa fa-cog"></i> Settings</a> </li> &#13;
+								<li> <a href="' . Ayoola_Application::getUrlPrefix() . '/{{{username}}}"><i class="fa fa-user"></i> Profile</a> </li> &#13;
+								<li> <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/signout"><i class="fa fa-sign-out"></i> Logout</a> </li>&#13;
+							</ul></li>&#13;
+					</ul></div>&#13;
+				</section>',
+) ); ?><div class="clearfix"> </div>				
+			</div>
+			<div class="clearfix"> </div>	
+		</div>
+		<!-- //header-ends -->
+		<!-- main content start-->
+		<div id="page-wrapper">
+			<div class="main-page">
+				<section><section data-pc-all-sections="1">	
+							<div class="">
+								<div class="row">
+									<div class="col-lg-12">
+										<?php
+//oneness Begins Here
+
+echo ( ! empty( $_d89ddf2ba344d40a937a1d7a4510f2e6 ) &&  is_object( $_d89ddf2ba344d40a937a1d7a4510f2e6 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_d89ddf2ba344d40a937a1d7a4510f2e6->view(), '' ) : null );
+
+echo ( ! empty( $_860cf6f944c2cc1ba706bdc253c8c42e ) &&  is_object( $_860cf6f944c2cc1ba706bdc253c8c42e ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_860cf6f944c2cc1ba706bdc253c8c42e->view(), 'white-background' ) : null );
+
+echo ( ! empty( $_00e45ea75c109ac55a184825bbb1f576 ) &&  is_object( $_00e45ea75c109ac55a184825bbb1f576 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_00e45ea75c109ac55a184825bbb1f576->view(), 'white-background' ) : null );
+
+							if( Ayoola_Page::hasPriviledge( array (
+  0 => '99',
+), array( 'strict' => true ) ) && ! empty( $_f6ca0d8c560b2c99a95473d7d33205e6 ) && is_object( $_f6ca0d8c560b2c99a95473d7d33205e6 ) )
+							{
+								echo Ayoola_Object_Wrapper_Abstract::wrap( $_f6ca0d8c560b2c99a95473d7d33205e6->view(), 'white-background' );
+							}
+							
+echo ( ! empty( $_df0c168bb07449442fcafe5b945a3470 ) &&  is_object( $_df0c168bb07449442fcafe5b945a3470 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_df0c168bb07449442fcafe5b945a3470->view(), 'white-background' ) : null );
+
+echo ( ! empty( $_d71f65ba79bac0155c2faf1c4ee1ec95 ) &&  is_object( $_d71f65ba79bac0155c2faf1c4ee1ec95 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_d71f65ba79bac0155c2faf1c4ee1ec95->view(), '' ) : null );
+
+//oneness Ends Here
+?>
+								   </div>
+								</div> 
+								<div class="row">
+									<div class="col-lg-6">
+										<?php
+//twosome1 Begins Here
+
+//twosome1 Ends Here
+?>
+								   </div>
+									<div class="col-lg-6">
+										<?php
+//twosome2 Begins Here
+
+//twosome2 Ends Here
+?>
+									</div> 
+								</div> 
+								<div class="row">
+									<div class="col-lg-4">
+										<?php
+//threesome1 Begins Here
+
+echo ( ! empty( $_eb45f2ea98c8b1703d96c7f4a5981f2a ) &&  is_object( $_eb45f2ea98c8b1703d96c7f4a5981f2a ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_eb45f2ea98c8b1703d96c7f4a5981f2a->view(), '' ) : null );
+
+echo ( ! empty( $_f4fb3c384da2bcf2f2471d74bb843c8e ) &&  is_object( $_f4fb3c384da2bcf2f2471d74bb843c8e ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_f4fb3c384da2bcf2f2471d74bb843c8e->view(), 'white-background' ) : null );
+
+//threesome1 Ends Here
+?>
+								   </div>
+									<div class="col-lg-4">
+										<?php
+//threesome2 Begins Here
+
+echo ( ! empty( $_83ccb2a5073fbe7f33ecbff23428e9c5 ) &&  is_object( $_83ccb2a5073fbe7f33ecbff23428e9c5 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_83ccb2a5073fbe7f33ecbff23428e9c5->view(), '' ) : null );
+
+echo ( ! empty( $_4a0fa986885edbc3f15e675176feba7c ) &&  is_object( $_4a0fa986885edbc3f15e675176feba7c ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_4a0fa986885edbc3f15e675176feba7c->view(), 'white-background' ) : null );
+
+//threesome2 Ends Here
+?>
+									</div> 
+									<div class="col-lg-4">
+										<?php
+//threesome3 Begins Here
+
+echo ( ! empty( $_c7e6e423b814c5da0a3a4b87a76d823b ) &&  is_object( $_c7e6e423b814c5da0a3a4b87a76d823b ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_c7e6e423b814c5da0a3a4b87a76d823b->view(), '' ) : null );
+
+echo ( ! empty( $_f96df91e49680686e54e25ca89464c0d ) &&  is_object( $_f96df91e49680686e54e25ca89464c0d ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_f96df91e49680686e54e25ca89464c0d->view(), 'white-background' ) : null );
+
+//threesome3 Ends Here
+?>
+									</div> 
+								</div> 
+								<div class="row">
+									<div class="col-lg-3">
+										<?php
+//foursome1 Begins Here
+
+//foursome1 Ends Here
+?>
+								   </div>
+									<div class="col-lg-3">
+										<?php
+//foursome2 Begins Here
+
+//foursome2 Ends Here
+?>
+									</div> 
+									<div class="col-lg-3">
+										<?php
+//foursome3 Begins Here
+
+//foursome3 Ends Here
+?>
+									</div> 
+									<div class="col-lg-3">
+										<?php
+//foursome4 Begins Here
+
+//foursome4 Ends Here
+?>
+									</div> 
+								</div> 
+							</div> 
+						</section></section>
+<?php
+//row_one Begins Here
+
+echo ( ! empty( $_8482adf117a12e61c61531407905c96f ) &&  is_object( $_8482adf117a12e61c61531407905c96f ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_8482adf117a12e61c61531407905c96f->view(), 'well' ) : null );
+
+//row_one Ends Here
+?>
+
+
+
+<?php
+//charts Begins Here
+
+//charts Ends Here
+?>
+
+
+
+<?php
+//three Begins Here
+
+//three Ends Here
+?>
+
+
+
+<?php
+//four Begins Here
+
+//four Ends Here
+?>
+
+
+
+<?php
+//five Begins Here
+
+//five Ends Here
+?>
+
+
+<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!--footer-->
+			<div class="main-page">
+		<div class="footer">
+		
+<?php
+//footer Begins Here
+
+echo ( ! empty( $_4bca9db1f90962ceede8d9da4ef499c4 ) &&  is_object( $_4bca9db1f90962ceede8d9da4ef499c4 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_4bca9db1f90962ceede8d9da4ef499c4->view(), '' ) : null );
+
+//footer Ends Here
+?>
+
+
+
+</div>
+		</div>
+        <!--//footer-->
+	</div>
+	<!-- Classie -->
+		<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/classie.js"></script><script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				body = document.body;
+				
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+			
+
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+			}
+		</script><!--scrolling js--><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/jquery.nicescroll.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/scripts.js"></script><!--//scrolling js--><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/bootstrap.js"> </script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+</body>
+</html>

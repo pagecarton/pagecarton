@@ -1,0 +1,128 @@
+@charset "utf-8";
+/* FORM */
+@import "/css/default/form.css";
+
+/* CLASSES */
+@import "/css/default/classes.css";
+
+/* HEADERS */
+@import "/css/default/headers.css";
+
+/* LINKS */
+@import "/css/default/links.css";
+
+/* TABLE */
+@import "/css/default/table.css";
+
+.Ayoola_Page_Layout_Edit_File_middle{
+	padding: 10px ;
+	margin: 0 auto;
+	overflow: hidden;
+	max-width:940px;
+	min-height:150px;
+}
+
+/* Website template by freewebsitetemplates.com */
+/*------------------------------ HEADER ------------------------------*/
+#navigation li a, #contact form input.btn {
+	background: url(../images/buttons.png) no-repeat;
+}
+/*------------------------------ HEADER ------------------------------*/
+#header {
+/* 	background: url(../images/bg-header.png) no-repeat center top;
+ */	min-height: 90px;
+	text-align: right;
+}
+#header > div {
+	max-width:940px;
+	margin: 0 auto;
+	padding: 0 10px;
+}
+/** Logo **/
+#logo {
+	float: left;
+}
+/** Navigation **/
+#navigation {
+	list-style: none;
+	display: inline-block;
+	max-width: 610px;
+	margin: 0;
+	padding: 0;
+}
+#navigation li {
+	float: left;
+	font-size: 14pt;
+	min-height: 60px;
+	width: 138px;
+	margin-left: -16px;
+	text-align: center;
+}
+#navigation li a {
+	background-position: -144px 0;
+	color: #e4dec0;
+	display: block;
+	font-family: 'Caudex-Regular';
+	font-size: 14px;
+	min-height: 60px;
+	width: 138px;
+	line-height: 60px;
+	outline: 0;
+	text-decoration: none;
+	text-shadow: 1px 1px #3d3413;
+	text-transform: uppercase;
+	background: url(/png/1/button2.png) no-repeat;
+}
+#navigation li a:hover, #navigation li.selected a {
+	background: url(/png/3/button1.png) no-repeat;
+	background-position: 0 0;
+	color: #fff;
+}
+#navigation li a:hover {
+	height: 66px;
+	line-height: 66px;
+}
+#connect a {
+	background: url(/png/7/social-media.png) no-repeat;
+	display: inline-block;
+	height: 26px;
+	width: 25px;
+	margin-right: 5px;
+}
+#connect a.facebook {
+	background-position: -35px 0;
+}
+#connect a.twitter {
+	background-position: -35px -38px;
+}
+#connect a.googleplus {
+	background-position: -35px -77px;
+}
+#connect a.facebook:hover {
+	background-position: 0 0;
+}
+#connect a.twitter:hover {
+	background-position: 0 -38px;
+}
+#connect a.googleplus:hover {
+	background-position: 0 -77px;
+}
+.footer {
+	max-width: 940px;
+	margin: 0 auto;
+	padding: 5px;
+}
+.orange-bar {
+	background-color: orange; 
+	width: 100%;
+	
+}
+.section {
+	max-height: 150px;
+	overflow: hidden;
+	min-width: 210px; 
+	max-width: 480px; 
+	float:left;
+	margin-left: 10px;
+	
+}

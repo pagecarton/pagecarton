@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DOCUMENT_ELEMENT table_name="whitelist" creation_time="1377295189" table_version="0.05" table_class="Ayoola_Api_Whitelist" creation_ip="2130706433">
+  <RECORDS/>
+  <TABLE_SETTINGS>
+    <DATA_TYPES api_label="INPUTTEXT" public_key="INPUTTEXT" hash="INPUTTEXT" whitelist_id="INT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

@@ -1,0 +1,9 @@
+@charset "utf-8";
+/* FORM */
+/*@import "../ayoola_default_style.css";*/
+
+html, body {
+    margin-left: 0;
+    margin-right: 0;
+	margin: 0;
+}

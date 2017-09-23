@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="account" creation_time="1397811518" table_version="0.03" module_version="1.00" table_class="Application_Database_Account" creation_ip="2130706433">
+  <RECORDS>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="username"><![CDATA[joywealth]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="password"><![CDATA[i8C*q{=dogQ8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="hostname"><![CDATA[localhost]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="adapter"><![CDATA[mysql]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="account_id"><![CDATA[3]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="username"><![CDATA[fiweranshe]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="password"><![CDATA[zt8QtsATnfstByPw]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="hostname"><![CDATA[localhost]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="adapter"><![CDATA[mysql]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="account_id"><![CDATA[4]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES hostname="INPUTTEXT" username="INPUTTEXT" password="INPUTTEXT" adapter="INPUTTEXT" account_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

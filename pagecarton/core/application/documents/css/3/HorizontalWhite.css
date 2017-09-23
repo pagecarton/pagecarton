@@ -1,0 +1,88 @@
+@charset "utf-8";
+
+/* 
+	HorizontalWhite menu css file
+*/
+
+/* 
+	The Container of the whole menu
+*/
+
+.Ayoola_MenuHorizontalWhiteContainer
+{
+	list-style:none;
+	background: #eee ;
+	border-radius: .4em;
+	border: 0.1em groove #ccc;
+	padding: 0.1em ;
+	overflow: hidden;
+	float:left;
+}
+
+/* 
+	Each option box
+*/
+
+.Ayoola_MenuHorizontalWhite,
+.Ayoola_MenuHorizontalWhite a,
+.Ayoola_MenuHorizontalWhite a:active,
+.Ayoola_MenuHorizontalWhite a:focus,
+.Ayoola_MenuHorizontalWhite a:hover,
+.Ayoola_MenuHorizontalWhite a:visited,
+.Ayoola_MenuHorizontalWhiteSelectedOption,
+.Ayoola_MenuHorizontalWhiteSelectedOption a,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:active,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:focus,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:hover,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:visited
+{
+	min-width:115px;
+	float:left;
+	line-height:2em;
+	text-align:center;
+	border-radius: .4em;
+	background-color:#fff;
+}
+
+/* 
+	Each option box outside the link
+*/
+
+.Ayoola_MenuHorizontalWhite,
+.Ayoola_MenuHorizontalWhiteSelectedOption
+{
+	padding: .1em;
+	margin: .1em;
+	border: .01em groove #eee;
+}
+
+/* 
+	The active option
+*/
+
+.Ayoola_MenuHorizontalWhiteSelectedOption,
+.Ayoola_MenuHorizontalWhiteSelectedOption a,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:visited,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:hover,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:active,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:focus
+{
+	background-color: #EEE;
+	color: green;
+}
+
+
+/* 
+	What happens onmouseover option
+*/
+
+.Ayoola_MenuHorizontalWhite a:active,
+.Ayoola_MenuHorizontalWhite a:focus,
+.Ayoola_MenuHorizontalWhite a:hover,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:active,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:hover,
+.Ayoola_MenuHorizontalWhiteSelectedOption a:focus
+{
+	color:#fff;
+	background-color:#172c43;
+}

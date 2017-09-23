@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="notificationmessage" creation_time="1397839331" table_version="0.01" module_version="1.00" table_class="Application_User_NotificationMessage" creation_ip="2130706433">
+  <RECORDS autoId="9">
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1337803376]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="notificationmessage_id"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="from"><![CDATA[account@account.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="subject"><![CDATA[New Account Opened]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="body"><![CDATA[Hello @@@firstname@@@,
+
+Thank you for creating an account. This is a confirmation that you have successfully gone through our account opening process.
+We have included in this email useful information about your account. For your record, you can print this email as a confirmation.
+
+Username: @@@username@@@
+Email: @@@email@@@
+
+
+Regards,
+
+Registration Team 
+______________________________________________________
+THIS IS AN AUTOMATED RESPONSE. 
+***DO NOT REPLY TO THIS EMAIL****]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1379707470]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1337779574]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="notificationmessage_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="from"><![CDATA[verification@account.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="subject"><![CDATA[E-mail Verification]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="body"><![CDATA[Hello @@@firstname@@@,
+Someone has requested an account with us using this email address and with the following login details:
+
+Username: @@@username@@@
+Firstname: @@@firstname@@@
+Lastname: @@@lastname@@@
+Alternate Email: @@@email@@@
+
+To verify you requested this account, please click the following link. The link will expire by mid-night.
+
+*****ACTIVATION LINK*****
+@@@link@@@
+
+
+If clicking the link does not work. You can copy and paste the link to your browser.
+
+Regards
+
+Registration Team 
+______________________________________________________
+THIS IS AN AUTOMATED RESPONSE. 
+***DO NOT REPLY TO THIS EMAIL****]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1379705386]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1379705038]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="notificationmessage_id"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="from"><![CDATA[verification@account.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="subject"><![CDATA[E-mail Verified]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="body"><![CDATA[Congratulations @@@firstname@@@,
+
+You have successfully verified your e-mail address.
+
+Thank you for taking your time to verify your e-mail address. Email verification has been completed successfully. Many more services have been unlocked for you.
+
+*****USEFUL LINKS*****
+To manage your account, visit:
+http://@@@domainName@@@/account/
+
+To log in to your account, visit:
+http://@@@domainName@@@/accounts/signin/
+
+To signup for a new account, visit:
+http://@@@domainName@@@/accounts/signup/
+
+
+Regards,
+
+Registration Team,
+@@@domainName@@@
+______________________________________________________
+THIS IS AN AUTOMATED RESPONSE. 
+***DO NOT REPLY TO THIS EMAIL****]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1379706276]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="from"><![CDATA[noreply@pagecarton.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="subject"><![CDATA[Computer Based Test Results]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="body"><![CDATA[@@@firstname@@@
+
+Congratulations! you have just successfully completed a Computer Based Test (CBT) on http://@@@domainName@@@/.
+
+We have sent you this e-mail as a result sheet, highlighting your performance in the test.
+
+To view your result sheet and go through the corrections, please click the following link:
+
+*****RESULT SHEET*****
+@@@LINK_TO_RESULT_SHEET@@@
+
+No. of all questions: @@@TOTAL_NO_OF_QUESTIONS@@@
+Your score: @@@SCORE@@@
+Scored percentage: @@@PERCENTAGE@@@
+
+Some tests automagically loads a fresh question set on every attempt. So you may go back to the test page to try the over again. Click the following link to go back to the test page:
+@@@ARTICLE_LINK@@@
+
+We have tried our best to ensure all questions and answers are accurate. However we would like you to alert us, if you feel there might be some errors in the test. 
+
+The easiest way to reach us is to fill the contact form on our website: http://@@@domainName@@@/site/contact/
+
+Regards,
+
+CBT Team,
+@@@domainName@@@
+______________________________________________________
+THIS IS AN AUTOMATED RESPONSE. 
+***DO NOT REPLY TO THIS EMAIL****]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1394212124]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="notificationmessage_id"><![CDATA[4]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1402468117]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="notificationmessage_id"><![CDATA[997-0-5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="from"><![CDATA[no-reply@pagecarton.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="subject"><![CDATA[Welcome to the Admin Group]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="body"><![CDATA[Dear @@@firstname@@@,
+
+Congratulations! We are pleased to notify you that you have been successfully added to the Admin Group of this website; This means that you are now enabled to perform administrative functions on the website. You can now also replicate the process by adding other users to the Admin Group.
+
+With the same username and password you have been using to sign into the website, you will be able to access the Control Panel of the website. The Control Panel can be accessed on: http://@@@domainName@@@/ayoola/
+
+Please take caution while working on the website as a little mistake can cause data loss. One of the precaution measures is to ensure you make a regular backup of the website. The website backup utility is available on: http://@@@domainName@@@/ayoola/backup/
+
+Once again, congratulations!
+Webmaster,
+http://@@@domainName@@@/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1402479063]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1403989727]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="notificationmessage_id"><![CDATA[1077-0-6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="from"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="subject"><![CDATA[Your new e-mail address]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="body"><![CDATA[Dear @@@firstname@@@,
+
+Congratulations! We are pleased to notify you that a new e-mail address has been created for you successfully. Please note that your new e-mail address is different from the username and password that you used to sign up on the website. The new e-mail address has a separate password as well; Ask your webmaster if you are unsure what your e-mail password is.
+
+There are several ways by which you can access your new e-mail. Some of the ways are: 
+
+1. Web-mail: Access your e-mail by going to http://mail.ComeRiver.com/mail/
+To access your e-mail on the web, you need to first log on with your website username and password, before you are able to log into your e-mail. 
+
+2. Using your favorite e-mail client on the computer, mobile phones, tablets and other internet enabled device. 
+Your new e-mail feature includes IMAP and POP3 access. It also includes SMTP authenticated outgoing mail-server. This means you can send and receive e-mail from any e-mail client of any internet-enabled device.
+
+Use the following generic settings when required
+E-mail: @@@new_email@@@
+Username: @@@new_email@@@
+Password: ***hidden*** 
+Incoming (IMAP) mail server: mail.ComeRiver.com
+Security: On (TLS)
+Port: 993
+Outgoing (SMTP) mail server: mail.ComeRiver.com
+Security: off
+Port: 25
+
+Feel free to begin sharing your new e-mail address with friends, relatives and colleagues. 
+
+Once again, congratulations!
+Webmaster,
+http://@@@domainName@@@/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1432194177]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="8">
+      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1413049480]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="notificationmessage_id"><![CDATA[1077-0-8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="from"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="subject"><![CDATA[Profile Update]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="body"><![CDATA[@@@firstname@@@
+
+Congratulations! you have just updated your profile on @@@organization_name@@@. 
+
+
+*****PROFILE INFORMATION*****
+
+Profile Link: @@@profile_link@@@ (click on the link to view your profile)
+Display Name: @@@display_name@@@
+Profile Description: @@@profile_description@@@
+
+Edit your profile at anytime by logging in to your account.
+
+
+Regards,
+
+@@@organization_name@@@,
+@@@domainName@@@
+______________________________________________________
+THIS IS AN AUTOMATED RESPONSE. 
+***DO NOT REPLY TO THIS EMAIL****]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1413050005]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES from="INPUTTEXT" to="INPUTTEXT" subject="INPUTTEXT" body="TEXTAREA" mode_id="INT, FOREIGN_KEYS = Application_User_NotificationMessage_Mode" creation_date="INT" modified_date="INT" notificationmessage_id="INPUTTEXT"/>
+    <FOREIGN_KEYS Application_User_NotificationMessage_Mode="mode_id"/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

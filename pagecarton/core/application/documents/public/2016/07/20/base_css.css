@@ -1,0 +1,45 @@
+/* Accessible News Slider: Base styles */
+
+div.jqans-wrapper {
+	-x-system-font:none;
+	font-family:arial,helvetica,clean,sans-serif;
+	font-size:13px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:1.231;
+	color:#666666;
+}
+
+div.jqans-wrapper img {
+	border: 0;
+}
+
+div.jqans-wrapper ul,
+div.jqans-wrapper li,
+div.jqans-wrapper h1,
+div.jqans-wrapper p {
+	margin: 0;
+	padding: 0;
+}
+
+div.jqans-wrapper {
+	position: relative;
+	overflow: hidden;
+}
+
+div.jqans-wrapper ul {
+	position: relative;
+	left: 0;
+	width: auto;
+	list-style-type: none;
+	overflow: hidden;
+	z-index: 1;
+}
+
+div.jqans-wrapper li {
+	float: left;
+	display: inline;
+}

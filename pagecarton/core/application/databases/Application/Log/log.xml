@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="log" creation_time="1398083770" table_version="0.01" module_version="1.00" table_class="Application_Log_Log" creation_ip="2130706433">
+  <RECORDS autoId="7">
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_name"><![CDATA[Error]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_viewer"><![CDATA[Application_Log_View_Error]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_description"><![CDATA[Error Log]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_name"><![CDATA[Access]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_viewer"><![CDATA[Application_Log_View_Access]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_description"><![CDATA[Access Log]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_name"><![CDATA[SignIn]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_viewer"><![CDATA[Application_Log_View_SignIn]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_description"><![CDATA[Logs all the login attempts into the application]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[3]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_name"><![CDATA[SignOut]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_viewer"><![CDATA[Application_Log_View_SignOut]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_description"><![CDATA[Keeps a log of User Sign Out]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[4]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_name"><![CDATA[ForgotUsernameOrPassword]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_viewer"><![CDATA[Application_Log_View_ForgetUsernameOrPassword]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_description"><![CDATA[Logs the process of Forgot User or Password]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[5]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="log_name"><![CDATA[General]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_viewer"><![CDATA[Application_Log_View_General]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_description"><![CDATA[General log for this website.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="log_id"><![CDATA[713-0-6]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES log_name="INPUTTEXT, UNIQUE" log_description="TEXTAREA" log_viewer="INPUTTEXT" auth_level="INT, FOREIGN_KEYS = Ayoola_Access_AuthLevel" log_id="INPUTTEXT"/>
+    <FOREIGN_KEYS Ayoola_Access_AuthLevel="auth_level"/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

@@ -1,0 +1,18 @@
+<?php return array (
+  'ay__oneness0' => 'pageEditText',
+  'ay__oneness0advanced_parameters' => 'advanced_parameter_name[]=markup_template_object_name&advanced_parameter_value[]=Application_Category_View&advanced_parameter_name[]=allow_dynamic_category_selection&advanced_parameter_value[]=1&advanced_parameter_name[]=build_meta_data&advanced_parameter_value[]=1&advanced_parameter_name[]=pc_module_url_values_category_offset&advanced_parameter_value[]=0&wrapper_name=',
+  'ay__oneness0editable' => '<section class="productname" style="padding:2em 1em 2em 1em;  background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url({{{cover_photo}}});  background-size: cover;  color: #fff;"><h1>{{{category_label}}}</h1><p><br></p>{{{category_description}}} <span style="font-size:12px;">{{{auto_create_link}}}</span><span style="font-size:11px;"> {{{edit_link}}}</span></section>',
+  'ay__oneness0_parameters' => 'advanced_parameters,editable,editable',
+  'ay__middlebar0' => 'articleShowAll',
+  'ay__middlebar0advanced_parameters' => 'advanced_parameter_name[]=pc_module_url_values_category_offset&advanced_parameter_value[]=0&advanced_parameter_name[]=allow_dynamic_category_selection&advanced_parameter_value[]=1&advanced_parameter_name[]=button_value&advanced_parameter_value[]=More...&advanced_parameter_name[]=cover_photo_width&advanced_parameter_value[]=600&advanced_parameter_name[]=cover_photo_height&advanced_parameter_value[]=600&wrapper_name=',
+  'ay__middlebar0option' => '20',
+  'ay__middlebar0category_name' => '',
+  'ay__middlebar0article_types' => '',
+  'ay__middlebar0template_name' => 'ItemsList',
+  'ay__middlebar0_parameters' => 'advanced_parameters,option,category_name,article_types,template_name,option,category_name,article_types,template_name',
+  'ay__middlebar1' => 'pageEditText',
+  'ay__middlebar1advanced_parameters' => 'advanced_parameter_name[]=markup_template_object_name&advanced_parameter_value[]=Application_Category_View&advanced_parameter_name[]=allow_dynamic_category_selection&advanced_parameter_value[]=1&advanced_parameter_name[]=pc_module_url_values_category_offset&advanced_parameter_value[]=0&advanced_parameter_name[]=pc_module_url_values_request_fallback&advanced_parameter_value[]=1&object_access_level[]=98&object_access_level[]=99&wrapper_name=well',
+  'ay__middlebar1editable' => '<section class="productname" style="padding:2em 1em 2em 1em; "><p style="text-align: center;"><span style="font-size:11px;">Add a new {{{post_type}}} to the "{{{category_label}}}" category.</span></p><p style="text-align: center;">&nbsp;</p><p style="text-align: center;"><a class="btn btn-primary" href="/tools/classplayer/get/name/Application_Article_Creator?article_type={{{post_type}}}&amp;category_name={{{category_name}}}&amp;pc_post_info_to_edit=article_title,article_description,document_url_base64,item_price,item_old_price,category_name" rel="spotlight"><span style="font-size:11px;">Add new</span></a></p></section>',
+  'ay__middlebar1_parameters' => 'advanced_parameters,editable',
+  'section_list' => 'ay__oneness,ay__middlebar,',
+);

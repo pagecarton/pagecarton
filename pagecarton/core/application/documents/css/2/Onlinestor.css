@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* FORM */
+@import "/css/default/form.css";
+
+/* CLASSES */
+@import "/css/default/classes.css";
+
+/* HEADERS */
+@import "/css/default/headers.css";
+
+/* LINKS */
+@import "/css/default/links.css";
+
+/* TABLE */
+@import "/css/default/table.css";
+
+body{
+	color: #000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background: #fff;
+	margin: 0;
+	padding: 0;
+	min-width:960px;
+}
+.Ayoola_Page_Layout_Edit_File_header{
+	padding: 10px;
+	overflow: hidden;
+}
+.Ayoola_Page_Layout_Edit_File_headerContainer{
+	padding-left: 2%;
+	padding-right: 2%;
+}
+.Ayoola_Page_Layout_Edit_File_content{
+	padding-left: 2%;
+	padding-right: 2%;
+	padding: 10px ;
+	overflow: hidden;
+}
+.Ayoola_Page_Layout_Edit_File_contentContainer{
+	padding: 5px ;
+}
+.Ayoola_Page_Layout_Edit_File_footer{
+	padding: 10px ;
+	overflow: hidden;
+}
+.Ayoola_Page_Layout_Edit_File_footerContainer{
+	padding: 5px ;
+}
+
+.Ayoola_Page_Layout_Edit_File_left{
+	float: left;
+	width: 220px;
+	padding: 10px ;
+}
+.Ayoola_Page_Layout_Edit_File_right {
+	float: right;
+	width: 220px;
+	padding: 10px ;
+	margin: 0 auto;
+}
+.Ayoola_Page_Layout_Edit_File_middle{
+	background: white;
+	border: solid 1em #172c43;
+	padding: 10px ;
+	margin: 0 auto;
+	overflow: hidden;
+	min-width:390px;
+}

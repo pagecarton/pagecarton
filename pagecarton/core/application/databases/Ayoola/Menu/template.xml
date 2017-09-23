@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="template" creation_time="1407537395" table_version="0.02" module_version="1.00" table_class="Ayoola_Menu_Template" creation_ip="2130706433">
+  <RECORDS autoId="5">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[HorizontalWhite]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[1077-0-1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Horizontal White Menu Style]]></TABLE_FIELD>  
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li class='{{{li-active-class}}} {{{li-ul-class}}}'&gt;
+&lt;a onClick=&quot;{{{ayoola_spotlight}}}&quot; class='{{{a-active-class}}}' href='{{{url}}}'&gt;&lt;span&gt;{{{option_name}}}&lt;/span&gt;&lt;/a&gt;
+{{{sub_menu}}}
+&lt;/li&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;----&quot;,&quot;css&quot;,&quot;javascript&quot;,&quot;padding&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;div class='cssmenuHorizontalWhite'&gt;
+&lt;ul&gt;
+]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_suffix"><![CDATA[&lt;/ul&gt;
+&lt;/div&gt;
+]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[[&quot;\/public\/2014\/08\/08\/script.js&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2014\/08\/08\/styles.css&quot;]]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[White Sidebar Menu Style]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[WhiteSidebarMenu]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li class='{{{li-active-class}}} {{{li-ul-class}}}'&gt;&lt;a onClick=&quot;{{{ayoola_spotlight}}}&quot;  class='{{{a-active-class}}}' href='{{{url}}}'&gt;&lt;span&gt;{{{option_name}}}&lt;/span&gt;&lt;/a&gt;
+{{{sub_menu}}}
+&lt;/li&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;----&quot;,&quot;css&quot;,&quot;padding&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;div class='WhiteSideBarMenu '&gt;
+&lt;ul&gt;
+]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_suffix"><![CDATA[&lt;/ul&gt;    
+&lt;/div&gt;
+]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2014\/08\/09\/styles.css&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[1077-0-2]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Black Accordion Side Menu Style]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[BlackAccordionSide-menu]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li class='{{{li-active-class}}} {{{li-ul-class}}} '&gt;&lt;a onClick=&quot;{{{ayoola_spotlight}}}&quot;  class='{{{a-active-class}}} pc-bg-color' href='{{{url}}}'&gt;&lt;span&gt;{{{option_name}}}&lt;/span&gt;&lt;/a&gt;
+{{{sub_menu}}}
+&lt;/li&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;----&quot;,&quot;css&quot;,&quot;javascript&quot;,&quot;padding&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;div class='BlackSideBarAccordion'&gt;
+&lt;ul&gt;
+]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_suffix"><![CDATA[&lt;/ul&gt;
+&lt;/div&gt;
+]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[[&quot;\/public\/2014\/08\/09\/script.js&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2014\/08\/09\/styles_2.css&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[1077-0-3]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Horizontal Grayish Menu Style]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[HorizontalGrayish]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li class='{{{li-active-class}}} {{{li-ul-class}}}'&gt;
+&lt;a onClick=&quot;{{{ayoola_spotlight}}}&quot; class='{{{a-active-class}}}' href='{{{url}}}'&gt;&lt;span&gt;{{{option_name}}}&lt;/span&gt;&lt;/a&gt;
+{{{sub_menu}}}
+&lt;/li&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;css&quot;,&quot;padding&quot;]]]></TABLE_FIELD>  
+      <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;div style='border-bottom:0;' class='HorizontalGrayish'&gt;
+&lt;ul&gt;
+]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_suffix"><![CDATA[&lt;/ul&gt;
+&lt;/div&gt;
+]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2014\/12\/18\/styles_css.css&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[1077-0-4]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES template_name="INPUTTEXT,UNIQUE" template_label="INPUTTEXT" template_screenshot="INPUTTEXT" markup_template="INPUTTEXT" markup_template_prefix="INPUTTEXT" markup_template_suffix="INPUTTEXT" template_options="JSON" javascript_files="JSON" css_files="JSON" template_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

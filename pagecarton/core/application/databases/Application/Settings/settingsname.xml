@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="settingsname" creation_time="1497205788" table_version="0.04" module_version="1.00" table_class="Application_Settings_SettingsName" creation_ip="0">
+  <RECORDS autoId="13">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Settings_Payment]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Payments]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[1]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[SiteInfo]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[1078]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Settings_SiteInfo]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[CompanyInformation]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Settings_CompanyInfo]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[4]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Page_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[6]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="7">
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[UserAccount]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_User_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[8]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="9">
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Articles]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Article_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[10]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="10">
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Documents]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Doc_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[11]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="11">
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Domains]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Domain_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[7]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="12">
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Profiles]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[1077]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Profile_Settings]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="13">
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Security]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[10977]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Settings_Security]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="14">
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[E-mail]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[10978]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_User_Email_Settings]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES settingsname_id="INT, RELATIVES = Application_Settings" settingsname_name="INPUTTEXT, UNIQUE" class_name="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES Application_Settings="settingsname_id"/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="authlevel" creation_time="1475075196" table_version="0.10" module_version="1.00" table_class="Ayoola_Access_AuthLevel" creation_ip="2130706433">
+  <RECORDS autoId="6">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="authlevel_id"><![CDATA[6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[99]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_name"><![CDATA[Super User (Admin)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_description"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="storage_size"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_allowed_posts"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_allowed_posts_private"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="authlevel_id"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_name"><![CDATA[All Signed-in Users]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_description"><![CDATA[All standard signed-in users]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="storage_size"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_allowed_posts"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_allowed_posts_private"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="authlevel_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_name"><![CDATA[Everyone]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_description"><![CDATA[This user group is the default level. It indicates that the user is not currently logged in.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[[&quot;display_picture&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[/public/2014/09/05/default_user_256_png.png]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="storage_size"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_allowed_posts"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_allowed_posts_private"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="auth_name"><![CDATA[Owner]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[98]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_description"><![CDATA[This grants a profile or post owner privileges on a Profile Page or Post that they own]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="authlevel_id"><![CDATA[1496-0-6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="storage_size"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_allowed_posts"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_allowed_posts_private"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="auth_name"><![CDATA[Invited Users]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[97]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_description"><![CDATA[This grants priviledge to someone that is explicitly invited to view a post.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="authlevel_id"><![CDATA[1496-0-7]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="storage_size"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_allowed_posts"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_allowed_posts_private"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES auth_level="INT,UNIQUE" auth_name="TEXTAREA,UNIQUE" auth_description="TEXTAREA" display_picture="INPUTTEXT" storage_size="INPUTTEXT" max_allowed_posts="INPUTTEXT" max_allowed_posts_private="INPUTTEXT" parent_access_level="JSON" additional_forms="JSON" auth_options="JSON" authlevel_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

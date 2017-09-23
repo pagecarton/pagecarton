@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="">
+<!-- Bootstrap Core CSS --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/css/bootstrap.min.css" rel="stylesheet">
+<!-- Custom CSS --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/css/small-business.css" rel="stylesheet">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --><!-- WARNING: Respond.js doesn't work if you view the page via file:// --><!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]--><link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+</head>
+<body style="background-color: #ddd;" data-pc-section-name="body">
+
+    <!-- Navigation -->
+<nav id="mainnav" class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-pc-menu-id-list=",bs-example-navbar-collapse-1" data-pc-menu-ul-class-bs-example-navbar-collapse-1="nav navbar-nav navbar-right" data-pc-menu-li-active-class-bs-example-navbar-collapse-1="dropdown" data-pc-menu-li-ul-class-bs-example-navbar-collapse-1="dropdown-menu"><div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar">&nbsp;</span>
+                    <span class="icon-bar">&nbsp;</span>
+                    <span class="icon-bar">&nbsp;</span>
+                </button>
+                <a class="navbar-brand" style="height:auto;height:initial;height:unset;" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/"><img style="max-height:50px;" name="pc-logo" src="<?php echo Ayoola_Doc::getLogo(); ?>"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <?php echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'mainnav', 'li-active-class' => 'dropdown', 'ul-class' => 'nav navbar-nav navbar-right', 'ul-id' => '', )  ); ?>
+</div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav><!-- Page Content --><div class="container" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
+
+        <!-- Heading Row -->
+		<section data-pc-all-sections="1">	
+									@@@oneness@@@
+									<div class="">
+										<div class="row">
+											<div class="col-lg-12 12u">
+												@@@middlebar@@@
+										   </div>
+										</div> 
+										<div class="row">
+											<div class="col-lg-6 6u 6u(medium) 12u$(xsmall)">
+												@@@twosome1@@@
+											</div>
+											<div class="col-lg-6 6u 6u(medium) 12u$(xsmall)">
+												@@@twosome2@@@
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)"> 
+												@@@threesome1@@@
+										   </div>
+											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+												@@@threesome2@@@
+											</div> 
+											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+												@@@threesome3@@@
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="col-lg-3 3u 6u(medium) 12u$(xsmall)">
+												@@@foursome1@@@
+										   </div>
+											<div class="col-lg-3 3u 6u$(medium) 12u$(xsmall)">
+												@@@foursome2@@@
+											</div> 
+											<div class="col-lg-3 3u 6u(medium) 12u$(xsmall)">
+												@@@foursome3@@@
+											</div> 
+											<div class="col-lg-3 3u 6u$(medium) 12u$(xsmall)">    
+												@@@foursome4@@@
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+												@@@leftbar@@@
+										   </div>
+											<div class="col-lg-8 8u 12u$(medium) 12u$(xsmall)">
+												@@@leftbarright@@@
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="col-lg-8 8u 12u$(medium) 12u$(xsmall)">
+												@@@rightbarleft@@@
+											</div> 
+											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+												@@@rightbar@@@
+											</div>   
+										</div> 
+									</div> 
+									@@@lastoneness@@@
+								</section><div class="row" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
+		
+@@@headline@@@
+
+{@@@headline
+<section id="headline"><div class="col-md-8">
+                <img class="img-responsive img-rounded" src="http://placehold.it/900x350" alt="">
+</div>
+            <!-- /.col-md-8 -->
+            <div class="col-md-4">
+                <h1>Business Name or Tagline</h1>
+                <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+                <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+            </div>
+            <!-- /.col-md-4 -->
+ 		</section>
+headline@@@}
+
+</div>
+        <!-- /.row -->
+
+        <hr>
+<!-- Call to Action Well -->
+@@@actionwell@@@
+
+{@@@actionwell
+<section id="actionwell"><div class="row">
+            <div class="col-lg-12">
+                <div class="well text-center">
+                    This is a well that is a great spot for a business tagline or phone number for easy access!
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        </section>
+actionwell@@@}
+<!-- /.row --><!-- Content Row --><div class="row" data-pc-section-autonamed="3" data-pc-section-name="pc-body-3">
+ 		
+@@@content@@@
+
+{@@@content
+<section id="content"><div class="col-md-4">
+                <h2>Heading 1</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
+                <a class="btn btn-default" href="#">More Info</a>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-4">
+                <h2>Heading 2</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
+                <a class="btn btn-default" href="#">More Info</a>
+            </div>
+            <!-- /.col-md-4 -->
+            <div class="col-md-4">
+                <h2>Heading 3</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
+                <a class="btn btn-default" href="#">More Info</a>
+            </div>
+            <!-- /.col-md-4 -->
+        </section>
+content@@@}
+
+</div>
+        <!-- /.row -->
+
+        <!-- Footer -->
+        
+@@@footer@@@
+
+{@@@footer
+<footer id="footer"><style type="text/css">.pc-social 
+{
+	text-align: center;
+}
+
+.pc-social ul 
+{
+	padding:0.5em;
+	text-align: center;
+    overflow: auto;
+}
+ 
+.pc-social ul li {
+    list-style-type: none;
+   display:inline-block;
+}
+ 
+.pc-social ul li a i {
+    background: #205D7A;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 25px;
+    text-align: center;
+    margin-right: 10px;
+    padding-top: 15%;
+    transition: all 0.2s ease-in-out;
+}
+.pc-social .fa-facebook {
+    background:#3b5998;
+} 
+.pc-social .fa-linkedin {
+    background:#007bb6;
+}
+.pc-social .fa-twitter {
+    background:#00aced;
+}
+.pc-social .fa-google-plus {
+    background:#dd4b39;
+}
+.pc-social ul li a i:hover {
+    opacity: .7;
+}
+</style>
+<div class="pc-social">
+<ul>
+<li><a href="http://facebook.com/PageCarton" target="_blank"><i class="fa fa-facebook">&nbsp;</i></a></li>
+	<li><a href="http://linkedin.com/company/PageCarton" target="_blank"><i class="fa fa-linkedin">&nbsp;</i></a></li>
+	<li><a href="http://twitter.com/PageCarton" target="_blank"><i class="fa fa-twitter">&nbsp;</i></a></li>
+	<li><a href="http://plus.google.com/+PageCarton" target="_blank"><i class="fa fa-google-plus">&nbsp;</i> </a></li>
+	<li><a href="http://instagram.com/PageCarton" target="_blank"><i class="fa fa-instagram">&nbsp;</i> </a></li>
+</ul>
+</div>
+
+            <div class="row">
+                <div style="text-align:center; font-size:smaller;" class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2016. | Built with <a href="http://www.pagecarton.org/" target="parent"> PageCarton CMS</a></p>
+                </div>
+            </div>
+        </footer>
+footer@@@}
+
+</div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/jquery.js"></script><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/bootstrap.min.js"></script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+</body>
+</html>

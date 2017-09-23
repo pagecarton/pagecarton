@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+/* LINKS */
+
+a img
+{ 
+	border: none;
+}
+
+a
+{
+	text-decoration: none;
+	color: #17b;
+	
+}

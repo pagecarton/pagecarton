@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="">
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="/layout/BootstrapBlogPost/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <link href="/layout/BootstrapBlogPost/css/modern-business.css" rel="stylesheet">
+    <link href="/layout/BootstrapBlogPost/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
+          <a href="/" title="Go to the home page" class="navbar-brand">
+			<?php echo ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ); ?><?php echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="float:left;margin:1em;vertical-align:top;" title="Change organization name" rel="spotlight;width=300px;height=300px;" href="/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/CompanyInformation/"> x </a>' : null; ?>
+		  </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
+				<?php
+					//	Access Menu
+					echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'accessMain', 'ul-class' => 'dropdown-menu', 'li-active-class' => 'active', 'ul-1-class' => 'dropdown-menu', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+				?>
+            </li>
+			<?php 
+			if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
+			{
+				echo '<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>';  
+					//	if( stripos( Ayoola_Application::getPresentUri(), '/ayoola' ) === 0 )
+						{
+							echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'headerAdmin', 'ul-class' => 'dropdown-menu', 'li-active-class' => 'active', 'ul-1-class' => 'dropdown-menu', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+						}
+				echo '</li>';
+			}
+			?>
+			<?php
+				//	On the fly Menu
+				foreach( Ayoola_Menu::getRawMenuOptions() as $key => $each )
+				{
+					echo '<li class="dropdown">
+						  <a href="#" class="dropdown-toggle" data-toggle="dropdown">' . $key . ' <b class="caret"></b></a>';
+					echo Ayoola_Menu_Demo::viewInLine( array( 'raw-options' => $each, 'ul-class' => 'dropdown-menu', 'li-active-class' => 'active', 'ul-1-class' => 'dropdown-menu', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+					echo '</li>';
+				}
+			?>
+		  </ul>
+			<?php	
+				//	Insert the header menu
+				echo Ayoola_Menu_Demo::viewInLine( array( 'option' => 'headerMain', 'ul-class' => 'nav navbar-nav navbar-right', 'ul-1-class' => 'dropdown-menu', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+			?>
+			<?php
+				//	Put the homepage link
+		//		echo Ayoola_Menu_Demo::viewInLine( array( 'raw-options' => array( array( 'enabled' => 1, 'option_id' => 11, 'option_name' => 'Home', 'url' => '/', 'title' => 'Home Page', 'logged_in' => 1, 'logged_out' => 1, 'append_previous_url' => 0, 'auth_level' => 0, 'menu_id' => '4', 'link_options' => NULL, 'sub_menu_name' => '', ) ), 'ul-class' => 'nav navbar-nav navbar-right', 'ul-1-class' => 'dropdown-menu', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'a-ul-append' => ' <b class="caret"></b> ', 'a-ul-attributes' => array( 'data-toggle' => "dropdown" ) ) );
+			?>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container -->
+    </nav>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+        
+		  <div title='This is the "header" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__header'><div class='DragBox' id='1b7462e8a4eb7f1ca0c6f3ca337b6f12125' data-object_name='objectEmbed' ><span data-parameter_name='view' >PHP Object</span><button href="javascript:;" title="Add a list of PHP classes to embed, separated by comma."  class="" onclick="ayoola.div.makeEditable( this.nextSibling ); this.nextSibling.style.display='block';"> edit </button><span data-parameter_name="editable" style="padding:1em;display:none;" onclick="this.nextSibling.style.display='';">Ayoola_Access_Logout</span><button href="javascript:;" style="display:none;" class="" title="Add a list of PHP classes to embed, separated by comma." onclick="this.previousSibling.style.display='none';this.style.display='none';"> hide </button><button name="advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12125" href="javascript:;" class="" title="Click to show or hide advanced settings" onclick="var b = document.getElementsByName( this.name ); for( var a = 0; a < b.length; a++ ){ b[a].style.display = ( b[a].style.display == 'none' ) ? 'block' : 'none'; this.style.display = ''; } "> advanced </button><button name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.removeChild( this.parentNode );"> delete </button><form name='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12125'  method='post'  enctype='application/x-www-form-urlencoded'  data-parameter_name='advanced_parameters'  style='display:none;'  id='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12125_form_id'  action='#advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12125' >
+<fieldset>
+
+<legend>Use this facility to inject some parameters to this object.</legend>
+<input type="text"  name = "advanced_parameter_name[]"  placeholder = "Parameter Name"  value = ""  id = "advanced_parameter_name[]"  />
+<input type="text"  name = "advanced_parameter_value[]"  placeholder = "Parameter Value"  value = ""  id = "advanced_parameter_value[]"  />
+<button type='button' title='Duplicate this fieldset' onClick='this.parentNode.parentNode.insertBefore( this.parentNode.cloneNode( true ), this.parentNode );'>+</button>
+<button type='button' title='Remove this fieldset' onClick='confirm( "Delete all the elements in these fieldset?") ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;'>-</button>
+</fieldset>
+<input type='hidden' name='eaed16e482378fe4b2a0fe947b97528c7bff3' id='eaed16e482378fe4b2a0fe947b97528c7bff3' value='advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12125' />
+<input type='hidden' name='b46cf441d4b3fa6e601f1c9bf0e2ec0ad4880c' id='b46cf441d4b3fa6e601f1c9bf0e2ec0ad4880c' value='107374182' />
+<div class='hidden'><label for='a4f4171c79ec095ce6ea8f40aad078b70c67bce8'>Delicious</label>
+<input type='text' id='a4f4171c79ec095ce6ea8f40aad078b70c67bce8' name='a4f4171c79ec095ce6ea8f40aad078b70c67bce8' value='' /></div></form>
+ </div></div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8">      
+		  <div title='This is the "middlebar" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__middlebar'></div>
+
+
+          <!-- the comment box -->
+          <div class="">
+			<div title='This is the "COMMENTS" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__COMMENTS'></div>
+
+          </div>
+        </div>
+        
+        <div class="col-lg-4">
+          <div class="well">
+			<div title='This is the "rightbar" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__rightbar'></div>
+
+			<div title='This is the "leftbar" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__leftbar'></div>
+
+          </div><!-- /well -->
+        </div>
+      </div>
+      
+      <hr>
+      
+      <footer>
+        <div class="row">
+          <div class="col-lg-12">
+			<div title='This is the "footer" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='ay__footer'></div>
+
+			
+            <p style="text-align:center;">
+				Copyright &copy; <?php echo Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain(); ?> <?php echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Organization Info" rel="spotlight;" href="/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/CompanyInformation/"> x </a>' : null; ?> <?php echo ' 2012 - ' . date( 'Y' ) ?> &middot; <a href="https://www.facebook.com/<?php echo ( Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'facebook_page_url' ) ? : 'AyoolaFramework' ); ?>">Facebook</a> &middot; <a href="https://www.twitter.com/<?php echo ( array_shift( explode( ',', Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'twitter_username' ) ) ) ? : 'AyoolaFramework' ); ?>">Twitter</a> &middot; <a href="https://plus.google.com/<?php echo ( Application_Settings_SocialMedia::getSettings( 'SocialMedia', 'googleplus_id' ) ? : '106833210591385672079' ); ?>" rel="publisher">Google+</a> &middot; Built with: Ayoola <a href="http://pagecarton.com/"> PHP Content Management Framework</a> on Bootstrap &middot; <?php echo Ayoola_Application::getUserInfo( 'access_level' ) == 99 ? '<a style="margin:1em;vertical-align:top;" title="Change Social Media Info" rel="spotlight;" href="/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SocialMedia/"> x </a>' : null; ?>
+			</p>
+          </div>
+        </div>
+      </footer>
+
+    </div><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/layout/BootstrapBlogPost/js/jquery.js"></script>
+    <script src="/layout/BootstrapBlogPost/js/bootstrap.js"></script>
+    <script src="/layout/BootstrapBlogPost/js/modern-business.js"></script>
+	<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+	<script type="text/javascript">
+
+	  //	Add top margin to scrollToView
+	  ayoola.scrollToViewMargin = '50px';
+	</script>
+  </body>
+</html>

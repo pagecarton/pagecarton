@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="viewableobject" creation_time="1502333845" table_version="0.04" module_version="1.00" table_class="Ayoola_Object_Table_ViewableObject" creation_ip="0">
+  <RECORDS autoId="12">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_User_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[userSignup]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Sign Up Form]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[14]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Menu]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[menuView]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Menu]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[16]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Page_Editor_Text]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[pageEditText]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[HTML Text]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[17]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Access_Login]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[accessLogin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Login Form]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[44]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Subscription_Cart]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[subscriptionCart]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Shopping Cart]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_ContactUs_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[contactUsCreator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Contact Form]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[101]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="7">
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Object_Embed]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[objectEmbed]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[PHP Object]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[190]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="8">
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Article_ShowAll]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[articleShowAll]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[162]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Posts]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="9">
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Page_Editor_Image]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[pageEditorImage]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Photo]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[997-0-2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="10">
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Slideshow_View]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[slideshowView]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[1077-0-3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Slideshow Photo Gallery]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="11">
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Form_View]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[formView]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[1077-0-4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Custom Form]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES class_name="TEXTAREA" object_name="TEXTAREA,UNIQUE" module="JSON" view_parameters="TEXTAREA" viewableobject_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

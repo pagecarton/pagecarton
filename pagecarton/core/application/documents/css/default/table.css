@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+/* TABLE */
+ 
+.pc-table caption,
+.pc-table{
+	width: 100%;
+    padding: 0.5em;
+/* 	font-size:	small;
+ */	overflow: scroll;
+	text-align: left;
+	margin-bottom:0.5em;
+}
+
+.pc-table th, .pc-table td {
+    padding:            0.5em;
+	text-align: left;
+	font-size:	small;
+}
+
+.pc-table th{
+	background-color: #444;
+	color: #fff;
+	text-transform: uppercase;
+	text-align: left;  
+}
+ 

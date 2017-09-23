@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="module" creation_time="1502328821" table_version="0.01" module_version="1.00" table_class="Ayoola_Object_Table_Module" creation_ip="0">
+  <RECORDS autoId="2">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="module_name"><![CDATA[Auth]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module_id"><![CDATA[1496]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES module_id="INT" module_name="INPUTTEXT, UNIQUE "/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

@@ -1,0 +1,89 @@
+@charset "utf-8";
+
+/* 
+	HorizontalGreen menu css file
+*/
+
+/* 
+	The Container of the whole menu
+*/
+
+.Ayoola_MenuHorizontalGreenContainer 
+{
+	background-color:#eee;
+	overflow: hidden;
+	line-height:2em;
+	border-radius: .4em;
+	border: .2em groove #ccc;
+	padding: 0.1em;
+	float:right;
+/*	position: fixed; */
+}
+
+/* 
+	Each option box
+*/
+
+.Ayoola_MenuHorizontalGreen,
+.Ayoola_MenuHorizontalGreen a,
+.Ayoola_MenuHorizontalGreen a:active,
+.Ayoola_MenuHorizontalGreen a:focus,
+.Ayoola_MenuHorizontalGreen a:hover,
+.Ayoola_MenuHorizontalGreen a:visited,
+.Ayoola_MenuHorizontalGreenSelectedOption,
+.Ayoola_MenuHorizontalGreenSelectedOption a,
+.Ayoola_MenuHorizontalGreenSelectedOption a:active,
+.Ayoola_MenuHorizontalGreenSelectedOption a:focus,
+.Ayoola_MenuHorizontalGreenSelectedOption a:hover,
+.Ayoola_MenuHorizontalGreenSelectedOption a:visited
+{
+	background-color:green;
+	text-align:center;
+	float:left;
+	margin: 0.1em;
+	padding: 0.3em;
+	color: #fff;
+	border-top-right-radius: 0.5em;
+	border-top-left-radius: 0.5em;
+	text-decoration: none;
+}
+
+/* 
+	Each option box outside the link
+*/
+
+.Ayoola_MenuHorizontalGreen,
+.Ayoola_MenuHorizontalGreenSelectedOption
+{
+	border: .01em groove green;
+}
+
+/* 
+	The active option
+*/
+
+.Ayoola_MenuHorizontalGreenSelectedOption,
+.Ayoola_MenuHorizontalGreenSelectedOption a,
+.Ayoola_MenuHorizontalGreenSelectedOption a:visited,
+.Ayoola_MenuHorizontalGreenSelectedOption a:hover,
+.Ayoola_MenuHorizontalGreenSelectedOption a:active,
+.Ayoola_MenuHorizontalGreenSelectedOption a:focus
+{
+	background-color: #EEE;
+	color: green;
+}
+
+/* 
+	What happens onmouseover option
+*/
+
+.Ayoola_MenuHorizontalGreen a:active,
+.Ayoola_MenuHorizontalGreen a:focus,
+.Ayoola_MenuHorizontalGreen a:hover,
+.Ayoola_MenuHorizontalGreenSelectedOption a:active,
+.Ayoola_MenuHorizontalGreenSelectedOption a:hover,
+.Ayoola_MenuHorizontalGreenSelectedOption a:focus
+{
+	background-color: #FFF;
+	color: green;
+}

@@ -1,0 +1,18 @@
+{
+    "name": "pagecarton/pagecarton",
+    "type": "project",
+    "description": "With PageCarton CMS, anyone could build a great website!",
+    "keywords": ["pagecarton", "cms"],
+    "homepage": "https://github.com/pagecarton/pagecarton",
+    "license": "GPL-2.0+",
+    "config": {
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "5.3.10"
+        },
+        "vendor-dir": "libraries/vendor"
+    },
+    "require": {
+        "php": ">=5.3.10"
+    }
+}

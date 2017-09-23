@@ -1,0 +1,169 @@
+/* Accessible News Slider : Theme Default */
+
+/*************************************
+	Height and Width values
+	these are extremely important!!!
+*************************************/
+
+/* the stories ul and lis must have the same height */
+div.jqans-wrapper.default .jqans-stories ul,
+div.jqans-wrapper.default .jqans-stories li {
+	height: 90px;
+}
+
+div.jqans-wrapper.default .jqans-stories-selector ul,
+div.jqans-wrapper.default .jqans-stories-selector li {
+	height: 10px;
+}
+
+/* 
+	wrapper and the container must have the same width
+	in order to get this value take the width value of
+	of story ".jqans-stories li" and times it by the 
+	number of stories you want to initially display.
+	
+	107px * 4 = 428px
+	
+ */
+div.jqans-wrapper.default,
+div.jqans-wrapper.default .jqans-container {
+/* 	width: 428px;
+ */}
+
+/* width value for each story li */
+div.jqans-wrapper.default li {
+ 	width: 107px;
+ }
+
+/* default styles */
+div.jqans-wrapper.default a {
+	text-decoration: none;
+	font-weight: normal;
+	color: #363636;
+	outline: none;
+}
+
+div.jqans-wrapper.default strong {
+	color: #000;
+}
+
+/* wrapper */
+div.jqans-wrapper.default {
+	border-left: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	margin: 0 0 32px 0;
+}
+
+/* container */
+div.jqans-wrapper.default .jqans-container { 
+/* 	min-height: 280px; 
+ 	text-align: center;
+*/	padding-top: 4px;
+}
+
+div.jqans-wrapper.default .jqans-container a {
+	font-weight: bold;
+}
+
+/* headline */
+div.jqans-wrapper.default .jqans-headline {
+	text-align: left;
+	margin-left: 4px;
+	margin-bottom: 4px;
+}
+
+div.jqans-wrapper.default .jqans-content h1 {
+	text-align: left;
+	color: #666666;
+	margin: 8px 4px 4px 4px;
+	font-size: 16px;
+}
+
+div.jqans-wrapper.default .jqans-content p {
+	text-align: left;
+	color: #666666;
+	margin: 4px;
+}
+
+/* stories */
+div.jqans-wrapper.default .jqans-stories {
+	background: #f3f3f3;
+}
+
+div.jqans-wrapper.default .jqans-stories li {
+	overflow: hidden;
+ 	text-align: center;
+ 	font-size: 12px;
+	color: #666;
+}
+
+div.jqans-wrapper.default .jqans-stories li.selected {
+	background: #999;
+}
+
+div.jqans-wrapper.default .jqans-stories li img {
+	margin-top: 10px;
+	border: 1px solid #eee;
+	padding: 1px;
+	background-color: #FFFFFF;
+}
+
+div.jqans-wrapper.default .jqans-stories li p {
+	display: none;
+}
+
+div.jqans-wrapper.default .jqans-stories li h3 {
+	margin:0;
+	font-size:12px;
+	font-weight:normal;
+}
+
+div.jqans-wrapper.default .jqans-stories-selector li.selected div {
+	margin:auto;
+	height: 0px;
+	width:0px;
+	line-height:0px;
+	font-size:0px;
+	border-right: 10px solid #999;
+	border-bottom: 10px solid #999;
+	border-left: 10px solid #999;
+}
+
+/* pagination */
+div.jqans-wrapper.default .jqans-pagination {
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	margin: 0;
+	padding: 2px 2px 0 2px;
+	background: #f3f3f3;
+	text-align: left;
+	clear: both;
+	width: 100%;
+	overflow: hidden;
+}
+
+div.jqans-wrapper.default .jqans-pagination-count {
+	float: left;
+}
+
+div.jqans-wrapper.default .jqans-pagination-controls {
+	float: right;
+}
+
+div.jqans-wrapper.default .jqans-pagination-controls a {
+	display: inline-block;
+	width: 22px;
+	height: 12px;
+	text-indent: -9999px;
+	background: no-repeat bottom center;
+	*float:left;
+}
+
+div.jqans-wrapper.default .jqans-pagination-controls-back a {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAMCAYAAABm+U3GAAAA90lEQVQ4jYWQubGFMAxFxdApHVACDVAHbTEeiPAiLxii+4M3MF74EJzA1tWRLWJmaK1fMcZ8ZlKYGaS1hpQSUkoopf5FSokrewnecsTMUEq9viCtb9v2+RNm/onfVqCUugV932Oe58/1ZGJjTAUzg5lhjME4jiAiCCGqWsotttY+ylKmaULbtmiaBkKIx0w6yFoLcs5lBWttxSUmIizLAudclUkdzrmfOA045x4ZhiETl5QO8t5XIe/9I13XYV3X6v6pPxOn4RDCzXW+9lfWygEhBFBaTBtCCNj3PaO8K/Oph8qGGCNijDiO45XzPHEcx52PMWbD/wD8ltnMnxci/wAAAABJRU5ErkJggg==);
+}
+
+div.jqans-wrapper.default .jqans-pagination-controls-next a {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAMCAYAAABm+U3GAAABAklEQVQ4jY2Qy5GEMAxEBUWkZEAIREAaxMXvhP82mFPvYUsuj2FnObwySK0nAxljoJR6hZQSWut/c8YYkFIKQghIKW9wkPt88hI+GSEEhBBQSoHe3Hjf91c35UXGmO9ilk3ThK7rUi3/mj9/BYu11jeMMdBaY1kWEBGGYUh17pUksbU2BUu4N88zqqpCXdcYxzFJ89lcbq0FOedushznHNZ1BRGhaZokds595HKHcw7kvb+JSljc932qldnc4b3/FZci7/0H27ahbVuEEB77T/PE4XIghJCw1kJrjRDCrfe0IImfZCEEHMeRyN/5ucznHsqD53kmYoy4rgsxxq9wvlz6AxJ02diX32wAAAAAAElFTkSuQmCC);
+}

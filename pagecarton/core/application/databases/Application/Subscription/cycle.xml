@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="cycle" creation_time="1404405376" table_version="0.04" module_version="1.00" table_class="Application_Subscription_Cycle" creation_ip="2130706433">
+  <RECORDS autoId="5">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="cycle_name"><![CDATA[Weekly]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cycle_id"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cycle_label"><![CDATA[Week(s)]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="cycle_name"><![CDATA[Monthly]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cycle_id"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cycle_label"><![CDATA[Month(s)]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="cycle_name"><![CDATA[Yearly]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cycle_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cycle_label"><![CDATA[Year(s)]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="cycle_name"><![CDATA[Per page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cycle_id"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cycle_label"><![CDATA[Page(s)]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES cycle_id="INPUTTEXT, RELATIVES = Application_Subscription_Price" cycle_name="INPUTTEXT,UNIQUE" cycle_label="INPUTTEXT" enabled="INT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES Application_Subscription_Price="cycle_id"/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

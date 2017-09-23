@@ -1,0 +1,25 @@
+<?php return array (
+  'ay__leftbar0' => 'menuView',
+  'ay__leftbar0advanced_parameters' => 'advanced_parameter_name[]=&advanced_parameter_value[]=&fd4a68cc1900db33325b64126be7cf99bbd04d8=advanced_parameters_9cbabf00532a0aafa02cc612dc280824200&e7f514449b0a074967bab9e0040cc980b814387b=107374182&d38ff3436d50af7dec43f77009d507f17a67=',
+  'ay__leftbar0option' => 'admin',
+  'ay__leftbar0template_name' => 'BlackAccordionSide-menu',
+  'ay__leftbar0_parameters' => 'advanced_parameters,option,template_name',
+  'ay__middlebar0' => 'pageEditText',
+  'ay__middlebar0advanced_parameters' => 'advanced_parameter_name[]=&advanced_parameter_value[]=&f8ea5f2a69568d472c628ec179968ebed=advanced_parameters_d037e4103e83a1b0065888e24b8faaa9878&e7f514449b0a074967bab9e0040cc980b814387b=107374182&d38ff3436d50af7dec43f77009d507f17a67=',
+  'ay__middlebar0editable' => '<h1>PageCarton Admin Panel</h1>
+',
+  'ay__middlebar0_parameters' => 'advanced_parameters,editable',
+  'ay__middlebar1' => 'objectEmbed',
+  'ay__middlebar1advanced_parameters' => 'advanced_parameter_name[]=&advanced_parameter_value[]=&cdde3ecf826c744d30e0d6cd00e7e577531488e=advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12407&e7f514449b0a074967bab9e0040cc980b814387b=107374182&d38ff3436d50af7dec43f77009d507f17a67=',
+  'ay__middlebar1editable' => 'Application_Info',
+  'ay__middlebar1_parameters' => 'advanced_parameters,editable',
+  'ay__middlebar2' => 'pageEditText',
+  'ay__middlebar2advanced_parameters' => 'advanced_parameter_name[]=&advanced_parameter_value[]=&cfe1a3aeb0abaa0bfb3550bc46cde8a106424c=advanced_parameters_d037e4103e83a1b0065888e24b8faaa9238&e7f514449b0a074967bab9e0040cc980b814387b=107374182&d38ff3436d50af7dec43f77009d507f17a67=',
+  'ay__middlebar2editable' => '<h2>Most recent contact messages from users</h2>
+',
+  'ay__middlebar2_parameters' => 'advanced_parameters,editable',
+  'ay__middlebar3' => 'objectEmbed',
+  'ay__middlebar3advanced_parameters' => 'advanced_parameter_name[]=&advanced_parameter_value[]=&d13c50d73b91c9759d67b7e55010765=advanced_parameters_1b7462e8a4eb7f1ca0c6f3ca337b6f12573&e7f514449b0a074967bab9e0040cc980b814387b=107374182&d38ff3436d50af7dec43f77009d507f17a67=',
+  'ay__middlebar3editable' => 'Application_ContactUs_ShowAll',
+  'ay__middlebar3_parameters' => 'advanced_parameters,editable',
+);

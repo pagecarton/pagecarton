@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="requirement" creation_time="1397738861" table_version="0.01" module_version="1.00" table_class="Ayoola_Form_Requirement" creation_ip="2130706433">
+  <RECORDS autoId="3">
+    <TABLE_ROW ROW_ID="7131">
+      <TABLE_FIELD FIELD_KEY="requirement_label"><![CDATA[User Registration]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_class"><![CDATA[Ayoola_Access_AccountRequired]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_legend"><![CDATA[Sign in or sign up]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_goodnews"><![CDATA[To continue, you are required to have a free account with us. Please take a few moments to sign in to an existing account or signup for a new account for free.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_name"><![CDATA[user-registration]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_dependencies"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_id"><![CDATA[7131]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="7132">
+      <TABLE_FIELD FIELD_KEY="requirement_label"><![CDATA[Email Address]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_class"><![CDATA[Application_User_UserEmail_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_legend"><![CDATA[Email Address]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_goodnews"><![CDATA[To continue, you are required to provide a valid e-mail address. The e-mail will only be used to send you notifications regarding services you select if you choose.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_dependencies"><![CDATA[b:0;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_name"><![CDATA[email-address]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_id"><![CDATA[7132]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="7133">
+      <TABLE_FIELD FIELD_KEY="requirement_label"><![CDATA[Address]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_class"><![CDATA[Application_User_UserLocation_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_legend"><![CDATA[Full Address]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_goodnews"><![CDATA[To continue, you are required to provide a valid address.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_dependencies"><![CDATA[b:0;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_name"><![CDATA[address]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_id"><![CDATA[7133]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="7134">
+      <TABLE_FIELD FIELD_KEY="requirement_label"><![CDATA[Phone Number]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_class"><![CDATA[Application_User_UserPhoneNumber_Creator]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_legend"><![CDATA[Phone Number]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_goodnews"><![CDATA[To continue, you are required to provide a valid phone number for user personalization or verification purposes. You may loose your account if you enter an invalid phone number.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_dependencies"><![CDATA[b:0;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_name"><![CDATA[phone-number]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_id"><![CDATA[7134]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="requirement_name"><![CDATA[domain-name-registration]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_label"><![CDATA[Domain Name Registration]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_class"><![CDATA[Application_Domain_Registration]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_legend"><![CDATA[Choose a domain name]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_goodnews"><![CDATA[The first step in creating your website is getting your Domain Name. Your domain name is your Internet address. Check the availability of the domain name you would use with the selected service.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_dependencies"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="requirement_label"><![CDATA[Other User Info]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_class"><![CDATA[Application_User_RequestOtherInfo]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_legend"><![CDATA[Optional User Information]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_goodnews"><![CDATA[The following fields are optional. We encourage you to fill them to enable us serve you better. Thank you!]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_dependencies"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_name"><![CDATA[other-user-info]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="requirement_id"><![CDATA[997-0-2]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES requirement_name="INPUTTEXT,UNIQUE" requirement_label="INPUTTEXT" requirement_class="INPUTTEXT" requirement_goodnews="INPUTTEXT" requirement_dependencies="ARRAY" requirement_legend="INPUTTEXT" requirement_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

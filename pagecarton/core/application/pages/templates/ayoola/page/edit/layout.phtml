@@ -1,0 +1,62 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /ayoola/page/edit/layout
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: layout.php	Sunday 11th of June 2017 06:15:02 PM	 $ 
+*/
+//	Template Content ?>
+<?php if( ! Ayoola_Application::isXmlHttpRequest() && $_SERVER['HTTP_USER_AGENT'] !== Ayoola_Abstract_Viewable::$userAgent ): // Only show this if this is not a ajax call ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<head>
+<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ); ?>
+<link rel='stylesheet' type='text/css' href='<?php echo Ayoola_Application::getUrlPrefix(); ?>/css/6/0_bars_100Percent.css' />
+</head>
+<body>
+	<div class="Ayoola_Page_Layout_Edit_File_contentContainer">
+		<div class="Ayoola_Page_Layout_Edit_File_content">
+		       <div class="Ayoola_Page_Layout_Edit_File_middle">
+<?php endif; ?>
+				<?php
+//header Begins Here
+
+//header Ends Here
+?>
+				<?php
+//middlebar Begins Here
+
+echo ( ! empty( $_a92154f43aa142ee84d3e4554508b2b1 ) &&  is_object( $_a92154f43aa142ee84d3e4554508b2b1 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_a92154f43aa142ee84d3e4554508b2b1->view(), '' ) : null );
+
+//middlebar Ends Here
+?>
+				<?php
+//leftbar Begins Here
+
+//leftbar Ends Here
+?>
+				<?php
+//rightbar Begins Here
+
+//rightbar Ends Here
+?>  
+				<?php
+//footer Begins Here
+
+//footer Ends Here
+?>
+<?php if( ! Ayoola_Application::isXmlHttpRequest() && $_SERVER['HTTP_USER_AGENT'] !== Ayoola_Abstract_Viewable::$userAgent ): // Only show this if this is not a ajax call ?>
+			</div>
+		</div>
+	</div>
+</body>
+<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+</html>
+<?php endif; ?>

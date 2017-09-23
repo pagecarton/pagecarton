@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="price" creation_time="1397902356" table_version="0.01" module_version="1.00" table_class="Application_Domain_Registration_Price" creation_ip="2130706433">
+  <RECORDS autoId="3">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="extension"><![CDATA[*]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="price"><![CDATA[100]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="price_id"><![CDATA[713-0-1]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="extension"><![CDATA[za.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="price"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="price_id"><![CDATA[2]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES extension="INPUTTEXT, FOREIGN_KEYS = Application_Domain_Registration_Whois" price="INPUTTEXT" price_id="INPUTTEXT"/>
+    <FOREIGN_KEYS Application_Domain_Registration_Whois="extension"/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

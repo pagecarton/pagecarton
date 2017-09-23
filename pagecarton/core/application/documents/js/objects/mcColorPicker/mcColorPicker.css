@@ -1,0 +1,89 @@
+﻿/*! Menucool Custom Color Picker v2012.8.30. http://www.menucool.com/color-picker */
+
+div#colorpicker
+{
+    width: 191px;
+    height: 164px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom:0;
+    padding-right:0;
+    position: absolute;
+    top: 22px;
+    left: 0px;
+    background-color: #EEE;
+    border: 1px solid #BBB;
+    display: none;
+    z-index: 200;
+    box-sizing:content-box;
+}
+div#colorpicker div
+{
+    float: left;
+    padding:0;
+    box-sizing:content-box;
+}
+div#colorpicker div.clear
+{
+    float: none;
+    clear: both;
+    border: 0;
+    overflow:hidden;
+    height:0;
+    font-size:0;
+}
+        
+div#colorpicker div#colorContainer
+{
+    float: left;
+    border:0;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+}
+div#colorContainer div
+{
+    border:0;
+    border-top: solid 1px black;
+    border-left: solid 1px black;
+    width:9px;
+    height:9px;
+    overflow:hidden;/*for IE6*/
+}
+div#colorpicker div#hexBox, div#colorpicker div#bgBox
+{
+    border: 1px solid #999;
+    font: normal 10px verdana;
+    height: 16px;
+    margin-bottom: 4px;
+}
+div#colorpicker div#hexBox
+{
+    width: 64px;
+    color: Black;
+    line-height: 16px;
+}
+div#colorpicker div#bgBox
+{
+    width: 110px;
+    margin-left: 3px;
+    clear: right;
+}
+
+div.transChooser
+{
+    background: transparent url(transChooser.gif);
+}     
+span.colorChooser
+{
+    width: 37px;
+    height: 20px;
+    background: transparent url(colorChooser.gif);
+    margin-left: 1px;
+    margin-bottom: 4px;
+    position: relative;
+    display: inline-block;
+    overflow: visible;
+    vertical-align: middle;
+    z-index:1;
+}     

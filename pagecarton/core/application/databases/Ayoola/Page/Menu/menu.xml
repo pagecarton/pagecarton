@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="menu" creation_time="1488536072" table_version="0.08" module_version="1.00" table_class="Ayoola_Page_Menu_Menu" creation_ip="0">
+  <RECORDS autoId="19">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[documents]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[23]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Documents]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[blog]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[22]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Blog]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[onlinestore]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[16]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Online Store]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[Accounts]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[11]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[User Account Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[b:0;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[developers]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[10]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Advanced &quot;Developer's&quot; Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[admin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Control Panel Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="7">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[subscription]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[E-Commerce]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="8">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[7]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Page Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="9">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[headerAdmin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/3/HorizontalBlue.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Admin Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="10">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[accessMain]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/4/HorizontalGreen.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Account Access Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[b:0;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="11">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[footerMain]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/3/HorizontalWhite.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Footer Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[a:1:{i:0;s:4:&quot;----&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="12">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[headerMain]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/7/HorizontalClean.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Header Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[a:2:{i:0;s:4:&quot;----&quot;;i:1;s:7:&quot;private&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="13">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[DevelopersLounge]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[15]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Developers Lounge]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="14">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[Services]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[20]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/1/list_in_line.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[a:1:{i:0;s:7:&quot;private&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Services]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="15">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[Products]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[21]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/1/list_in_line.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Products]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[a:2:{i:0;s:7:&quot;private&quot;;i:1;s:8:&quot;category&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[[&quot;products&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="16">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[MyAccount]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[24]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[My Account Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="17">
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[Articles]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[b:0;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[100]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Post Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="18">
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Side Bar Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[a:1:{i:0;s:4:&quot;----&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[side-bar-options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[1077-0-1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES menu_name="INPUTTEXT,UNIQUE" menu_label="INPUTTEXT" document_url="INPUTTEXT" menu_options="ARRAY" category_name="JSON" category_url="INPUTTEXT" url_integration_type="INPUTTEXT" sort_order="INPUTTEXT" enabled="INT" menu_id="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

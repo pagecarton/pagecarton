@@ -1,0 +1,83 @@
+@charset "utf-8";
+/* FORM */
+@import "/css/default/form.css";
+
+/* CLASSES */
+@import "/css/default/classes.css";
+
+/* HEADERS */
+@import "/css/default/headers.css";
+
+/* LINKS */
+@import "/css/default/links.css";
+
+/* TABLE */
+@import "/css/default/table.css";
+
+
+body{
+	color: #000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background: #77CCFF ;
+	margin: 0;
+	padding: 0;
+}
+.Ayoola_Page_Layout_Edit_File_header{
+	padding: 10px ;
+	width: 1024px;
+	border-radius: .4em;
+	border: 1px groove #ccc;
+	margin: 0 auto;
+	background: white;
+	overflow: hidden;
+}
+.Ayoola_Page_Layout_Edit_File_headerContainer{
+	padding: 5px ;
+}
+.Ayoola_Page_Layout_Edit_File_content{
+	padding: 10px ;
+	width: 1024px;
+	border-radius: .4em;
+	border: 1px groove #ccc;
+	margin: 0 auto;
+	background: white;
+	overflow: hidden;
+}
+.Ayoola_Page_Layout_Edit_File_contentContainer{
+	padding: 5px ;
+}
+.Ayoola_Page_Layout_Edit_File_footer{
+	padding: 10px ;
+	width: 1024px;
+	border-radius: .4em;
+	border: 1px groove #ccc;
+	margin: 0 auto;
+	background: white;
+	overflow: hidden;
+}
+.Ayoola_Page_Layout_Edit_File_footerContainer{
+	padding: 5px ;
+}
+
+.Ayoola_Page_Layout_Edit_File_left{
+	float: left;
+	width: 270px;
+	padding: 10px ;
+	border-radius: .4em;
+	border: 1px groove #eee;
+	margin: 0 auto;
+	background: white;
+}
+.Ayoola_Page_Layout_Edit_File_right {
+	display: none;
+}
+.Ayoola_Page_Layout_Edit_File_middle{
+	float: right;
+	width: 700px;
+	padding: 10px ;
+	border-radius: .4em;
+	border: 1px groove #eee;
+	margin: 0 auto;
+	background: white;
+	overflow: hidden;
+}
