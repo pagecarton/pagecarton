@@ -1,91 +1,57 @@
 <?php
 /**
- * AyStyle Developer Tool
+ * PageCarton Content Management System
  *
  * LICENSE
  *
- * @category   Ayoola
- * @package    Ayoola_
- * @copyright  Copyright (c) 2011-2010 Ayoola Online Inc. (http://www.ayo-ola.com)
- * @license    http://developer.ayo-ola.com/aystyle/license/
- * @version    $Id: filename.php date time username $
+ * @category   PageCarton CMS
+ * @package    Ayoola_Doc_Adapter_Default
+ * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @version    $Id: Default.php 5.15.12 8.49 ayoola $
  */
 
 /**
- * @see Ayoola_
+ * @see Ayoola_Doc_Adapter_Abstract_Octet
  */
  
-//require_once 'Ayoola/.php';
+require_once 'Ayoola/Doc/Adapter/Abstract/Octet.php';
 
 
 /**
- * @category   Ayoola
- * @package    Ayoola_
- * @copyright  Copyright (c) 2011-2010 Ayoola Online Inc. (http://www.ayo-ola.com)
- * @license    http://developer.ayo-ola.com/aystyle/license/
+ * @category   PageCarton CMS
+ * @package    Ayoola_Doc_Adapter_Default
+ * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class ClassName
+class Ayoola_Doc_Adapter_Default extends Ayoola_Doc_Adapter_Abstract_Octet
 {
     /**
-     * property
+     * Allowed extensions for this adapter
      *
-     * @var boolean
+     * @var array
      */
-	protected $property;
+	protected static $_allowedExtentions = array( 
+													'ttf' => 'application/x-font-ttf', 
+													'woff' => 'application/font-woff', 
+													'woff2' => 'application/font-woff', 
+													'eot' => 'application/vnd.ms-fontobject', 
+													'svg' => 'image/svg+xml', 
+													'otf' => 'application/x-font-opentype', 
+													'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',  
+													'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',  
+												);
+	
 	
     /**
-     * Singleton instance
+     * Return _allowedExtentions
      *
-     * @var self()
+     * @return array
      */
-	protected $_instance;
-
-    /**
-     * Constructor
-     *
-     * @param 
-     * 
-     */
-    public function __construct()
+    public static function getAllowedExtentions()
     {
-
-    }
-	
-    /**
-     * This method
-     *
-     * @param 
-     * @return 
-     */
-    public function method()
-    {
-        
+        return self::$_allowedExtentions;
     } 
-	
-    /**
-     * This method makes sure there is only a single instance
-     * of this class.
-     * @param void
-     * @return __CLASS__
-     */
-	public static function getInstance()
-    {
-		return is_null($this->instance) ? new self() : $this->instance; 
-    } 
-	
-    public function __get($property)
-    {
-    }    
-    public function __set($property, $value)
-    {
-    }
-    public function __call($method, $args)
-    {
-    }
-    public function __toString()
-    {
-	}  
-	
 	// END OF CLASS
 }
