@@ -449,7 +449,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		|| ( in_array( 97, $allowedLevels ) && $username && ( in_array( strtolower( Ayoola_Application::getUserInfo( 'email' ) ), array_map( 'strtolower', @Ayoola_Application::$GLOBAL['whitelist_email_address'] ? : array() ) ) || $username === strtolower( @Ayoola_Application::$GLOBAL['username'] ) ) ) //	We were invited to view a post/article
 		|| ( in_array( 0, $allowedLevels ) && ! @$options['strict'] ) //	Public means everyone is welcome except if its strict
 		|| in_array( $myLevel, $allowedLevels ) //	We are explicitly allowed
-		|| ( in_array( $_SERVER['REMOTE_ADDR' ], array( '127.0.0.1', '::1' ) ) && ! @$options['strict'] ) //	Localhost
+//		|| ( in_array( $_SERVER['REMOTE_ADDR' ], array( '127.0.0.1', '::1' ) ) && ! @$options['strict'] ) //	Localhost
 		)
 		{ 
 		//	var_export( strtolower( @Ayoola_Application::$GLOBAL['username'] ) );
