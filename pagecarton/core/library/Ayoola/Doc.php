@@ -239,8 +239,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			}
 		}
 		while( false );
-		@$dedicatedUrl = $dedicatedUrl ? : $uri;
-		if( Ayoola_Application::getUrlPrefix() && $dedicatedUrluri[0] === '/' )   
+		@$dedicatedUrl = $dedicatedUrl ? : $uri;    	
+		if( Ayoola_Application::getUrlPrefix() && $dedicatedUrl[0] === '/' )
 		{
 			$dedicatedUrl = Ayoola_Application::getUrlPrefix() . $dedicatedUrl;
 		}
