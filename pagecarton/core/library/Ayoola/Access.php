@@ -140,9 +140,6 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 		setcookie( 'accessLogin', '', time() - 1728000, '/' );
 		setcookie( 'accessLogin', '', 0 );
 		setcookie( 'accessLogin', false );
-	//	setcookie( 'PHPSESSID', '', time() - 1728000, '/' );
-	//	setcookie( 'PHPSESSID', '', 0 );
-	//	setcookie( 'PHPSESSID', false );
 		$this->getStorage()->clear();
 		@session_regenerate_id( true );
     } 	
