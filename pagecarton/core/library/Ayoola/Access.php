@@ -166,24 +166,14 @@ class Ayoola_Access extends Ayoola_Access_Abstract
     {
         if( is_null( $pageAccessLevel ) )
 		{
-			//	Access level is the one listed in the page
 			require_once 'Ayoola/Page.php';
-/* 			$table = 'Ayoola_Page_Page';
-			require_once 'Ayoola/Loader.php';
-			if( ! Ayoola_Loader::loadClass( $table ) ) 
-			{
-				require_once 'Ayoola/Access/Exception.php';
-				throw new Ayoola_Access_Exception( 'Invalid Table for Page Information - ' . $table );
-			}
-			$table = new $table;
- */			require_once 'Ayoola/Page.php';
 			$pageInfo = Ayoola_Page::getCurrentPageInfo();
 			switch( @$pageInfo['auth_level'] )
 			{
 				case false:
 				case null:
 				case '':
-		//	self::v( $pageInfo['auth_level'] );
+		        //	self::v( $pageInfo['auth_level'] );
 					$pageInfo['auth_level'] = isset( $pageInfo['auth_level'] ) ? $pageInfo['auth_level'] : array( 99 );
 				break;
 			
