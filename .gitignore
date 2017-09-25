@@ -14,7 +14,6 @@
 # Core's dependencies are managed with Composer.
 
 # Ignore configuration files that may contain sensitive information.
-public_html/*
 htdocs/*
 www/*
 
