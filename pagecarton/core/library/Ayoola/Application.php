@@ -1305,11 +1305,11 @@ class Ayoola_Application
 		//	general restriction
 	//		var_export( $_SERVER );
 		
-		if( $_SERVER['REMOTE_ADDR' ] !== '127.0.0.1' )
+//		if( $_SERVER['REMOTE_ADDR' ] !== '127.0.0.1' )
 		{
 			$auth->restrict();
 		}
-		else 
+	//	else 
 		{
 		//	var_export( 'localhost' );
 		//	var_export( $_SERVER );

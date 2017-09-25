@@ -221,14 +221,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			//			var_export( Ayoola_Application::getDomainSettings() );
 					//	exit();
 						$dedicatedUrl = Ayoola_Application::getDomainSettings( 'protocol' ) . "://{$domain}" . Ayoola_Application::getUrlPrefix() . "{$uri}?document_time={$j}";					
-					}
-/*					else
-					{
-						$dedicatedUrl = $j ? ( Ayoola_Application::getDomainSettings( 'protocol' ) . "://{$j}.document.{$domain}" . $uri ) : $uri;						
-					}
-	*/			
-				//		var_export( $dedicatedUrl );
-	
+					}	
 					$storage->store( $dedicatedUrl );
 				}
 			}
@@ -240,11 +233,12 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		}
 		while( false );
 		@$dedicatedUrl = $dedicatedUrl ? : $uri;    	
-		if( Ayoola_Application::getUrlPrefix() && $dedicatedUrl[0] === '/' )
+/*		if( Ayoola_Application::getUrlPrefix() && $dedicatedUrl[0] === '/' && stripos( $url, Ayoola_Application::getUrlPrefix() ) !== 0 )
 		{
+		//	var_export( $dedicatedUrl );
 			$dedicatedUrl = Ayoola_Application::getUrlPrefix() . $dedicatedUrl;
 		}
-	//	var_export( $dedicatedUrl );
+*/	//	var_export( $dedicatedUrl );
 		return $dedicatedUrl;
     } 
 	

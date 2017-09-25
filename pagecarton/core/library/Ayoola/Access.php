@@ -161,6 +161,8 @@ class Ayoola_Access extends Ayoola_Access_Abstract
      */
     public static function restrict( $pageAccessLevel = null )
     {
+    //  var_export( $pageAccessLevel );
+        
         if( is_null( $pageAccessLevel ) )
 		{
 			require_once 'Ayoola/Page.php';
