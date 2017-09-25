@@ -187,17 +187,7 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 		//	var_export( $authLevel );
  		// 	exit();
 		}
-	//	if( Ayoola_Abstract_Playable::hasPriviledge() )
-		{
-		//	var_export( Ayoola_Abstract_Playable::hasPriviledge( $pageAccessLevel ) );
-		//	exit();
-		} 
 		$pageAccessLevel = is_array( $pageAccessLevel ) ? $pageAccessLevel : array( $pageAccessLevel );
-//	var_export( Ayoola_Abstract_Playable::hasPriviledge( $pageAccessLevel ) );
-//	$pageAccessLevel = intval( $pageAccessLevel );
-	//	var_export( $pageInfo ); 
-	//		var_export( $pageAccessLevel );
-	//	if( $access->checkPriviledges( $pageAccessLevel ) ){ return true; }
 		if( 
 			Ayoola_Abstract_Playable::hasPriviledge( $pageAccessLevel ) 
 			|| @$pageInfo['url'] === '/accounts/signin'
@@ -206,22 +196,6 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 		{ 
 			return true; 
 		} 
- //		var_export( $pageInfo );
- //		var_export( Ayoola_Abstract_Playable::hasPriviledge( $pageAccessLevel ) );
-       
-/* 		var_export( $_SERVER['REMOTE_ADDR' ] );
-		var_export( $pageAccessLevel );
-		var_export( Ayoola_Abstract_Playable::hasPriviledge( $pageAccessLevel ) );
- */	//	if( Ayoola_Abstract_Playable::hasPriviledge() )
-		{
-	//		var_export( $pageInfo ); 
-	//		var_export( $pageAccessLevel );
-	//		var_export( Ayoola_Abstract_Playable::hasPriviledge( $pageAccessLevel ) );
-		//	exit();
-		} 
-
-        //  look for auth methods
-
         $table = new Ayoola_Object_Table_ViewableObject();
 
         if( $methods = $table->select( null, array( 'module' => 'Auth' ) ) )
@@ -247,21 +221,17 @@ class Ayoola_Access extends Ayoola_Access_Abstract
                 }
             }
         }
-//	  var_export( get_include_path() );
-//	  var_export( $table->select() );  
-//	  var_export( $methods );
-//       exit();  
 		//	IF WE ARE HERE, WE ARE NOT AUTHORIZED     
-        	$urlToGo = '' . Ayoola_Application::getUrlPrefix() . '/accounts/signin/';
-			$access = self::getInstance();
-			if( ! Ayoola_Application::isClassPlayer() )  
-			{			
-				$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
-				$access = self::getInstance();
-				$access->logout();
-				header( 'Location: ' . $urlToGo );	
-				exit();
-			}
+        $urlToGo = '' . Ayoola_Application::getUrlPrefix() . '/accounts/signin/';
+        $access = self::getInstance();
+        if( ! Ayoola_Application::isClassPlayer() )  
+        {			
+            $urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
+            $access = self::getInstance();
+            $access->logout();
+            header( 'Location: ' . $urlToGo );	
+            exit();
+        }
 		if( ! $access->isLoggedIn() )
 		{ 
 			//	$access->logout();
