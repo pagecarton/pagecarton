@@ -52,7 +52,7 @@ class Application_Upgrade_Check extends PageCarton_Widget
             $storage = $this->getObjectStorage( array( 'id' => 'diskspace', 'device' => 'File', 'time_out' => 86400, ) );
             if( ! $versionFromServer = $storage->retrieve() )
             {
-                $server = 'https://production.cmf.ayoo.la/object/name/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
+                $server = 'http://updates.pagecarton.org/object/name/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
           ///    var_export( $server );
                 $versionFromServer['time'] = time();
                 $response = self::fetchLink( $server );
