@@ -491,7 +491,8 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 EOD;
 	//	each
 				//	Build installer into the zipped document so that it always have the fresh content
-				file_put_contents( $installerFilenamePhp, $installerText );
+	//			file_put_contents( $installerFilenamePhp, $installerText );
+	//			dont do this here again since we switching to upgrades.pagecarton.org
 				
 				if( ! $info  = $this->createFile() ){ return false; }
 				rename( $info['backup_filename'], $installerFilenameGz );
