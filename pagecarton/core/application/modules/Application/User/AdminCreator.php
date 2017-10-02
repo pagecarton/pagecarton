@@ -27,6 +27,13 @@ require_once 'Ayoola/Abstract/Table.php';
 
 class Application_User_AdminCreator extends Application_User_Creator 
 {
+	
+    /**
+     * Access level for player
+     *
+     * @var boolean
+     */
+	protected static $_accessLevel = array( 0 );
 
     /**
      * Do the Sign up process
