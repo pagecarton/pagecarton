@@ -521,16 +521,18 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 	//		self::v( $values['logged_in'] );     
 	//		self::v( $values['logged_out'] );     
 	//		var_export( $_SERVER['REMOTE_ADDR' ] );           
-			if(	
+/*			if(	
 				( ! $values['logged_in']  && $access->isLoggedIn() && ! Ayoola_Application::isLocalServer()  ) || 
 				( ! $values['logged_out'] && ! $access->isLoggedIn() && ! Ayoola_Application::isLocalServer() ) || //	Show all menu on local host
 				( ! Ayoola_Abstract_Playable::hasPriviledge( $values['auth_level'] ) )
 			)
+*/			if(	
+				( ! $values['logged_in']  && $access->isLoggedIn()   ) || 
+				( ! $values['logged_out'] && ! $access->isLoggedIn() ) || //	Show all menu on local host
+				( ! Ayoola_Abstract_Playable::hasPriviledge( $values['auth_level'] ) )
+			)
 			{   
-/* 				self::v( $values['logged_in'] );
-				self::v( $values['logged_out'] );
-				self::v( $access->isLoggedIn() );
- */				continue;
+ 				continue;
 			}
 		//	var_export( $values );
 			$option = $xml->createElement( 'li' );
