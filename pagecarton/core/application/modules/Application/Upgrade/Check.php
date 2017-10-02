@@ -44,10 +44,8 @@ class Application_Upgrade_Check extends PageCarton_Widget
 
             if( ! empty( $_REQUEST['pc_domain'] ) )
             {
-       //         var_export( PageCarton::VERSION );
-        //        var_export( Ayoola_Application::$version );
                 echo PageCarton::VERSION;
-               exit();
+                exit();
             }
             $storage = $this->getObjectStorage( array( 'id' => 'diskspace', 'device' => 'File', 'time_out' => 86400, ) );
             if( ! $versionFromServer = $storage->retrieve() )

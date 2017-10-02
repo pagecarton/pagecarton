@@ -1218,7 +1218,7 @@ class Ayoola_Application
 		}
 
 		//	Client-side	scripting		
-		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/object/name/Application_Javascript/?v=' . filemtime( __FILE__ ) );
+		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . filemtime( __FILE__ ) );
 /*		Application_Javascript::addFile( '/js/js.js' );
 		Application_Javascript::addFile( '/js/objects/files.js' );
 		Application_Javascript::addFile( '/js/objects/events.js' );
