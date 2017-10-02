@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="menu" creation_time="1488536072" table_version="0.08" module_version="1.00" table_class="Ayoola_Page_Menu_Menu" creation_ip="0">
-  <RECORDS autoId="19">
+  <RECORDS autoId="20">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[documents]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
@@ -216,6 +216,18 @@
       <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="19">
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[mainnav]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[mainnav]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[0-0-19]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

@@ -9,43 +9,18 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: includes.php	Saturday 16th of September 2017 10:59:01 PM	 $ 
+* @version $Id: includes.php	Monday 2nd of October 2017 03:53:10 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
 							{
 								
-$_9baafcecd31f9232f8804529fb1103d2 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<h1 style="text-align: center;">PageCarton Successfully Installed!</h1>
-
-<p>&nbsp;</p>
-
-<p style="text-align: center;">Welcome to your new PageCarton installation. This is the default homepage, learn to customize PageCarton by going to <a href="http://www.PageCarton.org/docs" target="_blank">PageCarton.org Docs</a>!</p>
-',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'white-background',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_9baafcecd31f9232f8804529fb1103d2 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
-							{
-								
-$_39b332fea6c0694d370858f74582c7b5 = new Ayoola_Menu( array (
-  'option' => 'headerAdmin',
-  'new_menu_name' => '',
-  'template_name' => 'HorizontalWhite',
+$_963f6ceead56cc34e42f2b7fd9a45fcb = new Application_Article_ShowAll( array (
+  'option' => '5',
+  'category_name' => '',
+  'article_types' => '',
+  'template_name' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -58,25 +33,23 @@ $_39b332fea6c0694d370858f74582c7b5 = new Ayoola_Menu( array (
 							else
 							{
 								
-$_39b332fea6c0694d370858f74582c7b5 = null;
+$_963f6ceead56cc34e42f2b7fd9a45fcb = null;
 
 							}
 							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
 							{
 								
-$_9baafcecd31f9232f8804529fb1103d2 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<h1 style="text-align: center;">PageCarton Successfully Installed!</h1>
-
-<p>&nbsp;</p>
-
-<p style="text-align: center;">Welcome to your new PageCarton installation. This is the default homepage, learn to customize PageCarton by going to <a href="http://www.PageCarton.org/docs" target="_blank">PageCarton.org Docs</a>!</p>
-',
+$_963f6ceead56cc34e42f2b7fd9a45fcb = new Application_Article_ShowAll( array (
+  'option' => '5',
+  'category_name' => '',
+  'article_types' => '',
+  'template_name' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  'wrapper_name' => 'white-background',
+  'wrapper_name' => '',
   '' => '',
 ) );
 
@@ -84,7 +57,7 @@ $_9baafcecd31f9232f8804529fb1103d2 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_9baafcecd31f9232f8804529fb1103d2 = null;
+$_963f6ceead56cc34e42f2b7fd9a45fcb = null;
 
 							}
 							

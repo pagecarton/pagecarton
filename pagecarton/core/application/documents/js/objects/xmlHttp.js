@@ -302,7 +302,17 @@ ayoola.xmlHttp =
 				var b = document.getElementsByName( element + '_container' );
 		//		alert( rel.changeElementId );
 		//		alert( element );
-				if( ! b.length ){ return false; }
+				if( ! b.length )
+				{ 
+					if( element == 'page_refresh' )
+					{
+					//	var x = window.location.href;
+				//		x = x.split( '#' );
+					//	window.location.href = x[0];
+						window.location.href = window.location.href.split( '#' )[0];
+					}
+					return false; 
+				}
 				if( ! b[0].getAttribute( 'data-object-name' ) ){ return false; }
 				var url = ayoola.xmlHttp.getClassPlayerUrl() + 'get/object_name/' + b[0].getAttribute( 'data-object-name' ) + '/' + location.search;
 			//	element = document.getElementById( element );

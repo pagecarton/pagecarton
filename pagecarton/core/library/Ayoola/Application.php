@@ -444,7 +444,7 @@ class Ayoola_Application
 				else
 				{
 				//	setcookie( 'SUB_DIRECTORY', false, time() - 9999999, '/', $domainName );
-					header( 'HTTP/1.1 301 Moved Permanently' );
+				//	header( 'HTTP/1.1 301 Moved Permanently' );
 			//		var_export( $subDomainInfo );
 			//		var_export( $data );
 				//	header( 'Location: http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getPresentUri() );
@@ -482,7 +482,7 @@ class Ayoola_Application
 				}
 				elseif( ! empty( $tempWhere['domain_name'] ) )
 				{
-					header( 'HTTP/1.1 301 Moved Permanently' );
+			//		header( 'HTTP/1.1 301 Moved Permanently' );
 					header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getPresentUri() );    
 				//	var_export( $data );
 					
@@ -490,7 +490,7 @@ class Ayoola_Application
 				}
 				else
 				{
-					header( 'HTTP/1.1 301 Moved Permanently' );
+			//		header( 'HTTP/1.1 301 Moved Permanently' );
 				//	var_export( $data );
 					
 					exit( 'DOMAIN NOT IN USE' );
@@ -879,7 +879,7 @@ class Ayoola_Application
 		}
 		if( stripos( $_SERVER['HTTP_HOST'], '.document.' ) )
 		{ 
-				header( 'HTTP/1.1 301 Moved Permanently' );
+		//		header( 'HTTP/1.1 301 Moved Permanently' );
 				header( 'Location: http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Page::getPortNumber() . Ayoola_Application::getPresentUri() );
 				exit(); 
 		}
@@ -1214,7 +1214,7 @@ class Ayoola_Application
 		//	var_export( $pageInfo );
 			
 			header( 'Location: ' . $pageInfo['redirect_url'] . '?pc_redirect_url=' . $uri );
-			exit();
+			exit(); 
 		}
 
 		//	Client-side	scripting		

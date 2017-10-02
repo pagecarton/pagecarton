@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DOCUMENT_ELEMENT table_name="template" creation_time="1422612304" table_version="0.04" module_version="1.00" table_class="Application_Article_Template" creation_ip="0">
-  <RECORDS autoId="5">
-    <TABLE_ROW ROW_ID="2">
+<DOCUMENT_ELEMENT table_name="template" creation_time="1506956251" table_version="0.05" module_version="1.00" table_class="Application_Article_Template" creation_ip="2130706433">
+  <RECORDS autoId="4">
+    <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[ProductsandServicesList2]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[null]]></TABLE_FIELD>
@@ -37,9 +37,10 @@
       <TABLE_FIELD FIELD_KEY="max_group_no"><![CDATA[3]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2014\/12\/17\/Product_and_Services_List_2_cs.css&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_code"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="3">
-      <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[ItemsList]]></TABLE_FIELD> 
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[ItemsList]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="javascript_code"><![CDATA[]]></TABLE_FIELD>
@@ -66,8 +67,9 @@
       <TABLE_FIELD FIELD_KEY="max_group_no"><![CDATA[4]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2014\/12\/17\/Items_List_css.css&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_code"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="4">
+    <TABLE_ROW ROW_ID="3">
       <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[ProductsforSale]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[null]]></TABLE_FIELD>
@@ -92,10 +94,11 @@
       <TABLE_FIELD FIELD_KEY="max_group_no"><![CDATA[3]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2014\/12\/18\/Products_for_sale_css.css&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_code"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>
-    <DATA_TYPES template_name="INPUTTEXT,UNIQUE" template_label="INPUTTEXT" template_screenshot="INPUTTEXT" markup_template="INPUTTEXT" markup_template_prefix="INPUTTEXT" markup_template_suffix="INPUTTEXT" max_group_no="INT" template_options="JSON" javascript_files="JSON" javascript_code="TEXTAREA" css_code="TEXTAREA" css_files="JSON" template_id="INPUTTEXT"/>
+    <DATA_TYPES template_name="INPUTTEXT,UNIQUE" template_label="INPUTTEXT" template_screenshot="INPUTTEXT" markup_template="INPUTTEXT" markup_template_prefix="INPUTTEXT" markup_template_suffix="INPUTTEXT" markup_template_median="INPUTTEXT" max_group_no="INT" template_options="JSON" javascript_files="JSON" javascript_code="TEXTAREA" css_code="TEXTAREA" css_files="JSON" template_id="INPUTTEXT"/>
     <FOREIGN_KEYS/>
     <RELATIVES/>
   </TABLE_SETTINGS>
