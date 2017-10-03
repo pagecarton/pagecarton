@@ -63,6 +63,14 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->addElement( array( 'name' => 'site_headline', 'placeholder' => 'E.g. My Web', 'label' => 'Site Headline', 'value' => @$settings['site_headline'], 'type' => 'InputText' ) );
 		$fieldset->addElement( array( 'name' => 'site_description', 'label' => 'Site Description', 'placeholder' => 'What is this site about?', 'value' => @$settings['site_description'], 'type' => 'TextArea' ) );
+
+    //    var_export();
+
+        if( Ayoola_Abstract_Table::hasPriviledge( array( 99, 98 ) ) )
+        {        
+            $fieldset->addElement( array( 'name' => 'cover_photo', 'label' => 'Site Header Image', 'type' => 'Document', 'value' => @$settings['cover_photo'] ) );    
+    //        $fieldset->addElement( array( 'name' => 'site_logo', 'label' => 'Site Logo', 'type' => 'Document', 'value' => @$settings['site_logo'] ) );  
+        }  
 		$fieldset->addLegend( 'Site Information' );
 		$form->addFieldset( $fieldset );
 		

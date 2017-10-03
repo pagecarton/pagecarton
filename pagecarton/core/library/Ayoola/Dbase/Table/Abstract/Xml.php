@@ -317,8 +317,24 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             
       //     Application_Breadcrumb::v(  static::$_tableInfo );
      //      Application_Breadcrumb::v(  static::$_tableInfo['table_info']['table_class'] );
-            $result = json_decode( file_get_contents( $file ), true );
-            return $result;  
+            $stored = json_decode( file_get_contents( $file ), true );
+            if( $stored['files'] === $globalFiles )
+            {
+                if( empty( $globalFiles ) && ! empty( $stored['result'] ) )
+                {
+                    //  where did we get record when files are empty
+                    // plugins ?
+          //        var_export( $stored['result'] );
+         //         var_export( $globalFiles );
+          //        var_export( $stored['files'] );
+                }
+                return $stored['result'];  
+            }
+            else
+            {
+                //  refresh if the global files have changed
+       //         var_export( $globalFiles );
+            }
           }
        //   var_export( $catchPath );
           //  str_ireplace
@@ -335,7 +351,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
        //   var_export( $file );
         //  var_export( file_get_contents( $file ) );
           Ayoola_Doc::createDirectory( dirname( $file ) );
-         file_put_contents( $file, json_encode( $result ) );
+          file_put_contents( $file, json_encode( array( 'result' => $result, 'files' => $globalFiles ) ) );
         }
       }
       catch( Exception $e )

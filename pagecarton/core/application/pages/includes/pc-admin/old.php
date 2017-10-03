@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: old.php	Saturday 16th of September 2017 10:59:04 PM	 $ 
+* @version $Id: old.php	Tuesday 3rd of October 2017 05:41:44 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -148,94 +148,6 @@ $_8613c385d091a49dd9565e7054272913 = new Ayoola_Page_Editor_Text( array (
 							{
 								
 $_8613c385d091a49dd9565e7054272913 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
-							{
-								
-$_7353e32c863adf892aa07d2258013c19 = new Ayoola_Menu( array (
-  'option' => 'admin',
-  'new_menu_name' => '',
-  'template_name' => 'BlackAccordionSide-menu',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_7353e32c863adf892aa07d2258013c19 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_d3f23056ccee195c99a4ad1d55ecd4dc = new Ayoola_Object_Embed( array (
-  'editable' => 'Application_Info',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'grey-shadow-background',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_d3f23056ccee195c99a4ad1d55ecd4dc = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_65fa896b81da25d62b865be1332e25c8 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<p><span style="font-size:12px;">User Posts</span></p>
-',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'white-content-theme-border',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_65fa896b81da25d62b865be1332e25c8 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_3048d35b02b2faea491a71775ef3d9b6 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<p><span style="font-size:12px;">User Pages</span></p>
-',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'white-content-theme-border',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_3048d35b02b2faea491a71775ef3d9b6 = null;
 
 							}
 							

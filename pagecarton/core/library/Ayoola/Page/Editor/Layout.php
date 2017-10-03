@@ -430,17 +430,32 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		$placeholders2 = array_unique( $placeholders2[1] );
 //		var_export( $placeholders );
 	//	var_export( array_fill_keys( $placeholders, '1' ) );
-	//	$placeholders = array_merge( array_fill_keys( $placeholders, null ), $this->getLayouts() );
+		$placeholders = array_merge( $placeholders, $placeholders2 );
+		$placeholders = array_map( 'strtolower', array_unique( $placeholders ) );
 		$danglingPlaceholders = array();
 		$sectionsForPreservation = explode( ',', trim( @$values['section_list'], ',' ) );
 		$sectionsForPreservation = array_combine( $sectionsForPreservation, $sectionsForPreservation );
 		unset( $sectionsForPreservation[''] );
+
+		//	i think this makes it to double content so form submit twice
+		$hashPlaceholders = array();
 		foreach( $placeholders as $each )
 		{
 			//	make sure the hash is also there
-			$placeholders[] = self::hashSectionName( $each );
+		//	$placeholders[] = self::hashSectionName( $each );
+			$hashPlaceholders[] = self::hashSectionName( $each );
 		}
-		$danglingPlaceholders = array_merge( array_diff( $sectionsForPreservation, $placeholders ), $danglingPlaceholders );
+	//	var_export( $hashPlaceholders );
+//		var_export( $placeholders );
+		foreach( $sectionsForPreservation as $each )
+		{
+			if( ! in_array( $each, $placeholders ) && ! in_array( $each, $hashPlaceholders ) )
+			{
+//		var_export( $each );
+				$danglingPlaceholders[] = $each;
+			}
+		}
+	//	$danglingPlaceholders = array_merge( array_diff( $sectionsForPreservation, $placeholders ), $danglingPlaceholders );
 	//	var_export( $danglingPlaceholders );
 	//	var_export( $sectionsForPreservation );
 
@@ -499,7 +514,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$placeholders[] = $each;
 			$content['template'] = str_ireplace( $basePlaceholder, $basePlaceholder . ' ' . $newPlaceholder,  $content['template'] );
 		}
-		$placeholders = array_merge( array_fill_keys( $placeholders, null ), array_fill_keys( $placeholders2, null ) );
+		$placeholders = array_fill_keys( $placeholders, null );
+//		$placeholders = array_merge( array_fill_keys( $placeholders, null ), array_fill_keys( $placeholders2, null ) );
 	//	var_export( array_keys( $placeholders ) );
 //		$this->sectionListForJs = implode( ',', array_keys( $placeholders ) );
 		// 
@@ -514,6 +530,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 //		var_export( $theme );
 //		var_export( $page['url'] );
 		$this->_layoutRepresentation = $content['template'];
+//		var_export( $placeholders );
 		foreach( $placeholders as $section => $v )
 		{
 			$section = strtolower( $section );
@@ -549,6 +566,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					//	Need to hash so the element ID won't conflict in Js
 					$numberedSectionName = $hashSectionName . $i;
 					
+		//			var_export( $numberedSectionName);
 					$templateDefaults = array();
 					if( ! isset( $values[$numberedSectionName] ) && $i )
 					{
@@ -639,7 +657,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 							}
 						} 
 					}
-				//	var_export( $values );
 					$eachObject = $this->getObjectInfo( $values[$numberedSectionName] ? : $sectionalValues[$numberedSectionName] );
 				//	var_export( $eachObject );
 					if( ! isset( $eachObject['object_name'] ) )
@@ -661,7 +678,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				//	var_export( $objectName );
 
 					$objectName = '_' . md5( $objectName );  
-					
+										
 					$objectParametersAvailable = array_map( 'trim', explode( ',', @$values[$numberedSectionName . '_parameters'] ) );
 					$parameters = array();
 					foreach( $objectParametersAvailable as $each )

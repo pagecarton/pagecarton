@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: cart.php	Saturday 16th of September 2017 10:58:49 PM	 $ 
+* @version $Id: cart.php	Tuesday 3rd of October 2017 05:41:29 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -95,28 +95,6 @@ $_11dfdc4f269612637101b65b72651c99 = new Ayoola_Object_Embed( array (
 							{
 								
 $_11dfdc4f269612637101b65b72651c99 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_79c3488bb05d610f1aa339e89e0b4d48 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<h1>Shopping Cart</h1>
-',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_79c3488bb05d610f1aa339e89e0b4d48 = null;
 
 							}
 							

@@ -174,17 +174,17 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	public function showMessage()
     {
 		$this->_parameter['markup_template'] = null;
-	//	$message = array_pop( $this->_badnews ) ? : 'There are no recent posts to display here. Please check back later.';
-	//	$message = $this->getParameter( 'badnews' ) ? : $message;
-		$message = $this->getParameter( 'badnews' ) ? : null;
+		$message = array_pop( $this->_badnews ) ? : 'Posts will be displayed here when they become available.';
+		$message = $this->getParameter( 'badnews' ) ? : $message;
+	//	$message = $this->getParameter( 'badnews' ) ? : null;
 	//	if( ! $values )
 		{
 			//	switch templates off
 			$this->_parameter['markup_template'] = null; 
 		}
 		
-	//	$this->setViewContent( '<p class="badnews"> ' . $message . ' ' . self::getQuickLink() . '</p>', true );
-		$message ? $this->setViewContent( ' ' . $message . ' ', true ) : null;
+		$this->setViewContent( '<p class="badnews"> ' . $message . ' ' . self::getQuickLink() . '</p>', true );
+	//	$message ? $this->setViewContent( ' ' . $message . ' ', true ) : null;
 		
 		//	Check settings
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' ); 
@@ -207,7 +207,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 			$link .= http_build_query( $articleInfo );  
  */
-			$this->setViewContent( '<a href="' . $this->buildQueryForRequestedPosts( self::getPostUrl() . '/post/creator/?' ) . '">' . $addPostMessage . '</a>' );
+			$this->setViewContent( '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() .  '/object/name/Application_Article_Creator/?' . '">' . $addPostMessage . '</a>' );
 		}
 	//	if( self::hasPriviledge() )
 	//	{
@@ -436,53 +436,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$template = null;
 	//	self::v( $values );   
 		 
+		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 		
- 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ) && $this->getParameter( 'add_a_new_post' ) ) 
-		{ 
-			$tempItem = array_shift( $values );
-			//	make the first item a link to add a new post
-		//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
-		//	self::v( $tempItem );
-			$tempItem2 = $tempItem;
-			if( is_string( $tempItem2 ) )
-			{
-				$tempItem2 = include( $tempItem );
-			}
-			$newArticleType = @$tempItem2['article_type'];
-			$newArticleTypeToShow = ucfirst( $newArticleType );
-	//		self::v( $newArticleType );
-	//		self::v( $newArticleTypeToShow );
-			$item = array( 
-							'article_url' => ( $this->buildQueryForRequestedPosts( self::getPostUrl() . '/post/creator/?' ) . '&article_type=' . $newArticleType ), 
-							'allow_raw_data' => true, 
-						//	'article_type' => $newArticleType, 
-							'always_allow_article' => $this->getParameter( 'article_types' ), 
-							'category_name' => $this->getParameter( 'category_name' ), 
-							'document_url' => @$tempItem2['document_url'] ? ( 'http://placehold.it/' . ( @$articleSettings['cover_photo_width'] ? : '900' ) . 'x' . ( @$articleSettings['cover_photo_height'] ? : '300' ) . '&text=' . ( @$articleSettings['cover_photo_width'] ? : '900' ) . 'x' . ( @$articleSettings['cover_photo_height'] ? : '300' ) . '' ) : null, 
-							'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
-							'publish' => true, 
-							'auth_level' => $articleSettings['allowed_writers'], 
-							'article_tags' => '', 
-							'username' => Ayoola_Application::getUserInfo( 'username' ), 
-							'article_title' => 'Click here to add a new ' . $newArticleTypeToShow . '', 
-							'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
-							'article_content' => '<p> ' . $newArticleTypeToShow . ' article will be displayed here. You can <strong>format </strong>your <em>article </em>using any HTML <s>style</s> you want. You can use <span style="color:#FF0000">c</span>o<span style="color:#008000">l</span>o<span style="color:#0000FF">r</span>s. <span style="color:#008000">You </span>can <span style="background-color:#FFFF00">add</span> as many images as you want in this space.</p>
-							<p>You can also use mathematical expressions in the article e.g. X<sup>2 -y</sup> + 2x = y.</p>
-							', 
-						);  
-	//		self::v( $item );  
-		//	if( $tempData = $this->retrieveArticleData( $tempItem ) )
-			{
-		//		$item = array_merge( $tempData, $item ); 
-			}
-			//	now a second row
-		//	$item['article_type'] = $tempItem[]
-		
-			
-			array_unshift( $values, $item );   
-		//	array_push( $values, $item );   
-			array_unshift( $values, $tempItem );
-		}
+		//	default at 1800 so it can always cover the screen
+		$maxWith = $this->getParameter( 'cover_photo_width' ) ? : ( @$articleSettings['cover_photo_width'] ? : 1500 );
+		$maxHeight = $this->getParameter( 'cover_photo_height' ) ? : ( @$articleSettings['cover_photo_height'] ? : 600 ); 
  		
 		//	Split to chunk\
 	//	$_REQUEST['list_page_number'] = 0;
@@ -530,6 +488,58 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		
 			//		self::v( $values );
 		$values = $values ? array_unique( $values, SORT_REGULAR ) : array(); 
+		
+ 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ) && $this->getParameter( 'add_a_new_post' ) ) 
+		{ 
+			$tempItem = array_shift( $values );
+			//	make the first item a link to add a new post
+		//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
+		//	self::v( $tempItem );
+			$tempItem2 = $tempItem;
+			if( is_string( $tempItem2 ) )
+			{
+				$tempItem2 = include( $tempItem );
+			}
+			$newArticleType = @$tempItem2['article_type'];
+			$newArticleTypeToShow = ucfirst( $newArticleType );
+	//		self::v( $newArticleType );
+	//		self::v( $newArticleTypeToShow );
+			$item = array( 
+							'article_url' => ( '/object/name/Application_Article_Creator/?&article_type=' . $newArticleType ), 
+							'allow_raw_data' => true, 
+						//	'article_type' => $newArticleType, 
+							'always_allow_article' => $this->getParameter( 'article_types' ), 
+							'category_name' => $this->getParameter( 'category_name' ), 
+							'document_url' => '/img/placeholder-image.jpg', 
+							'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
+							'publish' => true, 
+							'auth_level' => $articleSettings['allowed_writers'], 
+							'article_tags' => '', 
+							'username' => Ayoola_Application::getUserInfo( 'username' ), 
+							'article_title' => 'Click here to add a new ' . $newArticleTypeToShow . '', 
+							'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
+							'article_content' => '<p> ' . $newArticleTypeToShow . ' article will be displayed here. You can <strong>format </strong>your <em>article </em>using any HTML <s>style</s> you want. You can use <span style="color:#FF0000">c</span>o<span style="color:#008000">l</span>o<span style="color:#0000FF">r</span>s. <span style="color:#008000">You </span>can <span style="background-color:#FFFF00">add</span> as many images as you want in this space.</p>
+							<p>You can also use mathematical expressions in the article e.g. X<sup>2 -y</sup> + 2x = y.</p>
+							', 
+						);  
+	//		self::v( $item );  
+		//	if( $tempData = $this->retrieveArticleData( $tempItem ) )
+			{
+		//		$item = array_merge( $tempData, $item ); 
+			}
+			//	now a second row
+		//	$item['article_type'] = $tempItem[]
+		
+			
+		//	array_push( $values, $item );   
+			array_unshift( $values, $tempItem );
+
+			if( count( $values ) >= $j )
+			{
+				array_pop( $values );  
+			}
+			array_push( $values, $item );   
+		}
 	//	self::v( $values[''] );
 	//	var_export( $values );
 		while( $values )
@@ -610,13 +620,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					@$data['document_url'] ? : ( $data['document_url'] = $data['display_picture'] );
 				}
 			}
-			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-			
-			//	default at 1800 so it can always cover the screen
-			$maxWith = $this->getParameter( 'cover_photo_width' ) ? : ( @$articleSettings['cover_photo_width'] ? : 1800 );
-			$maxHeight = $this->getParameter( 'cover_photo_height' ) ? : ( @$articleSettings['cover_photo_height'] ? : 600 ); 
 		//	if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
-			if( ! @$data['document_url'] && @$data['article_url'] )
+			if( @$data['article_url'] )
+//			if( ! @$data['document_url'] && @$data['article_url'] )
 			{
 				if( $this->getParameter( 'skip_ariticles_without_cover_photo' ) && ! @$data['document_url_base64'] && ( ! Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ? : @$data['display_picture'] ) ) )
 				{
@@ -646,7 +652,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( $data['article_url'] );
 			//	self::v( $data );
 			
-			$url = strtolower( $data['article_url'] );
+			//	Can't be lowercase because of auto create link
+			$url = $data['article_url'];
+
+//			$url = strtolower( $data['article_url'] );
 	//		var_export( $this->getParameter( 'article_types' ) );
 			$data += is_array( $this->_objectTemplateValues ) ? $this->_objectTemplateValues : array();
 			if( $this->getParameter( 'length_of_description' ) )
@@ -759,11 +768,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//		$this->_xml .= '<p style="">' . @$data['article_description'] .  ' <a title="Click to read more on this post" href="' . $url . '"> Read more... </a> ' . '</p>'; 
 			if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )
 			{
-				$imageLink = '<div style=""><a href="' . $url . '" onClick=""><img class="' . __CLASS__ . '_IMG" style="filter: brightness(50%);-webkit-filter: brightness(50%);-moz-filter: brightness(50%);" src="' . $image . '" alt="' . $data['article_title'] . "'s cover photo" . '" title="' . $data['article_title'] . "'s cover photo" . '"/></a></div>';  
+				$imageLink = '<div style=""><a href="' . Ayoola_Application::getUrlPrefix() . $url . '" onClick=""><img class="' . __CLASS__ . '_IMG" style="filter: brightness(50%);-webkit-filter: brightness(50%);-moz-filter: brightness(50%);" src="' . Ayoola_Application::getUrlPrefix() . $image . '" alt="' . $data['article_title'] . "'s cover photo" . '" title="' . $data['article_title'] . "'s cover photo" . '"/></a></div>';  
 				
 				//	Create this template placeholder value so we can have solve the problem of blank image tags in template markups
 				$data['cover_photo_with_link'] = $imageLink;
-				$this->_xml .= $imageLink;  
+			//	$this->_xml .= $imageLink;  
 			}
 			$data['button_value'] = $this->getParameter( 'button_value' ) ? : 'View';
 			
@@ -781,11 +790,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['category_text'] = $categoryText;
 			
 			//	Social Media
-			$parameter = array( 'url' => $url, 'title' => $data['article_title'] );
+			$parameter = array( 'url' =>  Ayoola_Application::getUrlPrefix() . $url, 'title' => $data['article_title'] );
 		//	$this->_xml .= Application_GooglePlus_Share::viewInLine( $parameter );
 		//	$this->_xml .= Application_Facebook_Like::viewInLine( $parameter );
 		//	$this->_xml .= '<hr />';
-			$this->_xml .= '<h2><a href="' . $url . '">' . $data['article_title'] . '</a></h2>';
+	//		$this->_xml .= '<h2><a href="' . Ayoola_Application::getUrlPrefix() .  $url . '">' . $data['article_title'] . '</a></h2>';
 		//	$this->_xml .= '<div>';
 		//	$this->_xml .= '<button style="" onClick="this.nextSibling.style.display=\'\';">Share...</button>';
 		//	$this->_xml .= '<div style="display:none;">' . Application_SocialMedia_Share::viewInLine( $parameter ) . '</div>';  
@@ -837,7 +846,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$postType = @$data['article_type'];
 			}
 		//	self::v( $postType );
-			$this->_xml .= '<div style="font-size:small;">';
+	//		$this->_xml .= '<div style="font-size:small;">';
 			$data['filtered_time'] = self::filterTime( $data );
 			switch( $postType )
 			{
@@ -846,14 +855,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				case 'service':
 					
 					
-					$this->_xml .= '<p style="">
+/*					$this->_xml .= '<p style="">
 											<strong>Price:</strong> 
 											' . ( $data['item_old_price'] ? '
 											<span class="" style="text-decoration:line-through;"> ' . $data['item_old_price'] . ' </span>' : '' ) . $data['item_price'] . '
 									</p> ';
-				//	$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
+*/				//	$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 					$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( array( 'data' => $data, 'button_value' => $this->getParameter( 'button_value' ) ? : $data['button_value'] ) );
-					$this->_xml .= $data['button_add_to_cart'];
+			//		$this->_xml .= $data['button_add_to_cart'];
 				//	$this->_xml .= @$data['article_content'];
 				break; 
 				case 'user_information':
@@ -902,9 +911,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				case 'profile':
 				//	$this->_xml .= '<span style="display:inline;"><strong>Name:</strong> ' . ( $data['full_legal_name'] ?  : 'None' ) . '</span> ';
 				//	exit();
-					@$this->_xml .= '<span style="display:inline;"><strong>From: </strong> ' . $data['_city'] . ', ' .  $data['_province'] . ', ' .  $data['_country'] . ' ' .  $data['_zip'] . '</span> ';
+			//		@$this->_xml .= '<span style="display:inline;"><strong>From: </strong> ' . $data['_city'] . ', ' .  $data['_province'] . ', ' .  $data['_country'] . ' ' .  $data['_zip'] . '</span> ';
 				//	$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;					
-					$this->_xml .= '<span style="" class="boxednews goodnews"> <a href="' . $url . '">View Profile...</a> </span> ';
+				//	$this->_xml .= '<span style="" class="boxednews goodnews"> <a href="' . Ayoola_Application::getUrlPrefix() .  $url . '">View Profile...</a> </span> ';
 				break;
 				case 'audio':
 				case 'music':
@@ -944,17 +953,17 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//		var_export( $data['file_size'] );
 					
 					//	Version
-					$this->_xml .= '<span style="display:inline;"><strong>Version:</strong> ' . ( @$data['download_version'] ? $data['download_version'] : 'None' ) . '</span> ';
+			//		$this->_xml .= '<span style="display:inline;"><strong>Version:</strong> ' . ( @$data['download_version'] ? $data['download_version'] : 'None' ) . '</span> ';
 					
 					//	By
 		//			$this->_xml .= '<span style="display:inline;"><strong>Uploaded by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-					$this->_xml .= ' ' . self::filterTime( $data );
-					$this->_xml .= '' . $categoryText;
+			//		$this->_xml .= ' ' . self::filterTime( $data );
+			//		$this->_xml .= '' . $categoryText;
 					
 			//		$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 					
-					$data['download_button'] = '<a title="Go to the download page." href="' . $url . '"><input type="button" value="Download Now" /></a>';
-					$this->_xml .= $data['download_button'];
+					$data['download_button'] = '<a title="Go to the download page." href="' . Ayoola_Application::getUrlPrefix() . $url . '"><input type="button" value="Download Now" /></a>';
+			//		$this->_xml .= $data['download_button'];
 				//	$this->_xml .= '<a title="Go to the download page." href="' . $url . '"><input type="button" value="Download Now" /></a>';
 				//	$this->_xml .= Application_Article_Type_Download::viewInLine( array( 'data' => $data ) );
 				break;
@@ -962,8 +971,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					
 					//	By
 				//	$this->_xml .= '<span style="["><strong>Video by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-					$this->_xml .= '  ' . self::filterTime( $data );
-					$this->_xml .= '' . $categoryText;
+		//			$this->_xml .= '  ' . self::filterTime( $data );
+			//		$this->_xml .= '' . $categoryText;
 				//	$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 					
 				//	$this->_xml .= Application_Article_Type_Video::viewInLine( array( 'data' => $data ) );  
@@ -974,13 +983,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					
 					//	By
 			//		$this->_xml .= '<span style="["><strong>Poll by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-					$this->_xml .= '  ' . self::filterTime( $data );
-					$this->_xml .= '' . $categoryText;
+		//			$this->_xml .= '  ' . self::filterTime( $data );
+		//			$this->_xml .= '' . $categoryText;
 
 				//	$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 					
 				//	$this->_xml .= Application_Article_Type_Poll::viewInLine( array( 'data' => $data ) );
-					$this->_xml .= '<a title="Go to the voting page." href="' . $url . '"><input type="button" value="Vote Now" /></a>';
+		//			$this->_xml .= '<a title="Go to the voting page." href="' . Ayoola_Application::getUrlPrefix() . $url . '"><input type="button" value="Vote Now" /></a>';
 				break;
 				case 'quiz':
 					//	title
@@ -988,11 +997,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					
 					//	By
 		//			$this->_xml .= '<span style=""><strong>Quiz by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-					$this->_xml .= '  ' . self::filterTime( $data );
-					$this->_xml .= '' . $categoryText;
+			//		$this->_xml .= '  ' . self::filterTime( $data );
+			//		$this->_xml .= '' . $categoryText;
 
 					
-					$this->_xml .= '<a title="Click to start test." href="' . $url . '"><input  class="boxednews goodnews" type="button" value="Start Test (' . Ayoola_Filter_Time::splitSeconds( $data['quiz_time'] ? : 0, 2 ) . ')" /></a>';
+			//		$this->_xml .= '<a title="Click to start test." href="' . Ayoola_Application::getUrlPrefix() . $url . '"><input  class="boxednews goodnews" type="button" value="Start Test (' . Ayoola_Filter_Time::splitSeconds( $data['quiz_time'] ? : 0, 2 ) . ')" /></a>';
 //					$this->_xml .= '<h2><a title="Click to start test" href="' . $url . '">Click here to Start Test (' . Ayoola_Filter_Time::splitSeconds( $data['quiz_time'], 2 ) . ') </a></h2><p>' . $data['article_description'] . '</p>';
 			//		$this->_xml .= Application_Article_Type_Quiz::viewInLine( array( 'data' => $data ) );
 				break;
@@ -1003,8 +1012,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					//	By
 				//	$this->_xml .= '<span style=""><strong>by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
 					//		$this->_xml .= '<p>' . $data['article_description'] . '</p>';
-					$this->_xml .= '  ' . self::filterTime( $data );
-					$this->_xml .= '' . $categoryText;
+			//		$this->_xml .= '  ' . self::filterTime( $data );
+			//		$this->_xml .= '' . $categoryText;
 					
 				//	$this->_xml .= '<span style="">';
 				//	$this->_xml .= @$data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
@@ -1012,14 +1021,16 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	$this->_xml .=	'</span>';
 				break;
 			}
-			$this->_xml .= '</div>';
-			@$this->_xml .= $data['article_description'] ? '<p>' . $data['article_description'] . '</p>' : null;
+	//		$this->_xml .= '</div>';
+	//		@$this->_xml .= $data['article_description'] ? '<p>' . $data['article_description'] . '</p>' : null;
 			
 			//	destroy float
-			$this->_xml .= $data['clear_float'] = '<div style="clear:both;"></div>'; 
+	//		$this->_xml .= $data['clear_float'] = '<div style="clear:both;"></div>'; 
 		//	$this->_xml .= '<hr />';
 	//		$this->_xml .= self::getQuickLink( $data );
 		//	$this->_xml .= $categoryText;
+			$this->_xml .= self::getDefaultPostView( $data );
+		
 			
 			//	useful in the templates
 			$data['article_quick_links'] = self::getQuickLink( $data );

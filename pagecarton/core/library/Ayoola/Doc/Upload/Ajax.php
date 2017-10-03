@@ -132,8 +132,12 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				}
 				else
 				{
+					//	if its new install, lets allow for specific files
+					
+
 					$message = 'You are not allowed to upload a file.';
 					$this->_objectData['badnews'][2] = $message;
+					$this->_objectData['error'] = @array_pop( $this->_objectData['badnews'] );
 					$this->_objectData['status'][] = 'failed';
 					$this->setViewContent( $message );
 					return false;

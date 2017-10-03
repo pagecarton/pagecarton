@@ -485,6 +485,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 			case 'document_url':
 			case self::hashElementName( 'document_url' ):
 			case 'cover_photo':
+			case 'site_logo':
 			case self::hashElementName( 'cover_photo' ):
 				$element['data-document_type'] = 'image';
 				
@@ -539,6 +540,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 					</span>
 					'; 
 				}
+				@$docSettings['allowed_viewers'] = @$docSettings['allowed_viewers'] ? : array();
+				@$docSettings['allowed_viewers'][] = 98;	// allow us to user domain owners
 				
  				if( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_viewers'] ) && ! @$element['data-allow_base64'] )
 				{ 

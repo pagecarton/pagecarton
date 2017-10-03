@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Friday 15th of September 2017 12:46:11 PM	 $ 
+* @version $Id: signin.php	Tuesday 3rd of October 2017 05:41:36 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -78,30 +78,6 @@ $_aa9e0e44eb52fcae5dbf065506a8071c = new Ayoola_Page_Editor_Text( array (
 							{
 								
 $_aa9e0e44eb52fcae5dbf065506a8071c = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_da572a4816c3b3a2748caf6101791ccb = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<p></p>
-<h1>Login</h1>
-',
-  'url_prefix' => '/pagecarton/index.php',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'white-background',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_da572a4816c3b3a2748caf6101791ccb = null;
 
 							}
 							

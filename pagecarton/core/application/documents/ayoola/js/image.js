@@ -209,6 +209,13 @@ ayoola.image =
 					}
 				//	var response = JSON.parse( ajax.responseText );
 					ayoola.image.files[fileObject.id]['response'] = response;
+					if( response['error'] )
+					{
+						alert( String( response['error'] ) );
+
+						//	close progresss if available
+						ayoola.image.removeProgress ? ayoola.image.removeProgress() : null;
+					}
 					ayoola.image.files[fileObject.id]['status'] = 'Uploaded'; 
 					ayoola.image.callAfterStateChangeCallbacks( fileObject.id );
 				} 

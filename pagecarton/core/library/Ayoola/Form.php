@@ -906,6 +906,14 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			array_push( $allElements, $this->getRequiredFieldset() );
 		}
  */		$elementMarkups = null;
+		if( ! empty( $_REQUEST['pc_form_element_whitelist'] ) )
+		{
+			$whiteList = array_map( 'trim', explode( ',', $_REQUEST['pc_form_element_whitelist'] ) );
+		}
+		else
+		{
+			$whiteList = $this->getParameter( 'element_whitelist' );
+		}
 		foreach( $allElements as $name => $markup )
 		{
 		//	var_export( $name . '<br>' );
@@ -915,7 +923,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			{
 				//	You are always on the whitelist
 			}   
-			elseif( $this->getParameter( 'element_whitelist' ) && ! in_array( $this->_names[$name]['real_name'], $this->getParameter( 'element_whitelist' ) ) && ! in_array( @$this->_names[$name]['data-pc-element-whitelist-group'], $this->getParameter( 'element_whitelist' ) ) )       
+			elseif( $whiteList && ! in_array( $this->_names[$name]['real_name'], $whiteList ) && ! in_array( @$this->_names[$name]['data-pc-element-whitelist-group'], $whiteList ) )       
 			{
 			//	var_export( $this->_names[$name]['real_name'] );
 			//	var_export( @$this->_names[$name]['data-pc-element-whitelist-group'] );  
@@ -1178,7 +1186,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */
 	public function getOneFieldSetAtATime()
     {
-		if( $this->getParameter( 'element_whitelist' ) )
+		if( $this->getParameter( 'element_whitelist' ) || ! empty( $_REQUEST['pc_form_element_whitelist'] ) )
 		{
 			return false;
 		}

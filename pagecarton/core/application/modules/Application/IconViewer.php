@@ -41,14 +41,15 @@ class Application_IconViewer extends PageCarton_Widget
     {    
 		try
 		{ 
-            if( empty( $_REQUEST['url'] ) || ! Ayoola_Loader::checkFile( '/documents' . $_REQUEST['url'] ) )
+            $url = $this->getParameter( 'url' ) ? : @$_REQUEST['url'];
+
+            if( empty( $url ) || ! Ayoola_Loader::checkFile( '/documents' . $url ) )
             {
                 
        //         Ayoola_Application::view();
       //          exit();
       //          return false;
             }
-            $url = @$_REQUEST['url'];
             //  Code that runs the widget goes here...
             $ext = strtolower( array_pop( explode( '.', $url ) ) );
             switch( $ext )
@@ -84,6 +85,7 @@ class Application_IconViewer extends PageCarton_Widget
                 break;
                 case 'mp3':
                 case 'wma':
+                case 'm4a':
                 case 'aac':
                     $url = '/img/audio-icon.png';
                 break;
@@ -98,9 +100,15 @@ class Application_IconViewer extends PageCarton_Widget
             }
      //       var_export( $url );
     //        header( 'Location: ' . $url );
-            if( $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
+            @$maxWith = $this->getParameter( 'max_width' ) ? : @intval( $_REQUEST['max_width'] );
+            @$maxHeight = $this->getParameter( 'max_height' ) ? : @intval( $_REQUEST['max_height'] ); 
+            if( $path = Ayoola_Loader::checkFile( 'documents' . $url ) AND ( $maxHeight || $maxWith ) )
             {
-                ImageManipulator::makeThumbnail( $path );
+         //      var_export( $maxWith );
+          //     var_export( $maxHeight );
+         //      var_export( $path );
+         //       exit();
+                ImageManipulator::makeThumbnail( $path, $maxWith, $maxHeight );
                 exit();
                 //	default
             }

@@ -299,8 +299,8 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
     {
 		if( self::$_postUrl ){ return self::$_postUrl; }
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-		self::$_postUrl = rtrim( @$articleSettings['post_url'] ? : '/article/', '/' );
-		return self::$_postUrl;
+		self::$_postUrl = rtrim( @$articleSettings['post_url'] ? : '/posts/', '/' );
+		return Ayoola_Application::getUrlPrefix() . self::$_postUrl;
 	}
 		
     /**
@@ -1088,21 +1088,56 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
      * Returns an HTML to display footer for messages
      * 
      */
+	public static function getDefaultPostView( $data )
+    {
+
+		if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )
+		{
+
+		}
+		$html = null;
+		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;margin:2em 0 2em 0;">';
+		$html .= '<a title="View ' . $data['article_title'] . '" style="color:inherit;" href="' . Ayoola_Application::getUrlPrefix() . $data['article_url'] . '">';
+		$html .= '<div style="padding:3em 2em 3em 2em; background: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\');  background-size: cover; background-position: center; background-attachment: fixed; color: #fff !important; ">';
+		$html .= '<p style="text-align:right;">' . $data['article_type'] . '</p>';
+		$html .= '<h2>' . $data['article_title'] . '</h2>';
+		$html .= $data['article_description'] ? '<br><br><p>' . $data['article_description'] . '</p>' : null;
+		$html .= '</div>';
+		$html .= '</a>';
+		$html .= '<div style="font-size:x-small;text-transform:uppercase;padding:3em 2em 3em 2em; background:     linear-gradient(      rgba(50, 50, 50, 0.7),      rgba( 50, 50, 50, 0.7)    );  color: #fff !important; ">';
+		$html .= '<span style="margin-right:1em;">' . self::filterTime( $data ) . '</span>';
+		$html .= '<span style="margin-right:1em;"> by ' . $data['username'] . '</span>';
+		$html .= $data['category_text'] ? '<span style="margin-right:1em;"> in ' . $data['category_text'] . ' </span>' : null;
+		$html .= self::hasPriviledge( array( 99, 98 ) ) ? '  
+		<a  style="color:inherit; margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?article_url=' . $data['article_url'] . '&\', \'page_refresh\' );" href="javascript:">edit</a> 
+		<a  style="color:inherit; margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?article_url=' . $data['article_url'] . '&\', \'page_refresh\' );" href="javascript:"> delete </a>
+		' : null;
+
+		$html .= '</div>';
+		$html .= '</div>';
+
+		return $html;
+	}
+	
+    /**
+     * Returns an HTML to display footer for messages
+     * 
+     */
 	public static function filterTime( $data )
     {
 		$filter = new Ayoola_Filter_Time();
 		$html = null;
 	//	var_export( $data['article_modified_date'] );
 	//	var_export( $data['article_creation_date'] );
-		if( @$data['article_modified_date'] )
+		if( @$data['article_creation_date'] )
 		{
 		//	$html .= '<strong> Modified: </strong> ';
-			$html .= $filter->filter( $data['article_modified_date'] );
+			$html .= $filter->filter( $data['article_creation_date'] );
 		}
 		else
 		{
 		//	$html .= '<strong> Posted: </strong> ';
-			$html .= $filter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
+			$html .= $filter->filter( @$data['article_modified_date'] ? : ( time() - 3 ) ); 
 		}
 		return $html;
 	
@@ -1253,7 +1288,8 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
 		$fieldName64 = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url_base64' ) : 'document_url_base64' );
 	//	var_export( $link );
-		$fieldset->addElement( array( 'name' => 'document_url', 'label' => 'Cover Photo', 'placeholder' => 'Cover Photo for this ' . $postTypeLabel . '', 'type' => 'Document', 'data-previous-url' => @$values['article_url'] ?'/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$values['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ) : null, 'autocomplete' => 'off', 'value' => null ) );
+	//	var_export( @$values['article_url'] );
+		$fieldset->addElement( array( 'name' => 'document_url', 'label' => 'Cover Photo', 'placeholder' => 'Cover Photo for this ' . $postTypeLabel . '', 'type' => 'Document', 'value' => @$values['document_url'] ) );
 //		$fieldset->addElement( array( 'name' => 'document_url', 'label' => 'Cover Photo', 'placeholder' => 'Cover Photo for this ' . $postTypeLabel . '', 'type' => 'Document', 'data-previous-url' => @$values['article_url'] ?'/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$values['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ) : null, 'autocomplete' => 'off', 'value' => null ) );
 	//	if( @$values['document_url_base64'] )
 		{ 

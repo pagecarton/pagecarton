@@ -43,7 +43,7 @@ class Application_Article_Delete extends Application_Article_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			
+		//	var_export( __LINE__ );
 			//	Only the owner or priviledged users can delete
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			if( ! self::isOwner( $data['user_id'] ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }  

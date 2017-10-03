@@ -50,7 +50,9 @@ class Application_Article_Creator extends Application_Article_Abstract
     {
 		try
 		{ 
-			
+	//		var_export( __LINE__ );
+
+		//	throw new Exception( 'XXX' );
 
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );  
@@ -280,9 +282,12 @@ class Application_Article_Creator extends Application_Article_Abstract
 			
 			
 		}
-		catch( Application_Article_Exception $e )
+	//	catch( Application_Article_Exception $e )
+		catch( Exception $e )
 		{ 
-		//	var_export( $e->getMessage() );
+		//	print_r(debug_backtrace());
+		//	exit();
+	//		var_export( $e->getTraceAsString() );
 			$this->getForm()->setBadnews( $e->getMessage() );
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false; 

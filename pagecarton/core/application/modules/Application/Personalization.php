@@ -139,10 +139,10 @@ class Application_Personalization extends Ayoola_Abstract_Table
 					{
 					//	var_export( self::hasPriviledge() );
 			//			exit();
-						header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/404/' );
+				//		header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/404/' );
 						
 						//	Secure installer
-						@unlink( Ayoola_Application::$installer );
+				//		@unlink( Ayoola_Application::$installer );
 						return false;
 					}
 				break;

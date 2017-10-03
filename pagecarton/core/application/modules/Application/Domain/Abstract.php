@@ -129,7 +129,9 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 		if( defined( 'PC_BASE' ) && is_dir( $oldPath ) && ! is_dir( $newPath ) )
 		{
 		//	var_export( $newPath );
-			mkdir( $newPath, 0777, true );
+
+			//	auto creating directories. Making multiple sites dir
+		//	mkdir( $newPath, 0777, true );
 			Ayoola_Doc::recursiveCopy( $oldPath, $newPath );
 			rename( $oldPath, $oldPath . '.old' );
 			$pathToUse = $newPath;

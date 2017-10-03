@@ -51,17 +51,22 @@ class Application_Article_PhotoViewer extends Application_Article_Abstract
 			
 			if( ! $data = self::getIdentifierData() )
 			{ 
-				header( 'Location: https://placeholdit.imgix.net/~text?txtsize=200&txt=No Photo&w=' . $maxWith . '&h=' . $maxHeight . '' );
+/*				header( 'Location: https://placeholdit.imgix.net/~text?txtsize=200&txt=No Photo&w=' . $maxWith . '&h=' . $maxHeight . '' );
 				exit( 'die' );
-			}
+*/			}
 			if( empty( $data['document_url_base64'] ) )
 			{
 				if( empty( $data['document_url'] ) )
 				{
-					header( 'Location: https://placeholdit.imgix.net/~text?txtsize=200&txt=No Photo&w=' . $maxWith . '&h=' . $maxHeight . '' );
-					exit( 'die' );
+				//	header( 'Location: https://placeholdit.imgix.net/~text?txtsize=200&txt=No Photo&w=' . $maxWith . '&h=' . $maxHeight . '' );
+			//		exit( 'die' );
+					$data['document_url'] = '/img/placeholder-image.jpg';
 				}
-				$data['document_url_base64'] = base64_encode( file_get_contents( Ayoola_loader::checkFile( 'documents' . $data['document_url'], array( 'prioritize_my_copy' => true, ) ) ) );
+			//	var_export( $data['document_url'] );
+				Application_IconViewer::viewInLine( array( 'url' => $data['document_url'] ) );
+                exit();
+
+	//			$data['document_url_base64'] = base64_encode( file_get_contents( Ayoola_loader::checkFile( 'documents' . $data['document_url'], array( 'prioritize_my_copy' => true, ) ) ) );
 			//	var_export( Ayoola_loader::checkFile( 'documents' . $data['document_url'], array( 'prioritize_my_copy' => true, ) ) );
 			}
 			$result = self::splitBase64Data( $data['document_url_base64'] );

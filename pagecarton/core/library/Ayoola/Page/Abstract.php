@@ -229,6 +229,10 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 	public function createForm( $submitValue, $legend = null, Array $values = null )  
     {
 	//	var_export( $values );
+		if( $this->fakeValues )
+		{
+			//	if we have this, we need to use all values present.
+		}
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
 		$fieldset = new Ayoola_Form_Element;
@@ -255,25 +259,28 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 	//	$fieldset->addElement( array( 'name' => 'layout_name', 'type' => 'Hidden', 'value' => null ) );
 	//	$fieldset->addElement( array( 'name' => 'page_options[]', 'type' => 'Hidden', 'value' => null ) );
 
-		if( ! empty( $values ) )
+		if( $this->fakeValues || ! empty( $values ) )
 		{
 			
 			$options =  array( 
-								'template' => 'Select a specific template for this page. (Over-rides default template)', 
-								'logged_in_hide' => 'Hide from logged inn users', 
-								'logged_out_hide' => 'Hide from logged out users', 
+								'template' => 'Select a specific theme for this page. (Over-rides default theme)', 
+								'logged_in_hide' => 'Hide page from logged inn users', 
+								'logged_out_hide' => 'Hide page from logged out users', 
 								'private' => 'Hide page on sub-domains', 
 								'redirect' => 'Auto-redirect this page to another page', 
-								'disable' => 'Disable Page', 
-								'clone_existing_page' => 'Clone an existing page', 
+						//		'disable' => 'Disable Page', 
+					//			'clone_existing_page' => 'Clone an existing page', 
 								'module' => 'Use this page as a module for articles and other posts',  
-								'advanced' => 'Show advanced options' 
+						//		'advanced' => 'Show advanced options' 
 								);
 			
 			$fieldset->addElement( array( 'name' => 'page_options', 'label' => 'Page Options', 'type' => 'Checkbox', 'value' => @$values['page_options'] ), $options );
 		}
 		
 		//	Auth Level
+
+		if(  $this->fakeValues || ! empty( $values ) )
+		{
 			
 			$authLevel = new Ayoola_Access_AuthLevel;  
 			$authLevel = $authLevel->select();
@@ -288,20 +295,28 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 			{
 		//		unset( $authLevel[98] );
 			}
-		//	$authLevel[0] = 'Everyone';
-		//	$authLevel[99] = 'Super Users (Admin)';
-		//	$authLevel[1] = 'All Signed-in Users';
-			$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Who can view this page', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel );    
+			$authLevel[99] = 'Admin Only';
+			$authLevel[98] = 'Private (Only Me)';
+			$authLevel[1] = 'Registration Required';
+			$authLevel[0] = 'Public';
+			$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Page Privacy', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel );    
 	//		$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $authLevel )  ) ); 
 			unset( $authLevel );
-				
-			//	allows to set system pages here
-			$fieldset->addElement( array( 'name' => 'system', 'type' => 'hidden', 'value' => null ) );    
+
+			$fieldset->addElement( array( 'name' => 'cover_photo', 'label' => 'Page Header Image', 'type' => 'Document', 'value' => @$values['cover_photo'] ) );    
+
+		}
+		else
+		{
+			$fieldset->addElement( array( 'name' => 'auth_level', 'type' => 'hidden', 'value' => '0' ) );    
+		}	
+		//	allows to set system pages here
+		$fieldset->addElement( array( 'name' => 'system', 'type' => 'hidden', 'value' => null ) );    
 	
 		$fieldset->addLegend( $legend );
 		$fieldset->addFilters( 'StripTags::Trim' );
 		$form->addFieldset( $fieldset );   
-		if( ! $values && is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'clone_existing_page', $this->getGlobalValue( 'page_options' ) ) )
+/*		if( ! $values && is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'clone_existing_page', $this->getGlobalValue( 'page_options' ) ) )
 		{
 			$fieldset = new Ayoola_Form_Element;
 			$fieldset->addLegend( 'Clone an existing page...' );
@@ -317,14 +332,14 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		//	$fieldset->addRequirement( 'default_url', array( 'InArray' => array_keys( $option )  ) );
 			$form->addFieldset( $fieldset );
 		}
-		if( is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'advanced', $this->getGlobalValue( 'page_options' ) ) )
+*//*		if( is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'advanced', $this->getGlobalValue( 'page_options' ) ) )
 		{
 			$fieldset = new Ayoola_Form_Element;
 			$fieldset->addLegend( 'Advanced settings for this page' );
 			$fieldset->addElement( array( 'name' => 'keywords', 'placeholder' => 'Comma-separated keywords for search engines', 'type' => 'InputText', 'value' => @$values['keywords'] ) );
 			$form->addFieldset( $fieldset );
 		}
-		if( is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'redirect', $this->getGlobalValue( 'page_options' ) ) )
+*/		if( is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'redirect', $this->getGlobalValue( 'page_options' ) ) )
 		{
 			$fieldset = new Ayoola_Form_Element;
 			$fieldset->addLegend( 'Redirect this page to another page' );

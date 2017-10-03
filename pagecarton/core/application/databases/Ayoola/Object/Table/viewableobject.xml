@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="viewableobject" creation_time="1502333845" table_version="0.04" module_version="1.00" table_class="Ayoola_Object_Table_ViewableObject" creation_ip="0">
-  <RECORDS autoId="12">
+  <RECORDS autoId="14">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[5]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_User_Creator]]></TABLE_FIELD>
@@ -77,6 +77,20 @@
       <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[1077-0-4]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Custom Form]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="12">
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Page_Info]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[ayoola_page_info]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[0-0-12]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Page Info]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="13">
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_SiteInfo]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[Site Headline]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[application_siteinfo]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[0-0-13]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

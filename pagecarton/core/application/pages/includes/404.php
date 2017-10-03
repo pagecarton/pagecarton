@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: 404.php	Saturday 16th of September 2017 10:58:51 PM	 $ 
+* @version $Id: 404.php	Tuesday 3rd of October 2017 05:41:35 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -75,28 +75,6 @@ $_2cb92db7d1c93ec2ad288ca0dd5803c0 = new Ayoola_Object_Embed( array (
 							{
 								
 $_2cb92db7d1c93ec2ad288ca0dd5803c0 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_c15064ab7dd70d6e4256417464e1d148 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<h1>Error 404 - Page Not Found</h1>
-',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'well',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_c15064ab7dd70d6e4256417464e1d148 = null;
 
 							}
 							
