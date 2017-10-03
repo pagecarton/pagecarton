@@ -70,16 +70,16 @@ class Application_Upgrade_Check extends PageCarton_Widget
 			}
             elseif( $versionFromServer['response'] != PageCarton::VERSION )
             {
-                $this->setViewContent( '<span class="badnews boxednews">ALERT! Your PageCarton installation is outdated.</span><span class="normalnews boxednews">New version (' . $versionFromServer['response']  . ') is available for download.</span>', true ); 
+                $this->setViewContent( '<span class="badnews boxednews">ALERT! Your PageCarton installation is outdated.</span><span class="normalnews boxednews">New version (' . $versionFromServer['response']  . ') is available for download. </span>', true ); 
            //     $this->setViewContent( '' ); 
 			    $this->setViewContent( '<div class="normalnews boxednews"><a onClick="ayoola.spotLight.showLinkInIFrame( this.href ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Upgrade?" class="pc-btn pc-bg-color">Begin Upgrade!</a></div>' );
                 $filter = new Ayoola_Filter_Time();
-                 $this->setViewContent( '<p  class="normalnews boxednews" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' </p>' ); 
+                 $this->setViewContent( '<p  class="normalnews boxednews" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $server . ')</p>' ); 
           }
             else
             {
                 $filter = new Ayoola_Filter_Time();
-                $this->setViewContent( '<p class="">You are running the latest version of PageCarton (' . $versionFromServer['response']  . '). <span  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' </span></p>', true ); 
+                $this->setViewContent( '<p class="">You are running the latest version of PageCarton (' . $versionFromServer['response']  . '). <span  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $server . ') </span></p>', true ); 
             //    $this->setViewContent( '' ); 
             }
 
