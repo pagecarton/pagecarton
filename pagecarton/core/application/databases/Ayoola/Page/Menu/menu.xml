@@ -66,12 +66,12 @@
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[9]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="document_url"><![CDATA[/css/8/VerticalLight.css]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Control Panel Options]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="category_name"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="sort_order"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="category_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url_integration_type"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_label"><![CDATA[Control Panel Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_options"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="7">
       <TABLE_FIELD FIELD_KEY="menu_name"><![CDATA[subscription]]></TABLE_FIELD>

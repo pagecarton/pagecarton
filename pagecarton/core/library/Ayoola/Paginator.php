@@ -474,6 +474,17 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			$row = is_scalar( $row ) ? array( $this->_key => $row ) : $row;
 			$row = $this->rowDataColumn ? $row[$this->rowDataColumn] : $row;
 			
+			$columnSearch = array();
+			$columnReplace = array();
+			if( @$this->crossColumnFields )
+			{
+				foreach( $row as $eachKey => $eachValue )
+				{
+					$columnSearch[] = '{{{%' . $eachKey . '%}}}';
+					$columnReplace[] = $eachValue;
+				}
+			}
+			
 		//	$bg = $bg == '#ffffff' ? '#eeeeee' : '#ffffff';
 			$rowClass = $rowClass == 'pc-table-row1' ? 'pc-table-row2' : 'pc-table-row1';
 			if( $this->noRowClass )
@@ -552,6 +563,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, is_scalar( $value ) ? $value : null );
 					$value = str_replace( '%KEY%', @$row[$key], $value );
 					$value = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $value );
+					$value = str_replace( $columnSearch, $columnReplace, $value );
 				//	$value = htmlentities( $value );
 					$records .='<td>' . $value . '</td>';    
 				}

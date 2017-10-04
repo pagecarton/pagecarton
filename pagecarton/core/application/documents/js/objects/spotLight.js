@@ -96,6 +96,10 @@ ayoola.spotLight =
 	splashScreen: function()     
 	{		
 		var elementInfo = ayoola.spotLight.popUp( "<div style=\"height:100%; background: rgba( 0, 0, 0, 0 ) url('" + ayoola.pcPathPrefix + "/loading2.gif?y') 50% 50% no-repeat;\"></div>" ); 
+
+		//	remove title
+		elementInfo.element.removeChild( elementInfo.element.firstChild );
+
 		var container = elementInfo.container;
 		var background = elementInfo.background;
 		var closeSplashScreen = function()
@@ -110,6 +114,7 @@ ayoola.spotLight =
 				}
 			
 			}
+		background.onDblClick = closeSplashScreen;
 			ayoola.spotLight.splashScreenObject = { close: closeSplashScreen, elementInfo: elementInfo };
 		return ayoola.spotLight.splashScreenObject;
 	},

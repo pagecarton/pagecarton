@@ -56,14 +56,15 @@ class Ayoola_Page_Menu_Edit_List extends Ayoola_Page_Menu_Edit_Abstract
 		$identifier = http_build_query( $this->getIdentifier() );
 		$list->setListOptions( 
 								array( 
-										'Creator' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Creator/?menu_id=' . $menuInfo['menu_id'] . '\' );" title=""> Add link option </a>',
+										'Creator' => '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Creator/?menu_id=' . $menuInfo['menu_id'] . '\', \'page_refresh\' );" title=""> Add link option </a>',
 									) 
 							);
 		$list->createList(  
 			array(
-				'option_name' => '%FIELD% <a title="Click to edit this link option" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Editor/?' . $this->getIdColumn() . '=%KEY%&' . $identifier . '">[edit]</a>', 
-				'url' => '%FIELD% <a title="Click to edit this link option" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Editor/?' . $this->getIdColumn() . '=%KEY%&' . $identifier . '">[edit]</a>', 
-				'x' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Delete/?' . $this->getIdColumn() . '=%KEY%&' . $identifier . '">x</a>',   
+				'option_name' => '%FIELD%', 
+				'url' => '%FIELD%', 
+				' ' => '<a title="Edit" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Editor/?' . $this->getIdColumn() . '=%KEY%&' . $identifier . '\', \'page_refresh\' );" href="javascript:">[Edit]</a>',   
+				'x' => '<a title="Delete" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Delete/?' . $this->getIdColumn() . '=%KEY%&' . $identifier . '\', \'page_refresh\' );" href="javascript:">x</a>',   
 			)
 		);
 	//	var_export( $list );

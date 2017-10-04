@@ -248,6 +248,11 @@ class ImageManipulator
     $width_new = $height * $max_width / $max_height;
     $height_new = $width * $max_height / $max_width;
     //if the new width is greater than the actual width of the image, then the height is too large and the rest cut off, or vice versa
+    // I think this is where you are mainly going wrong
+    $dst_img = imagecreatetruecolor($max_width,$max_height);
+    imagealphablending( $dst_img, false );
+    imagesavealpha( $dst_img, true );
+ //  imagecopyresampled($tmp_img, $thumb_img, 0, 0, $crop_x, $crop_y, $new_width, $new_height, $w, $h);
     if($width_new > $width){
         //cut point by height
         $h_point = (($height - $height_new) / 2);

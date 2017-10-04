@@ -100,11 +100,11 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 							'logged_in' => 'Show this menu option to logged inn users', 
 							'logged_out' => 'Show this menu option to logged out users', 
 							'append_previous_url' => 'Attach previous url to this link', 
-							'disable' => 'Disable Link', 
-							'spotlight' => 'Pop-up this link in PageCarton Spotlight (experimental)', 
+					//		'disable' => 'Disable Link', 
+							'spotlight' => 'Pop-up this link in Modal Box', 
 							'new_window' => 'Open this link in a new window', 
-							'advanced' => 'Show Advanced Settings',
-							'sub_menu' => 'This option has a sub-menu', 
+					//		'advanced' => 'Show Advanced Settings',
+					//		'sub_menu' => 'This option has a sub-menu', 
 							);
 		$fieldset->addElement( array( 'name' => 'link_options', 'label' => 'Link Options', 'type' => 'Checkbox', 'value' => @$values['link_options'] ? : array( 'logged_in', 'logged_out' ) ), $options );
 
@@ -116,14 +116,14 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 		$fieldset->addFilter( 'menu_id', array( 'DefiniteValue' => $identifier['menu_id'] ) );
 		//var_export( $identifier );
 		$fieldset->addLegend( $legend );
-		$form->addFieldset( $fieldset );
+	//	$form->addFieldset( $fieldset );
 
 		//	Advanced
-		if( is_array( $this->getGlobalValue( 'link_options' ) ) && in_array( 'advanced', $this->getGlobalValue( 'link_options' ) ) )
+	//	if( is_array( $this->getGlobalValue( 'link_options' ) ) && in_array( 'advanced', $this->getGlobalValue( 'link_options' ) ) )
 		{
 		
-			$fieldset = new Ayoola_Form_Element;
-			$fieldset->addLegend( 'Advanced options for menu link.' );
+//			$fieldset = new Ayoola_Form_Element;
+//			$fieldset->addLegend( 'Advanced options for menu link.' );
 			$authLevel = new Ayoola_Access_AuthLevel;
 			$authLevel = $authLevel->select();
 			require_once 'Ayoola/Filter/SelectListArray.php';
@@ -134,20 +134,24 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 			//	compatibility		
 		//	var_export( $values['auth_level'] );  
 		//	$values['auth_level'] = is_array( $values['auth_level'] ) ? $values['auth_level'] : array( $values['auth_level'] );
-			$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Select the user group that would see this menu option', 'type' => 'Checkbox', 'value' => @$values['auth_level'] ? (array) $values['auth_level'] : array_keys( $authLevel ) ), $authLevel );
+			$authLevel[99] = 'Admin';
+			$authLevel[98] = 'Owner';
+			$authLevel[1] = 'Signed in users';
+			$authLevel[0] = 'Everyone';
+	//		var_export( $values['auth_level'] );
+			$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? (array) $values['auth_level'] : array_keys( $authLevel ) ), $authLevel );
 			$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $authLevel ) ) );
 		//	unset( $authLevel ); 
-			$fieldset->addElement( array( 'name' => 'title', 'placeholder' => 'e.g. Home Page', 'type' => 'InputText', 'value' => @$values['title'] ) );
+	//		$fieldset->addElement( array( 'name' => 'title', 'placeholder' => 'e.g. Home Page', 'type' => 'InputText', 'value' => @$values['title'] ) );
 
-			$form->addFieldset( $fieldset );
 		}
 
 		//	Advanced
-		if( @$values['sub_menu_name'] || is_array( $this->getGlobalValue( 'link_options' ) ) && in_array( 'sub_menu', $this->getGlobalValue( 'link_options' ) ) )
+//		if( @$values['sub_menu_name'] || is_array( $this->getGlobalValue( 'link_options' ) ) && in_array( 'sub_menu', $this->getGlobalValue( 'link_options' ) ) )
 		{
 		
-			$fieldset = new Ayoola_Form_Element;
-			$fieldset->addLegend( 'Select a menu to use as submenu for this option' );
+	//		$fieldset = new Ayoola_Form_Element;
+	//		$fieldset->addLegend( 'Select a menu to use as submenu for this option' );
 
 			//	Sub menu
 			$options = new Ayoola_Page_Menu_Menu;
@@ -165,23 +169,26 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 //			$filter = new Ayoola_Filter_SelectListArray( 'menu_name', 'menu_label' );
 			$time = time();
 	//		$options = array( 'new_menu_' => $newSubmenuName, '' => 'NONE' ) + $filter->filter( $options );	
-			$menuList = array( 'sub_menu_' . $time => 'New Sub-Menu (' . $time . ')', '' => 'NONE' ) + $menuList;	
+			$menuList = array(  '' => 'NONE', 'sub_menu_' . $time => 'New Menu' ) + $menuList;	
 
 			//	Dont allow the parent menu to be selectable to avoid infinite loop
 			$data = $this->getIdentifierData();
 	//		var_export( $identifier );
 	//		var_export( $data );
 	//		unset( $options[$data['menu_name']] );
-			$fieldset->addElement( array( 'name' => 'sub_menu_name', 'label' => 'Please select (<a rel="spotLight" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Menu_List/">Manage Menu</a>)', 'type' => 'Select', 'value' => @$values['sub_menu_name'] ), $menuList );
+			$fieldset->addElement( array( 'name' => 'sub_menu_name', 'label' => 'Sub Menu', 'type' => 'Select', 'value' => @$values['sub_menu_name'] ), $menuList );
+//			$fieldset->addElement( array( 'name' => 'sub_menu_name', 'label' => 'Sub Menu (<a rel="spotLight" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Menu_List/">Manage Menu</a>)', 'type' => 'Select', 'value' => @$values['sub_menu_name'] ), $menuList );
 			$fieldset->addRequirement( 'sub_menu_name', array( 'InArray' => array_keys( $menuList )  ) );
-			$form->addFieldset( $fieldset );
+	//		$form->addFieldset( $fieldset );
 		}
 /* 		else
 		{
 			$fieldset->addElement( array( 'name' => 'auth_level', 'type' => 'Hidden', 'value' => '0' ) );
 			$fieldset->addElement( array( 'name' => 'sub_menu_name', 'type' => 'Hidden', 'value' => null ) );
 		}
- */		$this->setForm( $form );
+ */		
+ 		$form->addFieldset( $fieldset );
+		$this->setForm( $form );
     } 
 	// END OF CLASS
 }

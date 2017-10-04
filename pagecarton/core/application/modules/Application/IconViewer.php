@@ -102,7 +102,56 @@ class Application_IconViewer extends PageCarton_Widget
     //        header( 'Location: ' . $url );
             @$maxWith = $this->getParameter( 'max_width' ) ? : @intval( $_REQUEST['max_width'] );
             @$maxHeight = $this->getParameter( 'max_height' ) ? : @intval( $_REQUEST['max_height'] ); 
-            if( $path = Ayoola_Loader::checkFile( 'documents' . $url ) AND ( $maxHeight || $maxWith ) )
+
+            if( $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
+            {
+
+
+            }
+			
+            //  cache me
+            if( $_REQUEST['document_time'] )
+            {
+                //	Enable Cache for Documents
+                // seconds, minutes, hours, days
+                $expires = 60 * 60 * 24 * 140; // 140 days
+                
+                header( "Pragma: public" );
+                header( "Cache-Control: maxage=" . $expires );
+                header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + $expires ) . ' GMT' );
+                Ayoola_Application::$accessLogging = false;
+        //		var_export( $_REQUEST['document_time'] );
+        //		exit( $_REQUEST['document_time'] );
+            }
+            else
+            {
+			//	$fn = DOCUMENTS_DIR . DS . $url;
+                if( $path )
+                {
+                    header('Cache-Control: private');
+
+                    $docTime = filemtime( $path );
+
+           //         var_export( $docTime );
+           //         exit();
+
+                    // Checking if the client is validating his cache and if it is current.
+                    if( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) && ( strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) == $docTime ) ) 
+                    {
+                        // Client's cache IS current, so we just respond '304 Not Modified'.
+                        header( 'Last-Modified: '.  gmdate( 'D, d M Y H:i:s', $docTime ) . ' GMT', true, 304 );
+                        exit(); 
+                    } 
+                    else 
+                    {
+                        // Image not cached or cache outdated, we respond '200 OK' and output the image.
+                        header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s', $docTime ) . ' GMT', true, 200 );
+                    }
+                }
+                header( 'Content-Length: ' . filesize( $fn ) );
+                
+            }
+            if( $path AND ( $maxHeight || $maxWith ) )
             {
          //      var_export( $maxWith );
           //     var_export( $maxHeight );
@@ -112,7 +161,7 @@ class Application_IconViewer extends PageCarton_Widget
                 exit();
                 //	default
             }
-           $doc = new Ayoola_Doc( array( 'option' => $url ) );
+            $doc = new Ayoola_Doc( array( 'option' => $url ) );
             $doc->view();
             exit();
              // end of widget process

@@ -296,7 +296,7 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		//		unset( $authLevel[98] );
 			}
 			$authLevel[99] = 'Admin Only';
-			$authLevel[98] = 'Private (Only Me)';
+			$authLevel[98] = 'Owner';
 			$authLevel[1] = 'Registration Required';
 			$authLevel[0] = 'Public';
 			$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Page Privacy', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel );    

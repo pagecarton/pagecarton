@@ -59,7 +59,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 			}
 			//	make a form to select directory
 			$form = new Ayoola_Form();
-			$form->submitValue = 'Browse';
+		//	$form->submitValue = 'Browse';
 			$fieldset = new Ayoola_Form_Element();
 
 			$options = array(
@@ -67,7 +67,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 						//		'pictures' => 'Images Only',
 								'directory' => 'Directory Browser',
 			);
-			$fieldset->addElement( array( 'name' => 'mode', 'type' => 'Select', 'label' => 'Filter', ), $options );
+			$fieldset->addElement( array( 'name' => 'mode', 'onchange' => 'ayoola.spotLight.splashScreen(); this.form.submit();', 'type' => 'Select', 'label' => '', ), $options );
 
 			if( ( Ayoola_Form::getGlobalValue( 'mode' ) && 'directory' == Ayoola_Form::getGlobalValue( 'mode' ) ) )
 			{
@@ -80,26 +80,25 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 					unset( $options[$key] );
 				}
 				ksort( $options );
-				$fieldset->addElement( array( 'name' => 'directories', 'type' => 'SelectMultiple', 'label' => 'Select Directory', ), $options );
+				$fieldset->addElement( array( 'name' => 'doc_browser_directories', 'onchange' => 'ayoola.spotLight.splashScreen(); this.form.submit();', 'type' => 'Select', 'label' => '', ), array( '' => 'Select Directory' ) + $options );
 			}
 			$form->addFieldset( $fieldset );
 			
 		//	var_export( $options );
 			$this->setViewContent( $form->view(), true );
 
-			//	upload
-			$html = '<a class="pc-btn" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/" title="Upload a file">Upload File</a>';
-			$html = Ayoola_Object_Wrapper_Abstract::wrap( $html, 'white-background' );
-			$this->setViewContent( $html );
-
 			$filterTime = new Ayoola_Filter_Time();
 			$filterSize = new Ayoola_Filter_FileSize();
 			$data = array();
 			$values = $form->getValues();
-			switch( empty( $values['directories'] ) )
+			switch( empty( $values['doc_browser_directories'] ) )
 			{
 				case false:
-				foreach( $values['directories'] as $each )
+				if( is_string( $values['doc_browser_directories'] ) )
+				{
+					$values['doc_browser_directories'] = array( $values['doc_browser_directories'] );
+				}
+				foreach( $values['doc_browser_directories'] as $each )
 				{
 				//	var_export( $values );
 				//	var_export( $each );
@@ -110,13 +109,15 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 					{
 						$url = str_ireplace( $dir, '', $eachFile );
 						$ext = array_pop( explode( '.', $url ) );
+						$docTime = filemtime( $eachFile );
 						if( ! is_file( $eachFile ) || isset( $data[$url] ) || $ext == $url )
 						{
 							continue;
 						}
-						$data[$url] = array( 'url' => $url, 'basename' => basename( $url ), 'ext' => strtoupper( $ext ), 'filesize' => $filterSize->filter( filesize( $eachFile ) ), 'modified' => $filterTime->filter( filemtime( $eachFile ) ), 'created' => $filterTime->filter( filectime( $eachFile ) ), 'by' => '' );
+						$data[$url] = array( 'url' => $url, 'time' => $docTime, 'basename' => basename( $url ), 'ext' => strtoupper( $ext ), 'filesize' => $filterSize->filter( filesize( $eachFile ) ), 'modified' => $filterTime->filter( $docTime ), 'created' => $filterTime->filter( filectime( $eachFile ) ), 'by' => '' );
 					}
 				}
+				ksort( $data );
 				break;
 				default:
 					if( Ayoola_Application::getUserInfo( 'username' ) )
@@ -128,22 +129,28 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 							$url = $each['url'];
 							$eachFile = self::getDocumentsDirectory() . $each['url'];
 							$ext = array_pop( explode( '.', $url ) );
-							if( ! is_file( $eachFile ) || isset( $data[$url] ) || $ext == $url )
+							$docTime = filemtime( $eachFile );
+							if( ! is_file( $eachFile ) || isset( $data[$docTime] ) || $ext == $url )
 							{
 								continue;
 							}
-							$data[$url] = array( 'url' => $url, 'basename' => basename( $url ), 'ext' => strtoupper( $ext ), 'filesize' => $filterSize->filter( filesize( $eachFile ) ), 'modified' => $filterTime->filter( filemtime( $eachFile ) ), 'created' => $filterTime->filter( filectime( $eachFile ) ), 'by' => '' );
-							if( strlen( $data[$url]['basename'] ) > 12 )
+							$data[$docTime] = array( 'url' => $url, 'time' => $docTime, 'basename' => basename( $url ), 'ext' => strtoupper( $ext ), 'filesize' => $filterSize->filter( filesize( $eachFile ) ), 'modified' => $filterTime->filter( $docTime ), 'created' => $filterTime->filter( filectime( $eachFile ) ), 'by' => '' );
+							if( strlen( $data[$docTime]['basename'] ) > 12 )
 							{
-								$data[$url]['basename'] = ( trim( substr( $data[$url]['basename'], 0, 12 ) ) . '...' );
+								$data[$docTime]['basename'] = ( trim( substr( $data[$docTime]['basename'], 0, 12 ) ) . '...' );
 							}
 						}
 					}
+					krsort( $data );
 				break;
 			}
 		//	$data = array_unique( $data );
-			ksort( $data );
 			$html = Ayoola_Object_Wrapper_Abstract::wrap( $this->createList( $data )->view(), 'white-background' );
+			$this->setViewContent( $html );
+
+			//	upload
+			$html = '<a class="pc-btn" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/" title="Upload a file">Upload File</a>';
+			$html = Ayoola_Object_Wrapper_Abstract::wrap( $html, 'white-background' );
 			$this->setViewContent( $html );
 		}
 		catch( Exception $e )
@@ -164,6 +171,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
+		$list->crossColumnFields = true;
 //		$list->listTitle = self::getObjectTitle();
 
 
@@ -181,7 +189,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 								<div style="padding-bottom:5px;text-align:center;">
 								%FIELD%
 								</div>
-								<img src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=%KEY%" alt="" >
+								<img src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=60&max_height=60&url=%KEY%&document_time={{{%time%}}}" alt="" >
 								<div style="padding:5px;"><a class="pc-btn pc-btn-small" style="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '%KEY%">view</a> ' . $select . '</div>
 								</div>' ), 
 				'url' => '%FIELD%', 
