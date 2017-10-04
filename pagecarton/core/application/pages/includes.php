@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: includes.php	Tuesday 3rd of October 2017 05:41:39 AM	ayoola@ayoo.la $ 
+* @version $Id: includes.php	Tuesday 3rd of October 2017 02:49:01 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -40,7 +40,7 @@ $_abcabfbf989ffd80556ff9bd65e0ef94 = new Application_Article_ShowAll( array (
   'option' => '5',
   'category_name' => '',
   'article_types' => '',
-  'template_name' => 'ProductsandServicesList2',
+  'template_name' => '',
   'advanced_parameter_value' => 
   array (
     0 => '1',

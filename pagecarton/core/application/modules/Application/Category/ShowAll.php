@@ -27,13 +27,20 @@ require_once 'Application/Category/Abstract.php';
 
 class Application_Category_ShowAll extends Application_Category_Abstract
 {
-	
+
     /**
      * Access level for player
      *
      * @var boolean
      */
 	protected static $_accessLevel = 0;
+
+    /**
+     * Post Categories
+     *
+     * @var array
+     */
+	protected static $_postCategories;
 		
     /**
      * The method does the whole Class Process
@@ -132,5 +139,38 @@ class Application_Category_ShowAll extends Application_Category_Abstract
 		}
 	//	$this->setViewContent( '', true );
     } 
-		// END OF CLASS
+
+     /**
+     * This method returns the _classOptions property 
+     *
+     * @param void
+     * @return array
+     */
+    public static function getPostCategories()
+    {
+		if( null === self::$_postCategories )
+		{
+			//	Defaults to all categories available
+			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
+			$options = new Application_Category;
+			if( $articleSettings['allowed_categories'] )
+			{
+				if( ! self::$_postCategories = $options->select( null, array( 'category_name' => $articleSettings['allowed_categories'] ) ) )
+				{
+					self::$_postCategories = array();
+				}
+			}
+			else
+			{
+				if( ! self::$_postCategories = $options->select() )
+				{
+					self::$_postCategories = array();
+				}
+			}
+		//	self::$_postCategories$options;
+
+		}
+		return self::$_postCategories;
+	}
+	// END OF CLASS
 }

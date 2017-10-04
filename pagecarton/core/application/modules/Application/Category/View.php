@@ -81,6 +81,11 @@ class Application_Category_View extends Application_Category_Abstract
 						if( @array_key_exists( $this->getParameter( 'pc_module_url_values_category_offset' ), $_REQUEST['pc_module_url_values'] ) )
 						{
 							$category = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_category_offset' ) )];
+							if( $category == 'category' )
+							{
+								$category = @$_REQUEST['category'];
+							}
+
 						}
 						elseif( $this->getParameter( 'pc_module_url_values_request_fallback' ) && @$_REQUEST['category'] )
 						{
@@ -116,6 +121,8 @@ class Application_Category_View extends Application_Category_Abstract
 										'category_url' => '' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Category_Editor/?category_name=' . $category . '&auto_create_category=1&parent_category=' . $parentCategory,  
 										);
 						$data['auto_create_link'] = '<a href="' . $data['category_url'] . '">Create "' . $category . '" category!</a>';
+						$data['update_url'] = $data['category_url'];
+						$data['delete_url'] = 'javascript:';
 					}
 					else
 					{
@@ -137,12 +144,19 @@ class Application_Category_View extends Application_Category_Abstract
 										<a class="badnews" title="Edit ' . $data['category_label'] . '" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Editor/category_name/' . $data['category_name'] . '/"> - </a>
 										<a class="badnews" title="Delete ' . $data['category_label'] . '" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Delete/category_name/' . $data['category_name'] . '/"> x </a>
 									</span>';
- */					$adminOptions .= '<span class="" >
-										<a class="" title="Edit ' . $data['category_label'] . '" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Editor/category_name/' . $data['category_name'] . '/?&parent_category=' . $parentCategory . '"> Update Category Info </a> | 
-										<a class="" title="Delete ' . $data['category_label'] . '" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Delete/category_name/' . $data['category_name'] . '/"> Delete Category </a>
+ */					
+ 				$updateLink = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Editor/category_name/' . $data['category_name'] . '/?&parent_category=' . $parentCategory . '';
+ 				$deleteLink = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Delete/category_name/' . $data['category_name'] . '/';
+				 $adminOptions .= '<span class="" >
+										<a class="" title="Edit ' . $data['category_label'] . '" rel="spotlight;" href="' . $updateLink . '"> Update Category Info </a> | 
+										<a class="" title="Delete ' . $data['category_label'] . '" rel="spotlight;" href="' . $deleteLink . '/"> Delete Category </a>
 									</span>';
+					$this->_objectData['update_url'] = $updateLink;
+					$this->_objectData['delete_url'] = $deleteLink;
 					$this->_objectData['edit_link'] = $adminOptions;
-					$this->_objectTemplateValues['edit_link'] = $adminOptions;
+					$data['update_url'] = $updateLink;
+					$data['delete_url'] = $deleteLink;
+					$data['edit_link'] = $adminOptions;
 					
 			//		$data['category_description'] = 
 				}
@@ -155,9 +169,9 @@ class Application_Category_View extends Application_Category_Abstract
 			';
 		//	var_export( $data );
 	//		$this->_objectTemplateValues['category_url'] = 
-			if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['cover_photo'] ) )
+		//	if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['cover_photo'] ) )
 			{
-				$data['cover_photo'] = $image;
+		//		$data['cover_photo'] = $image;
 				$data['cover_photo_html'] = '<img style="max-width:100%;" src="' . $image . '" alt="" title="Cover photo for ' . $data['category_label'] . '" />';
 				$photoWithLink = 	'<a title="' . $data['category_label'] . '" href="' . $data['category_url'] . '">
 								' . $data['cover_photo_html'] . '
@@ -178,6 +192,20 @@ class Application_Category_View extends Application_Category_Abstract
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
 			}
 			$html .= $data['category_description'] ? '<blockquote><p>' . $data['category_description'] . '</p></blockquote>' : null;
+
+
+            $html = '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;padding:3em 2em 3em 2em; background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $data['cover_photo'] ) . '\');  background-size: cover;background-position: center; background-attachment: fixed; color: #fff !important; ">';
+            $html .= '<h1>' . $data['category_label'] . '</h1>';
+            $html .= $data['category_description'] ? '<br><br><p>' . $data['category_description'] . '</p>' : null;
+            $html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;">
+			<a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $data['update_url']  . '\', \'page_refresh\' );" href="javascript:">[Update Category]</a>
+			<a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $data['delete_url']  . '\', \'page_refresh\' );" href="javascript:">[Delete Category]</a>
+			
+			</p>' : null;
+            $html .= '</div>';
+   //         $this->setViewContent( $html ); 
+			
+
 			$this->setViewContent( $html, true );
 			$this->_objectTemplateValues += $data;
 		}
@@ -201,6 +229,10 @@ class Application_Category_View extends Application_Category_Abstract
 				if( @array_key_exists( $this->getParameter( 'pc_module_url_values_category_offset' ), $_REQUEST['pc_module_url_values'] ) )
 				{
 					$category = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_category_offset' ) )];
+					if( $category == 'category' )
+					{
+						$category = @$_REQUEST['category'];
+					}
 				}
 				elseif( $this->getParameter( 'pc_module_url_values_request_fallback' ) && @$_REQUEST['category'] )
 				{

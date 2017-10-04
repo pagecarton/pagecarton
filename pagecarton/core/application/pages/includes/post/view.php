@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Tuesday 3rd of October 2017 05:41:43 AM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Tuesday 3rd of October 2017 10:13:20 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -22,7 +22,7 @@ $_bd60a975883eab341532efd0da8c3fd8 = new Ayoola_Object_Embed( array (
   array (
     0 => '',
   ),
-  'wrapper_name' => 'white-background',
+  'wrapper_name' => '',
   '' => '',
 ) );
 

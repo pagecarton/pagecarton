@@ -58,9 +58,11 @@ class Application_Category_Editor extends Application_Category_Abstract
 				}
 			}
 					$data['category_label'] = @$data['category_label'] ? : ucwords( implode( ' ', explode( '-', $data['category_name'] ) ) );
-			$this->createForm( 'Continue...', 'Edit ' . $data['category_label'], $data );
+			$this->createForm( 'Save', 'Update ' . $data['category_label'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
+
+	//		var_export( $values );
 			if( @$_REQUEST['parent_category'] )
 			{
 				
@@ -76,7 +78,9 @@ class Application_Category_Editor extends Application_Category_Abstract
 			//	var_export( $values['parent_category'] );
 			}
 		//	var_export( $values );
-			if( $this->updateDb( $values ) ){ $this->setViewContent( 'Category edited successfully', true ); }
+			if( $this->updateDb( $values ) ){ $this->setViewContent( '<p class="goodnews">Category edited successfully</p>', true ); }
+		//	$this->createForm( 'Save', 'Update ' . $data['category_label'], $data );
+			$this->setViewContent( $this->getForm()->view() );
 		}
 		catch( Application_Category_Exception $e ){ return false; }
     } 

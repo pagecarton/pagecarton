@@ -16,6 +16,7 @@
 # Ignore configuration files that may contain sensitive information.
 htdocs/*
 www/*
+public_html/*
 
 # Ignore paths that contain user-generated content.
 pagecarton/sites/*

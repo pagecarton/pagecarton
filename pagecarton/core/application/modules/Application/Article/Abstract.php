@@ -300,7 +300,7 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		if( self::$_postUrl ){ return self::$_postUrl; }
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 		self::$_postUrl = rtrim( @$articleSettings['post_url'] ? : '/posts/', '/' );
-		return Ayoola_Application::getUrlPrefix() . self::$_postUrl;
+		return self::$_postUrl;
 	}
 		
     /**
@@ -332,6 +332,11 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 			if( is_numeric( $this->getParameter( 'pc_module_url_values_category_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_category_offset' ), $_REQUEST['pc_module_url_values'] ) )
 			{
 				$categoryId = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_category_offset' ) )];
+			//	var_export( $categoryId );
+				if( $categoryId == 'category' )
+				{
+					$categoryId = @$_REQUEST['category'];
+				}
 			//	var_export( $category );
 			}
 			elseif( @$_REQUEST['category'] )
@@ -392,14 +397,7 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 				//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
 			}
-/* 			//	Reset canonical url only if category is in the url
-			if( ! empty( $_GET['category'] ) && $_GET['category'] == $category['category_name'] )
-			{
-				//	Reset canonical url
-				Ayoola_Page::getCanonicalUri( self::getPostUrl() );
-				Ayoola_Page::getCanonicalUri( self::getPostUrl() . '/category/' . $category['category_name'] . '/' );
-			}
- */		}
+		}
 		elseif( $categoryId && is_array( $categoryId ) )
 		{
 			//	
@@ -1042,13 +1040,13 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		{
 			if( $displayOptions['template'] )
 			{
-				$html .= str_ireplace( array( '{{{category_url}}}', '{{{category_label}}}', '{{{category_name}}}' ), array( self::getPostUrl() . '/category/' . $each['category_name'], $each['category_label'], $each['category_name'] ), $displayOptions['template'] );
+				$html .= str_ireplace( array( '{{{category_url}}}', '{{{category_label}}}', '{{{category_name}}}' ), array( Ayoola_Application::getUrlPrefix() . self::getPostUrl() . '/category/' . $each['category_name'], $each['category_label'], $each['category_name'] ), $displayOptions['template'] );
 				$html .= count( $options ) === ++$i ? null : $displayOptions['glue']; 
 			}
 			else
 			{
 				$each['category_label'] = @$_GET['category'] === $each['category_name'] ? "<strong> {$each['category_label']} </strong>" : "{$each['category_label']}";
-				$html .= '<a style="" href="' . self::getPostUrl() . '/category/' . $each['category_name'] . '/"> ' . $each['category_label'] . ' </a>';
+				$html .= '<a style="" href="' . Ayoola_Application::getUrlPrefix() . self::getPostUrl() . '/category/' . $each['category_name'] . '/"> ' . $each['category_label'] . ' </a>';
 				$html .= count( $options ) === ++$i ? null : $displayOptions['glue']; 
 			}
 		}
@@ -1095,20 +1093,42 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		{
 
 		}
+		$link = 'a title="View ' . $data['article_title'] . '" style="color:inherit;" href="' . Ayoola_Application::getUrlPrefix() . $data['article_url'] . '"';
+		$realPost = true;
+		if( stripos( $data['article_url'], '/tools/classplayer') === 0 )
+		{
+			$link .= ' onclick="this.href=\'javascript:\';ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . $data['article_url'] . '\', \'page_refresh\' );"';
+			$realPost = false;
+		}
+		$header = 'h2';
+		if( $data['article_url'] === Ayoola_Application::getPresentUri() )
+		{
+			$link = 'span';
+			$header = 'h1';
+
+		}
 		$html = null;
 		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;margin:2em 0 2em 0;">';
-		$html .= '<a title="View ' . $data['article_title'] . '" style="color:inherit;" href="' . Ayoola_Application::getUrlPrefix() . $data['article_url'] . '">';
+		$html .= '<' . $link . '>';
 		$html .= '<div style="padding:3em 2em 3em 2em; background: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\');  background-size: cover; background-position: center; background-attachment: fixed; color: #fff !important; ">';
 		$html .= '<p style="text-align:right;">' . $data['article_type'] . '</p>';
-		$html .= '<h2>' . $data['article_title'] . '</h2>';
+		$html .= '<' . $header . '>' . $data['article_title'] . '</' . $header . '>';
 		$html .= $data['article_description'] ? '<br><br><p>' . $data['article_description'] . '</p>' : null;
+		$html .= $realPost && $data['button_value'] ? '<br><br><p><button class="pc-btn"> ' . $data['button_value'] . ' </button></p>' : null;
 		$html .= '</div>';
-		$html .= '</a>';
+		$html .= '</' . $link . '>';
 		$html .= '<div style="font-size:x-small;text-transform:uppercase;padding:3em 2em 3em 2em; background:     linear-gradient(      rgba(50, 50, 50, 0.7),      rgba( 50, 50, 50, 0.7)    );  color: #fff !important; ">';
+
+		$html .= $data['item_price'] ? '
+		<span style="font-size:small;">
+		<span  style="margin-right:1em;text-decoration:line-through;" >' . $data['item_old_price'] . '</span> 
+		<span  style="margin-right:1em;" >' . $data['item_price_with_currency'] . '</span> 
+		</span>
+		' : null;
 		$html .= '<span style="margin-right:1em;">' . self::filterTime( $data ) . '</span>';
 		$html .= '<span style="margin-right:1em;"> by ' . $data['username'] . '</span>';
 		$html .= $data['category_text'] ? '<span style="margin-right:1em;"> in ' . $data['category_text'] . ' </span>' : null;
-		$html .= self::hasPriviledge( array( 99, 98 ) ) ? '  
+		$html .= self::hasPriviledge( array( 99, 98 ) ) && $realPost ? '  
 		<a  style="color:inherit; margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?article_url=' . $data['article_url'] . '&\', \'page_refresh\' );" href="javascript:">edit</a> 
 		<a  style="color:inherit; margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?article_url=' . $data['article_url'] . '&\', \'page_refresh\' );" href="javascript:"> delete </a>
 		' : null;
@@ -1261,7 +1281,14 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		
 		
 		//	Set Article Type
-		$fieldset->addElement( array( 'name' => 'article_type', 'type' => 'Hidden', 'value' => @$values['article_type'] ? : @$_REQUEST['article_type'] ) );
+		$options = new Application_Article_Type;
+		$options = $options->select();
+		require_once 'Ayoola/Filter/SelectListArray.php';
+		$filter = new Ayoola_Filter_SelectListArray( 'post_type_id', 'post_type');
+		$options = $filter->filter( $options );
+		$options = $options ? : Application_Article_Type_TypeAbstract::$presetTypes;
+
+		$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post Type', 'onchange'=> 'window.location.search += \'&article_type=\' + this.value + \'\';', 'type' => 'Select', 'value' => @$values['article_type'] ? : @$_REQUEST['article_type'] ), $options );
 		$fieldset->addElement( array( 'name' => 'true_post_type', 'type' => 'Hidden', 'value' => @$values['true_post_type'] ? : @$values['article_type'] ) );
 		   
 		
@@ -1932,7 +1959,7 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		
 		//	Application_Javascript::addFile( '/js/objects/tinymce/tinymce.min.js' );
 //		Application_Javascript::addFile( '/js/objects/ckeditor/ckeditor.js' );
-		Application_Javascript::addFile( '/js/objects/ckeditor/ckeditor.js?x=1' );
+		Application_Javascript::addFile( '/js/objects/ckeditor/ckeditor.js' );
 	//	Application_Javascript::addFile( '//cdn.ckeditor.com/4.5.6/full-all/ckeditor.js' );
 /* 		$name = Ayoola_Form::hashElementName( 'article_content' );
 		$quizQuestions = '' . Ayoola_Form::hashElementName( 'quiz_question' );

@@ -110,7 +110,15 @@ abstract class Ayoola_Page_Menu_Abstract extends Ayoola_Abstract_Table
 			$fieldset->addElement( array( 'name' => 'menu_label', 'type' => @$_REQUEST['menu_label'] ? 'Hidden' : 'InputText', 'value' => @$values['menu_label'] ) );
 			$fieldset->addRequirement( 'menu_label', array( 'WordCount' => array( 3, 50 )  ) );
 		}	
-		$options =  array( 'logged_in_hide' => 'Hide from logged inn users', 'logged_out_hide' => 'Hide from logged out users', 'private' => 'Hide options on sub-domains', 'disable' => 'Disable Menu', 'auto_sub_menu' => 'Auto Sub menu', 'category' => 'Add links from a post category', 'sort_order' => 'Arrange the menu order' );   
+		$options =  array( 
+					//		'logged_in_hide' => 'Hide from logged inn users', 
+					//		'logged_out_hide' => 'Hide from logged out users', 
+					//		'private' => 'Hide options on sub-domains', 
+					//		'disable' => 'Disable Menu',
+							'auto_sub_menu' => 'Auto-Create sub menu for all options ', 
+							'category' => 'Add post category links', 
+							'sort_order' => 'Manually arrange the menu order' 
+							);   
 		$fieldset->addElement( array( 'name' => 'menu_options', 'label' => 'Menu Options', 'type' => 'Checkbox', 'value' => @$values['menu_options'] ), $options );
 		
 	//	$fieldset->addRequirement( 'enabled', array( 'Range' => array( 0, 1 ) ) );
@@ -130,8 +138,8 @@ abstract class Ayoola_Page_Menu_Abstract extends Ayoola_Abstract_Table
 			$fieldset->addLegend( 'Add links from a post category' . $adminOptions );
 	//		$fieldset->addElement( array( 'name' => 'keywords', 'placeholder' => 'Comma-separated keywords for search engines', 'type' => 'InputText', 'value' => @$values['keywords'] ) );
 			
-			$options = new Application_Category;
-			$options = $options->select();
+	//		$options = new Application_Category;
+			$options = Application_Category_ShowAll::getPostCategories();
 			require_once 'Ayoola/Filter/SelectListArray.php';
 			$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label', 'category_name' );
 			$options = $filter->filter( $options );

@@ -207,7 +207,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 			$link .= http_build_query( $articleInfo );  
  */
-			$this->setViewContent( '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() .  '/object/name/Application_Article_Creator/?' . '">' . $addPostMessage . '</a>' );
+	//		$this->setViewContent( '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() .  '/object/name/Application_Article_Creator/?' . '">' . $addPostMessage . '</a>' );
 		}
 	//	if( self::hasPriviledge() )
 	//	{
@@ -224,7 +224,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
  		if( ! $this->getDbData() )
 		{ 
 			$this->showMessage();
-			return;
+	//		return;
 		}
  	//	var_export( $this->getDbData() );
 		$this->setViewContent( self::getXml() );   
@@ -501,11 +501,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$tempItem2 = include( $tempItem );
 			}
 			$newArticleType = @$tempItem2['article_type'];
-			$newArticleTypeToShow = ucfirst( $newArticleType );
+			$newArticleTypeToShow = ucfirst( $newArticleType ) ? : 'Content';
 	//		self::v( $newArticleType );
 	//		self::v( $newArticleTypeToShow );
 			$item = array( 
-							'article_url' => ( '/object/name/Application_Article_Creator/?&article_type=' . $newArticleType ), 
+							'article_url' => ( '/tools/classplayer/get/name/Application_Article_Creator/?&article_type=' . $newArticleType ), 
 							'allow_raw_data' => true, 
 						//	'article_type' => $newArticleType, 
 							'always_allow_article' => $this->getParameter( 'article_types' ), 
@@ -516,7 +516,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							'auth_level' => $articleSettings['allowed_writers'], 
 							'article_tags' => '', 
 							'username' => Ayoola_Application::getUserInfo( 'username' ), 
-							'article_title' => 'Click here to add a new ' . $newArticleTypeToShow . '', 
+							'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
 							'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
 							'article_content' => '<p> ' . $newArticleTypeToShow . ' article will be displayed here. You can <strong>format </strong>your <em>article </em>using any HTML <s>style</s> you want. You can use <span style="color:#FF0000">c</span>o<span style="color:#008000">l</span>o<span style="color:#0000FF">r</span>s. <span style="color:#008000">You </span>can <span style="background-color:#FFFF00">add</span> as many images as you want in this space.</p>
 							<p>You can also use mathematical expressions in the article e.g. X<sup>2 -y</sup> + 2x = y.</p>
@@ -531,8 +531,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	$item['article_type'] = $tempItem[]
 		
 			
-		//	array_push( $values, $item );   
-			array_unshift( $values, $tempItem );
+		//	array_push( $values, $item ); 
+		//	var_export( $tempItem );  
+			$tempItem ? array_unshift( $values, $tempItem ) : null;
 
 			if( count( $values ) >= $j )
 			{
@@ -825,15 +826,17 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				
 				@$data['price_percentage_savings'] =  intval( ( ( $data['item_old_price'] - $data['item_price'] ) / $data['item_old_price'] ) * 100 ) . '%';
 				@$data['item_old_price'] = $data['item_old_price'] ? $filter->filter( $data['item_old_price'] ) : null;
-				$data['item_price'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
+				$data['item_price_with_currency'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
 				
 				//	Split to naira / kobo
 				$filter = new $filter();
 				$filter::$symbol = '';
-				$data['item_price_with_currency'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
 				$data['item_price_without_currency'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
+	//			var_export( $data['item_price'] );
+	//			var_export( $data['item_price_with_currency'] );
 				$data['item_price_before_decimal'] = array_shift( explode( '.', $data['item_price_without_currency'] ) );
 				$data['item_price_after_decimal'] = array_pop( explode( '.', $data['item_price_without_currency'] ) );
+				$data['item_price'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
 			
 			}
 		//	var_export( $data['article_type'] );
@@ -1182,9 +1185,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$html .= '<span style=""> posts </span>';
 		$html .= '<span style=""> in </span>';
 		
-		$options = new Application_Category;
-		$options = $options->select();
-		require_once 'Ayoola/Filter/SelectListArray.php';
+		$options = Application_Category_ShowAll::getPostCategories();
 		$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
 		$options = array( '' => 'All' ) + $filter->filter( $options );
 		

@@ -60,7 +60,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 	//		var_export( '1' );
 //			$postType = @$_REQUEST['article_type'] ? : 'post'; 
 			$postType = @$_REQUEST['article_type'] ? : @$_REQUEST['post_type']; 
-			if( ! $postType )
+/*			if( ! $postType )
 			{
 				//	interactively guide user through type selection
 
@@ -87,7 +87,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 				return;
 				
 			}
-			$realType = $postType; 
+*/			$realType = $postType; 
 			$joinedType = $postType; 
 			if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $postType ) )
 			{
@@ -95,6 +95,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 				$postType = $postTypeInfo['post_type'];
 				$joinedType = $realType . ' ('. $postType . ')'; 
 			}   
+			$joinedType = $joinedType ? : 'Post';
 			@$articleSettings['allowed_writers'] = $articleSettings['allowed_writers'] ? : array();
 			$articleSettings['allowed_writers'][] = 98; //	subdomain owners can add posts
 			

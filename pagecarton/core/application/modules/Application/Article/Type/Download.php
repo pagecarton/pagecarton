@@ -292,7 +292,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 		//	download
 		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden', 'value' => @$data['article_url'] ) );
 	//	$fieldset->addRequirement( 'Download_answer', array( 'ArrayKeys' => $data['Download_options'] ) );
-		$fieldset->addLegend( $legend );
+	//	$fieldset->addLegend( $legend );
 		$form->setParameter( array( 'requirements' => @$data['article_requirements']) );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );

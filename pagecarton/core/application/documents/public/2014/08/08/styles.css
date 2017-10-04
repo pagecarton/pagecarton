@@ -49,6 +49,7 @@
   border: 1px solid #ece6e8;
   border-bottom: 3px solid #d9ced2;
   border-top: 0 none;
+  z-index: 100000;
 }
 .cssmenuHorizontalWhite > ul li.dropdown ul li {
   display: block;

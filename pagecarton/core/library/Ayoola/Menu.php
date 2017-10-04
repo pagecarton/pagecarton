@@ -231,11 +231,16 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 		}
 	//	var_export( $category );
-		
-		if( $category )
+		$table = new Application_Category;
+		if( ! $category && $menu['menu_options'] && in_array( 'category', $menu['menu_options'] ) )
+		{
+			//	Defaults to all categories available
+			$categories = Application_Category_ShowAll::getPostCategories();
+		//	var_export( $category );
+		}
+		elseif( $category )
 		{
 		//	$menu['category_name'] = @$menu['category_name'] ? : $this->getParameter( 'category_name' );
-			$table = new Application_Category;
 			$categories = $table->select( null, array( 'category_name' => $category ) );
 	//	var_export( $categories );
 			
@@ -247,7 +252,9 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		//		$categories = $table->select();
 		//		var_export( $categories );
 			}
-			
+		}
+		if( $categories )	
+		{
 	//		self::v( $categories );
 			@$menu['category_url'] = trim( $this->getParameter( 'category_url' ) ? : @$menu['category_url'] );
 			@$menu['url_integration_type'] = $this->getParameter( 'url_integration_type' ) ? : @$menu['url_integration_type'];

@@ -130,7 +130,7 @@ class Application_Article_View extends Application_Article_Abstract
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' ); 		
 		$data = $this->getIdentifierData();
 	//	var_export( $data );
-		$this->_xml = '<span class="' . __CLASS__ . '_UL" style="list-style:none;">';
+	//	$this->_xml = '<span class="' . __CLASS__ . '_UL" style="list-style:none;">';
 		$url = $data['article_url'];
 	//	var_export( $data['article_content'] );
 	
@@ -195,26 +195,13 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 		}
 		
-		
-	//	$this->_xml .= '<caption style="">' . @$data['article_description'] . '</caption>';
-	
-		//	Description
-	//	$this->_xml .= '<li style=""><p style="">' . $data['article_description'] .  '</p></li>';
-		
-		//	content
-	//	var_export( $data );
-/* 		if( @$data['document_url_base64'] )
-		{
-			$data['document_url'] = $data['document_url_base64'];
-		}
- */			if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
+			if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
 			{
 			//	$data['document_url'] = $data['document_url_base64'];
 				$data['document_url'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . filemtime( self::getFolder() . @$data['article_url'] );
 			}
 		if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )  
 		{
-		//	$this->_xml .= '<span style=""><a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $image . '\' )"><img class="' . __CLASS__ . '_IMG" style="vertical-align:top; margin:.5em;float:left;" src="' . $image . '" alt="' . $data['article_title'] . "'s cover photo" . '" title="' . $data['article_title'] . "'s cover photo" . '"/></a></span>';
 			if( $this->getParameter( 'thumbnail' ) )   
 			{
 				Ayoola_Page::$thumbnail = $data['document_url'];
@@ -225,14 +212,9 @@ class Application_Article_View extends Application_Article_Abstract
 				
 				//	Create this template placeholder value so we can have solve the problem of blank image tags in template markups
 				$data['cover_photo_with_link'] = $imageLink;
-				$this->_xml .= '<img class="' . __CLASS__ . '_IMG" style="max-width:100%;" src="' . $image . '" alt="" title="' . $data['article_title'] . "'s cover photo" . '"/>';
+		//		$this->_xml .= '<img class="' . __CLASS__ . '_IMG" style="max-width:100%;" src="' . $image . '" alt="" title="' . $data['article_title'] . "'s cover photo" . '"/>';
 			}
 		}
-/* 		elseif( @$data['document_url_base64'] )
-		{
-			$data['document_url'] = $data['document_url_base64'];
-		}
- */		
 		//	CATEGORIES
 		@$data['category_name'] = is_array( $data['category_name'] ) ? $data['category_name'] : array();
 		@$data['category_id'] = is_array( $data['category_id'] ) ? $data['category_id'] : array(); 
@@ -251,11 +233,11 @@ class Application_Article_View extends Application_Article_Abstract
 	//	$this->_xml .= Application_GooglePlus_Share::viewInLine( $parameter );
 	//	$this->_xml .= Application_Facebook_Like::viewInLine( $parameter );
 	//	$this->_xml .= '<hr />';
-		$this->_xml .= '<div>';
+//		$this->_xml .= '<div>';
 	//	$this->_xml .= '<button style="" onClick="this.nextSibling.style.display=\'\';">Share...</button>';
 	///	$this->_xml .= '<div style="display:none;">' . Application_SocialMedia_Share::viewInLine( $parameter ) . '</div>';  
 		$shareLinks = '<div style="font-size:x-small; margin: 2em 0 2em 0;">' . self::getShareLinks( Ayoola_Page::getCanonicalUrl( $url ) ) . '</div>';  
-		$this->_xml .= $shareLinks;  
+	//	$this->_xml .= $shareLinks;  
 		$this->_objectData['share_link'] = $shareLinks;
 		$this->_objectTemplateValues['share_link'] = $shareLinks;
 		if( self::isOwner( $data['user_id'] ) || self::hasPriviledge( array( 98 ) ) || self::hasPriviledge( $articleSettings['allowed_editors'] ) )
@@ -268,10 +250,10 @@ class Application_Article_View extends Application_Article_Abstract
 			$editLinkHTML .= '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Article_Delete/?article_url=' . $data['article_url'] . '\' );">Delete Post...</button>';
 			$this->_objectData['edit_link'] = $editLinkHTML;
 			$this->_objectTemplateValues['edit_link'] = $editLinkHTML;
-			$this->_xml .= $editLinkHTML;
+//			$this->_xml .= $editLinkHTML;
 		}
 	//	var_export( $data['article_content'] );
-		$this->_xml .= '</div>'; 
+//		$this->_xml .= '</div>'; 
 		if( @$data['item_price'] )
 		{
 			//	Filter the price to display unit
@@ -357,6 +339,10 @@ class Application_Article_View extends Application_Article_Abstract
 				$data['article_creation_date_filtered'] = $filter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
 			}
 		}
+
+		//	just use this
+		$data['document_url'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
+		$this->_xml = self::getDefaultPostView( $data );
 		switch( $postType )   
 		{
 			case 'product':
@@ -367,9 +353,9 @@ class Application_Article_View extends Application_Article_Abstract
 				//	By
 				
 				//	title
-				$this->_xml .= '<div style="font-size:x-small; margin: 1em 0 1em 0;"><h1>' . $data['article_title'] . '</h1></div>';
-				$this->_xml .= '' . $categoryText;
-				
+		//		$this->_xml .= '<div style="font-size:x-small; margin: 1em 0 1em 0;"><h1>' . $data['article_title'] . '</h1></div>';
+		//		$this->_xml .= '' . $categoryText;
+/*				
 				if( @$data['item_price'] )
 				{
 					$this->_xml .= '<p style="font-size:small; margin: 1em 0 1em 0;">
@@ -378,7 +364,7 @@ class Application_Article_View extends Application_Article_Abstract
 											 <span class="" style="text-decoration:line-through;">' . @$data['item_old_price'] . '</span> ' : '' ) . ( '<span class="" style="font-weight:bold;">' .  @$data['item_price_with_currency'] . '</span>' ) . '
 									</p> ';  
 				}
-				$this->_xml .= $data['article_description'] ? '<p  style="margin: 1em 0 1em 0;">' . $data['article_description'] . '</p>' : null;
+*/		//		$this->_xml .= $data['article_description'] ? '<p  style="margin: 1em 0 1em 0;">' . $data['article_description'] . '</p>' : null;
 				$parameterX = array( 'data' => $data, 'button_value' => $this->getParameter( 'button_value' ), 'min_quantity' => $this->getParameter( 'min_quantity' ), 'max_quantity' => $this->getParameter( 'max_quantity' ) );
 				$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( $parameterX );
 				$this->_xml .= $data['button_add_to_cart'];
@@ -387,9 +373,9 @@ class Application_Article_View extends Application_Article_Abstract
 			case 'profile':
 				
 				//	title
-				$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
+		//		$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
 				//	By
-				$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
+		//		$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= '<p style=""><strong>Full Name:</strong> ' . $data['full_legal_name'] . '</p> ';
 				$this->_xml .= '<p style=""><strong>Phone Number:</strong> +' . $data['dial_code'] . '-' . $data['phonenumber'] . '</p> ';
 				$this->_xml .= '<p style=""><strong>Blackberry PIN:</strong> ' . $data['bbm_pin'] . '</p> ';
@@ -401,12 +387,12 @@ class Application_Article_View extends Application_Article_Abstract
 			case 'video':
 				
 				//	title
-				$this->_xml = '<span style=""><h1>' . $data['article_title'] . '</h1></span>';  
+		//		$this->_xml = '<span style=""><h1>' . $data['article_title'] . '</h1></span>';  
 				//	By
 			//	$this->_xml .= '<span><strong>Video by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-				$this->_xml .= '  ' . self::filterTime( $data );
-				$this->_xml .= '' . $categoryText;
-				$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
+		//		$this->_xml .= '  ' . self::filterTime( $data );
+		//		$this->_xml .= '' . $categoryText;
+		//		$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$data['video_content'] = Application_Article_Type_Video::viewInLine( array( 'data' => $data ) );
 				$this->_xml .= $data['video_content'];
 				$this->_xml .= @$data['article_content'];  
@@ -414,24 +400,24 @@ class Application_Article_View extends Application_Article_Abstract
 			case 'link':
 				
 				//	title
-				$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
+	//			$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
 				//	By
 			//	$this->_xml .= '<span><strong>Video by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-				$this->_xml .= '  ' . self::filterTime( $data );
-				$this->_xml .= '' . $categoryText;
-				$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
+	//			$this->_xml .= '  ' . self::filterTime( $data );
+	//			$this->_xml .= '' . $categoryText;
+		//		$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= '<a target="_blank" href="' . $data['link_url'] . '" class="pc-btn pc-bg-color">Visit Link</a>';
 				$this->_xml .= @$data['article_content'];
 			break;
 			case 'poll':
 				
 				//	title
-				$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
+			//	$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
 				//	By
 			//	$this->_xml .= '<span><strong>Poll by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-				$this->_xml .= '  ' . self::filterTime( $data );
-				$this->_xml .= '' . $categoryText;
-				$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
+		//		$this->_xml .= '  ' . self::filterTime( $data );
+		//		$this->_xml .= '' . $categoryText;
+		//		$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= @$data['article_content'];
 				@$data['poll'] = Application_Article_Type_Poll::viewInLine( array( 'data' => $data ) );
 				$this->_xml .= @$data['poll'];
@@ -439,12 +425,12 @@ class Application_Article_View extends Application_Article_Abstract
 			case 'quiz':
 				
 				//	title
-				$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
+		//		$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
 					//	By
 		//		$this->_xml .= '<span><strong>Quiz by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-				$this->_xml .= '  ' . self::filterTime( $data );
-				$this->_xml .= '' . $categoryText;
-				$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
+	//			$this->_xml .= '  ' . self::filterTime( $data );
+	//			$this->_xml .= '' . $categoryText;
+	//			$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= @$data['article_content'];
 				$this->_xml .= Application_Article_Type_Quiz::viewInLine( array( 'data' => $data ) );
 			break;
@@ -485,16 +471,16 @@ class Application_Article_View extends Application_Article_Abstract
 		//		var_export( $data['download_base64'] );
 				$filter = new Ayoola_Filter_FileSize();
 				$data['file_size'] = $filter->filter( $data['file_size'] );
-				$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
+		//		$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
 					
 				//	Version
-				$this->_xml .= '<span style="display:inline;"><strong>Version:</strong> ' . ( @$data['download_version'] ? $data['download_version'] : 'None' ) . '</span> ';
+	//			$this->_xml .= '<span style="display:inline;"><strong>Version:</strong> ' . ( @$data['download_version'] ? $data['download_version'] : 'None' ) . '</span> ';
 				
 				//	By
-				$this->_xml .= '  ' . self::filterTime( $data );
-				$this->_xml .= '' . $categoryText;
+	//			$this->_xml .= '  ' . self::filterTime( $data );
+	//			$this->_xml .= '' . $categoryText;
 			//	$this->_xml .= '<span style="display:inline;"><strong>Uploaded by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-				$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
+	//			$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= @$data['article_content'];
 				$data['download_button'] = Application_Article_Type_Download::viewInLine( array( 'data' => $data ) );
 				$this->_xml .= $data['download_button'];
@@ -502,16 +488,16 @@ class Application_Article_View extends Application_Article_Abstract
 			default:
 				
 				//	title
-				$this->_xml .= '<span style=""><h1>' . $data['article_title'] . ' </h1></span>';
+	//			$this->_xml .= '<span style=""><h1>' . $data['article_title'] . ' </h1></span>';
 				//	By
 			//	$this->_xml .= '<span style=""><strong>by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span>';
-				$this->_xml .= '  ' . self::filterTime( $data );
-				$this->_xml .= '' . $categoryText;
+	//			$this->_xml .= '  ' . self::filterTime( $data );
+	//			$this->_xml .= '' . $categoryText;
 		//		$this->_xml .= '<p>' . $data['article_description'] . '</p>';
-				$this->_xml .= '<span style="">';
-				$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
+	//			$this->_xml .= '<span style="">';
+	//			$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= @$data['article_content'];
-				$this->_xml .=	'</span>';
+	//			$this->_xml .=	'</span>';
 			break;
 		}
 		if( $this->getParameter( 'file_size' ) )
@@ -543,6 +529,7 @@ class Application_Article_View extends Application_Article_Abstract
 		}
 		//	destroy float
 		$this->_xml .= '<div style="clear:both;"></div>';
+		
 		
 		$this->_objectTemplateValues = array_merge( $data ? : array(), $this->_objectTemplateValues ? : array() );
 		
