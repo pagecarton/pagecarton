@@ -547,7 +547,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				{ 
 					$html .= '
 					<span title="Browse Existing files on site" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
-						<img  style="max-height:32px;" alt="Upload" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/grid-three-up-8x.png" >
+						<img  style="max-height:32px;" alt="Browse" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/grid-three-up-8x.png" >
 					</span>
 					
 					'; 

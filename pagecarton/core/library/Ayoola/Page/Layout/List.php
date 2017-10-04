@@ -81,14 +81,12 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
-		$list->listTitle = 'Other themes';
-	//	$table = $this->getDbTable();
-	//	$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-	//	var_export( $table->select() );
+		$list->listTitle = 'Preset themes';
+		$list->noRowClass = true;
+		$list->noOptionsColumn = true;
+		$list->noHeader = true;
 		krsort( $data );
-		$list->setData( $data );
-		$list->setKey( $this->getIdColumn() );  
-		$list->setNoRecordMessage( 'No other themes available.' );
+		$list->setData( $data );  
 		$list->setListOptions( 
 								array( 
 										'Creator' => ' ' 
@@ -96,17 +94,28 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 							);
 		$list->setRowOptions( 
 								array( 
+										'<a style="" title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/%KEY%/template\' );" href="javascript:;"> Edit Theme</a>',
 										'Images' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Images/?' . $this->getIdColumn() . '=%KEY%\' );" title="Update theme pictures">Pictures</a>' ,
 										'Pages' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Pages/?' . $this->getIdColumn() . '=%KEY%\' );" title="Manage Theme Pages">Pages</a>' ,
+										'Default' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?' . $this->getIdColumn() . '=%KEY%\' );" title="Make this the default site theme">Make Default</a>' ,
+										'Preview' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Layout_Preview/?' . $this->getIdColumn() . '=%KEY%\' );" title="Preview">Preview</a>' ,
 									) 
 							);
+		$list->setKey( $this->getIdColumn() );  
 		$list->createList(  
 			array(
-				' ' => array( 'field' => 'layout_label', 'value' => '<div class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/%KEY%/template\' );" style="text-align:center;padding:3em 1em 3em 1em;xmargin:1.5em 1em 1.5em 1em; xwidth:100px; overflow:hidden;  background:     linear-gradient(      rgba( 255, 255, 255, 0.2),      rgba(255, 255, 255, 0.2)    ),    url(' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=%KEY%);  background-size: cover;  color: #000 !important; cursor:pointer; ">%FIELD%</div>' ),   
-		//		'  ' => '<a title="Edit with a plain text editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?' . $this->getIdColumn() . '=%KEY%\' );" href="javascript:;">Edit</a>', 
-				'   ' => '<div style="text-align:center;"><a title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/%KEY%/template\' );" href="javascript:;">Edit</a></div>', 
-		//		'    ' => '<a title="Export template" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Export/?' . $this->getIdColumn() . '=%KEY%\' );" href="javascript:;">Export</a>', 
-		//		'     ' => '<a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+				' ' => array( 'field' => 'layout_label', 'value' => '
+				<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;margin:0 0 2em 0;">
+				<div style="background:     linear-gradient(      rgba( 0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=%KEY%&x=' . rand() . ');   padding:3em 2em 3em 2em;   background-size: 100%; background-position: 0 0; background-attachment: scroll;  background-repeat: no-repeat; color: #fff !important; min-height:200px;">
+				<span style="margin-right:1em;font-size:x-large;">%FIELD%</span>
+					
+				</div>
+				<div style="font-size:small;text-transform:uppercase;padding:1em 2em 1em 2em; background:     linear-gradient(      rgba(50, 50, 50, 0.7),      rgba( 50, 50, 50, 0.7)    );  color: #fff !important; ">
+				<span class="pc-btn-parent pc-btn-small-parent">%PC-TABLES-ROW-OPTIONS%</span>
+				</div>				
+				</div>				
+				' ),   
+			//	'   ' => '', 
 			)
 		);
 		//var_export( $list );
@@ -122,8 +131,10 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
-		$list->listTitle = self::getObjectTitle();
 		$list->listTitle = 'My themes';
+		$list->noRowClass = true;
+		$list->noOptionsColumn = true;
+		$list->noHeader = true;
 	//	$table = $this->getDbTable();
 	//	$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );   
 		krsort( $data );
@@ -138,26 +149,32 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 							);
 		$list->setRowOptions( 
 								array( 
-										'Code' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?' . $this->getIdColumn() . '=%KEY%\' );" title="Code">Edit Code</a>' ,
-										'Images' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Images/?' . $this->getIdColumn() . '=%KEY%\' );" title="Update theme pictures">Change Pictures</a>' ,
-										'Pages' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Pages/?' . $this->getIdColumn() . '=%KEY%\' );" title="Manage Theme Pages">Theme Pages</a>' ,
-										'Export' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Export/?' . $this->getIdColumn() . '=%KEY%\' );" title="Export Theme">Export Theme</a>' ,
+										'<a style="" title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/%KEY%/template\' );" href="javascript:;"> Edit Theme</a>',
+										'Code' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="Code">Code</a>' ,
+										'Images' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Images/?' . $this->getIdColumn() . '=%KEY%\' );" title="Update theme pictures">Pictures</a>' ,
+										'Pages' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Pages/?' . $this->getIdColumn() . '=%KEY%\' );" title="Manage Theme Pages">Pages</a>' ,
+										'Export' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Export/?' . $this->getIdColumn() . '=%KEY%\' );" title="Export Theme">Export</a>' ,
 										'Default' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?' . $this->getIdColumn() . '=%KEY%\' );" title="Make this the default site theme">Make Default</a>' ,
 										'Preview' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Layout_Preview/?' . $this->getIdColumn() . '=%KEY%\' );" title="Preview">Preview</a>' ,
-										'Delete' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="Export Theme">Delete Theme</a>' ,
+										'Delete' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="Delete">Delete</a>' ,
 									) 
 							);
 		$list->setKey( $this->getIdColumn() );  
 		$list->setNoRecordMessage( 'You have not added any theme yet.' );  
 		$list->createList(  
 			array(
-				' ' => array( 'field' => 'layout_label', 'value' => '<div class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/%KEY%/template\' );" style="text-align:center;padding:3em 1em 3em 1em;xmargin:1.5em 1em 1.5em 1em; xwidth:100px; overflow:hidden;  background:     linear-gradient(      rgba( 255, 255, 255, 0.2),      rgba(255, 255, 255, 0.2)    ),    url(' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=%KEY%);  background-size: cover;  color: #000 !important; cursor:pointer; ">%FIELD%</div>' ),   
-		//		' ' => '<a title="%KEY%" href="javascript:;"><img src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=%KEY%" style="max-height:50px;float:left;" alt="%KEY%" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?' . $this->getIdColumn() . '=%KEY%\' );" /></a>', 
-				'   ' => '<div style="text-align:center;"><a title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/%KEY%/template\' );" href="javascript:;">Edit</a></div>', 
-	//			'      ' => '<a title="Edit with a plain text editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?' . $this->getIdColumn() . '=%KEY%\' );" href="javascript:;">Code</a>', 
-			//	'  ' => '<a title="Edit theme images" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Images/?' . $this->getIdColumn() . '=%KEY%\' );" href="javascript:;">Images</a>', 
-	//			'    ' => '<a title="Export template" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Export/?' . $this->getIdColumn() . '=%KEY%\' );" href="javascript:;">Export</a>', 
-	//			'     ' => '<a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+				' ' => array( 'field' => 'layout_label', 'value' => '
+				<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;margin:0 0 2em 0;">
+				<div style="background:     linear-gradient(      rgba( 0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=%KEY%&x=' . rand() . ');   padding:3em 2em 3em 2em;   background-size: 100%; background-position: 0 0; background-attachment: scroll;  background-repeat: no-repeat; color: #fff !important; min-height:200px;">
+				<span style="margin-right:1em;font-size:x-large;">%FIELD%</span>
+					
+				</div>
+				<div style="font-size:small;text-transform:uppercase;padding:1em 2em 1em 2em; background:     linear-gradient(      rgba(50, 50, 50, 0.7),      rgba( 50, 50, 50, 0.7)    );  color: #fff !important; ">
+				<span class="pc-btn-parent pc-btn-small-parent">%PC-TABLES-ROW-OPTIONS%</span>
+				</div>				
+				</div>				
+				' ),   
+			//	'   ' => '', 
 			)
 		);
 		//var_export( $list );

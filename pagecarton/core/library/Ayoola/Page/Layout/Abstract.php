@@ -1002,55 +1002,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$form->setParameter( array( 'no_fieldset' => true ) );
 		$fieldset = new Ayoola_Form_Element;
 		$form->submitValue = 'Save' ;
-		//	Use tiny editor
-		//	Application_Javascript::addFile( '/js/objects/tinymce/tinymce.min.js' );
-	//	Application_Javascript::addFile( '/js/objects/ckeditor/ckeditor.js' );
-/* 		$name = Ayoola_Form::hashElementName( 'wysiwyg' );
-		Application_Javascript::addCode( 'ayoola.events.add( window, "load", function()
-		{ 
-			CKEDITOR.replace
-			( 
-				"' . $name . '",
-				{
-					filebrowserBrowseUrl: "/ayoola/thirdparty/Filemanager/index.php",
-				}
-			); 
-		} );' );
-		Application_Javascript::addCode
-		( 
-			'
-			ayoola.xmlHttp.setAfterStateChangeCallback
-			( 
-				function()
-				{ 
-					if (CKEDITOR.instances["' . $name . '"]) { delete CKEDITOR.instances["' . $name . '"] };
-					if (CKEDITOR.instances["' . $name . '"]) { CKEDITOR.instances["' . $name . '"].destroy(); } 
-					CKEDITOR.replace
-					( 
-						"' . $name . '",
-						{
-							filebrowserBrowseUrl: "/ayoola/thirdparty/Filemanager/index.php",
-						}
-					);
-				}
-			)
-			ayoola.xmlHttp.setBeforeStateChangeCallback
-			( 
-				function()
-				{ 
-				//	alert( CKEDITOR.instances["' . $name . '"] );
-				//	if (CKEDITOR.instances["' . $name . '"]) { delete CKEDITOR.instances["' . $name . '"] };
-			//		alert( CKEDITOR.instances["' . $name . '"] );
-					//	Destroy is the only method that gives me what i need
-					if (CKEDITOR.instances["' . $name . '"]) { CKEDITOR.instances["' . $name . '"].destroy(); } 
-			//		alert( CKEDITOR.instances["' . $name . '"] );
-				}
-			)
-			' 
-		);
- */		do 
+		do 
 		{
-		//	$options = array( 'wysiwyg' => 'Use a simple HTML editor',  'plain_text' => 'Use a plain text editor (Advanced)' );
 			$options = array( 'plain_text' => 'Paste Plain HTML Text' );
 			if( is_null( $values ) )
 			{
@@ -1070,9 +1023,9 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 			//	Load this before we break so some image JS can run
 			//	Screenshot
-		//	var_export( $link );
+		//	var_export( $values['screenshot_url'] );
 			$preview = @$values['screenshot_url'] ? : '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=' . $values['layout_name'];
-			$fieldset->addElement( array( 'name' => 'screenshot_url', 'label' => 'Theme screenshot', 'data-document_type' => 'image', 'type' => 'Document', 'data-previous-url' => $preview  , 'value' => @$values['screenshot_url'] ) );
+			$values ? $fieldset->addElement( array( 'name' => 'screenshot_url', 'label' => 'Theme screenshot', 'data-document_type' => 'image', 'type' => 'Document', 'data-previous-url' => $preview, 'value' => null, 'autocomplete' => 'off' ) ) : null;
 //			$fieldset->addElement( array( 'name' => 'screenshot', 'label' => 'Theme screenshot', 'data-allow_base64' => true, 'data-document_type' => 'image', 'type' => 'Document', 'data-previous-url' => '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=' . $values['layout_name'], 'value' => null, 'autocomplete' => 'off' ) );
 			if( ! $this->getGlobalValue( 'layout_type' ) )
 			{
@@ -1128,7 +1081,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				break;
 				case 'upload':
 			//		$fieldset->addElement( array( 'name' => 'upload', 'label' => 'Theme file (.zip, .tar or .tar.gz archives)', 'data-allow_base64' => true, 'data-document_type' => '', 'type' => 'Document', 'data-previous-url' => '' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/file-8x.png', 'value' => @$values['upload'] ) );
-					$fieldset->addElement( array( 'name' => 'url', 'label' => 'Theme file (.zip, .tar or .tar.gz archives)', 'data-document_type' => '', 'type' => 'Document', 'data-previous-url' => '' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/file-8x.png', 'value' => @$values['url'] ) );  
+					$fieldset->addElement( array( 'name' => 'theme_url', 'label' => 'Theme file (.zip, .tar or .tar.gz archives)', 'data-document_type' => '', 'type' => 'Document', 'data-previous-url' => '' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/file-8x.png', 'value' => @$values['theme_url'] ) );  
 				break; 
 				default:
 			//	case 'plain_text':

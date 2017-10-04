@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="table" creation_time="1505176754" table_version="0.0" module_version="1.00" table_class="Ayoola_Doc_Table" creation_ip="0">
-  <RECORDS autoId="2">
+  <RECORDS autoId="3">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/public/2017/09/12/Capture_PNG.png]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="upload_time"><![CDATA[1505176754]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="username"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="access_level"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[1496-0-1]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/public/2017/10/04/Capture_PNG.png]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="upload_time"><![CDATA[1507119209]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="username"><![CDATA[joywealth]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[0-0-2]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

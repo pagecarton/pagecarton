@@ -439,31 +439,35 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		$key = $this->getKey() ? : null;
 	//	var_export( $key );
 		$bg = '#eeeeee';
-		$html = '<table  class="pc-table"><tr bgcolor="' . $bg . '">';
-		$html .= @$this->hideCheckbox ? null : '<th><input type="checkbox" name=' . $key . ' value="0" /></th>';
-	//	var_export( $this->hideNumbering );
-		$html .= @$this->hideNumbering ? null : '<th>ID</th>';
-		foreach( $fields as $field => $value )
+		$html = '<table  class="pc-table">';
+		if( ! @$this->noHeader )
 		{
-		//	self::v( $field );
-		//	self::v( $value );
-			require_once 'Ayoola/Filter/UnderscoreToSpace.php';
-			$filter = new Ayoola_Filter_UnderscoreToSpace;
-			$head = $filter->filter( $field );
-			if( trim( $head ) )
+			$html .='<tr bgcolor="' . $bg . '">';
+			$html .= @$this->hideCheckbox ? null : '<th><input type="checkbox" name=' . $key . ' value="0" /></th>';
+		//	var_export( $this->hideNumbering );
+			$html .= @$this->hideNumbering ? null : '<th>ID</th>';
+			foreach( $fields as $field => $value )
 			{
-				$html .='<th>' . $head . ' <a href="javascript:;" onClick="window.location.search = window.location.search + \'&pc_sort_column=\' + \'' . @$value['field'] . '\';" > &#8645; </a></th>';
+			//	self::v( $field );
+			//	self::v( $value );
+				require_once 'Ayoola/Filter/UnderscoreToSpace.php';
+				$filter = new Ayoola_Filter_UnderscoreToSpace;
+				$head = $filter->filter( $field );
+				if( trim( $head ) )
+				{
+					$html .='<th>' . $head . ' <a href="javascript:;" onClick="window.location.search = window.location.search + \'&pc_sort_column=\' + \'' . @$value['field'] . '\';" > &#8645; </a></th>';
+				}
+				else
+				{
+					$html .='<th></th>';
+				}
 			}
-			else
+			if( $this->getRowOptions()  && ! @$this->noOptionsColumn )
 			{
 				$html .='<th></th>';
 			}
+			$html .='</tr>';
 		}
-		if( $this->getRowOptions() )
-		{
-			$html .='<th></th>';
-		}
-		$html .='</tr>';
 		$allRows = $this->getRows();
 		foreach( $allRows as $counter => $row )
 		{
@@ -472,11 +476,21 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			
 		//	$bg = $bg == '#ffffff' ? '#eeeeee' : '#ffffff';
 			$rowClass = $rowClass == 'pc-table-row1' ? 'pc-table-row2' : 'pc-table-row1';
+			if( $this->noRowClass )
+			{
+				$rowClass = null;
+			}
 			$records = '<tr class="' . $rowClass . '">';    
 //			$records = '<tr style="background-color:' . $bg . '; color:#000;">';    
 			$records .= @$this->hideCheckbox ? null : '<td><input type="checkbox" name="' . $key . '" value="' . $row[$key] . '" /></td>';
 			$records .= @$this->hideNumbering ? null : '<td>'. ++$counter . '</td>';
 //		var_export( $row );  
+			$optionsHtml = null;
+			foreach( $this->getRowOptions() as $option )
+			{
+				$option = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], '' ), $option );
+				$optionsHtml .= '<span style="" class=""> ' . $option . ' </span> ';			
+			}
 			foreach( $fields as $field => $value )
 			{
 			//	if( is_array( $row ) && array_key_exists( $field, $row ) )
@@ -537,6 +551,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				//	$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, $value );
 					$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, is_scalar( $value ) ? $value : null );
 					$value = str_replace( '%KEY%', @$row[$key], $value );
+					$value = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $value );
 				//	$value = htmlentities( $value );
 					$records .='<td>' . $value . '</td>';    
 				}
@@ -555,20 +570,16 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				}
 */				
 			}
-			if( $this->getRowOptions() )
+			if( $this->getRowOptions() && ! @$this->noOptionsColumn )
 			{
-				$records .='<td style="xwidth:10px; text-align:center;" onclick="var a = this.parentNode.nextElementSibling; a.style.display = ( a.style.display == \'none\' ) ? \'\'  : \'none\';"><a href="javascript:"> options </a></td>';
+				$records .='<td style="text-align:center;"><a onclick="var a = this.parentNode.parentNode.nextElementSibling; a.style.display = ( a.style.display == \'none\' ) ? \'\'  : \'none\';" href="javascript:"> options </a></td>';
 			}
 			$records .= '</tr>';
 			if( $this->getRowOptions() )
 			{
 		//		var_export( $this->getRowOptions() );
 				$records .= '<tr class="' . $rowClass . ' pc-btn-parent pc-btn-small-parent" style="display:none;"><td style="text-align:right;" colspan="100">';
-				foreach( $this->getRowOptions() as $option )
-				{
-					$option = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], '' ), $option );
-					$records .= '<span style="" class=""> ' . $option . ' </span> ';			
-				}
+				$records .= $optionsHtml;
 				$records .= '</td></tr>';
 			}
 			$html .= $records;

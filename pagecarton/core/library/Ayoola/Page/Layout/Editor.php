@@ -59,19 +59,26 @@ class Ayoola_Page_Layout_Editor extends Ayoola_Page_Layout_Abstract
 			<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Page/?layout_name=' . $identifierData['layout_name'] . '" class="pc-btn pc-btn-small">Change Default Theme</a>
 			
 			</p>' );
-
+/*
 			// save screenshot
 			if( $values['screenshot'] )
 			{
 				$filename = dirname( $this->getMyFilename() ) . DS . 'screenshot';
 				file_put_contents( $filename, $values['screenshot']);
 			}  
-
+*/
 			// remove this so that screenshot don't get updated'   
-			if( empty( $values['screenshot_url'] ) )
+			if( ! empty( $values['screenshot_url'] ) )
 			{
-				unset( $values['screenshot_url'] );
+				$file = Ayoola_Doc_Browser::getDocumentsDirectory() . $values['screenshot_url'];
+				if( file_exists( $file ) )
+				{
+					$layoutDir = dirname( $this->getMyFilename() );
+					$screenshot = $layoutDir . '/screenshot.jpg';
+					copy( $file, $screenshot );
+				}
 			}  
+			unset( $values['screenshot_url'] );
 		
 	//	$this->setViewContent( 'Layout saved successfully' );
 		}

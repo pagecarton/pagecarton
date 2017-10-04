@@ -33,7 +33,7 @@ class Ayoola_Page_PageLayout extends Ayoola_Dbase_Table_Abstract_Xml_Protected
      *
      * @param int
      */
-    protected $_tableVersion = '0.08';  
+    protected $_tableVersion = '0.09';  
 
 	protected $_dataTypes = array
 	( 
@@ -41,7 +41,7 @@ class Ayoola_Page_PageLayout extends Ayoola_Dbase_Table_Abstract_Xml_Protected
 		'layout_label' => 'INPUTTEXT',
 		'layout_options' => 'JSON',
 		'pagelayout_filename' => 'INPUTTEXT',
-		'screenshot_url' => 'INPUTTEXT',
+//		'screenshot_url' => 'INPUTTEXT',
 	);
 	// END OF CLASS
 }

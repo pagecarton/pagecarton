@@ -9,31 +9,10 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Saturday 16th of September 2017 10:58:45 PM	 $ 
+* @version $Id: template.php	Wednesday 4th of October 2017 12:13:40 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_b7050bae07234eabc14cec6521a7fe97 = new Ayoola_Object_Embed( array (
-  'editable' => 'Application_Breadcrumb',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_b7050bae07234eabc14cec6521a7fe97 = null;
-
-							}
-							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								

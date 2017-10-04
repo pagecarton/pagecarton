@@ -45,27 +45,9 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
      * 
      */
 	public static function this( $url, $themeName )
-    {    
-/*        if( ! self::$_table )
-        {
-	    	self::$_table = new Ayoola_Page_Page();
-        }
-
-        //	create this page if not available.
-        //	if its still a system page, delete and create again
-        if( ! self::$_table->select( null, array( 'url' => $url ) ) )
-        {
-            self::$_table->insert( array( 'url' => $url, 'system' => '1' ) );
-        }  
-*/        
- 
+    {     
         //  create page if they don't exist'
         $class = new Ayoola_Page_Editor_Sanitize(  array( 'no_init' => true, 'auto_create_page' => true )  );
-
-        if( ! $pageInfo = $class->sourcePage( $url ) )
-        {
-             return false;
-        }
   //      var_export( $pageInfo );
 
         $fPaths = $tPaths = Ayoola_Page::getPagePaths( $url );
@@ -79,6 +61,17 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
         $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
         $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
         $fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
+
+        if( Ayoola_Loader::getFullPath( $fPaths['include'], array( 'prioritize_my_copy' => true ) ) )
+        {
+            //  don't create this page unless it's saved
+            return false;
+        }
+
+        if( ! $pageInfo = $class->sourcePage( $url ) )
+        {
+             return false;
+        }
 
         foreach( $fPaths as $key => $each )
         {
