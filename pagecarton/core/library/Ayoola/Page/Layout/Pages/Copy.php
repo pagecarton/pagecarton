@@ -62,7 +62,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
         $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
         $fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
 
-        if( Ayoola_Loader::getFullPath( $fPaths['include'], array( 'prioritize_my_copy' => true ) ) )
+        if( ! Ayoola_Loader::getFullPath( $fPaths['include'], array( 'prioritize_my_copy' => true ) ) )
         {
             //  don't create this page unless it's saved
             return false;
@@ -110,7 +110,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
                 return false;   
             }
             
-			$this->createConfirmationForm( 'Copy', 'Copy contents of  "' . $url . '" in "' . $data['layout_name'] . '" to main page' );
+			$this->createConfirmationForm( 'Copy', 'Copy contents of  "' . $url . '" in "' . $data['layout_label'] . '" to main page' );
 			$this->setViewContent( $this->getForm()->view(), true);
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 /*

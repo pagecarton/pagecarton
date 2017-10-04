@@ -146,16 +146,14 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 												CKEDITOR.disableAutoInline = true;
 												CKEDITOR.config.toolbar = 
 															[
-																{ items: [ "Source", "-", "Save", "NewPage", "Preview", "Print", "-", "Templates" ] },
-																{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
+														//		{ items: [ "Source", "-", "Save", "NewPage", "Preview", "Print", "-", "Templates" ] },
+																{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "-", "RemoveFormat" ] },
+//																{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
 																{ name: "paragraph", groups: [ "list", "indent", "blocks", "align" ], items: [ "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "Blockquote", "-", "CreateDiv", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "-" ] },
 																{ name: "links", items: [ "Link", "Unlink", "Anchor" ] },
 																{ name: "styles", items: [ "Format", "Font", "FontSize" ] },
 																{ name: "colors", items: [ "TextColor", "BGColor" ] },
-																{ name: "insert", items: [ "Image", "Flash", "Table", "HorizontalRule", "Smiley", "SpecialChar", "Iframe", "div" ] },
-														//		"/",
-																{ name: "forms", items: [ "Form", "Checkbox", "Radio", "TextField", "Textarea", "Select", "Button", "ImageButton", "HiddenField" ] },
-																{ name: "tools", items: [ "Maximize" ] }
+																{ name: "insert", items: [ "Image", "Table", "HorizontalRule", "SpecialChar", "Iframe" ] }
 																
 															];
 												function replaceDiv( div )  
@@ -202,7 +200,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
 		if( ! @$object['codes'] )
 		{
-			$html .= '<div data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor" onDblClick="replaceDiv( this );">' . ( isset( $object['editable'] ) ? $object['editable'] : "<p>Demo HTML Content! You may edit this content by clicking here...</p>" ) . '</div>';  
+			$html .= '<div style=" cursor: text;" data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor" onDblClick="replaceDiv( this );">' . ( isset( $object['editable'] ) ? $object['editable'] : '
+			<div style="">
+			<h3>Enim cupidatat eiusmod non ipsum exercitation labore pariatur proident consectetur.</h3>
+			<p>Nisi fugiat laboris consequat nulla magna duis laboris ipsum ut officia aliquip. Dolor aliquip irure laborum proident. Eu cillum esse tempor in sit sunt tempor.</p>
+			</div>
+			' ) . '</div>';  
 		}
 		else
 		{

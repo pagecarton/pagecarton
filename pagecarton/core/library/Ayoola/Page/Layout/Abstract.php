@@ -471,6 +471,9 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				//	var_export( $each->getAttribute( 'data-pc-all-sections' ) );
 					if( $each->getAttribute( 'data-pc-all-sections' ) )   
 					{
+						//	can't add this here because then it hides whole section'
+				//		$each->setAttribute( 'class', $each->getAttribute( 'class' ) . ' pc_page_object_specific_item' );
+
 						//	put bootstrap sections in here
 							$each->appendChild( 
 								$xml->createCDATASection

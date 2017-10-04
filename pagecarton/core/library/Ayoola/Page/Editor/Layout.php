@@ -113,13 +113,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	$isNotLayoutPage = stripos( $page['url'], '/layout/' ) !== 0;
 			$pageToCopy = null;
 			if( ! $page = Ayoola_Page::getInfo( $this->_dbWhereClause['url'] ) )
-			{
-/* 				//	If this is not a URL not available in parent application then we cant help
-				$this->setViewContent( '<p>You need to first create a new page: "' . $this->_dbWhereClause['url'] . '" </p>', true );
-				$this->setViewContent( '<p class="boxednews goodnews"><a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/?url=' . $this->_dbWhereClause['url'] . '">Create</a></p>' );
-				return false;
-			//	throw new Ayoola_Page_Exception( 'PAGE URL IS NOT AVAILABLE IN PARENT APP.' ); 
- */			
+			{		
 								
 				//	Auto create now...
 				$page = $this->_dbWhereClause; 
@@ -996,6 +990,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			"load",
 			function()
 			{
+				//	everything is not clickable by default
+				 document.body.style.cursor = "not-allowed";
+				 document.body.title = "This area is not editable here!";
+
 				CreateDragContainer( ' . $portion . ' );
 				CreateDragContainer( "viewable_objects" );
 		//		ayoola.dragNDrop.makeDraggable( "viewable_objects" );
@@ -1027,7 +1025,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		displayViewableObjects.style.cssText = "display:none;";
 		displayViewableObjects.href = "javascript:";
 		displayViewableObjects.innerHTML = "<button type=\"button\">+</button>";
-		displayViewableObjects.title = "Show Viewable Objects";
+		displayViewableObjects.title = "Show Viewable Widgets";
 		topBarForButtons.appendChild( displayViewableObjects );
 		
 		var showViewableObjects = function( e )
@@ -1090,7 +1088,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			var target = ayoola.events.getTarget( e, "addItemButton" );
 	//		var target = e.target || e.srcElement;
 			var select = document.createElement( "select" );
-			select.innerHTML = "<option>Please select an object</option>' . $this->_viewableSelect . '";
+			select.className = target.className;
+	//		select.style.textAlign = "initial";
+	//		select.style.textAlign = "unset";
+			select.innerHTML = "<option>Select Widget</option>' . $this->_viewableSelect . '";
 			ayoola.events.add
 			( 
 				select, 
@@ -1110,12 +1111,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 /* 						
 						//	add delete button
 						var deleteButton = ayoola.div.getDelete( c, deleteButton );
-						deleteButton.title = "Delete Object";
+						deleteButton.title = "Delete Widget";
 						deleteButton.innerHTML = " x ";
 						c.appendChild( deleteButton );
  */						b.parentNode.appendChild( c );     
 					}
-				//	target.innerHTML = "Add another object";
+				//	target.innerHTML = "Add another widget";
 					ayoola.events.add( target, "click", addANewItemToContainer ); 
 					select.parentNode.appendChild( target );
 					select.parentNode.removeChild( select );
@@ -1136,8 +1137,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//
 			var addItemContainer = document.createElement( "div" );
 			addItemContainer.style.cssText = "text-align:center;";  
-			addItemContainer.title = "Click here to select an object to insert into this container";
-		//	addItemContainer.innerHTML = "<a href=\"javascript:\">Add an object</a>";
+			addItemContainer.className = "pc_page_object_specific_item pc_page_object_insert_button_area";
+	//		addItemContainer.style.display = "none";  
+		//	addItemContainer.title = "Click here to select an object to insert into this container";
+		//	addItemContainer.innerHTML = "<a href=\"javascript:\">Add a widget</a>";
 			addItemContainer.name = "add_a_new_item_to_parent_section";
 	//		ayoola.events.add( addItemContainer, "click", addANewItemToContainer ); 
 	
@@ -1145,11 +1148,42 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	addItemButton.className = "addItemButton greynews boxednews centerednews";
 			addItemButton.className = "addItemButton greynews boxednews centerednews pc-btn pc-btn-small";
 		//	addItemContainer.className = "";
-			addItemButton.title = "Click here to select an object to insert into this container";
-			addItemButton.innerHTML = "Add Object Here";
+	//		addItemButton.title = "Click here to select a widget to insert into this container";
+			addItemButton.innerHTML = "Add Widget Here";
 	//		addItemButton.name = "add_a_new_item_to_parent_section";
 			ayoola.events.add( addItemButton, "click", addANewItemToContainer ); 
-			addItemContainer.appendChild( addItemButton );  
+		//	addItemContainer.appendChild( addItemButton );  
+		//	section.appendChild( addItemContainer );
+
+
+
+			var select = document.createElement( "select" );
+			select.innerHTML = "<option value=\"\">Insert Widget Here</option>' . $this->_viewableSelect . '";
+			select.className = "addItemButton greynews boxednews centerednews pc-btn pc-btn-small";
+			select.title = "Select a widget to insert below";
+			ayoola.events.add
+			( 
+				select, 
+				"change", 
+				function( e )
+				{ 
+					var target = ayoola.events.getTarget( e );
+					var a = document.getElementById( target.value );
+					var b = target.parentNode;
+
+					//	Clone the node to replenish the main viewable objects.
+					if( a && b && b.parentNode )
+					{
+						c = a.cloneNode( true );
+						c.id = "";
+				//		alert( c );
+						b.parentNode.appendChild( c ); 
+						c.scrollIntoView( {block: "end",  behaviour: "smooth"} );;    
+					}
+					target.value = "";
+				} 
+			); 
+			addItemContainer.appendChild( select );  
 			section.appendChild( addItemContainer );
 		
 		}  
@@ -1327,17 +1361,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		}
 	//	alert( functionToSaveTemplate );
 		ayoola.events.add( saveButton, "click", functionToSaveTemplate );
-		
-		
-		
-		//	button to reload page
-		var a = document.createElement( "a" );
-		a.style.cssText = "";
-		a.href = "";
-		a.title = "Click here to reload the page editor.";
-		a.className = "pc-hide-children-children pc-btn pc-btn-small";  
-		a.innerHTML = "Reload";  
-	//	topBarForButtons.appendChild( a );
 		' 
 		. 
 		( $isNotLayoutPage ? 
@@ -1451,6 +1474,33 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		optionbar.innerHTML = \' ' . $optionHTML . '\';
 		optionbar.className = "pc-hide-children-children";
 		optionbar.title = "Select page to edit";
+//		topBarForButtons.appendChild( optionbar );
+		
+		//	Display Widgets Editor
+		var optionbar = document.createElement( "span" );
+		optionbar.innerHTML = \'Widgets Options\';
+		optionbar.className = " pc-btn pc-btn-small pc-hide-children-children";
+		optionbar.title = "Show or hide widget options";
+		optionbar.onclick = function()
+		{
+			var a = document.getElementsByClassName( "pc_page_object_specific_item" );
+			for( var b = 0; b < a.length; b++ )  
+			{
+				switch( a[b].style.display )
+				{
+					case "inline-block":
+					case "block":
+					case "inline":
+						a[b].style.display = "none";
+						this.innerHTML = \'Show Widget Options\';      
+					break;
+					default:
+						a[b].style.display = "block";
+						this.innerHTML = \'Hide Widget Options\';
+					break;
+				}
+			}
+		};
 		topBarForButtons.appendChild( optionbar );
 		
 		//	Add show more options button
@@ -1571,7 +1621,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//$moduleName = $modules[$object['module_id']];
 			$object['object_unique_id'] = 'object_unique_id_' . md5( $object['object_name'] );
 			$html .= $this->getViewableObject( $object );
-			$this->_viewableSelect .= "<option value='{$object['object_unique_id']}'>" . htmlspecialchars( $object['view_parameters'] ) . "</option>";
+			$this->_viewableSelect .= "<option style='text-align:initial;' value='{$object['object_unique_id']}'>" . htmlspecialchars( $object['view_parameters'] ) . "</option>";
 			
 		}
 				//	var_export( $objects );

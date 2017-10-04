@@ -612,7 +612,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= "<div name='over_all_object_container' class='DragBox' id='" . $object['object_unique_id'] . "' title='Move this object by dragging it around - " . $object['view_parameters'] . "' data-object_name='{$object['object_name']}' >";
 		
 		//	title bar
-		$html .= '<div style="" title="' . $object['view_parameters'] . '" class="title_bar" data-parameter_name="parent">'; 
+		$html .= '<div style="" title="' . $object['view_parameters'] . '" class="title_bar pc_page_object_specific_item" data-parameter_name="parent">'; 
 		
 		
 		//	Delete button
@@ -769,7 +769,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$openOrNot = static::$openViewParametersByDefault ? '' : 'display:none;';
 		$html .= '<div class="object_exterior" data-parameter_name="parent">'; //	exterior 
 		$html .= @$currentWrapper['wrapper_prefix']; //	exterior 
-		$html .= '<div  title="' . $object['view_parameters'] . '" style="' . $openOrNot . ' padding-top:0.5em;padding-bottom:0.5em;cursor: default;" name="' . $advancedName . '_interior" class="object_interior" data-parameter_name="parent">'; //	interior parent
+		$html .= '<div title="' . $object['view_parameters'] . '" style="' . $openOrNot . ' cursor: default;" name="' . $advancedName . '_interior" class="object_interior" data-parameter_name="parent">'; //	interior parent
+
+		//	just for padding.
+		$html .= '<div class="pc_page_object_specific_item" style="padding-top:0.5em; padding-bottom:0.5em;"></div>'; 
 		$getHTMLForLayoutEditor = 'getHTMLForLayoutEditor';
 		if( @$object['object_interior'] || @in_array( 'object_interior', $advanceParameters['advanced_parameter_name'] ) )
 		{
@@ -803,6 +806,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$html .= '<span data-parameter_name="editable" style="display:block;min-height:1em;" contentEditable=true onclick="" >' . ( @$object['editable'] ? : static::$_editableTitle ) . '</span>';
 		//	$html .= '<button href="javascript:;" style="display:none;" class="" title="' . static::$_editableTitle . '" onclick="this.previousSibling.style.display=\'none\';this.style.display=\'none\';"> hide </button>';
 		}
+
+		//	just for padding.
+		$html .= '<div class="pc_page_object_specific_item" style="padding-top:0.5em; padding-bottom:0.5em;"></div>'; 
 		
 		$html .= '</div>';	//	 interior
 		$html .= @$currentWrapper['wrapper_suffix'];	//	 wrapper
@@ -810,7 +816,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= "<textarea onclick='this.focus();this.select()' style='display:none; width:100%;' class='import_export_content' title='Copy contents and paste where you want to export.'> </textarea>";		
 		
 		//	status bar
-		$html .= '<div name="' . $advancedName . '_interior" style="' . $openOrNot . '" title="' . $object['view_parameters'] . '" class="status_bar">'; 
+		$html .= '<div name="' . $advancedName . '_interior" style="' . $openOrNot . '" title="' . $object['view_parameters'] . '" class="status_bar pc_page_object_specific_item">'; 
 				
 		//	Export
 		$html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var b = this.parentNode.parentNode.getElementsByClassName( \'import_export_content\' ); b = b[0];  if( b.style.display == \'none\' ){  b.value = this.parentNode.parentNode.outerHTML; b.style.display = \'block\';  var c = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' )[0]; c.style.display = \'none\'; this.innerHTML = \'&#8635; Import\' } else {  b.style.display = \'none\'; b.value ? ( this.parentNode.parentNode.outerHTML = b.value ) : null; this.innerHTML = \'&#8635; Export\'; } ">&#8635; Export</a>'; 

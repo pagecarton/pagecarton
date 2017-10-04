@@ -430,19 +430,36 @@
 	cursor: pointer; 
 	cursor: hand;
 }
+.pc_page_object_specific_item
+{
+    display: none;
+}
+.pc_page_object_insert_button_area
+{
+    border: 1px solid #ccc;
+    margin-top:0.5em;
+    margin-bottom:0.5em;
+    padding:0.5em;
+}
+.pc_page_object_insert_button_area:hover
+{
+    border: 1px groove #444;
+}
+.pc_page_object_insert_button_area:hover select
+{
+    border-color: #444;
+}
+
 .DragContainer, .OverDragContainer {
   display:block;
   z-index: 10000;
-	/*   border: #ddd 1px solid;
- */  min-height:2em;
-/*   padding:0.5em;
- */}
+}
 .DragBox, .OverDragBox, .DragDragBox, .miniDragBox {  
   /* border: #ccc 1px solid; */
   display:block;
   cursor: move;
-  padding-top:0.5em;
-  padding-bottom:0.5em;
+  /*padding-top:0.5em;
+  padding-bottom:0.5em;*/
 }
 .DragBox:hover > .title_bar, .DragBox:hover > .status_bar{  
 /* 	display:block;

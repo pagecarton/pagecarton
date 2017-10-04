@@ -39,7 +39,7 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
 			if( ! $data = $this->getIdentifierData() ){ return false; }
 
                         
-			$this->createConfirmationForm( 'Confirm', 'Set  "' . $data['layout_name'] . '" as the main site theme' );
+			$this->createConfirmationForm( 'Confirm', 'Set  "' . $data['layout_label'] . '" as the main site theme' );
 			$this->setViewContent( $this->getForm()->view(), true);
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
