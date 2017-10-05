@@ -34,7 +34,7 @@ class Application_Slideshow_ManageImage extends Application_Slideshow_Abstract
      */
 	protected function init()
     {
-		try
+/*		try
 		{ 
 
 			$this->_createDefaultSlideshow();
@@ -58,7 +58,7 @@ class Application_Slideshow_ManageImage extends Application_Slideshow_Abstract
 			if( $this->updateDb( $values ) ){ $this->setViewContent( 'Slideshow saved successfully.', true ); }
 		}
 		catch( Application_Slideshow_Exception $e ){ return false; }
-    } 
+*/    } 
 	
     /**
      * creates the form
@@ -69,7 +69,7 @@ class Application_Slideshow_ManageImage extends Application_Slideshow_Abstract
      */
 	public function createForm( $submitValue, $legend = null, Array $values = null )
     {
-		//	Form to create a new page
+/*		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$values['slideshow_images'] = unserialize( $values['slideshow_images'] );
 		$form->submitValue = 'Save' ;
@@ -102,6 +102,6 @@ class Application_Slideshow_ManageImage extends Application_Slideshow_Abstract
 		$form->addFieldset( $fieldset );
 		}
 		$this->setForm( $form );
-    } 
+*/    } 
 	// END OF CLASS
 }

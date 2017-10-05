@@ -269,8 +269,8 @@ class ImageManipulator
     if($dst_img)imagedestroy($dst_img);
     if($src_img)imagedestroy($src_img);
     exit();
-/*
-        $ext = strtolower( array_pop( explode( '.', $thumb_target ) ) );
+
+/*        $ext = strtolower( array_pop( explode( '.', $thumb_target ) ) );
         switch( $ext )
         {
             case 'gif':
@@ -288,7 +288,8 @@ class ImageManipulator
 
         // size from
         list($w, $h) = getimagesize($thumb_target);
-
+        $height = $max_height;
+        $width = $max_width;
         if($w > $h) {
                 $new_height =   $height;
                 $new_width  =   floor($w * ($new_height / $h));

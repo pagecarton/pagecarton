@@ -28,6 +28,12 @@ require_once 'Ayoola/Abstract/Table.php';
 class Application_User_Creator extends Application_User_Abstract 
 {
 	
+    /**	
+     *
+     * @var boolean
+     */
+	public static $editorViewDefaultToPreviewMode = true;
+	
     /**
      * Default Database Table
      *

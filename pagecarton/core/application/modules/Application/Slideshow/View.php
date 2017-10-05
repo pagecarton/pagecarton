@@ -28,6 +28,12 @@ require_once 'Application/Slideshow/Abstract.php';
 class Application_Slideshow_View extends Application_Slideshow_Abstract
 {
 	
+    /**	
+     *
+     * @var boolean
+     */
+	public static $editorViewDefaultToPreviewMode = true;
+	
     /**
      * The method does the whole Class Process
      * 
@@ -45,7 +51,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			{ 
 			//	var_export( $data );
 				$this->_parameter['markup_template'] = null;
-				return false; 
+			//	return false; 
 			}
 		//	var_export( $data );
 			if( empty( $data['slideshow_name'] ) )
@@ -55,24 +61,39 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 				return false; 
 			}
 		//	var_export( $data );
+			//	Using template?
+			$data['height'] = $data['height'] ? : 600;
+			$data['width'] = $data['width'] ? : 1600;
 			$data['image_limit'] = $this->getParameter( 'image_limit' ) ? : ( @$data['image_limit'] ? : 12 );
-			$data['slideshow_images'] = unserialize( @$data['slideshow_images'] ) ? : array();
-			if( $this->getParameter( 'sample_image_as_demo' ) && empty( $data['slideshow_images'] ) )
+		//	$data['slideshow_images'] = unserialize( @$data['slideshow_images'] ) ? : array();
+			if( empty( $data['slideshow_image'] ) )
+//			if( $this->getParameter( 'sample_image_as_demo' ) && empty( $data['slideshow_images'] ) )
 			{
 				//	Demo image 
-				$data['slideshow_images'] = array();
-				@$data['slideshow_images'][] = array( 'slideshow_image' => $data['sample_image'], 'image_description' => $data['image_description'], 'image_link' => 'javascript:;' );  
+				$data['slideshow_image'][] = '/img/placeholder-image.jpg';
+				$data['image_title'][] = 'Sunt aliquip cupidatat sit officia nulla.';
+				$data['image_description'][] = 'Duis est esse est voluptate consectetur sit dolor consequat tempor. ';
+				$data['image_link'][] = 'javascript:;';
+
+				$data['slideshow_image'][] = '/img/placeholder-image.jpg';
+				$data['image_title'][] = 'Sunt aliquip cupidatat sit officia nulla.';
+				$data['image_description'][] = 'Duis est esse est voluptate consectetur sit dolor consequat tempor. ';
+				$data['image_link'][] = 'javascript:;';
+
+				$data['slideshow_image'][] = '/img/placeholder-image.jpg';
+				$data['image_title'][] = 'Sunt aliquip cupidatat sit officia nulla.';
+				$data['image_description'][] = 'Duis est esse est voluptate consectetur sit dolor consequat tempor. ';
+				$data['image_link'][] = 'javascript:;';
+//				@$data['slideshow_images'][] = array( 'slideshow_image' => '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer?url=/img/abstract.jpg&max_width=' . $data['width'] . '&max_height=' . $data['height'] . '', 'image_description' => 'Duis est esse est voluptate consectetur sit dolor consequat tempor. ', 'image_title' => 'Ea sunt adipisicing reprehenderit nostrud aliqua amet culpa dolore sint..', 'image_link' => 'javascript:;' );  
 			}
-			//	Using template?
-			$data['height'] = $data['height'] ? : 700;
-			$data['width'] = $data['width'] ? : 1800;
-			if( $this->getParameter( 'template_name' ) )
+			$template = $this->getParameter( 'template_name' ) ? : 'NivoSlider';
+			if( $template )
 			{
 				$options = new Application_Slideshow_Template;
-				$options = $options->selectOne( null, array( 'template_name' => $this->getParameter( 'template_name' ) ) );
+				$options = $options->selectOne( null, array( 'template_name' => $template ) );
 				$options['javascript_code'] = Ayoola_Abstract_Playable::replacePlaceholders( $options['javascript_code'], $data + array( 'template_instance_count' => static::$_counter, 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
 			//	markup_template_namespace
-				$this->setParameter( ( $options ? : array() ) + array( 'markup_template_namespace' => $this->getParameter( 'template_name' ) ) );
+				$this->setParameter( ( $options ? : array() ) + array( 'markup_template_namespace' => $template ) );
 				if( @$options['javascript_files'] )
 				{
 					foreach( $options['javascript_files'] as $each )
@@ -137,7 +158,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 						$each = is_array( $each ) ? $each : @include $each;
 						$slideInfo = array();
 						$slideInfo['record_count'] = $i;
-						$slideInfo['slideshow_image'] = Ayoola_Application::getUrlPrefix() . $each['document_url'];
+						$slideInfo['slideshow_image'] = Ayoola_Application::getUrlPrefix() . $each['document_url'] . '&max_width=' . $data['width'] . '&max_height=' . $data['height'] . '';
 						$slideInfo['image_link'] = $each['article_url'];
 						$slideInfo['image_title'] = $each['article_title'];
 						$slideInfo['image_description'] = $each['article_description'];  
@@ -155,24 +176,27 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 					{
 						foreach( $data['slideshow_image'] as $key => $each )     
 						{
+							if( empty( $data['slideshow_image'][$key] ) )
+							{
+								continue;
+							}
 							
 							$slideInfo = array();
 							$slideInfo['record_count'] = $i;
-							$slideInfo['slideshow_image'] = Ayoola_Application::getUrlPrefix() . $data['slideshow_image'][$key];
+							$slideInfo['slideshow_image'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer?url=' . $data['slideshow_image'][$key] . '&max_width=' . $data['width'] . '&max_height=' . $data['height'] . '';
 							$slideInfo['image_link'] = $data['image_link'][$key] ? : 'javascript:;';
-						//	$slideInfo['image_title'] = $data['image_title'][$key] ? : $data['slideshow_title'];
 							$slideInfo['image_title'] = $data['image_title'][$key] ? : '';
 							$slideInfo['image_description'] = $data['image_description'][$key] ? : '';
 							$allImages[] = $slideInfo + $defaultInfo;
 					//		$each['record_count'] = $i;
 							$html .= self::replacePlaceholders( $this->getParameter( 'markup_template_' . ++$i ) ? : $image, $slideInfo + (array) $this->getParameter( 'slideshow_defaults' ) + array( 'template_instance_count' => static::$_counter, 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', 'link_to_edit_slideshow' => $linkToEdit, ) );
-							if( ++$i > $limit ){ break; }
+					//		if( ++$i > $limit ){ break; }
 							$html .= $this->getParameter( 'markup_template_median' );
 						}
 					}
-					elseif( $data['slideshow_images'] )
+	//				elseif( $data['slideshow_images'] )
 					{
-						foreach( $data['slideshow_images'] as $key => $each )
+/*						foreach( $data['slideshow_images'] as $key => $each )
 						{
 					//		var_export(  $each  );
 							$each['record_count'] = $i;
@@ -181,18 +205,18 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 							if( ++$i > $limit ){ break; }
 							$html .= $this->getParameter( 'markup_template_median' );
 						}
-					}
+*/					}
 				break;
 			}
 			$html = trim( $html, $this->getParameter( 'markup_template_median' ) ) . $suffix;  
 	//		var_export( $html );
 		//	var_export( $data['slideshow_images'] );
-			if( empty( $data['slideshow_images'] ) )
+		//	if( empty( $data['slideshow_images'] ) )
 			{
 				//	Dont show markup when its empty 
 			//	$html = null;
 			}
-			$allImages = ( is_array( $allImages ) ? $allImages : array() ) + ( @is_array( $data['slideshow_images'] ) ? $data['slideshow_images'] : array() );
+	//		$allImages = ( is_array( $allImages ) ? $allImages : array() ) + ( @is_array( $data['slideshow_images'] ) ? $data['slideshow_images'] : array() );
 		//	var_export( $allImages );
 			$this->_objectData = $allImages;
 			$this->_objectTemplateValues = $allImages;
@@ -219,9 +243,12 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 		//	var_export( $html );   
 			
 	//		$this->setViewContent( $html );
-			if( self::hasPriviledge() && ! $this->getParameter( 'hide_editor_link' ) )
+			if( self::hasPriviledge( array( 99, 98 ) ) && ! $this->getParameter( 'hide_editor_link' ) )
 			{
-			//	$this->setViewContent( '<button class="badnews boxednews centerednews blocknews" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $linkToEdit . '\' );" href="javascript:">Click to edit this slideshow images: "' . @$data['slideshow_name'] . '".</button>' );
+				$editButton = '<button class="pc-btn boxednews centerednews blocknews" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $linkToEdit . '\' );" href="javascript:">Manage Slideshow: "' . @$data['slideshow_name'] . '"</button>';
+				$this->_parameter['markup_template'] .= $editButton;
+
+			//	$this->setViewContent( $editButton );
 			}
 		//	var_export( $data );
 		}
@@ -287,7 +314,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];
@@ -303,8 +330,15 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 //		$options = array();
 		$options = (array) $options->getClassOptions();
 //		$options = (array) $options->getClassOptions();
-		$html .= '<span style=""> Show  </span>';
-		$html .= '<select data-parameter_name="slideshow_name"><option value="">Default</option>';
+		$newName = 'slideshow_' . time();
+		if( empty( $object['slideshow_name'] ) )  
+		{
+			$object['slideshow_name'] = $newName; 
+			$object['new_slideshow'] = $newName; 
+		}
+		$html .= '<span style="">Show  </span>';
+		$html .= '<select data-parameter_name="slideshow_name">
+		<option value="' . $newName . '">New Slideshow</option>';
 		foreach( $options as $key => $value ) 
 		{ 
 			$html .=  '<option value="' . $key . '"';  
@@ -313,7 +347,6 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			$html .=  '>' . ( $value ? : $key ) . '</option>';  
 		}
 		$html .= '</select>';
-		$html .= '<span style=""> slides </span>';
 		$html .= '<span style=""> in </span>';
 		
 		$options = new Application_Slideshow_Template;
@@ -333,7 +366,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			$html .=  '>' . ( $value ? : $key ) . '</option>';     
 		}
 		$html .= '</select>';
-		$html .= ' template. ';
+		$html .= ' style. ';
 		return $html;
 	}
 	

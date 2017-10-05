@@ -65,11 +65,26 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 	const TYPE_PLACEHOLDER = '@@TYPE@@';
 	
     /**
+     * Placeholder for ID
+     * 
+     * @var string
+     */
+	const ID_PLACEHOLDER = '@@ID@@';
+	
+    /**
      * html markup with placeholder
      * 
      * @var array
      */
-	protected static $_markup = array( 'file' => "\n<script type='@@TYPE@@' src='@@CONTENT@@'></script>\n", 'code' => "\n<script type='@@TYPE@@'>\n<!--\n@@CONTENT@@\n//-->\n</script>\n" );
+	protected static $_markup = array
+	( 
+		'file' => "<script type='@@TYPE@@' src='@@CONTENT@@' id='@@ID@@'></script>\n", 
+		'code' => "<script type='@@TYPE@@' id='@@ID@@'>
+					
+					@@CONTENT@@
+					
+					</script>\n" 
+	);
 	
     /**
      * html markup with placeholder
@@ -180,7 +195,7 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      */
 	public static function addCode( $code, array $settings = null )
     {
-		$key = 'A' . sha1( $code );
+		$key = 'A' . md5( $code );
 		if( @$settings['js_mode'] )
 		{
 			static::$_jsMode[$key] = $code;
@@ -216,8 +231,8 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 			if( ! $file ){ continue; }
 			$file = Ayoola_Doc::uriToDedicatedUrl( $file );
 			if( ! $file ){ continue; }
-			$files .= str_ireplace( array( self::CONTENT_PLACEHOLDER, self::TYPE_PLACEHOLDER ),
-									array( $file, static::$_type ),
+			$files .= str_ireplace( array( self::CONTENT_PLACEHOLDER, self::TYPE_PLACEHOLDER, self::ID_PLACEHOLDER ),
+									array( $file, static::$_type, md5( $file ) ),
 									static::$_markup['file'] 
 								);
 		}
@@ -259,18 +274,25 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      * Returns the Script code lines
      * 
      */
-	public static function getCodes()
+	public static function getCodes( $noTags = false )
     {
 		$codes = null;
 	//		var_export( self::$_codes );
 		static::$_codes = array_merge( static::$_codes, static::$_codesToHead );
-		foreach( static::$_codes as $code )
+		foreach( static::$_codes as $key => $code )
 		{
 			if( ! $code ){ continue; }
-			$codes .= str_ireplace( array( self::CONTENT_PLACEHOLDER, self::TYPE_PLACEHOLDER ),
-									array( $code, static::$_type ),
-									static::$_markup['code'] 
-								);
+			if( $noTags )
+			{
+				$codes .= $code;
+			}
+			else
+			{
+				$codes .= str_ireplace( array( self::CONTENT_PLACEHOLDER, self::TYPE_PLACEHOLDER, self::ID_PLACEHOLDER ),
+										array( $code, static::$_type, $key ),
+										static::$_markup['code'] 
+									);
+			}
 		}
 		
 		if( @static::$_codesOnLoad )

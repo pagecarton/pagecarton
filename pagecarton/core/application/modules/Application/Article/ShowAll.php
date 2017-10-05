@@ -28,6 +28,13 @@ require_once 'Application/Article/Abstract.php';
 class Application_Article_ShowAll extends Application_Article_Abstract  
 {
 	
+	
+    /**	
+     *
+     * @var boolean
+     */
+	public static $editorViewDefaultToPreviewMode = true;
+
     /**
      * 
      * 
@@ -1155,7 +1162,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];

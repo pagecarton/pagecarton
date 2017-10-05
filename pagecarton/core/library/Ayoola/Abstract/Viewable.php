@@ -153,6 +153,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static $openViewParametersByDefault = true;
 	
+    /**	
+     *
+     * @var boolean
+     */
+	public static $editorViewDefaultToPreviewMode = false;
+	
     /** The tag of the element used in preparing the view content.	
      *
      * @var string
@@ -774,17 +780,28 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		//	just for padding.
 		$html .= '<div class="pc_page_object_specific_item" style="padding-top:0.5em; padding-bottom:0.5em;"></div>'; 
 		$getHTMLForLayoutEditor = 'getHTMLForLayoutEditor';
-		if( @$object['object_interior'] || @in_array( 'object_interior', $advanceParameters['advanced_parameter_name'] ) )
+		
+		if( method_exists( $object['class_name'], $getHTMLForLayoutEditor ) )
 		{
-		//	var_export( $advanceParameters['advanced_parameter_name'] );
-		//	var_export( $object );
-		//	var_export( $object['class_name'] ? : $object['object_name'] );
-		//	var_export( $object );
-			$html .= Ayoola_Abstract_Viewable::viewObject( $object['class_name'] ? : $object['object_name'], $object );
+			$innerSettingsContent = $object['class_name']::$getHTMLForLayoutEditor( $object );
 		}
-		elseif( method_exists( $object['class_name'], $getHTMLForLayoutEditor ) )
+
+		if( @$object['object_interior'] || static::$editorViewDefaultToPreviewMode || @in_array( 'object_interior', $advanceParameters['advanced_parameter_name'] ) )
 		{
-			$html .= $object['class_name']::$getHTMLForLayoutEditor( $object );
+			$classToView = $object['class_name'] ? : $object['object_name'];
+			static::$editorViewDefaultToPreviewMode && $innerSettingsContent ? $html .= '<div  data-parameter_name="parent" class="pc_page_object_specific_item pc_page_object_inner_settings_area" style="">' . $innerSettingsContent . ' <button onclick="
+			var a = ayoola.div.getParentWithClass( this, \'DragBox\' );
+			var b = ayoola.div.getParameterOptions( a );
+			var c = a.getElementsByClassName( \'pc_page_object_inner_preview_area\' )[0];
+			var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Object_Preview/?class_name=' . $classToView . '\', data: b.content, container: c } );
+			">Preview!</button></div>' : null; 
+			
+			//	/object/name/Ayoola_Object_Preview/?class_name=' . $classToView . '
+			$html .= '<div  data-parameter_name="parent" class="pc_page_object_inner_preview_area" style="">' . Ayoola_Abstract_Viewable::viewObject( $classToView, $object ) . '</div>';
+		}
+		elseif( $innerSettingsContent )
+		{
+			$html .= $innerSettingsContent;
 		}
 		//	var_export( $object );
 		if( @$object['call_to_action'] )
@@ -818,12 +835,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		//	status bar
 		$html .= '<div name="' . $advancedName . '_interior" style="' . $openOrNot . '" title="' . $object['view_parameters'] . '" class="status_bar pc_page_object_specific_item">'; 
 				
+		//	Help
+		$html .= '<a class="title_button" title="Seek help on how to use this page editor" name="" href="http://pagecarton.org/docs" onclick="this.target=\'_new\'">?</a>'; 
+
 		//	Export
-		$html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var b = this.parentNode.parentNode.getElementsByClassName( \'import_export_content\' ); b = b[0];  if( b.style.display == \'none\' ){  b.value = this.parentNode.parentNode.outerHTML; b.style.display = \'block\';  var c = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' )[0]; c.style.display = \'none\'; this.innerHTML = \'&#8635; Import\' } else {  b.style.display = \'none\'; b.value ? ( this.parentNode.parentNode.outerHTML = b.value ) : null; this.innerHTML = \'&#8635; Export\'; } ">&#8635; Export</a>'; 
+		$html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var b = this.parentNode.parentNode.getElementsByClassName( \'import_export_content\' ); b = b[0];  if( b.style.display == \'none\' ){  b.value = this.parentNode.parentNode.outerHTML; b.style.display = \'block\';  var c = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' )[0]; c.style.display = \'none\'; this.innerHTML = \'&#8635; Import\' } else {  b.style.display = \'none\'; b.value ? ( this.parentNode.parentNode.outerHTML = b.value ) : null; this.innerHTML = \'&#8635;\'; } ">&#8635; Export</a>'; 
 //		$html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var a = window.prompt( \'Copy to clipboard: Ctrl+C, Enter\', this.parentNode.parentNode.outerHTML ); if( a ){ this.parentNode.parentNode.outerHTML = a; }">&#8635;</a>'; 
 				
-		//	Help
-//		$html .= '<a class="title_button" title="Seek help on how to use this page editor" name="" href="http://pagecarton.org" onclick="this.target=\'_new\'">?</a>'; 
 		$html .= method_exists( $object['class_name'], 'getStatusBarLinks' ) ? static::getStatusBarLinks( $object ) : null; 
 		
 		$html .= '<div style="clear:both;"></div>';

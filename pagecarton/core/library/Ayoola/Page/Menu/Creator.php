@@ -40,6 +40,19 @@ class Ayoola_Page_Menu_Creator extends Ayoola_Page_Menu_Abstract
 		$filter = new Ayoola_Filter_Name();
 		$filter->replace = '-';
 		$values['menu_name'] = strtolower( $filter->filter( $values['menu_label'] ) );
+
+		if( ! empty( $_REQUEST['menu_name'] ) )
+		{
+			$filter = new Ayoola_Filter_Name();
+			$values['menu_name'] = strtolower( $filter->filter( '' . $_REQUEST['menu_name'] ) );
+		}
+		if( $this->getDbTable()->selectOne( null, array( 'menu_name' => $values['menu_name'] ) ) )
+		{
+			$this->getForm()->setBadnews( 'Please enter a different name for this form. There is a form with the same name: ' . $values['menu_name'] );
+			$this->setViewContent( $this->getForm()->view(), true );
+			return false; 
+		}
+		
 		if( $this->insertDb( $values ) )
 		{ 
 			$menuInfo = $this->getDbTable()->selectOne( null, array( 'menu_name' => $values['menu_name'] ) );

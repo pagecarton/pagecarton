@@ -55,6 +55,12 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
      * @var array
      */
 	protected $_noOfOptionsToDisplay = 7;
+	
+    /**	
+     *
+     * @var boolean
+     */
+	public static $editorViewDefaultToPreviewMode = true;
  	
     /**
      * The column name used to sort queries
@@ -439,11 +445,11 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			if( ! $this->getParameter( 'raw-options' ) && ! $this->getOptions() )
 			{
 		//	var_export( self::hasPriviledge() );
-				$menuLabel = $this->getParameter( 'menu_label' ) ? : $this->getParameter( 'menu_name' );
-				if( self::hasPriviledge( array( 99, 98 ) ) && $menuLabel )
+				$menuName = $this->getParameter( 'menu_label' ) ? : $this->getParameter( 'menu_name' );
+				if( self::hasPriviledge( array( 99, 98 ) ) && $menuName )
 				{
 					$options = array();
-					$options[] = array( 'option_name' => $this->getParameter( 'sub_menu' ) ? 'Add sub-menu' : 'Set up new menu here (' . ( $menuLabel ) . ')', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Creator/?menu_label=' . ( $menuLabel ) . '', 'title' => 'Add another menu option', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in' ), );
+					$options[] = array( 'option_name' => $this->getParameter( 'sub_menu' ) ? 'Add sub-menu' : 'Set up new menu here', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Creator/?menu_name=' . ( $menuName ) . '', 'title' => 'Add another menu option', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in' ), );
 					$this->setOptions( $options );      
 				}
 				else
@@ -738,11 +744,12 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];
 		@$object['option'] = $object['option'] ? : $object['view_option'];
+	//	$object['xx'] = 'xxx';
 	//	$html .= "<span data-parameter_name='view' >{$object['view']}</span>";
 		
 		//	Implementing Object Options
@@ -754,7 +761,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 //		$options = array();
 	//	$html .= '<span style=""> Show  </span>';
 	//	$newMenuName = null;
-		$newMenuName = 'menu_' . static::$_counter;
+		$newMenuName = 'menu_' . time();
 		static::$_counter++;
 		$options = (array) $options->getClassOptions();
 	//	if( $options = (array) $options->getClassOptions() )
@@ -762,13 +769,21 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			$html .= '<span style=""> Menu:  </span>';
 	//		$options = (array) $options->getClassOptions();
 			$html .= '<select data-parameter_name="option">';
-			$html .= '<option value="' . $newMenuName . '">New Menu (' . $newMenuName . ')</option>';
+			$html .= '<option value="' . $newMenuName . '">New Menu</option>';
 			if( empty( $object['option'] ) && ! empty( $object['new_menu_name'] ) )  
 			{
 				$filter = new Ayoola_Filter_Name();
 				$filter->replace = '-';
 				$object['new_menu_name'] = strtolower( $filter->filter( @$object['new_menu_name'] ) );
 				$object['option'] = $object['option'] ? : $object['new_menu_name']; 
+			}
+			if( empty( $object['option'] ) )  
+			{
+				$object['option'] = $newMenuName; 
+			}
+			if( empty( $object['template_name'] ) )  
+			{
+				$object['template_name'] = 'HorizontalGrayish'; 
 			}
 			foreach( $options as $key => $value )
 			{ 

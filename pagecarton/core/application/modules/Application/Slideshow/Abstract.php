@@ -183,67 +183,41 @@ abstract class Application_Slideshow_Abstract extends Ayoola_Abstract_Table
 		$form->submitValue = 'Continue...' ;
 		$form->oneFieldSetAtATime = true;
 		$fieldset = new Ayoola_Form_Element; 
-		
-		$options = array( 
-							'post' => 'POST: Use information on recent posts as slideshow images',      
-							'upload' => 'UPLOAD: Build a custom slideshow with new photos and captions', 
-						);
-		$fieldset->addElement( array( 'name' => 'slideshow_type', 'type' => 'Radio', 'value' => @$values['slideshow_type'] ? : 'post', ), $options );
 		$fieldset->addElement( array( 'name' => 'slideshow_title', 'label' => 'Slideshow Title', 'placeholder' => 'Title for the slideshow.', 'type' => 'InputText', 'value' => @$values['slideshow_title'] ) );
-	//		$fieldset->addRequirement( 'slideshow_title', array( 'WordCount' => array( 3, 200 ) ) );
-		if( ! $values )
-		{
-	//		$fieldset->addElement( array( 'name' => 'slideshow_name', 'label' => 'Name', 'placeholder' => 'Give the new slideshow a name', 'type' => 'InputText', 'value' => @$values['slideshow_name'] ) );
-	//		$fieldset->addRequirement( 'slideshow_name', array( 'WordCount' => array( 2, 30 ) ) );   
-		}
+		$fieldset->addRequirement( 'slideshow_title', array( 'WordCount' => array( 3, 200 ) ) );
 		
 		$fieldset->addElement( array( 'name' => 'slideshow_description', 'label' => 'Slideshow Description', 'placeholder' => 'Briefly describe the slideshow.', 'type' => 'TextArea', 'value' => @$values['slideshow_description'] ) );
 	//	$fieldset->addRequirement( 'slideshow_description', array( 'WordCount' => array( 0, 200 ) ) );
 		
-		$fieldset->addLegend( $legend );
-		$form->addFieldset( $fieldset );
+	//	$form->addFieldset( $fieldset );
 		
-		if( ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'slideshow_requirements', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )
-		{
+	//	$fieldset = new Ayoola_Form_Element();		
 
-		}     
-		$fieldset = new Ayoola_Form_Element();		
-			//	var_export( Ayoola_Form::getGlobalValue( 'slideshow_type' ) );
-/* 				if( $values['sample_image'] AND $imageInfo = Application_Slideshow_Abstract::getImageInfo( $values['sample_image'] ) )
-		{
-		//	var_export( $imageInfo );
-			if( ! empty( $imageInfo['width'] ) && ! empty( $imageInfo['height'] ) )
-			{ 
-				$values['width'] = $values['width'] ? :  $imageInfo['width']; 
-				$values['height'] =  $values['height'] ? :  $imageInfo['height']; 
-			}
-		}
-*/
-		$fieldset->addElement( array( 'name' => 'width', 'label' => 'Dimensions', 'placeholder' => 'Width e.g. 1500', 'type' => 'InputText', 'value' => @$values['width'] ) );
+		$fieldset->addElement( array( 'name' => 'width', 'label' => 'Dimensions (Width/Height)', 'placeholder' => 'Width e.g. 1500', 'type' => 'InputText', 'value' => @$values['width'] ) );
 		$fieldset->addElement( array( 'name' => 'height', 'label' => '', 'placeholder' => 'Height e.g. 600', 'type' => 'InputText', 'value' => @$values['height'] ) );
 	//	$fieldset->addElement( array( 'name' => 'timeout', 'label' => 'Time out in seconds', 'placeholder' => 'e.g. 600', 'type' => 'InputText', 'value' => @$values['timeout'] ) );
 		    
 		$options = array_combine( range( 2, 20 ), range( 2, 20 ) );
-		$fieldset->addElement( array( 'name' => 'image_limit', 'label' => 'No of slides', 'placeholder' => 'Select the maximum number of images, slideshow can play.', 'type' => 'Select', 'value' => @$values['image_limit'] ), $options );
+		$fieldset->addElement( array( 'name' => 'image_limit', 'label' => 'No of slides', 'placeholder' => 'Select the maximum number of images, slideshow can play.', 'type' => 'Select', 'value' => @$values['image_limit'] ? : 5 ), $options );
 		$fieldset->addRequirement( 'image_limit', array( 'InArray' => $options ) );
-		
-		//	Cover photo
-//		$fieldset->addElement( array( 'name' => 'sample_image', 'data-document_type' => 'image', 'label' => 'Sample Image', 'type' => 'Document', 'value' => @$values['sample_image'], ) );
-		
 		$options = array( 
-							'crop' => 'Crop excess image width or height when uploading image.', 
-					//		'slideshow_requirements' => 'Information needed to display the Slideshow', 
-						//	'post' => 'Information needed to display the Slideshow', 
+							'upload' => 'Upload photos and captions', 
+							'post' => 'Use Recent Posts',      
 						);
-		$fieldset->addElement( array( 'name' => 'slideshow_options', 'type' => 'Checkbox', 'value' => @$values['slideshow_options'] ? : array( 'crop' ), ), $options );
+		$fieldset->addElement( array( 'name' => 'slideshow_type', 'type' => 'Select', 'value' => @$values['slideshow_type'] ? : 'upload', ), $options );
+		
+		$fieldset->addLegend( $legend );
+		$form->addFieldset( $fieldset );
+		
 
 		switch( Ayoola_Form::getGlobalValue( 'slideshow_type' ) )
 		{
 			case 'upload':
-				$fieldset->addLegend( 'Build a custom slideshow with new photos and captions' );
+		//		$fieldset->addLegend( 'Build a custom slideshow with new photos and captions' );
 			break;
 			case 'post':
 			//	var_export( Ayoola_Form::getGlobalValue( 'slideshow_type' ) );
+				$fieldset = new Ayoola_Form_Element();		
 				$categoryInfo = new Application_Article_Category;
 				$categoryInfo = $categoryInfo->getPublicDbData();
 				$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
@@ -263,10 +237,10 @@ abstract class Application_Slideshow_Abstract extends Ayoola_Abstract_Table
 				
 		//		$fieldset->addRequirement( 'category_name', array( 'ArrayKeys' => $categoryInfo ) );
 				$fieldset->addLegend( 'Use information on recent posts as slideshow images' );
+				$form->addFieldset( $fieldset );
 			break;
 			
 		}     
-		$form->addFieldset( $fieldset );
 		
 		
 		$this->setForm( $form );

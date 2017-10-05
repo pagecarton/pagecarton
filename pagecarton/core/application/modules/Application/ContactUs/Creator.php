@@ -27,6 +27,13 @@ require_once 'Application/ContactUs/Abstract.php';
 
 class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 {
+	
+    /**	
+     *
+     * @var boolean
+     */
+	public static $editorViewDefaultToPreviewMode = true;
+
     /**
      * Access level for player
      *

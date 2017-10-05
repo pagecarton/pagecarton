@@ -410,7 +410,67 @@ ayoola.div =
 		}
 		return parentElement;
 	},
-	
+
+	getParentWithClass: function( element, className ) 
+	{
+		while( ( element = element.parentElement ) && ! element.classList.contains( className ) );
+		return element;
+	},	
+
+	getParameterOptions: function( x, numberedSectionName )
+	{
+//		alert( numberedSectionName );
+		numberedSectionName = numberedSectionName ? numberedSectionName : '';
+		var p = "";
+		var q = Array();
+		for( var c = 0; c < x.childNodes.length; c++ ) 
+		{
+			var parameterOrOption = x.childNodes[c];
+			if( ! parameterOrOption || parameterOrOption.nodeName == "#text" ){ continue; }
+			if( ! parameterOrOption.dataset || ! parameterOrOption.dataset.parameter_name )
+			{ 
+				continue; 
+			}
+			if( parameterOrOption.dataset.parameter_name == "parent"  )
+			{
+				var g = ayoola.div.getParameterOptions( parameterOrOption, numberedSectionName );
+				if( g.content ) 
+				{
+					p += g.content;
+				}
+				if( g.list ) 
+				{
+					q = q.concat( g.list );
+				}
+			//	alert( parameterOrOption );
+				continue;
+			}
+			var parameterName = parameterOrOption.dataset.parameter_name;
+			p += "&" + numberedSectionName + parameterName + "=";
+		//	alert( parameterOrOption.outerHTML );
+			var pattern = /\(/ig;
+			var pattern = "x-x-x-xXXXxx";
+			if( parameterOrOption.value != undefined )
+			{ 
+				//	encode so that & in links wont be affected.
+				p += encodeURIComponent( parameterOrOption.value ).replace( pattern, "PC_SAFE_ITEMS_OPENING_BRACKET" ); 
+			}
+			else if( parameterOrOption.tagName.toLowerCase() == "form" )
+			{ 
+			//	alert( ayoola.div.getFormValues( { form: parameterOrOption, dontDisable: true } ) );
+				p += encodeURIComponent( ayoola.div.getFormValues( { form: parameterOrOption, dontDisable: true } ) ).replace( pattern, "PC_SAFE_ITEMS_OPENING_BRACKET" ); 
+			}
+			else
+			{ 
+				p += encodeURIComponent( parameterOrOption.innerHTML ).replace( pattern, "PC_SAFE_ITEMS_OPENING_BRACKET" ); 
+			}
+			q.push( parameterName );
+		}
+	//	alert( q );
+	//	alert( p );
+		return { content: p, list: q };
+	},
+
 	//	Returns form values as query String
 	getFormValues: function( formObject, dontDisable )
 	{

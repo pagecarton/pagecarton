@@ -27,6 +27,13 @@ require_once 'Application/Subscription/Abstract.php';
 
 class Application_Subscription_Cart extends Application_Subscription_Abstract
 {
+	
+    /**	
+     *
+     * @var boolean
+     */
+	public static $editorViewDefaultToPreviewMode = true;
+
     /**
      * Access level for player
      *

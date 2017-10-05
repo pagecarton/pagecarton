@@ -276,14 +276,48 @@ ayoola.xmlHttp =
 			ajax.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
 			ajax.setRequestHeader( 'Request-Type', 'xmlHttpFetchLink' );
 		}
-/* 		if( ! changeContent )
-		{ 
-			throw new Exception( 'Function to perform on state change was not defined' );
-//			return false; 
-		}
-		var callback = function(){ changeContent( e, ajax ); }
-		ayoola.events.add( ajax, 'readystatechange', callback );
- */		ajax = ayoola.xmlHttp.setDefault( ajax );
+		if( linkObject.container )
+		{
+			var splash = ayoola.spotLight.splashScreen();
+			var ajaxCallback = function()
+			{
+				//	alert( ajax );
+				if( ayoola.xmlHttp.isReady( ajax ) )
+				{
+				//	alert( ajax.responseText );
+			//		alert( ajax.responseXML );
+				//	if( ! ajax.responseText )
+					if( ! ajax.responseText )
+					{ 
+						return false;
+					}
+					var a = ajax.responseText.split( '<!--PC-HTML-DEMARCATION-->' );
+					linkObject.container.innerHTML = a[0];
+					var b = document.getElementsByTagName("body")[0];
+					var c = document.createElement( 'div' );
+					c.innerHTML = a[1];
+					d = c.getElementsByTagName("script");
+					for( var e = 0; e < d.length; e++ )
+					{
+					//	alert( d[e] );
+						if( d[e].id && document.getElementById( d[e].id ) )
+						{
+						//	alert( d[e].src );
+							d[e].parentNode.removeChild( d[e] );
+						}
+					}
+					b.appendChild( c );
+					ayoola.xmlHttp.nodeScriptReplace( c );
+					splash.close();
+				} 
+			}
+			ayoola.events.add( ajax, "readystatechange", ajaxCallback );
+		}	
+
+			//	Send ajax request
+		//	ajax.setRequestHeader( 'AYOOLA-PLAY-MODE', 'JSON' );
+	//		ajax.send( dataObject.data );
+		ajax = ayoola.xmlHttp.setDefault( ajax );
 		! linkObject.skipSend ? ajax.send( linkObject.data ) : null;
 		return ajax;
 	},
@@ -490,6 +524,34 @@ ayoola.xmlHttp =
 	getClassPlayerUrl: function()
 	{
 		return ayoola.pcPathPrefix + ayoola.xmlHttp.classPlayerUrl;
+	},
+
+	nodeScriptReplace: function (node) 
+	{
+        if( node.tagName === 'SCRIPT' ) 
+		{
+			node.parentNode.replaceChild( ayoola.xmlHttp.nodeScriptClone(node) , node );
+	//		node.src ? alert( node.src ) : alert( node.innerHTML );
+        }
+        else 
+		{
+			var i = 0;
+			var children = node.childNodes;
+			while ( i < children.length ) {
+					ayoola.xmlHttp.nodeScriptReplace( children[i++] );
+			}
+        }
+        return node;
+	},
+
+	nodeScriptClone: function(node)
+	{
+		var script  = document.createElement("script");
+		script.text = node.innerHTML;
+		for( var i = node.attributes.length-1; i >= 0; i-- ) {
+				script.setAttribute( node.attributes[i].name, node.attributes[i].value );
+		}
+		return script;
 	}
 }
 

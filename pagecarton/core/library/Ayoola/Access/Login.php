@@ -30,6 +30,12 @@ require_once 'Ayoola/Access/Abstract.php';
 class Ayoola_Access_Login extends Ayoola_Access_Abstract 
 {
 	
+    /**	
+     *
+     * @var boolean
+     */
+	public static $editorViewDefaultToPreviewMode = true;
+	
     /**
      * Whether class is playable or not
      *

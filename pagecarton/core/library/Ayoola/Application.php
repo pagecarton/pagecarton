@@ -823,6 +823,7 @@ class Ayoola_Application
 					}
 					else
 					{
+						header('Pragma: private');
 						header('Cache-Control: private');
 						// Checking if the client is validating his cache and if it is current.
 						if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && (strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == filemtime($fn))) {

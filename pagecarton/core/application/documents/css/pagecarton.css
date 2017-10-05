@@ -81,14 +81,17 @@
 
 }
 .pc-form2 legend, .pc-form2 h2{
-    background: #4D4D4D;
+    background: inherit;
     text-transform: uppercase;
     font-family: 'open_sansregular', sans-serif;
-    color: #797979;
+    color: inherit;
     font-size: 18px;
     font-weight: 100;
     padding: 20px;
+    padding-left: 0;
+    padding-right: 0;
     margin: 30px 0px 30px 0px;
+    border-top: 1px solid #4D4D4D;
 	/*width: 100%;*/
     display: block !important;
 }
@@ -434,18 +437,19 @@
 {
     display: none;
 }
-.pc_page_object_insert_button_area
+.pc_page_object_insert_button_area, .pc_page_object_inner_settings_area
+
 {
     border: 1px solid #ccc;
     margin-top:0.5em;
     margin-bottom:0.5em;
     padding:0.5em;
 }
-.pc_page_object_insert_button_area:hover
+.pc_page_object_insert_button_area:hover, .pc_page_object_inner_settings_area:hover
 {
     border: 1px groove #444;
 }
-.pc_page_object_insert_button_area:hover select
+.pc_page_object_insert_button_area:hover select, .pc_page_object_inner_settings_area:hover select
 {
     border-color: #444;
 }

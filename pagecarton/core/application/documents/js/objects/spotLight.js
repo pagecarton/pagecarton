@@ -104,6 +104,7 @@ ayoola.spotLight =
 		var background = elementInfo.background;
 		var closeSplashScreen = function()
 			{
+			//	alert( container );
 				if( container && container.parentNode )
 				{ 
 					container.parentNode.removeChild( container );  
@@ -114,7 +115,20 @@ ayoola.spotLight =
 				}
 			
 			}
-		background.onDblClick = closeSplashScreen;
+		if( ! ayoola.events.add( background, 'dblclick', closeSplashScreen ) )
+		{
+			background.ondblclick =  closeSplashScreen; 
+		}
+		if( ! ayoola.events.add( container, 'dblclick', closeSplashScreen ) )
+		{
+			container.ondblclick =  closeSplashScreen; 
+		}
+		if( ! ayoola.events.add( container.firstChild, 'dblclick', closeSplashScreen ) )
+		{
+			container.firstChild.ondblclick =  closeSplashScreen; 
+		}
+//		background.onDblClick = closeSplashScreen;
+///		container. = closeSplashScreen;
 			ayoola.spotLight.splashScreenObject = { close: closeSplashScreen, elementInfo: elementInfo };
 		return ayoola.spotLight.splashScreenObject;
 	},

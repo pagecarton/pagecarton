@@ -27,6 +27,12 @@ require_once 'Ayoola/Page/Abstract.php';
 class Ayoola_Form_View extends Ayoola_Form_Abstract
 {
 	
+    /**	
+     *
+     * @var boolean
+     */
+	public static $editorViewDefaultToPreviewMode = true;
+	
     /**
      * 
      * 
@@ -67,13 +73,26 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			{
 			//	var_export( $data );
 		//		var_export( $this->getDbData() );
-				$this->setViewContent( '<p class="boxednews badnews">The requested form was not found on the server. Please check the URL and try again. </p>', true );
-				if( self::hasPriviledge() )
+				if( self::hasPriviledge( array( 99, 98 ) ) )
 				{
-					$editLink = '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Creator/\' )" class="boxednews goodnews">New</a>';
-					$editLink = '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_List/\' )" class="boxednews normalnews">Manage Forms</a>';
-					$this->setViewContent( $editLink );
-				//	$this->setViewContent(  );
+					$formName = $_REQUEST['form_name'] ? : $this->getParameter( 'form_name' );
+					if( ! $this->getParameter( 'new_form' ) )
+					{
+						$this->setViewContent( '<p class=" badnews">Form not set up yet.</p>' );
+					}
+					else
+					{
+						$this->setViewContent( '<p class=" goodnews">New custom form ready.</p>' );
+					}
+					if( $formName  )
+					{
+						$editLink = '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Creator/?form_name=' . $formName . '\' )" class="pc-btn">Set up new form</a>';			$this->setViewContent( $editLink );
+					}
+				}
+				else
+				{
+					$this->setViewContent( '<p class=" badnews">The requested form was not found on the server. Please check the URL and try again. </p>', true );
+
 				}
 				return false;
 			//	self::setIdentifierData( $data );
@@ -192,7 +211,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];
@@ -210,24 +229,31 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		$filter = new Ayoola_Filter_SelectListArray( 'form_name', 'form_title');
 		if( $options = $filter->filter( $options ) )
 		{
-	//		$options = (array) $options->getClassOptions();
-			$html .= '<span style=""> Show  </span>';
-			$html .= '<select data-parameter_name="form_name">';
-			foreach( $options as $key => $value )
-			{ 
-				$html .=  '<option value="' . $key . '"';  
-			//	var_export( $object['view'] );
-				if( @$object['form_name'] == $key ){ $html .= ' selected = selected '; }
-				$html .=  '>' . $value . '</option>';  
-			}
-			$html .= '</select>';
-			$html .= '<span style=""> form.  </span>';
+
 		}
 		else
 		{
-			$html .= '<p>Create a form to display. You can manage all forms by clicking "Manage Forms"</p>'; 
-			$html .= '<button onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Creator/\' );">New Form</button>'; 
+	//		$object['form_name']; 
 		}
+		$newFormName = 'form_' . time();
+		if( empty( $object['form_name'] ) )  
+		{
+			$object['form_name'] = $newFormName; 
+			$object['new_form'] = $newFormName; 
+		}
+//		$options = (array) $options->getClassOptions();
+		$html .= '<span style=""> Form to Show:   </span>';
+		$html .= '<select data-parameter_name="form_name">';
+		$html .= '<option value="' . $newFormName . '">New Form</option>';
+		foreach( $options as $key => $value )
+		{ 
+			$html .=  '<option value="' . $key . '"';  
+		//	var_export( $object['view'] );
+			if( @$object['form_name'] == $key ){ $html .= ' selected = selected '; }
+			$html .=  '>' . $value . '</option>';  
+		}
+		$html .= '</select>';
+		$html .= '<span style="">  </span>';
 		return $html;
 	}
 	

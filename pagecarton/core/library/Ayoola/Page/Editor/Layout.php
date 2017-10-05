@@ -1208,7 +1208,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			{
 			//	CKEDITOR.instances[name].destroy();
 			} 
-			var addParameterOptions = function( x )
+/*			var addParameterOptions = function( x )
 			{
 				var p = "";
 				var q = Array();
@@ -1259,7 +1259,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	alert( p );
 				return { content: p, list: q };
 			}
-			var url = location.href;
+*/			var url = location.href;
 			var postContent = "";
 			var sectionListForPreservation = "";
 			for( var a = 0; a < sections.length; a++ )
@@ -1293,10 +1293,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					// Add View parameters and options
 					//	Loops through parameters
 					var parameterList = Array();
-					var h = addParameterOptions( object );
+				//	var h = addParameterOptions( object );
+					var h = ayoola.div.getParameterOptions( object, numberedSectionName );
 					
 					//	Add for interior Separately because of wrappers blocking it.
-					var k = addParameterOptions( object.getElementsByClassName( "object_interior" )[0] );
+				//	var k = addParameterOptions( object.getElementsByClassName( "object_interior" )[0] );
+					var k = ayoola.div.getParameterOptions( object.getElementsByClassName( "object_interior" )[0], numberedSectionName );
 				//	alert( object.getElementsByClassName( "object_interior" )[0] );
 					if( k.content ) 
 					{

@@ -39,8 +39,21 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 		{
 			$this->createForm( 'Continue..', 'Create a new form' );
 			$this->setViewContent( $this->getForm()->view() );
+
 		//	self::v( $_POST );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
+
+			if( ! empty( $_REQUEST['form_name'] ) )
+			{
+				$filter = new Ayoola_Filter_Name();
+				$values['form_name'] = strtolower( $filter->filter( '' . $_REQUEST['form_name'] ) );
+			}
+			if( $this->getDbTable()->selectOne( null, array( 'form_name' => $values['form_name'] ) ) )
+			{
+				$this->getForm()->setBadnews( 'Please enter a different name for this form. There is a form with the same name: ' . $values['form_name'] );
+				$this->setViewContent( $this->getForm()->view(), true );
+				return false; 
+			}
 			
 			//	Notify Admin
 			$link = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $values['form_name'] . '';
