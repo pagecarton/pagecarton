@@ -245,7 +245,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 	//		$this->setViewContent( $html );
 			if( self::hasPriviledge( array( 99, 98 ) ) && ! $this->getParameter( 'hide_editor_link' ) )
 			{
-				$editButton = '<button class="pc-btn boxednews centerednews blocknews" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $linkToEdit . '\' );" href="javascript:">Manage Slideshow: "' . @$data['slideshow_name'] . '"</button>';
+				$editButton = '<div style="text-align:center;"> <button class="pc-btn boxednews centerednews blocknews" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $linkToEdit . '\' );" href="javascript:">Manage this slideshow</button></div>';
 				$this->_parameter['markup_template'] .= $editButton;
 
 			//	$this->setViewContent( $editButton );
