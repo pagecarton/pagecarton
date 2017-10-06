@@ -1110,7 +1110,7 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		$html = null;
 		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;margin:2em 0 2em 0;">';
 		$html .= '<' . $link . '>';
-		$html .= '<div style="background: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\'); padding:3em 2em 3em 2em;   background-size: cover; background-position: center; background-attachment: fixed; color: #fff !important; ">';
+		$html .= '<div  class="pc_theme_parallax_background" style="background-image: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\'); ">';
 		$html .= '<p style="text-align:right;">' . $data['article_type'] . '</p>';
 		$html .= '<' . $header . '>' . $data['article_title'] . '</' . $header . '>';
 		$html .= $data['article_description'] ? '<br><br><p>' . $data['article_description'] . '</p>' : null;

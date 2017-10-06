@@ -57,7 +57,7 @@ class Ayoola_Page_Info extends PageCarton_Widget
                 $pageInfo['description'] = $pageInfo['description'] ? : 'Description for this page has not been set. Page Description will appear here when they become available.';
             }
 //     var_export( Ayoola_Page::getCurrentPageInfo() );
-            $html = '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;padding:3em 2em 3em 2em; background:     linear-gradient(      rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $pageInfo['cover_photo'] ) . '\');  background-size: cover;  color: #fff !important; ">';
+            $html = '<div class="pc_theme_parallax_background" style="background-image:     linear-gradient( rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)    ), url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $pageInfo['cover_photo'] ) . '\');">';
             $html .= '<h1>' . $pageInfo['title'] . '</h1>';
             $html .= $pageInfo['description'] ? '<br><br><p>' . $pageInfo['description'] . '</p>' : null;
             $html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;"><a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $pageInfo['url'] . '&pc_form_element_whitelist=title,description,cover_photo\', \'page_refresh\' );" href="javascript:">[edit page headline and description]</a></p>' : null;

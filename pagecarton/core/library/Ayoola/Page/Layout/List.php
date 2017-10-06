@@ -106,7 +106,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 			array(
 				' ' => array( 'field' => 'layout_label', 'value' => '
 				<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;margin:0 0 2em 0;">
-				<div style="background:     linear-gradient(      rgba( 0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=%KEY%&x=' . rand() . ');   padding:3em 2em 3em 2em;   background-size: 100%; background-position: 0 0; background-attachment: scroll;  background-repeat: no-repeat; color: #fff !important; min-height:200px;">
+				<div  class="pc_theme_parallax_background" style="background-image:     linear-gradient(      rgba( 0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=%KEY%&x=' . rand() . ');    background-position: 0 0; background-attachment: scroll;  min-height:200px;">
 				<span style="margin-right:1em;font-size:x-large;">%FIELD%</span>
 					
 				</div>
@@ -165,7 +165,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 			array(
 				' ' => array( 'field' => 'layout_label', 'value' => '
 				<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;margin:0 0 2em 0;">
-				<div style="background:     linear-gradient(      rgba( 0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=%KEY%&x=' . rand() . ');   padding:3em 2em 3em 2em;   background-size: 100%; background-position: 0 0; background-attachment: scroll;  background-repeat: no-repeat; color: #fff !important; min-height:200px;">
+				<div  class="pc_theme_parallax_background" style="background-image:     linear-gradient(      rgba( 0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=%KEY%&x=' . rand() . ');    background-position: 0 0; background-attachment: scroll;  min-height:200px;">
 				<span style="margin-right:1em;font-size:x-large;">%FIELD%</span>
 					
 				</div>
