@@ -149,12 +149,13 @@ class Application_IconViewer extends PageCarton_Widget
                         header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s', $docTime ) . ' GMT', true, 200 );
                     }
                 }
-                header( 'Content-Length: ' . filesize( $path ) );
+                //  browser keep expecting more when we resize and download has different size
+          //      header( 'Content-Length: ' . filesize( $path ) );
                 
             }
             if( $path AND ( $maxHeight || $maxWith ) )
             {
-         //      var_export( $maxWith );
+         //      var_export( $maxWith );  
           //     var_export( $maxHeight );
          //      var_export( $path );
          //       exit();
