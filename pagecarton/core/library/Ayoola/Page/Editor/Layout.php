@@ -1481,7 +1481,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	Display Widgets Editor
 		var optionbar = document.createElement( "span" );
 		optionbar.innerHTML = \'Widgets Options\';
-		optionbar.className = " pc-btn pc-btn-small pc-hide-children-children";
+		optionbar.className = " pc-btn pc-btn-small";
 		optionbar.title = "Show or hide widget options";
 		optionbar.onclick = function()
 		{
