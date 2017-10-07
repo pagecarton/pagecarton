@@ -386,10 +386,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="">
-<title>PageCarton 1.7.5 Installation</title>
+<title>PageCarton Installation</title>
 </head>
 <body>
-<div style="background-color:#ccc; padding:1em; margin:0;">';
+<div style="background-color:#ccc;">';
 	if( $badnews )
 	{
 		$a = '<h1>ERROR: ' . @$_GET['badnews'] . '</h1>';
@@ -401,7 +401,7 @@
 	else
 	{
 			echo $content;
-			echo '<p style="font-size:x-small; margin: 1em; text-align:center;">PageCarton version 1.7.5</p>';
+	//		echo '<p style="font-size:x-small; margin: 1em; text-align:center;">PageCarton version 1.7.5</p>';
 	}
 	echo '
 </div>
