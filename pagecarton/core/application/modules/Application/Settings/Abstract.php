@@ -85,13 +85,16 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			$settings = new Application_Settings_SettingsName();
 			$settingsNameInfo = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
 	//		var_export(  $key );
-	//		var_export(  $settingsName );
-		//	var_export(  $settingsNameInfo );   
+		//	self::v(  $settingsName );
+			self::v(  $settingsNameInfo );   
 	//		var_export(  $settings->select() );
 			$settings = new Application_Settings();
-			@$settingsInfo = $settings->selectOne( null, array( 'settingsname_id' => $settingsNameInfo['settingsname_id'] ) ); 
+			if( ! $settingsInfo = $settings->selectOne( null, array( 'settingsname_id' => $settingsNameInfo['settingsname_id'] ) ) )
+			{
+				$settingsInfo = $settings->selectOne( null, array( 'settingsname_name' => $settingsNameInfo['settingsname_name'] ) );
+			}
 			$settings = $settingsInfo + $settingsNameInfo;
-		//	var_export( $settingsInfo );
+	//		var_export( $settingsInfo );
 		//
 
 //		self::v( array( 'settingsname_name' => $settingsName ) );  
@@ -121,7 +124,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			}
 			
 		}
-	//	var_export( self::$_settings );
+	//	self::v( self::$_settings );
 	//	if( is_array( self::$_settings[$settingsName] ) && array_key_exists( $key, self::$_settings[$settingsName] ) )
 		if( ! is_null( $key ) )
 		{
