@@ -36,14 +36,14 @@ class Ayoola_Page_Menu_Editor extends Ayoola_Page_Menu_Abstract
     {
 //		var_export( self::getIdentifierData() );
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
-		$this->createForm( 'Save', 'Edit ' . $identifierData['menu_name'], $identifierData );
+		$this->createForm( 'Save', 'Edit ' . $identifierData['menu_label'], $identifierData );
 	//	var_export( $identifierData );
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( $this->updateDb() )
 		{ 
 		//	$menuInfo = $this->getDbTable()->selectOne( null, array( 'menu_name' => $identifierData['menu_name'] ) );
-			$this->setViewContent( '<span class="boxednews normalnews centerednews">Menu information saved successfully.</span>', true ); 
-			$this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_List/?menu_id=' . $identifierData['menu_id'] . '" class="boxednews goodnews centerednews">Manage options</a>' );     
+			$this->setViewContent( '<p class="goodnews">Menu information saved successfully.</p>', true ); 
+			$this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_List/?menu_id=' . $identifierData['menu_id'] . '" class="pc-btn">Manage options</a>' );     
 		}
     } 
 	// END OF CLASS

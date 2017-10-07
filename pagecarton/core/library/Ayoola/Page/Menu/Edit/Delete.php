@@ -40,7 +40,7 @@ class Ayoola_Page_Menu_Edit_Delete extends Ayoola_Page_Menu_Edit_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['option_name'],  'Delete Menu option' );
 			$this->setViewContent( $this->getForm()->view() );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Menu Option deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent( '<p class="goodnews">Menu Option deleted successfully</p>', true ); }
 		}
 		catch( Ayoola_Page_Menu_Edit_Exception $e ){ return false; }
     } 

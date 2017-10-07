@@ -107,7 +107,7 @@ abstract class Ayoola_Page_Menu_Abstract extends Ayoola_Abstract_Table
 		//	We don't allow editing UNIQUE Keys
 	//	if( is_null( $values ) )
 		{		
-			$fieldset->addElement( array( 'name' => 'menu_label', 'type' => @$_REQUEST['menu_label'] ? 'Hidden' : 'InputText', 'value' => @$values['menu_label'] ) );
+			$fieldset->addElement( array( 'name' => 'menu_label', 'label' => 'Menu Title', 'type' => @$_REQUEST['menu_label'] ? 'Hidden' : 'InputText', 'value' => @$values['menu_label'] ) );
 			$fieldset->addRequirement( 'menu_label', array( 'WordCount' => array( 3, 50 )  ) );
 		}	
 		$options =  array( 
@@ -132,10 +132,10 @@ abstract class Ayoola_Page_Menu_Abstract extends Ayoola_Abstract_Table
 		{
 			if( self::hasPriviledge() )
 			{
-				$adminOptions = '<button type="button" class="" title="Add a new category" rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_List/\' )"> Category Options </button> ';
+				$adminOptions = '<button type="button" class="pc-btn pc-btn-small" title="Add a new category" rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_List/\', \'page_refresh\' )"> Manage Categories </button> ';
 			}
 			$fieldset = new Ayoola_Form_Element;
-			$fieldset->addLegend( 'Add links from a post category' . $adminOptions );
+			$fieldset->addLegend( 'Add links from a post category'  );
 	//		$fieldset->addElement( array( 'name' => 'keywords', 'placeholder' => 'Comma-separated keywords for search engines', 'type' => 'InputText', 'value' => @$values['keywords'] ) );
 			
 	//		$options = new Application_Category;
@@ -143,10 +143,12 @@ abstract class Ayoola_Page_Menu_Abstract extends Ayoola_Abstract_Table
 			require_once 'Ayoola/Filter/SelectListArray.php';
 			$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label', 'category_name' );
 			$options = $filter->filter( $options );
+			//	$adminOptions
+			$fieldset->addElement( array( 'name' => 'category_name', 'label' => 'Select post categories to list as links', 'type' => 'SelectMultiple', 'footnote' => @$adminOptions, 'value' => @$values['category_name'] ), $options ); 
+	//		$fieldset->addRequirement( 'category_name', array( 'InArray' => array_keys( $options )  ) );   
+
 			$fieldset->addElement( array( 'name' => 'category_url', 'label' => 'Category Url e.g. /page/', 'type' => 'InputText', 'value' => @$values['category_url'] ) ); 
 			$fieldset->addElement( array( 'name' => 'url_integration_type', 'label' => 'URL Integration type', 'type' => 'Select', 'value' => @$values['url_integration_type'] ), array( '' => 'Use Query Strings', 'pc_module_url_values_offset' => 'URL Suffix' ) );      
-			$fieldset->addElement( array( 'name' => 'category_name', 'label' => 'Select post categories to list as links', 'type' => 'Checkbox', 'value' => @$values['category_name'] ), $options ); 
-	//		$fieldset->addRequirement( 'category_name', array( 'InArray' => array_keys( $options )  ) );   
 			unset( $options );
 			$form->addFieldset( $fieldset );
 		}

@@ -1,6 +1,6 @@
 <?php
 
-class Ayoola_Validator implements Ayoola_Validator_Interface
+abstract class Ayoola_Validator implements Ayoola_Validator_Interface
 {
 	protected static $_instance;
 	protected $_valid;

@@ -378,5 +378,80 @@ ayoola.dragNDrop =
 		//	Start dragging from the same position the object is
 		//ayoola.dragNDrop.draggedObject.parentNode.insertBefore( ayoola.dragNDrop.draggedObjectPlaceholder, ayoola.dragNDrop.draggedObject );
 		return ayoola.dragNDrop.draggedObjectPlaceholder;
-	}
+	},
+
+	draggedElements: []
+	,
+	allowDrop: function (ev) 
+	{
+		ev.preventDefault();
+	},
+
+	dragThisElement: function (ev) 
+	{
+	//	alert();
+		var element = ev.target;
+		var index = ayoola.dragNDrop.draggedElements.indexOf( element );
+		if( index == -1 ) 
+		{
+			// not already existing in the array, add it now
+			ayoola.dragNDrop.draggedElements.push(element);
+			index = ayoola.dragNDrop.draggedElements.length - 1;
+		}
+		ev.dataTransfer.setData("index", index );
+	},
+
+	dragMyParent: function (ev) 
+	{
+		//	lets drag just the title so no conflict with contenteditable
+	//	alert();
+		var element = ev.target.parentNode;
+		var index = ayoola.dragNDrop.draggedElements.indexOf( element );
+		if( index == -1 ) 
+		{
+			// not already existing in the array, add it now
+			ayoola.dragNDrop.draggedElements.push(element);
+			index = ayoola.dragNDrop.draggedElements.length - 1;
+		}
+		ev.dataTransfer.setData("index", index );
+	},
+
+	elementDropped: function (ev, target ) 
+	{
+	//	alert( ev );
+	//	alert( ev.target );
+		var overedElement = ev.target;
+		var nextElement;
+		var element = ayoola.dragNDrop.draggedElements[ev.dataTransfer.getData('index')];
+		if( ev.target != target )
+		{
+			nextElement = overedElement;
+			while( nextElement.getAttribute( 'class' ) != element.className  )
+			{
+		//		alert( nextElement.tagName );
+		//		alert( nextElement.getAttribute( 'draggable' ) );
+				if( nextElement == target )
+				{
+					nextElement = false;
+					break;
+				}
+				nextElement = nextElement.parentNode;
+			}
+		}
+		
+	//	alert(  );
+		if( nextElement )
+		{
+			target.insertBefore( element, nextElement );
+		}
+		else
+		{
+			target.appendChild(element);
+		}
+		ev.preventDefault();
+
+	//	var data = ev.dataTransfer.getData("text");
+	//	ev.target.appendChild(document.getElementById(data));
+	},
+
 }

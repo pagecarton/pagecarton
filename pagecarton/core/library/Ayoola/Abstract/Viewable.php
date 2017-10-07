@@ -618,7 +618,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= "<div name='over_all_object_container' class='DragBox' id='" . $object['object_unique_id'] . "' title='Move this object by dragging it around - " . $object['view_parameters'] . "' data-object_name='{$object['object_name']}' >";
 		
 		//	title bar
-		$html .= '<div style="" title="' . $object['view_parameters'] . '" class="title_bar pc_page_object_specific_item" data-parameter_name="parent">'; 
+		$html .= '<div draggable=\'true\' ondragstart=\'ayoola.dragNDrop.dragMyParent(event)\' style="cursor: move; cursor: -moz-grab;cursor: -webkit-grab;" title="' . $object['view_parameters'] . '" class="title_bar pc_page_object_specific_item" data-parameter_name="parent">'; 
 		
 		
 		//	Delete button
@@ -780,15 +780,26 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		//	just for padding.
 		$html .= '<div class="pc_page_object_specific_item" style="padding-top:0.5em; padding-bottom:0.5em;"></div>'; 
 		$getHTMLForLayoutEditor = 'getHTMLForLayoutEditor';
-		
+		$innerSettingsContent = null;
 		if( method_exists( $object['class_name'], $getHTMLForLayoutEditor ) )
 		{
 			$innerSettingsContent = $object['class_name']::$getHTMLForLayoutEditor( $object );
 		}
+		if( static::$_editableTitle ) 
+		{
+		//	$html .= '<button href="javascript:;" title="' . static::$_editableTitle . '"  class="" onclick="ayoola.div.makeEditable( this.nextSibling ); this.nextSibling.style.display=\'block\';"> edit </button>';   
+				//	var_export( $object );
+		// /		var_export( $object['editable'] );
+			$editableValue = '' . @$object['editable'] . '';
+			$innerSettingsContent .= '<input placeholder="' . ( static::$_editableTitle ) . '" data-parameter_name="editable" type=text value="' . $editableValue . '" >';
+		//	$html .= '<button href="javascript:;" style="display:none;" class="" title="' . static::$_editableTitle . '" onclick="this.previousSibling.style.display=\'none\';this.style.display=\'none\';"> hide </button>';
+		}
 
 		if( @$object['object_interior'] || static::$editorViewDefaultToPreviewMode || @in_array( 'object_interior', $advanceParameters['advanced_parameter_name'] ) )
 		{
+	//		var_export( $object );
 			$classToView = $object['class_name'] ? : $object['object_name'];
+	//		var_export( $classToView );
 			static::$editorViewDefaultToPreviewMode && $innerSettingsContent ? $html .= '<div  data-parameter_name="parent" class="pc_page_object_specific_item pc_page_object_inner_settings_area" style="">' . $innerSettingsContent . ' <button onclick="
 			var a = ayoola.div.getParentWithClass( this, \'DragBox\' );
 			var b = ayoola.div.getParameterOptions( a );
@@ -798,6 +809,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			
 			//	/object/name/Ayoola_Object_Preview/?class_name=' . $classToView . '
 			$html .= '<div  data-parameter_name="parent" class="pc_page_object_inner_preview_area" style="">' . Ayoola_Abstract_Viewable::viewObject( $classToView, $object ) . '</div>';
+		//	var_export( $object );
 		}
 		elseif( $innerSettingsContent )
 		{
@@ -815,13 +827,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( @$object['markup_template'] )
 		{
 			$html .= '<textarea name="' . $advancedName . '" placeholder="Enter HTML template to use" data-parameter_name="markup_template" style="width:100%;" onclick="">' . @$object['markup_template'] . '</textarea>';
-		}
-		if( static::$_editableTitle ) 
-		{
-		//	$html .= '<button href="javascript:;" title="' . static::$_editableTitle . '"  class="" onclick="ayoola.div.makeEditable( this.nextSibling ); this.nextSibling.style.display=\'block\';"> edit </button>';   
-				//	var_export( $object );
-			$html .= '<span data-parameter_name="editable" style="display:block;min-height:1em;" contentEditable=true onclick="" >' . ( @$object['editable'] ? : static::$_editableTitle ) . '</span>';
-		//	$html .= '<button href="javascript:;" style="display:none;" class="" title="' . static::$_editableTitle . '" onclick="this.previousSibling.style.display=\'none\';this.style.display=\'none\';"> hide </button>';
 		}
 
 		//	just for padding.
@@ -1092,7 +1097,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			return false;
 		}
-	//	var_export( $objectName::viewInLine( $parameters ) );
+//		var_export( $objectName );
 		
 		return $objectName::viewInLine( $parameters );
 	}

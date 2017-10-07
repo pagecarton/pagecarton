@@ -41,6 +41,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
      */
     public function init()
     {
+
 		$this->createConfirmationForm( 'Sanitize Pages', 'Sanitize all page files and information' );
 		$this->setViewContent( '<h3>NOTE:</h3>', true );		
 		$this->setViewContent( '<p>This process will create a fresh copy of all the pages. A fresh copy of the layout template will be used in generating the new pages. A backup of the application is recommended.</p>' );		
@@ -77,7 +78,8 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		$pages = $pages->getDbTable()->select( null, $where );
 		$pages = array_merge( $pages, $defaultPages );
 	//	var_export( $defaultPages );
-	//	var_export( $pages );
+//		var_export( $pages );
+//		exit();
 //var_export( $where );
 	//	var_export( $pages->getDbTable()->select( null, $where ) );    
 		foreach( $pages as $page )    
@@ -92,7 +94,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		//	if( $themeName && ( stripos( $page['url'], '/layout/' ) === 0 ) )
 			if( stripos( $page, '/layout/' ) === 0 )
 			{
-				//	dont cause unfinite loop by updating theme when a them is being sanitized
+				//	dont cause unfinite loop by updating theme when a theme is being sanitized
 				continue;
 			}
 			$this->refresh( $page );   

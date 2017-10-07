@@ -219,6 +219,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      */	
     public function init()
     {
+		//	don't cause infinite loop
+		//	makes sure /object and /tools/classplayer works fine
+		// those classes were embeding Ayoola_Object_Play
+		Ayoola_Object_Embed::ignoreClass( __CLASS__ );
+		Ayoola_Object_Embed::ignoreClass( 'Ayoola_Object_Play' );
+
 	//		var_export( $_POST );
 		if( ! $page = $this->sourcePage() )
 		{
@@ -259,10 +265,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$tmp = tempnam( sys_get_temp_dir(), __CLASS__ );           
 		//	$tmp = $path['template'] . '.tmp';
 		//	Application_Style::addFile( '/js/objects/webReferenceDragNDrop/css.css' );
-			Application_Javascript::addFile( '/js/objects/lukeBreuerDragNDrop.js' );
-			Application_Javascript::addFile( '/js/objects/webReferenceDragNDrop.js' );
-			Application_Javascript::addFile( '/js/objects/dragNDrop.js' );
-			Application_Javascript::addCode( $this->javascript() );
+			if( ! $this->isSaveMode() )
+			{
+				Application_Javascript::addFile( '/js/objects/lukeBreuerDragNDrop.js' );
+				Application_Javascript::addFile( '/js/objects/webReferenceDragNDrop.js' );
+				Application_Javascript::addFile( '/js/objects/dragNDrop.js' );
+				Application_Javascript::addCode( $this->javascript() );
+			}
 			if( $this->_layoutRepresentation )
 			{
 				file_put_contents( $tmp, $this->_layoutRepresentation );
@@ -441,6 +450,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		}
 	//	var_export( $hashPlaceholders );
 //		var_export( $placeholders );
+//		exit();
 		foreach( $sectionsForPreservation as $each )
 		{
 			if( ! in_array( $each, $placeholders ) && ! in_array( $each, $hashPlaceholders ) )
@@ -452,7 +462,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	//	$danglingPlaceholders = array_merge( array_diff( $sectionsForPreservation, $placeholders ), $danglingPlaceholders );
 	//	var_export( $danglingPlaceholders );
 	//	var_export( $sectionsForPreservation );
-
+	//	exit();
 		if( 
 			( empty( $values ) || ! empty( $_REQUEST['pc_load_theme_defaults'] ) )
 			AND $pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFile ) )
@@ -686,7 +696,15 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					//	add this here so it can be available in the the include and template files for new theme
 					$parameters = $parameters + $sectionalValues[$numberedSectionName . '_template_defaults'];
 					$eachObject = array_merge( $eachObject, $parameters );
-					$sectionalObjectCollection .= $this->getViewableObject( $eachObject );
+
+					//	it was causing in finite loop 
+					//	getViewableObjectRepresentation() is calling a view object
+					//	/object and Ayoola_Object_Embed seem to be causing the issue
+					//	ignoring them in savemode seems to fix this.
+					if( ! $this->isSaveMode() )
+					{
+						$sectionalObjectCollection .= $this->getViewableObject( $eachObject );
+					}
 				//	while( false );
 				//	Inject the parameters.
 				
@@ -807,6 +825,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			
 				$this->_layoutRepresentation = preg_replace( '/{@@@' . $section . '([\S\s]*)' . $section . '@@@}/i', '', $this->_layoutRepresentation );
 				$content['template'] = preg_replace( '/{@@@' . $section . '([\S\s]*)' . $section . '@@@}/i', '', $content['template'] );
+			//	var_export( __line__ );
 	//			var_export( $this->_layoutRepresentation );
 			//	echo strlen( $this->_layoutRepresentation ) ;
 			//	echo "<br>" ;
@@ -831,13 +850,14 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 		
 		//	save files
-		if( $_POST || $this->_updateLayoutOnEveryLoad || $this->updateLayoutOnEveryLoad ) //	create template for POSTed data
+		if( $this->isSaveMode() ) //	create template for POSTed data
 		{
 			//	Clear our the orphan placeholders
 		//	$this->_layoutRepresentation = preg_replace( '/{?@@@' . $section . '([\S\s]*)' . $section . '@@@}?/', '', $this->_layoutRepresentation );
 		//	$content['template'] = preg_replace( '/{?@@@([\S\s]*)@@@}?/', '', $content['template'] );
-			
-			//	var_export( $values );  
+			//	var_export( $page['url'] );
+			//	var_export( get_called_class() );
+		//		exit();  
 			
 			//	Get new relative paths
 			$rPaths = Ayoola_Page::getPagePaths( $page['url'] );
@@ -1336,6 +1356,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	alert( postContent );
 		//	return false;
 			var uniqueNameForAjax = "' . __CLASS__ . rand( 0, 500 ) . '";
+
+			//	debug
+			url = url + "&pc_show_error=1";
+
 			ayoola.xmlHttp.fetchLink( url, uniqueNameForAjax, postContent );
 			
 			//	Set a splash screen to indicate that we are loading.
@@ -1534,6 +1558,22 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	//	$script = "\n<script src='/js/objects/dragNDrop.js'>\n</script>\n<script>\n{$js}\n</script>\n";
 		return $js;
 	} 
+
+    /**
+     * Produce the mark-up for each draggable object
+     *
+     * @param string | array viewableObject Information
+     * @return string Mark-Up to Display Viewable Objects
+     */
+    protected function isSaveMode()
+    {
+		if( $_POST || $this->_updateLayoutOnEveryLoad || $this->updateLayoutOnEveryLoad ) //	create template for POSTed data
+		{
+			return true;
+		}
+		return false;
+
+	}
 
     /**
      * Produce the mark-up for each draggable object

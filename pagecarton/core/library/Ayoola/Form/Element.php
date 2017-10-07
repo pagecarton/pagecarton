@@ -202,7 +202,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 		$this->_values[$name] = @$element['value'];
 		
 		// 	Covert to html object and add description 
-		$description = @$element["description"];
+		$footnote = @$element["footnote"];
+//		$description = @$element["description"];
 	//	if( $element['type'] )
 		{
 			$method = 'add' . @$element['type'];
@@ -212,7 +213,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				$element['name'] = @$element['multiple'] ? ( $element['name'] . '[]' ) : $element['name']; 
 				unset( $element['multiple'],  $element['type'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
 				$markup = $this->$method( $element, $values );
-			//	$element .= $description ? "{$description}<br />\n" : null;		
+				$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;		
 			//	$element .= $description ? "<span> {$description} </span>" : null;		
 			//	$element = "<span>{$element}</span>";		
 				//	exit();

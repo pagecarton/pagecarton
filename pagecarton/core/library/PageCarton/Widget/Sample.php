@@ -1,21 +1,5 @@
 <?php
 
-/**
- * PageCarton Content Management System
- *
- * LICENSE
- *
- * @category   PageCarton CMS
- * @package    PageCarton_Widget_Sample
- * @copyright  Copyright (c) {year} PageCarton (http://www.pagecarton.org)
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
- * @version    $Id: {filename} {date} {username} $
- */
-
-/**
- * @see PageCarton_Widget
- */
-
 class PageCarton_Widget_Sample extends PageCarton_Widget
 {   
 	
@@ -36,11 +20,17 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
 		{ 
             //  Code that runs the widget goes here...
 
-
             // to outputs something to the screen
             {
-                $this->setViewContent( '<h1>PageCarton_Widget_Sample: Hello World</h1>' ); 
+                $this->setViewContent( '<h1>Hello World</h1>' ); 
+                $this->setViewContent( '<p>This is sample PageCarton Widget. Create a widget file on <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_List/\' href="javascript:;">Widgets</a></p>' ); 
+                $this->setViewContent( '<p>Here is a sample code of what a widget could do</p>' ); 
+                $this->setViewContent( '<p style="max-height:300px; overflow:scroll;">' . highlight_file( __FILE__, true ) . '</p>' ); 
+
             }
+            
+            //  we don't intend to run anything below here'
+            return true;     
 
             //  To work with PageCarton_Widget Forms
             {

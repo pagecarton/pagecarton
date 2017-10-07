@@ -309,7 +309,12 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 	        	$cacheTime = filemtime( $file );
             foreach( $globalFiles as $each )
             {
-		      	  if( $cacheTime <= @filemtime( $each ) ){ unlink( $file ); }
+       //       var_export();
+		      	  if( $cacheTime <= @filemtime( $each ) )
+              { 
+                  unlink( $file ); 
+                  break;
+              }
             }
           }
           if( is_file( $file ) && empty( $options['disable_cache'] ) )

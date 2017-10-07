@@ -415,8 +415,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				
 		//	var_export( $values );
 		//	var_export( $this->getParameter( 'sort_column' ) );
-				$values = self::sortMultiDimensionalArray( $values, 'article_modified_date' );
-				$values = array_reverse( $values );
+				if( $values )
+				{
+					$values = self::sortMultiDimensionalArray( $values, 'article_modified_date' );
+					$values = array_reverse( $values );
+				}
 			}
 			
 

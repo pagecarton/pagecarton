@@ -34,11 +34,11 @@ class Ayoola_Page_Layout extends Ayoola_Page_Layout_Abstract
      * @param void
      * @return Ayoola_Page_Layout_List
      */
-    public static function getList()
+/*    public static function getList()
     {
         return( new Ayoola_Page_Layout_List() );
     } 
-	
+*/	
     /**
      * This method edits an existing page layout
      *

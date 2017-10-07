@@ -561,7 +561,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		}
 		$currentUrl = self::getCurrentUrl();
 	//	var_export( $currentUrl );
-		$url .= 'previous_url=' . urlencode( $currentUrl );
+		$url .= 'previous_url=' . urlencode( Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '' . $currentUrl );
 		return $url;
     }	
 	

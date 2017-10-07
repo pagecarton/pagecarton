@@ -482,56 +482,56 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 									@@@' . $allSectionsCounter . 'oneness@@@
 									<div class="">
 										<div class="row">
-											<div class="col-lg-12 12u">
+											<div class="col-md-12 12u">
 												@@@' . $allSectionsCounter . 'middlebar@@@
 										   </div>
 										</div> 
 										<div class="row">
-											<div class="col-lg-6 6u 6u(medium) 12u$(xsmall)">
+											<div class="col-sm-6 6u 6u(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'twosome1@@@
 											</div>
-											<div class="col-lg-6 6u 6u(medium) 12u$(xsmall)">
+											<div class="col-sm-6 6u 6u(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'twosome2@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)"> 
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)"> 
 												@@@' . $allSectionsCounter . 'threesome1@@@
 										   </div>
-											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'threesome2@@@
 											</div> 
-											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'threesome3@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-lg-3 3u 6u(medium) 12u$(xsmall)">
+											<div class="col-md-3 3u 6u(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'foursome1@@@
 										   </div>
-											<div class="col-lg-3 3u 6u$(medium) 12u$(xsmall)">
+											<div class="col-md-3 3u 6u$(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'foursome2@@@
 											</div> 
-											<div class="col-lg-3 3u 6u(medium) 12u$(xsmall)">
+											<div class="col-md-3 3u 6u(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'foursome3@@@
 											</div> 
-											<div class="col-lg-3 3u 6u$(medium) 12u$(xsmall)">    
+											<div class="col-md-3 3u 6u$(medium) 12u$(xsmall)">    
 												@@@' . $allSectionsCounter . 'foursome4@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'leftbar@@@
 										   </div>
-											<div class="col-lg-8 8u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-8 8u 12u$(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'leftbarright@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-lg-8 8u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-8 8u 12u$(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'rightbarleft@@@
 											</div> 
-											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
 												@@@' . $allSectionsCounter . 'rightbar@@@
 											</div>   
 										</div> 

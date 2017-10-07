@@ -325,8 +325,12 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		if( is_null( $values ) )
 		{ 
 			$account->addElement( array( 'name' => 'email', 'label' => 'Email Address', 'placeholder' => ' e.g. email@example.com', 'type' => 'InputText', 'value' => @$values['email'] ) );
-			$account->addRequirement( 'email', array( 'EmailAddress' => null, 'DuplicateUser' => array( 'email' ) ) );
-
+			
+			//	username could no longer be needed
+			if( ! $this->getParameter( 'email_not_required' ) )
+			{ 
+				$account->addRequirement( 'email', array( 'EmailAddress' => null, 'DuplicateUser' => array( 'email' ) ) );
+			}
 			//	username could no longer be needed
 			if( ! $this->getParameter( 'no_username' ) )
 			{ 

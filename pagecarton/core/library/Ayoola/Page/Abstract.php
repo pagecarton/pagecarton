@@ -263,14 +263,14 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		{
 			
 			$options =  array( 
-								'template' => 'Select a specific theme for this page. (Over-rides default theme)', 
-								'logged_in_hide' => 'Hide page from logged inn users', 
-								'logged_out_hide' => 'Hide page from logged out users', 
-								'private' => 'Hide page on sub-domains', 
-								'redirect' => 'Auto-redirect this page to another page', 
+								'template' => 'Use separate theme (Over-rides default theme)', 
+					//			'logged_in_hide' => 'Hide page from logged inn users', 
+					//			'logged_out_hide' => 'Hide page from logged out users', 
+					//			'private' => 'Hide page on sub-domains', 
+								'redirect' => 'Redirect this page to another', 
 						//		'disable' => 'Disable Page', 
 					//			'clone_existing_page' => 'Clone an existing page', 
-								'module' => 'Use this page as a module for articles and other posts',  
+								'module' => 'Direct "' . rtrim( @$values['url'], '/' ) . '/*" to this page if they do not exist.',  
 						//		'advanced' => 'Show advanced options' 
 								);
 			

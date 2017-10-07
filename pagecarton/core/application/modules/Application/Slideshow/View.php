@@ -183,7 +183,9 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 							
 							$slideInfo = array();
 							$slideInfo['record_count'] = $i;
-							$slideInfo['slideshow_image'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer?url=' . $data['slideshow_image'][$key] . '&max_width=' . $data['width'] . '&max_height=' . $data['height'] . '';
+							$filename = Ayoola_Loader::checkFile( 'documents' . $data['slideshow_image'][$key] );
+						//	var_export( $filename );    
+							$slideInfo['slideshow_image'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer?url=' . $data['slideshow_image'][$key] . '&max_width=' . $data['width'] . '&max_height=' . $data['height'] . '&document_time=' . filemtime( $filename ) . '';
 							$slideInfo['image_link'] = $data['image_link'][$key] ? : 'javascript:;';
 							$slideInfo['image_title'] = $data['image_title'][$key] ? : '';
 							$slideInfo['image_description'] = $data['image_description'][$key] ? : '';
