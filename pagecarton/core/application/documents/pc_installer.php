@@ -380,7 +380,7 @@
 	}
 	echo '
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color:#ccc;">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -388,8 +388,8 @@
 <meta name="author" content="">
 <title>PageCarton Installation</title>
 </head>
-<body>
-<div style="background-color:#ccc;">';
+<body style="padding:1em; background-color:#ccc;">
+<div>';
 	if( $badnews )
 	{
 		$a = '<h1>ERROR: ' . @$_GET['badnews'] . '</h1>';
