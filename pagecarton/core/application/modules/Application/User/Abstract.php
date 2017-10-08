@@ -283,7 +283,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		//	var_export( $birthMonthValue );
 		//	var_export( $this->getGlobalValue( 'birth_month' ) );
 			$personal->addElement( array( 'name' => 'birth_month', 'label' => 'Date of Birth', 'style' => 'min-width:10%;max-width:25%;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $birthMonthValue ), array( 'Month' ) + $options ); 
-			$personal->addRequirement( 'birth_month', array( 'InArray' => array_keys( $options ) ) );
+	//		$personal->addRequirement( 'birth_month', array( 'InArray' => array_keys( $options ) ) );
 			if( strlen( $this->getGlobalValue( 'birth_month' ) ) === 1 )
 			{
 				$personal->addFilter( 'birth_month', array( 'DefiniteValue' => '0' . $this->getGlobalValue( 'birth_month' ) ) );
@@ -295,7 +295,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$birthDayValue = intval( @strlen( $values['birth_day'] ) === 1 ? ( '0' . @$values['birth_day'] ) : @$values['birth_day'] );
 			$birthDayValue = intval( $birthDayValue ?  : $this->getGlobalValue( 'birth_day' ) );
 			$personal->addElement( array( 'name' => 'birth_day', 'label' => '', 'style' => 'min-width:10%;max-width:25%;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $birthDayValue ), array( 'Day' ) +$options );
-			$personal->addRequirement( 'birth_day', array( 'InArray' => array_keys( $options ) ) );
+	//		$personal->addRequirement( 'birth_day', array( 'InArray' => array_keys( $options ) ) );
 			if( strlen( $this->getGlobalValue( 'birth_day' ) ) === 1 )
 			{
 				$personal->addFilter( 'birth_day', array( 'DefiniteValue' => '0' . $this->getGlobalValue( 'birth_day' ) ) );
@@ -306,7 +306,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$options = range( date( 'Y' ) - 13, 1900 );
 			$options = array_combine( $options, $options );
 			$personal->addElement( array( 'name' => 'birth_year', 'label' => '', 'style' => 'min-width:10%;max-width:25%;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values['birth_year'] ), array( 'Year' ) + $options );
-			$personal->addRequirement( 'birth_year', array( 'InArray' => array_keys( $options ) ) );
+		//	$personal->addRequirement( 'birth_year', array( 'InArray' => array_keys( $options ) ) );
 			
 			//	Birthday combined
 			$personal->addElement( array( 'name' => 'birth_date', 'label' => 'Date of Birth', 'placeholder' => 'YYYY-MM-DD', 'type' => 'Hidden', 'value' => @$values['birth_date'] ) );
@@ -325,7 +325,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		if( is_null( $values ) )
 		{ 
 			$account->addElement( array( 'name' => 'email', 'label' => 'Email Address', 'placeholder' => ' e.g. email@example.com', 'type' => 'InputText', 'value' => @$values['email'] ) );
-			
+
 			//	username could no longer be needed
 			if( ! $this->getParameter( 'email_not_required' ) )
 			{ 
@@ -400,7 +400,8 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				{
 					if( is_array( $each['auth_options'] ) && in_array( 'allow_signup', $each['auth_options'] ) )
 					{
-						$options[$each['auth_level']] =  "{$each['auth_name']}: {$each['auth_description']}";
+					//	$options[$each['auth_level']] =  "{$each['auth_name']}: {$each['auth_description']}";
+						$options[$each['auth_level']] =  "{$each['auth_name']}";
 					}
 				}
 				$account->addElement( array( 'name' => 'user_group', 'label' => 'Account Type', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['user_group'] ? : $this->getParameter( 'user_group' ) ) ), $options );  
@@ -411,7 +412,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			}
 			else 
 			{
-				$account->addElement( array( 'name' => 'user_group', 'label' => 'Account Type', 'type' => 'Hidden', 'value' => null ) );  
+				$account->addElement( array( 'name' => 'user_group', 'label' => 'Account Type', 'type' => 'Hidden', 'value' => @$_REQUEST['user_group'] ) );  
 			}
 			if( ! $this->getParameter( 'no_password' ) )
 			{ 

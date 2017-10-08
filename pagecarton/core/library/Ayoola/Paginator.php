@@ -845,20 +845,20 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			{ 
 				//	Put search 
 				$keys = array_combine( $keys, $keys );
-				$newForm = new Ayoola_Form( array( 'name' => 'xxx', 'class' => 'pc-form', 'data-not-playable' => true, 'method' => 'GET', 'action' => '?' . http_build_query( $_GET ), ) );
+				$newForm = new Ayoola_Form( array( 'name' => 'xxx', 'data-not-playable' => true, 'method' => 'GET', 'action' => '?' . http_build_query( $_GET ), ) );
 				$newForm->setParameter( array( 'no_fieldset' => true, 'no_required_fieldset' => true, ) );
 			//	$newForm->submitValue = 'Search';
 			//	$newForm->setParameter( array( 'no_form_element' => true ) );
 				$newFieldSet = new Ayoola_Form_Element;
 				$newFieldSet->container = 'span';
 		//		$newFieldSet->allowDuplication = true;
-				$newFieldSet->wrapper = 'white-content-theme-border';
+			//	$newFieldSet->wrapper = 'white-content-theme-border';
 			//	$newFieldSet->wrapper = 'white-background';
 				$newFieldSet->hashElementName = false;
 			//	$newFieldSet->addLegend( 'Search records...' );
 				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_value',  'label' => '',  'multiple' => 'multiple', 'placeholder' => 'Enter Search Keyword Here...', 'style' => 'max-width: 45%;', 'type' => 'InputText', 'value' => null ) );
-				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_name', 'style' => 'max-width: 45%;',  'label' => '  ',  'multiple' => 'multiple', 'type' => 'Select', 'value' => null ), array( 'Select Search Column...' ) + $keys );
-				$newFieldSet->addElement( array( 'name' => 'go', 'type' => 'Submit', 'value' => 'Go' ) );        
+				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_name', 'onchange' => 'this.form.submit()', 'style' => 'max-width: 45%;',  'label' => '  ',  'multiple' => 'multiple', 'type' => 'Select', 'value' => null ), array( 'Select Search Column...' ) + $keys );
+			//	$newFieldSet->addElement( array( 'name' => 'go', 'type' => 'Submit', 'value' => 'Go' ) );        
 				$newForm->addFieldset( $newFieldSet );  
 				
 				$newFieldSet = new Ayoola_Form_Element;

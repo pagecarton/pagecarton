@@ -56,6 +56,12 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 	protected static $_ignoredClasses = array();
 	
     /**
+     * 
+     * @var array
+     */
+	protected static $_widgets;
+	
+    /**
      * The method does the whole Class Process
      * 
      */
@@ -202,6 +208,32 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 
 	
     /**
+	 * 
+	 * Verifies if a class is valid PageCarton Widget
+	 * 		
+     * @param mixed Object
+     * @return bool
+     */
+    public static function isWidget( $className )
+	{
+		if( ! Ayoola_Loader::loadClass( $className ) )
+		{
+			return false;
+		}
+		if( ! is_subclass_of( $className, 'Ayoola_Abstract_Playable' ) )
+		{
+			return false;
+		}
+		$class = new ReflectionClass( $className );
+		if( ! $class->isInstantiable() )
+		{
+			return false;
+		}
+		return true;
+	}
+
+	
+    /**
 	 * Returns text for the "interior" of the Layout Editor
 	 * The default is to display view and option parameters.
 	 * 		
@@ -213,108 +245,62 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		$html = null;
 	//	@$object['option'] = $object['option']  ? $object['option'] : $object['editable'];
 		
-	
-		$options = array();
-		$files = array();
-
-		$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'modules';  
-		if( is_dir( $directory ) )
+		if( is_null( self::$_widgets ) )
 		{
-			$options = Ayoola_Doc::getFilesRecursive( $directory );  
+			$options = array();
+			$files = array();
+			$filter = new Ayoola_Filter_FilenameToClassname();
+			
+			$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'modules';  
+			if( is_dir( $directory ) )
+			{
+				$filter->directory = $directory;
+				$options = Ayoola_Doc::getFilesRecursive( $directory );  
+				foreach( $options as $file )
+				{
+					$className = $filter->filter( $file );
+					if( self::isWidget( $className ) )
+					{
+						$files[$className] = $className;
+					}
+				}
+			}
+	//			var_export( $directory );
+
+			$directory = APPLICATION_PATH . DS . 'modules';  
+			if( is_dir( $directory ) )
+			{
+				$filter->directory = $directory;
+				$options = Ayoola_Doc::getFilesRecursive( $directory );  
+				foreach( $options as $file )
+				{
+					$className = $filter->filter( $file );
+					if( self::isWidget( $className ) )
+					{
+						$files[$className] = $className;
+					}
+				}
+			}
+
+			$directory = APPLICATION_DIR . DS . 'library';  
+			if( is_dir( $directory ) )
+			{
+				$filter->directory = $directory;
+				$options = Ayoola_Doc::getFilesRecursive( $directory );  
+				foreach( $options as $file )
+				{
+					$className = $filter->filter( $file );
+					if( self::isWidget( $className ) )
+					{
+						$files[$className] = $className;
+					}
+				}
+			}
+			asort( $files );
+			self::$_widgets = $files;
+		}
 		
-			foreach( $options as $file )
-			{
-				$directory = str_ireplace( DS, '/', $directory );
-				$file = str_ireplace( DS, '/', $file );
-	//			var_export( $directory );
-	//			var_export( $file );
-				$file = str_ireplace( $directory, '', $file );
-				
-				//	The label is transformed into the class value
-				$className = implode( '_', array_map( 'ucwords', explode( '_', array_shift( explode( '.', trim( str_replace( DS, '_', $file ), '_' ) ) ) ) ) );
-				if( ! Ayoola_Loader::loadClass( $className ) )
-				{
-					continue;
-				}
-				if( ! is_subclass_of( $className, 'Ayoola_Abstract_Playable' ) )
-				{
-					continue;
-				}
-				$class = new ReflectionClass( $className );
-				if( ! $class->isInstantiable() )
-				{
-					continue;
-				}
-				$files[$className] = $className;
-			}
-		}
-//			var_export( $directory );
-
-		$directory = APPLICATION_PATH . DS . 'modules';  
-		if( is_dir( $directory ) )
-		{
-			$options = Ayoola_Doc::getFilesRecursive( $directory );  
-			foreach( $options as $file )
-			{
-				$directory = str_ireplace( DS, '/', $directory );
-				$file = str_ireplace( DS, '/', $file );
-	//			var_export( $directory );
-	//			var_export( $file );
-				$file = str_ireplace( $directory, '', $file );
-				
-				//	The label is transformed into the class value
-				$className = implode( '_', array_map( 'ucwords', explode( '_', array_shift( explode( '.', trim( str_replace( DS, '_', $file ), '_' ) ) ) ) ) );
-				if( ! Ayoola_Loader::loadClass( $className ) )
-				{
-					continue;
-				}
-				if( ! is_subclass_of( $className, 'Ayoola_Abstract_Playable' ) )
-				{
-					continue;
-				}
-				$class = new ReflectionClass( $className );
-				if( ! $class->isInstantiable() )
-				{
-					continue;
-				}
-				$files[$className] = $className;
-			}
-		}
-
-		$directory = APPLICATION_DIR . DS . 'library';  
-		if( is_dir( $directory ) )
-		{
-			$options = Ayoola_Doc::getFilesRecursive( $directory ); 
-			foreach( $options as $file )
-			{
-				$directory = str_ireplace( DS, '/', $directory );
-				$file = str_ireplace( DS, '/', $file );
-	//			var_export( $directory );
-	//			var_export( $file );
-				$file = str_ireplace( $directory, '', $file );
-				
-				//	The label is transformed into the class value
-				$className = implode( '_', array_map( 'ucwords', explode( '_', array_shift( explode( '.', trim( str_replace( DS, '_', $file ), '_' ) ) ) ) ) );
-				if( ! Ayoola_Loader::loadClass( $className ) )
-				{
-					continue;
-				}
-				if( ! is_subclass_of( $className, 'Ayoola_Abstract_Playable' ) )
-				{
-					continue;
-				}
-				$class = new ReflectionClass( $className );
-				if( ! $class->isInstantiable() )
-				{
-					continue;
-				}
-				if( stripos( $className, 'pagecarton' ) === 0 )
-				{
-					$files[$className] = $className;
-				}
-			}
-		}
-		asort( $files );
+	
 
 
 		{
@@ -323,7 +309,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				$object['editable'] = 'PageCarton_Widget_Sample'; 
 			}
 			$html .= '<select data-parameter_name="editable">';
-			foreach( $files as $key => $value )
+			foreach( self::$_widgets as $key => $value )
 			{ 
 				$html .=  '<option value="' . $key . '"';   
 				if( @$object['editable'] == $key ){ $html .= ' selected = selected '; }

@@ -46,9 +46,9 @@
     <TABLE_ROW ROW_ID="7">
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Object_Embed]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="object_name"><![CDATA[objectEmbed]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[PHP Object]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="viewableobject_id"><![CDATA[190]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="module"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="view_parameters"><![CDATA[[Other Widgets]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="module"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="8">
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Article_ShowAll]]></TABLE_FIELD>

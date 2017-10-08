@@ -87,6 +87,17 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
         {
             case 'table':
                 $sampleFile = 'PageCarton_Table_Sample';
+           //     var_export( $values['fields'] );
+                if( count( $values['datatypes'] ) != count( $values['fields'] ) )
+                {
+                    $newDataTypes = array();
+                    foreach( $values['fields'] as $key => $each )
+                    {
+                        $newDataTypes[] = $values['datatypes'][$key] ? : 'INPUTTEXT';
+                    }
+                    //  our data types must match the fields
+                    $values['datatypes'] = $newDataTypes;
+                }
                 $search["'{datatypes}'"] = var_export( array_combine( $values['fields'], $values['datatypes'] ), true );
             break;
             default:

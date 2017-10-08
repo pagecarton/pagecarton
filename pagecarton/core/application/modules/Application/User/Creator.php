@@ -118,7 +118,6 @@ class Application_User_Creator extends Application_User_Abstract
 		{
 			$values['password'] = Ayoola_Form::hashElementName( rand( 1000, 90999 ) );
 		}
-
 		if( empty( $values['username'] ) )
 		{
 			//	autogenerate username
@@ -170,13 +169,19 @@ class Application_User_Creator extends Application_User_Abstract
 					if( is_array( $authLevel['auth_options'] ) && in_array( 'allow_signup', $authLevel['auth_options'] ) && $values['user_group'] != 99  )
 					{
 					//	var_export( $authLevel );
-						$values['auth_level'] = $values['user_group'];  
+						$values['access_level'] = $values['user_group'];  
 					}
 				}
 			}
 		//	var_export( $values );
 
 		}
+
+		if( empty( $values['access_level'] ) )
+		{
+			$values['access_level'] = 1;
+		}
+
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
 			$database = 'file';

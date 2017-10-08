@@ -91,7 +91,7 @@ class Application_Article_ViewRandomPost extends Application_Article_View
 					$data = Application_Article_Abstract::loadPostData( $data );
 					$data['auth_level'] = array_map( 'intval', (array) $data['auth_level'] );
 					if( 
-						(  empty( trim( $data['publish'] ) ) && ! in_array( 'publish', @$data['article_options'] ) ) //	not published
+						(  empty( $data['publish'] ) && ! in_array( 'publish', @$data['article_options'] ) ) //	not published
 						|| 
 						! in_array( 0, $data['auth_level'] ) //	Not public
 					)

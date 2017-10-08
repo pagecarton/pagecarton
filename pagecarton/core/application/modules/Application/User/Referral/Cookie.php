@@ -34,7 +34,7 @@ class Application_User_Referral_Cookie extends Ayoola_Abstract_Table
      */
 	public function init()
     {
-			if( empty( $_COOKIE['pc_referrer'] ) && empty( $_REQUEST['pc_referrer'] ) && ( ! $this->getParameter('referrer_key') || empty( $_REQUEST[$this->getParameter('referrer_key')] ) ) &&  empty( @Ayoola_Application::$GLOBAL['username'] ) )    
+			if( empty( $_COOKIE['pc_referrer'] ) && empty( $_REQUEST['pc_referrer'] ) && ( ! $this->getParameter('referrer_key') || empty( $_REQUEST[$this->getParameter('referrer_key')] ) ) &&  empty( Ayoola_Application::$GLOBAL['username'] ) )    
 			{
 				return false;
 			}

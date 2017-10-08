@@ -247,7 +247,17 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		//	power our search box
 		if( @$_REQUEST['db_where_clause_field_name'] && @$_REQUEST['search-object'] == $this->getObjectName() )
 		{
-			$dbWhereClause = array_combine( $_REQUEST['db_where_clause_field_name'], @$_REQUEST['db_where_clause_field_value'] );
+			$field = $_REQUEST['db_where_clause_field_name'];
+			$value = @$_REQUEST['db_where_clause_field_value'];
+			if( ! is_array( $field ) )
+			{
+				$field = array( $field );
+			}
+			if( ! is_array( $value ) )
+			{
+				$value = array( $value );
+			}
+			$dbWhereClause = array_combine( $field, $value );
 			$this->_dbWhereClause = array_merge( $dbWhereClause ? : array(), $this->_dbWhereClause ? : array() );
 		//	self::v( $this->_dbWhereClause );
 		}

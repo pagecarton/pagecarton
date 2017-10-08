@@ -88,7 +88,7 @@ class Application_Article_ViewMostRecentPost extends Application_Article_View
 				//	var_export( $data );
 					$data['auth_level'] = array_map( 'intval', (array) $data['auth_level'] );
 					if( 
-						(  empty( trim( $data['publish'] ) ) && ! in_array( 'publish', @$data['article_options'] ) ) //	not published
+						(  empty( $data['publish'] ) && ! in_array( 'publish', @$data['article_options'] ) ) //	not published
 						|| 
 						! in_array( 0, $data['auth_level'] ) //	Not public
 					)

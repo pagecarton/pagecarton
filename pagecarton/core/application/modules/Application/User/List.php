@@ -55,23 +55,6 @@ class Application_User_List extends Application_User_Abstract
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = $this->getParameter( 'title' ) ? : self::getObjectTitle();
 
-		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
-		{
-			$database = 'cloud';
-		}
-		switch( $database )
-		{
-			case 'cloud':
-
-			break;
-			case 'relational':
-
-			break;
-			case 'file':
-			//	$list->rowDataColumn = 'user_information';  
-			break;
-		
-		}
 		$list->showSearchBox = true;
 		$data = $this->getDbData();
 		rsort( $data );
@@ -87,27 +70,28 @@ class Application_User_List extends Application_User_Abstract
 	//	$this->setIdColumn( 'user_name' );
 		$list->setKey( $this->getIdColumn() );
 	//	$list->setKey( 'email' );
-		$list->setRowOptions( 
-								array( 
+		$rowOptions = array( 
 										'Delete' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="">Delete Account</a>' ,
 										'Options' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Editor/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="">Update Account</a>' ,
-										'Pass' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Help_ResetPassword/?' . $this->getIdColumn() . '=%KEY%\' );" title="">Reset Password</a>' ,
-										'<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Impersonate/?' . $this->getIdColumn() . '=%KEY%\' );" title="">Log on as User</a>' ,
-										'<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_DownloadContact/?' . $this->getIdColumn() . '=%KEY%\' );" title="">Download VCARD</a>' , 
-									) 
-							);
-
-		$list->setNoRecordMessage( 'There are no user accounts on this application' );
+										'Password' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Help_ResetPassword/?' . $this->getIdColumn() . '=%KEY%\' );" title="">Reset Password</a>' ,
+										'Impersonate' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Impersonate/?' . $this->getIdColumn() . '=%KEY%\' );" title="">Log on as User</a>' ,
+										'VCard' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_DownloadContact/?' . $this->getIdColumn() . '=%KEY%\' );" title="">Download VCARD</a>' , 
+									);
+		if( is_array( $this->getParameter( 'row_options' ) ) )
+		{
+			$rowOptions = array_merge( $rowOptions, $this->getParameter( 'row_options' ));
+		}
+		$list->setRowOptions( $rowOptions );
+	//	var_Export( $this->getParameter() );
+	//	var_Export( $this->getParameter() );
+		
+	//	$list->setNoRecordMessage( 'There are no user accounts on this application' );
 		$options = array(
 				'email' => null, 
 				'firstname' => null, 
 				'lastname' => null, 
 				'phone_number' => null, 
 				'username' => '<a rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>',
-		//		'  ' => '<a title="Manually update wallet balance" class="normalnews boxednews" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Wallet_Editor/?' . $this->getIdColumn() . '=%KEY%">$</a>',
-		//		'   ' => '<a title="Sign in as this user" class="normalnews boxednews" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Impersonate/?' . $this->getIdColumn() . '=%KEY%">-</a>',
-				
-		//		' ' => '<a  class="badnews boxednews" title="Delete" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
 			);
 		$optionalFields = array(
 				'firstname' => null, 

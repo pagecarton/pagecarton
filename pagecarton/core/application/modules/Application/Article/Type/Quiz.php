@@ -283,7 +283,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 					
 					//	Take care of group questions
 					$questions = array_values( array_intersect_key( $data['quiz_question' . $eachGroupId], $randomKeys ) );				
-					if( ! empty( trim( @$data['quiz_subgroup_question'][$i] ) ) )
+					if( ! trim( @$data['quiz_subgroup_question'][$i] ) )
 					{
 					//	var_export( $data['quiz_subgroup_question'][$i] . "\r\n" );
 						foreach( $questions as &$eachQuestion )

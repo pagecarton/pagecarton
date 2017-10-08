@@ -5,7 +5,6 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
 	
     /**
      * 
-     * 
      * @var string 
      */
 	protected static $_objectTitle = 'Sample Widget Title'; 
@@ -23,9 +22,19 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
             // to outputs something to the screen
             {
                 $this->setViewContent( '<h1>Hello World</h1>' ); 
-                $this->setViewContent( '<p>This is sample PageCarton Widget. Create a widget file on <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_List/\' href="javascript:;">Widgets</a></p>' ); 
-                $this->setViewContent( '<p>Here is a sample code of what a widget could do</p>' ); 
-                $this->setViewContent( '<p style="max-height:300px; overflow:scroll;">' . highlight_file( __FILE__, true ) . '</p>' ); 
+                $this->setViewContent( '
+                <p>This is sample PageCarton Widget. 
+                Create a widget file on 
+                <a onClick="ayoola.spotLight.showLinkInIFrame( \'' 
+                . Ayoola_Application::getUrlPrefix() .
+                 '/tools/classplayer/get/name/Ayoola_Object_List/\' 
+                 href="javascript:;">Widgets</a>
+                </p>' ); 
+                $this->setViewContent( '<p>Here is a sample code of 
+                what a widget could do</p>' ); 
+                $this->setViewContent( '<p style="max-height:200px; 
+                overflow:auto; font-size:smaller;">' 
+                . highlight_file( __FILE__, true ) . '</p>' ); 
 
             }
             
@@ -48,7 +57,8 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
 
                 //  output the form data to the screen
                 //  the true parameter ensures previous data sent to screen is cleared.
-                $this->setViewContent( $values['demo_field_name'], true ); 
+                $this->setViewContent( '<p class="goodnews">Form Submitted</p>', true ); 
+                $this->setViewContent( $values['demo_field_name'] ); 
 
        //         return true;
   
@@ -95,10 +105,12 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
                         'another_sample_field' => 'Tolu',
                     ); 
 
-                    //  returns records where 'sample_field_name' field is  'Ayoola' and 'another_sample_field' is 'Tolu'
+                    //  returns records where 'sample_field_name' field 
+                    //  is  'Ayoola' and 'another_sample_field' is 'Tolu'
                     $allDbData = $table->select( null, $where );
 
-                    //  fetches just one data record. Fetches the last record inserted
+                    //  fetches just one data record. 
+                    //  Fetches the last record inserted
                     $lastRecordInserted = $table->selectOne( null, $where );
                 }
 
@@ -114,7 +126,8 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
                         'another_sample_field' => 'Falola',
                     ); 
 
-                    //  update records where 'sample_field_name' field is  'Ayoola' and 'another_sample_field' is 'Tolu'
+                    //  update records where 'sample_field_name' field
+                    //   is  'Ayoola' and 'another_sample_field' is 'Tolu'
                     $table->update( $updatedData, $where );
 
                     //  delete records
@@ -127,7 +140,7 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
             return false; 
         }
 	}
@@ -161,7 +174,10 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
             $fieldset->placeholderInPlaceOfLabel = false;
 
             //  Add input element of text type
-            $fieldset->addElement( array( 'name' => 'demo_field_name', 'placeholder' => 'Enter a value here...', 'label' => 'Demo Input Field', 'type' => 'InputText', 'value' => @$values['demo_field_name'] ) );
+            $fieldset->addElement( array( 'name' => 'demo_field_name', 
+            'placeholder' => 'Enter a value here...', 
+            'label' => 'Demo Input Field', 'type' => 'InputText', 
+            'value' => @$values['demo_field_name'] ) );
 
             //  Add element of Select type
 
@@ -172,9 +188,14 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
                              );
 
             //  Add select element
-            $fieldset->addElement( array( 'name' => 'field_name', 'placeholder' => 'Enter value here...', 'label' => 'Demo Select Field', 'type' => 'Select', 'value' => @$values['field_name'] ), $options );
+            $fieldset->addElement( array( 'name' => 'field_name',
+             'placeholder' => 'Enter value here...',
+              'label' => 'Demo Select Field',
+               'type' => 'Select',
+                'value' => @$values['field_name'] ), $options );
 
-            //  other input types are InputText, Hidden, Select, Radio, Checkbox, SelectMultiple, Document, Password, TextArea
+            //  other input types are InputText, Hidden, Select, 
+            //  Radio, Checkbox, SelectMultiple, Document, Password, TextArea
 
             //  Adds the legend
             $fieldset->addLegend( $legend );
