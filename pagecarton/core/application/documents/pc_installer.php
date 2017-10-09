@@ -67,7 +67,7 @@
 //	use the next sequence to provide installation procedure.
 	$content = null;
 	$badnews = null;
-	$remoteSite = 'http://production.cmf.ayoo.la';  
+	$remoteSite = 'http://updates.pagecarton.org';  
 
 
 	//	look for this path prefix dynamically
