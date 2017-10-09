@@ -94,7 +94,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 				$settingsInfo = $settings->selectOne( null, array( 'settingsname_name' => $settingsNameInfo['settingsname_name'] ) );
 			}
 			$settings = $settingsInfo + $settingsNameInfo;
-	//		var_export( $settingsInfo );
+	//		var_export( $settingsInfo );  
 		//
 
 //		self::v( array( 'settingsname_name' => $settingsName ) );  
@@ -170,7 +170,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 				$player->createForm( null, null, $values );
 				$fieldsets = $player->getForm()->getFieldsets();
 			}
-		//	self::v( $form );
+		//	self::v( $form );   
 			foreach( $fieldsets as $fieldset ){ $form->addFieldset( $fieldset ); }
 			$formAvailable = true;
 			$form->submitValue = 'Save';

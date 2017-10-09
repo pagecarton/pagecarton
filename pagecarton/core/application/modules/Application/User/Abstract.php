@@ -401,7 +401,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 					if( is_array( $each['auth_options'] ) && in_array( 'allow_signup', $each['auth_options'] ) )
 					{
 					//	$options[$each['auth_level']] =  "{$each['auth_name']}: {$each['auth_description']}";
-						$options[$each['auth_level']] =  "{$each['auth_name']}";
+						$options[$each['auth_level']] =  "{$each['auth_name']}";   
 					}
 				}
 				$account->addElement( array( 'name' => 'user_group', 'label' => 'Account Type', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['user_group'] ? : $this->getParameter( 'user_group' ) ) ), $options );  

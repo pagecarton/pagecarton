@@ -259,7 +259,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			}
 			$dbWhereClause = array_combine( $field, $value );
 			$this->_dbWhereClause = array_merge( $dbWhereClause ? : array(), $this->_dbWhereClause ? : array() );
-		//	self::v( $this->_dbWhereClause );
+		//	self::v( $this->_dbWhereClause );   
 		}
 	}
     /**

@@ -773,7 +773,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      */
     public function view()
     {	
-		$content = null;
+		$content = null;  
 		$content .= $this->listTitle ? '<div style="margin:1em 0 1.5em 0;"><h3 class="pc-heading">' . $this->listTitle . '</h3></div>' : null;     
 		
 		if( $this->_noOfPageRecords !== $this->_noOfRecords )     
