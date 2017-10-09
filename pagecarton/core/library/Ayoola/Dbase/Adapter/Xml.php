@@ -156,7 +156,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		if( is_null( $className ) ){ $className = get_class( $this ); }
 		if( ! $class = Ayoola_Loader::loadClass( $className ) )
 		{ 
-			throw new Ayoola_Dbase_Adapter_Exception( "XMLDB not available for $className" ); 
+	//		throw new Ayoola_Dbase_Adapter_Exception( "XMLDB not available for $className" ); 
 		}
 		$this->className =  $className;
 		$directory = XML_DATABASES_DIR . DS . str_ireplace( '_', DS, $className );

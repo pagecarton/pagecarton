@@ -530,7 +530,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 		//		var_export( get_class( $this ) );
 			}
 		}
-		if( ! $class = Ayoola_Loader::loadClass( $className ) ){ $className = null; }
+//	if( ! $class = Ayoola_Loader::loadClass( $className ) ){ $className = null; }
 		$this->getDatabase()->getAdapter()->select( $className );
     }
 
