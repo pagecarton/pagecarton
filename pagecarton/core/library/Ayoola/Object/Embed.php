@@ -83,21 +83,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			$this->initiated = false; //	compatibility
 			switch( $this->getParameter( 'mode' ) )
 			{
-/* 				case 'stages':
-					//	Use classnames as key
-					if( ! is_array( $classes ) )
-					{
-						$classes = array_map( 'trim', explode( ',', $classes ) );
-						$classes = array_combine( $classes, $classes );
-						$classes = array_fill_keys( $classes, null );
-					}
-					$this->setStages( $classes );
-					$class = key( $classes );
-					$this->getObjectStorage( 'current' )->store( $class );
-					$this->play( $class, array_shift( $classes ) );
-					$this->getObjectStorage( 'todo' )->store( $classes );
-				break;
- */				case '':
+				case '':
 				case null:
 				case false:
 				default:
@@ -158,14 +144,6 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
      */
     public function play( $class, array $parameters = null )
 	{
-	//	if( ! Ayoola_Loader::loadClass( $class ) )
-		{
-		//	return false;
-		//	throw new Ayoola_Object_Exception( 'EMBEDDED OBJECT NOT AVAILABLE: ' . $class );
-		}
-	//	$this->initiated = true; //	compatibility
-	//	$class->initiated = true; //	compatibility
-//		self::v( $class );
 		$parameters = $parameters ? $parameters + array( 'return_as_object' => true ) :  array( 'return_as_object' => true );
 		if( ! Ayoola_Loader::loadClass( $class ) )
 		{

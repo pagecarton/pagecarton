@@ -240,7 +240,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		}
 		
 		$form->submitValue = $submitValue ;
-		$form->oneFieldSetAtATime = $this->getParameter( 'show_all_fieldsets_at_once' ) ? false : true;
+	//	$form->oneFieldSetAtATime = $this->getParameter( 'show_all_fieldsets_at_once' ) ? false : true;
 	//	$form->oneFieldSetAtATime = false;
 		$form->formNamespace = get_class( $this ) . $values['user_id'];
 		//$form->setCaptcha( true ); // Adds captcha

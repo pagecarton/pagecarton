@@ -212,13 +212,13 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
     public function setCacheFilename()
     {
 	//	var_export( get_class( $this ) );
-		$arguments = md5( serialize( func_get_args() ) . $_SERVER['HTTP_HOST'] );
+		$arguments = md5( serialize( func_get_args() ) . '' . $_SERVER['HTTP_HOST'] );
 		
 	//	require_once 'Ayoola/Filter/Name.php';
 	//	$filter = new Ayoola_Filter_Name();
 	//	$file = $filter->filter( $arguments );
 		$file = strtolower( implode( DS, str_split( $arguments, 2 ) ) );
-		$file = $this->getTableCacheDirectory( $this->getTableName() ) . DS . $file;
+		$file = $this->getTableCacheDirectory( $this->getTableName() ) . DS . $file . $this->getTableName();
 		$this->_cacheFilename = $file;
     }
 		
@@ -228,8 +228,8 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
      */
     public function getCacheFilename()
     {
-		if( is_null( $this->_cacheFilename ) ){ $this->setCacheFilename( func_get_args() ); }
-		return $this->_cacheFilename;
+      if( is_null( $this->_cacheFilename ) ){ $this->setCacheFilename( func_get_args() ); }
+      return $this->_cacheFilename;
     } 
 		
 		

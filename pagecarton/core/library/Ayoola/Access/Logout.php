@@ -60,23 +60,30 @@ class Ayoola_Access_Logout extends Ayoola_Access_Abstract
 		$auth->logout();
 
         //  do we have logout info in user data? For plugin logout support
-
+        
  	
 		//	Log
 		if( $userInfo )
 		{
 			Application_Log_View_SignOut::log( $userInfo );
 		}
-		header( 'Location: ' . $urlToGo );
  //      var_export( $userInfo['logout_url'] );
      //   exit();
 		if( ! empty( $userInfo['logout_url'] ) )
         {
-            header( 'Location: ' . $userInfo['logout_url'] . '?previous_url=' . urlencode( 'http://' . Ayoola_Page::getDefaultDomain() . '' . $urlToGo ) );
+            if( strpos( $urlToGo, ':' ) === false )
+            {
+                $urlToGo = Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . Ayoola_Page::getDefaultDomain() . '' . $urlToGo;
+            }
+            header( 'Location: ' . $userInfo['logout_url'] . '?previous_url=' . $urlToGo );
 
         }
-            exit();
-		//	exit( 'wed3wd' );
+        else
+        {
+		    header( 'Location: ' . $urlToGo );
+        }
+        exit();
+    //	exit( 'wed3wd' );
     } 
 	// END OF CLASS
 }

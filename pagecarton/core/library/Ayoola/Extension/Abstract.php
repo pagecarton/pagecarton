@@ -96,6 +96,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 		
 		$fieldset->addElement( array( 'name' => 'settings_class', 'label' => 'PHP Class for Settings', 'type' => 'InputText', 'value' => @$values['settings_class'] ) );
 
+		$filter = new Ayoola_Filter_FilenameToClassname();
 		
 		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'modules', Ayoola_Form::getGlobalValue( 'components' ) ) )
 		{
@@ -120,7 +121,8 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 				$file = str_ireplace( $directory, '', $file );
 				
 				//	The label is transformed into the class value
-				$files[$file] = implode( '_', array_map( 'ucwords', explode( '_', array_shift( explode( '.', trim( str_replace( DS, '_', $file ), '_' ) ) ) ) ) );
+				$className = $filter->filter( $file );
+				$files[$file] = $className;
 			}
 			asort( $files );
 			$fieldset->addElement( array( 'name' => 'modules', 'required' => 'required', 'label' => 'Select the modules that you want to include. <a href="http://PageCarton.com/" target="_blank">Learn more...</a>', 'type' => 'SelectMultiple', 'value' => @$values['modules'] ), $files );
@@ -158,7 +160,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 				$file = str_ireplace( $directory, '', $file );
 				
 				//	The label is transformed into the class value
-				$className = implode( '_', array_map( 'ucwords', explode( '_', array_shift( explode( '.', trim( str_replace( DS, '_', $file ), '_' ) ) ) ) ) );
+				$className = $filter->filter( $file );
 				if( stripos( $className, '__' ) )
 				{
 					continue;

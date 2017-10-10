@@ -187,10 +187,28 @@ class Ayoola_Access extends Ayoola_Access_Abstract
  		// 	exit();
 		}
 		$pageAccessLevel = is_array( $pageAccessLevel ) ? $pageAccessLevel : array( $pageAccessLevel );
+   //     var_export( $pageInfo );
+    //    exit();
+		if( 
+			@$pageInfo['url'] === '/object'
+			|| @$pageInfo['url'] === '/tools/classplayer'  
+		)
+		{ 
+			$className = @$_GET['object_name'] ? : $_GET['name']; 
+            if( Ayoola_Loader::loadClass( $className ) && method_exists( $className, 'getAccessLevel' ) )
+            {
+            //    exit( $className );
+            //    var_export( $className::getAccessLevel() );
+            //    exit( $className );
+                if( Ayoola_Abstract_Playable::hasPriviledge( $className::getAccessLevel() ) )
+                {
+                    return true;  
+                }
+            } 
+		} 
 		if( 
 			Ayoola_Abstract_Playable::hasPriviledge( $pageAccessLevel ) 
 			|| @$pageInfo['url'] === '/accounts/signin'
-			|| @$pageInfo['url'] === '/tools/classplayer'  
 		)
 		{ 
 			return true; 
@@ -231,7 +249,7 @@ class Ayoola_Access extends Ayoola_Access_Abstract
             header( 'Location: ' . $urlToGo );	
             exit();
         }
-		if( ! $access->isLoggedIn() )
+		elseif( ! $access->isLoggedIn() )
 		{ 
 			//	$access->logout();
 			
@@ -240,8 +258,14 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 			$encodeLoginMessage = new Ayoola_Access_Login();
 			$encodeLoginMessage->getObjectStorage( 'pc_coded_login_message' )->store( 'Please login to continue...' );
 			
+            $urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
+//            var_export( $urlToGo );
+//            exit();
+            header( 'Location: ' . $urlToGo );	
+            exit();
+
 			$jsCode = 'ayoola ? ( ayoola.div.getParent( window, 5 ).location = "' . $urlToGo . '?pc_coded_login_message=1&previous_url=" + encodeURIComponent( ayoola.div.getParent( window, 5 ).location ) ) : ( window.location = "' . $urlToGo . '?pc_coded_login_message=1&previous_url=" + encodeURIComponent( window.location ) );';
-			Application_Javascript::addCode( $jsCode ); 
+			Application_Javascript::addCode( $jsCode );
 		}
 		
 	//	echo 'You need to be signed into your account to continue. <a target="_parent" onClick="' . $jsCode . '" href="' . $urlToGo . '">Click here to sign in...</a>';

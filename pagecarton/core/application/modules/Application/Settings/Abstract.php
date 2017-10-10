@@ -91,10 +91,13 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			$settings = new Application_Settings();
 			if( ! $settingsInfo = $settings->selectOne( null, array( 'settingsname_id' => $settingsNameInfo['settingsname_id'] ) ) )
 			{
-				$settingsInfo = $settings->selectOne( null, array( 'settingsname_name' => $settingsNameInfo['settingsname_name'] ) );
+				$settingsInfo = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
+		//		var_export( $settingsNameInfo['settingsname_name'] );  
+		//		var_export( $settings->selectOne() );  
 			}
 			$settings = $settingsInfo + $settingsNameInfo;
 	//		var_export( $settingsInfo );  
+	//		var_export( $settingsNameInfo );    
 		//
 
 //		self::v( array( 'settingsname_name' => $settingsName ) );  

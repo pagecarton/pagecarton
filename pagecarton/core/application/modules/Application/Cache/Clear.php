@@ -65,9 +65,9 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 			}
 			
 			//	Clear cache
-			if( is_dir( CACHE_DIR ) )
+			if( is_dir( PC_TEMP_DIR ) )
 			{
-				Ayoola_Doc::deleteDirectoryPlusContent( CACHE_DIR );
+				Ayoola_Doc::deleteDirectoryPlusContent( PC_TEMP_DIR );
 			}
 		}
 		elseif( self::hasPriviledge( array( 98 ) ) )
@@ -76,11 +76,11 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 			Ayoola_Application::setDomainSettings( true );
 					//	var_export( Ayoola_Application::getDomainSettings() );
 			//	Clear cache
-			$cache = CACHE_DIR . DS . 'STORAGE' . DS . Ayoola_Application::getDomainSettings( 'username' );
-			if( is_dir( $cache ) )
+	//		$cache = CACHE_DIR . DS . 'STORAGE' . DS . Ayoola_Application::getDomainSettings( 'username' );
+		//	if( is_dir( $cache ) )
+			if( is_dir( CACHE_DIR ) )
 			{
-			//	var_export( $cache );
-				Ayoola_Doc::deleteDirectoryPlusContent( $cache );
+				Ayoola_Doc::deleteDirectoryPlusContent( CACHE_DIR );
 			}
 		}
 		
