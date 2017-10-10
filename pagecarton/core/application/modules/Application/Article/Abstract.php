@@ -1262,11 +1262,23 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 			@$values['article_type'] = $_REQUEST[Ayoola_Form::hashElementName( 'article_type')] ? : $values['article_type']; 
 		}
 		$values['article_type'] = $values['article_type'] ? : $this->getGlobalValue( 'article_type' ); 
-		$values['article_type'] = $values['article_type'] ? : 'post';
+//		$values['article_type'] = $values['article_type'] ? : 'post';
+		
+		//	Set Article Type
+		$options = new Application_Article_Type;
+		$options = $options->select();
+		require_once 'Ayoola/Filter/SelectListArray.php';
+		$filter = new Ayoola_Filter_SelectListArray( 'post_type_id', 'post_type');
+		$options = $filter->filter( $options );
+		$options = $options ? : Application_Article_Type_TypeAbstract::$presetTypes;
+
+		$tempOptions = array_keys( $options );
+
+		$articleTypeWeUsing = $values['article_type'] ? : array_shift( $tempOptions );
 		
 		//	Check if post type is registered in the post db
 //		$values['true_post_type'] = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $values['article_type'] );
-		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $values['article_type'] ) )
+		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $articleTypeWeUsing ) )
 		{
 		//	var_export( $postTypeInfo );
 			$values['true_post_type'] = $postTypeInfo['article_type'];
@@ -1279,16 +1291,10 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		}
 //		var_export( $values['true_post_type'] );
 		
-		
-		//	Set Article Type
-		$options = new Application_Article_Type;
-		$options = $options->select();
-		require_once 'Ayoola/Filter/SelectListArray.php';
-		$filter = new Ayoola_Filter_SelectListArray( 'post_type_id', 'post_type');
-		$options = $filter->filter( $options );
-		$options = $options ? : Application_Article_Type_TypeAbstract::$presetTypes;
+	//	var_export( $options[key( $options )] );
+	//	var_export( $articleTypeWeUsing );
 
-		$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post Type', 'onchange'=> 'window.location.search += \'&article_type=\' + this.value + \'\';', 'type' => 'Select', 'value' => @$values['article_type'] ? : @$_REQUEST['article_type'] ), $options );
+		$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post Type', 'onchange'=> 'window.location.search += \'&article_type=\' + this.value + \'\';', 'type' => 'Select', 'value' => $articleTypeWeUsing ), $options );
 		$fieldset->addElement( array( 'name' => 'true_post_type', 'type' => 'Hidden', 'value' => @$values['true_post_type'] ? : @$values['article_type'] ) );
 		   
 		
