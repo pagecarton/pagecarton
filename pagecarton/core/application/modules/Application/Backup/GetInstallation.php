@@ -52,8 +52,11 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
          //   $zip->addFile( $installer, 'pc_installer.php.tar.gz');
 			$file1 = Ayoola_Loader::getFullPath( 'documents/ayoola/framework/installer.tar.gz', array( 'prioritize_my_copy' => true ) );
 			$file2 = Ayoola_Loader::getFullPath( 'documents/pc_installer.php', array( 'prioritize_my_copy' => true ) );
+			$file2 = Ayoola_Loader::getFullPath( 'documents/pc_redirect.php', array( 'prioritize_my_copy' => true ) );
+
             $zip->addFile( $file1, 'pc_installer.php.tar.gz');
             $zip->addFile( $file2, 'pc_installer.php');
+            $zip->addFile( $file3, 'index.php');
             $zip->addFile( APPLICATION_DIR . DS . 'changelog.txt', 'changelog.txt');
             $zip->addFile( APPLICATION_DIR . DS . 'copyright.txt', 'copyright.txt');
             $zip->addFile( APPLICATION_DIR . DS . 'install.txt', 'install.txt');
