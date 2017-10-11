@@ -222,15 +222,15 @@ class Application_Personalization extends Ayoola_Abstract_Table
 					return false; 
 				}
 			}
-			$this->setViewContent( '<p><strong>PageCarton Personalization Completed</strong></p>', true );   
+			$this->setViewContent( '<p class="goodnews">PageCarton Personalization Completed</p>', true );   
 			$this->setViewContent( '<p>Welcome to endless possibilities! You have successfully completed the installation and personalization sequence of PageCarton. </p>' ); 
-			$this->setViewContent( '<p>Next? Go to:</p>' ); 
+			$this->setViewContent( '<p class="pc-notify-info">Note the following pages and their links:</p>' ); 
 			$this->setViewContent
 			( 
 				'<ul>
-					<li><a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/">Home Page</a></li>
-					<li><a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/pc-admin/">Control Panel</a></li>
-					<li><a target="_blank" href="http://pagecarton.org/docs">Help! How to use PageCarton?</a></li>
+					<li><a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/">Home Page</a> - ' . Ayoola_Page::getCanonicalUrl( '/' ) .  '</li>
+					<li><a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/pc-admin">PageCarton Admin  Panel</a> - ' . Ayoola_Page::getCanonicalUrl( '/pc-admin' ) .  '</li>
+					<li><a target="_blank" href="http://pagecarton.org/docs">PageCarton Documentation</a></li>
 				</ul>' 
 			); 
 	//	exit();

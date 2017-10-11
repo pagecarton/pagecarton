@@ -93,15 +93,14 @@
 	{
         case 'start':
             $content .= '<h1>Installing PageCarton</h1>';
-            $content .= '<p>A tool to build a great website in 2 hrs or less - fast and easy. Automate things programmers & designers spend several hours putting together. When installed on your server, PageCarton will help you publish contents to the internet.</p>';  
-            $content .= '<p>Follow these simple steps to install PageCarton on your server. To find out more about PageCarton, visit <a href="http://www.PageCarton.com/">the application homepage</a>. To continue installation, click the button below.</p>';
+            $content .= '<p>A tool to build a great website in 2 hrs or less - fast and easy. Automate things programmers & designers spend several hours putting together. When installed on your server, PageCarton will help you publish contents to the internet. Follow these simple steps to install PageCarton on your server. To find out more about PageCarton, visit <a href="http://www.PageCarton.org/">the application homepage</a>. To continue installation, click the button below if you agree to be bound by the license terms below.</p>';
     //        $content .= '<input value="Continue..." type="button" onClick="location.href=\'?stage=licence\'" />';
   //      break;
 //		case 'licence':
 //			$content .= '<h1>Continue installation, only if you agree to be bound by the following license terms.</h1>';
-			$content .= '<p>Please note that the license terms may change from time to time. Changes will always be on <a href="http://PageCarton.com/license.txt">http://PageCarton.com/license.txt</a>.</p>';
+	//		$content .= '<p>Please note that the license terms may change from time to time. Changes will always be on <a href="http://PageCarton.org/license.txt">http://www.PageCarton.org/license.txt</a>.</p>';
 			$content .= '<textarea rows="10" style="min-width:90%;display:block;">' . ( @file_get_contents( 'license.txt' ) ? : @file_get_contents( $remoteSite . '/license.txt' ) ) . '</textarea>';
-			$content .= '<p>Having an active internet connection is preferred when installing PageCarton</p>';
+	//		$content .= '<p>Having an active internet connection is preferred when installing PageCarton</p>';
 			$content .= '<input value="I agree" type="button" onClick = "location.href=\'?stage=download\'" />';
 		break;
 		case 'download':
@@ -127,8 +126,8 @@
 				$badnews .= '<p>Downloaded application is not readable. Please ensure you have correct permissions set on this directory (' . APPLICATION_DIR . '). This is where PageCarton is being installed.</p>';
 				break;
 			}
-            $content .= '<h1>PageCarton Downloaded</h1>';
-            $content .= '<p>We will now begin installation of PageCarton on the server. Just click on the button below to begin installation.</p>';
+            $content .= '<h1>PageCarton Ready for Installation</h1>';
+            $content .= '<p>We will now begin installation of PageCarton on the server. Just click on the button below to begin start. This may take a few moments. Do not click the button more than once.</p>';
             $content .= '<input value="Begin Installation" type="button" onClick="location.href=\'?stage=install\';this.value=\'Please wait...\'; this.readOnly =true; " />';
 		break;
 		case 'install':
@@ -304,8 +303,7 @@
 			deleteDirectoryPlusContent( $baseAppPath . '/cache' );
 			
 			$content .= '<h1>Installation Completed</h1>';
-			$content .= '<p>The latest PageCarton software has been loaded on your server. You are going to be able to personalize it in a few moments.</p>';
-			$content .= '<p>Please ensure you complete the personalization process.</p>';
+			$content .= '<p>The latest PageCarton software has been loaded on your server. You are going to be able to personalize it in a few moments. Please ensure you complete the personalization in two easy steps.</p>';
 			
 			
 			//	Check if we have mod-rewrite
@@ -331,8 +329,9 @@
 			}
 			else
 			{
-				$content .= '<p>You do not have URL rewriting feature (e.g. mod-rewrite) on your webserver? PageCarton would try to work without it; But you would need to prefix your URLs with "index.php" when entering it on the web browser e.g. http://' . $_SERVER['HTTP_HOST'] . $prefix . '/index.php/page/url  </p>';
-				$content .= '<p><a href="index.php/object/name/Application_Personalization/"> Proceed to Personalization...</a></p>';
+				$content .= '<p>You do not have URL rewriting feature (e.g. mod-rewrite) on your webserver? PageCarton would work without it; But you would need to prefix your URLs with "index.php" when entering it on the web browser e.g. http://' . $_SERVER['HTTP_HOST'] . $prefix . '/index.php/page/url. On many of your pages, PageCarton will add this automatically.  </p>';
+			//	$content .= '<p><a href="index.php/object/name/Application_Personalization/"> Proceed to Personalization...</a></p>';
+				$content .= '<p><input value="Proceed to Personalization" type="button" onClick = "location.href=\'index.php/object/name/Application_Personalization/\'" /></p>';
 			}
 			//	Self destroy file
 			unlink( $filename );
