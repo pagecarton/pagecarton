@@ -92,8 +92,9 @@
 	switch( @$_GET['stage'] )
 	{
         case 'start':
-            $content .= '<h1>Installing PageCarton</h1>';
-            $content .= '<p>A tool to build a great website in 2 hrs or less - fast and easy. Automate things programmers & designers spend several hours putting together. When installed on your server, PageCarton will help you publish contents to the internet. Follow these simple steps to install PageCarton on your server. To find out more about PageCarton, visit <a href="http://www.PageCarton.org/">the application homepage</a>. To continue installation, click the button below if you agree to be bound by the license terms below.</p>';
+            $content .= '<h1>PageCarton Installation</h1>';
+            $content .= '<p>A tool to build a great website in 2 hrs or less - fast and easy. Automate things programmers & designers spend several hours putting together. When installed on your server, PageCarton will help you publish contents to the internet.</p>';
+            $content .= '<p>Follow these simple steps to install PageCarton on your server. To find out more about PageCarton, visit <a target="_blank" href="http://www.PageCarton.org/">www.PageCarton.org</a>. To continue installation, click the button below if you agree to be bound by the license terms below.</p>';
     //        $content .= '<input value="Continue..." type="button" onClick="location.href=\'?stage=licence\'" />';
   //      break;
 //		case 'licence':
@@ -127,8 +128,8 @@
 				break;
 			}
             $content .= '<h1>PageCarton Ready for Installation</h1>';
-            $content .= '<p>We will now begin installation of PageCarton on the server. Just click on the button below to begin start. This may take a few moments. Do not click the button more than once.</p>';
-            $content .= '<input value="Begin Installation" type="button" onClick="location.href=\'?stage=install\';this.value=\'Please wait...\'; this.readOnly =true; " />';
+            $content .= '<p>PageCarton is now ready to be installed on your server. Just click on the button below to begin installation. This may take a few moments; do not click the button more than once.</p>';
+            $content .= '<input value="Begin Installation" type="button" onClick="location.href=\'?stage=install\';this.value=\'Please wait...\'; this.readOnly =true; " />';  
 		break;
 		case 'install':
 			if( ! is_file( $filename ) )
@@ -386,6 +387,49 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="">
 <title>PageCarton Installation</title>
+<style>
+body
+{
+	max-width: 720px;
+	margin: auto auto;
+}
+p
+{
+	margin-top: 1em;
+	margin-bottom: 1em;
+	text-align:justify;
+}
+textarea
+{
+	width: 100%;
+	background: inherit;
+	padding-top: 2em;
+}
+input[type="button"],
+input[type="submit"]
+{
+    -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    box-shadow: inset 0px 1px 0px 0px #45D6D6;
+    background-color: #2CBBBB;
+    border: 1px solid #27A0A0;
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 8px 18px;
+	margin-top: 1em;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+input[type="button"]:hover,
+input[type="submit"]:hover 
+{
+    background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
+    background-color:#34CACA;
+}
+
+</style>
 </head>
 <body style="padding:1em; background-color:#ccc;">
 <div>';

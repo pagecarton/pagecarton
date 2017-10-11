@@ -222,7 +222,7 @@ class Application_Personalization extends Ayoola_Abstract_Table
 					return false; 
 				}
 			}
-			$this->setViewContent( '<p class="goodnews">PageCarton Personalization Completed</p>', true );   
+			$this->setViewContent( '<h1 class="goodnews">PageCarton Personalization Completed</h1>', true );   
 			$this->setViewContent( '<p>Welcome to endless possibilities! You have successfully completed the installation and personalization sequence of PageCarton. </p>' ); 
 			$this->setViewContent( '<p class="pc-notify-info">Note the following pages and their links:</p>' ); 
 			$this->setViewContent
