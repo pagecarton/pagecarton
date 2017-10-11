@@ -125,9 +125,12 @@
 		
 		//	Stop writing cache in the pagecarton dir
 	//	$tempDir = $oldDir . DS . 'temp' . DS';	
+		
 		defined('PC_TEMP_DIR') || define( 'PC_TEMP_DIR', $newDir . DS . 'temp' . $prefix );
 	//	var_export( PC_TEMP_DIR );
-		defined('CACHE_DIR') || define( 'CACHE_DIR', PC_TEMP_DIR . DS . 'cache' . $_SERVER['HTTP_HOST'] );
+		//	port number mess up cache
+		$tempDir = str_replace( ':', DS, 'cache' . DS . $_SERVER['HTTP_HOST'] );
+		defined('CACHE_DIR') || define( 'CACHE_DIR', PC_TEMP_DIR . DS . $tempDir );
 		
 		//   Define value of extension for files
 		defined('EXT') || define('EXT', '.php');
