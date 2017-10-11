@@ -438,8 +438,7 @@
     -webkit-box-shadow: 0 10px 6px -6px #777;
     -moz-box-shadow: 0 10px 6px -6px #777;
     box-shadow: 0 10px 6px -6px #777;
-    background: linear-gradient
-                ( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url( "../img/placeholder-image.jpg" );  
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url( "../img/placeholder-image.jpg" );  
 
     padding:3em 2em 3em 2em;   
     background-size: cover; 
@@ -450,6 +449,10 @@
 .pc_theme_parallax_background h1, .pc_theme_parallax_background h2, .pc_theme_parallax_background p
 {
     color: #fff !important; 
+}
+.pc_theme_parallax_background a
+{
+    color: #eee !important; 
 }
 
 .pc_page_object_specific_item

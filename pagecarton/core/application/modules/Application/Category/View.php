@@ -194,7 +194,7 @@ class Application_Category_View extends Application_Category_Abstract
 			$html .= $data['category_description'] ? '<blockquote><p>' . $data['category_description'] . '</p></blockquote>' : null;
 
 
-            $html = '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;padding:3em 2em 3em 2em; background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $data['cover_photo'] ) . '\');  background-size: cover;background-position: center; background-attachment: fixed; color: #fff !important; ">';
+            $html = '<div  class="pc_theme_parallax_background" style="background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $data['cover_photo'] ) . '\');  ">';
             $html .= '<h1>' . $data['category_label'] . '</h1>';
             $html .= $data['category_description'] ? '<br><br><p>' . $data['category_description'] . '</p>' : null;
             $html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;">

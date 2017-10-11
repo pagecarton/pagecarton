@@ -790,13 +790,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			//	CATEGORIES
  			@$categoryToUse = is_array( $data['category_name'] ) ? $data['category_name'] : array();
-	//		@$data['category_id'] = is_array( $data['category_id'] ) ? $data['category_id'] : array(); 
- 
-		//	$data['category_name'] = @$data['category_name'] ? : array();
-	//		$data['category_id'] = @$data['category_id'] ? : array();
-		//	$data['category_name'] = array_merge( $data['category_name'], $data['category_id'] );
 			$categoryTextRaw = self::getCategories( $categoryToUse, array( 'template' => $this->getParameter( 'category_template' ), 'glue' => ( $this->getParameter( 'category_template_glue' ) ? : ', ' ) ) );
-		//	self::v( $categoryText );
 			$categoryText = $categoryTextRaw ? ' ' . $categoryTextRaw : null;
 			$data['category_text'] = $categoryText;
 			

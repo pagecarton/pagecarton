@@ -144,13 +144,6 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 			
 		)
 		{ 
-		//	self::v( $data['article_title'] );
-		//	self::v( $data['publish'] );
-		//	self::v( @$data['auth_level'] );
-		//	self::v( @$data['user_id'] );
-		//	self::v( @$data['article_options'] );
-	//		var_export( Ayoola_Application::$GLOBAL['username'] );
-		//	var_export( @$data['article_title'] );  
 			return true; 
 		}
 		//	var_export( @$data['auth_level'] );  
@@ -1117,7 +1110,7 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		$html .= $realPost && $data['button_value'] ? '<br><br><p><button class="pc-btn"> ' . $data['button_value'] . ' </button></p>' : null;
 		$html .= '</div>';
 		$html .= '</' . $link . '>';
-		$html .= '<div style="font-size:x-small;text-transform:uppercase;padding:3em 2em 3em 2em; background:     linear-gradient(      rgba(50, 50, 50, 0.7),      rgba( 50, 50, 50, 0.7)    );  color: #fff !important; ">';
+		$html .= '<div class="pc_theme_parallax_background" style="font-size:x-small;text-transform:uppercase;background-image: linear-gradient(      rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\'); ">';
 
 		$html .= $data['item_price'] ? '
 		<span style="font-size:small;">

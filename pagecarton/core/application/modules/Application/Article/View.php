@@ -342,6 +342,10 @@ class Application_Article_View extends Application_Article_Abstract
 
 		//	just use this
 		$data['document_url'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
+		@$categoryToUse = is_array( $data['category_name'] ) ? $data['category_name'] : array();
+		$categoryTextRaw = self::getCategories( $categoryToUse, array( 'template' => $this->getParameter( 'category_template' ), 'glue' => ( $this->getParameter( 'category_template_glue' ) ? : ', ' ) ) );
+		$categoryText = $categoryTextRaw ? ' ' . $categoryTextRaw : null;
+		$data['category_text'] = $categoryText;
 		$this->_xml = self::getDefaultPostView( $data );
 		switch( $postType )   
 		{

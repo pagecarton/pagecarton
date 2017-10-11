@@ -72,7 +72,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 			if( ! isset( $object['view_option'] ) ){ $object['view_option'] = null; }
 			if( ! self::checkObject( $object ) )
 			{
-				$this->setViewContent( 'You currently do not have access to this content.', true );
+				$this->setViewContent( '<p class="badnews">You currently do not have access to this content.</p>', true );
 			}
 			if( ! $title = $object['class_name']::getObjectTitle() )
 			{
@@ -129,7 +129,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 					}
 					else
 					{
-						$this->setViewContent( 'You currently do not have access to this content.', true );   
+						$this->setViewContent( '<p class="badnews">You currently do not have access to this content.</p>', true );
 					}
 				//	var_export( self::checkObject( $identifier ) );
 				//	var_export( $identifier['class_name']::viewInLine() );

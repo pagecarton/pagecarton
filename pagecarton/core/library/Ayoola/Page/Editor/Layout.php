@@ -814,7 +814,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$content['template'] = str_ireplace( $search, $replace, $content['template'] );
 								
 				/* For Layout representation */
-				$replace = "<div title='This is the \"{$section}\" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='{$hashSectionName}'>$sectionalObjectCollection</div>\n";			
+				$replace = "<div ondrop='ayoola.dragNDrop.elementDropped( event, this )' ondragover='ayoola.dragNDrop.allowDrop( event )' title='This is the \"{$section}\" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='{$hashSectionName}'>$sectionalObjectCollection</div>\n";			
 	//			var_export( $sectionalObjectCollection );
 			//	$replace = "<div class='DragContainer' id='{$section}'>$sectionalObjectCollection</div>\n";			
 				$this->_layoutRepresentation = str_ireplace( $search, $replace, $this->_layoutRepresentation );

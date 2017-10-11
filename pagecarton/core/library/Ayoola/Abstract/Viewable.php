@@ -618,7 +618,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= "<div name='over_all_object_container' class='DragBox' id='" . $object['object_unique_id'] . "' title='Move this object by dragging it around - " . $object['view_parameters'] . "' data-object_name='{$object['object_name']}' >";
 		
 		//	title bar
-		$html .= '<div draggable=\'true\' ondragstart=\'ayoola.dragNDrop.dragMyParent(event)\' style="cursor: move; cursor: -moz-grab;cursor: -webkit-grab;" title="' . $object['view_parameters'] . '" class="title_bar pc_page_object_specific_item" data-parameter_name="parent">'; 
+		$html .= '<div draggable=\'true\' ondragstart=\'ayoola.dragNDrop.dragMyParent(event);\' style="cursor: move; cursor: -moz-grab;cursor: -webkit-grab;" title="' . $object['view_parameters'] . '" class="title_bar pc_page_object_specific_item" data-parameter_name="parent">'; 
 		
 		
 		//	Delete button
@@ -804,7 +804,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			var a = ayoola.div.getParentWithClass( this, \'DragBox\' );
 			var b = ayoola.div.getParameterOptions( a );
 			var c = a.getElementsByClassName( \'pc_page_object_inner_preview_area\' )[0];
-			var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Object_Preview/?class_name=' . $classToView . '\', data: b.content, container: c } );
+			var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?class_name=' . $classToView . '\', data: b.content, container: c } );
 			">Preview!</button></div>' : null; 
 			
 			//	/object/name/Ayoola_Object_Preview/?class_name=' . $classToView . '
