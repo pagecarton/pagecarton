@@ -45,6 +45,9 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
             case 'table':
                 $type = 'Database Table Class';
             break;
+            case 'settings':
+                $type = 'Module Settings Class';
+            break;
             default:
                 $type = 'Widget Class';
             break;
@@ -85,6 +88,9 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
         $search['{username}'] = Ayoola_Application::getUserInfo( 'email' );
         switch( @$_REQUEST['file_type'] )
         {
+            case 'settings':
+                $sampleFile = 'PageCarton_Settings_Sample';
+            break;
             case 'table':
                 $sampleFile = 'PageCarton_Table_Sample';
            //     var_export( $values['fields'] );
@@ -139,6 +145,9 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
 
         switch( @$_REQUEST['file_type'] )
         {
+            case 'settings':
+
+            break;
             case 'table':
 
                 $i = 0;

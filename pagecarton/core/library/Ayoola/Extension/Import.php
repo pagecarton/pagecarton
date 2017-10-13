@@ -29,6 +29,13 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 {
 	
     /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Import Plugin'; 
+	
+    /**
      * The method does the whole Class Process
      * 
      */
@@ -37,7 +44,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 		try
 		{ 
 
-			$this->createForm( 'Continue', 'Import new extension' );
+			$this->createForm( 'Continue', 'Import new plugin' );
 		//	$this->setViewContent( $this->getForm()->view(), true );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
@@ -56,6 +63,15 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				rename( $filename, $newFilename );
 				$filename = $newFilename;
 			//	var_export( $filename );
+			}
+			elseif( @$values['plugin_url'] )
+			{ 
+				$filename = Ayoola_Doc_Browser::getDocumentsDirectory() . DS . $values['plugin_url'];
+			//	var_export( $filename );
+			}
+
+			if( file_exists( $filename ) )
+			{ 
 				$export = new Ayoola_Phar_Data( $filename );
 				
 				$extensionInfo = json_decode( file_get_contents( $export['extension_information'] ), true );
@@ -90,7 +106,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				{
 					if( ! $result )
 					{ 
-						$this->setViewContent( '<p class="boxednews badnews">ERROR: COULD NOT SAVE EXTENSION DATA.</p>.' ); 
+						$this->setViewContent( '<p class="boxednews badnews">ERROR: COULD NOT SAVE PLUGIN DATA.</p>.' ); 
 						return false;
 					}
 				}
@@ -104,13 +120,17 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				unset( $export );
 				unlink( $filename );
 				
-				$this->setViewContent( '<p class="boxednews normalnews">Extension file imported successfully. Extension is deactivated by default.</p>', true );
-				$this->setViewContent( '<a class="boxednews goodnews" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?extension_name=' . $extensionInfo['extension_name'] . '">Turn on!</a>' );
+				$this->setViewContent( '<p class="goodnews">Plugin imported successfully. New plugins are deactivated by default when they are imported.</p>', true );
+				$this->setViewContent( '<a class="boxednews pc-notify-info" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?extension_name=' . $extensionInfo['extension_name'] . '">Turn on!</a>' );
 				
 				
 				//	Clean up temp dir
 		//		Ayoola_Doc::deleteDirectoryPlusContent( $tempDestination );
 				return true;  
+			}
+			else
+			{
+				$this->setViewContent( '<p class="badnews">Plugin file not found.</p>', true );
 			}
 		}
 		catch( Exception $e )

@@ -63,32 +63,12 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 			{
 				$this->_parameter['markup_template_prefix'] = 
 				'				
-					<style>
-						.pc-breadcrumb {
-							list-style: none;
-							border-radius: 4px;
-							margin:0;
-							padding:0;
-						}
-						.pc-breadcrumb > li {
-							display: inline-block;
-							font-size: x-small;   
-						}
-						.pc-breadcrumb > li + li::before {  
-							padding: 0px 5px;
-							content: ">";
-						}
-						.pc-breadcrumb > .pc-breadcrumb-active {     
-						}
-					</style>
-					<div style="margin-top:0.5em;margin-bottom:0.5em;">   
 						<ol class="pc-breadcrumb">
 							<li><a href="' . Ayoola_Application::getUrlPrefix() . '/" title="Home Page">Home</a></li>
 				';
 				$this->_parameter['markup_template_suffix'] = 
 				'
 						</ol>
-					</div>
 				';
 				$this->_parameter['markup_template_active'] = '<li title="{{{description}}}">{{{title}}}</li>';
 				$template =   

@@ -444,7 +444,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			//	lets find out if we are injecting options
 			if( ! $this->getParameter( 'raw-options' ) && ! $this->getOptions() )
 			{
-		//	var_export( self::hasPriviledge() );
+				//	var_export( self::hasPriviledge() );
 				$menuName = $this->getParameter( 'menu_label' ) ? : $this->getParameter( 'menu_name' );
 				if( self::hasPriviledge( array( 99, 98 ) ) && $menuName )
 				{
@@ -490,6 +490,10 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		{
 			$options = new Ayoola_Menu_Template;
 			$options = $options->selectOne( null, array( 'template_name' => $this->getParameter( 'template_name' ) ) );
+			$options['markup_template_prefix'] = self::replacePlaceholders( $options['markup_template_prefix'], $menuInfo + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) ); 
+			$options['markup_template_suffix'] = self::replacePlaceholders( $options['markup_template_suffix'], $menuInfo + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) ); 
+	//		var_export( $menuInfo );
+	//		var_export( $options );
 		//	markup_template_namespace
 			$this->setParameter( ( $options ? : array() ) + array(  'markup_template_no_cache' => true, 'markup_template_namespace' => $this->getParameter( 'template_name' ) . $this->getParameter( 'markup_template_namespace' ) ) );
 			if( @$options['javascript_files'] )

@@ -39,7 +39,19 @@ class Ayoola_Page_Layout_Editor extends Ayoola_Page_Layout_Abstract
 		try
 		{
 
-			if( ! $identifierData = self::getIdentifierData() ){ return false; }
+			if( ! $identifierData = $this->getIdentifierData() )
+			{ 
+				if( @$_REQUEST['layout_name'] === 'novus' )
+				{
+					$identifierData['layout_name'] = 'novus';
+					$this->_identifierData = $identifierData;
+					$this->setFilename( $identifierData );
+				}
+				else
+				{
+					return false; 
+				}
+			}
 			$this->createForm( 'Save', 'Editing "' . $identifierData['layout_name'] . '"', $identifierData );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -49,7 +61,14 @@ class Ayoola_Page_Layout_Editor extends Ayoola_Page_Layout_Abstract
 			if( ! $this->updateDb() )
 			{ 
 				$this->setViewContent( '<p class="badnews">Error: could not save layout template.</p>.', true ); 
-				return false;
+				if( @$_REQUEST['layout_name'] === 'novus' )
+				{
+
+				}
+				else
+				{
+					return false; 
+				}
 			}
 			if( $this->updateFile() ){ $this->setViewContent( '<p class="boxednews goodnews">Theme file saved successfully.</p>', true ); }	
 			

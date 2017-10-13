@@ -41,56 +41,56 @@
 									@@@oneness@@@
 									<div class="">
 										<div class="row">
-											<div class="col-lg-12 12u">
+											<div class="col-md-12 12u">
 												@@@middlebar@@@
 										   </div>
 										</div> 
 										<div class="row">
-											<div class="col-lg-6 6u 6u(medium) 12u$(xsmall)">
+											<div class="col-sm-6 6u 6u(medium) 12u$(xsmall)">
 												@@@twosome1@@@
 											</div>
-											<div class="col-lg-6 6u 6u(medium) 12u$(xsmall)">
+											<div class="col-sm-6 6u 6u(medium) 12u$(xsmall)">
 												@@@twosome2@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)"> 
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)"> 
 												@@@threesome1@@@
 										   </div>
-											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
 												@@@threesome2@@@
 											</div> 
-											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
 												@@@threesome3@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-lg-3 3u 6u(medium) 12u$(xsmall)">
+											<div class="col-md-3 3u 6u(medium) 12u$(xsmall)">
 												@@@foursome1@@@
 										   </div>
-											<div class="col-lg-3 3u 6u$(medium) 12u$(xsmall)">
+											<div class="col-md-3 3u 6u$(medium) 12u$(xsmall)">
 												@@@foursome2@@@
 											</div> 
-											<div class="col-lg-3 3u 6u(medium) 12u$(xsmall)">
+											<div class="col-md-3 3u 6u(medium) 12u$(xsmall)">
 												@@@foursome3@@@
 											</div> 
-											<div class="col-lg-3 3u 6u$(medium) 12u$(xsmall)">    
+											<div class="col-md-3 3u 6u$(medium) 12u$(xsmall)">    
 												@@@foursome4@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
 												@@@leftbar@@@
 										   </div>
-											<div class="col-lg-8 8u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-8 8u 12u$(medium) 12u$(xsmall)">
 												@@@leftbarright@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-lg-8 8u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-8 8u 12u$(medium) 12u$(xsmall)">
 												@@@rightbarleft@@@
 											</div> 
-											<div class="col-lg-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
 												@@@rightbar@@@
 											</div>   
 										</div> 

@@ -27,6 +27,13 @@ require_once 'Application/Subscription/Abstract.php';
 
 class Ayoola_Extension_Delete extends Ayoola_Extension_Abstract
 {
+	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Delete a plugin'; 
 		
     /**
      * The method does the whole Class Process
@@ -42,7 +49,7 @@ class Ayoola_Extension_Delete extends Ayoola_Extension_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( $this->deleteDb( false ) )
 			{ 
-				$this->setViewContent( 'Extension deleted successfully', true ); 
+				$this->setViewContent( '<p class="goodnews">Plugin deleted successfully</p>', true ); 
 			} 
 		}
 		catch( Ayoola_Extension_Exception $e ){ return false; }

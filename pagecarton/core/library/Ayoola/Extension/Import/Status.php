@@ -29,6 +29,13 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 {	
 	
     /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Plugin Status Update'; 
+	
+    /**
      * The method does the whole Class Process
      * 
      */
@@ -54,14 +61,14 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 				
 				//	Switch off				
 				$data['status'] = 'Disabled';
-				$this->createConfirmationForm( 'Disable Extension...', 'Disable "' . $data['extension_title'] . '"', $data );
+				$this->createConfirmationForm( 'Disable Plugin...', 'Disable "' . $data['extension_title'] . '"', $data );
 			break;
 			default:
 				// we currently are off
 				$currentStatus = false;
 				
 				//	Switch on
-				$this->createConfirmationForm( 'Enable Extension...', 'Enable "' . $data['extension_title'] . '"', $data );
+				$this->createConfirmationForm( 'Enable Plugin...', 'Enable "' . $data['extension_title'] . '"', $data );
 				$data['status'] = 'Enabled';
 			break;
 		}
@@ -150,10 +157,10 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 		unset( $data['extension_id'] );
  		if( ! $this->updateDb( $data ) )
 		{ 
-			$this->setViewContent( '<p class="badnews">Error: could not save extension.</p>.' ); 
+			$this->setViewContent( '<p class="badnews">Error: could not save Plugin.</p>.' ); 
 			return false;
 		}
-		$this->setViewContent( '<p class="boxednews normalnews">Extension status "' . $data['status'] . '" successfully.</p>' );
+		$this->setViewContent( '<p class="boxednews goodnews">Plugin switched "' . $data['status'] . '" successfully.</p>' );
 	//	$this->setViewContent( $this->getForm()->view() );
   
 	} 
@@ -183,7 +190,7 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 				{
 				//	var_export( $from );
 				//	var_export( readlink( $to ) );
-					$this->setViewParameter( '' . 'ERROR 2: "' . $file . '" is in use by another extension.' );
+					$this->setViewParameter( '' . 'ERROR 2: "' . $file . '" is in use by another Plugin.' );
 					continue;
 				}				
 				unlink( $to );
@@ -193,7 +200,7 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 			case false:
 				if( ! file_exists( $from ) )
 				{
-					$this->setViewParameter( '' . 'ERROR 3: "' . $file . '" not found in extension files.' );
+					$this->setViewParameter( '' . 'ERROR 3: "' . $file . '" not found in Plugin files.' );
 					continue;
 				}					
 				elseif( file_exists( $to ) )

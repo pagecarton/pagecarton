@@ -29,6 +29,13 @@ class Ayoola_Extension_List extends Ayoola_Extension_Abstract
 {
 	
     /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Plugins Built on this Installation'; 
+	
+    /**
      * Performs the creation process
      *
      * @param void
@@ -48,20 +55,23 @@ class Ayoola_Extension_List extends Ayoola_Extension_Abstract
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
-		$list->listTitle = 'My PageCarton Extensions';
+		$list->listTitle = $this->getObjectTitle();
 		$list->setData( $this->getDbData() );
 		$list->setKey( $this->getIdColumn() );  
 		$list->setListOptions( 
 								array( 
-										'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Creator/\', \'' . __CLASS__ . '\' );" title="Build a new extension">Build New Extension</a>',
+										'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Creator/\', \'' . __CLASS__ . '\' );" title="Build a new plugin">Build New Plugin</a>',
+										'DB Table' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_CreateFile/?file_type=table\' );" title="">New DB Table</a>',  
+										'Settings' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_CreateFile/?file_type=settings\' );" title="">New Settings</a>',  
+										'Widget' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_CreateFile/\' );" title="">New Widget</a>',    
 									) 
 							);
-		$list->setNoRecordMessage( 'No extensions is on this application.' );
+		$list->setNoRecordMessage( 'No plugins built yet.' );
 		$list->createList(  
 			array(
 			//	'extension_title' => '%FIELD%',   
-				'extension_title' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Edit extension" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?' . $this->getIdColumn() . '=%KEY%" href="javascript:;">%FIELD%</a>', 
-				'download' => '<a title="Download Extension" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Download/?' . $this->getIdColumn() . '=%KEY%\' );" href="javascript:;">Download</a>', 
+				'extension_title' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Edit plugin" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?' . $this->getIdColumn() . '=%KEY%" href="javascript:;">%FIELD%</a>', 
+				'download' => '<a title="Download Plugin" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Download/?' . $this->getIdColumn() . '=%KEY%\' );" href="javascript:;">Download</a>', 
 				'x' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
 			)
 		);

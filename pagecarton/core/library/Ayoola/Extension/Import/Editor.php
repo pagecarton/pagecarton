@@ -29,6 +29,13 @@ class Ayoola_Extension_Import_Editor extends Ayoola_Extension_Import_Abstract
 {	
 	
     /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Update plugin'; 
+	
+    /**
      * The method does the whole Class Process
      * 
      */
@@ -44,10 +51,10 @@ class Ayoola_Extension_Import_Editor extends Ayoola_Extension_Import_Abstract
 		
 		if( ! $this->updateDb() )
 		{ 
-			$this->setViewContent( '<p class="badnews">Error: could not save extension.</p>.', true ); 
+			$this->setViewContent( '<p class="badnews">Error: could not save Plugin.</p>.', true ); 
 			return false;
 		}
-			$this->setViewContent( '<p class="boxednews normalnews">Extension saved successfully.</p>', true );
+			$this->setViewContent( '<p class="boxednews goodnews">Plugin saved successfully.</p>', true );
 			$this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Extension_Import_Download/?extension_name=' . $identifierData['extension_name'] . '" class="boxednews goodnews">Download</a>' );
     } 
 	// END OF CLASS

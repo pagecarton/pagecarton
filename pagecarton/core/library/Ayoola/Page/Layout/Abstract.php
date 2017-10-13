@@ -115,7 +115,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 	//	if( ! @$values[self::VALUE_CONTENT] ){ return false; }
 		try
 		{
-			if( $identifierData = self::getIdentifierData() )
+			if( $identifierData = $this->getIdentifierData() )
 			{
 				$values = $values + $identifierData;
 			//	return false; 
@@ -339,11 +339,23 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$bodyChildren = array();
 		$allSections = false;
 		$firstElement = false;
+
+		//	Check if allsection is inserted already
+		$xpath = new DOMXpath($xml);
+
+		$pAllSections = $xpath->query('//section[@data-pc-all-sections="1"]');
+		$nodes = $xpath->query('//section[@data-pc-all-sections="1"]');
+	//	var_export( $pAllSections->length );
+	//	var_export( $nodes->length );
+		if( $pAllSections->length ) 
+		{ 
+			$allSections = true;
+		} 
 		
 		$createSections = function( $eachSection ) use ( &$bodyChildren, &$allSections, &$firstElement )
 		{
 			$bodyChildren = array();
-			$allSections = false;
+		//	$allSections = false;
 			foreach( $eachSection->childNodes as $eachDiv )
 			{
 			//	$i++;
@@ -1021,7 +1033,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			//	Choose a layout type first  
 			
 				//	Labels are expected to be inside uploaded document.
-				$fieldset->addElement( array( 'name' => 'layout_label', 'label' => 'Theme name', 'placeholder' => 'E.g. Super Theme', 'type' => 'InputText', 'value' => @$values['layout_label'] ) );
+				$fieldset->addElement( array( 'name' => 'layout_label', 'label' => 'Theme name', 'placeholder' => 'E.g. Super Theme', 'type' => 'InputText', 'value' => @$values['layout_label'] ? : $values['layout_name'] ) );
 				$fieldset->addRequirement( 'layout_label', array( 'WordCount' => array( 2,100 ) ) );   
 
 			//	Load this before we break so some image JS can run
@@ -1093,7 +1105,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					
 					$filter = new Ayoola_Filter_HighlightCode();    
 					
-//					$fieldset->addElement( array( 'name' => 'internal', 'label' => 'Internal HTML Used', 'readonly' => 'readonly', 'rows' => 10, 'style' => 'width:100%;', 'placeholder' => 'Enter the template text here...', 'type' => 'Html', 'value' => null ), array( 'html' => '<div style="max-height:200px;overflow:scroll;border: 2px solid #eee;">' . @$filter->filter( file_get_contents( $this->getMyFilename() . '' ), true ) . '</div>' ) );            
+			//		$fieldset->addElement( array( 'name' => 'internal', 'label' => 'Internal HTML Used', 'readonly' => 'readonly', 'rows' => 10, 'style' => 'width:100%;', 'placeholder' => 'Enter the template text here...', 'type' => 'Html', 'value' => null ), array( 'html' => '<div style="max-height:200px;overflow:scroll;border: 2px solid #eee;">' . @$filter->filter( file_get_contents( $this->getMyFilename() . '' ), true ) . '</div>' ) );            
 				//	$fieldset->addRequirement( 'plain_text', array( 'WordCount' => array( 10,50000 ) ) );
 					$fieldset->addFilter( self::VALUE_CONTENT, array( 'DefiniteValue' => $this->getGlobalValue( 'plain_text' ) ) );
 				break;  

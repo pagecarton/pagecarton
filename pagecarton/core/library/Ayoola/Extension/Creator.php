@@ -29,6 +29,13 @@ class Ayoola_Extension_Creator extends Ayoola_Extension_Abstract
 {
 	
     /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Build a new plugin'; 
+	
+    /**
      * The method does the whole Class Process
      * 
      */
@@ -37,7 +44,7 @@ class Ayoola_Extension_Creator extends Ayoola_Extension_Abstract
 		try
 		{ 
 		//	var_export( Ayoola_Page::getCurrentPageInfo( 'upload' ) );
-			$this->createForm( 'Continue', 'Build a new extension' );
+			$this->createForm( 'Continue', 'Build a new plugin' );
 		//	$this->setViewContent( $this->getForm()->view(), true );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
@@ -48,10 +55,10 @@ class Ayoola_Extension_Creator extends Ayoola_Extension_Abstract
 			
 			if( ! $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent( '<p class="boxednews badnews">Error: could not create extension.</p>.' ); 
+				$this->setViewContent( '<p class="boxednews badnews">Error: could not create plugin.</p>.' ); 
 				return false;
 			}
-			$this->setViewContent( '<p class="boxednews normalnews">Extension built successfully.</p>', true );
+			$this->setViewContent( '<p class="goodnews">Plugin built successfully.</p>', true );
 			$this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Extension_Download/?extension_name=' . $values['extension_name'] . '" class="boxednews goodnews">Download</a>' );
 			
 		}

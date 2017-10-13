@@ -2032,7 +2032,7 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 						{
 							CKEDITOR.plugins.addExternal( "uploadimage", "' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/plugins/uploadimage/plugin.js", "" );
 							CKEDITOR.plugins.addExternal( "confighelper", "' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/plugins/confighelper/plugin.js", "" );
-							CKEDITOR.config.extraPlugins = "confighelper,uploadimage,autogrow,tableresize";
+							CKEDITOR.config.extraPlugins = "confighelper,uploadimage,autogrow,tableresize,codesnippet";
 							CKEDITOR.config.removePlugins = "maximize,resize,elementspath";
 							CKEDITOR.config.allowedContent  = true;
 							CKEDITOR.config.filebrowserUploadUrl = "' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Ajax/?";  
@@ -2043,13 +2043,12 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 									height: 50,
 									toolbar : 
 									[
-										{ name: "insert", items: [ "Image", "Table", "SpecialChar" ] },
+										{ name: "insert", items: [ "Image", "Table", "SpecialChar", "CodeSnippet" ] },
 										{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
 										{ name: "paragraph", groups: [ "list", "indent", "blocks", "align" ], items: [ "NumberedList", "BulletedList", "-", "Blockquote", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "-" ] },
 										{ name: "links", items: [ "Link", "Unlink" ] },
 										{ name: "styles", items: [ "Format", "Font", "FontSize" ] },
 										{ name: "colors", items: [ "TextColor", "BGColor" ] },
-										{ name: "tools", items: [ "Maximize" ] }
 									],
 									autoGrow_minHeight : 50,
 									autoGrow_maxHeight : 400,

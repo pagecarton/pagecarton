@@ -66,7 +66,7 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 					$files[] = $directory . $each;
 				}
 			}
-			if( @$values['plugins'] )
+/*			if( @$values['plugins'] )
 			{
 				$directory =  '/plugins';
 				foreach( $values['plugins'] as $each )
@@ -74,7 +74,7 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 					$files[] = $directory . $each;
 				}
 			}
-			if( @$values['pages'] )
+*/			if( @$values['pages'] )
 			{
 				$directory =  '/';
 				foreach( $values['pages'] as $uri )
@@ -88,7 +88,7 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 					}
 				}
 			}
-			if( @$values['templates'] )
+/*			if( @$values['templates'] )
 			{
 				$directory =  '/documents/layout/';
 				foreach( $values['templates'] as $each )
@@ -96,7 +96,7 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 					$files[] = $directory . $each;
 				}
 			}
-			
+*/			
 			//		var_export( $files );
 			$filter = new Ayoola_Filter_Name();
 			$filter->replace = '_';
@@ -159,7 +159,7 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 			@unlink( $filename . '.gz' );
 			exit();
 			
-		//	$this->setViewContent( '<p class="boxednews goodnews">Extension has been saved successfuly.</p>, true' );
+		//	$this->setViewContent( '<p class="boxednews goodnews">Plugin has been saved successfuly.</p>, true' );
 		}
 		catch( Exception $e )
 		{ 

@@ -57,11 +57,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="navbar-collapse"> 
 				<nav data-pc-menu-ignore=1 class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 					<ul class="nav" id="side-menu">
-						<li>
-							<a href="#PC_URL_PREFIX/pc-admin/" class="active"><i class="fa fa-home nav_icon"></i>Dashboard</a>
-						</li>
 						<li>   
-							<a href="#"><i class="fa fa-cogs nav_icon"></i>Settings <span class="nav-badge">8</span> <span class="fa arrow"></span></a>
+							<a href="#"><i class="fa fa-cogs nav_icon"></i>Settings <span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
 									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Settings_SettingsName_List/">Options</a>
@@ -91,7 +88,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<!-- /nav-second-level -->
 						</li>
 						<li>
-							<a href="#"><i class="fa fa-file-text-o nav_icon"></i>Pages & Themes<span class="nav-badge">3</span><span class="fa arrow"></span></a>
+							<a href="#"><i class="fa fa-file-text-o nav_icon"></i>Pages & Themes <span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
 									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Page_List/">Pages</a>
@@ -106,13 +103,28 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<!-- //nav-second-level -->
 						</li>
 						<li class="">
-							<a href="#"><i class="fa fa-users nav_icon"></i>Users  <span class="nav-badge">3</span> <span class="fa arrow"></span></a>
+							<a href="#"><i class="fa fa-users nav_icon"></i>Users   <span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
 									<a href="#PC_URL_PREFIX/pc-admin/name/Application_User_List/">User Accounts</a>
 								</li>
 								<li>
 									<a href="#PC_URL_PREFIX/pc-admin/name/Application_XmlTableViewer/table_name/Application_User_UserEmail_MailingList/">Mailing List</a>
+								</li>
+								<li>
+									<a href="#PC_URL_PREFIX/pc-admin/name/Application_User_NotificationMessage_List/">Bulk Mails</a>
+								</li>
+							</ul>
+							<!-- /nav-second-level -->
+						</li>
+						<li>
+							<a href="#"><i class="fa fa-circle nav_icon"></i>Plugins <span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level collapse">
+								<li>
+									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Extension_Import_List/">Installed Plugins</a>
+								</li>
+								<li>
+									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Extension_List/">My Plugins</a>
 								</li>
 							</ul>
 							<!-- /nav-second-level -->
@@ -123,21 +135,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<li>
 							<a href="#PC_URL_PREFIX/pc-admin/name/Application_Article_List/"><i class="fa fa-th-large nav_icon"></i>Posts </a>
 						</li>						
-						<li>
-							<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Extension_Import_List/"><i class="fa fa-circle nav_icon"></i>Extensions </a>
-						</li>
-						<li>
-							<a href="#"><i class="fa fa-envelope nav_icon"></i>Mailbox <span class="nav-badge">2</span> <span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_ContactUs_ShowAll/">Contact Form Feedbacks</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_User_NotificationMessage_List/">Manage Bulk Mails</a>
-								</li>
-							</ul>
-							<!-- //nav-second-level -->
-						</li>
 						
 					</ul>
 					<!-- //sidebar-collapse -->
@@ -159,7 +156,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					</a>				
 				</div>
 				<!--//logo-->
-				<!--search-box-->
+				<!--search-box-
 				<div class="search-box">
 					<form action="#PC_URL_PREFIX/search/" class="input">
 						<input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />

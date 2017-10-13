@@ -80,25 +80,24 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 		$form->setParameter( array( 'no_fieldset' => true ) );
 		$fieldset = new Ayoola_Form_Element;
 		$form->submitValue = $submitValue ;
-		$fieldset->addElement( array( 'name' => 'extension_title', 'label' => 'Give this extension a name', 'placeholder' => 'Enter a name here...', 'onClick' => '', 'type' => 'InputText', 'value' => @$values['extension_title'] ) );
-		$fieldset->addRequirement( 'extension_title', array( 'WordCount' => array( 3,100, 'badnews' => 'An extension name should be made up of 3 to 100  alphanumeric characters.' ) ) ); 
-
+		$fieldset->addElement( array( 'name' => 'extension_title', 'label' => 'Plugin Name', 'placeholder' => 'e.g. My Super Plugin', 'onClick' => '', 'type' => 'InputText', 'value' => @$values['extension_title'] ) );
+		$fieldset->addRequirement( 'extension_title', array( 'WordCount' => array( 3,100, 'badnews' => 'A Plugin name should be made up of 3 to 100  alphanumeric characters.' ) ) ); 
+/*
 		$options = array( 
 							'modules' => 'Modules',
-							'databases' => 'Database Tables',
-							'documents' => 'Documents',
+							'databases' => 'Database Tables Data',
+							'documents' => 'Documents & Files',
 					//		'settings' => 'Settings',
 							'pages' => 'Pages',
-							'templates' => 'Layout Templates & Themes',
+					//		'templates' => 'Themes',
 						);
-		$fieldset->addElement( array( 'name' => 'components', 'label' => 'What kind of components do you want to build into an extension?', 'required' => 'required', 'type' => 'Checkbox', 'value' => @$values['components'] ), $options );
-		$fieldset->addRequirement( 'components', array( 'ArrayKeys' => $options + array( 'badnews' => 'You cannot create an empty extension. Please select components to include.' ) ) );
-		
-		$fieldset->addElement( array( 'name' => 'settings_class', 'label' => 'PHP Class for Settings', 'type' => 'InputText', 'value' => @$values['settings_class'] ) );
+		$fieldset->addElement( array( 'name' => 'components', 'label' => 'Plugin Components', 'required' => 'required', 'type' => 'Checkbox', 'value' => @$values['components'] ), $options );
+		$fieldset->addRequirement( 'components', array( 'ArrayKeys' => $options + array( 'badnews' => 'You cannot create an empty Plugin. Please select components to include.' ) ) );
+*/		
 
 		$filter = new Ayoola_Filter_FilenameToClassname();
 		
-		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'modules', Ayoola_Form::getGlobalValue( 'components' ) ) )
+	//	if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'modules', Ayoola_Form::getGlobalValue( 'components' ) ) )
 		{
 			try
 			{
@@ -112,6 +111,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 				$options = array(); 
 			}
 			$files = array();
+			$classes = array();
 			foreach( $options as $file )
 			{
 				$directory = str_ireplace( DS, '/', $directory );
@@ -123,21 +123,24 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 				//	The label is transformed into the class value
 				$className = $filter->filter( $file );
 				$files[$file] = $className;
+				$classes[$className] = $className;
 			}
 			asort( $files );
-			$fieldset->addElement( array( 'name' => 'modules', 'required' => 'required', 'label' => 'Select the modules that you want to include. <a href="http://PageCarton.com/" target="_blank">Learn more...</a>', 'type' => 'SelectMultiple', 'value' => @$values['modules'] ), $files );
+			$fieldset->addElement( array( 'name' => 'modules', 'required' => 'required', 'label' => 'Plugin Modules', 'type' => 'SelectMultiple', 'value' => @$values['modules'] ), $files );
 			if( $files ) 
 			{
-				$fieldset->addRequirement( 'modules', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the modules you want to include in the extension' )  ) );
+				$fieldset->addRequirement( 'modules', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the modules you want to include in the Plugin' )  ) );
 			}
+			$fieldset->addElement( array( 'name' => 'settings_class', 'label' => 'Settings Module', 'type' => 'Select', 'value' => @$values['settings_class'] ), array( '' => 'No Settings' ) + $classes );
  	
 		}
-		else
+/*		else
 		{
 			$fieldset->addElement( array( 'name' => 'modules', 'type' => 'Hidden', 'value' => '' ) );
+			$fieldset->addElement( array( 'name' => 'settings_class', 'type' => 'Hidden', 'value' => '' ) );
 		}
-		
-		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'databases', Ayoola_Form::getGlobalValue( 'components' ) ) )
+*/		
+//		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'databases', Ayoola_Form::getGlobalValue( 'components' ) ) )
 		{
  			$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'databases';  
 		//	var_export( $options );
@@ -170,17 +173,17 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			asort( $files );
 			if( $files ) 
 			{
-				$fieldset->addElement( array( 'name' => 'databases', 'required' => 'required', 'label' => 'Select the database tables', 'type' => 'SelectMultiple', 'value' => @$values['databases'] ), $files );
-				$fieldset->addRequirement( 'databases', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the database tables you want to include in the extension' )  ) );
+				$fieldset->addElement( array( 'name' => 'databases', 'required' => 'required', 'label' => 'Database Table Data', 'type' => 'SelectMultiple', 'value' => @$values['databases'] ), $files );
+				$fieldset->addRequirement( 'databases', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the database tables you want to include in the Plugin' )  ) );
 			}
  	
 		}
-		else
+/*		else
 		{
 			$fieldset->addElement( array( 'name' => 'databases', 'type' => 'Hidden', 'value' => '' ) );
 		}
-		
-		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'documents', Ayoola_Form::getGlobalValue( 'components' ) ) )
+*/		
+//		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'documents', Ayoola_Form::getGlobalValue( 'components' ) ) )
 		{
  			$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents';  
 		//	var_export( $options );
@@ -203,22 +206,22 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 				$files[$file] = $file;
 			}
 			asort( $files );
-			$fieldset->addElement( array( 'name' => 'documents', 'required' => 'required', 'label' => 'Select the documents', 'type' => 'SelectMultiple', 'value' => @$values['documents'] ), $files );
+			$fieldset->addElement( array( 'name' => 'documents', 'required' => 'required', 'label' => 'Documents & Files', 'type' => 'SelectMultiple', 'value' => @$values['documents'] ), $files );
 	//		$fieldset->addElement( array( 'name' => 'upload_document', 'label' => ' ', 'type' => 'document', 'value' => @$values['upload_document'] ) );
 			if( $files ) 
 			{
-				$fieldset->addRequirement( 'documents', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select documents you want to include in the extension' )  ) );
+				$fieldset->addRequirement( 'documents', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select documents you want to include in the Plugin' )  ) );
 			}
  	
 		}
-		else
+/*		else
 		{
 			$fieldset->addElement( array( 'name' => 'documents', 'type' => 'Hidden', 'value' => '' ) );
 		}
-		
+*/		
 
 		
-		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'pages', Ayoola_Form::getGlobalValue( 'components' ) ) )
+	//	if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'pages', Ayoola_Form::getGlobalValue( 'components' ) ) )
 		{
 			$option = new Ayoola_Page_Page;
 			$option = $option->select();
@@ -226,18 +229,18 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
 			$option = $filter->filter( $option );
 			asort( $option );
-			$fieldset->addElement( array( 'name' => 'pages', 'required' => 'required', 'label' => 'Select the pages. <a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_List/" target="_blank">Pages...</a>', 'type' => 'SelectMultiple', 'value' => @$values['pages'] ), $option );
+			$fieldset->addElement( array( 'name' => 'pages', 'required' => 'required', 'label' => 'Pages', 'type' => 'SelectMultiple', 'value' => @$values['pages'] ), $option );
 			if( $option )     
 			{
-				$fieldset->addRequirement( 'pages', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select pages you want to include in the extension' )  ) );
+				$fieldset->addRequirement( 'pages', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select pages you want to include in the Plugin' )  ) );
 			}
  	
 		}
-		else
+/*		else
 		{
 			$fieldset->addElement( array( 'name' => 'pages', 'type' => 'Hidden', 'value' => '' ) );
 		}
-		
+*//*		
 		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'templates', Ayoola_Form::getGlobalValue( 'components' ) ) )
 		{
 			$option = new Ayoola_Page_PageLayout;
@@ -250,7 +253,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			$fieldset->addElement( array( 'name' => 'templates', 'required' => 'required', 'label' => 'Select the layout themes <a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Layout_List/" target="_blank">(themes)</a>', 'type' => 'SelectMultiple', 'value' => @$values['templates'] ), $option );
 			if( $option ) 
 			{
-				$fieldset->addRequirement( 'templates', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select themes you want to include in the extension' )  ) );
+				$fieldset->addRequirement( 'templates', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select themes you want to include in the Plugin' )  ) );
 			}
  	
 		}
@@ -258,7 +261,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 		{
 			$fieldset->addElement( array( 'name' => 'templates', 'type' => 'Hidden', 'value' => '' ) );
 		}
-		$fieldset->addLegend( $legend );
+*/		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
     } 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="template" creation_time="1407537395" table_version="0.02" module_version="1.00" table_class="Ayoola_Menu_Template" creation_ip="2130706433">
-  <RECORDS autoId="5">
+  <RECORDS autoId="6">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[HorizontalWhite]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[1077-0-1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Horizontal White Menu Style]]></TABLE_FIELD>  
+      <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Horizontal White Menu Style]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li class='{{{li-active-class}}} {{{li-ul-class}}}'&gt;
 &lt;a onClick=&quot;{{{ayoola_spotlight}}}&quot; class='{{{a-active-class}}}' href='{{{url}}}'&gt;&lt;span&gt;{{{option_name}}}&lt;/span&gt;&lt;/a&gt;
 {{{sub_menu}}}
@@ -63,7 +63,7 @@
 &lt;a onClick=&quot;{{{ayoola_spotlight}}}&quot; class='{{{a-active-class}}}' href='{{{url}}}'&gt;&lt;span&gt;{{{option_name}}}&lt;/span&gt;&lt;/a&gt;
 {{{sub_menu}}}
 &lt;/li&gt;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;css&quot;,&quot;padding&quot;]]]></TABLE_FIELD>  
+      <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;css&quot;,&quot;padding&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;div style='border-bottom:0;' class='HorizontalGrayish'&gt;
 &lt;ul&gt;
 ]]></TABLE_FIELD>
@@ -74,6 +74,26 @@
       <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[1077-0-4]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[Plain]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[0-0-5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Plain]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li class='{{{li-active-class}}} {{{li-ul-class}}} '&gt;
+&lt;a onClick=&quot;{{{ayoola_spotlight}}}&quot;  class='{{{a-active-class}}}' href='{{{url}}}'&gt;{{{option_name}}}&lt;/a&gt;
+{{{sub_menu}}}
+&lt;/li&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;padding&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;div class='pc_plain_menu'&gt;
+&lt;p&gt;{{{menu_label}}}&lt;/p&gt;
+&lt;ul&gt;
+]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_suffix"><![CDATA[&lt;/ul&gt;
+&lt;/div&gt;
+]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

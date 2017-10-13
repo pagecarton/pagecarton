@@ -84,45 +84,33 @@ abstract class Ayoola_Extension_Import_Abstract extends Ayoola_Abstract_Table
 		do 
 		{
 			$options = array( 
-								'new' => 'Upload new extension',
-								'update' => 'Update existing extension',
+								'new' => 'Upload new Plugin',
+								'update' => 'Update existing Plugin',
 							);
 		//	$fieldset->addElement( array( 'name' => 'import_type', 'label' => 'What are you trying to do?', 'required' => 'required', 'type' => 'Radio', 'value' => @$values['import_type'] ? : 'new' ), $options );
 		//	$fieldset->addRequirement( 'import_type', array( 'ArrayKeys' => $options + array( 'badnews' => 'Please select what you are trying to do...' ) ) );
 		//	var_export( $this->getGlobalValue( 'import_type' ) );
 			if( @$_REQUEST['extension_name'] )
 			{
-/* 				$option = new Ayoola_Extension_Import_Table;
-				$option = $option->select();
-				require_once 'Ayoola/Filter/SelectListArray.php';
-				$filter = new Ayoola_Filter_SelectListArray( 'extension_name', 'extension_title');
-				$option = $filter->filter( $option );
-				ksort( $option );
- 				$fieldset->addElement( array( 'name' => 'extension_name', 'required' => 'required', 'label' => 'Select Extension to Update', 'type' => '', 'value' => @$values['extension_name'] ), $option );
-				if( $option )     
-				{
-					$fieldset->addRequirement( 'extension_name', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select extension to update' )  ) );
-				}
-*/	
 				$option = new Ayoola_Extension_Import_Table;
 				if( $option = $option->selectOne( null, array( 'extension_name' => $_REQUEST['extension_name'] ) ) )
 				{
 					$fieldset->addElement( array( 'name' => 'extension_name', 'type' => 'Hidden', 'value' => $option['extension_name'] ) );
-					$fieldset->addLegend( 'Update Extension (' . $option['extension_title'] . ')' );
+					$fieldset->addLegend( 'Update Plugin (' . $option['extension_title'] . ')' );
 				}
 				else
 				{
-					$fieldset->addLegend( 'Upload new Extension' );
+					$fieldset->addLegend( 'Upload new Plugin' );
 				}
-		//	$fieldset->addElement( array( 'name' => 'upload', 'label' => 'Extension File (.tar.gz archive)', 'data-allow_base64' => true, 'data-document_type' => 'application', 'type' => 'Document', 'value' => @$values['upload'] ) );
 			}
 			else
 			{
-				$fieldset->addLegend( 'Upload new Extension' );
+				$fieldset->addLegend( 'Upload new Plugin' );
 			}
 		}
 		while( false );
-		$fieldset->addElement( array( 'name' => 'upload', 'label' => 'Extension File (.tar.gz archive)', 'data-allow_base64' => true, 'data-document_type' => 'application', 'type' => 'Document', 'value' => @$values['upload'] ) );
+	//	$fieldset->addElement( array( 'name' => 'upload', 'label' => 'Plugin File (.tar.gz archive)', 'data-allow_base64' => true, 'data-document_type' => 'application', 'type' => 'Document', 'value' => @$values['upload'] ) );
+		$fieldset->addElement( array( 'name' => 'plugin_url', 'label' => 'Plugin File (.tar.gz archive)', 'data-document_type' => 'application', 'type' => 'Document', 'value' => @$values['plugin_url'] ) );
 		$form->addFieldset( $fieldset );
 		
 		$this->setForm( $form );

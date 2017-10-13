@@ -1,0 +1,391 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /layout/novus/template
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: template.php	Thursday 12th of October 2017 01:23:34 PM	ayoola@ayoo.la $ 
+*/
+//	Template Content ?>
+<!DOCTYPE HTML>
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+--><html>
+<head>
+<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script><!-- Bootstrap Core CSS --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/bootstrap.css" rel="stylesheet" type="text/css">
+<!-- Custom CSS --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/style.css" rel="stylesheet" type="text/css">
+<!-- font CSS --><!-- font-awesome icons --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/font-awesome.css" rel="stylesheet">
+<!-- //font-awesome icons --><!-- js--><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/jquery-1.11.1.min.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/modernizr.custom.js"></script><!--webfonts--><link href="//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
+<!--//webfonts--><!--animate--><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/animate.css" rel="stylesheet" type="text/css" media="all">
+<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/wow.min.js"></script><script>
+		 new WOW().init();
+	</script><!--//end-animate--><!-- chart --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/Chart.js"></script><!-- //chart --><!--Calender--><link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/clndr.css" type="text/css">
+<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/underscore-min.js" type="text/javascript"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/moment-2.2.1.js" type="text/javascript"></script><!--<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/clndr.js" type="text/javascript"></script>  
+<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/site.js" type="text/javascript"></script>--><!--End Calender--><!-- Metis Menu --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/metisMenu.min.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/custom.js"></script><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/custom.css" rel="stylesheet">
+<!--//Metis Menu -->
+</head>
+<body class="cbp-spmenu-push" data-pc-section-name="body">
+	<div class="main-content" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
+		<!--left-fixed -navigation-->
+		<div class=" sidebar" role="navigation" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
+            <div class="navbar-collapse"> 
+				<nav data-pc-menu-ignore="1" class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1"><ul class="nav" id="side-menu">
+<li>   
+							<a href="#"><i class="fa fa-cogs nav_icon">&nbsp;</i>Settings <span class="fa arrow">&nbsp;</span></a>
+							<ul class="nav nav-second-level collapse">
+<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Settings_SettingsName_List/">Options</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Access_AuthLevel_List/">Priviledges</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Object_List/">Widgets</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Domain_List/">Domains</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Backup_List/">Back up</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Log/">Logs</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Cache_Clear/">Clear Cache</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Upgrade/">Upgrades</a>
+								</li>
+							</ul>
+<!-- /nav-second-level -->
+</li>
+						<li>
+							<a href="#"><i class="fa fa-file-text-o nav_icon">&nbsp;</i>Pages &amp; Themes <span class="fa arrow">&nbsp;</span></a>
+							<ul class="nav nav-second-level collapse">
+<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_List/">Pages</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_Layout_List/">Themes</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_Menu_List/">Navigation</a>
+								</li>
+							</ul>
+<!-- //nav-second-level -->
+</li>
+						<li class="">
+							<a href="#"><i class="fa fa-users nav_icon">&nbsp;</i>Users   <span class="fa arrow">&nbsp;</span></a>
+							<ul class="nav nav-second-level collapse">
+<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_User_List/">User Accounts</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_XmlTableViewer/table_name/Application_User_UserEmail_MailingList/">Mailing List</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_User_NotificationMessage_List/">Bulk Mails</a>
+								</li>
+							</ul>
+<!-- /nav-second-level -->
+</li>
+						<li>
+							<a href="#"><i class="fa fa-circle nav_icon">&nbsp;</i>Plugins <span class="fa arrow">&nbsp;</span></a>
+							<ul class="nav nav-second-level collapse">
+<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Extension_Import_List/">Installed Plugins</a>
+								</li>
+								<li>
+									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Extension_List/">My Plugins</a>
+								</li>
+							</ul>
+<!-- /nav-second-level -->
+</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Form_List/"><i class="fa fa-check-square-o nav_icon">&nbsp;</i>Forms </a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Article_List/"><i class="fa fa-th-large nav_icon">&nbsp;</i>Posts </a>
+						</li>						
+						
+					</ul>
+<!-- //sidebar-collapse --></nav>
+</div>
+		</div>
+		<!--left-fixed -navigation-->
+		<!-- header-starts -->
+		<div class="sticky-header header-section " data-pc-section-autonamed="2" data-pc-section-name="pc-body-2">
+			<div class="header-left">
+				<!--toggle button start-->
+				<button id="showLeftPush"><i class="fa fa-bars">&nbsp;</i></button>
+				<!--toggle button end-->
+				<!--logo -->
+				<div class="logo">
+					<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin">
+						<h1>PageCarton</h1>
+						<span>AdminPanel</span>
+					</a>				
+				</div>
+				<!--//logo-->
+				<!--search-box-
+				<div class="search-box">
+					<form action="<?php echo Ayoola_Application::getUrlPrefix(); ?>/search/" class="input">
+						<input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
+						<label class="input__label" for="input-31">
+							<svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
+								<path d="m0,0l404,0l0,77l-404,0l0,-77z"/>   
+							</svg>
+						</label>
+					</form>
+				</div><!--//end-search-box-->
+				<div class="clearfix"> </div>
+			</div>
+			<div class="header-right">
+			
+				<!--notification menu end -->
+				<?php echo Ayoola_Abstract_Viewable::viewObject( 'Ayoola_Access_Dashboard', array (
+  'object_interior' => true,
+  'markup_template' => '<section><div class="profile_details">		&#13;
+					<ul><li class="dropdown profile_details_drop">&#13;
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">&#13;
+								<div class="profile_img">	&#13;
+									<span class="prfil-img"><img style="max-height:50px;" src="{{{display_picture}}}" alt=""></img></span> &#13;
+									<div class="user-name">&#13;
+										<p>{{{display_name}}}</p>&#13;
+										<span>{{{auth_name}}}</span>&#13;
+									</div>&#13;
+									<i class="fa fa-angle-down lnr"></i>&#13;
+									<i class="fa fa-angle-up lnr"></i>&#13;
+									<div class="clearfix"></div>	&#13;
+								</div>	&#13;
+							</a>&#13;
+							<ul class="dropdown-menu drp-mnu"><li> <a href="' . Ayoola_Application::getUrlPrefix() . '/account"><i class="fa fa-cog"></i> Settings</a> </li> &#13;
+								<li> <a href="' . Ayoola_Application::getUrlPrefix() . '/{{{username}}}"><i class="fa fa-user"></i> Profile</a> </li> &#13;
+								<li> <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/signout"><i class="fa fa-sign-out"></i> Logout</a> </li>&#13;
+							</ul></li>&#13;
+					</ul></div>&#13;
+				</section>',
+) ); ?><div class="clearfix"> </div>				
+			</div>
+			<div class="clearfix"> </div>	
+		</div>
+		<!-- //header-ends -->
+		<!-- main content start-->
+		<div id="page-wrapper" data-pc-section-name="page-wrapper">
+			<div class="main-page">
+				<section><section data-pc-all-sections="1">	
+									<?php
+//oneness Begins Here
+
+//oneness Ends Here
+?>@@@oneness@@@
+									<div class="">
+										<div class="row">
+											<div class="col-md-12 12u">
+												<?php
+//middlebar Begins Here
+
+//middlebar Ends Here
+?>@@@middlebar@@@
+										   </div>
+										</div> 
+										<div class="row">
+											<div class="col-sm-6 6u 6u(medium) 12u$(xsmall)">
+												<?php
+//twosome1 Begins Here
+
+//twosome1 Ends Here
+?>@@@twosome1@@@
+											</div>
+											<div class="col-sm-6 6u 6u(medium) 12u$(xsmall)">
+												<?php
+//twosome2 Begins Here
+
+//twosome2 Ends Here
+?>@@@twosome2@@@
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)"> 
+												<?php
+//threesome1 Begins Here
+
+//threesome1 Ends Here
+?>@@@threesome1@@@
+										   </div>
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+												<?php
+//threesome2 Begins Here
+
+//threesome2 Ends Here
+?>@@@threesome2@@@
+											</div> 
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+												<?php
+//threesome3 Begins Here
+
+//threesome3 Ends Here
+?>@@@threesome3@@@
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="col-md-3 3u 6u(medium) 12u$(xsmall)">
+												<?php
+//foursome1 Begins Here
+
+//foursome1 Ends Here
+?>@@@foursome1@@@
+										   </div>
+											<div class="col-md-3 3u 6u$(medium) 12u$(xsmall)">
+												<?php
+//foursome2 Begins Here
+
+//foursome2 Ends Here
+?>@@@foursome2@@@
+											</div> 
+											<div class="col-md-3 3u 6u(medium) 12u$(xsmall)">
+												<?php
+//foursome3 Begins Here
+
+//foursome3 Ends Here
+?>@@@foursome3@@@
+											</div> 
+											<div class="col-md-3 3u 6u$(medium) 12u$(xsmall)">    
+												<?php
+//foursome4 Begins Here
+
+//foursome4 Ends Here
+?>@@@foursome4@@@
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+												<?php
+//leftbar Begins Here
+
+//leftbar Ends Here
+?>@@@leftbar@@@
+										   </div>
+											<div class="col-md-8 8u 12u$(medium) 12u$(xsmall)">
+												<?php
+//leftbarright Begins Here
+
+//leftbarright Ends Here
+?>@@@leftbarright@@@
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="col-md-8 8u 12u$(medium) 12u$(xsmall)">
+												<?php
+//rightbarleft Begins Here
+
+//rightbarleft Ends Here
+?>@@@rightbarleft@@@
+											</div> 
+											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+												<?php
+//rightbar Begins Here
+
+//rightbar Ends Here
+?>@@@rightbar@@@
+											</div>   
+										</div> 
+									</div> 
+									<?php
+//lastoneness Begins Here
+
+//lastoneness Ends Here
+?>@@@lastoneness@@@
+								</section></section>
+<?php
+//row_one Begins Here
+
+//row_one Ends Here
+?>@@@row_one@@@
+
+
+
+<?php
+//charts Begins Here
+
+//charts Ends Here
+?>@@@charts@@@
+
+
+
+<?php
+//three Begins Here
+
+//three Ends Here
+?>@@@three@@@
+
+
+
+<?php
+//four Begins Here
+
+//four Ends Here
+?>@@@four@@@
+
+
+
+<?php
+//five Begins Here
+
+//five Ends Here
+?>@@@five@@@
+
+
+<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!--footer-->
+			<div class="main-page" data-pc-section-autonamed="4" data-pc-section-name="pc-body-4">
+		<div class="footer">
+		
+<?php
+//footer Begins Here
+
+//footer Ends Here
+?>@@@footer@@@
+
+
+
+</div>
+		</div>
+        <!--//footer-->
+	</div>
+	<!-- Classie -->
+		<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/classie.js"></script><script>
+			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+				showLeftPush = document.getElementById( 'showLeftPush' ),
+				body = document.body;
+				
+			showLeftPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toright' );
+				classie.toggle( menuLeft, 'cbp-spmenu-open' );
+				disableOther( 'showLeftPush' );
+			};
+			
+
+			function disableOther( button ) {
+				if( button !== 'showLeftPush' ) {
+					classie.toggle( showLeftPush, 'disabled' );
+				}
+			}
+		</script><!--scrolling js--><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/jquery.nicescroll.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/scripts.js"></script><!--//scrolling js--><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/bootstrap.js"> </script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+</body>
+</html>

@@ -1,8 +1,29 @@
 @charset "utf-8";
-/*
-*//* FORM */
-/*@import "default/form.css";*/
 
+/*Breadcrumb*/
+
+.pc-breadcrumb {
+    list-style: none;
+    margin:0;
+    padding:0;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+.pc-breadcrumb > li {
+    display: inline-block;
+}
+.pc-breadcrumb > li + li::before {  
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    font-size: smaller;
+    content: ">";
+}
+.pc-breadcrumb > .pc-breadcrumb-active {
+    list-style: none;
+}
+
+
+/* FORM */
 
 
 .pc-form label
@@ -470,6 +491,10 @@
 .pc_page_object_insert_button_area:hover, .pc_page_object_inner_settings_area:hover
 {
     border: 1px groove #444;
+}
+.pc_page_object_inner_settings_area select
+{
+    max-width: 100%;
 }
 .pc_page_object_insert_button_area:hover select, .pc_page_object_inner_settings_area:hover select
 {

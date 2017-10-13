@@ -132,7 +132,7 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 				$class->init(); // invoke the template update for this page.
  */		
 				$this->setViewContent( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>', true );   
-				$this->setViewContent( '<p><a class="boxednews centerednews" href="' . Ayoola_Application::getUrlPrefix() . '/ayoola/page/edit/layout/?url=' . $values['url'] . '"> Add Content!</a></p>' ); 
+				$this->setViewContent( '<p><a class="boxednews centerednews" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '"> Add Content!</a></p>' ); 
 	//		}
 	//		else
 	//		{ 
