@@ -881,6 +881,19 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	}
 
     /**
+	 * 
+	 * 		
+     * @param void
+     * @return void
+     */
+    public function clearParametersThatMayBeDuplicated()
+	{
+		unset( $this->_parameter['object_class'] );
+		unset( $this->_parameter['object_style'] );
+		unset( $this->_parameter['wrapper_name'] );
+	}
+
+    /**
 	 * Return $parameters
 	 * 		
      * @param string If set, method returns value of $parameters[$key]
@@ -983,8 +996,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$documentElement->setAttribute( 'data-object-name', $this->getObjectName() );
 				$documentElement->setAttribute( 'name', $this->getObjectName() . '_container' );
 			//	var_export( $this->getParameter( 'object_container_element' )  );
-				$this->getParameter( 'object_class' ) ? $documentElement->setAttribute( 'class', $this->getParameter( 'object_class' ) ) : null;
-				$this->getParameter( 'object_style' ) ? $documentElement->setAttribute( 'style', $this->getParameter( 'object_style' ) ) : null;   
+			//	$this->getParameter( 'object_class' ) ? $documentElement->setAttribute( 'class', $this->getParameter( 'object_class' ) ) : null;
+		//		$this->getParameter( 'object_style' ) ? $documentElement->setAttribute( 'style', $this->getParameter( 'object_style' ) ) : null;   
 				$this->_viewContent->appendChild( $documentElement );
 				
 				//	Use Named Anchor to reference this content
@@ -1230,6 +1243,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			break;
 			case static::PLAY_MODE_HTML:
 				$content = null;
+				$html = null;
 				$content = $this->getViewContent();
 				
 				if( ! $template = $this->getMarkupTemplate() )      
@@ -1238,91 +1252,100 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$template = $this->getParameter( 'markup_template_no_data' );  
 					if( ! $template )      
 					{
-						return $content;
+						$html = $content;
+					//	return $content;
 					}
 					else
 					{
 					//	var_export( $this->getParameter( 'markup_template' ) );
 					}
 				}
-		//		var_export( $template );
-				if( @$this->_form )
+				else      
 				{
-					Application_Javascript::addCode
-					(
-						'
-							ayoola.events.add
-							(
-								window,
-								"load",
-								function()
-								{
-									
-									ayoola.xmlHttp.setAfterStateChangeCallback
-									( 
-										function()
-										{ 
-											var a = document.getElementById( "' . $this->getObjectName() . '_form_goodnews" );
-											if( a )
-											{
-												//	workaround for a bug that makes content for the goodnews show the whole view content
-												a.id = "";
-												ayoola.spotLight.popUp( a.innerHTML ); 
-											}
-											
-										} 
-									);
-								}
-							);
-						'
-					);
-					//	Lets insert form requirements in the artificial form fields
-					$this->_objectTemplateValues = array_merge( $_REQUEST, $this->_objectTemplateValues );
-				//	var_export( $this->getParameter() );
-					$this->_objectTemplateValues['template_object_name'] = $this->getObjectName();
-					
-					//	internally count the instance
-					$this->_objectTemplateValues['template_instance_count'] = static::$_counter;
-					$this->_objectTemplateValues['template_form_requirements'] = $this->getForm()->getRequiredFieldset()->view();
-					$this->_objectTemplateValues['template_form_badnews'] = null;
-					$this->_objectTemplateValues['template_form_goodnews'] = null;
-					if( $this->getForm()->getBadnews() )
+					if( @$this->_form )
 					{
-						$this->_objectTemplateValues['template_form_badnews'] .= '<ul>';
-						foreach( $this->getForm()->getBadnews() as $message ) 
-						{
-							$this->_objectTemplateValues['template_form_badnews'] .= "<li class='badnews'>$message</li>\n";
-						}
-						$this->_objectTemplateValues['template_form_badnews'] .= '</ul>';  
-					}
-					elseif( $this->getForm()->getValues() ) 
-					{
-						//	used to disable forms for avoid multiple submissions after form completion
-						$this->_objectTemplateValues['template_form_disable'] = 'disabled="disabled"';
+						Application_Javascript::addCode
+						(
+							'
+								ayoola.events.add
+								(
+									window,
+									"load",
+									function()
+									{
+										
+										ayoola.xmlHttp.setAfterStateChangeCallback
+										( 
+											function()
+											{ 
+												var a = document.getElementById( "' . $this->getObjectName() . '_form_goodnews" );
+												if( a )
+												{
+													//	workaround for a bug that makes content for the goodnews show the whole view content
+													a.id = "";
+													ayoola.spotLight.popUp( a.innerHTML ); 
+												}
+												
+											} 
+										);
+									}
+								);
+							'
+						);
+						//	Lets insert form requirements in the artificial form fields
+						$this->_objectTemplateValues = array_merge( $_REQUEST, $this->_objectTemplateValues );
+					//	var_export( $this->getParameter() );
+						$this->_objectTemplateValues['template_object_name'] = $this->getObjectName();
 						
-						$this->_objectTemplateValues['template_form_goodnews'] = '<span id="' . $this->getObjectName() . '_form_goodnews"><span class="goodnews boxednews fullnews centerednews">' . $content . '</span></span>';
+						//	internally count the instance
+						$this->_objectTemplateValues['template_instance_count'] = static::$_counter;
+						$this->_objectTemplateValues['template_form_requirements'] = $this->getForm()->getRequiredFieldset()->view();
+						$this->_objectTemplateValues['template_form_badnews'] = null;
+						$this->_objectTemplateValues['template_form_goodnews'] = null;
+						if( $this->getForm()->getBadnews() )
+						{
+							$this->_objectTemplateValues['template_form_badnews'] .= '<ul>';
+							foreach( $this->getForm()->getBadnews() as $message ) 
+							{
+								$this->_objectTemplateValues['template_form_badnews'] .= "<li class='badnews'>$message</li>\n";
+							}
+							$this->_objectTemplateValues['template_form_badnews'] .= '</ul>';  
+						}
+						elseif( $this->getForm()->getValues() ) 
+						{
+							//	used to disable forms for avoid multiple submissions after form completion
+							$this->_objectTemplateValues['template_form_disable'] = 'disabled="disabled"';
+							
+							$this->_objectTemplateValues['template_form_goodnews'] = '<span id="' . $this->getObjectName() . '_form_goodnews"><span class="goodnews boxednews fullnews centerednews">' . $content . '</span></span>';
 
-		/* 				$content = $this->getViewContent();
-						return $content;
-		 */			}
-				}
-		//		self::v( $template );
-				//	Add the Ayoola_Application Global
-				$this->_objectTemplateValues = array_merge( Ayoola_Application::$GLOBAL ? : array(), $this->_objectTemplateValues );
-	
-				//	allows me to add pagination on post listing with predefined suffix
-				$template = $this->getParameter( 'markup_template_prepend' ) . $template;
-				$template = $template . $this->getParameter( 'markup_template_append' );
-		//		self::v( $template );  
-		// 		self::v( $this->_objectTemplateValues );  
-				$template = Ayoola_Abstract_Playable::replacePlaceholders( $template, $this->_objectTemplateValues + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
-			//	self::v( $this->getParameter() );   
+						}
+					}
+				
+			//		self::v( $template );
+					//	Add the Ayoola_Application Global
+					$this->_objectTemplateValues = array_merge( Ayoola_Application::$GLOBAL ? : array(), $this->_objectTemplateValues );
+		
+					//	allows me to add pagination on post listing with predefined suffix
+					$template = $this->getParameter( 'markup_template_prepend' ) . $template;
+					$template = $template . $this->getParameter( 'markup_template_append' );
+			//		self::v( $template );  
+			// 		self::v( $this->_objectTemplateValues );  
+					$template = Ayoola_Abstract_Playable::replacePlaceholders( $template, $this->_objectTemplateValues + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+				//	self::v( $this->getParameter() );  
+					$html = $template; 
+				}   
+				if( $this->getParameter( 'wrapper_name' ) )       
+				{
+			//		var_export( $this->getParameter( 'wrapper_name' ) );
+					$html = Ayoola_Object_Wrapper_Abstract::wrapContent( $html, $this->getParameter( 'wrapper_name' ) );
+				}   
 				if( $this->getParameter( 'object_style' ) || $this->getParameter( 'object_class' ) )       
 				{
-					$template = '<div class="'. $this->getParameter( 'object_class' ) .'" style="'. $this->getParameter( 'object_style' ) .'">' . $template . '</div>';
+			//		var_export( $this->getParameter() );
+					$html = '<div class="'. $this->getParameter( 'object_class' ) .'" style="'. $this->getParameter( 'object_style' ) .'">' . $html . '</div>';
 					//	self::v( $template );   
-				}   
-				return $template;
+				}
+				return $html;
 			break;  
 			default:
 				

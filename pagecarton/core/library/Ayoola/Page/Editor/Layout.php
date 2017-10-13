@@ -745,7 +745,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						$sectionContent['template'] .= "
 							if( Ayoola_Page::hasPriviledge( {$accessLevelStr}, array( 'strict' => true ) ) && ! empty( \${$objectName} ) && is_object( \${$objectName} ) )
 							{
-								echo Ayoola_Object_Wrapper_Abstract::wrap( \${$objectName}->view(), '{$parametersArray['wrapper_name']}' );
+								echo \${$objectName}->view();
 							}
 							";
 					}

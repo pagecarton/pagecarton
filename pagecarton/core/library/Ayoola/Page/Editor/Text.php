@@ -75,6 +75,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$parameters = array( 'markup_template' => $content, 'markup_template_namespace' => 'x1234', 'editable' => $this->getParameter( 'markup_template_object_name' ) ) + $this->getParameter();
 			$class = new Ayoola_Object_Embed( $parameters );
 			$content = $class->view();
+			$this->clearParametersThatMayBeDuplicated();
 			$content .= '<div style="clear:both;"></div>';  
 			$content .= '<div style="clear:both;"></div>';  
 		//	$content = Ayoola_Object_Embed::viewInLine( $parameters );
@@ -105,6 +106,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		
 		$this->setParameter( array( 'editable' => $content ) );
+		$html = $this->getParameter( 'editable' ) . $this->getParameter( 'raw_html' );
+	//	$this->
+		$this->_parameter['no_view_content_wrap'] = true;
+		$this->setViewContent( $html );
+
 	//	var_export( $this->_parameter );
      //   return $content . $this->getParameter( 'raw_html' );
     } 
@@ -332,25 +338,9 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * @param 
      * @return 
      */
-    public function view()
+/*    public function view()
     {
-		//	codes first because it wont be there if they didnt opt to enter codes
-/* 		$content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
-		if( $this->getParameter( 'markup_template_object_name' ) )
-		{
-			$parameters = array( 'markup_template' => $content, 'markup_template_namespace' => 'x1234' . time(), 'editable' => $this->getParameter( 'markup_template_object_name' ) ) + $this->getParameter();
-			$class = new Ayoola_Object_Embed( $parameters );
-			$content = $class->view();
-			$content .= '<div style="clear:both;"></div>';  
-			$content .= '<div style="clear:both;"></div>';  
-		//	$content = Ayoola_Object_Embed::viewInLine( $parameters );
-		//	var_export( $parameters );
-		//	var_export( $content );
-		}
- */		
-	//	var_export( $this->_parameter );
-	
         return $this->getParameter( 'editable' ) . $this->getParameter( 'raw_html' );  
     } 
-	// END OF CLASS
+*/	// END OF CLASS
 }

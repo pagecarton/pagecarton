@@ -158,15 +158,17 @@ class Application_Personalization extends Ayoola_Abstract_Table
 		{ 
 			//	Always Log out to allow login again
 			require_once 'Ayoola/Access.php'; 
-			$domainDir = Application_Domain_Abstract::getSubDomainDirectory( Ayoola_Page::getDefaultDomain() );
+	//		$domainDir = Application_Domain_Abstract::getSubDomainDirectory( Ayoola_Page::getDefaultDomain() );
 	//		if( @$values['create_personal_path'] )
-			if( ! is_dir( $domainDir ) && Ayoola_Application::getDomainSettings( APPLICATION_PATH ) == APPLICATION_PATH ) 
+	//		var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );
+//			var_export( $domainDir );
+	//		if( ! is_dir( $domainDir ) && Ayoola_Application::getDomainSettings( APPLICATION_PATH ) == APPLICATION_PATH ) 
 			{
 								
-				@Ayoola_Doc::createDirectory( $domainDir );
+	//			@Ayoola_Doc::createDirectory( $domainDir );
 
 				//	Reset domain to reflect created dir
-				Ayoola_Application::setDomainSettings( true );
+	//			Ayoola_Application::setDomainSettings( true );
 								
 				
 			}
@@ -212,16 +214,6 @@ class Application_Personalization extends Ayoola_Abstract_Table
 			{
 				@Ayoola_Doc::deleteDirectoryPlusContent( CACHE_DIR );
 			}
-
-			if( is_file( Ayoola_Application::$installer ) )
-			{ 
-				//	SELF DESTRUCT THE INSTALLER
-				if( ! unlink( Ayoola_Application::$installer ) )
-				{
-					$this->setViewContent( '<h1 class="badnews">ERROR: Please re-install or manually remove the installer.</h1>', true ); 
-					return false; 
-				}
-			}
 			$this->setViewContent( '<h1 class="goodnews">PageCarton Personalization Completed</h1>', true );   
 			$this->setViewContent( '<p>Welcome to endless possibilities! You have successfully completed the installation and personalization sequence of PageCarton. </p>' ); 
 			$this->setViewContent( '<p class="pc-notify-info">Note the following pages and their links:</p>' ); 
@@ -233,6 +225,16 @@ class Application_Personalization extends Ayoola_Abstract_Table
 					<li><a target="_blank" href="http://pagecarton.org/docs">PageCarton Documentation</a></li>
 				</ul>' 
 			); 
+
+			if( is_file( Ayoola_Application::$installer ) )
+			{ 
+				//	SELF DESTRUCT THE INSTALLER
+				if( ! unlink( Ayoola_Application::$installer ) )
+				{
+					$this->setViewContent( '<p class="badnews">ERROR: Please re-install or manually remove the installer.</p>' ); 
+				//	return false; 
+				}
+			}
 	//	exit();
 			
 		}

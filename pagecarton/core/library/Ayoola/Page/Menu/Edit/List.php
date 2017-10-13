@@ -57,6 +57,7 @@ class Ayoola_Page_Menu_Edit_List extends Ayoola_Page_Menu_Edit_Abstract
 		$list->setListOptions( 
 								array( 
 										'Creator' => '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Creator/?menu_id=' . $menuInfo['menu_id'] . '\', \'page_refresh\' );" title=""> Add link option </a>',
+										'Menu' => '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Editor/?menu_id=' . $menuInfo['menu_id'] . '\', \'\' );" title=""> Menu Details </a>',
 									) 
 							);
 		$list->createList(  

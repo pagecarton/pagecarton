@@ -78,6 +78,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			unset( $this->_parameter['view'] );
 
 			//	don't run when page editor is invoked.
+	//		var_export( $this->getParameter() );
 
 			//	var_Export( $classes );
 			$this->initiated = false; //	compatibility
@@ -103,6 +104,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 						$this->play( $class, $this->getParameter() );
 					//	$this->play( $class ); 
 					}
+					$this->clearParametersThatMayBeDuplicated();
 				break;
 			}
 		}

@@ -227,7 +227,6 @@ class Ayoola_Application
 		{		
 		//	var_export( $data );
  			//	Allows the sub-domains to have an include path too.
-		//	set_include_path( $data['domain_settings'][APPLICATION_PATH] . PS . $data['domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );    
 			if( @$data['parent_domain_settings'] )
 			{
 				set_include_path( $data['parent_domain_settings'][APPLICATION_PATH] . PS . $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );
@@ -243,7 +242,10 @@ class Ayoola_Application
 		//	var_export( $data );
 			return true;      
 		}  
-	//	var_export( $_SERVER );
+	//	echo get_called_class();
+//		var_export( debug_print_backtrace() );
+	//	var_export( $forceReset );
+//		var_export( $data );
 
 		//	Search the domain name in the domain table
 		do
@@ -372,8 +374,24 @@ class Ayoola_Application
 					$data['domain_settings'][APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'application';
 					$data['domain_settings'][EXTENSIONS_PATH] = @$primaryDomainInfo[EXTENSIONS_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'extensions';
 				}
-				elseif( is_dir( $domainDir ) )
+				else
 				{
+					$configurationFile = $domainDir . DS .  'pagecarton.json';
+					if( file_exists( $configurationFile ) )
+					{
+						if( $conf = file_get_contents( $configurationFile ) )
+						{
+							if( $conf = json_decode( $conf, true ) )
+							{
+								if( $conf['ignore_this_directory'] )
+								{
+									break;
+								}
+							}
+						}
+
+						//	exit( $domainDir);
+					}
 				//	For backward compatibility, the directory must be "consciously" set
 				//	var_export( __LINE__ );
 					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = $domainDir;  

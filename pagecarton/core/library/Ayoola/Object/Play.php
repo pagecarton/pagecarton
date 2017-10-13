@@ -33,7 +33,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
      *
      * @param void
      */
-    public function __construct()
+    public function init()
     {
 		//	Make the application know we are using class player
 		$_SERVER['HTTP_APPLICATION_MODE'] = $this->getObjectName();
@@ -137,10 +137,14 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 				return true;
 			}
 	//		var_export( $identifier );
+	//		var_export( $this->getParameter() );
 	//		var_export( $e->getMessage() );
-			throw new Ayoola_Exception( 'OBJECT TO BE PLAYED NOT FOUND' );
- 			$this->setViewContent( '<h4>ERROR:</h4>', true );
-			$this->setViewContent( '<p>There is an error on the page. An administrator has been notified about this error.</p>' );
+	//		throw new Ayoola_Exception( 'OBJECT TO BE PLAYED NOT FOUND' );
+ 	//		$this->setViewContent( '<h4>ERROR:</h4>', true );
+	 		if( ! $this->getParameter( 'silent_when_object_not_found' ) )
+			{
+				$this->setViewContent( '<p class="badnews">INVALID WIDGET MODULE EMBEDDED</p>' );
+			}
 			
  	//		header( 'Location: /404/' ); 
 	//		exit();

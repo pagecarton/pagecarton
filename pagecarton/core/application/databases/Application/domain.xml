@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="domain" creation_time="1506175642" table_version="0.09" module_version="1.00" table_class="Application_Domain" creation_ip="2733891431">
-  <RECORDS autoId="2">
-    <TABLE_ROW ROW_ID="1">
-      <TABLE_FIELD FIELD_KEY="domain_name"><![CDATA[updates.pagecarton.org]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="domain_default"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="sub_domain"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enforced_destination"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="domain_options"><![CDATA[null]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="application_dir"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="domain_type"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_destination"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_code"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="domain_id"><![CDATA[0-0-1]]></TABLE_FIELD>
-    </TABLE_ROW>
-  </RECORDS>
+  <RECORDS autoId="2"/>
   <TABLE_SETTINGS>
     <DATA_TYPES domain_name="INPUTTEXT, UNIQUE" domain_default="INPUTTEXT, UNIQUE" sub_domain="INPUTTEXT" enforced_destination="INPUTTEXT" domain_options="JSON" application_dir="INPUTTEXT" domain_type="INPUTTEXT" redirect_destination="INPUTTEXT" redirect_code="INPUTTEXT" domain_id="INPUTTEXT"/>
     <FOREIGN_KEYS/>

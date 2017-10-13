@@ -126,6 +126,7 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 //		var_export( ! is_dir( $newPath )  );  
 //		var_export( $newPath );  
 //		var_export( $oldPath );  
+		$pathToUse = $newPath;
 		if( defined( 'PC_BASE' ) && is_dir( $oldPath ) && ! is_dir( $newPath ) )
 		{
 		//	var_export( $newPath );
@@ -134,11 +135,11 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 		//	mkdir( $newPath, 0777, true );
 			Ayoola_Doc::recursiveCopy( $oldPath, $newPath );
 			rename( $oldPath, $oldPath . '.old' );
-			$pathToUse = $newPath;
+	//		$pathToUse = $newPath;
 		}
-		elseif( is_dir( $newPath ) )
+	//	elseif( is_dir( $newPath ) )
 		{
-			$pathToUse = $newPath;
+	//		$pathToUse = $newPath;
 		}
 		return $pathToUse;
 	}

@@ -38,7 +38,7 @@ class Ayoola_Page_Menu_Edit_Editor extends Ayoola_Page_Menu_Edit_Abstract
 		{ 
 			$this->setIdentifier(); 
 			if( ! $identifierData = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit Option', 'Edit ' . $identifierData['option_name'], $identifierData );
+			$this->createForm( 'Save', 'Edit ' . $identifierData['option_name'], $identifierData );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
 			

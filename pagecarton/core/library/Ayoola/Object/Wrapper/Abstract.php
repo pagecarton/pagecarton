@@ -62,6 +62,36 @@ abstract class Ayoola_Object_Wrapper_Abstract extends Ayoola_Abstract_Table
      * @var string
      */
 	protected $_idColumn = 'wrapper_name';
+	
+    /**
+     * 
+     * 
+     * @var Ayoola_Object_Table_Wrapper
+     */
+	protected static $_wrapperTable;
+		
+    /**
+     * 
+     *
+     */
+	public static function wrapContent( $textToWrap, $wrapNameID )
+	{
+		if( $wrapNameID && trim( $textToWrap ) )  
+		{
+			//	var_export( $textToWrap );
+			if( is_null( self::$_wrapperTable ) )
+			{
+				self::$_wrapperTable = new Ayoola_Object_Table_Wrapper;
+			}
+			if( $data = self::$_wrapperTable->selectOne( null, array( 'wrapper_name' => $wrapNameID ) ) )
+			{
+				$textToWrap = $data['wrapper_prefix'] . $textToWrap . $data['wrapper_suffix'];
+			}
+		} 
+	//	var_export( $data );
+		   
+		return $textToWrap;
+	}
 		
     /**
      * 
@@ -69,17 +99,7 @@ abstract class Ayoola_Object_Wrapper_Abstract extends Ayoola_Abstract_Table
      */
 	public static function wrap( $textToWrap, $wrapNameID )
 	{
-		if( $wrapNameID && trim( $textToWrap ) )  
-		{
-		//	var_export( $textToWrap );
-			$table = new Ayoola_Object_Table_Wrapper;
-			if( $data = $table->selectOne( null, array( 'wrapper_name' => $wrapNameID ) ) )
-			{
-				$textToWrap = $data['wrapper_prefix'] . $textToWrap . $data['wrapper_suffix'];
-			}
-		} 
-	//	var_export( $data );
-		   
+		//	Function is now deprecated. Fix By sanitizing all pages.
 		return $textToWrap;
 	}
 	
