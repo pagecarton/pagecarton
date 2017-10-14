@@ -44,7 +44,20 @@ class Ayoola_Object_Preview extends PageCarton_Widget
             //  Code that runs the widget goes here...
      //       header( 'Content-Type: text/xml' );
             //  Output demo content to screen
-            $classHtml = Ayoola_Abstract_Viewable::viewObject( $_REQUEST['class_name'], $_REQUEST );
+            $class = $_REQUEST['class_name'];
+            if( ! Ayoola_Loader::loadClass( $class ) )
+            {
+                exit;
+            }
+            $classHtml = null;
+    //      if( ! empty( $_REQUEST['rebuild_widget'] ) && method_exists( $class, 'getHTMLForLayoutEditor' ) )
+            {
+          //      var_export( $_REQUEST );  
+            //    $classHtml .= $class::getHTMLForLayoutEditor( $_REQUEST );
+            }
+          //  var_export( $_POST );
+			$parameters = Ayoola_Page_Editor_Layout::prepareParameters( $_POST );
+            $classHtml .= Ayoola_Abstract_Viewable::viewObject( $class, $parameters );
 
             $html = null;
             switch( $_REQUEST['content_type'] )
@@ -53,16 +66,11 @@ class Ayoola_Object_Preview extends PageCarton_Widget
                     $html .= Application_Javascript::getCodes( true );
                 break;
                 default:
-		            Application_Javascript::addFile( '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '/?class_name=' . $_REQUEST['class_name'] . '&v=' . filemtime( __FILE__ ) . '&content_type=js&' . http_build_query( $_POST ) );
+		            Application_Javascript::addFile( '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '/?class_name=' . $_REQUEST['class_name'] . '&v=' . filemtime( __FILE__ ) . '&content_type=js&' . http_build_query( $parameters ) );
                     $html .= $classHtml;
                     $html .= Application_Style::getAll(); 
                     $html .= '<!--PC-HTML-DEMARCATION-->';
-
-/*                    $html .= '
-                    <script type="text/javascript"> 
-                            alert( Math.random() );   
-                    </script>'; 
-*/                    $html .= Application_Javascript::getFiles(); 
+                    $html .= Application_Javascript::getFiles(); 
                     $doc = new Ayoola_Xml();
                     $fragment = $doc->createDocumentFragment();
                     @$doc->loadHTML( '<?xml encoding="utf-8" ?>' . $html );

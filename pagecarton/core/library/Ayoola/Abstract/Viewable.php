@@ -613,16 +613,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     {
 		
 		$html = null;
+		$object['object_name'] = $object['object_name'] ? : $object['class_name'];
 		$object['object_unique_id'] = @$object['object_unique_id'] ? : ( md5( $object['object_name'] ) . rand( 100, 1000 ) );
 		$advancedName = 'advanced_parameters_' . $object['object_unique_id'] . '';
-		$html .= "<div name='over_all_object_container' class='DragBox' id='" . $object['object_unique_id'] . "' title='Move this object by dragging it around - " . $object['view_parameters'] . "' data-object_name='{$object['object_name']}' >";
-		
+		$html .= "<div data-class_name='{$object['class_name']}' name='over_all_object_container' class='DragBox' id='" . $object['object_unique_id'] . "' title='Move this object by dragging it around - " . $object['view_parameters'] . "' data-object_name='{$object['object_name']}' >";
+		$title = ( ( $object['view_parameters'] ? : self::getObjectTitle() ) ? : $object['object_name'] );
 		//	title bar
-		$html .= '<div draggable=\'true\' ondragstart=\'ayoola.dragNDrop.dragMyParent(event);\' style="cursor: move; cursor: -moz-grab;cursor: -webkit-grab;" title="' . $object['view_parameters'] . '" class="title_bar pc_page_object_specific_item" data-parameter_name="parent">'; 
+		$html .= '<div draggable=\'true\' ondragstart=\'ayoola.dragNDrop.dragMyParent(event);\' style="cursor: move; cursor: -moz-grab;cursor: -webkit-grab;" title="' . $title . '" class="title_bar pc_page_object_specific_item" data-parameter_name="parent">'; 
 		
 		
 		//	Delete button
-		$html .= '<span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode );"> x </span>';
+		$html .= '<span class="title_button close_button"  name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode );"> x </span>';
 		
 		//	Maximize
 		$html .= '<a class="title_button" name="' . $advancedName . '" href="javascript:;" title="Click to show or hide advanced settings" onclick="  var b = this.parentNode.parentNode.getElementsByClassName( \'advanced_options\' );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == \'none\' ) ? \'\' : \'none\'; this.style.display = \'\'; } "> &square; </a>'; 
@@ -631,16 +632,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '<a class="title_button" name="' . $advancedName . '_interior" href="javascript:;" title="Minimize or open the body of this object" onclick="  var b = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == \'none\' ) ? \'\' : \'none\'; this.style.display = \'\'; } "> _ </a>'; 
 		
 		//	title
-		$html .= '<span style="">' . $object['view_parameters'] . '</span>';
+		$html .= '<span >' . $title . '</span>';
 		$html .= '<div style="clear:both;"></div>';		
 		
 		$html .= '</div>';	//	 title bar  
 		
 		//	advanced options
-		$html .= '<div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em; display:none;" title="" class="status_bar advanced_options" data-parameter_name="parent">'; 
-		$html .= '<div style="clear:both;" name="' . $advancedName . '" class=""><label>Inject some parameters to this object...</label></div>';		
+		$html .= '<div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em; display:none;" title="" class="status_bar advanced_options pc_page_object_specific_item" data-parameter_name="parent">'; 
+//		$html .= '<div style="clear:both;" name="' . $advancedName . '" class=""><label>Inject some parameters to this object...</label></div>';		
 
-			$form = new Ayoola_Form( array( 'name' => $advancedName, 'data-parameter_name' => 'advanced_parameters', 'style' => '' ) );
+			$form = new Ayoola_Form( array( 'name' => $advancedName, 'data-parameter_name' => 'advanced_parameters', 'class' => '' ) );
 			$form->setParameter( array( 'no_required_fieldset' => true ) );
 			$i = 0;
 		//	$object['advanced_parameter_name'] = html_entity_decode( @$object['advanced_parameter_name'] );
@@ -695,8 +696,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				require_once 'Ayoola/Filter/SelectListArray.php';
 				$filter = new Ayoola_Filter_SelectListArray( 'auth_level', 'auth_name' );
 				$authLevelOptions = $filter->filter( $authLevelOptions );
-				$authLevelOptions[0] = 'Signed out users';  
-				$authLevelOptions[1] = 'Signed in users';  
+				$authLevelOptions[0] = 'Users not logged in only';  
+				$authLevelOptions[1] = 'Signed in users only';  
 				$authLevelOptions[98] = 'Page Owners'; 
 				self::$_authLevelOptions =  $authLevelOptions;
 			}
@@ -704,9 +705,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$fieldset = new Ayoola_Form_Element; 
 			$fieldset->hashElementName = false;
 		//	$fieldset->addLegend( 'Select user groups that would be able to view this object...' );
-			$fieldset->addElement( array( 'name' => 'xx', 'type' => 'Html' ), array( 'html' => '<label>Who can view this object...</label>' ) );
+			$fieldset->addElement( array( 'name' => 'xx', 'type' => 'Html' ), array( 'html' => '<label>Widget Privacy</label>' ) );
 			$fieldset->addElement( array( 'name' => 'object_access_level', 'id' => $object['object_unique_id'] . '_object_access_level', 'label' => ' ', 'placeholder' => '', 'type' => 'Checkbox', 'value' => @$advanceParameters['object_access_level'] ), self::$_authLevelOptions );
-		
+/*		
 			$jsChangeWrapper = '
 				var a = ayoola.div.getParent( { element: this, name: \'over_all_object_container\', counter: 10 } );
 			//	alert( a );
@@ -736,7 +737,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	alert( d );
 			
 				';
-			if( ! self::$_wrapperOptions )
+*/			if( ! self::$_wrapperOptions )
 			{
 				$class = new Ayoola_Object_Table_Wrapper;
 				self::$_wrapperOptions = $class->select();
@@ -755,7 +756,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$currentWrapper = $eachWrapper;
 					$selected = 'selected=selected';
 				}
-				$options .= '<option ' . $selected . ' data-wrapper_prefix="' . htmlentities( $eachWrapper['wrapper_prefix'] ). '" data-wrapper_suffix="' .  htmlentities( $eachWrapper['wrapper_suffix'] ) . '" value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
+				$options .= '<option ' . $selected . ' value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
+//				$options .= '<option ' . $selected . ' data-wrapper_prefix="' . htmlentities( $eachWrapper['wrapper_prefix'] ). '" data-wrapper_suffix="' .  htmlentities( $eachWrapper['wrapper_suffix'] ) . '" value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
 			}
 			$options .= '</select>';
 			$fieldset->addElement( array( 'name' => 'wrapper_label', 'type' => 'Html' ), array( 'html' => '<p><label>Wrapper</label>' . $options . '</p>', 'fields' => 'wrapper_name' ) );
@@ -774,7 +776,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		//	Determine if its opening or closing inside the "object".
 		$openOrNot = static::$openViewParametersByDefault ? '' : 'display:none;';
 		$html .= '<div class="object_exterior" data-parameter_name="parent">'; //	exterior 
-		$html .= @$currentWrapper['wrapper_prefix']; //	exterior 
+	//	$html .= @$currentWrapper['wrapper_prefix']; //	exterior 
 		$html .= '<div title="' . $object['view_parameters'] . '" style="' . $openOrNot . ' cursor: default;" name="' . $advancedName . '_interior" class="object_interior" data-parameter_name="parent">'; //	interior parent
 
 		//	just for padding.
@@ -800,16 +802,25 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//		var_export( $object );
 			$classToView = $object['class_name'] ? : $object['object_name'];
 	//		var_export( $classToView );
-			static::$editorViewDefaultToPreviewMode && $innerSettingsContent ? $html .= '<div  data-parameter_name="parent" class="pc_page_object_specific_item pc_page_object_inner_settings_area" style="">' . $innerSettingsContent . ' <button onclick="
+			static::$editorViewDefaultToPreviewMode && $innerSettingsContent ? $html .= '<div  data-parameter_name="parent" class="pc_page_object_specific_item pc_page_object_inner_settings_area" >' . $innerSettingsContent 
+/*			
+			. 
+			
+			' <button onclick="
 			var a = ayoola.div.getParentWithClass( this, \'DragBox\' );
 			var b = ayoola.div.getParameterOptions( a );
 			var c = a.getElementsByClassName( \'pc_page_object_inner_preview_area\' )[0];
-			var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?class_name=' . $classToView . '\', data: b.content, container: c } );
-			">Preview!</button></div>' : null; 
+			var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?pc_show_error=1&rebuild_widget=1&class_name=' . $classToView . '\', data: b.content, container: c } );
+			">Preview!</button>'
+*/			.
+			'</div>'
+			
+			 : null;   
 			
 			//	/object/name/Ayoola_Object_Preview/?class_name=' . $classToView . '
-			$html .= '<div  data-parameter_name="parent" class="pc_page_object_inner_preview_area" style="">' . Ayoola_Abstract_Viewable::viewObject( $classToView, $object ) . '</div>';
-		//	var_export( $object );
+			$parameters = Ayoola_Page_Editor_Layout::prepareParameters( $object );			
+			$html .= '<div data-parameter_name="parent" class="pc_page_object_inner_preview_area" >' . Ayoola_Abstract_Viewable::viewObject( $classToView, $parameters + array( 'rebuild_widget' => 1 ) ) . '</div>';
+	//		var_export( $object );
 		}
 		elseif( $innerSettingsContent )
 		{
@@ -833,7 +844,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '<div class="pc_page_object_specific_item" style="padding-top:0.5em; padding-bottom:0.5em;"></div>'; 
 		
 		$html .= '</div>';	//	 interior
-		$html .= @$currentWrapper['wrapper_suffix'];	//	 wrapper
+	//	$html .= @$currentWrapper['wrapper_suffix'];	//	 wrapper
 		$html .= '</div>';	//	 exterior
 		$html .= "<textarea onclick='this.focus();this.select()' style='display:none; width:100%;' class='import_export_content' title='Copy contents and paste where you want to export.'> </textarea>";		
 		
@@ -844,7 +855,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '<a class="title_button" title="Seek help on how to use this page editor" name="" href="http://pagecarton.org/docs" onclick="this.target=\'_new\'">?</a>'; 
 
 		//	Export
-		$html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var b = this.parentNode.parentNode.getElementsByClassName( \'import_export_content\' ); b = b[0];  if( b.style.display == \'none\' ){  b.value = this.parentNode.parentNode.outerHTML; b.style.display = \'block\';  var c = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' )[0]; c.style.display = \'none\'; this.innerHTML = \'&#8635; Import\' } else {  b.style.display = \'none\'; b.value ? ( this.parentNode.parentNode.outerHTML = b.value ) : null; this.innerHTML = \'&#8635;\'; } ">&#8635; Export</a>'; 
+		$html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var b = this.parentNode.parentNode.getElementsByClassName( \'import_export_content\' ); b = b[0];  if( b.style.display == \'none\' ){  b.value = this.parentNode.parentNode.outerHTML; b.style.display = \'block\'; b.focuc();  var c = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' )[0]; c.style.display = \'none\'; this.innerHTML = \'&#8635; Import\' } else {  b.style.display = \'none\'; b.value ? ( this.parentNode.parentNode.outerHTML = b.value ) : null; this.innerHTML = \'&#8635;\'; } pc_makeInnerSettingsAutoRefresh(); ">&#8635;</a>'; 
 //		$html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var a = window.prompt( \'Copy to clipboard: Ctrl+C, Enter\', this.parentNode.parentNode.outerHTML ); if( a ){ this.parentNode.parentNode.outerHTML = a; }">&#8635;</a>'; 
 				
 		$html .= method_exists( $object['class_name'], 'getStatusBarLinks' ) ? static::getStatusBarLinks( $object ) : null; 
@@ -1334,9 +1345,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				//	self::v( $this->getParameter() );  
 					$html = $template; 
 				}   
+			//		var_export( $this->getParameter( 'wrapper_name' ) );
 				if( $this->getParameter( 'wrapper_name' ) )       
 				{
-			//		var_export( $this->getParameter( 'wrapper_name' ) );
 					$html = Ayoola_Object_Wrapper_Abstract::wrapContent( $html, $this->getParameter( 'wrapper_name' ) );
 				}   
 				if( $this->getParameter( 'object_style' ) || $this->getParameter( 'object_class' ) )       

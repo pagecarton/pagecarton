@@ -25,7 +25,7 @@ require_once 'Application/Article/Exception.php';
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-abstract class Application_Article_Abstract extends Application_Blog_Abstract
+abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 {
 	
     /**
@@ -107,17 +107,21 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 	public static function isAllowedToEdit( array $data )   
 	{
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
+		$articleSettings['allowed_editors'][] = 98;
+//		$whoCan = array( 98 ) + ( $articleSettings['allowed_editors'] ? : array() );
+	//	var_export( $articleSettings['allowed_editors'] ); 
+	//	var_export( self::hasPriviledge( $articleSettings['allowed_editors'] )  ); 
 		if( 
 			self::isOwner( @$data['user_id'] ) 
 			|| self::hasPriviledge( $articleSettings['allowed_editors'] ) 
-			|| Ayoola_Application::getUserInfo( 'username' ) !== $data['username']   
+			|| Ayoola_Application::getUserInfo( 'username' ) === $data['username']   
 		)
 		{ 
 		//	var_export( Ayoola_Application::getUserInfo( 'username' ) );
 	//		var_export( Ayoola_Application::$GLOBAL['username'] );
-			return false; 
+			return true; 
 		}
-		return true;
+		return false;
 	}
 	
     /**
@@ -1120,8 +1124,10 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		' : null;
 		$html .= '<span style="margin-right:1em;">' . self::filterTime( $data ) . '</span>';
 		$html .= '<span style="margin-right:1em;"> by ' . $data['username'] . '</span>';
-		$html .= $data['category_text'] ? '<span style="margin-right:1em;"> in ' . $data['category_text'] . ' </span>' : null;
-		$html .= self::hasPriviledge( array( 99, 98 ) ) && $realPost ? '  
+		$html .= $data['category_text'] ? '<span style="margin-right:1em;"> in ' . $data['category_text'] . ' </span>' : null;  
+	//	var_export( self::isAllowedToEdit( $data ) ); 
+
+		$html .= self::isAllowedToEdit( $data ) && $realPost ? '  
 		<a  style="color:inherit; margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?article_url=' . $data['article_url'] . '&\', \'page_refresh\' );" href="javascript:">edit</a> 
 		<a  style="color:inherit; margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?article_url=' . $data['article_url'] . '&\', \'page_refresh\' );" href="javascript:"> delete </a>
 		' : null;
@@ -1285,7 +1291,10 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 //		var_export( $values['true_post_type'] );
 		
 	//	var_export( $options[key( $options )] );
-	//	var_export( $articleTypeWeUsing );
+//		var_export( $articleTypeWeUsing );
+//		var_export( $values['post_type'] );
+		$values['post_type'] = $values['post_type'] ? : $articleTypeWeUsing;
+		$values['true_post_type'] = $values['true_post_type'] ? : $articleTypeWeUsing;
 
 		$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post Type', 'onchange'=> 'window.location.search += \'&article_type=\' + this.value + \'\';', 'type' => 'Select', 'value' => $articleTypeWeUsing ), $options );
 		$fieldset->addElement( array( 'name' => 'true_post_type', 'type' => 'Hidden', 'value' => @$values['true_post_type'] ? : @$values['article_type'] ) );
@@ -2054,6 +2063,7 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 									autoGrow_maxHeight : 400,
 								}
 							);
+							CKEDITOR.config.codeSnippet_theme = "pojoaque";
 						}
 						var f = function( e )
 						{
@@ -2268,7 +2278,7 @@ abstract class Application_Article_Abstract extends Application_Blog_Abstract
 		$fieldset->addRequirement( 'user_restrictions', array( 'UserRestrictions' => null ) );
 	
 
-		$fieldset->addFilters( array( 'trim' => null ) );
+		$fieldset->addFilters( array( 'trim' => null, 'FormatArticle' => null ) );
 		$form->addFieldset( $fieldset ); 
 	//	self::v( $fieldsToEdit );
 		$form->setParameter( array( 'element_whitelist' => $fieldsToEdit ) );

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="template" creation_time="1506956251" table_version="0.05" module_version="1.00" table_class="Application_Article_Template" creation_ip="2130706433">
-  <RECORDS autoId="4">
+  <RECORDS autoId="5">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[ProductsandServicesList2]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
@@ -95,6 +95,22 @@
       <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2014\/12\/18\/Products_for_sale_css.css&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_code"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Plain List of Titles]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[PlainListofTitles]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li&gt;&lt;a href=&quot;{{{article_url}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/li&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;padding&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;ul&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_suffix"><![CDATA[&lt;/ul&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_group_no"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="javascript_code"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="css_code"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[0-0-4]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

@@ -249,7 +249,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 			self::saveArticle( $values );
 			
 			//	Set Hash Tags
-			Application_HashTag_Abstract::set( @$values['article_tags'], 'articles', $values['article_url'] );
+		//	Application_HashTag_Abstract::set( @$values['article_tags'], 'articles', $values['article_url'] );
 			
 //			return false;
 		//	posts var_export( $values['article_filename'] );

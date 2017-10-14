@@ -1045,7 +1045,7 @@ class Ayoola_Application
 			//	var_export( $module );
 				
 				//	Look in the links table for SEO friendly and short URLS
-				$table = new Application_Link();
+/*				$table = new Application_Link();
 				$linkName = trim( $uri, '/' );
 			//	var_export( $table->select() );
 				if( $link = $table->selectOne( null, array( 'link_name' => $linkName ) ) )
@@ -1064,7 +1064,7 @@ class Ayoola_Application
 					self::view( $uri );
 					break; 
 				}
-			//	exit( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
+*/			//	exit( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 				self::$mode = '404';
 				self::view();	//	404 NOT FOUND
 			//	var_export( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );

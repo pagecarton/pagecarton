@@ -71,6 +71,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		{			
 			//	var_Export( $class );
 			$classes = $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' );
+			$this->_parameter['no_view_content_wrap'] = true;
 
 			//	One way or the other, leaving this causes a situation 
 			//	where classes are played twice
@@ -171,7 +172,17 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 	//	unset( $this->_parameters['markup_template_no_data'] );
 		unset( $this->_parameter['markup_template_no_data'] );
 //			self::v( $parameters );
-		$html = $class->view();
+		$html = null;
+		if( ( ! empty( $_REQUEST['rebuild_widget'] ) || ! empty( $parameters['rebuild_widget'] ) )  && method_exists( $class, 'getHTMLForLayoutEditor' ) )
+		{
+		//	var_export( $_REQUEST );  
+		//	var_export( $parameters );  
+			if( $classHtml = $class::getHTMLForLayoutEditor( $parameters ) )
+			{
+				$html .= '<div data-parameter_name="parent" class="pc_page_object_specific_item pc_page_object_inner_settings_area2" style="">' . $classHtml . '</div>';
+			}
+		}
+		$html .= $class->view();
 		
 	//	self::v( $this->getParameter( 'markup_template' ) );
 	//	self::v( $html );
@@ -225,7 +236,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		$html = null;
 	//	@$object['option'] = $object['option']  ? $object['option'] : $object['editable'];
 		
-		if( is_null( self::$_widgets ) )
+		if( is_null( self::$_widgets ) ) 
 		{
 			$options = array();
 			$files = array();
@@ -272,6 +283,10 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 					$className = $filter->filter( $file );
 					if( self::isWidget( $className ) )
 					{
+						if( stripos( $className, 'Ayoola' ) === 0 )
+						{
+							continue;
+						}
 						$files[$className] = $className;
 					}
 				}

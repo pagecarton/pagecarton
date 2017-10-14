@@ -709,17 +709,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				//	Inject the parameters.
 				
 					//	Calculate advanced parameters at this level so that access levels might work
-					if( ! empty( $parameters['advanced_parameters'] ) )
-					{ 
-						parse_str( $parameters['advanced_parameters'], $advanceParameters );
-						@$injectedValues = array_combine( $advanceParameters['advanced_parameter_name'], @$advanceParameters['advanced_parameter_value'] ) ? : array();
-						unset( $advanceParameters['advanced_parameter_name'] );
-						unset( $advanceParameters['advanced_parameter_name'] );
-					//	var_export( $advanceParameters );
-						$parameters += $advanceParameters ? : array();
-						$parameters += $injectedValues;
-						unset( $parameters['advanced_parameters'] );
-					}
+					$parameters = self::prepareParameters( $parameters );
 					$parametersArray = $parameters;
 					$parameters = var_export( $parameters, true );
 				//	$sectionContent['include'] .= "\n\${$objectName}->setParameter( {$parameters} );\n";  
@@ -1004,6 +994,70 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		
 		// Add object from checkbox to selectlist
 		$js = '
+			var pc_makeInnerSettingsAutoRefresh = function()
+			{
+				var loadInner = function( e )
+				{
+					var target = ayoola.events.getTarget( e );
+					var a = ayoola.div.getParentWithClass( target, \'DragBox\' );
+					var b = ayoola.div.getParameterOptions( a );
+					var c = a.getElementsByClassName( \'pc_page_object_inner_preview_area\' )[0];
+					var d = a.getAttribute( "data-class_name" );
+			//		alert( d );  
+					var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?pc_show_error=1&rebuild_widget=1&class_name=\' + d, data: b.content, container: c } );
+					var v = function()
+					{
+						if( ayoola.xmlHttp.isReady( ajax ) )
+						{	
+							pc_makeInnerSettingsAutoRefresh();
+						}		
+					}	
+
+					ayoola.events.add
+					( 
+						ajax, 
+						"readystatechange",
+						v,
+						true
+					);			
+				}
+				var z = document.getElementsByClassName( \'pc_page_object_inner_settings_area\' );
+				for( var y = 0; y < z.length; y++ )
+				{
+					var x = z[y].getElementsByTagName( \'select\' );
+					for( var w = 0; w < x.length; w++ )
+					{
+						ayoola.events.add( x[w], "change", loadInner, true );					
+					}
+				}
+				var z = document.getElementsByClassName( \'pc_page_object_inner_settings_area2\' );
+				for( var y = 0; y < z.length; y++ )
+				{
+					var x = z[y].getElementsByTagName( \'select\' );
+					for( var w = 0; w < x.length; w++ )
+					{
+						ayoola.events.add( x[w], "change", loadInner, true );					
+					}
+				}
+				var z = document.getElementsByClassName( \'DragBox\' );
+				for( var y = 0; y < z.length; y++ )
+				{
+					var x = z[y].getElementsByTagName( \'form\' );
+					for( var w = 0; w < x.length; w++ )
+					{
+						if( x[w].getAttribute( "data-parameter_name" ) != "advanced_parameters" )
+						{
+							continue;
+						}			
+						var r = x[w].elements;			
+						for( var q = 0; q < r.length; q++ )
+						{
+							ayoola.events.add( r[q], "change", loadInner, true );	
+						}				
+					}
+				}
+			}
+		
 		ayoola.events.add
 		(
 			window,
@@ -1016,8 +1070,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 				CreateDragContainer( ' . $portion . ' );
 				CreateDragContainer( "viewable_objects" );
-		//		ayoola.dragNDrop.makeDraggable( "viewable_objects" );
-		//		ayoola.xmlHttp.setAfterStateChangeCallback( ayoola.dragNDrop.init );
+				pc_makeInnerSettingsAutoRefresh();
+				
 			}
 		);
 			window.onbeforeunload = function()
@@ -1128,13 +1182,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					{
 						c = a.cloneNode( true );
 						c.id = "";
-/* 						
-						//	add delete button
-						var deleteButton = ayoola.div.getDelete( c, deleteButton );
-						deleteButton.title = "Delete Widget";
-						deleteButton.innerHTML = " x ";
-						c.appendChild( deleteButton );
- */						b.parentNode.appendChild( c );     
+						b.parentNode.appendChild( c );     
 					}
 				//	target.innerHTML = "Add another widget";
 					ayoola.events.add( target, "click", addANewItemToContainer ); 
@@ -1199,6 +1247,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				//		alert( c );
 						b.parentNode.appendChild( c ); 
 						c.scrollIntoView( {block: "end",  behaviour: "smooth"} );;    
+						pc_makeInnerSettingsAutoRefresh();
 					}
 					target.value = "";
 				} 
@@ -1509,22 +1558,16 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		optionbar.title = "Show or hide widget options";
 		optionbar.onclick = function()
 		{
-			var a = document.getElementsByClassName( "pc_page_object_specific_item" );
-			for( var b = 0; b < a.length; b++ )  
+			var a = document.body;
+			if( ayoola.style.hasClass( a, "pc_page_widgetmode" ) )
 			{
-				switch( a[b].style.display )
-				{
-					case "inline-block":
-					case "block":
-					case "inline":
-						a[b].style.display = "none";
-						this.innerHTML = \'Show Widget Options\';      
-					break;
-					default:
-						a[b].style.display = "block";
-						this.innerHTML = \'Hide Widget Options\';
-					break;
-				}
+				ayoola.style.removeClass( a, "pc_page_widgetmode" );
+				this.innerHTML = \'Widget Options\';      
+			}
+			else
+			{
+				this.innerHTML = \'Hide Widgets\';
+				ayoola.style.addClass( a, "pc_page_widgetmode" ); 
 			}
 		};
 		topBarForButtons.appendChild( optionbar );
@@ -1674,7 +1717,31 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		$html .= "</div>";
 		return $this->_viewableObjects = $html;
     }
-		
+					
+	
+    /**
+     * Merges widget Advanced Parameters with the main parameters
+     *
+     * @param array Parameters
+     * @return 
+     */
+    public static function prepareParameters( $parameters )
+    {
+		//	Calculate advanced parameters at this level so that access levels might work
+		if( ! empty( $parameters['advanced_parameters'] ) )
+		{ 
+			parse_str( $parameters['advanced_parameters'], $advanceParameters );
+			@$injectedValues = array_combine( $advanceParameters['advanced_parameter_name'], @$advanceParameters['advanced_parameter_value'] ) ? : array();
+			unset( $advanceParameters['advanced_parameter_name'] );
+			unset( $advanceParameters['advanced_parameter_name'] );
+		//	var_export( $advanceParameters );
+			$parameters += $advanceParameters ? : array();
+			$parameters += $injectedValues;
+			unset( $parameters['advanced_parameters'] );
+		}
+		return $parameters;
+	}
+
     /**
      * This method saves the layout into the page data file
      *

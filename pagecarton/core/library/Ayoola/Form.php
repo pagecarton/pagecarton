@@ -1226,7 +1226,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      * @param string Value to return if other values are unavailable
      * @return mixed The global value of the element
      */
-	public static function getGlobalValue( $name, $defaultValue = null )
+	public static function getGlobalValue( $name, $defaultValue = null, $ignoreSessionValues = false )
     {
 //		var_export( $_REQUEST[$name] );
 	//	var_export( $_REQUEST[Ayoola_Form::hashElementName( $name )] );
@@ -1249,7 +1249,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 	//		$value = $defaultValue;
 		}
 
-		if( $value === false )
+		if( $value === false && ! $ignoreSessionValues )
 		{
 			$values = self::getStorage( 'global_values' )->retrieve();
 		//	var_export( $values );
@@ -1271,7 +1271,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			//	Removed because its making the first value sticky
 		//	$_REQUEST[$name] = $value;
 		}
-
+		if( false === $value && ! is_null( $defaultValue ) )
+		{
+			$value = $defaultValue;
+		}
 		return $value;
     }
 	

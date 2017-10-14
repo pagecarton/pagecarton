@@ -74,7 +74,7 @@ class Application_Category_View extends Application_Category_Abstract
 				{
 				//	;
 				$category = $this->getParameter( 'category_name' );
-				if( $this->getParameter( 'allow_dynamic_category_selection' ) )
+		//		if( $this->getParameter( 'allow_dynamic_category_selection' ) )
 				{
 					if( is_numeric( $this->getParameter( 'pc_module_url_values_category_offset' ) ) )
 					{
@@ -94,7 +94,7 @@ class Application_Category_View extends Application_Category_Abstract
 						}
 					//	var_export( $category );
 					}
-					elseif( @$_REQUEST['category'] )
+					elseif( $this->getParameter( 'allow_dynamic_category_selection' ) && @$_REQUEST['category'] )
 					{
 						$category = $_REQUEST['category'];
 					}
@@ -222,7 +222,10 @@ class Application_Category_View extends Application_Category_Abstract
     {
 		$category = $this->getParameter( 'category_name' );
 		$data = array(); 
-		if( $this->getParameter( 'allow_dynamic_category_selection' ) )
+	//	var_export( $this->getParameter( 'allow_dynamic_category_selection' ) );
+	//	var_export( $this->getParameter( 'pc_module_url_values_category_offset' ) );
+
+//		if( $this->getParameter( 'allow_dynamic_category_selection' ) )
 		{
 			if( is_numeric( $this->getParameter( 'pc_module_url_values_category_offset' ) ) )
 			{
@@ -233,6 +236,7 @@ class Application_Category_View extends Application_Category_Abstract
 					{
 						$category = @$_REQUEST['category'];
 					}
+//		var_export( $category );
 				}
 				elseif( $this->getParameter( 'pc_module_url_values_request_fallback' ) && @$_REQUEST['category'] )
 				{
@@ -241,7 +245,7 @@ class Application_Category_View extends Application_Category_Abstract
 				}
 			//	var_export( $category );
 			}
-			elseif( @$_REQUEST['category'] )
+			elseif( $this->getParameter( 'allow_dynamic_category_selection' ) && @$_REQUEST['category'] )
 			{
 				$category = $_REQUEST['category'];
 			}
@@ -303,8 +307,8 @@ class Application_Category_View extends Application_Category_Abstract
 		$options = $options->select();
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
-		$options = array( 0 => '*Random*' ) + $filter->filter( $options );
-		$html .= '<span style=""> Show info of </span>';
+		$options = array( '' => 'Select Category' ) + $filter->filter( $options );
+		$html .= '<span style=""> Show Category Info of </span>';
 		
 		$html .= '<select data-parameter_name="category_name">';
 		foreach( $options as $key => $value )
@@ -315,11 +319,36 @@ class Application_Category_View extends Application_Category_Abstract
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>';
-		$html .= '<span style=""> category. </span>';
-		$html .= '<label style=""> Allow dynamic selection: </label>';
+		$html .= '<span style=""> or Dectect from </span>';
 		
-		$html .= '<select data-parameter_name="allow_dynamic_category_selection">';
-		$options = array( 'No', 'Yes' );
+		$html .= '<select data-parameter_name="pc_module_url_values_category_offset">';
+		$options = range( 0, 5 ) ;
+		foreach( $options as $key => $value )
+		{ 
+			$options[$key] = 'URL Offset ' . $value;
+		}
+	//	$firstOptions = 	
+		$options[''] = 'Select URL offset';
+		$options['?'] = 'Query Strings';
+		ksort( $options );  
+		if( @$object['allow_dynamic_category_selection'] )
+		{
+			$object['pc_module_url_values_category_offset'] = '?';
+		}
+	//	$html .= '<option value="">Select URL offset</option>';
+	//	$html .= '<option value="?">Query Strings</option>';
+		foreach( $options as $key => $value )
+		{ 
+	//		$value = 'URL Offset ' . $value;
+			$html .=  '<option value="' . $key . '"';  
+		//	var_export( $object['view'] );
+			if( @$object['pc_module_url_values_category_offset'] === strval( $key ) ){ $html .= ' selected = selected '; }
+			$html .=  '>' . $value . '</option>';  
+		}
+		$html .= '</select>';
+		
+/*		$html .= '<select data-parameter_name="allow_dynamic_category_selection">';
+		$options = array( 'No', 'Dynamic Category Selection' );
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';  
@@ -328,14 +357,15 @@ class Application_Category_View extends Application_Category_Abstract
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>';
-		if( static::$_editableTitle )
+*/		
+/*		if( static::$_editableTitle )
 		{
 			$html .= '<a href="javascript:;" title="' . static::$_editableTitle . '" onclick="ayoola.div.makeEditable( this.nextSibling ); this.nextSibling.style.display=\'block\';"> edit </a>';
 				//	var_export( $object );
 			$html .= '<span data-parameter_name="editable" style="padding:1em;display:none;" onclick="this.nextSibling.style.display=\'block\';">' . @$object['editable'] . '</span>';
 			$html .= '<a href="javascript:;" style="display:none;" title="' . static::$_editableTitle . '" onclick="this.previousSibling.style.display=\'none\';this.style.display=\'none\';"> hide </a>';
 		}
-		$html .= '<button onClick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Application_Category_List/\' );">Manage Categories</button>';
+*///		$html .= '<button onClick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Application_Category_List/\' );">Manage Categories</button>';
 		return $html;
 	}
 	// END OF CLASS

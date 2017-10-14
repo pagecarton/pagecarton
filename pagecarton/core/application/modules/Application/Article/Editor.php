@@ -132,7 +132,7 @@ class Application_Article_Editor extends Application_Article_Abstract
 			self::saveArticle( $values );
 			
 			//	Set Hash Tags
-			Application_HashTag_Abstract::set( @$values['article_tags'], 'articles', $values['article_url'] );
+	//		Application_HashTag_Abstract::set( @$values['article_tags'], 'articles', $values['article_url'] );
 	//		Application_HashTag_Abstract::get();
 	
 			// Share

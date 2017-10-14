@@ -164,7 +164,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		
 		if( @$element['autocomplete'] !== 'off' )
 		{
-			$element['value'] = self::getGlobalValue( $element['real_name'], $element['value'] ) ? : $element['value'];
+			$element['value'] = self::getGlobalValue( $element['real_name'], $element['value'], true ) ? : $element['value'];
 		}
 	//	self::v( $element['value'] );
 	//	self::v( Ayoola_Form::getDefaultValues( $element['real_name'] ) );

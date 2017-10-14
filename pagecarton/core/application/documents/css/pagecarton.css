@@ -480,15 +480,21 @@
 {
     display: none;
 }
-.pc_page_object_insert_button_area, .pc_page_object_inner_settings_area
 
+.pc_page_widgetmode .pc_page_object_specific_item
+{
+    display: block;
+}
+
+.pc_page_object_insert_button_area, .pc_page_object_inner_settings_area, .pc_page_object_inner_settings_area2
 {
     border: 1px solid #ccc;
     margin-top:0.5em;
     margin-bottom:0.5em;
     padding:0.5em;
 }
-.pc_page_object_insert_button_area:hover, .pc_page_object_inner_settings_area:hover
+
+.pc_page_object_insert_button_area:hover, .pc_page_object_inner_settings_area:hover, .pc_page_object_inner_settings_area2:hover
 {
     border: 1px groove #444;
 }
@@ -496,7 +502,7 @@
 {
     max-width: 100%;
 }
-.pc_page_object_insert_button_area:hover select, .pc_page_object_inner_settings_area:hover select
+.pc_page_object_insert_button_area:hover select, .pc_page_object_inner_settings_area:hover select, .pc_page_object_inner_settings_area2:hover select
 {
     border-color: #444;
 }

@@ -5,10 +5,27 @@
 ayoola.events =
 {
 	event: null, // Name of the event
+	eventList: { }, // Name of the event
 		
 	//	Add a callback to an event
-	add: function( object, event, callback )
+	add: function( object, event, callback, checkUnique )
 	{
+		if( checkUnique )
+		{
+			var hash = ayoola.js.hashCode( callback );
+			if( ayoola.events.eventList[hash] )
+			{
+				if( ayoola.events.eventList[hash].indexOf( object ) != -1 )
+				{
+					return false;
+				}
+			}
+			else
+			{
+				ayoola.events.eventList[hash] = new Array();
+			}
+			ayoola.events.eventList[hash].push( object );  
+		}
 		if( ! object ){ return false; }
 	//	alert( object );
 		//	First remove it 
@@ -23,11 +40,13 @@ ayoola.events =
 	remove: function( object, event, callback )
 	{
 	//	alert( object );  
-	//	alert( object.removeEventListener );  
+	//	alert( object.removeEventListener ); 
+		
 		if( ! object ){ return false; }
 		if( object.removeEventListener )
 		{ 
-		//	alert( object.removeEventListener( event, callback, false ) );
+	//		alert( object.removeEventListener( event, callback, false ) );
+	//		alert( object.removeEventListener( event, callback, true ) );
 			object.removeEventListener( event, callback, true ); 
 		}
 		else if( object.detachEvent ){ object.detachEvent( 'on' + event, callback ); }

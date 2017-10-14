@@ -232,7 +232,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      * 
      * return array
      */
-	protected function getDbData()
+	public function getDbData()
     {
 		if( is_null( $this->_dbData ) ){ $this->setDbData(); }
 		return $this->_dbData;

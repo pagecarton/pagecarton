@@ -67,7 +67,7 @@ class Application_Article_Template_List  extends Application_Article_Template_Ab
 		$list->setKey( $this->getIdColumn() );
 		$list->setListOptions( 
 								array( 
-										'New Post Template' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Application_Article_Template_Creator/\' );" title=""> New Post Template </a>',
+										'New Post Template' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Template_Creator/\' );" title=""> New Post Template </a>',
 									) 
 							);
 		$list->setNoRecordMessage( 'There are no Post templates on this application, please add one.' );
