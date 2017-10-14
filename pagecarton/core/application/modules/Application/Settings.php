@@ -25,7 +25,7 @@ require_once 'Ayoola/Dbase/Table/Abstract/Xml.php';
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Application_Settings extends Ayoola_Dbase_Table_Abstract_Xml
+class Application_Settings extends Ayoola_Dbase_Table_Abstract_Xml_Private
 {
 
     /**
