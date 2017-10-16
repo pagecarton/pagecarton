@@ -145,6 +145,7 @@ class Application_Info extends Ayoola_Abstract_Playable
 						);
 						
 		$dataX['domain'] = Ayoola_Page::getDefaultDomain();
+		$dataX['homepage'] = $dataX['domain'] . Ayoola_Application::getUrlPrefix();
 		$dataX['last_backup'] = $backup;
 		$dataX['user_count'] = $users;
 		$dataX['pagecarton_version'] = PageCarton::VERSION;

@@ -206,9 +206,9 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 				
 			}
 		}
-	//	var_export( $search );
-	//	var_export( $replace[0] );
-	//	var_export( $template );
+//		self::v( $search );
+//		self::v( $replace );
+//		self::v( $template );
 		$search[] = $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'];
 		$replace[] = @$iTemplate;  
 		$template = @str_ireplace( $search, $replace, $template );

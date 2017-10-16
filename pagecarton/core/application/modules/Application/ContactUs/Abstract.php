@@ -29,6 +29,14 @@ abstract class Application_ContactUs_Abstract extends Ayoola_Abstract_Table
 {
 	
     /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Contact Us';      
+
+	
+    /**
      * Whether class is playable or not
      *
      * @var boolean

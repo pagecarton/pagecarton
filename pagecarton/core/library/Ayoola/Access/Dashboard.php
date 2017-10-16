@@ -92,7 +92,18 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
 		//	Get information about the user access information
 		$options = self::getAccessInformation( $userInfo['username'] );
 	//	var_export( $options );  
-		@$options['display_name'] = $options['display_name'] ? $options['display_name'] : ( ucfirst( $userInfo['firstname'] ) . ' ' . strtoupper( $userInfo['lastname'] ) );
+		if( empty( $options['display_name'] ) )
+		{
+			if( ! empty( $options['firstname'] ) )
+			{
+				$options['display_name'] = ( ucfirst( $userInfo['firstname'] ) . ' ' . strtoupper( $userInfo['lastname'] ) );
+			}
+			if( ! empty( $options['username'] ) )
+			{
+				$options['display_name'] = '@' . $userInfo['username'];
+			}
+			
+		}
 		@$options['domain'] = Ayoola_Page::getDefaultDomain();
 		$this->_objectTemplateValues = array_merge( $options ? : array(), $this->_objectTemplateValues ? : array() );   
 		

@@ -504,9 +504,9 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     } 
 	
     /**
-     * Inserts the Data into Storage
      * 
-     * @return bool
+     * 
+     * @return null
      */
 	protected function sendConfirmationMail( Array $values = null )
     {

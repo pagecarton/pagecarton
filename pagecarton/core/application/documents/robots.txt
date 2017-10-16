@@ -4,6 +4,8 @@ Disallow: /tmp/
 Disallow: /ayoola/
 Disallow: /tools/
 Disallow: /object/
+Disallow: /widgets/
+Disallow: /pc-admin/
 User-Agent: MJ12bot
 Disallow: /
 User-Agent: AhrefsBot

@@ -315,7 +315,7 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
  */			{
 			//	if( @$info['profile_url'] )
 				{ 
-					@$info['display_picture'] = '/tools/classplayer/get/object_name/Application_Profile_PhotoViewer/profile_url/' . @$info['profile_url'] . '/time/' . filemtime( Application_Profile_Abstract::getProfilePath( @$info['profile_url'] ) );
+					@$info['display_picture'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_PhotoViewer/profile_url/' . @$info['profile_url'] . '/document_time/' . filemtime( Application_Profile_Abstract::getProfilePath( @$info['profile_url'] ) ) . '?max_width=300&max_height=300&extension=png';
 				}
 			//	$options['options'] = $userInfo['display_picture_base64'];
 			}

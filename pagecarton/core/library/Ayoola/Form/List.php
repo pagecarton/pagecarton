@@ -67,6 +67,7 @@ class Ayoola_Form_List  extends Ayoola_Form_Abstract
 								array( 
 										'Form Requirements' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Requirement_List/\' );" title="Manage Form Requirements.">Form Requirements </a>',
 										'Form Data' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Inspect/\' );" title="Check form data.">Form Data </a>',    
+										'Form Settings' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Forms/\' );" title="Update form settings.">Form Settings </a>',    
 									) 
 							);
 		$list->setKey( $this->getIdColumn() );

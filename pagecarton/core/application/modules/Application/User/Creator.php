@@ -258,30 +258,16 @@ class Application_User_Creator extends Application_User_Abstract
 	//	var_export( $saved );
 		if( ! $saved )
 		{ 
-		//	var_export( $saved );
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false;
 		}
- 		$this->setViewContent( '<h2>Account Opening Confirmation:</h2>', true );
- 		$this->setViewContent( '<p>Your account opening process is now complete. An email has been sent to you, containing how to activate and verify your new account.</p>' );
- 		$this->setViewContent( '<h4>What Next?</h4>' );
- 		$this->setViewContent( '<p>Go to </p>' );
- //		$this->setViewContent( '<ul>' );
- 		$this->setViewContent( '<li><a href="' . Ayoola_Page::getPreviousUrl() . '">Previous page,</a></li>' );
-/* 		
-		//	Create a profile
-		if( @$values['display_name'] ) 
-		{
-		//	var_export( $values );
-			$parameters = array( 'fake_values' => $values ); 
-			$class = new Ayoola_Access_AccessInformation_Editor();
-			$class->setParameter( $parameters );
-			$class->fakeValues = $values;
-			$class->init();
-		}
- */		
+ 		$this->setViewContent( '<h2 class="goodnews">Account Confirmation:</h2>', true );
+ 		$this->setViewContent( '<p>New user account has been created successfully. An email has been sent to the registered e-mail address containing how to activate and verify the new account.</p>' );
+ 		$this->setViewContent( '<h4></h4>' );
+ 		$this->setViewContent( '<p><a class="pc-btn" href="' . Ayoola_Page::getPreviousUrl() . '">Continue...</a></p>' );
+
 		//	Auto log me in now without confirmation
-	//	if( $this->getParameter( 'signin' ) ) 
+		if( $this->getParameter( 'signin' ) ) 
 		{
 	//		var_export( $values );  
 			if( ! $loginResponse = Ayoola_Access_Login::localLogin( $values ) )   
@@ -299,16 +285,11 @@ class Application_User_Creator extends Application_User_Abstract
 			}
 			$this->setViewContent( '<div id="ayoola-js-redirect-whole-page"></div>' );
 		}
-	//	else
-		{
-	//		$this->setViewContent( '<li><a href="' . Ayoola_Page::appendQueryStrings( array(), '/accounts/signin/' ) . '">Sign In</a></li>' );
+		
+		if( ! @$this->_sendActivationEmail() )
+		{ 
+			$this->setViewContent( '<p class="badnews">We were unable to deliver the email to you due to system error</p>' ); 
 		}
- 	//	$this->setViewContent( '</ul>' );
-		
- 		$this->setViewContent( '<p class="badnews">' . $message . '</p>' );
- 	//	$this->setViewContent( Ayoola_Access_Login::viewInLine() );
-		
-		if( ! @$this->_sendActivationEmail() ){ $this->setViewContent( '<p class="badnews">We were unable to deliver the email to you due to system error</p>' ); }
 		
 		//	Referrers
 		do 
@@ -368,7 +349,7 @@ class Application_User_Creator extends Application_User_Abstract
 		$domain = Ayoola_Page::getDefaultDomain();
 		$valuesForReplace = $values;
 		$email['to'] = $values['email'];
-		$email['from']  = "From: \"{$domain} Accounts\" <accounts@{$domain}>\r\n";
+		$email['from']  = "From: \"{$domain}\" <accounts@{$domain}>\r\n";
 	//	var_export( $email );
 		$email = self::replacePlaceholders( $email, $valuesForReplace );
 	//	var_export( $values );

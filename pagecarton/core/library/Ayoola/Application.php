@@ -1232,7 +1232,7 @@ class Ayoola_Application
 			}
 		//	var_export( $pageInfo );
 			
-			header( 'Location: ' . $pageInfo['redirect_url'] . '?pc_redirect_url=' . $uri );
+			header( 'Location: ' . $pageInfo['redirect_url'] . '?pc_redirect_url=' . $uri . '&' . http_build_query( $_GET ) );
 			exit(); 
 		}
 
@@ -1517,7 +1517,14 @@ class Ayoola_Application
 		$requestedUri = self::$_homePage;	// Default
 		
 		//	because of url prefix that has space in them
-		@$requestedUriDecoded = rawurldecode( $_SERVER['REQUEST_URI'] );
+		@$requestedUriDecoded = $_SERVER['REQUEST_URI'];
+		
+
+		//	remove query strings
+		$requestedUriDecoded = array_shift( explode( '?', $requestedUriDecoded ) );
+		@$requestedUriDecoded = rawurldecode( $requestedUriDecoded );
+//		var_export( $_SERVER['REQUEST_URI'] );
+//		var_export( $requestedUriDecoded );
 		
 		if( isset( $_SERVER['REQUEST_URI'] ) && $_SERVER['REQUEST_URI'] != '/' && $_SERVER['SCRIPT_NAME'] != $requestedUriDecoded )
 		{

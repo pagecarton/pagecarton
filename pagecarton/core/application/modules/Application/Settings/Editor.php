@@ -29,6 +29,13 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 {
 	
     /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Update Settings'; 
+	
+    /**
      * The method does the whole Class Process
      * 
      */

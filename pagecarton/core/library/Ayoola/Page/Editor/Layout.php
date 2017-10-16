@@ -361,17 +361,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		$filter = new Ayoola_Filter_LayoutIdToPath( $page );   
 	//	$defaultLayout = $filter->filter( $defaultLayout );
 
-/* 		//	Get the layout file if any
-		if( ! @$page['pagelayout_filename'] )	//	Compatibility
-		{
-			$page['pagelayout_filename'] = self::getDefaultLayout();
-		//	var_export( $page['pagelayout_filename'] );
-		}
-		if( ! $filePath = Ayoola_Loader::checkFile( $page['pagelayout_filename'] ) )
-		{ 
-			$filePath = Ayoola_Loader::checkFile( self::getDefaultLayout() );
-		}
- */		//	Get the layout file if any
+		//	Get the layout file if any
 //		$dir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS;
 //		if( ! is_file( $dir . @$layoutData['pagelayout_filename'] ) )
 

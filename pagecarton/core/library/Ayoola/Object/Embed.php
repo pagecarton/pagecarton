@@ -285,7 +285,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 					{
 						if( stripos( $className, 'Ayoola' ) === 0 )
 						{
-							continue;
+					//		continue;
 						}
 						$files[$className] = $className;
 					}

@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Friday 13th of October 2017 05:25:49 PM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Monday 16th of October 2017 10:09:26 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -60,16 +60,18 @@ $_860cf6f944c2cc1ba706bdc253c8c42e = null;
 								
 $_00e45ea75c109ac55a184825bbb1f576 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div class="col-md-12 stats-info widget" style="width: 100%;">
-    <div class="stats-title">
-        <h4 class="title">Pagecarton Admin Dashboard</h4>
-    </div>
-    <div class="stats-body">
-        <ul class="list-unstyled">
-            <li>Domain Name<span class="pull-right">{{{domain}}}</span></li>
-            <li>Last Back Up<span class="pull-right">{{{last_backup}}}</span></li>
-        </ul>
-    </div>
-</div>',
+<div class="stats-title">
+<h4 class="title">Dashboard</h4>
+</div>
+
+<div class="stats-body">
+<ul class="list-unstyled">
+	<li>Home Page<a href="http://{{{homepage}}}" target="_blank"><span class="pull-right">{{{homepage}}}</span></a></li>
+	<li>Last Back Up<span class="pull-right">{{{last_backup}}}</span></li>
+</ul>
+</div>
+</div>
+',
   'url_prefix' => '/x/index.php',
   'advanced_parameter_value' => 
   array (
@@ -172,6 +174,19 @@ $_df0c168bb07449442fcafe5b945a3470 = null;
 								
 $_d71f65ba79bac0155c2faf1c4ee1ec95 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<style>
+.logo a h1 {
+    color: transparent;
+    background-image: url("/x/index.php/img/logo.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.logo {
+    background: #4d4d4d;
+}
+.cbp-spmenu-vertical {
+    background-color: #333;
+}
 
 </style>',
   'url_prefix' => '/x/index.php',

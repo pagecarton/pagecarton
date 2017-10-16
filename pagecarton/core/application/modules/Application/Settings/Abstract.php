@@ -62,7 +62,6 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
      * @var array
      */
 	protected $_identifierKeys = array( 'settingsname_name' );
-
 	
     /**
      * Calls this after every successful settings change

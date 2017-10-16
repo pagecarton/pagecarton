@@ -462,7 +462,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		if( $this->submitValue && ! $this->callToAction )
 		{
 		//	var_export( $this->submitValue );
-			$element->addElement( array( 'name' => 'submit-' . $this->submitValue . '', 'value' => $this->submitValue . ' &raquo;', 'type' => 'Submit', 'style' => 'display:block; margin: 0.5em 0 0.5em 0 ;', 'class' => '', 'data-pc-ignore-field' => 'true' ) );  
+			$element->addElement( array( 'name' => 'submit-' . $this->submitValue . '', 'value' => $this->submitValue . '   » ', 'type' => 'Submit', 'style' => 'display:block; margin: 0.5em 0 0.5em 0 ;', 'class' => '', 'data-pc-ignore-field' => 'true' ) );    
 		}
 		foreach( $this->requiredElements as $key => $value )
 		{
@@ -642,6 +642,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			
 			$this->getGlobal();	//	Load the global
 			$form .= ">\n";
+		}
+	//	if( ! empty( $_GET['pc_inspect_widget_form'] ) )
+		{
+	//		$form .= var_export( $this->_names, true );   
 		}
 		$i = 0;
 		if( $this->getOneFieldSetAtATime() )
@@ -1075,6 +1079,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 		$name = self::HONEY_POT;
 		$name = self::hashElementName( $name ); // Honey Pots should always be hashed
+
  		if( isset( $_REQUEST[self::BACKBUTTON_INDICATOR] ) )
 		{
 			return false;
@@ -1088,6 +1093,21 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		if( @$_REQUEST[$name] === $this->_attributes['name'] )
 		{
 			return true;
+		}
+		$formOptions =  Application_Settings_Abstract::getSettings( 'Forms', 'options' ); 
+//		$formOptions =  Application_Settings_Abstract::getSettings( 'Forms' ); 
+//		var_export(  $formOptions );
+		if( is_array( $formOptions ) && in_array( 'allow_external_form_values', $formOptions )  )
+		{
+		//	var_export(  $this->_attributes['name'] );
+			if( 
+				( ! empty( $_REQUEST['form_name'] ) && $_REQUEST['form_name'] === $this->_attributes['name'] ) 
+				|| ( ! empty( $_POST ) && Ayoola_Application::isClassPlayer() )
+			)
+			{
+				$this->oneFieldSetAtATime = false;
+				return true;
+			}		
 		}
 		return false;
     }

@@ -125,6 +125,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 				$files[$file] = $className;
 				$classes[$className] = $className;
 			}
+			ksort( $classes );
 			asort( $files );
 			$fieldset->addElement( array( 'name' => 'modules', 'required' => 'required', 'label' => 'Plugin Modules', 'type' => 'SelectMultiple', 'value' => @$values['modules'] ), $files );
 			if( $files ) 

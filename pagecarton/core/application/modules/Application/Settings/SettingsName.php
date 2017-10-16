@@ -33,12 +33,13 @@ class Application_Settings_SettingsName extends Ayoola_Dbase_Table_Abstract_Xml_
      *
      * @param int
      */
-    protected $_tableVersion = '0.04';
+    protected $_tableVersion = '0.05';
 
 	protected $_dataTypes = array
 	( 
 		'settingsname_id' => 'INT, RELATIVES = Application_Settings',
 		'settingsname_name' => 'INPUTTEXT, UNIQUE',
+		'settingsname_title' => 'INPUTTEXT',
 	//	'settingsname_editable' => 'INT',
 	//	'settings_id' => 'INT, RELATIVES = Application_Settings',
 	//	'document_url' => 'INPUTTEXT',

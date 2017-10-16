@@ -52,9 +52,11 @@ class Application_Profile_PhotoViewer extends Application_Profile_Abstract
 				//	Get information about the user access information
 				if( ! $data = Ayoola_Access::getAccessInformation( Ayoola_Application::getUserInfo( 'username' ) ) )
 				{
+				Application_IconViewer::viewInLine( array( 'url' => $data['document_url'] ) );
+                exit();
 				//	exit()
-					header( 'Location: https://placeholdit.imgix.net/~text?txtsize=75&txt=No Photo&w=300&h=300' );
-					exit( 'die' );
+				//	header( 'Location: https://placeholdit.imgix.net/~text?txtsize=75&txt=No Photo&w=300&h=300' );
+				//	exit( 'die' );
 				}
 			//	var_export( $data );
 			}
@@ -74,7 +76,9 @@ class Application_Profile_PhotoViewer extends Application_Profile_Abstract
 			if( ! in_array( $type, array( 'image/gif', 'image/jpeg', 'image/png', ) ) )
 			{
 			//	exit()
-				header( 'Location: https://placeholdit.imgix.net/~text?txtsize=75&txt=' . @$data['display_name'] . '&w=300&h=300' );
+				Application_IconViewer::viewInLine( array( 'url' => $data['document_url'] ) );
+                exit();
+			//	header( 'Location: https://placeholdit.imgix.net/~text?txtsize=75&txt=' . @$data['display_name'] . '&w=300&h=300' );
 				exit( 'die' );
 			}
 			$result['formatted_image'] = false;

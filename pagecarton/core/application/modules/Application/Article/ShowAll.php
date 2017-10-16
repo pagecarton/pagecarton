@@ -1098,7 +1098,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//		var_export( $data );
 			}
 			//	hashtags
-			@$tags = array_map( 'trim', explode( ',', $data['article_tags'] ) );
+	//		@$tags = array_map( 'trim', explode( ',', $data['article_tags'] ) );
 		//	$this->_xml .= self::getHashTags( $tags );			
 			
 			//	footer

@@ -1,81 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="page" creation_time="1495144931" table_version="0.08" module_version="1.00" table_class="Ayoola_Page_Page" creation_ip="0">
-  <RECORDS autoId="74">
-    <TABLE_ROW ROW_ID="1">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/settings]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Settings]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[72]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="3">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/logo]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Application Logo]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[view or change application logo]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[logo]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[69]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="4">
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/blog/view]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[Blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:0;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[66]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="5">
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[65]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[a:1:{i:0;s:0:&quot;&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[Blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:0;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="6">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[Blog]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[64]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
+  <RECORDS autoId="76">
     <TABLE_ROW ROW_ID="10">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/onlinestore/cart]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
@@ -106,96 +31,6 @@
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="14">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/developer/access]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Access Levels]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Access Levels Management]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[Access]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[42]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="15">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/developer/module]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[106]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[View or Upload Files]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[View or Upload Files]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[file, document]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="16">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/document]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[104]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[View or Upload Files]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[View or Upload Files]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[file, document]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="17">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/developer/object]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Viewable Objects]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Viewable Objects]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[objects]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[103]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="18">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/developer]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Tools for Developers]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[developers]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[developers]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[105]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="20">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/log]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Log]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[101]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
     <TABLE_ROW ROW_ID="21">
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[freeLayout]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/tools/classplayer]]></TABLE_FIELD>
@@ -207,66 +42,6 @@
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[100]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="22">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/page/menu/edit]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Edit Menu]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[36]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="25">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/page]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[32]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Pages]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Administer Pages]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[pages]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="27">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/page/menu]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[2011]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Application Menu]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[19]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="28">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/page/layout]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[2011]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Layouts]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Page Layout Operations]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[18]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
@@ -322,14 +97,14 @@
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[2011]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[signin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="title"><![CDATA[Sign in]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="description"><![CDATA[Sign in with your existing account.]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[signin]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:0;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[b:0;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[a:1:{i:0;s:8:&quot;redirect&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[/account/signin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="36">
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[9]]></TABLE_FIELD>
@@ -376,21 +151,6 @@
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="43">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/accounts/email]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Manage Email Accounts]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[14]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
     <TABLE_ROW ROW_ID="46">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/onlinestore/confirmation]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
@@ -403,36 +163,6 @@
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:0;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[b:0;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="47">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/onlinestore/checkout/order]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[28]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Orders placed on the Application]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="48">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/onlinestore/checkout/bankaccount]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[29]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Bank Account Information]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
     </TABLE_ROW>
@@ -451,21 +181,6 @@
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="51">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[freeLayout]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/connect]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[33]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Connect to this application]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[This application supports API connection through the Ayoola Content Management Framework. API connection can be made through this URL.]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[API, connection, ayoola cmf, cmf]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:0;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
     <TABLE_ROW ROW_ID="54">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
@@ -479,66 +194,6 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[b:0;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="58">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/domain]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Manage Domains]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Manage application domains.]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[50]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="59">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/developer/cron]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Schedule Tasks]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Schedule Tasks with Cron]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[51]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="60">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/developer/api]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Manage API connections]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Manage API connections]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[52]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="61">
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/database]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Manage Databases]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[Administer the databases and database accounts.]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[53]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="62">
@@ -631,21 +286,6 @@
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[1496-0-75]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="71">
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/old]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[1496-0-78]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Old Admin Panel]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[a:1:{i:0;s:19:&quot;clone_existing_page&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
-    </TABLE_ROW>
     <TABLE_ROW ROW_ID="72">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/layout/bootstrapblogpost/template]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
@@ -675,6 +315,36 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[a:1:{i:0;s:6:&quot;module&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="74">
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/widgets]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[0-0-74]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[a:1:{i:0;s:6:&quot;module&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="75">
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/account/signin]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Log in]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[0-0-75]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

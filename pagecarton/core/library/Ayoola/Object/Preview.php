@@ -57,7 +57,15 @@ class Ayoola_Object_Preview extends PageCarton_Widget
             }
           //  var_export( $_POST );
 			$parameters = Ayoola_Page_Editor_Layout::prepareParameters( $_POST );
-            $classHtml .= Ayoola_Abstract_Viewable::viewObject( $class, $parameters );
+   //         var_export( $class );
+
+            if( $class === 'Ayoola_Object_Embed' && $parameters['editable'] == 'Ayoola_Object_Play' )
+            {
+   //          var_export( $parameters );
+               return false;
+            }
+    //        exit();
+           $classHtml .= Ayoola_Abstract_Viewable::viewObject( $class, $parameters );
 
             $html = null;
             switch( $_REQUEST['content_type'] )

@@ -51,7 +51,7 @@ class Application_IconViewer extends PageCarton_Widget
       //          return false;
             }
             //  Code that runs the widget goes here...
-            $ext = strtolower( array_pop( explode( '.', $url ) ) );
+            $ext = @$_REQUEST['extension'] ? : strtolower( array_pop( explode( '.', $url ) ) );
             switch( $ext )
             {
                 case 'jpg':
@@ -61,6 +61,7 @@ class Application_IconViewer extends PageCarton_Widget
        //         case 'bmp':
                 case 'png':
                     //  The url is same
+                    $url = $url ? : '/img/placeholder-image.jpg';
                 break;
                 case 'tar':
                 case 'gz':
@@ -98,6 +99,7 @@ class Application_IconViewer extends PageCarton_Widget
                     $url = '/img/file-icon.png';
                 break;
             }
+            $url = $url ? : '/img/file-icon.png';
      //       var_export( $url );
     //        header( 'Location: ' . $url );
             @$maxWith = $this->getParameter( 'max_width' ) ? : @intval( $_REQUEST['max_width'] );

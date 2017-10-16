@@ -39,8 +39,13 @@ class Application_Settings_SettingsName_Creator extends Application_Settings_Set
 			$this->createForm( 'Create', 'Create a SettingsName' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
+
+	//		$values['settingsname_name'] = 
+			$filter = new Ayoola_Filter_Name();
+			$values['settingsname_name'] = strtolower( $filter->filter( $values['settingsname_title'] ) );
+
 			if( ! $this->insertDb( $values ) ){ return false; }
-			$this->setViewContent( 'Settings Name created successfully', true );
+			$this->setViewContent( '<p class="goodnews">Settings Name created successfully</p>', true );
 		}
 		catch( Application_Settings_SettingsName_Exception $e ){ return false; }
     } 

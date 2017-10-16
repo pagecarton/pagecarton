@@ -188,7 +188,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
                 $fieldset = new Ayoola_Form_Element; 
 
 	        	$fieldset->addElement( array( 'name' => 'widget_title', 'label' => 'Display Name', 'placeholder' => 'Widget Title', 'type' => 'InputText', 'value' => @$values['widget_title'] ) );
-                $fieldset->addRequirement( 'widget_title', array( 'WordCount' => array( 3,100 ), 'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), upper case alphabets (A-Z), space and underscore (_).', 'character_list' => '^0-9\sa-z_A-Z', ) ) );
+                $fieldset->addRequirement( 'widget_title', array( 'WordCount' => array( 3,100 ), 'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), upper case alphabets (A-Z), space and underscore (_).', 'character_list' => '^0-9\sa-z_\-A-Z', ) ) );
                 $form->addFieldset( $fieldset );
             break;
             

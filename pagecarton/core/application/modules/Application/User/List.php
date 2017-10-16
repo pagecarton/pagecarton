@@ -98,15 +98,24 @@ class Application_User_List extends Application_User_Abstract
 				'lastname' => null, 
 				'phone_number' => null, 
 		);
-	//	$ = 
-//	var_export( $data );
-		$testData = array_shift( $data );
-		foreach( $optionalFields as $key => $each )
+		if( is_array( $this->getParameter( 'other_fields' ) ) )
 		{
-			if( empty( $testData[$key] ) )
+			$optionalFields = $optionalFields + $this->getParameter( 'other_fields' );
+		}
+
+		
+//	var_export( $data );
+		if( ! $this->getParameter( 'show_all_columns' ) )
+		{
+			$testData = array_shift( $data );
+			foreach( $optionalFields as $key => $each )
 			{
-				unset( $options[$key] );
+				if( empty( $testData[$key] ) )
+				{
+					unset( $options[$key] );
+				}
 			}
+
 		}
 		$list->createList( $options );
 		//var_export( $list );

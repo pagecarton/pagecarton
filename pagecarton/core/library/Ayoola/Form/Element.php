@@ -145,7 +145,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 		}
 		//	Set Element ID and Label to default if undeclared
-        $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $element['name'] ) );		
+        $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $element['name'] ) );	
+			
 		$element['real_name'] = $element['name'];
 		@$element['title'] = $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) );
 		@$element['placeholder'] = $element['placeholder'] ? : $element['label'];
@@ -166,17 +167,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 			$element['value'] = self::getGlobalValue( $element['real_name'], $element['value'], true ) ? : $element['value'];
 		}
-	//	self::v( $element['value'] );
-	//	self::v( Ayoola_Form::getDefaultValues( $element['real_name'] ) );
-/* 		do
-		{
-			if( isset( $_GET[$element['real_name']] ) ){ $element['value'] = $_GET[$element['real_name']]; }
-			elseif( isset( $_GET[$element['hashed_name']] ) ){ $element['value'] = $_GET[$element['hashed_name']]; }
-			if( isset( $_POST[$element['real_name']] ) ){ $element['value'] = $_POST[$element['real_name']]; }
-			elseif( isset( $_POST[$element['hashed_name']] ) ){ $element['value'] = $_POST[$element['hashed_name']]; }
-		}
-		while( false );
- */
+
 			//	self::v( $element['value'] );
 
 		if( is_scalar( @$element['value'] ) )
@@ -185,12 +176,13 @@ class Ayoola_Form_Element extends Ayoola_Form
 			
 			//	ENT_SUBSTITUTE allows non-utf encoding to go past this point
 			if ( ! defined( 'ENT_SUBSTITUTE') ) define( 'ENT_SUBSTITUTE', ENT_QUOTES );
-			$element['value'] = htmlentities( $element['value'], ENT_SUBSTITUTE, "UTF-8", false );						
+			$element['value'] = htmlentities( $element['value'], ENT_SUBSTITUTE, "UTF-8", true );						
 		}
-	//	self::v( $element['value'] );
+	//	self::v( $element['value'] );    
 		
 	//	$element['name'] = md5( $element['name'] );
 		$name = $element['name'];
+		$realName = $element['real_name'];
 		if( $this->hashElementName )
 		{
 			$name = $element['name'] = $element['hashed_name'];
@@ -214,6 +206,10 @@ class Ayoola_Form_Element extends Ayoola_Form
 				unset( $element['multiple'],  $element['type'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
 				$markup = $this->$method( $element, $values );
 				$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;		
+				if( ! empty( $_GET['pc_inspect_widget_form'] ) && stripos( $realName, 'submit-' ) === false && stripos( $realName, 'SUBMIT_DETECTOR' ) === false )
+				{
+					$markup .= ' <div style="font-size:smaller; padding-top:1em; padding-bottom:1em;"><br> The name attribute of the element above is "' . $realName . '"<br></div>';   
+				}
 			//	$element .= $description ? "<span> {$description} </span>" : null;		
 			//	$element = "<span>{$element}</span>";		
 				//	exit();

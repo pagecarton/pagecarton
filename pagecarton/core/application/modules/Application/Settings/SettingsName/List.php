@@ -33,6 +33,13 @@ class Application_Settings_SettingsName_List extends Application_Settings_Settin
      * 
      * @var string 
      */
+	protected $_sortColumn = 'settingsname_title'; 
+	
+    /**
+     * 
+     * 
+     * @var string 
+     */
 	protected static $_objectTitle = 'Site Options'; 
 		
     /**
@@ -54,15 +61,14 @@ class Application_Settings_SettingsName_List extends Application_Settings_Settin
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = self::getObjectTitle();
+//		$data = 
 		$list->setData( $this->getDbData() );
 		$this->setIdColumn( 'settingsname_name' );
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No settings on this application <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Creator/">Create</a>' );
 		$list->createList(  
 			array(
-		//		'settingsname_name' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/' . $this->getIdColumn() . '/%KEY%/">%FIELD%</a>', 
-		//		'Option Category' => array( 'field' => 'settingsname_name', 'value' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/' . $this->getIdColumn() . '/%KEY%/"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/' . $this->getIdColumn() . '/%KEY%/\' );">%FIELD%</a>' ), 
-				'Option Category' => array( 'field' => 'settingsname_name', 'value' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/' . $this->getIdColumn() . '/%KEY%/\' );">%FIELD%</a>' ), 
+				'Category' => array( 'field' => 'settingsname_title', 'value' => '<a href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/' . $this->getIdColumn() . '/%KEY%/\' );">%FIELD%</a>' ), 
 			//	'document_url' => '<img src="%FIELD%" width="32" height="32" />', 
 				'-' => '<a title="Change Settings" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_SettingsName_Editor/' . $this->getIdColumn() . '/%KEY%/">-</a>', 
 				'X' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_SettingsName_Delete/' . $this->getIdColumn() . '/%KEY%/">X</a>', 
