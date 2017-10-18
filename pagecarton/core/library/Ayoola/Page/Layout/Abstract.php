@@ -559,29 +559,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					}  
 				//	var_export( $name );
 					if( $each->getAttribute( 'data-pc-object-name' ) )
-					{
-					//	$eachParameters = array( 'markup_template' => $xml->saveXml( $each ) ) + ( json_decode( $each->getAttribute( 'data-pc-object-parameters' ), true ) ? : array() ); 
-
-						//	insert placeholders here
-				//		$markupTemplates = $each->getElementsbyClassName( 'pc-markup-template' );
-						# https://stackoverflow.com/questions/6366351/getting-dom-elements-by-classname
-/*						$classname = 'pc-markup-template';
-						$finder = new DomXPath( $each );
-						$markupTemplates = $finder->query( "//*[contains(concat(' ', normalize-space(@class), ' '), ' $classname ')]" );
-						foreach( $markupTemplates as $eachMarkupTemplate )
-						{
-							$classname = 'pc-markup-template-placeholder';
-							$finder = new DomXPath( $eachMarkupTemplate );
-							$markupTemplatesWithPlaceHolder = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' $classname ')]");
-							foreach( $markupTemplatesWithPlaceHolder as $eachMarkupTemplateWithPlaceholder )
-							{
-								if( $eachMarkupTemplateWithPlaceholder->getAttribute( 'data-pc-markup-template-field' ) )
-								{
-									$eachMarkupTemplateWithPlaceholder->nodeValue = '{{{' . $eachMarkupTemplateWithPlaceholder->getAttribute( 'data-pc-markup-template-field' ) . '}}}';
-								}
-							}
-						}
-*/						    
+					{						    
 						
 						//	Make all the parameters advanced parameters to allow them editable
 						$advancedParametersToUse = array();
@@ -673,19 +651,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 							$eachNav->setAttribute( 'data-pc-menu-ignore', '1' );
 						}
 					}
-/* 					if( ( $each->getElementsByTagName( 'section' )->length || $each->getElementsByTagName( 'header' )->length || $each->getElementsByTagName( 'footer' )->length ) )
-					{
-						//	sections must not have inner sections to ensure we reach the innermost sections without doubling the editable area regions
-						switch( strtolower( $each->tagName ) )
-						{
-							case 'section':
-							case 'header':
-							case 'footer':
-								continue;
-							break;
-						}
-					}
- */					
+				
 					if( $each->nextSibling )
 					{
 						$each->parentNode->insertBefore( $xml->createCDATASection( "\r\n{$name}@@@}\r\n" ), $each->nextSibling );
@@ -696,15 +662,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					}
 					$each->parentNode->insertBefore( $xml->createCDATASection( "\r\n@@@{$name}@@@\r\n" ), $each );   
 					$each->parentNode->insertBefore( $xml->createCDATASection( "\r\n{@@@{$name}\r\n" ), $each );
-		/*
-				//	$each->appendChild( $xml->createCDATASection( "\r\n{$name}@@@}\r\n" ) );
-
-					if( $each->hasChildNodes() )
-					{
-						$each->insertBefore( $xml->createCDATASection( "\r\n{@@@{$name}\r\n" ), $each->firstChild );
-					}
-					//	$each->insertBefore( $xml->createCDATASection( "\r\n@@@{$name}@@@\r\n" ), $each->firstChild );
-		*/			
+			
 				//	$each->setAttribute( 'data-pc-section-created', '1' );
 					$each->removeAttribute( 'data-pc-section-autonamed' );
 					$each->removeAttribute( 'data-pc-section-created' );

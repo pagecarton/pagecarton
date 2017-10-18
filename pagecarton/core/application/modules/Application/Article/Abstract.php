@@ -491,23 +491,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$postType = $postTypeInfo['article_type'];
 				}
 				$whereClause['article_type'][] = $postType;
-			//	var_export( $postType );
-			//	var_export( $postTypeInfo );
-				//	//	Show this here to avoid looping in Article_ShowAll
-			//	$path = self::getFolder();
-	//			$command = "find $path -type f -print0 | xargs -0 egrep -l \"'article_type' => '" . $postType . "'\"";
-		//		$pattern = implode('\|', $contents_list) ;
-	//			@exec( $command, $output );
-	//			$allOriginalPostTypes = implode( ' ', $output ) ? : 'work_around_to_avoid_it_showing_all_posts';
-				
-				
-	//			$command = "find $path -type f -print0 | xargs -0 egrep -l \"'true_post_type' => '" . $postType . "'\"";
-		//		$pattern = implode('\|', $contents_list) ;
-	//			@exec( $command, $output );
-	//			$allOriginalPostTypes2 = implode( ' ', $output ) ? : 'work_around_to_avoid_it_showing_all_posts';
-				
-	//			@$allOriginalPostTypes = $allOriginalPostTypes2 . ' ' . $allOriginalPostTypes;
-		//	var_export( $command ); 
 			}
 	//		var_export( $realPostTypePath ); 
 	//		var_export( $allOriginalPostTypes );
@@ -518,14 +501,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		elseif( $this->getParameter( 'access_level' ) )
 		{
 			$whereClause['access_level'][] = $this->getParameter( 'access_level' );
-	//		var_export( count( $files ) );
-			//	//	Show this here to avoid looping in Article_ShowAll
-		//	$path = self::getFolder();
-	//		$command = "find $path -type f -print0 | xargs -0 egrep -l \"'access_level' => '" . $this->getParameter( 'access_level' ) . "'\"";
-	//		$pattern = implode('\|', $contents_list) ;
-	//		@exec( $command, $output );
-	//		$path = implode( ' ', $output ) ? : 'work_around_to_avoid_it_showing_all_posts';
-		//	var_export( $path );
+
 		}
 		elseif( @$_REQUEST['type'] )
 		{
@@ -554,45 +530,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		//		var_export( count( $files ) );
 				//	Removing dependence on Ayoola_Api for showing posts
 				$categoryId = $categoryId ? : 'workaround_avoid_error_in_search';
-			//	$categoryId = 'category id has been finally switched off'; 
-			//	$command = "find $path -type f -print0 | xargs -0 egrep -lzo \" => '" . $categoryName . "'\"";  
-			//	$command = "find $path -type f -print0 | xargs -0 egrep -l \"\d => '" . $categoryName . "'\"";
-		//		$command = "find $path -type f -print0 | xargs -0 egrep -lzo \" => (')?($categoryId)|$categoryName(')?(,)\"";
-			//	$command = "find $pathToSearch -type f -print0 | xargs -0 egrep -lzo \" => '$categoryName'\"";
-			//	$command = "find $path -type f -print0 | xargs -0 egrep -lzo \" => (')?($categoryId)|$categoryName(')?(,)\"";
- 	//			$pattern = implode('\|', $contents_list) ;    
-			//	@exec( $command, $output );
-			
-				//	Seem like exec combines result from previous requests. Not allowing to use article_type with category_name Trying  shell_exec fixes this.
-		//		$output = explode( "\n" , shell_exec( $command ) );
-		//		var_export( $output );
-		//	self::v( shell_exec( $command ) );  
-		//	self::v( $command );
-		//	self::v( $output );
-		//	self::v( $path ); 
-		//		$path = implode( ' ', $output ) ? : 'work_around_to_avoid_it_showing_all_posts';
-/*  				if( $path === self::getFolder() )
-				{
-					
-				}
-				else
-				{
-					$otherResults = explode( ' ', $path );
-			//	self::v( $pathToSearch );   
-			//	self::v( $output );   
-					
-					$output = array_intersect( $otherResults, $output );
-			//	self::v( $otherResults );   
-			//	self::v( $output );   
-		///		self::v( $output );
-				}
- */		//		var_export( '<br />' );
-		//		var_export( $this->_dbData );
-		///		var_export( $command );
-			//	self::v( $command );   
-		///		self::v( $output );
-		//		self::v( $path );
-		//		var_export( '<br />' );
 				$this->_dbData = $output;   
 			}
 		}
@@ -1053,6 +990,68 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
     } 
 	
     /**
+     * Sets up JS Required to autoload new posts
+     * 
+     * @param string Post List ID
+     * @param int Post List ID
+     * 
+     */
+	public function autoLoadNewPosts( $postListId, $offset = 0 )
+    {
+	//	var_export( $values );
+		if( empty( $_GET['pc_post_list_autoload'] ) && ( $this->getParameter( 'pagination' ) || $this->getParameter( 'pc_post_list_autoload' ) ) )
+		{
+			Application_Javascript::addFile( '/js/objects/infinite-scroll.js' );	
+			Application_Javascript::addCode
+			( 
+				'
+				var pc_autoloadPostPageNumber = "' . $offset . '";
+				var options = 
+				{
+					distance: 50,
+					callback: function( done ) 
+					{
+						var a = document.createElement( "div" );
+						a.innerHTML = "<div title=\"Loading more...\" style=\"text-align: center;\"><img alt=\"Loading more...\" src=\"' . Ayoola_Application::getUrlPrefix() . '/loading.gif?document_time=1\" ></div>";
+						var b = document.getElementById( "' . $postListId . '" );
+						b.appendChild( a );
+						var url = "/tools/classplayer/get/name/' . get_class( $this ) . '/?pc_post_list_autoload=1&pc_post_list_id=' . $postListId . '&list_page_number=" + pc_autoloadPostPageNumber + "&no_of_post_to_show=' . $j . '";
+						var ajax = ayoola.xmlHttp.fetchLink( { url: url, container: b, noSplash: true, insertBefore: true } );
+						var v = function()
+						{
+							if( ayoola.xmlHttp.isReady( ajax ) )
+							{	
+								var b = document.getElementById( "' . $postListId . '" );
+								b.innerHTML = "";
+								if( ! ajax.responseText )
+								{ 
+									return false;
+								}
+								if( ajax.responseText.indexOf( "pc_no_post_to_show" ) > -1 )
+								{ 
+									return false;
+								}
+								
+								pc_autoloadPostPageNumber++;
+								done();
+							}		
+						}	
+						ayoola.events.add( ajax, "readystatechange", v );
+						// 1. fetch data from the server
+						// 2. insert it into the document
+						// 3. call done when we are done
+					//	done();
+					}
+				}
+					
+				// setup infinite scroll
+				infiniteScroll(options);		
+				' 
+			);	
+		}
+	}
+	
+    /**
      * Returns an HTML to display #hashtags
      * 
      */
@@ -1105,7 +1104,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 		}
 		$html = null;
-		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;margin:2em 0 2em 0;">';
+		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;">';
 		$html .= '<' . $link . '>';
 		$html .= '<div  class="pc_theme_parallax_background" style="background-image: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\'); ">';
 		$html .= '<p style="text-align:right;">' . $data['article_type'] . '</p>';

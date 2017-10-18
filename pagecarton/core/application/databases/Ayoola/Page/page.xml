@@ -333,18 +333,18 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="75">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/account/signin]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Log in]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[0-0-75]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="title"><![CDATA[Log in]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

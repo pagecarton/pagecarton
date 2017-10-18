@@ -63,37 +63,6 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 		
 		
 		$directory = dirname( Ayoola_Loader::checkFile( $this->getFilename() ) );
-	//	var_export( $directory );
-	//	var_export( Ayoola_Doc::getFilesRecursive( $directory ) );
-		
-		//	Sort to remove files that are not images
-/* 		$sortFunction = create_function
-		( 
-			'$filePath', 
-			'
-			$extension = array_pop( explode( ".", strtolower( $filePath ) ) );
-			switch( $extension )
-			{
-				case "jpg":
-				case "jpeg":
-				case "gif":
-				case "png":
-				case "bmp":
-					
-				//	var_export( $extension );
-					
-					return $filePath;
-				break;
-				default:
-					return false;
-				break;
-				return false;
-				
-			}
-			'
-		); 
- */		
-	//	$files = Ayoola_Doc::getFilesRecursive( $directory, array( 'key_function' => $sortFunction ) );
 		$files = Ayoola_Doc::getFilesRecursive( $directory );
 //		var_export( $files );
 	//	asort( $files );
@@ -126,10 +95,7 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 		$list->setNoRecordMessage( 'No images in this theme.' );
 		$list->createList(  
 			array(
-				'filename' => '<img alt="" src="' . Ayoola_Application::getUrlPrefix() . '%KEY%" style="max-height:48px; vertical-align:middle;" > <br> %FIELD%  ',    
-		//		'full_path' => '%FIELD%',      
-		//		'local_path' => '%FIELD%',    
-		//		'my_own_copy' => '%FIELD%',    
+				'filename' => '<img alt="" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=60&max_height=60&url=%KEY%" style="max-height:48px; vertical-align:middle;" > <br> %FIELD%  ',    
 				'  ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=%KEY%"> Replace </a>', 
 				' ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Delete/?uri=%KEY%"> X </a>', 
 			)

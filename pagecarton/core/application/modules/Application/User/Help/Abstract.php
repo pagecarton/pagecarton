@@ -57,7 +57,7 @@ abstract class Application_User_Help_Abstract extends Application_User_Abstract
 	//	$form->setSubmitButton( $submitValue );
 		//$form->setCaptcha( true ); // Adds captcha
 		require_once 'Ayoola/Form/Element.php';
-		$personal = new Ayoola_Form_Element;
+/*		$personal = new Ayoola_Form_Element;
 		$personal->addElement( array( 'name' => 'firstname', 'description' => 'Your given name', 'type' => 'InputText', 'value' => @$values['firstname'] ) );
 		$personal->addRequirement( 'firstname','Name:: WordCount=>2;;20' );
 		$personal->addElement( array( 'name' => 'lastname', 'description' => 'Your family name', 'type' => 'InputText', 'value' => @$values['lastname'] ) );
@@ -113,15 +113,15 @@ abstract class Application_User_Help_Abstract extends Application_User_Abstract
 		$personal->addRequirement( 'birth_date','Date=>YYYY-MM-DD' );
 		$personal->addFilters( 'Trim::Escape' );
 		$personal->addLegend( "Personal Information" );
-		$account = new Ayoola_Form_Element;
+*/		$account = new Ayoola_Form_Element;
 	//	$account->addElement( array( 'name' => 'username', 'description' => 'You can leave blank if you can\'t remember it', 'type' => 'InputText', 'value' => @$values['username'] ) );
 	//	$account->addFilter( 'username','Username' );
-		$account->addElement( array( 'name' => 'email', 'placeholder' => 'Your e-mail account is required for account activation, password reset or username retrieval', 'type' => 'InputText', 'value' => @$values['email'] ) );
+		$account->addElement( array( 'name' => 'email', 'placeholder' => 'e.g. me@example.com', 'type' => 'InputText', 'value' => @$values['email'] ) );
 		$account->addRequirement( 'email','EmailAddress' );
-		$account->addLegend( "Account Information" );
+	//	$account->addLegend( "Account Information" );
 		$account->addFilters( 'Trim::Escape' );
 		$form->addFieldset( $account );
-		$form->addFieldset( $personal );
+	//	$form->addFieldset( $personal );
 		return $this->setForm( $form );
     } 
 	// END OF CLASS

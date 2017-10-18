@@ -96,12 +96,49 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 		//	var_export( self::hasPriviledge( @$data['auth_level'] ) );
 			$this->setViewContent( self::getXml(), true );
-	//		var_export( $data['auth_level'] ); 
-/* 			if( self::hasPriviledge() )
-			{ 
-				$this->setViewContent( Application_Article_ShowAll::viewInLine( array( 'username_to_show' => $data['username'] ) ) ); 
+
+		//	if( $this->getParameter( 'pagination' ) )
+			{
+				$pagination = null;
+
+				//	Prepare post viewing for next posts
+				$storageForSinglePosts = self::getObjectStorage( array( 'id' => 'post_list_id' ) );
+				
+				$postListId = $storageForSinglePosts->retrieve();
+
+				$postList = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId, 'device' => 'File' ) );
+				$postList = $postList->retrieve();
+				if( ! empty( $postList['single_post_pagination'] ) )
+				{
+					$postList = $postList['single_post_pagination'][$data['article_url']];
+					if( ! empty( $postList['pc_next_post'] ) )
+					{
+						if( $nextPost = self::loadPostData( $postList['pc_next_post'] ) )
+						{
+							$this->_objectTemplateValues['paginator_next_page'] = Ayoola_Application::getUrlPrefix() . $postList['pc_next_post'];
+							$this->_objectTemplateValues['paginator_next_page_button'] = '<a class="pc-btn" href="' . $this->_objectTemplateValues['paginator_next_page'] . '">Next  &rarr; "' . $nextPost['article_title'] . '"</a>';       
+						}
+			//			var_export( $nextPost );
+
+					}
+					if( ! empty( $postList['pc_previous_post'] ) )
+					{
+						if( $previousPost = self::loadPostData( $postList['pc_previous_post'] ) )
+						{
+							$this->_objectTemplateValues['paginator_previous_page'] = Ayoola_Application::getUrlPrefix() . $postList['pc_previous_post'];
+							$this->_objectTemplateValues['paginator_previous_page_button'] = '<a class="pc-btn" href="' . $this->_objectTemplateValues['paginator_previous_page'] . '"> "' . $previousPost['article_title'] . '" &larr; Previous</a>';
+						}
+					}
+					$pagination .= @$this->_objectTemplateValues['paginator_previous_page_button'];
+					$pagination .= @$this->_objectTemplateValues['paginator_next_page_button'];			
+					$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '">' . $pagination . '</div>';
+
+				}
+			//	var_export( $postList );
+				$this->setViewContent( $pagination );
 			}
- */		}
+
+		}
 		catch( Exception $e )
 		{ 
 			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );

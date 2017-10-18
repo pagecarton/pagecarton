@@ -1684,11 +1684,11 @@ class Ayoola_Application
      */
     public static function isXmlHttpRequest()
     {
+		$pointer = array_map( 'trim', explode( ',', $_SERVER['HTTP_REQUEST_TYPE'] ) );
 	//	var_export( $_SERVER['HTTP_REQUEST_TYPE'] );
 		if
 		( 
-			( isset( $_SERVER['HTTP_REQUEST_TYPE'] ) && $_SERVER['HTTP_REQUEST_TYPE'] == 'xmlHttp' ) 
-			
+			in_array( 'xmlHttp', $pointer )
 		)
 		{ return true; }
 		return false;      

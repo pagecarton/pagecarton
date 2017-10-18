@@ -274,11 +274,14 @@ ayoola.xmlHttp =
 		if( method == 'POST' && ajax.setRequestHeader && ! linkObject.dontSetContentType )
 		{
 			ajax.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
-			ajax.setRequestHeader( 'Request-Type', 'xmlHttpFetchLink' );
 		}
+		ajax.setRequestHeader( 'Request-Type', 'xmlHttp' );
 		if( linkObject.container )
 		{
-			var splash = ayoola.spotLight.splashScreen();
+			if( ! linkObject.noSplash )
+			{
+				var splash = ayoola.spotLight.splashScreen();
+			}
 			var ajaxCallback = function()
 			{
 				//	alert( ajax );
@@ -292,23 +295,40 @@ ayoola.xmlHttp =
 						return false;
 					}
 					var a = ajax.responseText.split( '<!--PC-HTML-DEMARCATION-->' );
-					linkObject.container.innerHTML = a[0];
-					var b = document.getElementsByTagName("body")[0];
-					var c = document.createElement( 'div' );
-					c.innerHTML = a[1];
-					d = c.getElementsByTagName("script");
-					for( var e = 0; e < d.length; e++ )
+					if( a[0] )
 					{
-					//	alert( d[e] );
-						if( d[e].id && document.getElementById( d[e].id ) )
+						if( linkObject.appendContent )
 						{
-						//	alert( d[e].src );
-							d[e].parentNode.removeChild( d[e] );
+							linkObject.container.innerHTML = linkObject.container.innerHTML + a[0];							
+						}
+						else if( linkObject.insertBefore )
+						{
+							linkObject.container.outerHTML = a[0] + linkObject.container.outerHTML;							
+						}
+						else
+						{
+							linkObject.container.innerHTML = a[0];
 						}
 					}
-					b.appendChild( c );
-					ayoola.xmlHttp.nodeScriptReplace( c );
-					splash.close();
+					if( a[1] )
+					{
+						var b = document.getElementsByTagName("body")[0];
+						var c = document.createElement( 'div' );
+						c.innerHTML = a[1];
+						d = c.getElementsByTagName("script");
+						for( var e = 0; e < d.length; e++ )
+						{
+						//	alert( d[e] );
+							if( d[e].id && document.getElementById( d[e].id ) )
+							{
+							//	alert( d[e].src );
+								d[e].parentNode.removeChild( d[e] );
+							}
+						}
+						b.appendChild( c );
+						ayoola.xmlHttp.nodeScriptReplace( c );
+					}
+					splash ? splash.close() : null;
 				} 
 			}
 			ayoola.events.add( ajax, "readystatechange", ajaxCallback );

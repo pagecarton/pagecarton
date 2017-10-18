@@ -267,7 +267,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 */				$this->setViewContent( '<p class="goodnews">New theme saved successfully.</p>', true );
 				$this->setViewContent( '<p class="">
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Edit Codes Again</a>
-				<a href="' . Ayoola_Application::getUrlPrefix() . '/ayoola/page/edit/layout/?url=/layout/' . $values['layout_name'] . '/template" class="pc-btn pc-btn-small">Launch Theme Editor</a>
+				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/layout/' . $values['layout_name'] . '/template" class="pc-btn pc-btn-small">Launch Theme Editor</a>
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Page/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Change Default Theme</a>
 
 				</p>' );

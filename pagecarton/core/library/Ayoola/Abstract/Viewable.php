@@ -41,7 +41,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      *
      * @var Ayoola_Storage
      */
-	protected $_objectStorage;
+	protected static $_objectStorage;
 
     /**
      * Useful for lists
@@ -284,7 +284,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      * @param string Unique ID for Namespace
      * @return Ayoola_Storage
      */
-	public function getObjectStorage( $storageInfo = null )
+	public static function getObjectStorage( $storageInfo = null )
     {
 		$id = null;
 		$device = null;
@@ -299,12 +299,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$timeOut = @$storageInfo['time_out'];  
 		}
 		
-		if( @$this->_objectStorage[$id] ){ return $this->_objectStorage[$id]; }
-		$this->_objectStorage[$id] = new Ayoola_Storage();
-		$this->_objectStorage[$id]->storageNamespace = $this->getObjectName() . '-' . $id; 
-		$this->_objectStorage[$id]->timeOut = @$timeOut;   
-		$device ? $this->_objectStorage[$id]->setDevice( $device ) : null; 
-		return $this->_objectStorage[$id];
+		if( static::$_objectStorage[$id] )
+		{ 
+			return static::$_objectStorage[$id]; 
+		}
+		static::$_objectStorage[$id] = new Ayoola_Storage();
+//		var_export( get_called_class() );
+		static::$_objectStorage[$id]->storageNamespace = get_called_class() . '-' . $id; 
+//		var_export( static::$_objectStorage[$id]->storageNamespace );
+		static::$_objectStorage[$id]->timeOut = @$timeOut;   
+		$device ? static::$_objectStorage[$id]->setDevice( $device ) : null; 
+		return static::$_objectStorage[$id];
     }
 	
     /**

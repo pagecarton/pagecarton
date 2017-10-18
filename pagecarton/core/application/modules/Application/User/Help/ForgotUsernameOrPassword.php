@@ -50,9 +50,9 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
     {
 		try
 		{ 
-			$this->createForm( 'Reset' );
-			$this->setViewContent( '<h3>Reset Password</h3>' );
-			$this->setViewContent( 'Fill the following information to retrieve your username or to reset your password. Just fill in the information you remember.' );
+			$this->createForm( 'Reset Password' );
+	//		$this->setViewContent( '<h3>Reset Password</h3>' );
+			$this->setViewContent( '<p class="pc-notify-info">Fill the following information to reset your password</p>' );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
@@ -66,7 +66,8 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 				if( $info['user_information'] )  
 				{
 					$info = $info['user_information'];
-					$requiredFields = array( 'firstname', 'lastname', 'sex', 'birth_date' );
+				//	$requiredFields = array( 'firstname', 'lastname', 'sex', 'birth_date' );
+					$requiredFields = array();
 					
 					//	Super users cant do this...
 					if( intval( $info['access_level'] ) == 99 )

@@ -666,3 +666,9 @@ html, body
     font-family: 'open_sansregular', arial, sans;
 }
 
+/*POSTS*/
+.pc_posts_distinguish_sets
+{
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
