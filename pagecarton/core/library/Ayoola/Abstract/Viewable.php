@@ -1352,13 +1352,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$html = $template; 
 				}   
 			//		var_export( $this->getParameter( 'wrapper_name' ) );
-				if( $this->getParameter( 'wrapper_name' ) )       
+				if( $this->getParameter( 'wrapper_name' ) && $html )       
 				{
 					$html = Ayoola_Object_Wrapper_Abstract::wrapContent( $html, $this->getParameter( 'wrapper_name' ) );
 				}   
-				if( $this->getParameter( 'object_style' ) || $this->getParameter( 'object_class' ) )       
+				if( ( $this->getParameter( 'object_style' ) || $this->getParameter( 'object_class' ) ) && $html )       
 				{
-			//		var_export( $this->getParameter() );
+			//		var_export( $this->getParameter( 'object_style' ) );
+			//		var_export( $html );
 					$html = '<div class="'. $this->getParameter( 'object_class' ) .'" style="'. $this->getParameter( 'object_style' ) .'">' . $html . '</div>';
 					//	self::v( $template );   
 				}

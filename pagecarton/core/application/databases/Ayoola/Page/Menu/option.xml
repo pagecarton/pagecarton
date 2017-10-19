@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="option" creation_time="1408390303" table_version="0.05" module_version="1.00" table_class="Ayoola_Page_Menu_Option" creation_ip="2130706433">
-  <RECORDS autoId="86">
+  <RECORDS autoId="88">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Settings]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/settings/]]></TABLE_FIELD>
@@ -910,6 +910,34 @@
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[9]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:2:{i:0;s:2:&quot;98&quot;;i:1;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="sub_menu_name"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="86">
+      <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Home]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:2:{i:0;s:9:&quot;logged_in&quot;;i:1;s:10:&quot;logged_out&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[0-0-20]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:5:{i:0;s:1:&quot;1&quot;;i:1;s:1:&quot;0&quot;;i:2;s:2:&quot;97&quot;;i:3;s:2:&quot;98&quot;;i:4;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sub_menu_name"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="logged_in"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="logged_out"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="append_previous_url"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="option_id"><![CDATA[0-0-86]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="87">
+      <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[All Posts]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/posts]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:2:{i:0;s:9:&quot;logged_in&quot;;i:1;s:10:&quot;logged_out&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[0-0-20]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:5:{i:0;s:1:&quot;1&quot;;i:1;s:1:&quot;0&quot;;i:2;s:2:&quot;97&quot;;i:3;s:2:&quot;98&quot;;i:4;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sub_menu_name"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="logged_in"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="logged_out"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="append_previous_url"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="option_id"><![CDATA[0-0-87]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

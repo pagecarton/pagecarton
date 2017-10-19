@@ -285,11 +285,21 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		else
 		{
-			$postListId = 'pc_post_list_' . md5( serialize( $_GET ) . 'x--.---' . serialize( $this->getParameter() ) );
+			$postListId = 'pc_post_list_' . md5( serialize( $_GET ) . 'x---.---' . serialize( $this->getParameter() ) );
 		}
+	//	var_export( $_GET );
+//		var_export( $postListId );
+//		var_export( $postListId );
 		$storage = $this->getObjectStorage( array( 'id' => $postListId, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
 		$storedValues = $storage->retrieve();
 		
+		if( ! empty( $storedValues['parameter'] ) &&  empty( $_GET['pc_post_list_autoload'] ) )
+		{	
+		//	var_export( $storedValues['parameter'] );
+
+			//	Bring out stored parameters
+			$this->setParameter( $storedValues['parameter'] );
+		}
 		//	Prepare post viewing for next posts
 		$class = new Application_Article_View( array( 'no_init' => true ) );
 		$storageForSinglePosts = $class->getObjectStorage( array( 'id' => 'post_list_id' ) );
@@ -305,7 +315,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$values = $storedValues['values'];
 		}
 
-//		if( ! $storedValues )
+		if( ! $storedValues && $this->getParameter( 'cache_post_list' ) )
 		{   
 		//	var_export( $values );    
 	//		self::v( $this->getParameter() );       
@@ -457,12 +467,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 		}
 		
-		if( ! empty( $storedValues['parameter'] ) )
-		{	
-
-			//	Bring out stored parameters
-			$this->setParameter( $storedValues['parameter'] );
-		}
 	//	$values = array_unique( $values );
 	//		var_export( $values );
 	//	krsort( $values );
@@ -942,7 +946,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
 
 		$pagination = null;
-		if( $this->getParameter( 'pagination' ) )
+	//	if( $this->getParameter( 'pagination' ) )
+		if( ! $this->getParameter( 'no_pagination' ) )
 		{
 			$pagination .= @$this->_objectTemplateValues['paginator_previous_page_button'];
 			$pagination .= @$this->_objectTemplateValues['paginator_next_page_button'];
@@ -953,7 +958,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( empty( $_GET['pc_post_list_autoload'] ) )
 		{
 			$this->_xml .= $pagination;
-			if( empty( $_GET['pc_post_list_autoload'] ) && $template  )
+			if( $template  )
 			{
 				$template = '' . $template . $pagination;
 			}

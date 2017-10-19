@@ -1005,17 +1005,17 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			Application_Javascript::addCode
 			( 
 				'
-				var pc_autoloadPostPageNumber = "' . $offset . '";
+				var pc_autoloadPostPageNumber_' . $postListId . ' = "' . $offset . '";
 				var options = 
 				{
-					distance: 50,
+					distance: 200,
 					callback: function( done ) 
 					{
 						var a = document.createElement( "div" );
 						a.innerHTML = "<div title=\"Loading more...\" style=\"text-align: center;\"><img alt=\"Loading more...\" src=\"' . Ayoola_Application::getUrlPrefix() . '/loading.gif?document_time=1\" ></div>";
 						var b = document.getElementById( "' . $postListId . '" );
 						b.appendChild( a );
-						var url = "/tools/classplayer/get/name/' . get_class( $this ) . '/?pc_post_list_autoload=1&pc_post_list_id=' . $postListId . '&list_page_number=" + pc_autoloadPostPageNumber + "&no_of_post_to_show=' . $j . '";
+						var url = "/tools/classplayer/get/name/' . get_class( $this ) . '/?pc_post_list_autoload=1&pc_post_list_id=' . $postListId . '&list_page_number=" + pc_autoloadPostPageNumber_' . $postListId . ';
 						var ajax = ayoola.xmlHttp.fetchLink( { url: url, container: b, noSplash: true, insertBefore: true } );
 						var v = function()
 						{
@@ -1032,7 +1032,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 									return false;
 								}
 								
-								pc_autoloadPostPageNumber++;
+								pc_autoloadPostPageNumber_' . $postListId . '++;
 								done();
 							}		
 						}	
@@ -1104,7 +1104,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 		}
 		$html = null;
-		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777;">';
+		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777; margin-bottom:3em;">';
 		$html .= '<' . $link . '>';
 		$html .= '<div  class="pc_theme_parallax_background" style="background-image: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\'); ">';
 		$html .= '<p style="text-align:right;">' . $data['article_type'] . '</p>';
