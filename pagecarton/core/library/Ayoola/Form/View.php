@@ -292,7 +292,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		$fieldset = new Ayoola_Form_Element;
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;
-	//	$fieldset->placeholderInPlaceOfLabel = false;       
+	//	$fieldsets[$key]->placeholderInPlaceOfLabel = false;       
 		$i = 0;
 		do
 		{
@@ -309,10 +309,13 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			$requirement = null;
 			$options = array();
 			$type = 'InputText'; 
-			if( strpos( $formInfo['element_name'][$i], 'base64' ) )
+			@$formInfo['element_name'][$i] = $formInfo['element_name'][$i] ? : $formInfo['element_title'][$i];
+			$elementName = $formInfo['element_name'][$i];
+			if( strpos( $elementName, 'base64' ) )
 			{
 				$options['data-allow_base64'] = true;
 			}
+			$defaultValue = @$values[$elementName] ? : @$formInfo['element_default_value'][$i];
 			switch( $formInfo['element_type'][$i] )
 			{
 				case 'textarea': 
@@ -324,16 +327,112 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				case 'hidden': 
 					$type = 'hidden'; 
 				break;
+				case 'date': 
+				case 'datetime': 
+					//	event
+					//	retrieve
+					
+					if( @$defaultValue )
+					{
+						switch( strtolower( $defaultValue ) )
+						{
+							case 'now':
+								$defaultValue = date("Y-m-d H:i:s");
+							break;
+						}
+						$defaultValueDigits = str_replace( array( '-', ' ', ':' ), '', $defaultValue );
+						$values[$elementName . '_year'] = $defaultValueDigits[0] . $defaultValueDigits[1] . $defaultValueDigits[2] . $defaultValueDigits[3];
+						$values[$elementName . '_month'] = $defaultValueDigits[4] . $defaultValueDigits[5];
+						$values[$elementName . '_day'] = $defaultValueDigits[6] . $defaultValueDigits[7];
+						$values[$elementName . '_hours'] = $defaultValueDigits[8] . $defaultValueDigits[9];
+						$values[$elementName . '_minutes'] = $defaultValueDigits[10] . $defaultValueDigits[11];
+					}
+				//	self::v( $defaultValue );       
+					
+					//	Month
+					$options = array_combine( range( 1, 12 ), array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ) );
+					$monthValue = intval( @strlen( $values[$elementName . '_month'] ) === 1 ? ( '0' . @$values[$elementName . '_month'] ) : @$values[$elementName . '_month'] );
+					$monthValue = intval( $monthValue ?  : $this->getGlobalValue( $elementName . '_month' ) );
+				//	var_export( $monthValue );
+				//	var_export( $this->getGlobalValue( $elementName . '_month' ) );
+					$fieldsets[$key]->addElement( array( 'name' => $elementName . '_month', 'label' => $formInfo['element_title'][$i], 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $monthValue ), array( 'Month' ) + $options ); 
+					$fieldsets[$key]->addRequirement( $elementName . '_month', array( 'InArray' => array_keys( $options ) ) );
+					if( strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 )
+					{
+						$fieldsets[$key]->addFilter( $elementName . '_month', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_month' ) ) );
+					}
+					
+					//	Day
+					$options = range( 1, 31 );
+					$options = array_combine( $options, $options );
+					$DayValue = intval( @strlen( $values[$elementName . '_day'] ) === 1 ? ( '0' . @$values[$elementName . '_day'] ) : @$values[$elementName . '_day'] );
+					$DayValue = intval( $DayValue ?  : $this->getGlobalValue( $elementName . '_day' ) );
+					$fieldsets[$key]->addElement( array( 'name' => $elementName . '_day', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $DayValue ), array( 'Day' ) + $options );
+					$fieldsets[$key]->addRequirement( $elementName . '_day', array( 'InArray' => array_keys( $options ) ) );
+					if( strlen( $this->getGlobalValue( $elementName . '_day' ) ) === 1 )
+					{
+						$fieldsets[$key]->addFilter( $elementName . '_day', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_day' ) ) );
+					}
+					
+					//	Year
+					//	10 years and 10 years after todays date
+					$options = range( date( 'Y' ) + 100, date( 'Y' ) - 100 );
+					$options = array_combine( $options, $options );
+					$fieldsets[$key]->addElement( array( 'name' => $elementName . '_year', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values[$elementName . '_year'] ? : '' ), array( 'Year' ) + $options );
+					$fieldsets[$key]->addRequirement( $elementName . '_year', array( 'InArray' => array_keys( $options ) ) );
+					$date = $this->getGlobalValue( $elementName . '_year' );
+					$date .= '-';
+					$date .= strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_month' ) ) : $this->getGlobalValue( $elementName . '_month' );
+					$date .= '-';
+					$date .= strlen( $this->getGlobalValue( $elementName . '_day' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_day' ) ) : $this->getGlobalValue( $elementName . '_day' );
+					$fieldsets[$key]->addElement( array( 'name' => $elementName . '_date', 'label' => 'Timestamp', 'placeholder' => 'YYYY-MM-DD HH:MM', 'type' => 'Hidden', 'value' => @$values[$elementName . '_date'] ) );
+					$fieldsets[$key]->addFilter( $elementName . '_date', array( 'DefiniteValue' => $date ) );
+					$fieldsets[$key]->addFilter( $elementName, array( 'DefiniteValue' => $date ) );
+					if( 'datetime' == $formInfo['element_type'][$i] )
+					{
+						$options = range( 0, 23 );
+						foreach( $options as $eachKey => $each )
+						{
+							if( strlen( $options[$eachKey] ) < 2 )  
+							{
+								$options[$eachKey] = '0' . $options[$eachKey];
+							}
+						}
+						$fieldsets[$key]->addElement( array( 'name' => $elementName . '_hours', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_hours'] ), array( 'Hour' ) +  array_combine( $options, $options ) );
+						$fieldsets[$key]->addRequirement( $elementName . '_hours', array( 'InArray' => array_keys( $options ) ) );
+						$options = range( 0, 59 );
+						foreach( $options as $eachKey => $each )
+						{
+							if( strlen( $options[$eachKey] ) < 2 )    
+							{
+								$options[$eachKey] = '0' . $options[$eachKey];
+							}
+						}
+						$fieldsets[$key]->addElement( array( 'name' => $elementName . '_minutes', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_minutes'] ), array( 'Minute' ) + array_combine( $options, $options ) );
+						$fieldsets[$key]->addRequirement( $elementName . '_minutes', array( 'InArray' => array_keys( $options ) ) );
+
+						//	datetime combined
+						$datetime = $date;
+						$datetime .= ' ';
+						$datetime .= strlen( $this->getGlobalValue( $elementName . '_hours' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_hours' ) ) : $this->getGlobalValue( $elementName . '_hours' );
+						$datetime .= ':';
+						$datetime .= strlen( $this->getGlobalValue( $elementName . '_minutes' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_minutes' ) ) : $this->getGlobalValue( $elementName . '_minutes' );
+						$fieldsets[$key]->addElement( array( 'name' => $elementName . '_datetime', 'label' => 'Timestamp', 'placeholder' => 'YYYY-MM-DD HH:MM', 'type' => 'Hidden', 'value' => @$values[$elementName . '_datetime'] ) );
+						$fieldsets[$key]->addFilter( $elementName . '_datetime', array( 'DefiniteValue' => $datetime ) );
+						$fieldsets[$key]->addFilter( $elementName, array( 'DefiniteValue' => $datetime ) );
+					}
+					
+					$type = 'hidden'; 
+				break;
 				case 'file': 
 				case 'audio': 
 				case 'video': 
 				case 'image': 
 				//	$requirement = array( 'Base64Image' => array() );
 				case 'document': 
-			//		var_export( strpos( $formInfo['element_name'][$i], 'base64' ) );
-			//		var_export( $formInfo['element_name'][$i] );
 					$type = 'Document'; 
 					$docSettings = Ayoola_Doc_Settings::getSettings( 'Documents' );
+			//		var_export( $docSettings );
 					if( @$options['data-allow_base64'] )
 					{
 					//	$options['data-allow_base64'] = true;
@@ -341,7 +440,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					}
 					elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ) )
 					{ 
-						$requirement = array( 'IsFile' => array( 'base_directory' => Ayoola_Doc::getDocumentsDirectory() , 'allowed_extensions' => $this->getParameter( 'allowed_extensions' ) ? explode( ',', $this->getParameter( 'allowed_extensions' ) ) : null ) );
+				//		$requirement = array( 'IsFile' => array( 'base_directory' => Ayoola_Doc::getDocumentsDirectory() , 'allowed_extensions' => $this->getParameter( 'allowed_extensions' ) ? explode( ',', $this->getParameter( 'allowed_extensions' ) ) : null ) );
 					}
 					else
 					{
@@ -353,18 +452,15 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					$type = 'InputText'; 
 				break;
 			}
-		//	var_export( $formInfo['element_name'][$i] . '<br>' );
-		//	var_export( $type . '<br>' );
-			@$formInfo['element_name'][$i] = $formInfo['element_name'][$i] ? : $formInfo['element_title'][$i];
-			$fieldsets[$key]->addElement( array( 'name' => $formInfo['element_name'][$i] ? : $formInfo['element_title'][$i], 'label' => $formInfo['element_title'][$i], 'data-document_type' => $formInfo['element_type'][$i], 'placeholder' => $formInfo['element_placeholder'][$i], 'type' => $type, 'value' => @$values[$formInfo['element_name'][$i]] ? : @$formInfo['element_default_value'][$i] ) + $options );
-			$requirement ? $fieldsets[$key]->addRequirement( $formInfo['element_name'][$i], $requirement ) : null;
+			$fieldsets[$key]->addElement( array( 'name' => $elementName, 'label' => $formInfo['element_title'][$i], 'data-document_type' => $formInfo['element_type'][$i], 'placeholder' => $formInfo['element_placeholder'][$i], 'type' => $type, 'value' => $defaultValue ) + $options );
+			$requirement ? $fieldsets[$key]->addRequirement( $elementName, $requirement ) : null;
 							
 			$i++;
 		//	self::v( $i );  
 		}
 		while( ! empty( $formInfo['element_title'][$i] ) );
 	//	self::v( $formInfo['requirements'] );  
-	//	$fieldset->addElement( array( 'name' => 'form_name', 'type' => 'Hidden', 'value' => @$formInfo['form_name'] ) );
+	//	$fieldsets[$key]->addElement( array( 'name' => 'form_name', 'type' => 'Hidden', 'value' => @$formInfo['form_name'] ) );
 
 	//	$form->setFormRequirements( array( 'requirements' => $formInfo['requirements'] ) );
 		$form->setParameter( array( 'requirements' => $formInfo['requirements'] ) );

@@ -232,7 +232,24 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 					
 				//	$newFieldSet->addRequirement( 'element_name', array( 'Name' => null  ) ); 
 					$newFieldSet->addElement( array( 'name' => 'element_placeholder',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'width: 300px;', 'placeholder' => 'Placeholder e.g. John Smith', 'type' => 'InputText', 'value' => @$values['element_placeholder'][$i] ) );
-					$newFieldSet->addElement( array( 'name' => 'element_type',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'width: 300px;', 'type' => 'Select', 'value' => @$values['element_type'][$i] ), array( 'text' => 'Text Input', 'hidden' => 'Hidden Field', 'radio' => 'Radio Button', 'Select' => 'Select Option', 'email' => 'Email Input', 'textarea' => 'Text Area', 'submit' => 'Submit Button', 'file' => 'File', 'document' => 'Document', 'image' => 'Image', 'profile_picture' => 'Profile Picture', 'audio' => 'Audio', ) );
+					$newFieldSet->addElement( array( 'name' => 'element_type',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'width: 300px;', 'type' => 'Select', 'value' => @$values['element_type'][$i] ), 
+					
+						array( 
+								'text' => 'Text Input', 
+								'hidden' => 'Hidden Field', 
+					//			'radio' => 'Radio Button', 
+					//			'Select' => 'Select Option', 
+								'email' => 'Email Input', 
+								'textarea' => 'Text Area', 
+								'submit' => 'Submit Button', 
+								'file' => 'File', 
+								'document' => 'Document', 
+								'image' => 'Image', 
+							//	'profile_picture' => 'Profile Picture', 
+								'audio' => 'Audio',
+								'date' => 'Date',
+								'datetime' => 'Date & Time',
+								 ) );
 					$this->getGlobalValue( 'group_names' ) ? $newFieldSet->addElement( array( 'name' => 'element_group_name',  'multiple' => 'multiple', 'label' => 'Group Name (Optional)', 'placeholder' => 'e.g. personal', 'type' => 'Select', 'value' => @$values['element_group_name'][$i] ), array_combine( $this->getGlobalValue( 'group_ids' ), $this->getGlobalValue( 'group_names' ) ) ) : null; 
 					$newForm->addFieldset( $newFieldSet );    
 				//	self::v( $i );   
