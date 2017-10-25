@@ -766,6 +766,22 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		$newMenuName = 'menu_' . time();
 		static::$_counter++;
 		$options = (array) $options->getClassOptions();
+		if( ! empty( $object['option'] ) && ! array_key_exists( $object['option'], $options ) )  
+		{
+			//	 look for it in parent tables; 
+			$parentSeek = new Ayoola_Page_Menu_Menu();
+
+			//	look in parent tables
+			$parentSeek->getDatabase()->setAccessibility( $parentSeek::SCOPE_PROTECTED );
+			
+			if( $data = $parentSeek->selectOne( null, array( 'menu_name' => $object['option'] ), array( 'cc33' => true ) ) )
+			{ 
+				$options[$data['menu_name']] = $data['menu_label'];
+			//	var_export( $options ); 
+			}
+			
+		}
+
 	//	if( $options = (array) $options->getClassOptions() )
 		{
 			$html .= '<span style=""> Menu:  </span>';
@@ -787,6 +803,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			{
 				$object['template_name'] = 'HorizontalGrayish'; 
 			}
+		//	var_export( $object['option'] );      
 			foreach( $options as $key => $value )
 			{ 
 				$html .=  '<option value="' . $key . '"';  
