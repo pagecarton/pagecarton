@@ -766,7 +766,7 @@ class Ayoola_Application
 							{
 								self::$_runtimeSetting['real_url'] = '/post/view';								
 								$moduleInfo = Ayoola_Page::getInfo( self::$_runtimeSetting['real_url'] ); 
-								if( ( ! empty( $moduleInfo ) && in_array( 'module', $moduleInfo['page_options'] ) ) )
+/*								if( ( ! empty( $moduleInfo ) && in_array( 'module', $moduleInfo['page_options'] ) ) )
 								{
 									//	allow dedicated url for all post types like /download/posts/
 									
@@ -775,8 +775,9 @@ class Ayoola_Application
 								{
 									self::$_runtimeSetting['real_url'] = Application_Article_Abstract::getPostUrl() ? : '/';
 								}
-							}
+*/							}
 						}
+		//				var_export( self::$_runtimeSetting['real_url'] );   
 						self::view( self::$_runtimeSetting['real_url'] );
 						break;
 					//	exit();
