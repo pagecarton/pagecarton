@@ -94,7 +94,7 @@ class Ayoola_Loader
 
         foreach( $paths as $path )
 		{
-			set_time_limit( 60 );
+		//	set_time_limit( 60 );
             if( $path == '.' )
 			{
                 if ( is_readable( $relativePath ) ){ $availableFullPaths['.'] = $relativePath; }

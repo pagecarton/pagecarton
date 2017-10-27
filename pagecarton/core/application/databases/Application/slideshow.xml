@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="slideshow" creation_time="1507778050" table_version="0.10" module_version="1.00" table_class="Application_Slideshow" creation_ip="2130706433">
-  <RECORDS autoId="49">
+  <RECORDS autoId="50">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="slideshow_name"><![CDATA[slideshow_1507778050]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="slideshow_title"><![CDATA[slideshow_1507778050]]></TABLE_FIELD>
@@ -1008,6 +1008,27 @@
       <TABLE_FIELD FIELD_KEY="image_title"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="image_description"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="slideshow_id"><![CDATA[0-0-48]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="49">
+      <TABLE_FIELD FIELD_KEY="slideshow_name"><![CDATA[slideshow_1509044492]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="slideshow_title"><![CDATA[slideshow_1509044492]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="image_limit"><![CDATA[2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="sample_image"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="slideshow_type"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="slideshow_category_name"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="slideshow_article_type"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="slideshow_description"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="width"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="height"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="timeout"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="slideshow_images"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="slideshow_data"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="slideshow_options"><![CDATA[N;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="slideshow_image"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="image_link"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="image_title"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="image_description"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="slideshow_id"><![CDATA[0-0-49]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

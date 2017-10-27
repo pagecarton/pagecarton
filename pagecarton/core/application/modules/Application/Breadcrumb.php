@@ -101,7 +101,7 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 				}
 				elseif( ! $each['title'] )
 				{
-					$each['title'] = array_pop( array_map( 'ucwords', explode( '/', $each['url'] ) ) );  
+					$each['title'] = array_pop( array_map( 'ucwords', explode( '/', str_replace( '-', ' ',	 $each['url'] ) ) ) );  
 				}
 				$urlLog[$each['url']] = $each['url'];
 				if( $template )

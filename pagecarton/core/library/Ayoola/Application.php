@@ -1598,23 +1598,23 @@ class Ayoola_Application
     {
 //		var_export( $_SERVER );
 //		exit();
-		if( self::$_urlPrefix ){ return self::$_urlPrefix; }
+		if( ! is_null( self::$_urlPrefix ) ){ return self::$_urlPrefix; }
 		self::$_urlPrefix = '';
 		$storage = new Ayoola_Storage();
 		$storage->storageNamespace = __CLASS__  . 'url_prefix-' . @constant( 'PC_PATH_PREFIX' );
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve(); 
-	//	var_export( $data );
+	//	var_export( $data );   
 		if(  ! $data  )
 		{		
 		//	var_export( $data );
  			//	Detect if we have mod-rewrite
-			$urlToLocalInstallerFile = Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . $_SERVER['HTTP_HOST'] . @constant( 'PC_PATH_PREFIX' ) . '/pc_check.txt';
-		//	var_export( $urlToLocalInstallerFile );
+			$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . @constant( 'PC_PATH_PREFIX' ) . '/pc_check.txt';
+	//		var_export( $urlToLocalInstallerFile );
 			$modRewriteEnabled = get_headers( $urlToLocalInstallerFile );
 			$responseCode = explode( ' ', $modRewriteEnabled[0] );
 		//	var_export( $urlToLocalInstallerFile );
-		//	var_export( $responseCode );
+	//		var_export( $responseCode );
 			if( in_array( '200', $responseCode ) )
 			{
 				$data = 1;

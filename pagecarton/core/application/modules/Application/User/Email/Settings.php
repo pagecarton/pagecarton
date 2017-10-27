@@ -43,7 +43,7 @@ class Application_User_Email_Settings extends Application_Settings_Abstract
 		$form->oneFieldSetAtATime = true;
 		$fieldset = new Ayoola_Form_Element;
 		$options = array( 'ayoola' => 'Ayoola Mail', 'self' => 'Local Server', 'google' => 'Google Mail (experimental)' );
-		$fieldset->addElement( array( 'name' => 'provider', 'label' => 'Provider Information', 'value' => @$settings['provider'], 'type' => 'Radio' ), $options );
+//		$fieldset->addElement( array( 'name' => 'provider', 'label' => 'Provider Information', 'value' => @$settings['provider'], 'type' => 'Radio' ), $options );
 	//	$fieldset->addRequirement( 'options', array( 'ArrayKeys' => $options ) );
 		$fieldset->addLegend( 'Email Settings' );
 		$form->addFieldset( $fieldset );

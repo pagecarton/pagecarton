@@ -262,20 +262,14 @@ class Application_Category_View extends Application_Category_Abstract
 				$postType = $_REQUEST['post_type'];
 			}
 		}
-	//	var_export( $category );
-/* 		var_export( $this->getParameter( 'allow_dynamic_category_selection' ) );
-		var_export( $_REQUEST['category'] );
-		var_export( $category );
- */		if( ! $category )
+		if( ! $category )
 		{
-			//	Showing Random Info from allowed categories from POST   
-/* 			$class = new Application_Article_Category();
-			$data = $class->getPublicDbData();
-			$data = $data[array_rand( $data )];
- */		}
+
+		}
 		else
 		{
 			$data = $this->getDbTable()->selectOne( null, array( 'category_name' => $category ) ) ? : array();
+	//	var_export( $data );
 			
 			if( $data && @$postType )
 			{
