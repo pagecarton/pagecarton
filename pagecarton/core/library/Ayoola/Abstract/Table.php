@@ -277,6 +277,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		$this->_dbData = (array) $table->select( null, $this->_dbWhereClause );
 		$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
 	//	@$this->_sortColumn = ( $_REQUEST['pc_sort_column'] && $_REQUEST['pc_sort_column_table'] == get_class( $table ) ) ? $_REQUEST['pc_sort_column'] : $this->_sortColumn;
+//		var_Export( $this->_sortColumn );
 		if( $this->_sortColumn )    
 		{
 			$this->_dbData = self::sortMultiDimensionalArray( $this->_dbData, $this->_sortColumn );

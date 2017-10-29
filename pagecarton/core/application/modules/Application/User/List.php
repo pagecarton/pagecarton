@@ -57,8 +57,9 @@ class Application_User_List extends Application_User_Abstract
 
 		$list->showSearchBox = true;
 		$data = $this->getDbData();
-		rsort( $data );
+		krsort( $data );
 		$list->setData( $data ); 
+//		var_export( $data );
 		$list->setListOptions
 		( 
 			array( 

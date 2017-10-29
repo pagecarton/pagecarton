@@ -63,6 +63,12 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 	protected $_idColumn = 'username';
 	
     /**
+     * 
+     * @var string
+     */
+	protected $_sortColumn = 'creation_time';
+	
+    /**
      * Other tables used for storing user related data
      *
      * @var array
@@ -142,13 +148,17 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				{
 					$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ), array( 'result_filter_function' => $sortFunction2 ) );
 				}
-/* 				//	var_export( $table->select() ); 
-			//	var_export( $hashedCredentials 
-				if( $data = $table->select() )
+				$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
+		//		var_export( $this->_sortColumn );
+				if( $this->_sortColumn )    
 				{
-					$this->_dbData = $data;
+					$this->_dbData = self::sortMultiDimensionalArray( $this->_dbData, $this->_sortColumn );
 				}
- */				//	var_export( $data );
+				else
+				{
+					krsort( $this->_dbData );
+					$this->_dbData = array_values( $this->_dbData );
+				}
 			break;
 		
 		}
