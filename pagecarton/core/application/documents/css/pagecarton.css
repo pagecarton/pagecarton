@@ -488,6 +488,12 @@
     display: block;
 }
 
+.pc_add_widget_button
+{
+    height: unset;
+    height: initial;
+}
+
 .pc_page_object_insert_button_area, .pc_page_object_inner_settings_area, .pc_page_object_inner_settings_area2
 {
     border: 1px solid #ccc;

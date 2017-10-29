@@ -1196,34 +1196,24 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			var addItemContainer = document.createElement( "div" );
 			addItemContainer.style.cssText = "text-align:center;";  
 			addItemContainer.className = "pc_page_object_specific_item pc_page_object_insert_button_area";
-	//		addItemContainer.style.display = "none";  
-		//	addItemContainer.title = "Click here to select an object to insert into this container";
-		//	addItemContainer.innerHTML = "<a href=\"javascript:\">Add a widget</a>";
 			addItemContainer.name = "add_a_new_item_to_parent_section";
-	//		ayoola.events.add( addItemContainer, "click", addANewItemToContainer ); 
 	
 			var addItemButton = document.createElement( "span" );
-		//	addItemButton.className = "addItemButton greynews boxednews centerednews";
-			addItemButton.className = "addItemButton greynews boxednews centerednews pc-btn pc-btn-small";
-		//	addItemContainer.className = "";
-	//		addItemButton.title = "Click here to select a widget to insert into this container";
+			addItemButton.className = "pc_add_widget_button greynews boxednews centerednews pc-btn pc-btn-small";
 			addItemButton.innerHTML = "Add Widget Here";
-	//		addItemButton.name = "add_a_new_item_to_parent_section";
 			ayoola.events.add( addItemButton, "click", addANewItemToContainer ); 
-		//	addItemContainer.appendChild( addItemButton );  
-		//	section.appendChild( addItemContainer );
 
 
 
 			var select = document.createElement( "select" );
 			select.innerHTML = "<option value=\"\">Insert Widget Here</option>' . $this->_viewableSelect . '";
-			select.className = "addItemButton greynews boxednews centerednews pc-btn pc-btn-small";
+			select.className = "pc_add_widget_button greynews boxednews centerednews pc-btn pc-btn-small";
 			select.title = "Select a widget to insert below";
 			ayoola.events.add
 			( 
 				select, 
 				"change", 
-				function( e )
+				function( e )  
 				{ 
 					var target = ayoola.events.getTarget( e );
 					var a = document.getElementById( target.value );
