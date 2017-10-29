@@ -63,6 +63,11 @@ class Application_IconViewer extends PageCarton_Widget
                     //  The url is same
                     $url = $url ? : '/img/placeholder-image.jpg';
                 break;
+                case 'ico':
+                    //  The url is same
+                    $url = $url ? : '/img/placeholder-image.jpg';
+                    $noImageManipulation = true;
+                break;
                 case 'tar':
                 case 'gz':
                 case 'zip':
@@ -155,7 +160,7 @@ class Application_IconViewer extends PageCarton_Widget
           //      header( 'Content-Length: ' . filesize( $path ) );
                 
             }
-            if( $path AND ( $maxHeight || $maxWith ) )
+            if( $path AND ( $maxHeight || $maxWith ) AND empty( $noImageManipulation ) )
             {
          //      var_export( $maxWith );  
           //     var_export( $maxHeight );
