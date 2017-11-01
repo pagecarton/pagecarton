@@ -34,7 +34,7 @@ class Ayoola_Page_Settings extends Application_Settings_Abstract
      */
 	public static function callback()
     {
- 		$defaultPages = array( '/', '/post/view', '/object', '/widgets', '/account', '/accounts/signin', '/404', '/posts', '/search', );	
+ 		$defaultPages = array( '/', '/post/view', '/object', '/widgets', '/account', '/account/signin', '/404', '/posts', '/search', );	
 		  
 		$table = new Ayoola_Page_Page();
 	//	unset( $_POST );
