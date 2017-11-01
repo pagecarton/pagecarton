@@ -255,6 +255,8 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		$form->formNamespace = get_class( $this ) . $values['user_id'];
 		//$form->setCaptcha( true ); // Adds captcha
 		require_once 'Ayoola/Form/Element.php';
+
+		$additionalForms = array();
 		if( ! empty( $_REQUEST['personal_info'] ) || $this->getParameter( 'personal_info' ) || @$values['firstname'] )
 		{
 			$personal = new Ayoola_Form_Element;
@@ -393,41 +395,11 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			}	
 			
 		//	$account->addRequirement( 'username', array( 'Username' => null ) );
-			$description = null;
-			if( $userOptions = Application_Settings_Abstract::getSettings( 'UserAccount', 'user_options' ) )
-			{
-			//	var_export( $userOptions );
-			//	$database = 'cloud';
-			}
-			if( is_array( $userOptions ) && in_array( 'allow_level_selection', $userOptions ) )
-			{
-			//	$account = new Ayoola_Form_Element;
-			//	$account->id = __CLASS__ . 'level';
-				$authLevel = new Ayoola_Access_AuthLevel;
-				$authLevel = $authLevel->select();
-				$options = array();
-				foreach( $authLevel as $each )
-				{
-					if( is_array( $each['auth_options'] ) && in_array( 'allow_signup', $each['auth_options'] ) )
-					{
-					//	$options[$each['auth_level']] =  "{$each['auth_name']}: {$each['auth_description']}";
-						$options[$each['auth_level']] =  "{$each['auth_name']}";   
-					}
-				}
-				$account->addElement( array( 'name' => 'user_group', 'label' => 'Account Type', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['user_group'] ? : $this->getParameter( 'user_group' ) ) ), $options );  
-				$account->addRequirement( 'user_group', array( 'Int' => null, 'InArray' => array_keys( $options )  ) );
-				unset( $authLevel );
-			//	$account->addLegend( "Please choose a user Group you want to belong" );
-		//		$form->addFieldset( $account );
-			}
-			else 
-			{
-				$account->addElement( array( 'name' => 'user_group', 'label' => 'Account Type', 'type' => 'Hidden', 'value' => @$_REQUEST['user_group'] ) );  
-			}
+	//		$description = null;
 			if( ! $this->getParameter( 'no_password' ) )
 			{ 
 
-				$account->addElement( array( 'name' => 'password', 'autocomplete' => 'new-password', 'description' => $description, 'placeholder' => 'Choose a password', 'type' => 'InputPassword' ) );
+				$account->addElement( array( 'name' => 'password', 'autocomplete' => 'new-password', 'placeholder' => 'Choose a password', 'type' => 'InputPassword' ) );
 				if( is_null( $values ) )
 				{ 
 					$account->addRequirement( 'password','WordCount=>6;;18' ); 
@@ -446,23 +418,70 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$account->addFilter( $ipType, 'DefiniteValue=>' . $ip );
 			$account->addFilters( 'Trim::Escape' );
 		}
-/*		
-		@$options = array( $_REQUEST['password'], $_REQUEST[Ayoola_Form::hashElementName( 'password' )] );
-		{  }
-	//	var_export( $options );
- 		if( count( array_unique( $options ) ) !== 1 ) //	If I am using fake values
-		{ 
-			$account->addRequirement( 'password2', array( 'WordCount' => array( 6, 18 ), 'InArray' => $options ) ); 
-		}
- */	
+	
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
 		//	$database = 'cloud';
 		}
 		if( $database !== 'cloud' || is_null( $values ) )
 		{
+			if( $userOptions = Application_Settings_Abstract::getSettings( 'UserAccount', 'user_options' ) )
+			{
+			//	var_export( $userOptions );
+			//	$database = 'cloud';
+			}
+			$userGroupToCreate = ( @$values['access_level'] ? : $this->getParameter( 'user_group' ) ) ? : @$_REQUEST['user_group'];
+	//		var_export( $values );
+			if( $userGroupToCreate )
+			{
+
+			}
+			if( is_array( $userOptions ) && in_array( 'allow_level_selection', $userOptions ) )
+			{
+				$authLevel = new Ayoola_Access_AuthLevel;
+				$authLevel = $authLevel->select();
+				$options = array();
+				foreach( $authLevel as $each )
+				{
+					if( is_array( $each['auth_options'] ) && in_array( 'allow_signup', $each['auth_options'] ) )
+					{
+					//	$options[$each['auth_level']] =  "{$each['auth_name']}: {$each['auth_description']}";
+						$options[$each['auth_level']] =  "{$each['auth_name']}"; 
+
+						if( $each['auth_level'] == $userGroupToCreate )  
+						{
+							if( ! empty( $each['additional_forms'] ) && is_array( $each['auth_options'] ) && in_array( 'attach_forms', $each['auth_options'] ) ) 
+							{
+
+								$additionalForms = array_merge( $additionalForms, $each['additional_forms'] );
+							}
+
+							// we found what we are looking for
+							$options = array();
+							break;
+						}
+					}
+				}
+				if( $options && empty( $values['access_level'] ) )
+				{
+					$account->addElement( array( 'name' => 'user_group', 'label' => 'Account Type', 'type' => 'Select', 'required' => 'required', 'value' => $userGroupToCreate ), $options );  
+					$account->addRequirement( 'user_group', array( 'Int' => null, 'InArray' => array_keys( $options )  ) );
+					unset( $authLevel );
+				}
+				else
+				{
+					$account->addElement( array( 'name' => 'user_group', 'type' => 'Hidden', 'value' =>  $userGroupToCreate ) );  
+				}
+			//	$account->addLegend( "Please choose a user Group you want to belong" );
+		//		$form->addFieldset( $account );
+			}
+			else 
+			{
+				$account->addElement( array( 'name' => 'user_group', 'label' => 'Account Type', 'type' => 'Hidden', 'value' =>  $userGroupToCreate ) );  
+			}
 			$form->addFieldset( $account );
-			if( $this->getGlobalValue( 'user_group' ) && is_array( $userOptions ) && in_array( 'allow_level_selection', $userOptions ) )
+			
+/*			if( $this->getGlobalValue( 'user_group' ) && is_array( $userOptions ) && in_array( 'allow_level_selection', $userOptions ) )
 			{
 				$authLevel = new Ayoola_Access_AuthLevel;
 				$authLevel = $authLevel->selectOne( null, array( 'auth_level' => $this->getGlobalValue( 'user_group' ) ) );
@@ -485,7 +504,24 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				}
 				
 			}
-			$personal ? $form->addFieldset( $personal ) : null;
+*/			$personal ? $form->addFieldset( $personal ) : null;
+			foreach( $additionalForms as $formName )
+			{
+				if( empty( $formName ) )
+				{
+					continue;
+				}
+				$parameters = array( 'form_name' => $formName, 'default_values' => $values );  
+		//		var_export( $parameters );
+				$class = new Ayoola_Form_View( $parameters );
+		//		$class = new Ayoola_Form_View( array( 'form_name' => $formName ) );
+				$fieldsets = $class->getForm()->getFieldsets();
+				foreach( $fieldsets as $fieldset ) 
+				{
+					$fieldset->appendElement = false;
+					$form->addFieldset( $fieldset );
+				}
+			}
 	//		$form->oneFieldSetAtATime = true;
 		}
 		if( ! is_null( $values ) && self::hasPriviledge( 98 ) )

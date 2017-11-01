@@ -92,7 +92,7 @@ class Application_User_List extends Application_User_Abstract
 				'firstname' => null, 
 				'lastname' => null, 
 				'phone_number' => null, 
-				'username' => '<a rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>',
+	//			'username' => '<a rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>',
 			);
 		$optionalFields = array(
 				'firstname' => null, 

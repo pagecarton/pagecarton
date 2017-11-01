@@ -115,18 +115,6 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		return new static;
     } 	
 	
-    /**
-     * Returns the storage for the object
-     * 
-     * @param string Namespace for storage
-     */
-/* 	public function getObjectStorage( $namespace = null )
-    {		
-		$storage = new Ayoola_Storage();
-		$storage->storageNamespace = $namespace . get_class( $this );
-		return $storage;
-	}
- */	
     /** 
      * Replace placeholders in notification Info
      * 

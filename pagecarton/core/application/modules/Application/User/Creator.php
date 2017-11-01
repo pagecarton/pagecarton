@@ -261,10 +261,10 @@ class Application_User_Creator extends Application_User_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false;
 		}
- 		$this->setViewContent( '<h2 class="goodnews">Account Confirmation:</h2>', true );
- 		$this->setViewContent( '<p>New user account has been created successfully. An email has been sent to the registered e-mail address containing how to activate and verify the new account.</p>' );
+ 		$this->setViewContent( '<h2 class="goodnews">Account Confirmation</h2>', true );
+ 		$this->setViewContent( '<p>New user account has been created successfully. An email has been sent to ' . $values['email'] . ' containing how to activate and verify the new account.</p>' );
  		$this->setViewContent( '<h4></h4>' );
- 		$this->setViewContent( '<p><a class="pc-btn" href="' . Ayoola_Page::getPreviousUrl() . '">Continue...</a></p>' );
+ 		$this->setViewContent( '<p><a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl( '/account' ) . '">Continue...</a></p>' );   
 
 		//	Auto log me in now without confirmation
 		if( $this->getParameter( 'signin' ) ) 
@@ -348,10 +348,11 @@ class Application_User_Creator extends Application_User_Abstract
 		
 		$domain = Ayoola_Page::getDefaultDomain();
 		$valuesForReplace = $values;
+		$valuesForReplace['domain'] = $domain;
 		$email['to'] = $values['email'];
 		$email['from']  = "From: \"{$domain}\" <accounts@{$domain}>\r\n";
 	//	var_export( $email );
-		$email = self::replacePlaceholders( $email, $valuesForReplace );
+		$email['body'] = self::replacePlaceholders( $email['body'], $valuesForReplace );
 	//	var_export( $values );
 	//	var_export( $email );
 		$this->_setActivationEmail( $email );
