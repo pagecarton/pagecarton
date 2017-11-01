@@ -27,19 +27,16 @@ THIS IS AN AUTOMATED RESPONSE.
       <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1508020198]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="1">
-      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1337779574]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="notificationmessage_id"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="from"><![CDATA[verification@account.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="from"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="subject"><![CDATA[E-mail Verification]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="body"><![CDATA[Hello @@@firstname@@@,
 Someone has requested an account with us using this email address and with the following login details:
 
 Username: @@@username@@@
-Firstname: @@@firstname@@@
-Lastname: @@@lastname@@@
-Alternate Email: @@@email@@@
+Email: @@@email@@@
 
 To verify you requested this account, please click the following link. The link will expire by mid-night.
 
@@ -55,13 +52,13 @@ Registration Team
 ______________________________________________________
 THIS IS AN AUTOMATED RESPONSE. 
 ***DO NOT REPLY TO THIS EMAIL****]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1379705386]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1509411934]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="3">
-      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1379705038]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="notificationmessage_id"><![CDATA[3]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="from"><![CDATA[verification@account.ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="from"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="subject"><![CDATA[E-mail Verified]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="body"><![CDATA[Congratulations @@@firstname@@@,
@@ -77,10 +74,6 @@ http://@@@domainName@@@/account/
 To log in to your account, visit:
 http://@@@domainName@@@/accounts/signin/
 
-To signup for a new account, visit:
-http://@@@domainName@@@/accounts/signup/
-
-
 Regards,
 
 Registration Team,
@@ -88,7 +81,8 @@ Registration Team,
 ______________________________________________________
 THIS IS AN AUTOMATED RESPONSE. 
 ***DO NOT REPLY TO THIS EMAIL****]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1379706276]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1509411984]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="4">
       <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
@@ -131,22 +125,22 @@ THIS IS AN AUTOMATED RESPONSE.
     <TABLE_ROW ROW_ID="5">
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1402468117]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="notificationmessage_id"><![CDATA[997-0-5]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="from"><![CDATA[no-reply@pagecarton.com]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="from"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="subject"><![CDATA[Welcome to the Admin Group]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="body"><![CDATA[Dear @@@firstname@@@,
 
 Congratulations! We are pleased to notify you that you have been successfully added to the Admin Group of this website; This means that you are now enabled to perform administrative functions on the website. You can now also replicate the process by adding other users to the Admin Group.
 
-With the same username and password you have been using to sign into the website, you will be able to access the Control Panel of the website. The Control Panel can be accessed on: http://@@@domainName@@@/ayoola/
+With the same username and password you have been using to sign into the website, you will be able to access the Control Panel of the website. The Control Panel can be accessed on: http://@@@domainName@@@/pc-admin
 
-Please take caution while working on the website as a little mistake can cause data loss. One of the precaution measures is to ensure you make a regular backup of the website. The website backup utility is available on: http://@@@domainName@@@/ayoola/backup/
+Please take caution while working on the website as a little mistake can cause data loss. One of the precaution measures is to ensure you make a regular backup of the website. 
 
 Once again, congratulations!
 Webmaster,
 http://@@@domainName@@@/]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1402479063]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1509412228]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="6">
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1403989727]]></TABLE_FIELD>
@@ -160,7 +154,7 @@ Congratulations! We are pleased to notify you that a new e-mail address has been
 
 There are several ways by which you can access your new e-mail. Some of the ways are: 
 
-1. Web-mail: Access your e-mail by going to http://mail.ComeRiver.com/mail/
+1. Web-mail: Access your e-mail by going to http://mail.ComeRiver.com
 To access your e-mail on the web, you need to first log on with your website username and password, before you are able to log into your e-mail. 
 
 2. Using your favorite e-mail client on the computer, mobile phones, tablets and other internet enabled device. 
@@ -175,7 +169,7 @@ Security: On (TLS)
 Port: 993
 Outgoing (SMTP) mail server: mail.ComeRiver.com
 Security: off
-Port: 25
+Port: 587
 
 Feel free to begin sharing your new e-mail address with friends, relatives and colleagues. 
 
@@ -183,7 +177,7 @@ Once again, congratulations!
 Webmaster,
 http://@@@domainName@@@/]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1432194177]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1509412182]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="8">
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1413049480]]></TABLE_FIELD>
