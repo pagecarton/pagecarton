@@ -107,7 +107,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			
 			//	data
 			$this->_objectData['quantity'] = $values['quantity'];	
-		//		var_export( $data['item_price'] );
+			//	var_export( $data );
 			//	add main item to cart
 			switch( $data['item_price'] )
 			{
@@ -200,6 +200,8 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$subscriptionData = $this->getParameter( 'data' ) ? : $this->getIdentifierData(); 
 		//	var_export( $subscriptionData );
 		}
+	//	var_export( $subscriptionData );
+
 		//	Build a new Add To Cart button
 		$onSubmit = '
 					ayoola.events.add( document.getElementById( "' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '" ), "submit", addToCart );';
@@ -354,18 +356,31 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		//	var_export( $subscriptionData );
 //			$fieldset->addElement( array( 'name' => 'subscription_selections', 'label' => 'Options', 'type' => 'Select', 'value' => @$subscriptionData['subscription_selections'] ), @array_combine( $subscriptionData['subscription_selections'], $subscriptionData['subscription_selections'] ) );
 		} 
+		//	find out if everything is the same price 
 		if( @$subscriptionData['price_option_title'] )   
 		{
 
+			$samePricing = false;
+			if( @$subscriptionData['price_option_price'] )   
+			{
+		//		$samePricing = array_flip( $subscriptionData['price_option_price'] );
+			//	var_export( array_flip( $subscriptionData['price_option_price'] ) );
+				if( $samePricing = count( array_flip( $subscriptionData['price_option_price'] ) ) === 1 )
+				{
+			//		;
+				}
+			}
 			foreach( $subscriptionData['price_option_title'] as $key => $each )
 			{
 				if( empty( $subscriptionData['price_option_price'][$key] ) && empty( $subscriptionData['price_option_title'][$key] ) )
-				{ 
+				{
 					continue; 
 				}
-			//	if(  ) ){ continue; }
-				$pricing = $filter->filter( $subscriptionData['price_option_price'][$key] );
-				$fieldset->addElement( array( 'name' => 'price_option' . $each, 'label' => $each . ' - ' . $pricing , 'type' => 'Select', 'value' => 'price_option' . $each ), array_combine( range( 0, 100 ), range( 0, 100 ) ) );
+				if( empty( $samePricing ) )
+				{ 
+					$pricing = ' - ' . $filter->filter( $subscriptionData['price_option_price'][$key] );
+				}
+				$fieldset->addElement( array( 'name' => 'price_option' . $each, 'label' => $each . $pricing , 'type' => 'Select', 'value' => 'price_option' . $each ), array_combine( range( 0, 100 ), range( 0, 100 ) ) );
 			}
 		} 
 		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden', 'value' => @$subscriptionData['article_url'] ) );

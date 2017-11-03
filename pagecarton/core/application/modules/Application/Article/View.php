@@ -291,6 +291,25 @@ class Application_Article_View extends Application_Article_Abstract
 		}
 	//	var_export( $data['article_content'] );
 //		$this->_xml .= '</div>'; 
+		$leastPrice = false;
+		if( isset( $data['item_price'] ) )
+		{
+			if( empty( $data['item_price'] ) )
+			{
+				if( ! empty( $data['price_option_price'] ) )
+				{
+					$allOptionPrices = $data['price_option_price'];
+					asort( $allOptionPrices );
+					do
+					{
+						$leastPrice = array_shift( $allOptionPrices );
+					}
+					while( ! $leastPrice && $allOptionPrices );
+					$data['item_price'] = $leastPrice;
+				}
+
+			}
+		}
 		if( @$data['item_price'] )
 		{
 			//	Filter the price to display unit
@@ -394,19 +413,16 @@ class Application_Article_View extends Application_Article_Abstract
 				//	By
 				
 				//	title
-		//		$this->_xml .= '<div style="font-size:x-small; margin: 1em 0 1em 0;"><h1>' . $data['article_title'] . '</h1></div>';
-		//		$this->_xml .= '' . $categoryText;
-/*				
-				if( @$data['item_price'] )
+				$baseData = array();
+				if( ! empty( $leastPrice ) )
 				{
-					$this->_xml .= '<p style="font-size:small; margin: 1em 0 1em 0;">
-											Price:  
-											' . ( @$data['item_old_price'] ? '
-											 <span class="" style="text-decoration:line-through;">' . @$data['item_old_price'] . '</span> ' : '' ) . ( '<span class="" style="font-weight:bold;">' .  @$data['item_price_with_currency'] . '</span>' ) . '
-									</p> ';  
+					//	don't let least price get into the cart'
+					$baseData['item_price'] = '';
+				//	unset( $data['item_price'] );
 				}
-*/		//		$this->_xml .= $data['article_description'] ? '<p  style="margin: 1em 0 1em 0;">' . $data['article_description'] . '</p>' : null;
-				$parameterX = array( 'data' => $data, 'button_value' => $this->getParameter( 'button_value' ), 'min_quantity' => $this->getParameter( 'min_quantity' ), 'max_quantity' => $this->getParameter( 'max_quantity' ) );
+		//		var_export( $baseData );
+		//		var_export( $baseData + $data );
+				$parameterX = array( 'data' => $baseData + $data, 'button_value' => $this->getParameter( 'button_value' ), 'min_quantity' => $this->getParameter( 'min_quantity' ), 'max_quantity' => $this->getParameter( 'max_quantity' ) );
 				$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( $parameterX );
 				$this->_xml .= $data['button_add_to_cart'];
 				$this->_xml .= @$data['article_content'];
@@ -414,9 +430,6 @@ class Application_Article_View extends Application_Article_Abstract
 			case 'profile':
 				
 				//	title
-		//		$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
-				//	By
-		//		$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= '<p style=""><strong>Full Name:</strong> ' . $data['full_legal_name'] . '</p> ';
 				$this->_xml .= '<p style=""><strong>Phone Number:</strong> +' . $data['dial_code'] . '-' . $data['phonenumber'] . '</p> ';
 				$this->_xml .= '<p style=""><strong>Blackberry PIN:</strong> ' . $data['bbm_pin'] . '</p> ';

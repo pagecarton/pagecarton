@@ -315,7 +315,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$values = $storedValues['values'];
 		}
 
-		if( ! $storedValues && $this->getParameter( 'cache_post_list' ) )
+	//	if( ! $storedValues || ! $this->getParameter( 'cache_post_list' ) )
 		{   
 		//	var_export( $values );    
 	//		self::v( $this->getParameter() );       
@@ -323,7 +323,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	self::v( $postListId );       
 			$values = $this->getDbData();
 			
-		//	self::v( $values );
+	//		self::v( $values );
 			
 			//	sort
 	//		if( $this->getParameter( 'sort_column' ) )
@@ -740,7 +740,22 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			if( isset( $data['item_price'] ) ) 
 			{
 				//	Filter the price to display unit
-				@$data['item_price'] = $data['item_price'] ? : '0.00';
+			//	@$data['item_price'] = $data['item_price'] ? : '0.00';
+				if( empty( $data['item_price'] ) )
+				{
+					if( ! empty( $data['price_option_price'] ) )
+					{
+						$allOptionPrices = $data['price_option_price'];
+						asort( $allOptionPrices );
+						do
+						{
+							$leastPrice = array_shift( $allOptionPrices );
+						}
+						while( ! $leastPrice && $allOptionPrices );
+						$data['item_price'] = $leastPrice;
+					}
+
+				}
 				$filter = 'Ayoola_Filter_Currency';
 				$filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
 				$data['currency'] = $filter::$symbol;
@@ -758,7 +773,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//			var_export( $data['item_price_with_currency'] );
 				$data['item_price_before_decimal'] = array_shift( explode( '.', $data['item_price_without_currency'] ) );
 				$data['item_price_after_decimal'] = array_pop( explode( '.', $data['item_price_without_currency'] ) );
+		//		var_export( $data['item_price'] );
 				$data['item_price'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
+		//		var_export( $data['item_price'] );
 			
 			}
 		//	var_export( $data['article_type'] );

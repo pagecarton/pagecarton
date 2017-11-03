@@ -177,7 +177,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		foreach( $tableColumns as $column )
 		{
 		//
-			$columnNode = $this->_xml->createElement( 'th', $this->getParameter( $column . '_label' ) ? : $column );    
+			$columnNode = $this->_xml->createElement( 'th', ! is_null( $this->getParameter( $column . '_label' ) ) ? $this->getParameter( $column . '_label' ) : $column );    
 			$row->appendChild( $columnNode );
 		}
 		$cartID = md5( serialize( $values ) );
