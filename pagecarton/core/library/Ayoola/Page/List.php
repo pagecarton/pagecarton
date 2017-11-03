@@ -114,9 +114,7 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 		//	$list->setData( $this->getDbTable->select( null, array() ) );
 			$list->setListOptions( 
 									array( 
-								//			'Sanitize' => '<span rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Sanitize/\' );" title="Sanitize all pages. Recreate all page templates.">Sanitize Pages </span>',
-						//					'Change Site Theme' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Page/\' );" title="Advanced Page Settings.">Change Site Theme</a>',
-											'Create Home' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/\' );" title="Edit Home Page">Edit Home Page</a>',
+											'Create Home' => '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/\' );" title="Edit Home Page">Edit Home Page</a>',
 										) 
 								);
 		}
