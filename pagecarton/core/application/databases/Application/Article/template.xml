@@ -20,7 +20,7 @@
 							&lt;p style=&quot;color: rgb(119, 119, 119);font-size: 1.3em;&quot;&gt;{{{article_title}}}&lt;/p&gt;
 							&lt;div class=&quot;price1&quot;&gt;
 							  &lt;span class=&quot;reducedfrom&quot;&gt;{{{item_old_price}}}&lt;/span&gt;
-							  &lt;span class=&quot;actual&quot;&gt;{{{item_price}}}&lt;/span&gt;
+							  &lt;span class=&quot;actual&quot;&gt;{{{item_price_with_currency}}}&lt;/span&gt;
 							&lt;/div&gt;
 						&lt;/div&gt;
 						&lt;div class=&quot;cart-right pc-bg-color&quot;&gt; &lt;/div&gt;
@@ -31,13 +31,13 @@
 				&lt;/div&gt;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;css&quot;,&quot;padding&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;div class=&quot;top-box&quot;&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_suffix"><![CDATA[				&lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 			&lt;/div&gt;
 ]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="max_group_no"><![CDATA[3]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2014\/12\/17\/Product_and_Services_List_2_cs.css&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_code"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="2">
       <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[ItemsList]]></TABLE_FIELD>

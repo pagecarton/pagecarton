@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: cart.php	Wednesday 18th of October 2017 04:43:23 PM	ayoola@ayoo.la $ 
+* @version $Id: cart.php	Thursday 2nd of November 2017 11:06:18 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -19,6 +19,7 @@
 $_79c3488bb05d610f1aa339e89e0b4d48 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h1>Shopping Cart</h1>
 ',
+  'url_prefix' => '/x/index.php',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -42,8 +43,10 @@ $_67f23ec1035d39330527f78129cbd747 = new Application_Subscription_Cart( array (
   'advanced_parameter_value' => 
   array (
     0 => '',
+    1 => '',
   ),
   'wrapper_name' => '',
+  'multiple_label' => '',
   '' => '',
 ) );
 
@@ -61,6 +64,7 @@ $_67f23ec1035d39330527f78129cbd747 = null;
 $_992ecbde43a3e58a043698dbefea1d52 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h2>Checkout</h2>
 ',
+  'url_prefix' => '/x/index.php',
   'advanced_parameter_value' => 
   array (
     0 => '',
