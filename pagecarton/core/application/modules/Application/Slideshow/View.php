@@ -44,7 +44,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 		{ 
 
 		//	self::v( $this->getParameter() );
-			$this->_createDefaultSlideshow();
+		//	$this->_createDefaultSlideshow();
 		//	var_export( $html );
 		//	if( ! $data = self::getIdentifierData() ){ return false; }
 			if( ! $data = self::getIdentifierData() )
