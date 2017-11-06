@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DOCUMENT_ELEMENT table_name="page" creation_time="1495144931" table_version="0.08" module_version="1.00" table_class="Ayoola_Page_Page" creation_ip="0">
-  <RECORDS autoId="76">
-    <TABLE_ROW ROW_ID="10">
+<DOCUMENT_ELEMENT table_name="page" creation_time="1509968934" table_version="0.09" module_version="1.00" table_class="Ayoola_Page_Page" creation_ip="2130706433">
+  <RECORDS autoId="24">
+    <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/onlinestore/cart]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
@@ -15,8 +15,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="11">
+    <TABLE_ROW ROW_ID="2">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/onlinestore/checkout]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
@@ -30,8 +31,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[b:0;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="21">
+    <TABLE_ROW ROW_ID="3">
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[freeLayout]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/tools/classplayer]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
@@ -45,8 +47,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="29">
+    <TABLE_ROW ROW_ID="4">
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[freeLayout]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola/page/edit/layout]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[2011]]></TABLE_FIELD>
@@ -60,8 +63,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="31">
+    <TABLE_ROW ROW_ID="5">
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[BootstrapBlogPost]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/ayoola]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[2011]]></TABLE_FIELD>
@@ -75,8 +79,9 @@
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[i:99;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[/pc-admin]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="32">
+    <TABLE_ROW ROW_ID="6">
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[13]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/404]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[2011]]></TABLE_FIELD>
@@ -90,8 +95,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="35">
+    <TABLE_ROW ROW_ID="7">
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[10]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/accounts/signin]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[2011]]></TABLE_FIELD>
@@ -105,8 +111,9 @@
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[/account/signin]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="36">
+    <TABLE_ROW ROW_ID="8">
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[9]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/accounts/signout]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[2011]]></TABLE_FIELD>
@@ -120,8 +127,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="37">
+    <TABLE_ROW ROW_ID="9">
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[8]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/accounts/signup]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[2011]]></TABLE_FIELD>
@@ -135,8 +143,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="41">
+    <TABLE_ROW ROW_ID="10">
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[3]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/search]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[2011]]></TABLE_FIELD>
@@ -150,8 +159,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="46">
+    <TABLE_ROW ROW_ID="11">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/onlinestore/confirmation]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
@@ -165,8 +175,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[b:0;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="49">
+    <TABLE_ROW ROW_ID="12">
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/account]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
@@ -180,8 +191,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[N;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="54">
+    <TABLE_ROW ROW_ID="13">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[1]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
@@ -195,8 +207,9 @@
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="62">
+    <TABLE_ROW ROW_ID="14">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/article]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[0]]></TABLE_FIELD>
@@ -210,8 +223,9 @@
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="63">
+    <TABLE_ROW ROW_ID="15">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/personalize]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="title"><![CDATA[Personalize your website]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
@@ -225,8 +239,9 @@
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[1077-0-25]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="64">
+    <TABLE_ROW ROW_ID="16">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/object]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
@@ -240,8 +255,9 @@
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[1077-0-70]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="65">
+    <TABLE_ROW ROW_ID="17">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/post/view]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
@@ -255,8 +271,9 @@
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="67">
+    <TABLE_ROW ROW_ID="18">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
@@ -270,8 +287,9 @@
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[novus]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="69">
+    <TABLE_ROW ROW_ID="19">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/layout/novus/template]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
@@ -285,8 +303,9 @@
       <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[1496-0-75]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="72">
+    <TABLE_ROW ROW_ID="20">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/layout/bootstrapblogpost/template]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
@@ -300,8 +319,9 @@
       <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="page_id"><![CDATA[1496-0-86]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="73">
+    <TABLE_ROW ROW_ID="21">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/posts]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
@@ -315,8 +335,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[a:1:{i:0;s:6:&quot;module&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="74">
+    <TABLE_ROW ROW_ID="22">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/widgets]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
@@ -330,8 +351,9 @@
       <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[a:1:{i:0;s:6:&quot;module&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="75">
+    <TABLE_ROW ROW_ID="23">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/account/signin]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="redirect_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="keywords"><![CDATA[]]></TABLE_FIELD>
@@ -342,13 +364,14 @@
       <TABLE_FIELD FIELD_KEY="system"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="title"><![CDATA[Log in]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="description"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="page_options"><![CDATA[b:0;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:1:&quot;0&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="cover_photo"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>
-    <DATA_TYPES url="INPUTTEXT,UNIQUE" redirect_url="INPUTTEXT" title="INPUTTEXT" description="TEXTAREA" keywords="TEXTAREA" layout_name="INPUTTEXT" auth_level="ARRAY" enabled="INT" system="INT" page_options="ARRAY" creation_date="INT" modified_date="INT" page_id="INPUTTEXT"/>
+    <DATA_TYPES url="INPUTTEXT,UNIQUE" redirect_url="INPUTTEXT" title="INPUTTEXT" description="TEXTAREA" keywords="TEXTAREA" layout_name="INPUTTEXT" auth_level="ARRAY" enabled="INT" system="INT" cover_photo="INPUTTEXT" page_options="ARRAY" creation_date="INT" modified_date="INT" page_id="INPUTTEXT"/>
     <FOREIGN_KEYS/>
     <RELATIVES/>
   </TABLE_SETTINGS>
