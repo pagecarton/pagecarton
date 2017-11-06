@@ -159,6 +159,7 @@
     font-family: 'open_sansregular', sans-serif;
     font-size: 14px;
     padding: 8px 18px;
+    line-height: unset;
     text-decoration: none;
     text-transform: uppercase;
 }

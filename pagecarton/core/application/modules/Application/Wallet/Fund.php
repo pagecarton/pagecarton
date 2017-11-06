@@ -125,9 +125,9 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
 	//	$html .= '<p><strong>Update wallet balance for ' . ( $values['username'] ? : $this->getIdentifier( 'username' ) ) . '</strong></p>';
 		$html .= '' . ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$ ' ) . '';
 		$html .= '';
-		$fieldset->addElement( array( 'name' => 'html', 'label' => '', 'placeholder' => $html, 'style' => 'min-width:30px;max-width:50px;', ' disabled' => 'disabled', 'type' => 'InputText', 'value' => $html ), array( 'html' => $html ) );
-		$fieldset->addElement( array( 'name' => 'amount', 'label' => '', 'style' => 'min-width:20px;max-width:90px;', 'placeholder' => '0.00', 'description' => '', 'type' => 'InputText', 'value' => @$values['amount'] ? : $this->getParameter( 'amount' ) ) );
-		$fieldset->addElement( array( 'name' => 'submit', 'style' => 'min-width:20px;max-width:90px;', 'type' => 'Submit', 'value' => $this->getParameter( 'button_value' ) ? : 'Add funds' ) );
+		$fieldset->addElement( array( 'name' => 'html', 'label' => '', 'placeholder' => $html, 'style' => 'min-width:30px;max-width:50px;display:inline;', ' disabled' => 'disabled', 'type' => 'InputText', 'value' => $html ), array( 'html' => $html ) );
+		$fieldset->addElement( array( 'name' => 'amount', 'label' => '', 'style' => 'min-width:20px;max-width:90px;display:inline;', 'placeholder' => '0.00', 'description' => '', 'type' => 'InputText', 'value' => @$values['amount'] ? : $this->getParameter( 'amount' ) ) );
+		$fieldset->addElement( array( 'name' => 'submit', 'style' => 'min-width:20px;max-width:120px;', 'type' => 'Submit', 'value' => $this->getParameter( 'button_value' ) ? : 'Add funds' ) );
 		$fieldset->addRequirement( 'amount', array( 'MinMax' => array( 2, 1000000 ), 'NotEmpty' => array( 'blacklist' => array( 0, 0.00, '0', '0.00' ) )  ) );
 		$fieldset->addFilter( 'amount', array( 'float' => null ) ); 
 		$fieldset->addFilters( array( 'trim' => null ) );
