@@ -427,7 +427,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				{
 					$tempItem2 = include( $tempItem );
 				}
-				$newArticleType = @$tempItem2['article_type'];
+				$newArticleType = @$tempItem2['article_type'] ? : $this->getParameter( 'article_types' );
 				$newArticleTypeToShow = ucfirst( $newArticleType ) ? : 'Content';
 		//		self::v( $newArticleType );
 		//		self::v( $newArticleTypeToShow );
@@ -643,7 +643,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				if( ! empty( $data['datetime'] ) )
 				{
 					$data['datetime'] = strtotime( $data['datetime'] );
-					if( $this->getParameter( 'use_datetime' ) )
+				//	if( $this->getParameter( 'use_datetime' ) )
 					{
 
 						$data['article_modified_date'] = $data['datetime'];

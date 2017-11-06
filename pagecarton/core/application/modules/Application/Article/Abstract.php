@@ -468,6 +468,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	//		self::V( $command );
 		//	var_export( $path );
 		} 
+		if( $this->getParameter( 'true_post_type' ) )
+		{
+			$whereClause['true_post_type'][] = $this->getParameter( 'true_post_type' );
+		}
 		@$postType = $this->getParameter( 'article_types' ) ? : $postType;
 	//	var_export( $postType );
 		if( $postType )
@@ -1270,6 +1274,15 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$options = $filter->filter( $options );
 		$options = $options ? : Application_Article_Type_TypeAbstract::$presetTypes;
 
+		if( ! empty( $_REQUEST['article_type'] ) )
+		{
+			if( empty( $options[$_REQUEST['article_type']] ) )
+			{
+				$options[$_REQUEST['article_type']] = ucwords( str_replace( '-', ' ', $_REQUEST['article_type'] ) );
+			}
+			
+		}
+
 		$tempOptions = array_keys( $options );
 
 		$articleTypeWeUsing = $values['article_type'] ? : array_shift( $tempOptions );
@@ -1285,7 +1298,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		else
 		{
 			$values['true_post_type'] = $values['article_type'];
-			$values['post_type'] = $values['article_type'];
+			$values['post_type'] = $options[$values['article_type']] ? : $values['article_type'];
 		}
 //		var_export( $values['true_post_type'] );
 		

@@ -60,34 +60,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 	//		var_export( '1' );
 //			$postType = @$_REQUEST['article_type'] ? : 'post'; 
 			$postType = @$_REQUEST['article_type'] ? : @$_REQUEST['post_type']; 
-/*			if( ! $postType )
-			{
-				//	interactively guide user through type selection
-
-				//	Article Types
-				$options = new Application_Article_Type;
-				$options = $options->select();
-				require_once 'Ayoola/Filter/SelectListArray.php';
-				$filter = new Ayoola_Filter_SelectListArray( 'post_type_id', 'post_type');
-				$options = $filter->filter( $options );
-				$options = $options ? : Application_Article_Type_TypeAbstract::$presetTypes;
-			//	$options = array( '' => 'All' ) + $options;
-				$html = null;
-				$html .= '<form class="pc-form"><legend>What type of post are you trying to create?</legend>';
-				$html .= '<select multiple onchange="location.search = location.search + \'&article_type=\' + this.value;" data-parameter_name="article_types">';
-				foreach( $options as $key => $value )
-				{ 
-					$html .=  '<option value="' . $key . '"';  
-				//	var_export( $object['view'] );
-					if( @$object['article_types'] == $key ){ $html .= ' selected = selected '; }
-					$html .=  '>' . $value . '</option>';  
-				}
-				$html .= '</select></form>';
-				$this->setViewContent( $html );
-				return;
-				
-			}
-*/			$realType = $postType; 
+			$realType = $postType; 
 			$joinedType = $postType; 
 			if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $postType ) )
 			{
