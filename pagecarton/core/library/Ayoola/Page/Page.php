@@ -33,7 +33,7 @@ class Ayoola_Page_Page extends Ayoola_Dbase_Table_Abstract_Xml
      *
      * @param int
      */
-    protected $_tableVersion = '0.08';     
+    protected $_tableVersion = '0.09';     
 
 	
 	protected $_dataTypes = array
@@ -48,6 +48,7 @@ class Ayoola_Page_Page extends Ayoola_Dbase_Table_Abstract_Xml
 		'auth_level' => 'ARRAY', 
 		'enabled' => 'INT',
 		'system' => 'INT',
+		'cover_photo' => 'INPUTTEXT',
 		'page_options' => 'ARRAY',
 		'creation_date' => 'INT', 'modified_date' => 'INT',
 	);
