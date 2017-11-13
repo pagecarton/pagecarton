@@ -137,6 +137,37 @@ class Application_Personalization extends Ayoola_Abstract_Table
 				//	var_export( self::hasPriviledge() );
 					if( ! self::hasPriviledge( array( 99, 98 ) ) )
 					{
+						//	IF WE ARE HERE, WE ARE NOT AUTHORIZED     
+						$urlToGo = '' . Ayoola_Application::getUrlPrefix() . '/accounts/signin/';
+						$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
+			//			$access = self::getInstance();
+				//     var_export( $pageAccessLevel );
+				//    var_export( Ayoola_Application::isClassPlayer()  );
+					//    exit();
+				//		var_export( $objectPlay );
+					//	exit();
+				//		if( ! $access->isLoggedIn() )   
+						{ 
+							//	$access->logout();
+							
+							//	must log out first to avoid redirct at the login page.
+							
+							$encodeLoginMessage = new Ayoola_Access_Login();
+							$encodeLoginMessage->getObjectStorage( 'pc_coded_login_message' )->store( 'Please login to continue personalization' );
+							
+				//            var_export( $urlToGo );
+				//            exit();
+
+							$jsCode = 'ayoola ? ( ayoola.div.getParent( window, 5 ).location = "' . $urlToGo . '?pc_coded_login_message=1&previous_url=" + encodeURIComponent( ayoola.div.getParent( window, 5 ).location ) ) : ( window.location = "' . $urlToGo . '?pc_coded_login_message=1&previous_url=" + encodeURIComponent( window.location ) );';
+							Application_Javascript::addCode( $jsCode );
+
+					//		if(  ! Ayoola_Application::isClassPlayer() )
+							if( ! $objectPlay )
+							{
+								header( 'Location: ' . $urlToGo );	
+								exit();
+							}
+						}
 					//	var_export( self::hasPriviledge() );
 			//			exit();
 				//		header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/404/' );
