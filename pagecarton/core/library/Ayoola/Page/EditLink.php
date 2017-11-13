@@ -42,9 +42,13 @@ class Ayoola_Page_EditLink extends PageCarton_Widget
 		try
 		{ 
             //  Code that runs the widget goes here...
-
+            if( ! self::hasPriviledge( array( 98, 99 ) ) )  
+            {
+                return false;
+            } 
             //  Output demo content to screen
-		    $currentUrl = rtrim( Ayoola_Application::getPresentUri(), '/' ) ? : '/';
+		    $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
+   //         var_export( $currentUrl );
 			switch( $currentUrl )
 			{
 				case '/tools/classplayer':
@@ -57,6 +61,7 @@ class Ayoola_Page_EditLink extends PageCarton_Widget
 			//		var_export( __LINE__ );
 				break;
 				default:
+      //      var_export( $currentUrl );
                     $html = '<div style="text-align:center;">';
                     $html .= '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=' . $currentUrl . '\' );" title="Edit this page">Edit this page "' . $currentUrl . '"</a>';
                     $html .= '</div>';
