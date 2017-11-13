@@ -103,74 +103,96 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		{
 			$_GET['article_url'] = $values['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
-			//	var_export( $data );
-			
-			//	data
-			$this->_objectData['quantity'] = $values['quantity'];	
-			//	var_export( $data );
-			//	add main item to cart
-			switch( $data['item_price'] )
+			do
 			{
-				case false:
-				case null:
-				case '':
-		//		case true:
-					//	Do nothing.
-					//	 had to go through this route to process for 0.00
-			//		var_export( __LINE__ );
-				break;
-				default:
-				$values['subscription_name'] = $data['article_url'];
-				$values['subscription_label'] = $data['article_title'];
-				$values['price'] = $data['item_price'] + floatval( array_sum( @$values['product_option'] ? : array() ) );
-				$values['product_option'] = @$values['product_option'];
-				$values['cycle_name'] = 'each';
-				$values['cycle_label'] = '';
-				$values['price_id'] = $data['article_url'];
-				$values['subscription_description'] = $data['article_description'];
-				$values['url'] = $data['article_url'];
-				@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
-				//	''
-				//	After we checkout this is where we want to come to
-				$values['classplayer_link'] = "javascript:;";
-				$values['object_id'] = $data['article_url'];
-				$values['multiple'] = $values['quantity'];
-				$class->subscribe( $values );
+		//			exit();		
+				$added = false;	
+				if( @$data['price_option_title'] )   
+				{
 
 		//		var_export( $values );
-		//		exit();
-				break;
-			}
-	//			exit();			
-			if( @$data['price_option_title'] )   
-			{
-
-				foreach( $data['price_option_title'] as $key => $each )
-				{
-					$pricing = $data['price_option_price'][$key];
-
-					if( empty( $values['price_option' . $each] ) )
+					foreach( $data['price_option_title'] as $key => $each )
 					{
-						continue;
+
+						$pricing = $data['price_option_price'][$key];  
+
+						//	$data['item_price']
+						if( empty( $data['price_option_price'][$key] ) && ! empty( $data['item_price'] ) )
+						{
+							$pricing = $data['item_price'];
+						}
+						if( empty( $values['price_option' . $each] ) )
+						{
+							continue;
+						}
+						$values['subscription_name'] = $data['article_url'] . 'price_option' . $each;
+						$values['subscription_label'] = $data['price_option_title'][$key] . ' - ' . $data['article_title'];
+						$values['price'] = $pricing;
+						$values['cycle_name'] = 'each';
+						$values['cycle_label'] = '';
+						$values['price_id'] = $values['subscription_name'];
+						$values['subscription_description'] = $data['price_option_title'][$key] . ' - ' . $data['article_description'];
+						$values['url'] = $data['article_url'];
+						@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
+						//	''
+						//	After we checkout this is where we want to come to
+						$values['classplayer_link'] = "javascript:;";
+						$values['object_id'] = $data['article_url'];
+						$values['multiple'] = $values['price_option' . $each];
+						$class->subscribe( $values );
+						$added = true;	
+
 					}
-					$values['subscription_name'] = $data['article_url'] . 'price_option' . $each;
-					$values['subscription_label'] = $data['price_option_title'][$key] . ' - ' . $data['article_title'];
-					$values['price'] = $pricing;
+				}
+
+	//			var_export( $added );
+	//			exit();
+
+				if( $added ) 
+				{
+					break;
+				}
+				
+				//	var_export( $data );
+				
+				//	data
+				$this->_objectData['quantity'] = $values['quantity'];	
+				//	var_export( $data );
+				//	add main item to cart
+				switch( $data['item_price'] )
+				{
+					case false:
+					case null:
+					case '':
+			//		case true:
+						//	Do nothing.
+						//	 had to go through this route to process for 0.00
+				//		var_export( __LINE__ );
+					break;
+					default:
+					$values['subscription_name'] = $data['article_url'];
+					$values['subscription_label'] = $data['article_title'];
+					$values['price'] = $data['item_price'] + floatval( array_sum( @$values['product_option'] ? : array() ) );
+					$values['product_option'] = @$values['product_option'];
 					$values['cycle_name'] = 'each';
 					$values['cycle_label'] = '';
-					$values['price_id'] = $values['subscription_name'];
-					$values['subscription_description'] = $data['price_option_title'][$key] . ' - ' . $data['article_description'];
+					$values['price_id'] = $data['article_url'];
+					$values['subscription_description'] = $data['article_description'];
 					$values['url'] = $data['article_url'];
 					@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
 					//	''
 					//	After we checkout this is where we want to come to
 					$values['classplayer_link'] = "javascript:;";
 					$values['object_id'] = $data['article_url'];
-					$values['multiple'] = $values['price_option' . $each];
+					$values['multiple'] = $values['quantity'];
 					$class->subscribe( $values );
 
+			//		var_export( $values );
+			//		exit();
+					break;
 				}
-			} 
+			}
+			while( false );
 			
 			$this->_objectData['confirmation'] = $confirmation;	
 
@@ -350,11 +372,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			}
 	//		self::v( $optionsMenu );
 			$optionsMenu ? $fieldset->addElement( array( 'name' => 'product_option', 'label' => 'Options', 'type' => 'Checkbox', 'value' => @$subscriptionData['product_option'] ), $optionsMenu ) : null;
-		} 
-	//	if( @$subscriptionData['subscription_selections'] )   
-		{
-		//	var_export( $subscriptionData );
-//			$fieldset->addElement( array( 'name' => 'subscription_selections', 'label' => 'Options', 'type' => 'Select', 'value' => @$subscriptionData['subscription_selections'] ), @array_combine( $subscriptionData['subscription_selections'], $subscriptionData['subscription_selections'] ) );
 		} 
 		//	find out if everything is the same price 
 		if( @$subscriptionData['price_option_title'] )   

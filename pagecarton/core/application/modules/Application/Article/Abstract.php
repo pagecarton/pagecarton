@@ -1763,12 +1763,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					{
 						$fieldsetX = new Ayoola_Form_Element; 
 						$fieldsetX->hashElementName = false;
-						$fieldsetX->duplicationData = array( 'add' => 'New Pricing Option', 'remove' => 'Remove Pricing Option', 'counter' => 'pricing_option_counter', );
+						$fieldsetX->duplicationData = array( 'add' => 'New Option', 'remove' => 'Remove Option', 'counter' => 'pricing_option_counter', );
 
 						$fieldsetX->container = 'div';
 						$form->wrapForm = false;
-						$fieldsetX->addElement( array( 'name' => 'price_option_price', 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Price', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['price_option_price'][$i] ) );
-						$fieldsetX->addElement( array( 'name' => 'price_option_title', 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Price Option Title', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @htmlspecialchars( $values['price_option_title'][$i] ) ) );
+						$fieldsetX->addElement( array( 'name' => 'price_option_title', 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Option Name', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @htmlspecialchars( $values['price_option_title'][$i] ) ) );
+						$fieldsetX->addElement( array( 'name' => 'price_option_price', 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Separate Option Price', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['price_option_price'][$i] ) );
 						$fieldsetX->allowDuplication = true;  
 						$fieldsetX->placeholderInPlaceOfLabel = true;
 						$fieldsetX->wrapper = 'white-content-theme-border';  

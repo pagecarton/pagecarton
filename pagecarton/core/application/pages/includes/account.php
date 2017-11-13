@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Monday 6th of November 2017 12:14:38 PM	ayoola@ayoo.la $ 
+* @version $Id: account.php	Monday 13th of November 2017 09:31:01 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
