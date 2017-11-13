@@ -313,9 +313,13 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 			}
 			if( $options['display_picture_base64'] )
  */			{
-			//	if( @$info['profile_url'] )
+				if( empty( $info['display_picture'] ) )  
 				{ 
 					@$info['display_picture'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_PhotoViewer/profile_url/' . @$info['profile_url'] . '/document_time/' . filemtime( Application_Profile_Abstract::getProfilePath( @$info['profile_url'] ) ) . '?max_width=300&max_height=300&extension=png';
+				}
+				else
+				{
+					@$info['display_picture'] = Ayoola_Application::getUrlPrefix() . $info['display_picture'];
 				}
 			//	$options['options'] = $userInfo['display_picture_base64'];
 			}
