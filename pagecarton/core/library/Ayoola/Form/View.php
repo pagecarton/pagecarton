@@ -151,22 +151,25 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 	//		var_export( $data );
 		//	$this->setViewContent( 'Form Edited Successfully', true ); 
 			//	Add all fieldsets
-			foreach( @$data['callbacks'] as $class ) 
+			if( ! empty( $data['callbacks'] ) && is_array( $data['callbacks'] ) )
 			{
-				if( ! Ayoola_Loader::loadClass( $class ) )
+				foreach( @$data['callbacks'] as $class ) 
 				{
-					continue;
+					if( ! Ayoola_Loader::loadClass( $class ) )
+					{
+						continue;
+					}
+				//	self::v( $class ); 
+				//	self::v( $class->view() ); 
+					$class = new $class();
+					$parameters = array( 'fake_values' => $values );
+					$class->setParameter( $parameters );
+					$class->fakeValues = $values;
+					$class->init();
+				//	$this->setViewContent( $class->view(), true );    
+					
+				//	return false;
 				}
-			//	self::v( $class ); 
-			//	self::v( $class->view() ); 
-				$class = new $class();
-				$parameters = array( 'fake_values' => $values );
-				$class->setParameter( $parameters );
-				$class->fakeValues = $values;
-				$class->init();
-			//	$this->setViewContent( $class->view(), true );    
-				
-			//	return false;
 			}
 		
 			//	Clear plain text password for security reasons
