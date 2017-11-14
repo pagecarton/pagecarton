@@ -1430,7 +1430,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		a.className = "pc-hide-children-children pc-btn pc-btn-small";  
 		a.innerHTML = "Preview";  
 		topBarForButtons.appendChild( a );		
-		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '' . $page['url'] . '' . ( $page['layout_name'] == self::getDefaultLayout() ? null : ( '?pc_page_layout_name=' . $page['layout_name'] ) ) . '\' ); } );
+		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '' . $page['url'] . '' . ( '?pc_page_layout_name=' . $page['layout_name'] ) . '\' ); } );
+//		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '' . $page['url'] . '' . ( $page['layout_name'] == self::getDefaultLayout() ? null : ( '?pc_page_layout_name=' . $page['layout_name'] ) ) . '\' ); } );
 '
 .
 		( 
