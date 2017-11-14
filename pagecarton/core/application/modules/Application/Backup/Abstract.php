@@ -134,10 +134,12 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
 	//	$link = ;
 	//	$options = array( 'simple' => 'Simple Backup: creates an archive of my website for safe keep.', 'installer' => 'Installer: creates a archive of this website to install on another server. Some security settings are wiped out in the created archive. This archive will be available for download at <a target="_blank" href="' . self::getInstallerLink() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() . self::getInstallerLink() . '</a>', 'export' => 'Export: creates a archive of your site that can be imported on another location.' );
 		$options = array( 
-                            'simple' => 'Simple Backup: creates an archive of my website for safe keep.', 
-                            'installer' => 'Installer: creates a archive of this website to install on another server. Some security settings are wiped out in the created archive.', 
-                            'export' => 'Export: creates a archive of your site that can be imported on another location.' ); 
-        if( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) === APPLICATION_PATH )
+                            'simple' => 'Simple Backup', 
+                            'installer' => 'Installer', 
+                            'export' => 'Create Export Link' ); 
+    //    var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );
+    //    var_export( APPLICATION_PATH );
+        if( ( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) === APPLICATION_PATH || Ayoola_Page::getDefaultDomain() == 'updates.pagecarton.org' ) && self::hasPriviledge() )
         {
             unset( $options['simple'] );
             unset( $options['export'] );
@@ -150,7 +152,7 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
                 unset( $options['export'] );
             }
         } 
-		$fieldset->addElement( array( 'name' => 'backup_type', 'placeholder' => '', 'type' => 'Radio', 'value' => @$values['backup_type'] ? : 'simple' ), $options );
+		$fieldset->addElement( array( 'name' => 'backup_type', 'placeholder' => '', 'type' => 'Select', 'value' => @$values['backup_type'] ? : 'simple' ), $options );
 	//	if( Ayoola_Form::getGlobalValue( 'backup_type' ) === 'export' )
 		{
 			//	We allow options in export
