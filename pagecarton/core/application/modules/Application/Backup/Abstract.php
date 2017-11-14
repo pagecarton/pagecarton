@@ -129,11 +129,27 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
 		$fieldset = new Ayoola_Form_Element;
 		if( is_null( $values ) )
 		{
-			$fieldset->addElement( array( 'name' => 'backup_name', 'placeholder' => 'Name this Backup', 'type' => 'InputText', 'value' => @$values['backup_name'] ) );  
+			$fieldset->addElement( array( 'name' => 'backup_name', 'placeholder' => 'Name this Backup', 'type' => 'Hidden', 'value' => @$values['backup_name'] ) );  
 		}
 	//	$link = ;
 	//	$options = array( 'simple' => 'Simple Backup: creates an archive of my website for safe keep.', 'installer' => 'Installer: creates a archive of this website to install on another server. Some security settings are wiped out in the created archive. This archive will be available for download at <a target="_blank" href="' . self::getInstallerLink() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() . self::getInstallerLink() . '</a>', 'export' => 'Export: creates a archive of your site that can be imported on another location.' );
-		$options = array( 'simple' => 'Simple Backup: creates an archive of my website for safe keep.', 'installer' => 'Installer: creates a archive of this website to install on another server. Some security settings are wiped out in the created archive.', 'export' => 'Export: creates a archive of your site that can be imported on another location.' );   
+		$options = array( 
+                            'simple' => 'Simple Backup: creates an archive of my website for safe keep.', 
+                            'installer' => 'Installer: creates a archive of this website to install on another server. Some security settings are wiped out in the created archive.', 
+                            'export' => 'Export: creates a archive of your site that can be imported on another location.' ); 
+        if( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) === APPLICATION_PATH )
+        {
+            unset( $options['simple'] );
+            unset( $options['export'] );
+        } 
+        else
+        {
+            unset( $options['installer'] );  
+            if( empty( $values['backup_name'] ) )
+            {
+                unset( $options['export'] );
+            }
+        } 
 		$fieldset->addElement( array( 'name' => 'backup_type', 'placeholder' => '', 'type' => 'Radio', 'value' => @$values['backup_type'] ? : 'simple' ), $options );
 	//	if( Ayoola_Form::getGlobalValue( 'backup_type' ) === 'export' )
 		{

@@ -57,12 +57,16 @@ class Application_Backup_List extends Application_Backup_Abstract
 		$list->setData( $this->getDbData() );
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'You have not created any backup yet' );
-		$list->setListOptions( 
+		$listOptions = 
 								array( 
 										'<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Backup_Import/?import_option=import_from_local_device\', \'' . $this->getObjectName() . '\' );" title="Import a Backup file">Upload Backup File</a>',
 										'Import' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Backup_Import/?import_option=upload_from_other_sites\', \'' . $this->getObjectName() . '\' );" title="Import a Backup file">Import Backup from another website</a>',
 										'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Backup_Creator/\', \'' . $this->getObjectName() . '\' );" title="Import a Backup file">Create a back up</a>',
-									) 
+									);
+
+		$list->setListOptions( 
+								$listOptions
+
 							);
 		$list->createList(  
 			array(
