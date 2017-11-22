@@ -982,7 +982,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 			
 		
-		if( ! $this->getParameter( 'array_key_placeholders' ) )  
+		if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false )  
+//		if( ! $this->getParameter( 'array_key_placeholders' ) )  
 		{
 			//	update the markup template
 			@$this->_parameter['markup_template'] = null;
