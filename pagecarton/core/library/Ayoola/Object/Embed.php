@@ -222,20 +222,14 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		}
 		return true;
 	}
-
 	
     /**
-	 * Returns text for the "interior" of the Layout Editor
-	 * The default is to display view and option parameters.
+	 * 
 	 * 		
-     * @param array Object Info
-     * @return string HTML
+     * @return array widgets
      */
-    public static function getHTMLForLayoutEditor( & $object )
+    public static function getWidgets()
 	{
-		$html = null;
-	//	@$object['option'] = $object['option']  ? $object['option'] : $object['editable'];
-		
 		if( is_null( self::$_widgets ) ) 
 		{
 			$options = array();
@@ -294,17 +288,27 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			asort( $files );
 			self::$_widgets = $files;
 		}
-		
+		return self::$_widgets;
+	}
 	
-
-
+    /**
+	 * Returns text for the "interior" of the Layout Editor
+	 * The default is to display view and option parameters.
+	 * 		
+     * @param array Object Info
+     * @return string HTML
+     */
+    public static function getHTMLForLayoutEditor( & $object )
+	{
+		$html = null;
+	//	@$object['option'] = $object['option']  ? $object['option'] : $object['editable'];		
 		{
 			if( empty( $object['editable'] ) )  
 			{
 				$object['editable'] = 'PageCarton_Widget_Sample'; 
 			}
 			$html .= '<select data-parameter_name="editable">';
-			foreach( self::$_widgets as $key => $value )
+			foreach( self::getWidgets() as $key => $value )
 			{ 
 				$html .=  '<option value="' . $key . '"';   
 				if( @$object['editable'] == $key ){ $html .= ' selected = selected '; }

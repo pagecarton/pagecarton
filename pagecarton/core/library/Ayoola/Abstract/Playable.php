@@ -147,7 +147,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		//			$replaceInternally = true;
 				}
 			//	var_export( ( stripos( $template, $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'] ) !== false ) );
-				if( stripos( $template, $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'] ) !== false )
+				if( stripos( $template, $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'] ) !== false && stripos( $template, '<!--{{{0}}}' ) !== false )
 				{
 					$start = strpos( $template, '<!--{{{0}}}' ) + strlen( '<!--{{{0}}}' );
 				//	var_export( $postTheme );

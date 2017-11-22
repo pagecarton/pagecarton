@@ -67,6 +67,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     {
 		//	codes first because it wont be there if they didnt opt to enter codes
 		$content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
+//		var_export( $this->getParameter() );
 		if( $this->getParameter( 'markup_template_object_name' ) )
 		{
 	//		$parameters = array( 'markup_template' => $content, 'markup_template_namespace' => 'x1234' . time(), 'editable' => $this->getParameter( 'markup_template_object_name' ) ) + $this->getParameter();
@@ -114,6 +115,28 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	//	var_export( $this->_parameter );
      //   return $content . $this->getParameter( 'raw_html' );
     } 
+
+    /**
+	 * Returns text for the "interior" of the Layout Editor
+	 * The default is to display view and option parameters.
+	 * 		
+     * @param array Object Info
+     * @return string HTML
+     */
+    public static function getHTMLForLayoutEditorAdvancedSettings( $object )
+	{
+		$html = '<select class="" name="markup_template_object_name" style="width:100%;" >';  
+		$html .= '<option value="" >Widgets</option>';  
+
+		foreach( Ayoola_Object_Embed::getWidgets() as $key => $value )
+		{
+			$html .=  '<option value="' . $key . '"';   
+			if( @$object['markup_template_object_name'] == $key ){ $html .= ' selected = selected '; }
+			$html .=  '>' . $value . '</option>';  
+		}
+		$html .= '</select>';  
+		return $html;
+	}
 
     /**
 	 * Returns text for the "interior" of the Layout Editor

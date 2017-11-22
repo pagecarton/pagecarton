@@ -643,16 +643,27 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '</div>';	//	 title bar  
 		
 		//	advanced options
+
+		
 		$html .= '<div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em; display:none;" title="" class="status_bar advanced_options pc_page_object_specific_item" data-parameter_name="parent">'; 
 //		$html .= '<div style="clear:both;" name="' . $advancedName . '" class=""><label>Inject some parameters to this object...</label></div>';		
 
 			$form = new Ayoola_Form( array( 'name' => $advancedName, 'data-parameter_name' => 'advanced_parameters', 'class' => '' ) );
+			parse_str( @$object['advanced_parameters'], $advanceParameters );
+			$object = array_merge( $advanceParameters, $object );
+			if( method_exists( $object['class_name'], 'getHTMLForLayoutEditorAdvancedSettings' ) )
+			{
+				$fieldset = new Ayoola_Form_Element();
+				$fieldset->addElement( array( 'name' => 'x', 'type' => 'html', ), array( 'html' => $object['class_name']::getHTMLForLayoutEditorAdvancedSettings( $object ) ) );
+				$form->addFieldset( $fieldset );
+			//	var_export( $object['class_name']::getHTMLForLayoutEditorAdvancedSettings( $object ) );
+			//	$html .= ;
+			}
 			$form->setParameter( array( 'no_required_fieldset' => true ) );
 			$i = 0;
 		//	$object['advanced_parameter_name'] = html_entity_decode( @$object['advanced_parameter_name'] );
 		//	var_export( parse_str( $object['advanced_parameter_name'] ) );
 		//	var_export( @$object['advanced_parameter_name'] );
-			parse_str( @$object['advanced_parameters'], $advanceParameters );
 		//	var_export( $advanceParameters );
 			do
 			{
