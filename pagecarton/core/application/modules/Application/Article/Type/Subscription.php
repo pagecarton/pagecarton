@@ -342,9 +342,21 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$showQuantity = 'InputText';
 		}
 		elseif( is_numeric( $this->getParameter( 'min_quantity' ) ) ||  is_numeric( $this->getParameter( 'max_quantity' ) ) )
-		{  
+		{
+			$min = intval( $this->getParameter( 'min_quantity' ) ) ? : 1;
+			$max = intval( $this->getParameter( 'max_quantity' ) ) ? : intval( $this->getParameter( 'min_quantity' ) );
+			if( ! $step = $this->getParameter( 'quantity_step' ) )
+			{
+				$step = 1;
+				$diff = $max - $min;
+				if( $diff > 100 )
+				{
+					$step = round( $diff / 100 );
+				}
+				
+			}
 			$showQuantity = 'Select';
-			$options = range( intval( $this->getParameter( 'min_quantity' ) ) ? : 1, intval( $this->getParameter( 'max_quantity' ) ) ? : intval( $this->getParameter( 'min_quantity' ) ) );
+			$options = range( $min, $max, $step );
 			$options = array_combine( $options, $options );
 		} 
 	//	var_export( $showQuantity );
@@ -402,7 +414,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		} 
 		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden', 'value' => @$subscriptionData['article_url'] ) );
 	//	$fieldset->addElement( array( 'name' => 'submit',  'type' => 'Button',  'onClick' => 'addToCartNow( this.form );', 'value' => $submitValue ) );
-		$fieldset->addRequirement( 'quantity', array( 'Int' => null, 'MinMax' => array( 1, @$subscriptionData['no_of_items_in_stock'] ? : 100 ) ) );
+		 @$subscriptionData['no_of_items_in_stock'] ? $fieldset->addRequirement( 'quantity', array( 'Int' => null, 'MinMax' => array( 1, @$subscriptionData['no_of_items_in_stock'] ? : 100 ) ) ) : null;
 	//	$fieldset->addRequirement( 'quantity', array( 'Int' => null ) );
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset ); 
