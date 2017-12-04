@@ -316,30 +316,7 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addLegend( $legend );
 		$fieldset->addFilters( 'StripTags::Trim' );
 		$form->addFieldset( $fieldset );   
-/*		if( ! $values && is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'clone_existing_page', $this->getGlobalValue( 'page_options' ) ) )
-		{
-			$fieldset = new Ayoola_Form_Element;
-			$fieldset->addLegend( 'Clone an existing page...' );
-			
-			
-			//	URL to clone
-			$option = new Ayoola_Page_Page;
-			$option = $option->select();
-			require_once 'Ayoola/Filter/SelectListArray.php';
-			$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
-			$option = $filter->filter( $option );
-			$fieldset->addElement( array( 'name' => 'default_url', 'label' => 'Choose a page to copy', 'type' => 'Select', 'value' => @$settings['default_url'] ), $option );
-		//	$fieldset->addRequirement( 'default_url', array( 'InArray' => array_keys( $option )  ) );
-			$form->addFieldset( $fieldset );
-		}
-*//*		if( is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'advanced', $this->getGlobalValue( 'page_options' ) ) )
-		{
-			$fieldset = new Ayoola_Form_Element;
-			$fieldset->addLegend( 'Advanced settings for this page' );
-			$fieldset->addElement( array( 'name' => 'keywords', 'placeholder' => 'Comma-separated keywords for search engines', 'type' => 'InputText', 'value' => @$values['keywords'] ) );
-			$form->addFieldset( $fieldset );
-		}
-*/		if( is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'redirect', $this->getGlobalValue( 'page_options' ) ) )
+		if( is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'redirect', $this->getGlobalValue( 'page_options' ) ) )
 		{
 			$fieldset = new Ayoola_Form_Element;
 			$fieldset->addLegend( 'Redirect this page to another page' );

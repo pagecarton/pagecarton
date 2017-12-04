@@ -85,6 +85,7 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 				break;
 			}
 			$uri = Ayoola_Doc::pathToUri( $each );
+		//	var_export( $uri );
 			$localPath = Ayoola_Loader::checkFile( DOCUMENTS_DIR . $uri );
 			$data[] = array( 'path' => $uri, 'filename' => basename( $uri ), 'directory' => dirname( $uri ), 'full_path' => $each, 'local_path' => $localPath, 'my_own_copy' => $localPath == $each ? 'NO' : 'YES', );
 		}

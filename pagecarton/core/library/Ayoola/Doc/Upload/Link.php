@@ -79,8 +79,11 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 				case 'jpeg':
 				case 'png':  
 				case 'gif':
+		//		var_export( $imageUrl );
+		//		var_export( array_pop( explode( '.', strtolower( $imageUrl ) ) ) );
+		//		var_export( Application_Slideshow_Abstract::getImageInfo( $plainUrl ) );
 					//	var_export( Application_Slideshow_Abstract::getImageInfo( $imageUrl ) );
-					if( $imageUrl AND $imageInfo = Application_Slideshow_Abstract::getImageInfo( $imageUrl ) )
+					if( $imageUrl AND $imageInfo = Application_Slideshow_Abstract::getImageInfo( $plainUrl ) )
 					{
 					//	var_export( $imageInfo );
 						if( ! empty( $imageInfo['width'] ) && ! empty( $imageInfo['height'] ) )
@@ -120,7 +123,10 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 				$js .= 'ayoola.image.maxWidth = \'' . $this->getParameter( 'width' ) . '\'; ';
 				$js .= 'ayoola.image.maxHeight = \'' . $this->getParameter( 'height' ) . '\';';
 			}
-			$js .= 'ayoola.image.suggestedUrl = \'' . $this->getParameter( 'suggested_url' ) . '\';';
+	//		var_export( $this->getParameter( 'suggested_url' ) );
+	//		var_export( $imageInfo['suggested_url'] );
+	//		var_export( $plainUrl );
+			$js .= 'ayoola.image.suggestedUrl = \'' . ( $this->getParameter( 'suggested_url' ) ? : $imageInfo['suggested_url'] ) . '\';';
 			$js .= 'ayoola.image.cropping.crop = ' . ( $this->getParameter( 'crop' ) ? 'true' : 'false' ) . ';';
 				
 			//	use image id to ensure only one preview change when update is made
@@ -212,7 +218,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 				$uri = null;
 			}
 			$html = '
-				<div title="This is a live preview of the selected file." style="display:block;clear:both; text-align:center;" class="" >
+				<div title="This is a live preview of the selected file." style="display:block;clear:both; text-align:center;max-height:80%;" class="" >
 					<img name="' . $previewImageName . '" src="' . 
 					( ( $uri ? 
 					$uri : 

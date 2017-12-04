@@ -292,8 +292,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 //		var_export( $postListId );
 		$storage = $this->getObjectStorage( array( 'id' => $postListId, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
 		$storedValues = $storage->retrieve();
-		
-		if( ! empty( $storedValues['parameter'] ) &&  empty( $_GET['pc_post_list_autoload'] ) )
+
+	//	var_export( $storedValues );
+		if( ! empty( $storedValues['parameter'] ) && ! empty( $_GET['pc_post_list_autoload'] ) )
 		{	
 		//	var_export( $storedValues['parameter'] );
 
@@ -457,8 +458,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 
 			//	Cache results
-		//	var_export( $values );  
-			$valuesToStore = array( 'values' => $values, 'parameter' => $this->getParameter(), 'single_post_pagination' => $singlePostPaginationInfo  );
+		//	var_export( $this->getParameter( 'markup_template' ) );  
+			$valuesToStore = array( 'values' => $values, 'parameter' => $this->getParameter(), 'single_post_pagination' => $singlePostPaginationInfo );
 
 			// store if it's an independent request
 			if( empty( $_GET['pc_post_list_autoload'] ) )
@@ -550,7 +551,18 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$this->_objectTemplateValues['paginator_first_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=0';
 		$this->_objectTemplateValues['paginator_last_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . ( @count( $chunk ) - 1 );
 		$this->_objectTemplateValues = $this->_objectTemplateValues ? : array();
-		
+
+		$pagination = null;
+		if( ! $this->getParameter( 'no_pagination' ) )
+		{
+			$pagination .= @$this->_objectTemplateValues['paginator_previous_page_button'];
+			$pagination .= @$this->_objectTemplateValues['paginator_next_page_button'];
+		}
+		if( empty( $_GET['pc_post_list_autoload'] ) )
+		{
+			$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '">' . $pagination . '</div>';
+			$this->_objectTemplateValues['pagination'] = $this->_objectData['pagination'] = $data['pagination'] = $pagination;	
+		}	
 			//		self::v( $values );
 		$values = $values ? array_unique( $values, SORT_REGULAR ) : array(); 
 	//	self::v( $values[''] );
@@ -962,20 +974,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		unset( $_POST['PAGECARTON_RESPONSE_WHITELIST'] );
 
 
-		$pagination = null;
 	//	if( $this->getParameter( 'pagination' ) )
-		if( ! $this->getParameter( 'no_pagination' ) )
-		{
-			$pagination .= @$this->_objectTemplateValues['paginator_previous_page_button'];
-			$pagination .= @$this->_objectTemplateValues['paginator_next_page_button'];
-		}
-		$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '">' . $pagination . '</div>';
 		
 		//	$this->_objectTemplateValues['paginator_next_page_button']
 		if( empty( $_GET['pc_post_list_autoload'] ) )
 		{
 			$this->_xml .= $pagination;
-			if( $template  )
+			if( $template )
 			{
 				$template = '' . $template . $pagination;
 			}
@@ -997,6 +1002,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	@$this->_parameter['markup_template'] .= @$this->_parameter['markup_template_append'];
 			$this->_parameter['markup_template_prefix'] = null;
 			$this->_parameter['markup_template_suffix'] = null;  
+		}
+		else
+		{
+	//		@$this->_parameter['markup_template'] .= $pagination;   
 		}
 		//? '<a href="' . $nextPageLink . '"><input type="button" value="Next ' . ( @count( $chunk[( @$offset )] )) . '..." /></a>' : null;
  		if( ! $i ) 

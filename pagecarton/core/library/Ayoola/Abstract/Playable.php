@@ -121,6 +121,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
      */
 	public static function replacePlaceholders( $template, array $values )
     {
+//		var_export( $values );
 		$search = array();
 		$replace = array();
 		$values['placeholder_prefix'] = @$values['placeholder_prefix'] ? : '@@@';      

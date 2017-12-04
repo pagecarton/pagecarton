@@ -311,7 +311,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$this->_dbData = $data;
 			return true;
 		}
-		if( $this->getParameter( 'allow_dynamic_category_selection' ) )
+	//	if( $this->getParameter( 'allow_dynamic_category_selection' ) )
 		{
 	///		self::v( $_REQUEST['pc_module_url_values'] );      
 	//		self::v( intval( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) );      
@@ -322,7 +322,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				$postType = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_post_type_offset' ) )];
 			//	var_export( $category );
 			}
-			else
+			elseif( $this->getParameter( 'allow_dynamic_category_selection' ) )
 			{
 				@$postType = $_REQUEST['article_type'] ? : $_REQUEST['post_type'];  
 			}
@@ -336,7 +336,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				}
 			//	var_export( $category );
 			}
-			elseif( @$_REQUEST['category'] )
+			elseif( @$_REQUEST['category'] &&  $this->getParameter( 'allow_dynamic_category_selection' ) )
 			{
 				$categoryId = $_REQUEST['category'];  
 			}
@@ -1012,7 +1012,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				var pc_autoloadPostPageNumber_' . $postListId . ' = "' . $offset . '";
 				var options = 
 				{
-					distance: 200,
+					distance: ' . ( $this->getParameter( 'autoload_distance' ) ? : 200 ) . ',
 					callback: function( done ) 
 					{
 						var a = document.createElement( "div" );
@@ -1327,9 +1327,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		//	Description
 		$fieldset->addElement( array( 'name' => 'article_description', 'label' => '' . $postTypeLabel . ' Description', 'placeholder' => 'Describe this ' . $postTypeLabel . ' in a few words...', 'type' => 'TextArea', 'value' => @$values['article_description'] ) );
 
-		$fieldset->addRequirement( 'article_title', array( 'WordCount' => array( 6,200 ) ) );
+		$fieldset->addRequirement( 'article_title', array( 'WordCount' => array( 3,200 ) ) );
 		$fieldset->addRequirement( 'article_description', array( 'WordCount' => array( 0, 500 ) ) );
 	
+		//	addRequirements
 		//	Cover photo
 	//	$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
 		$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );

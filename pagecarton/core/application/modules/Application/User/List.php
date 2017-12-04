@@ -99,13 +99,27 @@ class Application_User_List extends Application_User_Abstract
 				'lastname' => null, 
 				'phone_number' => null, 
 		);
-		if( is_array( $this->getParameter( 'other_fields' ) ) )
+		if( $this->getParameter( 'other_fields' ) )
 		{
-			$optionalFields = $optionalFields + $this->getParameter( 'other_fields' );
+			if( is_array( $this->getParameter( 'other_fields' ) ) )
+			{
+				$optionalFields = $optionalFields + $this->getParameter( 'other_fields' );
+			}
+		}
+//		var_export( $this->getParameter( 'other_fields_list' ) );
+		if( $this->getParameter( 'other_fields_list' ) )
+		{
+	//		var_export( $this->getParameter( 'other_fields_list' ) );
+			$otherFields = array_map( 'trim', explode( ',' , $this->getParameter( 'other_fields_list' ) ) );
+			foreach( $otherFields as $each )
+			{
+				$options[$each] = null;
+			}
 		}
 
 		
 //	var_export( $data );
+//	var_export( $optionalFields );
 		if( ! $this->getParameter( 'show_all_columns' ) )
 		{
 			$testData = array_shift( $data );
@@ -113,7 +127,7 @@ class Application_User_List extends Application_User_Abstract
 			{
 				if( empty( $testData[$key] ) )
 				{
-					unset( $options[$key] );
+		//			unset( $options[$key] );
 				}
 			}
 

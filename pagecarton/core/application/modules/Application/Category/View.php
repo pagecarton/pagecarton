@@ -46,13 +46,7 @@ class Application_Category_View extends Application_Category_Abstract
 		//	var_export( $data );
 			$html = null;
 			$adminOptions = null;
-	//		include_once 'D:\\Documents\\Avalanche\\Jamb Questions\\AutomationCode.php';
-/* 			if( ! $_REQUEST['category_name'] && $_REQUEST['category'] )
-			{
-				$_GET['category_name'] = $_REQUEST['category']['category'];
-				$_REQUEST['category_name'] = $_REQUEST['category'];
-			}
- */			$this->_objectTemplateValues = array();
+			$this->_objectTemplateValues = array();
 			$parentCategory = $this->getParameter( 'parent_category' );
 			if( is_numeric( $this->getParameter( 'pc_module_url_values_parent_category_offset' ) ) )
 			{
@@ -136,21 +130,13 @@ class Application_Category_View extends Application_Category_Abstract
 			{
 				if( self::hasPriviledge( array( 98 ) ) )
 				{
-				//	var_export( $data );
-				//	var_export( $category );   
-					
-/* 					$adminOptions .= '<span class="boxednews greynews" >
-										<a class="" title="Add a new sub category" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Creator/parent_category_name/' . $data['category_name'] . '/"> + </a> 
-										<a class="badnews" title="Edit ' . $data['category_label'] . '" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Editor/category_name/' . $data['category_name'] . '/"> - </a>
-										<a class="badnews" title="Delete ' . $data['category_label'] . '" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Delete/category_name/' . $data['category_name'] . '/"> x </a>
-									</span>';
- */					
- 				$updateLink = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Editor/category_name/' . $data['category_name'] . '/?&parent_category=' . $parentCategory . '';
- 				$deleteLink = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Delete/category_name/' . $data['category_name'] . '/';
-				 $adminOptions .= '<span class="" >
-										<a class="" title="Edit ' . $data['category_label'] . '" rel="spotlight;" href="' . $updateLink . '"> Update Category Info </a> | 
-										<a class="" title="Delete ' . $data['category_label'] . '" rel="spotlight;" href="' . $deleteLink . '/"> Delete Category </a>
-									</span>';
+
+					$updateLink = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Editor/category_name/' . $data['category_name'] . '/?&parent_category=' . $parentCategory . '';
+					$deleteLink = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Delete/category_name/' . $data['category_name'] . '/';
+					$adminOptions .= '<span class="" >
+											<a class="" title="Edit ' . $data['category_label'] . '" rel="spotlight;" href="' . $updateLink . '"> Update Category Info </a> | 
+											<a class="" title="Delete ' . $data['category_label'] . '" rel="spotlight;" href="' . $deleteLink . '/"> Delete Category </a>
+										</span>';
 					$this->_objectData['update_url'] = $updateLink;
 					$this->_objectData['delete_url'] = $deleteLink;
 					$this->_objectData['edit_link'] = $adminOptions;
@@ -340,26 +326,6 @@ class Application_Category_View extends Application_Category_Abstract
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>';
-		
-/*		$html .= '<select data-parameter_name="allow_dynamic_category_selection">';
-		$options = array( 'No', 'Dynamic Category Selection' );
-		foreach( $options as $key => $value )
-		{ 
-			$html .=  '<option value="' . $key . '"';  
-		//	var_export( $object['view'] );
-			if( @$object['allow_dynamic_category_selection'] == $key ){ $html .= ' selected = selected '; }
-			$html .=  '>' . $value . '</option>';  
-		}
-		$html .= '</select>';
-*/		
-/*		if( static::$_editableTitle )
-		{
-			$html .= '<a href="javascript:;" title="' . static::$_editableTitle . '" onclick="ayoola.div.makeEditable( this.nextSibling ); this.nextSibling.style.display=\'block\';"> edit </a>';
-				//	var_export( $object );
-			$html .= '<span data-parameter_name="editable" style="padding:1em;display:none;" onclick="this.nextSibling.style.display=\'block\';">' . @$object['editable'] . '</span>';
-			$html .= '<a href="javascript:;" style="display:none;" title="' . static::$_editableTitle . '" onclick="this.previousSibling.style.display=\'none\';this.style.display=\'none\';"> hide </a>';
-		}
-*///		$html .= '<button onClick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Application_Category_List/\' );">Manage Categories</button>';
 		return $html;
 	}
 	// END OF CLASS
