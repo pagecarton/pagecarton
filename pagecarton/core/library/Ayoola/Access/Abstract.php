@@ -319,7 +319,7 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 				}
 				else
 				{
-					@$info['display_picture'] = Ayoola_Application::getUrlPrefix() . $info['display_picture']p;
+					@$info['display_picture'] = Ayoola_Application::getUrlPrefix() . $info['display_picture'];
 				}
 			//	$options['options'] = $userInfo['display_picture_base64'];
 			}
