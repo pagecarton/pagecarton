@@ -36,7 +36,22 @@ class Application_Slideshow_Editor extends Application_Slideshow_Abstract
     {
 		try
 		{ 
-			if( ! $data = self::getIdentifierData() ){ return false; }
+			$this->_createDefaultSlideshow();
+			if( ! $data = self::getIdentifierData() )
+			{ 
+				$this->_identifier = array( 'slideshow_name' => $this->getParameter( 'slideshow_name' ) );
+				self::setIdentifierData();
+				if( ! $data = self::getIdentifierData() )
+				{ 
+				//	var_export( $data );
+					if( self::hasPriviledge( 98 ) )
+					{
+						$data = $this->_identifier;
+					}
+				//	return false; 
+				}
+			//	return false; 
+			}
 			$this->createForm( 'Edit', 'Editing "' . $data['slideshow_title'] . '"', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			

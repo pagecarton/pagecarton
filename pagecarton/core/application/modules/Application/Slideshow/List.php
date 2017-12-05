@@ -47,7 +47,19 @@ class Application_Slideshow_List extends Application_Slideshow_Abstract
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = 'List of Slideshows on this Application';
-		$list->setData( $this->getDbData() );
+		$data = $this->getDbData();
+		if( count( $data ) > 20 )
+		{
+			foreach( $data as $key => $each )
+			{
+				if( empty( $each['slideshow_type'] ) && empty( $each['slideshow_image'] ) )
+				{
+					$this->getDbTable()->delete( array( 'slideshow_id' => $each['slideshow_id'] ) );
+					unset( $data[$key] );
+				}
+			}	
+		}
+		$list->setData( $data );
 	//	$this->setIdColumn( 'Slideshow_name' );
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'There are no slideshows on this application yet. <a title="Create a slideshow" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Creator/">Create one!</a>' );

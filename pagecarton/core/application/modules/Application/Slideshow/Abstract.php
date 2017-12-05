@@ -134,7 +134,8 @@ abstract class Application_Slideshow_Abstract extends Ayoola_Abstract_Table
      */
 	protected function _createDefaultSlideshow()
     {
-		$name = $this->getParameter( 'slideshow_name' ) ? : self::DEFAULT_NAME;
+		$name = $this->getParameter( 'slideshow_name' ) ? : @$_REQUEST['slideshow_name'];
+		$name = $name ? : self::DEFAULT_NAME;
 	//	var_export( $name );
 		try
 		{ 

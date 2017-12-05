@@ -49,11 +49,20 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 		//	if( ! $data = self::getIdentifierData() ){ return false; }
 			if( ! $data = self::getIdentifierData() )
 			{ 
-			//	var_export( $data );
-				$this->_parameter['markup_template'] = null;
-			//	return false; 
+				$this->_identifier = array( 'slideshow_name' => $this->getParameter( 'slideshow_name' ) );
+				self::setIdentifierData();
+				if( ! $data = self::getIdentifierData() )
+				{ 
+				//	var_export( $data );
+					$this->_parameter['markup_template'] = null;
+					if( self::hasPriviledge( 98 ) )
+					{
+						$data = $this->_identifier;
+					}
+				//	return false; 
+				}
 			}
-		//	var_export( $data );
+	//		var_export( $data );
 			if( empty( $data['slideshow_name'] ) )
 			{ 
 			//	var_export( $data['slideshow_images'] );
