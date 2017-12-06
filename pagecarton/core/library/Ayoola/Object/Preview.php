@@ -71,6 +71,7 @@ class Ayoola_Object_Preview extends PageCarton_Widget
             switch( $_REQUEST['content_type'] )
             {
                 case 'js':
+                    header( 'Content-Type: application/javascript' );
                     $html .= Application_Javascript::getCodes( true );
                 break;
                 default:

@@ -286,7 +286,9 @@ class Ayoola_Api extends Ayoola_Abstract_Table
 	//	var_export( file_get_contents( $data['options']['url'] ) );
 
 		$response = Ayoola_Abstract_Viewable::fetchLink( $data['options']['url'], $settings );
-	//	var_export( $response );
+//		var_export( $settings );
+//		var_export( $data['options']['url'] );
+//		var_export( $response );
 	//	echo $response;
 	//	exit( var_export( $settings ) );
 		$response = explode( sha1( '0' ), $response );

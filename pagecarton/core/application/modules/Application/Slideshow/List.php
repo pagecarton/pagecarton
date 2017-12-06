@@ -50,6 +50,7 @@ class Application_Slideshow_List extends Application_Slideshow_Abstract
 		$data = $this->getDbData();
 		if( count( $data ) > 20 )
 		{
+			set_time_limit( 0 );
 			foreach( $data as $key => $each )
 			{
 				if( empty( $each['slideshow_type'] ) && empty( $each['slideshow_image'] ) )

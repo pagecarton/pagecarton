@@ -99,7 +99,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			//	var_export( $data );
 			//	return false; 
 		}
-		else
+		elseif( $values = $this->getForm()->getValues() )
 		{
 			$_GET['article_url'] = $values['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();

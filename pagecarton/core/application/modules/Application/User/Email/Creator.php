@@ -40,12 +40,14 @@ class Application_User_Email_Creator extends Application_User_Email_Abstract
 		$this->createForm( 'Create', 'Create a new email' );
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
+	//	var_export( $values );
 		//	Save the user in the default user db table
 		if( ! $provider = Application_Settings_Abstract::getSettings( 'E-mail', 'provider' ) )
 		{
 			$provider = 'ayoola';
 		}
-	//	var_export( $values );
+	//	var_export( $provider );
+//		var_export( $values );
 		switch( $provider )
 		{
 			case 'ayoola':

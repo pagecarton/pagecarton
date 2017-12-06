@@ -99,18 +99,40 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
     public function setDbTable( Ayoola_Dbase_Table_Interface $table = null )
     {		
 		if( null === $table ){ $table = $this->getTableClass(); }
+
+//		if( ! empty( $this->tempTables[strval($table)] ) )
+		{
+	//		return $this->tempTables[strval($table)];
+		}
 		
 		//	Retrieve a dbInfo from the DbTable
-		$dbInfo = new Application_Database();
+		$dbInfoTable = new Application_Database();  
 	//	var_export( $dbInfo->select() );
-		$dbInfo = $dbInfo->selectOne( null, array( 'database' => 'mail' ) );
+		if( ! $dbInfo = $dbInfoTable->selectOne( null, array( 'database' => 'mail' ) ) )
+		{
+			//	walk around
+			if( $allDb = $dbInfoTable->select() )
+			{
+				foreach( $allDb as $each )
+				{
+					if( $each['database']  = 'mail' )
+					{
+						$dbInfo = $each;
+						break;
+					}
+				}
+			}
+		}
+
 	//	var_export( $table::getDbInfo() );
+//		var_export( $table );
+	//	var_export( $dbInfo );
 		$dbInfo = $dbInfo ? : $table::getDbInfo();
 	//	var_export( $table );   
-	//	var_export( $dbInfo );
-		$table = new $table( new Ayoola_Dbase( $dbInfo ) );
-		$this->_dbTable = $table;
-		return $table;
+		$dbTable = new $table( new Ayoola_Dbase( $dbInfo ) );
+		$this->_dbTable = $dbTable;
+//		$this->tempTables[strval($table)] = $dbTable;
+		return $dbTable;
     } 
 	
     /**
@@ -210,7 +232,7 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( 'name=>' . $this->getObjectName() );
-		$form->oneFieldSetAtATime = true;
+	//	$form->oneFieldSetAtATime = true;
 		$form->submitValue = 'Continue';
 		if( ! $values )
 		{

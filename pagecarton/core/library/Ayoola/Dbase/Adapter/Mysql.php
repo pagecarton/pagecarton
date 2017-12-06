@@ -96,7 +96,7 @@ class Ayoola_Dbase_Adapter_Mysql extends Ayoola_Dbase_Adapter_Abstract
 			mysqli_set_charset ( $link , 'utf8' );
 			return $this->_link = $link; 
 		}
-	//		var_export( $this->getDatabaseInfo() );  
+		//	var_export( $this->getDatabaseInfo() );  
 		require_once 'Ayoola/Dbase/Adapter/Exception.php';
 		throw new Ayoola_Dbase_Adapter_Exception( 'CONNECTION FAILED TO DATABASE - ' . $this->getDatabaseInfo( 'database' ) );
     } 

@@ -157,6 +157,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 					$class = new Application_Article_ShowAll( array( 'category_name' => @$data['slideshow_category_name'], 'article_types' => @$data['slideshow_article_type'], 'no_of_post_to_show' => @$data['image_limit'], ) + $this->getParameter() );     
 				//	var_export( $class->_objectData );
 					$info = $class->_objectData;
+
 					$info = self::sortMultiDimensionalArray( $info, $this->getParameter( 'sort_column' ) ? : 'article_creation_date' );
 					krsort( $info );
 					$i = 0;
@@ -164,10 +165,16 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 					foreach( $info as $key => $each )
 					{
 				//	var_export( $i );
+						if( empty( $each['document_url'] ) )
+						{
+							continue;
+						}
 						$each = is_array( $each ) ? $each : @include $each;
 						$slideInfo = array();
 						$slideInfo['record_count'] = $i;
 						$slideInfo['slideshow_image'] = Ayoola_Application::getUrlPrefix() . $each['document_url'] . '&max_width=' . $data['width'] . '&max_height=' . $data['height'] . '';
+				//		var_export( $each['document_url'] );
+				//		var_export( $slideInfo['slideshow_image'] );
 						$slideInfo['image_link'] = $each['article_url'];
 						$slideInfo['image_title'] = $each['article_title'];
 						$slideInfo['image_description'] = $each['article_description'];  
@@ -347,6 +354,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			$object['slideshow_name'] = $newName; 
 			$object['new_slideshow'] = $newName; 
 		}
+		$slideshowPresent = false;
 		$html .= '<span style="">Show  </span>';
 		$html .= '<select data-parameter_name="slideshow_name">
 		<option value="' . $newName . '">New Slideshow</option>';
@@ -354,8 +362,16 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 		{ 
 			$html .=  '<option value="' . $key . '"';  
 		//	var_export( $object['view'] ); 
-			if( @$object['slideshow_name'] == $key ){ $html .= ' selected = selected '; }
+			if( @$object['slideshow_name'] == $key )
+			{
+				$slideshowPresent = true;
+				$html .= ' selected = selected '; 
+			}
 			$html .=  '>' . ( $value ? : $key ) . '</option>';  
+		}
+		if( empty( $slideshowPresent ) )
+		{
+				$html .= '<option value="' . $object['slideshow_name'] . '" selected = selected>' . $object['slideshow_name'] . '</option> '; 
 		}
 		$html .= '</select>';
 		$html .= '<span style=""> in </span>';
