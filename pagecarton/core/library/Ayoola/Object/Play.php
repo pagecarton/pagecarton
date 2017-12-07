@@ -68,6 +68,10 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 				{
 					$identifier = array( 'class_name' => $_REQUEST['pc_module_url_values'][0] );
 				}
+				else
+				{
+					return false;
+				}
 			//	var_export( $_REQUEST['pc_module_url_values'][0] );
 			//	$identifier = array( 'class_name' => $identifierKey );
 				$this->setIdentifierData( $identifier );
