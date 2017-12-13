@@ -498,6 +498,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		}
 	//	var_export( $danglingPlaceholders );
 		// inject the dangling placeholders here. 
+		//	this made some placeholder to be double under lastoneness
 		foreach( $danglingPlaceholders as $key => $each )
 		{
 			$basePlaceholder = '@@@lastoneness@@@';
@@ -507,7 +508,18 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			}
 			$newPlaceholder = '@@@' . $each . '@@@';
 			$placeholders[] = $each;
-			$content['template'] = str_ireplace( $basePlaceholder, $basePlaceholder . ' ' . $newPlaceholder,  $content['template'] );
+			$searchFor = array();
+			$replaceWith = array();
+
+			//	can we deal with the duplicate contents here?
+			if( in_array( self::hashSectionName( $each ), $danglingPlaceholders ) )
+			{
+				continue;
+			}
+	//		var_export( $newPlaceholder );
+			$searchFor[] = $basePlaceholder;
+			$replaceWith[] = $basePlaceholder . ' ' . $newPlaceholder;
+			$content['template'] = str_ireplace( $searchFor, $replaceWith,  $content['template'] );
 		}
 		$placeholders = array_fill_keys( $placeholders, null );
 //		$placeholders = array_merge( array_fill_keys( $placeholders, null ), array_fill_keys( $placeholders2, null ) );
@@ -685,7 +697,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					$sectionalValues[$numberedSectionName . '_template_defaults'] = $sectionalValues[$numberedSectionName . '_template_defaults'] ? : array();
 
 					//	add this here so it can be available in the the include and template files for new theme
-					$parameters = $parameters + $sectionalValues[$numberedSectionName . '_template_defaults'];
+					//	not available in save mode so that when item is deleted in edit mode it doest sneak into save mode
+					if( ! $this->isSaveMode() )
+					{
+						$parameters = $parameters + $sectionalValues[$numberedSectionName . '_template_defaults'];
+					}
 					$eachObject = array_merge( $eachObject, $parameters );
 
 					//	it was causing in finite loop 
@@ -842,7 +858,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			
 			//	Get new relative paths
 			$rPaths = Ayoola_Page::getPagePaths( $page['url'] );
-			$rPaths['data-backup'] = PAGE_PATH . DS . 'data-backup' . $page['url'] . '.backup/' . time();
+			$rPaths['data-backup'] = self::getPageContentsBackupLocation( $page['url'] ) . DS . time();
+			//	PAGE_PATH . DS . 'data-backup' . $page['url'] . '.backup
 			//	change the place themes are being saved.
 			if( stripos( $page['url'], '/layout/' ) === 0 )
 			{
@@ -852,7 +869,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$rPaths['data'] = 'documents/layout/' . $themeName . '/theme/data';
 				$rPaths['data_php'] = 'documents/layout/' . $themeName . '/theme/data_php';
 				$rPaths['data_json'] = 'documents/layout/' . $themeName . '/theme/data_json';
-				$rPaths['data-backup'] ='documents/layout/' . $themeName . '/theme/data-backup/' . time();
+				$rPaths['data-backup'] = 'documents/layout/' . $themeName . '/theme/data-backup/' . time();
 			}
 			elseif( ! empty( $_REQUEST['pc_page_editor_layout_name'] ) )
 			{
@@ -874,10 +891,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	Let's store this for future reference.
 		//	$storagePath = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . PAGE_PATH . DS . 'data-backup' . $page['url'] . '.backup/' . time();
 		//	@Ayoola_Doc::createDirectory( dirname( $storagePath ) );
-			if( $previousData = @file_get_contents( $rPaths['data_json'] ) )  
-			{
-				file_put_contents( $rPaths['data-backup'], $previousData );
-			}
+			
 
 
 			file_put_contents( $rPaths['include'], $content['include'] );
@@ -888,9 +902,25 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	//		var_export( $values );
 	//		var_export( $sectionalValues );
 	//		file_put_contents( $rPaths['data_json'] , json_encode( $this->getValues() ) );
+	
+			if( $previousData = @file_get_contents( $rPaths['data_json'] ) )  
+			{
+				//	now saving current data instead of previous data
+			//	file_put_contents( $rPaths['data-backup'], $previousData );
+			}
+
 
 			//	save default values if no value is set so we can preload themes.
 			file_put_contents( $rPaths['data_json'] , json_encode( $values ? : $sectionalValues ) );
+
+			//	back up current data and not previous one
+			if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  
+			{
+				if( $currentData != $previousData )
+				{
+					file_put_contents( $rPaths['data-backup'], $currentData );
+				}
+			}
 			
 			
 			//	Sanitize theme pages!
@@ -974,12 +1004,61 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$optionHTML .= '<option ' . $selected . '>' . $eachPage['url'] . '</option>';
 			}
 			$optionHTML .= '</select></span>';
+			if( ! empty( $_REQUEST['pc_page_editor_layout_name'] ) )
+			{
+		//		var_export( $_REQUEST['pc_page_editor_layout_name'] );
+				$pageThemeFileUrl = $page['url'];
+				if( $pageThemeFileUrl == '/' )
+				{
+					$pageThemeFileUrl = '/index';
+				}
+				$backupDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $_REQUEST['pc_page_editor_layout_name'] . '/theme' . $pageThemeFileUrl . '/data-backup';
+			}	
+			else
+			{
+
+				$backupDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . self::getPageContentsBackupLocation( $page['url'] );
+			//					var_export( $page['url'] );
+			//					var_export( $backupDir );
+
+			}
+
 		}
 		else
 		{
 			list( , , $page['layout_name'] ) = explode( '/', $page['url'] );
 		//	var_export( $page['layout_name'] );
+			$backupDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $page['layout_name'] . '/theme/data-backup';
+	//		var_export( $backupDir );
 			$optionHTML = ' <span style="display:inline-block;padding: 0 5px 0 5px;"> Theme Editor </span>';
+		}
+//		var_export( $backupDir );
+		// content version
+		$pageVersions = array();
+		$pageVersionHTML = null;
+		if( is_dir( $backupDir ) )
+		{
+			$pageVersions = Ayoola_Doc::getFiles( $backupDir );
+			rsort( $pageVersions );
+		//	var_export( $pageVersions );
+			$pageVersionHTML = ' <span style="display:inline-block;padding: 0 5px 0 5px;"><select style="display: inline-block;width: initial;width: unset;" onChange="location.search = location.search + \\\'&pc_page_editor_content_version=\\\' + this.value;"><option value="">Last Saved Content</option>';
+			$filter = new Ayoola_Filter_Time();
+			foreach( $pageVersions as $eachVersion )
+			{
+				if( is_numeric( basename( $eachVersion ) ) )
+				{
+					$eachVersion = basename( $eachVersion );
+				}
+			//	$pageVersions[$eachVersion] = date( 'r', $eachVersion );
+			//	unset( $pageVersions[$keyR] );
+				$selected = null;
+				if( $_REQUEST['pc_page_editor_content_version'] == $eachVersion )
+				{
+					$selected = 'selected=selected';
+				}
+				$pageVersionHTML .= '<option ' . $selected . ' value="' . $eachVersion . '">Content Saved ' . $filter->filter( $eachVersion ) . '</option>';
+			}
+			$pageVersionHTML .= '</select></span>';
 		}
 	//	foreach
 		
@@ -995,6 +1074,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					var c = a.getElementsByClassName( \'pc_page_object_inner_preview_area\' )[0];
 					var d = a.getAttribute( "data-class_name" );
 			//		alert( d );  
+					if( ! c )
+					{
+						return false;
+					}
 					var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?pc_show_error=1&rebuild_widget=1&class_name=\' + d, data: b.content, container: c } );
 					var v = function()
 					{
@@ -1417,6 +1500,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		}
 	//	alert( functionToSaveTemplate );
 		ayoola.events.add( saveButton, "click", functionToSaveTemplate );
+
+		
 		' 
 		. 
 		( $isNotLayoutPage ? 
@@ -1484,8 +1569,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		var a = document.createElement( "a" );
 		a.style.cssText = "";
 		a.href = "javascript:";
-//		a.href = "?url=/layout/' . strtolower( $page['layout_name'] ) . '/template";
-//		a.target = "_blank";
 		a.className = "pc-hide-children-children pc-btn pc-btn-small";  
 		a.innerHTML = "Theme";  
 		topBarForButtons.appendChild( a );
@@ -1508,6 +1591,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		a.innerHTML = "Preview";  
 		topBarForButtons.appendChild( a );		
 		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Layout_Preview/?layout_name=' . $page['layout_name'] . '\' ); } );
+
+		
 		
 		//	button to load layout defaults HTML
 		var loadButton = document.createElement( "a" );
@@ -1552,6 +1637,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				ayoola.style.addClass( a, "pc_page_widgetmode" ); 
 			}
 		};
+		topBarForButtons.appendChild( optionbar );
+
+		//	Add options bar
+		var optionbar = document.createElement( "span" );
+		optionbar.innerHTML = \' ' . $pageVersionHTML . '\';
+		optionbar.className = "pc-hide-children-children";
+		optionbar.title = "Select page content version";
 		topBarForButtons.appendChild( optionbar );
 		
 		//	Add show more options button

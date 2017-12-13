@@ -482,7 +482,13 @@ class Ayoola_Application
 				//	exit();  
 					
 			//	if( $userInfo && @$userInfo['access_level'] != 99 )
-				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) AND ( $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) ) AND @$userInfo['access_level'] != 99  )
+		//	$userInfo = Ayoola_Access::getAccessInformation( $subDomain );
+		//		var_export( $subDomain );
+		//		var_export( $userInfo );
+		//		var_export( $data['domain_settings']['domain_options'] );
+		//		exit();
+				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) AND ( $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) )  )
+//				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) AND ( $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) ) AND @$userInfo['access_level'] != 99  )
 				{
 			//		var_export( $data['domain_settings'] );
 					Ayoola_Application::$GLOBAL = $userInfo;
@@ -501,7 +507,7 @@ class Ayoola_Application
 				elseif( ! empty( $tempWhere['domain_name'] ) )
 				{
 			//		header( 'HTTP/1.1 301 Moved Permanently' );
-					header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getPresentUri() );    
+					header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
 				//	var_export( $data );
 					
 					exit( 'DOMAIN NOT IN USE' );
@@ -526,7 +532,7 @@ class Ayoola_Application
 		if( @is_array( $data['domain_settings']['domain_options'] ) && in_array( 'redirect', $data['domain_settings']['domain_options'] ) && ! @$_REQUEST['ignore_domain_redirect'] && ! @$_SESSION['ignore_domain_redirect'] )
 		{
 			header( 'HTTP/1.1 ' . $data['domain_settings']['redirect_code'] );
-			$toGo = $protocol . '://' . $data['domain_settings']['redirect_destination'] . Ayoola_Application::getPresentUri();
+			$toGo = $protocol . '://' . $data['domain_settings']['redirect_destination'] . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET );
 			header( 'Location: ' . $toGo );
 		//	var_export( $data );
 			exit( 'REDIRECTING TO' );

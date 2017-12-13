@@ -586,9 +586,9 @@ EOD;
 		}
 		
 		//	for heavy files
-		set_time_limit( 1200 );
+		set_time_limit( 0 );
 		ignore_user_abort( true );
-		ini_set( 'memory_limit', "256M" );
+//		ini_set( 'memory_limit', "256M" );
  		switch( $values['backup_type'] )
 		{
 			case 'export':

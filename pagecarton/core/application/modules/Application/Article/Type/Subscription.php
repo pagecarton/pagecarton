@@ -101,6 +101,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		}
 		elseif( $values = $this->getForm()->getValues() )
 		{
+		//	var_export( $values );
 			$_GET['article_url'] = $values['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
 			do
@@ -415,7 +416,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden', 'value' => @$subscriptionData['article_url'] ) );
 	//	$fieldset->addElement( array( 'name' => 'submit',  'type' => 'Button',  'onClick' => 'addToCartNow( this.form );', 'value' => $submitValue ) );
 		 @$subscriptionData['no_of_items_in_stock'] ? $fieldset->addRequirement( 'quantity', array( 'Int' => null, 'MinMax' => array( 1, @$subscriptionData['no_of_items_in_stock'] ? : 100 ) ) ) : null;
-	//	$fieldset->addRequirement( 'quantity', array( 'Int' => null ) );
+		$fieldset->addRequirement( 'article_url', array( 'NotEmpty' => null ) );
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset ); 
 		$form->submitValue = $submitValue; 

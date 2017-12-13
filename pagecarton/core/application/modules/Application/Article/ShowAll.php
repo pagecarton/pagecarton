@@ -1039,6 +1039,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	E.g. One Class will be used for any object
 	//	var_export( $object );
 		$options = $object['class_name'];
+
+		if( ! Ayoola_Loader::loadClass( $options ) )
+		{
+			return false;
+		}
+	//	var_export( $options );
 		$options = new $options( array( 'no_init' => true ) );
 //		$options = array();
 		$options = (array) $options->getClassOptions();

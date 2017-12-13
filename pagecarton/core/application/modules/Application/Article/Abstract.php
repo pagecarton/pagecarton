@@ -233,6 +233,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public static function saveArticle( $values )
     {
 //		var_export( $values );
+		if( empty( $values['article_url'] ) )
+		{
+			return false;
+		}
 	//	$text = '<?php return ' . var_export( $values, true ) . ';';
 		$values['file_size'] = intval( strlen( var_export( $values, true ) ) );
 		

@@ -226,6 +226,15 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 			$oldPath = $rPaths['data_php'];
 			$rPaths['data_php'] = 'documents/layout/' . $themeName . '/theme/data_php';
 			$rPaths['data_json'] = 'documents/layout/' . $themeName . '/theme/data_json';
+
+			if( ! empty( $_REQUEST['pc_page_editor_content_version'] ) )
+			{
+				$backupFile = 'documents/layout/' . $themeName . '/theme/data-backup' . DS . $_REQUEST['pc_page_editor_content_version'];
+				if( is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $backupFile ) )
+				{
+					$rPaths['data_json'] = $backupFile;
+				}
+			}
 			
 			if( ! is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths['data_php'] ) )
 			{
@@ -240,16 +249,35 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 				$pageThemeFileUrl = '/index';
 			}
 			$themeName = strtolower( $_REQUEST['pc_page_editor_layout_name'] );
+
+
 			$file = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
 			if( is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $file ) )
 			{
 				$rPaths['data_json'] = $file;
+			}
+			if( ! empty( $_REQUEST['pc_page_editor_content_version'] ) )
+			{
+				$backupFile = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data-backup' . DS . $_REQUEST['pc_page_editor_content_version'];
+				if( is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $backupFile ) )
+				{
+					$rPaths['data_json'] = $backupFile;
+				}
+			}
+		}
+		elseif( ! empty( $_REQUEST['pc_page_editor_content_version'] ) )
+		{
+			$backupFile = self::getPageContentsBackupLocation( $page['url'] ) . DS . $_REQUEST['pc_page_editor_content_version'];
+			if( is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $backupFile ) )
+			{
+				$rPaths['data_json'] = $backupFile;
 			}
 		}
 		//	now using json to store this data
 	//	var_export( $rPaths );
 		$newFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths['data_json'];
 	//	var_export( $newFile );
+		
 		if( is_file( $newFile ) )
 		{
 	//		var_export( file_get_contents( $newFile ) );
@@ -531,5 +559,17 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		$merge = array_merge( $invalidData, $system );
 		return $merge;
     }
+	
+    /**
+     * 
+     * 
+     * @param string
+     * @return string
+     */
+    public static function getPageContentsBackupLocation( $url )
+    {
+		return PAGE_PATH . DS . 'data-backup' . $url . '.backup';
+	}
+
 	// END OF CLASS
 }

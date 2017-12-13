@@ -220,6 +220,14 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		{
 			return false;
 		}
+		if( ! method_exists( $className, 'getObjectTitle' ) )
+		{
+			return false;
+		}
+		if( ! $className::getObjectTitle() )
+		{
+			return false;
+		}
 		return true;
 	}
 	

@@ -75,6 +75,7 @@ class Ayoola_Object_Preview extends PageCarton_Widget
                     $html .= Application_Javascript::getCodes( true );
                 break;
                 default:
+                    unset( $parameters['editable'], $parameters['codes'] );
 		            Application_Javascript::addFile( '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '/?class_name=' . $_REQUEST['class_name'] . '&v=' . filemtime( __FILE__ ) . '&content_type=js&' . http_build_query( $parameters ) );
                     $html .= $classHtml;
                     $html .= Application_Style::getAll(); 

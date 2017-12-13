@@ -71,6 +71,7 @@ class Application_Personalization extends Ayoola_Abstract_Table
 		$startTime = microtime( true );
 		  
 		//	Clear cache
+		Application_Cache_Clear::viewInLine();
 /* 		if( is_dir( CACHE_DIR ) ) 
 		{
 			//	This is important or the application_dir won't change causing files to save in global dir

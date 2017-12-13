@@ -118,6 +118,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      * @var string
      */
 	protected static $_editableHideTitle = "Hide";
+	
+    /**
+     * 
+     * 
+     * @var array
+     */
+	protected static $_parameterKeys;
 
     /**
      * The Options Available as a Viewable Object
@@ -614,9 +621,37 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      * @param array viewableObject Information
      * @return string Mark-Up to Display Viewable Objects
      */
-    protected static function getViewableObjectRepresentation( array $object )
+    protected static function getParameterKeys()
     {
-		
+		$class = get_called_class();
+		if( ! empty( static::$_parameterKeys[$class] ) )
+		{
+			return static::$_parameterKeys[$class];
+		}
+		$filter = new Ayoola_Filter_ClassToFilename();
+		$classFile = $filter->filter( $class );
+		$classFile = Ayoola_Loader::getFullPath( $classFile );
+
+		$content = file_get_contents( $classFile ) . file_get_contents( __FILE__ ) ;
+		preg_match_all( "/getParameter\( '([a-z_-]*)' \)/", $content, $results );
+	//	var_export( $class );
+		sort( $results[1] );
+		static::$_parameterKeys[$class] = $results[1];   
+	//	var_export( $results[1] );
+	//	var_export( $content );
+	//	var_export( $classFile );
+	//	exit();
+		return static::$_parameterKeys[$class];
+	}
+
+    /**
+     * Produce the mark-up for each viewable object
+     *
+     * @param array viewableObject Information
+     * @return string Mark-Up to Display Viewable Objects
+     */
+    protected static function getViewableObjectRepresentation( array $object )
+    {		
 		$html = null;
 		$object['object_name'] = $object['object_name'] ? : $object['class_name'];
 		$object['object_unique_id'] = @$object['object_unique_id'] ? : ( md5( $object['object_name'] ) . rand( 100, 1000 ) );
@@ -695,10 +730,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						}
 					break;    
 					default:
-						$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'InputText', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ) );
-						$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'InputText', 'value' => @htmlspecialchars( $advanceParameters['advanced_parameter_value'][$i] ) ) );
-						$fieldset->allowDuplication = true;  
-						$fieldset->placeholderInPlaceOfLabel = true;
+						if( static::getParameterKeys() )
+						{
+							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys(), static::getParameterKeys() ) ? : array() ) );
+							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'InputText', 'value' => @htmlspecialchars( $advanceParameters['advanced_parameter_value'][$i] ) ) );
+							$fieldset->allowDuplication = true;  
+							$fieldset->placeholderInPlaceOfLabel = true;
+						}
 					break;
 				}
 				$form->addFieldset( $fieldset );
@@ -723,7 +761,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		//	$fieldset->addLegend( 'Select user groups that would be able to view this object...' );
 			$fieldset->addElement( array( 'name' => 'xx', 'type' => 'Html' ), array( 'html' => '<label>Widget Privacy</label>' ) );
 			$fieldset->addElement( array( 'name' => 'object_access_level', 'id' => $object['object_unique_id'] . '_object_access_level', 'label' => ' ', 'placeholder' => '', 'type' => 'Checkbox', 'value' => @$advanceParameters['object_access_level'] ), self::$_authLevelOptions );
-/*		
+
+			$inlineWrapperChange = false;
+	//		var_export( is_a( $object['class_name'], Ayoola_Page_Editor_Text ) );
+	//		var_export( $object['class_name'] );
+			if( $object['class_name'] == 'Ayoola_Page_Editor_Text' || $object['class_name'] == 'Ayoola_Page_Editor_Image' )
+			{
+				$inlineWrapperChange = true;
+
 			$jsChangeWrapper = '
 				var a = ayoola.div.getParent( { element: this, name: \'over_all_object_container\', counter: 10 } );
 			//	alert( a );
@@ -753,7 +798,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	alert( d );
 			
 				';
-*/			if( ! self::$_wrapperOptions )
+			}
+			if( ! self::$_wrapperOptions )
 			{
 				$class = new Ayoola_Object_Table_Wrapper;
 				self::$_wrapperOptions = $class->select();
@@ -772,8 +818,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$currentWrapper = $eachWrapper;
 					$selected = 'selected=selected';
 				}
-				$options .= '<option ' . $selected . ' value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
-//				$options .= '<option ' . $selected . ' data-wrapper_prefix="' . htmlentities( $eachWrapper['wrapper_prefix'] ). '" data-wrapper_suffix="' .  htmlentities( $eachWrapper['wrapper_suffix'] ) . '" value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
+		//		$options .= '<option ' . $selected . ' value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
+				if( ! $inlineWrapperChange )
+				{
+					$eachWrapper['wrapper_suffix'] = null;
+					$eachWrapper['wrapper_prefix'] = null;
+				}
+				$options .= '<option ' . $selected . ' data-wrapper_prefix="' . htmlentities( $eachWrapper['wrapper_prefix'] ). '" data-wrapper_suffix="' .  htmlentities( $eachWrapper['wrapper_suffix'] ) . '" value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
 			}
 			$options .= '</select>';
 			$fieldset->addElement( array( 'name' => 'wrapper_label', 'type' => 'Html' ), array( 'html' => '<p><label>Wrapper</label>' . $options . '</p>', 'fields' => 'wrapper_name' ) );
@@ -792,7 +843,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		//	Determine if its opening or closing inside the "object".
 		$openOrNot = static::$openViewParametersByDefault ? '' : 'display:none;';
 		$html .= '<div class="object_exterior" data-parameter_name="parent">'; //	exterior 
-	//	$html .= @$currentWrapper['wrapper_prefix']; //	exterior 
+		$html .= @$currentWrapper['wrapper_prefix']; //	exterior 
 		$html .= '<div title="' . $object['view_parameters'] . '" style="' . $openOrNot . ' cursor: default;" name="' . $advancedName . '_interior" class="object_interior" data-parameter_name="parent">'; //	interior parent
 
 		//	just for padding.
@@ -860,7 +911,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '<div class="pc_page_object_specific_item" style="padding-top:0.5em; padding-bottom:0.5em;"></div>'; 
 		
 		$html .= '</div>';	//	 interior
-	//	$html .= @$currentWrapper['wrapper_suffix'];	//	 wrapper
+		$html .= @$currentWrapper['wrapper_suffix'];	//	 wrapper
 		$html .= '</div>';	//	 exterior
 		$html .= "<textarea onclick='this.focus();this.select()' style='display:none; width:100%;' class='import_export_content' title='Copy contents and paste where you want to export.'> </textarea>";		
 		
