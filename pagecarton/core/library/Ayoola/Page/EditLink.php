@@ -49,6 +49,7 @@ class Ayoola_Page_EditLink extends PageCarton_Widget
             //  Output demo content to screen
 		    $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
    //         var_export( $currentUrl );
+            $editorMode = false;
 			switch( $currentUrl )
 			{
 				case '/tools/classplayer':
@@ -59,15 +60,30 @@ class Ayoola_Page_EditLink extends PageCarton_Widget
 					//	Do nothing.
 					//	 had to go through this route to process for 0.00
 			//		var_export( __LINE__ );
+					if( @$_REQUEST['url'] && @$_REQUEST['name'] || ( @$_REQUEST['rebuild_widget'] ) )
+                    {
+                        $currentUrl = $_REQUEST['url'];
+                        $editorMode = true;
+                        break;
+                    }
+                    return false;
 				break;
 				default:
       //      var_export( $currentUrl );
-                    $html = '<div style="text-align:center;">';
-                    $html .= '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=' . $currentUrl . '\' );" title="Edit this page">Edit this page "' . $currentUrl . '"</a>';
-                    $html .= '</div>';
-                    $this->setViewContent( $html );   
 				break;
 			}
+            if( ! $editorMode )
+            {
+               $editorLink = 'href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=' . $currentUrl . '\' );"';
+            }
+            else
+            {
+               $editorLink = 'href="javascript:" onClick="alert( \'Link will not work in Page Editor!\' );"';
+            }
+            $html = '<div style="text-align:center;">';
+            $html .= '<a ' . $editorLink . ' title="Edit this page">Edit this Page ' . ( $currentUrl ? '<span style="font-size:x-small;">[' . $currentUrl . ']</span>' : '' ) . '</a>';
+            $html .= '</div>';
+            $this->setViewContent( $html );   
              // end of widget process
           
 		}  

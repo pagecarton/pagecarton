@@ -19,6 +19,12 @@
 class Application_SiteInfo extends PageCarton_Widget
 {
 	
+    /**	
+     *
+     * @var boolean
+     */
+	public static $editorViewDefaultToPreviewMode = true;
+	
     /**
      * Access level for player. Defaults to everyone
      *
@@ -84,9 +90,9 @@ class Application_SiteInfo extends PageCarton_Widget
      */
     public static function getHTMLForLayoutEditor( $object )
 	{
-		$html = null;
-        $html .= self::viewInLine(); 
-		return $html;
+	//	$html = null;
+    //    $html .= self::viewInLine(); 
+	//	return $html;
 	}
 	// END OF CLASS
 }
