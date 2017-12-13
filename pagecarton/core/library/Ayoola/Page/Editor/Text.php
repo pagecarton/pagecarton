@@ -231,8 +231,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		{
 			$html .= '<div style=" cursor: text;" data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor" onDblClick="replaceDiv( this );">' . ( isset( $object['editable'] ) ? $object['editable'] : '
 			<div style="">
-			<h3>Enim cupidatat eiusmod non ipsum exercitation labore pariatur proident consectetur.</h3>
-			<p>Nisi fugiat laboris consequat nulla magna duis laboris ipsum ut officia aliquip. Dolor aliquip irure laborum proident. Eu cillum esse tempor in sit sunt tempor.</p>
+			<h3>Lorem Ipsum dolor</h3>
+			<p>Vivamus sit amet dolor sit amet nunc maximus finibus. Donec vel ornare leo, eget gravida orci. Etiam vitae rutrum nisi. Mauris auctor velit et ultricies mollis. Donec in mattis lectus. In hac habitasse platea dictumst. Sed ultricies magna ut ligula fringilla facilisis. Ut sodales erat ut libero rhoncus hendrerit. Vivamus nunc magna, finibus vel velit in, tempus venenatis dolor. Aenean a leo non tellus semper ultricies eget quis enim.</p>
 			</div>
 			' ) . '</div>';  
 		}
