@@ -26,6 +26,13 @@ require_once 'Ayoola/Page/Abstract.php';
  */
 class Ayoola_Page_AutoCreator extends Ayoola_Page_Abstract
 {
+	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Show Link to Auto-Create Page'; 
 		
     /**
      * Performs the creation process

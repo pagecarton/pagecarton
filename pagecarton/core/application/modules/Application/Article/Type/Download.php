@@ -1,4 +1,6 @@
+
 <?php
+ 
 /**
  * PageCarton Content Management System
  *
@@ -77,17 +79,13 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 
 					$this->setViewContent( '<p class="boxednews badnews">You need an additional ' . $neededFunds . ' in your wallet to download this file.</p>' );
 					$this->setViewContent( Application_Wallet_Fund::viewInLine( array( 'amount' => $amount, 'checkout_requirements' => @$data['article_requirements'], 'button_value' => $this->getParameter( 'button_value' ) ? : 'Add funds to download', 'return_url' => 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $data['article_url'] ) ) );
-				//	throw new Application_Article_Type_Exception( 'You have insufficient balance in your wallet to download this file.' );
 					return false;
 				}
 			}
 			
 			$this->createForm( 'Download', 'Download "' . $data['article_title'] . '" to your device.' );
 			$form = $this->getForm()->view();
-		//	$values = $this->getForm()->getValues();
-		//	var_export( $_POST );
 			$this->setViewContent( $form, true );
-		//	$data = $this->getParameter( 'data' );
 		
 			$values = $this->getForm()->getValues();
 			if( $values || @$_REQUEST['auto_download'] )
@@ -108,9 +106,6 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 			//		var_export( $transferInfo );
 			//		exit();
 				}
-			//	var_export( $values );   
-			//	var_export( $data );  
-			//		exit();
 				$_GET['article_url'] = @$values['article_url'];
 				$data = $this->getIdentifierData() ? : $this->getParameter( 'data' );
 				$this->createForm( 'Download', '', $data );
@@ -125,12 +120,6 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 				Here is a captured information of the user: ' . var_export( Ayoola_Application::getUserInfo(), true ) . '.
 				Here is a captured information provided by the user when accessing the file: ' . var_export( $values, true ) . '.
 				';
-	/* 			try
-				{
-					@Ayoola_Application_Notification::mail( $mailInfo );
-				}
-				catch( Ayoola_Exception $e ){ null; }
-	 */			
 				Application_Log_View_General::log( array( 'type' => 'Download', 'info' => array( $mailInfo ) ) );
 				
 				//	Log into the database 
@@ -175,83 +164,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 			//		$this->setViewContent( $this->getForm()->view(), true );
 					return false;
 				}
-				
-				//	Download
-				if( @$data['download_url'] )
-				{
-					if( $data['download_url'][0] === '/' )
-					{
-						//	this is still a local file we can load with Ayoola_Doc
-						$path =  $data['download_url'];
-					}
-					else
-					{
-						header( 'Location: ' . $data['download_url'] );
-						exit();
-					}
-				}
-				elseif( @$data['download_path'] )
-				{
-					$path = APPLICATION_DIR . $data['download_path'];
-				}
-				elseif( @$data['download_base64'] )
-				{
-					$result = self::splitBase64Data( $data['download_base64'] );
-					
-					//	https://chrisjean.com/generating-mime-type-in-php-is-not-magic/
-					if ( function_exists( 'finfo_open' ) && function_exists( 'finfo_file' ) && function_exists( 'finfo_close' ) ) 
-					{
-						$f = finfo_open();
-						$type = finfo_buffer( $f, $result['data'], FILEINFO_MIME_TYPE );
-					}
-					elseif ( function_exists( 'getimagesizefromstring' ) ) 
-					{
-						$fileInfo = getimagesizefromstring( $result['data'] );
-						$type = $fileInfo['mime'];
-					}
-					$filter = new Ayoola_Filter_Name();
-					$filter->replace = '-';
-					$customName = substr( trim( $filter->filter( @$data['display_name'] . '_' . $data['article_title'] ) , '-_' ), 0, 70 ) . '.' . array_pop( explode( '/', $type ) );
-					
-					header('Content-Description: File Transfer');
-					header( 'Content-Type: ' . $type );
-					header( 'Content-Disposition: attachment; filename=' . $customName );
-					header('Content-Transfer-Encoding: binary');
-					header('Expires: 0');
-					header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-					header('Pragma: public');
-					header( 'Content-Length: ' . strlen( $result['data'] ) );
-					ob_clean();
-					flush();
-					echo $result['data'];
-					exit();
-/* 
-					$filter = new Ayoola_Filter_Name();
-					$filter->replace = '-';
-					$customName = substr( trim( $filter->filter( @$data['display_name'] . '_' . $data['article_title'] ) , '-' ), 0, 70 );
-					$path = sys_get_temp_dir() . DS . $customName . '.' . array_pop( explode( '/', $type ) );
-					file_put_contents( $path, $result['data'] );
- */				}
-		//		var_export( $data['download_base64'] ); 
-			//	var_export( $path ); 
-		//		var_export( $path ); 
-				//	Handle encryption
-				switch( @$_SERVER['HTTP_AYOOLA_PLAY_MODE'] ) 
-				{
-					case 'ENCRYPTION':
-					case 'JSON':
-						$this->_objectData = $data; 
-					break;
-					default:
-						if( @$path )
-						{
-						//	var_export( $path );
-							$document = new Ayoola_Doc( array( 'option' => $path ) ); 
-							$document->download();
-						}
-						exit();
-					break;
-				}
+				static::getDownloadContent( $data );
 			}
 			else
 			{

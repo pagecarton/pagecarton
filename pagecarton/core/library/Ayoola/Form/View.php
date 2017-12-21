@@ -224,8 +224,14 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		//	Implementing Object Options
 		//	So that each objects can be used for so many purposes.
 		//	E.g. One Class will be used for any object
-	//	var_export( $object );
-		$options = $object['class_name'];
+//		var_export( $object );
+		$options = __CLASS__;
+//		$options = $object['class_name'];
+	//	var_export( $options );
+		if( ! $options || ! Ayoola_Loader::loadClass( $options ) )
+		{
+			return false;
+		}
 		$options = new $options( array( 'no_init' => true ) );
 //		$options = array();
 		$options = $options->getDbData();;

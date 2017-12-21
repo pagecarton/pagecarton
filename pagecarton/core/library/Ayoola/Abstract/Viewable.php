@@ -616,32 +616,58 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	}
 
     /**
-     * Produce the mark-up for each viewable object
+     * Returns an array of other classes to get parameter keys from
      *
-     * @param array viewableObject Information
-     * @return string Mark-Up to Display Viewable Objects
+     * @param void
+     * @return array
      */
-    protected static function getParameterKeys()
+    protected static function getParameterKeysFromTheseOtherClasses( & $parameters )
     {
-		$class = get_called_class();
-		if( ! empty( static::$_parameterKeys[$class] ) )
+		return array();
+	}
+
+    /**
+     * 
+     *
+     * @param void
+     * @return array
+     */
+    protected static function getParameterKeys( & $parameters )
+    {
+		$thisClass = get_called_class();
+		$thisObjectID = $thisClass . $parameters['object_unique_id'];
+		if( ! empty( static::$_parameterKeys[$thisObjectID] ) )
 		{
-			return static::$_parameterKeys[$class];
+			return static::$_parameterKeys[$thisObjectID];
 		}
 		$filter = new Ayoola_Filter_ClassToFilename();
-		$classFile = $filter->filter( $class );
-		$classFile = Ayoola_Loader::getFullPath( $classFile );
+		$classes = array( $thisClass );
+	//	var_export( static::getParameterKeysFromTheseOtherClasses( $parameters ) );
+		if( is_array( static::getParameterKeysFromTheseOtherClasses( $parameters ) ) )
+		{
+			$classes = array_merge( $classes, static::getParameterKeysFromTheseOtherClasses( $parameters ) );
+		}
+	//	var_export( $classes );
+		$content = file_get_contents( __FILE__ ) ;
+		foreach( $classes as $class )
+		{
+			$classFile = $filter->filter( $class );
+			$classFile = Ayoola_Loader::getFullPath( $classFile );
 
-		$content = file_get_contents( $classFile ) . file_get_contents( __FILE__ ) ;
+			$content .= file_get_contents( $classFile ) ;
+		}
+//		$class = get_called_class();
+
+
 		preg_match_all( "/getParameter\( '([a-z_-]*)' \)/", $content, $results );
 	//	var_export( $class );
 		sort( $results[1] );
-		static::$_parameterKeys[$class] = $results[1];   
+		static::$_parameterKeys[$thisObjectID] = $results[1];   
 	//	var_export( $results[1] );
 	//	var_export( $content );
 	//	var_export( $classFile );
 	//	exit();
-		return static::$_parameterKeys[$class];
+		return static::$_parameterKeys[$thisObjectID];
 	}
 
     /**
@@ -730,9 +756,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						}
 					break;    
 					default:
-						if( static::getParameterKeys() )
+						if( static::getParameterKeys( $object ) )
 						{
-							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys(), static::getParameterKeys() ) ? : array() ) );
+							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() ) );
 							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'InputText', 'value' => @htmlspecialchars( $advanceParameters['advanced_parameter_value'][$i] ) ) );
 							$fieldset->allowDuplication = true;  
 							$fieldset->placeholderInPlaceOfLabel = true;

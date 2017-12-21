@@ -49,6 +49,22 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <script src="js/custom.js"></script>
 <link href="css/custom.css" rel="stylesheet">
 <!--//Metis Menu -->
+<style>
+.logo a h1 {
+    color: transparent;
+    background-image: url("#PC_URL_PREFIX/img/logo.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.logo {
+    background: #4d4d4d;
+}
+.cbp-spmenu-vertical {
+    background-color: #333;
+}
+
+</style>
 </head> 
 <body class="cbp-spmenu-push">
 	<div class="main-content">
@@ -64,16 +80,16 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Settings_SettingsName_List/">Options</a>
 								</li>
 								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Access_AuthLevel_List/">Priviledges</a>
+									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Access_AuthLevel_List/">Privileges</a>
 								</li>
 								<li>
 									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Object_List/">Widgets</a>
 								</li>
 								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Domain_List/">Domains</a>
+									<a href="#PC_URL_PREFIX/pc-admin/name/PageCarton_MultiSite_List/">Multi-site Manager</a>
 								</li>
 								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Backup_List/">Back up</a>
+									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Backup_List/">Back up & Restore</a>
 								</li>
 								<li>
 									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Log/">Logs</a>

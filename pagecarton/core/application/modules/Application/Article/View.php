@@ -27,6 +27,13 @@ require_once 'Application/Article/Abstract.php';
 
 class Application_Article_View extends Application_Article_Abstract
 {
+ 	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'View a Post'; 
 	
     /**
      * Whether class is playable or not
@@ -96,47 +103,6 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 		//	var_export( self::hasPriviledge( @$data['auth_level'] ) );
 			$this->setViewContent( self::getXml(), true );
-
-		//	if( $this->getParameter( 'pagination' ) )
-			{
-				$pagination = null;
-
-				//	Prepare post viewing for next posts
-				$storageForSinglePosts = self::getObjectStorage( array( 'id' => 'post_list_id' ) );
-				
-				$postListId = $storageForSinglePosts->retrieve();
-
-				$postList = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId, 'device' => 'File' ) );
-				$postList = $postList->retrieve();
-				if( ! empty( $postList['single_post_pagination'] ) )
-				{
-					$postList = $postList['single_post_pagination'][$data['article_url']];
-					if( ! empty( $postList['pc_next_post'] ) )
-					{
-						if( $nextPost = self::loadPostData( $postList['pc_next_post'] ) )
-						{
-							$this->_objectTemplateValues['paginator_next_page'] = Ayoola_Application::getUrlPrefix() . $postList['pc_next_post'];
-							$this->_objectTemplateValues['paginator_next_page_button'] = '<a class="pc-btn" href="' . $this->_objectTemplateValues['paginator_next_page'] . '">Next  &rarr; "' . $nextPost['article_title'] . '"</a>';       
-						}
-			//			var_export( $nextPost );
-
-					}
-					if( ! empty( $postList['pc_previous_post'] ) )
-					{
-						if( $previousPost = self::loadPostData( $postList['pc_previous_post'] ) )
-						{
-							$this->_objectTemplateValues['paginator_previous_page'] = Ayoola_Application::getUrlPrefix() . $postList['pc_previous_post'];
-							$this->_objectTemplateValues['paginator_previous_page_button'] = '<a class="pc-btn" href="' . $this->_objectTemplateValues['paginator_previous_page'] . '"> "' . $previousPost['article_title'] . '" &larr; Previous</a>';
-						}
-					}
-					$pagination .= @$this->_objectTemplateValues['paginator_previous_page_button'];
-					$pagination .= @$this->_objectTemplateValues['paginator_next_page_button'];			
-					$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '">' . $pagination . '</div>';
-
-				}
-			//	var_export( $postList );
-				$this->setViewContent( $pagination );
-			}
 
 		}
 		catch( Exception $e )
@@ -241,7 +207,7 @@ class Application_Article_View extends Application_Article_Abstract
 		{
 			if( $this->getParameter( 'thumbnail' ) )   
 			{
-				Ayoola_Page::$thumbnail = $data['document_url'];
+				Ayoola_Page::$thumbnail = $data['document_url'];  
 			}
 			if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )  
 			{
@@ -402,6 +368,38 @@ class Application_Article_View extends Application_Article_Abstract
 		$categoryTextRaw = self::getCategories( $categoryToUse, array( 'template' => $this->getParameter( 'category_template' ), 'glue' => ( $this->getParameter( 'category_template_glue' ) ? : ', ' ) ) );
 		$categoryText = $categoryTextRaw ? ' ' . $categoryTextRaw : null;
 		$data['category_text'] = $categoryText;
+		//	
+
+		//	get number of views
+		if( $this->getParameter( 'get_views_count' ) )
+		{
+			if( ! $this->viewsTable )
+			{
+				$this->viewsTable =  new Application_Article_Views();
+			}
+			$data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ) ) );
+		}
+
+		//	get number of downloads
+		if( $this->getParameter( 'get_download_count' ) && self::isDownloadable( $data ) )
+		{
+			if( ! $this->downloadTable )
+			{
+				$this->downloadTable =  new Application_Article_Type_Download_Table();
+			}
+			$data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ) ) );
+		}
+	//	var_export( $data );
+		//	get number of downloads
+		if( $this->getParameter( 'get_audio_play_count' ) && $data['true_post_type'] == 'audio' )
+		{   
+			if( ! $this->audioTable )
+			{
+				$this->audioTable =  new Application_Article_Type_Audio_Table();
+			}
+			$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ) ) );
+		}
+
 		$this->_xml = self::getDefaultPostView( $data );
 		switch( $postType )   
 		{
@@ -439,52 +437,25 @@ class Application_Article_View extends Application_Article_Abstract
 				$this->_xml .= @$data['article_content'];
 			break;
 			case 'video':
-				
-				//	title
-		//		$this->_xml = '<span style=""><h1>' . $data['article_title'] . '</h1></span>';  
-				//	By
-			//	$this->_xml .= '<span><strong>Video by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-		//		$this->_xml .= '  ' . self::filterTime( $data );
-		//		$this->_xml .= '' . $categoryText;
-		//		$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$data['video_content'] = Application_Article_Type_Video::viewInLine( array( 'data' => $data ) );
 				$this->_xml .= $data['video_content'];
 				$this->_xml .= @$data['article_content'];  
 			break;
+			case 'audio':
+				$data['audio_content'] = Application_Article_Type_Audio::viewInLine( array( 'data' => $data ) );
+				$this->_xml .= $data['audio_content'];
+				$this->_xml .= @$data['article_content'];  
+			break;
 			case 'link':
-				
-				//	title
-	//			$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
-				//	By
-			//	$this->_xml .= '<span><strong>Video by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-	//			$this->_xml .= '  ' . self::filterTime( $data );
-	//			$this->_xml .= '' . $categoryText;
-		//		$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= '<a target="_blank" href="' . $data['link_url'] . '" class="pc-btn pc-bg-color">Visit Link</a>';
 				$this->_xml .= @$data['article_content'];
 			break;
 			case 'poll':
-				
-				//	title
-			//	$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
-				//	By
-			//	$this->_xml .= '<span><strong>Poll by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-		//		$this->_xml .= '  ' . self::filterTime( $data );
-		//		$this->_xml .= '' . $categoryText;
-		//		$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= @$data['article_content'];
 				@$data['poll'] = Application_Article_Type_Poll::viewInLine( array( 'data' => $data ) );
 				$this->_xml .= @$data['poll'];
 			break;
 			case 'quiz':
-				
-				//	title
-		//		$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
-					//	By
-		//		$this->_xml .= '<span><strong>Quiz by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-	//			$this->_xml .= '  ' . self::filterTime( $data );
-	//			$this->_xml .= '' . $categoryText;
-	//			$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= @$data['article_content'];
 				$this->_xml .= Application_Article_Type_Quiz::viewInLine( array( 'data' => $data ) );
 			break;
@@ -502,8 +473,6 @@ class Application_Article_View extends Application_Article_Abstract
 					if( $data['download_url'][0] === '/' )
 					{
 						//	this is still a local file we can load with Ayoola_Doc
-				//		var_export($data['download_url'] );
-				//		var_export( Ayoola_Loader::checkFile( 'documents/' . $data['download_url'] ) );  
 						$data['file_size'] =  filesize( Ayoola_Loader::checkFile(  'documents/' . $data['download_url'] ) );
 					}
 					else
@@ -525,33 +494,12 @@ class Application_Article_View extends Application_Article_Abstract
 		//		var_export( $data['download_base64'] );
 				$filter = new Ayoola_Filter_FileSize();
 				$data['file_size'] = $filter->filter( $data['file_size'] );
-		//		$this->_xml .= '<span style=""><h1>' . $data['article_title'] . '</h1></span>';
-					
-				//	Version
-	//			$this->_xml .= '<span style="display:inline;"><strong>Version:</strong> ' . ( @$data['download_version'] ? $data['download_version'] : 'None' ) . '</span> ';
-				
-				//	By
-	//			$this->_xml .= '  ' . self::filterTime( $data );
-	//			$this->_xml .= '' . $categoryText;
-			//	$this->_xml .= '<span style="display:inline;"><strong>Uploaded by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span> ';
-	//			$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= @$data['article_content'];
 				$data['download_button'] = Application_Article_Type_Download::viewInLine( array( 'data' => $data ) );
 				$this->_xml .= $data['download_button'];
 			break;
 			default:
-				
-				//	title
-	//			$this->_xml .= '<span style=""><h1>' . $data['article_title'] . ' </h1></span>';
-				//	By
-			//	$this->_xml .= '<span style=""><strong>by:</strong> ' . ( $data['username'] ? '<a  title=\'View other Posts by "' . $data['username'] . '"\' href="' . self::getPostUrl() . '/by/' . $data['username'] . '/">' . $data['username'] . '</a>' : 'Anonymous' ) . '</span>';
-	//			$this->_xml .= '  ' . self::filterTime( $data );
-	//			$this->_xml .= '' . $categoryText;
-		//		$this->_xml .= '<p>' . $data['article_description'] . '</p>';
-	//			$this->_xml .= '<span style="">';
-	//			$this->_xml .= $data['article_description'] ? '<blockquote>' . $data['article_description'] . '</blockquote>' : null;
 				$this->_xml .= @$data['article_content'];
-	//			$this->_xml .=	'</span>';
 			break;
 		}
 		if( $this->getParameter( 'file_size' ) )

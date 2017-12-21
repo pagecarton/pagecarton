@@ -495,6 +495,12 @@
     height: initial;
 }
 
+.pc_page_layout_grid
+{
+    min-height: unset;
+    min-height: initial;
+}
+
 .pc_page_object_insert_button_area, .pc_page_object_inner_settings_area, .pc_page_object_inner_settings_area2
 {
     border: 1px solid #ccc;
@@ -678,4 +684,12 @@ html, body
 {
     margin-top: 2em;
     margin-bottom: 2em;
+}
+
+.pc_posts_option_items
+{
+    color:inherit;
+    margin-right:2em;
+    margin-bottom: 1em;
+    display: inline-block;
 }

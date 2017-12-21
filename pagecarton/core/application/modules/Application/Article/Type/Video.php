@@ -40,7 +40,6 @@ class Application_Article_Type_Video extends Application_Article_Type_Abstract
      */
 	protected function init()
     {
-		$this->createForm( 'Vote', '' );
  		Application_Style::addCode
 		( 
 			'
@@ -64,7 +63,10 @@ class Application_Article_Type_Video extends Application_Article_Type_Abstract
 			' 
 		);
 
-		$data = $this->getParameter( 'data' );
+			if( ! $data = $this->getParameter( 'data' ) )
+			{
+				$data = $this->getIdentifierData();
+			}
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 		$this->setViewContent( '<div class="videoWrapper"><iframe width="' . ( @$articleSettings['cover_photo_width'] ? : '900' ) . '" height="' . ( @$articleSettings['cover_photo_height'] ? : '300' ) . '" src="' . $data['video_url'] . '" frameborder="0" allowfullscreen></iframe></div>' );
 //		$this->setViewContent( '<iframe width="900" height="315" src="' . $data['video_url'] . '" frameborder="0" allowfullscreen></iframe>' );

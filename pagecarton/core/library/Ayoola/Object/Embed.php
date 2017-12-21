@@ -197,6 +197,17 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 	//	var_export( @$class->getForm()->getValues() );
 	}
 
+    /**
+     * Returns an array of other classes to get parameter keys from
+     *
+     * @param void
+     * @return array
+     */
+    protected static function getParameterKeysFromTheseOtherClasses( & $parameters )
+    {
+	//	var_export( $parameters['editable'] );
+		return array( $parameters['editable'] );
+	}
 	
     /**
 	 * 

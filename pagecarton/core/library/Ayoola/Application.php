@@ -1349,26 +1349,7 @@ class Ayoola_Application
      */
     public static function log()
     {
-		//	Don't log request for file
-/* 		$filter = new Ayoola_Filter_FileExtention();
-		$ext = strtolower( $filter->filter( Ayoola_Application::getPresentUri() ) );
-	//	var_export( self::$_runtimeSetting['total_runtime'] . '<br />' );
-		switch( $ext )
-		{
-			case 'js':
-			case 'css':
-			case 'png':
-			case 'jpg':
-			case 'gif':
-			case '/tools/classplayer/get/object_name/application_log_info/': //	Don't log "CHECKING LOG" PROCESS 
-			case '/tools/classplayer/get/object_name/application_log_view/': //	Don't log "CHECKING LOG" PROCESS 
-			case '/tools/classplayer/get/object_name/application_log_clear/': //	Don't log "CLEARING LOG" PROCESS 
-				break;
-			default:
-				Application_Log_View_Access::log(); //	Log request
-				break;
-		}
- */		
+		//	Don't log request for file		
 		//	Don't log on localhost
 		if( count( explode( '.', DOMAIN ) ) == 1 )
 		{ 
@@ -1644,9 +1625,6 @@ class Ayoola_Application
 			self::$_urlPrefix .= constant( 'PC_PATH_PREFIX' );
 		//	exit();
 		}
-		
-		
-		
 		return self::$_urlPrefix;
 	}
 	

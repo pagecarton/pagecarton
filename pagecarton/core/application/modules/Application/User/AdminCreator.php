@@ -49,6 +49,12 @@ class Application_User_AdminCreator extends Application_User_Creator
 			//	Don't run this if we have admin present.
 			return false;
 		}
+		$userTable = new PageCarton_MultiSite_Table();
+		if( $response = $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
+		{
+			//	Don't run this if we are a product of multi-site
+			return false;
+		}
 	//	$auth = new Ayoola_Access();
 		$this->createForm( 'Create Admin Account' );
 	//	$this->setViewContent( '<h2>Sign up for a free account.</h2>' ); 

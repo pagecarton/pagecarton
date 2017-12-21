@@ -146,6 +146,7 @@
 				'Application/backup.xml',
 				'Ayoola/Access/localuser.xml', 
 				'Application/settings.xml',
+				'PageCarton/MultiSite/table.xml',
 				'Ayoola/Api/api.xml',
 			);
 			foreach( $preserveList as $eachDir )

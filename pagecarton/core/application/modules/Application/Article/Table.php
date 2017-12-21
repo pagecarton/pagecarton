@@ -25,7 +25,7 @@ class Application_Article_Table extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.0';  
+    protected $_tableVersion = '0.1';  
 
     /**
      * Table data types and declaration
@@ -40,6 +40,8 @@ class Application_Article_Table extends PageCarton_Table
   'auth_level' => 'JSON',
   'article_type' => 'INPUTTEXT',
   'true_post_type' => 'INPUTTEXT',
+  'article_modified_date' => 'INT',
+  'article_creation_date' => 'INT',
 );
 
 

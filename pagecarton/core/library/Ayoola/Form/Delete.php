@@ -39,7 +39,7 @@ class Ayoola_Form_Delete extends Ayoola_Form_Abstract
 			$this->createConfirmationForm( 'Delete', 'Delete this form, "' . $data['form_title'] . '" and all its associated files? This cannot be undone.' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			if( $this->deleteDb() ){ $this->setViewContent( 'Form deleted successfully', true ); } 
+			if( $this->deleteDb() ){ $this->setViewContent( '<div class="goodnews">Form deleted successfully</div>', true ); } 
 		}
 		catch( Exception $e )
 		{ 

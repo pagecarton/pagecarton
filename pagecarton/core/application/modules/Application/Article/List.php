@@ -25,7 +25,7 @@ require_once 'Application/Article/Abstract.php';
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Application_Article_List extends Application_Article_Abstract
+class Application_Article_List extends Application_Article_ShowAll
 {
 	
     /**

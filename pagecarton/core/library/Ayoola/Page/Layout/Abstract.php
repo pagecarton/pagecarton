@@ -494,56 +494,56 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 									@@@' . $allSectionsCounter . 'oneness@@@
 									<div class="">
 										<div class="row">
-											<div class="col-md-12 12u">
+											<div class="pc_page_layout_grid col-md-12 12u">
 												@@@' . $allSectionsCounter . 'middlebar@@@
 										   </div>
 										</div> 
 										<div class="row">
-											<div class="col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'twosome1@@@
 											</div>
-											<div class="col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'twosome2@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)"> 
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)"> 
 												@@@' . $allSectionsCounter . 'threesome1@@@
 										   </div>
-											<div class="col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'threesome2@@@
 											</div> 
-											<div class="col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'threesome3@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'foursome1@@@
 										   </div>
-											<div class="col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'foursome2@@@
 											</div> 
-											<div class="col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'foursome3@@@
 											</div> 
-											<div class="col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
 												@@@' . $allSectionsCounter . 'foursome4@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'leftbar@@@
 										   </div>
-											<div class="col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'leftbarright@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'rightbarleft@@@
 											</div> 
-											<div class="col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@' . $allSectionsCounter . 'rightbar@@@
 											</div>   
 										</div> 

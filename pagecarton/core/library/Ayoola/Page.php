@@ -458,10 +458,33 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     {
 	//	$uri = Ayoola_Application::getRuntimeSettings( 'url' );
 		$uri = self::getCanonicalUri( $uri, false );
-		$domain = self::getDefaultDomain();
 				//	if( $_SERVER['SERVER_PORT'] != '80' ){ break; }
-		$url = Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . $domain . self::getPortNumber() . Ayoola_Application::getUrlPrefix() . $uri;  
+		$url = self::getHomePageUrl() . $uri;  
 	//	var_export( $url );
+		return $url;
+    }
+	
+    /**
+     * Returns the home page url
+     *
+     * @return string
+     */
+    public static function getHomePageUrl()
+    {
+		$domain = self::getDefaultDomain();
+		$url = self::getRootUrl() . Ayoola_Application::getUrlPrefix();  
+		return $url;
+    }
+	
+    /**
+     * Returns the home page url
+     *
+     * @return string
+     */
+    public static function getRootUrl()
+    {
+		$domain = self::getDefaultDomain();
+		$url = Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . $domain . self::getPortNumber();  
 		return $url;
     }
 	
