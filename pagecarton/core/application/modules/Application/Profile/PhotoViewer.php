@@ -48,6 +48,8 @@ class Application_Profile_PhotoViewer extends Application_Profile_Abstract
 		{ 
 			if( ! $data = self::getIdentifierData() )
 			{ 
+	//		var_export( $data );
+	//		exit();
 			//	$userInfo = Ayoola_Application::getUserInfo();
 				//	Get information about the user access information
 				if( ! $data = Ayoola_Access::getAccessInformation( Ayoola_Application::getUserInfo( 'username' ) ) )
@@ -60,6 +62,16 @@ class Application_Profile_PhotoViewer extends Application_Profile_Abstract
 				}
 			//	var_export( $data );
 			}
+			//	var_export( $data['display_picture'] );
+          //      exit();
+			if( $data['display_picture'] )
+			{ 
+			//	var_export( $data['display_picture'] );
+				Application_IconViewer::viewInLine( array( 'url' => $data['display_picture'] ) );
+                exit();
+			}
+	//		var_export( $data );
+	//		exit();
 			$result = self::splitBase64Data( @$data['display_picture_base64'] );
 			
 			//	https://chrisjean.com/generating-mime-type-in-php-is-not-magic/

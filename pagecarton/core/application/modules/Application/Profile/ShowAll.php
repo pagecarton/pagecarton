@@ -46,27 +46,32 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 			$userInfo = $access->getUserInfo();
 			@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
 			$template = null;
+			$data = array();
+	//		var_export( $userInfo['profiles'] );
 			foreach( $userInfo['profiles'] as $url )
 			{
-				$filename = self::getProfilePath( $url );
-				if( ! $values = @include $filename )
+				$values = self::getProfileInfo( $url );
+	//		var_export( $values );
+				if( ! $values )
 				{
 					continue;
-				}				
-				if( $this->getParameter( 'auth_name' ) )
-				{
-					$table = new Ayoola_Access_AuthLevel();
-					$authInfo = $table->selectOne( null, array( 'auth_level' => $values['access_level'] ) );
-				//	var_export( $authInfo );
-					$values +=  is_array( $authInfo ) ? $authInfo : array();
 				}
 				
-				$values['full_profile_url'] = 'http://' . Ayoola_Page::getDefaultDomain() . '/' . $values['profile_url'] . '';
+				$values['full_profile_url'] = Ayoola_Page::getHomePageUrl() . '/' . $values['profile_url'] . '';
 				$values['logon_url'] = Ayoola_Page::setPreviousUrl( '/object/name/Application_Profile_Logon/' ) . '&profile_url=' . $values['profile_url'];
+				if( $url == $userInfo['profile_url'] )
+				{
+					$values['logon_link'] = 'Default';
+				}
+				else
+				{
+					$values['logon_link'] = '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_LogOn/?profile_url=%KEY%\', \'' . __CLASS__ . '\' );" href="javascript:">Set as Default</a>';
+				}
+				
 				$values['edit_url'] = Ayoola_Page::setPreviousUrl( '/object/name/Application_Profile_Editor/' ) . '&profile_url=' . $values['profile_url'];
 				$values['delete_url'] = Ayoola_Page::setPreviousUrl( '/object/name/Application_Profile_Delete/' ) . '&profile_url=' . $values['profile_url'];
 				$values['edit_photo_url'] = Ayoola_Page::setPreviousUrl( '/object/name/Application_Profile_Photo/' ) . '&profile_url=' . $values['profile_url'];
-				$this->setViewContent( '
+/*				$this->setViewContent( '
 										<div class="boxednews greynews" style="float:left;padding:1em; text-align:center;">
 											<span class=""><a href="' . $fullUrl . '"><strong class="">' . $values['display_name'] . ' </strong></a></span> 
 											<hr>
@@ -80,14 +85,17 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 										
 										' 
 									); 
-			
+*/			
 					//	$templateToUse .= $this->getParameter( 'markup_template' );
-					$template .= self::replacePlaceholders( $this->getParameter( 'markup_template' ), $values + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+			//		$template .= self::replacePlaceholders( $this->getParameter( 'markup_template' ), $values + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
 		//	var_export( $values );
+				$data[] = $values;
 			}
+		//	$this->createList( $data );
+			$this->setViewContent( $this->createList( $data ) );
 		//	var_export( $template );
-			$this->setViewContent( '<div style="clear:both"></div>' );
-			$this->_parameter['markup_template'] = $template;
+		//	$this->setViewContent( '<div style="clear:both"></div>' );
+	//		$this->_parameter['markup_template'] = $template;
 		//	var_export( $this->_parameter['markup_template'] );
 		}
 		catch( Exception $e )
@@ -97,6 +105,37 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with profile package.</p>' ); 
 		}
 	//	var_export( $this->getDbData() );
+    } 
+	
+    /**
+     * creates the list of the available subscription packages on the application
+     * 
+     */
+	public function createList( $data )
+    {
+		require_once 'Ayoola/Paginator.php';
+		$list = new Ayoola_Paginator();
+		$list->pageName = $this->getObjectName();
+	//	$list->listTitle = 'My Profiles';
+		$list->setData( $data );
+		$list->setListOptions( array( 'Creator' => ' ' ) );
+		$this->setIdColumn( 'profile_url' );
+		$list->setKey( 'profile_url' );
+		$list->setNoRecordMessage( 'No profile created yet.' );
+		$list->createList(  
+			array(
+				'      ' => array( 'field' => 'profile_url', 'value' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>' ), 
+				'' => array( 'field' => 'auth_name', 'value' => '%FIELD%' ), 
+				' ' => array( 'field' => 'logon_link', 'value' => '%FIELD%' ), 
+				'   ' => array( 'field' => 'profile_url', 'value' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/%FIELD%\' );" href="javascript:">Preview</a>' ), 
+				'  ' => array( 'field' => 'profile_url', 'value' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Share/?url=/%FIELD%&title=%FIELD%\' );" href="javascript:">Share</a>' ), 
+		//		'   ' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/%FIELD%\' );" href="javascript:">Preview</a>', 
+		//		'   ' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Share/?url=' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" href="javascript:">Share</a>', 
+				'    ' => '<a title="Delete" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" href="javascript:">x</a>', 
+			)
+		);
+		//var_export( $list );
+		return $list;
     } 
 	// END OF CLASS
 }

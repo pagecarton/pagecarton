@@ -258,17 +258,10 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				//	don't delete again
 			//	unlink( $filename );
 				
-				// save screenshot
-/*				if( $values['screenshot'] )
-				{
-					$filename = dirname( $this->getMyFilename() ) . DS . 'screenshot';
-					file_put_contents( $filename, $values['screenshot']);
-				}
-*/				$this->setViewContent( '<p class="goodnews">New theme saved successfully.</p>', true );
+				$this->setViewContent( '<p class="goodnews">New theme saved successfully.</p>', true );
 				$this->setViewContent( '<p class="">
-				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Edit Codes Again</a>
-				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/layout/' . $values['layout_name'] . '/template" class="pc-btn pc-btn-small">Launch Theme Editor</a>
-				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Page/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Change Default Theme</a>
+				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/layout/' . $values['layout_name'] . '/template" class="pc-btn pc-btn-small">Edit Theme</a>
+				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a>
 
 				</p>' );
 			//	$this->setViewContent( '<p class=""></p>' );

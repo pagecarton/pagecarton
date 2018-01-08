@@ -141,6 +141,8 @@ class Application_Article_Creator extends Application_Article_Abstract
 			}
 			//	Changing to category_name to correct error in grep
 			$values['category_name'] = @$values['category_name'] ? : array();
+			$values['category_name'][] = $values['article_type'];
+			$values['category_name'][] = $values['true_post_type'];
 			if( ! @in_array( $category['category_name'], $values['category_name'] ) )
 			{
 				@array_push( $values['category_name'], $category['category_name'] );

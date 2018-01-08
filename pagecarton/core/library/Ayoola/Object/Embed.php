@@ -25,7 +25,7 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Ayoola_Object_Embed extends Ayoola_Object_Abstract
+class Ayoola_Object_Embed extends Ayoola_Object_Abstract   
 {
 	
     /**	
@@ -330,8 +330,17 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			foreach( self::getWidgets() as $key => $value )
 			{ 
 				$html .=  '<option value="' . $key . '"';   
-				if( @$object['editable'] == $key ){ $html .= ' selected = selected '; }
+				if( @$object['editable'] == $key )
+				{
+					$present = true;
+					$html .= ' selected = selected '; 
+				}
+		//		if( @$object['editable'] == $key ){ $html .= ' selected = selected '; }
 				$html .=  '>' . $value . '</option>';  
+			}
+			if( empty( $present ) )
+			{
+					$html .= '<option value="' . $object['editable'] . '" selected = selected>' . $object['editable'] . '</option> '; 
 			}
 			$html .= '</select>';
 			

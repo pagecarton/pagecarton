@@ -185,20 +185,20 @@ class Ayoola_Access extends Ayoola_Access_Abstract
  		// 	exit();
 		}
 		$pageAccessLevel = is_array( $pageAccessLevel ) ? $pageAccessLevel : array( $pageAccessLevel );
-   //     var_export( $pageInfo );
-	//    exit();
+ //   var_export( $pageInfo );
+//	exit();
 		$objectPlay = false;
 		switch( $pageInfo['url'] )
 		{ 
 			case '/tools/classplayer':
 				$objectPlay = true;
 			case 'object':
-	//      var_export( $objectPlay );
 				$className = @$_GET['object_name'] ? : $_GET['name']; 
 				if( Ayoola_Loader::loadClass( $className ) && method_exists( $className, 'getAccessLevel' ) )
 				{
 				//    exit( $className );
-				//    var_export( $className::getAccessLevel() );
+				 //   var_export( $className::getAccessLevel() );
+				//    var_export( Ayoola_Abstract_Playable::hasPriviledge( $className::getAccessLevel() ) );
 				//    exit( $className );
 					if( Ayoola_Abstract_Playable::hasPriviledge( $className::getAccessLevel() ) )
 					{
@@ -241,14 +241,27 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 				}
 			}
 		}
-		//	IF WE ARE HERE, WE ARE NOT AUTHORIZED     
-		$urlToGo = '' . Ayoola_Application::getUrlPrefix() . '/accounts/signin/';
+		//	IF WE ARE HERE, WE ARE NOT AUTHORIZED   
+		$prefix =  Ayoola_Application::getUrlPrefix();
+		$userTable = new PageCarton_MultiSite_Table();
+		if( $response = $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
+		{
+//			var_export( $response );
+//			var_export( Ayoola_Application::getUrlPrefixController() );
+			$prefix = $response['parent_dir'] . Ayoola_Application::getUrlPrefixController();
+		}
+		$urlToGo = '' . $prefix . '/accounts/signin/';
+		if( $objectPlay )
+		{
+			$urlToGo = '' . $prefix . '/tools/classplayer/get/name/Ayoola_Access_Login/';
+		}
 		$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
 		$access = self::getInstance();
-   //     var_export( $pageAccessLevel );
+   //     var_export( $pageInfo );
+    //    var_export( $urlToGo );
+	//	var_export( $objectPlay );
    //    var_export( Ayoola_Application::isClassPlayer()  );
 	//    exit();
-//		var_export( $objectPlay );
 	//	exit();
 		if( ! $access->isLoggedIn() )   
 		{ 
@@ -266,7 +279,7 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 			Application_Javascript::addCode( $jsCode );
 
 	//		if(  ! Ayoola_Application::isClassPlayer() )
-			if( ! $objectPlay )
+		//	if( ! $objectPlay )
 			{
 				header( 'Location: ' . $urlToGo );	
 				exit();
@@ -276,11 +289,15 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 		{			
 			$access = self::getInstance();
 			$access->logout();
-			if( ! $objectPlay )
+		//	if( ! $objectPlay )
 			{
 				header( 'Location: ' . $urlToGo );	
 				exit();
 			}
+		}
+		else
+		{
+			
 		}
 		
 	//	echo 'You need to be signed into your account to continue. <a target="_parent" onClick="' . $jsCode . '" href="' . $urlToGo . '">Click here to sign in...</a>';

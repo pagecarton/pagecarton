@@ -108,7 +108,7 @@ abstract class Application_ContactUs_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addElement( array( 'name' => 'contactus_subject', 'label' => $this->getParameter( 'subject_label' ) ? : 'Subject', 'placeholder' => $this->getParameter( 'subject_placeholder' ) ? : 'Contact subject...', 'type' => 'InputText', 'value' => @$values['contactus_subject'] ) );
 		$fieldset->addElement( array( 'name' => 'contactus_message', 'label' => $this->getParameter( 'message_label' ) ? : 'Message', 'placeholder' => $this->getParameter( 'message_placeholder' ) ? : 'Please briefly describe what you are contacting us about...', 'type' => 'TextArea', 'value' => @$values['contactus_message'] ) );  
 		$fieldset->addRequirement( 'contactus_message', array( 'WordCount' => array( 10,1000 ) ) );
-		$fieldset->addRequirement( 'contactus_subject', array( 'WordCount' => array( 4,100 ) ) );
+//		$fieldset->addRequirement( 'contactus_subject', array( 'WordCount' => array( 4,100 ) ) );
 		$fieldset->addFilters( array( 'trim' => null ) );
 //		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );

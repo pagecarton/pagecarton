@@ -50,6 +50,8 @@ class Application_User_AdminCreator extends Application_User_Creator
 			return false;
 		}
 		$userTable = new PageCarton_MultiSite_Table();
+//		var_export( $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) );
+//		var_export( PC_PATH_PREFIX );
 		if( $response = $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
 		{
 			//	Don't run this if we are a product of multi-site
@@ -133,14 +135,20 @@ class Application_User_AdminCreator extends Application_User_Creator
      */
 	public function createForm( $submitValue, $legend = null, Array $values = null )
     {
+		$form = new Ayoola_Form( 'name=>' . $this->getObjectName() );
+		$this->setForm( $form );
 		$userTable = new Ayoola_Access_LocalUser();
 		$response = $userTable->selectOne( null, array( 'access_level' => 99 ) );
 		if( $response || Ayoola_Application::getUserInfo() )
 		{
 			//	Don't run this if we have admin present.
 			// Also if we are a loggedin user, just perfom an upgrade
-			$form = new Ayoola_Form( 'name=>' . $this->getObjectName() );
-			$this->setForm( $form );
+			return false;
+		}
+		$userTable = new PageCarton_MultiSite_Table();
+		if( $response = $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
+		{
+			//	Don't run this if we are a product of multi-site
 			return false;
 		}
 		parent::createForm( $submitValue, $legend, $values );

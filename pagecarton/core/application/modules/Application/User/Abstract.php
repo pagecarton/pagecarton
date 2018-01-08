@@ -43,6 +43,13 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 	protected static $_accessLevel = array( 99, 98 );
 	
     /**
+     * 
+     *
+     * @var Ayoola_Access_LocalUser
+     */
+	protected static $_localTable;
+	
+    /**
      * Identifier for the column to edit
      * 
      * @var array
@@ -123,7 +130,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			case 'cloud':
 			case 'file':
 				// Find user in the LocalUser table
-				$table = new Ayoola_Access_LocalUser();
+				$table = self::getLocalTable();
 
 				//	Filter the result to save time
 				$sortFunction2 = create_function
@@ -168,9 +175,51 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
      * Overides the parent class
      * 
      */
+	public static function getLocalTable()
+    {
+		if( ! self::$_localTable )
+		{
+			self::$_localTable = new Ayoola_Access_LocalUser();
+		}
+		return self::$_localTable;
+	}
+	
+    /**
+     * Overides the parent class
+     * 
+     */
+	public static function getUserInfo( $identifier )
+    {
+		if( ! is_array( $identifier ) )
+		{
+			$identifier = array( 'user_id' => $identifier );
+		}
+		//	Check from local table
+		$table = self::getLocalTable();
+//			var_export( $identifierInfo );
+
+		//	look in all lookable places for login info
+		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
+		
+		if( $info = $table->selectOne( null, $where ) )
+		{
+		//	var_export( $info );
+		//	var_export( $identifierInfo['username'] );
+			if( $info['user_information'] )  
+			{
+				$info = $info['user_information'];
+			}
+		}
+		return $info;
+
+	}
+	
+    /**
+     * Overides the parent class
+     * 
+     */
 	public function setIdentifierData()
     {
-		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
 		//	$database = 'cloud';
 		}
@@ -178,23 +227,11 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		do
 		{
 			//	Check from local table
-			$table = new Ayoola_Access_LocalUser();
+
 			$identifierInfo = $this->getIdentifier();
-	//			var_export( $identifierInfo );
-	
-			//	look in all lookable places for login info
-			$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-			
-			if( $info = $table->selectOne( null, array( $this->getIdColumn() => array( $identifierInfo[$this->getIdColumn()], strtolower( $identifierInfo[$this->getIdColumn()] ) ) ) ) )
-			{
-			//	var_export( $info );
-			//	var_export( $identifierInfo['username'] );
-				if( $info['user_information'] )  
-				{
-					$this->_identifierData = $info['user_information'];
-					break;
-				}
-			}
+			$where = array( $this->getIdColumn() => array( $identifierInfo[$this->getIdColumn()], strtolower( $identifierInfo[$this->getIdColumn()] ) ) );
+		//	$info = self::v( $where );
+			$info = self::getUserInfo( $where );
 		//	$info = array();
 			//	var_export( $table->select( null, array( 'username' => @$identifierInfo['username'] ) ) );
 		//	var_export( $identifierInfo['username'] );
@@ -411,7 +448,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				}
 			}
 		//	var_export( $_REQUEST['password'] );
-			$this->getParameter( 'no_legend' ) ?  null : $account->addLegend( "$legend Account Information" );
+			$this->getParameter( 'no_legend' ) ?  null : $account->addLegend( "$legend" );
 			$ip = sprintf( "%u", ip2long( long2ip( ip2long( $_SERVER['REMOTE_ADDR'] ) ) ) );
 			$ipType = is_null( $values ) ? 'creation_ip' : 'modified_ip';
 			$account->addElement( "name=>$ipType:: type=>Hidden" );

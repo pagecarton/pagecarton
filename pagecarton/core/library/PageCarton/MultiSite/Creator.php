@@ -49,6 +49,13 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
             $values['directory'] = PC_PATH_PREFIX . '/' . trim( $values['directory'], '/\\' );
+            $values['parent_dir'] = PC_PATH_PREFIX;
+           
+            if( $response = $this->getDbTable()->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
+            {
+                //	Don't run this if we are a product of multi-site
+                $values['parent_dir'] = $response['parent_dir'];
+            }
 			if( $this->getDbTable()->selectOne( null, array( 'directory' => $values['directory'] ) ) )
 			{
 				$this->getForm()->setBadnews( 'Enter a different directory for this site. There is a site with the same directory: ' . $values['directory'] );
@@ -68,7 +75,7 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 			$link = '' . Ayoola_Page::getRootUrl() . '' . $values['directory'];
 			$mailInfo = array();
 			$mailInfo['subject'] = 'A new site created';
-			$mailInfo['body'] = 'A new site has been created on your website with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'A new site has been created on your PageCarton Installation with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
 			
 			Preview the site on: ' . $link . '
 			';

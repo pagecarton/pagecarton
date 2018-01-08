@@ -302,8 +302,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->setParameter( $storedValues['parameter'] );
 		}
 		//	Prepare post viewing for next posts
-		$class = new Application_Article_View( array( 'no_init' => true ) );
+		$class = new Application_Article_ViewPagination( array( 'no_init' => true ) );
 		$storageForSinglePosts = $class->getObjectStorage( array( 'id' => 'post_list_id' ) );
+//		var_export( $postListId );
 		$storageForSinglePosts->store( $postListId );
 		
 		//	Using menu template?
@@ -378,6 +379,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//		var_export( $data['article_type'] );
 					static::sanitizeData( $data );
 					
+					$data['post_list_id'] = $postListId;
 
 					if( ! self::isAllowedToView( $data ) )
 					{
@@ -420,17 +422,30 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					unset( $data['download_base64'] );  
 					
 					$values[$key] = $data;
+					$firstPost = empty( $firstPost ) ? $data['article_url'] : $firstPost;
+
+					//	by default, next is first post
+					if( $data['article_url'] !==  $firstPost ) 
+					{
+						$values[$key]['pc_next_post'] = $firstPost;
+						$singlePostPaginationInfo[$values[$key]['article_url']]['pc_next_post'] = $firstPost;
+					}
+
+
 					if( ! is_null( $previousKey ) )
 					{
 						$values[$key]['pc_previous_post'] = $values[$previousKey]['article_url'];
 						$singlePostPaginationInfo[$values[$key]['article_url']]['pc_previous_post'] = $values[$key]['pc_previous_post'];
+						$singlePostPaginationInfo[$values[$key]['article_url']]['article_url'] = $values[$key]['article_url'];
 						$values[$previousKey]['pc_next_post'] = $values[$key]['article_url'];
 						$singlePostPaginationInfo[$values[$previousKey]['article_url']]['pc_next_post'] = $values[$previousKey]['pc_next_post'];
 					}
+					
 				//	var_export( $values );
 					$previousKey = $key;
 				}
 			}
+	//		var_export( $singlePostPaginationInfo );
 		
 			if( self::hasPriviledge( @$articleSettings['allowed_writers'] ) && $this->getParameter( 'add_a_new_post' ) ) 
 			{ 
@@ -479,6 +494,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			// store if it's an independent request
 			if( empty( $_GET['pc_post_list_autoload'] ) )
 			{
+			//	var_export( $postListId );
 				$storage->store( $valuesToStore );
 			}
 		}
@@ -1139,13 +1155,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			if( ! $category )
 			{
-				$this->_dbData = array();
-				return false;   
-			//	throw new Application_Article_Exception( 'INVALID CATEGORY: ' . $categoryId );
-			//	$this->setViewContent( '<p>Showing articles from ', true );
+	//			$this->_dbData = array();
+	//			return false;   
 			}
 			$categoryId = @$category['category_id'];
-			$categoryName = @$category['category_name'] ? : 'workaround_avoid_error_in_search';
+			$categoryName = @$category['category_name'] ? : $category['category_id'];
 			$categoryName = '' . $categoryName . '';
 			$category['category_description'] = $category['category_description'] ? : ' Latest Posts in the "' . $category['category_label'] . '" category on ' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() );
 			

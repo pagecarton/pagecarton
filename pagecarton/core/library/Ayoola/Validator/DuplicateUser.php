@@ -73,13 +73,17 @@ class Ayoola_Validator_DuplicateUser extends Ayoola_Validator_DuplicateRecord
 	//		return false; 
 		}
 		// Find user in the LocalUser table
-		$table = new Ayoola_Access_LocalUser();
+//		$table = new Ayoola_Access_LocalUser();
 
 		//	var_export( $table->select() ); 
 	//	var_export( $hashedCredentials );
-		if( $info = $table->selectOne( null, array_map( 'strtolower', $data ) ) )
+		if( $info = Application_User_Abstract::getLocalTable()->selectOne( null, array_map( 'strtolower', $data ) ) )
 		{
 			return false;  
+		}
+        if( ! empty( $data['username'] ) && Application_Profile_Abstract::getProfileInfo( $data['username'] ) )
+		{
+			return false;
 		}
 	//	var_export( $info );
 	

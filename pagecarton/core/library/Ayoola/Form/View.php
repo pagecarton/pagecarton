@@ -109,7 +109,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			if( ! $this->getParameter( 'hide_form_information' ) && ! $_POST )
 			{
 				$this->setViewContent( '<h1 class="pc-heading">' . $data['form_title'] . '</h1>', true );
-				$this->setViewContent( '<p>' . ( strip_tags( $data['form_description'] ) === $data['form_description'] ? nl2br( $data['form_description'] ) : $data['form_description'] ) . '</p>'  );
+				$this->setViewContent( '<p style="margin-top:2em;margin-bottom:2em;">' . ( strip_tags( $data['form_description'] ) === $data['form_description'] ? nl2br( $data['form_description'] ) : $data['form_description'] ) . '</p>'  );
 			}
 			if( self::hasPriviledge() )
 			{

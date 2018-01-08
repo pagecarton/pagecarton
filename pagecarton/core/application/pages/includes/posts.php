@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: posts.php	Monday 13th of November 2017 09:31:03 PM	ayoola@ayoo.la $ 
+* @version $Id: posts.php	Sunday 24th of December 2017 09:01:06 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -67,7 +67,7 @@ $_028c45200f20dd30665527b611466ede = null;
 							{
 								
 $_8dc06455a087fe8cf383f9c0eaf09ef5 = new Application_Article_ShowAll( array (
-  'option' => '1',
+  'option' => '5',
   'category_name' => '',
   'article_types' => '',
   'template_name' => '',
@@ -77,12 +77,18 @@ $_8dc06455a087fe8cf383f9c0eaf09ef5 = new Application_Article_ShowAll( array (
     1 => '1',
     2 => '0',
     3 => '1',
+    4 => '1',
+    5 => '1',
+    6 => '1',
   ),
   'wrapper_name' => '',
   'add_a_new_post' => '1',
   'allow_dynamic_category_selection' => '1',
   'pc_module_url_values_category_offset' => '0',
   'pagination' => '1',
+  'get_views_count' => '1',
+  'get_audio_play_count' => '1',
+  'get_download_count' => '1',
 ) );
 
 							}

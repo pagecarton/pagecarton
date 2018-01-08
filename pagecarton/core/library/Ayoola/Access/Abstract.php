@@ -275,7 +275,9 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 				//	Populate the Ayoola_Access_AccessInformation
 			//	$table->insert( $userInfo );
 			}
-			$filename = Application_Profile_Abstract::getProfilePath( $username );
+	//		$previousInfo = Application_Profile_Abstract::getProfileInfo( $username );
+
+/*			$filename = Application_Profile_Abstract::getProfilePath( $username );
 			if( ! $previousInfo = @include $filename )
 			{
 				//	compatibility - we used to save some info here
@@ -291,7 +293,7 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 				//	$table->delete( $where );
 				}
 			}
-
+*/
 			$authOptions = array();		
 	//		var_export( $userInfo['access_level'] );
  			if( @$userInfo['access_level'] )

@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Monday 13th of November 2017 09:31:04 PM	ayoola@ayoo.la $ 
+* @version $Id: signin.php	Wednesday 3rd of January 2018 08:10:40 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Access_Login' ) )
 							{
 								
-$_4d09cda9ff8254e1ecf6aacb1825ec3f = new Ayoola_Access_Login( array (
+$_fc40490cbf01d653fbced4e69f73c901 = new Ayoola_Access_Login( array (
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -29,16 +29,24 @@ $_4d09cda9ff8254e1ecf6aacb1825ec3f = new Ayoola_Access_Login( array (
 							else
 							{
 								
-$_4d09cda9ff8254e1ecf6aacb1825ec3f = null;
+$_fc40490cbf01d653fbced4e69f73c901 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_e5272b9b837757b5a9e3cf808ba2dccb = new Ayoola_Page_Editor_Text( array (
-  'editable' => 'Forgot Password? <a rel="spotlight;" href="/x/index.php/object/name/Application_User_Help_ForgotUsernameOrPassword">Sign in Help</a>!',
-  'url_prefix' => '/x/index.php',
+$_f046f4eadd53dc1db619bc502ee2c5e6 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<ul>
+	<li><a href="/x/tools/classplayer/get/name/Application_User_Help_ForgotUsernameOrPassword" rel="spotlight;">Forgot password</a>&nbsp;</li>
+	<li>
+<a onclick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/name/Application_User_Creator\', \'page_refresh\' );" href="javascript:">Create a new account</a>
+</li>
+</ul>
+
+',
+  'url_prefix' => '/x',
+  'markup_template_object_name' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -51,7 +59,7 @@ $_e5272b9b837757b5a9e3cf808ba2dccb = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_e5272b9b837757b5a9e3cf808ba2dccb = null;
+$_f046f4eadd53dc1db619bc502ee2c5e6 = null;
 
 							}
 							

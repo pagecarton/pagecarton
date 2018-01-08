@@ -34,6 +34,7 @@ class Application_Profile_All extends Application_Article_ShowAll
      * @var string
      */
 	protected static $_moduleDir = 'profiles';	
+	
 			
     /**
      * 

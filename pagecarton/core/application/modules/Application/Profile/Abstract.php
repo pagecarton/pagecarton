@@ -36,6 +36,13 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 	protected static $_playable = true;
 	
     /**
+     * 
+     *
+     * @var string
+     */
+	protected static $_profileTable;
+	
+    /**
      * Access level for player
      *
      * @var boolean
@@ -79,6 +86,28 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		{
 			return false;
 		}
+		if( empty( $values['modified_time'] ) )
+		{
+			$values['modified_time'] = array();
+			$values['modified_ip'] = array();
+		}
+		if( empty( $values['access_level'] ) )
+		{
+			$values['access_level'] = 1;
+		}
+		$values['modified_time'][] = time();
+		$values['modified_ip'][] = $_SERVER['REMOTE_ADDR'];
+		$values['profile_data'] = $values;
+		$values['profile_url'] = strtolower( $values['profile_url'] );
+		if( self::getProfileInfo( $values['profile_url'] ) )
+		{
+			return self::getProfileTable()->update( $values, array( 'profile_url' => $values['profile_url'] ) );
+		}
+		else
+		{
+			return self::getProfileTable()->insert( $values );
+		}
+/*
 		$path = self::getProfilePath( $values['profile_url'] );
 		Ayoola_Doc::createDirectory( dirname( $path ) );
 		$previousValues = @include $path;
@@ -87,6 +116,57 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			$values = array_merge( $previousValues, $values );
 		}
 		return file_put_contents( $path, '<?php return ' . var_export( $values, true ) . ';' );
+*/	}
+
+    /**
+     * 
+     * 
+     */
+	public static function getProfileTable()
+    {
+		if( ! self::$_profileTable )
+		{
+			self::$_profileTable = new Application_Profile_Table();
+		}
+		return self::$_profileTable;
+	}
+
+    /**
+     * 
+     * 
+     */
+	public static function getProfileInfo( $profileUrL )
+    {
+		$profileUrL = strtolower( $profileUrL );
+		if( $profileData = self::getProfileTable()->selectOne( null, array( 'profile_url' => $profileUrL ) ) )
+		{
+			$profileData = $profileData['profile_data'];
+		}
+		//	var_export( $profileUrL );
+	//		var_export( $profileData );
+		$table = new Ayoola_Access_AuthLevel();
+		if( $profileData['access_level'] != 1 && $profileData['access_level'] != 0 )
+		{
+			$authInfo = $table->selectOne( null, array( 'auth_level' => $profileData['access_level'] ) );
+	//		var_export( $authInfo );
+	//		var_export( $profileData );
+			$profileData +=  is_array( $authInfo ) ? $authInfo : array();
+		}
+		switch( $profileData['access_level'] )
+		{
+			case 1:
+	//			$profileData['auth_name'] = 'Standard';
+			break;
+		}
+		//	var_export( array( 'profile_url' => $profileUrL ) );
+		//	var_export( self::getProfileTable()->select() );
+		
+		if( ! $profileData )
+		{
+			$filename = self::getProfilePath( $url );
+			$profileData = @include $profileUrL;
+		}
+		return $profileData;
 	}
 
     /**
@@ -98,9 +178,10 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		// Comes from a file
 		if( ! $data = $this->getParameter( 'data' ) )
 		{
-			$url = @$_GET['profile_url'] ? : Ayoola_Application::getRequestedUri();  
-			$filename = self::getProfilePath( $url );
-			$data = @include $filename;
+			$url = @$_GET['profile_url'] ? : Ayoola_Application::$GLOBAL['profile_url'];  
+		//	var_export( $url );
+			$data = self::getProfileInfo( $url );
+		//	var_export( $data );
 		}
 		//	var_export( $filename );
 		if( ! $data  
@@ -123,8 +204,8 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		$fieldset = new Ayoola_Form_Element;
 		if( is_null( $values ) )
 		{
-			$option = array( Ayoola_Page::getDefaultDomain() => 'http://' . Ayoola_Page::getDefaultDomain() );
-			$fieldset->addElement( array( 'name' => 'domain', 'style' => 'max-width:20%;', 'placeholder' => 'Profile Domain (Default)', 'label' => 'Choose a profile URL e.g. MyStyle', 'disabled' => 'disabled', 'type' => 'InputText', 'value' => 'http://' . Ayoola_Page::getDefaultDomain() . '/' ), $option );
+		//	$option = array( Ayoola_Page::getDefaultDomain() => 'http://' . Ayoola_Page::getDefaultDomain() );
+//			$fieldset->addElement( array( 'name' => 'domain', 'style' => 'max-width:20%;', 'placeholder' => 'Profile Domain (Default)', 'label' => 'Choose a profile URL e.g. MyStyle', 'disabled' => 'disabled', 'type' => 'InputText', 'value' => 'http://' . Ayoola_Page::getDefaultDomain() . '/' ), $option );
 			
 			Application_Javascript::addCode
 			(
@@ -141,7 +222,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 						}
 						if( a )
 						{
-							element.innerHTML = "<span class=\'normalnews\'>The profile URL will be: <a href=\'http://' . Ayoola_Page::getDefaultDomain() . '/" + target.value + "\'>http://' . Ayoola_Page::getDefaultDomain() . '/" + target.value + "</a></span>";
+							element.innerHTML = "<span class=\'\' style=\'font-size:x-small\'>The profile URL will be: <a href=\'http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/" + target.value + "\'>http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/" + target.value + "</a></span>";
 						}  
 						else
 						{
@@ -151,15 +232,15 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 					}
 				'
 			);
-			$fieldset->addElement( array( 'name' => 'profile_url', 'style' => 'max-width:50%;', 'label' => '', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'Enter your profile url here...', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
-			$fieldset->addFilter( 'profile_url','Username' );
+			$fieldset->addElement( array( 'name' => 'profile_url', 'style' => 'max-width:50%;', 'label' => 'Handle', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'Enter your profile handle here...', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
+		//	$fieldset->addFilter( 'profile_url','Username' );
 			$fieldset->addRequirement( 'profile_url', array( 'NotEmpty' => array( 'badnews' => 'The profile URL cannot be left blank.', ), 'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^0-9a-zA-Z-_', ), 'WordCount' => array( 4,20 ), 'DuplicateUser' => array( 'Username', 'username', 'badnews' => 'Someone else has already chosen "%variable%"', ) ) );
 		//	$fieldset->addElement( array( 'name' => 'name', 'placeholder' => 'Give this page a name', 'type' => 'InputText', 'value' => @$values['name'] ) );
 			
-			//	Profile picture
-			$fieldset->addElement( array( 'name' => 'display_picture_base64', 'data-document_type' => 'image', 'data-allow_base64' => true, 'label' => 'Choose a Display Picture', 'type' => 'Document', 'value' => @$values['display_picture_base64'], ) ); 
-			$fieldset->addRequirement( 'display_picture_base64', array( 'NotEmpty' => array( 'badnews' => 'Please select a valid file to upload...', ) ) );
 		}
+		//	Profile picture
+		$fieldset->addElement( array( 'name' => 'display_picture', 'data-document_type' => 'image', 'label' => 'Display Picture', 'type' => 'Document', 'value' => @$values['display_picture'], ) ); 
+	//	$fieldset->addRequirement( 'display_picture', array( 'NotEmpty' => array( 'badnews' => 'Please select a valid file to upload...', ) ) );
 		
 		//	Profile type
 		$authLevel = new Ayoola_Access_AuthLevel;
@@ -169,7 +250,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		{
 			if( is_array( $each['auth_options'] ) && in_array( 'allow_signup', $each['auth_options'] ) )
 			{
-				$options[$each['auth_level']] =  "{$each['auth_name']}: {$each['auth_description']}";
+				$options[$each['auth_level']] =  "{$each['auth_name']}";
 			}
 		}
 		
@@ -177,7 +258,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		{
 			$account = new Ayoola_Form_Element;
 		//	$account->id = __CLASS__ . 'level';
-			$account->addElement( array( 'name' => 'access_level', 'label' => 'Select a profile type', 'type' => 'Radio', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), $options );  
+			$account->addElement( array( 'name' => 'access_level', 'label' => 'Profile type', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), $options );  
 			$account->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
 			$account->addLegend( $legend );
 			unset( $authLevel );
@@ -238,6 +319,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			$access = new Ayoola_Access();
 			$userInfo = $access->getUserInfo();
 			$fieldset->addElement( array( 'name' => 'display_name', 'placeholder' => 'e.g. John Smith', 'type' => 'InputText', 'value' => @$values['display_name'] ? : trim( $userInfo['firstname'] . ' ' . $userInfo['lastname'] ) ) );
+			$fieldset->addRequirement( 'display_name', array( 'NotEmpty' => array( 'badnews' => 'Please choose a display name', ), 'WordCount' => array( 2, 50 ) ) );
 			$fieldset->addElement( array( 'name' => 'profile_description', 'placeholder' => 'Enter your profile description here...', 'type' => 'TextArea', 'value' => @$values['profile_description'] ) );
 			$fieldset->addLegend( $legend );
 			$form->addFieldset( $fieldset ); 

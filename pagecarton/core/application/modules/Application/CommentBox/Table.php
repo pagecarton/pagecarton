@@ -6,10 +6,10 @@
  * LICENSE
  *
  * @category   PageCarton CMS
- * @package    PageCarton_MultiSite_Table
+ * @package    Application_CommentBox_Table
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
- * @version    $Id: Table.php Wednesday 20th of December 2017 03:22PM ayoola@ayoo.la $
+ * @version    $Id: Table.php Friday 22nd of December 2017 11:09AM ayoola@ayoo.la $
  */
 
 /**
@@ -17,7 +17,7 @@
  */
 
 
-class PageCarton_MultiSite_Table extends PageCarton_Table_Public
+class Application_CommentBox_Table extends PageCarton_Table
 {
 
     /**
@@ -25,7 +25,7 @@ class PageCarton_MultiSite_Table extends PageCarton_Table_Public
      *
      * @param string
      */
-    protected $_tableVersion = '0.5';  
+    protected $_tableVersion = '0.3';  
 
     /**
      * Table data types and declaration
@@ -34,9 +34,18 @@ class PageCarton_MultiSite_Table extends PageCarton_Table_Public
      * @param array
      */
 	protected $_dataTypes = array (
-  'directory' => 'INPUTTEXT',
-  'parent_dir' => 'INPUTTEXT',
+  'comment' => 'INPUTTEXT',
+  'url' => 'INPUTTEXT',
+  'article_url' => 'INPUTTEXT',
+  'profile_url' => 'INPUTTEXT',
+  'display_name' => 'INPUTTEXT',
+  'email' => 'INPUTTEXT',
+  'website' => 'INPUTTEXT',
   'creation_time' => 'INPUTTEXT',
+  'parent_comment' => 'INPUTTEXT',
+  'hidden' => 'INT',
+  'enabled' => 'INT',
+  'approved' => 'INT',
 );
 
 

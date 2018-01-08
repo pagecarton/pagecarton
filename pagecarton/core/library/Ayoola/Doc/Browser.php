@@ -57,6 +57,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 			{ 
 				return false;
 			}
+			$previousData = self::getObjectStorage( 'values' )->retrieve();			
 			//	make a form to select directory
 			$form = new Ayoola_Form();
 		//	$form->submitValue = 'Browse';
@@ -67,9 +68,9 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 						//		'pictures' => 'Images Only',
 								'directory' => 'Directory Browser',
 			);
-			$fieldset->addElement( array( 'name' => 'mode', 'onchange' => 'ayoola.spotLight.splashScreen(); this.form.submit();', 'type' => 'Select', 'label' => '', ), $options );
+			$fieldset->addElement( array( 'name' => 'mode', 'onchange' => 'ayoola.spotLight.splashScreen(); this.form.submit();', 'type' => 'Select', 'label' => '', 'value' => $previousData['mode'], ), $options );
 
-			if( ( Ayoola_Form::getGlobalValue( 'mode' ) && 'directory' == Ayoola_Form::getGlobalValue( 'mode' ) ) )
+			if( ( Ayoola_Form::getGlobalValue( 'mode' ) && 'directory' == Ayoola_Form::getGlobalValue( 'mode' ) ) || ( $previousData['mode'] && 'directory' == $previousData['mode'] ) )
 			{
 				$options = Ayoola_Doc::getDirectoriesRecursive( self::getDocumentsDirectory() );
 				foreach( $options as $key => $value )
@@ -80,7 +81,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 					unset( $options[$key] );
 				}
 				ksort( $options );
-				$fieldset->addElement( array( 'name' => 'doc_browser_directories', 'onchange' => 'ayoola.spotLight.splashScreen(); this.form.submit();', 'type' => 'Select', 'label' => '', ), array( '' => 'Select Directory' ) + $options );
+				$fieldset->addElement( array( 'name' => 'doc_browser_directories', 'onchange' => 'ayoola.spotLight.splashScreen(); this.form.submit();', 'type' => 'Select', 'label' => '', 'value' => $previousData['doc_browser_directories'], ), array( '' => 'Select Directory' ) + $options );
 			}
 			$form->addFieldset( $fieldset );
 			
@@ -91,6 +92,18 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 			$filterSize = new Ayoola_Filter_FileSize();
 			$data = array();
 			$values = $form->getValues();
+			if( ! empty( $values ) )
+			{
+				self::getObjectStorage( 'values' )->store( $values );
+			}
+			elseif( $values['mode'] !== 'mine' )
+			{
+				$values = $previousData;
+				if( $values['mode'] === 'mine' )
+				{
+					unset( $values['doc_browser_directories'] );
+				}
+			}
 			switch( empty( $values['doc_browser_directories'] ) )
 			{
 				case false:
@@ -190,7 +203,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 								%FIELD%
 								</div>
 								<img src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=60&max_height=60&url=%KEY%&document_time={{{%time%}}}" alt="" >
-								<div style="padding:5px;"><a class="pc-btn pc-btn-small" style="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '%KEY%">view</a> ' . $select . '</div>
+								<div style="padding:5px;"><a class="pc-btn pc-btn-small" style="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '%KEY%">view</a> <a class="pc-btn pc-btn-small" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=%KEY%&crop=1"> Replace </a> ' . $select . '</div>
 								</div>' ), 
 				'url' => '%FIELD%', 
 				'ext' => '%FIELD%', 

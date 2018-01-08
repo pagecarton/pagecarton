@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DOCUMENT_ELEMENT table_name="table" creation_time="1513790913" table_version="0.2" module_version="1.00" table_class="PageCarton_MultiSite_Table" creation_ip="2130706433">
-  <RECORDS autoId="16">
-    <TABLE_ROW ROW_ID="15">
+<DOCUMENT_ELEMENT table_name="table" creation_time="1513850045" table_version="0.5" module_version="1.00" table_class="PageCarton_MultiSite_Table" creation_ip="2130706433">
+  <RECORDS autoId="7">
+    <TABLE_ROW ROW_ID="5">
       <TABLE_FIELD FIELD_KEY="directory"><![CDATA[/x/music]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1513805559]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[0-0-15]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_dir"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1513852554]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[0-0-5]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="directory"><![CDATA[/x/new-site]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_dir"><![CDATA[/x]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1514391055]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[0-0-6]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>
-    <DATA_TYPES directory="INPUTTEXT" creation_time="INPUTTEXT" table_id="INPUTTEXT"/>
+    <DATA_TYPES directory="INPUTTEXT" parent_dir="INPUTTEXT" creation_time="INPUTTEXT" table_id="INPUTTEXT"/>
     <FOREIGN_KEYS/>
     <RELATIVES/>
   </TABLE_SETTINGS>

@@ -498,6 +498,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				@$width = $width ? : $element['data-pc-upload-image-width'];
 				@$height = $height ? : $element['data-pc-upload-image-height'];
 				$docSettings = Ayoola_Doc_Settings::getSettings( 'Documents' );
+			//	var_export( $docSettings );
 				$defaultPix = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( ( $element['data-document_type'] == 'image' ) ? '/img/placeholder-image.jpg' : '/open-iconic/png/document-8x.png' );
 				$valuePreview = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . @$element['value'];
 				$html .= '<div></div>';  

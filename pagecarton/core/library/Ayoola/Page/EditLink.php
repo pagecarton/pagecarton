@@ -48,13 +48,14 @@ class Ayoola_Page_EditLink extends PageCarton_Widget
             } 
             //  Output demo content to screen
 		    $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
-   //         var_export( $currentUrl );
+    //        var_export( $currentUrl );
             $editorMode = false;
 			switch( $currentUrl )
 			{
 				case '/tools/classplayer':
 				case '/object':
 				case '/pc-admin':
+				case '/widgets':
 				case '/widget':
 		//		case true:
 					//	Do nothing.

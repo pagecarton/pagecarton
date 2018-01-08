@@ -51,7 +51,12 @@ class Application_IconViewer extends PageCarton_Widget
       //          return false;
             }
             //  Code that runs the widget goes here...
-            $ext = @$_REQUEST['extension'] ? : strtolower( array_pop( explode( '.', $url ) ) );
+            $realExt = strtolower( array_pop( explode( '.', $url ) ) );
+            $ext = @$_REQUEST['extension'] ? : $realExt;
+            if( $realExt == $url )
+            {
+       //         $ext = null;
+            }
             switch( $ext )
             {
                 case 'jpg':
@@ -105,16 +110,27 @@ class Application_IconViewer extends PageCarton_Widget
                 break;
             }
             $url = $url ? : '/img/file-icon.png';
-     //       var_export( $url );
+  //          var_export( $realExt );
+  //          var_export( $url );
+  //          exit();
     //        header( 'Location: ' . $url );
             @$maxWith = $this->getParameter( 'max_width' ) ? : @intval( $_REQUEST['max_width'] );
             @$maxHeight = $this->getParameter( 'max_height' ) ? : @intval( $_REQUEST['max_height'] ); 
 
-            if( $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
-            {
-
-
+            if( ! $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
+            {  
+                $url = '/img/error-icon.png';
+                if( ! $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
+                {  
+                    $errorMessage = '<p class="badnews">Document does not  exist</p>';
+                //    var_export( $path );
+                    echo $errorMessage;
+                //  $this->setViewContent( $errorMessage, true );              
+                //    return false;
+                }
             }
+       //     var_export( $path );
+      //      exit();
 			
             //  cache me
             if( $_REQUEST['document_time'] )

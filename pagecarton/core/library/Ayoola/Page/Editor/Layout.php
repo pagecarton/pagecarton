@@ -936,6 +936,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		{
 			
 		}
+		$this->_layoutRepresentation = str_ireplace( '</body>', '<div style="display:none;">'. $this->getViewableObjects() . '</div></body>', $this->_layoutRepresentation );
 		return $this->_layoutRepresentation;
 	} 
 			
@@ -1191,7 +1192,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				topBarForButtons.appendChild( viewableObjects );
 				viewableObjects.style.cssText = "";
 			}
-			viewableObjects.innerHTML = "' . addcslashes( $this->getViewableObjects(), "\"\r\n" ) . '";		
 			CreateDragContainer( "viewable_objects" );
 			viewableObjects.style.display = "";
 		}

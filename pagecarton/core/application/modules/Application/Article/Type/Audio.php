@@ -73,7 +73,7 @@ class Application_Article_Type_Audio extends Application_Article_Type_Abstract
 			
 			$attributes .= 'onended="var xx = document.getElementsByClassName( \'pc_paginator_next_page_button\' )[0].href; location.href= xx + location.search + \'&autoplay_next_done=1&autoplay=1\'"';
 		}
-		$audio = '	<audio style="width:100%;" ' . $attributes . ' src="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Audio_Play/?article_url=' . $data['article_url'] . '&auto_download=1">
+		$audio = '	<audio preload="none" style="width:100%;" ' . $attributes . ' src="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Audio_Play/?article_url=' . $data['article_url'] . '&auto_download=1">
 						
 					</audio>';
 		

@@ -263,12 +263,22 @@ class ImageManipulator
         $w_point = (($width - $width_new) / 2);
         imagecopyresampled($dst_img, $src_img, 0, 0, $w_point, 0, $max_width, $max_height, $width_new, $height);
     }
-    header('Content-Type: ' . $mime );     
-    $image($dst_img);
+    if( $SetFileName == false ) 
+    {
+        header('Content-Type: ' . $mime );     
+        $image($dst_img);
+        
+        if($dst_img)imagedestroy($dst_img);
+        if($src_img)imagedestroy($src_img);
+        exit();
+    }
+    else
+    {
+        $image( $dst_img, $SetFileName, $quality );
+    }
     
     if($dst_img)imagedestroy($dst_img);
     if($src_img)imagedestroy($src_img);
-    exit();
 
 /*        $ext = strtolower( array_pop( explode( '.', $thumb_target ) ) );
         switch( $ext )

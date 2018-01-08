@@ -358,6 +358,13 @@ ayoola.image =
 						var formData = new FormData();
 						formData.append( 'upload', fileObject.file );
 						formData.append( 'suggested_url', fileObject.suggestedUrl );
+						if( ayoola.image.cropping.crop )
+						{	
+						//	alert( fileObject.maxWidth );			
+							formData.append( 'max_width', fileObject.maxWidth );
+							formData.append( 'max_height', fileObject.maxHeight );
+							formData.append( 'crop', 1 );
+						}
 						// suggested_url=' + encodeURIComponent( fileObject.suggestedUrl )
 				//		alert( fileObject.file.size );
 				//		exit();
@@ -385,7 +392,14 @@ ayoola.image =
 				var formData = new FormData();
 				formData.append( 'upload', fileObject.file );
 				formData.append( 'suggested_url', fileObject.suggestedUrl );
-
+				//	alert( fileObject.maxWidth );			
+				if( ayoola.image.cropping.crop )
+				{	
+				//	alert( fileObject.maxWidth );			
+					formData.append( 'max_width', fileObject.maxWidth );
+					formData.append( 'max_height', fileObject.maxHeight );
+					formData.append( 'crop', 1 );
+				}
 		//		alert( fileObject.file.size );
 		//		exit();
 				//ajaxUpload( { data: data } );

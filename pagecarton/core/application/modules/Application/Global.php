@@ -29,6 +29,13 @@ class Application_Global extends Ayoola_Abstract_Table
 {
 	
     /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Show Global Variables'; 
+	
+    /**
      * Whether class is playable or not
      *
      * @var boolean

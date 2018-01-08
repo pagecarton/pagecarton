@@ -121,7 +121,7 @@ class Application_Personalization extends Ayoola_Abstract_Table
 	//	var_export( $response );
 		if( is_array( @$response ) ) 
 		{
-		
+			$prefix = Ayoola_Application::getUrlPrefix();
 			switch( count( $response ) )
 			{
 				case 0:
@@ -133,14 +133,29 @@ class Application_Personalization extends Ayoola_Abstract_Table
 					//	That "One" user must not be an admin
 					$oneUser = array_pop( $response );
 					if( intval( $oneUser['access_level'] ) === 1 ){ break; }  
-				break;
+					$userTable = new PageCarton_MultiSite_Table();
+					if( $response = $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
+					{
+			//			var_export( $response );
+			//			var_export( Ayoola_Application::getUrlPrefixController() );
+						$prefix = $response['parent_dir'] . Ayoola_Application::getUrlPrefixController();
+					}
+					else
+					{
+						break;
+					}
+		//		break;
 				default:
 				//	var_export( self::hasPriviledge() );
 					if( ! self::hasPriviledge( array( 99, 98 ) ) )
 					{
 						//	IF WE ARE HERE, WE ARE NOT AUTHORIZED     
-						$urlToGo = '' . Ayoola_Application::getUrlPrefix() . '/accounts/signin/';
+						$urlToGo = '' . $prefix . '/accounts/signin/';
+					//	var_export( $urlToGo );
+					//	exit;
 						$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
+					//	var_export( $urlToGo );
+					//	exit;
 			//			$access = self::getInstance();
 				//     var_export( $pageAccessLevel );
 				//    var_export( Ayoola_Application::isClassPlayer()  );

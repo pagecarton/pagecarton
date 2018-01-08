@@ -238,7 +238,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		else
 		{
-			$html .= '<textarea data-parameter_name="codes" style="display:block; width:100%;" title="You may click to edit the content here..." >' . @$object['codes'] . '</textarea>';  
+			$html .= '<textarea data-parameter_name="codes" style="display:block; width:100%;" title="You may click to edit the content here..." >' . htmlspecialchars( @$object['codes'] ) . '</textarea>';     
 		}
 
 		//	Use this to clean the URL prefix from the codes

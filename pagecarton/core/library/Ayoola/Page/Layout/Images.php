@@ -63,7 +63,7 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 		
 		
 		$directory = dirname( Ayoola_Loader::checkFile( $this->getFilename() ) );
-		$files = Ayoola_Doc::getFilesRecursive( $directory );
+		$files = array_unique( Ayoola_Doc::getFilesRecursive( $directory ) );
 //		var_export( $files );
 	//	asort( $files );
 		$data = array();
@@ -97,7 +97,7 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 		$list->createList(  
 			array(
 				'filename' => '<img alt="" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=60&max_height=60&url=%KEY%" style="max-height:48px; vertical-align:middle;" > <br> %FIELD%  ',    
-				'  ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=%KEY%"> Replace </a>', 
+				'  ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=%KEY%&crop=1"> Replace </a>', 
 				' ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Delete/?uri=%KEY%"> X </a>', 
 			)
 		);

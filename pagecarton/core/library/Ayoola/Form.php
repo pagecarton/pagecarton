@@ -283,7 +283,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 	//	$this->_attributes['action'] = '/tools/classplayer/get/object_name/' . $this->_attributes['name'] . '/';
 		$this->_attributes['class'] = @$this->_attributes['class'] ? : 'pc-form2';
 //	var_export( $this->_attributes['class'] );
-		$this->_attributes['action'] = @$this->_attributes['action'] ? : '#' . $this->_attributes['name'];
+		$this->_attributes['action'] = @$this->_attributes['action'] ? : '#' . $this->_attributes['id'];
 		
 /* 		//	Check if form was submitted
 		if( @$_REQUEST[$this->_attributes['name'] . self::SUBMIT_DETECTOR] === $this->_attributes['name'] )
@@ -631,7 +631,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 	//	var_export( $this->_attributes );
 		
 		$form = null;
-		$form .= $this->wrapForm ? "<div id='{$this->_attributes['id']}'>\n" : null;
+		$form .= $this->wrapForm ? "<div id='{$this->_attributes['id']}_container'>\n" : null;
 		if( ! $this->getParameter( 'no_form_element' ) )
 		{
 			$form .= "<form data-pc-form=1 ";   

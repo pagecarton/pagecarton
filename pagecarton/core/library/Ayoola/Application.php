@@ -237,7 +237,7 @@ class Ayoola_Application
 			if( ! empty( $data['domain_settings']['username'] ) )
 			{
 				Ayoola_Application::$GLOBAL = $data['domain_settings'];
-			//	var_export( Ayoola_Application::$GLOBAL );
+				//	var_export( Ayoola_Application::$GLOBAL );
 			}
 		//	var_export( $data );
 			return true;      
@@ -1015,7 +1015,8 @@ class Ayoola_Application
 							}
  */						}
 						
-						$userInfo = $nameForModule ? Ayoola_Access::getAccessInformation( $nameForModule, array( 'set_canonical_url' => true ) ) : null;
+						$userInfo = $nameForModule ? Application_Profile_Abstract::getProfileInfo( $nameForModule ) : null;
+//						$userInfo = $nameForModule ? Ayoola_Access::getAccessInformation( $nameForModule, array( 'set_canonical_url' => true ) ) : null;
 		//		var_export( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 			//	exit();
 				//		var_export( $userInfo ); 
@@ -1626,6 +1627,20 @@ class Ayoola_Application
 		//	exit();
 		}
 		return self::$_urlPrefix;
+	}
+	
+    /**
+     * 
+     * 
+     */
+	public static function getUrlPrefixController()
+    {
+		$controller = basename( $_SERVER['SCRIPT_NAME'] );
+		if( stripos( self::getUrlPrefix(), $controller ) === false )
+		{
+			return null;
+		}
+		return '/' . $controller;
 	}
 	
     /**

@@ -32,7 +32,15 @@ class Application_Profile_Creator extends Application_Profile_Abstract
      *
      * @var boolean
      */
-	protected static $_accessLevel = 0;
+	protected static $_accessLevel = 1;
+	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Create a profile'; 
+
 	
     /**
      * The method does the whole Class Process
@@ -46,7 +54,7 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 
 			//	Check settings
 			$profileSettings = Application_Article_Settings::getSettings( 'Articles' );  
-			$this->createForm( 'Create profile', 'Create a new profile....' );
+			$this->createForm( 'Create profile', '' );
 			if( $this->getParameter( 'class_to_play_when_completed' ) )
 			{
 				$this->setViewContent( Ayoola_Object_Embed::viewInLine( array( 'editable' => $this->getParameter( 'class_to_play_when_completed' ) ) + $this->getParameter() ? : array() ) );
@@ -58,6 +66,7 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 			$access = new Ayoola_Access();
 			$userInfo = $access->getUserInfo();
 			$values['username'] = $userInfo['username'];
+			$values['user_id'] = $userInfo['user_id'];
 			
 			//	Save this information locally for easier lookup
 			@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
@@ -75,15 +84,17 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 			
 			$values['profile_creation_date'] = time();
 			$values['profile_modified_date'] = time();
+			$values['creation_time'] = time();
+			$values['creation_ip'] = $_SERVER['REMOTE_ADDR'];
 			
 			//	write to file
 			self::saveProfile( $values );
-			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '/' . Ayoola_Application::getUrlPrefix() . '' . $values['profile_url'] . '';
-			$this->setViewContent( '<div class="boxednews greynews">Profile saved successfully.</div> <div class="boxednews greynews"><a href="' . $fullUrl . '">View Profile.</a></div>', true );
-			$this->setViewContent( '<div class="boxednews greynews" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+			$fullUrl = Ayoola_Page::getHomePageUrl() . '/' . $values['profile_url'] . '';
+			$this->setViewContent( '<div class="goodnews">Profile saved successfully. <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Share/?url=/' . $values['profile_url'] . '%&title=' . $values['display_name'] . '\' );" href="javascript:">Share!</a></div>', true );
+	//		$this->setViewContent( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
 			if( @$_GET['previous_url'] )
 			{
-				$this->setViewContent( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
+				$this->setViewContent( '<div class="pc-info-notify"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
 			}
 			$this->_objectData['profile_url'] = $values['profile_url']; 
 		//	$this->setViewContent(  );

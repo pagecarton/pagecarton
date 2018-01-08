@@ -52,12 +52,6 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 			$this->createForm( 'Send message', $this->getParameter( 'form_legend' ) ? : 'Contact Form' );
 			$this->setViewContent( $this->getForm()->view(), true );
 
-			
-		//	$options = array( 'regex' => '#(library\\'. DS .')|(application\\'. DS .')|(local_html\\'. DS .')#' );
-		//	$options = array( 'regex' => '#(/application/)|(/library/)|(/local_html/)#' );
-		//	var_export( $options );
-			
-		//	Ayoola_Phar_Data::archiveDirectory( 'D:/Documents/www/default', $options );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
 			//
@@ -66,6 +60,8 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 			$access = new Ayoola_Access();
 			$userInfo = $access->getUserInfo();
 			$values['contactus_creator_user_id'] = $userInfo['user_id'];
+			$values['contactus_subject'] = $values['contactus_subject'] ? : substr( $values['contactus_message'], 0, 100 );
+			$values['contactus_subject'] = $values['contactus_subject'] ? : $values['contactus_message'];
 			if( ! $this->insertDb( $values ) ){ return false; }
 			//	self::v( $values );
 			$this->setViewContent( 'Thank you! Your message has reached us, we will get back to you as soon as possible.', true );

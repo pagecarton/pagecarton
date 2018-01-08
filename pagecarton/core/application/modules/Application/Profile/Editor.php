@@ -70,9 +70,9 @@ class Application_Profile_Editor extends Application_Profile_Abstract
 			$values = array_merge( $data, $values );  
 						
 			self::saveProfile( $values );
-			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '/' . Ayoola_Application::getUrlPrefix() . '' . $values['profile_url'] . '';
-			$this->setViewContent( '<div class="boxednews greynews">Profile saved successfully.</div> <div class="boxednews greynews"><a href="' . $fullUrl . '">View Profile.</a></div>', true );
-			$this->setViewContent( '<div class="boxednews greynews" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+			$fullUrl = Ayoola_Page::getHomePageUrl() . '/' . $values['profile_url'] . '';
+			$this->setViewContent( '<div class="goodnews">Profile saved successfully. <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Share/?url=/' . $values['profile_url'] . '%&title=' . $values['display_name'] . '\' );" href="javascript:">Share!</a></div>', true );
+	//		$this->setViewContent( '<div class="boxednews greynews" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
 			if( @$_GET['previous_url'] )
 			{
 				$this->setViewContent( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );

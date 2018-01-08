@@ -335,15 +335,19 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					$maxHeight = @intval( $_POST['max_height'] ) ? : 3000; 
 					
 				//	var_export( $maxWith );
-				//	var_export( $maxHeight );
+			//		var_export( $_REQUEST['crop'] );
 					
 					if( $width <= $maxWith && $height <= $maxHeight )
 					{
+						if( ! empty( $_REQUEST['crop'] ) )
+						{
+							ImageManipulator::makeThumbnail( $path, $maxWith, $maxHeight, $path );
+						}
 						//	No need for manipulation
 						break;
 					}
 					
-					
+			//		var_export( __CLASS__ );
 					
 					// our dimensions will be 200x130
 					$x1 = $centreX - ( $maxWith / 2 ); 

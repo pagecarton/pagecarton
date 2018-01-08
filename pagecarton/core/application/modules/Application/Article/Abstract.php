@@ -584,14 +584,14 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				var pc_autoloadPostPageNumber_' . $postListId . ' = "' . $offset . '";
 				var options = 
 				{
-					distance: ' . ( $this->getParameter( 'autoload_distance' ) ? : 200 ) . ',
+					distance: ' . ( $this->getParameter( 'autoload_distance' ) ? : 500 ) . ',
 					callback: function( done ) 
 					{
 						var a = document.createElement( "div" );
 						a.innerHTML = "<div title=\"Loading more...\" style=\"text-align: center;\"><img alt=\"Loading more...\" src=\"' . Ayoola_Application::getUrlPrefix() . '/loading.gif?document_time=1\" ></div>";
 						var b = document.getElementById( "' . $postListId . '" );
 						b.appendChild( a );
-						var url = "/tools/classplayer/get/name/' . get_class( $this ) . '/?pc_post_list_autoload=1&pc_post_list_id=' . $postListId . '&list_page_number=" + pc_autoloadPostPageNumber_' . $postListId . ';
+						var url = "' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . get_class( $this ) . '/?pc_post_list_autoload=1&pc_post_list_id=' . $postListId . '&list_page_number=" + pc_autoloadPostPageNumber_' . $postListId . ';
 						var ajax = ayoola.xmlHttp.fetchLink( { url: url, container: b, noSplash: true, insertBefore: true } );
 						var v = function()
 						{

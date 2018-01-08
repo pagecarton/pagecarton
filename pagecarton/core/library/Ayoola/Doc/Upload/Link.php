@@ -217,6 +217,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 			{
 				$uri = null;
 			}
+			$filter = new Ayoola_Filter_FileSize();
 			$html = '
 				<div title="This is a live preview of the selected file." style="display:block;clear:both; text-align:center;max-height:80%;" class="" >
 					<img name="' . $previewImageName . '" src="' . 
@@ -227,15 +228,18 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 					( $this->getParameter( 'width' ) ? : '300' ) . 'x' .
 					( $this->getParameter( 'height' ) ? : '300' ) . '&text=' .   
 					
-					( 'Preview' ) . '' ) ) . '"  class="" onClick="" style="width:' . 
+					( 'Preview' ) . '' ) ) . '"  class="" onClick="" style="max-height:50vh;"  > 
 
-					$this->getParameter( 'width' ) . 'px;max-width:100%;height:' . 
-					$this->getParameter( 'height' ) . '; max-height:50%;"  > 
+					' . ( $this->getParameter( 'width' ) ? ( '<div style="margin:1em; font-size:x-small;">
+					URL: ' .  $imageUrl . '<br>
+					DIMENSIONS: ' . $this->getParameter( 'width' ) . ' / ' . $this->getParameter( 'height' ) . ' <br>
+					SIZE: ' . $filter->filter( filesize( Ayoola_Doc_Browser::getDocumentsDirectory() . $imageUrl ) ) . '
+					</div>' ) : null ) . ' 
 				</div>
 				<div title="Click here to select a file to upload or drag and drop a file here." style="text-align:center;" class="" name="upload_through_ajax_link">
 					<div title="Select an option here" style="display:block;" >
 						<span name="' . $optionName . '" onClick="' . $js . ' ayoola.div.selectElement( { element: this, disableUnSelect: false, name: \'' . $optionName . '\' } ); ' . $showMenuJs . '  " title="Show or hide menu..." class="pc-btn pc-btn-small" style="display:inline-block;" >
-							' . ( $this->getParameter( 'call_to_action' ) ? : 'Browse...' ) . '  
+							' . ( $this->getParameter( 'call_to_action' ) ? : 'Change...' ) . '  
 						</span>
 						<span name="' . $optionName . '" onClick="' . $js . ' ' . $jsSelectElement . ' ' . $jsSetFieldName . ' ayoola.image.clickBrowseButton( { accept: \'' . $this->getParameter( 'file_types_to_accept' ) . '\', } ); " title="Click here to upload a file" class="pc-btn pc-btn-small" style="display:none;" >
 							Upload
