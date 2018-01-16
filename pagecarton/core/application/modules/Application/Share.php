@@ -43,8 +43,8 @@ class Application_Share extends Application_Share_Abstract
 		{ 
             //  Code that runs the widget goes here...
             $values['creation_time'] = time();
-            $values['article_url'] = @$_REQUEST['article_url'];
-            $values['url'] = @$_REQUEST['url'];
+            $values['article_url'] = strtolower( @$_REQUEST['article_url'] );
+            $values['url'] = strtolower( @$_REQUEST['url'] );
 
             $url = $values['url'] ? : $values['article_url'];
 			$access = new Ayoola_Access();
@@ -94,10 +94,12 @@ class Application_Share extends Application_Share_Abstract
 				}
 				else
 				{
-					$currentUrl = $this->getParameter( 'url' ) ? : ( rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/' );
+					$currentUrl = rtrim( Ayoola_Application::getRequestedUri(), '/' );
+			//		var_export( $currentUrl  );
+					$currentUrl = $this->getParameter( 'url' ) ? : ( $currentUrl ? : '/' );
 					$articleUrl = '';
 				}
-				$count = count( $this->getDbTable()->select( null, array( 'article_url' => $articleUrl, 'url' => $currentUrl ) ) );
+				$count = count( $this->getDbTable()->select( null, array( 'article_url' => strtolower( $articleUrl ), 'url' => strtolower( $currentUrl ) ) ) );
 				$values['share_count'] = $count;
 				$values['share_url'] = '/tools/classplayer/get/name/' . __CLASS__ . '/?url=' . htmlentities( $currentUrl ) . '&article_url=' . htmlentities( $articleUrl ) . '&title=' . htmlentities( $title ) . '';
 				$values['share_link'] = '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . $values['share_url'] . '\' );" href="javascript:" >' . $count . ' Shares</a>';

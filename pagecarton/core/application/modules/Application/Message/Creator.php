@@ -27,6 +27,13 @@ require_once 'Application/Message/Abstract.php';
 
 class Application_Message_Creator extends Application_Message_Abstract
 {
+
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Direct Message';      
 	
     /**
      * Access level for player
@@ -45,12 +52,15 @@ class Application_Message_Creator extends Application_Message_Abstract
 		{ 
 			$this->createForm( 'Send', 'Send a private message' );
 			$this->setViewContent( $this->getForm()->view(), true );
+		//	var_export( Ayoola_Application::$GLOBAL );
+	//		var_export( Ayoola_Application::getUserInfo() );
+			
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 		//	var_export( $values );
 			
 			
-			@$values['from'] = $values['from'] ? : Ayoola_Application::getUserInfo( 'username' );
-			@$values['to'] = $values['to'] ? : Ayoola_Application::$GLOBAL['username'];
+			@$values['from'] = $values['from'] ? : Ayoola_Application::getUserInfo( 'profile_url' );
+			@$values['to'] = $values['to'] ? : Ayoola_Application::$GLOBAL['profile_url'];
 			
 			//	There must be a valid sender
 			
@@ -86,7 +96,7 @@ Dear ' . $receiverInfo['firstname'] . ',
 You have just received a new private message from ' . $senderInfo['display_name'] . '. Click the following link to view the message: 
 
 ***LINK***
-http://' . Ayoola_Page::getDefaultDomain() . '/' . $senderInfo['username'] . '/message
+http://' . Ayoola_Page::getDefaultDomain() . '/' . $senderInfo['profile_url'] . '/message
 									
 								', 
 			

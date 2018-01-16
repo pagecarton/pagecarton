@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: profile.php	Friday 5th of January 2018 09:54:55 AM	ayoola@ayoo.la $ 
+* @version $Id: profile.php	Monday 8th of January 2018 08:02:35 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -51,7 +51,9 @@ $_b69000b28c902a54d8dbde45f0a62078 = null;
 							{
 								
 $_d7866b074a6399dd5fc2b5b46d33102a = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<a href="{{{share_url}}}" style="margin-right:1em;" target="_blank">Share ({{{share_count}}})</a> <a href="/tools/classplayer/get/name/Application_Message_Creator/?to={{{profile_url}}}" target="_blank">Message</a>
+  'editable' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'{{{share_url}}}\' );" href="javascript:">Share ({{{share_count}}})</a>
+
+<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/name/Application_Message_Creator/?to={{{profile_url}}}\' );" href="javascript:">Message</a>
 ',
   'url_prefix' => '/x',
   'markup_template_object_name' => 'Application_Share',
@@ -68,6 +70,27 @@ $_d7866b074a6399dd5fc2b5b46d33102a = new Ayoola_Page_Editor_Text( array (
 							{
 								
 $_d7866b074a6399dd5fc2b5b46d33102a = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
+							{
+								
+$_5e9109bd1ae750c96faedc269002118f = new Ayoola_Object_Embed( array (
+  'editable' => 'Application_Message_Creator',
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  'wrapper_name' => '',
+  '' => '',
+) );
+
+							}
+							else
+							{
+								
+$_5e9109bd1ae750c96faedc269002118f = null;
 
 							}
 							
