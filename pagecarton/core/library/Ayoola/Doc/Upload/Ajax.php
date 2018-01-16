@@ -262,7 +262,8 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			$this->_objectData['file_info']['url'] = $url;
 			$this->_objectData['file_info']['dedicated_url'] = $url;
 			$this->_objectData['file_info']['domain'] = Ayoola_Page::getDefaultDomain();
-			
+			$urlPrefix = Ayoola_Application::getUrlPrefix();
+		
 			
 			//	refresh cache
 			if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( $url, array( 'disable_cache' => true ) ) )  
@@ -272,7 +273,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			}  
 
 			$this->_objectData['uploaded'] = 1;
-			$this->_objectData['url'] = $this->_objectData['file_info']['dedicated_url'];
+			$this->_objectData['url'] = $urlPrefix . $this->_objectData['file_info']['dedicated_url'];
 			$this->_objectData['fileName'] = $_POST['name'];
 			$this->_objectData['error'] = @array_pop( $this->_objectData['badnews'] );
 			$this->_playMode = static::PLAY_MODE_JSON;			
@@ -293,7 +294,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				$url = $this->_objectData['file_info']['dedicated_url'];
 				// Usually you will only assign something here if the file could not be uploaded.
 				$message = 'File was successfuly uploaded.';
-				$html = "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message');</script>";		
+				$html = "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction($funcNum, '{$urlPrefix}{$url}', '$message');</script>";		
 				$this->setViewContent( $html, true );				
 			}
 			

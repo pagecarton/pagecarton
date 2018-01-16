@@ -50,13 +50,13 @@
 				onUploading: function( upload ) {
 					// Show the image during the upload.
 					this.parts.img.setAttribute( 'src', upload.data );
+					this.parts.img.setAttribute( 'style', 'max-width:100%;height:unset;height:initial;' );
 				},
 
 				onUploaded: function( upload ) {
 					// Set width and height to prevent blinking.
-					this.replaceWith( '<img src="' + upload.url + '" ' +
-						'width="' + this.parts.img.$.naturalWidth + '" ' +
-						'height="' + this.parts.img.$.naturalHeight + '">' );
+					this.replaceWith( '<img alt="" src="' + upload.url + '" ' +
+						'>' );
 				}
 			} );
 
