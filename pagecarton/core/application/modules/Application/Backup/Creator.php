@@ -44,6 +44,9 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		$this->createForm( 'Create', 'Create a Backup' );
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
+
+		set_time_limit( 0 );
+		ignore_user_abort( true ); 
 		
  		switch( $values['backup_type'] )
 		{

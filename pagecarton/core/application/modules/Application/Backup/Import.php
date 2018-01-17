@@ -39,6 +39,10 @@ class Application_Backup_Import extends Application_Backup_Abstract
 		{
 			$this->setViewContent( $this->getForm()->view() );		
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
+
+			set_time_limit( 0 );
+			ignore_user_abort( true ); 
+
 	//		var_export( $values );
 			$tempName = tempnam( sys_get_temp_dir(), '' ) . '.tar.gz';
 			$option = $values['import_option'] ? : @$_REQUEST['import_option'];

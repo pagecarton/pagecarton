@@ -60,6 +60,10 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 	protected function restore()
     {
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
+
+		set_time_limit( 0 );
+		ignore_user_abort( true ); 
+
 		$data = self::getIdentifierData();
 		if( ! is_file( $data['backup_filename'] ) ){ throw new Application_Backup_Exception( 'File does not exist' ); } 
 		$phar = 'Ayoola_Phar_Data';

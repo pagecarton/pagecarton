@@ -57,7 +57,10 @@ class Ayoola_Extension_Import_Delete extends Ayoola_Extension_Import_Abstract
 			$dir = @constant( 'EXTENSIONS_PATH' ) ? Ayoola_Application::getDomainSettings( EXTENSIONS_PATH ) : ( APPLICATION_DIR . DS . 'extensions' );
 			$dir = $dir . DS . ( $data['extension_name'] ? : 'avoid deleting all directories' );
 	//		var_export( $dir );
-			Ayoola_Doc::removeDirectory( $dir, true );
+			if( is_dir( $dir ) )
+			{
+				Ayoola_Doc::removeDirectory( $dir, true );
+			}
 			
 			//delete from db	
 			if( $this->deleteDb( false ) )

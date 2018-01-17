@@ -126,6 +126,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				
 				//	Clean up temp dir
 		//		Ayoola_Doc::deleteDirectoryPlusContent( $tempDestination );
+
 				return true;  
 			}
 			else

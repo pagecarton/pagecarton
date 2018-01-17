@@ -130,6 +130,13 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
 		if( is_null( $values ) )
 		{
 			$fieldset->addElement( array( 'name' => 'backup_name', 'placeholder' => 'Name this Backup', 'type' => 'Hidden', 'value' => @$values['backup_name'] ) );  
+        //	if( Ayoola_Form::getGlobalValue( 'backup_type' ) === 'export' )
+            {
+                //	We allow options in export
+            //	$options = array( 'databases', 'functions', 'modules', 'pages', 'documents', 'library' );
+            //	$options = array_combine( self::$_exportList, self::$_exportList );
+                $fieldset->addRequirement( 'backup_export_list', array( 'NotEmpty' => null ) );
+            }
 		}
 	//	$link = ;
 	//	$options = array( 'simple' => 'Simple Backup: creates an archive of my website for safe keep.', 'installer' => 'Installer: creates a archive of this website to install on another server. Some security settings are wiped out in the created archive. This archive will be available for download at <a target="_blank" href="' . self::getInstallerLink() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() . self::getInstallerLink() . '</a>', 'export' => 'Export: creates a archive of your site that can be imported on another location.' );
@@ -149,23 +156,20 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
             unset( $options['installer'] );  
             if( empty( $values['backup_name'] ) )
             {
+                $fieldset->addElement( array( 'name' => 'backup_export_list', 'label' => 'Back up Content', 'type' => 'Checkbox', 'value' => @$values['backup_export_list'] ? : array_keys( self::$_exportList ) ), self::$_exportList );
                 unset( $options['export'] );
             }
+            else
+            {
+        //        if( Ayoola_Form::getGlobalValue( 'backup_type' ) === 'export' )
+                {
+                    $fieldset->addElement( array( 'name' => 'export_expiry', 'label' => 'Link Expiry', 'type' => 'Select', 'value' => @$values['export_expiry'] ? : array_keys( self::$_exportList ) ), array( '3600' => '1 hr', '36000' => '10 hrs' ) );
+                    $fieldset->addRequirement( 'export_expiry', array( 'NotEmpty' => null ) );
+                }
+               unset( $options['simple'] );
+            }
         } 
-		$fieldset->addElement( array( 'name' => 'backup_type', 'placeholder' => '', 'type' => 'Select', 'value' => @$values['backup_type'] ? : 'simple' ), $options );
-	//	if( Ayoola_Form::getGlobalValue( 'backup_type' ) === 'export' )
-		{
-			//	We allow options in export
-		//	$options = array( 'databases', 'functions', 'modules', 'pages', 'documents', 'library' );
-		//	$options = array_combine( self::$_exportList, self::$_exportList );
-			$fieldset->addElement( array( 'name' => 'backup_export_list', 'label' => 'Select features to export', 'type' => 'Checkbox', 'value' => @$values['backup_export_list'] ? : array_keys( self::$_exportList ) ), self::$_exportList );
-			$fieldset->addRequirement( 'backup_export_list', array( 'NotEmpty' => null ) );
-		}
-		if( Ayoola_Form::getGlobalValue( 'backup_type' ) === 'export' )
-		{
-			$fieldset->addElement( array( 'name' => 'export_expiry', 'label' => 'Please select the period when this file will be available for export', 'type' => 'Select', 'value' => @$values['export_expiry'] ? : array_keys( self::$_exportList ) ), array( '60' => '1 min', '3600' => '1 hr' ) );
-			$fieldset->addRequirement( 'export_expiry', array( 'NotEmpty' => null ) );
-		}
+		$fieldset->addElement( array( 'name' => 'backup_type', 'label' => 'Mode', 'type' => 'Select', 'value' => @$values['backup_type'] ? : 'simple' ), $options );
 		$fieldset->addElement( array( 'name' => 'backup_description', 'placeholder' => 'Describe this Backup', 'type' => 'TextArea', 'value' => @$values['backup_description'] ) );
 		
 	//	var_export( Ayoola_Form::getGlobalValue( 'backup_type' ) );

@@ -44,6 +44,7 @@ class Ayoola_Extension_Import_Settings extends Ayoola_Extension_Import_Abstract
 		try{ $this->setIdentifier(); }
 		catch( Ayoola_Extension_Import_Exception $e ){ return false; }
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
+	//	var_export( $identifierData );
 		if( ! $this->createForm( 'Save...', 'Settings for "' . $identifierData['extension_name'] . '"', $identifierData['settings'] ) )
 		{
 			$this->setViewContent( '<p class="badnews">This Plugin is not configured to support settings.</p>', true ); 

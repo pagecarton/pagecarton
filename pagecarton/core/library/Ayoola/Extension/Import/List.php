@@ -71,10 +71,10 @@ class Ayoola_Extension_Import_List extends Ayoola_Extension_Import_Abstract
 			array(
 			//	'extension_title' => '%FIELD%',   
 				'extension_title' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Edit plugin" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?' . $this->getIdColumn() . '=%KEY%" href="javascript:;">%FIELD%</a>', 
-				'settings' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Settings" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Settings/?' . $this->getIdColumn() . '=%KEY%" href="javascript:;">Settings</a>', 
 				'status' => '%FIELD% <a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Change Status" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?' . $this->getIdColumn() . '=%KEY%" href="javascript:;">change</a>', 
+				'  ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Settings" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Settings/?' . $this->getIdColumn() . '=%KEY%" href="javascript:;">Settings</a>', 
 				' ' => array( 'value' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Change Status" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import/?extension_name=%FIELD%" href="javascript:;">update</a>', 'field' => 'extension_name' ), 
-				'x' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+				'   ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
 			)
 		);
 		//var_export( $list );

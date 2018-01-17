@@ -61,13 +61,13 @@ class Application_Backup extends Application_Backup_Abstract
 		$row  = $table->appendChild( $row );
 		
 		//	Show the name of the Backup
-		$data = $xml->createElement( 'th', '' . $backup['backup_name'] . '' );
+		$data = $xml->createElement( 'td', '' . $backup['backup_name'] . '' );
 		$data  = $row->appendChild( $data );
 		$classPlayer = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/';
 		$identifier = http_build_query( $this->getIdentifier() );
 
 		//	Begin each option on the same row with the name
-		$options = array( 'Application_Backup_Editor' => 'Edit', 'Application_Backup_Download' => 'Download', 'Application_Backup_Delete' => 'Delete', 'Application_Backup_Restore' => 'Restore' );
+		$options = array( 'Application_Backup_Editor' => 'Export', 'Application_Backup_Download' => 'Download', 'Application_Backup_Delete' => 'Delete', 'Application_Backup_Restore' => 'Restore' );
 		foreach( $options as $player => $viewLink ) 
 		{
 			$link = $xml->createElement( 'a', $viewLink );
