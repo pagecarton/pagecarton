@@ -1075,11 +1075,17 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					var c = a.getElementsByClassName( \'pc_page_object_inner_preview_area\' )[0];
 					var d = a.getAttribute( "data-class_name" );
 			//		alert( d );  
+					var f = "";
+					var g = false;
 					if( ! c )
 					{
-						return false;
+						//	rebuild whole box
+						var f = "&rebuild_widget_box=1";
+						c = a.parentNode;
+						g = true;
+					//	return false;
 					}
-					var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?pc_show_error=1&rebuild_widget=1&class_name=\' + d, data: b.content, container: c } );
+					var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?pc_show_error=1&rebuild_widget=1&class_name=\' + d + f, data: b.content, container: c, replaceContent: g } );
 					var v = function()
 					{
 						if( ayoola.xmlHttp.isReady( ajax ) )

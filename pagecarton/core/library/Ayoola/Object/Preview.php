@@ -50,11 +50,6 @@ class Ayoola_Object_Preview extends PageCarton_Widget
                 exit;
             }
             $classHtml = null;
-    //      if( ! empty( $_REQUEST['rebuild_widget'] ) && method_exists( $class, 'getHTMLForLayoutEditor' ) )
-            {
-          //      var_export( $_REQUEST );  
-            //    $classHtml .= $class::getHTMLForLayoutEditor( $_REQUEST );
-            }
           //  var_export( $_POST );
 			$parameters = Ayoola_Page_Editor_Layout::prepareParameters( $_POST );
    //         var_export( $class );
@@ -65,7 +60,15 @@ class Ayoola_Object_Preview extends PageCarton_Widget
                return false;
             }
     //        exit();
-           $classHtml .= Ayoola_Abstract_Viewable::viewObject( $class, $parameters );
+            if( ! empty( $_REQUEST['rebuild_widget_box'] ) && method_exists( $class, 'getHTMLForLayoutEditor' ) )
+            {
+            //    var_export( $_REQUEST );
+                $classHtml .= Ayoola_Abstract_Viewable::getViewableObjectRepresentation( $_REQUEST );
+            }
+            else
+            {
+                $classHtml .= Ayoola_Abstract_Viewable::viewObject( $class, $parameters );
+            }
 
             $html = null;
             switch( $_REQUEST['content_type'] )

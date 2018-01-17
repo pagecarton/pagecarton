@@ -640,7 +640,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			return static::$_parameterKeys[$thisObjectID];
 		}
-		$filter = new Ayoola_Filter_ClassToFilename();
 		$classes = array( $thisClass );
 	//	var_export( static::getParameterKeysFromTheseOtherClasses( $parameters ) );
 		if( is_array( static::getParameterKeysFromTheseOtherClasses( $parameters ) ) )
@@ -649,6 +648,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 	//	var_export( $classes );
 		$content = file_get_contents( __FILE__ ) ;
+		$filter = new Ayoola_Filter_ClassToFilename();
 		foreach( $classes as $class )
 		{
 			$classFile = $filter->filter( $class );
@@ -683,7 +683,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$object['object_unique_id'] = @$object['object_unique_id'] ? : ( md5( $object['object_name'] ) . rand( 100, 1000 ) );
 		$advancedName = 'advanced_parameters_' . $object['object_unique_id'] . '';
 		$html .= "<div data-class_name='{$object['class_name']}' name='over_all_object_container' class='DragBox' id='" . $object['object_unique_id'] . "' title='Move this object by dragging it around - " . $object['view_parameters'] . "' data-object_name='{$object['object_name']}' >";
-		$title = ( ( $object['view_parameters'] ? : self::getObjectTitle() ) ? : $object['object_name'] );
+		$title = ( ( $object['view_parameters'] ? : $object['object_name']::getObjectTitle() ) ? : $object['object_name'] );
 		//	title bar
 		$html .= '<div draggable=\'true\' ondragstart=\'ayoola.dragNDrop.dragMyParent(event);\' style="cursor: move; cursor: -moz-grab;cursor: -webkit-grab;" title="' . $title . '" class="title_bar pc_page_object_specific_item" data-parameter_name="parent">'; 
 		
@@ -751,8 +751,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					case 'body':
 					//	if( $advanceParameters['advanced_parameter_value'][$i] )       
 						{
-							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => 'HTML Markup', 'placeholder' => 'Parameter Name', 'type' => 'InputText', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ) );
-							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => ' ', 'placeholder' => 'Parameter Value', 'type' => 'TextArea', 'style' => 'width:100%;', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
+					//		$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => 'HTML Markup', 'placeholder' => 'Parameter Name', 'type' => 'Hidden', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ) );
+							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() ) );
+							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'TextArea', 'style' => 'width:100%;', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
+							$fieldset->allowDuplication = true;  
+							$fieldset->placeholderInPlaceOfLabel = true;
 						}
 					break;    
 					default:
@@ -951,7 +954,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var b = this.parentNode.parentNode.getElementsByClassName( \'import_export_content\' ); b = b[0];  if( b.style.display == \'none\' ){  b.value = this.parentNode.parentNode.outerHTML; b.style.display = \'block\'; b.focuc();  var c = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' )[0]; c.style.display = \'none\'; this.innerHTML = \'&#8635; Import\' } else {  b.style.display = \'none\'; b.value ? ( this.parentNode.parentNode.outerHTML = b.value ) : null; this.innerHTML = \'&#8635;\'; } pc_makeInnerSettingsAutoRefresh(); ">&#8635;</a>'; 
 //		$html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var a = window.prompt( \'Copy to clipboard: Ctrl+C, Enter\', this.parentNode.parentNode.outerHTML ); if( a ){ this.parentNode.parentNode.outerHTML = a; }">&#8635;</a>'; 
 				
-		$html .= method_exists( $object['class_name'], 'getStatusBarLinks' ) ? static::getStatusBarLinks( $object ) : null; 
+		$html .= method_exists( $object['class_name'], 'getStatusBarLinks' ) ? $object['class_name']::getStatusBarLinks( $object ) : null; 
 		
 		$html .= '<div style="clear:both;"></div>';
 		$html .= '</div>';	//	 status bar

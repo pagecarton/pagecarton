@@ -647,7 +647,7 @@ ayoola.div =
 	//auto expand textarea
 	autoExpand: function (h) {
 		h.style.height = "20px";
-		h.style.maxHeight = "90%;";
+		h.style.maxHeight = "80vh;";
 		h.style.height = (h.scrollHeight)+"px";
 	},
 	//set value for form element globally. Useful in filemanager selection

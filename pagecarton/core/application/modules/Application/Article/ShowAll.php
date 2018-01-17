@@ -839,7 +839,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				case 'service':
 					$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( array( 'data' => $data, 'button_value' => $this->getParameter( 'button_value' ) ? : $data['button_value'] ) );
 				break; 
-				case 'user_information':
+/*				case 'user_information':
 				//	var_export( $data );
 			//		var_export( $data['display_name'] );
 					//	Lifted from http://stackoverflow.com/questions/3776682/php-calculate-age
@@ -873,7 +873,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	self::v( $data );
 					
 				break;
-				case 'category_information':
+*/				case 'category_information':
 				//	self::v( $data );
 			//		var_export( $data['display_name'] );
 					@$data['article_title'] = $data['category_label'];

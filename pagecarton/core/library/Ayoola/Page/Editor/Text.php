@@ -125,7 +125,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
     public static function getHTMLForLayoutEditorAdvancedSettings( $object )
 	{
-		$html = '<select class="" name="markup_template_object_name" style="width:100%;" >';  
+		$html = '<select onchange="" class="" name="markup_template_object_name" style="width:100%;" >';  
 		$html .= '<option value="" >Widgets</option>';  
 
 		foreach( Ayoola_Object_Embed::getWidgets() as $key => $value )
@@ -134,7 +134,40 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			if( @$object['markup_template_object_name'] == $key ){ $html .= ' selected = selected '; }
 			$html .=  '>' . $value . '</option>';  
 		}
-		$html .= '</select>';  
+		$html .= '</select>'; 
+
+		$class = @$object['markup_template_object_name'];
+		if( ! empty( $class ) && Ayoola_Loader::loadClass( $class ) )
+		{
+		//	$object = new $class;
+		//	$content = file_get_contents( __FILE__ ) ;
+			$content = null;
+			$filter = new Ayoola_Filter_ClassToFilename();
+			$classFile = $filter->filter( $class );
+			$classFile = Ayoola_Loader::getFullPath( $classFile );
+
+			$content .= file_get_contents( $classFile ) ;
+	//		$class = get_called_class();
+
+
+			preg_match_all( "/$data\['([a-z_-]*)'\]/", $content, $results );
+		//	var_export( $results );
+		//	$object = new $class();
+		//	$data = $object->getDbData();
+		//	var_export( $data[0] );
+			$results = ( is_array( $results[1] ) ? $results[1] : array() );
+//			$results = ( is_array( $results[1] ) ? $results[1] : array() ) + ( is_array( $data ) && $data ? array_keys( array_pop( $data ) ) : array() );
+			if( $results )
+			{
+				$results = array_unique( $results );
+				sort( $results );
+				$data = trim( str_replace( '{{{}}},', '', '{{{' . implode( '}}}, {{{', $results ) . '}}}' ), ' ' );
+				
+				$html .= '<textarea readonly ondblclick="ayoola.div.autoExpand( this );">';  
+				$html .= '' . $data . '';  
+				$html .= '</textarea>';  
+			}
+		}
 		return $html;
 	}
 

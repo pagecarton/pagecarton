@@ -305,6 +305,10 @@ ayoola.xmlHttp =
 						{
 							linkObject.container.outerHTML = a[0] + linkObject.container.outerHTML;							
 						}
+						else if( linkObject.replaceContainer )
+						{
+							linkObject.container.outerHTML = a[0];							
+						}
 						else
 						{
 							linkObject.container.innerHTML = a[0];

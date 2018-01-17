@@ -425,7 +425,7 @@ class Application_Article_View extends Application_Article_Abstract
 				$this->_xml .= $data['button_add_to_cart'];
 				$this->_xml .= @$data['article_content'];
 			break;
-			case 'profile':
+/*			case 'profile':
 				
 				//	title
 				$this->_xml .= '<p style=""><strong>Full Name:</strong> ' . $data['full_legal_name'] . '</p> ';
@@ -436,7 +436,7 @@ class Application_Article_View extends Application_Article_Abstract
 				$this->_xml .= '<p style=""><strong>Website:</strong> ' . $data['website'] . '</p> ';
 				$this->_xml .= @$data['article_content'];
 			break;
-			case 'video':
+*/			case 'video':
 				$data['video_content'] = Application_Article_Type_Video::viewInLine( array( 'data' => $data ) );
 				$this->_xml .= $data['video_content'];
 				$this->_xml .= @$data['article_content'];  
