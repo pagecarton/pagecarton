@@ -196,14 +196,15 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		}
 		//	Check from local table
 		$table = self::getLocalTable();
-//			var_export( $identifierInfo );
+	//	var_export( $identifier );    
 
 		//	look in all lookable places for login info
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
 		
-		if( $info = $table->selectOne( null, $where ) )
+		if( $info = $table->selectOne( null, $identifier ) )
 		{
-		//	var_export( $info );
+	//		var_export( $info );
+	//		var_export( $info );
 		//	var_export( $identifierInfo['username'] );
 			if( $info['user_information'] )  
 			{

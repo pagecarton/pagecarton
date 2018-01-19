@@ -474,6 +474,8 @@ class Ayoola_Application
 				
 				//	do we have user domains
 				$userInfo = Ayoola_Access::getAccessInformation( $subDomain );
+		//		var_export( $userInfo );
+		//		exit();
 			//	$userOptions = Application_Settings_Abstract::getSettings( 'Domain', 'domain_options' );
 				
 			//		var_export( in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) );
