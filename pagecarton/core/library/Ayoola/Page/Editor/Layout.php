@@ -455,8 +455,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	//	var_export( $sectionsForPreservation );
 	//	exit();
 		if( 
-			( empty( $values ) || ! empty( $_REQUEST['pc_load_theme_defaults'] ) )
-			AND $pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFile ) )
+			//	now always run this path because we are trying to get lost js and css every time.
+			//	( empty( $values ) || ! empty( $_REQUEST['pc_load_theme_defaults'] ) )
+			//	AND 
+				$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFile ) )
 		{
 			//	We have a page-specific themefile
 			// 	we use it to build the default content
@@ -493,6 +495,41 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//		var_export( $originalFile );
 
 			}
+			//	load all js and css that is not in index file whereToGetPlaceholders
+			preg_match_all( "/<script[\s\S]*?>[\s\S]*?<\/script>/i", $originalFile, $originalScripts );
+			preg_match_all( "/<script[\s\S]*?>[\s\S]*?<\/script>/i", $whereToGetPlaceholders, $pageScripts );
+		//	var_export( $pageScripts );
+			if( $absentScripts = array_diff( $pageScripts[0], $originalScripts[0] ) )
+			{
+		//	var_export( $absentScripts );
+				$absentScripts = implode( "\r\n", $absentScripts );
+		//		foreach( $absentScripts as $eachScript )
+				{
+					$content['template'] = str_ireplace( '</body>', $absentScripts . "\r\n</body>", $content['template'] );
+				}
+			}
+	//		var_export( $absentScripts );
+	//		var_export( $pageScripts[0] );
+	//		var_export( $originalScripts[0] );
+
+			preg_match_all( "/<link[\s\S]*?href\s*=\s*[\'\"]([^\'\"]+)[\'\"]/i", $originalFile, $originalScripts );
+			preg_match_all( "/<link[\s\S]*?href\s*=\s*[\'\"]([^\'\"]+)[\'\"]/", $whereToGetPlaceholders, $pageScripts );
+			if( $absentScripts = array_diff( $pageScripts[1], $originalScripts[1] ) )
+			{
+			//	$absentScripts = implode( "\r\n", $absentScripts );
+				$allLinks = null;
+				foreach( $absentScripts as $eachScript )
+				{
+					$allLinks .= '<link href="' . $eachScript . '" rel="stylesheet" type="text/css">' . "\r\n";
+				}
+				$content['template'] = str_ireplace( '</head>', $allLinks . "\r\n</head>", $content['template'] );
+			}
+		//	var_export( $allLinks );
+		//	var_export( $absentScripts );
+//			var_export( $pageScripts[1] );
+//			var_export( $originalScripts[1] );
+			
+
 	//		var_export( $originalFile );
 		//	var_export( $whereToGetPlaceholders );
 		}
@@ -530,7 +567,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		$noOfDanglingObjects = 0;
 		$hasDanglingObjects = false;
 		$totalPlaceholders = count( $placeholders );
-					//	var_export( $this->_layoutRepresentation );
 		
 		//	record remainders so we stop loosing contents if sections missing
 	//	$valuesRecord = $values;
@@ -590,7 +626,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 							preg_match( '/{@@@' . $section . '([\S\s]*)' . $section . '@@@}/i', $whereToGetPlaceholders, $sectionPlaceholder );
 
 //								var_export( $placeholders );
-		//						var_export( $this->_layoutRepresentation );
 							$defaultPlaceHolder = @$sectionPlaceholder[1];
 						//		var_export( $originalFile );
 						//		var_export( $whereToGetPlaceholders );
