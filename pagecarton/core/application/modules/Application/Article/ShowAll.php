@@ -1208,25 +1208,28 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			switch( $this->getParameter( 'search_mode' ) )
 			{
-				case 'phrase':
-					$command = "find $path -type f -print0 | xargs -0 egrep -l \"*" . $_REQUEST['q'] . "*\"";
-			//		$pattern = implode('\|', $contents_list) ;
-					exec( $command, $output );
-					$path = implode( ' ', $output ); 
-				break;
 				case 'keyword':
-				default:      
 					$keywords = array_map( 'trim', explode( ' ', $_REQUEST['q'] ) );
 					$keywordPaths = null;
 					while( $keywords )
 					{
 						$keyword = array_shift( $keywords );
-						$command = "find $path -type f -print0 | xargs -0 egrep -l \"*" . $keyword . "*\"";
+				//		$command = "find $path -type f -print0 | xargs -0 egrep -l \"*" . $keyword . "*\"";
 				//		$pattern = implode('\|', $contents_list) ;
-						@exec( $command, $output );
-						$keywordPaths .= implode( ' ', $output ); 
+				//		@exec( $command, $output );
+				//		$keywordPaths .= implode( ' ', $output ); 
+						$whereClause['*'][] = $keyword;
 					}
 					$path = $keywordPaths ? : $path; 
+				break;
+				case 'phrase':
+				default:      
+				//	$command = "find $path -type f -print0 | xargs -0 egrep -l \"*" . $_REQUEST['q'] . "*\"";
+			//		$pattern = implode('\|', $contents_list) ;
+				//	exec( $command, $output );
+				//	$path = implode( ' ', $output ); 
+					$whereClause['*'] = $_REQUEST['q'];
+
 				break;
 			}
 		//	var_export( $path ); 

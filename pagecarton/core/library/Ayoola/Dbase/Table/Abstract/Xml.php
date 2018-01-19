@@ -333,7 +333,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
          //         var_export( $globalFiles );
           //        var_export( $stored['files'] );
                 }
-                return $stored['result'];  
+             //   return $stored['result'];  
             }
             else
             {

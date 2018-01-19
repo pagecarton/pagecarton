@@ -250,13 +250,19 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 			{
 				//	Check the user
 			//	self::v( $username );
-				$class = new Application_User_Editor( $where );
+			//	$class = new Application_User_Editor( $where );
 			//	self::v( $username );
-				$class->setIdentifier( $where );
+		//		$class->setIdentifier( $where );
 				
 				//	dont know why it is catching this data
 			//	$class->setIdentifierData();
-				$userInfo = $class->getIdentifierData();
+		//		$tabl();
+
+			//	$userInfo = $class->getIdentifierData();
+				$userInfo = Application_User_Abstract::getUserInfo( $where );
+		//		var_export( $where );
+		//		var_export( $username );
+		//		var_export( $userInfo );  
 				
 				//	hide super users
 		//		if( ! $userInfo || $userInfo['access_level'] == 99 )

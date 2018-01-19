@@ -101,7 +101,8 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 	//		self::v( $settings->select() );
 
 			//	for some reasons, this is returning empty for the first try
-			$settings = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ), array( 'disable_cache' => 1 ) );
+	//		$settings = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ), array( 'disable_cache' => 1 ) );
+			$settings = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
 
 	//		self::v( $settings );
 

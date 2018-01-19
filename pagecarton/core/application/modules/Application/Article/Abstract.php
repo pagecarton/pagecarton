@@ -1327,7 +1327,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				case 'subscription':
 					$fieldset->addElement( array( 'name' => 'item_old_price', 'label' => 'Old price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_old_price'] ) );
 					$fieldset->addElement( array( 'name' => 'item_price', 'label' => 'Current price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_price'] ) );
-			//		$fieldset->addElement( array( 'name' => 'no_of_items_in_stock', 'type' => 'InputText', 'value' => @$values['no_of_items_in_stock'] ) );  
+					$fieldset->addElement( array( 'name' => 'no_of_items_in_stock', 'type' => 'InputText', 'value' => @$values['no_of_items_in_stock'] ) );   
 			//		$fieldset->addElement( array( 'name' => 'call_to_action', 'placeholder' => 'e.g. Add to Cart', 'type' => 'InputText', 'value' => @$values['call_to_action'] ) );
 				//	$fieldset->addElement( array( 'name' => 'subscription_options', 'type' => 'Checkbox', 'value' => @$values['subscription_options'] ), array( 'selections' => 'This product or service has a options to select from e.g. color',  ) );
 			//		var_export( $values['subscription_selections'] );

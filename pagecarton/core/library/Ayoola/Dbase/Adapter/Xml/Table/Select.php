@@ -72,7 +72,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
  */	//	var_export( $where );
 	//	var_export( func_get_args() );
 	//	if( ! is_array( $where[$key] ) )
-		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
+	//	if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
 //		var_export( $result );
 	//	$this->_myFilename = @$options['filename'] ? : $this->_myFilename;
 	//	exit;
@@ -183,8 +183,9 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		{
 			if( $eachRecord instanceof DOMText ){ continue; }
 			$fields = array();		
+			$searchResultIsHere = false;
 			$rowId = self::getRecordRowId( $eachRecord );
-			foreach( $eachRecord->childNodes as $field )
+			foreach( $eachRecord->childNodes as $countField => $field )
 			{
 				$key = self::getFieldKey( $field );
 				if( ! in_array( $key, $fieldsToFetch ) ){ continue; }
@@ -200,7 +201,50 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			//	var_export( $this->getTableDataTypes( $key ) );
 				
 				$fields[$key] = self::filterDataType( $fields[$key], $this->getTableDataTypes( $key ) );
-				if( ! empty( $where ) )
+				if( ! empty( $where['*'] ) )
+				{
+				//	var_export( $key );
+				//	if( $key == 'article_type' )
+					{
+				//		var_export( $where['*'] );
+				//		var_export( $fields[$key] );
+				//		var_export( $where['*'] === $fields[$key] );
+			//			var_export( stripos( $fields[$key], $where['*'] ) );
+					}
+			//		var_export( $countField );
+					$recordNumber = ( $eachRecord->childNodes->length ) - 1;
+			//		var_export( $recordNumber );
+					if( ! is_array( $fields[$key] ) )
+					{
+						if( ( ! is_array( $where['*'] ) &&  stripos( $fields[$key], $where['*'] ) !== false  ) || ( is_array( $where['*'] ) && in_array( $fields[$key], $where['*'] ) )  )
+						{ 
+				//		var_export( $key );
+					//	var_export( $fields[$key] );
+							$searchResultIsHere = true;
+						}
+						elseif( $countField >= $recordNumber && ! $searchResultIsHere )
+						{
+			//		var_export( $key );
+			//		var_export( $fields[$key] );
+				//			var_export( $recordNumber );
+							continue 2;
+						}
+					}
+					else
+					{
+						//	An array is matched if a single member is present.
+						if( ( ! is_array( $where[$key] ) && in_array( $where[$key], $fields[$key] ) ) || ( is_array( $where[$key] ) && array_intersect( $where[$key], $fields[$key]) )  )
+						{
+				//			$searchResultIsHere = true;
+						}
+						elseif( $countField >= $recordNumber && ! $searchResultIsHere )
+						{
+							continue 2;
+						}
+					}
+
+				}
+				elseif( ! empty( $where ) )
 				{ 
 					if( array_key_exists( $key, $where ) )
 					{
