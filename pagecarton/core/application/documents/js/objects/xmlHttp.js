@@ -15,7 +15,7 @@ ayoola.xmlHttp =
 	//	Initialize the objects for automatic enablement
 	init: function()
 	{
-		for( var a = 0; a < document.forms.length; a++ )
+		for( var a = 0; a < document.forms.length; a++ )   
 		{
 	//		continue;   
 			var formElement = document.forms[a];
@@ -24,7 +24,7 @@ ayoola.xmlHttp =
 			if( formElement.getAttribute( 'data-not-playable' ) ){ continue; }
 			if( ! formElement.getAttribute( 'data-pc-form' ) ){ continue; }  
 			if( ! formElement.getAttribute( 'data-playable' ) ){ continue; }  
-			ayoola.events.add( formElement, 'submit', callback ); 
+			ayoola.events.add( formElement, 'submit', callback );   
 		}
 		var links = document.links;
 		for( var a = 0; a < links.length; a++ )

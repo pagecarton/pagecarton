@@ -575,7 +575,7 @@ class Ayoola_Application
 		date_default_timezone_set( 'UTC' );
 		self::loadPrerequisites();
 		require_once 'Ayoola/Loader/Autoloader.php';
-		self::$_autoloader = Ayoola_Loader_Autoloader::getInstance();
+		self::$_autoloader = Ayoola_Loader_Autoloader::getInstance();   
 		
 		//  
 		Ayoola_Event_NewSession::viewInLine();

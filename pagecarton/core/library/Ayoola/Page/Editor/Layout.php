@@ -455,7 +455,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	//	var_export( $sectionsForPreservation );
 	//	exit();
 		if( 
-			//	now always run this path because we are trying to get lost js and css every time.
+			//	now always run this path because we are trying to get lost js and css every time. 
 			//	( empty( $values ) || ! empty( $_REQUEST['pc_load_theme_defaults'] ) )
 			//	AND 
 				$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFile ) )

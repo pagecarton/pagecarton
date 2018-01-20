@@ -60,7 +60,7 @@ class Ayoola_Object_Preview extends PageCarton_Widget
                return false;
             }
     //        exit();
-            if( ! empty( $_REQUEST['rebuild_widget_box'] ) && method_exists( $class, 'getHTMLForLayoutEditor' ) )
+            if( ! empty( $_REQUEST['rebuild_widget_box'] ) )
             {
             //    var_export( $_REQUEST );
                 $classHtml .= Ayoola_Abstract_Viewable::getViewableObjectRepresentation( $_REQUEST );
