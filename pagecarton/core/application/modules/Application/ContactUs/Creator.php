@@ -76,6 +76,7 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 				$emailAddress[] = $values['contactus_email'];
 			}  
 			//	self::v( $emailAddress ); 
+			
 			if( $emailAddress )
 			{
 			
@@ -88,7 +89,7 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 				
 				);
 				$emailInfo['to'] = implode( ',', array_unique( $emailAddress ) );
-				$emailInfo['bcc'] = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
+				$emailInfo['bcc'] = Ayoola_Application_Notification::getEmails();
 			//	$emailInfo['html'] = true; 
 				@self::sendMail( $emailInfo );
 			//	self::v( $emailInfo );

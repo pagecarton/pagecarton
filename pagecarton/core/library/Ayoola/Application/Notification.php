@@ -38,7 +38,9 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
 		$mail = array();
 		
 	//	$mail['to'] = $mailInfo['to'];
-		$mail['to'] = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
+		$mail['to'] = self::getEmails();
+		
+
 		if( ! $mail['to'] )
 		{
 			throw new Ayoola_Abstract_Exception( 'E-MAIL NOT SET IN COMPANY INFO' );;
@@ -54,6 +56,30 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
 	//	echo nl2br( $mail['body'] );
 		self::sendMail( $mail );
 		
+    } 
+	
+    /**
+     * What to prepend to all notification messages
+     * 
+     */
+	public static function getEmails()
+    {
+		//	also sent the message to all admin accounts
+		$users = new Application_User_List( array( 'access_level' => array( 99, 98 ) ) );
+		$emails = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
+		if( $users = $users->getDbData() )
+		{
+			//	$users = array_column( $users, 'email' );
+			foreach( $users as $each )
+			{
+				$emails .= ( ',' . $each['email'] );
+			}
+		}
+		$emails = trim( $emails, ', ' );
+	//	var_export( $emails );
+	//	var_export( $users );
+	//	exit();
+		return $emails;
     } 
 	
     /**

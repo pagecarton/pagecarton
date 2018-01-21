@@ -41,6 +41,10 @@ class Application_User_List extends Application_User_Abstract
      */
 	protected function init()
     {
+		if( $this->getParameter( 'access_level' ) )
+		{
+			$this->_dbWhereClause['access_level'] = $this->getParameter( 'access_level' );
+		}
 		$this->setViewContent( $this->getList(), true );
     } 
 	

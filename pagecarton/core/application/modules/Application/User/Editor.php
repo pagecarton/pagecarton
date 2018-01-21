@@ -50,6 +50,7 @@ class Application_User_Editor extends Application_User_Abstract
 				return false;
 			}
 			if( ! $data = self::getIdentifierData() ){ return false; }
+		//	var_export( $data );
 			
 			if( $data['username'] !== Ayoola_Application::getUserInfo( 'username' )  && ! self::hasPriviledge( 98 ) )
 			{

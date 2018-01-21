@@ -459,7 +459,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	( empty( $values ) || ! empty( $_REQUEST['pc_load_theme_defaults'] ) )
 			//	AND 
 				$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFile ) )
-		{
+		{  
 			//	We have a page-specific themefile
 			// 	we use it to build the default content
 			$table = new Ayoola_Page_PageLayout();

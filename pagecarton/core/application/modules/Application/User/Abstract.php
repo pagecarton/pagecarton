@@ -232,7 +232,14 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$identifierInfo = $this->getIdentifier();
 			$where = array( $this->getIdColumn() => array( $identifierInfo[$this->getIdColumn()], strtolower( $identifierInfo[$this->getIdColumn()] ) ) );
 		//	$info = self::v( $where );
-			$info = self::getUserInfo( $where );
+			if( $info = self::getUserInfo( $where ) )
+			{
+				$this->_identifierData = $info;
+				break;
+			}
+		//	var_export( $info );
+		//	var_export( $where );
+			
 		//	$info = array();
 			//	var_export( $table->select( null, array( 'username' => @$identifierInfo['username'] ) ) );
 		//	var_export( $identifierInfo['username'] );
