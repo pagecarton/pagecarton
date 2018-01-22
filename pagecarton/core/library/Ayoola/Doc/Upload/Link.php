@@ -67,6 +67,8 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 			}
 			$plainUrl = @$_REQUEST['image_url'] ? : ( $this->getParameter( 'suggested_url' ) ? : $this->getParameter( 'image_url' ) );
 			$imageUrl = $plainUrl;    
+			$path = Ayoola_Loader::checkFile( 'documents' . $imageUrl );
+	//		var_export( $path );
 			if( Ayoola_Application::getUrlPrefix() && $plainUrl[0] === '/' )
 			{
 				$imageUrl = Ayoola_Application::getUrlPrefix() . $plainUrl;
@@ -233,7 +235,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 					' . ( $this->getParameter( 'width' ) ? ( '<div style="margin:1em; font-size:x-small;">
 					URL: ' .  $imageUrl . '<br>
 					DIMENSIONS: ' . $this->getParameter( 'width' ) . ' / ' . $this->getParameter( 'height' ) . ' <br>
-					SIZE: ' . $filter->filter( filesize( Ayoola_Doc_Browser::getDocumentsDirectory() . $imageUrl ) ) . '
+					SIZE: ' . $filter->filter( filesize( $path ) ) . '
 					</div>' ) : null ) . ' 
 				</div>
 				<div title="Click here to select a file to upload or drag and drop a file here." style="text-align:center;" class="" name="upload_through_ajax_link">

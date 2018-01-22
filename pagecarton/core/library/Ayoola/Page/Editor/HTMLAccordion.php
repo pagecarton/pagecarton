@@ -25,7 +25,7 @@ require_once 'Ayoola/Page/Editor/Abstract.php';
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Ayoola_Page_Editor_Image extends Ayoola_Page_Editor_Text
+class Ayoola_Page_Editor_HTMLAccordion extends Ayoola_Page_Editor_Text
 {
  	
     /**

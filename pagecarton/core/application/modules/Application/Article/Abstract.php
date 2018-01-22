@@ -944,7 +944,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addElement( array( 'name' => 'article_description', 'label' => '' . $postTypeLabel . ' Description', 'placeholder' => 'Describe this ' . $postTypeLabel . ' in a few words...', 'type' => 'TextArea', 'value' => @$values['article_description'] ) );
 
 		$fieldset->addRequirement( 'article_title', array( 'WordCount' => array( 3,200 ) ) );
-		$fieldset->addRequirement( 'article_description', array( 'WordCount' => array( 0, 500 ) ) );
+		$fieldset->addRequirement( 'article_description', array( 'WordCount' => array( 0, 5000 ) ) );
 	
 		//	addRequirements
 		//	Cover photo

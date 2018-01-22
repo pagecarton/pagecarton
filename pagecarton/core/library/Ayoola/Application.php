@@ -227,9 +227,21 @@ class Ayoola_Application
 		{		
 		//	var_export( $data );
  			//	Allows the sub-domains to have an include path too.
-			if( @$data['parent_domain_settings'] )
+	//		var_export( $data );
+		//		var_export( $data['parent_domain_settings'][APPLICATION_PATH] );
+			if( ! empty( $data['parent_domain_settings'][APPLICATION_PATH] ) && $data['parent_domain_settings'][APPLICATION_PATH] !== $data['domain_settings'][APPLICATION_PATH] )
 			{
 				set_include_path( $data['parent_domain_settings'][APPLICATION_PATH] . PS . $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );
+			}
+			else  
+			{
+		//		var_export( $data );
+				set_include_path( 
+									PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application'
+									. PS . PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules' 
+									. PS . get_include_path() 
+									
+								);
 			}
 			//	Allows the sub-domains to have an include path too.
 			set_include_path( $data['domain_settings'][APPLICATION_PATH] . PS . $data['domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );
@@ -558,6 +570,15 @@ class Ayoola_Application
 			{
 				$data['parent_domain_settings'] = $primaryDomainInfo;
 				@set_include_path( $data['parent_domain_settings'][APPLICATION_PATH] . PS . $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );
+			}
+			else
+			{
+				set_include_path( 
+									PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application'
+									. PS . PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules' 
+									. PS . get_include_path() 
+									
+								);  
 			}
 		//	var_export( $data );
 			$storage->store( $data );

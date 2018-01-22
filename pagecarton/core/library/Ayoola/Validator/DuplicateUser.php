@@ -79,6 +79,7 @@ class Ayoola_Validator_DuplicateUser extends Ayoola_Validator_DuplicateRecord
 	//	var_export( $hashedCredentials );
 		if( $info = Application_User_Abstract::getLocalTable()->selectOne( null, array_map( 'strtolower', $data ) ) )
 		{
+	//	var_export( $info );
 			return false;  
 		}
         if( ! empty( $data['username'] ) && Application_Profile_Abstract::getProfileInfo( $data['username'] ) )

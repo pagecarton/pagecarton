@@ -79,8 +79,16 @@ class Application_Article_Audio extends Application_Article_Abstract
                     while( $postData['true_post_type'] !== 'audio' );
              //       var_export( $postData['article_url'] );
                     $url = Ayoola_Application::getUrlPrefix() . $postData['article_url'] . '?pc_post_list_id=' . $postListId . '&autoplay=1&autoplay_next=1&pc_post_type_to_show=audio';
-                    header( 'Location: ' . $url );
-                    exit();
+
+                    if( $_REQUEST['autoplay'] )
+                    {
+                        header( 'Location: ' . $url . '' );
+                        exit();
+                    }
+                    else
+                    {
+                        $this->setViewContent( '<p class=""><a class="pc-btn" href="' . $url . '">Play Music <i class="fa fa-play-circle-o" aria-hidden="true"></i></a></p>', true ); 
+                    }
 
 				}
 			}

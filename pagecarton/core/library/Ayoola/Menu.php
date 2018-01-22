@@ -252,7 +252,11 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			
 			if( @count( $categories ) === 1 )
 			{
-				$categories = $table->select( null, array( 'parent_category' => $category ), array( 'x' ) );
+
+				if( $childCategories = $table->select( null, array( 'parent_category' => $category ), array( 'x' ) ) )
+				{
+					$categories = $childCategories;
+				}
 			//	var_export( $category );
 			//	var_export( $categories );
 		//		$categories = $table->select();
