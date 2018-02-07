@@ -239,19 +239,59 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;
 		$fieldset->placeholderInPlaceOfLabel = false;
+			
+		Application_Javascript::addCode
+		(
+			'
+				ayoola.addShowAutoUrl = function( target )
+				{
+					var cfdx = document.getElementsByClassName( "pc_page_url_field" )[0];
+					if( ! cfdx )
+					{
+						return false;
+					}
+					var element = document.getElementById( "pc_element_to_show_url" );
+					element = element ? element : document.createElement( "div" );
+					element.id = "pc_element_to_show_url";
+					var a = false;
+					var xry = target.value;
+					xry = xry.toLowerCase();
+					xry = xry.replace( /[^a-zA-Z0-9\/]/gi, "-" );
+					xry = xry.replace( /([-])+/gi, "-" );
+					xry = xry.replace( /[-\/]$/gi, "" );
+					xry = xry.replace( /^[-\/]/gi, "" );
+					xry = "/" + xry;
+					if( xry )
+					{
+						a = true;
+					}
+					var xm = "Please enter a valid name in the space provided... (e.g. My New Page)";
+					if( a )
+					{
+						xm = "<a href=\'javascript:\' onclick=\'var cfd = document.getElementsByClassName( \"pc_page_url_field\" )[0]; cfd.type = \"text\"; cfd.type = \"text\"; cfd.focus();\'>Use Custom URL</a> or The URL for the new page will be: <a href=\'' . Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '" + xry + "\'>' . Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '<strong>" + xry + "</strong></a>";
+					}  
+					cfdx.value = xry;
+					element.innerHTML = "<span style=\'font-size:x-small;\' class=\'\'>" + xm + "</span>";
+					target.parentNode.insertBefore( element, target.nextSibling );
+
+					
+				}
+			'
+		);
+	//      var_export( Ayoola_Application::getUrlPrefix() );
+		$fieldset->addElement( array( 'name' => 'title', 'placeholder' => 'e.g. My New Page', 'type' => 'InputText', 'onchange' => 'ayoola.addShowAutoUrl( this );', 'onkeyup' => 'ayoola.addShowAutoUrl( this );', 'value' => @$values['title'] ) );
 		if( is_null( $values ) )
 		{
 		//	$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html' ), array( 'html' => 'http://' . Ayoola_Page::getDefaultDomain() . ' ' ) );
 			$option = array( $_SERVER['HTTP_HOST'] => 'http://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() );
-			$fieldset->addElement( array( 'name' => 'domain', 'style' => 'max-width:20%;', 'label' => '', 'type' => 'Select', 'value' => 'http://' . $_SERVER['HTTP_HOST'] ), $option );
+		//	$fieldset->addElement( array( 'name' => 'domain', 'style' => 'max-width:20%;', 'label' => '', 'type' => 'Select', 'value' => 'http://' . $_SERVER['HTTP_HOST'] ), $option );
 			$domain = 'http://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix();
-			$fieldset->addElement( array( 'name' => 'domain', 'style' => 'max-width:' . strlen( $domain ) . 'em; min-width:20%;', 'label' => 'URL', 'disabled' => 'disabled', 'type' => 'InputText', 'value' => $domain ) );
-			$fieldset->addElement( array( 'name' => 'url', 'style' => 'max-width:50%;', 'label' => '', 'placeholder' => '/page', 'type' => 'InputText', 'value' => @$values['url'] ) ); 
+	//		$fieldset->addElement( array( 'name' => 'domain', 'style' => 'max-width:' . strlen( $domain ) . 'em; min-width:20%;', 'label' => 'URL', 'disabled' => 'disabled', 'type' => 'InputText', 'value' => $domain ) );
+			$fieldset->addElement( array( 'name' => 'url', 'class' => 'pc_page_url_field', 'style' => 'max-width:50%;', 'label' => '', 'placeholder' => '/page', 'onchange' => 'ayoola.addShowAutoUrl( this );', 'type' => 'Hidden', 'value' => @$values['url'] ) ); 
 			$fieldset->addFilter( 'url','Uri' );
 			$fieldset->addRequirement( 'url', array( 'DuplicateRecord' => array( 'Ayoola_Page_Page', 'url', 'badnews' => '"%variable%" already exist as a page.', ),'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^0-9a-z-_\/', ), 'NotEmpty' => null, 'Uri' => null ) );
 		//	$fieldset->addElement( array( 'name' => 'name', 'placeholder' => 'Give this page a name', 'type' => 'InputText', 'value' => @$values['name'] ) );
 		}
-		$fieldset->addElement( array( 'name' => 'title', 'placeholder' => 'e.g. Welcome to our page', 'type' => 'InputText', 'value' => @$values['title'] ) );
 		$fieldset->addElement( array( 'name' => 'description', 'placeholder' => 'Enter a short description of the content of this page. The description will be displayed in search results and page preview...', 'type' => 'TextArea', 'value' => @$values['description'] ) );
 		
 		//	Set the layout_name to null first to 

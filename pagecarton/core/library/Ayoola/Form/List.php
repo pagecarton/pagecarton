@@ -75,11 +75,13 @@ class Ayoola_Form_List  extends Ayoola_Form_Abstract
 		
 		$list->createList
 		(
-			array(
-				'form_title' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Editor/?' . $this->getIdColumn() . '=%KEY%">Edit Form</a>', 
-				'View Form' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?' . $this->getIdColumn() . '=%KEY%">View Form</a>', 
-				'X' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
-				'Share Link' => array( 'field' => 'form_name', 'value' => 'http://' . Ayoola_Page::getDefaultDomain() . ( $_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] == '443' ? '' : ( ':' . $_SERVER['SERVER_PORT'] ) ) . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=%FIELD%' ), 
+			array(    
+				'form_title' => '%FIELD%', 
+				'   ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?' . $this->getIdColumn() . '=%KEY%">Preview</a>', 
+	//			'Share Link' => array( 'field' => 'form_name', 'value' => '' . Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=%FIELD%' ), 
+				'  ' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Inspect/?' . $this->getIdColumn() . '=%KEY%">Responses</a>', 
+				' ' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
+				'' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
 				)
 		);
 		return $list;

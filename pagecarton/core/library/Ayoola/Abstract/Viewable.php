@@ -635,6 +635,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     protected static function getParameterKeys( & $parameters )
     {
 		$thisClass = get_called_class();
+//		var_export( $thisClass );
 		$thisObjectID = $thisClass . $parameters['object_unique_id'];
 		if( ! empty( static::$_parameterKeys[$thisObjectID] ) )
 		{
@@ -756,7 +757,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	if( $advanceParameters['advanced_parameter_value'][$i] )       
 						{
 					//		$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => 'HTML Markup', 'placeholder' => 'Parameter Name', 'type' => 'Hidden', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ) );
-							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() ) );
+							$parameterOptions = array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() );
+							if( ! array_key_exists( @$advanceParameters['advanced_parameter_value'][$i], $parameterOptions ) )
+							{
+								$parameterOptions[@$advanceParameters['advanced_parameter_value'][$i]] = @$advanceParameters['advanced_parameter_value'][$i];
+							}
+							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
 							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'TextArea', 'style' => 'width:100%;', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
 							$fieldset->allowDuplication = true;  
 							$fieldset->placeholderInPlaceOfLabel = true;

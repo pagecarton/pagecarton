@@ -153,6 +153,7 @@ class Application_Category_ShowAll extends Application_Category_Abstract
 			//	Defaults to all categories available
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			$options = new Application_Category;
+	////		var_export( $articleSettings );
 			if( $articleSettings['allowed_categories'] )
 			{
 				if( ! self::$_postCategories = $options->select( null, array( 'category_name' => $articleSettings['allowed_categories'] ) ) )

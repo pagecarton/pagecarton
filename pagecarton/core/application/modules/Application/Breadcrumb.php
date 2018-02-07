@@ -27,6 +27,13 @@
 
 class Application_Breadcrumb extends Ayoola_Abstract_Table
 {
+
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Breadcrumb';      
 	
     /**
      * Whether class is playable or not
@@ -59,13 +66,19 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 			}
 			
 		//	var_export( $breadcrumb );
+			$homeDone = true;
 			if( ! @$this->_parameter['markup_template'] ) 
 			{
-				$this->_parameter['markup_template_prefix'] = 
-				'				
-						<ol class="pc-breadcrumb">
-							<li><a href="' . Ayoola_Application::getUrlPrefix() . '/" title="Home Page">Home</a></li>
-				';
+				$this->_parameter['markup_template_prefix'] = '<ol class="pc-breadcrumb">';
+				if( Ayoola_Application::getUrlPrefix() && Ayoola_Application::getUrlPrefix() !== 'index.php' ) 
+				{
+					$this->_parameter['markup_template_prefix'] .= '<li><a href="/" title="Home Page">Home</a></li>';
+					$homeDone = false;
+				}
+				else
+				{
+					$this->_parameter['markup_template_prefix'] .= '<li><a href="' . Ayoola_Application::getUrlPrefix() . '/" title="Home Page">Home</a></li>';
+				}
 				$this->_parameter['markup_template_suffix'] = 
 				'
 						</ol>
@@ -85,7 +98,7 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 			$html = null;
 			$i = 0; //	counter
 			$j = 10; //	5 is our max articles to show
-			$j = is_numeric( $this->getParameter( 'no_of_post_to_show' ) ) ? intval( $this->getParameter( 'no_of_post_to_show' ) ) : $j;
+			$j = is_numeric( $this->getParameter( 'no_of_items_to_show' ) ) ? intval( $this->getParameter( 'no_of_items_to_show' ) ) : $j;
 			$urlLog = array();
 			$presentUri = Ayoola_Application::getPresentUri();
 		//	self::v( $breadcrumb );
@@ -95,7 +108,7 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 				{ 
 					break; 
 				}	
-				if( isset( $urlLog[$each['url']] ) || $each['url'] == '/' || $each['url'] == '/object' || $each['url'] == '/tools/classplayer' )
+				if( isset( $urlLog[$each['url']] ) || ( $each['url'] == '/' && $homeDone ) || $each['url'] == '/object' || $each['url'] == '/tools/classplayer' )
 				{   					
 					continue; 
 				}

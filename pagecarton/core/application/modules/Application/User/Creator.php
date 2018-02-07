@@ -276,9 +276,14 @@ class Application_User_Creator extends Application_User_Abstract
 			return false;
 		}
  		$this->setViewContent( '<h2 class="goodnews">Account Confirmation</h2>', true );
- 		$this->setViewContent( '<p>New user account has been created successfully. An email has been sent to ' . $values['email'] . ' containing how to activate and verify the new account.</p>' );
+ 		$this->setViewContent( '<p>New user account has been created successfully. An email has been sent to ' . $values['email'] . ' containing how to activate and verify the new account. You can login immediately.</p>' );
  		$this->setViewContent( '<h4></h4>' );
- 		$this->setViewContent( '<p><a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl( '/account' ) . '">Continue...</a></p>' );   
+		
+		if( ! Ayoola_Application::isClassPlayer() )
+		{
+ 			$this->setViewContent( '<p><a target="_parent" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl( '/account' ) . '">Continue...</a></p>' );     
+		}
+
 
 		//	Auto log me in now without confirmation
 		if( $this->getParameter( 'signin' ) ) 

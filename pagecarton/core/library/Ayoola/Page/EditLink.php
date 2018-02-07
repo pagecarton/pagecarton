@@ -75,7 +75,7 @@ class Ayoola_Page_EditLink extends PageCarton_Widget
 			}
             if( ! $editorMode )
             {
-               $editorLink = 'href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=' . $currentUrl . '\' );"';
+               $editorLink = 'href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=' . $currentUrl . '\', \'page_refresh\' );"';
             }
             else
             {

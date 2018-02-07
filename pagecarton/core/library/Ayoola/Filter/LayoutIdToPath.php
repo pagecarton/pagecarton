@@ -131,6 +131,7 @@
 			//	var_export( $PAGE_TEMPLATE_FILE );
 				$time = time();
 				$myClassName = __CLASS__;           
+				$myPath = array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) );
 				if( $PAGE_INCLUDE_FILE && $PAGE_TEMPLATE_FILE && $this->_pageInfo && ! $isLayoutPage )
 				{
 					//	use global temp folder because of progenies
@@ -143,11 +144,21 @@
 						//	Ayoola_Loader::getFullPath( $pagePaths['include'] ) because $PAGE_INCLUDE_FILE is too static. We need to have something that won't break if site is exported to another server  
 						file_put_contents( $temIncludeFile, "
 						<?php 
+						//		var_export( array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) );
+						//		var_export( __FILE__ );
+					//			var_export( stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) );
+								//	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
+								//	THEY WON'T HAVE CORRECT APPDIR
+//								var_export( stripos( __FILE__,CACHE_DIR ) );
+						//		var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );
 							if
 							( 
-								\$x_{$time} = {$myClassName}::getThemeIncludeFile( '{$themeName}', array( 'prioritize_my_copy' => true ) ) 
+
+								\$x_{$time} = {$myClassName}::getThemeIncludeFile( '{$themeName}', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) ) ) 
 							)
 							{
+							//	var_export( \$x_{$time} );
+							//	echo file_get_contents( \$x_{$time} );
 								include_once \$x_{$time};
 							}
 						?>
@@ -168,7 +179,6 @@
 						//	we have a parent template. lets make sure that's what is being used.
 						//	strip APPLICATION_PATH so that we don't store full url'   
 				//		$myPath = array_pop( explode( APPLICATION_PATH, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) );
-						$myPath = array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) );
 					//	self::getThemeIncludeFile( $themeName, array( 'path_blacklist' => $myPath ) );
 				//		$includeFile = self::getThemeIncludeFile( $themeName, array( 'path_blacklist' => $myPath ) );
 						$templateFile = self::getThemeIncludeFile( $themeName, array( 'path_blacklist' => $myPath ), 'template' );

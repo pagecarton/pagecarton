@@ -263,8 +263,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
  			//	Create TMP file for the template
 			$path = $this->getPagePaths();
 	//	 	var_export( $path );   
-			$tmp = tempnam( sys_get_temp_dir(), __CLASS__ );           
-		//	$tmp = $path['template'] . '.tmp';
+	//		$tmp = tempnam( CACHE_DIR, __CLASS__ );           
+			$tmp = $path['template'] . '.tmp';
+	//	 	var_export( $tmp );   
+			if( ! is_dir( dirname( $tmp ) ) )
+			{
+				$tmp = tempnam( CACHE_DIR, __CLASS__ );           	
+			}
 		//	Application_Style::addFile( '/js/objects/webReferenceDragNDrop/css.css' );
 			if( ! $this->isSaveMode() )
 			{
@@ -574,6 +579,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 //		var_export( $page['url'] );
 		$this->_layoutRepresentation = $content['template'];
 //		var_export( $placeholders );
+		//			var_export(  $values );
 		foreach( $placeholders as $section => $v )
 		{
 			$section = strtolower( $section );
@@ -616,6 +622,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						//	don't continue till ten when we don't have values
 						break;
 					}
+		//			var_export( $numberedSectionName );
 					if( ! isset( $values[$numberedSectionName] ) )
 					{ 
 						//	compatibility
@@ -705,8 +712,22 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					{ 
 						continue; 
 					} 
-			//		var_export( $templateDefaults );  
-			//		var_export( $eachObject );  
+		//			var_export( $values[$numberedSectionName . '_template_defaults']['editable'] );
+		//			var_export( $eachObject['object_name'] );
+		//			var_export( $eachObject['editable'] );
+		//			var_export( $eachObject['code'] );
+			//		if( $values[$numberedSectionName] === 'Ayoola_Page_Editor_Text' && empty( $eachObject['editable'] ) && empty( $eachObject['code'] ) && ! empty( $values[$numberedSectionName . '_template_defaults']['editable'] ) )
+					{ 
+					//	$eachObject['editable'] = $values[$numberedSectionName . '_template_defaults']['editable'];
+			//			var_export( $eachObject['editable'] );
+					} 
+/*					var_export( $numberedSectionName );  
+					var_export( $values[$numberedSectionName] );  
+					var_export( $sectionalValues[$numberedSectionName] );  
+					var_export( $templateDefaults );  
+					var_export( $eachObject );  
+					var_export( $values ); 
+*/			//		exit(); 
 					$objectName = 'obj' . $numberedSectionName . $eachObject['object_name'];
 					
 					
@@ -728,14 +749,19 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						$parameters[$each] = $values[$numberedSectionName . $each];
 					}
 					/* For Layout representation */
+			//		var_export( $values[$numberedSectionName . '_template_defaults'] );
 					$sectionalValues[$numberedSectionName . '_template_defaults'] = $values[$numberedSectionName . '_template_defaults'] ? : $sectionalValues[$numberedSectionName . '_template_defaults'];
 					$sectionalValues[$numberedSectionName . '_template_defaults'] = $sectionalValues[$numberedSectionName . '_template_defaults'] ? : array();
+				//	exit();
 
 					//	add this here so it can be available in the the include and template files for new theme
 					//	not available in save mode so that when item is deleted in edit mode it doest sneak into save mode
-					if( ! $this->isSaveMode() )
+					
+					//	now allowing autosave mode so that themes pages could be generated on creation.
+					if( ! $this->isSaveMode() || $this->isAutoSaveMode() )
 					{
-						$parameters = $parameters + $sectionalValues[$numberedSectionName . '_template_defaults'];
+
+						$parameters = ( is_array( $parameters ) ? $parameters : array() ) + ( is_array( $sectionalValues[$numberedSectionName . '_template_defaults'] ) ? $sectionalValues[$numberedSectionName . '_template_defaults'] : array() );
 					}
 					$eachObject = array_merge( $eachObject, $parameters );
 
@@ -751,6 +777,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				//	Inject the parameters.
 				
 					//	Calculate advanced parameters at this level so that access levels might work
+				//	var_export( $parameters );
 					$parameters = self::prepareParameters( $parameters );
 					$parametersArray = $parameters;
 					$parameters = var_export( $parameters, true );
@@ -946,6 +973,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 
 			//	save default values if no value is set so we can preload themes.
+		//	var_export();
 			file_put_contents( $rPaths['data_json'] , json_encode( $values ? : $sectionalValues ) );
 
 			//	back up current data and not previous one
@@ -1116,7 +1144,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					{
 						//	rebuild whole box
 						var f = "&rebuild_widget_box=1";
-						c = a.parentNode;
+						c = a;
 						g = true;
 					//	return false;
 					}
@@ -1661,7 +1689,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		
 		//	Display Widgets Editor
 		var optionbar = document.createElement( "span" );
-		optionbar.innerHTML = \'Widgets Options\';
+		optionbar.innerHTML = \'Update Content\';
 		optionbar.className = " pc-btn pc-btn-small";
 		optionbar.title = "Show or hide widget options";
 		optionbar.onclick = function()
@@ -1725,7 +1753,23 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      */
     protected function isSaveMode()
     {
-		if( $_POST || $this->_updateLayoutOnEveryLoad || $this->updateLayoutOnEveryLoad ) //	create template for POSTed data
+		if( $_POST || $this->isAutoSaveMode() ) //	create template for POSTed data
+		{
+			return true;
+		}
+		return false;
+
+	}
+
+    /**
+     * Produce the mark-up for each draggable object
+     *
+     * @param string | array viewableObject Information
+     * @return string Mark-Up to Display Viewable Objects
+     */
+    protected function isAutoSaveMode()
+    {
+		if( $this->_updateLayoutOnEveryLoad || $this->updateLayoutOnEveryLoad ) //	create template for POSTed data
 		{
 			return true;
 		}

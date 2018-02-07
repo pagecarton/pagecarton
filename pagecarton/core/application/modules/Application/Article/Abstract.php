@@ -443,7 +443,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			{
 				$pageInfo = array(
 					'description' => @$data['article_description'],
-					'keywords' => @$data['article_tags'],
 					'title' => trim( $data['article_title'] . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
 				);
 		//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
@@ -1731,7 +1730,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			);
 		}
 	//	var_export( $values['true_post_type'] );
-		if( $values['true_post_type'] == 'article' || $values['true_post_type'] == 'post' || @$values['article_content'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'article', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) || ( is_array( $values['article_options'] ) && in_array( 'article', $values['article_options'] ) ) || $values['article_type'] == 'article' || $values['article_type'] == 'post'  )       
+		if( $values['true_post_type'] == 'article' || $values['true_post_type'] == 'post' || @$values['article_content'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'article', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) || ( is_array( $values['article_options'] ) && in_array( 'article', $values['article_options'] ) ) || $values['article_type'] == 'article' || $values['article_type'] == 'post' || in_array( 'article', $internalForms )  )       
 		{
 			$fieldset->addElement( array( 'name' => 'article_content', 'data-html' => '1', 'label' => '' . $postTypeLabel . ' write up (Article)', 'rows' => '10', 'placeholder' => 'Enter content here...', 'type' => 'TextArea', 'value' => @$values['article_content'] ) );
 	//		$fieldset->addRequirement( 'article_content', array( 'WordCount' => array( 0,10000000 ) ) );

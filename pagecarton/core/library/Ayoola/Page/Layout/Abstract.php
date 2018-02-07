@@ -213,7 +213,10 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$class->updateLayoutOnEveryLoad = true;
 		$class->setPagePaths();
 		$class->setValues();
+		
 		$class->init(); // invoke the template update for this page.
+	//	var_export( $values['layout_name'] );
+	//	var_export( $class->getValues() );
 	//	var_export( $class->view() );
 		return true;
     } 
@@ -690,21 +693,15 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			$url = $each->getAttribute( 'href' );
 		//	var_export( $url );
-			if( stripos( $url, '/layout/' . $values['layout_name'] ) === false || stripos( $url, '.html' ) === false )
+			if( ! self::isThemePage( $url, $values['layout_name'] ) )
 			{
-				//	must be a link with /layout/name 
-				// must be a .html extension
-		//		var_export( $url );       
 				continue;
 			}
-		//	var_export( $url );    
 
 			//	change links with /page.html to /page
-			$url = array_pop( explode( '/layout/' . $values['layout_name'], $url ) );
-			$url = '' . array_shift( explode( '.html', $url ) );
-			$url = str_ireplace( array( '/index', '/home', ), array( '/', '/', ), $url );
-	//		var_export( $url );
-			$each->setAttribute( 'href', 'PC_URL_PREFIX' . $url . '?PC_URL_SUFFIX' );
+			$url = self::themePageToUrl( $url, $values['layout_name'] );
+		//		var_export( $url );
+			$each->setAttribute( 'href', 'PC_URL_PREFIX' . $url . '' );
 
 		}
 		
@@ -933,6 +930,74 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
      * 
      * 
      */
+	public static function isThemePage( $url, $themeName )
+    {
+		if( stripos( $url, '/layout/' . $themeName ) === false || stripos( $url, '.html' ) === false )
+		{
+			return false;
+		}
+		return true;
+	}
+	
+    /**
+     * 
+     * 
+     */
+	public static function themePageToUrl( $url, $themeName )
+    {
+		//	change links with /page.html to /page
+		if( strpos( $url, ':' ) !== false || strpos( $url, '//' ) !== false )
+		{
+			return $url;
+		}
+	//	var_export( $url );
+		if( $url[0] == '#' )
+		{
+			return $url;
+		}
+		$url = array_pop( explode( '/layout/' . $themeName, $url ) );
+		$url = '' . array_shift( explode( '.html', $url ) );
+		$url = str_ireplace( array( '/index', '/home', '/.php', ), array( '/', '/', ), '/' . trim( $url, '/' ) );
+//		var_export( $url );
+		return $url ;
+	}
+	
+    /**
+     * 
+     * 
+     */
+	public function getPreviousContent( $themeName )
+    {
+		//	use raw template as previous content where available
+		@$previousContent = file_get_contents( $this->getMyFilename() . 'raw' );
+		if( $previousContent )
+		{
+
+		}
+		else
+		{
+			//	compatibility
+			$previousContent = @file_get_contents( $this->getMyFilename() );
+			
+			
+		//	var_export( $this->getMyFilename() );
+			
+			//	Strip the php content from it.
+			$previousContent = preg_replace( '#<\?.*?(\?>|$)#s', '', $previousContent );
+			
+			//	This somehow make it impossible to work with other template file content. Should we retain it?
+		//	$previousContent = preg_replace( '#/layout/[a-zA-Z0-9-_]*/#', '', $previousContent );
+			
+			//	This was also added automatically
+			$previousContent = str_ireplace( array( '/layout/' . $themeName . '/', '/layout//' ), '', $previousContent );
+		}
+		return $previousContent;
+	}
+	
+    /**
+     * 
+     * 
+     */
 	public static function getPlaceholders()
     {
 		return static::$_placeholders;
@@ -1020,28 +1085,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 			
 			//	use raw template as previous content where available
-			@$previousContent = file_get_contents( $this->getMyFilename() . 'raw' );
-			if( $previousContent )
-			{
-
-			}
-			else
-			{
-				//	compatibility
-				$previousContent = @file_get_contents( $this->getMyFilename() );
-				
-				
-			//	var_export( $this->getMyFilename() );
-				
-				//	Strip the php content from it.
- 				$previousContent = preg_replace( '#<\?.*?(\?>|$)#s', '', $previousContent );
- 				
-				//	This somehow make it impossible to work with other template file content. Should we retain it?
-			//	$previousContent = preg_replace( '#/layout/[a-zA-Z0-9-_]*/#', '', $previousContent );
-				
-				//	This was also added automatically
-				$previousContent = str_ireplace( array( '/layout/' . $values['layout_name'] . '/', '/layout//' ), '', $previousContent );
-			}
+			@$previousContent = $this->getPreviousContent( $values['layout_name'] );
 			
 			//	var_export( $previousContent );
 			$fieldset->addElement( array( 'name' => self::VALUE_CONTENT, 'type' => 'Hidden', 'value' => null ) );

@@ -110,7 +110,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 			if( is_scalar( $each ) )
 			{
-				$inner .= ' ' . $key . ' = "' . $each . '" ';
+				$inner .= ' ' . $key . ' = "' . str_ireplace( '"', "'", $each ) . '" ';
 			}
 		}
 		return $inner;
@@ -594,9 +594,10 @@ class Ayoola_Form_Element extends Ayoola_Form
     }
     public function addHidden(array $element )
     {
+	//	self::v( $element );
     	$html = null;
 		$html .= self::$_placeholders['badnews'];
-		@$html .= "<input type='hidden' name='{$element['name']}' id='{$element['id']}' value='{$element['value']}' />\n";
+		@$html .= "<input type='hidden' " . self::getAttributesHtml( $element ) . " />\n";
 		 return $html;
     }
     public function addInputPassword(array $element )

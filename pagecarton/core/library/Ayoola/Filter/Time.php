@@ -75,16 +75,24 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
     public function filter( $value )
     {
 	//	var_export( $value );
-		$timeDifference = time() - $value;
-	//	$timeDifference = $value - time();
-    //	var_export( $timeDifference );
-    	if( $timeDifference < 1 )
-        {
-            $this->prefix = $this->futurePrefix;
-            $timeDifference = -$timeDifference;
+        $settings = $this->getTimeSettings();
+    	switch( $settings['mode'] )
+		{
+			case 'full':
+                return date( "D M j Y g:i A ", $value );
+			default:
+                $timeDifference = time() - $value;
+            //	$timeDifference = $value - time();
+            //	var_export( $timeDifference );
+                if( $timeDifference < 1 )
+                {
+                    $this->prefix = $this->futurePrefix;
+                    $timeDifference = -$timeDifference;
+                }
+                $time = self::splitSeconds( $timeDifference, $this->precision );
+                return $time . ' ' . $this->prefix;
+            break;
         }
-		$time = self::splitSeconds( $timeDifference, $this->precision );
-		return $time . ' ' . $this->prefix;
     } 
 
     /**
@@ -97,9 +105,10 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
     {
 	//	var_export( $value );
 	//	var_export( $timeDifference );
-   //	switch( $this->getTimeSettings() )
+   // 	switch( $settings['mode'] )
 		{
-	//		case null:
+		//	case 'gm':
+
 	//		default:
 			$timeSegments = array( 'secs', 'mins', 'hrs', 'days', 'wks', 'months', 'yrs' );
 			krsort( $timeSegments );
@@ -198,8 +207,8 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
      */
     public function autofil( $parameter )
     {
-		if( ! empty( $parameter[0] ) )
-        return setTimeSettings( $parameter[0] );
+		if( ! empty( $parameter ) )
+        return $this->setTimeSettings( $parameter );
 		
     } 
 	

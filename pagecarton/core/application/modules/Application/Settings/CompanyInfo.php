@@ -68,7 +68,7 @@ class Application_Settings_CompanyInfo extends Application_Settings_Abstract
 		$form->addFieldset( $fieldset );
 		
 		//	timezone
-/* 		$storage = $this->getObjectStorage( array( 'id' => 'timezones', 'device' => 'File', 'time_out' => 1640000, ) ); 
+ 		$storage = $this->getObjectStorage( array( 'id' => 'timezones', 'device' => 'File', 'time_out' => 1640000, ) ); 
 
 	//	if( ! $storage->retrieve() ) 
 		{
@@ -96,7 +96,7 @@ class Application_Settings_CompanyInfo extends Application_Settings_Abstract
 			$storage->store( $timezones );
 		}
 		$fieldset->addElement( array( 'name' => 'time_zone', 'label' => 'Time Zone', 'value' => @$settings['time_zone'], 'type' => 'Select' ), $storage->retrieve() );
- */		
+ 		
 		
 		//	Contact
 		$fieldset = new Ayoola_Form_Element;

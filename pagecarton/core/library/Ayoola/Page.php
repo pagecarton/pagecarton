@@ -239,7 +239,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     {
 		$page = $url ? : Ayoola_Application::getPresentUri();
 		$currentUrl = rtrim( Ayoola_Application::getPresentUri(), '/' );
-			//		var_export( Ayoola_Application::$mode );
+      //     var_export( $page );
 		switch( Ayoola_Application::$mode )
 		{
 			case 'profile_url':
@@ -366,6 +366,30 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			default:
 		//		var_export( $currentUrl );
 		//		var_export( Ayoola_Application::getRuntimeSettings( 'real_url' ) );
+			//		var_export( Ayoola_Application::$mode );
+			switch( $page )
+			{
+				case '/tools/classplayer':
+				case '/object':
+				case '/pc-admin':
+				case '/widgets':
+				case '/widget':
+		//		case true:
+					//	Do nothing.
+					//	 had to go through this route to process for 0.00
+			//		var_export( __LINE__ );
+					if( @$_REQUEST['url'] )
+                    {
+                        $page = $_REQUEST['url'];
+                        $editorMode = true;
+                        break;
+                    }
+				break;
+				default:
+      //      var_export( $currentUrl );
+				break;
+			}
+    //       var_export( $page );
 				
 			//	$currentUrl = rtrim( Ayoola_Application::getPresentUri(), '/' );
 				$sections = self::splitUrl( $page );

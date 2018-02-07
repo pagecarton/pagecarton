@@ -73,8 +73,8 @@ class Ayoola_Page_Layout_Editor extends Ayoola_Page_Layout_Abstract
 			if( $this->updateFile() ){ $this->setViewContent( '<p class="boxednews goodnews">Theme file saved successfully.</p>', true ); }	
 			
 				$this->setViewContent( '<p class="">
-				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/layout/' . $values['layout_name'] . '/template" class="pc-btn pc-btn-small">Edit Theme</a>
-				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a>
+				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/layout/' . $identifierData['layout_name'] . '/template" class="pc-btn pc-btn-small">Edit Theme</a>
+				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $identifierData['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a>
 
 				</p>' );
 /*

@@ -299,7 +299,7 @@ class Ayoola_Application
 			}
 			if( ! @$subDomain && @in_array( 'ssl', @$data['domain_settings']['domain_options'] ) && $protocol != 'https' )
 			{
-				header( 'Location: https://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
+				header( 'Location: https://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
 				exit();
 			}
 			if( ! @$subDomain && @strlen( $data['domain_settings']['enforced_destination'] ) > 3 )
@@ -312,7 +312,7 @@ class Ayoola_Application
 				{ 
 					if( strtolower( $_SERVER['HTTP_HOST'] ) !== strtolower( trim( $enforcedDestination ) ) )
 					{
-						header( 'Location: ' . $protocol . '://' . $enforcedDestination . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
+						header( 'Location: ' . $protocol . '://' . $enforcedDestination . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
 						exit();
 					}
 				}
@@ -521,7 +521,7 @@ class Ayoola_Application
 				elseif( ! empty( $tempWhere['domain_name'] ) )
 				{
 			//		header( 'HTTP/1.1 301 Moved Permanently' );
-					header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
+					header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
 				//	var_export( $data );
 					
 					exit( 'DOMAIN NOT IN USE' );
@@ -546,7 +546,7 @@ class Ayoola_Application
 		if( @is_array( $data['domain_settings']['domain_options'] ) && in_array( 'redirect', $data['domain_settings']['domain_options'] ) && ! @$_REQUEST['ignore_domain_redirect'] && ! @$_SESSION['ignore_domain_redirect'] )
 		{
 			header( 'HTTP/1.1 ' . $data['domain_settings']['redirect_code'] );
-			$toGo = $protocol . '://' . $data['domain_settings']['redirect_destination'] . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET );
+			$toGo = $protocol . '://' . $data['domain_settings']['redirect_destination'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET );
 			header( 'Location: ' . $toGo );
 		//	var_export( $data );
 			exit( 'REDIRECTING TO' );
@@ -1261,7 +1261,7 @@ class Ayoola_Application
 			{
 				$pageInfo['redirect_url'] = self::getUrlPrefix() . $pageInfo['redirect_url'];
 			}
-		//	var_export( $pageInfo );
+		//	var_export( $pageInfo );		    
 			
 			header( 'Location: ' . $pageInfo['redirect_url'] . '?pc_redirect_url=' . $uri . '&' . http_build_query( $_GET ) );
 			exit(); 

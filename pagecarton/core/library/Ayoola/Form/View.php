@@ -299,7 +299,8 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . @$formInfo['form_name'] ) );
 		$fieldset = new Ayoola_Form_Element;
-		$form->submitValue = $submitValue ;
+	//	var_export( $formInfo );
+		$form->submitValue = @$formInfo['button_value'] ? : $submitValue ;
 		$form->oneFieldSetAtATime = true;
 	//	$fieldsets[$key]->placeholderInPlaceOfLabel = false;       
 		$i = 0;
@@ -437,7 +438,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				case 'audio': 
 				case 'video': 
 				case 'image': 
-				//	$requirement = array( 'Base64Image' => array() );
+				//	$requirement = array( 'Base64Image' => array() ); 
 				case 'document': 
 					$type = 'Document'; 
 					$docSettings = Ayoola_Doc_Settings::getSettings( 'Documents' );

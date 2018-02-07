@@ -68,8 +68,8 @@ class PageCarton_MultiSite_List extends PageCarton_MultiSite_Abstract
 		(
 			array(
                     'Site' => array( 'field' => 'directory', 'value' =>  '<a style="font-size:smaller;" target="_blank" href="' . Ayoola_Page::getRootUrl() . '%FIELD%">' . Ayoola_Page::getRootUrl() . '%FIELD%</a>' ), 
+                    '  ' => array( 'field' => 'directory', 'value' =>  '<a style="font-size:smaller;" rel="shadowbox;" href="' . Ayoola_Page::getRootUrl() . '%FIELD%' . Ayoola_Application::getUrlPrefixController() .  '/pc-admin">Admin Panel</a>' ), 
                     ' ' => array( 'field' => 'directory', 'value' =>  '<a style="font-size:smaller;" rel="shadowbox;" href="' . Ayoola_Page::getRootUrl() . '%FIELD%' . Ayoola_Application::getUrlPrefixController() .  '/tools/classplayer/get/name/Application_Personalization">Personalize</a>' ), 
-
                     '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_MultiSite_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
 				)
 		);

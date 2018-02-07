@@ -58,6 +58,7 @@ class Application_Article_List extends Application_Article_ShowAll
 		$list->listTitle = self::getObjectTitle();
 	//	var_export( $this->getDbData() );
 		$data = $this->getDbData();
+		krsort( $data );
 	//	var_export( $each );
 		foreach( $data as $key => $each )
 		{

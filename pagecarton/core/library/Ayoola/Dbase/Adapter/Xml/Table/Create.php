@@ -55,7 +55,14 @@ class Ayoola_Dbase_Adapter_Xml_Table_Create extends Ayoola_Dbase_Adapter_Xml_Tab
 	//	if( empty( $dataTypes[$this->getTableName() . '_id'] ) ){ $dataTypes[$this->getTableName() . '_id'] = 'INT'; }
 	
 		//	CHANGE TO INPUTTEXT AS WORKAROUND FOR AMBIGUITY IN SUPPLEMENTARY TABLES.
-		if( empty( $dataTypes[$this->getTableName() . '_id'] ) ){ $dataTypes[$this->getTableName() . '_id'] = 'INPUTTEXT'; }
+		if( empty( $dataTypes[$this->getTableName() . '_id'] ) )
+		{ 
+			$dataTypes[$this->getTableName() . '_id'] = 'INPUTTEXT'; 
+		}
+		if( empty( $dataTypes['creation_time'] ) )  
+		{ 
+			$dataTypes['creation_time'] = 'INPUTTEXT'; 
+		}
 		
 		//	Refresh Xml Memory to start a new Document
 		require_once 'Ayoola/Xml.php';

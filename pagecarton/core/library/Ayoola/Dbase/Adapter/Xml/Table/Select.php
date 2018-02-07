@@ -101,13 +101,43 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				var_export( $files );
 				var_export( '<br />' );
 			}
- */			foreach( $files as $filename )
+ */			
+ 			if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
 			{
+				krsort( $files );
+
+ 		//		Ayoola_Page::v( $files );
+		//		 exit();
+	//			 $limitForNextFile = $options['limit'];
+			}
+ 			$totalRows = 0;
+			foreach( $files as $filename )
+			{
+				$innerOptions = $options;
+				if(  ! empty( $options['limit'] ) && $totalRows >= $options['limit'] )
+				{
+ 			//		Ayoola_Page::v( $totalRows );
+			//		 exit();
+					break;
+				}
+				else
+				{
+					$innerOptions['limit'] = $options['limit'] - $totalRows;
+				}
+				if( ! empty( $options['record_search_limit'] ) && $this->recordCount >= $options['record_search_limit'] )
+				{
+				//	Ayoola_Page::v( $this->recordCount );
+				//	exit();
+					break;
+				}
 				if( ! is_file( $filename ) ){ continue; }
 			//	var_export( $this->getMyFilename() );
 				$this->setXml();
 				$this->getXml()->load( $filename );
-				$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );
+				$rowsInThisFile = $this->doSelect( $fieldsToFetch, $where, $innerOptions );
+				$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $rowsInThisFile ) : $rows + $rowsInThisFile;
+				$totalRows = count( $rows );
+//				$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );
 		//	var_export( $rows );
 	//			var_export( count( $rows ) );
 	//			var_export( '<br />' );
@@ -181,7 +211,15 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//	var_export( $this->getRecords()->childNodes->length );
 		foreach( $this->getRecords()->childNodes as $eachRecord )
 		{
-			if( $eachRecord instanceof DOMText ){ continue; }
+			$this->recordCount = @$this->recordCount ? : 0;
+
+			if( ! empty( $options['record_search_limit'] ) && $this->recordCount >= $options['record_search_limit'] )
+			{
+			//	Ayoola_Page::v( $this->recordCount );
+			//	exit();
+				break;
+			}
+			$this->recordCount++;
 			$fields = array();		
 			$searchResultIsHere = false;
 			$rowId = self::getRecordRowId( $eachRecord );
@@ -331,6 +369,15 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			
 			//	If the filter wants to skip this record. It just need to switch the $fields to false;
 			$fields === false ? null : ( $rows[$rowId] = $fields );
+
+			if( ! empty( $options['limit'] ) && count( $rows ) >= $options['limit'] )
+			{
+				break;
+			}
+			else
+			{
+				$innerOptions['limit'] = $options['limit'] - $totalRows;
+			}
 			
 			//	
 		}

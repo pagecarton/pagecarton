@@ -83,17 +83,23 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		//	var_export( $parameters );
 		//	var_export( $content );
 		}
-		if( $this->getParameter( 'update_page_metadata' ) )
+		if( $this->getParameter( 'page_title' ) || $this->getParameter( 'page_description' )  )
 		{
 			$metaData = strip_tags( $content );
-			Ayoola_Page::$title = $this->getParameter( 'page_title' ) ? $metaData : Ayoola_Page::$title;
-			Ayoola_Page::$description = $this->getParameter( 'page_description' ) ? $metaData : Ayoola_Page::$description;
-	//		Ayoola_Page::$description = $userInfo['profile_description'];
-	//		Ayoola_Page::$thumbnail = $userInfo['display_picture'];
+		//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
+			if( $this->getParameter( 'page_title' ) )
+			{
+				$pageInfo['title'] = $metaData;
+			}
+			if( $this->getParameter( 'page_description' ) )
+			{
+				$pageInfo['description'] = $metaData;
+			}
+			Ayoola_Page::setCurrentPageInfo( $pageInfo );
 		}
 
 		//	Refreshes the url prefix just in case we have imported new site
-		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() )
+		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
 		{
 		//	$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), );
 		//	$replace = array( '"' . Ayoola_Application::getUrlPrefix(), "'". Ayoola_Application::getUrlPrefix(), );
@@ -209,7 +215,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 												CKEDITOR.config.toolbar = 
 															[
 														//		{ items: [ "Source", "-", "Save", "NewPage", "Preview", "Print", "-", "Templates" ] },
-																{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "-", "RemoveFormat" ] },
+																{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "-", "RemoveFormat" ] },
 //																{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
 																{ name: "paragraph", groups: [ "list", "indent", "blocks", "align" ], items: [ "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "Blockquote", "-", "CreateDiv", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "-" ] },
 																{ name: "links", items: [ "Link", "Unlink", "Anchor" ] },

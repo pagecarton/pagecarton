@@ -96,6 +96,7 @@ class Application_User_List extends Application_User_Abstract
 				'firstname' => null, 
 				'lastname' => null, 
 				'phone_number' => null, 
+				'Created On' => array( 'field' => 'creation_time', 'value' => '%FIELD%', 'filter' => 'Ayoola_Filter_Time', 'filter_autofill' => array( 'mode' => 'full' ), ), 
 	//			'username' => '<a rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>',
 			);
 		$optionalFields = array(
@@ -129,9 +130,9 @@ class Application_User_List extends Application_User_Abstract
 			$testData = array_shift( $data );
 			foreach( $optionalFields as $key => $each )
 			{
-				if( empty( $testData[$key] ) )
+				if( ! isset( $testData[$key] ) )
 				{
-		//			unset( $options[$key] );
+					unset( $options[$key] );
 				}
 			}
 

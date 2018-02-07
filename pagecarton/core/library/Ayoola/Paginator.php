@@ -513,11 +513,19 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					}
 					$value['value'] = @$value['value'] ? : $row[$field];
 			//		if( ! empty( $value['filter'] ) && $value['filter'] implements Ayoola_Filter_Interface )
-					if( ! empty( $value['filter'] ) )
+				//	if( ! Ayoola_Loader::loadClass( $options ) )
 					{
-						$value['filter'] = new $value['filter'];
+				//		return false;
+					}
+					if( ! empty( $value['filter'] ) && Ayoola_Loader::loadClass( $value['filter'] ) )
+					{
+						$filter = new $value['filter'];
+						if( ! empty( $value['filter_autofill'] ) )
+						{
+							$filter->autofil( $value['filter_autofill'] );
+						}
 					//	var_export( $row[$field] );
-						$row[$field] = $value['filter']->filter( $row[$field] );
+						$row[$field] = $filter->filter( $row[$field] );
 					//	var_export( $row[$field] );
 					}
 					$value = $value['value'];

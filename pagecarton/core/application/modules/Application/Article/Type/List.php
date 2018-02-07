@@ -55,9 +55,9 @@ class Application_Article_Type_List extends Application_Article_Type_TypeAbstrac
 		$list->createList
 		(  
 			array(
-				'post_type' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
-				' ' => array( 'field' => 'post_type', 'value' => '<a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Creator/?article_type=%KEY%">New %FIELD%</a>' ), 
-				'X' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'post_type' => '%FIELD% <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
+				' ' => array( 'field' => 'post_type', 'value' => '<a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Creator/?article_type=%KEY%">Create New %FIELD%</a>' ), 
+				'   ' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
 			)
 		);
 		//var_export( $list );

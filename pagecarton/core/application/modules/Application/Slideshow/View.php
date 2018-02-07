@@ -28,7 +28,7 @@ require_once 'Application/Slideshow/Abstract.php';
 class Application_Slideshow_View extends Application_Slideshow_Abstract
 {
 	
-    /**	
+    /**	  
      *
      * @var boolean
      */
@@ -96,6 +96,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 //				@$data['slideshow_images'][] = array( 'slideshow_image' => '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer?url=/img/abstract.jpg&max_width=' . $data['width'] . '&max_height=' . $data['height'] . '', 'image_description' => 'Duis est esse est voluptate consectetur sit dolor consequat tempor. ', 'image_title' => 'Ea sunt adipisicing reprehenderit nostrud aliqua amet culpa dolore sint..', 'image_link' => 'javascript:;' );  
 			}
 			$template = $this->getParameter( 'template_name' ) ? : 'NivoSlider';
+		//	var_export( $data );    
 			if( $template )
 			{
 				$options = new Application_Slideshow_Template;
@@ -154,12 +155,25 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			switch( @$data['slideshow_type'] )
 			{
 				case 'post':
-					$class = new Application_Article_ShowAll( array( 'category_name' => @$data['slideshow_category_name'], 'article_types' => @$data['slideshow_article_type'], 'no_of_post_to_show' => @$data['image_limit'], ) + $this->getParameter() );     
+					$parameters = array( 
+											'category_name' => @$data['slideshow_category_name'], 
+											'cover_photo_width' => @$data['width'], 
+											'cover_photo_height' => @$data['height'], 
+											'article_types' => @$data['slideshow_article_type'], 
+											'no_of_post_to_show' => @$data['image_limit'], 
+											) 
+											+ $this->getParameter();
+				//	var_export( $parameters );
+					$class = new Application_Article_ShowAll( $parameters );     
 				//	var_export( $class->_objectData );
 					$info = $class->_objectData;
+				//	var_export( $info );
 
-					$info = self::sortMultiDimensionalArray( $info, $this->getParameter( 'sort_column' ) ? : 'article_creation_date' );
-					krsort( $info );
+			//		$info = self::sortMultiDimensionalArray( $info, $this->getParameter( 'sort_column' ) ? : 'article_creation_date' );
+			//		var_export( $this->getParameter( 'sort_column' ) ? : 'article_creation_date' );
+			//		var_export( $info );
+			//		krsort( $info );
+			//		var_export( $info );
 					$i = 0;
 			//		var_export( array( 'category_name' => $data['slideshow_category_name'], 'article_types' => $data['slideshow_article_type'], 'no_of_post_to_show' => $data['image_limit'], ) );
 					foreach( $info as $key => $each )

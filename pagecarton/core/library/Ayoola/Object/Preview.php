@@ -63,7 +63,10 @@ class Ayoola_Object_Preview extends PageCarton_Widget
             if( ! empty( $_REQUEST['rebuild_widget_box'] ) )   
             {
             //    var_export( $_REQUEST );
-                $classHtml .= Ayoola_Abstract_Viewable::getViewableObjectRepresentation( $_REQUEST );
+             //   $classHtml .= Ayoola_Abstract_Viewable::getViewableObjectRepresentation( $_REQUEST );
+
+                //  using Ayoola_Abstract_Viewable is not allow us access the real class parameters
+                $classHtml .= $class::getViewableObjectRepresentation( $_REQUEST );
             }
             else
             {

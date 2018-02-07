@@ -27,6 +27,13 @@ require_once 'Application/Domain/Exception.php';
 
 class Application_Domain_Registration extends Application_Domain_Registration_Abstract
 {
+
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Domain Name Search';      
 	
     /**
      * 

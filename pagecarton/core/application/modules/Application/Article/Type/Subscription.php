@@ -27,6 +27,14 @@ require_once 'Application/Article/Abstract.php';
 
 class Application_Article_Type_Subscription extends Application_Article_Type_Abstract
 {
+
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Add item to cart';      
+
     /**
      * Using another layer of auth for this one
      *

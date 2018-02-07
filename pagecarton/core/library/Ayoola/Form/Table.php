@@ -33,7 +33,7 @@ class Ayoola_Form_Table extends Ayoola_Dbase_Table_Abstract_Xml
      *
      * @param int
      */
-    protected $_tableVersion = '0.11';   
+    protected $_tableVersion = '0.12';   
 
 	protected $_dataTypes = array
 	( 
@@ -43,6 +43,7 @@ class Ayoola_Form_Table extends Ayoola_Dbase_Table_Abstract_Xml
 		'form_success_message' => 'TEXTAREA',
 		'auth_level' => 'JSON', 
 		'email' => 'INPUTTEXT', 
+		'button_value' => 'INPUTTEXT', 
 		'group_names' => 'JSON', 
 		'group_descriptions' => 'JSON', 
 		'group_ids' => 'JSON', 

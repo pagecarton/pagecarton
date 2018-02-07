@@ -255,7 +255,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 
 				if( $childCategories = $table->select( null, array( 'parent_category' => $category ), array( 'x' ) ) )
 				{
-					$categories = $childCategories;
+			//		$categories = $childCategories;
 				}
 			//	var_export( $category );
 			//	var_export( $categories );
@@ -273,9 +273,17 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			foreach( $categories as $each )
 			{
 				$subCategories = $table->select( null, array( 'parent_category' => $each['category_name'] ) );   
+				if( ! empty( $subCategories ) && ! empty( $each['child_category_name'] ) && is_array( $each['child_category_name'] ) )
+				{
+			//		var_export( $each['child_category_name'] );
+					$subCategories2 = $table->select( null, array( 'category_name' => $each['child_category_name'] ) ); 
+					$subCategories += array_merge( $subCategories, $subCategories2 );
+				}
+			//	$subCategories = $table->select( null, array( 'child_category_name' => $each['category_name'] ) );   
 				$subMenuOptions = array();
 				foreach( $subCategories as $eachSub )
 				{
+
 					@$eachSub['category_url'] = $eachSub['category_url'] ? : @$menu['category_url'];
 					@$eachSub['url_integration_type'] = $eachSub['url_integration_type'] ? : @$menu['url_integration_type'];
 					$urlToUseForEach = Application_Article_Abstract::getPostUrl() . '/category/' . $eachSub['category_name'] . '/';
@@ -291,8 +299,8 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 						}
 						
 					}
-				//	@$eachSub['category_url'] = @$eachSub['category_url'] ? ( $eachSub['category_url'] . '?category=' . $eachSub['category_name'] ) : ( $eachSub['category_url'] ? : ( Application_Article_Abstract::getPostUrl() . '/category/' . $eachSub['category_name'] . '/' ) );
-					$subMenuOptions[] = array( 'option_name' => $eachSub['category_label'], 'rel' => '', 'url' => $urlToUseForEach, 'title' => $eachSub['category_description'], 'logged_in' => 1, 'logged_out' => 1, 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => 0, 'menu_id' => 0, 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ), ) + $eachSub ? : array();
+			//		var_export( $eachSub['category_url'] );  
+					$subMenuOptions[$eachSub['category_name']] = array( 'option_name' => $eachSub['category_label'], 'rel' => '', 'url' => $urlToUseForEach, 'title' => $eachSub['category_description'], 'logged_in' => 1, 'logged_out' => 1, 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => 0, 'menu_id' => 0, 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ), ) + $eachSub ? : array();
 				}
 				$urlToUseForEach = Application_Article_Abstract::getPostUrl() . '/category/' . $each['category_name'] . '/';
 				if( $menu['category_url'] )

@@ -44,6 +44,7 @@ class Ayoola_Page_Editor extends Ayoola_Page_Abstract
 			}
 			if( ! $data = self::getIdentifierData() )
 			{ 
+		//		$class = new Ayoola_Page_Crea
 				return false; 
 			}
 	 //		var_export( $data ); 

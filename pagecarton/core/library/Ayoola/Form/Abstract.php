@@ -91,6 +91,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 
 		$fieldset->addElement( array( 'name' => 'form_description', 'placeholder' => 'Enter a short description explaining the purpose of this form. This information will be displayed to users on top of the form. ', 'type' => 'TextArea', 'value' => @$values['form_description'] ) );
 		$fieldset->addElement( array( 'name' => 'form_success_message', 'placeholder' => 'Enter a short success message. This information will be displayed to users when the form is submitted. ', 'type' => 'TextArea', 'value' => @$values['form_success_message'] ) );
+		$fieldset->addElement( array( 'name' => 'button_value', 'placeholder' => 'e.g. Submit', 'type' => 'InputText', 'value' => @$values['button_value'] ) );
 		
 		$options =  array( 
 							'send_mail' => 'Send me an e-mail of the form data when someone fills the form.', 
@@ -119,7 +120,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addLegend( $legend );
 	//	$fieldset->addFilters( 'StripTags::Trim' );
 		$form->addFieldset( $fieldset );   
-		if( @$values['email'] ||  is_array( $this->getGlobalValue( 'form_options' ) ) && in_array( 'send_mail', $this->getGlobalValue( 'form_options' ) ) )
+	//	if( @$values['email'] ||  is_array( $this->getGlobalValue( 'form_options' ) ) && in_array( 'send_mail', $this->getGlobalValue( 'form_options' ) ) )
 		{ 
 			$fieldset = new Ayoola_Form_Element;
 			$fieldset->addLegend( 'Enter the e-mail to send the form data to:' );

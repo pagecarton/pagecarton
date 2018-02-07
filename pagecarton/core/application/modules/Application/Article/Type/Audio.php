@@ -66,16 +66,33 @@ class Application_Article_Type_Audio extends Application_Article_Type_Abstract
 		$attributes = 'controls ';
 		if( ! empty( $_REQUEST['autoplay'] ) || $this->getParameter( 'autoplay' ) )
 		{
-			$attributes .= 'autoplay ';
+			$attributes .= ' autoplay ';
 		}
-		if( ! empty( $_REQUEST['autoplay_next'] ) || $this->getParameter( 'autoplay_next' ) )
+//		if( ! empty( $_REQUEST['autoplay_next'] ) || $this->getParameter( 'autoplay_next' ) )
 		{
+			$query = "";
+			if( empty( $_REQUEST['autoplay'] ) )
+			{
+				$query .= "&autoplay=1";
+			}
+			if( empty( $_REQUEST['autoplay_next_done'] ) )
+			{
+				$query .= "&autoplay_next_done=1";
+			}
 			
-			$attributes .= 'onended="var xx = document.getElementsByClassName( \'pc_paginator_next_page_button\' )[0].href; location.href= xx + location.search + \'&autoplay_next_done=1&autoplay=1\'"';
+			$attributes .= 'onended="var xx = document.getElementsByClassName( \'pc_paginator_next_page_button\' )[0].href; location.href= xx + ( location.search ? location.search : \'?\' ) + \'' . $query .'\'"';
 		}
-		$audio = '	<audio preload="none" style="width:100%;" ' . $attributes . ' src="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Audio_Play/?article_url=' . $data['article_url'] . '&auto_download=1">
+		$tagName = '' . __CLASS__ . '_audio';
+		$audio = '	<audio class="' . $tagName . '" preload="none" style="width:100%;" ' . $attributes . ' src="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Audio_Play/?article_url=' . $data['article_url'] . '&auto_download=1">
 						
 					</audio>';
+		if( ! empty( $_REQUEST['autoplay'] ) )
+		{
+			Application_Javascript::addCode( '
+												var a = document.getElementsByClassName( \'' . $tagName . '\' )[0];
+												a.play();  
+			' );
+		}
 		
 		$this->setViewContent( $audio );
 

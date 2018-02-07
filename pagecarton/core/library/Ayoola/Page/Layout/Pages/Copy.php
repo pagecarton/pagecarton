@@ -57,6 +57,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
         {
             $pageThemeFileUrl = '/index';
         }
+        $fPaths = array();
     //    $themeName = strtolower( $data['layout_name'] );
         $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
         $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
