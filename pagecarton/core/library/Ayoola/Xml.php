@@ -692,7 +692,44 @@ class Ayoola_Xml extends DOMDocument
         }
         return $result;
     } 
-		
+
+	public function exportHTML( $node )
+	{
+			$voids = array( 'area',
+					'base',
+					'br',
+					'col',
+					'colgroup',
+					'command',
+					'embed',
+					'hr',
+					'img',
+					'input',
+					'keygen',
+					'link',
+					'meta',
+					'param',
+					'source',
+					'track',
+					'wbr' );
+
+			// Every empty node. There is no reason to match nodes with content inside.
+			$query = '//*[not(node())]';
+			$nodes = new DOMXPath($this);
+			$nodes = $nodes->query($query);
+
+			foreach ($nodes as $n) {
+					if (! in_array($n->nodeName, $voids)) {
+							// If it is not a void/empty tag,
+							// we need to leave the tag open.
+							$n->appendChild(new DOMComment('NOT_VOID'));
+					}
+			}
+
+			// Let's remove the placeholder.
+			return str_replace('<!--NOT_VOID-->', '', $this->saveXML( $node ));
+	}	
+
     /**
      * Returns the xml as a well formatted text
      * and that can be displayed in the browser

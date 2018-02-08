@@ -553,7 +553,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$searchFor = array();
 			$replaceWith = array();
 
-			//	can we deal with the duplicate contents here?
+			//	can we deal with the duplicate contents here?  
 			if( in_array( self::hashSectionName( $each ), $danglingPlaceholders ) )
 			{
 				continue;
@@ -716,10 +716,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//			var_export( $eachObject['object_name'] );
 		//			var_export( $eachObject['editable'] );
 		//			var_export( $eachObject['code'] );
-			//		if( $values[$numberedSectionName] === 'Ayoola_Page_Editor_Text' && empty( $eachObject['editable'] ) && empty( $eachObject['code'] ) && ! empty( $values[$numberedSectionName . '_template_defaults']['editable'] ) )
+					if( $values[$numberedSectionName] === 'Ayoola_Page_Editor_Text' && empty( $eachObject['editable'] ) && empty( $eachObject['code'] ) && ! empty( $values[$numberedSectionName . '_template_defaults'] ) )
 					{ 
-					//	$eachObject['editable'] = $values[$numberedSectionName . '_template_defaults']['editable'];
-			//			var_export( $eachObject['editable'] );
+						if( is_string( $values[$numberedSectionName . '_template_defaults'] ) )
+						{
+						$values[$numberedSectionName . '_template_defaults'] = array( 'editable' => $values[$numberedSectionName . '_template_defaults'] );
+						}
+				//		var_export( $eachObject['editable'] );
 					} 
 /*					var_export( $numberedSectionName );  
 					var_export( $values[$numberedSectionName] );  
@@ -760,8 +763,14 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					//	now allowing autosave mode so that themes pages could be generated on creation.
 					if( ! $this->isSaveMode() || $this->isAutoSaveMode() )
 					{
+				//		var_export( $parameters );
+					//	var_export( $sectionalValues[$numberedSectionName . '_template_defaults']  );
+				//		var_export( $numberedSectionName . '_template_defaults'  );
+	//					exit();
 
 						$parameters = ( is_array( $parameters ) ? $parameters : array() ) + ( is_array( $sectionalValues[$numberedSectionName . '_template_defaults'] ) ? $sectionalValues[$numberedSectionName . '_template_defaults'] : array() );
+				//		var_export( $parameters );
+				//		exit();
 					}
 					$eachObject = array_merge( $eachObject, $parameters );
 

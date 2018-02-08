@@ -86,7 +86,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$this->setXml();
 			$this->getXml()->load( $options['filename'] );
 			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );
-		//	var_export( $rows );
+	//		PageCarton_Widget::v( $rows );
 		}
 		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE || $this->getAccessibility() == self::SCOPE_PUBLIC )
 		{
@@ -102,14 +102,16 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				var_export( '<br />' );
 			}
  */			
+			sort( $files );
  			if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
 			{
-				krsort( $files );
+			//	krsort( $files );
 
  		//		Ayoola_Page::v( $files );
 		//		 exit();
 	//			 $limitForNextFile = $options['limit'];
 			}
+		//	PageCarton_Widget::v( $files );
  			$totalRows = 0;
 			foreach( $files as $filename )
 			{
@@ -120,7 +122,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			//		 exit();
 					break;
 				}
-				else
+				elseif( ! empty( $options['limit'] ) )
 				{
 					$innerOptions['limit'] = $options['limit'] - $totalRows;
 				}
@@ -131,10 +133,15 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 					break;
 				}
 				if( ! is_file( $filename ) ){ continue; }
+ 		//			Ayoola_Page::v( $filename );
 			//	var_export( $this->getMyFilename() );
 				$this->setXml();
 				$this->getXml()->load( $filename );
 				$rowsInThisFile = $this->doSelect( $fieldsToFetch, $where, $innerOptions );
+ 			//		Ayoola_Page::v( $filename );
+ 			//		Ayoola_Page::v( $innerOptions );
+ 			//		Ayoola_Page::v( count( $rowsInThisFile ) );
+ 			//		Ayoola_Page::v( "\r\n" );
 				$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $rowsInThisFile ) : $rows + $rowsInThisFile;
 				$totalRows = count( $rows );
 //				$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );

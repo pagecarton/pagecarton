@@ -109,22 +109,21 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 						$title = null;
 						foreach( $each->childNodes as $childKey => $eachChild )
 						{
+							if( strtolower( $eachChild->tagName ) === 'img' )
+							{
+								continue 2;
+							}
 							if( ! $eachChild->nodeValue )
 							{
 								$eachChild->nodeValue = " ";
 							}
-							$title .= $each->ownerDocument->saveXML( $eachChild ) ? : $eachChild->nodeValue;
+							$title .= $each->ownerDocument->exportHtml( $eachChild ) ? : $eachChild->nodeValue;
 		//					var_export( $title );
 						}
 					//	var_export( $title );
 					//	$title = implode( array_map( array( $each->ownerDocument,"saveXML" ), iterator_to_array( $each->childNodes ) ) );
 					//	$title = htmlspecialchars( $title );
 					//		var_export( $title );
-					}
-					elseif( ! trim( $title ) )
-					{
-					///	var_export( $innerHtml );
-						continue;
 					}
 					$url = $each->getAttribute( 'href' );
 				//	var_export( $url );
@@ -137,7 +136,17 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 					//	change links with /page.html to /page
 					$url = self::themePageToUrl( $url, $data['layout_name'] );
 				//		var_export( $url );
-					$title = str_ireplace( array( '<p>', '</p>' ), '', $title );
+					$title = str_ireplace( array( '<p>', '</p>', "&nbsp;", '' ), '', $title );
+					$titleX = htmlentities($title, null, 'utf-8');
+					$titleX = str_replace("&nbsp;", "", $titleX);
+					$titleX = html_entity_decode($titleX);
+		//			$title = preg_replace( '|^[^a-Z0-9]|', '', $title );
+					if( ! trim( $titleX ) )
+					{
+					///	var_export( $innerHtml );
+						continue;
+					}
+				//	var_export( $title );
 					$linkValue = array( 'title' => $title, 'url' => $url, 'node' => $each );
 					$key = md5( serialize( $linkValue ) );
 					$linksData[] = $linkValue;
@@ -155,6 +164,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			if( $linksData )
 			{
 				$this->setViewContent( $form->view(), true ); 
+				$this->setViewContent( '<div class="pc-notify-info">Please note that this tool is still experimental. </div>' ); 
 			}
 			else
 			{
@@ -207,10 +217,10 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 	//		var_export( $contentArray );
 			foreach( $htmlContent as $contentKey => $eachContent )
 			{
-            	$doc = str_ireplace( array( '<body>', '</body>', '<p->', '</p->' ), '', $xml[$contentKey]->saveXML( $xml[$contentKey]->documentElement->firstChild ) );
+            	$doc = str_ireplace( array( '<body>', '</body>', '<p->', '</p->' ), '', $xml[$contentKey]->exportHTML( $xml[$contentKey]->documentElement->firstChild ) );
 				
 		//		var_export( $doc );
-		//		var_export( $contentArray[$contentKey] );
+			//	var_export( $contentArray[$contentKey] );
 				$contentArray[$contentKey] = $doc;
 			//	var_export( $contentArray[$contentKey] );
 		//	var_export( $contentArray[$contentKey] );
