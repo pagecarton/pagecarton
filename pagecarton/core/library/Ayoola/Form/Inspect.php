@@ -86,7 +86,10 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 				'
 			); 
 			$formData = $table->select( null, array( 'form_name' => $data['form_name'] ), array( 'result_filter_function' => $sortFunction2 ) );
-		//	var_export( $formData[0] );
+			$formData = self::sortMultiDimensionalArray( $formData, 'creation_time' );
+			
+
+		//	var_export( $formData );
 			krsort( $formData );
 			$list->setData( $formData );
 			$list->setListOptions( 
