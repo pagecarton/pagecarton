@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Thursday 8th of February 2018 01:43:18 AM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Thursday 8th of February 2018 02:51:47 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -72,7 +72,7 @@ $_00e45ea75c109ac55a184825bbb1f576 = new Ayoola_Page_Editor_Text( array (
 </div>
 </div>
 ',
-  'url_prefix' => '/x/index.php',
+  'url_prefix' => '/x',
   'markup_template_object_name' => 'Application_Info',
   'advanced_parameter_value' => 
   array (
@@ -152,8 +152,8 @@ $_df0c168bb07449442fcafe5b945a3470 = new Ayoola_Page_Editor_Text( array (
         <div class="clearfix"> </div>
     </div>
 </section>',
-  'url_prefix' => '/x/index.php',
-  'markup_template_object_name' => '',
+  'url_prefix' => '/x',
+  'markup_template_object_name' => 'Application_Info',
   'advanced_parameter_value' => 
   array (
     0 => 'Application_Info',
@@ -176,7 +176,7 @@ $_d71f65ba79bac0155c2faf1c4ee1ec95 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<style>
 .logo a h1 {
     color: transparent;
-    background-image: url("/x/index.php/img/logo.png");
+    background-image: url("/x/img/logo.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -189,7 +189,7 @@ $_d71f65ba79bac0155c2faf1c4ee1ec95 = new Ayoola_Page_Editor_Text( array (
 }
 
 </style>',
-  'url_prefix' => '/x/index.php',
+  'url_prefix' => '/x',
   'markup_template_object_name' => '',
   'advanced_parameter_value' => 
   array (
@@ -234,7 +234,7 @@ $_d3d34002a931198d7c47042084a9ba9f = null;
 								
 $_eb45f2ea98c8b1703d96c7f4a5981f2a = new Ayoola_Page_Editor_Text( array (
   'editable' => 'Contact Messages',
-  'url_prefix' => '/x/index.php',
+  'url_prefix' => '/x',
   'markup_template_object_name' => '',
   'advanced_parameter_value' => 
   array (
@@ -278,7 +278,7 @@ $_f4fb3c384da2bcf2f2471d74bb843c8e = null;
 								
 $_83ccb2a5073fbe7f33ecbff23428e9c5 = new Ayoola_Page_Editor_Text( array (
   'editable' => 'Logo',
-  'url_prefix' => '/x/index.php',
+  'url_prefix' => '/x',
   'markup_template_object_name' => '',
   'advanced_parameter_value' => 
   array (
@@ -324,7 +324,7 @@ $_4a0fa986885edbc3f15e675176feba7c = null;
 								
 $_c7e6e423b814c5da0a3a4b87a76d823b = new Ayoola_Page_Editor_Text( array (
   'editable' => 'Favicon',
-  'url_prefix' => '/x/index.php',
+  'url_prefix' => '/x',
   'markup_template_object_name' => '',
   'advanced_parameter_value' => 
   array (
@@ -370,7 +370,7 @@ $_f96df91e49680686e54e25ca89464c0d = null;
 								
 $_4bca9db1f90962ceede8d9da4ef499c4 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<section data-pc-section-created="1" id="footer"><p>© 2018 <a href="http://www.PageCarton.com">PageCarton</a> CMS. All Rights Reserved | Theme by <a href="https://w3layouts.com/" target="_blank">w3layouts</a></p></section>',
-  'url_prefix' => '/x/index.php',
+  'url_prefix' => '/x',
   'markup_template_object_name' => '',
   'advanced_parameter_value' => 
   array (

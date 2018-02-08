@@ -159,7 +159,7 @@ ayoola.spotLight =
 	//	alert( changeElementId );
 		element.innerHTML = '<div style="opacity:0.8; display:none;" title="" class="title_bar">\
 		<div class="pc_container">\
-		  <span  class="pc_content_title" style=\'max-width:50%; overflow:hidden;background-image:url("' + ayoola.pcPathPrefix + '/loading.gif?y"); width: 50px;height: 20px;display: inline-block;background-size: cover;\'></span>\
+		  <span  class="pc_content_title" style=\'display: inline-block;\'></span>\
 		  <span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode.parentNode.parentNode ); ayoola.xmlHttp.refreshElement( \'' + changeElementId + '\' );"> x </span>\
 		  <a style="display:none;" class="title_button" name="" href="javascript:;" title="Click to show or hide advanced settings" onclick="var b = this.parentNode.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'\'; } this.nextElementSibling.style.display = \'\';this.style.display = \'none\';"> &square; </a>  \
 		  <a class="title_button" name="" href="javascript:;" title="Minimize or open the body of this object" onclick="var b = this.parentNode.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'none\'; } this.parentNode.parentNode.style.display = \'\'; this.previousElementSibling.style.display = \'\';this.style.display = \'none\';"> _ </a>  \
