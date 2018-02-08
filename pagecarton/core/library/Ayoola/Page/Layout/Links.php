@@ -141,6 +141,11 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 					$titleX = str_replace("&nbsp;", "", $titleX);
 					$titleX = html_entity_decode($titleX);
 		//			$title = preg_replace( '|^[^a-Z0-9]|', '', $title );
+					if( stripos( $titleX, '<img' ) !== false )
+					{
+					///	var_export( $innerHtml );
+						continue;
+					}
 					if( ! trim( $titleX ) )
 					{
 					///	var_export( $innerHtml );

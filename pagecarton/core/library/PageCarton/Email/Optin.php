@@ -20,5 +20,5 @@ class PageCarton_Email_OptIn extends Application_User_UserEmail_Creator
 {
 	
 
-	// END OF CLASS      
+	// END OF CLASS         
 }

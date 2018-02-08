@@ -129,10 +129,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditorAdvancedSettings( $object )
+    public static function getHTMLForLayoutEditorAdvancedSettings( & $object )
 	{
 		$html = '<select onchange="" class="" name="markup_template_object_name" style="width:100%;" >';  
-		$html .= '<option value="" >Widgets</option>';  
+		$html .= '<option value="" >Embed Widgets</option>';  
 
 		foreach( Ayoola_Object_Embed::getWidgets() as $key => $value )
 		{
@@ -181,6 +181,44 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				$html .= '' . $data . '';  
 				$html .= '</textarea>';  
 			}
+		}
+		if( ! empty( $object['phrase_to_replace_with'] ) &&  ! empty( $object['phrase_to_replace'] ) )
+		{
+			$object['editable'] = str_replace( $object['phrase_to_replace'], $object['phrase_to_replace_with'], $object['editable'] );
+		//	$object['phrase_to_replace'] = $object['phrase_to_replace_with'];
+		}
+		preg_match_all( '|\>([a-zA-Z 0-9-_,\'".\t\r\n\(\)\+\@]+)\<|', $object['editable'], $matches );
+	//	var_export( $matches[1] );
+		$html .= '<select data-pc-return-focus-to="phrase_to_replace_with" onchange="" class="" name="phrase_to_replace" style="width:100%;" >';  
+		$html .= '<option value="" >Replace Words & Phrases</option>';  
+
+		foreach( $matches[1] as $key => $value )
+		{
+			if( ! trim( $value ) )
+			{
+				continue;
+			}
+			$html .=  '<option value="' . $value . '"';   
+			if( @$object['phrase_to_replace'] == $value )
+			{ 
+				$present = true;
+				$html .= ' selected = selected '; 
+			}
+			$html .=  '>' . $value . '</option>';  
+		}
+		if( empty( $present ) && ! empty( $object['phrase_to_replace'] ) )
+		{
+		//	$html .= '<option value="' . $object['phrase_to_replace'] . '" selected = selected>' . $object['phrase_to_replace'] . '</option> '; 
+		}
+		$html .= '</select>'; 
+		if( ! empty( $object['phrase_to_replace_with'] ) )
+		{
+		//	$object['editable'] = str_replace( $object['phrase_to_replace'], $object['phrase_to_replace_with'], $object['editable'] );
+		}
+		elseif( ! empty( $object['phrase_to_replace'] ) )
+		{
+		//	var_export( $object );
+			$html .= '<textarea class="phrase_to_replace_with" placeholder="' . htmlentities( $object['phrase_to_replace'] ) . '" name="phrase_to_replace_with">' . $object['phrase_to_replace'] . '</textarea> '; 
 		}
 		return $html;
 	}
@@ -261,7 +299,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];    
 		@$object['option'] = $object['option'] ? : $object['view_option'];
-		if( @$object['url_prefix'] !== Ayoola_Application::getUrlPrefix() )
+		if( @$object['url_prefix'] !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
 		{
 			$search = array( '"' . $object['url_prefix'], "'" . $object['url_prefix'], '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), );
 			$replace = array( '"', "'", '"', "'", );

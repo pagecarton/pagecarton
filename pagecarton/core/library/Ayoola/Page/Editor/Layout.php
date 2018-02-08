@@ -1164,6 +1164,17 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						if( ayoola.xmlHttp.isReady( ajax ) )
 						{	
 							pc_makeInnerSettingsAutoRefresh();
+			//				alert( target.getAttribute( "data-pc-return-focus-to" ) );
+					//		if( target.getAttribute( "data-pc-return-focus-to" ) )
+							{
+						//		var ed = target.parentNode.getElementsByClassName( target.getAttribute( "data-pc-return-focus-to" ) )[0];
+						//		alert( ed );
+						//		if( ed && ed.focus )
+								{
+							//		ed.focus();
+								}
+							}
+
 						}		
 					}	
 

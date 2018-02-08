@@ -1783,6 +1783,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$categories['General Site Categories'] = $filter->filter( $categories['General Site Categories'] );
 		}
+	//	var_export( $articleSettings );
  		$addCategoryLink = ( '<a rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Add new Category" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Access_AccessInformation_Editor?pc_profile_info_to_edit=post_categories">My categories</a>' );     
 		if( self::hasPriviledge() )
 		{
