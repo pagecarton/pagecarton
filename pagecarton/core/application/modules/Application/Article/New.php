@@ -42,7 +42,7 @@ class Application_Article_New extends Application_Article_Abstract
     {
 		try
 		{ 
-			$table = new Application_Article_Type();
+			$table = Application_Article_Type::getInstance();
 			if( $postTypeInfo = $table->selectOne( null, array( 'post_type_id' => $postType ) ) )
 			{
 				return $postTypeInfo;

@@ -128,7 +128,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		$checkoutInfo = array();
 		if( ! $api = self::getApi( $values['checkoutoption_name'] ) )
 		{
-			$table = new Application_Subscription_Checkout_CheckoutOption();
+			$table = Application_Subscription_Checkout_CheckoutOption::getInstance();
 			$checkoutInfo = $table->selectOne( null, array( 'checkoutoption_name' => $values['checkoutoption_name'] ) );
 			
 			switch( $checkoutInfo['checkout_type'] )
@@ -179,7 +179,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 	public static function getApi( $checkoutOptionName )
     {
 		//if( ! $values = $this->getForm()->getValues() ){ return false; }
-		$table = new Application_Subscription_Checkout_CheckoutOption();
+		$table = Application_Subscription_Checkout_CheckoutOption::getInstance();
 		$data = $table->selectOne( null, array( 'checkoutoption_name' => $checkoutOptionName ) );
 	//	var_export( $data );
 		$className = __CLASS__ . '_' . $data['checkoutoption_name'];

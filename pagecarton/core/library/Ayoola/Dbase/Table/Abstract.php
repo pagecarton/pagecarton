@@ -75,16 +75,31 @@ abstract class Ayoola_Dbase_Table_Abstract implements Ayoola_Dbase_Table_Interfa
     {		
 		if( ! is_null( $database ) ){ $this->setDatabase( $database ); }
     }
+
+    /**
+     * 
+     *
+     * @param __CLASS__
+     */
+    protected static $_instance;
 	
     /**
-     * Gets a singleton instance
+     * Get the table info
      *
-     * @return self
+     * @return array
      */
-    public function getInstance()
+    public static function getInstance()
     {
-		return new static;
-    } 
+        $class = get_called_class();
+     //   var_export( get_called_class() );
+        if( ! empty( static::$_instance[$class] ) )
+        {
+          return static::$_instance[$class];
+        }
+
+        static::$_instance[$class] = new static;
+        return static::$_instance[$class];  
+    }
 	
     /**
      * Gets a _database property 

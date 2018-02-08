@@ -352,17 +352,40 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     static public function getFiles( $directory, array $options = null )
     {
+		$keyZ = md5( __METHOD__ . serialize( func_get_args() ) . 'fff=-' );
+		$storageInfo = array( 'id' => $keyZ, 'device' => 'File', 'time_out' => 10000, );
+		$storage = static::getObjectStorage( $storageInfo );
+		
+		if( empty( $options['no_cache'] ) )
+		{
+			if( ! is_null( static::$_properties[__METHOD__][$keyZ] ) )
+			{
+				return static::$_properties[__METHOD__][$keyZ];
+			}
+			if( $storage->retrieve() !== false )
+			{
+				//	dont know if this won't cause serious side effects'
+		//		return $storage->retrieve();
+			}
+		}
+	//		var_export( $storage->retrieve() );
+	//	var_export( $directory );
+		
+		$storage->store( array() );		
+		static::$_properties[__METHOD__][$keyZ] = array();
+
+	//	var_export( get_called_class() );
 		$files = array();    
 	//	var_export( $directory );
 		if ( ! is_dir( $directory ) ) 
 		{
 		//	var_export( $directory );
-			return false;
+			return $files;
 		//	throw new Ayoola_Doc_Exception( 'Invalid Directory - ' . $directory );   
 		}
 		if ( ! ( $handle = opendir( $directory ) ) ) 
 		{
-			return false;
+			return $files;
 //			throw new Ayoola_Doc_Exception( 'Directory cannot be opened  for reading - ' . $directory );
 		}
 		while ( ( $filename = readdir( $handle ) ) !== false ) 
@@ -459,6 +482,11 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 	//	( $files );
 		$files = array_unique( $files );
 	//	self::v( $files );
+		if( empty( $options['no_cache'] ) )
+		{
+			$storage->store( $files );		
+		}
+		static::$_properties[__METHOD__][$keyZ] = $files;
 		return $files;
     } 
 	
@@ -573,12 +601,14 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		$dotfiles = glob($path . '.*', GLOB_MARK);
 		$files = glob($path . '*', GLOB_MARK);
 		$files = array_merge($files, $dotfiles);
+	//	var_export( '' . count( $files ) . '' );
 		foreach ($files as $file) {
 			if (basename($file) == '.' || basename($file) == '..') {
 				continue;
 			} else if (is_dir($file)) {
 				self::deleteDirectoryPlusContent($file);
 			} else {
+			//	var_export( $file );
 				unlink($file);
 			}
 		}

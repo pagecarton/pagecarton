@@ -137,8 +137,16 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		foreach( Ayoola_Object_Embed::getWidgets() as $key => $value )
 		{
 			$html .=  '<option value="' . $key . '"';   
-			if( @$object['markup_template_object_name'] == $key ){ $html .= ' selected = selected '; }
+			if( @$object['markup_template_object_name'] == $key )
+			{ 
+				$present = true;
+				$html .= ' selected = selected '; 
+			}
 			$html .=  '>' . $value . '</option>';  
+		}
+		if( empty( $present ) && ! empty( $object['markup_template_object_name'] ) )
+		{
+			$html .= '<option value="' . $object['markup_template_object_name'] . '" selected = selected>' . $object['markup_template_object_name'] . '</option> '; 
 		}
 		$html .= '</select>'; 
 

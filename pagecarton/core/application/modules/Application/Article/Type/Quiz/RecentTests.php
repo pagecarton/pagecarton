@@ -50,7 +50,7 @@ class Application_Article_Type_Quiz_RecentTests extends Application_Article_Type
 /* 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			if( ! self::isOwner( $data['user_id'] ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ) ){ return false; }
  */			
-			$table = new Application_Article_Type_Quiz_Table();
+			$table = Application_Article_Type_Quiz_Table::getInstance();
 			
 			//	Filter the result to save time
 			$sortFunction2 = create_function

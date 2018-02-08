@@ -64,7 +64,7 @@ class Application_Article_Type_Quiz_ScoreBoard extends Application_Article_Type_
 						$values = false;
 						return false;
 					}
-					$table = new Ayoola_Access_LocalUser();
+					$table = Ayoola_Access_LocalUser::getInstance();
 					if( $info = $table->selectOne( null, array( "username" => strtolower( $values["username"] ) ) ) )
 			//		if( $info = $table->selectOne( null, array( "username" => strtolower( $values["username"] ) ), array( "disable_cache" => true ) ) )
 					{ 
@@ -81,7 +81,7 @@ class Application_Article_Type_Quiz_ScoreBoard extends Application_Article_Type_
 					$values = ( $values ? : array() ) + ( ( $info ) ? : array() );
 				'
 			); 
-			$table = new Application_Article_Type_Quiz_Table();
+			$table = Application_Article_Type_Quiz_Table::getInstance();
 			
 			$scores = array();
 			if( Ayoola_Application::getUserInfo( 'username' ) )

@@ -546,14 +546,24 @@
   background-color: #ff99cc;
 }
 
+.pc_container {
+    max-width: 1170px;
+}
+.pc_container {
+/*    padding-right: 15px;
+    padding-left: 15px;
+*/    margin-right: auto;
+    margin-left: auto;
+}
+
 /* Spotlight Object
  */
 .spotLight 
 {
 	top: 50%;
 	left: 50%;
-	max-width: 90%;
-	max-height: 90%;
+	max-width: 100%;
+	max-height: 94%;
 	position: fixed;
 	overflow: visible;
 	z-index: 200001;

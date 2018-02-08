@@ -52,7 +52,7 @@ class Application_Subscription_Checkout_DirectDeposit_Withdraw extends Applicati
 		do
 		{
 			//	Bank Accounts
-			$table = new Application_User_UserBankAccount_List();
+			$table = Application_User_UserBankAccount_List::getInstance();
 			$accounts = $table->getDbData();
 			$storage = new Ayoola_Storage();
 			$storage->storageNamespace = self::$withdrawalNamespace;

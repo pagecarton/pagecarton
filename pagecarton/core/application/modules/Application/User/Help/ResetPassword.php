@@ -73,7 +73,7 @@ class Application_User_Help_ResetPassword extends Application_User_Help_ChangePa
 			}
 			
 			//	First seek in the local flatfile
-			$table = new Ayoola_Access_LocalUser();
+			$table = Ayoola_Access_LocalUser::getInstance();
 			if( $wholeInfo = $table->selectOne( null, $identifier ) )
 			{
 				if( $wholeInfo['user_information'] )  

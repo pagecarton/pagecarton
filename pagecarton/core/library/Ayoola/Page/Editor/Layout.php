@@ -467,7 +467,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		{  
 			//	We have a page-specific themefile
 			// 	we use it to build the default content
-			$table = new Ayoola_Page_PageLayout();
+			$table = Ayoola_Page_PageLayout::getInstance();
 			$whereToGetPlaceholders = file_get_contents( $pageThemeFile );
 		//	var_export( $whereToGetPlaceholders );
 			$themeInfo = $table->selectOne( null, array( 'layout_name' => $theme ) );
@@ -1015,12 +1015,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		{
 			return self::$_objectInfo[$object_name];  
 		}
-		$table = new Ayoola_Object_Table_ViewableObject();
+		$table = Ayoola_Object_Table_ViewableObject::getInstance();
 		if( ! self::$_objectInfo[$object_name] = $table->selectOne( null, array( 'object_name' => $object_name ) ) )
 		{
 			self::$_objectInfo[$object_name] = $table->selectOne( null, array( 'class_name' => $object_name ) );
 		}
-		//var_export( $data );
+	//	var_export( $table );
 		return self::$_objectInfo[$object_name];
 	} 
 	
@@ -1053,7 +1053,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$page['layout_name'] = $page['layout_name'] ? : self::getDefaultLayout();
 			
 			//	List URL so it can be easy to change editing URL
-			$option = new Ayoola_Page_Page;
+			$option = Ayoola_Page_Page::getInstance();
 			$option = $option->select();
 		//	var_export( $option );
 			$option = self::sortMultiDimensionalArray( $option, 'url' );
@@ -1135,6 +1135,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					var target = ayoola.events.getTarget( e );
 					var a = ayoola.div.getParentWithClass( target, \'DragBox\' );
 					var b = ayoola.div.getParameterOptions( a );
+				//	alert( b.content );
 					var c = a.getElementsByClassName( \'pc_page_object_inner_preview_area\' )[0];
 					var d = a.getAttribute( "data-class_name" );
 			//		alert( d );  
@@ -1224,7 +1225,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	confirm( "Are you sure you want to close this page?" );
 			}
 		var topBarForButtons = document.createElement( "span" );
-		topBarForButtons.style.cssText = "width:auto;max-height:100%;overflow:auto;top:0px;left:0px;background-color:#fff;color:#000;position:fixed;padding:0.5em;cursor:move;border:0.1em solid #ccc;z-index:200000;";
+		topBarForButtons.style.cssText = "width:auto;max-height:100%;overflow:auto;top:50%;left:0px;background-color:#fff;color:#000;position:fixed;padding:0.5em;cursor:move;border:0.1em solid #ccc;z-index:200000;";
 	//	topBarForButtons.innerHTML = \'<p style="">Editing "<a target="_blank" href="' . $page['url'] . '" style="">' . $page['url'] . '</a>"</p>\';
 	//	topBarForButtons.innerHTML = \'' . $optionHTML . '\';
 	//	topBarForButtons.className = "drag, pc-hide-children-parent";
@@ -1834,20 +1835,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
     protected function setViewableObjects()
     {	
 		// Bring the objects from db
-		$table = new Ayoola_Object_Table_ViewableObject();
+		$table = Ayoola_Object_Table_ViewableObject::getInstance();
 		if( ! $objects = (array) $table->select() )
 		{
 		//	var_export( $objects );
 			return false;
 		}
-/* 		// Bring the PageLayout from db
-		require_once 'Ayoola/Dbase/Table/PageLayout.php';
-		$modules = new Ayoola_Dbase_Table_Module;
-		$modules = $modules->select();
-		require_once 'Ayoola/Filter/SelectListArray.php';
-		$filter = new Ayoola_Filter_SelectListArray( 'module_id', 'name');
-		$modules = $filter->filter( $modules );
- */		//var_export( $modules );
 		$html = "<div id='viewable_objects'>";
 	//	$select = "<select>";
 		$this->_viewableSelect = null;
@@ -1861,12 +1854,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	//	var_export( $objects );
 		foreach( $objects as $object )
 		{
-			//$xml = new Ayoola_Xml();			
-			//$moduleName = $modules[$object['module_id']];
 			$object['object_unique_id'] = 'object_unique_id_' . md5( $object['object_name'] );
 			$html .= $this->getViewableObject( $object );
-			$this->_viewableSelect .= "<option style='text-align:initial;' value='{$object['object_unique_id']}'>" . htmlspecialchars( $object['view_parameters'] ) . "</option>";
-			
+			$this->_viewableSelect .= "<option style='text-align:initial;' value='{$object['object_unique_id']}'>" . htmlspecialchars( $object['view_parameters'] ) . "</option>";	
 		}
 				//	var_export( $objects );
 		//	echo __LINE__;

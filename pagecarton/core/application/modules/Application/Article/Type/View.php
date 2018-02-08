@@ -100,11 +100,11 @@ class Application_Article_Type_View extends PageCarton_Widget
 		}
 		else
 		{
-		    $table = new Application_Article_Type;
+		    $table = Application_Article_Type::getInstance();
 			$data = $table->selectOne( null, array( 'post_type_id' => $postType ) ) ? : array();
             if( ! empty( $data['post_type_id'] ) )
             {
-                $table = new Application_Category;
+                $table = Application_Category();
                 $categoryInfo = $table->selectOne( null, array( 'category_name' => $data['post_type_id'] ) ) ? : array();
                 $data += $categoryInfo;
             }

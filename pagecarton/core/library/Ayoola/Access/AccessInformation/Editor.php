@@ -64,7 +64,7 @@ class Ayoola_Access_AccessInformation_Editor extends Ayoola_Access_AccessInforma
 		Ayoola_Access::setAccessInformation( $values );      
 		
 		//	Send E-mail
-		$table = new Application_User_NotificationMessage();
+		$table = Application_User_NotificationMessage::getInstance();
 		$emailInfo = $table->selectOne( null, array( 'subject' => 'Profile Update' ) ); 
 		$options = $values + array( 
 							'firstname' => Ayoola_Application::getUserInfo( 'firstname' ), 

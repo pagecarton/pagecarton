@@ -49,7 +49,7 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
      */	
     public function init()
     {
-		$table = new Ayoola_Page_Page();
+		$table = Ayoola_Page_Page::getInstance();
 //		$table = $this->getDbTable();
 	//	var_export( $table->select() );
 		$key = "url";
@@ -68,7 +68,7 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 
 		//	Other pages.
 		
-		$table = new Ayoola_Page_Page();
+		$table = Ayoola_Page_Page::getInstance();
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );  
 		if( $otherThemes = $table->select( null, array( 'system' => 1 ) ) )
 		{

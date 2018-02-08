@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="views" creation_time="1513689041" table_version="0.03" module_version="1.00" table_class="Application_Article_Views" creation_ip="2130706433">
-  <RECORDS autoId="21">
+  <RECORDS autoId="22">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="username"><![CDATA[joywealth]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="article_url"><![CDATA[]]></TABLE_FIELD>
@@ -120,6 +120,13 @@
       <TABLE_FIELD FIELD_KEY="article_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="timestamp"><![CDATA[1514290908]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="views_id"><![CDATA[0-0-20]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="21">
+      <TABLE_FIELD FIELD_KEY="username"><![CDATA[joywealth]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="article_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="timestamp"><![CDATA[1518020736]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="views_id"><![CDATA[0-0-21]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1518020736]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

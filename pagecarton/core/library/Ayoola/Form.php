@@ -506,7 +506,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		//	Test the first element to detect if each content is an array of ready content
 		$a = $requirements;
 		@$a = array_shift( $a );
-		$table = new Ayoola_Form_Requirement();
+		$table = Ayoola_Form_Requirement::getInstance();
 /* 		if( $requirements && ! is_array( $a ) )  
 		{
 			$requirements = $table->select( null, array( 'requirement_name' => $requirements ) );

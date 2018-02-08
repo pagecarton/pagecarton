@@ -710,8 +710,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		
 		//	advanced options
 
-		
-		$html .= '<div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em; display:none;" title="" class="status_bar advanced_options pc_page_object_specific_item" data-parameter_name="parent">'; 
+		$openAdvancedOption = 'display:none;';
+		if( ! empty( $_REQUEST['rebuild_widget_box'] ) )   
+		{
+			$openAdvancedOption = '';
+		}
+		$html .= '<div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;' . $openAdvancedOption . '" title="" class="status_bar advanced_options pc_page_object_specific_item " data-parameter_name="parent">'; 
 //		$html .= '<div style="clear:both;" name="' . $advancedName . '" class=""><label>Inject some parameters to this object...</label></div>';		
 
 			$form = new Ayoola_Form( array( 'name' => $advancedName, 'data-parameter_name' => 'advanced_parameters', 'class' => '' ) );
@@ -806,7 +810,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//		var_export( $object['class_name'] );
 			if( $object['class_name'] == 'Ayoola_Page_Editor_Text' || $object['class_name'] == 'Ayoola_Page_Editor_Image' )
 			{
-				$inlineWrapperChange = true;
+			//	$inlineWrapperChange = true;
 
 			$jsChangeWrapper = '
 				var a = ayoola.div.getParent( { element: this, name: \'over_all_object_container\', counter: 10 } );
@@ -840,11 +844,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			}
 			if( ! self::$_wrapperOptions )
 			{
-				$class = new Ayoola_Object_Table_Wrapper;
+				$class = Ayoola_Object_Table_Wrapper::getInstance();
 				self::$_wrapperOptions = $class->select();
 			}
 		//	var_export( @$object['wrapper_name'] );
-			$options = '<select name="wrapper_name" onChange="' . $jsChangeWrapper . '">
+	//		$options = '<select name="wrapper_name" onChange="' . $jsChangeWrapper . '">
+			$options = '<select name="wrapper_name" onChange="">
 							<option value="">No Wrapper...</option>
 							';
 		//	@$object['wrapper_name'] ? var_export( $object['wrapper_name'] ) : null;
@@ -863,7 +868,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$eachWrapper['wrapper_suffix'] = null;
 					$eachWrapper['wrapper_prefix'] = null;
 				}
-				$options .= '<option ' . $selected . ' data-wrapper_prefix="' . htmlentities( $eachWrapper['wrapper_prefix'] ). '" data-wrapper_suffix="' .  htmlentities( $eachWrapper['wrapper_suffix'] ) . '" value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
+				$options .= '<option ' . $selected . ' value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
+//				$options .= '<option ' . $selected . ' data-wrapper_prefix="' . htmlentities( $eachWrapper['wrapper_prefix'] ). '" data-wrapper_suffix="' .  htmlentities( $eachWrapper['wrapper_suffix'] ) . '" value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
 			}
 			$options .= '</select>';
 			$fieldset->addElement( array( 'name' => 'wrapper_label', 'type' => 'Html' ), array( 'html' => '<p><label>Wrapper</label>' . $options . '</p>', 'fields' => 'wrapper_name' ) );

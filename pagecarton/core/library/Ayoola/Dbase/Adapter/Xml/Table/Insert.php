@@ -61,10 +61,34 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		$filename = $this->_myFilename;
 //		while( count( $this->query( 'SELECT', null, null, array( 'filename' => $filename ) ) ) > 499 || ( filesize( $filename ) > 20000 ) )
 		//	Lets use filesize because some db may have many records "light" records e.g. 300000 (~300kb)
-		while( filesize( $filename ) > 150000 )
+		$dir = $this->getMySupplementaryDirectory();
+		if( filesize( $filename ) > 300000 )
+		{
+			$annexFile = $dir . DS . '' . implode( DS, str_split( $i ) ) . EXT_DATA;     
+			while( is_file( $annexFile ) )
+			{
+				++$i;
+				$annexFile = $dir . DS . '' . implode( DS, str_split( $i ) ) . EXT_DATA;     
+			}
+				
+			$dataTypes = $this->getDataTypes();
+			$tableInfo = $this->query( 'DESCRIBE' );
+			$tableInfo['table_info']['no_existence_check'] = true;
+			$tableInfo['table_info']['filename'] = $filename;
+
+			Ayoola_Doc::createDirectory( dirname( $annexFile ) );
+
+			rename( $filename, $annexFile );
+		//	$this->query( 'DROP' );
+			$this->setXml();
+			$this->query( 'CREATE', $tableInfo['table_info'], $tableInfo['data_types'] );
+			$this->setXml();
+			$this->getXml()->load( $filename );
+		}
+
+/*		while( filesize( $filename ) > 150000 )
 		{
 			++$i;
-			$dir = $this->getMySupplementaryDirectory();
 			if( $i > static::$_maxNoOfSupplementaryFiles )
 			{
 				$badnews = 'MAXIMUM NUMBER OF SUPPLEMENTARY FILES (' . static::$_maxNoOfSupplementaryFiles . ') CREATED FOR XML_DB IN "' . $dir . '"';
@@ -100,7 +124,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 			$this->getXml()->load( $filename );
 		//	break;
 		}
-		$recordRowId = $this->getXml()->autoId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );  		
+*/		$recordRowId = $this->getXml()->autoId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );  		
 		$row = $this->getXml()->createElement( self::TAG_TABLE_ROW );  
 		$idColumn = $this->getTableName() . '_id';
 		$whereValue = $recordRowId ? : $values[$idColumn];

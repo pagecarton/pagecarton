@@ -64,7 +64,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 				}
 			//	var_export( $this->getDbData() );
 			//	var_export( $data );
-				$table = new Ayoola_Form_Table_Data();
+				$table = Ayoola_Form_Table_Data::getInstance();
 				$this->setViewContent( $table->view(), true );
 				return false;
 			}
@@ -72,7 +72,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 			$list = new Ayoola_Paginator();
 			$list->pageName = $this->getObjectName();
 			$list->listTitle = self::getObjectTitle();
-			$table = new Ayoola_Form_Table_Data();
+			$table = Ayoola_Form_Table_Data::getInstance();
 
 			//	Filter the result to save time
 			$sortFunction2 = create_function

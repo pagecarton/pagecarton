@@ -114,7 +114,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 				if( ! empty( $data['quiz_correct_option'] ) )   
 				{
 					//	Log into the database
-					$table = new Application_Article_Type_Quiz_Table();
+					$table = Application_Article_Type_Quiz_Table::getInstance();
 					$table->insert( array(
 											'username' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ),
 											'article_url' => $data['article_url'],
@@ -164,7 +164,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 					//	SEND THE CANDIDATE AN EMAIL IF HE IS LOGGED INN
 					if( $access->isLoggedIn() )
 					{
-						$table = new Application_User_NotificationMessage();
+						$table = Application_User_NotificationMessage::getInstance();
 						$emailInfo = $table->selectOne( null, array( 'subject' => 'Computer Based Test Results' ) ); 
 						$values = array( 
 											'firstname' => Ayoola_Application::getUserInfo( 'firstname' ), 

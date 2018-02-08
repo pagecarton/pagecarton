@@ -137,7 +137,7 @@ ayoola.spotLight =
 	popUp: function( htmlText, changeElementId )
 	{		
 		var background = ayoola.spotLight.getBackground();
-		background.innerHTML = '';
+	//	background.innerHTML = '';
 		
 		//	Workaround to rebuild parameters for the current element
 		if( ! ayoola.spotLight.isPlayable(  ) ){ null; }
@@ -157,13 +157,14 @@ ayoola.spotLight =
 		//	Check if there is a classPlayerUrl
 	//	var barHtmlText = '<div style="width:100%;background-color:#fff;line-height:1em;cursor:move;border:1em groove #ccc;z-index:200000;color:#60F;position:fixed;top:0px;">close</div>';
 	//	alert( changeElementId );
-		element.innerHTML = '<div style="opacity:0.8" title="" class="title_bar">\
-		  <span  class="pc_content_title" style=\'background-image:url("' + ayoola.pcPathPrefix + '/loading.gif?y"); width: 50px;height: 20px;display: inline-block;background-size: cover;\'></span>\
-		  <span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode.parentNode ); ayoola.xmlHttp.refreshElement( \'' + changeElementId + '\' );"> x </span>\
-		  <a style="display:none;" class="title_button" name="" href="javascript:;" title="Click to show or hide advanced settings" onclick="var b = this.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'\'; } this.nextElementSibling.style.display = \'\';this.style.display = \'none\';"> &square; </a>  \
-		  <a class="title_button" name="" href="javascript:;" title="Minimize or open the body of this object" onclick="var b = this.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'none\'; } this.parentNode.style.display = \'\'; this.previousElementSibling.style.display = \'\';this.style.display = \'none\';"> _ </a>  \
-		  <a class="title_button" name="" href="javascript:;" title="Refresh" onclick="var b = this.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  b[a].contentWindow.location.reload(true); };"> &#8635; </a>  \
-		  <div style="clear:both;"></div>  \
+		element.innerHTML = '<div style="opacity:0.8; display:none;" title="" class="title_bar">\
+		<div class="pc_container">\
+		  <span  class="pc_content_title" style=\'max-width:50%; overflow:hidden;background-image:url("' + ayoola.pcPathPrefix + '/loading.gif?y"); width: 50px;height: 20px;display: inline-block;background-size: cover;\'></span>\
+		  <span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode.parentNode.parentNode ); ayoola.xmlHttp.refreshElement( \'' + changeElementId + '\' );"> x </span>\
+		  <a style="display:none;" class="title_button" name="" href="javascript:;" title="Click to show or hide advanced settings" onclick="var b = this.parentNode.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'\'; } this.nextElementSibling.style.display = \'\';this.style.display = \'none\';"> &square; </a>  \
+		  <a class="title_button" name="" href="javascript:;" title="Minimize or open the body of this object" onclick="var b = this.parentNode.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'none\'; } this.parentNode.parentNode.style.display = \'\'; this.previousElementSibling.style.display = \'\';this.style.display = \'none\';"> _ </a>  \
+		  <a class="title_button" name="" href="javascript:;" title="Refresh" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  b[a].contentWindow.location.reload(true); };"> &#8635; </a>  \
+		   </div><div style="clear:both;"></div>  \
 		  </div>';
 		switch( typeof htmlText )
 		{
@@ -182,11 +183,17 @@ ayoola.spotLight =
 		for( cx= 0; cx < cc.length; cx++ )
 		{
 	//		alert( cc[cx].tagName.toLowerCase() );
+		//	alert( cc[cx].className.search( /title_bar/ ) );
 			if( cc[cx].tagName.toLowerCase() == 'iframe' )
 			{
 				iframe = cc[cx];
+
+				//	start blank
+				// no need. iframe always start blank
+				//	doing it here may make loading seem slow
+			//	iframe.style.display = "none";
 			}
-			else if( cc[cx].className == 'title_bar' )
+			else if( cc[cx].className.search( /title_bar/ ) >= 0 )
 			{
 				titleBar = cc[cx];
 			}
@@ -198,22 +205,46 @@ ayoola.spotLight =
 			var target = ayoola.events.getTarget( e );
 			if( target.contentDocument.title )
 			{
-				var title = document.createElement( 'span' );
+/*				var title = document.createElement( 'span' );
 				title.className = 'pc_content_title';	
 				title.innerHTML = target.contentDocument.title + ' ';
-				var x = titleBar.getElementsByClassName( 'pc_content_title' );
-				for( y= 0; y < x.length; y++ )
+*/				var x = titleBar.getElementsByClassName( 'pc_content_title' )[0];
+				x.innerHTML = "";
+				x.style.backgroundImage = "none";
+				var sdd = document.createTextNode( target.contentDocument.title );
+				x.appendChild( sdd );
+			//	for( y= 0; y < x.length; y++ )
 				{
-					titleBar.removeChild( x[y] );
+				//	x[y].parentNode.removeChild( x[y] );
 				}
-				titleBar.insertBefore( title, titleBar.firstChild ); 
+				target.style.display = "";
+				titleBar.style.display = "";
+				background.style.backgroundImage = "none";
+		//		titleBar.insertBefore( title, titleBar.firstChild ); 
+			}
+			else
+			{
+				//	close box if page cant be loaded
+				elementContainer.parentNode.removeChild( elementContainer );
 			}
 		}
 		if( iframe && titleBar )
 		{
 			if( ! ayoola.events.add( iframe, 'load', setTitle ) )
 			{
-				iframe.onload =  setTitle;
+				iframe.onload = setTitle;
+			}
+			var deg = function()
+			{ 
+				elementContainer.parentNode.removeChild( elementContainer ); 
+			} 
+			if( ! ayoola.events.add( iframe, 'error', deg ) )
+			{
+				iframe.onerror = deg;
+			}
+			if( ! ayoola.events.add( iframe, 'abort', deg ) )
+			{
+				iframe.onabort = deg;
 			}
 		
 		}
@@ -231,6 +262,15 @@ ayoola.spotLight =
 	//	target.href = 'javascript:'; 
 	//	var elementPosition = ayoola.spotLight.setPosition( element );
 		ayoola.events.add( deleteButton, 'click', function(){ ayoola.xmlHttp.refreshElement( changeElement ); } );
+		var weff = function()
+		{ 
+			if( confirm( "Close the modal box?" ) )
+			{
+				elementContainer.parentNode.removeChild( elementContainer ); 
+			}
+		} 
+		ayoola.events.add( background, 'dblclick', weff );
+		ayoola.events.add( elementContainer, 'dblclick', weff );
 		
 	//	elementContainer.appendChild( deleteButton );
 		elementContainer.appendChild( element );
@@ -390,10 +430,10 @@ ayoola.spotLight =
 		}
 		else
 		{
-			element.style.width =  '90%'; 
-			element.style.height =  '90%'; 
-			element.style.top =  '5%'; 
-			element.style.left =  '5%'; 
+			element.style.width =  '100%'; 
+			element.style.height =  '96%'; 
+			element.style.top =  '3%'; 
+			element.style.left =  '0%'; 
 		//	alert( element.offsetHeight );
 		}
 	//	element.style.padding =  '5px'; 
@@ -414,6 +454,7 @@ ayoola.spotLight =
 //		if( ! ayoola.spotLight.background )
 		{ 
 			var background = document.createElement( 'div' );
+			background.style.cssText = "background-image:url('" + ayoola.pcPathPrefix + "/loading2.gif?y');background-position: 50% 50%; background-repeat: no-repeat;"
 			background.id = ayoola.spotLight.backgroundClassName;
 			ayoola.style.addClass( background, ayoola.spotLight.backgroundClassName );
 			ayoola.spotLight.background = background;

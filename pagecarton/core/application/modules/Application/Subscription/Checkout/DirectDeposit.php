@@ -41,7 +41,7 @@ class Application_Subscription_Checkout_DirectDeposit extends Application_Subscr
      */
 	protected function init()
     {		
-		$table = new Application_Subscription_Checkout_DirectDeposit_Account();
+		$table = Application_Subscription_Checkout_DirectDeposit_Account::getInstance();
 		if( ! $values = self::getStorage()->retrieve() ){ return; }
 		$accounts = $table->select( null, array( 'account_currency' => $values['settings']['currency_abbreviation'] ) );
 	//	$accounts = $table->select();

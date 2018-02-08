@@ -70,7 +70,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		}
 			
 	//	self::v( $cart );
-		$table = new Application_Subscription_Checkout_CheckoutOption();
+		$table = Application_Subscription_Checkout_CheckoutOption::getInstance();
 		$data = $table->selectOne( null, array( 'checkoutoption_name' => $identifier['api'] ) );
 
 		//	lets see if we can ask the gateway for status

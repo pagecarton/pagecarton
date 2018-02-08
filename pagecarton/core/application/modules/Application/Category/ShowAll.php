@@ -73,7 +73,7 @@ class Application_Category_ShowAll extends Application_Category_Abstract
 				break;
 			}
 			//	Categories
-			$table = new Application_Category();
+			$table = Application_Category::getInstance();
 			
 			$children = array();
 			if( $categoryInfo = $table->select( null, array( 'category_name' => @$categoryId ) ) )

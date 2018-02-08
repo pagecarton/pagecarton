@@ -60,7 +60,7 @@ class Application_User_Help_ChangePassword extends Application_User_Help_Abstrac
 			
 			
 			//	First seek in the local flatfile
-			$table = new Ayoola_Access_LocalUser();
+			$table = Ayoola_Access_LocalUser::getInstance();
 			if( $wholeInfo = $table->selectOne( null, $identifier ) )
 			{
 				if( $wholeInfo['user_information'] )  
@@ -103,7 +103,7 @@ class Application_User_Help_ChangePassword extends Application_User_Help_Abstrac
 		//	First seek in the local flatfile
 		if( ! $info )
 		{
-			$table = new Ayoola_Access_LocalUser();
+			$table = Ayoola_Access_LocalUser::getInstance();
 			if( $wholeInfo = $table->selectOne( null, $identifier ) )
 			{
 				if( $wholeInfo['user_information'] )  

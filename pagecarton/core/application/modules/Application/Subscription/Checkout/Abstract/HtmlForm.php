@@ -119,7 +119,7 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
      */
 	static function checkStatus( $orderNumber )
     {		
-		$table = new Application_Subscription_Checkout_Order();
+		$table = Application_Subscription_Checkout_Order::getInstance();
 		if( ! $orderInfo = $table->selectOne( null, array( 'order_id' => $orderNumber ) ) )
 		{
 			return false;

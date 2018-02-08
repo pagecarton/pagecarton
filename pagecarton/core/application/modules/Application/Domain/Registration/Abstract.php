@@ -49,7 +49,7 @@ abstract class Application_Domain_Registration_Abstract extends Application_Doma
 		$filter = new $filter();
 	//	$value['price'] = $filter->filter( $value['price'] );
  */
-		$table = new Application_Domain_Registration_Price();
+		$table = Application_Domain_Registration_Price::getInstance();
 		if( empty( self::$_domainPrice[$tld] ) )
 		{
 		//	var_export( $tld );

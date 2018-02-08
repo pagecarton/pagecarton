@@ -64,7 +64,7 @@ abstract class Application_Database_Abstract extends Ayoola_Abstract_Table
     {
 		if( $values['default'] )
 		{ 
-			$table = new Application_Database();
+			$table = Application_Database::getInstance();
 			$values = $table->selectOne( null, array( 'database' => $values['database'], 'username' => $values['username'], ) );
 			$database = '<?php' . PHP_EOL . '$_DATABASE = ' . var_export( $values, true ) . ';'; 
 			$filename = APPLICATION_PATH . DS . 'configs/database.php';

@@ -89,7 +89,7 @@ class Ayoola_Validator_DuplicateUser extends Ayoola_Validator_DuplicateRecord
 	//	var_export( $info );
 	
 		// No page must be of same username
-		$table = new Ayoola_Page_Page();
+		$table = Ayoola_Page_Page::getInstance();
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
 
 		//	var_export( $table->select() ); 

@@ -693,6 +693,7 @@ class Ayoola_Application
 		
 		//	Ignore localhosts and super users
  //		if( ! Ayoola_Page::hasPriviledge() )
+ 
  		if( ! in_array( $_SERVER['REMOTE_ADDR' ], array( '127.0.0.1', '::1' ) ) )
 		{
 			self::log();
@@ -1373,13 +1374,6 @@ class Ayoola_Application
      */
     public static function log()
     {
-		//	Don't log request for file		
-		//	Don't log on localhost
-		if( count( explode( '.', DOMAIN ) ) == 1 )
-		{ 
-		//	var_export( DOMAIN );
-			return; 
-		}
 		self::$accessLogging ? Application_Log_View_Access::log() : null; //	Log request
     }
 	

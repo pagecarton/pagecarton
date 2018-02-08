@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DOCUMENT_ELEMENT table_name="table" creation_time="1494505075" table_version="0.11" module_version="1.00" table_class="Ayoola_Form_Table" creation_ip="2733855004">
+<DOCUMENT_ELEMENT table_name="table" creation_time="1518019299" table_version="0.12" module_version="1.00" table_class="Ayoola_Form_Table" creation_ip="2130706433">
   <RECORDS/>
   <TABLE_SETTINGS>
-    <DATA_TYPES form_name="INPUTTEXT, UNIQUE, RELATIVES = Ayoola_Form_Table_Data" form_title="INPUTTEXT" form_description="TEXTAREA" form_success_message="TEXTAREA" auth_level="JSON" email="INPUTTEXT" group_names="JSON" group_descriptions="JSON" group_ids="JSON" form_options="JSON" requirements="JSON" callbacks="JSON" element_title="JSON" element_placeholder="JSON" element_type="JSON" element_group_name="JSON" element_name="JSON" element_default_value="JSON" table_id="INPUTTEXT"/>
+    <DATA_TYPES form_name="INPUTTEXT, UNIQUE, RELATIVES = Ayoola_Form_Table_Data" form_title="INPUTTEXT" form_description="TEXTAREA" form_success_message="TEXTAREA" auth_level="JSON" email="INPUTTEXT" button_value="INPUTTEXT" group_names="JSON" group_descriptions="JSON" group_ids="JSON" form_options="JSON" requirements="JSON" callbacks="JSON" element_title="JSON" element_placeholder="JSON" element_type="JSON" element_group_name="JSON" element_name="JSON" element_default_value="JSON" table_id="INPUTTEXT" creation_time="INPUTTEXT"/>
     <FOREIGN_KEYS/>
-    <RELATIVES Ayoola_Form_Table_Data="form_name"/>
+    <RELATIVES/>
   </TABLE_SETTINGS>
 </DOCUMENT_ELEMENT>

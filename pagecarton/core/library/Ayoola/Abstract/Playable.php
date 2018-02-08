@@ -54,6 +54,13 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 	protected static $_instance;
 	
     /**
+     * Singleton instance
+     *
+     * @var self
+     */
+	protected static $_properties;
+	
+    /**
      * Array of data response to send as JSON or PHP Serial or other standard form Response
      *
      * @var array

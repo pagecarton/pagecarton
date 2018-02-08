@@ -247,7 +247,7 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
 			$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html' ), array( 'html' => '@' ) );
 			//	Domain
 		//	$fieldset = new Ayoola_Form_Element;
-			$table = new Application_Domain();
+			$table = Application_Domain::getInstance();
 		//	$options = $table->select( null, array( 'sub_domain' => 0 ) );
 			$options = $table->select();
 			require_once 'Ayoola/Filter/SelectListArray.php';

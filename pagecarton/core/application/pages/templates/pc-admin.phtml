@@ -9,17 +9,27 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Wednesday 20th of December 2017 09:29:22 PM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Thursday 8th of February 2018 01:43:18 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
 						<?php 
+						//		var_export( array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) );
+						//		var_export( __FILE__ );
+					//			var_export( stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) );
+								//	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
+								//	THEY WON'T HAVE CORRECT APPDIR
+//								var_export( stripos( __FILE__,CACHE_DIR ) );
+						//		var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );
 							if
 							( 
-								$x_1513805362 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'novus', array( 'prioritize_my_copy' => true ) ) 
+
+								$x_1518054198 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'novus', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) ) ) 
 							)
 							{
-								include_once $x_1513805362;
+							//	var_export( $x_1518054198 );
+							//	echo file_get_contents( $x_1518054198 );
+								include_once $x_1518054198;
 							}
 						?>
 						 <?php

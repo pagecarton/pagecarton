@@ -89,7 +89,7 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 		//	var_export( $_POST );
 			$values = array( 'settings' => serialize( $values ) );
 					//		self::v( $this->getIdentifierData() ); 
-			$table = new Application_Settings();
+			$table = Application_Settings::getInstance();
 			$previousData = $table->select( null, $this->getIdentifier() );
 	//		self::v( $previousData ); 
 			if( $previousData )

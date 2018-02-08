@@ -67,7 +67,7 @@ class Application_Message_ShowAll extends Application_Message_Abstract
      */
 	public static function getNoOfNewMessages()
     {
-		$table = new Application_Message();
+		$table = Application_Message::getInstance();
 		if( Ayoola_Application::getUserInfo( 'username' ) AND $newMessages = $table->select( null, array( 'read_time' => 0, 'to' => Ayoola_Application::getUserInfo( 'username' ),  ) ) )
 		{
 			return count( $newMessages );

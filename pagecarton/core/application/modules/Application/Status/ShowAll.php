@@ -68,7 +68,7 @@ class Application_Status_ShowAll extends Application_Status_Abstract
      */
 	public static function getNoOfNewUpdates()
     {
-		$table = new Application_Status();
+		$table = Application_Status::getInstance();
 	//	var_export( Ayoola_Application::getUserInfo( 'username' ) );
 		if( Ayoola_Application::getUserInfo( 'username' ) AND $newMessages = $table->select( null, array( 'read_time' => 0, 'reference' => Ayoola_Application::getUserInfo( 'username' ),  ) ) )
 		{

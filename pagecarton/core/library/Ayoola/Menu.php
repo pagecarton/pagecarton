@@ -237,7 +237,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 		}
 	//	var_export( $category );
-		$table = new Application_Category;
+		$table = Application_Category::getInstance();
 		if( ! $category && $menu['menu_options'] && in_array( 'category', $menu['menu_options'] ) )
 		{
 			//	Defaults to all categories available

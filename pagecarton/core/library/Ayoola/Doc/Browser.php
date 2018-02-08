@@ -135,7 +135,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 				default:
 					if( Ayoola_Application::getUserInfo( 'username' ) )
 					{
-						$table = new Ayoola_Doc_Table();
+						$table = Ayoola_Doc_Table::getInstance();
 				//		var_export( $table->select( null, array( 'username' => Ayoola_Application::getUserInfo( 'username' ) ) ) );
 						foreach( $table->select( null, array( 'username' => Ayoola_Application::getUserInfo( 'username' ) ) ) as $each )
 						{

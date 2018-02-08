@@ -123,7 +123,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 				Application_Log_View_General::log( array( 'type' => 'Download', 'info' => array( $mailInfo ) ) );
 				
 				//	Log into the database 
-				$table = new Application_Article_Type_Download_Table();
+				$table = Application_Article_Type_Download_Table::getInstance();
 				$table->insert( array(
 										'username' => Ayoola_Application::getUserInfo( 'username' ),
 										'article_url' => $data['article_url'],

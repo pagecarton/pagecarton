@@ -216,7 +216,7 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 		{ 
 			return true; 
 		} 
-		$table = new Ayoola_Object_Table_ViewableObject();
+		$table = Ayoola_Object_Table_ViewableObject::getInstance();
 
 		if( $methods = $table->select( null, array( 'module' => 'Auth' ) ) )
 		{

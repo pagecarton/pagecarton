@@ -66,7 +66,7 @@ class Application_User_Email_Creator extends Application_User_Email_Abstract
 					if( @$values['user_id'] )
 					{
 						//	lets do a welcome service.
-						$table = new Application_User_NotificationMessage(); 
+						$table = Application_User_NotificationMessage::getInstance(); 
 						$emailInfo = $table->selectOne( null, array( 'subject' => 'Your new e-mail Address' ) );
 						$r = Ayoola_Api_UserList::send( array( 'user_id' => $values['user_id'] ) );
 						if( is_array( @$r['data'] ) )

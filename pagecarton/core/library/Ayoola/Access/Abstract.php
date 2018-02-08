@@ -274,7 +274,7 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 			}
 		//	self::v( $where );
 		//	self::v( $userInfo );
-			$table = new Ayoola_Access_AccessInformation();
+			$table = Ayoola_Access_AccessInformation::getInstance();
 	//		if( ! $previousInfo = $table->selectOne( null, $where ) )
 			{
 			
@@ -385,7 +385,7 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 			if( ! $previousInfo = @include $filename )           
 			{
 				//	compatibility - we used to save some info here
-				$table = new Ayoola_Access_AccessInformation();
+				$table = Ayoola_Access_AccessInformation::getInstance();
 				if( ! $previousInfo = $table->selectOne( null, $where ) )
 				{
 				

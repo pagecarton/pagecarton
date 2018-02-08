@@ -83,7 +83,7 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 					if( ! $realUserInfo = $table->selectOne( '', 'useremail, usersettings, userpassword, userpersonalinfo, useractivation', array( 'user_id' => intval( $cookieUserid ) )  ) ){ break; }
 				break;
 				default:
-					$table = new Ayoola_Access_LocalUser();
+					$table = Ayoola_Access_LocalUser::getInstance();
 					if( ! $info = $table->selectOne( null, array( 'email' => $cookieUserid ) ) ){ break; }
 					$realUserInfo = $info['user_information'];
 					$realUserInfo['password'] = $info['password'];

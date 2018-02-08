@@ -36,7 +36,7 @@ class Ayoola_Page_Settings extends Application_Settings_Abstract
     {
  		$defaultPages = array( '/', '/post/view', '/object', '/widgets', '/account', '/account/signin', '/404', '/posts', '/search', );	
 		  
-		$table = new Ayoola_Page_Page();
+		$table = Ayoola_Page_Page::getInstance();
 	//	unset( $_POST );
 		foreach( $defaultPages as $page )    
 		{

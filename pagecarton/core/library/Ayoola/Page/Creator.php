@@ -182,7 +182,7 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 	//	if( ! $this->_createXml( true ) ){ return false; }
 	//	if( ! $this->insertDb() ){ return false; }
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
-		$table = new Ayoola_Page_Page;
+		$table = Ayoola_Page_Page::getInstance();
 		$pageInfo = $table->selectOne( null, array( 'url' => $values['url'] ) );
 
 		//	var_export( $pageInfo );

@@ -116,7 +116,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 			
 		
 			//	Set a category to specify the type of Post this is 
-			$table = new Application_Category();
+			$table = Application_Category::getInstance();
 			@$values['article_type'] = $values['article_type'] ? : 'article';
 			switch( $values['article_type'] )
 			{

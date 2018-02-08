@@ -65,7 +65,7 @@ class Application_Article_Delete extends Application_Article_Abstract
 			@Ayoola_Doc::removeDirectory( dirname( self::getFolder() . $data['article_url'] ) );
 
 			// and we want to use tables for sorting categories and all
-			$table = new Application_Article_Table();
+			$table = Application_Article_Table::getInstance();
 			$table->delete( array( 'article_url' => $data['article_url'] ) );
 
 			$this->setViewContent( '<p class="goodnews">Post deleted successfully</p>', true ); 

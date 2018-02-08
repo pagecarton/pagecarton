@@ -58,7 +58,7 @@ class Application_Article_Type_Audio_Play extends Application_Article_Type_Audio
 			return false;
 		}
 		//	Log into the database 
-		$table = new Application_Article_Type_Audio_Table();
+		$table = Application_Article_Type_Audio_Table::getInstance();
 		$table->insert( array(
 								'username' => Ayoola_Application::getUserInfo( 'username' ),
 								'article_url' => $data['article_url'],

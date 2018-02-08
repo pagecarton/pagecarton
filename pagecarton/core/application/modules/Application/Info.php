@@ -29,6 +29,13 @@ class Application_Info extends Ayoola_Abstract_Playable
 {
 	
     /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Application Info'; 
+	
+    /**
      * Whether class is playable or not
      *
      * @var boolean
@@ -154,11 +161,11 @@ class Application_Info extends Ayoola_Abstract_Playable
 		$dataX['upgrade_link'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Upgrade';
 		
 		//	Pages
-		$option = new Ayoola_Page_Page;
+		$option = Ayoola_Page_Page::getInstance();
 		$dataX['page_count'] = count( $option->select() );
 		
 		//	Themes
-		$table = new Ayoola_Page_PageLayout;
+		$table = Ayoola_Page_PageLayout::getInstance();
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );
 		$myThemes = $table->select( null, null, array( 'workww--x-acrrwwwosssuwdnd-1-333' => true ) );
 		$dataX['theme_count'] = count( $myThemes );

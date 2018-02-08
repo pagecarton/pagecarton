@@ -102,7 +102,7 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 		else
 		{
 			//	Try individual search
-			$table = new Application_Domain_Registration_Whois();
+			$table = Application_Domain_Registration_Whois::getInstance();
 			$extension = explode( ".", $extension );
 			$extension = array_pop( $extension );
 			if( ! $whoisInfo = $table->selectOne( null, array( 'extension' => $extension ) ) )

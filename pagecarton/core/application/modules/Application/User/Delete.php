@@ -53,7 +53,7 @@ class Application_User_Delete extends Application_User_Abstract
 //		break;
 //		case 'file':
 			// Find user in the LocalUser table
-			$table = new Ayoola_Access_LocalUser();
+			$table = Ayoola_Access_LocalUser::getInstance();
 		//	var_export( $data );
 
 			if( $info = $table->delete( array( 'username' => strtolower( $data['username'] ) ) ) )

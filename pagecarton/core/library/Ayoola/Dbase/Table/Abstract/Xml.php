@@ -93,6 +93,11 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      */
     public function __construct()
     {
+    //    var_export( get_called_class() );
+    //    var_export( "\r\n" );
+
+        // wish i can do this...
+    //    $this = static::getInstance();
     //    get_class( $this );
  
      //   if( empty( static::$_alreadyRan[get_class( $this )] ) )

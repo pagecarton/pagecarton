@@ -41,7 +41,7 @@ class Application_Subscription_Level_Creator extends Application_Subscription_Le
      */
 	protected function init()
     {
-		$table = new Application_Subscription_Subscription();
+		$table = Application_Subscription_Subscription::getInstance();
 		if( ! $data = $table->selectOne( null, $this->getIdentifier() ) ){ return false; }
 		$this->createForm( 'Add', "Add a new category for \"{$data['subscription_label']}\"" );
 		$this->setViewContent( $this->getForm()->view(), true );

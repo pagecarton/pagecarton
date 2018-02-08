@@ -61,7 +61,7 @@ class Application_Subscription_Checkout_Callback extends Application_Subscriptio
 	public static function getApi()
     {
 	//	if( ! $identifier = self::getIdentifier() ){ return false; }
-		$table = new Application_Subscription_Checkout_CheckoutOption();
+		$table = Application_Subscription_Checkout_CheckoutOption::getInstance();
 		$data = $table->selectOne( null, array( 'checkoutoption_name' => $_GET['api'] ) );
 	//	var_export( $data );
 		$className = $data['object_name'] . '_Callback';

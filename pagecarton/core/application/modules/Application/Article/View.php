@@ -523,7 +523,7 @@ class Application_Article_View extends Application_Article_Abstract
 		if( $this->getParameter( 'download_count' ) )
 		{
 			//	Log into the database 
-			$table = new Application_Article_Type_Download_Table();
+			$table = Application_Article_Type_Download_Table::getInstance();
 			$count = $table->select( null, array( 'article_url' => $data['article_url'] ) );
 			$data['download_count'] = count( $count );
 		//	self::v( array( 'article_url' => $data['article_url'] ) );

@@ -80,7 +80,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( $this->getParameter( 'template_name' ) )
 		{
 		//	self::v( $this->getParameter( 'template_name' ) );
-			$options = new Application_Article_Template;
+			$options = Application_Article_Template::getInstance();
 			if( $options = $options->selectOne( null, array( 'template_name' => $this->getParameter( 'template_name' ) ) ) )
 			{
 				
@@ -367,7 +367,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					{
 						if( $data = $this->retrieveArticleData( $data ) )
 						{
-							$class = new Application_Article_Table();
+							$class = Application_Article_Table::getInstance();
 							$class->update( $data, array( 'article_url' => $data['article_url'] ) );
 						}			
 					}
@@ -1145,7 +1145,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 //		var_export( $this->getParameter( 'category_name' ) );
 	//	self::v( $categoryId );
 		$categoryName = null;
-		$table = new Application_Category();
+		$table = Application_Category::getInstance();
 		if( $categoryId && is_numeric( $categoryId ) ) 
 		{
 			$category = $table->selectOne( null, array( 'category_id' => $categoryId ) );
@@ -1297,7 +1297,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		elseif( @$_REQUEST['type'] )
 		{
-			$typeInfo = new Ayoola_Access_AuthLevel;
+			$typeInfo = Ayoola_Access_AuthLevel::getInstance();
 			if( $typeInfo = $typeInfo->selectOne( null, array( 'auth_name' => $_REQUEST['type'] ) ) )
 			{
 	//			$command = "find $path -type f -print0 | xargs -0 egrep -l \"'access_level' => '" . $typeInfo['auth_level'] . "'\"";
@@ -1477,7 +1477,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => 'filectime' ) );
 		//			$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => $sortFunction ) );
 		//			krsort( $this->_dbData );
-					$table = new Application_Article_Table();
+					$table = Application_Article_Table::getInstance();
 					$this->_dbData = $table->select();
 				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );
 				//	krsort( $this->_dbData );
@@ -1494,7 +1494,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					@exec( $command, $output );
 					$this->_dbData = array_unique( $output ); 
 */
-					$table = new Application_Article_Table();
+					$table = Application_Article_Table::getInstance();
 					$this->_dbData = $table->select( null, $whereClause );
 				//	var_export( $this->_dbData );
 				//	var_export( $output );
@@ -1591,7 +1591,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$html .= '<span style=""> Category; Of </span>';
 		
 		//	Article Types
-		$options = new Application_Article_Type;
+		$options = Application_Article_Type::getInstance();
 		$options = $options->select();
 	//	$options = $options ? : Application_Article_Type_TypeAbstract::$presetTypes;
 		require_once 'Ayoola/Filter/SelectListArray.php';
@@ -1613,7 +1613,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		
 		$html .= '<span style=""> In </span>';
 		
-		$options = new Application_Article_Template;
+		$options = Application_Article_Template::getInstance();
 		$options = $options->select();
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'template_name', 'template_label');

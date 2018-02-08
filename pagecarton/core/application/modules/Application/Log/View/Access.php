@@ -44,6 +44,7 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 	{
 		
 	//	var_export( self::getLogTable() );
+
 		foreach( self::getLogTable()->getDataTypes() as $key => $value )
 		{
 			$log[$key] = @$_SERVER[strtoupper( $key )];
@@ -60,7 +61,10 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 	//	$log['get'] = $_GET; 
 	//	$log['request'] = $_REQUEST; 
 	//	$log['request'] = $_GET + $_POST;  
-		$log['request'] = $_POST; 
+		if( strlen( serialize( $_POST ) ) < 10000 )
+		{
+			$log['request'] = $_POST; 
+		}
 		
 		//	NUMBER OF PAGES VIEWED IN THIS SESSION
 		@$log['NPS'] = ++$_SESSION['NPS']; 

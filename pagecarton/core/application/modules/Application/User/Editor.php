@@ -81,7 +81,7 @@ class Application_User_Editor extends Application_User_Abstract
 				}
 				//	We have a new administrator
 				//	lets do a welcome service.
-				$table = new Application_User_NotificationMessage(); 
+				$table = Application_User_NotificationMessage::getInstance(); 
 				$emailInfo = $table->selectOne( null, array( 'subject' => 'Welcome to the Admin Group' ) );
 				$replacements = array( 
 									'firstname' => $data['firstname'], 

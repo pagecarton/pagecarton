@@ -227,7 +227,7 @@ class Ayoola_Captcha
 							'code' => $code, 
 							'time' => time()
 							);
-        $table = new Ayoola_Dbase_Table_Captcha;
+        $table = Ayoola_Dbase_Table_Captcha::getInstance();
 		self::cleanUp( $table ); // Clean up old captcha files and db row
 		$table->insert( $values ); 
     } 

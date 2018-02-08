@@ -72,7 +72,7 @@ class Application_Upgrade_Check extends PageCarton_Widget
         {
             $this->setViewContent( '<div class="badnews">ALERT! Your PageCarton installation is outdated.</div><div class="pc-notify-info">New version (' . $versionFromServer['response']  . ') is available for download. </div>', true ); 
         //     $this->setViewContent( '' ); 
-            $this->setViewContent( '<div class=""><a onClick="ayoola.spotLight.showLinkInIFrame( this.href ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Upgrade?" class="pc-btn pc-bg-color">Begin Upgrade!</a></div>' );
+            $this->setViewContent( '<div class=""><a onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Upgrade?" class="pc-btn pc-bg-color">Begin Upgrade!</a></div>' );
             $filter = new Ayoola_Filter_Time();
                 $this->setViewContent( '<p  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $serverName . ')</p>' ); 
         }

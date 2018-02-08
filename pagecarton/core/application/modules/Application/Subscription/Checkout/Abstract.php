@@ -71,7 +71,7 @@ abstract class Application_Subscription_Checkout_Abstract extends Application_Su
 	public static function changeStatus( $response )
     {
 		//	var_export( $response );
-		$table = new Application_Subscription_Checkout_Order();
+		$table = Application_Subscription_Checkout_Order::getInstance();
 		if( ! $orderInfo = $table->selectOne( null, array( 'order_id' => $response['order_id'] ) ) )
 		{ 
 		//	echo 'INVALID ORDER';

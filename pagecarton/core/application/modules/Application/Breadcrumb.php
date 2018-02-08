@@ -70,7 +70,8 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 			if( ! @$this->_parameter['markup_template'] ) 
 			{
 				$this->_parameter['markup_template_prefix'] = '<ol class="pc-breadcrumb">';
-				if( Ayoola_Application::getUrlPrefix() && Ayoola_Application::getUrlPrefix() !== 'index.php' ) 
+			//	var_export( Ayoola_Application::getUrlPrefix() );
+				if( Ayoola_Application::getUrlPrefix() && Ayoola_Application::getUrlPrefix() !== '/index.php' ) 
 				{
 					$this->_parameter['markup_template_prefix'] .= '<li><a href="/" title="Home Page">Home</a></li>';
 					$homeDone = false;
@@ -115,6 +116,10 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 				elseif( ! $each['title'] )
 				{
 					$each['title'] = array_pop( array_map( 'ucwords', explode( '/', str_replace( '-', ' ',	 $each['url'] ) ) ) );  
+				}
+				if( ! $each['title'] )
+				{
+					continue;    
 				}
 				$urlLog[$each['url']] = $each['url'];
 				if( $template )

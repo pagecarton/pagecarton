@@ -79,7 +79,7 @@
 
 		public function filter( $value )
 		{
-			$table = new Ayoola_Page_PageLayout();
+			$table = Ayoola_Page_PageLayout::getInstance();
 			
 			//	Integer value means a layout ID is sent, otherwise Layout Name
 		//		var_export( $checkInt );

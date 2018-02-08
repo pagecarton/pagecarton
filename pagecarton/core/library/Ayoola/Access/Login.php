@@ -264,7 +264,7 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
     public static function localLogin( array & $values ) 
     {
 		// Find user in the LocalUser table
-		$table = new Ayoola_Access_LocalUser();
+		$table = Ayoola_Access_LocalUser::getInstance();
 				
 		//	Retrieve the password hash
 		$access = new Ayoola_Access();

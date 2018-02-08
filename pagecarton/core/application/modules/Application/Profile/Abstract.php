@@ -144,7 +144,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		}
 		//	var_export( $profileUrL );
 	//		var_export( $profileData );
-		$table = new Ayoola_Access_AuthLevel();
+		$table = Ayoola_Access_AuthLevel::getInstance();
 		if( $profileData['access_level'] != 1 && $profileData['access_level'] != 0 )
 		{
 			$authInfo = $table->selectOne( null, array( 'auth_level' => $profileData['access_level'] ) );

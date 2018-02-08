@@ -144,7 +144,7 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 		 //  var_export( $oldInfo['password'] );  
 		
 		//	Localize information 
-		$table = new Ayoola_Access_LocalUser();
+		$table = Ayoola_Access_LocalUser::getInstance();
 		if( $oldInfo = $table->selectOne( null, array( 'username' => array( $userInfo['username'], strtolower( $userInfo['username'] ) ) ) ) )
 		{
 		

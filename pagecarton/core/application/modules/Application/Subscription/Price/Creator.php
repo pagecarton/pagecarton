@@ -41,7 +41,7 @@ class Application_Subscription_Price_Creator extends Application_Subscription_Pr
      */
 	protected function init()
     {
-		$table = new Application_Subscription_SubscriptionLevel();
+		$table = Application_Subscription_SubscriptionLevel::getInstance();
 		if( ! $data = $table->selectOne( null, $this->getIdentifier() ) ){ return false; }
 		$this->createForm( 'Add', 'Add a new Price for category "' . $data['subscriptionlevel_name'] . '"' );
 		$this->setViewContent( $this->getForm()->view(), true );

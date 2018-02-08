@@ -89,7 +89,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		{
 			if( $cssFile = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) )
 			{
-				$table = new Ayoola_Page_PageLayout();
+				$table = Ayoola_Page_PageLayout::getInstance();
 				if( $cssFile = $table->selectOne( null, array( 'layout_name' => $cssFile ) ) )
 				{
 			//		var_export( $cssFile );
@@ -125,7 +125,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			
 			
 			$tableName = 'Ayoola_Page_Page';		
-			$table = new $tableName();		
+			$table = $tableName::getInstance();		
 	    	//	var_export( array( 'url' => $url ) );
 			if( $info = $table->selectOne( null, array( 'url' => $url ) ) )
 			{ 
@@ -300,7 +300,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				// module mode
 				$pages = array();
 				
-				$table = new Ayoola_Page_Page();
+				$table = Ayoola_Page_Page::getInstance();
 				$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
 				$pages = $table->select( null, array( 'url' => self::splitUrl( $page ) ) );
 
@@ -393,7 +393,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				
 			//	$currentUrl = rtrim( Ayoola_Application::getPresentUri(), '/' );
 				$sections = self::splitUrl( $page );
-				$table = new Ayoola_Page_Page();
+				$table = Ayoola_Page_Page::getInstance();
 				$pages = $table->select( null, array( 'url' => $sections ), array( 'work-arround-111' => true ) );
 				$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
 			//	var_export( $currentUrl );
@@ -454,7 +454,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 	//	var_export( $uri );
 
 		//	Look in the links table for SEO friendly and short URLS
-		$table = new Application_Link();
+		$table = Application_Link::getInstance();
 	//\\	var_export( $table->select() );
 		if( $link = $table->selectOne( null, array( 'link_url' => $uri ) ) )
 		{

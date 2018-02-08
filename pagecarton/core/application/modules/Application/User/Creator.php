@@ -324,7 +324,7 @@ class Application_User_Creator extends Application_User_Abstract
 				break;
 			}
 				
-			$table = new Application_User_Referral();
+			$table = Application_User_Referral::getInstance();
 			if( $table->insert( array( 'referrer' => strtolower( $userInfo['username'] ), 'referral' => strtolower( $values['username'] ), 'r_time' => time() ) ) )
 			{
 				self::sendMail( array( 'body' => 'Good job! @' . $values['username'] . ' just used your referral link to sign up!', 'subject' => 'New Referral', 'to' => $userInfo['email'], ) );

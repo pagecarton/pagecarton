@@ -72,7 +72,7 @@ class Ayoola_Access_UpgradeSelf extends Ayoola_Access_Abstract
 	//	var_export( $response );
 	
 		// Find user in the LocalUser table
-		$table = new Ayoola_Access_LocalUser();
+		$table = Ayoola_Access_LocalUser::getInstance();
 		if( $localInfo = $table->selectOne( null, array( 'access_level' => 99 ) ) )
 		{
 			

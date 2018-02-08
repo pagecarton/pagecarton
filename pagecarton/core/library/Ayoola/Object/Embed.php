@@ -249,8 +249,30 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
      */
     public static function getWidgets()
 	{
+		$keyZ = md5( __METHOD__ . serialize( func_get_args() ) . 'fff=-' );
+		
+	//	if( ! empty( $options['cache'] ) )
+		{
+			if( ! is_null( static::$_properties[__METHOD__][$keyZ] ) )
+			{
+				return static::$_properties[__METHOD__][$keyZ];
+			}
+			$storageInfo = array( 'id' => $keyZ, 'device' => 'File', 'time_out' => 10000, );
+			$storage = static::getObjectStorage( $storageInfo );
+			if( $storage->retrieve() !== false )
+			{
+				return $storage->retrieve();
+			}
+		}
+	//		var_export( $storage->retrieve() );
+	//	var_export( $directory );
+		
+		$storage->store( array() );		
+		static::$_properties[__METHOD__][$keyZ] = array();
+
 		if( is_null( self::$_widgets ) ) 
 		{
+		//	var_export( self::$_widgets );
 			$options = array();
 			$files = array();
 			$filter = new Ayoola_Filter_FilenameToClassname();
@@ -307,6 +329,9 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			asort( $files );
 			self::$_widgets = $files;
 		}
+		
+		$storage->store( self::$_widgets );		
+		static::$_properties[__METHOD__][$keyZ] = self::$_widgets;
 		return self::$_widgets;
 	}
 	

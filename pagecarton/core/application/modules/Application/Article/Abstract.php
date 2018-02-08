@@ -279,7 +279,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		file_put_contents( self::getFolder() . $values['article_url'], json_encode( $values ) ); 
 
 		// and we want to use tables for sorting categories and all
-		$table = new Application_Article_Table();
+		$table = Application_Article_Table::getInstance();
 		if( $table->select( null, array( 'article_url' => $values['article_url'] ) ) )
 		{
 			$table->delete( array( 'article_url' => $values['article_url'] ) );
@@ -449,7 +449,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
 
 				//	Log into the database 
-				$table = new Application_Article_Views();
+				$table = Application_Article_Views::getInstance();
 				$table->insert( array(
 										'username' => Ayoola_Application::getUserInfo( 'username' ),
 										'article_url' => $data['article_url'],
@@ -538,7 +538,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
     {
 		$html = null;
 	//	$html .= $displayOptions['template'] ? null : ' <ul style="list-style:none;display:inline-block;"><strong>Categories:</strong> ';
-		$class = new Application_Category;
+		$class = Application_Category::getInstance();
 		$options = $class->select( null, array( 'category_name' => $categoryIds ) ) ? : array();
 		
 		//	compatibility
@@ -882,7 +882,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 //		$values['article_type'] = $values['article_type'] ? : 'post';
 		
 		//	Set Article Type
-		$options = new Application_Article_Type;
+		$options = Application_Article_Type::getInstance();
 		$options = $options->select();
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'post_type_id', 'post_type');
@@ -1742,7 +1742,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	
 		}
 		//	Categories
-		$table = new Application_Category();
+		$table = Application_Category::getInstance();
 		
 		//	Now allowing users to create their own personal categories
 		
@@ -1806,7 +1806,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	//	$fieldset->addRequirement( 'article_title', array( 'UserRestrictions' => null ) );
 		if( @$values['requirement_name'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'requirement', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )
 		{
-			$options = new Ayoola_Form_Requirement;
+			$options = Ayoola_Form_Requirement::getInstance();
 			$options = $options->select();
 			if( $options ) 
 			{

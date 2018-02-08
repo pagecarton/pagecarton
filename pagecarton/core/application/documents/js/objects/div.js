@@ -426,6 +426,7 @@ ayoola.div =
 		for( var c = 0; c < x.childNodes.length; c++ ) 
 		{
 			var parameterOrOption = x.childNodes[c];
+		//	alert( parameterOrOption.outerHTML );
 			if( ! parameterOrOption || parameterOrOption.nodeName == "#text" ){ continue; }
 			if( ! parameterOrOption.dataset || ! parameterOrOption.dataset.parameter_name )
 			{ 
@@ -433,6 +434,11 @@ ayoola.div =
 			}
 			if( parameterOrOption.dataset.parameter_name == "parent"  )
 			{
+				//	if we are in exterior, just jump to interior and skip the wrapper
+				if( parameterOrOption.className.search( /object_exterior/ ) >= 0 )
+				{
+					parameterOrOption = parameterOrOption.getElementsByClassName( "object_interior" )[0];
+				}
 				var g = ayoola.div.getParameterOptions( parameterOrOption, numberedSectionName );
 				if( g.content ) 
 				{

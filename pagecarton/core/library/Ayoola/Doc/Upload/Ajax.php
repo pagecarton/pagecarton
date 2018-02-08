@@ -376,7 +376,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			while( false );
 
 			//	Put this in the Documents DB Table 
-			$table = new Ayoola_Doc_Table();
+			$table = Ayoola_Doc_Table::getInstance();
 			$table->insert( array(
 						'url' => $url,
 						'upload_time' => time(),

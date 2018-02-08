@@ -497,7 +497,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 			$this->_pageInfo = (array) $whereClause;
 			return;
 		}
-		$table = new Ayoola_Page_Page();
+		$table = Ayoola_Page_Page::getInstance();
 	//	var_export( $whereClause ); 
 		$data = $table->selectOne( null, $whereClause );
 	//	var_export( $data );

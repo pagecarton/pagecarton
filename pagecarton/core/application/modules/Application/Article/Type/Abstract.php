@@ -149,7 +149,7 @@ abstract class Application_Article_Type_Abstract extends Application_Article_Abs
      */
 	public static function getOriginalPostTypeInfo( $postType ) 
     {
-		$table = new Application_Article_Type();
+		$table = Application_Article_Type::getInstance();
 		if( $postTypeInfo = $table->selectOne( null, array( 'post_type_id' => $postType ) ) )
 		{
 			return $postTypeInfo;

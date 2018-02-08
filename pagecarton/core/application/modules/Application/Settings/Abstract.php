@@ -87,7 +87,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 		//	self::v(  $settingsName );
 	//		self::v(  $settingsNameInfo );   
 	//		var_export(  $settings->select() );
-			$settings = new Application_Settings();
+			$settings = Application_Settings::getInstance();
 //			if( ! $settingsInfo = $settings->selectOne( null, array( 'settingsname_id' => $settingsNameInfo['settingsname_id'] ) ) )
 			{
 		//		$settingsInfo = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
@@ -111,7 +111,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			{ 
 				//	Not found in site settings. 
 				//	Now lets look in the extension settings
-				$table = new Ayoola_Extension_Import_Table();
+				$table = Ayoola_Extension_Import_Table::getInstance();
 		//		var_export( $table->select() );
 		//		var_export( $settingsName );
 				if( ! $extensionInfo = $table->selectOne( null,  array( 'extension_name' => $settingsName ) ) )
@@ -132,6 +132,10 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 				static::$_settings[$settingsName] = unserialize( $settings['settings'] );
 			}
 			
+		}
+		if( static::$_settings[$settingsName] && is_string( static::$_settings[$settingsName] ) )
+		{
+			static::$_settings[$settingsName] = unserialize( static::$_settings[$settingsName] );  
 		}
 	//	self::v( self::$_settings );
 	//	if( is_array( self::$_settings[$settingsName] ) && array_key_exists( $key, self::$_settings[$settingsName] ) )
