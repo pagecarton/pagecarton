@@ -27,6 +27,9 @@ pagecarton/temp/*
 # cache
 pagecarton/backups/*
 pagecarton/core/application/documents/layout/*/theme/data-backup/*
+pagecarton/*.tmp
+pagecarton/*.gz
+pagecarton/*.zip
 
 # 
 pagecarton/core/application/databases/Application/Log/View/*
