@@ -462,7 +462,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		if( $this->submitValue && ! $this->callToAction )
 		{
 		//	var_export( $this->submitValue );
-			$element->addElement( array( 'name' => 'submit-' . $this->submitValue . '', 'value' => $this->submitValue . '   » ', 'type' => 'Submit', 'style' => 'display:block; margin: 0.5em 0 0.5em 0 ;', 'class' => '', 'onclick' => 'this.disabled = true; this.value= \'Please wait...\'', 'data-pc-ignore-field' => 'true' ) );    
+			$element->addElement( array( 'name' => 'submit-' . $this->submitValue . '', 'value' => $this->submitValue . '   » ', 'type' => 'Submit', 'style' => 'display:block; margin: 0.5em 0 0.5em 0 ;', 'class' => '', 'onclick' => 'this.value= \'Please wait...\'', 'data-pc-ignore-field' => 'true' ) );    
 		}
 		foreach( $this->requiredElements as $key => $value )
 		{
@@ -472,7 +472,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		$element->addElement( array( 'name' => $this->_attributes['name'] . self::SUBMIT_DETECTOR, 'value' => $this->_attributes['name'], 'type' => 'Hidden', 'data-pc-ignore-field' => 'true' ) );
 	//	$element->addElement( array( 'name' => 'MAX_FILE_SIZE', 'type' => 'Hidden', 'value' => '107374182', 'data-pc-ignore-field' => 'true' ) );
 	//	$element->addElement( array( 'name' => self::HONEY_POT, 'type' => 'HoneyPot', 'data-pc-ignore-field' => 'true' ) );
-		$element->addFilters( 'Trim:: Escape::Alnum' );
+		$element->addFilters( 'Trim:: Escape::Alnum' );   
 		return $element;
 	}
 	
