@@ -52,16 +52,21 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
          //   $zip->addFile( $installer, 'pc_installer.php.tar.gz');
 			$file1 = Ayoola_Loader::getFullPath( 'documents/ayoola/framework/installer.tar.gz', array( 'prioritize_my_copy' => true ) );
       //      if( filectime( $file1 ) > time() + 86400 )
-            if( filemtime( $file1 ) > ( time() + 0 ) )
+    //  var_export( $file1 );
+ //     var_export( filemtime( $file1 ) );
+         //       unlink( $file1 );
+ //     var_export( filemtime( $file1 ) );
+  //    var_export( filemtime( $file1 ) < ( time() + 0 ) );
+            if( ! file_exists( $file1 ) || filemtime( $file1 ) < ( time() + 86400 ) )   
             {
                 $parameters = array( 'backup_type' => 'installer', 'no_init' => true );
                 $class = new Application_Backup_Creator( $parameters );
                 $class->fakeValues = $parameters;
                 $class->init();
-                self::v( $class->view() );  
-                exit();
+         //       self::v( $class->view() );  
 
             }
+       //         exit();
 
 			$file2 = Ayoola_Loader::getFullPath( 'documents/pc_installer.php', array( 'prioritize_my_copy' => true ) );
 			$file3 = Ayoola_Loader::getFullPath( 'documents/pc_redirect.php', array( 'prioritize_my_copy' => true ) );

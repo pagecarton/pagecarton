@@ -111,7 +111,7 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getInstallerLink()
     {
-		return Ayoola_Application::getUrlPrefix() . '/ayoola/framework/installer.tar.gz';  
+		return '/ayoola/framework/installer.tar.gz';  
 	}
 	
     /**

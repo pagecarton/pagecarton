@@ -150,7 +150,12 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		
 		
 		//	Cwd is also required
-		$requiredList = array( '/' . basename( dirname( $_SERVER['SCRIPT_FILENAME'] ) ) . '/', '/local_html/', '/license.txt', '/changelog.txt', '/readme.txt', '/application/configs/', '/application/functions/', '/pagecarton/local_html/', '/pagecarton/license.txt', '/pagecarton/changelog.txt', '/pagecarton/copyright.txt', '/pagecarton/readme.txt', '/pagecarton/application/configs/', '/pagecarton/application/functions/' );  
+		$requiredList = array( '/' . basename( dirname( $_SERVER['SCRIPT_FILENAME'] ) ) . '/', '/local_html/', '/license.txt', '/changelog.txt', '/readme.txt', '/application/configs/', '/application/functions/', '/pagecarton/local_html/', '/pagecarton/license.txt', '/pagecarton/changelog.txt', '/pagecarton/copyright.txt', '/pagecarton/readme.txt', '/pagecarton/application/configs/', '/pagecarton/application/functions/' );
+		if( empty( $values['backup_export_list'] ) )
+		{
+			$values['backup_export_list'] = array_keys( self::$_exportList );
+		}
+
 		$userList = array_intersect( array_keys( self::$_exportList ), $values['backup_export_list'] );
 		$totalList = array_merge( $requiredList, $userList );
 	//	var_export( self::$_exportList );
