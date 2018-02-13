@@ -130,7 +130,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 						$data[$url] = array( 'url' => $url, 'time' => $docTime, 'basename' => basename( $url ), 'ext' => strtoupper( $ext ), 'filesize' => $filterSize->filter( filesize( $eachFile ) ), 'modified' => $filterTime->filter( $docTime ), 'created' => $filterTime->filter( filectime( $eachFile ) ), 'by' => '' );
 					}
 				}
-				ksort( $data );
+				krsort( $data );  
 				break;
 				default:
 					if( Ayoola_Application::getUserInfo( 'username' ) )
@@ -202,7 +202,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 								<div style="padding-bottom:5px;text-align:center;">
 								%FIELD%
 								</div>
-								<img src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=60&max_height=60&url=%KEY%&document_time={{{%time%}}}" alt="" >
+								<img width="60" height="60" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=60&max_height=60&url=%KEY%&document_time={{{%time%}}}" alt="" >
 								<div style="padding:5px;"><a class="pc-btn pc-btn-small" style="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '%KEY%">view</a> <a class="pc-btn pc-btn-small" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=%KEY%&crop=1"> Replace </a> ' . $select . '</div>
 								</div>' ), 
 				'url' => '%FIELD%', 
