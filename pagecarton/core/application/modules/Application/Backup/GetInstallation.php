@@ -69,7 +69,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             }
             if( ! empty( $_REQUEST['pc_recreate_installer'] ) )   
             {
-                exit( 'pc_recreate_installer done!' );
+                exit( 'pc_recreate_installer done!' );  
             }
        //         exit();
 
