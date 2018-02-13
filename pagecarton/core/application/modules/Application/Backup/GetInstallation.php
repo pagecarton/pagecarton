@@ -57,7 +57,8 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
          //       unlink( $file1 );
  //     var_export( filemtime( $file1 ) );
   //    var_export( filemtime( $file1 ) < ( time() + 0 ) );
-            if( ! file_exists( $file1 ) || filemtime( $file1 ) < ( time() + 86400 ) )   
+            if( ! file_exists( $file1 ) || ! empty( $_REQUEST['pc_recreate_installer'] ) )   
+//            if( ! file_exists( $file1 ) || filemtime( $file1 ) < ( time() + 86400 ) )   
             {
                 $parameters = array( 'backup_type' => 'installer', 'no_init' => true );
                 $class = new Application_Backup_Creator( $parameters );
@@ -65,6 +66,10 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $class->init();
          //       self::v( $class->view() );  
 
+            }
+            if( ! empty( $_REQUEST['pc_recreate_installer'] ) )   
+            {
+                exit();
             }
        //         exit();
 
