@@ -406,19 +406,23 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 								element = element ? element : document.createElement( "div" );
 								element.id = "element_to_show_profile_url";
 								var a = false;
-								if( target.value )
+								var xry = target.value;
+								xry = xry.toLowerCase();
+								xry = xry.replace( /[^a-zA-Z0-9\/]/gi, "-" );
+								xry = xry.replace( /([-])+/gi, "-" );
+								xry = xry.replace( /[-\/]$/gi, "" );
+								xry = xry.replace( /^[-\/]/gi, "" );
+							//	xry = "/" + xry;
+								if( xry )
 								{
 									a = true;
 								}
+								var xm = "Please enter a valid name in the space provided... (e.g. My New Site)";
 								if( a )
 								{
-									element.innerHTML = "<span style=\'font-size:smaller;\' class=\'normalnews\'>The sub-domain will be: <a href=\'/" + target.value + "\'>http://" + target.value + ".' . Ayoola_Application::getDomainSettings( 'domain_name' ) . '</a></span>";
+									xm = "The permanent domain name will be: <a target=\"_blank\" href=\'' . Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . '" + xry + ".' . Ayoola_Application::getDomainName() . '\'>' . Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . '" + xry + ".' . Ayoola_Application::getDomainName() . '</a>";
 								}  
-								else
-								{
-								//	element.innerHTML = "<span class=\'badnews\'>Please enter a valid profile URL in the space provided... (e.g. MyStyle) </span>";    
-									element.innerHTML = " ";       
-								}
+								element.innerHTML = "<span style=\'font-size:x-small;\' class=\'\'>" + xm + "</span>";
 								target.parentNode.insertBefore( element, target.nextSibling );
 							}
 						'

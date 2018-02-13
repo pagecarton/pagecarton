@@ -268,7 +268,7 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 					var xm = "Please enter a valid name in the space provided... (e.g. My New Page)";
 					if( a )
 					{
-						xm = "<a href=\'javascript:\' onclick=\'var cfd = document.getElementsByClassName( \"pc_page_url_field\" )[0]; cfd.type = \"text\"; cfd.type = \"text\"; cfd.focus();\'>Use Custom URL</a> or The URL for the new page will be: <a href=\'' . Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '" + xry + "\'>' . Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '<strong>" + xry + "</strong></a>";
+						xm = "<a href=\'javascript:\' onclick=\'var cfd = document.getElementsByClassName( \"pc_page_url_field\" )[0]; cfd.type = \"text\"; cfd.type = \"text\"; cfd.focus();\'>Use Custom URL</a> or The URL for the new page will be: <a target=\"_blank\" href=\'' . Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '" + xry + "\'>' . Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '<strong>" + xry + "</strong></a>";   
 					}  
 					cfdx.value = xry;
 					element.innerHTML = "<span style=\'font-size:x-small;\' class=\'\'>" + xm + "</span>";
@@ -304,14 +304,8 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 			
 			$options =  array( 
 								'template' => 'Use separate theme (Over-rides default theme)', 
-					//			'logged_in_hide' => 'Hide page from logged inn users', 
-					//			'logged_out_hide' => 'Hide page from logged out users', 
-					//			'private' => 'Hide page on sub-domains', 
 								'redirect' => 'Redirect this page to another', 
-						//		'disable' => 'Disable Page', 
-					//			'clone_existing_page' => 'Clone an existing page', 
 								'module' => 'Direct "' . rtrim( @$values['url'], '/' ) . '/*" to this page if they do not exist.',  
-						//		'advanced' => 'Show advanced options' 
 								);
 			
 			$fieldset->addElement( array( 'name' => 'page_options', 'label' => 'Page Options', 'type' => 'Checkbox', 'value' => @$values['page_options'] ), $options );
@@ -340,7 +334,6 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 			$authLevel[1] = 'Registration Required';
 			$authLevel[0] = 'Public';
 			$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Page Privacy', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel );    
-	//		$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $authLevel )  ) ); 
 			unset( $authLevel );
 
 			$fieldset->addElement( array( 'name' => 'cover_photo', 'label' => 'Page Header Image', 'type' => 'Document', 'value' => @$values['cover_photo'] ) );    

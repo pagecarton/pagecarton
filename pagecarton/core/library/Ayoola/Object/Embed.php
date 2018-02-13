@@ -363,9 +363,10 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		//		if( @$object['editable'] == $key ){ $html .= ' selected = selected '; }
 				$html .=  '>' . $value . '</option>';  
 			}
+	//		var_export( $object );
 			if( empty( $present ) )
 			{
-					$html .= '<option value="' . $object['editable'] . '" selected = selected>' . $object['editable'] . '</option> '; 
+				$html .= '<option value="' . $object['editable'] . '" selected = selected>' . $object['editable'] . '</option> '; 
 			}
 			$html .= '</select>';
 			

@@ -100,31 +100,7 @@ class Application_User_Creator extends Application_User_Abstract
 		$auth = new Ayoola_Access();
 		$urlToGo = Ayoola_Page::getPreviousUrl( '/account/' );
 		Application_Javascript::header( Ayoola_Application::getUrlPrefix() . $urlToGo );
-/*		if( $auth->isLoggedIn() )
-		{ 
-			if( Ayoola_Page::getPreviousUrl() )
-			{
-				header( 'Location: ' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl() );   
-				exit();
-			}
-		//	$this->setViewContent( Ayoola_Access_Bar::viewInLine() );
-			$this->setViewContent( '<h3>You are trying to create a new account while still logged in</h3>', true );
-			$this->setViewContent( '<p>You are currently logged in (as ' . Ayoola_Application::getUserInfo( 'email' ) . '), you cannot create a new account while still logged in. Here are a few options you may try:</p>
-			<ol>
-				<li>Sign out of the existing account, then try again. <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/signout/?previous_url=' . Ayoola_Page::getCurrentUrl() . '">Click here to sign out</a></li>
-				<li>Copy and paste the sign up url (<a href="http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Page::getPortNumber() . Ayoola_Application::getUrlPrefix() . '/accounts/signin">http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Page::getPortNumber() . Ayoola_Application::getUrlPrefix() . '/accounts/signin</a>) to another browser.</li>
-				<li>Share the sign up url with people that would like to sign up</li>
-			</ol>
-			' );
-		
-			return;
-		//	$auth->logout();
-		//	header( 'Location: ' . $urlToGo );
-		//	exit();
-		}
-*/		$this->setViewContent( $this->getForm()->view() );
-	//	$this->setViewContent( '<h3>Already have an account? <a rel="shadowbox;height=300px;width=600px;classPlayerUrl=/tools/classplayer/get/object_name/Ayoola_Access_Login/;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/accounts/signin/?previous_url=' . Ayoola_Page::getPreviousUrl( 'return_url' ) . '">Sign in</a>!</h3>' );
-	//	$this->setViewContent( '<h3>Already have an account? <a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/accounts/signin/?previous_url=' . Ayoola_Page::getPreviousUrl( '/account/' ) . '">Sign in</a>!</h3>' );
+		$this->setViewContent( $this->getForm()->view() );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 
 		$values['creation_time'] = time();
@@ -206,21 +182,6 @@ class Application_User_Creator extends Application_User_Abstract
 		{
 			case 'cloud':
 				//	If this is our first signup after we install, we could be made a super user
-			//	if( is_file( 'ayoola_cmf_installer.php' )  )
-				{ 
-/* 					isset( $_SESSION ) ? null : session_start();
-						
-					//	if I have this session, then I ran the installer.
-					if( isset( $_SESSION['installer'] )  )
-					{
-						//	DESTROY THE INSTALLER
-						if( @unlink( 'ayoola_cmf_installer.php' ) )
-						{
-							$values['access_level'] = 99;
-						}
-					}
- */				//	exit( 'Application can not run while installation is in progress.' ); 
-				}
 				$response = Ayoola_Api_SignUp::send( $values );
 			//	var_export( $response );
 				if( is_array( $response ) )

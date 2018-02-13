@@ -748,6 +748,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	$form->submitValue = $submitValue ;
 			//	$form->oneFieldSetAtATime = true;
 				$form->wrapForm = false;
+				$parameterOptions = array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() );
+				if( ! array_key_exists( @$advanceParameters['advanced_parameter_value'][$i], $parameterOptions ) )
+				{
+					$parameterOptions[@$advanceParameters['advanced_parameter_value'][$i]] = @$advanceParameters['advanced_parameter_value'][$i];
+				}
+				if( ! array_key_exists( @$advanceParameters['advanced_parameter_name'][$i], $parameterOptions ) )
+				{
+			//		var_export( $advanceParameters );
+					$parameterOptions[@$advanceParameters['advanced_parameter_name'][$i]] = @$advanceParameters['advanced_parameter_name'][$i];
+				}
 				switch( @$advanceParameters['advanced_parameter_name'][$i] )
 				{
 					case 'markup_template':
@@ -761,7 +771,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	if( $advanceParameters['advanced_parameter_value'][$i] )       
 						{
 					//		$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => 'HTML Markup', 'placeholder' => 'Parameter Name', 'type' => 'Hidden', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ) );
-							$parameterOptions = array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() );
 							if( ! array_key_exists( @$advanceParameters['advanced_parameter_value'][$i], $parameterOptions ) )
 							{
 								$parameterOptions[@$advanceParameters['advanced_parameter_value'][$i]] = @$advanceParameters['advanced_parameter_value'][$i];
@@ -775,7 +784,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					default:
 						if( static::getParameterKeys( $object ) )
 						{
-							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() ) );
+							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
 							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'InputText', 'value' => @htmlspecialchars( $advanceParameters['advanced_parameter_value'][$i] ) ) );
 							$fieldset->allowDuplication = true;  
 							$fieldset->placeholderInPlaceOfLabel = true;

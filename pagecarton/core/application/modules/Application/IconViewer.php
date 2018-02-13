@@ -114,8 +114,8 @@ class Application_IconViewer extends PageCarton_Widget
   //          var_export( $url );
   //          exit();
     //        header( 'Location: ' . $url );
-            @$maxWith = $this->getParameter( 'max_width' ) ? : @intval( $_REQUEST['max_width'] );
-            @$maxHeight = $this->getParameter( 'max_height' ) ? : @intval( $_REQUEST['max_height'] ); 
+            @$maxWith = ( $this->getParameter( 'max_width' ) ? : @intval( $_REQUEST['max_width'] ) ) ? : 600;
+            @$maxHeight = ( $this->getParameter( 'max_height' ) ? : @intval( $_REQUEST['max_height'] ) ) ? : 600; 
 
             if( ! $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
             {  

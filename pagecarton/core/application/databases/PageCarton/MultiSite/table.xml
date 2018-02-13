@@ -1,6 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="table" creation_time="1513850045" table_version="0.5" module_version="1.00" table_class="PageCarton_MultiSite_Table" creation_ip="2130706433">
-  <RECORDS autoId="7"/>
+  <RECORDS autoId="12">
+    <TABLE_ROW ROW_ID="7">
+      <TABLE_FIELD FIELD_KEY="directory"><![CDATA[/examples]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_dir"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1518273918]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[0-0-7]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="8">
+      <TABLE_FIELD FIELD_KEY="directory"><![CDATA[/tx]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_dir"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1518274054]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[0-0-8]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="9">
+      <TABLE_FIELD FIELD_KEY="directory"><![CDATA[/samples]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_dir"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1518274091]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[0-0-9]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="11">
+      <TABLE_FIELD FIELD_KEY="directory"><![CDATA[/samples/mynewweb]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parent_dir"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1518278895]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[0-0-11]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
   <TABLE_SETTINGS>
     <DATA_TYPES directory="INPUTTEXT" parent_dir="INPUTTEXT" creation_time="INPUTTEXT" table_id="INPUTTEXT"/>
     <FOREIGN_KEYS/>
