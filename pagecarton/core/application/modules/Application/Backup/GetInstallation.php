@@ -67,10 +67,6 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
          //       self::v( $class->view() );  
 
             }
-            if( ! empty( $_REQUEST['pc_recreate_installer'] ) )   
-            {
-                exit( 'pc_recreate_installer done!' );  
-            }
        //         exit();
 
 			$file2 = Ayoola_Loader::getFullPath( 'documents/pc_installer.php', array( 'prioritize_my_copy' => true ) );
@@ -88,6 +84,10 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
      //       var_export( $file1 );
     //        exit();
 
+            if( ! empty( $_REQUEST['pc_recreate_installer'] ) )   
+            {
+                exit( 'pc_recreate_installer done!' );  
+            }
 
             //  Output demo content to screen
             header('Content-Type: application/zip');
