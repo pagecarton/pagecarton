@@ -189,7 +189,17 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 				else
 				{
 					$done[] = $thisValue;
-					$linkValue[$linkKey] = array( 'title' => array_shift( $values['title'] ), 'url' => array_shift( $values['url'] ) );
+					$currentTitle = array_shift( $values['title'] );
+					$currentUrl = array_shift( $values['url'] );
+					if( ! trim( $currentTitle ) )
+					{
+						$currentTitle = $each['title'];
+					}
+					if( ! trim( $currentUrl ) )
+					{
+						$currentUrl = $each['url'];
+					}
+					$linkValue[$linkKey] = array( 'title' => $currentTitle, 'url' => $currentUrl );
 
 			//		$linkValue[$linkKey]['title'] = htmlspecialchars_decode( $linkValue[$linkKey]['title'] );
 					if( strip_tags( $linkValue[$linkKey]['title'] ) != $linkValue[$linkKey]['title'] )
