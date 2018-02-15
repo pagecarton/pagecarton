@@ -187,7 +187,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$object['editable'] = str_replace( $object['phrase_to_replace'], $object['phrase_to_replace_with'], $object['editable'] );
 		//	$object['phrase_to_replace'] = $object['phrase_to_replace_with'];
 		}
-		preg_match_all( '|\>([a-zA-Z 0-9-_,\'".\t\r\n\(\)\+\@]+)\<|', $object['editable'], $matches );
+		preg_match_all( '#\>([a-zA-Z 0-9-_,\'".\t\r\n\(\)\+\@\&\;\|©]+)\<#', $object['editable'], $matches );
 	//	var_export( $matches[1] );
 		$html .= '<select data-pc-return-focus-to="phrase_to_replace_with" onchange="" class="" name="phrase_to_replace" style="width:100%;" >';  
 		$html .= '<option value="" >Replace Words & Phrases</option>';  
