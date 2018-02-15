@@ -225,7 +225,11 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
             	$doc = str_ireplace( array( '<body>', '</body>', '<p->', '</p->' ), '', $xml[$contentKey]->exportHTML( $xml[$contentKey]->documentElement->firstChild ) );
 				
 		//		var_export( $doc );
-			//	var_export( $contentArray[$contentKey] );
+				//	delete all paragraphs in anchor
+				$doc = preg_replace( '#(\<a .*\>)(\<p\>)(.*)(\<\/p\>)(\<\/a\>)#', '$1$3$5', $doc );
+			//	var_export( $doc );
+		//		var_export( $contentArray[$contentKey] );
+				
 				$contentArray[$contentKey] = $doc;
 			//	var_export( $contentArray[$contentKey] );
 		//	var_export( $contentArray[$contentKey] );
@@ -234,7 +238,9 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			$newContent = json_encode( $contentArray );
 			file_put_contents( $path, $newContent );
 		//	$this->updateFile( array( 'plain_text' => $xml->saveHTML() ) );
+			static::refreshThemePage( $data['layout_name'] );
 			$this->setViewContent( '<p class="boxednews goodnews">Theme links saved successfully.</p>', true );
+			
 		//	echo $xml->view();
 		//	exit();
 		//	var_export( $linksData );
