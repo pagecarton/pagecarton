@@ -184,11 +184,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		if( ! empty( $object['phrase_to_replace_with'] ) &&  ! empty( $object['phrase_to_replace'] ) )
 		{
-			$object['editable'] = str_replace( $object['phrase_to_replace'], $object['phrase_to_replace_with'], $object['editable'] );
+			$object['editable'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['editable'] );
+			$object['codes'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['codes'] );
 		//	$object['phrase_to_replace'] = $object['phrase_to_replace_with'];
 		}
-		preg_match_all( '#\>([a-zA-Z 0-9-_,\'".\t\r\n\(\)\+\@\&\;\|©]+)\<#', $object['editable'], $matches );
+		preg_match_all( '#\>([a-zA-Z 0-9-_,\'".\t\r\n\(\)\+\@\&\;\|©]+)\<#', $object['editable'] . $object['codes'], $matches );
 	//	var_export( $matches[1] );
+		$matches[1] = array_unique( $matches[1] );
 		$html .= '<select data-pc-return-focus-to="phrase_to_replace_with" onchange="" class="" name="phrase_to_replace" style="width:100%;" >';  
 		$html .= '<option value="" >Replace Words & Phrases</option>';  
 
@@ -220,6 +222,21 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		//	var_export( $object );
 			$html .= '<textarea class="phrase_to_replace_with" placeholder="' . htmlentities( $object['phrase_to_replace'] ) . '" name="phrase_to_replace_with">' . $object['phrase_to_replace'] . '</textarea> '; 
 		}
+		$optionsName = 'text_widget_options';
+	//	if( ! empty( $object[$optionsName] ) && in_array( $key, $object[$optionsName] ) )
+		$html .= '<select multiple class="" name="' . $optionsName . '[]" style="width:100%;" >';  
+	//	$html .= '<option value="" >Text Options</option>';  
+		$availableOptions = array( 'preserve_content' => 'Disable WYSIWYG' );
+		foreach( $availableOptions as $key => $value )
+		{
+			$html .=  '<option value="' . $key . '"';   
+			if( ! empty( $object[$optionsName] ) && in_array( $key, $object[$optionsName] ) )
+			{ 
+				$html .= ' selected = selected '; 
+			}
+			$html .=  '>' . $value . '</option>';  
+		}
+		$html .= '</select>'; 
 		return $html;
 	}
 
@@ -311,19 +328,38 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, $object['editable'] ): null;
 	//		$replace = Ayoola_Application::getUrlPrefix();
 		}
+		$optionsName = 'text_widget_options';
 
-		if( ! @$object['codes'] )
+		if( ! @$object['codes'] || @in_array( 'preserve_content', $object[$optionsName] ) )
 		{
-			$html .= '<div style=" cursor: text;" data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor" onDblClick="replaceDiv( this );">' . ( isset( $object['editable'] ) ? $object['editable'] : '
+
+			if( @in_array( 'preserve_content', $object[$optionsName] ) )
+			{
+				@$object['editable'] = $object['codes'] ? : $object['editable'];
+				$html .= '<div data-parameter_name="editable" title="The content has been locked from editing...">';
+			}
+			else
+			{
+				$html .= '<div style=" cursor: text;" data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor" onDblClick="replaceDiv( this );">';
+			}
+			
+			
+			$html .= ( isset( $object['editable'] ) ? $object['editable'] : '
 			<div style="">
 			<h3>Lorem Ipsum dolor</h3>
 			<p>Vivamus sit amet dolor sit amet nunc maximus finibus. Donec vel ornare leo, eget gravida orci. Etiam vitae rutrum nisi. Mauris auctor velit et ultricies mollis. Donec in mattis lectus. In hac habitasse platea dictumst. Sed ultricies magna ut ligula fringilla facilisis. Ut sodales erat ut libero rhoncus hendrerit. Vivamus nunc magna, finibus vel velit in, tempus venenatis dolor. Aenean a leo non tellus semper ultricies eget quis enim.</p>
 			</div>
-			' ) . '</div>';  
+			' ) .
+			
+			'</div>';  
 		}
-		else
+		if( @$object['codes'] || @in_array( 'preserve_content', $object[$optionsName] ) )
 		{
-			$html .= '<textarea data-parameter_name="codes" style="display:block; width:100%;" title="You may click to edit the content here..." >' . htmlspecialchars( @$object['codes'] ) . '</textarea>';     
+			if( @in_array( 'preserve_content', $object[$optionsName] ) )
+			{
+				$hiddenStyle = 'display:none;';
+			}
+			$html .= '<textarea class="pc_page_object_specific_item" data-parameter_name="codes" style="' . $hiddenStyle . 'width:100%;" title="You may click to edit the content here..." >' . htmlspecialchars( @$object['codes'] ? : $object['editable'] ) . '</textarea>';     
 		}
 
 		//	Use this to clean the URL prefix from the codes
@@ -337,84 +373,86 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	//	$html .= '<a class="title_button" title="Switch the editing mode" name="" href="javascript:;" onclick="e.preventDefault();divToCodeEditor( this );">Code View</a>'; 
 	//	var_export( @$object['codes'] );
 		//									f.outerHTML = \'<div data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor"  onClick="replaceDiv( this );" onDblClick="replaceDiv( this );">' . @$object['codes'] . '</div>\';  
+		if( ! @in_array( 'preserve_content', $object[$optionsName] ) )
+		{
 
-		Application_Javascript::addCode
-		(
-			'
-				var divToCodeEditor = function( trigger )
-				{
-					// create textarea
-					var e = trigger.parentNode.parentNode.getElementsByTagName( \'textarea\'); 
-				//	if( e.length )
+			Application_Javascript::addCode
+			(
+				'
+					var divToCodeEditor = function( trigger )
 					{
-						var c = false;
- 						for( var b = 0; b < e.length; b++ )
-						{ 
-							if( e[b].name == \'' . __CLASS__ . '_code_editor\' )
-							{
-								var c = e[b];  
-							}
-							else if( e[b].getAttribute( \'data-parameter_name\' ) == \'codes\' )
-							{
-								//	saving as codes makes us not have the ckeditor again
-								var f = document.createElement( \'div\' ); 
-								f.className = \'ckeditor\'; 
-								f.outerHTML = \'<div data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor"  onClick="replaceDiv( this );" onDblClick="replaceDiv( this );">\' + e[b].value +  \'</div>\';  
-						//		f. = 5; 
-								f.setAttribute( \'onClick\', \'replaceDiv( this );\' ); 
-								f.setAttribute( \'contentEditable\', \'true\' ); 
-								
-								//	new ckeditor 
-								e[b].parentNode.insertBefore( f, e[b] ); 
-								var c = e[b];
+						// create textarea
+						var e = trigger.parentNode.parentNode.getElementsByTagName( \'textarea\'); 
+					//	if( e.length )
+						{
+							var c = false;
+							for( var b = 0; b < e.length; b++ )
+							{ 
+								if( e[b].name == \'' . __CLASS__ . '_code_editor\' )
+								{
+									var c = e[b];  
+								}
+								else if( e[b].getAttribute( \'data-parameter_name\' ) == \'codes\' )
+								{
+									//	saving as codes makes us not have the ckeditor again
+									var f = document.createElement( \'div\' ); 
+									f.className = \'ckeditor\'; 
+									f.outerHTML = \'<div data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor"  onClick="replaceDiv( this );" onDblClick="replaceDiv( this );">\' + e[b].value +  \'</div>\';  
+							//		f. = 5; 
+									f.setAttribute( \'onClick\', \'replaceDiv( this );\' ); 
+									f.setAttribute( \'contentEditable\', \'true\' ); 
+									
+									//	new ckeditor 
+									e[b].parentNode.insertBefore( f, e[b] ); 
+									var c = e[b];
+								}
 							}
 						}
- 					}
-					if( ! c )
-					{						
-							//	saving this is causing conflicts, so new textarea for each request
-							var c = document.createElement( \'textarea\' ); 
-							c.name = \'' . __CLASS__ . '_code_editor\'; 
-							c.rows = 5; 
-							c.setAttribute( \'style\', \'display:block; width:100%;\' ); 
+						if( ! c )
+						{						
+								//	saving this is causing conflicts, so new textarea for each request
+								var c = document.createElement( \'textarea\' ); 
+								c.name = \'' . __CLASS__ . '_code_editor\'; 
+								c.rows = 5; 
+								c.setAttribute( \'style\', \'display:block; width:100%;\' ); 
+						}
+						var a = trigger.parentNode.parentNode.getElementsByClassName( \'ckeditor\'); 
+						for( var b = 0; b < a.length; b++ )
+						{  
+							if( trigger.innerHTML == \'WYSIWYG\' )
+							{ 
+								a[b].innerHTML = c.value ? c.value : a[b].innerHTML;  
+								
+								a[b].style.display = \'block\'; 
+								c.style.display = \'none\'; 
+								trigger.innerHTML = \'Code View\'; 
+								c.setAttribute( \'data-parameter_name\', \'\' ); 
+								a[b].setAttribute( \'data-parameter_name\', \'editable\' ); 
+								c.parentNode.removeChild( c );
+								
+							} 
+							else
+							{ 
+								if( CKEDITOR )
+								for( name in CKEDITOR.instances )
+								{
+									//	Destroy ckeditor so it could clean up the  code for Code Editor
+									CKEDITOR.instances[name].destroy();
+								}
+								a[b].parentNode.insertBefore( c, a[b] ); 
+								a[b].style.display = \'none\';  
+								trigger.innerHTML = \'WYSIWYG\'; 
+								c.value = a[b].innerHTML; 
+								c.setAttribute( \'data-parameter_name\', \'codes\' ); 
+								a[b].setAttribute( \'data-parameter_name\', \'\' ); 
+								c.focus(); 
+							} 
+						//	trigger.style.display = \'\'; 
+						}
 					}
-					var a = trigger.parentNode.parentNode.getElementsByClassName( \'ckeditor\'); 
-					for( var b = 0; b < a.length; b++ )
-					{  
-						if( trigger.innerHTML == \'WYSIWYG\' )
-						{ 
-							a[b].innerHTML = c.value ? c.value : a[b].innerHTML;  
-							
-							a[b].style.display = \'block\'; 
-							c.style.display = \'none\'; 
-							trigger.innerHTML = \'Code View\'; 
-							c.setAttribute( \'data-parameter_name\', \'\' ); 
-							a[b].setAttribute( \'data-parameter_name\', \'editable\' ); 
-							c.parentNode.removeChild( c );
-							
-						} 
-						else
-						{ 
-							if( CKEDITOR )
-							for( name in CKEDITOR.instances )
-							{
-								//	Destroy ckeditor so it could clean up the  code for Code Editor
-								CKEDITOR.instances[name].destroy();
-							}
-							a[b].parentNode.insertBefore( c, a[b] ); 
-							a[b].style.display = \'none\';  
-							trigger.innerHTML = \'WYSIWYG\'; 
-							c.value = a[b].innerHTML; 
-							c.setAttribute( \'data-parameter_name\', \'codes\' ); 
-							a[b].setAttribute( \'data-parameter_name\', \'\' ); 
-							c.focus(); 
-						} 
-					//	trigger.style.display = \'\'; 
-					}
-				}
-			'
-		);
-						
+				'
+			);
+		}					
 //		$html .= '<p style="clear:both;"></p>';
 	//	$html .= '</div>';	//	 status bar
 	//	$html .= '<button href="javascript:;" title="Launch the HTML Editor" class="normalnews boxednews" onclick="ayoola.div.makeEditable( this.previousSibling ); replaceDiv( this.previousSibling ); this.innerHTML = this.innerHTML == \'edit\' ? \'preview\' : \'edit\'">HTML Editor</button>';
@@ -437,7 +475,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		(
 			'<a class="title_button" title="Switch the editing mode" name="" href="javascript:;" onclick="divToCodeEditor( this );">Code View</a>'
 		);
- */		return '<a class="title_button" title="Switch the editing mode" name="" href="javascript:;" onclick="divToCodeEditor( this );return true;">' . ( isset( $object['codes'] ) ? 'WYSIWYG' : 'Code View' ) . '</a>';
+ */	
+		$optionsName = 'text_widget_options';
+		if( ! @in_array( 'preserve_content', $object[$optionsName] ) )
+		{
+			return '<a class="title_button" title="Switch the editing mode" name="" href="javascript:;" onclick="divToCodeEditor( this );return true;">' . ( isset( $object['codes'] ) ? 'WYSIWYG' : 'Code View' ) . '</a>';
+		}
 	}
 	
     /**
