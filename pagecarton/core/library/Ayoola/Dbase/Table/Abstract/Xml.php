@@ -338,7 +338,9 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
          //         var_export( $globalFiles );
           //        var_export( $stored['files'] );
                 }
-                return $stored['result'];  
+
+                //  this cache has been found to return result of other tables in a table
+            //    return $stored['result'];  
             }
             else
             {
