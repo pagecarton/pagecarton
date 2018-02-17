@@ -1618,9 +1618,11 @@ class Ayoola_Application
 	//		var_export( $urlToLocalInstallerFile );
 			$modRewriteEnabled = get_headers( $urlToLocalInstallerFile );
 			$responseCode = explode( ' ', $modRewriteEnabled[0] );
-		//	var_export( $urlToLocalInstallerFile );
+	//		var_export( $urlToLocalInstallerFile );
 	//		var_export( $responseCode );
-			if( in_array( '200', $responseCode ) )
+		//	exit();
+			if( ! in_array( '404', $responseCode ) )
+//			if( in_array( '200', $responseCode ) )
 			{
 				$data = 1;
 			}
