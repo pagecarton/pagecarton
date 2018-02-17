@@ -498,8 +498,8 @@
 
 .pc_page_layout_grid
 {
-    min-height: unset;
-    min-height: initial;
+    min-height: unset !important;
+    min-height: initial !important;
 }
 
 .pc_page_object_insert_button_area, .pc_page_object_inner_settings_area, .pc_page_object_inner_settings_area2
