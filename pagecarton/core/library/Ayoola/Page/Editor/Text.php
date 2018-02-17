@@ -67,6 +67,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     {
 		//	codes first because it wont be there if they didnt opt to enter codes
 		$content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
+		if( @in_array( 'preserve_content', $this->getParameter( 'text_widget_options' ) ) && $this->getParameter( 'preserved_content' ) )
+		{
+			@$content = $this->getParameter( 'preserved_content' );
+		}
 //		var_export( $this->getParameter() );
 		if( $this->getParameter( 'markup_template_object_name' ) )
 		{
@@ -184,6 +188,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		if( ! empty( $object['phrase_to_replace_with'] ) &&  ! empty( $object['phrase_to_replace'] ) )
 		{
+			$object['preserved_content'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['preserved_content'] );
 			$object['editable'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['editable'] );
 			$object['codes'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['codes'] );
 		//	$object['phrase_to_replace'] = $object['phrase_to_replace_with'];
@@ -314,6 +319,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 											' 
 										);    
 		$html = null;
+		$optionsName = 'text_widget_options';
+		if( @in_array( 'preserve_content', $object['text_widget_options'] ) )
+		{
+			@$object['editable'] = $object['preserved_content'] ? : ( $object['codes'] ? : $object['editable'] );
+		}
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];    
 		@$object['option'] = $object['option'] ? : $object['view_option'];
 		if( @$object['url_prefix'] !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
@@ -328,14 +338,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, $object['editable'] ): null;
 	//		$replace = Ayoola_Application::getUrlPrefix();
 		}
-		$optionsName = 'text_widget_options';
 
-		if( ! @$object['codes'] || @in_array( 'preserve_content', $object[$optionsName] ) )
+		if( ! @$object['codes'] )
 		{
 
 			if( @in_array( 'preserve_content', $object[$optionsName] ) )
 			{
-				@$object['editable'] = $object['codes'] ? : $object['editable'];
 				$html .= '<div data-parameter_name="editable" title="The content has been locked from editing...">';
 			}
 			else
@@ -353,14 +361,15 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			
 			'</div>';  
 		}
-		if( @$object['codes'] || @in_array( 'preserve_content', $object[$optionsName] ) )
+		elseif( @$object['codes']  )
 		{
-			if( @in_array( 'preserve_content', $object[$optionsName] ) )
+		//	if( @in_array( 'preserve_content', $object[$optionsName] ) )
 			{
-				$hiddenStyle = 'display:none;';
+		//		$hiddenStyle = 'display:none;';
 			}
 			$html .= '<textarea class="pc_page_object_specific_item" data-parameter_name="codes" style="' . $hiddenStyle . 'width:100%;" title="You may click to edit the content here..." >' . htmlspecialchars( @$object['codes'] ? : $object['editable'] ) . '</textarea>';     
 		}
+		$html .= '<textarea class="" data-parameter_name="preserved_content" style="display:none;" title="" >' . htmlspecialchars( @$object['editable'] ) . '</textarea>';     
 
 		//	Use this to clean the URL prefix from the codes
 		$html .= '<input data-parameter_name="url_prefix" type="hidden" value="' . Ayoola_Application::getUrlPrefix() . '" >';  
@@ -471,7 +480,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     protected static function getParameterKeysFromTheseOtherClasses( & $parameters )
     {
 	//	var_export( $parameters['editable'] );
-		return (array) $parameters['markup_template_object_name'];
+		$classes = array();
+		if( $parameters['markup_template_object_name'] )
+		{
+			$classes = (array) $parameters['markup_template_object_name'];
+		}
+		return $classes;
 	}
  
 	
