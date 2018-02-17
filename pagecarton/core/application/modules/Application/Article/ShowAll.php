@@ -1477,10 +1477,16 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => 'filectime' ) );
 		//			$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => $sortFunction ) );
 		//			krsort( $this->_dbData );
-					$table = Application_Article_Table::getInstance();
-					$this->_dbData = $table->select();
-				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );
-				//	krsort( $this->_dbData );
+					if( empty( $_REQUEST['pc_load_old_posts']))
+					{
+						$table = Application_Article_Table::getInstance();
+						$this->_dbData = $table->select();
+					}
+					else
+					{
+						$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );
+						krsort( $this->_dbData );
+					}
 				//	self::v( self::getFolder() );
 				//	self::v( Ayoola_Doc::getFilesRecursive( self::getFolder() ) );
 				//	var_export( count( $files ) );  
