@@ -771,7 +771,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					break;
 				}
 			}
-			elseif( $this->getParameter( 'filter_date' ) )
+		//	elseif( $this->getParameter( 'filter_date' ) )
 			{
 				$filter = new Ayoola_Filter_Time();
 			//	if( @$data['article_modified_date'] )

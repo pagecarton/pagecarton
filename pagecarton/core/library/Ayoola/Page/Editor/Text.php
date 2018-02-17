@@ -461,6 +461,18 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	//	$html .= '<a href="javascript:;" title="Close editor the preview content" class="normalnews boxednews" style="padding:1em;" onclick="ayoola.div.wysiwygEditor.destroy();"> preview </a>';
 		return $html;
 	}
+
+    /**
+     * Returns an array of other classes to get parameter keys from
+     *
+     * @param void
+     * @return array
+     */
+    protected static function getParameterKeysFromTheseOtherClasses( & $parameters )
+    {
+	//	var_export( $parameters['editable'] );
+		return (array) $parameters['markup_template_object_name'];
+	}
  
 	
     /**
