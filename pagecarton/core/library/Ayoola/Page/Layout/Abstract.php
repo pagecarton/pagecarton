@@ -172,33 +172,35 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				break;
 			}
 		}
+	//	var_export( $files );
 	//	var_export( $alternateFile );
+	//	exit();
 		if( $alternateFile )
 		{
 			$alternateFile = file_get_contents( $alternateFile );
 			$alternateFile = self::sanitizeTemplateFile( $alternateFile, $values );
-			preg_match_all( "/@@@([0-9A-Za-z_]+)@@@/", $content, $matches );
-			
-	//		preg_match_all( '/{@@@\w([\S\s]*)\w@@@}/i', $content, $matches );
+		}
+		preg_match_all( "/@@@([0-9A-Za-z_]+)@@@/", $content, $matches );
+		
+//		preg_match_all( '/{@@@\w([\S\s]*)\w@@@}/i', $content, $matches );
 //		var_export( $matches );
 
-			foreach( $matches[1] as $count => $match )
-			{
-				preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $content, $placeholder );
-		//		var_export( $match );
-		//		var_export( $placeholder[1] );
-		//		var_export( $alternateFile );
-		//		var_export( stripos( $placeholder[1], '©' ) );
+		foreach( $matches[1] as $count => $match )
+		{
+			preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $content, $placeholder );
+	//		var_export( $match );
+	//		var_export( $placeholder[1] );
+	//		var_export( $alternateFile );
+	//		var_export( stripos( $placeholder[1], '©' ) );
 
-				// Excempt the header content, and the nav and footer
-				if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ! stripos( $placeholder[1], '</nav>' ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy;' ) )
-				{
-			//		var_export( stripos( $placeholder[1], '©' ) );
-			//		var_export( $match );
-					//	remove sections that are not common to all files
-					$content = preg_replace('/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', '', $content );
-				//	var_export( $match );
-				}
+			// Excempt the header content, and the nav and footer
+			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ! stripos( $placeholder[1], '</nav>' ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy;' ) )
+			{
+		//		var_export( stripos( $placeholder[1], '©' ) );
+		//		var_export( $match );
+				//	remove sections that are not common to all files
+				$content = preg_replace('/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', '', $content );
+			//	var_export( $match );
 			}
 		}
 

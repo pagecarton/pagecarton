@@ -654,7 +654,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			if( ! Ayoola_Loader::loadClass( $class ) )
 			{
-				return false;
+				continue;
 			}
 			$classFile = $filter->filter( $class );
 			$classFile = Ayoola_Loader::getFullPath( $classFile );
