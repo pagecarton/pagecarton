@@ -422,10 +422,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	Add to the layout on the fly
 		//	must be a word because its used as variable in the page files
 	//	preg_match_all( "/@@@([\w+]+)@@@/", $this->_layoutRepresentation, $placeholders );
-		preg_match_all( "/@@@([0-9A-Za-z_]+)@@@/", $content['template'], $placeholders );
+	//	preg_match_all( "/@@@([0-9A-Za-z_]+)@@@/", $content['template'], $placeholders );
+		$placeholders = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $content['template'] );
 		preg_match_all( "/%%([A-Za-z]+)%%/", $content['template'], $placeholders2 );
 	//	var_export( $placeholders );
-		$placeholders = array_unique( $placeholders[1] );
+		$placeholders = array_unique( $placeholders );
 		$placeholders2 = array_unique( $placeholders2[1] );
 //		var_export( $placeholders );
 	//	var_export( array_fill_keys( $placeholders, '1' ) );
@@ -475,14 +476,17 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$whereToGetPlaceholders = Ayoola_Page_Layout_Abstract::sanitizeTemplateFile( $whereToGetPlaceholders, $themeInfo  );
 
 			//		look for dangling placeholders in page theme file
-			preg_match_all( "/@@@([0-9A-Za-z_]+)@@@/", $whereToGetPlaceholders, $placeholdersInPageThemeFile );
-			$placeholdersInPageThemeFile = $placeholdersInPageThemeFile[1];
+	//		preg_match_all( "/@@@([0-9A-Za-z_]+)@@@/", $whereToGetPlaceholders, $placeholdersInPageThemeFile );
+	//		$placeholdersInPageThemeFile = $placeholdersInPageThemeFile[1];
+			$placeholdersInPageThemeFile = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $whereToGetPlaceholders );
 
 			$danglingPlaceholders = array_merge( array_diff( $placeholdersInPageThemeFile, $placeholders ), $danglingPlaceholders );
 
+			krsort( $danglingPlaceholders );
+
 		//	var_export( $placeholdersInPageThemeFile );
 	//		var_export( $placeholders );
-	//		var_export( $danglingPlaceholders );
+				//		var_export( $danglingPlaceholders );
 	//		$inversePlaceholders = array_flip( $placeholders );
 	//		$inverseThemePlaceholders = array_flip( $placeholdersInPageThemeFile );
 		//	$danglingPlaceholders = implode( '@@@')
@@ -647,7 +651,16 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 								if( stripos( $check, '</nav>' ) && empty( $firstNav ) )
 								{
 									$firstNav = true;
-									$defaultPlaceHolder = null;
+
+									// treat case where we are on index page but we using a different nagivation
+							//		if( ! stripos( $originalFile, $check ) && $page['url'] == '/' )
+									{
+
+									}
+							//		else
+									{
+										$defaultPlaceHolder = null;
+									}
 								}
 								if( stripos( $originalFile, $check  ) || stripos( $check, '©' ) || stripos( $check, '&copy;' ) )
 								{

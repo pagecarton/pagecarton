@@ -102,9 +102,9 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
 	public static function getFooter()
     {
 		return '
-		Your e-mail, ' . Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' ) . ' was set in Ayoola CMF admin panel. Here is the direct link to access the web application settings: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/settings/.
+		Your e-mail, ' . Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' ) . ' was set in PageCarton admin panel. Here is the direct link to the admin panel: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/pc-admin/.
 		
-		For tutorials, help on developing with Ayoola CMF, visit http://ayoo.la/developer/cmf/. Ayoola CMF (http://ayoo.la/cmf/) is a content management framework that makes it easy to build responsive web pages. 
+		For tutorials, help on developing with PageCarton, visit http://pagecarton.org. PageCarton is a content management system that makes it easy to build responsive websites and apps. 
 		';
     } 
 	// END OF CLASS

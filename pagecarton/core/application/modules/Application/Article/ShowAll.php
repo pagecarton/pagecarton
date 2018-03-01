@@ -708,6 +708,17 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					@$data['article_title'] = mb_strimwidth( $titleToUse, 0, $this->getParameter( 'length_of_title' ), "..." );
 				}
 			}
+			if( $this->getParameter( 'use_datetime' ) )
+			{
+
+				if( ! empty( $data['datetime'] ) )
+				{
+					$data['datetime'] = strtotime( $data['datetime'] );
+					$data['article_creation_date'] = $data['datetime'];		
+					$data['article_modified_date'] = $data['datetime'];		
+				}
+		//		var_export( $data['article_modified_date'] );
+			}
 			if( $this->getParameter( 'modified_time_representation' ) )
 			{
 				if( is_string( $this->getParameter( 'modified_time_representation' ) ) )
@@ -718,17 +729,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				else
 				{
 					$timeToShow = (array) $this->getParameter( 'modified_time_representation' );
-				}
-				if( ! empty( $data['datetime'] ) )
-				{
-					$data['datetime'] = strtotime( $data['datetime'] );
-				//	if( $this->getParameter( 'use_datetime' ) )
-					{
-
-						$data['article_modified_date'] = $data['datetime'];
-				//		var_export( $data['article_modified_date'] );
-					}
-					
 				}
 				foreach( $timeToShow as $key => $each )
 				{
@@ -746,30 +746,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				@$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
 				@$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
 				@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );
-				//	var_export( $data['article_modified_date'] );
-				//		var_export( time() );
-				switch( $this->getParameter( 'post_expiry_time' ) )
-				{
-					case 'future':
-					//	var_export( $data['article_modified_date'] > time() );
-					//	var_export( $data['article_modified_date'] );
-				//		var_export( $data['article_title'] );
-					//	var_export( time() );
-						if( $data['article_modified_date'] < time() )
-						{
-							continue 2;
-						}
-					break;
-					case 'past':
-						if( $data['article_modified_date'] > time() )
-						{
-							continue 2;
-						}
-					break;
-					default:
-
-					break;
-				}
 			}
 		//	elseif( $this->getParameter( 'filter_date' ) )
 			{
@@ -782,6 +758,30 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				{
 					$data['article_creation_date_filtered'] = $filter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
 				}
+			}
+				//	var_export( $data['article_modified_date'] );
+				//		var_export( time() );
+			switch( $this->getParameter( 'post_expiry_time' ) )
+			{
+				case 'future':
+				//	var_export( $data['article_modified_date'] > time() );
+				//	var_export( $data['article_modified_date'] );
+			//		var_export( $data['article_title'] );
+				//	var_export( time() );
+					if( $data['article_modified_date'] < time() )
+					{
+						continue 2;
+					}
+				break;
+				case 'past':
+					if( $data['article_modified_date'] > time() )
+					{
+						continue 2;
+					}
+				break;
+				default:
+
+				break;
 			}
 		//	var_export( $data );
 			

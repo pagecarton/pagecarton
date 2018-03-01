@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageCarton Content Management System
  *
@@ -252,9 +253,12 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 
 
 			$file = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
-			if( is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $file ) )
+	//		if( is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $file ) )
 			{
+				//	dont allow main page content slip here.
 				$rPaths['data_json'] = $file;
+				$rPaths['data_php'] = null;
+				$rPaths['data_php'] = null;
 			}
 			if( ! empty( $_REQUEST['pc_page_editor_content_version'] ) )
 			{

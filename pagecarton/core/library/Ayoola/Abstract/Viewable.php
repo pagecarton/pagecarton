@@ -222,7 +222,55 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//		var_export( $this->initiated );
 //			var_export( get_class( $this ) );
 		//	self::v( $this->getParameter( 'no_init' ) );
+
 			$this->initiated = true;
+
+			if( $this->getParameter( 'url_blacklist' ) || $this->getParameter( 'url_whitelist' ) )
+			{
+				$currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
+				switch( $currentUrl )
+				{
+					case '/tools/classplayer':
+					case '/object':
+					case '/pc-admin':
+					case '/widgets':
+					case '/widget':
+			//		case true:
+						//	Do nothing.
+						//	 had to go through this route to process for 0.00
+				//		var_export( __LINE__ );
+						if( @$_REQUEST['url'] && @$_REQUEST['name'] || ( @$_REQUEST['rebuild_widget'] ) )
+						{
+							$currentUrl = $_REQUEST['url'];
+							$editorMode = true;
+							break;
+						}
+						return false;
+					break;
+					default:
+		//      var_export( $currentUrl );
+					break;
+				}
+			}
+			if( $this->getParameter( 'url_blacklist' ) )
+			{
+				$list = $this->getParameter( 'url_blacklist' );
+				$list = array_map( 'trim', explode( ',', $list ) );
+			//	var_export( $currentUrl );
+				if( in_array( $currentUrl, $list ) )
+				{
+					return false;
+				}
+			}
+			elseif( $this->getParameter( 'url_whitelist' ) )
+			{
+				$list = $this->getParameter( 'url_whitelist' );
+				$list = array_map( 'trim', explode( ',', $list ) );
+				if( ! in_array( $currentUrl, $list ) )
+				{
+					return false;
+				}
+			}
 		//	var_export( __LINE__ );
 			if( $this->init() )
 			{
@@ -720,6 +768,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 			$form = new Ayoola_Form( array( 'name' => $advancedName, 'data-parameter_name' => 'advanced_parameters', 'class' => '' ) );
 			parse_str( @$object['advanced_parameters'], $advanceParameters );
+			self::sanitizeParameters( $object );
+
+
 			$object = array_merge( $advanceParameters, $object );
 			if( method_exists( $object['class_name'], 'getHTMLForLayoutEditorAdvancedSettings' ) )
 			{
@@ -995,7 +1046,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	 * 		
      * @param array Parameters meant for this object
      */
-    public function setParameter( array $parameters ) 
+    public static function sanitizeParameters( & $parameters ) 
 	{
 		
 		if( ! empty( $parameters['advanced_parameters'] ) )
@@ -1006,6 +1057,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$parameters += $advanceParameters;
 			unset( $parameters['advanced_parameters'] );
 		}
+	}
+
+    /**
+	 * Replacing setViewOption and setViewParameter with a universal method
+	 * 		
+     * @param array Parameters meant for this object
+     */
+    public function setParameter( array $parameters ) 
+	{
+		self::sanitizeParameters( $parameters );
 		if( isset( $parameters['view'] ) ){ $this->setViewParameter( $parameters['view'] ); }
 		if( isset( $parameters['editable'] ) ){ $this->setViewParameter( $parameters['editable'] ); }
 		if( isset( $parameters['option'] ) ){ $this->setViewOption( $parameters['option'] ); }

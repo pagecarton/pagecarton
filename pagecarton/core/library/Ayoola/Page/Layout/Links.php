@@ -109,7 +109,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 						$title = null;
 						foreach( $each->childNodes as $childKey => $eachChild )
 						{
-							if( strtolower( $eachChild->tagName ) === 'img' )
+							if( strtolower( $eachChild->tagName ) === 'img' && stripos( $eachChild->getAttribute( 'src' ), '/img/logo.png' ) === false )
 							{
 								continue 2;
 							}
@@ -136,15 +136,16 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 					//	change links with /page.html to /page
 					$url = self::themePageToUrl( $url, $data['layout_name'] );
 				//		var_export( $url );
-					$title = str_ireplace( array( '<p>', '</p>', "&nbsp;", '' ), '', $title );
+					$title = str_ireplace( array( '<p>', '</img>', '</p>', "&nbsp;", '' ), '', $title );
 					$titleX = htmlentities($title, null, 'utf-8');
 					$titleX = str_replace("&nbsp;", "", $titleX);
 					$titleX = html_entity_decode($titleX);
 		//			$title = preg_replace( '|^[^a-Z0-9]|', '', $title );
 					if( stripos( $titleX, '<img' ) !== false )
 					{
+						//	we need to allow logo from getting here
 					///	var_export( $innerHtml );
-						continue;
+					//	continue;
 					}
 					if( ! trim( $titleX ) )
 					{

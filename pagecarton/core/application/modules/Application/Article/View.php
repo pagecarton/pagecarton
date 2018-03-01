@@ -146,6 +146,18 @@ class Application_Article_View extends Application_Article_Abstract
 				$data += $userInfo;
 			}
 		}
+		if( $this->getParameter( 'use_datetime' ) )
+		{
+			if( ! empty( $data['datetime'] ) )
+			{
+				$data['datetime'] = strtotime( $data['datetime'] );
+
+				$data['article_modified_date'] = $data['datetime'];
+				$data['article_creation_date'] = $data['datetime'];
+		//		var_export( $data['article_modified_date'] );
+			}
+			
+		}
 		if( $this->getParameter( 'modified_time_representation' ) )
 		{
 			if( is_string( $this->getParameter( 'modified_time_representation' ) ) )
@@ -156,17 +168,6 @@ class Application_Article_View extends Application_Article_Abstract
 			else
 			{
 				$timeToShow = (array) $this->getParameter( 'modified_time_representation' );
-			}
-			if( ! empty( $data['datetime'] ) )
-			{
-				$data['datetime'] = strtotime( $data['datetime'] );
-				if( $this->getParameter( 'use_datetime' ) )
-				{
-
-					$data['article_modified_date'] = $data['datetime'];
-			//		var_export( $data['article_modified_date'] );
-				}
-				
 			}
 			foreach( $timeToShow as $key => $each )
 			{
@@ -197,12 +198,13 @@ class Application_Article_View extends Application_Article_Abstract
 				$data['article_creation_date_filtered'] = $filter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
 			}
 		}
+		$data['filtered_time'] = self::filterTime( $data );
 		
-			if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
-			{
-			//	$data['document_url'] = $data['document_url_base64'];
-				$data['document_url'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . filemtime( self::getFolder() . @$data['article_url'] );
-			}
+		if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
+		{
+		//	$data['document_url'] = $data['document_url_base64'];
+			$data['document_url'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . filemtime( self::getFolder() . @$data['article_url'] );
+		}
 		if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )  
 		{
 			if( $this->getParameter( 'thumbnail' ) )   
@@ -314,52 +316,6 @@ class Application_Article_View extends Application_Article_Abstract
 		else
 		{
 			$postType = $data['article_type'];
-		}
-		$data['filtered_time'] = self::filterTime( $data );
-		if( $this->getParameter( 'modified_time_representation' ) )
-		{
-			if( is_string( $this->getParameter( 'modified_time_representation' ) ) )
-			{
-				$timeToShow = array_map( 'trim', explode( ',', $this->getParameter( 'modified_time_representation' ) ) );
-				$timeToShow = array_combine( $timeToShow, $timeToShow );
-			}
-			else
-			{
-				$timeToShow = (array) $this->getParameter( 'modified_time_representation' );
-			}
-			if( ! empty( $data['datetime'] ) )
-			{
-				$data['datetime'] = strtotime( $data['datetime'] );
-			}
-			foreach( $timeToShow as $key => $each )
-			{
-			//	var_export( date( $each, $data['article_modified_date'] ) );
-			//	var_export( $key );
-				@$data['modified_time_representation_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
-				@$data['article_modified_date_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
-				@$data['article_creation_date_' . $key] = date( $each, $data['article_creation_date'] ? : ( time() - 1 ) );
-				if( ! empty( $data['datetime'] ) )
-				{
-					@$data['datetime_' . $key] = date( $each, $data['datetime'] );
-				//	var_export( $data['datetime_' . $key] );
-				}
-			}
-			@$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
-			@$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
-			@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );
-			@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );
-		}
-		elseif( $this->getParameter( 'filter_date' ) )
-		{
-			$filter = new Ayoola_Filter_Time();
-		//	if( @$data['article_modified_date'] )
-			{
-				$data['article_modified_date_filtered'] = $filter->filter( $data['article_modified_date'] );
-			}
-		//	else
-			{
-				$data['article_creation_date_filtered'] = $filter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
-			}
 		}
 
 		//	just use this

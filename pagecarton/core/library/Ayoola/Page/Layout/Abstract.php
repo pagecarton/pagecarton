@@ -152,6 +152,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$alternateFile = null;
 		$dir = dirname( $this->getMyFilename() );
 		$files = Ayoola_Doc::getFiles( $dir );
+	//	var_export( $files );
 		foreach( $files as $each )
 		{
 			$ext = array_pop( explode( '.', $each ) );
@@ -175,23 +176,70 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 	//	var_export( $files );
 	//	var_export( $alternateFile );
 	//	exit();
+		$alternateNavigation = null;
+		$altNavigationPlaceholder = null;
+	//			var_export( $alternateFile );
 		if( $alternateFile )
 		{
 			$alternateFile = file_get_contents( $alternateFile );
 			$alternateFile = self::sanitizeTemplateFile( $alternateFile, $values );
+		//	pick navigation from another page in case the navigation of home page contains other content.			
+
+			$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $alternateFile );
+			foreach( $matches as $count => $match )
+			{
+				preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $alternateFile, $placeholder );
+			//	var_export( $placeholder[1] );
+				if( stripos( $placeholder[1], '</nav>' ) )
+				{
+					//	check navigation
+					$alternateNavigation = $placeholder[1];
+					$altNavigationPlaceholder = $match;
+				}
+			}
 		}
-		preg_match_all( "/@@@([0-9A-Za-z_]+)@@@/", $content, $matches );
+		$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $content );
+//		preg_match_all( "/@@@([0-9A-Za-z_]+)@@@/", $content, $matches );
 		
 //		preg_match_all( '/{@@@\w([\S\s]*)\w@@@}/i', $content, $matches );
-//		var_export( $matches );
+	// 	var_export( $matches );
 
-		foreach( $matches[1] as $count => $match )
+		foreach( $matches as $count => $match )
 		{
 			preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $content, $placeholder );
-	//		var_export( $match );
+		//	var_export( $match );
 	//		var_export( $placeholder[1] );
 	//		var_export( $alternateFile );
+	//		var_export( $alternateNavigation );
 	//		var_export( stripos( $placeholder[1], '©' ) );
+			if( $alternateNavigation && stripos( $placeholder[1], '</nav>' ) )
+			{
+	//			var_export( strlen( $alternateNavigation ) );
+	//			var_export( $altNavigationPlaceholder );
+		//		var_export( $match );
+		//		var_export( stripos( $placeholder[1], '</nav>' ) );
+	//			var_export( strlen( $placeholder[1] ) );
+		//		var_export( $placeholder[1] );
+				if( empty( $navigationReplaced ) && ( strlen( $alternateNavigation ) + 20 ) < strlen( $placeholder[1] ) )
+				{
+				//	$placeholder[1] = $alternateNavigation;
+					//	put the two navigation there.
+					$before = '{@@@' . $match . $placeholder[1] . $match . '@@@}';
+					$altMatch = $match . '_alt';
+					$after = '
+								{@@@' . $match . $placeholder[1] . $match . '@@@}
+								@@@' . $altMatch . '@@@
+								{@@@' . $altMatch . $alternateNavigation . $altMatch . '@@@}
+								
+							';
+
+					$content = str_ireplace( $before, $after, $content );
+					$navigationReplaced = true;
+				//	$content = str_ireplace( '@@@' . $match . '@@@', '@@@' . $altNavigationPlaceholder . '@@@', $content );
+				}
+				//	we have alternate navigation
+				//	check navigation
+			}
 
 			// Excempt the header content, and the nav and footer
 			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ! stripos( $placeholder[1], '</nav>' ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy;' ) )
@@ -296,6 +344,16 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		if( ! $filename = $this->getFilename() ){ return false; }
 		$filename = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $filename;
 		return $filename;
+	}
+
+    /**
+	 * 
+	 *
+     */
+    public static function getThemeFilePlaceholders( $content )
+	{
+		preg_match_all( "/@@@([0-9A-Za-z-_]+)@@@/", $content, $placeholdersInPageThemeFile );
+		return @$placeholdersInPageThemeFile[1];
 	}
 
     /**

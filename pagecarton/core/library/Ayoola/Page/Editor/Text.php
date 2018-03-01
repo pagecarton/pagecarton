@@ -135,6 +135,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
     public static function getHTMLForLayoutEditorAdvancedSettings( & $object )
 	{
+	//	var_export( $object );
 		$html = '<select onchange="" class="" name="markup_template_object_name" style="width:100%;" >';  
 		$html .= '<option value="" >Embed Widgets</option>';  
 
