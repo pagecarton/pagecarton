@@ -192,6 +192,12 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 					$done[] = $thisValue;
 					$currentTitle = array_shift( $values['title'] );
 					$currentUrl = array_shift( $values['url'] );
+					$delete = false;
+					if( ! trim( $currentTitle ) && ! trim( $currentUrl ) )
+					{
+						//	delete link
+						$delete = true;
+					}
 					if( ! trim( $currentTitle ) )
 					{
 						$currentTitle = $each['title'];
@@ -200,7 +206,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 					{
 						$currentUrl = $each['url'];
 					}
-					$linkValue[$linkKey] = array( 'title' => $currentTitle, 'url' => $currentUrl );
+					$linkValue[$linkKey] = array( 'title' => $currentTitle, 'url' => $currentUrl, 'delete' => $delete );
 
 			//		$linkValue[$linkKey]['title'] = htmlspecialchars_decode( $linkValue[$linkKey]['title'] );
 					if( strip_tags( $linkValue[$linkKey]['title'] ) != $linkValue[$linkKey]['title'] )
@@ -226,9 +232,29 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 				}
 				$each['node']->nodeValue = null;
 			//	$newNode = 
-				$newNode = $each['node']->ownerDocument->importNode( $linkValue[$linkKey]['new_node'], true );
-				$each['node']->appendChild( $newNode );			
-				$each['node']->setAttribute( 'href', $linkValue[$linkKey]['url'] );
+				if( empty( $linkValue[$linkKey]['delete'] ) )
+				{
+					$newNode = $each['node']->ownerDocument->importNode( $linkValue[$linkKey]['new_node'], true );
+					$newNode ? $each['node']->appendChild( $newNode ) : null;			
+					$each['node']->setAttribute( 'href', $linkValue[$linkKey]['url'] );
+					$class = $each['node']->getAttribute( 'class' );
+					if( stripos( $class, 'scroll' ) !== false )
+					{
+						if( $linkValue[$linkKey]['url'][0] !== '#' )
+						{
+							$each['node']->setAttribute( 'class', str_ireplace( 'scroll', '', $class ) );
+						}  
+					}
+				}
+				else
+				{
+					$nodeToDelete = $each['node'];
+					if( strtoupper( $each['node']->parentNode->tagName ) === 'LI' )
+					{
+						$nodeToDelete = $each['node']->parentNode;
+					}
+					$nodeToDelete->parentNode->removeChild( $nodeToDelete );
+				}
 			}
 	//		var_export( $contentArray );
 			foreach( $htmlContent as $contentKey => $eachContent )

@@ -27,6 +27,13 @@ require_once 'Application/Category/Abstract.php';
 
 class Application_Category_View extends Application_Category_Abstract
 {
+
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'View Category Info';      
 	
     /**
      * Identifier for the column to edit

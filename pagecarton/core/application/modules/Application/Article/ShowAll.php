@@ -664,6 +664,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 		//	if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
 			if( @$data['article_url'] )
+			$data['document_url'] = $data['document_url']; 
+			$data['document_url_plain'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
+			$data['document_url_uri'] = $data['document_url']; 
 //			if( ! @$data['document_url'] && @$data['article_url'] )
 			{
 				if( $this->getParameter( 'skip_ariticles_without_cover_photo' ) && ! @$data['document_url_base64'] && ( ! Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ? : @$data['display_picture'] ) ) )
@@ -674,7 +677,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	This is the default now if they don't have picture, create a placeholder
 			//	$data['document_url'] = $data['document_url_base64'];
 				$data['document_url'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
-				$data['document_url_no_resize'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] );     
+				$data['document_url_cropped'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
+				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] );     
 				
 			}
 			
@@ -820,7 +824,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
 				//	Filter the price to display unit
 			//	@$data['item_price'] = $data['item_price'] ? : '0.00';
-				if( empty( $data['item_price'] ) )
+				if( empty( $data['item_price'] ) && $this->getParameter( 'use_price_option_price' ) )
 				{
 					if( ! empty( $data['price_option_price'] ) )
 					{
@@ -831,7 +835,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							$leastPrice = array_shift( $allOptionPrices );
 						}
 						while( ! $leastPrice && $allOptionPrices );
-						$data['item_price'] = $leastPrice;
+						$data['item_price'] = '' . $leastPrice;
 					}
 
 				}

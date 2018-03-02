@@ -593,7 +593,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
 	public static function deleteDirectoryPlusContent($path) {
 		if (!is_dir($path)) {
-			throw new Ayoola_Doc_Exception("$path is not a directory");
+			return false;
+		//	throw new Ayoola_Doc_Exception("$path is not a directory");
 		}
 		if (substr($path, strlen($path) - 1, 1) != '/') {
 			$path .= '/';

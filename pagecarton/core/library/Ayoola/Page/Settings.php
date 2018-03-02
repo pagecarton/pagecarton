@@ -54,7 +54,8 @@ class Ayoola_Page_Settings extends Application_Settings_Abstract
 				//	must initialize each time so that each page can be handled.
 				$class = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'auto_create_page' => true ) );  
 
-				$class->sourcePage( $page );
+				$response = $class->sourcePage( $page );
+		//		var_export( $response );   
 			}
 			catch( Exception $e )
 			{

@@ -152,6 +152,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			}
 		//	self::v( __LINE__ . '<br>' );
 			//	Create a new page using the values of the parent application
+			//	Ayoola_Page_Page
 			$class = new Ayoola_Page_Creator();
 
 			//	make sure this is a system file.

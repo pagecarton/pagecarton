@@ -162,6 +162,7 @@ class Application_Info extends Ayoola_Abstract_Playable
 		
 		//	Pages
 		$option = Ayoola_Page_Page::getInstance();
+		$option->getDatabase()->setAccessibility( $option::SCOPE_PRIVATE );
 		$dataX['page_count'] = count( $option->select() );
 		
 		//	Themes

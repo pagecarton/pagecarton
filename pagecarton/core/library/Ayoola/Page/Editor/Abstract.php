@@ -502,6 +502,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 			return;
 		}
 		$table = Ayoola_Page_Page::getInstance();
+		$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );
 	//	var_export( $whereClause ); 
 		$data = $table->selectOne( null, $whereClause );
 	//	var_export( $data );
