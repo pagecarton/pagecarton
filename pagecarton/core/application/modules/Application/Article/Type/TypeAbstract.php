@@ -116,6 +116,7 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
                                 'datetime' => 'Date and Time', 
                                 'location' => 'Location', 
                                 'audio' => 'Play Audio', 
+                                'gallery' => 'Gallery Images', 
                                 );
 
 			$fieldset->addElement( array( 'name' => 'post_type_options', 'label' => 'Other Options available to post type', 'title' => '', 'type' => 'Checkbox', 'value' => @$values['post_type_options'], ), $options );      

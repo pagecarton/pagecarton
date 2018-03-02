@@ -55,7 +55,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 				{ 
 				//	var_export( $data );
 					$this->_parameter['markup_template'] = null;
-					if( self::hasPriviledge( 98 ) )
+				//	if( self::hasPriviledge( 98 ) )
 					{
 						$data = $this->_identifier;
 					}
@@ -63,6 +63,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 				}
 			}
 	//		var_export( $data );
+	//		var_export( $this->getParameter() );
 			if( empty( $data['slideshow_name'] ) )
 			{ 
 			//	var_export( $data['slideshow_images'] );
@@ -71,8 +72,8 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			}
 		//	var_export( $data );
 			//	Using template?
-			$data['width'] = $data['width'] ? : 2100;
-			$data['height'] = $data['height'] ? : 700;  
+			$data['width'] = $this->getParameter( 'image_width' ) ? : ( $data['width'] ? : 2100 );
+			$data['height'] = $this->getParameter( 'image_height' ) ? : ( $data['height'] ? : 700 );     
 			$data['image_limit'] = $this->getParameter( 'image_limit' ) ? : ( @$data['image_limit'] ? : 12 );
 		//	$data['slideshow_images'] = unserialize( @$data['slideshow_images'] ) ? : array();
 			if( empty( $data['slideshow_image'] ) )
@@ -151,6 +152,23 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			$defaultInfo = array();
 									//		var_export(  $data  );
 			$limit = $data['image_limit'];
+			switch( $data['slideshow_name'] )
+			{
+				case 'pc_page_images':
+			//		var_export( Ayoola_Application::$GLOBAL['images'] );
+			//		var_export( Ayoola_Application::$GLOBAL['document_url'] );
+			//		var_export( $data );
+					$data['image_description'] = array();
+					if( Ayoola_Application::$GLOBAL['images'] && ( Ayoola_Application::$GLOBAL['images'][0] ) )
+					{
+						$data['slideshow_image'] = Ayoola_Application::$GLOBAL['images'];
+					}
+					elseif( Ayoola_Application::$GLOBAL['document_url'] )
+					{
+						$data['slideshow_image'] = (array) Ayoola_Application::$GLOBAL['document_url'];
+					}
+				break;
+			}
 
 			switch( @$data['slideshow_type'] )
 			{
@@ -369,6 +387,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			$object['new_slideshow'] = $newName; 
 		}
 		$slideshowPresent = false;
+		$options['pc_page_images'] = 'Page Images';
 		$html .= '<span style="">Show  </span>';
 		$html .= '<select data-parameter_name="slideshow_name">
 		<option value="' . $newName . '">New Slideshow</option>';
@@ -385,7 +404,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 		}
 		if( empty( $slideshowPresent ) )
 		{
-				$html .= '<option value="' . $object['slideshow_name'] . '" selected = selected>' . $object['slideshow_name'] . '</option> '; 
+			$html .= '<option value="' . $object['slideshow_name'] . '" selected = selected>' . $object['slideshow_name'] . '</option> '; 
 		}
 		$html .= '</select>';
 		$html .= '<span style=""> in </span>';

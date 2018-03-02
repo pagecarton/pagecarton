@@ -27,6 +27,13 @@ require_once 'Ayoola/Access/Abstract.php';
 
 class Ayoola_Access_AccountRequired extends Ayoola_Abstract_Table
 {
+ 	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Account Required';        
 	
     /**
      * Whether class is playable or not

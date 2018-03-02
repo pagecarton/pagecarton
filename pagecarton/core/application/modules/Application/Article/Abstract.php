@@ -1043,6 +1043,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$fieldset->addElement( array( 'name' => 'isbn', 'label' => 'ISBN', 'type' => 'InputText', 'value' => @$values['isbn']  ) );
 			//		$fieldset->addElement( array( 'name' => 'authors', 'label' => 'Authors', 'placeholder' => 'Enter an author here... Click + to add more...', 'type' => 'MultipleInputText', 'value' => @$values['authors']  ) );   
 				break;  
+				case 'gallery':
+					$fieldset->addElement( array( 'name' => 'images', 'label' => $postTypeLabel . ' Images', 'type' => 'Document', 'data-document_type' => 'image', 'multiple' => 'multiple', 'data-multiple' => 'multiple', 'value' => @$values['images']  ) );
+				break;  
 				case 'examination':
 				case 'test':
 				case 'quiz':

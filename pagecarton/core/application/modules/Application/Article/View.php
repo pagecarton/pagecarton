@@ -26,8 +26,7 @@ require_once 'Application/Article/Abstract.php';
  */
 
 class Application_Article_View extends Application_Article_Abstract
-{
- 	
+{	
     /**
      * 
      * 

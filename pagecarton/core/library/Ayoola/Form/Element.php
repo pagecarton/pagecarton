@@ -500,15 +500,20 @@ class Ayoola_Form_Element extends Ayoola_Form
 				$docSettings = Ayoola_Doc_Settings::getSettings( 'Documents' );
 			//	var_export( $docSettings );
 				$defaultPix = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( ( $element['data-document_type'] == 'image' ) ? '/img/placeholder-image.jpg' : '/open-iconic/png/document-8x.png' );
-				$valuePreview = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . @$element['value'];
+				$valuesForPreview = (array) $element['value'];
 				$html .= '<div></div>';  
-				
-				$html .= '
-				<span class="" style="max-height:50px;display:inline-block;vertical-align:middle;" onclick="var a = this.parentNode.getElementsByTagName( \'input\' ); for( var b = 0; b < a.length; b++ ){var c = a[b].type; if( c == \'text\' ){ a[b].type = \'hidden\' }else{ a[b].type = \'text\'; }  a[b].style.display=\'\';  a[b].focus();  a[b].click(); }" title="The preview thumbnail image for the uploaded file will show here...">    
-					<img onerror="this.src=\'' . $defaultPix . '\';this.onerror=\'/\';" alt="" style="max-height:50px" name="' . $uniqueIDForElement . '_preview_zone_image' . '" src="' . ( @$element['data-previous-url'] ? : ( ( @$element['value'] && is_scalar( $element['value'] ) ? $valuePreview : Ayoola_Form::getGlobalValue( $element['name'] ) ) ? : '' . $defaultPix . '' ) ) . '"  class="" onClick=""  > 
-				</span>
-				';
+				foreach( $valuesForPreview as $each )
+				{
+					$valuePreview = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . @$each;
 
+			//		var_export( $element['value'] );
+					
+					$html .= '
+					<span class="" style="max-height:50px;display:inline-block;vertical-align:middle;" onclick="var a = this.parentNode.getElementsByTagName( \'input\' ); for( var b = 0; b < a.length; b++ ){var c = a[b].type; if( c == \'text\' ){ a[b].type = \'hidden\' }else{ a[b].type = \'text\'; }  a[b].style.display=\'\';  a[b].focus();  a[b].click(); }" title="The preview thumbnail image for the uploaded file will show here...">    
+						<img onerror="this.src=\'' . $defaultPix . '\';this.onerror=\'/\';" alt="" style="max-height:50px" name="' . $uniqueIDForElement . '_preview_zone_image' . '" src="' . ( @$element['data-previous-url'] ? : ( ( @$each && is_scalar( $each ) ? $valuePreview : Ayoola_Form::getGlobalValue( $element['name'] ) ) ? : '' . $defaultPix . '' ) ) . '"  class="" onClick=""  > 
+					</span>
+					';
+				}
 				if( @$element['data-allow_base64'] )
 				{
 					$uploadJsText = 'ayoola.image.upLoadOnSelect = false; ayoola.image.fieldNameValue = \'base\';';
