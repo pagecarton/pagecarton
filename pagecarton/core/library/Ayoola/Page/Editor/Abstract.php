@@ -289,9 +289,9 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 	//		var_export( $values );
 			return $values;
 		}
-		else
+		elseif( ! empty( $_REQUEST['pc_page_editor_layout_name'] )  )
 		{
-			
+			return false;
 		}
 		//	compatibility
 		
