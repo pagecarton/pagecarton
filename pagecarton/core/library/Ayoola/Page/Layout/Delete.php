@@ -50,7 +50,7 @@ class Ayoola_Page_Layout_Delete extends Ayoola_Page_Layout_Abstract
 				//	sanitize deleted theme to avoid dangling web pages 
 				$class = new Ayoola_Page_Editor_Sanitize();
 				$themeToSanitize = $data['layout_name'];
-				if( Ayoola_Page_Editor_Layout::getDefaultLayout() )
+				if( $themeToSanitize = Ayoola_Page_Editor_Layout::getDefaultLayout() )
 				{
 					$themeToSanitize = null;
 				}

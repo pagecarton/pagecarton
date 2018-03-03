@@ -78,6 +78,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		$pages = $pages->getDbTable()->select( null, $where );
 		$pages = array_merge( $pages, $defaultPages );
 	//	var_export( $defaultPages );
+//		var_export( $themeName );
 //		var_export( $pages );
 //		exit();
 //var_export( $where );

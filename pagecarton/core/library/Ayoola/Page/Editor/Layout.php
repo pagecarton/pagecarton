@@ -382,9 +382,15 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		{ 
 			$filePath = Ayoola_Loader::checkFile( $filter->filter( self::getDefaultLayout() ) );
 		}
+		if( ! $filePath )
+		{ 
+			$filePath = Ayoola_Loader::checkFile( $filter->filter( 'bootstrapbasic') );
+		}
 //		var_export( $pageThemeFile );
 	//	$filePath = self::getLayoutTemplateFilePath( $page )
 //		var_export( self::getDefaultLayout() );
+	//	var_export( $theme );
+//		var_export( $theme );
 //		var_export( $filePath );
 //		var_export( $page['pagelayout_filename'] );
 		$page['pagelayout_filename'] = $filePath; 
