@@ -502,8 +502,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 				$defaultPix = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( ( $element['data-document_type'] == 'image' ) ? '/img/placeholder-image.jpg' : '/open-iconic/png/document-8x.png' );
 				$valuesForPreview = (array) $element['value'];
 				$html .= '<div></div>';  
-				foreach( $valuesForPreview as $each )
+			//	var_export( $valuesForPreview );
+			//	var_export( $element['value'] );
+				do
 				{
+					@$each = array_shift( $valuesForPreview );
 					$valuePreview = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . @$each;
 
 			//		var_export( $element['value'] );
@@ -514,6 +517,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 					</span>
 					';
 				}
+				while( $valuesForPreview );
 				if( @$element['data-allow_base64'] )
 				{
 					$uploadJsText = 'ayoola.image.upLoadOnSelect = false; ayoola.image.fieldNameValue = \'base\';';

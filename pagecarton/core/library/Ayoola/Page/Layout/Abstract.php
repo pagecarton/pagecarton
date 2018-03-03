@@ -179,6 +179,11 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$alternateNavigation = null;
 		$altNavigationPlaceholder = null;
 	//			var_export( $alternateFile );
+		$navTag = '</nav>';
+		if( ! stripos( $content, $navTag ) )
+		{
+			$navTag = '</ul>';
+		}
 		if( $alternateFile )
 		{
 			$alternateFile = file_get_contents( $alternateFile );
@@ -190,11 +195,12 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			{
 				preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $alternateFile, $placeholder );
 			//	var_export( $placeholder[1] );
-				if( stripos( $placeholder[1], '</nav>' ) )
+				if( empty( $alternateNavigation ) && stripos( $placeholder[1], $navTag ) )
 				{
 					//	check navigation
 					$alternateNavigation = $placeholder[1];
 					$altNavigationPlaceholder = $match;
+					break;
 				}
 			}
 		}
@@ -212,15 +218,14 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 	//		var_export( $alternateFile );
 	//		var_export( $alternateNavigation );
 	//		var_export( stripos( $placeholder[1], '©' ) );
-			if( $alternateNavigation && stripos( $placeholder[1], '</nav>' ) )
+			if( empty( $navigationReplaced ) && $alternateNavigation && stripos( $placeholder[1], $navTag ) )
 			{
 	//			var_export( strlen( $alternateNavigation ) );
 	//			var_export( $altNavigationPlaceholder );
 		//		var_export( $match );
-		//		var_export( stripos( $placeholder[1], '</nav>' ) );
 	//			var_export( strlen( $placeholder[1] ) );
 		//		var_export( $placeholder[1] );
-				if( empty( $navigationReplaced ) && ( strlen( $alternateNavigation ) + 20 ) < strlen( $placeholder[1] ) )
+				if(  ( strlen( $alternateNavigation ) + 20 ) < strlen( $placeholder[1] ) )
 				{
 				//	$placeholder[1] = $alternateNavigation;
 					//	put the two navigation there.
@@ -240,9 +245,14 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				//	we have alternate navigation
 				//	check navigation
 			}
+			if( empty( $realNavigationDone ) && stripos( $placeholder[1], $navTag ) )
+			{
+				$isRealNavigation = true;
+				$realNavigationDone = true;
+			}
 
 			// Excempt the header content, and the nav and footer
-			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ! stripos( $placeholder[1], '</nav>' ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy;' ) )
+			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ( empty( $isRealNavigation ) ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy;' ) )
 			{
 		//		var_export( stripos( $placeholder[1], '©' ) );
 		//		var_export( $match );
@@ -250,6 +260,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				$content = preg_replace('/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', '', $content );
 			//	var_export( $match );
 			}
+			$isRealNavigation = false;
 		}
 
 		file_put_contents( $this->getMyFilename() . 'sections', '<?php return ' . var_export( $sectionsToSave, true ) . ';' );
@@ -1026,7 +1037,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		}
 		$url = array_pop( explode( '/layout/' . $themeName, $url ) );
 		$url = '' . array_shift( explode( '.html', $url ) );
-		$url = str_ireplace( array( '/index', '/home', '/.php', ), array( '/', '/', ), '/' . trim( $url, '/' ) );
+		$url = str_ireplace( array( '/index', '/home', '/.php', '/.php', '/index.php/', '//', ), '/', '/' . trim( $url, '/' ) );
 //		var_export( $url );
 		return $url ;
 	}

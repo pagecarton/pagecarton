@@ -46,10 +46,16 @@ class Ayoola_Page_Layout_Delete extends Ayoola_Page_Layout_Abstract
 			if( $this->deleteDb( false ) )
 			{ 
 				$this->deleteFile();
+
+				//	sanitize deleted theme to avoid dangling web pages 
+				$class = new Ayoola_Page_Editor_Sanitize();
+				$themeToSanitize = $data['layout_name'];
+				if( Ayoola_Page_Editor_Layout::getDefaultLayout() )
+				{
+					$themeToSanitize = null;
+				}
 				
-					//	sanitize deleted theme to avoid dangling web pages 
-					$class = new Ayoola_Page_Editor_Sanitize();
-					$class->sanitize( $data['layout_name'] );
+				$class->sanitize( $themeToSanitize );
 				
 				$this->setViewContent( '<p class="goodnews">Theme Layout deleted successfully</p>', true ); 
 			} 

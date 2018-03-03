@@ -134,8 +134,9 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 
 
 					//	change links with /page.html to /page
+			//			var_export( $url );
 					$url = self::themePageToUrl( $url, $data['layout_name'] );
-				//		var_export( $url );
+		//				var_export( $url );
 					$title = str_ireplace( array( '<p>', '</img>', '</p>', "&nbsp;", '' ), '', $title );
 					$titleX = htmlentities($title, null, 'utf-8');
 					$titleX = str_replace("&nbsp;", "", $titleX);

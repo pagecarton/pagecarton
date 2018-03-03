@@ -568,6 +568,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$replaceWith[] = $basePlaceholder . ' ' . $newPlaceholder;
 			$content['template'] = str_ireplace( $searchFor, $replaceWith,  $content['template'] );
 		}
+		$navTag = '</nav>';
+		if( ! stripos( $content['template'], $navTag ) )
+		{
+			$navTag = '</ul>';
+		}
 		$placeholders = array_fill_keys( $placeholders, null );
 //		$placeholders = array_merge( array_fill_keys( $placeholders, null ), array_fill_keys( $placeholders2, null ) );
 	//	var_export( array_keys( $placeholders ) );
@@ -647,9 +652,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 							{
 								$check = $sectionPlaceholder[1];
 						//		$check = str_replace( $whitespaces, '', $check );
-							//	var_export( stripos( $check, '</nav>'  ) );
+							//	var_export( stripos( $check, $navTag  ) );
 							//	var_export( $check );
-								if( stripos( $check, '</nav>' ) && empty( $firstNav ) )
+								if( stripos( $check, $navTag ) && empty( $firstNav ) )
 								{
 									$firstNav = true;
 
