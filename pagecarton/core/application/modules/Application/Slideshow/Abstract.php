@@ -180,7 +180,7 @@ abstract class Application_Slideshow_Abstract extends Ayoola_Abstract_Table
 	public function createForm( $submitValue, $legend = null, Array $values = null )
     {
 		//	Form to create a new page
-        $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
+        $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . @$values['slideshow_title'] ) );
 		$form->submitValue = 'Continue...' ;
 		$form->oneFieldSetAtATime = true;
 		$fieldset = new Ayoola_Form_Element; 

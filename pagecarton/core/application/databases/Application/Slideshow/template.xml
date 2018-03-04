@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="template" creation_time="1504318316" table_version="0.05" module_version="1.00" table_class="Application_Slideshow_Template" creation_ip="2130706433">
-  <RECORDS autoId="6">
+  <RECORDS autoId="7">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[NivoSlider]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
@@ -182,6 +182,37 @@
       <TABLE_FIELD FIELD_KEY="javascript_code"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2017\/09\/02\/zoomslider_css.css&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_code"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[SlidesJS]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[SlidesJS]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;img src=&quot;{{{slideshow_image}}}&quot; alt=&quot;&quot; title=&quot;&quot; &gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;css&quot;,&quot;javascript&quot;,&quot;padding&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;div class=&quot;slidesjscontainer&quot; id=&quot;slidesjs{{{template_instance_count}}}&quot;&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_suffix"><![CDATA[&lt;/div&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="max_group_no"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[[&quot;\/public\/2018\/03\/03\/jquery_slides_min_1__js.js&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="javascript_code"><![CDATA[    $(function() {
+      $('#slidesjs{{{template_instance_count}}}').slidesjs({
+        width: {{{width}}},
+        height: {{{height}}},
+        play: {
+          active: true,
+          auto: true,
+          interval: 4000,
+          swap: true
+        }
+      });
+    });]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2018\/03\/03\/slideJs_css.css&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="css_code"><![CDATA[    /* Prevents slides from flashing */
+    .slidesjscontainer {
+      display:none;
+    }]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_screenshot"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[0-0-6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1520119527]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

@@ -51,6 +51,9 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 
 		if( self::hasPriviledge() )
 		{
+
+			set_time_limit( 0 );
+			
 			//	Reset domain
 			Ayoola_Application::setDomainSettings( true );
 			

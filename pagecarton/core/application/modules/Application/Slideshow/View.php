@@ -197,7 +197,8 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 					foreach( $info as $key => $each )
 					{
 				//	var_export( $i );
-						if( empty( $each['document_url'] ) )
+					//	var_export( $each );
+						if( ! is_array( $each ) || empty( $each['document_url'] ) )
 						{
 							continue;
 						}

@@ -74,7 +74,7 @@ abstract class Ayoola_Abstract_Template extends Ayoola_Abstract_Table
     {
 	//	var_export( $values );
 		//	Form to create a new menu
-        $form = new Ayoola_Form( 'name=>' . $this->getObjectName() ); 
+        $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . @$values['template_name'] ) ); 
 		$fieldset = new Ayoola_Form_Element;
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;
