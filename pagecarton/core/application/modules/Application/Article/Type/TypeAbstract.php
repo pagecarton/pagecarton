@@ -127,7 +127,7 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
             require_once 'Ayoola/Filter/SelectListArray.php';
             $filter = new Ayoola_Filter_SelectListArray( 'form_name', 'form_title');
             $options = $filter->filter( $options );
-            $fieldset->addElement( array( 'name' => 'supplementary_form', 'label' => 'Supplementary Creation form', 'type' => 'Select', 'value' => @$settings['supplementary_form'] ), array( '' => 'Please select...' ) + $options ); 
+            $fieldset->addElement( array( 'name' => 'supplementary_form', 'label' => 'Supplementary Creation form', 'type' => 'Select', 'value' => @$values['supplementary_form'] ), array( '' => 'Please select...' ) + $options ); 
 
 	//		$i++;
 			$fieldset->addLegend( $legend );

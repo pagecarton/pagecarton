@@ -242,6 +242,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 					//			'Select' => 'Select Option', 
 								'email' => 'Email Input', 
 								'textarea' => 'Text Area', 
+								'html' => 'HTML Editor', 
 								'submit' => 'Submit Button', 
 								'file' => 'File', 
 								'document' => 'Document', 

@@ -92,6 +92,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	protected static $_moduleDir = 'articles';	
 	
     /**
+     * Module files directory namespace
+     * 
+     * @var string
+     */
+	protected static $editorInitialized;	
+	
+    /**
      * Identifier for the column to edit
      * 
      * @var string
@@ -779,6 +786,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		return $html;
 	
 	}
+	
     /**
      * Returns an HTML to display footer for messages
      * 
@@ -795,6 +803,153 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$html .= '</ul>';
 	//	var_export( count( $value ) );
 		return $html;
+    } 
+	
+    /**
+     * Returns an HTML to display footer for messages
+     * 
+     */
+	public static function initHTMLEditor()
+    {
+		if( self::$editorInitialized )
+		{
+			return false;
+		}
+		self::$editorInitialized = true;
+		
+		Application_Javascript::addFile( '/js/objects/ckeditor/ckeditor.js' );
+		Application_Javascript::addCode 
+		(  
+			'ayoola.xmlHttp.setAfterStateChangeCallback
+			( 
+				function()
+				{ 
+					try
+					{
+						//	destroy all instances of ckeditor everytime state changes.
+						for( name in CKEDITOR.instances )
+						{
+							CKEDITOR.instances[name].destroy();
+						}
+					}
+					catch( e )
+					{
+					
+					}
+				}
+			)' 
+		);
+		Application_Javascript::addCode
+		( 
+			'ayoola.events.add
+			( 
+				window, "load", 
+				function()
+				{ 
+					ayoola.xmlHttp.callAfterStateChangeCallbacks();
+				} 
+			);' 
+		
+		);
+		Application_Javascript::addCode 
+		(  
+			'ayoola.xmlHttp.setAfterStateChangeCallback
+			( 
+				function()
+				{ 
+					//	Retrieve all the stylesheets in the doc and attach them to the editor
+					var a = document.getElementsByTagName( "link" );
+					var d = new Array();
+					for( var b = 0; b < a.length; b++ )
+					{
+						if( ! a[b].href.search( /css/ ) || a[b].href.search( /css/ ) == -1 ) 
+						{ 
+							continue; 
+						}
+						
+						d.push( a[b].href );
+					}
+			//		var a = document.getElementsByName( "" );
+					var a = document.getElementsByTagName( "textarea" );
+				//	alert( a.length );
+					var initCKEditor = function( target )
+					{
+						CKEDITOR.plugins.addExternal( "uploadimage", "' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/plugins/uploadimage/plugin.js", "" );
+						CKEDITOR.plugins.addExternal( "confighelper", "' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/plugins/confighelper/plugin.js", "" );
+						CKEDITOR.config.extraPlugins = "confighelper,uploadimage,autogrow,tableresize,codesnippet";
+						CKEDITOR.config.removePlugins = "maximize,resize,elementspath";
+						CKEDITOR.config.allowedContent  = true;
+						CKEDITOR.config.filebrowserUploadUrl = "' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Ajax/?";  
+						CKEDITOR.replace
+						( 
+							target,
+							{
+								height: 50,
+								toolbar : 
+								[
+									{ name: "insert", items: [ "Image", "Table", "SpecialChar", "CodeSnippet" ] },
+									{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
+									{ name: "paragraph", groups: [ "list", "indent", "blocks", "align" ], items: [ "NumberedList", "BulletedList", "-", "Blockquote", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "-" ] },
+									{ name: "links", items: [ "Link", "Unlink" ] },
+									{ name: "styles", items: [ "Format", "Font", "FontSize" ] },
+									{ name: "colors", items: [ "TextColor", "BGColor" ] },
+								],
+								autoGrow_minHeight : 50,
+								autoGrow_maxHeight : 400,
+							}
+						);
+						CKEDITOR.config.codeSnippet_theme = "pojoaque";
+					}
+					var f = function( e )
+					{
+					//	alert( e ); 
+						try
+						{
+							try
+							{
+								//	destroy all instances of ckeditor everytime state changes.
+								for( name in CKEDITOR.instances )
+								{
+									CKEDITOR.instances[name].destroy();
+								}
+							}
+							catch( e )
+							{
+							
+							}
+							var target = ayoola.events.getTarget( e );
+				//			alert( target ); 
+							initCKEditor( target );
+						}
+						catch( e )
+						{
+							//	throws exception if article content is not available
+						}
+					}
+					for( var b = 0; b < a.length; b++ )
+					{
+					//	alert( a[b].name );
+						switch( a[b].name  )
+						{
+							case "article_content":
+							case "' . Ayoola_Form::hashElementName( 'article_content' ) . '":
+								initCKEditor( a[b] );
+							break;
+							default:
+							//	alert( a[b] ); 
+								if( ! a[b].getAttribute( "data-html" ) && a[b].getAttribute( "data-document_type" ) != "html" )
+								{
+									break;
+								}
+							//	ayoola.events.add( a[b], "click", f );
+								ayoola.events.add( a[b], "dblclick", f );
+							break;
+						}
+					}
+				}
+			)' 
+		);
+		return true;
     } 
 	
     /**
@@ -1595,143 +1750,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->hashElementName = $this->hashFormElementName;
 		//	Use tiny editor
-		
-		Application_Javascript::addFile( '/js/objects/ckeditor/ckeditor.js' );
-	
-		Application_Javascript::addCode 
-		(  
-			'ayoola.xmlHttp.setAfterStateChangeCallback
-			( 
-				function()
-				{ 
-					try
-					{
-						//	destroy all instances of ckeditor everytime state changes.
-						for( name in CKEDITOR.instances )
-						{
-							CKEDITOR.instances[name].destroy();
-						}
-					}
-					catch( e )
-					{
-					
-					}
-				}
-			)' 
-		);
-	//	foreach( $htmlFields as $each )
-		{
- 			Application_Javascript::addCode
-			( 
-				'ayoola.events.add
-				( 
-					window, "load", 
-					function()
-					{ 
-						ayoola.xmlHttp.callAfterStateChangeCallbacks();
-					} 
-				);' 
-			
-			);
- 			Application_Javascript::addCode 
-			(  
-				'ayoola.xmlHttp.setAfterStateChangeCallback
-				( 
-					function()
-					{ 
-						//	Retrieve all the stylesheets in the doc and attach them to the editor
-						var a = document.getElementsByTagName( "link" );
-						var d = new Array();
-						for( var b = 0; b < a.length; b++ )
-						{
-							if( ! a[b].href.search( /css/ ) || a[b].href.search( /css/ ) == -1 ) 
-							{ 
-								continue; 
-							}
-							
-							d.push( a[b].href );
-						}
-				//		var a = document.getElementsByName( "" );
-						var a = document.getElementsByTagName( "textarea" );
-					//	alert( a.length );
-						var initCKEditor = function( target )
-						{
-							CKEDITOR.plugins.addExternal( "uploadimage", "' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/plugins/uploadimage/plugin.js", "" );
-							CKEDITOR.plugins.addExternal( "confighelper", "' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/plugins/confighelper/plugin.js", "" );
-							CKEDITOR.config.extraPlugins = "confighelper,uploadimage,autogrow,tableresize,codesnippet";
-							CKEDITOR.config.removePlugins = "maximize,resize,elementspath";
-							CKEDITOR.config.allowedContent  = true;
-							CKEDITOR.config.filebrowserUploadUrl = "' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Ajax/?";  
-							CKEDITOR.replace
-							( 
-								target,
-								{
-									height: 50,
-									toolbar : 
-									[
-										{ name: "insert", items: [ "Image", "Table", "SpecialChar", "CodeSnippet" ] },
-										{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
-										{ name: "paragraph", groups: [ "list", "indent", "blocks", "align" ], items: [ "NumberedList", "BulletedList", "-", "Blockquote", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "-" ] },
-										{ name: "links", items: [ "Link", "Unlink" ] },
-										{ name: "styles", items: [ "Format", "Font", "FontSize" ] },
-										{ name: "colors", items: [ "TextColor", "BGColor" ] },
-									],
-									autoGrow_minHeight : 50,
-									autoGrow_maxHeight : 400,
-								}
-							);
-							CKEDITOR.config.codeSnippet_theme = "pojoaque";
-						}
-						var f = function( e )
-						{
-						//	alert( e ); 
-							try
-							{
-								try
-								{
-									//	destroy all instances of ckeditor everytime state changes.
-									for( name in CKEDITOR.instances )
-									{
-										CKEDITOR.instances[name].destroy();
-									}
-								}
-								catch( e )
-								{
-								
-								}
-								var target = ayoola.events.getTarget( e );
-					//			alert( target ); 
-								initCKEditor( target );
-							}
-							catch( e )
-							{
-								//	throws exception if article content is not available
-							}
-						}
-						for( var b = 0; b < a.length; b++ )
-						{
-						//	alert( a[b].name );
-							switch( a[b].name  )
-							{
-								case "article_content":
-								case "' . Ayoola_Form::hashElementName( 'article_content' ) . '":
-									initCKEditor( a[b] );
-								break;
-								default:
-								//	alert( a[b] ); 
-									if( ! a[b].getAttribute( "data-html" ) )
-									{
-										break;
-									}
-								//	ayoola.events.add( a[b], "click", f );
-									ayoola.events.add( a[b], "dblclick", f );
-								break;
-							}
-						}
-					}
-				)' 
-			);
-		}
+
+		static::initHTMLEditor();
+
+
 	//	var_export( $values['true_post_type'] );
 		if( $values['true_post_type'] == 'article' || $values['true_post_type'] == 'post' || @$values['article_content'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'article', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) || ( is_array( $values['article_options'] ) && in_array( 'article', $values['article_options'] ) ) || $values['article_type'] == 'article' || $values['article_type'] == 'post' || in_array( 'article', $internalForms )  )       
 		{

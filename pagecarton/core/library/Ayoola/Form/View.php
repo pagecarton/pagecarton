@@ -328,6 +328,8 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			$defaultValue = @$values[$elementName] ? : @$formInfo['element_default_value'][$i];
 			switch( $formInfo['element_type'][$i] )
 			{
+				case 'html': 
+					Application_Article_Abstract::initHTMLEditor();
 				case 'textarea': 
 					$type = 'TextArea'; 
 				break;
