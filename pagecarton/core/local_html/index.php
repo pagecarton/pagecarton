@@ -130,7 +130,7 @@
 		defined( 'PC_TEMP_DIR' ) || define( 'PC_TEMP_DIR', $newDir . DS . 'temp' );
 	//	var_export( PC_TEMP_DIR );
 		//	port number mess up cache
-		$tempDir = str_replace( ':', DS, 'cache' . DS . $_SERVER['HTTP_HOST'] ) . DS . $prefix;
+		$tempDir = str_replace( '/', DS, str_replace( ':', DS, 'cache' . DS . $_SERVER['HTTP_HOST'] ) . $prefix );
 		defined( 'CACHE_DIR' ) || define( 'CACHE_DIR', PC_TEMP_DIR . DS . $tempDir );
 		
 		//   Define value of extension for files

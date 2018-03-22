@@ -54,6 +54,7 @@
 		{
 		//	var_export( $themeName );
 		//	var_export( $type );
+		//	var_export( $options );
 			if( $path = Ayoola_Loader::getFullPath( 'documents/layout/' . $themeName . '/theme/' . $type . '', $options ) )
 			{
 			//
@@ -145,12 +146,14 @@
 						file_put_contents( $temIncludeFile, "
 						<?php 
 						//		var_export( array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) );
-						//		var_export( __FILE__ );
+					//			var_export( __FILE__ );
+					//			var_export( CACHE_DIR );
 					//			var_export( stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) );
 								//	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
 								//	THEY WON'T HAVE CORRECT APPDIR
 //								var_export( stripos( __FILE__,CACHE_DIR ) );
-						//		var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );
+			//					var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );
+			//					var_export( Ayoola_Application::getDomainSettings() );
 							if
 							( 
 
@@ -161,6 +164,7 @@
 							//	echo file_get_contents( \$x_{$time} );
 								include_once \$x_{$time};
 							}
+		//					var_export( \$x_{$time} );
 						?>
 						" . ' ' . file_get_contents( $PAGE_TEMPLATE_FILE ) );   
 						

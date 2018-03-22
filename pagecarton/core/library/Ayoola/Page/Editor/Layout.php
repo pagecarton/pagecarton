@@ -264,10 +264,18 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
  			//	Create TMP file for the template
 			$path = $this->getPagePaths();
 	//	 	var_export( $path );   
-	//		$tmp = tempnam( CACHE_DIR, __CLASS__ );           
+	//		$tmp = tempnam( CACHE_DIR, __CLASS__ ); 
 			$tmp = $path['template'] . '.tmp';
+			$itsMyPage = true;
+			if( stripos( $tmp, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false );
+			{
+				$itsMyPage = false;
+			}       
+	//	 	var_export( $itsMyPage );   
+	//	 	var_export( stripos( $tmp, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false );   
 	//	 	var_export( $tmp );   
-			if( ! is_dir( dirname( $tmp ) ) )
+	//	 	var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );   
+			if( ! $itsMyPage || ! is_dir( dirname( $tmp ) ) )
 			{
 				$tmp = tempnam( CACHE_DIR, __CLASS__ );           	
 			}
@@ -387,6 +395,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$filePath = Ayoola_Loader::checkFile( $filter->filter( 'bootstrapbasic') );
 		}
 //		var_export( $pageThemeFile );
+//		var_export( $filePath );
 	//	$filePath = self::getLayoutTemplateFilePath( $page )
 //		var_export( self::getDefaultLayout() );
 	//	var_export( $theme );
@@ -674,7 +683,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 										$defaultPlaceHolder = null;
 									}
 								}
-								if( stripos( $originalFile, $check  ) || stripos( $check, '©' ) || stripos( $check, '&copy;' ) )
+								if( stripos( $originalFile, $check  ) || stripos( $check, '©' ) || stripos( $check, '&copy;' ) || stripos( $check, '&amp;copy' ) )
 								{
 									//	Don't duplicate whats in theme file and navigation'
 							//		var_export( $sectionPlaceholder[1] );

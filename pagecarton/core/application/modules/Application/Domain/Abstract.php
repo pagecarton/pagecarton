@@ -141,6 +141,8 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 		{
 	//		$pathToUse = $newPath;
 		}
+		$pathToUse = str_replace( '/', DS, $pathToUse );
+	//	var_export( $pathToUse );
 		return $pathToUse;
 	}
 	

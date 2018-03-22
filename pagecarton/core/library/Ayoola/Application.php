@@ -220,7 +220,7 @@ class Ayoola_Application
 		}
 
 
-		$storage->storageNamespace = __CLASS__ . '---x--' . $_SERVER['HTTP_HOST'] . $protocol;
+		$storage->storageNamespace = __CLASS__ . '--------x--' . $_SERVER['HTTP_HOST'] . $protocol;
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve(); 
 		if(  $data && ! $forceReset && ! @$_GET['reset_domain_information'] )
@@ -382,7 +382,7 @@ class Ayoola_Application
 						$customDir =  $oldCustomDir;
 					}
 					
-					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = $customDir; 
+					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = str_replace( '/', DS, $customDir ); 
 					$data['domain_settings'][APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'application';
 					$data['domain_settings'][EXTENSIONS_PATH] = @$primaryDomainInfo[EXTENSIONS_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'extensions';
 				}
@@ -406,7 +406,7 @@ class Ayoola_Application
 					}
 				//	For backward compatibility, the directory must be "consciously" set
 				//	var_export( __LINE__ );
-					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = $domainDir;  
+					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = str_replace( '/', DS, $domainDir );  
 					$data['domain_settings'][APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'application';
 					@$data['domain_settings'][EXTENSIONS_PATH] = @$primaryDomainInfo[EXTENSIONS_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'extensions';
 				}
@@ -460,7 +460,7 @@ class Ayoola_Application
 				//	var_export( $subDomainInfo );
 					$data['domain_settings']['main_domain'] = $tempWhere['domain_name'];
 					$data['domain_settings']['domain_name'] = $subDomain . '.' . $tempWhere['domain_name'];
-					$data['domain_settings'][APPLICATION_DIR] = Application_Domain_Abstract::getSubDomainDirectory( $subDomainInfo['domain_name'] );
+					$data['domain_settings'][APPLICATION_DIR] = str_replace( '/', DS, Application_Domain_Abstract::getSubDomainDirectory( $subDomainInfo['domain_name'] ) );
 					$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
 					@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
 				//	$storage->store( $data );

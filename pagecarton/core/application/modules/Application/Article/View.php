@@ -205,6 +205,14 @@ class Application_Article_View extends Application_Article_Abstract
 		//	$data['document_url'] = $data['document_url_base64'];
 			$data['document_url'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . filemtime( self::getFolder() . @$data['article_url'] );
 		}
+		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
+		
+		//	default at 1800 so it can always cover the screen
+		$maxWith = $this->getParameter( 'cover_photo_width' );
+		$maxHeight = $this->getParameter( 'cover_photo_height' ); 
+		$data['document_url'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
+		$data['document_url_cropped'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
+		$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] );     
 		if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )  
 		{
 			if( $this->getParameter( 'thumbnail' ) )   
@@ -357,106 +365,115 @@ class Application_Article_View extends Application_Article_Abstract
 		}
 
 		$this->_xml = self::getDefaultPostView( $data );
-		switch( $postType )   
-		{
-			case 'product':
-			case 'service':
-			case 'subscription':
-			case 'event':
-			case 'events':
-				//	By
-				
-				//	title
-				$baseData = array();
-				if( ! empty( $leastPrice ) )
-				{
-					//	don't let least price get into the cart'
-					$baseData['item_price'] = '';
-				//	unset( $data['item_price'] );
-				}
-		//		var_export( $baseData );
-		//		var_export( $baseData + $data );
-				$parameterX = array( 'data' => $baseData + $data, 'button_value' => $this->getParameter( 'button_value' ), 'min_quantity' => $this->getParameter( 'min_quantity' ), 'max_quantity' => $this->getParameter( 'max_quantity' ) );
-				$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( $parameterX );
-				$this->_xml .= $data['button_add_to_cart'];
-				$this->_xml .= @$data['article_content'];
-			break;
-/*			case 'profile':
-				
-				//	title
-				$this->_xml .= '<p style=""><strong>Full Name:</strong> ' . $data['full_legal_name'] . '</p> ';
-				$this->_xml .= '<p style=""><strong>Phone Number:</strong> +' . $data['dial_code'] . '-' . $data['phonenumber'] . '</p> ';
-				$this->_xml .= '<p style=""><strong>Blackberry PIN:</strong> ' . $data['bbm_pin'] . '</p> ';
-				$this->_xml .= '<p style=""><strong>Blackberry Channel:</strong> ' . $data['bbm_channel'] . '</p> ';
-			//	$this->_xml .= '<p style=""><strong>Twitter Handle:</strong> ' . $data['twitter_handle'] . '</p> ';
-				$this->_xml .= '<p style=""><strong>Website:</strong> ' . $data['website'] . '</p> ';
-				$this->_xml .= @$data['article_content'];
-			break;
-*/			case 'video':
-				$data['video_content'] = Application_Article_Type_Video::viewInLine( array( 'data' => $data ) );
-				$this->_xml .= $data['video_content'];
-				$this->_xml .= @$data['article_content'];  
-			break;
-			case 'audio':
-				$data['audio_content'] = Application_Article_Type_Audio::viewInLine( array( 'data' => $data ) );
-				$this->_xml .= $data['audio_content'];
-				$this->_xml .= @$data['article_content'];  
-			break;
-			case 'link':
-				$this->_xml .= '<a target="_blank" href="' . $data['link_url'] . '" class="pc-btn pc-bg-color">Visit Link</a>';
-				$this->_xml .= @$data['article_content'];
-			break;
-			case 'poll':
-				$this->_xml .= @$data['article_content'];
-				@$data['poll'] = Application_Article_Type_Poll::viewInLine( array( 'data' => $data ) );
-				$this->_xml .= @$data['poll'];
-			break;
-			case 'quiz':
-				$this->_xml .= @$data['article_content'];
-				$this->_xml .= Application_Article_Type_Quiz::viewInLine( array( 'data' => $data ) );
-			break;
-			case 'audio':
-			case 'music':
-			case 'message':
-			case 'e-book':
-			case 'document':
-			case 'file':
-			case 'download':
-			//	self::v( $data );
-				//	title
-				if( @$data['download_url'] )
-				{
-					if( $data['download_url'][0] === '/' )
+		//	internal forms to use
+		$internalForms = array();
+		$internalForms[] = $postType;
+		$internalForms = array_merge( is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array(), $internalForms );
+
+		foreach( array_unique( $internalForms ) as $eachPostType )
+		{	
+			switch( $eachPostType )
+			{
+				case 'product':
+				case 'service':
+				case 'subscription':
+				case 'event':
+				case 'events':
+				case 'multi-price':
+					//	By
+					
+					//	title
+					$baseData = array();
+					if( ! empty( $leastPrice ) )
 					{
-						//	this is still a local file we can load with Ayoola_Doc
-						$data['file_size'] =  filesize( Ayoola_Loader::checkFile(  'documents/' . $data['download_url'] ) );
+						//	don't let least price get into the cart'
+						$baseData['item_price'] = '';
+					//	unset( $data['item_price'] );
 					}
-					else
+			//		var_export( $baseData );
+			//		var_export( $baseData + $data );
+					$parameterX = array( 'data' => $baseData + $data, 'button_value' => $this->getParameter( 'button_value' ), 'min_quantity' => $this->getParameter( 'min_quantity' ), 'max_quantity' => $this->getParameter( 'max_quantity' ) );
+					$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( $parameterX );
+					$this->_xml .= $data['button_add_to_cart'];
+					$this->_xml .= @$data['article_content'];
+				break;
+	/*			case 'profile':
+					
+					//	title
+					$this->_xml .= '<p style=""><strong>Full Name:</strong> ' . $data['full_legal_name'] . '</p> ';
+					$this->_xml .= '<p style=""><strong>Phone Number:</strong> +' . $data['dial_code'] . '-' . $data['phonenumber'] . '</p> ';
+					$this->_xml .= '<p style=""><strong>Blackberry PIN:</strong> ' . $data['bbm_pin'] . '</p> ';
+					$this->_xml .= '<p style=""><strong>Blackberry Channel:</strong> ' . $data['bbm_channel'] . '</p> ';
+				//	$this->_xml .= '<p style=""><strong>Twitter Handle:</strong> ' . $data['twitter_handle'] . '</p> ';
+					$this->_xml .= '<p style=""><strong>Website:</strong> ' . $data['website'] . '</p> ';
+					$this->_xml .= @$data['article_content'];
+				break;
+	*/			case 'video':
+					$data['video_content'] = Application_Article_Type_Video::viewInLine( array( 'data' => $data ) );
+					$this->_xml .= $data['video_content'];
+					$this->_xml .= @$data['article_content'];  
+				break;
+				case 'audio':
+					$data['audio_content'] = Application_Article_Type_Audio::viewInLine( array( 'data' => $data ) );
+					$this->_xml .= $data['audio_content'];
+					$this->_xml .= @$data['article_content'];  
+				break;
+				case 'link':
+					$this->_xml .= '<a target="_blank" href="' . $data['link_url'] . '" class="pc-btn pc-bg-color">Visit Link</a>';
+					$this->_xml .= @$data['article_content'];
+				break;
+				case 'poll':
+					$this->_xml .= @$data['article_content'];
+					@$data['poll'] = Application_Article_Type_Poll::viewInLine( array( 'data' => $data ) );
+					$this->_xml .= @$data['poll'];
+				break;
+				case 'quiz':
+					$this->_xml .= @$data['article_content'];
+					$this->_xml .= Application_Article_Type_Quiz::viewInLine( array( 'data' => $data ) );
+				break;
+				case 'audio':
+				case 'music':
+				case 'message':
+				case 'e-book':
+				case 'document':
+				case 'file':
+				case 'download':
+				//	self::v( $data );
+					//	title
+					if( @$data['download_url'] )
 					{
-						$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
-						$data['file_size'] = $head['content-length'];							
+						if( $data['download_url'][0] === '/' )
+						{
+							//	this is still a local file we can load with Ayoola_Doc
+							$data['file_size'] =  filesize( Ayoola_Loader::checkFile(  'documents/' . $data['download_url'] ) );
+						}
+						else
+						{
+							$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
+							$data['file_size'] = $head['content-length'];							
+						}
 					}
-				}
-				elseif( @$data['download_path'] )
-				{
-					$path = APPLICATION_DIR . $data['download_path'];
-					$data['file_size'] =  filesize( $path );
-				}
-				elseif( @$data['download_base64'] )
-				{
-					$result = self::splitBase64Data( $data['download_base64'] );
-					$data['file_size'] =  strlen( $result['data'] );
-				}
-		//		var_export( $data['download_base64'] );
-				$filter = new Ayoola_Filter_FileSize();
-				$data['file_size'] = $filter->filter( $data['file_size'] );
-				$this->_xml .= @$data['article_content'];
-				$data['download_button'] = Application_Article_Type_Download::viewInLine( array( 'data' => $data ) );
-				$this->_xml .= $data['download_button'];
-			break;
-			default:
-				$this->_xml .= @$data['article_content'];
-			break;
+					elseif( @$data['download_path'] )
+					{
+						$path = APPLICATION_DIR . $data['download_path'];
+						$data['file_size'] =  filesize( $path );
+					}
+					elseif( @$data['download_base64'] )
+					{
+						$result = self::splitBase64Data( $data['download_base64'] );
+						$data['file_size'] =  strlen( $result['data'] );
+					}
+			//		var_export( $data['download_base64'] );
+					$filter = new Ayoola_Filter_FileSize();
+					$data['file_size'] = $filter->filter( $data['file_size'] );
+					$this->_xml .= @$data['article_content'];
+					$data['download_button'] = Application_Article_Type_Download::viewInLine( array( 'data' => $data ) );
+					$this->_xml .= $data['download_button'];
+				break;
+				default:
+					$this->_xml .= @$data['article_content'];
+				break;
+			}
 		}
 		if( $this->getParameter( 'file_size' ) )
 		{

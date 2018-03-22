@@ -252,7 +252,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 
 			// Excempt the header content, and the nav and footer
-			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ( empty( $isRealNavigation ) ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy;' ) )
+			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ( empty( $isRealNavigation ) ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy' ) && ! stripos( $placeholder[1], '&amp;copy' ) )
 			{
 		//		var_export( stripos( $placeholder[1], '©' ) );
 		//		var_export( $match );
@@ -260,7 +260,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				$content = preg_replace('/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', '', $content );
 			//	var_export( $match );
 			}
-			$isRealNavigation = false;
+			$isRealNavigation = false;     
 		}
 
 		file_put_contents( $this->getMyFilename() . 'sections', '<?php return ' . var_export( $sectionsToSave, true ) . ';' );
@@ -568,13 +568,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					{
 						//	can't add this here because then it hides whole section'
 				//		$each->setAttribute( 'class', $each->getAttribute( 'class' ) . ' pc_page_object_specific_item' );
-
+						$each->parentNode->insertBefore( $xml->createCDATASection( '@@@' . $allSectionsCounter . 'oneness@@@' ), $each );
+						$each->parentNode->insertBefore( $xml->createCDATASection( '@@@' . $allSectionsCounter . 'lastoneness@@@' ), $each->nextSibling );
 						//	put bootstrap sections in here
 							$each->appendChild( 
 								$xml->createCDATASection
 								( 
 									'	
-									@@@' . $allSectionsCounter . 'oneness@@@
 									<div class="">
 										<div class="row">
 											<div class="pc_page_layout_grid col-md-12 12u">
@@ -631,7 +631,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 											</div>   
 										</div> 
 									</div> 
-									@@@' . $allSectionsCounter . 'lastoneness@@@
 								' 
 							 
 								) 
