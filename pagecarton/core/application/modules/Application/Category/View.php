@@ -188,6 +188,7 @@ class Application_Category_View extends Application_Category_Abstract
 
 
             $html = '<div  class="pc_theme_parallax_background" style="background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $data['cover_photo'] ) . '\');  ">';
+            $html .= $this->getParameter( 'css_class_of_inner_content' ) ? '<div class="' . $this->getParameter( 'css_class_of_inner_content' ) . '">' : null;
             $html .= '<h1>' . $data['category_label'] . '</h1>';
             $html .= $data['category_description'] ? '<br><br><p>' . $data['category_description'] . '</p>' : null;
             $html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;">
@@ -195,6 +196,7 @@ class Application_Category_View extends Application_Category_Abstract
 			<a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $data['delete_url']  . '\', \'page_refresh\' );" href="javascript:">[Delete Category]</a>
 			
 			</p>' : null;
+            $html .= $this->getParameter( 'css_class_of_inner_content' ) ? '</div>' : null;
             $html .= '</div>';
    //         $this->setViewContent( $html ); 
 			
@@ -318,7 +320,8 @@ class Application_Category_View extends Application_Category_Abstract
 		$options[''] = 'Select URL offset';
 		$options['?'] = 'Query Strings';
 		ksort( $options );  
-		if( @$object['allow_dynamic_category_selection'] )
+
+		if( @$object['allow_dynamic_category_selection'] && ! isset( $object['pc_module_url_values_category_offset'] ) )
 		{
 			$object['pc_module_url_values_category_offset'] = '?';
 		}
@@ -333,6 +336,7 @@ class Application_Category_View extends Application_Category_Abstract
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>';
+
 		return $html;
 	}
 	// END OF CLASS
