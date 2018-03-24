@@ -173,12 +173,12 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 
 			//	Dont allow the parent menu to be selectable to avoid infinite loop
 			$data = $this->getIdentifierData();
-	//		var_export( $identifier );
+	//		var_export( $identifier );  
 	//		var_export( $data );
 	//		unset( $options[$data['menu_name']] );
 			$fieldset->addElement( array( 'name' => 'sub_menu_name', 'label' => 'Sub Menu', 'type' => 'Select', 'value' => @$values['sub_menu_name'] ), $menuList );
 //			$fieldset->addElement( array( 'name' => 'sub_menu_name', 'label' => 'Sub Menu (<a rel="spotLight" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Menu_List/">Manage Menu</a>)', 'type' => 'Select', 'value' => @$values['sub_menu_name'] ), $menuList );
-			$fieldset->addRequirement( 'sub_menu_name', array( 'InArray' => array_keys( $menuList )  ) );
+		//	$fieldset->addRequirement( 'sub_menu_name', array( 'InArray' => array_keys( $menuList )  ) );
 	//		$form->addFieldset( $fieldset );
 		}
 /* 		else
