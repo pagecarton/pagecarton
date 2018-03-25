@@ -245,7 +245,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 							$editorMode = true;
 							break;
 						}
-						return false;
+					//	return false;
 					break;
 					default:
 		//      var_export( $currentUrl );
