@@ -9,16 +9,21 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: 404.php	Monday 13th of November 2017 09:30:58 PM	ayoola@ayoo.la $ 
+* @version $Id: 404.php	Saturday 24th of March 2018 02:57:51 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_c15064ab7dd70d6e4256417464e1d148 = new Ayoola_Page_Editor_Text( array (
+$_1fc0757f8fe3f62eb8083f4b06f06b77 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h1>Error 404 - Page Not Found</h1>
 ',
+  'preserved_content' => '<h1>Error 404 - Page Not Found</h1>
+',
+  'url_prefix' => '/x',
+  'markup_template_object_name' => '',
+  'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -31,16 +36,21 @@ $_c15064ab7dd70d6e4256417464e1d148 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_c15064ab7dd70d6e4256417464e1d148 = null;
+$_1fc0757f8fe3f62eb8083f4b06f06b77 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_a44960725c4e9cdaff09059689171645 = new Ayoola_Page_Editor_Text( array (
+$_f65ea3edcf46abd00859784ad6818b7a = new Ayoola_Page_Editor_Text( array (
   'editable' => '<p>You are seeing this page because you have requested a page that is not available. Please check the URL and try again.</p>
 ',
+  'preserved_content' => '<p>You are seeing this page because you have requested a page that is not available. Please check the URL and try again.</p>
+',
+  'url_prefix' => '/x',
+  'markup_template_object_name' => '',
+  'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -53,14 +63,14 @@ $_a44960725c4e9cdaff09059689171645 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_a44960725c4e9cdaff09059689171645 = null;
+$_f65ea3edcf46abd00859784ad6818b7a = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_2cb92db7d1c93ec2ad288ca0dd5803c0 = new Ayoola_Object_Embed( array (
+$_e9be13d2f92baab2f6c9e2cbc7eef982 = new Ayoola_Object_Embed( array (
   'editable' => 'Ayoola_Page_AutoCreator',
   'advanced_parameter_value' => 
   array (
@@ -74,7 +84,7 @@ $_2cb92db7d1c93ec2ad288ca0dd5803c0 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_2cb92db7d1c93ec2ad288ca0dd5803c0 = null;
+$_e9be13d2f92baab2f6c9e2cbc7eef982 = null;
 
 							}
 							

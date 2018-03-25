@@ -9,18 +9,31 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: 404.php	Monday 13th of November 2017 09:30:58 PM	ayoola@ayoo.la $ 
+* @version $Id: 404.php	Saturday 24th of March 2018 02:57:51 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
 						<?php 
+						//		var_export( array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) );
+					//			var_export( __FILE__ );
+					//			var_export( CACHE_DIR );
+					//			var_export( stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) );
+								//	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
+								//	THEY WON'T HAVE CORRECT APPDIR
+//								var_export( stripos( __FILE__,CACHE_DIR ) );
+			//					var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );
+			//					var_export( Ayoola_Application::getDomainSettings() );
 							if
 							( 
-								$x_1510608658 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', array( 'prioritize_my_copy' => true ) ) 
+
+								$x_1521903471 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) ) ) 
 							)
 							{
-								include_once $x_1510608658;
+							//	var_export( $x_1521903471 );
+							//	echo file_get_contents( $x_1521903471 );
+								include_once $x_1521903471;
 							}
+		//					var_export( $x_1521903471 );
 						?>
 						 <?php
 /**
@@ -85,12 +98,6 @@ echo ( ! empty( $_b7050bae07234eabc14cec6521a7fe97 ) &&  is_object( $_b7050bae07
 ?><?php
 //oneness Begins Here
 
-echo ( ! empty( $_c15064ab7dd70d6e4256417464e1d148 ) &&  is_object( $_c15064ab7dd70d6e4256417464e1d148 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_c15064ab7dd70d6e4256417464e1d148->view(), 'well' ) : null );
-
-echo ( ! empty( $_a44960725c4e9cdaff09059689171645 ) &&  is_object( $_a44960725c4e9cdaff09059689171645 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_a44960725c4e9cdaff09059689171645->view(), 'white-background' ) : null );
-
-echo ( ! empty( $_2cb92db7d1c93ec2ad288ca0dd5803c0 ) &&  is_object( $_2cb92db7d1c93ec2ad288ca0dd5803c0 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_2cb92db7d1c93ec2ad288ca0dd5803c0->view(), '' ) : null );
-
 //oneness Ends Here
 ?>
 									<div class="">
@@ -102,6 +109,12 @@ echo ( ! empty( $_2cb92db7d1c93ec2ad288ca0dd5803c0 ) &&  is_object( $_2cb92db7d1
 //middlebar Ends Here
 ?><?php
 //middlebar Begins Here
+
+echo ( ! empty( $_1fc0757f8fe3f62eb8083f4b06f06b77 ) &&  is_object( $_1fc0757f8fe3f62eb8083f4b06f06b77 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_1fc0757f8fe3f62eb8083f4b06f06b77->view(), 'well' ) : null );
+
+echo ( ! empty( $_f65ea3edcf46abd00859784ad6818b7a ) &&  is_object( $_f65ea3edcf46abd00859784ad6818b7a ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_f65ea3edcf46abd00859784ad6818b7a->view(), 'white-background' ) : null );
+
+echo ( ! empty( $_e9be13d2f92baab2f6c9e2cbc7eef982 ) &&  is_object( $_e9be13d2f92baab2f6c9e2cbc7eef982 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_e9be13d2f92baab2f6c9e2cbc7eef982->view(), '' ) : null );
 
 //middlebar Ends Here
 ?>

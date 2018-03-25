@@ -633,7 +633,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];

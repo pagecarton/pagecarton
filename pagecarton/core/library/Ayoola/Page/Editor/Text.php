@@ -253,7 +253,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * @param array Object Info
      * @return string HTML
      */
-     public static function getHTMLForLayoutEditor( $object )
+     public static function getHTMLForLayoutEditor( & $object )
 	{
 /* 		Application_Style::addCode( 'div.editable
 					{
@@ -496,7 +496,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * @param 
      * @return 
      */
-    public function getStatusBarLinks( $object )
+    public static function getStatusBarLinks( $object )
     {
 /* 		$links = array
 		(
