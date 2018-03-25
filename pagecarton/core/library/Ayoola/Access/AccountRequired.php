@@ -133,10 +133,11 @@ class Ayoola_Access_AccountRequired extends Ayoola_Abstract_Table
 		//	var_export( $mode );
 				if( ! Ayoola_Loader::loadClass( $mode ) )
 				{
-					throw new Ayoola_Object_Exception( 'INVALID CLASS: ' . $mode );
+					return false;
+					//throw new Ayoola_Object_Exception( 'INVALID CLASS: ' . $mode );
 				}
 				$class = new $mode();
-				if( ! method_exists( $class, 'createForm' ) ){ continue; }
+				if( ! method_exists( $class, 'createForm' ) ){ return false; }
 				$fieldsets = $class->getForm()->getFieldsets();
 				foreach( $fieldsets as $fieldset )
 				{
