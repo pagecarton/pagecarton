@@ -470,6 +470,7 @@
     background-position: center; 
     background-attachment: fixed; 
     color: #fff !important;
+    background-color:#444;
 }
 .pc_theme_parallax_background h1, .pc_theme_parallax_background h2, .pc_theme_parallax_background p
 {

@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: profile.php	Monday 8th of January 2018 08:02:35 PM	ayoola@ayoo.la $ 
+* @version $Id: profile.php	Sunday 25th of March 2018 10:25:24 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -17,7 +17,41 @@
 							{
 								
 $_b69000b28c902a54d8dbde45f0a62078 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<div class="pc_theme_parallax_background" style="min-height:200px; background-image:url( \'{{{url_prefix}}}{{{display_picture}}}\' );">
+  'editable' => '<div class="pc_theme_parallax_background" style="background-color:#444;min-height:200px; background-image:url( \'{{{url_prefix}}}{{{profile_banner}}}\' );">
+    <div class="container">
+        <div class="pc-profile-image-div">&nbsp;</div>
+        <div style="display:inline-block; margin-left:1em;">
+            <h1>{{{display_name}}}</h1>
+
+            <p>{{{auth_name}}}</p>
+
+            <p>@{{{profile_url}}}</p>
+
+            <p>&nbsp;</p>
+        </div>
+
+
+        <blockquote>
+            <p>{{{profile_description}}}</p>
+        </blockquote>
+    </div>
+</div>
+
+<style type="text/css">
+    .pc-profile-image-div {
+        display: inline-block;
+        float: left;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        background-image: url(\'{{{url_prefix}}}{{{display_picture}}}\');
+    }
+</style>',
+  'preserved_content' => '<div class="pc_theme_parallax_background" style="min-height:200px; background-image:url( \'{{{url_prefix}}}{{{display_picture}}}\' );">
 <h1>{{{display_name}}}</h1>
 
 <p>{{{auth_name}}}</p>
@@ -29,8 +63,9 @@ $_b69000b28c902a54d8dbde45f0a62078 = new Ayoola_Page_Editor_Text( array (
 </blockquote>
 </div>
 ',
-  'url_prefix' => '/x',
+  'url_prefix' => '/x/index.php',
   'markup_template_object_name' => 'Application_Profile_View',
+  'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -53,10 +88,15 @@ $_b69000b28c902a54d8dbde45f0a62078 = null;
 $_d7866b074a6399dd5fc2b5b46d33102a = new Ayoola_Page_Editor_Text( array (
   'editable' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'{{{share_url}}}\' );" href="javascript:">Share ({{{share_count}}})</a>
 
-<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/name/Application_Message_Creator/?to={{{profile_url}}}\' );" href="javascript:">Message</a>
+<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/x/index.php/tools/classplayer/get/name/Application_Message_Creator/?to={{{profile_url}}}\' );" href="javascript:">Message</a>
 ',
-  'url_prefix' => '/x',
+  'preserved_content' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'{{{share_url}}}\' );" href="javascript:">Share ({{{share_count}}})</a>
+
+<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/x/index.php/tools/classplayer/get/name/Application_Message_Creator/?to={{{profile_url}}}\' );" href="javascript:">Message</a>
+',
+  'url_prefix' => '/x/index.php',
   'markup_template_object_name' => 'Application_Share',
+  'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
