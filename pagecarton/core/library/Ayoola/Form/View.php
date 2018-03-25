@@ -302,11 +302,12 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 	//	var_export( $formInfo );
 		$form->submitValue = @$formInfo['button_value'] ? : $submitValue ;
 		$form->oneFieldSetAtATime = true;
+		
+		$form->setFormRequirements( $formInfo['requirements'] );
 	//	$fieldsets[$key]->placeholderInPlaceOfLabel = false;       
 		$i = 0;
 		do
 		{
-			
 			//	Put the questions in a separate fieldset
 			$key = md5( $formInfo['element_group_name'][$i] );
 			if( empty( $fieldsets[$key] ) )
@@ -475,7 +476,6 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 	//	$fieldsets[$key]->addElement( array( 'name' => 'form_name', 'type' => 'Hidden', 'value' => @$formInfo['form_name'] ) );
 
 	//	$form->setFormRequirements( array( 'requirements' => $formInfo['requirements'] ) );
-		$form->setParameter( array( 'requirements' => $formInfo['requirements'] ) );
 		$form->requiredElements = $form->requiredElements + array( 'form_name' => $formInfo['form_name'] );
 		
 		//	Add all fieldsets

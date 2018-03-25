@@ -178,10 +178,10 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 			}
 			$form->addFieldset( $fieldset );    
 		}
-		if( @$values['requirements'] ||  is_array( $this->getGlobalValue( 'form_options' ) ) && in_array( 'requirements', $this->getGlobalValue( 'form_options' ) ) )
+	//	if( @$values['requirements'] ||  is_array( $this->getGlobalValue( 'form_options' ) ) && in_array( 'requirements', $this->getGlobalValue( 'form_options' ) ) )
 		{ 
 			$fieldset = new Ayoola_Form_Element;
-			$fieldset->addLegend( 'Requirements of this form:' );
+		//	$fieldset->addLegend( 'Requirements of this form:' );
 			$options = new Ayoola_Form_Requirement;
 			$options = $options->select();
 			if( $options ) 
@@ -189,7 +189,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 				require_once 'Ayoola/Filter/SelectListArray.php';
 				$filter = new Ayoola_Filter_SelectListArray( 'requirement_name', 'requirement_label' );
 				$options = $filter->filter( $options );
-				$fieldset->addElement( array( 'name' => 'requirements', 'label' => 'Select information required from viewers of this "' . $this->getGlobalValue( 'form_title' ) . '" (advanced)', 'type' => 'Checkbox', 'value' => @$values['requirements'] ), $options );
+				$fieldset->addElement( array( 'name' => 'requirements', 'label' => 'Form Requirements', 'type' => 'SelectMultiple', 'value' => @$values['requirements'] ), $options );
 			}
 			$form->addFieldset( $fieldset );
 		}
