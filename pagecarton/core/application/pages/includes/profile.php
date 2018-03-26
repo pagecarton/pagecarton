@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: profile.php	Sunday 25th of March 2018 11:32:49 PM	ayoola@ayoo.la $ 
+* @version $Id: profile.php	Monday 26th of March 2018 01:54:40 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -52,18 +52,41 @@ $_b69000b28c902a54d8dbde45f0a62078 = new Ayoola_Page_Editor_Text( array (
         background-color: #fff;
     }
 </style>',
-  'preserved_content' => '<div class="pc_theme_parallax_background" style="min-height:200px; background-image:url( \'{{{url_prefix}}}{{{display_picture}}}\' );">
-<h1>{{{display_name}}}</h1>
+  'preserved_content' => '<div class="pc_theme_parallax_background" style="background-color:#444;min-height:200px; background-image:url( \'{{{url_prefix}}}{{{profile_banner}}}\' );">
+    <div class="container">
+        <div class="pc-profile-image-div">&nbsp;</div>
+        <div style="display:inline-block; margin-left:1em;">
+            <h1>{{{display_name}}}</h1>
 
-<p>{{{auth_name}}}</p>
+            <p>{{{auth_name}}}</p>
 
-<p>@{{{profile_url}}}</p><p><br></p>
+            <p>@{{{profile_url}}}</p>
 
-<blockquote>
-<p>{{{profile_description}}}</p>
-</blockquote>
+            <p>&nbsp;</p>
+        </div>
+
+
+        <blockquote>
+            <p>{{{profile_description}}}</p>
+        </blockquote>
+    </div>
 </div>
-',
+
+<style type="text/css">
+    .pc-profile-image-div {
+        display: inline-block;
+        float: left;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        background-image: url(\'{{{url_prefix}}}{{{display_picture}}}\');
+        background-color: #fff;
+    }
+</style>',
   'url_prefix' => '/x/index.php',
   'markup_template_object_name' => 'Application_Profile_View',
   'phrase_to_replace' => '',

@@ -33,6 +33,13 @@ class Application_Profile_All extends Application_Article_ShowAll
      * 
      * @var string
      */
+	protected $_postTable = 'Application_Profile_Table';	
+	
+    /**
+     * Module files directory namespace
+     * 
+     * @var string
+     */
 	protected static $_moduleDir = 'profiles';	
 	
 			
@@ -41,7 +48,8 @@ class Application_Profile_All extends Application_Article_ShowAll
      */
 	public static function sanitizeData( &$data )
     {
-	//	var_export( $data['profile_url'] );
+		$data = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] );
+	//	var_export( $data );
 		$data['article_title'] = @$data['display_name']; 
 		$data['article_description'] = @$data['profile_description']; 
 		$data['document_url'] = @$data['display_picture']; 

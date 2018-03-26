@@ -342,7 +342,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( $this->getParameter( 'sort_column' ) );
 				if( $values )
 				{
-					$values = self::sortMultiDimensionalArray( $values, 'article_creation_date' );
+					$values = self::sortMultiDimensionalArray( $values, @$data['article_creation_date'] ? 'article_creation_date' : 'profile_creation_date' );
 					$values = array_reverse( $values );
 				}
 			}			
@@ -360,10 +360,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	var_export( $data );
 			//		var_export( $data );
 					unset( $values[$key] );
-					//	var_export( $data );
 
 					//	quick fix for older posts that the dates were not set in the table
-					if( is_array( $data ) && empty( $data['article_creation_date'] ) )
+					if( is_array( $data ) && empty( $data['article_creation_date'] ) && ! empty( $data['article_url'] ) )
 					{
 						if( $data = $this->retrieveArticleData( $data ) )
 						{
@@ -371,13 +370,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							$class->update( $data, array( 'article_url' => $data['article_url'] ) );
 						}			
 					}
+					static::sanitizeData( $data );
+				//		var_export( $data );
 					
-					if( ! $data = $this->retrieveArticleData( $data ) )
+					if( ( empty( $data['article_url'] ) || empty( $data['article_title'] ) ) AND ! $data = $this->retrieveArticleData( $data ) )
 					{
 						continue;
 					}
-			//		var_export( $data['article_type'] );
-					static::sanitizeData( $data );
+			//		var_export( $data );
+//					var_export( $data['article_type'] );
 					
 					$data['post_list_id'] = $postListId;
 
@@ -1453,6 +1454,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	var_export( self::getFolder() . " 2 \r\n" );
 			
 		//		if( $path === self::getFolder() )
+				$table = $this->_postTable;
+		//		var_export( $table );
 				if( empty( $whereClause ) )
 				{
 				//	var_export( $path );
@@ -1483,8 +1486,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//			krsort( $this->_dbData );
 					if( empty( $_REQUEST['pc_load_old_posts']))
 					{
-						$table = Application_Article_Table::getInstance();
+						$table = $table::getInstance();
 						$this->_dbData = $table->select();
+			//			var_export( $this->_dbData );
 					}
 					else
 					{
@@ -1504,8 +1508,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					@exec( $command, $output );
 					$this->_dbData = array_unique( $output ); 
 */
-					$table = Application_Article_Table::getInstance();
+					$table = $table::getInstance();
 					$this->_dbData = $table->select( null, $whereClause );
+			//		var_export( $this->_postTable );
 				//	var_export( $this->_dbData );
 				//	var_export( $output );
 			//		var_export( $whereClause );
