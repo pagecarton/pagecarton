@@ -101,7 +101,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		$values['profile_url'] = strtolower( $values['profile_url'] );
 		if( self::getProfileInfo( $values['profile_url'] ) )
 		{
-			return self::getProfileTable()->update( $values, array( 'profile_url' => $values['profile_url'] ) );
+			return self::getProfileTable()->update( $values, array( 'profile_url' => strtolower( $data['profile_url'] ) ) );
 		}
 		else
 		{

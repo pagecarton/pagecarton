@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: profile.php	Sunday 25th of March 2018 10:25:24 PM	ayoola@ayoo.la $ 
+* @version $Id: profile.php	Sunday 25th of March 2018 11:32:49 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -49,6 +49,7 @@ $_b69000b28c902a54d8dbde45f0a62078 = new Ayoola_Page_Editor_Text( array (
         background-position: center center;
         background-size: cover;
         background-image: url(\'{{{url_prefix}}}{{{display_picture}}}\');
+        background-color: #fff;
     }
 </style>',
   'preserved_content' => '<div class="pc_theme_parallax_background" style="min-height:200px; background-image:url( \'{{{url_prefix}}}{{{display_picture}}}\' );">

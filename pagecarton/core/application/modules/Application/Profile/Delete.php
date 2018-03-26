@@ -61,6 +61,9 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 			//	if( true !== $response['data'] ){ throw new Application_Profile_Exception( $response ); }
 			}
 		//	$filename = self::getProfilePath( $url );
+		//		var_export( $data );
+			self::getProfileTable()->delete( array( 'profile_url' => strtolower( $data['profile_url'] ) ) );
+
 			unlink( self::getProfilePath( $data['profile_url'] ) );
 			
 			@Ayoola_Doc::removeDirectory( dirname( self::getFolder() . $data['profile_url'] ) );
