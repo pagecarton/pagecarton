@@ -342,7 +342,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( $this->getParameter( 'sort_column' ) );
 				if( $values )
 				{
-					$values = self::sortMultiDimensionalArray( $values, @$data['article_creation_date'] ? 'article_creation_date' : 'profile_creation_date' );
+					$sortColumn = @$values[0]['profile_creation_date'] ? 'profile_creation_date' : 'article_creation_date';
+			//		var_export( $sortColumn );
+					$values = self::sortMultiDimensionalArray( $values, $sortColumn );
 					$values = array_reverse( $values );
 				}
 			}			
@@ -371,13 +373,19 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						}			
 					}
 					static::sanitizeData( $data );
-				//		var_export( $data );
-					
-					if( ( empty( $data['article_url'] ) || empty( $data['article_title'] ) ) AND ! $data = $this->retrieveArticleData( $data ) )
-					{
-						continue;
-					}
 			//		var_export( $data );
+		//			$oldData = $data;
+	//				$data = $this->retrieveArticleData( $data );
+			//		self::v( $data );
+					if( ! empty( $data['true_post_type'] ) )
+					{
+						if( ! $data = $this->retrieveArticleData( $data ) )
+						{
+							continue;
+						}
+					}
+					
+			//		self::v( $data );
 //					var_export( $data['article_type'] );
 					
 					$data['post_list_id'] = $postListId;
@@ -388,9 +396,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					//	self::v( self::hasPriviledge( @$data['auth_level'] ) );
 					//	self::v( $data['publish'] );
 					//	self::v( self::isAllowedToView( $data ) );
+				//	self::v( $data );
 						continue;
 					//	self::setIdentifierData( $data );
 					}
+		//			self::v( $data );
 					//	Switch
 					if( $this->getParameter( 'post_switch' ) )
 					{
@@ -417,6 +427,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						//	freebies 
 						continue;
 					}
+				//	self::v( $data );
 
 			//	get number of views
 					if( $this->getParameter( 'get_views_count' ) )
@@ -713,6 +724,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					@$data['article_title'] = mb_strimwidth( $titleToUse, 0, $this->getParameter( 'length_of_title' ), "..." );
 				}
 			}
+			//		self::v( $data );
 			if( $this->getParameter( 'use_datetime' ) )
 			{
 
@@ -1455,7 +1467,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 		//		if( $path === self::getFolder() )
 				$table = $this->_postTable;
-		//		var_export( $table );
+	////			var_export( $table );
 				if( empty( $whereClause ) )
 				{
 				//	var_export( $path );
@@ -1484,11 +1496,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => 'filectime' ) );
 		//			$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => $sortFunction ) );
 		//			krsort( $this->_dbData );
+				//	self::v( $this->_dbData );
+				//	self::v( $_REQUEST );
 					if( empty( $_REQUEST['pc_load_old_posts']))
 					{
 						$table = $table::getInstance();
 						$this->_dbData = $table->select();
-			//			var_export( $this->_dbData );
+				//		self::v( $this->_dbData );
 					}
 					else
 					{
@@ -1511,11 +1525,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					$table = $table::getInstance();
 					$this->_dbData = $table->select( null, $whereClause );
 			//		var_export( $this->_postTable );
-				//	var_export( $this->_dbData );
 				//	var_export( $output );
 			//		var_export( $whereClause );
 				}
-			//	var_export( $path );
+		//		self::v( $table->select() );
+			//	self::v( $whereClause );
 					//	Posts created same time causing issues.
 				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );
 				//		self::v( $this->_dbData );
@@ -1643,7 +1657,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>';
-		$html .= '<span style=""> style. </span>';
+		$html .= '<span style=""> style. </span>';  
 		if( static::$_editableTitle )
 		{
 			$html .= '<a href="javascript:;" title="' . static::$_editableTitle . '" onclick="ayoola.div.makeEditable( this.nextSibling ); this.nextSibling.style.display=\'block\';"> edit </a>';

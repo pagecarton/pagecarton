@@ -148,14 +148,14 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	{
 	//	var_export( $data['username'] );
 		if( 
-				( 
+/*				( 
 					trim( @$data['publish'] )
 					|| self::isOwner( @$data['user_id'] ) 
 					|| @in_array( 'publish', @$data['article_options'] ) 
 					|| strtolower( Ayoola_Application::getUserInfo( 'username' ) ) === strtolower( $data['username']  )
 				)
 			&&
-				(
+*/				(
 					self::hasPriviledge( @$data['auth_level'] ) 
 					|| strtolower( Ayoola_Application::getUserInfo( 'username' ) ) === strtolower( $data['username']  )
 				)
@@ -164,7 +164,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{ 
 			return true; 
 		}
-		//	var_export( @$data['auth_level'] );  
+		//	var_export( @$data['auth_level'] );    
 		return false;
 	}
 	
