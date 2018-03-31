@@ -56,6 +56,9 @@ class Application_Profile_Editor extends Application_Profile_Abstract
 //			$this->setViewContent( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
+
+		//	self::v( $values );
+
 			$access = new Ayoola_Access();
 			if( $userInfo = $access->getUserInfo() )
 			{
@@ -67,6 +70,9 @@ class Application_Profile_Editor extends Application_Profile_Abstract
 			$values['profile_modified_date'] = time();
 			
 			//	making options that have been disabled to still be active.
+		//	$data['profile_data'] = array_merge( $data['profile_data'], $values['profile_data'] );  
+		//	self::v( $data['profile_data'] );
+		//	self::v( $values['profile_data'] );
 			$values = array_merge( $data, $values );  
 						
 			self::saveProfile( $values );

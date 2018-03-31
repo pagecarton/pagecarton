@@ -49,7 +49,9 @@ class Application_Log_View_Error extends Application_Log_View_Abstract
 			Ayoola_Application_Notification::mail( $mailInfo );
 		}
 		catch( Ayoola_Exception $e ){ null; }
-		echo "There is error on this page please reload your browser to continue. If this persist, contact the administrator. You can also go back to the <a href=\'/\'>homepage</a>";
+		$message = "There is error on this page please reload your browser to continue. If this persist, contact the administrator. You can also go back to the <a href=\'/\'>homepage</a>";
+		trigger_error( $message );
+	//	echo "There is error on this page please reload your browser to continue. If this persist, contact the administrator. You can also go back to the <a href=\'/\'>homepage</a>";
 	//	var_export( static::getLogTable() );
 		$result = self::getLogTable()->insert( $log );
  	//	var_export( $result );

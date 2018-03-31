@@ -63,7 +63,7 @@ class Application_Profile_All extends Application_Article_ShowAll
 		$data['document_url_base64'] = @$data['display_picture_base64']; 
 		$data['article_modified_date'] = @$data['profile_modified_date']; 
 		$data['article_creation_date'] = @$data['profile_creation_date']; 
-		$data['article_url'] = '/' . @$data['profile_url']; 
+		$data['article_url'] = '/' . @$data['profile_url'];   
 		$data['publish'] = '1'; 
 		$data['auth_level'] = '0'; 
 	//	$data['allow_raw_data'] = true; 

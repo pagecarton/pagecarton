@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageCarton Content Management System
  *
@@ -18,7 +19,6 @@
  
 require_once 'Ayoola/Dbase/Table/Abstract.php';
 require_once 'Ayoola/Dbase/Table/Abstract/Exception.php';
-
 
 /**
  * @category   PageCarton CMS
@@ -187,7 +187,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             $values = include( $backupFile );  
         //    var_export( $values );
             $newBackUpFile = $backUpFile . filemtime( $backupFile );
-            Application_Log_View_Error::log( "There is an error on an XML Database. The back up file {$backUpFile} as been copied to {$newBackUpFile} for safe keep." );
+         //   Application_Log_View_Error::log( "There is an error on an XML Database. The back up file {$backUpFile} as been copied to {$newBackUpFile} for safe keep." );
   //   		var_export( $backupFile );
   //   		var_export(  static::$_tableInfo );  
 

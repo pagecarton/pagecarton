@@ -97,11 +97,12 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		}
 		$values['modified_time'][] = time();
 		$values['modified_ip'][] = $_SERVER['REMOTE_ADDR'];
+	//	var_export( self::getProfileInfo( $values['profile_url'] ) );
 		$values['profile_data'] = $values;
 		$values['profile_url'] = strtolower( $values['profile_url'] );
 		if( self::getProfileInfo( $values['profile_url'] ) )
 		{
-			return self::getProfileTable()->update( $values, array( 'profile_url' => strtolower( $data['profile_url'] ) ) );
+			return self::getProfileTable()->update( $values, array( 'profile_url' => strtolower( $values['profile_url'] ) ) );
 		}
 		else
 		{
@@ -199,7 +200,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 	{
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . @$_REQUEST['access_level'] . @$values['profile_url'], 'data-not-playable' => true ) );      
       //  $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
-		$form->oneFieldSetAtATime = true;
+		$form->oneFieldSetAtATime = false;
 		$form->submitValue = $submitValue ;
 		$fieldset = new Ayoola_Form_Element;
 		if( is_null( $values ) )

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageCarton Content Management System
  *
@@ -456,7 +457,7 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
 			@unlink( $filename );
 			try
 			{ 
-				Application_Log_View_Error::log( "'{$filename}' has some errors, so it has been renamed '{$newFilename}' " );
+			//	Application_Log_View_Error::log( "'{$filename}' has some errors, so it has been renamed '{$newFilename}' " );
 			}
 			catch( Exception $e )
 			{
