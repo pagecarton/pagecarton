@@ -377,7 +377,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//			$oldData = $data;
 	//				$data = $this->retrieveArticleData( $data );
 			//		self::v( $data );
-					if( ! empty( $data['true_post_type'] ) )
+					if( ! empty( $data['true_post_type'] )|| ! empty( $data['auth_level'] ) )
 					{
 						if( ! $data = $this->retrieveArticleData( $data ) )
 						{
@@ -385,7 +385,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						}
 					}
 					
-			//		self::v( $data );
+		//			var_export( $data );
 //					var_export( $data['article_type'] );
 					
 					$data['post_list_id'] = $postListId;
@@ -400,7 +400,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						continue;
 					//	self::setIdentifierData( $data );
 					}
-		//			self::v( $data );
+			//		self::v( $data );
+				//	var_export( $data );
 					//	Switch
 					if( $this->getParameter( 'post_switch' ) )
 					{
@@ -1502,14 +1503,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					{
 						$table = $table::getInstance();
 						$this->_dbData = $table->select();
-				//		self::v( $this->_dbData );
-					}
+		//				var_export( $this->_dbData );    
+					}  
 					else
 					{
 						$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );
 						krsort( $this->_dbData );
 					}
-				//	self::v( self::getFolder() );
+	//					var_export( $this->_dbData );        
 				//	self::v( Ayoola_Doc::getFilesRecursive( self::getFolder() ) );
 				//	var_export( count( $files ) );  
 					//	Removing dependence on Ayoola_Api for showing posts
@@ -1525,7 +1526,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					$table = $table::getInstance();
 					$this->_dbData = $table->select( null, $whereClause );
 			//		var_export( $this->_postTable );
-				//	var_export( $output );
+			//		var_export( $this->_dbData );
 			//		var_export( $whereClause );
 				}
 		//		self::v( $table->select() );

@@ -54,9 +54,9 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 	//	var_export( $table->select() );
 		$key = "url";
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );  
-		$myPages = $table->select( null, array( 'system' => 0 ), array( 'worsssk-arwrouddddnss00d-1-333' => true ) );
+		$myPages = $table->select( null, array( 'system' => 0 ), array( 'worsssk22edew-arwrouddddnss00d-1-333' => true ) );
 
-//		var_export( $myPages );
+	//	var_export( $myPages );
 		
 		$myPages = self::sortMultiDimensionalArray( $myPages, $key );
 	//	$list->listTitle = 'My Pages'; 
