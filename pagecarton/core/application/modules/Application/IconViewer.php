@@ -176,7 +176,7 @@ class Application_IconViewer extends PageCarton_Widget
           //      header( 'Content-Length: ' . filesize( $path ) );
                 
             }
-            if( $path AND ( $maxHeight || $maxWith ) AND empty( $noImageManipulation ) )
+            if( $path AND ( $maxHeight || $maxWith ) AND empty( $noImageManipulation ) AND function_exists( 'imagecreatetruecolor' ) )
             {
          //      var_export( $maxWith );  
           //     var_export( $maxHeight );

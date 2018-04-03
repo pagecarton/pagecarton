@@ -390,7 +390,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					
 					$data['post_list_id'] = $postListId;
 
-					if( ! self::isAllowedToView( $data ) )  
+					if( ! self::isAllowedToView( $data ) )    
 					{
 					//	self::v( @$data['auth_level'] );
 					//	self::v( self::hasPriviledge( @$data['auth_level'] ) );
