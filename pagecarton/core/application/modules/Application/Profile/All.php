@@ -50,6 +50,7 @@ class Application_Profile_All extends Application_Article_ShowAll
     {
 		$data = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] );
 	//	var_export( $data );
+		$data['not_real_post'] = @$data['display_name']; 
 		$data['article_title'] = @$data['display_name']; 
 		$data['article_description'] = @$data['profile_description']; 
 		$data['document_url'] = @$data['display_picture']; 
@@ -65,7 +66,7 @@ class Application_Profile_All extends Application_Article_ShowAll
 		$data['article_creation_date'] = @$data['profile_creation_date']; 
 		$data['article_url'] = '/' . @$data['profile_url'];   
 		$data['publish'] = '1'; 
-		$data['auth_level'] = '0'; 
+		$data['auth_level'] = '0';   
 	//	$data['allow_raw_data'] = true; 
 	}
 	// END OF CLASS

@@ -554,7 +554,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				
 			}
 */			$personal ? $form->addFieldset( $personal ) : null;
-	//		var_export( $additionalForms );
+	//		var_export( $additionalForms );  
 			foreach( $additionalForms as $formName )
 			{
 				if( empty( $formName ) )
@@ -598,7 +598,9 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$form->addFieldset( $settings );
 		}
 		$supplementaryForm = Application_Settings_CompanyInfo::getSettings( 'UserAccount', 'supplementary_form' );
+
 	//	var_export( $supplementaryForm );  
+
 		if( $supplementaryForm )
 		{
 			$parameters = array( 'form_name' => $supplementaryForm, 'default_values' => $values );  

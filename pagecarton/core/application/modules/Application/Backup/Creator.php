@@ -207,7 +207,10 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		}
 		$regex = trim( $regex, '|' );
 		$regex = "#{$regex}#";
-		$backup->buildFromDirectory( $dir, $regex );
+		$backup->buildFromDirectory( $dir, $regex );  
+	//	var_export( $dir );
+	//	return false;
+	//	$backup->buildFromDirectory( $dir );
 	//	foreach( $excluded as $key => $each )
 		{
 		//	unset( $backup[ltrim( $key, '/' )] );
