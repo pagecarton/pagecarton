@@ -200,19 +200,24 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 			$method = 'add' . @$element['type'];
 			$markup = null;
-			if( method_exists( __CLASS__, $method ) )
+			if( ! method_exists( __CLASS__, $method ) )
 			{
-				$element['name'] = @$element['multiple'] ? ( $element['name'] . '[]' ) : $element['name']; 
-				unset( $element['multiple'],  $element['type'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
-				$markup = $this->$method( $element, $values );
-				$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;		
-				if( ! empty( $_GET['pc_inspect_widget_form'] ) && stripos( $realName, 'submit-' ) === false && stripos( $realName, 'SUBMIT_DETECTOR' ) === false )
-				{
-					$markup .= ' <div style="font-size:smaller; padding-top:1em; padding-bottom:1em;"><br> The name attribute of the element above is "' . $realName . '"<br></div>';   
-				}
+				$method = 'addInputText';
 			//	$element .= $description ? "<span> {$description} </span>" : null;		
 			//	$element = "<span>{$element}</span>";		
 				//	exit();
+			}
+			else
+			{
+				unset( $element['type'] );
+			}
+			$element['name'] = @$element['multiple'] ? ( $element['name'] . '[]' ) : $element['name']; 
+			unset( $element['multiple'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
+			$markup = $this->$method( $element, $values );
+			$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;		
+			if( ! empty( $_GET['pc_inspect_widget_form'] ) && stripos( $realName, 'submit-' ) === false && stripos( $realName, 'SUBMIT_DETECTOR' ) === false )
+			{
+				$markup .= ' <div style="font-size:smaller; padding-top:1em; padding-bottom:1em;"><br> The name attribute of the element above is "' . $realName . '"<br></div>';   
 			}
 			$this->setHtml( $markup );
 			if( $this->appendElement )
@@ -430,7 +435,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 		//	
 //$element['value'] = htmlspecialchars( $element['value'] );
 		unset( $element['label'] );
-		$html .= "<input type=\"text\" " . self::getAttributesHtml( $element ) . " />\n";
+		if( empty( $element['type'] ) )
+		{
+			$element['type'] = 'text';
+		}
+		$html .= "<input " . self::getAttributesHtml( $element ) . " />\n";
 	//	$html .= $this->useDivTagForElement ? "</div>\n" : null;
 
 		 return $html;

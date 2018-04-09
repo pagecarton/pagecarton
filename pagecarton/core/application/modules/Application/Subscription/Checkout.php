@@ -293,6 +293,14 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			}
 			$form->submitValue = 'Continue checkout...';
 		}
+		else
+		{
+			$fieldset = new Ayoola_Form_Element();
+			$fieldset->addElement( array( 'name' => 'full_name', 'label' => 'Customer Name', 'placeholder' => 'e.g. John Bello', 'type' => 'InputText', 'value' => @$values['full_name'] ) );
+			$fieldset->addElement( array( 'name' => 'email', 'label' => 'Customer Email', 'placeholder' => 'e.g. email@example.com', 'type' => 'email', 'value' => @$values['email'] ) );
+			$fieldset->addElement( array( 'name' => 'phone_number', 'label' => 'Customer Phone Number', 'placeholder' => 'e.g. +1-202-555-1234', 'type' => 'InputText', 'value' => @$values['phone_number'] ) );
+			$form->addFieldset( $fieldset );
+		}
 		$cart = self::getStorage()->retrieve();
 		if( ! $orderForm && $cart )
 		{ 
@@ -349,13 +357,17 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		$options = $filter->filter( $options );
 												
 		$editLink = self::hasPriviledge( 98 ) ? ( '<a class="" rel="spotlight;" title="Change organization contact information" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Payments/">(edit payment informaton)</a>' ) : null; 
-
+		if( count( $options ) == 1 )
+		{
+			@$values['checkoutoption_name'] = array_pop( array_keys( $options ) ); 
+//var_export( $values['checkoutoption_name'] );
+		}
 		$fieldset->addElement( array( 'name' => 'checkoutoption_name', 'label' => ' ' , 'type' => 'Radio', 'value' => @$values['checkoutoption_name'] ), $options );
 // 		$fieldset->addRequirement( 'checkoutoption_name', array( 'InArray' => array_keys( $options ) ) );
 	//	$fieldset->addRequirements( array( 'NotEmpty' => null  ) );
 
 //		$fieldset->addElement( array( 'name' => 'api-checkout', 'value' => 'Checkout', 'type' => 'Submit' ) );
-		$fieldset->addLegend( 'Please select your preferred payment method ' . $editLink );
+	//	$fieldset->addLegend( 'Please select your preferred payment method ' . $editLink );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
     }

@@ -345,14 +345,14 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 	//	self::v( $subscriptionData );
 	//	var_export( $subscriptionData['no_of_items_in_stock'] );
 		$showQuantity = 'Hidden';
-		$options = array();
+		$optionsForSelect = array();
 		if( @intval( $subscriptionData['no_of_items_in_stock'] ) > 1 )
 		{
 			$showQuantity = 'InputText';
 		}
 		elseif( is_numeric( $this->getParameter( 'min_quantity' ) ) ||  is_numeric( $this->getParameter( 'max_quantity' ) ) )
 		{
-			$min = intval( $this->getParameter( 'min_quantity' ) ) ? : 1;
+			$min = is_numeric( $this->getParameter( 'min_quantity' ) ) ? $this->getParameter( 'min_quantity' ) : 1;
 			$max = intval( $this->getParameter( 'max_quantity' ) ) ? : intval( $this->getParameter( 'min_quantity' ) );
 			if( ! $step = $this->getParameter( 'quantity_step' ) )
 			{
@@ -365,37 +365,40 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 				
 			}
 			$showQuantity = 'Select';
-			$options = range( $min, $max, $step );
-			$options = array_combine( $options, $options );
+			$optionsForSelect = range( $min, $max, $step );
+			$optionsForSelect = array_combine( $optionsForSelect, $optionsForSelect );
 		} 
 	//	var_export( $showQuantity );
 	//	var_export( $options );
-		$fieldset->addElement( array( 'name' => 'quantity', 'id' => 'quantity_' . md5( @$subscriptionData['article_url'] ), 'label' => 'Quantity', 'style' => 'min-width:20px;max-width:60px;display:inline;margin-right:0;', 'type' => $showQuantity, 'value' => @$values['quantity'] ? : 1 ), $options );  
-		$filter = 'Ayoola_Filter_Currency';
-		$filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
-	//	$data['currency'] = $filter::$symbol;
-		$filter = new $filter();
-		if( @$subscriptionData['option_name'] )  
-		{
-			$optionsMenu = array();
-			foreach( $subscriptionData['option_name'] as $key => $eachOption )
+		if( empty( $subscriptionData['price_option_title'] ) )
+		{	
+			$fieldset->addElement( array( 'name' => 'quantity', 'id' => 'quantity_' . md5( @$subscriptionData['article_url'] ), 'label' => 'Quantity', 'style' => 'min-width:20px;max-width:60px;display:inline;margin-right:0;', 'type' => $showQuantity, 'value' => @$values['quantity'] ? : 1 ), $optionsForSelect );  
+			$filter = 'Ayoola_Filter_Currency';
+			$filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
+		//	$data['currency'] = $filter::$symbol;
+			$filter = new $filter();
+			if( @$subscriptionData['option_name'] )  
 			{
-				if( empty( $eachOption ) )
+				$optionsMenu = array();
+				foreach( $subscriptionData['option_name'] as $key => $eachOption )
 				{
-					continue;
+					if( empty( $eachOption ) )
+					{
+						continue;
+					}
+					if( empty( $subscriptionData['option_price'][$key] ) || empty( $subscriptionData['option_price'][$key] ) )
+					{
+					//	continue;
+					}
+					$price = $subscriptionData['option_price'][$key] ? $filter->filter( $subscriptionData['option_price'][$key] ) : null;
+					$optionsMenu[$subscriptionData['option_price'][$key]] = $subscriptionData['option_name'][$key] . ' (' . $price . ') ';
 				}
-				if( empty( $subscriptionData['option_price'][$key] ) || empty( $subscriptionData['option_price'][$key] ) )
-				{
-				//	continue;
-				}
-				$price = $subscriptionData['option_price'][$key] ? $filter->filter( $subscriptionData['option_price'][$key] ) : null;
-				$optionsMenu[$subscriptionData['option_price'][$key]] = $subscriptionData['option_name'][$key] . ' (' . $price . ') ';
+		//		self::v( $optionsMenu );
+				$optionsMenu ? $fieldset->addElement( array( 'name' => 'product_option', 'label' => 'Options', 'type' => 'Checkbox', 'value' => @$subscriptionData['product_option'] ), $optionsMenu ) : null;
 			}
-	//		self::v( $optionsMenu );
-			$optionsMenu ? $fieldset->addElement( array( 'name' => 'product_option', 'label' => 'Options', 'type' => 'Checkbox', 'value' => @$subscriptionData['product_option'] ), $optionsMenu ) : null;
 		} 
 		//	find out if everything is the same price 
-		if( @$subscriptionData['price_option_title'] )   
+		else  
 		{
 
 			$samePricing = false;
@@ -418,7 +421,8 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 				{ 
 					$pricing = ' - ' . $filter->filter( $subscriptionData['price_option_price'][$key] );
 				}
-				$fieldset->addElement( array( 'name' => 'price_option' . $each, 'label' => $each . $pricing , 'type' => 'Select', 'value' => 'price_option' . $each ), array_combine( range( 0, 100 ), range( 0, 100 ) ) );
+				$optionsForSelect = empty( $optionsForSelect ) ? array_combine( range( 0, 100 ), range( 0, 100 ) ) : $optionsForSelect;
+				$fieldset->addElement( array( 'name' => 'price_option' . $each, 'label' => $each . $pricing , 'type' => 'Select', 'value' => 'price_option' . $each ), $optionsForSelect );
 			}
 		} 
 		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden', 'value' => @$subscriptionData['article_url'] ) );

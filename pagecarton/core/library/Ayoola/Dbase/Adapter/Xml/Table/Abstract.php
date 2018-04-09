@@ -433,7 +433,7 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
 		{
 			//	Avoid errors of when this is empty
 			unlink( $filename );
-			Application_Log_View_Error::log( "'{$filename}' is an empty file and has been removed from the server. " );
+		//	Application_Log_View_Error::log( "'{$filename}' is an empty file and has been removed from the server. " );
 			return array();
 		}
 		else
