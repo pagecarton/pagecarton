@@ -109,19 +109,19 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 	
 		//	Use another means to seek the old path. 
 	
-		$oldPath = dirname( APPLICATION_DIR ) . DS . 'application'  . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @constant( 'PC_PATH_PREFIX' );
+		$oldPath = dirname( APPLICATION_DIR ) . DS . 'application'  . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @Ayoola_Application::getPathPrefix();
 //		var_export( ! is_dir( $oldPath ) );    
 		if( ! is_dir( $oldPath ) )
 		{
-			$oldPath = APPLICATION_DIR . DS . 'application'  . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @constant( 'PC_PATH_PREFIX' );  
+			$oldPath = APPLICATION_DIR . DS . 'application'  . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @Ayoola_Application::getPathPrefix();  
 		}
-		@$newPath = PC_BASE . DS . 'sites' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @constant( 'PC_PATH_PREFIX' );
+		@$newPath = PC_BASE . DS . 'sites' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @Ayoola_Application::getPathPrefix();
 		
 		$pathToUse = $oldPath;
 		    
 		//	compatibility, send to new path
 	//	var_export( PC_BASE );
-	//	var_export( defined( 'PC_BASE' ) );
+	//	var_export( defined( 'PC_BASE' ) );   
 //		var_export( is_dir( $oldPath )  );
 //		var_export( ! is_dir( $newPath )  );  
 //		var_export( $newPath );  

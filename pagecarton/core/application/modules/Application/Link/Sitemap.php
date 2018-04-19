@@ -27,6 +27,19 @@ require_once 'Application/Link/Abstract.php';
 
 class Application_Link_Sitemap extends Application_Link_Abstract
 {
+    /**
+     * Using another layer of auth for this one
+     *
+     * @var boolean
+     */
+	protected static $_accessLevel = 0;
+	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Sitemap'; 
 
     /**
      * The xml document
@@ -43,10 +56,11 @@ class Application_Link_Sitemap extends Application_Link_Abstract
     {
 		try
 		{
-			$this->createConfirmationForm( 'Build Site Map', 'Build site map and submit it to search engines' );
-			$this->setViewContent( $this->getForm()->view(), true );
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			
+		//	$this->createConfirmationForm( 'Build Site Map', 'Build site map and submit it to search engines' );
+		//	$this->setViewContent( $this->getForm()->view(), true );
+		//	if( ! $values = $this->getForm()->getValues() ){ return false; }
+/*			
+			$domains = new Application_Domain();
 			$domains = new Application_Domain();
 		//	echo $domains->view();
 			Ayoola_Application::getDomainSettings();
@@ -54,41 +68,49 @@ class Application_Link_Sitemap extends Application_Link_Abstract
 			{
 				
 			}
-			$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . DOCUMENTS_DIR . DS . 'sitemap';
-			Ayoola_Doc::createDirectory( $directory );
-			$extentionXml = '.xml';
-			$extentionGz = '.tar.gz';
-			foreach( $domains as $domain )
+*/			//	do normal
+			Ayoola_Application::reset();
+			$this->setXml();
+
+			$table = new PageCarton_MultiSite_Table();
+			if( $sites = $table->select() )
 			{
-				$this->setXml( $domain['domain_name'] );
-				$filenameXml = $directory . DS . $domain['domain_name'] . $extentionXml;
-				$filenameGz = $directory . DS . $domain['domain_name'] . $extentionGz;
-				$tempFileName = rand( 1000, 2000 );
-				$tempFile = $directory . DS . $tempFileName . '.tar';
 				
-				//	save the xml site map
-				$this->getXml()->save( $filenameXml );
-				
-				//	compress the sitemap to send to search engine
-				@unlink( $filenameGz ); // remove the previous compressed sitemap
-				@unlink( $tempFile ); // remove the previous tempfile
-				$phar = 'Ayoola_Phar_Data';
-				$temp = new $phar( $tempFile );
-				$temp->startBuffering();
-			//	var_export( $filenameXml );
-			//	var_export( $filenameGz );
-				$temp->addFile( $filenameXml, 'sitemap.xml' );
-				$temp->stopBuffering();
-				$temp->compress( Ayoola_Phar::GZ ); 
-				unset( $temp );
-				unlink( $tempFile );
-				
-				//	compression have changed the filename
-				rename( $tempFile . '.gz', $filenameGz );			
-				
-				$url = urlencode( 'http://' . $domain['domain_name'] . '/sitemap/' . $domain['domain_name'] . '.tar.gz' );
-				$this->sendToSearchEngine( $url );
 			}
+
+			//	do for directories
+			foreach( $sites as $site )
+			{
+				Ayoola_Application::reset( array( 'path' => $site['directory'] ) );
+				$this->setXml();
+			}
+			Ayoola_Application::reset();
+
+			switch( strtolower( $_REQUEST['mode'] ) )
+			{
+				case 'html':
+				//	echo $this->_html->view();
+				//	exit();
+					$this->setViewContent( $this->_html->saveHTML() );
+				break;
+				case 'xml':
+					echo $this->_xml->view();
+					exit();
+				break;
+				case 'html-xml':
+					echo $this->_html->view();
+					exit();
+				break;
+				default:
+					$this->setViewContent( $this->_html->saveHTML() );
+/*					$content = '<p>Site Map</p><ul>';
+					$content .= '<li><a href="?mode=html">HTML</a></li>';
+					$content .= '<li><a href="?mode=xml">XML</a></li>';
+					$content .= '</ul>';
+					$this->setViewContent( $content );
+*/				break;
+			}
+	//		exit();
 
 		}
 		catch( Exception $e ){ return false; }
@@ -96,76 +118,209 @@ class Application_Link_Sitemap extends Application_Link_Abstract
     } 
 	
     /**
-     * Send sitemap to search engines
-     * 
-     */
-	public function sendToSearchEngine( $url )
-    {
-		$searchEngines = new Application_Link_SearchEngine();
-		$searchEngines = $searchEngines->select();
-			//	var_export( $searchEngines );
-	//	$headers = array( "Content-Type: text/xml; charset=UTF-8" );
-		foreach( $searchEngines as $searchEngine )
-		{
-			$requestUrl = str_ireplace( 'sitemap_url', $url, $searchEngine['searchengine_sitemap_url'] );
-		//	var_export( '<br />' . $requestUrl . '<br />' );
-			$request = curl_init( $requestUrl );
-			curl_setopt( $request, CURLOPT_HEADER, false );
-		//	curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
-			curl_setopt( $request, CURLOPT_FOLLOWLOCATION, false );
-		//	var_export( $request );
-			$response = curl_exec( $request );
-		//	var_export( $response );
-			// close cURL resource, and free up system resources
-			curl_close( $request );
-		}
-		return true;
-    } 
-	
-    /**
-     * Returns the Xml
-     * 
-     * @return Ayoola_Xml
-     */
-	public function getXml()
-    {
-		if( is_null( $this->_xml ) ){ $this->setXml( DOMAIN ); }
-		return $this->_xml;
-    } 
-	
-    /**
      * Sets the xml
      * 
      */
-	public function setXml( $domainName )
+	public function setXml()
     {
-		$this->_xml = new Ayoola_Xml();
-		$urlset = $this->_xml->createElement( 'urlset' );
-		$urlset->setAttribute( 'xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9' );
-		$this->_xml->appendChild( $urlset );
-		$tables[] = new Ayoola_Page_Page();
-		$tables[] = new Application_Link();
-		foreach( $tables as $table )
+		if( empty( $this->_xml ) )
 		{
-			$each = $table->select();
-		//	var_export( $each );
-			foreach( $each as $data )
-			{
-				$url = $this->_xml->createElement( 'url' );
-				$url = $urlset->appendChild( $url );
-				$data['url'] = isset( $data['url'] ) ? $data['url'] : $data['link_url'];
-				$data['url'] = isset( $data['link_name'] ) ? '/' . $data['link_name'] . '/' : $data['url'];
-				$data['url'] = 'http://' . $domainName . $data['url'];
-				$loc = $this->_xml->createElement( 'loc', $data['url'] );
-				$loc = $url->appendChild( $loc );
-				$changefreq = $this->_xml->createElement( 'changefreq', 'always' );
-				$changefreq = $url->appendChild( $changefreq );
-				$defaultPriority = 5;
-				$data['link_priority'] = isset( $data['link_priority'] ) ? $data['link_priority'] : $defaultPriority;
-				$priority = $this->_xml->createElement( 'priority', '0.' . $data['link_priority'] );
-				$priority = $url->appendChild( $priority );
-			}
+			$this->_xml = new Ayoola_Xml();
+			$urlset = $this->_xml->createElement( 'urlset' );
+			$urlset->setAttribute( 'xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9' );
+			$this->_xml->appendChild( $urlset );
+			$this->_xml->appendChild( $urlset );
+
+			$this->_html = new Ayoola_Xml();
+			$ul = $this->_html->createElement( 'ul' );
+			$ul = $this->_html->appendChild( $ul );
 		}
+		@$urlset = $urlset ? : $this->_xml->documentElement;
+		@$ul = $ul ? : $this->_html->documentElement;
+
+		//	each site
+		$li = $this->_html->createElement( 'li', Ayoola_Application::getPathPrefix() ? : 'Root' );
+		$li = $ul->appendChild( $li );
+
+		//	pages
+
+		$table = new Ayoola_Page_Page();
+		$table = $table->select();
+
+		$innerUl = $this->_html->createElement( 'ul' );
+		$innerUl = $li->appendChild( $innerUl );
+		$innerLi = $this->_html->createElement( 'li', 'Pages' );
+		$innerLi = $innerUl->appendChild( $innerLi );
+
+		$innerInnerUl = $this->_html->createElement( 'ul' );
+		$innerInnerUl = $innerLi->appendChild( $innerInnerUl );
+
+
+		foreach( $table as $data )
+		{
+			if( ! @in_array( '0', $data['auth_level'] ) || @in_array( 'module', $data['page_options'] ) )
+			{  
+				continue;
+			}
+//			var_export( $data );
+			$url = $this->_xml->createElement( 'url' );
+			$url = $urlset->appendChild( $url );
+			$data['url'] = '' . Ayoola_Page::getHomePageUrl() . $data['url'];
+			$loc = $this->_xml->createElement( 'loc', $data['url'] );
+			$loc = $url->appendChild( $loc );
+			$changefreq = $this->_xml->createElement( 'changefreq', 'always' );
+			$changefreq = $url->appendChild( $changefreq );
+			$defaultPriority = 8;
+			$priority = $this->_xml->createElement( 'priority', '0.' . $defaultPriority );
+			$priority = $url->appendChild( $priority );
+				
+			$a = $this->_html->createElement( 'a', htmlspecialchars( $data['title'] ? : $data['url'] ) );
+			$a->setAttribute( 'href', $data['url'] );
+			$a->setAttribute( 'title', htmlspecialchars( $data['description'] ) );
+				
+			$pageLi = $this->_html->createElement( 'li' );
+			$pageLi = $innerInnerUl->appendChild( $pageLi );
+			$a = $pageLi->appendChild( $a );
+		}
+
+		//	categories
+		$table = new Application_Category();
+		$table = $table->select();
+
+		$innerUl = $this->_html->createElement( 'ul' );
+		$innerUl = $li->appendChild( $innerUl );
+		$innerLi = $this->_html->createElement( 'li', 'Categories' );
+		$innerLi = $innerUl->appendChild( $innerLi );
+
+		$innerInnerUl = $this->_html->createElement( 'ul' );
+		$innerInnerUl = $innerLi->appendChild( $innerInnerUl );
+		foreach( $table as $data )
+		{
+			$url = $this->_xml->createElement( 'url' );
+			$url = $urlset->appendChild( $url );
+			$data['url'] = '' . Ayoola_Page::getHomePageUrl() . '/posts/' . $data['category_name'];
+			$loc = $this->_xml->createElement( 'loc', $data['url'] );
+			$loc = $url->appendChild( $loc );
+			$changefreq = $this->_xml->createElement( 'changefreq', 'always' );
+			$changefreq = $url->appendChild( $changefreq );
+			$defaultPriority = 5;
+			$priority = $this->_xml->createElement( 'priority', '0.' . $defaultPriority );
+			$priority = $url->appendChild( $priority );
+				
+			$a = $this->_html->createElement( 'a', htmlspecialchars( $data['category_label'] ) );
+			$a->setAttribute( 'href', $data['url'] );
+			$a->setAttribute( 'title', htmlspecialchars( $data['category_description'] ) );
+				
+			$pageLi = $this->_html->createElement( 'li' );
+			$pageLi = $innerInnerUl->appendChild( $pageLi );
+			$a = $pageLi->appendChild( $a );
+		}
+
+		// post types
+		$table = new Application_Article_Type();
+		$table = $table->select();
+
+		$innerUl = $this->_html->createElement( 'ul' );
+		$innerUl = $li->appendChild( $innerUl );
+		$innerLi = $this->_html->createElement( 'li', 'Post Types' );
+		$innerLi = $innerUl->appendChild( $innerLi );
+
+		$innerInnerUl = $this->_html->createElement( 'ul' );
+		$innerInnerUl = $innerLi->appendChild( $innerInnerUl );
+		foreach( $table as $data )
+		{
+			$url = $this->_xml->createElement( 'url' );
+			$url = $urlset->appendChild( $url );
+			$data['url'] = '' . Ayoola_Page::getHomePageUrl() . '/posts/' . $data['post_type_id'];
+			$loc = $this->_xml->createElement( 'loc', $data['url'] );
+			$loc = $url->appendChild( $loc );
+			$changefreq = $this->_xml->createElement( 'changefreq', 'always' );
+			$changefreq = $url->appendChild( $changefreq );
+			$defaultPriority = 6;
+			$priority = $this->_xml->createElement( 'priority', '0.' . $defaultPriority );
+			$priority = $url->appendChild( $priority );
+				
+			$a = $this->_html->createElement( 'a', htmlspecialchars( $data['post_type'] ) );
+			$a->setAttribute( 'href', $data['url'] );
+			$a->setAttribute( 'title', $data['post_type'] );
+				
+			$pageLi = $this->_html->createElement( 'li' );
+			$pageLi = $innerInnerUl->appendChild( $pageLi );
+			$a = $pageLi->appendChild( $a );
+		}
+
+		//	profiles
+		$table = new Application_Profile_Table();
+		$table = $table->select();
+
+		$innerUl = $this->_html->createElement( 'ul' );
+		$innerUl = $li->appendChild( $innerUl );
+		$innerLi = $this->_html->createElement( 'li', 'Profiles' );
+		$innerLi = $innerUl->appendChild( $innerLi );
+
+		$innerInnerUl = $this->_html->createElement( 'ul' );
+		$innerInnerUl = $innerLi->appendChild( $innerInnerUl );
+		foreach( $table as $data )
+		{
+			$url = $this->_xml->createElement( 'url' );
+			$url = $urlset->appendChild( $url );
+			$data['url'] = '' . Ayoola_Page::getHomePageUrl() . '/' . $data['profile_url'];
+			$loc = $this->_xml->createElement( 'loc', $data['url'] );
+			$loc = $url->appendChild( $loc );
+			$changefreq = $this->_xml->createElement( 'changefreq', 'always' );
+			$changefreq = $url->appendChild( $changefreq );
+			$defaultPriority = 7;
+			$priority = $this->_xml->createElement( 'priority', '0.' . $defaultPriority );
+			$priority = $url->appendChild( $priority );
+				
+			$a = $this->_html->createElement( 'a', htmlspecialchars( $data['display_name'] ? : $data['url'] ) );
+			$a->setAttribute( 'href', $data['url'] );
+			$a->setAttribute( 'title', htmlspecialchars( $data['profile_description'] ) );
+				
+			$pageLi = $this->_html->createElement( 'li' );
+			$pageLi = $innerInnerUl->appendChild( $pageLi );
+			$a = $pageLi->appendChild( $a );
+		}
+		
+
+		//	posts
+		$table = new Application_Article_Table();
+		$table = $table->select();
+
+		$innerUl = $this->_html->createElement( 'ul' );
+		$innerUl = $li->appendChild( $innerUl );
+		$innerLi = $this->_html->createElement( 'li', 'Posts' );
+		$innerLi = $innerUl->appendChild( $innerLi );
+
+		$innerInnerUl = $this->_html->createElement( 'ul' );
+		$innerInnerUl = $innerLi->appendChild( $innerInnerUl );
+		foreach( $table as $data )
+		{
+		//	var_export( $data );
+			if( 0 !== $data['auth_level'] )
+			{
+				continue;
+			}
+			$url = $this->_xml->createElement( 'url' );
+			$url = $urlset->appendChild( $url );
+			$data['url'] = '' . Ayoola_Page::getHomePageUrl() . '' . $data['article_url'];
+			$loc = $this->_xml->createElement( 'loc', $data['url'] );
+			$loc = $url->appendChild( $loc );
+			$changefreq = $this->_xml->createElement( 'changefreq', 'always' );
+			$changefreq = $url->appendChild( $changefreq );
+			$defaultPriority = 9;  
+			$priority = $this->_xml->createElement( 'priority', '0.' . $defaultPriority );
+			$priority = $url->appendChild( $priority );
+				
+			$a = $this->_html->createElement( 'a', htmlspecialchars( $data['article_title'] ? : $data['url'] ) );
+			$a->setAttribute( 'href', $data['url'] );
+			$a->setAttribute( 'title', htmlspecialchars( $data['article_description'] ) );
+				
+			$pageLi = $this->_html->createElement( 'li' );
+			$pageLi = $innerInnerUl->appendChild( $pageLi );
+			$a = $pageLi->appendChild( $a );
+		}
+
     } 
 	// END OF CLASS
 }

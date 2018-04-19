@@ -75,6 +75,12 @@ class Ayoola_Application
      * 
      * @var string 
      */
+	protected static $_pathPrefix;
+	
+    /**
+     * 
+     * @var string 
+     */
 	protected static $_presentUri;
 	
     /**
@@ -180,6 +186,26 @@ class Ayoola_Application
 		self::$_domainName = $domainName;
 
 		return self::$_domainName;
+	}
+	 
+    /**
+     * Returns the settings of the current domain
+     * 
+     * @return array
+     */
+	public static function reset( array $settings = null )
+    {
+		//	set path
+//		if( ! empty( $settings['path'] ) )
+		{
+			self::$_pathPrefix = $settings['path'];
+		//	var_export( self::$_pathPrefix );
+			self::setUrlPrefix( self::$_pathPrefix );
+		}
+
+		// set domain
+		self::setDomainSettings( true ); 
+//		Application_Cache_Clear::viewInLine( array( 'clear_all' => true ) );
 	}
 	 
     /**
@@ -1603,8 +1629,28 @@ class Ayoola_Application
     {
 //		var_export( $_SERVER );
 //		exit();
-		if( ! is_null( self::$_urlPrefix ) ){ return self::$_urlPrefix; }
+		if( is_null( self::$_urlPrefix ) )
+		{
+			self::setUrlPrefix();
+		}
+		
+		return self::$_urlPrefix;
+	}
+	
+    /**
+     * 
+     * 
+     */
+	public static function setUrlPrefix( $prefix = null )  
+    {
+//		var_export( $_SERVER );
+//		exit();
 		self::$_urlPrefix = '';
+		if( $prefix )
+		{
+			self::$_urlPrefix = $prefix;
+			return true;
+		}
 		$storage = new Ayoola_Storage();
 		$storage->storageNamespace = __CLASS__  . 'url_prefix-' . @constant( 'PC_PATH_PREFIX' );
 		$storage->setDevice( 'File' );
@@ -1640,12 +1686,26 @@ class Ayoola_Application
 		{
 			self::$_urlPrefix .= $_SERVER['SCRIPT_NAME'];
 		}
-		elseif( @constant( 'PC_PATH_PREFIX' ) )
+		elseif( @self::getPathPrefix() )
 		{
-			self::$_urlPrefix .= constant( 'PC_PATH_PREFIX' );
+			self::$_urlPrefix .= self::getPathPrefix();
 		//	exit();
 		}
 		return self::$_urlPrefix;
+	}
+	
+    /**
+     * 
+     * 
+     */
+	public static function getPathPrefix()
+    {
+		if( is_null( self::$_pathPrefix ) )
+		{
+			self::$_pathPrefix = constant( 'PC_PATH_PREFIX' );
+		}
+		
+		return self::$_pathPrefix;
 	}
 	
     /**

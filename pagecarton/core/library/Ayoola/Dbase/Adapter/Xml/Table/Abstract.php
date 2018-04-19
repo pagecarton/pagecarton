@@ -193,7 +193,7 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
      */
     public static function getCacheDirectory()
     {
-		return CACHE_DIR . DS . Ayoola_Application::getDomainSettings( 'domain_name' ) . DS . 'XMLDB';
+		return CACHE_DIR . DS . Ayoola_Application::getDomainSettings( 'domain_name' ) . DS . 'XMLDB' . Ayoola_Application::getPathPrefix();
     }
 		
     /**

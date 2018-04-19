@@ -9,18 +9,31 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: confirmation.php	Monday 13th of November 2017 09:31:01 PM	ayoola@ayoo.la $ 
+* @version $Id: confirmation.php	Thursday 19th of April 2018 11:15:00 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
 						<?php 
+						//		var_export( array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) );
+					//			var_export( __FILE__ );
+					//			var_export( CACHE_DIR );
+					//			var_export( stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) );
+								//	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
+								//	THEY WON'T HAVE CORRECT APPDIR
+//								var_export( stripos( __FILE__,CACHE_DIR ) );
+			//					var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );
+			//					var_export( Ayoola_Application::getDomainSettings() );
 							if
 							( 
-								$x_1510608661 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', array( 'prioritize_my_copy' => true ) ) 
+
+								$x_1524136500 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) ) ) 
 							)
 							{
-								include_once $x_1510608661;
+							//	var_export( $x_1524136500 );
+							//	echo file_get_contents( $x_1524136500 );
+								include_once $x_1524136500;
 							}
+		//					var_export( $x_1524136500 );
 						?>
 						 <?php
 /**
@@ -33,7 +46,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Monday 13th of November 2017 09:30:56 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Thursday 19th of April 2018 11:14:54 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <!DOCTYPE html>
@@ -316,12 +329,14 @@ echo ( ! empty( $_b7050bae07234eabc14cec6521a7fe97 ) &&  is_object( $_b7050bae07
 <?php
 //footer Begins Here
 
+echo ( ! empty( $_b71609262e8e97539bd6fa137dd38be4 ) &&  is_object( $_b71609262e8e97539bd6fa137dd38be4 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_b71609262e8e97539bd6fa137dd38be4->view(), '' ) : null );
+
 							if( Ayoola_Page::hasPriviledge( array (
   0 => '98',
   1 => '99',
-), array( 'strict' => true ) ) && ! empty( $_c6329d36ef29ec72448c468eebc353f8 ) && is_object( $_c6329d36ef29ec72448c468eebc353f8 ) )
+), array( 'strict' => true ) ) && ! empty( $_199d60ed2c8487d949bc81e7e1cdd92e ) && is_object( $_199d60ed2c8487d949bc81e7e1cdd92e ) )
 							{
-								echo $_c6329d36ef29ec72448c468eebc353f8->view();
+								echo $_199d60ed2c8487d949bc81e7e1cdd92e->view();
 							}
 							
 //footer Ends Here

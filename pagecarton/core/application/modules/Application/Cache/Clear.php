@@ -49,7 +49,7 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 	protected function init()
     {
 
-		if( self::hasPriviledge() )
+		if( self::hasPriviledge() || $this->getParameter( 'clear_all' ) )
 		{
 
 			set_time_limit( 0 );
