@@ -52,7 +52,7 @@ class Application_Subscription_Level_List extends Application_Subscription_Level
      * Overrides the parent's || Sets _identifierData
      * 
      */
-	public function setIdentifierData()
+	public function setIdentifierData( $identifier = NULL )
     {
 		$table = $this->getDbTable();
 		$this->_identifierData = (array) $table->select( null, $this->getIdentifier() );

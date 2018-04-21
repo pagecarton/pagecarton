@@ -51,7 +51,7 @@ class Application_Log_View_Error extends Application_Log_View_Abstract
 		catch( Ayoola_Exception $e ){ null; }
 		$message = "There is error on this page please reload your browser to continue. If this persist, contact the administrator. You can also go back to the <a href=\'/\'>homepage</a>";
 		trigger_error( $message );
-	//	echo "There is error on this page please reload your browser to continue. If this persist, contact the administrator. You can also go back to the <a href=\'/\'>homepage</a>";
+		echo "<div class='badnews'>$message</div>";
 	//	var_export( static::getLogTable() );
 		$result = self::getLogTable()->insert( $log );
  	//	var_export( $result );

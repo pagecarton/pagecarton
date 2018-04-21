@@ -246,7 +246,7 @@ class Ayoola_Application
 		}
 
 
-		$storage->storageNamespace = __CLASS__ . '--------x--' . $_SERVER['HTTP_HOST'] . $protocol;
+		$storage->storageNamespace = __CLASS__ . '--------x--' . $_SERVER['HTTP_HOST'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve(); 
 		if(  $data && ! $forceReset && ! @$_GET['reset_domain_information'] )
@@ -1351,6 +1351,7 @@ class Ayoola_Application
 			);" 
 		);
 	//	var_export( Ayoola_Page::getCurrentPageInfo() );
+	//	var_export( $PAGE_INCLUDE_FILE );
 	
 		//	Set TimeZone
 		date_default_timezone_set( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'time_zone' ) ? : 'UTC' );
@@ -1359,8 +1360,10 @@ class Ayoola_Application
 		header("Content-Type: text/html; charset=utf-8");
 	
 		include_once $PAGE_INCLUDE_FILE;
+	//	var_export( $PAGE_INCLUDE_FILE );
 //		exit( microtime( true ) - Ayoola_Application::getRuntimeSettings( 'start_time' ) . '<br />' );
 		include_once $PAGE_TEMPLATE_FILE;
+	//	var_export( $PAGE_INCLUDE_FILE );
 		return true;
 	} 
    

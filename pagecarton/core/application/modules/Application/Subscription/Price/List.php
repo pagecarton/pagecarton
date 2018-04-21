@@ -50,7 +50,7 @@ class Application_Subscription_Price_List extends Application_Subscription_Price
      * Overrides the parent's || Sets _identifierData
      * 
      */
-	public function setIdentifierData()
+	public function setIdentifierData( $identifier = NULL )
     {
 		$table = $this->getDbTable();
 		$this->_identifierData = (array) $table->select( null, $this->getIdentifier() );

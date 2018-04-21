@@ -75,7 +75,7 @@ class Application_Article_Type_View extends PageCarton_Widget
      * Overides the parent class
      * 
      */
-	public function setIdentifierData()
+	public function setIdentifierData( $identifier = NULL )
     {
         if( is_numeric( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) )
         {

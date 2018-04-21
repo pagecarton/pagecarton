@@ -71,12 +71,12 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
     {
 		try
 		{
-			//	var_export( $this->getIdentifierData() ); 
+		//	var_export( $this->getIdentifierData() ); 
 			if( ! $data = $this->getIdentifierData() )
 			{
 				return false;				
 			}
-			//	self::v( $data ); 
+		//		self::v( $data ); 
 			if( ! self::isAllowedToView( $data ) )
 			{				
 				return false;
@@ -103,6 +103,7 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 						$postListId = $storageForSinglePosts->retrieve();
 					}
                 }
+		//		var_export( $postListId );
 
 				$postListData = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId, 'device' => 'File' ) );
 		//		var_export( $postListId );

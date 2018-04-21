@@ -213,7 +213,7 @@ class Application_Category_View extends Application_Category_Abstract
      * Overides the parent class
      * 
      */
-	public function setIdentifierData()
+	public function setIdentifierData( $identifier = NULL )
     {
 		$category = $this->getParameter( 'category_name' );
 		$data = array(); 

@@ -219,7 +219,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
      * Overides the parent class
      * 
      */
-	public function setIdentifierData()
+	public function setIdentifierData( $identifier = NULL )
     {
 		{
 		//	$database = 'cloud';

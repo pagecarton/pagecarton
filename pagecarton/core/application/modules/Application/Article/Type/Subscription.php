@@ -370,13 +370,13 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		} 
 	//	var_export( $showQuantity );
 	//	var_export( $options );
+		$filter = 'Ayoola_Filter_Currency';
+		$filter = new $filter();
 		if( empty( $subscriptionData['price_option_title'] ) )
 		{	
 			$fieldset->addElement( array( 'name' => 'quantity', 'id' => 'quantity_' . md5( @$subscriptionData['article_url'] ), 'label' => 'Quantity', 'style' => 'min-width:20px;max-width:60px;display:inline;margin-right:0;', 'type' => $showQuantity, 'value' => @$values['quantity'] ? : 1 ), $optionsForSelect );  
-			$filter = 'Ayoola_Filter_Currency';
 			$filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
 		//	$data['currency'] = $filter::$symbol;
-			$filter = new $filter();
 			if( @$subscriptionData['option_name'] )  
 			{
 				$optionsMenu = array();

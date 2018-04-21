@@ -174,7 +174,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
      * Overides the parent class
      * 
      */
-	public function setIdentifierData()
+	public function setIdentifierData( $identifier = NULL )
     {
 		// Comes from a file
 		if( ! $data = $this->getParameter( 'data' ) )
