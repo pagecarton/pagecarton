@@ -121,7 +121,7 @@ class Ayoola_Page_Info extends PageCarton_Widget
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 	//	$html = null;
      //   $html .= self::viewInLine( array( 'url' => @$_REQUEST['url'] ) ); 

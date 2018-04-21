@@ -67,7 +67,7 @@ abstract class Ayoola_Page_Menu_Abstract extends Ayoola_Abstract_Table
      * Overides the parent class
      * 
      */
-	public function setIdentifierData()
+	public function setIdentifierData( $identifier = null )
     {
 		do
 		{

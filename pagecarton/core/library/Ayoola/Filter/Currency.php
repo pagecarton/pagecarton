@@ -12,9 +12,10 @@ class Ayoola_Filter_Currency implements Ayoola_Filter_Interface
 
     public function filter( $value )
 	{
+		$value = str_replace( array( ',', ' ' ), '', $value );
 		$value = floatval( $value );
 		$value = sprintf( "%.2f", $value );
-		//var_export( $value );
+	//	var_export( $value );
 		return self::$symbol . $value;
 	}
 

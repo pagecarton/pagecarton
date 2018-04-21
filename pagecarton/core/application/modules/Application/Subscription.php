@@ -303,7 +303,7 @@ class Application_Subscription extends Application_Subscription_Abstract
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];
@@ -338,7 +338,7 @@ class Application_Subscription extends Application_Subscription_Abstract
      * Creates the form for subscription
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = NULL, array $values = NULL )
     {
 		$priceList = new Application_Subscription_Price;
 //		var_export( $priceList->select() );

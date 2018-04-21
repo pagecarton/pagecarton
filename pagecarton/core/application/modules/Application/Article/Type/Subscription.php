@@ -223,7 +223,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
      * Form to display Subscription
      * 
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		if( ! $subscriptionData = $this->getParameter( 'data' ) )
 		{

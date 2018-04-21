@@ -1123,8 +1123,37 @@ class Ayoola_Application
 					break; 
 				}
 */			//	exit( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
-				self::$mode = '404';
-				self::view();	//	404 NOT FOUND
+
+				//	we cant find the file. Now lets look at the multisite
+				$table = new PageCarton_MultiSite_Table();
+			//	var_export( $nameForModule );
+			//	var_export( $table->select() );
+				$multiSiteDir = '/' . $nameForModule;
+				if( $sites = $table->select( null, array( 'directory' => $multiSiteDir ) ) )
+				{
+					Ayoola_Application::reset( array( 'path' => $multiSiteDir ) );
+
+					//	change requested url
+					$requestedUri = self::getRequestedUri();
+				//	var_export( $requestedUri );
+					$requestedUri = explode( $multiSiteDir, $requestedUri );
+			//		var_export( $requestedUri ); 
+					array_shift( $requestedUri );
+					$requestedUri = implode( '', $requestedUri );
+					self::$_requestedUri = $requestedUri;
+					self::$_presentUri = null;
+					
+			//		var_export( self::getPresentUri() );
+			//		var_export( $requestedUri );
+					
+					self::run();	//	404 NOT FOUND
+					return false;
+				}
+				else
+				{
+					self::$mode = '404';
+					self::view();	//	404 NOT FOUND
+				}
 			//	var_export( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 			}
 			while( false );

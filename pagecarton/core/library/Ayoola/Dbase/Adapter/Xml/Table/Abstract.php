@@ -16,7 +16,7 @@
  * @see Ayoola_Dbase_Adapter_Xml_Table
  * @see Ayoola_Dbase_Adapter_Xml_Table_Exception
  */
-require_once 'Ayoola/Dbase/Adapter/Xml/Exception.php';
+require_once 'Ayoola/Dbase/Adapter/Xml/Exception.php';     
 require_once 'Ayoola/Dbase/Adapter/Xml/Table.php';
 
 

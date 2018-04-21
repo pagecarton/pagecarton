@@ -46,7 +46,7 @@ class Application_Article_HashTag extends Application_Article_Abstract
      * 
      * @var string
      */
-	protected $_tableClass = 'Application_HashTag';
+	protected $_tableClass = 'Application_HashTag'; 
 
     /**
      * The xml string
@@ -64,10 +64,10 @@ class Application_Article_HashTag extends Application_Article_Abstract
 		try
 		{
 //		var_export( $articleSettings );
-			if( ! Application_HashTag_Abstract::get( 'articles' ) ){ return $this->setViewContent( '<p class="badnews">There are no recent hash tags to display.</p>', true ); }
-			$this->createConfirmationForm( '#Trending',  '' );
+	//		if( ! Application_HashTag_Abstract::get( 'articles' ) ){ return $this->setViewContent( '<p class="badnews">There are no recent hash tags to display.</p>', true ); }
+	//		$this->createConfirmationForm( '#Trending',  '' );
 		//	$this->setViewContent( '<h4>Popular Tags:</h4>', true );
-	//		$this->setViewContent( self::getXml() );
+	//		$this->setViewContent( self::getXml() );  
 		}
 		catch( Exception $e ){ return $this->setViewContent( 'Error with hashtag package', true ); }
 	//	var_export( $this->getDbData() );

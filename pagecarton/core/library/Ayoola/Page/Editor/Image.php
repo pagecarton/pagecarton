@@ -64,7 +64,7 @@ class Ayoola_Page_Editor_Image extends Ayoola_Page_Editor_Text
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 		$object['editable'] = @$object['editable'] ? : '<img title="Double-click this picture to change it." alt="" src="' . Ayoola_Application::getUrlPrefix() . '/img/placeholder-image.jpg?document_time=1" >';
 		return parent::getHTMLForLayoutEditor( $object );

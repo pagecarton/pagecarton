@@ -833,7 +833,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//	$this->_objectData['edit_link'] = $editLinkHTML;
 				$data['edit_link'] = $editLinkHTML;
 			}
-		
+		//	var_export(  $data['item_price'] );
 			if( isset( $data['item_price'] ) ) 
 			{
 				//	Filter the price to display unit
