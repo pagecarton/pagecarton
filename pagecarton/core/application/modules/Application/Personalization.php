@@ -134,7 +134,7 @@ class Application_Personalization extends Ayoola_Abstract_Table
 					$oneUser = array_pop( $response );
 					if( intval( $oneUser['access_level'] ) === 1 ){ break; }  
 					$userTable = new PageCarton_MultiSite_Table();
-					if( $response = $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
+					if( $response = $userTable->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
 					{
 			//			var_export( $response );
 			//			var_export( Ayoola_Application::getUrlPrefixController() );

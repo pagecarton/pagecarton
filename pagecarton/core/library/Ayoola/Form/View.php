@@ -272,7 +272,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
      * @param 
      * @return 
      */
-    public function getStatusBarLinks( $object )
+    public static function getStatusBarLinks( $object )
     {
 		return '<a title="Manage Forms" class="title_button" href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_List/\' );">Manage Forms</a>';
 	}

@@ -290,8 +290,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	var_export( $_GET );
 //		var_export( $postListId );
 //		var_export( $postListId );
-		$storage = $this->getObjectStorage( array( 'id' => $postListId, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
+		//			self::v( $postListId  );   
+
+		$storage = self::getObjectStorage( array( 'id' => $postListId, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
 		$storedValues = $storage->retrieve();
+//		self::v( $storage  );   
 
 	//	var_export( $storedValues );
 		if( ! empty( $storedValues['parameter'] ) && ! empty( $_GET['pc_post_list_autoload'] ) )
@@ -309,7 +312,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		
 		//	Using menu template?
 		//	autoload new posts
-	//	self::v( $storedValues );
+//		self::v( $postListId );
+//		self::v( $storedValues );
 		$values = array();
 
 		if( ! empty( $storedValues['values'] )  )
@@ -322,9 +326,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( $values );    
 	//		self::v( $this->getParameter() );       
 	//		self::v( $this->getParameter() );       
-		//	self::v( $postListId );       
-			$values = $this->getDbData();
-			
+		//	self::v( $postListId );
+
+			//	This ensures that data altered by query strings is uploaded when autoloaded
+			if( empty( $_REQUEST['pc_post_list_autoload'] ) || empty( $_REQUEST['pc_post_list_id'] )  )
+			{
+				$values = $this->getDbData();
+			}
 	//		self::v( $values );
 			
 		//	var_export( $this->getParameter( 'sort_column' ) );
@@ -547,8 +555,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			// store if it's an independent request
 			if( empty( $_GET['pc_post_list_autoload'] ) )
 			{
-			//	var_export( $postListId );
+			//	self::v( $valuesToStore );
 				$storage->store( $valuesToStore );
+			//	self::v( $storage->retrieve() );
 			}
 		}
 		

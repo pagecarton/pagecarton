@@ -71,7 +71,8 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
      */
     public function __construct( $paths = null )
     {
-	//	var_export( $paths );
+//		var_export( $paths );
+//    exit();
 		$this->setPaths( $paths );		
     }
 
@@ -221,6 +222,8 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
     public function view()
     {
 		$paths = array_unique( $this->getPaths() );
+//		var_export( $this->getPaths() );
+//		exit();   
 		foreach( $paths as $path )
 		{	
   //    var_export( $path );  

@@ -284,7 +284,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		}
 		else
 		{
-			krsort( $this->_dbData );
+	//		krsort( $this->_dbData );
 			$this->_dbData = array_values( $this->_dbData );
 		}
     } 

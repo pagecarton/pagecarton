@@ -799,7 +799,6 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			$creatorClass = implode( '_', $creatorClass );
 			if( ! isset( $this->_listOptions['Creator'] ) )  
 			{
-			//	$this->setListOptions( array( 'Creator' => '<a rel="" href="javascript:;" title="Add new to the list" class="" style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . @constant( 'PC_PATH_PREFIX' ) .'/tools/classplayer/get/object_name/' . $creatorClass . '/\', \'' . $this->pageName . '\' )">Add new</a>' ) ); 
 				$this->setListOptions( array( 'Creator' => '<a rel="" href="javascript:;" title="Add new to the list" class="" style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/' . $creatorClass . '/\', \'' . $this->pageName . '\' )">Add new</a>' ) ); 
 			}
 		}

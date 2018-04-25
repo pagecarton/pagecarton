@@ -101,7 +101,7 @@ class Application_SiteInfo extends PageCarton_Widget
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 	//	$html = null;
     //    $html .= self::viewInLine(); 

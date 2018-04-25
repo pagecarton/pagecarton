@@ -281,7 +281,7 @@ class Application_Category_View extends Application_Category_Abstract
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];

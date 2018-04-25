@@ -162,6 +162,7 @@ class Ayoola_Storage_File implements Ayoola_Storage_Interface
 			require_once 'Ayoola/File/Storage.php';
 			$file = new Ayoola_File_Storage(); 
 		}
+   //     PageCarton_Widget::v( $file );
 		$file->timeOut = $this->timeOut;
 		$file->setNamespace( $this->getNamespace() );
 		$this->_fileStorage = $file;

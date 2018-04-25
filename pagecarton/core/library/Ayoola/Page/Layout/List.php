@@ -85,7 +85,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		$list->noRowClass = true;
 		$list->noOptionsColumn = true;
 		$list->noHeader = true;
-		krsort( $data );
+	//	krsort( $data );
 		$list->setData( $data );  
 		$list->setListOptions( 
 								array( 
@@ -137,7 +137,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		$list->noHeader = true;
 	//	$table = $this->getDbTable();
 	//	$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );   
-		krsort( $data );
+	//	krsort( $data );       
 		$list->setData( $data );  
 		$list->setListOptions( 
 								array( 

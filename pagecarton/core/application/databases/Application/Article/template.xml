@@ -78,7 +78,7 @@
       <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Products for Sale]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li&gt;
 					&lt;div class=&quot;view123 view-first123&quot;&gt;
-					  &lt;img style=&quot;border: 0px currentColor;border-image: none;&quot; class=&quot;img-responsive&quot; alt=&quot;&quot; src=&quot;{{{pc_url_prefix}}}{{{document_url}}}&quot;&gt;
+					  &lt;a  href=&quot;{{{pc_url_prefix}}}{{{article_url}}}&quot;&gt;&lt;img style=&quot;border: 0px currentColor;border-image: none;&quot; class=&quot;img-responsive&quot; alt=&quot;&quot; src=&quot;{{{pc_url_prefix}}}{{{document_url}}}&quot;&gt;&lt;/a&gt;
 					  &lt;div class=&quot;tab_desc pc-bg-color&quot;&gt;
 			             &lt;h3&gt;&lt;a  style=&quot; &quot; href=&quot;{{{pc_url_prefix}}}{{{article_url}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/h3&gt;
 						 &lt;p&gt;{{{item_price}}}&lt;/p&gt;
@@ -88,13 +88,13 @@
 				  &lt;/li&gt;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;css&quot;,&quot;padding&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[    &lt;ul class=&quot;grid123456&quot; style=&quot;	margin-top: 0px;margin-bottom: 10px;margin: 0px;list-style: none;padding: 0px;list-style: none;padding: 0px;margin-top: 2em;position: relative;&quot;&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_suffix"><![CDATA[				  &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 				&lt;/ul&gt;
 ]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="max_group_no"><![CDATA[3]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_files"><![CDATA[[&quot;\/public\/2014\/12\/18\/Products_for_sale_css.css&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="css_code"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="4">
       <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Plain List of Titles]]></TABLE_FIELD>

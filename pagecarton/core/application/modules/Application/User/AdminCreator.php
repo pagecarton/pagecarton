@@ -50,9 +50,7 @@ class Application_User_AdminCreator extends Application_User_Creator
 			return false;
 		}
 		$userTable = new PageCarton_MultiSite_Table();
-//		var_export( $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) );
-//		var_export( PC_PATH_PREFIX );
-		if( $response = $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
+		if( $response = $userTable->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
 		{
 			//	Don't run this if we are a product of multi-site
 			return false;
@@ -146,7 +144,7 @@ class Application_User_AdminCreator extends Application_User_Creator
 			return false;
 		}
 		$userTable = new PageCarton_MultiSite_Table();
-		if( $response = $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
+		if( $response = $userTable->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
 		{
 			//	Don't run this if we are a product of multi-site
 			return false;

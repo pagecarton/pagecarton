@@ -1297,7 +1297,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      * @param string parameters used to view the object
      * @return string Mark-Up for the view template
      */
-    public function viewObject( $objectName, $parameters = null )
+    public static function viewObject( $objectName, $parameters = null )
 	{
 	//		var_export( $objectName );
 		if( ! Ayoola_Loader::loadClass( $objectName ) )  

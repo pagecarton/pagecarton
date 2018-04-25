@@ -1,49 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="wrapper" creation_time="1455818413" table_version="0.02" module_version="1.00" table_class="Ayoola_Object_Table_Wrapper" creation_ip="2130706433">
-  <RECORDS autoId="3">
+  <RECORDS autoId="7">
     <TABLE_ROW ROW_ID="3">
       <TABLE_FIELD FIELD_KEY="wrapper_name"><![CDATA[white-background]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="wrapper_id"><![CDATA[1496-0-3]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="wrapper_label"><![CDATA[White Background]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="wrapper_prefix"><![CDATA[&lt;div class=&quot; &quot; style=&quot;
-font-family: inherit;
-overflow: auto;
-padding: 12px;
-background-color: #fff;
-border: 1px solid;
-border-color: #e5e6e9 #dfe0e4 #d0d1d5;
-border-radius: 3px;
-color: #1d2129;
-margin-bottom:1em;  
-margin-top:1em;
-	  &quot;&gt;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="wrapper_suffix"><![CDATA[	  
-&lt;div style=&quot;clear:both;&quot;&gt;	  
-&lt;/div&gt;
-	  &lt;/div&gt;
-	  ]]></TABLE_FIELD>
-    </TABLE_ROW>  
+      <TABLE_FIELD FIELD_KEY="wrapper_label"><![CDATA[White Card With Border]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_prefix"><![CDATA[&lt;div class=&quot; &quot; style=&quot;font-family: inherit;overflow: auto;padding: 12px;background-color: #fff;border: 1px solid;border-color: #e5e6e9 #dfe0e4 #d0d1d5;
+border-radius: 3px;color: #1d2129;margin-bottom:1em;  margin-top:1em;&quot;&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_suffix"><![CDATA[&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;]]></TABLE_FIELD>
+    </TABLE_ROW>
     <TABLE_ROW ROW_ID="5">
       <TABLE_FIELD FIELD_KEY="wrapper_name"><![CDATA[well]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="wrapper_id"><![CDATA[1496-0-4]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="wrapper_label"><![CDATA[Well]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="wrapper_prefix"><![CDATA[
-&lt;div class=&quot; &quot; style=&quot;
-min-height: 20px;
-padding: 19px;
-background-color: #f5f5f5;
-color: #000;
-border: 1px solid #e3e3e3;
-border-radius: 4px;
--webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
-	  &quot;&gt;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="wrapper_suffix"><![CDATA[	  
-&lt;div style=&quot;clear:both;&quot;&gt;	  
-&lt;/div&gt;
-	  &lt;/div&gt;
-	  ]]></TABLE_FIELD>
-    </TABLE_ROW>  
+      <TABLE_FIELD FIELD_KEY="wrapper_label"><![CDATA[Grey Well]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_prefix"><![CDATA[&lt;div class=&quot; &quot; style=&quot;min-height: 20px;padding: 19px;background-color: #f5f5f5;color: #000;border: 1px solid #e3e3e3;border-radius: 0;border-left: 0;border-right: 0;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);box-shadow: inset 0 1px 1px rgba(0,0,0,.05);&quot;&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_suffix"><![CDATA[&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="wrapper_name"><![CDATA[dark]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_id"><![CDATA[0-0-4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1524492934]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_label"><![CDATA[Dark Well]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_prefix"><![CDATA[&lt;div class=&quot; &quot; style=&quot;min-height: 20px;padding: 19px;background-color: #333;color: #fff !important;border: 1px solid #e3e3e3;border-radius: 0;border-left: 0;border-right: 0;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);box-shadow: inset 0 1px 1px rgba(0,0,0,.05);&quot;&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_suffix"><![CDATA[&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="wrapper_name"><![CDATA[white-well]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_id"><![CDATA[0-0-6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1524493652]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_label"><![CDATA[White Well]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_prefix"><![CDATA[&lt;div class=&quot;&quot; style=&quot;min-height: 20px;padding: 19px;background-color: #fff;color: #333 !important;border: 1px solid #fff;border-radius: 0;border-left: 0;border-right: 0;-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);box-shadow: inset 0 1px 1px rgba(0,0,0,.05);&quot;&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_suffix"><![CDATA[&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;]]></TABLE_FIELD>
+    </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>
     <DATA_TYPES wrapper_name="INPUTTEXT, UNIQUE " wrapper_label="INPUTTEXT " wrapper_prefix="INPUTTEXT" wrapper_suffix="INPUTTEXT" wrapper_id="INPUTTEXT"/>

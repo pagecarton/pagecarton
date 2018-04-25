@@ -128,7 +128,9 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			throw new Ayoola_Doc_Exception( basename( $path ) . ' Not Found' );	
 			return false;
 		}
-	//	var_export( $path );
+//		var_export(  Ayoola_Loader::getValidIncludePaths( $path ) );
+//		var_export( $absolutePath );
+//		exit();
 		if( $includePaths = array_keys( Ayoola_Loader::getValidIncludePaths( $path ) ) )
 		{
 			$documentDirectory = array_shift( $includePaths );
@@ -353,8 +355,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     static public function getFiles( $directory, array $options = null )
     {
 		$keyZ = md5( __METHOD__ . serialize( func_get_args() ) . 'fff=-' );
-		$storageInfo = array( 'id' => $keyZ, 'device' => 'File', 'time_out' => 10000, );
-		$storage = static::getObjectStorage( $storageInfo );
+//		$storageInfo = array( 'id' => $keyZ, 'device' => 'File', 'time_out' => 100000, );
+	//	$storage = static::getObjectStorage( $storageInfo );
 		
 		if( empty( $options['no_cache'] ) )
 		{
@@ -362,7 +364,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			{
 				return static::$_properties[__METHOD__][$keyZ];
 			}
-			if( $storage->retrieve() !== false )
+	//		if( $storage->retrieve() !== false )
 			{
 				//	dont know if this won't cause serious side effects'
 		//		return $storage->retrieve();
@@ -371,7 +373,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 	//		var_export( $storage->retrieve() );
 	//	var_export( $directory );
 		
-		$storage->store( array() );		
+	//	$storage->store( array() );		
 		static::$_properties[__METHOD__][$keyZ] = array();
 
 	//	var_export( get_called_class() );
@@ -484,7 +486,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 	//	self::v( $files );
 		if( empty( $options['no_cache'] ) )
 		{
-			$storage->store( $files );		
+		//	$storage->store( $files );		
 		}
 		static::$_properties[__METHOD__][$keyZ] = $files;
 		return $files;
@@ -801,7 +803,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public function view()
     {	
-	//	self::v( $this->getPaths() );
+//		self::v( $this->getPaths() );
+//		exit();
 		$this->getAdapter()->setPaths( $this->getPaths()  );
 	//	self::v( $this->getAdapter()->getLoaders() );
 		return $this->getAdapter()->view();

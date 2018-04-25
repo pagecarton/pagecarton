@@ -437,7 +437,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
      * @param 
      * @return 
      */
-    public function getStatusBarLinks( $object )
+    public static function getStatusBarLinks( $object )
     {
 		return '<a title="Manage Slideshows" class="title_button" href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_List/\' );">Manage Slideshows</a>';
 	}

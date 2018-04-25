@@ -90,11 +90,11 @@ abstract class Ayoola_Dbase_Table_Abstract implements Ayoola_Dbase_Table_Interfa
      */
     public static function getInstance()
     {
-        $class = get_called_class();
+        $class = get_called_class() . Ayoola_Application::getPathPrefix();
      //   var_export( get_called_class() );
         if( ! empty( static::$_instance[$class] ) )
         {
-          return static::$_instance[$class];
+          return static::$_instance[$class];    
         }
 
         static::$_instance[$class] = new static;

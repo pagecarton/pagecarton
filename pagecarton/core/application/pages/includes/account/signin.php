@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Thursday 19th of April 2018 11:15:01 AM	ayoola@ayoo.la $ 
+* @version $Id: signin.php	Monday 23rd of April 2018 11:35:51 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -40,6 +40,14 @@ $_f046f4eadd53dc1db619bc502ee2c5e6 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<ul>
 	<li><a href="/x/tools/classplayer/get/name/Application_User_Help_ForgotUsernameOrPassword" rel="spotlight;">Forgot password</a>&nbsp;</li>
 	<li>
+<a onclick="this.href=this.href + location.search;" href="/accounts/signup">Create a new account</a>
+</li>
+</ul>
+
+',
+  'preserved_content' => '<ul>
+	<li><a href="/x/tools/classplayer/get/name/Application_User_Help_ForgotUsernameOrPassword" rel="spotlight;">Forgot password</a>&nbsp;</li>
+	<li>
 <a onclick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/name/Application_User_Creator\', \'page_refresh\' );" href="javascript:">Create a new account</a>
 </li>
 </ul>
@@ -47,6 +55,7 @@ $_f046f4eadd53dc1db619bc502ee2c5e6 = new Ayoola_Page_Editor_Text( array (
 ',
   'url_prefix' => '/x',
   'markup_template_object_name' => '',
+  'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',

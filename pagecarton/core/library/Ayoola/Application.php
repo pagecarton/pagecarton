@@ -204,7 +204,7 @@ class Ayoola_Application
 		}
 
 		// set domain
-		self::setDomainSettings( true ); 
+		self::setDomainSettings(); 
 //		Application_Cache_Clear::viewInLine( array( 'clear_all' => true ) );
 	}
 	 
@@ -446,34 +446,7 @@ class Ayoola_Application
 					@set_include_path( $data['parent_domain_settings'][APPLICATION_PATH] . PS . $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );  
 				}
 				
- 			//	var_export( $primaryDomainInfo );
-			//	exit();
-				
-			//	$domainDir = Application_Domain_Abstract::getSubDomainDirectory( Ayoola_Page::getDefaultDomain() );
-	//			$domainDir = Application_Domain_Abstract::getSubDomainDirectory( $tempWhere['domain_name'] );
-	//		var_export( $domainDir );  
-				
-/* 				
-				if( @strlen( $data['domain_settings']['application_dir'] ) > 3 )
-				{
-					$data['domain_settings'][APPLICATION_DIR] = APPLICATION_DIR . $data['domain_settings']['application_dir']; 
-					$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
-					@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
-				}
-				elseif( is_dir( $domainDir ) )
-				{
-				//	For backward compatibility, the directory must be "consciously" set
-				//	var_export( __LINE__ );
-					$data['domain_settings'][APPLICATION_DIR] = $domainDir;  
-					$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
-					@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
-				//	var_export( $data );
-				}
- *//* 					if( $domainName == 'test.pagecarton.com' )
-					{
-						var_export( $data );
-					}
- */			}
+			}
 			//	check subdomain
 			if( @$subDomain )
 			if( $subDomainInfo = $domain->selectOne( null, array( 'domain_name' => $subDomain ) ) )
@@ -499,11 +472,6 @@ class Ayoola_Application
 				}
 				else
 				{
-				//	setcookie( 'SUB_DIRECTORY', false, time() - 9999999, '/', $domainName );
-				//	header( 'HTTP/1.1 301 Moved Permanently' );
-			//		var_export( $subDomainInfo );
-			//		var_export( $data );
-				//	header( 'Location: http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getPresentUri() );
 					exit( 'INVALID SUB-DOMAIN' );   
 				}
 			}
@@ -512,21 +480,6 @@ class Ayoola_Application
 				
 				//	do we have user domains
 				$userInfo = Ayoola_Access::getAccessInformation( $subDomain );
-		//		var_export( $userInfo );
-		//		exit();
-			//	$userOptions = Application_Settings_Abstract::getSettings( 'Domain', 'domain_options' );
-				
-			//		var_export( in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) );
-			//		var_export( $data['domain_settings'] );
-				//	var_export( $userInfo );
-				//	exit();  
-					
-			//	if( $userInfo && @$userInfo['access_level'] != 99 )
-		//	$userInfo = Ayoola_Access::getAccessInformation( $subDomain );
-		//		var_export( $subDomain );
-		//		var_export( $userInfo );
-		//		var_export( $data['domain_settings']['domain_options'] );
-		//		exit();
 				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) AND ( $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) )  )
 //				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) AND ( $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) ) AND @$userInfo['access_level'] != 99  )
 				{
@@ -744,7 +697,6 @@ class Ayoola_Application
 		$uri = Ayoola_Application::getPresentUri();
 	//	var_export( $uri );	
 		
-		//	var_export( strpos( $uri, PC_PATH_PREFIX ) );
 		
 		//	var_export( $_SERVER['HTTP_IF_MODIFIED_SINCE'] );
 
@@ -889,32 +841,36 @@ class Ayoola_Application
 						//	files already using document time
 						$catchForever = true;
 					}
-					if( $catchForever )
+					if( $fn )
 					{
-						#  https://stackoverflow.com/questions/7324242/headers-for-png-image-output-to-make-sure-it-gets-cached-at-browser
-						header('Pragma: public');
-						header('Cache-Control: max-age=8640000');
-						header('Expires: '. gmdate('D, d M Y H:i:s \G\M\T', time() + 8640000));
-					}
-					else
-					{
-						header('Pragma: private');
-						header('Cache-Control: private');
-						// Checking if the client is validating his cache and if it is current.
-						if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && (strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == filemtime($fn))) {
-							// Client's cache IS current, so we just respond '304 Not Modified'.
-							header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($fn)).' GMT', true, 304);
-							exit(); 
-						} else {
-							// Image not cached or cache outdated, we respond '200 OK' and output the image.
-							header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($fn)).' GMT', true, 200);
+						if( $catchForever )
+						{
+							#  https://stackoverflow.com/questions/7324242/headers-for-png-image-output-to-make-sure-it-gets-cached-at-browser
+							header('Pragma: public');
+							header('Cache-Control: max-age=8640000');
+							header('Expires: '. gmdate('D, d M Y H:i:s \G\M\T', time() + 8640000));
 						}
+						else
+						{
+							header('Pragma: private');
+							header('Cache-Control: private');
+							// Checking if the client is validating his cache and if it is current.
+							if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && (strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == filemtime($fn))) {
+								// Client's cache IS current, so we just respond '304 Not Modified'.
+								header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($fn)).' GMT', true, 304);
+								exit(); 
+							} else {
+								// Image not cached or cache outdated, we respond '200 OK' and output the image.
+								header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($fn)).' GMT', true, 200);
+							}
+						}
+						header( 'Content-Length: ' . filesize( $fn ) );
 					}
-					header( 'Content-Length: ' . filesize( $fn ) );
 					
 
 			//		var_export( headers_list() );
-	//			var_export( $uri );
+			//	var_export( $uri );
+			//	exit();
 			
 					//	DONT LOGG DOCUMENTS
 					self::$accessLogging = false;
@@ -1360,7 +1316,7 @@ class Ayoola_Application
 		header("Content-Type: text/html; charset=utf-8");
 	
 		include_once $PAGE_INCLUDE_FILE;
-	//	var_export( $PAGE_INCLUDE_FILE );
+	//	var_export( $PAGE_INCLUDE_FILE );  
 //		exit( microtime( true ) - Ayoola_Application::getRuntimeSettings( 'start_time' ) . '<br />' );
 		include_once $PAGE_TEMPLATE_FILE;
 	//	var_export( $PAGE_INCLUDE_FILE );
@@ -1608,15 +1564,14 @@ class Ayoola_Application
 	//	var_export( $_SERVER );
 
 	//	var_export( $requestedUri );
-	//		var_export( PC_PATH_PREFIX );
 	//		var_export( $requestedUri );
 		//	REMOVE PATH PREFIX
-		if( strpos( $requestedUri, @constant( 'PC_PATH_PREFIX' ) ) === 0 )  
+		if( strpos( $requestedUri, Ayoola_Application::getPathPrefix() ) === 0 )  
 		{
-			$requestedUri = explode( PC_PATH_PREFIX, $requestedUri );
+			$requestedUri = explode( Ayoola_Application::getPathPrefix(), $requestedUri );
 	//		var_export( $requestedUri );
 			array_shift( $requestedUri );
-			$requestedUri = implode( PC_PATH_PREFIX, $requestedUri ) ? : '/';
+			$requestedUri = implode( Ayoola_Application::getPathPrefix(), $requestedUri ) ? : '/';
 		//	exit();
 		}
 	//	var_Export( $_SERVER );
@@ -1684,7 +1639,7 @@ class Ayoola_Application
 			return true;
 		}
 		$storage = new Ayoola_Storage();
-		$storage->storageNamespace = __CLASS__  . 'url_prefix-' . @constant( 'PC_PATH_PREFIX' );
+		$storage->storageNamespace = __CLASS__  . 'url_prefix-' . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve(); 
 	//	var_export( $data );   
@@ -1692,7 +1647,7 @@ class Ayoola_Application
 		{		
 		//	var_export( $data );
  			//	Detect if we have mod-rewrite
-			$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . @constant( 'PC_PATH_PREFIX' ) . '/pc_check.txt';
+			$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt';
 	//		var_export( $urlToLocalInstallerFile );
 			$modRewriteEnabled = get_headers( $urlToLocalInstallerFile );
 			$responseCode = explode( ' ', $modRewriteEnabled[0] );

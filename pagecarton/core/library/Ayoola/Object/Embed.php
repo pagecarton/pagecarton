@@ -94,7 +94,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 					{
 						$classes = array_map( 'trim', explode( ',', strip_tags( $classes ) ) );
 					}
-				//	var_export( $classes);
+				//	self::v( $classes);
 					foreach( $classes as $class )
 					{
 						if( ! $class ){ continue; }

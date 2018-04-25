@@ -72,7 +72,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
  */	//	var_export( $where );
 	//	var_export( func_get_args() );
 	//	if( ! is_array( $where[$key] ) )
-		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
+//		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
 //		var_export( $result );
 	//	$this->_myFilename = @$options['filename'] ? : $this->_myFilename;
 	//	exit;
@@ -102,9 +102,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				var_export( '<br />' );
 			}
  */			
-			sort( $files );
- 			if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
+			rsort( $files );
+ 		//	if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
 			{
+			//	PageCarton_Widget::v( $files );
 			//	krsort( $files );
 
  		//		Ayoola_Page::v( $files );
@@ -115,6 +116,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
  			$totalRows = 0;
 			foreach( $files as $filename )
 			{
+			//	if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
+				{
+				//	PageCarton_Widget::v( $filename );
+				}
 				$innerOptions = $options;
 				if(  ! empty( $options['limit'] ) && $totalRows >= $options['limit'] )
 				{
@@ -216,8 +221,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		}
  */		$rows = array();
 	//	var_export( $this->getRecords()->childNodes->length );
-		foreach( $this->getRecords()->childNodes as $eachRecord )
+
+		$nextRecord = $this->getRecords()->lastChild;
+		while( $nextRecord )
+//		foreach( $this->getRecords()->childNodes as $eachRecord )
 		{
+			$eachRecord = $nextRecord;
+		 	$nextRecord = $eachRecord->previousSibling;
 			$this->recordCount = @$this->recordCount ? : 0;
 
 			if( ! empty( $options['record_search_limit'] ) && $this->recordCount >= $options['record_search_limit'] )
@@ -387,6 +397,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			}
 			
 			//	
+			 
 		}
 	//	var_export( $rows );
 	

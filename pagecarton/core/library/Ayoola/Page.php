@@ -111,29 +111,37 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     {		
 		do
 		{
-		
-			//	Cache to speed things up a bit
-			require_once 'Ayoola/Storage.php';
-			$storage = new Ayoola_Storage();
-			$storage->storageNamespace = __METHOD__ . $url;
-			$storage->setDevice( 'File' );
+			$id = $url . Ayoola_Application::getPathPrefix();
+			$storage = self::getObjectStorage( array( 'id' => $id ) );
+	//		$storage->storageNamespace = md5( __METHOD__ . $url . Ayoola_Application::getPathPrefix() );
+		//	var_export( $storage->storageNamespace );
+	 //   	self::v( $url );  
+	 //   	self::v( Ayoola_Application::getPathPrefix() );
+	  //  	self::v( $storage->storageNamespace );
 			if( $info = $storage->retrieve() )
 			{ 
+	 		 // 	var_export( $info );
 				//	var_export( unserialize( $info['cache_info'] ) );
 				break; 
 			}
 			
 			
 			$tableName = 'Ayoola_Page_Page';		
+		//	$table = new $tableName;		
 			$table = $tableName::getInstance();		
-	    	//	var_export( array( 'url' => $url ) );
-			if( $info = $table->selectOne( null, array( 'url' => $url ) ) )
-			{ 
+	   // 	var_export( array( 'url' => $url ) );
+	  //  	self::v( $table->selectOne( null, array( 'url' => $url ) ) );
+			if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'id' => $id ) ) )
+			{
+		//		self::v( $id );
+		//		self::v( $info );
 				$info['cache_info'] = serialize( $storage );
 				$storage->store( $info ); 
 				break; 
 			}
 			$table->getDatabase()->setAccessibility( $tableName::SCOPE_PROTECTED );
+	//		self::v( $tableName::SCOPE_PROTECTED );
+	//		self::v( $info );
   			
 		//	var_export( $table->selectOne( null, array( 'url' => $url ), array( 'disable_cache' => true ) ) );
 			
@@ -157,6 +165,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			}
 		}
 		while( false );
+//		self::v( $info );
 		return $info;
 		
     } 
@@ -298,13 +307,10 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			break;
 			case 'module':
 				// module mode
-				$pages = array();
-				
-				$table = Ayoola_Page_Page::getInstance();
-				$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-				$pages = $table->select( null, array( 'url' => self::splitUrl( $page ) ) );
+				$pages = self::getPageCrumbs( $page );
 
-			//	var_export( $pages );
+		//		self::v( $page );
+		//		self::v( $pages );
 				
 				//	final word 
 				$title = ucwords( array_pop( explode( '/', Ayoola_Application::getRuntimeSettings( 'url' ) ) ) );
@@ -335,7 +341,8 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				$pages = array();
 				
 				//	Home
-				$pages[] = self::getInfo( '/' );
+				$pages[] = self::getInfo( '/' );   
+		//		var_export( $pages );
 				
  				//	posts
 	//			if( self::getInfo( '/post' ) )
@@ -389,10 +396,9 @@ class Ayoola_Page extends Ayoola_Page_Abstract
       //      var_export( $currentUrl );
 				break;
 			}
-    //       var_export( $page );
 				
 			//	$currentUrl = rtrim( Ayoola_Application::getPresentUri(), '/' );
-				$sections = self::splitUrl( $page );
+/*				$sections = self::splitUrl( $page );
 				$table = Ayoola_Page_Page::getInstance();
 				$pages = $table->select( null, array( 'url' => $sections ), array( 'work-arround-111' => true ) );
 				$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
@@ -403,7 +409,8 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				$pages2 = self::sortMultiDimensionalArray( $pages2, 'url' );
 			//	var_export( $pages );
 				$pages = $pages + $pages2;
-			//		var_export( $pages );
+*/			//		var_export( $pages );
+				$pages = self::getPageCrumbs( $page );
 				if( Ayoola_Application::getRuntimeSettings( 'real_url' ) == '/404' )
 				{
 					$pages[] = self::getInfo( '/404' );
@@ -413,6 +420,28 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				return $pages;
 			break;
 		}
+	}
+	
+    /**
+     *
+     * @return string
+     */
+    public static function getPageCrumbs( $page )
+    {
+		$sections = self::splitUrl( $page );
+		$table = Ayoola_Page_Page::getInstance();
+		$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );
+		$pages = $table->select( null, array( 'url' => $sections ), array( 'work-arround-ddd111' => true ) );
+		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
+	//	var_export( $currentUrl );
+//			if( $moduleInfo = Ayoola_Page::getInfo( $curentPage ) )
+		$pages2 = $table->select( null, array( 'url' => $sections ), array( 'work-arround-333' => true ) );
+	//	self::v( $pages );
+		$pages = self::sortMultiDimensionalArray( $pages, 'url' );
+		$pages2 = self::sortMultiDimensionalArray( $pages2, 'url' );
+	//	var_export( $pages );
+		$pages = $pages + $pages2;
+		return $pages;
 	}
 	
     /**

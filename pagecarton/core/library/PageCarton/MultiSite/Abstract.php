@@ -160,7 +160,7 @@ class PageCarton_MultiSite_Abstract extends PageCarton_Widget
                         var xm = "Please enter a valid name in the space provided... (e.g. newsite)";
 						if( a )
 						{
-                            xm = "The new site URL will be: <a href=\'' . Ayoola_Page::getRootUrl() . PC_PATH_PREFIX . '/" + target.value + "\'>' . Ayoola_Page::getRootUrl() . PC_PATH_PREFIX . '/" + target.value + "</a>";
+                            xm = "The new site URL will be: <a href=\'' . Ayoola_Page::getRootUrl() . Ayoola_Application::getPathPrefix() . '/" + target.value + "\'>' . Ayoola_Page::getRootUrl() . Ayoola_Application::getPathPrefix() . '/" + target.value + "</a>";
 						}  
 						element.innerHTML = "<span style=\'font-size:x-small;\' class=\'\'>" + xm + "</span>";
 						target.parentNode.insertBefore( element, target.nextSibling );

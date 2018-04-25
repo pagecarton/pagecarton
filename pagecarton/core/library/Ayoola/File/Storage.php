@@ -125,7 +125,8 @@ class Ayoola_File_Storage extends Ayoola_File
     {
 		$path = $this->getFile()->getPath();
 		Ayoola_Doc::createDirectory( dirname( $path ) );
-		file_put_contents( $path, '<?php return ' . var_export( $data, true ) . ';' );
+        //	PageCarton_Widget::v( $path );
+		file_put_contents( $path, '<?php return ' . var_export( $data, true ) . ';' );     
     } 
 	
     /**
@@ -175,35 +176,9 @@ class Ayoola_File_Storage extends Ayoola_File
 			$filter = new Ayoola_Filter_Alnum();
 			$filter->replace = DS;
 			$name = $filter->filter( $this->getNamespace() );
-			
-			
-/*  			$domainName = $_SERVER['HTTP_HOST'];
-			$domainName = str_ireplace( 'www.', '', strtolower( $domainName ) ); 
-			$domainName = explode( ':', $domainName );
-			$domainName = array_shift( $domainName );
- */			
- 			//	we cant use Ayoola_Application::getDomainName( array( 'no_cache' => true ) ) because it causes infinite loop
 			$domain = $filter->filter( Ayoola_Application::getDomainName( array( 'no_cache' => true ) ) );
-		//	$domain = $filter->filter( $domainName );
-/* 			
-			require_once 'Ayoola/Storage.php';
-			$storage = new Ayoola_Storage();
-			$storage->storageNamespace = __METHOD__;
-	//		$storage->setDevice( 'File' );
-			$appId = $storage->retrieve(); 
-			if( ! $appId )
-			{		  
-				//	save appid in session to save time
-				//	add app id to record id so as to remove duplicate cache
-				$appId = new Ayoola_Api_Api();
-				$appId = $appId->selectOne();
-				$appId = strval( intval( $appId ? $appId['application_id'] : '0' ) );
-				$storage->store( $appId );
-			}
- */		//	var_export( $this->getNamespace() );
-		//	var_export( $name );
-		//	$this->_file->setPath( 'STORAGE' . DS . $appId . DS . $name );  
-			$this->_file->setPath( 'STORAGE' . DS . $domain . DS . $name );  
+         //   PageCarton_Widget::v( Ayoola_Application::getPathPrefix() );
+			$this->_file->setPath( 'STORAGE' . DS . $domain . Ayoola_Application::getPathPrefix() .  DS . $name . md5( $name ) );     
 		}
         return $this->_file;
     } 

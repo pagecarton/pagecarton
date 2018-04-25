@@ -69,9 +69,10 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
      */
 	protected function init()
     {
+	//	self::v( $this->getParameter() ); 
 		try
 		{
-		//	var_export( $this->getIdentifierData() ); 
+		//	self::v( $this->getIdentifierData() ); 
 			if( ! $data = $this->getIdentifierData() )
 			{
 				return false;				
@@ -95,19 +96,22 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 					$storageForSinglePosts = self::getObjectStorage( array( 'id' => 'post_list_id' ) );
 					
 					$postListId = $storageForSinglePosts->retrieve();
-		//		var_export( $postListId );
-					if( ! $postListId )
+					$postListData = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId, 'device' => 'File' ) );
+				//	self::v( $postListData  );   
+     //       PageCarton_Widget::v( Ayoola_Application::getPathPrefix() );
+
+					if( ! $postListId || ! $postListData->retrieve() )
 					{
 						$class = new Application_Article_ShowAll( array( 'true_post_type' => $data['true_post_type'] ) );
 						$class->initOnce();
 						$postListId = $storageForSinglePosts->retrieve();
 					}
                 }
-		//		var_export( $postListId );
+			//	self::v( $postListId );
 
 				$postListData = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId, 'device' => 'File' ) );
 		//		var_export( $postListId );
-		//		var_export( $postListData );
+			//	self::v( $postListData->retrieve() );
 				$postListData = $postListData->retrieve();
 	//			var_export( $postListData );
 				if( ! empty( $postListData['single_post_pagination'] ) )
@@ -166,6 +170,7 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 		}
 		catch( Exception $e )
 		{ 
+		//	var_export( $e->getMessage() );
 			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
 			return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
 		}

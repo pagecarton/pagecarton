@@ -137,6 +137,12 @@ class Ayoola_Loader
     {
 		$relativePath = str_replace( array( '/', '\\' ), DS, $relativePath );
 		$all = self::getValidIncludePaths( $relativePath, $options ? : array() );
+
+		//	if we have two, hide PC own
+		if( count( $all ) > 1 )
+		{
+			unset( $all[APPLICATION_PATH] );
+		}
 		if( @$options['path_blacklist'] )
 		{
 		//	var_export( $options['path_blacklist'] );

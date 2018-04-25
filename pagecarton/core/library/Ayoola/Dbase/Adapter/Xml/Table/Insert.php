@@ -64,17 +64,20 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		$dir = $this->getMySupplementaryDirectory();
 		if( filesize( $filename ) > 300000 )
 		{
-			$annexFile = $dir . DS . '' . implode( DS, str_split( $i ) ) . EXT_DATA;     
+			$strToUse = str_pad( $i, 3, '0', STR_PAD_LEFT );
+			$annexFile = $dir . DS . '' . implode( DS, str_split( $strToUse ) ) . EXT_DATA;     
 			while( is_file( $annexFile ) )
 			{
 				++$i;
-				$annexFile = $dir . DS . '' . implode( DS, str_split( $i ) ) . EXT_DATA;     
+				$strToUse = str_pad( $i, 3, '0', STR_PAD_LEFT );
+				$annexFile = $dir . DS . '' . implode( DS, str_split( $strToUse ) ) . EXT_DATA;     
 			}
 				
 			$dataTypes = $this->getDataTypes();
 			$tableInfo = $this->query( 'DESCRIBE' );
 			$tableInfo['table_info']['no_existence_check'] = true;
 			$tableInfo['table_info']['filename'] = $filename;
+		//	PageCarton_Widget::v( $annexFile );
 
 			Ayoola_Doc::createDirectory( dirname( $annexFile ) );
 

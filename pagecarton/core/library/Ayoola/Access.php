@@ -244,7 +244,7 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 		//	IF WE ARE HERE, WE ARE NOT AUTHORIZED   
 		$prefix =  Ayoola_Application::getUrlPrefix();
 		$userTable = new PageCarton_MultiSite_Table();
-		if( $response = $userTable->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
+		if( $response = $userTable->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
 		{
 //			var_export( $response );
 //			var_export( Ayoola_Application::getUrlPrefixController() );

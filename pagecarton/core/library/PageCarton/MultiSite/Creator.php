@@ -48,10 +48,10 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 		//	self::v( $_POST );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
-            $values['directory'] = PC_PATH_PREFIX . '/' . trim( $values['directory'], '/\\' );
-            $values['parent_dir'] = PC_PATH_PREFIX;
+            $values['directory'] = Ayoola_Application::getPathPrefix() . '/' . trim( $values['directory'], '/\\' );
+            $values['parent_dir'] = Ayoola_Application::getPathPrefix();
            
-            if( $response = $this->getDbTable()->selectOne( null, array( 'directory' => PC_PATH_PREFIX ) ) )
+            if( $response = $this->getDbTable()->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
             {
                 //	Don't run this if we are a product of multi-site
                 $values['parent_dir'] = $response['parent_dir'];

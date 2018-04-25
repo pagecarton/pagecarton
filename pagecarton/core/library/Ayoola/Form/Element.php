@@ -196,13 +196,13 @@ class Ayoola_Form_Element extends Ayoola_Form
 		// 	Covert to html object and add description 
 		$footnote = @$element["footnote"];
 //		$description = @$element["description"];
-	//	if( $element['type'] )
+		if( $element['type'] )
 		{
 			$method = 'add' . @$element['type'];
 			$markup = null;
 			if( ! method_exists( __CLASS__, $method ) )
 			{
-				$method = 'addInputText';
+			//	$method = 'addInputText';
 			//	$element .= $description ? "<span> {$description} </span>" : null;		
 			//	$element = "<span>{$element}</span>";		
 				//	exit();
