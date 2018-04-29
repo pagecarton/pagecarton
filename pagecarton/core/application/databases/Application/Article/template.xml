@@ -8,7 +8,7 @@
       <TABLE_FIELD FIELD_KEY="javascript_code"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[1077-0-3]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Products and Services List]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;div class=&quot;col_1_of_3 span_1_of_3&quot; style=&quot;margin-bottom:2em;&quot;&gt; 
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;div class=&quot;col_1_of_3 span_1_of_3&quot; style=&quot;&quot;&gt; 
 			   &lt;a href=&quot;{{{pc_url_prefix}}}{{{article_url}}}&quot;&gt;
 				&lt;div class=&quot;inner_content clearfix&quot; style=&quot; background-color:#fff; &quot;&gt;
 					&lt;div class=&quot;product_image&quot;&gt;
@@ -87,7 +87,7 @@
 					&lt;/div&gt;
 				  &lt;/li&gt;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;css&quot;,&quot;padding&quot;]]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[    &lt;ul class=&quot;grid123456&quot; style=&quot;	margin-top: 0px;margin-bottom: 10px;margin: 0px;list-style: none;padding: 0px;list-style: none;padding: 0px;margin-top: 2em;position: relative;&quot;&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[    &lt;ul class=&quot;grid123456&quot; style=&quot;	margin-top: 0px;margin: 0px;list-style: none;padding: 0px;list-style: none;padding: 0px;position: relative;&quot;&gt;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_suffix"><![CDATA[				  &lt;div class=&quot;clearfix&quot;&gt; &lt;/div&gt;
 				&lt;/ul&gt;
