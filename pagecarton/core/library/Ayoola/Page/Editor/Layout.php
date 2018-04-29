@@ -79,7 +79,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      */	
     public function sourcePage( $url = null )
     {
-	//	set_time_limit( 0 );
+		set_time_limit( 0 );
 		if( $url )
 		{ 
 			//	source for this specific url
@@ -428,6 +428,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$pageThemeFileUrl = '/index';
 		}
 		$pageThemeFile = '/layout/' . $theme . '' . $pageThemeFileUrl . '.html';
+		$defaultPageThemeFile = '/layout/' . $theme . '/default' . '.html';
 //		var_export( $pageThemeFile );
 	//	var_export( $page );
 		$whereToGetPlaceholders = $content['template'];
@@ -480,7 +481,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	now always run this path because we are trying to get lost js and css every time. 
 			//	( empty( $values ) || ! empty( $_REQUEST['pc_load_theme_defaults'] ) )
 			//	AND 
-				$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFile ) )
+				$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFile )
+				
+				OR
+				
+				$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $defaultPageThemeFile )
+
+				 )
 		{  
 			//	We have a page-specific themefile
 			// 	we use it to build the default content
