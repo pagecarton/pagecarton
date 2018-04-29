@@ -133,6 +133,9 @@
 				$time = time();
 				$myClassName = __CLASS__;           
 				$myPath = array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) );
+		//				var_export( $isLayoutPage );    
+		//				var_export( $this->_pageInfo['url'] );    
+			//			var_export( $myPath );    
 				if( $PAGE_INCLUDE_FILE && $PAGE_TEMPLATE_FILE && $this->_pageInfo && ! $isLayoutPage )
 				{
 					//	use global temp folder because of progenies
@@ -185,10 +188,11 @@
 				//		$myPath = array_pop( explode( APPLICATION_PATH, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) );
 					//	self::getThemeIncludeFile( $themeName, array( 'path_blacklist' => $myPath ) );
 				//		$includeFile = self::getThemeIncludeFile( $themeName, array( 'path_blacklist' => $myPath ) );
+				//		var_export( $myPath );    
 						$templateFile = self::getThemeIncludeFile( $themeName, array( 'path_blacklist' => $myPath ), 'template' );
 			//		var_export( APPLICATION_PATH );
 			//		var_export( APPLICATION_DIR );
-			//		var_export( $myPath );
+				//	var_export( $myPath );
 				//	var_export( $templateFile );
 						
 						//	use global temp folder because of progenies

@@ -148,7 +148,7 @@ class Ayoola_Doc_Upload extends Ayoola_Doc_Abstract
      * creates the form
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = NULL, array $values = NULL )
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'enctype' => 'multipart/form-data' ) );

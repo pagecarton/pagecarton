@@ -105,7 +105,7 @@ class Application_Backup extends Application_Backup_Abstract
      * Creates the form to select which Backup to view
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = NULL, array $values = NULL )
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'method' => 'get' ) );
 		$fieldset = new Ayoola_Form_Element();	

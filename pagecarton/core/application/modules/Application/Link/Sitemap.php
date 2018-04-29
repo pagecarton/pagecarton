@@ -56,19 +56,7 @@ class Application_Link_Sitemap extends Application_Link_Abstract
     {
 		try
 		{
-		//	$this->createConfirmationForm( 'Build Site Map', 'Build site map and submit it to search engines' );
-		//	$this->setViewContent( $this->getForm()->view(), true );
-		//	if( ! $values = $this->getForm()->getValues() ){ return false; }
-/*			
-			$domains = new Application_Domain();
-			$domains = new Application_Domain();
-		//	echo $domains->view();
-			Ayoola_Application::getDomainSettings();
-			if( ! $domains = $domains->select() )
-			{
-				
-			}
-*/			//	do normal
+			//	do normal
 			Ayoola_Application::reset();
 			$this->setXml();
 

@@ -188,10 +188,10 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 					$this->setViewParameter( '' . 'ERROR 1: "' . $file . '" not enabled before.' );
 					continue;
 				}				
-				elseif( $from !== readlink( $to ) )
+				elseif( $from !== readlink( $to ) && is_file( readlink( $to ) ) )
 				{
-				//	var_export( $from );
-				//	var_export( readlink( $to ) );
+		//			var_export( $from );
+		//			var_export( readlink( $to ) );
 					$this->setViewParameter( '' . 'ERROR 2: "' . $file . '" is in use by another Plugin.' );
 					continue;
 				}				

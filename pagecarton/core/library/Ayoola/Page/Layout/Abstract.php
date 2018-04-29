@@ -282,6 +282,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
      */
     public static function refreshThemePage( $themeName )
 	{
+
 		$class = new Ayoola_Page_Editor_Layout( array( 'no_init' => true ) );
 		$class->setPageInfo( array( 'url' => '/layout/' . $themeName . '/template' ) );
 		$class->updateLayoutOnEveryLoad = true;
@@ -289,6 +290,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$class->setValues();
 		
 		$class->init(); // invoke the template update for this page.
+//		echo $class->view();
 	}
 
     /**

@@ -79,7 +79,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      */	
     public function sourcePage( $url = null )
     {
-		set_time_limit( 0 );
+	//	set_time_limit( 0 );
 		if( $url )
 		{ 
 			//	source for this specific url
@@ -1034,7 +1034,30 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			{
 				$class = new Ayoola_Page_Editor_Sanitize(); 
 			//	$class->setParameter( array( 'where' => array( '' ) ) );
+
+				//	do normal
+
 				$class->sanitize( $themeName ); 
+
+				$table = new PageCarton_MultiSite_Table();
+				$isChildSite = $table->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) );
+		//		var_export( Ayoola_Application::getPathPrefix() );
+		//		var_export( $isChildSite );
+		//	var_export( $rPaths );
+				if( ! $isChildSite )
+				{	
+					$sites = $table->select();
+
+					//	do for directories
+					foreach( $sites as $site )
+					{
+						Ayoola_Application::reset( array( 'path' => $site['directory'] ) );
+						Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName ); 
+					//	$class->sanitize( $themeName ); 
+					}
+					Ayoola_Application::reset();
+				}
+
 			}
 			
 		}

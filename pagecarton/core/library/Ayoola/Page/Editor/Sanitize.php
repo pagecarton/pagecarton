@@ -69,10 +69,6 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 			if( strtolower( $themeName ) === strtolower( Ayoola_Page_Editor_Layout::getDefaultLayout() ) )
 			{
 				$where['layout_name'][] = '';
-				
-				//	autocreate some of the default pages
-		//		$defaultPages = array( '/', '/object', '/account', '/accounts/signin', '/accounts/signup', '/404', '/blog', '/search', );		
-		//		$defaultPages = array( '/tested', );		
 			}
 		}
 		$pages = $pages->getDbTable()->select( null, $where );

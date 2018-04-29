@@ -16,7 +16,7 @@
  * @see PageCarton_Widget
  */
 
-class Application_Article_Type_View extends PageCarton_Widget
+class Application_Article_Type_View extends PageCarton_Widget   
 {
 	
     /**
@@ -121,7 +121,7 @@ class Application_Article_Type_View extends PageCarton_Widget
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];

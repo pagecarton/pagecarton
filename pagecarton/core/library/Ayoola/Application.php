@@ -1280,21 +1280,8 @@ class Ayoola_Application
 		}
 
 		//	Client-side	scripting		
-	//	Application_Javascript::addFile( '' . self::getUrlPrefix() . '/object/name/Application_Javascript/?v=' . filemtime( __FILE__ ) );
 		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . filemtime( __FILE__ ) );
-/*		Application_Javascript::addFile( '/js/js.js' );
-		Application_Javascript::addFile( '/js/objects/files.js' );
-		Application_Javascript::addFile( '/js/objects/events.js' );
-		Application_Javascript::addFile( '/js/objects/spotLight.js' );
-		Application_Javascript::addFile( '/js/objects/style.js' );
-		Application_Javascript::addFile( '/js/objects/xmlHttp.js' );
-		Application_Javascript::addFile( '/js/objects/div.js' );
-		Application_Javascript::addFile( '/js/objects/js.js' );
-		Application_Javascript::addFile( '/ayoola/js/form.js' ); 
-		Application_Javascript::addFile( '/ayoola/js/image.js' );
-*/		Application_Style::addFile( Ayoola_Page::getPageCssFile() );
-//		Application_Javascript::addCode( 'ayoola.spotLight.popUp( "Welcome to Nigeria!" );' );
-//		Application_Javascript::addCode( 'ayoola.spotLight.showLink( "/css/ayoola_default_style.css" );' );
+		Application_Style::addFile( Ayoola_Page::getPageCssFile() );
 
 		//	Pass the artificial query string to the client-side			
 		Application_Javascript::addCode  
@@ -1306,8 +1293,6 @@ class Ayoola_Application
 				window, 'load', function(){ ayoola.setArtificialQueryString( '" . Ayoola_Application::getRuntimeSettings( 'real_url' ) . "' ); } 
 			);" 
 		);
-	//	var_export( Ayoola_Page::getCurrentPageInfo() );
-	//	var_export( $PAGE_INCLUDE_FILE );
 	
 		//	Set TimeZone
 		date_default_timezone_set( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'time_zone' ) ? : 'UTC' );

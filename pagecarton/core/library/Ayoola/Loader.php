@@ -70,7 +70,7 @@ class Ayoola_Loader
      */
     public static function getValidIncludePaths( $relativePath, array $options = array() )
     {
-		$pathsId = md5( $relativePath . json_encode( $options ) );
+		$pathsId = md5( $relativePath . Ayoola_Application::getPathPrefix() . json_encode( $options ) );
 		if( ! empty( self::$_validIncludePaths[$pathsId] ) && empty( $options['refresh_list'] ) )
 		{
 			return self::$_validIncludePaths[$pathsId];
@@ -151,9 +151,13 @@ class Ayoola_Loader
 			unset( $all[$options['path_blacklist']] );
 			unset( $all[PC_BASE . $options['path_blacklist']] );
 		}
+	//	if( @$options['prioritize_my_copy'] && stripos( Ayoola_Application::getDomainSettings( APPLICATION_PATH ), 'music' ) )
+		{
+//			var_export( $relativePath );
+//			var_export( $all );
+		}
 		if( @$options['prioritize_my_copy'] && @$all[Ayoola_Application::getDomainSettings( APPLICATION_PATH )] )
 		{
-		//	var_export( $options['path_blacklist'] );
 			//$key = array_search( $options['path_blacklist'], $all );
 			return $all[Ayoola_Application::getDomainSettings( APPLICATION_PATH )];
 		}
