@@ -162,10 +162,10 @@ ayoola.spotLight =
 		  <span  class="pc_content_title" style=\'display: inline-block;\'></span>\
 		  <span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode.parentNode.parentNode ); ayoola.xmlHttp.refreshElement( \'' + changeElementId + '\' );"> x </span>\
 		  <a style="display:none;" class="title_button" name="" href="javascript:;" title="Click to show or hide advanced settings" onclick="var b = this.parentNode.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'\'; } this.nextElementSibling.style.display = \'\';this.style.display = \'none\';"> &square; </a>  \
-		  <a class="title_button" name="" href="javascript:;" title="Minimize or open the body of this object" onclick="var b = this.parentNode.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'none\'; } this.parentNode.parentNode.style.display = \'\'; this.previousElementSibling.style.display = \'\';this.style.display = \'none\';"> _ </a>  \
+		  <a class="title_button" target="_blank" href="javascript:;" title="Open this widget in a new window or tab" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  this.href = b[a].contentWindow.location.href };"> &#10140; </a>  \
 		  <a class="title_button" name="" href="javascript:;" title="Refresh" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  b[a].contentWindow.location.reload(true); };"> &#8635; </a>  \
 		   </div><div style="clear:both;"></div>  \
-		  </div>';
+		  </div>';  
 		switch( typeof htmlText )
 		{
 			case 'object': 
