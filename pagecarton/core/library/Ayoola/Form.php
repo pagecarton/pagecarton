@@ -462,7 +462,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		if( $this->submitValue && ! $this->callToAction )
 		{
 		//	var_export( $this->submitValue );
-			$element->addElement( array( 'name' => 'submit-' . $this->submitValue . '', 'value' => $this->submitValue . '   » ', 'type' => 'Submit', 'style' => 'display:block; margin: 0.5em 0 0.5em 0 ;', 'class' => '', 'onclick' => 'this.value= \'Please wait...\'', 'data-pc-ignore-field' => 'true' ) );    
+			$element->addElement( array( 'name' => 'pc-submit-button', 'value' => $this->submitValue . '   » ', 'type' => 'Submit', 'style' => 'display:block; margin: 0.5em 0 0.5em 0 ;', 'class' => '', 'data-pc-ignore-field' => 'true' ) );    
 		}
 		foreach( $this->requiredElements as $key => $value )
 		{
@@ -634,10 +634,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		$form .= $this->wrapForm ? "<div id='{$this->_attributes['id']}_container'>\n" : null;
 		if( ! $this->getParameter( 'no_form_element' ) )
 		{
-			$form .= "<form data-pc-form=1 ";   
+			$form .= '<form onsubmit="pc-submit-button.disabled = true;' . self::hashElementName( 'pc-submit-button' ) . '.disabled = true; return true;" data-pc-form=1 ';   
 			foreach( $this->_attributes as $key => $value )
 			{
-				$form .= empty( $this->_attributes[$key] ) ? null : " $key='$value' ";
+				$form .= empty( $this->_attributes[$key] ) ? null : " $key='$value' ";  
 			}
 			
 			$this->getGlobal();	//	Load the global
