@@ -122,25 +122,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 			$element = _Array( $element );
 		}
-	//	$expectedKeys = array( 'type', 'class', 'placeholder', 'name', 'label', 'value', 'description', 'id' ); 
-	//	foreach( $expectedKeys as $each )
-		{
-	//		if( ! array_key_exists( $each, $element ) )
-	//			$element[$each] = null;
-		}
-	//	self::v( "\r\n" );
         if( empty( $element['name'] ) )
 		{
 		//	var_export( $element );
 			trigger_error(  'You must enter a name for the Form Element' );
 		}
-	//	if( ! empty( $this->_names[$element['name']] ) )
-		{
-			//	Weve been here!
-	//		return false;
-		}
-	//	self::v( $element['name'] );
-	//	self::v( "\r\n" );
 		if( @$element['type'] )
 		{
 		}
@@ -196,10 +182,10 @@ class Ayoola_Form_Element extends Ayoola_Form
 		// 	Covert to html object and add description 
 		$footnote = @$element["footnote"];
 //		$description = @$element["description"];
+		$markup = null;
 		if( $element['type'] )
 		{
 			$method = 'add' . @$element['type'];
-			$markup = null;
 			if( ! method_exists( __CLASS__, $method ) )
 			{
 			//	$method = 'addInputText';
@@ -213,21 +199,21 @@ class Ayoola_Form_Element extends Ayoola_Form
 			}
 			$element['name'] = @$element['multiple'] ? ( $element['name'] . '[]' ) : $element['name']; 
 			unset( $element['multiple'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
-			$markup = $this->$method( $element, $values );
-			$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;		
-			if( ! empty( $_GET['pc_inspect_widget_form'] ) && stripos( $realName, 'submit-' ) === false && stripos( $realName, 'SUBMIT_DETECTOR' ) === false )
-			{
-				$markup .= ' <div style="font-size:smaller; padding-top:1em; padding-bottom:1em;"><br> The name attribute of the element above is "' . $realName . '"<br></div>';   
-			}
-			$this->setHtml( $markup );
-			if( $this->appendElement )
-			{
-				$this->_elements[$name] = $markup;
-			}
-			else
-			{
-				$this->_elements = array( $name => $markup ) + $this->_elements;
-			}
+			$markup .= $this->$method( $element, $values );
+		}
+		$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;		
+		if( ! empty( $_GET['pc_inspect_widget_form'] ) && stripos( $realName, 'submit-' ) === false && stripos( $realName, 'SUBMIT_DETECTOR' ) === false )
+		{
+			$markup .= ' <div style="font-size:smaller; padding-top:1em; padding-bottom:1em;"><br> The name attribute of the element above is "' . $realName . '"<br></div>';   
+		}
+		$this->setHtml( $markup );
+		if( $this->appendElement )
+		{
+			$this->_elements[$name] = $markup;
+		}
+		else
+		{
+			$this->_elements = array( $name => $markup ) + $this->_elements;
 		}
 		
 		// Register Html object to fieldlist

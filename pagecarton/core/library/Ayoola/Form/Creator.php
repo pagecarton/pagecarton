@@ -42,6 +42,7 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 
 		//	self::v( $_POST );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
+		//	self::v( $values );
 
 			if( ! empty( $_REQUEST['form_name'] ) )
 			{

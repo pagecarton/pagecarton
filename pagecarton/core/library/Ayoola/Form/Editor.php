@@ -41,9 +41,13 @@ class Ayoola_Form_Editor extends Ayoola_Form_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createForm( 'Continue...', 'Edit "' . $data['form_title'] . '"', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
-		//	var_export( $_POST );
+		//	var_export( $data );
+		//	var_export( $data );
+		//	var_export( $data );
 		//	var_export( $this->getForm()->getValues() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
+		//	var_export( $_POST );
+		//	var_export( $values );
 			
 			
 			if( ! $this->updateDb( $values ) ){ return false; }
