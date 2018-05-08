@@ -390,7 +390,8 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 	//	$fieldset->addElement( array( 'name' => 'Login Now', 'value' => 'Login', 'type' => 'Submit' ) );
 		
 		//$fieldset->addRequirement( 'password', 'WordCount=>8;;16' );
-		$fieldset->addFilters( 'Trim::Escape' );
+	//	$fieldset->addFilters( 'Trim' );
+//		$fieldset->addFilters( 'Trim::Escape' );
 	//	$fieldset->addFilter( 'username','Username' );   
 	//	$fieldset->addLegend( '' );
 		$form->addFieldset( $fieldset );

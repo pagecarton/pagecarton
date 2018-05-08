@@ -372,7 +372,8 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$dob .= strlen( $this->getGlobalValue( 'birth_month' ) ) === 1 ? ( '0' . $this->getGlobalValue( 'birth_month' ) ) : $this->getGlobalValue( 'birth_month' );
 			$dob .= strlen( $this->getGlobalValue( 'birth_day' ) ) === 1 ? ( '0' . $this->getGlobalValue( 'birth_day' ) ) : $this->getGlobalValue( 'birth_day' );
 			$personal->addFilter( 'birth_date', array( 'DefiniteValue' => $dob ) );
-			$personal->addFilters( 'Trim::Escape' );
+	//		$personal->addFilters( 'Trim' );
+//			$personal->addFilters( 'Trim::Escape' );
 			$this->getParameter( 'no_legend' ) ?  null : $personal->addLegend( "$legend Personal Information" );
 		}
 		$account = new Ayoola_Form_Element;
@@ -451,12 +452,13 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				$account->addElement( array( 'name' => 'password', 'autocomplete' => 'new-password', 'placeholder' => 'Choose a password', 'type' => 'InputPassword' ) );
 				if( is_null( $values ) )
 				{ 
-					$account->addRequirement( 'password','WordCount=>6;;18' ); 
+					$account->addRequirement( 'password','WordCount=>6;;180' ); 
 				}
 				$account->addElement( array( 'name' => 'password2', 'autocomplete' => 'new-password', 'label' => 'Confirm password', 'placeholder' => 'Confirm password', 'type' => 'InputPassword' ) );
 				if( $this->getGlobalValue( 'password2' ) ) //	If I am using fake values
 				{ 
-					$account->addRequirement( 'password2', array( 'DefiniteValueSilent' => $this->getGlobalValue( 'password' ) ) ); 
+					$account->addRequirement( 'password2', array( 'DefiniteValueSilent' => $this->getGlobalValue( 'password' ) ) );
+				//	var_export( $this->getGlobalValue( 'password' ) ); 
 				}
 			}
 		//	var_export( $_REQUEST['password'] );
@@ -465,7 +467,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$ipType = is_null( $values ) ? 'creation_ip' : 'modified_ip';
 			$account->addElement( "name=>$ipType:: type=>Hidden" );
 			$account->addFilter( $ipType, 'DefiniteValue=>' . $ip );
-			$account->addFilters( 'Trim::Escape' );
+	//		$account->addFilters( 'Trim' );
 		}
 	
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
