@@ -196,18 +196,25 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			';
 			try
 			{
-		//		var_export( $mailInfo );
-				if( $data['email'] )
-				{
 					@self::sendMail( $mailInfo + array( 'to' => $data['email'] ) ); 
-				}
-			//	@Ayoola_Application_Notification::mail( $mailInfo );
 			}
 			catch( Ayoola_Exception $e ){ null; }
 		//	if( ! $this->insertDb() ){ return false; }
 		//	$this->setViewContent( '<h1>Thank you!</h1>', true );
 			$this->setViewContent( ' ', true );
-			$this->setViewContent( '<p>' . ( strip_tags( $data['form_success_message'] ) === $data['form_success_message'] ? nl2br( $data['form_success_message'] ) : $data['form_success_message'] ) . '</p>', true );
+			$data['form_success_message'] = ( strip_tags( $data['form_success_message'] ) === $data['form_success_message'] ? ( '<p>' . nl2br( $data['form_success_message'] ) . '</p>' ) : $data['form_success_message'] );
+
+			$mailInfo = array();
+			$mailInfo['subject'] = $data['form_title'];
+			$mailInfo['body'] = '<html><body>' . $data['form_success_message'] . '</body></html>';
+			$mailInfo['to'] = Ayoola_Form::getGlobalValue( 'email' ) ? : ( Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Application::getUserInfo( 'email' ) );
+			try
+			{
+				@self::sendMail( $mailInfo ); 
+			}
+			catch( Ayoola_Exception $e ){ null; }
+
+			$this->setViewContent( $data['form_success_message'], true );
 			
 		}
 		catch( Exception $e )

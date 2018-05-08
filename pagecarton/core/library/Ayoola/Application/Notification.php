@@ -102,7 +102,7 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
 	public static function getFooter()
     {
 		return '
-		Your e-mail, ' . Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' ) . ' was set in PageCarton admin panel. Here is the direct link to the admin panel: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/pc-admin/.
+		Your e-mail, ' . Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' ) . ' was set in PageCarton admin panel. Here is the direct link to the admin panel: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/pc-admin
 		
 		For tutorials, help on developing with PageCarton, visit http://pagecarton.org. PageCarton is a content management system that makes it easy to build responsive websites and apps. 
 		';

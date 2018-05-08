@@ -117,7 +117,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		try
 		{
 		//	var_export( $newCart );
-			$mailInfo['to'] = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
+			$mailInfo['to'] = Ayoola_Application_Notification::getEmails();
 			@self::sendMail( $mailInfo );
 	//		Ayoola_Application_Notification::mail( $mailInfo );
 		}

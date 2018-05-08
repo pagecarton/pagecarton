@@ -289,7 +289,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 		try
 		{
 		//	var_export( $newCart );
-			$mailInfo['to'] = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
+			$mailInfo['to'] = Ayoola_Application_Notification::getEmails();;
 			@self::sendMail( $mailInfo );
 		}
 		catch( Ayoola_Exception $e ){ null; }

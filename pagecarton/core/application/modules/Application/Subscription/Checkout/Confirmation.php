@@ -154,7 +154,8 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		}
 		//	Notify Admin
 	//	$mailInfo = array();
-		$emailInfo['to'] = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
+		$emailInfo['to'] = 	Ayoola_Application_Notification::getEmails();
+
 		$emailInfo['subject'] = 'Checkout Confirmation';
 		$emailInfo['body'] = '<html><body>Someone just confirmed their checkout. Here is the cart content: <br> 
 		' . $this->view() . ' <br>  

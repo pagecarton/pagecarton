@@ -90,7 +90,10 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 		}	
 
 		$fieldset->addElement( array( 'name' => 'form_description', 'placeholder' => 'Enter a short description explaining the purpose of this form. This information will be displayed to users on top of the form. ', 'type' => 'TextArea', 'value' => @$values['form_description'] ) );
-		$fieldset->addElement( array( 'name' => 'form_success_message', 'placeholder' => 'Enter a short success message. This information will be displayed to users when the form is submitted. ', 'type' => 'TextArea', 'value' => @$values['form_success_message'] ) );
+
+		Application_Article_Abstract::initHTMLEditor();
+		
+		$fieldset->addElement( array( 'name' => 'form_success_message', 'placeholder' => 'Enter a short success message. This information will be displayed to users when the form is submitted. ', 'data-html' => true, 'type' => 'TextArea', 'value' => @$values['form_success_message'] ) );
 		$fieldset->addElement( array( 'name' => 'button_value', 'placeholder' => 'e.g. Submit', 'type' => 'InputText', 'value' => @$values['button_value'] ) );
 		
 		$options =  array( 
