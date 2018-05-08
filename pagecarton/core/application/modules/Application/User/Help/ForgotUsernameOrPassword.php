@@ -103,7 +103,7 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 			{
 				if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 				{
-					$database = 'cloud';
+			//		$database = 'cloud';
 				}
 				switch( $database )
 				{
@@ -162,6 +162,7 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 						$info = array_merge( $info, $informationToUpdate );
 						
 						unset( $values['password2'] );
+				//		var_export( $informationToSend );
 						if( Ayoola_Access_Localize::info( $info ) )
 						{
 							$this->setViewContent( 'Password reset was successful; a new password has been sent to your email address.', true );
