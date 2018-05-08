@@ -183,6 +183,23 @@ class Ayoola_Xml extends DOMDocument
      */
     public function load( $filename, $options = null )
     {
+		$tempName = $filename . '.lock';
+		$giveUpAfter = 5; //sec
+		$time = time() + $giveUpAfter;
+	//	var_export( $tempName );
+		if( is_file( $tempName ) )
+		{
+			if( filemtime( $tempName ) < time() - 9999 )
+			{
+				unlink( $tempName );
+				Application_Log_View_Error::log( $tempName . ' stayed too long. It is now removed.' );
+			}
+			while( is_file( $tempName ) && time() < $time )
+			{
+				usleep(100000);
+			}
+		}
+		
 		if( ! $path = Ayoola_Loader::checkFile( $filename ) )
 		{
 			require_once 'Ayoola/Xml/Exception.php';
@@ -205,6 +222,15 @@ class Ayoola_Xml extends DOMDocument
     {
 		//throw new Exception;
 		$filename = $filename ? : $this->getFilename();
+
+	//	PageCarton_Widget::v( $filename );
+		$tempName = $filename . '.lock';
+		if( is_file( $filename ) )
+		{
+			copy( $filename, $tempName );
+		}
+	//	PageCarton_Widget::v( $tempName );
+	//	PageCarton_Widget::v( file_get_contents( $tempName ) );
 		
 		//	Make sure the file is saved before you give up
 		$giveUpAfter = 5; //sec
@@ -218,6 +244,7 @@ class Ayoola_Xml extends DOMDocument
 			continue; 
 		}
 		$this->setFilename( $filename );
+		unlink( $tempName );
 		return $result;
     } 
 	

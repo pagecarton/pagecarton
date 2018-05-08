@@ -700,7 +700,20 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
      */
     public function setClassOptions()
     {
-		foreach( $this->getDbData() as $value )
+		$table = new Ayoola_Page_Menu_Menu();
+
+		//	look in parent tables
+		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
+	//	var_export( $this->getParameter( ) );
+		if( $this->getParameter( 'include_parent_menu' ) )
+		{
+			$all = $table->select();
+		}
+		else
+		{
+			$all = $this->getDbData();
+		}
+		foreach( $all as $value )
 		{
 			$this->_classOptions[$value['menu_name']] = $value['menu_label'];
 		}
@@ -769,15 +782,33 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		//	Implementing Object Options
 		//	So that each objects can be used for so many purposes.
 		//	E.g. One Class will be used for any object
-	//	var_export( $object );
+	//	var_export( $object['include_parent_menu'] );
 		$options = $object['class_name'];
-		$options = new $options( array( 'no_init' => true ) );
+		$options = new $options( array( 'no_init' => true ) + $object );
 //		$options = array();
 	//	$html .= '<span style=""> Show  </span>';
 	//	$newMenuName = null;
 		$newMenuName = 'menu_' . time();
 		static::$_counter++;
-		$options = (array) $options->getClassOptions();
+		if( ! empty( $object['include_parent_menu'] ) )
+		{
+			$table = new Ayoola_Page_Menu_Menu();
+
+			//	look in parent tables
+			$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
+			$all = $table->select( null, null, array( 'sss' => 'ss' ) );
+	//		var_export( $all );
+
+			$options = array();
+			foreach( $all as $value )
+			{
+				$options[$value['menu_name']] = $value['menu_label'];
+			}
+		}
+		else
+		{
+			$options = (array) $options->getClassOptions();
+		}
 		if( ! empty( $object['option'] ) && ! array_key_exists( $object['option'], $options ) )  
 		{
 			//	 look for it in parent tables; 

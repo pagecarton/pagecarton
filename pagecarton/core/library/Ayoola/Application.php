@@ -579,6 +579,10 @@ class Ayoola_Application
 		
 		//  
 		Ayoola_Event_NewSession::viewInLine();
+		if( empty( $_SESSION['PC_SESSION_START_TIME'] ) )
+		{
+			$_SESSION['PC_SESSION_START_TIME'] = time();
+		}
 
 		//	Error / Exception handling
 		$errorMessage = '"Uncaught Exception " . get_class( $object ) . " with message " . $object->getMessage() . " in  " . $object->getFile() . " on line " . $object->getLine() . " Stack trace: " . $object->getTraceAsString() ';
@@ -673,7 +677,7 @@ class Ayoola_Application
 		//	Ignore localhosts and super users
  //		if( ! Ayoola_Page::hasPriviledge() )
  
- 		if( ! in_array( $_SERVER['REMOTE_ADDR' ], array( '127.0.0.1', '::1' ) ) )
+ //		if( ! in_array( $_SERVER['REMOTE_ADDR' ], array( '127.0.0.1', '::1' ) ) )
 		{
 			self::log();
 		}

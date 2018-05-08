@@ -354,35 +354,36 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */	
     protected function _validate( $name )
     {
-/* 		//	Extra check for non-admin
-		if( ! Ayoola_Form::hasPriviledge() )
+ 		//	Extra check for non-admin
+		$allowedCoders =  Application_Settings_Abstract::getSettings( 'Forms', 'coders_access_group' ); 
+//		var_export( $allowedCoders );
+//		var_export( Ayoola_Form::hasPriviledge( $allowedCoders ) );
+		//	<a>efewwewe</a>
+		if( $allowedCoders && ! Ayoola_Form::hasPriviledge( $allowedCoders ) )
 		{
 			//	Turning this to array allows to validate array values
 			$values = $this->_values[$this->_names[$name]['real_name']];
 			$values = is_array( $values ) ? $values : array( $values );
-		//		var_export( $this->_values );
+			//	var_export( $values );
 			foreach( $values as $each )
 			{
-				if( $each != strip_tags( $each, '<span> <font> <div> <a> <address> <em> <strong> <u> <b> <i> <big> <small> <sub> <sup> <cite> <code> <img> <ul> <ol> <li> <dl> <lh> <dt> <dd> <br> <p> <table> <th> <td> <tr> <pre> <blockquote> <nowiki> <h1> <h2> <h3> <h4> <h5> <h6> <hr> <kbd> <s> <strike> <del>' ) )  
+		//		var_export( htmlentities( $each ) );
+		//		var_export( htmlentities( strip_tags( $each ) ) );
+				if( $each != strip_tags( $each ) )  
 				{
 								
 					//	Notify Admin
-					$mailInfo['subject'] = 'Alert! Code Injection by user';
+			//		$mailInfo['subject'] = 'Alert! Code Injection by user';
 					$mailInfo['body'] = 'Alert! Code Injection by user
 					Info: ' . var_export( $this->_values, true ) . '.
 					';
-				//	Application_Log_View_General::log( array( 'type' => 'New Post', 'info' => array( $mailInfo ) ) );
-					try
-					{
-						@Ayoola_Application_Notification::mail( $mailInfo );
-					}
-					catch( Ayoola_Exception $e ){ null; }
-					$this->setBadnews( 'Not allowed! Why are you trying to put code into PageCarton?', $name );
+					Application_Log_View_Error::log( $mailInfo['body'] );
+					$this->setBadnews( 'Codes are not allowed in forms!', $name );
 					return false;
 				} 
 			}
 		}
- */		
+ 		
 		if( ! @is_array( $this->_requirements[$name] ) ){ return true; }
 		$validator = 'Ayoola_Validator_';
 		foreach( $this->_requirements[$name] as $requirement => $parameter )
@@ -452,6 +453,24 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */	
     public function getRequiredFieldset()
     {
+		if( $delay =  Application_Settings_Abstract::getSettings( 'Forms', 'session_delay_time' ) )
+		{
+			$sessionTime = time() - $_SESSION['PC_SESSION_START_TIME'];
+	//		var_export( $sessionTime );
+	//		var_export( '' );
+	//		var_export( $_SESSION['PC_SESSION_START_TIME'] );
+	//		var_export( '' );
+			if( $delay > $sessionTime )
+			{
+				$this->setBadnews( 'Please wait ' . ( $delay - $sessionTime ) . ' secs before submitting your form!', '' );
+		//		return false;
+			}
+		}
+		//	the settings wast working with this
+	//	if( $this->requiredFieldSet )
+		{
+	//		return $this->requiredFieldSet;
+		}
         $element = new Ayoola_Form_Element;
 		$element->useDivTagForElement = false;
 		if( $this->useCaptcha )
@@ -459,6 +478,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			$element->addElement( 'name=>captcha:: type=>Captcha' );
 			$element->addRequirement( 'captcha','Captcha' );
 		}
+		//	var_export( $this->submitValue );
 		if( $this->submitValue && ! $this->callToAction )
 		{
 		//	var_export( $this->submitValue );
@@ -471,9 +491,11 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 		$element->addElement( array( 'name' => $this->_attributes['name'] . self::SUBMIT_DETECTOR, 'value' => $this->_attributes['name'], 'type' => 'Hidden', 'data-pc-ignore-field' => 'true' ) );
 	//	$element->addElement( array( 'name' => 'MAX_FILE_SIZE', 'type' => 'Hidden', 'value' => '107374182', 'data-pc-ignore-field' => 'true' ) );
-	//	$element->addElement( array( 'name' => self::HONEY_POT, 'type' => 'HoneyPot', 'data-pc-ignore-field' => 'true' ) );
-		$element->addFilters( 'Trim:: Escape::Alnum' );   
-		return $element;
+		$element->addElement( array( 'name' => self::HONEY_POT, 'type' => 'HoneyPot', 'value' => '', 'data-pc-ignore-field' => 'true' ) );
+//		$element->addRequirement( self::HONEY_POT, array( 'Blank' ) );   
+		$element->addFilters( 'Trim:: Escape::Alnum' );  
+		$this->requiredFieldSet = $element; 
+		return $this->requiredFieldSet;
 	}
 	
     /**
@@ -1062,6 +1084,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */			
     public function setBadnews( $badnews, $name = null )
     {
+	//	var_export( $badnews );
 		$this->_badnews[$name] = $badnews;
     }
 	
@@ -1079,6 +1102,14 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 		$name = self::HONEY_POT;
 		$name = self::hashElementName( $name ); // Honey Pots should always be hashed
+
+		//	honeypot should always be left blank
+	//	var_export( $_REQUEST[$name] );
+	
+		if( ! empty( $_REQUEST[self::HONEY_POT] ) || ! empty( $_REQUEST[$name] ) )
+		{
+			return false;
+		}
 
  		if( isset( $_REQUEST[self::BACKBUTTON_INDICATOR] ) )
 		{
@@ -1133,7 +1164,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			}
 		}
 		
-		$this->_names = $this->_names ? :$this->getRequiredFieldset()->getNames() ;
+		$this->_names = $this->_names ? : $this->getRequiredFieldset()->getNames() ;
 		$this->_names = array_merge( $elements->getNames(), $this->_names );
 	//	$this->_values = array_merge( $elements->getValues(), $this->_values );
 		$this->_requirements = array_merge( $elements->getRequirements(), $this->_requirements );
@@ -1306,7 +1337,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     public function view()
     {
 		$form = null;
-	//		var_export( $this->_badnews );
+		//	var_export( $this->_badnews );
 		if( $this->badnewsBeforeElements && $this->_badnews )
 		{
 			$form .= '<ul>';

@@ -156,7 +156,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->setParameter( array( 'no_fieldset' => true ) );

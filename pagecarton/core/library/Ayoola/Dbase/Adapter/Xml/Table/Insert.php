@@ -140,10 +140,12 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		//		throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( 'PRIMARY ID "' . $idColumn . '" ALREADY HAS "' . $values[$idColumn] . '"' );
 			}
 		}
+	//	var_export( $values['creation_time'] );
 		if( empty( $values['creation_time'] ) )   
 		{
 			$values['creation_time'] = time();
 		}
+	//	var_export( $values['creation_time'] );
 	//		var_export( $recordRowId );
 	//		var_export( $values[$idColumn] );
 		if( empty( $options['record_row_id'] ) && empty( $values[$idColumn] ) )

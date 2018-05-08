@@ -72,7 +72,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
  */	//	var_export( $where );
 	//	var_export( func_get_args() );
 	//	if( ! is_array( $where[$key] ) )
-//		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
+		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
 //		var_export( $result );
 	//	$this->_myFilename = @$options['filename'] ? : $this->_myFilename;
 	//	exit;

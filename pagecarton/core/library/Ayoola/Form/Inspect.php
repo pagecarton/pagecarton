@@ -79,6 +79,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 			( 
 				'& $key, & $values', 
 				'
+		//			var_export( $values );
 					$time = $values["creation_time"];
 					$values = $values["form_data"];
 					$values["creation_time"] = $time;
@@ -89,7 +90,8 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 			$formData = self::sortMultiDimensionalArray( $formData, 'creation_time' );
 			
 
-		//	var_export( $formData );
+	//		var_export( $table->select() );
+	//		var_export( $formData );
 			krsort( $formData );
 			$list->setData( $formData );
 			$list->setListOptions( 

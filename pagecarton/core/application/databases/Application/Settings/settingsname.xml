@@ -69,7 +69,7 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="12">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Forms]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[0]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[02378]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Forms]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Form_Settings]]></TABLE_FIELD>
     </TABLE_ROW>

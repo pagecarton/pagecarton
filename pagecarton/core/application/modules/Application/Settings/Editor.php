@@ -63,15 +63,18 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 			if( ! $settingsInfo )
 			{
 				$settingsName = new Application_Settings_SettingsName();
-			//	var_export( $settingsName );
+		//		var_export( $settingsName->select() );
+			//	var_export( $settings->select() );
 				if( ! $settingsNameInfo )
 				{
+					$this->insertDb( $settingsNameInfo );
 					return $this->setViewContent( 'Invalid Settings Name', true );
 				}
-				$this->insertDb( $settingsNameInfo );
+		//		var_export( $settingsInfo );
+		//		var_export( $settingsNameInfo );
 				$settings = new Application_Settings();
-				$settingsInfo = $settings->selectOne( null, array( 'settingsname_id' => $settingsNameInfo['settingsname_id'] ) );
-				$data = $settingsInfo + $settingsNameInfo;
+				$settingsInfo = $settings->selectOne( null, array( 'settingsname_id' => $settingsNameInfo['settingsname_id'] ) ) ? : $settings->selectOne( null, array( 'settingsname_name' => $settingsNameInfo['settingsname_name'] ) ) ;
+				$data = $settingsNameInfo + $settingsInfo;
 			}
 /* 				$settingsName = new Application_Settings_SettingsName();
 				$test = $settingsName->select();
@@ -80,6 +83,10 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 //			self::v( $_REQUEST['settingsname_name'] );
 	//		self::v( self::getSettings( $_REQUEST['settingsname_name'] ) );
 		//	exit();
+	//	var_export( $settings->select() );
+//		var_export( $settingsInfo );
+//		var_export( $settingsNameInfo );
+//		var_export( $data );
 			$this->createForm( 'Save', 'Edit ' . @$data['settingsname_name'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 		//		self::v( $data );
@@ -91,13 +98,31 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 					//		self::v( $this->getIdentifierData() ); 
 			$table = Application_Settings::getInstance();
 			$previousData = $table->select( null, $this->getIdentifier() );
-	//		self::v( $previousData ); 
+	//		self::v( $this->getIdentifier() ); 
+		//	self::v( $previousData ); 
+			if( count( $previousData ) > 1 )
+			{
+				foreach( $previousData as $key => $each )
+				{
+					if( ! $key )
+					{
+						//	skip one, delete the rest
+						continue;
+
+					}
+			//		var_export( $each['settings_id'] );
+			// 		var_export( $each );
+					$table->delete( array( 'settings_id' => $each['settings_id'] ) );
+				}
+			}
 			if( $previousData )
 			{
 				if( ! $table->update( $values, $this->getIdentifier() ) ){ return false; }
 			}
 			else
 			{
+	//		self::v( $previousData ); 
+	//		self::v( $this->getIdentifier() ); 
 				$values = array_merge( $values, $this->getIdentifier() );
 				if( ! $table->insert( $values ) ){ return false; }  
 			}

@@ -52,6 +52,7 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
 	public function createForm( $submitValue, $legend = null, Array $values = null )
     {
     //    $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
+	//	var_export( $values );
 		$settings = unserialize( @$values['settings'] );
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;

@@ -345,11 +345,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
 			if( @in_array( 'preserve_content', $object[$optionsName] ) )
 			{
-				$html .= '<div data-parameter_name="editable" title="The content has been locked from editing...">';
+				$html .= '<div data-pc-preserve-content="1" class="preserved_content_view pc_html_editor" data-parameter_name="editable" title="The content has been locked from editing...">';
 			}
 			else
 			{
-				$html .= '<div style=" cursor: text;" data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor" onDblClick="replaceDiv( this );">';
+				$html .= '<div style=" cursor: text;" data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor pc_html_editor" onDblClick="replaceDiv( this );">';
 			}
 			
 			
@@ -393,11 +393,15 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 					{
 						// create textarea
 						var e = trigger.parentNode.parentNode.getElementsByTagName( \'textarea\'); 
+					//	alert( e );
+					//	alert( trigger.parentNode.parentNode.innerHTML );
 					//	if( e.length )
 						{
 							var c = false;
 							for( var b = 0; b < e.length; b++ )
 							{ 
+					//			alert( e[b].getAttribute( \'data-parameter_name\' ) );
+					//			alert( e[b].style.display );
 								if( e[b].name == \'' . __CLASS__ . '_code_editor\' )
 								{
 									var c = e[b];  
@@ -416,17 +420,48 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 									e[b].parentNode.insertBefore( f, e[b] ); 
 									var c = e[b];
 								}
+								else if( e[b].getAttribute( \'data-parameter_name\' ) == \'preserved_content\' )
+								{
+									//	saving as codes makes us not have the ckeditor again
+									var xx = e[b];
+								}
 							}
 						}
+						var a = trigger.parentNode.parentNode.getElementsByClassName( \'ckeditor\'); 
+				//		alert(a.length);
+				//		alert(c);
+						if( ! c && ! a.length )
+						{
+							//	preserved content era
+							var xy = trigger.parentNode.parentNode.getElementsByClassName( \'preserved_content_view\')[0];
+						//	alert(xy);
+						//	alert(xy.innerHTML);
+							switch( xx.style.display )
+							{
+								case "none":
+									xy.style.display = "none";
+									xx.style.width = "100%";
+									xx.style.display = "block";
+									xx.focus();
+								break;
+								default:
+									xy.innerHTML = xx.value;
+									xy.style.display = "";
+									xx.style.display = "none";
+								break;
+
+							}
+							return true;
+						}
 						if( ! c )
-						{						
+						{
+
 								//	saving this is causing conflicts, so new textarea for each request
 								var c = document.createElement( \'textarea\' ); 
 								c.name = \'' . __CLASS__ . '_code_editor\'; 
 								c.rows = 5; 
 								c.setAttribute( \'style\', \'display:block; width:100%;\' ); 
 						}
-						var a = trigger.parentNode.parentNode.getElementsByClassName( \'ckeditor\'); 
 						for( var b = 0; b < a.length; b++ )
 						{  
 							if( trigger.innerHTML == \'WYSIWYG\' )
@@ -497,14 +532,9 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * @return 
      */
     public static function getStatusBarLinks( $object )
-    {
-/* 		$links = array
-		(
-			'<a class="title_button" title="Switch the editing mode" name="" href="javascript:;" onclick="divToCodeEditor( this );">Code View</a>'
-		);
- */	
+    {	
 		$optionsName = 'text_widget_options';
-		if( ! @in_array( 'preserve_content', $object[$optionsName] ) )
+	//	if( ! @in_array( 'preserve_content', $object[$optionsName] ) )
 		{
 			return '<a class="title_button" title="Switch the editing mode" name="" href="javascript:;" onclick="divToCodeEditor( this );return true;">' . ( isset( $object['codes'] ) ? 'WYSIWYG' : 'Code View' ) . '</a>';
 		}

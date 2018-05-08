@@ -139,10 +139,10 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		//	if( ! $this->updateDb( $values ) ){ return false; }
 		
 			//	Save to table
-			if( $data['form_options'] && in_array( 'database', $data['form_options'] ) )
+	//		if( $data['form_options'] && in_array( 'database', $data['form_options'] ) )
 			{
 				$table = Ayoola_Form_Table_Data::getInstance();
-				$infoToInsert = $data + array( 'form_data' => $values );
+				$infoToInsert = array( 'form_name' => $data['form_name'], 'form_data' => $values );
 			//		var_export( $table->select() );
 		//		var_export( $infoToInsert );
 				$table->insert( $infoToInsert );
