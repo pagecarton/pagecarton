@@ -50,6 +50,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 			$rows = $this->query( 'SELECT', null, $where, array( 'filename' => $filename ) );
 	//		return $rows;
 			$result = false;
+			if( empty( $update['modified_time'] ) )   
+			{
+				$update['modified_time'] = time();
+			}
 			foreach( $update as $key => $value )
 			{
 				foreach( $rows as $rowId => $row )

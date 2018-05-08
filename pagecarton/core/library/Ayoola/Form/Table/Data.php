@@ -33,10 +33,11 @@ class Ayoola_Form_Table_Data extends Ayoola_Dbase_Table_Abstract_Xml
      *
      * @param int
      */
-    protected $_tableVersion = '0.11';      
+    protected $_tableVersion = '0.12';      
 
 	protected $_dataTypes = array
 	( 
+		'user_id' => 'INPUTTEXT',
 		'form_name' => 'INPUTTEXT',
 		'form_data' => 'JSON',
 	);

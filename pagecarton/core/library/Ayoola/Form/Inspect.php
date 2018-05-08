@@ -81,8 +81,8 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 				'
 		//			var_export( $values );
 					$time = $values["creation_time"];
-					$values = $values["form_data"];
-					$values["creation_time"] = $time;
+					$values = $values["form_data"] + $values;
+				//	$values["creation_time"] = $time;
 				//	$key = $values["username"];
 				'
 			); 
@@ -120,6 +120,9 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 				$listColumn[$each] = array( 'value' => $value, 'field' => $data['element_name'][$key] ? : $each );
 			}
 			$listColumn['creation_time'] = array( 'value' => '%FIELD%', 'filter' => 'Ayoola_Filter_Time' );
+			$listColumn['  '] = array( 'value' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?data_id=%FIELD%&form_name=' . $data['form_name'] . '">update</a>', 'field' => 'data_id' );  
+			$listColumn[' '] = array( 'value' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Table_Delete/?data_id=%FIELD%&form_name=' . $data['form_name'] . '">X</a>', 'field' => 'data_id' );  
+	//		var_export( $listColumn );
 			
 			$list->createList
 			(

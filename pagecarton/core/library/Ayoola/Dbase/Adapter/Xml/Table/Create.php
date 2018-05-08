@@ -63,6 +63,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Create extends Ayoola_Dbase_Adapter_Xml_Tab
 		{ 
 			$dataTypes['creation_time'] = 'INPUTTEXT'; 
 		}
+		if( empty( $dataTypes['modified_time'] ) )  
+		{ 
+			$dataTypes['modified_time'] = 'INPUTTEXT'; 
+		}
 		
 		//	Refresh Xml Memory to start a new Document
 		require_once 'Ayoola/Xml.php';
@@ -70,6 +74,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Create extends Ayoola_Dbase_Adapter_Xml_Tab
 		$documentNode = $this->getXml()->createElement( self::TAGNAME_DOCUMENT_ELEMENT );
 		$documentNode->setAttribute( 'table_name', $this->getTableName() );
 		$documentNode->setAttribute( 'creation_time', time() );
+		$documentNode->setAttribute( 'modified_time', time() );
 		$documentNode->setAttribute( 'table_version', @$tableInfo['table_version'] );
 		$documentNode->setAttribute( 'module_version', @$tableInfo['module_version'] );
 		$documentNode->setAttribute( 'table_class', @$tableInfo['table_class'] );

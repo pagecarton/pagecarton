@@ -97,12 +97,16 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				return false;
 			//	self::setIdentifierData( $data );
 			}
-	//	if( empty( $values['form_name'] ) )
-		{
-	//		return false;
-		}
+			$previousData = null;
+			if( ! empty( $_REQUEST['data_id'] ) && ( self::hasPriviledge() || $_REQUEST['data_id'] == Ayoola_Application::getUserInfo( 'user_id' ) ) )
+			{
+				$previousData = Ayoola_Form_Table_Data::getInstance()->selectOne( null, array( 'data_id' => $_REQUEST['data_id'] ) );
+		//		var_export( $_REQUEST['data_id'] );
+			//	var_export( $previousData );
+				$previousData = $previousData['form_data'];
+			}
 		//	var_export( $data );
-			$this->createForm( 'Continue...' );          
+			$this->createForm( 'Continue...', null, $previousData );          
 			$this->setViewContent( '', true );
 			
 			//	We show form information by default
@@ -142,10 +146,17 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 	//		if( $data['form_options'] && in_array( 'database', $data['form_options'] ) )
 			{
 				$table = Ayoola_Form_Table_Data::getInstance();
-				$infoToInsert = array( 'form_name' => $data['form_name'], 'form_data' => $values );
+				$infoToInsert = array( 'form_name' => $data['form_name'], 'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 'form_data' => $values );
 			//		var_export( $table->select() );
 		//		var_export( $infoToInsert );
-				$table->insert( $infoToInsert );
+				if( $previousData )
+				{
+					$table->update( $infoToInsert, array( 'data_id' => $_REQUEST['data_id'] ) );
+				}
+				else
+				{
+					$table->insert( $infoToInsert );
+				}
 			}     
 			
 	//		var_export( $data );
