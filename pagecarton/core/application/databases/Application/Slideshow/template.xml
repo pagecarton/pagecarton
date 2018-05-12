@@ -112,11 +112,16 @@
     <TABLE_ROW ROW_ID="4">
       <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Slick]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[Slick]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;div title=&quot;{{{image_title}}} - {{{image_description}}}&quot; class=&quot;boxednews centerednews pc-bg-color&quot;&gt;
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;div title=&quot;{{{image_title}}} - {{{image_description}}}&quot; &gt;
 	&lt;img src=&quot;{{{slideshow_image}}}&quot; alt=&quot;&quot; &gt;
-	&lt;h3&gt;&lt;a href=&quot;{{{image_link}}}&quot; &gt;{{{image_title}}}&lt;/a&gt;&lt;/h3&gt;
+	&lt;div class=&quot; pc-well pc-bg-color&quot; style=&quot;&quot; &gt;
+	&lt;div class=&quot;&quot; style=&quot; height:5em; overflow:hidden;&quot; &gt; 
+	&lt;h3&gt;
+  &lt;a href=&quot;{{{image_link}}}&quot; &gt;{{{image_title}}}&lt;/a&gt;
+  &lt;/h3&gt;
 	&lt;p&gt;{{{image_description}}} &lt;a href=&quot;{{{image_link}}}&quot; &gt;...&lt;/a&gt; &lt;/p&gt;
-	
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;css&quot;,&quot;javascript&quot;,&quot;padding&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;div class=&quot;slick_{{{template_instance_count}}}&quot;&gt;]]></TABLE_FIELD>
