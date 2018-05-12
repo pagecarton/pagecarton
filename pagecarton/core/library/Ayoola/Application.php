@@ -91,6 +91,13 @@ class Ayoola_Application
 	protected static $_domainName;
 	
     /**
+     * Site Configuration
+     * 
+     * @var array 
+     */
+	protected static $_conf = array();
+	
+    /**
      * Application mode e.g. document/page
      * 
      * @var string 
@@ -376,7 +383,20 @@ class Ayoola_Application
 		//		var_export( $oldDomainDir );
 				//	we need to change this to main dir
 				$domainDir = Application_Domain_Abstract::getSubDomainDirectory( 'default' );
-		//		var_export( $domainDir );  
+				$data['domain_settings']['site_configuraton'] = array();
+				$configurationFile = $domainDir . DS .  'pagecarton.json';
+				if( file_exists( $configurationFile ) )
+				{
+					if( $conf = file_get_contents( $configurationFile ) )
+					{
+						if( $conf = json_decode( $conf, true ) )
+						{
+							$data['domain_settings']['site_configuraton'] = $conf;
+						}
+					}
+					
+				}
+						//		var_export( $domainDir );  
 				if( is_dir( $oldDomainDir ) )  
 				{
 					if( ! is_dir( $domainDir ) )
@@ -414,22 +434,11 @@ class Ayoola_Application
 				}
 				else
 				{
-					$configurationFile = $domainDir . DS .  'pagecarton.json';
-					if( file_exists( $configurationFile ) )
+					if( ! empty( $data['domain_settings']['site_configuraton']['ignore_this_directory'] ) )
 					{
-						if( $conf = file_get_contents( $configurationFile ) )
-						{
-							if( $conf = json_decode( $conf, true ) )
-							{
-								if( $conf['ignore_this_directory'] )
-								{
-									break;
-								}
-							}
-						}
-
-						//	exit( $domainDir);
+						break;
 					}
+					//	exit( $domainDir);
 				//	For backward compatibility, the directory must be "consciously" set
 				//	var_export( __LINE__ );
 					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = str_replace( '/', DS, $domainDir );  
@@ -664,6 +673,16 @@ class Ayoola_Application
 	//	var_export( microtime( true ) - Ayoola_Application::$_runtimeSetting['start_time'] );
 		
 	//	var_export( memory_get_usage ( true ) . '<br />' );
+
+	//	run cron
+		self::$_conf = self::getDomainSettings( 'site_configuraton' );
+		
+		if( empty( self::$_conf['disable_auto_cron'] ) )
+		{
+			$result = PageCarton_Cron_Run::viewInLine();
+		//	var_export( $result );
+		}
+		
 		self::display();
 	//	var_export( microtime( true ) - Ayoola_Application::$_runtimeSetting['start_time'] );
 	//	exit();

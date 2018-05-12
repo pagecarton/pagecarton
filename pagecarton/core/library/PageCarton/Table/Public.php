@@ -17,7 +17,7 @@
  */
 
 
-abstract class PageCarton_Table_Public extends PageCarton_Table
+abstract class PageCarton_Table_Public extends Ayoola_Dbase_Table_Abstract_Xml_Public
 {
 
     /**

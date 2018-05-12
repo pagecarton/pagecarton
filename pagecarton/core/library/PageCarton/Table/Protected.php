@@ -17,7 +17,7 @@
  */
 
 
-abstract class PageCarton_Table_Protected extends PageCarton_Table
+abstract class PageCarton_Table_Protected extends Ayoola_Dbase_Table_Abstract_Xml_Protected
 {
 
     /**
