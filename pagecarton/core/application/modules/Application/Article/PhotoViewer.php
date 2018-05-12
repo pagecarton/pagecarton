@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageCarton Content Management System
  *
@@ -54,21 +55,88 @@ class Application_Article_PhotoViewer extends Application_Article_Abstract
 /*				header( 'Location: https://placeholdit.imgix.net/~text?txtsize=200&txt=No Photo&w=' . $maxWith . '&h=' . $maxHeight . '' );
 				exit( 'die' );
 */			}
-			if( empty( $data['document_url_base64'] ) )
+	//		if( empty( $data['document_url_base64'] ) )
+			
+		//	self::v( $data['document_url_base64'] );
+	//		exit();
+			if( empty( $data['document_url'] ) && empty( $data['document_url_base64'] ) )
 			{
-				if( empty( $data['document_url'] ) )
+				
+			//	header( 'Location: https://placeholdit.imgix.net/~text?txtsize=200&txt=No Photo&w=' . $maxWith . '&h=' . $maxHeight . '' );
+		//		exit( 'die' );
+				$data['document_url'] = '/img/placeholder-image.jpg';
+			}
+			elseif( ! empty( $data['document_url_base64'] ) )
+			{
+				$result = self::splitBase64Data( $data['document_url_base64'] );
+			//	var_export( $result );
+
+			//	exit();
+				
+				//	https://chrisjean.com/generating-mime-type-in-php-is-not-magic/
+				if ( function_exists( 'finfo_open' ) && function_exists( 'finfo_file' ) && function_exists( 'finfo_close' ) ) 
 				{
-				//	header( 'Location: https://placeholdit.imgix.net/~text?txtsize=200&txt=No Photo&w=' . $maxWith . '&h=' . $maxHeight . '' );
-			//		exit( 'die' );
-					$data['document_url'] = '/img/placeholder-image.jpg';
+					$f = finfo_open();
+					$type = finfo_buffer( $f, $result['data'], FILEINFO_MIME_TYPE );
 				}
+				elseif ( function_exists( 'getimagesizefromstring' ) ) 
+				{
+					$fileInfo = getimagesizefromstring( $result['data'] );
+					$type = $fileInfo['mime'];
+				}
+				//	No need to support < php 5.3
+	/* 			elseif ( function_exists( 'mime_content_type' ) ) 
+				{
+					
+					tempnam()
+					$type = mime_content_type( $result['data'] );
+				}
+	*/			
+			//	var_export( $type );
+			//	var_export( $result );
+				//	Setting the default to my screensize
+				if( ! in_array( $type, array( 'image/gif', 'image/jpeg', 'image/png', ) ) )
+				{
+				//	exit()
+					header( 'Location: https://placeholdit.imgix.net/~text?txtsize=200&txt=' . $data['article_title'] . '&w=' . $maxWith . '&h=' . $maxHeight . '' );
+					exit( 'die' );
+				}
+		//		var_export( base64_decode( $data['document_url_base64'] ) );
+			//	exit();
+				if( $xX = base64_decode( $data['document_url_base64'] ) )
+				{
+					$path = tempnam( sys_get_temp_dir(), __CLASS__ );
+					switch( strtolower( $type ) ) 
+					{
+						case 'image/gif' :
+							$path .= '.gif';
+						break;
+						case 'image/jpeg':
+							$path .= '.jpg';
+						break;
+						case 'image/png':
+							$path .= '.png';
+						break;
+					}			//		var_export( $_REQUEST['document_time'] );
+					header( 'Content-Type: ' . $type );
+
+					file_put_contents( $path, $xX ); 
+		//			var_export( array( 'path' => $path ) );  
+					Application_IconViewer::viewInLine( array( 'path' => $path ) );
+					exit();
+				}
+			}
+
 			//	var_export( $data['document_url'] );
+			if( ! empty( $data['document_url'] ) )
+			{
 				Application_IconViewer::viewInLine( array( 'url' => $data['document_url'] ) );
                 exit();
+			}
 
 	//			$data['document_url_base64'] = base64_encode( file_get_contents( Ayoola_loader::checkFile( 'documents' . $data['document_url'], array( 'prioritize_my_copy' => true, ) ) ) );
 			//	var_export( Ayoola_loader::checkFile( 'documents' . $data['document_url'], array( 'prioritize_my_copy' => true, ) ) );
-			}
+			
 			$result = self::splitBase64Data( $data['document_url_base64'] );
 		//	var_export( $result );
 

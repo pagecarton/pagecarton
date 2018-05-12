@@ -41,95 +41,103 @@ class Application_IconViewer extends PageCarton_Widget
     {    
 		try
 		{ 
-            $url = $this->getParameter( 'url' ) ? : @$_REQUEST['url'];
+                @$maxWith = ( $this->getParameter( 'max_width' ) ? : @intval( $_REQUEST['max_width'] ) ) ? : 600;
+                @$maxHeight = ( $this->getParameter( 'max_height' ) ? : @intval( $_REQUEST['max_height'] ) ) ? : 600; 
 
-            if( empty( $url ) || ! Ayoola_Loader::checkFile( '/documents' . $url ) )
+            if( ! $path = $this->getParameter( 'path' ) OR ! is_file( $path ) )
             {
-                
-       //         Ayoola_Application::view();
+       //         var_export( $path );
+      //          var_export( $path );
+       //         var_export( $this->getParameter( 'path' ) );
       //          exit();
-      //          return false;
-            }
-            //  Code that runs the widget goes here...
-            $realExt = strtolower( array_pop( explode( '.', $url ) ) );
-            $ext = @$_REQUEST['extension'] ? : $realExt;
-            if( $realExt == $url )
-            {
-       //         $ext = null;
-            }
-            switch( $ext )
-            {
-                case 'jpg':
-                case 'jpeg':
-                case 'gif':
-        //        case 'ico':
-       //         case 'bmp':
-                case 'png':
-                    //  The url is same
-                    $url = $url ? : '/img/placeholder-image.jpg';
-                break;
-                case 'ico':
-                    //  The url is same
-                    $url = $url ? : '/img/placeholder-image.jpg';
-                    $noImageManipulation = true;
-                break;
-                case 'tar':
-                case 'gz':
-                case 'zip':
-                    $url = '/img/file-zip-icon.png';
-                break;
-                case 'pdf':
-                    $url = '/img/pdf-icon.png';
-                break;
-                case 'txt':
-                case 'css':
-                case 'js':
-                    $url = '/img/file-text-icon.png';
-                break;
-                case 'doc':
-                case 'docx':
-                case 'pptx':
-                case 'ppt':
-                case 'xls':
-                case 'xlsx':
-                    $url = '/img/document-icon.png';
-                break;
-                case 'mp3':
-                case 'wma':
-                case 'm4a':
-                case 'aac':
-                    $url = '/img/audio-icon.png';
-                break;
-                case 'mp4':
-                case 'flv':
-                case 'avi':
-                    $url = '/img/video-icon.png';
-                break;
-                default:
-                    $url = '/img/file-icon.png';
-                break;
-            }
-            $url = $url ? : '/img/file-icon.png';
-  //          var_export( $realExt );
-  //          var_export( $url );
-  //          exit();
-    //        header( 'Location: ' . $url );
-            @$maxWith = ( $this->getParameter( 'max_width' ) ? : @intval( $_REQUEST['max_width'] ) ) ? : 600;
-            @$maxHeight = ( $this->getParameter( 'max_height' ) ? : @intval( $_REQUEST['max_height'] ) ) ? : 600; 
 
-            if( ! $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
-            {  
-                $url = '/img/error-icon.png';
+                $url = $this->getParameter( 'url' ) ? : @$_REQUEST['url'];
+
+                if( empty( $url ) || ! Ayoola_Loader::checkFile( '/documents' . $url ) )
+                {
+                    
+        //         Ayoola_Application::view();
+        //          exit();
+        //          return false;
+                }
+                //  Code that runs the widget goes here...
+                $realExt = strtolower( array_pop( explode( '.', $url ) ) );
+                $ext = @$_REQUEST['extension'] ? : $realExt;
+                if( $realExt == $url )
+                {
+        //         $ext = null;
+                }
+                switch( $ext )
+                {
+                    case 'jpg':
+                    case 'jpeg':
+                    case 'gif':
+            //        case 'ico':
+        //         case 'bmp':
+                    case 'png':
+                        //  The url is same
+                        $url = $url ? : '/img/placeholder-image.jpg';
+                    break;
+                    case 'ico':
+                        //  The url is same
+                        $url = $url ? : '/img/placeholder-image.jpg';
+                        $noImageManipulation = true;
+                    break;
+                    case 'tar':
+                    case 'gz':
+                    case 'zip':
+                        $url = '/img/file-zip-icon.png';
+                    break;
+                    case 'pdf':
+                        $url = '/img/pdf-icon.png';
+                    break;
+                    case 'txt':
+                    case 'css':
+                    case 'js':
+                        $url = '/img/file-text-icon.png';
+                    break;
+                    case 'doc':
+                    case 'docx':
+                    case 'pptx':
+                    case 'ppt':
+                    case 'xls':
+                    case 'xlsx':
+                        $url = '/img/document-icon.png';
+                    break;
+                    case 'mp3':
+                    case 'wma':
+                    case 'm4a':
+                    case 'aac':
+                        $url = '/img/audio-icon.png';
+                    break;
+                    case 'mp4':
+                    case 'flv':
+                    case 'avi':
+                        $url = '/img/video-icon.png';
+                    break;
+                    default:
+                        $url = '/img/file-icon.png';
+                    break;
+                }
+                $url = $url ? : '/img/file-icon.png';
+    //          var_export( $realExt );
+    //          var_export( $url );
+    //          exit();
+        //        header( 'Location: ' . $url );
                 if( ! $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
                 {  
-                    $errorMessage = '<p class="badnews">Document does not  exist</p>';
-                //    var_export( $path );
-                    echo $errorMessage;
-                //  $this->setViewContent( $errorMessage, true );              
-                //    return false;
+                    $url = '/img/error-icon.png';
+                    if( ! $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
+                    {  
+                        $errorMessage = '<p class="badnews">Document does not  exist</p>';
+                    //    var_export( $path );
+                        echo $errorMessage;
+                    //  $this->setViewContent( $errorMessage, true );              
+                    //    return false;
+                    }
                 }
             }
-       //     var_export( $path );
+      //    var_export( $path );
       //      exit();
 			
             //  cache me
@@ -176,6 +184,10 @@ class Application_IconViewer extends PageCarton_Widget
           //      header( 'Content-Length: ' . filesize( $path ) );
                 
             }
+         //      var_export( $maxWith );  
+          //     var_export( $maxHeight );
+         //      var_export( $path );
+         //      exit();
             if( $path AND ( $maxHeight || $maxWith ) AND empty( $noImageManipulation ) AND function_exists( 'imagecreatetruecolor' ) )
             {
          //      var_export( $maxWith );  
@@ -186,9 +198,17 @@ class Application_IconViewer extends PageCarton_Widget
                 exit();
                 //	default
             }
-            $doc = new Ayoola_Doc( array( 'option' => $url ) );
-            $doc->view();
-            exit();
+            elseif( $url )
+            {
+                $doc = new Ayoola_Doc( array( 'option' => $url ) );
+                $doc->view();
+                exit();
+            }
+            elseif( $path )
+            {
+                readfile( $path );
+                exit();
+            }
              // end of widget process
           
 		}  

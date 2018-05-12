@@ -112,8 +112,8 @@
     <TABLE_ROW ROW_ID="4">
       <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Slick]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[Slick]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;div title=&quot;{{{image_title}}} - {{{image_description}}}&quot; &gt;
-	&lt;img src=&quot;{{{slideshow_image}}}&quot; alt=&quot;&quot; &gt;
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;div title=&quot;{{{image_title}}}&quot; &gt;
+  &lt;a href=&quot;{{{image_link}}}&quot; &gt;	&lt;img src=&quot;{{{slideshow_image}}}&quot; alt=&quot;&quot; &gt;&lt;/a&gt;
 	&lt;div class=&quot; pc-well pc-bg-color&quot; style=&quot;&quot; &gt;
 	&lt;div class=&quot;&quot; style=&quot; height:5em; overflow:hidden;&quot; &gt; 
 	&lt;h3&gt;

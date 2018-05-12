@@ -149,17 +149,6 @@ class Application_Article_Creator extends Application_Article_Abstract
 			}
 			array_unique( $values['category_name'] );
 			
-			
-			//	compatibility
-/* 			$values['category_id'] = $values['category_id'] ? : array();
-			if( ! @in_array( $category['category_id'], $values['category_id'] ) )
-			{
-				@array_push( $values['category_id'], $category['category_id'] );
-			}
-			array_unique( $values['category_id'] );
- */			
-			
-			
 			if( is_array( static::$_forcedValues ) )
 			{
 				$values = array_merge( $values, static::$_forcedValues );
