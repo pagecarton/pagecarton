@@ -41,6 +41,7 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 			$data['backup_creation_date'] = $filter->filter( $data['backup_creation_date'] );
 			$this->createConfirmationForm( 'Restore', 'Restore application to the way it was ' . $data['backup_creation_date'] . ' using "' . $data['backup_name'] . '"' );
 			$this->setViewContent( $this->getForm()->view(), true );		
+			Application_Cache_Clear::viewInLine();
 			if( $this->restore() ){ $this->setViewContent( 'Back up restored successfully.', true ); }
 	//		if( $this->restore() ){ null; }
 		}
