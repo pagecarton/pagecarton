@@ -13,7 +13,13 @@
 
 # Core's dependencies are managed with Composer.
 
+# Ignore IDE and GIT specifics
+
+.git/*
+.*
+
 # Ignore configuration files that may contain sensitive information.
+
 htdocs/*
 www/*
 public_html/*
