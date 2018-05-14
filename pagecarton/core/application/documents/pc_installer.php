@@ -89,6 +89,28 @@
 	//	var_export( $prefix );
 	}
 
+	//	system check
+	$check = array( 
+					'dom_import_simplexml' => 'PHP DOM XML',
+					'curl_version' => 'PHP CURL',
+					'imagegd' => 'PHP GD',
+					'zip_open' => 'PHP ZIP',
+		);
+	foreach( $check as $key => $each )
+	{
+		if( ! function_exists( $key ) )
+		{
+			$badnews .= '<p>An important component is missing on your web server. Please ensure "' . $each . '" library is installed and try again.</p>';   
+		}
+	}
+	if( version_compare( PHP_VERSION, '5.3.0' ) >= 0 ) 
+	{
+	//	echo 'I am at least PHP version 5.3.0, my version: ' . PHP_VERSION . "\n";
+	}
+	else
+	{
+		$badnews .= '<p>PageCarton requires PHP 5.3 or later. You are running version "' . PHP_VERSION .  '". We recommend PHP 7.0 or later.</p>';   
+	}
 	switch( @$_GET['stage'] )
 	{
         case 'start':
