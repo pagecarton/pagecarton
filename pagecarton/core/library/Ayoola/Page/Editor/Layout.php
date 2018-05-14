@@ -428,6 +428,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$pageThemeFileUrl = '/index';
 		}
 		$pageThemeFile = '/layout/' . $theme . '' . $pageThemeFileUrl . '.html';
+
+	//	var_export( $theme );
 		$defaultPageThemeFile = '/layout/' . $theme . '/default' . '.html';
 //		var_export( $pageThemeFile );
 	//	var_export( $page );
@@ -481,13 +483,19 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	now always run this path because we are trying to get lost js and css every time. 
 			//	( empty( $values ) || ! empty( $_REQUEST['pc_load_theme_defaults'] ) )
 			//	AND 
-				$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFile )
-				
-				OR
-				
-				$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $defaultPageThemeFile )
+				stripos( $page['url'], '/layout/' ) !== 0
 
-				 )
+				AND
+
+				(
+
+					$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFile )
+					
+					OR
+					
+					$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $defaultPageThemeFile )
+				)
+		)
 		{  
 			//	We have a page-specific themefile
 			// 	we use it to build the default content
