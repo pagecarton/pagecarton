@@ -80,7 +80,7 @@ class Application_Article_RSS extends Application_Article_Abstract
                 $class = new Application_Article_ShowAll( $where );
                 $class->initOnce();
                 $chunk = $class->getDbData();
-                krsort( $chunk );
+           //     krsort( $chunk );
                 $xml = new Ayoola_Xml();
                 $rss = $xml->createElement( 'rss' );
                 $rss->setAttribute( 'version', '2.0' );
