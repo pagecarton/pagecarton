@@ -124,6 +124,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      * 
      * @var array
      */
+	protected static $_hooks = array();
+	
+    /**
+     * 
+     * 
+     * @var array
+     */
 	protected static $_parameterKeys;
 
     /**
@@ -198,10 +205,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public function __construct( $parameter = null )
     {
-	//	self::v( $parameter );
-	//	Ayoola_Form::v( ( microtime( true ) - Ayoola_Application::getRuntimeSettings( 'start_time' ) ) . '<br />' );
-	//	Ayoola_Form::v( ( get_class( $this ) ) . '<br />' );
-//		$this->timeStart = microtime( true );
+	//	var_export( self::getHooks() );
+		foreach( self::getHooks() as $class )
+		{
+			$class::hook( $this, __FUNCTION__, func_get_args() );
+		}
 		if( ! $parameter )
 		{
 			if( Ayoola_Application::isXmlHttpRequest() || Ayoola_Application::isClassPlayer() ){ return null; }
@@ -210,6 +218,32 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$this->initOnce();
 		static::$_counter++;
     } 
+ 	
+    /**
+     * 
+     * 
+     */
+	public static function getHooks()
+	{ 
+		$class = get_called_class();
+//		var_export( $class );
+		if( null !== static::$_hooks[$class] )
+		{
+			return static::$_hooks[$class];
+		}
+		$hooks = array();
+		if( $all = PageCarton_Hook::getInstance()->select( null, array( 'class_name' => $class ) ) )
+		{
+			foreach( $all as $each )
+			{
+				$hooks[] = $each['hook_class_name'];
+			}
+
+		}
+	//	var_export( $hooks );
+		static::$_hooks[$class] = $hooks;
+		return static::$_hooks[$class];
+	}
  	
     /**
      * 
@@ -1066,6 +1100,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     public function setParameter( array $parameters ) 
 	{
+		foreach( self::getHooks() as $class )
+		{
+			$class::hook( $this, __FUNCTION__, func_get_args() );
+		}
 		self::sanitizeParameters( $parameters );
 		if( isset( $parameters['view'] ) ){ $this->setViewParameter( $parameters['view'] ); }
 		if( isset( $parameters['editable'] ) ){ $this->setViewParameter( $parameters['editable'] ); }
@@ -1140,9 +1178,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			return static::$_objectTitle;
 		}
+		$title = str_ireplace( array( 'Ayoola_', 'PageCarton_', 'Application_', 'Article_', 'Object_', 'Classplayer_', ), '', get_called_class() );  
+		$title = ucwords( implode( ' ', explode( '_', $title ) ) );
+		$title = ucwords( implode( ' ', explode( '-', $title ) ) );
 		
-//		self::$_objectTitle = get_called_class();;
-	//	return self::$_objectTitle;
+		self::$_objectTitle = $title;;
+		return self::$_objectTitle;
 	 }
 	
     /**
@@ -1180,6 +1221,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		//	var_export( $content );
 			//	don't return empty tags
 			return false;
+		}
+		foreach( self::getHooks() as $class )
+		{
+			$class::hook( $this, __FUNCTION__, func_get_args() );
 		}
 		if( null === $this->_viewContent || true === $refresh )
 		{ 
@@ -1321,6 +1366,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//	Ayoola_Form::v( ( $this->timeStart ) . '<br />' );
 	//	Ayoola_Form::v( ( microtime( true ) - $this->timeStart ) . '<br />' );
 	//	Ayoola_Form::v( ( microtime( true ) - Ayoola_Application::getRuntimeSettings( 'start_time' ) ) . '<br />' );
+		foreach( self::getHooks() as $class )
+		{
+			$class::hook( $this, __FUNCTION__ );
+		}
 
 		$this->_playMode = $this->getParameter( 'play_mode' ) ? : $this->_playMode;
 		if( isset( $_SERVER['HTTP_AYOOLA_PLAY_MODE'], $_REQUEST['object_name'] ) && $_REQUEST['object_name'] == get_class( $this ) )
