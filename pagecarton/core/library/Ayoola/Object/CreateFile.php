@@ -81,6 +81,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
  //       $this->setViewContent( $path );
  //      $this->setViewContent( var_export( $values, true ) );
      //   var_export( $path );
+        $otherFiles = array();
         $search = array();
         $search['{date}'] = date('l jS \of F Y h:iA');
         $search['{year}'] = date('Y');
@@ -105,6 +106,15 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
                     $values['datatypes'] = $newDataTypes;
                 }
                 $search["'{datatypes}'"] = var_export( array_combine( $values['fields'], $values['datatypes'] ), true );
+                $search["'table_id'"] = "'" . strtolower( array_shift( explode( '.', basename( $path ) ) ) . '_id' ) . "'";
+
+                //  copy the sample widgets to populate the db table
+                $sampleWidgetsAbstract = $filter->filter( 'PageCarton_Table_Sample_Abstract' );
+        //      $this->setViewContent( $sampleFile );
+                if( $sampleWidgetsAbstract = Ayoola_Loader::checkFile( $sampleWidgetsAbstract ) )
+                {
+                    $otherFiles = Ayoola_Doc::getFiles( dirname( $sampleWidgetsAbstract ) );
+                }  
             break;
             default:
                 $sampleFile = 'PageCarton_Widget_Sample_Blank';
@@ -120,6 +130,37 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
         $content = str_ireplace( array_keys( $search ), array_values( $search ), $content );
         Ayoola_Doc::createDirectory( dirname( $path  ) );
         file_put_contents( $path, $content );
+
+        foreach( $otherFiles as $each )
+        {
+            $content = file_get_contents( $each );
+            $destDir = explode( '.', $path );
+            array_pop( $destDir );
+            $destDir = implode( '.', $destDir );
+            Ayoola_Doc::createDirectory( $destDir );
+            preg_match_all( '|.*field_name.*|', $content, $matches );
+            if( $matches[0] )
+            {
+                foreach( $matches[0] as $fieldRep )
+                {
+                    $newRep = null; 
+                    foreach( $values['fields'] as $key => $fieldName )
+                    {
+                        $newRep .= str_ireplace( 'field_name', $fieldName, $fieldRep );
+                    }
+                    $search[$fieldRep] = $newRep;
+                    
+                }
+            }
+       //     var_export( $search );
+            $search['{filename}'] = basename( $each );
+            $content = str_ireplace( array_keys( $search ), array_values( $search ), $content );
+            $newFileName = $destDir . DS . basename( $each );
+            if( ! is_file( $newFileName ) )
+            {
+              file_put_contents( $newFileName, $content );
+            }
+        }
 
     //    $this->setViewContent( '<textarea>' . $content . '</textarea>' );
         $this->setViewContent( '<h1 class="goodnews">File created successfully</h1>', true ); 
