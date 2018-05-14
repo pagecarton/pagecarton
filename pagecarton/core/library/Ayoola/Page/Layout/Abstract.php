@@ -760,7 +760,9 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		//	load js after the body
 		foreach( $body as $each )   
 		{
+			$each->insertBefore( $xml->createCDATASection( "<?php include_once( LAYOUT_PATH . DS . 'header' . TPL ) ?>" ), $each->firstChild );
 			$each->appendChild( $xml->createCDATASection( "<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>" ) );
+			$each->appendChild( $xml->createCDATASection( "<?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?>" ) );
 		}
 		
 		//	build links
