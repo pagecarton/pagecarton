@@ -126,7 +126,8 @@ class Ayoola_File_Storage extends Ayoola_File
 		$path = $this->getFile()->getPath();
 		Ayoola_Doc::createDirectory( dirname( $path ) );
         //	PageCarton_Widget::v( $path );
-		file_put_contents( $path, '<?php return ' . var_export( $data, true ) . ';' );     
+	//	file_put_contents( $path, '<?php return ' . var_export( $data, true ) . ';' );     
+		file_put_contents( $path, json_encode( $data ) );     
     } 
 	
     /**
@@ -140,26 +141,27 @@ class Ayoola_File_Storage extends Ayoola_File
 		$path = $this->getFile()->getPath();
 		$timeOut = intval( $this->timeOut );
 	//	var_export( $this );
-		if( is_file( $path ) && $timeOut )
+		if( is_file( $path ) )
 		{
-		//	var_export( $timeOut );
-/* 			if( $_GET['x'] )
-			{ 
-				var_export( time() - filectime( $path ) );
-				var_export( '' );
-				var_export( $timeOut );
-				var_export( '' );
-			}
- */			//	Check the time out 
-			if( $timeOut < time() - filectime( $path ) )
-			{
-				unlink( $path );
-			}
+            if( $timeOut )
+            {
+                //	Check the time out 
+                if( $timeOut < time() - filectime( $path ) )
+                {
+                    unlink( $path );
+                }
+            }
+        //	Ayoola_Document::createDirectory( dirname( $path ) );
+        //	$data = include $path;
+            $data = false;
+            if( $content = file_get_contents( $path ) )
+            {
+                $data = json_decode( $content, true );
+            }
+    //        var_export( $data );
+            return $data;
 			
 		}
-	//	Ayoola_Document::createDirectory( dirname( $path ) );
-		$data = @include $path;
-		return $data;
     } 
 	
     /**
