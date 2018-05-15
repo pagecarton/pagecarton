@@ -40,10 +40,6 @@
 	-o-transition: all .2s linear;
 }
 
-body {
-	background: rgb(235, 235, 235);
-	font-family: "Ubuntu Condensed", sans-serif;
-}
 .grid_1_of_4 {
 	margin: 1% 0px 1% 1.6%;
 	float: left;
@@ -56,18 +52,14 @@ body {
 .images_1_of_4 {
 	background: rgb(255, 255, 255);
 	padding: 1.5%;
-	width: 23.6%;
+	width: 20.3%;
 	text-align: center;
 	position: relative;
 }
-:first-child.grid_1_of_4 {
-	margin-left: 0px;
-}
-a {
-	text-decoration: none;
-}
+
 .images_1_of_4 a {
 	display: block;
+	text-decoration: none;
 }
 .price-details {
 	border-top-color: rgb(238, 238, 238);
@@ -79,6 +71,11 @@ a {
 }
 .clear {
 	clear: both;
+}
+.images_1_of_4 h4  {
+	height: 32px;
+	overflow: hidden;
+	 margin-bottom: 5px;
 }
 .images_1_of_4 h4 a {
 	color: rgb(228, 79, 43);
@@ -125,9 +122,6 @@ a {
 .price-details p span.rupees {
 	color: rgb(35, 39, 42);
 	font-size: 22px;
-}
-img {
-	max-width: 100%;
 }
 .images_1_of_4 img {
 	max-width: 100%;
