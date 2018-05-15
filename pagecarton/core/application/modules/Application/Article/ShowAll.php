@@ -293,10 +293,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//			self::v( $postListId  );   
 
 		$storage = self::getObjectStorage( array( 'id' => $postListId, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
+	//	$storage = new Ayoola_Storage( array( 'id' => $postListId, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
 		$storedValues = $storage->retrieve();
 //		self::v( $storage  );   
 
-	//	var_export( $storedValues );
+//		var_export( $storedValues );
 		if( ! empty( $storedValues['parameter'] ) && ! empty( $_GET['pc_post_list_autoload'] ) )
 		{	
 		//	var_export( $storedValues['parameter'] );
@@ -358,6 +359,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}			
 	//
 	
+	//		var_export( $values );
 	//		self::v( $values );
 			
 			//	sort
@@ -689,7 +691,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['document_url'] = $data['document_url']; 
 			$data['document_url_plain'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
 			$data['document_url_uri'] = $data['document_url']; 
-//			if( ! @$data['document_url'] && @$data['article_url'] )
+			if( strpos( @$data['document_url'], ':' ) === false && empty( $data['not_real_post'] ) )
 			{
 				if( $this->getParameter( 'skip_ariticles_without_cover_photo' ) && ! @$data['document_url_base64'] && ( ! Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ? : @$data['display_picture'] ) ) )
 				{
@@ -1589,13 +1591,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	So that each objects can be used for so many purposes.
 		//	E.g. One Class will be used for any object
 	//	var_export( $object );
-		$options = $object['class_name'];
+		$options = get_called_class();
 
 		if( ! Ayoola_Loader::loadClass( $options ) )
 		{
 			return false;
 		}
 	//	var_export( $options );
+//		var_export( get_called_class() );
 		$options = new $options( array( 'no_init' => true ) );
 //		$options = array();
 		$options = (array) $options->getClassOptions();
@@ -1676,6 +1679,18 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$html .= '<a href="javascript:;" style="display:none;" title="' . static::$_editableTitle . '" onclick="this.previousSibling.style.display=\'none\';this.style.display=\'none\';"> hide </a>';
 		}
 		return $html;
+	}
+
+    /**
+     * Returns an array of other classes to get parameter keys from
+     *
+     * @param void
+     * @return array
+     */
+    protected static function getParameterKeysFromTheseOtherClasses( & $parameters )
+    {
+	//	var_export( $parameters['editable'] );
+		return array( __CLASS__, 'Application_Article_Abstract' );
 	}
 
      /**
