@@ -41,13 +41,15 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
 		//	var_export( $values );
+	//		var_export( $this->getParameter( 'path' ) );
+	//		var_export( Ayoola_Loader::checkFile( $this->getParameter( 'path' ) ) );
 			
 			//	Import mode
 	//		if( @$values['upload'] )
-			if( @$values['theme_url'] )
+			if( @$values['theme_url'] || Ayoola_Loader::checkFile( $this->getParameter( 'path' ) ) )
 			{ 				
 				//	let's use url so that it will be possible to put the theme on the server via filemanager
-					if( ! $filename = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $values['theme_url'] ) )
+					if( ! $filename = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $values['theme_url'] ) AND ! $filename = Ayoola_Loader::checkFile( $this->getParameter( 'path' ) ) )
 					{
 						return false;
 					}
@@ -55,6 +57,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					//	http://php.net/manual/en/ziparchive.extractto.php
 					$zip = new ZipArchive;
 					$isZip = $zip->open( $filename );
+			//		var_export( $isZip );
 					if ( $isZip === TRUE ) 
 					{
 					//	$zip->extractTo( $tempDestination );

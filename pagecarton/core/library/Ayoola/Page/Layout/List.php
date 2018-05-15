@@ -143,7 +143,8 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 								array( 
 								//		'Sanitize' => '<span rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Sanitize/\' );" title="Sanitize all pages. Recreate all page templates.">Sanitize Pages </span>',  
 										'Upload' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Creator/layout_type/upload/\', \'' . $this->getObjectName() . '\' );" title="Upload new theme">Upload New Theme</a>',
-										'Browse' => '<a target="_blank" href="http://themes.pagecarton.org" title="Download new theme">Find more themes...</a>',
+										'Browse' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Repository\', \'' . $this->getObjectName() . '\' );" title="Upload new theme">Browse Themes</a>',
+								//		'Browse' => '<a target="_blank" href="http://themes.pagecarton.org" title="Download new theme">Find more themes...</a>',
 										'Creator' => ' ' 
 									) 
 							);
