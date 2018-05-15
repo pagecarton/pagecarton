@@ -205,8 +205,21 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
      */
     protected static function getParameterKeysFromTheseOtherClasses( & $parameters )
     {
-	//	var_export( $parameters['editable'] );
-		return array( $parameters['editable'] );
+		$classes = array();
+		if( Ayoola_Loader::loadClass( $parameters['editable'] ) )
+		{
+			$class = $parameters['editable'];
+		//	var_export( $class );
+			$classes = $class::getParameterKeysFromTheseOtherClasses( $parameters );
+		}
+	//	if( $parameters['editable'] )
+		{
+
+		}
+//		var_export( $classes );
+		$classes[] = $parameters['editable'];
+//		var_export( $classes );
+		return $classes;
 	}
 	
     /**
