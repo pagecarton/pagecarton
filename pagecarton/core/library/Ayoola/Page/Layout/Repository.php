@@ -72,18 +72,63 @@ class Ayoola_Page_Layout_Repository extends Application_Article_ShowAll
 			$this->setViewContent( $class->view(), true );
 	//		if( $this->deleteDb( false ) )
 			{ 
-                
+
             }
         }
         else
         {
+		//	$this->setViewContent( self::getMenu(), true );
             $this->_parameter['pagination'] = true;
             $this->_parameter['no_of_post_to_show'] = 20;
             $this->_parameter['template_name'] = 'ItemsList';
             $this->_parameter['button_value'] = 'Install';
+            $this->_parameter['markup_template_prepend'] = self::getMenu();
             parent::init();
         }
     }		
+    
+    /**
+     * Overides the parent class
+     * 
+     */
+	public static function getMenu()
+    {
+		$storage = self::getObjectStorage( array( 'id' => 'menu=', 'device' => 'File', 'time_out' => 446000, ) );
+		if( ! $menu = $storage->retrieve() )
+        {
+            $feed = 'https://themes.pagecarton.org/tools/classplayer/get/name/Application_Category_ShowAll?pc_widget_output_method=JSON';
+            $feed = self::fetchLink( $feed, array( 'time_out' => 28800, 'connect_time_out' => 28800, ) );
+            $allFeed = json_decode( $feed, true );
+          //     var_export( $allFeed );
+            $data = array();
+            foreach( $allFeed as $each )
+            {
+          //     var_export( $each );
+                $data[] = array(
+                    'url' => '?category=' . $each['category_name'] . '',
+                    'option_name' => $each['article_title'],
+                    'title' => $each['article_title'],
+                   
+                    'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),
+                );
+            }
+          //     var_export( $data );
+
+            $menu = Ayoola_Menu::viewInLine( array(
+                                    'raw-options' => $data,
+                                     'template_name' => 'HorizontalGrayish',
+                               //     'raw-options' => $data,
+            ) );            
+        //    $storage->store( $menu );
+        }
+//       var_export( $data );
+        
+		return $menu;
+      //  self::v( $allFeed['channel']->item[0] );
+     //   self::v( $allFeed['channel']->item[1] );
+
+	}
+    
     /**
      * Overides the parent class
      * 
@@ -95,11 +140,11 @@ class Ayoola_Page_Layout_Repository extends Application_Article_ShowAll
 			$this->_dbData = $data;
 			return true;
 		}
-		$storage = self::getObjectStorage( array( 'id' => 'cdcffw', 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
+		$storage = self::getObjectStorage( array( 'id' => 'cdcffw' . @$_GET['category'], 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
 		if( ! $data = $storage->retrieve() )
         {
-            $feed = 'https://themes.pagecarton.org/widgets/Application_Article_RSS';
-            $feed = self::fetchLink( $feed );
+            $feed = 'https://themes.pagecarton.org/widgets/Application_Article_RSS?category=' . @$_GET['category'];
+            $feed = self::fetchLink( $feed, array( 'time_out' => 28800, 'connect_time_out' => 28800, ) );
             $allFeed = (array) simplexml_load_string($feed);
         //  self::v($feed_to_array);
     //     $allFeed['channel'] = (array) $allFeed['channel'];
