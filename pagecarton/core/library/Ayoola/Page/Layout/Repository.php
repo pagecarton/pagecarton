@@ -42,7 +42,7 @@ class Ayoola_Page_Layout_Repository extends Application_Article_ShowAll
     {
 		if( ! empty( $_GET['install'] ) )
 		{
-			$this->createConfirmationForm( 'Download theme', 'Download and Install Theme and its Components' );
+			$this->createConfirmationForm( 'Install theme', 'Download and Install Theme and its Components' );
 			$this->setViewContent( $this->getForm()->view(), true);
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
             $link = 'https://themes.pagecarton.org/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $_GET['install'] . '&auto_download=1';
@@ -72,10 +72,10 @@ class Ayoola_Page_Layout_Repository extends Application_Article_ShowAll
 			$this->setViewContent( $class->view(), true );
 	//		if( $this->deleteDb( false ) )
 			{ 
-
+                
             }
         }
-   //   else
+        else
         {
             $this->_parameter['pagination'] = true;
             $this->_parameter['no_of_post_to_show'] = 20;
@@ -95,25 +95,30 @@ class Ayoola_Page_Layout_Repository extends Application_Article_ShowAll
 			$this->_dbData = $data;
 			return true;
 		}
-        $feed = 'https://themes.pagecarton.org/widgets/Application_Article_RSS';
-        $feed = self::fetchLink( $feed );
-        $allFeed = (array) simplexml_load_string($feed);
-      //  self::v($feed_to_array);
-        $items = $allFeed['channel']['item'];
-   //     $allFeed['channel'] = (array) $allFeed['channel'];
-        foreach( $allFeed['channel']->item as  $each )
+		$storage = self::getObjectStorage( array( 'id' => 'cdcffw', 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
+		if( ! $data = $storage->retrieve() )
         {
-            $each = (array) $each;
-            $data[] = array(
-                'article_url' => '?layout_label=' . $each['title'] . '&layout_type=upload&install=' . $each['guid'],
-             //   'article_url' => $each['link'],
-                'guid' => $each['guid'],
-                'article_title' => $each['title'],
-                'article_description' => $each['description'],
-                'article_creation_date' => strtotime( $each['pubDate'] ),
-                'article_modified_date' => strtotime( $each['pubDate'] ),
-            );
-     //       var_export( $each );
+            $feed = 'https://themes.pagecarton.org/widgets/Application_Article_RSS';
+            $feed = self::fetchLink( $feed );
+            $allFeed = (array) simplexml_load_string($feed);
+        //  self::v($feed_to_array);
+    //     $allFeed['channel'] = (array) $allFeed['channel'];
+            $data = array();
+            foreach( $allFeed['channel']->item as  $each )
+            {
+                $each = (array) $each;
+                $data[] = array(
+                    'article_url' => '?layout_label=' . $each['title'] . '&layout_type=upload&install=' . $each['guid'],
+                //   'article_url' => $each['link'],
+                    'guid' => $each['guid'],
+                    'article_title' => $each['title'],
+                    'article_description' => $each['description'],
+                    'article_creation_date' => strtotime( $each['pubDate'] ),
+                    'article_modified_date' => strtotime( $each['pubDate'] ),
+                );
+        //       var_export( $each );
+            }
+            $storage->store( $data );
         }
 //       var_export( $data );
         

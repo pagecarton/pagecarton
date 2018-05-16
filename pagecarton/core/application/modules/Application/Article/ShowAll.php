@@ -652,7 +652,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( empty( $_GET['pc_post_list_autoload'] ) )
 		{
 			$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '">' . $pagination . '</div>';
-			$this->_objectTemplateValues['pagination'] = $this->_objectData['pagination'] = $data['pagination'] = $pagination;	
+			$this->_objectTemplateValues['pagination'] = $data['pagination'] = $pagination;	
 		}	
 			//		self::v( $values );
 		$values = $values ? array_unique( $values, SORT_REGULAR ) : array(); 
@@ -708,7 +708,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			//	Can't be lowercase because of auto create link
 			$url = $data['article_url'];
-			$data += is_array( $this->_objectTemplateValues ) ? $this->_objectTemplateValues : array();
+
+			//	error making last post to be part of present one
+	//		$data += is_array( $this->_objectTemplateValues ) ? $this->_objectTemplateValues : array();
 			if( $this->getParameter( 'length_of_description' ) )
 			{
 				if( ! function_exists( 'mb_strimwidth' ) )

@@ -25,8 +25,15 @@ require_once 'Application/Category/Abstract.php';
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Application_Category_ShowAll extends Application_Category_Abstract
+class Application_Category_ShowAll extends Application_Article_ShowAll
 {
+	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Site Categories'; 
 
     /**
      * Access level for player
@@ -46,9 +53,10 @@ class Application_Category_ShowAll extends Application_Category_Abstract
      * The method does the whole Class Process
      * 
      */
-	protected function init()
+	public function setDbData( $data = null )
     {
-		$this->setViewContent( '', true );
+//		var_export( __CLASS__ );
+	//	$this->setViewContent( '', true );
 		
  		//	Choose the kind of categories to show
 		@$categoryId = $_GET['category']; 
@@ -99,46 +107,31 @@ class Application_Category_ShowAll extends Application_Category_Abstract
 		}
 		//	switch templates off
 	//	$this->_parameter['markup_template'] = null; 
-		$data = $this->getDbData();
-		krsort( $data );
-		if( $data )
-		//while( $this->getDbData() )
-		{
-		//	$data = array_shift( $this->getDbData() );
-			$dataToPad = array( 
-						//	'article_url' => 'javascript:',   
-							'allow_raw_data' => true, 
-							'article_type' => 'category_information', 
-						//	'document_url' => 'http://placehold.it/300x300&text=No Picture',
-							'publish' => true, 
-							'auth_level' => 0, 
-							'article_title' => '', 
-							'article_description' => '', 
-						);
-		//	self::v( $data );
-			//	Use article viewer to bring out this
-			$parameters = array_merge( $this->getParameter() ? : array(), array( 'data_to_merge' => $dataToPad, 'get_access_information' => true ) );
-		//	self::v( $parameters );
-			$class = new Application_Article_ShowAll( array( 'no_init' => true ) );
-			$class->setDbData( $data );
-			$class->setParameter( $parameters );
-			$class->init();
-		//	$this->setViewContent( $class->view() );
-		
-			$parameters = $class->getParameter();		
-			unset( $parameters['markup_template_no_data'] );
-			
-			//	return parameters
-			$this->setParameter( $parameters );
-	//		self::v( $this->getParameter( 'markup_template' ) );
-/* 			$this->_parameter['markup_template'] = $class->getParameter( 'markup_template' );
-			$this->_parameter['markup_template_suffix'] = null;
-			$this->_parameter['markup_template_prefix'] = null;
- */			$this->_objectTemplateValues = $class->getObjectTemplateValues();
-			//	break;
-		}
+		$data = Application_Category::getInstance()->select( null, $this->_dbWhereClause );
+	//	var_export( $data );
+	//	$data = $this->getDbData();
+	//	krsort( $data );
+		$this->_dbData = $data;
+	//	$this->_objectData = $data;
+	//	$this->_objectTemplateValues = $data;
 	//	$this->setViewContent( '', true );
     } 
+			
+    /**
+     * 
+     */
+	public static function sanitizeData( &$data )
+    {
+	//	var_export( $data );
+		$data['not_real_post'] = true; 
+		$data['document_url'] = $data['cover_photo'];
+		$data['article_title'] = $data['category_label']; 
+		$data['article_url'] = '/posts/?category=' . $data['category_name']; 
+		$data['article_description'] = $data['category_description']; 
+		$data['publish'] = '1'; 
+		$data['auth_level'] = '0';   
+	//	$data['allow_raw_data'] = true; 
+	}
 
      /**
      * This method returns the _classOptions property 

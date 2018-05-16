@@ -205,7 +205,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public function __construct( $parameter = null )
     {
-	//	var_export( self::getHooks() );
 		foreach( self::getHooks() as $class )
 		{
 			$class::hook( $this, __FUNCTION__, func_get_args() );
@@ -215,6 +214,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			if( Ayoola_Application::isXmlHttpRequest() || Ayoola_Application::isClassPlayer() ){ return null; }
 		}
 		if( is_array( $parameter ) ){ $this->setParameter( $parameter ); }
+		//	var_export( self::getHooks() );
 		$this->initOnce();
 		static::$_counter++;
     } 
@@ -1372,11 +1372,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 
 		$this->_playMode = $this->getParameter( 'play_mode' ) ? : $this->_playMode;
-		if( isset( $_SERVER['HTTP_AYOOLA_PLAY_MODE'], $_REQUEST['object_name'] ) && $_REQUEST['object_name'] == get_class( $this ) )
-		{
-			$this->_playMode = $_SERVER['HTTP_AYOOLA_PLAY_MODE'] ? : $this->_playMode;
-		}
-	//	var_export( $_POST );
+	//	var_export( get_class( $this ) );
+	//	var_export( $this->_playMode );
 /* 		if( @$_POST['a'] == 'test' )
 		{
 		//	var_export( $_SERVER );
