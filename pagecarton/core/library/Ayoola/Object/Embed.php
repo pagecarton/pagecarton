@@ -272,9 +272,10 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			}
 			$storageInfo = array( 'id' => $keyZ, 'device' => 'File', 'time_out' => 10000, );
 			$storage = static::getObjectStorage( $storageInfo );
-			if( $storage->retrieve() !== false )
+			if( $storage->retrieve() )
 			{
-				return $storage->retrieve();
+			//	var_export( $storage->retrieve() );
+				return (array) $storage->retrieve();
 			}
 		}
 	//		var_export( $storage->retrieve() );
@@ -345,7 +346,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		
 		$storage->store( self::$_widgets );		
 		static::$_properties[__METHOD__][$keyZ] = self::$_widgets;
-		return self::$_widgets;
+		return (array) self::$_widgets;
 	}
 	
     /**

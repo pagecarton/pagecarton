@@ -477,6 +477,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			curl_setopt( $request, CURLOPT_POST, true );
 			curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );
 		}
+		if( @$settings['raw_response_header'] )
+		{
+		//	var_export( $settings );
+			$headerBuff = fopen( '/tmp/headers' . time(), 'w+' );
+			//	var_export( $headerBuff );
+			curl_setopt( $request, CURLOPT_WRITEHEADER, $headerBuff );
+		}
 		if( is_array( @$settings['http_header'] ) )
 		{
 			curl_setopt( $request, CURLOPT_HTTPHEADER, $settings['http_header'] );
@@ -494,7 +501,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
  	//	if( ! $response || $responseOptions['http_code'] != 200 ){ return false; }
  		if( $responseOptions['http_code'] != 200 ){ return false; }
 		if( @$settings['return_as_array'] == true )
-		{ 
+		{   
+			if( @$settings['raw_response_header'] )
+			{
+			//	var_export( $headerBuff );
+				rewind($headerBuff);
+				$headers = stream_get_contents( $headerBuff );
+				@$responseOptions['raw_response_header'] = $headers;
+			}
 			$response = array( 'response' => $response, 'options' => $responseOptions );
 		}
  		//	var_export( $response );

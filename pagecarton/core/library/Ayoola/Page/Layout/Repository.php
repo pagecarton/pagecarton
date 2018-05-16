@@ -40,6 +40,8 @@ class Ayoola_Page_Layout_Repository extends Application_Article_ShowAll
      */
 	protected function init()
     {
+        set_time_limit(0); // unlimited max execution time
+
 		if( ! empty( $_GET['install'] ) )
 		{
 			$this->createConfirmationForm( 'Install theme', 'Download and Install Theme and its Components' );
@@ -47,13 +49,22 @@ class Ayoola_Page_Layout_Repository extends Application_Article_ShowAll
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
             $link = 'https://themes.pagecarton.org/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $_GET['install'] . '&auto_download=1';
 
-            set_time_limit(0); // unlimited max execution time
-            $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, ) );
-            $filename = tempnam( sys_get_temp_dir(), __CLASS__ );
-     //       var_export( $link );
-     //       var_export( strlen( $content ) );
+            $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
+            $filename = tempnam( sys_get_temp_dir(), __CLASS__ ) . '';
+
+            if(preg_match('/Content-Disposition: .*filename=([^ ]+)/', $content['options']['raw_response_header'], $matches)) {
+                $filename .= $matches[1];
+            }
+            else
+            {
+                $filename .= '.tar.gz';
+            }
+       //     var_export( $filename );   
+        //    var_export( $content['options'] );
+        //    exit();
+     //       var_export( strlen( $content ) );  
          //   file_put_contents( $filename, fopen( $link, 'r' ) );
-            file_put_contents( $filename, $content );
+            file_put_contents( $filename, $content['response'] );
 		    $options =  array( 
 							'auto_section',  
 							'auto_menu', 
@@ -93,14 +104,21 @@ class Ayoola_Page_Layout_Repository extends Application_Article_ShowAll
      */
 	public static function getMenu()
     {
-		$storage = self::getObjectStorage( array( 'id' => 'menu=', 'device' => 'File', 'time_out' => 446000, ) );
-		if( ! $menu = $storage->retrieve() )
+		$storage = self::getObjectStorage( array( 'id' => 'menu=ffd', 'device' => 'File', 'time_out' => 446000, ) );
+		if( ! $data = $storage->retrieve() )
         {
             $feed = 'https://themes.pagecarton.org/tools/classplayer/get/name/Application_Category_ShowAll?pc_widget_output_method=JSON';
             $feed = self::fetchLink( $feed, array( 'time_out' => 28800, 'connect_time_out' => 28800, ) );
             $allFeed = json_decode( $feed, true );
           //     var_export( $allFeed );
             $data = array();
+            $data[] = array(
+                'url' => '?',
+                'option_name' => 'All Categories',
+                'title' => 'All Categories',
+                
+                'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),
+            );
             foreach( $allFeed as $each )
             {
           //     var_export( $each );
@@ -114,13 +132,13 @@ class Ayoola_Page_Layout_Repository extends Application_Article_ShowAll
             }
           //     var_export( $data );
 
+            $storage->store( $data );
+        }
             $menu = Ayoola_Menu::viewInLine( array(
                                     'raw-options' => $data,
                                      'template_name' => 'HorizontalGrayish',
                                //     'raw-options' => $data,
             ) );            
-        //    $storage->store( $menu );
-        }
 //       var_export( $data );
         
 		return $menu;

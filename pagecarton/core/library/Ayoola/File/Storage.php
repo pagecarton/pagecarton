@@ -162,6 +162,7 @@ class Ayoola_File_Storage extends Ayoola_File
             return $data;
 			
 		}
+        return false;
     } 
 	
     /**
