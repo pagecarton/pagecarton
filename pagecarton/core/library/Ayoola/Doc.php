@@ -525,23 +525,46 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     static public function getDirectories( $directory )
     {
 		$directories = array();
+  //      if( basename( $directory ) === 'data' )
+        {
+   //    PageCarton_Widget::v( $directory );
+  //     PageCarton_Widget::v( is_dir( trim( $directory ) ) );
+    //   PageCarton_Widget::v( $directories );
+        }
 		if ( ! is_dir( $directory )) 
 		{
-			throw new Ayoola_Doc_Exception( 'Invalid Directory - ' . $directory );
+			return array();
+		//	throw new Ayoola_Doc_Exception( 'Invalid Directory - ' . $directory );
 		}
 		if ( ! ( $handle = opendir( $directory ) ) ) 
 		{
-			throw new Ayoola_Doc_Exception( 'Directory cannot be opened  for reading - ' . $directory );
+			return array();
+		//	throw new Ayoola_Doc_Exception( 'Directory cannot be opened  for reading - ' . $directory );
 		}
 		while ( ( $innerDirectoryBaseName = readdir( $handle ) ) !== false ) 
 		{
 			$innerDirectory = $directory . DS . $innerDirectoryBaseName;
-			if ( trim( $innerDirectoryBaseName, '.' ) &&  is_dir( $innerDirectory )  )
+		//	if( basename( $directory ) === 'data' )
+			{
+		//		PageCarton_Widget::v( $innerDirectoryBaseName );
+		//		PageCarton_Widget::v( is_dir( $innerDirectory ) );
+		//		PageCarton_Widget::v( trim( $innerDirectoryBaseName, '.' ) );
+	//     PageCarton_Widget::v( is_dir( trim( $directory ) ) );
+		//   PageCarton_Widget::v( $directories );
+			}
+			if ( trim( $innerDirectoryBaseName, '.' ) !== '' &&  is_dir( $innerDirectory )  )
 			{ 
 				$directories[] = $innerDirectory; 
 			}
 		}
 		closedir( $handle );
+  //      if( basename( $directory ) === 'data' )
+        {
+   	//	    PageCarton_Widget::v( $directory );
+   	//	    PageCarton_Widget::v( $directories );
+  //     PageCarton_Widget::v( is_dir( trim( $directory ) ) );
+    //   PageCarton_Widget::v( $directories );
+        }
 		//var_export( $directories );
 		return $directories;
     } 
@@ -556,6 +579,12 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     {
 		$recursiveDirectories = array();
 		$directories = self::getDirectories( $directory );
+        if( basename( $directory ) === 'data' )
+        {
+    //   PageCarton_Widget::v( $directory );
+    //   PageCarton_Widget::v( $directories );
+        }
+
 		foreach( $directories as $directory )
 		{
 			$method = __FUNCTION__;
