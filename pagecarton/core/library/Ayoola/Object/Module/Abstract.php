@@ -60,7 +60,7 @@ abstract class Ayoola_Object_Module_Abstract extends Ayoola_Abstract_Table
      * 
      *
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
 	{
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$fieldset = new Ayoola_Form_Element;

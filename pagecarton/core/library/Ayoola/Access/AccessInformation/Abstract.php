@@ -57,7 +57,7 @@ abstract class Ayoola_Access_AccessInformation_Abstract extends Ayoola_Abstract_
 	protected $_identifierKeys = array( 'accessinformation_id' );
 	  
 	//	This is to implement the abstract method of the parent class. Not all inheriting classes needs a form
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
 	{
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 	//	$form->oneFieldSetAtATime = true;

@@ -63,7 +63,7 @@ abstract class Ayoola_Access_AuthLevel_Abstract extends Ayoola_Abstract_Table
 	protected $_idColumn = 'auth_name';
 	  
 	//	This is to implement the abstract method of the parent class. Not all inheriting classes needs a form
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
 	{
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->oneFieldSetAtATime = true;

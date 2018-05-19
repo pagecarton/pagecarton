@@ -153,7 +153,7 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )  
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )  
     {
         //  Initialize the form
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );

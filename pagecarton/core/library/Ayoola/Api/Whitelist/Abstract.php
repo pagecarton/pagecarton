@@ -49,7 +49,7 @@ abstract class Ayoola_Api_Whitelist_Abstract extends Ayoola_Api_Abstract
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = 'Save' ;

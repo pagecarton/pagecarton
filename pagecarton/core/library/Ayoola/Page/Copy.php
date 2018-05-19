@@ -77,7 +77,7 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
     } 
 	
 	//	This is to implement the abstract method of the parent class. Not all inheriting classes needs a form
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
 	{
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 	//	$form->oneFieldSetAtATime = true;

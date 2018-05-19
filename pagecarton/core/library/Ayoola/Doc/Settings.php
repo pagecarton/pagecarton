@@ -42,7 +42,7 @@ class Ayoola_Doc_Settings extends Application_Settings_Abstract
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		$settings = unserialize( @$values['settings'] );
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );

@@ -84,7 +84,7 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );

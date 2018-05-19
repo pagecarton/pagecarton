@@ -302,7 +302,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )  
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )  
     {
 	//	self::v( $values ); 
 		//	Form to create a new form

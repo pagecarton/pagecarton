@@ -170,7 +170,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
     } 
 	
 	//	This is to implement the abstract method of the parent class. Not all inheriting classes needs a form
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
 	{
         $form = new Ayoola_Form( 'name=>' . $this->getObjectName() );
 
