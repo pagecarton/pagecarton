@@ -42,6 +42,12 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 		#
 		$this->setViewContent( '<h2>Details of Order #'  . $identifierData['order_id'] . '</h2>', true );
 
+		$this->setViewContent( '<h3>Customer Info</h3>' );
+		$this->setViewContent( self::arrayToString( $identifierData['order']['checkout_info'] ) );
+
+		$this->setViewContent( '<h3>Shopping Cart</h3>' );
+//		var_export( $identifierData );
+//		var_export( $identifierData['order']['checkout_info'] );
 		$class = new Application_Subscription_Cart( array( 'cart' => $identifierData['order'] ) );
 		$this->setViewContent( $class->view() );
 //		if( $this->updateDb() ){ $this->setViewContent( 'Order edited successfully', true ); }
