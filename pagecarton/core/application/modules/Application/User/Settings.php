@@ -46,7 +46,11 @@ class Application_User_Settings extends Application_Settings_Abstract
 		$fieldset = new Ayoola_Form_Element;
 		$options = array( 'verified' => 'Email verification', 'enabled' => 'Enabled Account', 'approved' => 'Admin Approval', );
 		$fieldset->addElement( array( 'name' => 'signin-requirement', 'label' => 'Sign in requirements', 'value' => @$settings['signin-requirement'], 'type' => 'Checkbox' ), $options );
-		$dbOptions = array( 'cloud' => 'Ayoola Cloud (recommended)', 'file' => 'Flat file', 'relational' => 'Relational database' );
+		$dbOptions = array( 
+						//	'cloud' => 'Ayoola Cloud (recommended)', 
+							'file' => 'Flat file', 
+							'relational' => 'Relational database' 
+							);
 		$fieldset->addElement( array( 'name' => 'database', 'label' => 'Look for users in', 'value' => @$settings['database'], 'type' => 'Checkbox' ), $dbOptions );
 		$fieldset->addLegend( 'Sign in options' );
 		$form->addFieldset( $fieldset );
@@ -83,6 +87,13 @@ class Application_User_Settings extends Application_Settings_Abstract
 		$filter = new Ayoola_Filter_SelectListArray( 'form_name', 'form_title');
 		$options = $filter->filter( $options );
 		$fieldset->addElement( array( 'name' => 'supplementary_form', 'label' => 'Supplementary Sign up form', 'type' => 'Select', 'value' => @$settings['supplementary_form'] ), array( '' => 'Please select...' ) + $options ); 	
+
+		$options = new Ayoola_Page_Page;
+		$options = $options->select();
+		require_once 'Ayoola/Filter/SelectListArray.php';
+		$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
+		$options = array( '' => 'Default (/account)' ) + $filter->filter( $options );
+		$fieldset->addElement( array( 'name' => 'default_account_page', 'type' => 'Select', 'value' => @$settings['default_account_page'] ), $options );
 		
 //		$fieldset->addElement( array( 'name' => 'allowed_access_information', 'value' => @$settings['allowed_access_information'], 'type' => 'MultipleInputText' ) ); 
 		$fieldset->addLegend( 'User options' );

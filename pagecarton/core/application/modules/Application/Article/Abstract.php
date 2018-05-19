@@ -298,6 +298,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$table->delete( array( 'article_url' => $values['article_url'] ) );
 		}
+	//	var_export( $values );
+		if( ! empty( $values['profile_url'] ) )
+		{
+			$values['profile_url'] = strtolower( $values['profile_url'] );
+		}
 		$table->insert( $values );
 
 	 	return true;
@@ -692,26 +697,38 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$header = 'h1';
 
 		}
+	//	var_export( $data );
 		$html = null;
 		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777; margin-bottom:3em;">';
 		$html .= '<' . $link . '>';
 		$html .= '<div  class="pc_theme_parallax_background" style="background-image: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\'); ">';
-		$html .= '<p style="text-align:right;">' . $data['article_type'] . '</p>';
+		$html .= '<div style="float:right;background-color:#000;padding:10px;border-radius:10px;">' . $data['post_type'] . '</div>';
 		$html .= '<' . $header . '>' . $data['article_title'] . '</' . $header . '>';
-		$html .= $data['article_description'] ? '<br><br><p>' . $data['article_description'] . '</p>' : null;
-		$html .= $realPost && $data['button_value'] ? '<br><br><p><button class="pc-btn"> ' . $data['button_value'] . ' </button></p>' : null;
+		$html .= $data['article_description'] ? '<br><p>' . $data['article_description'] . '</p>' : null;
+		$html .= $realPost && $data['button_value'] ? '<br><p><button class="pc-btn"> ' . $data['button_value'] . ' </button></p>' : null;
 		$html .= '</div>';
 		$html .= '</' . $link . '>';
-		$html .= '<div class="pc_theme_parallax_background" style="font-size:x-small;text-transform:uppercase;background-image: linear-gradient(      rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\'); ">';
+		$html .= '<div class="pc_theme_parallax_background" style="font-size:x-small;text-transform:uppercase;background-image: linear-gradient(      rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)  ); ">';
 
-		$html .= $data['item_price'] ? '
+		$html .= $data['item_old_price'] ? '
 		<span style="font-size:small;">
 		<span class="pc_posts_option_items" style="text-decoration:line-through;" >' . $data['item_old_price'] . '</span> 
+		</span>
+		' : null;
+		$html .= $data['item_price'] ? '
+		<span style="font-size:small;">
 		<span class="pc_posts_option_items" >' . $data['item_price_with_currency'] . '</span> 
 		</span>
 		' : null;
 		$html .= '<span class="pc_posts_option_items">' . self::filterTime( $data ) . '</span>';
-		$html .= '<span class="pc_posts_option_items"> by ' . $data['username'] . '</span>';
+		if( ! empty( $data['profile_url'] ) )
+		{
+			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) )
+			{
+				$html .= ( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '" class="pc_posts_option_items"> by ' . ( $profileInfo['display_name'] ? : $data['profile_url'] ) . '</a>' );
+			}
+		}
+		
 		if( isset( $data['views_count'] ) )
 		{
 			$html .= '<span class="pc_posts_option_items">' . $data['views_count'] . ' <span >views</span></span>';
@@ -745,7 +762,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 		$html .= '</div>';
 		$html .= '</div>';
-
 		return $html;
 	}
 	
@@ -1834,8 +1850,18 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$options = array( 0 => 'Public', 97 => 'Private (Invited viewers only)', 98 => 'Only Me' );
 		}
-		$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'Select', 'value' => @$values['auth_level'] ? : array_keys( $options ) ), $options );
+		$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'Select', 'value' => @$values['auth_level'] ? : 0 ), $options );
 		$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $options ) ) );
+
+		$profiles = Application_Profile_Abstract::getMyProfiles();
+		if( ! empty( $values['profile_url'] ) && ! in_array( $values['profile_url'], $profiles ) )
+		{
+			$profiles[] = $values['profile_url'];
+		}
+		$profiles = array_combine( $profiles, $profiles );
+		$fieldset->addElement( array( 'name' => 'profile_url', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : Application_Profile_Abstract::getMyDefaultProfile() ), $profiles );
+		$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
+
 	//	$fieldset->addRequirement( 'article_title', array( 'UserRestrictions' => null ) );
 		if( @$values['requirement_name'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'requirement', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )
 		{

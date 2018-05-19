@@ -27,6 +27,13 @@ require_once 'Application/Message/Abstract.php';
 
 class Application_Message_ShowAll extends Application_Message_Abstract
 {
+
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Direct Message';      
 	
     /**
      * Whether class is playable or not
@@ -84,67 +91,46 @@ class Application_Message_ShowAll extends Application_Message_Abstract
      */
 	public function getHtml()
     {
+		$sendMessageForm = Application_Message_Creator::viewInLine();
+		$profileInfo = Application_Profile_Abstract::getMyDefaultProfile();
  		switch( $this->getParameter( 'messages_to_show' ) )
 		{
 			case 'mine':
 				//	hard-coded message page
-				$this->_dbWhereClause = array( 'reference' => Ayoola_Application::getUserInfo( 'username' ) );
+				$this->_dbWhereClause = array( 'reference' => $profileInfo['profile_url'] );
 			break;
 			case 'received':
 				//	hard-coded message page
-				$this->_dbWhereClause = array( 'to' => Ayoola_Application::getUserInfo( 'username' ) );
+				$this->_dbWhereClause = array( 'to' => $profileInfo['profile_url'] );
 			break;
 			default:
-				$reference = array( Ayoola_Application::getUserInfo( 'username' ), @Ayoola_Application::$GLOBAL['username'] );
+				$reference = array_map( 'strtolower', array( $profileInfo['profile_url'], @Ayoola_Application::$GLOBAL['profile_url'], @$_GET['to'] ) );
 				$this->_dbWhereClause = array( 
 												'from' => $reference,
 												'to' => $reference,
-												'reference' => Ayoola_Application::getUserInfo( 'username' ),
+												'reference' => strtolower( $profileInfo['profile_url'] ),
 											);
 			break;
 		}
-/* 		elseif( $this->getParameter( 'reference_type' ) === 'post' )
-		{
-			//	Get the article url
-			$reference = Ayoola_Application::$GLOBAL['article_url'];		
-		}
-		elseif( Ayoola_Application::$GLOBAL['username'] )
-		{
-			//	profile message page
-			$reference = Ayoola_Application::$GLOBAL['username'];		
-		}
- */ 	//	var_export( $reference );
 		$updates = $this->getDbData();
-		krsort( $updates );
+	//	krsort( $updates );
 	//	$updates = $table->select();
 		
 	//	self::v( $updates );
-//		var_export( $this->_dbWhereClause );
+	//	var_export( $this->_dbWhereClause );
 		
 		if( ! @$this->_parameter['markup_template'] ) 
 		{
 			$template = 
 			'
 				<span style="background-color:#def">
-					<p>
-						<a href="' . Ayoola_Application::getUrlPrefix() . '/{{{from}}}">
-							<img src="{{{display_picture}}}" style="float:right; max-height:60px;">
-						</a>
-						<a href="' . Ayoola_Application::getUrlPrefix() . '/{{{from}}}">
-							<strong>{{{display_name}}}</strong>
-						</a>
-						→
-						<a href="' . Ayoola_Application::getUrlPrefix() . '/{{{to}}}">
-							<strong>{{{to}}}</strong>
-						</a>
-						<br>
+					<div class="pc_message_box pc-well {{{pc_message_box_mine}}}" style=" ">
 						{{{message}}}
-						<br>
-						<span style="font-size:small;">{{{timestamp}}}</span>
-					</p>
+						<div style="clear:both;"></div>
+						<div style="font-size:x-small;float:right;">{{{timestamp}}}</div>
+					</div>
 					<div style="clear:both;"></div>
-				</span>
-				
+				</span>				
 			';
 		
 		}
@@ -154,6 +140,21 @@ class Application_Message_ShowAll extends Application_Message_Abstract
 		}
 		$this->_parameter['markup_template'] = null;  
 		$html = null;
+		$to = @Ayoola_Application::$GLOBAL['profile_url'] ? : @$_GET['to'];
+		$myProfiles = array_map( 'strtolower', Ayoola_Application::getUserInfo( 'profiles' ) );
+		if( in_array( strtolower( $to ), $myProfiles ) )
+		{ 
+			$this->setViewContent( '<div class="badnews">You cannot send message to yourself</div>', true );
+			return false;
+		}
+		if( ! empty( $to ) AND $profileInfoTo = Application_Profile_Abstract::getProfileInfo( $to ) )
+		{
+		//	var_export( $profileInfoTo );
+			$html .= '<div style="padding:0.5em;"><a href="' . Ayoola_Application::getUrlPrefix() . '/' . $profileInfoTo['profile_url'] . '"><div class="pc-profile-image-div" style="background-image: url(\'' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_IconViewer/?url=' . ( $profileInfoTo['display_picture'] ? : '/img/placeholder-image.jpg' ) . '\'); margin-right:1em; width:48px; height:48px;">&nbsp;</div></a>Private Message <br> <a href="' . Ayoola_Application::getUrlPrefix() . '/' . $profileInfoTo['profile_url'] . '">@' . $profileInfoTo['profile_url'] . '</a></div>
+			<div style="clear:both;"></div>
+			
+			';
+		}
 		$subjectInfo = array();
 		$i = 0; //	counter
 		$j = 10; //	5 is our max articles to show
@@ -166,27 +167,36 @@ class Application_Message_ShowAll extends Application_Message_Abstract
 			//	var_export( $j );
 				break; 
 			}
-			if( empty( $info['to'] ) || empty( $info['from'] ) )
+			if( empty( $each['to'] ) || empty( $each['from'] ) )
 			{ 
 				continue; 
 			}
+			if( in_array( strtolower( $each['from'] ), $myProfiles ) )
+			{ 
+				$each['pc_message_box_mine'] = 'pc_message_box_mine';
+			}
+			
+		//	var_export( $each );
 		//	self::v( $each['reference']['from'] );
 		//	self::v( Ayoola_Access::getAccessInformation( $each['reference']['from'] ) );
-			$subjectInfo[$each['reference']['from']] = @$subjectInfo[$each['reference']['from']] ? : Ayoola_Access::getAccessInformation( $each['reference']['from'] );
-			$info = $subjectInfo[$each['reference']['from']] ? : array() + $each ? : array();
-			$info['from'] = $each['reference']['from'];
-			$info['from'] = $each['reference']['from'];
+		//	$sender = @$subjectInfo[$each['reference']['from']] ? : Application_Profile_Abstract::getProfileInfo( $each['reference']['from'] );
+		//	$each = $subjectInfo[$each['reference']['from']] ? : array() + $each ? : array();
+		//	$each['from'] = $each['reference']['from'];
+	//		$each['to'] = $each['reference']['to'];
 			$filter = new Ayoola_Filter_Time();
-			$info['timestamp'] = $filter->filter( $info['timestamp'] ? : ( time() - 3 ) );  
-			$info['second_party'] = strtolower( $info['from'] ) === strtolower( Ayoola_Application::getUserInfo( 'username' ) ) ? $info['to'] : $info['from'];  
+			$each['timestamp'] = $filter->filter( $each['timestamp'] ? : ( time() - 3 ) );  
+		//	$each['second_party'] = strtolower( $each['from'] ) === strtolower( Application_Profile_Abstract::getMyDefaultProfile() ) ? $each['to'] : $each['from'];  
+		//	var_export( $each );
 			
 			if( $template )
 			{
-				$html .= self::replacePlaceholders( $template, $info + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+				$html .= self::replacePlaceholders( $template, $each + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
 			} 
 			
 		
 		}
+		$html .= '<div style="padding:0.5em;"></div>';
+		$html .= $sendMessageForm;
 //		$this->_parameter['markup_template'] = $html ? : '<p class="badnews boxednews">No recent updates...</p>';
 		$this->_parameter['markup_template'] = $html ? : null;
 	}

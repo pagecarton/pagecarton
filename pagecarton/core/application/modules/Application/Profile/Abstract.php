@@ -48,6 +48,12 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
      * @var boolean
      */
 	protected static $_accessLevel = array( 99, 98 );
+		
+    /**
+     * The method does the whole Class Process
+     * 
+     */
+	public static $_myProfiles;
 	
     /**
      * returns the profile folder
@@ -74,6 +80,60 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 	public static function getProfilePath( $url )
     {
 		return self::getProfileDir( $url ) . '.profile';  
+	}
+		
+    /**
+     * The method does the whole Class Process
+     * 
+     */
+	public static function getMyProfiles()
+    {   
+		if( ! is_null( self::$_myProfiles ) )
+		{
+			return self::$_myProfiles;
+		}
+		$access = new Ayoola_Access();
+		$userInfo = $access->getUserInfo();
+	//	var_export( $userInfo );
+		@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
+		foreach( $userInfo['profiles'] as $url )
+		{
+			$values = self::getProfileInfo( $url );
+//		var_export( $url );
+//		var_export( $values );
+			if( ! $values )
+			{
+				continue;
+			}
+			self::$_myProfiles[] = $url;
+		}
+
+
+		return self::$_myProfiles;
+	}
+	
+    /**
+     * 
+     * 
+     */
+	public static function getMyDefaultProfile()
+    {
+		$profile = Ayoola_Application::getUserInfo( 'profile_url' );
+	//	var_export( $profile );
+		if( ! $profileInfo = self::getProfileInfo( $profile ) )
+		{
+		 	if( $others = Ayoola_Application::getUserInfo( 'profiles' ) )
+			{
+				while( $profile = array_pop( $others ) )
+				{
+					if( $profileInfo = self::getProfileInfo( $profile ) )
+					{
+						break;
+					}
+				}
+			}
+		}
+		return $profileInfo;  
 	}
 	
     /**
@@ -108,16 +168,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		{
 			return self::getProfileTable()->insert( $values );
 		}
-/*
-		$path = self::getProfilePath( $values['profile_url'] );
-		Ayoola_Doc::createDirectory( dirname( $path ) );
-		$previousValues = @include $path;
-		if( is_array( $previousValues ) )
-		{
-			$values = array_merge( $previousValues, $values );
-		}
-		return file_put_contents( $path, '<?php return ' . var_export( $values, true ) . ';' );
-*/	}
+	}
 
     /**
      * 
@@ -334,26 +385,8 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 				$form->addFieldset( $each );
 			}
 		}
-
-		//	Profile picture
-//		$fieldset = new Ayoola_Form_Element; 
 	
-		//	Cover photo
-	//	$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'display_picture' ) : 'display_picture' );
-	//	var_export( $link );
-	//	$fieldset->addElement( array( 'name' => 'display_picture', 'label' => 'Profile Picture', 'placeholder' => 'Choose a profile picture...', 'type' => 'Document', 'value' => @$values['display_picture'] ) );  
-	//	$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html' ), array( 'html' => Ayoola_Doc_Upload_Link::viewInLine( array( 'image_preview' => ( @$values['display_picture'] ? : $this->getGlobalValue( 'display_picture' ) ), 'field_name' => $fieldName, 'width' => '160', 'height' => '160', 'crop' => true, 'field_name_value' => 'url', 'preview_text' => 'Display Picture', 'call_to_action' => 'Change picture' ) ) ) ); 
-	//	$fieldset->addLegend( "Choose a profile picture..." );
-/* 		$class = new Ayoola_Access_AccountRequired();
-		if( $fieldsets = $class->getForm()->getFieldsets() )
-		{
-			foreach( $fieldsets as $each ) 
-			{
-				$form->addFieldset( $each );  
-			}
-		}
-			var_export( $fieldsets );
- */		$form->setFormRequirements( 'user-registration' );
+		$form->setFormRequirements( 'user-registration' );
 		
 		$this->setForm( $form );
 	}

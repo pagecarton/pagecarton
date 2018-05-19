@@ -189,7 +189,7 @@ class Ayoola_Xml extends DOMDocument
 	//	var_export( $tempName );
 		if( is_file( $tempName ) )
 		{
-			if( filemtime( $tempName ) < time() - 9999 )
+			if( filemtime( $tempName ) < time() - 999999 )
 			{
 				unlink( $tempName );
 				Application_Log_View_Error::log( $tempName . ' stayed too long. It is now removed.' );
@@ -244,7 +244,7 @@ class Ayoola_Xml extends DOMDocument
 			continue; 
 		}
 		$this->setFilename( $filename );
-		unlink( $tempName );
+		@unlink( $tempName );
 		return $result;
     } 
 	

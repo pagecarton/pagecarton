@@ -1,7 +1,26 @@
 @charset "utf-8";
+.pc_message_box{
+    background-color:#eee;
+    float:left; 
+    padding: 0.5em; 
+    margin: 0.5em;
+}
 
-/*Breadcrumb*/
+.pc_message_box_mine{
+    background-color:#bbb;
+    float:right;
+}
 
+.pc-profile-image-div {
+    float:left;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-color: #fff;  
+}
 .pc-breadcrumb {
     list-style: none;
     margin:0;
@@ -93,8 +112,8 @@
 
 .pc-form2{
     font-family: 'open_sansregular', arial, sans;
-    /*width: 500px;
-    margin: 50px auto;*/
+    max-width: 500px;
+    margin: 0 auto;
     padding: 30px;
     background: #FFFFFF;
     color:#000;
@@ -105,19 +124,17 @@
 }
 .pc-form2 legend, .pc-form2 h2{
     background: inherit;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-family: 'open_sansregular', sans-serif;
     color: inherit;
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 100;
-    padding: 0;
-    padding-left: 0;
-    padding-right: 0;
-    margin: 30px 0px 15px 0px;
+    padding: 30px;
     border-top: 0;
     border-bottom: 0;
 	/*width: 100%;*/
     display: block !important;
+    background-color: #eee;
 }
 .pc-form2 input[type="text"],
 .pc-form2 input[type="date"],
@@ -144,6 +161,11 @@
     margin-bottom: 10px;
     font: 16px Arial, Helvetica, sans-serif;
     height: 45px;
+}
+.pc-form2 input[type="checkbox"],
+.pc-form2 input[type="radio"]
+{
+    margin-bottom: 10px;
 }
 .pc-form2 textarea{
     resize:none;
@@ -479,9 +501,9 @@
     -webkit-box-shadow: 0 10px 6px -6px #777;
     -moz-box-shadow: 0 10px 6px -6px #777;
     box-shadow: 0 10px 6px -6px #777;
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url( "../img/placeholder-image.jpg" );  
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) );  
 
-    padding:3em 2em 3em 2em;   
+    padding:1.5em 1.5em 1.5em 1.5em;   
     background-size: cover; 
     background-position: center; 
     background-attachment: fixed; 
@@ -744,6 +766,7 @@ html, body
 {
     color:inherit;
     margin-right:2em;
-    margin-bottom: 1em;
+    margin-bottom: 0.3em;
+    margin-top: 0.3em;
     display: inline-block;
 }

@@ -388,12 +388,20 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		$validator = 'Ayoola_Validator_';
 		foreach( $this->_requirements[$name] as $requirement => $parameter )
 		{ 
-			$requiredValidator = $validator . ucfirst( $requirement );
-			if( ! Ayoola_Loader::loadClass( $requiredValidator ) )
+			$requiredValidator = $requirement;
+			if( ! Ayoola_Loader::loadClass( $requirement ) )
 			{ 
-				//	invalid validator means its always invalid
+				$requiredValidator = $validator . ucfirst( $requirement );
+				if( ! Ayoola_Loader::loadClass( $requiredValidator ) )
+				{ 
+					//	invalid validator means its always invalid
+					return false;
+				//	throw new Ayoola_Exception( 'INVALID FORM VALIDATOR: ' . $requiredValidator  );
+				}
+			}
+			if( ! new $requiredValidator instanceof Ayoola_Validator_Interface )
+			{
 				return false;
-			//	throw new Ayoola_Exception( 'INVALID FORM VALIDATOR: ' . $requiredValidator  );
 			}
 			$check = new $requiredValidator;
 			$parameter = is_array( $parameter ) ? $parameter : array_map( 'trim', explode( ';;', $parameter ) );
@@ -597,14 +605,14 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					foreach( $fieldsets as $key => $fieldset )
 					{
 						$fieldset->appendElement = false;
-						@$fieldset->addLegend( $this->getParameter( $each['requirement_name'] . '_fieldset_legend' ) ? : ( $combinedInfo['requirement_legend'] . ( $fieldset->getLegend() ?  ' | ' . $fieldset->getLegend() : null  ) ) );
+				//		@$fieldset->addLegend( $this->getParameter( $each['requirement_name'] . '_fieldset_legend' ) ? : ( $combinedInfo['requirement_legend'] . ( $fieldset->getLegend() ?  ' | ' . $fieldset->getLegend() : null  ) ) );
 						if( @$b['requirement_goodnews'] )
 						{
-							$fieldset->addElement( array( 'type' => 'html', 'name' => $key . '_Xe' ), array( 'html' => '<blockquote class=""><em class="">' . str_ireplace( '@@@requirement_title@@@', @$combinedInfo['requirement_title'] , $b['requirement_goodnews'] ) . '</em></blockquote>' ) );
+					//		$fieldset->addElement( array( 'type' => 'html', 'name' => $key . '_Xe' ), array( 'html' => '<blockquote class=""><em class="">' . str_ireplace( '@@@requirement_title@@@', @$combinedInfo['requirement_title'] , $b['requirement_goodnews'] ) . '</em></blockquote>' ) );
 						}
 						if( @$each['requirement_goodnews'] )
 						{
-							$fieldset->addElement( array( 'type' => 'html', 'name' => $key . '_e' ), array( 'html' => '<blockquote class=""><em class="">' . str_ireplace( '@@@requirement_title@@@', @$combinedInfo['requirement_title'] , $each['requirement_goodnews'] ) . '</em></blockquote>' ) );
+					//		$fieldset->addElement( array( 'type' => 'html', 'name' => $key . '_e' ), array( 'html' => '<blockquote class=""><em class="">' . str_ireplace( '@@@requirement_title@@@', @$combinedInfo['requirement_title'] , $each['requirement_goodnews'] ) . '</em></blockquote>' ) );
 						}
 						$this->addFieldset( $fieldset );
 					}

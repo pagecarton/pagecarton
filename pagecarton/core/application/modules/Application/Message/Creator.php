@@ -50,6 +50,14 @@ class Application_Message_Creator extends Application_Message_Abstract
     {
 		try
 		{ 
+			if( ! $this->requireRegisteredAccount() )
+			{
+				return false;
+			}
+			if( ! $this->requireProfile() )
+			{
+				return false;
+			}
 			$this->createForm( 'Send', 'Send a private message' );
 			$this->setViewContent( $this->getForm()->view(), true );
 		//	var_export( Ayoola_Application::$GLOBAL );
@@ -59,29 +67,32 @@ class Application_Message_Creator extends Application_Message_Abstract
 		//	var_export( $values );
 			
 			
-			@$values['from'] = $values['from'] ? : Ayoola_Application::getUserInfo( 'profile_url' );
-			@$values['to'] = $values['to'] ? : Ayoola_Application::$GLOBAL['profile_url'];
+			@$values['from'] = strtolower( $values['from'] ? : Ayoola_Application::getUserInfo( 'profile_url' ) );
+			@$values['to'] = strtolower( $values['to'] ? : Ayoola_Application::$GLOBAL['profile_url'] );
 			
 			//	There must be a valid sender
-			
-			if( ! $senderInfo = Ayoola_Access::getAccessInformation( $values['from'] ) )
+	//		Application_Profile_Abstract::getMyDefaultProfile()
+			if( ! $senderInfo = Application_Profile_Abstract::getProfileInfo( $values['from'] ) )
 			{
+				$this->setViewContent( '<p class="badnews">Invalid sender.</p>' );
 				return false;
 			//	throw new Application_Message_Exception( 'UNABLE TO POST AN UPDATE BECAUSE USER IS INVALID.' );
 			}
-			if( ! $receiverInfo = Ayoola_Access::getAccessInformation( $values['to'] ) )
+			if( ! $receiverInfo = Application_Profile_Abstract::getProfileInfo( $values['to'] ) )
 			{
+				$this->setViewContent( '<p class="badnews">Invalid receiver information.</p>' );
 				return false;
 			//	throw new Application_Message_Exception( 'UNABLE TO POST AN UPDATE BECAUSE USER IS INVALID.' );
 			}
+	//		var_export( $receiverInfo );
 			@$values['timestamp'] = $values['timestamp'] ? : time();
 			@$values['reference'] = $values['reference'] ? ( (array) $values['reference'] ) : array();
 			$values['reference']['from'] = $values['from'];
 			$values['reference']['to'] = $values['to'];
 			if( $values['from'] == $values['to'] )
 			{
-			//	return false;
-				throw new Application_Message_Exception( 'PRIVATE MESSAGE CANNOT BE SENT TO ONESELF.' );
+				return false;
+			//	throw new Application_Message_Exception( 'PRIVATE MESSAGE CANNOT BE SENT TO ONESELF.' );
 			}
 			if( ! $this->insertDb( $values ) ){ return $this->setViewContent( $this->getForm()->view(), true ); }
 			
@@ -113,7 +124,7 @@ http://' . Ayoola_Page::getDefaultDomain() . '/' . $senderInfo['profile_url'] . 
 			$emailInfo['from'] = '' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . '<no-reply@' . Ayoola_Page::getDefaultDomain() . '>';
 			@self::sendMail( $emailInfo );
 			
-			$this->setViewContent( '<p class="boxednews goodnews">Private message has been sent successfully.</p>', true );
+			$this->setViewContent( '<p class="goodnews">Private message has been sent successfully.</p>', true );
 		}
 		catch( Application_Message_Exception $e ){ return false; }
    } 

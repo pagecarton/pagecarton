@@ -556,7 +556,9 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 							$field = $value['field'];
 						}
 					}
- */					if( is_array( $value ) )
+ */					
+ 				//	var_export( $row[$field] );
+ 					if( is_array( $value ) )
 					{ 
 					//	var_export( $value );
 						$value = print_r( $value, true ); 
@@ -565,6 +567,16 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					{ 
 					//	var_export( (array) $value );
 						$value = print_r( (array) $value, true ); 
+					}
+ 					elseif( is_array( $row[$field] ) )
+					{ 
+					//	var_export( $value );
+						$row[$field] = print_r( $row[$field], true ); 
+					}
+					elseif( is_object( $row[$field] ) )
+					{ 
+					//	var_export( (array) $value );
+						$row[$field] = print_r( (array) $row[$field], true ); 
 					}
 					
 				//	$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, $value );

@@ -1305,6 +1305,7 @@ class Ayoola_Application
 		//	Client-side	scripting		
 		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . filemtime( __FILE__ ) );
 		Application_Style::addFile( Ayoola_Page::getPageCssFile() );
+		Application_Style::addFile( '//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css' );
 
 		//	Pass the artificial query string to the client-side			
 		Application_Javascript::addCode  
@@ -1510,7 +1511,7 @@ class Ayoola_Application
 		{
 			return array();
 		}
-		return array_key_exists( $key, self::$_userInfo ) && $key ? self::$_userInfo[$key] : self::$_userInfo;
+		return $key ? self::$_userInfo[$key] : self::$_userInfo;
     } 
 	
     /**

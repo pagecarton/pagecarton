@@ -60,21 +60,24 @@ abstract class Application_Message_Abstract extends Ayoola_Abstract_Table
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
-		$form->oneFieldSetAtATime = true;
+	//	$form->oneFieldSetAtATime = true;
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = true;
 		$fieldset->useDivTagForElement = false; 
 		$form->submitValue = $submitValue;
         $to = @$values['to'] ? : @Ayoola_Application::$GLOBAL['profile_url'];
         $to = $to ? : $_GET['to'];
-		$fieldset->addElement( array( 'name' => 'message', 'label' => 'To @' . $to, 'placeholder' => 'Start typing your message to @' . $to . ' here...', 'type' => 'TextArea', 'value' => @$values['message'] ) );
+    //    var_export( $values['to'] );
+    //    var_export( $_GET['to'] );
+   //     var_export( $to );
+		$fieldset->addElement( array( 'name' => 'message', 'label' => '', 'placeholder' => 'Start typing your message to @' . $to . ' here...', 'type' => 'TextArea', 'value' => @$values['message'] ) );
 		$fieldset->addRequirement( 'message', array( 'WordCount' => array( 3, 1000 ) ) );
 		
 		$fieldset->addElement( array( 'name' => 'to', 'placeholder' => '', 'type' => 'Hidden', 'value' => $to ) );
 
         $profiles = Application_Profile_ShowAll::getMyProfiles();
         $profiles = array_combine( $profiles, $profiles );
-		$fieldset->addElement( array( 'name' => 'from', 'placeholder' => '', 'type' => 'Select', 'value' => @$values['from'] ? : Ayoola_Application::getUserInfo( 'profile_url' ) ), $profiles );
+		$fieldset->addElement( array( 'name' => 'from', 'placeholder' => '', 'type' => count( $profiles ) > 1 ? 'Select' : 'Hidden', 'value' => @$values['from'] ? : Ayoola_Application::getUserInfo( 'profile_url' ) ), $profiles );
 	//	$fieldset->addElement( array( 'name' => 'reference', 'multiple' => 'multiple', 'placeholder' => '', 'type' => 'Hidden', 'value' => @$values['reference'] ? : Ayoola_Application::getUserInfo( 'profile_url' ) ) );
 	//	$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );

@@ -105,6 +105,7 @@ class Application_Share extends Application_Share_Abstract
 				$values['share_link'] = '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . $values['share_url'] . '\' );" href="javascript:" >' . $count . ' Shares</a>';
 				$this->setViewContent( $values['share_link'] );
 			}
+		//	var_export( $values );
 			$this->_objectTemplateValues = array_merge( $values ? : array(), $this->_objectTemplateValues ? : array() );
             // end of widget process
           

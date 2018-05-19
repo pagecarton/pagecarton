@@ -40,7 +40,7 @@ class Application_Article_Creator extends Application_Article_Abstract
      *
      * @var boolean
      */
-	protected static $_accessLevel = 0;
+	protected static $_accessLevel = 0;  
 	
     /**
      * The method does the whole Class Process
@@ -50,13 +50,11 @@ class Application_Article_Creator extends Application_Article_Abstract
     {
 		try
 		{ 
-	//		var_export( __LINE__ );
+		//	var_export( Application_Profile_Abstract::getMyDefaultProfile() );
 
-		//	throw new Exception( 'XXX' );
 
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );  
-		//	var_export( $_POST );
 	//		var_export( '1' );
 //			$postType = @$_REQUEST['article_type'] ? : 'post'; 
 			$postType = @$_REQUEST['article_type'] ? : @$_REQUEST['post_type']; 
@@ -71,18 +69,18 @@ class Application_Article_Creator extends Application_Article_Abstract
 			$joinedType = $joinedType ? : 'Post';
 			@$articleSettings['allowed_writers'] = $articleSettings['allowed_writers'] ? : array();
 			$articleSettings['allowed_writers'][] = 98; //	subdomain owners can add posts
-			
-			//	Only allowed users can write
-			if( ! Ayoola_Application::getUserInfo() )
-			{ 
-				$url = Ayoola_Page::setPreviousUrl( '/accounts/signin/' );
-				$this->setViewContent( '<span class="badnews"> Please <a rel="" href="' . $url . '">login</a> to add a new ' . $joinedType . '. </a></span>' );
-				return false;     
-			}         
-			elseif( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
+			if( ! $this->requireRegisteredAccount() )
+			{
+				return false;
+			}
+			if( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
 			{ 
 				$this->setViewContent( '<span class="badnews">You do not have enough priviledge to add a new ' . $joinedType . ' on this website. </span>', true );
 				return false;     
+			}
+			if( ! $this->requireProfile() )
+			{
+				return false;
 			}
 			
 			$this->createForm( 'Save', $this->getParameter( 'form_legend' ) ? : 'Add a new ' . $joinedType );
@@ -166,7 +164,8 @@ class Application_Article_Creator extends Application_Article_Abstract
 			$values['user_id'] = $userInfo['user_id'];
 			$values['username'] = $userInfo['username'];
 			
-			$values['profile_url'] = @$userInfo['profile_url'];
+		//	$values['profile_url'] = @$userInfo['profile_url'];
+			$values['profile_url'] = strtolower( $values['profile_url'] );
 			$values['article_creation_date'] = time();
 			$values['article_modified_date'] = time();
 			@$values['publish'] = ( ! isset( $values['publish'] ) && ! is_array( @$values['article_options'] ) ) ? '1' :  $values['publish'];

@@ -107,6 +107,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				}
 			}
 		}
+		$this->_parameter['content_to_clear_internal'] .= '
+		<p></p>
+		<span class="reducedfrom"></span>
+		<span class="pc_posts_option_items" style="text-decoration:line-through;" ></span>
+		<div class="sale-box1"><span style="border-bottom: 0;" class="on_sale title_shop pc-bg-color "></span></div>
+		<div class="price-number"><p><span class="rupees"></span></p></div>
+		';
 	//	var_export( 'ewe' );
 		try
 		{
@@ -473,6 +480,17 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					//	don't cache base64 strings of images and download data
 					unset( $data['document_url_base64'] );
 					unset( $data['download_base64'] );  
+
+					if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
+					{
+						$data['true_post_types'] = $postTypeInfo['article_type'];
+						$data['post_type'] = $postTypeInfo['post_type'];
+					}
+					else
+					{
+						$data['true_post_types'] = $data['article_type'];
+						$data['post_type'] = $data['article_type'];
+					}
 					
 					$values[$key] = $data;
 					$firstPost = empty( $firstPost ) ? $data['article_url'] : $firstPost;
@@ -1236,10 +1254,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( Ayoola_Application::getUserInfo( 'username' ) );
 			$this->setParameter( array( 'username_to_show' => Ayoola_Application::getUserInfo( 'username' ) ) );
 		}
-		elseif( $this->getParameter( 'show_profile_posts' ) && @Ayoola_Application::$GLOBAL['username'] )
+		elseif( $this->getParameter( 'show_profile_posts' ) && @Ayoola_Application::$GLOBAL['profile_url'] )
 		{
 		//	var_export( Ayoola_Application::$GLOBAL['username'] );  
-			$this->setParameter( array( 'username_to_show' => Ayoola_Application::$GLOBAL['username'] ) );
+			$this->setParameter( array( 'profile_to_show' => strtolower( Ayoola_Application::$GLOBAL['profile_url'] ) ) );
 		}
 		elseif( $this->getParameter( 'search_mode' ) && @$_REQUEST['q'] )
 		{
@@ -1275,17 +1293,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 //		var_export( $this->getParameter( 'username_to_show' ) ); 
 		if( $this->getParameter( 'username_to_show' ) )
 		{
-		//	var_export( $this->getParameter( 'username_to_show' ) );
-			//	Removing dependence on Ayoola_Api for showing posts
-		//	$path = self::getFolder();
-	//		$command = "find $path -type f -print0 | xargs -0 egrep -l \"'username' => '" . $this->getParameter( 'username_to_show' ) . "'\"";
-	//		$pattern = implode('\|', $contents_list) ;
-	//		@exec( $command, $output );
-	//		$path = implode( ' ', $output ) ? : 'work_around_to_avoid_it_showing_all_posts';
-
 			$whereClause['username'][] = $this->getParameter( 'username_to_show' );
-	//		self::V( $command );
-		//	var_export( $path );
+		} 
+		if( $this->getParameter( 'profile_to_show' ) )
+		{
+			$whereClause['profile_url'][] = $this->getParameter( 'profile_to_show' );
 		} 
 		if( $this->getParameter( 'true_post_type' ) )
 		{
@@ -1539,10 +1551,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					$table = $table::getInstance();
 					$this->_dbData = $table->select( null, $whereClause );
 			//		var_export( $this->_postTable );
-			//		var_export( $this->_dbData );
-			//		var_export( $whereClause );
+		//			var_export( $this->_dbData );
+		//			var_export( $whereClause );
 				}
-		//		self::v( $table->select() );
+//self::v( $table->select() );
 			//	self::v( $whereClause );
 					//	Posts created same time causing issues.
 				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );

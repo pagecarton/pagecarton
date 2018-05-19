@@ -60,7 +60,7 @@ class Ayoola_Access_AccountRequired extends Ayoola_Abstract_Table
      * 
      * @var array
      */
-	protected static $_modes = array( 'Ayoola_Access_Login' => 'Yes? Login to an existing account', 'Application_User_Creator' => 'No? Create a new account for free', );
+	protected static $_modes = array( 'Ayoola_Access_Login' => 'Yes', 'Application_User_Creator' => 'No', );
 		
     /**
      * 
@@ -112,7 +112,7 @@ class Ayoola_Access_AccountRequired extends Ayoola_Abstract_Table
 		require_once 'Ayoola/Form.php'; 
 		$form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = 'Continue' ;
-		$form->oneFieldSetAtATime = true;
+		$form->oneFieldSetAtATime = false;
 		
 		//	Check if there is a logged in user
 		$auth = new Ayoola_Access();
@@ -121,13 +121,14 @@ class Ayoola_Access_AccountRequired extends Ayoola_Abstract_Table
 		{ 
 			$fieldset = new Ayoola_Form_Element();
 			$fieldset->id = __CLASS__;
-			$fieldset->placeholderInPlaceOfLabel = true;
+			$fieldset->placeholderInPlaceOfLabel = false;
 			$fieldset->useDivTagForElement = false;
-			$fieldset->addElement( array( 'name' => 'mode', 'label' => 'Have you created an account on ' . Ayoola_Page::getDefaultDomain() . ' before?', 'type' => 'Radio', 'value' => @$values['mode'] ), self::$_modes ); 
+			$mode = $this->getGlobalValue( 'mode' ) ? : $this->getObjectStorage()->retrieve();
+			$mode = $mode ? : 'Application_User_Creator';
+			$fieldset->addElement( array( 'name' => 'mode', 'label' => 'Do you have an existing ' . Ayoola_Page::getDefaultDomain() . ' account?', 'type' => 'Select', 'onchange' => 'this.form.submit();', 'value' => @$values['mode'] ? : $mode ), self::$_modes ); 
 			$fieldset->addRequirement( 'mode', array( 'ArrayKeys' => self::$_modes ) );
 			$form->addFieldset( $fieldset );
-			$mode = $this->getGlobalValue( 'mode' ) ? : $this->getObjectStorage()->retrieve();
-		//	var_export( $mode );
+	//		var_export( $mode );
 			if( $mode )
 			{
 		//	var_export( $mode );
@@ -139,10 +140,19 @@ class Ayoola_Access_AccountRequired extends Ayoola_Abstract_Table
 				$class = new $mode();
 				if( ! method_exists( $class, 'createForm' ) ){ return false; }
 				$fieldsets = $class->getForm()->getFieldsets();
+	//		var_export( $fieldsets );
 				foreach( $fieldsets as $fieldset )
 				{
 					$fieldset->appendElement = false;
-					$fieldset->getLegend() ? : $fieldset->addLegend( self::$_modes[$mode] );
+					if( $mode === 'Application_User_Creator' )
+					{
+						$legend = 'Sign up';
+					}
+					else
+					{
+						$legend = 'Sign in';
+					}
+				//	$fieldset->getLegend() ? : $fieldset->addLegend( $legend );
 			//		$fieldset->addElement( array( 'type' => 'html', 'name' => 'e' ), array( 'html' => '<div class="goodnews">' . self::$_requirementOptions[$each]['goodnews'] . '</div>' ) );
 					$form->addFieldset( $fieldset );
 				}

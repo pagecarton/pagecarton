@@ -80,7 +80,16 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 			
 			//	save the new settings as well
 			Ayoola_Access_Login::login( $userInfo );
-			Ayoola_Access_Localize::info( $userInfo );
+
+			// we need to set this on the main site.
+			$multisiteTable = new PageCarton_MultiSite_Table();
+			$prefix = Ayoola_Application::getPathPrefix();
+			if( $response = $multisiteTable->selectOne( null, array( 'directory' => $prefix ) ) )
+			{
+				Ayoola_Application::reset( array( 'path' => $response['parent_dir'] ) );
+				Ayoola_Access_Localize::info( $userInfo );
+				Ayoola_Application::reset( array( 'path' => $prefix ) );
+			}
 			
 			$values['profile_creation_date'] = time();
 			$values['profile_modified_date'] = time();

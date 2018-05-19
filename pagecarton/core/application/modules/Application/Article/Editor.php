@@ -51,6 +51,11 @@ class Application_Article_Editor extends Application_Article_Abstract
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			if( ! self::isOwner( $data['user_id'] ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }  
+			if( ! $this->requireProfile() )
+			{
+				return false;
+			}
+			
 		//	self::v( $data );
 			//			var_export( $data['quiz_correct_option'] );
 			$this->createForm( 'Continue...', 'Editing "' . $data['article_title'] . '"', $data );

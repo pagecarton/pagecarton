@@ -392,6 +392,60 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 	} 
 	
     /**
+     * Do the class process to require a profile before continuing in class process
+     *
+     * @return boolean
+     */
+    public function requireRegisteredAccount()
+    {
+		if( ! Ayoola_Application::getUserInfo( 'email' ) )
+		{
+			$class = new Ayoola_Access_AccountRequired();
+			$class->initOnce();
+			if( ! $formV = $class->getForm()->getValues() )
+			{
+				$this->setViewContent( '<h3 style="margin: 1em 0;">Login to continue</h3>' );
+				$this->setViewContent( $class->view() );
+				return false;
+			}
+			else
+			{
+		//		$this->setViewContent( '<h2 style="margin: 1em 0;">Continue as @' . Ayoola_Application::getUserInfo( 'email' ) . '</h2>' );
+				return true;
+			}
+		}
+		return true;
+	}
+	
+    /**
+     * Do the class process to require a profile before continuing in class process
+     *
+     * @return boolean
+     */
+    public function requireProfile()
+    {
+		if( ! $profileInfo = Application_Profile_Abstract::getMyDefaultProfile() )
+		{
+	//		var_export( Application_Profile_Abstract::getMyDefaultProfile() );
+			//	profile now required for posts
+			$class = new Application_Profile_Creator();
+			$class->initOnce();
+			if( ! $formV = $class->getForm()->getValues() )
+			{
+				$this->setViewContent( '<h2 style="margin: 1em 0;">Create a profile to continue</h2>' );
+				$this->setViewContent( $class->view() );
+				return false;
+			}
+			else
+			{
+			//	$this->setViewContent( '<h2>Continue as @' . $formV['profile_url'] . '</h2>' );
+				return true;
+			}
+		}
+		return true;
+	}
+	
+    /**
      * Set the form object
      *
      * @param Ayoola_Form

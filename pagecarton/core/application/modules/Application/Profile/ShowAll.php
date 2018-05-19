@@ -46,29 +46,6 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
      * The method does the whole Class Process
      * 
      */
-	public static $_myProfiles;
-		
-    /**
-     * The method does the whole Class Process
-     * 
-     */
-	public static function getMyProfiles()
-    {   
-		if( ! is_null( self::$_myProfiles ) )
-		{
-			return self::$_myProfiles;
-		}
-		$access = new Ayoola_Access();
-		$userInfo = $access->getUserInfo();
-		@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
-		self::$_myProfiles = $userInfo['profiles'];
-		return $userInfo['profiles'];
-	}
-		
-    /**
-     * The method does the whole Class Process
-     * 
-     */
 	protected function init()
     {   
 		try
@@ -79,6 +56,7 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 			foreach( self::getMyProfiles() as $url )
 			{
 				$values = self::getProfileInfo( $url );
+	//		var_export( $url );
 	//		var_export( $values );
 				if( ! $values )
 				{

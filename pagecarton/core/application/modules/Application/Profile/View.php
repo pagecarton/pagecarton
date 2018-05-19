@@ -27,6 +27,13 @@ require_once 'Application/Profile/Abstract.php';
 
 class Application_Profile_View extends Application_Profile_Abstract
 {
+ 	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'View Profile'; 
 	
     /**
      * Whether class is playable or not
@@ -43,13 +50,6 @@ class Application_Profile_View extends Application_Profile_Abstract
 	protected static $_accessLevel = 0;
 	
     /**
-     * 
-     * 
-     * @var string 
-     */
-	protected static $_objectTitle = 'View User Profile'; 
-	
-    /**
      * The method does the whole Class Process
      * 
      */
@@ -61,8 +61,37 @@ class Application_Profile_View extends Application_Profile_Abstract
 			{
 		//		if( )
 			}
+			if( ! @$this->_parameter['markup_template'] ) 
+			{
+
+				$this->_parameter['markup_template'] = '
+                <div class="pc_theme_parallax_background" style="background-color:#444;background-image: url(\'{{{profile_banner}}}\');">
+                    <div class="xcontainer">
+                        <div class="pc-profile-image-div" style="background-image: url(\'{{{display_picture}}}\'); margin-right:1em;">&nbsp;</div>
+                        <div style="">
+                            <h3 style="margin-top:0;">{{{display_name}}}</h3>
+                            <p>{{{profile_description}}}</p>
+                            <p><i class="fa fa-share-alt"></i> {{{link_to_view_profile}}}</p>
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>';
+			}
+            $this->_parameter['content_to_clear_internal'] .= '
+            <p></p>
+            background-image: url(\'\');
+            ';
 			$this->_objectTemplateValues = array_merge( $data ? : array(), $this->_objectTemplateValues ? : array() );
-		//	var_export( $data );
+			$this->_objectTemplateValues['display_picture'] = $this->_objectTemplateValues['display_picture'] ?  Ayoola_Application::getUrlPrefix() . $this->_objectTemplateValues['display_picture'] : null;
+			$this->_objectTemplateValues['profile_banner'] = $this->_objectTemplateValues['profile_banner'] ? Ayoola_Application::getUrlPrefix() . $this->_objectTemplateValues['profile_banner'] : null;
+			$this->_objectTemplateValues['profile_link'] = Ayoola_Page::getHomePageUrl() . '/' . $this->_objectTemplateValues['profile_url'];
+      //      var_export( Ayoola_Application::getPresentUri() );
+       //     var_export( Ayoola_Application::getRequestedUri() );
+            if( Ayoola_Application::getPresentUri() !== $data['profile_url'] )
+            {
+		    	$this->_objectTemplateValues['link_to_view_profile'] = '<a style="font-size:x-small;" href="' . $this->_objectTemplateValues['profile_link']  . '"> ' . $this->_objectTemplateValues['profile_link'] . '</a>';
+		//	var_export( $this->_objectTemplateValues );
+            }
 		}
 		catch( Exception $e )
 		{ 

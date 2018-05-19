@@ -866,6 +866,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					case 'markup_template_prefix':
 					case 'markup_template_suffix':
 					case 'call_to_action':
+					case 'content_to_clear':
 					case 'body':
 					//	if( $advanceParameters['advanced_parameter_value'][$i] )       
 						{
@@ -1601,6 +1602,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$html = '<div class="'. $this->getParameter( 'object_class' ) .'" style="'. $this->getParameter( 'object_style' ) . '">' . $html . '</div>';
 					//	self::v( $template );   
 				}
+			//		var_export( $this->getParameter( 'content_to_clear' ) );
+				//	Define content to clear from the screen
+					$contentToClear = $this->getParameter( 'content_to_clear' ) . $this->_parameter['content_to_clear_internal'];
+				if( $contentToClear )       
+				{
+					$search = array_map( 'trim', explode( "\n", $contentToClear ) );
+			//		var_export( $search );
+					$html = str_replace( $search, '', $html );
+					//	self::v( $template );   
+				}
+				
 				return $html;
 			break;  
 			default:

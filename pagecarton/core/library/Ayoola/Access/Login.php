@@ -82,6 +82,16 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 	//	var_export( __LINE__ );
 		require_once 'Ayoola/Access.php'; 
 		require_once 'Ayoola/Page.php'; 
+		$accountPage = '/account';
+		if( $defaultAccountPage = Application_Settings_Abstract::getSettings( 'UserAccount', 'default_account_page' ) )
+		{
+			if( Ayoola_Page::getInfo( $defaultAccountPage ) )
+			{
+				$accountPage = $defaultAccountPage;
+			}
+
+		}
+	//	var_export( $accountPage );
 		$urlToGo = self::$returnUrl ? : Ayoola_Page::getPreviousUrl( '' . Ayoola_Application::getUrlPrefix() . '/account/' );
 		Application_Javascript::header( $urlToGo );
 		

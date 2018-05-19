@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="validator" creation_time="1526659956" modified_time="1526659956" table_version="0.3" module_version="1.00" table_class="Ayoola_Form_Validator" creation_ip="2130706433">
+  <RECORDS autoId="7">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="validator_title"><![CDATA[Valid Email Address]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validators"><![CDATA[[&quot;Ayoola_Validator_EmailAddress&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parameters"><![CDATA[[null]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_name"><![CDATA[_validemailaddress]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_id"><![CDATA[0-0-1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1526659956]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="validator_title"><![CDATA[Non Empty Value]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validators"><![CDATA[[&quot;Ayoola_Validator_NotEmpty&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parameters"><![CDATA[[null]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_name"><![CDATA[_nonemptyvalue]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_id"><![CDATA[0-0-2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1526659989]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="validator_title"><![CDATA[Alphanumeric Characters]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validators"><![CDATA[[&quot;Ayoola_Validator_Alnum&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parameters"><![CDATA[[null]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_name"><![CDATA[_alphanumericcharacters]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_id"><![CDATA[0-0-3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1526660042]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="validator_title"><![CDATA[Alphabets Only]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validators"><![CDATA[[&quot;Ayoola_Validator_Alpha&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parameters"><![CDATA[[null]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_name"><![CDATA[_alphabetsonly]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_id"><![CDATA[0-0-4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1526660093]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="5">
+      <TABLE_FIELD FIELD_KEY="validator_title"><![CDATA[Numeric Characters Only]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validators"><![CDATA[[&quot;Ayoola_Validator_Digits&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parameters"><![CDATA[[null]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_name"><![CDATA[_numericcharactersonly]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_id"><![CDATA[0-0-5]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1526660220]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="validator_title"><![CDATA[3 to 100 characters]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validators"><![CDATA[[&quot;Ayoola_Validator_WordCount&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parameters"><![CDATA[[[&quot;3&quot;,&quot;100&quot;]]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_name"><![CDATA[_3to100characters]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="validator_id"><![CDATA[0-0-6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1526660535]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES validator_title="INPUTTEXT" validator_name="INPUTTEXT" validators="JSON" parameters="JSON" validator_id="INPUTTEXT" creation_time="INPUTTEXT" modified_time="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>
