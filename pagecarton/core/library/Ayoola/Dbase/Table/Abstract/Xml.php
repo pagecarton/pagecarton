@@ -153,6 +153,32 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 			}
 			if( ! empty(  static::$_tableInfo['table_info'] ) && ( @ static::$_tableInfo['table_info']['table_version'] === $this->_tableVersion && @ static::$_tableInfo['table_info']['module_version'] === self::$_version ) )
 			{ 
+        if( file_exists( $backupFile ) && time() - filemtime( $backupFile ) > 86400 )
+        { 
+            $values = include( $backupFile );
+            $num = count( $values );
+            rename( $backupFile, $backupFile . '.backup' );
+            set_time_limit( 86400 );
+//              PageCarton_Widget::v( $num );   
+
+            foreach( $values as $intK => $each )
+            { 
+              try
+              {
+              //    PageCarton_Widget::v( $intK );   
+            //      PageCarton_Widget::v( $each['form_name'] );   
+                $this->insert( $each ); 
+              }
+              catch( Exception $e )
+              {  
+                null;
+              }
+            }
+           
+          //  lets just try to revive the saved data
+    //      self::v( $backupFile );
+            PageCarton_Widget::v( $backupFile );
+        }
 				break; 
 			}
  	//
@@ -170,6 +196,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
         $backupFile =  static::$_tableInfo['filename'] . '.backup';
         if( file_exists( $backupFile ) )
         { 
+    //      self::v( $backupFile );
           
         //	if( time() - filemtime( $backupFile ) < 86400 )
           if( time() - filemtime( $backupFile ) < 86400 )
@@ -221,7 +248,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 			
 			
 		//	exit( __LINE__ );
-		//	set_time_limit( 86400 ); //	We may need time to update a very large table
+			set_time_limit( 86400 ); //	We may need time to update a very large table
 		//	ignore_user_abort( true );
 			foreach( $values as $each )
 			{ 

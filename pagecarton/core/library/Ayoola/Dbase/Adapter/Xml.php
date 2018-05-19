@@ -376,6 +376,12 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		{
  		//	LOOK FOR SUPPLEMENTARY FILES FOR LARGE RECORDS	
     //    var_export( $this->getGlobalFilenames() );		
+     //   if( basename( $this->getMySupplementaryDirectory( $filePath ) ) === 'data' )
+        {
+      //       PageCarton_Widget::v( $filePath );
+     //       PageCarton_Widget::v( Ayoola_Doc::getDirectoriesRecursive( $this->getMySupplementaryDirectory( $filePath ) ) );
+   //       PageCarton_Widget::v( Ayoola_Doc::getFilesRecursive( $this->getMySupplementaryDirectory( $filePath ) ) );
+        }
 		  if( $files = Ayoola_Doc::getFilesRecursive( $this->getMySupplementaryDirectory( $filePath ), array( 'key_function' => 'filectime' ) ) )
       {
     //    var_export( $files );
