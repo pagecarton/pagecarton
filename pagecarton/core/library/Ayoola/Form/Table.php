@@ -33,7 +33,7 @@ class Ayoola_Form_Table extends Ayoola_Dbase_Table_Abstract_Xml
      *
      * @param int
      */
-    protected $_tableVersion = '0.12';   
+    protected $_tableVersion = '0.17';   
 
 	protected $_dataTypes = array
 	( 
@@ -56,6 +56,9 @@ class Ayoola_Form_Table extends Ayoola_Dbase_Table_Abstract_Xml
 		'element_group_name' => 'JSON',
 		'element_name' => 'JSON',
 		'element_default_value' => 'JSON',
+		'element_validators' => 'JSON',
+		'element_importance' => 'JSON',
+		'element_multioptions' => 'JSON',
 	);
 	// END OF CLASS
 }

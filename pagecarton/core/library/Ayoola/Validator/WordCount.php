@@ -40,6 +40,7 @@ class Ayoola_Validator_WordCount extends Ayoola_Validator_Abstract
 	public function autofill( $parameters )
     {
 		//$args = array_slice( $args, 0, 2 );
+  //      var_export( $parameters );
 		$this->setRange( $parameters[0],$parameters[1] );
     }
 }

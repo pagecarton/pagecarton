@@ -188,7 +188,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 			$method = 'add' . @$element['type'];
 			if( ! method_exists( __CLASS__, $method ) )
 			{
-			//	$method = 'addInputText';
+			//	$adderEx
+				$method = 'addInputText';
 			//	$element .= $description ? "<span> {$description} </span>" : null;		
 			//	$element = "<span>{$element}</span>";		
 				//	exit();
@@ -523,12 +524,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				{ 
 				//	if( @$element['data-allow_base64'] )
 					{
-/*						$html .= '
-						<span title="Click to upload new photo" style="cursor: pointer;max-height:100px;vertical-align:middle;display:inline-block;" class="" onClick="ayoola.image.formElement = this; ayoola.image.cropping.crop = true; ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\'; ayoola.image.fieldNameValue = \'url\'; ayoola.image.formElement = this.parentNode.getElementsByTagName( \'input\' ).item(0); ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
-							<img  style="max-height:32px;" alt="Upload" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-top-8x.png" >
-						</span>
-						'; 
-*/						$html .= '
+						$html .= '
 						<span title="Click to upload new photo" style="cursor: pointer;max-height:100px;vertical-align:middle;display:inline-block;" class="" onClick="ayoola.image.formElement = this; ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\'; ayoola.image.fieldNameValue = \'url\'; ayoola.image.formElement = this.parentNode.getElementsByTagName( \'input\' ).item(0); ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
 							<img  style="max-height:32px;" alt="Upload" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-top-8x.png" >
 						</span>
@@ -539,7 +535,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 					//	return ;
 					}
 				}
-				else
+				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] )  )
 				{
 					$html .= '
 					<span  title="Upload new file" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
@@ -690,6 +686,9 @@ class Ayoola_Form_Element extends Ayoola_Form
 		//		var_export( $element['value'] );
 		foreach( $values as $value => $label )
 		{ 
+		//	var_export( $label );
+			$label = $label !== '' ? $label : $value;
+		//	var_export( $value );
 			$counter++;
 			$checked = null; 
 			//	@var_export( $value );
@@ -820,6 +819,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		unset( $element['label'] );
 		foreach( $values as $value => $label )
 		{ 
+			$label !== '' ? $label : $value;
 			//	Doing this because of CHeckout logo
 			$label = htmlspecialchars_decode( $label );
 			$i++;
@@ -875,6 +875,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 			
 			foreach( $subgroup as $value => $title )
 			{
+				$title = $title !== '' ? $title : $value;
 				$html.= "<option value='{$value}'";
 		//		var_export( $value );
 		//		var_export( $element["value"] );
@@ -916,6 +917,7 @@ class Ayoola_Form_Element extends Ayoola_Form
         $html .= "<select " . self::getAttributesHtml( $element ) . "> \n";
 		foreach( $values as $value => $title )
 		{
+			$title = $title !== '' ? $title : $value;
 			$html.= "<option value='{$value}'";
 			if( isset( $_POST[$element["name"]] ) && !( strcmp( $value, $_POST[$element["name"]] ) ) )
 			{ 

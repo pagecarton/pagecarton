@@ -198,10 +198,10 @@ class Ayoola_Page_Layout_Repository extends Application_Article_ShowAll
     {
 	//	var_export( $data );
 		$data['not_real_post'] = true; 
-		$data['document_url'] = 'http://themes.pagecarton.org/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=850&max_height=540&article_url=' . @$data['guid'];
+		$data['document_url'] = 'https://themes.pagecarton.org/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=850&max_height=540&article_url=' . @$data['guid'];
 		$data['publish'] = '1'; 
 		$data['auth_level'] = '0';   
-	//	$data['allow_raw_data'] = true; 
+	//	$data['allow_raw_data'] = true;    
 	}
 	// END OF CLASS
 }

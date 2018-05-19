@@ -337,7 +337,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			
 			$requirement = null;
 			$options = array();
-			$type = 'InputText'; 
+			$type = $formInfo['element_type'][$i]; 
 			@$formInfo['element_name'][$i] = $formInfo['element_name'][$i] ? : $formInfo['element_title'][$i];
 			$elementName = $formInfo['element_name'][$i];
 			if( strpos( $elementName, 'base64' ) )
@@ -354,6 +354,9 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				break;
 				case 'submit': 
 					$type = 'submit'; 
+				break;
+				case 'email': 
+					$type = 'email'; 
 				break;
 				case 'hidden': 
 					$type = 'hidden'; 
@@ -480,10 +483,61 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					}
 				break;
 				default: 
-					$type = 'InputText'; 
+				//	$type = 'InputText'; 
 				break;
 			}
-			$fieldsets[$key]->addElement( array( 'name' => $elementName, 'label' => $formInfo['element_title'][$i], 'data-document_type' => $formInfo['element_type'][$i], 'placeholder' => $formInfo['element_placeholder'][$i], 'type' => $type, 'value' => $defaultValue ) + $options );
+	//		var_export( $type );
+			$elementInfo = array( 'name' => $elementName, 'label' => $formInfo['element_title'][$i], 'data-document_type' => $formInfo['element_type'][$i], 'placeholder' => $formInfo['element_placeholder'][$i], 'type' => $type, 'value' => $defaultValue );
+			if( $formInfo['element_importance'][$i] == 'required' )
+			{
+				$elementInfo['required'] = true;
+			}
+			$multiOptionsRecord = array();
+			if( $formInfo['element_multioptions'][$i] )
+			{
+				if( $multiOptions = Ayoola_Form_MultiOptions::getInstance()->selectOne( null, array( 'multioptions_name' => $formInfo['element_multioptions'][$i] ) ) )
+				{
+					//	var_export( $multiOptions );
+					$tableDb = $multiOptions['db_table_class'];
+					if( Ayoola_Loader::loadClass( $tableDb ) && $tableDb::getInstance() instanceof Ayoola_Dbase_Table_Interface  )
+					{
+					//	$multiOptions = $tableDb::getInstance();
+						$multiOptionsRecord = $tableDb::getInstance()->select();
+						require_once 'Ayoola/Filter/SelectListArray.php';
+						$filter = new Ayoola_Filter_SelectListArray( $multiOptions['values_field'], $multiOptions['label_field'] );
+						$multiOptionsRecord = $filter->filter( $multiOptionsRecord );  
+						asort( $multiOptionsRecord );
+					}
+				//	var_export( $multiOptions['values_field'] );
+				//	var_export( $tableDb );
+				//	if( $tableDb === 'Application_Profile_Table' )
+					{
+				//		var_export( $tableDb::getInstance()->select() );
+					}
+				}
+			}
+	//		var_export( $multiOptionsRecord );
+			$fieldsets[$key]->addElement( $elementInfo + $options, $multiOptionsRecord );
+			
+			if( $formInfo['element_validators'][$i] )
+			{
+				if( $validatorInfo = Ayoola_Form_Validator::getInstance()->selectOne( null, array( 'validator_name' => $formInfo['element_validators'][$i] ) ) )
+				{
+					foreach( $validatorInfo['validators'] as $iKey => $eachValidator )
+					{
+						//	var_export( $eachValidator );
+						if( Ayoola_Loader::loadClass( $eachValidator ) && new $eachValidator instanceof Ayoola_Validator_Interface  )
+						{
+					//	var_export( $validatorInfo['parameters'][$iKey] );
+							$req = array( $eachValidator => $validatorInfo['parameters'][$iKey] );
+						//	var_export( $req );
+							$fieldsets[$key]->addRequirement( $elementName, $req );
+						}
+					}
+				}
+			//	var_export( $validatorInfo );
+			}
+
 			$requirement ? $fieldsets[$key]->addRequirement( $elementName, $requirement ) : null;
 							
 			$i++;

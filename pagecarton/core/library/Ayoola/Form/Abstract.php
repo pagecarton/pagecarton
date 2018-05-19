@@ -206,6 +206,16 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 	//	if( is_array( $this->getGlobalValue( 'form_options' ) ) && in_array( 'send_mail', $this->getGlobalValue( 'form_options' ) ) )
 		{ 
 			$j = 0; // group count
+
+			$reqOptions = Ayoola_Form_Validator::getInstance();
+			$reqOptions = $reqOptions->select();
+			$filter = new Ayoola_Filter_SelectListArray( 'validator_name', 'validator_title');
+			$reqOptions = array( '' => 'No Validator' ) + $filter->filter( $reqOptions );  
+
+			$multiOptions = Ayoola_Form_MultiOptions::getInstance();
+			$multiOptions = $multiOptions->select();
+			$filter = new Ayoola_Filter_SelectListArray( 'multioptions_name', 'multioptions_title');
+			$multiOptions = array( '' => 'No Multi-Options' ) + $filter->filter( $multiOptions );  
 	//		while( $j <= count( @$groupIds ) && $j < 9 )//	Do this for all each categories and don't forget the "uncategorized"
 			{ 
 				$i = 0;
@@ -230,19 +240,20 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 			//		$newFieldSet->addLegend( 'Field <span name="field_counter">' . ( $i + 1 ) . '</span>' );
 			//		$newFieldSet->addLegend( ' Group Name:' . $groupTitle[$j] . ' <br>Form Field ' . ( $i + 1 ) );
 					$newFieldSet->addElement( array( 'name' => 'element', 'type' => 'Html', 'value' => null ), array( 'html' => '<div style="padding: 1em 0 1em 0;">Field <span name="field_counter"> ' . ( $i + 1 ) . '</span></div>' ) );
-					$newFieldSet->addElement( array( 'name' => 'element_title',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'width: 300px;', 'placeholder' => 'Element title e.g. Full Name', 'type' => 'InputText', 'value' => @$values['element_title'][$i] ) ); 
-					$newFieldSet->addElement( array( 'name' => 'element_name',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'width: 300px;', 'placeholder' => 'Unique Name e.g. full_name', 'type' => 'InputText', 'value' => @$values['element_name'][$i] ) );
-					$newFieldSet->addElement( array( 'name' => 'element_default_value',  'multiple' => 'multiple', 'label' => ' ', 'style' => 'width: 300px;', 'placeholder' => 'Default Value e.g. John C. Smith', 'type' => 'InputText', 'value' => @$values['element_default_value'][$i] ) );
+					$newFieldSet->addElement( array( 'name' => 'element_title',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Element title e.g. Full Name', 'type' => 'InputText', 'value' => @$values['element_title'][$i] ) ); 
+					$newFieldSet->addElement( array( 'name' => 'element_name',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Unique Name e.g. full_name', 'type' => 'InputText', 'value' => @$values['element_name'][$i] ) );
+					$newFieldSet->addElement( array( 'name' => 'element_default_value',  'multiple' => 'multiple', 'label' => ' ', 'style' => 'max-width: 240px;', 'placeholder' => 'Default Value e.g. John C. Smith', 'type' => 'InputText', 'value' => @$values['element_default_value'][$i] ) );
 					
 				//	$newFieldSet->addRequirement( 'element_name', array( 'Name' => null  ) ); 
-					$newFieldSet->addElement( array( 'name' => 'element_placeholder',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'width: 300px;', 'placeholder' => 'Placeholder e.g. John Smith', 'type' => 'InputText', 'value' => @$values['element_placeholder'][$i] ) );
-					$newFieldSet->addElement( array( 'name' => 'element_type',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'width: 300px;', 'type' => 'Select', 'value' => @$values['element_type'][$i] ), 
+					$newFieldSet->addElement( array( 'name' => 'element_placeholder',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Placeholder e.g. John Smith', 'type' => 'InputText', 'value' => @$values['element_placeholder'][$i] ) );
+					$newFieldSet->addElement( array( 'name' => 'element_type',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'type' => 'Select', 'value' => @$values['element_type'][$i] ), 
 					
 						array( 
 								'text' => 'Text Input', 
 								'hidden' => 'Hidden Field', 
-					//			'radio' => 'Radio Button', 
-					//			'Select' => 'Select Option', 
+								'radio' => 'Radio Button', 
+								'select' => 'Select Option', 
+								'checkbox' => 'Checkbox', 
 								'email' => 'Email Input', 
 								'textarea' => 'Text Area', 
 								'html' => 'HTML Editor', 
@@ -255,16 +266,27 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 								'date' => 'Date',
 								'datetime' => 'Date & Time',
 								 ) );
-					$this->getGlobalValue( 'group_names' ) ? $newFieldSet->addElement( array( 'name' => 'element_group_name',  'multiple' => 'multiple', 'label' => 'Group Name (Optional)', 'placeholder' => 'e.g. personal', 'type' => 'Select', 'value' => @$values['element_group_name'][$i] ), array_combine( $this->getGlobalValue( 'group_ids' ), $this->getGlobalValue( 'group_names' ) ) ) : null; 
+					$this->getGlobalValue( 'group_names' ) ? $newFieldSet->addElement( array( 'name' => 'element_group_name',  'multiple' => 'multiple', 'label' => 'Group Name (Optional)', 'type' => 'Select', 'value' => @$values['element_group_name'][$i] ), array_combine( $this->getGlobalValue( 'group_ids' ), $this->getGlobalValue( 'group_names' ) ) ) : null; 
+					
+					$newFieldSet->addElement( array( 'name' => 'element_validators', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_validators'][$i] ), $reqOptions );   
+					
+					$newFieldSet->addElement( array( 'name' => 'element_multioptions', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_multioptions'][$i] ), $multiOptions );   
+					
+					$importanceOptions = array(
+												'' => 'Optional',
+												'required' => 'Required',
+					);
+					$newFieldSet->addElement( array( 'name' => 'element_importance', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_importance'][$i] ), $importanceOptions );   
 					$newForm->addFieldset( $newFieldSet );    
 				//	self::v( $i );   
 				//	var_export();
 					$i++;
 				}
 				while( ! empty( $values['element_title'][$i] ) );
+		//		var_export( $values );
 				$fieldset = new Ayoola_Form_Element;
 			//	$fieldset->allowDuplication = true;
-				$fieldset->addElement( array( 'name' => 'xxxx', 'type' => 'Html', 'value' => '' ), array( 'html' => '<legend>Build form Elements and Fields</legend>' . $newForm->view(), 'fields' => 'element_title,element_name,element_group_name,element_default_value,element_placeholder,element_type' ) );
+				$fieldset->addElement( array( 'name' => 'xxxx', 'type' => 'Html', 'value' => '' ), array( 'html' => '<legend>Build form Elements and Fields</legend>' . $newForm->view(), 'fields' => 'element_title,element_name,element_group_name,element_default_value,element_placeholder,element_type,element_validators,element_importance,element_multioptions' ) );
 		//		self::v( $newForm->view() );  
 		//		$fieldset->addElement( array( 'name' => 'xxxx', 'type' => 'Html', 'value' => '' ), array( 'html' => $newForm->view(), 'fields' => '' ) );
 				$form->addFieldset( $fieldset );   

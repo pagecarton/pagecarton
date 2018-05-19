@@ -15,6 +15,9 @@ class Ayoola_Validator_EmailAddress extends Ayoola_Validator_Abstract
 			return false;
 		if( substr_count( $value, '@' )  > 1 )		
 			return false;
+
+		if( strpos( $value, ' ' ) !== false )		
+			return false;
 		
 		if( substr_count( $value, '.' )  < 1 )		
 			return false;
