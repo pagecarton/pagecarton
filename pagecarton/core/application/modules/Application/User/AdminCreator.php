@@ -131,7 +131,7 @@ class Application_User_AdminCreator extends Application_User_Creator
      * Creates the form 
      *
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		$form = new Ayoola_Form( 'name=>' . $this->getObjectName() );
 		$this->setForm( $form );

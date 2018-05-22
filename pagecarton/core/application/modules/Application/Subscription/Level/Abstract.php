@@ -63,7 +63,7 @@ abstract class Application_Subscription_Level_Abstract extends Ayoola_Abstract_T
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		//var_export( $_POST );
 		//	Form to create a new page

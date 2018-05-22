@@ -152,7 +152,7 @@ class Application_User_NotificationMessage_Send extends Application_User_Notific
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		//	Form to create a new page
     //    $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'enctype' => 'multipart/form-data' ) );

@@ -110,7 +110,7 @@ class Application_Article_Type_Quiz_WhitelistImport extends Application_Article_
      * Form to display poll
      * 
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );

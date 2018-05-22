@@ -84,7 +84,7 @@ abstract class Application_User_UserLocation_Abstract extends Ayoola_Abstract_Ta
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		$values = $values ? : $this->getParameter( 'form_preset_values' ); 
 		//	var_export( $values );

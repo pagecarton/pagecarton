@@ -63,7 +63,7 @@ abstract class Application_Database_Account_Abstract extends Ayoola_Abstract_Tab
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 	//	var_export( $values['days_of_the_week'] );
 	

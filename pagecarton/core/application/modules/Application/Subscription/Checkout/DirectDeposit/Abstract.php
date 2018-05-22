@@ -49,7 +49,7 @@ abstract class Application_Subscription_Checkout_DirectDeposit_Abstract extends 
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 	//	var_export( $values['object_name'] );	
 		//	Form to create a new page

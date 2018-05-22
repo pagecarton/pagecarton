@@ -79,7 +79,7 @@ abstract class Application_User_UserCreditCard_Abstract extends Ayoola_Abstract_
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		require_once 'Ayoola/Form.php';
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );

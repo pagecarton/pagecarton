@@ -178,7 +178,7 @@ class Application_User_Help_ChangePassword extends Application_User_Help_Abstrac
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		require_once 'Ayoola/Form.php';
 //		$form = new Ayoola_Form( 'name=>' . $this->getObjectName() );

@@ -328,7 +328,7 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
 				if( ! method_exists( $table, 'getInstance' ) ){ continue; }
 				@$class = $table::getInstance();
 				if( ! $class instanceof Ayoola_Dbase_Adapter_Interface ){ continue; }
-				$node->setAttribute( $table, $field );
+				$node->setAttribute( $table, $field );   
 			}
 		}
 		return $node;

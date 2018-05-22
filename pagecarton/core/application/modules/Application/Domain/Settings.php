@@ -35,7 +35,7 @@ class Application_Domain_Settings extends Application_Settings_Abstract
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		$values = unserialize( @$values['settings'] );
 //		var_export( $values );

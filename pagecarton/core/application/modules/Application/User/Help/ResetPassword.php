@@ -109,7 +109,7 @@ class Application_User_Help_ResetPassword extends Application_User_Help_ChangePa
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		require_once 'Ayoola/Form.php';
 //		$form = new Ayoola_Form( 'name=>' . $this->getObjectName() );

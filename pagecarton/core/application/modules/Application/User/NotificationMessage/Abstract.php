@@ -63,7 +63,7 @@ abstract class Application_User_NotificationMessage_Abstract extends Ayoola_Abst
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( 'name=>' . $this->getObjectName() );

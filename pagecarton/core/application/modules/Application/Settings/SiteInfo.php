@@ -49,7 +49,7 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
     //    $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 	//	var_export( $values );

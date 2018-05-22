@@ -97,7 +97,7 @@ class Application_Profile_Photo extends Application_Profile_Abstract
 		}
     } 
 	//	This is to implement the abstract method of the parent class. Not all inheriting classes needs a form
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
 	{
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => $this->getObjectName() ) );
 	//	$form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );

@@ -98,7 +98,7 @@ class Application_CommentBox_Abstract extends PageCarton_Widget
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )  
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )  
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );

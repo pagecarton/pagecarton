@@ -247,7 +247,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
     } 
 	  
 	//	This is to implement the abstract method of the parent class. Not all inheriting classes needs a form
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
 	{
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . @$_REQUEST['access_level'] . @$values['profile_url'], 'data-not-playable' => true ) );      
       //  $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );

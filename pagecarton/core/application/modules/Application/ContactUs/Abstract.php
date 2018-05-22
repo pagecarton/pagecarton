@@ -71,7 +71,7 @@ abstract class Application_ContactUs_Abstract extends Ayoola_Abstract_Table
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue, $legend = null, Array $values = null )
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		//	Form to create a new page
    //   $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'class' => 'smallFormElements' ) );   
