@@ -410,8 +410,15 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 								{
 									//	saving as codes makes us not have the ckeditor again
 									var f = document.createElement( \'div\' ); 
+									var fx = document.createElement( \'div\' ); 
+									fx.appendChild( f );
 									f.className = \'ckeditor\'; 
-									f.outerHTML = \'<div data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor"  onClick="replaceDiv( this );" onDblClick="replaceDiv( this );">\' + e[b].value +  \'</div>\';  
+								//	alert( f.outerHTML );
+								//	alert( f.innerHTML );
+									if( f.outerHTML )
+									{
+										f.outerHTML = \'<div data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor"  onClick="replaceDiv( this );" onDblClick="replaceDiv( this );">\' + e[b].value +  \'</div>\';  
+									}
 							//		f. = 5; 
 									f.setAttribute( \'onClick\', \'replaceDiv( this );\' ); 
 									f.setAttribute( \'contentEditable\', \'true\' ); 
