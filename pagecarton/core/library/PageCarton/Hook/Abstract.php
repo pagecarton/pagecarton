@@ -46,7 +46,7 @@ class PageCarton_Hook_Abstract extends PageCarton_Widget
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 99 );
+	protected static $_accessLevel = array( 99, 98 );
 
 
     /**
@@ -66,7 +66,8 @@ class PageCarton_Hook_Abstract extends PageCarton_Widget
 //		$form->oneFieldSetAtATime = true;
 		$fieldset->placeholderInPlaceOfLabel = false;
         
-        $fieldset->addElement( array( 'name' => 'class_name', 'type' => 'InputText', 'value' => @$values['class_name'] ) );         $fieldset->addElement( array( 'name' => 'hook_class_name', 'type' => 'InputText', 'value' => @$values['hook_class_name'] ) ); 
+        $fieldset->addElement( array( 'name' => 'class_name', 'type' => 'InputText', 'value' => @$values['class_name'] ) ); 
+        $fieldset->addElement( array( 'name' => 'hook_class_name', 'type' => 'InputText', 'value' => @$values['hook_class_name'] ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

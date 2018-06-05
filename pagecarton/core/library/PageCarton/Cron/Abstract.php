@@ -45,7 +45,7 @@ class PageCarton_Cron_Abstract extends PageCarton_Widget
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 99 );
+	protected static $_accessLevel = array( 99, 98 );
 	
     /**
      * 
