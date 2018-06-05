@@ -535,7 +535,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 					//	return ;
 					}
 				}
-				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] )  )
+				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ? : 98 )  )
 				{
 					$html .= '
 					<span  title="Upload new file" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
@@ -546,7 +546,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				@$docSettings['allowed_viewers'] = @$docSettings['allowed_viewers'] ? : array();
 				@$docSettings['allowed_viewers'][] = 98;	// allow us to user domain owners
 				
- 				if( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_viewers'] ) && ! @$element['data-allow_base64'] )
+ 				if( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_viewers'] ? : 98 ) && ! @$element['data-allow_base64'] )
 				{ 
 					$html .= '
 					<span title="Browse Existing files on site" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 

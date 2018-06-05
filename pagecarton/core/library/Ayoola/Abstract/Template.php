@@ -40,7 +40,7 @@ abstract class Ayoola_Abstract_Template extends Ayoola_Abstract_Table
      *
      * @var boolean
      */
-	protected static $_accessLevel = 99;
+	protected static $_accessLevel = array( 98, 99 );
  	
     /**
      * The column name of the primary key
