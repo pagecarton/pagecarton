@@ -87,10 +87,12 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
         $search['{year}'] = date('Y');
         $search['{filename}'] = basename( $path );
         $search['{username}'] = Ayoola_Application::getUserInfo( 'email' );
+        $nextStep = null;
         switch( @$_REQUEST['file_type'] )
         {
             case 'settings':
                 $sampleFile = 'PageCarton_Settings_Sample';
+                $nextStep = '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/' . $values['class_name'] . '">View Widget</a>';
             break;
             case 'table':
                 $sampleFile = 'PageCarton_Table_Sample';
@@ -115,6 +117,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
                 {
                     $otherFiles = Ayoola_Doc::getFiles( dirname( $sampleWidgetsAbstract ) );
                 }  
+                $nextStep = '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/' . $values['class_name'] . '_List">Manage Table Data</a>';
             break;
             default:
                 $sampleFile = 'PageCarton_Widget_Sample_Blank';
@@ -164,8 +167,13 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
 
     //    $this->setViewContent( '<textarea>' . $content . '</textarea>' );
         $this->setViewContent( '<h1 class="goodnews">File created successfully</h1>', true ); 
-        $this->setViewContent( '<p>Customize this ' . $type . ' (' . $values['class_name'] . ') by editing the file below:</p>' ); 
-        $this->setViewContent( '<p style="font-size:smaller;">' . $path . '</p>' ); 
+        $this->setViewContent( '<p>' . $nextStep . '</p>' ); 
+
+        if( self::hasPriviledge() )
+        {
+            $this->setViewContent( '<p>Customize this ' . $type . ' (' . $values['class_name'] . ') by editing the file below:</p>' ); 
+            $this->setViewContent( '<p style="font-size:smaller;">' . $path . '</p>' ); 
+        } 
  		
     } 
 	

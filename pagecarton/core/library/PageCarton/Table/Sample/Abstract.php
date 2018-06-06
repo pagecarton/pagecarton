@@ -46,7 +46,7 @@ class PageCarton_Table_Sample_Abstract extends PageCarton_Widget
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 99 );
+	protected static $_accessLevel = array( 99, 98 );
 
 
     /**
