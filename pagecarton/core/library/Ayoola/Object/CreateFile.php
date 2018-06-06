@@ -92,7 +92,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
         {
             case 'settings':
                 $sampleFile = 'PageCarton_Settings_Sample';
-                $nextStep = '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/' . $values['class_name'] . '">View Widget</a>';
+                $nextStep = '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/' . $values['class_name'] . '">View Settings</a>';
             break;
             case 'table':
                 $sampleFile = 'PageCarton_Table_Sample';
@@ -122,6 +122,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
             default:
                 $sampleFile = 'PageCarton_Widget_Sample_Blank';
                 $search['{widget_title}'] = $values['widget_title'];
+                $nextStep = '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/' . $values['class_name'] . '">View Widgets</a>';
             break;
         }
         $search[$sampleFile] = $values['class_name'];
