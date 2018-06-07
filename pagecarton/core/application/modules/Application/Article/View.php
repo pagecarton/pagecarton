@@ -369,7 +369,8 @@ class Application_Article_View extends Application_Article_Abstract
 		$internalForms = array();
 		$internalForms[] = $postType;
 		$internalForms = array_merge( is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array(), $internalForms );
-
+	//	var_export( $internalForms );
+		if( ! $this->getParameter( 'min_quantity' ) )
 		foreach( array_unique( $internalForms ) as $eachPostType )
 		{	
 			switch( $eachPostType )
@@ -379,7 +380,6 @@ class Application_Article_View extends Application_Article_Abstract
 				case 'subscription':
 				case 'event':
 				case 'events':
-				case 'multi-price':
 					//	By
 					
 					//	title
@@ -397,18 +397,25 @@ class Application_Article_View extends Application_Article_Abstract
 					$this->_xml .= $data['button_add_to_cart'];
 					$this->_xml .= @$data['article_content'];
 				break;
-	/*			case 'profile':
+				case 'multi-price':
+					//	By
 					
 					//	title
-					$this->_xml .= '<p style=""><strong>Full Name:</strong> ' . $data['full_legal_name'] . '</p> ';
-					$this->_xml .= '<p style=""><strong>Phone Number:</strong> +' . $data['dial_code'] . '-' . $data['phonenumber'] . '</p> ';
-					$this->_xml .= '<p style=""><strong>Blackberry PIN:</strong> ' . $data['bbm_pin'] . '</p> ';
-					$this->_xml .= '<p style=""><strong>Blackberry Channel:</strong> ' . $data['bbm_channel'] . '</p> ';
-				//	$this->_xml .= '<p style=""><strong>Twitter Handle:</strong> ' . $data['twitter_handle'] . '</p> ';
-					$this->_xml .= '<p style=""><strong>Website:</strong> ' . $data['website'] . '</p> ';
+					$baseData = array();
+					if( ! empty( $leastPrice ) )
+					{
+						//	don't let least price get into the cart'
+						$baseData['item_price'] = '';
+					//	unset( $data['item_price'] );
+					}
+			//		var_export( $baseData );
+			//		var_export( $baseData + $data );
+					$parameterX = array( 'data' => $baseData + $data, 'button_value' => $this->getParameter( 'button_value' ), 'multi-price' => true, 'min_quantity' => $this->getParameter( 'min_quantity' ), 'max_quantity' => $this->getParameter( 'max_quantity' ) );
+					$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( $parameterX );
+					$this->_xml .= $data['button_add_to_cart'];
 					$this->_xml .= @$data['article_content'];
 				break;
-	*/			case 'video':
+				case 'video':
 					$data['video_content'] = Application_Article_Type_Video::viewInLine( array( 'data' => $data ) );
 					$this->_xml .= $data['video_content'];
 					$this->_xml .= @$data['article_content'];  

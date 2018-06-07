@@ -58,7 +58,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		//	var_export( $subscriptionData );
 		}
 		$this->createForm( $this->getParameter( 'button_value' ) ? : ( @$subscriptionData['call_to_action'] ? : 'Add to cart' ), '' );
-		$form = $this->getForm()->view();
+		$form = $this->getForm() ? $this->getForm()->view() : null;
 		$class = new Application_Subscription();   
 		$confirmation = $class::getConfirmation();
 	
@@ -95,7 +95,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			exit();
 		//	$this->_objectData['confirmation'] = $confirmation;	
 		}
-		elseif( ! $values = $this->getForm()->getValues() )
+		elseif( $this->getForm()  AND ! $values = $this->getForm()->getValues() )
 		{ 
 			//	var_export( 123 );
 			//	show form
@@ -107,7 +107,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			//	var_export( $data );
 			//	return false; 
 		}
-		elseif( $values = $this->getForm()->getValues() )
+		elseif( $this->getForm()  AND  $values = $this->getForm()->getValues() )
 		{
 		//	var_export( $values );
 			$_GET['article_url'] = $values['article_url'];
@@ -372,7 +372,8 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 	//	var_export( $options );
 		$filter = 'Ayoola_Filter_Currency';
 		$filter = new $filter();
-		if( empty( $subscriptionData['price_option_title'] ) )
+	//	var_export( $this->getParameter( 'multi-price' ) );
+		if( ! $this->getParameter( 'multi-price' ) )
 		{	
 			$fieldset->addElement( array( 'name' => 'quantity', 'id' => 'quantity_' . md5( @$subscriptionData['article_url'] ), 'label' => 'Quantity', 'style' => 'min-width:20px;max-width:60px;display:inline;margin-right:0;', 'type' => $showQuantity, 'value' => @$values['quantity'] ? : 1 ), $optionsForSelect );  
 			$filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
@@ -398,7 +399,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			}
 		} 
 		//	find out if everything is the same price 
-		else  
+		elseif( ! empty( $subscriptionData['price_option_title'] )  )
 		{
 
 			$samePricing = false;
@@ -411,6 +412,8 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			//		;
 				}
 			}
+			$optionsForSelect = array();
+	//		self::v( $subscriptionData['price_option_title'] );
 			foreach( $subscriptionData['price_option_title'] as $key => $each )
 			{
 				if( empty( $subscriptionData['price_option_price'][$key] ) && empty( $subscriptionData['price_option_title'][$key] ) )
@@ -424,7 +427,16 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 				$optionsForSelect = empty( $optionsForSelect ) ? array_combine( range( 0, 100 ), range( 0, 100 ) ) : $optionsForSelect;
 				$fieldset->addElement( array( 'name' => 'price_option' . $each, 'label' => $each . $pricing , 'type' => 'Select', 'value' => 'price_option' . $each ), $optionsForSelect );
 			}
+			if( ! $optionsForSelect )
+			{
+				return false;
+			}
 		} 
+		else
+		{
+		//	var_export( $subscriptionData );
+			return false;
+		}
 		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden', 'value' => @$subscriptionData['article_url'] ) );
 	//	$fieldset->addElement( array( 'name' => 'submit',  'type' => 'Button',  'onClick' => 'addToCartNow( this.form );', 'value' => $submitValue ) );
 		 @$subscriptionData['no_of_items_in_stock'] ? $fieldset->addRequirement( 'quantity', array( 'Int' => null, 'MinMax' => array( 1, @$subscriptionData['no_of_items_in_stock'] ? : 100 ) ) ) : null;

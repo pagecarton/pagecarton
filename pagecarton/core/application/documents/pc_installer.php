@@ -1,4 +1,5 @@
 <?php 
+
 /**
  * PageCarton Developer Tool
  *
@@ -314,9 +315,12 @@
 			
 			//	Transfer the local_html files to the document root
 		//	$backup->extractTo( dirname( $_SERVER['SCRIPT_FILENAME'] ), array( 'local_html/index.php', 'local_html/.htaccess', ), true ); 
-			file_put_contents( 'index.php', file_get_contents( $backup['local_html/index.php'] ) );
+/*			file_put_contents( 'index.php', file_get_contents( $backup['local_html/index.php'] ) );
 			file_put_contents( '.htaccess', file_get_contents( $backup['local_html/.htaccess'] ) );
 			file_put_contents( 'web.config', file_get_contents( $backup['local_html/web.config'] ) );
+*/			file_put_contents( 'index.php', file_get_contents( APPLICATION_DIR . DS . 'local_html' . DS . 'index.php' ) );
+			file_put_contents( '.htaccess', file_get_contents( APPLICATION_DIR . DS . 'local_html' . DS . '.htaccess' ) );
+			file_put_contents( 'web.config', file_get_contents( APPLICATION_DIR . DS . 'local_html' . DS . 'web.config' ) );
 			chmod( 'index.php', 0644 );
 			chmod( '.htaccess', 0644 );
 			chmod( 'web.config', 0644 );

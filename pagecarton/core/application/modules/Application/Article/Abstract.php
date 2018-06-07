@@ -600,10 +600,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			( 
 				'
 				var pc_autoloadPostPageNumber_' . $postListId . ' = "' . $offset . '";
-				var options = 
-				{
-					distance: ' . ( $this->getParameter( 'autoload_distance' ) ? : 500 ) . ',
-					callback: function( done ) 
+				var pc_autoloadFunc_' . $postListId . ' = function( done ) 
 					{
 						var a = document.createElement( "div" );
 						a.innerHTML = "<div title=\"Loading more...\" style=\"text-align: center;\"><img alt=\"Loading more...\" src=\"' . Ayoola_Application::getUrlPrefix() . '/loading.gif?document_time=1\" ></div>";
@@ -635,8 +632,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						// 2. insert it into the document
 						// 3. call done when we are done
 					//	done();
-					}
-				}
+					};		
+				var options = 
+				{
+					distance: ' . ( $this->getParameter( 'autoload_distance' ) ? : 500 ) . ',
+					callback: pc_autoloadFunc_' . $postListId . '
+				} 
 					
 				// setup infinite scroll
 				infiniteScroll(options);		

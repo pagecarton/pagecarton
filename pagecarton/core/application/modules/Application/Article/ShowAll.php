@@ -651,6 +651,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$nextPageLink = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . @$offset;
 			$this->_objectTemplateValues['paginator_next_page'] = $nextPageLink;
 			$this->_objectTemplateValues['paginator_next_page_button'] = '<a class="pc-btn" href="' . $nextPageLink . '"> Next &rarr;</a>';       
+			if( empty( $_GET['pc_post_list_autoload'] ) && $this->getParameter( 'pagination' ) )
+			{
+				$this->_objectTemplateValues['click_to_load_more'] = $linkToLoadMore = '<div style="text-align:center;" class="pc_posts_distinguish_sets" id="' . $postListId . '"><a class="pc-btn pc-btn-small" href="javascript:" onclick="pc_autoloadFunc_' . $postListId . '();"> Load more</a></div>';     
+			}  
 		}
 		if( @$chunk[( @$offset - 2 )] )
 		{
@@ -672,7 +676,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '">' . $pagination . '</div>';
 			$this->_objectTemplateValues['pagination'] = $data['pagination'] = $pagination;	
 		}	
-			//		self::v( $values );
+	//	self::v( $pagination );  
 		$values = $values ? array_unique( $values, SORT_REGULAR ) : array(); 
 	//	self::v( $values[''] );
 	//	var_export( $values );
@@ -1100,9 +1104,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			if( $template )
 			{
 				$template = '' . $template . $pagination;
+	//			self::v( $pagination );
 			}
 		}
-			
+			//	self::v( $this->_objectTemplateValues['pagination'] );
+			//	self::v( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) );
 		
 		if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false )  
 //		if( ! $this->getParameter( 'array_key_placeholders' ) )  
@@ -1122,7 +1128,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		else
 		{
-	//		@$this->_parameter['markup_template'] .= $pagination;   
+			@$this->_parameter['markup_template'] .= $linkToLoadMore;   
 		}
 		//? '<a href="' . $nextPageLink . '"><input type="button" value="Next ' . ( @count( $chunk[( @$offset )] )) . '..." /></a>' : null;
  		if( ! $i ) 

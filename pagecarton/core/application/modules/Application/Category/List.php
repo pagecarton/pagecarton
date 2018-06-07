@@ -54,7 +54,8 @@ class Application_Category_List extends Application_Category_Abstract
 		$list->createList
 		(  
 			array(
-				'category_label' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Editor/?' . $this->getIdColumn() . '=%KEY%">[%FIELD%]</a>', 
+				'category_label' => '%FIELD% <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Editor/?' . $this->getIdColumn() . '=%KEY%">[edit]</a>', 
+				'category_name' => '%FIELD%</a>', 
 				'X' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
 			)
 		);
