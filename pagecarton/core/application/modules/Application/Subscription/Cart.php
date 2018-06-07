@@ -215,14 +215,14 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			$text = $this->_xml->createTextNode( $value['subscription_label'] );
 			$columnNode->appendChild( $text );
 		//	var_export( $value );
-			@$itemLink = $value['url'] ? : 'javascript:;';
+			$value['item_link'] = @$itemLink = $value['url'] ? : 'javascript:;';
 			if( ! @$value['classplayer_url'] && @$value['subscription_object_name'] )
 			{
 	//			$value['classplayer_url'] = '/tools/classplayer/get/object_name/' .  $value['subscription_object_name'] . '/';
 			}
 			@$value['classplayer_url'] = $value['classplayer_url'] ? ';classPlayerUrl=' . $value['classplayer_url'] . ';' . 'spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() : null;
 		//		var_export( $value['classplayer_url'] );
-			$link->setAttribute( 'href', $itemLink );
+			$link->setAttribute( 'href', $value['item_link'] );
 			$link->setAttribute( 'rel', $value['classplayer_url'] );
 			$link->setAttribute( 'title', @$value['subscription_description'] );
 			$columnNode = $this->_xml->createElement( 'td' );
@@ -252,6 +252,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			$columnNode->setAttribute( 'align', 'center'  );
 			$row->appendChild( $columnNode );
 			$table->appendChild( $row );
+			$this->_objectTemplateValues[] = $value;
 		}
 		
 		//	surcharges
