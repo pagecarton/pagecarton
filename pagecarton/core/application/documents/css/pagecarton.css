@@ -112,7 +112,8 @@
 
 .pc-form2{
     font-family: 'open_sansregular', arial, sans;
-    max-width: 500px;
+    /*Dont remove this. defaces some parts of design*/
+    /*max-width: 500px;*/
     margin: 0 auto;
     padding: 30px;
     background: #FFFFFF;

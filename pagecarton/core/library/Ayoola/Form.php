@@ -1253,6 +1253,17 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     }
 	
     /**
+     * Checks if we want oneFieldSetAtATime
+     * 
+     * @param void
+     * @return bool
+     */
+	public function getNames()
+    {
+		return $this->_names;
+    }
+	
+    /**
      * Returns the storage for oneFieldSetAtATime
      * 
      * @param string Unique ID for Namespace

@@ -54,7 +54,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 				if( ! $data = self::getIdentifierData() )
 				{ 
 				//	var_export( $data );
-					$this->_parameter['markup_template'] = null;
+				//	$this->_parameter['markup_template'] = null;
 				//	if( self::hasPriviledge( 98 ) )
 					{
 						$data = $this->_identifier;
@@ -67,7 +67,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			if( empty( $data['slideshow_name'] ) )
 			{ 
 			//	var_export( $data['slideshow_images'] );
-				$this->_parameter['markup_template'] = null;
+				$this->_parameter['markup_template'] = 'Slideshow name not set';
 				return false; 
 			}
 		//	var_export( $data );
@@ -96,8 +96,17 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 				$data['image_link'][] = 'javascript:;';
 //				@$data['slideshow_images'][] = array( 'slideshow_image' => '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer?url=/img/abstract.jpg&max_width=' . $data['width'] . '&max_height=' . $data['height'] . '', 'image_description' => 'Duis est esse est voluptate consectetur sit dolor consequat tempor. ', 'image_title' => 'Ea sunt adipisicing reprehenderit nostrud aliqua amet culpa dolore sint..', 'image_link' => 'javascript:;' );  
 			}
-			$template = $this->getParameter( 'template_name' ) ? : 'NivoSlider';
-		//	var_export( $data );    
+			$template = $this->getParameter( 'template_name' );
+			if( ! $this->getParameter( 'markup_template' ) )
+			{
+				$template = $template ? : 'NivoSlider';
+			}
+			
+	//		$template = $this->getParameter( 'template_name' ) ? : 'NivoSlider';
+	//		var_export( $template );    
+//			var_export( $data );    
+	//		var_export( $this->getParameter( 'template_name' ) );    
+	//		var_export( $this->getParameter( 'markup_template' ) );    
 			if( $template )
 			{
 				$options = new Application_Slideshow_Template;
@@ -296,7 +305,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 	//		$this->setViewContent( $html );
 			if( self::hasPriviledge( array( 99, 98 ) ) && ! $this->getParameter( 'hide_editor_link' ) )
 			{
-				$editButton = '<div style="text-align:center;"> <button class="pc-btn boxednews centerednews blocknews" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $linkToEdit . '\' );" href="javascript:">Manage this slideshow</button></div>';
+			//	$editButton = '<div style="text-align:center;"> <button class="pc-btn boxednews centerednews blocknews" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $linkToEdit . '\' );" href="javascript:">Manage this slideshow</button></div>';
 				$this->_parameter['markup_template'] .= $editButton;
 
 			//	$this->setViewContent( $editButton );

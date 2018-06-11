@@ -296,8 +296,9 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		else
 		{
 			$fieldset = new Ayoola_Form_Element();
-			$fieldset->addElement( array( 'name' => 'full_name', 'label' => 'Customer Name', 'placeholder' => 'e.g. John Bello', 'type' => 'InputText', 'value' => @$values['full_name'] ) );
-			$fieldset->addElement( array( 'name' => 'email', 'label' => 'Customer Email', 'placeholder' => 'e.g. email@example.com', 'type' => 'email', 'value' => @$values['email'] ) );
+			$fieldset->addElement( array( 'name' => 'firstname', 'label' => 'First Name', 'placeholder' => 'e.g. John', 'type' => 'InputText', 'value' => @$values['firstname'] ) );
+			$fieldset->addElement( array( 'name' => 'lastname', 'label' => 'Last Name', 'placeholder' => 'e.g. Bello', 'type' => 'InputText', 'value' => @$values['lastname'] ) );
+			$fieldset->addElement( array( 'name' => 'email_address', 'label' => 'Customer Email', 'placeholder' => 'e.g. email@example.com', 'type' => 'email', 'value' => @$values['email_address'] ) );
 			$fieldset->addElement( array( 'name' => 'phone_number', 'label' => 'Customer Phone Number', 'placeholder' => 'e.g. +1-202-555-1234', 'type' => 'InputText', 'value' => @$values['phone_number'] ) );
 			$form->addFieldset( $fieldset );
 		}

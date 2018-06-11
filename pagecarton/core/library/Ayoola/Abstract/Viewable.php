@@ -468,10 +468,21 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		curl_setopt( $request, CURLOPT_USERAGENT, @$settings['user_agent'] ? : self::$userAgent );
 		curl_setopt( $request, CURLOPT_AUTOREFERER, true );
 		curl_setopt( $request, CURLOPT_REFERER, @$settings['referer'] ? : $link );
-		curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
+		if( @$settings['destination_file'] )
+		{
+			$fp = fopen( $settings['destination_file'], 'w' );
+			curl_setopt( $request, CURLOPT_FILE, $fp );
+			curl_setopt( $request, CURLOPT_BINARYTRANSFER, true );
+			curl_setopt( $request, CURLOPT_HEADER, 0 ); 
+		}
+		else
+		{
+			curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
+		}
+//		curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt( $request, CURLOPT_FOLLOWLOCATION, @$settings['follow_redirect'] === false ? false : true ); //	By default, we follow redirect
-		curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 10 );	//	Max of 1 Secs on a single request
-		curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 10 );	//	Max of 1 Secs on a single request
+		curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 1000 );	//	Max of 1 Secs on a single request
+		curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 1000 );	//	Max of 1 Secs on a single request
 		if( @$settings['post_fields'] )
 		{
 			curl_setopt( $request, CURLOPT_POST, true );
@@ -816,6 +827,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 			$form = new Ayoola_Form( array( 'name' => $advancedName, 'data-parameter_name' => 'advanced_parameters', 'class' => '' ) );
 			parse_str( @$object['advanced_parameters'], $advanceParameters );
+		//	$advanceParameters['advanced_parameter_value'][] = 'tested' . time();
+		//	$advanceParameters['advanced_parameter_name'][] = 'test' . time();
+		//	var_export( $advanceParameters );
 			self::sanitizeParameters( $object );
 
 
@@ -848,14 +862,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	$form->oneFieldSetAtATime = true;
 				$form->wrapForm = false;
 				$parameterOptions = array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() );
-				if( ! array_key_exists( @$advanceParameters['advanced_parameter_value'][$i], $parameterOptions ) )
+		//		if( ! array_key_exists( @$advanceParameters['advanced_parameter_value'][$i], $parameterOptions ) )
 				{
-					$parameterOptions[@$advanceParameters['advanced_parameter_value'][$i]] = @$advanceParameters['advanced_parameter_value'][$i];
+				//	$parameterOptions[@$advanceParameters['advanced_parameter_value'][$i]] = @$advanceParameters['advanced_parameter_value'][$i];
 				}
 				if( ! array_key_exists( @$advanceParameters['advanced_parameter_name'][$i], $parameterOptions ) )
 				{
-			//		var_export( $advanceParameters );
-					$parameterOptions[@$advanceParameters['advanced_parameter_name'][$i]] = @$advanceParameters['advanced_parameter_name'][$i];
+				//	var_export( $advanceParameters['advanced_parameter_name'][$i] );
+				//	var_export( $advanceParameters['advanced_parameter_value'][$i] );
+					$parameterOptions[$advanceParameters['advanced_parameter_name'][$i]] = $advanceParameters['advanced_parameter_name'][$i];
+				//	var_export( $parameterOptions[$advanceParameters['advanced_parameter_name'][$i]] );
 				}
 				switch( @$advanceParameters['advanced_parameter_name'][$i] )
 				{
@@ -871,9 +887,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	if( $advanceParameters['advanced_parameter_value'][$i] )       
 						{
 					//		$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => 'HTML Markup', 'placeholder' => 'Parameter Name', 'type' => 'Hidden', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ) );
-							if( ! array_key_exists( @$advanceParameters['advanced_parameter_value'][$i], $parameterOptions ) )
+							if( ! array_key_exists( @$advanceParameters['advanced_parameter_name'][$i], $parameterOptions ) )
 							{
-								$parameterOptions[@$advanceParameters['advanced_parameter_value'][$i]] = @$advanceParameters['advanced_parameter_value'][$i];
+								$parameterOptions[@$advanceParameters['advanced_parameter_name'][$i]] = @$advanceParameters['advanced_parameter_name'][$i];
 							}
 							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
 							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'TextArea', 'style' => 'width:100%;', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
@@ -884,8 +900,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					default:
 						if( static::getParameterKeys( $object ) )
 						{
+					//		var_export( $advanceParameters['advanced_parameter_name'][$i] );
+					//		var_export( $parameterOptions );  
 							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
-							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'InputText', 'value' => @htmlspecialchars( $advanceParameters['advanced_parameter_value'][$i] ) ) );
+							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'InputText', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
 							$fieldset->allowDuplication = true;  
 							$fieldset->placeholderInPlaceOfLabel = true;
 						}
@@ -1137,6 +1155,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		unset( $this->_parameter['object_class'] );
 		unset( $this->_parameter['object_style'] );
 		unset( $this->_parameter['wrapper_name'] );
+		unset( $this->_parameter['markup_template_no_data'] );
 	}
 
     /**
@@ -1332,10 +1351,22 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$this->_markupTemplate =  $storage->retrieve();
 			null;
 		}
+		elseif( $this->getParameter( 'markup_template_no_data' ) )
+		{
+		//	var_export( $this->getParameter( 'markup_template_no_data' ) );
+		//	var_export( $this->getParameter( 'markup_template' ) );
+			$this->_markupTemplate = $this->getParameter( 'markup_template_no_data' );
+		}
 		else
 		{
 			//	Turn me to false so we dont have to come here again for the same request.
 			$this->_markupTemplate = false;
+		}
+		if( $this->getParameter( 'markup_template_no_data' ) )
+		{
+		//	var_export( $this->getParameter( 'markup_template_no_data' ) );
+		//	var_export( $this->getParameter( 'markup_template' ) );
+	//		$this->_markupTemplate = $this->getParameter( 'markup_template_no_data' );
 		}
 	//	$storage->clear(  );  
 		return $this->_markupTemplate;
@@ -1504,7 +1535,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				if( ! $template = $this->getMarkupTemplate() )      
 				{
 					//	Allow page builder to be able to set a default content incase theres no data used as template markup
-					$template = $this->getParameter( 'markup_template_no_data' );  
+			//		$html = $this->getParameter( 'markup_template_no_data' );  
 					if( ! $template )      
 					{
 						$html = $content;
@@ -1512,6 +1543,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					}
 					else
 					{
+					//	var_export( $html );
 					//	var_export( $this->getParameter( 'markup_template' ) );
 					}
 				}

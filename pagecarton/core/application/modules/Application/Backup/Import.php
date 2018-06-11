@@ -73,7 +73,8 @@ class Application_Backup_Import extends Application_Backup_Abstract
 					}					
 				break;
 				case 'upload_from_other_sites':					
-					file_put_contents( $tempName, file_get_contents( $values['backup_url'] ) );
+				//	file_put_contents( $tempName, file_get_contents( $values['backup_url'] ) );
+				self::fetchLink( $values['backup_url'], array( 'destination_file' => $tempName ) );
 				//	var_export( filesize( $tempName ) );
 				//	$tempName = $values['backup_url'];
 				break;

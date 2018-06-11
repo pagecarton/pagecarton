@@ -66,10 +66,11 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		//	var_export( $_POST );
 		if( @$_REQUEST['add_to_cart'] )
 		{
-			$values = array();
 			$_GET['article_url'] = $subscriptionData['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
 			//	var_export( $data );
+			$values = $data;
+			unset( $values['document_url_base64'], $values['download_base64'] ); 
 			
 			//	data
 			$this->_objectData['quantity'] = $values['quantity'] = 1;	
@@ -83,7 +84,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$values['cycle_label'] = '';
 			$values['price_id'] = $data['article_url'];
 			$values['subscription_description'] = $data['article_description'];
-			$values['url'] = $data['article_url'];
+			$values['url'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];     
 			@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
 			//	''
 			//	After we checkout this is where we want to come to
@@ -91,7 +92,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$values['object_id'] = $data['article_url'];
 			$values['multiple'] = $values['quantity'];
 			$class->subscribe( $values );
-			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/onlinestore/cart' );
+			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/cart' );
 			exit();
 		//	$this->_objectData['confirmation'] = $confirmation;	
 		}
@@ -110,6 +111,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		elseif( $this->getForm()  AND  $values = $this->getForm()->getValues() )
 		{
 		//	var_export( $values );
+		//	exit();
 			$_GET['article_url'] = $values['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
 			do
@@ -134,6 +136,9 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 						{
 							continue;
 						}
+						$values += $data;
+						unset( $values['document_url_base64'], $values['download_base64'] ); 
+						
 						$values['subscription_name'] = $data['article_url'] . 'price_option' . $each;
 						$values['subscription_label'] = $data['price_option_title'][$key] . ' - ' . $data['article_title'];
 						$values['price'] = $pricing;
@@ -141,7 +146,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 						$values['cycle_label'] = '';
 						$values['price_id'] = $values['subscription_name'];
 						$values['subscription_description'] = $data['price_option_title'][$key] . ' - ' . $data['article_description'];
-						$values['url'] = $data['article_url'];
+						$values['url'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
 						@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
 						//	''
 						//	After we checkout this is where we want to come to
@@ -179,6 +184,8 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 				//		var_export( __LINE__ );
 					break;
 					default:
+					$values += $data;
+					unset( $values['document_url_base64'], $values['download_base64'] ); 
 					$values['subscription_name'] = $data['article_url'];
 					$values['subscription_label'] = $data['article_title'];
 					$values['price'] = $data['item_price'] + floatval( array_sum( @$values['product_option'] ? : array() ) );
@@ -187,7 +194,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					$values['cycle_label'] = '';
 					$values['price_id'] = $data['article_url'];
 					$values['subscription_description'] = $data['article_description'];
-					$values['url'] = $data['article_url'];
+					$values['url'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
 					@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
 					//	''
 					//	After we checkout this is where we want to come to
@@ -196,8 +203,8 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					$values['multiple'] = $values['quantity'];
 					$class->subscribe( $values );
 
-			//		var_export( $values );
-			//		exit();
+		//			var_export( $values );
+		//			exit();
 					break;
 				}
 			}
@@ -208,7 +215,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			//	not supposed to show this but lets put it just in case the browser didnt redirect.  
 			$this->setViewContent( '<span name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_confirmation" style="">' . $confirmation . '</span>' );
 
-			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/onlinestore/cart' );
+			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/cart' );
 			exit();
 			//	self::saveArticle( $data );
 			

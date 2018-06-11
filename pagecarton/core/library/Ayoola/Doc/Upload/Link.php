@@ -127,8 +127,16 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 			}
 	//		var_export( $this->getParameter( 'suggested_url' ) );
 	//		var_export( $imageInfo['suggested_url'] );
-	//		var_export( $plainUrl );
-			$js .= 'ayoola.image.suggestedUrl = \'' . ( $this->getParameter( 'suggested_url' ) ? : $imageInfo['suggested_url'] ) . '\';';
+		//	var_export( $plainUrl );
+			$suggestedUrl = ( $this->getParameter( 'suggested_url' ) ? : $imageInfo['suggested_url'] );
+			if( $plainUrl && ! $suggestedUrl )
+			{
+				if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( $plainUrl ) )   
+				{
+					$suggestedUrl = $plainUrl;
+				}
+			}
+			$js .= 'ayoola.image.suggestedUrl = \'' . $suggestedUrl . '\';';
 			$js .= 'ayoola.image.cropping.crop = ' . ( $this->getParameter( 'crop' ) ? 'true' : 'false' ) . ';';
 				
 			//	use image id to ensure only one preview change when update is made
@@ -209,10 +217,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 		//	var_export( $this->getParameter( 'field_name' ) );
 		//	var_export( $this->getGlobalValue( $this->getParameter( 'field_name' ) ) ); 
 			$uri = $plainUrl;
-			if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( $uri ) )   
-			{
-				$uri = $dedicatedUri;
-			}
+			$uri = Ayoola_Application::getUrlPrefix() . '/widgets/Application_IconViewer?url=' . $plainUrl;
 		//	var_export( $this->getParameter( 'image_preview' ) );
 		//	var_export( $uri );
 			if( ! is_string( $uri ) )
@@ -231,12 +236,16 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 					( $this->getParameter( 'height' ) ? : '300' ) . '&text=' .   
 					
 					( 'Preview' ) . '' ) ) . '"  class="" onClick="" style="max-height:50vh;"  > 
+					<div style="margin:1em; font-size:x-small;">
+						' . ( is_file( $path ) ? ( '
+						URL: ' .  $imageUrl . '<br>
+						SIZE: ' . $filter->filter( filesize( $path ) ) . '
+						' ) : null ) . ' 
 
-					' . ( $this->getParameter( 'width' ) ? ( '<div style="margin:1em; font-size:x-small;">
-					URL: ' .  $imageUrl . '<br>
-					DIMENSIONS: ' . $this->getParameter( 'width' ) . ' / ' . $this->getParameter( 'height' ) . ' <br>
-					SIZE: ' . $filter->filter( filesize( $path ) ) . '
-					</div>' ) : null ) . ' 
+						' . ( $this->getParameter( 'width' ) ? ( '
+						DIMENSIONS: ' . $this->getParameter( 'width' ) . ' / ' . $this->getParameter( 'height' ) . ' <br>
+						' ) : null ) . ' 
+					</div>
 				</div>
 				<div title="Click here to select a file to upload or drag and drop a file here." style="text-align:center;" class="" name="upload_through_ajax_link">
 					<div title="Select an option here" style="display:block;" >

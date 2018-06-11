@@ -133,19 +133,22 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		$replace = array();
 		$values['placeholder_prefix'] = @$values['placeholder_prefix'] ? : '@@@';      
 		$values['placeholder_suffix'] = @$values['placeholder_suffix'] ? : '@@@';
-		$values['pc_domain'] = @$values['pc_domain'] ? : Ayoola_Page::getDefaultDomain();
-		$values['pc_url_prefix'] = @$values['pc_url_prefix'] ? : Ayoola_Application::getUrlPrefix();
+		$defaultSearch = array();
+		$defaultSearch['pc_domain'] = $defaultSearch['pc_domain'] = Ayoola_Page::getDefaultDomain();
+		$defaultSearch['pc_url_prefix'] = Ayoola_Application::getUrlPrefix();
+	//	$search += array_keys( $defaultSearch );
+	//	$replace += array_values( $defaultSearch );
+		$values = $values + $defaultSearch;
 				$replaceInternally = false;
 				$iTemplate = null;
 				$postTheme = null;
 //		$search[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
 		foreach( $values as $key => $value )
 		{
-			if( ! is_array( $value ) && stripos( $template, '{{{0}}}' ) === false )
+			if( ! is_array( $value ) )
 			{
 				$search[] = $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
-				$replace[] = $value;
-				
+				$replace[] = $value;	
 			}
 			elseif( is_array( $value ) )
 			{
@@ -174,7 +177,9 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 				foreach( $value as $eachKey => $eachValue )
 				{
 					//	placeholder now {{{key}}}{{{0}}}
- 					if( $replaceInternally & $key > 0 )
+ 				//	if( $replaceInternally & $key > 0 )
+				 	//	skipping index 0 makes the first on the list be info about current post on the page
+ 					if( $replaceInternally & is_numeric( $key ) )
 					{
 					//	var_export( $eachValue );
 						$iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . '0' . $values['placeholder_suffix'];
@@ -197,14 +202,24 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		//		var_export( $replace );
 				if( @$replaceInternally && $iSearch )
 				{
+					foreach( $defaultSearch as $ckey => $cccc )
+					{
+						$iSearch[] = $values['placeholder_prefix'] . $ckey . $values['placeholder_suffix'];
+						$iReplace[] = $cccc;
+					}
 					$iTemplate .= @str_ireplace( $iSearch, $iReplace, $postTheme );    
 				}  
 				
 			}
 		}
-//		self::v( $search );
+	//	self::v( $search );    
 //		self::v( $replace );
 //		self::v( $template );
+		foreach( $defaultSearch as $ckey => $cccc )
+		{
+			$search[] = $values['placeholder_prefix'] . $ckey . $values['placeholder_suffix'];
+			$replace[] = $cccc;
+		}
 		$search[] = $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'];
 		$replace[] = @$iTemplate;  
 		$template = @str_ireplace( $search, $replace, $template );

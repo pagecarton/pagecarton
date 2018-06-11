@@ -9,10 +9,10 @@
       <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[1077-0-3]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Products and Services List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;div class=&quot;col_1_of_3 span_1_of_3&quot; style=&quot;&quot;&gt; 
-			   &lt;a href=&quot;{{{pc_url_prefix}}}{{{article_url}}}&quot;&gt;
+			   &lt;a href=&quot;{{{post_link}}}&quot;&gt;
 				&lt;div class=&quot;inner_content clearfix&quot; style=&quot; background-color:#fff; &quot;&gt;
 					&lt;div class=&quot;product_image&quot;&gt;
-						&lt;img alt=&quot;&quot; src=&quot;{{{pc_url_prefix}}}{{{document_url}}}&quot;&gt;
+						&lt;img alt=&quot;&quot; src=&quot;{{{document_url_cropped}}}&quot;&gt;
 					&lt;/div&gt;
                     &lt;div class=&quot;sale-box1&quot;&gt;&lt;span style=&quot;border-bottom: 0;&quot; class=&quot;on_sale title_shop pc-bg-color &quot;&gt;{{{item_tag}}}&lt;/span&gt;&lt;/div&gt;	
                     &lt;div style=&quot;padding: 10px 0px 0px;&quot;&gt;
@@ -47,14 +47,14 @@
       <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[1077-0-4]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Items List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;div class=&quot;grid_1_of_4 images_1_of_4&quot;&gt;
-					 &lt;h4&gt;&lt;a style=&quot; background-color: transparent !important; color: #E44F2B  !important; padding-bottom: 5px; font-size: 16px; &quot; href=&quot;{{{pc_url_prefix}}}{{{article_url}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/h4&gt;
-					  &lt;a style=&quot; background-color: transparent !important; &quot; href=&quot;{{{pc_url_prefix}}}{{{article_url}}}&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;{{{pc_url_prefix}}}{{{document_url}}}&quot;&gt;&lt;/a&gt;
-					  &lt;div class=&quot;price-details&quot;&gt;
+					 &lt;h4&gt;&lt;a style=&quot; background-color: transparent !important; color: #E44F2B  !important; padding-bottom: 5px; font-size: 16px; &quot; href=&quot;{{{post_link}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/h4&gt;
+					  &lt;a style=&quot; background-color: transparent !important; &quot; href=&quot;{{{post_link}}}&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;{{{document_url_cropped}}}&quot;&gt;&lt;/a&gt;
+					  &lt;div class=&quot;price-details&quot;&gt;  
 				       &lt;div class=&quot;price-number&quot;&gt;
 							&lt;p&gt;&lt;span class=&quot;rupees&quot;&gt;{{{item_price}}} &lt;/span&gt;&lt;/p&gt;
 					    &lt;/div&gt;
 					       		&lt;div class=&quot;add-cart&quot;&gt;								
-									&lt;h4&gt;&lt;a style=&quot; background: #8FA7AE none repeat scroll 0% 0% !important; color: #FFF  !important;&quot; href=&quot;{{{pc_url_prefix}}}{{{article_url}}}&quot;&gt;{{{button_value}}}&lt;/a&gt;&lt;/h4&gt;
+									&lt;h4&gt;&lt;a style=&quot; background: #8FA7AE none repeat scroll 0% 0% !important; color: #FFF  !important;&quot; href=&quot;{{{post_link}}}&quot;&gt;{{{button_value}}}&lt;/a&gt;&lt;/h4&gt;
 							     &lt;/div&gt;
 							 &lt;div class=&quot;clear&quot;&gt;&lt;/div&gt;
 					&lt;/div&gt;					 
@@ -78,11 +78,11 @@
       <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Products for Sale]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li&gt;
 					&lt;div class=&quot;view123 view-first123&quot;&gt;
-					  &lt;a  href=&quot;{{{pc_url_prefix}}}{{{article_url}}}&quot;&gt;&lt;img style=&quot;border: 0px currentColor;border-image: none;&quot; class=&quot;img-responsive&quot; alt=&quot;&quot; src=&quot;{{{pc_url_prefix}}}{{{document_url}}}&quot;&gt;&lt;/a&gt;
+					  &lt;a  href=&quot;{{{post_link}}}&quot;&gt;&lt;img style=&quot;border: 0px currentColor;border-image: none;&quot; class=&quot;img-responsive&quot; alt=&quot;&quot; src=&quot;{{{document_url_cropped}}}&quot;&gt;&lt;/a&gt;
 					  &lt;div class=&quot;tab_desc pc-bg-color&quot;&gt;
-			             &lt;h3&gt;&lt;a  style=&quot; &quot; href=&quot;{{{pc_url_prefix}}}{{{article_url}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/h3&gt;
+			             &lt;h3&gt;&lt;a  style=&quot; &quot; href=&quot;{{{post_link}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/h3&gt;
 						 &lt;p&gt;{{{item_price}}}&lt;/p&gt;
-						 &lt;a class=&quot;btnexample1 btnexample-primary1&quot;href=&quot;{{{pc_url_prefix}}}{{{article_url}}}&quot;&gt;&lt;span&gt;{{{button_value}}}&lt;/span&gt;&lt;img alt=&quot;&quot; src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAHklEQVQokWNgGDTgPxIYLhr/kwAGWCP9A2fgNRICAAAV4x0nkgjjAAAAAElFTkSuQmCC&quot;&gt;&lt;/a&gt;
+						 &lt;a class=&quot;btnexample1 btnexample-primary1&quot;href=&quot;{{{post_link}}}&quot;&gt;&lt;span&gt;{{{button_value}}}&lt;/span&gt;&lt;img alt=&quot;&quot; src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAHklEQVQokWNgGDTgPxIYLhr/kwAGWCP9A2fgNRICAAAV4x0nkgjjAAAAAElFTkSuQmCC&quot;&gt;&lt;/a&gt;
 					  &lt;/div&gt;
 					&lt;/div&gt;
 				  &lt;/li&gt;]]></TABLE_FIELD>

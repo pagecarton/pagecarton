@@ -48,23 +48,40 @@ class Application_Article_Type_View extends PageCarton_Widget
 			$this->_objectTemplateValues = array();
 			if( ! $data = self::getIdentifierData() )
 			{ 
-
+				if( $this->_usedPostTypeId && self::hasPriviledge( array( 99, 98 ) ) )
+				{
+					$data['post_type_set_up_message'] = $this->getParameter( 'post_type_set_up_message' ) ? : 'Set up new post type [' . $this->_usedPostTypeId . ']' ;
+					$data['post_type_set_up_url'] = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Creator/?post_type_id=' . $this->_usedPostTypeId . '';
+					$html .= self::hasPriviledge( array( 99, 98 ) ) ? '<p style="font-size:x-small;">
+					<a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $data['post_type_set_up_url']  . '\', \'page_refresh\' );" href="javascript:">[' . $data['post_type_set_up_message']  . ']</a>
+					
+					</p>' : null;
+				}
             }
-            @$data['category_label'] = $data['post_type'] ? : $data['category_label'];
-            $html = '<div  class="pc_theme_parallax_background" style="background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $data['cover_photo'] ) . '\');  ">';
-            $html .= '<h1>' . $data['category_label'] . '</h1>';
-            $html .= $data['category_description'] ? '<br><br><p>' . $data['category_description'] . '</p>' : null;
-            $html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;">
-			<a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $data['update_url']  . '\', \'page_refresh\' );" href="javascript:">[Update Category]</a>
-			<a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $data['delete_url']  . '\', \'page_refresh\' );" href="javascript:">[Delete Category]</a>
-			
-			</p>' : null;
-            $html .= '</div>';
+			else
+			{
+				$data['update_url'] = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Editor/?post_type_id=' . $data['post_type_id'] . '';
+				$data['delete_url'] = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Delete/?post_type_id=' . $data['post_type_id'] . '';
+				@$data['category_label'] = $data['post_type'] ? : $data['category_label'];
+				$html = '<div  class="pc_theme_parallax_background" style="background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $data['cover_photo'] ) . '\');  ">';
+				$html .= '<h1>' . $data['category_label'] . '</h1>';
+			//    $html .= $data['category_description'] ? '<br><br><p>' . $data['category_description'] . '</p>' : null;
+				$html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;">
+				<a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $data['update_url']  . '\', \'page_refresh\' );" href="javascript:">[Update Category]</a>
+				<a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $data['delete_url']  . '\', \'page_refresh\' );" href="javascript:">[Delete Category]</a>
+				
+				</p>' : null;
+				$html .= '</div>';
+			}
+	//		var_export( $data ); 
    //         $this->setViewContent( $html );
 			
 
 			$this->setViewContent( $html, true );
-			$this->_objectTemplateValues += $data;
+			if( $data )
+			{
+				$this->_objectTemplateValues += $data;
+			}
 		}
 		catch( Application_Category_Exception $e )
 		{ 
@@ -101,6 +118,7 @@ class Application_Article_Type_View extends PageCarton_Widget
 		else
 		{
 		    $table = Application_Article_Type::getInstance();
+			$this->_usedPostTypeId = $postType;
 			$data = $table->selectOne( null, array( 'post_type_id' => $postType ) ) ? : array();
             if( ! empty( $data['post_type_id'] ) )
             {

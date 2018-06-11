@@ -915,6 +915,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		$html .= self::$_placeholders['badnews'];
         $html .= "<select " . self::getAttributesHtml( $element ) . "> \n";
+	//	var_export( $values );
 		foreach( $values as $value => $title )
 		{
 			$title = $title !== '' ? $title : $value;
@@ -933,10 +934,12 @@ class Ayoola_Form_Element extends Ayoola_Form
  */			$html.= "> \n";
 			$html.= $title;
 			$html.= "</option> \n";
+			//		 var_export( $title );
+			//		 var_export( $value );
+
 		}
 		$html.= "</select> \n";
 		$html .= $this->useDivTagForElement ? "</div>\n" : null;
-		 
 		return $html;
     }
 	

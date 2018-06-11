@@ -40,6 +40,10 @@ class Application_Article_Type_Creator extends Application_Article_Type_TypeAbst
 		
 	//	var_export( $values );
 		$values['post_type_id'] = @$values['post_type_id'] ? : $values['post_type'];
+		if( ! empty( $_GET['post_type_id'] ) )
+		{
+			$values['post_type_id'] = $_GET['post_type_id'];
+		}
 	//	var_export( $values );
 		$filter = new Ayoola_Filter_Name();
 		$filter->replace = '-';

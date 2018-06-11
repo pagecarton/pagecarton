@@ -780,18 +780,30 @@ class Ayoola_Application
 						//	Ayoola_Page::v( $moduleInfo );
 						//	Ayoola_Page::v( '/' . $articleInfo['true_post_type'] . '/post' );     
 						//	Ayoola_Page::v( '/' . $articleInfo['article_type'] . '/post' );       
-							if( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/' . $articleInfo['article_type'] . '/post' ) ) AND ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) )
+							if( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['article_type'] ) ) )
 							{
-								//	allow dedicated url for all post types like /download/posts/
-								
-								self::$_runtimeSetting['real_url'] = '/' . $articleInfo['article_type'] . '/post';							
-								
+								//	allow dedicated url for all post types like /post-viewer-article/
+								self::$_runtimeSetting['real_url'] = '/post-viewer-'  . $articleInfo['article_type'];		
+							}
+							elseif( ( ! empty( $articleInfo['true_post_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['true_post_type'] ) ) )
+							{
+								//	allow dedicated url for all post types like /post-viewer-article/
+								self::$_runtimeSetting['real_url'] = '/post-viewer-'  . $articleInfo['true_post_type'];		
+							}
+							elseif( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer' ) )
+							{
+								//	allow dedicated url for all post types like /post-viewer-article/
+								self::$_runtimeSetting['real_url'] = '/post-viewer';		
+							}
+							elseif( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/' . $articleInfo['article_type'] . '/post' ) ) AND ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) )
+							{
+								//	allow dedicated url for all post types like /download/posts/					
+								self::$_runtimeSetting['real_url'] = '/' . $articleInfo['article_type'] . '/post';						
 							}
 							elseif( ( ! empty( $articleInfo['true_post_type'] ) ) AND  ( $moduleInfo = Ayoola_Page::getInfo( '/' . $articleInfo['true_post_type'] . '/post' ) ) AND ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) )
 							{
-								//	allow dedicated url for all post types like /download/posts/
-								
-								self::$_runtimeSetting['real_url'] = '/' . $articleInfo['true_post_type'] . '/post';							
+								//	allow dedicated url for all post types like /download/posts/								
+								self::$_runtimeSetting['real_url'] = '/' . $articleInfo['true_post_type'] . '/post';					
 							}   
 							else
 							{

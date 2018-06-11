@@ -393,7 +393,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 /*		$placeholders = array( '#PC_OBJECT_URL_PREFIX', '#PC_URL_PREFIX', 'PC_URL_PREFIX', 'PC_PLACEHOLDER_FOR_ORG_LOGO', '/../' );
  		$placeholderValues = array( "' . Ayoola_Application::getUrlPrefix() . '", "<?php echo Ayoola_Application::getUrlPrefix(); ?>", "<?php echo Ayoola_Application::getUrlPrefix(); ?>", '<?php echo Ayoola_Doc::getLogo(); ?>', '/' );
 */ 	//	$content = str_ireplace( $placeholders, $placeholderValues, $content );
-		$content = preg_replace('#(href|src)[\s]*=[\s]*["\']([^/\#\{][^:"]*)(?:["\'\.])#', '$1="PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$2"', $content ); 
+		$content = preg_replace('#(href|src)[\s]*=[\s]*(["\'])([^/\#\{][^:\'"]*)(?:["\'\.])#', '$1=$2PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$3$2', $content ); 
 		
 	//	var_export( $content );
 		   

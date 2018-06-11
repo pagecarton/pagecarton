@@ -96,18 +96,32 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		$userInfo = $access->getUserInfo();
 	//	var_export( $userInfo );
 		@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
-		foreach( $userInfo['profiles'] as $url )
+		if( ! $userInfo['profiles'] )
 		{
-			$values = self::getProfileInfo( $url );
-//		var_export( $url );
-//		var_export( $values );
-			if( ! $values )
+			$table = Application_Profile_Table::getInstance();
+			$profiles = $table->select( null, array( 'username' => $userInfo['username'] ) );
+			foreach( $profiles as $profileInfo )
 			{
-				continue;
+				self::$_myProfiles[] = $profileInfo['profile_url'];
 			}
-			self::$_myProfiles[] = $url;
+		}
+		else
+		{
+			foreach( $userInfo['profiles'] as $url )
+			{
+				$values = self::getProfileInfo( $url );
+	//		var_export( $url );
+	//		var_export( $values );
+				if( ! $values )
+				{
+					continue;
+				}
+				self::$_myProfiles[] = $url;
+			}
 		}
 
+		
+	//	var_export( $profiles );
 
 		return self::$_myProfiles;
 	}
@@ -122,7 +136,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 	//	var_export( $profile );
 		if( ! $profileInfo = self::getProfileInfo( $profile ) )
 		{
-		 	if( $others = Ayoola_Application::getUserInfo( 'profiles' ) )
+		 	if( $others = self::getMyProfiles() )
 			{
 				while( $profile = array_pop( $others ) )
 				{

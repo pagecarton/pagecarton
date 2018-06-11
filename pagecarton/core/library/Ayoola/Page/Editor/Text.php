@@ -71,15 +71,70 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		{
 			@$content = $this->getParameter( 'preserved_content' );
 		}
-//		var_export( $this->getParameter() );
+	//	var_export( $this->getParameter( 'markup_template_object_name' ) );
 		if( $this->getParameter( 'markup_template_object_name' ) )
 		{
-	//		$parameters = array( 'markup_template' => $content, 'markup_template_namespace' => 'x1234' . time(), 'editable' => $this->getParameter( 'markup_template_object_name' ) ) + $this->getParameter();
-			
-			//	Removing time() from namespace because it doesn't allow the post to cache
-			$parameters = array( 'markup_template' => $content, 'markup_template_namespace' => 'x1234', 'editable' => $this->getParameter( 'markup_template_object_name' ) ) + $this->getParameter();
-			$class = new Ayoola_Object_Embed( $parameters );
-			$content = $class->view();
+			$classes = (array) $this->getParameter( 'markup_template_object_name' );
+			foreach( $classes as $each )
+			{		
+				//	Removing time() from namespace because it doesn't allow the post to cache
+				//	Use whole content or specified part
+				$i = 0;
+		//				var_export( $each );
+		//				var_export( $content );
+				if( stripos( $content, '{{{@' . $each ) !== false && stripos( $content, $each . '@}}}' ) !== false )
+				{
+				//	var_export( $each );
+					while( stripos( $content, '{{{@' . $each ) !== false && stripos( $content, $each . '@}}}' ) !== false && ++$i < 5 )
+					{
+					//	var_export( $i );
+						$partTemplate = null;
+					//	if( stripos( $content, '{{{@' . $each ) !== false && stripos( $content, $each . '@}}}' ) !== false )
+						{
+						//	$start = stripos( $content, '{{{@' . $each ) + strlen( '{{{@' . $each );
+							$start = stripos( $content, '{{{@' . $each );
+						//	var_export( $postTheme );
+							$length = ( stripos( $content, $each . '@}}}' ) + strlen( $each . '@}}}' ) )  - $start;
+	//						$length = stripos( $content, $each . '@}}}' ) - $start;
+							$partTemplate = substr( $content, $start, $length );
+						//	var_export( $each );
+						//	var_export( $partTemplate );
+						}
+
+						$parameters = array( 'markup_template' => $partTemplate, 'markup_template_namespace' => 'x1234', 'editable' => $each ) + $this->getParameter();
+						
+						$class = new Ayoola_Object_Embed( $parameters );
+						$returnedContent = $class->view();
+				//			var_export( $each );
+				//			var_export( $partTemplate );
+//var_export( $returnedContent );
+				//		if( $partTemplate )
+						{
+							$searchY = array();
+							$replaceY = array();
+							$searchY[] = '{{{@' . $each;
+							$replaceY[] = '';
+							$searchY[] = $each . '@}}}';
+							$replaceY[] = '';
+							$returnedContent = str_ireplace( $searchY, $replaceY, $returnedContent );
+							
+							$searchC = array();
+							$replaceC = array();
+							$searchC[] = $partTemplate;
+							$replaceC[] = $returnedContent;
+							$content = str_ireplace( $searchC, $replaceC, $content );
+						}
+					}  
+				}
+				else
+				{
+					$parameters = array( 'markup_template' => $content, 'markup_template_namespace' => 'x1234', 'editable' => $each ) + $this->getParameter();
+					
+					$class = new Ayoola_Object_Embed( $parameters );
+					$content = $class->view();
+				}
+			}
+
 			$this->clearParametersThatMayBeDuplicated();
 			$content .= '<div style="clear:both;"></div>';  
 			$content .= '<div style="clear:both;"></div>';  
@@ -136,55 +191,57 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     public static function getHTMLForLayoutEditorAdvancedSettings( & $object )
 	{
 	//	var_export( $object );
-		$html = '<select onchange="" class="" name="markup_template_object_name" style="width:100%;" >';  
+		$html = '<select multiple onchange="" class="" name="markup_template_object_name[]" style="width:100%;" >';  
 		$html .= '<option value="" >Embed Widgets</option>';  
-
-		foreach( Ayoola_Object_Embed::getWidgets() as $key => $value )
+	//	var_export( $object['markup_template_object_name'] );
+		$object['markup_template_object_name'] = (array) $object['markup_template_object_name'];
+		$widgets = Ayoola_Object_Embed::getWidgets();
+		foreach( $object['markup_template_object_name'] as $each )
+		{
+			if( ! array_key_exists( $each, $widgets ) )
+			{ 
+				$widgets[$each] = $each; 
+			}
+		}
+		foreach( $widgets as $key => $value )
 		{
 			$html .=  '<option value="' . $key . '"';   
-			if( @$object['markup_template_object_name'] == $key )
+			if( in_array( $key, $object['markup_template_object_name'] ) )
 			{ 
 				$present = true;
 				$html .= ' selected = selected '; 
 			}
 			$html .=  '>' . $value . '</option>';  
 		}
-		if( empty( $present ) && ! empty( $object['markup_template_object_name'] ) )
+	//	if( empty( $present ) && ! empty( $object['markup_template_object_name'] ) )
 		{
-			$html .= '<option value="' . $object['markup_template_object_name'] . '" selected = selected>' . $object['markup_template_object_name'] . '</option> '; 
+//		$html .= '<option value="' . $object['markup_template_object_name'] . '" selected = selected>' . $object['markup_template_object_name'] . '</option> '; 
 		}
 		$html .= '</select>'; 
 
-		$class = @$object['markup_template_object_name'];
-		if( ! empty( $class ) && Ayoola_Loader::loadClass( $class ) )
+		foreach( $object['markup_template_object_name'] as $each )
 		{
-		//	$object = new $class;
-		//	$content = file_get_contents( __FILE__ ) ;
-			$content = null;
-			$filter = new Ayoola_Filter_ClassToFilename();
-			$classFile = $filter->filter( $class );
-			$classFile = Ayoola_Loader::getFullPath( $classFile );
-
-			$content .= file_get_contents( $classFile ) ;
-	//		$class = get_called_class();
-
-
-			preg_match_all( "/$data\['([a-z_-]*)'\]/", $content, $results );
-		//	var_export( $results );
-		//	$object = new $class();
-		//	$data = $object->getDbData();
-		//	var_export( $data[0] );
-			$results = ( is_array( $results[1] ) ? $results[1] : array() );
-//			$results = ( is_array( $results[1] ) ? $results[1] : array() ) + ( is_array( $data ) && $data ? array_keys( array_pop( $data ) ) : array() );
-			if( $results )
+			$class = $each;
+			if( ! empty( $class ) && Ayoola_Loader::loadClass( $class ) )
 			{
-				$results = array_unique( $results );
-				sort( $results );
-				$data = trim( str_replace( '{{{}}},', '', '{{{' . implode( '}}}, {{{', $results ) . '}}}' ), ' ' );
-				
-				$html .= '<textarea readonly ondblclick="ayoola.div.autoExpand( this );">';  
-				$html .= '' . $data . '';  
-				$html .= '</textarea>';  
+				$content = null;
+				$filter = new Ayoola_Filter_ClassToFilename();
+				$classFile = $filter->filter( $class );
+				$classFile = Ayoola_Loader::getFullPath( $classFile );
+
+				$content .= file_get_contents( $classFile ) ;
+				preg_match_all( "/$data\['([a-z_-]*)'\]/", $content, $results );
+				$results = ( is_array( $results[1] ) ? $results[1] : array() );
+				if( $results )
+				{
+					$results = array_unique( $results );
+					sort( $results );
+					$data = trim( str_replace( '{{{}}},', '', '{{{' . implode( '}}}, {{{', $results ) . '}}}' ), ' ' );
+					
+					$html .= '<textarea readonly ondblclick="ayoola.div.autoExpand( this );">';  
+					$html .= '' . $data . '';  
+					$html .= '</textarea>';  
+				}
 			}
 		}
 		if( ! empty( $object['phrase_to_replace_with'] ) &&  ! empty( $object['phrase_to_replace'] ) )

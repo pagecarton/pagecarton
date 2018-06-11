@@ -25,7 +25,7 @@ class Application_Profile_Table extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.1';  
+    protected $_tableVersion = '0.2';  
 
     /**
      * Table data types and declaration
@@ -36,6 +36,8 @@ class Application_Profile_Table extends PageCarton_Table
 	protected $_dataTypes = array (
   'profile_url' => 'INPUTTEXT',
   'display_name' => 'INPUTTEXT',
+  'username' => 'INPUTTEXT',
+  'user_id' => 'INPUTTEXT',
   'access_level' => 'INT',
   'profile_data' => 'JSON',
   'creation_time' => 'INT',

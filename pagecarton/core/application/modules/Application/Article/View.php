@@ -157,6 +157,13 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 			
 		}
+		if( ! empty( $data['profile_url'] ) )
+		{
+			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) )
+			{
+				$data += $profileInfo ? : array();
+			}
+		}
 		if( $this->getParameter( 'modified_time_representation' ) )
 		{
 			if( is_string( $this->getParameter( 'modified_time_representation' ) ) )

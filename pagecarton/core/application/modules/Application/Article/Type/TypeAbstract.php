@@ -102,8 +102,13 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 	//	$types = array( 'post' => 'Normal Post', 'article' => 'Article', 'audio' => 'Audio', 'video' => 'Video', 'quiz' => 'Online Quiz', 'poll' => 'Online Poll', 'download' => 'Downloadables', 'link' => 'Link', 'event' => 'Event', 'product' => 'Product', 'service' => 'Service', 'book' => 'Book', );          
 	//	var_export( $settings );
 	//	do
-		{		
-			$fieldset->addElement( array( 'name' => 'post_type', 'label' => 'Type Name', 'title' => 'Enter post tyoe name, e.g. Article', 'placeholder' => 'e.g. Article', 'type' => 'InputText', 'value' => @$values['post_type'], ) ); 
+		{
+            if( ! empty( $_GET['post_type_id'] ) && empty( $values['post_type'] ) )
+            {
+                $values['post_type'] = $_GET['post_type_id'];
+            }
+            		
+			$fieldset->addElement( array( 'name' => 'post_type', 'label' => 'Type Name', 'title' => 'Enter post type name, e.g. Article', 'placeholder' => 'e.g. Article', 'type' => 'InputText', 'value' => @$values['post_type'], ) ); 
 			$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post is similar to', 'title' => 'Choose the kind of post this is...', 'type' => 'Select', 'value' => @$values['article_type'], ), self::$presetTypes );  
 
 
@@ -128,6 +133,7 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
             $filter = new Ayoola_Filter_SelectListArray( 'form_name', 'form_title');
             $options = $filter->filter( $options );
             $fieldset->addElement( array( 'name' => 'supplementary_form', 'label' => 'Supplementary Creation form', 'type' => 'Select', 'value' => @$values['supplementary_form'] ), array( '' => 'Please select...' ) + $options ); 
+			$fieldset->addElement( array( 'name' => 'post_type_custom_fields', 'label' => 'Supplementary Custom Fields', 'title' => 'Custom Fields for Post Type', 'placeholder' => 'e.g. brand, size, color ', 'type' => 'InputText', 'value' => @$values['post_type_custom_fields'], ) ); 
 
 	//		$i++;
 			$fieldset->addLegend( $legend );

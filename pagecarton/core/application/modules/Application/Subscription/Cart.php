@@ -60,7 +60,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
      * 
      * @var int
      */
-	protected static $_noOfDinstinctItems = 0;
+	protected $_noOfDinstinctItems = 0;
 	
     /**
      * The total price amount of items in the cart
@@ -201,7 +201,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		{
 			$cartID = md5( serialize( $value ) );
 			//	Count the number of items
-			++self::$_noOfDinstinctItems; 
+			++$this->_noOfDinstinctItems; 
 			$noOfItems += $value['multiple'];
 			if( ! isset( $value['price'] ) )
 			{
@@ -215,7 +215,8 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			$text = $this->_xml->createTextNode( $value['subscription_label'] );
 			$columnNode->appendChild( $text );
 		//	var_export( $value );
-			$value['item_link'] = @$itemLink = $value['url'] ? : 'javascript:;';
+			
+			$value['item_link'] = @$itemLink =  $value['url'] ? : 'javascript:;' ;
 			if( ! @$value['classplayer_url'] && @$value['subscription_object_name'] )
 			{
 	//			$value['classplayer_url'] = '/tools/classplayer/get/object_name/' .  $value['subscription_object_name'] . '/';
@@ -224,7 +225,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		//		var_export( $value['classplayer_url'] );
 			$link->setAttribute( 'href', $value['item_link'] );
 			$link->setAttribute( 'rel', $value['classplayer_url'] );
-			$link->setAttribute( 'title', @$value['subscription_description'] );
+			$link->setAttribute( 'title', @$value['subscription_description'] );   
 			$columnNode = $this->_xml->createElement( 'td' );
 			$columnNode->appendChild( $link );
 			$row->appendChild( $columnNode );
@@ -247,12 +248,12 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			}
 		//	var_export( $value );
 		//	var_export( md5( serialize( $value ) ) );
-			$deleteUrl2 = $deleteMessage ? $value['link'] : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'delete', 'cart_id' => $cartID  ) );
-			$columnNode = @$this->_xml->createHTMLElement( 'td',  '<a href="' . $deleteUrl2 . '" title="' . $deleteMessage . ' Delete: ' . $value['subscription_label'] . '">x</a>' );
+			$value['delete_url'] = $deleteUrl2 = $deleteMessage ? $deleteMessage : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'delete', 'cart_id' => $cartID  ) );
+			$columnNode = @$this->_xml->createHTMLElement( 'td',  '<a href="' . $value['delete_url'] . '" title="' . $deleteMessage . ' Delete: ' . $value['subscription_label'] . '">x</a>' );
 			$columnNode->setAttribute( 'align', 'center'  );
 			$row->appendChild( $columnNode );
 			$table->appendChild( $row );
-			$this->_objectTemplateValues[] = $value;
+			$this->_objectTemplateValues[] = $value;   
 		}
 		
 		//	surcharges
@@ -330,11 +331,14 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		
 		
 		$this->_xml->appendChild( $div );
-		$this->_objectTemplateValues['no_of_distinct_items'] = self::$_noOfDinstinctItems;
+		$this->_objectTemplateValues['no_of_distinct_items'] = $this->_noOfDinstinctItems;
 		$this->_objectTemplateValues['no_of_items'] = $noOfItems;
+		$this->_objectTemplateValues['total_surcharge'] = $totalSurcharge;
 		$this->_objectTemplateValues['total_price'] = $totalPrice;
 		$this->_objectTemplateValues['grand_total_price'] = $grandTotalPrice;
 		$this->_objectTemplateValues['empty_cart_url'] = $deleteUrl;
+		$this->_objectTemplateValues['total_discount'] = 0;
+		$this->_objectTemplateValues['delivery_price'] = 0;
 
     } 
 	// END OF CLASS

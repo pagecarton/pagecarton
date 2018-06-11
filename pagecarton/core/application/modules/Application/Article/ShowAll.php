@@ -177,7 +177,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      */
 	public function showMessage()
     {
-		$this->_parameter['markup_template'] = null;
+	//	$this->_parameter['markup_template'] = null;
 		if( empty( $_GET['pc_post_list_id'] ) )
 		{
 			$message = array_pop( $this->_badnews ) ? : 'Posts will be displayed here when they become available.';
@@ -185,6 +185,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		else
 		{
+			$this->_parameter['markup_template'] = null; 
+			$this->_parameter['markup_template_no_data'] = null; 
 			$message = 'No more items.';
 		}
 		
@@ -192,10 +194,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	if( ! $values )
 		{
 			//	switch templates off
-			$this->_parameter['markup_template'] = null; 
+	//		$this->_parameter['markup_template'] = null; 
 		}
 		
-		$this->setViewContent( '<p class="badnews pc_no_post_to_show"> ' . $message . ' ' . self::getQuickLink() . '</p>', true );
+		$this->setViewContent( '<p class="pc-notify-info pc_no_post_to_show"> ' . $message . ' ' . self::getQuickLink() . '</p>', true );
 	//	$message ? $this->setViewContent( ' ' . $message . ' ', true ) : null;
 		
 		//	Check settings
@@ -205,6 +207,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ) && $this->getParameter( 'add_a_new_post' ) )
 		{
 			$addPostMessage = is_numeric( $this->getParameter( 'add_a_new_post' ) ) ? 'Create a new post' : $this->getParameter( 'add_a_new_post' );
+		}
+		else
+	//	if( ! $values )
+		{
+			//	switch templates off
+			$this->_parameter['markup_template'] = null; 
 		}
 	}
 	
@@ -445,7 +453,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						//	freebies 
 						continue;
 					}
-				//	self::v( $data );
+			//		var_export( $data['article_creation_date'] ); //2592000 //604800
+					if( ( time() - $data['article_creation_date'] ) < ( $this->getParameter( 'time_span_for_new_badge' ) ? : 2592000 ) )
+					{
+						$data['new_badge'] = $this->getParameter( 'new_badge' ) ? : 'New';
+					}
+				//	self::v( $data['new_badge'] );
 
 			//	get number of views
 					if( $this->getParameter( 'get_views_count' ) )
@@ -528,45 +541,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				krsort( $values );
 			}
 		
-			if( self::hasPriviledge( @$articleSettings['allowed_writers'] ) && $this->getParameter( 'add_a_new_post' ) ) 
-			{ 
-				$tempItem = array_shift( $values );
-				//	make the first item a link to add a new post
-			//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
-			//	self::v( $tempItem );
-				$tempItem2 = $tempItem;
-				if( is_string( $tempItem2 ) )
-				{
-					$tempItem2 = include( $tempItem );
-				}
-				$newArticleType = @$tempItem2['article_type'] ? : $this->getParameter( 'article_types' );
-				$newArticleTypeToShow = ucfirst( $newArticleType ) ? : 'Content';
-		//		self::v( $newArticleType );
-		//		self::v( $newArticleTypeToShow );
-				$item = array( 
-								'article_url' => ( '/tools/classplayer/get/name/Application_Article_Creator/?&article_type=' . $newArticleType ), 
-								'allow_raw_data' => true, 
-							//	'article_type' => $newArticleType, 
-								'always_allow_article' => $this->getParameter( 'article_types' ), 
-								'category_name' => $this->getParameter( 'category_name' ), 
-								'document_url' => '/img/placeholder-image.jpg', 
-								'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
-								'publish' => true, 
-								'auth_level' => $articleSettings['allowed_writers'], 
-					//			'article_tags' => '', 
-								'username' => Ayoola_Application::getUserInfo( 'username' ), 
-								'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
-								'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
-							);  
-				$item ? array_unshift( $values, $item ) : null;
-				$tempItem ? array_unshift( $values, $tempItem ) : null;
-/*
-				if( count( $values ) >= $j )
-				{
-					$sacrificial = array_pop( $values );  
-				}
-*/			//	array_push( $values, $item );   
-			}
 
 			//	Cache results
 		//	var_export( $this->getParameter( 'markup_template' ) );  
@@ -579,6 +553,49 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$storage->store( $valuesToStore );
 			//	self::v( $storage->retrieve() );
 			}
+		}
+		$this->_objectTemplateValues['total_no_of_posts'] = count( $values );
+	//	var_export( $values );
+		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ) && $this->getParameter( 'add_a_new_post' ) ) 
+		{ 
+			$tempItem = array_shift( $values );
+			//	make the first item a link to add a new post
+		//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
+		//	self::v( $tempItem );
+			$tempItem2 = $tempItem;
+			if( is_string( $tempItem2 ) )
+			{
+				$tempItem2 = include( $tempItem );
+			}
+			$where =  $this->_dbWhereClause;
+			$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
+			$newArticleType = @$tempItem2['article_type'] ? : ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
+			$newArticleTypeToShow = ucfirst( $newArticleType ) ? : 'Content';
+	//		self::v( $newArticleType );
+		//	self::v( $this->_dbWhereClause );
+			$item = array( 
+							'article_url' => ( '/tools/classplayer/get/name/Application_Article_Creator/?true_post_type=' . $truePostType . '&post_type_custom_fields=' . $this->getParameter( 'post_type_custom_fields' ) . '&article_type=' . $newArticleType . '&category_name=' . @array_pop( $where['category_name'] ) ), 
+							'allow_raw_data' => true, 
+						//	'article_type' => $newArticleType, 
+							'always_allow_article' => $this->getParameter( 'article_types' ), 
+							'category_name' => $this->getParameter( 'category_name' ), 
+							'document_url' => '/img/placeholder-image.jpg', 
+							'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
+							'publish' => true, 
+							'auth_level' => $articleSettings['allowed_writers'], 
+				//			'article_tags' => '', 
+							'username' => Ayoola_Application::getUserInfo( 'username' ), 
+							'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
+							'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
+						);  
+			$item ? array_unshift( $values, $item ) : null;
+			$tempItem ? array_unshift( $values, $tempItem ) : null;
+/*
+			if( count( $values ) >= $j )
+			{
+				$sacrificial = array_pop( $values );  
+			}
+*/			//	array_push( $values, $item );   
 		}
 		
 		$i = 0; //	counter
@@ -598,8 +615,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 		
 		//	default at 1800 so it can always cover the screen
-		$maxWith = $this->getParameter( 'cover_photo_width' ) ? : ( @$articleSettings['cover_photo_width'] ? : 1500 );
-		$maxHeight = $this->getParameter( 'cover_photo_height' ) ? : ( @$articleSettings['cover_photo_height'] ? : 600 ); 
+		$maxWith = $this->getParameter( 'cover_photo_width_for_list' ) ? : ( $this->getParameter( 'cover_photo_width' ) ? : ( @$articleSettings['cover_photo_width'] ? : 1500 ) );
+		$maxHeight = $this->getParameter( 'cover_photo_height_for_list' ) ? : ( $this->getParameter( 'cover_photo_height' ) ? : ( @$articleSettings['cover_photo_height'] ? : 600 ) ); 
  		
 		//	Split to chunk\
 	//	$_REQUEST['list_page_number'] = 0;
@@ -648,12 +665,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$this->autoLoadNewPosts( $postListId, $offset );
 		if( @$chunk[$offset] )
 		{
+	//		var_export( $offset );
 			$nextPageLink = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . @$offset;
 			$this->_objectTemplateValues['paginator_next_page'] = $nextPageLink;
 			$this->_objectTemplateValues['paginator_next_page_button'] = '<a class="pc-btn" href="' . $nextPageLink . '"> Next &rarr;</a>';       
-			if( empty( $_GET['pc_post_list_autoload'] ) && $this->getParameter( 'pagination' ) )
+			if( empty( $_GET['pc_post_list_autoload'] ) && $this->getParameter( 'pagination' ) && ! $this->getParameter( 'hide_pagination_buttons' ) )
 			{
-				$this->_objectTemplateValues['click_to_load_more'] = $linkToLoadMore = '<div style="text-align:center;" class="pc_posts_distinguish_sets" id="' . $postListId . '"><a class="pc-btn pc-btn-small" href="javascript:" onclick="pc_autoloadFunc_' . $postListId . '();"> Load more</a></div>';     
+				$this->_objectTemplateValues['click_to_load_more'] = $linkToLoadMore = '<div style="text-align:center;" class="pc_posts_distinguish_sets" id="' . $postListId . '_pagination"><a class="pc-btn pc-btn-small" href="javascript:" onclick="pc_autoloadFunc_' . $postListId . '();"> Load more</a></div>';     
 			}  
 		}
 		if( @$chunk[( @$offset - 2 )] )
@@ -661,8 +679,16 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_objectTemplateValues['paginator_previous_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . ( @$offset - 2 );
 			$this->_objectTemplateValues['paginator_previous_page_button'] = '<a class="pc-btn" href="' . $this->_objectTemplateValues['paginator_previous_page'] . '">&larr; Previous</a>';
 		}
-		$this->_objectTemplateValues['paginator_first_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=0';
-		$this->_objectTemplateValues['paginator_last_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . ( @count( $chunk ) - 1 );
+//		var_export( $offset );
+		if( $offset != 1 )
+		{
+			$this->_objectTemplateValues['paginator_first_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=0';
+		}
+		if( $offset != ( @count( $chunk ) ) )
+		{
+			$this->_objectTemplateValues['paginator_last_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . ( @count( $chunk ) - 1 );
+			$this->_objectTemplateValues['paginator_last_page_number'] = ( @count( $chunk ) );
+		}
 		$this->_objectTemplateValues = $this->_objectTemplateValues ? : array();
 
 		$pagination = null;
@@ -671,11 +697,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$pagination .= @$this->_objectTemplateValues['paginator_previous_page_button'];
 			$pagination .= @$this->_objectTemplateValues['paginator_next_page_button'];
 		}
-		if( empty( $_GET['pc_post_list_autoload'] ) )
+		if( empty( $_GET['pc_post_list_autoload'] ) && ! $this->getParameter( 'hide_pagination_buttons' ) )
 		{
-			$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '">' . $pagination . '</div>';
+			$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '_pagination">' . $pagination . '</div>';
 			$this->_objectTemplateValues['pagination'] = $data['pagination'] = $pagination;	
 		}	
+		$this->_objectTemplateValues['post_list_id'] = $postListId;
 	//	self::v( $pagination );  
 		$values = $values ? array_unique( $values, SORT_REGULAR ) : array(); 
 	//	self::v( $values[''] );
@@ -708,11 +735,25 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					@$data['document_url'] ? : ( $data['document_url'] = $data['display_picture'] );
 				}
 			}
+			if( ! empty( $data['profile_url'] ) )
+			{
+				if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) )
+				{
+					$data += $profileInfo ? : array();
+				}
+			}
 		//	if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
+			$data['post_link'] = $data['article_url'];
+			if( @$data['article_url'] && strpos( @$data['article_url'], ':' ) === false && $data['article_url'][0] !== '?'  )
+			{
+				$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
+			}
 			if( @$data['article_url'] )
 			$data['document_url'] = $data['document_url']; 
 			$data['document_url_plain'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
 			$data['document_url_uri'] = $data['document_url']; 
+			$data['document_url_cropped'] = $data['document_url']; 
+			$data['document_url_no_resize'] = $data['document_url']; 
 			if( strpos( @$data['document_url'], ':' ) === false && empty( $data['not_real_post'] ) )
 			{
 				if( $this->getParameter( 'skip_ariticles_without_cover_photo' ) && ! @$data['document_url_base64'] && ( ! Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ? : @$data['display_picture'] ) ) )
@@ -722,8 +763,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				}
 				//	This is the default now if they don't have picture, create a placeholder
 			//	$data['document_url'] = $data['document_url_base64'];
-				$data['document_url'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
-				$data['document_url_cropped'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
+				$data['document_url'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
+				$data['document_url_cropped'] = $data['document_url']; 
 				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] );     
 				
 			}
@@ -893,8 +934,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$data['currency'] = $filter::$symbol;
 				$filter = new $filter();
 				
-				@$data['price_percentage_savings'] =  intval( ( ( $data['item_old_price'] - $data['item_price'] ) / $data['item_old_price'] ) * 100 ) . '%';
-				@$data['item_old_price'] = $data['item_old_price'] ? $filter->filter( $data['item_old_price'] ) : null;
+				if( $data['item_old_price'] )
+				{
+					@$data['price_percentage_savings'] =  intval( ( ( $data['item_old_price'] - $data['item_price'] ) / $data['item_old_price'] ) * 100 ) . '';
+					@$data['item_old_price'] = $data['item_old_price'] ? $filter->filter( $data['item_old_price'] ) : null;
+				}
 				$data['item_price_with_currency'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
 				
 				//	Split to naira / kobo
@@ -1107,6 +1151,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//			self::v( $pagination );
 			}
 		}
+		else
+		{
+			$this->_parameter['markup_template_append'] = null;
+			$this->_parameter['markup_template_prepend'] = null;  
+		}
 			//	self::v( $this->_objectTemplateValues['pagination'] );
 			//	self::v( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) );
 		
@@ -1219,9 +1268,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//			$this->_dbData = array();
 	//			return false;   
 			}
-			$categoryId = @$category['category_id'];
-			$categoryName = @$category['category_name'] ? : $category['category_id'];
-			$categoryName = '' . $categoryName . '';
+			else
+			{
+				$categoryId = @$category['category_id'];
+				$categoryName = @$category['category_name'] ? : $category['category_id'];
+				$categoryName = '' . $categoryName . '';
+			}
 			$category['category_description'] = $category['category_description'] ? : ' Latest Posts in the "' . $category['category_label'] . '" category on ' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() );
 			
 			//	Add the category to title and description?
@@ -1359,19 +1411,28 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	var_export( $path );
 	//	self::v( $path );
 		//		self::v( $categoryName );      
+		if( $this->getParameter( 'post_with_same_true_post_type' ) && @Ayoola_Application::$GLOBAL['true_post_type'] )
+		{
+			$whereClause['true_post_type'][] = @Ayoola_Application::$GLOBAL['true_post_type'];
+		}
+		if( $this->getParameter( 'post_with_same_article_type' ) && @Ayoola_Application::$GLOBAL['post_with_same_article_type'] )
+		{
+			$whereClause['post_with_same_article_type'][] = @Ayoola_Application::$GLOBAL['post_with_same_article_type'];
+		}
 	
 		if( $categoryId || $categoryName )
 		{
-			$whereClause['category_name'][] = $categoryName ? : 'workaround_avoid_error_in_search';
-			$whereClause['category_name'][] = $categoryId ? : 'workaround_avoid_error_in_search';
+			$whereClause['category_name'][] = $categoryName ? : $categoryId;
+	//		$whereClause['category_name'][] = $categoryId ? : 'workaround_avoid_error_in_search';
 		//	$this->_dbWhereClause['category_id'] = $categoryId;
 		//	$this->setViewContent( '<p>Showing articles from ', true );
 		//	if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 ) 
 			{
 		//		var_export( count( $files ) );
 				//	Removing dependence on Ayoola_Api for showing posts
-				$categoryId = $categoryId ? : 'workaround_avoid_error_in_search';
-				$this->_dbData = $output;   
+			//
+			//	$categoryId = $categoryId ? : 'workaround_avoid_error_in_search';
+			//	$this->_dbData = $output;   
 			}
 		}
 		elseif( ! empty( $_GET['tag'] ) )
@@ -1556,6 +1617,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 */
 					$table = $table::getInstance();
 					$this->_dbData = $table->select( null, $whereClause );
+					$this->_dbWhereClause = $whereClause;
 			//		var_export( $this->_postTable );
 		//			var_export( $this->_dbData );
 		//			var_export( $whereClause );
