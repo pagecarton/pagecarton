@@ -457,6 +457,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					if( ( time() - $data['article_creation_date'] ) < ( $this->getParameter( 'time_span_for_new_badge' ) ? : 2592000 ) )
 					{
 						$data['new_badge'] = $this->getParameter( 'new_badge' ) ? : 'New';
+						
 					}
 				//	self::v( $data['new_badge'] );
 

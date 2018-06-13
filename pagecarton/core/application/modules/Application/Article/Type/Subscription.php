@@ -140,7 +140,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 						unset( $values['document_url_base64'], $values['download_base64'] ); 
 						
 						$values['subscription_name'] = $data['article_url'] . 'price_option' . $each;
-						$values['subscription_label'] = $data['price_option_title'][$key] . ' - ' . $data['article_title'];
+						$values['subscription_label'] = ( $values['subscription_selections'] ? ( $values['subscription_selections'] . ' | ' ) : null ) . $data['price_option_title'][$key] . ' - ' . $data['article_title'];
 						$values['price'] = $pricing;
 						$values['cycle_name'] = 'each';
 						$values['cycle_label'] = '';
@@ -187,7 +187,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					$values += $data;
 					unset( $values['document_url_base64'], $values['download_base64'] ); 
 					$values['subscription_name'] = $data['article_url'];
-					$values['subscription_label'] = $data['article_title'];
+					$values['subscription_label'] = ( $values['subscription_selections'] ? ( $values['subscription_selections'] . ' | ' ) : null ) . $data['article_title'];
 					$values['price'] = $data['item_price'] + floatval( array_sum( @$values['product_option'] ? : array() ) );
 					$values['product_option'] = @$values['product_option'];
 					$values['cycle_name'] = 'each';
@@ -380,6 +380,20 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		$filter = 'Ayoola_Filter_Currency';
 		$filter = new $filter();
 	//	var_export( $this->getParameter( 'multi-price' ) );
+			if( @$subscriptionData['subscription_selections'] )  
+			{
+				$optionsMenu = array();
+				foreach( $subscriptionData['subscription_selections'] as $eachOption )
+				{
+					if( empty( $eachOption ) )
+					{
+						continue;
+					}
+					$optionsMenu[$eachOption] = $eachOption;
+				}
+		//		self::v( $optionsMenu );
+				$optionsMenu ? $fieldset->addElement( array( 'name' => 'subscription_selections', 'label' => 'Options', 'type' => 'Radio', 'value' => @$subscriptionData['subscription_selections'] ), $optionsMenu ) : null;
+			}
 		if( ! $this->getParameter( 'multi-price' ) )
 		{	
 			$fieldset->addElement( array( 'name' => 'quantity', 'id' => 'quantity_' . md5( @$subscriptionData['article_url'] ), 'label' => 'Quantity', 'style' => 'min-width:20px;max-width:60px;display:inline;margin-right:0;', 'type' => $showQuantity, 'value' => @$values['quantity'] ? : 1 ), $optionsForSelect );  

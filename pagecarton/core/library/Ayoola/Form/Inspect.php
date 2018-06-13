@@ -71,7 +71,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 		//	var_export( $data );
 			$list = new Ayoola_Paginator();
 			$list->pageName = $this->getObjectName();
-			$list->listTitle = self::getObjectTitle();
+			$list->listTitle = $data['form_title'] . ' Responses';
 			$table = Ayoola_Form_Table_Data::getInstance();
 
 			//	Filter the result to save time
@@ -83,7 +83,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 					$time = $values["creation_time"];
 					$values = $values["form_data"] + $values;
 				//	$values["creation_time"] = $time;
-				//	$key = $values["username"];
+				//	$key = $values["username"]; 
 				'
 			); 
 			$formData = $table->select( null, array( 'form_name' => $data['form_name'] ), array( 'result_filter_function' => $sortFunction2 ) );
@@ -100,6 +100,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 										) 
 								);
 			$list->setKey( $this->getIdColumn() );
+			$list->pageName = $this->getObjectName();
 			$list->setNoRecordMessage( 'There are no responses to this form yet.' );
 
 			foreach( $data['element_title'] as $key => $each )

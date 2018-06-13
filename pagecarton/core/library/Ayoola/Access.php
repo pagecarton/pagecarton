@@ -212,6 +212,7 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 		if( 
 			Ayoola_Abstract_Playable::hasPriviledge( $pageAccessLevel ) 
 			|| @$pageInfo['url'] === '/accounts/signin'
+			|| @$pageInfo['url'] === '/account/signin'
 		)
 		{ 
 			return true; 
@@ -248,7 +249,7 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 		{
 			$prefix = $response['parent_dir'] . Ayoola_Application::getUrlPrefixController();
 		}
-		$urlToGo = '' . $prefix . '/accounts/signin/';
+		$urlToGo = '' . $prefix . '/account/signin/';
 		if( $objectPlay )
 		{
 			$urlToGo = '' . $prefix . '/tools/classplayer/get/name/Ayoola_Access_Login/';

@@ -118,6 +118,7 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
                                 'download' => 'Download URL', 
                                 'product' => 'Price', 
                                 'multi-price' => 'Multiple Pricing', 
+                                'subscription-options' => 'Subscription Options', 
                                 'datetime' => 'Date and Time', 
                                 'location' => 'Location', 
                                 'audio' => 'Play Audio', 

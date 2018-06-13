@@ -129,6 +129,9 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 	public static function replacePlaceholders( $template, array $values )
     {
 //		var_export( $values );
+//		var_export( $values );
+//		self::v( $values );
+//		self::v( $template );
 		$search = array();
 		$replace = array();
 		$values['placeholder_prefix'] = @$values['placeholder_prefix'] ? : '@@@';      
@@ -150,8 +153,9 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 				$search[] = $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
 				$replace[] = $value;	
 			}
-			elseif( is_array( $value ) )
+			elseif( is_array( $value ) && array_values( $value ) != $value )
 			{
+	//	self::v( $value );
 		//		$replaceInternally = false;
 		//		if( stripos( $template, $values['placeholder_prefix'] . 'array_key_count' . $values['placeholder_suffix'] ) !== false )
 				{
@@ -171,6 +175,8 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 				}
 				$iSearch = array();
 				$iReplace = array();
+				$jSearch = array();
+				$jReplace = array();
 					//			var_export( $value );  
 				//				var_export( $values['article_title'] );  
 
@@ -188,14 +194,16 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 					}  
 					else
 					{
-						$search[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
-						$replace[] = $eachValue;  
+					//	var_export( $eachKey );
+					//	var_export( $eachValue );
+						$jSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
+						$jReplace[] = $eachValue;  
 						
 						//	CLEAR HTML comments like <!--{{{0}}} {{{0}}}-->
-						$search[] = '<!--' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '';
-						$replace[] = '';  
-						$search[] = '' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '-->';
-						$replace[] = '';  
+						$jSearch[] = '<!--' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '';
+						$jReplace[] = '';  
+						$jSearch[] = '' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '-->';
+						$jReplace[] = '';  
 					}
  				}
 		//		var_export( $search );
@@ -208,7 +216,11 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 						$iReplace[] = $cccc;
 					}
 					$iTemplate .= @str_ireplace( $iSearch, $iReplace, $postTheme );    
-				}  
+				}
+				elseif( $jSearch )
+				{
+					$template = str_ireplace( $jSearch, $jReplace, $template );    
+				}
 				
 			}
 		}

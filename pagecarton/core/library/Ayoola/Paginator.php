@@ -294,11 +294,14 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		
 		// Set representations to null if they are null
         $current = $this->_currentPage;
-/*         $first = is_null( $this->_firstPage ) ? NULL : $this->_rep['first'];
+/*      
+		$first = is_null( $this->_firstPage ) ? NULL : $this->_rep['first'];
 		$last = is_null( $this->_lastPage ) ? NULL : $this->_rep['last'];
 		$next = is_null( $this->_nextPage ) ? NULL : $this->_rep['next'];
 		$previous = is_null( $this->_previousPage ) ? NULL : $this->_rep['previous'];
- */     $first = $this->_rep['first'];
+
+ */     
+ 		$first = $this->_rep['first'];
 		$last = $this->_rep['last'];
 		$next = $this->_rep['next'];
 		$previous = $this->_rep['previous'];
@@ -435,6 +438,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
     {	
 		
 		$fields = _Array( $fields );
+		$this->fields = $fields;
 		if( ! $this->getRows() ){ return $this->_list = $this->getNoRecordMessage(); }
 		$key = $this->getKey() ? : null;
 	//	var_export( $key );
@@ -616,7 +620,8 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			}
 			$html .= $records;
 		}
-		$this->_rows = array(); // Free up the memory
+		//	leaves this so download can work
+//		$this->_rows = array(); // Free up the memory
 		$html .='</table>';		
 		
 		// Embed the html in a form so as to service the checkboxes
@@ -771,6 +776,8 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		{
 			$this->setRows();
 		}
+					//		var_export( $this->_rows );
+
 		return (array) $this->_rows;
     }
 	
@@ -793,6 +800,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      */
     public function view()
     {	
+		$list = $this->getList();
 		$content = null;  
 		$content .= $this->listTitle ? '<div style="margin:1em 0 1.5em 0;"><h3 class="pc-heading">' . $this->listTitle . '</h3></div>' : null;     
 		
@@ -814,6 +822,52 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				$this->setListOptions( array( 'Creator' => '<a rel="" href="javascript:;" title="Add new to the list" class="" style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/' . $creatorClass . '/\', \'' . $this->pageName . '\' )">Add new</a>' ) ); 
 			}
 		}
+		$downloadLink = '/widgets/' . $this->pageName . '/?export_list=' . $this->pageName . '&' . http_build_query( $_GET );
+			$this->setListOptions( array( 'Export' => '<a rel="" href="' . $downloadLink . '" title="" class="" style="" onClick="">Export List</a>' ) ); 
+			if( @$_GET['export_list'] == $this->pageName )
+			{
+				// filename for download
+				$filename = ( $this->listTitle ? : $this->pageName ) . date('-Y-m-d') . ".csv";
+
+				header("Content-Disposition: attachment; filename=\"$filename\"");
+				header("Content-Type: text/csv");
+
+				$out = fopen("php://output", 'w');
+
+				$flag = false;
+				$result = $this->getRows();
+				//	var_export( $result );
+				//	var_export( $this->fields );
+				if( ! function_exists( 'cleanData' ) )
+				{
+					function cleanData(&$str)
+					{
+						if( ! is_scalar( $str ) ){ return false; }
+						if($str == 't') $str = 'TRUE';
+						if($str == 'f') $str = 'FALSE';
+						if(preg_match( "/^0/", $str ) || preg_match( "/^\+?\d{8,}$/", $str ) || preg_match("/^\d{4}.\d{1,2}.\d{1,2}/", $str)) 
+						{
+					//		$str = "'$str ";
+						}
+						if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+					}
+				}
+				while( $row = array_shift( $result ) ) 
+				{
+					if( ! $flag ) 
+					{
+						// display field/column names as first row
+						fputcsv( $out, array_keys( $row ), ',', '"' );
+						fputcsv( $out, array_keys( $this->fields ), ',', '"' );
+						$flag = true;
+					}
+					array_walk( $row, __NAMESPACE__ . '\cleanData' );
+					fputcsv( $out, array_values( $row ), ',', '"' );
+				}
+
+				fclose($out);
+				exit;
+  			}
 		$noToShow = null;
 		$order = null;
 		$content .= ' <div style="padding-top:0em;padding-bottom:1em;" class="pc-btn-parent pc-btn-small-parent">';			
@@ -889,7 +943,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				$content .= $newForm->view();  
 			}
 		}
-		$content .= $this->getList();
+		$content .= $list;
 	//	if( ! @$this->hideOptions  )
 		{ 
 		//	$fieldset = new Ayoola_Form_Element();

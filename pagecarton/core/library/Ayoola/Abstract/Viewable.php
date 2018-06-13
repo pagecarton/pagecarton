@@ -1608,7 +1608,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						}
 					}
 				
-			//		self::v( $template );
+	//				self::v( $this->_objectTemplateValues );
 					//	Add the Ayoola_Application Global
 					$this->_objectTemplateValues = array_merge( Ayoola_Application::$GLOBAL ? : array(), $this->_objectTemplateValues );
 		

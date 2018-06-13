@@ -1524,14 +1524,16 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$fieldset->addElement( array( 'name' => 'item_price', 'label' => 'Current price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_price'] ) );
 					$fieldset->addElement( array( 'name' => 'no_of_items_in_stock', 'type' => 'InputText', 'value' => @$values['no_of_items_in_stock'] ) );   
 			//		$fieldset->addElement( array( 'name' => 'call_to_action', 'placeholder' => 'e.g. Add to Cart', 'type' => 'InputText', 'value' => @$values['call_to_action'] ) );
-				//	$fieldset->addElement( array( 'name' => 'subscription_options', 'type' => 'Checkbox', 'value' => @$values['subscription_options'] ), array( 'selections' => 'This product or service has a options to select from e.g. color',  ) );
+				break;
+				case 'subscription-options':
+			//		$fieldset->addElement( array( 'name' => 'subscription_options', 'type' => 'Checkbox', 'value' => @$values['subscription_options'] ), array( 'selections' => 'This product or service has a options to select from e.g. color',  ) );
 			//		var_export( $values['subscription_selections'] );
-				//	if( ( $this->getGlobalValue( 'subscription_options' ) && in_array( 'selections', $this->getGlobalValue( 'subscription_options' ) ) ) ) 
-					{
-					//	$fieldset->addElement( array( 'name' => 'subscription_selections', 'placeholder' => 'e.g. blue', 'type' => 'MultipleInputText', 'value' => @$values['subscription_selections'] ), @$values['subscription_selections'] );
+				//	if( ( $this->getGlobalValue( 'subscription_options' ) && in_array( 'selections', $this->getGlobalValue( 'subscription_options' ) ) ) )  
+			//		{
+						$fieldset->addElement( array( 'name' => 'subscription_selections', 'label' => $postTypeLabel . ' Options', 'placeholder' => 'e.g. blue', 'type' => 'MultipleInputText', 'value' => @$values['subscription_selections'] ), @$values['subscription_selections'] );
 					//	$fieldset->addRequirement( 'subscription_selections', array( 'WordCount' => array( 1,300 ), ) );
-					}
-		//		break;
+			//		}
+				break;
 		//		case 'product':
 		//		case 'service':   
 	/*					$i = 0;

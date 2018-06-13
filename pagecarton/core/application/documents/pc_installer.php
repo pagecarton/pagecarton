@@ -20,7 +20,7 @@
 	ini_set( "memory_limit","512M" );
 
 	//	Download and extraction can take a while
-//	set_time_limit( 0 );
+	set_time_limit( 0 );
 	defined('DS') || define('DS', DIRECTORY_SEPARATOR);
 	defined('PS') || define('PS', PATH_SEPARATOR);
 	
@@ -174,7 +174,7 @@
 			);
 			foreach( $preserveList as $eachDir )
 			{
-				set_time_limit( 30 );
+			//	set_time_limit( 30 );
 				$oldEachDir = APPLICATION_DIR . $dbDir . $eachDir;
 				if( ! is_file( $oldEachDir ) )
 				{
@@ -215,7 +215,7 @@
 				$insideFiles = glob($eachDir . '*', GLOB_MARK);
 				$insideFiles = array_merge($insideFiles, $dotfiles);
 				foreach ($insideFiles as $insideFile) {
-					set_time_limit( 30 );
+				//	set_time_limit( 30 );
 					if (basename($insideFile) == '.' || basename($insideFile) == '..') {
 						continue;
 					} else if (is_dir($insideFile)) {
@@ -229,7 +229,7 @@
 			}	
 			foreach( $dirsToDelete as $eachDir )
 			{
-				set_time_limit( 30 );
+			//	set_time_limit( 30 );
 				$eachDir = APPLICATION_DIR . $eachDir;
 				@deleteDirectoryPlusContent($eachDir);
 			}	
@@ -237,21 +237,21 @@
 			
 			//	Open the downloaded ( and zipped ) framework and save it on the server.
 			//	We must have PharData installed for this to work.
-			  ini_set('max_execution_time', 200*60);
+		//	  ini_set('max_execution_time', 200*60);
 			$phar = 'PharData';
 			$backup = new $phar( $filename );
 			$backup->extractTo( APPLICATION_DIR, null, true );
 			
 			//	return preserved data
-			ini_set('max_execution_time', 200*60);
+		//	ini_set('max_execution_time', 200*60);
 			foreach( $preserveList as $eachDir )
 			{
-				ini_set('max_execution_time', 200*60);
+		//		ini_set('max_execution_time', 200*60);
 				$oldEachDir = APPLICATION_DIR . $dbDir . $eachDir;
 				$newEachDir = $temDir . $eachDir;
 				@mkdir( dirname( $oldEachDir ), 0777, true );
 				@copy( $newEachDir, $oldEachDir );  
-				ini_set('max_execution_time', 200*60);    
+		//		ini_set('max_execution_time', 200*60);    
 		//		var_export( $newEachDir );
 		//		var_export( $oldEachDir );
 			}

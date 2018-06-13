@@ -198,7 +198,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		$widgets = Ayoola_Object_Embed::getWidgets();
 		foreach( $object['markup_template_object_name'] as $each )
 		{
-			if( ! array_key_exists( $each, $widgets ) )
+			if( $each && ! array_key_exists( $each, $widgets ) )
 			{ 
 				$widgets[$each] = $each; 
 			}
