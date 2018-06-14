@@ -30,7 +30,14 @@
 	$dir = realpath( dirname( $home ) );
  */	
 	//	Using document root now
-	$home = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];    
+	$home = dirname( __FILE__ );
+	if( ! empty( $_SERVER['DOCUMENT_ROOT'] ) )
+	{
+		$home = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];    
+	}
+//	var_export( $home );
+//	var_export( $_SERVER );
+//	exit();
 	$dir = $oldDir = $baseAppPath = dirname( $home );
 	
 	//	Shrink everything into a single dir
@@ -74,7 +81,7 @@
 	//	look for this path prefix dynamically
 
     $currentDir = explode( '/', str_replace( array( '/', '\\' ), '/', dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
-    $tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $_SERVER['DOCUMENT_ROOT'], '/\\' ) ) );   
+    $tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $baseAppPath, '/\\' ) ) );   
 
 	$prefix = null;
 	if( $currentDir !== $tempDir )

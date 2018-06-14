@@ -158,15 +158,18 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 
 		//	Refreshes the url prefix just in case we have imported new site
-		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
+//	var_export( $this->getParameter( 'url_prefix' ) );
+	//	var_export( strpos( $content, '//' ) );
+		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() )
+//		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
 		{
 		//	$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), );
 		//	$replace = array( '"' . Ayoola_Application::getUrlPrefix(), "'". Ayoola_Application::getUrlPrefix(), );
-			$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), );
-			$replace = array( '"', "'", '"', "'", );
+			$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), "url(" . $this->getParameter( 'url_prefix' ), '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), "url(" . Ayoola_Application::getUrlPrefix(), );
+			$replace = array( '"', "'", "url(", '"', "'", "url(", );
 			$content = str_ireplace( $search, $replace, $content );
-			$search = array( '"/', "'/", );
-			$replace = array( '"' . Ayoola_Application::getUrlPrefix() . '/', "'". Ayoola_Application::getUrlPrefix() . '/', );
+			$search = array( '"/', "'/", "url(/", Ayoola_Application::getUrlPrefix() . '//' );
+			$replace = array( '"' . Ayoola_Application::getUrlPrefix() . '/', "'". Ayoola_Application::getUrlPrefix() . '/', "url(". Ayoola_Application::getUrlPrefix() . '/', '//' );
 			$content = str_ireplace( $search, $replace, $content );
 	//		$replace = Ayoola_Application::getUrlPrefix();
 		}

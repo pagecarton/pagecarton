@@ -9,8 +9,17 @@
 		
 		
 		//    look for this path prefix dynamically
+		$root = dirname( __FILE__ );
+		if( ! empty( $_SERVER['DOCUMENT_ROOT'] ) )
+		{
+			$root = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];    
+		}
+	//	var_export( $home );
+	//	var_export( $_SERVER );
+	//	exit();
+		$dir = $oldDir = $baseAppPath = dirname( $home );
 		$currentDir = explode( '/', str_replace( array( '/', '\\' ), '/', dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
-		$tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $_SERVER['DOCUMENT_ROOT'], '/\\' ) ) );  
+		$tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $root, '/\\' ) ) );  
 
 		$prefix = null;
 		if( $currentDir !== $tempDir )
@@ -21,13 +30,13 @@
 				$prefix = '/' . implode( '/', $prefix );  
 			}
 		}
-		//	var_export( $tempDir );
-		//	var_export( $prefix );
+	//		var_export( $tempDir );
+	//		var_export( $prefix );
 		defined( 'PATH_PREFIX' ) || define( 'PATH_PREFIX', $prefix );
 		defined( 'PC_PATH_PREFIX' ) || define( 'PC_PATH_PREFIX', $prefix );
 	//	var_export( PATH_PREFIX );
 
-		$oldDir = dirname( $_SERVER['DOCUMENT_ROOT'] ); 
+		$oldDir = dirname( $root ); 
 		$oldDir = realpath( $oldDir ) ? : $oldDir; 
 	//	var_export( $_SERVER['DOCUMENT_ROOT'] );
 	//	var_export( dirname( $_SERVER['DOCUMENT_ROOT'] ) );

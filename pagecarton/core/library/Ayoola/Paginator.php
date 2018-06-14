@@ -822,7 +822,10 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				$this->setListOptions( array( 'Creator' => '<a rel="" href="javascript:;" title="Add new to the list" class="" style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/' . $creatorClass . '/\', \'' . $this->pageName . '\' )">Add new</a>' ) ); 
 			}
 		}
-		$downloadLink = '/widgets/' . $this->pageName . '/?export_list=' . $this->pageName . '&' . http_build_query( $_GET );
+		if( $result = $this->getRows() )
+		{
+
+			$downloadLink = '/widgets/' . $this->pageName . '/?export_list=' . $this->pageName . '&' . http_build_query( $_GET );
 			$this->setListOptions( array( 'Export' => '<a rel="" href="' . $downloadLink . '" title="" class="" style="" onClick="">Export List</a>' ) ); 
 			if( @$_GET['export_list'] == $this->pageName )
 			{
@@ -835,7 +838,6 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				$out = fopen("php://output", 'w');
 
 				$flag = false;
-				$result = $this->getRows();
 				//	var_export( $result );
 				//	var_export( $this->fields );
 				if( ! function_exists( 'cleanData' ) )
@@ -868,6 +870,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				fclose($out);
 				exit;
   			}
+		}
 		$noToShow = null;
 		$order = null;
 		$content .= ' <div style="padding-top:0em;padding-bottom:1em;" class="pc-btn-parent pc-btn-small-parent">';			

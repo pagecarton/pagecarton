@@ -234,7 +234,7 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 			//	if we have this, we need to use all values present.
 		}
 		//	Form to create a new page
-        $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
+        $form = new Ayoola_Form( array( 'name' => $this->getObjectName() . $values['page_id'] . $values['url'], 'data-not-playable' => true ) );
 		$fieldset = new Ayoola_Form_Element;
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;

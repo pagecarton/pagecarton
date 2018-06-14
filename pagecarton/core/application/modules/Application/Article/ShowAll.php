@@ -204,7 +204,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' ); 
 
 		//	Only allowed users can write
-		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ) && $this->getParameter( 'add_a_new_post' ) )
+		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) )
 		{
 			$addPostMessage = is_numeric( $this->getParameter( 'add_a_new_post' ) ) ? 'Create a new post' : $this->getParameter( 'add_a_new_post' );
 		}
@@ -457,7 +457,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					if( ( time() - $data['article_creation_date'] ) < ( $this->getParameter( 'time_span_for_new_badge' ) ? : 2592000 ) )
 					{
 						$data['new_badge'] = $this->getParameter( 'new_badge' ) ? : 'New';
-						
+
 					}
 				//	self::v( $data['new_badge'] );
 
@@ -557,7 +557,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		$this->_objectTemplateValues['total_no_of_posts'] = count( $values );
 	//	var_export( $values );
-		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ) && $this->getParameter( 'add_a_new_post' ) ) 
+		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) ) 
 		{ 
 			$tempItem = array_shift( $values );
 			//	make the first item a link to add a new post
@@ -901,7 +901,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			//	Social Media
 			$parameter = array( 'url' =>  Ayoola_Application::getUrlPrefix() . $url, 'title' => $data['article_title'] );
-			if( self::isOwner( @$data['user_id'] ) || self::hasPriviledge( @$articleSettings['allowed_editors'] ) )
+			if( self::isOwner( @$data['user_id'] ) || self::hasPriviledge( @$articleSettings['allowed_editors'] ? : 98 ) )
 			{
 				$editLink = self::getPostUrl() . '/post/editor/?article_url=' . $data['article_url'];
 				$editLinkHTML = null;

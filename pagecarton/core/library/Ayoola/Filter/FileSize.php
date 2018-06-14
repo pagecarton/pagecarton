@@ -76,7 +76,7 @@ class Ayoola_Filter_FileSize implements Ayoola_Filter_Interface
 		//	var_export( $temp . '<br />' );
 			if( $temp >= 1 ){ $values[$key] = $temp; }
 		}
-		$lastKey = 'kb';
+		$lastKey = 'b';
 		foreach( $values as $key => $each )
 		{
 			if( $temp > $each )

@@ -783,12 +783,20 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					$objectName = 'obj' . $numberedSectionName . $eachObject['object_name'];
 					
 					
+					//	add domain
+					//	conflicting multisites
+					//	the same url is theme urls on subdomains
+					$objectName .= Ayoola_Page::getDefaultDomain();
+					
+					
+					//	add prefix
+					//	conflicting multisites
+					$objectName .= Ayoola_Application::getUrlPrefix();
+
 					//	The objectname is conflicting in templates and the page
 					//	Let's make it a function of the url to fix this
 					$objectName .= $page['url'];
 
-					//	the same url is theme urls on subdomains
-					$objectName .= Ayoola_Page::getDefaultDomain();
 
 				//	var_export( $objectName );
 

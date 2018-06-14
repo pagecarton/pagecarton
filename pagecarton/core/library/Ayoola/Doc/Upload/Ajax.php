@@ -335,11 +335,15 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					$maxWith = @intval( $_POST['max_width'] ) ? : 3000;
 					$maxHeight = @intval( $_POST['max_height'] ) ? : 3000; 
 					
-				//	var_export( $maxWith );
+			//		var_export( $width );
+			//		var_export( $maxWith );
+			//		var_export( $height );
+			//		var_export( $maxHeight );  
 			//		var_export( $_REQUEST['crop'] );
 					
-					if( $width <= $maxWith && $height <= $maxHeight )
+					if( $width > $maxWith && $height > $maxHeight )
 					{
+		//			var_export( $_REQUEST['crop'] );  
 						if( ! empty( $_REQUEST['crop'] ) )
 						{
 							ImageManipulator::makeThumbnail( $path, $maxWith, $maxHeight, $path );
@@ -358,9 +362,9 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					$y2 = $centreY + ( $maxHeight / 2 ); 
 			 
 					// center cropping to 200x130
-					$newImage = $manipulator->crop($x1, $y1, $x2, $y2);
+				//	$newImage = $manipulator->crop($x1, $y1, $x2, $y2);
 					// saving file to uploads folder
-					$manipulator->save( $path );
+				//	$manipulator->save( $path );
 			
 					//	refresh cache after resize
 					if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( $url, array( 'disable_cache' => true ) ) )  
