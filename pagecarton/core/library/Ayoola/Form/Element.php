@@ -702,7 +702,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 					$checked = "checked='true'";
 				}
 			}
-			@$html .= "<span style='display:inline-block;'><input type='checkbox' style='{$element['style']}' id='{$element['id']}$counter' value='{$value}' name='{$element['name']}' {$checked} /> <label class='clearTransformation' style='{$element['label_style']}' for='{$element['id']}{$counter}'>{$label} </label></span>\n";  
+			@$html .= "<span style='display:inline-block;'><input type='checkbox' id='{$element['id']}$counter' value='{$value}' {$checked} " . self::getAttributesHtml( $element ) . " /> <label class='clearTransformation' style='{$element['label_style']}' for='{$element['id']}{$counter}'>{$label} </label></span>\n";  
 		}
 		unset( $values );
 		 

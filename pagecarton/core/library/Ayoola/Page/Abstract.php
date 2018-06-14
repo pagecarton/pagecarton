@@ -237,7 +237,7 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() . $values['page_id'] . $values['url'], 'data-not-playable' => true ) );
 		$fieldset = new Ayoola_Form_Element;
 		$form->submitValue = $submitValue ;
-		$form->oneFieldSetAtATime = true;
+		$form->oneFieldSetAtATime = false;
 		$fieldset->placeholderInPlaceOfLabel = false;
 			
 		Application_Javascript::addCode
@@ -298,18 +298,6 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		//	PREVENT EDITOR FROM STILL PARADING THE OLD TEMPLATE
 	//	$fieldset->addElement( array( 'name' => 'layout_name', 'type' => 'Hidden', 'value' => null ) );
 	//	$fieldset->addElement( array( 'name' => 'page_options[]', 'type' => 'Hidden', 'value' => null ) );
-
-		if( $this->fakeValues || ! empty( $values ) )
-		{
-			
-			$options =  array( 
-								'template' => 'Use separate theme (Over-rides default theme)', 
-								'redirect' => 'Redirect this page to another', 
-								'module' => 'Direct "' . rtrim( @$values['url'], '/' ) . '/*" to this page if they do not exist.',  
-								);
-			
-			$fieldset->addElement( array( 'name' => 'page_options', 'label' => 'Page Options', 'type' => 'Checkbox', 'value' => @$values['page_options'] ), $options );
-		}
 		
 		//	Auth Level
 
@@ -345,22 +333,41 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		}	
 		//	allows to set system pages here
 		$fieldset->addElement( array( 'name' => 'system', 'type' => 'hidden', 'value' => null ) );    
+
+		if( $this->fakeValues || ! empty( $values ) )
+		{
+			
+			$options =  array( 
+								'template' => 'Use separate theme (Over-rides default theme)', 
+								'redirect' => 'Redirect this page to another', 
+								'module' => 'Direct "' . rtrim( @$values['url'], '/' ) . '/*" to this page if they do not exist.',  
+								);
+			
+			$fieldset->addElement( array( 'name' => 'page_options', 'onchange' => 'this.form.submit();', 'label' => 'Page Options', 'type' => 'Checkbox', 'value' => @$values['page_options'] ), $options );
+		}
 	
 		$fieldset->addLegend( $legend );
 		$fieldset->addFilters( 'StripTags::Trim' );
 		$form->addFieldset( $fieldset );   
-		if( is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'redirect', $this->getGlobalValue( 'page_options' ) ) )
+		$pageOptions = $this->getGlobalValue( 'page_options' ) ? : @$values['page_options'];
+		if( is_array( $pageOptions ) && in_array( 'redirect', $pageOptions ) )
 		{
 			$fieldset = new Ayoola_Form_Element;
-			$fieldset->addLegend( 'Redirect this page to another page' );
+	//		$fieldset->addLegend( 'Redirect this page to another page' );
 			$fieldset->addElement( array( 'name' => 'redirect_url', 'placeholder' => 'e.g. http://example.com/page.html', 'type' => 'InputText', 'value' => @$values['redirect_url'] ) );
+			$fieldset->addRequirement( 'redirect_url', array( 'NotEmpty' => null ) );
+			
 			$form->addFieldset( $fieldset );
 		}  
+		else
+		{
+			$fieldset->addElement( array( 'name' => 'redirect_url', 'type' => 'hidden', 'value' => '' ) );    
+		}	
 	//	self::v( $this->getGlobalValue( 'page_options' ) );
-		if( is_array( $this->getGlobalValue( 'page_options' ) ) && in_array( 'template', $this->getGlobalValue( 'page_options' ) ) )
+		if( is_array( $pageOptions ) && in_array( 'template', $pageOptions ) )
 		{
 			$fieldset = new Ayoola_Form_Element;
-			$fieldset->addLegend( 'Choose a layout template to use for this page' );
+	//		$fieldset->addLegend( 'Choose a layout template to use for this page' );
 			$option = new Ayoola_Page_PageLayout;
 			$option = $option->select( array( 'pagelayout_id', 'layout_name', 'layout_label' ) );
 		//	require_once 'Ayoola/Filter/SelectListArray.php';
@@ -384,10 +391,17 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 			</div>';
 			//	$layouts[$each['layout_name']] = $each['layout_name']; 
 			}
-			$fieldset->addElement( array( 'name' => 'layout_name', 'label' => ' ', 'type' => 'Radio', 'style' => 'display:none;', 'optional' => 'optional', 'value' => @$values['layout_name'] ), $layouts );
-			$fieldset->addRequirement( 'layout_name','InArray=>' . implode( ';;', array_keys( $layouts ) ) );
+			$fieldset->addElement( array( 'name' => 'layout_name', 'label' => 'Page Theme', 'type' => 'Radio', 'style' => 'display:none;', 'required' => 'required', 'value' => @$values['layout_name'] ), $layouts );
+	//		var_export( $values['layout_name'] );
+	//		var_export( $_POST );
+	//		var_export( $layouts );
+			$fieldset->addRequirement( 'layout_name', array( 'InArray' => array_keys( $layouts ) + array( 'badnews' => 'Please select a theme for this page' ), 'NotEmpty' => array( 'badnews' => 'Please select a theme for this page' ) ) );
 			$form->addFieldset( $fieldset );
 		}
+		else
+		{
+			$fieldset->addElement( array( 'name' => 'layout_name', 'type' => 'hidden', 'value' => '' ) );    
+		}	
 		$this->setForm( $form );
     } 
 	// END OF CLASS
