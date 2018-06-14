@@ -388,7 +388,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$timeOut = @$storageInfo['time_out'];  
 		}
 		
-		if( static::$_objectStorage[$id] )
+		if( isset( static::$_objectStorage[$id] ) )
 		{ 
 			return static::$_objectStorage[$id]; 
 		}

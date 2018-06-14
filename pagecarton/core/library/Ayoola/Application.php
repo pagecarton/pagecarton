@@ -1654,6 +1654,10 @@ class Ayoola_Application
 //		var_export( $_SERVER );
 //		exit();
 		self::$_urlPrefix = '';
+		if( ! empty( $_REQUEST['pc_clean_url_check'] ) )
+		{
+			return true;
+		}
 		if( $prefix )
 		{
 			self::$_urlPrefix = $prefix;
@@ -1668,7 +1672,7 @@ class Ayoola_Application
 		{		
 		//	var_export( $data );
  			//	Detect if we have mod-rewrite
-			$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt';
+			$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt?pc_clean_url_check=1';
 	//		var_export( $urlToLocalInstallerFile );
 			$modRewriteEnabled = get_headers( $urlToLocalInstallerFile );
 			$responseCode = explode( ' ', $modRewriteEnabled[0] );

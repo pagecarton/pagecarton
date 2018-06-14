@@ -36,12 +36,16 @@
 		$home = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];    
 	}
 //	var_export( $home );
-//	var_export( $_SERVER );
+//	var_export( $_SERVER['DOCUMENT_ROOT'] );
 //	exit();
 	$dir = $oldDir = $baseAppPath = dirname( $home );
-	
+//		var_export( $oldDir );
+//		var_export( $baseAppPath );
+//		var_export( dirname( $home ) );
+
 	//	Shrink everything into a single dir
 	$dir = $newDir = $dir . '/pagecarton';
+	$temDirMain = $dir . '/temp/';
 	$temDir = $dir . '/temp/install/';
 	
 	
@@ -81,8 +85,12 @@
 	//	look for this path prefix dynamically
 
     $currentDir = explode( '/', str_replace( array( '/', '\\' ), '/', dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
-    $tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $baseAppPath, '/\\' ) ) );   
+    $tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( @$_SERVER['DOCUMENT_ROOT'] ? : $home, '/\\' ) ) );   
 
+//	var_export( $currentDir );
+//	var_export( $baseAppPath );
+//	var_export( $tempDir );
+//	exit;
 	$prefix = null;
 	if( $currentDir !== $tempDir )
 	{
@@ -96,6 +104,18 @@
 	//	var_export( $tempDir );
 	//	var_export( $prefix );
 	}
+			
+	//	Preserve some of this data before deleting some files
+	$dbDir = '/application/databases/';
+	$preserveList = array
+	(
+		'Application/domain.xml',
+		'Application/backup.xml',
+		'Ayoola/Access/localuser.xml', 
+		'Application/settings.xml',
+		'PageCarton/MultiSite/table.xml',
+		'Ayoola/Api/api.xml',
+	);
 
 	//	system check
 	$check = array( 
@@ -119,6 +139,39 @@
 	{
 		$badnews .= '<p>PageCarton requires PHP 5.3 or later. You are running version "' . PHP_VERSION .  '". We recommend PHP 7.0 or later.</p>';   
 	}
+			
+	/**
+		* Attempts to remove dirs recursively in case
+		*
+		* @param string Path to Directory to be deleted
+		* @return void
+		*/
+	function deleteDirectoryPlusContent( $eachDir )
+	{
+		if (!is_dir($eachDir)) {
+		//	throw new Ayoola_Doc_Exception("$eachDir is not a directory");
+		//	echo $eachDir . ' not found... 
+			return false;
+		}
+		if (substr($eachDir, strlen($eachDir) - 1, 1) != '/') {
+			$eachDir .= '/';
+		}
+		$dotfiles = glob($eachDir . '.*', GLOB_MARK);
+		$insideFiles = glob($eachDir . '*', GLOB_MARK);
+		$insideFiles = array_merge($insideFiles, $dotfiles);
+		foreach ($insideFiles as $insideFile) {
+		//	set_time_limit( 30 );
+			if (basename($insideFile) == '.' || basename($insideFile) == '..') {
+				continue;
+			} else if (is_dir($insideFile)) {
+				deleteDirectoryPlusContent($insideFile);   
+			} else {
+				unlink($insideFile);
+			}
+		}
+		@rmdir($eachDir);   
+		return ! is_dir( $eachDir );
+	}	
 	switch( @$_GET['stage'] )
 	{
         case 'start':
@@ -167,18 +220,6 @@
 				header( 'Location: ?stage=download' );
 				exit();
 			}
-			
-			//	Preserve some of this data before deleting some files
-			$dbDir = '/application/databases/';
-			$preserveList = array
-			(
-				'Application/domain.xml',
-				'Application/backup.xml',
-				'Ayoola/Access/localuser.xml', 
-				'Application/settings.xml',
-				'PageCarton/MultiSite/table.xml',
-				'Ayoola/Api/api.xml',
-			);
 			foreach( $preserveList as $eachDir )
 			{
 			//	set_time_limit( 30 );
@@ -195,51 +236,26 @@
 					@copy( $oldEachDir, $newEachDir );  
 				}
 			}
+			header( 'Location: ?stage=install-delete-dir' );
+			exit();
+		break;
+		case 'install-delete-dir':
 			
 			//	clean all dirs first
 		//	$dirsToDelete = array( '/library/', '/temp/', '/cache/', '/local_html/', '/application/databases/', '/application/configs/', '/application/modules/', '/application/functions/', '/application/pages/', '/application/documents/', );
 		
 			//	dont clear temp because theres where our preservations are.
 			$dirsToDelete = array( '/library/', '/cache/', '/local_html/', '/application/databases/', '/application/configs/', '/application/modules/', '/application/functions/', '/application/pages/', '/application/documents/', );
-			
-			/**
-			 * Attempts to remove dirs recursively in case
-			 *
-			 * @param string Path to Directory to be deleted
-			 * @return void
-			 */
-			function deleteDirectoryPlusContent( $eachDir )
-			{
-				if (!is_dir($eachDir)) {
-				//	throw new Ayoola_Doc_Exception("$eachDir is not a directory");
-				//	echo $eachDir . ' not found... 
-					return false;
-				}
-				if (substr($eachDir, strlen($eachDir) - 1, 1) != '/') {
-					$eachDir .= '/';
-				}
-				$dotfiles = glob($eachDir . '.*', GLOB_MARK);
-				$insideFiles = glob($eachDir . '*', GLOB_MARK);
-				$insideFiles = array_merge($insideFiles, $dotfiles);
-				foreach ($insideFiles as $insideFile) {
-				//	set_time_limit( 30 );
-					if (basename($insideFile) == '.' || basename($insideFile) == '..') {
-						continue;
-					} else if (is_dir($insideFile)) {
-						deleteDirectoryPlusContent($insideFile);   
-					} else {
-						unlink($insideFile);
-					}
-				}
-				@rmdir($eachDir);   
-				return ! is_dir( $eachDir );
-			}	
 			foreach( $dirsToDelete as $eachDir )
 			{
 			//	set_time_limit( 30 );
 				$eachDir = APPLICATION_DIR . $eachDir;
 				@deleteDirectoryPlusContent($eachDir);
 			}	
+			header( 'Location: ?stage=install-extract' );
+			exit();
+		break;
+		case 'install-extract':
 			
 			
 			//	Open the downloaded ( and zipped ) framework and save it on the server.
@@ -262,6 +278,10 @@
 		//		var_export( $newEachDir );
 		//		var_export( $oldEachDir );
 			}
+			header( 'Location: ?stage=install-compatibility-fix' );
+			exit();
+		break;
+		case 'install-compatibility-fix':
 			
 			//	
 			if( is_dir( $newDir ) )
@@ -300,8 +320,8 @@
 						}
 
 						// Loop through the folder
-						$dir = dir($source);
-						while (false !== $entry = $dir->read()) {
+						$dirX = dir($source);
+						while (false !== $entry = $dirX->read()) {
 							// Skip pointers
 							if ($entry == '.' || $entry == '..') {
 								continue;
@@ -312,13 +332,17 @@
 						}
 
 						// Clean up
-						$dir->close();
+						$dirX->close();
 						return true;
 					}
 					xcopy( $source, $dest );
 					rename( $oldAppPath, $oldAppPath . '.old' );
 				}
 			}
+			header( 'Location: ?stage=install-copy-controller' );
+			exit();
+		break;
+		case 'install-copy-controller':
 			
 			//	Transfer the local_html files to the document root
 		//	$backup->extractTo( dirname( $_SERVER['SCRIPT_FILENAME'] ), array( 'local_html/index.php', 'local_html/.htaccess', ), true ); 
@@ -332,10 +356,18 @@
 			chmod( '.htaccess', 0644 );
 			chmod( 'web.config', 0644 );
 
+			header( 'Location: ?stage=install-finalize' );
+			exit();
 						
+		break;
+		case 'install-finalize':
 			//	Get rid of the cache items. This help for compatibility.
-			deleteDirectoryPlusContent( $baseAppPath . '/temp' );
-			deleteDirectoryPlusContent( $baseAppPath . '/cache' );
+			deleteDirectoryPlusContent( $temDirMain );
+		//	deleteDirectoryPlusContent( $baseAppPath . '/cache' );
+			header( 'Location: ?stage=install-complete' );
+			exit();
+		break;
+		case 'install-complete':
 			
 			$content .= '<h1>Installation Completed</h1>';
 			$content .= '<p>The latest PageCarton software has been loaded on your server. You are going to be able to personalize it in a few moments. Please ensure you complete the personalization in two easy steps.</p>';
@@ -351,7 +383,7 @@
 				$protocol = 'https';
 			}
 		
-			$urlToLocalInstallerFile = $protocol . '://' . $_SERVER['HTTP_HOST'] . $prefix . '/object';
+			$urlToLocalInstallerFile = $protocol . '://' . $_SERVER['HTTP_HOST'] . $prefix . '/object?pc_clean_url_check=1';
 			
 			$modRewriteEnabled = get_headers( $urlToLocalInstallerFile );
 			$responseCode = explode( ' ', $modRewriteEnabled[0] );
