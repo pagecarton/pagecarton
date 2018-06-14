@@ -360,7 +360,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		
 		if( empty( $options['no_cache'] ) )
 		{
-			if( ! is_null( static::$_properties[__METHOD__][$keyZ] ) )
+			if( isset( static::$_properties[__METHOD__][$keyZ] ) && ! is_null( static::$_properties[__METHOD__][$keyZ] ) )
 			{
 				return static::$_properties[__METHOD__][$keyZ];
 			}

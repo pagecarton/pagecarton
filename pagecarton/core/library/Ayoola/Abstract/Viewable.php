@@ -227,7 +227,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	{ 
 		$class = get_called_class();
 //		var_export( $class );
-		if( null !== static::$_hooks[$class] )
+		if( isset( static::$_hooks[$class] ) && null !== static::$_hooks[$class] )
 		{
 			return static::$_hooks[$class];
 		}
@@ -1636,7 +1636,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				}
 			//		var_export( $this->getParameter( 'content_to_clear' ) );
 				//	Define content to clear from the screen
-					$contentToClear = $this->getParameter( 'content_to_clear' ) . $this->_parameter['content_to_clear_internal'];
+					$contentToClear = $this->getParameter( 'content_to_clear' ) . @$this->_parameter['content_to_clear_internal'];
 				if( $contentToClear )       
 				{
 					$search = array_map( 'trim', explode( "\n", $contentToClear ) );
