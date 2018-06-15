@@ -538,6 +538,7 @@ ayoola.image =
 		else
 		{
 			a.accept = inputObject.accept || '';  
+			a.multiple = inputObject.multiple ? true : false;  
 		}
 		a ? a.dispatchEvent( e1 ) : null;
 	},

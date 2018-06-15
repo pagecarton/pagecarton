@@ -635,7 +635,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					};		
 				var options = 
 				{
-					distance: ' . ( $this->getParameter( 'autoload_distance' ) ? : 500 ) . ',
+					distance: ' . ( $this->getParameter( 'autoload_distance' ) ? : 5000 ) . ',
 					callback: pc_autoloadFunc_' . $postListId . '
 				} 
 					

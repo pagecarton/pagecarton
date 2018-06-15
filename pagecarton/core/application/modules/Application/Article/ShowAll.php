@@ -99,12 +99,21 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					Application_Javascript::addFile( $each );
 				}
 			}
+			if( @$options['javascript_code'] )
+			{
+			//	$options['javascript_code'] = self::replacePlaceholders( $options['javascript_code'], $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+				Application_Javascript::addCode( $options['javascript_code'] );
+			}
 			if( @$options['css_files'] )
 			{
 				foreach( @$options['css_files'] as $each )
 				{
 					Application_Style::addFile( $each );
 				}
+			}
+			if( @$options['css_code'] )
+			{
+				Application_Javascript::addCode( $options['css_code'] );
 			}
 		}
 		$this->_parameter['content_to_clear_internal'] .= '

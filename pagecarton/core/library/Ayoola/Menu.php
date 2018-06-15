@@ -515,12 +515,21 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 					Application_Javascript::addFile( $each );
 				}
 			}
+			if( @$options['javascript_code'] )
+			{
+				$options['javascript_code'] = self::replacePlaceholders( $options['javascript_code'], $menuInfo + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+				Application_Javascript::addCode( $options['javascript_code'] );
+			}
 			if( @$options['css_files'] )
 			{
 				foreach( @$options['css_files'] as $each )
 				{
 					Application_Style::addFile( $each );
 				}
+			}
+			if( @$options['css_code'] )
+			{
+				Application_Javascript::addCode( $options['css_code'] );
 			}
 		}
 		foreach( $this->getOptions() as $values ) 
