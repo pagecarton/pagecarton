@@ -73,7 +73,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//	var_export( func_get_args() );
 	//	if( ! is_array( $where[$key] ) )
 		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
-//		var_export( $result );
+//		PageCarton_Widget::v( $result );
 	//	$this->_myFilename = @$options['filename'] ? : $this->_myFilename;
 	//	exit;
 	//	var_export( $this->_useCacheResult );
@@ -113,9 +113,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//			 $limitForNextFile = $options['limit'];
 			}
 		//	PageCarton_Widget::v( $files );
- 			$totalRows = 0;
+			$rows = $this->loopFiles( $files, $fieldsToFetch, $where, $options );
+/* 			$totalRows = 0;
+///				PageCarton_Widget::v( count( $files ) );
+			//	PageCarton_Widget::v( $files );
 			foreach( $files as $filename )
 			{
+			//	PageCarton_Widget::v( $filename . '<br>' );
 			//	if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
 				{
 				//	PageCarton_Widget::v( $filename );
@@ -155,7 +159,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//			var_export( '<br />' );
 		//		return $rows;
 			}
- 	//	var_export( count( $rows ) );
+*/ 	//	var_export( count( $rows ) );
 	//		var_export( $rows );
 
 		}
@@ -164,6 +168,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//		var_export( $this->getMyFilename() );
 			$rows = array();
 			$files = array_unique( $this->getGlobalFilenames() );
+			$rows = $this->loopFiles( $files, $fieldsToFetch, $where, $options );
 	//		var_export( $this->getGlobalFilenames() );
 //	var_export( $files );
 /* 				if( @$where['menu_name'] )
@@ -171,9 +176,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				//	var_export( $where );
 			//		var_export( $files );
 				}
- */			foreach( $files as $filename )
+ */	
+/* 			foreach( $files as $filename )
 			{
 				if( ! is_file( $filename ) ){ continue; }
+			//	PageCarton_Widget::v( $filename . '<br>' );
 				$this->setXml();
 				$this->getXml()->load( $filename );
 			//	var_export( $this->getMyFilename() );
@@ -183,7 +190,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		//	var_export( $rows );
 			//	var_export( $filename );
 			}
-		}
+*/		}
 	//	exit();
  	//	var_export( count( $rows ) );
 	//			var_export( $rows );
@@ -192,6 +199,64 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		return $rows;
     }
 	
+    /**
+     * Does the work
+     *
+     * @param void
+     */
+    public function loopFiles( Array $files, Array $fieldsToFetch = null, Array $where = null, Array $options = null  )
+    {
+		$rows = array();
+ 		$totalRows = 0;
+ 		$fileCount = 0;
+ 		$maxNoOfFiles = 50;
+		rsort( $files );
+
+//		PageCarton_Widget::v( $files );
+	//	if( count( $files ) > $maxNoOfFiles )
+	//	PageCarton_Widget::v( $files );
+	//	PageCarton_Widget::v( count( $files ) . '<br>' );
+		foreach( $files as $filename )
+		{
+	//		PageCarton_Widget::v( $filename . '<br>' );
+		//	if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
+			{
+			//	PageCarton_Widget::v( $filename );
+			}
+			$innerOptions = $options;
+			if(  ! empty( $options['limit'] ) && $totalRows >= $options['limit'] )
+			{
+		//		Ayoola_Page::v( $totalRows );
+		//		 exit();
+				break;
+			}
+			elseif( ! empty( $options['limit'] ) )
+			{
+				$innerOptions['limit'] = $options['limit'] - $totalRows;
+			}
+			if( ! empty( $options['record_search_limit'] ) && $this->recordCount >= $options['record_search_limit'] )
+			{
+			//	Ayoola_Page::v( $this->recordCount );
+			//	exit();
+				break;
+			}
+			if( ! is_file( $filename ) ){ continue; }
+			if( ++$fileCount >= $maxNoOfFiles ){ break; }
+	//			Ayoola_Page::v( $filename );
+		//	var_export( $this->getMyFilename() );
+			$this->setXml();
+			$this->getXml()->load( $filename );
+			$rowsInThisFile = $this->doSelect( $fieldsToFetch, $where, $innerOptions );
+		//		Ayoola_Page::v( $filename );
+		//		Ayoola_Page::v( $innerOptions );
+		//		Ayoola_Page::v( count( $rowsInThisFile ) );
+		//		Ayoola_Page::v( "\r\n" );
+			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $rowsInThisFile ) : $rows + $rowsInThisFile;
+			$totalRows = count( $rows );
+		}
+		return $rows;
+	}
+
     /**
      * Does the work
      *

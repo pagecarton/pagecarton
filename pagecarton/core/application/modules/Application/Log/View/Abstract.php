@@ -60,7 +60,8 @@ abstract class Application_Log_View_Abstract implements Application_Log_View_Int
 		{ 
 			$errorMessage = static::$_logTable . ' is not a valid log table';
 			if( ! $class = Ayoola_Loader::loadClass( static::$_logTable ) ){ throw new Application_Log_View_Exception( $errorMessage ); }
-			static::$_logTable = new static::$_logTable;
+            $table = static::$_logTable;
+			static::$_logTable = $table::getInstance();
 //		exit( var_export( __LINE__ ) );
 //		var_export( static::$_logTable );
 			if( ! static::$_logTable instanceof Ayoola_Dbase_Table_Interface ){ throw new Application_Log_View_Exception( $errorMessage ); }

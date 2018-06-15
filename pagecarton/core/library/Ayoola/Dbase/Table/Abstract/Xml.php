@@ -153,7 +153,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 			}
 			if( ! empty(  static::$_tableInfo['table_info'] ) && ( @ static::$_tableInfo['table_info']['table_version'] === $this->_tableVersion && @ static::$_tableInfo['table_info']['module_version'] === self::$_version ) )
 			{ 
-        if( file_exists( $backupFile ) && time() - filemtime( $backupFile ) > 86400 )
+/*        if( file_exists( $backupFile ) && time() - filemtime( $backupFile ) > 86400 )
         { 
             $values = include( $backupFile );
             $num = count( $values );
@@ -179,7 +179,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
     //      self::v( $backupFile );
             PageCarton_Widget::v( $backupFile );
         }
-				break; 
+*/				break; 
 			}
  	//
 			$previousAccessibility = $this->_accessibility;
@@ -191,7 +191,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
  // 		var_export( $values );
 	
 			//	Backup the previous table
-      if( ! empty(  static::$_tableInfo['filename'] ) )
+      if( ! empty( static::$_tableInfo['filename'] ) )
       {
         $backupFile =  static::$_tableInfo['filename'] . '.backup';
         if( file_exists( $backupFile ) )
@@ -204,17 +204,13 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             //	Backup in progress. Don't duplicate progress unless its more than one day
             break;
           }
-          elseif( empty( $backupFile ) || ! is_string( $backupFile ) )
-          {
-          
-          }
           else
           {
             //	Something has gone wrong, restore the backup automagically.
             $values = include( $backupFile );  
         //    var_export( $values );
-            $newBackUpFile = $backUpFile . filemtime( $backupFile );
-         //   Application_Log_View_Error::log( "There is an error on an XML Database. The back up file {$backUpFile} as been copied to {$newBackUpFile} for safe keep." );
+            $newBackUpFile = $backUpFile . '_error_' . filemtime( $backupFile );
+            Application_Log_View_Error::log( "There is an error on an XML Database. The back up file {$backUpFile} as been copied to {$newBackUpFile} for safe keep." );
   //   		var_export( $backupFile );
   //   		var_export(  static::$_tableInfo );  
 

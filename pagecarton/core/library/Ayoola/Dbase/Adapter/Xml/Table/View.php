@@ -48,7 +48,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_View extends Ayoola_Dbase_Adapter_Xml_Table
 		//	self::v( $this->_dbWhereClause );
 		}
 		$records = array_values( $this->query( 'FETCH', $fieldKeys, $dbWhereClause ) );
-		krsort( $records );
+	//	krsort( $records );
 		$records = array_values( $records );
 		require_once 'Ayoola/Paginator.php';
 		$fieldKeys = $fieldKeys ? array_values( $fieldKeys ) : $this->getTableDataTypes();

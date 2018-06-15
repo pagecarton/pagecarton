@@ -53,14 +53,17 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 		$log['total_run_time'] = Ayoola_Application::getRuntimeSettings( 'total_runtime' );
 	//	var_export( $log['total_run_time'] );  
 	//	var_export( $log ); 
+		$timestamp = date( "Y-m-d H:i:s" ); // this line is for demonstration
+
 		$log['total_run_time'] = number_format( is_numeric( $log['total_run_time'] ) ? : 0, 2, '.', '' );
 	//	var_export( $log['total_run_time'] );
-		$log['ip'] = implode( ':', Ayoola_Application::getRuntimeSettings( 'user_ip' ) );
+		$log['ip'] = trim( implode( ':', Ayoola_Application::getRuntimeSettings( 'user_ip' ) ), ':' );
 	//	$log['session_id'] = sha1( session_id() );
 	//	$log['post'] = $_POST;
 	//	$log['get'] = $_GET; 
 	//	$log['request'] = $_REQUEST; 
 	//	$log['request'] = $_GET + $_POST;  
+		$log['request_time'] = $timestamp;
 		if( strlen( serialize( $_POST ) ) < 10000 )
 		{
 			$log['request'] = $_POST; 
