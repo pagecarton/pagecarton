@@ -73,8 +73,14 @@ class Ayoola_Page_Info extends PageCarton_Widget
 
             //  Output demo content to screen
 		    $settings = Application_Settings_Abstract::getSettings( 'SiteInfo' );
-
-            $pageInfo = Ayoola_Page::getInfo( $this->getParameter( 'url' ) ? : $currentUrl );
+     //       self::v( $settings );   
+            $url = $this->getParameter( 'url' ) ? : $currentUrl;
+            $pageInfo = Ayoola_Page::getInfo( $url );
+        //    $pageInfo = Ayoola_Page_Page::getInstance()->selectOne( null, array( 'url' => $url ) );
+            
+   //        self::v( $this->getParameter( 'url' ) );   
+   //       self::v( $currentUrl );   
+   //       self::v( $pageInfo );   
 
             if( empty( $pageInfo['title'] ) )
             {

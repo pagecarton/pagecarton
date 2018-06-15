@@ -111,11 +111,13 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     {		
 		do
 		{
-			$id = $url . Ayoola_Application::getPathPrefix();
+			$id = Ayoola_Application::getPathPrefix() . $url;
+//			$id = $url . Ayoola_Application::getPathPrefix();
 			$storage = self::getObjectStorage( array( 'id' => $id ) );
 	//		$storage->storageNamespace = md5( __METHOD__ . $url . Ayoola_Application::getPathPrefix() );
 		//	var_export( $storage->storageNamespace );
-	 //   	self::v( $url );  
+	  //  	self::v( $id );  
+	   // 	self::v( $url );  
 	 //   	self::v( Ayoola_Application::getPathPrefix() );
 	  //  	self::v( $storage->storageNamespace );
 			if( $info = $storage->retrieve() )

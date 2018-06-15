@@ -83,6 +83,9 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 				return false;
 			}
 		//	self::v( $data ); 
+	//	$storageForSinglePosts = self::getObjectStorage( array( 'id' => 'post_list_id' ) );
+	//	self::v( $storageForSinglePosts->retrieve() ); 
+	//	self::v( $storageForSinglePosts ); 
 
 			{
 				$pagination = null;
@@ -96,8 +99,9 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 					$storageForSinglePosts = self::getObjectStorage( array( 'id' => 'post_list_id' ) );
 					
 					$postListId = $storageForSinglePosts->retrieve();
-					$postListData = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId, 'device' => 'File' ) );
-				//	self::v( $postListData  );   
+					$postListData = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId . '_single_post_pagination', 'device' => 'File' ) );
+				//	self::v( $postListId  );   
+				//	self::v( $postListData->retrieve()  );   
      //       PageCarton_Widget::v( Ayoola_Application::getPathPrefix() );
 
 					if( ! $postListId || ! $postListData->retrieve() )
@@ -109,29 +113,19 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
                 }
 			//	self::v( $postListId );
 
-				$postListData = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId, 'device' => 'File' ) );
+				$postListData = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId . '_single_post_pagination', 'device' => 'File' ) );
 		//		var_export( $postListId );
-			//	self::v( $postListData->retrieve() );
+		//		self::v( $postListData->retrieve() );
 				$postListData = $postListData->retrieve();
 	//			var_export( $postListData );
-				if( ! empty( $postListData['single_post_pagination'] ) )
+		//		if( ! empty( $postListData['single_post_pagination'] ) )
 				{
 					$presentArticle = $data['article_url'];
                     do
                     {
                 //     var_export( $postList['single_post_pagination'] );
-						$postList = $postListData['single_post_pagination'][$presentArticle];
-       //      			var_export( $postList['pc_next_post'] );
-       	//	            var_export( $postListData['single_post_pagination'] );
-/*						if( empty( $postList['pc_next_post'] ) )
-						{
-             			var_export( $postListData['single_post_pagination'] );
-							$postListNew = array_shift( $postListData['single_post_pagination'] );
-             			var_export( $postListNew );
-							$postList['pc_next_post'] = $postListNew['pc_next_post'];
-						}
-             	//		var_export( $postList );
-*/                     	if( ! @$postList['article_type'] || ! @$postList['pc_next_post'] )
+						$postList = $postListData[$presentArticle];
+	                  	if( ! @$postList['article_url'] || ! @$postList['pc_next_post'] )
 						{
 							break;
 						}
@@ -142,11 +136,16 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
                     while( $postData['article_type'] !== $data['article_type'] );
 					if( ! empty( $postList['pc_next_post'] ) )
 					{
-						if( $nextPost = self::loadPostData( $postList['pc_next_post'] ) )
+						$nextPost = $postList['pc_next_post'];
+
+						if( ! $nextPost = self::loadPostData( $nextPost ) )
 						{
-							$this->_objectTemplateValues['paginator_next_page'] = Ayoola_Application::getUrlPrefix() . $postList['pc_next_post'];
-							$this->_objectTemplateValues['paginator_next_page_button'] = '<a onclick="this.href=this.href + location.search;" class="pc_paginator_next_page_button pc-btn" href="' . $this->_objectTemplateValues['paginator_next_page'] . '">"' . $nextPost['article_title'] . '" Next  &rarr; </a>';       
+							//	if next is not valid article
+						//	$postList['pc_next_post'] = $postListData[$postList['pc_next_post']]['pc_next_post'];
+						//	$nextPost = self::loadPostData( $postList['pc_next_post'] );
 						}
+						$this->_objectTemplateValues['paginator_next_page'] = Ayoola_Application::getUrlPrefix() . $postList['pc_next_post'];
+						$this->_objectTemplateValues['paginator_next_page_button'] = '<a onclick="this.href=this.href + location.search;" class="pc_paginator_next_page_button pc-btn" href="' . $this->_objectTemplateValues['paginator_next_page'] . '">"' . $nextPost['article_title'] . '" Next  &rarr; </a>';       
 			//			var_export( $nextPost );
 
 					}

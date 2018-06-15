@@ -332,7 +332,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	Prepare post viewing for next posts
 		$class = new Application_Article_ViewPagination( array( 'no_init' => true ) );
 		$storageForSinglePosts = $class->getObjectStorage( array( 'id' => 'post_list_id' ) );
-//		var_export( $postListId );
+	//	self::v( $postListId );  
 		$storageForSinglePosts->store( $postListId );
 		
 		//	Using menu template?
@@ -390,7 +390,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//		if( $this->getParameter( 'sort_column' ) )
 			{ 
 				$previousKey = null;
-				$singlePostPaginationInfo = array();
+			//	$singlePostPaginationInfo = array();
 				foreach( $values as $key => $data )
 				{
 				//	var_export( $data );
@@ -516,7 +516,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					}
 					
 					$values[$key] = $data;
-					$firstPost = empty( $firstPost ) ? $data['article_url'] : $firstPost;
+/*					$firstPost = empty( $firstPost ) ? $data['article_url'] : $firstPost;
 
 					//	by default, next is first post
 					if( $data['article_url'] !==  $firstPost ) 
@@ -537,7 +537,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					
 				//	var_export( $values );
 					$previousKey = $key;
-				}
+*/				}
 			}
 	//		var_export( $singlePostPaginationInfo );
 			if( $this->getParameter( 'order_by' ) )
@@ -554,7 +554,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
 			//	Cache results
 		//	var_export( $this->getParameter( 'markup_template' ) );  
-			$valuesToStore = array( 'values' => $values, 'parameter' => $this->getParameter(), 'single_post_pagination' => $singlePostPaginationInfo );
+			$valuesToStore = array( 'values' => $values, 'parameter' => $this->getParameter() );
 
 			// store if it's an independent request
 			if( empty( $_GET['pc_post_list_autoload'] ) )
@@ -586,6 +586,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$item = array( 
 							'article_url' => ( '/tools/classplayer/get/name/Application_Article_Creator/?true_post_type=' . $truePostType . '&post_type_custom_fields=' . $this->getParameter( 'post_type_custom_fields' ) . '&article_type=' . $newArticleType . '&category_name=' . @array_pop( $where['category_name'] ) ), 
 							'allow_raw_data' => true, 
+							'not_real_post' => true, 
 						//	'article_type' => $newArticleType, 
 							'always_allow_article' => $this->getParameter( 'article_types' ), 
 							'category_name' => $this->getParameter( 'category_name' ), 
@@ -717,6 +718,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$values = $values ? array_unique( $values, SORT_REGULAR ) : array(); 
 	//	self::v( $values[''] );
 	//	var_export( $values );
+		$singlePostPaginationInfo = array();
 		while( $values )
 		{
 			if( $i >= $j )
@@ -724,6 +726,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				break; 
 			}
 			$data = array_shift( $values );
+
 			
 			switch( @$data['article_url'] )
 			{
@@ -888,6 +891,31 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				break;
 			}
 		//	var_export( $data );
+
+			// build a list
+			if( $data['true_post_type'] && empty( $data['not_real_post'] ) )
+			{
+				$firstPost = empty( $firstPost ) ? $data['article_url'] : $firstPost;
+
+				//	by default, next is first post
+				if( $data['article_url'] !==  $firstPost ) 
+				{
+					$data['pc_next_post'] = $firstPost;
+					$singlePostPaginationInfo[$data['article_url']]['pc_next_post'] = $firstPost;
+				}
+
+
+				if( ! is_null( $previousKey ) )
+				{
+			//		$data['pc_previous_post'] = $previousKey;
+					$singlePostPaginationInfo[$data['article_url']]['pc_previous_post'] = $previousKey;
+					$singlePostPaginationInfo[$data['article_url']]['article_url'] = $data['article_url'];
+					$singlePostPaginationInfo[$previousKey]['pc_next_post'] = $data['article_url'];
+				}
+				
+			//	var_export( $values );
+				$previousKey = $data['article_url'];
+				}
 			
 			
 			//	content
@@ -1141,7 +1169,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_objectTemplateValues[] = $data;
 			
 		}
-//		var_export( $allTemplate );
+
+		// store playlist
+		$storage = self::getObjectStorage( array( 'id' => $postListId . '_single_post_pagination', 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
+		$storage->store( $singlePostPaginationInfo );
+	//	self::v( $postListId );
 	//	$this->_xml = $allTemplate; //	reset
 		$this->_xml = '' . $allTemplate . '';
 //		var_export( $this->_xml );
