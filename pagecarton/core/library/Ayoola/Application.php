@@ -253,7 +253,7 @@ class Ayoola_Application
 		}
 
 
-		$storage->storageNamespace = __CLASS__ . '--------x--' . $_SERVER['HTTP_HOST'] . $protocol . Ayoola_Application::getPathPrefix();
+		$storage->storageNamespace = __CLASS__ . 'x' . $_SERVER['HTTP_HOST'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve(); 
 		if(  $data && ! $forceReset && ! @$_GET['reset_domain_information'] )
@@ -385,6 +385,8 @@ class Ayoola_Application
 				$domainDir = Application_Domain_Abstract::getSubDomainDirectory( 'default' );
 				$data['domain_settings']['site_configuraton'] = array();
 				$configurationFile = $domainDir . DS .  'pagecarton.json';
+
+		//		var_export( $configurationFile );
 				if( file_exists( $configurationFile ) )
 				{
 					if( $conf = file_get_contents( $configurationFile ) )
