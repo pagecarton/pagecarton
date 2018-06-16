@@ -146,7 +146,10 @@ class Ayoola_Form_Element extends Ayoola_Form
 	//		var_export( __LINE__ );
 							
 		//	set value to GET or POST equivalent if available
-		@$element['value'] = ! is_null( $element['value'] ) ? $element['value'] : Ayoola_Form::getDefaultValues( $element['real_name'] );
+		if( $element['type'] != 'submit' )
+		{
+			@$element['value'] = ! is_null( $element['value'] ) ? $element['value'] : Ayoola_Form::getDefaultValues( $element['real_name'] );
+		}
 	//	self::v( $element['value'] );
 		
 		if( @$element['autocomplete'] !== 'off' )
