@@ -76,7 +76,8 @@ abstract class Application_ContactUs_Abstract extends Ayoola_Abstract_Table
 		//	Form to create a new page
    //   $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'class' => 'smallFormElements' ) );   
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
-//		$form->oneFieldSetAtATime = true;
+	//	$form->oneFieldSetAtATime = true;
+		$form->oneFieldSetAtATimeJs = true;
 
 		//	Contact information
 		$fieldset = new Ayoola_Form_Element;

@@ -481,6 +481,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
         $element = new Ayoola_Form_Element;
 		$element->useDivTagForElement = false;
+	//	$element->tag = "div";
 		if( $this->useCaptcha )
 		{
 			$element->addElement( 'name=>captcha:: type=>Captcha' );
@@ -662,6 +663,11 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		
 		$form = null;
 		$form .= $this->wrapForm ? "<div id='{$this->_attributes['id']}_container'>\n" : null;
+		if( $this->oneFieldSetAtATimeJs )
+		{
+			$this->_attributes['class'] .= ' pc-form-one-fieldset-at-a-time';
+		//	Application_Style::addCode( '.pc' );
+		}
 		if( ! $this->getParameter( 'no_form_element' ) )
 		{
 			$form .= '<form onsubmit="pc-submit-button.disabled = true;' . self::hashElementName( 'pc-submit-button' ) . '.disabled = true; return true;" data-pc-form=1 ';   
@@ -893,6 +899,52 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		{
 			$form .= '</span>';
 		}
+		if( $this->oneFieldSetAtATimeJs )
+		{
+			Application_Javascript::addCode( 
+				'pc_ShowNextFieldset = function( form )
+				{
+					var a = form.getElementsByTagName( "fieldset" );
+					var foundNext = false;
+
+					for( var b = 0; b < a.length; b++ )
+					{
+						if( a[b].getAttribute( "data-pc-form-done-fieldset" ) == "true" || a[b].className == "pc-form-fieldset-1" )
+						{
+							if( b + 2 == a.length )
+							{
+								break;
+							}
+							a[b].style.display = "none";
+							continue;
+						}
+						if( a[b].className == "pc-form-fieldset-" + ( b + 1 ) )
+						{
+							foundNext = true;
+							a[b].style.display = "block";
+							var c;
+							if( c = a[b].getElementsByTagName( "input" ) )
+							{
+								c[0].focus();
+							}
+							a[b].setAttribute( "data-pc-form-done-fieldset", "true" )
+							break;
+						}
+						else
+						{
+						//	a[b].style.display = "none";
+						}
+					}
+					if( ! foundNext )
+					{
+					//	alert( foundNext );
+						form.submit();
+					}
+				}'
+			 );
+			$form .= '<a onclick="pc_ShowNextFieldset( this.parentNode );" class="btn btn-default pc-btn" href="javascript:">Continue...</a>';
+		//	Application_Style::addCode( '.pc' );
+		}
 		
 		if( ! $this->getParameter( 'no_form_element' ) )
 		{
@@ -930,9 +982,12 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 	//	self::v( $this->_global );
 	//	self::v( $this->_names );
+		++$this->counter;
 		$form = null;
 		$form .= @$fieldset->container ? "<{$fieldset->container}>\n" : null;
-		$form .= $fieldset->getLegend() && ! $this->getParameter( 'no_fieldset' ) ? "<fieldset>\n" : null;
+		$fieldsetTag = $fieldset->tag ? : "fieldset";
+
+		$form .= ! @$fieldset->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "<{$fieldsetTag} class='pc-form-fieldset-{$this->counter}'>\n" : null;
 		$form .= $fieldset->getLegend() ? "\n<legend>{$fieldset->getLegend()}</legend>\n" : null;
 		$allElements = $fieldset->getElements();
 /* 		if( $this->getParameter( 'return_required_fieldset_values' ) )
@@ -1020,7 +1075,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 	//	var_export( $this->_values );
 	//	$form .= $fieldset->allowDuplication ? "<button title='Duplicate this fieldset' onClick='this.parentNode.parentNode.insertBefore( this.parentNode.cloneNode( true ), this.parentNode );'>+</button>\n" : null;
 	//	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
-		$form .= $fieldset->getLegend() && ! $this->getParameter( 'no_fieldset' ) ? "</fieldset>\n" : null;
+		$form .= ! @$fieldset->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "</{$fieldsetTag}>\n" : null;
 		$form .= @$fieldset->container ? "</{$fieldset->container}>\n" : null;
 		return $form;  
     }
@@ -1355,19 +1410,20 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */	
     public function view()
     {
+		$formContent = $this->getForm();
 		$form = null;
-		//	var_export( $this->_badnews );
+	//	var_export( $this->_badnews );
 		if( $this->badnewsBeforeElements && $this->_badnews )
 		{
-			$form .= '<ul>';
-			foreach( $this->_badnews as $message ) 
+		//	$form .= '<ul>';
+			foreach( array_unique( $this->_badnews ) as $message ) 
 			{
-				$form .= "<li class='badnews'>$message</li>\n";
+				$form .= "<div class='badnews'>$message</div>\n";
 			}
-			$form .= '</ul>';
+	//		$form .= '</ul>';
 		}
+		$form .= $formContent;
 	//		var_export( $this->_badnews );
-		$form .= $this->getForm();
 	//		var_export( $this->_badnews );
 		return $form;
     }

@@ -411,6 +411,11 @@ ayoola.div =
 		return parentElement;
 	},
 
+	getElementStyle: function( element ) 
+	{
+		element.currentStyle ? element.currentStyle.display : getComputedStyle( element, null ).display
+	},
+
 	getParentWithClass: function( element, className ) 
 	{
 		while( ( element = element.parentElement ) && ! element.classList.contains( className ) );

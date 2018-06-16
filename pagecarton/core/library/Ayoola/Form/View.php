@@ -319,7 +319,8 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		$fieldset = new Ayoola_Form_Element;
 	//	var_export( $formInfo );
 		$form->submitValue = @$formInfo['button_value'] ? : $submitValue ;
-		$form->oneFieldSetAtATime = true;
+		$form->oneFieldSetAtATimeJs = true;
+		$form->badnewsBeforeElements = true;
 		
 		$form->setFormRequirements( $formInfo['requirements'] );
 	//	$fieldsets[$key]->placeholderInPlaceOfLabel = false;       

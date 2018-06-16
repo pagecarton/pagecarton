@@ -45,6 +45,16 @@
 /* FORM */
 
 
+.pc-form-one-fieldset-at-a-time fieldset
+{
+	display: none;
+}     
+
+.pc-form-one-fieldset-at-a-time fieldset.pc-form-fieldset-1
+{
+	display: block;
+}     
+
 .pc-form label
 {
 	font-weight:bolder;
