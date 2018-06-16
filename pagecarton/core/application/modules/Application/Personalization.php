@@ -69,9 +69,6 @@ class Application_Personalization extends Ayoola_Abstract_Table
 		set_time_limit( 0 );
 		ignore_user_abort( true );
 		$startTime = microtime( true );
-		  
-		//	Clear cache
-		Application_Cache_Clear::viewInLine();
 /* 		if( is_dir( CACHE_DIR ) ) 
 		{
 			//	This is important or the application_dir won't change causing files to save in global dir
@@ -110,7 +107,13 @@ class Application_Personalization extends Ayoola_Abstract_Table
 		
 		}*/
 		//	Reset domain
-		Ayoola_Application::setDomainSettings( true );
+		  
+		//	Clear cache
+		if( ( ! empty( $_REQUEST['rebuild_widget'] ) || ! $this->getParameter( 'rebuild_widget' ) ) )
+		{
+			Application_Cache_Clear::viewInLine();
+			Ayoola_Application::setDomainSettings( true );
+		}
 		
 		//	We have to go about and do a separate authentication for this module
 		//	If this is not a new install, we must be admin  
@@ -146,6 +149,11 @@ class Application_Personalization extends Ayoola_Abstract_Table
 					}
 		//		break;
 				default:
+					if( $this->getParameter( 'only_show_when_no_admin' ) )
+					{
+						return false; 
+					}
+				
 				//	var_export( self::hasPriviledge() );
 					if( ! self::hasPriviledge( array( 99, 98 ) ) )
 					{
