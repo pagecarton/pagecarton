@@ -137,12 +137,6 @@ class Ayoola_Loader
     {
 		$relativePath = str_replace( array( '/', '\\' ), DS, $relativePath );
 		$all = self::getValidIncludePaths( $relativePath, $options ? : array() );
-
-		//	if we have two, hide PC own
-		if( count( $all ) > 1 )
-		{
-			unset( $all[APPLICATION_PATH] );
-		}
 		if( @$options['path_blacklist'] )
 		{
 		//	var_export( $options['path_blacklist'] );
@@ -160,6 +154,17 @@ class Ayoola_Loader
 		{
 			//$key = array_search( $options['path_blacklist'], $all );
 			return $all[Ayoola_Application::getDomainSettings( APPLICATION_PATH )];
+		}
+		//	won't make app run, 
+		//	i think because Ayoola_Application::getDomainSettings( APPLICATION_PATH ) isn't available at some point
+	//	elseif( $all[Ayoola_Application::getDomainSettings( APPLICATION_PATH )] )
+		{
+	//		return $all[Ayoola_Application::getDomainSettings( APPLICATION_PATH )];
+		}
+		//	if we have two, hide PC own
+		if( count( $all ) > 1  )
+		{
+			unset( $all[APPLICATION_PATH] );
 		}
 
 		return array_shift( $all );
