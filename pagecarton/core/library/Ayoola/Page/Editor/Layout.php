@@ -1223,6 +1223,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				{
 					var target = ayoola.events.getTarget( e );
 					var a = ayoola.div.getParentWithClass( target, \'DragBox\' );
+					if( a.getAttribute( "data-pc-object-refreshing" ) == "true" )
+					{
+						//	dont run twice at the sam time.
+						return false;
+					}
+					
 					var b = ayoola.div.getParameterOptions( a );
 				//	alert( b.content );
 					var c = a.getElementsByClassName( \'pc_page_object_inner_preview_area\' )[0];
@@ -1239,10 +1245,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					//	return false;
 					}
 					var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?pc_show_error=1&rebuild_widget=1&class_name=\' + d + f, data: b.content, container: c, replaceContent: g } );
+					a.setAttribute( "data-pc-object-refreshing", "true" );
 					var v = function()
 					{
 						if( ayoola.xmlHttp.isReady( ajax ) )
 						{	
+							a.removeAttribute( "data-pc-object-refreshing" );
 							pc_makeInnerSettingsAutoRefresh();
 			//				alert( target.getAttribute( "data-pc-return-focus-to" ) );
 					//		if( target.getAttribute( "data-pc-return-focus-to" ) )
@@ -1294,7 +1302,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						{
 							continue;
 						}			
-						var r = x[w].elements;			
+						var r = x[w].elements;	
+				//		alert( z[y].outerHTML );		
 						for( var q = 0; q < r.length; q++ )
 						{
 							ayoola.events.add( r[q], "change", loadInner, true );	
