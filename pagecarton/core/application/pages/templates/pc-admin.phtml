@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Sunday 17th of June 2018 12:20:37 AM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Sunday 17th of June 2018 02:05:02 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -26,14 +26,14 @@
 							if
 							( 
 
-								$x_1529194837 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'novus', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) ) ) 
+								$x_1529201102 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'novus', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) ) ) 
 							)
 							{
-							//	var_export( $x_1529194837 );
-							//	echo file_get_contents( $x_1529194837 );
-								include_once $x_1529194837;
+							//	var_export( $x_1529201102 );
+							//	echo file_get_contents( $x_1529201102 );
+								include_once $x_1529201102;
 							}
-		//					var_export( $x_1529194837 );
+		//					var_export( $x_1529201102 );
 						?>
 						 <?php
 /**
@@ -46,7 +46,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Wednesday 20th of December 2017 09:29:21 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Sunday 17th of June 2018 02:00:11 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <!DOCTYPE HTML>
@@ -88,6 +88,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </style>
 </head>
 <body class="cbp-spmenu-push" data-pc-section-name="body">
+<?php include_once( LAYOUT_PATH . DS . 'header' . TPL ) ?>
 	<div class="main-content" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
 		<!--left-fixed -navigation-->
 		<div class=" sidebar" role="navigation" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
@@ -124,7 +125,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- /nav-second-level -->
 </li>
 						<li>
-							<a href="#"><i class="fa fa-file-text-o nav_icon">&nbsp;</i>Pages &amp; Themes <span class="fa arrow">&nbsp;</span></a>
+							<a href="#"><i class="fa fa-file-text-o nav_icon">&nbsp;</i>Appearance <span class="fa arrow">&nbsp;</span></a>
 							<ul class="nav nav-second-level collapse">
 <li>
 									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_List/">Pages</a>
@@ -134,6 +135,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</li>
 								<li>
 									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_Menu_List/">Navigation</a>
+								</li>
+								<li>
+									<a onclick="ayoola.spotLight.showLinkInIFrame( '<?php echo Ayoola_Application::getUrlPrefix(); ?>/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/img/logo.png' );" href="javascript:">Logo</a>
+								</li>
+								<li>
+									<a onclick="ayoola.spotLight.showLinkInIFrame( '<?php echo Ayoola_Application::getUrlPrefix(); ?>/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/favicon.ico' );" href="javascript:">Favicon</a>
 								</li>
 							</ul>
 <!-- //nav-second-level -->
@@ -237,9 +244,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- main content start-->
 		<div id="page-wrapper" data-pc-section-name="page-wrapper">
 			<div class="main-page">
-				<section><section data-pc-all-sections="1">	
-									<?php
+				<section><?php
 //oneness Begins Here
+
+echo ( ! empty( $_dac83995f15adeba352e9940462f4228 ) &&  is_object( $_dac83995f15adeba352e9940462f4228 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_dac83995f15adeba352e9940462f4228->view(), '' ) : null );
 
 //oneness Ends Here
 ?><?php
@@ -256,16 +264,14 @@ echo ( ! empty( $_28742e28f5492c7b1e886e903e64c3c3 ) &&  is_object( $_28742e28f5
 								echo $_fdb452d3ce6343c66d26aed2671ec2d9->view();
 							}
 							
-echo ( ! empty( $_0f5b4fd608ed8ec14b958db3df760319 ) &&  is_object( $_0f5b4fd608ed8ec14b958db3df760319 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_0f5b4fd608ed8ec14b958db3df760319->view(), 'white-background' ) : null );
+echo ( ! empty( $_0f5b4fd608ed8ec14b958db3df760319 ) &&  is_object( $_0f5b4fd608ed8ec14b958db3df760319 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_0f5b4fd608ed8ec14b958db3df760319->view(), 'well' ) : null );
 
 echo ( ! empty( $_e0b062b9ea3e343d6f92c3b1e96f4f7f ) &&  is_object( $_e0b062b9ea3e343d6f92c3b1e96f4f7f ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_e0b062b9ea3e343d6f92c3b1e96f4f7f->view(), '' ) : null );
 
-echo ( ! empty( $_d9e5cb31e5f2858952223a83bcfbe5b8 ) &&  is_object( $_d9e5cb31e5f2858952223a83bcfbe5b8 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_d9e5cb31e5f2858952223a83bcfbe5b8->view(), '' ) : null );
-
-echo ( ! empty( $_720f96276816b09f68dd1cd2e539a0e9 ) &&  is_object( $_720f96276816b09f68dd1cd2e539a0e9 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_720f96276816b09f68dd1cd2e539a0e9->view(), '' ) : null );
+echo ( ! empty( $_1193238d7284ef6c6f4c5bec7efffb75 ) &&  is_object( $_1193238d7284ef6c6f4c5bec7efffb75 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_1193238d7284ef6c6f4c5bec7efffb75->view(), '' ) : null );
 
 //oneness Ends Here
-?>
+?><section data-pc-all-sections="1">	
 									<div class="">
 										<div class="row">
 											<div class="pc_page_layout_grid col-md-12 12u">
@@ -313,10 +319,6 @@ echo ( ! empty( $_720f96276816b09f68dd1cd2e539a0e9 ) &&  is_object( $_720f962768
 ?><?php
 //threesome1 Begins Here
 
-echo ( ! empty( $_eced507511dddb1b6d463ea065ac2612 ) &&  is_object( $_eced507511dddb1b6d463ea065ac2612 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_eced507511dddb1b6d463ea065ac2612->view(), 'white-background' ) : null );
-
-echo ( ! empty( $_8b4bcbe8c750690add73ab389ca51d39 ) &&  is_object( $_8b4bcbe8c750690add73ab389ca51d39 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_8b4bcbe8c750690add73ab389ca51d39->view(), 'white-background' ) : null );
-
 //threesome1 Ends Here
 ?>
 										   </div>
@@ -328,10 +330,6 @@ echo ( ! empty( $_8b4bcbe8c750690add73ab389ca51d39 ) &&  is_object( $_8b4bcbe8c7
 ?><?php
 //threesome2 Begins Here
 
-echo ( ! empty( $_3ea5ad3554fbc3238febe0eefe722618 ) &&  is_object( $_3ea5ad3554fbc3238febe0eefe722618 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_3ea5ad3554fbc3238febe0eefe722618->view(), 'white-background' ) : null );
-
-echo ( ! empty( $_3fc2d203781b1098e2de279003b69c46 ) &&  is_object( $_3fc2d203781b1098e2de279003b69c46 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_3fc2d203781b1098e2de279003b69c46->view(), 'white-background' ) : null );
-
 //threesome2 Ends Here
 ?>
 											</div> 
@@ -342,10 +340,6 @@ echo ( ! empty( $_3fc2d203781b1098e2de279003b69c46 ) &&  is_object( $_3fc2d20378
 //threesome3 Ends Here
 ?><?php
 //threesome3 Begins Here
-
-echo ( ! empty( $_781f6bd596c645809bd82b98b1a6a126 ) &&  is_object( $_781f6bd596c645809bd82b98b1a6a126 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_781f6bd596c645809bd82b98b1a6a126->view(), 'white-background' ) : null );
-
-echo ( ! empty( $_81d87806f4fa99873ca6c47e319ca9e5 ) &&  is_object( $_81d87806f4fa99873ca6c47e319ca9e5 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_81d87806f4fa99873ca6c47e319ca9e5->view(), 'white-background' ) : null );
 
 //threesome3 Ends Here
 ?>
@@ -446,7 +440,7 @@ echo ( ! empty( $_81d87806f4fa99873ca6c47e319ca9e5 ) &&  is_object( $_81d87806f4
 											</div>   
 										</div> 
 									</div> 
-									<?php
+								</section><?php
 //lastoneness Begins Here
 
 //lastoneness Ends Here
@@ -454,8 +448,7 @@ echo ( ! empty( $_81d87806f4fa99873ca6c47e319ca9e5 ) &&  is_object( $_81d87806f4
 //lastoneness Begins Here
 
 //lastoneness Ends Here
-?>
-								</section></section>
+?></section>
 <?php
 //row_one Begins Here
 
@@ -525,6 +518,8 @@ echo ( ! empty( $_81d87806f4fa99873ca6c47e319ca9e5 ) &&  is_object( $_81d87806f4
 <?php
 //footer Begins Here
 
+echo ( ! empty( $_1993374b8af42634763e52ad9417ea4e ) &&  is_object( $_1993374b8af42634763e52ad9417ea4e ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_1993374b8af42634763e52ad9417ea4e->view(), '' ) : null );
+
 //footer Ends Here
 ?><?php
 //footer Begins Here
@@ -559,6 +554,6 @@ echo ( ! empty( $_2b0ebdfee9b736d01f4e00b5169f0eb1 ) &&  is_object( $_2b0ebdfee9
 					classie.toggle( showLeftPush, 'disabled' );
 				}
 			}
-		</script><!--scrolling js--><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/jquery.nicescroll.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/scripts.js"></script><!--//scrolling js--><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/bootstrap.js"> </script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+		</script><!--scrolling js--><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/jquery.nicescroll.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/scripts.js"></script><!--//scrolling js--><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/bootstrap.js"> </script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?><?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?>
 </body>
 </html>

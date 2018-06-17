@@ -309,11 +309,11 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		$html .='<table class="pc-table">
 					<tr>';
 		$html .= is_null( $this->_firstPage ) ? NULL : ( '<td>
-							<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="pc-btn" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_firstPage . '/;changeElementId=' . $this->pageName . '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_firstPage ) ) . '">' . $first. '
+							<a name="paginator_navigation" class="pc-btn" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_firstPage . '/;changeElementId=' . $this->pageName . '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_firstPage ) ) . '">' . $first. '
 							</a>
 						</td>' );
 		$html .= is_null( $this->_previousPage ) ? NULL : ( '<td>
-							<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="pc-btn" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_previousPage . '/;changeElementId=' . $this->pageName . '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_previousPage ) ) . '">' . $previous. '
+							<a name="paginator_navigation" class="pc-btn" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_previousPage . '/;changeElementId=' . $this->pageName . '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_previousPage ) ) . '">' . $previous. '
 							</a>
 						</td>' );
 		if( $this->_lastPage )

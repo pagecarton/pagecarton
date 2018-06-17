@@ -163,7 +163,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 	//		$previewName = $name . '_preview';
 			
 			//{ accept: \'' . @$element['data-document_type'] . '/*\' }
-			$jsSelectElement = ' ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'' . $optionName . '\', } ); ';
+		//	$jsSelectElement = ' ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'' . $optionName . '\', } ); ';
 			$dropZoneName = $name . '_drop_zone';
 			$previewZoneName = $imageId . '_preview_zone';
 			$previewImageName = $imageId . '_preview_zone_image'; 
@@ -238,8 +238,8 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 					( 'Preview' ) . '' ) ) . '"  class="" onClick="" style="max-height:50vh;"  > 
 					<div style="margin:1em; font-size:x-small;">
 						' . ( is_file( $path ) ? ( '
-						URL: ' .  $imageUrl . '<br>
-						SIZE: ' . $filter->filter( filesize( $path ) ) . '
+						URL: <a href="' . ( Ayoola_Application::getUrlPrefix() . $imageUrl ) . '">' .  $imageUrl . '</a><br>
+						SIZE: ' . $filter->filter( filesize( $path ) ) . '<br>
 						' ) : null ) . ' 
 
 						' . ( $this->getParameter( 'width' ) ? ( '
@@ -249,16 +249,16 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 				</div>
 				<div title="Click here to select a file to upload or drag and drop a file here." style="text-align:center;" class="" name="upload_through_ajax_link">
 					<div title="Select an option here" style="display:block;" >
-						<span name="' . $optionName . '" onClick="' . $js . ' ayoola.div.selectElement( { element: this, disableUnSelect: false, name: \'' . $optionName . '\' } ); ' . $showMenuJs . '  " title="Show or hide menu..." class="pc-btn pc-btn-small" style="display:inline-block;" >
+						<span name="' . $optionName . '" onClick="' . $js . '  ' . $showMenuJs . '  " title="Show or hide menu..." class="pc-btn" style="display:inline-block;" >
 							' . ( $this->getParameter( 'call_to_action' ) ? : 'Change...' ) . '  
 						</span>
-						<span name="' . $optionName . '" onClick="' . $js . ' ' . $jsSelectElement . ' ' . $jsSetFieldName . ' ayoola.image.clickBrowseButton( { accept: \'' . $this->getParameter( 'file_types_to_accept' ) . '\', } ); " title="Click here to upload a file" class="pc-btn pc-btn-small" style="display:none;" >
+						<span name="' . $optionName . '" onClick="' . $js . ' ' . $jsSelectElement . ' ' . $jsSetFieldName . ' ayoola.image.clickBrowseButton( { accept: \'' . $this->getParameter( 'file_types_to_accept' ) . '\', } ); " title="Click here to upload a file" class="pc-btn" style="display:none;" >
 							Upload
 						</span>
-						<span name="' . $optionName . '" onClick="' . $js . ' ayoola.div.selectElement( { element: this, disableUnSelect: false, name: \'' . $optionName . '\' } ); ' . $dropZoneJs . ' ' . $jsSetFieldName . ' " title="Click here to select a file from the previous files on the website" class="pc-btn pc-btn-small" style="display:none;" >
+						<span name="' . $optionName . '" onClick="' . $js . ' ' . $dropZoneJs . ' ' . $jsSetFieldName . ' " title="Click here to select a file from the previous files on the website" class="pc-btn " style="display:none;" >
 							Drag N Drop
 						</span>
-						<span name="' . $optionName . '" onClick="' . $js . ' ayoola.div.selectElement( { element: this, disableUnSelect: false, name: \'' . $optionName . '\' } );   var a = document.getElementsByName( \'' . $name . '\' ); for( var b = 0; b < a.length; b++ ){var c = a[b].type; if( c == \'text\' ){ a[b].type = \'hidden\' }else{ a[b].type = \'text\'; }  a[b].style.display=\'block\';  a[b].focus();  a[b].click(); } " title="Click here to a URL link to the file" class=" pc-btn pc-btn-small" style="display:none;" >
+						<span name="' . $optionName . '" onClick="' . $js . '   var a = document.getElementsByName( \'' . $name . '\' ); for( var b = 0; b < a.length; b++ ){var c = a[b].type; if( c == \'text\' ){ a[b].type = \'hidden\' }else{ a[b].type = \'text\'; }  a[b].style.display=\'block\';  a[b].focus();  a[b].click(); } " title="Click here to a URL link to the file" class=" pc-btn " style="display:none;" >
 							URL
 						</span>
 					</div>

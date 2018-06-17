@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Sunday 17th of June 2018 12:20:37 AM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Sunday 17th of June 2018 02:05:02 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -125,7 +125,7 @@ $_0f5b4fd608ed8ec14b958db3df760319 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'Application_Info',
   ),
-  'wrapper_name' => 'white-background',
+  'wrapper_name' => 'well',
 ) );
 
 							}
@@ -219,66 +219,12 @@ $_e0b062b9ea3e343d6f92c3b1e96f4f7f = null;
 
 							}
 							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_d9e5cb31e5f2858952223a83bcfbe5b8 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<style>
-.logo a h1 {
-    color: transparent;
-    background-image: url("/x/img/logo.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-.logo {
-    background: #4d4d4d;
-}
-.cbp-spmenu-vertical {
-    background-color: #333;
-}
-
-</style>',
-  'preserved_content' => '<style>
-.logo a h1 {
-    color: transparent;
-    background-image: url("/x/img/logo.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-.logo {
-    background: #4d4d4d;
-}
-.cbp-spmenu-vertical {
-    background-color: #333;
-}
-
-</style>',
-  'url_prefix' => '/x',
-  'phrase_to_replace' => '',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_d9e5cb31e5f2858952223a83bcfbe5b8 = null;
-
-							}
-							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
 							{
 								
-$_720f96276816b09f68dd1cd2e539a0e9 = new Ayoola_Menu( array (
+$_1193238d7284ef6c6f4c5bec7efffb75 = new Ayoola_Menu( array (
   'option' => 'admin',
-  'template_name' => 'HorizontalGrayish',
+  'template_name' => 'HorizontalWhite',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -291,146 +237,7 @@ $_720f96276816b09f68dd1cd2e539a0e9 = new Ayoola_Menu( array (
 							else
 							{
 								
-$_720f96276816b09f68dd1cd2e539a0e9 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_eced507511dddb1b6d463ea065ac2612 = new Ayoola_Page_Editor_Text( array (
-  'editable' => 'Contact Messages',
-  'preserved_content' => 'Contact Messages',
-  'url_prefix' => '/x',
-  'phrase_to_replace' => '',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'white-background',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_eced507511dddb1b6d463ea065ac2612 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_8b4bcbe8c750690add73ab389ca51d39 = new Ayoola_Object_Embed( array (
-  'editable' => 'Application_ContactUs_ShowAll',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'white-background',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_8b4bcbe8c750690add73ab389ca51d39 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_3ea5ad3554fbc3238febe0eefe722618 = new Ayoola_Page_Editor_Text( array (
-  'editable' => 'Logo',
-  'preserved_content' => 'Logo',
-  'url_prefix' => '/x',
-  'phrase_to_replace' => '',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'white-background',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_3ea5ad3554fbc3238febe0eefe722618 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_3fc2d203781b1098e2de279003b69c46 = new Ayoola_Object_Embed( array (
-  'editable' => 'Ayoola_Doc_Upload_Link',
-  'advanced_parameter_value' => 
-  array (
-    0 => '/img/logo.png',
-    1 => '1',
-  ),
-  'wrapper_name' => 'white-background',
-  'suggested_url' => '/img/logo.png',
-  'ignore_width_and_height' => '1',
-) );
-
-							}
-							else
-							{
-								
-$_3fc2d203781b1098e2de279003b69c46 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_781f6bd596c645809bd82b98b1a6a126 = new Ayoola_Page_Editor_Text( array (
-  'editable' => 'Favicon',
-  'preserved_content' => 'Favicon',
-  'url_prefix' => '/x',
-  'phrase_to_replace' => '',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'white-background',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_781f6bd596c645809bd82b98b1a6a126 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_81d87806f4fa99873ca6c47e319ca9e5 = new Ayoola_Object_Embed( array (
-  'editable' => 'Ayoola_Doc_Upload_Link',
-  'advanced_parameter_value' => 
-  array (
-    0 => '/favicon.ico',
-    1 => '1',
-  ),
-  'wrapper_name' => 'white-background',
-  'suggested_url' => '/favicon.ico',
-  'ignore_width_and_height' => '1',
-) );
-
-							}
-							else
-							{
-								
-$_81d87806f4fa99873ca6c47e319ca9e5 = null;
+$_1193238d7284ef6c6f4c5bec7efffb75 = null;
 
 							}
 							

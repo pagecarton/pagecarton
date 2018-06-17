@@ -37,6 +37,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 </style>
 </head>
 <body class="cbp-spmenu-push" data-pc-section-name="body">
+<?php include_once( LAYOUT_PATH . DS . 'header' . TPL ) ?>
 	<div class="main-content" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
 		<!--left-fixed -navigation-->
 		<div class=" sidebar" role="navigation" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
@@ -73,7 +74,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- /nav-second-level -->
 </li>
 						<li>
-							<a href="#"><i class="fa fa-file-text-o nav_icon">&nbsp;</i>Pages &amp; Themes <span class="fa arrow">&nbsp;</span></a>
+							<a href="#"><i class="fa fa-file-text-o nav_icon">&nbsp;</i>Appearance <span class="fa arrow">&nbsp;</span></a>
 							<ul class="nav nav-second-level collapse">
 <li>
 									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_List/">Pages</a>
@@ -83,6 +84,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								</li>
 								<li>
 									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_Menu_List/">Navigation</a>
+								</li>
+								<li>
+									<a onclick="ayoola.spotLight.showLinkInIFrame( '<?php echo Ayoola_Application::getUrlPrefix(); ?>/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/img/logo.png' );" href="javascript:">Logo</a>
+								</li>
+								<li>
+									<a onclick="ayoola.spotLight.showLinkInIFrame( '<?php echo Ayoola_Application::getUrlPrefix(); ?>/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/favicon.ico' );" href="javascript:">Favicon</a>
 								</li>
 							</ul>
 <!-- //nav-second-level -->
@@ -186,8 +193,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		<!-- main content start-->
 		<div id="page-wrapper" data-pc-section-name="page-wrapper">
 			<div class="main-page">
-				<section><section data-pc-all-sections="1">	
-									@@@oneness@@@
+				<section>@@@oneness@@@<section data-pc-all-sections="1">	
 									<div class="">
 										<div class="row">
 											<div class="pc_page_layout_grid col-md-12 12u">
@@ -244,8 +250,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 											</div>   
 										</div> 
 									</div> 
-									@@@lastoneness@@@
-								</section></section>
+								</section>@@@lastoneness@@@</section>
 @@@row_one@@@
 
 
@@ -302,6 +307,6 @@ footer@@@}
 					classie.toggle( showLeftPush, 'disabled' );
 				}
 			}
-		</script><!--scrolling js--><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/jquery.nicescroll.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/scripts.js"></script><!--//scrolling js--><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/bootstrap.js"> </script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+		</script><!--scrolling js--><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/jquery.nicescroll.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/scripts.js"></script><!--//scrolling js--><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/bootstrap.js"> </script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?><?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?>
 </body>
 </html>

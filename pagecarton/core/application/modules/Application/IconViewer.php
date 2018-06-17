@@ -41,8 +41,8 @@ class Application_IconViewer extends PageCarton_Widget
     {    
 		try
 		{ 
-                @$maxWith = ( $this->getParameter( 'max_width' ) ? : @intval( $_REQUEST['max_width'] ) ) ? : 600;
-                @$maxHeight = ( $this->getParameter( 'max_height' ) ? : @intval( $_REQUEST['max_height'] ) ) ? : 600; 
+                @$maxWith = ( $this->getParameter( 'max_width' ) ? : @intval( $_REQUEST['max_width'] ) );
+                @$maxHeight = ( $this->getParameter( 'max_height' ) ? : @intval( $_REQUEST['max_height'] ) ); 
 
             if( ! $path = $this->getParameter( 'path' ) OR ! is_file( $path ) )
             {
@@ -67,6 +67,8 @@ class Application_IconViewer extends PageCarton_Widget
                 {
         //         $ext = null;
                 }
+                $defaultWidth = 600;
+                $defaultHeight = 600;
                 switch( $ext )
                 {
                     case 'jpg':
@@ -77,6 +79,8 @@ class Application_IconViewer extends PageCarton_Widget
                     case 'png':
                         //  The url is same
                         $url = $url ? : '/img/placeholder-image.jpg';
+                        $defaultWidth = 0;
+                        $defaultHeight = 0;
                     break;
                     case 'ico':
                         //  The url is same
@@ -137,8 +141,11 @@ class Application_IconViewer extends PageCarton_Widget
                     }
                 }
             }
-      //    var_export( $path );
-      //      exit();
+            $maxWith = $maxWith ? : $defaultHeight;
+            $maxHeight = $maxHeight ? : $defaultHeight; 
+    //      var_export( $maxWith );
+    //      var_export( $maxHeight );
+     //       exit();
 			
             //  cache me
             if( $_REQUEST['document_time'] )

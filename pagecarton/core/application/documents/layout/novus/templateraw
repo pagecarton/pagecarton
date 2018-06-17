@@ -104,7 +104,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<!-- /nav-second-level -->
 						</li>
 						<li>
-							<a href="#"><i class="fa fa-file-text-o nav_icon"></i>Pages & Themes <span class="fa arrow"></span></a>
+							<a href="#"><i class="fa fa-file-text-o nav_icon"></i>Appearance <span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level collapse">
 								<li>
 									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Page_List/">Pages</a>
@@ -114,6 +114,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</li>
 								<li>
 									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Page_Menu_List/">Navigation</a>
+								</li>
+								<li>
+									<a onclick="ayoola.spotLight.showLinkInIFrame( '#PC_URL_PREFIX/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/img/logo.png' );" href="javascript:">Logo</a>
+								</li>
+								<li>
+									<a onclick="ayoola.spotLight.showLinkInIFrame( '#PC_URL_PREFIX/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/favicon.ico' );" href="javascript:">Favicon</a>
 								</li>
 							</ul>
 							<!-- //nav-second-level -->
