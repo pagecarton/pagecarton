@@ -32,7 +32,7 @@ class Ayoola_Form_Table_Delete extends Ayoola_Form_Abstract
      * 
      * @var array
      */
-	protected $_identifierKeys = array( 'form_name', 'data_id' );
+	protected $_identifierKeys = array( 'data_id' );
 	
     /**
      * Identifier for the column to edit
