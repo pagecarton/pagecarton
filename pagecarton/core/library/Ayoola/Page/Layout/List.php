@@ -132,7 +132,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = 'My themes';
-		$list->noRowClass = true;
+	//	$list->noRowClass = true;
 		$list->noOptionsColumn = true;
 		$list->noHeader = true;
 	//	$table = $this->getDbTable();

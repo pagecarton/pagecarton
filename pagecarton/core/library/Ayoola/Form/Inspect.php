@@ -33,6 +33,13 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
      * @var array
      */
 	protected $_identifierKeys = array( 'form_name' );
+	
+    /**
+     * Identifier for the column to edit
+     * 
+     * @var array
+     */
+	protected $_idColumn = 'data_id';
 		
     /**
      * Performs the creation process
@@ -71,6 +78,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 		//	var_export( $data );
 			$list = new Ayoola_Paginator();
 			$list->pageName = $this->getObjectName();
+			$list->deleteClass = 'Ayoola_Form_Table_Delete';
 			$list->listTitle = $data['form_title'] . ' Responses';
 			$table = Ayoola_Form_Table_Data::getInstance();
 

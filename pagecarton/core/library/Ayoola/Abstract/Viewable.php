@@ -1271,7 +1271,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	var_export( $this->getParameter( 'object_container_element' )  );
 			//	$this->getParameter( 'object_class' ) ? $documentElement->setAttribute( 'class', $this->getParameter( 'object_class' ) ) : null;
 		//		$this->getParameter( 'object_style' ) ? $documentElement->setAttribute( 'style', $this->getParameter( 'object_style' ) ) : null;   
-				$this->_viewContent->appendChild( $documentElement );
+				$b = $this->_viewContent->createElement( 'div' );
+		//		$b->setAttribute( 'name', 'over-all-container' );   
+				$b->appendChild( $documentElement );
+				$this->_viewContent->appendChild( $b );
 				
 				//	Use Named Anchor to reference this content
 				$a = $this->_viewContent->createElement( 'div' );
@@ -1284,7 +1287,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$contentTag = $this->_viewContent->createElement( static::$_viewContentElementContainer ); 
 			$contentTag->appendChild( $contentData );
-			$this->_viewContent->documentElement->appendChild( $contentTag );
+			$this->_viewContent->documentElement->firstChild->appendChild( $contentTag );
 		}
 		else
 		{

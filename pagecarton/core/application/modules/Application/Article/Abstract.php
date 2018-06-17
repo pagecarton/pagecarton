@@ -99,6 +99,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	protected $_postTable = 'Application_Article_Table';	
 	
     /**
+     * 
+     * 
+     * @var string
+     */
+	protected $_idColumn = 'article_url';	
+	
+    /**
      * Module files directory namespace
      * 
      * @var string

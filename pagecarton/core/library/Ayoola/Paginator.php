@@ -56,7 +56,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      */
 	public $rowDataColumn;
 	
-	public $hideCheckbox = true;
+	public $hideCheckbox = false;
 	public $hideNumbering = true;
 
     /**
@@ -219,6 +219,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      */
     public function __construct( $data = null )
     {
+		self::$_counter++;
 		$data ? $this->setData( $data ) : null;
     }
 	
@@ -230,13 +231,6 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      */
     public function setData( $data )
     {
-	//	if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
-		{
-	//		var_export( count( $files ) );
-	//		var_export( '<br />' );
-		//	var_export( $data );
-	//		var_export( '<br />' );
-		}
  	//	var_export( count( $data ) );
 		@$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
 		@$this->_sortColumn = ( $_REQUEST['pc_sort_column'] ) ? $_REQUEST['pc_sort_column'] : $this->_sortColumn;
@@ -315,11 +309,11 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		$html .='<table class="pc-table">
 					<tr>';
 		$html .= is_null( $this->_firstPage ) ? NULL : ( '<td>
-							<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="boxednews normalnews" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_firstPage . '/;changeElementId=' . $this->pageName . '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_firstPage ) ) . '">' . $first. '
+							<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="pc-btn" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_firstPage . '/;changeElementId=' . $this->pageName . '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_firstPage ) ) . '">' . $first. '
 							</a>
 						</td>' );
 		$html .= is_null( $this->_previousPage ) ? NULL : ( '<td>
-							<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="boxednews normalnews" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_previousPage . '/;changeElementId=' . $this->pageName . '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_previousPage ) ) . '">' . $previous. '
+							<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="pc-btn" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_previousPage . '/;changeElementId=' . $this->pageName . '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_previousPage ) ) . '">' . $previous. '
 							</a>
 						</td>' );
 		if( $this->_lastPage )
@@ -338,22 +332,22 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				$label = $i + 1;
 				if( $i === $this->_currentPage )
 				{
-					$html .= 		'<span onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="boxednews selectednews"> ' . $label . ' 
+					$html .= 		'<span name="paginator_navigation" class="pc-btn"> ' . $label . ' 
 								</span>  ';
 				}
 				else
 				{
 		//			$html .= ' 		<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="boxednews normalnews" rel="classPlayerUrl=' . $classPlayer . 'page/' . $i . '/;changeElementId=' . $this->pageName. '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $i ) ) . '">' . $label . '</a> ';
-					$html .= ' 		<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="boxednews normalnews" rel="" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $i ) ) . '">' . $label . '</a> ';
+					$html .= ' 		<a name="paginator_navigation" class="pc-btn" rel="" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $i ) ) . '">' . $label . '</a> ';
 				}
 			}
 			
 			$html .= 		'</td>';
 		}
 		$html .= is_null( $this->_nextPage ) ? NULL :		'<td style="text-align:right;" >
-							<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="boxednews normalnews" style="text-align:right;" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_nextPage . '/;changeElementId=' . $this->pageName. '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_nextPage ) ) . '">' . $next. '</a></td>';
+							<a name="paginator_navigation" class="pc-btn" style="text-align:right;" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_nextPage . '/;changeElementId=' . $this->pageName. '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_nextPage ) ) . '">' . $next. '</a></td>';
 		$html .= is_null( $this->_lastPage ) ? NULL :		'<td style="text-align:right;" >
-							<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="boxednews normalnews" style="text-align:right;" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_lastPage . '/;changeElementId=' . $this->pageName. '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_lastPage ) ) . '">' . $last. '</a>
+							<a name="paginator_navigation" class="pc-btn" style="text-align:right;" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_lastPage . '/;changeElementId=' . $this->pageName. '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_lastPage ) ) . '">' . $last. '</a>
 						</td>';
 		$html .=	'</tr>
 				</table>';
@@ -447,7 +441,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		if( ! @$this->noHeader )
 		{
 			$html .='<tr bgcolor="' . $bg . '">';
-			$html .= @$this->hideCheckbox ? null : '<th><input type="checkbox" name=' . $key . ' value="0" /></th>';
+			$html .= @$this->hideCheckbox ? null : '<th><input title="toggle all" class="pc-paginator-record-selector-' . $this->pageName . self::$_counter . '" type="checkbox" onchange="var a = document.getElementsByClassName( this.className ); ayoola.div.toggleCheckboxes( a );" /></th>';
 		//	var_export( $this->hideNumbering );
 			$html .= @$this->hideNumbering ? null : '<th>ID</th>';
 			foreach( $fields as $field => $value )
@@ -497,7 +491,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			}
 			$records = '<tr class="' . $rowClass . '">';    
 //			$records = '<tr style="background-color:' . $bg . '; color:#000;">';    
-			$records .= @$this->hideCheckbox ? null : '<td><input type="checkbox" name="' . $key . '" value="' . $row[$key] . '" /></td>';
+			$records .= @$this->hideCheckbox ? null : '<td><input class="pc-paginator-record-selector-' . $this->pageName . self::$_counter . '" type="checkbox" name="' . $key . '[]" value="' . $row[$key] . '" ></td>';
 			$records .= @$this->hideNumbering ? null : '<td>'. ++$counter . '</td>';
 //		var_export( $row );  
 			$optionsHtml = null;
@@ -623,6 +617,43 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		//	leaves this so download can work
 //		$this->_rows = array(); // Free up the memory
 		$html .='</table>';		
+		//						var a = ayoola.div.getParentWithClass( target, \'DragBox\' );
+		Application_Javascript::addCode( 
+			'
+			pc_MultiDoForPaginationRecord = function( target, url )
+			{
+			//	var target = ayoola.events.getTarget( e );
+				var a = ayoola.div.getParentWithClass( target, \'pc-form\' );
+				if( a.className != \'pc-form\' )
+				{
+					return false;
+				}
+				var b =	ayoola.div.getFormValues( { form: a, dontDisable: true } );
+				ayoola.spotLight.showLinkInIFrame( url + "?list_name=" + a.name + "&" + b, a.name );
+			//	alert( b );
+			}
+			'
+		);
+
+		$multiDoOption = array();
+		$deletePrefix = null;
+		if( $this->deleteClass )
+		{
+			$deletePrefix = 'delete_class/' . ( $this->deleteClass );
+		}
+		$multiDoOption[] = array( 
+									'url' => Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Pagination_MultiDo_Delete/' . ( $deletePrefix ) . '',
+									'name' => 'Delete',
+									);
+
+		$html .='<div class="pc-btn-parent" style="background-color:#d4d4d4;">';		
+		foreach( $multiDoOption as $doOption )
+		{
+			$html .='<a class="" onclick="pc_MultiDoForPaginationRecord( this, \'' . $doOption['url'] . '\' );" href="javascript:">' . $doOption['name'] . '</a>';		
+		}
+		$html .='</div>';		
+
+
 		
 		// Embed the html in a form so as to service the checkboxes
 		//	I am going to be using Ayoola_Form 
@@ -802,8 +833,8 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
     {	
 		$list = $this->getList();
 		$content = null;  
-		$content .= $this->listTitle ? '<div style="margin:1em 0 1.5em 0;"><h3 class="pc-heading">' . $this->listTitle . '</h3></div>' : null;     
-		
+		$content .= $this->listTitle ? '<div><h3 class="pc-heading">' . $this->listTitle . '</h3></div>' : null;     
+		$content .= '<div style="background-color:#d4d4d4;">';     		
 		if( $this->_noOfPageRecords !== $this->_noOfRecords )     
 		{	
 //			$content .='<p style="font-size:smaller;">Showing ' . $this->_noOfPageRecords . ' out of ' . $this->_noOfRecords . ' Record(s). Show ' . $noToShow .' ' . $order .'</p>';
@@ -873,11 +904,11 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		}
 		$noToShow = null;
 		$order = null;
-		$content .= ' <div style="padding-top:0em;padding-bottom:1em;" class="pc-btn-parent pc-btn-small-parent">';			
+		$content .= ' <div style="" class="pc-btn-parent">';			
 		if( $this->_noOfRecords > 10 ) 
 		{
 		
-			$noToShow = '<select style="border:0;" onChange="window.location.search = window.location.search + \'&noPerPage=\' + this.value;">
+			$noToShow = '<select class="pc-element-like-btn" onChange="window.location.search = window.location.search + \'&noPerPage=\' + this.value;">
 						<option>' . $this->_noOfPageRecords . ' out of ' . $this->_noOfRecords . '</option>  O
 						<option>10</option>
 						<option>20</option>
@@ -888,12 +919,12 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 						<option>500</option>
 					</select>
 					';
-			$order = '<select style="border:0;" onChange="window.location.search = window.location.search + \'&pc_sort_order_inverse=\' + this.value;">
+			$order = '<select class="pc-element-like-btn" onChange="window.location.search = window.location.search + \'&pc_sort_order_inverse=\' + this.value;">
 						<option>Order...</option>  
 						<option value=' . ( @$_GET['pc_sort_order_inverse'] ? '0' : '1' ) . '>Inverse</option>
 					</select>
 					';
-			$content .='<a class=" " style="font-size:smaller;">' . $noToShow .' ' . $order .'</a>';
+			$content .='' . $noToShow .' ' . $order .'';
 		}  
 		if( $this->_listOptions )
 		{
@@ -906,7 +937,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				}
 			//	$content .= ' <span class="boxednews centerednews selectednews"> ' . $option . ' </span> ';			
 		//		$content .= ' <button type="button"> ' . $option . ' </button> ';			
-				$content .= '<span style="" class=""> ' . $option . ' </span> ';			
+				$content .= '' . $option . '';			
 			}
 		}
 		$content .= '</div> ';					
@@ -921,7 +952,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			{ 
 				//	Put search 
 				$keys = array_combine( $keys, $keys );
-				$newForm = new Ayoola_Form( array( 'name' => 'xxx', 'data-not-playable' => true, 'method' => 'GET', 'action' => '?' . http_build_query( $_GET ), ) );
+				$newForm = new Ayoola_Form( array( 'name' => 'xxx', 'class' => 'xxx', 'data-not-playable' => true, 'method' => 'GET', 'action' => '?' . http_build_query( $_GET ), ) );
 				$newForm->setParameter( array( 'no_fieldset' => true, 'no_required_fieldset' => true, ) );
 			//	$newForm->submitValue = 'Search';
 			//	$newForm->setParameter( array( 'no_form_element' => true ) );
@@ -932,8 +963,8 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			//	$newFieldSet->wrapper = 'white-background';
 				$newFieldSet->hashElementName = false;
 			//	$newFieldSet->addLegend( 'Search records...' );
-				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_value',  'label' => '',  'multiple' => 'multiple', 'placeholder' => 'Enter Search Keyword Here...', 'style' => 'max-width: 45%;', 'type' => 'InputText', 'value' => null ) );
-				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_name', 'onchange' => 'this.form.submit()', 'style' => 'max-width: 45%;',  'label' => '  ',  'multiple' => 'multiple', 'type' => 'Select', 'value' => null ), array( 'Select Search Column...' ) + $keys );
+				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_value',  'label' => '',  'multiple' => 'multiple', 'placeholder' => 'Search ' . $this->listTitle . '...', 'style' => 'width:100%; max-width:500px;text-transform:none;cursor:auto', 'class' => 'pc-element-like-btn', 'type' => 'InputText', 'value' => null ) );
+				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_name', 'onchange' => 'this.form.submit()', 'class' => 'pc-element-like-btn', 'style' => 'width:100%; max-width:300px;cursor:auto',  'label' => '  ',  'multiple' => 'multiple', 'type' => 'Select', 'value' => null ), array( 'Select Search Column...' ) + $keys );
 			//	$newFieldSet->addElement( array( 'name' => 'go', 'type' => 'Submit', 'value' => 'Go' ) );        
 				$newForm->addFieldset( $newFieldSet );  
 				
@@ -946,10 +977,11 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				$content .= $newForm->view();  
 			}
 		}
+		$content .= '</div>';     		
 		$content .= $list;
 	//	if( ! @$this->hideOptions  )
 		{ 
-		//	$fieldset = new Ayoola_Form_Element();
+		//	$fieldset = new Ayoola_Form_Element();   
 			
 		}
 	//	$content .= $this->getList();

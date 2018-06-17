@@ -411,9 +411,15 @@ ayoola.div =
 		return parentElement;
 	},
 
-	getElementStyle: function( element ) 
+	toggleCheckboxes: function( checkboxes ) 
 	{
-		element.currentStyle ? element.currentStyle.display : getComputedStyle( element, null ).display
+		for ( var i=0; i< checkboxes.length; i++ )  
+		{
+			if( checkboxes[i].type == 'checkbox' )   
+			{
+				checkboxes[i].checked = checkboxes[i].checked ? false : true;
+			}
+		}
 	},
 
 	getParentWithClass: function( element, className ) 
