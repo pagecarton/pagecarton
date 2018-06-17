@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Sunday 17th of June 2018 12:03:53 AM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Sunday 17th of June 2018 12:20:37 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -55,10 +55,40 @@ $_28742e28f5492c7b1e886e903e64c3c3 = null;
 
 							}
 							
+							if( Ayoola_Page::hasPriviledge( array (
+  0 => '99',
+), array( 'strict' => true ) ) )
+							{
+								if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
+								{
+									
+$_fdb452d3ce6343c66d26aed2671ec2d9 = new Ayoola_Object_Embed( array (
+  'editable' => 'Application_Upgrade_Check',
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  'object_access_level' => 
+  array (
+    0 => '99',
+  ),
+  'wrapper_name' => '',
+  '' => '',
+) );
+
+								}
+								else
+								{
+									
+$_fdb452d3ce6343c66d26aed2671ec2d9 = null;
+
+								}
+							}    
+							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_cbb73f797e675448bd90e9b66cf9f434 = new Ayoola_Page_Editor_Text( array (
+$_0f5b4fd608ed8ec14b958db3df760319 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div class="col-md-12 stats-info widget" style="width: 100%;">
 <div class="stats-title">
 <h4 class="title">Dashboard</h4>
@@ -102,39 +132,9 @@ $_cbb73f797e675448bd90e9b66cf9f434 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_cbb73f797e675448bd90e9b66cf9f434 = null;
+$_0f5b4fd608ed8ec14b958db3df760319 = null;
 
 							}
-							
-							if( Ayoola_Page::hasPriviledge( array (
-  0 => '99',
-), array( 'strict' => true ) ) )
-							{
-								if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-								{
-									
-$_76e7e3da660c3d8115385434d8c36c76 = new Ayoola_Object_Embed( array (
-  'editable' => 'Application_Upgrade_Check',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'object_access_level' => 
-  array (
-    0 => '99',
-  ),
-  'wrapper_name' => 'white-well',
-  '' => '',
-) );
-
-								}
-								else
-								{
-									
-$_76e7e3da660c3d8115385434d8c36c76 = null;
-
-								}
-							}    
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{

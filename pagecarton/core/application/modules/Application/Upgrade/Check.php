@@ -61,25 +61,19 @@ class Application_Upgrade_Check extends PageCarton_Widget
                 $storage->store( $versionFromServer );
             }
         //    var_export( $versionFromServer );
+        $filter = new Ayoola_Filter_Time();
+        $lastChecked = '<span  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $serverName . ')</span>';
         if( empty( $versionFromServer['response'] ) )
         {
-            $this->setViewContent( '<div class="badnews">ALERT! PageCartion is not able to check for updates. Please check that cURL is installed on the server and clear the cache to try again.</div>', true ); 
-        //     $this->setViewContent( '' ); 
-            $filter = new Ayoola_Filter_Time();
-                $this->setViewContent( '<p  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $serverName . ')</p>' ); 
+            $this->setViewContent( '<div class="badnews">PageCartion is not able to check for updates (cURL error). ' . $lastChecked . '  </div>', true ); 
         }
         elseif( $versionFromServer['response'] != PageCarton::VERSION )
         {
-            $this->setViewContent( '<div class="badnews">ALERT! Your PageCarton installation is outdated.</div><div class="pc-notify-info">New version (' . $versionFromServer['response']  . ') is available for download. </div>', true ); 
-        //     $this->setViewContent( '' ); 
-            $this->setViewContent( '<div class=""><a onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Upgrade?" class="pc-btn pc-bg-color">Begin Upgrade!</a></div>' );
-            $filter = new Ayoola_Filter_Time();
-                $this->setViewContent( '<p  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $serverName . ')</p>' ); 
+            $this->setViewContent( '<div class="badnews"> PageCarton ' . $versionFromServer['response']  . ' is available for download. ' . $lastChecked . ' . <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Upgrade?" class="">Begin Upgrade!</a></div>', true ); 
         }
         else
         {
-            $filter = new Ayoola_Filter_Time();
-            $this->setViewContent( '<p class="goodnews">You are running the latest version of PageCarton (' . $versionFromServer['response']  . '). <span  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $serverName . ') </span></p>', true ); 
+            $this->setViewContent( '<p class="goodnews">You are running the latest version of PageCarton (' . $versionFromServer['response']  . '). ' . $lastChecked . '</p>', true ); 
         //    $this->setViewContent( '' ); 
         }
 
