@@ -17,7 +17,7 @@
  */
 
 
-class Application_Profile_Table extends PageCarton_Table
+class Application_Profile_Table extends PageCarton_Table_Private
 {
 
     /**

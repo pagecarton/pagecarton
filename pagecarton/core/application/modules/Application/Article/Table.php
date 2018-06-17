@@ -17,7 +17,7 @@
  */
 
 
-class Application_Article_Table extends PageCarton_Table
+class Application_Article_Table extends PageCarton_Table_Private
 {
 
     /**
