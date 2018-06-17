@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Sunday 17th of June 2018 02:05:02 AM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Sunday 17th of June 2018 02:41:20 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -125,7 +125,7 @@ $_0f5b4fd608ed8ec14b958db3df760319 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'Application_Info',
   ),
-  'wrapper_name' => 'well',
+  'wrapper_name' => 'white-well',
 ) );
 
 							}
@@ -136,10 +136,32 @@ $_0f5b4fd608ed8ec14b958db3df760319 = null;
 
 							}
 							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
+							{
+								
+$_848972eb36aa04b62e7b6ec01bae0040 = new Ayoola_Menu( array (
+  'option' => 'admin',
+  'template_name' => 'HorizontalWhite',
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  'wrapper_name' => '',
+  '' => '',
+) );
+
+							}
+							else
+							{
+								
+$_848972eb36aa04b62e7b6ec01bae0040 = null;
+
+							}
+							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_e0b062b9ea3e343d6f92c3b1e96f4f7f = new Ayoola_Page_Editor_Text( array (
+$_d9e5cb31e5f2858952223a83bcfbe5b8 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<section id="row-one" data-pc-section-created="1">
     <div class="row-one">
         <div class="col-md-4 widget">
@@ -215,29 +237,7 @@ $_e0b062b9ea3e343d6f92c3b1e96f4f7f = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_e0b062b9ea3e343d6f92c3b1e96f4f7f = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
-							{
-								
-$_1193238d7284ef6c6f4c5bec7efffb75 = new Ayoola_Menu( array (
-  'option' => 'admin',
-  'template_name' => 'HorizontalWhite',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_1193238d7284ef6c6f4c5bec7efffb75 = null;
+$_d9e5cb31e5f2858952223a83bcfbe5b8 = null;
 
 							}
 							
