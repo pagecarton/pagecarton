@@ -283,6 +283,8 @@
 .pc-notify-info, .goodnews, .pc-notify-warning, .badnews, .pc-heading, .noRecord {
     font-family: 'open_sansregular', sans-serif;
     padding:10px; 
+    margin-top: 0;
+    margin-bottom: 0;
 }
 .pc-notify-info:before, .goodnews:before, .pc-notify-warning:before, .badnews:before, .noRecord:before , .pc-heading:before {
     font-family:FontAwesome;
