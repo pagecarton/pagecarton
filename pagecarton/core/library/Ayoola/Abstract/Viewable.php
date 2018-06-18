@@ -426,18 +426,25 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 //		var_export( $mailInfo );
 		if( empty( $mailInfo['subject'] ) ){ $mailInfo['subject'] = 'Account Notice'; }
-		$header = 'From: ' . $mailInfo['from'] . "";
+		$header = 'From: ' . $mailInfo['from'] . "\r\n";
+	 	$header .= "Return-Path: " . @$mailInfo['return-path'] ? : $mailInfo['from'] . "\r\n";
+
 		if( ! empty( $mailInfo['bcc'] ) )
 		{ 
 			$header .= "bcc: {$mailInfo['bcc']}\r\n";
 		//	var_export( $header );
 		}
-		if( ! empty( $mailInfo['html'] ) )
+		if( ! empty( $mailInfo['html'] ) || strip_tags( $mailInfo['body'] ) != $mailInfo['body'] )
 		{ 
+			if( stripos( $mailInfo['body'], '<html>' ) === false )
+			{
+				$mailInfo['body'] = '<html>' . $mailInfo['body'] . '</html>';
+			}
 			$header .= "MIME-Version: 1.0\r\n";
 			$header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 		}
 		$sent = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], $header );
+//		var_export( $mailInfo );
 	//	exit( var_export( $mailInfo ) );
 	//	if( ! $sent ){ throw new Ayoola_Abstract_Exception( 'Error encountered while sending e-mail' ); }
 		return true;
