@@ -502,6 +502,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			}
 			foreach( $fields as $field => $value )
 			{
+				$rawFieldValues  = $value;
 			//	if( is_array( $row ) && array_key_exists( $field, $row ) )
 				if( is_array( $value ) && ( ! empty( $value['value'] ) || ! empty( $value['filter'] ) ) )
 				{
@@ -527,35 +528,13 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					//	var_export( $row[$field] );
 					}
 					$value = $value['value'];
+
 				}
 				if( array_key_exists( $field, $row ) )
 				{
 					
 					// make adequate  replacement if required 
 					$value =  $value ? : $row[$field];
-					
-				//	if( is_array( $value ) )
-					{ 
-				//		var_export( $value );
-					//	$value = print_r( $value, true ); 
-					}
-//	var_export( $value );
-/* 					if( is_array( $value ) && ( ! empty( $value['value'] ) || ! empty( $value['filter'] ) ) )
-					{
-						$value['value'] = @$value['value'] ? : $row[$field];
-				//		if( ! empty( $value['filter'] ) && $value['filter'] implements Ayoola_Filter_Interface )
-						if( ! empty( $value['filter'] ) )
-						{
-							$value['filter'] = new $value['filter'];
-							$value = $value['filter']->filter( $value['value'] );
-						}
-						if( ! empty( $value['field'] ) )
-						{
-							$field = $value['field'];
-						}
-					}
- */					
- 				//	var_export( $row[$field] );
  					if( is_array( $value ) )
 					{ 
 					//	var_export( $value );
@@ -582,6 +561,13 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					$value = str_replace( '%KEY%', @$row[$key], $value );
 					$value = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $value );
 					$value = str_replace( $columnSearch, $columnReplace, $value );
+					if( isset( $rawFieldValues['value_representation'][$value] ) )
+					{
+						$value = $rawFieldValues['value_representation'][$value];
+					}
+			//		if( $this->crossColumnFields )
+
+					//	we want to include html here // use personal filters for this
 				//	$value = htmlentities( $value );
 					$records .='<td>' . $value . '</td>';    
 				}
@@ -856,7 +842,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		if( $result = $this->getRows() )
 		{
 
-			$downloadLink = '/widgets/' . $this->pageName . '/?export_list=' . $this->pageName . '&' . http_build_query( $_GET );
+			$downloadLink = Ayoola_Application::getUrlPrefix() . '/widgets/' . $this->pageName . '/?export_list=' . $this->pageName . '&' . http_build_query( $_GET );
 			$this->setListOptions( array( 'Export' => '<a rel="" href="' . $downloadLink . '" title="" class="" style="" onClick="">Export List</a>' ) ); 
 			if( @$_GET['export_list'] == $this->pageName )
 			{
@@ -875,10 +861,10 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				{
 					function cleanData(&$str)
 					{
-						if( ! is_scalar( $str ) ){ return false; }
-						if($str == 't') $str = 'TRUE';
-						if($str == 'f') $str = 'FALSE';
-						if(preg_match( "/^0/", $str ) || preg_match( "/^\+?\d{8,}$/", $str ) || preg_match("/^\d{4}.\d{1,2}.\d{1,2}/", $str)) 
+				//		if( ! is_scalar( $str ) ){ return false; }
+					//	if($str == 't') $str = 'TRUE';
+					//	if($str == 'f') $str = 'FALSE';
+					//	if(preg_match( "/^0/", $str ) || preg_match( "/^\+?\d{8,}$/", $str ) || preg_match("/^\d{4}.\d{1,2}.\d{1,2}/", $str)) 
 						{
 					//		$str = "'$str ";
 						}
@@ -887,11 +873,12 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				}
 				while( $row = array_shift( $result ) ) 
 				{
+					ksort( $row );
 					if( ! $flag ) 
 					{
 						// display field/column names as first row
 						fputcsv( $out, array_keys( $row ), ',', '"' );
-						fputcsv( $out, array_keys( $this->fields ), ',', '"' );
+					//	fputcsv( $out, array_keys( $this->fields ), ',', '"' );
 						$flag = true;
 					}
 					array_walk( $row, __NAMESPACE__ . '\cleanData' );
