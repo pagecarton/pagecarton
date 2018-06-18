@@ -592,7 +592,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 		{
 			return $this->_dataTypes;
 		}
-		throw new Ayoola_Dbase_Table_Abstract_Exception( 'No Datatype on file. Set with ' . __CLASS__ . '::setDataTypes()' );
+		  throw new Ayoola_Dbase_Table_Abstract_Exception( 'No Datatype on file. Set with ' . __CLASS__ . '::setDataTypes()' );
     }
 
     /**
@@ -602,7 +602,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      */
     public function setDataTypes( Array $dataTypes )
     {	
-		$this->_dataTypes = $dataTypes;
+		  $this->_dataTypes = $dataTypes;
     }
 
     /**

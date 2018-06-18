@@ -331,6 +331,10 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     protected function setDbTable( Ayoola_Dbase_Table_Interface $table = null )
     {		
 		if( null === $table ){ $table = $this->getTableClass(); }
+		if( ! Ayoola_Loader::loadClass( $table ) )
+		{
+			throw new Ayoola_Exception( 'TABLE CLASS NOT FOUND ' . $table );
+		}
 		//	var_export( static::$_dbInfo );
 		$table = new $table( new Ayoola_Dbase( self::$_dbInfo ) );
 		$this->_dbTable = $table;
