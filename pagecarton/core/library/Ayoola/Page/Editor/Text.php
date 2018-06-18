@@ -63,6 +63,21 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * @param 
      * @return 
      */
+    public function addDomainToAbsoluteLinks( $content )
+    {
+		$rootUrl = Ayoola_Page::getRootUrl();
+		$search = array( '"/', "'/", "url(/", $rootUrl . '//' );
+		$replace = array( '"' . $rootUrl . '/', "'". $rootUrl . '/', "url(". $rootUrl . '/', '//' );
+		$content = str_ireplace( $search, $replace, $content );
+		return $content;
+	}
+	
+    /**
+     * This method
+     *
+     * @param 
+     * @return 
+     */
     public function init()
     {
 		//	codes first because it wont be there if they didnt opt to enter codes
