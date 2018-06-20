@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Sunday 17th of June 2018 02:41:20 AM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Wednesday 20th of June 2018 12:37:00 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -85,10 +85,32 @@ $_fdb452d3ce6343c66d26aed2671ec2d9 = null;
 								}
 							}    
 							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
+							{
+								
+$_06dac9ada8e3d8a65b6947dcaa67b97f = new Ayoola_Menu( array (
+  'option' => 'admin',
+  'template_name' => 'HorizontalWhite',
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  'wrapper_name' => '',
+  '' => '',
+) );
+
+							}
+							else
+							{
+								
+$_06dac9ada8e3d8a65b6947dcaa67b97f = null;
+
+							}
+							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_0f5b4fd608ed8ec14b958db3df760319 = new Ayoola_Page_Editor_Text( array (
+$_e0b062b9ea3e343d6f92c3b1e96f4f7f = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div class="col-md-12 stats-info widget" style="width: 100%;">
 <div class="stats-title">
 <h4 class="title">Dashboard</h4>
@@ -132,29 +154,7 @@ $_0f5b4fd608ed8ec14b958db3df760319 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_0f5b4fd608ed8ec14b958db3df760319 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
-							{
-								
-$_848972eb36aa04b62e7b6ec01bae0040 = new Ayoola_Menu( array (
-  'option' => 'admin',
-  'template_name' => 'HorizontalWhite',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_848972eb36aa04b62e7b6ec01bae0040 = null;
+$_e0b062b9ea3e343d6f92c3b1e96f4f7f = null;
 
 							}
 							
