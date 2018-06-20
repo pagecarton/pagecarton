@@ -1172,7 +1172,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
 		// store playlist
 		$storage = self::getObjectStorage( array( 'id' => $postListId . '_single_post_pagination', 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
+	//	self::v( $postListId );  
+	//	self::v( $singlePostPaginationInfo );  
+		//	add it to previous because of autoload clearing this settings
+		$prevSinglePostPagination = $storage->retrieve();
+		$singlePostPaginationInfo = $singlePostPaginationInfo + ( is_array( $prevSinglePostPagination ) ? $prevSinglePostPagination : array() );
 		$storage->store( $singlePostPaginationInfo );
+	//	self::v( $prevSinglePostPagination );
+	//	self::v( count( $singlePostPaginationInfo ) );
 	//	self::v( $postListId );
 	//	$this->_xml = $allTemplate; //	reset
 		$this->_xml = '' . $allTemplate . '';
