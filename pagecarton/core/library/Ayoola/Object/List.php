@@ -63,6 +63,7 @@ class Ayoola_Object_List extends Ayoola_Object_Abstract
 										'Modules' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_Module_List/\' );" title="">Manage Modules</a>',  
 										'DB Table' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_CreateFile/?file_type=table\' );" title="">Create a DB Table</a>',  
 										'Widget' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_CreateFile/\' );" title="">Create a Widget</a>',    
+										'Settings' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_CreateFile/?file_type=settings\' );" title="">Create Settings File</a>',    
 									) 
 							);
 		$list->setNoRecordMessage( 'You have not created any Object yet' );
