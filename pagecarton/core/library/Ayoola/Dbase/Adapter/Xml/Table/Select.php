@@ -102,7 +102,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				var_export( '<br />' );
 			}
  */			
-			rsort( $files );
+	//		rsort( $files );
  		//	if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
 			{
 			//	PageCarton_Widget::v( $files );
@@ -194,6 +194,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//	exit();
  	//	var_export( count( $rows ) );
 	//			var_export( $rows );
+		if( ! empty( $options['sort_column'] ) )
+		{
+			$rows = PageCarton_Widget::sortMultiDimensionalArray( $rows, $options['sort_column'] );
+		}
 		if( empty( $options['disable_cache'] ) ){ $this->setCache( $rows ); }
 //		var_export( $rows );
 		return $rows;
