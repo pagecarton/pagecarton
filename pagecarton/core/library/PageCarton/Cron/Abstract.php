@@ -48,6 +48,18 @@ class PageCarton_Cron_Abstract extends PageCarton_Widget
 	protected static $_accessLevel = array( 99, 98 );
 	
     /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var boolean
+     */
+	protected static $_intervalOptions = array(
+                            '3600' => '1 hr',
+                            '43200' => '12 hrs',
+                            '86400' => '1 day',
+                            '604800' => '1 week',
+        );
+	
+    /**
      * 
      * 
      * @var string 
@@ -74,12 +86,7 @@ class PageCarton_Cron_Abstract extends PageCarton_Widget
 
 		$values['cron_parameters'] = $values['cron_parameters'] ? json_encode( $values['cron_parameters'] ) : $values['cron_parameters'];
         $fieldset->addElement( array( 'name' => 'cron_parameters', 'label' => 'Parameters', 'placeholder' => '[]', 'type' => 'InputText', 'value' => @$values['cron_parameters'] ) ); 
-        $options = array(
-                            '3600' => '1 hr',
-                            '43200' => '12 hr',
-                            '86400' => '1 day',
-                            '604800' => '7 days',
-        );
+        $options = static::$_intervalOptions;
         $fieldset->addElement( array( 'name' => 'cron_interval', 'label' => 'Cron Interval', 'type' => 'Select', 'value' => @$values['cron_interval'] ), $options ); 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

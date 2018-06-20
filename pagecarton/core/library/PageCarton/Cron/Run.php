@@ -57,19 +57,48 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
             else
             {
                 $tasks = PageCarton_Cron_Table::getInstance()->select();
-
+                $u = 0;
+                $cTime = time();
+              //   var_export( $tasks );
                 foreach( $tasks as $data )
                 {
-                    if( $data['cron_next_run_time'] > time() || ! empty( $data['cron_interval'] ) )
+              //     var_export( $data );
+              //      var_export( $data['cron_next_run_time'] . '<br>' );
+             //       var_export( time() );
+                    if( $runHistory = PageCarton_Cron_Run_Table::getInstance()->select( null, array( 'cron_id' => $data['table_id'], ), array( 'sort_column' => 'runtime' ) ) )
+                    {
+                        $lastRunInfo = array_pop( $runHistory );
+                        $lastRunTime = $lastRunInfo['runtime'];
+                        $nextRunTime = $lastRunTime + $data['cron_interval'];
+                    }
+                    else
+                    {
+                        $nextRunTime = $cTime;
+                    }
+
+               //      var_export( $data['table_id'] );
+            //         var_export( $runHistory );
+                    $filter = new Ayoola_Filter_Time();
+                //     var_export( $filter->filter( $lastRunTime ) );
+               //      var_export( $data['cron_interval'] );
+                //    var_export( $filter->filter( $nextRunTime ) );
+               //      var_export( $nextRunTime < $cTime );
+                //     var_export( empty( $data['cron_interval'] ) );
+                //    var_export( PageCarton_Cron_Run_Table::getInstance()->select() );
+                    if( $nextRunTime > $cTime )
                     {
                         continue;
                     }
+                  //   var_export( $data );
                     if( $html = self::task( $data ) )
                     {
                         $this->setViewContent( $html, true );
                     }
+                    $u++;
+                    $runData = array( 'cron_id' => $data['table_id'], 'runtime' => $cTime, );
+                    PageCarton_Cron_Run_Table::getInstance()->insert( $runData );
                 }
-                $this->setViewContent( '<div class="goodnews">All cron tasks processed successfully</div>' );
+                $this->setViewContent( '<div class="goodnews">' . $u . ' cron tasks processed successfully</div>' );
             }
 
             //  if you are not admin, don't see updates.
@@ -108,11 +137,10 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
 		//	    $this->setViewContent( $html, true );
 		//	    $this->setViewContent( '<div class="goodnews">Cron task processed successfully</div>' );
             }
-			$data['cron_run_time_history'] = $data['cron_run_time_history'] ? : array();
-			$data['cron_run_time_history'][] = time();
-			$data['cron_next_run_time'] = time() + $data['cron_interval'];
-            PageCarton_Cron_Table::getInstance()->update( $data, array( 'table_id' => $data['table_id'] ) );
-
+	//		$data['cron_run_time_history'] = $data['cron_run_time_history'] ? : array();
+	//		$data['cron_run_time_history'][] = time();
+	//		$data['cron_next_run_time'] = time() + $data['cron_interval'];
+    //        PageCarton_Cron_Table::getInstance()->update( $data, array( 'table_id' => $data['table_id'] ) );
             return $html;
             // end of widget process
           
