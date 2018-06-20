@@ -25,7 +25,7 @@ class PageCarton_Cron_Table extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.1';  
+    protected $_tableVersion = '0.3';  
 
     /**
      * Table data types and declaration
@@ -37,8 +37,6 @@ class PageCarton_Cron_Table extends PageCarton_Table
   'class_name' => 'INPUTTEXT',
   'cron_parameters' => 'JSON',
   'cron_interval' => 'INT',
-  'cron_next_run_time' => 'INT',
-  'cron_run_time_history' => 'JSON',
 );
 
 
