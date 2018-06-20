@@ -91,10 +91,12 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
         switch( @$_REQUEST['file_type'] )
         {
             case 'settings':
+                Ayoola_Object_Widget::getInstance()->insert( array( 'class_name' => $values['class_name'] ) );
                 $sampleFile = 'PageCarton_Settings_Sample';
                 $nextStep = '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/' . $values['class_name'] . '">View Settings</a>';
             break;
             case 'table':
+                Ayoola_Object_Dbase::getInstance()->insert( array( 'class_name' => $values['class_name'] ) );
                 $sampleFile = 'PageCarton_Table_Sample';
            //     var_export( $values['fields'] );
                 if( count( $values['datatypes'] ) != count( $values['fields'] ) )
@@ -120,6 +122,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
                 $nextStep = '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/' . $values['class_name'] . '_List">Manage Table Data</a>';
             break;
             default:
+                Ayoola_Object_Widget::getInstance()->insert( array( 'class_name' => $values['class_name'] ) );
                 $sampleFile = 'PageCarton_Widget_Sample_Blank';
                 $search['{widget_title}'] = $values['widget_title'];
                 $nextStep = '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/' . $values['class_name'] . '">View Widgets</a>';

@@ -51,6 +51,7 @@ class Ayoola_Page_Menu_Edit_List extends Ayoola_Page_Menu_Edit_Abstract
 		catch( Ayoola_Page_Menu_Edit_Exception $e ){ null; }    
 		$list = new Ayoola_Paginator( $data );
 		$list->listTitle = isset( $menuInfo['menu_label'] ) ? ( 'Menu options for "' . $menuInfo['menu_label'] . '"' ) : 'Menu Options';
+		$list->pageName = $this->getObjectName();
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'There are no options on this menu' );
 		$identifier = http_build_query( $this->getIdentifier() );
