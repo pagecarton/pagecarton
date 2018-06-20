@@ -154,7 +154,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 			//	add app id to record id so as to remove duplicate IDs
 			$appId = new Ayoola_Api_Api();
 			$appId = $appId->selectOne();
-			$appId = strval( intval( $appId ? $appId['application_id'] : '0' ) );
+			$appId = strval( intval( $appId ? $appId['application_id'] : time() ) );
 		//	$recordRowId = $appId . $recordRowId
 			$whereValue = '' . $appId . '-' . $i . '-' . $recordRowId;
 			
