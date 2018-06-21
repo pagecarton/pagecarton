@@ -868,7 +868,7 @@ ayoola.image =
 					this.src = ayoola.pcPathPrefix + '/open-iconic/png/document-8x.png';
 			//		this.src = ayoola.pcPathPrefix + '/open-iconic/' + ayoola.image.files[fileId].file.type.split( '/' ).shift() + '.png';
 				}
-				var xx = ayoola.pcPathPrefix + '/tools/classplayer/get/name/Application_IconViewer/?url=' + a.response.file_info['url'];
+				var xx = ayoola.pcPathPrefix + '/tools/classplayer/get/name/Application_IconViewer/?url=' + a.response.file_info['url'] + '&crop=1';
 				
 				if( ayoola.image.files[fileId].file.type.match( 'image.*' ) ) 
 				{   

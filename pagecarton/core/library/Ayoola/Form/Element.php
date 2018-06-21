@@ -498,7 +498,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				@$height = $height ? : $element['data-pc-upload-image-height'];
 				$docSettings = Ayoola_Doc_Settings::getSettings( 'Documents' );
 			//	var_export( $docSettings );
-				$defaultPix = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( ( $element['data-document_type'] == 'image' ) ? '/img/placeholder-image.jpg' : '/open-iconic/png/document-8x.png' );
+				$defaultPix = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( ( $element['data-document_type'] == 'image' ) ? '/img/placeholder-image.jpg' : '/open-iconic/png/document-8x.png' ) . '&crop=1';
 				$valuesForPreview = (array) $element['value'];
 				$html .= '<div></div>';  
 			//	var_export( $valuesForPreview );
@@ -506,7 +506,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				do
 				{
 					@$each = array_shift( $valuesForPreview );
-					$valuePreview = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . @$each;
+					$valuePreview = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . @$each . '&crop=1';
 
 			//		var_export( $element['value'] );
 					
