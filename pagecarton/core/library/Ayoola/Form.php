@@ -1419,7 +1419,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		//	$form .= '<ul>';
 			foreach( array_unique( $this->_badnews ) as $message ) 
 			{
-				$form .= "<div class='badnews'>$message</div>\n";
+				$form .= "<div class='badnews'>" . htmlspecialchars( $message ) . "</div>\n";
 			}
 	//		$form .= '</ul>';
 		}
