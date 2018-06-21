@@ -1027,42 +1027,9 @@ class Ayoola_Application
 							$nameForModule = array_shift( $a );
 						}
 				//		var_export( $nameForModule ); 
-						if( $nameForModule )  
-						{
-/* 							$filename = Application_Profile_Abstract::getProfilePath( $nameForModule );
-							//	getAccessInformation
-							
-							$userInfo = @include $filename;
-							if( is_array( $userInfo ) )
-							{
-							//	var_export( $data );
-								if( $userInfo['display_picture_base64'] )
-								{
-								//	if( @$userInfo['document_url_base64'] )
-									{ 
-										$userInfo['display_picture'] = '/tools/classplayer/get/object_name/Application_Profile_PhotoViewer/profile_url/' . @$userInfo['profile_url'] . '/time/' . filemtime( Application_Profile_Abstract::getProfilePath( @$userInfo['profile_url'] ) );
-									}
-								//	$userInfo['display_picture'] = $userInfo['display_picture_base64'];
-								}
-								Ayoola_Page::$title = $userInfo['display_name'];
-								Ayoola_Page::$description = $userInfo['profile_description'];
-								Ayoola_Page::$thumbnail = $userInfo['display_picture'];
-								self::$GLOBAL += $userInfo; // store this in the global var 
-								self::$_runtimeSetting['real_url'] = rtrim( '/profile/' . implode( '/', $a ), '/' );
-								self::$mode = 'profile_url';
-								if( self::view( self::$_runtimeSetting['real_url'] ) )  
-								{
-									break;
-								}
-								
-							}
- */						}
+
 						
 						$userInfo = $nameForModule ? Application_Profile_Abstract::getProfileInfo( $nameForModule ) : null;
-//						$userInfo = $nameForModule ? Ayoola_Access::getAccessInformation( $nameForModule, array( 'set_canonical_url' => true ) ) : null;
-		//		var_export( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
-			//	exit();
-				//		var_export( $userInfo ); 
 						
 						//	Hide superusers
 						if( $userInfo && $userInfo['access_level'] != 99 )
@@ -1073,8 +1040,7 @@ class Ayoola_Application
 							Ayoola_Page::$title = $userInfo['display_name'];
 							Ayoola_Page::$description = $userInfo['profile_description'];
 							Ayoola_Page::$thumbnail = $userInfo['display_picture'];
-					//		$_GET = array_merge( $_GET, array( 'username' => $nameForModule ) ); // Combines our generated params with the original 
-					//		$_REQUEST = array_merge( $_REQUEST, array( 'username' => $nameForModule ) ); // Combines our generated params with the original 
+
 							self::$GLOBAL += $userInfo; // store this in the global var 
 							self::$_runtimeSetting['real_url'] = rtrim( '/profile/' . implode( '/', $a ), '/' );
 						//	var_export( self::$_runtimeSetting['real_url'] );
