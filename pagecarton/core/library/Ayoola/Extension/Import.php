@@ -69,13 +69,19 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				$filename = Ayoola_Doc_Browser::getDocumentsDirectory() . DS . $values['plugin_url'];
 			//	var_export( $filename );
 			}
+			elseif( $this->getParameter( 'path' ) )
+			{ 
+				$filename = $this->getParameter( 'path' );
+			}
+		//	var_export( $values );
+		//	var_export( $filename );
 
 			if( file_exists( $filename ) )
 			{ 
 				$export = new Ayoola_Phar_Data( $filename );
 				
 				$extensionInfo = json_decode( file_get_contents( $export['extension_information'] ), true );
-	//		var_export( $extensionInfo );
+		//	var_export( $extensionInfo );
 				if( empty( $extensionInfo['extension_name'] ) )
 				{
 					return false;
@@ -120,8 +126,8 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				unset( $export );
 				unlink( $filename );
 				
-				$this->setViewContent( '<p class="goodnews">Plugin imported successfully. New plugins are deactivated by default when they are imported.</p>', true );
-				$this->setViewContent( '<a class="boxednews pc-notify-info" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?extension_name=' . $extensionInfo['extension_name'] . '">Turn on!</a>' );
+				$this->setViewContent( '<p class="goodnews">Plugin imported successfully. New plugins are deactivated by default when they are imported. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?extension_name=' . $extensionInfo['extension_name'] . '">Turn on!</a></p>', true );
+			//	$this->setViewContent( '' );
 				
 				
 				//	Clean up temp dir
@@ -137,9 +143,9 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 		catch( Exception $e )
 		{ 
 		//	var_export( $e->getTraceAsString());
-		//	$this->getForm()->setBadnews( $e->getMessage() );
-		//	$this->setViewContent( $this->getForm()->view(), true );
-		//	return false; 
+			$this->getForm()->setBadnews( $e->getMessage() );
+			$this->setViewContent( $this->getForm()->view(), true );
+			return false; 
 		}
     } 
 

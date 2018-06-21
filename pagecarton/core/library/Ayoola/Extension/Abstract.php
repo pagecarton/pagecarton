@@ -130,7 +130,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			$fieldset->addElement( array( 'name' => 'modules', 'required' => 'required', 'label' => 'Plugin Modules', 'type' => 'SelectMultiple', 'value' => @$values['modules'] ), $files );
 			if( $files ) 
 			{
-				$fieldset->addRequirement( 'modules', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the modules you want to include in the Plugin' )  ) );
+			//	$fieldset->addRequirement( 'modules', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the modules you want to include in the Plugin' )  ) );
 			}
 			$fieldset->addElement( array( 'name' => 'settings_class', 'label' => 'Settings Module', 'type' => 'Select', 'value' => @$values['settings_class'] ), array( '' => 'No Settings' ) + $classes );
  	
@@ -175,7 +175,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			if( $files ) 
 			{
 				$fieldset->addElement( array( 'name' => 'databases', 'required' => 'required', 'label' => 'Database Table Data', 'type' => 'SelectMultiple', 'value' => @$values['databases'] ), $files );
-				$fieldset->addRequirement( 'databases', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the database tables you want to include in the Plugin' )  ) );
+			//	$fieldset->addRequirement( 'databases', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the database tables you want to include in the Plugin' )  ) );
 			}
  	
 		}
@@ -211,7 +211,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 	//		$fieldset->addElement( array( 'name' => 'upload_document', 'label' => ' ', 'type' => 'document', 'value' => @$values['upload_document'] ) );
 			if( $files ) 
 			{
-				$fieldset->addRequirement( 'documents', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select documents you want to include in the Plugin' )  ) );
+			//	$fieldset->addRequirement( 'documents', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select documents you want to include in the Plugin' )  ) );
 			}
  	
 		}

@@ -63,7 +63,7 @@ class Ayoola_Extension_Import_List extends Ayoola_Extension_Import_Abstract
 		$list->setListOptions( 
 								array( 
 										'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Creator/\', \'' . __CLASS__ . '\' );" title="Import a new plugins">Upload New</a>',
-						//				'My Plugins' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_List/\' );" title="Import a new extension">My Plugins</a>',
+										'Browse' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Repository\', \'' . $this->getObjectName() . '\' );" title="">Browse More Plugins</a>',
 									) 
 							);
 		$list->setNoRecordMessage( 'No plugins installed yet.' );
