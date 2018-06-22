@@ -63,7 +63,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * @param 
      * @return 
      */
-    public function addDomainToAbsoluteLinks( $content )
+    public static function addDomainToAbsoluteLinks( $content )
     {
 		$rootUrl = Ayoola_Page::getRootUrl();
 		$search = array( '"/', "'/", "url(/", $rootUrl . '//' );
