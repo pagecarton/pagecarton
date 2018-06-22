@@ -75,7 +75,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      * 
      * @var array
      */
-	protected $_identifierKeys = array( 'article_name' );
+	protected $_identifierKeys = array( 'article_url' );
 	
     /**
      * Error messages to show in List of Posts
@@ -430,6 +430,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					//	Check file before it is included.
 				// Get the shell output from the syntax check command
 					if( $data2 = json_decode( file_get_contents( $filename ), true ) )
+
 					{
 						$data += $data2;
 					}
@@ -451,7 +452,17 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( ! $data = $this->getParameter( 'data' ) )
 		{
 			$url = Ayoola_Application::getRequestedUri();
-			$url = @$_GET['article_url'] ? : $url;
+		//	var_export( $url );
+			try
+			{
+				$articleUrl = $this->getIdentifier();
+			}
+			catch( Exception $e )
+			{
+
+			}
+		//	var_export( $articleUrl );
+			$url = $articleUrl[$this->getIdColumn()] ? : ( @$_GET['article_url'] ? : $url );
 			$url = $this->getParameter( 'article_url' ) ? : $url;
 		//	self::v( $url ); 
 			$filename = self::getFolder() . $url;
@@ -1900,12 +1911,21 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'Select', 'value' => @$values['auth_level'] ? : 0 ), $options );
 		$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $options ) ) );
 
-		$profiles = Application_Profile_Abstract::getMyProfiles();
-		if( ! empty( $values['profile_url'] ) && ! in_array( $values['profile_url'], $profiles ) )
+		if( ! self::hasPriviledge( 98 ) )
 		{
-			$profiles[] = $values['profile_url'];
+			$profiles = Application_Profile_Abstract::getMyProfiles();
+			if( ! empty( $values['profile_url'] ) && ! in_array( $values['profile_url'], $profiles ) )
+			{
+				$profiles[] = $values['profile_url'];
+			}
+			$profiles = array_combine( $profiles, $profiles );
 		}
-		$profiles = array_combine( $profiles, $profiles );
+		else
+		{
+			$profiles = Application_Profile_Table::getInstance()->select();
+			$filter = new Ayoola_Filter_SelectListArray( 'profile_url', 'profile_url' );
+			$profiles = $filter->filter( $profiles );
+		}
 		$fieldset->addElement( array( 'name' => 'profile_url', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : Application_Profile_Abstract::getMyDefaultProfile() ), $profiles );
 		$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
 

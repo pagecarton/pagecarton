@@ -43,6 +43,20 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 	protected static $_profileTable;
 	
     /**
+     * 
+     *
+     * @var string
+     */
+	protected $_idColumn = 'profile_url';
+	
+    /**
+     * 
+     *
+     * @var string
+     */
+	protected $_tableClass = 'Application_Profile_Table';
+	
+    /**
      * Access level for player
      *
      * @var boolean
@@ -176,11 +190,11 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		$values['profile_url'] = strtolower( $values['profile_url'] );
 		if( self::getProfileInfo( $values['profile_url'] ) )
 		{
-			return self::getProfileTable()->update( $values, array( 'profile_url' => strtolower( $values['profile_url'] ) ) );
+			return Application_Profile_Table::getInstance()->update( $values, array( 'profile_url' => strtolower( $values['profile_url'] ) ) );
 		}
 		else
 		{
-			return self::getProfileTable()->insert( $values );
+			return Application_Profile_Table::getInstance()->insert( $values );
 		}
 	}
 
@@ -192,7 +206,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
     {
 		if( ! self::$_profileTable )
 		{
-			self::$_profileTable = new Application_Profile_Table();
+			self::$_profileTable = Application_Profile_Table::getInstance();
 		}
 		return self::$_profileTable;
 	}
@@ -204,7 +218,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 	public static function getProfileInfo( $profileUrL )
     {
 		$profileUrL = strtolower( $profileUrL );
-		if( $profileData = self::getProfileTable()->selectOne( null, array( 'profile_url' => $profileUrL ) ) )
+		if( $profileData = Application_Profile_Table::getInstance()->selectOne( null, array( 'profile_url' => $profileUrL ) ) )
 		{
 			$profileData = $profileData['profile_data'];
 		}
@@ -225,7 +239,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			break;
 		}
 		//	var_export( array( 'profile_url' => $profileUrL ) );
-		//	var_export( self::getProfileTable()->select() );
+		//	var_export( Application_Profile_Table::getInstance()->select() );
 		
 		if( ! $profileData )
 		{
@@ -244,7 +258,16 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		// Comes from a file
 		if( ! $data = $this->getParameter( 'data' ) )
 		{
-			$url = @$_GET['profile_url'] ? : Ayoola_Application::$GLOBAL['profile_url'];  
+			try
+			{
+				$profileUrl = $this->getIdentifier();
+			}
+			catch( Exception $e )
+			{
+
+			}
+		//	var_export( $profileUrl );
+			$url = $profileUrl[$this->getIdColumn()] ? : ( @$_GET['profile_url'] ? : Ayoola_Application::$GLOBAL['profile_url'] );  
 		//	var_export( $url );
 			$data = self::getProfileInfo( $url );
 		//	var_export( $data );
