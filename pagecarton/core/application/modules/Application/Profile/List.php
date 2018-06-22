@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageCarton Content Management System
  *
@@ -34,8 +35,6 @@ class Application_Profile_List extends Application_Profile_Abstract
      */
 	protected function init()
     {
-//		$this->setViewContent( '<h3>OPTIONS:</h3>' );		
-	//	$this->setViewContent( '<a title="Compose an profile..." rel="shadowbox;changeElementId=' . $this->getObjectName() . /'" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Creator/">+</a>' );
 		$this->setViewContent( $this->getList() );
     } 
 	
@@ -49,15 +48,15 @@ class Application_Profile_List extends Application_Profile_Abstract
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = 'List of Profiles on this Application';
-		$list->setData( $this->getDbData() );
-		$list->setListOptions( array( 'Creator' => '<a title="Compose an profile..." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Creator/">+</a>' ) );
+		$list->setData( Application_Profile_Table::getInstance()->select() );
+	//	$list->setListOptions( array( 'Creator' => '<a title="Create profile..." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Creator/">+</a>' ) );
 		$this->setIdColumn( 'profile_url' );
 		$list->setKey( 'profile_url' );
-		$list->setNoRecordMessage( 'You have not writen any profile yet. <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Creator/">Write!</a>' );
+		$list->setNoRecordMessage( 'You have not created any profile yet. <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Creator/">Create!</a>' );
 		$list->createList(  
 			array(
 				'profile_url' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
-				'o' => '<a title="Preview profile." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_View/?' . $this->getIdColumn() . '=%KEY%">0</a>', 
+				' ' => '<a title="View profile" target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/%KEY%">preview</a>', 
 				'X' => '<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
 			)
 		);
