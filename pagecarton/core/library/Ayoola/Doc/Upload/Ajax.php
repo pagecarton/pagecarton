@@ -341,7 +341,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			//		var_export( $maxHeight );  
 			//		var_export( $_REQUEST['crop'] );
 					
-					if( $width > $maxWith && $height > $maxHeight )
+					if( $width != $maxWith || $height != $maxHeight )
 					{
 		//			var_export( $_REQUEST['crop'] );  
 						if( ! empty( $_REQUEST['crop'] ) )
@@ -362,6 +362,9 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					$y2 = $centreY + ( $maxHeight / 2 ); 
 			 
 					// center cropping to 200x130
+					//	This does the actual cropping
+					//	 expand small pictures
+					//	not doing anything the top one isnt doing
 				//	$newImage = $manipulator->crop($x1, $y1, $x2, $y2);
 					// saving file to uploads folder
 				//	$manipulator->save( $path );
