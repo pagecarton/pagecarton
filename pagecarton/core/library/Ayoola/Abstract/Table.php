@@ -144,7 +144,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		if( ! is_null( $this->_tableClass ) ){ return $this->_tableClass; }
 	//	var_export( get_class( $this ) );
 		require_once 'Ayoola/Exception.php';
-		throw new Ayoola_Exception( 'CLASS FOR TABLE IS NOT SET' );
+		throw new Ayoola_Exception( 'CLASS FOR TABLE IS NOT SET FOR ' . get_class( $this )  );
     } 
 	
     /**
@@ -509,11 +509,19 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     {	
 		if( null === $values ){ $values = $_REQUEST; }
 	//	$this->_identifier = is_array( $this->_identifier ) ? $this->_identifier : array();
+		if( empty( $this->_identifierKeys ) && ! empty( $this->_idColumn ) )
+		{
+			$this->_identifierKeys = array( $this->_idColumn );
+		} 
+	//	var_export( $this->_identifierKeys );
+		
 		foreach( $this->_identifierKeys as $value )
 		{
 //	var_export( $value );
 			if( ! array_key_exists( $value, $values ) )
 			{ 
+	//			var_export( $value );
+	//			var_export( $values );
 				if( array_key_exists( Ayoola_Form::hashElementName( $value ), $values ) )
 				{
 					$values[$value] = $values[Ayoola_Form::hashElementName( $value )];
