@@ -1244,7 +1244,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						g = true;
 					//	return false;
 					}
-					var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?pc_show_error=1&rebuild_widget=1&class_name=\' + d + f, data: b.content, container: c, replaceContent: g } );
+					var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?rebuild_widget=1&class_name=\' + d + f, data: b.content, container: c, replaceContent: g } );
 					a.setAttribute( "data-pc-object-refreshing", "true" );
 					var v = function()
 					{
@@ -1650,7 +1650,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			var uniqueNameForAjax = "' . __CLASS__ . rand( 0, 500 ) . '";
 
 			//	debug
-			url = url + "&pc_show_error=1";
+			url = url + "";
 
 			ayoola.xmlHttp.fetchLink( url, uniqueNameForAjax, postContent );
 			
