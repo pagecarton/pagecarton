@@ -427,7 +427,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 //		var_export( $mailInfo );
 		if( empty( $mailInfo['subject'] ) ){ $mailInfo['subject'] = 'Account Notice'; }
 		$header = 'From: ' . $mailInfo['from'] . "\r\n";
-	 	$header .= "Return-Path: " . @$mailInfo['return-path'] ? : $mailInfo['from'] . "\r\n";
+	// 	$header .= "Return-Path: " . @$mailInfo['return-path'] ? : $mailInfo['from'] . "\r\n";
 
 		if( ! empty( $mailInfo['bcc'] ) )
 		{ 
