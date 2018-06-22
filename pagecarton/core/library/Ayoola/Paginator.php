@@ -453,7 +453,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				$head = $filter->filter( $field );
 				if( trim( $head ) )
 				{
-					$html .='<th>' . $head . ' <a href="javascript:;" onClick="window.location.search = window.location.search + \'&pc_sort_column=\' + \'' . @$value['field'] . '\';" > &#8645; </a></th>';
+					$html .='<th>' . $head . ' <a href="javascript:;" onClick="window.location.search = window.location.search + \'&pc_sort_column=\' + \'' . ( ! empty( $value['field'] ) ? $value['field'] : $field ) . '\';" > &#8645; </a></th>';
 				}
 				else
 				{
@@ -922,8 +922,6 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				{
 					continue;
 				}
-			//	$content .= ' <span class="boxednews centerednews selectednews"> ' . $option . ' </span> ';			
-		//		$content .= ' <button type="button"> ' . $option . ' </button> ';			
 				$content .= '' . $option . '';			
 			}
 		}
@@ -941,24 +939,16 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				$keys = array_combine( $keys, $keys );
 				$newForm = new Ayoola_Form( array( 'name' => 'xxx', 'class' => 'xxx', 'data-not-playable' => true, 'method' => 'GET', 'action' => '?' . http_build_query( $_GET ), ) );
 				$newForm->setParameter( array( 'no_fieldset' => true, 'no_required_fieldset' => true, ) );
-			//	$newForm->submitValue = 'Search';
-			//	$newForm->setParameter( array( 'no_form_element' => true ) );
 				$newFieldSet = new Ayoola_Form_Element;
 				$newFieldSet->container = 'span';
-		//		$newFieldSet->allowDuplication = true;
-			//	$newFieldSet->wrapper = 'white-content-theme-border';
-			//	$newFieldSet->wrapper = 'white-background';
 				$newFieldSet->hashElementName = false;
-			//	$newFieldSet->addLegend( 'Search records...' );
 				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_value',  'label' => '',  'multiple' => 'multiple', 'placeholder' => 'Search ' . $this->listTitle . '...', 'style' => 'width:100%; max-width:500px;text-transform:none;cursor:auto', 'class' => 'pc-element-like-btn', 'type' => 'InputText', 'value' => null ) );
 				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_name', 'onchange' => 'this.form.submit()', 'class' => 'pc-element-like-btn', 'style' => 'width:100%; max-width:300px;cursor:auto',  'label' => '  ',  'multiple' => 'multiple', 'type' => 'Select', 'value' => null ), array( 'Select Search Column...' ) + $keys );
-			//	$newFieldSet->addElement( array( 'name' => 'go', 'type' => 'Submit', 'value' => 'Go' ) );        
 				$newForm->addFieldset( $newFieldSet );  
 				
 				$newFieldSet = new Ayoola_Form_Element;
 				$newFieldSet->container = 'span';
 				$newFieldSet->hashElementName = false;
-			//	$newFieldSet->addElement( array( 'name' => 'search', 'type' => 'Submit', 'value' => 'Search' ) );
 				$newFieldSet->addElement( array( 'name' => 'search-object', 'type' => 'Hidden', 'value' => $this->pageName ) );
 				$newForm->addFieldset( $newFieldSet );     
 				$content .= $newForm->view();  
@@ -966,12 +956,6 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		}
 		$content .= '</div>';     		
 		$content .= $list;
-	//	if( ! @$this->hideOptions  )
-		{ 
-		//	$fieldset = new Ayoola_Form_Element();   
-			
-		}
-	//	$content .= $this->getList();
 		return $content;
     }
 	
