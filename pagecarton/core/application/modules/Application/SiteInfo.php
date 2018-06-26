@@ -74,7 +74,7 @@ class Application_SiteInfo extends PageCarton_Widget
 		    $settings = self::getInfo();
 
 //     var_export( Ayoola_Page::getCurrentsettings() );
-            $html = '<div class="pc_theme_parallax_background" style="background-image:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $settings['cover_photo'] ) . '\');">';
+            $html = '<div class="pc_theme_parallax_background" style="background-image:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $settings['cover_photo'] ) . '&crop=1&max_width=1500&max_height=600\');">';
             $html .= $this->getParameter( 'css_class_of_inner_content' ) ? '<div class="' . $this->getParameter( 'css_class_of_inner_content' ) . '">' : null;
             $html .= '<h1>' . $settings['site_headline'] . '</h1>';
             $html .= $settings['site_description'] ? '<br><br><p>' . $settings['site_description'] . '</p>' : null;

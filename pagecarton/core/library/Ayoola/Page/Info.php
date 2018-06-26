@@ -98,7 +98,7 @@ class Ayoola_Page_Info extends PageCarton_Widget
             }
 
 //     var_export( Ayoola_Page::getCurrentPageInfo() );
-            $html = '<div class="pc_theme_parallax_background" style="background-image:     linear-gradient( rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)    ), url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $pageInfo['cover_photo'] ? : $settings['cover_photo'] ) . '\');">';
+            $html = '<div class="pc_theme_parallax_background" style="background-image:     linear-gradient( rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)    ), url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $pageInfo['cover_photo'] ? : $settings['cover_photo'] ) . '&crop=1&max_width=1500&max_height=600\');">'; 
             $html .= $this->getParameter( 'css_class_of_inner_content' ) ? '<div class="' . $this->getParameter( 'css_class_of_inner_content' ) . '">' : null;
             $html .= '<h1>' . $pageInfo['title'] . '</h1>';
             $html .= $pageInfo['description'] ? '<br><br><p>' . $pageInfo['description'] . '</p>' : null;
