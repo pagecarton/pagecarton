@@ -1651,7 +1651,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 			//	debug
 			url = url + "";
-
 			ayoola.xmlHttp.fetchLink( url, uniqueNameForAjax, postContent );
 			
 			//	Set a splash screen to indicate that we are loading.
