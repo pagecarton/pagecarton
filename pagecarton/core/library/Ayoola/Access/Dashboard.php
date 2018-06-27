@@ -40,7 +40,7 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
      *
      * @var boolean
      */
-	protected static $_accessLevel = 1;
+	protected static $_accessLevel = array( 1, 98 );
 	
     /**
      * This method performs the class' essense.

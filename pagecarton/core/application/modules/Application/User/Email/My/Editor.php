@@ -34,6 +34,6 @@ class Application_User_Email_My_Editor extends Application_User_Email_Editor
      *
      * @var boolean
      */
-	protected static $_accessLevel = 1;
+	protected static $_accessLevel = array( 1, 98 );
 	// END OF CLASS
 }

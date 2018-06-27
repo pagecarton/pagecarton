@@ -33,7 +33,7 @@ class Ayoola_Access_AccessInformation_Creator extends Ayoola_Access_AccessInform
      *
      * @var boolean
      */  
-	protected static $_accessLevel = 1;      
+	protected static $_accessLevel = array( 1, 98 );      
 	
     /**
      * The method does the whole Class Process

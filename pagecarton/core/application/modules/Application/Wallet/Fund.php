@@ -33,7 +33,7 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
      *
      * @var boolean
      */
-	protected static $_accessLevel = 1;
+	protected static $_accessLevel = array( 1, 98 );
 
     /**
      * The xml document

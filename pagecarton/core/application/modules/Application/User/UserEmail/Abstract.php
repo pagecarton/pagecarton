@@ -33,7 +33,7 @@ abstract class Application_User_UserEmail_Abstract extends Ayoola_Abstract_Table
      *
      * @var boolean
      */
-	protected static $_accessLevel = 1;
+	protected static $_accessLevel = array( 1, 98 );
 	
     /**
      * Whether class is playable or not

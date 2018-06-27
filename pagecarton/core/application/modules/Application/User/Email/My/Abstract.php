@@ -33,7 +33,7 @@ abstract class Application_User_Email_My_Abstract extends Application_User_Email
      *
      * @var boolean
      */
-	protected static $_accessLevel = 1;		
+	protected static $_accessLevel = array( 1, 98 );		
 	
     /**
      * This method secures the application from injection of user_id by a standard user.

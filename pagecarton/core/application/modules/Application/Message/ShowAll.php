@@ -47,7 +47,7 @@ class Application_Message_ShowAll extends Application_Message_Abstract
      *
      * @var boolean
      */
-	protected static $_accessLevel = 1; 
+	protected static $_accessLevel = array( 1, 98 );
 	
     /**
      * Sort the dbData

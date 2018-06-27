@@ -32,7 +32,7 @@ class Application_Article_Type_Quiz_Whitelist extends Application_Article_Type_Q
      *
      * @var boolean
      */
-	protected static $_accessLevel = 1;
+	protected static $_accessLevel = array( 1, 98 );
 	
     /**
      * The method does the whole Class Process
