@@ -118,23 +118,27 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 			//	var_export( $postListId );
 		//		self::v( $postListData->retrieve() );
 				$postListData = $postListData->retrieve();
-	//			var_export( $postListData );
+		//		self::v( $postListData );
 		//		if( ! empty( $postListData['single_post_pagination'] ) )
 				{
 					$presentArticle = $data['article_url'];
                //     do
                     {
                 //     var_export( $postList['single_post_pagination'] );
+						if( empty( $postListData[$presentArticle] ) )
+						{
+							$presentArticle = array_shift( array_keys( $postListData ) );
+						}
 						$postList = $postListData[$presentArticle];
                        	$postData = self::loadPostData( $postList );
-					//	$presentArticle = $postList['pc_next_post'];
+						$presentArticle = $postList['pc_next_post'];
 					//	var_export( $data['article_url'] );
 					//	var_export( $postListData );
 					//	var_export( $data );
 					//	var_export( $postList );
 					//	var_export( $postData );
                     }
-                //    while( ! $postData );
+         //           while( ! $postData );
 					if( ! empty( $postList['pc_next_post'] ) )
 					{
 						$nextPost = $postList['pc_next_post'];
