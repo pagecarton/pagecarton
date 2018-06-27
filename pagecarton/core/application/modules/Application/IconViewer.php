@@ -79,8 +79,11 @@ class Application_IconViewer extends PageCarton_Widget
                     case 'png':
                         //  The url is same
                         $url = $url ? : '/img/placeholder-image.jpg';
-                        $defaultWidth = 0;
-                        $defaultHeight = 0;
+                        if( empty( $_GET['crop'] ) )
+                        {
+                            $defaultWidth = 0;
+                            $defaultHeight = 0;
+                        }
                     break;
                     case 'ico':
                         //  The url is same
