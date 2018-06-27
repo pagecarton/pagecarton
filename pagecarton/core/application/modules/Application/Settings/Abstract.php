@@ -81,32 +81,8 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
     {
 		if( is_null( @self::$_settings[$settingsName] ) )
 		{
-		//	$settings = new Application_Settings_SettingsName();
-	//		$settingsNameInfo = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
-	//		var_export(  $key );
-		//	self::v(  $settingsName );
-	//		self::v(  $settingsNameInfo );   
-	//		var_export(  $settings->select() );
 			$settings = Application_Settings::getInstance();
-//			if( ! $settingsInfo = $settings->selectOne( null, array( 'settingsname_id' => $settingsNameInfo['settingsname_id'] ) ) )
-			{
-		//		$settingsInfo = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
-		//		var_export( $settingsNameInfo['settingsname_name'] );  
-		//		var_export( $settings->selectOne() );  
-			}
-	//		$settings = $settingsInfo + $settingsNameInfo;
-	//		var_export( $settingsInfo );  
-	//		var_export( $settingsNameInfo );    
-		//
-	//		self::v( $settings->select() );
-
-			//	for some reasons, this is returning empty for the first try
-	//		$settings = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ), array( 'disable_cache' => 1 ) );
 			$settings = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
-
-	//		self::v( $settings );
-
-//		self::v( array( 'settingsname_name' => $settingsName ) );  
 			if( ! isset( $settings['settings'] ) )
 			{ 
 				//	Not found in site settings. 
