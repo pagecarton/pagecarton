@@ -757,10 +757,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		$classes = array( $thisClass );
 	//	var_export( static::getParameterKeysFromTheseOtherClasses( $parameters ) );
-		if( is_array( static::getParameterKeysFromTheseOtherClasses( $parameters ) ) )
+		$parameterKeysClasses = static::getParameterKeysFromTheseOtherClasses( $parameters );
+		if( is_array( $parameterKeysClasses ) )
 		{
-			$classes = array_merge( $classes, static::getParameterKeysFromTheseOtherClasses( $parameters ) );
+			$classes = array_merge( $classes, $parameterKeysClasses );
 		}
+	//	var_export( $classes );
+		$classes = array_unique( $classes );
 	//	var_export( $classes );
 		$content = file_get_contents( __FILE__ ) ;
 		$filter = new Ayoola_Filter_ClassToFilename();
@@ -780,8 +783,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 		preg_match_all( "/getParameter\( '([a-z_-]*)' \)/", $content, $results );
 	//	var_export( $class );
+		$results[1] = array_unique( $results[1] );
 		sort( $results[1] );
 		static::$_parameterKeys[$thisObjectID] = $results[1];   
+		if( in_array( 'Application_Profile_View', $classes ) )
+		{
+			var_export( $results[1] );
+		}
+
 	//	var_export( $results[1] );
 	//	var_export( $content );
 	//	var_export( $classFile );
