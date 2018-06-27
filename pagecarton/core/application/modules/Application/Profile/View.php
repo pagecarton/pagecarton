@@ -75,11 +75,11 @@ class Application_Profile_View extends Application_Profile_Abstract
                         <div style="clear:both;"></div>
                     </div>
                 </div>';
-			}
+			}  
             $this->_parameter['content_to_clear_internal'] .= '
             <p></p>
             background-image: url(\'\');
-            ';
+            ';    
 			$this->_objectTemplateValues = array_merge( $data ? : array(), $this->_objectTemplateValues ? : array() );
 			$this->_objectTemplateValues['display_picture'] = $this->_objectTemplateValues['display_picture'] ?  Ayoola_Application::getUrlPrefix() . $this->_objectTemplateValues['display_picture'] : null;
 			$this->_objectTemplateValues['profile_banner'] = $this->_objectTemplateValues['profile_banner'] ? Ayoola_Application::getUrlPrefix() . $this->_objectTemplateValues['profile_banner'] : null;
