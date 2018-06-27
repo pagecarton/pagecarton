@@ -233,7 +233,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			$fieldset->addElement( array( 'name' => 'pages', 'required' => 'required', 'label' => 'Pages', 'type' => 'SelectMultiple', 'value' => @$values['pages'] ), $option );
 			if( $option )     
 			{
-				$fieldset->addRequirement( 'pages', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select pages you want to include in the Plugin' )  ) );
+			//	$fieldset->addRequirement( 'pages', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select pages you want to include in the Plugin' )  ) );
 			}
  	
 		}
