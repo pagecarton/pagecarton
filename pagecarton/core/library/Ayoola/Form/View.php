@@ -346,6 +346,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				$options['data-allow_base64'] = true;
 			}
 			$defaultValue = @$values[$elementName] ? : @$formInfo['element_default_value'][$i];
+		//	self::v( $formInfo['element_type'][$i] );
 			switch( $formInfo['element_type'][$i] )
 			{
 				case 'html': 
@@ -467,13 +468,14 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				case 'document': 
 					$type = 'Document'; 
 					$docSettings = Ayoola_Doc_Settings::getSettings( 'Documents' );
+					@$docSettings['allowed_uploaders'] = is_array( @$docSettings['allowed_uploaders'] ) ? $docSettings['allowed_uploaders'] : array();
 			//		var_export( $docSettings );
 					if( @$options['data-allow_base64'] )
 					{
 					//	$options['data-allow_base64'] = true;
 						
 					}
-					elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ) )
+					elseif( Ayoola_Abstract_Table::hasPriviledge( $docSettings['allowed_uploaders'] + array( 98 ) ) )
 					{ 
 				//		$requirement = array( 'IsFile' => array( 'base_directory' => Ayoola_Doc::getDocumentsDirectory() , 'allowed_extensions' => $this->getParameter( 'allowed_extensions' ) ? explode( ',', $this->getParameter( 'allowed_extensions' ) ) : null ) );
 					}
@@ -487,6 +489,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				//	$type = 'InputText'; 
 				break;
 			}
+	///		self::v( $type );
 	//		var_export( $type );
 			$elementInfo = array( 'name' => $elementName, 'label' => $formInfo['element_title'][$i], 'data-document_type' => $formInfo['element_type'][$i], 'placeholder' => $formInfo['element_placeholder'][$i], 'type' => $type, 'value' => $defaultValue );
 			if( $formInfo['element_importance'][$i] == 'required' )
