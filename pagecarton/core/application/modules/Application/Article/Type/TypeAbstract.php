@@ -134,6 +134,7 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
             $filter = new Ayoola_Filter_SelectListArray( 'form_name', 'form_title');
             $options = $filter->filter( $options );
             $fieldset->addElement( array( 'name' => 'supplementary_form', 'label' => 'Supplementary Creation form', 'type' => 'Select', 'value' => @$values['supplementary_form'] ), array( '' => 'Please select...' ) + $options ); 
+
 			$fieldset->addElement( array( 'name' => 'post_type_custom_fields', 'label' => 'Supplementary Custom Fields', 'title' => 'Custom Fields for Post Type', 'placeholder' => 'e.g. brand, size, color ', 'type' => 'InputText', 'value' => @$values['post_type_custom_fields'], ) ); 
 
 	//		$i++;
@@ -141,9 +142,36 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 		//	$fieldset->wrapper = 'white-background';
 			$fieldset->wrapper = 'white-content-theme-border';   
 		}
-	//	while( isset( $settings['post_types'][$i] ) );    
+	//	while( isset( $settings['post_types'][$i] ) ); 
 
-		$form->addFieldset( $fieldset );		
+		//	preset values
+		$i = 0;
+		//	Build a separate demo form for the previous group
+		$presetForm = new Ayoola_Form( array( 'name' => 'preset...' )  );
+		$presetForm->setParameter( array( 'no_fieldset' => true, 'no_form_element' => true ) );
+		$presetForm->wrapForm = false;
+		do
+		{
+				
+			$presetFieldset = new Ayoola_Form_Element; 
+			$presetFieldset->allowDuplication = true;
+			$presetFieldset->duplicationData = array( 'add' => '+ Add preset field', 'remove' => '- preset field', 'counter' => 'preset_counter', );
+			$presetFieldset->container = 'span';
+		//	$presetFieldset->wrapper = 'white-content-theme-border';
+		
+			$presetFieldset->addElement( array( 'name' => 'preset_keys', 'label' => '', 'placeholder' => 'key', 'style' => 'width:45%;', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['preset_keys'][$i], ) ); 
+			$presetFieldset->addElement( array( 'name' => 'preset_values', 'label' => '', 'placeholder' => 'value', 'style' => 'width:45%;', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['preset_values'][$i], ) ); 
+
+			$i++;
+			$presetForm->addFieldset( $presetFieldset );
+		}
+		while( isset( $values['preset_keys'][$i] ) );    
+		
+		//	add previous categories if available
+	//	$fieldset->addLegend( 'Create personal categories to use for posts ' );						  
+		$fieldset->addElement( array( 'name' => 'xx', 'type' => 'Html', 'value' => '', 'data-pc-element-whitelist-group' => 'preset_keys' ), array( 'html' => '<label style="display:block;">Preset Fields</label>' . $presetForm->view() . '', 'fields' => 'preset_keys,preset_values' ) );	
+
+		$form->addFieldset( $fieldset );   		
 		$this->setForm( $form );
     } 
 	// END OF CLASS
