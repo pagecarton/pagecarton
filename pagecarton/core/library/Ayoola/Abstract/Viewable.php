@@ -658,7 +658,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function v( $variable )
     {
-		if( self::hasPriviledge() )
+		if( self::hasPriviledge( 98 ) )
 		{ 
 			var_export( $variable );
 		}
