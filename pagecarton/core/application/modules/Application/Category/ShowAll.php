@@ -53,7 +53,7 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
      * The method does the whole Class Process
      * 
      */
-	public function setDbData( $data = null )
+	public function setDbData( array $data = null )
     {
 //		var_export( __CLASS__ );
 	//	$this->setViewContent( '', true );
