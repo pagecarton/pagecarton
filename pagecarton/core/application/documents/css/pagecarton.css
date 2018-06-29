@@ -213,16 +213,20 @@
 
 .pc-form2 label
 {
-    text-transform: uppercase;
-	display:block;
+    /*text-transform: uppercase;*/
+	display:inline-block;
 	margin: 1em 0 1em 0;
     color: #000;
+    font-weight: bold;
 
-}     
+}         
+
 .pc-form2 label label
 {
-    all: initial !important;
-}     
+    font-weight: normal;
+	margin: 0;
+
+}         
  
 /* CLASSES */
 /*@import "default/classes.css";  */

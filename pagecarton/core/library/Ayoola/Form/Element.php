@@ -131,11 +131,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 		}
 		//	Set Element ID and Label to default if undeclared
-        $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $element['name'] ) );	
+    //    $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $element['name'] ) );	
 			
 		$element['real_name'] = $element['name'];
-		@$element['title'] = $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) );
-		@$element['placeholder'] = $element['placeholder'] ? : $element['label'];
+		@$element['title'] = trim( $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) ) , ':' );
+		@$element['placeholder'] = ( $element['placeholder'] ? : $element['label'] ) ? : ucwords( str_replace( '_', ' ', $element['name'] ) );
 		$element['hashed_name'] = self::hashElementName( $element['name'] );
 		if( $this->hashElementName )
 		{
@@ -209,6 +209,14 @@ class Ayoola_Form_Element extends Ayoola_Form
 		if( ! empty( $_GET['pc_inspect_widget_form'] ) && stripos( $realName, 'submit-' ) === false && stripos( $realName, 'SUBMIT_DETECTOR' ) === false )
 		{
 			$markup .= ' <div style="font-size:smaller; padding-top:1em; padding-bottom:1em;"><br> The name attribute of the element above is "' . $realName . '"<br></div>';   
+		}
+		if( $this->placeholderInPlaceOfLabel || ! trim( $element['label'] ) )
+		{
+		
+		}
+		else
+		{
+			$markup = "<label style=\"{$element['label_style']}\" for=\"{$element['name']}\">{$element['label']}{$markup}</label>\n";
 		}
 		$this->setHtml( $markup );
 		if( $this->appendElement )
@@ -401,7 +409,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-			$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+	//		$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
 		if( is_array( $element['value'] ) )
 		{
@@ -448,7 +456,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-			$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+		//	$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
 		$link = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Doc_Browser/?field_name=' . $element['name'] . '&unique_id=' . $uniqueIDForElement;
 //		$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . $element['name'];
@@ -595,7 +603,7 @@ class Ayoola_Form_Element extends Ayoola_Form
     }
     public function addHoneyPot(array $element )
     {
-        @$html = "<div class='hidden'><label for='{$element['name']}'>{$element['label']}</label>\n";
+        @$html = "<div class='hidden'>\n";
 		@$html .= "<input type='text' id='{$element['id']}' name='{$element['name']}' value='{$element['value']}' /></div>";
 
 		 return $html;
@@ -618,7 +626,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-			$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+		//	$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
 		$html .= self::$_placeholders['badnews'];
 		@$html .= "<input type='password' placeholder='{$element['placeholder']}' id='{$element['id']}' name='{$element['name']}' />\n";
@@ -637,7 +645,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-			$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+		//	$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
 		$html .= self::$_placeholders['badnews'];
 		$value = is_scalar( $element['value'] ) ? $element['value'] : null;
@@ -649,7 +657,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 	public function addFile( array $element )
     {
     	$html = $this->useDivTagForElement ? "<div id='{$element['id']}_container'>\n" : null;
-        $html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+   //     $html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		$html .= self::$_placeholders['badnews'];
 		$html .= "<input id='{$element['id']}' name='{$element['name']}' type='file' />\n";
 		$html .= $this->useDivTagForElement ? "</div>\n" : null;
@@ -682,11 +690,12 @@ class Ayoola_Form_Element extends Ayoola_Form
     {
 		//	Setting the [] from the class level causes some trouble.
 		$element['name'] = trim( $element['name'], '[]' ) . '[]';
-       @$html = "<label style='{$element['label_style']}' for='{$element['name']}'>{$element['label']}\n";
-       $html .= "</label>\n";
+ //      @$html = "<label style='{$element['label_style']}' for='{$element['name']}'>{$element['label']}\n";
+ //      $html .= "</label>\n";
 		$html .= self::$_placeholders['badnews'];
 		$counter = 0;
 		//		var_export( $element['value'] );
+       	$html .= '<div style="display:inline-block;">';
 		foreach( $values as $value => $label )
 		{ 
 		//	var_export( $label );
@@ -705,8 +714,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 					$checked = "checked='true'";
 				}
 			}
-			@$html .= "<span style='display:inline-block;'><input type='checkbox' id='{$element['id']}$counter' value='{$value}' {$checked} " . self::getAttributesHtml( $element ) . " /> <label class='clearTransformation' style='{$element['label_style']}' for='{$element['id']}{$counter}'>{$label} </label></span>\n";  
+			@$html .= "<label style='{$element['label_style']}' for='{$element['id']}{$counter}'>
+							<input type='checkbox' id='{$element['id']}$counter' value='{$value}' {$checked} " . self::getAttributesHtml( $element ) . " > {$label} 
+						</label>\n";  
 		}
+       	$html .= '</div>';
 		unset( $values );
 		 
 		return $html;
@@ -730,11 +742,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 		elseif( ! $values )
 		{
 			$values = array( '' => '' );
-			$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+	//		$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
 		else
 		{
-			$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+		//	$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
 		$element['name'] = trim( $element['name'], '[]' ) . '[]';
 /* 		$html .= "
@@ -779,7 +791,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-			$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+	//		$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
 		$html .= self::$_placeholders['badnews'];
 		$counter = 0;
@@ -815,11 +827,12 @@ class Ayoola_Form_Element extends Ayoola_Form
 	//	self::v( $element );
 		//	debug making "/tools/classplayer/get/object_name/Ayoola_Page_Editor/?url=/" to display nonsense title
 	//	unset( $element['title'] );
-        $html = "<label for='{$element['name']}'>{$element['label']}\n";
-       $html .= "</label>\n";
+  //      $html = "<label for='{$element['name']}'>{$element['label']}\n";
+  //     $html .= "</label>\n";
 		$html .= self::$_placeholders['badnews'];
 		$i = 0;
 		unset( $element['label'] );
+       	$html .= '<div style="display:inline-block;">';
 		foreach( $values as $value => $label )
 		{ 
 			$label !== '' ? $label : $value;
@@ -835,8 +848,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 			{
 				$checked = 'checked="true"';   
 			}
-			@$html .= "<span style='display:inline-block;'><input type='radio' id='{$element['id']}{$i}' value='{$value}' {$checked}  " . self::getAttributesHtml( $element ) . " /><label class='clearTransformation' for='{$element['id']}{$i}'>{$label}</label></span>\n";
+			@$html .= "<label class='clearTransformation' for='{$element['id']}{$i}'>
+							<input type='radio' id='{$element['id']}{$i}' value='{$value}' {$checked}  " . self::getAttributesHtml( $element ) . " >{$label}
+						</label>";
 		}
+       	$html .= '</div>';
 		unset( $values );
 		$html .= "\n";
 		 
@@ -855,7 +871,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-			$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+	//		$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
       ///  $html = "<div id='{$element['id']}_container'><label for='{$element['name']}'>{$element['label']}</label>\n";
 		$html .= self::$_placeholders['badnews'];
@@ -914,7 +930,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-			$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+	//		$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
 		$html .= self::$_placeholders['badnews'];
         $html .= "<select " . self::getAttributesHtml( $element ) . "> \n";
