@@ -565,6 +565,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 		}
 		$this->_objectTemplateValues['total_no_of_posts'] = count( $values );
+		 
+		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
+		
+		//	default at 1800 so it can always cover the screen
+		$maxWith = $this->getParameter( 'cover_photo_width_for_list' ) ? : ( $this->getParameter( 'cover_photo_width' ) ? : ( @$articleSettings['cover_photo_width'] ? : 1500 ) );
+		$maxHeight = $this->getParameter( 'cover_photo_height_for_list' ) ? : ( $this->getParameter( 'cover_photo_height' ) ? : ( @$articleSettings['cover_photo_height'] ? : 600 ) ); 
+
 	//	var_export( $values );
 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) ) 
 		{ 
@@ -590,7 +597,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						//	'article_type' => $newArticleType, 
 							'always_allow_article' => $this->getParameter( 'article_types' ), 
 							'category_name' => $this->getParameter( 'category_name' ), 
-							'document_url' => '/img/placeholder-image.jpg', 
+							'document_url' => Ayoola_Application::getUrlPrefix() . '/widgets/Application_IconViewer?url=/img/placeholder-image.jpg&crop=1&max_width=' . $maxWith . '&max_height=' . $maxHeight . '&', 
 							'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
 							'publish' => true, 
 							'auth_level' => $articleSettings['allowed_writers'], 
@@ -620,14 +627,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	var_export( $i );
 	//	var_export( $j );
 		$done = array();
-		$template = null;
+		$template = null;  
 	//	self::v( $values );   
-		 
-		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-		
-		//	default at 1800 so it can always cover the screen
-		$maxWith = $this->getParameter( 'cover_photo_width_for_list' ) ? : ( $this->getParameter( 'cover_photo_width' ) ? : ( @$articleSettings['cover_photo_width'] ? : 1500 ) );
-		$maxHeight = $this->getParameter( 'cover_photo_height_for_list' ) ? : ( $this->getParameter( 'cover_photo_height' ) ? : ( @$articleSettings['cover_photo_height'] ? : 600 ) ); 
  		
 		//	Split to chunk\
 	//	$_REQUEST['list_page_number'] = 0;
