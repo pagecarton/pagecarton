@@ -253,7 +253,7 @@ class Ayoola_Application
 		}
 
 
-		$storage->storageNamespace = __CLASS__ . 'x' . $_SERVER['HTTP_HOST'] . $protocol . Ayoola_Application::getPathPrefix();
+		$storage->storageNamespace = __CLASS__ . 'x-' . $_SERVER['HTTP_HOST'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve(); 
 		if(  $data && ! $forceReset && ! @$_GET['reset_domain_information'] )
@@ -500,6 +500,7 @@ class Ayoola_Application
 				//	var_export( $subDomain );     
 				//	Application_Profile_Abstract::saveProfile( $information );
 					$data['domain_settings']['main_domain'] = $tempWhere['domain_name'];
+					$data['domain_settings']['domain_name'] = $domainName;					
 			//		$data['domain_settings'][APPLICATION_DIR] = Application_Profile_Abstract::getProfileDir( $userInfo['username'] );
 					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] . DS . AYOOLA_MODULE_FILES .  DS . 'profiles' . DS . strtolower( implode( DS, str_split( $userInfo['username'], 2 ) ) );    
 					$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
