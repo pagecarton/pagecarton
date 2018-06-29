@@ -186,6 +186,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 		$footnote = @$element["footnote"];
 //		$description = @$element["description"];
 		$markup = null;
+//		self::v( $element['real_name'] );
+//		self::v( $element['type'] );
 		if( $element['type'] )
 		{
 			$method = 'add' . @$element['type'];
@@ -205,7 +207,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 			unset( $element['multiple'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
 			$markup .= $this->$method( $element, $values );
 		}
-		$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;		
+		$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;	
+//		var_export( $method );	
 		if( ! empty( $_GET['pc_inspect_widget_form'] ) && stripos( $realName, 'submit-' ) === false && stripos( $realName, 'SUBMIT_DETECTOR' ) === false )
 		{
 			$markup .= ' <div style="font-size:smaller; padding-top:1em; padding-bottom:1em;"><br> The name attribute of the element above is "' . $realName . '"<br></div>';   
@@ -216,7 +219,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-			$markup = "<label style=\"{$element['label_style']}\" for=\"{$element['name']}\">{$element['label']}{$markup}</label>\n";
+			$markup = "<label style=\"{$element['label_style']}\" for=\"{$element['name']}\">{$element['label']}</label>{$markup}";
+		}
+		if( strtolower( $method ) == 'adddocument' )
+		{
+			$markup = "<div>{$markup}</div>";
 		}
 		$this->setHtml( $markup );
 		if( $this->appendElement )
@@ -445,11 +452,12 @@ class Ayoola_Form_Element extends Ayoola_Form
 	
     public function addDocument(array $element, $values = array() )
     {
+	//	var_export( $element );
 		$uniqueIDForElement = $element['name'] . '_' . self::$_elementCounter;
 	//	@$element['required'] = $element['required'] ? "required='{$element['required']}'" : null;
     	$html = null;
     //	$html = $this->useDivTagForElement ? "<div id='{$element['id']}_container'>\n" : null;
-    	$html .= "<span>";
+    	$html .= "<div>";
 		if( $this->placeholderInPlaceOfLabel || ! $element['label'] )
 		{
 			@$element['placeholder'] = $element['placeholder'] ? : $element['label'];
@@ -531,6 +539,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				}
 			//	if( ! Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] )  )
 			//	var_export( @$uniqueIDForElement );  
+ 				$html .= '<div style="">';
 				if( @$element['data-allow_base64']  )
 				{ 
 				//	if( @$element['data-allow_base64'] )
@@ -549,9 +558,9 @@ class Ayoola_Form_Element extends Ayoola_Form
 				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ? : 98 )  )
 				{
 					$html .= '
-					<span  title="Upload new file" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
-							<img  style="max-height:32px;" alt="Upload" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-top-8x.png" >
-					</span>
+					<a  title="Upload new file" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
+							Upload
+					</a>
 					'; 
 				}
 				@$docSettings['allowed_viewers'] = @$docSettings['allowed_viewers'] ? : array();
@@ -560,12 +569,13 @@ class Ayoola_Form_Element extends Ayoola_Form
  				if( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_viewers'] ? : 98 ) && ! @$element['data-allow_base64'] )
 				{ 
 					$html .= '
-					<span title="Browse Existing files on site" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
-						<img  style="max-height:32px;" alt="Browse" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/grid-three-up-8x.png" >
-					</span>
+					<a title="Browse Existing files on site" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
+						Browse
+					</a>
 					
 					'; 
 				}
+ 				$html .= '</div>';
  				$html .= '<div style="clear:both;"></div>';
 			break;
 		}
@@ -588,7 +598,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 			$html .= "<input type=\"hidden\" value=\"" . $each . "\" " . self::getAttributesHtml( $element ) . " />\n";
 		}
 	//	$html .= $this->useDivTagForElement ? "</div>\n" : null;
-    	$html .= "</span>";
+    	$html .= "</div>";
 
 		 return $html;
     }
