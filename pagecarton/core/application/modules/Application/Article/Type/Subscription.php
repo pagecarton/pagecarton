@@ -202,6 +202,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					$values['object_id'] = $data['article_url'];
 					$values['multiple'] = $values['quantity'];
 					$class->subscribe( $values );
+					$added = true;	
 
 		//			var_export( $values );
 		//			exit();
@@ -211,10 +212,15 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			while( false );
 			
 			$this->_objectData['confirmation'] = $confirmation;	
+			if( ! $added ) 
+			{
+				//	Don't redirect unless item added to cart
+				return false;
+			}
+
 
 			//	not supposed to show this but lets put it just in case the browser didnt redirect.  
 			$this->setViewContent( '<span name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_confirmation" style="">' . $confirmation . '</span>' );
-
 			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/cart' );
 			exit();
 			//	self::saveArticle( $data );
@@ -343,7 +349,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
  	//	Application_Javascript::addCode( $onSubmit );
 		
 		//	Add to cart
-        $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . $subscriptionData['article_url'], 'data-not-playable' => true, 'action' => '' . Ayoola_Application::getUrlPrefix() . '' . $subscriptionData['article_url'] ) ); 
+        $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . $subscriptionData['article_url'] . self::$_counter , 'data-not-playable' => true, 'action' => '' . Ayoola_Application::getUrlPrefix() . '' . $subscriptionData['article_url'] ) ); 
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->hashElementName = true;
 	//	$form->submitValue = $submitValue ;
@@ -433,7 +439,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			//		;
 				}
 			}
-			$optionsForSelect = array();
+	//		$optionsForSelect = array();
 	//		self::v( $subscriptionData['price_option_title'] );
 			foreach( $subscriptionData['price_option_title'] as $key => $each )
 			{
