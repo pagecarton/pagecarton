@@ -131,6 +131,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			$table = Application_Subscription_Checkout_CheckoutOption::getInstance();
 			$checkoutInfo = $table->selectOne( null, array( 'checkoutoption_name' => $values['checkoutoption_name'] ) );
 			
+		
 			switch( $checkoutInfo['checkout_type'] )
 			{
 				case 'http_post':
@@ -145,6 +146,11 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		else
 		{
 		//	$this->setViewContent( $api::viewInLine(), true );
+		}
+	//	var_export( $values['checkoutoption_name'] );
+		if( empty( $values['checkoutoption_name'] ) )
+		{
+			$api = $values['checkoutoption_name'] = 'Application_Subscription_Checkout_Default';
 		}
 		Application_Subscription_Checkout::getOrderNumber( $values['checkoutoption_name'], true );     
 //		$this->setViewContent( $api::viewInLine( $checkoutInfo ), true );
@@ -278,12 +284,14 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 	public function createForm()
     {
 		$form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
+		$formIncluded = array();
 		
 		$orderForm = Application_Settings_CompanyInfo::getSettings( 'Payments', 'order_form' );
 	//	var_export( $orderForm );
 		if( $orderForm )
 		{
 			$parameters = array( 'form_name' => $orderForm );
+			$formIncluded[] = $orderForm;
 			$orderFormClass = new Ayoola_Form_View( $parameters );
 			
 			foreach( $orderFormClass->getForm()->getFieldsets() as $each )
@@ -303,13 +311,25 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			$form->addFieldset( $fieldset );
 		}
 		$cart = self::getStorage()->retrieve();
-		if( ! $orderForm && $cart )
+		if( ! empty ( $cart['cart'] ) )
 		{ 
 			
 			//	Look for checkout requirements
 			$requirements = array();
 			foreach( $cart['cart'] as $name => $value )
 			{
+				if( ! empty( $value['checkout_form'] ) && ! in_array( $value['checkout_form'], $formIncluded ) )
+				{
+					$formIncluded[] = $value['checkout_form'];
+					$parameters = array( 'form_name' => $value['checkout_form'] );
+					$orderFormClass = new Ayoola_Form_View( $parameters );
+					foreach( $orderFormClass->getForm()->getFieldsets() as $each )
+					{
+						
+						$form->addFieldset( $each );
+					}
+					$form->submitValue = 'Continue checkout...';
+				}
  				$value['checkout_requirements'] = is_string( $value['checkout_requirements'] ) ? array_map( 'trim', explode( ',', $value['checkout_requirements'] ) ) : $value['checkout_requirements'];
 				$value['checkout_requirements'] = is_array( $value['checkout_requirements'] ) ? $value['checkout_requirements'] : array();
 				$requirements += @$value['checkout_requirements'];
