@@ -193,7 +193,7 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
      */
     public static function getCacheDirectory()
     {
-		return CACHE_DIR . DS . Ayoola_Application::getDomainSettings( 'domain_name' ) . DS . 'XMLDB' . Ayoola_Application::getPathPrefix();
+		return CACHE_DIR . DS . Ayoola_Application::getDomainSettings( 'domain_name' ) . 'XMLDB' . Ayoola_Application::getPathPrefix();
     }
 		
     /**
@@ -218,8 +218,9 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
 	//	require_once 'Ayoola/Filter/Name.php';
 	//	$filter = new Ayoola_Filter_Name();
 	//	$file = $filter->filter( $arguments );
-		$file = strtolower( implode( DS, str_split( $arguments, 2 ) ) );
-		$file = $this->getTableCacheDirectory( $this->getTableName() ) . DS . $file . $this->getTableName();
+		$file = strtolower( $arguments );
+//		$file = strtolower( implode( DS, str_split( $arguments, 2 ) ) );
+		$file = $this->getTableCacheDirectory( $this->getTableName() ) . DS . $file;
 		$this->_cacheFilename = $file;
     }
 		
