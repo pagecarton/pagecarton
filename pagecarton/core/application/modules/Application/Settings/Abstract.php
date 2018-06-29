@@ -85,6 +85,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			$settings = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
 			if( ! isset( $settings['settings'] ) )
 			{ 
+
 				//	Not found in site settings. 
 				//	Now lets look in the extension settings
 				$table = Ayoola_Extension_Import_Table::getInstance();
@@ -93,14 +94,37 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 				if( ! $extensionInfo = $table->selectOne( null,  array( 'extension_name' => $settingsName ) ) )
 				{
 					self::$_settings[$settingsName]  = false;
-					return false; 
+				//	return false; 
 				}
 				if( empty( $extensionInfo['settings'] ) )
 				{
-					self::$_settings[$settingsName]  = false;
-					return false; 
+
+				//	settings getting lost in the subdomains with username
+				//	workaround till we find lasting solution
+					$domainSettings = Ayoola_Application::getDomainSettings();
+					if( ! empty( $domainSettings['main_domain'] ) && $domainSettings['main_domain'] != $domainSettings['domain_name'] )
+					{
+				//		if( Ayoola_Application::getRunTimeSettings() )
+						{
+			//				self::v( Ayoola_Application::getDomainSettings() );
+						}
+						$settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ), array( 'disable_cache' => true ) );
+						if( ! empty( $settings['settings'] ) )
+						{
+							static::$_settings[$settingsName] = unserialize( $settings['settings'] );
+						//	self::v( static::$_settings );
+						}
+						else
+						{
+							static::$_settings[$settingsName] = false;
+						}
+					}
+				//	self::v( $settings );
 				}
-				static::$_settings[$settingsName] =  $extensionInfo['settings'];
+				else
+				{
+					static::$_settings[$settingsName] =  $extensionInfo['settings'];
+				}
 				
 			}
 			else
@@ -113,7 +137,8 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 		{
 			static::$_settings[$settingsName] = unserialize( static::$_settings[$settingsName] );  
 		}
-	//	self::v( self::$_settings );
+
+//		self::v( self::$_settings );
 	//	if( is_array( self::$_settings[$settingsName] ) && array_key_exists( $key, self::$_settings[$settingsName] ) )
 		if( ! is_null( $key ) )
 		{
