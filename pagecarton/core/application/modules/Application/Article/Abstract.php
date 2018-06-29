@@ -439,6 +439,16 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 	//	var_export( $jsonData );
 	//	var_export( $data );
+		$presetValues = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $data['article_type'] ) );
+		if( ! empty( $presetValues['preset_keys'] ) && ! empty( $presetValues['preset_values'] ) )
+		{
+			$presetValues = array_combine( $presetValues['preset_keys'], $presetValues['preset_values'] );
+			$data += $presetValues;
+		}
+	//	$presetValues = Application_Article_Type::getInstance()->select();
+	//	self::v( $data );
+//		self::v( $data );
+
 		return $data;
 	}
 	
