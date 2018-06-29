@@ -78,6 +78,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			//	Domain Reg
 			$values['subscription_name'] = $data['article_url'];
 			$values['subscription_label'] = $data['article_title'];
+			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
 			$values['price'] = $data['item_price'] + floatval( array_sum( $values['product_option'] ? : array() ) );
 			$values['product_option'] = $values['product_option'];
 			$values['cycle_name'] = 'each'; 
@@ -141,14 +142,14 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 						
 						$values['subscription_name'] = $data['article_url'] . 'price_option' . $each;
 						$values['subscription_label'] = ( $values['subscription_selections'] ? ( $values['subscription_selections'] . ' | ' ) : null ) . $data['price_option_title'][$key] . ' - ' . $data['article_title'];
-						$values['price'] = $pricing;
-						$values['cycle_name'] = 'each';
+						$values['price'] = str_replace( array( ',', ' ' ), '', $pricing );
+						$values['cycle_name'] = 'each';   
 						$values['cycle_label'] = '';
 						$values['price_id'] = $values['subscription_name'];
 						$values['subscription_description'] = $data['price_option_title'][$key] . ' - ' . $data['article_description'];
 						$values['url'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
 						@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
-						//	''
+						//
 						//	After we checkout this is where we want to come to
 						$values['classplayer_link'] = "javascript:;";
 						$values['object_id'] = $data['article_url'];
