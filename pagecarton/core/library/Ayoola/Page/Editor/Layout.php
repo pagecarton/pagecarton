@@ -983,7 +983,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	var_export( $page['url'] );
 			//	var_export( get_called_class() );
 		//		exit();  
-			
+			$dataToSave = json_encode( $values ? : $sectionalValues );
 			//	Get new relative paths
 			$rPaths = Ayoola_Page::getPagePaths( $page['url'] );
 			$rPaths['data-backup'] = self::getPageContentsBackupLocation( $page['url'] ) . DS . time();
@@ -1002,6 +1002,19 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			elseif( ! empty( $_REQUEST['pc_page_editor_layout_name'] ) )
 			{
 				$themeName = strtolower( $_REQUEST['pc_page_editor_layout_name'] );
+		//		var_export( $themeName );
+		//		var_export( self::getDefaultLayout() );
+				if( $themeName == self::getDefaultLayout() && empty( $page['layout_name'] ) )
+				{
+					foreach( $rPaths as $eachItem => $eachFile )
+					{
+						$rPaths[$eachItem] = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths[$eachItem];
+						@Ayoola_Doc::createDirectory( dirname( $rPaths[$eachItem] ) );
+					}
+					file_put_contents( $rPaths['include'], $content['include'] );
+					file_put_contents( $rPaths['template'], $content['template'] );				
+					file_put_contents( $rPaths['data_json'] , $dataToSave );
+				}
 				$rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 				$rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 				$rPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
@@ -1012,24 +1025,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			{
 				//	hardcode the localized  filename
 				$rPaths[$eachItem] = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths[$eachItem];
-		//	var_export( $rPaths[$eachItem] );
 				@Ayoola_Doc::createDirectory( dirname( $rPaths[$eachItem] ) );
 			}
-			
-			//	Let's store this for future reference.
-		//	$storagePath = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . PAGE_PATH . DS . 'data-backup' . $page['url'] . '.backup/' . time();
-		//	@Ayoola_Doc::createDirectory( dirname( $storagePath ) );
-			
-
 
 			file_put_contents( $rPaths['include'], $content['include'] );
 			file_put_contents( $rPaths['template'], $content['template'] );				
-		//	file_put_contents( $rPaths['data_php'] , '<?php return ' . var_export( $this->getValues(), true ) . ';' );
-		//	$sectionalValues
-	//		var_export( $rPaths );
-	//		var_export( $values );
-	//		var_export( $sectionalValues );
-	//		file_put_contents( $rPaths['data_json'] , json_encode( $this->getValues() ) );
 	
 			if( $previousData = @file_get_contents( $rPaths['data_json'] ) )  
 			{
@@ -1040,7 +1040,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 			//	save default values if no value is set so we can preload themes.
 		//	var_export();
-			file_put_contents( $rPaths['data_json'] , json_encode( $values ? : $sectionalValues ) );
+			file_put_contents( $rPaths['data_json'], $dataToSave );
 
 			//	back up current data and not previous one
 			if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  
