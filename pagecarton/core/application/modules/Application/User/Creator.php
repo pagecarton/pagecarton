@@ -247,7 +247,7 @@ class Application_User_Creator extends Application_User_Abstract
 
 
 		//	Auto log me in now without confirmation
-		if( $this->getParameter( 'signin' ) ) 
+		if( $this->getParameter( 'signin' ) || ! empty( $_GET['previous_url'] ) ) 
 		{
 	//		var_export( $values );  
 			if( ! $loginResponse = Ayoola_Access_Login::localLogin( $values ) )   
