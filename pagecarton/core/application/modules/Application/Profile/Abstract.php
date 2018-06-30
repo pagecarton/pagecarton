@@ -321,7 +321,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 					}
 				'
 			);
-			$fieldset->addElement( array( 'name' => 'profile_url', 'style' => 'max-width:50%;', 'label' => 'Handle', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'Enter your profile handle here...', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
+			$fieldset->addElement( array( 'name' => 'profile_url', 'style' => '', 'label' => 'Profile Handle', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'e.g. MyProfileUrl', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
 		//	$fieldset->addFilter( 'profile_url','Username' );
 			$fieldset->addRequirement( 'profile_url', array( 'NotEmpty' => array( 'badnews' => 'The profile URL cannot be left blank.', ), 'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^0-9a-zA-Z-_', ), 'WordCount' => array( 4,20 ), 'DuplicateUser' => array( 'Username', 'username', 'badnews' => 'Someone else has already chosen "%variable%"', ) ) );
 		//	$fieldset->addElement( array( 'name' => 'name', 'placeholder' => 'Give this page a name', 'type' => 'InputText', 'value' => @$values['name'] ) );
@@ -347,7 +347,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		{
 			$account = new Ayoola_Form_Element;
 		//	$account->id = __CLASS__ . 'level';
-			$account->addElement( array( 'name' => 'access_level', 'label' => 'Profile type', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), $options );  
+			$account->addElement( array( 'name' => 'access_level', 'label' => 'Profile Type', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), $options );  
 			$account->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
 			$account->addLegend( $legend );
 			unset( $authLevel );
@@ -407,7 +407,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		{
 			$access = new Ayoola_Access();
 			$userInfo = $access->getUserInfo();
-			$fieldset->addElement( array( 'name' => 'display_name', 'placeholder' => 'e.g. John Smith', 'type' => 'InputText', 'value' => @$values['display_name'] ? : trim( $userInfo['firstname'] . ' ' . $userInfo['lastname'] ) ) );
+			$fieldset->addElement( array( 'name' => 'display_name', 'placeholder' => 'Display Name e.g. John Smith', 'type' => 'InputText', 'value' => @$values['display_name'] ? : trim( $userInfo['firstname'] . ' ' . $userInfo['lastname'] ) ) );
 			$fieldset->addRequirement( 'display_name', array( 'NotEmpty' => array( 'badnews' => 'Please choose a display name', ), 'WordCount' => array( 2, 50 ) ) );
 			$fieldset->addElement( array( 'name' => 'profile_description', 'placeholder' => 'Enter your profile description here...', 'type' => 'TextArea', 'value' => @$values['profile_description'] ) );
 			$fieldset->addLegend( $legend );
