@@ -210,7 +210,8 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			$value['total'] = (float) floatval( $value['price'] ) * floatval( $value['multiple'] );
 			$totalPrice = (float) $value['total'] + $totalPrice;
 			$row = $this->_xml->createElement( 'tr' );
-			$link = $this->_xml->createElement( 'a', $value['subscription_label'] );
+	//		var_export( $value['subscription_label'] );
+			$link = $this->_xml->createElement( 'a', htmlspecialchars( $value['subscription_label'] ) );
 			$columnNode = $this->_xml->createElement( 'td' );
 			$text = $this->_xml->createTextNode( $value['subscription_label'] );
 			$columnNode->appendChild( $text );
@@ -258,7 +259,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		
 		//	surcharges
 		$paymentSettings = Application_Settings_Abstract::getSettings( 'Payments' );
-		$totalSurcharge = 0;
+		$totalSurcharge = 0.00;
 
 		if( ! empty( $paymentSettings['surcharge_title'] ) )
 		{
@@ -337,8 +338,8 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$this->_objectTemplateValues['total_price'] = $totalPrice;
 		$this->_objectTemplateValues['grand_total_price'] = $grandTotalPrice;
 		$this->_objectTemplateValues['empty_cart_url'] = $deleteUrl;
-		$this->_objectTemplateValues['total_discount'] = 0;
-		$this->_objectTemplateValues['delivery_price'] = 0;
+		$this->_objectTemplateValues['total_discount'] = 0.00;
+		$this->_objectTemplateValues['delivery_price'] = 0.00;
 
     } 
 	// END OF CLASS
