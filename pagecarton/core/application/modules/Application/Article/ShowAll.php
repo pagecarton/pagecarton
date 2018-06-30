@@ -206,7 +206,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//		$this->_parameter['markup_template'] = null; 
 		}
 		
-		$this->setViewContent( '<p class="pc-notify-info pc_no_post_to_show"> ' . $message . ' ' . self::getQuickLink() . '</p>', true );
+		$this->setViewContent( '<p style="clear: both;" class="pc-notify-info pc_no_post_to_show"> ' . $message . ' ' . self::getQuickLink() . '</p>', true );
 	//	$message ? $this->setViewContent( ' ' . $message . ' ', true ) : null;
 		
 		//	Check settings

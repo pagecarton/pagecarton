@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Saturday 30th of June 2018 11:00:51 AM	ayoola@ayoo.la $ 
+* @version $Id: account.php	Saturday 30th of June 2018 04:34:30 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -17,13 +17,14 @@
 							{
 								
 $_abfe4d78405111b0fb3f1897a066a533 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<div>
-<h1 class="pc-heading">My Account</h1>
-</div>
-',
-  'preserved_content' => '<div>
-<h1 class="pc-heading">My Account</h1>
-</div>
+  'editable' => '<br>
+
+<h1>Account Dashboard</h1>
+
+<br>',
+  'preserved_content' => '<h1>&nbsp;Account Dashboard</h1>
+
+<p>&nbsp;</p>
 ',
   'url_prefix' => '/x',
   'phrase_to_replace' => '',
@@ -46,16 +47,30 @@ $_abfe4d78405111b0fb3f1897a066a533 = null;
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_1d6aff9ac2ae180800c5bcd948f940a0 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<div><br></div><div><br></div>',
-  'preserved_content' => '',
+$_cb54a96507f5ce6fa4a027c5e36227c9 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div style="">Email: {{{email}}}</div>
+
+<div style="">Username: {{{username}}}</div>
+
+
+',
+  'preserved_content' => '<div style="">Email: {{{email}}}</div>
+
+<div style="">Username: {{{username}}}</div>
+
+<div style="">Password: ******</div>
+',
   'url_prefix' => '/x',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Ayoola_Access_Dashboard',
+  ),
   'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  'wrapper_name' => '',
+  'wrapper_name' => 'dark',
   '' => '',
 ) );
 
@@ -63,14 +78,14 @@ $_1d6aff9ac2ae180800c5bcd948f940a0 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_1d6aff9ac2ae180800c5bcd948f940a0 = null;
+$_cb54a96507f5ce6fa4a027c5e36227c9 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
 							{
 								
-$_d3c6c1015e105533db3b93e0ccc8140b = new Ayoola_Menu( array (
+$_2187ef0587b10f3624dd768499920d24 = new Ayoola_Menu( array (
   'option' => 'MyAccount',
   'template_name' => 'WhiteSidebarMenu',
   'advanced_parameter_value' => 
@@ -85,28 +100,7 @@ $_d3c6c1015e105533db3b93e0ccc8140b = new Ayoola_Menu( array (
 							else
 							{
 								
-$_d3c6c1015e105533db3b93e0ccc8140b = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_250d634cd4217dddff35b1c906fac53c = new Ayoola_Object_Embed( array (
-  'editable' => 'Application_Profile_ShowAll',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_250d634cd4217dddff35b1c906fac53c = null;
+$_2187ef0587b10f3624dd768499920d24 = null;
 
 							}
 							
@@ -131,7 +125,7 @@ $_ea35c1c2cdc5584d84cace9de47b1f1a = new Ayoola_Page_Editor_Text( array (
   array (
     0 => '',
   ),
-  'wrapper_name' => 'white-well',
+  'wrapper_name' => 'dark',
   '' => '',
 ) );
 
@@ -143,29 +137,41 @@ $_ea35c1c2cdc5584d84cace9de47b1f1a = null;
 
 							}
 							
-							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_147197d44fdcae73544ef6297ec5736b = new Application_Article_ShowAll( array (
-  'option' => '5',
-  'category_name' => '',
-  'article_types' => '',
-  'template_name' => 'PlainListofTitles',
+$_3d635a79040269634bf9aece4519b644 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<br>
+<div style="">
+<a href="{{{post_link}}}" style="text-transform:uppercase;">{{{article_title}}}</a>
+<br>
+{{{article_description}}}
+</div>
+<br>',
+  'preserved_content' => '',
+  'url_prefix' => '/x',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Article_ShowAll',
+  ),
+  'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '1',
     1 => '1',
+    2 => '2',
   ),
   'wrapper_name' => 'well',
   'add_a_new_post' => '1',
   'show_post_by_me' => '1',
+  'no_of_post_to_show' => '2',
 ) );
 
 							}
 							else
 							{
 								
-$_147197d44fdcae73544ef6297ec5736b = null;
+$_3d635a79040269634bf9aece4519b644 = null;
 
 							}
 							

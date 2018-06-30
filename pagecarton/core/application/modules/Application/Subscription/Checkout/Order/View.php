@@ -29,21 +29,32 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 {	
 	
     /**
+     * Access level for player
+     *
+     * @var boolean
+     */
+	protected static $_accessLevel = array( 1, 98 );
+	
+    /**
      * The method does the whole Class Process
      * 
      */
 	protected function init()
     {
+		if( ! self::hasPriviledge( 98 ) )
+		{
+			$this->_dbWhereClause['username'] = strtolower( Ayoola_Application::getUserInfo( 'username' ) );
+		}
 		try{ $this->setIdentifier(); }
 		catch( Application_Subscription_Checkout_Order_Exception $e ){ return false; }
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 	//	$this->createForm( 'Edit Order', 'Edit ' . $identifierData['order_id'], $identifierData );
 
 		#
-		$this->setViewContent( '<h2>Order no '  . $identifierData['order_id'] . '</h2>', true );
+		$this->setViewContent( '<h2>Order number '  . $identifierData['order_id'] . '</h2>', true );
 
 
-		$this->setViewContent( '<h3>Order Details</h3>' );
+		$this->setViewContent( '<h3>Details</h3>' );
 	//	var_export( $identifierData );
 //		var_export( $identifierData['order']['checkout_info'] );
 		$class = new Application_Subscription_Cart( array( 'cart' => $identifierData['order'] ) );
