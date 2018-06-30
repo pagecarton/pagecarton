@@ -70,8 +70,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		}
 			
 	//	self::v( $cart );
-		$table = Application_Subscription_Checkout_CheckoutOption::getInstance();
-		$data = $table->selectOne( null, array( 'checkoutoption_name' => $identifier['api'] ) );
+		$data = Application_Subscription_Checkout_CheckoutOption::getInstance()->selectOne( null, array( 'checkoutoption_name' => $identifier['api'] ) );
 
 		//	lets see if we can ask the gateway for status
 	//	var_export( $data );
@@ -140,11 +139,11 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 
 		$emailInfo = array(
 							'subject' => 'Order Notification',
-							'body' => '<html><body>' . $this->view() . '</body></html>',
+							'body' => '' . $this->view() . '',
 		
 		);
 		$emailInfo['to'] = implode( ',', array_unique( $emailAddress ) );
-		$emailInfo['from'] = '' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . ' <no-reply@' . Ayoola_Page::getDefaultDomain() . '>"';
+	//	$emailInfo['from'] = '' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . ' <no-reply@' . Ayoola_Page::getDefaultDomain() . '>"';
 		$emailInfo['html'] = true; 
 		if( $emailAddress )
 		{		
@@ -157,13 +156,12 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		$emailInfo['to'] = 	Ayoola_Application_Notification::getEmails();
 
 		$emailInfo['subject'] = 'Checkout Confirmation';
-		$emailInfo['body'] = '<html><body>Someone just confirmed their checkout. Here is the cart content: <br> 
+		$emailInfo['body'] = 'Someone just confirmed their checkout. Here is the cart content: <br> 
 		' . $this->view() . ' <br>  
 
 		ORDER INFORMATION
 		' . self::arrayToString( $orderInfo ) . ' <br>  
-		Subscription options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/subscription/<br>
-		</body></html>';
+		';
 		try
 		{
 		//	var_export( $emailInfo );

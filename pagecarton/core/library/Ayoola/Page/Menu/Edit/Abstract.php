@@ -40,7 +40,7 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
      * 
      * param string
      */
-	protected $_identifierKeys = array( 'option_id' );
+	protected $_identifierKeys = array( 'option_id', 'menu_id' );
 	
     /**
      * Class for Table

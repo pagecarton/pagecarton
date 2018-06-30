@@ -206,7 +206,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 
 			$mailInfo = array();
 			$mailInfo['subject'] = $data['form_title'];
-			$mailInfo['body'] = '<html><body>' . $data['form_success_message'] . '</body></html>';
+			$mailInfo['body'] = '' . $data['form_success_message'] . '';
 			$mailInfo['to'] = Ayoola_Form::getGlobalValue( 'email' ) ? : ( Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Application::getUserInfo( 'email' ) );
 			try
 			{

@@ -29,6 +29,13 @@ class Ayoola_Page_Menu_Edit_Delete extends Ayoola_Page_Menu_Edit_Abstract
 {
 	
     /**
+     * Identifier for the column to edit
+     * 
+     * param string
+     */
+	protected $_identifierKeys = array( 'option_id' );
+	
+    /**
      * The method does the whole Class Process
      * 
      */

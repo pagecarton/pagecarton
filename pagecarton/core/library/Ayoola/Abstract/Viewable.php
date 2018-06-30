@@ -422,12 +422,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( empty( $mailInfo['from'] ) )
 		{ 
 		//	$mailInfo['from'] = 'no-reply@' . Ayoola_Page::getDefaultDomain(); 
-			$mailInfo['from'] = '' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . ' <no-reply@' . Ayoola_Page::getDefaultDomain() . '>' . "\r\n";
+			$mailInfo['from'] = '"' . htmlspecialchars( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Application::getDomainName() ) . '" <no-reply@' . Ayoola_Application::getDomainName() . '>' . "";
 		}
-//		var_export( $mailInfo );
-		if( empty( $mailInfo['subject'] ) ){ $mailInfo['subject'] = 'Account Notice'; }
+
+//		var_export( htmlentities( $mailInfo['from'] ) );
+	//	return false;
+		if( empty( $mailInfo['subject'] ) )
+		{ 
+			$mailInfo['subject'] = 'E-mail Notification';  
+		}
 		$header = 'From: ' . $mailInfo['from'] . "\r\n";
-	// 	$header .= "Return-Path: " . @$mailInfo['return-path'] ? : $mailInfo['from'] . "\r\n";
+	 	$header .= "Return-Path: " . @$mailInfo['return-path'] ? : $mailInfo['from'] . "\r\n";
 
 		if( ! empty( $mailInfo['bcc'] ) )
 		{ 
@@ -436,15 +441,32 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		if( ! empty( $mailInfo['html'] ) || strip_tags( $mailInfo['body'] ) != $mailInfo['body'] )
 		{ 
+			if( stripos( $mailInfo['body'], '<body>' ) === false )
+			{
+				$mailInfo['body'] = '<body>' . $mailInfo['body'] . '</body>';
+			}
 			if( stripos( $mailInfo['body'], '<html>' ) === false )
 			{
-				$mailInfo['body'] = '<html>' . $mailInfo['body'] . '</html>';
+				$styleFile = Ayoola_Loader::checkFile( 'documents/css/pagecarton.css' );
+				$mailInfo['body'] = '
+										<html>
+											<head>
+												<style>
+													' . file_get_contents( $styleFile ) . '
+												</style>
+											</head>
+											' . $mailInfo['body'] . '
+										</html>';
 			}
 			$header .= "MIME-Version: 1.0\r\n";
 			$header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+            $mailInfo['body'] = Ayoola_Page_Editor_Text::addDomainToAbsoluteLinks( $mailInfo['body'] );
+	//		var_export( $styleFile );
+	//		var_export( htmlentities( $mailInfo['body'] ) );
+	//		return false;  
+			
 		}
 		$sent = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], $header );
-//		var_export( $mailInfo );
 	//	exit( var_export( $mailInfo ) );
 	//	if( ! $sent ){ throw new Ayoola_Abstract_Exception( 'Error encountered while sending e-mail' ); }
 		return true;

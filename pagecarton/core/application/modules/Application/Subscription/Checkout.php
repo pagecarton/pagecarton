@@ -103,16 +103,10 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		$mailInfo['subject'] = 'Checkout Attempted';
 		$mailInfo['html'] = true; 
 		$mailInfo['body'] = '   
-						<html>
-						<body>
 						Someone just attempted to checkout. Here is the cart content<br>
 						' . Application_Subscription_Cart::viewInLine() . '<br>
 						The information entered by the user is as follows:
-						' . self::arrayToString( $values ) . '<br>
-						Subscription options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/subscription/.<br>
-						</body></html>       
-		
-		
+						' . self::arrayToString( $values ) . '<br>			
 		';
 		try
 		{
@@ -217,6 +211,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			$storage->clear(); 
 			self::$_orderNumber = null;
 		}
+		$email = strtolower( Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Application::getUserInfo( 'email' ) );
 		if( is_null( self::$_orderNumber ) )
 		{
 			//	Store order number to avoid multiple table insert
@@ -236,9 +231,9 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 									'order' => $cart, 
 									'currency' => $cart['settings']['currency_abbreviation'], 
 									'order_api' => $orderApi, 
-									'username' => Ayoola_Application::getUserInfo( 'username' ), 
+									'username' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ), 
 									'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 
-									'email' => Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Application::getUserInfo( 'email' ), 
+									'email' => $email, 
 									'time' => time(), 
 									'total' => $cart['settings']['total'], 
 									'order_status' => self::$checkoutStages[1] ,
@@ -253,10 +248,20 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 				$orderInfo['order_api'] = $orderApi;
 				
 				$storage->store( $orderInfo );
+				if( $email )
+				{
+					$mailInfo['to'] = $email;
+					$mailInfo['subject'] = 'Your order no ' . $orderInfo['order_number'];
+					$mailInfo['body'] = '';
+				//	$mailInfo['body'] .= 'Here is the details for your order number ' . $orderInfo['order_number'] . '.';
+					$mailInfo['body'] .= Application_Subscription_Checkout_Order_View::viewInLine( array( 'order_id' => $orderInfo['order_number'] ) );
+					self::sendMail( $mailInfo );
+				}
+			//	var_export( $mailInfo );
 			}
 			self::$_orderNumber =  $orderInfo['order_number'];
 		}
-		
+	//	var_export( $mailInfo );
 		return self::$_orderNumber;
     } 
 	

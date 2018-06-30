@@ -40,16 +40,25 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 	//	$this->createForm( 'Edit Order', 'Edit ' . $identifierData['order_id'], $identifierData );
 
 		#
-		$this->setViewContent( '<h2>Details of Order #'  . $identifierData['order_id'] . '</h2>', true );
+		$this->setViewContent( '<h2>Order no '  . $identifierData['order_id'] . '</h2>', true );
 
-		$this->setViewContent( '<h3>Customer Info</h3>' );
-		$this->setViewContent( self::arrayToString( $identifierData['order']['checkout_info'] ) );
 
-		$this->setViewContent( '<h3>Shopping Cart</h3>' );
-//		var_export( $identifierData );
+		$this->setViewContent( '<h3>Order Details</h3>' );
+	//	var_export( $identifierData );
 //		var_export( $identifierData['order']['checkout_info'] );
 		$class = new Application_Subscription_Cart( array( 'cart' => $identifierData['order'] ) );
 		$this->setViewContent( $class->view() );
+		$data = Application_Subscription_Checkout_CheckoutOption::getInstance()->selectOne( null, array( 'checkoutoption_name' => $identifierData['order_api'] ) );
+		$this->setViewContent( '<h3>Payment Method</h3>' );
+		$this->setViewContent( '<div>'  . $data['checkoutoption_name'] . '<br> '  . $data['checkoutoption_logo'] . '</div>' );
+		$this->setViewContent( '<h3>Order  Status</h3>' );
+		$this->setViewContent( '<p>'  . $identifierData['order_status'] . '</p>' );
+		$this->setViewContent( '<h3>Customer Information</h3>' );
+		$this->setViewContent( self::arrayToString( $identifierData['order']['checkout_info'] ) );
+
+//		var_export( $data );
+
+
 //		if( $this->updateDb() ){ $this->setViewContent( 'Order edited successfully', true ); }
     } 
 	// END OF CLASS

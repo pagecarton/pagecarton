@@ -393,7 +393,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			if( ! $this->getParameter( 'no_username' ) )
 			{ 
 
-				$account->addElement( array( 'name' => 'username', 'placeholder' => 'Choose a username', 'type' => 'InputText', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'value' => @$values['username'] ) );
+				$account->addElement( array( 'name' => 'username', 'label' => 'Username', 'placeholder' => 'Choose a username', 'type' => 'InputText', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'value' => @$values['username'] ) );
 			//	var_export( in_array( 'user_subdomains', Ayoola_Application::getDomainSettings( 'domain_options' ) ) );
 		//		in_array( 'user_subdomains', Ayoola_Application::getDomainSettings( 'domain_options' ) )
 				if( @in_array( 'user_subdomains', Ayoola_Application::getDomainSettings( 'domain_options' ) ) )
@@ -449,7 +449,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			if( ! $this->getParameter( 'no_password' ) )
 			{ 
 
-				$account->addElement( array( 'name' => 'password', 'autocomplete' => 'new-password', 'placeholder' => 'Choose a password', 'type' => 'InputPassword' ) );
+				$account->addElement( array( 'name' => 'password', 'label' => 'Password', 'autocomplete' => 'new-password', 'placeholder' => 'Choose a password', 'type' => 'InputPassword' ) );
 				if( is_null( $values ) )
 				{ 
 					$account->addRequirement( 'password','WordCount=>6;;180' ); 
@@ -528,7 +528,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			}
 			else 
 			{
-				$account->addElement( array( 'name' => 'user_group', 'label' => 'Account Type', 'type' => 'Hidden', 'value' =>  $userGroupToCreate ) );  
+				$account->addElement( array( 'name' => 'user_group', 'type' => 'Hidden', 'value' =>  $userGroupToCreate ) );  
 			}
 			$form->addFieldset( $account );
 			
