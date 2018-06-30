@@ -29,6 +29,20 @@ abstract class Application_Subscription_Checkout_Order_Abstract extends Applicat
 {
 	
     /**
+     * Whether class is playable or not
+     *
+     * @var boolean
+     */
+	protected static $_playable = true;
+	
+    /**
+     * Access level for player
+     *
+     * @var boolean
+     */
+	protected static $_accessLevel = array( 99, 98 );
+	
+    /**
      * Default Database Table
      *
      * @var string

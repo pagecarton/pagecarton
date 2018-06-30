@@ -53,18 +53,27 @@ class Application_Subscription_Checkout_Order_List extends Application_Subscript
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No one has placed an order yet.' );
 
+		if( ! self::hasPrivilege( 98 ) )
+		{
+			$this->_dbWhereClause['username'] = Ayoola_Application::getUserInfo( 'username' );
+		}
+		if( ! empty( $_GET['article_url'] ) AND $postInfo = Application_Article_Abstract::loadPost( $_GET['article_url'] ) )
+		{
+			$this->_dbWhereClause['article_url'] = $_GET['article_url'];
+		}
+
 		$cur = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' );
 		$list->createList(  
 			array(
 				'order_id' => '%KEY% <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_View/?' . $this->getIdColumn() . '=%KEY%">details</a>', 
 				'email' => null, 
-				'username' => null, 
-				'order_status' => null, 
-				'order_api' => null, 				
+		//		'user' => array( 'field' => 'username', 'value' => '%FIELD%', 'filter' => '' ), 
+				'status' => array( 'field' => 'order_status', 'value' => '%FIELD%', 'filter' => '' ), 
+				'Method' => array( 'field' => 'order_api', 'value' => '%FIELD%', 'filter' => '' ), 				
 				'total' => $cur . ' %FIELD%', 
 				'time' => array( 'field' => 'time', 'value' => '%FIELD%', 'filter' => 'Ayoola_Filter_Time' ), 
-				'-' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Editor/?' . $this->getIdColumn() . '=%KEY%"> update </a>', 
-				'X' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				' ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Editor/?' . $this->getIdColumn() . '=%KEY%"> update </a>', 
+				'  ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
 			)
 		);
 		//var_export( $list );

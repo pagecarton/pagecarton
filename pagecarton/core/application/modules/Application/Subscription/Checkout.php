@@ -231,7 +231,20 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			{
 //var_export( __LINE__ );
 				$table = new Application_Subscription_Checkout_Order();
-				$insertInfo = $table->insert( array( 'order' => $cart, 'currency' => $cart['settings']['currency_abbreviation'], 'order_api' => $orderApi, 'username' => Ayoola_Application::getUserInfo( 'username' ), 'email' => Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Application::getUserInfo( 'email' ), 'time' => time(), 'total' => $cart['settings']['total'], 'order_status' => self::$checkoutStages[1] ) );
+			//	var_export();
+				$insert = array( 
+									'order' => $cart, 
+									'currency' => $cart['settings']['currency_abbreviation'], 
+									'order_api' => $orderApi, 
+									'username' => Ayoola_Application::getUserInfo( 'username' ), 
+									'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 
+									'email' => Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Application::getUserInfo( 'email' ), 
+									'time' => time(), 
+									'total' => $cart['settings']['total'], 
+									'order_status' => self::$checkoutStages[1] ,
+									'article_url' => array_unique( $cart['settings']['article_url'] ),
+									);
+				$insertInfo = $table->insert( $insert );
 //				$insertInfo = $table->insert( array( 'order' => serialize( $cart ), 'currency' => $cart['settings']['currency_abbreviation'], 'order_api' => $orderApi, 'username' => Ayoola_Application::getUserInfo( 'username' ), 'order_status' => self::$checkoutStages[1] ) );
 				$orderNumber = $insertInfo['insert_id'];
 				$orderInfo = array();
@@ -308,6 +321,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			$fieldset->addElement( array( 'name' => 'lastname', 'label' => 'Last Name', 'placeholder' => 'e.g. Bello', 'type' => 'InputText', 'value' => @$values['lastname'] ) );
 			$fieldset->addElement( array( 'name' => 'email_address', 'label' => 'Customer Email', 'placeholder' => 'e.g. email@example.com', 'type' => 'email', 'value' => @$values['email_address'] ) );
 			$fieldset->addElement( array( 'name' => 'phone_number', 'label' => 'Customer Phone Number', 'placeholder' => 'e.g. +1-202-555-1234', 'type' => 'InputText', 'value' => @$values['phone_number'] ) );
+			$fieldset->addRequirements( array( 'NotEmpty' => null ) );
 			$form->addFieldset( $fieldset );
 		}
 		$cart = self::getStorage()->retrieve();

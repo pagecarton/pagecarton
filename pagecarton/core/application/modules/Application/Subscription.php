@@ -260,14 +260,20 @@ class Application_Subscription extends Application_Subscription_Abstract
 		//	calculate the total price
 	//	$settings['total'] += (double) @$previousData['settings']['total'];
 		$settings['total'] = 0.00; 
+		$settings['article_url'] = array();
 		foreach( $newCart as $name => $eachItem )
 		{
 			if( ! isset( $eachItem['price'] ) )
 			{
 				$eachItem = array_merge( self::getPriceInfo( $eachItem['price_id'] ), $eachItem );
 			}  
+			if( ! empty( $eachItem['article_url'] ) )
+			{
+				$settings['article_url'][] = $eachItem['article_url'];
+			}  
 			@$settings['total'] += $eachItem['price'] * $eachItem['multiple'];
-		}		
+		}
+		$settings['article_url'] = array_unique( $settings['article_url'] );
 	//	var_export( $settings['total'] );
 	//	var_export( '' );  
 		$this->getStorage()->store( array( 'cart' => $newCart, 'settings' => $settings ) );
