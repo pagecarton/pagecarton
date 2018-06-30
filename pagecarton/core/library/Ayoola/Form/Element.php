@@ -779,8 +779,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 			@$html .= "
 						<span style='xdisplay:none;' name='{$element['name']}container'>
 							<input onchange='this.name = this.name != \"{$element['name']}\" ? \"{$element['name']}\" : \"{$element['name']}\"; ' type='text' style='{$element['style']}' id='{$element['id']}$counter' value='{$label}' name='{$tempName}' " . self::getAttributesHtml( $element ) . " />
-							<span class='goodnews boxednews' onClick='this.parentNode.parentNode.insertBefore( this.parentNode.cloneNode( true ), this.parentNode );' title='Add new {$element['label']}'>+</span>
-							<span class='badnews boxednews' onClick='confirm( \"Delete this option?\" ) ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;' title='Delete this option for {$element['label']}'>-</span>
+							<span class='pc-btn' onClick='this.parentNode.parentNode.insertBefore( this.parentNode.cloneNode( true ), this.parentNode );' title='Add new {$element['label']}'>+</span>
+							<span class='pc-btn' onClick='confirm( \"Delete this option?\" ) ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;' title='Delete this option for {$element['label']}'>-</span>
 						</span>\n";
 		}
 		unset( $values );
