@@ -194,7 +194,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$filter = new $filter;
 		
 		//	Calculate culmulative price
-		$totalPrice = 0;
+		$totalPrice = 0.00;
 		$noOfItems = 0;
 	//	var_export( $values );
 		foreach( $values as $name => $value )
