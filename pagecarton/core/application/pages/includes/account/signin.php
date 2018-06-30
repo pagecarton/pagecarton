@@ -9,19 +9,19 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Monday 23rd of April 2018 11:35:51 AM	ayoola@ayoo.la $ 
+* @version $Id: signin.php	Saturday 30th of June 2018 11:40:16 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Access_Login' ) )
 							{
 								
-$_fc40490cbf01d653fbced4e69f73c901 = new Ayoola_Access_Login( array (
+$_d927081df425600998eb0a79a6bb619c = new Ayoola_Access_Login( array (
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  'wrapper_name' => 'white-background',
+  'wrapper_name' => '',
   '' => '',
 ) );
 
@@ -29,38 +29,25 @@ $_fc40490cbf01d653fbced4e69f73c901 = new Ayoola_Access_Login( array (
 							else
 							{
 								
-$_fc40490cbf01d653fbced4e69f73c901 = null;
+$_d927081df425600998eb0a79a6bb619c = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_f046f4eadd53dc1db619bc502ee2c5e6 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<ul>
-	<li><a href="/x/tools/classplayer/get/name/Application_User_Help_ForgotUsernameOrPassword" rel="spotlight;">Forgot password</a>&nbsp;</li>
-	<li>
-<a onclick="this.href=this.href + location.search;" href="/accounts/signup">Create a new account</a>
-</li>
-</ul>
-
+$_ed0e2e17fd21b9d4af1a3ba060fcd3e5 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div style="text-align: center;"><a href="/x/tools/classplayer/get/name/Application_User_Help_ForgotUsernameOrPassword" rel="spotlight;">Forgot password</a> | <a href="/accounts/signup" onclick="this.href=this.href + location.search;">Create a new account</a></div>
 ',
-  'preserved_content' => '<ul>
-	<li><a href="/x/tools/classplayer/get/name/Application_User_Help_ForgotUsernameOrPassword" rel="spotlight;">Forgot password</a>&nbsp;</li>
-	<li>
-<a onclick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/name/Application_User_Creator\', \'page_refresh\' );" href="javascript:">Create a new account</a>
-</li>
-</ul>
-
+  'preserved_content' => '<div style="text-align: center;"><a href="/x/tools/classplayer/get/name/Application_User_Help_ForgotUsernameOrPassword" rel="spotlight;">Forgot password</a> | <a href="/accounts/signup" onclick="this.href=this.href + location.search;">Create a new account</a></div>
 ',
   'url_prefix' => '/x',
-  'markup_template_object_name' => '',
   'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  'wrapper_name' => 'white-background',
+  'wrapper_name' => 'well',
   '' => '',
 ) );
 
@@ -68,7 +55,7 @@ $_f046f4eadd53dc1db619bc502ee2c5e6 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_f046f4eadd53dc1db619bc502ee2c5e6 = null;
+$_ed0e2e17fd21b9d4af1a3ba060fcd3e5 = null;
 
 							}
 							
