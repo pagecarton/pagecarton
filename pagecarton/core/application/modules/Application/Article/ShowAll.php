@@ -590,8 +590,34 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$newArticleTypeToShow = ucfirst( $newArticleType ) ? : 'Content';
 	//		self::v( $newArticleType );
 		//	self::v( $this->_dbWhereClause );
+			$categoryForNewPost = @array_pop( $where['category_name'] );
+			$addNewPostUrl = '/tools/classplayer/get/name/Application_Article_Creator/?';
+			if( $newArticleType )
+			{
+				$addNewPostUrl .= '&article_type=' . $newArticleType . '';
+			}
+			if( $categoryForNewPost )
+			{
+				$addNewPostUrl .= '&category_name=' . $categoryForNewPost . '';
+			}
+			if( $truePostType )
+			{
+				$addNewPostUrl .= '&true_post_type=' . $truePostType . '';
+			}
+			if( $this->getParameter( 'post_type_custom_fields' ) )
+			{
+				$addNewPostUrl .= '&post_type_custom_fields=' . $this->getParameter( 'post_type_custom_fields' ) . '';
+			}
+			if( $this->getParameter( 'post_type_options' ) )
+			{
+				$addNewPostUrl .= '&post_type_options=' . $this->getParameter( 'post_type_options' ) . '';
+			}
+			if( $this->getParameter( 'post_type_options_name' ) )
+			{
+				$addNewPostUrl .= '&post_type_options_name=' . $this->getParameter( 'post_type_options_name' ) . '';
+			}
 			$item = array( 
-							'article_url' => ( '/tools/classplayer/get/name/Application_Article_Creator/?true_post_type=' . $truePostType . '&post_type_custom_fields=' . $this->getParameter( 'post_type_custom_fields' ) . '&article_type=' . $newArticleType . '&category_name=' . @array_pop( $where['category_name'] ) ), 
+							'article_url' => $addNewPostUrl, 
 							'allow_raw_data' => true, 
 							'not_real_post' => true, 
 						//	'article_type' => $newArticleType, 

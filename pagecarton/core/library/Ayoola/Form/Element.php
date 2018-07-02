@@ -558,7 +558,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ? : 98 )  )
 				{
 					$html .= '
-					<a  title="Upload new file" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
+					<a  title="Upload new file" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
 							Upload
 					</a>
 					'; 
@@ -759,13 +759,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		//	$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
 		$element['name'] = trim( $element['name'], '[]' ) . '[]';
-/* 		$html .= "
-					<span style='display:inline-block;'>
-						<span class='goodnews boxednews' onClick='var a = document.getElementsByName( \"{$element['name']}container\" ); for( var b = 0; b < a.length; b++ ){ a[b].style.display = a[b].style.display == \"none\" ? \"inline-block\" : \"none\"; } var a = document.getElementsByName( \"temporary_name_to_disable_option\" ); for( var b = 0; b < a.length; b++ ){ a[b].name = \"{$element['name']}\"; }' title='Hide or show  {$element['label']}'>Show or Hide</span>
-						<span class='badnews boxednews' onClick='confirm( \"Delete all options for  {$element['label']}?\") ? this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode ) : null;' title='Delete all options for  {$element['label']}'> x </span>
-					</span>
-				\n";
- */		$html .= self::$_placeholders['badnews'];
+		$html .= self::$_placeholders['badnews'];
 		$counter = 0;
 		foreach( @$values as $value => $label )
 		{ 
@@ -777,11 +771,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 			}
 			$counter++;
 			@$html .= "
-						<span style='xdisplay:none;' name='{$element['name']}container'>
+						<div style='xdisplay:none;' name='{$element['name']}container'>
 							<input onchange='this.name = this.name != \"{$element['name']}\" ? \"{$element['name']}\" : \"{$element['name']}\"; ' type='text' style='{$element['style']}' id='{$element['id']}$counter' value='{$label}' name='{$tempName}' " . self::getAttributesHtml( $element ) . " />
 							<span class='pc-btn' onClick='this.parentNode.parentNode.insertBefore( this.parentNode.cloneNode( true ), this.parentNode );' title='Add new {$element['label']}'>+</span>
 							<span class='pc-btn' onClick='confirm( \"Delete this option?\" ) ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;' title='Delete this option for {$element['label']}'>-</span>
-						</span>\n";
+						</div>\n";
 		}
 		unset( $values );
 		$html .= "</span>\n";

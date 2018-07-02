@@ -372,16 +372,49 @@ class Application_Article_View extends Application_Article_Abstract
 		}
 
 		$this->_xml = self::getDefaultPostView( $data );
+
 		//	internal forms to use
-		$internalForms = array();
-		$internalForms[] = $postType;
-		$internalForms = array_merge( is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array(), $internalForms );
-	//	var_export( $internalForms );
-		if( ! $this->getParameter( 'min_quantity' ) )
-		foreach( array_unique( $internalForms ) as $eachPostType )
+		$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array();
+		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
+		$features[] = $data['true_post_type'];
+		$featuresPrefix[] = '';
+		$featureCount = array();
+		$featureCount = array();
+		//		var_export( $features );
+		foreach( $features as $key => $eachPostType )
 		{	
+			$featureSuffix = $featuresPrefix[$key];
+			if( empty( $featureCount[$eachPostType] ) )
+			{
+				$featureCount[$eachPostType] = 1;
+			}
+			else
+			{
+				if( empty( $featureSuffix ) )
+				{
+					$featureSuffix = $featureCount[$eachPostType];
+				}
+				$featureCount[$eachPostType]++;
+			}
 			switch( $eachPostType )
 			{
+				case 'subscription-options':
+			//		var_export( $featureSuffix );
+			//		var_export( $data['subscription_selections' . $featureSuffix] );
+					if( $this->getParameter( 'subscription_selections_template' ) && $data['subscription_selections' . $featureSuffix] )
+					{
+						$data['subscription_selections_html' . $featureSuffix] = null;
+						foreach( $data['subscription_selections' . $featureSuffix] as $eachSelection )
+						{
+							if( $eachSelection == '' )
+							{
+								continue;
+							}
+							$data['subscription_selections_html' . $featureSuffix] .= str_ireplace( array( '{{{subscription_selections}}}', '{{{suffix}}}', ), array( $eachSelection, $featureSuffix ), $this->getParameter( 'subscription_selections_template' ) );
+						}
+					//	var_export( $data['subscription_selections_html' . $featurePrefix] );
+					}			
+				break;
 				case 'product':
 				case 'service':
 				case 'subscription':

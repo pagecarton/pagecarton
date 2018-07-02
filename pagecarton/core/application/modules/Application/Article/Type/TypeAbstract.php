@@ -99,50 +99,67 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 		$fieldset = new Ayoola_Form_Element;
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true; 
-	//	$types = array( 'post' => 'Normal Post', 'article' => 'Article', 'audio' => 'Audio', 'video' => 'Video', 'quiz' => 'Online Quiz', 'poll' => 'Online Poll', 'download' => 'Downloadables', 'link' => 'Link', 'event' => 'Event', 'product' => 'Product', 'service' => 'Service', 'book' => 'Book', );          
-	//	var_export( $settings );
-	//	do
+        if( ! empty( $_GET['post_type_id'] ) && empty( $values['post_type'] ) )
+        {
+            $values['post_type'] = $_GET['post_type_id'];
+        }
+                
+        $fieldset->addElement( array( 'name' => 'post_type', 'label' => 'Type Name', 'title' => 'Enter post type name, e.g. Article', 'placeholder' => 'e.g. Article', 'type' => 'InputText', 'value' => @$values['post_type'], ) ); 
+        $fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post is similar to', 'title' => 'Choose the kind of post this is...', 'type' => 'Select', 'value' => @$values['article_type'], ), self::$presetTypes );  
+
+        $options = 	array( 
+                            '' => 'Select Feature', 
+                            'article' => 'Article', 
+                            'video' => 'Video Embed URL', 
+                            'download' => 'Download URL', 
+                            'product' => 'Price', 
+                            'multi-price' => 'Multiple Pricing', 
+                            'subscription-options' => 'Subscription Options', 
+                            'datetime' => 'Date and Time', 
+                            'location' => 'Location', 
+                            'audio' => 'Play Audio', 
+                            'gallery' => 'Gallery Images', 
+                            );
+
+
+		//	preset values
+		$i = 0;
+		//	Build a separate demo form for the previous group
+		$featureForm = new Ayoola_Form( array( 'name' => 'preset...' )  );
+		$featureForm->setParameter( array( 'no_fieldset' => true, 'no_form_element' => true ) );
+		$featureForm->wrapForm = false;
+		do
 		{
-            if( ! empty( $_GET['post_type_id'] ) && empty( $values['post_type'] ) )
-            {
-                $values['post_type'] = $_GET['post_type_id'];
-            }
-            		
-			$fieldset->addElement( array( 'name' => 'post_type', 'label' => 'Type Name', 'title' => 'Enter post type name, e.g. Article', 'placeholder' => 'e.g. Article', 'type' => 'InputText', 'value' => @$values['post_type'], ) ); 
-			$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post is similar to', 'title' => 'Choose the kind of post this is...', 'type' => 'Select', 'value' => @$values['article_type'], ), self::$presetTypes );  
+				
+			$featureFieldset = new Ayoola_Form_Element; 
+			$featureFieldset->allowDuplication = true;
+			$featureFieldset->duplicationData = array( 'add' => '+ Add feature', 'remove' => '- Remove feature', 'counter' => 'preset_counter', );
+			$featureFieldset->container = 'span';
+		
+			$featureFieldset->addElement( array( 'name' => 'post_type_options', 'label' => '', 'style' => 'width:45%;', 'type' => 'Select', 'multiple' => 'multiple', 'value' => @$values['post_type_options'][$i], ), $options ); 
+			$featureFieldset->addElement( array( 'name' => 'post_type_options_name', 'label' => '', 'placeholder' => 'Field name suffix (optional)', 'style' => 'width:45%;', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['post_type_options_name'][$i], ) ); 
 
-
-            $options = 	array( 
-                                'article' => 'Article', 
-                                'video' => 'Video Embed URL', 
-                                'download' => 'Download URL', 
-                                'product' => 'Price', 
-                                'multi-price' => 'Multiple Pricing', 
-                                'subscription-options' => 'Subscription Options', 
-                                'datetime' => 'Date and Time', 
-                                'location' => 'Location', 
-                                'audio' => 'Play Audio', 
-                                'gallery' => 'Gallery Images', 
-                                );
-
-			$fieldset->addElement( array( 'name' => 'post_type_options', 'label' => 'Other Options available to post type', 'title' => '', 'type' => 'Checkbox', 'value' => @$values['post_type_options'], ), $options );      
-            
-            //	supplementary form for creating post
-            $options = new Ayoola_Form_Table(); 
-            $options = $options->select();
-            require_once 'Ayoola/Filter/SelectListArray.php';
-            $filter = new Ayoola_Filter_SelectListArray( 'form_name', 'form_title');
-            $options = $filter->filter( $options );
-            $fieldset->addElement( array( 'name' => 'supplementary_form', 'label' => 'Supplementary Creation form', 'type' => 'Select', 'value' => @$values['supplementary_form'] ), array( '' => 'Please select...' ) + $options ); 
-
-			$fieldset->addElement( array( 'name' => 'post_type_custom_fields', 'label' => 'Supplementary Custom Fields', 'title' => 'Custom Fields for Post Type', 'placeholder' => 'e.g. brand, size, color ', 'type' => 'InputText', 'value' => @$values['post_type_custom_fields'], ) ); 
-
-	//		$i++;
-			$fieldset->addLegend( $legend );
-		//	$fieldset->wrapper = 'white-background';
-			$fieldset->wrapper = 'white-content-theme-border';   
+			$i++;
+			$featureForm->addFieldset( $featureFieldset );
 		}
-	//	while( isset( $settings['post_types'][$i] ) ); 
+		while( isset( $values['post_type_options'][$i] ) );    
+		$fieldset->addElement( array( 'name' => 'xxxxx', 'type' => 'Html', 'value' => '', 'data-pc-element-whitelist-group' => 'post_type_options' ), array( 'html' => '<label style="display:block;">Post Type Features</label>' . $featureForm->view() . '', 'fields' => 'post_type_options,post_type_options_name' ) );	
+   //     $fieldset->addElement( array( 'name' => 'post_type_options', 'label' => 'Other Options available to post type', 'title' => '', 'type' => 'Checkbox', 'value' => @$values['post_type_options'], ), $options );      
+        
+        //	supplementary form for creating post
+        $options = new Ayoola_Form_Table(); 
+        $options = $options->select();
+        require_once 'Ayoola/Filter/SelectListArray.php';
+        $filter = new Ayoola_Filter_SelectListArray( 'form_name', 'form_title');
+        $options = $filter->filter( $options );
+        $fieldset->addElement( array( 'name' => 'supplementary_form', 'label' => 'Supplementary Creation form', 'type' => 'Select', 'value' => @$values['supplementary_form'] ), array( '' => 'Please select...' ) + $options ); 
+
+        $fieldset->addElement( array( 'name' => 'post_type_custom_fields', 'label' => 'Supplementary Custom Fields', 'title' => 'Custom Fields for Post Type', 'placeholder' => 'e.g. brand, size, color ', 'type' => 'InputText', 'value' => @$values['post_type_custom_fields'], ) ); 
+
+//		$i++;
+        $fieldset->addLegend( $legend );
+    //	$fieldset->wrapper = 'white-background';
+        $fieldset->wrapper = 'white-content-theme-border';   
 
 		//	preset values
 		$i = 0;
@@ -155,7 +172,7 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 				
 			$presetFieldset = new Ayoola_Form_Element; 
 			$presetFieldset->allowDuplication = true;
-			$presetFieldset->duplicationData = array( 'add' => '+ Add preset field', 'remove' => '- preset field', 'counter' => 'preset_counter', );
+			$presetFieldset->duplicationData = array( 'add' => '+ Add preset field', 'remove' => '- Remove preset field', 'counter' => 'preset_counter', );
 			$presetFieldset->container = 'span';
 		//	$presetFieldset->wrapper = 'white-content-theme-border';
 		
@@ -166,9 +183,6 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 			$presetForm->addFieldset( $presetFieldset );
 		}
 		while( isset( $values['preset_keys'][$i] ) );    
-		
-		//	add previous categories if available
-	//	$fieldset->addLegend( 'Create personal categories to use for posts ' );						  
 		$fieldset->addElement( array( 'name' => 'xx', 'type' => 'Html', 'value' => '', 'data-pc-element-whitelist-group' => 'preset_keys' ), array( 'html' => '<label style="display:block;">Preset Fields</label>' . $presetForm->view() . '', 'fields' => 'preset_keys,preset_values' ) );	
 
 		$form->addFieldset( $fieldset );   		

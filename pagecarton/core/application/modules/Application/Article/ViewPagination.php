@@ -107,7 +107,7 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 
 					if( ! $postListId || ! $postListData->retrieve() )
 					{
-						$class = new Application_Article_ShowAll( array( 'true_post_type' => $data['true_post_type'] ) );
+						$class = new Application_Article_ShowAll( array( 'true_post_type' => $data['true_post_type'], 'no_of_post_to_show' => 200 ) );
 						$class->initOnce();
 						$postListId = $storageForSinglePosts->retrieve();
 					}

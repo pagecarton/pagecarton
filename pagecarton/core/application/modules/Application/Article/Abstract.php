@@ -1127,7 +1127,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( ! $postTypeInfo && ! array_key_exists( $articleTypeWeUsing, $options ) && ! array_key_exists( $articleTypeWeUsing, Application_Article_Type_TypeAbstract::$presetTypes && self::hasPriviledge( array( 99, 98 ) ) ) )
 		{
 			//	auto setup post type
-			$postTypeInfo = array( 'post_type' => $articleTypeWeUsing, 'article_type' => @$_REQUEST['true_post_type'], 'post_type_custom_fields' => @$_REQUEST['post_type_custom_fields'], );
+			$postTypeInfo = array( 
+									'post_type' => $articleTypeWeUsing, 
+									'article_type' => @$_REQUEST['true_post_type'], 
+									'post_type_custom_fields' => @$_REQUEST['post_type_custom_fields'], 
+									'post_type_options' => @array_map( 'trim', explode( ',', $_REQUEST['post_type_options'] ) ), 
+									'post_type_options_name' => @array_map( 'trim', explode( ',', $_REQUEST['post_type_options_name'] ) ), 
+								);
 			$classToCreatePostType = new Application_Article_Type_Creator( array( 'fake_values' => $postTypeInfo ) );
 			$result = $classToCreatePostType->view();
 			$values['true_post_type'] = $postTypeInfo['article_type'];
@@ -1174,21 +1180,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	//	var_export( $link );
 	//	var_export( @$values['article_url'] );
 		$fieldset->addElement( array( 'name' => 'document_url', 'label' => 'Cover Photo', 'placeholder' => 'Cover Photo for this ' . $postTypeLabel . '', 'type' => 'Document', 'value' => @$values['document_url'] ) );
-//		$fieldset->addElement( array( 'name' => 'document_url', 'label' => 'Cover Photo', 'placeholder' => 'Cover Photo for this ' . $postTypeLabel . '', 'type' => 'Document', 'data-previous-url' => @$values['article_url'] ?'/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$values['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ) : null, 'autocomplete' => 'off', 'value' => null ) );
-	//	if( @$values['document_url_base64'] )
-		{ 
-			
-		//	$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-	//		$size = ( @$articleSettings['cover_photo_width'] ? : '900' ) . 'x' . ( @$articleSettings['cover_photo_height'] ? : '300' );
-	//		$imgHtml = '<img title="Cover Photo for this ' . $postTypeLabel . '" alt="" style="" name="' . $fieldName64 . '_preview_zone_image' . '" src="' . ( ( @$values['document_url_base64'] ) ? ( '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$values['article_url'] ) : ( 'http://placehold.it/' . $size . '&text=' . ( @$element['label'] ? : ( 'Photo (' . $size . ')' ) ) . '' ) ) . '"  class="" onClick=""  >';
-	//		$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html', 'value' => '' ), array( 'html' => $imgHtml, 'fields' => '' ) );
-		}
-//		$fieldset->addElement( array( 'name' => 'document_url_base64', 'data-previous-url' => '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$values['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ), 'label' => 'Cover Photo', 'data-allow_base64' => true, 'type' => 'Document', 'autocomplete' => 'off', 'value' => null ) );
-	//	if( self::hasPriviledge() )
-		{
-	//		$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html' ), array( 'html' => Ayoola_Doc_Upload_Link::viewInLine( array( 'image_preview' => ( @$values['document_url'] ? : $this->getGlobalValue( 'document_url' ) ), 'field_name' => $fieldName, 'width' => @$articleSettings['cover_photo_width'] ? : '900', 'height' => @$articleSettings['cover_photo_height'] ? : '300', 'crop' => true, 'field_name_value' => 'url', 'preview_text' => 'Cover Photo', 'call_to_action' => 'Change cover photo' ) ) ) ); 
-		}
-	//	$fieldset->addRequirement( 'document_url', array( 'InArray' => array_keys( $option )  ) );
 	
 		//	options
 		$options =  array( 
@@ -1219,7 +1210,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			}
 			
 		}
-//		$fieldset->addElement( array( 'name' => 'article_options', 'label' => '' . $postTypeLabel . ' Options', 'type' => 'Checkbox', 'value' => $values['article_options'] ), $options );
 	
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset ); 
@@ -1245,27 +1235,39 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				$form->submitValue = 'Continue...';
 			}
 		}
-		//	internal forms to use
-		$internalForms = array();
-		$internalForms[] = $values['true_post_type'];
-		$internalForms = array_merge( is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array(), $internalForms );
 
-		//	Next Level
 
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->hashElementName = $this->hashFormElementName;
-	//	var_export( $internalForms );
-	//	var_export( array_unique( $internalForms ) );
-		foreach( array_unique( $internalForms ) as $eachPostType )
+
+		//	internal forms to use
+		$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array();
+		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
+		$features[] = $values['true_post_type'];
+		$featuresPrefix[] = '';
+		$featureCount = array();
+		foreach( $features as $key => $eachPostType )
 		{	
+			$featurePrefix = $featuresPrefix[$key];
+			if( empty( $featureCount[$eachPostType] ) )
+			{
+				$featureCount[$eachPostType] = 1;
+			}
+			else
+			{
+				if( empty( $featurePrefix ) )
+				{
+					$featurePrefix = $featureCount[$eachPostType];
+				}
+				$featureCount[$eachPostType]++;
+			}
 			switch( $eachPostType )
 			{
 				case 'book':
 					$fieldset->addElement( array( 'name' => 'isbn', 'label' => 'ISBN', 'type' => 'InputText', 'value' => @$values['isbn']  ) );
-			//		$fieldset->addElement( array( 'name' => 'authors', 'label' => 'Authors', 'placeholder' => 'Enter an author here... Click + to add more...', 'type' => 'MultipleInputText', 'value' => @$values['authors']  ) );   
 				break;  
 				case 'gallery':
-					$fieldset->addElement( array( 'name' => 'images', 'label' => $postTypeLabel . ' Images', 'type' => 'Document', 'data-document_type' => 'image', 'multiple' => 'multiple', 'data-multiple' => 'multiple', 'value' => @$values['images']  ) );
+					$fieldset->addElement( array( 'name' => 'images' . $featurePrefix, 'label' => $postTypeLabel . ' Images ' . $featurePrefix, 'type' => 'Document', 'data-document_type' => 'image', 'multiple' => 'multiple', 'data-multiple' => 'multiple', 'value' => @$values['images' . $featurePrefix]  ) );
 				break;  
 				case 'examination':
 				case 'test':
@@ -1344,11 +1346,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							}
 							$categoryFieldset->addFilter( 'quiz_subgroup_id', array( 'DefiniteValue' => array( $groupIds ) ) );						
 						}
-					//	var_export( Ayoola_Form::getStorage( 'global_values' )->retrieve() );
-				//		var_export( $groupIds );
-					//	var_export( $groupQuestions );
-				//		var_export( $this->getGlobalValue( 'quiz_subgroup_id' ) );
-
 						//	Add only the last one into the main form
 						$form->addFieldset( $categoryFieldset );
 					}
@@ -1362,10 +1359,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				//	if( ! $values || $this->getGlobalValue( 'edit_questions' ) )
 					{
 						$j = 0; // group count
-						
-						
-				//	var_export( $groupIds );  
-					//	do
 						//	Separate form for category confirmation
 						//	Do this later after questions have been set so the max questions could equal total questions
 						$questionConfForm = new Ayoola_Form( array( 'name' => 'categories-conf...' )  );
@@ -1407,10 +1400,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 								$questionFieldset->duplicationData = array( 'add' => '+ Add New Question Below', 'remove' => '- Remove Above Question', 'counter' => 'question_counter' . $j . '', );
 								$questionFieldset->container = 'span';
 							//	$questionFieldset->wrapper = 'white-content-theme-border';   
-								$questionFieldset->wrapper = 'white-background';
-						//		self::v( 'quiz_question' . @$groupIds[$j] );
-							//	$questionFieldset->addElement( array( 'name' => 'questions_and_answers_break', 'type' => 'Html', 'value' => '' ), array( 'html' => ( '<hr>' ) ) );
-								
+								$questionFieldset->wrapper = 'white-background';								
 
 								$questionFieldset->addElement( array( 'name' => 'quiz_question' . @$groupIds[$j], 'data-html' => '1', 'data-pc-element-whitelist-group' => 'questions_and_answers', 'multiple' => 'multiple', 'rows' => '1', 'label' => ( 'Question <span name="question_counter' . $j . '">' . ( $i + 1 ) . '</span> of <span name="question_counter' . $j . '_total">' . ( count( @$values['quiz_question' . @$groupIds[$j]] ) ? : 1 ) . '</span>' ), 'placeholder' => 'Enter question here...', 'title' => 'Double-Click here to launch the advanced editor', 'type' => 'TextArea', 'value' => @$values['quiz_question' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_question' . @$groupIds[$j], null , $i ) ) );  
 							//	$questionFieldset->addFilter( 'quiz_question', array( 'HtmlSpecialChars' => null, ) );
@@ -1448,14 +1438,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 								
 								$i++;
 								
-						//		$questionFieldset->addLegend( 'Question <span name="question_counter">' . $i . '</span> of <span name="question_counter_total">' . ( count( @$values['quiz_question' . @$groupIds[$j]] ) ? : 1 ) . '</span>' );						  
 								$questionForm->addFieldset( $questionFieldset );
-							//	self::v( $i );  
-						//		var_export( '' . $groupQuestions[$j] . '<br>' );
 							}
 							while( isset( $values['quiz_question' . @$groupIds[$j]][$i] ) );
-						//		var_export( $values['quiz_question' . @$groupIds[$j]] );  
-							
 							
 							//	Put the questions in a separate fieldset
 							$questionFieldset = new Ayoola_Form_Element; 
@@ -1471,34 +1456,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							$totalQuestionCount = @$totalQuestionCount ? : 0;
 							$questionCount = count( $this->getGlobalValue( 'quiz_question' . @$groupIds[$j] ) ? : array() );
 							$totalQuestionCount += $questionCount;
-						//	self::v( strval( $questionCount ) );
-						//	self::v( $totalQuestionCount );
-						//	self::v( 'question_count' . @$groupIds[$j] );
 							
 							$questionFieldset->addElement( array( 'name' => 'question_count' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'label' => '', 'type' => 'Hidden', 'value' => null ) );
 							$questionFieldset->addFilter( 'question_count' . @$groupIds[$j], array( 'DefiniteValue' => $questionCount ) );
 
 							$questionElementList = 'quiz_question' . @$groupIds[$j] . ',quiz_option1' . @$groupIds[$j] . ',quiz_option2' . @$groupIds[$j] . ',quiz_option3' . @$groupIds[$j] . ',quiz_option4' . @$groupIds[$j] . ',quiz_correct_option' . @$groupIds[$j] . ',quiz_answer_notes' . @$groupIds[$j];
 							$questionFieldset->addElement( array( 'name' => 'questions_and_answers', 'data-pc-element-whitelist-group' => 'questions_and_answers', 'type' => 'Html', 'value' => '' ), array( 'html' => ( $subGroupHeading . $questionForm->view() ), 'parameters' => array( 'data-pc-element-whitelist-group' => 'questions_and_answers' ), 'fields' => $questionElementList ) );
-							
-	/* 						if( in_array( 'questions_and_answers', $fieldsToEdit ) )
-							{
-								//	Add the following to the elements whitelist
-								$questionElementList = array_map( 'trim', explode( ',', $questionElementList . ',question_count' . @$groupIds[$j] ) );
-								$fieldsToEdit = array_merge( $fieldsToEdit, $questionElementList );
-							//	self::v( $fieldsToEdit );
-							}
-	*/						
-	/* 						$questionFieldset->addFilter( 'quiz_question' . @$groupIds[$j], array( 'HtmlSpecialChars' => null, ) );
-							$questionFieldset->addFilter( 'quiz_option1' . @$groupIds[$j], array( 'HtmlSpecialChars' => null, ) );
-							$questionFieldset->addFilter( 'quiz_option2' . @$groupIds[$j], array( 'HtmlSpecialChars' => null, ) );
-							$questionFieldset->addFilter( 'quiz_option3' . @$groupIds[$j], array( 'HtmlSpecialChars' => null, ) );
-							$questionFieldset->addFilter( 'quiz_option4' . @$groupIds[$j], array( 'HtmlSpecialChars' => null, ) );
-							$questionFieldset->addFilter( 'quiz_answer_notes' . @$groupIds[$j], array( 'HtmlSpecialChars' => null, ) );
-							$questionFieldset->addFilter( 'quiz_correct_option' . @$groupIds[$j], array( 'HtmlSpecialChars' => null, ) );
-	*/						
-						//	var_export( $_SESSION );
-							
+														
 							//	Add only the last one into the main form
 							$form->addFieldset( $questionFieldset );
 					//		$categoryName = array_shift( $groupIds );
@@ -1532,14 +1496,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						
 						$questionConfFieldset->addElement( array( 'name' => 'total_question_displayed', 'data-pc-element-whitelist-group' => '', 'type' => 'Hidden', 'value' => null ) );
 						$questionConfFieldset->addFilter( 'total_question_displayed', array( 'DefiniteValue' => array_sum( $this->getGlobalValue( 'quiz_subgroup_question_max' ) ) ) );
-	/* 					if( in_array( 'questions_and_answers', $fieldsToEdit ) )
-						{
-							//	Add the following to the elements whitelist
-							$fieldsToEdit[] = 'total_question_count';
-						//	self::v( $fieldsToEdit );
-						}
-	*/					
-					//	self::v( $totalQuestionCount );
+
 						//	Review Questions and Set  
 						$form->addFieldset( $questionConfFieldset );  
 					//	while( $j <= count( $groupIds ) );
@@ -1548,55 +1505,14 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				case 'product':
 				case 'service':
 				case 'subscription':
-					$fieldset->addElement( array( 'name' => 'item_old_price', 'label' => 'Old price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_old_price'] ) );
-					$fieldset->addElement( array( 'name' => 'item_price', 'label' => 'Current price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_price'] ) );
-					$fieldset->addElement( array( 'name' => 'no_of_items_in_stock', 'type' => 'InputText', 'value' => @$values['no_of_items_in_stock'] ) );   
-			//		$fieldset->addElement( array( 'name' => 'call_to_action', 'placeholder' => 'e.g. Add to Cart', 'type' => 'InputText', 'value' => @$values['call_to_action'] ) );
+					$fieldset->addElement( array( 'name' => 'item_old_price' . $featurePrefix, 'label' => 'Old price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_old_price' . $featurePrefix] ) );
+					$fieldset->addElement( array( 'name' => 'item_price' . $featurePrefix, 'label' => 'Current price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_price' . $featurePrefix] ) );
+					$fieldset->addElement( array( 'name' => 'no_of_items_in_stock' . $featurePrefix, 'type' => 'InputText', 'value' => @$values['no_of_items_in_stock' . $featurePrefix] ) );   
 				break;
 				case 'subscription-options':
-			//		$fieldset->addElement( array( 'name' => 'subscription_options', 'type' => 'Checkbox', 'value' => @$values['subscription_options'] ), array( 'selections' => 'This product or service has a options to select from e.g. color',  ) );
-			//		var_export( $values['subscription_selections'] );
-				//	if( ( $this->getGlobalValue( 'subscription_options' ) && in_array( 'selections', $this->getGlobalValue( 'subscription_options' ) ) ) )  
 			//		{
-						$fieldset->addElement( array( 'name' => 'subscription_selections', 'label' => $postTypeLabel . ' Options', 'placeholder' => 'e.g. blue', 'type' => 'MultipleInputText', 'value' => @$values['subscription_selections'] ), @$values['subscription_selections'] );
-					//	$fieldset->addRequirement( 'subscription_selections', array( 'WordCount' => array( 1,300 ), ) );
+						$fieldset->addElement( array( 'name' => 'subscription_selections' . $featurePrefix, 'label' => $postTypeLabel . ' Options ' . $featurePrefix, 'placeholder' => 'e.g. blue', 'type' => 'MultipleInputText', 'value' => @$values['subscription_selections' . $featurePrefix] ), @$values['subscription_selections' . $featurePrefix] );
 			//		}
-				break;
-		//		case 'product':
-		//		case 'service':   
-	/*					$i = 0;
-						//	Build a separate demo form for the previous group
-						$productForm = new Ayoola_Form( array( 'name' => 'product options' )  );
-						$productForm->setParameter( array( 'no_fieldset' => true, 'no_form_element' => true ) );
-						$productForm->wrapForm = false;
-						do
-						{
-							
-							//	Put the product options in a separate fieldset
-							$product = new Ayoola_Form_Element; 
-							$product->allowDuplication = true;
-							$product->container = 'span';
-						
-							//	Question
-							$product->addElement( array( 'name' => 'option_name', 'multiple' => 'multiple', 'placeholder' => 'Enter option name here...', 'type' => 'InputText', 'value' => @$values['option_name' . $groupIds[$j]][$i] ) );
-							$product->addElement( array( 'name' => 'option_price', 'multiple' => 'multiple', 'placeholder' => 'Enter option price here...', 'type' => 'InputText', 'value' => @$values['option_price' . $groupIds[$j]][$i] ) );
-											
-							$product->addLegend( 'Product options (if available)' );						
-							$productForm->addFieldset( $product );
-							$i++;
-						//	self::v( $i );  
-						}
-						while( ! empty( $values['option_name' . @$groupIds[$j]][$i] ) );
-						
-				//		if( @$values['quiz_question'] )
-						{
-							//	add previous questions if available
-							$fieldset->addElement( array( 'name' => 'previous_forms', 'type' => 'Html', 'value' => '' ), array( 'html' => $productForm->view(), 'fields' => 'option_name,option_price' ) );
-							
-						}
-	*/					//	Add only the last one into the main form
-					//	$form->addFieldset( $product );   
-					
 				break;
 				case 'multi-price':
 				//	var_export( $postTypeInfo );
@@ -1609,11 +1525,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 						$fieldsetX->container = 'div';
 						$form->wrapForm = false;
-						$fieldsetX->addElement( array( 'name' => 'price_option_title', 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Option Name', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @htmlspecialchars( $values['price_option_title'][$i] ) ) );
-						$fieldsetX->addElement( array( 'name' => 'price_option_price', 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Separate Option Price', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['price_option_price'][$i] ) );
+						$fieldsetX->addElement( array( 'name' => 'price_option_title' . $featurePrefix, 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Option Name', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @htmlspecialchars( $values['price_option_title' . $featurePrefix][$i] ) ) );
+						$fieldsetX->addElement( array( 'name' => 'price_option_price' . $featurePrefix, 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Separate Option Price', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['price_option_price' . $featurePrefix][$i] ) );
 						$fieldsetX->allowDuplication = true;  
 						$fieldsetX->placeholderInPlaceOfLabel = true;
-						$fieldsetX->wrapper = 'white-content-theme-border';  
+				//		$fieldsetX->wrapper = 'white-content-theme-border';  
 						$i++;
 						$fieldsetX->addLegend( 'Pricing Option <span name="pricing_option_counter">' . $i .  '</span>' );
 						$form->oneFieldSetAtATime = false;   
@@ -1633,11 +1549,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				break;
 				case 'video':
 					//	video
-					$fieldset->addElement( array( 'name' => 'video_url', 'type' => 'InputText', 'value' => @$values['video_url'] ) );
+					$fieldset->addElement( array( 'name' => 'video_url' . $featurePrefix, 'type' => 'InputText', 'value' => @$values['video_url' . $featurePrefix] ) );
 				break;
 				case 'link':
 					//	link
-					$fieldset->addElement( array( 'name' => 'link_url', 'type' => 'InputText', 'value' => @$values['link_url'] ) );
+					$fieldset->addElement( array( 'name' => 'link_url' . $featurePrefix, 'type' => 'InputText', 'value' => @$values['link_url' . $featurePrefix] ) );
 				break;
 				case 'date':
 				case 'datetime':
@@ -1664,34 +1580,32 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					//	Month
 					$options = array_combine( range( 1, 12 ), array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ) );
 					$birthMonthValue = intval( @strlen( $values['month'] ) === 1 ? ( '0' . @$values['month'] ) : @$values['month'] );
-					$birthMonthValue = intval( $birthMonthValue ?  : $this->getGlobalValue( 'month' ) );
-				//	var_export( $birthMonthValue );
-				//	var_export( $this->getGlobalValue( 'month' ) );
-					$fieldset->addElement( array( 'name' => 'month', 'label' => $postTypeLabel . ' Date', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $birthMonthValue ), array( 'Month' ) + $options ); 
+					$birthMonthValue = intval( $birthMonthValue ?  : $this->getGlobalValue( 'month' . $featurePrefix ) );
+					$fieldset->addElement( array( 'name' => 'month' . $featurePrefix, 'label' => $postTypeLabel . ' Date', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $birthMonthValue ), array( 'Month' ) + $options ); 
 					$fieldset->addRequirement( 'month', array( 'InArray' => array_keys( $options ) ) );
-					if( strlen( $this->getGlobalValue( 'month' ) ) === 1 )
+					if( strlen( $this->getGlobalValue( 'month' . $featurePrefix ) ) === 1 )
 					{
-						$fieldset->addFilter( 'month', array( 'DefiniteValue' => '0' . $this->getGlobalValue( 'month' ) ) );
+						$fieldset->addFilter( 'month', array( 'DefiniteValue' => '0' . $this->getGlobalValue( 'month' . $featurePrefix ) ) );
 					}
 					
 					//	Day
 					$options = range( 1, 31 );
 					$options = array_combine( $options, $options );
 					$birthDayValue = intval( @strlen( $values['day'] ) === 1 ? ( '0' . @$values['day'] ) : @$values['day'] );
-					$birthDayValue = intval( $birthDayValue ?  : $this->getGlobalValue( 'day' ) );
-					$fieldset->addElement( array( 'name' => 'day', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $birthDayValue ), array( 'Day' ) +$options );
-					$fieldset->addRequirement( 'day', array( 'InArray' => array_keys( $options ) ) );
-					if( strlen( $this->getGlobalValue( 'day' ) ) === 1 )
+					$birthDayValue = intval( $birthDayValue ?  : $this->getGlobalValue( 'day' . $featurePrefix ) );
+					$fieldset->addElement( array( 'name' => 'day' . $featurePrefix, 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $birthDayValue ), array( 'Day' ) + $options );
+					$fieldset->addRequirement( 'day' . $featurePrefix, array( 'InArray' => array_keys( $options ) ) );
+					if( strlen( $this->getGlobalValue( 'day' . $featurePrefix ) ) === 1 )
 					{
-						$fieldset->addFilter( 'day', array( 'DefiniteValue' => '0' . $this->getGlobalValue( 'day' ) ) );
+						$fieldset->addFilter( 'day' . $featurePrefix, array( 'DefiniteValue' => '0' . $this->getGlobalValue( 'day' . $featurePrefix ) ) );
 					}
 					
 					//	Year
 					//	10 years and 10 years after todays date
 					$options = range( date( 'Y' ) + 10, date( 'Y' ) - 10 );
 					$options = array_combine( $options, $options );
-					$fieldset->addElement( array( 'name' => 'year', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values['year'] ? : date( 'Y' ) ), array( 'Year' ) + $options );
-					$fieldset->addRequirement( 'year', array( 'InArray' => array_keys( $options ) ) );
+					$fieldset->addElement( array( 'name' => 'year' . $featurePrefix, 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values['year'] ? : date( 'Y' ) ), array( 'Year' ) + $options );
+					$fieldset->addRequirement( 'year' . $featurePrefix, array( 'InArray' => array_keys( $options ) ) );
 					$options = range( 0, 23 );
 					foreach( $options as $key => $each )
 					{
@@ -1700,8 +1614,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							$options[$key] = '0' . $options[$key];
 						}
 					}
-					$fieldset->addElement( array( 'name' => 'time_hour', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values['time_hour'] ), array( 'Hour' ) +  array_combine( $options, $options ) );
-					$fieldset->addRequirement( 'time_hour', array( 'InArray' => array_keys( $options ) ) );
+					$fieldset->addElement( array( 'name' => 'time_hour' . $featurePrefix, 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values['time_hour' . $featurePrefix] ), array( 'Hour' ) +  array_combine( $options, $options ) );
+					$fieldset->addRequirement( 'time_hour' . $featurePrefix, array( 'InArray' => array_keys( $options ) ) );
 					$options = range( 0, 59 );
 					foreach( $options as $key => $each )
 					{
@@ -1710,32 +1624,31 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							$options[$key] = '0' . $options[$key];
 						}
 					}
-					$fieldset->addElement( array( 'name' => 'time_minutes', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values['time_minutes'] ), array( 'Minute' ) + array_combine( $options, $options ) );
-					$fieldset->addRequirement( 'time_minutes', array( 'InArray' => array_keys( $options ) ) );
+					$fieldset->addElement( array( 'name' => 'time_minutes' . $featurePrefix, 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values['time_minutes' . $featurePrefix] ), array( 'Minute' ) + array_combine( $options, $options ) );
+					$fieldset->addRequirement( 'time_minutes' . $featurePrefix, array( 'InArray' => array_keys( $options ) ) );
 
-			//		$fieldset->addElement( array( 'name' => 'host', 'label' => $postTypeLabel . ' Host', 'type' => 'InputText', 'value' => @$values['host'] ) );
-					
 					//	datetime combined
-					$fieldset->addElement( array( 'name' => 'datetime', 'label' => 'Timestamp', 'placeholder' => 'YYYY-MM-DD HH:MM', 'type' => 'Hidden', 'value' => @$values['datetime'] ) );
-					$datetime = $this->getGlobalValue( 'year' );
+					$fieldset->addElement( array( 'name' => 'datetime' . $featurePrefix, 'label' => 'Timestamp', 'placeholder' => 'YYYY-MM-DD HH:MM', 'type' => 'Hidden', 'value' => @$values['datetime' . $featurePrefix] ) );
+					$datetime = $this->getGlobalValue( 'year' . $featurePrefix );
 					$datetime .= '-';
-					$datetime .= strlen( $this->getGlobalValue( 'month' ) ) === 1 ? ( '0' . $this->getGlobalValue( 'month' ) ) : $this->getGlobalValue( 'month' );
+					$datetime .= strlen( $this->getGlobalValue( 'month' . $featurePrefix ) ) === 1 ? ( '0' . $this->getGlobalValue( 'month' . $featurePrefix ) ) : $this->getGlobalValue( 'month' . $featurePrefix );
 					$datetime .= '-';
-					$datetime .= strlen( $this->getGlobalValue( 'day' ) ) === 1 ? ( '0' . $this->getGlobalValue( 'day' ) ) : $this->getGlobalValue( 'day' );
+					$datetime .= strlen( $this->getGlobalValue( 'day' . $featurePrefix ) ) === 1 ? ( '0' . $this->getGlobalValue( 'day' . $featurePrefix ) ) : $this->getGlobalValue( 'day' . $featurePrefix );
 					$datetime .= ' ';
-					$datetime .= strlen( $this->getGlobalValue( 'time_hour' ) ) === 1 ? ( '0' . $this->getGlobalValue( 'time_hour' ) ) : $this->getGlobalValue( 'time_hour' );
+					$datetime .= strlen( $this->getGlobalValue( 'time_hour' . $featurePrefix ) ) === 1 ? ( '0' . $this->getGlobalValue( 'time_hour' . $featurePrefix ) ) : $this->getGlobalValue( 'time_hour' . $featurePrefix );
 					$datetime .= ':';
-					$datetime .= strlen( $this->getGlobalValue( 'time_minutes' ) ) === 1 ? ( '0' . $this->getGlobalValue( 'time_minutes' ) ) : $this->getGlobalValue( 'time_minutes' );
-					$fieldset->addFilter( 'datetime', array( 'DefiniteValue' => $datetime ) );
+					$datetime .= strlen( $this->getGlobalValue( 'time_minutes' . $featurePrefix ) ) === 1 ? ( '0' . $this->getGlobalValue( 'time_minutes' . $featurePrefix ) ) : $this->getGlobalValue( 'time_minutes' . $featurePrefix );
+					$fieldset->addFilter( 'datetime' . $featurePrefix, array( 'DefiniteValue' => $datetime ) );
 	//			break;
 				case 'location':
 
-					$fieldset->addElement( array( 'name' => 'address', 'label' => $postTypeLabel . ' Address', 'placeholder' => 'e.g. Jogor Centre', 'type' => 'InputText', 'value' => @$values['address'] ) );  
-					$fieldset->addElement( array( 'name' => 'city', 'label' => $postTypeLabel . ' City', 'placeholder' => 'e.g. Ibadan', 'type' => 'InputText', 'value' => @$values['city'] ) );
-					$fieldset->addElement( array( 'name' => 'province', 'label' => $postTypeLabel . ' - State, Province or Region', 'placeholder' => '', 'type' => 'InputText', 'value' => @$values['province'] ) );
-		//			$fieldset->addElement( array( 'name' => 'ante', 'type' => 'InputText', 'value' => @$values['ante'] ) );
-			//		$form->setParameter( array( 'requirements' => 'address,' . $form->getParameter( 'requirements' ) ) );
-			//		$form->setParameter( array( 'address_fieldset_legend' => 'Event Location'  ) );   
+					$fieldset->addElement( array( 'name' => 'address' . $featurePrefix, 'label' => $postTypeLabel . ' Address', 'placeholder' => 'e.g. Jogor Centre', 'type' => 'InputText', 'value' => @$values['address' . $featurePrefix] ) );  
+					$fieldset->addElement( array( 'name' => 'city . $featurePrefix', 'label' => $postTypeLabel . ' City', 'placeholder' => 'e.g. Ibadan', 'type' => 'InputText', 'value' => @$values['city' . $featurePrefix] ) );
+					$fieldset->addElement( array( 'name' => 'province' . $featurePrefix, 'label' => $postTypeLabel . ' - State, Province or Region', 'placeholder' => '', 'type' => 'InputText', 'value' => @$values['province' . $featurePrefix] ) );
+				break;
+				case 'article':
+					$fieldset->addElement( array( 'name' => 'article_content' . $featurePrefix, 'data-html' => '1', 'label' => '' . $postTypeLabel . ' write up  ' . $featurePrefix, 'rows' => '10', 'placeholder' => 'Enter content here...', 'type' => 'TextArea', 'value' => @$values['article_content' . $featurePrefix] ) );
+
 				break;
 				case 'audio':
 				case 'music':
@@ -1749,48 +1662,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$downloadOptions = array( 
 												'require_user_info' => 'Require log-in before download', 
 												'download_notification' => 'Notify me on every download', 
-										//		'version' => 'This document has a version information', 
-								//				'password' => 'Require a password to download ' . $postTypeLabel . '', 
-										//		'private' => 'This document is private. Do not allow the public to have access to it.', 
-										//		'premium' => 'This is a premium file. Users are charged before they can download.', 
 											);
-					$fieldset->addElement( array( 'name' => 'download_options', 'label' => '' . $postTypeLabel . ' Options', 'type' => 'Checkbox', 'value' => @$values['download_options'] ), $downloadOptions  );
+					$fieldset->addElement( array( 'name' => 'download_options' . $featurePrefix, 'label' => '' . $postTypeLabel . ' Options', 'type' => 'Checkbox', 'value' => @$values['download_options' . $featurePrefix] ), $downloadOptions  );
 					
-			//		if( strlen( @$values['download_base64'] ) < 1999999 )
-					{
-			//			$fieldset->addElement( array( 'name' => 'download_base64', 'type' => 'Hidden', 'value' => @$values['download_base64'] )  );
-					}
-			//		$name = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'download_url' ) : 'download_url' );
-				//	$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . $name;
-				//	$fieldset->addElement( array( 'name' => 'html_xx', 'type' => 'Html', 'value' => '' ), array( 'html' => '<br><input onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;" type=\'button\' value="Browse Site..." /> <input onClick="ayoola.image.formElement = this; ayoola.image.fieldNameValue = \'url\'; ayoola.image.fieldName = \'' . $name . '\'; ayoola.image.clickBrowseButton( { accept: \'\' } );" type=\'button\' value="Browse Device..." />', 'fields' => '' ) );
-				//	$fieldset->addElement( array( 'name' => 'xxxx_html', 'value' => '' ) );
-					$fieldset->addElement( array( 'name' => 'download_url', 'label' => 'Download File', 'placeholder' => 'e.g. http://example.com/path/to/file.mp3', 'type' => 'Document', 'optional' => 'optional', 'value' => @$values['download_url'] ) );
-				//	$fieldset->addRequirement( 'download_url', array( 'IsFile' => array( 'base_directory' => Ayoola_Doc::getDocumentsDirectory() , 'allowed_extensions' => $this->getParameter( 'allowed_extensions' ) ? explode( ',', $this->getParameter( 'allowed_extensions' ) ) : null ) ) );
-	//				$fieldset->addElement( array( 'name' => 'download_base64', 'label' => ' ', 'data-allow_base64' => true, 'type' => 'Document', 'data-previous-url' => '' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/document-8x.png', 'autocomplete' => 'off', 'value' => null ) );
-					
-
-					//	For security reasons, only admins can do this.
-					if( Ayoola_Abstract_Table::hasPriviledge() )
-					{ 
-			//			$fieldset->addElement( array( 'name' => 'download_path', 'type' => 'InputText', 'value' => @$values['download_path'] ) );
-					}
-	/* 				if( @$values['download_version'] || is_array( Ayoola_Form::getGlobalValue( 'download_options' ) ) && in_array( 'version', Ayoola_Form::getGlobalValue( 'download_options' ) ) )  
-					{
-						$fieldset->addElement( array( 'name' => 'download_version', 'type' => 'InputText', 'value' => @$values['download_version'] ) );
-					}		
-	*/				if( @$values['download_password'] || is_array( Ayoola_Form::getGlobalValue( 'download_options' ) ) && in_array( 'password', Ayoola_Form::getGlobalValue( 'download_options' ) ) )
-					{
-						$fieldset->addElement( array( 'name' => 'download_password', 'label' => 'Download Password (Optional)', 'type' => 'InputPassword', 'value' => @$values['download_password'] ) );
-					}		
-				//	if( @$values['premium'] || is_array( Ayoola_Form::getGlobalValue( 'download_options' ) ) && in_array( 'premium', Ayoola_Form::getGlobalValue( 'download_options' ) ) )
-					{
-					//	$fieldset->addElement( array( 'name' => 'item_price', 'label' => 'How much should the ' . $postTypeLabel . ' cost? Leave blank for free downloads', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_price'] ) );
-				//		$fieldset->addElement( array( 'name' => 'item_old_price', 'label' => 'Compare price', 'type' => 'InputText', 'value' => @$values['item_old_price'] ) );
-				//		$fieldset->addFilter( 'item_price', array( 'Currency' => null ) );
-				//		$fieldset->addFilter( 'item_old_price', array( 'Currency' => null ) );
-				///		$fieldset->addRequirement( 'item_price', array( 'WordCount' => array( 1,20 ) ) );
-				//		$fieldset->addRequirement( 'item_old_price', array( 'WordCount' => array( 1,20 ) ) );
-					}		
+					$fieldset->addElement( array( 'name' => 'download_url' . $featurePrefix, 'label' => 'Download File', 'placeholder' => 'e.g. http://example.com/path/to/file.mp3', 'type' => 'Document', 'optional' => 'optional', 'value' => @$values['download_url' . $featurePrefix] ) );
 				break;
 				default:
 					
@@ -1820,9 +1695,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$fieldset->addElement( array( 'name' => $eachField, 'type' => 'Hidden', ) );
 		}
-		
-//		$fieldset->addRequirement( 'article_title', array( 'WordCount' => array( 6,200 ) ) );
-//		$fieldset->addRequirement( 'article_description', array( 'WordCount' => array( 0, 500 ) ) );
 		$fieldset->addLegend( 'Other information' );
 		$form->addFieldset( $fieldset ); 
 		
@@ -1835,14 +1707,17 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		static::initHTMLEditor();
 
 
-	//	var_export( $values['true_post_type'] );
-		if( $values['true_post_type'] == 'article' || $values['true_post_type'] == 'post' || @$values['article_content'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'article', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) || ( is_array( $values['article_options'] ) && in_array( 'article', $values['article_options'] ) ) || $values['article_type'] == 'article' || $values['article_type'] == 'post' || in_array( 'article', $internalForms )  )       
+//		var_export( $values['article_options'] );
+/*		if( $values['true_post_type'] == 'article' || $values['true_post_type'] == 'post' || @$values['article_content'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) 
+		&& in_array( 'article', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) 
+		|| ( is_array( $values['article_options'] ) 
+		&& in_array( 'article', $values['article_options'] ) ) || $values['article_type'] == 'article' || $values['article_type'] == 'post' || in_array( 'article', $internalForms )  )       
 		{
 			$fieldset->addElement( array( 'name' => 'article_content', 'data-html' => '1', 'label' => '' . $postTypeLabel . ' write up (Article)', 'rows' => '10', 'placeholder' => 'Enter content here...', 'type' => 'TextArea', 'value' => @$values['article_content'] ) );
 	//		$fieldset->addRequirement( 'article_content', array( 'WordCount' => array( 0,10000000 ) ) );
 	
 		}
-		if( @$values['article_tags'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'keywords', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )
+*/		if( @$values['article_tags'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'keywords', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )
 		{
 			$fieldset->addElement( array( 'name' => 'article_tags', 'label' => '' . $postTypeLabel . ' Tags', 'placeholder' => 'Enter tags for this ' . $postTypeLabel . ' separated by comma', 'type' => 'InputText', 'value' => @$values['article_tags'] ) );
 	
