@@ -99,7 +99,11 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 			//	write to file
 			self::saveProfile( $values );
 			$fullUrl = Ayoola_Page::getHomePageUrl() . '/' . $values['profile_url'] . '';
-			$this->setViewContent( '<div class="goodnews">Profile saved successfully. <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Share/?url=/' . $values['profile_url'] . '%&title=' . $values['display_name'] . '\' );" href="javascript:">Share!</a></div>', true );
+			$this->setViewContent( '<div class="goodnews">Profile saved successfully. 
+							<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '" target="_blank">Preview</a> | 
+							<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Share/?url=/' . $values['profile_url'] . '%&title=' . $values['display_name'] . '\' );" href="javascript:">Share</a>
+							
+							</div>', true );
 	//		$this->setViewContent( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
 			if( @$_GET['previous_url'] )
 			{

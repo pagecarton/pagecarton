@@ -358,12 +358,15 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			$fieldset->addElement( array( 'name' => 'access_level', 'type' => 'Hidden', 'value' => $_REQUEST['access_level'] ) );  
 			$fieldset->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
 		}
-		$accessLevel = @$_REQUEST['access_level'] ? : $this->getGlobalValue( 'access_level' );
+		$accessLevel = ( @$_REQUEST['access_level'] ? : $this->getGlobalValue( 'access_level' ) ) ? : $values['access_level'];
+//		var_export( $accessLevel );
+//		var_export( $values['access_level'] );
 		$customForm = false;
 		if( $accessLevel )
 		{
 			$authLevel = new Ayoola_Access_AuthLevel;
 			$authLevel = $authLevel->selectOne( null, array( 'auth_level' => $accessLevel ) );
+	//		var_export( $authLevel );
 			if( ! empty( $authLevel['additional_forms'] ) && is_array( $authLevel['auth_options'] ) && in_array( 'attach_forms', $authLevel['auth_options'] ) ) 
 			{
 

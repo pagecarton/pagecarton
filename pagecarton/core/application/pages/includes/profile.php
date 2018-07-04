@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: profile.php	Friday 18th of May 2018 11:01:53 AM	ayoola@ayoo.la $ 
+* @version $Id: profile.php	Wednesday 4th of July 2018 11:25:29 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_337f1f52a5981a69019d7adfdc6b6416 = new Ayoola_Object_Embed( array (
+$_358989b0d9d1aafc1c51c9ff6c85da92 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Profile_View',
   'advanced_parameter_value' => 
   array (
@@ -30,18 +30,66 @@ $_337f1f52a5981a69019d7adfdc6b6416 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_337f1f52a5981a69019d7adfdc6b6416 = null;
+$_358989b0d9d1aafc1c51c9ff6c85da92 = null;
 
 							}
+							
+							if( Ayoola_Page::hasPriviledge( array (
+  0 => '98',
+  1 => '99',
+), array( 'strict' => true ) ) )
+							{
+								if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+								{
+									
+$_1cfd3b6b8526759bd378871f87b275b7 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '
+
+<p style="text-align: center;">
+<a class="btn btn-default" href="/widgets/Application_Profile_Editor/?profile_url={{{profile_url}}}">Edit Profile</a>
+<a class="btn btn-danger" href="/widgets/Application_Profile_Delete/?profile_url={{{profile_url}}}">Delete Profile</a>
+
+</p>',
+  'preserved_content' => '<p style="text-align: center;">
+<a class="btn btn-default" href="/widgets/Application_Profile_Editor/?profile_url={{{profile_url}}}">Edit Profile</a>
+<a class="btn btn-danger" href="/widgets/Application_Profile_Delete/?profile_url={{{profile_url}}}">Delete Profile</a>
+
+</p>',
+  'url_prefix' => '',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Profile_View',
+  ),
+  'phrase_to_replace' => '',
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  'object_access_level' => 
+  array (
+    0 => '98',
+    1 => '99',
+  ),
+  'wrapper_name' => 'well',
+  '' => '',
+) );
+
+								}
+								else
+								{
+									
+$_1cfd3b6b8526759bd378871f87b275b7 = null;
+
+								}
+							}    
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_b69000b28c902a54d8dbde45f0a62078 = new Ayoola_Page_Editor_Text( array (
+$_1ea76315bfea90e5bd00bcc59cc03e95 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<br>',
   'preserved_content' => '<br>',
   'url_prefix' => '/x',
-  'markup_template_object_name' => '',
   'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
@@ -55,20 +103,23 @@ $_b69000b28c902a54d8dbde45f0a62078 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_b69000b28c902a54d8dbde45f0a62078 = null;
+$_1ea76315bfea90e5bd00bcc59cc03e95 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_e9b8486357fa0ae2f80b0459237503b1 = new Ayoola_Page_Editor_Text( array (
+$_47b4dea8cee177d5070a7e9ff0aae5ae = new Ayoola_Page_Editor_Text( array (
   'editable' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/x/tools/classplayer/get/name/Application_Message_ShowAll/?to={{{profile_url}}}\' );" href="javascript:"> <i class="fa fa-envelope" style="margin-right: 1em;"></i> Message</a>
 ',
-  'preserved_content' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/x/tools/classplayer/get/name/Application_Message_Creator/?to={{{profile_url}}}\' );" href="javascript:">Message</a>
+  'preserved_content' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/x/tools/classplayer/get/name/Application_Message_ShowAll/?to={{{profile_url}}}\' );" href="javascript:"> <i class="fa fa-envelope" style="margin-right: 1em;"></i> Message</a>
 ',
   'url_prefix' => '/x',
-  'markup_template_object_name' => 'Application_Global',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Global',
+  ),
   'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
@@ -82,20 +133,23 @@ $_e9b8486357fa0ae2f80b0459237503b1 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_e9b8486357fa0ae2f80b0459237503b1 = null;
+$_47b4dea8cee177d5070a7e9ff0aae5ae = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_01eda85b98bda9e8333625dc77ad7484 = new Ayoola_Page_Editor_Text( array (
+$_e5f3f4c65940d7681d18d8ea47207773 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'{{{share_url}}}\' );" href="javascript:"> <i class="fa fa-share-alt" style="margin-right: 1em;"></i> Share ({{{share_count}}})</a>
 ',
-  'preserved_content' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'{{{share_url}}}\' );" href="javascript:">Share ({{{share_count}}})</a>
+  'preserved_content' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'{{{share_url}}}\' );" href="javascript:"> <i class="fa fa-share-alt" style="margin-right: 1em;"></i> Share ({{{share_count}}})</a>
 ',
   'url_prefix' => '/x',
-  'markup_template_object_name' => 'Application_Share',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Share',
+  ),
   'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
@@ -109,18 +163,17 @@ $_01eda85b98bda9e8333625dc77ad7484 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_01eda85b98bda9e8333625dc77ad7484 = null;
+$_e5f3f4c65940d7681d18d8ea47207773 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_c018e6c5819c7575815757750463f0d3 = new Ayoola_Page_Editor_Text( array (
+$_2ad96c7faaf8eac0f3bb423a2121e525 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<br>',
   'preserved_content' => '<br>',
   'url_prefix' => '/x',
-  'markup_template_object_name' => '',
   'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
@@ -134,14 +187,14 @@ $_c018e6c5819c7575815757750463f0d3 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_c018e6c5819c7575815757750463f0d3 = null;
+$_2ad96c7faaf8eac0f3bb423a2121e525 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
 							{
 								
-$_47b477afa92568bdd6fb28a66d065985 = new Application_Article_ShowAll( array (
+$_a9daf128f1dc5bbc057898a9accd1e1c = new Application_Article_ShowAll( array (
   'option' => '5',
   'category_name' => '',
   'article_types' => '',
@@ -164,7 +217,7 @@ $_47b477afa92568bdd6fb28a66d065985 = new Application_Article_ShowAll( array (
 							else
 							{
 								
-$_47b477afa92568bdd6fb28a66d065985 = null;
+$_a9daf128f1dc5bbc057898a9accd1e1c = null;
 
 							}
 							
