@@ -347,7 +347,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		{
 			$account = new Ayoola_Form_Element;
 		//	$account->id = __CLASS__ . 'level';
-			$account->addElement( array( 'name' => 'access_level', 'label' => 'Profile Type', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), $options );  
+			$account->addElement( array( 'name' => 'access_level', 'label' => '', 'onchange' => 'location.search+=\'&access_level=\'+ this.value;', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), array( 'Select Profile Type' ) + $options );  
 			$account->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
 			$account->addLegend( $legend );
 			unset( $authLevel );

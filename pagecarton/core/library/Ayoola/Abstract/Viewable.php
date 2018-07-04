@@ -808,9 +808,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$results[1] = array_unique( $results[1] );
 		sort( $results[1] );
 		static::$_parameterKeys[$thisObjectID] = $results[1];   
-		if( in_array( 'Application_Profile_View', $classes ) )
+	//	if( in_array( 'Application_Profile_View', $classes ) )
 		{
-			var_export( $results[1] );
+	//		var_export( $results[1] );
 		}
 
 	//	var_export( $results[1] );

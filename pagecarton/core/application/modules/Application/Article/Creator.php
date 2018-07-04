@@ -64,7 +64,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 			{
 				$realType = $postTypeInfo['article_type'];
 				$postType = $postTypeInfo['post_type'];
-				$joinedType = $realType . ' ('. $postType . ')'; 
+				$joinedType = $realType . ' ('. $postType . ') item'; 
 			}   
 			$joinedType = $joinedType ? : 'Post';
 			@$articleSettings['allowed_writers'] = $articleSettings['allowed_writers'] ? : array();
@@ -83,7 +83,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 				return false;
 			}
 			
-			$this->createForm( 'Save', $this->getParameter( 'form_legend' ) ? : 'Add a new ' . $joinedType );
+			$this->createForm( 'Save', $this->getParameter( 'form_legend' ) ? : 'Post a new ' . $joinedType );
 			if( $this->getParameter( 'class_to_play_when_completed' ) )
 			{
 				$this->setViewContent( Ayoola_Object_Embed::viewInLine( array( 'editable' => $this->getParameter( 'class_to_play_when_completed' ) ) + $this->getParameter() ? : array() ) );
