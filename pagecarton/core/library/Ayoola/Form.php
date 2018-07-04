@@ -1266,7 +1266,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      * @param array
      * @return null
      */
-    public function setDefaultValues( array $values )
+    public static function setDefaultValues( array $values )
     {
 		self::$_defaultValues += $values;
     }

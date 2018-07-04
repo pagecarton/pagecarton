@@ -512,7 +512,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		//	var_export( $tableFile . '<br />' );
 			if( $cacheTime <= @filemtime( $tableFile ) ){ @unlink( $cacheFile ); }
 		}
-	//	var_export( filemtime( $cacheFile ) . '<br />' );
+	//	if( stripos( $cacheFile, 'Ayoola/Access/authlevel' ) && stripos( $cacheFile, 'belluth' ) )
+		{
+		//	var_export( $cacheFile . '<br />' );
+	//		var_export( get_include_path()  . '<br />' );
+		//	exit();
+	//		PageCarton_Widget::v( func_get_args() );
+		}
 	//	var_export( filemtime( $tableFile ) . '<br />' );
 	//	var_export( filemtime( $tableFile ) );
 	//	var_export( $cacheFile );

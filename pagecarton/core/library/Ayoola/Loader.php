@@ -70,7 +70,7 @@ class Ayoola_Loader
      */
     public static function getValidIncludePaths( $relativePath, array $options = array() )
     {
-		$pathsId = md5( $relativePath . Ayoola_Application::getPathPrefix() . json_encode( $options ) );
+		$pathsId = md5( $relativePath . get_include_path() . Ayoola_Application::getPathPrefix() . json_encode( $options ) );
 		if( ! empty( self::$_validIncludePaths[$pathsId] ) && empty( $options['refresh_list'] ) )
 		{
 			return self::$_validIncludePaths[$pathsId];
