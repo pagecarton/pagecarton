@@ -132,11 +132,11 @@ abstract class Ayoola_Page_Menu_Abstract extends Ayoola_Abstract_Table
 		{
 			if( self::hasPriviledge() )
 			{
-				$adminOptions = '<button type="button" class="pc-btn pc-btn-small" title="Add a new category" rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_List/\', \'page_refresh\' )"> Manage Categories </button> ';
+				$adminOptions = '<button type="button" class="pc-btn pc-btn-small" title="Add a new category" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Articles/\', \'page_refresh\' )"> Manage Categories </button> ';
 			}
 			$fieldset = new Ayoola_Form_Element;
 			$fieldset->addLegend( 'Add links from a post category'  );
-	//		$fieldset->addElement( array( 'name' => 'keywords', 'placeholder' => 'Comma-separated keywords for search engines', 'type' => 'InputText', 'value' => @$values['keywords'] ) );
+	//		$fieldset->addElement( array( 'name' => 'keywords', 'placeholder' => 'Comma-separated keywords for search engines', 'type' => 'InputText', 'value' => @$values['keywords'] ) );   
 			
 	//		$options = new Application_Category;
 			$options = Application_Category_ShowAll::getPostCategories();

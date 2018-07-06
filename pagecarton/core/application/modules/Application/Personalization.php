@@ -309,7 +309,7 @@ class Application_Personalization extends Ayoola_Abstract_Table
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = 'Continue Personalization';
-		$form->oneFieldSetAtATime = true;
+		$form->oneFieldSetAtATimeJs = true;
 	//	$form->oneFieldSetAtATime = false;
 		foreach( self::$_stages as $class )
 		{

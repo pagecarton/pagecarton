@@ -226,10 +226,9 @@ class Application_Subscription extends Application_Subscription_Abstract
 			$previousData = array();
 		}
 		
-		//	Inconsistent Password
-		if( @$previousData['settings']['password'] && $previousData['settings']['password'] != $settings['password'] )
+		//	Inconsistent Password or we want to refresh cart
+		if( ( @$previousData['settings']['password'] && $previousData['settings']['password'] != $settings['password'] ) || ! empty( $values['refresh_cart'] ) )
 		{ 
-		//	throw new Application_Subscription_Exception( 'CART DOES NOT SUPPORT AMBIGOUS CURRENCIES - YOUR SHOPPING CART HAS BEEN CLEARED/REFRESHED' ); 
 			$this->getStorage()->store( array() );
 			$previousData = array();
 		}

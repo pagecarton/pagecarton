@@ -63,12 +63,18 @@ class Application_Profile_View extends Application_Profile_Abstract
 			}
 			if( ! @$this->_parameter['markup_template'] ) 
 			{  
+                $displayName = '{{{display_name}}}';
+                if( Ayoola_Application::getRuntimeSettings( 'real_url' ) != '/profile' )
+                {
+                    $displayName = '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '">{{{display_name}}}</a>';
+                }
 				$this->_parameter['markup_template'] = '
                 <div class="pc_theme_parallax_background" style="background-color:#444;background-image: url(\'{{{profile_banner}}}\');">
                     <div class="' . $this->getParameter( 'css_class_of_inner_content' ) . '">
                         <div class="pc-profile-image-div" style="background-image: url(\'{{{display_picture}}}\'); margin-right:1em;">&nbsp;</div>
                         <div style="">
-                            <h3 style="margin-top:0;">{{{display_name}}}</h3>
+                            <h3 style="margin-top:0;">' . $displayName . '</h3>
+                            <br>
                             <p>{{{profile_description}}}</p>
                             <p><i class="fa fa-share-alt"></i> {{{link_to_view_profile}}}</p>
                         </div>

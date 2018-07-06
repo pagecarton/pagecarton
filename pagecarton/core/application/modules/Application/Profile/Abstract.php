@@ -110,6 +110,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		$userInfo = $access->getUserInfo();
 	//	var_export( $userInfo );
 		@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
+	//	var_export( $userInfo );
 		if( ! $userInfo['profiles'] )
 		{
 			$table = Application_Profile_Table::getInstance();

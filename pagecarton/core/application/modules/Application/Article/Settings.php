@@ -125,7 +125,7 @@ class Application_Article_Settings extends Application_Settings_Abstract
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
 		$options = $filter->filter( $options );
-		$fieldset->addElement( array( 'name' => 'allowed_categories', 'label' => 'Select site-wide categories available for users when creating posts <a rel="spotlight;changeElementId=page_refresh" title="Manage Categories" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_List/"> Manage Categories</a>', 'value' => @$settings['allowed_categories'], 'type' => 'Checkbox' ), $options );
+		$fieldset->addElement( array( 'name' => 'allowed_categories', 'label' => 'Select site-wide categories available for users when creating posts <a rel="spotlight;changeElementId=page_refresh" title="Manage Categories" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_List/"> Manage All Categories</a>', 'value' => @$settings['allowed_categories'], 'type' => 'Checkbox' ), $options );
 		
 		$fieldset->addLegend( 'Post Settings' );
 		$form->addFieldset( $fieldset );

@@ -235,7 +235,7 @@ class Ayoola_Application
 			self::setDomainSettings();
 	//		var_export( self::$_domainSettings );
 		}
-		
+	//	var_export( self::$_domainSettings );
 		return $key ? @self::$_domainSettings[$key] : self::$_domainSettings;
 	}
 	
@@ -336,6 +336,18 @@ class Ayoola_Application
 			//	var_export( $tempWhere );
 				
 			}
+			if( ! @$subDomain && ! $data['domain_settings'] )
+			{
+				//	look for domain in the users table
+				$userDomainInfo = Application_Domain_UserDomain::getInstance()->selectOne( null, array( 'domain_name' => $where['domain_name'] ) );
+				
+				//	link it to the profile
+				$subDomain = $userDomainInfo['profile_url'];
+				$data['domain_settings'] = $userDomainInfo;
+				$data['domain_settings']['domain_options'] = array( 'user_subdomains' );
+		//		var_export( $userDomainInfo );
+			//	exit();
+			}
 			if( ! @$subDomain && @in_array( 'ssl', @$data['domain_settings']['domain_options'] ) && $protocol != 'https' )
 			{
 				header( 'Location: https://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
@@ -357,10 +369,12 @@ class Ayoola_Application
 				}
 			
 			}
+	//		var_export( $data['domain_settings'] );
 			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] )
 			{
 				if( ! $domain->select() && ( '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] ) )
 				{
+					//	insert the first domain only
 					$domain->insert( $where );
 					$data['domain_settings'] = $where;
 					break;
@@ -499,6 +513,7 @@ class Ayoola_Application
 				
 				//	do we have user domains
 				$userInfo = Ayoola_Access::getAccessInformation( $subDomain );
+			//	exit( var_export( $userInfo ) );
 				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) AND ( $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) )  )
 //				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) AND ( $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) ) AND @$userInfo['access_level'] != 99  )
 				{
@@ -517,13 +532,16 @@ class Ayoola_Application
 				//	$storage->store( $data );
 				//	setcookie( 'SUB_DIRECTORY', $subDomain['domain_name'], time() + 9999999, '/' );
 				}
-				elseif( ! empty( $tempWhere['domain_name'] ) )
+				elseif( ! empty( $tempWhere['domain_name'] ) && $tempWhere['domain_name'] != self::getDomainName() )
 				{
+			//		var_export( $tempWhere );
+			//		var_export( $subDomain );
+			//		exit();
 			//		header( 'HTTP/1.1 301 Moved Permanently' );
 					header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
 				//	var_export( $data );
 					
-					exit( 'DOMAIN NOT IN USE' );
+					exit( 'USER DOMAIN NOT ACTIVE' );
 				}
 				else
 				{

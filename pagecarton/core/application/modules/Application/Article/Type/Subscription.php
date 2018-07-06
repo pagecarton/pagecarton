@@ -74,7 +74,12 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			unset( $values['document_url_base64'], $values['download_base64'] ); 
 			
 			//	data
-			$this->_objectData['quantity'] = $values['quantity'] = intval( @$_REQUEST['quantity'] ) ? : 1;	
+			$values['quantity'] = intval( @$_REQUEST['quantity'] ) ? : 1;	
+			if( ! empty( $values['subscription_minimum_order'] ) && intval( $values['subscription_minimum_order'] ) > $values['quantity'] )
+			{
+				$values['quantity'] = $values['subscription_minimum_order'];
+			}
+			$this->_objectData['quantity'] = $values['quantity'];	
 			
 			//	Domain Reg
 			$values['subscription_name'] = $data['article_url'];
@@ -99,7 +104,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$values['cycle_label'] = '';
 			$values['price_id'] = $data['article_url'];
 			$values['subscription_description'] = $data['article_description'];
-			$values['url'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];     
+			$values['url'] = Ayoola_Application::getUrlPrefix() . ( @$data['cart_url'] ? : $data['article_url'] );     
 			@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
 			//	''
 			//	After we checkout this is where we want to come to

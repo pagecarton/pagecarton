@@ -1643,7 +1643,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				case 'location':
 
 					$fieldset->addElement( array( 'name' => 'address' . $featurePrefix, 'label' => $postTypeLabel . ' Address', 'placeholder' => 'e.g. Jogor Centre', 'type' => 'InputText', 'value' => @$values['address' . $featurePrefix] ) );  
-					$fieldset->addElement( array( 'name' => 'city . $featurePrefix', 'label' => $postTypeLabel . ' City', 'placeholder' => 'e.g. Ibadan', 'type' => 'InputText', 'value' => @$values['city' . $featurePrefix] ) );
+					$fieldset->addElement( array( 'name' => 'city' . $featurePrefix, 'label' => $postTypeLabel . ' City', 'placeholder' => 'e.g. Ibadan', 'type' => 'InputText', 'value' => @$values['city' . $featurePrefix] ) );
 					$fieldset->addElement( array( 'name' => 'province' . $featurePrefix, 'label' => $postTypeLabel . ' - State, Province or Region', 'placeholder' => '', 'type' => 'InputText', 'value' => @$values['province' . $featurePrefix] ) );
 				break;
 				case 'article':
