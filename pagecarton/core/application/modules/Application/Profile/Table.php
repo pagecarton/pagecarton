@@ -17,7 +17,7 @@
  */
 
 
-class Application_Profile_Table extends PageCarton_Table_Private
+class Application_Profile_Table extends PageCarton_Table_Protected // need to be protected so it can be used for subdomain in Ayoola_Application
 {
 
     /**

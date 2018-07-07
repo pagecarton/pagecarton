@@ -154,19 +154,12 @@ class Application_Subscription extends Application_Subscription_Abstract
 					<input name="' . __CLASS__ . '_next_steps" onClick="ayoola.div.selectElement( this )" class="boxednews" value="See products and services" type="button" /></a>
 			</span> 
  */ 
-		self::$_confirmation = '<p>Product or service has been added to your shopping cart. You can:</p>
-		<span>
+		self::$_confirmation = '<p class="goodnews">Product or service has been added to your shopping cart. <a href="' . Ayoola_Application::getUrlPrefix() . '/cart/">View Shopping Cart</a></p>
+		<div>
 			<span>
-				<a onClick="window.parent.location.href=this.href;" href="' . Ayoola_Application::getUrlPrefix() . '/onlinestore/checkout/">
-					<input name="' . __CLASS__ . '_next_steps" onClick="ayoola.div.selectElement( this )" class="boxednews goodnews" value="Make payment" type="button" />
-				</a>
+				
 			</span>
-			<span>
-				<a onClick="window.parent.location.href=this.href;" href="' . Ayoola_Application::getUrlPrefix() . '/onlinestore/cart/">
-					<input name="' . __CLASS__ . '_next_steps" onClick="ayoola.div.selectElement( this )" class="boxednews" value="View shopping cart" type="button" />
-				</a>
-			</span>
-		</span>';
+		</div>';
  	//	self::$_confirmation .= Ayoola_Menu::viewInLine( null, 'onlinestore' );
 //		self::$_confirmation .= Application_Subscription_Cart::viewInLine();
 		return self::$_confirmation;

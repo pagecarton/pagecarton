@@ -47,6 +47,13 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      * @var string 
      */
 	public static $title;
+
+    /**
+     * Data storage device
+     *
+     * @var string e.g. Session, File
+     */
+	protected static $_objectStorageDevice = 'File';
 	
     /**
      * Page Description
@@ -113,25 +120,17 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		{
 			$id = Ayoola_Application::getPathPrefix() . $url;
 //			$id = $url . Ayoola_Application::getPathPrefix();
-			$storage = self::getObjectStorage( array( 'id' => $id ) );
-	//		$storage->storageNamespace = md5( __METHOD__ . $url . Ayoola_Application::getPathPrefix() );
-		//	var_export( $storage->storageNamespace );
-	  //  	self::v( $id );  
-	   // 	self::v( $url );  
-	 //   	self::v( Ayoola_Application::getPathPrefix() );
-	  //  	self::v( $storage->storageNamespace );
+			$storage = self::getObjectStorage( array( 'id' => $id,  ) );
 			if( $info = $storage->retrieve() )
 			{ 
-	 		 // 	var_export( $info );
-				//	var_export( unserialize( $info['cache_info'] ) );
-				break; 
+		//		break; 
 			}
 			
 			
 			$tableName = 'Ayoola_Page_Page';		
 		//	$table = new $tableName;		
 			$table = $tableName::getInstance();		
-	   // 	var_export( array( 'url' => $url ) );
+	   // 	self::v( array( 'url' => $url ) );
 	  //  	self::v( $table->selectOne( null, array( 'url' => $url ) ) );
 			if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'id' => $id ) ) )
 			{
@@ -141,25 +140,23 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				$storage->store( $info ); 
 				break; 
 			}
+			$table = $tableName::getInstance( $tableName::SCOPE_PROTECTED );
 			$table->getDatabase()->setAccessibility( $tableName::SCOPE_PROTECTED );
-	//		self::v( $tableName::SCOPE_PROTECTED );
-	//		self::v( $info );
-  			
-		//	var_export( $table->selectOne( null, array( 'url' => $url ), array( 'disable_cache' => true ) ) );
-			
-			//	We need to cache this to save load time
-	//		if( $info = $table->selectOne( null, array( 'url' => $url ) ) )
-	//		if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'disable_cache' => true ) ) )
+	   // 	self::v( $info );
 			if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'work-arround-1-333' => true ) ) )
 			{ 
+				//	remove info we dont want
 				if( @in_array( 'private', $info['page_options'] ) )
 				{
 					//	We are not allowed to access parent page.
 			//		var_export( self::$_currentPageInfo );
 					$info = array();
 					return false; 
-					throw new Ayoola_Exception( 'PAGE INHERITANCE NOT ALLOWED: ' . $url );
+				//	throw new Ayoola_Exception( 'PAGE INHERITANCE NOT ALLOWED: ' . $url );
 				}
+				@$info['page_options'] = array_combine( $info['page_options'], $info['page_options'] );
+				unset( $info['title'], $info['description'], $info['layout_name'], $info['page_options']['template'], $info['cover_photo'] );
+		//		self::v( $info );
 			//		var_export( self::$_currentPageInfo );
 				$info['cache_info'] = serialize( $storage );
 				$storage->store( $info );

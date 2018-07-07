@@ -20,6 +20,13 @@ class Application_Domain_UserDomain_Creator extends Application_Domain_UserDomai
 {
 	
     /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var boolean
+     */
+	protected static $_accessLevel = array( 1 );  
+	
+    /**
      * 
      * 
      * @var string 
@@ -34,8 +41,24 @@ class Application_Domain_UserDomain_Creator extends Application_Domain_UserDomai
     {    
 		try
 		{ 
+			if( ! $this->requireRegisteredAccount() )
+			{
+				return false;
+			}
+			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );  
+			@$articleSettings['allowed_writers'] = $articleSettings['allowed_writers'] ? : array();
+			$articleSettings['allowed_writers'][] = 98; //	subdomain owners can add posts
+			if( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
+			{ 
+				$this->setViewContent( '<span class="badnews">You do not have enough priviledges to add a domain. </span>', true );
+				return false;     
+			}
+			if( ! $this->requireProfile() )
+			{
+				return false;
+			}
             //  Code that runs the widget goes here...
-			$this->createForm( 'Submit...', 'Add existing domain to your account' );
+			$this->createForm( 'Submit...', 'Link a domain name to your account' );
 			$this->setViewContent( $this->getForm()->view() );
 
 		//	self::v( $_POST );

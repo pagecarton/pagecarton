@@ -336,7 +336,8 @@ class Ayoola_Application
 			//	var_export( $tempWhere );
 				
 			}
-			if( ! @$subDomain && ! $data['domain_settings'] )
+	//		var_export( $subDomain );
+			if( ! $data['domain_settings'] )
 			{
 				//	look for domain in the users table
 				$userDomainInfo = Application_Domain_UserDomain::getInstance()->selectOne( null, array( 'domain_name' => $where['domain_name'] ) );
@@ -345,7 +346,8 @@ class Ayoola_Application
 				$subDomain = $userDomainInfo['profile_url'];
 				$data['domain_settings'] = $userDomainInfo;
 				$data['domain_settings']['domain_options'] = array( 'user_subdomains' );
-		//		var_export( $userDomainInfo );
+				$data['domain_settings']['main_domain'] = $where['domain_name'];
+			//	var_export( $userDomainInfo );
 			//	exit();
 			}
 			if( ! @$subDomain && @in_array( 'ssl', @$data['domain_settings']['domain_options'] ) && $protocol != 'https' )
@@ -369,7 +371,7 @@ class Ayoola_Application
 				}
 			
 			}
-	//		var_export( $data['domain_settings'] );
+//			var_export( $data['domain_settings'] );
 			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] )
 			{
 				if( ! $domain->select() && ( '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] ) )
@@ -490,7 +492,7 @@ class Ayoola_Application
 			//		var_export( $data['domain_settings'] );
 					$data['domain_settings'] = $subDomainInfo;
 				//	var_export( $subDomainInfo );
-					$data['domain_settings']['main_domain'] = $tempWhere['domain_name'];
+					$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
 					$data['domain_settings']['domain_name'] = $subDomain . '.' . $tempWhere['domain_name'];
 					$data['domain_settings'][APPLICATION_DIR] = str_replace( '/', DS, Application_Domain_Abstract::getSubDomainDirectory( $subDomainInfo['domain_name'] ) );
 					$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
@@ -513,16 +515,28 @@ class Ayoola_Application
 				
 				//	do we have user domains
 				$userInfo = Ayoola_Access::getAccessInformation( $subDomain );
-			//	exit( var_export( $userInfo ) );
-				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) AND ( $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) )  )
-//				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) AND ( $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) ) AND @$userInfo['access_level'] != 99  )
+				if( ! $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) )
+				{
+					$userInfo = Application_Profile_Abstract::getProfileInfo( $subDomain );
+				}
+//				var_export( $subDomain );
+//				exit();
+			//	if( $subDomain == 'pagecartonad' )
+				{
+			//		var_export( self::$_includePaths );
+			//		var_export( $userInfo );
+				//	exit( var_export( $userInfo ) );
+				}
+				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) && $userInfo  )
 				{
 			//		var_export( $data['domain_settings'] );
 					Ayoola_Application::$GLOBAL = $userInfo;
-					$data['domain_settings'] = $userInfo;
-				//	var_export( $subDomain );     
+					$data['domain_settings'] = $data['domain_settings'] ? : array();
+					$data['domain_settings'] += $userInfo;
+			//		var_export( $userInfo ); 
+			//		exit();    
 				//	Application_Profile_Abstract::saveProfile( $information );
-					$data['domain_settings']['main_domain'] = $tempWhere['domain_name'];
+					$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
 					$data['domain_settings']['domain_name'] = $domainName;					
 			//		$data['domain_settings'][APPLICATION_DIR] = Application_Profile_Abstract::getProfileDir( $userInfo['username'] );
 					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] . DS . AYOOLA_MODULE_FILES .  DS . 'profiles' . DS . strtolower( implode( DS, str_split( $userInfo['username'], 2 ) ) );    

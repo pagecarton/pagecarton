@@ -242,7 +242,7 @@
 
 .pc-btn-parent a, .pc-btn, .pc-element-like-btn {
     background-color: #ccc;
-    border: 0;
+    border: 1px outset #aaa;
     display: inline-block;
     cursor: pointer;
     color: #000;

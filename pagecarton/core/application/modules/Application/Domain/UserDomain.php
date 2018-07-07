@@ -17,7 +17,7 @@
  */
 
 
-class Application_Domain_UserDomain extends PageCarton_Table
+class Application_Domain_UserDomain extends PageCarton_Table_Public
 {
 
     /**

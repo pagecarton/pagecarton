@@ -129,7 +129,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				//	$page = $defaultPage;			
 					$pageToCopy = $defaultPage;
 				}				
-				$this->setViewContent( '<div class="">This page with url - "' . $this->_dbWhereClause['url'] . '" exists as part of the preset pages in PageCarton or in a parent website. The system need to make a copy of the page before you can edit it. Do you want to do that right now?</div>', true );
+		//		$this->setViewContent( '<div class="">This page with url - "' . $this->_dbWhereClause['url'] . '" exists as part of the preset pages in PageCarton or in a parent website. The system need to make a copy of the page before you can edit it. Do you want to do that right now?</div>', true );
 		//		$this->createConfirmationForm( 'Continue...' );
 			//	$this->setViewContent( $this->getForm()->view() );
 			//	if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -1798,7 +1798,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		
 		//	Display Widgets Editor
 		var optionbar = document.createElement( "span" );
-		optionbar.innerHTML = \'Update Content\';
+		optionbar.innerHTML = \'Widget Options\';
 		optionbar.className = " pc-btn pc-btn-small";
 		optionbar.title = "Show or hide widget options";
 		optionbar.onclick = function()
@@ -1811,7 +1811,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			}
 			else
 			{
-				this.innerHTML = \'Hide Widgets\';
+				this.innerHTML = \'Hide Options\';
 				ayoola.style.addClass( a, "pc_page_widgetmode" ); 
 			}
 		};

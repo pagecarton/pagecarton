@@ -209,6 +209,11 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		if( is_null( $identifier ) ){ $identifier = $this->getIdentifier(); }
 		$table = $this->getDbTable();
 	//	var_export( $identifier );
+		if( is_array( $this->_dbWhereClause ) )
+		{
+			$identifier = $identifier ? : array();
+			$identifier += $this->_dbWhereClause;
+		}
 		$this->_identifierData = (array) $table->selectOne( null, $identifier );
 	//	var_export( $this->_identifierData );
 		

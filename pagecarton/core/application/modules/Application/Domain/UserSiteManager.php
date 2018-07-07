@@ -6,42 +6,66 @@
  * LICENSE
  *
  * @category   PageCarton CMS
- * @package    Application_Domain_UserDomain_List
- * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
+ * @package    Application_Domain_UserSiteManager
+ * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
- * @version    $Id: List.php Wednesday 20th of December 2017 03:21PM ayoola@ayoo.la $
+ * @version    $Id: UserSiteManager.php Friday 6th of July 2018 11:58PM ayoola@ayoo.la $
  */
 
 /**
  * @see PageCarton_Widget
  */
 
-class Application_Domain_UserDomain_List extends Application_Domain_UserDomain_Abstract
+class Application_Domain_UserSiteManager extends PageCarton_Widget
 {
- 	
+	
+    /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var boolean
+     */
+	protected static $_accessLevel = array( 0 );
+	
     /**
      * 
      * 
      * @var string 
      */
-	  protected static $_objectTitle = 'My Domains';   
-
- 
+	protected static $_objectTitle = 'My Sites'; 
+	
     /**
-     * Performs the creation process
-     *
-     * @param void
-     * @return void
-     */	
-    public function init()
-    {
-      if( ! self::hasPriviledge() )
-      {
-        $this->_dbWhereClause['username'] = Ayoola_Application::getUserInfo( 'username' );
-        $this->_dbWhereClause['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
-      }
-      $this->setViewContent( $this->getList() );		
-    } 
+     * 
+     * 
+     * @var string 
+     */
+	protected $_tableClass = 'Application_Profile_Table'; 
+
+    /**
+     * Performs the whole widget running process
+     * 
+     */
+	public function init()
+    {    
+		try
+		{ 
+            //  Code that runs the widget goes here...
+            if( ! self::hasPriviledge() )
+            {
+                $this->_dbWhereClause['username'] = Ayoola_Application::getUserInfo( 'username' );
+                $this->_dbWhereClause['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
+            }
+            $this->setViewContent( $this->getList() );		
+             // end of widget process
+          
+		}  
+		catch( Exception $e )
+        { 
+            //  Alert! Clear the all other content and display whats below.
+        //    $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
+            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+            return false; 
+        }
+	}
 	
     /**
      * Paginate the list with Ayoola_Paginator
@@ -66,10 +90,10 @@ class Application_Domain_UserDomain_List extends Application_Domain_UserDomain_A
 		$list->createList
 		(
 			array(
-                    'domain' => array( 'field' => 'domain_name', 'value' =>  '<a target="_blank" href="http://%FIELD%/">%FIELD%</a> ', 'filter' =>  '' ), 
+                    'site' => array( 'field' => 'profile_url', 'value' =>  '<a target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() . '">http://%FIELD%.' . Ayoola_Application::getDomainName() . '</a> ', 'filter' =>  '' ), 
               //      'user_id' => array( 'field' => 'user_id', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
              //       'username' => array( 'field' => 'username', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-                    'subdomain' => array( 'field' => 'profile_url', 'value' =>  '%FIELD%.' . Ayoola_Application::getDomainName(), 'filter' =>  '' ), 
+            //        'subdomain' => array( 'field' => 'profile_url', 'value' =>  '%FIELD%.' . Ayoola_Application::getDomainName(), 'filter' =>  '' ), 
               //      'expiry' => array( 'field' => 'expiry', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
                     '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 

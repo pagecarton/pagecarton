@@ -43,41 +43,12 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
     {
 		try
 		{
-		//	var_export( $this->getObjectStorage()->retrieve() );
-/*  			$parameters = $this->getObjectStorage()->retrieve();
-			$class = 'Application_Domain_Registration_CheckAvailability';			
-	//		if( false !== @$this->getParameter( $class ) )
-			{ 
-				$class = new $class();
-				$class->initOnce();
-		//		$this->setViewContent( $class->view(), true );
-			}
-		//	var_export( $parameters );
-/* 			if( ! empty( $parameters['suggestions'] ) ){ $this->setParameter( $parameters ); }
-			else
-			{
-				return;
-			}
- */		//	$this->setParameter( array( 'suggestions' => array( 'abc.com' ) ) );
- 		//	$this->setViewContent( '<h2>Avalaible domain name(s)</h2>' );
 			$this->createForm( 'Register', 'Register domain name' );
-/* 			var_export( $this->getParameter() );
-			exit();
- */			$this->setViewContent( $this->getForm()->view() );
-		//	var_export( $this->getObjectStorage()->retrieve() );
-	//		var_export( __LINE__ );
+ 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() )
 			{ 
-			//	var_export( $this->getForm()->getBadnews() );
 				return false; 
 			}
-			
-			//	Register the selection in the shopping cart
-			
-			
-			
-	//		var_export( $values );
-		//	$class->init();
 			$this->subscribe( $values );
 			
 			
@@ -91,24 +62,6 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 		
     } 
 	
-    /**
-     * 
-     * 
-     */
-/* 	public function subscribe( array $values )
-    {
-		if( ! empty( $values['options'] ) )
-		{
-			foreach( $values['options'] as $each )
-			{
-				$class = new Application_Subscription();
-				$class->setIdentifier( array( 'subscription_name' => $each ) );
-				$class->subscribe( $values );
-			}
-		}
-		$this->setViewContent( Application_Subscription::getConfirmation(), true );
-    } 
- */	
     /**
      * 
      * 
@@ -177,7 +130,8 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 				
 			}
 		}
-		$this->setViewContent( Application_Subscription::getConfirmation(), true );
+
+	//	$this->setViewContent( Application_Subscription::getConfirmation(), true );
     } 
 	
 	
@@ -207,74 +161,12 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 		//	if( ! method_exists( $class, 'createForm' ) ){ continue; }
 			$fieldsets = $class->getForm()->getFieldsets();
 			$form->actions += $class->getForm()->actions;
-		//	var_export( $form->actions );
- 		//	var_export( $this->getParameter() );
-		//	exit();
 			foreach( $fieldsets as $fieldset )
 			{
-			//	$fieldset->appendElement = false;
-				$fieldset->getLegend() ? : $fieldset->addLegend( 'Domain name registration' );
-		//		$fieldset->addElement( array( 'type' => 'html', 'name' => 'e' ), array( 'html' => '<div class="goodnews">' . self::$_requirementOptions[$each]['goodnews'] . '</div>' ) );
+		//		$fieldset->getLegend() ? : $fieldset->addLegend( 'Domain name registration' );
 				$form->addFieldset( $fieldset );
 			}
 		}
-/* //		if( $this->getParameter( 'suggestions' ) )
-		{
-		
-			//	Domain options
-		//	@$_POST['options'] = $_POST['options'] ? : $_POST[Ayoola_Form::hashElementName( 'options' )];
-			$optionValue = $this->getGlobalValue( 'options' );
-			$parameters = $this->getObjectStorage()->retrieve();
-		//	var_export( $optionValue );
-			if( $optionValue )
-			{
-				$parameters['options'] = $optionValue;
-				$this->getObjectStorage()->store( $parameters );
-			}
-			elseif( @$parameters['options'] && ! $_POST )
-			{
-				$optionValue = $parameters['options'];
-			}
-			
-
- 			$fieldset = new Ayoola_Form_Element;		
-			$options = array( 'domain-name-registration' => 'Domain Name Registration: Register the selected domain names with us.', 'website-hosting' => 'Website Hosting: You need to host your domain before it can be accessible on the World Wide Web.', 'website-design' => 'Website Design: Employ the services of our professionals to design your website.	' );
-			$fieldset->addElement( array( 'name' => 'options', 'label' => 'Please select appropriate domain related services you would subscribe for:', 'description' => 'Please select appropriate services.', 'type' => 'Checkbox', 'value' => @$optionValue ? : $values['options'] ), $options );
-			$fieldset->addRequirement( 'options', array( 'NotEmpty' => null ) );
-			$fieldset->addLegend( 'Website hosting and other related services:' );
-			$form->addFieldset( $fieldset );
-			//	var_export( $_POST );
-			if( @$parameters['options'] )
-			foreach( $parameters['options'] as $each )
-			{
-			//	if( ! is_array( $_POST['options'] ) || ! in_array( $key, $_POST['options'] ) ){ continue; }
-			//	var_export( $_POST['options'] );
-// 				var_export( $each );
-//				exit();
- 				$class = new Application_Subscription( array( 'no_init' => true ) );
-		//		$class->setSe( array( 'subscription_name' => $each ) );
-				$class->setIdentifier( array( 'subscription_name' => $each ) );
-			//	$options = $options->getForm()->getFieldsets();
-			//	var_export( $each );
-			//	$fieldset->addElement( array( 'name' => 'webhosting', 'label' => 'Web Hosting', 'type' => 'Radio', 'value' => $options ) );
-			//	$fieldset->addLegend( $legend );
-				$fieldsets = $class->getForm()->getFieldsets();
-		//		var_export( $fieldsets );
-			//	var_export( $this->getParameter() );
-			//	exit();
-				foreach( $fieldsets as $fieldset )
-				{
-				//	$fieldset->appendElement = false;
-					$fieldset->getLegend() ? : $fieldset->addLegend( 'Register a domain name' );
-			//		$fieldset->addElement( array( 'type' => 'html', 'name' => 'e' ), array( 'html' => '<div class="goodnews">' . self::$_requirementOptions[$each]['goodnews'] . '</div>' ) );
-					$form->addFieldset( $fieldset );
-				}
-				
-			}
- 		
-			
-		}
- */		
 		if( $this->getGlobalValue( 'suggestions' ) || $this->getGlobalValue( 'unavailable' ) )
 		{
 			$suggestions = array_merge( $this->getGlobalValue( 'suggestions' ) ? : array(), $this->getGlobalValue( 'unavailable' ) ? : array() );
@@ -309,25 +201,23 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 					$options[$value] = $value . ' ' . $period . ' (' . $filter->filter( $price * $value ) . ') ';
 				}
 				$fieldset->addElement( array( 'name' => 'no_of_yrs_for_' . $each, 'label' => 'Length', 'type' => 'Select', 'value' => @$values['no_of_yrs_for_' . $each] ), $options );
-				$fieldset->addRequirement( 'no_of_yrs_for_' . $each, array( 'NotEmpty' => null ) );
+		//		$fieldset->addRequirement( 'no_of_yrs_for_' . $each, array( 'NotEmpty' => null ) );
 			
-				$options = array( 'No', 'Yes' => 'Yes' );
+				$selectOption = array( 'No', 'Yes' => 'Yes' );
 			//	var_export( $domainSettings['domain_registration_options'] );
 			//	var_export( $domainSettings );
 				$options = array();
-				if( array_key_exists( 'domain_registration_options', $domainSettings ) && in_array( 'domain_auto_renewal', $domainSettings['domain_registration_options'] ) )
+		//		if( array_key_exists( 'domain_registration_options', $domainSettings ) && in_array( 'domain_auto_renewal', $domainSettings['domain_registration_options'] ) )
 				{
 					$options += array( 'domain_auto_renewal' => 'Auto renew: Protect your domain from accidental expiration. (' . $filter->filter( 0 ) . '/yr)' );
-			//		$fieldset->addElement( array( 'name' => 'domain_auto_renew_for_' . $each, 'label' => 'Auto renew: Protect your domain from accidental expiration', 'type' => 'Select', 'value' => @$values['domain_auto_renew_for_' . $each] ), $options );
+				//	$fieldset->addElement( array( 'name' => 'domain_auto_renew_for_' . $each, 'label' => 'Auto renew: Protect your domain from accidental expiration', 'type' => 'Select', 'value' => @$values['domain_auto_renew_for_' . $each] ), $selectOption );
 			//		$fieldset->addRequirement( 'domain_auto_renew_for_' . $each, array( 'NotEmpty' => null ) );
 				}
-				if( array_key_exists( 'domain_registration_options', $domainSettings ) && in_array( 'private_domain_registration', $domainSettings['domain_registration_options'] ) )
+		//		if( array_key_exists( 'domain_registration_options', $domainSettings ) && in_array( 'private_domain_registration', $domainSettings['domain_registration_options'] ) )
 				{
 					$options += array( 'private_domain_registration' => 'Private Registration: shield your personal information from the public while preserving your rights. (' . $filter->filter( @$domainSettings['private_domain_registration_price'] ) . '/yr)' );
-		//			$fieldset->addElement( array( 'name' => 'domain_privacy_for_' . $each, 'label' => 'Private Registration: shield your personal information from the public while preserving your rights.', 'type' => 'Select', 'value' => @$values['domain_privacy_for_' . $each] ), $options );
-			//		$fieldset->addRequirement( 'domain_privacy_for_' . $each, array( 'NotEmpty' => null ) );
 				}
-				$fieldset->addElement( array( 'name' => 'options_for_' . $each, 'label' => 'Other additional service options for ' . $each, 'type' => 'Checkbox', 'value' => @$values['options_for_' . $each] ), $options );
+				$options ? $fieldset->addElement( array( 'name' => 'options_for_' . $each, 'label' => 'Other additional service options for ' . $each, 'type' => 'Checkbox', 'value' => @$values['options_for_' . $each] ), $options ) : null;
 				
 				$fieldset->addLegend( '<strong>' . $each . '</strong>: Select the number of years of domain registration and other service options for ' . $each );
 				$form->addFieldset( $fieldset );
@@ -358,30 +248,13 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 					$fieldset->addElement( array( 'name' => 'optional_subscriptions', 'label' => 'Optional subscriptions', 'type' => 'Checkbox', 'value' => @$values['optional_subscriptions'] ), $newOption );
 					$fieldset->addLegend( '<strong>Recommended</strong> Services: You might also be interested in the following service options ' );
 					$form->addFieldset( $fieldset );				
-/* 					if( $this->getGlobalValue( 'optional_subscriptions' ) )
-					{
-						foreach( $this->getGlobalValue( 'optional_subscriptions' ) as $eachSubscription )
-						{
-							$class = new Application_Subscription( array( 'no_init' => true ) );
-							$class->setIdentifier( array( 'subscription_name' => $eachSubscription ) );
-							$fieldsets = $class->getForm()->getFieldsets();
-							foreach( $fieldsets as $fieldset )
-							{
-						//		$fieldset->getLegend() ? : $fieldset->addLegend( 'Register a domain name' );
-								$form->addFieldset( $fieldset );
-							}
-						}
-					}
- */				}
+ 				}
 				
 			}
 			
 		}
-		//		var_export( $this->getGlobalValue( 'unavailable' ) );
 		//	Register how many yrs
 				$requirements = array( 
-								//		array( 'requirement' => 'user-registration' ), 
-							//			array( 'requirement' => 'address', 'requirement_legend' => 'Billing Address', 'parameters' => array( 'location_prefix' => 'billing_address' ), 'requirement_goodnews' => 'Please provide a valid billing address. If you are paying with a debit or credit card, you must ensure this information matches the one listed with your card issuer.' ), 
 										array( 'requirement' => 'address', 'requirement_legend' => 'Domain Contact', 'parameters' => array( 'location_prefix' => 'domain_contact' ), 'requirement_goodnews' => 'Provide information for the domain WHOIS contact information. This information will not be used if you select the private domain registration option.' ), 
 										array( 'requirement' => 'phone-number' ), 
 										array( 'requirement' => 'email-address' ), 

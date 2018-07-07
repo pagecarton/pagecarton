@@ -161,7 +161,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      * 
      * @var boolean 
      */				
-	public $badnewsBeforeElements = true;
+	public $badnewsBeforeElements = false;
 	
     /**
      * Flag to whether to display error message before each elements
@@ -1414,14 +1414,22 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		$formContent = $this->getForm();
 		$form = null;
 	//	var_export( $this->_badnews );
-		if( $this->badnewsBeforeElements && $this->_badnews )
+		if( $this->_badnews && self::isSubmitted() )
 		{
+		//	var_export( $this->_badnews );
 		//	$form .= '<ul>';
-			foreach( array_unique( $this->_badnews ) as $message ) 
+			if( $this->badnewsBeforeElements )
 			{
-				$form .= "<div class='badnews'>" . htmlspecialchars( $message ) . "</div>\n";
+				foreach( array_unique( $this->_badnews ) as $message ) 
+				{
+					$form .= "<div class='badnews'>" . htmlspecialchars( $message ) . "</div>\n";
+				}
+		//		$form .= '</ul>';
 			}
-	//		$form .= '</ul>';
+			elseif( $this->oneFieldSetAtATimeJs )
+			{
+				$form .= "<div class='badnews'>There are some errors in the form. Kindly go over it again</div>\n";
+			}
 		}
 		$form .= $formContent;
 	//		var_export( $this->_badnews );

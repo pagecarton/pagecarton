@@ -216,7 +216,7 @@ abstract class Application_User_UserLocation_Abstract extends Ayoola_Abstract_Ta
 			$fieldset->addRequirement( 'street_address', array( 'WordCount' => array( 6, 50 ) ) );
 						
 			//	Street Address 2
-			$fieldset->addElement( array( 'name' => 'street_address2', 'label' => 'Address line 2', 'placeholder' => 'e.g. Apt H-3', 'type' => 'InputText', 'value' => @$values['street_address2'] ) );			
+	//		$fieldset->addElement( array( 'name' => 'street_address2', 'label' => 'Address line 2', 'placeholder' => 'e.g. Apt H-3', 'type' => 'InputText', 'value' => @$values['street_address2'] ) );			
 		//	$fieldset->addRequirement( 'street_address2', array( 'WordCount' => array( 6, 50 ) ) );
 
 			
@@ -253,6 +253,7 @@ abstract class Application_User_UserLocation_Abstract extends Ayoola_Abstract_Ta
 			}
 			else
 			{
+				$fieldset->addElement( array( 'name' => 'country', 'class' => 'geotext[country-long]', 'label' => 'Country', 'type' => 'InputText', 'value' => $defaultCountryValue ) );  
 		//		break;  
 			}
 			//	Prefixes

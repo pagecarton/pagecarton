@@ -65,6 +65,7 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 			$this->createForm( 'Search Domain', self::$_defaultFieldset );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
+		//	var_export( $values );
 			$this->createForm( 'Search Domain', self::$_defaultFieldset );
 			$this->setViewContent( $this->getForm()->view(), true );
 		//	$this->setViewContent( '<h2>Choose another Domain Name</h2>', true );
@@ -157,7 +158,7 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 	//	$form->formNamespace = get_class( $this ) . rand( 10, 1000 );
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->addLegend( self::$_defaultFieldset );
-		$fieldset->addElement( array( 'name' => 'domain_name', 'label' => 'Domain Name', 'placeholder' => 'Search for a new domain name e.g. yourcompany.com', 'type' => 'InputSearch', 'value' => @$values['domain_name'] ) );
+		$fieldset->addElement( array( 'name' => 'domain_name', 'label' => '', 'placeholder' => 'Search for a new domain name e.g. yourcompany.com', 'type' => 'InputSearch', 'value' => @$values['domain_name'] ) );
 		$fieldset->addFilters( array( 'trim' => null ) );
 		$fieldset->addRequirement( 'domain_name', array( 'WordCount' => array( 3, 100 ), 'Username' => null ) );
 		$form->addFieldset( $fieldset );
@@ -250,16 +251,6 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 		$unavailable = @$unavailable ? : $this->getObjectStorage( 'unavailable' )->retrieve();
 		if( @$suggestions || @$unavailable )
 		{
-		//	var_export( $domainName );
-		//	var_export( $unavailable );
-/* 				$class = new Application_Domain_Registration();
-		//	$class->setParameter( array( 'suggestions' => $suggestions ) );
-			$parameter = array( 'suggestions' => $suggestions );
-			$class->setParameter( array( __CLASS__ => false ) );
-			$class->getObjectStorage()->store( $parameter );
-			$class->initOnce();
-			$this->setViewContent( $class->view() );
-*/				
 			$fieldset = new Ayoola_Form_Element;		
 			switch( $this->getGlobalValue( 'unavailable_selection_option', 'dont_allow_me_to_search_session' ) )
 			{
@@ -273,19 +264,15 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 			{ 
 			//	$fieldset = new Ayoola_Form_Element;		
 			//	var_export( $domainName );
-				$fieldset->addElement( array( 'type' => 'html', 'name' => 'ee' ), array( 'html' => '<div class="badnews"><h2>Sorry!</h2><p> <strong> ' . $domainName . ' </strong> is not available! It is likely that someone else has bought it.</p></div>' ) );
+				$fieldset->addElement( array( 'type' => 'html', 'name' => 'ee' ), array( 'html' => '<div class="badnews">Sorry! <strong> ' . $domainName . ' </strong> is not available! It is likely that someone else has taken it.</div>' ) );
 				$option = array( 
 									'new_search' => 'I want to search for a new domain name', 
 									'no_ownership' => 'I will choose from the suggestions', 
 									'domain_transfer' => 'I own "' . $domainName . '". I want to transfer the domain.', 
 									'domain_hosting_only' => 'I own "' . $domainName . '". I want to retain my registrar. I will change the nameservers.',
 								);
-				$fieldset->addElement( array( 'name' => 'unavailable_selection_option', 'label' => 'Tell us what you would like to do now... ', 'required' => 'required', 'type' => 'Radio', 'value' => @$values['unavailable_selection_option'] ), $option );		
-				$fieldset->addRequirement( 'unavailable_selection_option', array( 'NotEmpty' => null ) );
-				
-			//	$fieldset->addElement( array( 'name' => 'back_to_domain_search', 'type' => 'Submit', 'value' => 'Back to domain search' ) );
-		//		$fieldset->addElement( array( 'name' => 'domain_name', 'label' => 'Domain Name', 'placeholder' => 'Search for a another domain name e.g. yourcompany.com', 'type' => 'InputSearch', 'value' => @$values['domain_name'] ) );
-		//		$fieldset->addRequirement( 'domain_name', array( 'WordCount' => array( 3, 100 ), 'Username' => null ) );
+		//		$fieldset->addElement( array( 'name' => 'unavailable_selection_option', 'label' => 'Tell us what you would like to do now... ', 'required' => 'required', 'type' => 'Select', 'value' => @$values['unavailable_selection_option'] ), $option );		
+		//		$fieldset->addRequirement( 'unavailable_selection_option', array( 'NotEmpty' => null ) );
 				
 				$fieldset->addFilters( array( 'trim' => null ) );
 				if( 'domain_transfer' === $this->getGlobalValue( 'unavailable_selection_option' ) )
@@ -299,8 +286,8 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 			}	
 			if( $suggestions )
 			{
-				$fieldset->addElement( array( 'type' => 'html', 'name' => 'exx' ), array( 'html' => '<div><h2 class="">Congratulations!</h2><p>The following domain names are available!</p></div>' ) );
-				$fieldset->addElement( array( 'name' => 'suggestions', 'label' => 'Please select domain names you wish to have:', 'type' => 'Checkbox', 'value' => @$values['suggestions'] ), $suggestions );		
+				$fieldset->addElement( array( 'type' => 'html', 'name' => 'exx' ), array( 'html' => '<div class="goodnews">Congratulations! The following domain names are available! </div>' ) );
+				$fieldset->addElement( array( 'name' => 'suggestions', 'label' => ' ', 'type' => 'Checkbox', 'value' => @$values['suggestions'] ? : array( $domainName )  ), $suggestions );		
 				$fieldset->addFilters( array( 'trim' => null ) );
 				if( ! $this->getGlobalValue( 'unavailable_selection_option' ) || 'no_ownership' === $this->getGlobalValue( 'unavailable_selection_option' ) )
 				{
@@ -318,7 +305,7 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 		}
 	//	if( @$unavailable && array_key_exists( $domainName, $unavailable ) )
 		{
-			$fieldset->addLegend( self::$_defaultFieldset );
+		//	$fieldset->addLegend( self::$_defaultFieldset );
 			$form->addFieldset( $fieldset );
 		}
 		$this->setForm( $form );

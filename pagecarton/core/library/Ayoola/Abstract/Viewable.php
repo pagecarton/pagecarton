@@ -44,6 +44,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	protected static $_objectStorage;
 
     /**
+     * Data storage device
+     *
+     * @var string e.g. Session, File
+     */
+	protected static $_objectStorageDevice = 'Session';
+
+    /**
      * Useful for lists
      *
      * @var Ayoola_Paginator
@@ -376,7 +383,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	public static function getObjectStorage( $storageInfo = null )
     {
 		$id = null;
-		$device = null;
+		$device = static::$_objectStorageDevice;
 		if( is_string( $storageInfo ) )
 		{
 			$id = $storageInfo;
@@ -384,7 +391,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		elseif( is_array( $storageInfo ) )
 		{
 			$id = $storageInfo['id'];
-			$device = @$storageInfo['device'];
+			$device = @$storageInfo['device'] ? : $device;
 			$timeOut = @$storageInfo['time_out'];  
 		}
 		

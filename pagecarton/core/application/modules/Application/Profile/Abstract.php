@@ -312,7 +312,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 						}
 						if( a )
 						{
-							element.innerHTML = "<span class=\'\' style=\'font-size:x-small\'>The profile URL will be: <a href=\'http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/" + target.value + "\'>http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/" + target.value + "</a></span>";
+							element.innerHTML = "<span class=\'\' style=\'font-size:x-small\'>The profile URL will be: <a target=\'_blank\' href=\'http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/" + target.value + "\'>http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/" + target.value + "</a></span>";
 						}  
 						else
 						{

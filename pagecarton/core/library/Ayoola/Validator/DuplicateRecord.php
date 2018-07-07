@@ -53,7 +53,8 @@ class Ayoola_Validator_DuplicateRecord extends Ayoola_Validator_Abstract
 		$this->_value = $value;
 		if( ! Ayoola_Loader::loadClass( $this->tableClass ) )
 		{ 
-			throw new Ayoola_Exception( 'INVALID CLASS FOR DUPLICATE RECORD VALIDATOR: ' . $this->tableClass  );
+            return false;
+	//		throw new Ayoola_Exception( 'INVALID CLASS FOR DUPLICATE RECORD VALIDATOR: ' . $this->tableClass  );
 		}
 		$table = new $this->tableClass;
 		if( $table instanceof Ayoola_Dbase_Table_Abstract_Xml )
@@ -62,7 +63,7 @@ class Ayoola_Validator_DuplicateRecord extends Ayoola_Validator_Abstract
 		}
 		else
 		{
-			$value = $table->select( null, null, array( $this->columnName => $value ) );
+	//		$value = $table->select( null, null, array( $this->columnName => $value ) );
 		}
 		if( ! $value ){ return true; }
 		return false;

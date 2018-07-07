@@ -93,7 +93,7 @@ abstract class Application_User_UserPhoneNumber_Abstract extends Ayoola_Abstract
 		$form->submitValue = $submitValue ;
 		require_once 'Ayoola/Form/Element.php';
 		$fieldset = new Ayoola_Form_Element;
-		$fieldset->placeholderInPlaceOfLabel = true;
+	//	$fieldset->placeholderInPlaceOfLabel = false;
 		$fieldset->id = __CLASS__;
 		$dialCodes = array();
 			
@@ -173,7 +173,7 @@ abstract class Application_User_UserPhoneNumber_Abstract extends Ayoola_Abstract
 				$fieldset->addFilter( 'dial_code', array( 'DefiniteValue' => $dialCodes[$this->getGlobalValue( 'country_id' )] ) );
 			} 
 			//	Phone number
-			$fieldset->addElement( array( 'name' => 'phonenumber', 'label' => 'Phone Number', 'style' => 'max-width:60%;display:inline;margin-left:0;', 'placeholder' => 'e.g. 8031234567', 'type' => 'InputText', 'value' => @$values['phonenumber'] ) );	
+			$fieldset->addElement( array( 'name' => 'phonenumber', 'label' => '', 'style' => 'max-width:60%;display:inline;margin-left:0;', 'placeholder' => 'e.g. 2348031234567', 'type' => 'InputText', 'value' => @$values['phonenumber'] ) );	
 			$fieldset->addFilter( 'phonenumber', array( 'Digits' => null ) );
 			$fieldset->addRequirement( 'phonenumber', array( 'WordCount' => array( 5, 20 ) ) );
 

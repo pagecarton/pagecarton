@@ -27,6 +27,11 @@ class Application_Domain_UserDomain_Editor extends Application_Domain_UserDomain
     {    
 		try
 		{ 
+            if( ! self::hasPriviledge() )
+            {
+                $this->_dbWhereClause['username'] = Ayoola_Application::getUserInfo( 'username' );
+                $this->_dbWhereClause['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
+            }
             //  Code that runs the widget goes here...
 			if( ! $data = $this->getIdentifierData() ){ return false; }
 			$this->createForm( 'Save', 'Edit', $data );

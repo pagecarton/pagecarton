@@ -18,6 +18,14 @@
 
 class PageCarton_Table_Sample_List extends PageCarton_Table_Sample_Abstract
 {
+ 	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	  protected static $_objectTitle = 'List';   
+
     /**
      * Performs the creation process
      *
