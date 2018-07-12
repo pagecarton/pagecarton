@@ -538,7 +538,22 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	load all js and css that is not in index file whereToGetPlaceholders
 			preg_match_all( "/<script[\s\S]*?>[\s\S]*?<\/script>/i", $originalFile, $originalScripts );
 			preg_match_all( "/<script[\s\S]*?>[\s\S]*?<\/script>/i", $whereToGetPlaceholders, $pageScripts );
-		//	var_export( $pageScripts );
+		//	var_export( $pageScripts );0
+
+			//	remove scripts that are not needed on the page
+			//	some where causing issues on sb-mart
+			if( $scriptNotNeededInPage = array_diff( $originalScripts[0], $pageScripts[0] ) )
+			{
+			//	$absentScripts = implode( "\r\n", $absentScripts );
+				foreach( $scriptNotNeededInPage as $eachScript )
+				{
+					//	remove all script thats not needed
+					$content['template'] = str_ireplace( $eachScript, '', $content['template'] );
+				}
+			}
+
+			//	add needed absent scripts
+			//	var_export( $scriptNotNeededInPage );  
 			if( $absentScripts = array_diff( $pageScripts[0], $originalScripts[0] ) )
 			{
 		//	var_export( $absentScripts );
