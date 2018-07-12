@@ -396,7 +396,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				$account->addElement( array( 'name' => 'username', 'label' => 'Username', 'placeholder' => 'Choose a username', 'type' => 'InputText', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'value' => @$values['username'] ) );
 			//	var_export( in_array( 'user_subdomains', Ayoola_Application::getDomainSettings( 'domain_options' ) ) );
 		//		in_array( 'user_subdomains', Ayoola_Application::getDomainSettings( 'domain_options' ) )
-				if( @in_array( 'user_subdomains', Ayoola_Application::getDomainSettings( 'domain_options' ) ) )
+/*				if( @in_array( 'user_subdomains', Ayoola_Application::getDomainSettings( 'domain_options' ) ) )
 				{
 					Application_Javascript::addCode
 					(
@@ -441,7 +441,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 						'
 					);
 				}
-				$account->addRequirement( 'username', array( 'Username' => null, 'DuplicateUser' => array( 'username' ) ) );
+*/				$account->addRequirement( 'username', array( 'Username' => null, 'DuplicateUser' => array( 'username' ) ) );
 			}	
 			
 		//	$account->addRequirement( 'username', array( 'Username' => null ) );

@@ -123,7 +123,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			$storage = self::getObjectStorage( array( 'id' => $id,  ) );
 			if( $info = $storage->retrieve() )
 			{ 
-		//		break; 
+				break; 
 			}
 			
 			
@@ -547,17 +547,14 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      */
     public static function getDefaultDomain()
     {
-/* 		$table = new Application_Domain();
-	//	$domains = $table->insert( array( 'domain_name' => 'ayoola' . rand( 0, 100 ), 'domain_default' => 1 ) );
-		if( ! $domain = $table->selectOne( null, array( 'domain_default' => '1' ) ) )
+	//	var_export( Ayoola_Application::getDomainSettings( 'domain_name' ) );
+		$domainName = Ayoola_Application::getDomainSettings( 'domain_name' );
+		if( ! @Ayoola_Application::getDomainSettings( 'dynamic_domain' ) )
 		{
-			if( ! $domain = $table->selectOne( null, array( 'domain_type' => 'primary_domain' ) ) )
-			{
-				$domain = $table->selectOne();
-			}
+			$domainName = ( Ayoola_Application::getDomainSettings( 'enforced_destination' ) ? : Ayoola_Application::getDomainSettings( 'domain_name' ) ) ? : Ayoola_Application::getDomainName();
 		}
- */	//	@$domain = $domain['domain_name'] ? : str_ireplace( 'www.', '', $_SERVER['HTTP_HOST'] );
-		return ( Ayoola_Application::getDomainSettings( 'enforced_destination' ) ? : Ayoola_Application::getDomainSettings( 'domain_name' ) ) ? : Ayoola_Application::getDomainName();
+	//	exit();
+		return $domainName;
 	//	return Ayoola_Application::getDomainName();
     }
 	
@@ -566,7 +563,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      *
      * @return string
      */
-    public static function getPortNumber()
+    public static function getPortNumber()  
     {
 		return ( $_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] == '443' ? '' : ( ':' . $_SERVER['SERVER_PORT'] ) );
     }

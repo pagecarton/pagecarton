@@ -96,6 +96,8 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 					self::$_settings[$settingsName]  = false;
 				//	return false; 
 				}
+			//	var_export( $settingsName );
+			//	var_export( $extensionInfo );
 				if( empty( $extensionInfo['settings'] ) )
 				{
 
@@ -191,20 +193,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			return $this->setForm( $form );
 		}
 		while( false );
-		
-		//	workaround
-	//	$this->init();
-	//	return false;
-		
-//		var_export( $values );
-	//	echo( 'Please reload this page to continue.' );
-/* 		$settings = unserialize( @$values['settings'] );
-		$fieldset = new Ayoola_Form_Element;
-		$fieldset->addElement( array( 'name' => 'value', 'value' => $settings['value'], 'type' => 'InputText' ) );
-		$fieldset->addElement( array( 'name' => __CLASS__, 'value' => $submitValue, 'type' => 'Submit' ) );
-		$fieldset->addLegend( $legend );
-		$form->addFieldset( $fieldset );
- */		$this->setForm( $form );
+ 		$this->setForm( $form );
     } 
 	// END OF CLASS
 }

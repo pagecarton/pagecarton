@@ -42,13 +42,26 @@ class Application_Profile_Delete extends Application_Profile_Abstract
     {
 		try
 		{ 
-			if( ! $data = self::getIdentifierData() ){ return false; }
+			if( ! $data = self::getIdentifierData() )
+			{ 
+				//	lets be able to delete username
+				$userDir = Application_Profile_Abstract::getProfileFilesDir( Ayoola_Application::getUserInfo( 'username' ) );
+		//      var_export( $userDir );
+				if( is_dir( $userDir ) )
+				{
+					$data = array( 'profile_url' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ) ) + Ayoola_Application::getUserInfo();
+				}
+				else
+				{
+					return false; 
+				}
+			}
 			
 			//	Only the owner or priviledged users can delete
 			$profileSettings = Application_Profile_Settings::getSettings( 'Profiles' );
 			if( ! self::isOwner( $data['username'] ) && ! self::hasPriviledge( $profileSettings['allowed_editors'] ) ){ return false; }
 			
-			$this->createConfirmationForm( 'Delete',  'Delete information and files of this profile: "'  . $data['display_name'] . '"' );
+			$this->createConfirmationForm( 'Delete forever',  'Delete information and files of this handle: "'  . $data['profile_url'] . '"' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
@@ -61,10 +74,14 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 			//	if( true !== $response['data'] ){ throw new Application_Profile_Exception( $response ); }
 			}
 		//	$filename = self::getProfilePath( $url );
-		//		var_export( $data );
 			self::getProfileTable()->delete( array( 'profile_url' => strtolower( $data['profile_url'] ) ) );
 
 			unlink( self::getProfilePath( $data['profile_url'] ) );
+        	$userDir = Application_Profile_Abstract::getProfileFilesDir( $data['profile_url'] ) . DS . 'application';
+		//		var_export( $userDir );
+			Ayoola_Doc::deleteDirectoryPlusContent( $userDir );
+        	$backup = Application_Profile_Abstract::getProfileFilesDir( $data['profile_url'] ) . DS . 'backup';
+			Ayoola_Doc::deleteDirectoryPlusContent( $backup );
 			
 			@Ayoola_Doc::removeDirectory( dirname( self::getFolder() . $data['profile_url'] ) );
 			$this->setViewContent( '<div class="boxednews badnews">Profile deleted successfully</div>', true ); 

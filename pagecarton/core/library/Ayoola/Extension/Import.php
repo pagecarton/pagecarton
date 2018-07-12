@@ -101,11 +101,18 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 					$class->init();
 					
 					//	remove files
-					Ayoola_Doc::removeDirectory( $dir, true );
+			//		Ayoola_Doc::removeDirectory( $dir, true );
 					
 					//	to update 
 					$update = $extensionInfo;
 					unset( $update['extension_name'] );
+					$previousData = $this->getDbTable()->selectOne( null, array( 'extension_name' => $extensionInfo['extension_name'] ) );
+
+					//	preserve settings
+					$update['settings'] = $previousData['settings'];
+				//	var_export( $extensionInfo );
+				//	var_export( $update );
+			//		exit();
 					$this->getDbTable()->update( $update, array( 'extension_name' => $extensionInfo['extension_name'] ) );
 				}
 				else

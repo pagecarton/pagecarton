@@ -338,7 +338,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				else
 				{
 		//			$html .= ' 		<a onClick="ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'paginator_navigation\' } );" name="paginator_navigation" class="boxednews normalnews" rel="classPlayerUrl=' . $classPlayer . 'page/' . $i . '/;changeElementId=' . $this->pageName. '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $i ) ) . '">' . $label . '</a> ';
-					$html .= ' 		<a name="paginator_navigation" class="pc-btn" rel="" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $i ) ) . '">' . $label . '</a> ';
+					$html .= ' 		<a name="paginator_navigation" class="pc-btn" rel="" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $i ) ) . '">' . $label . '</a> ';  
 				}
 			}
 			

@@ -196,10 +196,6 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 				$className = @$_GET['object_name'] ? : $_GET['name']; 
 				if( Ayoola_Loader::loadClass( $className ) && method_exists( $className, 'getAccessLevel' ) )
 				{
-				//    exit( $className );
-				 //   var_export( $className::getAccessLevel() );
-				//    var_export( Ayoola_Abstract_Playable::hasPriviledge( $className::getAccessLevel() ) );
-				//    exit( $className );
 					if( Ayoola_Abstract_Playable::hasPriviledge( $className::getAccessLevel() ) )
 					{
 						return true;  

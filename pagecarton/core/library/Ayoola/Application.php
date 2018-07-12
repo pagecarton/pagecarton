@@ -495,6 +495,7 @@ class Ayoola_Application
 					$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
 					$data['domain_settings']['domain_name'] = $subDomain . '.' . $tempWhere['domain_name'];
 					$data['domain_settings'][APPLICATION_DIR] = str_replace( '/', DS, Application_Domain_Abstract::getSubDomainDirectory( $subDomainInfo['domain_name'] ) );
+					$data['domain_settings']['dynamic_domain'] = true;					
 					$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
 					@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
 				//	$storage->store( $data );
@@ -537,7 +538,8 @@ class Ayoola_Application
 			//		exit();    
 				//	Application_Profile_Abstract::saveProfile( $information );
 					$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
-					$data['domain_settings']['domain_name'] = $domainName;					
+					$data['domain_settings']['domain_name'] = Ayoola_Application::getDomainName();					
+					$data['domain_settings']['dynamic_domain'] = true;					
 			//		$data['domain_settings'][APPLICATION_DIR] = Application_Profile_Abstract::getProfileDir( $userInfo['username'] );
 					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] . DS . AYOOLA_MODULE_FILES .  DS . 'profiles' . DS . strtolower( implode( DS, str_split( $userInfo['username'], 2 ) ) );    
 					$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';

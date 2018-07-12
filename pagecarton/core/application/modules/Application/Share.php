@@ -77,8 +77,8 @@ class Application_Share extends Application_Share_Abstract
 			{
 				$title = $_REQUEST['title'];
 			}
-            
-			if( $url )
+        //    var_export( $_SERVER['HTTP_APPLICATION_MODE'] );
+			if( $url && @$_SERVER['HTTP_APPLICATION_MODE'] == 'Ayoola_Object_Play' )
 			{ 
 				$this->getDbTable()->insert( $values );
 				header( 'Location: https://www.addtoany.com/share#url=' . htmlentities( Ayoola_Page::getHomePageUrl() . $url ) . '&title=' . htmlentities( $title ) . '' );

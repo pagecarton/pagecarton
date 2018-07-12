@@ -383,7 +383,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 	//	$previousContent = preg_replace( '#/layout/[a-zA-Z0-9-_]*/#', '', $previousContent );
 		
 		//	This was also added automatically
-		$content = str_ireplace( array( '/layout/' . $values['layout_name'] . '/', '/layout//' ), '', $content );
+		//	ADDED " so we can include links to layout path
+		$content = str_ireplace( array( '"/layout/' . $values['layout_name'] . '/', '"/layout//' ), '"', $content );
 
 	
 	//	http://stackoverflow.com/questions/2869844/regex-to-replace-relative-link-with-root-relative-link
@@ -458,12 +459,16 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 						}
 					case "div":
 						@++$countDiv;
-						if( ! $eachDiv->getAttribute( "data-pc-section-name" ) && ! $eachDiv->getAttribute( "id" ) )   
+				//		if( ! $eachDiv->getAttribute( "data-pc-section-name" ) && ! $eachDiv->getAttribute( "id" ) )   
+						if( ! $eachDiv->getAttribute( "data-pc-section-name" ) )   
 						{
 							@$eachDiv->setAttribute( "data-pc-section-autonamed", $countDiv );
 						}
-						@$eachDiv->setAttribute( "data-pc-section-name", $eachDiv->getAttribute( "data-pc-section-name" ) ? : ( $eachDiv->getAttribute( "id" ) ? : ( "pc-body-" . $countDiv ) ) );       
+				//		@$eachDiv->setAttribute( "data-pc-section-name", $eachDiv->getAttribute( "data-pc-section-name" ) ? : ( $eachDiv->getAttribute( "id" ) ? : ( "pc-body-" . $countDiv ) ) );       
+						@$eachDiv->setAttribute( "data-pc-section-name", $eachDiv->getAttribute( "data-pc-section-name" ) ? : ( ( "pc-body-" . $countDiv ) ) );             
 						$bodyChildren[] = $eachDiv;
+
+						// 'id'
 
 						//	Determine element after which to put all default sections						
 						@$firstElement = $firstElement ? : $eachDiv;   
@@ -558,7 +563,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				{
 					//	now doing this on the fly in the Ayoola_Page_Editor_Layout 
 					//	Better we do it here. We will create db fieldname for sections for easy access in Ayoola_Page_Editor_Layout
-					$name = str_ireplace( array( ' ', '-' ), '_', ( $each->getAttribute( 'data-pc-section-name' ) ? : $each->getAttribute( 'id' ) ) );
+				//	$name = str_ireplace( array( ' ', '-' ), '_', ( $each->getAttribute( 'data-pc-section-name' ) ? : $each->getAttribute( 'id' ) ) );
+					$name = str_ireplace( array( ' ', '-' ), '_', ( $each->getAttribute( 'data-pc-section-name' ) ) );
 				
 					if( $each->getAttribute( 'data-pc-section-autonamed' ) && $sectionsToUse[$key] !== $bodyChildren )
 					{

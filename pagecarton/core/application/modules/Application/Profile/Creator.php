@@ -54,7 +54,7 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 
 			//	Check settings
 			$profileSettings = Application_Article_Settings::getSettings( 'Articles' );  
-			$this->createForm( 'Create profile', '' );
+			$this->createForm( 'Save Page', '' );
 			if( $this->getParameter( 'class_to_play_when_completed' ) )
 			{
 				$this->setViewContent( Ayoola_Object_Embed::viewInLine( array( 'editable' => $this->getParameter( 'class_to_play_when_completed' ) ) + $this->getParameter() ? : array() ) );
@@ -98,11 +98,16 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 			
 			//	write to file
 			self::saveProfile( $values );
+		if( empty( $_GET['subdomain'] ) )
+		{
 			$fullUrl = Ayoola_Page::getHomePageUrl() . '/' . $values['profile_url'] . '';
+		}
+		else
+		{
+			$fullUrl = 'http://' . $values['profile_url'] . '.' . Ayoola_Application::getDomainName() . '';
+		}
 			$this->setViewContent( '<div class="goodnews">Profile saved successfully. 
-							<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '" target="_blank">Preview</a> | 
-							<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Share/?url=/' . $values['profile_url'] . '%&title=' . $values['display_name'] . '\' );" href="javascript:">Share</a>
-							
+							<a href="' . $fullUrl . '" target="_blank">Preview</a>							
 							</div>', true );
 	//		$this->setViewContent( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
 			if( @$_GET['previous_url'] )

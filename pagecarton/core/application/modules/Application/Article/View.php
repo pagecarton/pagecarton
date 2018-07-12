@@ -379,7 +379,7 @@ class Application_Article_View extends Application_Article_Abstract
 		$features[] = $data['true_post_type'];
 		$featuresPrefix[] = '';
 		$featureCount = array();
-		$featureCount = array();
+		$featureDone = array();
 		//		var_export( $features );
 		foreach( $features as $key => $eachPostType )
 		{	
@@ -396,6 +396,14 @@ class Application_Article_View extends Application_Article_Abstract
 				}
 				$featureCount[$eachPostType]++;
 			}
+			$featureCountKey = $eachPostType . $featureSuffix;
+			if( ! empty( $featureDone[$featureCountKey] ) )
+			{
+				continue;
+			}
+		//	self::v( $eachPostType );
+			$featureDone[$featureCountKey] = true;
+
 			switch( $eachPostType )
 			{
 				case 'subscription-options':
@@ -435,7 +443,7 @@ class Application_Article_View extends Application_Article_Abstract
 					$parameterX = array( 'data' => $baseData + $data, 'button_value' => $this->getParameter( 'button_value' ), 'min_quantity' => $this->getParameter( 'min_quantity' ), 'max_quantity' => $this->getParameter( 'max_quantity' ) );
 					$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( $parameterX );
 					$this->_xml .= $data['button_add_to_cart'];
-					$this->_xml .= @$data['article_content'];
+					// $this->_xml .= @$data['article_content'];
 				break;
 				case 'multi-price':
 					//	By
@@ -453,29 +461,29 @@ class Application_Article_View extends Application_Article_Abstract
 					$parameterX = array( 'data' => $baseData + $data, 'button_value' => $this->getParameter( 'button_value' ), 'multi-price' => true, 'min_quantity' => $this->getParameter( 'min_quantity' ), 'max_quantity' => $this->getParameter( 'max_quantity' ) );
 					$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( $parameterX );
 					$this->_xml .= $data['button_add_to_cart'];
-					$this->_xml .= @$data['article_content'];
+					// $this->_xml .= @$data['article_content'];
 				break;
 				case 'video':
 					$data['video_content'] = Application_Article_Type_Video::viewInLine( array( 'data' => $data ) );
 					$this->_xml .= $data['video_content'];
-					$this->_xml .= @$data['article_content'];  
+					// $this->_xml .= @$data['article_content'];  
 				break;
 				case 'audio':
 					$data['audio_content'] = Application_Article_Type_Audio::viewInLine( array( 'data' => $data ) );
 					$this->_xml .= $data['audio_content'];
-					$this->_xml .= @$data['article_content'];  
+					// $this->_xml .= @$data['article_content'];  
 				break;
 				case 'link':
 					$this->_xml .= '<a target="_blank" href="' . $data['link_url'] . '" class="pc-btn pc-bg-color">Visit Link</a>';
-					$this->_xml .= @$data['article_content'];
+					// $this->_xml .= @$data['article_content'];
 				break;
 				case 'poll':
-					$this->_xml .= @$data['article_content'];
+					// $this->_xml .= @$data['article_content'];
 					@$data['poll'] = Application_Article_Type_Poll::viewInLine( array( 'data' => $data ) );
 					$this->_xml .= @$data['poll'];
 				break;
 				case 'quiz':
-					$this->_xml .= @$data['article_content'];
+					// $this->_xml .= @$data['article_content'];
 					$this->_xml .= Application_Article_Type_Quiz::viewInLine( array( 'data' => $data ) );
 				break;
 				case 'audio':
@@ -513,12 +521,13 @@ class Application_Article_View extends Application_Article_Abstract
 			//		var_export( $data['download_base64'] );
 					$filter = new Ayoola_Filter_FileSize();
 					$data['file_size'] = $filter->filter( $data['file_size'] );
-					$this->_xml .= @$data['article_content'];
+					// $this->_xml .= @$data['article_content'];
 					$data['download_button'] = Application_Article_Type_Download::viewInLine( array( 'data' => $data ) );
 					$this->_xml .= $data['download_button'];
 				break;
-				default:
-					$this->_xml .= @$data['article_content'];
+				case 'article':
+				case 'post':
+					$this->_xml .= @$data['article_content' . $featureSuffix];
 				break;
 			}
 		}

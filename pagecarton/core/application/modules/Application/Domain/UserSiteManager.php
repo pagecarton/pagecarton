@@ -24,7 +24,7 @@ class Application_Domain_UserSiteManager extends PageCarton_Widget
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 0 );
+	protected static $_accessLevel = array( 1 );
 	
     /**
      * 
@@ -32,6 +32,13 @@ class Application_Domain_UserSiteManager extends PageCarton_Widget
      * @var string 
      */
 	protected static $_objectTitle = 'My Sites'; 
+	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected $_idColumn = 'profile_url'; 
 	
     /**
      * 
@@ -77,27 +84,30 @@ class Application_Domain_UserSiteManager extends PageCarton_Widget
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = self::getObjectTitle();
-		$list->setData( $this->getDbData() );
+        $data = $this->getDbData();
+        $userDir = Application_Profile_Abstract::getProfileFilesDir( Ayoola_Application::getUserInfo( 'username' ) ) . DS . 'application';
+  //      var_export( $userDir );
+        if( is_dir( $userDir ) )
+        {
+            $data[] = array( 'profile_url' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ) ) + Ayoola_Application::getUserInfo();
+        }
+		$list->setData( $data );
 		$list->setListOptions( 
 								array( 
-										    'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Creator/\', \'' . $this->getObjectName() . '\' );" title="">Link External Domain</a>',    
-										    'Register' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Registration/\', \'' . $this->getObjectName() . '\' );" title="">Register Domain Name</a>',    
+										    'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Creator/?subdomain=1\', \'' . $this->getObjectName() . '\' );" title="">Create a new site</a>',    
 									) 
 							);
 		$list->setKey( $this->getIdColumn() );
-		$list->setNoRecordMessage( 'No data added to this table yet.' );
+		$list->setNoRecordMessage( 'You have not created any site yet' );
 		
 		$list->createList
 		(
 			array(
                     'site' => array( 'field' => 'profile_url', 'value' =>  '<a target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() . '">http://%FIELD%.' . Ayoola_Application::getDomainName() . '</a> ', 'filter' =>  '' ), 
-              //      'user_id' => array( 'field' => 'user_id', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-             //       'username' => array( 'field' => 'username', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-            //        'subdomain' => array( 'field' => 'profile_url', 'value' =>  '%FIELD%.' . Ayoola_Application::getDomainName(), 'filter' =>  '' ), 
-              //      'expiry' => array( 'field' => 'expiry', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    '   ' => array( 'field' => 'profile_url', 'value' =>  '<a target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() . '/pc-admin">Admin Panel</a> ', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
-                    '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
-                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+           //         '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
+                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
 				)
 		);
 		return $list;
