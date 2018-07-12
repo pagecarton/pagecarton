@@ -1014,6 +1014,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		//	refresh docs on update
 		/*$content = preg_replace( '|(#)?PC_URL_PREFIX([^\#\{][^:"]*)(")|', '<?php echo Ayoola_Doc::uriToDedicatedUrl( \'$2\' ); ?>$4', $content );*/ 
 
+		//	replace all embedded html links
 		$content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/]*)\.html([\'"])?#s', '=$1/$2$3', $content );
 		$content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/=]*\.default_file)([\'"])?#s', '=$1PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$2$3', $content );
 		
