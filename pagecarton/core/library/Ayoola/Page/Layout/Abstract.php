@@ -378,6 +378,10 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 	{
 		//	Strip the php content from it.
 		$content = preg_replace( '#<\?.*?(\?>|$)#s', '', $content );
+
+		# '#(//)(www\.)?([^/:"\'<>\s\\\\]*[\.][^/:"\'<>\s\\\\]*)(/)?#'
+
+		//	make all html links absolute
 	
 		//	This somehow make it impossible to work with other template file content. Should we retain it?
 	//	$previousContent = preg_replace( '#/layout/[a-zA-Z0-9-_]*/#', '', $previousContent );
@@ -385,7 +389,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		//	This was also added automatically
 		//	ADDED " so we can include links to layout path
 		$content = str_ireplace( array( '"/layout/' . $values['layout_name'] . '/', '"/layout//' ), '"', $content );
-
+	//	var_export( $content );
 	
 	//	http://stackoverflow.com/questions/2869844/regex-to-replace-relative-link-with-root-relative-link
 /* 		$linkForPrefix = "<?php echo Ayoola_Application::getUrlPrefix(); ?>";
@@ -396,11 +400,11 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 */ 	//	$content = str_ireplace( $placeholders, $placeholderValues, $content );
 		$content = preg_replace('#(href|src)[\s]*=[\s]*(["\'])([^/\#\{][^:\'"]*)(?:["\'\.])#', '$1=$2PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$3$2', $content ); 
 		
-	//	var_export( $content );
 		   
 		//	Fix url();  
 		$content = preg_replace('#url\(([^/\#\{][^:"\(\);]*)\)#', 'url(PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$1)', $content );
 
+//		var_export( $content );
 		// Instantiate the object
 		$xml = new Ayoola_Xml();
 		
@@ -774,7 +778,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		
 		//	build links
 		$links = array();
-		if( ! empty( $values['layout_options'] ) && in_array( 'auto_menu', $values['layout_options'] ) )   
+	//	if( ! empty( $values['layout_options'] ) && in_array( 'auto_menu', $values['layout_options'] ) )   
 		{
 			$links = $xml->getElementsByTagName( 'a' );
 		}
@@ -1009,10 +1013,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 		//	refresh docs on update
 		/*$content = preg_replace( '|(#)?PC_URL_PREFIX([^\#\{][^:"]*)(")|', '<?php echo Ayoola_Doc::uriToDedicatedUrl( \'$2\' ); ?>$4', $content );*/ 
+
+		$content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/]*)\.html([\'"])?#s', '=$1/$2$3', $content );
+		$content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/=]*\.default_file)([\'"])?#s', '=$1PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$2$3', $content );
 		
 		//	workaround for the bug causing space to be replaced with 	%5Cs in preg_replace $placeholder
 		$content = str_ireplace( self::getPlaceholders(), self::getPlaceholderValues(), $content );
-	
+	//	var_export( $content );
 		return $content;
 	}
 	
@@ -1048,7 +1055,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$url = array_pop( explode( '/layout/' . $themeName, $url ) );
 		$url = '' . array_shift( explode( '.html', $url ) );
 		$url = str_ireplace( array( '/index', '/home', '/.php', '/.php', '/index.php/', '//', ), '/', '/' . trim( $url, '/' ) );
-//		var_export( $url );
+	//	var_export( $url ); 
 		return $url ;
 	}
 	
