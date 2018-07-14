@@ -441,7 +441,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		if( ! @$this->noHeader )
 		{
 			$html .='<tr bgcolor="' . $bg . '">';
-			$html .= @$this->hideCheckbox ? null : '<th><input title="toggle all" class="pc-paginator-record-selector-' . $this->pageName . self::$_counter . '" type="checkbox" onchange="var a = document.getElementsByClassName( this.className ); ayoola.div.toggleCheckboxes( a );" /></th>';
+			$html .= @$this->hideCheckbox ? null : '<th><input title="toggle all" class="pc-paginator-record-selector-' . $this->pageName . self::$_counter . '" type="checkbox" onchange="var a = document.getElementsByClassName( this.className ); ayoola.div.toggleCheckboxes( a );ayoola.div.getParentWithClass( this, \'pc-form\' ).getElementsByClassName( \'pc-paginator-multioption-area\' )[0].style.display =\'block\';" /></th>';
 		//	var_export( $this->hideNumbering );
 			$html .= @$this->hideNumbering ? null : '<th>ID</th>';
 			foreach( $fields as $field => $value )
@@ -491,7 +491,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			}
 			$records = '<tr class="' . $rowClass . '">';    
 //			$records = '<tr style="background-color:' . $bg . '; color:#000;">';    
-			$records .= @$this->hideCheckbox ? null : '<td><input class="pc-paginator-record-selector-' . $this->pageName . self::$_counter . '" type="checkbox" name="' . $key . '[]" value="' . $row[$key] . '" ></td>';
+			$records .= @$this->hideCheckbox ? null : '<td><input class="pc-paginator-record-selector-' . $this->pageName . self::$_counter . '" type="checkbox" name="' . $key . '[]" value="' . $row[$key] . '" onchange="ayoola.div.getParentWithClass( this, \'pc-form\' ).getElementsByClassName( \'pc-paginator-multioption-area\' )[0].style.display =\'block\'; " ></td>';
 			$records .= @$this->hideNumbering ? null : '<td>'. ++$counter . '</td>';
 //		var_export( $row );  
 			$optionsHtml = null;
@@ -632,7 +632,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 									'name' => 'Delete',
 									);
 
-		$html .='<div class="pc-btn-parent" style="background-color:#d4d4d4;">';		
+		$html .='<div class="pc-btn-parent pc-paginator-multioption-area" style="background-color:#d4d4d4;display:none;">';		
 		foreach( $multiDoOption as $doOption )
 		{
 			$html .='<a class="" onclick="pc_MultiDoForPaginationRecord( this, \'' . $doOption['url'] . '\' );" href="javascript:">' . $doOption['name'] . '</a>';		
@@ -830,20 +830,15 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		$file = array_pop( $creatorClass );
 		
 	//	var_export( $file );
-		if( $file === 'List' )
-		{
-			array_push( $creatorClass, 'Creator' );
-			$creatorClass = implode( '_', $creatorClass );
-			if( ! isset( $this->_listOptions['Creator'] ) )  
-			{
-				$this->setListOptions( array( 'Creator' => '<a rel="" href="javascript:;" title="Add new to the list" class="" style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/' . $creatorClass . '/\', \'' . $this->pageName . '\' )">Add new</a>' ) ); 
-			}
-		}
 		if( $result = $this->getRows() )
 		{
+			if( $this->showExportLink )
+			{
 
-			$downloadLink = Ayoola_Application::getUrlPrefix() . '/widgets/' . $this->pageName . '/?export_list=' . $this->pageName . '&' . http_build_query( $_GET );
-			$this->setListOptions( array( 'Export' => '<a rel="" href="' . $downloadLink . '" title="" class="" style="" onClick="">Export List</a>' ) ); 
+				$downloadLink = Ayoola_Application::getUrlPrefix() . '/widgets/' . $this->pageName . '/?export_list=' . $this->pageName . '&' . http_build_query( $_GET );
+
+				$this->setListOptions( array( 'Export' => '<a rel="" href="' . $downloadLink . '" title="" class="" style="" onClick="">Export List</a>' ) ); 
+			}
 			if( @$_GET['export_list'] == $this->pageName )
 			{
 				// filename for download
@@ -888,6 +883,15 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				fclose($out);
 				exit;
   			}
+		}
+		if( $file === 'List' )
+		{
+			array_push( $creatorClass, 'Creator' );
+			$creatorClass = implode( '_', $creatorClass );
+			if( ! isset( $this->_listOptions['Creator'] ) )  
+			{
+				$this->setListOptions( array( 'Creator' => '<a rel="" href="javascript:;" title="Add new to the list" class="" style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/' . $creatorClass . '/\', \'' . $this->pageName . '\' )">Add new</a>' ) ); 
+			}
 		}
 		$noToShow = null;
 		$order = null;

@@ -466,7 +466,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 		//	$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		}
-		$link = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Doc_Browser/?field_name=' . $element['name'] . '&unique_id=' . $uniqueIDForElement;
+		$link = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Doc_Browser/?field_name=' . $element['name'];
+		if( ! @$element['data-multiple'] )
+		{
+			$link .= '&unique_id=' . $uniqueIDForElement;
+		}
 //		$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . $element['name'];
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 		
@@ -526,12 +530,12 @@ class Ayoola_Form_Element extends Ayoola_Form
 
 			//		var_export( $element['value'] );
 					
-					$html .= '
+/*					$html .= '
 					<span class="" style="max-height:50px;display:inline-block;vertical-align:middle;" onclick="var a = this.parentNode.getElementsByTagName( \'input\' ); for( var b = 0; b < a.length; b++ ){var c = a[b].type; if( c == \'text\' ){ a[b].type = \'hidden\' }else{ a[b].type = \'text\'; }  a[b].style.display=\'\';  a[b].focus();  a[b].click(); }" title="The preview thumbnail image for the uploaded file will show here...">    
 						<img onerror="this.src=\'' . $defaultPix . '\';this.onerror=\'/\';" alt="" style="max-height:50px" name="' . $uniqueIDForElement . '_preview_zone_image' . '" src="' . ( @$element['data-previous-url'] ? : ( ( @$each && is_scalar( $each ) ? $valuePreview : Ayoola_Form::getGlobalValue( $element['name'] ) ) ? : '' . $defaultPix . '' ) ) . '"  class="" onClick=""  > 
 					</span>
 					';
-				}
+*/				}
 				while( $valuesForPreview );
 				if( @$element['data-allow_base64'] )
 				{
@@ -542,7 +546,7 @@ class Ayoola_Form_Element extends Ayoola_Form
  				$html .= '<div style="">';
 				if( @$element['data-allow_base64']  )
 				{ 
-				//	if( @$element['data-allow_base64'] )
+/*				//	if( @$element['data-allow_base64'] )
 					{
 						$html .= '
 						<span title="Click to upload new photo" style="cursor: pointer;max-height:100px;vertical-align:middle;display:inline-block;" class="" onClick="ayoola.image.formElement = this; ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\'; ayoola.image.fieldNameValue = \'url\'; ayoola.image.formElement = this.parentNode.getElementsByTagName( \'input\' ).item(0); ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
@@ -554,7 +558,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 					{  
 					//	return ;
 					}
-				}
+*/				}
 				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ? : 98 )  )
 				{
 					$html .= '
@@ -595,6 +599,25 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}  
 		foreach( $element['value'] as $each )
 		{
+			if( trim( $each ) )
+			{
+				$valuesJs = array( 
+									'dedicated_url' => Ayoola_Doc::uriToDedicatedUrl( $each ),
+									'url' => $each,
+									);
+				$valuesJs = json_encode( $valuesJs );
+				Application_Javascript::addCode  
+				( 
+					"
+					ayoola.events.add
+					(
+						window, 'load', function()
+						{ 
+							ayoola.image.setExistingDocument( '" . $element['name'] .  "', " . $valuesJs .  " ); 
+						} 
+					);" 
+				);			
+			}
 			$html .= "<input type=\"hidden\" value=\"" . $each . "\" " . self::getAttributesHtml( $element ) . " />\n";
 		}
 	//	$html .= $this->useDivTagForElement ? "</div>\n" : null;

@@ -36,15 +36,18 @@ class Ayoola_Doc_Delete extends Ayoola_Doc_Abstract
     {
 		try
 		{ 
+		//	$data = $this->getIdentifierData();
  			if( empty( $_GET['uri'] ) && empty( $_GET['url'] ) )
 			{ 
 				return false; 
 			}
-			$url = $_GET['url'] ? : $_GET['uri'];
+			$identifier = $this->getIdentifier();
+		//	var_export( $this->getIdentifier() );  
+			$url = $identifier['url'] ? : ( $_GET['url'] ? : $_GET['uri'] );
 			$myPath = self::getDocumentsDirectory() . $url;
 		//	$myPath = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $filename;
 		//	$realPath = Ayoola_Loader::checkFile( $filename );
-		//	var_export( $myPath );
+	///		var_export( $myPath );
 		//	var_export( $filename );
 			if( is_file( $myPath ) )
 			{
@@ -66,7 +69,7 @@ class Ayoola_Doc_Delete extends Ayoola_Doc_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( unlink( $myPath ) )
 			{ 
-				$this->setViewContent( '<p>File deleted successfully</p>', true ); 
+				$this->setViewContent( '<p class="goodnews">' . $url . ' deleted successfully</p>', true ); 
 			}				
 			return true;
 		}

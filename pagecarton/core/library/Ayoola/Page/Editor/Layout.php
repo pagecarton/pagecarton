@@ -100,6 +100,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			{
 				if( ! $url )
 				{
+	//		var_export( $url );
+					Ayoola_Application::view();
+					exit();
+
 					//	If this is no URL id we can help
 					return false; 
 				}

@@ -67,14 +67,15 @@ abstract class Application_Subscription_Checkout_Order_Abstract extends Applicat
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
+        $form->submitValue = $submitValue;
 		$fieldset = new Ayoola_Form_Element;
 		
 		$fieldset->addElement( array( 'name' => 'username', 'type' => 'InputText', 'value' => @$values['username'] ) );
 		$fieldset->addElement( array( 'name' => 'email', 'type' => 'InputText', 'value' => @$values['email'] ) );
 //		$fieldset->addElement( array( 'name' => 'order', 'description' => 'Order', 'type' => 'TextArea', 'value' => @var_export( $values['order'], true ) ) );
 		$fieldset->addElement( array( 'name' => 'order_api', 'description' => 'Payment', 'type' => 'InputText', 'value' => @$values['order_api'] ) );
-		$fieldset->addElement( array( 'name' => 'order_status', 'type' => 'InputText', 'value' => @$values['order_status'] ) );
-		$fieldset->addElement( array( 'name' => 'order_random_code', 'type' => 'InputText', 'value' => @$values['order_random_code'] ) );
+		$fieldset->addElement( array( 'name' => 'order_status', 'type' => 'Select', 'value' => @$values['order_status'] ), static::$checkoutStages );
+//		$fieldset->addElement( array( 'name' => 'order_random_code', 'type' => 'InputText', 'value' => @$values['order_random_code'] ) );
 //		$fieldset->addElement( array( 'name' => 'currency', 'type' => 'InputText', 'value' => @$values['currency'] ) );
 		
 	//	$fieldset->addFilters( 'enabled', array( 'HtmlSpecialCharsDecode' => null  ) );

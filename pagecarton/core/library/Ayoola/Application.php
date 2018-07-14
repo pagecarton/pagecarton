@@ -1189,10 +1189,18 @@ class Ayoola_Application
 			header( "HTTP/1.0 404 Not Found" );
 			header( "HTTP/1.1 404 Not Found" );
 			Header('Status: 404 Not Found');
+			http_response_code(404);
 	//		var_export( headers_list() );
 		//	exit();
 		}
-		//	now because of situation where we have username domains
+/*		else
+		{
+			http_response_code( 200 );
+			header( "HTTP/1.0 200 OK" );
+			header( "HTTP/1.1 200 OK" );
+			Header('Status: 200 OK');
+		}
+*/		//	now because of situation where we have username domains
 		//	we should be able to overide page inheritance
 		
 		//	my copy first

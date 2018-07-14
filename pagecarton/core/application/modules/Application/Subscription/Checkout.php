@@ -46,7 +46,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
      *
      * @var string
      */
-	protected static $checkoutStages = array( 0 => 'Payment Failed', 1 => 'Checkout Attempted', 2 => 'Payment Disputed', 99 => 'Payment Successful' );
+	protected static $checkoutStages = array( 0 => 'Payment Failed', 1 => 'Checkout Attempted', 2 => 'Payment Disputed', 99 => 'Payment Successful', 100 => 'Completed' );
 	
     /**
      * Default Database Table
@@ -171,7 +171,68 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			$this->setViewContent( $this->getForm()->view(), true );
 		}
     } 
-	
+
+    /**
+     * Plays the API that is selected
+     * 
+     */
+	public static function changeStatus( $response )
+    {
+		//	var_export( $response );
+		$table = Application_Subscription_Checkout_Order::getInstance();
+		if( ! $orderInfo = $table->selectOne( null, array( 'order_id' => $response['order_id'] ) ) )
+		{ 
+			return false; 
+		}
+
+		$stages = Application_Subscription_Checkout::$checkoutStages;
+		if( $orderInfo['order_status'] == $response['order_status'] )
+		{ 
+			return false; 
+		}
+		//	Treat the callback methods
+		if( ! is_array( $orderInfo['order'] ) )
+		{
+			//	compatibility
+			$orderInfo['order'] = unserialize( $orderInfo['order'] );			
+		}
+		$values = $orderInfo['order'];
+		foreach( $values['cart'] as $each )
+		{ 
+			//	call backs
+			if( ! isset( $each['callback'] ) ){ continue; }
+			$each['order_status'] = $response['order_status'];
+			$each['transactionmethod'] =  $orderInfo['order_api'];
+			$each['currency_abbreviation'] = $values['settings']['currency_abbreviation'];
+			$callback = array_map( 'trim', explode( ',', $each['callback'] ) );
+			foreach( $callback as $eachCallback )
+			{
+				//	Let's treat callbacks'
+				if( ! $eachCallback ){ continue; }
+				if( ! Ayoola_Loader::loadClass( $eachCallback ) )
+				{ 
+					continue;
+				}
+				$eachCallback::callback( $each ); 
+			}
+			
+		}
+		$update = array( 'order_random_code' => $response['order_random_code'], 'order_status' => $response['order_status'] );
+		$update = array_merge( $orderInfo, $update);  
+		$table->update( $update, array( 'order_id' => $response['order_id'] )  );
+
+		//	Notify Admin
+		$mailInfo = array();
+		$mailInfo['subject'] = 'Status change for order no ' . $response['order_id'];
+		$mailInfo['body'] = '' . self::arrayToString( $orderInfo ) . '';
+		@$checkoutEmail = $cart['checkout_info']['email'] ? : $cart['checkout_info']['email_address'];
+		@Ayoola_Application_Notification::mail( $mailInfo );
+		$mailInfo['email'] = $checkoutEmail;
+		@self::sendMail( $mailInfo );
+		
+		return;
+    } 
+		
     /**
      * Plays the API that is selected
      * 
@@ -403,7 +464,17 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 //var_export( $values['checkoutoption_name'] );
 		}
 		$fieldset->addElement( array( 'name' => 'checkoutoption_name', 'label' => ' ' , 'type' => 'Radio', 'value' => @$values['checkoutoption_name'] ), $options );
-// 		$fieldset->addRequirement( 'checkoutoption_name', array( 'InArray' => array_keys( $options ) ) );
+		if( $cart['settings']['terms_and_conditions'] )
+		{
+			$options = array( 'Agree' => 'I agree to above terms and conditions' );
+			$fieldset->addElement( array( 'name' => 'terms_and_conditions', 'label' => 'Terms and Conditions' , 'type' => 'textarea', 'value' => $cart['settings']['terms_and_conditions'] ) );
+			$fieldset->addElement( array( 'name' => 'terms', 'label' => ' ' , 'type' => 'Checkbox', 'value' => null ), $options );
+			$fieldset->addElement( array( 'name' => 'checkterms', 'label' => ' ' , 'type' => 'Hidden', 'value' => null ) );
+			if( ! $this->getGlobalValue( 'terms' ) )
+			{
+				$fieldset->addRequirement( 'checkterms', array( 'NotEmpty' => array( 'badnews' => 'You must agree to the terms and conditions before completing your order' ) ) );
+			}
+		}
 	//	$fieldset->addRequirements( array( 'NotEmpty' => null  ) );
 
 //		$fieldset->addElement( array( 'name' => 'api-checkout', 'value' => 'Checkout', 'type' => 'Submit' ) );

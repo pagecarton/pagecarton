@@ -162,9 +162,9 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 			$this->setViewContent( $html );
 
 			//	upload
-			$html = '<a class="pc-btn" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/" title="Upload a file">Upload File</a>';
-			$html = Ayoola_Object_Wrapper_Abstract::wrap( $html, 'white-background' );
-			$this->setViewContent( $html );
+		//	$html = '<a class="pc-btn" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/" title="Upload a file">Upload File</a>';
+		//	$html = Ayoola_Object_Wrapper_Abstract::wrap( $html, 'white-background' );
+		//	$this->setViewContent( $html );
 		}
 		catch( Exception $e )
 		{ 
@@ -184,16 +184,21 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
+		$list->deleteClass = 'Ayoola_Doc_Delete';
 		$list->crossColumnFields = true;
 //		$list->listTitle = self::getObjectTitle();
 
 
 		$list->setData( $data );
-		$list->setListOptions( array( 'Creator' => ' ' ) );
-//		$list->setListOptions( array( 'Creator' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload/" title="Upload a new document.">Upload File</a>' ) );
+	//	$list->setListOptions( array( 'Creator' => ' ' ) );
+		$list->setListOptions( 
+					array( 
+						'Creator' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/" title="Upload a file">Upload File</a>' ) );
 
 		$list->setKey( 'url' );
 		$list->setNoRecordMessage( 'There is no file in the selected directory.' );
+		//			ayoola.image.setElementValue( element, value, { url: value, url: value, } ); 
+
 		$select = empty( $_REQUEST['field_name'] ) ? null : '<a  class="pc-btn pc-btn-small" style="" href="javascript:" onclick="ayoola.div.setFormElementValue( \'' . $_REQUEST['field_name'] . '\', \'%KEY%\', \'' . @$_REQUEST['unique_id'] . '\' );; ">select</a>';
 
 		$list->createList(  

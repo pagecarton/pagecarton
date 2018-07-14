@@ -54,16 +54,18 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 		}
 		$files = Ayoola_Doc::getFiles( $dir );
 //		var_export( $files );
-		$pages = array();
+		$pages = array();   
 	//	sort( $files );
 		foreach( $files as $each )
 		{
-			$ext = array_pop( explode( '.', $each ) );
+			$ext = explode( '.', $each );
+			$ext = array_pop( $ext );
 			switch( $ext )
 			{
 				case 'html':
 					$each = basename( $each );
-					$url = array_shift( explode( '.', $each ) );
+					$each = explode( '.', $each );
+					$url = array_shift( $each );
 					$url = '/' . $url;
 					$url = str_ireplace( array( '/index', '/home', ), array( '/', '/', ), $url );
 					$pages[null][] = array( 'url' => '' . $url );

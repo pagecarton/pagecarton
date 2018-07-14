@@ -25,9 +25,10 @@ ayoola.image =
 	url: '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Ajax/', //	URL to upload the file too
 	files: {}, //	Storage for file records
 	splashScreen: {}, 
-	removeProgress: null, 
+	removeProgress: {}, 
 	filesCountField: {},
 	filesCount: {},
+	fileElement: {},
 	filesCountPreview: {},
 	thumbnail: 
 	{
@@ -127,28 +128,28 @@ ayoola.image =
 			progress.setAttribute( 'max', '100' );
 			progress.setAttribute( 'title', 'Double-Click here to remove this from screen.' );
 			progress.setAttribute( 'value', '0' );
-			progress.setAttribute( 'style', 'display: inline-block;position: fixed;top: 0;bottom: 0;left: 0;right: 0;width: 300px;height: 50px;margin: auto;background-color: #4d4d4d;z-index: 200001;' );
+			progress.setAttribute( 'style', 'display: inline-block;position: fixed;top: 0;bottom: 0;left: 0;right: 0;width: 300px;height: 30px;margin: auto;background-color: #4d4d4d;z-index: 200001; ' );
 			document.body.appendChild( progress );
 
 			var progressText = document.createElement( 'div' );
 			progressText.setAttribute( 'title', 'Double-Click here to remove this from screen.' );
-			progressText.setAttribute( 'style', 'display: padding: 5px; inline-block;position: fixed;top: 0;bottom: 0;left: 0;right: 0;width: 250px;height: 45px;line-height: 45px; text-align:center;margin: auto;background-color: ; color:#fff; font size: 12px; overflow: hidden;z-index: 200001;' );
-			progressText.innerHTML = 'uploading ' + fileObject.file.name  + ' 0%.';
+			progressText.setAttribute( 'style', 'display: padding: 5px; inline-block;position: fixed;top: 0;bottom: 0;left: 0;right: 0;width: 250px;height: 20px;line-height: 20px; text-align:center;margin: auto;background-color: ; color:#fff; font-size:small; overflow: hidden;z-index: 200001;' );
+			progressText.innerHTML = 'uploading ' + fileObject.file.name  + '';
 			document.body.appendChild( progressText );
 
 			//	how to manually remove the progress box from the screen
 			var closeProgress = function()
 			{
-				ayoola.image.removeProgress ? ayoola.image.removeProgress() : null;
+				ayoola.image.removeProgress[fileObject.file.name] ? ayoola.image.removeProgress[fileObject.file.name]() : null;
 			}
-			ayoola.image.removeProgress = function()
+			ayoola.image.removeProgress[fileObject.file.name] = function()
 			{
 				progressText.parentNode ? progressText.parentNode.removeChild( progressText ) : null;
 				progress.parentNode ? progress.parentNode.removeChild( progress ) : null;
 						
 				//	Close the splash screen
 				ayoola.image.splashScreen.close ? ayoola.image.splashScreen.close() : null; 
-				ayoola.image.removeProgress = null;
+				ayoola.image.removeProgress[fileObject.file.name] = null;
 			}
 			ayoola.events.add( progress, 'dblclick', closeProgress );
 			ayoola.events.add( progressText, 'dblclick', closeProgress );
@@ -165,7 +166,7 @@ ayoola.image =
 				//	alert( complete );
 					ayoola.image.files[fileObject.id]['progress'] = complete;
 					progress.value = complete;
-					progressText.innerHTML = rr + fileObject.file.name  + ' (' + complete  + '%).';
+					progressText.innerHTML = rr + ' (' + complete  + '%) ' + fileObject.file.name  + '';
 					if( complete > 99 )
 					{
 					//	ajax.upload.onprogress = null;
@@ -182,7 +183,7 @@ ayoola.image =
 				// just in case we get stuck around 99%
 				ayoola.image.files[fileObject.id]['progress'] = 100;
 				progress.value = 100;
-				progressText.innerHTML = rr + fileObject.file.name  +  ' (100%).';
+				progressText.innerHTML = rr + ' (100%) ' + fileObject.file.name  +  '';
 			};
 
 			var ajaxCallback = function()
@@ -214,7 +215,7 @@ ayoola.image =
 						alert( String( response['error'] ) );
 
 						//	close progresss if available
-						ayoola.image.removeProgress ? ayoola.image.removeProgress() : null;
+						ayoola.image.removeProgress[fileObject.file.name] ? ayoola.image.removeProgress[fileObject.file.name]() : null;
 					}
 					ayoola.image.files[fileObject.id]['status'] = 'Uploaded'; 
 					ayoola.image.callAfterStateChangeCallbacks( fileObject.id );
@@ -440,6 +441,7 @@ ayoola.image =
 			var files = target.files || e.dataTransfer.files;
 
 			//	register this that we are starting. filesCountPreview
+			ayoola.image.fileElement[ayoola.image.uniqueNameForBrowseButton] = target;
 			ayoola.image.filesCountField[ayoola.image.uniqueNameForBrowseButton] = files.length;
 			ayoola.image.filesCountPreview[ayoola.image.uniqueNameForBrowseButton] = files.length;
 			ayoola.image.filesCount[ayoola.image.uniqueNameForBrowseButton] = files.length;
@@ -573,6 +575,126 @@ ayoola.image =
 			callback( fileId );
 		}
 		ayoola.image.setStatus( fileId );
+	},
+	
+	//	Sets status of a file
+	setElementValue: function( fieldname, valueToAdd, fileInfo ) 
+	{
+
+		switch( typeof fieldname )
+		{
+			case 'string':
+				var b = document.getElementsByName( fieldname );
+				if( ! b || ! b[0] ){ return false; }
+				var isMultiple = fieldname.split( '[]' ).length == 2;
+			break;
+			case 'object':
+				var b = Array( fieldname );
+				isMultiple = false;
+			break;
+		}
+		var nf;
+	//	alert( fieldname );
+		
+		if( 
+
+			( ayoola.image.fileElement[ayoola.image.uniqueNameForBrowseButton] 
+			 && ayoola.image.fileElement[ayoola.image.uniqueNameForBrowseButton].multiple )
+			 || isMultiple
+			 
+			 )
+		{
+			for( var c = 0; c < b.length; c++ )
+			{
+				if( ! b[c].value )
+				{
+					nf = b[c];
+
+					//	we have found an empty field
+					break;
+				}
+			}
+			if( ! nf )
+			{
+				nf = b[0].cloneNode( true );
+				b[0].parentNode.insertBefore( nf, b[0] );
+			}
+		}
+		else
+		{
+			nf = b[0];
+		}
+		nf.value = valueToAdd;
+		if( ayoola.image.setExistingDocument( nf, fileInfo ) )
+		{
+//			return false
+		}					
+		if( nf.value && nf.value.split(",")[1] )
+		{
+			//	if we are using data-url, omit the : so it doesn't get blocked by some servers
+			nf.value = nf.value.split(",")[1];
+		}
+	},
+	
+	//	Sets status of a file
+	setExistingDocument: function( fieldname, fileInfo ) 
+	{
+		var b = document.getElementsByName( fieldname.name || fieldname );
+		if( ! b || ! b[0] || ! fileInfo  )
+		{
+			return false;
+		}
+		var container = document.createElement( 'div' );
+		container.setAttribute( 'style', 'font-size:x-small;display:inline-block;padding:1em 0;' );
+
+		var px = document.createElement( 'img' );
+		var pxx = ayoola.pcPathPrefix + '/tools/classplayer/get/name/Application_IconViewer/?url=' + fileInfo['url'] + '&crop=1&max_width=24&max_height=24';
+		px.setAttribute( 'src', pxx );
+		px.setAttribute( 'style', 'padding-right:1em;vertical-align:middle;' );
+		container.appendChild( px );
+
+		var xr = document.createElement( 'a' );
+		xr.innerHTML = '' + fileInfo['url'] + '';
+		xr.setAttribute( 'href', fileInfo['dedicated_url'] );
+		xr.setAttribute( 'target', '_blank' );
+		container.appendChild( xr );
+
+		var dx = document.createElement( 'a' );
+		dx.innerHTML = ' x ';
+		dx.setAttribute( 'href', 'javascript:' );
+		dx.setAttribute( 'title', 'Remove ' + fileInfo['url'] );
+		dx.setAttribute( 'style', 'padding:0 1em' );
+		dx.onclick = function()
+		{
+			var rCount = 0
+			for( var c = 0; c < b.length; c++ )
+			{
+				if( b[c].value == fileInfo['url'] )
+				{
+					rCount++;
+					if( rCount < b.length )
+					{
+						b[c].parentNode.removeChild( b[c] );
+					}
+					else
+					{
+						b[c].value = '';
+					}
+				}
+			}
+			container.parentNode.removeChild( container );
+		}
+		container.appendChild( dx );
+		switch( typeof fieldname )
+		{
+			case 'string':
+				b[0].parentNode.insertBefore( container, b[0] );  
+			break;
+			case 'object':
+				fieldname.parentNode.insertBefore( container, fieldname );  
+			break;
+		}
+		return true;
 	},
 	
 	//	Sets status of a file
@@ -760,16 +882,16 @@ ayoola.image =
 			if( ! a || ! a.response || ! a.response.file_info ){ break; }
 					
 			//	Close the splash screen
-			ayoola.image.splashScreen.close ? ayoola.image.splashScreen.close() : null; 
+		//	ayoola.image.splashScreen.close ? ayoola.image.splashScreen.close() : null; 
 
 			//	close progresss if available
-			ayoola.image.removeProgress ? ayoola.image.removeProgress() : null;
+			ayoola.image.removeProgress[a.file.name] ? ayoola.image.removeProgress[a.file.name]() : null;
 //			ayoola.spotLight.close(); 
 
 				//	if the register is false, we can clear the fields. Refresh
 	//		alert( a.formElement );
 	//		alert( a.fieldName );
-			var x = a.formElement || a.fieldName;    
+/*			var x = a.formElement || a.fieldName;    
 			if( x && ayoola.image.filesCount[ayoola.image.uniqueNameForBrowseButton] == ayoola.image.filesCountField[ayoola.image.uniqueNameForBrowseButton] && ayoola.image.filesCount[ayoola.image.uniqueNameForBrowseButton] > 1 )
 			{
 				var b = document.getElementsByName( x.name );  
@@ -780,9 +902,10 @@ ayoola.image =
 					b[c].parentNode.removeChild( b[c] );
 				}
 			}
-			if( a.formElement )
+*//*			if( a.formElement )
 			{
 				var nf = a.formElement;
+
 
 				if( --ayoola.image.filesCountField[ayoola.image.uniqueNameForBrowseButton] )
 				{
@@ -792,6 +915,13 @@ ayoola.image =
 					a.formElement.parentNode.insertBefore( nf, a.formElement );
 				}
 				nf.value = a.response.file_info[a.fieldNameValue];
+			//	alert( nf.value )
+				var xr = document.createElement( 'a' );
+				xr.innerHTML = nf.value;
+				xr.setAttribute( 'href', nf.value );
+				xr.setAttribute( 'style', 'font-size:x-small;display:block;' );
+				xr.setAttribute( 'target', '_blank' );
+				nf.parentNode.insertBefore( xr, nf );  
 								
 				if( nf.value && nf.value.split(",")[1] )
 				{
@@ -800,30 +930,14 @@ ayoola.image =
 				}
 				a.fieldName = a.formElement.id;
 			}
-			var b = document.getElementsByName( a.fieldName );
-		//	if( ! b ){ break; }
-			for( var c = 0; c < b.length; c++ )
+*/			
+			if( a.formElement )
 			{
-				//	alert( ayoola.image.fieldNameValue );
-				//	alert( a.response.file_info[ayoola.image.fieldNameValue] );
-				var nf = b[c];
-				if( --ayoola.image.filesCountField[ayoola.image.uniqueNameForBrowseButton] )
-				{
-					var nf = b[c].cloneNode( true );
-					b[c].parentNode.insertBefore( nf, b[c] );
-				}
-				nf.value = a.response.file_info[a.fieldNameValue];
-
-			//	b[c].value = a.response.file_info[a.fieldNameValue];
-								
-				if( nf.value && nf.value.split(",")[1] )
-				{
-					//	if we are using data-url, omit the : so it doesn't get blocked by some servers
-					nf.value = nf.value.split(",")[1];
-				}
-
-				//	this shouldnt be allowed to go beyond this point because of multiple uploads
-				break;
+				ayoola.image.setElementValue( a.formElement, a.response.file_info[a.fieldNameValue], a.response.file_info ); 
+			}
+			else if( a.fieldName )
+			{
+				ayoola.image.setElementValue( a.fieldName, a.response.file_info[a.fieldNameValue], a.response.file_info ); 
 			}
 			previewLivePicture();
 
@@ -872,8 +986,8 @@ ayoola.image =
 				
 				if( ayoola.image.files[fileId].file.type.match( 'image.*' ) ) 
 				{   
-					nf.src = xx;
-//					nf.src = a.response.file_info['dedicated_url'];
+			//		nf.src = xx;
+					nf.src = a.response.file_info['dedicated_url'];
 				}
 				else
 				{

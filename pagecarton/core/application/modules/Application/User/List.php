@@ -58,6 +58,7 @@ class Application_User_List extends Application_User_Abstract
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = $this->getParameter( 'title' ) ? : self::getObjectTitle();
+		$list->showExportLink = true;
 
 		$list->showSearchBox = true;
 		$data = $this->getDbData();

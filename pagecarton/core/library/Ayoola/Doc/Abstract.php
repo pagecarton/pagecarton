@@ -54,7 +54,13 @@ abstract class Ayoola_Doc_Abstract extends Ayoola_Abstract_Table
      * 
      * @var array
      */
-	protected $_identifierKeys = array( 'document_id' );
+	protected $_identifierKeys = array( 'url' );
+	
+    /**
+     * 
+     * @var string
+     */
+	protected $_idColumn = 'url';
 	
     /**
      * Identifier for the column to edit

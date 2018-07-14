@@ -79,6 +79,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 			$list = new Ayoola_Paginator();
 			$list->pageName = $this->getObjectName();
 			$list->deleteClass = 'Ayoola_Form_Table_Delete';
+			$list->showExportLink = true;
 			$list->listTitle = $data['form_title'] . ' Responses';
 			$table = Ayoola_Form_Table_Data::getInstance();
 

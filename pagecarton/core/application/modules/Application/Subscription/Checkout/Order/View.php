@@ -33,7 +33,7 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 1, 98 );
+	protected static $_accessLevel = array( 0, 98 );
 	
     /**
      * The method does the whole Class Process
@@ -48,7 +48,6 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 		try{ $this->setIdentifier(); }
 		catch( Application_Subscription_Checkout_Order_Exception $e ){ return false; }
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
-	//	$this->createForm( 'Edit Order', 'Edit ' . $identifierData['order_id'], $identifierData );
 
 		#
 		$this->setViewContent( '<h2>Order number '  . $identifierData['order_id'] . '</h2>', true );

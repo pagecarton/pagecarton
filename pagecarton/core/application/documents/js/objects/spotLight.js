@@ -203,7 +203,8 @@ ayoola.spotLight =
 		var setTitle = function( e )
 		{
 			var target = ayoola.events.getTarget( e );
-			if( target.contentDocument.title )
+			target.focus();
+			if( target.contentDocument.title )  
 			{
 /*				var title = document.createElement( 'span' );
 				title.className = 'pc_content_title';	

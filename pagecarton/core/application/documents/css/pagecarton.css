@@ -183,6 +183,7 @@
     overflow: hidden;
 }
 .pc-form2 input[type="button"],
+.pc-form2 .pc-submit-btn,
 .pc-form2 input[type="submit"]{
     -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
     -webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
@@ -252,7 +253,12 @@
     text-transform: uppercase;
     font-size: 10px;
 } 
-
+@media screen and (max-width: 480px)
+{
+    .pc-btn-parent a, .pc-btn, .pc-element-like-btn {
+        max-width: 50%;
+    } 
+}
 .pc-btn-small-parent a, .pc-btn-small {
   font-size: smaller;
   padding: 0.2em;

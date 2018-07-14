@@ -253,6 +253,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 	//	$settings['total'] += (double) @$previousData['settings']['total'];
 		$settings['total'] = 0.00; 
 		$settings['article_url'] = array();
+		$settings['terms_and_conditions'] = '';
 		foreach( $newCart as $name => $eachItem )
 		{
 			if( ! isset( $eachItem['price'] ) )
@@ -262,6 +263,11 @@ class Application_Subscription extends Application_Subscription_Abstract
 			if( ! empty( $eachItem['article_url'] ) )
 			{
 				$settings['article_url'][] = $eachItem['article_url'];
+			}  
+			if( ! empty( $eachItem['item_terms_and_conditions'] ) && strpos( $settings['terms_and_conditions'], $eachItem['item_terms_and_conditions'] ) === false )
+			{
+				$settings['terms_and_conditions'] .= strtoupper( $eachItem['article_title'] ) . "\r\n" . "\r\n";
+				$settings['terms_and_conditions'] .= $eachItem['item_terms_and_conditions'] . "\r\n" . "\r\n";
 			}  
 			@$settings['total'] += $eachItem['price'] * $eachItem['multiple'];
 		}

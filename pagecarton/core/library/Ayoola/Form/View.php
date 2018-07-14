@@ -460,6 +460,13 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					
 					$type = 'hidden'; 
 				break;
+				case 'image-multiple': 
+					@$options['data-document_type'] = 'image';
+				case 'document-multiple': 
+					@$options['data-multiple'] = true;
+					@$options['multiple'] = true;     
+					$type = 'Document'; 
+				break;
 				case 'file': 
 				case 'audio': 
 				case 'video': 
@@ -521,7 +528,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				}
 			}
 	//		var_export( $multiOptionsRecord );
-			$fieldsets[$key]->addElement( $elementInfo + $options, $multiOptionsRecord );
+			$fieldsets[$key]->addElement( $options + $elementInfo , $multiOptionsRecord );
 			
 			if( $formInfo['element_validators'][$i] )
 			{

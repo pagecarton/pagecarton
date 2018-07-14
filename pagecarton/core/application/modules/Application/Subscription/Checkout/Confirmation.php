@@ -109,14 +109,20 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		{
 			$this->setViewContent( "<h4>Order Details</h4><br>" );
 			$this->setViewContent( Application_Subscription_Cart::viewInLine() );
-			self::getStorage()->clear(); 
+		//	self::getStorage()->clear(); 
 		//	self::getOrderNumber(); //	Clear order number history
-			$this->setViewContent( "<h4>What Next???</h4><br><p>Go back to <a href='{$cart['settings']['return_url']}'>Previous Page</a>.</p>" );
+			$this->setViewContent( "
+									<h4>What Next???</h4>
+									<br>
+									<p><a href='" . Ayoola_Application::getUrlPrefix() . "/widgets/Application_Subscription_Checkout_Order_View?order_id=" . $orderNumber . "'>Check order status</a>.</p>
+									<p><a href='{$cart['settings']['return_url']}'>Go back</a>.</p>
+									" 
+									);
 			$notes = Application_Settings_Abstract::getSettings( 'Payments', 'order_notes' );
 
 			$notes ? $this->setViewContent( "<h4>Note:</h4><br>" ) : null;
 		//	$this->setViewContent( "<h4>Note:</h4><p>Orders can take up to 24 hours after payment is confirmed for fufillment ( depending on the payment method ). Please be patient.</p>" );
-			$notes ? $this->setViewContent( $notes ) : null;
+			$notes ? $this->setViewContent( $notes ) : null;          
 		}
 		else
 		{

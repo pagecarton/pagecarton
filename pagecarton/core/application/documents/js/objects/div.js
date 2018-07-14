@@ -668,54 +668,31 @@ ayoola.div =
 		h.style.height = (h.scrollHeight)+"px";
 	},
 	//set value for form element globally. Useful in filemanager selection
-	setFormElementValue: function ( element, value, id ) {
+	setFormElementValue: function ( element, value, id ) 
+	{
+
 		switch( typeof element )
 		{
 			case 'string':
 
+				var xx = ayoola.pcPathPrefix + '/tools/classplayer/get/name/Application_IconViewer/?url=' + value;
 				var aa = document.getElementById( id );
 				if( ! aa )
 				{
-					var a = document.getElementsByName( element );
+					var aa = element;
 				}
-				else
-				{
-					a = Array( aa );
-				}
-				for( var b = 0; b < a.length; b++ )
-				{
-					a[b].value = value;
-				//	b.className = ' normalnews';
-				}
-				var a = document.getElementsByName( id + '_preview_zone_image' );
-				var xx = ayoola.pcPathPrefix + '/tools/classplayer/get/name/Application_IconViewer/?url=' + value;
-				for( var b = 0; b < a.length; b++ )
-				{
-					a[b].src = xx;
-				}
-			
+				ayoola.image.setElementValue( aa, value, { url: value, dedicated_url: xx, } ); 
+
 				if( window.parent )
 				{
 					var aa = window.parent.document.getElementById( id );
 			//		alert( aa );  
 					if( ! aa )
 					{
-						var a = window.parent.document.getElementsByName( element );
+						aa = element;
 					}
-					else
-					{
-						a = Array( aa );
-					}
-					for( var b = 0; b < a.length; b++ )
-					{
-						a[b].value = value;
-					//	b.className = ' normalnews';
-					}
-					var a = window.parent.document.getElementsByName( id + '_preview_zone_image' );
-					for( var b = 0; b < a.length; b++ )
-					{
-						a[b].src = xx;
-					}
+		//			alert( aa );  
+					window.parent.ayoola.image.setElementValue( aa, value, { url: value, dedicated_url: xx, } ); 					
 					try
 					{
 						window.parent.ayoola.spotLight.instance.container.parentNode.removeChild( window.parent.ayoola.spotLight.instance.container );
@@ -729,6 +706,7 @@ ayoola.div =
 			break;
 			default:
 		}
+		ayoola.image.setElementValue( element, value, { url: value, url: value, } ); 
 			
 	}
 

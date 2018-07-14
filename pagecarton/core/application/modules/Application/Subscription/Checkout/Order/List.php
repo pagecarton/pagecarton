@@ -58,8 +58,8 @@ class Application_Subscription_Checkout_Order_List extends Application_Subscript
 		$listInfo = array(
 							'order_id' => '%KEY% <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_View/?' . $this->getIdColumn() . '=%KEY%">details</a>', 
 							'email' => null, 
-							'status' => array( 'field' => 'order_status', 'value' => '%FIELD%', 'filter' => '' ), 
-							'method' => array( 'field' => 'order_api', 'value' => '%FIELD%', 'filter' => '' ), 				
+							'status' => array( 'field' => 'order_status', 'value' => '%FIELD%', 'filter' => '', 'value_representation' => static::$checkoutStages ), 
+			//				'method' => array( 'field' => 'order_api', 'value' => '%FIELD%', 'filter' => '' ), 				
 							'total' => $cur . ' %FIELD%', 
 							'time' => array( 'field' => 'time', 'value' => '%FIELD%', 'filter' => 'Ayoola_Filter_Time' ), 
 							' ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Editor/?' . $this->getIdColumn() . '=%KEY%"> update </a>', 
