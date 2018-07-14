@@ -347,6 +347,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 
 	//	if( ! $storedValues || ! $this->getParameter( 'cache_post_list' ) )
+		if( ! $this->getParameter( 'cache_post_list' ) )
 		{   
 		//	var_export( $values );    
 	//		self::v( $this->getParameter() );       
