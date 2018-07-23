@@ -34,6 +34,13 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
      * @var string 
      */
 	protected static $_objectTitle = 'Theme Links'; 
+ 	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_regex = '#(<a[^<>]*href[\s]*=[\s]*[\'"])([^\'"]*)([\'"][^<>]*>)(.*)(</a>)#isU'; 
 			
     /**
      * The method does the whole Class Process
@@ -55,9 +62,18 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 
 	//		var_export( $contentArray );
 			$htmlContent = array();
+			$titles = array();
+			$urls = array();
 			foreach( $contentArray as $contentKey => $each )
 			{
-				if( is_array( $each ) && ! empty( $each['editable'] ) )
+			//	var_export( $contentKey );
+			//	var_export( $each );
+				if( is_array( $each ) && ! empty( $each['codes'] ) )
+				{
+					$htmlContent[$contentKey] = $each['codes'];
+				///	var_export( $each['editable'] );
+				}
+				elseif( is_array( $each ) && ! empty( $each['editable'] ) )
 				{
 					$htmlContent[$contentKey] = $each['editable'];
 				///	var_export( $each['editable'] );
@@ -66,11 +82,19 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 				{
 					$htmlContent[$contentKey] = $each;
 				}
-
+				preg_match_all( static::$_regex, $htmlContent[$contentKey], $matches );
+			//	var_export( $matches );
+		//		var_export( $htmlContent ); 
+				$matches[2] = array_combine( $matches[0], $matches[2] );
+				$matches[4] = array_combine( $matches[0], $matches[4] );
+				$urls += $matches[2];
+				$titles += $matches[4];
+			//	$tracket += $matches[2];
 			}
 	//		exit();
-
-		//		var_export( $htmlContent ); 
+				asort( $urls );
+		//		var_export( $urls ); 
+		//		var_export( $titles ); 
 			$linksData = array(); 		
 			$keyList = array(); 		
 
@@ -78,8 +102,23 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			$form->submitValue = 'Update';
 	//		$fieldset = new Ayoola_Form_Element();
 			$xml = array();
+			$pages = Ayoola_Page_Page::getInstance();
+			$pages = $pages->select();
+			require_once 'Ayoola/Filter/SelectListArray.php';
+			$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
+			$pages = $filter->filter( $pages );
+
+			$pages += Ayoola_Page_Layout_Pages::getPages( $data['layout_name'], 'list-url' );
+			asort( $pages );
+
+			$fieldset = new Ayoola_Form_Element();
+			$fieldset->addElement( array( 'name' => 'editing-mode', 'label' => '', 'onchange' => 'ayoola.spotLight.splashScreen(); location.search += \'&editing-mode=\' + this.value; ', 'type' => 'Select', 'style' => 'width:100%', 'value' => @$_GET['editing-mode'] ), array( 'simple' => 'Links without codes (Simple Mode)', 'advanced' => 'All links (Advanced Mode)' ) );
+			$form->addFieldset( $fieldset );
+
+		//	Application_Article_Abstract::initHTMLEditor();
+
 		//	var_export( $htmlContent );
-			foreach( $htmlContent as $contentKey => $eachContent )
+/*			foreach( $htmlContent as $contentKey => $eachContent )
 			{
 				$content = $eachContent;
 	//			$content = $this->getPreviousContent();
@@ -93,15 +132,20 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 				$xml[$contentKey]->removeChild( $xml[$contentKey]->doctype );           
 
 				# remove <html><body></body></html> 
-			//	$xml[$contentKey]->replaceChild($xml[$contentKey]->firstChild->firstChild->firstChild, $xml[$contentKey]->firstChild);
 				$links = $xml[$contentKey]->getElementsByTagName( 'a' );
-
+*/
 			//	var_export( $_POST );
-				foreach( $links as $each )
+		//		foreach( $links as $each )
+				$newTitles = $this->getGlobalValue( 'title' );
+				$newUrls = $this->getGlobalValue( 'url' );
+				$counter = 0;
+				foreach( $urls as $urlKey => $each )
 				{
-					$fieldset = new Ayoola_Form_Element();
-					$title = trim( $each->nodeValue );
+/*					$title = trim( $each->nodeValue );
 //					$title = trim( htmlentities( $each->nodeValue ) );
+					$url = $each->getAttribute( 'href' );
+			//		var_export( $url . "\r\n");
+			//		var_export( $title . "\r\n");
 
 			//		var_export( $each->childNodes->length );
 					if( $each->childNodes->length > 0 )
@@ -115,63 +159,66 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 							}
 							if( ! $eachChild->nodeValue )
 							{
-								$eachChild->nodeValue = " ";
+
+								//	causing some elements to be missing. don't know why'
+							//	$eachChild->nodeValue = " ";
 							}
 							$title .= $each->ownerDocument->exportHtml( $eachChild ) ? : $eachChild->nodeValue;
 		//					var_export( $title );
 						}
-					//	var_export( $title );
-					//	$title = implode( array_map( array( $each->ownerDocument,"saveXML" ), iterator_to_array( $each->childNodes ) ) );
-					//	$title = htmlspecialchars( $title );
-					//		var_export( $title );
 					}
-					$url = $each->getAttribute( 'href' );
-				//	var_export( $url );
-		//			if( ! self::isThemePage( $url, $data['layout_name'] ) )
-					{
-				//		continue;
-					}
-
-
+*/
+					$url = $each;
 					//	change links with /page.html to /page
 			//			var_export( $url );
 					$url = self::themePageToUrl( $url, $data['layout_name'] );
-		//				var_export( $url );
-					$title = str_ireplace( array( '<p>', '</img>', '</p>', "&nbsp;", '' ), '', $title );
-					$titleX = htmlentities($title, null, 'utf-8');
+		//			var_export( $title . "\r\n");
+					$title = $titles[$urlKey];
+					$title =  trim( $title, "\r\n\t " );
+					$url =  trim( $url, "\r\n\t " );
+					$title = str_ireplace( array( '<p>', '</img>', '</p>', "&nbsp;", "\r\n", "\t" ), '', $title );
+					$title = preg_replace( '# +#', ' ', $title );
+					$titleX = htmlentities( $title, null, 'utf-8' );
 					$titleX = str_replace("&nbsp;", "", $titleX);
 					$titleX = html_entity_decode($titleX);
-		//			$title = preg_replace( '|^[^a-Z0-9]|', '', $title );
-					if( stripos( $titleX, '<img' ) !== false )
-					{
-						//	we need to allow logo from getting here
-					///	var_export( $innerHtml );
-					//	continue;
-					}
 					if( ! trim( $titleX ) )
 					{
-					///	var_export( $innerHtml );
+					//	continue;
+					}
+					if( strip_tags( $title ) != $title && @$_GET['editing-mode'] !== 'advanced' )
+					{
 						continue;
 					}
-				//	var_export( $title );
-					$linkValue = array( 'title' => $title, 'url' => $url, 'node' => $each );
-					$key = md5( serialize( $linkValue ) );
-					$linksData[] = $linkValue;
+				//	var_export( $newTitles[$counter] . "\r\n" );
+
+					$key = md5( $title . $url );
 					if( ! array_key_exists( $key, $keyList ) )
 					{
-						$keyList[$key] = $linkValue;
-						$fieldset->addElement( array( 'name' => 'title', 'label' => '', 'placeholder' => $title, 'type' => 'InputText', 'multiple' => 'multiple', 'style' => 'max-width:40%', 'value' => $title ) );
-						$fieldset->addElement( array( 'name' => 'url', 'label' => '', 'placeholder' => $url, 'type' => 'InputText', 'multiple' => 'multiple', 'style' => 'max-width:40%', 'value' => $url ) );
+						$linkValue = array( 'title' => $title, 'url' => $url, 'new_title' => $newTitles[$counter], 'new_url' => $newUrls[$counter] );
+						$linksData[$urlKey] = $linkValue;
+						$keyList[$key] = $linksData[$urlKey];
+						$fieldset = new Ayoola_Form_Element();
+						$fieldset->addElement( array( 'name' => 'title', 'label' => '', 'data-html' => true, 'placeholder' => $title, 'type' => 'InputText', 'multiple' => 'multiple', 'style' => 'width:100%', 'value' => trim( $title, "\r\n\t " ) ) );
+						$fieldset->addElement( array( 'name' => 'url', 'label' => '', 'placeholder' => $url, 'type' => 'Select', 'multiple' => 'multiple', 'style' => 'width:100%', 'value' => trim( $url ) ), array( $url => $url ) + $pages );
+						$fieldset->wrapper = 'white-background';
+					//	var_export( $url );
+						$counter++;
+						$fieldset->addLegend( 'Link ' . $counter );
 						$form->addFieldset( $fieldset );
 					}
+					else
+					{
+						$linksData[$urlKey] = $keyList[$key];
+					}
 				}
-			}
+	//		}
+
 
 		//	var_export( $linksData );
 			if( $linksData )
 			{
 				$this->setViewContent( $form->view(), true ); 
-				$this->setViewContent( '<div class="pc-notify-info">Please note that this tool is still experimental. </div>' ); 
+				$this->setViewContent( '<div class="pc-notify-info">Please take caution while using this tool as it is still experimental. </div>' ); 
 			}
 			else
 			{
@@ -180,8 +227,9 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			if( ! $values = $form->getValues() ){ return false; }
 		//	var_export( $form->getValues() );
 			$done = array();
-			foreach( $linksData as $key => $each )
+/*			foreach( $linksData as $key => $each )
 			{
+				
 				$thisValue = array( 'title' => $each['title'], 'url' => $each['url'] );
 				$linkKey = md5( serialize( $thisValue ) );
 				if( in_array( $thisValue, $done ) )
@@ -212,6 +260,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			//		$linkValue[$linkKey]['title'] = htmlspecialchars_decode( $linkValue[$linkKey]['title'] );
 					if( strip_tags( $linkValue[$linkKey]['title'] ) != $linkValue[$linkKey]['title'] )
 					{
+						
 						$each['node']->nodeValue = null;
 						$f = new Ayoola_Xml();
 						$f->preserveWhiteSpace = FALSE;
@@ -257,14 +306,36 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 					$nodeToDelete->parentNode->removeChild( $nodeToDelete );
 				}
 			}
-	//		var_export( $contentArray );
+*/	//		var_export( $values );     
+
+			foreach( $values as $contentKey => $eachContent )
+			{
+
+			}
+
 			foreach( $htmlContent as $contentKey => $eachContent )
 			{
-            	$doc = str_ireplace( array( '<body>', '</body>', '<p->', '</p->' ), '', $xml[$contentKey]->exportHTML( $xml[$contentKey]->documentElement->firstChild ) );
+          //  	$doc = str_ireplace( array( '<body>', '</body>', '<p->', '</p->' ), '', $xml[$contentKey]->exportHTML( $xml[$contentKey]->documentElement->firstChild ) );
 				
 		//		var_export( $doc );
 				//	delete all paragraphs in anchor
-				$doc = preg_replace( '#(\<a .*\>)(\<p\>)(.*)(\<\/p\>)(\<\/a\>)#', '$1$3$5', $doc );
+				$callback = function( $matches ) use( $linksData )
+				{
+					if( isset( $linksData[$matches[0]] ) && ( $linksData[$matches[0]]['new_url'] !== $linksData[$matches[0]]['url'] ||  $linksData[$matches[0]]['new_title'] !== $linksData[$matches[0]]['title'] ) )
+					{
+						$info = $linksData[$matches[0]];
+					//	var_export( $info );
+						$new = preg_replace( static::$_regex, '$1' . $linksData[$matches[0]]['new_url'] . '$3' . $linksData[$matches[0]]['new_title'] . '$5', $matches[0] );
+					//	$new = str_replace( $info );
+					//	var_export( $new . "\r\n" );
+						return $new;
+					}
+					else
+					{
+						return $matches[0];
+					}
+				};
+				$doc = preg_replace_callback( static::$_regex, $callback, $eachContent );
 			//	var_export( $doc );
 		//		var_export( $contentArray[$contentKey] );
 				
@@ -274,6 +345,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			}
 		//	exit();
 			$newContent = json_encode( $contentArray );
+		//	var_export( $contentArray );
 			file_put_contents( $path, $newContent );
 		//	$this->updateFile( array( 'plain_text' => $xml->saveHTML() ) );
 			static::refreshThemePage( $data['layout_name'] );

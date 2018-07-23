@@ -40,6 +40,10 @@ class Application_Domain_UserDomain_Editor extends Application_Domain_UserDomain
 
 
 			if( $this->updateDb( $values ) ){ $this->setViewContent( '<div class="goodnews">Data updated successfully</div>', true ); } 
+			
+			//	clear domain cache
+			Ayoola_File_Storage::purgeDomain( $data['domain_name'] );
+
 
              // end of widget process
           

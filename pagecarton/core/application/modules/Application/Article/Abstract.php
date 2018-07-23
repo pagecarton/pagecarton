@@ -1166,20 +1166,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addElement( array( 'name' => 'article_title', 'label' => $postTypeLabel . ' Title', 'placeholder' => 'Enter a title for the ' . $postTypeLabel . ' here...', 'type' => 'InputText', 'value' => @$values['article_title'] ) );
 	//	$fieldset->addElement( array( 'name' => 'cs', 'type' => 'Html' ), array( 'html' => '<div style="display:block;min-width:100%;"></div><br />' ) );
 	
-		//	Description
-		$fieldset->addElement( array( 'name' => 'article_description', 'label' => '' . $postTypeLabel . ' Description', 'placeholder' => 'Describe this ' . $postTypeLabel . ' in a few words...', 'type' => 'TextArea', 'value' => @$values['article_description'] ) );
 
 		$fieldset->addRequirement( 'article_title', array( 'WordCount' => array( 3,200 ) ) );
 		$fieldset->addRequirement( 'article_description', array( 'WordCount' => array( 0, 5000 ) ) );
 	
 		//	addRequirements
-		//	Cover photo
-	//	$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
-		$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
-		$fieldName64 = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url_base64' ) : 'document_url_base64' );
-	//	var_export( $link );
-	//	var_export( @$values['article_url'] );
-		$fieldset->addElement( array( 'name' => 'document_url', 'label' => 'Cover Photo', 'placeholder' => 'Cover Photo for this ' . $postTypeLabel . '', 'type' => 'Document', 'value' => @$values['document_url'] ) );
 	
 		//	options
 		$options =  array( 
@@ -1263,6 +1254,97 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			}
 			switch( $eachPostType )
 			{
+				case 'description':
+					//	Description
+					$fieldset->addElement( array( 'name' => 'article_description', 'label' => '' . $postTypeLabel . ' Description', 'placeholder' => 'Describe this ' . $postTypeLabel . ' in a few words...', 'type' => 'TextArea', 'value' => @$values['article_description'] ) );
+				break;  
+				case 'privacy':
+					{
+						$options = array( 0 => 'Public', 97 => 'Private (Invited viewers only)', 98 => 'Only Me' );
+					}
+					$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'Select', 'value' => @$values['auth_level'] ? : 0 ), $options );
+					$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $options ) ) );
+				break;  
+				case 'cover-photo':
+					//	Cover photo
+				//	$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
+					$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
+					$fieldName64 = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url_base64' ) : 'document_url_base64' );
+				//	var_export( $link );
+				//	var_export( @$values['article_url'] );
+					$fieldset->addElement( array( 'name' => 'document_url', 'label' => 'Cover Photo', 'placeholder' => 'Cover Photo for this ' . $postTypeLabel . '', 'type' => 'Document', 'value' => @$values['document_url'] ) );
+				break;  
+				case 'category':   
+
+					//	Categories
+					$table = Application_Category::getInstance();
+					
+					//	Now allowing users to create their own personal categories
+					
+					//	Get information about the user access information
+					$userInfo = Ayoola_Access::getAccessInformation();
+					$categories = array();
+					if( ! empty( $userInfo['post_categories_id'] ) && ! empty( $userInfo['post_categories'] ) )
+					{
+						$categories += array_combine( $userInfo['post_categories_id'], $userInfo['post_categories'] );  
+			//			$categories['My Categories'] = array_combine( $userInfo['post_categories_id'], $userInfo['post_categories'] );  
+					}
+					require_once 'Ayoola/Filter/SelectListArray.php';
+					$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
+					if( ! empty( $articleSettings['allowed_categories'] ) )
+					{
+						$siteCategories = $table->select( null, array( 'category_name' => $articleSettings['allowed_categories'] ) );
+						if( $siteCategories  )
+						{
+							foreach( $siteCategories as $key => $value )
+							{
+								if( ! $siteCategories[$key]['category_label'] )
+								{
+									$siteCategories[$key]['category_label'] = $siteCategories[$key]['category_name'];        
+								}
+							//	var_export( array( 'parent_category' => $siteCategories[$key]['category_name'] ) );
+								if( $inner = $table->select( null, array( 'parent_category' => $siteCategories[$key]['category_name'] ) ) )
+								{
+									$categories[$siteCategories[$key]['category_label']] = $filter->filter( $inner );
+								}
+							//	var_export( $inner );
+							}
+							$siteCategories = $filter->filter( $siteCategories );
+						}
+						else
+						{
+						//	unset( $categories['General Site Categories'] );
+						}
+					}
+					elseif( $siteCategories = $table->select() )
+					{
+						$siteCategories = $filter->filter( $siteCategories );
+					}
+					if( is_array( $siteCategories ) )
+					{
+						$categories += $siteCategories;  
+					}
+				//	var_export( $articleSettings );
+				//	$addCategoryLink = ( '<a rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Add new Category" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Access_AccessInformation_Editor?pc_profile_info_to_edit=post_categories">My categories</a>' );     
+					if( self::hasPriviledge( 98 ) )
+					{
+						$addCategoryLink .= ( '<a rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Add new Category" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Articles/">Manage Categories</a>' );
+					}
+					$currentCategories =  is_array( @$values['category_name'] ) ? $values['category_name'] : array();
+
+					if( ! empty( $_GET['category_name'] ) )
+					{
+					//	$presetCategory = $_GET['category_name'];
+						if( is_string( $_GET['category_name'] ) )
+						{
+							$_GET['category_name'] = array_map( 'trim', explode( ',', $_GET['category_name'] ) );
+							$_REQUEST['category_name'] = $_GET['category_name'];
+						}
+						$currentCategories +=  is_array( $_GET['category_name'] ) ? $_GET['category_name'] : array();
+						$categories['Preset Categories'] = array_combine( $_GET['category_name'], $_GET['category_name'] );
+					}
+					$fieldset->addElement( array( 'name' => 'category_name', 'label' => 'Categories ' . $addCategoryLink, 'type' => 'SelectMultiple', 'value' => $currentCategories  ), $categories ? : array() );
+				break;  
 				case 'book':
 					$fieldset->addElement( array( 'name' => 'isbn', 'label' => 'ISBN', 'type' => 'InputText', 'value' => @$values['isbn']  ) );
 				break;  
@@ -1695,7 +1777,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$fieldset->addElement( array( 'name' => $eachField, 'type' => 'Hidden', ) );
 		}
-		$fieldset->addLegend( 'Other information' );
+	//	$fieldset->addLegend( 'Other information' );
 		$form->addFieldset( $fieldset ); 
 		
 		//	Next Level
@@ -1717,85 +1799,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	//		$fieldset->addRequirement( 'article_content', array( 'WordCount' => array( 0,10000000 ) ) );
 	
 		}
-*/		if( @$values['article_tags'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'keywords', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )
+*/	//	if( @$values['article_tags'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'keywords', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )
 		{
-			$fieldset->addElement( array( 'name' => 'article_tags', 'label' => '' . $postTypeLabel . ' Tags', 'placeholder' => 'Enter tags for this ' . $postTypeLabel . ' separated by comma', 'type' => 'InputText', 'value' => @$values['article_tags'] ) );
+	//		$fieldset->addElement( array( 'name' => 'article_tags', 'label' => '' . $postTypeLabel . ' Tags', 'placeholder' => 'Enter tags for this ' . $postTypeLabel . ' separated by comma', 'type' => 'InputText', 'value' => @$values['article_tags'] ) );
 	
 		}
-		//	Categories
-		$table = Application_Category::getInstance();
-		
-		//	Now allowing users to create their own personal categories
-		
-		//	Get information about the user access information
-		$userInfo = Ayoola_Access::getAccessInformation();
-		$categories = array();
-		if( ! empty( $userInfo['post_categories_id'] ) && ! empty( $userInfo['post_categories'] ) )
-		{
-			$categories += array_combine( $userInfo['post_categories_id'], $userInfo['post_categories'] );  
-//			$categories['My Categories'] = array_combine( $userInfo['post_categories_id'], $userInfo['post_categories'] );  
-		}
-		require_once 'Ayoola/Filter/SelectListArray.php';
-		$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
-		if( ! empty( $articleSettings['allowed_categories'] ) )
-		{
-			$siteCategories = $table->select( null, array( 'category_name' => $articleSettings['allowed_categories'] ) );
-			if( $siteCategories  )
-			{
-				foreach( $siteCategories as $key => $value )
-				{
-					if( ! $siteCategories[$key]['category_label'] )
-					{
-						$siteCategories[$key]['category_label'] = $siteCategories[$key]['category_name'];        
-					}
-				//	var_export( array( 'parent_category' => $siteCategories[$key]['category_name'] ) );
-					if( $inner = $table->select( null, array( 'parent_category' => $siteCategories[$key]['category_name'] ) ) )
-					{
-						$categories[$siteCategories[$key]['category_label']] = $filter->filter( $inner );
-					}
-				//	var_export( $inner );
-				}
-				$siteCategories = $filter->filter( $siteCategories );
-			}
-			else
-			{
-			//	unset( $categories['General Site Categories'] );
-			}
-		}
-		elseif( $siteCategories = $table->select() )
-		{
-			$siteCategories = $filter->filter( $siteCategories );
-		}
-		if( is_array( $siteCategories ) )
-		{
-			$categories += $siteCategories;  
-		}
-	//	var_export( $articleSettings );
- 	//	$addCategoryLink = ( '<a rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Add new Category" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Access_AccessInformation_Editor?pc_profile_info_to_edit=post_categories">My categories</a>' );     
-		if( self::hasPriviledge( 98 ) )
-		{
-			$addCategoryLink .= ( '<a rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Add new Category" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Articles/">Manage Categories</a>' );
-		}
-		$currentCategories =  is_array( @$values['category_name'] ) ? $values['category_name'] : array();
-
-		if( ! empty( $_GET['category_name'] ) )
-		{
-		//	$presetCategory = $_GET['category_name'];
-			if( is_string( $_GET['category_name'] ) )
-			{
-				$_GET['category_name'] = array_map( 'trim', explode( ',', $_GET['category_name'] ) );
-				$_REQUEST['category_name'] = $_GET['category_name'];
-			}
-			$currentCategories +=  is_array( $_GET['category_name'] ) ? $_GET['category_name'] : array();
-			$categories['Preset Categories'] = array_combine( $_GET['category_name'], $_GET['category_name'] );
-		}
-		$fieldset->addElement( array( 'name' => 'category_name', 'label' => 'Categories ' . $addCategoryLink, 'type' => 'SelectMultiple', 'value' => $currentCategories  ), $categories ? : array() );
-		{
-			$options = array( 0 => 'Public', 97 => 'Private (Invited viewers only)', 98 => 'Only Me' );
-		}
-		$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'Select', 'value' => @$values['auth_level'] ? : 0 ), $options );
-		$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $options ) ) );
-
+		$defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
+		$defaultProfile = $defaultProfile['profile_url'];
 		if( ! self::hasPriviledge( 98 ) )
 		{
 			$profiles = Application_Profile_Abstract::getMyProfiles();
@@ -1811,8 +1821,18 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$filter = new Ayoola_Filter_SelectListArray( 'profile_url', 'profile_url' );
 			$profiles = $filter->filter( $profiles );
 		}
-		$fieldset->addElement( array( 'name' => 'profile_url', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : Application_Profile_Abstract::getMyDefaultProfile() ), $profiles );
-		$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
+		if( count( $profiles )  > 1 )
+		{
+		//	var_dump()
+			$fieldset->addElement( array( 'name' => 'profile_url', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles );
+			$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
+		}
+		else
+		{
+	//		var_export( Application_Profile_Abstract::getMyDefaultProfile()  );
+			$fieldset->addElement( array( 'name' => 'profile_url', 'type' => 'Hidden', 'value' => @$values['profile_url'] ? : $defaultProfile ) );
+			$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
+		}
 
 	//	$fieldset->addRequirement( 'article_title', array( 'UserRestrictions' => null ) );
 		if( @$values['requirement_name'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'requirement', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )

@@ -39,6 +39,11 @@ class Application_Domain_UserDomain_Delete extends Application_Domain_UserDomain
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
             
 			if( $this->deleteDb() ){ $this->setViewContent( '<div class="goodnews">Data deleted successfully</div>', true ); } 
+			
+			//	clear domain cache
+			Ayoola_File_Storage::purgeDomain( $data['domain_name'] );
+
+            
 
              // end of widget process
           

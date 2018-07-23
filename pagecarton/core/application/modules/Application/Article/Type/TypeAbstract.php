@@ -119,10 +119,15 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
                             'location' => 'Location', 
                             'audio' => 'Play Audio', 
                             'gallery' => 'Gallery Images', 
+                            'category' => 'Categories', 
+                            'privacy' => 'Privacy Options', 
+                            'description' => 'Short Description', 
+                            'cover-photo' => 'Cover Photo', 
+                            'category' => 'Categories', 
                             );
 
 
-		//	preset values
+		//	preset values     
 		$i = 0;
 		//	Build a separate demo form for the previous group
 		$featureForm = new Ayoola_Form( array( 'name' => 'preset...' )  );

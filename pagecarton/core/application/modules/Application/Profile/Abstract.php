@@ -251,12 +251,15 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		//	var_export( array( 'profile_url' => $profileUrL ) );
 		//	var_export( Application_Profile_Table::getInstance()->select() );
 		
+		//	getting from php file makes a request call an abitrary php file
+	//	self::v( $_SERVER );
+/*		
 		if( ! $profileData )
 		{
 			$filename = self::getProfilePath( $url );
 			$profileData = @include $profileUrL;
 		}
-		return $profileData;
+*/		return $profileData;
 	}
 
     /**

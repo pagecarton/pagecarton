@@ -396,7 +396,7 @@ class Ayoola_Application
 				{
 					$primaryDomainInfo = $data['domain_settings'];
 				}
-			//	var_export( $primaryDomainInfo );
+			//	var_export( $primaryDomainInfo );  
 				
 			//	$domainDir = Application_Domain_Abstract::getSubDomainDirectory( Ayoola_Page::getDefaultDomain() );
 				$oldDomainDir = Application_Domain_Abstract::getSubDomainDirectory( @$primaryDomainInfo['domain_name'] ? : Ayoola_Page::getDefaultDomain() );   
@@ -778,7 +778,7 @@ class Ayoola_Application
 		$explodedUri = explode( '.', $uri );
 		$extension = strtolower( array_pop( $explodedUri ) );
 	//	var_export( $extension );
-		if( count( $explodedUri ) > 0 && strlen( $extension ) <= 5 )  
+		if( count( $explodedUri ) > 0 && strlen( $extension ) <= 15 )  
 		{
 			try
 			{
@@ -815,15 +815,12 @@ class Ayoola_Application
 						if( @$_REQUEST['x_url'] )
 						{
 							$moduleInfo = Ayoola_Page::getInfo( $_REQUEST['x_url'] ); 
-							if( ( ! empty( $moduleInfo ) && in_array( 'module', $moduleInfo['page_options'] ) ) )
+							if( ( ! empty( $moduleInfo ) ) )
+//							if( ( ! empty( $moduleInfo ) && in_array( 'module', $moduleInfo['page_options'] ) ) )
 							{
 								self::$_runtimeSetting['real_url'] = $_REQUEST['x_url'];
 							}
-							else
-							{
-								self::$_runtimeSetting['real_url'] = Application_Article_Abstract::getPostUrl() ? : '/';
-							}
-						}
+						}  
 						else
 						{
 						//	Ayoola_Abstract_Table::v( self::$_runtimeSetting['real_url'] );
@@ -1075,7 +1072,7 @@ class Ayoola_Application
 						{
 							$nameForModule = array_shift( $a );
 						}
-				//		var_export( $nameForModule ); 
+				//		PageCarton_Widget::v( $nameForModule );    
 
 						
 						$userInfo = $nameForModule ? Application_Profile_Abstract::getProfileInfo( $nameForModule ) : null;
@@ -1109,34 +1106,13 @@ class Ayoola_Application
 				}
 			//	var_export( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 			//	var_export( $module );
-				
-				//	Look in the links table for SEO friendly and short URLS
-/*				$table = new Application_Link();
-				$linkName = trim( $uri, '/' );
-			//	var_export( $table->select() );
-				if( $link = $table->selectOne( null, array( 'link_name' => $linkName ) ) )
-				{
-					$filter = new Ayoola_Filter_Get;
-					$get = $filter->filter( $link['link_url'] );
-					$_GET = array_merge( $_GET, $get ); // Combines our generated params with the original 
-					$_REQUEST = array_merge( $_REQUEST, $get ); // Combines our generated params with the original 
-					require_once 'Ayoola/Filter/Uri.php';
-					$filter = new Ayoola_Filter_Uri;
-					$uri = $filter->filter( $link['link_url'] );
-				//	var_export( $uri );
-					self::$_runtimeSetting['real_url'] = $link['link_url'];
-				///	var_export( self::$_runtimeSetting['real_url'] );
-					self::$_runtimeSetting['url'] = $uri;
-					self::view( $uri );
-					break; 
-				}
-*/			//	exit( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 
 				//	we cant find the file. Now lets look at the multisite
 				$table = new PageCarton_MultiSite_Table();
 			//	var_export( $nameForModule );
 			//	var_export( $table->select() );
 				$multiSiteDir = '/' . $nameForModule;
+		//		var_export( $multiSiteDir );
 				if( $sites = $table->select( null, array( 'directory' => $multiSiteDir ) ) )
 				{
 					Ayoola_Application::reset( array( 'path' => $multiSiteDir ) );
@@ -1602,6 +1578,8 @@ class Ayoola_Application
 			$requestedUri = $requestedUriDecoded;
 		//	var_export( $requestedUri );
 		}
+	//	Application_Profile_Abstract::v( $_SERVER );
+
 		if( isset( $_SERVER['PATH_INFO'] ) )
 		{
 			$requestedUri = $_SERVER['PATH_INFO'];
@@ -1633,6 +1611,16 @@ class Ayoola_Application
 		{
 			$requestedUri = self::$_homePage;
 		}
+
+		//	an nginx installation not recognizing url like 
+		//	https://www.example.com/index.php/url
+		$controller = '/index.php/';
+		if( stripos( $requestedUri, $controller ) === 0 )
+		{
+			$requestedUri = '/' . array_pop( explode( $controller, $requestedUri ) );
+		}
+	//	var_export( $requestedUri );
+
 		//	Fetch the GET parameters from the url
 		require_once 'Ayoola/Filter/Get.php';
 		$filter = new Ayoola_Filter_Get;

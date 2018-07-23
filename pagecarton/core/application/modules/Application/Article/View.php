@@ -370,6 +370,14 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 			$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ) ) );
 		}
+		if( $this->getParameter( 'get_comment_count' ) )
+		{   
+			if( ! $this->commentTable )
+			{
+				$this->commentTable =  new Application_CommentBox_Table();
+			}
+			$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '300' ) ) );
+		}
 
 		$this->_xml = self::getDefaultPostView( $data );
 
@@ -406,6 +414,21 @@ class Application_Article_View extends Application_Article_Abstract
 
 			switch( $eachPostType )
 			{
+				case 'gallery':
+					$imagesKey = 'images' . $featurePrefix;
+					$images = $data[$imagesKey];
+					foreach( $images as $imageCounter => $eachImage )
+					{
+						if( ! trim( $eachImage ) )
+						{
+							continue;
+						}
+						$eachImageKey = $imagesKey . '_' . $imageCounter;
+						$data[$eachImageKey] = $eachImage;
+						$data[$eachImageKey . '_cropped'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&url=' . $eachImage; 
+					}
+					unset( $data[$imagesKey] );
+				break;  
 				case 'subscription-options':
 			//		var_export( $featureSuffix );
 			//		var_export( $data['subscription_selections' . $featureSuffix] );

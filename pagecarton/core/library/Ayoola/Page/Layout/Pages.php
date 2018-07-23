@@ -70,6 +70,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 					$url = str_ireplace( array( '/index', '/home', ), array( '/', '/', ), $url );
 					$pages[null][] = array( 'url' => '' . $url );
 					$pages['list'][] = $url;
+					$pages['list-url'][$url] = $url;
 				break;
 			}
 		}

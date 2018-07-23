@@ -41,6 +41,7 @@ class Application_Domain_UserDomain_Creator extends Application_Domain_UserDomai
     {    
 		try
 		{ 
+		//	self::v( CACHE_DIR );  
 			if( ! $this->requireRegisteredAccount() )
 			{
 				return false;
@@ -90,6 +91,10 @@ class Application_Domain_UserDomain_Creator extends Application_Domain_UserDomai
 			}
 			catch( Ayoola_Exception $e ){ null; }
 		//	if( ! $this->insertDb() ){ return false; }
+			
+			//	clear domain cache
+			Ayoola_File_Storage::purgeDomain( $values['domain_name'] );
+
 			if( $this->insertDb( $values ) )
 			{ 
 				$this->setViewContent( '<div class="goodnews">Added successfully. </div>', true ); 

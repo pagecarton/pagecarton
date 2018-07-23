@@ -754,6 +754,8 @@ class Ayoola_Xml extends DOMDocument
 			}
 
 			// Let's remove the placeholder.
+	//		var_export( $this->saveXML( $node ) . "\r\n" );
+	//		var_export( str_replace('<!--NOT_VOID-->', '', $this->saveXML( $node )) . "\r\n" );
 			return str_replace('<!--NOT_VOID-->', '', $this->saveXML( $node ));
 	}	
 

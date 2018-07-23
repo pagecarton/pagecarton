@@ -49,7 +49,7 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 	protected function init()
     {
 
-		if( self::hasPriviledge() || $this->getParameter( 'clear_all' ) )
+		if( self::hasPriviledge() )
 		{
 
 			set_time_limit( 0 );
@@ -60,6 +60,7 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 			//	remove "cache dir" this is causing issues.
 			//	Clear cache
 			$stupidCache = realpath( dirname( $_SERVER['SCRIPT_FILENAME'] ) ) . '/cache';
+			
 			//	var_export( $stupidCache );
 			if( is_dir( $stupidCache ) )
 			{
@@ -73,7 +74,7 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 				Ayoola_Doc::deleteDirectoryPlusContent( PC_TEMP_DIR );
 			}
 		}
-		elseif( self::hasPriviledge( array( 98 ) ) )
+		elseif( self::hasPriviledge( array( 98 ) ) || $this->getParameter( 'clear_all' ) )
 		{
 			//	Reset domain
 			Ayoola_Application::setDomainSettings( true );

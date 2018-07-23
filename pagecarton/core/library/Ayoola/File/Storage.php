@@ -96,7 +96,7 @@ class Ayoola_File_Storage extends Ayoola_File
 		$filter = new Ayoola_Filter_DomainName();
 		$domain = $filter->filter( $domain );
 		
-		$filter = new Ayoola_Filter_Alnum();
+/*		$filter = new Ayoola_Filter_Alnum();
 		$filter->replace = DS;
 
 		//	we cant use Ayoola_Application::getDomainName( array( 'no_cache' => true ) ) because it causes infinite loop
@@ -104,7 +104,12 @@ class Ayoola_File_Storage extends Ayoola_File
 		$firstPart = array_shift( explode( DS, $domain ) );
 		
 		$dir = $class->getFile()->getDirectory() . DS . 'STORAGE' . DS . $firstPart;
-	//	var_export( $dir );
+*/
+        $cacheDestination = dirname( CACHE_DIR ) . DS . $domain;  
+        Ayoola_Doc::deleteDirectoryPlusContent( $cacheDestination);
+        $cacheDestination = dirname( CACHE_DIR ) . DS . 'www.' . $domain;  
+        Ayoola_Doc::deleteDirectoryPlusContent( $cacheDestination);
+/*	//	var_export( $dir );
 		if( strlen( $domain ) < 1 || ! is_dir( $dir ) )
 		{
 			return false;
@@ -112,7 +117,8 @@ class Ayoola_File_Storage extends Ayoola_File
 	//	var_export( $dir );
 	//	$dir = $class->getFile()->getDirectory() . DS . __CLASS__ . DS;
 		Ayoola_Doc::deleteDirectoryPlusContent( $dir );
-		return true;
+
+*/		return true;
     } 
 	
     /**
@@ -149,12 +155,13 @@ class Ayoola_File_Storage extends Ayoola_File
                 if( $timeOut < time() - filectime( $path ) )
                 {
                     unlink( $path );
+                    return false;
                 }
             }
         //	Ayoola_Document::createDirectory( dirname( $path ) );
         //	$data = include $path;
             $data = false;
-            if( $content = file_get_contents( $path ) )
+            if( $content = file_get_contents( $path ) )   
             {
                 $data = json_decode( $content, true );
             }

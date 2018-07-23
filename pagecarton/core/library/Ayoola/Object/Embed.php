@@ -270,7 +270,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			{
 				return static::$_properties[__METHOD__][$keyZ];
 			}
-			$storageInfo = array( 'id' => $keyZ, 'device' => 'File', 'time_out' => 10000, );
+			$storageInfo = array( 'id' => $keyZ, 'device' => 'File', 'time_out' => 1000000, );
 			$storage = static::getObjectStorage( $storageInfo );
 			if( $storage->retrieve() )
 			{

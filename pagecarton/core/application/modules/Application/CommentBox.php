@@ -98,7 +98,7 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			
 			View the page where the comment was posted: ' . $link . '
 
-			Moderate Comments: ' . Ayoola_Page::getHomePageUrl() . '/widgets/Application_CommentBox_List
+			Moderate Comments: ' . Ayoola_Page::getHomePageUrl() . '/widgets/Application_CommentBox_Table_List
 			';
 			try
 			{

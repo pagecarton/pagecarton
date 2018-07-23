@@ -24,7 +24,7 @@ require_once 'Ayoola/Access/Abstract.php';
  * @category   PageCarton CMS
  * @package    Ayoola_Access_Login
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * @license    GNU General Public License version 2 or later; see LICENSE.txt  
  */
 
 class Ayoola_Access_Login extends Ayoola_Access_Abstract 
@@ -146,7 +146,6 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			$validUserInfo['username'] = $values['username'];
 			$validUserInfo['password'] = $values['password'];
 		}
-
 		$userInfo = array();
 		do
 		{
@@ -254,7 +253,10 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 				}
 			}
 		}
+		$userInfo['access_level'] = $userInfo['access_level'] ? : 1;
 	//	var_export( $userInfo );
+	//	self::v( $userInfo );
+	//	exit();
 		
 		//	Add access info
 		$userInfo += self::getAccessInformation( $userInfo['username'], array( 'skip_user_check' => true ) ) ? : array();

@@ -500,6 +500,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						}
 						$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '300' ) ) );
 					}
+					if( $this->getParameter( 'get_comment_count' ) )
+					{   
+						if( ! $this->commentTable )
+						{
+							$this->commentTable =  new Application_CommentBox_Table();
+						}
+						$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '300' ) ) );
+					}
 					
 					//	don't cache base64 strings of images and download data
 					unset( $data['document_url_base64'] );
@@ -788,6 +796,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			if( @$data['article_url'] && strpos( @$data['article_url'], ':' ) === false && $data['article_url'][0] !== '?'  )
 			{
 				$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
+		//		var_export( $data['post_link'] );
 			}
 			if( @$data['article_url'] )
 			$data['document_url'] = $data['document_url']; 
@@ -1031,101 +1040,114 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 		//	self::v( $postType );
 			$data['filtered_time'] = self::filterTime( $data );
-			switch( $postType )
-			{
-				case 'subscription':
-				case 'product':
-				case 'service':
-					$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( array( 'data' => $data, 'button_value' => $this->getParameter( 'button_value' ) ? : $data['button_value'] ) );
-				break; 
-/*				case 'user_information':
-				//	var_export( $data );
-			//		var_export( $data['display_name'] );
-					//	Lifted from http://stackoverflow.com/questions/3776682/php-calculate-age
-					if( $this->getParameter( 'show_sex_of_user_in_full' ) )
-					{
-						switch( @$data['sex'] )
-						{
-							case 'F':
-								$data['sex'] = 'Female';
-							break;
-							case 'M':
-								$data['sex'] = 'Male';
-							break;
-						}
-					}
 
-					//	Lifted from http://stackoverflow.com/questions/3776682/php-calculate-age
-					if( $this->getParameter( 'calculate_age' ) )
+			//	internal forms to use
+			$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array();
+			$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
+			$features[] = $data['true_post_type'];
+			$featuresPrefix[] = '';
+			$featureCount = array();
+			$featureDone = array();
+			//		var_export( $features );
+			foreach( $features as $key => $eachPostType )
+			{	
+				$featureSuffix = $featuresPrefix[$key];
+				if( empty( $featureCount[$eachPostType] ) )
+				{
+					$featureCount[$eachPostType] = 1;
+				}
+				else
+				{
+					if( empty( $featureSuffix ) )
 					{
-						//date in mm/dd/yyyy format; or it can be in other formats as well
-						$birthDate = @$data['birth_date'];
-						//explode the date to get month, day and year
-						$birthDate = explode("-", $birthDate);
-						//get age from date or birthdate
-						$age = (date("md", date("U", @mktime(0, 0, 0, @$birthDate[1], @$birthDate[2], @$birthDate[0]))) > date("md")
-						? ((date("Y") - $birthDate[0]) - 1)
-						: (date("Y") - $birthDate[0]));
-						$data['age'] = $age;
+						$featureSuffix = $featureCount[$eachPostType];
 					}
-				//	echo "Age is:" . $age;					
-				//	self::v( $data );
-					
-				break;
-*/				case 'category_information':
-				//	self::v( $data );
-			//		var_export( $data['display_name'] );
-					@$data['article_title'] = $data['category_label'];
-					@$data['article_description'] = $data['category_description'];
-					@$data['document_url'] = $data['cover_photo'] ? : $data['document_url'];
-					@$data['article_url'] = $data['category_url'] ? : ( '' . self::getPostUrl() . '/category/' . $data['category_name'] );
-					@$data['item_price'] = null;					
-				break;
-				case 'profile':
-				break;
-				case 'audio':
-				case 'music':
-				case 'message':
-				case 'e-book':
-				case 'document':
-				case 'file':
-				case 'download':
-					//	title
-					if( @$data['download_url'] )
-					{
-						if( $data['download_url'][0] === '/' )
+					$featureCount[$eachPostType]++;
+				}
+				$featureCountKey = $eachPostType . $featureSuffix;
+				if( ! empty( $featureDone[$featureCountKey] ) )
+				{
+					continue;
+				}
+			//	self::v( $eachPostType );
+				$featureDone[$featureCountKey] = true;
+				switch( $eachPostType )
+				{
+					case 'gallery':
+						$imagesKey = 'images' . $featurePrefix;
+						$images = $data[$imagesKey];
+						foreach( $images as $imageCounter => $eachImage )
 						{
-							//	this is still a local file we can load with Ayoola_Doc
-							$data['file_size'] =  filesize( Ayoola_Loader::checkFile(  'documents/' . $data['download_url'] ) );
+							if( ! trim( $eachImage ) )
+							{
+								continue;
+							}
+							$eachImageKey = $imagesKey . '_' . $imageCounter;
+							$data[$eachImageKey] = $eachImage;
+							$data[$eachImageKey . '_cropped'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&url=' . $eachImage; 
 						}
-						else
+						unset( $data[$imagesKey] );
+					break;  
+					case 'subscription':
+					case 'product':
+					case 'service':
+						$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( array( 'data' => $data, 'button_value' => $this->getParameter( 'button_value' ) ? : $data['button_value'] ) );
+					break; 
+					case 'category_information':
+					//	self::v( $data );
+				//		var_export( $data['display_name'] );
+						@$data['article_title'] = $data['category_label'];
+						@$data['article_description'] = $data['category_description'];
+						@$data['document_url'] = $data['cover_photo'] ? : $data['document_url'];
+						@$data['article_url'] = $data['category_url'] ? : ( '' . self::getPostUrl() . '/category/' . $data['category_name'] );
+						@$data['item_price'] = null;					
+					break;
+					case 'profile':
+					break;
+					case 'audio':
+					case 'music':
+					case 'message':
+					case 'e-book':
+					case 'document':
+					case 'file':
+					case 'download':
+						//	title
+						if( @$data['download_url'] )
 						{
-							$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
-							$data['file_size'] = $head['content-length'];							
+							if( $data['download_url'][0] === '/' )
+							{
+								//	this is still a local file we can load with Ayoola_Doc
+								$data['file_size'] =  filesize( Ayoola_Loader::checkFile(  'documents/' . $data['download_url'] ) );
+							}
+							else
+							{
+								$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
+								$data['file_size'] = $head['content-length'];							
+							}
 						}
-					}
-					elseif( @$data['download_path'] )
-					{
-						$path = APPLICATION_DIR . $data['download_path'];
-						$data['file_size'] =  filesize( $path );
-					}
-					elseif( @$data['download_base64'] )
-					{
-						$result = self::splitBase64Data( $data['download_base64'] );
-						$data['file_size'] =  strlen( $result['data'] );
-					}
-			//		var_export( $data['download_base64'] );
-					$filter = new Ayoola_Filter_FileSize();
-					$data['file_size'] = $filter->filter( $data['file_size'] );
-					
-					$data['download_button'] = '<a title="Go to the download page." href="' . Ayoola_Application::getUrlPrefix() . $url . '"><input type="button" value="Download Now" /></a>';
-				break;
-				case 'video':
-				break;
-				case 'poll':
-				break;
-				default:
-				break;
+						elseif( @$data['download_path'] )
+						{
+							$path = APPLICATION_DIR . $data['download_path'];
+							$data['file_size'] =  filesize( $path );
+						}
+						elseif( @$data['download_base64'] )
+						{
+							$result = self::splitBase64Data( $data['download_base64'] );
+							$data['file_size'] =  strlen( $result['data'] );
+						}
+				//		var_export( $data['download_base64'] );
+						$filter = new Ayoola_Filter_FileSize();
+						$data['file_size'] = $filter->filter( $data['file_size'] );
+						
+						$data['download_button'] = '<a title="Go to the download page." href="' . Ayoola_Application::getUrlPrefix() . $url . '"><input type="button" value="Download Now" /></a>';
+					break;
+					case 'video':
+					break;
+					case 'poll':
+					break;
+					default:
+					break;
+				}
 			}
 		//	
 			$this->_xml .= '' . self::getDefaultPostView( $data ) . '';

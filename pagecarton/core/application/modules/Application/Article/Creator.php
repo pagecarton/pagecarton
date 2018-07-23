@@ -83,7 +83,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 				return false;
 			}
 			
-			$this->createForm( 'Save', $this->getParameter( 'form_legend' ) ? : 'Post a new ' . $joinedType );
+			$this->createForm( 'Save', $this->getParameter( 'form_legend' ) ? : 'New ' . $postType );
 			if( $this->getParameter( 'class_to_play_when_completed' ) )
 			{
 				$this->setViewContent( Ayoola_Object_Embed::viewInLine( array( 'editable' => $this->getParameter( 'class_to_play_when_completed' ) ) + $this->getParameter() ? : array() ) );

@@ -165,7 +165,7 @@ abstract class Application_Category_Abstract extends Ayoola_Abstract_Table
 		{
 		//	$fieldset = new Ayoola_Form_Element;
 		//	$fieldset->addLegend( 'Manually enter a URL that this category will link to' );
-			$options = new Ayoola_Page_Page;
+			$options = Ayoola_Page_Page::getInstance();
 			$options = $options->select();
 			require_once 'Ayoola/Filter/SelectListArray.php';
 			$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
