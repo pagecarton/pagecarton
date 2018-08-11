@@ -17,7 +17,7 @@
  */
 
 
-abstract class PageCarton_Settings extends Application_Settings_Abstract
+abstract class PageCarton_Settings extends Application_Settings_Editor
 {
 
 	// END OF CLASS
