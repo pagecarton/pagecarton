@@ -295,7 +295,7 @@ class Ayoola_Application
 				//	var_export( Ayoola_Application::$GLOBAL );
 			}
 		//	var_export( $data );
-			return true;      
+		//	return true;      
 		}  
 
 		//	Search the domain name in the domain table
@@ -336,19 +336,25 @@ class Ayoola_Application
 			//	var_export( $tempWhere );
 				
 			}
-	//		var_export( $subDomain );
+		//	var_export( $subDomain );
+			if( ! $primaryDomainInfo = $domain->selectOne( null, array( 'domain_type' => 'primary_domain' ) ) )
+			{
+				$primaryDomainInfo = $data['domain_settings'];
+			}
+			//	var_export( $primaryDomainInfo );  
 			if( ! $data['domain_settings'] )
 			{
 				//	look for domain in the users table
-				$userDomainInfo = Application_Domain_UserDomain::getInstance()->selectOne( null, array( 'domain_name' => $where['domain_name'] ) );
-				
-				//	link it to the profile
-				$subDomain = $userDomainInfo['profile_url'];
-				$data['domain_settings'] = $userDomainInfo;
-				$data['domain_settings']['domain_options'] = array( 'user_subdomains' );
-				$data['domain_settings']['main_domain'] = $where['domain_name'];
-			//	var_export( $userDomainInfo );
-			//	exit();
+				if( $userDomainInfo = Application_Domain_UserDomain::getInstance()->selectOne( null, array( 'domain_name' => $where['domain_name'] ) ) )
+				{					
+					//	link it to the profile
+					$subDomain = $userDomainInfo['profile_url'];
+					$data['domain_settings'] = $userDomainInfo;
+					$data['domain_settings']['domain_options'] = array( 'user_subdomains' );
+					$data['domain_settings']['main_domain'] = $where['domain_name'];
+				//	var_export( $userDomainInfo );
+				//	exit();
+				}
 			}
 			if( ! @$subDomain && @in_array( 'ssl', @$data['domain_settings']['domain_options'] ) && $protocol != 'https' )
 			{
@@ -381,9 +387,10 @@ class Ayoola_Application
 					$data['domain_settings'] = $where;
 					break;
 				}
-				header( "HTTP/1.0 404 Not Found" );
+/*				header( "HTTP/1.0 404 Not Found" );
 				header( "HTTP/1.1 404 Not Found" );
 				Header('Status: 404 Not Found');
+*/				header( 'Location: ' . $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
 				exit( 'DOMAIN NOT FOUND' );
 			}
 			else
@@ -392,11 +399,6 @@ class Ayoola_Application
 				//	Inventing a personal APPLICATION_PATH also for the "default" Installation
 				
 				//	Get settings for the primary domain for inheritance
-				if( ! $primaryDomainInfo = $domain->selectOne( null, array( 'domain_type' => 'primary_domain' ) ) )
-				{
-					$primaryDomainInfo = $data['domain_settings'];
-				}
-			//	var_export( $primaryDomainInfo );  
 				
 			//	$domainDir = Application_Domain_Abstract::getSubDomainDirectory( Ayoola_Page::getDefaultDomain() );
 				$oldDomainDir = Application_Domain_Abstract::getSubDomainDirectory( @$primaryDomainInfo['domain_name'] ? : Ayoola_Page::getDefaultDomain() );   
@@ -482,89 +484,94 @@ class Ayoola_Application
 				}
 				
 			}
+		//	var_export( $data['domain_settings']['*']  );
 			//	check subdomain
-			if( @$subDomain )
-			if( $subDomainInfo = $domain->selectOne( null, array( 'domain_name' => $subDomain ) ) )
-			{
-				//	var_export( $subDomainInfo );
-				if( @$subDomainInfo['sub_domain'] || @$subDomainInfo['domain_type'] === 'sub_domain' )
-				{
-			//		var_export( $data['domain_settings'] );
-					$data['domain_settings'] = $subDomainInfo;
-				//	var_export( $subDomainInfo );
-					$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
-					$data['domain_settings']['domain_name'] = $subDomain . '.' . $tempWhere['domain_name'];
-					$data['domain_settings'][APPLICATION_DIR] = str_replace( '/', DS, Application_Domain_Abstract::getSubDomainDirectory( $subDomainInfo['domain_name'] ) );
-					$data['domain_settings']['dynamic_domain'] = true;					
-					$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
-					@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
-				//	$storage->store( $data );
-				//	setcookie( 'SUB_DIRECTORY', $subDomainInfo['domain_name'], time() + 9999999, '/' );
-				}
-				elseif( $data['domain_settings']['*'] )
-				{
-			//		setcookie( 'SUB_DIRECTORY', false, time() - 9999999, '/', $domainName );				header( "HTTP/1.0 404 Not Found" );
-					
-				}
-				else
-				{
-					exit( 'INVALID SUB-DOMAIN' );   
-				}
-			}
-			else
-			{
-				
-				//	do we have user domains
-				$userInfo = Ayoola_Access::getAccessInformation( $subDomain );
-				if( ! $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) )
-				{
-					$userInfo = Application_Profile_Abstract::getProfileInfo( $subDomain );
-				}
-//				var_export( $subDomain );
-//				exit();
-			//	if( $subDomain == 'pagecartonad' )
-				{
-			//		var_export( self::$_includePaths );
-			//		var_export( $userInfo );
-				//	exit( var_export( $userInfo ) );
-				}
-				if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) && $userInfo  )
-				{
-			//		var_export( $data['domain_settings'] );
-					Ayoola_Application::$GLOBAL = $userInfo;
-					$data['domain_settings'] = $data['domain_settings'] ? : array();
-					$data['domain_settings'] += $userInfo;
-			//		var_export( $userInfo ); 
-			//		exit();    
-				//	Application_Profile_Abstract::saveProfile( $information );
-					$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
-					$data['domain_settings']['domain_name'] = Ayoola_Application::getDomainName();					
-					$data['domain_settings']['dynamic_domain'] = true;					
-			//		$data['domain_settings'][APPLICATION_DIR] = Application_Profile_Abstract::getProfileDir( $userInfo['username'] );
-					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] . DS . AYOOLA_MODULE_FILES .  DS . 'profiles' . DS . strtolower( implode( DS, str_split( $userInfo['username'], 2 ) ) );    
-					$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
-					@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
-				//	var_export( $data['domain_settings'] );
-				//	$storage->store( $data );
-				//	setcookie( 'SUB_DIRECTORY', $subDomain['domain_name'], time() + 9999999, '/' );
-				}
-				elseif( ! empty( $tempWhere['domain_name'] ) && $tempWhere['domain_name'] != self::getDomainName() )
-				{
-			//		var_export( $tempWhere );
 			//		var_export( $subDomain );
-			//		exit();
-			//		header( 'HTTP/1.1 301 Moved Permanently' );
-					header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
-				//	var_export( $data );
-					
-					exit( 'USER DOMAIN NOT ACTIVE' );
+		//			var_export( $data['domain_settings'] );
+	//		$data['domain_settings'];
+			if( @$subDomain )
+			{
+				if( $subDomainInfo = $domain->selectOne( null, array( 'domain_name' => $subDomain ) ) )
+				{
+					//	var_export( $subDomainInfo );
+					if( @$subDomainInfo['sub_domain'] || @$subDomainInfo['domain_type'] === 'sub_domain' )
+					{
+				//		var_export( $data['domain_settings'] );
+						$data['domain_settings'] = $subDomainInfo;
+					//	var_export( $subDomainInfo );
+						$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
+						$data['domain_settings']['domain_name'] = $subDomain . '.' . $tempWhere['domain_name'];
+						$data['domain_settings'][APPLICATION_DIR] = str_replace( '/', DS, Application_Domain_Abstract::getSubDomainDirectory( $subDomainInfo['domain_name'] ) );
+						$data['domain_settings']['dynamic_domain'] = true;					
+						$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
+						@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
+					//	$storage->store( $data );
+					//	setcookie( 'SUB_DIRECTORY', $subDomainInfo['domain_name'], time() + 9999999, '/' );
+					}
+					elseif( $data['domain_settings']['*'] )
+					{
+				//		setcookie( 'SUB_DIRECTORY', false, time() - 9999999, '/', $domainName );				header( "HTTP/1.0 404 Not Found" );
+						
+					}
+					else
+					{
+						exit( 'INVALID SUB-DOMAIN' );   
+					}
 				}
 				else
 				{
-			//		header( 'HTTP/1.1 301 Moved Permanently' );
-				//	var_export( $data );
 					
-					exit( 'DOMAIN NOT IN USE' );
+					//	do we have user domains
+					$userInfo = Ayoola_Access::getAccessInformation( $subDomain );
+					if( ! $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) )
+					{
+						$userInfo = Application_Profile_Abstract::getProfileInfo( $subDomain );
+					}
+	//				var_export( $subDomain );
+	//				exit();
+				//	if( $subDomain == 'pagecartonad' )
+					{
+				//		var_export( self::$_includePaths );
+				//		var_export( $userInfo );
+					//	exit( var_export( $userInfo ) );
+					}
+					if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) && $userInfo  )
+					{
+				//		var_export( $data['domain_settings'] );
+						Ayoola_Application::$GLOBAL = $userInfo;
+						$data['domain_settings'] = $data['domain_settings'] ? : array();
+						$data['domain_settings'] += $userInfo;
+				//		var_export( $userInfo ); 
+				//		exit();    
+					//	Application_Profile_Abstract::saveProfile( $information );
+						$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
+						$data['domain_settings']['domain_name'] = Ayoola_Application::getDomainName();					
+						$data['domain_settings']['dynamic_domain'] = true;					
+				//		$data['domain_settings'][APPLICATION_DIR] = Application_Profile_Abstract::getProfileDir( $userInfo['username'] );
+						$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] . DS . AYOOLA_MODULE_FILES .  DS . 'profiles' . DS . strtolower( implode( DS, str_split( $subDomain, 2 ) ) );    
+						$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
+						@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
+					//	var_export( $data['domain_settings'] );
+					//	$storage->store( $data );
+					//	setcookie( 'SUB_DIRECTORY', $subDomain['domain_name'], time() + 9999999, '/' );
+					}
+					elseif( ! empty( $tempWhere['domain_name'] ) && $tempWhere['domain_name'] != self::getDomainName() )
+					{
+				//		var_export( $tempWhere );
+				//		var_export( $subDomain );
+				//		exit();
+				//		header( 'HTTP/1.1 301 Moved Permanently' );
+						header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
+					//	var_export( $data );
+						
+						exit( 'USER DOMAIN NOT ACTIVE' );
+					}
+					else
+					{
+				//		header( 'HTTP/1.1 301 Moved Permanently' );
+						header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
+						exit( 'DOMAIN NOT IN USE' );
+					}
 				}
 			}
 		}
@@ -775,6 +782,7 @@ class Ayoola_Application
 		//	var_export( $_SERVER['HTTP_IF_MODIFIED_SINCE'] );
 
 		//	Handle Files and Documents differently, as per type of file
+		$uri = trim( $uri );
 		$explodedUri = explode( '.', $uri );
 		$extension = strtolower( array_pop( $explodedUri ) );
 	//	var_export( $extension );

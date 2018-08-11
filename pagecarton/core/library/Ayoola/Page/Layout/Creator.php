@@ -274,6 +274,21 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				Ayoola_Doc::deleteDirectoryPlusContent( $tempDestination );
 				return true;  
 			}
+			else
+			{
+				if( empty( $values['layout_name'] ) &&  $values['layout_label'] )
+				{
+					$filter = new Ayoola_Filter_Name();
+					$values['layout_name'] = strtolower( $filter->filter( 'pc_layout_' . $values['layout_label'] ) );
+				} 
+				if( $this->getDbTable()->selectOne( null, array( 'layout_name' => $values['layout_name'] ) ) )
+				{
+					$this->getForm()->setBadnews( 'Please enter a different name for this layout template (theme). There is a layout with the same name: ' . $values['layout_name'] );
+					$this->setViewContent( $this->getForm()->view(), true );
+					return false; 
+				}
+
+			}
 	//		$result = self::splitBase64Data( $values['screenshot'] );
 	//		$filter = new Ayoola_Filter_Name();
 	//		$filter->replace = '-';
@@ -304,10 +319,10 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				$this->setViewContent( '<p class="boxednews goodnews">New theme saved successfully.</p>', true );
 				$this->setViewContent( '<p class="">
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Edit Codes Again</a>
-				<a href="' . Ayoola_Application::getUrlPrefix() . '/ayoola/page/edit/layout/?url=/layout/' . $values['layout_name'] . '/template" class="pc-btn pc-btn-small">Launch Theme Editor</a>
+				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout?url=/layout/' . $values['layout_name'] . '/template" class="pc-btn pc-btn-small">Launch Theme Editor</a>
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Page/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Change Default Theme</a>
 				
-				</p>' );
+				</p>' );  
 			}
 			
 		//	$this->setViewContent( '<p class="goodnews">Layout created successfully.</p>' );

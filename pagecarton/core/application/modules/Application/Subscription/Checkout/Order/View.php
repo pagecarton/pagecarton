@@ -64,7 +64,23 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 		$this->setViewContent( '<h3>Order  Status</h3>' );
 		$this->setViewContent( '<p>'  . $identifierData['order_status'] . '</p>' );
 		$this->setViewContent( '<h3>Customer Information</h3>' );
+	//	var_export( $identifierData );
+		$orderForm = Application_Settings_CompanyInfo::getSettings( 'Payments', 'order_form' );
+	//	var_export( $identifierData['order'] );
+		if( ! $orderForm )
+		{
+			if( $firstProduct = array_pop( $identifierData['order']['cart'] ) )
+			{
+			//	var_export( $firstProduct );
+				if( $firstProduct['checkout_form'] )
+				{
+					$orderForm = $firstProduct['checkout_form'];
+				}
+			}
+		}
 		$this->setViewContent( self::arrayToString( $identifierData['order']['checkout_info'] ) );
+		$formViewer = new Ayoola_Form_View( array( 'form_name' => $orderForm, 'form_data' => $identifierData['order']['checkout_info'] ) );
+		$this->setViewContent( $formViewer->view() );
 
 //		var_export( $data );
 

@@ -15,7 +15,7 @@ class Ayoola_Form_Element extends Ayoola_Form
      * 
      * @var string
      */
-	public $id;
+	public $id;  
 	
 	
     /**
@@ -212,6 +212,20 @@ class Ayoola_Form_Element extends Ayoola_Form
 		if( ! empty( $_GET['pc_inspect_widget_form'] ) && stripos( $realName, 'submit-' ) === false && stripos( $realName, 'SUBMIT_DETECTOR' ) === false )
 		{
 			$markup .= ' <div style="font-size:smaller; padding-top:1em; padding-bottom:1em;"><br> The name attribute of the element above is "' . $realName . '"<br></div>';   
+		}
+	//	self::v( $element );
+		switch( strtolower( $method ) )
+		{
+			case 'addinputtext':
+			case 'addtextarea':
+			case 'addselect':
+			//	self::v( $method );
+				//	Set Element ID and Label to default if undeclared
+				$element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $realName ) );	
+			break;
+			case 'addhidden':
+				$element['label'] = null;	
+			break;
 		}
 		if( $this->placeholderInPlaceOfLabel || ! trim( $element['label'] ) )
 		{

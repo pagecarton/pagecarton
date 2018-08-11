@@ -703,6 +703,151 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	}
 	
     /**
+     * Translate a string of text.
+     * 
+     */
+	public static function __( $string )
+    {		
+		if( ! Ayoola_Loader::loadClass( 'PageCarton_Locale' ) )
+		{
+			return $string;
+		}
+		if( preg_match( '#^[\s]*\{\{\{[^\{\}\s]*\}\}\}[\s]*$#', $string ) )
+		{
+		//	var_export( $string );
+			return $string;
+		}
+		if( ! trim( $string ) || strpos( $string, '<style>' ) !== false || strpos( $string, '<script>' ) !== false )
+		{
+			
+			return $string;
+		}
+		if( strip_tags( $string ) != $string )
+		{
+			$allStrings = preg_split( '#<(?!a|span|/a|/span)[\s]?[^<>]*>#', $string );
+		//	preg_match_all( '#[^<>]*(\<(?!a|span|/a|/span)[^<>]*>)?[^<>]*(\<(?!a|span|/a|/span)[^<>]*>)?[^<>]*#', $string, $matches );
+	//		var_export( $allStrings );
+			if( count( $allStrings ) > 1 )
+			{
+				foreach( $allStrings as $each )
+				{
+					$translated = self::__( $each );
+					$string = str_ireplace( '>' . $each . '<', '>' . $translated . '<', $string );
+				}
+			//	var_export( $string );
+				return $string;
+			}
+		}
+	//	var_export( $string );
+	//	var_export( $arr );
+	//	$string = trim( $string );
+
+		$storage = self::getObjectStorage( 'locale' );
+		do
+		{
+			if( ! $locale = $storage->retrieve() )		
+			{
+				if( ! $languages = PageCarton_Locale::getInstance()->select() )
+				{
+					break;
+				}
+			
+				$availableLocale = array();
+				foreach( $languages as $each )
+				{
+					$availableLocale[] = $each['locale_code'];
+				}
+				//	system locale
+			//	$locale = setlocale( LC_ALL, 0 );
+				$locale = PageCarton_Locale_Settings::retrieve( 'default_locale' );
+		//		var_export( $localeSettings );
+				
+			//	var_export( $languages );
+			//	var_export( $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
+				$getPreferredLanguage = function ( array $available_languages, $http_accept_language = null ) 
+				{
+					if (is_null($http_accept_language)) 
+					{
+						if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) 
+						{
+							return array();
+						}
+						$http_accept_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+					}
+					$available_languages = array_flip($available_languages);
+
+					$langs;
+					preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($http_accept_language), $matches, PREG_SET_ORDER);
+					foreach($matches as $match) {
+
+						list($a, $b) = explode('-', $match[1]) + array('', '');
+						$value = isset($match[2]) ? (float) $match[2] : 1.0;
+
+						if(isset($available_languages[$match[1]])) {
+							$langs[$match[1]] = $value;
+							continue;
+						}
+
+						if(isset($available_languages[$a])) {
+							$langs[$a] = $value - 0.1;
+						}
+
+					}
+					$langs ? arsort( $langs ) : null;
+
+					return $langs ? : array();
+				};
+				if( $allPreferred = $getPreferredLanguage( $availableLocale ) )
+				{
+					$locale = array_shift( array_keys( $allPreferred ) );
+				}
+				$storage->store( $locale );
+			//	var_export( $locale );
+			}
+			
+		//	var_export( $string );
+		//	$translation = PageCarton_Locale_Translation::getInstance();
+			$string = trim( $string );
+			
+			//	cache is workaround because of insert not active until next load
+			//	was causing double inserting of words when the words are double on same page
+			$stringStorage = self::getObjectStorage( 'stringInfo' . $string . 'dddss' );     
+			if( ! $stringInfo = $stringStorage->retrieve() )
+			{
+				$words = PageCarton_Locale_OriginalString::getInstance();
+				if( ! $stringInfo = $words->selectOne( null, array( 'string' => $string ) ) )
+				{
+			//		var_export( $string );
+					$options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
+					if( in_array( 'autosave_new_words', $options ) )
+					{
+						$stringInfo = $words->insert( array( 'string' => $string, 'pages' => array( Ayoola_Application::getRequestedUri() ), ) );
+					}
+				}
+				$stringStorage->store( $stringInfo );	
+				
+			}		
+		//	var_export( $stringInfo );
+			
+			if( ! empty( $stringInfo['originalstring_id'] ) )
+			{
+				$translation = PageCarton_Locale_Translation::getInstance();
+				if( ! $translatedString = $translation->selectOne( null, array( 'originalstring_id' => $stringInfo['originalstring_id'], 'locale_code' => $locale, ) ) )
+				{
+				//	$translation->insert( array( 'word' => $string, 'locale_code' => $locale, ) );
+				}
+				elseif( ! empty( $translatedString['translation'] ) )
+				{
+					$string = $translatedString['translation'];
+				}
+			}
+		//	var_export( $stringInfo );
+		}
+		while( false );
+		return $string;
+	}
+	
+    /**
      * Used by administrators to inspect variables for debugging purposes.
      * 
      */
@@ -713,9 +858,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$stringValues = $options['separator'];
 		foreach( $values as $key => $value )
 		{
-			if( ! is_scalar( $value ) )
+			if( is_array( $value ) )
 			{
-				continue;
+				$value = implode( ', ', $value );
 			}
 			$key = implode( ' ', array_map( 'ucfirst', explode( '_', $key ) ) );
 			$stringValues .= "<strong>$key</strong>: $value" . $options['separator'];

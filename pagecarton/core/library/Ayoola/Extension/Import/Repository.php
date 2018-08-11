@@ -66,11 +66,11 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 		if( ! empty( $_GET['install'] ) )
 		{
 			$this->createConfirmationForm( 'Install ' . static::$_pluginType . '', 'Download and install ' . static::$_pluginType . ' and its components' );
-            $photoUrl = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . $_GET['install'] . '&width=1500&height=600';
-			$this->setViewContent( self::getMenu(), true);
-			$this->setViewContent( '<img style="width:100%;" src="' . $photoUrl . '" alt="">' );
 			$this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' );
 			$this->setViewContent( $this->getForm()->view() );
+            $photoUrl = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . $_GET['install'] . '&width=1500&height=600';
+			$this->setViewContent( self::getMenu() );
+			$this->setViewContent( '<img style="width:100%;" src="' . $photoUrl . '" alt="">' );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
             $link = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $_GET['install'] . '&auto_download=1';
         //    var_export(  $link );

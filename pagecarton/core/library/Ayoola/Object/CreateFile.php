@@ -188,7 +188,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
 
 		$fieldset = new Ayoola_Form_Element;
 
-		$fieldset->addElement( array( 'name' => 'class_name', 'label' => 'PHP Class Name', 'placeholder' => 'e.g. Sample_Class_Name', 'type' => 'InputText', 'value' => @$values['class_name'] ) );
+		$fieldset->addElement( array( 'name' => 'class_name', 'onkeydown' => 'this.value=this.value.replace( " ", "_");', 'label' => 'PHP Class Name', 'placeholder' => 'e.g. Sample_Class_Name', 'type' => 'InputText', 'value' => @$values['class_name'] ) );
 
         $fieldset->addRequirement( 'class_name', array( 'WordCount' => array( 3,100 ), 'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), upper case alphabets (A-Z) and underscore (_).', 'character_list' => '^a-z_A-Z', ) ) );
 
@@ -217,7 +217,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
 
                     $fieldsetX->container = 'div';
                     $form->wrapForm = false;
-                    $fieldsetX->addElement( array( 'name' => 'fields', 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Field name e.g. full_name', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['fields'][$i] ) );
+                    $fieldsetX->addElement( array( 'name' => 'fields', 'onkeydown' => 'this.value=this.value.toLowerCase().replace( " ", "_");', 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Field name e.g. full_name', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['fields'][$i] ) );
 
                     $options = array( 
                                         'INPUTTEXT' => 'TEXT',

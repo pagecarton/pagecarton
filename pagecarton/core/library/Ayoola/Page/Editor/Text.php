@@ -86,68 +86,63 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		{
 			@$content = $this->getParameter( 'preserved_content' );
 		}
+		$content = self::__( $content );
 	//	var_export( $this->getParameter( 'markup_template_object_name' ) );
 		if( $this->getParameter( 'markup_template_object_name' ) )
 		{
-			$classes = (array) $this->getParameter( 'markup_template_object_name' );
-			foreach( $classes as $each )
+			$classes = (array) $this->getParameter( 'markup_template_object_name' );    
+			foreach( $classes as $counter => $each )
 			{		
 				//	Removing time() from namespace because it doesn't allow the post to cache
 				//	Use whole content or specified part
 				$i = 0;
 		//				var_export( $each );
 		//				var_export( $content );
-				if( stripos( $content, '{{{@' . $each ) !== false && stripos( $content, $each . '@}}}' ) !== false )
+				$start = '{{{@' . $counter . '(' . $each . ')';
+				$end = '(' . $each . ')@' . $counter . '}}}';
+				if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
 				{
-				//	var_export( $each );
-					while( stripos( $content, '{{{@' . $each ) !== false && stripos( $content, $each . '@}}}' ) !== false && ++$i < 5 )
+					$start = '{{{@(' . $each . ')';
+					$end = '(' . $each . ')@}}}';
+					if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
 					{
-					//	var_export( $i );
-						$partTemplate = null;
-					//	if( stripos( $content, '{{{@' . $each ) !== false && stripos( $content, $each . '@}}}' ) !== false )
+						$start = '{{{@' . $each . '';
+						$end = '' . $each . '@}}}';
+						if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
 						{
-						//	$start = stripos( $content, '{{{@' . $each ) + strlen( '{{{@' . $each );
-							$start = stripos( $content, '{{{@' . $each );
-						//	var_export( $postTheme );
-							$length = ( stripos( $content, $each . '@}}}' ) + strlen( $each . '@}}}' ) )  - $start;
-	//						$length = stripos( $content, $each . '@}}}' ) - $start;
-							$partTemplate = substr( $content, $start, $length );
-						//	var_export( $each );
-						//	var_export( $partTemplate );
+							$parameters = array( 'markup_template' => $content, 'markup_template_namespace' => 'x1234', 'editable' => $each ) + $this->getParameter();
+							$class = new Ayoola_Object_Embed( $parameters );
+							$content = $class->view();
 						}
-
-						$parameters = array( 'markup_template' => $partTemplate, 'markup_template_namespace' => 'x1234', 'editable' => $each ) + $this->getParameter();
-						
-						$class = new Ayoola_Object_Embed( $parameters );
-						$returnedContent = $class->view();
-				//			var_export( $each );
-				//			var_export( $partTemplate );
-//var_export( $returnedContent );
-				//		if( $partTemplate )
-						{
-							$searchY = array();
-							$replaceY = array();
-							$searchY[] = '{{{@' . $each;
-							$replaceY[] = '';
-							$searchY[] = $each . '@}}}';
-							$replaceY[] = '';
-							$returnedContent = str_ireplace( $searchY, $replaceY, $returnedContent );
-							
-							$searchC = array();
-							$replaceC = array();
-							$searchC[] = $partTemplate;
-							$replaceC[] = $returnedContent;
-							$content = str_ireplace( $searchC, $replaceC, $content );
-						}
-					}  
+					}
 				}
-				else
+			//	var_export( $each );
+			//	var_export( $start );
+			//	var_export( $end );
+				while( stripos( $content, $start ) !== false && stripos( $content, $end ) !== false && ++$i < 5 )
 				{
-					$parameters = array( 'markup_template' => $content, 'markup_template_namespace' => 'x1234', 'editable' => $each ) + $this->getParameter();
+					$started = stripos( $content, $start );
+					$length = ( stripos( $content, $end ) + strlen( $end ) )  - $started;
+					$partTemplate = substr( $content, $started, $length );
+					$parameters = array( 'markup_template' => $partTemplate, 'markup_template_namespace' => 'x1234', 'editable' => $each ) + $this->getParameter();
 					
 					$class = new Ayoola_Object_Embed( $parameters );
-					$content = $class->view();
-				}
+					$returnedContent = $class->view();
+
+					$searchY = array();
+					$replaceY = array();
+					$searchY[] = $start;
+					$replaceY[] = '';
+					$searchY[] = $end;
+					$replaceY[] = '';
+					$returnedContent = str_ireplace( $searchY, $replaceY, $returnedContent );
+					
+					$searchC = array();
+					$replaceC = array();
+					$searchC[] = $partTemplate;
+					$replaceC[] = $returnedContent;
+					$content = str_ireplace( $searchC, $replaceC, $content );
+				}  
 			}
 
 			$this->clearParametersThatMayBeDuplicated();

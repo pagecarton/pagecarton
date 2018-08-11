@@ -25,7 +25,7 @@ require_once 'Ayoola/Abstract/Playable.php';
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Application_Settings_Payment extends Application_Settings_Abstract
+class Application_Settings_Payment extends PageCarton_Settings
 {
 	
     /**
@@ -55,7 +55,7 @@ class Application_Settings_Payment extends Application_Settings_Abstract
 		$settings = unserialize( @$values['settings'] );
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
-		$form->oneFieldSetAtATime = true;
+//		$form->oneFieldSetAtATime = true;
  
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->addElement( array( 'name' => 'default_currency', 'label' => 'Default Currency', 'required' => 'required', 'description' => 'Default Currency', 'type' => 'InputText', 'value' => @$settings['default_currency'] ) );
@@ -80,6 +80,7 @@ class Application_Settings_Payment extends Application_Settings_Abstract
 		$options = $filter->filter( $options );
 		$fieldset->addElement( array( 'name' => 'allowed_payment_options', 'label' => 'Available Payment Methods <a rel="spotlight" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Subscription_Checkout_List/">(Options)</a>', 'type' => 'Checkbox', 'value' => @$settings['allowed_payment_options'] ), $options ); 	
 		$fieldset->addElement( array( 'name' => 'order_notes', 'label' => 'Please enter a message to always display to user while checking out.', 'type' => 'TextArea', 'value' => @$settings['order_notes'] ) );         	
+		$fieldset->addElement( array( 'name' => 'order_confirmation_message', 'label' => 'Order Confirmation Message', 'type' => 'TextArea', 'value' => @$settings['order_confirmation_message'] ) );         	
 		
 		//	Order form configuration
 		$options = new Ayoola_Form_Table(); 

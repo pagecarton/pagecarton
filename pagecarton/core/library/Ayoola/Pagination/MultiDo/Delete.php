@@ -70,7 +70,7 @@ class Ayoola_Pagination_MultiDo_Delete extends PageCarton_Widget
             {
                 $this->setViewContent( '<div class="badnews">Items does not support multiple delete.</div>', true );
                 return false;
-            }
+            }  
 
             $class = new $deleteClass;
             $classId = $class->getIdColumn();
@@ -87,11 +87,12 @@ class Ayoola_Pagination_MultiDo_Delete extends PageCarton_Widget
             $this->setViewContent( $this->getForm()->view(), true );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
             $this->setViewContent( '<div></div>', true );
+            set_time_limit( 0 );
             foreach( $recordIds as $each )
             {
-                //   var_export( $each );
                 $identifier = array( $classId => $each );
-                $class->setIdentifier( $identifier );
+                $class->setIdentifier( $identifier + ( $_GET ? : array() ) );
+                $class->setParameter( $identifier );
                 $class->setIdentifierData();
                 $class->fakeValues = $identifier;
                 $class->init();

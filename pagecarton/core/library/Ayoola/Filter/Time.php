@@ -90,7 +90,10 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
                     $timeDifference = -$timeDifference;
                 }
                 $time = self::splitSeconds( $timeDifference, $this->precision );
-                return $time . ' ' . $this->prefix;
+                $output = '%s ' . $this->prefix;
+                $output = PageCarton_Widget::__( $output );
+                $output = sprintf( $output, $time );
+                return $output;
             break;
         }
     } 
@@ -121,8 +124,12 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
 				if( $remSec === 0 ){ break; }
 				if( $noOfSegment == 0 ){ continue; }
 				if( $noOfSegment == 1 ){ $each = rtrim( $each, 's' ); }
+                $output = '%d ' . $each . ' ';
+                $output = PageCarton_Widget::__( $output );
+                $output = sprintf( $output, $noOfSegment );
 				
-				$time .= $noOfSegment . ' ' . $each . ' ';
+				$time .= $output;
+//				$time .= $noOfSegment . ' ' . $each . ' ';
 				$counter++;
 				if( $counter >= $precision ){ break; }
 			}

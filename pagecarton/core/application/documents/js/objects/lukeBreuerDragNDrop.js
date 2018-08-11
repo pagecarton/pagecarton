@@ -75,7 +75,15 @@ function OnMouseMove(e)
 		var e = window.event; 
 	if ( ! _dragElement ){ return false; }
 	// this is the actual "drag code"
+//	alert( _dragElement.style.bottom );
+	_dragElement.style.setProperty( "bottom", "unset" );
+//	alert( _dragElement.style.bottom );
 	_dragElement.style.left = (_offsetX + e.clientX - _startX) + 'px';
+
+	if( ! _offsetY )
+	{
+		_offsetY = _startY;
+	}
 	_dragElement.style.top = (_offsetY + e.clientY - _startY) + 'px';
 	
 //	_debug.innerHTML = '(' + _dragElement.style.left + ', ' + _dragElement.style.top + ')';	

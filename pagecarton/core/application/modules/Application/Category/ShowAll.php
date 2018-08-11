@@ -126,7 +126,7 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 		$data['not_real_post'] = true; 
 		$data['document_url'] = $data['cover_photo'];
 		$data['article_title'] = $data['category_label']; 
-		$data['article_url'] = '/posts/?category=' . $data['category_name']; 
+		$data['article_url'] = '' . self::getPostUrl() . '?category=' . $data['category_name']; 
 		$data['article_description'] = $data['category_description']; 
 		$data['publish'] = '1'; 
 		$data['auth_level'] = '0';   

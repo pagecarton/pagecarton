@@ -258,9 +258,9 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 					$pages[] = self::getInfo( '/' );
 					
 					//	module
-					if( self::getInfo( '/members' ) )
+			//		if( self::getInfo( '/members' ) )
 					{
-						$pages[] = self::getInfo( '/members' );
+		//				$pages[] = self::getInfo( '/members' );
 					}
 //var_export( Ayoola_Application::$GLOBAL );
 					//	profile_url
@@ -285,15 +285,15 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 					$pages[] = self::getInfo( '/' );
 					
 					//	module
-					if( self::getInfo( '/members' ) )
+			//		if( self::getInfo( '/members' ) )
 					{
-						$pages[] = self::getInfo( '/members' );
+				//		$pages[] = self::getInfo( '/members' );
 					}
 					
 					//	username
-					if( Ayoola_Application::$GLOBAL['username'] )
+				//	if( Ayoola_Application::$GLOBAL['username'] )
 					{
-						$pages[] = array( 'url' => ( '/' . Ayoola_Application::$GLOBAL['username'] ), 'title' => Ayoola_Application::$GLOBAL['display_name'], 'description' => Ayoola_Application::$GLOBAL['profile_description'] );
+			//			$pages[] = array( 'url' => ( '/' . Ayoola_Application::$GLOBAL['username'] ), 'title' => Ayoola_Application::$GLOBAL['display_name'], 'description' => Ayoola_Application::$GLOBAL['profile_description'] );
 					}
 					
 					//	Page
@@ -341,29 +341,6 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				
 				//	Home
 				$pages[] = self::getInfo( '/' );   
-		//		var_export( $pages );
-				
- 				//	posts
-	//			if( self::getInfo( '/post' ) )
-				{
-	//				$pages[] = self::getInfo( '/post' );
-				}
-
-/* 					
-				//	username
-				if( @Ayoola_Application::$GLOBAL['username'] )  
-				{
-					$pages[] = array( 'url' => ( '/' . Ayoola_Application::$GLOBAL['username'] ), 'title' => Ayoola_Application::$GLOBAL['display_name'], 'description' => Ayoola_Application::$GLOBAL['profile_description'] );
-				}
- */ 				
- 
- 					
-/* 				//	profile_url
-				if( @Ayoola_Application::$GLOBAL['profile_url'] )
-				{
-					$pages[] = array( 'url' => ( '/' . Ayoola_Application::$GLOBAL['profile_url'] ), 'title' => Ayoola_Application::$GLOBAL['display_name'], 'description' => Ayoola_Application::$GLOBAL['profile_description'] );
-				}
- */
 				//	Article gan gan
 				$pages[] = array( 'url' => Ayoola_Application::$GLOBAL['article_url'], 'title' => Ayoola_Application::$GLOBAL['article_title'] );
 			//	var_export( $categoryName );
@@ -631,7 +608,8 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		//	var_export( $url );
 			return $url;
 		}
-		$currentUrl = self::getCurrentUrl();
+		$currentUrl = Ayoola_Application::getRequestedUri();
+//		$currentUrl = self::getCurrentUrl();
 	//	var_export( $currentUrl );
 		$url .= 'previous_url=' . urlencode( Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . Ayoola_Page::getDefaultDomain() .  self::getPortNumber() . '' . $currentUrl );
 		return $url;

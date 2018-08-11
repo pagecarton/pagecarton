@@ -61,7 +61,7 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 			$profileSettings = Application_Profile_Settings::getSettings( 'Profiles' );
 			if( ! self::isOwner( $data['username'] ) && ! self::hasPriviledge( $profileSettings['allowed_editors'] ) ){ return false; }
 			
-			$this->createConfirmationForm( 'Delete forever',  'Delete information and files of this handle: "'  . $data['profile_url'] . '"' );
+			$this->createConfirmationForm( 'Delete forever',  'Delete information and files of this handle: "'  . $data['profile_url'] . '". This cannot be undone. You should create a backup of its content and have it saved elsewhere before you delete.' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			

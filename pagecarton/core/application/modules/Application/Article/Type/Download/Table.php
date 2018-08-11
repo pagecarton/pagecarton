@@ -35,6 +35,13 @@ class Application_Article_Type_Download_Table extends Ayoola_Dbase_Table_Abstrac
      */
     protected $_tableVersion = '0.03';
 
+    /**
+     * Time to hold the cache before refreshing
+     *
+     * @param int
+     */
+    public static $cacheTimeOut = 86400;
+
 	protected $_dataTypes = array
 	( 
 		'username' => 'INPUTTEXT',

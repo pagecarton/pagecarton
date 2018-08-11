@@ -43,15 +43,26 @@ class Application_Settings_Editor extends Application_Settings_Abstract
     {
 	//	try
 		{ 
-			
-	//		var_export( $this->getIdentifier() );
-	//		var_export( $this->getIdentifierData()  );
-		//	if( ! $data = $this->getIdentifierData() )
+			$settingsNameToUse = $this->getParameter( 'settingsname_name' ) ? : @$_REQUEST['settingsname_name'];
+	//		var_export(  $settingsNameToUse );
 			$settings = new Application_Settings_SettingsName();
-			$settingsNameInfo = $settings->selectOne( null, array( 'settingsname_name' => $this->getParameter( 'settingsname_name' ) ? : @$_REQUEST['settingsname_name'] ) );
-	//		var_export(  $_REQUEST['settingsname_name'] );
-	//		var_export(  $this->getParameter( 'settingsname_name' ) );
-	//		var_export(  $settingsNameInfo );
+			if( ! $settingsNameToUse )
+			{
+				$class = get_class( $this );
+				if( $settingsNameInfo = $settings->selectOne( null, array( 'class_name' => $class ) ) )
+				{
+					$settingsNameToUse = $settingsNameInfo['settingsname_name'];
+				}
+				else
+				{
+					return $this->setViewContent( '<div class="pc-notify-info">Class settings need to be setup. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_SettingsName_Creator/?class_name=' . $class . '" >Setup Now</a></div>', true );
+				}
+			//	var_export(  $settingsNameInfo );
+			}
+			else
+			{
+				$settingsNameInfo = $settings->selectOne( null, array( 'settingsname_name' => $settingsNameToUse ) );
+			}
 			$settingsInfo = array();
 			if( @$settingsNameInfo['settingsname_id'] )
 			{
@@ -63,43 +74,23 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 			if( ! $settingsInfo )
 			{
 				$settingsName = new Application_Settings_SettingsName();
-		//		var_export( $settingsName->select() );
-			//	var_export( $settings->select() );
 				if( ! $settingsNameInfo )
 				{
 					$this->insertDb( $settingsNameInfo );
 					return $this->setViewContent( 'Invalid Settings Name', true );
 				}
-		//		var_export( $settingsInfo );
-		//		var_export( $settingsNameInfo );
 				$settings = new Application_Settings();
 				$settingsInfo = $settings->selectOne( null, array( 'settingsname_id' => $settingsNameInfo['settingsname_id'] ) ) ? : $settings->selectOne( null, array( 'settingsname_name' => $settingsNameInfo['settingsname_name'] ) ) ;
 				$data = $settingsNameInfo + $settingsInfo;
 			}
-/* 				$settingsName = new Application_Settings_SettingsName();
-				$test = $settingsName->select();
-				self::v( $test );
- */			
-//			self::v( $_REQUEST['settingsname_name'] );
-	//		self::v( self::getSettings( $_REQUEST['settingsname_name'] ) );
-		//	exit();
-	//	var_export( $settings->select() );
-//		var_export( $settingsInfo );
-//		var_export( $settingsNameInfo );
-//		var_export( $data );
 			$this->createForm( 'Save', 'Edit ' . @$data['settingsname_name'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 		//		self::v( $data );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-		//		self::v( $data );
-		//		self::v( $values ); 
-		//	var_export( $_POST );
 			$values = array( 'settings' => serialize( $values ) );
 					//		self::v( $this->getIdentifierData() ); 
 			$table = Application_Settings::getInstance();
-			$previousData = $table->select( null, $this->getIdentifier() );
-	//		self::v( $this->getIdentifier() ); 
-		//	self::v( $previousData ); 
+			$previousData = $table->select( null, array( 'settingsname_name' => $settingsNameToUse ) );
 			if( count( $previousData ) > 1 )
 			{
 				foreach( $previousData as $key => $each )
@@ -110,20 +101,16 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 						continue;
 
 					}
-			//		var_export( $each['settings_id'] );
-			// 		var_export( $each );
 					$table->delete( array( 'settings_id' => $each['settings_id'] ) );
 				}
 			}
 			if( $previousData )
 			{
-				if( ! $table->update( $values, $this->getIdentifier() ) ){ return false; }
+				if( ! $table->update( $values, array( 'settingsname_name' => $settingsNameToUse ) ) ){ return false; }
 			}
 			else
 			{
-	//		self::v( $previousData ); 
-	//		self::v( $this->getIdentifier() ); 
-				$values = array_merge( $values, $this->getIdentifier() );
+				$values = array_merge( $values, array( 'settingsname_name' => $settingsNameToUse ) );
 				if( ! $table->insert( $values ) ){ return false; }  
 			}
 

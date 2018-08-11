@@ -447,13 +447,16 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			foreach( $fields as $field => $value )
 			{
 			//	self::v( $field );
-			//	self::v( $value );
 				require_once 'Ayoola/Filter/UnderscoreToSpace.php';
 				$filter = new Ayoola_Filter_UnderscoreToSpace;
-				$head = $filter->filter( $field );
+				$head = ( ! is_numeric( $field ) ) ? $field : null ;
+				$head = ( is_array( $value ) && ! empty( $value['header'] ) ? $value['header'] : $head ) ;
+				$head = $filter->filter( $head );
+				$field = ( ! empty( $value['field'] ) ? $value['field'] : $field );
 				if( trim( $head ) )
 				{
-					$html .='<th>' . $head . ' <a href="javascript:;" onClick="window.location.search = window.location.search + \'&pc_sort_column=\' + \'' . ( ! empty( $value['field'] ) ? $value['field'] : $field ) . '\';" > &#8645; </a></th>';
+					$head = self::__( $head );
+					$html .='<th>' . $head . ' <a href="javascript:;" onClick="window.location.search = window.location.search + \'&pc_sort_column=\' + \'' . ( $field ) . '\';" > &#8645; </a></th>';
 				}
 				else
 				{
@@ -500,10 +503,12 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				$option = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], '' ), $option );
 				$optionsHtml .= '<span style="" class=""> ' . $option . ' </span> ';			
 			}
+		//	var_export( $fields );
 			foreach( $fields as $field => $value )
 			{
-				$rawFieldValues  = $value;
+				$rawFieldValues  = is_array( $value ) ? $value : array();
 			//	if( is_array( $row ) && array_key_exists( $field, $row ) )
+			//	var_export( $value );
 				if( is_array( $value ) && ( ! empty( $value['value'] ) || ! empty( $value['filter'] ) ) )
 				{
 					if( ! empty( $value['field'] ) )
@@ -530,9 +535,11 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					$value = $value['value'];
 
 				}
+				$value = self::__( $value );
 				if( array_key_exists( $field, $row ) )
 				{
 					
+				//	var_export( $value );
 					// make adequate  replacement if required 
 					$value =  $value ? : $row[$field];
  					if( is_array( $value ) )
@@ -555,16 +562,23 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					//	var_export( (array) $value );
 						$row[$field] = print_r( (array) $row[$field], true ); 
 					}
-					
 				//	$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, $value );
 					$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, is_scalar( $value ) ? $value : null );
-					$value = str_replace( '%KEY%', @$row[$key], $value );
-					$value = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $value );
-					$value = str_replace( $columnSearch, $columnReplace, $value );
 					if( isset( $rawFieldValues['value_representation'][$value] ) )
 					{
 						$value = $rawFieldValues['value_representation'][$value];
 					}
+					elseif( isset( $rawFieldValues['value_representation']['pc_paginator_default'] ) )
+					{
+						$value = $rawFieldValues['value_representation']['pc_paginator_default'];
+					}
+					elseif( isset( $rawFieldValues['value_representation'] ) )
+					{
+						$value = null;
+					}
+					$value = str_replace( '%KEY%', @$row[$key], $value );
+					$value = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $value );
+					$value = str_replace( $columnSearch, $columnReplace, $value );
 			//		if( $this->crossColumnFields )
 
 					//	we want to include html here // use personal filters for this
@@ -615,8 +629,9 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					return false;
 				}
 				var b =	ayoola.div.getFormValues( { form: a, dontDisable: true } );
-				ayoola.spotLight.showLinkInIFrame( url + "?list_name=" + a.name + "&" + b, a.name );
-			//	alert( b );
+			//	alert( location.search );
+
+				ayoola.spotLight.showLinkInIFrame( url + ( location.search ? location.search : "?" ) + "&list_name=" + a.name + "&" + b, a.name );
 			}
 			'
 		);

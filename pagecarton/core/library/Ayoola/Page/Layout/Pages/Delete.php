@@ -53,8 +53,8 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
             //  Output demo content to screen
 			if( ! $data = $this->getIdentifierData() ){ return false; }
 		
-		//	var_export( $this->getFilename() );
-            $url = @$_REQUEST['url'];
+		//	var_export( $this->getIdentifier() );
+            $url = $this->getParameter( 'url' ) ? : @$_REQUEST['url'];
             
             $allPages = self::getPages( $data['layout_name'], 'list' );
             $allPages = array_combine( $allPages, $allPages );

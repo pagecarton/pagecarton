@@ -54,7 +54,7 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 
 			//	Check settings
 			$profileSettings = Application_Article_Settings::getSettings( 'Articles' );  
-			$this->createForm( 'Save Page', '' );
+			$this->createForm( 'Save', '' );
 			if( $this->getParameter( 'class_to_play_when_completed' ) )
 			{
 				$this->setViewContent( Ayoola_Object_Embed::viewInLine( array( 'editable' => $this->getParameter( 'class_to_play_when_completed' ) ) + $this->getParameter() ? : array() ) );

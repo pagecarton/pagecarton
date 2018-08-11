@@ -50,35 +50,14 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
      */
     public function init( Array $fieldsToFetch = null, Array $where = null, Array $options = null )
     {
-	//	var_export( $this->getGlobalFilenames() );
+//		PageCarton_Widget::v( $this );  
 		/**
 		 * If the accessibility NOT PRIVATE, we need to load all files
 		 * The reason for the protected scope is to be able to select prIvate files
 		 */
 		$result = null;
 		$result = $this->getCache( func_get_args() );
-	//		$files = array_unique( $this->getGlobalFilenames() );
-	//		var_export( $this->getGlobalFilenames() );
- 	//	var_export( count( $result ) );
-			//	if( $this->getTableName() == 'menu' )
-				{
-			//		$result = null;
-				}
-/* 			if( @$where['menu_name'] )
-			{
-			//	var_export( $where );
-				$result = null;
-			}
- */	//	var_export( $where );
-	//	var_export( func_get_args() );
-	//	if( ! is_array( $where[$key] ) )
 		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
-//		PageCarton_Widget::v( $result );
-	//	$this->_myFilename = @$options['filename'] ? : $this->_myFilename;
-	//	exit;
-	//	var_export( $this->_useCacheResult );
-	//	var_export( func_get_args() );
-	//	var_export( $this->getMyFilename() );
 		$rows = array();
 		if( ! empty( $options['filename'] ) )
 		{
@@ -92,75 +71,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		{
 		//	$rows = $this->doSelect( $fieldsToFetch, $where, $options ); 
 			$files =  array_unique( array( $this->getFilenameAccordingToScope() => $this->getFilenameAccordingToScope() ) + $this->getSupplementaryFilenames() );
-		//	$files =  array_unique( array( $this->getMyFilename() => $this->getMyFilename() ) + $this->getSupplementaryFilenames() );
-		//	$files = array_unique( $this->getSupplementaryFilenames() );
-/* 			if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
-			{
-				var_export( count( $files ) );
-				var_export( '<br />' );
-				var_export( $files );
-				var_export( '<br />' );
-			}
- */			
-	//		rsort( $files );
- 		//	if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
-			{
-			//	PageCarton_Widget::v( $files );
-			//	krsort( $files );
-
- 		//		Ayoola_Page::v( $files );
-		//		 exit();
-	//			 $limitForNextFile = $options['limit'];
-			}
-		//	PageCarton_Widget::v( $files );
 			$rows = $this->loopFiles( $files, $fieldsToFetch, $where, $options );
-/* 			$totalRows = 0;
-///				PageCarton_Widget::v( count( $files ) );
-			//	PageCarton_Widget::v( $files );
-			foreach( $files as $filename )
-			{
-			//	PageCarton_Widget::v( $filename . '<br>' );
-			//	if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
-				{
-				//	PageCarton_Widget::v( $filename );
-				}
-				$innerOptions = $options;
-				if(  ! empty( $options['limit'] ) && $totalRows >= $options['limit'] )
-				{
- 			//		Ayoola_Page::v( $totalRows );
-			//		 exit();
-					break;
-				}
-				elseif( ! empty( $options['limit'] ) )
-				{
-					$innerOptions['limit'] = $options['limit'] - $totalRows;
-				}
-				if( ! empty( $options['record_search_limit'] ) && $this->recordCount >= $options['record_search_limit'] )
-				{
-				//	Ayoola_Page::v( $this->recordCount );
-				//	exit();
-					break;
-				}
-				if( ! is_file( $filename ) ){ continue; }
- 		//			Ayoola_Page::v( $filename );
-			//	var_export( $this->getMyFilename() );
-				$this->setXml();
-				$this->getXml()->load( $filename );
-				$rowsInThisFile = $this->doSelect( $fieldsToFetch, $where, $innerOptions );
- 			//		Ayoola_Page::v( $filename );
- 			//		Ayoola_Page::v( $innerOptions );
- 			//		Ayoola_Page::v( count( $rowsInThisFile ) );
- 			//		Ayoola_Page::v( "\r\n" );
-				$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $rowsInThisFile ) : $rows + $rowsInThisFile;
-				$totalRows = count( $rows );
-//				$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );
-		//	var_export( $rows );
-	//			var_export( count( $rows ) );
-	//			var_export( '<br />' );
-		//		return $rows;
-			}
-*/ 	//	var_export( count( $rows ) );
-	//		var_export( $rows );
 
 		}
 		else
@@ -169,31 +80,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$rows = array();
 			$files = array_unique( $this->getGlobalFilenames() );
 			$rows = $this->loopFiles( $files, $fieldsToFetch, $where, $options );
-	//		var_export( $this->getGlobalFilenames() );
-//	var_export( $files );
-/* 				if( @$where['menu_name'] )
-				{
-				//	var_export( $where );
-			//		var_export( $files );
-				}
- */	
-/* 			foreach( $files as $filename )
-			{
-				if( ! is_file( $filename ) ){ continue; }
-			//	PageCarton_Widget::v( $filename . '<br>' );
-				$this->setXml();
-				$this->getXml()->load( $filename );
-			//	var_export( $this->getMyFilename() );
-				$this->_useParentNamespace = ( $filename == $this->getMyFilename() ) ? false : true;
-				$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );
-			//	$rows = $rows + $this->doSelect( $fieldsToFetch, $where );
-		//	var_export( $rows );
-			//	var_export( $filename );
-			}
-*/		}
-	//	exit();
- 	//	var_export( count( $rows ) );
-	//			var_export( $rows );
+		}
 		if( ! empty( $options['sort_column'] ) )
 		{
 			$rows = PageCarton_Widget::sortMultiDimensionalArray( $rows, $options['sort_column'] );
@@ -215,23 +102,12 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
  		$fileCount = 0;
  		$maxNoOfFiles = 50;
 		rsort( $files );
-
-//		PageCarton_Widget::v( $files );
-	//	if( count( $files ) > $maxNoOfFiles )
-	//	PageCarton_Widget::v( $files );
 	//	PageCarton_Widget::v( count( $files ) . '<br>' );
 		foreach( $files as $filename )
 		{
-	//		PageCarton_Widget::v( $filename . '<br>' );
-		//	if( ! empty( $options['limit'] ) || ! empty( $options['record_search_limit'] ) )
-			{
-			//	PageCarton_Widget::v( $filename );
-			}
 			$innerOptions = $options;
 			if(  ! empty( $options['limit'] ) && $totalRows >= $options['limit'] )
 			{
-		//		Ayoola_Page::v( $totalRows );
-		//		 exit();
 				break;
 			}
 			elseif( ! empty( $options['limit'] ) )
@@ -240,8 +116,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			}
 			if( ! empty( $options['record_search_limit'] ) && $this->recordCount >= $options['record_search_limit'] )
 			{
-			//	Ayoola_Page::v( $this->recordCount );
-			//	exit();
 				break;
 			}
 			if( ! is_file( $filename ) ){ continue; }
@@ -251,10 +125,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$this->setXml();
 			$this->getXml()->load( $filename );
 			$rowsInThisFile = $this->doSelect( $fieldsToFetch, $where, $innerOptions );
-		//		Ayoola_Page::v( $filename );
-		//		Ayoola_Page::v( $innerOptions );
-		//		Ayoola_Page::v( count( $rowsInThisFile ) );
-		//		Ayoola_Page::v( "\r\n" );
 			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $rowsInThisFile ) : $rows + $rowsInThisFile;
 			$totalRows = count( $rows );
 		}
@@ -270,25 +140,9 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
     {
 		//	Calculate the total fields on the table, extended
 		$allFields = $this->query( 'FIELDLIST' );
-	//	var_export( $allFields );
-/* 		if( ! is_null( $where ) )
-		{ 
-			foreach( $where as $key => $value )
-			{  
-		//		var_export( $key );
-				if( ! in_array( $key, $allFields ) ){ throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( "{$key} is not in field list" ); }
-			}
-		}
- */
+
 		if( is_null( $fieldsToFetch ) ){ $fieldsToFetch = $allFields; }
-/* 		else
-		{
-			foreach( $fieldsToFetch as $eachfield )
-			{
-				if( ! in_array( $eachfield, $allFields ) ){ throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( "{$eachfield} is not in field list" ); 	}
-			}
-		}
- */		$rows = array();
+		$rows = array();
 	//	var_export( $this->getRecords()->childNodes->length );
 
 		$nextRecord = $this->getRecords()->lastChild;
@@ -301,8 +155,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 
 			if( ! empty( $options['record_search_limit'] ) && $this->recordCount >= $options['record_search_limit'] )
 			{
-			//	Ayoola_Page::v( $this->recordCount );
-			//	exit();
 				break;
 			}
 			$this->recordCount++;
@@ -321,36 +173,20 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 						break; 
 					} 
 				}
-			//	var_export( $fields[$key] );
-			//	var_export( $this->getTableDataTypes( $key ) );
 				
 				$fields[$key] = self::filterDataType( $fields[$key], $this->getTableDataTypes( $key ) );
 				if( ! empty( $where['*'] ) )
 				{
-				//	var_export( $key );
-				//	if( $key == 'article_type' )
-					{
-				//		var_export( $where['*'] );
-				//		var_export( $fields[$key] );
-				//		var_export( $where['*'] === $fields[$key] );
-			//			var_export( stripos( $fields[$key], $where['*'] ) );
-					}
-			//		var_export( $countField );
 					$recordNumber = ( $eachRecord->childNodes->length ) - 1;
 			//		var_export( $recordNumber );
 					if( ! is_array( $fields[$key] ) )
 					{
 						if( ( ! is_array( $where['*'] ) &&  stripos( $fields[$key], $where['*'] ) !== false  ) || ( is_array( $where['*'] ) && in_array( $fields[$key], $where['*'] ) )  )
 						{ 
-				//		var_export( $key );
-					//	var_export( $fields[$key] );
 							$searchResultIsHere = true;
 						}
 						elseif( $countField >= $recordNumber && ! $searchResultIsHere )
 						{
-			//		var_export( $key );
-			//		var_export( $fields[$key] );
-				//			var_export( $recordNumber );
 							continue 2;
 						}
 					}
@@ -507,21 +343,48 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
     {
 		$cacheFile = $this->getCacheFilename( func_get_args() );
 		$cacheTime = @filemtime( $cacheFile );
+		if( $classCachePeriod = $this->getTableInfo( 'table_class' ) )
+		{
+			if( Ayoola_Loader::loadClass( $classCachePeriod ) )
+			{
+				$classCachePeriod = $classCachePeriod::$cacheTimeOut;
+			}
+		}
+//		$classCachePeriod = $classCachePeriod::$cacheTimeOut;
+	//	PageCarton_Widget::v( $classCachePeriod );
+		$cTime = time();
 		foreach( $this->getGlobalFilenames() as $tableFile )
 		{
 		//	var_export( $tableFile . '<br />' );
-			if( $cacheTime <= @filemtime( $tableFile ) ){ @unlink( $cacheFile ); }
+			if( ! is_file( $tableFile ) )
+			{
+				continue;
+			}
+			$fileMTime = @filemtime( $tableFile );
+			if( ! ( $fileMTime ) )
+			{
+				continue;
+			}
+			if( $classCachePeriod )
+			{
+			//	var_export( $cTime . '<br>' );
+		//		var_export( $tableFile . '<br>' );
+		//		var_export( $fileMTime . '<br>' );  
+			//	var_export( ( $classCachePeriod + $fileMTime ) . '<br>' );  
+			//	PageCarton_Widget::v( $cacheTime < $fileMTime );  
+			//	PageCarton_Widget::v( $classCachePeriod + $fileMTime < $cTime );  
+
+			}
+			if( $cacheTime < $fileMTime && ( ! $classCachePeriod || $classCachePeriod + $fileMTime < $cTime ) )
+			{ 
+			//	var_export( $cacheTime . '<br>' );
+			//	var_export( $fileMTime . '<br>' );  
+			//	var_export( $tableFile );
+			//	var_export( $cacheFile );
+				@unlink( $cacheFile ); 
+				break;
+			}
 		}
-	//	if( stripos( $cacheFile, 'Ayoola/Access/authlevel' ) && stripos( $cacheFile, 'belluth' ) )
-		{
-		//	var_export( $cacheFile . '<br />' );
-	//		var_export( get_include_path()  . '<br />' );
-		//	exit();
-	//		PageCarton_Widget::v( func_get_args() );
-		}
-	//	var_export( filemtime( $tableFile ) . '<br />' );
-	//	var_export( filemtime( $tableFile ) );
-	//	var_export( $cacheFile );
 		return @unserialize( file_get_contents( $cacheFile ) );
     } 
 	// END OF CLASS

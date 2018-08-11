@@ -101,7 +101,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		$this->setViewContent( "<br><h3>Thank you! Order Confirmed! </h3><br>" );
 		$this->setViewContent( "<h4>STATUS: "  . self::$_status[intval( $identifier['status'] )] . "</h4><br>" );
 		$this->setViewContent( "<h4>ORDER NUMBER: " . $orderNumber . "</h4><br>" );
-		$this->setViewContent( "<p>You can print this page for your records. Your order number is a unique identifier that should be mentioned when referencing this order.</p><br>" );
+		$this->setViewContent( "<p>" . ( Application_Settings_Abstract::getSettings( 'Payments', 'order_confirmation_message' ) ? : "You can print this page for your records. Your order number is a unique identifier that should be mentioned when referencing this order." ) . "</p><br>" );
 		$this->setViewContent( "<h4>Payment Option</h4><br>" );   
 		$data['checkoutoption_logo'] = htmlspecialchars_decode( $data['checkoutoption_logo'] );
 		$this->setViewContent( "<p>{$data['checkoutoption_logo']}</p><br>" );		

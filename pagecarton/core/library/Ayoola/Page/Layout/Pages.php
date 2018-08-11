@@ -30,6 +30,14 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
  	
     /**
      * 
+     *
+     * @var string
+     */
+	protected $_idColumn = 'url';  
+	
+ 	
+    /**
+     * 
      * 
      * @var string 
      */
@@ -53,7 +61,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 			$dir = dirname( $globalFile );
 		}
 		$files = Ayoola_Doc::getFiles( $dir );
-//		var_export( $files );
+//		var_export( $files );   
 		$pages = array();   
 	//	sort( $files );
 		foreach( $files as $each )
@@ -74,8 +82,8 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 				break;
 			}
 		}
-		sort( $pages['list'] );
-		return $pages[$type];
+		$pages[$type] ? sort( $pages[$type] ) : null;
+		return $pages[$type] ? : array();
 	}
 		
     /**
@@ -99,6 +107,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 			$list = new Ayoola_Paginator();
 			$list->pageName = $this->getObjectName();
 			$list->listTitle = self::getObjectTitle();
+			$list->deleteClass = 'Ayoola_Page_Layout_Pages_Delete';
 		//	$list->listTitle = $this->get;
 		//	$table = $this->getDbTable();
 		//	$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );   

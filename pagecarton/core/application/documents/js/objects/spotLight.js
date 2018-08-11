@@ -108,10 +108,14 @@ ayoola.spotLight =
 				if( container && container.parentNode )
 				{ 
 					container.parentNode.removeChild( container );  
+					ayoola.style.removeClass( document.body, "pc_no_scroll" );
+					ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
 				}
 				if( background && background.parentNode )
 				{ 
 					background.parentNode.removeChild( background );  
+					ayoola.style.removeClass( document.body, "pc_no_scroll" );
+					ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
 				}
 			
 			}
@@ -160,7 +164,7 @@ ayoola.spotLight =
 		element.innerHTML = '<div style="opacity:0.8; display:none;" title="" class="title_bar">\
 		<div class="pc_container">\
 		  <span  class="pc_content_title" style=\'display: inline-block;\'></span>\
-		  <span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode.parentNode.parentNode ); ayoola.xmlHttp.refreshElement( \'' + changeElementId + '\' );"> x </span>\
+		  <span class="title_button close_button" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode.parentNode.parentNode ); ayoola.xmlHttp.refreshElement( \'' + changeElementId + '\' ); 			ayoola.style.removeClass( document.body, \'pc_no_scroll\' );ayoola.style.removeClass( document.body.parentNode, \'pc_no_scroll\' );"> x </span>\
 		  <a style="display:none;" class="title_button" name="" href="javascript:;" title="Click to show or hide advanced settings" onclick="var b = this.parentNode.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'\'; } this.nextElementSibling.style.display = \'\';this.style.display = \'none\';"> &square; </a>  \
 		  <a class="title_button" target="_blank" href="javascript:;" title="Open this widget in a new window or tab" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  this.href = b[a].contentWindow.location.href };"> &#10140; </a>  \
 		  <a class="title_button" name="" href="javascript:;" title="Refresh" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  b[a].contentWindow.location.reload(true); };"> &#8635; </a>  \
@@ -259,15 +263,25 @@ ayoola.spotLight =
 	//	changeElement.submit();
 	//	ayoola.events.add( deleteButton, 'click', function(){ ayoola.spotLight.close(); } );
 	//	var_export( changeElementId );
-		ayoola.events.add( deleteButton, 'click', function(){ ayoola.xmlHttp.refreshElement( changeElementId ); } );
+		ayoola.events.add( deleteButton, 'click', function()
+		{ 
+		//	alert();
+			ayoola.style.removeClass( document.body, "pc_no_scroll" );
+			ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
+	//		alert( document.body.className );
+			ayoola.xmlHttp.refreshElement( changeElementId ); 
+			ayoola.xmlHttp.refreshElement( changeElement );
+		} );
 	//	target.href = 'javascript:'; 
 	//	var elementPosition = ayoola.spotLight.setPosition( element );
-		ayoola.events.add( deleteButton, 'click', function(){ ayoola.xmlHttp.refreshElement( changeElement ); } );
+	//	ayoola.events.add( deleteButton, 'click', function(){ ayoola.xmlHttp.refreshElement( changeElement ); } );
 		var weff = function()
 		{ 
 			if( confirm( "Close the modal box?" ) )
 			{
 				elementContainer.parentNode.removeChild( elementContainer ); 
+				ayoola.style.removeClass( document.body, "pc_no_scroll" );
+				ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
 			}
 		} 
 		ayoola.events.add( background, 'dblclick', weff );
@@ -278,6 +292,8 @@ ayoola.spotLight =
 		elementContainer.appendChild( background );
 	//	background.appendChild( ayoola.div.getDelete( element, background ) );
 	//	document.body.appendChild( background );
+		ayoola.style.addClass( document.body, "pc_no_scroll" );
+		ayoola.style.addClass( document.body.parentNode, "pc_no_scroll" );
 		document.body.appendChild( elementContainer ); // on
 	//	if( e.preventDefault ){ e.preventDefault(); }
 		ayoola.spotLight.setPosition( element ); 
@@ -395,6 +411,8 @@ ayoola.spotLight =
 		if( element && element.parentNode )
 		{ 
 			element.parentNode.removeChild( element );
+			ayoola.style.removeClass( document.body, "pc_no_scroll" );
+			ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
 		}
 		if( parent.ayoola.spotLight.SpotLight && parent.ayoola.spotLight.SpotLight.parentNode )
 		{ 
@@ -402,6 +420,8 @@ ayoola.spotLight =
 			if( element && element.parentNode )
 			{ 
 				element.parentNode.removeChild( element );
+				ayoola.style.removeClass( document.body, "pc_no_scroll" );
+				ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
 			}
 		}
 		ayoola.spotLight.SpotLight = null;

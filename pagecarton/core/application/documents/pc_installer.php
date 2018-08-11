@@ -109,12 +109,13 @@
 	$dbDir = '/application/databases/';
 	$preserveList = array
 	(
-		'Application/domain.xml',
 		'Application/backup.xml',
+		'Application/domain.xml',
+		'Application/Domain/userdomain.xml',
 		'Ayoola/Access/localuser.xml', 
+		'Ayoola/Api/api.xml',
 		'Application/settings.xml',
 		'PageCarton/MultiSite/table.xml',
-		'Ayoola/Api/api.xml',
 	);
 
 	//	system check

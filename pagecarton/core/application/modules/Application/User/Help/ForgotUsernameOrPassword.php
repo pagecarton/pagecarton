@@ -56,7 +56,7 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
-			$identifier = array( 'email' => $values['email'] );
+			$identifier = array( 'email' => strtolower( trim( $values['email'] ) ) );
 			
 			
 			//	First seek in the local flatfile

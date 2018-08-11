@@ -118,18 +118,19 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		$access = new Ayoola_Access();
 		$userInfo = $access->getUserInfo();
 	//	var_export( $userInfo );
-		@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
+	//	@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
 	//	var_export( $userInfo );
-		if( ! $userInfo['profiles'] )
+//		if( ! $userInfo['profiles'] )
 		{
 			$table = Application_Profile_Table::getInstance();
 			$profiles = $table->select( null, array( 'username' => $userInfo['username'] ) );
+	//		self::v( $table->select() );
 			foreach( $profiles as $profileInfo )
 			{
 				self::$_myProfiles[] = $profileInfo['profile_url'];
 			}
 		}
-		else
+/*		else
 		{
 			foreach( $userInfo['profiles'] as $url )
 			{
@@ -143,7 +144,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 				self::$_myProfiles[] = $url;
 			}
 		}
-
+*/
 		
 	//	var_export( $profiles );
 
@@ -433,6 +434,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 				}
 				
 			}
+		//	var_export( $customForm );
 			if( @$_REQUEST['form_name'] )     
 			{
 				is_array( $values ) ? Ayoola_Form::setDefaultValues( $values ) : null;

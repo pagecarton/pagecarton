@@ -472,6 +472,20 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
     } 
 
     /**
+     * Gets data types of fields on a table
+     *
+     * @return array
+     */
+    public function getTableInfo( $key = null )
+    {
+      if( $node = $this->getXml()->getElementsByTagName( self::TAGNAME_DOCUMENT_ELEMENT )->item( 0 ) )
+      {
+          $tableInfo = $this->getXml()->getTagAttributes( $node ); 
+      }
+      return ( $key ) ? $tableInfo[$key] : $tableInfo;
+    } 
+
+    /**
      * Returns the Data Type of a particular field
      *
      * @param string Field key

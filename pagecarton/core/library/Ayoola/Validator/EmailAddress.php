@@ -51,7 +51,7 @@ class Ayoola_Validator_EmailAddress extends Ayoola_Validator_Abstract
 	
     public function getBadnews()
     {
-		return '%value% should be of the format username@domain.tld';
+		return '%value% seems to be an invalid email address';
     }
 	
 	

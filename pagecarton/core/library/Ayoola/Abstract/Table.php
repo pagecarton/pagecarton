@@ -300,8 +300,12 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      * @param array 
      * @param string
      */
-    public static function sortMultiDimensionalArray( array $array, $key )
+    public static function sortMultiDimensionalArray( $array, $key )
     {
+		if( ! is_array( $array ) )
+		{
+			return false;
+		}
 		$sortColumn = create_function  
 		(
 			'$a,$b',

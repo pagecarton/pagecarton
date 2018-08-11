@@ -327,7 +327,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
     {
 		if( $defaultLayout = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) )     
 		{
-			return $defaultLayout;
+			if( Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $defaultLayout ) ) )
+			{
+				return $defaultLayout;
+			}
 		}
 	//	return 'bootstrapmini';
 	//	return 'alissa-coming-soon';
@@ -349,7 +352,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	//	var_export( $this->getPagePaths() );
 		$values = $this->getValues();
 	//	$previousValues = $values;
-		
+	//	var_export( $values );
 		//	debug 
 		if( $values == array ( 0 => false, ) )
 		{
@@ -1165,7 +1168,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$option = $option->select();
 		//	var_export( $option );
 			$option = self::sortMultiDimensionalArray( $option, 'url' );
-			$optionHTML = ' <span style="display:inline-block;padding: 0 5px 0 5px;"> <select style="display: inline-block;width: initial;width: unset;" onChange="location.href= \\\'?url=\\\' + this.value;">';
+			$optionHTML = ' <span style="display:inline-block;padding: 0 5px 0 5px;"> <select class="pc-btn" style="display: inline-block;width: initial;width: unset;" onChange="location.href= \\\'?url=\\\' + this.value;">';
 			foreach( $option as $eachPage )
 			{
 				$selected = null;
@@ -1213,7 +1216,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$pageVersions = Ayoola_Doc::getFiles( $backupDir );
 			rsort( $pageVersions );
 		//	var_export( $pageVersions );
-			$pageVersionHTML = ' <span style="display:inline-block;padding: 0 5px 0 5px;"><select style="display: inline-block;width: initial;width: unset;" onChange="location.search = location.search + \\\'&pc_page_editor_content_version=\\\' + this.value;"><option value="">Last Saved Content</option>';
+			$pageVersionHTML = ' <span style="display:inline-block;padding: 0 5px 0 5px;"><select class="pc-btn" onChange="location.search = location.search + \\\'&pc_page_editor_content_version=\\\' + this.value;"><option value="">Last Saved Content</option>';
 			$filter = new Ayoola_Filter_Time();
 			foreach( $pageVersions as $eachVersion )
 			{
@@ -1353,7 +1356,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	confirm( "Are you sure you want to close this page?" );
 			}
 		var topBarForButtons = document.createElement( "span" );
-		topBarForButtons.style.cssText = "width:auto;max-height:100%;overflow:auto;top:50%;left:0px;background-color:#fff;color:#000;position:fixed;padding:0.5em;cursor:move;border:0.1em solid #ccc;z-index:200000;";
+		topBarForButtons.style.cssText = "overflow:auto;bottom:0;left:0;background-color:#333;color:#fff;position:fixed;padding:0.5em;cursor:move;z-index:200000;";
 	//	topBarForButtons.innerHTML = \'<p style="">Editing "<a target="_blank" href="' . $page['url'] . '" style="">' . $page['url'] . '</a>"</p>\';
 	//	topBarForButtons.innerHTML = \'' . $optionHTML . '\';
 	//	topBarForButtons.className = "drag, pc-hide-children-parent";
@@ -1481,7 +1484,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			addItemContainer.name = "add_a_new_item_to_parent_section";
 	
 			var addItemButton = document.createElement( "span" );
-			addItemButton.className = "pc_add_widget_button greynews boxednews centerednews pc-btn pc-btn-small";
+			addItemButton.className = "pc_add_widget_button greynews boxednews centerednews pc-btn";
 			addItemButton.innerHTML = "Add Widget Here";
 			ayoola.events.add( addItemButton, "click", addANewItemToContainer ); 
 
@@ -1489,7 +1492,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 			var select = document.createElement( "select" );
 			select.innerHTML = "<option value=\"\">Insert Widget Here</option>' . $this->_viewableSelect . '";
-			select.className = "pc_add_widget_button greynews boxednews centerednews pc-btn pc-btn-small";
+			select.className = "pc_add_widget_button greynews boxednews centerednews pc-btn";
 			select.title = "Select a widget to insert below";
 			ayoola.events.add
 			( 
@@ -1524,7 +1527,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		saveButton.style.cssText = "";
 		saveButton.href = "javascript:";
 		saveButton.title = "Save the layout template for this page.";
-		saveButton.className = "pc-btn pc-btn-small pc-bg-color";  
+		saveButton.className = "pc-btn pc-bg-color";  
 		saveButton.innerHTML = "Save";  
 		topBarForButtons.appendChild( saveButton );
 		
@@ -1710,7 +1713,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		a.href = "javascript:";
 	//	a.target = "_blank";
 	//	a.rel = "spotlight";
-		a.className = "pc-hide-children-children pc-btn pc-btn-small";  
+		a.className = "pc-hide-children-children pc-btn";  
 		a.innerHTML = "Preview";  
 		topBarForButtons.appendChild( a );		
 		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '' . $page['url'] . '' . ( '?pc_page_layout_name=' . $page['layout_name'] ) . '\' ); } );
@@ -1733,7 +1736,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		a.href = "javascript:window.location.search = window.location.search + \'&pc_load_theme_defaults=1\'";
 		a.onclick = "";
 		a.title = "Load default HTML Content to this theme";
-		a.className = "pc-hide-children-children pc-btn pc-btn-small";  
+		a.className = "pc-hide-children-children pc-btn";  
 		a.innerHTML = "Load Default";  
 		topBarForButtons.appendChild( a );
 '			
@@ -1747,7 +1750,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		a.style.cssText = "";
 		a.href = "javascript:";
 		a.title = "Edit page title, description and other information.";
-		a.className = "pc-hide-children-children pc-btn pc-btn-small";  
+		a.className = "pc-hide-children-children pc-btn";  
 		a.innerHTML = "Options";  
 	//	topBarForButtons.appendChild( a );
 		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor/?url=' . $page['url'] . '\' ); } );
@@ -1757,7 +1760,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		a.style.cssText = "";
 		a.href = "javascript:";
 		a.title = "Delete page";
-		a.className = "pc-hide-children-children pc-btn pc-btn-small";  
+		a.className = "pc-hide-children-children pc-btn";  
 		a.innerHTML = "Delete";  
 //		topBarForButtons.appendChild( a );
 		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Delete/?url=' . $page['url'] . '\' ); } );
@@ -1766,7 +1769,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		var a = document.createElement( "a" );
 		a.style.cssText = "";
 		a.href = "javascript:";
-		a.className = "pc-hide-children-children pc-btn pc-btn-small";  
+		a.className = "pc-hide-children-children pc-btn";  
 		a.innerHTML = "Theme";  
 		topBarForButtons.appendChild( a );
 		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/layout/' . strtolower( $page['layout_name'] ) . '/template\' ); } );
@@ -1784,7 +1787,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		a.href = "javascript:";
 	//	a.target = "_blank";
 	//	a.rel = "spotlight";
-		a.className = "pc-hide-children-children pc-btn pc-btn-small";  
+		a.className = "pc-hide-children-children pc-btn";  
 		a.innerHTML = "Preview";  
 		topBarForButtons.appendChild( a );		
 		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Layout_Preview/?layout_name=' . $page['layout_name'] . '\' ); } );
@@ -1797,7 +1800,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		loadButton.href = "javascript:window.location.search = window.location.search + \'&pc_load_theme_defaults=1\'";
 		loadButton.onclick = "";
 		loadButton.title = "Load default HTML Content to this theme";
-		loadButton.className = "pc-hide-children-children pc-btn pc-btn-small";  
+		loadButton.className = "pc-hide-children-children pc-btn";  
 		loadButton.innerHTML = "Load Default";  
 		topBarForButtons.appendChild( loadButton );
 
@@ -1818,19 +1821,19 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	Display Widgets Editor
 		var optionbar = document.createElement( "span" );
 		optionbar.innerHTML = \'Widget Options\';
-		optionbar.className = " pc-btn pc-btn-small";
+		optionbar.className = " pc-btn";
 		optionbar.title = "Show or hide widget options";
 		optionbar.onclick = function()
 		{
 			var a = document.body;
-			if( ayoola.style.hasClass( a, "pc_page_widgetmode" ) )
+			if( ayoola.style.hasClass( a, "pc_page_widgetmode" ) )  
 			{
 				ayoola.style.removeClass( a, "pc_page_widgetmode" );
-				this.innerHTML = \'Widget Options\';      
+				this.innerHTML = \'Show Widget Options\';      
 			}
 			else
 			{
-				this.innerHTML = \'Hide Options\';
+				this.innerHTML = \'Hide Widget Options\';
 				ayoola.style.addClass( a, "pc_page_widgetmode" ); 
 			}
 		};
@@ -1846,7 +1849,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	Add show more options button
 		var optionbar = document.createElement( "span" );
 		optionbar.innerHTML = \'&raquo;&raquo;\';
-		optionbar.className = " pc-btn pc-btn-small";
+		optionbar.className = " pc-btn";
 		optionbar.title = "Show or hide more options";
 		optionbar.onclick = function()
 		{
@@ -1869,6 +1872,23 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		topBarForButtons.appendChild( optionbar );
 		';
 		;
+
+		//	if we don't have values, prep the screen for editing'
+		if( ! $this->getValues() )
+		{
+		
+			$js .= '
+			ayoola.events.add
+			(
+				window,
+				"load",
+				function()
+				{
+					//	everything is not clickable by default
+					ayoola.style.addClass( document.body, "pc_page_widgetmode" );
+				}
+			);';
+		}
 	//	$script = "\n<script src='/js/objects/dragNDrop.js'>\n</script>\n<script>\n{$js}\n</script>\n";
 		return $js;
 	} 

@@ -467,7 +467,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		if( $cart['settings']['terms_and_conditions'] )
 		{
 			$options = array( 'Agree' => 'I agree to above terms and conditions' );
-			$fieldset->addElement( array( 'name' => 'terms_and_conditions', 'label' => 'Terms and Conditions' , 'type' => 'textarea', 'value' => $cart['settings']['terms_and_conditions'] ) );
+			$fieldset->addElement( array( 'name' => 'terms_and_conditions', 'readonly' => 'readonly', 'style' => 'overflow:auto;resize: vertical;min-height:200px;', 'label' => 'Terms and Conditions' , 'type' => 'textarea', 'value' => $cart['settings']['terms_and_conditions'] ) );
 			$fieldset->addElement( array( 'name' => 'terms', 'label' => ' ' , 'type' => 'Checkbox', 'value' => null ), $options );
 			$fieldset->addElement( array( 'name' => 'checkterms', 'label' => ' ' , 'type' => 'Hidden', 'value' => null ) );
 			if( ! $this->getGlobalValue( 'terms' ) )

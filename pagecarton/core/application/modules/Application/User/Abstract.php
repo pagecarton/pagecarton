@@ -467,6 +467,8 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$ipType = is_null( $values ) ? 'creation_ip' : 'modified_ip';
 			$account->addElement( "name=>$ipType:: type=>Hidden" );
 			$account->addFilter( $ipType, 'DefiniteValue=>' . $ip );
+			$account->addFilter( 'email', 'Trim' );
+			$account->addFilter( 'username', 'Trim' );
 	//		$account->addFilters( 'Trim' );
 		}
 	

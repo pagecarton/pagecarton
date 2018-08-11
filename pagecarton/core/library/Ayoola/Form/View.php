@@ -98,7 +98,11 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			//	self::setIdentifierData( $data );
 			}
 			$previousData = null;
-			if( ! empty( $_REQUEST['data_id'] ) && ( self::hasPriviledge() || $_REQUEST['data_id'] == Ayoola_Application::getUserInfo( 'user_id' ) ) )
+			if( $this->getParameter( 'form_data' ) )
+			{
+				$previousData = $this->getParameter( 'form_data' );
+			}
+			elseif( ! empty( $_REQUEST['data_id'] ) && ( self::hasPriviledge() || $_REQUEST['data_id'] == Ayoola_Application::getUserInfo( 'user_id' ) ) )
 			{
 				$previousData = Ayoola_Form_Table_Data::getInstance()->selectOne( null, array( 'data_id' => $_REQUEST['data_id'] ) );
 		//		var_export( $_REQUEST['data_id'] );

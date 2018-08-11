@@ -309,7 +309,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		else
 		{
-			$postListId = 'pc_post_list_' . md5( serialize( $_GET ) . 'x---.---' . serialize( $this->getParameter() ) );
+			$postListId = 'pc_post_list_' . md5( serialize( $_GET ) . 'x-----==-.---' . serialize( $this->getParameter() ) );
 		}
 	//	var_export( $_GET );
 //		var_export( $postListId );
@@ -463,6 +463,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						//	freebies 
 						continue;
 					}
+					if( $this->getParameter( 'skip_ariticles_without_cover_photo' ) && ! @$data['document_url_base64'] && ( ! Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ? : @$data['display_picture'] ) ) )
+					{
+						//	Post without image is not allowed 
+						continue;
+					}
 			//		var_export( $data['article_creation_date'] ); //2592000 //604800
 					if( ( time() - $data['article_creation_date'] ) < ( $this->getParameter( 'time_span_for_new_badge' ) ? : 2592000 ) )
 					{
@@ -478,7 +483,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						{
 							$this->viewsTable =  new Application_Article_Views();
 						}
-						$data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ddddddddddddd', 'limit' => $this->getParameter( 'limit_for_views_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_views_count_record_search' ) ? : '300' ) ) );
+						$data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ddddddddddddd', 'limit' => $this->getParameter( 'limit_for_views_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_views_count_record_search' ) ? : '100' ) ) );
 					}
 
 					//	get number of downloads
@@ -488,7 +493,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						{
 							$this->downloadTable =  new Application_Article_Type_Download_Table();
 						}
-						$data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'sssdefwefefs', 'limit' => $this->getParameter( 'limit_for_download_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_download_count_record_search' ) ? : '300' ) ) );
+						$data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'sssdefwefefs', 'limit' => $this->getParameter( 'limit_for_download_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_download_count_record_search' ) ? : '100' ) ) );
 					}
 				//	var_export( $data );
 					//	get number of downloads
@@ -498,7 +503,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						{
 							$this->audioTable =  new Application_Article_Type_Audio_Table();
 						}
-						$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '300' ) ) );
+						$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '100' ) ) );
 					}
 					if( $this->getParameter( 'get_comment_count' ) )
 					{   
@@ -506,7 +511,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						{
 							$this->commentTable =  new Application_CommentBox_Table();
 						}
-						$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '300' ) ) );
+						$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '100' ) ) );
 					}
 					
 					//	don't cache base64 strings of images and download data
@@ -791,6 +796,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					$data += $profileInfo ? : array();
 				}
 			}
+			$data['css_class_of_inner_content'] = $this->getParameter( 'css_class_of_inner_content' );
 		//	if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
 			$data['post_link'] = $data['article_url'];
 			if( @$data['article_url'] && strpos( @$data['article_url'], ':' ) === false && $data['article_url'][0] !== '?'  )
@@ -806,11 +812,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['document_url_no_resize'] = $data['document_url']; 
 			if( strpos( @$data['document_url'], ':' ) === false && empty( $data['not_real_post'] ) )
 			{
-				if( $this->getParameter( 'skip_ariticles_without_cover_photo' ) && ! @$data['document_url_base64'] && ( ! Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ? : @$data['display_picture'] ) ) )
-				{
-					//	Post without image is not allowed 
-					continue;
-				}
 				//	This is the default now if they don't have picture, create a placeholder
 			//	$data['document_url'] = $data['document_url_base64'];
 				$data['document_url'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
@@ -818,6 +819,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] );     
 				
 			}
+			else
+			{
+				$data['document_url'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
+				$data['document_url_no_resize'] = $data['document_url']; 
+				$data['document_url_cropped'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&url=' . @$data['document_url_uri'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
+			}
+		//	self::v( $data['document_url'] );
 			
 			//	Can't be lowercase because of auto create link
 			$url = $data['article_url'];
@@ -1257,6 +1265,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 			//	self::v( $this->_objectTemplateValues['pagination'] );
 			//	self::v( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) );
+	//	var_export( $this->_parameter['markup_template'] );
 		
 		if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false )  
 //		if( ! $this->getParameter( 'array_key_placeholders' ) )  

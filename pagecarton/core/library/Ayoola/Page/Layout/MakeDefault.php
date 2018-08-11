@@ -37,7 +37,6 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
             
             //  Code that runs the widget goes here...
 			if( ! $data = $this->getIdentifierData() ){ return false; }
-
                         
 			$this->createConfirmationForm( 'Confirm', 'Set  "' . $data['layout_label'] . '" as the main site theme' );
 			$this->setViewContent( $this->getForm()->view(), true);
@@ -50,7 +49,7 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
                 $this->setViewContent( '<p class="badnews">An error was encountered while changing the theme.</p>' ); 
                 return false;
             }
-            $this->setViewContent( '<p class="goodnews">Theme successfully set as main site theme.</p>' ); 
+            $this->setViewContent( '<p class="goodnews">Theme successfully set as main site theme.</p>', true ); 
 
              // end of widget process
           

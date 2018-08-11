@@ -147,8 +147,8 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 			array(
 				'url' => '<span>%FIELD%</span>', 
 //				'url' => '<span style="font-size:smaller;">' . Ayoola_Application::getUrlPrefix() . '</span><span>%FIELD%</span> <a style="font-size:smaller;" title="Preview" onClick="ayoola.spotLight.showLinkInIFrame( \'http://' . DOMAIN . '' . Ayoola_Application::getUrlPrefix() . '%FIELD%\' );" href="javascript:;">preview</a>', 
-				'title' => '%FIELD%', 
-//				'title' => '%FIELD% <a style="font-size:smaller;" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor/?' . $this->getIdColumn() . '=%KEY%"> options</a>', 
+	//			'title' => '%FIELD%', 
+				'title' => '%FIELD% <a style="font-size:smaller;" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor/?' . $this->getIdColumn() . '=%KEY%"> update</a>', 
 				' ' => '<a rel="" href="javascript:;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" >Edit</a>', 
 		//		'   ' => '<a rel="" href="javascript:" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Copy/?origin=%KEY%\' );">Copy</a>', 
 		//		'  ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 

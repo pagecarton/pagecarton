@@ -43,7 +43,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      *
      * @param int
      */
-    protected $_tableVersion = '0.01';
 
     /**
      * The Version of the general table module
@@ -79,6 +78,20 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      * @param string
      */
     protected $_relationship = SELF::DEFAULT_SCOPE;
+
+    /**
+     * Table version number
+     *
+     * @param string
+     */
+    protected $_tableVersion = '0.01';
+
+    /**
+     * Time to hold the cache before refreshing
+     *
+     * @param int
+     */
+    public static $cacheTimeOut;
 	
 	const DEFAULT_SCOPE = SELF::SCOPE_PRIVATE;
 	const SCOPE_PRIVATE = 'PRIVATE';
@@ -298,96 +311,9 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      */
     public function select( Array $fieldsToSelect = null, Array $where = null, Array $options = null )
     {
-/*	  	if( ! $this->exists() )
-			{
-     
-				//	cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
-				return array();
-			}
-*/      
       try
       {
-           //  implement cache at this level
-       if( ! empty(  static::$_tableInfo['filename'] ) )
-        {
-          $filename = str_ireplace( Ayoola_Application::getDomainSettings( APPLICATION_PATH ), '',  static::$_tableInfo['filename'] );
-
-          //   we must always refresh list because we don't know if the table was just created
-          $globalFiles = Ayoola_Loader::getValidIncludePaths( $filename, array( 'refresh_list' => 1 ) );
-          $class = @static::$_tableInfo['table_info']['table_class'] ? : get_class( $this );
-         // Application_Breadcrumb::v( static::$_tableInfo['table_info']['table_class'] );
-       //   Application_Breadcrumb::v( static::$_tableInfo['table_info'] );
-         $arguments =  $class . ' ' . md5( serialize( func_get_args() ) )  . ' ' . $_SERVER['HTTP_HOST'];
-          
-        //	require_once 'Ayoola/Filter/Name.php';
-        //	$filter = new Ayoola_Filter_Name();
-        //	$file = $filter->filter( $arguments );
-          $filter = new Ayoola_Filter_Name();
-          $filter->replace = DS;
-          $file = str_ireplace( '_', DS, $filter->filter( $arguments ) );
-          $dir = Ayoola_Dbase_Adapter_Xml_Table_Abstract::getCacheDirectory();
-          $file = $dir . DS . $file;
-  //        Application_Breadcrumb::v( $file );
-  //        var_Export( $file );
-  //        var_Export( $arguments );
-     //     $catchPath =  static::$_tableInfo['table_info']['table_class'];
-          if( is_file( $file ) )
-          {
-        //    var_export( $file );
-	        	$cacheTime = filemtime( $file );
-            foreach( $globalFiles as $each )
-            {
-       //       var_export();
-		      	  if( $cacheTime <= @filemtime( $each ) )
-              { 
-                  unlink( $file ); 
-                  break;
-              }
-            }
-          }
-          if( is_file( $file ) && empty( $options['disable_cache'] ) )
-          {
-            
-      //     Application_Breadcrumb::v(  static::$_tableInfo );
-     //      Application_Breadcrumb::v(  static::$_tableInfo['table_info']['table_class'] );
-            $stored = json_decode( file_get_contents( $file ), true );
-            if( $stored['files'] === $globalFiles )
-            {
-                if( empty( $globalFiles ) && ! empty( $stored['result'] ) )
-                {
-                    //  where did we get record when files are empty
-                    // plugins ?
-          //        var_export( $stored['result'] );
-         //         var_export( $globalFiles );
-          //        var_export( $stored['files'] );
-                }
-
-                //  this cache has been found to return result of other tables in a table
-            //    return $stored['result'];  
-            }
-            else
-            {
-                //  refresh if the global files have changed
-       //         var_export( $globalFiles );
-            }
-          }
-       //   var_export( $catchPath );
-          //  str_ireplace
-        }
-        else
-        {
-          //  none should come here tho
-      //     var_export(  static::$_tableInfo );
-    //      return array();
-        }
 		    $result = $this->query( 'TABLE', 'FETCH', $fieldsToSelect, $where, $options );
-        if( ! empty( $file ) )
-        {
-       //   var_export( $file );
-        //  var_export( file_get_contents( $file ) );
-          Ayoola_Doc::createDirectory( dirname( $file ) );
-          file_put_contents( $file, json_encode( array( 'result' => $result, 'files' => $globalFiles ) ) );
-        }
       }
       catch( Exception $e )
       {
@@ -408,9 +334,10 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      */
     public function selectOne( Array $fieldsToSelect = null, Array $where = null, Array $options = null )
     {
-		$data = $this->select( $fieldsToSelect, $where, $options );
-		if( ! empty( $data ) ){ $data = array_shift( $data ); }
-		return $data;
+      $options['limit'] = 1;
+      $data = $this->select( $fieldsToSelect, $where, $options );
+      if( ! empty( $data ) ){ $data = array_shift( $data ); }
+      return $data;
     }
 
     /**

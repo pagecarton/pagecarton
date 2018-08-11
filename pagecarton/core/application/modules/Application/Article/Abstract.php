@@ -541,7 +541,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public function getQuickLink( array $data = null )
     {
 		
-		//	You can edit this article if you are a super user	
+/*		//	You can edit this article if you are a super user	
 		$editLink = null;
 	//	Check settings
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
@@ -574,7 +574,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$editLink = ' <span style="display:inline-block;"> ' . $editLink . ' </span> ';
 		}	
 		return $editLink;
-    } 
+*/    } 
 	
     /**
      * Returns an HTML to display categories
@@ -731,13 +731,16 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777; margin-bottom:3em;">';
 		$html .= '<' . $link . '>';
 		$html .= '<div  class="pc_theme_parallax_background" style="background-image: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\'); ">';
+        $html .= $data['css_class_of_inner_content'] ? '<div class="' .$data['css_class_of_inner_content'] . '">' : null;
 		$html .= '<div style="float:right;background-color:#000;padding:10px;border-radius:10px;">' . $data['post_type'] . '</div>';
 		$html .= '<' . $header . '>' . $data['article_title'] . '</' . $header . '>';
 		$html .= $data['article_description'] ? '<br><p>' . $data['article_description'] . '</p>' : null;
 		$html .= $realPost && $data['button_value'] ? '<br><p><button class="pc-btn"> ' . $data['button_value'] . ' </button></p>' : null;
+        $html .= $data['css_class_of_inner_content'] ? '</div>' : null;
 		$html .= '</div>';
 		$html .= '</' . $link . '>';
 		$html .= '<div class="pc_theme_parallax_background" style="font-size:x-small;text-transform:uppercase;background-image: linear-gradient(      rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)  ); ">';
+        $html .= $data['css_class_of_inner_content'] ? '<div class="' .$data['css_class_of_inner_content'] . '">' : null;
 
 		$html .= $data['item_old_price'] ? '
 		<span style="font-size:small;">
@@ -791,6 +794,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		';
 		$html .= '<span style="display: inline-block; color:inherit; margin-right:2em;">' . $shareLink . ' </span>';  
 
+        $html .= $data['css_class_of_inner_content'] ? '</div>' : null;
 		$html .= '</div>';
 		$html .= '</div>';
 		return $html;

@@ -249,17 +249,11 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 				</div>
 				<div title="Click here to select a file to upload or drag and drop a file here." style="text-align:center;" class="" name="upload_through_ajax_link">
 					<div title="Select an option here" style="display:block;" >
-						<span name="' . $optionName . '" onClick="' . $js . '  ' . $showMenuJs . '  " title="Show or hide menu..." class="pc-btn" style="display:inline-block;" >
-							' . ( $this->getParameter( 'call_to_action' ) ? : 'Change...' ) . '  
+						<span name="' . $optionName . '" onClick="' . $js . ' ' . $jsSelectElement . ' ' . $jsSetFieldName . ' ayoola.image.clickBrowseButton( { accept: \'' . $this->getParameter( 'file_types_to_accept' ) . '\', } ); " title="Click here to upload a file" class="pc-btn"  >
+							Upload New
 						</span>
-						<span name="' . $optionName . '" onClick="' . $js . ' ' . $jsSelectElement . ' ' . $jsSetFieldName . ' ayoola.image.clickBrowseButton( { accept: \'' . $this->getParameter( 'file_types_to_accept' ) . '\', } ); " title="Click here to upload a file" class="pc-btn" style="display:none;" >
-							Upload
-						</span>
-						<span name="' . $optionName . '" onClick="' . $js . ' ' . $dropZoneJs . ' ' . $jsSetFieldName . ' " title="Click here to select a file from the previous files on the website" class="pc-btn " style="display:none;" >
+						<span name="' . $optionName . '" onClick="' . $js . ' ' . $dropZoneJs . ' ' . $jsSetFieldName . ' " title="Click here to select a file from the previous files on the website" class="pc-btn">
 							Drag N Drop
-						</span>
-						<span name="' . $optionName . '" onClick="' . $js . '   var a = document.getElementsByName( \'' . $name . '\' ); for( var b = 0; b < a.length; b++ ){var c = a[b].type; if( c == \'text\' ){ a[b].type = \'hidden\' }else{ a[b].type = \'text\'; }  a[b].style.display=\'block\';  a[b].focus();  a[b].click(); } " title="Click here to a URL link to the file" class=" pc-btn " style="display:none;" >
-							URL
 						</span>
 					</div>
 					<div name="' . $dropZoneName . '" style="max-width:100%;display:none;text-align:center;" title="Drag and drop files here" class="boxednews centerednews badnews">	

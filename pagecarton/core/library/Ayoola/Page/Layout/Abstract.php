@@ -1147,7 +1147,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				$options += array( 'upload' => 'Upload ZIP/Tar Archive', );
 			}
 		//	if( @$_REQUEST['layout_type'] )
-			$fieldset->addElement( array( 'name' => 'layout_type', 'label' => 'How are you adding a new theme', 'onClick' => 'this.form.submit();', 'type' => ( @$_REQUEST['layout_type'] || @$values ) ? 'Hidden' : 'Radio', 'value' => @$values['layout_type'] ? : 'plain_text' ), $options );
+			$options ? $fieldset->addElement( array( 'name' => 'layout_type', 'label' => 'How are you adding a new theme', 'onClick' => 'this.form.submit();', 'type' => ( @$_REQUEST['layout_type'] || @$values ) ? 'Hidden' : 'Radio', 'value' => @$values['layout_type'] ? : 'plain_text' ), $options ) : null;
 			$fieldset->addRequirement( 'layout_type', array( 'ArrayKeys' => $options ) );
 		//	$previousContent = file_get_contents( $this->getMyFilename() );
 		//	var_export( $_POST );
@@ -1201,7 +1201,17 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				default:
 			//	case 'plain_text':
 			//	var_export( $previousContent );
-					$fieldset->addElement( array( 'name' => 'plain_text', 'label' => 'HTML Code', 'rows' => 10, 'style' => 'width:100%;', 'placeholder' => 'Enter the template text here...', 'type' => 'Textarea', 'value' => $previousContent ) );
+					$fieldset->addElement( array( 'name' => 'plain_text', 'label' => 'HTML Code', 'rows' => 10, 'style' => 'width:100%;height:200px;', 'placeholder' => trim( '<!DOCTYPE html>
+<html>
+	<head>
+		...
+	</head>
+	<body>
+		...
+	</body>
+</html> 
+					
+					' ), 'type' => 'Textarea', 'value' => $previousContent ) );
 					
 					$filter = new Ayoola_Filter_HighlightCode();    
 					

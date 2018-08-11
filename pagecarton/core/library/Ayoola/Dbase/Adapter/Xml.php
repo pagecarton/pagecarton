@@ -158,6 +158,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		{ 
 	//		throw new Ayoola_Dbase_Adapter_Exception( "XMLDB not available for $className" ); 
 		}
+//		PageCarton_Widget::v( $className );
+ //   var_export( $className );
 		$this->className =  $className;
 		$directory = XML_DATABASES_DIR . DS . str_ireplace( '_', DS, $className );
 	//	if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
@@ -726,6 +728,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			throw new Ayoola_Dbase_Adapter_Xml_Exception( $keyword . ' is an invalid keyword' );
 		}
 		$class = new $class;
+		$class->tableClass = get_class( $this );		
+	//	PageCarton_Widget::v( $this );
 		foreach( $this as $key => $value )
 		{
 			require_once 'Ayoola/Reflection/Property.php';

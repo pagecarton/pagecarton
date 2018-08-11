@@ -61,9 +61,8 @@ class Ayoola_Extension_List extends Ayoola_Extension_Abstract
 		$list->setListOptions( 
 								array( 
 										'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Creator/\', \'' . __CLASS__ . '\' );" title="Build a new plugin">Build New Plugin</a>',
-										'DB Table' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_CreateFile/?file_type=table\' );" title="">New DB Table</a>',  
-										'Settings' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_CreateFile/?file_type=settings\' );" title="">New Settings</a>',  
-										'Widget' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_CreateFile/\' );" title="">New Widget</a>',    
+										'DB Table' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_Dbase_List/?file_type=table\' );" title="">My Databases</a>',  
+										'Widget' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_Widget_List/\' );" title="">My Widgets</a>',    
 									) 
 							);
 		$list->setNoRecordMessage( 'No plugins built yet.' );
