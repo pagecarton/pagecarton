@@ -353,9 +353,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 //		$classCachePeriod = $classCachePeriod::$cacheTimeOut;
 	//	PageCarton_Widget::v( $classCachePeriod );
 		$cTime = time();
+//		PageCarton_Widget::v( $cacheFile . "\r\n" );
 		foreach( $this->getGlobalFilenames() as $tableFile )
 		{
-		//	var_export( $tableFile . '<br />' );
+		//	var_export( Ayoola_Application::getRequestUri() . '<br />' );
 			if( ! is_file( $tableFile ) )
 			{
 				continue;
@@ -364,6 +365,12 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			if( ! ( $fileMTime ) )
 			{
 				continue;
+			}
+		//	if( Ayoola_Application::getRequestedUri() == '/AyoolaX' && stripos( $tableFile, '/Application/Profile/table.xml' ) )
+			{
+			//	var_export( $tableFile . '<br>' );  
+			//	var_export( $cacheTime . '<br>' );
+			//	var_export( $fileMTime . '<br>' );  
 			}
 			if( $classCachePeriod )
 			{
@@ -375,7 +382,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			//	PageCarton_Widget::v( $classCachePeriod + $fileMTime < $cTime );  
 
 			}
-			if( $cacheTime < $fileMTime && ( ! $classCachePeriod || $classCachePeriod + $fileMTime < $cTime ) )
+			if( $cacheTime <= $fileMTime && ( ! $classCachePeriod || $classCachePeriod + $fileMTime <= $cTime ) )
 			{ 
 			//	var_export( $cacheTime . '<br>' );
 			//	var_export( $fileMTime . '<br>' );  

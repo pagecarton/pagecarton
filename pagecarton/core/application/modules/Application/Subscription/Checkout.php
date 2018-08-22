@@ -360,7 +360,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
      * Creates the form for checkout
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = NULL, $legend = NULL, array $values = NULL )
     {
 		$form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
 		$formIncluded = array();
@@ -436,34 +436,38 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			self::setFormRequirements( $form, $requirements );
 		}
 		$fieldset = new Ayoola_Form_Element();		
-		
-		$options = new Application_Subscription_Checkout_CheckoutOption();
-		$options = $options->select();
-		$allowedOptions = Application_Settings_Abstract::getSettings( 'Payments', 'allowed_payment_options' ) ? : array();
-		foreach( $options as $key => $each )
+	//		self::v( $cart['settings']['total'] );
+		if( ! empty( $cart['settings']['total'] ) )
 		{
-			$api = 'Application_Subscription_Checkout_' . $each['checkoutoption_name'];
-		//	$options[$key]['checkoutoption_logo'] = $each['checkoutoption_logo'] . htmlspecialchars( '<br />' );
-			$options[$key]['checkoutoption_logo'] = '<div style="max-width:210px; margin: 0 1em 0 1em; display:inline-block">' . ( $each['checkoutoption_logo'] ? : $each['checkoutoption_name'] ) . '</div>';     
-			if( Ayoola_Loader::loadClass( $api ) )
-			{ 
-				if( ! $api::isValidCurrency() ){ unset( $options[$key] ); }
+			$options = new Application_Subscription_Checkout_CheckoutOption();
+			$options = $options->select();
+			$allowedOptions = Application_Settings_Abstract::getSettings( 'Payments', 'allowed_payment_options' ) ? : array();
+		//	self::v( $cart );
+			foreach( $options as $key => $each )
+			{
+				$api = 'Application_Subscription_Checkout_' . $each['checkoutoption_name'];
+			//	$options[$key]['checkoutoption_logo'] = $each['checkoutoption_logo'] . htmlspecialchars( '<br />' );
+				$options[$key]['checkoutoption_logo'] = '<div style="max-width:210px; margin: 0 1em 0 1em; display:inline-block">' . ( $each['checkoutoption_logo'] ? : $each['checkoutoption_name'] ) . '</div>';     
+				if( Ayoola_Loader::loadClass( $api ) )
+				{ 
+					if( ! $api::isValidCurrency() ){ unset( $options[$key] ); }
+				}
+				if( $allowedOptions && ! in_array( $each['checkoutoption_name'], $allowedOptions ) ){ unset( $options[$key] ); }    
+			//	var_export( $api::isValidCurrency() );
 			}
-			if( $allowedOptions && ! in_array( $each['checkoutoption_name'], $allowedOptions ) ){ unset( $options[$key] ); }    
-		//	var_export( $api::isValidCurrency() );
+		//	var_export( $options );
+			require_once 'Ayoola/Filter/SelectListArray.php';
+			$filter = new Ayoola_Filter_SelectListArray( 'checkoutoption_name', 'checkoutoption_logo');    
+			$options = $filter->filter( $options );
+													
+			$editLink = self::hasPriviledge( 98 ) ? ( '<a class="" rel="spotlight;" title="Change organization contact information" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Payments/">(edit payment informaton)</a>' ) : null; 
+			if( count( $options ) == 1 )
+			{
+				@$values['checkoutoption_name'] = array_pop( array_keys( $options ) ); 
+	//var_export( $values['checkoutoption_name'] );
+			}
+			$fieldset->addElement( array( 'name' => 'checkoutoption_name', 'label' => ' ' , 'type' => 'Radio', 'value' => @$values['checkoutoption_name'] ), $options );
 		}
-	//	var_export( $options );
-		require_once 'Ayoola/Filter/SelectListArray.php';
-		$filter = new Ayoola_Filter_SelectListArray( 'checkoutoption_name', 'checkoutoption_logo');    
-		$options = $filter->filter( $options );
-												
-		$editLink = self::hasPriviledge( 98 ) ? ( '<a class="" rel="spotlight;" title="Change organization contact information" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Payments/">(edit payment informaton)</a>' ) : null; 
-		if( count( $options ) == 1 )
-		{
-			@$values['checkoutoption_name'] = array_pop( array_keys( $options ) ); 
-//var_export( $values['checkoutoption_name'] );
-		}
-		$fieldset->addElement( array( 'name' => 'checkoutoption_name', 'label' => ' ' , 'type' => 'Radio', 'value' => @$values['checkoutoption_name'] ), $options );
 		if( $cart['settings']['terms_and_conditions'] )
 		{
 			$options = array( 'Agree' => 'I agree to above terms and conditions' );

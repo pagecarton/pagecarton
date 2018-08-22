@@ -1874,9 +1874,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		;
 
 		//	if we don't have values, prep the screen for editing'
+	//	self::v( $this->getValues() );
 		if( ! $this->getValues() )
 		{
-		
 			$js .= '
 			ayoola.events.add
 			(
@@ -1886,6 +1886,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				{
 					//	everything is not clickable by default
 					ayoola.style.addClass( document.body, "pc_page_widgetmode" );
+			//		alert();
 				}
 			);';
 		}

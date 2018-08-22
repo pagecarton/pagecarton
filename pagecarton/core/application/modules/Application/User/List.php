@@ -68,7 +68,6 @@ class Application_User_List extends Application_User_Abstract
 		$list->setListOptions
 		( 
 			array( 
-				//		'Creator' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Creator/" title="Add a new user">+</a>',
 						'Settings' => '<a rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/UserAccount/" title="User Account settings">User Account Settings</a>'
 						) 
 		);

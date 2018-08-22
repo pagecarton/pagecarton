@@ -130,7 +130,10 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			case 'cloud':
 			case 'file':
 				// Find user in the LocalUser table
-				$table = self::getLocalTable();
+				$table = "Ayoola_Access_LocalUser";
+				$table = $table::getInstance( $table::SCOPE_PRIVATE );
+				$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 
 				//	Filter the result to save time
 				$sortFunction2 = create_function

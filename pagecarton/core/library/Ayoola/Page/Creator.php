@@ -94,16 +94,23 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 			$values['auth_level'] = (array) ( isset( $values['auth_level'] ) ? $values['auth_level'] : 0 );
 		//	self::v( $values );
 		//	return false;
+		
+			if( ! empty( $values['system'] ) )
+			{
+				//	Notify Admin
+				$mailInfo = array();
+				$mailInfo['subject'] = 'A new page created';
+				$mailInfo['body'] = 'A new page have been created on your application with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+				
+				Preview the page on: http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . $values['url'] . '';
+				try
+				{
+			//		var_export( $mailInfo );
+					@Ayoola_Application_Notification::mail( $mailInfo );
+				}
+				catch( Ayoola_Exception $e ){ null; }
+			}
 			
-			
-			//	Notify Admin
-			$mailInfo = array();
-			$mailInfo['subject'] = 'A new page created';
-			$mailInfo['body'] = 'A new page have been created on your application with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
-			
-			Preview the page on: http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . $values['url'] . '/
-			Page administration options are available on: http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/ayoola/page/.
-			';
 			self::resetCacheForPage( $values['url'] ); 
 			$isLayoutPage = stripos( $values['url'], '/layout/' ) === 0;
 			if( $isLayoutPage )
@@ -111,12 +118,6 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 				//	Only admin should be able to view template files
 				$values['auth_level'] = array( 99 );
 			}
-			try
-			{
-		//		var_export( $mailInfo );
-				@Ayoola_Application_Notification::mail( $mailInfo );
-			}
-			catch( Ayoola_Exception $e ){ null; }
 			if( ! $this->insertDb( $values ) ){ return false; }
 			
 			//	let's allow only page editor create this files

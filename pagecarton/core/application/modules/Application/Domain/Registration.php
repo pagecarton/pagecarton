@@ -49,7 +49,9 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 			{ 
 				return false; 
 			}
-			$this->subscribe( $values );
+			$this->subscribe( $values );  
+			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/cart' );
+			exit();
 			
 			
 			
@@ -198,7 +200,8 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 				{
 				//	unset( $options[$key] );
 					$period = $value < 2 ? 'year' : 'years';
-					$options[$value] = $value . ' ' . $period . ' (' . $filter->filter( $price * $value ) . ') ';
+					$priceText = $price ? ' (' . $filter->filter( $price * $value ) . ') ' : null;
+					$options[$value] = $value . ' ' . $period . $priceText;
 				}
 				$fieldset->addElement( array( 'name' => 'no_of_yrs_for_' . $each, 'label' => 'Length', 'type' => 'Select', 'value' => @$values['no_of_yrs_for_' . $each] ), $options );
 		//		$fieldset->addRequirement( 'no_of_yrs_for_' . $each, array( 'NotEmpty' => null ) );
@@ -220,7 +223,7 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 				$options ? $fieldset->addElement( array( 'name' => 'options_for_' . $each, 'label' => 'Other additional service options for ' . $each, 'type' => 'Checkbox', 'value' => @$values['options_for_' . $each] ), $options ) : null;
 				
 				$fieldset->addLegend( '<strong>' . $each . '</strong>: Select the number of years of domain registration and other service options for ' . $each );
-				$form->addFieldset( $fieldset );
+			//	$form->addFieldset( $fieldset );
 			}
 			if( @$domainSettings['optional_subscriptions'] )  
 			{
@@ -254,14 +257,14 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 			
 		}
 		//	Register how many yrs
-				$requirements = array( 
+/*				$requirements = array( 
 										array( 'requirement' => 'address', 'requirement_legend' => 'Domain Contact', 'parameters' => array( 'location_prefix' => 'domain_contact' ), 'requirement_goodnews' => 'Provide information for the domain WHOIS contact information. This information will not be used if you select the private domain registration option.' ), 
 										array( 'requirement' => 'phone-number' ), 
 										array( 'requirement' => 'email-address' ), 
 									);
 	//	var_export( $requirements );
 		$form->setFormRequirements( $requirements );
-		$this->setForm( $form );
+*/		$this->setForm( $form );
     } 
 	// END OF CLASS
 }

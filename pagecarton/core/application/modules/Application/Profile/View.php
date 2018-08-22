@@ -69,12 +69,11 @@ class Application_Profile_View extends Application_Profile_Abstract
                     $displayName = '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '">{{{display_name}}}</a>';
                 }
 				$this->_parameter['markup_template'] = '
-                <div class="pc_theme_parallax_background" style="background-color:#444;background-image: url(\'{{{profile_banner}}}\');">
+                <div class="" style="">
                     <div class="' . $this->getParameter( 'css_class_of_inner_content' ) . '">
                         <div class="pc-profile-image-div" style="background-image: url(\'{{{display_picture}}}\'); margin-right:1em;">&nbsp;</div>
                         <div style="">
                             <h3 style="margin-top:0;">' . $displayName . '</h3>
-                            <br>
                             <p>{{{profile_description}}}</p>
                             <p><i class="fa fa-share-alt"></i> {{{link_to_view_profile}}}</p>
                         </div>
@@ -91,7 +90,7 @@ class Application_Profile_View extends Application_Profile_Abstract
 			$this->_objectTemplateValues['profile_banner'] = $this->_objectTemplateValues['profile_banner'] ? Ayoola_Application::getUrlPrefix() . $this->_objectTemplateValues['profile_banner'] : null;
 			$this->_objectTemplateValues['profile_link'] = Ayoola_Page::getHomePageUrl() . '/' . $this->_objectTemplateValues['profile_url'];
       //      var_export( Ayoola_Application::getPresentUri() );
-       //     var_export( Ayoola_Application::getRequestedUri() );
+       //     self::v( $data );
             if( Ayoola_Application::getPresentUri() !== $data['profile_url'] )
             {
 		    	$this->_objectTemplateValues['link_to_view_profile'] = '<a style="font-size:x-small;" href="' . $this->_objectTemplateValues['profile_link']  . '"> ' . $this->_objectTemplateValues['profile_link'] . '</a>';

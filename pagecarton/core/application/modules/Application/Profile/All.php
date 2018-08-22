@@ -48,8 +48,22 @@ class Application_Profile_All extends Application_Article_ShowAll
      */
 	public static function sanitizeData( &$data )
     {
+	//	var_export( $data );
 		$data = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] );
 	//	self::v( $data );
+		if( ! empty( $data['posts']['all'] ) )
+		{
+			$data = false;
+			return false;
+		//	self::v( $data['posts']['all'] );
+		}
+		if( empty( $data['profile_url'] ) )
+		{
+			$data = false;
+			return false;
+		//	self::v( $data['posts']['all'] );
+		}
+	//	self::v( $data['profile_url'] );
 		$data['not_real_post'] = true; 
 		$data['display_name'] = trim( @$data['display_name'] ); 
 		$data['article_title'] = @$data['display_name']; 
@@ -57,10 +71,6 @@ class Application_Profile_All extends Application_Article_ShowAll
 		$data['document_url'] = @$data['display_picture']; 
 		$data['document_url_base64'] = @$data['display_picture_base64']; 
 		$data['profile_url'] = is_array( $data['profile_url'] ) ? array_pop( $data['profile_url'] ) : $data['profile_url'];
-	//	if( @$data['document_url_base64'] )
-		{
-		//	$data['document_url'] = '/tools/classplayer/get/object_name/Application_Profile_PhotoViewer/profile_url/' . @$data['profile_url'] . '/time/' . filemtime( Application_Profile_Abstract::getProfilePath( @$data['profile_url'] ) );
-		}
 	//	$data['display_picture'] = @$data['document_url'];     
 		$data['document_url_base64'] = @$data['display_picture_base64']; 
 		$data['article_modified_date'] = @$data['profile_modified_date']; 

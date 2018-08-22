@@ -199,7 +199,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 						$keyList[$key] = $linksData[$urlKey];
 						$fieldset = new Ayoola_Form_Element();
 						$fieldset->addElement( array( 'name' => 'title', 'label' => '', 'data-html' => true, 'placeholder' => $title, 'type' => 'InputText', 'multiple' => 'multiple', 'style' => 'width:100%', 'value' => trim( $title, "\r\n\t " ) ) );
-						$fieldset->addElement( array( 'name' => 'url', 'label' => '', 'onchange' => 'if( this.value == \'\' ){ a = prompt( \'New Url\', \'/url\' ); var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'placeholder' => $url, 'type' => 'Select', 'multiple' => 'multiple', 'style' => 'width:100%', 'value' => trim( $url ) ), array( $url => $url ) + $pages + array( '' => 'Custom URL' ) );
+						$fieldset->addElement( array( 'name' => 'url', 'label' => '', 'onchange' => 'if( this.value == \'\' ){ a = prompt( \'New Url\', \'/url\' ); var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'placeholder' => $url, 'type' => 'Select', 'multiple' => 'multiple', 'style' => 'width:100%', 'value' => trim( $url ) ), array_unique( array( $url => $url ) + $pages + array( '' => 'Custom URL' ) ) );
 						$fieldset->wrapper = 'white-background';
 					//	var_export( $url );
 						$counter++;

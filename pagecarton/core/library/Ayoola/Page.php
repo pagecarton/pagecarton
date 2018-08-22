@@ -564,7 +564,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     public static function getCurrentUrl()
     {
 		$queryString = self::buildQueryStrings();
-		$currentUrl = rtrim( Ayoola_Application::getPresentUri(), '/' );
+		$currentUrl = rtrim( Ayoola_Application::getRequestedUri(), '/' );
 	//	if
 		switch( Ayoola_Application::$mode )
 		{
@@ -608,8 +608,8 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		//	var_export( $url );
 			return $url;
 		}
-		$currentUrl = Ayoola_Application::getRequestedUri();
-//		$currentUrl = self::getCurrentUrl();
+	//	$currentUrl = Ayoola_Application::getRequestedUri();
+		$currentUrl = self::getCurrentUrl();
 	//	var_export( $currentUrl );
 		$url .= 'previous_url=' . urlencode( Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . Ayoola_Page::getDefaultDomain() .  self::getPortNumber() . '' . $currentUrl );
 		return $url;

@@ -55,8 +55,9 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
 		
 		//	var_export( $this->getFilename() );
             $url = @$_REQUEST['url'];
+            $themeName = strtolower( $data['layout_name'] );
             
-            $allPages = self::getPages( $data['layout_name'], 'list' );
+            $allPages = self::getPages( $themeName, 'list' );
             $allPages = array_combine( $allPages, $allPages );
             if( ! in_array( $url, $allPages ) )
             {
@@ -94,14 +95,14 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
             {
                 $values['new_page'] = '/index';
             }
-            $from = 'documents/layout/' . $data['layout_name'] . '' . $values['old_page'] . '.html';
+            $from = 'documents/layout/' . $themeName . '' . $values['old_page'] . '.html';
         //    var_export( $from );
             if( ! $from = Ayoola_Loader::getFullPath( $from, array( 'prioritize_my_copy' => true ) ) )
             {
                 $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
                 return false;   
             }
-            $to = Ayoola_Doc_Browser::getDocumentsDirectory() . '/layout/' . $data['layout_name'] . '' . $values['new_page'] . '.html';
+            $to = Ayoola_Doc_Browser::getDocumentsDirectory() . '/layout/' . $themeName . '' . $values['new_page'] . '.html';
 
             if( is_file( $to ) )
             {
@@ -115,6 +116,24 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
             if( copy( $from, $to ) )
             {
                 $this->setViewContent( '<p class="goodnews">"' . $values['new_page'] . '" created successfully.</p>', true ); 
+                $fPaths = array();
+                $tPaths = array();
+            //    $themeName = strtolower( $data['layout_name'] );
+                $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $values['old_page'] . '/include';
+                $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $values['old_page'] . '/template';
+                $fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $values['old_page'] . '/data_json';
+                $tPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $values['new_page'] . '/include';
+                $tPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $values['new_page'] . '/template';
+                $tPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $values['new_page'] . '/data_json';
+                foreach( $fPaths as $key => $each )
+                {
+                    if( $from = Ayoola_Loader::getFullPath( $each, array( 'prioritize_my_copy' => true ) ) )
+                    {
+                        $to = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $tPaths[$key];
+                        Ayoola_Doc::createDirectory( dirname( $to ) );
+                        copy( $from, $to );
+                    }
+                }
             }
             else
             {

@@ -195,6 +195,10 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		}
 	//	var_export( $values );
 		$this->_values = $values;
+		if( $this->_values == array ( 0 => false, ) )
+		{
+			$this->_values = array();
+		}
     } 
 	
     /**

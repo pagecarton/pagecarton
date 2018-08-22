@@ -121,7 +121,7 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 			$mailInfo['subject'] = 'New Profile Created';
 			$mailInfo['body'] = 'A new profile name "' . $values['display_name'] . '", has been created with the profile module. 
 			
-			You can view the new profile by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '/' . Ayoola_Application::getUrlPrefix() . '' . $values['profile_url'] . '.
+			You can view the new profile by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '.
 			';
 			Application_Log_View_General::log( array( 'type' => 'New profile', 'info' => array( $mailInfo ) ) );
 			try

@@ -36,17 +36,17 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
     /**
      * 
      */
-	protected static $_universalTlds = array( 'com', 'net', 'org', 'co.uk', 'info', 'biz' );
+	protected static $_universalTlds = array( 'com', 'net', 'org', 'com.ng', 'info' );
 	
     /**
      * 
      */
-	protected static $_defaultPrefixes = array( 'i', 'our', 'my', 'the', 'e-', 'first', 'free', 'cheap', 'premium' );
+	protected static $_defaultPrefixes = array( 'i', 'our', 'my', 'the', 'e', 'first', 'free', 'cheap', 'premium' );
 	
     /**
      * 
      */
-	protected static $_defaultsuffixes = array( 'online', 'net', '247', 'forever', 'international' );
+	protected static $_defaultsuffixes = array( 'online', 'net', '247', 'forever', 'international', 'ing', 's' );
 	
     /**
      * 
@@ -90,6 +90,7 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 		if( @$response = self::getResponse( $server, $domain ) )
 		{
 			if( stripos( $response, 'no match for' ) !== FALSE ){ return false; }
+			if( stripos( $response, 'NOT FOUND' ) === 0 ){ return false; }
 			
 			switch( trim( strtolower( $response ) ) )
 			{
@@ -98,6 +99,8 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 				return false;
 				break;
 			}
+		//	var_export( $domain . '<br>' );
+		//	var_export( $response . '<br>' );
 			return true;
 		}
 		else
@@ -118,9 +121,11 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 			{
 				return true;
 			}
+	//		var_export( $server . '<br>' );
+		//	var_export( strlen( $response ) . '<br>' );
 			$response = str_ireplace( $domain, '', $response );
 			$response = strlen( $response );
-	//		var_export( $response );
+//			var_export( $response . '<br>' );
 			if( $response == $whoisInfo['badnews_length'] ){ return false; }
 			return true;
 		}
@@ -192,6 +197,23 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 			
 			$suggestions = array();
 			$unavailable = array();
+			
+			$unavailableList = null;
+			foreach( $domains as $domain )
+			{
+			//	if( self::check( $domain ) )
+				if( self::check( $domain ) )
+				{
+					$unavailable[$domain] = $domain . $price;
+			//		$this->getObjectStorage( 'unavailable' )->store( $unavailable );
+					$unavailableList .= '<li style="list-style:none;display:inline-block;padding-right:1em;min-width:100px;">' . $domain . '</li>';
+				}
+				else
+				{
+				//	$this->getObjectStorage( 'unavailable' )->clear();
+					$suggestions[$domain] = $domain . $price;
+				}
+			}
 
 			//	Suggest universal tld
 			//	Filter the price to display unit in domain price
@@ -201,14 +223,30 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 		//	$value['price'] = $filter->filter( $value['price'] );
 			foreach( static::$_universalTlds as $each )
 			{
-				$price = ' (' . $filter->filter( self::getTldPrice( $each ) ) . '/yr) ';
+				if( self::getTldPrice( $each ) )
+				{
+			//		self::v( $each );
+					$price = ' (' . $filter->filter( self::getTldPrice( $each ) ) . '/yr) ';
+				}
+				else
+				{
+					$price = null;
+				}
 				$each = $subPart . '.' . $each;
 				if( ! self::check( $each ) )
 				{
 					$suggestions[$each] = $each . $price;
 				}
 			}
-			$price = ' (' . $filter->filter( self::getTldPrice( $tld ) ) . '/yr) ';
+			if( self::getTldPrice( $tld ) )
+			{
+		//		self::v( $each );
+				$price = ' (' . $filter->filter( self::getTldPrice( $tld ) ) . '/yr) ';
+			}
+			else
+			{
+				$price = null;
+			}
 			
 			//	Suggest prefix
 			foreach( static::$_defaultPrefixes as $each )
@@ -229,26 +267,11 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 					$suggestions[$each] = $each . $price;
 				}
 			}
-			
-			$unavailableList = null;
-			foreach( $domains as $domain )
-			{
-			//	if( self::check( $domain ) )
-				if( self::check( $domain ) )
-				{
-					$unavailable[$domain] = $domain . $price;
-			//		$this->getObjectStorage( 'unavailable' )->store( $unavailable );
-					$unavailableList .= '<li style="list-style:none;display:inline-block;padding-right:1em;min-width:100px;">' . $domain . '</li>';
-				}
-				else
-				{
-				//	$this->getObjectStorage( 'unavailable' )->clear();
-					$suggestions[$domain] = $domain . $price;
-				}
-			}
 		}
 		$suggestions = @$suggestions ? : $this->getObjectStorage( 'suggestions' )->retrieve();
 		$unavailable = @$unavailable ? : $this->getObjectStorage( 'unavailable' )->retrieve();
+	//	var_export( $domains );
+	//	var_export( $suggestions );
 		if( @$suggestions || @$unavailable )
 		{
 			$fieldset = new Ayoola_Form_Element;		

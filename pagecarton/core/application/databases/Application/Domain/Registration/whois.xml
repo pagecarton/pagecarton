@@ -436,7 +436,7 @@
     <TABLE_ROW ROW_ID="73">
       <TABLE_FIELD FIELD_KEY="server"><![CDATA[whois.nic.net.ng]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="extension"><![CDATA[ng]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="badnews_length"><![CDATA[1020]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="badnews_length"><![CDATA[1024]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="whois_id"><![CDATA[73]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="74">

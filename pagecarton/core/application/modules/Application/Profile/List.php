@@ -48,8 +48,11 @@ class Application_Profile_List extends Application_Profile_Abstract
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = 'List of Profiles on this Application';
-		$list->setData( Application_Profile_Table::getInstance()->select() );
-	//	$list->setListOptions( array( 'Creator' => '<a title="Create profile..." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Creator/">+</a>' ) );
+		$table = "Application_Profile_Table";
+		$table = $table::getInstance( $table::SCOPE_PRIVATE );
+		$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+		$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+		$list->setData( $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) ) );  
 		$this->setIdColumn( 'profile_url' );
 		$list->setKey( 'profile_url' );
 		$list->setNoRecordMessage( 'You have not created any profile yet. <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Creator/">Create!</a>' );

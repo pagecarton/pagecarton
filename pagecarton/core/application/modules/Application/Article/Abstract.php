@@ -180,7 +180,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      * 
      */
 	public static function sanitizeData( &$data )
-    {
+    {  
 
 	}
 	
@@ -430,7 +430,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					//	Check file before it is included.
 				// Get the shell output from the syntax check command
 					if( $data2 = json_decode( file_get_contents( $filename ), true ) )
-
 					{
 						$data += $data2;
 					}
@@ -708,7 +707,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public static function getDefaultPostView( $data )
     {
 
-		if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )
+		if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url_uri'] ) )
 		{
 
 		}
@@ -730,7 +729,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$html = null;
 		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777; margin-bottom:3em;">';
 		$html .= '<' . $link . '>';
-		$html .= '<div  class="pc_theme_parallax_background" style="background-image: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . Ayoola_Application::getUrlPrefix() . $image . '\'); ">';
+		$html .= '<div  class="pc_theme_parallax_background" style="background-image: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . $image . '\'); ">';
         $html .= $data['css_class_of_inner_content'] ? '<div class="' .$data['css_class_of_inner_content'] . '">' : null;
 		$html .= '<div style="float:right;background-color:#000;padding:10px;border-radius:10px;">' . $data['post_type'] . '</div>';
 		$html .= '<' . $header . '>' . $data['article_title'] . '</' . $header . '>';
@@ -1128,7 +1127,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$values['true_post_type'] = $values['article_type'];
 			$values['post_type'] = $postTypesAvailable[$values['article_type']] ? : $values['article_type'];
 		}
-		if( ! $postTypeInfo && ! array_key_exists( $articleTypeWeUsing, $options ) && ! array_key_exists( $articleTypeWeUsing, Application_Article_Type_TypeAbstract::$presetTypes && self::hasPriviledge( array( 99, 98 ) ) ) )
+//		self::v( $articleTypeWeUsing );
+//		self::v( Application_Article_Type_TypeAbstract::$presetTypes );
+		if( ! $postTypeInfo && ! array_key_exists( $articleTypeWeUsing, $options ) && ! array_key_exists( $articleTypeWeUsing, Application_Article_Type_TypeAbstract::$presetTypes ) && ! empty( $_REQUEST['article_type'] ) && ! empty( $_REQUEST['true_post_type'] ) && self::hasPriviledge( array( 99, 98 ) ) )
 		{
 			//	auto setup post type
 			$postTypeInfo = array( 
@@ -1236,7 +1237,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$fieldset->hashElementName = $this->hashFormElementName;
 
 		//	internal forms to use
-		$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array();
+		$features = is_array( @$postTypeInfo['post_type_options'] ) && ( count( $postTypeInfo['post_type_options'] ) !== 1 || $postTypeInfo['post_type_options'][0] !== '' ) ? $postTypeInfo['post_type_options'] : array( 'description', 'cover-photo', 'category', 'privacy', );  
+	//	self::v( $features );   
 		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
 		$features[] = $values['true_post_type'];
 		$featuresPrefix[] = '';
@@ -1879,3 +1881,4 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
     } 
 	// END OF CLASS
 }
+

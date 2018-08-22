@@ -399,7 +399,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					unset( $values[$key] );
 
 					//	quick fix for older posts that the dates were not set in the table
-					if( is_array( $data ) && empty( $data['article_creation_date'] ) && ! empty( $data['article_url'] ) )
+					if( is_array( $data ) && empty( $data['article_creation_date'] ) && empty( $data['profile_modified_date'] ) && ! empty( $data['article_url'] ) )
 					{
 						if( $data = $this->retrieveArticleData( $data ) )
 						{
@@ -408,6 +408,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						}			
 					}
 					static::sanitizeData( $data );
+					if( ! $data )
+					{
+						continue;
+					}
 			//		var_export( $data );
 		//			$oldData = $data;
 			//		$dataX = $this->retrieveArticleData( $data );
@@ -1350,9 +1354,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		@$categoryId = $this->getParameter( 'category' ) ? : $categoryId;
 		@$categoryId = $this->getParameter( 'category_id' ) ? : $categoryId;
 		@$categoryId = $this->getParameter( 'category_name' ) ? : $categoryId;
-		if( $this->getParameter( 'post_with_same_category' ) && @Ayoola_Application::$GLOBAL['category_name'] )
+		if( $this->getParameter( 'post_with_same_category' ) && @Ayoola_Application::$GLOBAL['post']['category_name'] )
 		{
-			$categoryId = @Ayoola_Application::$GLOBAL['category_name'];
+			$categoryId = @Ayoola_Application::$GLOBAL['post']['category_name'];
 		}
 //		var_export( $this->getParameter( 'category_name' ) );
 	//	self::v( $categoryId );
@@ -1409,6 +1413,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$pathToSearch = $path;
 		$output = array();
 		$whereClause = array();
+	//	var_export( Ayoola_Application::$GLOBAL );
 		if( $this->getParameter( 'show_post_by_me' ) )
 		{
 			if( ! Ayoola_Application::getUserInfo( 'username' ) )
@@ -1420,10 +1425,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( Ayoola_Application::getUserInfo( 'username' ) );
 			$this->setParameter( array( 'username_to_show' => Ayoola_Application::getUserInfo( 'username' ) ) );
 		}
-		elseif( $this->getParameter( 'show_profile_posts' ) && @Ayoola_Application::$GLOBAL['profile_url'] )
+		elseif( $this->getParameter( 'show_profile_posts' ) && @Ayoola_Application::$GLOBAL['profile']['profile_url'] )
 		{
-		//	var_export( Ayoola_Application::$GLOBAL['username'] );  
-			$this->setParameter( array( 'profile_to_show' => strtolower( Ayoola_Application::$GLOBAL['profile_url'] ) ) );
+		//	var_export( Ayoola_Application::$GLOBAL['post']['username'] );  
+			$this->setParameter( array( 'profile_to_show' => strtolower( Ayoola_Application::$GLOBAL['profile']['profile_url'] ) ) );
 		}
 		elseif( $this->getParameter( 'search_mode' ) && @$_REQUEST['q'] )
 		{
@@ -1519,13 +1524,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	var_export( $path );
 	//	self::v( $path );
 		//		self::v( $categoryName );      
-		if( $this->getParameter( 'post_with_same_true_post_type' ) && @Ayoola_Application::$GLOBAL['true_post_type'] )
+		if( $this->getParameter( 'post_with_same_true_post_type' ) && @Ayoola_Application::$GLOBAL['post']['true_post_type'] )
 		{
-			$whereClause['true_post_type'][] = @Ayoola_Application::$GLOBAL['true_post_type'];
+			$whereClause['true_post_type'][] = @Ayoola_Application::$GLOBAL['post']['true_post_type'];
 		}
-		if( $this->getParameter( 'post_with_same_article_type' ) && @Ayoola_Application::$GLOBAL['post_with_same_article_type'] )
+		if( $this->getParameter( 'post_with_same_article_type' ) && @Ayoola_Application::$GLOBAL['post']['post_with_same_article_type'] )
 		{
-			$whereClause['post_with_same_article_type'][] = @Ayoola_Application::$GLOBAL['post_with_same_article_type'];
+			$whereClause['post_with_same_article_type'][] = @Ayoola_Application::$GLOBAL['post']['post_with_same_article_type'];
 		}
 	
 		if( $categoryId || $categoryName )
@@ -1701,20 +1706,22 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	self::v( $_REQUEST );
 					if( empty( $_REQUEST['pc_load_old_posts']))
 					{
-						$table = $table::getInstance();
-						$this->_dbData = $table->select();
-		//				var_export( $this->_dbData );    
+						$table = $table::getInstance( $table::SCOPE_PRIVATE );
+						$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+						$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+						$this->_dbData = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) );
+				//		var_export( $this->_dbData );    
 					}  
 					else
 					{
 						$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );
-						krsort( $this->_dbData );
+						krsort( $this->_dbData ); 
 					}
 	//					var_export( $this->_dbData );        
 				//	self::v( Ayoola_Doc::getFilesRecursive( self::getFolder() ) );
 				//	var_export( count( $files ) );  
 					//	Removing dependence on Ayoola_Api for showing posts
-				//	$path = self::getFolder();
+				//	$path = self::getFolder();   
 				}
 				else
 				{

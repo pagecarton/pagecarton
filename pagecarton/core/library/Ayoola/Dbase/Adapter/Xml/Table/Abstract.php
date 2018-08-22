@@ -203,7 +203,9 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
     public function getTableCacheDirectory( $tableName )
     {
 		$name = explode( '_', get_class( $this ) );
-		return self::getCacheDirectory() . DS  . array_pop( $name ) . DS . str_ireplace( '_', DS, $this->className . DS . $tableName );
+    $accessibility = $this->getAccessibility();
+  //  var_export( $accessibility );
+		return self::getCacheDirectory() . DS  . array_pop( $name ) . DS . str_ireplace( '_', DS, $this->className . DS . $tableName ) . DS . $accessibility;
     }
 		
     /**

@@ -104,7 +104,7 @@ class Application_Message_ShowAll extends Application_Message_Abstract
 				$this->_dbWhereClause = array( 'to' => $profileInfo['profile_url'] );
 			break;
 			default:
-				$reference = array_map( 'strtolower', array( $profileInfo['profile_url'], @Ayoola_Application::$GLOBAL['profile_url'], @$_GET['to'] ) );
+				$reference = array_map( 'strtolower', array( $profileInfo['profile_url'], @Ayoola_Application::$GLOBAL['profile']['profile_url'], @$_GET['to'] ) );
 				$this->_dbWhereClause = array( 
 												'from' => $reference,
 												'to' => $reference,
@@ -140,7 +140,7 @@ class Application_Message_ShowAll extends Application_Message_Abstract
 		}
 		$this->_parameter['markup_template'] = null;  
 		$html = null;
-		$to = @Ayoola_Application::$GLOBAL['profile_url'] ? : @$_GET['to'];
+		$to = @Ayoola_Application::$GLOBAL['profile']['profile_url'] ? : @$_GET['to'];
 		$myProfiles = array_map( 'strtolower', Ayoola_Application::getUserInfo( 'profiles' ) );
 		if( in_array( strtolower( $to ), $myProfiles ) )
 		{ 

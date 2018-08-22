@@ -44,13 +44,15 @@ class Application_User_Editor extends Application_User_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifier() ){ return false; }
-			if( $data['username'] !== Ayoola_Application::getUserInfo( 'username' )  && ! self::hasPriviledge( 98 ) )
+		//	var_Export( $data );
+		//	var_Export( self::hasPriviledge( 98 ) );
+			if( $data['username'] !== Ayoola_Application::getUserInfo( 'username' ) && ! self::hasPriviledge( 98 ) )
 			{
 				//	We are not the owner of data and we are not admin
 				return false;
 			}
+//			var_export( $data );
 			if( ! $data = self::getIdentifierData() ){ return false; }
-		//	var_export( $data );
 			
 			if( $data['username'] !== Ayoola_Application::getUserInfo( 'username' )  && ! self::hasPriviledge( 98 ) )
 			{

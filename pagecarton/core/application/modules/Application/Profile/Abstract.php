@@ -142,7 +142,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 					continue;
 				}
 				self::$_myProfiles[] = $url;
-			}
+			} 
 		}
 */
 		
@@ -181,6 +181,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
      */
 	public static function saveProfile( $values )
     {
+	//	var_export( $values );
 		if( empty( $values['profile_url'] ) )
 		{
 			return false;
@@ -229,11 +230,11 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 	public static function getProfileInfo( $profileUrL )
     {
 		$profileUrL = strtolower( $profileUrL );
-		if( $profileData = Application_Profile_Table::getInstance()->selectOne( null, array( 'profile_url' => $profileUrL ) ) )
+		if( $profileData = Application_Profile_Table::getInstance()->selectOne( null, array( 'profile_url' => $profileUrL ), array( 'x' => 'work-around-to-avoid-stupid-cache' ) ) )
 		{
 			$profileData = $profileData['profile_data'];
 		}
-		//	var_export( $profileUrL );
+//			var_export( Application_Profile_Table::getInstance()->selectOne() );
 	//		var_export( $profileData );
 		$table = Ayoola_Access_AuthLevel::getInstance();
 		if( $profileData['access_level'] != 1 && $profileData['access_level'] != 0 )
@@ -281,7 +282,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 
 			}
 		//	var_export( $profileUrl );
-			$url = $profileUrl[$this->getIdColumn()] ? : ( @$_GET['profile_url'] ? : Ayoola_Application::$GLOBAL['profile_url'] );  
+			$url = $profileUrl[$this->getIdColumn()] ? : ( @$_GET['profile_url'] ? : Ayoola_Application::$GLOBAL['profile']['profile_url'] );  
 		//	var_export( $url );
 			$data = self::getProfileInfo( $url );
 		//	var_export( $data );
@@ -305,75 +306,8 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		$form->oneFieldSetAtATime = false;
 		$form->submitValue = $submitValue ;
 		$fieldset = new Ayoola_Form_Element;
-		if( is_null( $values ) )
-		{
-			
-			if( empty( $_GET['subdomain'] ) )
-			{
-				Application_Javascript::addCode
-				(
-					'
-						ayoola.addShowProfileUrl = function( target )
-						{
-							var element = document.getElementById( "element_to_show_profile_url" );
-							element = element ? element : document.createElement( "div" );
-							element.id = "element_to_show_profile_url";
-							var a = false;
-							if( target.value )
-							{
-								a = true;
-							}
-							if( a )
-							{
-								element.innerHTML = "<span class=\'\' style=\'font-size:x-small\'>The profile URL will be: <a target=\'_blank\' href=\'http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/" + target.value + "\'>http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/" + target.value + "</a></span>";
-							}  
-							else
-							{
-							//	element.innerHTML = "<span class=\'badnews\'>Please enter a valid profile URL in the space provided... (e.g. MyStyle) </span>";  
-							}
-							target.parentNode.insertBefore( element, target.nextSibling );
-						}
-					'
-				);
-			}
-			else
-			{
-				Application_Javascript::addCode
-				(
-					'
-						ayoola.addShowProfileUrl = function( target )
-						{
-							var element = document.getElementById( "element_to_show_profile_url" );
-							element = element ? element : document.createElement( "div" );
-							element.id = "element_to_show_profile_url";
-							var a = false;
-							if( target.value )
-							{
-								a = true;
-							}
-							if( a )
-							{
-								element.innerHTML = "<span class=\'\' style=\'font-size:x-small\'>Site URL would be: <a target=\'_blank\' href=\'http://" + target.value + ".' . Ayoola_Application::getDomainName() . '\'>http://" + target.value + ".' . Ayoola_Application::getDomainName() . '</a></span>";
-							}  
-							else
-							{
-							//	element.innerHTML = "<span class=\'badnews\'>Please enter a valid profile URL in the space provided... (e.g. MyStyle) </span>";  
-							}
-							target.parentNode.insertBefore( element, target.nextSibling );
-						}
-					'
-				);
-			}
-			$fieldset->addElement( array( 'name' => 'profile_url', 'style' => '', 'label' => 'Handle', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'e.g. MyPage', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
-		//	$fieldset->addFilter( 'profile_url','Username' );
-			$fieldset->addRequirement( 'profile_url', array( 'NotEmpty' => array( 'badnews' => 'The profile URL cannot be left blank.', ), 'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^0-9a-zA-Z-_', ), 'WordCount' => array( 4,20 ), 'DuplicateUser' => array( 'Username', 'username', 'badnews' => 'Someone else has already chosen "%variable%"', ) ) );
-		//	$fieldset->addElement( array( 'name' => 'name', 'placeholder' => 'Give this page a name', 'type' => 'InputText', 'value' => @$values['name'] ) );
-			
-		}
 		if( empty( $_GET['subdomain'] ) )
 		{
-			//	Profile picture
-			$fieldset->addElement( array( 'name' => 'display_picture', 'data-document_type' => 'image', 'label' => 'Display Picture', 'type' => 'Document', 'value' => @$values['display_picture'], ) ); 
 		//	$fieldset->addRequirement( 'display_picture', array( 'NotEmpty' => array( 'badnews' => 'Please select a valid file to upload...', ) ) );
 			
 			//	Profile type
@@ -445,7 +379,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 				//	continue;
 				}
 				$customForms = $class->getForm()->getFieldsets();   
-				$form->addFieldset( $fieldset ); 
+			//	$form->addFieldset( $fieldset ); 
 				foreach( $customForms as $each ) 
 				{
 					$each->addLegend( $legend );
@@ -456,15 +390,20 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			{
 				$access = new Ayoola_Access();
 				$userInfo = $access->getUserInfo();
-				$fieldset->addElement( array( 'name' => 'display_name', 'placeholder' => 'Display Name e.g. John Smith', 'type' => 'InputText', 'value' => @$values['display_name'] ? : trim( $userInfo['firstname'] . ' ' . $userInfo['lastname'] ) ) );
+				$fieldset->addElement( array( 'name' => 'display_name', 'label' => 'Display Name', 'onkeyup' => '', 'placeholder' => 'Display Name e.g. John Smith', 'type' => 'InputText', 'value' => @$values['display_name'] ? : trim( $userInfo['firstname'] . ' ' . $userInfo['lastname'] ) ) );
+				
 				$fieldset->addRequirement( 'display_name', array( 'NotEmpty' => array( 'badnews' => 'Please choose a display name', ), 'WordCount' => array( 2, 50 ) ) );
-				$fieldset->addElement( array( 'name' => 'profile_description', 'placeholder' => 'Enter your profile description here...', 'type' => 'TextArea', 'value' => @$values['profile_description'] ) );
+
+				$fieldset->addElement( array( 'name' => 'profile_description', 'label' => 'Profile Description', 'placeholder' => 'Enter your profile description here...', 'type' => 'TextArea', 'value' => @$values['profile_description'] ) );
+
+				//	Profile picture
+				$fieldset->addElement( array( 'name' => 'display_picture', 'data-document_type' => 'image', 'label' => 'Display Picture', 'type' => 'Document', 'value' => @$values['display_picture'], ) ); 
+
 				$fieldset->addLegend( $legend );
-				$form->addFieldset( $fieldset ); 
+		//		$form->addFieldset( $fieldset ); 
 			}
 			else
 			{
-				$form->addFieldset( $fieldset ); 
 				foreach( $customForms as $each ) 
 				{
 					$each->addLegend( $legend );
@@ -474,8 +413,99 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		}
 		else
 		{
-			$form->addFieldset( $fieldset ); 
+		//	$form->addFieldset( $fieldset ); 
 		}
+		Application_Javascript::addCode
+		(
+			'
+				ayoola.events.add
+				(
+					window, "load", function()
+					{ 
+						var a = document.getElementsByName( "display_name" );
+						if( ! a.length )
+						{
+							var a = document.getElementsByName( "' . Ayoola_Form::hashElementName( 'display_name' ) . '" );
+						}
+						ayoola.events.add( a[0], "keyup", function()
+						{
+							var a = document.getElementById( \'profile_url_field\' );
+							a.value = this.value; 
+							ayoola.addShowProfileUrl( a );
+						});
+					} 
+				);
+			'
+		);
+		if( is_null( $values ) )
+		{
+			
+			if( empty( $_GET['subdomain'] ) )
+			{
+				Application_Javascript::addCode
+				(
+					'
+						ayoola.addShowProfileUrl = function( target )
+						{
+							var element = document.getElementById( "element_to_show_profile_url" );
+							element = element ? element : document.createElement( "div" );
+							element.id = "element_to_show_profile_url";
+							var a = false;
+							var xx = target.value;
+					//		alert( xx.replace(/[^a-zA-Z0-9_]*/g, "" ) );
+							target.value = xx.replace(/[^a-zA-Z0-9_]*/g, "" );
+							if( target.value )
+							{
+								a = true;
+							}
+							if( a )
+							{
+								element.innerHTML = "<span class=\'\' style=\'font-size:x-small\'>The profile URL will be: <a target=\'_blank\' href=\'http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/" + target.value + "\'>http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/" + target.value + "</a></span>";
+							}  
+							else
+							{
+							//	element.innerHTML = "<span class=\'badnews\'>Please enter a valid profile URL in the space provided... (e.g. MyStyle) </span>";  
+							}
+							target.parentNode.insertBefore( element, target.nextSibling );
+						}
+					'
+				);
+			}
+			else
+			{
+				Application_Javascript::addCode
+				(
+					'
+						ayoola.addShowProfileUrl = function( target )
+						{
+							var element = document.getElementById( "element_to_show_profile_url" );
+							element = element ? element : document.createElement( "div" );
+							element.id = "element_to_show_profile_url";
+							var a = false;
+							if( target.value )
+							{
+								a = true;
+							}
+							if( a )
+							{
+								element.innerHTML = "<span class=\'\' style=\'font-size:x-small\'>Site URL would be: <a target=\'_blank\' href=\'http://" + target.value + ".' . Ayoola_Application::getDomainName() . '\'>http://" + target.value + ".' . Ayoola_Application::getDomainName() . '</a></span>";
+							}  
+							else
+							{
+							//	element.innerHTML = "<span class=\'badnews\'>Please enter a valid profile URL in the space provided... (e.g. MyStyle) </span>";  
+							}
+							target.parentNode.insertBefore( element, target.nextSibling );
+						}
+					'
+				);
+			}
+			$fieldset->addElement( array( 'name' => 'profile_url', 'id' => 'profile_url_field', 'label' => 'Handle', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'e.g. MyPage', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
+		//	$fieldset->addFilter( 'profile_url','Username' );  
+			$fieldset->addRequirement( 'profile_url', array( 'NotEmpty' => array( 'badnews' => 'The profile URL cannot be left blank.', ), 'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^0-9a-zA-Z-_', ), 'WordCount' => array( 4,20 ), 'DuplicateUser' => array( 'Username', 'username', 'badnews' => 'Someone else has already chosen "%variable%"', ) ) );
+		//	$fieldset->addElement( array( 'name' => 'name', 'placeholder' => 'Give this page a name', 'type' => 'InputText', 'value' => @$values['name'] ) );   
+			
+		}
+		$form->addFieldset( $fieldset );  
 	
 		$form->setFormRequirements( 'user-registration' );
 		

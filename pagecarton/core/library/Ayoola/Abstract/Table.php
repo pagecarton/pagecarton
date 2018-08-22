@@ -446,7 +446,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			$class->initOnce();
 			if( ! $formV = $class->getForm()->getValues() )
 			{
-				$this->setViewContent( '<h2 style="margin: 1em 0;">Create a profile to continue</h2>' );
+				$this->setViewContent( '<h2 style="margin: 1em 0;">Tell us about yourself first...</h2>' );
 				$this->setViewContent( $class->view() );
 				return false;
 			}

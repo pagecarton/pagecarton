@@ -169,18 +169,31 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
 		//	Refreshes the url prefix just in case we have imported new site
 //	var_export( $this->getParameter( 'url_prefix' ) );
+//	var_export( Ayoola_Application::getUrlPrefix() );
 	//	var_export( strpos( $content, '//' ) );
-		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() )
+	//	var_export( $content );  
+		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() ||  Ayoola_Application::getUrlPrefix() )
 //		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
 		{
+			$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), "url(" . $this->getParameter( 'url_prefix' ), '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), "url(" . Ayoola_Application::getUrlPrefix(), );
+			//	fix issue of $this->getParameter( 'url_prefix' ) = /test and Ayoola_Application::getUrlPrefix() = /test/store
+			if( stripos( $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() ) === 0 )
+			{
+				$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), "url(" . $this->getParameter( 'url_prefix' ), '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), "url(" . Ayoola_Application::getUrlPrefix(), );
+			}
+			elseif( stripos( Ayoola_Application::getUrlPrefix(), $this->getParameter( 'url_prefix' ) ) === 0 )
+			{
+				$search = array( '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), "url(" . Ayoola_Application::getUrlPrefix(), '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), "url(" . $this->getParameter( 'url_prefix' ), );
+			}
 		//	$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), );
 		//	$replace = array( '"' . Ayoola_Application::getUrlPrefix(), "'". Ayoola_Application::getUrlPrefix(), );
-			$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), "url(" . $this->getParameter( 'url_prefix' ), '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), "url(" . Ayoola_Application::getUrlPrefix(), );
 			$replace = array( '"', "'", "url(", '"', "'", "url(", );
 			$content = str_ireplace( $search, $replace, $content );
+		//	var_export( $content );  
 			$search = array( '"/', "'/", "url(/", Ayoola_Application::getUrlPrefix() . '//' );
 			$replace = array( '"' . Ayoola_Application::getUrlPrefix() . '/', "'". Ayoola_Application::getUrlPrefix() . '/', "url(". Ayoola_Application::getUrlPrefix() . '/', '//' );
 			$content = str_ireplace( $search, $replace, $content );
+
 	//		$replace = Ayoola_Application::getUrlPrefix();
 		}
 		
@@ -424,10 +437,9 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			
 			
 			$html .= ( isset( $object['editable'] ) ? $object['editable'] : '
-			<div style="">
+			
 			<h3>Lorem Ipsum dolor</h3>
 			<p>Vivamus sit amet dolor sit amet nunc maximus finibus. Donec vel ornare leo, eget gravida orci. Etiam vitae rutrum nisi. Mauris auctor velit et ultricies mollis. Donec in mattis lectus. In hac habitasse platea dictumst. Sed ultricies magna ut ligula fringilla facilisis. Ut sodales erat ut libero rhoncus hendrerit. Vivamus nunc magna, finibus vel velit in, tempus venenatis dolor. Aenean a leo non tellus semper ultricies eget quis enim.</p>
-			</div>
 			' ) .
 			
 			'</div>';  

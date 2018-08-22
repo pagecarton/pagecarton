@@ -816,7 +816,7 @@ class Ayoola_Application
 							//	var_export( $articleInfo['username'] );
 							}
 						}
-						self::$GLOBAL += is_array( $articleInfo ) ? $articleInfo : array(); // store this in the global var 
+						self::$GLOBAL['post'] = is_array( $articleInfo ) ? $articleInfo : array(); // store this in the global var 
 						
 						
 						//	introducing x_url so that user can determine the url to display a post
@@ -1095,7 +1095,7 @@ class Ayoola_Application
 							Ayoola_Page::$description = $userInfo['profile_description'];
 							Ayoola_Page::$thumbnail = $userInfo['display_picture'];
 
-							self::$GLOBAL += $userInfo; // store this in the global var 
+							self::$GLOBAL['profile'] = $userInfo; // store this in the global var 
 							self::$_runtimeSetting['real_url'] = rtrim( '/profile/' . implode( '/', $a ), '/' );
 						//	var_export( self::$_runtimeSetting['real_url'] );
 							self::$mode = 'profile';
@@ -1332,7 +1332,7 @@ class Ayoola_Application
 		Application_Javascript::addCode  
 		( 
 			"
-			ayoola.pcPathPrefix = '" . self::getUrlPrefix() . "';  
+			ayoola.pcPathPrefix = '" . self::getUrlPrefix() . "';     
 			ayoola.events.add
 			(
 				window, 'load', function(){ ayoola.setArtificialQueryString( '" . Ayoola_Application::getRuntimeSettings( 'real_url' ) . "' ); } 

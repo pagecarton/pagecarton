@@ -1084,7 +1084,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 							{
 								$parameterOptions[@$advanceParameters['advanced_parameter_name'][$i]] = @$advanceParameters['advanced_parameter_name'][$i];
 							}
-							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
+							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'onchange' => 'if( this.value == \'\' ){ a = prompt( \'Custom Parameter Name\', \'\' ); var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
 							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'TextArea', 'style' => 'width:100%;', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
 							$fieldset->allowDuplication = true;  
 							$fieldset->placeholderInPlaceOfLabel = true;
@@ -1095,7 +1095,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						{
 					//		var_export( $advanceParameters['advanced_parameter_name'][$i] );
 					//		var_export( $parameterOptions );  
-							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
+							$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Parameter Name', 'onchange' => 'if( this.value == \'\' ){ a = prompt( \'Custom Parameter Name\', \'\' ); var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
 							$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'InputText', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
 							$fieldset->allowDuplication = true;  
 							$fieldset->placeholderInPlaceOfLabel = true;
@@ -1116,7 +1116,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$authLevelOptions[0] = 'Users not logged in only';  
 				$authLevelOptions[1] = 'Signed in users only';  
 				$authLevelOptions[98] = 'Page Owners'; 
-				self::$_authLevelOptions =  $authLevelOptions;
+				self::$_authLevelOptions =  $authLevelOptions;  
 			}
 		//	$options[97] = 'Page Owners Only';  
 			$fieldset = new Ayoola_Form_Element; 
