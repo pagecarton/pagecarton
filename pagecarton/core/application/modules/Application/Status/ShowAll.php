@@ -91,20 +91,20 @@ class Application_Status_ShowAll extends Application_Status_Abstract
 			//	hard-coded status page
 			$reference = $this->getParameter( 'reference' );		
 		}
-		elseif( $this->getParameter( 'reference_type' ) === 'post' && @Ayoola_Application::$GLOBAL['article_url'] )
+		elseif( $this->getParameter( 'reference_type' ) === 'post' && @Ayoola_Application::$GLOBAL['post']['article_url'] )
 		{
 			//	Get the article url
-			$reference = Ayoola_Application::$GLOBAL['article_url'];		
+			$reference = Ayoola_Application::$GLOBAL['post']['article_url'];		
 		}
 		elseif( $this->getParameter( 'show_post_by_me' ) )
 		{
 			//	Show for the current session user
 			$reference = Ayoola_Application::getUserInfo( 'username' );	 	
 		}
-		elseif( @Ayoola_Application::$GLOBAL['username'] )
+		elseif( @Ayoola_Application::$GLOBAL['profile']['username'] )
 		{
 			//	profile status page
-			$reference = Ayoola_Application::$GLOBAL['username'];		
+			$reference = Ayoola_Application::$GLOBAL['profile']['username'];		
 		}
 		$this->_dbWhereClause = @$reference ? array( 'reference' => $reference ) : $this->_dbWhereClause;
 	//	var_export( $this->_dbWhereClause ); 

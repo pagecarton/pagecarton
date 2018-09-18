@@ -24,7 +24,7 @@ class Application_Domain_UserDomain_List extends Application_Domain_UserDomain_A
      * 
      * @var string 
      */
-	  protected static $_objectTitle = 'My Domains';   
+	  protected static $_objectTitle = 'My Linked Domains';   
 
  
     /**
@@ -56,12 +56,13 @@ class Application_Domain_UserDomain_List extends Application_Domain_UserDomain_A
 		$list->setData( $this->getDbData() );
 		$list->setListOptions( 
 								array( 
-										    'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Creator/\', \'' . $this->getObjectName() . '\' );" title="">Link External Domain</a>',    
+										    'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Creator/\', \'' . $this->getObjectName() . '\' );" title="">My Domains</a>',    
+										    '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Creator/?external_domain=1\', \'' . $this->getObjectName() . '\' );" title="">Link External Domain</a>',    
 										    'Register' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Registration/\', \'' . $this->getObjectName() . '\' );" title="">Register Domain Name</a>',    
 									) 
 							);
 		$list->setKey( $this->getIdColumn() );
-		$list->setNoRecordMessage( 'No data added to this table yet.' );
+		$list->setNoRecordMessage( 'No domain has been linked to this account yet.' );
 		
 		$list->createList
 		(

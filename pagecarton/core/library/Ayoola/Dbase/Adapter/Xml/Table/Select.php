@@ -29,7 +29,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 {
 	
     /**
-     * Switch to true to rearrange the result array
+     * Switch to true to rearrange the result array  
      *
      * @var boolean
      */

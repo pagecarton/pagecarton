@@ -46,7 +46,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
      *
      * @var string
      */
-	protected static $checkoutStages = array( 0 => 'Payment Failed', 1 => 'Checkout Attempted', 2 => 'Payment Disputed', 99 => 'Payment Successful', 100 => 'Completed' );
+	protected static $checkoutStages = array( 0 => 'Payment Failed', 'Payment Failed' => 'Payment Failed', 1 => 'Checkout Attempted', 'Checkout Attempted' => 'Checkout Attempted', 2 => 'Payment Disputed', 'Payment Disputed' => 'Payment Disputed', 99 => 'Payment Successful', 'Payment Successful' => 'Payment Successful', 100 => 'Completed', 'Completed' => 'Completed' );
 	
     /**
      * Default Database Table
@@ -190,6 +190,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		{ 
 			return false; 
 		}
+//		var_export( $orderInfo );
 		//	Treat the callback methods
 		if( ! is_array( $orderInfo['order'] ) )
 		{
@@ -197,14 +198,17 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			$orderInfo['order'] = unserialize( $orderInfo['order'] );			
 		}
 		$values = $orderInfo['order'];
+		$output = null;
 		foreach( $values['cart'] as $each )
 		{ 
 			//	call backs
 			if( ! isset( $each['callback'] ) ){ continue; }
+			$each['full_order_info'] = $orderInfo;
 			$each['order_status'] = $response['order_status'];
 			$each['transactionmethod'] =  $orderInfo['order_api'];
 			$each['currency_abbreviation'] = $values['settings']['currency_abbreviation'];
 			$callback = array_map( 'trim', explode( ',', $each['callback'] ) );
+		//	var_export( $callback );
 			foreach( $callback as $eachCallback )
 			{
 				//	Let's treat callbacks'
@@ -213,7 +217,18 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 				{ 
 					continue;
 				}
-				$eachCallback::callback( $each ); 
+				if( method_exists( $eachCallback, 'callback' ) )
+				{
+					$eachCallback::callback( $each ); 
+			//		var_export( $eachCallback );
+				}
+				else
+				{
+					$eachCallback = new $eachCallback( $each );
+					$eachCallback->initOnce();
+				//	var_export( $eachCallback->view() );
+					$output .= $eachCallback->view();
+				}
 			}
 			
 		}
@@ -221,15 +236,16 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		$update = array_merge( $orderInfo, $update);  
 		$table->update( $update, array( 'order_id' => $response['order_id'] )  );
 
-		//	Notify Admin
+		//	Notify shopper
 		$mailInfo = array();
 		$mailInfo['subject'] = 'Status change for order no ' . $response['order_id'];
-		$mailInfo['body'] = '' . self::arrayToString( $orderInfo ) . '';
+		$mailInfo['body'] = null;
+		$mailInfo['body'] .= '' . self::arrayToString( $orderInfo ) . '';
+		$mailInfo['body'] .= $output;
 		@$checkoutEmail = $cart['checkout_info']['email'] ? : $cart['checkout_info']['email_address'];
 		@Ayoola_Application_Notification::mail( $mailInfo );
 		$mailInfo['email'] = $checkoutEmail;
 		@self::sendMail( $mailInfo );
-		
 		return;
     } 
 		
@@ -272,7 +288,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			$storage->clear(); 
 			self::$_orderNumber = null;
 		}
-		$email = strtolower( Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Application::getUserInfo( 'email' ) );
+		$email = strtolower( ( Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Form::getGlobalValue( 'email' ) ) ? : Ayoola_Application::getUserInfo( 'email' ) );
 		if( is_null( self::$_orderNumber ) )
 		{
 			//	Store order number to avoid multiple table insert
@@ -297,7 +313,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 									'email' => $email, 
 									'time' => time(), 
 									'total' => $cart['settings']['total'], 
-									'order_status' => self::$checkoutStages[1] ,
+									'order_status' => self::$checkoutStages[1] ,   
 									'article_url' => array_unique( $cart['settings']['article_url'] ),
 									);
 				$insertInfo = $table->insert( $insert );

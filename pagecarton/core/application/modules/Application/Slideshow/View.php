@@ -168,13 +168,13 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			//		var_export( Ayoola_Application::$GLOBAL['document_url'] );
 			//		var_export( $data );
 					$data['image_description'] = array();
-					if( Ayoola_Application::$GLOBAL['images'] && ( Ayoola_Application::$GLOBAL['images'][0] ) )
+					if( Ayoola_Application::$GLOBAL['post']['images'] && ( Ayoola_Application::$GLOBAL['post']['images'][0] ) )
 					{
-						$data['slideshow_image'] = Ayoola_Application::$GLOBAL['images'];
+						$data['slideshow_image'] = Ayoola_Application::$GLOBAL['post']['images'];
 					}
-					elseif( Ayoola_Application::$GLOBAL['document_url'] )
+					elseif( Ayoola_Application::$GLOBAL['post']['document_url'] )
 					{
-						$data['slideshow_image'] = (array) Ayoola_Application::$GLOBAL['document_url'];
+						$data['slideshow_image'] = (array) Ayoola_Application::$GLOBAL['post']['document_url'];
 					}
 				break;
 			}

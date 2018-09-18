@@ -1809,7 +1809,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 	//		$fieldset->addElement( array( 'name' => 'article_tags', 'label' => '' . $postTypeLabel . ' Tags', 'placeholder' => 'Enter tags for this ' . $postTypeLabel . ' separated by comma', 'type' => 'InputText', 'value' => @$values['article_tags'] ) );
 	
-		}
+		}        
 		$defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
 		$defaultProfile = $defaultProfile['profile_url'];
 		if( ! self::hasPriviledge( 98 ) )
@@ -1823,7 +1823,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 		else
 		{
-			$profiles = Application_Profile_Table::getInstance()->select();
+			$table = "Application_Profile_Table";
+			$table = $table::getInstance( $table::SCOPE_PRIVATE );
+			$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+			$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+			$profiles = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) );
+	//		$profiles = Application_Profile_Table::getInstance()->select();
 			$filter = new Ayoola_Filter_SelectListArray( 'profile_url', 'profile_url' );
 			$profiles = $filter->filter( $profiles );
 		}
@@ -1831,13 +1836,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 		//	var_dump()
 			$fieldset->addElement( array( 'name' => 'profile_url', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles );
-			$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
+		//	$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
 		}
 		else
 		{
 	//		var_export( Application_Profile_Abstract::getMyDefaultProfile()  );
 			$fieldset->addElement( array( 'name' => 'profile_url', 'type' => 'Hidden', 'value' => @$values['profile_url'] ? : $defaultProfile ) );
-			$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
+		//	$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
 		}
 
 	//	$fieldset->addRequirement( 'article_title', array( 'UserRestrictions' => null ) );

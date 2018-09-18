@@ -71,7 +71,7 @@ class Application_Status_Update extends Application_Status_Abstract
 				return false;
 			//	throw new Application_Status_Exception( 'UNABLE TO POST AN UPDATE BECAUSE USER IS INVALID.' );
 			}
- */			@$values['object'] = $values['object'] ? : Ayoola_Application::$GLOBAL['username'];
+ */			@$values['object'] = $values['object'] ? : Ayoola_Application::$GLOBAL['profile']['username'];
 			@$values['timestamp'] = $values['timestamp'] ? : time();
 			@$values['reference'] = $values['reference'] ? ( (array) $values['reference'] ) : array();
 			$values['reference']['subject'] = $values['subject'];

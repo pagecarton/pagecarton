@@ -65,7 +65,7 @@ abstract class Application_Message_Abstract extends Ayoola_Abstract_Table
 	//	$fieldset->placeholderInPlaceOfLabel = true;
 		$fieldset->useDivTagForElement = false; 
 		$form->submitValue = $submitValue;
-        $to = @$values['to'] ? : @Ayoola_Application::$GLOBAL['profile_url'];
+        $to = @$values['to'] ? : @Ayoola_Application::$GLOBAL['profile']['profile_url'];
         $to = $to ? : $_GET['to'];
     //    var_export( $values['to'] );
     //    var_export( $_GET['to'] );

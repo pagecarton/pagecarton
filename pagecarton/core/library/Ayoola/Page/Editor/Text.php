@@ -172,6 +172,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 //	var_export( Ayoola_Application::getUrlPrefix() );
 	//	var_export( strpos( $content, '//' ) );
 	//	var_export( $content );  
+//		var_export( $this->getParameter() );  
 		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() ||  Ayoola_Application::getUrlPrefix() )
 //		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
 		{
@@ -189,6 +190,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		//	$replace = array( '"' . Ayoola_Application::getUrlPrefix(), "'". Ayoola_Application::getUrlPrefix(), );
 			$replace = array( '"', "'", "url(", '"', "'", "url(", );
 			$content = str_ireplace( $search, $replace, $content );
+	//		var_export( $search );  
+	//		var_export( $replace );  
 		//	var_export( $content );  
 			$search = array( '"/', "'/", "url(/", Ayoola_Application::getUrlPrefix() . '//' );
 			$replace = array( '"' . Ayoola_Application::getUrlPrefix() . '/', "'". Ayoola_Application::getUrlPrefix() . '/', "url(". Ayoola_Application::getUrlPrefix() . '/', '//' );
@@ -199,6 +202,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		
 		$this->setParameter( array( 'editable' => $content ) );
 		$html = $this->getParameter( 'editable' ) . $this->getParameter( 'raw_html' );
+		if( $this->getParameter( 'nl2br' ) )
+		{
+			$html = nl2br( $html );
+		}
 	//	$this->
 		$this->_parameter['no_view_content_wrap'] = true;
 		$this->setViewContent( $html );
@@ -410,14 +417,33 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];    
 		@$object['option'] = $object['option'] ? : $object['view_option'];
-		if( @$object['url_prefix'] !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
+		if( @$object['url_prefix'] !== Ayoola_Application::getUrlPrefix() ||  Ayoola_Application::getUrlPrefix() )
+	//	if( @$object['url_prefix'] !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
 		{
-			$search = array( '"' . $object['url_prefix'], "'" . $object['url_prefix'], '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), );
-			$replace = array( '"', "'", '"', "'", );
+			$search = array( 
+								'"' . $object['url_prefix'], 
+								"'" . $object['url_prefix'], 
+								'"' . Ayoola_Application::getUrlPrefix(), 
+								"'" . Ayoola_Application::getUrlPrefix(), 
+								"url(" . $object['url_prefix'], 
+								"url(" . Ayoola_Application::getUrlPrefix(), 
+								);
+			$replace = array( 
+								'"', 
+								"'", 
+								'"', 
+								"'", 
+								"url(", 
+								"url(", 
+								);
 			$object['codes'] ? $object['codes'] = str_ireplace( $search, $replace, @$object['codes'] ) : null;
 			$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, @$object['editable'] ) : null;
-			$search = array( '"/', "'/", );
-			$replace = array( '"' . Ayoola_Application::getUrlPrefix() . '/', "'". Ayoola_Application::getUrlPrefix() . '/', );
+			$search = array( '"/', "'/", "url(", );
+			$replace = array( 
+								'"' . Ayoola_Application::getUrlPrefix() . '/', 
+								"'" . Ayoola_Application::getUrlPrefix() . '/', 
+								"url(" . Ayoola_Application::getUrlPrefix(), 
+								);
 			$object['codes'] ? $object['codes'] = str_ireplace( $search, $replace, $object['codes'] ): null;
 			$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, $object['editable'] ): null;
 	//		$replace = Ayoola_Application::getUrlPrefix();

@@ -76,8 +76,8 @@ class Ayoola_Api extends Ayoola_Abstract_Table
      * @var string
      */
 //	protected static $_url = ;
-	protected static $_url = 'http://account.ayoo.la/tools/classplayer/get/object_name/Ayoola_Api/';
-//	protected static $_url = 'http://account.comeriver.com/tools/classplayer/get/object_name/Ayoola_Api/';
+//	protected static $_url = 'http://account.ayoo.la/tools/classplayer/get/object_name/Ayoola_Api/';
+	protected static $_url = 'https://accounty.comeriver.com/tools/classplayer/get/object_name/Ayoola_Api/';
 	
     /**
      * Plays the class
@@ -287,8 +287,9 @@ class Ayoola_Api extends Ayoola_Abstract_Table
 
 		$response = Ayoola_Abstract_Viewable::fetchLink( $data['options']['url'], $settings );
 //		var_export( $settings );
+	//	var_export( $data );
 //		var_export( $data['options']['url'] );
-//		var_export( $response );
+	//	var_export( $response );
 	//	echo $response;
 	//	exit( var_export( $settings ) );
 		$response = explode( sha1( '0' ), $response );

@@ -778,7 +778,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						} 
 					}
 					$eachObject = $this->getObjectInfo( $values[$numberedSectionName] ? : $sectionalValues[$numberedSectionName] );
-				//	var_export( $eachObject );
+
+				//	self::v( $values );
+				//	self::v( $sectionalValues );  
 					if( ! isset( $eachObject['object_name'] ) )
 					{ 
 						continue; 
@@ -997,6 +999,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 		
 		//	save files
+		if( empty( $values ) && empty( $sectionalValues ) )
+		{
+			$this->noExistingContent = true;
+		}
 		if( $this->isSaveMode() ) //	create template for POSTed data
 		{
 			//	Clear our the orphan placeholders
@@ -1874,8 +1880,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		;
 
 		//	if we don't have values, prep the screen for editing'
-	//	self::v( $this->getValues() );
-		if( ! $this->getValues() )
+	//	self::v( $this->noExistingContent );
+		
+		if( $this->noExistingContent )
 		{
 			$js .= '
 			ayoola.events.add

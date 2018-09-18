@@ -68,7 +68,7 @@ class Application_Message_Creator extends Application_Message_Abstract
 			
 			
 			@$values['from'] = strtolower( $values['from'] ? : Ayoola_Application::getUserInfo( 'profile_url' ) );
-			@$values['to'] = strtolower( $values['to'] ? : Ayoola_Application::$GLOBAL['profile_url'] );
+			@$values['to'] = strtolower( $values['to'] ? : Ayoola_Application::$GLOBAL['profile']['profile_url'] );
 			
 			//	There must be a valid sender
 	//		Application_Profile_Abstract::getMyDefaultProfile()

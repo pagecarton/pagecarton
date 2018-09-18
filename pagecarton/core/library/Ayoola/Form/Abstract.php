@@ -97,10 +97,10 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addElement( array( 'name' => 'button_value', 'placeholder' => 'e.g. Submit', 'type' => 'InputText', 'value' => @$values['button_value'] ) );
 		
 		$options =  array( 
-							'send_mail' => 'Send me an e-mail of the form data when someone fills the form.', 
+					//		'send_mail' => 'Send me an e-mail of the form data when someone fills the form.', 
 							
 							//	Saving all information to db by default 
-							'database' => 'Save the data filled by user to database.', 
+					//		'database' => 'Save the data filled by user to database.', 
 							'group' => 'Group this form into fieldsets', 
 							'requirements' => 'This form has some requirements.', 
 							'callbacks' => 'Perform some actions (Call some PHP classes) after the form is filled.', 

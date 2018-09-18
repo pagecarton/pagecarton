@@ -64,8 +64,20 @@ class Application_Domain_UserDomain_Abstract extends PageCarton_Widget
 //		$form->oneFieldSetAtATime = true;
 
 		$fieldset = new Ayoola_Form_Element;
-	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'domain_name', 'label' => 'Domain Name', 'placeholder' => 'e.g. example.com', 'type' => 'InputText', 'value' => @$values['domain_name'] ) ); 
+	//	$fieldset->placeholderInPlaceOfLabel = false;    
+        if( ! empty( $_REQUEST['external_domain'] ) )   
+        {
+            $fieldset->addElement( array( 'name' => 'domain_name', 'label' => 'Domain Name', 'placeholder' => 'e.g. example.com', 'type' => 'InputText', 'value' => @$values['domain_name'] ) ); 
+        }
+        else
+        {
+            $table = "Application_Domain_Order";
+            $table = $table::getInstance();
+            $domains = $table->select( null, array( 'username' => Ayoola_Application::getUserInfo( 'username' ) ) );
+			$filter = new Ayoola_Filter_SelectListArray( 'domain_name', 'domain_name' );
+			$domains = $filter->filter( $domains );
+            $fieldset->addElement( array( 'name' => 'domain_name', 'label' => 'Domain Name', 'placeholder' => 'e.g. example.com', 'type' => 'Select', 'value' => @$values['domain_name'] ), array( '' => 'Select Domain' ) + $domains ); 
+        }
         $fieldset->addRequirement( 'domain_name', array( 'NotEmpty' => null, 'DuplicateRecord' => array( 'Application_Domain_UserDomain', 'domain_name' ) ) ); 
    //   $fieldset->addElement( array( 'name' => 'user_id', 'type' => 'InputText', 'value' => @$values['user_id'] ) ); 
    //   $fieldset->addElement( array( 'name' => 'username', 'type' => 'InputText', 'value' => @$values['username'] ) ); 

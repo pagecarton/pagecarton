@@ -146,6 +146,9 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			
 		//	if( ! $this->updateDb( $values ) ){ return false; }
 		
+			//	Clear plain text password for security reasons
+			unset( $values['password'], $values['password2'], $values['document_url_base64'], $values['download_url_base64'] );
+		
 			//	Save to table
 	//		if( $data['form_options'] && in_array( 'database', $data['form_options'] ) )
 			{
@@ -186,9 +189,6 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				//	return false;
 				}
 			}
-		
-			//	Clear plain text password for security reasons
-			unset( $values['password'], $values['password2'], $values['document_url_base64'], $values['download_url_base64'] );
 			
 			//	Notify Admin
 			$link = 'http://' . Ayoola_Page::getDefaultDomain() . '/object/name/Ayoola_Form_View/?form_name=' . $data['form_name'] . '';
@@ -200,7 +200,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			';
 			try
 			{
-					@self::sendMail( $mailInfo + array( 'to' => $data['email'] ) ); 
+				@self::sendMail( $mailInfo + array( 'to' => $data['email'] ) ); 
 			}
 			catch( Ayoola_Exception $e ){ null; }
 		//	if( ! $this->insertDb() ){ return false; }

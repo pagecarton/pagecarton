@@ -33,7 +33,7 @@ class Application_User_Email_Email extends Ayoola_Dbase_Table_Abstract_Mysql
      *
      * @var array
      */
-	protected static $_dbInfo = array( 'database' => 'mail', 'username' => 'fiweranshe', 'password' => 'YVe93yGAVHez4Q4T', 'hostname' => 'localhost', 'adapter' => 'mysql', );
+	protected static $_dbInfo = array( 'database' => 'mail', 'username' => 'fiweranshe', 'password' => '--', 'hostname' => 'localhost', 'adapter' => 'mysql', );
 		
 	// END OF CLASS
 }

@@ -282,7 +282,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 
 			}
 		//	var_export( $profileUrl );
-			$url = $profileUrl[$this->getIdColumn()] ? : ( @$_GET['profile_url'] ? : Ayoola_Application::$GLOBAL['profile']['profile_url'] );  
+			$url = $profileUrl[$this->getIdColumn()] ? : ( @$_GET['profile_url'] ? : ( Ayoola_Application::$GLOBAL['profile']['profile_url'] ? : Ayoola_Application::$GLOBAL['post']['profile_url'] ) );  
 		//	var_export( $url );
 			$data = self::getProfileInfo( $url );
 		//	var_export( $data );

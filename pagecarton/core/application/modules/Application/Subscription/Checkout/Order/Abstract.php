@@ -74,7 +74,7 @@ abstract class Application_Subscription_Checkout_Order_Abstract extends Applicat
 		$fieldset->addElement( array( 'name' => 'email', 'type' => 'InputText', 'value' => @$values['email'] ) );
 //		$fieldset->addElement( array( 'name' => 'order', 'description' => 'Order', 'type' => 'TextArea', 'value' => @var_export( $values['order'], true ) ) );
 		$fieldset->addElement( array( 'name' => 'order_api', 'description' => 'Payment', 'type' => 'InputText', 'value' => @$values['order_api'] ) );
-		$fieldset->addElement( array( 'name' => 'order_status', 'type' => 'Select', 'value' => @$values['order_status'] ), static::$checkoutStages );
+		$fieldset->addElement( array( 'name' => 'order_status', 'type' => 'Select', 'value' => @$values['order_status'] ), array_unique( static::$checkoutStages ) );
 //		$fieldset->addElement( array( 'name' => 'order_random_code', 'type' => 'InputText', 'value' => @$values['order_random_code'] ) );
 //		$fieldset->addElement( array( 'name' => 'currency', 'type' => 'InputText', 'value' => @$values['currency'] ) );
 		

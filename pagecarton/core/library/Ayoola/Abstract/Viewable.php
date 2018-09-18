@@ -613,7 +613,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( 
 			( $myLevel === 99 && ! @$options['strict'] ) // Super user except if its strict
 		|| ( in_array( 98, $allowedLevels ) && $username && $username === strtolower( @Ayoola_Application::$GLOBAL['username'] ) ) //	Profile owner means he is authorized
-		|| ( in_array( 97, $allowedLevels ) && $username && ( in_array( strtolower( Ayoola_Application::getUserInfo( 'email' ) ), array_map( 'strtolower', @Ayoola_Application::$GLOBAL['whitelist_email_address'] ? : array() ) ) || $username === strtolower( @Ayoola_Application::$GLOBAL['username'] ) ) ) //	We were invited to view a post/article
+		|| ( in_array( 97, $allowedLevels ) && $username && ( in_array( strtolower( Ayoola_Application::getUserInfo( 'email' ) ), array_map( 'strtolower', @Ayoola_Application::$GLOBAL['post']['whitelist_email_address'] ? : array() ) ) || $username === strtolower( @Ayoola_Application::$GLOBAL['post']['username'] ) ) ) //	We were invited to view a post/article
 		|| ( in_array( 0, $allowedLevels ) && ! @$options['strict'] ) //	Public means everyone is welcome except if its strict
 		|| in_array( $myLevel, $allowedLevels ) //	We are explicitly allowed
 //		|| ( in_array( $_SERVER['REMOTE_ADDR' ], array( '127.0.0.1', '::1' ) ) && ! @$options['strict'] ) //	Localhost
@@ -1054,7 +1054,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	$form->submitValue = $submitValue ;
 			//	$form->oneFieldSetAtATime = true;
 				$form->wrapForm = false;
-				$parameterOptions = array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() );
+				$parameterOptions = array( '' => 'Parameter Name' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() ) + array( '' => 'Custom Parameter' );
 		//		if( ! array_key_exists( @$advanceParameters['advanced_parameter_value'][$i], $parameterOptions ) )
 				{
 				//	$parameterOptions[@$advanceParameters['advanced_parameter_value'][$i]] = @$advanceParameters['advanced_parameter_value'][$i];
@@ -1806,7 +1806,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				
 	//				self::v( $this->_objectTemplateValues );
 					//	Add the Ayoola_Application Global
-					$this->_objectTemplateValues = array_merge( Ayoola_Application::$GLOBAL ? : array(), $this->_objectTemplateValues );
+					$this->_objectTemplateValues = array_merge( Ayoola_Application::$GLOBAL['post'] ? : array(), $this->_objectTemplateValues );
+					$this->_objectTemplateValues = array_merge( Ayoola_Application::$GLOBAL['profile'] ? : array(), $this->_objectTemplateValues );
 		
 					//	allows me to add pagination on post listing with predefined suffix
 					$template = $this->getParameter( 'markup_template_prepend' ) . $template;

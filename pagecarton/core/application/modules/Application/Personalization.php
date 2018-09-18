@@ -69,43 +69,6 @@ class Application_Personalization extends Ayoola_Abstract_Table
 		set_time_limit( 0 );
 		ignore_user_abort( true );
 		$startTime = microtime( true );
-/* 		if( is_dir( CACHE_DIR ) ) 
-		{
-			//	This is important or the application_dir won't change causing files to save in global dir
-			Ayoola_Doc::deleteDirectoryPlusContent( CACHE_DIR ); 
-		}
- */		//	refresh domain information
-//		Ayoola_Application::setDomainSettings( true );
-		
-/*		if( is_file( Ayoola_Application::$installer ) &&  is_writable( Ayoola_Application::$installer ) )
-		{ 
-			//	For new install, clear the following databases
-			$tables = array
-			(
-				'Application_Domain',   
-		//		'Application_Backup',
-		//		'Ayoola_Access_LocalUser', 
-			//	'Application_Settings',
-				'Ayoola_Api_Api',
-			);
-			foreach( $tables as $each )
-			{
-				try
-				{
-						$class = new $each();
-						$method = 'drop';
-						if( method_exists( $class, $method ) )
-						{
-							$class->$method();
-						}
-				}
-				catch( Exception $e )
-				{
-				//	$this->setViewContent( '<div class="boxednews badnews"> ERROR DELETING ' . $each . ' - ' . $e->getMessage() . '</div>' ); 
-				}
-			}
-		
-		}*/
 		//	Reset domain
 		  
 		//	Clear cache
@@ -118,8 +81,15 @@ class Application_Personalization extends Ayoola_Abstract_Table
 		//	We have to go about and do a separate authentication for this module
 		//	If this is not a new install, we must be admin  
 //		$response = Ayoola_Api_UserList::send( array() );
-		$userTable = new Ayoola_Access_LocalUser();
-		$response = $userTable->select( null, array( 'access_level' => 99 ) );
+
+		$userTable = 'Ayoola_Access_LocalUser';
+
+		//	set table to private so when parent have admin, we dont allow new admin on child
+		//	if not like this, it becomes a security breach on .com
+		$userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
+		$userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
+		$userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
+		$response = $userTable->select( null, array( 'access_level' => 99 ), array( 'disable_cache' => true ) );
 	//	$response = Ayoola_Api_UserList::send( array( 'access_level' => 99 ) );
 	//	var_export( $response );
 		if( is_array( @$response ) ) 

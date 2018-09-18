@@ -69,7 +69,7 @@ abstract class Application_Status_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addRequirement( 'status', array( 'WordCount' => array( 3, 300 ) ) );
 		
 		$fieldset->addElement( array( 'name' => 'class_name', 'placeholder' => '', 'type' => 'Hidden', 'value' => @$values['class_name'] ) );
-		$fieldset->addElement( array( 'name' => 'object', 'placeholder' => '', 'type' => 'Hidden', 'value' => @$values['object'] ? : @Ayoola_Application::$GLOBAL['username'] ) );
+		$fieldset->addElement( array( 'name' => 'object', 'placeholder' => '', 'type' => 'Hidden', 'value' => @$values['object'] ? : @Ayoola_Application::$GLOBAL['profile']['username'] ) );
 		$fieldset->addElement( array( 'name' => 'subject', 'placeholder' => '', 'type' => 'Hidden', 'value' => @$values['subject'] ? : Ayoola_Application::getUserInfo( 'username' ) ) );
 		$fieldset->addElement( array( 'name' => 'reference', 'multiple' => 'multiple', 'placeholder' => '', 'type' => 'Hidden', 'value' => @$values['reference'] ? : Ayoola_Application::getUserInfo( 'username' ) ) );
 	//	$fieldset->addLegend( $legend );

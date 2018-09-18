@@ -84,7 +84,7 @@ class Application_Article_View extends Application_Article_Abstract
 		//		var_export( @$data['user_id'] );
 		//		exit();
 			//	var_export( self::hasPriviledge( @$data['auth_level'] ) );
-				if( Ayoola_Application::$GLOBAL['article_url'] === $data['article_url'] )
+				if( Ayoola_Application::$GLOBAL['post']['article_url'] === $data['article_url'] )
 				{
 					
 					//	IF WE ARE HERE, WE ARE NOT AUTHORIZED

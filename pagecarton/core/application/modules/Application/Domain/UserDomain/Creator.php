@@ -46,14 +46,6 @@ class Application_Domain_UserDomain_Creator extends Application_Domain_UserDomai
 			{
 				return false;
 			}
-			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );  
-			@$articleSettings['allowed_writers'] = $articleSettings['allowed_writers'] ? : array();
-			$articleSettings['allowed_writers'][] = 98; //	subdomain owners can add posts
-			if( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
-			{ 
-				$this->setViewContent( '<span class="badnews">You do not have enough priviledges to add a domain. </span>', true );
-				return false;     
-			}
 			if( ! $this->requireProfile() )
 			{
 				return false;
@@ -71,7 +63,7 @@ class Application_Domain_UserDomain_Creator extends Application_Domain_UserDomai
 			$serverIp = gethostbyname( $_SERVER['SERVER_NAME'] );
 			if( $userIp != $serverIp )
 			{
-				$this->setViewContent( '<div class="badnews">Before a domain name can be added, it must have a DNS "A" record that is pointing to the ip address "' .$serverIp .  '". It is currently pointing to "' .$userIp .  '". </div>', true ); 
+				$this->setViewContent( '<div class="badnews">Before a domain name can be added, it must have a DNS "A" record that is pointing to the ip address "' .$serverIp .  '". It is currently pointing to "' .$userIp .  '". </div>', true ); 				
 				$this->setViewContent( $this->getForm()->view() );
 				return false;
 			}

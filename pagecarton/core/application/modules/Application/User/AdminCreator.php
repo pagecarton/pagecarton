@@ -43,16 +43,23 @@ class Application_User_AdminCreator extends Application_User_Creator
      */
     protected function init()
     {
-		$userTable = new Ayoola_Access_LocalUser();
-		if( $response = $userTable->selectOne( null, array( 'access_level' => 99 ) ) )
-		{
-			//	Don't run this if we have admin present.
-			return false;
-		}
-		$userTable = new PageCarton_MultiSite_Table();
-		if( $response = $userTable->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
+		$table = new PageCarton_MultiSite_Table();
+		if( $response = $table->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
 		{
 			//	Don't run this if we are a product of multi-site
+			return false;
+		}
+
+		//	set table to private so when parent have admin, we dont allow new admin on child
+		//	if not like this, it becomes a security breach on .com
+		$userTable = 'Ayoola_Access_LocalUser';
+		$userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
+		$userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
+		$userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
+		$response = $userTable->select( null, array( 'access_level' => 99 ), array( 'disable_cache' => true ) );
+		if( $response )
+		{
+			//	Don't run this if we have admin present.
 			return false;
 		}
 	//	$auth = new Ayoola_Access();
@@ -62,12 +69,15 @@ class Application_User_AdminCreator extends Application_User_Creator
 		
 		//	Try to use curent userInfo
 		$hashedCredentials = array();			
-		if( $values = Ayoola_Application::getUserInfo() )
+
+		//	turn this off as it posses a risk of upgrading a normal user in .com
+//		if( $values = Ayoola_Application::getUserInfo() )
 		{ 
 			//	don't update password
-			unset( $values['password'] );
+		//	unset( $values['password'] );
 		}
-		elseif( $values = $this->getForm()->getValues() )
+	//	elseif( $values = $this->getForm()->getValues() )
+		if( $values = $this->getForm()->getValues() )
 		{ 
 			$access = new Ayoola_Access();
 			$hashedCredentials = $access->hashCredentials( $values );			
@@ -135,18 +145,21 @@ class Application_User_AdminCreator extends Application_User_Creator
     {
 		$form = new Ayoola_Form( 'name=>' . $this->getObjectName() );
 		$this->setForm( $form );
-		$userTable = new Ayoola_Access_LocalUser();
-		$response = $userTable->selectOne( null, array( 'access_level' => 99 ) );
+		$table = new PageCarton_MultiSite_Table();
+		if( $response = $table->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
+		{
+			//	Don't run this if we are a product of multi-site
+			return false;
+		}
+		$userTable = 'Ayoola_Access_LocalUser';
+		$userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
+		$userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
+		$userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
+		$response = $userTable->select( null, array( 'access_level' => 99 ), array( 'disable_cache' => true ) );
 		if( $response || Ayoola_Application::getUserInfo() )
 		{
 			//	Don't run this if we have admin present.
 			// Also if we are a loggedin user, just perfom an upgrade
-			return false;
-		}
-		$userTable = new PageCarton_MultiSite_Table();
-		if( $response = $userTable->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
-		{
-			//	Don't run this if we are a product of multi-site
 			return false;
 		}
 		parent::createForm( $submitValue, $legend, $values );

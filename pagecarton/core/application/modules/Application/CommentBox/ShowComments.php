@@ -42,11 +42,11 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
 		try
 		{ 
             //  Code that runs the widget goes here...
-            $articleUrl = Ayoola_Application::$GLOBAL['article_url'] ? : $_REQUEST['article_url'];
+            $articleUrl = Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'];
             if( $articleUrl )
             {
                 $where = array( 'article_url' => $articleUrl );
-                $title = Ayoola_Application::$GLOBAL['article_title'];
+                $title = Ayoola_Application::$GLOBAL['post']['article_title'];
                 $link = Ayoola_Application::getUrlPrefix() . $articleUrl;
             }
             else
@@ -85,7 +85,7 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
                                     <div class="comment-head">
                                         <h6 class="comment-name "><a target="_blank" href="' . $each['website'] . '">' . $each['display_name'] . '</a> <span class="comment-user-level">' . $each['auth_level'] . '</span></h6>
                                         <span>' . $each['creation_time'] . '</span>
-                                        ' . ( Application_Article_Abstract::isAllowedToEdit( Ayoola_Application::$GLOBAL ) || self::hasPriviledge( 98 ) ? '
+                                        ' . ( Application_Article_Abstract::isAllowedToEdit( Ayoola_Application::$GLOBAL['post'] ) || self::hasPriviledge( 98 ) ? '
                                         <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_CommentBox_HideComment/?table_id=' . $each['table_id'] . '\' );" title="Hide Comment" onclick="" href="javascript:"><i class="fa fa-times"></i></a>
                                         ' : null ) . '
                                         <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_CommentBox/?article_url=' . $where['article_url'] . '&url=' . $where['url'] . '&parent_comment=' . $each['table_id'] . '\' );" href="javascript:"><i class="fa fa-reply"></i></a>

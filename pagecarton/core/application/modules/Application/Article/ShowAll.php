@@ -814,7 +814,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['document_url_uri'] = $data['document_url']; 
 			$data['document_url_cropped'] = $data['document_url']; 
 			$data['document_url_no_resize'] = $data['document_url']; 
-			if( strpos( @$data['document_url'], ':' ) === false && empty( $data['not_real_post'] ) )
+			if( strpos( @$data['document_url'], '//' ) === false && empty( $data['not_real_post'] ) )
 			{
 				//	This is the default now if they don't have picture, create a placeholder
 			//	$data['document_url'] = $data['document_url_base64'];
@@ -825,9 +825,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 			else
 			{
-				$data['document_url'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
+				//	set back to original because it wasnt making repo images to work.
+				$data['document_url'] = $data['document_url']; 
 				$data['document_url_no_resize'] = $data['document_url']; 
-				$data['document_url_cropped'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&url=' . @$data['document_url_uri'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
+				$data['document_url_cropped'] = $data['document_url']; 
 			}
 		//	self::v( $data['document_url'] );
 			

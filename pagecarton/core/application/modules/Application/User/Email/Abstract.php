@@ -163,7 +163,7 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
 				$functionName = function_exists( 'posix_getuid' ) ? 'posix_getuid' : 'getmyuid';
 		//		var_export( $functionName );
 		//		var_export( $functionName() );
-				$this->_dbData = (array) $table->fetchSQLQuery( 'SELECT * FROM `email`, `domain`, `useraccount` WHERE email.domain_id = domain.domain_id AND useraccount.userid = domain.userid AND useraccount.userid = "' . $functionName() . '" ' );	
+				$this->_dbData = (array) $table->fetchSQLQuery( 'SELECT * FROM `email`, `domain`, `useraccount` WHERE email.domain_id = domain.domain_id AND useraccount.useraccount_id = domain.useraccount_id ' );	
 	//			var_export( $this->_dbData );   
 			break;
 		

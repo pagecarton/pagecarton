@@ -264,9 +264,9 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 					}
 //var_export( Ayoola_Application::$GLOBAL );
 					//	profile_url
-					if( Ayoola_Application::$GLOBAL['profile_url'] )
+					if( Ayoola_Application::$GLOBAL['profile']['profile_url'] )
 					{
-						$pages[] = array( 'url' => ( '/' . Ayoola_Application::$GLOBAL['profile_url'] ), 'title' => Ayoola_Application::$GLOBAL['display_name'], 'description' => Ayoola_Application::$GLOBAL['profile_description'] );
+						$pages[] = array( 'url' => ( '/' . Ayoola_Application::$GLOBAL['profile']['profile_url'] ), 'title' => Ayoola_Application::$GLOBAL['profile']['display_name'], 'description' => Ayoola_Application::$GLOBAL['profile']['profile_description'] );
 					}
 					
 					//	Page
@@ -342,7 +342,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				//	Home
 				$pages[] = self::getInfo( '/' );   
 				//	Article gan gan
-				$pages[] = array( 'url' => Ayoola_Application::$GLOBAL['article_url'], 'title' => Ayoola_Application::$GLOBAL['article_title'] );
+				$pages[] = array( 'url' => Ayoola_Application::$GLOBAL['post']['article_url'], 'title' => Ayoola_Application::$GLOBAL['post']['article_title'] );
 			//	var_export( $categoryName );
 				return $pages;  
 			break;

@@ -54,7 +54,7 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 
 
 		$this->setViewContent( '<h3>Details</h3>' );
-	//	var_export( $identifierData );
+//		var_export( $identifierData );   
 //		var_export( $identifierData['order']['checkout_info'] );
 		$class = new Application_Subscription_Cart( array( 'cart' => $identifierData['order'] ) );
 		$this->setViewContent( $class->view() );
@@ -62,8 +62,8 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 		$this->setViewContent( '<h3>Payment Method</h3>' );
 		$this->setViewContent( '<div>'  . $data['checkoutoption_name'] . '<br> '  . $data['checkoutoption_logo'] . '</div>' );
 		$this->setViewContent( '<h3>Order  Status</h3>' );
-		$this->setViewContent( '<p>'  . $identifierData['order_status'] . '</p>' );
-		$this->setViewContent( '<h3>Customer Information</h3>' );
+		$this->setViewContent( '<p>'  . self::$checkoutStages[$identifierData['order_status']] . '</p>' );
+		$this->setViewContent( '<h3>Customer Information</h3>' ); 
 	//	var_export( $identifierData );
 		$orderForm = Application_Settings_CompanyInfo::getSettings( 'Payments', 'order_form' );
 	//	var_export( $identifierData['order'] );

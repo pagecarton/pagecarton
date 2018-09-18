@@ -83,12 +83,21 @@ class Ayoola_Dbase_Adapter_Mysql extends Ayoola_Dbase_Adapter_Abstract
     {
 		if( ! is_resource( $link ) )
 		{
-		//	var_export( $this->getDatabaseInfo() );
+        //    var_export( $this->getDatabaseInfo() );
+            if( ! $dbInfo = Application_Database_Account::getInstance()->selectOne( null, array( 'database' => $this->getDatabaseInfo( 'database' ) ) ) )
+            {
+      //          $dbInfo = $this->getDatabaseInfo();
+            }
+        //    var_export( $this->getDatabaseInfo( 'database' ) );        
+      //      var_export( $dbInfo );
+         //   var_export( Application_Database_Account::getInstance()->select() );
+        
 		//	echo $this->getDatabaseInfo( 'username' );
-			$link = mysqli_connect( $this->getDatabaseInfo( 'hostname' ), 
-				$this->getDatabaseInfo( 'username' ), 
-				$this->getDatabaseInfo( 'password' ), 
-				$this->getDatabaseInfo( 'database' ) );
+			$link = mysqli_connect(  $dbInfo['hostname'] ? : $this->getDatabaseInfo( 'hostname' ), 
+            $dbInfo['username'] ? : $this->getDatabaseInfo( 'username' ), 
+            $dbInfo['password'] ? : $this->getDatabaseInfo( 'password' ), 
+            $dbInfo['database'] ? : $this->getDatabaseInfo( 'database' ) 
+            );
 		}
 		if ( $link )
 		{ 
@@ -96,7 +105,7 @@ class Ayoola_Dbase_Adapter_Mysql extends Ayoola_Dbase_Adapter_Abstract
 			mysqli_set_charset ( $link , 'utf8' );
 			return $this->_link = $link; 
 		}
-		//	var_export( $this->getDatabaseInfo() );  
+		//	var_export( mysql_error()  );  
 		require_once 'Ayoola/Dbase/Adapter/Exception.php';
 		throw new Ayoola_Dbase_Adapter_Exception( 'CONNECTION FAILED TO DATABASE - ' . $this->getDatabaseInfo( 'database' ) );
     } 
@@ -120,7 +129,10 @@ class Ayoola_Dbase_Adapter_Mysql extends Ayoola_Dbase_Adapter_Abstract
     public function select( $databaseName = '' )
 	{
 		$databaseName = $databaseName ? : $this->getDatabaseInfo( 'database' );
-		if ( mysqli_select_db( $this->getLink(), $databaseName ) ){ return true; }
+    //    var_export( $this->getLink() );
+        if ( mysqli_select_db( $this->getLink(), $databaseName ) ){ return true; }
+    //	var_export( $this->getLink() );
+
 		return true;
 		require_once 'Ayoola/Dbase/Adapter/Exception.php';
 		throw new Ayoola_Dbase_Adapter_Exception( 'CANNOT SELECT DATABASE - ' . $databaseName );
@@ -131,6 +143,7 @@ class Ayoola_Dbase_Adapter_Mysql extends Ayoola_Dbase_Adapter_Abstract
 		$query = (string) $query;
 		$this->_lastQuery = $query;
 	//	print( $query );
+	//	print( $query );
 		$result = mysqli_query( $this->getLink(), $query );
 		$this->_lastResult = $result;
 		if( $result )
@@ -138,8 +151,9 @@ class Ayoola_Dbase_Adapter_Mysql extends Ayoola_Dbase_Adapter_Abstract
 			$this->_lastResult = $result;
 			return $result;
 		}
+	//	print( mysqli_error( $this->getLink() ) ); 
 	//	print( $query ); 
-		require_once 'Ayoola/Dbase/Adapter/Exception.php';
+		require_once 'Ayoola/Dbase/Adapter/Exception.php';    
 		throw new Ayoola_Dbase_Adapter_Exception( 'DATABASE QUERY IS NOT SUCCESSFUL' );
 	}
 

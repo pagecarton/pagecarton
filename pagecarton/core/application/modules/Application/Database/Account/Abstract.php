@@ -70,6 +70,7 @@ abstract class Application_Database_Account_Abstract extends Ayoola_Abstract_Tab
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$fieldset = new Ayoola_Form_Element;
+		$fieldset->addElement( array( 'name' => 'database', 'type' => 'InputText', 'value' => @$values['database'] ) );
 		$fieldset->addElement( array( 'name' => 'username', 'type' => 'InputText', 'value' => @$values['username'] ) );
 		
 		$fieldset->addElement( array( 'name' => 'password', 'placeholder' => '', 'type' => 'InputText', 'value' => @$values['password'] ) );

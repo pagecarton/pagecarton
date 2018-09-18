@@ -88,7 +88,7 @@ class Application_Share extends Application_Share_Abstract
 			{
 	//			$currentUrl = $this->getParameter( 'url' ) ? : ( rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/' );
 		//         var_export( $currentUrl );
-				if( $articleUrl = $this->getParameter( 'article_url' ) ? : ( Ayoola_Application::$GLOBAL['article_url'] ? : $_REQUEST['article_url'] ) )
+				if( $articleUrl = $this->getParameter( 'article_url' ) ? : ( Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'] ) )
 				{
 					$currentUrl = '';
 				}

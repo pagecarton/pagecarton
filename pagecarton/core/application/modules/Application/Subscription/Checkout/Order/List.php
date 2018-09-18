@@ -55,6 +55,7 @@ class Application_Subscription_Checkout_Order_List extends Application_Subscript
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = 'Orders';
+		$cur = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' );
 		$listInfo = array(
 							'order_id' => '%KEY% <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_View/?' . $this->getIdColumn() . '=%KEY%">details</a>', 
 							'email' => null, 
@@ -81,12 +82,13 @@ class Application_Subscription_Checkout_Order_List extends Application_Subscript
 			$list->listTitle = 'Orders for ' . $postInfo['article_title'];
 		}
 		require_once 'Ayoola/Paginator.php';
-		$list->setData( $this->getDbData() );
+		$data = $this->getDbData();
+	//	self::v( $data );  
+		$list->setData( $data );
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No orders placed yet.' );
 
 
-		$cur = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' );
 		$list->createList( $listInfo );
 		//var_export( $list );
 		return $list;

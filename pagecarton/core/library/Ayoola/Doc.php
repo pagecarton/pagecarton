@@ -644,7 +644,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 				unlink($file);
 			}
 		}
-		rmdir($path);
+		@rmdir( $path );
 		return ! is_dir( $path );
 	}	
 	

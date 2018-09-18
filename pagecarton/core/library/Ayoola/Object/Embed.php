@@ -183,18 +183,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			}
 		}
 		$html .= $class->view();
-		
-	//	self::v( $this->getParameter( 'markup_template' ) );
-	//	self::v( $html );
-	//	self::v( $class->viewInLine() );
-	//	if( is_object( $content ) ) var_export( $content );
-	//	var_export( @$class->getForm()->getValues() );
 		$this->setViewContent( $html );
-		
-		//	Return the values from the forms
-	//	if( ! @$values = $class->getForm()->getValues() ){ return; }
-	//	var_export( @$class );
-	//	var_export( @$class->getForm()->getValues() );
 	}
 
     /**

@@ -114,7 +114,7 @@ class Application_CommentBox_Abstract extends PageCarton_Widget
         $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
 //         var_export( $currentUrl );
         $fieldset->addElement( array( 'name' => 'url', 'type' => 'Hidden', 'value' => $currentUrl ) );
-        $articleUrl = Ayoola_Application::$GLOBAL['article_url'] ? : $_REQUEST['article_url'];
+        $articleUrl = Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'];
         $fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden', 'value' => $articleUrl ) ); 
         
 		$fieldset->addLegend( $legend );

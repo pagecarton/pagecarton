@@ -505,7 +505,17 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
     public function getForm()
     {	
-		if( null === $this->_form ){ $this->createForm( null ); }
+		if( null === $this->_form )
+		{ 
+			if( method_exists( $this, 'createForm' ) )
+			{
+				$this->createForm( null ); 
+			}
+			else
+			{
+				$this->_form = new Ayoola_Form();
+			}
+		}
 		return $this->_form;
     }
 	

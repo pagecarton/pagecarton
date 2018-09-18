@@ -89,6 +89,7 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 				$class = new Application_Subscription();
 				
 				//	Domain Reg
+				$values['domain_name'] = $each;
 				$values['subscription_name'] = "{$each} (Domain Name Registration)";
 				$values['subscription_label'] = $values['subscription_name'];
 			//	$values['item'] = $values['account_id'];
@@ -99,7 +100,8 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 				$values['price_id'] = $each . '_' . $values['price'];
 				$values['subscription_description'] = "Domain name registration charges for ({$each})";
 				$values['url'] = "javascript:;";
-				$values['checkout_requirements'] = "billing_address";
+				$values['callback'] = "Application_Domain_Order_Process";
+			//	$values['checkout_requirements'] = "billing_address";
 				
 				//	After we checkout this is where we want to come to
 				$values['classplayer_link'] = "/tools/classplayer/get/object_name/Application_Domain_Registration/";
@@ -258,13 +260,36 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 		}
 		//	Register how many yrs
 /*				$requirements = array( 
-										array( 'requirement' => 'address', 'requirement_legend' => 'Domain Contact', 'parameters' => array( 'location_prefix' => 'domain_contact' ), 'requirement_goodnews' => 'Provide information for the domain WHOIS contact information. This information will not be used if you select the private domain registration option.' ), 
-										array( 'requirement' => 'phone-number' ), 
+										array( 'requirement' => 'address', 'requirement_legend' => 'Domain Contact', 'parameters' => array( 'location_prefix' => 'domain_contact' ), 'requirement_goodnews' => 'Provide information for the domain WHOIS contact information' ), 
+								//		array( 'requirement' => 'phone-number' ), 
 										array( 'requirement' => 'email-address' ), 
 									);
-	//	var_export( $requirements );
-		$form->setFormRequirements( $requirements );
-*/		$this->setForm( $form );
+*/	//	var_export( $requirements );
+	//	$form->setFormRequirements( $requirements );
+		$fieldset = new Ayoola_Form_Element;	
+		$fieldset->addElement( array( 'name' => 'firstname', 'label' => 'First Name', 'placeholder' => 'e.g. John', 'type' => 'InputText', 'value' => @$values['firstname'] ) );
+		$fieldset->addElement( array( 'name' => 'lastname', 'label' => 'Last Name', 'placeholder' => 'e.g. Smith', 'type' => 'InputText', 'value' => @$values['lastname'] ) );
+		$fieldset->addElement( array( 'name' => 'organization_name', 'label' => 'Organization Name', 'placeholder' => 'e.g. Sethlene Inc.', 'type' => 'InputText', 'value' => @$values['organization_name'] ) );
+		$fieldset->addElement( array( 'name' => 'street_address', 'label' => 'Address Line 1', 'placeholder' => 'e.g. 119 State Road', 'type' => 'InputText', 'value' => @$values['street_address'] ) );
+		$fieldset->addElement( array( 'name' => 'street_address2', 'label' => 'Address Line 2', 'placeholder' => 'e.g. Apt. H3', 'type' => 'InputText', 'value' => @$values['street_address2'] ) );
+		$fieldset->addElement( array( 'name' => 'city', 'label' => 'City', 'placeholder' => 'e.g. Ibadan', 'type' => 'InputText', 'value' => @$values['city'] ) );
+		$fieldset->addElement( array( 'name' => 'province', 'label' => 'State/Province', 'placeholder' => 'e.g. OY', 'type' => 'InputText', 'value' => @$values['province'] ) );
+		$fieldset->addElement( array( 'name' => 'zip', 'label' => 'Zip/Postal Code', 'type' => 'InputText', 'value' => @$values['zip'] ) );
+		$fieldset->addElement( array( 'name' => 'country', 'label' => 'Country', 'type' => 'InputText', 'value' => @$values['country'] ) );
+		$fieldset->addElement( array( 'name' => 'email', 'label' => 'Contact Email Address', 'placeholder' => 'e.g. email@example.com', 'type' => 'InputText', 'value' => @$values['email'] ) );
+		$fieldset->addElement( array( 'name' => 'country_code', 'label' => 'Contact Phone Number', 'placeholder' => '234', 'style' => 'width:50px;', 'type' => 'InputText', 'value' => @$values['country_code'] ) );
+		$fieldset->addElement( array( 'name' => 'phone_number', 'label' => '', 'placeholder' => '8032100555', 'style' => 'width:150px;', 'type' => 'InputText', 'value' => @$values['phone_number'] ) );
+		$fieldset->addRequirement( 'firstname', array( 'NotEmpty' => null ) );
+		$fieldset->addRequirement( 'lastname', array( 'NotEmpty' => null ) );
+		$fieldset->addRequirement( 'street_address', array( 'NotEmpty' => null ) );
+		$fieldset->addRequirement( 'city', array( 'NotEmpty' => null ) );
+		$fieldset->addRequirement( 'zip', array( 'NotEmpty' => null ) );
+		$fieldset->addRequirement( 'email', array( 'EmailAddress' => null ) );
+		$fieldset->addRequirement( 'country_code', array( 'NotEmpty' => null, 'Digits' => null ) );
+		$fieldset->addRequirement( 'phone_number', array( 'NotEmpty' => null, 'Digits' => null ) );
+		$fieldset->addLegend( 'Domain Contact Information' );
+		$form->addFieldset( $fieldset );				
+		$this->setForm( $form );
     } 
 	// END OF CLASS
 }
