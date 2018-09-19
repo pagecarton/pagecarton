@@ -75,7 +75,11 @@ class Ayoola_Api extends Ayoola_Abstract_Table
      *
      * @var string
      */
-//	protected static $_url = ;
+	protected static $_defaultUrlHistory = array(
+		'http://account.ayoo.la/tools/classplayer/get/object_name/Ayoola_Api/',
+		'https://accounty.comeriver.com/tools/classplayer/get/object_name/Ayoola_Api/',
+		'https://account.comeriver.com/tools/classplayer/get/object_name/Ayoola_Api/',
+	);
 //	protected static $_url = 'http://account.ayoo.la/tools/classplayer/get/object_name/Ayoola_Api/';
 	protected static $_url = 'https://accounty.comeriver.com/tools/classplayer/get/object_name/Ayoola_Api/';
 	
@@ -188,13 +192,23 @@ class Ayoola_Api extends Ayoola_Abstract_Table
      */
 	public static function getSettings( $url )
     {
+	//	var_export( $url );
+		if( $url == self::$_url )
+		{
+			$url = self::$_defaultUrlHistory; 
+		}
+
 		//	needed to remove this because of multiple api request within a single request.
 	//	if( empty( self::$_settings[$url] ) )
 		{
 			$table = new Ayoola_Api_Api();
-			self::$_settings[$url] = $table->selectOne( null, array( 'api_url' => $url ) );
+			$urlInfo = $table->selectOne( null, array( 'api_url' => $url ) );
+			self::$_url = $urlInfo['api_url'];
+
+			self::$_settings[self::$_url] = $urlInfo;
+		//	var_export( $urlInfo );
 		}
-		return self::$_settings[$url];
+		return self::$_settings[self::$_url];
 	}
 	
     /**

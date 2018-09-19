@@ -151,7 +151,7 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
 			case 'ayoola':
 				$response = Application_User_Email_Api_List::send( array( 'user_id' => $this->getIdentifierUserIdQuery() ) );
 			//	var_export( $this->getIdentifierUserIdQuery() );
-			//	var_export( $response );
+			//	var_export( $response );  
 				if( is_array( $response['data'] ) )
 				{
 					$this->_dbData = $response['data'];    

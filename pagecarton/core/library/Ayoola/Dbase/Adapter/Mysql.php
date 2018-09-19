@@ -143,7 +143,7 @@ class Ayoola_Dbase_Adapter_Mysql extends Ayoola_Dbase_Adapter_Abstract
 		$query = (string) $query;
 		$this->_lastQuery = $query;
 	//	print( $query );
-	//	print( $query );
+	//	print( $query );  
 		$result = mysqli_query( $this->getLink(), $query );
 		$this->_lastResult = $result;
 		if( $result )
