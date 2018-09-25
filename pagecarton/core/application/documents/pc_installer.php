@@ -8,7 +8,7 @@
  * @category   PageCarton
  * @package    PageCarton Installer
  * @copyright  Copyright (c) 2011-2017 PageCarton.com (http://www.PageCarton.com/)
- * @license    http://production.cmf.ayoo.la/license.txt
+ * @license    http://www.pagecarton.org/license.txt
  * @version    $Id: pc_installer.php 09:21:2017 11:35pm  $joywealth
  */
 
@@ -21,14 +21,12 @@
 
 	//	Download and extraction can take a while
 	set_time_limit( 0 );
-	defined('DS') || define('DS', DIRECTORY_SEPARATOR);
-	defined('PS') || define('PS', PATH_SEPARATOR);
-	
-		
+	defined( 'DS' ) || define( 'DS', DIRECTORY_SEPARATOR );
+	defined( 'PS' ) || define( 'PS', PATH_SEPARATOR );
+			
 	//  Detect path to application
-/* 	$home = realpath( dirname( $_SERVER['SCRIPT_FILENAME'] ) );   
-	$dir = realpath( dirname( $home ) );
- */	
+	
+
 	//	Using document root now
 	$home = dirname( __FILE__ );
 	if( ! empty( $_SERVER['DOCUMENT_ROOT'] ) )
@@ -80,6 +78,7 @@
 	$content = null;
 	$badnews = null;
 	$remoteSite = 'http://updates.pagecarton.org';  
+	$remoteSite2 = 'http://updates2.pagecarton.org';  
 
 
 	//	look for this path prefix dynamically
@@ -184,7 +183,7 @@
 //		case 'licence':
 //			$content .= '<h1>Continue installation, only if you agree to be bound by the following license terms.</h1>';
 	//		$content .= '<p>Please note that the license terms may change from time to time. Changes will always be on <a href="http://PageCarton.org/license.txt">http://www.PageCarton.org/license.txt</a>.</p>';
-			$content .= '<textarea rows="10" style="min-width:90%;display:block;">' . ( @file_get_contents( 'license.txt' ) ? : @file_get_contents( $remoteSite . '/license.txt' ) ) . '</textarea>';
+			$content .= '<textarea rows="10" style="min-width:90%;display:block;">' . ( ( @file_get_contents( 'license.txt' ) ? : @file_get_contents( $remoteSite . '/license.txt' ) ) ? : @file_get_contents( $remoteSite2 . '/license.txt' ) ) . '</textarea>';
 	//		$content .= '<p>Having an active internet connection is preferred when installing PageCarton</p>';
 			$content .= '<input value="I agree" type="button" onClick = "location.href=\'?stage=download\'" />';
 		break;
@@ -200,9 +199,12 @@
 			{ 
 				if( ! $f = @fopen( $remoteSite . '/ayoola/framework/installer.tar.gz', 'r' ) )
 				{
-					$badnews .= '<p>The installation archive is missing. We also tried to connect to the internet to download it but application coult not connect to the internet. Please ensure that allow_fopen_url is not switched off in your server configuration.</p>';
-					$badnews .= '<p>Please try copying the files back into your web root again and restart your installation. You may also resolve this issue by connecting to the internet.</p>';
-					break;
+					if( ! $f = @fopen( $remoteSite2 . '/ayoola/framework/installer.tar.gz', 'r' ) )
+					{
+						$badnews .= '<p>The installation archive is missing. We also tried to connect to the internet to download it but application coult not connect to the internet. Please ensure that allow_fopen_url is not switched off in your server configuration.</p>';
+						$badnews .= '<p>Please try copying the files back into your web root again and restart your installation. You may also resolve this issue by connecting to the internet.</p>';
+						break;
+					}
 				}
 				file_put_contents( $filename, $f );
 			}
