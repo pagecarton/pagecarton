@@ -707,9 +707,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public static function getDefaultPostView( $data )
     {
 
-		if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url_uri'] ) )
+		if( ! $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url_uri'] ) )
 		{
-
+			$image = $data['document_url_cropped'] ;
 		}
 		$link = 'a title="View ' . $data['article_title'] . '" style="color:inherit;" href="' . Ayoola_Application::getUrlPrefix() . $data['article_url'] . '"';
 		$realPost = true;

@@ -219,6 +219,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
 			//	self::v( $data ); 
 			if( 
+				! is_array( $data ) || 
 				! self::isAllowedToView( $data )
 			)
 			{

@@ -427,9 +427,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//			var_export( $data );
 //					var_export( $data['article_type'] );
 					
-					$data['post_list_id'] = $postListId;
 
-					if( ! self::isAllowedToView( $data ) )    
+					if( ! is_array( $data ) || ! self::isAllowedToView( $data ) )    
 					{
 					//	self::v( @$data['auth_level'] );
 					//	self::v( self::hasPriviledge( @$data['auth_level'] ) );
@@ -439,6 +438,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						continue;
 					//	self::setIdentifierData( $data );
 					}
+					$data['post_list_id'] = $postListId;
 			//		self::v( $data );
 				//	var_export( $data );
 					//	Switch
