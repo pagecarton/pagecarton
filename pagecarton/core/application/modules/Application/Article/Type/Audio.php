@@ -53,8 +53,22 @@ class Application_Article_Type_Audio extends Application_Article_Type_Abstract
 			{
 				$data = $this->getIdentifierData();
 			}
+		$playNext = 'var xx = document.getElementsByClassName( \'pc_paginator_next_page_button\' )[0].href; location.href= xx + ( location.search ? location.search : \'?\' ) + \'' . $query . '\'';
 		if( ! self::isDownloadable( $data ) )
 		{
+			if( ! empty( $_REQUEST['autoplay'] ) || $this->getParameter( 'autoplay' ) )
+			{
+				Application_Javascript::addCode( 
+					'ayoola.events.add
+					( 
+						window, "load", 
+						function()
+						{ 
+							' . $playNext . ';
+						} 
+					);' 							
+				  );   
+			}
 			$this->setViewContent( '<div class="badnews">Audio file has not been set</div>' );
 			return false;
 		}
@@ -70,7 +84,6 @@ class Application_Article_Type_Audio extends Application_Article_Type_Abstract
 		}
 //		if( ! empty( $_REQUEST['autoplay_next'] ) || $this->getParameter( 'autoplay_next' ) )
 		{
-			$query = "";
 			if( empty( $_REQUEST['autoplay'] ) )
 			{
 				$query .= "&autoplay=1";
@@ -80,7 +93,6 @@ class Application_Article_Type_Audio extends Application_Article_Type_Abstract
 				$query .= "&autoplay_next_done=1";
 			}
 			
-			$playNext .= 'var xx = document.getElementsByClassName( \'pc_paginator_next_page_button\' )[0].href; location.href= xx + ( location.search ? location.search : \'?\' ) + \'' . $query . '\'';
 			$attributes .= ' onended="' . $playNext . '" ';
 			$attributes .= ' onerror="' . $playNext . '" ';
 		}
