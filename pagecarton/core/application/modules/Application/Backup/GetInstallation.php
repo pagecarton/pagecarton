@@ -50,21 +50,89 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
 
        //     $installer = Ayoola_Doc::getDocumentsDirectory() . '/ayoola/framework/installer.tar.gz';
          //   $zip->addFile( $installer, 'pc_installer.php.tar.gz');
-			$file1 = Ayoola_Loader::getFullPath( 'documents/ayoola/framework/installer.tar.gz', array( 'prioritize_my_copy' => true ) );
+            $loc = 'documents/ayoola/framework/installer.tar.gz';
+            if( ! $file1 = Ayoola_Loader::getFullPath( $loc, array( 'prioritize_my_copy' => true ) ) )
+            {
+                $file1 = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $loc;
+            //    var_export( $file1 );
+            //    exit();
+              
+            }
+                
       //      if( filectime( $file1 ) > time() + 86400 )
-    //  var_export( $file1 );
+  //    var_export( $file1 );
  //     var_export( filemtime( $file1 ) );
          //       unlink( $file1 );
  //     var_export( filemtime( $file1 ) );
   //    var_export( filemtime( $file1 ) < ( time() + 0 ) );
             if( ! file_exists( $file1 ) || ! empty( $_REQUEST['pc_recreate_installer'] ) )   
-//            if( ! file_exists( $file1 ) || filemtime( $file1 ) < ( time() + 86400 ) )   
             {
+                $version = explode( '.', PageCarton::VERSION );
+                $minor = array_pop( $version );
+                $version = implode( '.', $version ) . '.x';
+
+                $link = 'https://github.com/pagecarton/pagecarton/archive/' . $version . '.zip';
+                //    var_export(  $link );
+                $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
+                $filename = tempnam( sys_get_temp_dir(), __CLASS__ ) . '';
+    
+                $filename .= '.zip';
+                file_put_contents( $filename, $content['response'] );
+                $tempDir = sys_get_temp_dir() . DS . __CLASS__ . PageCarton::VERSION;
+                Ayoola_Doc::createDirectory( $tempDir );
+
+                $zip2 = new ZipArchive;
+                if ($zip2->open( $filename ) === TRUE) {
+                    $zip2->extractTo( $tempDir );
+                    $zip2->close();
+           //         echo 'ok';
+                } else {
+             //       echo 'failed';
+                }
+
+        //        $phar = 'Ayoola_Phar_Data';
+        //        $backupc = new $phar( $filename );
+        //        $backupc->extractTo( $tempDir, null, true );
+           //     var_export( $file1 );
+        //        var_export( $tempDir );
+        //        var_export( filesize( $filename ) );
+         //       var_export( $zip2->extractTo( $tempDir ) );
+
+                $phar = 'Ayoola_Phar_Data';
+                $tFile = str_ireplace( '.tar.gz', '.tar', $file1 );
+                $backup = new $phar( $tFile );
+                $backup->startBuffering();
+
+           //     var_export( APPLICATION_DIR );
+
+                $from = $tempDir . DS . 'pagecarton-' . $version . '/pagecarton/core';
+                $to = APPLICATION_DIR . '';
+           //     var_export( $from );
+           //     var_export( $to );
+                Ayoola_Doc::createDirectory( $to );
+                Ayoola_Doc::recursiveCopy( $to, $to . '-' . PageCarton::VERSION );    
+           //     $to = rename( $to, $to . '-' . PageCarton::VERSION );
+                Ayoola_Doc::deleteDirectoryPlusContent( $to );
+            //    $to = $to . 'x';
+                Ayoola_Doc::createDirectory( $to );
+                Ayoola_Doc::recursiveCopy( $from, $to );    
+/* 
+                $backup->buildFromDirectory( $from );  
+                
+                $backup->stopBuffering();
+                $phar::unlinkArchive( $file1 );
+		
+                $backup->compress( Ayoola_Phar::GZ ); 
+                unset( $backup );
+                $phar::unlinkArchive( $tFile );
+ */           //     exit( $filename );
+          //      exit( $filename );
+       
                 $parameters = array( 'backup_type' => 'installer', 'no_init' => true );
                 $class = new Application_Backup_Creator( $parameters );
                 $class->fakeValues = $parameters;
                 $class->init();
-         //       self::v( $class->view() );  
+          //       self::v( $class->view() );  
 
             }
        //         exit();
@@ -93,7 +161,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             header('Content-Type: application/zip');
             header('Content-Length: ' . filesize($file));
             header('Content-Disposition: attachment; filename="pagecarton-' . PageCarton::VERSION . '.zip"');
-            readfile($file);
+            readfile($file);  
             unlink($file); 
 
             exit();
@@ -103,7 +171,8 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent( $e->getMessage() ); 
+            $this->setViewContent( 'Theres an error in the code' ); 
             return false; 
         }
 	}
