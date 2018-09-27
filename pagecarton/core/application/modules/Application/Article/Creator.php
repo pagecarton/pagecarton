@@ -160,7 +160,15 @@ class Application_Article_Creator extends Application_Article_Abstract
 			$filter->replace = '-';
 			$access = new Ayoola_Access();
 			$userInfo = $access->getUserInfo();
-			$values['article_url'] = substr( trim( $filter->filter( strtolower( $values['article_title'] ) ) , '-' ), 0, 70 ) ? : microtime();
+		//	idn_to_ascii( );
+			if( function_exists( 'mb_substr') )
+			{
+				$values['article_url'] = mb_substr( trim( $filter->filter( strtolower( $values['article_title'] ) ) , '-' ), 0, 70 ) ? : microtime();
+			}
+			else
+			{
+				$values['article_url'] = substr( trim( $filter->filter( strtolower( $values['article_title'] ) ) , '-' ), 0, 70 ) ? : microtime();
+			}
 			$values['user_id'] = $userInfo['user_id'];
 			$values['username'] = $userInfo['username'];
 			
