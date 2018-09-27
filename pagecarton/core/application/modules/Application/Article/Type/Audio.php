@@ -49,11 +49,31 @@ class Application_Article_Type_Audio extends Application_Article_Type_Abstract
      */
 	protected function init()
     {
-			if( ! $data = $this->getParameter( 'data' ) )
+		if( ! $data = $this->getParameter( 'data' ) )
+		{
+			$data = $this->getIdentifierData();
+		}
+		$attributes = 'controls ';
+		$query = '';
+		if( ! empty( $_REQUEST['autoplay'] ) || $this->getParameter( 'autoplay' ) )
+		{
+			$attributes .= ' autoplay ';
+		}
+//		if( ! empty( $_REQUEST['autoplay_next'] ) || $this->getParameter( 'autoplay_next' ) )
+		{
+			if( empty( $_REQUEST['autoplay'] ) )
 			{
-				$data = $this->getIdentifierData();
+				$query .= "&autoplay=1";
 			}
-		$playNext = 'var xx = document.getElementsByClassName( \'pc_paginator_next_page_button\' )[0].href; location.href= xx + ( location.search ? location.search : \'?\' ) + \'' . $query . '\'';
+			if( empty( $_REQUEST['autoplay_next_done'] ) )
+			{
+				$query .= "&autoplay_next_done=1";
+			}
+			$playNext = 'var xx = document.getElementsByClassName( \'pc_paginator_next_page_button\' )[0].href; location.href= xx + ( location.search ? location.search : \'?\' ) + \'' . $query . '\'';
+			
+			$attributes .= ' onended="' . $playNext . '" ';
+			$attributes .= ' onerror="' . $playNext . '" ';
+		}
 		if( ! self::isDownloadable( $data ) )
 		{
 			if( ! empty( $_REQUEST['autoplay'] ) || $this->getParameter( 'autoplay' ) )
@@ -76,25 +96,6 @@ class Application_Article_Type_Audio extends Application_Article_Type_Abstract
 		{
 			$this->setViewContent( '<div class="badnews">This is not a true audio post</div>' );
 			return false;
-		}
-		$attributes = 'controls ';
-		if( ! empty( $_REQUEST['autoplay'] ) || $this->getParameter( 'autoplay' ) )
-		{
-			$attributes .= ' autoplay ';
-		}
-//		if( ! empty( $_REQUEST['autoplay_next'] ) || $this->getParameter( 'autoplay_next' ) )
-		{
-			if( empty( $_REQUEST['autoplay'] ) )
-			{
-				$query .= "&autoplay=1";
-			}
-			if( empty( $_REQUEST['autoplay_next_done'] ) )
-			{
-				$query .= "&autoplay_next_done=1";
-			}
-			
-			$attributes .= ' onended="' . $playNext . '" ';
-			$attributes .= ' onerror="' . $playNext . '" ';
 		}
 		$tagName = '' . __CLASS__ . '_audio';
 		$audio = '	<audio class="' . __CLASS__ . ' ' . $tagName . '" preload="none" style="width:100%;" ' . $attributes . ' src="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Audio_Play/?article_url=' . $data['article_url'] . '&auto_download=1">
