@@ -100,7 +100,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 						{
 							$playMode = $_REQUEST['pc_widget_output_method'];
 						}
-						$this->setViewContent( $identifier['class_name']::viewInLine( array( 'play_mode' => $playMode ) ), true );
+						$this->setViewContent( $identifier['class_name']::viewInLine( array( 'play_mode' => @$playMode ) ), true );
 						if( ! $title = $identifier['class_name']::getObjectTitle() )
 						{
 							$title = $identifier['class_name'];

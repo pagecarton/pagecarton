@@ -236,11 +236,12 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 						$iSearch[] = $values['placeholder_prefix'] . $ckey . $values['placeholder_suffix'];
 						$iReplace[] = $cccc;
 					}
-					$iTemplate .= @str_ireplace( $iSearch, $iReplace, $postTheme );  
+					$iData = @str_ireplace( $iSearch, $iReplace, $postTheme );  
+					$iTemplate .= $iData;  
 
 					//	deal with {{{pc_post_item_1}}}
-					$search[] = '' . $values['placeholder_prefix'] . 'pc_post_item_' . $key . $values['placeholder_suffix'] . '';
-					$replace[] = $iTemplate;  
+					$search[] = '' . $values['placeholder_prefix'] . 'pc_post_item_' . $key . $values['placeholder_suffix'] . '';  
+					$replace[] = $iData;  
 				}
 				elseif( $jSearch )
 				{

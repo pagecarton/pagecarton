@@ -263,7 +263,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		//		var_export( $categories );
 			}
 		}
-		if( $categories )	
+		if( @$categories )	
 		{
 	//		self::v( $categories );
 			@$menu['category_url'] = trim( $this->getParameter( 'category_url' ) ? : @$menu['category_url'] );

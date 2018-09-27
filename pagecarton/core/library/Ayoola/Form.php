@@ -192,6 +192,13 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 	public $oneFieldSetAtATime = false;
 	
     /**
+     * Switch to true to load each fieldset at a time
+     * 
+     * @var boolean 
+     */					
+	public $oneFieldSetAtATimeJs = false;  
+	
+    /**
      * Switch to true to put captcha in the form
      * 
      * @var boolean 
@@ -983,10 +990,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 	//	self::v( $this->_global );
 	//	self::v( $this->_names );
-		++$this->counter;
+		@++$this->counter;
 		$form = null;
 		$form .= @$fieldset->container ? "<{$fieldset->container}>\n" : null;
-		$fieldsetTag = $fieldset->tag ? : "fieldset";
+		$fieldsetTag = @$fieldset->tag ? : "fieldset";
 
 		$form .= ! @$fieldset->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "<{$fieldsetTag} class='pc-form-fieldset-{$this->counter}'>\n" : null;
 		$form .= $fieldset->getLegend() ? "\n<legend>{$fieldset->getLegend()}</legend>\n" : null;

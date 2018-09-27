@@ -227,7 +227,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				$element['label'] = null;	
 			break;
 		}
-		if( $this->placeholderInPlaceOfLabel || ! trim( $element['label'] ) )
+		if( $this->placeholderInPlaceOfLabel || ! trim( @$element['label'] ) )
 		{
 		
 		}

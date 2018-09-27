@@ -57,22 +57,6 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
 		$header = $style . 'font-weight:bold;';
 		
 		//	Account Information
-		$this->setViewContent( "<span style='{$header}'>First Name: </span>" );
-		$this->setViewContent( "<span style='{$style}'>{$userInfo['firstname']}</span>" );
-		$this->setViewContent( "<span style='{$header}'>Middle Name: </span>" );
-		$this->setViewContent( "<span style='{$style}'>{$userInfo['middlename']}</span>" );
-		$this->setViewContent( "<span style='{$header}'>Last Name: </span>" );
-		$this->setViewContent( "<span style='{$style}'>{$userInfo['lastname']}</span>" );
-		$this->setViewContent( "<span style='{$header}'>E-mail: </span>" );
-		$this->setViewContent( "<span style='{$style}'>{$userInfo['email']}</span>" );
-		$this->setViewContent( "<span style='{$header}'>Account Since: </span>" );
-		@$this->setViewContent( "<span style='{$style}'>{$userInfo['creation_date']}</span>" );
-		$this->setViewContent( "<span style='{$header}'>Creation IP: </span>" );
-		$this->setViewContent( "<span style='{$style}'>{$userInfo['creation_ip']}</span>" );
-		$this->setViewContent( "<span style='{$header}'>Last Modified Date: </span>" );
-	//	@$this->setViewContent( "<span style='{$style}'>{$userInfo['modified_date']}</span>" );
-	//	$this->setViewContent( "<span style='{$header}'>Last Modified IP: </span>" );
-	//	$this->setViewContent( "<span style='{$style}'>{$userInfo['modified_ip']}</span>" );
 /* 
 		<img src="{{{display_picture}}}" style="float:right;max-height:160px;" >
 		<h2>Account Summary</h2> 

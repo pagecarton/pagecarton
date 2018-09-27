@@ -483,8 +483,8 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
       if( $node = $this->getXml()->getElementsByTagName( self::TAGNAME_DOCUMENT_ELEMENT )->item( 0 ) )
       {
           $tableInfo = $this->getXml()->getTagAttributes( $node ); 
-      }
-      return ( $key ) ? $tableInfo[$key] : $tableInfo;
+          return ( $key ) ? $tableInfo[$key] : $tableInfo;     
+        }
     } 
 
     /**

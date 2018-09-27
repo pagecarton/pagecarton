@@ -55,6 +55,13 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      * @var string
      */
 	public $rowDataColumn;
+
+    /**
+     *
+     * @var null
+     */
+	public $noRowClass;
+	public $deleteClass;
 	
 	public $hideCheckbox = false;
 	public $hideNumbering = true;
@@ -487,7 +494,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			}
 			
 		//	$bg = $bg == '#ffffff' ? '#eeeeee' : '#ffffff';
-			$rowClass = $rowClass == 'pc-table-row1' ? 'pc-table-row2' : 'pc-table-row1';
+			$rowClass = @$rowClass == 'pc-table-row1' ? 'pc-table-row2' : 'pc-table-row1';
 			if( $this->noRowClass )
 			{
 				$rowClass = null;
@@ -847,7 +854,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 	//	var_export( $file );
 		if( $result = $this->getRows() )
 		{
-			if( $this->showExportLink )
+			if( @$this->showExportLink )
 			{
 
 				$downloadLink = Ayoola_Application::getUrlPrefix() . '/widgets/' . $this->pageName . '/?export_list=' . $this->pageName . '&' . http_build_query( $_GET );
