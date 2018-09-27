@@ -819,7 +819,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				{
 			//		var_export( $string );
 					$options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
-					if( in_array( 'autosave_new_words', $options ) )
+					if( is_array( $options ) && in_array( 'autosave_new_words', $options ) )
 					{
 						$stringInfo = $words->insert( array( 'string' => $string, 'pages' => array( Ayoola_Application::getRequestedUri() ), ) );
 					}
