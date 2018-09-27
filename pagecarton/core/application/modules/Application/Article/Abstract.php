@@ -1360,6 +1360,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				case 'examination':
 				case 'test':
 				case 'quiz':
+					$form->oneFieldSetAtATime = true;   
+
 				//	self::v( $values['quiz_options'] );
 					$quizOptions = array(
 											'quiz_subgroups' => 'This quiz has subgroups',
@@ -1537,7 +1539,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							$questionFieldset->container = 'span';
 							
 							//	add previous questions if available
-							$subGroupHeading = '<p style="font-size:large;">Question Sub Group - #' . ( $j + 1 ) . '</p><p>Sub-group Question/Instruction:</p><p><blockquote>' . ( @$groupQuestions[$j] ? : 'Uncategorized Questions' ) . ' </blockquote> </p>';
+							$subGroupHeading = $groupQuestions[$j] ? '<p style="font-size:large;">Question Sub Group - #' . ( $j + 1 ) . '</p><p>Sub-group Question/Instruction:</p><p><blockquote>' . ( @$groupQuestions[$j] ? : 'Uncategorized Questions' ) . ' </blockquote> </p>' : null;
 							$subGroupHeading = Ayoola_Object_Wrapper_Abstract::wrap( $subGroupHeading, 'white-content-theme-border' );
 					//		self::v( $subGroupHeading );
 					//		exit();
