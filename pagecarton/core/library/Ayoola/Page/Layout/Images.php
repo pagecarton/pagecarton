@@ -43,17 +43,64 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
      */	
     public function init()
     {
-		try{ $this->setIdentifier(); }
-		catch( Ayoola_Page_Layout_Exception $e ){ return false; }
+		try
+		{ 
+			$this->setIdentifier();
+		}
+		catch( Exception $e )
+		{ 
+			$this->_identifier[$this->getIdColumn()] = Ayoola_Page_Editor_Layout::getDefaultLayout();
+		//	return false; 
+		}
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
-		$this->setViewContent( $this->getList(), true );		
+		$this->setViewContent( $this->showImages(), true );		
     } 
 	
     /**
      * creates the list of the available subscription packages on the application
      * 
      */
-	public function createList()
+	public function showImages()
+    {		
+		
+		$directory = dirname( Ayoola_Loader::checkFile( $this->getFilename() ) );
+		$files = array_unique( Ayoola_Doc::getFilesRecursive( $directory ) );
+	//	var_export( $files );
+	//	asort( $files );
+		$data = array();
+		$html = '<div class="pc-notify-info" style="text-align:center;">Click on any image to replace it! <a style="font-size:smaller;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Browser/">More in File Manager</a></div>';
+		foreach( $files as $each )
+		{
+			$extension = array_pop( explode( ".", strtolower( $each ) ) );
+			switch( $extension )
+			{
+				case "jpg":
+				case "jpeg":
+				case "gif":
+				case "png":
+				case "bmp":
+				case "ico":
+				//	var_export( $extension );
+				break;
+				default:
+					continue 2;
+				break;
+			}
+			$uri = Ayoola_Doc::pathToUri( $each );
+			//	var_export( $uri );
+			$html .= '<a style="display:inline-block;xbackground:#fff;margin:10px;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=' . $uri . '&crop=1\', \'' . $this->getObjectName() . '\' );" href="javascript:"><img alt="' . $uri . '" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=100&max_height=60&url=' . $uri . '" ></a>';
+		}
+//		$data = self::sortMultiDimensionalArray( $data, 'filename' );
+	//	$html .= ;
+
+		return $html;
+    } 
+	
+    /**
+     * creates the list of the available subscription packages on the application
+     * 
+     */
+/* 	public function createList()
     {
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
@@ -104,5 +151,5 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 		//var_export( $list );
 		return $list;
     } 
-	// END OF CLASS
+ */	// END OF CLASS
 }
