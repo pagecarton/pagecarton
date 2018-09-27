@@ -1250,6 +1250,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				var loadInner = function( e )
 				{
 					var target = ayoola.events.getTarget( e );
+					if( target.value == \'__custom\' ){ return false; }
 					var a = ayoola.div.getParentWithClass( target, \'DragBox\' );
 					if( a.getAttribute( "data-pc-object-refreshing" ) == "true" )
 					{
