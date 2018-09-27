@@ -162,7 +162,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		//			$replaceInternally = true;
 				}
 			//	var_export( ( stripos( $template, $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'] ) !== false ) );
-				if( stripos( $template, $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'] ) !== false && stripos( $template, '<!--{{{0}}}' ) !== false )
+				if( ( stripos( $template, $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'] ) !== false || stripos( $template, $values['placeholder_prefix'] . 'pc_post_item_' ) !== false ) && stripos( $template, '<!--{{{0}}}' ) !== false )
 				{
 					$start = strpos( $template, '<!--{{{0}}}' ) + strlen( '<!--{{{0}}}' );
 				//	var_export( $postTheme );
@@ -222,7 +222,8 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 							$jSearch[] = '<!--' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '';
 							$jReplace[] = '';  
 							$jSearch[] = '' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '-->';
-							$jReplace[] = '';  
+							$jReplace[] = ''; 
+							
 						}
 					}
  				}
@@ -235,7 +236,11 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 						$iSearch[] = $values['placeholder_prefix'] . $ckey . $values['placeholder_suffix'];
 						$iReplace[] = $cccc;
 					}
-					$iTemplate .= @str_ireplace( $iSearch, $iReplace, $postTheme );    
+					$iTemplate .= @str_ireplace( $iSearch, $iReplace, $postTheme );  
+
+					//	deal with {{{pc_post_item_1}}}
+					$search[] = '' . $values['placeholder_prefix'] . 'pc_post_item_' . $key . $values['placeholder_suffix'] . '';
+					$replace[] = $iTemplate;  
 				}
 				elseif( $jSearch )
 				{
