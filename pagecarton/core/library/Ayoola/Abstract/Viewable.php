@@ -1834,13 +1834,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//		var_export( $this->getParameter( 'content_to_clear' ) );
 				//	Define content to clear from the screen
 					$contentToClear = $this->getParameter( 'content_to_clear' ) . @$this->_parameter['content_to_clear_internal'];
-				if( $contentToClear )       
-				{
-					$search = array_map( 'trim', explode( "\n", $contentToClear ) );
-			//		var_export( $search );
-					$html = str_replace( $search, '', $html );
-					//	self::v( $template );   
-				}
+					if( $contentToClear )       
+					{
+						$search = array_map( 'trim', explode( "\n", $contentToClear ) );
+				//		var_export( $search );
+						$html = str_replace( $search, '', $html );
+						//	self::v( $template );   
+					}
+					$themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => Ayoola_Page_Editor_Layout::getDefaultLayout() ) );
+					$html = str_replace( $themeInfo['dummy_search'], $themeInfo['dummy_replace'], $html );
 				
 				return $html;
 			break;  

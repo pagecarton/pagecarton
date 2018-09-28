@@ -933,7 +933,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 							var c;
 							if( c = a[b].getElementsByTagName( "input" ) )
 							{
-								c[0].focus();
+								c[0] ? c[0].focus() : null;
 							}
 							a[b].setAttribute( "data-pc-form-done-fieldset", "true" )
 							break;
