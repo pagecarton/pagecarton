@@ -1841,8 +1841,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						$html = str_replace( $search, '', $html );
 						//	self::v( $template );   
 					}
-					$themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => Ayoola_Page_Editor_Layout::getDefaultLayout() ) );
-					$html = str_replace( $themeInfo['dummy_search'], $themeInfo['dummy_replace'], $html );
 				
 				return $html;
 			break;  

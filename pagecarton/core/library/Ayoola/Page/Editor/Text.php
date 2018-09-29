@@ -86,6 +86,9 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		{
 			@$content = $this->getParameter( 'preserved_content' );
 		}
+		$themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout() ) );
+		$content = str_replace( $themeInfo['dummy_search'], $themeInfo['dummy_replace'], $content );
+	//	var_export( $themeInfo );   
 		$content = self::__( $content );
 	//	var_export( $this->getParameter( 'markup_template_object_name' ) );
 		if( $this->getParameter( 'markup_template_object_name' ) )

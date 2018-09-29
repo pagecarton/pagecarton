@@ -53,16 +53,23 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             }
             if( ! $identifierData = self::getIdentifierData() ){ return false; }
 			$this->createForm( 'Continue..', '' );
-			$this->setViewContent( '<div class="pc-notify-info" style="text-align:center;">Update text on the site! <a style="font-size:smaller;" href="?editing_dummy_text=1">Advanced mode</a></div>' );
+			$this->setViewContent( '<div class="pc-notify-info" style="text-align:center;">Update text on the site! <a style="font-size:smaller;" onclick="location.search+=\'&editing_dummy_text=1\'" href="javascript:">Advanced mode</a></div>' );
 			$this->setViewContent( $this->getForm()->view() );
 		//	self::v( $_POST );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
          //   self::v( $identifierData );
       //      self::v( $values );
     //        $identifierData += $values;
+            foreach( $values['dummy_replace'] as $key => $each )
+            {
+                if( '' === $each )
+                {
+                    $values['dummy_replace'][$key] = trim( $values['dummy_search'][$key], '{}' );
+                }
+
+            }
             $this->updateDb( $values );
-
-
+			$this->setViewContent( '<div class="goodnews" style="xtext-align:center;">Update saved successfully.</div>', true );
             // end of widget process
           
 		}  
@@ -107,7 +114,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             {
                 $fieldset->addElement( array( 'name' => 'dummy_search', 'multiple' => 'multiple', 'label' => 'Dummy Text', 'placeholder' => @$data['dummy_search'][$i], 'type' => 'InputText', 'value' => @$data['dummy_search'][$i] ) );
             }
-            $info = array( 'name' => 'dummy_replace', 'multiple' => 'multiple', 'label' => $data['dummy_title'][$i] ? : ' ', 'placeholder' => @$data['dummy_search'][$i], 'type' => 'TextArea', 'value' => @$data['dummy_replace'][$i] ? : @$data['dummy_search'][$i] );
+            $info = array( 'name' => 'dummy_replace', 'multiple' => 'multiple', 'label' => $data['dummy_title'][$i] ? : ' ', 'placeholder' => @$data['dummy_search'][$i], 'type' => 'TextArea', 'value' => ( @$data['dummy_replace'][$i] || ! empty( $_REQUEST['editing_dummy_text'] ) ) ? $data['dummy_replace'][$i] : trim( @$data['dummy_search'][$i], '{}' ) );
             if( strip_tags( $data['dummy_search'][$i] ) !== $data['dummy_search'][$i] )
             {
                 $info['data-html'] = '1';
@@ -115,6 +122,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             }
             if( ! empty( $_REQUEST['editing_dummy_text'] ) )
             {
+                $info['label'] = 'Default Replacement';
                 $info['label'] = 'Default Replacement';
             //    var_export( $info );
             }
