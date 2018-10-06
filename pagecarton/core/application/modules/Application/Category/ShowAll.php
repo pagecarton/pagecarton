@@ -48,27 +48,17 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
      * @var array
      */
 	protected static $_postCategories;
+	
 		
     /**
      * The method does the whole Class Process
      * 
      */
-	public function setDbData( array $data = null )
+	public static function getChildren( $categoryId )
     {
-//		var_export( __CLASS__ );
-	//	$this->setViewContent( '', true );
-		
  		//	Choose the kind of categories to show
-		@$categoryId = $_GET['category']; 
-		if( $this->getParameter( 'ignore_category_query_string' ) )
-		{
-			// switch $_GET['category'] off for this instance 
-			@$categoryId = null; 
-		}
-		@$categoryId = $this->getParameter( 'category' ) ? : $categoryId;
-		@$categoryId = $this->getParameter( 'category_id' ) ? : $categoryId;
-		@$categoryId = $this->getParameter( 'category_name' ) ? : $categoryId;
-		if( $categoryId )
+		$children = array();
+	   if( $categoryId )
 		{
 			switch( gettype($categoryId ) )
 			{
@@ -83,7 +73,6 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 			//	Categories
 			$table = Application_Category::getInstance();
 			
-			$children = array();
 			if( $categoryInfo = $table->select( null, array( 'category_name' => @$categoryId ) ) )
 			{
 				//	self::v( $categoryInfo );
@@ -93,36 +82,58 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 				}
 				
 			}
+		//	self::v( $categoryInfo );
 			
 			if( $categoryInfo = $table->select( null, array( 'parent_category_name' => $categoryId ) ) )
 			{
-				//	self::v( $categoryInfo );
 				foreach( $categoryInfo as $each )
 				{
 					$children[] = $each['category_name'];
 				}
 			}
-			$this->_dbWhereClause['category_name'] = $children;
+			
+			if( $categoryInfo = $table->select( null, array( 'parent_category' => $categoryId ) ) )
+			{
+				foreach( $categoryInfo as $each )
+				{
+					$children[] = $each['category_name'];
+				}
+			}
+	//		self::v( $categoryInfo );
+	//		self::v( $table->select() );
 
+		}
+		return $children;
+    } 
+		
+    /**
+     * The method does the whole Class Process
+     * 
+     */
+	public function setDbData( array $data = null )
+    {
+		@$categoryId = $this->getParameter( 'category' ) ? : $categoryId;
+		@$categoryId = $this->getParameter( 'category_id' ) ? : $categoryId;
+		@$categoryId = $this->getParameter( 'category_name' ) ? : $categoryId;
+		if( is_numeric( $this->getParameter( 'pc_module_url_values_parent_category_offset' ) ) )
+		{
+			if( @array_key_exists( $this->getParameter( 'pc_module_url_values_parent_category_offset' ), $_REQUEST['pc_module_url_values'] ) )
+			{
+				$categoryId = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_parent_category_offset' ) )];
+			}
 		}
 		//	switch templates off
 	//	$this->_parameter['markup_template'] = null; 
-		if( empty( $this->_dbWhereClause['category_name'] ) )
+		if( ! $children = self::getChildren( $categoryId ) )
 		{
 			$this->_dbWhereClause['parent_category'] = null;
 		}
+		else
+		{
+			$this->_dbWhereClause['category_name'] = $children;
+		}
 		$data = Application_Category::getInstance()->select( null, $this->_dbWhereClause );
-	//	var_export( $this->_dbWhereClause );
-	//	var_export( $data );
-	//	$data = $this->getDbData();
-	//	krsort( $data );
 		$this->_dbData = $data;
-	//	var_export( $this->_parameter['parameter_suffix'] );
-	//	var_export( $this->_parameter );
-	//	var_export( $this->getParameter( 'order_by' ) );  
-	//	$this->_objectData = $data;
-	//	$this->_objectTemplateValues = $data;
-	//	$this->setViewContent( '', true );
     } 
 			
     /**

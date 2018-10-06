@@ -62,7 +62,6 @@ abstract class Application_Category_Abstract extends Ayoola_Abstract_Table
      */
 	protected $_tableClass = 'Application_Category';
 	
-	
     /**
      * creates the form
      * 

@@ -1536,7 +1536,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	
 		if( $categoryId || $categoryName )
 		{
-			$whereClause['category_name'][] = $categoryName ? : $categoryId;
+			$category = $categoryName ? : $categoryId;
+			$whereClause['category_name'][] = $category;
+			if( $children = Application_Category_ShowAll::getChildren( $category ) )
+			{
+				$whereClause['category_name'] = array_merge( $whereClause['category_name'], $children );
+				;
+			}
+		//	var_export( $children );
 	//		$whereClause['category_name'][] = $categoryId ? : 'workaround_avoid_error_in_search';
 		//	$this->_dbWhereClause['category_id'] = $categoryId;
 		//	$this->setViewContent( '<p>Showing articles from ', true );
