@@ -95,7 +95,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		{
 			$classes = (array) $this->getParameter( 'markup_template_object_name' );    
 			foreach( $classes as $counter => $each )
-			{		
+			{	
+	
 				//	Removing time() from namespace because it doesn't allow the post to cache
 				//	Use whole content or specified part
 				$i = 0;
@@ -103,6 +104,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		//				var_export( $content );
 				$start = '{{{@' . $counter . '(' . $each . ')';
 				$end = '(' . $each . ')@' . $counter . '}}}';
+
 				if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
 				{
 					$start = '{{{@(' . $each . ')';
@@ -113,7 +115,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 						$end = '' . $each . '@}}}';
 						if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
 						{
-							$parameters = array( 'markup_template' => $content, 'markup_template_namespace' => 'x1234', 'editable' => $each ) + $this->getParameter();
+							$parameters = array( 
+												'markup_template' => $content, 
+												'markup_template_namespace' => 'x1234', 
+												'parameter_suffix' => '_[' . $counter . ']', 
+												'editable' => $each 
+												) 
+												+ $this->getParameter();
 							$class = new Ayoola_Object_Embed( $parameters );
 							$content = $class->view();
 						}
@@ -267,7 +275,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$fieldset->duplicationData = array( 'add' => '+ Embed New Widget', 'remove' => '- Remove Above Widget', 'counter' => 'embed_widget_counter', );
 			$fieldset->placeholderInPlaceOfLabel = true;
 			$i++;
-			$fieldset->addLegend( 'Widget  <span name="embed_widget_counter">' . $i . '</span> of <span name="embed_widget_counter_total">' . ( count( @$object['markup_template_object_name'] ) ? : 1 ) . '</span>' );			   			
+			$fieldset->addLegend( 'Widget  <span name="embed_widget_counter" class="embed_widget_counter">' . $i . '</span> of <span name="embed_widget_counter_total" class="embed_widget_counter_total">' . ( count( @$object['markup_template_object_name'] ) ? : 1 ) . '</span>' );   			   			
 			$html .= $fieldset->view(); 
 		}
 		while( isset( $object['markup_template_object_name'][$i] ) );

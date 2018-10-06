@@ -293,15 +293,34 @@ ayoola.div =
 	},
 		
 	//	Counts elements and set innerhtml to the number of each
-	refreshVisibleCounter: function( element )
+	refreshVisibleCounter: function( element, baseElement )
 	{
+	//	alert( baseElement );
+		baseElement = baseElement ? baseElement : document;
 		if( ! element ){ return false; }
 		if( typeof element == 'string' )
 		{
-			element = document.getElementsByName( element ); //
+			if( baseElement.getElementsByName )
+			{
+				element = baseElement.getElementsByName( element ); //
+			}
+			if( ! baseElement.getElementsByName && baseElement.getElementsByClassName )
+			{
+				element = baseElement.getElementsByClassName( element ); //
+			}
 		}
+	//	alert( element );
+	//	alert( baseElement.getElementsByClassName( element ) );
+	//	alert( element[0] );
 		if( ! element ){ return false; }
-		var total = document.getElementsByName( element[0].getAttribute( 'name' ) + '_total' );
+		if( baseElement.getElementsByName )
+		{
+			var total = baseElement.getElementsByName( element[0].getAttribute( 'name' ) + '_total' );
+		}
+		if( ! baseElement.getElementsByName && baseElement.getElementsByClassName )
+		{
+			var total = baseElement.getElementsByClassName( element[0].getAttribute( 'name' ) + '_total' );
+		}
 	//	alert( element[0].getAttribute( 'name' ) + '_total' );
 	//	alert( total.length );
 		for( var a = 0; a < element.length; a++ )
@@ -312,7 +331,7 @@ ayoola.div =
 		{
 			total[a].innerHTML = element.length;
 		}
-		return true;
+		return true; 
 	},
 		
 	//	Remove elements from the document
@@ -425,6 +444,15 @@ ayoola.div =
 	getParentWithClass: function( element, className ) 
 	{
 		while( ( element = element.parentElement ) && ! element.classList.contains( className ) );
+		return element;
+	},	
+
+	getParentWithTagName: function( element, tagName ) 
+	{
+		while( ( element = element.parentElement ) && element.tagName.toLowerCase() != tagName.toLowerCase() )
+		{
+		//	alert( element );
+		}
 		return element;
 	},	
 

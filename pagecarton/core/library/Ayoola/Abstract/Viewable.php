@@ -961,6 +961,21 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		preg_match_all( "/getParameter\( '([a-z_-]*)' \)/", $content, $results );
 	//	var_export( $class );
 		$results[1] = array_unique( $results[1] );
+
+		// 
+		$supplementary = array();	
+		if( ! empty( $parameters['markup_template_object_name'] ) )
+		{
+			foreach( $parameters['markup_template_object_name'] as $counter => $eachKey )
+			{
+				foreach( $results[1] as $each )
+				{
+					$supplementary[] = $each . '_[' . $counter . ']';
+				}
+			}
+		}
+	//	var_export( $supplementary );
+		$results[1] += $supplementary;
 		sort( $results[1] );
 		static::$_parameterKeys[$thisObjectID] = $results[1];   
 	//	if( in_array( 'Application_Profile_View', $classes ) )
@@ -1362,6 +1377,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( is_null( $key ) )
 		{
 			return $this->_parameter;
+		}
+		if( array_key_exists( $key . $this->_parameter['parameter_suffix'], $this->_parameter ) )
+		{
+			return $this->_parameter[$key];
 		}
 		if( array_key_exists( $key, $this->_parameter ) )
 		{
