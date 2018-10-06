@@ -363,10 +363,13 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
  		//	Extra check for non-admin
 		$allowedCoders =  Application_Settings_Abstract::getSettings( 'Forms', 'coders_access_group' ); 
-//		var_export( $allowedCoders );
+	//	var_export( $allowedCoders );  
 //		var_export( Ayoola_Form::hasPriviledge( $allowedCoders ) );
 		//	<a>efewwewe</a>
-		if( $allowedCoders && ! Ayoola_Form::hasPriviledge( $allowedCoders ) )
+	//	if( $allowedCoders && ! Ayoola_Form::hasPriviledge( $allowedCoders ) )
+
+		//	first fight against xss
+		if( ! Ayoola_Form::hasPriviledge( $allowedCoders ) )
 		{
 			//	Turning this to array allows to validate array values
 			$values = $this->_values[$this->_names[$name]['real_name']];
@@ -992,11 +995,11 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 	//	self::v( $this->_names );
 		@++$this->counter;
 		$form = null;
-		$form .= @$fieldset->container ? "<{$fieldset->container}>\n" : null;
+		$form .= @$fieldset->getPreHtml();
+//		$form .= @$fieldset->container ? "<{$fieldset->container}>\n" : null;
 		$fieldsetTag = @$fieldset->tag ? : "fieldset";
-
 		$form .= ! @$fieldset->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "<{$fieldsetTag} class='pc-form-fieldset-{$this->counter}'>\n" : null;
-		$form .= $fieldset->getLegend() ? "\n<legend>{$fieldset->getLegend()}</legend>\n" : null;
+	//	$form .= $fieldset->getLegend() ? "\n<legend>{$fieldset->getLegend()}</legend>\n" : null;
 		$allElements = $fieldset->getElements();
 /* 		if( $this->getParameter( 'return_required_fieldset_values' ) )
 		{
@@ -1078,14 +1081,15 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 	//	var_export( Ayoola_Object_Wrapper_Abstract::wrap( $elementMarkups, @$fieldset->wrapper  ) );
 		$form .= Ayoola_Object_Wrapper_Abstract::wrapContent( $elementMarkups, @$fieldset->wrapper  );
-		$form .= $fieldset->allowDuplication ? "<div><a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$fieldset->duplicationData['add'] ? : "Duplicate this fieldset" ) . "' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.parentNode.cloneNode( true ); var fieldtags= [ \"input\", \"textarea\", \"select\"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= \"\"; } } this.parentNode.parentNode.parentNode.insertBefore( fieldset, this.parentNode.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name=\"\"; ayoola.div.refreshVisibleCounter(\"" . @$fieldset->duplicationData['counter'] . "\");'>" . ( @$fieldset->duplicationData['add'] ? : " + " ) . "</a>\n" : null; 
-		$form .= $fieldset->allowDuplication ? "<a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$fieldset->duplicationData['add'] ? : "Remove this fieldset" ) . "' onClick='confirm( \"Delete all the elements in these fieldset?\") ? this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode ) : null; ayoola.div.refreshVisibleCounter(\"" . @$fieldset->duplicationData['counter'] . "\");'>" . ( @$fieldset->duplicationData['remove'] ? : " - " ) . "</a></div>\n" : null; 
+//		$form .= $fieldset->allowDuplication ? "<div><a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$fieldset->duplicationData['add'] ? : "Duplicate this fieldset" ) . "' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.parentNode.cloneNode( true ); var fieldtags= [ \"input\", \"textarea\", \"select\"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= \"\"; } } this.parentNode.parentNode.parentNode.insertBefore( fieldset, this.parentNode.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name=\"\"; ayoola.div.refreshVisibleCounter(\"" . @$fieldset->duplicationData['counter'] . "\");'>" . ( @$fieldset->duplicationData['add'] ? : " + " ) . "</a>\n" : null; 
+	//	$form .= $fieldset->allowDuplication ? "<a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$fieldset->duplicationData['add'] ? : "Remove this fieldset" ) . "' onClick='confirm( \"Delete all the elements in these fieldset?\") ? this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode ) : null; ayoola.div.refreshVisibleCounter(\"" . @$fieldset->duplicationData['counter'] . "\");'>" . ( @$fieldset->duplicationData['remove'] ? : " - " ) . "</a></div>\n" : null; 
 	//	var_export( $div );  
 	//	var_export( $this->_values );
 	//	$form .= $fieldset->allowDuplication ? "<button title='Duplicate this fieldset' onClick='this.parentNode.parentNode.insertBefore( this.parentNode.cloneNode( true ), this.parentNode );'>+</button>\n" : null;
 	//	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+		$form .= @$fieldset->getPostHtml();
 		$form .= ! @$fieldset->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "</{$fieldsetTag}>\n" : null;
-		$form .= @$fieldset->container ? "</{$fieldset->container}>\n" : null;
+	//	$form .= @$fieldset->container ? "</{$fieldset->container}>\n" : null;
 		return $form;  
     }
 	
