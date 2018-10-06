@@ -42,27 +42,28 @@ ayoola.countdown =
 	{
 		//	Find out if any of the timer variables were sent in the argument
 		var datetime = timerObject.datetime || ayoola.countdown.datetime;
-		var secondsLeft = timerObject.secondsLeft || ayoola.countdown.secondsLeft;
+		var secondsLeftx = timerObject.secondsLeft || ayoola.countdown.secondsLeft;
 		var container = timerObject.container || ayoola.countdown.container;
 		var callbacks = timerObject.callbacks || ayoola.countdown.callbacks;
 		
 		//  we use time first 
-		if( ! secondsLeft )
+		if( ! secondsLeftx )
 		{
 			// find the amount of "seconds" between now and target
 			var target = new Date( datetime.year, datetime.month, datetime.day, datetime.hours, datetime.minutes, datetime.seconds ).getTime();
-			secondsLeft = ( target - ( new Date().getTime() ) ) / 1000;
+			secondsLeftx = ( target - ( new Date().getTime() ) ) / 1000;
 		}
-	//	alert( secondsLeft );
+	//	alert( secondsLeftx );
+
 		// variables for time units
 		var years, months, days, hours, minutes, seconds;
 
 		// get tag element
-		var countdown = document.getElementById("countdown");		
+	//	var countdown = document.getElementById("countdown");		
 		var countdown = function()
 		{
 			var content = '';
-
+			secondsLeft = secondsLeftx;
 			// do some time calculations
 			//	alert( secondsLeft );
 			//	alert( secondsLeft / 946080000 );
@@ -103,16 +104,17 @@ ayoola.countdown =
 				minutes = parseInt( secondsLeft / 60 );
 				content += ' ' + minutes + ' min ';
 			}
-		//	alert( secondsLeft );
 			seconds = parseInt( secondsLeft % 60 );
 		//	alert( seconds );
-			secondsLeft--;
+			secondsLeftx--;
 			// format countdown string + set tag value
 			if( seconds )
 			{
 				content += ' ' + seconds + ' sec ';
 			}
-			if( secondsLeft < 0 )
+	//		alert( secondsLeft );
+	//		alert( content );
+			if( secondsLeftx < 0 )
 			{
 				stopCounting();
 				
