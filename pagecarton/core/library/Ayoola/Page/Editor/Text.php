@@ -86,7 +86,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		{
 			@$content = $this->getParameter( 'preserved_content' );
 		}
-		$themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout() ) );
+		$themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout() ) );
 		$content = str_replace( $themeInfo['dummy_search'], $themeInfo['dummy_replace'], $content );
 	//	var_export( $themeInfo );   
 		$content = self::__( $content );
@@ -227,18 +227,9 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     public static function getHTMLForLayoutEditorAdvancedSettings( & $object )
 	{
 	//	var_export( $object );
-		$html = '<select multiple onchange="" class="" name="markup_template_object_name[]" style="width:100%;" >';  
+/* 		$html = '<select onchange="" class="" name="markup_template_object_name[]" style="width:100%;" >';  
 		$html .= '<option value="" >Embed Widgets</option>';  
 	//	var_export( $object['markup_template_object_name'] );
-		$object['markup_template_object_name'] = (array) $object['markup_template_object_name'];
-		$widgets = Ayoola_Object_Embed::getWidgets();
-		foreach( $object['markup_template_object_name'] as $each )
-		{
-			if( $each && ! array_key_exists( $each, $widgets ) )
-			{ 
-				$widgets[$each] = $each; 
-			}
-		}
 		foreach( $widgets as $key => $value )
 		{
 			$html .=  '<option value="' . $key . '"';   
@@ -254,7 +245,32 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 //		$html .= '<option value="' . $object['markup_template_object_name'] . '" selected = selected>' . $object['markup_template_object_name'] . '</option> '; 
 		}
 		$html .= '</select>'; 
-
+ */
+		$object['markup_template_object_name'] = (array) $object['markup_template_object_name'];
+		$widgets = Ayoola_Object_Embed::getWidgets();
+		foreach( $object['markup_template_object_name'] as $each )
+		{
+			if( $each && ! array_key_exists( $each, $widgets ) )
+			{ 
+				$widgets[$each] = $each;   
+			}
+		}
+		$html = null;
+		$i = 0;
+		do
+		{
+			$fieldset = new Ayoola_Form_Element; 
+			$fieldset->hashElementName = false;
+			$fieldset->container = 'span';
+			$fieldset->addElement( array( 'name' => 'markup_template_object_name[]', 'label' => '', 'style' => '', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$object['markup_template_object_name'][$i] ), array( '' => 'Embed Widgets' ) + $widgets );
+			$fieldset->allowDuplication = true;  
+			$fieldset->duplicationData = array( 'add' => '+ Embed New Widget', 'remove' => '- Remove Above Widget', 'counter' => 'embed_widget_counter', );
+			$fieldset->placeholderInPlaceOfLabel = true;
+			$i++;
+			$fieldset->addLegend( 'Widget  <span name="embed_widget_counter">' . $i . '</span> of <span name="embed_widget_counter_total">' . ( count( @$object['markup_template_object_name'] ) ? : 1 ) . '</span>' );			   			
+			$html .= $fieldset->view(); 
+		}
+		while( isset( $object['markup_template_object_name'][$i] ) );
 		foreach( $object['markup_template_object_name'] as $each )
 		{
 			$class = $each;

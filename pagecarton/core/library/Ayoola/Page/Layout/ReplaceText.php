@@ -94,7 +94,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 		//	
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() . $values['page_id'] . $values['url'], 'data-not-playable' => true ) );
 		$form->submitValue = $submitValue ;
-		$form->oneFieldSetAtATimeJs = true;
+	//	$form->oneFieldSetAtATimeJs = true;
 
         if( ! $data = self::getIdentifierData() ){ return false; }
 
