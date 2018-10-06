@@ -593,19 +593,21 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	var_export( $values );
 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) ) 
 		{ 
-			$tempItem = array_shift( $values );
+		//	$tempItem = array_shift( $values );
+			$tempItem = array_pop( $values );
 			//	make the first item a link to add a new post
 		//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
 		//	self::v( $tempItem );
 			$tempItem2 = $tempItem;
-			if( is_string( $tempItem2 ) )
+		//	if( is_string( $tempItem2 ) )
 			{
-				$tempItem2 = include( $tempItem );
+			//	$tempItem2 = include( $tempItem );
 			}
 			$where =  $this->_dbWhereClause;
 			$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
 			$newArticleType = @$tempItem2['article_type'] ? : ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
-			$newArticleTypeToShow = ucfirst( $newArticleType ) ? : 'Content';
+			$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
+			$newArticleTypeToShow = ucfirst( $postTypeInfo['post_type'] ) ? : 'Item';
 	//		self::v( $newArticleType );
 		//	self::v( $this->_dbWhereClause );
 			$categoryForNewPost = @array_pop( $where['category_name'] );
@@ -650,14 +652,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
 							'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
 						);  
-			$item ? array_unshift( $values, $item ) : null;
-			$tempItem ? array_unshift( $values, $tempItem ) : null;
-/*
-			if( count( $values ) >= $j )
-			{
-				$sacrificial = array_pop( $values );  
-			}
-*/			//	array_push( $values, $item );   
+		//	$item ? array_unshift( $values, $item ) : null;
+			$item ? array_push( $values, $item ) : null;
+		//	$tempItem ? array_unshift( $values, $tempItem ) : null;
+
 		}
 		
 		$i = 0; //	counter
