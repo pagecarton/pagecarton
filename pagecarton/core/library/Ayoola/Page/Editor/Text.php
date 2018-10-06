@@ -81,6 +81,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     public function init()
     {
 		//	codes first because it wont be there if they didnt opt to enter codes
+	//	var_export( $this->_parameter );  
 		$content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
 		if( @in_array( 'preserve_content', $this->getParameter( 'text_widget_options' ) ) && $this->getParameter( 'preserved_content' ) )
 		{
@@ -118,10 +119,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 							$parameters = array( 
 												'markup_template' => $content, 
 												'markup_template_namespace' => 'x1234', 
-												'parameter_suffix' => '_[' . $counter . ']', 
+												'parameter_suffix' => '[' . $counter . ']', 
 												'editable' => $each 
 												) 
-												+ $this->getParameter();
+												+ $this->getParameter();  
 							$class = new Ayoola_Object_Embed( $parameters );
 							$content = $class->view();
 						}
@@ -135,7 +136,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 					$started = stripos( $content, $start );
 					$length = ( stripos( $content, $end ) + strlen( $end ) )  - $started;
 					$partTemplate = substr( $content, $started, $length );
-					$parameters = array( 'markup_template' => $partTemplate, 'markup_template_namespace' => 'x1234', 'editable' => $each ) + $this->getParameter();
+					$parameters = array( 
+						'markup_template' => $partTemplate, 
+						'markup_template_namespace' => 'x1234', 
+						'parameter_suffix' => '[' . $counter . ']', 
+						'editable' => $each 
+						) 
+						+ $this->getParameter();  
 					
 					$class = new Ayoola_Object_Embed( $parameters );
 					$returnedContent = $class->view();

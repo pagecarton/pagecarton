@@ -107,11 +107,19 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 		}
 		//	switch templates off
 	//	$this->_parameter['markup_template'] = null; 
+		if( empty( $this->_dbWhereClause['category_name'] ) )
+		{
+			$this->_dbWhereClause['parent_category'] = null;
+		}
 		$data = Application_Category::getInstance()->select( null, $this->_dbWhereClause );
+	//	var_export( $this->_dbWhereClause );
 	//	var_export( $data );
 	//	$data = $this->getDbData();
 	//	krsort( $data );
 		$this->_dbData = $data;
+	//	var_export( $this->_parameter['parameter_suffix'] );
+	//	var_export( $this->_parameter );
+	//	var_export( $this->getParameter( 'order_by' ) );  
 	//	$this->_objectData = $data;
 	//	$this->_objectTemplateValues = $data;
 	//	$this->setViewContent( '', true );
@@ -125,7 +133,11 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 	//	var_export( $data );
 		$data['not_real_post'] = true; 
 		$data['document_url'] = $data['cover_photo'];
-		$data['article_title'] = $data['category_label']; 
+		$data['article_title'] = $data['category_label'] ? : $data['category_name']; 
+		if( ! $data['article_title'] )
+		{
+			$data = false;
+		}
 		$data['article_url'] = '' . self::getPostUrl() . '?category=' . $data['category_name']; 
 		$data['article_description'] = $data['category_description']; 
 		$data['publish'] = '1'; 

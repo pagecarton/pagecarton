@@ -946,14 +946,33 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$filter = new Ayoola_Filter_ClassToFilename();
 		foreach( $classes as $class )
 		{
-			if( ! Ayoola_Loader::loadClass( $class ) )
+			do
 			{
-				continue;
+				if( ! Ayoola_Loader::loadClass( $class ) )
+				{
+					continue;
+				}
+				$classFile = $filter->filter( $class );
+				$classFile = Ayoola_Loader::getFullPath( $classFile );
+			//	var_export( $classFile );
+				$fileContent = file_get_contents( $classFile );
+				$content .= $fileContent;
+				preg_match_all( "/class\s([a-zA-Z_]*)\sextends\s([a-zA-Z_]*)/", $fileContent, $abstract );
+		//		var_export( $class );
+		//		var_export( $abstract[2][0] );
+				$class = $abstract[2][0];
+				if( ! $class || in_array( $class, $classes ) )
+				{
+				//	var_export( $class );
+					break;
+				}
+				else
+				{
+					$classes[] = $class;
+				}
+			//	var_export( $abstract[2] );
 			}
-			$classFile = $filter->filter( $class );
-			$classFile = Ayoola_Loader::getFullPath( $classFile );
-		//	var_export( $classFile );
-			$content .= file_get_contents( $classFile ) ;
+			while( ! empty( $abstract[2] ) );
 		}
 //		$class = get_called_class();
 
@@ -964,18 +983,23 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 		// 
 		$supplementary = array();	
-		if( ! empty( $parameters['markup_template_object_name'] ) )
+		if( ! empty( $parameters['markup_template_object_name'] ) && is_array( $parameters['markup_template_object_name'] ) )
 		{
 			foreach( $parameters['markup_template_object_name'] as $counter => $eachKey )
 			{
+				if( ! Ayoola_Loader::loadClass( $eachKey ) )
+				{
+					continue;
+				}				
 				foreach( $results[1] as $each )
 				{
-					$supplementary[] = $each . '_[' . $counter . ']';
+					$supplementary[] = $each . '[' . $counter . ']';
 				}
 			}
+	//		var_export( $parameters['markup_template_object_name'] );
+	//		var_export( $supplementary );
 		}
-	//	var_export( $supplementary );
-		$results[1] += $supplementary;
+		$results[1] = array_merge( $results[1], $supplementary );
 		sort( $results[1] );
 		static::$_parameterKeys[$thisObjectID] = $results[1];   
 	//	if( in_array( 'Application_Profile_View', $classes ) )
@@ -1378,9 +1402,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			return $this->_parameter;
 		}
-		if( array_key_exists( $key . $this->_parameter['parameter_suffix'], $this->_parameter ) )
+	//	var_export( $key . $this->_parameter['parameter_suffix'] );
+	//	if( isset( $this->_parameter['parameter_suffix'] ) )
 		{
-			return $this->_parameter[$key];
+		//	var_export( $key . $this->_parameter['parameter_suffix'] );
+		//	return $this->_parameter[$key];
+		}
+		if( isset( $this->_parameter['parameter_suffix'] ) && array_key_exists( $key . $this->_parameter['parameter_suffix'], $this->_parameter ) )
+		{
+		//	var_export( $key . $this->_parameter['parameter_suffix'] );
+			return $this->_parameter[$key . $this->_parameter['parameter_suffix']];
 		}
 		if( array_key_exists( $key, $this->_parameter ) )
 		{
