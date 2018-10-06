@@ -384,9 +384,43 @@ class Ayoola_Form_Element extends Ayoola_Form
      *
      * @return string The Mark-up For Displaying Elements in a Browers
      */
+    public function getPreHtml()
+    {
+		$html = null;
+		$html .= @$this->container ? "<{$this->container}>\n" : null;
+		$fieldsetTag = @$this->tag ? : "fieldset";
+
+	//	$html .= ! @$this->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "<{$fieldsetTag} class='pc-form-fieldset-{$this->counter}'>\n" : null;
+		$html .= $this->getLegend() ? "\n<legend>{$this->getLegend()}</legend>\n" : null;
+		return $html;
+    } 	
+
+	
+    /**
+     * Sets and Updates the _html property
+     *
+     * @return string The Mark-up For Displaying Elements in a Browers 
+     */
+    public function getPostHtml()
+    {
+		$html = null;
+		$html .= $this->allowDuplication ? "<div><a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "Duplicate this fieldset" ) . "' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.parentNode.cloneNode( true ); var fieldtags= [ \"input\", \"textarea\", \"select\"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= \"\"; } } this.parentNode.parentNode.parentNode.insertBefore( fieldset, this.parentNode.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name=\"\"; ayoola.div.refreshVisibleCounter( \"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['add'] ? : " + " ) . "</a>\n" : null; 
+		$html .= $this->allowDuplication ? "<a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "Remove this fieldset" ) . "' onClick='confirm( \"Delete all the elements in these fieldset?\") ? this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode ) : null; ayoola.div.refreshVisibleCounter(\"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['remove'] ? : " - " ) . "</a></div>\n" : null; 
+//		$html .= ! @$this->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "</{$fieldsetTag}>\n" : null;
+		$html .= @$this->container ? "</{$this->container}>\n" : null;
+		return $html;
+    } 	
+
+	
+    /**
+     * Sets and Updates the _html property
+     *
+     * @return string The Mark-up For Displaying Elements in a Browers
+     */
     public function getHtml()
     {
-		return $this->_html;
+		$this->_html = Ayoola_Object_Wrapper_Abstract::wrapContent( $this->_html, @$this->wrapper  );
+		return $this->getPreHtml() . $this->_html . $this->getPostHtml();
     } 	
 
     /**
