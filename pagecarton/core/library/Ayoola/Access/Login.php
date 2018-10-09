@@ -247,8 +247,8 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			foreach( $settings as $each )
 			{
 	//	var_export( $userInfo[$each] );
-				if( empty( $userInfo[$each] ) )
-				{
+			if( empty( $userInfo[$each] ) && ! in_array( $userInfo['access_level'], array( 99, 98 ) )  )
+			{
 					return false;
 				}
 			}
