@@ -369,7 +369,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 	//	if( $allowedCoders && ! Ayoola_Form::hasPriviledge( $allowedCoders ) )
 
 		//	first fight against xss
-		if( ! Ayoola_Form::hasPriviledge( $allowedCoders ) )
+		if( ! Ayoola_Form::hasPriviledge( $allowedCoders ? : 98 ) )
 		{
 			//	Turning this to array allows to validate array values
 			$values = $this->_values[$this->_names[$name]['real_name']];
