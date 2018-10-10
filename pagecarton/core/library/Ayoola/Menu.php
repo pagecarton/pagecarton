@@ -690,7 +690,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			$menu->appendChild( $option );
 			if( $this->getParameter( 'markup_template' ) )
 			{
-				$template .= self::replacePlaceholders( $this->getParameter( 'markup_template' ), $values + ( $this->getParameter() ? : array() ) + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+				$template .= self::replacePlaceholders( $this->getParameter( 'markup_template' ), $values + ( $this->getParameter() ? : array() ) + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', 'pc_no_data_filter' => true, ) );
 			}
 		}
 		//	update the markup template
