@@ -1094,6 +1094,17 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     }
 	
     /**
+     * Return $_placeholders
+     *
+     * @param void
+     * @return array
+     */		
+    public static function getPlaceholders()
+    {
+		return self::$_placeholders;
+	}
+	
+    /**
      * Return $_global
      *
      * @param void

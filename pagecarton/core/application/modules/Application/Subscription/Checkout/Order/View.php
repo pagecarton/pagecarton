@@ -80,7 +80,16 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 		}
 		$this->setViewContent( self::arrayToString( $identifierData['order']['checkout_info'] ) );
 		$formViewer = new Ayoola_Form_View( array( 'form_name' => $orderForm, 'form_data' => $identifierData['order']['checkout_info'] ) );
-		$this->setViewContent( $formViewer->view() );
+		$formX = '<a href="javascript:" onclick="this.nextSibling.style.display=\'block\';this.nextSibling.elements[0].focus();this.nextSibling.scrollIntoView();this.style.display=\'none\';">Show Form Data</a><form style="display:none;" class="pc-form">';
+		foreach( $formViewer->getForm()->getFieldsets() as $fieldset )
+		{
+			$formX .= $fieldset->view();
+		//	$this->setViewContent(  );
+		}
+		$formX .= '</form>';
+		$formX = str_ireplace( Ayoola_Form::getPlaceholders(), '', $formX );
+		$this->setViewContent( $formX );
+//		$this->setViewContent( $formViewer->view() );
 
 //		var_export( $data );
 
