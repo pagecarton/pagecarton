@@ -405,16 +405,41 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 	//	self::v( $subscriptionData );
 	//	var_export( $subscriptionData['no_of_items_in_stock'] );
 		$showQuantity = 'Hidden';
-		$optionsForSelect = array();
+		$optionsForSelect = array( 0 );
 		if( @intval( $subscriptionData['no_of_items_in_stock'] ) > 1 )
 		{
 			$showQuantity = 'InputText';
 		}
 		elseif( is_numeric( $this->getParameter( 'min_quantity' ) ) ||  is_numeric( $this->getParameter( 'max_quantity' ) ) )
 		{
-			$min = is_numeric( $this->getParameter( 'min_quantity' ) ) ? $this->getParameter( 'min_quantity' ) : 1;
-			$max = intval( $this->getParameter( 'max_quantity' ) ) ? : intval( $this->getParameter( 'min_quantity' ) );
-			if( ! $step = $this->getParameter( 'quantity_step' ) )
+			var_export( $subscriptionData['item_min_quantity'] );
+			$min = 1;
+			if( is_numeric( $this->getParameter( 'min_quantity' ) ) )
+			{
+				$min = $this->getParameter( 'min_quantity' );
+			}
+			if( is_numeric( @$subscriptionData['item_min_quantity'] ) )
+			{
+				$min = $subscriptionData['item_min_quantity'];
+			}
+			$max = $min;
+			if( is_numeric( $this->getParameter( 'max_quantity' ) ) )
+			{
+				$max = $this->getParameter( 'max_quantity' );
+			}
+			if( is_numeric( @$subscriptionData['item_max_quantity'] ) )
+			{
+				$max = $subscriptionData['item_max_quantity'];
+			}
+			if( is_numeric( $this->getParameter( 'quantity_step' ) ) )
+			{
+				$step = $this->getParameter( 'quantity_step' );
+			}
+			if( is_numeric( @$subscriptionData['item_quantity_step'] ) )
+			{
+				$step = $subscriptionData['item_quantity_step'];
+			}
+			if( ! @$step )
 			{
 				$step = 1;
 				$diff = $max - $min;
@@ -425,8 +450,12 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 				
 			}
 			$showQuantity = 'Select';
-			$optionsForSelect = range( $min, $max, $step );
-			$optionsForSelect = array_combine( $optionsForSelect, $optionsForSelect );
+			$range = range( $min, $max, $step );
+			$optionsForSelect += array_combine( $range, $range );
+		//	if( ! in_array( 0, $optionsForSelect ) )
+			{
+	//			$optionsForSelect[0] = 0;
+			}
 		} 
 		//	internal forms to use
 		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $subscriptionData['article_type'] ) )
@@ -537,6 +566,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					$pricing = ' - ' . $filter->filter( $subscriptionData['price_option_price'][$key] );
 				}
 				$optionsForSelect = empty( $optionsForSelect ) ? array_combine( range( 0, 100 ), range( 0, 100 ) ) : $optionsForSelect;
+		//	var_export( $optionsForSelect );
 				$fieldset->addElement( array( 'name' => 'price_option' . $each, 'label' => $each . $pricing , 'type' => 'Select', 'value' => 'price_option' . $each ), $optionsForSelect );
 			}
 			if( ! $optionsForSelect )
