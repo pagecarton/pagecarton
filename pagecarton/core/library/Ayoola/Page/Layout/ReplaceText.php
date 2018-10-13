@@ -69,7 +69,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 
             }
             $this->updateDb( $values );
-			$this->setViewContent( '<div class="goodnews" style="xtext-align:center;">Update saved successfully.</div>', true );
+			$this->setViewContent( '<div class="goodnews" style="xtext-align:center;">Update saved successfully. Further text update could be done in <a href="/tools/classplayer/get/name/Ayoola_Page_List">Pages</a>. </div>', true );
             // end of widget process
           
 		}  
