@@ -624,7 +624,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
 				$addNewPostUrl .= '&true_post_type=' . $truePostType . '';
 			}
-			if( $this->getParameter( 'post_type_custom_fields' ) )
+			if( $this->getParameter( 'post_type_custom_fields' ) )  
 			{
 				$addNewPostUrl .= '&post_type_custom_fields=' . $this->getParameter( 'post_type_custom_fields' ) . '';
 			}
@@ -653,6 +653,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
 						);  
 		//	$item ? array_unshift( $values, $item ) : null;
+			$tempItem ? array_push( $values, $tempItem ) : null;
 			$item ? array_push( $values, $item ) : null;
 		//	$tempItem ? array_unshift( $values, $tempItem ) : null;
 

@@ -1054,7 +1054,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$openAdvancedOption = '';
 		}
-		$html .= '<div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;' . $openAdvancedOption . '" title="" class="status_bar advanced_options pc_page_object_specific_item " data-parameter_name="parent">'; 
+		$html .= '<div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;' . $openAdvancedOption . '" title="" class="advanced_options pc_page_object_specific_item " data-parameter_name="parent">'; 
 //		$html .= '<div style="clear:both;" name="' . $advancedName . '" class=""><label>Inject some parameters to this object...</label></div>';		
 
 			$form = new Ayoola_Form( array( 'name' => $advancedName, 'data-parameter_name' => 'advanced_parameters', 'class' => '' ) );

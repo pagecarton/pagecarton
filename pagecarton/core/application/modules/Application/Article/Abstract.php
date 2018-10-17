@@ -1139,7 +1139,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 									'post_type_options' => @array_map( 'trim', explode( ',', $_REQUEST['post_type_options'] ) ), 
 									'post_type_options_name' => @array_map( 'trim', explode( ',', $_REQUEST['post_type_options_name'] ) ), 
 								);
-			$classToCreatePostType = new Application_Article_Type_Creator( array( 'fake_values' => $postTypeInfo ) );
+			$classToCreatePostType = new Application_Article_Type_Creator( array( 'fake_values' => array( 'post_type' => ucwords( str_replace( array( '-', ' ' ), ' ', $articleTypeWeUsing ) ) ) + $postTypeInfo ) );
 			$result = $classToCreatePostType->view();
 			$values['true_post_type'] = $postTypeInfo['article_type'];
 			$values['post_type'] = $postTypeInfo['post_type'];
