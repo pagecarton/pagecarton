@@ -129,6 +129,10 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 	public static function filterReplacement( & $replacement )
     {
 		$first = $replacement;
+		if( ! is_scalar( $replacement )  )
+		{
+			return $replacement;
+		}
 		$replacement = ! is_scalar( $replacement ) ? null : html_entity_decode( $replacement );
 		$replacement = strip_tags( $replacement );
 		$replacement = htmlentities( $replacement, null, null, false );

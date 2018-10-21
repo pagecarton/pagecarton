@@ -1778,6 +1778,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$html = null;
 				$content = $this->getViewContent();
 				
+		//		var_export( $this->getParameter( 'markup_template' ) );
+
 				if( ! $template = $this->getMarkupTemplate() )      
 				{
 					//	Allow page builder to be able to set a default content incase theres no data used as template markup

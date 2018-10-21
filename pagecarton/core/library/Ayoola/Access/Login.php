@@ -127,7 +127,7 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 		//	Check if user sent a username or an email
 		$validator = new Ayoola_Validator_EmailAddress();
 		$validUserInfo = array();
-		
+		$values['username'] = trim( strtolower( $values['username'] ) );
 		if( $validator->validate( $values['username'] ) )
 		{
 			$values['email'] = $values['username'];
