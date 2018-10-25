@@ -101,11 +101,11 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 						if( in_array( $class, self::$_ignoredClasses ) ){ continue; }
 				//		var_export( $class );
 				//		var_export( self::$_ignoredClasses );
-
+					//	$parameters = 
 						$this->play( $class, $this->getParameter() );
 					//	$this->play( $class ); 
 					}
-					$this->clearParametersThatMayBeDuplicated();
+				//	$this->clearParametersThatMayBeDuplicated();
 				break;
 			}
 		}
@@ -154,6 +154,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		//	self::v( $class );   
 			return false;
 		}
+		self::unsetParametersThatMayBeDuplicated( $parameters );
 		$class = $class::viewInLine( $parameters );
 	//	$class = new $class( $parameters );
 	//	$class->setParameter(  );

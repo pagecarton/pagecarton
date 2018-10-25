@@ -1384,10 +1384,22 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     public function clearParametersThatMayBeDuplicated()
 	{
-		unset( $this->_parameter['object_class'] );
-		unset( $this->_parameter['object_style'] );
-		unset( $this->_parameter['wrapper_name'] );
-		unset( $this->_parameter['markup_template_no_data'] );
+		self::unsetParametersThatMayBeDuplicated( $this->_parameter );
+	}
+
+
+    /**
+	 * 
+	 * 		
+     * @param void
+     * @return void
+     */
+    public static function unsetParametersThatMayBeDuplicated( & $parameters )
+	{
+		unset( $parameters['object_class'] );
+		unset( $parameters['object_style'] );
+		unset( $parameters['wrapper_name'] );
+		unset( $parameters['markup_template_no_data'] );
 	}
 
     /**

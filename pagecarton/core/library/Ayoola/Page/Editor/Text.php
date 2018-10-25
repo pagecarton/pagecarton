@@ -123,6 +123,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 												'editable' => $each 
 												) 
 												+ $this->getParameter();  
+							self::unsetParametersThatMayBeDuplicated( $parameters );
 							$class = new Ayoola_Object_Embed( $parameters );
 							$content = $class->view();
 						}
@@ -144,6 +145,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 						) 
 						+ $this->getParameter();  
 					
+					self::unsetParametersThatMayBeDuplicated( $parameters );
 					$class = new Ayoola_Object_Embed( $parameters );
 					$returnedContent = $class->view();
 
@@ -163,7 +165,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				}  
 			}
 
-			$this->clearParametersThatMayBeDuplicated();
+		//	$this->clearParametersThatMayBeDuplicated();
 			$content .= '<div style="clear:both;"></div>';  
 			$content .= '<div style="clear:both;"></div>';  
 		//	$content = Ayoola_Object_Embed::viewInLine( $parameters );
@@ -222,7 +224,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		$html = $this->getParameter( 'editable' ) . $this->getParameter( 'raw_html' );
 		if( $this->getParameter( 'nl2br' ) )
 		{
-			$html = nl2br( $html );
+			$html = nl2br( $html );  
 		}
 	//	$this->
 		$this->_parameter['no_view_content_wrap'] = true;

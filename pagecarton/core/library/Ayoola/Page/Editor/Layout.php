@@ -1265,7 +1265,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//		alert( d );  
 					var f = "";
 					var g = false;
-					if( ! c )
+				//	if( ! c )
 					{
 						//	rebuild whole box
 						var f = "&rebuild_widget_box=1";
