@@ -69,6 +69,7 @@ class Application_SearchBox extends Ayoola_Abstract_Table
 				);
 		//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
+				Application_SearchBox_Table::getInstance()->insert( array( 'keywords' => array( array_map( 'trim', explode( ' ', $term ) ) ), 'query' => $term, 'username' => Ayoola_Application::getUserInfo( 'username' ), 'user_id' => Ayoola_Application::getUserInfo( 'user_id' ) ) );
 			}
 			//	make SearchBoxr
 		//	copy( $installerFilenamePhp, Ayoola_Application::$SearchBoxr );
