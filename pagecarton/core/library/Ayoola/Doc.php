@@ -428,7 +428,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 				//		PageCarton_Widget::v( $options['key_function'] );
 					}
 				}
-					if( isset( $files[$key] ) ) 
+				if( isset( $files[$key] ) ) 
 				{
 					while( isset( $files[$key] ) )
 					{
@@ -524,8 +524,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		//	$files = array_merge( $files, self::getFiles( $directory, $options ) );
 		//	$files = @array_merge( $files, self::getFiles( $directory, $options ) ) ? : array();
 		//	self::v( self::getFiles( $directory, $options ) );
-		//	$files = @array_merge( $files, self::getFiles( $directory, $options ) ) ? : array();
-			$files += self::getFiles( $directory, $options ) ? : array();
+			$files = @array_merge( $files, self::getFiles( $directory, $options ) ) ? : array();
+		//	$files += self::getFiles( $directory, $options ) ? : array();
 		}
 	//	self::v( $files );
 		ksort( $files, SORT_NUMERIC );
