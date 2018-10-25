@@ -57,7 +57,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		 */
 		$result = null;
 		$result = $this->getCache( func_get_args() );
-	//	if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
+		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
 		$rows = array();
 		if( ! empty( $options['filename'] ) )
 		{
@@ -165,8 +165,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$fields = array();		
 			$searchResultIsHere = false;
 			$rowId = self::getRecordRowId( $eachRecord );
+			$recordMatch = false;
+			$keyCount = 0;
 			foreach( $eachRecord->childNodes as $countField => $field )
 			{
+				$keyCount++;
 				$key = self::getFieldKey( $field );
 				if( ! in_array( $key, $fieldsToFetch ) ){ continue; }
 				foreach( $field->childNodes as $value )
@@ -179,71 +182,85 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				}
 				
 				$fields[$key] = self::filterDataType( $fields[$key], $this->getTableDataTypes( $key ) );
-				if( ! empty( $where['*'] ) )
+				do
 				{
-					$recordNumber = ( $eachRecord->childNodes->length ) - 1;
-			//		var_export( $recordNumber );
-					if( ! is_array( $fields[$key] ) )
+					if( ! empty( $where['*'] ) )
 					{
-						if( ( ! is_array( $where['*'] ) &&  stripos( $fields[$key], $where['*'] ) !== false  ) || ( is_array( $where['*'] ) && in_array( $fields[$key], $where['*'] ) )  )
-						{ 
-							$searchResultIsHere = true;
-						}
-						elseif( $countField >= $recordNumber && ! $searchResultIsHere )
-						{
-							continue 2;
-						}
-					}
-					else
-					{
-						//	An array is matched if a single member is present.
-						if( ( ! is_array( $where[$key] ) && in_array( $where[$key], $fields[$key] ) ) || ( is_array( $where[$key] ) && array_intersect( $where[$key], $fields[$key]) )  )
-						{
-				//			$searchResultIsHere = true;
-						}
-						elseif( $countField >= $recordNumber && ! $searchResultIsHere )
-						{
-							continue 2;
-						}
-					}
-
-				}
-				elseif( ! empty( $where ) )
-				{ 
-					if( array_key_exists( $key, $where ) )
-					{
+						$recordMatch = $recordMatch ? : false;
 						if( ! is_array( $fields[$key] ) )
 						{
-							if( ! is_array( $where[$key] ) && $where[$key] != $fields[$key] )
-							{ 
-								continue 2; 
-							}
-							elseif( is_array( $where[$key] ) && ! in_array( $fields[$key], $where[$key] ) )
+							if( ! is_array( $where['*'] ) ) 
 							{
+								if( stripos( $fields[$key], $where['*'] ) !== false )
+								{ 
+									$recordMatch = true;
+								//	break 2;  
+								}
+								else
+								{
+								//	continue 2;
+								}
+							}
+							else
+							{
+								foreach( $where['*'] as $keyword )
+								{
+									if( stripos( $fields[$key], $keyword ) !== false )
+									{ 
+								//	var_export( $where );
+								//	var_export( $fields );
 							//	var_export( $fields[$key] );
-								continue 2; 
+										$recordMatch = true;
+									//	break 3;  
+									}
+								}
+							//	continue 2;
 							}
 						}
- 						else
+					//	if( $keyCount === count(  $eachRecord->childNodes ) && $recordMatch )
 						{
-							//	An array is matched if a single member is present.
-							if( ! is_array( $where[$key] ) && ! in_array( $where[$key], $fields[$key] ) )
-							{
-								//	only the record is array
-								continue 2; 
-							}
-							elseif( is_array( $where[$key] ) && ! array_intersect( $where[$key], $fields[$key]) )
-							{
-								//	both element are arrays
-							//	var_export( $fields[$key] );
-								continue 2; 
-							}
-						//	var_export( $where[$key] );
-						//	var_export( $fields[$key] );
-						//	continue 2; 
+
 						}
- 					}
+
+					}
+					if( ! empty( $where ) )
+					{ 
+						if( array_key_exists( $key, $where ) )
+						{
+							if( ! is_array( $fields[$key] ) )
+							{
+								if( ! is_array( $where[$key] ) && $where[$key] != $fields[$key] )
+								{ 
+									continue 3; 
+								}
+								elseif( is_array( $where[$key] ) && ! in_array( $fields[$key], $where[$key] ) )
+								{
+								//	var_export( $fields[$key] );
+									continue 3; 
+								}
+							}
+							else
+							{
+								//	An array is matched if a single member is present.
+								if( ! is_array( $where[$key] ) && ! in_array( $where[$key], $fields[$key] ) )
+								{
+									//	only the record is array
+									continue 3; 
+								}
+								elseif( is_array( $where[$key] ) && ! array_intersect( $where[$key], $fields[$key]) )
+								{
+									//	both element are arrays
+								//	var_export( $fields[$key] );
+									continue 3; 
+								}
+							//	var_export( $where[$key] );
+							//	var_export( $fields[$key] );
+							//	continue 2; 
+							}
+						}
+					}
 				}
+				while( false );
 				
 				//	Retrieve values from the foreign keys
 			//	$temp = array();
@@ -294,7 +311,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			}
 			
 			//	If the filter wants to skip this record. It just need to switch the $fields to false;
-			$fields === false ? null : ( $rows[$rowId] = $fields );
+		//	var_export( $recordMatch );
+			$fields === false || ( $recordMatch === false && ! empty( $where['*'] ) ) ? null : ( $rows[$rowId] = $fields );
 
 			if( ! empty( $options['limit'] ) && count( $rows ) >= $options['limit'] )
 			{
