@@ -57,7 +57,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		 */
 		$result = null;
 		$result = $this->getCache( func_get_args() );
-		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
+	//	if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
 		$rows = array();
 		if( ! empty( $options['filename'] ) )
 		{
@@ -102,7 +102,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
  		$fileCount = 0;
  		$maxNoOfFiles = 50;
 		rsort( $files );
-	//	PageCarton_Widget::v( count( $files ) . '<br>' );
+	//	if( stripos( $this->getMyFilename(), 'localuser' ) )
+		{
+	//		PageCarton_Widget::v( $files );
+		}
+//		PageCarton_Widget::v( count( $files ) . '<br>' );
 		foreach( $files as $filename )
 		{
 			$innerOptions = $options;

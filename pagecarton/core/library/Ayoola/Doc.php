@@ -417,7 +417,18 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		//			self::v( $file ); 
 		//			self::v( $key ); 
 				}
-				if( isset( $files[$key] ) ) 
+			//	if( stripos( $directory, 'localuser' ) !== false )
+				{
+				//	if( stripos( $filename, '0.xml' ) !== false )
+					{
+					//	PageCarton_Widget::v( $file );
+				//		PageCarton_Widget::v( $filename );
+					//	PageCarton_Widget::v( $directory );
+				//		PageCarton_Widget::v( $key );
+				//		PageCarton_Widget::v( $options['key_function'] );
+					}
+				}
+					if( isset( $files[$key] ) ) 
 				{
 					while( isset( $files[$key] ) )
 					{
@@ -503,6 +514,11 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		$files = self::getFiles( $directory, $options );
 	//	var_export( $files );
 		$directories = self::getDirectoriesRecursive( $directory );
+	//	if( stripos( $directory, 'localuser' ) )
+		{
+	//		PageCarton_Widget::v( $files );
+	//		PageCarton_Widget::v( $directories );
+		}
 		foreach( $directories as $directory )
 		{
 		//	$files = array_merge( $files, self::getFiles( $directory, $options ) );

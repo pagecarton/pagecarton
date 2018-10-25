@@ -282,7 +282,7 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 		$access = new Ayoola_Access();
 		$hashedCredentials = $access->hashCredentials( $values );
 	//	$table->drop();
-	//	var_export( $table->select() ); 
+	//	self::v( $table->select() ); 
 	//	var_export( $hashedCredentials );
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED ); 
 		if( $info = $table->selectOne( null, array_map( 'strtolower', $hashedCredentials ) ) )
