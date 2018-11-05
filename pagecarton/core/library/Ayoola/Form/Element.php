@@ -233,7 +233,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-			$markup = "<label style=\"{$element['label_style']}\" for=\"{$element['name']}\">{$element['label']}</label>{$markup}";
+			@$markup = "<label style=\"{$element['label_style']}\" for=\"{$element['name']}\">{$element['label']}</label>{$markup}";
 		}
 		if( strtolower( $method ) == 'adddocument' )
 		{

@@ -37,6 +37,36 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
      * Performs the whole widget running process
      * 
      */
+	public static function getUpdates()
+    { 
+        $settingsName = __CLASS__;
+        $table = Application_Settings::getInstance();
+        $themeName =  ( ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
+    //    var_export( $themeName );
+        $themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
+    //    var_export( $themeInfo );
+        if( $previousData = $table->selectOne( null, array( 'settingsname_name' => $settingsName ) ) )
+        {
+    //      var_export( $previousData );
+            $previousData = unserialize( $previousData['settings'] );
+     //    var_export( $themeInfo );
+           if( is_array( $previousData['dummy_title'] ) && is_array( $previousData['dummy_search'] ) && is_array( $previousData['dummy_replace'] ) )
+            {
+                $themeInfo['dummy_title'] = array_merge( $themeInfo['dummy_title'], $previousData['dummy_title'] );
+                $themeInfo['dummy_search'] = array_merge( $themeInfo['dummy_search'], $previousData['dummy_search'] );
+                $themeInfo['dummy_replace'] = array_merge( $themeInfo['dummy_replace'], $previousData['dummy_replace'] );
+            }
+        }    
+        
+    //    var_export( $themeInfo );
+    //    var_export( $previousData );
+    return $themeInfo;   
+    }
+
+    /**
+     * Performs the whole widget running process
+     * 
+     */
 	public function init()
     {    
 		try
@@ -52,7 +82,9 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             //	return false; 
             }
             if( ! $identifierData = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Continue..', '' );
+            $settingsName = __CLASS__;
+
+            $this->createForm( 'Continue..', '' );
 			$this->setViewContent( '<div class="pc-notify-info" style="text-align:center;">Update text on the site! <a style="font-size:smaller;" onclick="location.search+=\'&editing_dummy_text=1\'" href="javascript:">Advanced mode</a></div>' );
 			$this->setViewContent( $this->getForm()->view() );
 		//	self::v( $_POST );
@@ -69,6 +101,20 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 
             }
             $this->updateDb( $values );
+            $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates();
+            $table = Application_Settings::getInstance();
+        //    var_export( $previousData );
+            if( $previousData )
+            {
+                $table->delete( array( 'settingsname_name' => $settingsName ) );
+                $values['dummy_title'] = array_merge( $previousData['dummy_title'], $values['dummy_title'] );
+                $values['dummy_search'] = array_merge( $previousData['dummy_search'], $values['dummy_search'] );
+                $values['dummy_replace'] = array_merge( $previousData['dummy_replace'], $values['dummy_replace'] );
+            }
+        //    var_export( $values );
+			$table->insert( array( 'settings' => serialize( $values ), 'settingsname_name' => $settingsName ) );
+
+            
 			$this->setViewContent( '<div class="goodnews" style="xtext-align:center;">Update saved successfully. Further text update could be done in <a href="/tools/classplayer/get/name/Ayoola_Page_List">Pages</a>. </div>', true );
             // end of widget process
           
@@ -96,7 +142,10 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 		$form->submitValue = $submitValue ;
 	//	$form->oneFieldSetAtATimeJs = true;
 
-        if( ! $data = self::getIdentifierData() ){ return false; }
+    //    if( ! $data = self::getIdentifierData() ){ return false; }
+        $data = Ayoola_Page_Layout_ReplaceText::getUpdates();
+        
+    //    var_export( $data );
 
         $i = 0;
         do

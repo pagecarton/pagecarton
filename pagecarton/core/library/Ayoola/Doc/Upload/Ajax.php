@@ -181,7 +181,8 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				$url .= 'public/';
 				
 				//	format extension
-				$extension = strtolower( array_pop( explode( '.', $_POST['name'] ) ) );
+				$extension = explode( '.', $_POST['name'] );
+				$extension = strtolower( array_pop( $extension ) );
 				
 				if( @in_array( 'private_directory', $docSettings['options'] ) && Ayoola_Application::getUserInfo( 'username' ) ) 
 				{

@@ -173,11 +173,12 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
  				//	retain the same layoutname of imported theme to preserve data links like images
  				if( isset( $export['layout_information'] ) )
 				{
-					if( $previousData = unserialize( file_get_contents( $export['layout_information'] ) ) )
+					if( $previousData = json_decode( file_get_contents( $export['layout_information'] ), true ) OR $previousData = unserialize( file_get_contents( $export['layout_information'] ) ) )
 					{
 						if( $previousData['layout_name'] )
 						{
-							$values['layout_name'] = $previousData['layout_name'];
+							//	send all content because of text update
+							$values += $previousData;
 						}
 						
 					}

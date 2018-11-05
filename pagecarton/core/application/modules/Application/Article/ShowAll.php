@@ -899,9 +899,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					//	var_export( $data['datetime_' . $key] );
 					}
 				}
-				@$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
-				@$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
-				@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );
 			}
 		//	elseif( $this->getParameter( 'filter_date' ) )
 			{
@@ -915,7 +912,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					$data['article_creation_date_filtered'] = $filter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
 				}
 			}
-				//	var_export( $data['article_modified_date'] );
+			@$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
+			@$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
+			@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );   
+			//	var_export( $data['article_modified_date'] );
 				//		var_export( time() );
 			switch( $this->getParameter( 'post_expiry_time' ) )
 			{

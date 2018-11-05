@@ -88,15 +88,6 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 					}
 				}
 			}
-/*			if( @$values['templates'] )
-			{
-				$directory =  '/documents/layout/';
-				foreach( $values['templates'] as $each )
-				{
-					$files[] = $directory . $each;
-				}
-			}
-*/			
 			//		var_export( $files );
 			$filter = new Ayoola_Filter_Name();
 			$filter->replace = '_';
@@ -125,16 +116,15 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 				$each = str_replace( array( '/', '\\' ), DS, $each );
 				$fullFiles[$each] = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . $each;	
 				$fullFiles[$each] = str_replace( array( '/', '\\' ), DS, $fullFiles[$each] );
+				if( ! is_file( $fullFiles[$each] ) || ! is_readable( $fullFiles[$each] ) )
+				{
+					unset( $fullFiles[$each] );
+				}
 			}
+		//	var_export( $fullFiles );
+		//	exit();
 			$regex = trim( $regex, '|' );
 			$regex = str_replace( DS, '/', "#({$regex})#" );
-		//	$regex = str_replace( array( 'C:' ), '', $regex );
-		//	$regex = str_replace( array( '/', '\\' ), DS, $regex );
-		//	$regex = str_replace( array( '\\' ), '\\\\', $regex );
-		//	var_export( $files );
-		//	var_export( $fullFiles );
-		//	var_export( $regex );
-		//	return false;
 		//	$export->buildFromDirectory( Ayoola_Application::getDomainSettings( APPLICATION_DIR ), $regex );
 			$export->buildFromIterator( new ArrayIterator( $fullFiles ), Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );			
 			

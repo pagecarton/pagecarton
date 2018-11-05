@@ -61,8 +61,10 @@ class Application_IconViewer extends PageCarton_Widget
         //          return false;
                 }
                 //  Code that runs the widget goes here...
-                $realExt = strtolower( array_pop( explode( '.', $url ) ) );
-                $ext = @$_REQUEST['extension'] ? : $realExt;
+                $realExt = explode( '.', $url );
+                $realExt = array_pop( $realExt );
+                $realExt = strtolower( $realExt );
+                $ext = @$_REQUEST['extension'] ? : $realExt;  
                 if( $realExt == $url )
                 {
         //         $ext = null;

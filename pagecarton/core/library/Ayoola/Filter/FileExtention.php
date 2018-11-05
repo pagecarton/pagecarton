@@ -8,8 +8,9 @@ class Ayoola_Filter_FileExtention implements Ayoola_Filter_Interface
 /* 		$ext = substr( $value, strrpos( $value, '.' ) );
 		$ext = strtolower( $ext );
  */		
-		
-		return strtolower( array_pop( explode( '.', $value ) ) );
+		$value = explode( '.', $value );
+		$value = strtolower( array_pop( $value ) );
+		return $value;
 	}
  
 }

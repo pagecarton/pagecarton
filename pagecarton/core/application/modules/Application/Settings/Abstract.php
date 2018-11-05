@@ -85,9 +85,13 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 		if( $settingsNameInfo = $settings->selectOne( null, array( 'class_name' => $class ) ) )
 		{
 			$settingsNameToUse = $settingsNameInfo['settingsname_name'];
+			return self::getSettings( $settingsNameToUse, $key );
 		}
-	//	var_export(  $settingsNameToUse );
-		return self::getSettings( $settingsNameToUse, $key );
+		elseif( $extensionInfo = $table->selectOne( null,  array( 'settings_class' => $class ) ) )
+		{
+			return self::getSettings( $extensionInfo['extension_name'], $key );
+		}
+//	var_export(  $settingsNameToUse );
 	}
 	
     /**
@@ -117,16 +121,11 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			//	var_export( $extensionInfo );
 				if( empty( $extensionInfo['settings'] ) )
 				{
-
 				//	settings getting lost in the subdomains with username
 				//	workaround till we find lasting solution
 					$domainSettings = Ayoola_Application::getDomainSettings();
 					if( ! empty( $domainSettings['main_domain'] ) && $domainSettings['main_domain'] != $domainSettings['domain_name'] )
 					{
-				//		if( Ayoola_Application::getRunTimeSettings() )
-						{
-			//				self::v( Ayoola_Application::getDomainSettings() );
-						}
 						$settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ), array( 'disable_cache' => true ) );
 						if( ! empty( $settings['settings'] ) )
 						{

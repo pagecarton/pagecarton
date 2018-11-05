@@ -343,6 +343,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			{
 				$data = $data['article_url'];
 			}
+			else
+			{
+				return false; 
+			}
 		}
 		if( ! is_file( $data ) )
 		{
