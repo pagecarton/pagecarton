@@ -261,7 +261,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 						@$values['pc_no_data_filter'] ? : self::filterReplacement( $cccc );
 						$iReplace[] = $cccc;
 					}
-					$iData = @str_ireplace( $iSearch, $iReplace, $postTheme );  
+					$iData = @str_replace( $iSearch, $iReplace, $postTheme );  
 					$iTemplate .= $iData;  
 
 					//	deal with {{{pc_post_item_1}}}
@@ -270,7 +270,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 				}
 				elseif( $jSearch )
 				{
-					$template = str_ireplace( $jSearch, $jReplace, $template );    
+					$template = str_replace( $jSearch, $jReplace, $template );    
 				}
 				
 			}
@@ -286,7 +286,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		}
 		$search[] = $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'];
 		$replace[] = @$iTemplate;  
-		$template = @str_ireplace( $search, $replace, $template );
+		$template = @str_replace( $search, $replace, $template );  
 		$search = array();
 		$search[] = '/' . $values['placeholder_prefix'] . '([\w+]+)' . $values['placeholder_suffix'] . '/';
 		$search[] = '/<!--([.]+)-->/';   

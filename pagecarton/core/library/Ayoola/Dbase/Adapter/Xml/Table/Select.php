@@ -193,6 +193,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 							{
 								if( stripos( $fields[$key], $where['*'] ) !== false )
 								{ 
+									$fields['pc_search_score'] += 1;
 									$recordMatch = true;
 								//	break 2;  
 								}
@@ -207,7 +208,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 								{
 									if( stripos( $fields[$key], $keyword ) !== false )
 									{ 
-								//	var_export( $where );
+										$fields['pc_search_score'] += 1;
+										//	var_export( $where );
 								//	var_export( $fields );
 							//	var_export( $fields[$key] );
 										$recordMatch = true;

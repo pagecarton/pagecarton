@@ -708,8 +708,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function __( $string )
     {		
-		if( ! Ayoola_Loader::loadClass( 'PageCarton_Locale' ) )
+	//	if( ! Ayoola_Loader::loadClass( 'PageCarton_Locale' ) )
 		{
+			//	was slowing down app
 			return $string;
 		}
 		if( preg_match( '#^[\s]*\{\{\{[^\{\}\s]*\}\}\}[\s]*$#', $string ) )
@@ -1115,6 +1116,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					case 'markup_template_suffix':
 					case 'call_to_action':
 					case 'content_to_clear':
+					case 'javascript_code':
 					case 'body':
 					//	if( $advanceParameters['advanced_parameter_value'][$i] )       
 						{
@@ -1306,9 +1308,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$html .= '<input name="' . $advancedName . '" placeholder="Choose a namespace for HTML template" data-parameter_name="markup_template_namespace" style="width:100%;" onclick="" value="' . @$object['markup_template_namespace'] . '" />';
 		}
-		if( @$object['markup_template'] )
+	//	if( @$object['markup_template'] )
 		{
-			$html .= '<textarea name="' . $advancedName . '" placeholder="Enter HTML template to use" data-parameter_name="markup_template" style="width:100%;" onclick="">' . @$object['markup_template'] . '</textarea>';
+		//	$html .= '<textarea name="' . $advancedName . '" placeholder="Enter HTML template to use" data-parameter_name="markup_template" style="width:100%;" onclick="">' . @$object['markup_template'] . '</textarea>';
 		}
 
 		//	just for padding.

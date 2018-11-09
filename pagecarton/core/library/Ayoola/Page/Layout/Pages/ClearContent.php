@@ -69,9 +69,11 @@ class Ayoola_Page_Layout_Pages_ClearContent extends Ayoola_Page_Layout_Pages
             }
             $fPaths = array();
             $themeName = strtolower( $data['layout_name'] );
-            $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
+/*             $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
             $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
             $fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
+ */            
+            $fPaths = static::getPagePaths( $themeName, $pageThemeFileUrl );
             $from = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $fPaths['include'];
       //      var_export( $from );
             if( ! is_file( $from ) )

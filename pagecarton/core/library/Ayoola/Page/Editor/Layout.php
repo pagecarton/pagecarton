@@ -950,7 +950,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					
 				$replace .= "\n//{$section} Ends Here\n?>";
 				
-				if( stripos( $page['url'], '/layout/' ) === 0 )
+				if( stripos( $page['url'], '/layout/' ) === 0 || stripos( $page['url'], '/default-layout' ) === 0 )
 				{
 					//	Template editor need this so pages could use the generated template to build their own templates
 					$replace = array( $replace . "%%{$section}%%", $replace . "@@@{$section}@@@" );  

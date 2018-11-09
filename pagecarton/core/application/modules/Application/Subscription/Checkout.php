@@ -459,6 +459,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			$options = $options->select();
 			$allowedOptions = Application_Settings_Abstract::getSettings( 'Payments', 'allowed_payment_options' ) ? : array();
 		//	self::v( $cart );
+		//	self::v( $options );
 			foreach( $options as $key => $each )
 			{
 				$api = 'Application_Subscription_Checkout_' . $each['checkoutoption_name'];

@@ -47,6 +47,36 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
      * 
      * 
      */
+	public static function getPagePaths( $themeName, $pageThemeFileUrl = null )
+    {
+        $fPaths = array();
+    //    $themeName = strtolower( $data['layout_name'] );
+        $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
+        $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
+		$fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
+		return $fPaths;
+	}
+		
+    /**
+     * 
+     * 
+     */
+	public static function getPageFile( $themeName, $pageThemeFileUrl = null )  
+    {
+     //   $fPaths = array();
+	//    $themeName = strtolower( $data['layout_name'] );
+		$pageThemeFileUrl = trim( $pageThemeFileUrl, '/' );
+
+
+	//	var_export( $pageThemeFileUrl );
+        $fPath = 'documents/layout/' . $themeName . '/' . ( $pageThemeFileUrl ? : 'index' ) . '.html';
+		return $fPath;
+	}
+		
+    /**
+     * 
+     * 
+     */
 	public static function getPages( $themeName, $type = null )
     {
 	//	if( ! $data = $this->getIdentifierData() ){ return array(); }

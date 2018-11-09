@@ -31,7 +31,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
      * 
      * @var string 
      */
-	protected static $_objectTitle = 'Update Text'; 
+	protected static $_objectTitle = 'Update Text';     
 
     /**
      * Performs the whole widget running process

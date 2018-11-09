@@ -89,7 +89,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates();
 		$content = str_replace( $textUpdatesSettings['dummy_search'], $textUpdatesSettings['dummy_replace'], $content );
-	//	var_export( $themeInfo );      
+	//	self::v( $textUpdatesSettings );        
 		$content = self::__( $content );
 	//	var_export( $this->getParameter( 'markup_template_object_name' ) );
 		if( $this->getParameter( 'markup_template_object_name' ) )
@@ -229,6 +229,14 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	//	$this->
 		$this->_parameter['no_view_content_wrap'] = true;
 		$this->setViewContent( $html );
+		if( $this->getParameter( 'javascript_code' ) )
+		{
+
+			Application_Javascript::addCode
+			(
+				$this->getParameter( 'javascript_code' )
+			);
+		}					
 
 	//	var_export( $this->_parameter );
      //   return $content . $this->getParameter( 'raw_html' );

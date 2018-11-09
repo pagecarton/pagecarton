@@ -23,9 +23,18 @@ require_once 'Ayoola/Dbase/Table/Abstract/Xml/Protected.php';
  * @package    Application_Subscription_Checkout_CheckoutOption
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
+ * 
  */
 
-class Application_Subscription_Checkout_CheckoutOption extends Ayoola_Dbase_Table_Abstract_Xml_Private
+
+/**
+ *
+ *	Children need to inherit. Because we can't install plugin twice
+ *
+ * 
+ */
+
+class Application_Subscription_Checkout_CheckoutOption extends Ayoola_Dbase_Table_Abstract_Xml_Protected
 {
 
     /**

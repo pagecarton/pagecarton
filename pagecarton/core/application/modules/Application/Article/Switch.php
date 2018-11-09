@@ -69,7 +69,7 @@ class Application_Article_Switch extends Application_Article_Abstract
 					case false:
 					case '':
 					case null:
-						$data[$switch] = true;
+						$data[$switch] = $switch;
 					break;
 					case 1:
 					case true:

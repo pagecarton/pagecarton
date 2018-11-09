@@ -119,12 +119,15 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
                 $fPaths = array();
                 $tPaths = array();
             //    $themeName = strtolower( $data['layout_name'] );
+                /* 
                 $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $values['old_page'] . '/include';
                 $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $values['old_page'] . '/template';
                 $fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $values['old_page'] . '/data_json';
                 $tPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $values['new_page'] . '/include';
                 $tPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $values['new_page'] . '/template';
-                $tPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $values['new_page'] . '/data_json';
+                $tPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $values['new_page'] . '/data_json'; */
+                $fPaths = static::getPagePaths( $themeName, $values['old_page'] );
+                $tPaths = static::getPagePaths( $themeName, $values['new_page'] );
                 foreach( $fPaths as $key => $each )
                 {
                     if( $from = Ayoola_Loader::getFullPath( $each, array( 'prioritize_my_copy' => true ) ) )

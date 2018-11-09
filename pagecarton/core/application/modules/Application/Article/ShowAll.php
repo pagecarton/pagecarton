@@ -359,7 +359,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
 				$values = $this->getDbData();
 			}
-	//		self::v( $values );
+		//	self::v( $values );
 			
 		//	var_export( $this->getParameter( 'sort_column' ) );
 			if( $this->getParameter( 'sort_column' ) )
@@ -396,6 +396,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				{
 				//	var_export( $data );
 			//		var_export( $data );
+			//		self::v( $data );
 					unset( $values[$key] );
 
 					//	quick fix for older posts that the dates were not set in the table
@@ -453,6 +454,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							{
 								continue 2;
 							}
+							$data[$switch] = $switch;
+							$data['post_switch'] = $switch;
 						}
 						
 					}
@@ -913,6 +916,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				}
 			}
 			@$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
+			@$data['article_date_m'] = date( 'm', $data['article_modified_date'] );   
 			@$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
 			@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );   
 			//	var_export( $data['article_modified_date'] );
