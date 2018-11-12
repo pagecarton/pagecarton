@@ -95,7 +95,13 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 		//	We don't allow editing UNIQUE Keys
 		$fieldset->addElement( array( 'name' => 'option_name', 'label' => 'Link Name', 'placeholder' => 'e.g. Contact Us', 'type' => 'InputText', 'value' => @$values['option_name'] ) );
 		$fieldset->addRequirement( 'option_name', array( 'WordCount' => array( 1, 500 ) ) );
-		$fieldset->addElement( array( 'name' => 'url', 'placeholder' => 'e.g. /site/contact', 'type' => 'InputText', 'value' => @$values['url'] ) );
+		$pages = Ayoola_Page::getAll();
+		if( @$values['url'] )
+		{
+			$pages[$values['url']] = $values['url'];
+		}
+		$fieldset->addElement( array( 'name' => 'url', 'label' => 'URL', 'onchange' => 'if( this.value == \'\' ){ a = prompt( \'New Url\', \'/url\' ); if( ! a ) return false; var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'placeholder' => $url, 'type' => 'Select', 'value' => @$values['url'] ), array_unique( $pages + array( '' => 'Custom URL' ) ) );
+	//	$fieldset->addElement( array( 'name' => 'url', 'placeholder' => 'e.g. /site/contact', 'type' => 'InputText', 'value' => @$values['url'] ) );
 		$options =  array( 
 							'logged_in' => 'Show this menu option to logged inn users', 
 							'logged_out' => 'Show this menu option to logged out users', 

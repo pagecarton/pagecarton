@@ -816,7 +816,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['document_url_uri'] = $data['document_url']; 
 			$data['document_url_cropped'] = $data['document_url']; 
 			$data['document_url_no_resize'] = $data['document_url']; 
-			if( strpos( @$data['document_url'], '//' ) === false && empty( $data['not_real_post'] ) )
+	//		var_export( $data['document_url'] );
+		//	var_export( Ayoola_Doc::uriToPath( $data['document_url'] ) );
+			if( $fileP = Ayoola_Doc::uriToPath( $data['document_url'] ) )
+			{
+				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?&url=' . @$data['document_url'] . '&document_time=' . @filemtime( $fileP ) . ''; 
+				$data['document_url_cropped'] = $data['document_url_no_resize'] . '&max_width=' . $maxWith . '&max_height=' . $maxHeight . ''; 
+		///		$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] );     
+			}
+			elseif( strpos( @$data['document_url'], '//' ) === false && empty( $data['not_real_post'] ) )
 			{
 				//	This is the default now if they don't have picture, create a placeholder
 			//	$data['document_url'] = $data['document_url_base64'];
@@ -832,7 +840,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$data['document_url_no_resize'] = $data['document_url']; 
 				$data['document_url_cropped'] = $data['document_url']; 
 			}
-		//	self::v( $data['document_url'] );
+	//		self::v( $data['document_url'] );
+	//		self::v( $data['document_url_cropped'] );
 			
 			//	Can't be lowercase because of auto create link
 			$url = $data['article_url'];

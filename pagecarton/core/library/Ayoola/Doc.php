@@ -328,6 +328,20 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     /**
      * Retrieves URI from directory
      *
+     * @param string The path to the document
+     * @return string URI
+     */
+    static public function uriToPath( $uri )
+    {	
+		//	Retrieve the url from the path
+		require_once 'Ayoola/Loader.php';
+		$fullDirPath = Ayoola_Loader::checkFile( DOCUMENTS_DIR . $uri );
+		return $fullDirPath;
+    } 
+	
+    /**
+     * Retrieves URI from directory
+     *
      * @param mixed The path(s) to the document
      * @return array Array of URIs
      */

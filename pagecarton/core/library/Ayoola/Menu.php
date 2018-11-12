@@ -94,7 +94,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		//	var_export( self::hasPriviledge() );
 	//	self::v( $this->getParameter( 'new_menu_name' ) );
 	//	self::v( $this->getParameter( 'new_menu_name' ) );
-		$menuName = $this->getViewOption();
+		$menuName = $this->getViewOption() ? : $this->getParameter( 'menu_name' );
 		if( ! $menuName && $this->getParameter( 'new_menu_name' ) )
 		{
 			$filter = new Ayoola_Filter_Name();
@@ -326,7 +326,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		{
 	//		var_export( self::hasPriviledge( array( 99, 98 ) ) );
 	//		var_export( self::hasPriviledge() );
-			$options[] = array( 'option_name' => $this->getParameter( 'edit_option_text' ) ? : '[Edit ' . $menu['menu_label']  . ' Menu]', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_List/menu_id/' . $menu['menu_id'] . '/', 'title' => 'Edit menu options', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => $menu['menu_id'], 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in','logged_out' ), ); 
+			$options[] = array( 'option_name' => $this->getParameter( 'edit_option_text' ) ? : '[Manage ' . $menu['menu_label']  . ' Menu]', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_List/menu_id/' . $menu['menu_id'] . '/', 'title' => 'Edit menu options', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => $menu['menu_id'], 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in','logged_out' ), ); 
 		}
 		$this->_options = $options;
     } 	

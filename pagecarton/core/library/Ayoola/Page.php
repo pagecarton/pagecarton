@@ -84,6 +84,25 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 	public static $isHome = false;
 	
     /**
+     * 
+     *
+     * @param void
+     * @return array 
+     */
+    public static function getAll()
+    {		
+		$pages = Ayoola_Page_Page::getInstance();
+		$pages = $pages->select();
+		require_once 'Ayoola/Filter/SelectListArray.php';
+		$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
+		$pages = $filter->filter( $pages );
+
+		$pages += Ayoola_Page_Layout_Pages::getPages( $data['layout_name'], 'list-url' ) ? : array();
+		asort( $pages );
+		return array_unique( $pages );
+	}
+	
+    /**
      * Get Page Info as available in $_currentPageInfo class property
      *
      * @param void

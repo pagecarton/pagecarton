@@ -786,62 +786,6 @@
       <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:2:{i:0;s:9:&quot;logged_in&quot;;i:1;s:19:&quot;append_previous_url&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[5]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="80">
-      <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Home]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:2:{i:0;s:9:&quot;logged_in&quot;;i:1;s:10:&quot;logged_out&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[0-0-19]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="logged_in"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="logged_out"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="append_previous_url"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="sub_menu_name"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="option_id"><![CDATA[0-0-80]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="81">
-      <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Log out]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/accounts/signout]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:2:{i:0;s:9:&quot;logged_in&quot;;i:1;s:19:&quot;append_previous_url&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[0-0-19]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="logged_in"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="logged_out"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="append_previous_url"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="sub_menu_name"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="option_id"><![CDATA[0-0-81]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="82">
-      <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Log in]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/accounts/signin]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:2:{i:0;s:10:&quot;logged_out&quot;;i:1;s:19:&quot;append_previous_url&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[0-0-19]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="logged_in"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="logged_out"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="append_previous_url"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[N;]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="sub_menu_name"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="option_id"><![CDATA[0-0-82]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="83">
-      <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Admin Panel]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:2:{i:0;s:9:&quot;logged_in&quot;;i:1;s:8:&quot;advanced&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[0-0-19]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:2:{i:0;s:2:&quot;98&quot;;i:1;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="logged_in"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="logged_out"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="append_previous_url"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="enabled"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="sub_menu_name"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="option_id"><![CDATA[0-0-83]]></TABLE_FIELD>
-    </TABLE_ROW>
     <TABLE_ROW ROW_ID="85">
       <TABLE_FIELD FIELD_KEY="title"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="logged_in"><![CDATA[0]]></TABLE_FIELD>

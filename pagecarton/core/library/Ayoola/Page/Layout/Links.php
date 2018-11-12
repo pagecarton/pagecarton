@@ -102,7 +102,8 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			$form->submitValue = 'Update';
 	//		$fieldset = new Ayoola_Form_Element();
 			$xml = array();
-			$pages = Ayoola_Page_Page::getInstance();
+			$pages = Ayoola_Page::getAll();
+/* 			$pages = Ayoola_Page_Page::getInstance();
 			$pages = $pages->select();
 			require_once 'Ayoola/Filter/SelectListArray.php';
 			$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
@@ -110,7 +111,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 
 			$pages += Ayoola_Page_Layout_Pages::getPages( $data['layout_name'], 'list-url' ) ? : array();
 			asort( $pages );
-
+ */
 			$fieldset = new Ayoola_Form_Element();
 			$fieldset->addElement( array( 'name' => 'editing-mode', 'label' => '', 'onchange' => 'ayoola.spotLight.splashScreen(); location.search += \'&editing-mode=\' + this.value; ', 'type' => 'Select', 'style' => 'width:100%', 'value' => @$_GET['editing-mode'] ), array( 'simple' => 'Links without codes (Simple Mode)', 'advanced' => 'All links (Advanced Mode)' ) );
 			$form->addFieldset( $fieldset );
@@ -199,7 +200,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 						$keyList[$key] = $linksData[$urlKey];
 						$fieldset = new Ayoola_Form_Element();
 						$fieldset->addElement( array( 'name' => 'title', 'label' => '', 'data-html' => true, 'placeholder' => $title, 'type' => 'InputText', 'multiple' => 'multiple', 'style' => 'width:100%', 'value' => trim( $title, "\r\n\t " ) ) );
-						$fieldset->addElement( array( 'name' => 'url', 'label' => '', 'onchange' => 'if( this.value == \'\' ){ a = prompt( \'New Url\', \'/url\' ); var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'placeholder' => $url, 'type' => 'Select', 'multiple' => 'multiple', 'style' => 'width:100%', 'value' => trim( $url ) ), array_unique( array( $url => $url ) + $pages + array( '' => 'Custom URL' ) ) );
+						$fieldset->addElement( array( 'name' => 'url', 'label' => '', 'onchange' => 'if( this.value == \'\' ){ a = prompt( \'New Url\', \'/url\' ); if( ! a ) return false; var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'placeholder' => $url, 'type' => 'Select', 'multiple' => 'multiple', 'style' => 'width:100%', 'value' => trim( $url ) ), array_unique( array( $url => $url ) + $pages + array( '' => 'Custom URL' ) ) );
 						$fieldset->wrapper = 'white-background';
 					//	var_export( $url );
 						$counter++;

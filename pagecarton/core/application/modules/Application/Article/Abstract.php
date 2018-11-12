@@ -1095,6 +1095,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			@$values['article_type'] = $_REQUEST[Ayoola_Form::hashElementName( 'article_type')] ? : $values['article_type']; 
 		}
 		$values['article_type'] = $values['article_type'] ? : $this->getGlobalValue( 'article_type' ); 
+	//	var_export( $values['article_type'] );
 //		$values['article_type'] = $values['article_type'] ? : 'post';
 		
 		//	Set Article Type
@@ -1103,13 +1104,22 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'post_type_id', 'post_type');
 		$options = $filter->filter( $options );
-		$postTypesAvailable = $options ? : Application_Article_Type_TypeAbstract::$presetTypes;
+		$postTypesAvailable = Application_Article_Type_TypeAbstract::$presetTypes + $options;
 
 		if( ! empty( $_REQUEST['article_type'] ) )
 		{
 			if( empty( $postTypesAvailable[$_REQUEST['article_type']] ) )
 			{
 				$postTypesAvailable[$_REQUEST['article_type']] = ucwords( str_replace( '-', ' ', $_REQUEST['article_type'] ) );
+			}
+			
+		}
+
+		if( ! empty( $values['article_type'] ) )
+		{
+			if( empty( $postTypesAvailable[$values['article_type']] ) )
+			{
+				$postTypesAvailable[$values['article_type']] = ucwords( str_replace( '-', ' ', $values['article_type'] ) );
 			}
 			
 		}
