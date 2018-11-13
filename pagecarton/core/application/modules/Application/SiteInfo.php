@@ -85,6 +85,7 @@ class Application_SiteInfo extends PageCarton_Widget
             $html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;"><a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SiteInfo/?' . '&xpc_form_element_whitelist=site_headline,site_description,cover_photo\', \'page_refresh\' );" href="javascript:">[edit site headline and description]</a></p>' : null;
             $html .= $this->getParameter( 'css_class_of_inner_content' ) ? '</div>' : null;
             $html .= '</div>';
+            $this->_objectTemplateValues = array_merge( $settings ? : array(), $this->_objectTemplateValues ? : array() );
             $this->setViewContent( $html ); 
 
              // end of widget process
