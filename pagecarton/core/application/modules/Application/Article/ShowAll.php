@@ -613,8 +613,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$newArticleTypeToShow = ucfirst( $postTypeInfo['post_type'] ) ? : 'Item';
 	//		self::v( $newArticleType );
 		//	self::v( $this->_dbWhereClause );
+		//	self::v( $where );
 			$categoryForNewPost = @array_pop( $where['category_name'] );
-			$addNewPostUrl = '/tools/classplayer/get/name/Application_Article_Creator/?';
+			$addNewPostUrl = ( $this->getParameter( 'add_a_new_post_link' ) ? : '/tools/classplayer/get/name/Application_Article_Creator/' ) . '?';
 			if( $newArticleType )
 			{
 				$addNewPostUrl .= '&article_type=' . $newArticleType . '';
@@ -745,8 +746,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( $offset != ( @count( $chunk ) ) )
 		{
 			$this->_objectTemplateValues['paginator_last_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . ( @count( $chunk ) - 1 );
-			$this->_objectTemplateValues['paginator_last_page_number'] = ( @count( $chunk ) );
 		}
+		$this->_objectTemplateValues['paginator_last_page_number'] = ( @count( $chunk ) );
 		$this->_objectTemplateValues = $this->_objectTemplateValues ? : array();
 
 		$pagination = null;
@@ -1416,8 +1417,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			//	
 		//	var_export( $categoryId );
-			$categoryName = count( $categoryId ) === 1 ? ( '' . $categoryId[key( $categoryId )] . '' ) : ( '(' . implode( ')|(', $categoryId ) . ')' );
-			$categoryId = null;
+		//	$categoryName = count( $categoryId ) === 1 ? ( '' . $categoryId[key( $categoryId )] . '' ) : ( '(' . implode( ')|(', $categoryId ) . ')' );
+		//	$categoryId = null;
 		}
 	//	self::v( $categoryId );
 	//	self::v( $categoryName );

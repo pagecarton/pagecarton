@@ -145,6 +145,17 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 		$data['not_real_post'] = true; 
 		$data['document_url'] = $data['cover_photo'];
 		$data['article_title'] = $data['category_label'] ? : $data['category_name']; 
+		$storage = self::getObjectStorage( array( 'id' => 'total_no_of_posts' . $data['category_name'], 'device' => 'File', 'time_out' => 94600, ) );
+		$data['total_no_of_posts'] = $storage->retrieve();
+		if( ! is_numeric( $data['total_no_of_posts'] ) )
+		{
+
+			$data['total_no_of_posts'] = Application_Article_Table::getInstance()->select( null, array( 'category_name' => $data['category_name'] ) );
+	//		var_export( $data['total_no_of_posts'] );
+			$data['total_no_of_posts'] = count( $data['total_no_of_posts'] );
+			$storage->store( $data['total_no_of_posts'] );
+		}
+		$data['total_no_of_posts'] = $data['total_no_of_posts'] ? : 0; 
 		if( ! $data['article_title'] )
 		{
 			$data = false;

@@ -1146,7 +1146,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$form->addFieldset( $fieldset );
 				$i++;
 			}
-			while( ! empty( $advanceParameters['advanced_parameter_name'][$i] ) );
+			while( ! empty( $advanceParameters['advanced_parameter_name'][$i] ) || ! empty( $advanceParameters['advanced_parameter_name'][++$i] ) );
 			if( ! self::$_authLevelOptions )
 			{
 				$authLevelOptions = new Ayoola_Access_AuthLevel;
