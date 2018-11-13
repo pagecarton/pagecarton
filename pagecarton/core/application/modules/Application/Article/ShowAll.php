@@ -1550,7 +1550,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( $categoryId || $categoryName )
 		{
 			$category = $categoryName ? : $categoryId;
-			$whereClause['category_name'][] = $category;
+			$whereClause['category_name'] = @$whereClause['category_name'] ? : array();
+			if( ! is_array( $category ) )
+			{
+				$whereClause['category_name'][] = $category;
+			}
+			else
+			{
+				$whereClause['category_name'] += $category;
+			}
 			if( $children = Application_Category_ShowAll::getChildren( $category ) )
 			{
 				$whereClause['category_name'] = array_merge( $whereClause['category_name'], $children );
