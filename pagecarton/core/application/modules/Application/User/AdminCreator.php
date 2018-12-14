@@ -156,7 +156,8 @@ class Application_User_AdminCreator extends Application_User_Creator
 		$userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
 		$userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
 		$response = $userTable->select( null, array( 'access_level' => 99 ), array( 'disable_cache' => true ) );
-		if( $response || Ayoola_Application::getUserInfo() )
+		if( $response )
+//		if( $response || Ayoola_Application::getUserInfo() )
 		{
 			//	Don't run this if we have admin present.
 			// Also if we are a loggedin user, just perfom an upgrade

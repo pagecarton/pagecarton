@@ -42,15 +42,12 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 			$this->createConfirmationForm( 'Restore', 'Restore application to the way it was ' . $data['backup_creation_date'] . ' using "' . $data['backup_name'] . '"' );
 			$this->setViewContent( $this->getForm()->view(), true );		
 			Application_Cache_Clear::viewInLine();
-			if( $this->restore() ){ $this->setViewContent( '<div class="goodnews">Back up restored successfully.</div>', true ); }
-
-			//	do we have admin user
-			if( ! $response = Application_User_Abstract::getUsers( array( 'access_level' => 99 ) ) )  
-			{
-				header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Personalization' );
-				exit();
-			//	$this->setViewContent( '<div class="pc-notify-info">Back up restored successfully.</div>', true );
+			if( $this->restore() )
+			{ 
+				$this->setViewContent( '<div class="goodnews">Back up restored successfully.</div>', true ); 
 			}
+		//	else
+			//	do we have admin user
 			//		if( $this->restore() ){ null; }
 		}
 		catch( Exception $e )
@@ -188,6 +185,13 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 		@unlink( $tempBackupFilename );
 		
 		Application_Cache_Clear::viewInLine();
+
+		if( ! $response = Application_User_Abstract::getUsers( array( 'access_level' => 99 ) ) )  
+		{
+			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Personalization' );
+			exit();
+		//	$this->setViewContent( '<div class="pc-notify-info">Back up restored successfully.</div>', true );
+		}
 		return true;
 	//	$tempBackupFilename;
     } 
