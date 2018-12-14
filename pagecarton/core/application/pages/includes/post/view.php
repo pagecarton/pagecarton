@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Thursday 17th of May 2018 09:04:20 AM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Friday 14th of December 2018 10:21:28 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_bd60a975883eab341532efd0da8c3fd8 = new Ayoola_Object_Embed( array (
+$_a960555731d7eede33b37a08755a85c3 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Article_View',
   'advanced_parameter_value' => 
   array (
@@ -36,14 +36,42 @@ $_bd60a975883eab341532efd0da8c3fd8 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_bd60a975883eab341532efd0da8c3fd8 = null;
+$_a960555731d7eede33b37a08755a85c3 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_663cd0992952a4d9dc532ce83c9a6037 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div><br></div><div><br></div>',
+  'preserved_content' => '',
+  'url_prefix' => '/x',
+  'markup_template_object_name' => 
+  array (
+    0 => '',
+  ),
+  'phrase_to_replace' => '',
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  'wrapper_name' => '',
+  '' => '',
+) );
+
+							}
+							else
+							{
+								
+$_663cd0992952a4d9dc532ce83c9a6037 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_f462342042034c0e81dc55b426a83636 = new Ayoola_Object_Embed( array (
+$_575b17636a0d4f79c80ef72f71cf5379 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Profile_View',
   'advanced_parameter_value' => 
   array (
@@ -57,14 +85,42 @@ $_f462342042034c0e81dc55b426a83636 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_f462342042034c0e81dc55b426a83636 = null;
+$_575b17636a0d4f79c80ef72f71cf5379 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_c64d813fc7b4ea8d9c4a2a68b3298595 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div><br></div><div><br></div>',
+  'preserved_content' => '',
+  'url_prefix' => '/x',
+  'markup_template_object_name' => 
+  array (
+    0 => '',
+  ),
+  'phrase_to_replace' => '',
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  'wrapper_name' => '',
+  '' => '',
+) );
+
+							}
+							else
+							{
+								
+$_c64d813fc7b4ea8d9c4a2a68b3298595 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_c4f6f07054a7ff0f77c5b6ffa8e3c1c9 = new Ayoola_Object_Embed( array (
+$_0728c5a0d4359507c2387cc862aea4b2 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Article_ViewPagination',
   'advanced_parameter_value' => 
   array (
@@ -78,14 +134,14 @@ $_c4f6f07054a7ff0f77c5b6ffa8e3c1c9 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_c4f6f07054a7ff0f77c5b6ffa8e3c1c9 = null;
+$_0728c5a0d4359507c2387cc862aea4b2 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_e9e2dbab1d778875c91459d2e0c62e8c = new Ayoola_Object_Embed( array (
+$_e8a0d6a7408d7168bf04af1b28404aae = new Ayoola_Object_Embed( array (
   'editable' => 'Application_CommentBox',
   'advanced_parameter_value' => 
   array (
@@ -99,14 +155,14 @@ $_e9e2dbab1d778875c91459d2e0c62e8c = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_e9e2dbab1d778875c91459d2e0c62e8c = null;
+$_e8a0d6a7408d7168bf04af1b28404aae = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_07a1dc036491e9cbefb1752305c61b32 = new Ayoola_Object_Embed( array (
+$_4e442587b46ac2c732e40d2558305dbf = new Ayoola_Object_Embed( array (
   'editable' => 'Application_CommentBox_ShowComments',
   'advanced_parameter_value' => 
   array (
@@ -120,7 +176,7 @@ $_07a1dc036491e9cbefb1752305c61b32 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_07a1dc036491e9cbefb1752305c61b32 = null;
+$_4e442587b46ac2c732e40d2558305dbf = null;
 
 							}
 							
