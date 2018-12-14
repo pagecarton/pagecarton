@@ -250,6 +250,7 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
 			$table = Application_Domain::getInstance();
 		//	$options = $table->select( null, array( 'sub_domain' => 0 ) );
 			$options = $table->select();
+			$options[] = array( 'domain_name' => Ayoola_Page::getDefaultDomain() );
 			require_once 'Ayoola/Filter/SelectListArray.php';
 			$filter = new Ayoola_Filter_SelectListArray( 'domain_name', 'domain_name');
 			$options = $filter->filter( $options );

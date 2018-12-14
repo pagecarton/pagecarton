@@ -229,8 +229,9 @@ class Application_Article_Creator extends Application_Article_Abstract
 		
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . ''; 
-			$this->setViewContent( '<div class="boxednews greynews">' . ucfirst( $joinedType ) . ' successfully saved.</div> <div class="boxednews greynews"><a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View ' . $joinedType . '</a></div>', true );
-			$this->setViewContent( '<div class="boxednews greynews" title="Share this with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+			$this->setViewContent( '<div class="goodnews">' . ucfirst( $joinedType ) . ' successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View ' . $joinedType . '</a> or <a href="' . Ayoola_Page::getPreviousUrl() . '">Go Back</a></div>', true );
+//			$this->setViewContent( '<div class="pc-notify-info" title="Share this with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+		//	$this->setViewContent( '<div class="pc-notify-info"></div>' );  
 						
 			//	Notify Admin
 			$mailInfo['subject'] = 'New ' . $joinedType . ' created';

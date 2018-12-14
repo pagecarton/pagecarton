@@ -620,7 +620,11 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      */
     public static function setPreviousUrl( $url = null )
     {
-		$url .= stripos( $url, '?' ) ? '&' : '?';
+		if( $url )
+		{
+			$url .= stripos( $url, '?' ) ? '&' : '?';
+		}
+		
 		if( @$_GET['previous_url'] )
 		{
 			$url .= 'previous_url=' . urlencode( $_GET['previous_url'] );
@@ -631,7 +635,8 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		$currentUrl = self::getCurrentUrl();
 	//	var_export( $currentUrl );
 
-		//	https://www.example.com/account/signin?previous_url=https://www.example.com/account is being blocked by some servers
+		//	https://www.example.com/account/signin?previous_url=https://www.example.com/account 
+		//	is being blocked by some servers
 		//	probably because of xss
 		//	$_POST, $_GET was being cleared
 	//	$url .= 'previous_url=' . urlencode( Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . Ayoola_Page::getDefaultDomain() .  self::getPortNumber() . '' . $currentUrl );

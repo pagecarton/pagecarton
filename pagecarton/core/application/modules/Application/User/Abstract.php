@@ -83,6 +83,21 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 	protected $_otherTables = array( 'UserEmail', 'UserSettings', 'UserPassword', 'UserPersonalInfo', 'UserActivation' );
 	
     /**
+     * 
+     * @param array
+     * @return mixed
+     */
+    public static function getUsers( $where = array() )  
+    {
+		$userTable = 'Ayoola_Access_LocalUser';
+		$userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
+		$userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
+		$userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
+		$response = $userTable->select( null, array( 'access_level' => 99 ), array( 'disable_cache' => true ) );
+		return $response;
+    } 
+	
+    /**
      * Validates form
      * @param void
      * @return boolean

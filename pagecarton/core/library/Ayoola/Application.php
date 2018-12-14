@@ -1172,8 +1172,8 @@ class Ayoola_Application
 			self::$_runtimeSetting['real_url'] = self::$_notFoundPage;
 			header( "HTTP/1.0 404 Not Found" );
 			header( "HTTP/1.1 404 Not Found" );
-			Header('Status: 404 Not Found');
-			http_response_code(404);
+			header('Status: 404 Not Found');
+			function_exists( 'http_response_code' ) ? http_response_code(404) : null;
 	//		var_export( headers_list() );
 		//	exit();
 		}

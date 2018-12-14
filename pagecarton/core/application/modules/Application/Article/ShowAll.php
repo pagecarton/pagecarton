@@ -615,7 +615,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	self::v( $this->_dbWhereClause );
 		//	self::v( $where );
 			$categoryForNewPost = @array_pop( $where['category_name'] );
-			$addNewPostUrl = ( $this->getParameter( 'add_a_new_post_link' ) ? : '/tools/classplayer/get/name/Application_Article_Creator/' ) . '?';
+			$addNewPostUrl = ( $this->getParameter( 'add_a_new_post_link' ) ? : '/widgets/Application_Article_Creator/' ) . '?';
 			if( $newArticleType )
 			{
 				$addNewPostUrl .= '&article_type=' . $newArticleType . '';
@@ -640,6 +640,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
 				$addNewPostUrl .= '&post_type_options_name=' . $this->getParameter( 'post_type_options_name' ) . '';
 			}
+
+			$addNewPostUrl .= '&' . Ayoola_Page::setPreviousUrl();
+			
+			//			$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
+
 			$item = array( 
 							'article_url' => $addNewPostUrl, 
 							'allow_raw_data' => true, 

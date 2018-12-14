@@ -31,10 +31,11 @@
 	$home = dirname( __FILE__ );
 	if( ! empty( $_SERVER['DOCUMENT_ROOT'] ) )
 	{
-		$home = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];    
+		$home = $_SERVER['DOCUMENT_ROOT'];    
 	}
+	$home = realpath( $home ) ? : $home;    
 //	var_export( $home );
-//	var_export( $_SERVER['DOCUMENT_ROOT'] );
+//	var_export( $_SERVER );
 //	exit();
 	$dir = $oldDir = $baseAppPath = dirname( $home );
 //		var_export( $oldDir );
@@ -103,6 +104,8 @@
 	//	var_export( $tempDir );
 	//	var_export( $prefix );
 	}
+//	var_export( $currentDir );
+//	var_export( $prefix );
 			
 	//	Preserve some of this data before deleting some files
 	$dbDir = '/application/databases/';
@@ -442,7 +445,8 @@
           //      $badnews .= '<p>The installer could not be upgraded. It need to be refreshed before installation. Make the installer file writable. The part is - ' . $_SERVER['SCRIPT_FILENAME'] . '</p>';
 			}
 		//	header( 'Location: ?stage=start' );
-			header( "Location: {$prefix}/pc_installer.php?stage=start" );
+		//	header( "Location: {$prefix}/pc_installer.php?stage=start" );
+			header( "Location: {$_SERVER['PHP_SELF']}?stage=start" );
 			exit();
         break;
 	

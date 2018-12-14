@@ -4,7 +4,7 @@
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Plain List of Titles]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[PlainListofTitles]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li&gt;&lt;a href=&quot;{{{article_url}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/li&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;li&gt;&lt;a href=&quot;{{{post_link}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/li&gt;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_options"><![CDATA[[&quot;padding&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_prefix"><![CDATA[&lt;ul&gt;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template_median"><![CDATA[]]></TABLE_FIELD>

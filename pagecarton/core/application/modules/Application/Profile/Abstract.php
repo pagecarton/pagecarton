@@ -159,13 +159,14 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
     {
 		$profile = Ayoola_Application::getUserInfo( 'profile_url' );
 	//	var_export( $profile );
-		if( ! $profileInfo = self::getProfileInfo( $profile ) )
+	//	var_export( Ayoola_Application::getUserInfo() );
+		if( ! $profileInfo = self::getProfileInfo( $profile, true ) )
 		{
 		 	if( $others = self::getMyProfiles() )
 			{
 				while( $profile = array_pop( $others ) )
 				{
-					if( $profileInfo = self::getProfileInfo( $profile ) )
+					if( $profileInfo = self::getProfileInfo( $profile, true ) )
 					{
 						break;
 					}
@@ -227,10 +228,21 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
      * 
      * 
      */
-	public static function getProfileInfo( $profileUrL )
+	public static function getProfileInfo( $profileUrL, $private = false )
     {
 		$profileUrL = strtolower( $profileUrL );
-		if( $profileData = Application_Profile_Table::getInstance()->selectOne( null, array( 'profile_url' => $profileUrL ), array( 'x' => 'work-around-to-avoid-stupid-cache' ) ) )
+		$table = "Application_Profile_Table";
+		if( $private )
+		{
+			$table = $table::getInstance( $table::SCOPE_PRIVATE );
+			$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+			$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+		}
+		else
+		{
+			$table = $table::getInstance();
+		}
+		if( $profileData = $table->selectOne( null, array( 'profile_url' => $profileUrL ), array( 'x' => 'work-around-to-avoid-stupid-cache' ) ) )
 		{
 			$profileData = $profileData['profile_data'];
 		}

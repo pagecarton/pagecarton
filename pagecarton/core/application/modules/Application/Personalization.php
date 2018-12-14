@@ -82,17 +82,16 @@ class Application_Personalization extends Ayoola_Abstract_Table
 		//	If this is not a new install, we must be admin  
 //		$response = Ayoola_Api_UserList::send( array() );
 
-		$userTable = 'Ayoola_Access_LocalUser';
-
 		//	set table to private so when parent have admin, we dont allow new admin on child
 		//	if not like this, it becomes a security breach on .com
-		$userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
+		$response = Application_User_Abstract::getUsers( array( 'access_level' => 99 ) ); 
+/* 		$userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
 		$userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
 		$userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
 		$response = $userTable->select( null, array( 'access_level' => 99 ), array( 'disable_cache' => true ) );
 	//	$response = Ayoola_Api_UserList::send( array( 'access_level' => 99 ) );
 	//	var_export( $response );
-		if( is_array( @$response ) ) 
+ */		if( is_array( @$response ) ) 
 		{
 			$prefix = Ayoola_Application::getUrlPrefix();
 			switch( count( $response ) )

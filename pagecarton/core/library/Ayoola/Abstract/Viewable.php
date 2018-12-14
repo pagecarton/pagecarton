@@ -343,8 +343,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					display: inline;
 					}
 				</style>
-				<div class="share-buttons" >
-					Share on | 
+				<div class="share-buttons" > 
 					<!-- Facebook -->
 					<a href="http://www.facebook.com/sharer.php?u=' . $fullUrl . '" target="_blank" title="Share on Facebook"><img src="' . Ayoola_Application::getUrlPrefix() . '/social-media-icons/facebook.png" alt="Facebook" /></a>
 					 

@@ -533,7 +533,9 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			$this->_identifierKeys = array( $this->_idColumn );
 		} 
 	//	var_export( $this->_identifierKeys );
-		
+//	var_export( $this->_identifierKeys );
+//	var_export( $this->getParameter() ); 
+
 		foreach( $this->_identifierKeys as $value )
 		{
 //	var_export( $value );
@@ -548,7 +550,8 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 				}
 				elseif( null === $this->getParameter( $value ) )
 				{
-					throw new Ayoola_Exception( 'ID column is not available' ); 
+					return false;
+				//	throw new Ayoola_Exception( 'ID column is not available' ); 
 				}
 				else
 				{

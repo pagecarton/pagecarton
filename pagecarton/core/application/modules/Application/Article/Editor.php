@@ -142,8 +142,8 @@ class Application_Article_Editor extends Application_Article_Abstract
 	
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '';
-			$this->setViewContent( '<div class="boxednews greynews">Post successfully saved.</div> <div class="boxednews greynews"><a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View Post.</a></div>', true );
-			$this->setViewContent( '<div class="boxednews greynews" title="Share this with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+			$this->setViewContent( '<div class="goodnews">Post successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View Post.</a></div>', true );
+	//		$this->setViewContent( '<div class="dpc-notify-info" title="Share this with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );   
 	//		$this->setViewContent( 'Post edited successfully. <a href="' . strtolower( $values['article_url'] ) . '">View post.</a>', true );
 			$this->_objectData['article_url'] = $values['article_url'];  
 		}

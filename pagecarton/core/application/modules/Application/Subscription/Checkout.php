@@ -455,10 +455,19 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 	//		self::v( $cart['settings']['total'] );
 		if( ! empty( $cart['settings']['total'] ) )
 		{
-			$options = new Application_Subscription_Checkout_CheckoutOption();
-			$options = $options->select();
+			$table = 'Application_Subscription_Checkout_CheckoutOption';
+			$table = $table::getInstance( $table::SCOPE_PRIVATE );
+			$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+			$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+			$public = false;
+			if( ! $options = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) ) )
+			{
+				$options = $table::getInstance();
+				$options = $options->select();
+				$public = true;
+			}
 			$allowedOptions = Application_Settings_Abstract::getSettings( 'Payments', 'allowed_payment_options' ) ? : array();
-		//	self::v( $cart );
+			//	self::v( $cart );
 		//	self::v( $options );
 			foreach( $options as $key => $each )
 			{
@@ -469,7 +478,14 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 				{ 
 					if( ! $api::isValidCurrency() ){ unset( $options[$key] ); }
 				}
-				if( $allowedOptions && ! in_array( $each['checkoutoption_name'], $allowedOptions ) ){ unset( $options[$key] ); }    
+				if( $allowedOptions && ! in_array( $each['checkoutoption_name'], $allowedOptions ) )
+				{ 
+					unset( $options[$key] ); 
+				}
+				elseif( $public & ! $allowedOptions )
+				{
+					unset( $options[$key] ); 
+				}
 			//	var_export( $api::isValidCurrency() );
 			}
 		//	var_export( $options );
