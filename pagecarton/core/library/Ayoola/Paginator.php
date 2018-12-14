@@ -463,6 +463,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				if( trim( $head ) )
 				{
 					$head = self::__( $head );
+					self::filterReplacement( $head );
 					$html .='<th>' . $head . ' <a href="javascript:;" onClick="window.location.search = window.location.search + \'&pc_sort_column=\' + \'' . ( $field ) . '\';" > &#8645; </a></th>';
 				}
 				else
@@ -542,12 +543,15 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					$value = $value['value'];
 
 				}
-				$value = self::__( $value );
+			//	self::filterReplacement( $value );
+		//		var_export( $value );
+				$value = self::__( $value );    
 				if( array_key_exists( $field, $row ) )
 				{
 					
 				//	var_export( $value );
 					// make adequate  replacement if required 
+					self::filterReplacement( $row[$field] );
 					$value =  $value ? : $row[$field];
  					if( is_array( $value ) )
 					{ 
