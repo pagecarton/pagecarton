@@ -37,7 +37,10 @@ class Ayoola_Form_Settings extends Application_Settings_Abstract
      */
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
-		$values = unserialize( @$values['settings'] );
+	//	$values = unserialize( @$values['settings'] );
+	//	$settings = unserialize( @$values['settings'] );
+	//	$settings = @$values['data'] ? : unserialize( @$values['settings'] );
+		$values = @$values['data'] ? : unserialize( @$values['settings'] );
 	//	var_export( $values );
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->setParameter( array( 'no_fieldset' => true ) );

@@ -31,7 +31,10 @@ class PageCarton_Locale_Settings extends PageCarton_Settings
      */
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
-		$settings = unserialize( @$values['settings'] ) ? : $values['settings'];
+	//	$values = unserialize( @$values['settings'] );
+	//	$settings = unserialize( @$values['settings'] );
+		$settings = @$values['data'] ? : unserialize( @$values['settings'] );
+//$values = @$values['data'] ? : unserialize( @$values['settings'] );
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;

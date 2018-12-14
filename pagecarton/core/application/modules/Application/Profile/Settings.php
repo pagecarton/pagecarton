@@ -54,7 +54,8 @@ class Application_Profile_Settings extends Application_Settings_Abstract
      */
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
-		$settings = unserialize( @$values['settings'] );
+	//	$settings = unserialize( @$values['settings'] );
+		$settings = @$values['data'] ? : unserialize( @$values['settings'] );
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;

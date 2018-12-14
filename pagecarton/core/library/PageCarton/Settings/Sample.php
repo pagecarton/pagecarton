@@ -33,7 +33,11 @@ class PageCarton_Settings_Sample extends PageCarton_Settings
     {
 		if( ! $settings = unserialize( @$values['settings'] ) )
 		{
-			if( is_array( $values['settings'] ) )
+			if( is_array( $values['data'] ) )
+			{
+				$settings = $values['data'];
+			}
+			elseif( is_array( $values['settings'] ) )
 			{
 				$settings = $values['settings'];
 			}

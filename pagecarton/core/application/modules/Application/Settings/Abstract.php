@@ -104,50 +104,62 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 		{
 			$settings = Application_Settings::getInstance();
 			$settings = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
-			if( ! isset( $settings['settings'] ) )
+			if( empty( $settings['data'] ) )
 			{ 
-
-				//	Not found in site settings. 
-				//	Now lets look in the extension settings
-				$table = Ayoola_Extension_Import_Table::getInstance();
-		//		var_export( $table->select() );
-		//		var_export( $settingsName );
-				if( ! $extensionInfo = $table->selectOne( null,  array( 'extension_name' => $settingsName ) ) )
-				{
-					self::$_settings[$settingsName]  = false;
-				//	return false; 
-				}
-			//	var_export( $settingsName );
-			//	var_export( $extensionInfo );
-				if( empty( $extensionInfo['settings'] ) )
-				{
-				//	settings getting lost in the subdomains with username
-				//	workaround till we find lasting solution
-					$domainSettings = Ayoola_Application::getDomainSettings();
-					if( ! empty( $domainSettings['main_domain'] ) && $domainSettings['main_domain'] != $domainSettings['domain_name'] )
+				if( ! isset( $settings['settings'] ) )
+				{ 
+		
+					//	Not found in site settings. 
+					//	Now lets look in the extension settings
+					$table = Ayoola_Extension_Import_Table::getInstance();
+			//		var_export( $table->select() );
+			//		var_export( $settingsName );
+					if( ! $extensionInfo = $table->selectOne( null,  array( 'extension_name' => $settingsName ) ) )
 					{
-						$settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ), array( 'disable_cache' => true ) );
-						if( ! empty( $settings['settings'] ) )
-						{
-							static::$_settings[$settingsName] = unserialize( $settings['settings'] );
-						//	self::v( static::$_settings );
-						}
-						else
-						{
-							static::$_settings[$settingsName] = false;
-						}
+						self::$_settings[$settingsName]  = false;
+					//	return false; 
 					}
-				//	self::v( $settings );
+				//	var_export( $settingsName );
+				//	var_export( $extensionInfo );
+					if( empty( $extensionInfo['settings'] ) )
+					{
+					//	settings getting lost in the subdomains with username
+					//	workaround till we find lasting solution
+						$domainSettings = Ayoola_Application::getDomainSettings();
+						if( ! empty( $domainSettings['main_domain'] ) && $domainSettings['main_domain'] != $domainSettings['domain_name'] )
+						{
+							$settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ), array( 'disable_cache' => true ) );
+					//		var_export( $settings );
+							if( ! empty( $settings['data'] ) )
+							{
+								static::$_settings[$settingsName] = $settings['data'];
+							}
+							elseif( ! empty( $settings['settings'] ) )
+							{
+								static::$_settings[$settingsName] = unserialize( $settings['settings'] );
+							//	self::v( static::$_settings );
+							}
+							else
+							{
+								static::$_settings[$settingsName] = false;
+							}
+						}
+					//	self::v( $settings );
+					}
+					else
+					{
+						static::$_settings[$settingsName] =  $extensionInfo['settings'];
+					}
 				}
 				else
 				{
-					static::$_settings[$settingsName] =  $extensionInfo['settings'];
+					static::$_settings[$settingsName] = unserialize( $settings['settings'] );
 				}
-				
+					
 			}
 			else
 			{
-				static::$_settings[$settingsName] = unserialize( $settings['settings'] );
+				static::$_settings[$settingsName] = $settings['data'];
 			}
 			
 		}

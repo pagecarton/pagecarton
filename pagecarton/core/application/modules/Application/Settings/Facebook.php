@@ -51,7 +51,8 @@ class Application_Settings_Facebook extends Ayoola_Abstract_Table implements App
     {
     //    $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$fieldsets = array();
-		$settings = unserialize( @$values['settings'] );
+	//	$settings = unserialize( @$values['settings'] );
+		$settings = @$values['data'] ? : unserialize( @$values['settings'] );
 		
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->addElement( array( 'name' => 'app_id', 'label' => 'App ID/API Key', 'value' => $settings['app_id'], 'type' => 'InputText' ) );

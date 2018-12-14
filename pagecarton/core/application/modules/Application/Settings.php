@@ -33,10 +33,11 @@ class Application_Settings extends Ayoola_Dbase_Table_Abstract_Xml_Private
      *
      * @param int
      */
-    protected $_tableVersion = '0.0.5';
+    protected $_tableVersion = '0.0.7';
 
 	protected $_dataTypes = array
 	(  
+		'data' => 'JSON',
 		'settings' => 'INPUTTEXT',
 		'settingsname_name' => 'INPUTTEXT',
 		'class_name' => 'INPUTTEXT',

@@ -52,13 +52,14 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
     //    $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
-	//	var_export( $values );
-		$settings = unserialize( @$values['settings'] );
+//		self::v( $values );
+	//	$settings = unserialize( @$values['settings'] );
+		$settings = @$values['data'] ? : unserialize( @$values['settings'] );
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;
 		
-	//	var_export( $settings );
+//		var_export( $settings );  
 		
 		//	Company Info
 		$fieldset = new Ayoola_Form_Element;

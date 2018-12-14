@@ -87,7 +87,7 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 		//		self::v( $data );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			$values = array( 'settings' => serialize( $values ) );
+			$values = array( 'settings' => serialize( $values ), 'data' => $values );
 					//		self::v( $this->getIdentifierData() ); 
 			$table = Application_Settings::getInstance();
 			$previousData = $table->select( null, array( 'settingsname_name' => $settingsNameToUse ) );
