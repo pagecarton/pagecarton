@@ -368,6 +368,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( $values );
 		//	var_export( $this->getParameter( 'sort_column' ) );
 				$values = self::sortMultiDimensionalArray( $values, $this->getParameter( 'sort_column' ) );
+		//	self::v( $this->getParameter( 'sort_column' ) );
+		//	self::v( $values );
 			}
 			else
 			{   
@@ -419,10 +421,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//		self::v( $data );
 					if( ! empty( $data['true_post_type'] ) || empty( $data['not_real_post'] ) )
 					{
-						if( ! $data = $this->retrieveArticleData( $data ) )
+						if( ! $dataX = $this->retrieveArticleData( $data ) )
 						{
 							continue;
 						}
+						$data += $dataX;
 					}
 					
 		//			var_export( $data );
@@ -709,7 +712,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		
 	//	var_export( $offset );
 		$chunk = array_chunk( $values , $j );
-	//	var_export( $chunk );  
+	//	self::v( $values );  
 		if( @$chunk[$offset] )
 		{
 			$values = $chunk[$offset];
@@ -1699,6 +1702,16 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 	//	var_export( $path );
 		//	Removing dependence on Ayoola_Api for showing posts
+			$keyFunction = create_function
+			( 
+				'& $value, & $otherData, & $searchTerm', 
+				'
+				//	$otherData = Application_Article_ShowAll::loadPostData( $value );
+					$searchTerm = json_encode( Application_Article_ShowAll::loadPostData( $value ) );
+				//	var_export( $otherData );
+				//	return $otherData;
+				'
+			); 
 			try
 			{
 				//	var_export( $path . " 1 \r\n" );
@@ -1743,7 +1756,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						$table = $table::getInstance( $table::SCOPE_PRIVATE );
 						$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 						$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
-						$this->_dbData = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) );
+						$this->_dbData = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache', 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
 				//		var_export( $this->_dbData );    
 					}  
 					else
@@ -1765,7 +1778,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					$this->_dbData = array_unique( $output ); 
 */
 					$table = $table::getInstance();
-					$this->_dbData = $table->select( null, $whereClause );
+					$this->_dbData = $table->select( null, $whereClause, array( 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
 					$this->_dbWhereClause = $whereClause;
 			//		var_export( $this->_postTable );
 		//			var_export( $this->_dbData );

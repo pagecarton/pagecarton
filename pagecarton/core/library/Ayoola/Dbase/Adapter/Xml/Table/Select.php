@@ -182,16 +182,31 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				}
 				
 				$fields[$key] = self::filterDataType( $fields[$key], $this->getTableDataTypes( $key ) );
+				$searchTerm = $fields[$key];
+			//	PageCarton_Widget::v( $options );
+				$otherData = array();
+				if( ! empty( $options['key_filter_function'][$key] ) && is_callable( $options['key_filter_function'][$key] ) )
+ 				{
+					//	manipulate them before finally recording them
+					$filterFunction = $options['key_filter_function'][$key];
+					$filterFunction( $fields[$key], $otherData, $searchTerm );   
+ 				//	PageCarton_Widget::v( $searchTerm ); 
+				//	PageCarton_Widget::v( $fields[$key] );
+					if( is_array( $otherData ) )
+					{
+						$fields += $otherData;
+					}
+				}
 				do
 				{
 					if( ! empty( $where['*'] ) )
 					{
 						$recordMatch = $recordMatch ? : false;
-						if( ! is_array( $fields[$key] ) )
+						if( ! is_array( $searchTerm ) )
 						{
 							if( ! is_array( $where['*'] ) ) 
 							{
-								if( stripos( $fields[$key], $where['*'] ) !== false )
+								if( stripos( $searchTerm, $where['*'] ) !== false )
 								{ 
 									$fields['pc_search_score'] += 1;
 									$recordMatch = true;
@@ -204,9 +219,23 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 							}
 							else
 							{
-								foreach( $where['*'] as $keyword )
+								$phrase = implode( '', $where['*'] );
+								$searchTermSlim = str_replace( ' ', '', $searchTerm );
+ 		//						PageCarton_Widget::v( $searchTermSlim ); 
+								if( stripos( $searchTermSlim, $phrase ) !== false )
+								{ 
+								//	PageCarton_Widget::v( $phrase ); 
+								//	PageCarton_Widget::v( $searchTermSlim ); 
+									$fields['pc_search_score'] += 10;
+									//	var_export( $searchTermSlim );
+							//	var_export( $fields );
+						//	var_export( $fields[$key] );
+									$recordMatch = true;
+								//	break 3;  
+								}
+							foreach( $where['*'] as $keyword )
 								{
-									if( stripos( $fields[$key], $keyword ) !== false )
+									if( stripos( $searchTerm, $keyword ) !== false )
 									{ 
 										$fields['pc_search_score'] += 1;
 										//	var_export( $where );
