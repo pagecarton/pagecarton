@@ -876,6 +876,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			return false;
 		}
+		$allowedCoders =  Application_Settings_Abstract::getSettings( 'Forms', 'coders_access_group' ); 
+		if( ! Ayoola_Form::hasPriviledge( $allowedCoders ? : 98 ) )
+		{
+			return false;
+		}
 		self::$editorInitialized = true;
 		
 		Application_Javascript::addFile( '/js/objects/ckeditor/ckeditor.js' );

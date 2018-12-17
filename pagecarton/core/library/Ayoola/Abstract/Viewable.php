@@ -408,6 +408,18 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     }
 	
     /**
+     * Clean HTML
+     * 
+     */
+	public static function cleanHTML( $text )
+    {
+		$text = strip_tags( $text, '<a> <address> <em> <strong> <b> <i> <big> <small> <sub> <sup> <cite> <code> <img> <ul> <ol> <li> <dl> <lh> <dt> <dd> <br> <p> <table> <th> <td> <tr> <pre> <blockquote> <nowiki> <h1> <h2> <h3> <h4> <h5> <h6> <hr>' );
+		$regex = "#<(/?\w+)\s+[^>]*>#is";
+		$text = preg_replace( $regex, '<${1}>', $text );
+		return $text;
+	}
+	
+    /**
      * Sends email
      * 
      */

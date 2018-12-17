@@ -384,7 +384,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 								
 					//	Notify Admin
 			//		$mailInfo['subject'] = 'Alert! Code Injection by user';
-					$mailInfo['body'] = 'Alert! Code Injection by user
+					$mailInfo['body'] = 'Alert! Code Injction by user
 					Info: ' . var_export( $this->_values, true ) . '.
 					';
 					Application_Log_View_Error::log( $mailInfo['body'] );
@@ -392,6 +392,28 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					return false;
 				} 
 			}
+		}
+		elseif( ! Ayoola_Form::hasPriviledge( 98 ) )
+		{
+			//	Turning this to array allows to validate array values
+			$values = $this->_values[$this->_names[$name]['real_name']];
+		//	$values = is_array( $values ) ? $values : array( $values );
+			//	var_export( $values );
+			if( is_array( $values ) )
+			{
+				foreach( $values as $key => $each )
+				{
+					$values[$key] = self::cleanHTML( $values[$key] );
+				}
+				$this->_values[$this->_names[$name]['real_name']] = $values;
+			}
+			else
+			{
+				$this->_values[$this->_names[$name]['real_name']] = self::cleanHTML( $values );
+			}
+	//		var_export( $this->_values[$this->_names[$name]['real_name']] );
+
+			
 		}
  		
 		if( ! @is_array( $this->_requirements[$name] ) ){ return true; }
