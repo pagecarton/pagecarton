@@ -723,7 +723,8 @@ ayoola.div =
 					window.parent.ayoola.image.setElementValue( aa, value, { url: value, dedicated_url: xx, } ); 					
 					try
 					{
-						window.parent.ayoola.spotLight.instance.container.parentNode.removeChild( window.parent.ayoola.spotLight.instance.container );
+					//	alert( window.parent.ayoola.spotLight.close );  
+						window.parent.ayoola.spotLight.close();
 					}
 					catch( e )
 					{
