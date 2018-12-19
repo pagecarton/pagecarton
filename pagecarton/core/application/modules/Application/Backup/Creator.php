@@ -40,73 +40,84 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 	//	var_export( $_SERVER['SCRIPT_FILENAME'] );
 		//	$dir = Ayoola_Application::getDomainSettings( APPLICATION_DIR );
 	//	var_export( APPLICATION_DIR );
-
-		$this->createForm( 'Create', 'Create a Backup' );
-		$this->setViewContent( $this->getForm()->view(), true );
-		if( ! $values = $this->getForm()->getValues() ){ return false; }
-
-		set_time_limit( 0 );
-		ignore_user_abort( true ); 
-		
- 		switch( $values['backup_type'] )
+		try
 		{
-			case 'installer':
-				
-				//	copy the file to my document directory so it can be downloadable.
-				$coreDocumentsDir = APPLICATION_PATH . DS . DOCUMENTS_DIR;
-				$documentsDir = Ayoola_Doc::getDocumentsDirectory();
-				$installerFilenameGz = $documentsDir . self::getInstallerLink();
-				$simpleFilename = Ayoola_Application::$installer;
-				$urlPrefix = Ayoola_Application::getUrlPrefix();
-
-				//	This one needs to always be in the core
-				$installerFilenamePhp = $coreDocumentsDir . DS . $simpleFilename;
-
-		//		var_export( $installerFilenamePhp );
 
 
-				Ayoola_Doc::createDirectory( dirname( $installerFilenameGz ) );
-				Ayoola_Doc::createDirectory( dirname( $installerFilenamePhp ) );
-				@unlink( $installerFilenameGz );
-				
-				//	dont remove this again so it can be useful for upgrade.
-			//	@unlink( $installerFilenamePhp );
+			$this->createForm( 'Create', 'Create a Backup' );
+			$this->setViewContent( $this->getForm()->view(), true );
+			if( ! $values = $this->getForm()->getValues() ){ return false; }
+
+			set_time_limit( 0 );
+			ignore_user_abort( true ); 
 			
-				$year = date( 'Y' );
-				$date = date( "m:d:Y g:ia" );
-				$userInfo = Ayoola_Application::getUserInfo();
-				$domain = Ayoola_Page::getDefaultDomain();
-				$filename = self::getInstallerLink(); 
-				$version = PageCarton::VERSION; 
-	//	each
-				//	Build installer into the zipped document so that it always have the fresh content
-	//			file_put_contents( $installerFilenamePhp, $installerText );
-	//			dont do this here again since we switching to upgrades.pagecarton.org
+			switch( $values['backup_type'] )
+			{
+				case 'installer':
+					
+					//	copy the file to my document directory so it can be downloadable.
+					$coreDocumentsDir = APPLICATION_PATH . DS . DOCUMENTS_DIR;
+					$documentsDir = Ayoola_Doc::getDocumentsDirectory();
+					$installerFilenameGz = $documentsDir . self::getInstallerLink();
+					$simpleFilename = Ayoola_Application::$installer;
+					$urlPrefix = Ayoola_Application::getUrlPrefix();
+
+					//	This one needs to always be in the core
+					$installerFilenamePhp = $coreDocumentsDir . DS . $simpleFilename;
+
+			//		var_export( $installerFilenamePhp );
+
+
+					Ayoola_Doc::createDirectory( dirname( $installerFilenameGz ) );
+					Ayoola_Doc::createDirectory( dirname( $installerFilenamePhp ) );
+					@unlink( $installerFilenameGz );
+					
+					//	dont remove this again so it can be useful for upgrade.
+				//	@unlink( $installerFilenamePhp );
 				
-				if( ! $info  = $this->createFile() ){ return false; }
-				rename( $info['backup_filename'], $installerFilenameGz );
-				
-				//	Save a draft in local_html to use for upgrade
-		//		copy( $installerFilenamePhp, APPLICATION_DIR . DS . 'local_html' );
-				
-				$this->setViewContent( '<p class="goodnews">Archive for installation has been created successfully. It is now accessible publicly for download at <a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Backup_GetInstallation/">' . 'http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Backup_GetInstallation/</a></p>', true );
-//				$this->setViewContent( '<p class="goodnews">Archive for installation has been created successfully. It is now accessible publicly for download at <a href="' . self::getInstallerLink() . '?r=' . time() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() .  self::getInstallerLink() . '</a></p>', true );
-				$this->setViewContent( '<p class="">The script to install the archive on a new server has been auto-generated and could be found on this link <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/' . $simpleFilename . '?r=' . time() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() . '/' . $simpleFilename . '</a></p>' );
-			break;
-			case 'export':
-				if( ! $values  = $this->createFile() ){ return false; }
-				$values['export_information']['export_expiry'] = $values['export_expiry'];
-				$values['export_information']['time'] = time();
-				if( ! $data = $this->insertDb( $values ) ){ return false; }
-				$this->setViewContent( '<p class="boxednews goodnews">Backup created successfully.</p>', true );
-				$this->setViewContent( '<p class="">Export URL is "http://' . DOMAIN . '' . Ayoola_Application::getUrlPrefix() .'/tools/classplayer/get/object_name/Application_Backup_Export/?backup_id=' . $data['backup_id'] . '"</p>' );
-			break;
-			default:
-				if( ! $values  = $this->createFile() ){ return false; }
-		//		var_export( $values );
-				if( ! $this->insertDb( $values ) ){ return false; }
-				$this->setViewContent( '<p class="boxednews goodnews">Backup created successfully.</p>', true );  
-			break;
+					$year = date( 'Y' );
+					$date = date( "m:d:Y g:ia" );
+					$userInfo = Ayoola_Application::getUserInfo();
+					$domain = Ayoola_Page::getDefaultDomain();
+					$filename = self::getInstallerLink(); 
+					$version = PageCarton::VERSION; 
+		//	each
+					//	Build installer into the zipped document so that it always have the fresh content
+		//			file_put_contents( $installerFilenamePhp, $installerText );
+		//			dont do this here again since we switching to upgrades.pagecarton.org
+					
+					if( ! $info  = $this->createFile() ){ return false; }
+					rename( $info['backup_filename'], $installerFilenameGz );
+					
+					//	Save a draft in local_html to use for upgrade
+			//		copy( $installerFilenamePhp, APPLICATION_DIR . DS . 'local_html' );
+					
+					$this->setViewContent( '<p class="goodnews">Archive for installation has been created successfully. It is now accessible publicly for download at <a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Backup_GetInstallation/">' . 'http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Backup_GetInstallation/</a></p>', true );
+	//				$this->setViewContent( '<p class="goodnews">Archive for installation has been created successfully. It is now accessible publicly for download at <a href="' . self::getInstallerLink() . '?r=' . time() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() .  self::getInstallerLink() . '</a></p>', true );
+					$this->setViewContent( '<p class="">The script to install the archive on a new server has been auto-generated and could be found on this link <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/' . $simpleFilename . '?r=' . time() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() . '/' . $simpleFilename . '</a></p>' );
+				break;
+				case 'export':
+					if( ! $values  = $this->createFile() ){ return false; }
+					$values['export_information']['export_expiry'] = $values['export_expiry'];
+					$values['export_information']['time'] = time();
+					if( ! $data = $this->insertDb( $values ) ){ return false; }
+					$this->setViewContent( '<p class="boxednews goodnews">Backup created successfully.</p>', true );
+					$this->setViewContent( '<p class="">Export URL is "http://' . DOMAIN . '' . Ayoola_Application::getUrlPrefix() .'/tools/classplayer/get/object_name/Application_Backup_Export/?backup_id=' . $data['backup_id'] . '"</p>' );
+				break;
+				default:
+					if( ! $values  = $this->createFile() ){ return false; }
+			//		var_export( $values );
+					if( ! $this->insertDb( $values ) ){ return false; }
+					$this->setViewContent( '<p class="boxednews goodnews">Backup created successfully.</p>', true );  
+				break;
+			}
+		}
+		catch( Exception $e )  
+		{
+			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
+			$this->getForm()->setBadnews( $e->getMessage() );
+			$this->setViewContent( $this->getForm()->view() );
+			return false; 
 		}
     } 
 	
@@ -207,6 +218,14 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		}
 		$regex = trim( $regex, '|' );
 		$regex = "#{$regex}#";
+		try
+		{
+
+		}
+		catch( Exception $e )
+		{
+
+		}
 		$backup->buildFromDirectory( $dir, $regex );  
 		$backup['backup_information'] = serialize( $values );
 	//	var_export( $regex );
