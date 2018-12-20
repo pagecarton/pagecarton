@@ -1173,8 +1173,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 //		var_export( $values['post_type'] );
 		$values['post_type'] = $values['post_type'] ? : $articleTypeWeUsing;
 		$values['true_post_type'] = $values['true_post_type'] ? : $articleTypeWeUsing;
-
-		$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post Type', 'onchange'=> 'window.location.search += \'&article_type=\' + this.value + \'\';', 'type' => 'Select', 'value' => $articleTypeWeUsing ), $postTypesAvailable );
+	//	var_export( $values['post_type'] );
+		$typeDisplay = 'Select';
+		if( ! empty( $_REQUEST['article_type'] ) )
+		{
+			$typeDisplay = 'Hidden';
+		}
+		$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post Type', 'onchange'=> 'window.location.search += \'&article_type=\' + this.value + \'\';', 'type' => $typeDisplay, 'value' => $articleTypeWeUsing ), $postTypesAvailable );
 		$fieldset->addElement( array( 'name' => 'true_post_type', 'type' => 'Hidden', 'value' => @$values['true_post_type'] ? : @$values['article_type'] ) );
 		   
 		
