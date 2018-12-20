@@ -136,7 +136,7 @@
 /*PC FORM STYLE 2*/
 
 .pc-form2{
-    font-family: 'open_sansregular', arial, sans;
+    /* font-family: 'open_sansregular', arial, sans; */
     /*Dont remove this. defaces some parts of design*/
     /*max-width: 500px;*/
     margin: 0 auto;
@@ -151,7 +151,7 @@
 .pc-form2 legend, .pc-form2 h2{
     background: inherit;
     /*text-transform: uppercase;*/
-    font-family: 'open_sansregular', sans-serif;
+    /* font-family: 'open_sansregular', sans-serif; */
     color: inherit;
     font-size: 21px;
     font-weight: 100;
@@ -178,15 +178,12 @@
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     outline: none;
-    /*display: block;*/
     width: 100%;
     padding: 7px;
     border: none;
     border-bottom: 1px solid #ddd;
     background: transparent;
     margin-bottom: 10px;
-    font: 16px Arial, Helvetica, sans-serif;
-    height: 45px;
 }
 .pc-form2 input[type="checkbox"],
 .pc-form2 input[type="radio"]
@@ -208,7 +205,7 @@
     display: inline-block;
     cursor: pointer;
     color: #FFFFFF;
-    font-family: 'open_sansregular', sans-serif;
+    /* font-family: 'open_sansregular', sans-serif; */
     font-size: 14px;
     padding: 8px 18px;
     line-height: unset;
@@ -767,7 +764,7 @@ ul {
 
 html, body
 {
-    font-family: 'open_sansregular', arial, sans;
+    /* font-family: 'open_sansregular', arial, sans; */ 
 }
 
 /*POSTS*/
