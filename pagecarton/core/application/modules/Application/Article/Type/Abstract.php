@@ -69,6 +69,13 @@ abstract class Application_Article_Type_Abstract extends Application_Article_Abs
      */
 	public static function getDownloadContent( $data )
     {
+		foreach( self::getHooks() as $class )
+		{
+			$class::hook( $this, __FUNCTION__, $data );
+		}
+	//	self::v( $data );
+		//				exit();  
+
 		if( ! self::isDownloadable( $data ) )
 		{
 			return false;
@@ -91,6 +98,7 @@ abstract class Application_Article_Type_Abstract extends Application_Article_Abs
 		elseif( @$data['download_path'] )
 		{
 			$path = APPLICATION_DIR . $data['download_path'];
+		//	self::v( $path );
 		}
 		elseif( @$data['download_base64'] )
 		{

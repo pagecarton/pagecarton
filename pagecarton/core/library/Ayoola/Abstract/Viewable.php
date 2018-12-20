@@ -214,7 +214,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     {
 		foreach( self::getHooks() as $class )
 		{
-			$class::hook( $this, __FUNCTION__, func_get_args() );
+			$class::hook( $this, __FUNCTION__, $parameter );
 		}
 		if( ! $parameter )
 		{
@@ -243,6 +243,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			foreach( $all as $each )
 			{
+				if( ! Ayoola_Loader::loadClass( $each['hook_class_name'] ) )
+				{
+					continue;
+				}
+				if( ! method_exists( $each['hook_class_name'], 'hook' ) )
+				{
+					continue;
+				}
+			//	if( $each['hook_class_name'] )
 				$hooks[] = $each['hook_class_name'];
 			}
 
@@ -1380,7 +1389,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	{
 		foreach( self::getHooks() as $class )
 		{
-			$class::hook( $this, __FUNCTION__, func_get_args() );
+			$class::hook( $this, __FUNCTION__, $parameters );
 		}
 		self::sanitizeParameters( $parameters );
 		if( isset( $parameters['view'] ) ){ $this->setViewParameter( $parameters['view'] ); }
@@ -1526,7 +1535,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		foreach( self::getHooks() as $class )
 		{
-			$class::hook( $this, __FUNCTION__, func_get_args() );
+			$class::hook( $this, __FUNCTION__, $content );
 		}
 		if( null === $this->_viewContent || true === $refresh )
 		{ 

@@ -131,7 +131,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 								) 
 				);
 			//	var_export
-				if( in_array( 'download_notification', $data['download_options'] ) && $data['username'] )
+				if( is_array( $data['download_options'] ) && in_array( 'download_notification', $data['download_options'] ) && @$data['username'] )
 				{
 					//	Retrieve the information of the uploader
 			//		if( $data['username'] )
@@ -173,9 +173,9 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 		}
 		catch( Exception $e )
 		{ 
-		//	$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
 			$this->getForm()->setBadnews( $e->getMessage() );
-			$this->setViewContent( $this->getForm()->view(), true );
+			$this->setViewContent( $this->getForm()->view() );
 			return false;
 		}
     } 
