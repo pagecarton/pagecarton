@@ -175,6 +175,36 @@ class Ayoola_Xml extends DOMDocument
     } 
 	
     /**
+     * 
+     *
+     * @param string Filename
+     * @return boolean
+     */
+    public static function checkLockFile( $filename, $giveUpAfter = 5 )
+    {
+		$tempName = $filename . '.lock';
+	//	$giveUpAfter = 5; //sec
+		$time = time() + $giveUpAfter;
+	//	var_export( $tempName );
+		if( is_file( $tempName ) )
+		{
+
+	//		var_export( ( filemtime( $tempName ) < time() - 999999 ) );
+	//		var_export( $tempName );
+			if( filemtime( $tempName ) < time() - 999999 )
+			{
+				unlink( $tempName );
+			//	Application_Log_View_Error::log( $tempName . ' stayed too long. It is now removed.' );
+			}
+			while( is_file( $tempName ) && time() < $time )
+			{
+				usleep(100000);
+			}
+		}
+		return true;	
+	}
+	
+    /**
      * This method complements the parent 'load' method
      *
      * @param string Filename
@@ -184,22 +214,7 @@ class Ayoola_Xml extends DOMDocument
     public function load( $filename, $options = null )
     {
 		$tempName = $filename . '.lock';
-		$giveUpAfter = 5; //sec
-		$time = time() + $giveUpAfter;
-	//	var_export( $tempName );
-		if( is_file( $tempName ) )
-		{
-			if( filemtime( $tempName ) < time() - 999999 )
-			{
-				unlink( $tempName );
-				Application_Log_View_Error::log( $tempName . ' stayed too long. It is now removed.' );
-			}
-			while( is_file( $tempName ) && time() < $time )
-			{
-				usleep(100000);
-			}
-		}
-		
+		self::checkLockFile( $tempName );
 		if( ! $path = Ayoola_Loader::checkFile( $filename ) )
 		{
 			require_once 'Ayoola/Xml/Exception.php';
@@ -224,7 +239,8 @@ class Ayoola_Xml extends DOMDocument
 		$filename = $filename ? : $this->getFilename();
 
 	//	PageCarton_Widget::v( $filename );
-		$tempName = $filename . '.lock';
+		$tempName = $filename . '.lock';  
+		self::checkLockFile( $tempName );
 		if( is_file( $filename ) )
 		{
 			copy( $filename, $tempName );

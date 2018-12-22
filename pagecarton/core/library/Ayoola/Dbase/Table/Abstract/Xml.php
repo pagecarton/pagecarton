@@ -201,7 +201,9 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 			$adapter->setRelationship( self::SCOPE_PRIVATE );
 			$adapter->cache = false;
 			$values = $this->select();
- // 		var_export( $values );
+  	//	var_export( $values );
+   //   var_export( static::$_tableInfo['filename'] );
+    //  exit();
 	
 			//	Backup the previous table
       if( ! empty( static::$_tableInfo['filename'] ) )
@@ -222,12 +224,14 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             //	Something has gone wrong, restore the backup automagically.
             $values = include( $backupFile );  
         //    var_export( $values );
-            $newBackUpFile = $backUpFile . '_error_' . filemtime( $backupFile );
-            Application_Log_View_Error::log( "There is an error on an XML Database. The back up file {$backUpFile} as been copied to {$newBackUpFile} for safe keep." );
-  //   		var_export( $backupFile );
+            $newBackUpFile = $backupFile . '_error_' . filemtime( $backupFile );
+            rename( $backupFile, $newBackUpFile ); 
+      //      var_export( $backupFile );
+      //    var_export( $newBackUpFile );   
+        //    exit;
+               Application_Log_View_Error::log( "There is an error on an XML Database. The back up file {$backUpFile} as been copied to {$newBackUpFile} for safe keep." );
   //   		var_export(  static::$_tableInfo );  
 
-            rename( $backUpFile, $newBackUpFile ); 
           }
         }
         else
