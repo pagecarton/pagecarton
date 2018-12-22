@@ -206,6 +206,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		//	if( ! $this->insertDb() ){ return false; }
 		//	$this->setViewContent( '<h1>Thank you!</h1>', true );
 			$this->setViewContent( ' ', true );
+			$data['form_success_message'] = $data['form_success_message'] ? : 'Thank you! Form is successfully submitted.';
 			$data['form_success_message'] = ( strip_tags( $data['form_success_message'] ) === $data['form_success_message'] ? ( '<p>' . nl2br( $data['form_success_message'] ) . '</p>' ) : $data['form_success_message'] );
 
 			$mailInfo = array();
@@ -218,7 +219,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			}
 			catch( Ayoola_Exception $e ){ null; }
 
-			$this->setViewContent( $data['form_success_message'], true );
+			$this->setViewContent( $data['form_success_message'] . '<p> <a href="#" onClick="history.go(-1)">Go Back</a> </p>' , true );
 			
 		}
 		catch( Exception $e )
