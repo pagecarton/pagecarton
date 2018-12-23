@@ -103,9 +103,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				$i = 0;
 		//				var_export( $each );
 		//				var_export( $content );
-				$start = '{{{@' . $counter . '(' . $each . ')';
-				$end = '(' . $each . ')@' . $counter . '}}}';
-
+				$start = '<!--{{{@' . $counter . '(' . $each . ')-->';
+				$end = '<!--(' . $each . ')@' . $counter . '}}}-->';
+				if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
+				{
+					$start = '{{{@' . $counter . '(' . $each . ')';
+					$end = '(' . $each . ')@' . $counter . '}}}';
+				}
 				if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
 				{
 					$start = '{{{@(' . $each . ')';
