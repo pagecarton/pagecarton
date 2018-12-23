@@ -436,7 +436,7 @@
             { 
              	if( $f = @fopen( $remoteSite . '/pc_installer.php?do_not_highlight_file=1', 'r' ) )
                 {
-					file_put_contents( 'pc_installer.php', $f );
+					file_put_contents( 'pc_installer.php', $f );  
                 }
           	}
 			else
@@ -451,7 +451,7 @@
 			{
 				$urlToGo = '{$prefix}/pc_installer.php';
 			}
-			header( "Location: {$urlToGo}?stage=start" );
+			header( "Location: {$urlToGo}?stage=start" );   
 			exit();
         break;
 	
