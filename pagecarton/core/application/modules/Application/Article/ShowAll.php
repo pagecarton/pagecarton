@@ -1309,7 +1309,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	var_export( $this->_parameter['markup_template'] );
 		
 		if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false )  
-//		if( ! $this->getParameter( 'array_key_placeholders' ) )  
+//		if( ! $this->_parameter['array_key_placeholders'] )  
 		{
 			//	update the markup template
 			@$this->_parameter['markup_template'] = null;
@@ -1527,7 +1527,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( $path );
 		//	$allOriginalPostTypes = array();
 			//	var_export( $postType );
-			if( $this->getParameter( 'article_types_plus_original' ) )
+			if( @$this->_parameter['article_types_plus_original'] )
 			{
 				if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $postType ) )
 				{
@@ -1541,9 +1541,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			@$path = $realPostTypePath . ' ' . $allOriginalPostTypes;
 		
 		} //	For profiles
-		elseif( $this->getParameter( 'access_level' ) )
+		elseif( @$this->_parameter['access_level'] )
 		{
-			$whereClause['access_level'][] = $this->getParameter( 'access_level' );
+			$whereClause['access_level'][] = $this->_parameter['access_level'];
 
 		}
 		elseif( @$_REQUEST['type'] )

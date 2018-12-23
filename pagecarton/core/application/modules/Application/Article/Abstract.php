@@ -1198,10 +1198,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 	//	$fieldset->placeholderInPlaceOfLabel = true;
 		//	Let's know the kind of post that we are working on.
-	//	var_export( $this->getParameter( 'article_type' ) ); 
+	//	var_export( $this->getParameter( 'article_types' ) ); 
 	//	self::v( $articleSettings ); 
 	//	self::v( $values['article_type'] ); 
-		@$values['article_type'] = $this->getParameter( 'article_type' ) ? : $values['article_type'];   
+		@$values['article_type'] = $this->getParameter( 'article_types' ) ? : $values['article_type'];   
 		if( ! @$values['article_type'] || ! empty( $_REQUEST['article_type'] ) )
 		{ 
 	//	var_export( $_REQUEST[Ayoola_Form::hashElementName( 'article_type')] ); 
