@@ -596,6 +596,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	var_export( $whereToGetPlaceholders );
 		}
 	//	var_export( $danglingPlaceholders );
+		rsort( $danglingPlaceholders );
 		// inject the dangling placeholders here. 
 		//	this made some placeholder to be double under lastoneness
 		foreach( $danglingPlaceholders as $key => $each )
@@ -652,14 +653,15 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	We are working on two files
 			$sectionContent['template'] = null;
 			$sectionContent['include'] = null;
-			$hashSectionName = $section;
+		//	$hashSectionName = $section;
 		//	var_export( $hashSectionName );
 
 			//	hack to fix duplicating content 
 			//	especially on new theme
-			if( stripos( $section, 'ay__' ) === false )
+		//	if( stripos( $section, 'ay__' ) === false )
 			{
 				$hashSectionName = self::hashSectionName( $section );
+				
 			}
 			
 		//	var_export( $section );
@@ -676,6 +678,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	var_export( $sectionsForPreservation );
 			}
 			unset( $sectionsForPreservation[$hashSectionName] );
+			unset( $sectionsForPreservation[$section] );
 			
 			//	set max no of objects in a section
 			$maxObjectsPerSection = 10;
@@ -693,12 +696,21 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					$templateDefaults = array();
 					if( ! isset( $values[$numberedSectionName] ) && $i )
 					{
-						//	don't continue till ten when we don't have values
-						break;
+						$numberedSectionName = $section . $i;
+						if( ! isset( $values[$numberedSectionName] ) && $i )
+						{
+							//	don't continue till ten when we don't have values
+							break;
+						}
 					}
-		//			var_export( $numberedSectionName );
+				//	var_export( $numberedSectionName );
 					if( ! isset( $values[$numberedSectionName] ) )
 					{ 
+						if( stripos( $section, 'ay__ay__' ) === 0 )
+						{
+							//	fix doublers
+							break;	
+						}
 						//	compatibility
 						$numberedSectionName = $section . $i;
 				//		$sectionalValues[$numberedSectionName] = $values[$numberedSectionName];
@@ -937,7 +949,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				{
 		//		var_export( $noOfDanglingObjects );
 		//		var_export( $sectionsForPreservation );
-					$hashSectionName = array_pop( $sectionsForPreservation );
+					$hashSectionName = array_shift( $sectionsForPreservation );
 			//	var_export( $hashSectionName );
 					$noOfDanglingObjects--;
 				}
