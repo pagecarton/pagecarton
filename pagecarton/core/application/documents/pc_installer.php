@@ -446,7 +446,12 @@
 			}
 		//	header( 'Location: ?stage=start' );
 		//	header( "Location: {$prefix}/pc_installer.php?stage=start" );
-			header( "Location: {$_SERVER['PHP_SELF']}?stage=start" );
+			$urlToGo = $_SERVER['PHP_SELF'];
+			if( strpos( $urlToGo, 'pc_installer.php' ) === false )
+			{
+				$urlToGo = '{$prefix}/pc_installer.php';
+			}
+			header( "Location: {$urlToGo}?stage=start" );
 			exit();
         break;
 	
