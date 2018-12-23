@@ -606,75 +606,82 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	var_export( $values );
 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) ) 
 		{ 
-		//	$tempItem = array_shift( $values );
-			$tempItem = array_pop( $values );
-			//	make the first item a link to add a new post
-		//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
-		//	self::v( $tempItem );
-			$tempItem2 = $tempItem;
-		//	if( is_string( $tempItem2 ) )
+			$howManyPostsToAdd = intval( $this->getParameter( 'add_a_new_post' ) );
+			do
 			{
-			//	$tempItem2 = include( $tempItem );
-			}
-			$where =  $this->_dbWhereClause;
-			$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
-			$newArticleType = @$tempItem2['article_type'] ? : ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
-			$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
-			$newArticleTypeToShow = ucfirst( $postTypeInfo['post_type'] ) ? : 'Item';
-	//		self::v( $newArticleType );
-		//	self::v( $this->_dbWhereClause );
-		//	self::v( $where );
-			$categoryForNewPost = @array_pop( $where['category_name'] );
-			$addNewPostUrl = ( $this->getParameter( 'add_a_new_post_link' ) ? : '/widgets/Application_Article_Creator/' ) . '?';
-			if( $newArticleType )
-			{
-				$addNewPostUrl .= '&article_type=' . $newArticleType . '';
-			}
-			if( $categoryForNewPost )
-			{
-				$addNewPostUrl .= '&category_name=' . $categoryForNewPost . '';
-			}
-			if( $truePostType )
-			{
-				$addNewPostUrl .= '&true_post_type=' . $truePostType . '';
-			}
-			if( $this->getParameter( 'post_type_custom_fields' ) )  
-			{
-				$addNewPostUrl .= '&post_type_custom_fields=' . $this->getParameter( 'post_type_custom_fields' ) . '';
-			}
-			if( $this->getParameter( 'post_type_options' ) )
-			{
-				$addNewPostUrl .= '&post_type_options=' . $this->getParameter( 'post_type_options' ) . '';
-			}
-			if( $this->getParameter( 'post_type_options_name' ) )
-			{
-				$addNewPostUrl .= '&post_type_options_name=' . $this->getParameter( 'post_type_options_name' ) . '';
-			}
 
-			$addNewPostUrl .= '&' . Ayoola_Page::setPreviousUrl();
-			
-			//			$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
+			//	$tempItem = array_shift( $values );
+				$tempItem = array_pop( $values );
+				//	make the first item a link to add a new post
+			//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
+			//	self::v( $tempItem );
+				self::v( $howManyPostsToAdd );
+				$tempItem2 = $tempItem;
+			//	if( is_string( $tempItem2 ) )
+				{
+				//	$tempItem2 = include( $tempItem );
+				}
+				$where =  $this->_dbWhereClause;
+				$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
+				$newArticleType = @$tempItem2['article_type'] ? : ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
+				$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
+				$newArticleTypeToShow = ucfirst( $postTypeInfo['post_type'] ) ? : 'Item';
+		//		self::v( $newArticleType );
+			//	self::v( $this->_dbWhereClause );
+			//	self::v( $where );
+				$categoryForNewPost = @array_pop( $where['category_name'] );
+				$addNewPostUrl = ( $this->getParameter( 'add_a_new_post_link' ) ? : '/widgets/Application_Article_Creator/' ) . '?';
+				if( $newArticleType )
+				{
+					$addNewPostUrl .= '&article_type=' . $newArticleType . '';
+				}
+				if( $categoryForNewPost )
+				{
+					$addNewPostUrl .= '&category_name=' . $categoryForNewPost . '';
+				}
+				if( $truePostType )
+				{
+					$addNewPostUrl .= '&true_post_type=' . $truePostType . '';
+				}
+				if( $this->getParameter( 'post_type_custom_fields' ) )  
+				{
+					$addNewPostUrl .= '&post_type_custom_fields=' . $this->getParameter( 'post_type_custom_fields' ) . '';
+				}
+				if( $this->getParameter( 'post_type_options' ) )
+				{
+					$addNewPostUrl .= '&post_type_options=' . $this->getParameter( 'post_type_options' ) . '';
+				}
+				if( $this->getParameter( 'post_type_options_name' ) )
+				{
+					$addNewPostUrl .= '&post_type_options_name=' . $this->getParameter( 'post_type_options_name' ) . '';
+				}
 
-			$item = array( 
-							'article_url' => $addNewPostUrl, 
-							'allow_raw_data' => true, 
-							'not_real_post' => true, 
-						//	'article_type' => $newArticleType, 
-							'always_allow_article' => $this->getParameter( 'article_types' ), 
-							'category_name' => $this->getParameter( 'category_name' ), 
-							'document_url' => Ayoola_Application::getUrlPrefix() . '/widgets/Application_IconViewer?url=/img/placeholder-image.jpg&crop=1&max_width=' . $maxWith . '&max_height=' . $maxHeight . '&', 
-							'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
-							'publish' => true, 
-							'auth_level' => $articleSettings['allowed_writers'], 
-				//			'article_tags' => '', 
-							'username' => Ayoola_Application::getUserInfo( 'username' ), 
-							'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
-							'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
-						);  
-		//	$item ? array_unshift( $values, $item ) : null;
-			$tempItem ? array_push( $values, $tempItem ) : null;
-			$item ? array_push( $values, $item ) : null;
-		//	$tempItem ? array_unshift( $values, $tempItem ) : null;
+				$addNewPostUrl .= '&' . Ayoola_Page::setPreviousUrl() . '&counter=' . $howManyPostsToAdd;
+				
+				//			$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
+
+				$item = array( 
+								'article_url' => $addNewPostUrl, 
+								'allow_raw_data' => true, 
+								'not_real_post' => true, 
+							//	'article_type' => $newArticleType, 
+								'always_allow_article' => $this->getParameter( 'article_types' ), 
+								'category_name' => $this->getParameter( 'category_name' ), 
+								'document_url' => Ayoola_Application::getUrlPrefix() . '/widgets/Application_IconViewer?url=/img/placeholder-image.jpg&crop=1&max_width=' . $maxWith . '&max_height=' . $maxHeight . '&', 
+								'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
+								'publish' => true, 
+								'auth_level' => $articleSettings['allowed_writers'], 
+					//			'article_tags' => '', 
+								'username' => Ayoola_Application::getUserInfo( 'username' ), 
+								'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
+								'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
+							);  
+			//	$item ? array_unshift( $values, $item ) : null;
+				$tempItem ? array_push( $values, $tempItem ) : null;
+				$item ? array_push( $values, $item ) : null;
+			//	$tempItem ? array_unshift( $values, $tempItem ) : null;
+			}
+			while( --$howManyPostsToAdd );
 
 		}
 		
