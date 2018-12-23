@@ -428,7 +428,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						$data += $dataX;
 					}
 					
-		//			var_export( $data );
+		//			self::v( $data );
 //					var_export( $data['article_type'] );
 					
 
@@ -489,31 +489,37 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//	get number of views
 					if( $this->getParameter( 'get_views_count' ) )
 					{
+						self::getViewsCount( $data );
 						if( ! $this->viewsTable )
 						{
 							$this->viewsTable =  new Application_Article_Views();
 						}
 						$data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ddddddddddddd', 'limit' => $this->getParameter( 'limit_for_views_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_views_count_record_search' ) ? : '100' ) ) );
+						set_time_limit( 0 );
 					}
 
 					//	get number of downloads
 					if( $this->getParameter( 'get_download_count' ) && self::isDownloadable( $data ) )
 					{
+						self::getDownloadCount( $data );
 						if( ! $this->downloadTable )
 						{
 							$this->downloadTable =  new Application_Article_Type_Download_Table();
 						}
 						$data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'sssdefwefefs', 'limit' => $this->getParameter( 'limit_for_download_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_download_count_record_search' ) ? : '100' ) ) );
+						set_time_limit( 0 );
 					}
 				//	var_export( $data );
 					//	get number of downloads
 					if( $this->getParameter( 'get_audio_play_count' ) && $data['true_post_type'] == 'audio' )
 					{   
+						self::getAudioPlayCount( $data );
 						if( ! $this->audioTable )
 						{
 							$this->audioTable =  new Application_Article_Type_Audio_Table();
 						}
 						$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '100' ) ) );
+						set_time_limit( 0 );
 					}
 					if( $this->getParameter( 'get_comment_count' ) )
 					{   
@@ -522,6 +528,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							$this->commentTable =  new Application_CommentBox_Table();
 						}
 						$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '100' ) ) );
+						set_time_limit( 0 );
 					}
 					
 					//	don't cache base64 strings of images and download data
@@ -814,6 +821,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['css_class_of_inner_content'] = $this->getParameter( 'css_class_of_inner_content' );
 		//	if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
 			$data['post_link'] = $data['article_url'];
+			$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['article_url'];
 			if( @$data['article_url'] && strpos( @$data['article_url'], ':' ) === false && $data['article_url'][0] !== '?'  )
 			{
 				$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
@@ -1191,7 +1199,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['article_quick_links'] = self::getQuickLink( $data );
 			$data['comment_count'] = '0';
 			$data['category_html'] = $categoryTextRaw;
-			$data['record_count'] = $i; 
+			$data['record_count'] = $i + 1; 
 			
 			//	compatibility
 			$data['category_id'] = $categoryTextRaw;

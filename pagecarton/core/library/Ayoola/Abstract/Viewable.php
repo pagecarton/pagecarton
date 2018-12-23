@@ -1355,6 +1355,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		
 		$html .= '<div style="clear:both;"></div>';
 		$html .= '</div>';	//	 status bar
+		$html .= '<div style="clear:both;"></div>';    
 		
 
 		$html .= "</div>";

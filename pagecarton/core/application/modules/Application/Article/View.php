@@ -341,43 +341,28 @@ class Application_Article_View extends Application_Article_Abstract
 		$categoryText = $categoryTextRaw ? ' ' . $categoryTextRaw : null;
 		$data['category_text'] = $categoryText;
 		//	
+	 //	self::v( $data );
 
 		//	get number of views
 		if( $this->getParameter( 'get_views_count' ) )
 		{
-			if( ! $this->viewsTable )
-			{
-				$this->viewsTable =  new Application_Article_Views();
-			}
-			$data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ) ) );
+			self::getViewsCount( $data );
 		}
 
 		//	get number of downloads
 		if( $this->getParameter( 'get_download_count' ) && self::isDownloadable( $data ) )
 		{
-			if( ! $this->downloadTable )
-			{
-				$this->downloadTable =  new Application_Article_Type_Download_Table();
-			}
-			$data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ) ) );
+			self::getDownloadCount( $data );
 		}
-	//	var_export( $data );
+	//	self::v( $data );
 		//	get number of downloads
 		if( $this->getParameter( 'get_audio_play_count' ) && $data['true_post_type'] == 'audio' )
 		{   
-			if( ! $this->audioTable )
-			{
-				$this->audioTable =  new Application_Article_Type_Audio_Table();
-			}
-			$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ) ) );
+			self::getAudioPlayCount( $data );
 		}
 		if( $this->getParameter( 'get_comment_count' ) )
 		{   
-			if( ! $this->commentTable )
-			{
-				$this->commentTable =  new Application_CommentBox_Table();
-			}
-			$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '300' ) ) );
+			self::getCommentsCount( $data );
 		}
 
 		$this->_xml = self::getDefaultPostView( $data );
@@ -573,7 +558,7 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 			$data['file_size'] = $newFilesizeString;
 		}
-		if( $this->getParameter( 'download_count' ) )
+/* 		if( $this->getParameter( 'download_count' ) )
 		{
 			//	Log into the database 
 			$table = Application_Article_Type_Download_Table::getInstance();
@@ -582,7 +567,7 @@ class Application_Article_View extends Application_Article_Abstract
 		//	self::v( array( 'article_url' => $data['article_url'] ) );
 		//	self::v( $count );
 		}
-		//	destroy float
+ */		//	destroy float
 		$this->_xml .= '<div style="clear:both;"></div>';
 		
 		

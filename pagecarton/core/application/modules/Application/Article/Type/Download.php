@@ -130,7 +130,9 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 										'timestamp' => time(),
 								) 
 				);
-			//	var_export
+				$secondaryValues = array( 'article_url' => $data['article_url'], 'download_count_total' => @++$data['download_count_total'] );
+				self::saveArticleSecondaryData( $secondaryValues );
+						//	var_export
 				if( is_array( $data['download_options'] ) && in_array( 'download_notification', $data['download_options'] ) && @$data['username'] )
 				{
 					//	Retrieve the information of the uploader

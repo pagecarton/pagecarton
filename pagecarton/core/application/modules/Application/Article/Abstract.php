@@ -113,11 +113,94 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	protected static $editorInitialized;	
 	
     /**
+     * 
+     * 
+     * @var bool
+     */
+	protected static $_postViewed;	
+	
+    /**
      * Identifier for the column to edit
      * 
      * @var string
      */
 	protected $_tableClass = 'Application_Article';	
+	
+    /**
+     * 
+     * 
+     */
+	public static function getViewsCount( array & $data )   
+	{
+		//	set this using different method
+	//	self::v( $data );
+		if( ! isset( $data['views_count_total'] ) )
+		{
+			$data['views_count'] = count( Application_Article_Views::getInstance()->select( null, array( 'article_url' => $data['article_url'] ) ) );
+			$data['views_count_total'] =  $data['views_count'];
+			$secondaryValues = array( 'article_url' => $data['article_url'], 'views_count_total' => $data['views_count_total'] );
+			self::saveArticleSecondaryData( $secondaryValues );
+		}
+		$data['views_count'] = $data['views_count_total'];
+		return $data['views_count_total'];
+	}
+	
+    /**
+     * 
+     * 
+     */
+	public static function getAudioPlayCount( array & $data )   
+	{
+		//	set this using different method
+		if( ! isset( $data['audio_play_count_total'] ) )
+		{
+			$data['audio_play_count'] = count( Application_Article_Type_Audio_Table::getInstance()->select( null, array( 'article_url' => $data['article_url'] ) ) );
+			$data['audio_play_count_total'] =  $data['audio_play_count'];
+			$secondaryValues = array( 'article_url' => $data['article_url'], 'audio_play_count_total' => $data['audio_play_count_total'] );
+			self::saveArticleSecondaryData( $secondaryValues );
+		}
+	//	self::v( $data['article_url'] );
+	//	self::v( $data['audio_play_count_total'] );
+	//	exit();
+		$data['audio_play_count'] = $data['audio_play_count_total'];
+		return $data['audio_play_count_total'];
+	}
+	
+    /**
+     * 
+     * 
+     */
+	public static function getDownloadCount( array & $data )   
+	{
+		//	set this using different method
+		if( ! isset( $data['download_count_total'] ) )
+		{
+			$data['download_count'] = count( Application_Article_Type_Download_Table::getInstance()->select( null, array( 'article_url' => $data['article_url'] ) ) );
+			$data['download_count_total'] =  $data['download_count'];
+			$secondaryValues = array( 'article_url' => $data['article_url'], 'download_count_total' => $data['download_count_total'] );
+			self::saveArticleSecondaryData( $secondaryValues );
+		}
+		$data['download_count'] = $data['download_count_total'];
+		return $data['download_count_total'];
+	}
+	
+    /**
+     * 
+     * 
+     */
+	public static function getCommentsCount( array & $data )   
+	{
+		//	set this using different method
+		if( ! isset( $data['comments_count_total'] ) )
+		{
+			$data['comments_count'] = count( Application_CommentBox_Table::getInstance()->select( null, array( 'article_url' => $data['article_url'] ) ) );
+			$data['comments_count_total'] =  $data['comments_count'];
+			$secondaryValues = array( 'article_url' => $data['article_url'], 'comments_count_total' => $data['comments_count_total'] );
+			self::saveArticleSecondaryData( $secondaryValues );
+		}
+		$data['comments_count'] = $data['comments_count_total'];
+		return $data['comments_count_total'];
+	}
 	
     /**
      * Compliments the parent
@@ -251,6 +334,28 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      * Save the article
      * 
      */
+	public static function saveArticleSecondaryData( $values )
+    {
+		$secDir = self::getSecondaryFolder() . $values['article_url'];
+	//	self::v( get_called_class() );
+	//	self::v( $values );
+		if( $previousData = json_decode ( file_get_contents( $secDir ), true ) )
+		{
+			$values += $previousData;
+		}
+	//	self::v( $values );
+	//	exit();
+		Ayoola_Doc::createDirectory( dirname( $secDir ) );
+		unset( $values['document_url_base64'], $values['download_base64'] );
+		$values['has_secondary_data'] = true;   
+		file_put_contents( $secDir, json_encode( $values ) );  
+		return true;
+	}
+	
+    /**
+     * Save the article
+     * 
+     */
 	public static function saveArticle( $values )
     {
 //		var_export( $values );
@@ -284,13 +389,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	//	if( $values['file_size'] > 5000000 )
 		if( ! empty( $values['document_url_base64'] ) ||  ! empty( $values['download_base64'] ) )
 		{
-			$secDir = self::getSecondaryFolder() . $values['article_url'];
-			Ayoola_Doc::createDirectory( dirname( $secDir ) );
-			$secondaryValues = array( 'document_url_base64' => $values['document_url_base64'], 'download_base64' => $values['download_base64'], );
+		//	$secDir = self::getSecondaryFolder() . $values['article_url'];
+		//	Ayoola_Doc::createDirectory( dirname( $secDir ) );
+			$secondaryValues = array( 'article_url' => $values['article_url'], 'document_url_base64' => $values['document_url_base64'], 'download_base64' => $values['download_base64'], );
 			unset( $values['document_url_base64'], $values['download_base64'] );
 			$values['has_secondary_data'] = true;   
-			file_put_contents( $secDir, json_encode( $secondaryValues ) );
-	//		file_put_contents( $secDir, '<?php return ' . var_export( $secondaryValues, true ) . ';' );
+			self::saveArticleSecondaryData( $secondaryValues );
 		}
 		$values['file_size'] += intval( filesize( Ayoola_Doc::uriToDedicatedUrl( @$data['download_url'] ) ) );
 		$values['file_size'] += intval( filesize( @$values['download_path'] ) );
@@ -380,7 +484,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$data = include $data;
 
 
-			if( @$data['has_secondary_data'] )
+		//	if( @$data['has_secondary_data'] )
 			{
 				$filename = self::getSecondaryFolder() . $data['article_url'];
 				if( is_file( $filename ) )
@@ -426,7 +530,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		else
 		{
 			$data = $jsonData;
-			if( @$data['has_secondary_data'] )
+		//	if( @$data['has_secondary_data'] )
 			{
 				$filename = self::getSecondaryFolder() . $data['article_url'];
 				if( is_file( $filename ) )
@@ -437,6 +541,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					{
 						$data += $data2;
 					}
+			//		self::v( $data2 );
 				}
 			}
 		}
@@ -489,8 +594,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( get_class( $this ) === 'Application_Article_View' )
 		{
 			//	dont duplicate
-			if( strpos( Ayoola_Page::getCurrentPageInfo( 'title' ), $data['article_title'] ) === false )
+			if( ! self::$_postViewed )
 			{
+				self::$_postViewed = true;
+			//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
+			//	var_export( $data['article_title'] );
 				$pageInfo = array(
 					'description' => @$data['article_description'],
 					'title' => trim( $data['article_title'] . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
@@ -499,6 +607,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
 
 				//	Log into the database 
+				self::getViewsCount( $data );
 				$table = Application_Article_Views::getInstance();
 				$table->insert( array(
 										'username' => Ayoola_Application::getUserInfo( 'username' ),
@@ -506,6 +615,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 										'timestamp' => time(),
 								) 
 				);
+				$secondaryValues = array( 'article_url' => $data['article_url'], 'views_count_total' => @++$data['views_count_total'] );
+				self::saveArticleSecondaryData( $secondaryValues );
 			}
 		}
 
