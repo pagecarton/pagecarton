@@ -275,57 +275,83 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		$html .= '</select>'; 
  */
-		$object['markup_template_object_name'] = (array) $object['markup_template_object_name'];
-		$widgets = Ayoola_Object_Embed::getWidgets();
-		foreach( $object['markup_template_object_name'] as $each )
-		{
-			if( $each && ! array_key_exists( $each, $widgets ) )
-			{ 
-				$widgets[$each] = $each;   
-			}
-		}
 		$html = null;
-		$i = 0;
-		do
+		$optionsName = 'text_widget_options';
+	//	if( ! empty( $object[$optionsName] ) && in_array( $key, $object[$optionsName] ) )
+		$html .= '<select multiple class="" name="' . $optionsName . '[]" style="width:100%;" >';     
+	//	$html .= '<option value="" >Text Options</option>';  
+		$availableOptions = array( 
+				'preserve_content' => 'Disable WYSIWYG',
+				'embed_widgets' => 'Embed Widgets',
+			);
+		foreach( $availableOptions as $key => $value )
 		{
-			$fieldset = new Ayoola_Form_Element; 
-			$fieldset->hashElementName = false;
-			$fieldset->container = 'span';
-			$fieldset->addElement( array( 'name' => 'markup_template_object_name[]', 'label' => '', 'style' => '', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$object['markup_template_object_name'][$i] ), array( '' => 'Embed Widgets' ) + $widgets );
-			$fieldset->allowDuplication = true;  
-			$fieldset->duplicationData = array( 'add' => '+ Embed New Widget', 'remove' => '- Remove Above Widget', 'counter' => 'embed_widget_counter', );
-			$fieldset->placeholderInPlaceOfLabel = true;
-			$i++;
-			$fieldset->addLegend( 'Widget  <span name="embed_widget_counter" class="embed_widget_counter">' . $i . '</span> of <span name="embed_widget_counter_total" class="embed_widget_counter_total">' . ( count( @$object['markup_template_object_name'] ) ? : 1 ) . '</span>' );   			   			
-			$html .= $fieldset->view(); 
+			$html .=  '<option value="' . $key . '"';   
+			if( ! empty( $object[$optionsName] ) && in_array( $key, $object[$optionsName] ) )
+			{ 
+				$html .= ' selected = selected '; 
+			}
+			$html .=  '>' . $value . '</option>';  
 		}
-		while( isset( $object['markup_template_object_name'][$i] ) );
-		foreach( $object['markup_template_object_name'] as $each )
+		$html .= '</select>'; 
+		if( @in_array( 'embed_widgets', $object['text_widget_options'] ) )
 		{
-			$class = $each;
-			if( ! empty( $class ) && Ayoola_Loader::loadClass( $class ) )
+			$object['markup_template_object_name'] = (array) $object['markup_template_object_name'];
+			$widgets = Ayoola_Object_Embed::getWidgets();
+			foreach( $object['markup_template_object_name'] as $each )
 			{
-				$content = null;
-				$filter = new Ayoola_Filter_ClassToFilename();
-				$classFile = $filter->filter( $class );
-				$classFile = Ayoola_Loader::getFullPath( $classFile );
-
-				$content .= file_get_contents( $classFile ) ;
-				preg_match_all( "/$data\['([a-z_-]*)'\]/", $content, $results );
-				$results = ( is_array( $results[1] ) ? $results[1] : array() );
-				if( $results )
-				{
-					$results = array_unique( $results );
-					sort( $results );
-					$data = trim( str_replace( '{{{}}},', '', '{{{' . implode( '}}}, {{{', $results ) . '}}}' ), ' ' );
-					
-					$html .= '<textarea readonly ondblclick="ayoola.div.autoExpand( this );">';  
-					$html .= '' . $data . '';  
-					$html .= '</textarea>';  
+				if( $each && ! array_key_exists( $each, $widgets ) )
+				{ 
+					$widgets[$each] = $each;   
 				}
 			}
+			$i = 0;   
+			do
+			{
+				$fieldset = new Ayoola_Form_Element; 
+				$fieldset->hashElementName = false;
+				$fieldset->container = 'span';
+				$fieldset->addElement( array( 'name' => 'markup_template_object_name[]', 'label' => 'Widget  <span name="embed_widget_counter" class="embed_widget_counter">' . ( $i ) . '</span>', 'style' => '', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$object['markup_template_object_name'][$i] ), array( '' => 'Select Widget' ) + $widgets );
+				if( $object['markup_template_object_name'][$i] )
+				{
+					$fieldset->allowDuplication = true;  
+					$fieldset->duplicationData = array( 'add' => '+ Embed New Widget', 'remove' => '- Remove Above Widget', 'counter' => 'embed_widget_counter', );
+				}
+				$fieldset->placeholderInPlaceOfLabel = true;
+				$i++;
+				$fieldset->addLegend( '' );   			   			
+				$html .= $fieldset->view(); 
+			}
+			while( isset( $object['markup_template_object_name'][$i] ) );
+			$content = null;
+			$resultsVar = null;
+			foreach( $object['markup_template_object_name'] as $each )
+			{
+			//	var_export( $each );
+				$class = $each;
+				if( ! empty( $class ) && Ayoola_Loader::loadClass( $class ) )
+				{
+					$filter = new Ayoola_Filter_ClassToFilename();
+					$classFile = $filter->filter( $class );
+					$classFile = Ayoola_Loader::getFullPath( $classFile );
+	
+					$content .= file_get_contents( $classFile ) ;
+					preg_match_all( "/$data\['([a-z_-]*)'\]/", $content, $resultsVar );
+					$resultsVar = ( is_array( $resultsVar[1] ) ? $resultsVar[1] : array() );
+				}
+			}
+			if( $resultsVar )
+			{
+				$resultsVar = array_unique( $resultsVar );
+				sort( $resultsVar );
+				$data = trim( str_replace( '{{{}}},', '', '{{{' . implode( '}}}, {{{', $resultsVar ) . '}}}' ), ' ' );
+				
+				$html .= '<textarea readonly ondblclick="ayoola.div.autoExpand( this );">';  
+				$html .= 'Available variables to use in content: ' . $data . '';  
+				$html .= '</textarea>';  
+			}
 		}
-		if( ! empty( $object['phrase_to_replace_with'] ) &&  ! empty( $object['phrase_to_replace'] ) )
+/* 		if( ! empty( $object['phrase_to_replace_with'] ) &&  ! empty( $object['phrase_to_replace'] ) )
 		{
 			$object['preserved_content'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['preserved_content'] );
 			$object['editable'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['editable'] );
@@ -366,21 +392,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		//	var_export( $object );
 			$html .= '<textarea class="phrase_to_replace_with" placeholder="' . htmlentities( $object['phrase_to_replace'] ) . '" name="phrase_to_replace_with">' . $object['phrase_to_replace'] . '</textarea> '; 
 		}
-		$optionsName = 'text_widget_options';
-	//	if( ! empty( $object[$optionsName] ) && in_array( $key, $object[$optionsName] ) )
-		$html .= '<select multiple class="" name="' . $optionsName . '[]" style="width:100%;" >';  
-	//	$html .= '<option value="" >Text Options</option>';  
-		$availableOptions = array( 'preserve_content' => 'Disable WYSIWYG' );
-		foreach( $availableOptions as $key => $value )
-		{
-			$html .=  '<option value="' . $key . '"';   
-			if( ! empty( $object[$optionsName] ) && in_array( $key, $object[$optionsName] ) )
-			{ 
-				$html .= ' selected = selected '; 
-			}
-			$html .=  '>' . $value . '</option>';  
-		}
-		$html .= '</select>'; 
+ */		
 		return $html;
 	}
 
