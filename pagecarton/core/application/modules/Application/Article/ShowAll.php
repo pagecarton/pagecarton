@@ -615,7 +615,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	make the first item a link to add a new post
 			//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
 			//	self::v( $tempItem );
-				self::v( $howManyPostsToAdd );
+			//	self::v( $howManyPostsToAdd );
 				$tempItem2 = $tempItem;
 			//	if( is_string( $tempItem2 ) )
 				{
