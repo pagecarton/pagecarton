@@ -641,7 +641,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 //		var_export( $page['url'] );
 		$this->_layoutRepresentation = $content['template'];
 //		var_export( $placeholders );
-		//			var_export(  $values );
+		//			self::v(  $values );
 		foreach( $placeholders as $section => $v )
 		{
 			$section = strtolower( $section );
@@ -652,18 +652,30 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	We are working on two files
 			$sectionContent['template'] = null;
 			$sectionContent['include'] = null;
-			$hashSectionName = self::hashSectionName( $section );
+			$hashSectionName = $section;
+		//	var_export( $hashSectionName );
+
+			//	hack to fix duplicating content 
+			//	especially on new theme
+			if( stripos( $section, 'ay__' ) === false )
+			{
+				$hashSectionName = self::hashSectionName( $section );
+			}
 			
-	//	var_export( $hashSectionName );
+		//	var_export( $section );
+		//	var_export( $hashSectionName );
 	//	var_export( $sectionsForPreservation );
-/*			if( ++$counter >= $totalPlaceholders )
+
+			//	this was what made to recover template page changes 
+			//	on comeriver site
+			if( ++$counter >= $totalPlaceholders )
 			{
 				$noOfDanglingObjects = count( $sectionsForPreservation );
 				$hasDanglingObjects = count( $sectionsForPreservation );
 			//	var_export( $noOfDanglingObjects . '<br>' ); 
 			//	var_export( $sectionsForPreservation );
 			}
-*/			unset( $sectionsForPreservation[$hashSectionName] );
+			unset( $sectionsForPreservation[$hashSectionName] );
 			
 			//	set max no of objects in a section
 			$maxObjectsPerSection = 10;
@@ -919,6 +931,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				
 					//	We need to work on the layout template file if there is any
 				}
+			//	var_export( $hashSectionName );
 				
 				if( $hasDanglingObjects )
 				{
