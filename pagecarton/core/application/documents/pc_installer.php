@@ -449,7 +449,7 @@
 			$urlToGo = $_SERVER['PHP_SELF'];
 			if( strpos( $urlToGo, 'pc_installer.php' ) === false )
 			{
-				$urlToGo = '{$prefix}/pc_installer.php';
+				$urlToGo = "{$prefix}/pc_installer.php";
 			}
 			header( "Location: {$urlToGo}?stage=start" );   
 			exit();
