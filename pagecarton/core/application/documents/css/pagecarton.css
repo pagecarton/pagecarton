@@ -307,6 +307,15 @@ Basic Style
       padding-top: 34px;
     }
   }
+
+pc_full_width 
+{
+    width: 100%;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
+}
+
 .pc_message_box{
     background-color:#eee;
     float:left; 
@@ -578,7 +587,10 @@ Basic Style
     .pc-btn-parent a, .pc-btn, .pc-element-like-btn 
     {
         width: 100%;
-        text-align: center;
+        width: -moz-available;          /* WebKit-based browsers will ignore this. */
+        width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+        width: fill-available;
+        text-align: center; 
     } 
 }
 .pc-btn-small-parent a, .pc-btn-small {
