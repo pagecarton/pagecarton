@@ -77,77 +77,87 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      */
 	protected function init()
     {
-		if( $this->getParameter( 'template_name' ) )
-		{
-		//	self::v( $this->getParameter( 'template_name' ) );
-			$options = Application_Article_Template::getInstance();
-			if( $options = $options->selectOne( null, array( 'template_name' => $this->getParameter( 'template_name' ) ) ) )
-			{
-				
-			}
-		//	markup_template_namespace
-			if( $this->getParameter( 'max_group_no' ) )
-			{
-				//	allow us to override max_group_no
-				unset( $options['max_group_no'] );
-			}
-			$this->setParameter( ( $options ? : array() ) + array(  'markup_template_no_cache' => true, 'markup_template_namespace' => $this->getParameter( 'template_name' ) . $this->getParameter( 'markup_template_namespace' ) ) );
-			if( @$options['javascript_files'] )
-			{
-				foreach( $options['javascript_files'] as $each )
-				{
-					Application_Javascript::addFile( $each );
-				}
-			}
-			if( @$options['javascript_code'] )
-			{
-			//	$options['javascript_code'] = self::replacePlaceholders( $options['javascript_code'], $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
-				Application_Javascript::addCode( $options['javascript_code'] );
-			}
-			if( @$options['css_files'] )
-			{
-				foreach( @$options['css_files'] as $each )
-				{
-					Application_Style::addFile( $each );
-				}
-			}
-			if( @$options['css_code'] )
-			{
-				Application_Javascript::addCode( $options['css_code'] );
-			}
-		}
-		$this->_parameter['content_to_clear_internal'] .= '
-		<p></p>
-		<span class="reducedfrom"></span>
-		<span class="pc_posts_option_items" style="text-decoration:line-through;" ></span>
-		<div class="sale-box1"><span style="border-bottom: 0;" class="on_sale title_shop pc-bg-color "></span></div>
-		<div class="price-number"><p><span class="rupees"></span></p></div>
-		';
-	//	var_export( 'ewe' );
 		try
 		{
-		//	var_export( $this->getParameter() );
-			switch( @$_GET['post'] )
+			if( $this->getParameter( 'template_name' ) )
 			{
-				default:
-					$this->show();
-			//		var_export( $this->getMarkupTemplate() );
-			//		var_export( $this->_parameter['markup_template'] );
-				break;
+			//	self::v( $this->getParameter( 'template_name' ) );
+				$options = Application_Article_Template::getInstance();
+				if( $options = $options->selectOne( null, array( 'template_name' => $this->getParameter( 'template_name' ) ) ) )
+				{
+					
+				}
+			//	markup_template_namespace
+				if( $this->getParameter( 'max_group_no' ) )
+				{
+					//	allow us to override max_group_no
+					unset( $options['max_group_no'] );
+				}
+				$this->setParameter( ( $options ? : array() ) + array(  'markup_template_no_cache' => true, 'markup_template_namespace' => $this->getParameter( 'template_name' ) . $this->getParameter( 'markup_template_namespace' ) ) );
+				if( @$options['javascript_files'] )
+				{
+					foreach( $options['javascript_files'] as $each )
+					{
+						Application_Javascript::addFile( $each );
+					}
+				}
+				if( @$options['javascript_code'] )
+				{
+				//	$options['javascript_code'] = self::replacePlaceholders( $options['javascript_code'], $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+					Application_Javascript::addCode( $options['javascript_code'] );
+				}
+				if( @$options['css_files'] )
+				{
+					foreach( @$options['css_files'] as $each )
+					{
+						Application_Style::addFile( $each );
+					}
+				}
+				if( @$options['css_code'] )
+				{
+					Application_Javascript::addCode( $options['css_code'] );
+				}
 			}
-	//		echo $this->getViewContent();
-		}
-		catch( Application_Article_Exception $e )
-		{ 
-			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
+			$this->_parameter['content_to_clear_internal'] .= '
+			<p></p>
+			<span class="reducedfrom"></span>
+			<span class="pc_posts_option_items" style="text-decoration:line-through;" ></span>
+			<div class="sale-box1"><span style="border-bottom: 0;" class="on_sale title_shop pc-bg-color "></span></div>
+			<div class="price-number"><p><span class="rupees"></span></p></div>
+			';
+		//	var_export( 'ewe' );
+			try
+			{
+			//	var_export( $this->getParameter() );
+				switch( @$_GET['post'] )
+				{
+					default:
+						$this->show();
+				//		var_export( $this->getMarkupTemplate() );
+				//		var_export( $this->_parameter['markup_template'] );
+					break;
+				}
+		//		echo $this->getViewContent();
+			}
+			catch( Application_Article_Exception $e )
+			{ 
+				$this->_parameter['markup_template'] = null;
+				$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			//	return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
+			}
+			catch( Exception $e )
+			{ 
+				$this->_parameter['markup_template'] = null;
+				$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+			}
 		}
 		catch( Exception $e )
-		{ 
-			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+		{
+            //  Alert! Clear the all other content and display whats below.
+        //    $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
+            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+            return false; 
 		}
 	//	var_export( $this->getDbData() );
     } 
