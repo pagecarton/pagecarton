@@ -398,13 +398,13 @@
 		//	var_export( $responseCode );
 			if( in_array( '200', $responseCode ) )
 			{
-				$content .= '<p><input value="Proceed to Personalization" type="button" onClick = "location.href=\'' . $prefix . '/object/name/Application_Personalization/\'" /></p>';
+				$content .= '<p><input value="Proceed to Personalization" type="button" onClick = "location.href=\'' . $prefix . '/object/name/PageCarton_NewSiteWizard/\'" /></p>';
 			}
 			else
 			{
 				$content .= '<p>You do not have URL rewriting feature (e.g. mod-rewrite) on your webserver? PageCarton would work without it; But you would need to prefix your URLs with "index.php" when entering it on the web browser e.g. http://' . $_SERVER['HTTP_HOST'] . $prefix . '/index.php/page/url. On many of your pages, PageCarton will add this automatically.  </p>';
-			//	$content .= '<p><a href="index.php/object/name/Application_Personalization/"> Proceed to Personalization...</a></p>';
-				$content .= '<p><input value="Proceed to Personalization" type="button" onClick = "location.href=\'index.php/object/name/Application_Personalization/\'" /></p>';
+			//	$content .= '<p><a href="index.php/object/name/PageCarton_NewSiteWizard/"> Proceed to Personalization...</a></p>';
+				$content .= '<p><input value="Proceed to Personalization" type="button" onClick = "location.href=\'index.php/object/name/PageCarton_NewSiteWizard/\'" /></p>';
 			}
 			//	Self destroy file
 			unlink( $filename );
