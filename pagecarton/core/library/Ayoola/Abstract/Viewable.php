@@ -1193,7 +1193,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$fieldset->hashElementName = false;
 		//	$fieldset->addLegend( 'Select user groups that would be able to view this object...' );
 	//	var_export( $object );
-			if( $object['set_access_level'] )
+			if( $object['set_access_level'] || $advanceParameters['object_access_level'] )
 			{
 			//	$fieldset->addElement( array( 'name' => 'xx', 'type' => 'Html' ), array( 'html' => '<label>Widget Privacy</label>' ) );
 				$fieldset->addElement( array( 'name' => 'object_access_level', 'id' => $object['object_unique_id'] . '_object_access_level', 'label' => 'Widget Privacy', 'placeholder' => '', 'type' => 'SelectMultiple', 'value' => @$advanceParameters['object_access_level'] ), self::$_authLevelOptions );
@@ -1235,7 +1235,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			
 				';
 			}
-			if( $object['wrap_widget'] )
+		//	var_export( $advanceParameters );
+			if( $object['wrap_widget'] || $advanceParameters['wrapper_name'] )
 			{
 				if( ! self::$_wrapperOptions )
 				{
@@ -1389,8 +1390,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( ! empty( $parameters['advanced_parameters'] ) )
 		{ 
 			parse_str( $parameters['advanced_parameters'], $advanceParameters );
-			@$advanceParameters = array_combine( $advanceParameters['advanced_parameter_name'], @$advanceParameters['advanced_parameter_value'] ) ? : array();
 		//	var_export( $advanceParameters );
+		@$advanceParameters = array_combine( $advanceParameters['advanced_parameter_name'], @$advanceParameters['advanced_parameter_value'] ) ? : array();
 			$parameters += $advanceParameters;
 			unset( $parameters['advanced_parameters'] );
 		}

@@ -643,6 +643,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		$this->_layoutRepresentation = $content['template'];
 //		var_export( $placeholders );
 		//			self::v(  $values );
+		$pageContent = array();  
 		foreach( $placeholders as $section => $v )
 		{
 			$section = strtolower( $section );
@@ -830,7 +831,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 */			//		exit(); 
 					$objectName = 'obj' . $numberedSectionName . $eachObject['object_name'];
 					
-					
 					//	add domain
 					//	conflicting multisites
 					//	the same url is theme urls on subdomains
@@ -893,6 +893,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					//	Calculate advanced parameters at this level so that access levels might work
 				//	var_export( $parameters );
 					$parameters = self::prepareParameters( $parameters );
+					$pageContent[$section][] = 	array( 'class' => $eachObject['class_name'], 'parameters' => $parameters );			
 					$parametersArray = $parameters;
 					$parameters = var_export( $parameters, true );
 				//	$sectionContent['include'] .= "\n\${$objectName}->setParameter( {$parameters} );\n";  
@@ -1050,6 +1051,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$rPaths['data'] = 'documents/layout/' . $themeName . '/theme/data';
 				$rPaths['data_php'] = 'documents/layout/' . $themeName . '/theme/data_php';
 				$rPaths['data_json'] = 'documents/layout/' . $themeName . '/theme/data_json';
+				$rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme/data_json_content';
 				$rPaths['data-backup'] = 'documents/layout/' . $themeName . '/theme/data-backup/' . time();
 			}
 			elseif( ! empty( $_REQUEST['pc_page_editor_layout_name'] ) )
@@ -1071,6 +1073,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 				$rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 				$rPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
+				$rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json_content';
 				$rPaths['data-backup'] ='documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data-backup/' . time();
 			}
 
@@ -1094,6 +1097,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	save default values if no value is set so we can preload themes.
 		//	var_export();
 			file_put_contents( $rPaths['data_json'], $dataToSave );
+			file_put_contents( $rPaths['data_json_content'], json_encode( $pageContent ) );
 
 			//	back up current data and not previous one
 			if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  

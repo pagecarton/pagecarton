@@ -657,6 +657,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				}
 
 				$addNewPostUrl .= '&' . Ayoola_Page::setPreviousUrl() . '&counter=' . $howManyPostsToAdd;
+
+				$this->_parameter['add_a_new_post_full_url'] = $addNewPostUrl;
 				
 				//			$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
 
@@ -1527,7 +1529,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( $path );
 		//	$allOriginalPostTypes = array();
 			//	var_export( $postType );
-			if( @$this->_parameter['article_types_plus_original'] )
+			if( @$this->_parameter['article_types_plus_original'] ) 
 			{
 				if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $postType ) )
 				{

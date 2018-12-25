@@ -178,5 +178,22 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		//var_export( $list );
 		return $list;
     } 
+		
+    /**
+     * 
+     * 
+     */
+	public static function getPercentageCompleted()
+    {
+		$percentage = 0;
+		if( $defaultLayout = Application_Settings_CompanyInfo::getSettings( 'Page', 'default_layout' ) )
+		{
+			if( Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $defaultLayout ) ) )
+			{
+				$percentage += 100;
+			}
+		}
+		return $percentage;
+	}
 	// END OF CLASS
 }

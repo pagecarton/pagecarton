@@ -271,6 +271,25 @@ class Application_Personalization extends Ayoola_Abstract_Table
 	}
 		
     /**
+     * 
+     * 
+     */
+	public static function getPercentageCompleted()
+    {
+		$percentage = 0;
+		if( Application_Settings_CompanyInfo::getSettings( 'SiteInfo', 'site_headline' ) )
+		{
+			$percentage += 50;
+		}
+		if( Application_Settings_CompanyInfo::getSettings( 'SiteInfo', 'site_description' ) )
+		{
+			$percentage += 50;
+		}
+	//	var_export( $percentage );
+		return $percentage;
+	}
+		
+    /**
      * Creates the form to select which Personalization to view
      * 
      */

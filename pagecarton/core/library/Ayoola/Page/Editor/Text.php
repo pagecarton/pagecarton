@@ -49,6 +49,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * @var string
      */
 	protected $_viewParameter;
+
+    /**
+     * 
+     *
+     * @var array
+     */
+	protected $_markupTemplateObjects;
 	
 	
     /**	
@@ -56,6 +63,17 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * @var boolean
      */
 	public static $openViewParametersByDefault = true;
+	
+    /**
+     * This method
+     *
+     * @param void
+     * @return array
+     */
+    public function getMarkupTemplateObjects()
+    {
+		return $this->_markupTemplateObjects;
+	}
 	
     /**
      * This method
@@ -97,7 +115,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$classes = (array) $this->getParameter( 'markup_template_object_name' );    
 			foreach( $classes as $counter => $each )
 			{	
-	
+				if( ! Ayoola_Loader::loadClass( $each ) )
+				{
+					continue;
+				}
+
 				//	Removing time() from namespace because it doesn't allow the post to cache
 				//	Use whole content or specified part
 				$i = 0;
@@ -124,12 +146,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 												'markup_template' => $content, 
 												'markup_template_namespace' => 'x1234', 
 												'parameter_suffix' => '[' . $counter . ']', 
-												'editable' => $each 
+										//		'editable' => $each 
 												) 
 												+ $this->getParameter();  
 							self::unsetParametersThatMayBeDuplicated( $parameters );
-							$class = new Ayoola_Object_Embed( $parameters );
+							$class = new $each( $parameters );
 							$content = $class->view();
+							$this->_markupTemplateObjects[] = $class;
 						}
 					}
 				}
@@ -145,14 +168,14 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 						'markup_template' => $partTemplate, 
 						'markup_template_namespace' => 'x1234', 
 						'parameter_suffix' => '[' . $counter . ']', 
-						'editable' => $each 
+					//	'editable' => $each 
 						) 
 						+ $this->getParameter();  
 					
 					self::unsetParametersThatMayBeDuplicated( $parameters );
-					$class = new Ayoola_Object_Embed( $parameters );
+					$class = new $each( $parameters );
 					$returnedContent = $class->view();
-
+					$this->_markupTemplateObjects[] = $class;
 					$searchY = array();
 					$replaceY = array();
 					$searchY[] = $start;
@@ -294,7 +317,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>'; 
-		if( @in_array( 'embed_widgets', $object['text_widget_options'] ) )
+		if( @in_array( 'embed_widgets', $object['text_widget_options'] ) || $object['markup_template_object_name'] )
 		{
 			$object['markup_template_object_name'] = (array) $object['markup_template_object_name'];
 			$widgets = Ayoola_Object_Embed::getWidgets();

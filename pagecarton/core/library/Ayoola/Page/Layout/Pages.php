@@ -124,8 +124,14 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
     {
 		try
 		{ 
-	//		var_export( $files );
+		//	var_export( $this->setIdentifier() );
+			if( ! $this->setIdentifier() )
+			{
+				$this->_identifier['layout_name'] = Ayoola_Page_Editor_Layout::getDefaultLayout();
+			}
+		//	var_export( $this->_identifier );
 			if( ! $data = $this->getIdentifierData() ){ return false; }
+		//	var_export( $data );
 		
 	//		var_export( $this->getMyFilename() );
 			if( ! $pages = self::getPages( $data['layout_name'] ) )

@@ -51,18 +51,18 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             return static::$_textUpdates;
         }
         $settingsName = __CLASS__;
-        $table = Application_Settings::getInstance();
+    //    $table = Application_Settings::getInstance();
         $themeName =  ( ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
     //    var_export( $themeName );
         $themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
     //    var_export( $themeName );
     //    var_export( $themeInfo );
     //    var_export( Ayoola_Page_PageLayout::getInstance( 'xx' )->select() );
-        if( $getSiteData AND $previousData = $table->selectOne( null, array( 'settingsname_name' => $settingsName ) ) )
+        if( $getSiteData AND $previousData = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ) ) )
         {
     //      var_export( $settingsName );
         //  var_export( $previousData['settings'] );
-            $previousData = json_decode( $previousData['settings'], true ) ? : unserialize( base64_decode( base64_encode( $previousData['settings'] ) ) );
+            $previousData =  $previousData['data'] ? : ( json_decode( $previousData['settings'], true ) ? : unserialize( base64_decode( base64_encode( $previousData['settings'] ) ) ) );
     //    var_export( $previousData );
            if( is_array( $previousData['dummy_title'] ) && is_array( $previousData['dummy_search'] ) && is_array( $previousData['dummy_replace'] ) )
             {
@@ -100,14 +100,18 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             //  Code that runs the widget goes here...
             try
             { 
-                $this->setIdentifier();
+                if( ! $this->setIdentifier() )
+                {
+                    $this->_identifier['layout_name'] = Ayoola_Page_Editor_Layout::getDefaultLayout();
+                }
             }
             catch( Exception $e )
             { 
-                $this->_identifier[$this->getIdColumn()] = Ayoola_Page_Editor_Layout::getDefaultLayout();
+                $this->_identifier['layout_name'] = Ayoola_Page_Editor_Layout::getDefaultLayout();
             //	return false; 
             }
             if( ! $identifierData = self::getIdentifierData() ){ return false; }
+        //    var_export( $identifierData );
             $settingsName = __CLASS__;
 
             $this->createForm( 'Continue..', '' );
@@ -155,7 +159,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 
             }
         //    var_export( $values );
-			$table->insert( array( 'settings' => json_encode( $values ), 'settingsname_name' => $settingsName ) );
+			$table->insert( array( 'data' => $values, 'settings' => json_encode( $values ), 'settingsname_name' => $settingsName ) );
 
             
 			$this->setViewContent( '<div class="goodnews" style="xtext-align:center;">Update saved successfully. Further text update could be done in <a href="/tools/classplayer/get/name/Ayoola_Page_List">Pages</a>. </div>', true );
@@ -234,5 +238,29 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
     
 		$this->setForm( $form );
     } 
+		
+    /**
+     * 
+     * 
+     */
+	public static function getPercentageCompleted()
+    {
+        $percentage = 0;
+        $themeInfo = self::getUpdates();
+        $themeInfoAll = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => __CLASS__ ) );
+        $themeInfoAll = $themeInfoAll['data'];
+		if( empty( $themeInfo['dummy_search'] )  )
+		{
+			$percentage += 100;
+		}
+		elseif( ! @array_diff( $themeInfo['dummy_search'], $themeInfoAll['dummy_search'] ) )
+		{
+			$percentage += 100;
+		}
+	//	var_export( $percentage );
+ //   var_export( self::getUpdates() );
+//    var_export( $themeInfoAll['dummy_search'] );
+		return $percentage;
+	}
 	// END OF CLASS
 }

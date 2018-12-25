@@ -107,6 +107,7 @@ class Application_Domain_UserSiteManager extends PageCarton_Widget
                     '   ' => array( 'field' => 'profile_url', 'value' =>  '<a target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() . '/pc-admin">Admin Panel</a> ', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
            //         '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
+                    array( 'field' => 'profile_url', 'value' =>  '<a style="font-size:smaller;" rel="shadowbox;" href="http://%FIELD%.' . Ayoola_Application::getDomainName() .  '/tools/classplayer/get/name/PageCarton_NewSiteWizard">New Website Wizard</a>' ), 
                     ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
 				)
 		);
