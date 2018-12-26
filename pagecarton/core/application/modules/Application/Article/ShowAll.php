@@ -679,7 +679,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							//	'article_type' => $newArticleType, 
 								'always_allow_article' => $this->getParameter( 'article_types' ), 
 								'category_name' => $this->getParameter( 'category_name' ), 
-								'document_url' => Ayoola_Application::getUrlPrefix() . '/widgets/Application_IconViewer?url=/img/placeholder-image.jpg&crop=1&max_width=' . $maxWith . '&max_height=' . $maxHeight . '&', 
+								'document_url' => $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg', 
 								'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
 								'publish' => true, 
 								'auth_level' => $articleSettings['allowed_writers'], 
@@ -847,7 +847,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//		var_export( $data['post_link'] );
 			}
 			if( @$data['article_url'] )
-			$data['document_url'] = $data['document_url']; 
+			$data['document_url'] = $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ); 
 			$data['document_url_plain'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
 			$data['document_url_uri'] = $data['document_url']; 
 			$data['document_url_cropped'] = $data['document_url']; 
