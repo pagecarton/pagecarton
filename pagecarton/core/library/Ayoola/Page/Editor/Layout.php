@@ -407,7 +407,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 //		var_export( self::getDefaultLayout() );
 	//	var_export( $theme );
 //		var_export( $theme );
-//		var_export( $filePath );
+	//	var_export( is_file( $filePath ) );
 //		var_export( $page['pagelayout_filename'] );
 		$page['pagelayout_filename'] = $filePath; 
 		$this->hashListForJs = NULL;
@@ -596,6 +596,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	var_export( $whereToGetPlaceholders );
 		}
 	//	var_export( $danglingPlaceholders );
+	//	var_export( $placeholders );
 		rsort( $danglingPlaceholders );
 		// inject the dangling placeholders here. 
 		//	this made some placeholder to be double under lastoneness
@@ -960,8 +961,15 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			
 			//	refresh this here because its been tampered with in  $noOfDanglingObjects
 			$hashSectionName = self::hashSectionName( $section );
-			
-			if( is_file( $page['pagelayout_filename'] ) ) 
+		//	var_export( $page['pagelayout_filename'] );
+//		var_export( is_file( $page['pagelayout_filename'] ) );
+//		var_export( is_file( $filePath ) );
+//		var_export( $content['template'] );
+
+			// For some reasons this is no longer available bececause this tempfil is being deleted
+			//	before end of the script
+		//	if( is_file( $page['pagelayout_filename'] ) ) 
+		//	if( ( $page['pagelayout_filename'] ) ) 
 			{
 				//	 Try to replace contents of the layout
 				$search = array( '%%' . $section . '%%', '@@@' . $section . '@@@' );
@@ -990,7 +998,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 								
 				/* For Layout representation */
 				$replace = "<div ondrop='ayoola.dragNDrop.elementDropped( event, this )' ondragover='ayoola.dragNDrop.allowDrop( event )' title='This is the \"{$section}\" section. Drag objects from the draggable pane and drop it here.' class='DragContainer' id='{$hashSectionName}'>$sectionalObjectCollection</div>\n";			
-	//			var_export( $sectionalObjectCollection );
+			//	var_export( $search );
 			//	$replace = "<div class='DragContainer' id='{$section}'>$sectionalObjectCollection</div>\n";			
 				$this->_layoutRepresentation = str_ireplace( $search, $replace, $this->_layoutRepresentation );
 				
@@ -1006,10 +1014,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	echo "<br>" ;
 		//		exit();
 			}  
-			else
+		//	else
 			{
-				$content['template'] .= "<?php\n//{$section} Begins Here\n{$sectionContent['template']}\n//{$section} Ends Here\n?>";
-			}
+				;
+/* 		//		$content['template'] .= "<?php\n//{$section} Begins Here\n{$sectionContent['template']}\n//{$section} Ends Here\n?>";
+ */			}
 			
 			//	Add the new sectional data to the main content
 		//	$content['template'] .= $sectionContent['template'];
