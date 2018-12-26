@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Tuesday 25th of December 2018 08:58:59 AM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Wednesday 26th of December 2018 12:09:12 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -26,17 +26,17 @@
 							if
 							( 
 
-								$x_1545728339 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'novus', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+								$x_1545782952 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'novus', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
 							)
 							{
-							//	var_export( $x_1545728339 );
-							//	echo file_get_contents( $x_1545728339 );
-								foreach( $x_1545728339 as $each )
+							//	var_export( $x_1545782952 );
+							//	echo file_get_contents( $x_1545782952 );
+								foreach( $x_1545782952 as $each )
 								{	
 									include_once $each;
 								}
 							}
-		//					var_export( $x_1545728339 );
+		//					var_export( $x_1545782952 );
 						?>
 						 <?php
 /**
@@ -49,7 +49,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Sunday 17th of June 2018 02:00:11 AM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Tuesday 25th of December 2018 11:56:25 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <!DOCTYPE HTML>
@@ -74,6 +74,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/underscore-min.js" type="text/javascript"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/moment-2.2.1.js" type="text/javascript"></script><!--<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/clndr.js" type="text/javascript"></script>  
 <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/site.js" type="text/javascript"></script>--><!--End Calender--><!-- Metis Menu --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/metisMenu.min.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/custom.js"></script><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/custom.css" rel="stylesheet">
 <!--//Metis Menu --><style>
+	.row {
+    margin: 0 0 0;
+}
 .logo a h1 {
     color: transparent;
     background-image: url("<?php echo Ayoola_Application::getUrlPrefix(); ?>/img/logo.png");
@@ -81,12 +84,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     background-size: contain;
     background-repeat: no-repeat;
 }
-.logo {
-    background: #4d4d4d;
-}
-.cbp-spmenu-vertical {
-    background-color: #333;
-}
+		.logo {
+			background: #4d4d4d;
+			float: unset;
+		}
+
+		.cbp-spmenu-vertical {
+			background-color: #333;
+		}
+
+		.header-left {
+			float: unset;
+			width: unset;
+		}
 
 </style>
 </head>
@@ -197,7 +207,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				<div class="logo">
 					<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin">
 						<h1>PageCarton</h1>
-						<span>AdminPanel</span>
+						<span>PageCarton Admin Panel</span>
 					</a>				
 				</div>
 				<!--//logo-->
@@ -207,39 +217,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
 						<label class="input__label" for="input-31">
 							<svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
-								<path d="m0,0l404,0l0,77l-404,0l0,-77z"/>   
+								<path d="m0,0l404,0l0,77l-404,0l0,-77z"/>    
 							</svg>
 						</label>
 					</form>
 				</div><!--//end-search-box-->
 				<div class="clearfix"> </div>
-			</div>
-			<div class="header-right">
-			
-				<!--notification menu end -->
-				<?php echo Ayoola_Abstract_Viewable::viewObject( 'Ayoola_Access_Dashboard', array (
-  'object_interior' => true,
-  'markup_template' => '<section><div class="profile_details">		&#13;
-					<ul><li class="dropdown profile_details_drop">&#13;
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">&#13;
-								<div class="profile_img">	&#13;
-									<span class="prfil-img"><img style="max-height:50px;" src="{{{display_picture}}}" alt=""></img></span> &#13;
-									<div class="user-name">&#13;
-										<p>{{{display_name}}}</p>&#13;
-										<span>{{{auth_name}}}</span>&#13;
-									</div>&#13;
-									<i class="fa fa-angle-down lnr"></i>&#13;
-									<i class="fa fa-angle-up lnr"></i>&#13;
-									<div class="clearfix"></div>	&#13;
-								</div>	&#13;
-							</a>&#13;
-							<ul class="dropdown-menu drp-mnu"><li> <a href="' . Ayoola_Application::getUrlPrefix() . '/account"><i class="fa fa-cog"></i> Settings</a> </li> &#13;
-								<li> <a href="' . Ayoola_Application::getUrlPrefix() . '/{{{username}}}"><i class="fa fa-user"></i> Profile</a> </li> &#13;
-								<li> <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/signout"><i class="fa fa-sign-out"></i> Logout</a> </li>&#13;
-							</ul></li>&#13;
-					</ul></div>&#13;
-				</section>',
-) ); ?><div class="clearfix"> </div>				
 			</div>
 			<div class="clearfix"> </div>	
 		</div>
@@ -522,8 +505,6 @@ echo ( ! empty( $_81887aceed5b28012e715c3090815557 ) &&  is_object( $_81887aceed
 		
 <?php
 //footer Begins Here
-
-echo ( ! empty( $_1993374b8af42634763e52ad9417ea4e ) &&  is_object( $_1993374b8af42634763e52ad9417ea4e ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_1993374b8af42634763e52ad9417ea4e->view(), '' ) : null );
 
 //footer Ends Here
 ?><?php
