@@ -52,9 +52,11 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<link href="css/custom.css" rel="stylesheet">
 	<!--//Metis Menu -->
 	<style>
-.row {
-    margin: 0 0 0;
-}		.logo a h1 {
+		.row {
+			margin: 0 0 0;
+		}
+
+		.logo a h1 {
 			color: transparent;
 			background-image: url("#PC_URL_PREFIX/img/logo.png");
 			background-position: center;
@@ -74,6 +76,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		.header-left {
 			float: unset;
 			width: unset;
+		}
+		@media(max-width:640px) {
+			.cbp-spmenu-push div#page-wrapper {
+
+				padding: 5em 1em 2em;
+
+			}
 		}
 	</style>
 </head>

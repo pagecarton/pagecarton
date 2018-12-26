@@ -62,10 +62,11 @@ class Application_Upgrade_Check extends PageCarton_Widget
             }
         //    var_export( $versionFromServer );
         $filter = new Ayoola_Filter_Time();
-        $lastChecked = '<span  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $serverName . ')</span>';
+        $lastChecked = null;
+//        $lastChecked = '<span  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $serverName . ')</span>';
         if( empty( $versionFromServer['response'] ) )
         {
-            $this->setViewContent( '<div class="badnews">PageCartion is not able to check for updates (cURL error). ' . $lastChecked . '  </div>', true ); 
+            $this->setViewContent( '<div  style="font-size:smaller;" class="badnews">PageCartion is not able to check for updates (cURL error). ' . $lastChecked . '  </div>', true ); 
         }
         elseif( $versionFromServer['response'] != PageCarton::VERSION )
         {
@@ -73,7 +74,7 @@ class Application_Upgrade_Check extends PageCarton_Widget
         }
         else
         {
-            $this->setViewContent( '<p class="goodnews">You are running the latest version of PageCarton (' . $versionFromServer['response']  . '). ' . $lastChecked . '</p>', true ); 
+            $this->setViewContent( '<p  style="font-size:smaller; text-align:center;" class="goodnews"> PageCarton Up-to-date (' . $versionFromServer['response']  . '). ' . $lastChecked . '</p>', true ); 
         //    $this->setViewContent( '' ); 
         }
 

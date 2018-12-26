@@ -19,7 +19,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</script><!--//end-animate--><!-- chart --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/Chart.js"></script><!-- //chart --><!--Calender--><link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/clndr.css" type="text/css">
 <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/underscore-min.js" type="text/javascript"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/moment-2.2.1.js" type="text/javascript"></script><!--<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/clndr.js" type="text/javascript"></script>  
 <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/site.js" type="text/javascript"></script>--><!--End Calender--><!-- Metis Menu --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/metisMenu.min.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/custom.js"></script><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/custom.css" rel="stylesheet">
-<!--//Metis Menu --><style>
+<!--//Metis Menu -->
+<style>
 .logo a h1 {
     color: transparent;
     background-image: url("<?php echo Ayoola_Application::getUrlPrefix(); ?>/img/logo.png");
@@ -27,12 +28,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     background-size: contain;
     background-repeat: no-repeat;
 }
-.logo {
-    background: #4d4d4d;
-}
+		.logo {
+			background: #4d4d4d;
+			float: unset;
+		}
 .cbp-spmenu-vertical {
     background-color: #333;
 }
+
+		.header-left {
+			float: unset;
+			width: unset;
+		}
 @media(max-width:640px){
 .cbp-spmenu-push div#page-wrapper {
 
