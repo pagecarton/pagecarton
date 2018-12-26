@@ -955,7 +955,8 @@ class Ayoola_Application
 								header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($fn)).' GMT', true, 200);
 							}
 						}
-						header( 'Content-Length: ' . filesize( $fn ) );
+					//	This was making site load forever if size sent do not match this
+					//	header( 'Content-Length: ' . filesize( $fn ) );
 					}
 					
 

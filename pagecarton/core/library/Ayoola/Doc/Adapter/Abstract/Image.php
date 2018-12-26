@@ -70,5 +70,50 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
 		//exit( var_export( $xml->saveHTML() ) );
 		return $xml->saveHTML(); 
     } 
+	
+	/**
+     * This method outputs the document
+     *
+     * @param void
+     * @return mixed
+     */
+    public function view()
+    {
+		$paths = array_unique( $this->getPaths() );
+//		var_export( $this->getPaths() );
+//		exit();   
+		$imageInfo = array();
+		if( @$_GET['crop_to_fit_url'] )
+		{
+			$imageInfo = Application_Slideshow_Abstract::getImageInfo( $_GET['crop_to_fit_url'] );
+		}
+		if( @$_GET['width'] )
+		{
+			$imageInfo['width'] = $_GET['width'];
+		}
+		if( @$_GET['height'] )
+		{
+			$imageInfo['height'] = $_GET['height'];
+		}
+
+	//	var_export( $imageInfo );
+	//	exit();   
+		foreach( $paths as $path )
+		{	
+			header( 'Content-Description: File Transfer' );
+			header( 'Content-Type: ' . $this->getContentType( $path ) );
+			header( 'Content-Transfer-Encoding: binary' );
+			header( 'Content-Length: ' . filesize( $path ) );
+			if( ! empty( $imageInfo['width'] ) && ! empty( $imageInfo['height'] ) )
+			{
+                ImageManipulator::makeThumbnail( $path, $imageInfo['width'], $imageInfo['height'] );
+                exit();
+			}
+			else
+			{
+				readfile( $path );
+			}
+		}
+    } 
 	// END OF CLASS
 }

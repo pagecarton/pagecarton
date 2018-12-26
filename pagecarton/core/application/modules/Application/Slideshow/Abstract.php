@@ -88,6 +88,10 @@ abstract class Application_Slideshow_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getImageInfo( $url )
     {
+		if( ! $url )
+		{
+			return false;
+		}
 		$info = array();
 		switch( $url[0] )
 		{
