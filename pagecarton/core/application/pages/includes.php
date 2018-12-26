@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: includes.php	Wednesday 26th of December 2018 12:02:18 PM	ayoola@ayoo.la $ 
+* @version $Id: includes.php	Wednesday 26th of December 2018 12:21:08 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -103,12 +103,13 @@ $_9cfa0159b65cbb1ced5e614f8d44d92d = null;
 
 							}
 							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_76f3fface02ce8ef4109dbc5b13137b1 = new Ayoola_Menu( array (
-  'option' => 'MyAccount',
-  'template_name' => 'HorizontalGrayish',
+$_69cfd5933ab1896e68af7e4de5dcca2e = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<p><br></p><p><br></p><p><br></p>',
+  'preserved_content' => '',
+  'url_prefix' => '/x',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -120,7 +121,50 @@ $_76f3fface02ce8ef4109dbc5b13137b1 = new Ayoola_Menu( array (
 							else
 							{
 								
-$_76f3fface02ce8ef4109dbc5b13137b1 = null;
+$_69cfd5933ab1896e68af7e4de5dcca2e = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
+							{
+								
+$_626f5396191eebbd2e6badaf31705957 = new Ayoola_Menu( array (
+  'option' => 'MyAccount',
+  'template_name' => 'HorizontalWhite',
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  '' => '',
+) );
+
+							}
+							else
+							{
+								
+$_626f5396191eebbd2e6badaf31705957 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_67d5ea30804012df35eea5dad02ca2dc = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<p><br></p><p><br></p><p><br></p>',
+  'preserved_content' => '',
+  'url_prefix' => '/x',
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  '' => '',
+) );
+
+							}
+							else
+							{
+								
+$_67d5ea30804012df35eea5dad02ca2dc = null;
 
 							}
 							
