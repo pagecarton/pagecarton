@@ -72,6 +72,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	protected static $_listCounter = 0;
 	
     /**
+     * Module files directory namespace
+     * 
+     * @var string
+     */
+	protected static $_newPostUrl;	
+	
+    /**
      * The method does the whole Class Process
      * 
      */
@@ -631,16 +638,17 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				{
 				//	$tempItem2 = include( $tempItem );
 				}
+			//	if( property_exists( $this, '_itemName' ) )
 				$where =  $this->_dbWhereClause;
 				$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
 				$newArticleType = @$tempItem2['article_type'] ? : ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
 				$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
-				$newArticleTypeToShow = ucfirst( $postTypeInfo['post_type'] ) ? : 'Item';
+				$newArticleTypeToShow = property_exists( $this, '_itemName' ) ? static::$_itemName : ( ucfirst( $postTypeInfo['post_type'] ) ? : 'Item' );
 		//		self::v( $newArticleType );
 			//	self::v( $this->_dbWhereClause );
 			//	self::v( $where );
 				$categoryForNewPost = @array_pop( $where['category_name'] );
-				$addNewPostUrl = ( $this->getParameter( 'add_a_new_post_link' ) ? : '/widgets/Application_Article_Creator/' ) . '?';
+				$addNewPostUrl = ( static::$_newPostUrl ? : ( $this->getParameter( 'add_a_new_post_link' ) ? : '/widgets/Application_Article_Creator/' ) ) . '?';
 				if( $newArticleType )
 				{
 					$addNewPostUrl .= '&article_type=' . $newArticleType . '';

@@ -29,6 +29,13 @@ class Application_Profile_All extends Application_Article_ShowAll
 {
 	
     /**
+     *
+     * 
+     * @var string
+     */
+	protected static $_itemName = 'Profile';	
+	
+    /**
      * Module files directory namespace
      * 
      * @var string
@@ -42,6 +49,13 @@ class Application_Profile_All extends Application_Article_ShowAll
      */
 	protected static $_moduleDir = 'profiles';	
 	
+    /**
+     * Module files directory namespace
+     * 
+     * @var string
+     */
+	protected static $_newPostUrl = '/widgets/Application_Profile_Creator';	
+	
 			
     /**
      * 
@@ -49,6 +63,7 @@ class Application_Profile_All extends Application_Article_ShowAll
 	public static function sanitizeData( &$data )
     {
 	//	var_export( $data );
+//		$this->_parameter['add_a_new_post_link'] = $this->getParameter( 'add_a_new_post_link' ) ? : '/widgets/Application_Profile_Creator';
 		$data = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] );
 	//	self::v( $data );
 		if( ! empty( $data['posts']['all'] ) )

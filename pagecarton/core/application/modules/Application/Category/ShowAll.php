@@ -29,6 +29,13 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 {
 	
     /**
+     *
+     * 
+     * @var string
+     */
+	protected static $_itemName = 'Category';	
+	
+    /**
      * 
      * 
      * @var string 
@@ -48,6 +55,13 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
      * @var array
      */
 	protected static $_postCategories;
+	
+    /**
+     * Module files directory namespace
+     * 
+     * @var string
+     */
+	protected static $_newPostUrl = '/widgets/Application_Category_Creator';	
 	
 		
     /**
