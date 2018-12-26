@@ -24,7 +24,7 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 98 );
+	protected static $_accessLevel = array( 0 );
 	
     /**
      * 
@@ -42,10 +42,7 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
 		try
 		{ 
             //  Code that runs the widget goes here...
-            if( ! self::hasPriviledge( 98 )  )
-            {
-                return false;
-            }
+            Application_Personalization::viewInLine();
 
             $stages = array(
                 array( 'key' => 'Basic Information', 'title' => 'Set site basic information', 'class' => 'Application_Personalization' ),
