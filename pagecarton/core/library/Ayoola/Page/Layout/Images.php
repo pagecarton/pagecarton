@@ -52,7 +52,7 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
     {
 		try
 		{ 
-			if( ! $this->setIdentifier() )
+			if( ! $this->getIdentifier() )
 			{
 				$this->_identifier[$this->getIdColumn()] = Ayoola_Page_Editor_Layout::getDefaultLayout();
 			}

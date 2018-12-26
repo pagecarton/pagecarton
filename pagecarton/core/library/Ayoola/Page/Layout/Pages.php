@@ -125,7 +125,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 		try
 		{ 
 		//	var_export( $this->setIdentifier() );
-			if( ! $this->setIdentifier() )
+			if( ! $this->getIdentifier() )
 			{
 				$this->_identifier['layout_name'] = Ayoola_Page_Editor_Layout::getDefaultLayout();
 			}
