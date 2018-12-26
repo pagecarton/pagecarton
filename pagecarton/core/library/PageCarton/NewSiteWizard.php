@@ -115,7 +115,7 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                Step ' . ( $weAreOn ) . ' of ' . count( $stages ) . ' <br><br>
                ' . $xT[$class]['title'] . ' <br><br>
                 <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '\', \'page_refresh\' );" href="javascript:;"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . $xT[$class]['key'] . '</a><br><br>
-                <a style="font-size:small;" class="" href="' . Ayoola_Application::getUrlPrefix() . '/" target="_blank"> <i  style="margin:5px;" class="fa fa-external-link"></i> Preview Site </a><br><br>
+                <a style="font-size:x-small;" class="" href="' . Ayoola_Application::getUrlPrefix() . '/" target="_blank"> <i  style="margin:5px;" class="fa fa-external-link"></i> Preview Site </a><br><br>
                 
                 </div>' ); 
             //    $this->setViewContent( $class::viewInLine() ); 
