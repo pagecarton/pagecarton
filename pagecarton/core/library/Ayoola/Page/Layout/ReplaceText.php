@@ -27,6 +27,63 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 	protected static $_accessLevel = array( 98 );
 	
     /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var boolean
+     */
+	protected static $_defaultTexts = array (
+        'dummy_title' => 
+        array (
+          0 => 'Organization Name',
+          1 => 'Short Description About Organization',
+          2 => 'More About Organization ',
+          3 => 'Background History of Organization',
+          4 => 'Street Address',
+          5 => 'City',
+          6 => 'Country',
+          7 => 'Phone Number 1',
+          8 => 'Email Address',
+          9 => 'Facebook URL',
+          10 => 'Twitter URL',
+          11 => 'Instagram URL',
+        ),
+        'dummy_search' => 
+        array (
+          0 => '{Organization Name}',
+          1 => '{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}',
+          2 => '{More About Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.}
+      ',
+          3 => '{Background History Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea consequat.}',
+          4 => '{Street Address}',
+          5 => '{State}',
+          6 => '{Country}',
+          7 => '{+234 800 000 0000}',
+          8 => '{info@example.com}',
+          9 => '{https://www.facebook.com/PageCarton}',
+          10 => '{https://www.twitter.com/PageCarton}
+      ',
+          11 => '{https://www.instagram.com/PageCarton}',
+        ),
+        'dummy_replace' => 
+        array (
+          0 => 'Organization Name',
+          1 => 'Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.',
+          2 => 'More About Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.
+      ',
+          3 => 'Background History Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea consequat.',
+          4 => 'Street Address',
+          5 => 'State',
+          6 => 'Country',
+          7 => '+234 800 000 0000',
+          8 => 'info@example.com',
+          9 => 'https://www.facebook.com/PageCarton',
+          10 => 'https://www.twitter.com/PageCarton
+      ',
+          11 => 'https://www.instagram.com/PageCarton',
+        ),
+      );
+	
+    /**
      * 
      * 
      * @var string 
@@ -192,6 +249,10 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
     //    if( ! $data = self::getIdentifierData() ){ return false; }
         $data = Ayoola_Page_Layout_ReplaceText::getUpdates( ! empty( $_GET['editing_dummy_text'] ) );
         
+        if( empty( $data['dummy_search'] ) )
+        {
+            $data = static::$_defaultTexts + $data;
+        }
     //    var_export( $data );
 
         $i = 0;
