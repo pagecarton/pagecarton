@@ -196,6 +196,23 @@ class Application_Article_Creator extends Application_Article_Abstract
 				$newUrl = date( '/Y/m/d/' ) . '' . $values['article_url'] . $time . '.' . $articleSettings['extension'];
 				$path = Application_Article_Abstract::getFolder() . $newUrl;
 				$time = '-' . $values['article_creation_date'] . '';
+				if( is_file( $path ) )
+				{
+					if( $thatPost = self::loadPostData( $newUrl ) )
+					{
+						$keysToCheck = array( 'article_title', 'article_description', 'document_url', 'username', 'user_id', 'article_type', 'profile_url', );
+						foreach( $keysToCheck as $eachKey )
+						{
+							if( @$thatPost[$eachKey] !== @$values[$eachKey] )
+							{
+								continue 2;
+							}
+						}
+						$this->setViewContent( '<div class="badnews">' . ucfirst( $joinedType ) . ' With the same info exists. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $newUrl . '">View ' . $joinedType . '</a> or <a href="' . Ayoola_Page::getPreviousUrl() . '">Go Back</a></div>', true );
+						return false;
+
+					}
+				}
 			}
 			while( is_file( $path ) );
 		//	self::v( $newUrl );
