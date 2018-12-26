@@ -496,10 +496,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					}
 				//	self::v( $data['new_badge'] );
 
-			//	get number of views
+				//	get number of views
+					self::getViewsCount( $data );
 					if( $this->getParameter( 'get_views_count' ) )
 					{
-						self::getViewsCount( $data );
 						if( ! $this->viewsTable )
 						{
 							$this->viewsTable =  new Application_Article_Views();
@@ -508,10 +508,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						set_time_limit( 0 );
 					}
 
+					self::getDownloadCount( $data );
 					//	get number of downloads
 					if( $this->getParameter( 'get_download_count' ) && self::isDownloadable( $data ) )
 					{
-						self::getDownloadCount( $data );
 						if( ! $this->downloadTable )
 						{
 							$this->downloadTable =  new Application_Article_Type_Download_Table();
@@ -521,9 +521,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					}
 				//	var_export( $data );
 					//	get number of downloads
+					self::getAudioPlayCount( $data );
 					if( $this->getParameter( 'get_audio_play_count' ) && $data['true_post_type'] == 'audio' )
 					{   
-						self::getAudioPlayCount( $data );
 						if( ! $this->audioTable )
 						{
 							$this->audioTable =  new Application_Article_Type_Audio_Table();
@@ -1216,7 +1216,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			//	useful in the templates
 			$data['article_quick_links'] = self::getQuickLink( $data );
-			$data['comment_count'] = '0';
+			$data['comments_count'] = '0';
 			$data['category_html'] = $categoryTextRaw;
 			$data['record_count'] = $i + 1; 
 			

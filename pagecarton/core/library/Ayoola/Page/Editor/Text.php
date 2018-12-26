@@ -57,6 +57,16 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
 	protected $_markupTemplateObjects;
 	
+    /**
+     * 
+     * 
+     * @var array
+     */
+	protected static $_widgetOptions = array( 
+		'preserve_content' => 'Disable WYSIWYG',
+		'embed_widgets' => 'Embed Widgets',
+	);
+	
 	
     /**	
      *
@@ -101,7 +111,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		//	codes first because it wont be there if they didnt opt to enter codes
 	//	var_export( $this->_parameter );  
 		$content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
-		if( @in_array( 'preserve_content', $this->getParameter( 'text_widget_options' ) ) && $this->getParameter( 'preserved_content' ) )
+		if( ( @in_array( 'preserve_content', $this->getParameter( 'widget_options' ) ) || @in_array( 'preserve_content', $this->getParameter( 'text_widget_options' ) ) ) && $this->getParameter( 'preserved_content' ) )
 		{
 			@$content = $this->getParameter( 'preserved_content' );
 		}
@@ -299,7 +309,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		$html .= '</select>'; 
  */
 		$html = null;
-		$optionsName = 'text_widget_options';
+/* 		$optionsName = 'text_widget_options';
 	//	if( ! empty( $object[$optionsName] ) && in_array( $key, $object[$optionsName] ) )
 		$html .= '<select multiple class="" name="' . $optionsName . '[]" style="width:100%;" >';     
 	//	$html .= '<option value="" >Text Options</option>';  
@@ -317,7 +327,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>'; 
-		if( @in_array( 'embed_widgets', $object['text_widget_options'] ) || $object['markup_template_object_name'] )
+ */		if( ( @in_array( 'embed_widgets', $object['widget_options'] ) || @in_array( 'embed_widgets', $object['text_widget_options'] ) ) || $object['markup_template_object_name'] )
 		{
 			$object['markup_template_object_name'] = (array) $object['markup_template_object_name'];
 			$widgets = Ayoola_Object_Embed::getWidgets();
@@ -493,8 +503,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 											' 
 										);    
 		$html = null;
-		$optionsName = 'text_widget_options';
-		if( @in_array( 'preserve_content', $object['text_widget_options'] ) )
+	//	$optionsName = 'text_widget_options';
+		if( ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
 		{
 			@$object['editable'] = $object['preserved_content'] ? : ( $object['codes'] ? : $object['editable'] );
 		}
@@ -535,7 +545,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		if( ! @$object['codes'] )
 		{
 
-			if( @in_array( 'preserve_content', $object[$optionsName] ) )
+			if( ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
 			{
 				$html .= '<div data-pc-preserve-content="1" class="preserved_content_view pc_html_editor" data-parameter_name="editable" title="The content has been locked from editing...">';
 			}
@@ -555,10 +565,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		elseif( @$object['codes']  )
 		{
-		//	if( @in_array( 'preserve_content', $object[$optionsName] ) )
-			{
-		//		$hiddenStyle = 'display:none;';
-			}
 			$html .= '<textarea class="pc_page_object_specific_item" data-parameter_name="codes" style="' . $hiddenStyle . 'width:100%;" title="You may click to edit the content here..." >' . htmlspecialchars( @$object['codes'] ? : $object['editable'] ) . '</textarea>';     
 		}
 		$html .= '<textarea class="" data-parameter_name="preserved_content" style="display:none;" title="" >' . htmlspecialchars( @$object['editable'] ) . '</textarea>';     
@@ -566,15 +572,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		//	Use this to clean the URL prefix from the codes
 		$html .= '<input data-parameter_name="url_prefix" type="hidden" value="' . Ayoola_Application::getUrlPrefix() . '" >';  
 		$html .= '<div style="clear:both;"></div>';  
-		
-		//	status bar
-	//	$html .= '<div name="" style="" title="" class="status_bar">'; 
-				
-		//	Code View
-	//	$html .= '<a class="title_button" title="Switch the editing mode" name="" href="javascript:;" onclick="e.preventDefault();divToCodeEditor( this );">Code View</a>'; 
-	//	var_export( @$object['codes'] );
-		//									f.outerHTML = \'<div data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor"  onClick="replaceDiv( this );" onDblClick="replaceDiv( this );">' . @$object['codes'] . '</div>\';  
-		if( ! @in_array( 'preserve_content', $object[$optionsName] ) )
+		if( ! ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
 		{
 
 			Application_Javascript::addCode

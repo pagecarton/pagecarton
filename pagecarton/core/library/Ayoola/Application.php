@@ -1129,10 +1129,13 @@ class Ayoola_Application
 					//	change requested url
 					$requestedUri = self::getRequestedUri();
 				//	var_export( $requestedUri );
+				//	var_export( $multiSiteDir );
 					$requestedUri = explode( $multiSiteDir, $requestedUri );
-			//		var_export( $requestedUri ); 
+				//	var_export( $requestedUri ); 
 					array_shift( $requestedUri );
-					$requestedUri = implode( '', $requestedUri );
+				//	var_export( $requestedUri ); 
+					$requestedUri = implode( $multiSiteDir, $requestedUri );
+					array_shift( $requestedUri );
 					self::$_requestedUri = $requestedUri;
 					self::$_presentUri = null;
 					

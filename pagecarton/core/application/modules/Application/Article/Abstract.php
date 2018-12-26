@@ -142,7 +142,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			self::saveArticleSecondaryData( $secondaryValues );
 		}
 		$data['views_count'] = $data['views_count_total'];
-		return $data['views_count_total'];
+		return intval( $data['views_count_total'] );
 	}
 	
     /**
@@ -163,7 +163,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	//	self::v( $data['audio_play_count_total'] );
 	//	exit();
 		$data['audio_play_count'] = $data['audio_play_count_total'];
-		return $data['audio_play_count_total'];
+		return intval( $data['audio_play_count_total'] );
 	}
 	
     /**
@@ -181,7 +181,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			self::saveArticleSecondaryData( $secondaryValues );
 		}
 		$data['download_count'] = $data['download_count_total'];
-		return $data['download_count_total'];
+		return intval( $data['download_count_total'] );
 	}
 	
     /**
@@ -199,7 +199,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			self::saveArticleSecondaryData( $secondaryValues );
 		}
 		$data['comments_count'] = $data['comments_count_total'];
-		return $data['comments_count_total'];
+		return intval( $data['comments_count_total'] );
 	}
 	
     /**
