@@ -93,9 +93,10 @@ class Application_Article_Publisher extends PageCarton_Widget
                             foreach( $class->getMarkupTemplateObjects() as $eachWidget )
                             {
             //    self::v( $eachWidget->getParameter() );
+                            //    self::v( $eachWidget );
                                 $values = $eachWidget->getObjectTemplateValues();
-                                $noRequired = ( $eachWidget->getParameter( 'no_of_post_to_show' ) ? : 3 );
-                                $postType = ( $eachWidget->getParameter( 'article_types' ) ? : $eachWidget->getParameter( 'true_post_type' ) ) ? : '';
+                                $noRequired = ( $eachWidget->getParameter( 'no_of_post_to_show' ) ? : 1 );
+                                $postType = ( $eachWidget->getParameter( 'article_types' ) ? : $eachWidget->getParameter( 'true_post_type' ) ) ? : ( method_exists( $eachWidget, 'getItemName' ) ? $eachWidget::getItemName() : '' );
                                 if( ( $postType && $postTypes[$postType] ) || ! $eachWidget->getParameter( 'add_a_new_post_full_url' ) )
                                 {
                                     continue;
@@ -107,11 +108,12 @@ class Application_Article_Publisher extends PageCarton_Widget
                                      $done = false;
                                      $cssClass = '';
                                 }
-                                 $html .= '<a style="text-align:center;" class="pc-btn ' .  $cssClass  . '" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '' . $eachWidget->getParameter( 'add_a_new_post_full_url' ) . '\', \'page_refresh\' );" href="javascript:;" > 
+                            //    var_export( get_class( $eachWidget ) );
+                                $html .= '<a style="text-align:center;" class="pc-btn ' .  $cssClass  . '" href="' . Ayoola_Application::getUrlPrefix() . '' . $eachWidget->getParameter( 'add_a_new_post_full_url' ) . '" > 
                                 ' . $postType . '
                                 
                                 <br><br>
-                                ' . $values['total_no_of_posts'] . '/' .  $noRequired  . '
+                                ' . $values['total_no_of_posts'] . ( $values['total_no_of_posts'] > $noRequired ? null : ( '/' .  $noRequired )  ) . '
                                
                                 <br>
                                <i  style="margin:10px;" class="fa fa-external-link"></i>  Add a new item  </a>';
@@ -130,7 +132,7 @@ class Application_Article_Publisher extends PageCarton_Widget
                 $done = Application_Article_Table::getInstance()->select();
             }
             $this->setViewContent( '<div style="text-align:center;">' . $html . '</div>' ); 
-            $this->setViewContent( '<div style="text-align:center;"><br><br><a style="text-align:center;" class="" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Article_List\', \'page_refresh\' );" href="javascript:;" ><i  style="margin:10px;" class="fa fa-external-link"></i>  Manage Posts  </a><br><br></div>' ); 
+            $this->setViewContent( '<div style="text-align:center;"><br><br><a style="text-align:center;" class="" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Article_List\', \'page_refresh\' );" href="javascript:;" ><i  style="margin:10px;" class="fa fa-external-link"></i>  Manage all Posts  </a><br><br></div>' ); 
             return $done;
             // end of widget process
           

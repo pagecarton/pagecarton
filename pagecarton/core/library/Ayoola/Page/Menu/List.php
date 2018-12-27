@@ -56,12 +56,26 @@ class Ayoola_Page_Menu_List extends Ayoola_Page_Menu_Abstract
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = self::getObjectTitle();
-		$list->setData( $this->getDbData() );
+		if( @$_GET['get_all_menu'] )
+		{
+			$table = $this->getTableClass();
+			$table = $table::getInstance( $table::SCOPE_PROTECTED );
+			$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PROTECTED );
+			$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PROTECTED );
+			$list->setData( $table->select() );
+		//	$response = $table->select();
+		}
+		else
+		{
+			$list->setData( $this->getDbData() );
+		}
+
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No Menu yet on this application.' ); 
 		$list->setListOptions( 
 								array( 
 										'Manage Menu Templates' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Menu_List/\' );" title=""> Manage Menu Templates </a>',
+										'All' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_List/?get_all_menu=1\' );" title=""> Default Navigations </a>',
 									) 
 							);
 		$list->createList(  

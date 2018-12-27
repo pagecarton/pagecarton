@@ -145,7 +145,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 			{
 				@array_push( $values['category_name'], $category['category_name'] );
 			}
-			array_unique( $values['category_name'] );
+			$values['category_name'] = array_unique( $values['category_name'] );
 			
 			if( is_array( static::$_forcedValues ) )
 			{

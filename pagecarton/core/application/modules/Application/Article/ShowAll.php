@@ -65,6 +65,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	protected $_xml;
 
     /**
+     * 
+     * 
+     * @var string
+     */
+	protected static $_itemName;
+
+    /**
      * Use this to detect the instance of this class for unique pagination
      * 
      * @var int
@@ -77,6 +84,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      * @var string
      */
 	protected static $_newPostUrl;	
+	
+    /**
+     * 
+     * 
+     */
+	public static function getItemName()
+    {
+		return static::$_itemName;
+	}
 	
     /**
      * The method does the whole Class Process
@@ -592,7 +608,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{   
 				$values = self::sortMultiDimensionalArray( $values, $this->getParameter( 'order_by' ) );
 	//		self::v( $this->getParameter( 'order_by' ) );
-	//		self::v( array_pop( $values ) );
+		//	self::v( array_pop( $values ) );
 			}
 			if( $this->getParameter( 'inverse_order' ) )
 			{   
@@ -625,9 +641,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{ 
 			$howManyPostsToAdd = intval( $this->getParameter( 'add_a_new_post' ) );
 			$myProfileInfo = Application_Profile_Abstract::getMyDefaultProfile();
-			$tempItem = array_pop( $values );
 			do
 			{
+				$tempItem = array_pop( $values );
 
 			//	$tempItem = array_shift( $values );
 				//	make the first item a link to add a new post
@@ -644,7 +660,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
 				$newArticleType = @$tempItem2['article_type'] ? : ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
 				$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
-				$newArticleTypeToShow = property_exists( $this, '_itemName' ) ? static::$_itemName : ( ucfirst( $postTypeInfo['post_type'] ) ? : 'Item' );
+				$newArticleTypeToShow = self::getItemName() ? : ( ucfirst( $postTypeInfo['post_type'] ) ? : 'Item' );
 		//		self::v( $newArticleType );
 			//	self::v( $this->_dbWhereClause );
 			//	self::v( $where );
@@ -698,11 +714,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 								'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
 							)  + ( $myProfileInfo ? : array() );  
 			//	$item ? array_unshift( $values, $item ) : null;
+				$tempItem ? array_push( $values, $tempItem ) : null;
 				$item ? array_push( $values, $item ) : null;
 			//	$tempItem ? array_unshift( $values, $tempItem ) : null;
 			}
 			while( --$howManyPostsToAdd );
-			$tempItem ? array_push( $values, $tempItem ) : null;
 
 		}
 		
@@ -885,7 +901,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$data['document_url_no_resize'] = $data['document_url']; 
 				$data['document_url_cropped'] = $data['document_url']; 
 			}
-	//		self::v( $data['document_url'] );
+		//	self::v( $data['article_url'] );
+		//	self::v( '<br>'); 
+		//	self::v( $data['views_count'] );
 	//		self::v( $data['document_url_cropped'] );
 			
 			//	Can't be lowercase because of auto create link

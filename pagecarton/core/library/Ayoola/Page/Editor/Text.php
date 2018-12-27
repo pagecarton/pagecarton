@@ -117,6 +117,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
 		$content = str_replace( $textUpdatesSettings['dummy_search'], $textUpdatesSettings['dummy_replace'], $content );
+	//	self::v( $content );  
+	//	exit();          
 	//	self::v( $textUpdatesSettings );  
 	//	exit();          
 		$content = self::__( $content );
@@ -175,8 +177,16 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 					$started = stripos( $content, $start );
 					$length = ( stripos( $content, $end ) + strlen( $end ) )  - $started;
 					$partTemplate = substr( $content, $started, $length );
+			//		var_export( $partTemplate );
+					$searchY = array();
+					$replaceY = array();
+					$searchY[] = $start;
+					$replaceY[] = '';
+					$searchY[] = $end;
+					$replaceY[] = '';
+					$partTemplateToUse = str_ireplace( $searchY, $replaceY, $partTemplate );
 					$parameters = array( 
-						'markup_template' => $partTemplate, 
+						'markup_template' => $partTemplateToUse, 
 						'markup_template_namespace' => 'x1234', 
 						'parameter_suffix' => '[' . $counter . ']', 
 					//	'editable' => $each 
@@ -187,12 +197,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 					$class = new $each( $parameters );
 					$returnedContent = $class->view();
 					$this->_markupTemplateObjects[] = $class;
-					$searchY = array();
-					$replaceY = array();
-					$searchY[] = $start;
-					$replaceY[] = '';
-					$searchY[] = $end;
-					$replaceY[] = '';
 					$returnedContent = str_ireplace( $searchY, $replaceY, $returnedContent );
 					
 					$searchC = array();

@@ -1100,6 +1100,21 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$object = array_merge( $advanceParameters, $object );
 				//	var_export( $object );
 
+			//	check it here first so that it can set the widget options
+			if( $object['savedwidget_id'] )
+			{
+			//	$savedWidgets ? $fieldset->addElement( array( 'name' => 'savedwidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['savedwidget_id'] ), array( '' => 'Restore Saved Widgets' ) + $savedWidgets ) : null;
+				if( $widgetToRestore = Ayoola_Object_SavedWidget::getInstance()->selectOne( null, array( 'savedwidget_id' =>  $object['savedwidget_id'], ) ) )
+				{
+				//	var_export( $widgetToRestore );
+					$object = $widgetToRestore['parameters'];
+					
+					//	avoid double saves
+					unset( $object['save_widget_as'] );
+					$advanceParameters = $object;
+				}
+			}
+	
 			$availableOptions = ( static::$_widgetOptions ? : array() ) + array( 
 				'wrappers' => 'Wrappers',
 				'parameters' => 'Parameters',

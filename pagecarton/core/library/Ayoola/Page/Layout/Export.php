@@ -78,7 +78,7 @@ class Ayoola_Page_Layout_Export extends Ayoola_Page_Layout_Abstract
 		$filter = new Ayoola_Filter_Name();
 		$filter->replace = '-';
 	//	$customName = substr( trim( $filter->filter( @$data['layout_name'] . '_' . microtime() ), '-' ), 0, 70 );
-		$filename = sys_get_temp_dir() . DS . $data['layout_name'] . '.tar';
+		$filename = CACHE_DIR . DS . $data['layout_name'] . '.tar';
 		
 		//	remove previous files
 		@unlink( $filename );
@@ -95,7 +95,9 @@ class Ayoola_Page_Layout_Export extends Ayoola_Page_Layout_Abstract
 		$export->buildFromDirectory( $directory );
 		$export['layout_information'] = serialize( $this->getIdentifierData() );
 		$export->stopBuffering();
-		
+	//	unlink( $filename . '.gz' );
+	//	var_export( $filename );
+	//	exit();		
 		$export->compress( Ayoola_Phar::GZ ); 
 		unset( $export );
 		$phar::unlinkArchive( $filename );

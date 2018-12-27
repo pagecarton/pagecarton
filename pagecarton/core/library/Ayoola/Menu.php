@@ -608,6 +608,11 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			{
 				$optionClass .= ' ' . __CLASS__ . @$menuInfo['document_name'] . ' ';
 			}
+			if( $this->getParameter( 'length_of_option_name' ) ) 
+			{
+				@$values['option_name'] = strlen( $values['option_name'] ) < $this->getParameter( 'length_of_option_name' ) ? $values['option_name'] : ( trim( substr( $values['option_name'], 0, $this->getParameter( 'length_of_option_name' ) ) ) . '...' );
+			}
+		
 			$link = @$xml->createElement( 'a', $values['option_name'] );
 			
 		//	$values['url'] = ! empty( $values['url'] ) ? Ayoola_Page::appendQueryStrings( array( 'menu_option' => $values['option_id'] ), $values['url'], false ) : null;

@@ -51,8 +51,8 @@ class Application_Category_Creator extends Application_Category_Abstract
 		$values['category_name'] = trim( $filter->filter( strtolower( $values['category_name'] ) ) , '-' );
 		if( ! $this->insertDb( $values ) ){ return $this->setViewContent( $this->getForm()->view(), true ); }
 		$this->setViewContent( '<div><p class="goodnews">Category created successfully.<p></div>', true );
-		$this->getForm()->oneFieldSetAtATime = false;
-		$this->setViewContent( $this->getForm()->view() );  
+	//	$this->getForm()->oneFieldSetAtATime = false;
+	//	$this->setViewContent( $this->getForm()->view() );  
    } 
 	// END OF CLASS
 }

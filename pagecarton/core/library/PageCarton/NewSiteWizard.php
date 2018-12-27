@@ -42,6 +42,12 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
 		try
 		{ 
             //  Code that runs the widget goes here...
+            if( ! self::hasPriviledge( 98 ) )
+            {
+                $this->setViewContent( Ayoola_Access_Login::viewInLine() ); 
+                return false;
+            }
+
             Application_Personalization::viewInLine();
 
             $stages = array(
@@ -57,7 +63,8 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             $html .= '<ol class="cd-multi-steps text-bottom count">';  
             $lastCompleted = false;
             $break = false;
-        //    $class = $stages[0]['class'];
+        //  $class = $stages[0]['class'];
+            
             foreach( $stages as $key => $each )
             {   
                 $xT[$each['class']] = $each;

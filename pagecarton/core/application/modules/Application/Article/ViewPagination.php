@@ -149,15 +149,23 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 						//	$postList['pc_next_post'] = $postListData[$postList['pc_next_post']]['pc_next_post'];
 						//	$nextPost = self::loadPostData( $postList['pc_next_post'] );
 						}
+				//		var_export( $nextPost );
+						$this->_objectTemplateValues['pc_next_post_title'] = $nextPost['article_title'];
+						$this->_objectTemplateValues['pc_next_post_cover_photo'] = $nextPost['document_url'] ? : '/img/placeholder-image.jpg';
 						$this->_objectTemplateValues['paginator_next_page'] = Ayoola_Application::getUrlPrefix() . $postList['pc_next_post'];
 						$this->_objectTemplateValues['paginator_next_page_button'] = '<a onclick="this.href=this.href + location.search;" class="pc_paginator_next_page_button pc-btn" href="' . $this->_objectTemplateValues['paginator_next_page'] . '">"' . $nextPost['article_title'] . '" Next  &rarr; </a>';       
 			//			var_export( $nextPost );
 
 					}
+					$postList['pc_previous_post'] = $postList['pc_previous_post'] ? : $postList['pc_next_post'];
 					if( ! empty( $postList['pc_previous_post'] ) )
 					{
+						
 						if( $previousPost = self::loadPostData( $postList['pc_previous_post'] ) )
 						{
+				//	var_export( $previousPost );
+							$this->_objectTemplateValues['pc_previous_post_title'] = $previousPost['article_title'];
+							$this->_objectTemplateValues['pc_previous_post_cover_photo'] = $previousPost['document_url'] ? : '/img/placeholder-image.jpg';
 							$this->_objectTemplateValues['paginator_previous_page'] = Ayoola_Application::getUrlPrefix() . $postList['pc_previous_post'];
 							$this->_objectTemplateValues['paginator_previous_page_button'] = '<a onclick="this.href=this.href + location.search;" class="pc_paginator_previous_page_button pc-btn" href="' . $this->_objectTemplateValues['paginator_previous_page'] . '"> &larr; Previous "' . $previousPost['article_title'] . '"</a>';
 						}
@@ -169,7 +177,7 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 					$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '">' . $pagination . '</div>';
 
 				}
-			//	var_export( $postList );
+			//	var_export( $this->_objectTemplateValues );
 				$this->setViewContent( $pagination );
 			}
 
