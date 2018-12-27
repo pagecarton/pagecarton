@@ -80,22 +80,49 @@ class Ayoola_Page_Info extends PageCarton_Widget
             
    //        self::v( $this->getParameter( 'url' ) );   
    //       self::v( $currentUrl );   
-   //       self::v( $pageInfo );   
-
-            if( empty( $pageInfo['title'] ) )
-            {
-                $pageInfo['title'] = ucwords( str_replace( '-', ' ', basename( $pageInfo['url'] ? : $currentUrl ) ) ? : 'Home Page' );
-            }
             if( ! $pageInfo['url'] )
             {
                 $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
                 $pageInfo = Ayoola_Page::getInfo( $this->getParameter( 'url' ) ? : $currentUrl );
             }
 
+            if( $this->getParameter( 'use_site_defaults' ) )
+            {
+
+                if( empty( $pageInfo['title'] ) )
+                {
+                    $pageInfo['title'] = $settings['site_headline'];
+                }
+    
+                if( empty( $pageInfo['cover_photo'] ) )
+                {
+                    $pageInfo['cover_photo'] = $settings['cover_photo'];
+                }
+    
+                if( empty( $pageInfo['description'] ) )
+                {
+                    $pageInfo['description'] = $settings['site_description'] ;
+                }
+             //   var_export( $pageInfo );
+            }
+
+
+
+            if( empty( $pageInfo['title'] ) )
+            {
+            //    $pageInfo['title'] = ucwords( str_replace( '-', ' ', basename( $pageInfo['url'] ? : $currentUrl ) ) ? : 'Home Page' );
+            }
+
+            if( empty( $pageInfo['cover_photo'] ) )
+            {
+                $pageInfo['cover_photo'] = $settings['cover_photo'] ? : '/img/placeholder-image.jpg';
+            }
+
             if( empty( $pageInfo['description'] ) && self::hasPriviledge( array( 99, 98 ) ) )
             {
                 $pageInfo['description'] = $pageInfo['description'] ? : 'Description for this page has not been set. Page Description will appear here when they become available.';
             }
+        //    self::v( $pageInfo );   
 
 //     var_export( Ayoola_Page::getCurrentPageInfo() );
             $html = '<div class="pc_theme_parallax_background" style="background-image:     linear-gradient( rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)    ), url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $pageInfo['cover_photo'] ? : $settings['cover_photo'] ) . '&crop=1&max_width=1500&max_height=600\');">'; 

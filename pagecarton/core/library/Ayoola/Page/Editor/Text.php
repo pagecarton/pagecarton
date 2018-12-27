@@ -113,11 +113,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		$content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
 		if( ( @in_array( 'preserve_content', $this->getParameter( 'widget_options' ) ) || @in_array( 'preserve_content', $this->getParameter( 'text_widget_options' ) ) ) && $this->getParameter( 'preserved_content' ) )
 		{
-			@$content = $this->getParameter( 'preserved_content' );
+			@$content = $this->getParameter( 'codes' ) ? : $this->getParameter( 'preserved_content' );
 		}
 		$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
 		$content = str_replace( $textUpdatesSettings['dummy_search'], $textUpdatesSettings['dummy_replace'], $content );
-	//	self::v( $textUpdatesSettings );        
+	//	self::v( $textUpdatesSettings );  
+	//	exit();          
 		$content = self::__( $content );
 	//	var_export( $this->getParameter( 'markup_template_object_name' ) );
 		if( $this->getParameter( 'markup_template_object_name' ) )
@@ -438,6 +439,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
      public static function getHTMLForLayoutEditor( & $object )
 	{
+		if( empty( $object['widget_options'] ) &&  ! empty( $object['text_widget_options'] ) )
+		{
+			$object['widget_options'] = $object['text_widget_options'];
+		}
+
 /* 		Application_Style::addCode( 'div.editable
 					{
 						border: solid 2px #90F;

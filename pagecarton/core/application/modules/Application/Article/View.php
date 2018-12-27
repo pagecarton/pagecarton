@@ -205,7 +205,8 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 		}
 		$data['filtered_time'] = self::filterTime( $data );
-		$data['document_url'] = $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ); 
+		$data['document_url'] = ( $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ) ) ? : '/img/placeholder-image.jpg'; 
+		$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['article_url'];
 		$data['document_url_plain'] = $data['document_url']; 
 		
 		if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )

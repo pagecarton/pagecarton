@@ -233,20 +233,6 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
 			header( 'Content-Type: ' . $this->getContentType( $path ) );
 			header( 'Content-Transfer-Encoding: binary' );
 			header( 'Content-Length: ' . filesize( $path ) );
-/* 			setlocale( LC_TIME, "C" );
-			$ft = filemtime ( $path );
-			$localt = mktime();
-			$gmtt = gmmktime();
-			$ft = $ft - $gmtt + $localt;
-			$modified = strftime( "%a, %d %b %Y %T GMT", $ft );
-			header( 'Last-Modified: ' . $modified );
- */			//header('Expires: 0');
-			//header('Cache-Control: must-revalidate, post-check = 0, pre-check=0');
-			//header('Pragma: public');
-
-		//	ob_clean();
-		//	flush();  
-		//	exit( $path );
 			readfile( $path );
 		}
     } 

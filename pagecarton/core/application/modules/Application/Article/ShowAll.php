@@ -624,11 +624,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) ) 
 		{ 
 			$howManyPostsToAdd = intval( $this->getParameter( 'add_a_new_post' ) );
+			$myProfileInfo = Application_Profile_Abstract::getMyDefaultProfile();
+			$tempItem = array_pop( $values );
 			do
 			{
 
 			//	$tempItem = array_shift( $values );
-				$tempItem = array_pop( $values );
 				//	make the first item a link to add a new post
 			//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
 			//	self::v( $tempItem );
@@ -695,13 +696,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 								'username' => Ayoola_Application::getUserInfo( 'username' ), 
 								'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
 								'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
-							);  
+							)  + ( $myProfileInfo ? : array() );  
 			//	$item ? array_unshift( $values, $item ) : null;
-				$tempItem ? array_push( $values, $tempItem ) : null;
 				$item ? array_push( $values, $item ) : null;
 			//	$tempItem ? array_unshift( $values, $tempItem ) : null;
 			}
 			while( --$howManyPostsToAdd );
+			$tempItem ? array_push( $values, $tempItem ) : null;
 
 		}
 		
@@ -855,7 +856,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//		var_export( $data['post_link'] );
 			}
 			if( @$data['article_url'] )
-			$data['document_url'] = $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ); 
+			$data['document_url'] = ( $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ) ) ? : '/img/placeholder-image.jpg'; 
 			$data['document_url_plain'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
 			$data['document_url_uri'] = $data['document_url']; 
 			$data['document_url_cropped'] = $data['document_url']; 

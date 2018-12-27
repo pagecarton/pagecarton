@@ -100,10 +100,6 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
 	//	exit();   
 		foreach( $paths as $path )
 		{	
-			header( 'Content-Description: File Transfer' );
-			header( 'Content-Type: ' . $this->getContentType( $path ) );
-			header( 'Content-Transfer-Encoding: binary' );
-			header( 'Content-Length: ' . filesize( $path ) );
 			if( ! empty( $imageInfo['width'] ) && ! empty( $imageInfo['height'] ) )
 			{
                 ImageManipulator::makeThumbnail( $path, $imageInfo['width'], $imageInfo['height'] );
@@ -111,7 +107,11 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
 			}
 			else
 			{
-				readfile( $path );
+					header( 'Content-Description: File Transfer' );
+					header( 'Content-Type: ' . $this->getContentType( $path ) );
+					header( 'Content-Transfer-Encoding: binary' );
+					header( 'Content-Length: ' . filesize( $path ) );
+					readfile( $path );
 			}
 		}
     } 

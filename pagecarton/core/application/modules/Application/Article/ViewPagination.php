@@ -138,7 +138,7 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 					//	var_export( $postList );
 					//	var_export( $postData );
                     }
-         //           while( ! $postData );
+					//           while( ! $postData );
 					if( ! empty( $postList['pc_next_post'] ) )
 					{
 						$nextPost = $postList['pc_next_post'];
@@ -162,6 +162,8 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 							$this->_objectTemplateValues['paginator_previous_page_button'] = '<a onclick="this.href=this.href + location.search;" class="pc_paginator_previous_page_button pc-btn" href="' . $this->_objectTemplateValues['paginator_previous_page'] . '"> &larr; Previous "' . $previousPost['article_title'] . '"</a>';
 						}
 					}
+					$this->_objectTemplateValues['pc_next_post'] = $postList['pc_next_post'];
+					$this->_objectTemplateValues['pc_previous_post'] = $postList['pc_previous_post'];
 					$pagination .= @$this->_objectTemplateValues['paginator_previous_page_button'];
 					$pagination .= @$this->_objectTemplateValues['paginator_next_page_button'];			
 					$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '">' . $pagination . '</div>';
