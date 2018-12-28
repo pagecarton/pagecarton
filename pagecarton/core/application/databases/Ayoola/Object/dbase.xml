@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="dbase" creation_time="1533477593" modified_time="1533477593" table_version="0.0" module_version="1.00" table_class="Ayoola_Object_Dbase" creation_ip="2130706433">
-  <RECORDS autoId="9">
+  <RECORDS autoId="10">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[PageCarton_Locale]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="dbase_id"><![CDATA[1533477593-0-1]]></TABLE_FIELD>
@@ -47,6 +47,12 @@
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Object_SavedWidget]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="dbase_id"><![CDATA[1545844158-0-8]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1545844158]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="9">
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Upgrade_Check_Table]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="dbase_id"><![CDATA[1545959763-0-9]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1545959763]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>

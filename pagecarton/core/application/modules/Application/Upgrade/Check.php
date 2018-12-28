@@ -46,6 +46,8 @@ class Application_Upgrade_Check extends PageCarton_Widget
 
             if( ! empty( $_REQUEST['pc_domain'] ) )
             {
+                $info = array( 'domain_name' => $_REQUEST['pc_domain'], 'remote_version' => $_REQUEST['version'], 'version' => PageCarton::VERSION, );
+                Application_Upgrade_Check_Table()->insert(  );
                 echo PageCarton::VERSION;
                 exit();
             }
