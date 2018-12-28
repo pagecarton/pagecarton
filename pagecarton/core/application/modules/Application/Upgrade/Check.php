@@ -47,20 +47,23 @@ class Application_Upgrade_Check extends PageCarton_Widget
             if( ! empty( $_REQUEST['pc_domain'] ) )
             {
                 $info = array( 'domain_name' => $_REQUEST['pc_domain'], 'remote_version' => $_REQUEST['version'], 'version' => PageCarton::VERSION, );
-                Application_Upgrade_Check_Table()->insert(  );
+                Application_Upgrade_Check_Table::getInstance()->insert( $info );  
                 echo PageCarton::VERSION;
                 exit();
             }
-            $storage = $this->getObjectStorage( array( 'id' => 'diskspace', 'device' => 'File', 'time_out' => 86400, ) );
+            $storage = self::getObjectStorage( array( 'id' => 'diskspace', 'device' => 'File', 'time_out' => 86400, ) );
+        //    var_export( $storage->retrieve() );
+        //    var_export( $storage );
             if( ! $versionFromServer = $storage->retrieve() )
             {
                 $server = 'http://' . $serverName . '/object/name/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
           ///    var_export( $server );
+                $versionFromServer = array();
                 $versionFromServer['time'] = time();
                 $response = self::fetchLink( $server );
-			//	var_export( $response );
                 $versionFromServer['response'] = strlen( $response ) > 6 || strlen( $response ) < 2 ? 0 : $response;
-                $storage->store( $versionFromServer );
+			//	var_export( $versionFromServer );
+            //    $storage->store( $versionFromServer );
             }
         //    var_export( $versionFromServer );
         $filter = new Ayoola_Filter_Time();

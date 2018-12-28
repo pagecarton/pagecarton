@@ -173,23 +173,31 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             $settingsName = __CLASS__;
 
             $this->createForm( 'Continue..', '' );
+			$this->setViewContent( $this->getForm()->view() );
             if( empty( $_GET['editing_dummy_text'] ) )
             {
                 $this->setViewContent( '<div class="pc-notify-info" style="text-align:center;">Update text on the site! <a style="font-size:smaller;" onclick="location.search+=\'&editing_dummy_text=1\'" href="javascript:">Advanced mode</a></div>' );
             }
-			$this->setViewContent( $this->getForm()->view() );
 		//	self::v( $_POST );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
          //   self::v( $identifierData );
     //        $identifierData += $values;
         //    self::v( $values );
         //    exit();
+            $dataForHiddenFields = Ayoola_Page_Layout_ReplaceText::getUpdates( ! empty( $_GET['editing_dummy_text'] ) );
             foreach( $values['dummy_replace'] as $key => $each )
             {
-                if( ! empty( $values['dummy_search'][$key] ) )
+
+                //  cause when this wasnt sent by form
+                if( empty( $values['dummy_search'][$key] ) )
                 {
-                   $values['dummy_search'][$key] = trim( $values['dummy_search'][$key] );
+                    $values['dummy_search'][$key] = $dataForHiddenFields['dummy_search'][$key];
                 }
+                if( empty( $values['dummy_title'][$key] ) )
+                {
+                    $values['dummy_title'][$key] = $dataForHiddenFields['dummy_title'][$key];
+                }
+                $values['dummy_search'][$key] = trim( $values['dummy_search'][$key] );
                 $values['dummy_replace'][$key] = trim( $values['dummy_replace'][$key] );
                 if( '' === $each )
                 {
@@ -203,6 +211,8 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
             $table = Application_Settings::getInstance();
         //    var_export( $previousData );
+
+            //  merge now with settings
             if( $previousData )
             {
                 $table->delete( array( 'settingsname_name' => $settingsName ) );
@@ -211,6 +221,9 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $values['dummy_replace'] = array_merge( $values['dummy_replace'] ? : array(), $previousData['dummy_replace'] ? : array() );
             }
             $record = array();
+//            var_export( $values );
+
+            //  delete duplicates
             foreach( $values['dummy_search'] as $key => $each )
             {
                 if( ! empty( $record[$values['dummy_search'][$key]] ) )
@@ -222,11 +235,20 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $record[$values['dummy_search'][$key]] = true;
 
             }
+            //    var_export( $values );
+            if( count( $values['dummy_replace'] ) !== count( $values['dummy_search'] ) )
+            {
+            //    var_export( $values );
+                $this->setViewContent( '<div class="badnews" style="xtext-align:center;">Something went wrong. Please go back and try again. </div>', true );
+            }
+            else
+            {
+                $table->insert( array( 'data' => $values, 'settings' => json_encode( $values ), 'settingsname_name' => $settingsName ) );
+                $this->setViewContent( '<div class="goodnews" style="xtext-align:center;">Update saved successfully. Further text update could be done in <a href="/tools/classplayer/get/name/Ayoola_Page_List">Pages</a>. </div>', true );
+            }
         //    var_export( $values );
-			$table->insert( array( 'data' => $values, 'settings' => json_encode( $values ), 'settingsname_name' => $settingsName ) );
 
             
-			$this->setViewContent( '<div class="goodnews" style="xtext-align:center;">Update saved successfully. Further text update could be done in <a href="/tools/classplayer/get/name/Ayoola_Page_List">Pages</a>. </div>', true );
             // end of widget process
           
 		}  
@@ -295,13 +317,13 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             //  always default to own prefilled data
          //   var_export( $allMyData );
             $allMyData = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
-   //        var_export( $allMyData['dummy_search'] );
-    //        exit();
-            if( ! empty( $allMyData['dummy_search'] ) )
+        //   var_export( $allMyData );
+        //    exit();
+            if( ! empty( $allMyData['dummy_search'] ) && empty( $_GET['clear_user_settings'] )  )
             {
                 $myReplacementKey = array_search( $data['dummy_search'][$i], $allMyData['dummy_search'] );
             //    var_export( $myReplacementKey );
-                if( ! empty( $allMyData['dummy_replace'][$myReplacementKey] ) )
+                if( $myReplacementKey !== false && ! empty( $allMyData['dummy_replace'][$myReplacementKey] ) )
                 {
         //    var_export( $allMyData['dummy_replace'][$myReplacementKey] );
                    $data['dummy_replace'][$i] = $allMyData['dummy_replace'][$myReplacementKey];
