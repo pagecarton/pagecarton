@@ -96,12 +96,13 @@ class Application_Article_Publisher extends PageCarton_Widget
                             //    self::v( $eachWidget );
                                 $values = $eachWidget->getObjectTemplateValues();
                                 $noRequired = ( $eachWidget->getParameter( 'no_of_post_to_show' ) ? : 1 );
-                                $postType = ( $eachWidget->getParameter( 'article_types' ) ? : $eachWidget->getParameter( 'true_post_type' ) ) ? : ( method_exists( $eachWidget, 'getItemName' ) ? $eachWidget::getItemName() : '' );
-                                if( ( $postType && $postTypes[$postType] ) || ! $eachWidget->getParameter( 'add_a_new_post_full_url' ) )
+                                $postType = ( $eachWidget->getParameter( 'article_types' ) ? : $eachWidget->getParameter( 'true_post_type' ) ) ? : ( method_exists( $eachWidget, 'getItemName' ) && $eachWidget::getItemName() ? $eachWidget::getItemName() : 'Post' );
+                                if( ( $postType && $postTypes[$postType] ) || ! $eachWidget->getParameter( 'add_a_new_post_full_url' ) || $postTypes[$eachWidget->getParameter( 'add_a_new_post_full_url' )] )
                                 {
                                     continue;
                                 }
                                 $postTypes[$postType] = $postType;
+                                $postTypes[$eachWidget->getParameter( 'add_a_new_post_full_url' )] = $eachWidget->getParameter( 'add_a_new_post_full_url' );
                                 $cssClass = 'goodnews';
                                 if( $values['total_no_of_posts'] < $noRequired )
                                 {

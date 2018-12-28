@@ -238,15 +238,17 @@ class Application_Personalization extends Ayoola_Abstract_Table
 			{
 				@Ayoola_Doc::deleteDirectoryPlusContent( CACHE_DIR );
 			}
-			$this->setViewContent( '<h1 class="goodnews">PageCarton Personalization Completed</h1>', true );   
-			$this->setViewContent( '<p>Welcome to endless possibilities! You have successfully completed the installation and personalization sequence of PageCarton. </p>' ); 
-			$this->setViewContent( '<p class="pc-notify-info">Note the following pages and their links:</p>' ); 
+			$this->setViewContent( '<h2 class="">Basic Settings Saved</h2>', true );   
+			$this->setViewContent( '<p>Welcome to endless possibilities! PageCarton helps to publish great content to the web fast, easy using award-winning secure methods. You can make stunning websites easily and apps with PageCarton.</p>' );
+
+			$this->setViewContent( '<h4 class="xpc-notify-info">What to do next?</h4>' ); 
 			$this->setViewContent
 			( 
 				'<ul>
-					<li><a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/">Home Page</a> - ' . Ayoola_Page::getCanonicalUrl( '/' ) .  '</li>
-					<li><a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/pc-admin">PageCarton Admin  Panel</a> - ' . Ayoola_Page::getCanonicalUrl( '/pc-admin' ) .  '</li>
-					<li><a target="_blank" href="http://pagecarton.org/docs">PageCarton Documentation</a></li>
+					<li>Try <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/PageCarton_NewSiteWizard/">Simple Web Builder</a> (Recommended)</li>
+					<li>Go to <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/">Home Page</a> - ' . Ayoola_Page::getCanonicalUrl( '/' ) .  '</li>
+					<li>Go to <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/pc-admin">PageCarton Admin  Panel</a> - ' . Ayoola_Page::getCanonicalUrl( '/pc-admin' ) .  '</li>
+					<li>Study <a target="_blank" href="http://docs.pagecarton.org">PageCarton Documentation</a> - http://docs.pagecarton.org</li>
 				</ul>' 
 			); 
 
