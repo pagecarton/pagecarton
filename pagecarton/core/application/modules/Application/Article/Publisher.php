@@ -51,8 +51,10 @@ class Application_Article_Publisher extends PageCarton_Widget
             $basename = array( 'data_json_content', 'content.json' );
             $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir, array( 'whitelist_basename' => $basename ) ) );
             $postTypes = array();
+
             if( ! $files )
             {
+                //  compatibiity
                 $sanitize = new Ayoola_Page_Editor_Sanitize();
                 $sanitize->sanitize( $defaultLayout );
             }
