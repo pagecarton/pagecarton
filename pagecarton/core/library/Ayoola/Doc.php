@@ -416,6 +416,16 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 				{
 					continue;
 				}
+                $extension = array_pop( explode( ".", strtolower( $file ) ) );
+                if( is_array( @$options['whitelist_extensions'] ) && ! in_array( $extension, @$options['whitelist_extensions'] ) )
+                {
+                    continue;
+                }
+                $basename = basename( strtolower( $file ) );
+                if(  is_array( @$options['whitelist_basename'] ) && ! in_array( $basename, @$options['whitelist_basename'] ) )
+                {
+                    continue;
+                }
 	//			$files[$file] = $file; 
 				$key = $file;
 				if( ! empty( $options['key_function'] ) )
@@ -426,20 +436,6 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 					{
 				//		var_export( $key );
 						continue;
-					}
-		//			self::v( $options['key_function'] ); 
-		//			self::v( $file ); 
-		//			self::v( $key ); 
-				}
-			//	if( stripos( $directory, 'localuser' ) !== false )
-				{
-				//	if( stripos( $filename, '0.xml' ) !== false )
-					{
-					//	PageCarton_Widget::v( $file );
-				//		PageCarton_Widget::v( $filename );
-					//	PageCarton_Widget::v( $directory );
-				//		PageCarton_Widget::v( $key );
-				//		PageCarton_Widget::v( $options['key_function'] );
 					}
 				}
 				if( isset( $files[$key] ) ) 
@@ -475,6 +471,16 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 				//	self::v( $filePath );
 					continue;
 				}
+                $extension = array_pop( explode( ".", strtolower( $file ) ) );
+                if( is_array( @$options['whitelist_extensions'] ) && ! in_array( $extension, @$options['whitelist_extensions'] ) )
+                {
+                    continue;
+                }
+                $basename = basename( strtolower( $file ) );
+                if(  is_array( @$options['whitelist_basename'] ) && ! in_array( $basename, @$options['whitelist_basename'] ) )
+                {
+                    continue;
+                }
 				//	self::v( $options['key_function'] ); 
  				$key = $filePath;
 				if( ! empty( $options['key_function'] ) )
