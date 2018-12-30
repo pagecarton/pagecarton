@@ -1181,14 +1181,7 @@ class Ayoola_Application
 	//		var_export( headers_list() );
 		//	exit();
 		}
-/*		else
-		{
-			http_response_code( 200 );
-			header( "HTTP/1.0 200 OK" );
-			header( "HTTP/1.1 200 OK" );
-			Header('Status: 200 OK');
-		}
-*/		//	now because of situation where we have username domains
+		//	now because of situation where we have username domains
 		//	we should be able to overide page inheritance
 		
 		//	my copy first
@@ -1205,6 +1198,7 @@ class Ayoola_Application
 	//	var_export( is_file( $PAGE_INCLUDE_FILE ) );
 	//	var_export( is_file( $PAGE_TEMPLATE_FILE ) ); 
 	//	exit(); 
+		$noRestriction = false;
 		$previewTheme = function() use ( $pagePaths, $uri, &$PAGE_INCLUDE_FILE, &$PAGE_TEMPLATE_FILE )
 		{
 
@@ -1224,9 +1218,10 @@ class Ayoola_Application
 			$PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
 		//	var_export( $pagePaths['include'] );
 		//	var_export( $pagePaths['template'] );
-//			var_export( $pageThemeFileUrl );
-//			var_export( $PAGE_INCLUDE_FILE );
-//			var_export( $PAGE_TEMPLATE_FILE );
+		//	var_export( $themeName );
+		//	var_export( $pageThemeFileUrl );
+		//	var_export( $PAGE_INCLUDE_FILE );
+		//	var_export( $PAGE_TEMPLATE_FILE );
 			if( ! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE )
 			{
 				//	not found
@@ -1250,6 +1245,13 @@ class Ayoola_Application
 				! is_file( $PAGE_INCLUDE_FILE ) AND ! is_file( $PAGE_TEMPLATE_FILE )
 			)
 			{
+				//	not found
+				//	use content of default theme
+				if( $previewTheme() )
+				{
+					$noRestriction = true;
+					break;
+				}
 				
 				// intended copy next
 				$intendedCopyPaths = Ayoola_Page::getPagePaths( '/' . trim( $uri . '/default', '/' ) );
@@ -1273,11 +1275,7 @@ class Ayoola_Application
 						! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE
 					)
 					{
-						//	not found
-					//	if( ! $previewTheme() )
-						{
-							return false;
-						}
+						return false;
 					}
 				}
 			}
@@ -1287,29 +1285,11 @@ class Ayoola_Application
 	//	var_export( $PAGE_TEMPLATE_FILE );     
 	//	var_export( $pagePaths['template'] );     
 	//	var_export( Ayoola_Loader::checkFile( $pagePaths['template'] ) );     
-		//	The normal page
-		try
-		{
-			//	Check if page options permits
-/* 			$pageOptions = Ayoola_Page::getCurrentPageInfo();
-			@$pageOptions = $pageOptions['page_options'] ? : array();
-			$access = new Ayoola_Access();
-			if(	( in_array( 'logged_in_hide', $pageOptions )  && $access->isLoggedIn() ) 
-			|| 	( in_array( 'logged_out_hide', $pageOptions ) && ! $access->isLoggedIn() )
-			)
-			{
-				self::view();
-				exit();
-			}
- */		}
-		catch( Ayoola_Exception $e ){ self::view(); exit(); }
-		 
-	//	$table = new Application_User_CloudCopy();
-	//	var_export( file_get_contents( "php://input" ) );
-	//	$table->select();
-		
+
+	
 		//	Put in Access Restriction
-		self::restrictAccess();
+		$noRestriction ? : self::restrictAccess();
+
 	//	exit( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 	
 		//	check if redirect

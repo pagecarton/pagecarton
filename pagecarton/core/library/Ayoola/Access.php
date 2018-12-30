@@ -161,7 +161,16 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 	 */
 	public static function restrict( $pageAccessLevel = null )
 	{
-		$pageInfo = Ayoola_Page::getCurrentPageInfo();
+		if( $pageInfo = Ayoola_Page::getCurrentPageInfo() )
+		{
+			//	we cant outright allow all these to skip restriction
+			//  we allow theme pages only for now. Because they dont have pageinfo
+
+			
+
+		}
+	//	var_export( $pageInfo );
+	//	exit;
 		if( is_null( $pageAccessLevel ) )
 		{
 			require_once 'Ayoola/Page.php';
