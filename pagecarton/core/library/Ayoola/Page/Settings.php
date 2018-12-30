@@ -66,9 +66,10 @@ class Ayoola_Page_Settings extends Application_Settings_Abstract
 		$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
 //		var_export( $themeName );
 		$pages = Ayoola_Page_Layout_Pages::getPages( $themeName, 'list' );
-		foreach( $pages as $url )
+	//	foreach( $pages as $url )
 		{
-			Ayoola_Page_Layout_Pages_Copy::this( $url, $themeName );
+			// dont autocreate page again because its creating too many pages
+		//	Ayoola_Page_Layout_Pages_Copy::this( $url, $themeName );
 		}
 
 
