@@ -1236,6 +1236,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			$defaultOptions = array_keys( $options );
 		}
 		$fieldset->addElement( array( 'name' => 'layout_options', 'label' => 'Theme Update Options', 'type' => 'Checkbox', 'value' => @$values['layout_options'] ? : $defaultOptions ), $options );
+		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden' ) );
 
 		$fieldset->addFilters( array( 'Trim' => null ) );
 		$fieldset->addLegend( $legend );

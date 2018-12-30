@@ -72,6 +72,7 @@ class Ayoola_Page_Layout_Repository extends Ayoola_Extension_Import_Repository
                             //   'theme_url' => 'cccccc',
                             'layout_options' => $options,
                             'layout_type' => 'upload',
+                            'article_url' => $_GET['install'],
         );
         return $values;
     }

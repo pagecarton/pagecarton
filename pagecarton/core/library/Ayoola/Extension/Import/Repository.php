@@ -92,12 +92,22 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
          //   file_put_contents( $filename, fopen( $link, 'r' ) );
             file_put_contents( $filename, $content['response'] );
             $values = static::getOtherInstallOptions( $filename );
-            $class = new static::$_pluginClass( array( 'no_init' => true, 'fake_values' => $values, 'path' => $filename ) );
+
+            $class = new static::$_pluginClass( array( 'no_init' => true, 'fake_values' => $values, 'path' => $filename, ) );
             $class->fakeValues = $values;
             $class->init();
-        //    var_export( $class->getForm()->getBadnews() );
-			$this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' );
-			$this->setViewContent( $class->view(), true );
+        //     var_export( $class->getForm()->getValues() );
+        //	$this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' );
+            if( ! $class->getForm()->getBadnews() )
+            {
+                
+                $this->setViewContent( $class->view(), true );
+             //   $this->setViewContent( '<p class="badnews">' . array_pop( $class->getForm()->getBadnews() ) . '</p>' );
+            }
+            else
+            {
+            	$this->setViewContent( '<p class="badnews">' . array_pop( $class->getForm()->getBadnews() ) . '</p>', true );
+            }
  //           unlink( $filename );
 	//		if( $this->deleteDb( false ) )
 			{ 
@@ -124,6 +134,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
     {
         $values = array( 
                             'path' => $filename,
+                            'article_url' => $_GET['install'],
         );
         return $values;
     }
