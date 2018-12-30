@@ -100,7 +100,8 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getSettings( $settingsName, $key = null )
     {
-		if( is_null( @self::$_settings[$settingsName] ) )
+		$id = Ayoola_Application::getUrlPrefix() . $settingsName;
+		if( is_null( @self::$_settings[$id] ) )
 		{
 			$settings = Application_Settings::getInstance();
 			$settings = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
@@ -116,7 +117,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			//		var_export( $settingsName );
 					if( ! $extensionInfo = $table->selectOne( null,  array( 'extension_name' => $settingsName ) ) )
 					{
-						self::$_settings[$settingsName]  = false;
+						self::$_settings[$id]  = false;
 					//	return false; 
 					}
 				//	var_export( $settingsName );
@@ -132,51 +133,51 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 					//		var_export( $settings );
 							if( ! empty( $settings['data'] ) )
 							{
-								static::$_settings[$settingsName] = $settings['data'];
+								static::$_settings[$id] = $settings['data'];
 							}
 							elseif( ! empty( $settings['settings'] ) )
 							{
-								static::$_settings[$settingsName] = unserialize( $settings['settings'] );
+								static::$_settings[$id] = unserialize( $settings['settings'] );
 							//	self::v( static::$_settings );
 							}
 							else
 							{
-								static::$_settings[$settingsName] = false;
+								static::$_settings[$id] = false;
 							}
 						}
 					//	self::v( $settings );
 					}
 					else
 					{
-						static::$_settings[$settingsName] =  $extensionInfo['settings'];
+						static::$_settings[$id] =  $extensionInfo['settings'];
 					}
 				}
 				else
 				{
-					static::$_settings[$settingsName] = unserialize( $settings['settings'] );
+					static::$_settings[$id] = unserialize( $settings['settings'] );
 				}
 					
 			}
 			else
 			{
-				static::$_settings[$settingsName] = $settings['data'];
+				static::$_settings[$id] = $settings['data'];
 			}
 			
 		}
-		if( static::$_settings[$settingsName] && is_string( static::$_settings[$settingsName] ) )
+		if( static::$_settings[$id] && is_string( static::$_settings[$setidtingsName] ) )
 		{
-			static::$_settings[$settingsName] = unserialize( static::$_settings[$settingsName] );  
+			static::$_settings[$id] = unserialize( static::$_settings[$id] );  
 		}
 
 //		self::v( self::$_settings );
-	//	if( is_array( self::$_settings[$settingsName] ) && array_key_exists( $key, self::$_settings[$settingsName] ) )
+	//	if( is_array( self::$_settings[$id] ) && array_key_exists( $key, self::$_settings[$id] ) )
 		if( ! is_null( $key ) )
 		{
-			return @self::$_settings[$settingsName][$key];
+			return @self::$_settings[$id][$key];
 		}
 		else
 		{
-			return self::$_settings[$settingsName];
+			return self::$_settings[$id];
 		}
     } 
 	
