@@ -48,13 +48,19 @@ class Application_Article_Publisher extends PageCarton_Widget
             $defaultLayout = Application_Settings_CompanyInfo::getSettings( 'Page', 'default_layout' );
             $dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'template';
             $dir = dirname( Ayoola_Loader::checkFile( $dir ) );
-            $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir ) );
+            $basename = array( 'data_json_content', 'content.json' );
+            $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir, array( 'whitelist_basename' => $basename ) ) );
             $postTypes = array();
+            if( ! $files )
+            {
+                $sanitize = new Ayoola_Page_Editor_Sanitize();
+                $sanitize->sanitize( $defaultLayout );
+            }
         //    self::v( $files );
             foreach( $files as $each )
             {
                 $extension = array_pop( explode( "/", strtolower( $each ) ) );
-                if( ! in_array( $extension, array( 'data_json_content', 'content.json' ) ) )
+                if( ! in_array( $extension, $basename ) )
                 {
                     continue;
                 }
