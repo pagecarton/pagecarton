@@ -44,7 +44,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
      * Performs the whole widget running process
      * 
      */
-	public static function this( $url, $themeName )
+	public static function canCopy( $url, $themeName )
     {     
         //  create page if they don't exist'
         $class = new Ayoola_Page_Editor_Sanitize(  array( 'no_init' => true, 'auto_create_page' => true )  );
@@ -59,10 +59,6 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             $pageThemeFileUrl = '/index';
         }
         $fPaths = static::getPagePaths( $themeName, $pageThemeFileUrl );
-    //    $themeName = strtolower( $data['layout_name'] );
-    //    $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
-     //   $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
-    //    $fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
 
         if( ! Ayoola_Loader::getFullPath( $fPaths['include'], array( 'prioritize_my_copy' => true ) ) )
         {
@@ -77,7 +73,19 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
         {
              return false;
         }
+        return true;
+    }
 
+    /**
+     * Performs the whole widget running process
+     * 
+     */
+	public static function this( $url, $themeName )
+    {     
+        if( ! static::canCopy( $url, $themeName ) )
+        {
+            return false;
+        }
 
         foreach( $fPaths as $key => $each )
         {
@@ -87,9 +95,6 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
                 Ayoola_Doc::createDirectory( dirname( $to ) );
                 copy( $from, $to );
             }
-    //          var_export( $from );
-    //         var_export( $to );
-    //        var_export( $tPaths[$each] );
         }
         return true;
     }

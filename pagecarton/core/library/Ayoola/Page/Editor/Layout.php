@@ -387,7 +387,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 //		$dir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS;
 //		if( ! is_file( $dir . @$layoutData['pagelayout_filename'] ) )
 
-		$theme = @$_REQUEST['pc_page_editor_layout_name'] ? : $page['layout_name'];
+		$theme = $this->getPageEditorLayoutName() ? : $page['layout_name'];
 		$theme = $theme ? : self::getDefaultLayout();
 		if( ! Ayoola_Loader::checkFile( @$page['pagelayout_filename'] ) )	//	Compatibility
 		{
@@ -1063,9 +1063,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme/data_json_content';
 				$rPaths['data-backup'] = 'documents/layout/' . $themeName . '/theme/data-backup/' . time();
 			}
-			elseif( ! empty( $_REQUEST['pc_page_editor_layout_name'] ) )
+			elseif( $this->getPageEditorLayoutName() )
 			{
-				$themeName = strtolower( $_REQUEST['pc_page_editor_layout_name'] );
+				$themeName = $this->getPageEditorLayoutName();
 		//		var_export( $themeName );
 		//		var_export( self::getDefaultLayout() );
 				if( $themeName == self::getDefaultLayout() && empty( $page['layout_name'] ) )
@@ -1204,7 +1204,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		if( $isNotLayoutPage )
 		{
 			//	Always have this here so we can have a template editor link
-			$page['layout_name'] = $page['layout_name'] ? : @$_REQUEST['pc_page_editor_layout_name'];
+			$page['layout_name'] = $page['layout_name'] ? : $this->getPageEditorLayoutName();
 			$page['layout_name'] = $page['layout_name'] ? : self::getDefaultLayout();
 			
 			//	List URL so it can be easy to change editing URL
@@ -1223,15 +1223,15 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$optionHTML .= '<option ' . $selected . '>' . $eachPage['url'] . '</option>';
 			}
 			$optionHTML .= '</select></span>';
-			if( ! empty( $_REQUEST['pc_page_editor_layout_name'] ) )
+			if( $this->getPageEditorLayoutName() )
 			{
-		//		var_export( $_REQUEST['pc_page_editor_layout_name'] );
+		//		var_export( $this->getPageEditorLayoutName() );
 				$pageThemeFileUrl = $page['url'];
 				if( $pageThemeFileUrl == '/' )
 				{
 					$pageThemeFileUrl = '/index';
 				}
-				$backupDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $_REQUEST['pc_page_editor_layout_name'] . '/theme' . $pageThemeFileUrl . '/data-backup';
+				$backupDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $this->getPageEditorLayoutName() . '/theme' . $pageThemeFileUrl . '/data-backup';
 			}	
 			else
 			{
@@ -1766,7 +1766,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 '
 .
 		( 
-			empty( $_REQUEST["pc_page_editor_layout_name"] ) 
+			! $this->getPageEditorLayoutName() 
 
 			? 
 
@@ -1972,7 +1972,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 	}
 
-    /**
+	/**
      * Produce the mark-up for each draggable object
      *
      * @param string | array viewableObject Information

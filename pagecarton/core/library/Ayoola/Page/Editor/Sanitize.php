@@ -72,28 +72,34 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 			}
 		}
 		$pages = $pages->getDbTable()->select( null, $where );
+
+		if( $themeName )
+		{
+			$themePages = Ayoola_Page_Layout_Pages::getPages( $themeName );
+			foreach( $themePages as $page )
+			{
+				if( ! Ayoola_Page_Layout_Pages_Copy::canCopy( $page, $themeName ) )
+				{
+					continue;
+				}
+				$page = is_string( $page ) ? $page : $page['url'];
+				$this->_parameter['page_editor_layout_name'] = $themeName;
+				$this->refresh( $page );   
+			}
+		}
+
 		$pages = array_merge( $pages, $defaultPages );
-	//	var_export( $defaultPages );
-//		var_export( $themeName );
-//		var_export( $pages );
-//		exit();
-//var_export( $where );
-	//	var_export( $pages->getDbTable()->select( null, $where ) );    
+
 		foreach( $pages as $page )    
 		{
 			$page = is_string( $page ) ? $page : $page['url'];
-	//		set_time_limit( 30 );
-		//	var_export( @$page['url'] ? : $page );
-	//		var_export( $page );
-	//		continue;
-		//	$class = new Ayoola_Page_Editor_Layout();
-		//	$class->setPageId( $page['page_id'] );
-		//	if( $themeName && ( stripos( $page['url'], '/layout/' ) === 0 ) )
 			if( stripos( $page, '/layout/' ) === 0 )
 			{
 				//	dont cause unfinite loop by updating theme when a theme is being sanitized
 				continue;
 			}
+			//	sanitize now on theme level
+			$this->_parameter['page_editor_layout_name'] = null;
 			$this->refresh( $page );   
 		}
 		return true;

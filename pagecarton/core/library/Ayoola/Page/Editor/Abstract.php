@@ -246,14 +246,14 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 				$rPaths['data_php'] = $oldPath;
 			}
 		}
-		elseif( ! empty( $_REQUEST['pc_page_editor_layout_name'] ) )
+		elseif( $this->getPageEditorLayoutName() )
 		{
 			$pageThemeFileUrl = $page['url'];
 			if( $pageThemeFileUrl == '/' )
 			{
 				$pageThemeFileUrl = '/index';
 			}
-			$themeName = strtolower( $_REQUEST['pc_page_editor_layout_name'] );
+			$themeName = strtolower( $this->getPageEditorLayoutName() );
 
 
 			$file = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
@@ -293,7 +293,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 	//		var_export( $values );
 			return $values;
 		}
-		elseif( ! empty( $_REQUEST['pc_page_editor_layout_name'] )  )
+		elseif( $this->getPageEditorLayoutName()  )
 		{
 			return false;
 		}
@@ -500,7 +500,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		}
 		
 		//	We don't want themes saved in the pages table anymore
-		if( stripos( $whereClause['url'], '/layout/' ) === 0 || ! empty( $_REQUEST['pc_page_editor_layout_name'] ) && ! $this->getParameter( auto_create_page ) )
+		if( stripos( $whereClause['url'], '/layout/' ) === 0 || $this->getPageEditorLayoutName() && ! $this->getParameter( auto_create_page ) )
 		{
 			$this->_pageInfo = (array) $whereClause;
 			return;
@@ -540,6 +540,19 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		}
 		return $this->_pageInfo;
 	} 
+
+    /**
+     * 
+     *
+     * @param void
+     * @return string
+     */
+    protected function getPageEditorLayoutName()
+    {
+		$themeName = $this->getParameter( 'page_editor_layout_name' ) ? : strtolower( $_REQUEST['pc_page_editor_layout_name'] );
+		return $themeName;
+	}
+
 		
     /**
      * Sets a badnews error message

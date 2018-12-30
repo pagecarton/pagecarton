@@ -90,7 +90,9 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 			}
 			$dir = dirname( $globalFile );
 		}
-		$files = Ayoola_Doc::getFiles( $dir );
+        $ext = array( 'html', 'htm' );
+    //        $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir, array( 'whitelist_basename' => $basename ) ) );
+		$files = Ayoola_Doc::getFiles( $dir, array( 'whitelist_extension' => $ext ) );
 //		var_export( $files );   
 		$pages = array();   
 	//	sort( $files );
