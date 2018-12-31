@@ -38,14 +38,18 @@ class Ayoola_Page_Editor extends Ayoola_Page_Abstract
 		try
 		{
 			//	allow for sending url as identifier
-			if( @$_GET['url'] )
+			if( @trim( $_GET['url'] ) )
 			{
 				$this->_identifierKeys = array( 'url' );
 			}
 			if( ! $data = self::getIdentifierData() )
 			{ 
-		//		$class = new Ayoola_Page_Crea
-				return false; 
+				$class = new Ayoola_Page_Editor_Sanitize();
+				if( @trim( $_GET['url'] ) AND ! $data = $class->sourcePage( @trim( $_GET['url'] ) ) )
+				{
+					return false;
+				}
+			//	return false; 
 			}
 	 //		var_export( $data ); 
 			$this->createForm( 'Continue...', 'Edit ' . $data['url'], $data );     

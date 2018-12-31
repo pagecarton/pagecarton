@@ -202,6 +202,39 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
     } 
 	
     /**
+     * 
+     *
+     * @param void
+     * @return array
+     */
+    public static function getDefaultPageFilesToUse( $url, $themeName = null )
+    {
+		$values = array();
+		// Retrieve the previous layout data from the page data file
+		
+//		var_export( $paths );
+		$rPaths = Ayoola_Page::getPagePaths( $url );
+		
+		//	first default content to determine now is the default layout saved content
+		$themeName = $themeName ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+		$pageThemeFileUrl = $url;
+		if( $pageThemeFileUrl == '/' )
+		{
+			$pageThemeFileUrl = '/index';
+		}
+		$defaulThemeDataFile = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
+		if( $themeName && is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $defaulThemeDataFile ) )
+		{
+			//	dont allow main page content slip here.
+			$rPaths['data_json'] = $defaulThemeDataFile;
+			$rPaths['data_php'] = null;
+			$rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
+			$rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
+		}
+		return $rPaths;
+	}
+	
+    /**
      * Computes layout data using saved information
      *
      * @param void
@@ -221,17 +254,19 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 
 		//	Get new relative paths
 		$page = $this->getPageInfo();
-		$rPaths = Ayoola_Page::getPagePaths( $page['url'] );
+
+	//	$rPaths = Ayoola_Page::getPagePaths( $page['url'] );
 		
 		//	first default content to determine now is the default layout saved content
 		$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
-		$pageThemeFileUrl = $page['url'];
+		$rPaths = self::getDefaultPageFilesToUse( $page['url'], $themeName );
+/* 		$pageThemeFileUrl = $page['url'];
 		if( $pageThemeFileUrl == '/' )
 		{
 			$pageThemeFileUrl = '/index';
 		}
 		$defaulThemeDataFile = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
-		if( stripos( $page['url'], '/layout/' ) === 0 )
+ */		if( stripos( $page['url'], '/layout/' ) === 0 )
 		{
 			list(  , $themeName ) = explode( '/', trim( $page['url'], '/' ) );
 			$oldPath = $rPaths['data_php'];
@@ -280,14 +315,14 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 				$rPaths['data_json'] = $backupFile;
 			}
 		}
-		elseif( $themeName && is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $defaulThemeDataFile ) )
+/* 		elseif( $themeName && is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $defaulThemeDataFile ) )
 		{
 			//	dont allow main page content slip here.
 			$rPaths['data_json'] = $defaulThemeDataFile;
 			$rPaths['data_php'] = null;
 			$rPaths['data_php'] = null;
 		}
-		//	now using json to store this data
+ */		//	now using json to store this data
 	//	var_export( $rPaths );
 		$newFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths['data_json'];
 	//	var_export( $newFile );

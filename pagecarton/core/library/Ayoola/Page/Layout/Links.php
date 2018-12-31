@@ -102,7 +102,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			$form->submitValue = 'Update';
 	//		$fieldset = new Ayoola_Form_Element();
 			$xml = array();
-			$pages = Ayoola_Page::getAll();
+			$pages = Ayoola_Page::getAll( $data );
 /* 			$pages = Ayoola_Page_Page::getInstance();
 			$pages = $pages->select();
 			require_once 'Ayoola/Filter/SelectListArray.php';

@@ -69,7 +69,10 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 	//	var_export( $otherThemes );
 		$this->setViewContent( $this->createPrivateList( $myThemes ), true );		
 	//	$this->setViewContent( '<h3>All Themes</h3>' );		
-		$allThemes ? $this->setViewContent( $this->createList( $allThemes ) ) : null;		
+		if( ! empty( $_GET['mini_info'] ) )
+		{
+			$allThemes ? $this->setViewContent( $this->createList( $allThemes ) ) : null;		
+		}
     } 
 	
     /**
@@ -171,7 +174,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		$list->createList(  
 			array(
 					array( 'field' => 'layout_label', 'header' => 'Theme Name', 'value' => '%FIELD%' ),   
-					array( 'field' => 'layout_name', 'header' => '', 'value' => '<a style="" title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/%KEY%/template\' );" href="javascript:;"> Edit Theme</a>' ),   
+				//	array( 'field' => 'layout_name', 'header' => '', 'value' => '<a style="" title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/%KEY%/template\' );" href="javascript:;"> Edit Theme</a>' ),   
 					array( 'field' => 'layout_name', 'header' => 'Default', 'value' => '%FIELD%', 'value_representation' => $default ),
 			)
 		);

@@ -89,7 +89,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      * @param void
      * @return array 
      */
-    public static function getAll()
+    public static function getAll( array $data = null )
     {		
 		$pages = Ayoola_Page_Page::getInstance();
 		$pages = $pages->select();

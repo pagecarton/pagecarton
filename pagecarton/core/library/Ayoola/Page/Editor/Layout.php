@@ -140,7 +140,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	var_export( Ayoola_Page::getPagePaths( $page['url'] ) );
 				
 				//	Copy the parent files
-				foreach( Ayoola_Page::getPagePaths( $pageToCopy['url'] ) as $key => $each )
+				$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+				$rPaths = self::getDefaultPageFilesToUse( $pageToCopy['url'], $themeName );
+
+				foreach( $rPaths as $key => $each )
 				{
 					if( ! $each = Ayoola_Loader::checkFile( $each ) )
 					{

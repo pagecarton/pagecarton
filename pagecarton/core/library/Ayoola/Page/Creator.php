@@ -95,7 +95,7 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 		//	self::v( $values );
 		//	return false;
 		
-			if( ! empty( $values['system'] ) )
+			if( empty( $values['system'] ) )
 			{
 				//	Notify Admin
 				$mailInfo = array();
