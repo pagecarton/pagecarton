@@ -181,6 +181,19 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				$storage->store( $info );
 				break; 
 			}
+
+			//	get info for theme pages
+			$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+			if( $themeName && Ayoola_Page_Layout_Pages_Copy::canCopy( $url, $themeName ) )
+			{ 
+				//	just what we need
+				@$info = array( 'url' => $url );
+			//		self::v( $info );
+				//		var_export( self::$_currentPageInfo );
+				$info['cache_info'] = serialize( $storage );
+				$storage->store( $info );
+				break; 
+			}
 		}
 		while( false );
 //		self::v( $info );

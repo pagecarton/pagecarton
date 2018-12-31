@@ -65,9 +65,12 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             //  don't create this page unless it's saved
             return false;
         }
-        if( ! $pageInfo = $class->sourcePage( $url ) )
+
+        //  page does not need to exit to be able to copy
+        //  to allow Ayoola_Page::getInfo to work for theme pages
+    //    if( ! $pageInfo = $class->sourcePage( $url ) )
         {
-             return false;
+    //         return false;
         }
         if( ! empty( $pageInfo['layout_name'] ) && $pageInfo['layout_name'] != $themeName )
         {
