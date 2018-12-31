@@ -97,7 +97,8 @@ class Application_Article_Publisher extends PageCarton_Widget
                             }
                         //    self::sanitizeParameters( $widget['parameters'] );
              //   self::v( $widget['parameters'] );
-                            $class = new $class( $widget['parameters'] ); 
+                            $class = new $class( $widget['parameters'] );
+                            if( $class->getMarkupTemplateObjects() ) 
                             foreach( $class->getMarkupTemplateObjects() as $eachWidget )
                             {
             //    self::v( $eachWidget->getParameter() );
