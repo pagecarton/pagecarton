@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: cart.php	Thursday 19th of April 2018 11:14:55 AM	ayoola@ayoo.la $ 
+* @version $Id: cart.php	Monday 31st of December 2018 11:18:51 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_79c3488bb05d610f1aa339e89e0b4d48 = new Ayoola_Page_Editor_Text( array (
+$_6a7f8980fc8d00a1ef6aec28c75efe04 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h1>Shopping Cart</h1>
 ',
   'url_prefix' => '/x/index.php',
@@ -32,14 +32,14 @@ $_79c3488bb05d610f1aa339e89e0b4d48 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_79c3488bb05d610f1aa339e89e0b4d48 = null;
+$_6a7f8980fc8d00a1ef6aec28c75efe04 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Application_Subscription_Cart' ) )
 							{
 								
-$_67f23ec1035d39330527f78129cbd747 = new Application_Subscription_Cart( array (
+$_7a988dae6b7ce7e9d4537a3cbcc83e32 = new Application_Subscription_Cart( array (
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -54,14 +54,14 @@ $_67f23ec1035d39330527f78129cbd747 = new Application_Subscription_Cart( array (
 							else
 							{
 								
-$_67f23ec1035d39330527f78129cbd747 = null;
+$_7a988dae6b7ce7e9d4537a3cbcc83e32 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_992ecbde43a3e58a043698dbefea1d52 = new Ayoola_Page_Editor_Text( array (
+$_87044070d6e8170c2de22660a33f80d5 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h2>Checkout</h2>
 ',
   'url_prefix' => '/x/index.php',
@@ -77,14 +77,14 @@ $_992ecbde43a3e58a043698dbefea1d52 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_992ecbde43a3e58a043698dbefea1d52 = null;
+$_87044070d6e8170c2de22660a33f80d5 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_11dfdc4f269612637101b65b72651c99 = new Ayoola_Object_Embed( array (
+$_7f8486c96b4eb6fb3753bd68526780cc = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Subscription_Checkout',
   'advanced_parameter_value' => 
   array (
@@ -98,7 +98,7 @@ $_11dfdc4f269612637101b65b72651c99 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_11dfdc4f269612637101b65b72651c99 = null;
+$_7f8486c96b4eb6fb3753bd68526780cc = null;
 
 							}
 							

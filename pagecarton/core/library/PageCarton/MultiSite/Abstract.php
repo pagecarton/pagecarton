@@ -125,12 +125,15 @@ class PageCarton_MultiSite_Abstract extends PageCarton_Widget
 	public static function deleteFiles( $directory )  
     {
         $newSite = self::getNewSiteDir( $directory );
-        if( ! file_exists( $newSite ) )
+        if( is_file( $newSite ) )
         {
-            return false; 
+            return Ayoola_Doc::deleteDirectoryPlusContent( $newSite );
         }
-        Ayoola_Doc::deleteDirectoryPlusContent( $newSite );
-        return true;
+        if( is_link( $newSite ) )
+        {
+            return unlink( $newSite );
+        }
+        return false;
     }
 
     /**

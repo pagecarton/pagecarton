@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: 404.php	Thursday 19th of April 2018 11:14:59 AM	ayoola@ayoo.la $ 
+* @version $Id: 404.php	Monday 31st of December 2018 11:18:49 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_1fc0757f8fe3f62eb8083f4b06f06b77 = new Ayoola_Page_Editor_Text( array (
+$_e3c85fbe1daeb8a0091aff70f2532d3e = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h1>Error 404 - Page Not Found</h1>
 ',
   'preserved_content' => '<h1>Error 404 - Page Not Found</h1>
@@ -36,14 +36,14 @@ $_1fc0757f8fe3f62eb8083f4b06f06b77 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_1fc0757f8fe3f62eb8083f4b06f06b77 = null;
+$_e3c85fbe1daeb8a0091aff70f2532d3e = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_f65ea3edcf46abd00859784ad6818b7a = new Ayoola_Page_Editor_Text( array (
+$_df10f2f0702f2f3a30281aa9f423898e = new Ayoola_Page_Editor_Text( array (
   'editable' => '<p>You are seeing this page because you have requested a page that is not available. Please check the URL and try again.</p>
 ',
   'preserved_content' => '<p>You are seeing this page because you have requested a page that is not available. Please check the URL and try again.</p>
@@ -63,14 +63,14 @@ $_f65ea3edcf46abd00859784ad6818b7a = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_f65ea3edcf46abd00859784ad6818b7a = null;
+$_df10f2f0702f2f3a30281aa9f423898e = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_e9be13d2f92baab2f6c9e2cbc7eef982 = new Ayoola_Object_Embed( array (
+$_e47786f32dc36a9b8e711d8c0f6fb2ab = new Ayoola_Object_Embed( array (
   'editable' => 'Ayoola_Page_AutoCreator',
   'advanced_parameter_value' => 
   array (
@@ -84,7 +84,7 @@ $_e9be13d2f92baab2f6c9e2cbc7eef982 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_e9be13d2f92baab2f6c9e2cbc7eef982 = null;
+$_e47786f32dc36a9b8e711d8c0f6fb2ab = null;
 
 							}
 							

@@ -88,7 +88,7 @@ abstract class Application_Settings_SettingsName_Abstract extends Ayoola_Abstrac
  */		
  		$fieldset->addElement( array( 'name' => 'settingsname_title', 'placeholder' => 'Settings Title', 'type' => 'InputText', 'value' => @$values['settingsname_title'] ? : @$values['settingsname_name']  ) );
 		$fieldset->addRequirement( 'settingsname_title', array( 'WordCount' => array( 3, 50 ) ) );
-
+/* 
 		$filter = new Ayoola_Filter_FilenameToClassname();
 			try
 			{
@@ -127,7 +127,7 @@ abstract class Application_Settings_SettingsName_Abstract extends Ayoola_Abstrac
 				$classes[$className] = $className;
 			}
 		ksort( $classes );
- 		$fieldset->addElement( array( 'name' => 'class_name', 'placeholder' => 'Class name', 'type' => 'Select', 'value' => @$values['class_name'] ), $classes );
+ */ 		$fieldset->addElement( array( 'name' => 'class_name', 'placeholder' => 'Class name', 'type' => 'Select', 'value' => @$values['class_name'] ), Ayoola_Object_Embed::getWidgets() );
 		if( is_null( $values ) )
 		{		
 	//		$fieldset->addRequirement( 'settingsname_name', array( 'Name' => null, 'WordCount' => array( 3,100 )  ) );

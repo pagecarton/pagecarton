@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Friday 14th of December 2018 10:21:28 AM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Monday 31st of December 2018 11:18:41 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -26,17 +26,17 @@
 							if
 							( 
 
-								$x_1544782889 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+								$x_1546255121 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
 							)
 							{
-							//	var_export( $x_1544782889 );
-							//	echo file_get_contents( $x_1544782889 );
-								foreach( $x_1544782889 as $each )
+							//	var_export( $x_1546255121 );
+							//	echo file_get_contents( $x_1546255121 );
+								foreach( $x_1546255121 as $each )
 								{	
 									include_once $each;
 								}
 							}
-		//					var_export( $x_1544782889 );
+		//					var_export( $x_1546255121 );
 						?>
 						 <?php
 /**
