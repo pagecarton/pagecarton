@@ -86,14 +86,14 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                 if( $percentage == 100 && ! $break )
                 {
                     $lastCompleted = true;
-                    $html .= '<li class="visited"><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '\', \'page_refresh\' );" href="javascript:;">' . $each['key'] . '</a></li>';
+                    $html .= '<li class="visited"><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?min_info=1\', \'page_refresh\' );" href="javascript:;">' . $each['key'] . '</a></li>';
                 }
                 elseif( $lastCompleted == true || $key === 0 )
                 {
                     $class = $each['class'];
                     $lastCompleted = false;
                     $break = true;
-                    $html .= '<li class="current"><em><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '\', \'page_refresh\' );" href="javascript:;">' . $each['key'] . '</a></em></li>';
+                    $html .= '<li class="current"><em><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?min_info=1\', \'page_refresh\' );" href="javascript:;">' . $each['key'] . '</a></em></li>';
 
                 }
                 else
@@ -121,7 +121,7 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                $this->setViewContent( '<div style="text-align:center;">
                Step ' . ( $weAreOn ) . ' of ' . count( $stages ) . ' <br><br>
                ' . $xT[$class]['title'] . ' <br><br>
-                <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '\', \'page_refresh\' );" href="javascript:;"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . $xT[$class]['key'] . '</a><br><br>
+                <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '?min_info=1\', \'page_refresh\' );" href="javascript:;"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . $xT[$class]['key'] . '</a><br><br>
                 <a style="font-size:x-small;" class="" href="' . Ayoola_Application::getUrlPrefix() . '/" target="_blank"> <i  style="margin:5px;" class="fa fa-external-link"></i> Preview Site </a><br><br>
                 
                 </div>' ); 
