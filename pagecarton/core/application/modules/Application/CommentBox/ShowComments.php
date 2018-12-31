@@ -64,6 +64,7 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
             $where['parent_comment'] = '';
             $where['hidden'] = 0;
             $data = $this->getDbTable()->select( null, $where );
+            krsort( $data );
             Application_Style::addFile( '/css/comment-box.css' );
             $html = null;
             $html .= '<div class="comments-container">

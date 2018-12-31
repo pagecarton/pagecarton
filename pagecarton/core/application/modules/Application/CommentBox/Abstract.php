@@ -62,15 +62,22 @@ class Application_CommentBox_Abstract extends PageCarton_Widget
      */
 	public function filterCommentData( & $data )  
     {
+        foreach( $data as $key => $each )
+        {
+            if( empty( $each ) )
+            {
+                unset( $data[$key] );
+            }
+        }
         if( $data['profile_url'] )
         {
             $profileData = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) ? : array();
-            $data = array_merge( $data, $profileData );
+            $data = array_merge( $profileData, $data );
       //      var_export( $profileData );
        //     var_export( $data );
             if( ! empty( $profileData['user_id'] ) )
             {
-                if( $info = Application_User_Abstract::getUserInfo( $profileData['user_id'] ) )
+                if( $info = Application_User_Abstract::getUserInfo( $profileData['user_id'] ) )  
                 {
                     $data = array_merge( $info, $data );
                 }

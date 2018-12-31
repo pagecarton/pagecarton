@@ -68,11 +68,14 @@ class Application_CommentBox extends Application_CommentBox_Abstract
             $values['creation_time'] = time();
             $values['parent_comment'] = $_REQUEST['parent_comment'];
 
-            $url = $values['url'] ? : $values['article_url'];
+			$url = $values['url'] ? : $values['article_url'];
+	//		var_export( $values );
+			
 			if( $values['article_url'] )
 			{
 				$postData = Application_Article_Abstract::loadPostData( $values );
 				$title = $postData['article_title'];
+				$url = $values['article_url'];
 			}
 			else
 			{
@@ -121,6 +124,7 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			//	confirmation email for commenter
             self::filterCommentData( $values );
 			$mailInfo['to'] = $values['email'];
+			$mailInfo['subject'] = 'Your comment on "' . $title  . '"';
 			$mailInfo['body'] = 'Your comment on "' . $title  . '" (' . $link  . ') has successfully been posted. Here is your comment below:
 
 			"' . $values['comment']  . '"
@@ -136,7 +140,8 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			$previousComments = $this->getDbTable()->select( null, $where );
 			foreach( $previousComments as $each )
 			{
-                self::filterCommentData( $each );
+				self::filterCommentData( $each );
+				$mailInfo['subject'] = 'Someone also commented on "' . $title  . '"';
 				$mailInfo['to'] = $each['email'];
 				$mailInfo['body'] = '' . $values['display_name']  . ' also commented on "' . $title  . '" on ' . $link  . '';
 				self::sendMail( $mailInfo );
