@@ -86,7 +86,12 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 				{
 					continue;
 				}
-				$all[] = Ayoola_Page::getInfo( $eachPage );
+			//	var_export( $eachPage );
+			//	var_export( Ayoola_Page::getInfo( $eachPage ) );
+				if( $info = Ayoola_Page::getInfo( $eachPage ) )
+				{
+					$all[] = $info;
+				}
 			}
 				$this->setViewContent( $this->createList( $all, 'All Pages' ), true );
 		}

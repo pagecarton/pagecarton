@@ -196,7 +196,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
     protected static function getParameterKeysFromTheseOtherClasses( & $parameters )
     {
 		$classes = array();
-		if( Ayoola_Loader::loadClass( $parameters['editable'] ) )
+		if( Ayoola_Loader::loadClass( @$parameters['editable'] ) )
 		{
 			$class = $parameters['editable'];
 		//	var_export( $class );
@@ -207,7 +207,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 
 		}
 //		var_export( $classes );
-		$classes[] = $parameters['editable'];
+		$classes[] = @$parameters['editable'];
 //		var_export( $classes );
 		return $classes;
 	}
@@ -256,7 +256,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		
 	//	if( ! empty( $options['cache'] ) )
 		{
-			if( ! is_null( static::$_properties[__METHOD__][$keyZ] ) )
+			if( ! @is_null( static::$_properties[__METHOD__][$keyZ] ) )
 			{
 				return static::$_properties[__METHOD__][$keyZ];
 			}

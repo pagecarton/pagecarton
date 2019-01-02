@@ -121,6 +121,17 @@ class Ayoola_Filter_UriToPath implements Ayoola_Filter_Interface
      */
     public function setPathTemplates( $uri = null )
     {
+      if( is_array( $uri ) )
+      {
+        if( ! empty( $uri['url'] ) )
+        {
+          $uri = $uri['url'];
+        }
+        else
+        {
+          return false;
+        }
+      }
 		$paths = array();
 		foreach( $this->getTypes() as $key => $values )
 		{
@@ -148,12 +159,17 @@ class Ayoola_Filter_UriToPath implements Ayoola_Filter_Interface
     public function filter( $value )
 	{
 		$paths = $this->getPathTemplates( $value );
-	//	var_export( $paths );
+		if( is_array( $value) )
+    {
+    //  throw new Exception();
+	  //  var_export( get_ );
+    }
 		$result = array();
 		require_once 'Ayoola/Loader.php';
+//	var_export( $this->getUriPlaceholder() );
 		foreach( $paths as $name => $path )
 		{
-			$result[$name] = str_ireplace( $this->getUriPlaceholder(), $value, $path );
+  $result[$name] = str_ireplace( $this->getUriPlaceholder(), $value, $path );
 			if( $filePath = Ayoola_Loader::checkFile( $result[$name] ) )
 			{
 			//	$result[$name] = $filePath;

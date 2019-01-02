@@ -988,7 +988,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				preg_match_all( "/class\s([a-zA-Z_]*)\sextends\s([a-zA-Z_]*)/", $fileContent, $abstract );
 		//		var_export( $class );
 		//		var_export( $abstract[2][0] );
-				$class = $abstract[2][0];
+				$class = @$abstract[2][0];
 				if( ! $class || in_array( $class, $classes ) )
 				{
 				//	var_export( $class );
@@ -1101,7 +1101,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				//	var_export( $object );
 
 			//	check it here first so that it can set the widget options
-			if( $object['savedwidget_id'] )
+			if( @$object['savedwidget_id'] )
 			{
 			//	$savedWidgets ? $fieldset->addElement( array( 'name' => 'savedwidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['savedwidget_id'] ), array( '' => 'Restore Saved Widgets' ) + $savedWidgets ) : null;
 				if( $widgetToRestore = Ayoola_Object_SavedWidget::getInstance()->selectOne( null, array( 'savedwidget_id' =>  $object['savedwidget_id'], ) ) )
@@ -1157,7 +1157,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$form->addFieldset( $fieldset );
 
 			}
-			if( $object['savedwidget_id'] )
+			if( @$object['savedwidget_id'] )
 			{
 			//	$savedWidgets ? $fieldset->addElement( array( 'name' => 'savedwidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['savedwidget_id'] ), array( '' => 'Restore Saved Widgets' ) + $savedWidgets ) : null;
 				if( $widgetToRestore = Ayoola_Object_SavedWidget::getInstance()->selectOne( null, array( 'savedwidget_id' =>  $object['savedwidget_id'], ) ) )

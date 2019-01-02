@@ -1,19 +1,3 @@
-<title><?php echo ( htmlentities( trim( Ayoola_Page::$title . ' ' . Ayoola_Page::getCurrentPageInfo( 'title' ) ), ENT_QUOTES, "UTF-8", false ) ? : ( Application_SiteInfo::getInfo( 'site_headline' ) ? : Ayoola_Page::getDefaultDomain() ) ); ?></title>
-<meta name="Description" content="<?php echo htmlentities( trim( Ayoola_Page::$description . ' ' . Ayoola_Page::getCurrentPageInfo( 'description' ) ), ENT_QUOTES, "UTF-8", false ) ? : ( Application_SiteInfo::getInfo( 'site_description' ) ); ?>" />
-<meta name="Keywords" content="<?php echo htmlentities( Ayoola_Page::getCurrentPageInfo( 'keywords' ), ENT_QUOTES, "UTF-8", false ); ?>" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta NAME="robots" CONTENT="noydir" />
-<meta NAME="robots" CONTENT="noodp" />   
-<link rel="image_src" href="<?php echo Ayoola_Page::getThumbnail(); ?>" />
-<meta property="og:title" content="<?php echo ( htmlentities( trim( Ayoola_Page::$title . ' ' . Ayoola_Page::getCurrentPageInfo( 'title' ) ), ENT_QUOTES, "UTF-8", false ) ? : ( Application_Settings_Abstract::getSettings( 'SiteInfo', 'site_headline' ) ? : Ayoola_Page::getDefaultDomain() ) ); ?>"/>
-<meta property="og:type" content="<?php echo Ayoola_Page::$isHome ? 'website' : 'article' ?>"/> 
-<meta property="og:url" content="<?php echo Ayoola_Page::getCanonicalUrl(); ?>"/>
-<meta property="og:image" content="<?php echo Ayoola_Page::getThumbnail(); ?>"/>
-<meta property="og:site_name" content="<?php echo Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain(); ?>"/>
-<meta property="og:description" content="<?php echo htmlentities( trim( Ayoola_Page::$description . ' ' . Ayoola_Page::getCurrentPageInfo( 'description' ) ), ENT_QUOTES, "UTF-8", false ) ? : ( Application_Settings_Abstract::getSettings( 'SiteInfo', 'site_description' ) ); ?>"/>  
-<link rel="icon" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/favicon.ico" type="image/x-icon" />
-<link rel="shortcut icon" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/favicon.ico" type="image/x-icon" />
-<link rel="bookmark icon" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/favicon.ico" type="image/x-icon" />
-<link rel="canonical" href="<?php echo Ayoola_Page::getCanonicalUrl(); ?>" />    
-         
-<?php echo Application_Style::getAll(); ?>
+<?php 
+
+echo PageCarton_Head::viewInLine();

@@ -47,17 +47,20 @@ class Application_Article_Publisher extends PageCarton_Widget
             //  Output demo content to screen
             $defaultLayout = Application_Settings_CompanyInfo::getSettings( 'Page', 'default_layout' );
             $dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'template';
-            $dir = dirname( Ayoola_Loader::checkFile( $dir ) );
+            $path = Ayoola_Loader::checkFile( $dir );
+            $dir = dirname( $path );
             $basename = array( 'data_json_content', 'content.json' );
             $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir, array( 'whitelist_basename' => $basename ) ) );
             $postTypes = array();
 
-            if( $defaultLayout && ! $files )
+            if( time() - filemtime( $path ) < 9000 && $defaultLayout && ! $files )
             {
                 //  compatibiity
                 $sanitize = new Ayoola_Page_Editor_Sanitize();
             //    var_export( $defaultLayout );
+                
                 $sanitize->sanitize( $defaultLayout );
+            //    exit();
             }
         //    self::v( $files );
             foreach( $files as $each )
@@ -107,7 +110,7 @@ class Application_Article_Publisher extends PageCarton_Widget
                                 $values = $eachWidget->getObjectTemplateValues();
                                 $noRequired = ( $eachWidget->getParameter( 'no_of_post_to_show' ) ? : 1 );
                                 $postType = ( $eachWidget->getParameter( 'article_types' ) ? : $eachWidget->getParameter( 'true_post_type' ) ) ? : ( method_exists( $eachWidget, 'getItemName' ) && $eachWidget::getItemName() ? $eachWidget::getItemName() : 'Post' );
-                                if( ( $postType && $postTypes[$postType] ) || ! $eachWidget->getParameter( 'add_a_new_post_full_url' ) || $postTypes[$eachWidget->getParameter( 'add_a_new_post_full_url' )] )
+                                if( ( $postType && @$postTypes[$postType] ) || ! $eachWidget->getParameter( 'add_a_new_post_full_url' ) || @$postTypes[$eachWidget->getParameter( 'add_a_new_post_full_url' )] )
                                 {
                                     continue;
                                 }

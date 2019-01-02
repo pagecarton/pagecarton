@@ -141,7 +141,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					Application_Javascript::addCode( $options['css_code'] );
 				}
 			}
-			$this->_parameter['content_to_clear_internal'] .= '
+			@$this->_parameter['content_to_clear_internal'] .= '
 			<p></p>
 			<span class="reducedfrom"></span>
 			<span class="pc_posts_option_items" style="text-decoration:line-through;" ></span>
@@ -660,7 +660,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
 				$newArticleType = @$tempItem2['article_type'] ? : ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
 				$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
-				$newArticleTypeToShow = self::getItemName() ? : ( ucfirst( $postTypeInfo['post_type'] ) ? : 'Item' );
+				@$newArticleTypeToShow = self::getItemName() ? : ( ucfirst( $postTypeInfo['post_type'] ) ? : 'Item' );
 		//		self::v( $newArticleType );
 			//	self::v( $this->_dbWhereClause );
 			//	self::v( $where );
@@ -742,7 +742,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	self::v( $_REQUEST['list_page_number'] );
 		$offset = 0;
 		$offsetDefined = false;
-		if( is_numeric( $_REQUEST['list_page_number'] ) )
+		if( is_numeric( @$_REQUEST['list_page_number'] ) )
 		{
 			if( self::$_listCounter != intval( @$_REQUEST['list_counter'] ) && empty( $_GET['pc_post_list_id'] ) )
 			{
@@ -980,7 +980,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$filter = new Ayoola_Filter_Time();
 			//	if( @$data['article_modified_date'] )
 				{
-					$data['article_modified_date_filtered'] = $filter->filter( $data['article_modified_date'] );
+					@$data['article_modified_date_filtered'] = $filter->filter( $data['article_modified_date'] );
 				}
 			//	else
 				{
@@ -1018,7 +1018,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( $data );
 
 			// build a list
-			if( $data['true_post_type'] && empty( $data['not_real_post'] ) )
+			if( @$data['true_post_type'] && empty( $data['not_real_post'] ) )
 			{
 				$firstPost = empty( $firstPost ) ? $data['article_url'] : $firstPost;
 
@@ -1132,7 +1132,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//	internal forms to use
 			$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array();
 			$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
-			$features[] = $data['true_post_type'];
+			$features[] = @$data['true_post_type'];
 			$featuresPrefix[] = '';
 			$featureCount = array();
 			$featureDone = array();
@@ -1462,7 +1462,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$categoryName = @$category['category_name'] ? : $category['category_id'];
 				$categoryName = '' . $categoryName . '';
 			}
-			$category['category_description'] = $category['category_description'] ? : ' Latest Posts in the "' . $category['category_label'] . '" category on ' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() );
+			@$category['category_description'] = $category['category_description'] ? : ' Latest Posts in the "' . $category['category_label'] . '" category on ' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() );
 			
 			//	Add the category to title and description?
 			if( $this->getParameter( 'build_meta_data' ) )

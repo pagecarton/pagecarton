@@ -75,7 +75,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		//		var_export( $this->getDbData() );
 				if( self::hasPriviledge( array( 99, 98 ) ) )
 				{
-					$formName = $_REQUEST['form_name'] ? : $this->getParameter( 'form_name' );
+					$formName = @$_REQUEST['form_name'] ? : $this->getParameter( 'form_name' );
 					if( ! $this->getParameter( 'new_form' ) )
 					{
 						$this->setViewContent( '<p class=" badnews">Form not set up yet.</p>' );

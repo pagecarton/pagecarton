@@ -771,6 +771,7 @@ class Ayoola_Form_Element extends Ayoola_Form
     {
 		//	Setting the [] from the class level causes some trouble.
 		$element['name'] = trim( $element['name'], '[]' ) . '[]';
+       $html = null;
  //      @$html = "<label style='{$element['label_style']}' for='{$element['name']}'>{$element['label']}\n";
  //      $html .= "</label>\n";
 		$html .= self::$_placeholders['badnews'];

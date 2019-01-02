@@ -332,7 +332,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>'; 
- */		if( ( @in_array( 'embed_widgets', $object['widget_options'] ) || @in_array( 'embed_widgets', $object['text_widget_options'] ) ) || $object['markup_template_object_name'] )
+ */		if( ( @in_array( 'embed_widgets', $object['widget_options'] ) || @in_array( 'embed_widgets', $object['text_widget_options'] ) ) || @$object['markup_template_object_name'] )
 		{
 			$object['markup_template_object_name'] = (array) $object['markup_template_object_name'];
 			$widgets = Ayoola_Object_Embed::getWidgets();
@@ -524,11 +524,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	//	if( @$object['url_prefix'] !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
 		{
 			$search = array( 
-								'"' . $object['url_prefix'], 
-								"'" . $object['url_prefix'], 
+								'"' . @$object['url_prefix'], 
+								"'" . @$object['url_prefix'], 
 								'"' . Ayoola_Application::getUrlPrefix(), 
 								"'" . Ayoola_Application::getUrlPrefix(), 
-								"url(" . $object['url_prefix'], 
+								"url(" . @$object['url_prefix'], 
 								"url(" . Ayoola_Application::getUrlPrefix(), 
 								);
 			$replace = array( 
@@ -539,16 +539,16 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 								"url(", 
 								"url(", 
 								);
-			$object['codes'] ? $object['codes'] = str_ireplace( $search, $replace, @$object['codes'] ) : null;
-			$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, @$object['editable'] ) : null;
+			@$object['codes'] ? $object['codes'] = str_ireplace( $search, $replace, @$object['codes'] ) : null;
+			@$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, @$object['editable'] ) : null;
 			$search = array( '"/', "'/", "url(", );
 			$replace = array( 
 								'"' . Ayoola_Application::getUrlPrefix() . '/', 
 								"'" . Ayoola_Application::getUrlPrefix() . '/', 
 								"url(" . Ayoola_Application::getUrlPrefix(), 
 								);
-			$object['codes'] ? $object['codes'] = str_ireplace( $search, $replace, $object['codes'] ): null;
-			$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, $object['editable'] ): null;
+			@$object['codes'] ? $object['codes'] = str_ireplace( $search, $replace, $object['codes'] ): null;
+			@$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, $object['editable'] ): null;
 	//		$replace = Ayoola_Application::getUrlPrefix();
 		}
 
@@ -723,7 +723,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     {
 	//	var_export( $parameters['editable'] );
 		$classes = array();
-		if( $parameters['markup_template_object_name'] )
+		if( @$parameters['markup_template_object_name'] )
 		{
 			$classes = (array) $parameters['markup_template_object_name'];
 		}

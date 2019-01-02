@@ -260,13 +260,14 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		//	first default content to determine now is the default layout saved content
 		$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
 		$rPaths = self::getDefaultPageFilesToUse( $page['url'], $themeName );
-/* 		$pageThemeFileUrl = $page['url'];
+ 		$pageThemeFileUrl = $page['url'];
 		if( $pageThemeFileUrl == '/' )
 		{
 			$pageThemeFileUrl = '/index';
 		}
-		$defaulThemeDataFile = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
- */		if( stripos( $page['url'], '/layout/' ) === 0 )
+	//	var_export( $rPaths );
+	//	$defaulThemeDataFile = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
+ 		if( stripos( $page['url'], '/layout/' ) === 0 )
 		{
 			list(  , $themeName ) = explode( '/', trim( $page['url'], '/' ) );
 			$oldPath = $rPaths['data_php'];
@@ -323,7 +324,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 			$rPaths['data_php'] = null;
 		}
  */		//	now using json to store this data
-	//	var_export( $rPaths );
+//	var_export( $rPaths );
 		$newFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths['data_json'];
 	//	var_export( $newFile );
 		
@@ -541,7 +542,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		}
 		
 		//	We don't want themes saved in the pages table anymore
-		if( stripos( $whereClause['url'], '/layout/' ) === 0 || $this->getPageEditorLayoutName() && ! $this->getParameter( auto_create_page ) )
+		if( stripos( $whereClause['url'], '/layout/' ) === 0 || $this->getPageEditorLayoutName() && ! $this->getParameter( 'auto_create_page' ) )
 		{
 			$this->_pageInfo = (array) $whereClause;
 			return;
@@ -590,7 +591,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
      */
     protected function getPageEditorLayoutName()
     {
-		$themeName = $this->getParameter( 'page_editor_layout_name' ) ? : strtolower( $_REQUEST['pc_page_editor_layout_name'] );
+		$themeName = $this->getParameter( 'page_editor_layout_name' ) ? : strtolower( @$_REQUEST['pc_page_editor_layout_name'] );
 		return $themeName;
 	}
 

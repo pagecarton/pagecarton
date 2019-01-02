@@ -128,7 +128,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 	//		var_export( $this->getParameter( 'suggested_url' ) );
 	//		var_export( $imageInfo['suggested_url'] );
 		//	var_export( $plainUrl );
-			$suggestedUrl = ( $this->getParameter( 'suggested_url' ) ? : $imageInfo['suggested_url'] );
+			@$suggestedUrl = ( $this->getParameter( 'suggested_url' ) ? : $imageInfo['suggested_url'] );
 			if( $plainUrl && ! $suggestedUrl )
 			{
 				if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( $plainUrl ) )   
@@ -249,7 +249,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 				</div>
 				<div title="Click here to select a file to upload or drag and drop a file here." style="text-align:center;" class="" name="upload_through_ajax_link">
 					<div title="Select an option here" style="display:block;" >
-						<span name="' . $optionName . '" onClick="' . $js . ' ' . $jsSelectElement . ' ' . $jsSetFieldName . ' ayoola.image.clickBrowseButton( { accept: \'' . $this->getParameter( 'file_types_to_accept' ) . '\', } ); " title="Click here to upload a file" class="pc-btn"  >
+						<span name="' . @$optionName . '" onClick="' . @$js . ' ' . @$jsSelectElement . ' ' . @$jsSetFieldName . ' ayoola.image.clickBrowseButton( { accept: \'' . $this->getParameter( 'file_types_to_accept' ) . '\', } ); " title="Click here to upload a file" class="pc-btn"  >
 							Upload New
 						</span>
 						<span name="' . $optionName . '" onClick="' . $js . ' ' . $dropZoneJs . ' ' . $jsSetFieldName . ' " title="Click here to select a file from the previous files on the website" class="pc-btn">

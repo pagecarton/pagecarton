@@ -294,7 +294,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				Application_Javascript::addFile( '/js/objects/dragNDrop.js' );
 				Application_Javascript::addCode( $this->javascript() );
 			}
-			if( $this->_layoutRepresentation )
+			if( $this->_layoutRepresentation && ! $this->noLayoutView )
 			{
 				file_put_contents( $tmp, $this->_layoutRepresentation );
 			//	var_export( $tmp );
@@ -328,6 +328,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      */
     public static function getDefaultLayout()   
     {
+	//	var_export();
 		if( $defaultLayout = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) )     
 		{
 			if( Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $defaultLayout ) ) )
@@ -390,7 +391,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 //		$dir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS;
 //		if( ! is_file( $dir . @$layoutData['pagelayout_filename'] ) )
 
-		$theme = $this->getPageEditorLayoutName() ? : $page['layout_name'];
+		$theme = $this->getPageEditorLayoutName() ? : @$page['layout_name'];
 		$theme = $theme ? : self::getDefaultLayout();
 		if( ! Ayoola_Loader::checkFile( @$page['pagelayout_filename'] ) )	//	Compatibility
 		{
@@ -428,8 +429,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		}
 	//	var_export( $layoutPreloadedContents );
  	//	$this->_layoutRepresentation = $xml->saveXml() ? : $content['template'];
-//		var_export( $content['template'] );   
-//		exit();
+	//	var_export( $content['template'] );   
+	//	var_export( $page['url'] );   
+	//	exit();
 
 		// check if theres a page specific theme file
 		$pageThemeFileUrl = $page['url'];
@@ -729,7 +731,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						//		var_export( $whereToGetPlaceholders );
 						//		var_export( $section );
 						//		var_export( $sectionPlaceholder[1] );
-							if( ! empty( $originalFile ) && $sectionPlaceholder[1]  )
+							if( ! empty( $originalFile ) && @$sectionPlaceholder[1]  )
 							{
 								$check = $sectionPlaceholder[1];
 						//		$check = str_replace( $whitespaces, '', $check );
@@ -768,7 +770,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						
 							//	only show this if  && empty( $values )
 						//	if( )
-							if( ! empty( $_GET['pc_load_theme_defaults'] ) || empty( $values ) || $values[0] === false )
+							if( ! empty( $_GET['pc_load_theme_defaults'] ) || empty( $values ) || @$values[0] === false )
 							{
 					//		var_Export( $values );
 					//				var_export( $layoutPreloadedContents[$section] );
@@ -862,7 +864,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					}
 					/* For Layout representation */
 			//		var_export( $values[$numberedSectionName . '_template_defaults'] );
-					$sectionalValues[$numberedSectionName . '_template_defaults'] = $values[$numberedSectionName . '_template_defaults'] ? : $sectionalValues[$numberedSectionName . '_template_defaults'];
+					@$sectionalValues[$numberedSectionName . '_template_defaults'] = $values[$numberedSectionName . '_template_defaults'] ? : $sectionalValues[$numberedSectionName . '_template_defaults'];
 					$sectionalValues[$numberedSectionName . '_template_defaults'] = $sectionalValues[$numberedSectionName . '_template_defaults'] ? : array();
 				//	exit();
 
@@ -1078,15 +1080,22 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						$rPaths[$eachItem] = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths[$eachItem];
 						@Ayoola_Doc::createDirectory( dirname( $rPaths[$eachItem] ) );
 					}
-					file_put_contents( $rPaths['include'], $content['include'] );
-					file_put_contents( $rPaths['template'], $content['template'] );				
-					file_put_contents( $rPaths['data_json'] , $dataToSave );
+
+					//	saving as well to main pages
+					//	don't copy again because we are now loading theme pages automatically
+				//	file_put_contents( $rPaths['include'], $content['include'] );
+				//	file_put_contents( $rPaths['template'], $content['template'] );				
+				//	file_put_contents( $rPaths['data_json'] , $dataToSave );
 				}
 				$rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 				$rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 				$rPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
 				$rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json_content';
 				$rPaths['data-backup'] ='documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data-backup/' . time();
+			}
+			else
+			{
+			//	var_export( $page['url'] );
 			}
 
 			foreach( $rPaths as $eachItem => $eachFile )

@@ -194,6 +194,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				$storage->store( $info );
 				break; 
 			}
+			return false;
 		}
 		while( false );
 //		self::v( $info );

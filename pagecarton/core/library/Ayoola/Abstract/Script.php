@@ -110,6 +110,13 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      * @var array
      */
 	protected static $_files = array();
+
+    /**
+     * All the Script files to include in the safe
+     * 
+     * @var array
+     */
+	protected static $_filesDedicatedUrl = array();
 	
     /**
      * All the Script code lines to write to script
@@ -186,6 +193,7 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 		{
 			static::$_files[$key] = $file;
 		}
+		static::$_filesDedicatedUrl[$key] = Ayoola_Doc::uriToDedicatedUrl( $file );
 	}
 	
     /**
@@ -213,6 +221,15 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 			static::$_codes[$key] = $code;
 		}
 	//	self::$_codes[] = $code;
+	}
+	
+    /**
+     * Returns the Script files markup
+     * 
+     */
+	public static function getFilesUrl()
+    {
+		return array_unique( static::$_filesDedicatedUrl );
 	}
 	
     /**

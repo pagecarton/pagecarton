@@ -71,13 +71,19 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 				$where['layout_name'][] = '';
 			}
 		}
-		$pages = $pages->getDbTable()->select( null, $where );
 
 		if( $themeName )
 		{
 			$themePages = Ayoola_Page_Layout_Pages::getPages( $themeName );
 			foreach( $themePages as $page )
 			{
+			//	var_export( $page );
+				if( is_array( $page ) && ! empty( $page['url'] ) )
+				{
+					$page = $page['url'];
+				//  throw new Exception();
+				  //  var_export( get_ );
+				}
 				if( ! Ayoola_Page_Layout_Pages_Copy::canCopy( $page, $themeName ) )
 				{
 					continue;
@@ -88,8 +94,9 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 			}
 		}
 
+		$pages = $pages->getDbTable()->select( null, $where );
 		$pages = array_merge( $pages, $defaultPages );
-
+	//	var_export( self::getDefaultLayout() );
 		foreach( $pages as $page )    
 		{
 			$page = is_string( $page ) ? $page : $page['url'];
@@ -118,6 +125,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		$this->setPagePaths();
 		$this->setValues();
 		$this->_updateLayoutOnEveryLoad = true;
+		$this->noLayoutView = true;
 		parent::init(); // invoke the template update for this page.           
 		return true;
     } 

@@ -351,7 +351,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			}
 			else
 			{
-				$innerOptions['limit'] = $options['limit'] - $totalRows;
+				@$innerOptions['limit'] = $options['limit'] - $totalRows;
 			}
 			
 			//	

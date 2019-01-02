@@ -81,7 +81,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
     {
 	//	if( ! $data = $this->getIdentifierData() ){ return array(); }
 	//	$dir = dirname( $this->getMyFilename() );
-		if( ! is_dir( $dir ) ) 
+	//	if( ! is_dir( $dir ) ) 
 		{
 			$globalFile = Ayoola_Loader::checkFile( 'documents/layout/' . $themeName . '/template' );
 			if( ! is_file( $globalFile ) )

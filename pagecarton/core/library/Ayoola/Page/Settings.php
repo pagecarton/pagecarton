@@ -64,8 +64,8 @@ class Ayoola_Page_Settings extends Application_Settings_Abstract
 		}
 		//	copy page content from theme
 		$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
-//		var_export( $themeName );
-		$pages = Ayoola_Page_Layout_Pages::getPages( $themeName, 'list' );
+	//	var_export( $themeName );
+	//	$pages = Ayoola_Page_Layout_Pages::getPages( $themeName, 'list' );
 	//	foreach( $pages as $url )
 		{
 			// dont autocreate page again because its creating too many pages
@@ -75,7 +75,7 @@ class Ayoola_Page_Settings extends Application_Settings_Abstract
 
  	//	var_export( __LINE__ );  
 		$class2 = new Ayoola_Page_Editor_Sanitize(); 
-		$class2->sanitize(); 
+		$class2->sanitize( $themeName ); 
 	}    
 	
     /**

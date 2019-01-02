@@ -72,8 +72,8 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 			}
 		//	var_export( $data );
 			//	Using template?
-			$data['width'] = $this->getParameter( 'image_width' ) ? : ( $data['width'] ? : 2100 );
-			$data['height'] = $this->getParameter( 'image_height' ) ? : ( $data['height'] ? : 700 );     
+			@$data['width'] = $this->getParameter( 'image_width' ) ? : ( $data['width'] ? : 2100 );
+			@$data['height'] = $this->getParameter( 'image_height' ) ? : ( $data['height'] ? : 700 );     
 			$data['image_limit'] = $this->getParameter( 'image_limit' ) ? : ( @$data['image_limit'] ? : 12 );
 		//	$data['slideshow_images'] = unserialize( @$data['slideshow_images'] ) ? : array();
 			if( empty( $data['slideshow_image'] ) )

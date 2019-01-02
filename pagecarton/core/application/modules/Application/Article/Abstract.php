@@ -849,7 +849,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$html .= '<' . $link . '>';
 		$html .= '<div  class="pc_theme_parallax_background" style="background-image: linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)  ),    url(\'' . $image . '\'); ">';
         $html .= $data['css_class_of_inner_content'] ? '<div class="' .$data['css_class_of_inner_content'] . '">' : null;
-		$html .= '<div style="float:right;background-color:#000;padding:10px;border-radius:10px;">' . $data['post_type'] . '</div>';
+		$html .= '<div style="float:right;background-color:#000;padding:10px;border-radius:10px;">' . @$data['post_type'] . '</div>';
 		$html .= '<' . $header . '>' . $data['article_title'] . '</' . $header . '>';
 		$html .= $data['article_description'] ? '<br><p>' . $data['article_description'] . '</p>' : null;
 		$html .= $realPost && $data['button_value'] ? '<br><p><button class="pc-btn"> ' . $data['button_value'] . ' </button></p>' : null;
@@ -859,12 +859,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$html .= '<div class="pc_theme_parallax_background" style="font-size:x-small;text-transform:uppercase;background-image: linear-gradient(      rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)  ); ">';
         $html .= $data['css_class_of_inner_content'] ? '<div class="' .$data['css_class_of_inner_content'] . '">' : null;
 
-		$html .= $data['item_old_price'] ? '
+		$html .= @$data['item_old_price'] ? '
 		<span style="font-size:small;">
 		<span class="pc_posts_option_items" style="text-decoration:line-through;" >' . $data['item_old_price'] . '</span> 
 		</span>
 		' : null;
-		$html .= $data['item_price'] ? '
+		$html .= @$data['item_price'] ? '
 		<span style="font-size:small;">
 		<span class="pc_posts_option_items" >' . $data['item_price_with_currency'] . '</span> 
 		</span>

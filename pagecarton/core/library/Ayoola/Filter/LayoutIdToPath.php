@@ -52,6 +52,10 @@
 	
 		public static function getThemeIncludeFile( $themeName, $options, $type = 'include' )
 		{
+		//		var_export( $themeName );  
+		//		var_export( $options );  
+		//		var_export( $type );  
+			//	var_export( file_get_contents( $path ) );
 			$fileC = array();
 			$fPaths = Ayoola_Page_Layout_Pages::getPagePaths( $themeName, '/default-layout' );
 			if( $path = Ayoola_Loader::getFullPath( $fPaths[$type], $options ) )

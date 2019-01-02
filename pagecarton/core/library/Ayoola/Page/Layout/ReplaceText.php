@@ -370,7 +370,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         $percentage = 0;
         $themeInfo = self::getUpdates();
         $themeInfoAll = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => __CLASS__ ) );
-        $themeInfoAll = $themeInfoAll['data'];
+        @$themeInfoAll = $themeInfoAll['data'];
 		if( empty( $themeInfo['dummy_search'] )  )
 		{
 			$percentage += 100;

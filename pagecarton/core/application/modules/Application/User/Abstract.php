@@ -575,7 +575,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				}
 				
 			}
-*/			$personal ? $form->addFieldset( $personal ) : null;
+*/			@$personal ? $form->addFieldset( $personal ) : null;
 	//		var_export( $additionalForms );  
 			foreach( $additionalForms as $formName )
 			{

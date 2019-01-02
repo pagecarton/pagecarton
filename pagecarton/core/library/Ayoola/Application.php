@@ -1197,7 +1197,13 @@ class Ayoola_Application
 	//	var_export( $PAGE_TEMPLATE_FILE );
 	//	var_export( is_file( $PAGE_INCLUDE_FILE ) );
 	//	var_export( is_file( $PAGE_TEMPLATE_FILE ) ); 
-	//	exit(); 
+//	var_export( $uri );
+//	var_export( Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) );
+//	if( stripos( $uri, 'pwa' ) === false )
+	{
+//		exit();
+	}
+//	exit(); 
 		$noRestriction = false;
 		$previewTheme = function() use ( $pagePaths, $uri, &$PAGE_INCLUDE_FILE, &$PAGE_TEMPLATE_FILE )
 		{
@@ -1209,7 +1215,7 @@ class Ayoola_Application
 			}
 			//	page may just be present in the theme
 			$themeName = @$_REQUEST['pc_page_layout_name'];
-			$themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
+			$themeName = $themeName ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
 			$pagePaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 			$pagePaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 			
@@ -1220,10 +1226,15 @@ class Ayoola_Application
 		//	var_export( $pagePaths['template'] );
 		//	var_export( $themeName );
 		//	var_export( $pageThemeFileUrl );
+		//	if( stripos( $pageThemeFileUrl, 'pwa' ) === false )
+			{
+			//	exit();
+			}
 		//	var_export( $PAGE_INCLUDE_FILE );
 		//	var_export( $PAGE_TEMPLATE_FILE );
-			if( ! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE )
+			if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
 			{
+			//	var_export( $themeName );
 				//	not found
 				return false;
 			}
@@ -1233,26 +1244,37 @@ class Ayoola_Application
 		{
 			if( ! empty( $_REQUEST['pc_page_layout_name'] ) )     
 			{
+			//	var_export( $_REQUEST['pc_page_layout_name'] );
 				if( $previewTheme() )
 				{
 					break;
 				}
 			}
-		
-		//	var_export( $pagePaths );
+		//	var_export( Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) );
+		//	if( stripos( $uri, 'pwa' ) === false )
+			{
+			//	var_export( $PAGE_INCLUDE_FILE );
+		//	exit();
+			}
+				
 			if
 			( 
-				! is_file( $PAGE_INCLUDE_FILE ) AND ! is_file( $PAGE_TEMPLATE_FILE )
+				! is_file( $PAGE_INCLUDE_FILE ) OR ! is_file( $PAGE_TEMPLATE_FILE )
 			)
 			{
 				//	not found
 				//	use content of default theme
 				if( $previewTheme() )
 				{
+				//	var_export( $PAGE_INCLUDE_FILE );
+					//		exit();
 					$noRestriction = true;
 					break;
 				}
-				
+			//	var_export( $PAGE_INCLUDE_FILE );
+			//	var_export( $pageThemeFileUrl );
+			//	exit();
+		
 				// intended copy next
 				$intendedCopyPaths = Ayoola_Page::getPagePaths( '/' . trim( $uri . '/default', '/' ) );
 				$PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $intendedCopyPaths['include'], array( 'prioritize_my_copy' => true ) );
@@ -1261,7 +1283,7 @@ class Ayoola_Application
 			//	var_export( $intendedCopyPaths['template'] );
 				if
 				( 
-					! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE
+					! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE
 				)
 				{
 					
@@ -1272,13 +1294,15 @@ class Ayoola_Application
 				//	var_export( $pagePaths['template'] );
 					if
 					( 
-						! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE
+						! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE
 					)
 					{
 						return false;
 					}
 				}
 			}
+	//	var_export( $PAGE_INCLUDE_FILE );     
+	//	var_export( $PAGE_TEMPLATE_FILE );     
 		}
 		while( false );
 	//	var_export( $PAGE_INCLUDE_FILE );     

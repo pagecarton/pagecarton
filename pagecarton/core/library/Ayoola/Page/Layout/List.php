@@ -69,7 +69,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 	//	var_export( $otherThemes );
 		$this->setViewContent( $this->createPrivateList( $myThemes ), true );		
 	//	$this->setViewContent( '<h3>All Themes</h3>' );		
-		if( ! empty( $_GET['mini_info'] ) )
+		if( empty( $_GET['mini_info'] ) )
 		{
 			$allThemes ? $this->setViewContent( $this->createList( $allThemes ) ) : null;		
 		}
@@ -148,7 +148,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 										'Creator' => ' ' 
 									) 
 							);
-		if( ! empty( $_GET['mini_info'] ) )
+		if( empty( $_GET['mini_info'] ) )
 		{
 
 
@@ -177,8 +177,8 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 											'Delete' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="Delete">Delete</a>' ,
 										) 
 								);
-			$list->setKey( $this->getIdColumn() );  
 		}
+		$list->setKey( $this->getIdColumn() );  
 		$list->setNoRecordMessage( 'You have not added any theme yet.' );  
 		$default = array(
 				Ayoola_Page_Editor_Layout::getDefaultLayout() => '<i class="fa fa-check"></i>',
