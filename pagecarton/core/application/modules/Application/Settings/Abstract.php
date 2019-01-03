@@ -87,7 +87,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			$settingsNameToUse = $settingsNameInfo['settingsname_name'];
 			return self::getSettings( $settingsNameToUse, $key );
 		}
-		elseif( $extensionInfo = $table->selectOne( null,  array( 'settings_class' => $class ) ) )
+		elseif( $extensionInfo = Ayoola_Extension_Import_Table::getInstance()->selectOne( null,  array( 'settings_class' => $class ) ) )
 		{
 			return self::getSettings( $extensionInfo['extension_name'], $key );
 		}
