@@ -238,7 +238,8 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		{
 			return false;
 		}
-		if( ! $className::getObjectTitle() )
+	//	var_export( $className::getObjectTitle( false ) );
+		if( ! $className::getObjectTitle( false ) )
 		{
 			return false;
 		}

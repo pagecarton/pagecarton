@@ -126,26 +126,26 @@ class Ayoola_Page_Settings extends Application_Settings_Abstract
 		$fieldset->addLegend( 'Choose a theme for this website' );
  
 		//	Personalization
-	//	Application_Javascript::addFile( '/js/objects/mcColorPicker/mcColorPicker.js' );
-	//	Application_Style::addFile( '/js/objects/mcColorPicker/mcColorPicker.css' );
-	//	$fieldset->addElement( array( 'name' => 'background_color', 'label' => 'Background color', 'placeholder' => '#FFBB33', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['background_color'] ) );
-/* 		$fieldset->addElement( array( 'name' => 'background_image', 'label' => 'Background Image', 'placeholder' => 'e.g. http://domain.tld/path/to/file.jpg', 'type' => 'Hidden', 'value' => @$values['background_image'] ) );
-		$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'background_image' ) : 'background_image' );
+		Application_Javascript::addFile( '/js/objects/mcColorPicker/mcColorPicker.js' );
+		Application_Style::addFile( '/js/objects/mcColorPicker/mcColorPicker.css' );
+		$fieldset->addElement( array( 'name' => 'background_color', 'label' => 'Background color', 'style' => 'max-width:300px;', 'placeholder' => '#FFBB33', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['background_color'] ) );
+	//	$fieldset->addElement( array( 'name' => 'background_image', 'label' => 'Background Image', 'placeholder' => 'e.g. http://domain.tld/path/to/file.jpg', 'type' => 'Hidden', 'value' => @$values['background_image'] ) );
+	//	$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'background_image' ) : 'background_image' );
 	//	var_export( $link );
-		$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html' ), array( 'html' => Ayoola_Doc_Upload_Link::viewInLine( array( 'image_preview' => ( @$values['background_image'] ? : $this->getGlobalValue( 'background_image' ) ), 'field_name' => $fieldName, 'field_name_value' => 'url', 'preview_text' => 'Background Image', 'call_to_action' => 'Change Background Image' ) ) ) ); 
- */		
+	//	$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html' ), array( 'html' => Ayoola_Doc_Upload_Link::viewInLine( array( 'image_preview' => ( @$values['background_image'] ? : $this->getGlobalValue( 'background_image' ) ), 'field_name' => $fieldName, 'field_name_value' => 'url', 'preview_text' => 'Background Image', 'call_to_action' => 'Change Background Image' ) ) ) ); 
+ 		
 	//	$form->addFieldset( $fieldset );  
 		
 	//	if( $this->getGlobalValue( 'background_color' ) || $this->getGlobalValue( 'background_image' ) )
 		{
 		//	$fieldset = new Ayoola_Form_Element;
-/* 			$fieldset->addElement( array( 'name' => 'font_color', 'label' => 'Color of Fonts', 'placeholder' => '#FF0033', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['font_color'] ) ); 
-			$fieldset->addElement( array( 'name' => 'link_color', 'label' => 'Color of Links', 'placeholder' => '#FF00EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color'] ) ); 
-			$fieldset->addElement( array( 'name' => 'link_color_active', 'label' => 'Color of Links (Active)', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_active'] ) ); 
-			$fieldset->addElement( array( 'name' => 'link_color_hover', 'label' => 'Color of Links Text(Hover)', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_hover'] ) ); 
-			$fieldset->addElement( array( 'name' => 'link_color_hover_background', 'label' => 'Color of Links Background (Hover)', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_hover_background'] ) ); 
-			$fieldset->addElement( array( 'name' => 'link_color_visited', 'label' => 'Color of Visited Links', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_visited'] ) );
- */		//	$fieldset->addRequirement( 'font_color', array( 'NotEmpty' => null  ) );
+ 			$fieldset->addElement( array( 'name' => 'font_color', 'label' => 'Color of Fonts', 'style' => 'max-width:300px;', 'placeholder' => '#FF0033', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['font_color'] ) ); 
+		//	$fieldset->addElement( array( 'name' => 'link_color', 'label' => 'Color of Links', 'placeholder' => '#FF00EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color'] ) ); 
+		//	$fieldset->addElement( array( 'name' => 'link_color_active', 'label' => 'Color of Links (Active)', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_active'] ) ); 
+		//	$fieldset->addElement( array( 'name' => 'link_color_hover', 'label' => 'Color of Links Text(Hover)', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_hover'] ) ); 
+		//	$fieldset->addElement( array( 'name' => 'link_color_hover_background', 'label' => 'Color of Links Background (Hover)', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_hover_background'] ) ); 
+		//	$fieldset->addElement( array( 'name' => 'link_color_visited', 'label' => 'Color of Visited Links', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_visited'] ) );
+ 		//	$fieldset->addRequirement( 'font_color', array( 'NotEmpty' => null  ) );
 			$form->addFieldset( $fieldset );
 		}
 		 

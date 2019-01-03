@@ -1572,20 +1572,23 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	}
 	
     /**
-     * Returns _objectTitle will become the form name or id
+     * Returns _objectTitle
      * 
      */
-	 public static function getObjectTitle()
+	 public static function getObjectTitle( $generateName = true )
 	 {
 		if( static::$_objectTitle )
 		{
 			return static::$_objectTitle;
 		}
-		$title = str_ireplace( array( 'Ayoola_', 'PageCarton_', 'Application_', 'Article_', 'Object_', 'Classplayer_', ), '', get_called_class() );  
-		$title = ucwords( implode( ' ', explode( '_', $title ) ) );
-		$title = ucwords( implode( ' ', explode( '-', $title ) ) );
-		
-		self::$_objectTitle = $title;;
+		elseif( $generateName )
+		{
+			$title = str_ireplace( array( 'Ayoola_', 'PageCarton_', 'Application_', 'Article_', 'Object_', 'Classplayer_', ), '', get_called_class() );  
+			$title = ucwords( implode( ' ', explode( '_', $title ) ) );
+			$title = ucwords( implode( ' ', explode( '-', $title ) ) );
+			
+			self::$_objectTitle = $title;;
+		}
 		return self::$_objectTitle;
 	 }
 	

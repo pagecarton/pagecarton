@@ -97,7 +97,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
 		$pages = $filter->filter( $pages );
 
-		$pages += Ayoola_Page_Layout_Pages::getPages( $data['layout_name'], 'list-url' ) ? : array();
+		$pages += Ayoola_Page_Layout_Pages::getPages( @$data['layout_name'] ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ), 'list-url' ) ? : array();
 		asort( $pages );
 		return array_unique( $pages );
 	}

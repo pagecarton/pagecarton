@@ -29,7 +29,15 @@ require_once 'Application/Article/Abstract.php';
 
 class Application_Article_Type_Download extends Application_Article_Type_Abstract
 {
+ 	
     /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Download File'; 
+
+	/**
      * Using another layer of auth for this one
      *
      * @var boolean

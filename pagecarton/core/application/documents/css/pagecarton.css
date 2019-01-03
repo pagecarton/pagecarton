@@ -548,6 +548,7 @@ pc_full_width
 	margin: 1em 0 1em 0;
     color: #000;
     font-weight: bold;
+    display: block;
 
 }         
 

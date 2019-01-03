@@ -34,7 +34,7 @@ class Application_Article_Type_Audio_Play extends Application_Article_Type_Audio
      * 
      * @var string 
      */
-	protected static $_objectTitle = ''; 
+	protected static $_objectTitle = 'Play Audio'; 
 
     /**
      * Using another layer of auth for this one
