@@ -520,18 +520,18 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	self::v( $data['new_badge'] );
 
 				//	get number of views
-					self::getViewsCount( $data );
+			//		self::getViewsCount( $data );
 					if( $this->getParameter( 'get_views_count' ) )
 					{
 						if( ! $this->viewsTable )
 						{
 							$this->viewsTable =  new Application_Article_Views();
 						}
-						$data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ddddddddddddd', 'limit' => $this->getParameter( 'limit_for_views_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_views_count_record_search' ) ? : '100' ) ) );
-						set_time_limit( 0 );
+					//	$data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ddddddddddddd', 'limit' => $this->getParameter( 'limit_for_views_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_views_count_record_search' ) ? : '100' ) ) );
+					//	set_time_limit( 0 );
 					}
 
-					self::getDownloadCount( $data );
+				//	self::getDownloadCount( $data );
 					//	get number of downloads
 					if( $this->getParameter( 'get_download_count' ) && self::isDownloadable( $data ) )
 					{
@@ -539,20 +539,20 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						{
 							$this->downloadTable =  new Application_Article_Type_Download_Table();
 						}
-						$data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'sssdefwefefs', 'limit' => $this->getParameter( 'limit_for_download_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_download_count_record_search' ) ? : '100' ) ) );
-						set_time_limit( 0 );
+					//	$data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'sssdefwefefs', 'limit' => $this->getParameter( 'limit_for_download_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_download_count_record_search' ) ? : '10' ) ) );
+					//	set_time_limit( 0 );
 					}
 				//	var_export( $data );
 					//	get number of downloads
-					self::getAudioPlayCount( $data );
+				//	self::getAudioPlayCount( $data );
 					if( $this->getParameter( 'get_audio_play_count' ) && $data['true_post_type'] == 'audio' )
 					{   
 						if( ! $this->audioTable )
 						{
 							$this->audioTable =  new Application_Article_Type_Audio_Table();
 						}
-						$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '100' ) ) );
-						set_time_limit( 0 );
+					//	$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
+					//	set_time_limit( 0 );
 					}
 					if( $this->getParameter( 'get_comment_count' ) )
 					{   
@@ -560,9 +560,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						{
 							$this->commentTable =  new Application_CommentBox_Table();
 						}
-						$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '100' ) ) );
-						set_time_limit( 0 );
+					//	$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
+					//	set_time_limit( 0 );
 					}
+				//	exit();
 					
 					//	don't cache base64 strings of images and download data
 					unset( $data['document_url_base64'] );

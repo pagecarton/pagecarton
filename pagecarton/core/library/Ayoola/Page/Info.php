@@ -127,7 +127,7 @@ class Ayoola_Page_Info extends PageCarton_Widget
 //     var_export( Ayoola_Page::getCurrentPageInfo() );
             $html = '<div class="pc_theme_parallax_background" style="background-image:     linear-gradient( rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)    ), url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $pageInfo['cover_photo'] ? : $settings['cover_photo'] ) . '&crop=1&max_width=1500&max_height=600\');">'; 
             $html .= $this->getParameter( 'css_class_of_inner_content' ) ? '<div class="' . $this->getParameter( 'css_class_of_inner_content' ) . '">' : null;
-            $html .= '<h1>' . #$pageInfo['title'] . '</h1>';
+            $html .= '<h1>' . @$pageInfo['title'] . '</h1>';
             $html .= $pageInfo['description'] ? '<br><br><p>' . $pageInfo['description'] . '</p>' : null;
             $html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;"><a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $pageInfo['url'] . '&pc_form_element_whitelist=title,description,cover_photo\', \'page_refresh\' );" href="javascript:">[edit page headline and description]</a></p>' : null;
             $html .= $this->getParameter( 'css_class_of_inner_content' ) ? '</div>' : null;
