@@ -154,7 +154,8 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		//	self::v( $class );   
 			return false;
 		}
-		self::unsetParametersThatMayBeDuplicated( $parameters );
+	//	self::unsetParametersThatMayBeDuplicated( $parameters );
+		self::unsetParametersThatMayBeDuplicated( $this->_parameter );
 		$class = $class::viewInLine( $parameters );
 	//	$class = new $class( $parameters );
 	//	$class->setParameter(  );

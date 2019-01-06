@@ -47,8 +47,8 @@ class Application_Profile_View extends Application_Profile_Abstract
      *
      * @var boolean
      */
-	protected static $_accessLevel = 0;
-	
+    protected static $_accessLevel = 0;
+
     /**
      * The method does the whole Class Process
      * 
@@ -96,6 +96,9 @@ class Application_Profile_View extends Application_Profile_Abstract
 		    	$this->_objectTemplateValues['link_to_view_profile'] = '<a style="font-size:x-small;" href="' . $this->_objectTemplateValues['profile_link']  . '"> ' . $this->_objectTemplateValues['profile_link'] . '</a>';
 		//	var_export( $this->_objectTemplateValues );
             }
+
+            // store
+
 		}
 		catch( Exception $e )
 		{ 

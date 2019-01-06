@@ -50,6 +50,21 @@ class Application_Profile_All extends Application_Article_ShowAll
 	protected static $_moduleDir = 'profiles';	
 	
     /**
+     * Identifier for the column to edit
+     * 
+     * @var array
+     */
+	protected $_identifierKeys = array( 'profile_url' );
+	
+    /**
+     * 
+     * 
+     * @var string
+     */
+	protected $_idColumn = 'profile_url';	
+
+	
+    /**
      * Module files directory namespace
      * 
      * @var string

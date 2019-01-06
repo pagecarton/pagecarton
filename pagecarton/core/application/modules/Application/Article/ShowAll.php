@@ -65,13 +65,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	protected $_xml;
 
     /**
-     * 
-     * 
-     * @var string
-     */
-	protected static $_itemName;
-
-    /**
      * Use this to detect the instance of this class for unique pagination
      * 
      * @var int
@@ -495,17 +488,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						}
 						
 					}
-					
-					if( $this->getParameter( 'price_lower_limit' ) && floatval( @$data['item_price'] ) <= floatval( $this->getParameter( 'price_lower_limit' ) ) )
-					{
-						//	freebies 
-						continue;
-					}
-					if( $this->getParameter( 'price_upper_limit' ) && floatval( @$data['item_price'] ) >= floatval( $this->getParameter( 'price_upper_limit' ) ) )
-					{
-						//	freebies 
-						continue;
-					}
 					if( $this->getParameter( 'skip_ariticles_without_cover_photo' ) && ! @$data['document_url_base64'] && ( ! Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ? : @$data['display_picture'] ) ) )
 					{
 						//	Post without image is not allowed 
@@ -517,92 +499,91 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						$data['new_badge'] = $this->getParameter( 'new_badge' ) ? : 'New';
 
 					}
-				//	self::v( $data['new_badge'] );
+					if( ! empty( $data['true_post_type'] ) || empty( $data['not_real_post'] ) )
+					{
 
-				//	get number of views
-			//		self::getViewsCount( $data );
-					if( $this->getParameter( 'get_views_count' ) )
-					{
-						if( ! $this->viewsTable )
+						
+						if( $this->getParameter( 'price_lower_limit' ) && floatval( @$data['item_price'] ) <= floatval( $this->getParameter( 'price_lower_limit' ) ) )
 						{
-							$this->viewsTable =  new Application_Article_Views();
+							//	freebies 
+							continue;
 						}
-					//	$data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ddddddddddddd', 'limit' => $this->getParameter( 'limit_for_views_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_views_count_record_search' ) ? : '100' ) ) );
-					//	set_time_limit( 0 );
-					}
+						if( $this->getParameter( 'price_upper_limit' ) && floatval( @$data['item_price'] ) >= floatval( $this->getParameter( 'price_upper_limit' ) ) )
+						{
+							//	freebies 
+							continue;
+						}
+					//	self::v( $data['new_badge'] );
 
-				//	self::getDownloadCount( $data );
-					//	get number of downloads
-					if( $this->getParameter( 'get_download_count' ) && self::isDownloadable( $data ) )
-					{
-						if( ! $this->downloadTable )
+					//	get number of views
+						self::getViewsCount( $data );
+						if( $this->getParameter( 'get_views_count' ) )
 						{
-							$this->downloadTable =  new Application_Article_Type_Download_Table();
+							if( ! $this->viewsTable )
+							{
+								$this->viewsTable =  new Application_Article_Views();
+							}
+							$data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ddddddddddddd', 'limit' => $this->getParameter( 'limit_for_views_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_views_count_record_search' ) ? : '10' ) ) );
+						//	set_time_limit( 0 );
 						}
-					//	$data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'sssdefwefefs', 'limit' => $this->getParameter( 'limit_for_download_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_download_count_record_search' ) ? : '10' ) ) );
-					//	set_time_limit( 0 );
-					}
-				//	var_export( $data );
-					//	get number of downloads
-				//	self::getAudioPlayCount( $data );
-					if( $this->getParameter( 'get_audio_play_count' ) && $data['true_post_type'] == 'audio' )
-					{   
-						if( ! $this->audioTable )
-						{
-							$this->audioTable =  new Application_Article_Type_Audio_Table();
-						}
-					//	$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
-					//	set_time_limit( 0 );
-					}
-					if( $this->getParameter( 'get_comment_count' ) )
-					{   
-						if( ! $this->commentTable )
-						{
-							$this->commentTable =  new Application_CommentBox_Table();
-						}
-					//	$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
-					//	set_time_limit( 0 );
-					}
-				//	exit();
-					
-					//	don't cache base64 strings of images and download data
-					unset( $data['document_url_base64'] );
-					unset( $data['download_base64'] );  
 
-					if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
-					{
-						$data['true_post_types'] = $postTypeInfo['article_type'];
-						$data['post_type'] = $postTypeInfo['post_type'];
+						self::getDownloadCount( $data );
+						//	get number of downloads
+						if( $this->getParameter( 'get_download_count' ) && self::isDownloadable( $data ) )
+						{
+							if( ! $this->downloadTable )
+							{
+								$this->downloadTable =  new Application_Article_Type_Download_Table();
+							}
+							$data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'sssdefwefefs', 'limit' => $this->getParameter( 'limit_for_download_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_download_count_record_search' ) ? : '10' ) ) );
+						//	set_time_limit( 0 );
+						}
+					//	var_export( $data );
+						//	get number of downloads
+						self::getAudioPlayCount( $data );
+						if( $this->getParameter( 'get_audio_play_count' ) && $data['true_post_type'] == 'audio' )
+						{   
+							if( ! $this->audioTable )
+							{
+								$this->audioTable =  new Application_Article_Type_Audio_Table();
+							}
+							$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
+						//	set_time_limit( 0 );
+						}
+						self::getCommentsCount( $data );
+						if( $this->getParameter( 'get_comment_count' ) )
+						{   
+							if( ! $this->commentTable )
+							{
+								$this->commentTable =  new Application_CommentBox_Table();
+							}
+							$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
+						//	set_time_limit( 0 );
+						}
+					//	exit();
+						$data['engagement_count'] = intval( $data['download_count'] ) + intval( $data['views_count'] ) + intval( $data['comments_count'] ) + intval( $data['audio_play_count'] );
+
+						$data['engagement_count_total'] = intval( $data['download_count_total'] ) + intval( $data['views_count_total'] ) + intval( $data['comments_count_total'] ) + intval( $data['audio_play_count_total'] );
+
+
+
+						//	don't cache base64 strings of images and download data
+						unset( $data['document_url_base64'] );
+						unset( $data['download_base64'] );  
+
+						if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
+						{
+							$data['true_post_types'] = $postTypeInfo['article_type'];
+							$data['post_type'] = $postTypeInfo['post_type'];
+						}
+						else
+						{
+							$data['true_post_types'] = $data['article_type'];
+							$data['post_type'] = $data['article_type'];
+						}
 					}
-					else
-					{
-						$data['true_post_types'] = $data['article_type'];
-						$data['post_type'] = $data['article_type'];
-					}
-					
 					$values[$key] = $data;
-/*					$firstPost = empty( $firstPost ) ? $data['article_url'] : $firstPost;
-
-					//	by default, next is first post
-					if( $data['article_url'] !==  $firstPost ) 
-					{
-						$values[$key]['pc_next_post'] = $firstPost;
-						$singlePostPaginationInfo[$values[$key]['article_url']]['pc_next_post'] = $firstPost;
-					}
-
-
-					if( ! is_null( $previousKey ) )
-					{
-						$values[$key]['pc_previous_post'] = $values[$previousKey]['article_url'];
-						$singlePostPaginationInfo[$values[$key]['article_url']]['pc_previous_post'] = $values[$key]['pc_previous_post'];
-						$singlePostPaginationInfo[$values[$key]['article_url']]['article_url'] = $values[$key]['article_url'];
-						$values[$previousKey]['pc_next_post'] = $values[$key]['article_url'];
-						$singlePostPaginationInfo[$values[$previousKey]['article_url']]['pc_next_post'] = $values[$previousKey]['pc_next_post'];
-					}
-					
-				//	var_export( $values );
-					$previousKey = $key;
-*/				}
+				}
 			}
 	//		var_export( $singlePostPaginationInfo );
 			if( $this->getParameter( 'order_by' ) )
@@ -634,8 +615,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 		
 		//	default at 1800 so it can always cover the screen
-		$maxWith = $this->getParameter( 'cover_photo_width_for_list' ) ? : ( $this->getParameter( 'cover_photo_width' ) ? : ( @$articleSettings['cover_photo_width'] ? : 1500 ) );
-		$maxHeight = $this->getParameter( 'cover_photo_height_for_list' ) ? : ( $this->getParameter( 'cover_photo_height' ) ? : ( @$articleSettings['cover_photo_height'] ? : 600 ) ); 
+		$maxWith = $this->getParameter( 'cover_photo_width_for_list' ) ? : ( $this->getParameter( 'cover_photo_width' ) ? : ( @$articleSettings['cover_photo_width'] ? : 600 ) );
+		$maxHeight = $this->getParameter( 'cover_photo_height_for_list' ) ? : ( $this->getParameter( 'cover_photo_height' ) ? : ( @$articleSettings['cover_photo_height'] ? : 300 ) );    
 
 	//	var_export( $values );
 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) ) 
@@ -1550,6 +1531,63 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( $this->getParameter( 'true_post_type' ) )
 		{
 			$whereClause['true_post_type'][] = $this->getParameter( 'true_post_type' );
+		}
+		if( $this->getParameter( 'trending' ) )
+		{
+			$table = Application_Article_Views::getInstance();
+
+			switch( $this->getParameter( 'trending_key' ) )
+			{
+				case 'views_count':
+
+				break;
+				case 'audio_play_count':
+					$table = Application_Article_Type_Audio_Table::getInstance();
+				break;
+				case 'download_count':
+					$table = Application_Article_Type_Download_Table::getInstance();
+				break;
+				case 'comments_count':
+					$table = Application_CommentBox_Table::getInstance();
+				break;
+			}
+			$noOfTrends = intval( $this->getParameter( 'trending' ) ) > 9 ? $this->getParameter( 'trending' ) : 100;
+			$trendingData = $table->select( null, null, array( 'limit' => $noOfTrends, 'record_search_limit' => $noOfTrends ) );
+		//	self::v( $trendingData );   
+			if( ! function_exists("array_column"))
+			{
+			
+				function array_column( $array, $column_name )
+				{
+					return array_map(function($element) use($column_name){return $element[$column_name];}, $array);
+				}
+			}
+			$trendingPost = array();
+		//	self::v( empty( $trendingData[0][$this->getIdColumn()] ) );   
+		//	self::v( empty( $trendingData[0]['article_url'] ) );   
+			if( empty( $trendingData[0][$this->getIdColumn()] ) && ! empty( $trendingData[0]['article_url'] ) )
+			{
+		//	self::v( empty( $trendingData[0]['article_url'] ) );   
+				foreach( $trendingData as $key => $each )
+				{
+					$trendingData[$key] = Application_Article_Abstract::loadPostData( $each['article_url'] );
+					$trendingData[$key][$this->getIdColumn()] = strtolower( $trendingData[$key][$this->getIdColumn()] );
+					if( empty( $trendingData[$key][$this->getIdColumn()] ) )
+					{
+						unset( $trendingData[$key] );
+					}
+
+		//	self::v( $each['article_url'] );   
+				}
+	//	self::v( $trendingData );   
+			}
+			$trendingPost = array_unique( array_column( $trendingData, $this->getIdColumn() ) );
+
+		//	self::v( $trendingPost );   
+		//	self::v( $this->getIdColumn() );   
+			$whereClause[$this->getIdColumn()] = $trendingPost;
+			@$this->_parameter['order_by'] = $this->_parameter['order_by'] ? : 'engagement_count';
+			@$this->_parameter['inverse_order'] = isset( $this->_parameter['inverse_order'] ) ? $this->_parameter['inverse_order'] : true;
 		}
 		@$postType = $this->getParameter( 'article_types' ) ? : $postType;
 	//	var_export( $postType );

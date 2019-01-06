@@ -97,6 +97,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      * @var string
      */
 	protected $_postTable = 'Application_Article_Table';	
+
+    /**
+     * 
+     * 
+     * @var string
+     */
+	protected static $_itemName;
 	
     /**
      * 
@@ -133,7 +140,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public static function getViewsCount( array & $data )   
 	{
 		//	set this using different method
-	//	self::v( $data );
+		if( static::$_itemName )
+		{
+			return intval( $data['views_count_total'] );
+		}
+	//	self::v( $data['views_count_total'] );
 		if( ! isset( $data['views_count_total'] ) )
 		{
 			$data['views_count'] = count( Application_Article_Views::getInstance()->select( null, array( 'article_url' => $data['article_url'] ) ) );
@@ -151,9 +162,16 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getAudioPlayCount( array & $data )   
 	{
+	//	self::v( $data['audio_play_count_total'] );
+	//	exit();
 		//	set this using different method
+		if( static::$_itemName )
+		{
+			return intval( $data['views_count_total'] );
+		}
 		if( ! isset( $data['audio_play_count_total'] ) )
 		{
+		//	self::v( $data['audio_play_count_total'] );
 			$data['audio_play_count'] = count( Application_Article_Type_Audio_Table::getInstance()->select( null, array( 'article_url' => $data['article_url'] ) ) );
 			$data['audio_play_count_total'] =  $data['audio_play_count'];
 			$secondaryValues = array( 'article_url' => $data['article_url'], 'audio_play_count_total' => $data['audio_play_count_total'] );
@@ -172,6 +190,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getDownloadCount( array & $data )   
 	{
+		if( static::$_itemName )
+		{
+			return intval( $data['views_count_total'] );
+		}
 		//	set this using different method
 		if( ! isset( $data['download_count_total'] ) )
 		{
@@ -190,6 +212,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getCommentsCount( array & $data )   
 	{
+		if( static::$_itemName )
+		{
+			return intval( $data['views_count_total'] );
+		}
 		//	set this using different method
 		if( ! isset( $data['comments_count_total'] ) )
 		{

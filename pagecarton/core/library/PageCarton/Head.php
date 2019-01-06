@@ -62,9 +62,19 @@ class PageCarton_Head extends PageCarton_Widget
 <link rel="canonical" href="' .  Ayoola_Page::getCanonicalUrl() . '" />    
                      
             ' .  Application_Style::getAll() . '';             
-            
+            if( Application_Settings_Abstract::getSettings( 'Page', 'background_color' ) )
+            {
+                $html .= '
+            <style>
+                .pc-bg-color
+                {
+                    background-color: ' . Application_Settings_Abstract::getSettings( 'Page', 'background_color' ) . ';
+                    color: ' . Application_Settings_Abstract::getSettings( 'Page', 'font_color' ) . ';
+                }
+            </style>';
+            }            
+                        
             echo $html;
-            
             // end of widget process
           
 		}  

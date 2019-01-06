@@ -27,6 +27,13 @@ require_once 'Ayoola/Page/Menu/Abstract.php';
 
 class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 {
+
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Navigation';       
 	
     /**
      * Whether class is playable or not

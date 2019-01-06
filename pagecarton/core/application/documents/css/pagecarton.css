@@ -366,8 +366,7 @@ pc_full_width
 .pc-breadcrumb > li + li::before {  
     padding-left: 0.5em;
     padding-right: 0.5em;
-    font-size: smaller;
-    content: ">";
+    content: "/";
 }
 .pc-breadcrumb > .pc-breadcrumb-active {
     list-style: none;
@@ -925,7 +924,7 @@ pc_full_width
 }
 
 .pc_give_space {
-    margin: 1em;  
+    margin: 1em;    
 }
 
 .pc_container {
