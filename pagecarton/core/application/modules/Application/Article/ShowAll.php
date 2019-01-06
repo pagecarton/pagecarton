@@ -1554,14 +1554,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$noOfTrends = intval( $this->getParameter( 'trending' ) ) > 9 ? $this->getParameter( 'trending' ) : 100;
 			$trendingData = $table->select( null, null, array( 'limit' => $noOfTrends, 'record_search_limit' => $noOfTrends ) );
 		//	self::v( $trendingData );   
-			if( ! function_exists("array_column"))
-			{
-			
-				function array_column( $array, $column_name )
-				{
-					return array_map(function($element) use($column_name){return $element[$column_name];}, $array);
-				}
-			}
 			$trendingPost = array();
 		//	self::v( empty( $trendingData[0][$this->getIdColumn()] ) );   
 		//	self::v( empty( $trendingData[0]['article_url'] ) );   

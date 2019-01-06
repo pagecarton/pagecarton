@@ -51,7 +51,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
   //      var_export( $pageInfo );
 
 
-        $fPaths = $tPaths = Ayoola_Page::getPagePaths( $url );
+        $fPaths = $tPaths = Ayoola_Page::getPagePaths( $url ); 
     //    var_export( $tPaths );
         $pageThemeFileUrl = $url;
         if( $pageThemeFileUrl == '/' )

@@ -83,10 +83,19 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 	public function showImages()
     {		
 		$directory = dirname( Ayoola_Loader::checkFile( $this->getFilename() ) );
-		$files = array_unique( Ayoola_Doc::getFilesRecursive( $directory ) );
-	//	var_export( $files );
+		$files = array_unique( Ayoola_Doc::getFilesRecursive( $directory, array( 'whitelist_extension' => self::$_imageExtensions ) ) );
+		
+		//	Show files uploaded normally
+		$uploadedFiles = Ayoola_Doc_Table::getInstance()->select();
+		$uploadedFiles = array_unique( array_column( $uploadedFiles, 'url', 'url' ) );
+		$files = array_unique( $uploadedFiles + $files );
+		//	var_export( $uploadedFiles );  
+	//	var_export( $directory );
+	//	var_export( $this->getFilename() );
 	//	asort( $files );
-		$data = array();
+		$dirForCheck = dirname( $this->getFilename() );
+
+		$done = array();
 		$html = '<div class="pc-notify-info" style="text-align:center;">Click on any image to replace it! <a style="font-size:smaller;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Browser/">More in File Manager</a></div>';
 		foreach( $files as $each )
 		{
@@ -96,7 +105,19 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 				continue;
 			}
 			$uri = Ayoola_Doc::pathToUri( $each );
-			//	var_export( $uri );
+			
+			$eachFile = Ayoola_Doc::getDocumentsDirectory() . $uri;
+			if( ! is_file( $eachFile ) || ! empty( $done[$uri] ) )
+			{
+				continue;
+			}
+			if( strpos( $eachFile, 'documents/layout/' ) && strpos( $eachFile, $dirForCheck ) === false )
+			{
+				//	don't show if we are of a different theme
+				continue;
+			}
+			$done[$uri] = true;
+//	var_export( $uri );
 			$html .= '<a style="display:inline-block;xbackground:#fff;margin:10px;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=' . $uri . '&crop=1\', \'page_refresh\' );" href="javascript:"><img alt="' . $uri . '" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=100&max_height=60&url=' . $uri . '" ></a>';
 		}
 //		$data = self::sortMultiDimensionalArray( $data, 'filename' );
