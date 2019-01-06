@@ -1083,9 +1083,15 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 					//	saving as well to main pages
 					//	don't copy again because we are now loading theme pages automatically
-				//	file_put_contents( $rPaths['include'], $content['include'] );
-				//	file_put_contents( $rPaths['template'], $content['template'] );				
-				//	file_put_contents( $rPaths['data_json'] , $dataToSave );
+
+					//	activated again because of index and co that is still autocopied
+					if( is_file( $rPaths['include'] ) && is_file( $rPaths['template'] ) &&  is_file( $rPaths['data_json'] )  )
+					{
+						//	only update if file exist already
+						file_put_contents( $rPaths['include'], $content['include'] );
+						file_put_contents( $rPaths['template'], $content['template'] );				
+						file_put_contents( $rPaths['data_json'] , $dataToSave );
+					}
 				}
 				$rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 				$rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';

@@ -46,6 +46,31 @@ class Application_Article_Creator extends Application_Article_Abstract
      * The method does the whole Class Process
      * 
      */
+	protected function isAuthorized()
+    {
+		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );  
+		@$articleSettings['allowed_writers'] = $articleSettings['allowed_writers'] ? : array();
+		$articleSettings['allowed_writers'][] = 98; //	subdomain owners can add posts
+		if( ! $this->requireRegisteredAccount() )
+		{
+			return false;
+		}
+		if( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
+		{ 
+			$this->setViewContent( '<span class="badnews">You do not have enough priviledge to publish on this website. </span>', true );
+			return false;     
+		}
+		if( ! $this->requireProfile() )
+		{
+			return false;
+		}
+		return true;
+	}
+	
+    /**
+     * The method does the whole Class Process
+     * 
+     */
 	protected function init()
     {
 		try
@@ -67,18 +92,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 				$joinedType = $realType . ' ('. $postType . ') item'; 
 			}   
 			$joinedType = $joinedType ? : 'Post';
-			@$articleSettings['allowed_writers'] = $articleSettings['allowed_writers'] ? : array();
-			$articleSettings['allowed_writers'][] = 98; //	subdomain owners can add posts
-			if( ! $this->requireRegisteredAccount() )
-			{
-				return false;
-			}
-			if( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
-			{ 
-				$this->setViewContent( '<span class="badnews">You do not have enough priviledge to add a new ' . $joinedType . ' on this website. </span>', true );
-				return false;     
-			}
-			if( ! $this->requireProfile() )
+			if( ! $this->isAuthorized() )
 			{
 				return false;
 			}
