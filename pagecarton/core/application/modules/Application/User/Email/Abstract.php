@@ -240,7 +240,7 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
 			//	Username
 			$fieldset = new Ayoola_Form_Element;
 			$fieldset->placeholderInPlaceOfLabel = true;
-			$fieldset->addElement( array( 'name' => 'username', 'description' => '', 'style' => 'max-width:40%;display:inline;margin-left:0;', 'type' => 'InputText', 'value' => @$values['username'] ) );
+			$fieldset->addElement( array( 'name' => 'username', 'placeholder' => 'example', 'style' => 'text-align:right;padding:1em;padding-right:0;max-width:40%;display:inline;margin-left:0;', 'type' => 'InputText', 'value' => @$values['username'] ) );
 			$fieldset->addRequirement( 'username', array( 'Username' => null ) );
 			$fieldset->addLegend( 'Choose e-mail username' );
 		//	$form->addFieldset( $fieldset );
@@ -248,13 +248,15 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
 			//	Domain
 		//	$fieldset = new Ayoola_Form_Element;
 			$table = Application_Domain::getInstance();
+			$options = array();
 		//	$options = $table->select( null, array( 'sub_domain' => 0 ) );
-			$options = $table->select();
-			$options[] = array( 'domain_name' => Ayoola_Page::getDefaultDomain() );
+		//	$options = $table->select();   
+			$mainDomain = str_ireplace( 'www.', '', Ayoola_Page::getDefaultDomain() );
+			$options[] = array( 'domain_name' => $mainDomain );
 			require_once 'Ayoola/Filter/SelectListArray.php';
 			$filter = new Ayoola_Filter_SelectListArray( 'domain_name', 'domain_name');
 			$options = $filter->filter( $options );
-			$fieldset->addElement( array( 'name' => 'domain', 'type' => 'Select', 'style' => 'max-width:40%;display:inline;margin-left:0;', 'value' => @$values['domain'] ), $options );
+			$fieldset->addElement( array( 'name' => 'domain', 'type' => 'InputText', 'readonly' => 'readonly', 'style' => 'border-color:transparent;background-color:transparent;padding:0;max-width:40%;display:inline;margin-left:0;', 'value' => @$values['domain'] ? :  $mainDomain ), $options );
 	//		$fieldset->addRequirement( 'domain', array( 'ArrayKeys' => $options ) );
 			$fieldset->addLegend( 'Create a new e-mail' );
 			$form->addFieldset( $fieldset );
@@ -296,12 +298,12 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
 		if( ( $this->getGlobalValue( 'editing_options' ) && in_array( 'password', $this->getGlobalValue( 'editing_options' ) ) ) || ! $values )
 		{ 
 			$fieldset = new Ayoola_Form_Element;
-			$fieldset->addElement( array( 'name' => 'password', 'description' => 'Choose a password for the email', 'type' => 'InputPassword', 'value' => @$values['password'] ) );
+			$fieldset->addElement( array( 'name' => 'password', 'placeholder' => 'Choose a password for the email', 'type' => 'InputPassword', 'value' => @$values['password'] ) );
 			$fieldset->addRequirement( 'password', array( 'WordCount' => array( 5, 100 ) ) );
-			$fieldset->addElement( array( 'name' => 'password2', 'description' => 'Confirm Password', 'type' => 'InputPassword', 'value' => @$values['password2'] ) );
+			$fieldset->addElement( array( 'name' => 'password2', 'placeholder' => 'Confirm Password', 'type' => 'InputPassword', 'value' => @$values['password2'] ) );
 			$fieldset->addFilters( array( 'trim' => null ) );
 			$fieldset->addElement( array( 'name' => 'application_id', 'type' => 'Hidden' ) );
-			$fieldset->addLegend( 'Choose a password' );
+		//	$fieldset->addLegend( 'Choose a password' );
 			$form->addFieldset( $fieldset );
 		}
 		$this->setForm( $form );
