@@ -63,7 +63,10 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             if( @$_GET['mode'] === 'publisher' || $this->getParameter( 'publisher_mode' ) )
             { 
                 unset( $stages[1], $stages[2] );
-            }  
+            }
+
+            //  reset keys because those that left
+            $stages = array_values( $stages );
             $html = null;
             $html .= '<ol class="cd-multi-steps text-bottom count">';  
             $lastCompleted = false;
