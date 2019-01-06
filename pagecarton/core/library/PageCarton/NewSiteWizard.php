@@ -59,6 +59,11 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                 array( 'key' => 'Start Publishing', 'title' => 'Start building up the site by adding some structured posts', 'class' => 'Application_Article_Publisher' ), 
                 array( 'key' => 'Share Website', 'title' => 'Your are done building your site. Next is to share with the world with social tools', 'class' => 'Application_Share_Website' ), 
             );
+            
+            if( @$_GET['mode'] === 'publisher' || $this->getParameter( 'publisher_mode' ) )
+            { 
+                unset( $stages[1], $stages[2] );
+            }  
             $html = null;
             $html .= '<ol class="cd-multi-steps text-bottom count">';  
             $lastCompleted = false;

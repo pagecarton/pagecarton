@@ -1087,7 +1087,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					//	activated again because of index and co that is still autocopied
 					if( is_file( $rPaths['include'] ) && is_file( $rPaths['template'] ) &&  is_file( $rPaths['data_json'] )  )
 					{
-						//	only update if file exist already
+						//	only update if files exist already
 						file_put_contents( $rPaths['include'], $content['include'] );
 						file_put_contents( $rPaths['template'], $content['template'] );				
 						file_put_contents( $rPaths['data_json'] , $dataToSave );

@@ -619,6 +619,48 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$maxHeight = $this->getParameter( 'cover_photo_height_for_list' ) ? : ( $this->getParameter( 'cover_photo_height' ) ? : ( @$articleSettings['cover_photo_height'] ? : 300 ) );    
 
 	//	var_export( $values );
+
+		//	calculate  the creator link here because of Application_Article_Publisher
+		//	So it can see $this->_parameter['add_a_new_post_full_url']
+		$where =  $this->_dbWhereClause;
+		$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
+		$newArticleType = ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
+		$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
+		@$newArticleTypeToShow = self::getItemName() ? : ( ucfirst( $postTypeInfo['post_type'] ) ? : 'Item' );
+	//		self::v( $newArticleType );
+	//	self::v( $this->_dbWhereClause );
+	//	self::v( $where );
+		$categoryForNewPost = @array_pop( $where['category_name'] );
+		$addNewPostUrl = ( static::$_newPostUrl ? : ( $this->getParameter( 'add_a_new_post_link' ) ? : '/widgets/Application_Article_Creator/' ) ) . '?';
+		if( $newArticleType )
+		{
+			$addNewPostUrl .= '&article_type=' . $newArticleType . '';
+		}
+		if( $categoryForNewPost )
+		{
+			$addNewPostUrl .= '&category_name=' . $categoryForNewPost . '';
+		}
+		if( $truePostType )
+		{
+			$addNewPostUrl .= '&true_post_type=' . $truePostType . '';
+		}
+		if( $this->getParameter( 'post_type_custom_fields' ) )  
+		{
+			$addNewPostUrl .= '&post_type_custom_fields=' . $this->getParameter( 'post_type_custom_fields' ) . '';
+		}
+		if( $this->getParameter( 'post_type_options' ) )
+		{
+			$addNewPostUrl .= '&post_type_options=' . $this->getParameter( 'post_type_options' ) . '';
+		}
+		if( $this->getParameter( 'post_type_options_name' ) )
+		{
+			$addNewPostUrl .= '&post_type_options_name=' . $this->getParameter( 'post_type_options_name' ) . '';
+		}
+
+		$addNewPostUrl .= '&' . Ayoola_Page::setPreviousUrl() . '&counter=' . $howManyPostsToAdd;
+
+		$this->_parameter['add_a_new_post_full_url'] = $addNewPostUrl;
+
 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) ) 
 		{ 
 			$howManyPostsToAdd = intval( $this->getParameter( 'add_a_new_post' ) );
@@ -632,50 +674,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
 			//	self::v( $tempItem );
 			//	self::v( $howManyPostsToAdd );
-				$tempItem2 = $tempItem;
+			//	$tempItem2 = $tempItem;
 			//	if( is_string( $tempItem2 ) )
 				{
 				//	$tempItem2 = include( $tempItem );
 				}
 			//	if( property_exists( $this, '_itemName' ) )
-				$where =  $this->_dbWhereClause;
-				$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
-				$newArticleType = @$tempItem2['article_type'] ? : ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
-				$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
-				@$newArticleTypeToShow = self::getItemName() ? : ( ucfirst( $postTypeInfo['post_type'] ) ? : 'Item' );
-		//		self::v( $newArticleType );
-			//	self::v( $this->_dbWhereClause );
-			//	self::v( $where );
-				$categoryForNewPost = @array_pop( $where['category_name'] );
-				$addNewPostUrl = ( static::$_newPostUrl ? : ( $this->getParameter( 'add_a_new_post_link' ) ? : '/widgets/Application_Article_Creator/' ) ) . '?';
-				if( $newArticleType )
-				{
-					$addNewPostUrl .= '&article_type=' . $newArticleType . '';
-				}
-				if( $categoryForNewPost )
-				{
-					$addNewPostUrl .= '&category_name=' . $categoryForNewPost . '';
-				}
-				if( $truePostType )
-				{
-					$addNewPostUrl .= '&true_post_type=' . $truePostType . '';
-				}
-				if( $this->getParameter( 'post_type_custom_fields' ) )  
-				{
-					$addNewPostUrl .= '&post_type_custom_fields=' . $this->getParameter( 'post_type_custom_fields' ) . '';
-				}
-				if( $this->getParameter( 'post_type_options' ) )
-				{
-					$addNewPostUrl .= '&post_type_options=' . $this->getParameter( 'post_type_options' ) . '';
-				}
-				if( $this->getParameter( 'post_type_options_name' ) )
-				{
-					$addNewPostUrl .= '&post_type_options_name=' . $this->getParameter( 'post_type_options_name' ) . '';
-				}
-
-				$addNewPostUrl .= '&' . Ayoola_Page::setPreviousUrl() . '&counter=' . $howManyPostsToAdd;
-
-				$this->_parameter['add_a_new_post_full_url'] = $addNewPostUrl;
 				
 				//			$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
 
@@ -1635,9 +1639,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$whereClause['true_post_type'][] = @Ayoola_Application::$GLOBAL['post']['true_post_type'];
 		}
-		if( $this->getParameter( 'post_with_same_article_type' ) && @Ayoola_Application::$GLOBAL['post']['post_with_same_article_type'] )
+		if( $this->getParameter( 'post_with_same_article_type' ) && @Ayoola_Application::$GLOBAL['post']['article_type'] )
 		{
-			$whereClause['post_with_same_article_type'][] = @Ayoola_Application::$GLOBAL['post']['post_with_same_article_type'];
+			$whereClause['article_type'][] = @Ayoola_Application::$GLOBAL['post']['article_type']; 
 		}
 	
 		if( $categoryId || $categoryName )

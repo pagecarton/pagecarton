@@ -130,7 +130,7 @@ class Application_Article_Publisher extends Application_Article_Creator
                                 }
                             //    var_export( get_class( $eachWidget ) );
                                 $html .= '<a style="text-align:center;" class="pc-btn ' .  $cssClass  . '" href="' . Ayoola_Application::getUrlPrefix() . '' . $eachWidget->getParameter( 'add_a_new_post_full_url' ) . '" > 
-                                ' . $postType . '
+                                ' . $postType . ' ' . ( $category ? ' [' . $category . '] ' : $category ) . '
                                 
                                 <br><br>
                                 ' . $values['total_no_of_posts'] . ( $values['total_no_of_posts'] > $noRequired ? null : ( '/' .  $noRequired )  ) . '

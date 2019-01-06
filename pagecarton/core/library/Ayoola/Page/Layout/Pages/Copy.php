@@ -51,7 +51,6 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
   //      var_export( $pageInfo );
 
 
-        $fPaths = $tPaths = Ayoola_Page::getPagePaths( $url ); 
     //    var_export( $tPaths );
         $pageThemeFileUrl = $url;
         if( $pageThemeFileUrl == '/' )
@@ -59,6 +58,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             $pageThemeFileUrl = '/index';
         }
         $fPaths = static::getPagePaths( $themeName, $pageThemeFileUrl );
+    //    var_export();
 
         if( ! Ayoola_Loader::getFullPath( $fPaths['include'], array( 'prioritize_my_copy' => true ) ) )
         {
@@ -89,6 +89,14 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
         {
             return false;
         }
+        $fPaths = $tPaths = Ayoola_Page::getPagePaths( $url ); 
+        $pageThemeFileUrl = $url;
+        if( $pageThemeFileUrl == '/' )
+        {
+            $pageThemeFileUrl = '/index';
+        }
+        $fPaths = static::getPagePaths( $themeName, $pageThemeFileUrl );
+    //    var_export(  $fPaths );
 
         foreach( $fPaths as $key => $each )
         {
