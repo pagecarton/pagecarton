@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: classplayer.php	Tuesday 25th of December 2018 10:09:43 PM	ayoola@ayoo.la $ 
+* @version $Id: classplayer.php	Tuesday 8th of January 2019 10:51:31 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <?php if( ! Ayoola_Application::isXmlHttpRequest() && $_SERVER['HTTP_USER_AGENT'] !== Ayoola_Abstract_Viewable::$userAgent ): // Only show this if this is not a ajax call ?>
@@ -24,36 +24,38 @@
 <body style="margin: 0;">
 	<div class="Ayoola_Page_Layout_Edit_File_contentContainer">
 		<div class="Ayoola_Page_Layout_Edit_File_content">
-		       <div class="Ayoola_Page_Layout_Edit_File_middle">
+		    <div class="Ayoola_Page_Layout_Edit_File_middle">
+				<div class="pc_container">
 <?php endif; ?>
-				<?php
+					<?php
 //header Begins Here
 
 echo ( ! empty( $_f126b093afe0c23f9e3fa2eff412b539 ) &&  is_object( $_f126b093afe0c23f9e3fa2eff412b539 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_f126b093afe0c23f9e3fa2eff412b539->view(), '' ) : null );
 
 //header Ends Here
 ?>
-				<?php
+					<?php
 //middlebar Begins Here
 
 //middlebar Ends Here
 ?>
-				<?php
+					<?php
 //leftbar Begins Here
 
 //leftbar Ends Here
 ?>
-				<?php
+					<?php
 //rightbar Begins Here
 
 //rightbar Ends Here
 ?>  
-				<?php
+					<?php
 //footer Begins Here
 
 //footer Ends Here
 ?>
 <?php if( ! Ayoola_Application::isXmlHttpRequest() && $_SERVER['HTTP_USER_AGENT'] !== Ayoola_Abstract_Viewable::$userAgent ): // Only show this if this is not a ajax call ?>
+				</div>
 			</div>
 		</div>
 	</div>

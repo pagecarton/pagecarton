@@ -926,6 +926,10 @@ pc_full_width
 .pc_give_space {
     margin: 1em;    
 }
+.pc_give_space_top_bottom { 
+    margin-top: 1em;    
+    margin-bottom: 1em;    
+}
 
 .pc_container {
 /*    padding-right: 15px;

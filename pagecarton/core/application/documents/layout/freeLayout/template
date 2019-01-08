@@ -10,14 +10,16 @@
 <body style="margin: 0;">
 	<div class="Ayoola_Page_Layout_Edit_File_contentContainer">
 		<div class="Ayoola_Page_Layout_Edit_File_content">
-		       <div class="Ayoola_Page_Layout_Edit_File_middle">
+		    <div class="Ayoola_Page_Layout_Edit_File_middle">
+				<div class="pc_container">
 <?php endif; ?>
-				%%HEADER%%
-				%%MIDDLEBAR%%
-				%%LEFTBAR%%
-				%%RIGHTBAR%%  
-				%%FOOTER%%
+					%%HEADER%%
+					%%MIDDLEBAR%%
+					%%LEFTBAR%%
+					%%RIGHTBAR%%  
+					%%FOOTER%%
 <?php if( ! Ayoola_Application::isXmlHttpRequest() && $_SERVER['HTTP_USER_AGENT'] !== Ayoola_Abstract_Viewable::$userAgent ): // Only show this if this is not a ajax call ?>
+				</div>
 			</div>
 		</div>
 	</div>

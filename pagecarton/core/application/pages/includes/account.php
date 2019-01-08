@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Sunday 6th of January 2019 09:57:57 PM	ayoola@ayoo.la $ 
+* @version $Id: account.php	Sunday 6th of January 2019 11:05:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -141,15 +141,16 @@ $_3d635a79040269634bf9aece4519b644 = new Ayoola_Page_Editor_Text( array (
 <div style="">
 <a href="{{{post_link}}}" style="text-transform:uppercase;">{{{article_title}}}</a>
 <br>
-<a class="" href="/object/name/Application_Article_Editor?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Edit Post</span> </a>  - 
-<a class="" href="/object/name/Application_Article_Delete?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Delete Post</span> </a>
+<a class="" href="/x/object/name/Application_Article_Editor?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Edit Post</span> </a>  - 
+<a class="" href="/x/object/name/Application_Article_Delete?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Delete Post</span> </a>
 </div>
 <br>',
   'preserved_content' => '<br>
 <div style="">
 <a href="{{{post_link}}}" style="text-transform:uppercase;">{{{article_title}}}</a>
 <br>
-{{{article_description}}}
+<a class="" href="/x/object/name/Application_Article_Editor?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Edit Post</span> </a>  - 
+<a class="" href="/x/object/name/Application_Article_Delete?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Delete Post</span> </a>
 </div>
 <br>',
   'url_prefix' => '/x',
@@ -177,9 +178,14 @@ $_3d635a79040269634bf9aece4519b644 = null;
 
 							}
 							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							if( Ayoola_Page::hasPriviledge( array (
+  0 => '98',
+  1 => '99',
+), array( 'strict' => true ) ) )
 							{
-								
+								if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+								{
+									
 $_d7ccbb0d078f1382556241c0c2a4c9d9 = new Ayoola_Page_Editor_Text( array (
   'editable' => '
 			
@@ -192,17 +198,24 @@ $_d7ccbb0d078f1382556241c0c2a4c9d9 = new Ayoola_Page_Editor_Text( array (
   'widget_options' => 
   array (
     0 => 'wrappers',
+    1 => 'privacy',
+  ),
+  'object_access_level' => 
+  array (
+    0 => '98',
+    1 => '99',
   ),
   'wrapper_name' => '',
 ) );
 
-							}
-							else
-							{
-								
+								}
+								else
+								{
+									
 $_d7ccbb0d078f1382556241c0c2a4c9d9 = null;
 
-							}
+								}
+							}    
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{

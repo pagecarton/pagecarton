@@ -1560,7 +1560,7 @@ class Ayoola_Application
 		{ 
 			return self::$_presentUri[$url]; 
 		}
-		$url = $url ? : self::getRequestedUri();
+		$url = $url ? : self::getRequestedUri();  
 		require_once 'Ayoola/Filter/Uri.php';
 		$filter = new Ayoola_Filter_Uri;
 		$result = $filter->filter( $url );

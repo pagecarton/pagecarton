@@ -724,7 +724,14 @@ ayoola.div =
 					try
 					{
 					//	alert( window.parent.ayoola.spotLight.close );  
-						window.parent.ayoola.spotLight.close();
+
+						//	parent is closing everything in browse
+					//	window.parent.ayoola.spotLight.close();
+
+						//	need to be set here to work for browse
+						ayoola.style.removeClass( window.parent.document.body, "pc_no_scroll" );
+						ayoola.style.removeClass( window.parent.document.body.parentNode, "pc_no_scroll" );
+						ayoola.spotLight.close();
 					}
 					catch( e )
 					{
