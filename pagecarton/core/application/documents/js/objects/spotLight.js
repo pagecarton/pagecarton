@@ -20,6 +20,7 @@ ayoola.spotLight =
 	spotLightClassName: 'spotLight', //	Classname of the spotlight
 	iframeStyle: 'width: 100% ! important; border: medium none ! important; overflow: auto ! important; height: 90% ! important;', //	Classname of the spotlight
 	splashScreenObject: new Object, //	Classname of the spotlight
+	delete: null, //	Classname of the spotlight
 	instance: new Object, //	Classname of the spotlight
 	
 	
@@ -263,15 +264,16 @@ ayoola.spotLight =
 	//	changeElement.submit();
 	//	ayoola.events.add( deleteButton, 'click', function(){ ayoola.spotLight.close(); } );
 	//	var_export( changeElementId );
-		ayoola.events.add( deleteButton, 'click', function()
+		var deleteIt = function()
 		{ 
-		//	alert();
+		//	alert( changeElementId );
 			ayoola.style.removeClass( document.body, "pc_no_scroll" );
 			ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
-	//		alert( document.body.className );
 			ayoola.xmlHttp.refreshElement( changeElementId ); 
 			ayoola.xmlHttp.refreshElement( changeElement );
-		} );
+		}
+		ayoola.spotLight.delete = deleteIt;	
+		ayoola.events.add( deleteButton, 'click', deleteIt );
 	//	target.href = 'javascript:'; 
 	//	var elementPosition = ayoola.spotLight.setPosition( element );
 	//	ayoola.events.add( deleteButton, 'click', function(){ ayoola.xmlHttp.refreshElement( changeElement ); } );
@@ -279,6 +281,7 @@ ayoola.spotLight =
 		{ 
 			if( confirm( "Close the modal box?" ) )
 			{
+				deleteIt();
 				elementContainer.parentNode.removeChild( elementContainer ); 
 				ayoola.style.removeClass( document.body, "pc_no_scroll" );
 				ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
@@ -404,6 +407,12 @@ ayoola.spotLight =
 	//	Returns the spotlight element
 	close: function()
 	{
+		if( parent.ayoola.spotLight.delete )
+		{
+		//	alert( parent.ayoola.spotLight.delete );
+			parent.ayoola.spotLight.delete();
+			return true;
+		}
 	//	alert( ayoola.spotLight.SpotLight );
 		element = parent.ayoola.spotLight.background;
 	//	parent.ayoola.spotLight.background.parentNode.innerHTML = '';

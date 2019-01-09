@@ -55,6 +55,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 			//	ALLOW THE USE OF CLASS_NAME
 		//			var_export( $object );
 				$identifier = null;
+
 				if( @$_REQUEST['object_name'] )
 				{ 
 					$identifier = array( 'class_name' => $_REQUEST['object_name'] );
@@ -101,7 +102,54 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 						{
 							$playMode = $_REQUEST['pc_widget_output_method'];
 						}
-						$this->setViewContent( $identifier['class_name']::viewInLine( array( 'play_mode' => @$playMode ) ), true );
+						$classToPlay = new $identifier['class_name']( array( 'play_mode' => @$playMode ) );
+		
+						$this->setViewContent( $classToPlay->view(), true );
+						if( @$_REQUEST['close_on_success'] )
+						{ 
+						//	if( Ayoola_Loader::loadClass( $classToPlay ) )
+							{
+								if( method_exists( $classToPlay, 'getPercentageCompleted' ) )
+								{
+									$percentage = $classToPlay::getPercentageCompleted();
+								}
+							}			
+							if( $classToPlay->getForm()->getValues() )
+							{
+								Application_Javascript::addCode(
+									'
+										ayoola.events.add
+										(
+											window, "load", function(){ 
+												ayoola.spotLight.close();
+												parent.ayoola.spotLight.close();
+											} 
+										);
+									'
+								);
+							}
+							elseif( $percentage == 100 )
+							{
+								Application_Javascript::addCode(
+									'
+										ayoola.events.add
+										(
+											window, "load", function(){
+											//	alert( document.getElementsByClassName( "goodnews" ) );
+											//	alert( document.getElementsByClassName( "goodnews" ).length );
+												if( document.getElementsByClassName( "goodnews" ).length == 1 )
+												{
+													ayoola.spotLight.close();
+													parent.ayoola.spotLight.close();
+												}
+
+											} 
+										);
+									'
+								);
+							}
+						}
+					//	$classToPlay	$this->setViewContent( $identifier['class_name']::viewInLine(  ), true );
 						if( ! $title = $identifier['class_name']::getObjectTitle() )
 						{
 							$title = $identifier['class_name'];

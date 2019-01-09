@@ -93,7 +93,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             file_put_contents( $filename, $content['response'] );
             $values = static::getOtherInstallOptions( $filename );
 
-            $class = new static::$_pluginClass( array( 'no_init' => true, 'fake_values' => $values, 'path' => $filename, ) );
+            $class = new static::$_pluginClass( array( 'no_init' => true, 'fake_values' => $values, 'path' => $filename, ) ); 
             $class->fakeValues = $values;
             $class->init();
         //     var_export( $class->getForm()->getValues() );
@@ -164,7 +164,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             {
           //     var_export( $each );
                 $data[] = array(
-                    'url' => '?category=' . $each['category_name'] . '',
+                    'url' => '?category=' . $each['category_name'] . '&' . http_build_query( $_GET ) . '',
                     'option_name' => $each['article_title'],
                     'title' => $each['article_title'],
                    
@@ -199,7 +199,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 			$this->_dbData = $data;
 			return true;
 		}
-		$storage = self::getObjectStorage( array( 'id' => 'cssdcffw' . @$_GET['category'], 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
+		$storage = self::getObjectStorage( array( 'id' => 'cssdcf-fw' . @$_GET['category'], 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
 		if( ! $data = $storage->retrieve() )
         {
             $feed = 'https://' . static::$_site . '/widgets/Application_Article_RSS?category=' . @$_GET['category'];
@@ -212,7 +212,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             {
                 $each = (array) $each;
                 $data[] = array(
-                    'article_url' => '?title=' . $each['title'] . '&layout_type=upload&install=' . $each['guid'],
+                    'article_url' => '?title=' . $each['title'] . '&layout_type=upload&install=' . $each['guid'] . '&' . http_build_query( $_GET ),
                 //   'article_url' => $each['link'], 
                     'guid' => $each['guid'],
                     'article_title' => $each['title'],
