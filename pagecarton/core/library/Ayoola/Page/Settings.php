@@ -25,7 +25,7 @@ require_once 'Ayoola/Abstract/Playable.php';
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Ayoola_Page_Settings extends Application_Settings_Abstract
+class Ayoola_Page_Settings extends PageCarton_Settings
 {
 	
     /**
@@ -153,5 +153,22 @@ class Ayoola_Page_Settings extends Application_Settings_Abstract
 		//		$form->addFieldset( $fieldset );
 	//	$this->setForm( $form );
     } 
+		
+    /**
+     * 
+     * 
+     */
+	public static function getPercentageCompleted()
+    {
+		$percentage = 0;
+		if( $defaultLayout = Application_Settings_CompanyInfo::getSettings( 'Page', 'default_layout' ) )
+		{
+			if( Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $defaultLayout ) ) )
+			{
+				$percentage += 100;
+			}
+		}
+		return $percentage;
+	}
 	// END OF CLASS
 }

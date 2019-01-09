@@ -53,7 +53,7 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             $stages = array(
                 array( 'key' => 'Basic Information', 'title' => 'Set site basic information', 'class' => 'Application_Personalization' ),
                 array( 'key' => 'Browse Themes', 'title' => 'Choose from hundreds of great themes for your site', 'class' => 'Ayoola_Page_Layout_Repository' ),
-                array( 'key' => 'Choose a Theme', 'title' => 'Make a theme the default site theme', 'class' => 'Ayoola_Page_Layout_List' ),
+                array( 'key' => 'Choose a Theme', 'title' => 'Make a theme the default site theme', 'class' => 'Ayoola_Page_Settings' ),
                 array( 'key' => 'Create Content', 'title' => 'Replace dummy text content', 'class' => 'Ayoola_Page_Layout_ReplaceText' ),
                 array( 'key' => 'Update Images', 'title' => 'Change some theme dummy pictures', 'class' => 'Ayoola_Page_Layout_Images' ),
                 array( 'key' => 'Start Publishing', 'title' => 'Start building up the site by adding some structured posts', 'class' => 'Application_Article_Publisher' ), 
@@ -102,7 +102,6 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                     $lastCompleted = false;
                     $break = true;
                     $html .= '<li class="current"><em><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?mini_info=1&close_on_success=1\', \'page_refresh\' );" href="javascript:;">' . $each['key'] . '</a></em></li>';
-
                 }
                 else
                 {
