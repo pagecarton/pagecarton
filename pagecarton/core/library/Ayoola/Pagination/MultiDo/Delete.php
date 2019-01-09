@@ -44,11 +44,10 @@ class Ayoola_Pagination_MultiDo_Delete extends PageCarton_Widget
             //  Code that runs the widget goes here...
 
             //  Output demo content to screen
-     //       var_export( $_REQUEST );
+        //    var_export( $_REQUEST );
             $class = @$_GET['list_name'];
-            if( ! Ayoola_Object_Embed::isWidget( $class ) )
+            if( ! Ayoola_Object_Embed::isWidget( $class, false ) )
             {
-          //      var_export( $className );
                 $this->setViewContent( '<div class="badnews">Items does not support multiple delete.</div>', true );
                 return false;
             }
@@ -66,7 +65,7 @@ class Ayoola_Pagination_MultiDo_Delete extends PageCarton_Widget
                 }
                 $deleteClass = implode( '_', $classNameArray ) . '_Delete';
             }
-            if( ! Ayoola_Object_Embed::isWidget( $deleteClass ) )
+            if( ! Ayoola_Object_Embed::isWidget( $deleteClass, false) )
             {
                 $this->setViewContent( '<div class="badnews">Items does not support multiple delete.</div>', true );
                 return false;

@@ -220,7 +220,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
      * @param mixed Object
      * @return bool
      */
-    public static function isWidget( $className )
+    public static function isWidget( $className, $deepCheck = true )
 	{
 		if( ! Ayoola_Loader::loadClass( $className ) )
 		{
@@ -240,7 +240,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			return false;
 		}
 	//	var_export( $className::getObjectTitle( false ) );
-		if( ! $className::getObjectTitle( false ) )
+		if( $deepCheck && ! $className::getObjectTitle( false ) )
 		{
 			return false;
 		}
