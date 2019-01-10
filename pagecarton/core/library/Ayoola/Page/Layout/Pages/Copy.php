@@ -146,6 +146,15 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             $class->init(); // invoke the template update for this page.
 */        //    $paths = $this->getPageFilesPaths( $values['origin'] );
 
+
+            //  create here for compatibility. Pages copied before will keep asking for password
+            $class = new Ayoola_Page_Editor_Sanitize(  array( 'no_init' => true, 'auto_create_page' => true )  );
+            if( ! $pageInfo = $class->sourcePage( $url ) )
+            {
+                return false;  
+            }
+
+
             if( self::this( $url, $data['layout_name'] ) )
             {
                 $this->setViewContent( '<p class="goodnews">"' . $url . '" page copied successfully.</p>', true ); 
