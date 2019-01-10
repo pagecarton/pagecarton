@@ -110,7 +110,7 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
 					header( 'Content-Description: File Transfer' );
 					header( 'Content-Type: ' . $this->getContentType( $path ) );
 					header( 'Content-Transfer-Encoding: binary' );
-					header( 'Content-Length: ' . filesize( $path ) );
+			//		header( 'Content-Length: ' . filesize( $path ) );
 					readfile( $path );
 			}
 		}

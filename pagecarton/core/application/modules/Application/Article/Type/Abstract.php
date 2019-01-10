@@ -126,7 +126,7 @@ abstract class Application_Article_Type_Abstract extends Application_Article_Abs
 			header('Expires: 0');
 			header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
 			header('Pragma: public');
-			header( 'Content-Length: ' . strlen( $result['data'] ) );
+		//	header( 'Content-Length: ' . strlen( $result['data'] ) );
 			ob_clean();
 			flush();
 			echo $result['data'];

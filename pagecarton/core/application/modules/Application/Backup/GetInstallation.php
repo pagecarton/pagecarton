@@ -159,7 +159,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
 
             //  Output demo content to screen
             header('Content-Type: application/zip');
-            header('Content-Length: ' . filesize($file));
+        //    header('Content-Length: ' . filesize($file));
             header('Content-Disposition: attachment; filename="pagecarton-' . PageCarton::VERSION . '.zip"');
             readfile($file);  
             unlink($file); 

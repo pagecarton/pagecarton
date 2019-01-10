@@ -610,8 +610,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ? : 98 )  )
 				{
 					$html .= '
-					<a  title="Upload new file" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
-							Upload
+					<a  title="Upload new file" style="cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
+						<i class="fa fa-arrow-up pc_give_space"></i>	Upload
 					</a>
 					'; 
 				}
@@ -621,8 +621,8 @@ class Ayoola_Form_Element extends Ayoola_Form
  				if( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_viewers'] ? : 98 ) && ! @$element['data-allow_base64'] )
 				{ 
 					$html .= '
-					<a title="Browse Existing files on site" style="cursor: pointer;max-height:50px;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
-						Browse
+					<a title="Browse Existing files on site" style="cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
+					<i class="fa fa-eye pc_give_space"></i>	Browse
 					</a>
 					
 					'; 
@@ -740,7 +740,7 @@ class Ayoola_Form_Element extends Ayoola_Form
     	$html = $this->useDivTagForElement ? "<div id='{$element['id']}_container'>\n" : null;
    //     $html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
 		$html .= self::$_placeholders['badnews'];
-		$html .= "<input id='{$element['id']}' name='{$element['name']}' type='file' />\n";
+		$html .= "<input id='{$element['id']}' name='{$element['name']}' type='file' >\n";
 		$html .= $this->useDivTagForElement ? "</div>\n" : null;
 		 return $html;
     }
@@ -750,7 +750,19 @@ class Ayoola_Form_Element extends Ayoola_Form
 	//	var_export( $element );
     	$html = null;
   //  	$html = $this->useDivTagForElement ? "<span id='{$element['id']}_container'>\n" : null;
-		$html .= "<input " . self::getAttributesHtml( $element ) . " type='submit' />\n";
+		$html .= "<input " . self::getAttributesHtml( $element ) . " type='submit' >\n";
+//		$html .= $this->useDivTagForElement ? "</span>\n" : null;
+		return $html;
+    }
+	
+    public function addSubmitButton(array $element)
+    {
+	//	var_export( $element );
+    	$html = null;
+  //  	$html = $this->useDivTagForElement ? "<span id='{$element['id']}_container'>\n" : null;
+		$value = html_entity_decode( $element['value'] );
+		unset( $element['value'] );
+		$html .= "<button " . self::getAttributesHtml( $element ) . " type='submit'>" . $value . "</button>";
 //		$html .= $this->useDivTagForElement ? "</span>\n" : null;
 		return $html;
     }

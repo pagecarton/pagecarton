@@ -466,17 +466,17 @@ pc_full_width
 }
 .pc-form2 legend, .pc-form2 h2{
     background: inherit;
-    /*text-transform: uppercase;*/
+    text-transform: uppercase;
     /* font-family: 'open_sansregular', sans-serif; */
     color: inherit;
     font-size: 21px;
     font-weight: 100;
-    padding: 30px;
+    padding: 21px 0;
     border-top: 0;
     border-bottom: 0;
 	/*width: 100%;*/
     display: block !important;
-    background-color: #eee;
+    /* background-color: #eee; */
 }
 .pc-form2 input[type="text"],
 .pc-form2 input[type="date"],
@@ -930,7 +930,12 @@ pc_full_width
     margin-top: 1em;    
     margin-bottom: 1em;    
 }
-
+.pc_inline_block {
+    text-align:center;
+    display: inline-block;
+    width: 120px;
+    margin: 0.5em 0;
+}
 .pc_container {
 /*    padding-right: 15px;
     padding-left: 15px;

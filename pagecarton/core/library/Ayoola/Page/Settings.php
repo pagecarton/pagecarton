@@ -108,22 +108,29 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 	//	$option = $filter->filter( $option );
 		$class = null; 
 	//	var_export( $option );
-		array_unshift( $option, array( 'layout_name' => '', 'layout_label' => 'PageCarton Default', ) );   
+		array_unshift( $option, array( 'layout_name' => 'bootstrapbasic', 'layout_label' => 'PageCarton Default', ) );   
 		foreach( $option as $each )
 		{
 			$class = $each['layout_name'] === Ayoola_Page_Editor_Layout::getDefaultLayout() ? 'defaultnews' : 'normalnews';  
+		//	$layouts[$each['layout_name']] = '
+		//	<div class="' . $class . '" name="layout_screenshot" onClick="this.parentNode.parentNode.click(); ayoola.div.selectElement( { element: this, selectMultiple: false } ); " style="display:inline-block;text-align:center;padding:3em 2em 3em 2em; xwidth:100px; overflow:hidden;  background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=' . ( $each['layout_name'] ) . '\');  background-size: cover;  color: #fff !important; cursor:pointer; ">
+		//	' . $each['layout_label'] . '
+		//	</div>';
 			$layouts[$each['layout_name']] = '
-			<div class="' . $class . '" name="layout_screenshot" onClick="this.parentNode.parentNode.click(); ayoola.div.selectElement( { element: this, selectMultiple: false } ); " style="display:inline-block;text-align:center;padding:3em 2em 3em 2em; xwidth:100px; overflow:hidden;  background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=' . ( $each['layout_name'] ) . '\');  background-size: cover;  color: #fff !important; cursor:pointer; ">
-			' . $each['layout_label'] . '
-			</div>';
-		//	$layouts[$each['layout_name']] = $each['layout_name'];
+					<div style="cursor:pointer;" class="pc_inline_block ' . $class . '" name="layout_screenshot" onClick="this.parentNode.parentNode.click(); ayoola.div.selectElement( { element: this, selectMultiple: false } ); ">
+						<span style="font-size:20px;"><img height="100" alt="" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?url=/layout/' . $each['layout_name'] . '/screenshot.jpg&max_width=900&max_height=600;" ></span>
+						<br>
+						<div  class="pc_give_space" style="height:2em;overflow:hidden;"> ' . $each['layout_label'] . ' </div>
+					</div>
+				';
+//			$layouts[$each['layout_name']] = $each['layout_name'];
 		}
-		$fieldset->addElement( array( 'name' => 'default_layout', 'required' => 'required', 'label' => 'Select a theme', 'title' => 'Select this', 'type' => 'Radio', 'style' => 'display:none;', 'value' => @$values['default_layout'] ), $layouts );
+		$fieldset->addElement( array( 'name' => 'default_layout', 'label' => 'Default Theme', 'title' => 'Select this', 'type' => 'Radio', 'style' => 'display:none;', 'value' => @$values['default_layout'] ), $layouts );
 		$fieldset->addRequirement( 'default_layout','InArray=>' . implode( ';;', array_keys( $layouts ) ) );
 		
 		
 		
-		$fieldset->addLegend( 'Choose a theme for this website' );
+		$fieldset->addLegend( 'Customize Site Pages' );
  
 		//	Personalization
 		Application_Javascript::addFile( '/js/objects/mcColorPicker/mcColorPicker.js' );

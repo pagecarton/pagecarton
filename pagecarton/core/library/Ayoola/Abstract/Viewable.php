@@ -1820,7 +1820,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$this->_objectData = array_intersect_key( $this->_objectData, $whitelist );
 				}
 				$dataToSend = json_encode( $this->_objectData );
-				header( 'Content-Length: ' . strlen( $dataToSend ) );
+
+				//	json data was being truncated
+			//	header( 'Content-Length: ' . strlen( $dataToSend ) );
 				echo $dataToSend;
 				
 				//	Log early before we exit
@@ -1845,7 +1847,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$this->_objectData = array_intersect_key( $this->_objectData, $whitelist );
 				}
 				$dataToSend = json_encode( $this->_objectData );
-				header( 'Content-Length: ' . strlen( $dataToSend ) );
+			//	header( 'Content-Length: ' . strlen( $dataToSend ) );
 				
 				echo $dataToSend;
 				//	Log early before we exit
@@ -1882,7 +1884,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	var_export( $encrypted );
 			//	echo $dataToSend;
 			//	echo base64_encode( $encrypted );
-				header( 'Content-Length: ' . strlen( $encrypted ) );
+			//	header( 'Content-Length: ' . strlen( $encrypted ) );
 				echo $encrypted;
 				//	Log early before we exit
 				Ayoola_Application::log();
@@ -1893,7 +1895,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			break;
 			case static::PLAY_MODE_PHP:
 				$dataToSend = serialize( $this->_objectData );
-				header( 'Content-Length: ' . strlen( $dataToSend ) );
+			//	header( 'Content-Length: ' . strlen( $dataToSend ) );
 				echo $dataToSend;
 				//	Log early before we exit
 				Ayoola_Application::log();

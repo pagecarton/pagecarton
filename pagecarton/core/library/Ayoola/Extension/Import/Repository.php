@@ -143,23 +143,17 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
      * Overides the parent class
      * 
      */
-	public static function getMenu()
+	public static function getMenuOptions()
     {
-		$storage = self::getObjectStorage( array( 'id' => 'menu=ffd', 'device' => 'File', 'time_out' => 446000, ) );
+		$storage = self::getObjectStorage( array( 'id' => 'mdenu=ddffd', 'device' => 'File', 'time_out' => 446000, ) );
 		if( ! $data = $storage->retrieve() )
         {
-            $feed = 'https://' . static::$_site . '/tools/classplayer/get/name/Application_Category_ShowAll?pc_widget_output_method=JSON';
-            $feed = self::fetchLink( $feed, array( 'time_out' => 28800, 'connect_time_out' => 28800, ) );
+            $url = 'https://' . static::$_site . '/tools/classplayer/get/name/Application_Category_ShowAll?pc_widget_output_method=JSON';
+            $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
             $allFeed = json_decode( $feed, true );
-          //     var_export( $allFeed );
+            //   var_export( $url );
+            //   var_export( $allFeed );
             $data = array();
-            $data[] = array(
-                'url' => '?',
-                'option_name' => 'All Categories',
-                'title' => 'All Categories',
-                
-                'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),
-            );
             foreach( $allFeed as $each )
             {
           //     var_export( $each );
@@ -168,13 +162,31 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
                     'option_name' => $each['article_title'],
                     'title' => $each['article_title'],
                    
-                    'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),
+                    'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),  
                 );
             }
           //     var_export( $data );
 
             $storage->store( $data );
         }
+        return $data;
+    }
+    
+    /**
+     * Overides the parent class
+     * 
+     */
+	public static function getMenu()
+    {
+        $data = static::getMenuOptions();
+        $data[] = array(
+            'url' => '?',
+            'option_name' => 'All Categories',
+            'title' => 'All Categories',
+            
+            'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),
+        );
+
             $menu = Ayoola_Menu::viewInLine( array(
                                     'raw-options' => $data,
                                      'template_name' => 'HorizontalGrayish',
