@@ -86,9 +86,12 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 		$files = array_unique( Ayoola_Doc::getFilesRecursive( $directory, array( 'whitelist_extension' => self::$_imageExtensions ) ) );
 		
 		//	Show files uploaded normally
-		$uploadedFiles = Ayoola_Doc_Table::getInstance()->select();
-		$uploadedFiles = array_unique( array_column( $uploadedFiles, 'url', 'url' ) );
-		$files = array_unique( $uploadedFiles + $files );
+		if( self::getPercentageCompleted() == 100 )
+		{
+			$uploadedFiles = Ayoola_Doc_Table::getInstance()->select();
+			$uploadedFiles = array_unique( array_column( $uploadedFiles, 'url', 'url' ) );
+			$files = array_unique( $uploadedFiles + $files );
+		}
 		//	var_export( $uploadedFiles );  
 	//	var_export( $directory );
 	//	var_export( $this->getFilename() );

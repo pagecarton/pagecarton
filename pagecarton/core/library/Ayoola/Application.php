@@ -1133,9 +1133,10 @@ class Ayoola_Application
 					$requestedUri = explode( $multiSiteDir, $requestedUri );
 				//	var_export( $requestedUri ); 
 					array_shift( $requestedUri );
-				//	var_export( $requestedUri ); 
-					$requestedUri = implode( $multiSiteDir, $requestedUri );
-					array_shift( $requestedUri );
+				//	var_export( $requestedUri );  
+				//	$requestedUri = implode( $multiSiteDir, $requestedUri );
+					$requestedUri = array_shift( $requestedUri );
+				//	var_export( $requestedUri );  
 					self::$_requestedUri = $requestedUri;
 					self::$_presentUri = null;
 					
@@ -1332,7 +1333,7 @@ class Ayoola_Application
 		}
 
 		//	Client-side	scripting		
-		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . filemtime( __FILE__ ) );
+		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . filemtime( __FILE__ ) );  
 		Application_Style::addFile( Ayoola_Page::getPageCssFile() );
 		Application_Style::addFile( '//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css' );
 

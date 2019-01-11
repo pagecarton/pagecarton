@@ -412,7 +412,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		}
 		elseif( is_numeric( $this->getParameter( 'min_quantity' ) ) ||  is_numeric( $this->getParameter( 'max_quantity' ) ) )
 		{
-			var_export( $subscriptionData['item_min_quantity'] );
+		//	var_export( $subscriptionData['item_min_quantity'] );
 			$min = 1;
 			if( is_numeric( $this->getParameter( 'min_quantity' ) ) )
 			{
@@ -571,7 +571,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			}
 			if( ! $optionsForSelect )
 			{
-				return false;
+				return false;  
 			}
 		} 
 		else

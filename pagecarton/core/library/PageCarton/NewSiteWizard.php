@@ -44,8 +44,11 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             //  Code that runs the widget goes here...
             if( ! self::hasPriviledge( 98 ) )
             {
-                $this->setViewContent( Ayoola_Access_Login::viewInLine() ); 
-                return false;
+                $this->setViewContent( Ayoola_Access_Login::viewInLine( array( 'no_redirect' => true ) ) ); 
+                if( ! self::hasPriviledge( 98 ) )
+                {
+                    return false;
+                }
             }
 
             Application_Personalization::viewInLine();
@@ -94,14 +97,14 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                 if( $percentage == 100 && ! $break )
                 {
                     $lastCompleted = true;
-                    $html .= '<li class="visited"><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?mini_info=1&close_on_success=1\', \'page_refresh\' );" href="javascript:;">' . $each['key'] . '</a></li>';
+                    $html .= '<li class="visited"><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;">' . $each['key'] . '</a></li>';
                 }
                 elseif( $lastCompleted == true || $key === 0 )
                 {
                     $class = $each['class'];
                     $lastCompleted = false;
                     $break = true;
-                    $html .= '<li class="current"><em><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?mini_info=1&close_on_success=1\', \'page_refresh\' );" href="javascript:;">' . $each['key'] . '</a></em></li>';
+                    $html .= '<li class="current"><em><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;">' . $each['key'] . '</a></em></li>';
                 }
                 else
                 {
@@ -122,13 +125,13 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             }
 
             //  Output demo content to screen
-            $this->setViewContent( $html ); 
+            $this->setViewContent( $html, true ); 
             if( Ayoola_Loader::loadClass( $class ) )
             {
                $this->setViewContent( '<div style="text-align:center;">
                Step ' . ( $weAreOn ) . ' of ' . count( $stages ) . ' <br><br>
                ' . $xT[$class]['title'] . ' <br><br>
-                <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '?mini_info=1&close_on_success=1\', \'page_refresh\' );" href="javascript:;"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . $xT[$class]['key'] . '</a><br><br>
+                <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . $xT[$class]['key'] . '</a><br><br>
                 <a style="font-size:x-small;" class="" href="' . Ayoola_Application::getUrlPrefix() . '/" target="_blank"> <i  style="margin:5px;" class="fa fa-external-link"></i> Preview Site </a><br><br>
                 
                 </div>' ); 

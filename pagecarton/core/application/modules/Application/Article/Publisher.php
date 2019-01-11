@@ -104,10 +104,11 @@ class Application_Article_Publisher extends Application_Article_Creator
                                 break;
                             }
                         //    self::sanitizeParameters( $widget['parameters'] );
+                            $widget['parameters'] =  ( $widget['parameters'] ? : array() ) + array( 'add_a_new_post_classplayer' => '/tools/classplayer/get/name' );
              //   self::v( $widget['parameters'] );
                             $class = new $class( $widget['parameters'] );
                             if( $class->getMarkupTemplateObjects() ) 
-                            foreach( $class->getMarkupTemplateObjects() as $eachWidget )
+                            foreach( $class->getMarkupTemplateObjects() as $eachWidget ) 
                             {
             //    self::v( $eachWidget->getParameter() );
                             //    self::v( $eachWidget );
@@ -129,7 +130,8 @@ class Application_Article_Publisher extends Application_Article_Creator
                                      $cssClass = '';
                                 }
                             //    var_export( get_class( $eachWidget ) );
-                                $html .= '<a style="text-align:center;" class="pc-btn ' .  $cssClass  . '" href="' . Ayoola_Application::getUrlPrefix() . '' . $eachWidget->getParameter( 'add_a_new_post_full_url' ) . '" > 
+                                $link = '' . Ayoola_Application::getUrlPrefix() . '' . $eachWidget->getParameter( 'add_a_new_post_full_url' ) . '&close_on_success=1';
+                                $html .= '<a style="text-align:center;" class="pc-btn ' .  $cssClass  . '" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\', \'' . $this->getObjectName() . '\' );" href="javascript:" > 
                                 ' . $postType . ' ' . ( $category ? ' [' . $category . '] ' : $category ) . '
                                 
                                 <br><br>

@@ -59,14 +59,6 @@ class Application_Domain_UserDomain_Creator extends Application_Domain_UserDomai
 
 			//	the domain name must point to this ip address
 			$values['domain_name'] = strtolower( str_ireplace( 'www', '', array_pop( explode( '//', $values['domain_name'] ) ) ) );
-			$userIp = gethostbyname( $values['domain_name'] );
-			$serverIp = gethostbyname( $_SERVER['SERVER_NAME'] );
-			if( $userIp != $serverIp )
-			{
-				$this->setViewContent( '<div class="badnews">Before a domain name can be added, it must have a DNS "A" record that is pointing to the ip address "' .$serverIp .  '". It is currently pointing to "' .$userIp .  '". </div>', true ); 				
-				$this->setViewContent( $this->getForm()->view() );
-				return false;
-			}
 			$values['username'] = strtolower( Ayoola_Application::getUserInfo( 'username' ) );
 			$values['user_id'] = strtolower( Ayoola_Application::getUserInfo( 'user_id' ) );
 			
@@ -89,7 +81,16 @@ class Application_Domain_UserDomain_Creator extends Application_Domain_UserDomai
 
 			if( $this->insertDb( $values ) )
 			{ 
+				$userIp = gethostbyname( $values['domain_name'] );
+				$serverIp = gethostbyname( $_SERVER['SERVER_NAME'] );
 				$this->setViewContent( '<div class="goodnews">Added successfully. </div>', true ); 
+				if( $userIp != $serverIp )
+				{
+					$this->setViewContent( '<div class="badnews">Add a DNS "A" record that is pointing to the ip address "' .$serverIp .  '". It appears to be pointing to "' .$userIp .  '". </div>' ); 				
+				//	$this->setViewContent( $this->getForm()->view() );
+				//	return false;
+				}
+				return true;
 			}
 		//	$this->setViewContent( $this->getForm()->view() );
             

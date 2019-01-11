@@ -367,6 +367,7 @@ ayoola.xmlHttp =
 					//	var x = window.location.href;
 				//		x = x.split( '#' );
 					//	window.location.href = x[0];
+					//	alert( window.location.href );
 						ayoola.spotLight.splashScreen();
 						window.location.href = window.location.href.split( '#' )[0];
 					}

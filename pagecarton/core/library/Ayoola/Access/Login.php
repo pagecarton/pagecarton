@@ -92,8 +92,11 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 
 		}
 	//	var_export( $accountPage );
-		$urlToGo = self::$returnUrl ? : Ayoola_Page::getPreviousUrl( '' . Ayoola_Application::getUrlPrefix() . '/account/' );
-		Application_Javascript::header( $urlToGo );
+		if( ! $this->getParameter( 'no_redirect' )  )
+		{
+			$urlToGo = $this->getParameter( 'return_url' ) ? : ( self::$returnUrl ? : ( Application_User_Settings::retrieve( 'default_account_page' ) ? : Ayoola_Page::getPreviousUrl( '' . Ayoola_Application::getUrlPrefix() . '/account/' ) ) );
+			Application_Javascript::header( $urlToGo );
+		}
 		
 //		var_export( $urlToGo );
 		$logResult = array( 'medium' => 'cookie', 'result' => 'fail', 'message' => null );
@@ -210,8 +213,11 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 				exit();
 			}
 			// Do ajax
-			$this->setViewContent( 'Login Successful. You are being redirected to the previous page... <a href="' . $urlToGo . '">Click here if you are not redirected to the page in 5 seconds.</a>', true );
-			$this->setViewContent( '<span id="ayoola-js-redirect-whole-page"></span>' );
+			if( $urlToGo )
+			{
+				$this->setViewContent( 'Login Successful. You are being redirected to the previous page... <a href="' . $urlToGo . '">Click here if you are not redirected to the page in 5 seconds.</a>', true );
+				$this->setViewContent( '<span id="ayoola-js-redirect-whole-page"></span>' );
+			}
 			return true;
 		}
 		

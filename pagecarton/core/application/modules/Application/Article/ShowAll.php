@@ -631,7 +631,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	self::v( $this->_dbWhereClause );
 	//	self::v( $where );
 		$categoryForNewPost = @array_pop( $where['category_name'] );
-		$addNewPostUrl = ( static::$_newPostUrl ? : ( $this->getParameter( 'add_a_new_post_link' ) ? : '/widgets/Application_Article_Creator/' ) ) . '?';
+		$addNewPostUrl = ( static::$_newPostUrl ? : 
+							( $this->getParameter( 'add_a_new_post_link' ) ? : 
+							( ( $this->getParameter( 'add_a_new_post_classplayer' ) ? :  
+							'/widgets' ) . '/Application_Article_Creator/' )
+							) 
+							) . '?';
 		if( $newArticleType )
 		{
 			$addNewPostUrl .= '&article_type=' . $newArticleType . '';

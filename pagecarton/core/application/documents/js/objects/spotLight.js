@@ -407,11 +407,20 @@ ayoola.spotLight =
 	//	Returns the spotlight element
 	close: function()
 	{
-		if( parent.ayoola.spotLight.delete )
+		//	alert( ayoola.spotLight.delete );
+		//	alert( parent.ayoola.spotLight.delete );
+		if( ayoola.spotLight.delete )
 		{
+		//	alert( ayoola.spotLight.delete );
+			ayoola.spotLight.delete();
+		//	return true;
+		}
+		else if( parent.ayoola.spotLight.delete )
+		{
+		//	alert( ayoola.spotLight.delete );
 		//	alert( parent.ayoola.spotLight.delete );
 			parent.ayoola.spotLight.delete();
-			return true;
+		//	return true;
 		}
 	//	alert( ayoola.spotLight.SpotLight );
 		element = parent.ayoola.spotLight.background;

@@ -122,12 +122,12 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 										(
 											window, "load", function(){ 
 												ayoola.spotLight.close();
-												parent.ayoola.spotLight.close();
+											//	parent.ayoola.spotLight.close();
 											} 
 										);
 									'
 								);
-							}
+							}  
 							elseif( $percentage == 100 )
 							{
 								Application_Javascript::addCode(
@@ -140,7 +140,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 												if( document.getElementsByClassName( "goodnews" ).length == 1 )
 												{
 													ayoola.spotLight.close();
-													parent.ayoola.spotLight.close();
+												//	parent.ayoola.spotLight.close();
 												}
 
 											} 
