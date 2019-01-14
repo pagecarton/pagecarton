@@ -25,7 +25,7 @@ class Application_Domain_Order extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.10';  
+    protected $_tableVersion = '0.11';  
 
     /**
      * Table data types and declaration
@@ -48,6 +48,11 @@ class Application_Domain_Order extends PageCarton_Table
   'active' => 'INT',
   'order_date' => 'INPUTTEXT',
   'expiry_date' => 'INPUTTEXT',
+  'hostname_records' => 'JSON',
+  'hostname_records_type' => 'JSON',
+  'hostname_records_address' => 'JSON',
+  'hostname_records_preference' => 'JSON',
+  'hostname_records_ttl' => 'JSON',
 );
 
 

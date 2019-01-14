@@ -70,6 +70,13 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 	public static $thumbnail;
 	
     /**
+     * Link for the favicon for the page
+     * 
+     * @var string 
+     */
+	public static $favicon;
+	
+    /**
      * Allows the htmlHeader to get the correct layout name to use for <base> 
      * 
      * @var string 
@@ -587,6 +594,17 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     {
 		if( is_null( self::$thumbnail ) ){ self::$thumbnail = '/img/logo.png'; }
 		return Ayoola_Doc::uriToDedicatedUrl( self::$thumbnail );
+    }
+	
+    /**
+     * Returns the link for thumbnail for the page
+     *
+     * @return string
+     */
+    public static function getFavicon() 
+    {
+		if( is_null( self::$favicon ) ){ self::$favicon = '/img/favicon.ico'; }
+		return Ayoola_Doc::uriToDedicatedUrl( self::$favicon );  
     }
 	
     /**

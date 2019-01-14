@@ -43,11 +43,13 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
 
 		if( ! $mail['to'] )
 		{
-			throw new Ayoola_Abstract_Exception( 'E-MAIL NOT SET IN COMPANY INFO' );;
+			return false;
+		//	throw new Ayoola_Abstract_Exception( 'E-MAIL NOT SET IN COMPANY INFO' );;
 		}
 		if( ! $mailInfo['body'] )
 		{
-			throw new Ayoola_Abstract_Exception( 'NO BODY WAS SPECIFIED IN NOTIFICATION MESSAGE' );;
+			return false;
+		//	throw new Ayoola_Abstract_Exception( 'NO BODY WAS SPECIFIED IN NOTIFICATION MESSAGE' );;
 		}
 		$mail['subject'] = trim( $mailInfo['subject'] . ' [PageCarton Notification]' );
 		$mail['body'] = self::getHeader() . $mailInfo['body'] . self::getFooter();

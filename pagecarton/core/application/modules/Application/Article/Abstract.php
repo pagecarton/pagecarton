@@ -634,6 +634,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				);
 		//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
+				
 
 				//	Log into the database 
 				self::getViewsCount( $data );

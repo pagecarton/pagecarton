@@ -107,6 +107,18 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
     } 
 	
     /**
+     * The method does the whole Class Process
+     * 
+     */
+	public static function clear()
+    {
+		if( self::getStorage()->clear() )
+		{ 
+			return true;
+		}	
+    } 
+	
+    /**
      * Returns the Xml
      * 
      * @return Ayoola_Xml

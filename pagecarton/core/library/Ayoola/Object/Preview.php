@@ -60,6 +60,7 @@ class Ayoola_Object_Preview extends PageCarton_Widget
                return false;
             }
     //        exit();
+            set_time_limit( 0 );
             if( ! empty( $_REQUEST['rebuild_widget_box'] ) )   
             {
             //    var_export( $_REQUEST );

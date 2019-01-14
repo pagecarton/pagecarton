@@ -168,8 +168,14 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 		$fieldset->addRequirement( 'domain_name', array( 'WordCount' => array( 3, 100 ), 'Username' => null ) );
 		$form->addFieldset( $fieldset );
 		$domainName = $this->getGlobalValue( 'domain_name' );
-		if( $domainName )
+		$limit = $this->getParameter( 'suggestion_limit' );
+		do
 		{
+
+			if( ! $domainName )
+			{
+				break;
+			}
 			$domains = array();
 			$sub = array_map( 'trim', explode( '.', $domainName ) );
 	//		$tld = $sub;
@@ -212,6 +218,10 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 				{
 				//	$this->getObjectStorage( 'unavailable' )->clear();
 					$suggestions[$domain] = $domain . $price;
+					if( $limit && count( $suggestions ) >= $limit )
+					{
+						break;
+					}
 				}
 			}
 
@@ -236,6 +246,10 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 				if( ! self::check( $each ) )
 				{
 					$suggestions[$each] = $each . $price;
+					if( $limit && count( $suggestions ) >= $limit )
+					{
+						break;
+					}
 				}
 			}
 			if( self::getTldPrice( $tld ) )
@@ -255,6 +269,10 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 				if( ! self::check( $each ) )
 				{
 					$suggestions[$each] = $each . $price;
+					if( $limit && count( $suggestions ) >= $limit )
+					{
+						break;
+					}
 				}
 			}
 			
@@ -264,10 +282,15 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 				$each = $subPart . $each . '.' . $tld;
 				if( ! self::check( $each ) )
 				{
+					if( $limit && count( $suggestions ) >= $limit )
+					{
+						break;
+					}
 					$suggestions[$each] = $each . $price;
 				}
 			}
 		}
+		while( false );
 		$suggestions = @$suggestions ? : $this->getObjectStorage( 'suggestions' )->retrieve();
 		$unavailable = @$unavailable ? : $this->getObjectStorage( 'unavailable' )->retrieve();
 	//	var_export( $domains );
@@ -309,6 +332,14 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 			}	
 			if( $suggestions )
 			{
+			//	$limit = 1;
+				if( $limit && count( $suggestions ) > $limit )
+				{
+					while( count( $suggestions ) > $limit )
+					{
+						array_pop( $suggestions );
+					}
+				}
 				$fieldset->addElement( array( 'type' => 'html', 'name' => 'exx' ), array( 'html' => '<div class="goodnews">Congratulations! The following domain names are available! </div>' ) );
 				$fieldset->addElement( array( 'name' => 'suggestions', 'label' => ' ', 'type' => 'Checkbox', 'value' => @$values['suggestions'] ? : array( $domainName )  ), $suggestions );		
 				$fieldset->addFilters( array( 'trim' => null ) );
@@ -326,7 +357,7 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 				$form->actions[] = $form::BACKBUTTON_INDICATOR;
 			}
 		}
-	//	if( @$unavailable && array_key_exists( $domainName, $unavailable ) )
+//	if( @$unavailable && array_key_exists( $domainName, $unavailable ) )
 		{
 		//	$fieldset->addLegend( self::$_defaultFieldset );
 			$form->addFieldset( $fieldset );

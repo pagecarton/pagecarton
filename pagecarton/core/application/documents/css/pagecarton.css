@@ -549,7 +549,21 @@ pc_full_width
     font-weight: bold;
     display: block;
 
-}         
+}
+
+.pc-form2 label.clearTransformation
+{
+    
+    display:inline-block;
+}
+
+.pc-form2 label.clearTransformation > .pc_give_space
+{
+    
+    margin-left: 1em;
+    margin-right: 1em;
+}
+
 
 .pc-form2 label label
 {
@@ -782,11 +796,12 @@ pc_full_width
  	border-top: 0 solid transparent;
  	border-bottom: 1px solid #ccc;
  	border-right: 1px solid #ccc;
- 	border-left: 1px solid #ccc;
-     position: absolute;  
+     border-left: 1px solid #ccc;
+    /* Better to do this with a button on the interface */
+/*      position: absolute;  
      width: 100%;
      z-index: 1000000000;    
- }
+ */ }
 .title_button, a.title_button,  a.title_button:link,  a.title_button:active,  a.title_button:hover,  a.title_button:visited
 {  
 	background-color:transparent;
@@ -988,10 +1003,6 @@ pc_full_width
 {
 	color: blue;
 	font-weight: lighter;
-}
-.clearTransformation
-{
-	all: unset !important;
 }
 
 /* HEADERS */

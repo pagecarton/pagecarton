@@ -208,6 +208,7 @@ class Application_Article_View extends Application_Article_Abstract
 		$data['document_url'] = ( $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ) ) ? : '/img/placeholder-image.jpg'; 
 		$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['article_url'];
 		$data['document_url_plain'] = $data['document_url']; 
+		$data['document_url_uri'] = $data['document_url']; 
 		
 		if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
 		{
@@ -224,13 +225,14 @@ class Application_Article_View extends Application_Article_Abstract
 		$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] );     
 		if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )  
 		{
-			if( $this->getParameter( 'thumbnail' ) )   
+		//	if( $this->getParameter( 'thumbnail' ) )    
 			{
-				Ayoola_Page::$thumbnail = $data['document_url'];  
+				Ayoola_Page::$thumbnail = Ayoola_Page::getHomePageUrl() . $data['document_url_uri'] . '?width=500&height=500';  
+				Ayoola_Page::$favicon = Ayoola_Page::getHomePageUrl() . $data['document_url_uri'] . '?width=500&height=500';  
 			}
 			if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )  
 			{
-				$imageLink = '<a href="' . $url . '" onClick=""><img class="' . __CLASS__ . '_IMG" style="max-width:100%;" src="' . $image . '" alt="' . $data['article_title'] . "'s cover photo 2" . '" title="' . $data['article_title'] . "'s cover photo" . '"/></a>';   
+				$imageLink = '<a href="' . $url . '" onClick=""><img class="' . __CLASS__ . '_IMG" style="max-width:100%;" src="' . $image . '" alt="' . $data['article_title'] . "'s cover photo 2" . '" title="' . $data['article_title'] . "'s cover photo" . '"/></a>';    
 				
 				//	Create this template placeholder value so we can have solve the problem of blank image tags in template markups
 				$data['cover_photo_with_link'] = $imageLink;

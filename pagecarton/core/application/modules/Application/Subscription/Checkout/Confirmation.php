@@ -78,23 +78,28 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 
 	//	var_export( $identifier );
 		$orderNumber = self::getOrderNumber( $identifier['api'] );
+	//	var_export( $orderNumber );
 		if( Ayoola_Loader::loadClass( $className ) )
 		{ 
 			if( method_exists( $className, 'checkStatus' ) )
 			{
 				if( $orderInfo = $className::checkStatus( $orderNumber ) )
 				{
-			//		var_export( $orderInfo );
-					if( $orderInfo['order_status'] === 'Payment Successful' )
-					{
-						$identifier['status'] = 1;
-					}
-					else
-					{
-						$identifier['status'] = 0;
+					$identifier['status'] = 0;
+					switch( strtolower( $orderInfo['order_status'] ) )
+					{ 
+						case 'payment successful':
+						case '99':
+						case '100':
+							$identifier['status'] = 1;
+						break;   
 					}
 				}
 			}
+		}
+		else
+		{
+		//	$identifier['status'] = $_GET['status'];
 		}
 
 
@@ -119,6 +124,8 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 									" 
 									);
 			$notes = Application_Settings_Abstract::getSettings( 'Payments', 'order_notes' );
+
+			Application_Subscription_Cart::clear();
 
 			$notes ? $this->setViewContent( "<h4>Note:</h4><br>" ) : null;
 		//	$this->setViewContent( "<h4>Note:</h4><p>Orders can take up to 24 hours after payment is confirmed for fufillment ( depending on the payment method ). Please be patient.</p>" );

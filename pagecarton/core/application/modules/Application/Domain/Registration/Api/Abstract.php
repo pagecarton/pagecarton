@@ -73,8 +73,8 @@ class Application_Domain_Registration_Api_Abstract extends PageCarton_Widget
         $options = Application_Domain_Registration_Whois::getInstance()->select();
         $filter = new Ayoola_Filter_SelectListArray( 'extension', 'extension' );
         $options = $filter->filter( $options );
-        $fieldset->addElement( array( 'name' => 'extension', 'type' => 'SelectMultiple', 'value' => @$values['extension'] ), $options ); 
-
+        $fieldset->addElement( array( 'name' => 'extension', 'type' => 'Checkbox', 'value' => @$values['extension'] ), $options ); 
+ 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   
 		$this->setForm( $form );

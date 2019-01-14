@@ -43,14 +43,15 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
     {
 		try
 		{
-			$this->createForm( 'Register', 'Register domain name' );
+			$this->createForm( 'Continue Registration', 'Register domain name' );
  			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() )
 			{ 
 				return false; 
 			}
 			$this->subscribe( $values );  
-			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/cart' );
+
+			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . ( $this->getParameter( 'url_to_go' ) ? : '/cart' ) );
 			exit();
 			
 			
@@ -266,29 +267,37 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 									);
 */	//	var_export( $requirements );
 	//	$form->setFormRequirements( $requirements );
+	$fieldset = new Ayoola_Form_Element;	
+	$fieldset->addElement( array( 'name' => 'firstname', 'label' => 'First Name', 'placeholder' => 'e.g. John', 'type' => 'InputText', 'value' => @$values['firstname'] ) );
+	$fieldset->addElement( array( 'name' => 'lastname', 'label' => 'Last Name', 'placeholder' => 'e.g. Smith', 'type' => 'InputText', 'value' => @$values['lastname'] ) );
+	$fieldset->addElement( array( 'name' => 'organization_name', 'label' => 'Organization Name', 'placeholder' => 'e.g. Sethlene Inc.', 'type' => 'InputText', 'value' => @$values['organization_name'] ) );
+	$fieldset->addElement( array( 'name' => 'email', 'label' => 'Contact Email Address', 'placeholder' => 'e.g. email@example.com', 'type' => 'InputText', 'value' => @$values['email'] ) );
+	$fieldset->addElement( array( 'name' => 'country_code', 'label' => 'Contact Phone Number', 'placeholder' => '234', 'style' => 'width:50px;', 'type' => 'InputText', 'value' => @$values['country_code'] ) );
+	$fieldset->addElement( array( 'name' => 'phone_number', 'label' => '', 'placeholder' => '8032100555', 'style' => 'width:150px;', 'type' => 'InputText', 'value' => @$values['phone_number'] ) );
+	$fieldset->addRequirement( 'firstname', array( 'NotEmpty' => null ) );
+	$fieldset->addRequirement( 'lastname', array( 'NotEmpty' => null ) );
+
+	$fieldset->addRequirement( 'email', array( 'EmailAddress' => null ) );
+	$fieldset->addRequirement( 'country_code', array( 'NotEmpty' => null, 'Digits' => null ) );
+	$fieldset->addRequirement( 'phone_number', array( 'NotEmpty' => null, 'Digits' => null ) );
+	$fieldset->addLegend( 'Domain Contact Information' );
+	$form->addFieldset( $fieldset );				
+
+
+		//	Domain Contact
 		$fieldset = new Ayoola_Form_Element;	
-		$fieldset->addElement( array( 'name' => 'firstname', 'label' => 'First Name', 'placeholder' => 'e.g. John', 'type' => 'InputText', 'value' => @$values['firstname'] ) );
-		$fieldset->addElement( array( 'name' => 'lastname', 'label' => 'Last Name', 'placeholder' => 'e.g. Smith', 'type' => 'InputText', 'value' => @$values['lastname'] ) );
-		$fieldset->addElement( array( 'name' => 'organization_name', 'label' => 'Organization Name', 'placeholder' => 'e.g. Sethlene Inc.', 'type' => 'InputText', 'value' => @$values['organization_name'] ) );
 		$fieldset->addElement( array( 'name' => 'street_address', 'label' => 'Address Line 1', 'placeholder' => 'e.g. 119 State Road', 'type' => 'InputText', 'value' => @$values['street_address'] ) );
 		$fieldset->addElement( array( 'name' => 'street_address2', 'label' => 'Address Line 2', 'placeholder' => 'e.g. Apt. H3', 'type' => 'InputText', 'value' => @$values['street_address2'] ) );
 		$fieldset->addElement( array( 'name' => 'city', 'label' => 'City', 'placeholder' => 'e.g. Ibadan', 'type' => 'InputText', 'value' => @$values['city'] ) );
 		$fieldset->addElement( array( 'name' => 'province', 'label' => 'State/Province', 'placeholder' => 'e.g. OY', 'type' => 'InputText', 'value' => @$values['province'] ) );
 		$fieldset->addElement( array( 'name' => 'zip', 'label' => 'Zip/Postal Code', 'type' => 'InputText', 'value' => @$values['zip'] ) );
 		$fieldset->addElement( array( 'name' => 'country', 'label' => 'Country', 'type' => 'InputText', 'value' => @$values['country'] ) );
-		$fieldset->addElement( array( 'name' => 'email', 'label' => 'Contact Email Address', 'placeholder' => 'e.g. email@example.com', 'type' => 'InputText', 'value' => @$values['email'] ) );
-		$fieldset->addElement( array( 'name' => 'country_code', 'label' => 'Contact Phone Number', 'placeholder' => '234', 'style' => 'width:50px;', 'type' => 'InputText', 'value' => @$values['country_code'] ) );
-		$fieldset->addElement( array( 'name' => 'phone_number', 'label' => '', 'placeholder' => '8032100555', 'style' => 'width:150px;', 'type' => 'InputText', 'value' => @$values['phone_number'] ) );
-		$fieldset->addRequirement( 'firstname', array( 'NotEmpty' => null ) );
-		$fieldset->addRequirement( 'lastname', array( 'NotEmpty' => null ) );
 		$fieldset->addRequirement( 'street_address', array( 'NotEmpty' => null ) );
 		$fieldset->addRequirement( 'city', array( 'NotEmpty' => null ) );
-		$fieldset->addRequirement( 'zip', array( 'NotEmpty' => null ) );
-		$fieldset->addRequirement( 'email', array( 'EmailAddress' => null ) );
-		$fieldset->addRequirement( 'country_code', array( 'NotEmpty' => null, 'Digits' => null ) );
-		$fieldset->addRequirement( 'phone_number', array( 'NotEmpty' => null, 'Digits' => null ) );
-		$fieldset->addLegend( 'Domain Contact Information' );
+		$fieldset->addRequirement( 'country', array( 'NotEmpty' => null ) );
+		$fieldset->addLegend( 'Domain Address Information' );
 		$form->addFieldset( $fieldset );				
+
 		$this->setForm( $form );
     } 
 	// END OF CLASS

@@ -762,8 +762,11 @@ class Ayoola_Form_Element extends Ayoola_Form
   //  	$html = $this->useDivTagForElement ? "<span id='{$element['id']}_container'>\n" : null;
 		$value = html_entity_decode( $element['value'] );
 		unset( $element['value'] );
-		$html .= "<button " . self::getAttributesHtml( $element ) . " type='submit'>" . $value . "</button>";
+//		var_export( htmlentities( $value ) );
+		$html .= ( "<button " . self::getAttributesHtml( $element ) . " type='submit'>" . $value . "</button>" );
 //		$html .= $this->useDivTagForElement ? "</span>\n" : null;
+// var_export( htmlentities( $html ) );
+
 		return $html;
     }
 	
@@ -808,6 +811,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 					$checked = "checked='true'";
 				}
 			}
+			$element['class'] .= ' pc_give_space';
 			@$html .= "<label style='{$element['label_style']}' for='{$element['id']}{$counter}' class='clearTransformation'> 
 							<input type='checkbox' id='{$element['id']}$counter' value='{$value}' {$checked} " . self::getAttributesHtml( $element ) . " > {$label} 
 						</label>\n";  
@@ -936,6 +940,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 			{
 				$checked = 'checked="true"';   
 			}
+			$element['class'] .= ' pc_give_space';
 			@$html .= "<label class='clearTransformation' for='{$element['id']}{$i}'>
 							<input type='radio' id='{$element['id']}{$i}' value='{$value}' {$checked}  " . self::getAttributesHtml( $element ) . " >{$label}
 						</label>";
