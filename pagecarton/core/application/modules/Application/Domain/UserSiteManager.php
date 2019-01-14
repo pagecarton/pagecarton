@@ -94,7 +94,7 @@ class Application_Domain_UserSiteManager extends PageCarton_Widget
 		$list->setData( $data );
 		$list->setListOptions( 
 								array( 
-										    'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Creator/?subdomain=1\', \'' . $this->getObjectName() . '\' );" title="">Create a new site</a>',    
+										    'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserSiteManager_Creator/\', \'' . $this->getObjectName() . '\' );" title="">Create a new site</a>',    
 									) 
 							);
 		$list->setKey( $this->getIdColumn() );

@@ -45,6 +45,25 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
     /**
      * 
      *
+     * @var boolean
+     */
+	protected static $_subdomain;
+	
+    /**
+     * 
+     * @var string 
+     */
+	protected static $_submitButton = 'Continue'; 
+	
+    /**
+     * 
+     * @var string 
+     */
+	protected static $_urlName = 'Handle'; 
+	
+    /**
+     * 
+     *
      * @var string
      */
 	protected $_idColumn = 'profile_url';
@@ -228,6 +247,15 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
      * 
      * 
      */
+	public static function isSubDomain()
+    {
+		return @$_GET['subdomain'] || static::$_subdomain;
+	}
+
+    /**
+     * 
+     * 
+     */
 	public static function getProfileInfo( $profileUrL, $private = false )
     {
 		$profileUrL = strtolower( $profileUrL );
@@ -318,7 +346,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		$form->oneFieldSetAtATime = false;
 		$form->submitValue = $submitValue ;
 		$fieldset = new Ayoola_Form_Element;
-		if( empty( $_GET['subdomain'] ) )
+		if( ! static::isSubDomain() )
 		{
 		//	$fieldset->addRequirement( 'display_picture', array( 'NotEmpty' => array( 'badnews' => 'Please select a valid file to upload...', ) ) );
 			
@@ -452,7 +480,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		if( is_null( $values ) )
 		{
 			
-			if( empty( $_GET['subdomain'] ) )
+			if( ! static::isSubDomain() )
 			{
 				Application_Javascript::addCode
 				(
@@ -511,7 +539,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 					'
 				);
 			}
-			$fieldset->addElement( array( 'name' => 'profile_url', 'id' => 'profile_url_field', 'label' => 'Handle', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'e.g. MyPage', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
+			$fieldset->addElement( array( 'name' => 'profile_url', 'id' => 'profile_url_field', 'label' => static::$_urlName, 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'e.g. MyPage', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
 		//	$fieldset->addFilter( 'profile_url','Username' );  
 			$fieldset->addRequirement( 'profile_url', array( 'NotEmpty' => array( 'badnews' => 'The profile URL cannot be left blank.', ), 'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^0-9a-zA-Z-_', ), 'WordCount' => array( 4,20 ), 'DuplicateUser' => array( 'Username', 'username', 'badnews' => 'Someone else has already chosen "%variable%"', ) ) );
 		//	$fieldset->addElement( array( 'name' => 'name', 'placeholder' => 'Give this page a name', 'type' => 'InputText', 'value' => @$values['name'] ) );   

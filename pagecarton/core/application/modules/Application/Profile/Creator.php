@@ -46,6 +46,56 @@ class Application_Profile_Creator extends Application_Profile_Abstract
      * The method does the whole Class Process
      * 
      */
+	protected function setConfirmationPage( $values )
+    {
+		if( ! static::isSubDomain() )
+		{
+			$fullUrl = Ayoola_Page::getHomePageUrl() . '/' . $values['profile_url'] . '';
+		}
+		else
+		{
+			$fullUrl = 'http://' . $values['profile_url'] . '.' . Ayoola_Application::getDomainName() . '';
+		}
+		$this->setViewContent( '<div class="goodnews">Profile saved successfully. 
+						<a href="' . $fullUrl . '" target="_blank">Preview</a>							
+						</div>', true );
+//		$this->setViewContent( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+		if( @$_GET['previous_url'] )
+		{
+			$this->setViewContent( '<div class="pc-info-notify"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
+		}
+		$this->_objectData['profile_url'] = $values['profile_url']; 
+	//	$this->setViewContent(  );
+
+		
+		//	Notify Admin
+		$mailInfo['subject'] = 'New Profile Created';
+		$mailInfo['body'] = 'A new profile name "' . $values['display_name'] . '", has been created with the profile module. 
+		
+		You can view the new profile by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '.
+		';
+		Application_Log_View_General::log( array( 'type' => 'New profile', 'info' => array( $mailInfo ) ) );
+		try
+		{
+			@Ayoola_Application_Notification::mail( $mailInfo );
+		}
+		catch( Ayoola_Exception $e ){ null; }
+
+		$mailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
+		$mailInfo['subject'] = 'Your new profile';
+		$mailInfo['body'] = 'A new public profile name , has been created for you.
+		
+		Display Name: "' . $values['display_name'] . '",
+		Profile URL: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '
+		Manage your profiles: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/account';
+		self::sendMail( $mailInfo );
+
+	}
+	
+    /**
+     * The method does the whole Class Process
+     * 
+     */
 	protected function init()
     {
 		try
@@ -54,7 +104,7 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 
 			//	Check settings
 			$profileSettings = Application_Article_Settings::getSettings( 'Articles' );  
-			$this->createForm( 'Save', '' );
+			$this->createForm( static::$_submitButton, '' );
 			if( $this->getParameter( 'class_to_play_when_completed' ) )
 			{
 				$this->setViewContent( Ayoola_Object_Embed::viewInLine( array( 'editable' => $this->getParameter( 'class_to_play_when_completed' ) ) + $this->getParameter() ? : array() ) );
@@ -98,37 +148,7 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 			
 			//	write to file
 			self::saveProfile( $values );
-		if( empty( $_GET['subdomain'] ) )
-		{
-			$fullUrl = Ayoola_Page::getHomePageUrl() . '/' . $values['profile_url'] . '';
-		}
-		else
-		{
-			$fullUrl = 'http://' . $values['profile_url'] . '.' . Ayoola_Application::getDomainName() . '';
-		}
-			$this->setViewContent( '<div class="goodnews">Profile saved successfully. 
-							<a href="' . $fullUrl . '" target="_blank">Preview</a>							
-							</div>', true );
-	//		$this->setViewContent( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
-			if( @$_GET['previous_url'] )
-			{
-				$this->setViewContent( '<div class="pc-info-notify"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
-			}
-			$this->_objectData['profile_url'] = $values['profile_url']; 
-		//	$this->setViewContent(  );
-						
-			//	Notify Admin
-			$mailInfo['subject'] = 'New Profile Created';
-			$mailInfo['body'] = 'A new profile name "' . $values['display_name'] . '", has been created with the profile module. 
-			
-			You can view the new profile by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '.
-			';
-			Application_Log_View_General::log( array( 'type' => 'New profile', 'info' => array( $mailInfo ) ) );
-			try
-			{
-				@Ayoola_Application_Notification::mail( $mailInfo );
-			}
-			catch( Ayoola_Exception $e ){ null; }
+			$this->setConfirmationPage( $values );
 			
 			//	Do something after creating an profile
 		//	self::v( $this->getParameter( 'class_to_play_when_completed' )  );

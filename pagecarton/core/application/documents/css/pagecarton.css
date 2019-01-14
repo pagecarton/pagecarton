@@ -945,6 +945,12 @@ pc_full_width
     margin-top: 1em;    
     margin-bottom: 1em;    
 }
+.pc_give_space_right { 
+    margin-right: 1em;    
+}
+.pc_give_space_left { 
+    margin-left: 1em;    
+}
 .pc_inline_block {
     text-align:center;
     display: inline-block;

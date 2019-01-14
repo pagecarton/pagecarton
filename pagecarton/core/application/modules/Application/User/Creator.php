@@ -98,7 +98,8 @@ class Application_User_Creator extends Application_User_Abstract
 		$this->createForm( $this->getParameter( 'submit_value' ) ?  : 'Create Account', $this->getParameter( 'legend' ) );
 	//	$this->setViewContent( '<h2>Sign up for a free account.</h2>' ); 
 		$auth = new Ayoola_Access();
-		$urlToGo = Ayoola_Page::getPreviousUrl( '/account/' );
+		$urlToGo = $this->getParameter( 'return_url' ) ? : Ayoola_Page::getPreviousUrl();
+		//	var_export( $urlToGo ); 
 		Application_Javascript::header( Ayoola_Application::getUrlPrefix() . $urlToGo );
 		$this->setViewContent( $this->getForm()->view() );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -247,7 +248,7 @@ class Application_User_Creator extends Application_User_Abstract
 
 
 		//	Auto log me in now without confirmation
-		if( $this->getParameter( 'signin' ) || ! empty( $_GET['previous_url'] ) ) 
+		if( $this->getParameter( 'signin' ) || ! empty( $urlToGo ) ) 
 		{
 	//		var_export( $values );  
 			if( ! $loginResponse = Ayoola_Access_Login::localLogin( $values ) )   
@@ -259,9 +260,9 @@ class Application_User_Creator extends Application_User_Abstract
 	//		var_export( $loginResponse );  
 	//		exit();
 			
-			if( Ayoola_Page::getPreviousUrl() && ! Ayoola_Application::isXmlHttpRequest() && ! $this->getParameter( 'no_redirect' )  )
+			if( $urlToGo && ! Ayoola_Application::isXmlHttpRequest() && ! $this->getParameter( 'no_redirect' )  )
 			{
-				header( 'Location: ' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl() );
+				header( 'Location: ' . Ayoola_Application::getUrlPrefix() . $urlToGo );
 				exit();
 			}
 			$this->setViewContent( '<div id="ayoola-js-redirect-whole-page"></div>' );
