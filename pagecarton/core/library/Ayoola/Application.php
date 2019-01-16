@@ -843,6 +843,7 @@ class Ayoola_Application
 							}
 							elseif( ( ! empty( $articleInfo['true_post_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['true_post_type'] ) ) )
 							{
+							//	PageCarton_Widget::v( $moduleInfo );
 								//	allow dedicated url for all post types like /post-viewer-article/
 								self::$_runtimeSetting['real_url'] = '/post-viewer-'  . $articleInfo['true_post_type'];		
 							}
@@ -1217,6 +1218,12 @@ class Ayoola_Application
 			//	page may just be present in the theme
 			$themeName = @$_REQUEST['pc_page_layout_name'];
 			$themeName = $themeName ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+			$pageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
+			$pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) );
+			if( ! is_file( $pageFile ) )
+			{
+				return false;
+			}
 			$pagePaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 			$pagePaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 			
@@ -1272,6 +1279,11 @@ class Ayoola_Application
 					$noRestriction = true;
 					break;
 				}
+				else
+				{
+			//	var_export( $PAGE_INCLUDE_FILE );
+			//	var_export( $pageThemeFileUrl );
+				}
 			//	var_export( $PAGE_INCLUDE_FILE );
 			//	var_export( $pageThemeFileUrl );
 			//	exit();
@@ -1298,6 +1310,8 @@ class Ayoola_Application
 						! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE
 					)
 					{
+				//	var_export( $pagePaths['include'] );
+				//	var_export( $pagePaths['template'] );
 						return false;
 					}
 				}
@@ -1353,6 +1367,8 @@ class Ayoola_Application
 		
 		//	Send content type to avoid mozilla reloading when theres and error message
 		header("Content-Type: text/html; charset=utf-8");
+	//	PageCarton_Widget::v( $PAGE_INCLUDE_FILE );  
+	//	PageCarton_Widget::v( $PAGE_TEMPLATE_FILE );  
 	
 		include_once $PAGE_INCLUDE_FILE;
 	//	var_export( $PAGE_INCLUDE_FILE );  

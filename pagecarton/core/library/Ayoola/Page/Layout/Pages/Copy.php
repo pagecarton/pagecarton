@@ -58,7 +58,13 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             $pageThemeFileUrl = '/index';
         }
         $fPaths = static::getPagePaths( $themeName, $pageThemeFileUrl );
-    //    var_export();
+        $pageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
+        $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) );
+        if( ! is_file( $pageFile ) )
+        {
+            return false;
+        }
+//    var_export();
 
         if( ! Ayoola_Loader::getFullPath( $fPaths['include'], array( 'prioritize_my_copy' => true ) ) )
         {

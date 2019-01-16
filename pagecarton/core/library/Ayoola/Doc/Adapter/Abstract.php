@@ -199,16 +199,13 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
       foreach( $this->getPaths() as $path )
       {
         header( 'Content-Description: File Transfer' );
-        header( 'Content-Type: ' . ( $this->getParameter( 'download_mime_type' ) ? : 'application/octet-stream' ) );
-        header('Content-Disposition: attachment; filename=' . ( $this->getParameter( 'download_filename' ) ? : basename( $path ) ) );
+        header( 'Content-Type: ' . ( 'application/octet-stream' ) );
+        header('Content-Disposition: attachment; filename=' . ( basename( $path ) ) );
         header( 'Content-Transfer-Encoding: binary' );
         header( 'Expires: 0' );
-        header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
         header( 'Pragma: public' );
-        if( $this->getParameter( 'send_content_length' ) )
-        {
-          header('Content-Length: ' . filesize($path));
-        }
+        header( 'Content-Length: ' . filesize( $path ) );
         ob_clean();
         flush();
         readfile($path);

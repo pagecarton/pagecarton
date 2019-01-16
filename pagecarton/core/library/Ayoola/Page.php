@@ -147,9 +147,10 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			$id = Ayoola_Application::getPathPrefix() . $url;
 //			$id = $url . Ayoola_Application::getPathPrefix();
 			$storage = self::getObjectStorage( array( 'id' => $id,  ) );
-			if( $info = $storage->retrieve() )
+		//	if( $info = $storage->retrieve() )
 			{ 
-				break; 
+				//	The theme sometimes caches and brings stale info
+			//	break; 
 			}
 			
 			
@@ -191,11 +192,12 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 
 			//	get info for theme pages
 			$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+	//		self::v( Ayoola_Page_Layout_Pages_Copy::canCopy( $url, $themeName  ) );
 			if( $themeName && Ayoola_Page_Layout_Pages_Copy::canCopy( $url, $themeName ) )
 			{ 
 				//	just what we need
 				@$info = array( 'url' => $url );
-			//		self::v( $info );
+				//	self::v( $info );
 				//		var_export( self::$_currentPageInfo );
 				$info['cache_info'] = serialize( $storage );
 				$storage->store( $info );
@@ -603,7 +605,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      */
     public static function getFavicon() 
     {
-		if( is_null( self::$favicon ) ){ self::$favicon = '/img/favicon.ico'; }
+		if( is_null( self::$favicon ) ){ self::$favicon = '/favicon.ico'; }
 		return Ayoola_Doc::uriToDedicatedUrl( self::$favicon );  
     }
 	

@@ -1637,6 +1637,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( null === $this->_viewContent || true === $refresh )
 		{ 
 			$this->_viewContent = new Ayoola_Xml();
+		//	self::v( get_class( $this ) );
+		//	self::v( $this->wrapViewContent );
 			if( $this->wrapViewContent && ! $this->getParameter( 'no_view_content_wrap' ) )
 			{
 				$documentElement = $this->_viewContent->createElement( $this->getParameter( 'object_container_element' ) ? : static::$_viewContentElementContainer );  

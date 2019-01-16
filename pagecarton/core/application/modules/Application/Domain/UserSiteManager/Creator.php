@@ -66,7 +66,7 @@ class Application_Domain_UserSiteManager_Creator extends Application_Profile_Cre
         $this->setViewContent( '
         <div class="goodnews">
             New site created successfully. 
-            <a href="' . $fullUrl . '/new-website-wizard" target="_blank">New Website Wizard</a>
+            <a href="' . $fullUrl . '/new-site-wizard" target="_blank">New Website Wizard</a>
         </div>', true );
 //		$this->setViewContent( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
 		if( @$_GET['previous_url'] )
@@ -93,7 +93,7 @@ class Application_Domain_UserSiteManager_Creator extends Application_Profile_Cre
 		$mailInfo['body'] = 'You have successfully created your site. Next is to add content and build it.
 		
 		Site Homepage Link: ' . $fullUrl . '
-		Start building the site here: ' . $fullUrl . '/new-website-wizard
+		Start building the site here: ' . $fullUrl . '/new-site-wizard
 		Manage your sites: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/account';
 		self::sendMail( $mailInfo );
 

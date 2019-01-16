@@ -89,11 +89,16 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
 			
 		}
 		@$options['domain'] = Ayoola_Page::getDefaultDomain();
+		switch( $userInfo['access_level'] )
+		{
+			case 1:
+				$options['auth_name'] = 'FREE Account';
+			break;
+		}
 		$this->_objectTemplateValues = array_merge( $options ? : array(), $this->_objectTemplateValues ? : array() );   
 		
 		
-		
-	//	$userInfo['access_level'] ? 
+	//	$userInfo['access_level'] ?   
 		@$userInfo['wallet_balance'] = $userInfo['wallet_balance'] ? $userInfo['wallet_balance'] : '0.00';
 		@$this->setViewContent( "<span style='{$style}'>{$options['auth_name']}</span>" );
 		

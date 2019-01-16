@@ -356,12 +356,56 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 					$fieldset->duplicationData = array( 'add' => '+ Embed New Widget', 'remove' => '- Remove Above Widget', 'counter' => 'embed_widget_counter', );
 				}
 				$fieldset->placeholderInPlaceOfLabel = true;
-				$i++;
 				$fieldset->addLegend( '' );   			   			
 				$html .= $fieldset->view(); 
+
+				$class = @$object['markup_template_object_name'][$i];
+				$content = null;
+				$resultsVar = null;
+
+				if( ! empty( $class ) && Ayoola_Loader::loadClass( $class ) )
+				{
+					$filter = new Ayoola_Filter_ClassToFilename();
+					$classFile = $filter->filter( $class );
+					$classFile = Ayoola_Loader::getFullPath( $classFile );
+	
+					$content = file_get_contents( $classFile ) ;
+					preg_match_all( "/\['([a-z_-]*)'\]/", $content, $resultsVar );
+				//	self::v( $class );
+				//	self::v( $classFile );
+				//	self::v( strlen( $content ) );
+				//	self::v( $resultsVar );
+					$resultsVar = ( is_array( $resultsVar[1] ) ? $resultsVar[1] : array() );
+				}
+				if( $resultsVar )
+				{
+					$resultsVar = array_unique( $resultsVar );
+					sort( $resultsVar );
+					$data = trim( str_replace( '{{{}}},', '', '{{{' . implode( '}}}, {{{', $resultsVar ) . '}}}' ), ' ' );
+					
+					$html .= '<div>';  
+					$html .= '<textarea style="font-size:12px;" readonly rows="5" style="height:auto;" ondblclick="ayoola.div.autoExpand( this );">';  
+					$html .= '<!-- How to embed ' . $class . ' -->
+<!--{{{@' . $i . '(' . $class . ')-->
+<p>Insert HTML content here. Use varables like {{{' . ( $resultsVar[0] ? : $resultsVar[1] ) . '}}} here.</p>
+<!--(' . $class . ')@' . $i . '}}}-->
+<!-- Place this code in code view -->';  
+								
+					$html .= '</textarea>'; 
+
+					$html .= '<textarea  style="font-size:12px;" readonly ondblclick="ayoola.div.autoExpand( this );">';  
+					$html .= '' . $class . ' variables to use in content: ' . $data . '
+
+									';  
+								
+					$html .= '</textarea>';  
+					$html .= '</div>';  
+				}
+				$i++;
+
 			}
 			while( isset( $object['markup_template_object_name'][$i] ) );
-			$content = null;
+/* 			$content = null;
 			$resultsVar = null;
 			foreach( $object['markup_template_object_name'] as $each )
 			{
@@ -388,7 +432,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				$html .= 'Available variables to use in content: ' . $data . '';  
 				$html .= '</textarea>';  
 			}
-		}
+ */		}
 /* 		if( ! empty( $object['phrase_to_replace_with'] ) &&  ! empty( $object['phrase_to_replace'] ) )
 		{
 			$object['preserved_content'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['preserved_content'] );

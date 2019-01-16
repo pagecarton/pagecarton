@@ -71,7 +71,6 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		{			
 			//	var_Export( $class );
 			$classes = $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' );
-			$this->_parameter['no_view_content_wrap'] = true;
 
 			//	One way or the other, leaving this causes a situation 
 			//	where classes are played twice
@@ -156,6 +155,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		}
 	//	self::unsetParametersThatMayBeDuplicated( $parameters );
 		self::unsetParametersThatMayBeDuplicated( $this->_parameter );
+		$this->_parameter['no_view_content_wrap'] = true;
 		$class = $class::viewInLine( $parameters );
 	//	$class = new $class( $parameters );
 	//	$class->setParameter(  );
