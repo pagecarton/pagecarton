@@ -99,7 +99,8 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			$urlToGo = self::$returnUrl ? : $urlToGo;
 			$urlToGo = $this->getParameter( 'return_url' ) ? : $urlToGo;
 			$urlToGo = Ayoola_Application::getUrlPrefix() . $urlToGo;
-			$urlToGo = Ayoola_Page::getPreviousUrl( $urlToGo );
+			$urlToGo = Ayoola_Page::getPreviousUrl( $urlToGo );  
+		//	var_export( $urlToGo );
 			Application_Javascript::header( $urlToGo );
 		}
 		
@@ -213,7 +214,7 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			
 			if( ! Ayoola_Application::isXmlHttpRequest() && ! $this->getParameter( 'no_redirect' ) )
 			{			
-				@header( 'Location: ' . Ayoola_Application::getUrlPrefix() . $urlToGo );
+				@header( 'Location: ' . $urlToGo );
 			//	var_export( __LINE__ );
 				exit();
 			}
