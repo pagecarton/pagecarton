@@ -2,7 +2,7 @@
 
 		//	Report all PHP errors 
 		error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
-		ini_set( 'display_errors', "0" );	 
+		ini_set( 'display_errors', "1" );	 
 		ini_set( "memory_limit","512M" );	 
 		defined( 'DS' ) || define( 'DS', DIRECTORY_SEPARATOR);
 		defined( 'PS' ) || define( 'PS', PATH_SEPARATOR);
@@ -24,14 +24,39 @@
 		$prefix = null;
 		if( $currentDir !== $tempDir )
 		{
+			
+			//	
+		//	var_export( $_SERVER['SCRIPT_FILENAME'] );
+		//	var_export( $currentDir );
+		//	var_export( $tempDir );
+		//	var_export( $prefix );
+			
+			//	fix issue where prefix is /countdown and user is going to /countdown/countdown page
+			//	System seeing it like there is a directory called /countdown/countdown
+			//	workaround this here
+			$testCurrentDir = implode( DS, $currentDir );
+		//	var_export( is_link( $testCurrentDir ) );
+		//	var_export( is_link( dirname( $testCurrentDir ) ) );
+			while( is_link( $testCurrentDir ) && is_link( dirname( $testCurrentDir ) )  )
+			{
+			//	$filename = basename( $testCurrentDir ); 
+				$testCurrentDir = dirname( $testCurrentDir );
+				$currentDir = explode( DS, $testCurrentDir );
+			}
+		//	var_export( $testCurrentDir );
+		//	var_export( $currentDir );
+		//	var_export( $tempDir );
 			$prefix = array_diff( $currentDir, $tempDir );
+			
+			
 			if( implode( '/', $currentDir ) === implode( '/', $tempDir + $prefix ) && trim( implode( '/', $prefix ) ) )
 			{
 				$prefix = '/' . implode( '/', $prefix );  
 			}
 		}
 	//		var_export( $tempDir );
-	//		var_export( $prefix );
+		//	var_export( $prefix ); 
+		//	EXIT();			
 		defined( 'PATH_PREFIX' ) || define( 'PATH_PREFIX', $prefix );
 		defined( 'PC_PATH_PREFIX' ) || define( 'PC_PATH_PREFIX', $prefix );
 	//	var_export( PATH_PREFIX );
