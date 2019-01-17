@@ -207,7 +207,7 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 				$userInfo['password'] = $hashedCredentials['password'];
 			//	var_export();
 				
-				$cookie = self::getPersistentCookieValue( $userInfo['email'],  $userInfo['email'] . $userInfo['password'] ); 
+				$cookie = self::getPersistentCookieValue( $userInfo['email'], $userInfo['password'] ); 
 				$expire = time() + 1728000; // Expire in 20 days
 				@setcookie( $this->getObjectName(), $cookie, $expire, '/', null, false, true );
 			}

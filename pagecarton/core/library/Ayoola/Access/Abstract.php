@@ -439,18 +439,20 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
      * @param string hashed password
      * @return string The value for persistent cookie
      */
-    public static function getPersistentCookieValue( $username, $password ) 
+    public static function getPersistentCookieValue( $username, $password, $time = null ) 
     {
 	//	$auth = new Ayoola_Access();
 	//	$userInfo = $auth->getUserInfo();
 		
 	//	var_export( $userInfo['password'] );
+		$password = $username . $password;
 
 		//	Use the user password, server salt and browser info to generate a cookiepassword
-		$time = time();
+		$time = $time ? : time();
 		$cookiePassword = self::hashPassWord( $password, $time );
+		$strictCookiePassword = self::hashPassWord( $password . ( $_SERVER['REMOTE_ADDR'] ? :  $_SERVER['REMOTE_HOST'] ), $time );
 	//	var_export( $userInfo['user_id'] . ':' . $cookiePassword . ':' . time() );
-		return base64_encode( $username . ':' . $cookiePassword . ':' . $time ); 
+		return base64_encode( $username . ':' . $cookiePassword . ':' . $time . ':' . $strictCookiePassword ); 
 		
     } 
 	// END OF CLASS
