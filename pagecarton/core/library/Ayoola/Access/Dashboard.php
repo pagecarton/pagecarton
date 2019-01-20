@@ -50,8 +50,12 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
      */
     public function init()
     {
-		$userInfo = Ayoola_Application::getUserInfo();
-	 //	var_export( $userInfo ); 
+	//	var_export( Ayoola_Application::$GLOBAL );
+		if( ! $userInfo = Ayoola_Application::getUserInfo() )
+		{
+			return false;
+		}
+	// 	var_export( $userInfo ); 
 
 		$style = 'min-width:25%;max-width:50%;line-height:2em;display:inline-block;';
 		$header = $style . 'font-weight:bold;';
