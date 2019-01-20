@@ -192,16 +192,23 @@ class Ayoola_Application
 	public static function reset( array $settings = null )
     {
 		//	set path
+		$domainSettings = array();
 //		if( ! empty( $settings['path'] ) )
 		{
 			self::$_pathPrefix = $settings['path'];
 		//	var_export( self::$_pathPrefix );
 			self::setUrlPrefix( self::$_pathPrefix );
 		}
+		if( ! empty( $settings['domain'] ) )
+		{
+			$domainSettings['domain'] = $settings['domain'];
+		}
 
 		// set domain
-		self::setDomainSettings(); 
-//		Application_Cache_Clear::viewInLine( array( 'clear_all' => true ) );
+		self::setDomainSettings( $domainSettings );   
+		Ayoola_Loader::resetValidIncludePaths(); 
+		
+//		Application_Cache_Clear::viewInLine( array( 'clear_all' => true ) );  
 	}
 	 
     /**
@@ -217,6 +224,18 @@ class Ayoola_Application
 			self::$_includePaths[] = $path;
 			set_include_path( $path . PS . get_include_path() );
 		}
+	}
+	 
+    /**
+     * 
+     * 
+     * @return array
+     */
+	public static function getApplicationNameSpace()
+    {
+		$appPath = md5( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );
+		$name = Ayoola_Application::getPathPrefix() . DS . $appPath;
+		return $name;
 	}
 	 
     /**
@@ -245,9 +264,10 @@ class Ayoola_Application
      * @param boolean Whether to force a reset
      * @return array
      */
-	public static function setDomainSettings( $forceReset = null )
+	public static function setDomainSettings( $domainSettings = null )
     {
 	//		var_export( $domainName );
+		$forceReset = is_array( $domainSettings ) ? $domainSettings['force_reset'] : $domainSettings;
 		require_once 'Ayoola/Storage.php';
 		$storage = new Ayoola_Storage();
 		$protocol = 'http';
@@ -257,10 +277,10 @@ class Ayoola_Application
 		}
 
 
-		$storage->storageNamespace = __CLASS__ . 'x-' . $_SERVER['HTTP_HOST'] . $protocol . Ayoola_Application::getPathPrefix();
+		$storage->storageNamespace = __CLASS__ . 'x-' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve(); 
-		if(  $data && ! $forceReset && ! @$_GET['reset_domain_information'] )
+		if( $data && ! $forceReset && ! @$_GET['reset_domain_information'] )
 		{		
 		//	var_export( $data );
  			//	Allows the sub-domains to have an include path too.
@@ -295,15 +315,16 @@ class Ayoola_Application
 				//	var_export( Ayoola_Application::$GLOBAL );
 			}
 		//	var_export( $data );
-		//	return true;      
+			return true;      
 		}  
+	//	var_export( $domainSettings );
 
 		//	Search the domain name in the domain table
 		do
 		{
 			$data = array();
 			//	var_export( $data );
-			$domainName = self::getDomainName();
+			$domainName = @$domainSettings['domain'] ? :  self::getDomainName();
 			//	var_export( $domainName );
 			
 			//	Ignore localhosts
@@ -336,10 +357,17 @@ class Ayoola_Application
 			//	var_export( $tempWhere );
 				
 			}
+			if( ! empty( $data['domain_settings']['sub_domain'] ) || @$data['domain_settings']['domain_type'] === 'sub_domain' )
+			{
+				$subDomain = $tempDomainName;
+			}
 		//	var_export( $subDomain );
 			if( ! $primaryDomainInfo = $domain->selectOne( null, array( 'domain_type' => 'primary_domain' ) ) )
 			{
-				$primaryDomainInfo = $data['domain_settings'];
+				if( ! $primaryDomainInfo = $domain->selectOne( null, array( 'domain_type' => '' ) ) )
+				{
+					$primaryDomainInfo = $data['domain_settings'];
+				}
 			}
 			//	var_export( $primaryDomainInfo );  
 			if( ! $data['domain_settings'] )
@@ -499,13 +527,16 @@ class Ayoola_Application
 				//		var_export( $data['domain_settings'] );
 						$data['domain_settings'] = $subDomainInfo;
 					//	var_export( $subDomainInfo );
-						$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
-						$data['domain_settings']['domain_name'] = $subDomain . '.' . $tempWhere['domain_name'];
+					//	primaryDomainInfo
+					//	$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
+						$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $primaryDomainInfo['domain_name'];
+					//	$data['domain_settings']['domain_name'] = $subDomain . '.' . $tempWhere['domain_name'];
+						$data['domain_settings']['domain_name'] = $subDomain . '.' . $primaryDomainInfo['domain_name'];
 						$data['domain_settings'][APPLICATION_DIR] = str_replace( '/', DS, Application_Domain_Abstract::getSubDomainDirectory( $subDomainInfo['domain_name'] ) );
 						$data['domain_settings']['dynamic_domain'] = true;					
 						$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
 						@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
-					//	$storage->store( $data );
+					//	$storage->store( $data ); 
 					//	setcookie( 'SUB_DIRECTORY', $subDomainInfo['domain_name'], time() + 9999999, '/' );
 					}
 					elseif( $data['domain_settings']['*'] )

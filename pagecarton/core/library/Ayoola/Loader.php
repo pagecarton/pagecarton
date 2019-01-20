@@ -63,6 +63,16 @@ class Ayoola_Loader
     } 
 	
     /**
+     * 
+     *
+     * @return void
+     */
+    public static function resetValidIncludePaths()
+    {
+		return self::$_validIncludePaths = array();
+	}
+
+    /**
      * Retrieve the valid include paths for a given relative path
      *
      * @param string Filename

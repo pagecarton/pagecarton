@@ -72,6 +72,21 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             return false;
         }
 
+        //  when other files like template and data wasn't checked, theme pages are being sanitized
+        #   when the default theme was sanitized
+
+        if( ! Ayoola_Loader::getFullPath( $fPaths['template'], array( 'prioritize_my_copy' => true ) ) )
+        {
+            //  don't create this page unless it's saved
+            return false;
+        }
+
+        if( ! Ayoola_Loader::getFullPath( $fPaths['data_json'], array( 'prioritize_my_copy' => true ) ) )
+        {
+            //  don't create this page unless it's saved
+            return false;
+        }
+
         //  page does not need to exit to be able to copy
         //  to allow Ayoola_Page::getInfo to work for theme pages
     //    if( ! $pageInfo = $class->sourcePage( $url ) )
@@ -81,6 +96,15 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
         if( ! empty( $pageInfo['layout_name'] ) && $pageInfo['layout_name'] != $themeName )
         {
              return false;
+        }
+    //    foreach( $fPaths as $key => $each )
+        {
+     //       if( $from = Ayoola_Loader::getFullPath( $each, array( 'prioritize_my_copy' => true ) ) )
+            {
+            //    var_export( $key . '<br>');
+            //    var_export( $from . '<br>');
+            //    copy( $from, $to );
+            }
         }
         return true;
     }
