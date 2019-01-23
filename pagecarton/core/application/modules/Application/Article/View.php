@@ -327,7 +327,14 @@ class Application_Article_View extends Application_Article_Abstract
 			$data['true_post_types'] = $data['article_type'];
 			$data['post_type'] = $data['article_type'];
 		}
-		
+		$data['post_link'] = $data['article_url'];
+		$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['article_url'];
+		if( @$data['article_url'] && strpos( @$data['article_url'], ':' ) === false && $data['article_url'][0] !== '?'  )
+		{
+			$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
+	//		var_export( $data['post_link'] );
+		}
+	
 	//	var_export( $postTypeInfo );
 		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
 		{

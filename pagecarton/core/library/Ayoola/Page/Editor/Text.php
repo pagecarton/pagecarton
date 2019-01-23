@@ -349,7 +349,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				$fieldset = new Ayoola_Form_Element; 
 				$fieldset->hashElementName = false;
 				$fieldset->container = 'span';
-				$fieldset->addElement( array( 'name' => 'markup_template_object_name[]', 'label' => 'Widget  <span name="embed_widget_counter" class="embed_widget_counter">' . ( $i ) . '</span>', 'style' => '', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$object['markup_template_object_name'][$i] ), array( '' => 'Select Widget' ) + $widgets );
+				$fieldset->addElement( array( 'name' => 'markup_template_object_name[]', 'label' => 'Widget  <span name="embed_widget_counter" class="embed_widget_counter">' . ( $i ) . '</span>', 'style' => '', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$object['markup_template_object_name'][$i] ), array( '' => 'Select Widget' ) + $widgets + array( '__custom' => 'Custom Widget' ) );  
 				if( $object['markup_template_object_name'][$i] )
 				{
 					$fieldset->allowDuplication = true;  
