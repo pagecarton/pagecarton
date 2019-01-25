@@ -451,6 +451,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						{
 							continue;
 						}
+
+						//	Some old posts does have titles in the table
+						if( empty( $data['article_title'] ) && ! empty( $dataX['article_title'] ) )
+						{
+							$class = Application_Article_Table::getInstance();
+							$class->update( $dataX, array( 'article_url' => $data['article_url'] ) );
+							$data = $dataX;
+						}
 						$data += $dataX;
 					}
 					
