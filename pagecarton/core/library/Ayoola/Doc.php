@@ -416,7 +416,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 				{
 					continue;
 				}
-                $extension = array_pop( explode( ".", strtolower( $file ) ) );
+                $extension = explode( ".", strtolower( $file ) );
+                $extension = array_pop( $extension );
                 if( is_array( @$options['whitelist_extensions'] ) && ! in_array( $extension, @$options['whitelist_extensions'] ) )
                 {
                     continue;

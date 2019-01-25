@@ -203,8 +203,10 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 				$images = array();
 				foreach( $files as $each )
 				{
-					$extension = array_pop( explode( ".", strtolower( $each ) ) );
-					if( ! in_array( $extension, self::$_imageExtensions ) )
+				//	$extension = array_pop( explode( ".", strtolower( $each ) ) );
+					$extension = explode( ".", strtolower( $each ) );
+					$extension = array_pop( $extension );
+						if( ! in_array( $extension, self::$_imageExtensions ) )
 					{
 						continue;
 					}

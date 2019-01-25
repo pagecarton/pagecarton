@@ -1593,7 +1593,7 @@ class Ayoola_Application
 		{
 			return array();
 		}
-		return $key ? self::$_userInfo[$key] : self::$_userInfo;
+		return $key ? @self::$_userInfo[$key] : self::$_userInfo;
     } 
 	
     /**

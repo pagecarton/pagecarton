@@ -878,7 +878,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
         $html .= $data['css_class_of_inner_content'] ? '<div class="' .$data['css_class_of_inner_content'] . '">' : null;
 		$html .= '<div style="float:right;background-color:#000;padding:10px;border-radius:10px;">' . @$data['post_type'] . '</div>';
 		$html .= '<' . $header . '>' . $data['article_title'] . '</' . $header . '>';
-		$html .= $data['article_description'] ? '<br><p>' . $data['article_description'] . '</p>' : null;
+		$html .= @$data['article_description'] ? '<br><p>' . $data['article_description'] . '</p>' : null;
 		$html .= $realPost && $data['button_value'] ? '<br><p><button class="pc-btn"> ' . $data['button_value'] . ' </button></p>' : null;
         $html .= $data['css_class_of_inner_content'] ? '</div>' : null;
 		$html .= '</div>';
@@ -903,7 +903,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			{
 	//		var_export( $profileInfo );
 			//	$data += $profileInfo ? : array();
-				$html .= ( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '" class="pc_posts_option_items"> by ' . ( $profileInfo['display_name'] ? : $data['profile_url'] ) . '</a>' );
+				$html .= ( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '" class="pc_posts_option_items"> by ' . ( @$data['display_name'] ? : $data['profile_url'] ) . '</a>' );
 			}
 		}
 		

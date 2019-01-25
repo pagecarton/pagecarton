@@ -270,7 +270,15 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 				}
 				elseif( $jSearch )
 				{
-					$template = str_replace( $jSearch, $jReplace, $template );    
+					if( is_array( $jReplace ) && ! is_array( $jSearch ) )
+					{
+						//	don't cause error 
+
+					}
+					else
+					{
+						$template = str_replace( $jSearch, $jReplace, $template );    
+					}
 				}
 				
 			}

@@ -354,7 +354,10 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		//		self::v( $pages );
 				
 				//	final word 
-				$title = ucwords( array_pop( explode( '/', Ayoola_Application::getRuntimeSettings( 'url' ) ) ) );
+			//	$title = ucwords( array_pop( explode( '/', Ayoola_Application::getRuntimeSettings( 'url' ) ) ) );
+                $title = explode( "/", strtolower( Ayoola_Application::getRuntimeSettings( 'url' ) ) );
+                $title = array_pop( $title );
+                $title = ucwords( $title );
 				if( class_exists( $title ) && method_exists( $title, 'getObjectTitle' ) && $title::getObjectTitle() )
 				{
 					$title = $title::getObjectTitle() ? : $title;

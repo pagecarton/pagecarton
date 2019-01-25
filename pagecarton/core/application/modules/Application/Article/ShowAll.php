@@ -689,14 +689,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$addNewPostUrl .= '&post_type_options_name=' . $this->getParameter( 'post_type_options_name' ) . '';
 		}
-
+		$howManyPostsToAdd = intval( $this->getParameter( 'add_a_new_post' ) );
 		$addNewPostUrl .= '&' . Ayoola_Page::setPreviousUrl() . '&counter=' . $howManyPostsToAdd;
 
 		$this->_parameter['add_a_new_post_full_url'] = $addNewPostUrl;
 
 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) ) 
 		{ 
-			$howManyPostsToAdd = intval( $this->getParameter( 'add_a_new_post' ) );
 			$myProfileInfo = Application_Profile_Abstract::getMyDefaultProfile();
 			do
 			{

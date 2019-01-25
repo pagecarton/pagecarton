@@ -42,7 +42,11 @@ class Application_Subscription_Checkout_Order_Editor extends Application_Subscri
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 
 		self::changeStatus( $values + $identifierData );
-		if( $this->updateDb() ){ $this->setViewContent( 'Order edited successfully', true ); }
+		if( $this->updateDb() )
+		{ 
+			$this->setViewContent( '<div class="goodnews">Order edited successfully</div>', true ); 
+			$this->setViewContent( $this->getForm()->view() );
+		}
     } 
 	// END OF CLASS
 }
