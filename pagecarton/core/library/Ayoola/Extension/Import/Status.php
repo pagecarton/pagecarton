@@ -153,6 +153,16 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 				self::changeStatus( $currentStatus, $from , $to );
 			}
 		}
+
+		$settings = null;
+		if( $data['settings_class'] )
+		{ 
+			if( Ayoola_Loader::loadClass( $data['settings_class'] ) )
+			{
+				$settings =  '<a href="/tools/classplayer/get/name/Ayoola_Extension_Import_Settings/?extension_name=' . $data['extension_name'] . '">Manage Settings.</p>';
+			}
+
+		}
 		unset( $data['extension_name'] );
 		unset( $data['extension_id'] );
  		if( ! $this->updateDb( $data ) )
@@ -160,7 +170,8 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 			$this->setViewContent( '<p class="badnews">Error: could not save Plugin.</p>.' ); 
 			return false;
 		}
-		$this->setViewContent( '<p class="boxednews goodnews">Plugin switched "' . $data['status'] . '" successfully.</p>' );
+		$this->setViewContent( '<p class="boxednews goodnews">Plugin switch "' . $data['status'] . '" successfully. ' . $settings . '</p>' );
+	//	var_Export( $data );  
 		//	clear cache
 		Application_Cache_Clear::viewInLine();	
 	//	$this->setViewContent( $this->getForm()->view() );

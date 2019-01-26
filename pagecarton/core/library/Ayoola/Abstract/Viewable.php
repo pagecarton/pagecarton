@@ -1641,10 +1641,22 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		//	self::v( $this->wrapViewContent );
 			if( $this->wrapViewContent && ! $this->getParameter( 'no_view_content_wrap' ) )
 			{
-				$documentElement = $this->_viewContent->createElement( $this->getParameter( 'object_container_element' ) ? : static::$_viewContentElementContainer );  
+				$element = $this->getParameter( 'object_container_element' ) ? : static::$_viewContentElementContainer;
+				switch( strtolower( $element ) )
+				{
+					case 'div' :
+					case 'span' :
+					case 'section' :
+
+					break;
+					default:
+					$element = 'div';
+					break;
+				}
+		//		self::v( $this->getParameter( 'object_container_element' )  );
+				$documentElement = $this->_viewContent->createElement( $element );  
 				$documentElement->setAttribute( 'data-object-name', $this->getObjectName() );
 				$documentElement->setAttribute( 'name', $this->getObjectName() . '_container' );
-			//	var_export( $this->getParameter( 'object_container_element' )  );
 			//	$this->getParameter( 'object_class' ) ? $documentElement->setAttribute( 'class', $this->getParameter( 'object_class' ) ) : null;
 		//		$this->getParameter( 'object_style' ) ? $documentElement->setAttribute( 'style', $this->getParameter( 'object_style' ) ) : null;   
 				$b = $this->_viewContent->createElement( 'div' );
