@@ -29,13 +29,18 @@
 
 	//	Using document root now
 	$home = dirname( __FILE__ );
+	//	var_export( $home );
+
 	if( ! empty( $_SERVER['DOCUMENT_ROOT'] ) )
 	{
-		$home = $_SERVER['DOCUMENT_ROOT'];    
+		$docRoot = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];  
+		if( is_file( $docRoot ) && is_writable( $docRoot ) )
+		{
+		    $home = $docRoot;
+		}
 	}
-	$home = realpath( $home ) ? : $home;    
 //	var_export( $home );
-//	var_export( $_SERVER );
+//	var_export( $_SERVER['DOCUMENT_ROOT'] );
 //	exit();
 	$dir = $oldDir = $baseAppPath = dirname( $home );
 //		var_export( $oldDir );
@@ -45,7 +50,7 @@
 	//	Shrink everything into a single dir
 	$dir = $newDir = $dir . '/pagecarton';
 	$temDirMain = $dir . '/temp/';
-	$temDir = $dir . '/temp/install/';
+	$temDir = $dir . '/temp/install/'; 
 	
 	
 	$oldAppPath = null;
@@ -85,7 +90,7 @@
 	//	look for this path prefix dynamically
 
     $currentDir = explode( '/', str_replace( array( '/', '\\' ), '/', dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
-    $tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( @$_SERVER['DOCUMENT_ROOT'] ? : $home, '/\\' ) ) );   
+    $tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $home, '/\\' ) ) );   
 
 //	var_export( $currentDir );
 //	var_export( $baseAppPath );
@@ -97,15 +102,23 @@
 		$prefix = array_diff( $currentDir, $tempDir );
 		if( implode( '/', $currentDir ) === implode( '/', $tempDir + $prefix ) && trim( implode( '/', $prefix ) ) )
 		{
-		//	var_export( $currentDir );
+			//	var_export( $currentDir );
 			$prefix = '/' . implode( '/', $prefix );  
 		//	var_export( $prefix );
+		}
+		else
+		{
+			$prefix = null;
 		}
 	//	var_export( $tempDir );
 	//	var_export( $prefix );
 	}
-//	var_export( $currentDir );
-//	var_export( $prefix );
+	if( ! empty( $_SERVER['CONTEXT_PREFIX'] ) )
+	{
+		#	for cpanel temp user links
+		#	http://199.192.23.45/~nustreamscentre/pc_installer.php?stage=start
+		$prefix = $_SERVER['CONTEXT_PREFIX'] . $prefix;
+	}
 			
 	//	Preserve some of this data before deleting some files
 	$dbDir = '/application/databases/';
@@ -403,7 +416,7 @@
 			else
 			{
 				$content .= '<p>You do not have URL rewriting feature (e.g. mod-rewrite) on your webserver? PageCarton would work without it; But you would need to prefix your URLs with "index.php" when entering it on the web browser e.g. http://' . $_SERVER['HTTP_HOST'] . $prefix . '/index.php/page/url. On many of your pages, PageCarton will add this automatically.  </p>';
-			//	$content .= '<p><a href="index.php/object/name/PageCarton_NewSiteWizard/"> Proceed to Personalization...</a></p>';
+			//	$content .= '<p><a href="index.php/object/name/Application_Personalization/"> Proceed to Personalization...</a></p>';
 				$content .= '<p><input value="Proceed to Personalization" type="button" onClick = "location.href=\'index.php/object/name/Application_Personalization/\'" /></p>';
 			}
 			//	Self destroy file
@@ -436,7 +449,7 @@
             { 
              	if( $f = @fopen( $remoteSite . '/pc_installer.php?do_not_highlight_file=1', 'r' ) )
                 {
-					file_put_contents( 'pc_installer.php', $f );  
+					file_put_contents( 'pc_installer.php', $f );
                 }
           	}
 			else
@@ -445,13 +458,8 @@
           //      $badnews .= '<p>The installer could not be upgraded. It need to be refreshed before installation. Make the installer file writable. The part is - ' . $_SERVER['SCRIPT_FILENAME'] . '</p>';
 			}
 		//	header( 'Location: ?stage=start' );
-		//	header( "Location: {$prefix}/pc_installer.php?stage=start" );
-			$urlToGo = $_SERVER['PHP_SELF'];
-			if( strpos( $urlToGo, 'pc_installer.php' ) === false )
-			{
-				$urlToGo = "{$prefix}/pc_installer.php";
-			}
-			header( "Location: {$urlToGo}?stage=start" );   
+	//    var_export( $prefix );
+			header( "Location: {$prefix}/pc_installer.php?stage=start" );
 			exit();
         break;
 	

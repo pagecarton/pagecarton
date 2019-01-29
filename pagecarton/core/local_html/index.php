@@ -12,7 +12,11 @@
 		$root = dirname( __FILE__ );
 		if( ! empty( $_SERVER['DOCUMENT_ROOT'] ) )
 		{
-			$root = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];    
+			$docRoot = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];  
+			if( is_file( $docRoot ) && is_writable( $docRoot ) )
+			{
+				$root = $docRoot;
+			}
 		}
 	//	var_export( $home );
 	//	var_export( $_SERVER );
@@ -54,7 +58,13 @@
 				$prefix = '/' . implode( '/', $prefix );  
 			}
 		}
-	//		var_export( $tempDir );
+		if( ! empty( $_SERVER['CONTEXT_PREFIX'] ) )
+		{
+			#	for cpanel temp user links
+			#	http://199.192.23.45/~nustreamscentre/pc_installer.php?stage=start
+			$prefix = $_SERVER['CONTEXT_PREFIX'] . $prefix;
+		}
+		//		var_export( $tempDir );
 		//	var_export( $prefix ); 
 		//	EXIT();			
 		defined( 'PATH_PREFIX' ) || define( 'PATH_PREFIX', $prefix );
