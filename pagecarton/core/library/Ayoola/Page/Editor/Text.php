@@ -619,7 +619,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		elseif( @$object['codes']  )
 		{
-			$html .= '<textarea class="pc_page_object_specific_item" data-parameter_name="codes" style="' . $hiddenStyle . 'width:100%;" title="You may click to edit the content here..." >' . htmlspecialchars( @$object['codes'] ? : $object['editable'] ) . '</textarea>';     
+			$html .= '<textarea class="pc_page_object_specific_item" data-parameter_name="codes" style="' . $hiddenStyle . 'width:100%; background-color:inherit; color:inherit;" title="You may click to edit the content here..." >' . htmlspecialchars( @$object['codes'] ? : $object['editable'] ) . '</textarea>';     
 		}
 		$html .= '<textarea class="" data-parameter_name="preserved_content" style="display:none;" title="" >' . htmlspecialchars( @$object['editable'] ) . '</textarea>';     
 

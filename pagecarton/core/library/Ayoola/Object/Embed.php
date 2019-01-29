@@ -374,7 +374,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			{
 				$html .= '<option value="' . $object['editable'] . '" selected = selected>' . $object['editable'] . '</option> '; 
 			}
-			$html .= '<option value="__custom" selected = selected>Custom Widget</option> '; 
+			$html .= '<option value="__custom">Custom Widget</option> '; 
 			$html .= '</select>';
 			
 		//	$html .= '<span style=""> or </span>';

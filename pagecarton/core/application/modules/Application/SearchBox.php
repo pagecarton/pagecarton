@@ -54,7 +54,7 @@ class Application_SearchBox extends Ayoola_Abstract_Table
 			$term = htmlentities( strip_tags( $_GET['q'] ), ENT_QUOTES, "UTF-8", false );
 			$html = '
 						<form data-not-playable="true" style="padding:1em 0 1em 0;" method="get" action="' . ( $this->getParameter( 'action' ) ? : '' . Ayoola_Application::getUrlPrefix() . '/search' ) . '" class="">
-						  <input style="width:80%;padding:1em;" name="q" type="search" value="' . $term . '" placeholder="' . htmlentities( $this->getParameter( 'placeholder' ) ? : 'What are you looking for?', ENT_QUOTES, "UTF-8", false ) . '"><button type="submit" style="width:20%;padding:1em;">Go</button>
+						  <input style="width:80%;padding:1em;background-color:inherit; color:inherit;" name="q" type="search" value="' . $term . '" placeholder="' . htmlentities( $this->getParameter( 'placeholder' ) ? : 'What are you looking for?', ENT_QUOTES, "UTF-8", false ) . '"><button type="submit" style="width:20%;padding:1em;">Go</button>
 						</form>
 			';
 /* 			if( $this->getParameter( 'full_screen' ) )

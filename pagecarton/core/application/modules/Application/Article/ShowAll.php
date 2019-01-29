@@ -356,10 +356,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->setParameter( $storedValues['parameter'] );
 		}
 		//	Prepare post viewing for next posts
-		$class = new Application_Article_ViewPagination( array( 'no_init' => true ) );
-		$storageForSinglePosts = $class->getObjectStorage( array( 'id' => 'post_list_id' ) );
-	//	self::v( $postListId );  
-		$storageForSinglePosts->store( $postListId );
 		
 		//	Using menu template?
 		//	autoload new posts
@@ -1331,11 +1327,18 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$storage = self::getObjectStorage( array( 'id' => $postListId . '_single_post_pagination', 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
 		//	self::v( $postListId );  
-		//	self::v( $singlePostPaginationInfo );  
+		//	self::v( $singlePostPaginationInfo );    
 			//	add it to previous because of autoload clearing this settings
 			$prevSinglePostPagination = $storage->retrieve();
 			$singlePostPaginationInfo = $singlePostPaginationInfo + ( is_array( $prevSinglePostPagination ) ? $prevSinglePostPagination : array() );
 			$storage->store( $singlePostPaginationInfo );
+
+			
+			$class = new Application_Article_ViewPagination( array( 'no_init' => true ) );
+			$storageForSinglePosts = $class::getObjectStorage( array( 'id' => 'post_list_id' ) );
+		//	self::v( $postListId );  
+			$storageForSinglePosts->store( $postListId );
+		//	self::v( $storageForSinglePosts->retrieve() ); 
 		}
 	//	self::v( $prevSinglePostPagination );
 	//	self::v( count( $singlePostPaginationInfo ) );

@@ -499,6 +499,8 @@ pc_full_width
     border: none;
     border-bottom: 1px solid #ddd;
     background: transparent;
+    background-color: inherit;
+    color:inherit;
     margin-bottom: 10px;
 }
 .pc-form2 input[type="checkbox"],
