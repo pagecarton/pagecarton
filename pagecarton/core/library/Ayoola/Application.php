@@ -405,20 +405,27 @@ class Ayoola_Application
 				}
 			
 			}
-//			var_export( $data['domain_settings'] );
-			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] )
+			if( $domainName === $_SERVER['SERVER_ADDR'] )
+			{
+				//	don't use ip domain
+	//			$data['domain_settings'] = $where; 
+		//		va
+				//	make IP work but don't store it
+				$subDomain = null;
+			}
+		//	var_export( $subDomain );
+			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && $domainName !== $_SERVER['SERVER_ADDR'] )
 			{
 				if( ! $domain->select() && ( '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] ) )
 				{
+				//	var_export( $domainName );
+				//	var_export( $_SERVER['SERVER_ADDR'] );
 					//	insert the first domain only
 					$domain->insert( $where );
-					$data['domain_settings'] = $where;
+					$data['domain_settings'] = $where; 
 					break;
 				}
-/*				header( "HTTP/1.0 404 Not Found" );
-				header( "HTTP/1.1 404 Not Found" );
-				Header('Status: 404 Not Found');
-*/				header( 'Location: ' . $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
+				header( 'Location: ' . $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
 				exit( 'DOMAIN NOT FOUND' );
 			}
 			else

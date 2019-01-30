@@ -200,7 +200,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		//		break; 
 			}
 		//	if( $_SERVER['SERVER_PORT'] != '80' ){ break; }
-	//	var_export( $uri . '<br>' );
+//	var_export( $uri . '<br>' );
 			try
 			{
 			//	$filePath = DOCUMENTS_DIR . $file;
@@ -220,7 +220,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 					$domain = DOMAIN;
 		//			if( $useQueryStrings )
 					{
-			//			var_export( Ayoola_Application::getDomainSettings() );
+					//	var_export( Ayoola_Application::getDomainSettings() );
 					//	exit();
 						$dedicatedUrl = Ayoola_Application::getDomainSettings( 'protocol' ) . "://{$domain}" . Ayoola_Application::getUrlPrefix() . "{$uri}?document_time={$j}";					
 					}	
