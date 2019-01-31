@@ -413,8 +413,7 @@ class Ayoola_Application
 				//	make IP work but don't store it
 				$subDomain = null;
 			}
-		//
-			var_export( $subDomain );
+		//	var_export( $subDomain );
 			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && $domainName !== $_SERVER['SERVER_ADDR'] )
 			{
 				if( ! $domain->select() && ( '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] ) )
