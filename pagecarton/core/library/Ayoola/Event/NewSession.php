@@ -49,8 +49,10 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 			$auth = new Ayoola_Access();
 		//	var_export( $_COOKIE );
 			
+			$loginObject = new Ayoola_Access_Login();
+			
 			//	User doesn't have pesistent login cookie
-			$cookieValue = @$_COOKIE['accessLogin'] ? : $_COOKIE['Ayoola_Access_Login'];
+			$cookieValue = @$_COOKIE[$loginObject->getObjectName()];
 			if( empty( $cookieValue ) ){ break; }
 		//	var_export( $_COOKIE );
 			
@@ -58,7 +60,6 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 			if( $userInfo = $auth->getUserInfo() ){ break; }
 		//	var_export( $_COOKIE );
 
-		//	$cookieValue = @$_COOKIE['accessLogin'] ? : $_COOKIE['Ayoola_Access_Login'];
 			list( $cookieUserid, $cookiePassword, $cookieCreationTime, $strict ) = explode( ':', base64_decode( $cookieValue ) );
 	//		self::v( base64_decode( $cookieValue ) );
 		//	self::v( $cookieUserid );

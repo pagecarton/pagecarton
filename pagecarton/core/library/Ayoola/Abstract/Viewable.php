@@ -1606,13 +1606,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		$className = $className ? : get_class( $this );
 		$objectName = $className;
-/*		$objectName = new Ayoola_Object_Table_ViewableObject();
-	//	var_export( $className );
-		$objectName = $objectName->selectOne( null, array( 'class_name' => $className ) );
-	//	var_export( $objectName );
-		@$objectName = $objectName['object_name'] ? : $className;
-	//	var_export( $objectName );
-*/		$this->objectName = $objectName;
+		$this->objectName = $objectName;
 		return $objectName;
 	 }
  
