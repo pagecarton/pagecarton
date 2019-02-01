@@ -131,20 +131,10 @@ class Application_Article_View extends Application_Article_Abstract
     {
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' ); 		
 		$data = $this->getIdentifierData();
-	//	var_export( $data );
+	//	self::v( $data );
 	//	$this->_xml = '<span class="' . __CLASS__ . '_UL" style="list-style:none;">';
 		$url = $data['article_url'];
 	//	var_export( $data['article_content'] );
-	
-		//	Get user info
-		if( @$data['username'] && $this->getParameter( 'get_access_information' ) )
-		{
-			//	Causes things to run slow
-			if( $userInfo = Ayoola_Access::getAccessInformation( $data['username'] ) )
-			{
-				$data += $userInfo;
-			}
-		}
 		if( $this->getParameter( 'use_datetime' ) )
 		{
 			if( ! empty( $data['datetime'] ) )
@@ -159,11 +149,24 @@ class Application_Article_View extends Application_Article_Abstract
 		}
 		if( ! empty( $data['profile_url'] ) )
 		{
+		//	self::v( $data );
 			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) )
 			{
+			//	self::v( $profileInfo );
 				$data += $profileInfo ? : array();
 			}
 		}
+			
+		//	Get user info
+		if( @$data['username'] && $this->getParameter( 'get_access_information' ) )
+		{
+			//	Causes things to run slow
+			if( $userInfo = Ayoola_Access::getAccessInformation( $data['username'] ) )
+			{
+				$data += $userInfo;
+			}
+		}
+
 		if( $this->getParameter( 'modified_time_representation' ) )
 		{
 			if( is_string( $this->getParameter( 'modified_time_representation' ) ) )

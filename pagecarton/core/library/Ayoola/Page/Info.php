@@ -115,7 +115,7 @@ class Ayoola_Page_Info extends PageCarton_Widget
 
             if( empty( $pageInfo['cover_photo'] ) )
             {
-                $pageInfo['cover_photo'] = $settings['cover_photo'] ? : '/img/placeholder-image.jpg';
+                $pageInfo['cover_photo'] = $settings['cover_photo'] ? : ( $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg' );
             }
 
             if( empty( $pageInfo['description'] ) && self::hasPriviledge( array( 99, 98 ) ) )

@@ -614,6 +614,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
  		}
 //		self::v( $this->getParameter( 'article_url' ) );
 //		self::v( $url );
+//		self::v( $data );
 		if( ! $data )
 		{
 			return false;

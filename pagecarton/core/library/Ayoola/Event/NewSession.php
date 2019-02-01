@@ -49,7 +49,7 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 			$auth = new Ayoola_Access();
 		//	var_export( $_COOKIE );
 			
-			$loginObject = new Ayoola_Access_Login();
+			$loginObject = new Ayoola_Access_Login( array( 'no_init' => true ) );
 			
 			//	User doesn't have pesistent login cookie
 			$cookieValue = @$_COOKIE[$loginObject->getObjectName()];

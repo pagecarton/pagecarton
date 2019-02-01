@@ -137,7 +137,7 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 	 */
 	public function logout()
 	{
-		$loginObject = new Ayoola_Access_Login();
+		$loginObject = new Ayoola_Access_Login( array( 'no_init' => true ) );
 
 		setcookie( $loginObject->getObjectName(), '', time() - 1728000, '/' );
 		setcookie( $loginObject->getObjectName(), '', 0 );

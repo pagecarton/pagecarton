@@ -744,6 +744,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$j = is_numeric( @$_GET['no_of_articles_to_show'] ) ? intval( $_GET['no_of_articles_to_show'] ) : $j; 
 		$j = is_numeric( @$_GET['no_of_post_to_show'] ) ? intval( $_GET['no_of_post_to_show'] ) : $j; 
 		$j = is_numeric( $this->getParameter( 'no_of_post_to_show' ) ) ? intval( $this->getParameter( 'no_of_post_to_show' ) ) : $j;
+		if( $j < intval( $this->getParameter( 'add_a_new_post' ) ) )
+		{
+			$j = $this->getParameter( 'add_a_new_post' );
+		}
 	//	var_export( $i );
 	//	var_export( $j );
 		$done = array();
@@ -891,7 +895,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['document_url_uri'] = $data['document_url']; 
 			$data['document_url_cropped'] = $data['document_url']; 
 			$data['document_url_no_resize'] = $data['document_url']; 
-	//		var_export( $data['document_url'] );
+		//	self::v( $data['document_url'] );  
 		//	var_export( Ayoola_Doc::uriToPath( $data['document_url'] ) );
 			if( $fileP = Ayoola_Doc::uriToPath( $data['document_url'] ) )
 			{

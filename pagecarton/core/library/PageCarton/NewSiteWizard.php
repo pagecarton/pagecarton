@@ -51,7 +51,9 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                 }
             }
 
-            Application_Personalization::viewInLine();
+            //  Causing page to take too long to load
+            //  may be the cause of cache clearing every time
+        //    Application_Personalization::viewInLine();
 
             $stages = array(
                 array( 'key' => 'Basic Information', 'title' => 'Set site basic information', 'class' => 'Application_Personalization' ),

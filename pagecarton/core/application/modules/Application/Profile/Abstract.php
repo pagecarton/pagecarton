@@ -301,7 +301,20 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			$filename = self::getProfilePath( $url );
 			$profileData = @include $profileUrL;
 		}
-*/		return $profileData;
+*/		
+		if( ! @$profileData['display_picture'] )
+		{
+			$profileData['display_picture'] = '/img/placeholder-image.jpg';
+		}
+		if( ! @$profileData['display_name'] )
+		{
+			$profileData['display_name'] = $profileData['profile_url'];
+		}
+		if( ! @$profileData['profile_description'] )
+		{
+		//	$profileData['profile_description'] = $profileData['profile_url'];
+		}
+		return $profileData;
 	}
 
     /**

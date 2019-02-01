@@ -1918,8 +1918,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$content = null;
 				$html = null;
 				$content = $this->getViewContent();
-				
-		//		var_export( $this->getParameter( 'markup_template' ) );
+			//	if( get_class( $this ) === 'Application_Article_Category' )
+				{
+				//	var_export( $this->getMarkupTemplate() );
+				}
 
 				if( ! $template = $this->getMarkupTemplate() )      
 				{

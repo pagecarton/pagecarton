@@ -723,7 +723,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 								trigger.innerHTML = \'Code View\'; 
 								c.setAttribute( \'data-parameter_name\', \'\' ); 
 								a[b].setAttribute( \'data-parameter_name\', \'editable\' ); 
-								c.parentNode.removeChild( c );
+								c.parentNode.removeChild( c ); 
 								
 							} 
 							else
