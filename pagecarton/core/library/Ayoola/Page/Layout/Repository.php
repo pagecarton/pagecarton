@@ -54,6 +54,15 @@ class Ayoola_Page_Layout_Repository extends Ayoola_Extension_Import_Repository
      */
 	protected static $_pluginClass = 'Ayoola_Page_Layout_Creator'; 
 
+    
+    /**
+     * 
+     * 
+     */
+	public function getDefaultCategory()
+    {
+        return Application_Settings_SiteInfo::retrieve( 'site_type' );
+    }
 	
     
     /**

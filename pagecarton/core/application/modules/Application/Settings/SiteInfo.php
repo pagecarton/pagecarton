@@ -73,7 +73,8 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
             $fieldset->addElement( array( 'name' => 'cover_photo', 'label' => 'Banner Image', 'type' => 'Document', 'value' => @$settings['cover_photo'] ) );    
         }  
         $options = Ayoola_Page_Layout_Repository::getMenuOptions();
-		$fieldset->addElement( array( 'name' => 'site_type', 'label' => 'Theme Type', 'value' => @$settings['site_type'], 'type' => 'Select' ), array( '' => 'Generic' ) + array_column( $options, 'option_name', 'title' ) ? : array() );
+  //      var_export( $options );
+		$fieldset->addElement( array( 'name' => 'site_type', 'label' => 'Theme Type', 'value' => @$settings['site_type'], 'type' => 'Select' ), array( '' => 'Generic' ) + array_column( $options, 'title', 'category_name' ) ? : array() );
 		$fieldset->addLegend( 'Site Information' );  
 		$form->addFieldset( $fieldset );
 		
