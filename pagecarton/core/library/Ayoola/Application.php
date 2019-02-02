@@ -192,7 +192,7 @@ class Ayoola_Application
 	public static function reset( array $settings = null )
     {
 		//	set path
-		$domainSettings = array();
+		$domainSettings = array( 'no_redirect' => true );
 //		if( ! empty( $settings['path'] ) )
 		{
 			self::$_pathPrefix = $settings['path'];
@@ -370,6 +370,7 @@ class Ayoola_Application
 				}
 			}
 			//	var_export( $primaryDomainInfo );  
+			//	exit();
 			if( ! $data['domain_settings'] )
 			{
 				//	look for domain in the users table
@@ -384,12 +385,14 @@ class Ayoola_Application
 				//	exit();
 				}
 			}
-			if( ! @$subDomain && @in_array( 'ssl', @$data['domain_settings']['domain_options'] ) && $protocol != 'https' )
+		//	PageCarton_Widget::v( $data['domain_settings'] );
+		//	exit();
+			if( ! @$subDomain && @in_array( 'ssl', @$data['domain_settings']['domain_options'] ) && $protocol != 'https' && empty( $domainSettings['no_redirect'] ) )
 			{
 				header( 'Location: https://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
 				exit();
 			}
-			if( ! @$subDomain && @strlen( $data['domain_settings']['enforced_destination'] ) > 3 )
+			if( ! @$subDomain && @strlen( $data['domain_settings']['enforced_destination'] ) > 3 && empty( $domainSettings['no_redirect'] ) )
 			{
 			//	var_export( $subDomain );
 			//	exit();
@@ -414,7 +417,7 @@ class Ayoola_Application
 				$subDomain = null;
 			}
 		//	var_export( $subDomain );
-			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && $domainName !== $_SERVER['SERVER_ADDR'] )
+			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && $domainName !== $_SERVER['SERVER_ADDR']&& empty( $domainSettings['no_redirect'] )  )
 			{
 				if( ! $domain->select() && ( '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] ) )
 				{
@@ -593,7 +596,7 @@ class Ayoola_Application
 					//	$storage->store( $data );
 					//	setcookie( 'SUB_DIRECTORY', $subDomain['domain_name'], time() + 9999999, '/' );
 					}
-					elseif( ! empty( $tempWhere['domain_name'] ) && $tempWhere['domain_name'] != self::getDomainName() )
+					elseif( ! empty( $tempWhere['domain_name'] ) && $tempWhere['domain_name'] != self::getDomainName() && empty( $domainSettings['no_redirect'] )  )
 					{
 				//		var_export( $tempWhere );
 				//		var_export( $subDomain );
@@ -604,7 +607,7 @@ class Ayoola_Application
 						
 						exit( 'USER DOMAIN NOT ACTIVE' );
 					}
-					else
+					elseif( empty( $domainSettings['no_redirect'] ) )
 					{
 				//		header( 'HTTP/1.1 301 Moved Permanently' );
 						header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
@@ -621,7 +624,7 @@ class Ayoola_Application
 		
 		//	Check if theres a forwarding needed.
 	//	unset( $_SESSION['ignore_domain_redirect'] );
-		if( @is_array( $data['domain_settings']['domain_options'] ) && in_array( 'redirect', $data['domain_settings']['domain_options'] ) && ! @$_REQUEST['ignore_domain_redirect'] && ! @$_SESSION['ignore_domain_redirect'] )
+		if( @is_array( $data['domain_settings']['domain_options'] ) && in_array( 'redirect', $data['domain_settings']['domain_options'] ) && ! @$_REQUEST['ignore_domain_redirect'] && ! @$_SESSION['ignore_domain_redirect'] && empty( $domainSettings['no_redirect'] ) )
 		{
 			header( 'HTTP/1.1 ' . $data['domain_settings']['redirect_code'] );
 			$toGo = $protocol . '://' . $data['domain_settings']['redirect_destination'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET );
