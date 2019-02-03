@@ -69,6 +69,12 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             { 
                 unset( $stages[1], $stages[2] );
             }
+            else
+            {
+                #   Remove image from new site wizard, retain in publisher mode
+                #   We have not figured how updating images will enable a smooth progress
+                unset( $stages[4] );
+            }
 
             //  reset keys because those that left
             $stages = array_values( $stages );
