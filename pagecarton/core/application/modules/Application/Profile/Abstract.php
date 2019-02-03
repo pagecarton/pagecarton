@@ -302,17 +302,20 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			$profileData = @include $profileUrL;
 		}
 */		
-		if( ! @$profileData['display_picture'] )
+		if( @$profileData['profile_url'] )
 		{
-			$profileData['display_picture'] = '/img/placeholder-image.jpg';
-		}
-		if( ! @$profileData['display_name'] )
-		{
-			$profileData['display_name'] = $profileData['profile_url'];
-		}
-		if( ! @$profileData['profile_description'] )
-		{
-		//	$profileData['profile_description'] = $profileData['profile_url'];
+			if( ! @$profileData['display_picture'] )
+			{
+			//	$profileData['display_picture'] = '/img/placeholder-image.jpg';
+			}
+			if( ! @$profileData['display_name'] )
+			{
+			//	$profileData['display_name'] = $profileData['profile_url'];
+			}
+			if( ! @$profileData['profile_description'] )
+			{
+			//	$profileData['profile_description'] = $profileData['profile_url'];
+			}
 		}
 		return $profileData;
 	}
