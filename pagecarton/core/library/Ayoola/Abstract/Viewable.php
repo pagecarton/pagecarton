@@ -544,14 +544,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 //		curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt( $request, CURLOPT_FOLLOWLOCATION, @$settings['follow_redirect'] === false ? false : true ); //	By default, we follow redirect
-		curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 1000 );	//	Max of 1 Secs on a single request
-		curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 1000 );	//	Max of 1 Secs on a single request
+		curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 2 );	//	Max of 1 Secs on a single request  
+		curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 2 );	//	Max of 1 Secs on a single request
 		if( @$settings['post_fields'] )
 		{
 			curl_setopt( $request, CURLOPT_POST, true );
 		//	var_export( $request );
 		//	var_export( $settings['post_fields'] );   
-			curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );
+			curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );  
 		}
 		if( @$settings['raw_response_header'] )
 		{

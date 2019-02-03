@@ -100,8 +100,9 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
 
                 $phar = 'Ayoola_Phar_Data';
                 $tFile = str_ireplace( '.tar.gz', '.tar', $file1 );
+                Ayoola_Doc::createDirectory( dirname( $file1 ) );
                 $backup = new $phar( $tFile );
-                $backup->startBuffering();
+                $backup->startBuffering(); 
 
            //     var_export( APPLICATION_DIR );
 
@@ -137,17 +138,28 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             }
        //         exit();
 
-			$file2 = Ayoola_Loader::getFullPath( 'documents/pc_installer.php', array( 'prioritize_my_copy' => true ) );
-			$file3 = Ayoola_Loader::getFullPath( 'documents/pc_redirect.php', array( 'prioritize_my_copy' => true ) );
+            if( $_GET['pc_core_only'] )
+            {
+                $file = $file1;
+                header( 'Content-Disposition: attachment; filename="pagecarton-' . PageCarton::VERSION . '.tar.gz"' );
+                header('Content-Type: application/x-gzip');
+            }
+            else
+            {
+                $file2 = Ayoola_Loader::getFullPath( 'documents/pc_installer.php', array( 'prioritize_my_copy' => true ) );
+                $file3 = Ayoola_Loader::getFullPath( 'documents/pc_redirect.php', array( 'prioritize_my_copy' => true ) );
 
-            $zip->addFile( $file1, 'pc_installer.php.tar.gz');
-            $zip->addFile( $file2, 'pc_installer.php');
-            $zip->addFile( $file3, 'index.php');
-            $zip->addFile( APPLICATION_DIR . DS . 'changelog.txt', 'changelog.txt');
-            $zip->addFile( APPLICATION_DIR . DS . 'copyright.txt', 'copyright.txt');
-            $zip->addFile( APPLICATION_DIR . DS . 'install.txt', 'install.txt');
-            $zip->addFile( APPLICATION_DIR . DS . 'license.txt', 'license.txt');
-            $zip->addFile( APPLICATION_DIR . DS . 'readme.txt', 'readme.txt');
+                $zip->addFile( $file1, 'pc_installer.php.tar.gz');
+                $zip->addFile( $file2, 'pc_installer.php');
+                $zip->addFile( $file3, 'index.php');
+                $zip->addFile( APPLICATION_DIR . DS . 'changelog.txt', 'changelog.txt');
+                $zip->addFile( APPLICATION_DIR . DS . 'copyright.txt', 'copyright.txt');
+                $zip->addFile( APPLICATION_DIR . DS . 'install.txt', 'install.txt');
+                $zip->addFile( APPLICATION_DIR . DS . 'license.txt', 'license.txt');
+                $zip->addFile( APPLICATION_DIR . DS . 'readme.txt', 'readme.txt');
+                header('Content-Type: application/zip');
+                header( 'Content-Disposition: attachment; filename="pagecarton-' . PageCarton::VERSION . '.zip"' );
+            }
             $zip->close();   
      //       var_export( $file1 );
     //        exit();
@@ -158,12 +170,11 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             }
 
             //  Output demo content to screen
-            header('Content-Type: application/zip');
         //    header('Content-Length: ' . filesize($file));
-            header('Content-Disposition: attachment; filename="pagecarton-' . PageCarton::VERSION . '.zip"');
-            readfile($file);  
-            unlink($file); 
 
+            header( 'Content-Length: ' . filesize( $file ) );
+            readfile($file);  
+            @unlink($file); 
             exit();
              // end of widget process
           

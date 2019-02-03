@@ -84,8 +84,18 @@
 	$content = null;
 	$badnews = null;
 	$remoteSite = 'http://updates.pagecarton.org';  
-	$remoteSite2 = 'http://updates2.pagecarton.org';  
+	$remoteSite2 = 'http://s1.updates.pagecarton.org';  
+	$remoteSite3 = 'http://s2.updates.pagecarton.org';  
 
+	//	Now use back-up server
+	if( ! fetchLink( $remoteSite ) )
+	{
+		$remoteSite = $remoteSite2;
+		if( ! fetchLink( $remoteSite ) )
+		{
+			$remoteSite = $remoteSite3;
+		}
+	}
 
 	//	look for this path prefix dynamically
 
@@ -155,6 +165,88 @@
 	{
 		$badnews .= '<p>PageCarton requires PHP 5.3 or later. You are running version "' . PHP_VERSION .  '". We recommend PHP 7.0 or later.</p>';   
 	}
+  	
+    /** 
+     * Fetches a remote link. Lifted from Ayoola_Abstract_Viewable
+     *
+     * @param string Link to fetch
+     * @param array Settings  
+     */
+    function fetchLink( $link, array $settings = null )
+    {	
+		$request = curl_init( $link );
+//		curl_setopt( $request, CURLOPT_HEADER, true );
+		curl_setopt( $request, CURLOPT_URL, $link );
+
+		//	dont check ssl
+		curl_setopt($request, CURLOPT_SSL_VERIFYHOST, 0);
+		curl_setopt($request, CURLOPT_SSL_VERIFYPEER, 0);   
+
+		curl_setopt( $request, CURLOPT_USERAGENT, @$settings['user_agent'] ? : __FILE__ ); 
+		curl_setopt( $request, CURLOPT_AUTOREFERER, true );
+		curl_setopt( $request, CURLOPT_REFERER, @$settings['referer'] ? : $link );
+		if( @$settings['destination_file'] )
+		{
+			$fp = fopen( $settings['destination_file'], 'w' );
+			curl_setopt( $request, CURLOPT_FILE, $fp );
+			curl_setopt( $request, CURLOPT_BINARYTRANSFER, true );
+			curl_setopt( $request, CURLOPT_HEADER, 0 ); 
+		}
+		else  
+		{
+			curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
+		}
+//		curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
+		curl_setopt( $request, CURLOPT_FOLLOWLOCATION, @$settings['follow_redirect'] === false ? false : true ); //	By default, we follow redirect
+		curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 10 );	//	Max of 1 Secs on a single request
+		curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 10 );	//	Max of 1 Secs on a single request
+		if( @$settings['post_fields'] )
+		{
+			curl_setopt( $request, CURLOPT_POST, true );
+		//	var_export( $request );
+		//	var_export( $settings['post_fields'] );   
+			curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );
+		}
+		if( @$settings['raw_response_header'] )
+		{
+		//	var_export( $settings );
+			$headerBuff = fopen( '/tmp/headers' . time(), 'w+' );
+			//	var_export( $headerBuff );
+			curl_setopt( $request, CURLOPT_WRITEHEADER, $headerBuff );
+		}
+		if( is_array( @$settings['http_header'] ) )
+		{
+			curl_setopt( $request, CURLOPT_HTTPHEADER, $settings['http_header'] );
+		}
+		$response = curl_exec( $request );
+		$responseOptions = curl_getinfo( $request );
+
+			// close cURL resource, and free up system resources
+		curl_close( $request );
+	//	var_export( htmlentities( $response ) );
+		
+ 		//	var_export( $responseOptions );
+	//	exit( var_export( $responseOptions ) );
+		//	var_export( $settings['post_fields'] );
+ 	//	if( ! $response || $responseOptions['http_code'] != 200 ){ return false; }
+		if( empty( $settings['return_error_response'] ) )
+		{   
+ 			if( $responseOptions['http_code'] != 200 ){ return false; }
+		}
+		if( @$settings['return_as_array'] == true )
+		{   
+			if( @$settings['raw_response_header'] )
+			{
+			//	var_export( $headerBuff );
+				rewind($headerBuff);
+				$headers = stream_get_contents( $headerBuff );
+				@$responseOptions['raw_response_header'] = $headers;
+			}
+			$response = array( 'response' => $response, 'options' => $responseOptions );
+		}
+ 		//	var_export( $response );
+		return $response;
+    } 
 			
 	/**
 		* Attempts to remove dirs recursively in case
@@ -199,7 +291,7 @@
 //		case 'licence':
 //			$content .= '<h1>Continue installation, only if you agree to be bound by the following license terms.</h1>';
 	//		$content .= '<p>Please note that the license terms may change from time to time. Changes will always be on <a href="http://PageCarton.org/license.txt">http://www.PageCarton.org/license.txt</a>.</p>';
-			$content .= '<textarea rows="10" style="min-width:90%;display:block;">' . ( ( @file_get_contents( 'license.txt' ) ? : @file_get_contents( $remoteSite . '/license.txt' ) ) ? : @file_get_contents( $remoteSite2 . '/license.txt' ) ) . '</textarea>';
+			$content .= '<textarea rows="10" style="min-width:90%;display:block;">' . ( ( @file_get_contents( 'license.txt' ) ? : @fetchLink( $remoteSite . '/license.txt' ) ) ? : @fetchLink( $remoteSite2 . '/license.txt' ) ) . '</textarea>';
 	//		$content .= '<p>Having an active internet connection is preferred when installing PageCarton</p>';
 			$content .= '<input value="I agree" type="button" onClick = "location.href=\'?stage=download\'" />';
 		break;
@@ -211,9 +303,9 @@
 				break;
 			}
 			//	Retrieve the file
-			if( ! is_file( $filename ) )
+			if( ! is_file( $filename ) || ! filesize( $filename ) )
 			{ 
-				if( ! $f = @fopen( $remoteSite . '/ayoola/framework/installer.tar.gz', 'r' ) )
+/* 				if( ! $f = @fopen( $remoteSite . '/ayoola/framework/installer.tar.gz', 'r' ) )
 				{
 					if( ! $f = @fopen( $remoteSite2 . '/ayoola/framework/installer.tar.gz', 'r' ) )
 					{
@@ -223,6 +315,14 @@
 					}
 				}
 				file_put_contents( $filename, $f );
+ */				
+				if( ! $f = fetchLink( $remoteSite . '/widgets/Application_Backup_GetInstallation/?pc_core_only=1' ) )
+				{ 
+					$badnews .= '<p>The installation archive is missing. We also tried to connect to the internet to download it but application coult not connect to the internet. Please ensure that allow_fopen_url is not switched off in your server configuration.</p>';
+					$badnews .= '<p>Please try copying the files back into your web root again and restart your installation. You may also resolve this issue by connecting to the internet.</p>';
+					break;
+				}
+				$f ? file_put_contents( $filename, $f ) : null;
 			}
 			if( ! is_readable( $filename ) )
 			{ 
@@ -447,12 +547,16 @@
 			}
 			if( is_writable( $_SERVER['SCRIPT_FILENAME'] ) )
             { 
-             	if( $f = @fopen( $remoteSite . '/pc_installer.php?do_not_highlight_file=1', 'r' ) )
+             //	if( $f = @fopen( $remoteSite . '/pc_installer.php?do_not_highlight_file=1', 'r' ) )
+             	if( $f = fetchLink( $remoteSite . '/pc_installer.php?do_not_highlight_file=1' ) )
                 {
+				//	var_export( $f );
+				//	exit();
 					file_put_contents( 'pc_installer.php', $f );
+				//	file_put_contents( 'pc_installer.php',  );
                 }
           	}
-			else
+			else  
 			{
 				//	Upgrade no longer required to cater for offline installers
           //      $badnews .= '<p>The installer could not be upgraded. It need to be refreshed before installation. Make the installer file writable. The part is - ' . $_SERVER['SCRIPT_FILENAME'] . '</p>';
