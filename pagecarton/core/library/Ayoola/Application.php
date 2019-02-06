@@ -1,14 +1,16 @@
 <?php
-
+/**
+ * Undocumented class
+ */
 class Ayoola_Application
 {
-	public static $disableOutput = false; 
-	
-	public static $playMode; 
+	public static $disableOutput = false;
+
+	public static $playMode;
 
     /**
      * Whether to log every visit or not
-     * 
+     *
      * @var boolean
      */
 	public static $accessLogging = true;
@@ -18,144 +20,144 @@ class Ayoola_Application
 
     /**
      * The Info of User of the Application
-     * 
+     *
      * @var array
      */
 	protected static $_userInfo;
 
     /**
      * Use to pass parameter accross application
-     * 
+     *
      * @var array
      */
 	public static $GLOBAL = array();
 
     /**
      * The Settings of the current running
-     * 
+     *
      * @var array
      */
 	protected static $_runtimeSetting;
 
     /**
      * The Settings of the current domain
-     * 
+     *
      * @var array
      */
 	protected static $_domainSettings;
 
     /**
      * The system user account information
-     * 
+     *
      * @var array
      */
 	protected static $_userAccountInfo;
-	
+
     /**
      * The Home and Default page
-     * 
-     * @var string 
+     *
+     * @var string
      */
 	public static $_homePage = '/';
 	public static $_notFoundPage = '/404';
-	
+
     /**
-     * 
-     * @var string 
+     *
+     * @var string
      */
 	protected static $_requestedUri;
-	
+
     /**
-     * 
-     * @var string 
+     *
+     * @var string
      */
 	protected static $_urlPrefix;
-	
+
     /**
-     * 
-     * @var string 
+     *
+     * @var string
      */
 	protected static $_pathPrefix;
-	
+
     /**
-     * 
-     * @var string 
+     *
+     * @var string
      */
 	protected static $_presentUri;
-	
+
     /**
      * The requested domain name
-     * 
-     * @var string 
+     *
+     * @var string
      */
 	protected static $_domainName;
-	
+
     /**
      * Site Configuration
-     * 
-     * @var array 
+     *
+     * @var array
      */
 	protected static $_conf = array();
-	
+
     /**
-     * 
-     * 
-     * @var array 
+     *
+     *
+     * @var array
      */
 	protected static $_includePaths = array();
-	
+
     /**
      * Application mode e.g. document/page
-     * 
-     * @var string 
+     *
+     * @var string
      */
 	public static $mode;
-	
+
     /**
      * Ayoola Framework software version
-     * 
-     * @var string 
+     *
+     * @var string
      */
 	public static $version = '1.6.1';
-	
+
     /**
      * Ayoola Framework software installer
-     * 
-     * @var string 
+     *
+     * @var string
      */
-	public static $installer = 'pc_installer.php';    
- 	
-	
+	public static $installer = 'pc_installer.php';
+
+
     /**
      * Returns the current runtime settings
-     * 
+     *
      * @return array
      */
 	public static function getRuntimeSettings( $key = null )
     {
 	//	new Application_Domain();
 		return ! array_key_exists( $key, self::$_runtimeSetting ) ? (array) self::$_runtimeSetting : self::$_runtimeSetting[$key];
-    } 
-	
+    }
+
     /**
-     * 
-     * 
+     *
+     *
      * @return string
      */
 	public static function sanitizeDomainName( $domainName )
     {
-	
-	} 
-	
+
+	}
+
     /**
      * Returns _domainName
-     * 
+     *
      * @return string
      */
 	public static function getDomainName( array $options = null )
     {
 		if( ! is_null( self::$_domainName ) )
-		{ 
+		{
 			return self::$_domainName;
 		}
 			//		var_export( $domainName );
@@ -165,28 +167,28 @@ class Ayoola_Application
 			require_once 'Ayoola/Storage.php';
 			$storage->storageNamespace = __METHOD__;
 			$storage->setDevice( 'File' );
-			$data = $storage->retrieve(); 
+			$data = $storage->retrieve();
 		}
 		if( @$data )
-		{		
+		{
 			self::$_domainName =  $data;
 			return self::$_domainName;
 		}
 		$filter = new Ayoola_Filter_DomainName();
-		$domainName = $filter->filter( $_SERVER['HTTP_HOST'] );  
-				
+		$domainName = $filter->filter( $_SERVER['HTTP_HOST'] );
+
 		//	Store to global use
 		$storage->store( $domainName );
-		
+
 		//	Store for request use
 		self::$_domainName = $domainName;
 
 		return self::$_domainName;
 	}
-	 
+
     /**
      * Returns the settings of the current domain
-     * 
+     *
      * @return array
      */
 	public static function reset( array $settings = null )
@@ -200,14 +202,14 @@ class Ayoola_Application
 		}
 
 		// set domain
-		self::setDomainSettings(); 
+		self::setDomainSettings();
 //		Application_Cache_Clear::viewInLine( array( 'clear_all' => true ) );
 	}
-	 
+
     /**
      *
-     * 
-     * @param string Path 
+     *
+     * @param string Path
      * @return void
      */
 	public static function setIncludePath( $path )
@@ -218,16 +220,16 @@ class Ayoola_Application
 			set_include_path( $path . PS . get_include_path() );
 		}
 	}
-	 
+
     /**
      * Returns the settings of the current domain
-     * 
+     *
      * @return array
      */
 	public static function getDomainSettings( $key = null )
     {
 		if( is_null( self::$_domainSettings ) )
-		{ 
+		{
 			// This is needed in Application_Domain Table
 			self::$_domainSettings[APPLICATION_DIR] = APPLICATION_DIR;
 			self::$_domainSettings[APPLICATION_PATH] = APPLICATION_PATH;
@@ -238,10 +240,10 @@ class Ayoola_Application
 	//	var_export( self::$_domainSettings );
 		return $key ? @self::$_domainSettings[$key] : self::$_domainSettings;
 	}
-	
+
     /**
      * Returns the settings of the current domain
-     * 
+     *
      * @param boolean Whether to force a reset
      * @return array
      */
@@ -259,9 +261,9 @@ class Ayoola_Application
 
 		$storage->storageNamespace = __CLASS__ . 'x-' . $_SERVER['HTTP_HOST'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
-		$data = $storage->retrieve(); 
+		$data = $storage->retrieve();
 		if(  $data && ! $forceReset && ! @$_GET['reset_domain_information'] )
-		{		
+		{
 		//	var_export( $data );
  			//	Allows the sub-domains to have an include path too.
 	//		var_export( $data );
@@ -272,31 +274,31 @@ class Ayoola_Application
 				self::setIncludePath( $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' );
 			//	set_include_path( $data['parent_domain_settings'][APPLICATION_PATH] . PS . $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );
 			}
-			else  
+			else
 			{
 		//		var_export( $data );
 				self::setIncludePath( PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' );
 				self::setIncludePath( PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules' );
-/*				set_include_path( 
+/*				set_include_path(
 									PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application'
-									. PS . PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules' 
-									. PS . get_include_path() 
-									
+									. PS . PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules'
+									. PS . get_include_path()
+
 								);
 */			}
 			//	Allows the sub-domains to have an include path too.
 			self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
 			self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] . '/modules' );
 	//		set_include_path( $data['domain_settings'][APPLICATION_PATH] . PS . $data['domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );
-			self::$_domainSettings =  $data['domain_settings'];  
+			self::$_domainSettings =  $data['domain_settings'];
 			if( ! empty( $data['domain_settings']['username'] ) )
 			{
 				Ayoola_Application::$GLOBAL = $data['domain_settings'];
 				//	var_export( Ayoola_Application::$GLOBAL );
 			}
 		//	var_export( $data );
-		//	return true;      
-		}  
+		//	return true;
+		}
 
 		//	Search the domain name in the domain table
 		do
@@ -305,15 +307,15 @@ class Ayoola_Application
 			//	var_export( $data );
 			$domainName = self::getDomainName();
 			//	var_export( $domainName );
-			
+
 			//	Ignore localhosts
 		//	if( count( explode( '.', $domainName ) ) == 1 ){ break; }
 			if( '127.0.0.1' == $_SERVER['REMOTE_ADDR'] )
-			{ 
+			{
 		//		$domainName = 'localhost';
-			//	break; 
+			//	break;
 			}
-			
+
 			require_once 'Application/Domain.php';
 			$domain = new Application_Domain();
 		//	var_export( $_SERVER );
@@ -321,32 +323,32 @@ class Ayoola_Application
 			$where = array( 'domain_name' => $domainName );
 			$tempDomainName = $domainName;
 			$tempWhere = $where;
-			while( ! $data['domain_settings'] = $domain->selectOne( null, $tempWhere ) ) 
+			while( ! $data['domain_settings'] = $domain->selectOne( null, $tempWhere ) )
 			{
 				if( '127.0.0.1' == $_SERVER['REMOTE_ADDR'] )
-				{ 
+				{
 			//		$domainName = 'localhost';
-					break; 
+					break;
 				}
 					$tempDomainName = explode( '.', $tempDomainName );
 				if( count( $tempDomainName ) < 2 ){ break; }
-				$subDomain = array_shift( $tempDomainName );	// Fix wildcard domainnames			
+				$subDomain = array_shift( $tempDomainName );	// Fix wildcard domainnames
 				$tempDomainName = implode( '.', $tempDomainName );
 				$tempWhere = array( 'domain_name' => $tempDomainName );
 			//	var_export( $tempWhere );
-				
+
 			}
 		//	var_export( $subDomain );
 			if( ! $primaryDomainInfo = $domain->selectOne( null, array( 'domain_type' => 'primary_domain' ) ) )
 			{
 				$primaryDomainInfo = $data['domain_settings'];
 			}
-			//	var_export( $primaryDomainInfo );  
+			//	var_export( $primaryDomainInfo );
 			if( ! $data['domain_settings'] )
 			{
 				//	look for domain in the users table
 				if( $userDomainInfo = Application_Domain_UserDomain::getInstance()->selectOne( null, array( 'domain_name' => $where['domain_name'] ) ) )
-				{					
+				{
 					//	link it to the profile
 					$subDomain = $userDomainInfo['profile_url'];
 					$data['domain_settings'] = $userDomainInfo;
@@ -368,14 +370,14 @@ class Ayoola_Application
 				$enforcedDestination = $data['domain_settings']['enforced_destination'];
 			//	var_export( $enforcedDestination );
 				if( count( explode( '.', $enforcedDestination ) ) >= 2 )
-				{ 
+				{
 					if( strtolower( $_SERVER['HTTP_HOST'] ) !== strtolower( trim( $enforcedDestination ) ) )
 					{
 						header( 'Location: ' . $protocol . '://' . $enforcedDestination . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
 						exit();
 					}
 				}
-			
+
 			}
 //			var_export( $data['domain_settings'] );
 			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] )
@@ -390,18 +392,18 @@ class Ayoola_Application
 /*				header( "HTTP/1.0 404 Not Found" );
 				header( "HTTP/1.1 404 Not Found" );
 				Header('Status: 404 Not Found');
-*/				header( 'Location: ' . $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
+*/				header( 'Location: ' . $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );
 				exit( 'DOMAIN NOT FOUND' );
 			}
 			else
 			{
 				//	We have found our domain name
 				//	Inventing a personal APPLICATION_PATH also for the "default" Installation
-				
+
 				//	Get settings for the primary domain for inheritance
-				
+
 			//	$domainDir = Application_Domain_Abstract::getSubDomainDirectory( Ayoola_Page::getDefaultDomain() );
-				$oldDomainDir = Application_Domain_Abstract::getSubDomainDirectory( @$primaryDomainInfo['domain_name'] ? : Ayoola_Page::getDefaultDomain() );   
+				$oldDomainDir = Application_Domain_Abstract::getSubDomainDirectory( @$primaryDomainInfo['domain_name'] ? : Ayoola_Page::getDefaultDomain() );
 
 			//	var_export( @$primaryDomainInfo['domain_name'] ? : Ayoola_Page::getDefaultDomain()  );
 		//		var_export( $oldDomainDir );
@@ -420,10 +422,10 @@ class Ayoola_Application
 							$data['domain_settings']['site_configuraton'] = $conf;
 						}
 					}
-					
+
 				}
-						//		var_export( $domainDir );  
-				if( is_dir( $oldDomainDir ) )  
+						//		var_export( $domainDir );
+				if( is_dir( $oldDomainDir ) )
 				{
 					if( ! is_dir( $domainDir ) )
 					{
@@ -431,14 +433,14 @@ class Ayoola_Application
 						Ayoola_Doc::recursiveCopy( $oldDomainDir, $domainDir );
 					}
 					rename( $oldDomainDir, $oldDomainDir . '.old.' . time() );
-				}  
-				
-				
+				}
+
+
 				if( @strlen( $primaryDomainInfo['application_dir'] ) > 3 )
 				{
 					$customDir =  Application_Domain_Abstract::getSubDomainDirectory( $primaryDomainInfo['application_dir'] );
 					$oldCustomDir = APPLICATION_DIR . $primaryDomainInfo['application_dir'];
-					
+
 					//	compatibility.
 					if( defined( 'PC_BASE' ) )
 					{
@@ -453,8 +455,8 @@ class Ayoola_Application
 					{
 						$customDir =  $oldCustomDir;
 					}
-					
-					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = str_replace( '/', DS, $customDir ); 
+
+					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = str_replace( '/', DS, $customDir );
 					$data['domain_settings'][APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'application';
 					$data['domain_settings'][EXTENSIONS_PATH] = @$primaryDomainInfo[EXTENSIONS_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'extensions';
 				}
@@ -467,22 +469,22 @@ class Ayoola_Application
 					//	exit( $domainDir);
 				//	For backward compatibility, the directory must be "consciously" set
 				//	var_export( __LINE__ );
-					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = str_replace( '/', DS, $domainDir );  
+					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = str_replace( '/', DS, $domainDir );
 					$data['domain_settings'][APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'application';
 					@$data['domain_settings'][EXTENSIONS_PATH] = @$primaryDomainInfo[EXTENSIONS_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'extensions';
 				}
 			//	var_export( $primaryDomainInfo );
-				
-				
+
+
 				//	How do we allow the user accounts in the primary domain visible here?
  			//	if( @$primaryDomainInfo['domain_name'] !== @$data['domain_settings']['domain_name'] )
 				{
 					$data['parent_domain_settings'] = $primaryDomainInfo;
 					self::setIncludePath( $data['parent_domain_settings'][APPLICATION_PATH] );
 					self::setIncludePath( $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' );
-			//		@set_include_path( $data['parent_domain_settings'][APPLICATION_PATH] . PS . $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );  
+			//		@set_include_path( $data['parent_domain_settings'][APPLICATION_PATH] . PS . $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );
 				}
-				
+
 			}
 		//	var_export( $data['domain_settings']['*']  );
 			//	check subdomain
@@ -502,7 +504,7 @@ class Ayoola_Application
 						$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
 						$data['domain_settings']['domain_name'] = $subDomain . '.' . $tempWhere['domain_name'];
 						$data['domain_settings'][APPLICATION_DIR] = str_replace( '/', DS, Application_Domain_Abstract::getSubDomainDirectory( $subDomainInfo['domain_name'] ) );
-						$data['domain_settings']['dynamic_domain'] = true;					
+						$data['domain_settings']['dynamic_domain'] = true;
 						$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
 						@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
 					//	$storage->store( $data );
@@ -511,16 +513,16 @@ class Ayoola_Application
 					elseif( $data['domain_settings']['*'] )
 					{
 				//		setcookie( 'SUB_DIRECTORY', false, time() - 9999999, '/', $domainName );				header( "HTTP/1.0 404 Not Found" );
-						
+
 					}
 					else
 					{
-						exit( 'INVALID SUB-DOMAIN' );   
+						exit( 'INVALID SUB-DOMAIN' );
 					}
 				}
 				else
 				{
-					
+
 					//	do we have user domains
 					$userInfo = Ayoola_Access::getAccessInformation( $subDomain );
 					if( ! $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) )
@@ -541,14 +543,14 @@ class Ayoola_Application
 						Ayoola_Application::$GLOBAL = $userInfo;
 						$data['domain_settings'] = $data['domain_settings'] ? : array();
 						$data['domain_settings'] += $userInfo;
-				//		var_export( $userInfo ); 
-				//		exit();    
+				//		var_export( $userInfo );
+				//		exit();
 					//	Application_Profile_Abstract::saveProfile( $information );
 						$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
-						$data['domain_settings']['domain_name'] = Ayoola_Application::getDomainName();					
-						$data['domain_settings']['dynamic_domain'] = true;					
+						$data['domain_settings']['domain_name'] = Ayoola_Application::getDomainName();
+						$data['domain_settings']['dynamic_domain'] = true;
 				//		$data['domain_settings'][APPLICATION_DIR] = Application_Profile_Abstract::getProfileDir( $userInfo['username'] );
-						$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] . DS . AYOOLA_MODULE_FILES .  DS . 'profiles' . DS . strtolower( implode( DS, str_split( $subDomain, 2 ) ) );    
+						$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] . DS . AYOOLA_MODULE_FILES .  DS . 'profiles' . DS . strtolower( implode( DS, str_split( $subDomain, 2 ) ) );
 						$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
 						@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
 					//	var_export( $data['domain_settings'] );
@@ -561,15 +563,15 @@ class Ayoola_Application
 				//		var_export( $subDomain );
 				//		exit();
 				//		header( 'HTTP/1.1 301 Moved Permanently' );
-						header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
+						header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );
 					//	var_export( $data );
-						
+
 						exit( 'USER DOMAIN NOT ACTIVE' );
 					}
 					else
 					{
 				//		header( 'HTTP/1.1 301 Moved Permanently' );
-						header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
+						header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );
 						exit( 'DOMAIN NOT IN USE' );
 					}
 				}
@@ -580,7 +582,7 @@ class Ayoola_Application
 		@$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_PATH] ? : APPLICATION_PATH;
 		@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][EXTENSIONS_PATH] ? : EXTENSIONS_PATH;
 		$data['domain_settings']['protocol'] = $protocol;
-		
+
 		//	Check if theres a forwarding needed.
 	//	unset( $_SESSION['ignore_domain_redirect'] );
 		if( @is_array( $data['domain_settings']['domain_options'] ) && in_array( 'redirect', $data['domain_settings']['domain_options'] ) && ! @$_REQUEST['ignore_domain_redirect'] && ! @$_SESSION['ignore_domain_redirect'] )
@@ -605,7 +607,7 @@ class Ayoola_Application
 		{
 		//	var_export( $primaryDomainInfo );
 		//	var_export( $data );
-			
+
 			if( @$primaryDomainInfo['domain_name'] !== @$data['domain_settings']['domain_name'] )
 			{
 				$data['parent_domain_settings'] = $primaryDomainInfo;
@@ -617,12 +619,12 @@ class Ayoola_Application
 			{
 				self::setIncludePath( PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' );
 				self::setIncludePath( PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules' );
-/*				set_include_path( 
+/*				set_include_path(
 									PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application'
-									. PS . PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules' 
-									. PS . get_include_path() 
-									
-								);  
+									. PS . PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules'
+									. PS . get_include_path()
+
+								);
 */			}
 		//	var_export( $data );
 			$storage->store( $data );
@@ -634,17 +636,17 @@ class Ayoola_Application
 		self::$_domainSettings = $data['domain_settings'];
 		//	var_export( $data );
 		return true;
-    } 
+    }
 
     public static function boot()
     {
-		
+
 		date_default_timezone_set( 'UTC' );
 		self::loadPrerequisites();
 		require_once 'Ayoola/Loader/Autoloader.php';
-		self::$_autoloader = Ayoola_Loader_Autoloader::getInstance();     
-		
-		//  
+		self::$_autoloader = Ayoola_Loader_Autoloader::getInstance();
+
+		//
 		Ayoola_Event_NewSession::viewInLine();
 		if( empty( $_SESSION['PC_SESSION_START_TIME'] ) )
 		{
@@ -652,27 +654,25 @@ class Ayoola_Application
 		}
 
 		//	Error / Exception handling
-		$errorMessage = '"Uncaught Exception " . get_class( $object ) . " with message " . $object->getMessage() . " in  " . $object->getFile() . " on line " . $object->getLine() . " Stack trace: " . $object->getTraceAsString() ';
-		$errorHandler = create_function
-		( 
-			'$object', 
-			'Application_Log_View_Error::log( ' . $errorMessage . ' );' 
-		);   
-	//	var_export( $errorHandler );
-		set_exception_handler( $errorHandler );
-		
+		//update to handle the deprecation of create_function
+		set_exception_handler( function($object){
+			Application_Log_View_Error::log( "Uncaught Exception " . get_class( $object ) . " with message " . $object->getMessage() . " in  " . $object->getFile() . " on line " . $object->getLine() . " Stack trace: " . $object->getTraceAsString() );
+		});
+
+		// throw new Exception();
+
 		//	Handle encryption
-		switch( @$_SERVER['HTTP_AYOOLA_PLAY_MODE'] ) 
+		switch( @$_SERVER['HTTP_AYOOLA_PLAY_MODE'] )
 		{
 			case 'ENCRYPTION':
-				$_POST = array();				
+				$_POST = array();
 				$data = file_get_contents( "php://input" );
 			//	echo $data;
 			//	var_export( $data );
 			//	exit();
 				if( $decrypted = OpenSSL::decrypt( $data, $_SERVER['HTTP_PAGECARTON_REQUEST_ENCRYPTION'] ) )
 				{
-					parse_str( $decrypted, $result ); 
+					parse_str( $decrypted, $result );
 					$_POST = is_array( $result ) ? $result : array();
 					if( isset( $_POST['pagecarton_request_timezone'], $_POST['pagecarton_request_time'], $_POST['pagecarton_request_timeout'] ) )
 					{
@@ -686,7 +686,7 @@ class Ayoola_Application
 						{
 							$_POST = array();
 						}
-					
+
 					}
 				//	var_export( $decrypted );
 			//		var_export( $_POST );
@@ -694,7 +694,7 @@ class Ayoola_Application
 				}
 			//	var_export( $encrypted );
 			//	echo $decrypted;
-				
+
 			//	var_export( $data );
 			//	exit();
 				//	Log early before we exit
@@ -703,9 +703,9 @@ class Ayoola_Application
 				{
 				//	exit();
 				}
-			break; 
+			break;
 		}
-		
+
 	//	throw new Exception( 'aaaa' );
     }
     public static function run()
@@ -716,12 +716,12 @@ class Ayoola_Application
 		$time_start = microtime( true );
 	//	var_export( memory_get_usage ( true ) . '<br />' );
 		self::$_runtimeSetting['start_time'] = $time_start; //	Record start time
-		
+
 		//	Record IP Address
 		@self::$_runtimeSetting['user_ip'] = array( 'REMOTE_ADDR' => $_SERVER['REMOTE_ADDR'], 'HTTP_CLIENT_IP' => $_SERVER['HTTP_CLIENT_IP'], 'HTTP_X_FORWARDED_FOR' => $_SERVER['HTTP_X_FORWARDED_FOR'], );
 ;
 		self::boot();
-	//	self::$_runtimeSetting['real_url'] = URI;   
+	//	self::$_runtimeSetting['real_url'] = URI;
 	//	self::$_runtimeSetting['url'] = URI;
 		self::$_runtimeSetting['real_url'] = Ayoola_Application::getPresentUri();
 		self::$_runtimeSetting['url'] = Ayoola_Application::getPresentUri();
@@ -729,40 +729,40 @@ class Ayoola_Application
 		//	Domain settings
 	//	self::getDomainSettings();
 	//	var_export( microtime( true ) - Ayoola_Application::$_runtimeSetting['start_time'] );
-		
+
 	//	var_export( memory_get_usage ( true ) . '<br />' );
 
 	//	run cron
 		self::$_conf = self::getDomainSettings( 'site_configuraton' );
-		
+
 		if( empty( self::$_conf['disable_auto_cron'] ) )
 		{
 			$result = PageCarton_Cron_Run::viewInLine();
 		//	var_export( $result );
 		}
-		
+
 		self::display();
 	//	var_export( microtime( true ) - Ayoola_Application::$_runtimeSetting['start_time'] );
 	//	exit();
 	//	var_export( memory_get_usage ( true ) . '<br />' );
 		$time_end = microtime( true );
-		
+
 	//	self::v( microtime( true ) - Ayoola_Application::$_runtimeSetting['start_time'] );
 		self::$_runtimeSetting['total_runtime'] = $time_end - $time_start; //	Record total runtime
-	//	var_export( self::$_runtimeSetting['total_runtime'] );  
-		
+	//	var_export( self::$_runtimeSetting['total_runtime'] );
+
 		//	Ignore localhosts and super users
  //		if( ! Ayoola_Page::hasPriviledge() )
- 
- 		if( ! in_array( $_SERVER['REMOTE_ADDR' ], array( '127.0.0.1', '::1' ) ) )                 
+
+ 		if( ! in_array( $_SERVER['REMOTE_ADDR' ], array( '127.0.0.1', '::1' ) ) )
 		{
 			self::log();
 		}
  	//	var_export( self::$_runtimeSetting['total_runtime'] . '<br />' );
 	//	var_export( $time_end . '<br />' );
- 
+
     }
-	
+
     /**
      * Display The Page
      *
@@ -776,9 +776,9 @@ class Ayoola_Application
 		//	var_export( Ayoola_Application::getUserInfo() );
 			//	new session
 		$uri = Ayoola_Application::getPresentUri();
-	//	var_export( $uri );	
-		
-		
+	//	var_export( $uri );
+
+
 		//	var_export( $_SERVER['HTTP_IF_MODIFIED_SINCE'] );
 
 		//	Handle Files and Documents differently, as per type of file
@@ -786,14 +786,14 @@ class Ayoola_Application
 		$explodedUri = explode( '.', $uri );
 		$extension = strtolower( array_pop( $explodedUri ) );
 	//	var_export( $extension );
-		if( count( $explodedUri ) > 0 && strlen( $extension ) <= 15 )  
+		if( count( $explodedUri ) > 0 && strlen( $extension ) <= 15 )
 		{
 			try
 			{
-				do 
+				do
 				{
 					self::$mode = 'document';
-					
+
 					//	Check if this is an article
 					$article = Application_Article_Abstract::getFolder() . $uri;
 					if( is_file( $article ) )
@@ -816,59 +816,59 @@ class Ayoola_Application
 							//	var_export( $articleInfo['username'] );
 							}
 						}
-						self::$GLOBAL['post'] = is_array( $articleInfo ) ? $articleInfo : array(); // store this in the global var 
-						
-						
+						self::$GLOBAL['post'] = is_array( $articleInfo ) ? $articleInfo : array(); // store this in the global var
+
+
 						//	introducing x_url so that user can determine the url to display a post
 						if( @$_REQUEST['x_url'] )
 						{
-							$moduleInfo = Ayoola_Page::getInfo( $_REQUEST['x_url'] ); 
+							$moduleInfo = Ayoola_Page::getInfo( $_REQUEST['x_url'] );
 							if( ( ! empty( $moduleInfo ) ) )
 //							if( ( ! empty( $moduleInfo ) && in_array( 'module', $moduleInfo['page_options'] ) ) )
 							{
 								self::$_runtimeSetting['real_url'] = $_REQUEST['x_url'];
 							}
-						}  
+						}
 						else
 						{
 						//	Ayoola_Abstract_Table::v( self::$_runtimeSetting['real_url'] );
-					//		$moduleInfo = Ayoola_Page::getInfo( self::$_runtimeSetting['real_url'] ); 
+					//		$moduleInfo = Ayoola_Page::getInfo( self::$_runtimeSetting['real_url'] );
 						//	Ayoola_Page::v( $moduleInfo );
-						//	Ayoola_Page::v( '/' . $articleInfo['true_post_type'] . '/post' );     
-						//	Ayoola_Page::v( '/' . $articleInfo['article_type'] . '/post' );       
+						//	Ayoola_Page::v( '/' . $articleInfo['true_post_type'] . '/post' );
+						//	Ayoola_Page::v( '/' . $articleInfo['article_type'] . '/post' );
 							if( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['article_type'] ) ) )
 							{
 								//	allow dedicated url for all post types like /post-viewer-article/
-								self::$_runtimeSetting['real_url'] = '/post-viewer-'  . $articleInfo['article_type'];		
+								self::$_runtimeSetting['real_url'] = '/post-viewer-'  . $articleInfo['article_type'];
 							}
 							elseif( ( ! empty( $articleInfo['true_post_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['true_post_type'] ) ) )
 							{
 								//	allow dedicated url for all post types like /post-viewer-article/
-								self::$_runtimeSetting['real_url'] = '/post-viewer-'  . $articleInfo['true_post_type'];		
+								self::$_runtimeSetting['real_url'] = '/post-viewer-'  . $articleInfo['true_post_type'];
 							}
 							elseif( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer' ) )
 							{
 								//	allow dedicated url for all post types like /post-viewer-article/
-								self::$_runtimeSetting['real_url'] = '/post-viewer';		
+								self::$_runtimeSetting['real_url'] = '/post-viewer';
 							}
 							elseif( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/' . $articleInfo['article_type'] . '/post' ) ) AND ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) )
 							{
-								//	allow dedicated url for all post types like /download/posts/					
-								self::$_runtimeSetting['real_url'] = '/' . $articleInfo['article_type'] . '/post';						
+								//	allow dedicated url for all post types like /download/posts/
+								self::$_runtimeSetting['real_url'] = '/' . $articleInfo['article_type'] . '/post';
 							}
 							elseif( ( ! empty( $articleInfo['true_post_type'] ) ) AND  ( $moduleInfo = Ayoola_Page::getInfo( '/' . $articleInfo['true_post_type'] . '/post' ) ) AND ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) )
 							{
-								//	allow dedicated url for all post types like /download/posts/								
-								self::$_runtimeSetting['real_url'] = '/' . $articleInfo['true_post_type'] . '/post';					
-							}   
+								//	allow dedicated url for all post types like /download/posts/
+								self::$_runtimeSetting['real_url'] = '/' . $articleInfo['true_post_type'] . '/post';
+							}
 							else
 							{
-								self::$_runtimeSetting['real_url'] = '/post/view';								
-								$moduleInfo = Ayoola_Page::getInfo( self::$_runtimeSetting['real_url'] ); 
+								self::$_runtimeSetting['real_url'] = '/post/view';
+								$moduleInfo = Ayoola_Page::getInfo( self::$_runtimeSetting['real_url'] );
 /*								if( ( ! empty( $moduleInfo ) && in_array( 'module', $moduleInfo['page_options'] ) ) )
 								{
 									//	allow dedicated url for all post types like /download/posts/
-									
+
 								}
 								else
 								{
@@ -876,12 +876,12 @@ class Ayoola_Application
 								}
 */							}
 						}
-		//				var_export( self::$_runtimeSetting['real_url'] );   
+		//				var_export( self::$_runtimeSetting['real_url'] );
 						self::view( self::$_runtimeSetting['real_url'] );
 						break;
 					//	exit();
 					}
-					
+
 					//	Enable Cache for Documents
 					// seconds, minutes, hours, days
 					$expires = 60 * 60 * 24 * 14; // 14 days
@@ -894,8 +894,8 @@ class Ayoola_Application
 					{
 					//	throw new Exception( 'File not found' );
 					}
-					
-	//	var_export( $fn );    
+
+	//	var_export( $fn );
 	//				exit();
 					//	cache some files forever to reduce connection rates
 					$catchForever = false;
@@ -907,7 +907,7 @@ class Ayoola_Application
 						case 'open-iconic':
 						case 'js':
 						case 'loading.gif':
-						case 'loading2.gif':    
+						case 'loading2.gif':
 						case 'js':
 							//	files already using document time
 							$catchForever = true;
@@ -949,21 +949,20 @@ class Ayoola_Application
 							if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) && (strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) == filemtime($fn))) {
 								// Client's cache IS current, so we just respond '304 Not Modified'.
 								header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($fn)).' GMT', true, 304);
-								exit(); 
+								exit();
 							} else {
 								// Image not cached or cache outdated, we respond '200 OK' and output the image.
 								header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($fn)).' GMT', true, 200);
 							}
 						}
-					//	This was making site load forever if size sent do not match this
-					//	header( 'Content-Length: ' . filesize( $fn ) );
+						header( 'Content-Length: ' . filesize( $fn ) );
 					}
-					
+
 
 			//		var_export( headers_list() );
 			//	var_export( $uri );
 			//	exit();
-			
+
 					//	DONT LOGG DOCUMENTS
 					self::$accessLogging = false;
 					$doc = new Ayoola_Doc( array( 'option' => $uri ) );	;
@@ -982,7 +981,7 @@ class Ayoola_Application
 		//	catch( Ayoola_Doc_Exception $e )
 			catch( Ayoola_Exception $e )
 			{
-				
+
 		//		echo $e->getMessage();
 				// 	Possibly File not found
 				//	This may not work unless a setting is made with the webserver
@@ -994,18 +993,18 @@ class Ayoola_Application
  */			//	break;
 			//	exit();
 			}
-			//	Decided not to halt the script here 
+			//	Decided not to halt the script here
 			//	This is mainly because of PHP Documents
 			//	If not, this chunk should stop here, because the file has been executed/
 		//	exit();
-			
+
 			require_once 'Ayoola/Loader.php';
 		}
 		if( stripos( $_SERVER['HTTP_HOST'], '.document.' ) )
-		{ 
+		{
 		//		header( 'HTTP/1.1 301 Moved Permanently' );
 				header( 'Location: http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Page::getPortNumber() . Ayoola_Application::getPresentUri() );
-				exit(); 
+				exit();
 		}
 		else
 		{
@@ -1013,14 +1012,14 @@ class Ayoola_Application
 		//	$pagePaths = Ayoola_Page::getPagePaths( $uri );
 		//	var_export( $pageOptions );
 		//	exit( $_SERVER['HTTP_IF_MODIFIED_SINCE'] );
-			do 
+			do
 			{
-				
-				
+
+
 				self::$mode = 'uri';
 			//	var_export( $uri );
 			//	var_export( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
-				
+
 				if( self::view( $uri ) )
 				{
 					break;
@@ -1033,7 +1032,7 @@ class Ayoola_Application
 				$nameForModule = array_shift( $a );
 				$module = '/' . $nameForModule;
 			//	var_export( $a );
-			
+
 				//	If the first level url is a valid page, then its the module, else, its the homepage
 				$firstLevelPage = '/' . $a[0];
 				if( Ayoola_Page::getInfo( $firstLevelPage ) )
@@ -1041,9 +1040,9 @@ class Ayoola_Application
 					//	We are not using "/"
 					$nameForModule = array_shift( $a );
 					$module = '/' . $nameForModule;
-					
+
 				}
-				$moduleInfo = Ayoola_Page::getInfo( $module ); 
+				$moduleInfo = Ayoola_Page::getInfo( $module );
 			//	var_export( $nameForModule );
 			//	var_export( $module );
 			//	var_export( $moduleInfo );
@@ -1061,8 +1060,8 @@ class Ayoola_Application
 					}
 
 				//	$get = http_build_query( $get );
-					$_GET = array_merge( $_GET, $get ); // Combines our generated params with the original 
-					$_REQUEST = array_merge( $_REQUEST, $get ); // Combines our generated params with the original 
+					$_GET = array_merge( $_GET, $get ); // Combines our generated params with the original
+					$_REQUEST = array_merge( $_REQUEST, $get ); // Combines our generated params with the original
 				//	var_export( $_GET );
 					self::$_runtimeSetting['real_url'] = $module;
 					self::$mode = 'module';
@@ -1081,22 +1080,22 @@ class Ayoola_Application
 						{
 							$nameForModule = array_shift( $a );
 						}
-				//		PageCarton_Widget::v( $nameForModule );    
+				//		PageCarton_Widget::v( $nameForModule );
 
-						
+
 						$userInfo = $nameForModule ? Application_Profile_Abstract::getProfileInfo( $nameForModule ) : null;
-						
+
 						//	Hide superusers
 						if( $userInfo && $userInfo['access_level'] != 99 )
 						{
-						
-							
+
+
 						//	var_export( $module );
 							Ayoola_Page::$title = $userInfo['display_name'];
 							Ayoola_Page::$description = $userInfo['profile_description'];
 							Ayoola_Page::$thumbnail = $userInfo['display_picture'];
 
-							self::$GLOBAL['profile'] = $userInfo; // store this in the global var 
+							self::$GLOBAL['profile'] = $userInfo; // store this in the global var
 							self::$_runtimeSetting['real_url'] = rtrim( '/profile/' . implode( '/', $a ), '/' );
 						//	var_export( self::$_runtimeSetting['real_url'] );
 							self::$mode = 'profile';
@@ -1111,7 +1110,7 @@ class Ayoola_Application
 					{
 						null;
 					}
-				
+
 				}
 			//	var_export( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 			//	var_export( $module );
@@ -1129,20 +1128,16 @@ class Ayoola_Application
 					//	change requested url
 					$requestedUri = self::getRequestedUri();
 				//	var_export( $requestedUri );
-				//	var_export( $multiSiteDir );
 					$requestedUri = explode( $multiSiteDir, $requestedUri );
-				//	var_export( $requestedUri ); 
+			//		var_export( $requestedUri );
 					array_shift( $requestedUri );
-				//	var_export( $requestedUri );  
-				//	$requestedUri = implode( $multiSiteDir, $requestedUri );
-					$requestedUri = array_shift( $requestedUri );
-				//	var_export( $requestedUri );  
+					$requestedUri = implode( '', $requestedUri );
 					self::$_requestedUri = $requestedUri;
 					self::$_presentUri = null;
-					
+
 			//		var_export( self::getPresentUri() );
 			//		var_export( $requestedUri );
-					
+
 					self::run();	//	404 NOT FOUND
 					return false;
 				}
@@ -1156,7 +1151,7 @@ class Ayoola_Application
 			while( false );
 		}
 	//	self::view();	//	404 NOT FOUND
-		
+
     }
 
     /**
@@ -1167,45 +1162,45 @@ class Ayoola_Application
      * @return void
      */
     public static function view( $uriToView = null )
-    {	
+    {
 		//	var_export( $_SERVER );
 		//	exit();
-		$uri = $uriToView; 
+		$uri = $uriToView;
 		if( ! $uri )
 		{
 			$uri =  self::$_notFoundPage;
 			self::$_runtimeSetting['real_url'] = self::$_notFoundPage;
 			header( "HTTP/1.0 404 Not Found" );
 			header( "HTTP/1.1 404 Not Found" );
-			header('Status: 404 Not Found');
-			function_exists( 'http_response_code' ) ? http_response_code(404) : null;
+			Header('Status: 404 Not Found');
+			http_response_code(404);
 	//		var_export( headers_list() );
 		//	exit();
 		}
-		//	now because of situation where we have username domains
+/*		else
+		{
+			http_response_code( 200 );
+			header( "HTTP/1.0 200 OK" );
+			header( "HTTP/1.1 200 OK" );
+			Header('Status: 200 OK');
+		}
+*/		//	now because of situation where we have username domains
 		//	we should be able to overide page inheritance
-		
+
 		//	my copy first
 		$pagePaths = Ayoola_Page::getPagePaths( $uri );
 	//	var_export( $pagePaths['include'] );
 	//	var_export( $pagePaths['template'] );
 	//	var_export( is_file( $PAGE_INCLUDE_FILE ) );
-	//	var_export( is_file( $PAGE_TEMPLATE_FILE ) );  
+	//	var_export( is_file( $PAGE_TEMPLATE_FILE ) );
 		$PAGE_INCLUDE_FILE = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pagePaths['include'];
 		$PAGE_TEMPLATE_FILE = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pagePaths['template'];
 	//	var_export( $pagePaths );
 	//	var_export( $PAGE_INCLUDE_FILE );
 	//	var_export( $PAGE_TEMPLATE_FILE );
 	//	var_export( is_file( $PAGE_INCLUDE_FILE ) );
-	//	var_export( is_file( $PAGE_TEMPLATE_FILE ) ); 
-//	var_export( $uri );
-//	var_export( Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) );
-//	if( stripos( $uri, 'pwa' ) === false )
-	{
-//		exit();
-	}
-//	exit(); 
-		$noRestriction = false;
+	//	var_export( is_file( $PAGE_TEMPLATE_FILE ) );
+	//	exit();
 		$previewTheme = function() use ( $pagePaths, $uri, &$PAGE_INCLUDE_FILE, &$PAGE_TEMPLATE_FILE )
 		{
 
@@ -1216,26 +1211,20 @@ class Ayoola_Application
 			}
 			//	page may just be present in the theme
 			$themeName = @$_REQUEST['pc_page_layout_name'];
-			$themeName = $themeName ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+			$themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
 			$pagePaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 			$pagePaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
-			
+
 			//	theme copy
 			$PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
 			$PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
 		//	var_export( $pagePaths['include'] );
 		//	var_export( $pagePaths['template'] );
-		//	var_export( $themeName );
-		//	var_export( $pageThemeFileUrl );
-		//	if( stripos( $pageThemeFileUrl, 'pwa' ) === false )
+//			var_export( $pageThemeFileUrl );
+//			var_export( $PAGE_INCLUDE_FILE );
+//			var_export( $PAGE_TEMPLATE_FILE );
+			if( ! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE )
 			{
-			//	exit();
-			}
-		//	var_export( $PAGE_INCLUDE_FILE );
-		//	var_export( $PAGE_TEMPLATE_FILE );
-			if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
-			{
-			//	var_export( $themeName );
 				//	not found
 				return false;
 			}
@@ -1243,39 +1232,21 @@ class Ayoola_Application
 		};
 		do
 		{
-			if( ! empty( $_REQUEST['pc_page_layout_name'] ) )     
+			if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
 			{
-			//	var_export( $_REQUEST['pc_page_layout_name'] );
 				if( $previewTheme() )
 				{
 					break;
 				}
 			}
-		//	var_export( Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) );
-		//	if( stripos( $uri, 'pwa' ) === false )
-			{
-			//	var_export( $PAGE_INCLUDE_FILE );
-		//	exit();
-			}
-				
+
+		//	var_export( $pagePaths );
 			if
-			( 
-				! is_file( $PAGE_INCLUDE_FILE ) OR ! is_file( $PAGE_TEMPLATE_FILE )
+			(
+				! is_file( $PAGE_INCLUDE_FILE ) AND ! is_file( $PAGE_TEMPLATE_FILE )
 			)
 			{
-				//	not found
-				//	use content of default theme
-				if( $previewTheme() )
-				{
-				//	var_export( $PAGE_INCLUDE_FILE );
-					//		exit();
-					$noRestriction = true;
-					break;
-				}
-			//	var_export( $PAGE_INCLUDE_FILE );
-			//	var_export( $pageThemeFileUrl );
-			//	exit();
-		
+
 				// intended copy next
 				$intendedCopyPaths = Ayoola_Page::getPagePaths( '/' . trim( $uri . '/default', '/' ) );
 				$PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $intendedCopyPaths['include'], array( 'prioritize_my_copy' => true ) );
@@ -1283,85 +1254,105 @@ class Ayoola_Application
 			//	var_export( $intendedCopyPaths['include'] );
 			//	var_export( $intendedCopyPaths['template'] );
 				if
-				( 
-					! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE
+				(
+					! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE
 				)
 				{
-					
+
 					//	global copy
 					$PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
 					$PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
 				//	var_export( $pagePaths['include'] );
 				//	var_export( $pagePaths['template'] );
 					if
-					( 
-						! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE
+					(
+						! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE
 					)
 					{
-						return false;
+						//	not found
+					//	if( ! $previewTheme() )
+						{
+							return false;
+						}
 					}
 				}
 			}
-	//	var_export( $PAGE_INCLUDE_FILE );     
-	//	var_export( $PAGE_TEMPLATE_FILE );     
 		}
 		while( false );
-	//	var_export( $PAGE_INCLUDE_FILE );     
-	//	var_export( $PAGE_TEMPLATE_FILE );     
-	//	var_export( $pagePaths['template'] );     
-	//	var_export( Ayoola_Loader::checkFile( $pagePaths['template'] ) );     
+	//	var_export( $PAGE_INCLUDE_FILE );
+	//	var_export( $PAGE_TEMPLATE_FILE );
+	//	var_export( $pagePaths['template'] );
+	//	var_export( Ayoola_Loader::checkFile( $pagePaths['template'] ) );
+		//	The normal page
+		try
+		{
+			//	Check if page options permits
+/* 			$pageOptions = Ayoola_Page::getCurrentPageInfo();
+			@$pageOptions = $pageOptions['page_options'] ? : array();
+			$access = new Ayoola_Access();
+			if(	( in_array( 'logged_in_hide', $pageOptions )  && $access->isLoggedIn() )
+			|| 	( in_array( 'logged_out_hide', $pageOptions ) && ! $access->isLoggedIn() )
+			)
+			{
+				self::view();
+				exit();
+			}
+ */		}
+		catch( Ayoola_Exception $e ){ self::view(); exit(); }
 
-	
+	//	$table = new Application_User_CloudCopy();
+	//	var_export( file_get_contents( "php://input" ) );
+	//	$table->select();
+
 		//	Put in Access Restriction
-		$noRestriction ? : self::restrictAccess();
-
+		self::restrictAccess();
 	//	exit( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
-	
+
 		//	check if redirect
-		$pageInfo = Ayoola_Page::getInfo( $uri ); 
-	//		var_export( $pageInfo ); 
+		$pageInfo = Ayoola_Page::getInfo( $uri );
+	//		var_export( $pageInfo );
 		if( @$pageInfo['redirect_url'] && ! @$_REQUEST['pc_redirect_url'] )
 		{
 			if( self::getUrlPrefix() && $pageInfo['redirect_url'][0] === '/' )
 			{
 				$pageInfo['redirect_url'] = self::getUrlPrefix() . $pageInfo['redirect_url'];
 			}
-		//	var_export( $pageInfo );		    
-			
+		//	var_export( $pageInfo );
+
 			header( 'Location: ' . $pageInfo['redirect_url'] . '?pc_redirect_url=' . $uri . '&' . http_build_query( $_GET ) );
-			exit(); 
+			exit();
 		}
 
-		//	Client-side	scripting		
-		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . filemtime( __FILE__ ) );  
+		//	Client-side	scripting
+		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . filemtime( __FILE__ ) );
 		Application_Style::addFile( Ayoola_Page::getPageCssFile() );
 		Application_Style::addFile( '//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css' );
 
-		//	Pass the artificial query string to the client-side			
-		Application_Javascript::addCode  
-		( 
+		//	Pass the artificial query string to the client-side
+		Application_Javascript::addCode
+		(
 			"
-			ayoola.pcPathPrefix = '" . self::getUrlPrefix() . "';     
+			ayoola.pcPathPrefix = '" . self::getUrlPrefix() . "';
 			ayoola.events.add
 			(
-				window, 'load', function(){ ayoola.setArtificialQueryString( '" . Ayoola_Application::getRuntimeSettings( 'real_url' ) . "' ); } 
-			);" 
+				window, 'load', function(){ ayoola.setArtificialQueryString( '" . Ayoola_Application::getRuntimeSettings( 'real_url' ) . "' ); }
+			);"
 		);
-	
+
 		//	Set TimeZone
 		date_default_timezone_set( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'time_zone' ) ? : 'UTC' );
-		
+
 		//	Send content type to avoid mozilla reloading when theres and error message
 		header("Content-Type: text/html; charset=utf-8");
-	
+
 		include_once $PAGE_INCLUDE_FILE;
-	//	var_export( $PAGE_INCLUDE_FILE );  
+	//	var_export( $PAGE_INCLUDE_FILE );
 //		exit( microtime( true ) - Ayoola_Application::getRuntimeSettings( 'start_time' ) . '<br />' );
 		include_once $PAGE_TEMPLATE_FILE;
 	//	var_export( $PAGE_INCLUDE_FILE );
 		return true;
-	} 
-   
+	}
+
     /**
      * Restrict Access to Application
      *
@@ -1369,13 +1360,13 @@ class Ayoola_Application
      * @return void
      */
     public static function restrictAccess()
-    {	
+    {
 	//	var_export( $_COOKIE );	echo "<br />\n";
 //		var_export( $_SERVER['HTTP_USER_AGENT'] );	echo "<br />\n";
 		$auth = new Ayoola_Access();
 		$userInfo = $auth->getUserInfo();
-		
-		//	Show error to logged in admin 
+
+		//	Show error to logged in admin
 		switch( @$_SERVER['HTTP_AYOOLA_PLAY_MODE'] )
 		{
 			case null:
@@ -1384,14 +1375,14 @@ class Ayoola_Application
 				//	By default, don't display error'
 				{
 					error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
-					ini_set( 'display_errors', "0" );    
+					ini_set( 'display_errors', "0" );
 				}
-			
+
 				//	If the mode is selected, we don't want to see errors.
 				if( $userInfo['access_level'] > 98 || '127.0.0.1' == $_SERVER['REMOTE_ADDR'] )
-				{ 
+				{
 					error_reporting( E_ALL & ~E_STRICT );
-			//		ini_set( 'display_errors', "1" ); 
+			//		ini_set( 'display_errors', "1" );
 				//	var_export( $userInfo['access_level'] );
 				}
 
@@ -1399,28 +1390,28 @@ class Ayoola_Application
 				if( ! empty( $_REQUEST['pc_show_error'] ) )
 				{
 					error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
-					ini_set( 'display_errors', "1" );   
+					ini_set( 'display_errors', "1" );
 				}
 	//			else
 			break;
 		}
 		require_once 'Ayoola/Access.php';
 		$auth = new Ayoola_Access();
-		
+
 		//	general restriction
 	//		var_export( $_SERVER );
-		
+
 //		if( $_SERVER['REMOTE_ADDR' ] !== '127.0.0.1' )
 		{
 			$auth->restrict();
 		}
-	//	else 
+	//	else
 		{
 		//	var_export( 'localhost' );
 		//	var_export( $_SERVER );
 		}
-	} 
-	
+	}
+
     /**
      * Logs request
      *
@@ -1429,7 +1420,7 @@ class Ayoola_Application
     {
 		self::$accessLogging ? Application_Log_View_Access::log() : null; //	Log request
     }
-	
+
     /**
      * This method load needed files
      *
@@ -1444,7 +1435,7 @@ class Ayoola_Application
 		// we have done this in index file
 //		self::setDefaultIncludePath();
     }
-	
+
     /**
      * This method sets the include path to a value
      *
@@ -1457,9 +1448,9 @@ class Ayoola_Application
 		self::setIncludePath( MODULES_PATH );
 		self::setIncludePath( APPLICATION_PATH );
 	//	set_include_path( LIBRARY_PATH . PS . MODULES_PATH . PS . APPLICATION_PATH . PS . get_include_path() );
-    } 
-	
-	
+    }
+
+
     /**
      * Returns header for a request
      *
@@ -1474,15 +1465,15 @@ class Ayoola_Application
         // set cURL options
         $opts = array( CURLOPT_RETURNTRANSFER => true, // do not output to browser
                                   CURLOPT_URL => $link,            // set URL
-                                  CURLOPT_AUTOREFERER => true,            
+                                  CURLOPT_AUTOREFERER => true,
                                   CURLOPT_USERAGENT => 'Mozilla/5.0 ( compatible; ayoolabot/0.1; +http://ayoo.la/bot/ )',            // set URL
                                   CURLOPT_NOBODY => true	// do a HEAD request only
 					);   // set timeout
-								  
+
 		@$opts[CURLOPT_TIMEOUT] = $options['timeout'] ? : 10; //	Defaults to 1sec
 		@$opts[CURLOPT_FOLLOWLOCATION] = $options['follow_redirect']; // By default we don't follow redirects
-	
-        curl_setopt_array($ch, $opts); 
+
+        curl_setopt_array($ch, $opts);
 
         $response = curl_exec($ch); // do it!
         $info = curl_getinfo($ch); // check if HTTP OK
@@ -1495,8 +1486,8 @@ class Ayoola_Application
         curl_close($ch); // close handle
 
         return $info;
-    } 
-	
+    }
+
     /**
      * Flushes the output to the user
      *
@@ -1506,12 +1497,12 @@ class Ayoola_Application
     {
 		if( ! self::$disableOutput )
 		{
-			echo $lastOutput;    
+			echo $lastOutput;
 			ob_flush();
 			flush();
 		}
-    } 
-	
+    }
+
     /**
      * Return _mode
      *
@@ -1521,8 +1512,8 @@ class Ayoola_Application
     public static function getMode()
     {
 		return self::$_mode;
-    } 
-	
+    }
+
     /**
      * Returns the $_userInfo
      *
@@ -1547,8 +1538,8 @@ class Ayoola_Application
 			return array();
 		}
 		return $key ? self::$_userInfo[$key] : self::$_userInfo;
-    } 
-	
+    }
+
     /**
      * This method basically removes the /get/ seo query from the requested Uri
      *
@@ -1558,17 +1549,17 @@ class Ayoola_Application
     public static function getPresentUri( $url = null )
     {
 		if( @self::$_presentUri[$url] )
-		{ 
-			return self::$_presentUri[$url]; 
+		{
+			return self::$_presentUri[$url];
 		}
-		$url = $url ? : self::getRequestedUri();  
+		$url = $url ? : self::getRequestedUri();
 		require_once 'Ayoola/Filter/Uri.php';
 		$filter = new Ayoola_Filter_Uri;
 		$result = $filter->filter( $url );
 		self::$_presentUri[$url] = $result;
 		return self::$_presentUri[$url];
-    } 
-	
+    }
+
     /**
      * This method returns the requested Uri
      *
@@ -1579,17 +1570,17 @@ class Ayoola_Application
     {
 		if( self::$_requestedUri ){ return self::$_requestedUri; }
 		$requestedUri = self::$_homePage;	// Default
-		
+
 		//	because of url prefix that has space in them
 		@$requestedUriDecoded = $_SERVER['REQUEST_URI'];
-		
+
 
 		//	remove query strings
 		$requestedUriDecoded = array_shift( explode( '?', $requestedUriDecoded ) );
 		@$requestedUriDecoded = rawurldecode( $requestedUriDecoded );
 //		var_export( $_SERVER['REQUEST_URI'] );
 //		var_export( $requestedUriDecoded );
-		
+
 		if( isset( $_SERVER['REQUEST_URI'] ) && $_SERVER['REQUEST_URI'] != '/' && $_SERVER['SCRIPT_NAME'] != $requestedUriDecoded )
 		{
 			$requestedUri = $requestedUriDecoded;
@@ -1601,10 +1592,10 @@ class Ayoola_Application
 		{
 			$requestedUri = $_SERVER['PATH_INFO'];
 		}
-		else  
+		else
 		{
 		//	var_export( $_SERVER['PATH_INFO'] );
-		
+
 		}
 	//	$requestedUri = rawurldecode( $requestedUri );
 	//	var_export( $_SERVER );
@@ -1612,7 +1603,7 @@ class Ayoola_Application
 	//	var_export( $requestedUri );
 	//		var_export( $requestedUri );
 		//	REMOVE PATH PREFIX
-		if( strpos( $requestedUri, Ayoola_Application::getPathPrefix() ) === 0 )  
+		if( strpos( $requestedUri, Ayoola_Application::getPathPrefix() ) === 0 )
 		{
 			$requestedUri = explode( Ayoola_Application::getPathPrefix(), $requestedUri );
 	//		var_export( $requestedUri );
@@ -1629,7 +1620,7 @@ class Ayoola_Application
 			$requestedUri = self::$_homePage;
 		}
 
-		//	an nginx installation not recognizing url like 
+		//	an nginx installation not recognizing url like
 		//	https://www.example.com/index.php/url
 		$controller = '/index.php/';
 		if( stripos( $requestedUri, $controller ) === 0 )
@@ -1642,18 +1633,18 @@ class Ayoola_Application
 		require_once 'Ayoola/Filter/Get.php';
 		$filter = new Ayoola_Filter_Get;
 		$get = $filter->filter( $requestedUri );
-		$_GET = array_merge( $_GET, $get ); // Combines our generated params with the original 
-		$_REQUEST = array_merge( $_REQUEST, $get ); // Combines our generated params with the original 
+		$_GET = array_merge( $_GET, $get ); // Combines our generated params with the original
+		$_REQUEST = array_merge( $_REQUEST, $get ); // Combines our generated params with the original
 //		var_export( $requestedUri ); //
 		self::$_requestedUri = $requestedUri;
 		return self::$_requestedUri;
-    } 
-	
+    }
+
     /**
-     * 
-     * 
+     *
+     *
      */
-	public static function getUrlSuffix()  
+	public static function getUrlSuffix()
     {
 		$suffix = null;
 		if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
@@ -1663,12 +1654,12 @@ class Ayoola_Application
 		}
 		return $suffix;
 	}
-	
+
     /**
-     * 
-     * 
+     *
+     *
      */
-	public static function getUrlPrefix()  
+	public static function getUrlPrefix()
     {
 //		var_export( $_SERVER );
 //		exit();
@@ -1676,15 +1667,15 @@ class Ayoola_Application
 		{
 			self::setUrlPrefix();
 		}
-		
+
 		return self::$_urlPrefix;
 	}
-	
+
     /**
-     * 
-     * 
+     *
+     *
      */
-	public static function setUrlPrefix( $prefix = null )  
+	public static function setUrlPrefix( $prefix = null )
     {
 //		var_export( $_SERVER );
 //		exit();
@@ -1701,10 +1692,10 @@ class Ayoola_Application
 		$storage = new Ayoola_Storage();
 		$storage->storageNamespace = __CLASS__  . 'url_prefix-' . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
-		$data = $storage->retrieve(); 
-	//	var_export( $data );   
+		$data = $storage->retrieve();
+	//	var_export( $data );
 		if(  ! $data  )
-		{		
+		{
 		//	var_export( $data );
  			//	Detect if we have mod-rewrite
 			$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt?pc_clean_url_check=1';
@@ -1740,10 +1731,10 @@ class Ayoola_Application
 		}
 		return self::$_urlPrefix;
 	}
-	
+
     /**
-     * 
-     * 
+     *
+     *
      */
 	public static function getPathPrefix()
     {
@@ -1751,13 +1742,13 @@ class Ayoola_Application
 		{
 			self::$_pathPrefix = constant( 'PC_PATH_PREFIX' );
 		}
-		
+
 		return self::$_pathPrefix;
 	}
-	
+
     /**
-     * 
-     * 
+     *
+     *
      */
 	public static function getUrlPrefixController()
     {
@@ -1768,10 +1759,10 @@ class Ayoola_Application
 		}
 		return '/' . $controller;
 	}
-	
+
     /**
-     * 
-     * 
+     *
+     *
      */
 	public static function getUserAccountInfo( $key = null )
     {
@@ -1784,8 +1775,8 @@ class Ayoola_Application
 			self::$_userAccountInfo['username'] =  $processUserInfo['name'] ? : 'UNKWOWN';
 		}
 		return $key ? self::$_userAccountInfo[$key] : self::$_userAccountInfo;
-    } 
-	
+    }
+
     /**
      * Returns true if the request was by internal cURL
      *
@@ -1795,13 +1786,13 @@ class Ayoola_Application
     public static function isCurlRequest()
     {
 		if
-		( 
+		(
 			( isset( $_SERVER['HTTP_REQUEST_TYPE'] ) && $_SERVER['HTTP_REQUEST_TYPE'] == 'curl' )
 		)
 		{ return true; }
 		return false;
-    } 
-	
+    }
+
     /**
      * Returns true if the request was by ajax
      *
@@ -1813,48 +1804,48 @@ class Ayoola_Application
 		$pointer = array_map( 'trim', explode( ',', @$_SERVER['HTTP_REQUEST_TYPE'] ) );
 	//	var_export( $_SERVER['HTTP_REQUEST_TYPE'] );
 		if
-		( 
+		(
 			in_array( 'xmlHttp', $pointer )
 		)
 		{ return true; }
-		return false;      
-    } 
-	
+		return false;
+    }
+
     /**
-     * Returns true if the particular class is being 'played'  
+     * Returns true if the particular class is being 'played'
      *
      * @param void
      * @return boolean
      */
-    public static function isClassPlayer()   
+    public static function isClassPlayer()
     {
 	//	var_export( $_SERVER['HTTP_APPLICATION_MODE'] );
 		if
-		( 
+		(
 			( isset( $_SERVER['HTTP_APPLICATION_MODE'] ) && $_SERVER['HTTP_APPLICATION_MODE'] == 'Ayoola_Object_Play' )
-			
+
 		)
-		{ 
-			return true; 
+		{
+			return true;
 		}
 		return false;
-    } 
-	
+    }
+
     /**
-     * Returns true if we are running on local server 
+     * Returns true if we are running on local server
      *
      * @param void
      * @return boolean
      */
-    public static function isLocalServer()   
+    public static function isLocalServer()
     {
 	//	var_export( $_SERVER['HTTP_APPLICATION_MODE'] );
 		if
-		( 
-			in_array( $_SERVER['REMOTE_ADDR'], array( '127.0.0.1', '::1' ) )	
+		(
+			in_array( $_SERVER['REMOTE_ADDR'], array( '127.0.0.1', '::1' ) )
 		)
 		{ return true; }
 		return false;
-    } 
+    }
 	// END OF CLASS
-}  
+}
