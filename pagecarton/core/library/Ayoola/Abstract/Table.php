@@ -478,7 +478,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			$form->callToAction = $this->getParameter( 'call_to_action' );
 		}
 		$this->fakeValues = $this->fakeValues ? : $this->getParameter( 'fake_values' );
-		if( count( $this->fakeValues ) )
+		if( ! empty( $this->fakeValues ) )
 		{ 
 			$form->fakeValues = $this->fakeValues; 
 			$form->oneFieldSetAtATime = false; 

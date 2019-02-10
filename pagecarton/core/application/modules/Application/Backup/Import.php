@@ -42,9 +42,14 @@ class Application_Backup_Import extends Application_Backup_Abstract
 
 			set_time_limit( 0 );
 			ignore_user_abort( true ); 
+			ini_set( "memory_limit","3000M" );	 
 
-	//		var_export( $values );
-			$tempName = tempnam( sys_get_temp_dir(), '' ) . '.tar.gz';
+		//	var_export( $values );
+
+		//	exit();
+		//	$tempName = tempnam( sys_get_temp_dir(), '' ) . '.tar.gz';
+			$tempName = CACHE_DIR . DS . 'imported-backups' . DS . md5( serialize( $values ) ) . '.tar.gz';
+			Ayoola_Doc::createDirectory( dirname( $tempName ) );
 			$option = $values['import_option'] ? : @$_REQUEST['import_option'];
 			
 			switch( $option ) 
@@ -74,38 +79,57 @@ class Application_Backup_Import extends Application_Backup_Abstract
 				break;
 				case 'upload_from_other_sites':					
 				//	file_put_contents( $tempName, file_get_contents( $values['backup_url'] ) );
-				self::fetchLink( $values['backup_url'], array( 'destination_file' => $tempName ) );
-				//	var_export( filesize( $tempName ) );
-				//	$tempName = $values['backup_url'];
+				//	@unlink( $tempName );
+					if( ! is_file( $tempName ) )
+					{
+						self::fetchLink( $values['backup_url'], array( 'destination_file' => $tempName, 'connect_time_out' => 30, 'time_out' => 986000 ) );
+					}
+				//	var_export( $values['backup_url'] ); 
+				//	var_export( filesize( $tempName ) ); 
+				//	$tempName = $values['backup_url'];  
 				break;
 
 			}
-	//		var_export( $tempName );
+		//	var_export( $tempName );
 			$phar = 'Ayoola_Phar_Data';
-			$backup = new $phar( $tempName );
+			try
+			{
+				$backup = new $phar( $tempName, RecursiveDirectoryIterator::SKIP_DOTS );
+				$information = file_get_contents( $backup['backup_information'] );
+				$information = unserialize( $information );
+			}
+			catch( Exception $e )
+			{
+				$information = array(
+					'backup_name' => 'UNKNOWN ' . date( 'r' ),
+				//	'backup_name' => '',
+				);
+			}
+		//	var_export( $tempName );
 
-			$information = file_get_contents( $backup['backup_information'] );
 		//	$information = $backup['backup_information']->getContent();
-			$information = unserialize( $information );
 				//	var_export( $information );
 			$newFilename = self::getFilename( ) . '.gz';
 			$information['backup_filename'] = $newFilename;
 		//	$backup->extractTo( $newFilename );
 		//	$this->setViewContent( $newFilename );
-				//	var_export( $information );
+			//		var_export( $information );  
 			if( $this->getDbTable()->insert( $information ) )
 			{
 				$fileToUpload = $tempName;
-				rename( $fileToUpload, $newFilename );
+			//	rename( $fileToUpload, $newFilename );
+				copy( $fileToUpload, $newFilename );
 			}
-			$this->setViewContent( '<div class="boxednews goodnews">Success! "' .$information['backup_name']. '" imported.</div>', true );
+			$this->setViewContent( '<div class="goodnews">Success! "' .$information['backup_name']. '" imported.</div>', true );
 		}
   		catch( Exception $e )
 		{
+		//	var_export( $e->getMessage() );
 			$this->getForm()->setBadnews( 'Invalid Backup File', 3 );
 			$this->getForm()->setBadnews( $e->getMessage(), 2 );
+			$this->createForm();
 			$this->setViewContent( $this->getForm()->view(), true );		
-		//	$this->setViewContent( $extention );		
+			$this->setViewContent( $extention );		
 			return false;
 		} 
 		return true;
@@ -143,7 +167,9 @@ class Application_Backup_Import extends Application_Backup_Abstract
 				$tempName = $tempName . '.gz';
 			}
 		//	var_export( $tempName );
+		///	exit;
 			$backup = new $phar( $tempName );
+		//	var_export( $tempName );
 
 			$information = file_get_contents( $backup['backup_information'] );
 			$information = unserialize( $information );
@@ -160,6 +186,7 @@ class Application_Backup_Import extends Application_Backup_Abstract
 		}
   		catch( Exception $e )
 		{
+		//	var_export( $e->getMessage() );    
 			$this->getForm()->setBadnews( 'Invalid Backup File' );
 			$this->getForm()->setBadnews( $e->getMessage() );
 			$this->setViewContent( $this->getForm()->view(), true );		
@@ -174,7 +201,7 @@ class Application_Backup_Import extends Application_Backup_Abstract
      * creates the form
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = NULL, $legend = NULL, array $values = NULL )
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );

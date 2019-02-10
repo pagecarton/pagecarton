@@ -198,10 +198,10 @@
 		}
 //		curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt( $request, CURLOPT_FOLLOWLOCATION, @$settings['follow_redirect'] === false ? false : true ); //	By default, we follow redirect
-		curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 10 );	//	Max of 1 Secs on a single request
-		curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 10 );	//	Max of 1 Secs on a single request
+		curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 9000 );	//	Max of 1 Secs on a single request
+		curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 9000 );	//	Max of 1 Secs on a single request
 		if( @$settings['post_fields'] )
-		{
+		{ 
 			curl_setopt( $request, CURLOPT_POST, true );
 		//	var_export( $request );
 		//	var_export( $settings['post_fields'] );   
@@ -316,12 +316,12 @@
 				}
 				file_put_contents( $filename, $f );
  */				
-				if( ! $f = fetchLink( $remoteSite . '/widgets/Application_Backup_GetInstallation/?pc_core_only=1' ) )
+				if( ! $f = fetchLink( $remoteSite . '/widgets/Application_Backup_GetInstallation/?pc_core_only=1', array( 'time_out' => 300 ) ) ) 
 				{ 
 					$badnews .= '<p>The installation archive is missing. We also tried to connect to the internet to download it but application coult not connect to the internet. Please ensure that allow_fopen_url is not switched off in your server configuration.</p>';
 					$badnews .= '<p>Please try copying the files back into your web root again and restart your installation. You may also resolve this issue by connecting to the internet.</p>';
 					break;
-				}
+				} 
 				$f ? file_put_contents( $filename, $f ) : null;
 			}
 			if( ! is_readable( $filename ) )

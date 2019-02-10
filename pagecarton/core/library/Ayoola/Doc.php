@@ -205,7 +205,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			{
 			//	$filePath = DOCUMENTS_DIR . $file;
 				$storage = new Ayoola_Storage(); 
-				$storage->storageNamespace = __CLASS__ . $uri . 's-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
+				$storage->storageNamespace = __CLASS__ . Ayoola_Application::getUrlPrefix() . $uri . 's-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
 				$storage->setDevice( 'File' );
 			//	self::v( $storage->retrieve() );
 				if( ! $dedicatedUrl = $storage->retrieve() OR $options['disable_cache'] )  
@@ -739,8 +739,11 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     {
 		if( ! is_dir( $dir ) )
 		{
-		//	var_export( $dir );    
-			if( ! mkdir( $dir, $permission, true ) ){ return false; }
+			if( ! mkdir( $dir, $permission, true ) )
+			{
+			//	var_export( $dir );    
+				return false; 
+			}
 		}
 		//	Returns true altogether because this is not required per say
 		return true;

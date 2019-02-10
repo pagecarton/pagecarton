@@ -533,6 +533,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		curl_setopt( $request, CURLOPT_REFERER, @$settings['referer'] ? : $link );
 		if( @$settings['destination_file'] )
 		{
+		//	var_export( $settings );
 			$fp = fopen( $settings['destination_file'], 'w' );
 			curl_setopt( $request, CURLOPT_FILE, $fp );
 			curl_setopt( $request, CURLOPT_BINARYTRANSFER, true );

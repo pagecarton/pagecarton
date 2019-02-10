@@ -74,11 +74,11 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $link = 'https://github.com/pagecarton/pagecarton/archive/' . $version . '.zip';
                 //    var_export(  $link );
                 $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
-                $filename = tempnam( sys_get_temp_dir(), __CLASS__ ) . '';
+                $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';
     
                 $filename .= '.zip';
                 file_put_contents( $filename, $content['response'] );
-                $tempDir = sys_get_temp_dir() . DS . __CLASS__ . PageCarton::VERSION;
+                $tempDir = CACHE_DIR . DS . __CLASS__ . PageCarton::VERSION;
                 Ayoola_Doc::createDirectory( $tempDir );
 
                 $zip2 = new ZipArchive;
@@ -172,9 +172,9 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             //  Output demo content to screen
         //    header('Content-Length: ' . filesize($file));
 
-            header( 'Content-Length: ' . filesize( $file ) );
-            readfile($file);  
-            @unlink($file); 
+        //    header( 'Content-Length: ' . filesize( $file ) );
+            readfile($file);    
+        //    @unlink($file);     
             exit();
              // end of widget process
           
