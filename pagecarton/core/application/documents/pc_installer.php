@@ -87,15 +87,6 @@
 	$remoteSite2 = 'http://s1.updates.pagecarton.org';  
 	$remoteSite3 = 'http://s2.updates.pagecarton.org';  
 
-	//	Now use back-up server
-	if( ! fetchLink( $remoteSite ) )
-	{
-		$remoteSite = $remoteSite2;
-		if( ! fetchLink( $remoteSite ) )
-		{
-			$remoteSite = $remoteSite3;
-		}
-	}
 
 	//	look for this path prefix dynamically
 
@@ -164,6 +155,16 @@
 	else
 	{
 		$badnews .= '<p>PageCarton requires PHP 5.3 or later. You are running version "' . PHP_VERSION .  '". We recommend PHP 7.0 or later.</p>';   
+	}
+	
+	//	Now use back-up server
+	if( ! fetchLink( $remoteSite ) )
+	{
+		$remoteSite = $remoteSite2;
+		if( ! fetchLink( $remoteSite ) )
+		{
+			$remoteSite = $remoteSite3;
+		}
 	}
   	
     /** 

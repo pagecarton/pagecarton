@@ -575,6 +575,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						//	set_time_limit( 0 );
 						}
 						self::getCommentsCount( $data );
+					//	self::v( $data['comments_count'] );
 						if( $this->getParameter( 'get_comment_count' ) )
 						{   
 							if( ! $this->commentTable )
@@ -584,6 +585,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
 						//	set_time_limit( 0 );
 						}
+					//	self::v( $data['comments_count'] );
 					//	exit();
 						$data['engagement_count'] = intval( $data['download_count'] ) + intval( $data['views_count'] ) + intval( $data['comments_count'] ) + intval( $data['audio_play_count'] );
 
@@ -1261,7 +1263,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			//	useful in the templates
 			$data['article_quick_links'] = self::getQuickLink( $data );
-			$data['comments_count'] = '0';
+			$data['comments_count'] = intval( $data['comments_count'] ) ? : '0';
 			$data['category_html'] = $categoryTextRaw;
 			$data['record_count'] = $i + 1; 
 			

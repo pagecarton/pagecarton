@@ -63,18 +63,52 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
             }
             $where['parent_comment'] = '';
             $where['hidden'] = 0;
+            if( $this->getParameter( 'show_all_site_comments' ) )
+            {
+                $where = null;
+            }
+            else
+            {
+                krsort( $data );
+            }
             $data = $this->getDbTable()->select( null, $where );
-            krsort( $data );
             Application_Style::addFile( '/css/comment-box.css' );
             $html = null;
             $html .= '<div class="comments-container">
                         <ul id="comments-list" class="comments-list">';
-      //      var_export( $data );
+        //    self::v( $data );
       //      var_export( $this->getDbTable()->select() );
             $filter = new Ayoola_Filter_Time();
+        //    $this->_objectTemplateValues = $data
+            $limit = $this->getParameter( 'no_of_post_to_show' ) ? : 10;
+            $counter = 0;
+            $done = array();
             foreach( $data as $each )
             {
-           //     var_export( $each );
+                if( $this->getParameter( 'show_all_site_comments' ) )
+                {
+                    if( ! empty( $done[$each['article_url']] ) )
+                    {
+                        continue;
+                    }
+                    if( $each['article_url'] )
+                    {
+                        $done[$each['article_url']] = true;
+                        if( $postInfo = Application_Article_View::loadPostData( $each ) )
+                        {
+                            $each += $postInfo;
+                        }
+                    }
+                    
+                }
+                if( $counter++ > $limit )
+                {
+                    break;
+                }
+
+                $this->_objectData[] = $each;
+                $this->_objectTemplateValues[] = $each; 
+            //    self::v( $each );
                 self::filterCommentData( $each );
                 $each['creation_time'] = $filter->filter( $each['creation_time'] );
                 $html .= '<li>

@@ -225,6 +225,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			self::saveArticleSecondaryData( $secondaryValues );
 		}
 		$data['comments_count'] = $data['comments_count_total'];
+	//	self::v( $data['comments_count_total'] );
+	//	self::v( $data['comments_count'] );
 		return intval( $data['comments_count_total'] );
 	}
 	
@@ -869,7 +871,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$link = 'span';
 			$header = 'h1';
-
 		}
 	//	var_export( $data );
 		$html = null;
