@@ -67,11 +67,11 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
             {
                 $where = null;
             }
-            else
+            $data = $this->getDbTable()->select( null, $where );
+            if( ! $this->getParameter( 'show_all_site_comments' ) )
             {
                 krsort( $data );
             }
-            $data = $this->getDbTable()->select( null, $where );
             Application_Style::addFile( '/css/comment-box.css' );
             $html = null;
             $html .= '<div class="comments-container">
