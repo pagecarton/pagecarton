@@ -1781,7 +1781,17 @@ class Ayoola_Application
  			//	Detect if we have mod-rewrite
 			$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt?pc_clean_url_check=1';
 	//		var_export( $urlToLocalInstallerFile );
-			$modRewriteEnabled = get_headers( $urlToLocalInstallerFile );
+			$response = PageCarton_Widget::fetchLink( $urlToLocalInstallerFile );
+		//	var_export( $response );  
+			if( $response )
+			{
+				$data = 1;
+			}
+			else
+			{
+				$data = 2;
+			}
+/* 			$modRewriteEnabled = get_headers( $urlToLocalInstallerFile );
 			$responseCode = explode( ' ', $modRewriteEnabled[0] );
 	//		var_export( $urlToLocalInstallerFile );
 	//		var_export( $responseCode );
@@ -1795,7 +1805,7 @@ class Ayoola_Application
 			{
 				$data = 2;
 			}
-			$storage->store( $data );
+ */			$storage->store( $data );
 		}
 		if( $data == 2 )
 		{

@@ -1235,8 +1235,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							}
 							else
 							{
-								$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
-								$data['file_size'] = $head['content-length'];							
+								#	we don't want to use get_headers again. Can make site slow
+							//	$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
+							//	$data['file_size'] = $head['content-length'];							
 							}
 						}
 						elseif( @$data['download_path'] )
