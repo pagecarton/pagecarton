@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Wednesday 26th of December 2018 10:13:03 AM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Wednesday 13th of February 2019 11:02:14 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_0b9ac26e3cbcd36692cd5b2ccadf626e = new Ayoola_Object_Embed( array (
+$_183a467e23cc670297e6c5bd0c5c0829 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Breadcrumb',
   'advanced_parameter_value' => 
   array (
@@ -30,14 +30,14 @@ $_0b9ac26e3cbcd36692cd5b2ccadf626e = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_0b9ac26e3cbcd36692cd5b2ccadf626e = null;
+$_183a467e23cc670297e6c5bd0c5c0829 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_28742e28f5492c7b1e886e903e64c3c3 = new Ayoola_Object_Embed( array (
+$_dd6c65cbd2cd676c37a9abfde6efd317 = new Ayoola_Object_Embed( array (
   'editable' => 'Ayoola_Object_Play',
   'advanced_parameter_value' => 
   array (
@@ -50,7 +50,7 @@ $_28742e28f5492c7b1e886e903e64c3c3 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_28742e28f5492c7b1e886e903e64c3c3 = null;
+$_dd6c65cbd2cd676c37a9abfde6efd317 = null;
 
 							}
 							
@@ -61,7 +61,7 @@ $_28742e28f5492c7b1e886e903e64c3c3 = null;
 								if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 								{
 									
-$_fdb452d3ce6343c66d26aed2671ec2d9 = new Ayoola_Object_Embed( array (
+$_f02b87ccc33a26259b03001b75547ac7 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Upgrade_Check',
   'advanced_parameter_value' => 
   array (
@@ -78,7 +78,7 @@ $_fdb452d3ce6343c66d26aed2671ec2d9 = new Ayoola_Object_Embed( array (
 								else
 								{
 									
-$_fdb452d3ce6343c66d26aed2671ec2d9 = null;
+$_f02b87ccc33a26259b03001b75547ac7 = null;
 
 								}
 							}    
@@ -86,7 +86,7 @@ $_fdb452d3ce6343c66d26aed2671ec2d9 = null;
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_76e7e3da660c3d8115385434d8c36c76 = new Ayoola_Object_Embed( array (
+$_812e2aa44bc048b65f0488edd3206e29 = new Ayoola_Object_Embed( array (
   'editable' => 'PageCarton_NewSiteWizard',
   'advanced_parameter_value' => 
   array (
@@ -102,14 +102,14 @@ $_76e7e3da660c3d8115385434d8c36c76 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_76e7e3da660c3d8115385434d8c36c76 = null;
+$_812e2aa44bc048b65f0488edd3206e29 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
 							{
 								
-$_848972eb36aa04b62e7b6ec01bae0040 = new Ayoola_Menu( array (
+$_bf2a002fc6578717a36bf0f78ea87160 = new Ayoola_Menu( array (
   'option' => 'admin',
   'template_name' => 'HorizontalWhite',
   'advanced_parameter_value' => 
@@ -123,14 +123,14 @@ $_848972eb36aa04b62e7b6ec01bae0040 = new Ayoola_Menu( array (
 							else
 							{
 								
-$_848972eb36aa04b62e7b6ec01bae0040 = null;
+$_bf2a002fc6578717a36bf0f78ea87160 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_d9e5cb31e5f2858952223a83bcfbe5b8 = new Ayoola_Page_Editor_Text( array (
+$_ec42b8d03cb407c2a48fb9be1a94f821 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div class="col-md-12 stats-info widget" style="width: 100%;">
 <div class="stats-title">
 <h4 class="title">Dashboard</h4>
@@ -157,7 +157,7 @@ $_d9e5cb31e5f2858952223a83bcfbe5b8 = new Ayoola_Page_Editor_Text( array (
 </div>
 </div>
 ',
-  'url_prefix' => '/x',
+  'url_prefix' => '',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Info',
@@ -173,14 +173,14 @@ $_d9e5cb31e5f2858952223a83bcfbe5b8 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_d9e5cb31e5f2858952223a83bcfbe5b8 = null;
+$_ec42b8d03cb407c2a48fb9be1a94f821 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_81887aceed5b28012e715c3090815557 = new Ayoola_Page_Editor_Text( array (
+$_4e8fd3c1ce6442243ee625dc127bf58a = new Ayoola_Page_Editor_Text( array (
   'editable' => '<section id="row-one" data-pc-section-created="1">
     <div class="row-one">
         <div class="col-md-4 widget">
@@ -239,7 +239,7 @@ $_81887aceed5b28012e715c3090815557 = new Ayoola_Page_Editor_Text( array (
         <div class="clearfix"> </div>
     </div>
 </section>',
-  'url_prefix' => '/x',
+  'url_prefix' => '',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Info',
@@ -254,17 +254,17 @@ $_81887aceed5b28012e715c3090815557 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_81887aceed5b28012e715c3090815557 = null;
+$_4e8fd3c1ce6442243ee625dc127bf58a = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_2b0ebdfee9b736d01f4e00b5169f0eb1 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<section data-pc-section-created="1" id="footer"><p>© 2018 <a href="http://www.PageCarton.com">PageCarton</a> CMS. All Rights Reserved | Theme by <a href="https://w3layouts.com/" target="_blank">w3layouts</a></p></section>',
-  'preserved_content' => '<section data-pc-section-created="1" id="footer"><p>© 2018 <a href="http://www.PageCarton.com">PageCarton</a> CMS. All Rights Reserved | Theme by <a href="https://w3layouts.com/" target="_blank">w3layouts</a></p></section>',
-  'url_prefix' => '/x',
+$_8f94b54f70cde9623d9cc279007489dd = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<section data-pc-section-created="1" id="footer"><p>© 2019 <a href="http://www.PageCarton.com">PageCarton</a>. All Rights Reserved.<br></p></section>',
+  'preserved_content' => '<section data-pc-section-created="1" id="footer"><p>© 2019 <a href="http://www.PageCarton.com">PageCarton</a>. All Rights Reserved.<br></p></section>',
+  'url_prefix' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -276,7 +276,7 @@ $_2b0ebdfee9b736d01f4e00b5169f0eb1 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_2b0ebdfee9b736d01f4e00b5169f0eb1 = null;
+$_8f94b54f70cde9623d9cc279007489dd = null;
 
 							}
 							
