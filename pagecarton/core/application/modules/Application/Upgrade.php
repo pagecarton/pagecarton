@@ -55,7 +55,7 @@ class Application_Upgrade extends Ayoola_Abstract_Table
 			$this->setViewContent( '<h1 class="pc-heading">PageCarton Upgrade</h1>' );
 			$this->setViewContent( '<div style="padding-top:1.5em;">Upgrade your PageCarton to the latest version. You are currently running version ' . PageCarton::VERSION . '. It is recommended that you do a backup of your application before you go ahead, do you want to do that now? </div>' );
 			$this->setViewContent( '<div style="padding-top:1.5em;padding-bottom:1em;"><a onClick="ayoola.spotLight.showLinkInIFrame( this.href ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Backup_List" class="pc-btn">Backup Now!</a>
-			<a onClick="ayoola.spotLight.showLinkInIFrame( this.href ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '?stage=upgrade" class="pc-btn pc-bg-color">Begin Upgrade!</a></div>' );
+			<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '?stage=upgrade" class="pc-btn pc-bg-color">Begin Upgrade!</a></div>' );
 		//	$this->setViewContent( '' );
 		//	$this->setViewContent( $this->getForm()->view() ); 
 			$values = $this->getForm()->getValues();
