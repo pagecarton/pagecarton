@@ -931,6 +931,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
 			//	error making last post to be part of present one
 	//		$data += is_array( $this->_objectTemplateValues ) ? $this->_objectTemplateValues : array();
+
+			$data['article_description'] = trim( $data['article_description'] );
+			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
+			{
+				$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 200 );
+			}
 			if( $this->getParameter( 'length_of_description' ) )
 			{
 				if( ! function_exists( 'mb_strimwidth' ) )
