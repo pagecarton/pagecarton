@@ -579,6 +579,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
  	//	if( ! $response || $responseOptions['http_code'] != 200 ){ return false; }
 		if( empty( $settings['return_error_response'] ) )
 		{   
+		//	var_export( $response );
+		//	var_export( $responseOptions );
  			if( $responseOptions['http_code'] != 200 ){ return false; }
 		}
 		if( @$settings['return_as_array'] == true )
