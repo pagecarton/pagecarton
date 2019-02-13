@@ -74,7 +74,7 @@ class Application_Upgrade_Check extends PageCarton_Widget
                }
                 $versionFromServer['response'] = strlen( $response ) > 6 || strlen( $response ) < 2 ? 0 : $response;
 			//	var_export( $versionFromServer );
-            //    $storage->store( $versionFromServer );
+                $storage->store( $versionFromServer ); 
             }
         //    var_export( $versionFromServer );
         $filter = new Ayoola_Filter_Time();

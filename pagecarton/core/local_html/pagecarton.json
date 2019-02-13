@@ -1,3 +1,4 @@
 {
-    "PC_BASE": "" 
+    "PC_BASE": "",
+    "run_as_core": false
 }

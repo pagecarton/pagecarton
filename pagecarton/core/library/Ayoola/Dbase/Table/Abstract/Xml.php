@@ -400,7 +400,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      * @param Array Criteria
      * @return boolean
      */
-    public function delete( Array $where = null )
+    public function delete( Array $where = null, array $options = null )
     {
 	  	if( ! $this->exists() )
 			{
@@ -408,10 +408,10 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 				//	cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
 				return false;
 			}
-		  $result = $this->query( 'TABLE', 'DELETE', $where );
+		  $result = $this->query( 'TABLE', 'DELETE', $where, $options );
       static::$_alreadyRan[get_class( $this )] = true;
       return $result;
-    }
+    } 
 
     /**
      * Creates a table in the current database

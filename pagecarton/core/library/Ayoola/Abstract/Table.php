@@ -661,8 +661,8 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			{
 				if( ! $values = $this->getForm()->getValues() ){ return false; }
 			}
-			return $this->getDbTable()->delete( $this->getIdentifier()  );
-		}
+			return $this->getDbTable()->delete( $this->getIdentifier(), array( 'limit' => 1 )  ); 
+		} 
 		catch( Ayoola_Dbase_Adapter_Xml_Table_Exception $e )
 		{ 
 		//	echo $e->getMessage();

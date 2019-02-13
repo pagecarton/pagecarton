@@ -514,6 +514,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     public static function fetchLink( $link, array $settings = null )
     {	
+	//	self::V( $link );
 		if( ! function_exists( 'curl_init' ) )
 		{
 			//trigger_error( __METHOD__ . ' WORKS BETTER WHEN CURL IS ENABLED. PLEASE ENABLE CURL ON YOUR SERVER.' );
@@ -720,15 +721,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function v( $variable )
     {
-		if( self::hasPriviledge( 98 ) )
+		if( self::hasPriviledge( 98 ) || $_REQUEST['pc_show_error']  )
 		{ 
 			var_export( $variable );
+			echo "\r\n";
 		}
-		elseif( $_REQUEST['pc_show_error'] )
-		{
-			var_export( $variable );
-		}
-		
 		
 	}
 	

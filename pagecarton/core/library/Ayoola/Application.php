@@ -266,7 +266,7 @@ class Ayoola_Application
      */
 	public static function setDomainSettings( $domainSettings = null )
     {
-	//		var_export( $domainName );
+		//	var_export( file_get_contents( __FILE__ ) );
 		$forceReset = is_array( $domainSettings ) ? $domainSettings['force_reset'] : $domainSettings;
 		require_once 'Ayoola/Storage.php';
 		$storage = new Ayoola_Storage();
@@ -428,8 +428,19 @@ class Ayoola_Application
 					$data['domain_settings'] = $where; 
 					break;
 				}
-				header( 'Location: ' . $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
-				exit( 'DOMAIN NOT FOUND' );
+			//	var_export( $primaryDomainInfo );
+			//	exit();
+				if( $primaryDomainInfo['domain_name'] )
+				{
+					header( 'Location: ' . $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );    
+
+					exit( 'DOMAIN NOT FOUND' );
+				}
+				else
+				{
+					$data['domain_settings'] = $where; 
+					break;
+				}
 			}
 			else
 			{
@@ -449,6 +460,10 @@ class Ayoola_Application
 				$configurationFile = $domainDir . DS .  'pagecarton.json';
 
 		//		var_export( $configurationFile );
+				if( ! file_exists( $configurationFile ) )
+				{
+					$configurationFile = 'pagecarton.json';				
+				}
 				if( file_exists( $configurationFile ) )
 				{
 					if( $conf = file_get_contents( $configurationFile ) )
@@ -498,7 +513,7 @@ class Ayoola_Application
 				}
 				else
 				{
-					if( ! empty( $data['domain_settings']['site_configuraton']['ignore_this_directory'] ) )
+					if( ! empty( $data['domain_settings']['site_configuraton']['run_as_core'] ) )
 					{
 						break;
 					}

@@ -59,6 +59,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		$result = $this->getCache( func_get_args() );
 		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
 		$rows = array();
+	//	PageCarton_Widget::v( $options );  
+	//	PageCarton_Widget::v( $result );  
 		if( ! empty( $options['filename'] ) )
 		{
 		//	var_export( $this->getMyFilename() );
@@ -107,12 +109,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//		PageCarton_Widget::v( $files );
 		}
 //		PageCarton_Widget::v( count( $files ) . '<br>' );
+	//	PageCarton_Widget::v( $files );
 		foreach( $files as $filename )
 		{
 			$innerOptions = $options;
 			if(  ! empty( $options['limit'] ) && $totalRows >= $options['limit'] )
 			{
-				break;
+				break; 
 			}
 			elseif( ! empty( $options['limit'] ) )
 			{
@@ -189,9 +192,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
  				{
 					//	manipulate them before finally recording them
 					$filterFunction = $options['key_filter_function'][$key];
-					$filterFunction( $fields[$key], $otherData, $searchTerm );   
+				//	var_export( $filterFunction );
+					call_user_func_array( $filterFunction, array( &$fields[$key], &$otherData, &$searchTerm )  );
+				//	$filterFunction( $fields[$key], $otherData, $searchTerm );   
  				//	PageCarton_Widget::v( $searchTerm ); 
-				//	PageCarton_Widget::v( $fields[$key] );
+				//	PageCarton_Widget::v( $fields[$key] ); 
 					if( is_array( $otherData ) )
 					{
 						$fields += $otherData;

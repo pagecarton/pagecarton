@@ -1841,7 +1841,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 	//	var_export( $path );
 		//	Removing dependence on Ayoola_Api for showing posts
-			$keyFunction = create_function
+/* 			$keyFunction = create_function
 			( 
 				'& $value, & $otherData, & $searchTerm', 
 				'
@@ -1851,6 +1851,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	return $otherData;
 				'
 			); 
+ */		//	$keyFunction = function( & $value, & $otherData, & $searchTerm )
+		//	{
+		//		$searchTerm = json_encode( Application_Article_ShowAll::loadPostData( $value ) );
+		//	};
+			$classKey = __CLASS__;
+			$keyFunction = array( __CLASS__, 'filterSearch' );
 			try
 			{
 				//	var_export( $path . " 1 \r\n" );
@@ -1863,7 +1869,20 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				if( empty( $whereClause ) )
 				{
 				//	var_export( $path );
-					$sortFunction = create_function
+					$sortFunction = function( $filePath )
+					{
+						$values = Application_Article_Abstract::loadPostData( $filePath );
+			//			var_export( $values[\'article_title\'] );
+						if( ! $values )
+						{
+				//			var_export( $values[\'article_title\'] );
+							return false;
+						}
+						return $values['article_creation_date'] ? : $values['article_modified_date'];
+					//	var_export( $result  . "<br>");
+						return $result;
+					};
+/* 					$sortFunction = create_function
 					( 
 						'$filePath', 
 						'
@@ -1885,7 +1904,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						return $result;
 						'
 					); 
-				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => 'filectime' ) );
+ */				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => 'filectime' ) );
 		//			$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => $sortFunction ) );
 		//			krsort( $this->_dbData );
 				//	self::v( $this->_dbData );
@@ -1896,7 +1915,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 						$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 						$this->_dbData = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache', 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
-				//		var_export( $this->_dbData );    
+					//	var_export( $this->_dbData );    
+					//	var_export( get_called_class() );    
+						
+					//	var_export( count( $this->_dbData ) );    
 					}  
 					else
 					{
@@ -2062,6 +2084,17 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$html .= '<a href="javascript:;" style="display:none;" title="' . static::$_editableTitle . '" onclick="this.previousSibling.style.display=\'none\';this.style.display=\'none\';"> hide </a>';
 		}
 		return $html;
+	}
+
+    /**
+     * Returns an array of other classes to get parameter keys from
+     *
+     * @param void
+     * @return array
+     */
+    public static function filterSearch( & $value, & $otherData, & $searchTerm )
+    {
+		$searchTerm = json_encode( Application_Article_ShowAll::loadPostData( $value ) );
 	}
 
     /**

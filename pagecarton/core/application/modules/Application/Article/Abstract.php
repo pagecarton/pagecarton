@@ -468,7 +468,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function loadPostData( $data )
     {
-		
+ 		
 		if( is_array( $data ) )
 		{
 			if( ! empty( $data['article_url'] ) )
@@ -575,7 +575,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 	//	var_export( $jsonData );
 	//	var_export( $data );
-		$presetValues = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $data['article_type'] ) );
+		$storage = self::getObjectStorage( array( 'id' => __CLASS__ . 'xxweeff', 'device' => 'File', 'time_out' => 10000, ) );
+		$presetValues = $storage->retrieve();  
+		if( ! is_array( $presetValues ) )
+		{
+			$presetValues = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $data['article_type'] ) );
+			$storage->store( $presetValues );
+		}
 		if( ! empty( $presetValues['preset_keys'] ) && ! empty( $presetValues['preset_values'] ) )
 		{
 			$presetValues = array_combine( $presetValues['preset_keys'], $presetValues['preset_values'] );

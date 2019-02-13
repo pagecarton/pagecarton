@@ -718,9 +718,25 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     public function query( $keyword = null )
 	{
 		$arguments = func_get_args();
-		//var_export( $arguments );
+//		PageCarton_Widget::v( $arguments ); 
 		$keyword = array_shift( $arguments );
-		$keyword = ucfirst( strtolower( $keyword ) );
+    $keyword = ucfirst( strtolower( $keyword ) );
+    
+    $hash = md5( json_encode( $arguments ) . $this->_myFilename . $this->_relationship . $this->_accessibility  . Ayoola_Application::getPathPrefix() ) . @filemtime( $this->_myFilename);
+  //  var_export( $hash );
+		$storage = PageCarton_Widget::getObjectStorage( array( 'id' => __CLASS__ . 'wefwfff' . $hash, 'device' => 'File', 'time_out' => 1000000, ) );
+		$result = $storage->retrieve();    
+		if( false !== $result )
+		{
+      return $result;
+    }
+    else
+    {
+		//  PageCarton_Widget::v( $arguments );
+		//  PageCarton_Widget::v( $this->_myFilename );  
+		//  PageCarton_Widget::v( $result );
+    }
+    
 		$class = __CLASS__ . '_' . $keyword;
 		require_once 'Ayoola/Loader.php';
 		if( ! Ayoola_Loader::loadClass( $class ) )
@@ -730,7 +746,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		}
 		$class = new $class;
 		$class->tableClass = get_class( $this );		
-	//	PageCarton_Widget::v( $this );
+//		PageCarton_Widget::v( $this ); 
 		foreach( $this as $key => $value )
 		{
 			require_once 'Ayoola/Reflection/Property.php';
@@ -743,8 +759,12 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			}
 			catch( ReflectionException $e ){  continue; }
 		}
-		$class = array( $class, __FUNCTION__ );
-		return call_user_func_array( $class, $arguments );
+    $class = array( $class, __FUNCTION__ );
+    $result = call_user_func_array( $class, $arguments );
+    $result = false === $result ? null : $result;
+    $storage->store( $result );
+    return $result;
+    
 	}
 	// END OF CLASS
 }
