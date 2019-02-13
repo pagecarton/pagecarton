@@ -5,6 +5,7 @@ CONTENTS OF THIS FILE
  * Configuration and features
  * Appearance
  * Developing for PageCarton
+ * Contributing to PageCarton Core
  * Documentation
  * More information
 
@@ -47,6 +48,20 @@ When you need new functionality for your PageCarton site, search for existing
 contributed modules. Create new custom modules only when nothing existing 
 comes close to what you need. Create new themes and customize your PageCarton install.
 Join the PageCarton Community on http://www.pagecarton.org/join
+
+CONTRIBUTING TO PAGECARTON CORE
+---------------------
+
+People intending to contribute to the PageCarton core should join the PageCarton Community via  http://www.pagecarton.org/join. We use GitHub for collaboration and contribution on PageCarton
+Pull requests is the best way to get codes merged with core. Contributors should check out the documentation on    http://docs.PageCarton.org/.  
+
+ * Explaining the concepts of PageCarton:
+   https://docs.pagecarton.org/2019/01/19/explaining-the-concepts-of-pagecarton.html
+
+ * Cloning PageCarton Repository for Contribution:
+   https://docs.pagecarton.org/2019/02/13/cloning-pagecarton-repository-for-contribution.html
+
+
 
 
 DOCUMENTATION
