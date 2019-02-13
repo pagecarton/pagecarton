@@ -69,7 +69,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );
 	//		PageCarton_Widget::v( $rows );
 		}
-		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE || $this->getAccessibility() == self::SCOPE_PUBLIC )
+		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE ) // let PUBLIC PICK FROM CORE AND DEFAULT FOR COMPATIBILITY TO PREVIOUS VERSIONS THAT SAVED IN CORE
+//		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE || $this->getAccessibility() == self::SCOPE_PUBLIC )
 		{
 		//	$rows = $this->doSelect( $fieldsToFetch, $where, $options ); 
 			$files =  array_unique( array( $this->getFilenameAccordingToScope() => $this->getFilenameAccordingToScope() ) + $this->getSupplementaryFilenames() );

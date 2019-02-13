@@ -721,7 +721,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function v( $variable )
     {
-		if( self::hasPriviledge( 98 ) || $_REQUEST['pc_show_error']  )
+		if( self::hasPriviledge( 98 ) || @$_REQUEST['pc_show_error']  )
 		{ 
 			var_export( $variable );
 			echo "\r\n";

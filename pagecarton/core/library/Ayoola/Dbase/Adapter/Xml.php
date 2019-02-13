@@ -248,7 +248,12 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			break;
 			
 			case self::SCOPE_PUBLIC:
-				$path = APPLICATION_PATH . DS . $directory;   
+      //	$path = APPLICATION_PATH . DS . $directory;   
+
+        //  CHANING PUBLIC DB BASE TO DEFAULT SINCE IT IS MOST CONSTANT DIR
+        //  CORE GETS DELETED ON NEW INSTALL
+        $path = SITE_APPLICATION_PATH . DS . $directory;   
+          
 	//	var_export( $directory );
 		//		Ayoola_Page_Creator::v( $path );
 	//	var_export( $path );
@@ -617,8 +622,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 				$this->setMyfilename( $this->getTableName() );
 				$filename = $this->getMyfilename( $checkFile );
 	//	trigger_error( $filename ); 
-		//		Ayoola_Page_Creator::v( $filename );
-		//		var_export( $checkFile ); 
+			//	Ayoola_Page_Creator::v( $filename );
+			//	var_export( $checkFile ); 
 			break;
 			default:
 				throw new Ayoola_Dbase_Adapter_Xml_Exception( $scope . ' is invalid accessibility scope' );	
@@ -718,11 +723,25 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     public function query( $keyword = null )
 	{
 		$arguments = func_get_args();
-//		PageCarton_Widget::v( $arguments ); 
+	//	PageCarton_Widget::v( $this ); 
 		$keyword = array_shift( $arguments );
     $keyword = ucfirst( strtolower( $keyword ) );
     
-    $hash = md5( json_encode( $arguments ) . $this->_myFilename . $this->_relationship . $this->_accessibility  . Ayoola_Application::getPathPrefix() ) . @filemtime( $this->_myFilename);
+  //  $paths = Ayoola_Loader::getValidIncludePaths( $this->_globalDirectory );
+	//	PageCarton_Widget::v( $paths ); 
+  //	PageCarton_Widget::v( $paths ); \
+
+    //  TRACK CORE CHANGES
+    $coreFile = APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename );
+
+    //  TRACK DEFAULT SITE CHANGES
+    $defaultFile = SITE_APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename ); 
+
+    
+   // var_export( $coreFile );
+  //  PageCarton_Widget::v( Ayoola_Application::getDomainSettings( 'domain_name' ) );
+  //  PageCarton_Widget::v( filesize( $defaultFile ) );
+    $hash = md5( json_encode( $arguments ) . $this->_myFilename . $this->_relationship . $this->_accessibility  . Ayoola_Application::getPathPrefix() . Ayoola_Application::getDomainSettings( 'domain_name' ) ) . @filemtime( $this->_myFilename ). @filemtime( $defaultFile ) . @filemtime( $coreFile );
   //  var_export( $hash );
 		$storage = PageCarton_Widget::getObjectStorage( array( 'id' => __CLASS__ . 'wefwfff' . $hash, 'device' => 'File', 'time_out' => 1000000, ) );
 		$result = $storage->retrieve();    

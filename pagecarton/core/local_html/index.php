@@ -26,6 +26,8 @@
 		$dir = $oldDir = $baseAppPath = dirname( $root );
 		$currentDir = explode( '/', str_replace( array( '/', '\\' ), '/', dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
 		$tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $root, '/\\' ) ) );  
+	//	var_export( $_SERVER['SCRIPT_FILENAME'] );
+	//	var_export( $tempDir );
 
 		$prefix = null;
 		if( $currentDir !== $tempDir )
@@ -173,6 +175,9 @@
 		
 		//	Application_dir is where site/app specific is stored
 		defined( 'APPLICATION_PATH' ) || define( 'APPLICATION_PATH', $appPath );
+		
+		//	Application_dir is where site/app specific is stored
+		defined( 'SITE_APPLICATION_PATH' ) || define( 'SITE_APPLICATION_PATH',  PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' );  
 		
 	//   Define path to classes
 		defined( 'EXTENSIONS_PATH' ) || define( 'EXTENSIONS_PATH', APPLICATION_DIR  . DS . 'extensions' );

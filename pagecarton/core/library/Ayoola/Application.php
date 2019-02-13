@@ -277,7 +277,7 @@ class Ayoola_Application
 		}
 
 
-		$storage->storageNamespace = __CLASS__ . 'x-' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
+		@$storage->storageNamespace = __CLASS__ . 'x-' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve(); 
 		if( $data && ! $forceReset && ! @$_GET['reset_domain_information'] )
@@ -295,11 +295,11 @@ class Ayoola_Application
 			else  
 			{
 		//		var_export( $data );
-				self::setIncludePath( PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' );
-				self::setIncludePath( PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules' );
+				self::setIncludePath( SITE_APPLICATION_PATH );
+				self::setIncludePath( SITE_APPLICATION_PATH . DS . 'modules' );
 /*				set_include_path( 
-									PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application'
-									. PS . PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules' 
+									SITE_APPLICATION_PATH
+									. PS . SITE_APPLICATION_PATH . DS . 'modules' 
 									. PS . get_include_path() 
 									
 								);
@@ -671,11 +671,11 @@ class Ayoola_Application
 			}
 			else
 			{
-				self::setIncludePath( PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' );
-				self::setIncludePath( PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules' );
+				self::setIncludePath( SITE_APPLICATION_PATH );
+				self::setIncludePath( SITE_APPLICATION_PATH . DS . 'modules' );
 /*				set_include_path( 
-									PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application'
-									. PS . PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' . DS . 'modules' 
+									SITE_APPLICATION_PATH
+									. PS . SITE_APPLICATION_PATH . DS . 'modules' 
 									. PS . get_include_path() 
 									
 								);  
@@ -1682,16 +1682,35 @@ class Ayoola_Application
 	//	var_export( $_SERVER );
 
 	//	var_export( $requestedUri );
-	//		var_export( $requestedUri );
+		//	var_export( $requestedUri );
+		//	var_export( Ayoola_Application::getPathPrefix() );
 		//	REMOVE PATH PREFIX
 		if( strpos( $requestedUri, Ayoola_Application::getPathPrefix() ) === 0 )  
 		{
 			$requestedUri = explode( Ayoola_Application::getPathPrefix(), $requestedUri );
-	//		var_export( $requestedUri );
+		//	var_export( $requestedUri );
 			array_shift( $requestedUri );
 			$requestedUri = implode( Ayoola_Application::getPathPrefix(), $requestedUri ) ? : '/';
 		//	exit();
 		}
+		elseif( strpos( $requestedUri, '/index.php/' ) !== false )
+		{
+			$requestedUri = explode( '/index.php', $requestedUri );
+			if( count( $requestedUri ) === 2 )
+			{
+				#	https://www.comeriver.com/music/index.php/trending
+				list( $pathPrefix, $requestedUri ) = $requestedUri;
+				if( ! Ayoola_Application::getPathPrefix() )
+				{
+					self::$_pathPrefix = $pathPrefix;
+				}
+			//	var_export( $pathPrefix );
+			//	var_export( self::$_pathPrefix );
+			}//
+		//	var_export( $requestedUri );
+		//	var_export( $requestedUri );
+		}  
+
 	//	var_Export( $_SERVER );
 	//	var_Export( $requestedUri );
 		$requestedUri = parse_url( $requestedUri );
