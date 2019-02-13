@@ -13,15 +13,17 @@
 		if( ! empty( $_SERVER['DOCUMENT_ROOT'] ) )
 		{
 			$docRoot = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];  
-			if( is_file( $docRoot ) && is_writable( $docRoot ) )
+			if( is_dir( $docRoot ) && is_writable( $docRoot ) )
 			{
 				$root = $docRoot;
 			}
 		}
 	//	var_export( $home );
-	//	var_export( $_SERVER );
+	//	var_export( $docRoot );
+	//	var_export( $root );
+	//	var_export( $_SERVER['DOCUMENT_ROOT'] );
 	//	exit();
-		$dir = $oldDir = $baseAppPath = dirname( $home );
+		$dir = $oldDir = $baseAppPath = dirname( $root );
 		$currentDir = explode( '/', str_replace( array( '/', '\\' ), '/', dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
 		$tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $root, '/\\' ) ) );  
 
@@ -77,13 +79,11 @@
 	//	var_export( dirname( $_SERVER['DOCUMENT_ROOT'] ) );
 	//	var_export( $oldDir );
 		
-	//	exit();
+	//	exit(); 
 		
 		//	Check if the new compact dir is available, overides the old structure.
 		$newDir = $oldDir . DS . 'pagecarton';
 		
-		//	introducing separate core dir to make this one easily replaceable during upgrades
-		$newDir2 = $newDir . DS . 'core';
 		
 		$oldAppPath = $oldDir . DS . 'application';
 		$newAppPath = $newDir . DS . 'application';
@@ -146,6 +146,18 @@
 				rename( $oldAppPath, $oldAppPath . '.old' );
 			}
 		}
+		$pcBase = $newDir;
+
+		$pcConfig = json_decode( file_get_contents( 'pagecarton.json' ), true );
+		if( ! empty( $pcConfig['PC_BASE'] ) && is_dir( $pcConfig['PC_BASE'] ) && is_writable( $pcConfig['PC_BASE'] ) )
+		{
+			$pcBase = $pcConfig['PC_BASE'];
+		}
+	//	var_export( $oldDir );
+	//	var_export( $newDir );
+		//	introducing separate core dir to make this one easily replaceable during upgrades
+		$newDir2 = $pcBase . DS . 'core';
+
 		if( is_dir( $newDir2 ) )
 		{
 			//	No need to copy existing files since this will be done once upgrade is done.
@@ -153,9 +165,9 @@
 		}
 		$appPath = $dirToUse . DS . 'application';
 		$libaryPath = $dirToUse . DS . 'library';
-		
+
 		//	Parent of all dir /pagecarton
-		defined( 'PC_BASE' ) || define( 'PC_BASE', $newDir );   
+		defined( 'PC_BASE' ) || define( 'PC_BASE', $pcBase );   
 		defined( 'PC_CORE_DIR' ) || define( 'PC_CORE_DIR', $newDir2 );
 		defined( 'APPLICATION_DIR' ) || define( 'APPLICATION_DIR', $dirToUse );
 		
@@ -171,7 +183,7 @@
 		//	Stop writing cache in the pagecarton dir
 	//	$tempDir = $oldDir . DS . 'temp' . DS';	
 		
-		defined( 'PC_TEMP_DIR' ) || define( 'PC_TEMP_DIR', $newDir . DS . 'temp' );
+		defined( 'PC_TEMP_DIR' ) || define( 'PC_TEMP_DIR', $pcBase . DS . 'temp' );
 	//	var_export( PC_TEMP_DIR );
 		//	port number mess up cache
 		//	don't use prefix because of nginx issues'
