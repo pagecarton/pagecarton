@@ -18,6 +18,7 @@
 				$root = $docRoot;
 			}
 		}
+
 	//	var_export( $home );
 	//	var_export( $docRoot );
 	//	var_export( $root );
@@ -150,7 +151,7 @@
 		}
 		$pcBase = $newDir;
 
-		$pcConfig = json_decode( file_get_contents( 'pagecarton.json' ), true );
+		$pcConfig = json_decode( @file_get_contents( 'pagecarton.json' ), true );
 		if( ! empty( $pcConfig['PC_BASE'] ) && is_dir( $pcConfig['PC_BASE'] ) && is_writable( $pcConfig['PC_BASE'] ) )
 		{
 			$pcBase = $pcConfig['PC_BASE'];
@@ -169,6 +170,7 @@
 		$libaryPath = $dirToUse . DS . 'library';
 
 		//	Parent of all dir /pagecarton
+		defined( 'PC_DOCUMENT_ROOT' ) || define( 'PC_DOCUMENT_ROOT', $root );   
 		defined( 'PC_BASE' ) || define( 'PC_BASE', $pcBase );   
 		defined( 'PC_CORE_DIR' ) || define( 'PC_CORE_DIR', $newDir2 );
 		defined( 'APPLICATION_DIR' ) || define( 'APPLICATION_DIR', $dirToUse );
@@ -237,7 +239,13 @@
 		defined( 'DOMAIN' ) || define( 'DOMAIN', $_SERVER['HTTP_HOST'] );
 		
 		//	Bring in our libraries.
-		set_include_path( LIBRARY_PATH . PS . MODULES_PATH . PS . APPLICATION_PATH  );
+		set_include_path( LIBRARY_PATH . PS . MODULES_PATH . PS . APPLICATION_PATH . PS . SITE_APPLICATION_PATH  );
+
+		if( ! is_file( LIBRARY_PATH ) )
+		{
+
+		}
+
 	//	Detects the Url and path
 		require_once 'Ayoola/Application.php';
 		defined( 'URI' ) || define( 'URI', Ayoola_Application::getPresentUri() );

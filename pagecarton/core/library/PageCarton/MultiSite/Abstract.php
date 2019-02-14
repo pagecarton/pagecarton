@@ -63,7 +63,7 @@ class PageCarton_MultiSite_Abstract extends PageCarton_Widget
      */
 	public static function getNewSiteDir( $directory )  
     {
-        $root = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];        
+        $root = PC_DOCUMENT_ROOT;        
         $newSite = $root . $directory;
         return $newSite;
     }
@@ -102,7 +102,7 @@ class PageCarton_MultiSite_Abstract extends PageCarton_Widget
         }
         $files = self::getSiteFiles();
     //    var_export( getcwd() );
-    //    var_export( $newSite );
+    //    var_export( $newSite );  
         if( ! symlink( getcwd(), $newSite ) )
         {
             return false; 

@@ -159,7 +159,7 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 		{ 
 			if( Ayoola_Loader::loadClass( $data['settings_class'] ) )
 			{
-				$settings =  '<a href="/tools/classplayer/get/name/Ayoola_Extension_Import_Settings/?extension_name=' . $data['extension_name'] . '">Manage Settings.</p>';
+				$settings =  '<a href="' . Ayoola_Application::getUrlPrefix() .  '/tools/classplayer/get/name/Ayoola_Extension_Import_Settings/?extension_name=' . $data['extension_name'] . '">Manage Settings.</p>';
 			}
 
 		}

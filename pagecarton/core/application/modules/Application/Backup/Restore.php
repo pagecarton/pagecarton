@@ -46,6 +46,7 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 			{ 
 				$this->setViewContent( '<div class="goodnews">Back up restored successfully.</div>', true ); 
 			}
+			Application_Cache_Clear::viewInLine();  
 		//	else
 			//	do we have admin user
 			//		if( $this->restore() ){ null; }
@@ -54,7 +55,8 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 		{
 		//	var_export( $e->getMessage() );
 			$this->getForm()->setBadnews( 'Invalid Backup File' );
-			$this->setViewContent( $this->getForm()->view(), true );		
+			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );		
+			$this->setViewContent( $this->getForm()->view() );		
 			return false;
 		}
     } 

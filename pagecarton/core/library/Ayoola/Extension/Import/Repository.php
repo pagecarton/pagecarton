@@ -177,7 +177,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             foreach( $allFeed as $each )
             {
           //     var_export( $each );
-                $data[] = array(
+                $data[$each['category_name']] = array(
                     'url' => '?category=' . $each['category_name'] . '&' . http_build_query( $_GET ) . '',
                     'option_name' => $each['article_title'],
                     'title' => $each['article_title'],
@@ -241,7 +241,13 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 			$this->_dbData = $data;
 			return true;
         }
+        $options = array_keys( self::getMenuOptions() );
+    //    self::v( $options );
         $category = ( @$_GET['category'] ? : $this->getDefaultCategory() );
+        if( ! in_array( $category, $options ) )
+        {
+            $category = null;
+        }
 		$storage = self::getObjectStorage( array( 'id' => 'cssdcf-fw' . $category, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
 		if( ! $data = $storage->retrieve() )
         {
@@ -249,7 +255,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             $url = 'https://' . static::$_site . '/widgets/Application_Article_RSS?category=' . $category;
             $feed = self::fetchLink( $url, array( 'time_out' => 28800, 'connect_time_out' => 28800, ) );
             $allFeed = (array) simplexml_load_string( $feed );
-        //  self::v($feed_to_array);
+       //   self::v($feed_to_array);
         //    self::v($url);
     //     $allFeed['channel'] = (array) $allFeed['channel'];
             $data = array();

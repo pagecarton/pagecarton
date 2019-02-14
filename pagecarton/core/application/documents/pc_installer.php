@@ -158,14 +158,16 @@
 	}
 	
 	//	Now use back-up server
-	if( ! fetchLink( $remoteSite ) )
+	if( ! $res = fetchLink( $remoteSite . '/pc_check.txt' ) )
 	{
 		$remoteSite = $remoteSite2;
-		if( ! fetchLink( $remoteSite ) )
+		if( ! fetchLink( $remoteSite . '/pc_check.txt' ) )
 		{
 			$remoteSite = $remoteSite3;
 		}
 	}
+//	var_export( $res );
+//	exit()
   	
     /** 
      * Fetches a remote link. Lifted from Ayoola_Abstract_Viewable
@@ -317,6 +319,7 @@
 				}
 				file_put_contents( $filename, $f );
  */				
+        //        var_export( $remoteSite . '/widgets/Application_Backup_GetInstallation/?pc_core_only=1' );
 				if( ! $f = fetchLink( $remoteSite . '/widgets/Application_Backup_GetInstallation/?pc_core_only=1', array( 'time_out' => 300 ) ) ) 
 				{ 
 					$badnews .= '<p>The installation archive is missing. We also tried to connect to the internet to download it but application coult not connect to the internet. Please ensure that allow_fopen_url is not switched off in your server configuration.</p>';

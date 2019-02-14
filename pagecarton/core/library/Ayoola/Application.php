@@ -416,18 +416,28 @@ class Ayoola_Application
 				//	make IP work but don't store it
 				$subDomain = null;
 			}
-		//	var_export( $subDomain );
-			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && $domainName !== $_SERVER['SERVER_ADDR']&& empty( $domainSettings['no_redirect'] )  )
+		//	var_export( get_include_path() );
+		//	var_export( $domain->select() );
+		//	exit();
+			if( ! $domain->select() )
 			{
-				if( ! $domain->select() && ( '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] ) )
+			//	var_export( $domainName );
+			//	var_export( $_SERVER['SERVER_ADDR'] );
+				//	insert the first domain only
+				if( ( '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] ) && empty( $_SERVER['CONTEXT_PREFIX'] ) )
 				{
-				//	var_export( $domainName );
-				//	var_export( $_SERVER['SERVER_ADDR'] );
-					//	insert the first domain only
 					$domain->insert( $where );
-					$data['domain_settings'] = $where; 
-					break;
 				}
+				$data['domain_settings'] = $where; 
+				$subDomain = null;
+			//	break;
+			}
+		//	var_export( $data );
+		///	exit();
+			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && $domainName !== $_SERVER['SERVER_ADDR'] && empty( $domainSettings['no_redirect'] )  )
+			{
+				
+
 			//	var_export( $primaryDomainInfo );
 			//	exit();
 				if( $primaryDomainInfo['domain_name'] )
@@ -1855,6 +1865,16 @@ class Ayoola_Application
 		}
 		
 		return self::$_pathPrefix;
+	}
+	
+    /**
+     * 
+     * 
+     */
+	public static function getRealPathPrefix()
+    {
+		$path = str_replace( @$_SERVER['CONTEXT_PREFIX'], '', Ayoola_Application::getPathPrefix() );
+		return $path;
 	}
 	
     /**

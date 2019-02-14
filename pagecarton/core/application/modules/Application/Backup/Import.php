@@ -83,6 +83,16 @@ class Application_Backup_Import extends Application_Backup_Abstract
 					if( ! is_file( $tempName ) )
 					{
 						self::fetchLink( $values['backup_url'], array( 'destination_file' => $tempName, 'connect_time_out' => 30, 'time_out' => 986000 ) );
+						try
+						{
+							//	try if tar will work on server
+							$backup = new $phar( $tempName, RecursiveDirectoryIterator::SKIP_DOTS );
+							$information = file_get_contents( $backup['backup_information'] );
+						}
+						catch( Exception $e )
+						{
+							
+						}
 					}
 				//	var_export( $values['backup_url'] ); 
 				//	var_export( filesize( $tempName ) ); 
