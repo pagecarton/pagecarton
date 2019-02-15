@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Editor_Layout
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Page/Editor/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Editor_Layout
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -349,19 +349,63 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				$fieldset = new Ayoola_Form_Element; 
 				$fieldset->hashElementName = false;
 				$fieldset->container = 'span';
-				$fieldset->addElement( array( 'name' => 'markup_template_object_name[]', 'label' => 'Widget  <span name="embed_widget_counter" class="embed_widget_counter">' . ( $i ) . '</span>', 'style' => '', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$object['markup_template_object_name'][$i] ), array( '' => 'Select Widget' ) + $widgets );
+				$fieldset->addElement( array( 'name' => 'markup_template_object_name[]', 'label' => 'Widget  <span name="embed_widget_counter" class="embed_widget_counter">' . ( $i ) . '</span>', 'style' => '', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$object['markup_template_object_name'][$i] ), array( '' => 'Select Widget' ) + $widgets + array( '__custom' => 'Custom Widget' ) );  
 				if( $object['markup_template_object_name'][$i] )
 				{
 					$fieldset->allowDuplication = true;  
 					$fieldset->duplicationData = array( 'add' => '+ Embed New Widget', 'remove' => '- Remove Above Widget', 'counter' => 'embed_widget_counter', );
 				}
 				$fieldset->placeholderInPlaceOfLabel = true;
-				$i++;
 				$fieldset->addLegend( '' );   			   			
 				$html .= $fieldset->view(); 
+
+				$class = @$object['markup_template_object_name'][$i];
+				$content = null;
+				$resultsVar = null;
+
+				if( ! empty( $class ) && Ayoola_Loader::loadClass( $class ) )
+				{
+					$filter = new Ayoola_Filter_ClassToFilename();
+					$classFile = $filter->filter( $class );
+					$classFile = Ayoola_Loader::getFullPath( $classFile );
+	
+					$content = file_get_contents( $classFile ) ;
+					preg_match_all( "/\['([a-z_-]*)'\]/", $content, $resultsVar );
+				//	self::v( $class );
+				//	self::v( $classFile );
+				//	self::v( strlen( $content ) );
+				//	self::v( $resultsVar );
+					$resultsVar = ( is_array( $resultsVar[1] ) ? $resultsVar[1] : array() );
+				}
+				if( $resultsVar )
+				{
+					$resultsVar = array_unique( $resultsVar );
+					sort( $resultsVar );
+					$data = trim( str_replace( '{{{}}},', '', '{{{' . implode( '}}}, {{{', $resultsVar ) . '}}}' ), ' ' );
+					
+					$html .= '<div>';  
+					$html .= '<textarea style="font-size:12px;" readonly rows="5" style="height:auto;" ondblclick="ayoola.div.autoExpand( this );">';  
+					$html .= '<!-- How to embed ' . $class . ' -->
+<!--{{{@' . $i . '(' . $class . ')-->
+<p>Insert HTML content here. Use varables like {{{' . ( $resultsVar[0] ? : $resultsVar[1] ) . '}}} here.</p>
+<!--(' . $class . ')@' . $i . '}}}-->
+<!-- Place this code in code view -->';  
+								
+					$html .= '</textarea>'; 
+
+					$html .= '<textarea  style="font-size:12px;" readonly ondblclick="ayoola.div.autoExpand( this );">';  
+					$html .= '' . $class . ' variables to use in content: ' . $data . '
+
+									';  
+								
+					$html .= '</textarea>';  
+					$html .= '</div>';  
+				}
+				$i++;
+
 			}
 			while( isset( $object['markup_template_object_name'][$i] ) );
-			$content = null;
+/* 			$content = null;
 			$resultsVar = null;
 			foreach( $object['markup_template_object_name'] as $each )
 			{
@@ -388,7 +432,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				$html .= 'Available variables to use in content: ' . $data . '';  
 				$html .= '</textarea>';  
 			}
-		}
+ */		}
 /* 		if( ! empty( $object['phrase_to_replace_with'] ) &&  ! empty( $object['phrase_to_replace'] ) )
 		{
 			$object['preserved_content'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['preserved_content'] );
@@ -575,7 +619,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		elseif( @$object['codes']  )
 		{
-			$html .= '<textarea class="pc_page_object_specific_item" data-parameter_name="codes" style="' . $hiddenStyle . 'width:100%;" title="You may click to edit the content here..." >' . htmlspecialchars( @$object['codes'] ? : $object['editable'] ) . '</textarea>';     
+			$html .= '<textarea class="pc_page_object_specific_item" data-parameter_name="codes" style="' . $hiddenStyle . 'width:100%; background-color:inherit; color:inherit;" title="You may click to edit the content here..." >' . htmlspecialchars( @$object['codes'] ? : $object['editable'] ) . '</textarea>';     
 		}
 		$html .= '<textarea class="" data-parameter_name="preserved_content" style="display:none;" title="" >' . htmlspecialchars( @$object['editable'] ) . '</textarea>';     
 
@@ -679,7 +723,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 								trigger.innerHTML = \'Code View\'; 
 								c.setAttribute( \'data-parameter_name\', \'\' ); 
 								a[b].setAttribute( \'data-parameter_name\', \'editable\' ); 
-								c.parentNode.removeChild( c );
+								c.parentNode.removeChild( c ); 
 								
 							} 
 							else

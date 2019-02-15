@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Form_MultiOptions_List
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -51,7 +51,11 @@ class Ayoola_Form_MultiOptions_List extends Ayoola_Form_MultiOptions_Abstract
 		$list->createList
 		(
 			array(
-                    'multioptions_title' => array( 'field' => 'multioptions_title', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'multioptions_name' => array( 'field' => 'multioptions_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'db_table_class' => array( 'field' => 'db_table_class', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'values_field' => array( 'field' => 'values_field', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'label_field' => array( 'field' => 'label_field', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'multioptions_title' => array( 'field' => 'multioptions_title', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'multioptions_name' => array( 'field' => 'multioptions_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'db_table_class' => array( 'field' => 'db_table_class', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'values_field' => array( 'field' => 'values_field', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'label_field' => array( 'field' => 'label_field', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
                     '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_MultiOptions_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
                     ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_MultiOptions_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 

@@ -499,6 +499,8 @@ pc_full_width
     border: none;
     border-bottom: 1px solid #ddd;
     background: transparent;
+    background-color: inherit;
+    color:inherit;
     margin-bottom: 10px;
 }
 .pc-form2 input[type="checkbox"],
@@ -956,6 +958,9 @@ pc_full_width
     display: inline-block;
     width: 120px;
     margin: 0.5em 0;
+}
+.pc_inline_block_o {
+    display: inline-block;
 }
 .pc_container {
 /*    padding-right: 15px;

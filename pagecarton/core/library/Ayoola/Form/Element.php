@@ -810,8 +810,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 				//	var_export( $element['value'] ); 
 					$checked = "checked='true'";
 				}
-			}
-			$element['class'] .= ' pc_give_space';
+			} 
+			@$element['class'] .= ' pc_give_space';
 			@$html .= "<label style='{$element['label_style']}' for='{$element['id']}{$counter}' class='clearTransformation'> 
 							<input type='checkbox' id='{$element['id']}$counter' value='{$value}' {$checked} " . self::getAttributesHtml( $element ) . " > {$label} 
 						</label>\n";  

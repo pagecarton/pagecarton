@@ -2,11 +2,11 @@
 
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Access_Login
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -21,7 +21,7 @@ require_once 'Ayoola/Access/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Access_Login
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt  
@@ -94,8 +94,14 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 	//	var_export( $accountPage );
 		if( ! $this->getParameter( 'no_redirect' )  )
 		{
-			$urlToGo = $this->getParameter( 'return_url' ) ? : ( self::$returnUrl ? : ( Application_User_Settings::retrieve( 'default_account_page' ) ? : Ayoola_Page::getPreviousUrl( '/account/' ) ) );
-			Application_Javascript::header( Ayoola_Application::getUrlPrefix() . $urlToGo );
+			$urlToGo = '/account';
+			$urlToGo = Application_User_Settings::retrieve( 'default_account_page' ) ? : $urlToGo;
+			$urlToGo = self::$returnUrl ? : $urlToGo;
+			$urlToGo = $this->getParameter( 'return_url' ) ? : $urlToGo;
+			$urlToGo = Ayoola_Application::getUrlPrefix() . $urlToGo;
+			$urlToGo = Ayoola_Page::getPreviousUrl( $urlToGo );  
+		//	var_export( $urlToGo );
+			Application_Javascript::header( $urlToGo );
 		}
 		
 //		var_export( $urlToGo );
@@ -201,21 +207,21 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 				$userInfo['password'] = $hashedCredentials['password'];
 			//	var_export();
 				
-				$cookie = self::getPersistentCookieValue( $userInfo['email'],  $userInfo['email'] . $userInfo['password'] ); 
+				$cookie = self::getPersistentCookieValue( $userInfo['email'], $userInfo['password'] ); 
 				$expire = time() + 1728000; // Expire in 20 days
 				@setcookie( $this->getObjectName(), $cookie, $expire, '/', null, false, true );
 			}
 			
 			if( ! Ayoola_Application::isXmlHttpRequest() && ! $this->getParameter( 'no_redirect' ) )
 			{			
-				@header( 'Location: ' . Ayoola_Application::getUrlPrefix() . $urlToGo );
+				@header( 'Location: ' . $urlToGo );
 			//	var_export( __LINE__ );
 				exit();
 			}
 			// Do ajax
 			if( $urlToGo )
 			{
-				$this->setViewContent( 'Login Successful. You are being redirected to the previous page... <a href="' . Ayoola_Application::getUrlPrefix() . $urlToGo . '">Click here if you are not redirected to the page in 5 seconds.</a>', true );
+				$this->setViewContent( 'Login Successful. You are being redirected to the previous page... <a href="' . $urlToGo . '">Click here if you are not redirected to the page in 5 seconds.</a>', true );
 				$this->setViewContent( '<span id="ayoola-js-redirect-whole-page"></span>' );
 			}
 			return true;

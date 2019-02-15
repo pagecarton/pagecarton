@@ -4,7 +4,7 @@
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    PageCarton Installer
  * @copyright  Copyright (c) 2011-2015 Ayoola Online Inc. (http://www.ayoo.la/)
  * @license    http://pagecarton.com/license.txt

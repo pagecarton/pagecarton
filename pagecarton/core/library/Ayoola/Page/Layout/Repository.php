@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Layout_Repository
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -54,6 +54,15 @@ class Ayoola_Page_Layout_Repository extends Ayoola_Extension_Import_Repository
      */
 	protected static $_pluginClass = 'Ayoola_Page_Layout_Creator'; 
 
+    
+    /**
+     * 
+     * 
+     */
+	public function getDefaultCategory()
+    {
+        return Application_Settings_SiteInfo::retrieve( 'site_type' );
+    }
 	
     
     /**

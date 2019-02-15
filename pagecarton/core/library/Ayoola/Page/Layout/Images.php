@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Layout_Images
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Page/Layout/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Layout_Images
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -203,8 +203,10 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 				$images = array();
 				foreach( $files as $each )
 				{
-					$extension = array_pop( explode( ".", strtolower( $each ) ) );
-					if( ! in_array( $extension, self::$_imageExtensions ) )
+				//	$extension = array_pop( explode( ".", strtolower( $each ) ) );
+					$extension = explode( ".", strtolower( $each ) );
+					$extension = array_pop( $extension );
+						if( ! in_array( $extension, self::$_imageExtensions ) )
 					{
 						continue;
 					}

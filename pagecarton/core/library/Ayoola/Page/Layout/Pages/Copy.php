@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Layout_Pages_Copy
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -58,9 +58,30 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             $pageThemeFileUrl = '/index';
         }
         $fPaths = static::getPagePaths( $themeName, $pageThemeFileUrl );
-    //    var_export();
+        $pageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
+        $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) );
+        if( ! is_file( $pageFile ) )
+        {
+            return false;
+        }
+//    var_export();
 
         if( ! Ayoola_Loader::getFullPath( $fPaths['include'], array( 'prioritize_my_copy' => true ) ) )
+        {
+            //  don't create this page unless it's saved
+            return false;
+        }
+
+        //  when other files like template and data wasn't checked, theme pages are being sanitized
+        #   when the default theme was sanitized
+
+        if( ! Ayoola_Loader::getFullPath( $fPaths['template'], array( 'prioritize_my_copy' => true ) ) )
+        {
+            //  don't create this page unless it's saved
+            return false;
+        }
+
+        if( ! Ayoola_Loader::getFullPath( $fPaths['data_json'], array( 'prioritize_my_copy' => true ) ) )
         {
             //  don't create this page unless it's saved
             return false;
@@ -75,6 +96,15 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
         if( ! empty( $pageInfo['layout_name'] ) && $pageInfo['layout_name'] != $themeName )
         {
              return false;
+        }
+    //    foreach( $fPaths as $key => $each )
+        {
+     //       if( $from = Ayoola_Loader::getFullPath( $each, array( 'prioritize_my_copy' => true ) ) )
+            {
+            //    var_export( $key . '<br>');
+            //    var_export( $from . '<br>');
+            //    copy( $from, $to );
+            }
         }
         return true;
     }

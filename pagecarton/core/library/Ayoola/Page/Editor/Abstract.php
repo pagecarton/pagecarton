@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Editor_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -20,7 +20,7 @@ require_once 'Ayoola/Object/Interface/Viewable.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Editor_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -547,14 +547,21 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 			$this->_pageInfo = (array) $whereClause;
 			return;
 		}
-		$table = Ayoola_Page_Page::getInstance();
+		$table = Ayoola_Page_Page::getInstance( Ayoola_Application::getApplicationNameSpace() );
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );
 	//	var_export( $whereClause ); 
 		if( ! $whereClause )
 		{
 			return false;
 		}
-		$data = $table->selectOne( null, $whereClause );
+		$data = $table->selectOne( null, $whereClause, array( 'work-around to avoid cache' => Ayoola_Application::getApplicationNameSpace() ) );
+	//	if( $whereClause['url'] === '/how-to' )
+		{
+		//	$e = new \Exception;
+	//	var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );			
+	//	var_export( $table->select() );			
+		//	var_export( $page );
+		}
 	//	var_export( $data );
 		if( ! $data )
 		{

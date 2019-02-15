@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Abstract_Playable
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com) 
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -23,7 +23,7 @@ require_once 'Ayoola/Abstract/Viewable.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Abstract_Playable
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -270,7 +270,15 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 				}
 				elseif( $jSearch )
 				{
-					$template = str_replace( $jSearch, $jReplace, $template );    
+					if( is_array( $jReplace ) && ! is_array( $jSearch ) )
+					{
+						//	don't cause error 
+
+					}
+					else
+					{
+						$template = str_replace( $jSearch, $jReplace, $template );    
+					}
 				}
 				
 			}

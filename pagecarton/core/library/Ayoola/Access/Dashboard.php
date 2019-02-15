@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Access_Dashboard
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Access/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Access_Dashboard
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -50,8 +50,12 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
      */
     public function init()
     {
-		$userInfo = Ayoola_Application::getUserInfo();
-	 //	var_export( $userInfo ); 
+	//	var_export( Ayoola_Application::$GLOBAL );
+		if( ! $userInfo = Ayoola_Application::getUserInfo() )
+		{
+			return false;
+		}
+	// 	var_export( $userInfo ); 
 
 		$style = 'min-width:25%;max-width:50%;line-height:2em;display:inline-block;';
 		$header = $style . 'font-weight:bold;';
@@ -89,11 +93,16 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
 			
 		}
 		@$options['domain'] = Ayoola_Page::getDefaultDomain();
+		switch( $userInfo['access_level'] )
+		{
+			case 1:
+				$options['auth_name'] = 'FREE Account';
+			break;
+		}
 		$this->_objectTemplateValues = array_merge( $options ? : array(), $this->_objectTemplateValues ? : array() );   
 		
 		
-		
-	//	$userInfo['access_level'] ? 
+	//	$userInfo['access_level'] ?   
 		@$userInfo['wallet_balance'] = $userInfo['wallet_balance'] ? $userInfo['wallet_balance'] : '0.00';
 		@$this->setViewContent( "<span style='{$style}'>{$options['auth_name']}</span>" );
 		

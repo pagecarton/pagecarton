@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_YesOrNo_Abstract
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -65,7 +65,8 @@ class Application_YesOrNo_Abstract extends PageCarton_Widget
 
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'answer', 'type' => 'InputText', 'value' => @$values['answer'] ) );         $fieldset->addElement( array( 'name' => 'answer_value', 'type' => 'InputText', 'value' => @$values['answer_value'] ) ); 
+        $fieldset->addElement( array( 'name' => 'answer', 'type' => 'InputText', 'value' => @$values['answer'] ) ); 
+        $fieldset->addElement( array( 'name' => 'answer_value', 'type' => 'InputText', 'value' => @$values['answer_value'] ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

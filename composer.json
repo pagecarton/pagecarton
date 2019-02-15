@@ -1,8 +1,8 @@
 {
     "name": "pagecarton/pagecarton",
     "type": "project",
-    "description": "With PageCarton CMS, anyone could build a great website!",
-    "keywords": ["pagecarton", "cms"],
+    "description": "With PageCarton, anyone could build a great website and app!",
+    "keywords": ["pagecarton", "cms", "cmf", "web framework", "web builder", "app builder"],
     "homepage": "https://github.com/pagecarton/pagecarton",
     "license": "GPL-2.0+",
     "config": {

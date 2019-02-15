@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_View
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Application/Article/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_View
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -131,20 +131,10 @@ class Application_Article_View extends Application_Article_Abstract
     {
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' ); 		
 		$data = $this->getIdentifierData();
-	//	var_export( $data );
+	//	self::v( $data );
 	//	$this->_xml = '<span class="' . __CLASS__ . '_UL" style="list-style:none;">';
 		$url = $data['article_url'];
 	//	var_export( $data['article_content'] );
-	
-		//	Get user info
-		if( @$data['username'] && $this->getParameter( 'get_access_information' ) )
-		{
-			//	Causes things to run slow
-			if( $userInfo = Ayoola_Access::getAccessInformation( $data['username'] ) )
-			{
-				$data += $userInfo;
-			}
-		}
 		if( $this->getParameter( 'use_datetime' ) )
 		{
 			if( ! empty( $data['datetime'] ) )
@@ -159,11 +149,30 @@ class Application_Article_View extends Application_Article_Abstract
 		}
 		if( ! empty( $data['profile_url'] ) )
 		{
+		//	self::v( $data );
 			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) )
 			{
+			//	self::v( $profileInfo );
 				$data += $profileInfo ? : array();
 			}
 		}
+			
+		//	Get user info
+		if( @$data['username'] && $this->getParameter( 'get_access_information' ) )
+		{
+			//	Causes things to run slow
+			if( $userInfo = Ayoola_Access::getAccessInformation( $data['username'] ) )
+			{
+				$data += $userInfo;
+			}
+		}
+
+		$data['article_description'] = trim( $data['article_description'] );
+		if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
+		{
+			$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 200 );
+		}
+
 		if( $this->getParameter( 'modified_time_representation' ) )
 		{
 			if( is_string( $this->getParameter( 'modified_time_representation' ) ) )
@@ -327,7 +336,14 @@ class Application_Article_View extends Application_Article_Abstract
 			$data['true_post_types'] = $data['article_type'];
 			$data['post_type'] = $data['article_type'];
 		}
-		
+		$data['post_link'] = $data['article_url'];
+		$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['article_url'];
+		if( @$data['article_url'] && strpos( @$data['article_url'], ':' ) === false && $data['article_url'][0] !== '?'  )
+		{
+			$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
+	//		var_export( $data['post_link'] );
+		}
+	
 	//	var_export( $postTypeInfo );
 		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
 		{
@@ -517,8 +533,9 @@ class Application_Article_View extends Application_Article_Abstract
 						}
 						else
 						{
-							$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
-							$data['file_size'] = $head['content-length'];							
+								#	we don't want to use get_headers again. Can make site slow
+						//	$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
+						//	$data['file_size'] = $head['content-length'];							
 						}
 					}
 					elseif( @$data['download_path'] )

@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Loader
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Loader
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -62,6 +62,16 @@ class Ayoola_Loader
 		return class_exists( $class, false ) ?  true : false;
     } 
 	
+    /**
+     * 
+     *
+     * @return void
+     */
+    public static function resetValidIncludePaths()
+    {
+		return self::$_validIncludePaths = array();
+	}
+
     /**
      * Retrieve the valid include paths for a given relative path
      *

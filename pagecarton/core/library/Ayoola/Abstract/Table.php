@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Abstract_Table
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -21,7 +21,7 @@ require_once 'Ayoola/Abstract/Playable.php';
 
 
 /**       
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Abstract_Table
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -478,7 +478,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			$form->callToAction = $this->getParameter( 'call_to_action' );
 		}
 		$this->fakeValues = $this->fakeValues ? : $this->getParameter( 'fake_values' );
-		if( count( $this->fakeValues ) )
+		if( ! empty( $this->fakeValues ) )
 		{ 
 			$form->fakeValues = $this->fakeValues; 
 			$form->oneFieldSetAtATime = false; 
@@ -661,8 +661,8 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			{
 				if( ! $values = $this->getForm()->getValues() ){ return false; }
 			}
-			return $this->getDbTable()->delete( $this->getIdentifier()  );
-		}
+			return $this->getDbTable()->delete( $this->getIdentifier(), array( 'limit' => 1 )  ); 
+		} 
 		catch( Ayoola_Dbase_Adapter_Xml_Table_Exception $e )
 		{ 
 		//	echo $e->getMessage();

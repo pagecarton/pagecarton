@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System 
+ * PageCarton 
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Application/Article/Exception.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -225,6 +225,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			self::saveArticleSecondaryData( $secondaryValues );
 		}
 		$data['comments_count'] = $data['comments_count_total'];
+	//	self::v( $data['comments_count_total'] );
+	//	self::v( $data['comments_count'] );
 		return intval( $data['comments_count_total'] );
 	}
 	
@@ -466,7 +468,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function loadPostData( $data )
     {
-		
+ 		
 		if( is_array( $data ) )
 		{
 			if( ! empty( $data['article_url'] ) )
@@ -573,7 +575,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 	//	var_export( $jsonData );
 	//	var_export( $data );
-		$presetValues = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $data['article_type'] ) );
+		$storage = self::getObjectStorage( array( 'id' => __CLASS__ . 'xxweeff', 'device' => 'File', 'time_out' => 10000, ) );
+		$presetValues = $storage->retrieve();  
+		if( ! is_array( $presetValues ) )
+		{
+			$presetValues = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $data['article_type'] ) );
+			$storage->store( $presetValues );
+		}
 		if( ! empty( $presetValues['preset_keys'] ) && ! empty( $presetValues['preset_values'] ) )
 		{
 			$presetValues = array_combine( $presetValues['preset_keys'], $presetValues['preset_values'] );
@@ -614,6 +622,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
  		}
 //		self::v( $this->getParameter( 'article_url' ) );
 //		self::v( $url );
+//		self::v( $data );
 		if( ! $data )
 		{
 			return false;
@@ -868,7 +877,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$link = 'span';
 			$header = 'h1';
-
 		}
 	//	var_export( $data );
 		$html = null;
@@ -878,7 +886,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
         $html .= $data['css_class_of_inner_content'] ? '<div class="' .$data['css_class_of_inner_content'] . '">' : null;
 		$html .= '<div style="float:right;background-color:#000;padding:10px;border-radius:10px;">' . @$data['post_type'] . '</div>';
 		$html .= '<' . $header . '>' . $data['article_title'] . '</' . $header . '>';
-		$html .= $data['article_description'] ? '<br><p>' . $data['article_description'] . '</p>' : null;
+		$html .= @$data['article_description'] ? '<br><p>' . $data['article_description'] . '</p>' : null;
 		$html .= $realPost && $data['button_value'] ? '<br><p><button class="pc-btn"> ' . $data['button_value'] . ' </button></p>' : null;
         $html .= $data['css_class_of_inner_content'] ? '</div>' : null;
 		$html .= '</div>';
@@ -903,7 +911,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			{
 	//		var_export( $profileInfo );
 			//	$data += $profileInfo ? : array();
-				$html .= ( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '" class="pc_posts_option_items"> by ' . ( $profileInfo['display_name'] ? : $data['profile_url'] ) . '</a>' );
+				$html .= ( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '" class="pc_posts_option_items"> by ' . ( @$data['display_name'] ? : $data['profile_url'] ) . '</a>' );
 			}
 		}
 		

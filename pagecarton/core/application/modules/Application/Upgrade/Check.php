@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Upgrade_Check
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -60,10 +60,21 @@ class Application_Upgrade_Check extends PageCarton_Widget
           ///    var_export( $server );
                 $versionFromServer = array();
                 $versionFromServer['time'] = time();
-                $response = self::fetchLink( $server );
+                if( ! $response = self::fetchLink( $server ) )
+                {
+                    $server = 'http://s1.' . $serverName . '/object/name/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
+                    if( ! $response = self::fetchLink( $server ) )
+                    {
+                        $server = 'http://s2.' . $serverName . '/object/name/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
+                        if( ! $response = self::fetchLink( $server ) )
+                        {
+                            // we don try;
+                        }
+                    }
+               }
                 $versionFromServer['response'] = strlen( $response ) > 6 || strlen( $response ) < 2 ? 0 : $response;
 			//	var_export( $versionFromServer );
-            //    $storage->store( $versionFromServer );
+                $storage->store( $versionFromServer ); 
             }
         //    var_export( $versionFromServer );
         $filter = new Ayoola_Filter_Time();

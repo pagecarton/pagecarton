@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Adapter_Xml_Table_Select
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Dbase/Adapter/Xml/Table/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Adapter_Xml_Table_Select
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -59,6 +59,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		$result = $this->getCache( func_get_args() );
 		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
 		$rows = array();
+	//	PageCarton_Widget::v( $options );  
+	//	PageCarton_Widget::v( $result );  
 		if( ! empty( $options['filename'] ) )
 		{
 		//	var_export( $this->getMyFilename() );
@@ -67,7 +69,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );
 	//		PageCarton_Widget::v( $rows );
 		}
-		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE || $this->getAccessibility() == self::SCOPE_PUBLIC )
+		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE ) // let PUBLIC PICK FROM CORE AND DEFAULT FOR COMPATIBILITY TO PREVIOUS VERSIONS THAT SAVED IN CORE
+//		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE || $this->getAccessibility() == self::SCOPE_PUBLIC )
 		{
 		//	$rows = $this->doSelect( $fieldsToFetch, $where, $options ); 
 			$files =  array_unique( array( $this->getFilenameAccordingToScope() => $this->getFilenameAccordingToScope() ) + $this->getSupplementaryFilenames() );
@@ -107,12 +110,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//		PageCarton_Widget::v( $files );
 		}
 //		PageCarton_Widget::v( count( $files ) . '<br>' );
+	//	PageCarton_Widget::v( $files );
 		foreach( $files as $filename )
 		{
 			$innerOptions = $options;
 			if(  ! empty( $options['limit'] ) && $totalRows >= $options['limit'] )
 			{
-				break;
+				break; 
 			}
 			elseif( ! empty( $options['limit'] ) )
 			{
@@ -189,9 +193,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
  				{
 					//	manipulate them before finally recording them
 					$filterFunction = $options['key_filter_function'][$key];
-					$filterFunction( $fields[$key], $otherData, $searchTerm );   
+				//	var_export( $filterFunction );
+					call_user_func_array( $filterFunction, array( &$fields[$key], &$otherData, &$searchTerm )  );
+				//	$filterFunction( $fields[$key], $otherData, $searchTerm );   
  				//	PageCarton_Widget::v( $searchTerm ); 
-				//	PageCarton_Widget::v( $fields[$key] );
+				//	PageCarton_Widget::v( $fields[$key] ); 
 					if( is_array( $otherData ) )
 					{
 						$fields += $otherData;

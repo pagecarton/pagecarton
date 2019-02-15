@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Editor_Layout
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)  
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -20,7 +20,7 @@ require_once 'Ayoola/Page/Editor/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Editor_Layout
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -1110,7 +1110,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$rPaths[$eachItem] = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths[$eachItem];
 				@Ayoola_Doc::createDirectory( dirname( $rPaths[$eachItem] ) );
 			}
-
+		//	var_export( $rPaths['include'] . '<br>' );
 			file_put_contents( $rPaths['include'], $content['include'] );
 			file_put_contents( $rPaths['template'], $content['template'] );				
 	
@@ -1146,24 +1146,60 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 				$class->sanitize( $themeName ); 
 
+
+				//	Sanitize multi sites
 				$table = new PageCarton_MultiSite_Table();
 				$isChildSite = $table->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) );
 		//		var_export( Ayoola_Application::getPathPrefix() );
 		//		var_export( $isChildSite );
 		//	var_export( $rPaths );
-				if( ! $isChildSite )
+				$appPath = Ayoola_Application::getDomainSettings( APPLICATION_PATH );
+				$isDefaultSite = false;
+				if( basename( $appPath ) === 'application' && basename( dirname( $appPath ) ) === 'default' )
+				{
+					$isDefaultSite = true;
+				}
+		//	var_export( $appPath . '<br>' );
+				if( $isDefaultSite && ! $isChildSite )
 				{	
 					$sites = $table->select();
 
 					//	do for directories
 					foreach( $sites as $site )
 					{
+					//	var_export( $site['directory'] . '<br>' );
 						Ayoola_Application::reset( array( 'path' => $site['directory'] ) );
 						Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName ); 
 					//	$class->sanitize( $themeName ); 
 					}
 					Ayoola_Application::reset();
 				}
+
+	//	var_export( $appPath );
+				if( $isDefaultSite && ! $isChildSite )
+				{	
+					$sites = Application_Domain::getInstance()->select();
+
+					//	do for directories
+					foreach( $sites as $site ) 
+					{
+						Ayoola_Application::reset( array( 'domain' => $site['domain_name'] ) );
+						if( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) === $appPath )
+						{
+							//	don't cause infinite loop
+							continue;
+						}
+					//	var_export( $site['domain_name'] . '<br>' );
+					//	var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );
+					//	var_export( $appPath );
+
+						Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName );  
+					//	exit(); 
+					//	$class->sanitize( $themeName );   
+					}
+					Ayoola_Application::reset();
+				}
+
 
 			}
 			

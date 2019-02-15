@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Object_Embed
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Object_Embed
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -71,7 +71,6 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		{			
 			//	var_Export( $class );
 			$classes = $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' );
-			$this->_parameter['no_view_content_wrap'] = true;
 
 			//	One way or the other, leaving this causes a situation 
 			//	where classes are played twice
@@ -156,6 +155,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		}
 	//	self::unsetParametersThatMayBeDuplicated( $parameters );
 		self::unsetParametersThatMayBeDuplicated( $this->_parameter );
+		$this->_parameter['no_view_content_wrap'] = true;
 		$class = $class::viewInLine( $parameters );
 	//	$class = new $class( $parameters );
 	//	$class->setParameter(  );
@@ -357,7 +357,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			{
 				$object['editable'] = 'PageCarton_Widget_Sample'; 
 			}
-			$html .= '<select data-parameter_name="editable">';
+			$html .= '<select data-parameter_name="editable" onchange="if( this.value == \'__custom\' ){  var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }">';
 			foreach( self::getWidgets() as $key => $value )
 			{ 
 				$html .=  '<option value="' . $key . '"';   
@@ -367,13 +367,14 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 					$html .= ' selected = selected '; 
 				}
 		//		if( @$object['editable'] == $key ){ $html .= ' selected = selected '; }
-				$html .=  '>' . $value . '</option>';  
+				$html .=  '>' . $value . '</option>';   
 			}
 	//		var_export( $object );
 			if( empty( $present ) )
 			{
 				$html .= '<option value="' . $object['editable'] . '" selected = selected>' . $object['editable'] . '</option> '; 
 			}
+			$html .= '<option value="__custom">Custom Widget</option> '; 
 			$html .= '</select>';
 			
 		//	$html .= '<span style=""> or </span>';

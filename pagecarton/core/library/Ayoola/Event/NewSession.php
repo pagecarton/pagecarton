@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Event_NewSession
  * @copyright  Copyright (c) 2011-2012 Ayoola Online Inc. (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Event_NewSession
  * @copyright  Copyright (c) 2011-2012 Ayoola Online Inc. (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -49,15 +49,23 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 			$auth = new Ayoola_Access();
 		//	var_export( $_COOKIE );
 			
+			$loginObject = new Ayoola_Access_Login( array( 'no_init' => true ) );
+			
 			//	User doesn't have pesistent login cookie
-			if( empty( $_COOKIE['accessLogin'] ) ){ break; }
+			$cookieValue = @$_COOKIE[$loginObject->getObjectName()];
+			if( empty( $cookieValue ) ){ break; }
+		//	var_export( $_COOKIE );
 			
 			//	User is currently logged in
 			if( $userInfo = $auth->getUserInfo() ){ break; }
 		//	var_export( $_COOKIE );
 
-			$cookieValue = $_COOKIE['accessLogin'];
-			list( $cookieUserid, $cookiePassword, $cookieCreationTime ) = explode( ':', base64_decode( $cookieValue ) );
+			list( $cookieUserid, $cookiePassword, $cookieCreationTime, $strict ) = explode( ':', base64_decode( $cookieValue ) );
+	//		self::v( base64_decode( $cookieValue ) );
+		//	self::v( $cookieUserid );
+	//		self::v( $cookiePassword );
+	//		self::v( $cookieCreationTime );
+	//		self::v( $strict );
 			if( ! isset( $cookieUserid, $cookiePassword, $cookieCreationTime ) ){ break; }
 			$cookieAge = time() - $cookieCreationTime;
 			if( $cookieAge < 0 || $cookieAge > 1728000 ){ break; }
@@ -93,16 +101,34 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 			
 			}
 			if( empty( $realUserInfo['password'] ) ){ break; }
+		//	$correctCookiePassword = Ayoola_Access_Login::getPersistentCookieValue( $realUserInfo['email'], $realUserInfo['password'], $cookieCreationTime );
+		//	list( $cookieUserid, $cookiePassword, $cookieCreationTime, $strict ) = explode( ':', base64_decode( $correctCookiePassword ) );
+	//		self::v( $cookieUserid );
+	//		self::v( $cookiePassword );
+	//		self::v( $cookieCreationTime );
+		//	self::v( $strict );
+		//	self::v( base64_decode( $correctCookiePassword ) );
+
+
 			if( $realUserInfo['access_level'] > 98 )
 			{ 
-				break;
+				$correctCookiePassword = Ayoola_Access_Login::getPersistentCookieValue( $realUserInfo['email'], $realUserInfo['password'], $cookieCreationTime );
+			//	var_export( $cookieValue );
+			//	var_export( $correctCookiePassword );
+				
+				//	strict cookie value for super users
+				if( $correctCookiePassword != $cookieValue )
+				{
+					$auth->logout();
+					break; 
+				}
 			}
 			$correctCookiePassword = Ayoola_Access_Login::hashPassWord( $realUserInfo['email'] . $realUserInfo['password'], $cookieCreationTime );
 		//	var_export( $cookiePassword );
 		//	var_export( $correctCookiePassword );
 			if( $correctCookiePassword != $cookiePassword )
 			{
-				$auth->logout();
+			//	$auth->logout();
 				break;
 			}
 	//	exit( $correctCookieValue );

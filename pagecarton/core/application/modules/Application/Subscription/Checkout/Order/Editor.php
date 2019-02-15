@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Subscription_Checkout_Order_Editor
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Application/Subscription/Checkout/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Subscription_Checkout_Order_Editor
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -42,7 +42,11 @@ class Application_Subscription_Checkout_Order_Editor extends Application_Subscri
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 
 		self::changeStatus( $values + $identifierData );
-		if( $this->updateDb() ){ $this->setViewContent( 'Order edited successfully', true ); }
+		if( $this->updateDb() )
+		{ 
+			$this->setViewContent( '<div class="goodnews">Order edited successfully</div>', true ); 
+			$this->setViewContent( $this->getForm()->view() );
+		}
     } 
 	// END OF CLASS
 }

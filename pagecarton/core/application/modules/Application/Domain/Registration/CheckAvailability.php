@@ -1,6 +1,6 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
@@ -162,13 +162,13 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 //		$form->oneFieldSetAtATime = true;
 	//	$form->formNamespace = get_class( $this ) . rand( 10, 1000 );
 		$fieldset = new Ayoola_Form_Element;
-		$fieldset->addLegend( self::$_defaultFieldset );
-		$fieldset->addElement( array( 'name' => 'domain_name', 'label' => '', 'placeholder' => 'Search for a new domain name e.g. yourcompany.com', 'type' => 'InputSearch', 'value' => @$values['domain_name'] ) );
+		$fieldset->addLegend( $this->getParameter( 'domain_name_legend' ) ? : self::$_defaultFieldset );
+		$fieldset->addElement( array( 'name' => 'domain_name', 'label' => '', 'placeholder' => $this->getParameter( 'domain_name_placeholder' ) ? : 'Search for a new domain name e.g. yourcompany.com', 'type' => 'InputSearch', 'value' => @$values['domain_name'] ) );
 		$fieldset->addFilters( array( 'trim' => null ) );
 		$fieldset->addRequirement( 'domain_name', array( 'WordCount' => array( 3, 100 ), 'Username' => null ) );
 		$form->addFieldset( $fieldset );
 		$domainName = $this->getGlobalValue( 'domain_name' );
-		$limit = $this->getParameter( 'suggestion_limit' );
+		$limit = $this->getParameter( 'suggestion_limit' );  
 		do
 		{
 

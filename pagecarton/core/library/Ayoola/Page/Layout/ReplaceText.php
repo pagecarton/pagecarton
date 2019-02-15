@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Layout_ReplaceText
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -127,7 +127,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $themeInfo['dummy_title'] = array_merge( $previousData['dummy_title'] ? : array(), $themeInfo['dummy_title'] ? : array() );
                 $themeInfo['dummy_search'] = array_merge( $previousData['dummy_search'] ? : array(), $themeInfo['dummy_search'] ? : array() );
                 $themeInfo['dummy_replace'] = array_merge( $previousData['dummy_replace'] ? : array(), $themeInfo['dummy_replace'] ? : array() );
-                $record = array();
+            //    $record = array();
                 foreach( $themeInfo['dummy_search'] as $key => $each )
                 {
                     if( ! empty( $record[$themeInfo['dummy_search'][$key]] ) )
@@ -136,7 +136,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                         unset( $themeInfo['dummy_search'][$key] );
                         unset( $themeInfo['dummy_replace'][$key] );
                     }
-                    $record[$themeInfo['dummy_search'][$key]] = true;
+               //     $record[$themeInfo['dummy_search'][$key]] = true;
 
                 }
             }

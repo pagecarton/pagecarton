@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_Publisher
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -69,7 +69,9 @@ class Application_Article_Publisher extends Application_Article_Creator
         //    self::v( $files );
             foreach( $files as $each )
             {
-                $extension = array_pop( explode( "/", strtolower( $each ) ) );
+            //    $extension = array_pop( explode( "/", strtolower( $each ) ) );
+                $extension = explode( "/", strtolower( $each ) );
+                $extension = array_pop( $extension );
                 if( ! in_array( $extension, $basename ) )
                 {
                     continue;

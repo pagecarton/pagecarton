@@ -1,6 +1,6 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
@@ -160,9 +160,10 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 		{
 			if( ! Ayoola_Loader::loadClass( $mode ) )
 			{
-				throw new Ayoola_Object_Exception( 'INVALID CLASS: ' . $mode );
+				return false;
+			//	throw new Ayoola_Object_Exception( 'INVALID CLASS: ' . $mode );
 			}
-			$class = new $mode();
+			$class = new $mode( $this->getParameter() );
 		//	if( ! method_exists( $class, 'createForm' ) ){ continue; }
 			$fieldsets = $class->getForm()->getFieldsets();
 			$form->actions += $class->getForm()->actions;
@@ -173,7 +174,7 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 			}
 		}
 		if( $this->getGlobalValue( 'suggestions' ) || $this->getGlobalValue( 'unavailable' ) )
-		{
+		{ 
 			$suggestions = array_merge( $this->getGlobalValue( 'suggestions' ) ? : array(), $this->getGlobalValue( 'unavailable' ) ? : array() );
 		//		var_export( $this->getGlobalValue( 'unavailable' ) );
 		//		var_export( $suggestions );

@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Subscription_Checkout_Order_Order_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Abstract/Playable.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Subscription_Checkout_Order_Order_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -73,8 +73,22 @@ abstract class Application_Subscription_Checkout_Order_Abstract extends Applicat
 		$fieldset->addElement( array( 'name' => 'username', 'type' => 'InputText', 'value' => @$values['username'] ) );
 		$fieldset->addElement( array( 'name' => 'email', 'type' => 'InputText', 'value' => @$values['email'] ) );
 //		$fieldset->addElement( array( 'name' => 'order', 'description' => 'Order', 'type' => 'TextArea', 'value' => @var_export( $values['order'], true ) ) );
-		$fieldset->addElement( array( 'name' => 'order_api', 'description' => 'Payment', 'type' => 'InputText', 'value' => @$values['order_api'] ) );
-		$fieldset->addElement( array( 'name' => 'order_status', 'type' => 'Select', 'value' => @$values['order_status'] ), array_unique( static::$checkoutStages ) );
+        $fieldset->addElement( array( 'name' => 'order_api', 'description' => 'Payment', 'type' => 'InputText', 'value' => @$values['order_api'] ) );
+        
+    //    var_export( $values['order_status'] );
+    //    var_export( static::$checkoutStages );
+
+        $stages = array_unique( static::$checkoutStages );
+
+
+        if( ! array_key_exists( $values['order_status'], $stages ) && in_array( $values['order_status'], $stages ) )
+        {
+        //    array_column();
+            $keyStages = array_flip( $stages );
+            $values['order_status'] = $keyStages[$values['order_status']];
+        }
+
+		$fieldset->addElement( array( 'name' => 'order_status', 'type' => 'Select', 'value' => @$values['order_status'] ), $stages );
 //		$fieldset->addElement( array( 'name' => 'order_random_code', 'type' => 'InputText', 'value' => @$values['order_random_code'] ) );
 //		$fieldset->addElement( array( 'name' => 'currency', 'type' => 'InputText', 'value' => @$values['currency'] ) );
 		

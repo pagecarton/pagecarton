@@ -23,6 +23,9 @@
 htdocs/*
 www/*
 public_html/*
+public_html
+www
+htdocs
 
 # Ignore paths that contain user-generated content.
 pagecarton/sites/*
@@ -36,6 +39,8 @@ pagecarton/core/application/documents/layout/*/theme/data-backup/*
 pagecarton/*.tmp
 pagecarton/*.gz
 pagecarton/*.zip
+pagecarton/*.backup
+pagecarton/*.malformed.xml
 
 # 
 pagecarton/core/application/databases/Application/Log/View/*

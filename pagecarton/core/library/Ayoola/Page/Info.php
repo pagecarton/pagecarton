@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Info
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -115,7 +115,7 @@ class Ayoola_Page_Info extends PageCarton_Widget
 
             if( empty( $pageInfo['cover_photo'] ) )
             {
-                $pageInfo['cover_photo'] = $settings['cover_photo'] ? : '/img/placeholder-image.jpg';
+                $pageInfo['cover_photo'] = $settings['cover_photo'] ? : ( $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg' );
             }
 
             if( empty( $pageInfo['description'] ) && self::hasPriviledge( array( 99, 98 ) ) )

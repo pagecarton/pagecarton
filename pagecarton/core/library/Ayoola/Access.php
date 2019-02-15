@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Access
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Access/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Access
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -137,9 +137,11 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 	 */
 	public function logout()
 	{
-		setcookie( 'accessLogin', '', time() - 1728000, '/' );
-		setcookie( 'accessLogin', '', 0 );
-		setcookie( 'accessLogin', false );
+		$loginObject = new Ayoola_Access_Login( array( 'no_init' => true ) );
+
+		setcookie( $loginObject->getObjectName(), '', time() - 1728000, '/' );
+		setcookie( $loginObject->getObjectName(), '', 0 );
+		setcookie( $loginObject->getObjectName(), false );
 		$this->getStorage()->clear();
 		@session_regenerate_id( true );
 	} 	

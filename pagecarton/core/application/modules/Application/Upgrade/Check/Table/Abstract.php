@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Upgrade_Check_Table_Abstract
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -65,7 +65,9 @@ class Application_Upgrade_Check_Table_Abstract extends PageCarton_Widget
 
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'domain_name', 'type' => 'InputText', 'value' => @$values['domain_name'] ) );         $fieldset->addElement( array( 'name' => 'remote_version', 'type' => 'InputText', 'value' => @$values['remote_version'] ) );         $fieldset->addElement( array( 'name' => 'version', 'type' => 'InputText', 'value' => @$values['version'] ) ); 
+        $fieldset->addElement( array( 'name' => 'domain_name', 'type' => 'InputText', 'value' => @$values['domain_name'] ) ); 
+        $fieldset->addElement( array( 'name' => 'remote_version', 'type' => 'InputText', 'value' => @$values['remote_version'] ) ); 
+        $fieldset->addElement( array( 'name' => 'version', 'type' => 'InputText', 'value' => @$values['version'] ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   
