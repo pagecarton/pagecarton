@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DOCUMENT_ELEMENT table_name="pagelayout" creation_time="1507119178" table_version="0.09" module_version="1.00" table_class="Ayoola_Page_PageLayout" creation_ip="2130706433">
+<DOCUMENT_ELEMENT table_name="pagelayout" creation_time="1550096966" modified_time="1550096966" table_version="0.10" module_version="1.00" table_class="Ayoola_Page_PageLayout" creation_ip="2130706433">
   <RECORDS autoId="2">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[bootstrapbasic]]></TABLE_FIELD>
@@ -7,10 +7,16 @@
       <TABLE_FIELD FIELD_KEY="pagelayout_id"><![CDATA[1496-0-11]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="layout_label"><![CDATA[Bootstrap Basic]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="layout_options"><![CDATA[[&quot;auto_section&quot;,&quot;auto_menu&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="dummy_title"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="dummy_search"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="dummy_replace"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="article_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1550096967]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>
-    <DATA_TYPES layout_name="INPUTTEXT,UNIQUE" layout_label="INPUTTEXT" layout_options="JSON" pagelayout_filename="INPUTTEXT" pagelayout_id="INPUTTEXT"/>
+    <DATA_TYPES layout_name="INPUTTEXT,UNIQUE" layout_label="INPUTTEXT" layout_options="JSON" pagelayout_filename="INPUTTEXT" dummy_title="JSON" dummy_search="JSON" dummy_replace="JSON" article_url="INPUTTEXT" pagelayout_id="INPUTTEXT" creation_time="INPUTTEXT" modified_time="INPUTTEXT"/>
     <FOREIGN_KEYS/>
     <RELATIVES/>
   </TABLE_SETTINGS>

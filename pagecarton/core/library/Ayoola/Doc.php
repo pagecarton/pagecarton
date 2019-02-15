@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Doc
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Doc/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Doc
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -200,12 +200,12 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		//		break; 
 			}
 		//	if( $_SERVER['SERVER_PORT'] != '80' ){ break; }
-	//	var_export( $uri . '<br>' );
+//	var_export( $uri . '<br>' );
 			try
 			{
 			//	$filePath = DOCUMENTS_DIR . $file;
 				$storage = new Ayoola_Storage(); 
-				$storage->storageNamespace = __CLASS__ . $uri . 's-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
+				$storage->storageNamespace = __CLASS__ . Ayoola_Application::getUrlPrefix() . $uri . 's-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
 				$storage->setDevice( 'File' );
 			//	self::v( $storage->retrieve() );
 				if( ! $dedicatedUrl = $storage->retrieve() OR $options['disable_cache'] )  
@@ -220,7 +220,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 					$domain = DOMAIN;
 		//			if( $useQueryStrings )
 					{
-			//			var_export( Ayoola_Application::getDomainSettings() );
+					//	var_export( Ayoola_Application::getDomainSettings() );
 					//	exit();
 						$dedicatedUrl = Ayoola_Application::getDomainSettings( 'protocol' ) . "://{$domain}" . Ayoola_Application::getUrlPrefix() . "{$uri}?document_time={$j}";					
 					}	
@@ -416,7 +416,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 				{
 					continue;
 				}
-                $extension = array_pop( explode( ".", strtolower( $file ) ) );
+                $extension = explode( ".", strtolower( $file ) );
+                $extension = array_pop( $extension );
                 if( is_array( @$options['whitelist_extensions'] ) && ! in_array( $extension, @$options['whitelist_extensions'] ) )
                 {
                     continue;
@@ -738,8 +739,11 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     {
 		if( ! is_dir( $dir ) )
 		{
-		//	var_export( $dir );    
-			if( ! mkdir( $dir, $permission, true ) ){ return false; }
+			if( ! mkdir( $dir, $permission, true ) )
+			{
+			//	var_export( $dir );    
+				return false; 
+			}
 		}
 		//	Returns true altogether because this is not required per say
 		return true;

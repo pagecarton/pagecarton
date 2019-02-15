@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System 
+ * PageCarton 
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Backup_Restore
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Application/Backup/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Backup_Restore
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -46,6 +46,7 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 			{ 
 				$this->setViewContent( '<div class="goodnews">Back up restored successfully.</div>', true ); 
 			}
+			Application_Cache_Clear::viewInLine();  
 		//	else
 			//	do we have admin user
 			//		if( $this->restore() ){ null; }
@@ -54,7 +55,8 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 		{
 		//	var_export( $e->getMessage() );
 			$this->getForm()->setBadnews( 'Invalid Backup File' );
-			$this->setViewContent( $this->getForm()->view(), true );		
+			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );		
+			$this->setViewContent( $this->getForm()->view() );		
 			return false;
 		}
     } 
@@ -69,6 +71,7 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 
 		set_time_limit( 0 );
 		ignore_user_abort( true ); 
+		ini_set( "memory_limit","3000M" );	 
 
 		$data = self::getIdentifierData();
 		if( ! is_file( $data['backup_filename'] ) ){ throw new Application_Backup_Exception( 'File does not exist' ); } 
@@ -83,19 +86,42 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 
  */		//	we cant use Ayoola_Application::getDomainName( array( 'no_cache' => true ) ) because it causes infinite loop
 	//	$domain = $filter->filter( $domain );
-		$tempDir = sys_get_temp_dir() . DS . md5( Ayoola_Page::getDefaultDomain() ) . DS . __CLASS__ . DS . 'backups';
+		$tempDir = CACHE_DIR . DS . md5( Ayoola_Page::getDefaultDomain() ) . DS . __CLASS__ . DS . 'backups';
 		
 		//	USING DOMAIN NAME FIXES ERROR OF FILE PERMISSIONS
-		$tempDirForPresentFile = sys_get_temp_dir() . DS . md5( Ayoola_Page::getDefaultDomain() ) . DS . __CLASS__ . DS . 'present';
+		$tempDirForPresentFile = CACHE_DIR . DS . md5( Ayoola_Page::getDefaultDomain() ) . DS . __CLASS__ . DS . 'present';
 		Ayoola_Doc::createDirectory( $tempDir );
 		Ayoola_Doc::createDirectory( $tempDirForPresentFile );
 		
 		//	copy the backup file to the temp dir so as to remain live through out the process
 		$tempBackupFilename = $tempDirForPresentFile . DS . basename( $data['backup_filename'] );
 		copy( $data['backup_filename'], $tempBackupFilename );
-		$backup = new $phar( $tempBackupFilename );
-		$dir = APPLICATION_DIR;
+	//	var_export( $tempBackupFilename );
+	//	var_export( filesize( $data['backup_filename'] ) );
+	//	var_export( filesize( $tempBackupFilename ) );
 	//	var_export( $dir );
+	//	try
+		{ 
+			$backup = new $phar( $tempBackupFilename );
+		}
+	//	catch( Exception $e )
+		{ 
+/* 			#	https://stackoverflow.com/questions/38843938/phardata-extractto-method-failed-to-extract-tar-gz-on-linux-environment
+			//	fix cases where error comes
+		//	var_export( filesize( $tempBackupFilename ) );
+			$p = new PharData( $tempBackupFilename, RecursiveDirectoryIterator::SKIP_DOTS );
+		//	var_export( filesize( $tempBackupFilename ) );
+			$p->convertToData(Phar::ZIP);
+
+			$zip = new ZipArchive;
+			$res = $zip->open($createdZipArchive);
+			if ($res === TRUE) {
+				$backup = $zip;
+			//	$zip->extractTo($destinationPath);
+			//	$zip->close();
+			}
+ */		}
+		$dir = APPLICATION_DIR;
 	//	var_export( $data );
 		//	compatibility
 		try

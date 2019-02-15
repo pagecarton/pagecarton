@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Settings_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Abstract/Playable.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Settings_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -100,11 +100,15 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getSettings( $settingsName, $key = null )
     {
-		$id = Ayoola_Application::getUrlPrefix() . $settingsName . $key;
+		$id = Ayoola_Application::getUrlPrefix() . Ayoola_Application::getApplicationNameSpace() . $settingsName . $key;
 	//	var_export( $id );
+		if( $settingsName == 'Page' )
+		{
+		//	var_export( $id );
+		}
 		if( is_null( @self::$_settings[$settingsName][$id] ) )
 		{
-			$settings = Application_Settings::getInstance();
+			$settings = Application_Settings::getInstance( $id );
 			$settings = $settings->selectOne( null, array( 'settingsname_name' => $settingsName ) );
 			if( empty( $settings['data'] ) )
 			{ 
@@ -113,7 +117,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 		
 					//	Not found in site settings. 
 					//	Now lets look in the extension settings
-					$table = Ayoola_Extension_Import_Table::getInstance();
+					$table = Ayoola_Extension_Import_Table::getInstance( $id );
 			//		var_export( $table->select() );
 			//		var_export( $settingsName );
 					if( ! $extensionInfo = $table->selectOne( null,  array( 'extension_name' => $settingsName ) ) )
@@ -130,7 +134,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 						$domainSettings = Ayoola_Application::getDomainSettings();
 						if( ! empty( $domainSettings['main_domain'] ) && $domainSettings['main_domain'] != $domainSettings['domain_name'] )
 						{
-							$settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ), array( 'disable_cache' => true ) );
+							$settings = Application_Settings::getInstance( $id )->selectOne( null, array( 'settingsname_name' => $settingsName ), array( 'disable_cache' => true ) );
 					//		var_export( $settings );
 							if( ! empty( $settings['data'] ) )
 							{

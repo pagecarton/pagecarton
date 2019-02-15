@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_ViewPagination
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Application/Article/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_ViewPagination
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -107,7 +107,13 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 
 					if( ! $postListId || ! $postListData->retrieve() )
 					{
-						$class = new Application_Article_ShowAll( array( 'true_post_type' => $data['true_post_type'], 'no_of_post_to_show' => 200 ) );
+						$parameters = array( 'true_post_type' => $data['true_post_type'], 'no_of_post_to_show' => 200, 'single_post_pagination' => true );
+						if( ! empty( Ayoola_Application::$GLOBAL['post']['category_name'] ) )
+						{
+							$parameters['category_name'] = Ayoola_Application::$GLOBAL['post']['category_name'];
+						}
+					//	self::V( $parameters );
+						$class = new Application_Article_ShowAll( $parameters );
 						$class->initOnce();
 						$postListId = $storageForSinglePosts->retrieve();
 					}

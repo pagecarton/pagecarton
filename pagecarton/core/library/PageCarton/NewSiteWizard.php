@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    PageCarton_NewSiteWizard
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -51,7 +51,9 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                 }
             }
 
-            Application_Personalization::viewInLine();
+            //  Causing page to take too long to load
+            //  may be the cause of cache clearing every time
+        //    Application_Personalization::viewInLine();
 
             $stages = array(
                 array( 'key' => 'Basic Information', 'title' => 'Set site basic information', 'class' => 'Application_Personalization' ),
@@ -66,6 +68,12 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             if( @$_GET['mode'] === 'publisher' || $this->getParameter( 'publisher_mode' ) )
             { 
                 unset( $stages[1], $stages[2] );
+            }
+            else
+            {
+                #   Remove image from new site wizard, retain in publisher mode
+                #   We have not figured how updating images will enable a smooth progress
+                unset( $stages[4] );
             }
 
             //  reset keys because those that left

@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  * 
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_ShowAll
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Application/Article/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_ShowAll
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -356,10 +356,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->setParameter( $storedValues['parameter'] );
 		}
 		//	Prepare post viewing for next posts
-		$class = new Application_Article_ViewPagination( array( 'no_init' => true ) );
-		$storageForSinglePosts = $class->getObjectStorage( array( 'id' => 'post_list_id' ) );
-	//	self::v( $postListId );  
-		$storageForSinglePosts->store( $postListId );
 		
 		//	Using menu template?
 		//	autoload new posts
@@ -451,6 +447,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						{
 							continue;
 						}
+
+						//	Some old posts does have titles in the table
+						if( empty( $data['article_title'] ) && ! empty( $dataX['article_title'] ) )
+						{
+							$class = Application_Article_Table::getInstance();
+							$class->update( $dataX, array( 'article_url' => $data['article_url'] ) );
+							$data = $dataX;
+						}
 						$data += $dataX;
 					}
 					
@@ -492,6 +496,26 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					{
 						//	Post without image is not allowed 
 						continue;
+					}
+					if( $this->getParameter( 'skip_ariticles_without_this_key' ) )
+					{
+						$keys = $this->getParameter( 'skip_ariticles_without_this_key' );
+						if( is_string( $keys ) )
+						{
+							$keys = array_map( 'trim', explode( ',', $keys ) );
+						}
+					//	var_export( $keys );
+						foreach( $keys as $eachKey )
+						{
+							if( ! @$data[$eachKey] )
+							{
+					//		var_export( $data['article_title'] );
+					//		var_export( $data[$eachKey] );
+								//	Post without this is not allowed 
+								continue 2;
+							}
+						//	var_export( $data[$eachKey] );
+						}
 					}
 			//		var_export( $data['article_creation_date'] ); //2592000 //604800
 					if( ( time() - $data['article_creation_date'] ) < ( $this->getParameter( 'time_span_for_new_badge' ) ? : 2592000 ) )
@@ -551,6 +575,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						//	set_time_limit( 0 );
 						}
 						self::getCommentsCount( $data );
+					//	self::v( $data['comments_count'] );
 						if( $this->getParameter( 'get_comment_count' ) )
 						{   
 							if( ! $this->commentTable )
@@ -560,6 +585,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
 						//	set_time_limit( 0 );
 						}
+					//	self::v( $data['comments_count'] );
 					//	exit();
 						$data['engagement_count'] = intval( $data['download_count'] ) + intval( $data['views_count'] ) + intval( $data['comments_count'] ) + intval( $data['audio_play_count'] );
 
@@ -661,14 +687,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$addNewPostUrl .= '&post_type_options_name=' . $this->getParameter( 'post_type_options_name' ) . '';
 		}
-
+		$howManyPostsToAdd = intval( $this->getParameter( 'add_a_new_post' ) );
 		$addNewPostUrl .= '&' . Ayoola_Page::setPreviousUrl() . '&counter=' . $howManyPostsToAdd;
 
 		$this->_parameter['add_a_new_post_full_url'] = $addNewPostUrl;
 
 		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) ) 
 		{ 
-			$howManyPostsToAdd = intval( $this->getParameter( 'add_a_new_post' ) );
 			$myProfileInfo = Application_Profile_Abstract::getMyDefaultProfile();
 			do
 			{
@@ -721,6 +746,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$j = is_numeric( @$_GET['no_of_articles_to_show'] ) ? intval( $_GET['no_of_articles_to_show'] ) : $j; 
 		$j = is_numeric( @$_GET['no_of_post_to_show'] ) ? intval( $_GET['no_of_post_to_show'] ) : $j; 
 		$j = is_numeric( $this->getParameter( 'no_of_post_to_show' ) ) ? intval( $this->getParameter( 'no_of_post_to_show' ) ) : $j;
+		if( $j < intval( $this->getParameter( 'add_a_new_post' ) ) )
+		{
+			$j = $this->getParameter( 'add_a_new_post' );
+		}
 	//	var_export( $i );
 	//	var_export( $j );
 		$done = array();
@@ -868,7 +897,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['document_url_uri'] = $data['document_url']; 
 			$data['document_url_cropped'] = $data['document_url']; 
 			$data['document_url_no_resize'] = $data['document_url']; 
-	//		var_export( $data['document_url'] );
+		//	self::v( $data['document_url'] );  
 		//	var_export( Ayoola_Doc::uriToPath( $data['document_url'] ) );
 			if( $fileP = Ayoola_Doc::uriToPath( $data['document_url'] ) )
 			{
@@ -902,6 +931,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
 			//	error making last post to be part of present one
 	//		$data += is_array( $this->_objectTemplateValues ) ? $this->_objectTemplateValues : array();
+
+			$data['article_description'] = trim( $data['article_description'] );
+			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
+			{
+				$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 200 );
+			}
 			if( $this->getParameter( 'length_of_description' ) )
 			{
 				if( ! function_exists( 'mb_strimwidth' ) )
@@ -1200,8 +1235,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							}
 							else
 							{
-								$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
-								$data['file_size'] = $head['content-length'];							
+								#	we don't want to use get_headers again. Can make site slow
+							//	$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
+							//	$data['file_size'] = $head['content-length'];							
 							}
 						}
 						elseif( @$data['download_path'] )
@@ -1234,7 +1270,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			//	useful in the templates
 			$data['article_quick_links'] = self::getQuickLink( $data );
-			$data['comments_count'] = '0';
+			$data['comments_count'] = intval( $data['comments_count'] ) ? : '0';
 			$data['category_html'] = $categoryTextRaw;
 			$data['record_count'] = $i + 1; 
 			
@@ -1300,13 +1336,23 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 
 		// store playlist
-		$storage = self::getObjectStorage( array( 'id' => $postListId . '_single_post_pagination', 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
-	//	self::v( $postListId );  
-	//	self::v( $singlePostPaginationInfo );  
-		//	add it to previous because of autoload clearing this settings
-		$prevSinglePostPagination = $storage->retrieve();
-		$singlePostPaginationInfo = $singlePostPaginationInfo + ( is_array( $prevSinglePostPagination ) ? $prevSinglePostPagination : array() );
-		$storage->store( $singlePostPaginationInfo );
+		if( $this->getParameter( 'single_post_pagination' ) )
+		{
+			$storage = self::getObjectStorage( array( 'id' => $postListId . '_single_post_pagination', 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
+		//	self::v( $postListId );  
+		//	self::v( $singlePostPaginationInfo );    
+			//	add it to previous because of autoload clearing this settings
+			$prevSinglePostPagination = $storage->retrieve();
+			$singlePostPaginationInfo = $singlePostPaginationInfo + ( is_array( $prevSinglePostPagination ) ? $prevSinglePostPagination : array() );
+			$storage->store( $singlePostPaginationInfo );
+
+			
+			$class = new Application_Article_ViewPagination( array( 'no_init' => true ) );
+			$storageForSinglePosts = $class::getObjectStorage( array( 'id' => 'post_list_id' ) );
+		//	self::v( $postListId );  
+			$storageForSinglePosts->store( $postListId );
+		//	self::v( $storageForSinglePosts->retrieve() ); 
+		}
 	//	self::v( $prevSinglePostPagination );
 	//	self::v( count( $singlePostPaginationInfo ) );
 	//	self::v( $postListId );
@@ -1796,7 +1842,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 	//	var_export( $path );
 		//	Removing dependence on Ayoola_Api for showing posts
-			$keyFunction = create_function
+/* 			$keyFunction = create_function
 			( 
 				'& $value, & $otherData, & $searchTerm', 
 				'
@@ -1806,6 +1852,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	return $otherData;
 				'
 			); 
+ */		//	$keyFunction = function( & $value, & $otherData, & $searchTerm )
+		//	{
+		//		$searchTerm = json_encode( Application_Article_ShowAll::loadPostData( $value ) );
+		//	};
+			$classKey = __CLASS__;
+			$keyFunction = array( __CLASS__, 'filterSearch' );
 			try
 			{
 				//	var_export( $path . " 1 \r\n" );
@@ -1818,7 +1870,20 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				if( empty( $whereClause ) )
 				{
 				//	var_export( $path );
-					$sortFunction = create_function
+					$sortFunction = function( $filePath )
+					{
+						$values = Application_Article_Abstract::loadPostData( $filePath );
+			//			var_export( $values[\'article_title\'] );
+						if( ! $values )
+						{
+				//			var_export( $values[\'article_title\'] );
+							return false;
+						}
+						return $values['article_creation_date'] ? : $values['article_modified_date'];
+					//	var_export( $result  . "<br>");
+						return $result;
+					};
+/* 					$sortFunction = create_function
 					( 
 						'$filePath', 
 						'
@@ -1840,7 +1905,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						return $result;
 						'
 					); 
-				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => 'filectime' ) );
+ */				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => 'filectime' ) );
 		//			$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => $sortFunction ) );
 		//			krsort( $this->_dbData );
 				//	self::v( $this->_dbData );
@@ -1851,7 +1916,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 						$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 						$this->_dbData = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache', 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
-				//		var_export( $this->_dbData );    
+					//	var_export( $this->_dbData );    
+					//	var_export( get_called_class() );    
+						
+					//	var_export( count( $this->_dbData ) );    
 					}  
 					else
 					{
@@ -2017,6 +2085,17 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$html .= '<a href="javascript:;" style="display:none;" title="' . static::$_editableTitle . '" onclick="this.previousSibling.style.display=\'none\';this.style.display=\'none\';"> hide </a>';
 		}
 		return $html;
+	}
+
+    /**
+     * Returns an array of other classes to get parameter keys from
+     *
+     * @param void
+     * @return array
+     */
+    public static function filterSearch( & $value, & $otherData, & $searchTerm )
+    {
+		$searchTerm = json_encode( Application_Article_ShowAll::loadPostData( $value ) );
 	}
 
     /**

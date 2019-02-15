@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_Category
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Application/Article/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_Category
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -33,6 +33,13 @@ class Application_Article_Category extends Ayoola_Abstract_Table
      * @var boolean
      */
 	protected static $_accessLevel = 0;
+
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Show Post Categories'; 
 	
     /**
      * Whether class is playable or not
@@ -65,10 +72,22 @@ class Application_Article_Category extends Ayoola_Abstract_Table
 		{
 //		var_export( $articleSettings );
 		//	self::v( $this->_parameter['markup_template'] );
+		//	self::v( $this->getPublicDbData() );
 			$this->createConfirmationForm( 'Show all',  '' );
-			if( ! $this->getPublicDbData() ){ return $this->setViewContent( '<p class="badnews">ERROR - No category to display</p>', true ); }
+		//	var_export( $this->getPublicDbData() );
+			if( ! $this->getPublicDbData() )
+			{ 
+				$this->_parameter['markup_template'] = null;
+
+				//	refresh
+				//	workaround for markup template not working
+				$this->_markupTemplate = null;
+				return $this->setViewContent( '', true ); 
+			}
 		//	$this->setViewContent( '<h4>Categories</h4>', true );
-	//		$this->setViewContent( self::getXml() );
+			$this->setViewContent( self::getXml() );
+	//	self::v( $this->_parameter['markup_template'] );
+
 		}
 		catch( Application_Article_Exception $e ) 
 		{ 
@@ -82,7 +101,12 @@ class Application_Article_Category extends Ayoola_Abstract_Table
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
 		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
 		}
-	//	var_export( $this->getDbData() );
+
+		//	refresh
+		//	workaround for markup template not working
+		$this->_markupTemplate = null;
+	//	self::v( $this->_parameter['markup_template'] );
+	//	self::v( $this->view() );
     } 
 	
     /**
@@ -94,6 +118,10 @@ class Application_Article_Category extends Ayoola_Abstract_Table
     {
 //		var_export( $articleSettings );
 		//	if available, only allowed categories are listed
+		if( $this->getParameter( 'show_only_post_categories' ) )
+		{
+			$this->_dbWhereClause['category_name'] = Ayoola_Application::$GLOBAL['post']['category_name'];
+		}
 		if( $this->getParameter( 'parent_category_name' ) )
 		{
 			$this->_dbWhereClause['parent_category_name'] = $this->getParameter( 'parent_category_name' );
@@ -129,11 +157,11 @@ class Application_Article_Category extends Ayoola_Abstract_Table
 		$this->_xml = '<ul style="margin:0;padding:0;list-style:none;"> ';
 		$values = $this->getPublicDbData();
 		shuffle( $values );
-	//	var_Export( $values );
+	//	self::v( $values );
 		$i = 0; //	5 is our max articles to show
 		$j = 10;
 		$form = $this->getForm()->view();
-		if( $a = $this->getForm()->getValues() ){ $j = 500; }
+		if( $a = $this->getForm()->getValues() ){ $j = 500; }   
 		$template = null;
 	//	var_Export( $a );
 	//	var_Export( $_POST );

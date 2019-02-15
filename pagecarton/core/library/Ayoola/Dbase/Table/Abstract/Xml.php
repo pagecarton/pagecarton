@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Table_Abstract_Xml
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -21,7 +21,7 @@ require_once 'Ayoola/Dbase/Table/Abstract.php';
 require_once 'Ayoola/Dbase/Table/Abstract/Exception.php';
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Table_Abstract_Xml
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -400,7 +400,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      * @param Array Criteria
      * @return boolean
      */
-    public function delete( Array $where = null )
+    public function delete( Array $where = null, array $options = null )
     {
 	  	if( ! $this->exists() )
 			{
@@ -408,10 +408,10 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 				//	cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
 				return false;
 			}
-		  $result = $this->query( 'TABLE', 'DELETE', $where );
+		  $result = $this->query( 'TABLE', 'DELETE', $where, $options );
       static::$_alreadyRan[get_class( $this )] = true;
       return $result;
-    }
+    } 
 
     /**
      * Creates a table in the current database

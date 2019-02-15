@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Abstract_Viewable
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -20,7 +20,7 @@ require_once 'Ayoola/Exception.php';
 require_once 'Ayoola/Abstract/Viewable.php';
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Abstract_Viewable
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -514,6 +514,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     public static function fetchLink( $link, array $settings = null )
     {	
+	//	self::V( $link );
 		if( ! function_exists( 'curl_init' ) )
 		{
 			//trigger_error( __METHOD__ . ' WORKS BETTER WHEN CURL IS ENABLED. PLEASE ENABLE CURL ON YOUR SERVER.' );
@@ -533,6 +534,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		curl_setopt( $request, CURLOPT_REFERER, @$settings['referer'] ? : $link );
 		if( @$settings['destination_file'] )
 		{
+		//	var_export( $settings );
 			$fp = fopen( $settings['destination_file'], 'w' );
 			curl_setopt( $request, CURLOPT_FILE, $fp );
 			curl_setopt( $request, CURLOPT_BINARYTRANSFER, true );
@@ -544,14 +546,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 //		curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt( $request, CURLOPT_FOLLOWLOCATION, @$settings['follow_redirect'] === false ? false : true ); //	By default, we follow redirect
-		curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 1000 );	//	Max of 1 Secs on a single request
-		curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 1000 );	//	Max of 1 Secs on a single request
+		curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 2 );	//	Max of 1 Secs on a single request  
+		curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 2 );	//	Max of 1 Secs on a single request
 		if( @$settings['post_fields'] )
 		{
 			curl_setopt( $request, CURLOPT_POST, true );
 		//	var_export( $request );
 		//	var_export( $settings['post_fields'] );   
-			curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );
+			curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );  
 		}
 		if( @$settings['raw_response_header'] )
 		{
@@ -577,6 +579,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
  	//	if( ! $response || $responseOptions['http_code'] != 200 ){ return false; }
 		if( empty( $settings['return_error_response'] ) )
 		{   
+		//	var_export( $response );
+		//	var_export( $responseOptions );
  			if( $responseOptions['http_code'] != 200 ){ return false; }
 		}
 		if( @$settings['return_as_array'] == true )
@@ -719,15 +723,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function v( $variable )
     {
-		if( self::hasPriviledge( 98 ) )
+		if( self::hasPriviledge( 98 ) || @$_REQUEST['pc_show_error']  )
 		{ 
 			var_export( $variable );
+			echo "\r\n";
 		}
-		elseif( $_REQUEST['pc_show_error'] )
-		{
-			var_export( $variable );
-		}
-		
 		
 	}
 	
@@ -1606,13 +1606,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		$className = $className ? : get_class( $this );
 		$objectName = $className;
-/*		$objectName = new Ayoola_Object_Table_ViewableObject();
-	//	var_export( $className );
-		$objectName = $objectName->selectOne( null, array( 'class_name' => $className ) );
-	//	var_export( $objectName );
-		@$objectName = $objectName['object_name'] ? : $className;
-	//	var_export( $objectName );
-*/		$this->objectName = $objectName;
+		$this->objectName = $objectName;
 		return $objectName;
 	 }
  
@@ -1637,12 +1631,26 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( null === $this->_viewContent || true === $refresh )
 		{ 
 			$this->_viewContent = new Ayoola_Xml();
+		//	self::v( get_class( $this ) );
+		//	self::v( $this->wrapViewContent );
 			if( $this->wrapViewContent && ! $this->getParameter( 'no_view_content_wrap' ) )
 			{
-				$documentElement = $this->_viewContent->createElement( $this->getParameter( 'object_container_element' ) ? : static::$_viewContentElementContainer );  
+				$element = $this->getParameter( 'object_container_element' ) ? : static::$_viewContentElementContainer;
+				switch( strtolower( $element ) )
+				{
+					case 'div' :
+					case 'span' :
+					case 'section' :
+
+					break;
+					default:
+					$element = 'div';
+					break;
+				}
+		//		self::v( $this->getParameter( 'object_container_element' )  );
+				$documentElement = $this->_viewContent->createElement( $element );  
 				$documentElement->setAttribute( 'data-object-name', $this->getObjectName() );
 				$documentElement->setAttribute( 'name', $this->getObjectName() . '_container' );
-			//	var_export( $this->getParameter( 'object_container_element' )  );
 			//	$this->getParameter( 'object_class' ) ? $documentElement->setAttribute( 'class', $this->getParameter( 'object_class' ) ) : null;
 		//		$this->getParameter( 'object_style' ) ? $documentElement->setAttribute( 'style', $this->getParameter( 'object_style' ) ) : null;   
 				$b = $this->_viewContent->createElement( 'div' );
@@ -1910,8 +1918,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$content = null;
 				$html = null;
 				$content = $this->getViewContent();
-				
-		//		var_export( $this->getParameter( 'markup_template' ) );
+			//	if( get_class( $this ) === 'Application_Article_Category' )
+				{
+				//	var_export( $this->getMarkupTemplate() );
+				}
 
 				if( ! $template = $this->getMarkupTemplate() )      
 				{
@@ -1991,8 +2001,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				
 	//				self::v( $this->_objectTemplateValues );
 					//	Add the Ayoola_Application Global
-					$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['post'] ? : array(), $this->_objectTemplateValues );
-					$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['profile'] ? : array(), $this->_objectTemplateValues );
+					//	adding this global causes variable to be available on widgets using same variables 
+					//	like username
+					#	Don't display user infor for signed out user
+				//	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['post'] ? : array(), $this->_objectTemplateValues );
+				//	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['profile'] ? : array(), $this->_objectTemplateValues );
 		
 					//	allows me to add pagination on post listing with predefined suffix
 					$template = $this->getParameter( 'markup_template_prepend' ) . $template;

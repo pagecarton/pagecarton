@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Layout_Creator
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Page/Layout/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page_Layout_Creator
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -57,9 +57,12 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					//	http://php.net/manual/en/ziparchive.extractto.php
 					$zip = new ZipArchive;
 					$isZip = $zip->open( $filename );
-			//		var_export( $isZip );
-					if ( $isZip === TRUE ) 
+				//	var_export( $filename );
+				//	var_export( filesize( $filename ) ); 
+				//	var_export( $isZip );
+					if( $isZip === TRUE && $zip->numFiles ) 
 					{
+					//	var_export( $zip['template'] );
 					//	$zip->extractTo( $tempDestination );
 					//	$zip->close();
 					//	echo 'ok';
@@ -85,6 +88,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					{
 						Ayoola_Doc::createDirectory( $tempDestination );
 					}
+
 					//	Copy this file here for temp manipulation
 					//	Deal with zip files first. Phar isn't handling ZIP compression well.
 					//	http://php.net/manual/en/ziparchive.extractto.php
@@ -97,8 +101,11 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					else 
 					{
 						$export->extractTo( $tempDestination, null, true );
-					}			
-				
+					}	
+					
+				//	var_export( $export['index.html'] );
+				//	var_export( Ayoola_Doc::getFiles( $tempDestination ) );
+			
 					//	 Trying to see if its possible to upload random templates.
 					//	Before now, users need to have all the template files in the root dir of the archive. 
 					$iterator = new RecursiveIteratorIterator( new RecursiveDirectoryIterator( $tempDestination, RecursiveDirectoryIterator::SKIP_DOTS ), RecursiveIteratorIterator::SELF_FIRST );

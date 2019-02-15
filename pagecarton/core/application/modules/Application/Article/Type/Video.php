@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_Type_Video
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Application/Article/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Article_Type_Video
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -68,7 +68,9 @@ class Application_Article_Type_Video extends Application_Article_Type_Abstract
 				$data = $this->getIdentifierData();
 			}
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
+	//	var_export( $data['video_url'] );
 		$data['video_url'] = 'https://youtube.com/embed/' . array_pop( explode( '/', $data['video_url'] ) );
+	//	var_export( $data['video_url'] );
 		$this->setViewContent( '<div class="videoWrapper"><iframe width="' . ( @$articleSettings['cover_photo_width'] ? : '900' ) . '" height="' . ( @$articleSettings['cover_photo_height'] ? : '300' ) . '" src="' . $data['video_url'] . '" frameborder="0" allowfullscreen></iframe></div>' );
 //		$this->setViewContent( '<iframe width="900" height="315" src="' . $data['video_url'] . '" frameborder="0" allowfullscreen></iframe>' );
 	//	var_export( $data );

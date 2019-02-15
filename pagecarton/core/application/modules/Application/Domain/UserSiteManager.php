@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Domain_UserSiteManager
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -103,13 +103,14 @@ class Application_Domain_UserSiteManager extends PageCarton_Widget
 		$list->createList
 		(
 			array(
-                    'site' => array( 'field' => 'profile_url', 'value' =>  '
-                    http://%FIELD%.' . Ayoola_Application::getDomainName() . '
-                    <a class="" target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() . '">Preview</a> 
+                    'site' => array( 'field' => 'profile_url', 'value' =>  ' <a class="pc_inline_block_o" target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() . '"><i class="fa fa-external-link pc_give_space "></i>
+                    http://%FIELD%.' . Ayoola_Application::getDomainName() . '</a>
                     <br>
-                    <a  class="" style="" target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() .  '/widgets/PageCarton_NewSiteWizard">New Website Wizard</a>
-                    <br>
-                    <a  class="" target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() . '/pc-admin">Admin Panel</a>
+                    <a class="pc_inline_block_o" target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() . '"><i class="fa fa-eye pc_give_space "></i>  Preview</a> 
+                    
+                    <a class="pc_inline_block_o" target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() .  '/new-site-wizard"><i class="fa fa-chevron-right pc_give_space "></i> New Website Wizard</a>
+                    
+                    <a class="pc_inline_block_o" target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() . '/pc-admin"><i class="fa fa-cog pc_give_space "></i> Admin Panel</a>
                     ', 'filter' =>  '' ), 
            //         '   ' => array( 'field' => 'profile_url', 'value' =>  '<a target="_blank" href="http://%FIELD%.' . Ayoola_Application::getDomainName() . '/pc-admin">Admin Panel</a> ', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 

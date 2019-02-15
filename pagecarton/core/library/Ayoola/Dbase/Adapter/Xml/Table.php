@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Adapter_Xml_Table
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Dbase/Adapter/Xml.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Adapter_Xml_Table
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -48,8 +48,9 @@ class Ayoola_Dbase_Adapter_Xml_Table extends Ayoola_Dbase_Adapter_Xml
      */
     public function query( $keyword = null )
 	{
+//		PageCarton_Widget::v( $this );
 		$arguments = func_get_args();
-		//var_export( $arguments );
+	//	var_export( $arguments );
 		$keyword = array_shift( $arguments );
 		$keyword = ucfirst( strtolower( $keyword ) );
 		$class = __CLASS__ . '_' . $keyword;
@@ -75,7 +76,9 @@ class Ayoola_Dbase_Adapter_Xml_Table extends Ayoola_Dbase_Adapter_Xml
 		}
 		$class = array( $class, 'init' );
 	//	var_export( $class );
-		return call_user_func_array( $class, $arguments );
+		$result = call_user_func_array( $class, $arguments );
+ 	//	PageCarton_Widget::v( $result );
+		return $result; 
     }
 	// END OF CLASS
 }

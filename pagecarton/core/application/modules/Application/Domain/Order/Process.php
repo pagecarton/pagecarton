@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Domain_Order_Process
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -40,6 +40,7 @@ class Application_Domain_Order_Process extends Application_Domain_Order_Abstract
 				return false;
 			}
 			$parameters['domain_name'] = strtolower( $parameters['domain_name'] );
+		//	$parameters['domain_name'] = $parameters['domain_name'] . time();
 			$values = $parameters;
 			$values['username'] = $values['full_order_info']['username'];
 			$values['user_id'] = $values['full_order_info']['user_id'];
@@ -83,20 +84,29 @@ class Application_Domain_Order_Process extends Application_Domain_Order_Abstract
                         }
 						break;
 					}
+			
+					//	Notify Admin
+					$mailInfo = array();
+					$mailInfo['subject'] = __CLASS__;
+					$mailInfo['body'] = $this->view();
+					try
+					{
+						@Ayoola_Application_Notification::mail( $mailInfo );
+					}
+					catch( Ayoola_Exception $e ){ null; }
+
+					//	notification
+					$mailInfo = array();
+					$mailInfo['subject'] = 'Your domain order';
+					$mailInfo['to'] = $values['full_order_info']['email'];
+					$mailInfo['body'] = $this->view();
+
+					self::sendMail( $mailInfo );
+
 				break;   
 			}
-/*			
-			//	Notify Admin
-			$mailInfo = array();
-			$mailInfo['subject'] = __CLASS__;
-			$mailInfo['body'] = 'Form submitted on your PageCarton Installation with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '".';
-			try
-			{
-				@Ayoola_Application_Notification::mail( $mailInfo );
-			}
-			catch( Ayoola_Exception $e ){ null; }
             
-*/            // end of widget process
+            // end of widget process
           
 		}  
 		catch( Exception $e )

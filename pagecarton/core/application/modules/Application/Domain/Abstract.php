@@ -1,6 +1,6 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
@@ -108,6 +108,8 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 	//	$oldPath = APPLICATION_PATH . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) );
 	
 		//	Use another means to seek the old path. 
+		$myPath = Ayoola_Application::getRealPathPrefix();
+//		$myPath = str_replace( @$_SERVER['CONTEXT_PREFIX'], '', Ayoola_Application::getPathPrefix() );
 	
 		$oldPath = dirname( APPLICATION_DIR ) . DS . 'application'  . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @Ayoola_Application::getPathPrefix();
 //		var_export( ! is_dir( $oldPath ) );    
@@ -115,7 +117,7 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 		{
 			$oldPath = APPLICATION_DIR . DS . 'application'  . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @Ayoola_Application::getPathPrefix();  
 		}
-		@$newPath = PC_BASE . DS . 'sites' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @Ayoola_Application::getPathPrefix();
+		@$newPath = PC_BASE . DS . 'sites' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . $myPath;
 		
 		$pathToUse = $oldPath;
 		    

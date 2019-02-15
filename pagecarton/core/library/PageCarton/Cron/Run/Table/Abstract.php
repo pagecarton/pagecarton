@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    PageCarton_Cron_Run_Table_Abstract
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -65,7 +65,8 @@ class PageCarton_Cron_Run_Table_Abstract extends PageCarton_Widget
 
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'cron_id', 'type' => 'InputText', 'value' => @$values['cron_id'] ) );         $fieldset->addElement( array( 'name' => 'runtime', 'type' => 'InputText', 'value' => @$values['runtime'] ) ); 
+        $fieldset->addElement( array( 'name' => 'cron_id', 'type' => 'InputText', 'value' => @$values['cron_id'] ) ); 
+        $fieldset->addElement( array( 'name' => 'runtime', 'type' => 'InputText', 'value' => @$values['runtime'] ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Settings_SiteInfo
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Abstract/Playable.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Settings_SiteInfo
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -41,7 +41,40 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
      * @var array
      */
 	protected $_identifierKeys = array( 'settingsname_name' );
-	
+    /**
+     * Calls this after every successful settings change
+     * 
+     */
+	public static function callback()
+    {
+        $settings = self::retrieve();
+        $from = Ayoola_Doc_Browser::getDocumentsDirectory() . $settings['logo'];
+        if( is_file( $from ) )
+        {
+            $to = Ayoola_Doc_Browser::getDocumentsDirectory() . '/img/logo.png';
+            if( filesize( $from ) !== @filesize( $to ) )
+            {
+            //    var_export( $from );
+            //    var_export( $to );
+                Ayoola_Doc::createDirectory( dirname( $to ) );
+                copy( $from, $to );
+            }
+        }
+        $from = Ayoola_Doc_Browser::getDocumentsDirectory() . $settings['favicon'];
+        if( is_file( $from ) )
+        {
+            $to = Ayoola_Doc_Browser::getDocumentsDirectory() . '/favicon.ico';
+            if( filesize( $from ) !== @filesize( $to ) )
+            {
+            //    var_export( $from );
+            //    var_export( $to );
+                Ayoola_Doc::createDirectory( dirname( $to ) );
+                copy( $from, $to );
+            }
+        }
+        
+    }
+
     /**
      * creates the form for creating and editing
      * 
@@ -70,10 +103,14 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
 
         if( Ayoola_Abstract_Table::hasPriviledge( array( 99, 98 ) ) )
         {        
-            $fieldset->addElement( array( 'name' => 'cover_photo', 'label' => 'Banner Image', 'type' => 'Document', 'value' => @$settings['cover_photo'] ) );    
-        }  
+            $fieldset->addElement( array( 'name' => 'cover_photo', 'label' => 'Banner Image', 'data-document_type' => 'image', 'type' => 'Document', 'value' => @$settings['cover_photo'] ) );    
+            $fieldset->addElement( array( 'name' => 'logo', 'label' => 'Brand Logo', 'data-document_type' => 'image', 'type' => 'Document', 'value' => '/img/logo.png' ) );    
+            $fieldset->addElement( array( 'name' => 'favicon', 'label' => 'Favicon', 'data-document_type' => 'image', 'type' => 'Document', 'value' => @$settings['favicon'] ? : '/favicon.ico' ) );    
+        }
+
         $options = Ayoola_Page_Layout_Repository::getMenuOptions();
-		$fieldset->addElement( array( 'name' => 'site_type', 'label' => 'Theme Type', 'value' => @$settings['site_type'], 'type' => 'Select' ), array( '' => 'Generic' ) + array_column( $options, 'option_name', 'title' ) ? : array() );
+  //      var_export( $options );
+		$fieldset->addElement( array( 'name' => 'site_type', 'label' => 'Theme Type', 'value' => @$settings['site_type'], 'type' => 'Select' ), array( '' => 'Generic' ) + array_column( $options, 'title', 'category_name' ) ? : array() );
 		$fieldset->addLegend( 'Site Information' );  
 		$form->addFieldset( $fieldset );
 		

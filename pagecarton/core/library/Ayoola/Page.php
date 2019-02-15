@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Page/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Page
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -147,9 +147,10 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			$id = Ayoola_Application::getPathPrefix() . $url;
 //			$id = $url . Ayoola_Application::getPathPrefix();
 			$storage = self::getObjectStorage( array( 'id' => $id,  ) );
-			if( $info = $storage->retrieve() )
+		//	if( $info = $storage->retrieve() )
 			{ 
-				break; 
+				//	The theme sometimes caches and brings stale info
+			//	break; 
 			}
 			
 			
@@ -191,11 +192,12 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 
 			//	get info for theme pages
 			$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+	//		self::v( Ayoola_Page_Layout_Pages_Copy::canCopy( $url, $themeName  ) );
 			if( $themeName && Ayoola_Page_Layout_Pages_Copy::canCopy( $url, $themeName ) )
 			{ 
 				//	just what we need
 				@$info = array( 'url' => $url );
-			//		self::v( $info );
+				//	self::v( $info );
 				//		var_export( self::$_currentPageInfo );
 				$info['cache_info'] = serialize( $storage );
 				$storage->store( $info );
@@ -352,7 +354,10 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		//		self::v( $pages );
 				
 				//	final word 
-				$title = ucwords( array_pop( explode( '/', Ayoola_Application::getRuntimeSettings( 'url' ) ) ) );
+			//	$title = ucwords( array_pop( explode( '/', Ayoola_Application::getRuntimeSettings( 'url' ) ) ) );
+                $title = explode( "/", strtolower( Ayoola_Application::getRuntimeSettings( 'url' ) ) );
+                $title = array_pop( $title );
+                $title = ucwords( $title );
 				if( class_exists( $title ) && method_exists( $title, 'getObjectTitle' ) && $title::getObjectTitle() )
 				{
 					$title = $title::getObjectTitle() ? : $title;
@@ -541,8 +546,8 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     public static function getHomePageUrl()
     {
 		$domain = self::getDefaultDomain();
-		$url = self::getRootUrl() . Ayoola_Application::getUrlPrefix();  
-		return $url;
+		$url = self::getRootUrl() . Ayoola_Application::getRealPathPrefix();  
+		return $url; 
     }
 	
     /**
@@ -553,7 +558,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     public static function getRootUrl()
     {
 		$domain = self::getDefaultDomain();
-		$url = Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . $domain . self::getPortNumber();  
+		$url = Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . $domain . self::getPortNumber() . $_SERVER['CONTEXT_PREFIX'];   
 		return $url;
     }
 	
@@ -603,7 +608,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      */
     public static function getFavicon() 
     {
-		if( is_null( self::$favicon ) ){ self::$favicon = '/img/favicon.ico'; }
+		if( is_null( self::$favicon ) ){ self::$favicon = '/favicon.ico'; }
 		return Ayoola_Doc::uriToDedicatedUrl( self::$favicon );  
     }
 	

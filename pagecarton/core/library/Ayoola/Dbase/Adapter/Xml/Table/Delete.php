@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS 
+ * @category   PageCarton 
  * @package    Ayoola_Dbase_Adapter_Xml_Table_Delete
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Dbase/Adapter/Xml/Table/Abstract.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Adapter_Xml_Table_Delete
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -32,10 +32,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Delete extends Ayoola_Dbase_Adapter_Xml_Tab
      *
      * @param array Filter with field values
      */
-    public function init( Array $where = null )
+    public function init( Array $where = null, array $options = null )
     {
 			//var_export( $where );
-		//Count the amount of records deleted
+		//Count the amount of records deleted 
 		$count = 0;
 	//	$this->setMyFilename( $this->getTableName() );
 		$files =  array_unique( array( $this->getFilenameAccordingToScope() => $this->getFilenameAccordingToScope() ) + $this->getSupplementaryFilenames() );
@@ -47,6 +47,15 @@ class Ayoola_Dbase_Adapter_Xml_Table_Delete extends Ayoola_Dbase_Adapter_Xml_Tab
 			$this->getXml()->load( $filename );
 	//		return $rows;
 			$result = false;
+			if(  ! empty( $options['limit'] ) && $count >= $options['limit'] )
+			{
+			//	PageCarton_Widget::v( $options );
+				break;
+			}
+			else {
+			//	PageCarton_Widget::v( $count );
+			//	PageCarton_Widget::v( $options );
+			} 
 			if( ! empty( $where ) )
 			{
 			//	$rows = $this->query( 'SELECT', null, $where );
@@ -55,15 +64,25 @@ class Ayoola_Dbase_Adapter_Xml_Table_Delete extends Ayoola_Dbase_Adapter_Xml_Tab
 			//	var_export( $rows );
 				foreach( $rows as $rowId => $row )
 				{
-				//	var_export( $this->getRelatives() );
-					foreach( $this->getRelatives() as $relative => $key )
+						//	var_export( $this->getRelatives() );
+				//	PageCarton_Widget::v( $count );
+				//	PageCarton_Widget::v( $rowId );
+					if(  ! empty( $options['limit'] ) && $count >= $options['limit'] )
 					{
+					//	PageCarton_Widget::v( $options );
+						break;
+					}
+					else {
+					//	PageCarton_Widget::v( $count );
+					//	PageCarton_Widget::v( $options );
+					} 
+					foreach( $this->getRelatives() as $relative => $key )
+					{ 
 					
 						$where = array( $key => $row[$key] );
 						//		var_export( $row );
 						$count += self::deleteRelative( $relative, $where );
 					}
-					$count++;
 					if( ! $row = $this->getXml()->getElementById( $rowId ) )
 					{
 						continue 2;
@@ -71,6 +90,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Delete extends Ayoola_Dbase_Adapter_Xml_Tab
 					//	throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( "Cannot find the row data to delete for row ID {$rowId}" );
 					}
 					$result = $row->parentNode->removeChild( $row );
+					$count++;
 				//	var_export( $result );
 				//	if( ! $result )
 					{

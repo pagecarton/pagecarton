@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System 
+ * PageCarton 
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Profile_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Application/Profile/Exception.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Profile_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -301,7 +301,23 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			$filename = self::getProfilePath( $url );
 			$profileData = @include $profileUrL;
 		}
-*/		return $profileData;
+*/		
+		if( @$profileData['profile_url'] )
+		{
+			if( ! @$profileData['display_picture'] )
+			{
+			//	$profileData['display_picture'] = '/img/placeholder-image.jpg';
+			}
+			if( ! @$profileData['display_name'] )
+			{
+			//	$profileData['display_name'] = $profileData['profile_url'];
+			}
+			if( ! @$profileData['profile_description'] )
+			{
+			//	$profileData['profile_description'] = $profileData['profile_url'];
+			}
+		}
+		return $profileData;
 	}
 
     /**

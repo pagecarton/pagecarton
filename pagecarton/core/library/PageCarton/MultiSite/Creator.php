@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    PageCarton_MultiSite_Creator
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -48,10 +48,13 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 		//	self::v( $_POST );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
-            $values['directory'] = Ayoola_Application::getPathPrefix() . '/' . trim( $values['directory'], '/\\' );
-            $values['parent_dir'] = Ayoola_Application::getPathPrefix();
+		//	var_export( $values );
+
+            $values['directory'] = Ayoola_Application::getRealPathPrefix() . '/' . trim( $values['directory'], '/\\' );
+            $values['parent_dir'] = Ayoola_Application::getRealPathPrefix();
+		//	var_export( $values );
            
-            if( $response = $this->getDbTable()->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
+            if( $response = $this->getDbTable()->selectOne( null, array( 'directory' => Ayoola_Application::getRealPathPrefix() ) ) )
             {
                 //	Don't run this if we are a product of multi-site
                 $values['parent_dir'] = $response['parent_dir'];
@@ -59,7 +62,8 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 			if( $this->getDbTable()->selectOne( null, array( 'directory' => $values['directory'] ) ) )
 			{
 				$this->getForm()->setBadnews( 'Enter a different directory for this site. There is a site with the same directory: ' . $values['directory'] );
-				$this->setViewContent( $this->getForm()->view(), true );
+				$this->setViewContent( '<p class="badnews">Enter a different directory for this site. There is a site with the same directory: ' . $values['directory'] . '</p>', true );		
+				$this->setViewContent( $this->getForm()->view() );		
 				return false; 
 			}
             $values['creation_time'] = time();
@@ -67,12 +71,14 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
             if( ! self::copyFiles( $values['directory'] ) )
             {
                 $this->getForm()->setBadnews( 'Enter a different directory for this site. Specified directory is in use: ' . $values['directory'] );
-                $this->setViewContent( $this->getForm()->view(), true );
+				$this->setViewContent( '<p class="badnews">Enter a different directory for this site. Specified directory is in use: ' . $values['directory'] . '</p>', true );		
+				$this->setViewContent( $this->getForm()->view() );		
                 return false;
             }     
 			
 			//	Notify Admin
 			$link = '' . Ayoola_Page::getRootUrl() . '' . $values['directory'];
+			$newSiteLink = '' . Ayoola_Page::getRootUrl() . '' . $values['directory'] . '/new-site-wizard';
 			$mailInfo = array();
 			$mailInfo['subject'] = 'A new site created';
 			$mailInfo['body'] = 'A new site has been created on your PageCarton Installation with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
@@ -88,7 +94,7 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 		//	if( ! $this->insertDb() ){ return false; }
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent( '<div class="goodnews">Site created successfully. <a class="" href="' . $link . '"> Preview it!</a></div>', true ); 
+				$this->setViewContent( '<div class="goodnews">Site created successfully. <a class="" href="' . $link . '"> Preview</a> or <a class="" href="' . $newSiteLink . '">Create a site!</a></div>', true );  
 			}
 		//	$this->setViewContent( $this->getForm()->view() );
             

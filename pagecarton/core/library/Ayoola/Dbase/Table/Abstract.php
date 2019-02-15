@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Table_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@ require_once 'Ayoola/Dbase/Table/Interface.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Table_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -90,7 +90,7 @@ abstract class Ayoola_Dbase_Table_Abstract implements Ayoola_Dbase_Table_Interfa
      */
     public static function getInstance( $key = null )
     {
-        $class = get_called_class() . Ayoola_Application::getPathPrefix() . $key;
+        $class = get_called_class() . Ayoola_Application::getApplicationNameSpace() . $key; 
      //   var_export( get_called_class() );
         if( ! empty( static::$_instance[$class] ) )
         {

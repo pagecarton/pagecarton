@@ -12,26 +12,66 @@
 		$root = dirname( __FILE__ );
 		if( ! empty( $_SERVER['DOCUMENT_ROOT'] ) )
 		{
-			$root = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];    
+			$docRoot = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];  
+			if( is_dir( $docRoot ) && is_writable( $docRoot ) )
+			{
+				$root = $docRoot;
+			}
 		}
+
 	//	var_export( $home );
-	//	var_export( $_SERVER );
+	//	var_export( $docRoot );
+	//	var_export( $root );
+	//	var_export( $_SERVER['DOCUMENT_ROOT'] );
 	//	exit();
-		$dir = $oldDir = $baseAppPath = dirname( $home );
+		$dir = $oldDir = $baseAppPath = dirname( $root );
 		$currentDir = explode( '/', str_replace( array( '/', '\\' ), '/', dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
 		$tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $root, '/\\' ) ) );  
+	//	var_export( $_SERVER['SCRIPT_FILENAME'] );
+	//	var_export( $tempDir );
 
 		$prefix = null;
 		if( $currentDir !== $tempDir )
 		{
+			
+			//	
+		//	var_export( $_SERVER['SCRIPT_FILENAME'] );
+		//	var_export( $currentDir );
+		//	var_export( $tempDir );
+		//	var_export( $prefix );
+			
+			//	fix issue where prefix is /countdown and user is going to /countdown/countdown page
+			//	System seeing it like there is a directory called /countdown/countdown
+			//	workaround this here
+			$testCurrentDir = implode( DS, $currentDir );
+		//	var_export( is_link( $testCurrentDir ) );
+		//	var_export( is_link( dirname( $testCurrentDir ) ) );
+			while( is_link( $testCurrentDir ) && is_link( dirname( $testCurrentDir ) )  )
+			{
+			//	$filename = basename( $testCurrentDir ); 
+				$testCurrentDir = dirname( $testCurrentDir );
+				$currentDir = explode( DS, $testCurrentDir );
+			}
+		//	var_export( $testCurrentDir );
+		//	var_export( $currentDir );
+		//	var_export( $tempDir );
 			$prefix = array_diff( $currentDir, $tempDir );
+			
+			
 			if( implode( '/', $currentDir ) === implode( '/', $tempDir + $prefix ) && trim( implode( '/', $prefix ) ) )
 			{
 				$prefix = '/' . implode( '/', $prefix );  
 			}
 		}
-	//		var_export( $tempDir );
-	//		var_export( $prefix );
+		if( ! empty( $_SERVER['CONTEXT_PREFIX'] ) )
+		{
+			#	for cpanel temp user links
+			#	http://199.192.23.45/~nustreamscentre/pc_installer.php?stage=start
+			$prefix = $_SERVER['CONTEXT_PREFIX'] . $prefix;
+		}
+		//		var_export( $tempDir );
+		//	var_export( $prefix ); 
+		//	EXIT();			
 		defined( 'PATH_PREFIX' ) || define( 'PATH_PREFIX', $prefix );
 		defined( 'PC_PATH_PREFIX' ) || define( 'PC_PATH_PREFIX', $prefix );
 	//	var_export( PATH_PREFIX );
@@ -42,13 +82,11 @@
 	//	var_export( dirname( $_SERVER['DOCUMENT_ROOT'] ) );
 	//	var_export( $oldDir );
 		
-	//	exit();
+	//	exit(); 
 		
 		//	Check if the new compact dir is available, overides the old structure.
 		$newDir = $oldDir . DS . 'pagecarton';
 		
-		//	introducing separate core dir to make this one easily replaceable during upgrades
-		$newDir2 = $newDir . DS . 'core';
 		
 		$oldAppPath = $oldDir . DS . 'application';
 		$newAppPath = $newDir . DS . 'application';
@@ -111,6 +149,18 @@
 				rename( $oldAppPath, $oldAppPath . '.old' );
 			}
 		}
+		$pcBase = $newDir;
+
+		$pcConfig = json_decode( @file_get_contents( 'pagecarton.json' ), true );
+		if( ! empty( $pcConfig['PC_BASE'] ) && is_dir( $pcConfig['PC_BASE'] ) && is_writable( $pcConfig['PC_BASE'] ) )
+		{
+			$pcBase = $pcConfig['PC_BASE'];
+		}
+	//	var_export( $oldDir );
+	//	var_export( $newDir );
+		//	introducing separate core dir to make this one easily replaceable during upgrades
+		$newDir2 = $pcBase . DS . 'core';
+
 		if( is_dir( $newDir2 ) )
 		{
 			//	No need to copy existing files since this will be done once upgrade is done.
@@ -118,14 +168,18 @@
 		}
 		$appPath = $dirToUse . DS . 'application';
 		$libaryPath = $dirToUse . DS . 'library';
-		
+
 		//	Parent of all dir /pagecarton
-		defined( 'PC_BASE' ) || define( 'PC_BASE', $newDir );   
+		defined( 'PC_DOCUMENT_ROOT' ) || define( 'PC_DOCUMENT_ROOT', $root );   
+		defined( 'PC_BASE' ) || define( 'PC_BASE', $pcBase );   
 		defined( 'PC_CORE_DIR' ) || define( 'PC_CORE_DIR', $newDir2 );
 		defined( 'APPLICATION_DIR' ) || define( 'APPLICATION_DIR', $dirToUse );
 		
 		//	Application_dir is where site/app specific is stored
 		defined( 'APPLICATION_PATH' ) || define( 'APPLICATION_PATH', $appPath );
+		
+		//	Application_dir is where site/app specific is stored
+		defined( 'SITE_APPLICATION_PATH' ) || define( 'SITE_APPLICATION_PATH',  PC_BASE . DS . 'sites' . DS . 'default' . DS . 'application' );  
 		
 	//   Define path to classes
 		defined( 'EXTENSIONS_PATH' ) || define( 'EXTENSIONS_PATH', APPLICATION_DIR  . DS . 'extensions' );
@@ -136,7 +190,7 @@
 		//	Stop writing cache in the pagecarton dir
 	//	$tempDir = $oldDir . DS . 'temp' . DS';	
 		
-		defined( 'PC_TEMP_DIR' ) || define( 'PC_TEMP_DIR', $newDir . DS . 'temp' );
+		defined( 'PC_TEMP_DIR' ) || define( 'PC_TEMP_DIR', $pcBase . DS . 'temp' );
 	//	var_export( PC_TEMP_DIR );
 		//	port number mess up cache
 		//	don't use prefix because of nginx issues'
@@ -185,7 +239,13 @@
 		defined( 'DOMAIN' ) || define( 'DOMAIN', $_SERVER['HTTP_HOST'] );
 		
 		//	Bring in our libraries.
-		set_include_path( LIBRARY_PATH . PS . MODULES_PATH . PS . APPLICATION_PATH  );
+		set_include_path( LIBRARY_PATH . PS . MODULES_PATH . PS . APPLICATION_PATH . PS . SITE_APPLICATION_PATH  );
+
+		if( ! is_file( LIBRARY_PATH ) )
+		{
+
+		}
+
 	//	Detects the Url and path
 		require_once 'Ayoola/Application.php';
 		defined( 'URI' ) || define( 'URI', Ayoola_Application::getPresentUri() );

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Extension_Import_Repository
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -65,12 +65,23 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 
 		if( ! empty( $_GET['install'] ) )
 		{
-			$this->createConfirmationForm( 'Install ' . static::$_pluginType . '', 'Download and install ' . static::$_pluginType . ' and its components' );
-			$this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' );
-			$this->setViewContent( $this->getForm()->view() );
+       //     var_export( array( 'article_url' =>  @$_GET['install'] ) );
+         //   var_export( Ayoola_Page_PageLayout::getInstance()->select( null, array( 'article_url' =>  @$_GET['install'] ) ) );
+            $layout = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'article_url' =>  @$_GET['install'] ) );
+            if( $layout['article_url'] === @$_GET['install'] )
+            {
+                $this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . ' Installed</h1>' );
+            //    $this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . ' Installed</h1>' );
+            }
+            else
+            {
+                $this->createConfirmationForm( 'Install ' . static::$_pluginType . '', 'Download and install ' . static::$_pluginType . ' and its components' );
+                $this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' );
+                $this->setViewContent( $this->getForm()->view() );
+            }
             $photoUrl = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . $_GET['install'] . '&width=1500&height=600';
-			$this->setViewContent( self::getMenu() );
 			$this->setViewContent( '<img style="width:100%;" src="' . $photoUrl . '" alt="">' );
+			$this->setViewContent( self::getMenu() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
             $link = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $_GET['install'] . '&auto_download=1';
         //    var_export(  $link );
@@ -93,10 +104,19 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             file_put_contents( $filename, $content['response'] );
             $values = static::getOtherInstallOptions( $filename );
 
-            $class = new static::$_pluginClass( array( 'no_init' => true, 'fake_values' => $values, 'path' => $filename, ) ); 
-            $class->fakeValues = $values;
-            $class->init();
-        //     var_export( $class->getForm()->getValues() );
+            try
+            {
+                $class = new static::$_pluginClass( array( 'xno_init' => true, 'fake_values' => $values, 'path' => $filename, ) ); 
+            //    $class->fakeValues = $values;
+            //    $class->init();
+            }
+            catch( Exception $e )
+            {
+            //    echo $e->getMessage();
+            //    $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
+            }
+        //    var_export( $class->getForm()->getValues() );
+        //    var_export( $class->getForm()->getBadnews() );
         //	$this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' );
             if( ! $class->getForm()->getBadnews() )
             {
@@ -151,19 +171,20 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             $url = 'https://' . static::$_site . '/tools/classplayer/get/name/Application_Category_ShowAll?pc_widget_output_method=JSON';
             $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
             $allFeed = json_decode( $feed, true );
-            //   var_export( $url );
+           //    var_export( $url );
             //   var_export( $allFeed );
             $data = array();
             foreach( $allFeed as $each )
             {
           //     var_export( $each );
-                $data[] = array(
+                $data[$each['category_name']] = array(
                     'url' => '?category=' . $each['category_name'] . '&' . http_build_query( $_GET ) . '',
                     'option_name' => $each['article_title'],
                     'title' => $each['article_title'],
                    
                     'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),  
-                );
+                ) + $each;
+            //    $data += $each;
             }
           //     var_export( $data );
 
@@ -181,7 +202,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
         $data = static::getMenuOptions();
         $data[] = array(
             'url' => '?',
-            'option_name' => 'All Categories',
+            'option_name' => 'Default',
             'title' => 'All Categories',
             
             'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),
@@ -201,6 +222,15 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 	}
     
     /**
+     * 
+     * 
+     */
+	public function getDefaultCategory()
+    {
+        ;
+    }
+    
+    /**
      * Overides the parent class
      * 
      */
@@ -210,14 +240,23 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 		{
 			$this->_dbData = $data;
 			return true;
-		}
-		$storage = self::getObjectStorage( array( 'id' => 'cssdcf-fw' . @$_GET['category'], 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
+        }
+        $options = array_keys( self::getMenuOptions() );
+    //    self::v( $options );
+        $category = ( @$_GET['category'] ? : $this->getDefaultCategory() );
+        if( ! in_array( $category, $options ) )
+        {
+            $category = null;
+        }
+		$storage = self::getObjectStorage( array( 'id' => 'cssdcf-fw' . $category, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
 		if( ! $data = $storage->retrieve() )
         {
-            $feed = 'https://' . static::$_site . '/widgets/Application_Article_RSS?category=' . @$_GET['category'];
-            $feed = self::fetchLink( $feed, array( 'time_out' => 28800, 'connect_time_out' => 28800, ) );
+        //    &category=' . 
+            $url = 'https://' . static::$_site . '/widgets/Application_Article_RSS?category=' . $category;
+            $feed = self::fetchLink( $url, array( 'time_out' => 28800, 'connect_time_out' => 28800, ) );
             $allFeed = (array) simplexml_load_string( $feed );
-        //  self::v($feed_to_array);
+       //   self::v($feed_to_array);
+        //    self::v($url);
     //     $allFeed['channel'] = (array) $allFeed['channel'];
             $data = array();
             foreach( $allFeed['channel']->item as  $each )

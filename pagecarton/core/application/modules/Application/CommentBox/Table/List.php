@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_CommentBox_Table_List
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -51,7 +51,18 @@ class Application_CommentBox_Table_List extends Application_CommentBox_Table_Abs
 		$list->createList
 		(
 			array(
-                    'comment' => array( 'field' => 'comment', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'url' => array( 'field' => 'url', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'article_url' => array( 'field' => 'article_url', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'profile_url' => array( 'field' => 'profile_url', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'display_name' => array( 'field' => 'display_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'email' => array( 'field' => 'email', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'website' => array( 'field' => 'website', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'creation_time' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'parent_comment' => array( 'field' => 'parent_comment', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'hidden' => array( 'field' => 'hidden', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'enabled' => array( 'field' => 'enabled', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'approved' => array( 'field' => 'approved', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'comment' => array( 'field' => 'comment', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'url' => array( 'field' => 'url', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'article_url' => array( 'field' => 'article_url', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'profile_url' => array( 'field' => 'profile_url', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'display_name' => array( 'field' => 'display_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'email' => array( 'field' => 'email', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'website' => array( 'field' => 'website', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'creation_time' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'parent_comment' => array( 'field' => 'parent_comment', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'hidden' => array( 'field' => 'hidden', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'enabled' => array( 'field' => 'enabled', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'approved' => array( 'field' => 'approved', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
                     '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_CommentBox_Table_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
                     ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_CommentBox_Table_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
