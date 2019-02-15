@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Access_Adapter_Cloud
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -21,7 +21,7 @@ require_once 'Ayoola/Access/Adapter/Interface.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Access_Adapter_Cloud
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt

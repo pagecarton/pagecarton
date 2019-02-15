@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_CommentBox_Table_Abstract
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -65,7 +65,18 @@ class Application_CommentBox_Table_Abstract extends PageCarton_Widget
 
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'comment', 'type' => 'InputText', 'value' => @$values['comment'] ) );         $fieldset->addElement( array( 'name' => 'url', 'type' => 'InputText', 'value' => @$values['url'] ) );         $fieldset->addElement( array( 'name' => 'article_url', 'type' => 'InputText', 'value' => @$values['article_url'] ) );         $fieldset->addElement( array( 'name' => 'profile_url', 'type' => 'InputText', 'value' => @$values['profile_url'] ) );         $fieldset->addElement( array( 'name' => 'display_name', 'type' => 'InputText', 'value' => @$values['display_name'] ) );         $fieldset->addElement( array( 'name' => 'email', 'type' => 'InputText', 'value' => @$values['email'] ) );         $fieldset->addElement( array( 'name' => 'website', 'type' => 'InputText', 'value' => @$values['website'] ) );         $fieldset->addElement( array( 'name' => 'creation_time', 'type' => 'InputText', 'value' => @$values['creation_time'] ) );         $fieldset->addElement( array( 'name' => 'parent_comment', 'type' => 'InputText', 'value' => @$values['parent_comment'] ) );         $fieldset->addElement( array( 'name' => 'hidden', 'type' => 'InputText', 'value' => @$values['hidden'] ) );         $fieldset->addElement( array( 'name' => 'enabled', 'type' => 'InputText', 'value' => @$values['enabled'] ) );         $fieldset->addElement( array( 'name' => 'approved', 'type' => 'InputText', 'value' => @$values['approved'] ) ); 
+        $fieldset->addElement( array( 'name' => 'comment', 'type' => 'InputText', 'value' => @$values['comment'] ) ); 
+        $fieldset->addElement( array( 'name' => 'url', 'type' => 'InputText', 'value' => @$values['url'] ) ); 
+        $fieldset->addElement( array( 'name' => 'article_url', 'type' => 'InputText', 'value' => @$values['article_url'] ) ); 
+        $fieldset->addElement( array( 'name' => 'profile_url', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
+        $fieldset->addElement( array( 'name' => 'display_name', 'type' => 'InputText', 'value' => @$values['display_name'] ) ); 
+        $fieldset->addElement( array( 'name' => 'email', 'type' => 'InputText', 'value' => @$values['email'] ) ); 
+        $fieldset->addElement( array( 'name' => 'website', 'type' => 'InputText', 'value' => @$values['website'] ) ); 
+        $fieldset->addElement( array( 'name' => 'creation_time', 'type' => 'InputText', 'value' => @$values['creation_time'] ) ); 
+        $fieldset->addElement( array( 'name' => 'parent_comment', 'type' => 'InputText', 'value' => @$values['parent_comment'] ) ); 
+        $fieldset->addElement( array( 'name' => 'hidden', 'type' => 'InputText', 'value' => @$values['hidden'] ) ); 
+        $fieldset->addElement( array( 'name' => 'enabled', 'type' => 'InputText', 'value' => @$values['enabled'] ) ); 
+        $fieldset->addElement( array( 'name' => 'approved', 'type' => 'InputText', 'value' => @$values['approved'] ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

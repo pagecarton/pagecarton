@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    PageCarton_Hook_List
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -52,7 +52,8 @@ class PageCarton_Hook_List extends PageCarton_Hook_Abstract
 		$list->createList
 		(
 			array(
-                    'class_name' => array( 'field' => 'class_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'hook_class_name' => array( 'field' => 'hook_class_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'class_name' => array( 'field' => 'class_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'hook_class_name' => array( 'field' => 'hook_class_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
                     '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Hook_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
                     ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Hook_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 

@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Upgrade_Check_Table_List
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -59,7 +59,9 @@ class Application_Upgrade_Check_Table_List extends Application_Upgrade_Check_Tab
 		$list->createList
 		(
 			array(
-                    'domain_name' => array( 'field' => 'domain_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'remote_version' => array( 'field' => 'remote_version', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'version' => array( 'field' => 'version', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'domain_name' => array( 'field' => 'domain_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'remote_version' => array( 'field' => 'remote_version', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'version' => array( 'field' => 'version', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
                     '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Upgrade_Check_Table_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
                     ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Upgrade_Check_Table_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 

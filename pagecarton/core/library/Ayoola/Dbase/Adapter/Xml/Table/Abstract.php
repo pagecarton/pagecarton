@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Adapter_Xml_Table_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -23,7 +23,7 @@ require_once 'Ayoola/Dbase/Adapter/Xml/Table.php';
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Dbase_Adapter_Xml_Table_Abstract
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt

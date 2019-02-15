@@ -1,11 +1,11 @@
 <?php
 
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Application_Domain_UserSiteManager
  * @copyright  Copyright (c) 2018 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt

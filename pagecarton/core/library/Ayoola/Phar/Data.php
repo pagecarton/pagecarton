@@ -1,10 +1,10 @@
 <?php
 /**
- * PageCarton Content Management System
+ * PageCarton
  *
  * LICENSE
  *
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Phar_Data
  * @copyright  Copyright (c) 2011-2012 Ayoola Online Inc. (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
@@ -19,7 +19,7 @@
 
 
 /**
- * @category   PageCarton CMS
+ * @category   PageCarton
  * @package    Ayoola_Phar_Data
  * @copyright  Copyright (c) 2011-2012 Ayoola Online Inc. (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
