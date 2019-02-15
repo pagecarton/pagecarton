@@ -546,8 +546,8 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     public static function getHomePageUrl()
     {
 		$domain = self::getDefaultDomain();
-		$url = self::getRootUrl() . Ayoola_Application::getUrlPrefix();  
-		return $url;
+		$url = self::getRootUrl() . Ayoola_Application::getRealPathPrefix();  
+		return $url; 
     }
 	
     /**

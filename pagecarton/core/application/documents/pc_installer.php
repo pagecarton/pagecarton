@@ -556,7 +556,7 @@
                 {
 				//	var_export( $f );
 				//	exit();
-					file_put_contents( 'pc_installer.php', $f );
+					file_put_contents( 'pc_installer.php', $f );   
 				//	file_put_contents( 'pc_installer.php',  );
                 }
           	}
