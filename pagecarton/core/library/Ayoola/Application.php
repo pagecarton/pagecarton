@@ -1978,5 +1978,21 @@ class Ayoola_Application
 		{ return true; }
 		return false;
     } 
+	
+    /**
+     * Returns true if we are running on local server 
+     *
+     * @param void
+     * @return boolean
+     */
+    public static function isFirstAdminUser()   
+    {
+		$response = Application_User_Abstract::getUsers( array( 'access_level' => array( 98, 99 ) ) ); 
+		if( $response  )
+		{ 
+			return false; 
+		}
+		return true;
+    } 
 	// END OF CLASS
 }  
