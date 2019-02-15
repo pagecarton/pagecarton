@@ -42,13 +42,17 @@ pagecarton/*.zip
 pagecarton/*.backup
 pagecarton/*.malformed.xml
 
-# 
+#
 pagecarton/core/application/databases/Application/Log/View/*
 pagecarton/core/application/databases/PageCarton/Cron/Run/*
 #pagecarton/core/application/documents/js/objects/ckeditor/*
 pagecarton/core/application/pages/data-backup/*
-pagecarton/core/application/sub_domain/* 
+pagecarton/core/application/sub_domain/*
 pagecarton/core/application/databases/Ayoola/Access/localuser.xml
 pagecarton/core/application/databases/PageCarton/MultiSite/*
 pagecarton/core/application/databases/PageCarton/MultiSite/table.xml
 pagecarton/core/application/databases/PageCarton/MultiSite/*
+
+# When developing locally, do not include the automatically created site folders
+pagecarton/sites
+pagecarton/temp
