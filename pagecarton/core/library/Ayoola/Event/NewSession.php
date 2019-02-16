@@ -50,9 +50,9 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 
 			//	auto auth
 			//	because of cPanel
-			if( ! empty( $_REQUEST['auto_auth'] ) )
+			if( ! empty( $_REQUEST['pc_auto_auth'] ) )
 			{
-				$autoAuthFile = SITE_APPLICATION_PATH . '/auto-auth/' . $_REQUEST['auto_auth'];
+				$autoAuthFile = SITE_APPLICATION_PATH . '/auto-auth/' . $_REQUEST['pc_auto_auth'];
 			//	var_export( file_get_contents( $autoAuthFile ) );
 				if( is_file( $autoAuthFile ) && is_writable( $autoAuthFile ) )
 				{
@@ -61,6 +61,13 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 					if( unlink( $autoAuthFile ) )
 					{
 						$auth->getStorage()->store( $userInfo );
+
+						if( ! empty( $_REQUEST['pc_auto_signup'] ) )  
+						{
+							$class = new Application_User_Creator( array( 'fake_values' => $userInfo ) );
+							$class->initOnce();
+						//	echo $class->view();
+						}
 						break;
 					}
 				}
