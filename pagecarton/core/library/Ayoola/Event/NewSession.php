@@ -54,20 +54,22 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 			{
 				$autoAuthFile = SITE_APPLICATION_PATH . '/auto-auth/' . $_REQUEST['pc_auto_auth'];
 			//	var_export( file_get_contents( $autoAuthFile ) );
+			//	exit();
 				if( is_file( $autoAuthFile ) && is_writable( $autoAuthFile ) )
 				{
 					$userInfo = json_decode( file_get_contents( $autoAuthFile ), true );
 
 					if( unlink( $autoAuthFile ) )
 					{
-						$auth->getStorage()->store( $userInfo );
-
 						if( ! empty( $_REQUEST['pc_auto_signup'] ) )  
 						{
 							$class = new Application_User_Creator( array( 'fake_values' => $userInfo ) );
 							$class->initOnce();
 						//	echo $class->view();
 						}
+						$auth->getStorage()->store( $userInfo );  
+			//	var_export( file_get_contents( $autoAuthFile ) );
+			//	exit();
 						break;
 					}
 				}
