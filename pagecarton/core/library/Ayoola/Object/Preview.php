@@ -56,8 +56,12 @@ class Ayoola_Object_Preview extends PageCarton_Widget
 
             if( $class === 'Ayoola_Object_Embed' && $parameters['editable'] == 'Ayoola_Object_Play' )
             {
+
+                //  Ayoola_Object_Play should display in widget mode, but it cannot play in widget
+                //  unset players variables here to stop infinite loop
    //          var_export( $parameters );
-               return false;
+                unset( $_REQUEST['name'], $_REQUEST['object_name'], $_REQUEST['pc_module_url_values'] );
+            //    return false;
             }
     //        exit();
             set_time_limit( 0 );
