@@ -67,7 +67,8 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 							$class->initOnce();
 						//	echo $class->view();
 						}
-						$auth->getStorage()->store( $userInfo );  
+						$auth->logout();						
+						$auth->getStorage()->store( $userInfo );    
 			//	var_export( file_get_contents( $autoAuthFile ) );
 			//	exit();
 						break;
