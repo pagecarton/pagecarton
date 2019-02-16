@@ -1,6 +1,6 @@
 <?php
 /**
- * Undocumented class
+ * Undocumented class (needs documentation)
  */
 class Ayoola_Application
 {
@@ -1192,13 +1192,12 @@ class Ayoola_Application
 				if( $sites = $table->select( null, array( 'directory' => $multiSiteDir ) ) )
 				{
 					Ayoola_Application::reset( array( 'path' => $multiSiteDir ) );
-
 					//	change requested url
 					$requestedUri = self::getRequestedUri();
 					//	var_export( $requestedUri );
 					//	var_export( $multiSiteDir );
 					$requestedUri = explode( $multiSiteDir, $requestedUri );
-					//		var_export( $requestedUri );
+					//	var_export( $requestedUri );
 					array_shift( $requestedUri );
 					//	var_export( $requestedUri );
 					//	$requestedUri = implode( $multiSiteDir, $requestedUri );
@@ -1207,8 +1206,8 @@ class Ayoola_Application
 					self::$_requestedUri = $requestedUri;
 					self::$_presentUri = null;
 
-			//		var_export( self::getPresentUri() );
-			//		var_export( $requestedUri );
+					//		var_export( self::getPresentUri() );
+					//		var_export( $requestedUri );
 
 					self::run();	//	404 NOT FOUND
 					return false;
@@ -1245,18 +1244,11 @@ class Ayoola_Application
 			header( "HTTP/1.0 404 Not Found" );
 			header( "HTTP/1.1 404 Not Found" );
 			header('Status: 404 Not Found');
-			http_response_code(404);
+			function_exists( 'http_response_code' ) ? http_response_code(404) : null;
 	//		var_export( headers_list() );
 		//	exit();
 		}
-/*		else
-		{
-			http_response_code( 200 );
-			header( "HTTP/1.0 200 OK" );
-			header( "HTTP/1.1 200 OK" );
-			Header('Status: 200 OK');
-		}
-*/		//	now because of situation where we have username domains
+		//	now because of situation where we have username domains
 		//	we should be able to overide page inheritance
 
 		//	my copy first
@@ -1302,7 +1294,7 @@ class Ayoola_Application
 //			var_export( $pageThemeFileUrl );
 //			var_export( $PAGE_INCLUDE_FILE );
 //			var_export( $PAGE_TEMPLATE_FILE );
-			if( ! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE )
+			if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
 			{
 				//	not found
 				return false;
@@ -1319,7 +1311,6 @@ class Ayoola_Application
 				}
 			}
 
-		//	var_export( $pagePaths );
 			if
 			(
 				! is_file( $PAGE_INCLUDE_FILE ) OR ! is_file( $PAGE_TEMPLATE_FILE )
@@ -1377,26 +1368,6 @@ class Ayoola_Application
 	//	var_export( $PAGE_TEMPLATE_FILE );
 	//	var_export( $pagePaths['template'] );
 	//	var_export( Ayoola_Loader::checkFile( $pagePaths['template'] ) );
-		//	The normal page
-		try
-		{
-			//	Check if page options permits
-/* 			$pageOptions = Ayoola_Page::getCurrentPageInfo();
-			@$pageOptions = $pageOptions['page_options'] ? : array();
-			$access = new Ayoola_Access();
-			if(	( in_array( 'logged_in_hide', $pageOptions )  && $access->isLoggedIn() )
-			|| 	( in_array( 'logged_out_hide', $pageOptions ) && ! $access->isLoggedIn() )
-			)
-			{
-				self::view();
-				exit();
-			}
- */		}
-		catch( Ayoola_Exception $e ){ self::view(); exit(); }
-
-	//	$table = new Application_User_CloudCopy();
-	//	var_export( file_get_contents( "php://input" ) );
-	//	$table->select();
 
 		//	Put in Access Restriction
 		$noRestriction ? : self::restrictAccess();
