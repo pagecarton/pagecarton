@@ -1022,11 +1022,12 @@ class Ayoola_Application
 								header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($fn)).' GMT', true, 200);
 							}
 						}
-						header( 'Content-Length: ' . filesize( $fn ) );
+						//	This was making site load forever if size sent do not match this
+						// header( 'Content-Length: ' . filesize( $fn ) );
 					}
 
 
-			//		var_export( headers_list() );
+			//  var_export( headers_list() );
 			//	var_export( $uri );
 			//	exit();
 
@@ -1194,11 +1195,15 @@ class Ayoola_Application
 
 					//	change requested url
 					$requestedUri = self::getRequestedUri();
-				//	var_export( $requestedUri );
+					//	var_export( $requestedUri );
+					//	var_export( $multiSiteDir );
 					$requestedUri = explode( $multiSiteDir, $requestedUri );
-			//		var_export( $requestedUri );
+					//		var_export( $requestedUri );
 					array_shift( $requestedUri );
-					$requestedUri = implode( '', $requestedUri );
+					//	var_export( $requestedUri );
+					//	$requestedUri = implode( $multiSiteDir, $requestedUri );
+					$requestedUri = array_shift( $requestedUri );
+					//	var_export( $requestedUri );
 					self::$_requestedUri = $requestedUri;
 					self::$_presentUri = null;
 
@@ -1239,7 +1244,7 @@ class Ayoola_Application
 			self::$_runtimeSetting['real_url'] = self::$_notFoundPage;
 			header( "HTTP/1.0 404 Not Found" );
 			header( "HTTP/1.1 404 Not Found" );
-			Header('Status: 404 Not Found');
+			header('Status: 404 Not Found');
 			http_response_code(404);
 	//		var_export( headers_list() );
 		//	exit();
@@ -1268,6 +1273,7 @@ class Ayoola_Application
 	//	var_export( is_file( $PAGE_INCLUDE_FILE ) );
 	//	var_export( is_file( $PAGE_TEMPLATE_FILE ) );
 	//	exit();
+	$noRestriction = false;
 		$previewTheme = function() use ( $pagePaths, $uri, &$PAGE_INCLUDE_FILE, &$PAGE_TEMPLATE_FILE )
 		{
 
@@ -1316,7 +1322,7 @@ class Ayoola_Application
 		//	var_export( $pagePaths );
 			if
 			(
-				! is_file( $PAGE_INCLUDE_FILE ) AND ! is_file( $PAGE_TEMPLATE_FILE )
+				! is_file( $PAGE_INCLUDE_FILE ) OR ! is_file( $PAGE_TEMPLATE_FILE )
 			)
 			{
 				//	not found
@@ -1345,7 +1351,7 @@ class Ayoola_Application
 			//	var_export( $intendedCopyPaths['template'] );
 				if
 				(
-					! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE
+					! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE
 				)
 				{
 
@@ -1356,7 +1362,7 @@ class Ayoola_Application
 				//	var_export( $pagePaths['template'] );
 					if
 					(
-						! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE
+						! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE
 					)
 					{
 				//	var_export( $pagePaths['include'] );
@@ -1393,7 +1399,7 @@ class Ayoola_Application
 	//	$table->select();
 
 		//	Put in Access Restriction
-		self::restrictAccess();
+		$noRestriction ? : self::restrictAccess();
 	//	exit( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 
 		//	check if redirect
@@ -1976,6 +1982,24 @@ class Ayoola_Application
 		)
 		{ return true; }
 		return false;
+
     }
+
+    /**
+     * Returns true if we are running on local server
+     *
+     * @param void
+     * @return boolean
+     */
+    public static function isFirstAdminUser()
+    {
+		$response = Application_User_Abstract::getUsers( array( 'access_level' => array( 98, 99 ) ) );
+		if( $response  )
+		{
+			return false;
+		}
+		return true;
+    }
+
 	// END OF CLASS
 }

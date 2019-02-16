@@ -56,6 +56,3 @@ pagecarton/core/application/databases/PageCarton/MultiSite/*
 # When developing locally, do not include the automatically created site folders
 pagecarton/sites
 pagecarton/temp
-
-#exclude pagecarton.json to make it safe for collaboration
-pagecarton/core/local_html/pagecarton.json
