@@ -168,7 +168,14 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		}
 
 		$userList = array_intersect( array_keys( self::$_exportList ), $values['backup_export_list'] );
-		$totalList = array_merge( $requiredList, $userList );
+
+		//	multisites
+	//	$siteList = array();
+	//	foreach( $values['backup_export_list'] as $site )
+		{
+		//	$siteList[] = '' . $site . '';
+		}
+		$totalList = array_merge( $requiredList, $userList, $values['backup_export_multisites'] ? : array() );
 	//	var_export( self::$_exportList );
 	//	var_export( $values['backup_export_list'] );
 	//	var_export( $totalList );
@@ -216,8 +223,10 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 			$each = basename( $dir ) . $each;
 			$regex .= "({$each})|";			
 		}
-		$regex = trim( $regex, '|' );
+		$regex = trim( $regex, '|' ); 
 		$regex = "#{$regex}#";
+	//	var_export( $regex );
+	//	exit();
 		try
 		{
 

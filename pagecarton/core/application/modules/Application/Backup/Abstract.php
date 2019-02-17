@@ -47,7 +47,7 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
      * 
      * @var array
      */
-	protected static $_exportList = array( '/application/databases/' => 'Databases', '/application/modules/' => 'Modules', '/application/module_files/' => 'Modules Files', '/application/pages/' => 'Page and Layout Templates', '/application/documents/' => 'Documents', '/library/' => 'Libraries' );
+	protected static $_exportList = array( '/application/databases/' => 'Databases', '/application/modules/' => 'Widgets', '/application/module_files/' => 'Posts', '/application/pages/' => 'Pages', '/application/documents/' => 'Documents', '/library/' => 'Libraries' );
 	
     /**
      * Identifier for the column to edit
@@ -157,6 +157,16 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
             if( empty( $values['backup_name'] ) )
             {
                 $fieldset->addElement( array( 'name' => 'backup_export_list', 'label' => 'Back up Content', 'type' => 'Checkbox', 'value' => @$values['backup_export_list'] ? : array_keys( self::$_exportList ) ), self::$_exportList );
+
+                $multisites = PageCarton_MultiSite_Table::getInstance();
+                if( $multisites = $multisites->select() ) 
+                {
+                    require_once 'Ayoola/Filter/SelectListArray.php';
+                    $filter = new Ayoola_Filter_SelectListArray( 'directory', 'directory' );
+                    $multisites = $filter->filter( $multisites );
+                    $fieldset->addElement( array( 'name' => 'backup_export_multisites', 'label' => 'Back up multisites', 'type' => 'Checkbox', 'value' => @$values['backup_export_multisites'] ? : $multisites ), $multisites );
+                }
+    
                 unset( $options['export'] );
             }
             else
