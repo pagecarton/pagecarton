@@ -1631,8 +1631,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$trendingPost = array_unique( array_column( $trendingData, $this->getIdColumn() ) );
 
 		//	self::v( $trendingPost );   
-		//	self::v( $this->getIdColumn() );   
-			$whereClause[$this->getIdColumn()] = $trendingPost;
+		//	self::v( $this->getIdColumn() ); 
+			if( $trendingPost )
+			{
+				$whereClause[$this->getIdColumn()] = $trendingPost;
+			}
 			@$this->_parameter['order_by'] = $this->_parameter['order_by'] ? : 'engagement_count';
 			@$this->_parameter['inverse_order'] = isset( $this->_parameter['inverse_order'] ) ? $this->_parameter['inverse_order'] : true;
 		}
