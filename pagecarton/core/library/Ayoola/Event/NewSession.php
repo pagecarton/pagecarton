@@ -14,7 +14,7 @@
 /**
  * @see Ayoola_
  */
- 
+
 //require_once 'Ayoola/.php';
 
 
@@ -27,10 +27,10 @@
 
 class Ayoola_Event_NewSession extends Ayoola_Event
 {
-	
+
     /**
      * Plays the class
-     * 
+     *
      */
 	public function init()
     {
@@ -38,8 +38,8 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 		//	Try to login with persistent cookie variables
 		do
 		{
-			
-		
+
+
 		//	break;
 			if( isset( $_COOKIE[Ayoola_Session::getName()] ) )
 			{
@@ -61,14 +61,14 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 
 					if( unlink( $autoAuthFile ) )
 					{
-						if( ! empty( $_REQUEST['pc_auto_signup'] ) )  
+						if( ! empty( $_REQUEST['pc_auto_signup'] ) )
 						{
 							$class = new Application_User_Creator( array( 'fake_values' => $userInfo ) );
 							$class->initOnce();
 						//	echo $class->view();
 						}
-						$auth->logout();						
-						$auth->getStorage()->store( $userInfo );    
+						$auth->logout();
+						$auth->getStorage()->store( $userInfo );
 			//	var_export( file_get_contents( $autoAuthFile ) );
 			//	exit();
 						break;
@@ -76,16 +76,16 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 				}
 			}
 
-			
+
 		//	var_export( $_COOKIE );
-			
+
 			$loginObject = new Ayoola_Access_Login( array( 'no_init' => true ) );
-			
+
 			//	User doesn't have pesistent login cookie
 			$cookieValue = @$_COOKIE[$loginObject->getObjectName()];
 			if( empty( $cookieValue ) ){ break; }
 		//	var_export( $_COOKIE );
-			
+
 			//	User is currently logged in
 			if( $userInfo = $auth->getUserInfo() ){ break; }
 		//	var_export( $_COOKIE );
@@ -128,7 +128,7 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 		//	var_export( $info );
 		//	var_export( $correctCookiePassword );
 				break;
-			
+
 			}
 			if( empty( $realUserInfo['password'] ) ){ break; }
 		//	$correctCookiePassword = Ayoola_Access_Login::getPersistentCookieValue( $realUserInfo['email'], $realUserInfo['password'], $cookieCreationTime );
@@ -141,16 +141,16 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 
 
 			if( $realUserInfo['access_level'] > 98 )
-			{ 
+			{
 				$correctCookiePassword = Ayoola_Access_Login::getPersistentCookieValue( $realUserInfo['email'], $realUserInfo['password'], $cookieCreationTime );
 			//	var_export( $cookieValue );
 			//	var_export( $correctCookiePassword );
-				
+
 				//	strict cookie value for super users
 				if( $correctCookiePassword != $cookieValue )
 				{
 					$auth->logout();
-					break; 
+					break;
 				}
 			}
 			$correctCookiePassword = Ayoola_Access_Login::hashPassWord( $realUserInfo['email'] . $realUserInfo['password'], $cookieCreationTime );
@@ -166,6 +166,6 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 			return true;
 		}
 		while( false );
-    } 
+    }
 	// END OF CLASS
 }
