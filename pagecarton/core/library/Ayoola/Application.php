@@ -364,11 +364,15 @@ class Ayoola_Application
 				$subDomain = $tempDomainName;
 			}
 		//	var_export( $subDomain );
+		//	var_export( $data['domain_settings'] );
 			if( ! $primaryDomainInfo = $domain->selectOne( null, array( 'domain_type' => 'primary_domain' ) ) )
 			{
-				if( ! $primaryDomainInfo = $domain->selectOne( null, array( 'domain_type' => '' ) ) )
+				if( ! $primaryDomainInfo = $domain->selectOne( null, array( 'domain_type' => '', 'sub_domain' => ''  ) ) )
 				{
-					$primaryDomainInfo = $data['domain_settings'];
+					if( ! $primaryDomainInfo = $domain->selectOne( null, array( 'sub_domain' => ''  ) ) )
+					{
+						$primaryDomainInfo = $data['domain_settings'];
+					}
 				}
 			}
 			//	var_export( $primaryDomainInfo );
@@ -436,10 +440,13 @@ class Ayoola_Application
 			}
 		//	var_export( $data );
 		///	exit();
-			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && $domainName !== $_SERVER['SERVER_ADDR'] && empty( $domainSettings['no_redirect'] )  )
+			if( ! empty( $_SERVER['CONTEXT_PREFIX'] )  )
 			{
+				$data['domain_settings'] = $where;
+			}
 
-
+			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && $domainName !== $_SERVER['SERVER_ADDR'] && empty( $domainSettings['no_redirect'] ) && empty( $_SERVER['CONTEXT_PREFIX'] )  )
+			{
 			//	var_export( $primaryDomainInfo );
 			//	exit();
 				if( $primaryDomainInfo['domain_name'] )
@@ -554,7 +561,7 @@ class Ayoola_Application
 			//		var_export( $subDomain );
 		//			var_export( $data['domain_settings'] );
 	//		$data['domain_settings'];
-			if( @$subDomain )
+			if( @$subDomain && empty( $_SERVER['CONTEXT_PREFIX'] ) )
 			{
 				if( $subDomainInfo = $domain->selectOne( null, array( 'domain_name' => $subDomain ) ) )
 				{

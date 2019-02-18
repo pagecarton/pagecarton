@@ -86,6 +86,7 @@ class Application_Backup_Import extends Application_Backup_Abstract
 						try
 						{
 							//	try if tar will work on server
+							$phar = 'Ayoola_Phar_Data';
 							$backup = new $phar( $tempName, RecursiveDirectoryIterator::SKIP_DOTS );
 							$information = file_get_contents( $backup['backup_information'] );
 						}
@@ -101,8 +102,8 @@ class Application_Backup_Import extends Application_Backup_Abstract
 
 			}
 		//	var_export( $tempName );
-			$phar = 'Ayoola_Phar_Data';
-			try
+		$phar = 'Ayoola_Phar_Data';
+		try
 			{
 				$backup = new $phar( $tempName, RecursiveDirectoryIterator::SKIP_DOTS );
 				$information = file_get_contents( $backup['backup_information'] );
