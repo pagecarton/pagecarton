@@ -182,6 +182,7 @@ class Ayoola_Xml extends DOMDocument
      */
     public static function checkLockFile( $tempName, $giveUpAfter = 5 )
     {
+	//	return true;
 		$time = time() + $giveUpAfter;
 		if( is_file( $tempName ) )
 		{
@@ -192,7 +193,7 @@ class Ayoola_Xml extends DOMDocument
 			}
 			while( time() < $time )
 			{
-				usleep(100000);
+				usleep( 100 );
 				if( ! is_file( $tempName ) )
 				{
 					return true;
