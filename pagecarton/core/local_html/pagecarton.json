@@ -1,4 +1,5 @@
 {
-    "PC_BASE": "/opt/lampp/htdocs/git-collaborations/pagecarton/pagecarton/",
+    "PC_BASE": "",
+    "application_dir": "",
     "run_as_core": false
 }
