@@ -256,7 +256,7 @@ class Ayoola_Application
 			self::setDomainSettings();
 	//		var_export( self::$_domainSettings );
 		}
-	//	var_export( self::$_domainSettings );
+	//	PageCarton_Widget::v( self::$_domainSettings );
 		return $key ? @self::$_domainSettings[$key] : self::$_domainSettings;
 	}
 
@@ -492,8 +492,8 @@ class Ayoola_Application
 							$data['domain_settings']['site_configuraton'] = $conf;
 						}
 					}
-
 				}
+
 						//		var_export( $domainDir );
 				if( is_dir( $oldDomainDir ) )
 				{
@@ -505,8 +505,15 @@ class Ayoola_Application
 					rename( $oldDomainDir, $oldDomainDir . '.old.' . time() );
 				}
 
-
-				if( @strlen( $primaryDomainInfo['application_dir'] ) > 3 )
+				$customDir = null;
+			//	var_export( $conf['application_dir'] );
+			//	var_export( $primaryDomainInfo['application_dir'] );
+				if( ! empty( $conf['application_dir'] ) && is_dir( $conf['application_dir'] ) && is_readable( $conf['application_dir'] ) )
+				{
+					$customDir = $conf['application_dir'];
+					$subDomain = null;
+				}
+				elseif( @strlen( $primaryDomainInfo['application_dir'] ) > 3 )
 				{
 					$customDir =  Application_Domain_Abstract::getSubDomainDirectory( $primaryDomainInfo['application_dir'] );
 					$oldCustomDir = APPLICATION_DIR . $primaryDomainInfo['application_dir'];
@@ -525,7 +532,10 @@ class Ayoola_Application
 					{
 						$customDir =  $oldCustomDir;
 					}
-
+				}
+			//	var_export( $customDir );
+				if( $customDir )
+				{
 					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = str_replace( '/', DS, $customDir );
 					$data['domain_settings'][APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'application';
 					$data['domain_settings'][EXTENSIONS_PATH] = @$primaryDomainInfo[EXTENSIONS_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'extensions';
@@ -576,7 +586,12 @@ class Ayoola_Application
 						$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $primaryDomainInfo['domain_name'];
 					//	$data['domain_settings']['domain_name'] = $subDomain . '.' . $tempWhere['domain_name'];
 						$data['domain_settings']['domain_name'] = $subDomain . '.' . $primaryDomainInfo['domain_name'];
-						$data['domain_settings'][APPLICATION_DIR] = str_replace( '/', DS, Application_Domain_Abstract::getSubDomainDirectory( $subDomainInfo['domain_name'] ) );
+
+						$subDomainDir = $subDomainInfo['application_dir'] ? : $subDomainInfo['domain_name'];
+						$subDomainDir = Application_Domain_Abstract::getSubDomainDirectory( $subDomainDir );
+					//	var_export( $subDomainDir );
+
+						$data['domain_settings'][APPLICATION_DIR] = str_replace( '/', DS, $subDomainDir );
 						$data['domain_settings']['dynamic_domain'] = true;
 						$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
 						@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
