@@ -82,7 +82,7 @@ class Application_Backup_Import extends Application_Backup_Abstract
 				//	@unlink( $tempName );
 					if( ! is_file( $tempName ) )
 					{
-						self::fetchLink( $values['backup_url'], array( 'destination_file' => $tempName, 'connect_time_out' => 30, 'time_out' => 986000 ) );
+						self::fetchLink( $values['backup_url'], array( 'destination_file' => $tempName, 'connect_time_out' => 3000, 'time_out' => 9860000 ) );
 						try
 						{
 							//	try if tar will work on server
@@ -102,8 +102,8 @@ class Application_Backup_Import extends Application_Backup_Abstract
 
 			}
 		//	var_export( $tempName );
-		$phar = 'Ayoola_Phar_Data';
-		try
+			$phar = 'Ayoola_Phar_Data';
+			try
 			{
 				$backup = new $phar( $tempName, RecursiveDirectoryIterator::SKIP_DOTS );
 				$information = file_get_contents( $backup['backup_information'] );
@@ -111,10 +111,14 @@ class Application_Backup_Import extends Application_Backup_Abstract
 			}
 			catch( Exception $e )
 			{
-				$information = array(
-					'backup_name' => 'UNKNOWN ' . date( 'r' ),
-				//	'backup_name' => '',
-				);
+				//	if not valid tar then we need to delete 
+			//	var_export( $e->getMessage() );
+				$this->setViewContent( '<div class="badnews">Invalid Backup File ' . filesize( $tempName )  .  '</div>', true );
+				$this->setViewContent( '<div class="pc-notify-info">' . $e->getMessage() . '</div>', true );
+				$this->setViewContent( $this->getForm()->view() );		
+				unlink( $tempName );
+				return false;
+				
 			}
 		//	var_export( $tempName );
 
