@@ -102,8 +102,14 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getSubDomainDirectory( $subDomain = null )
     {
+	//	var_export( $subDomain );
 		if( is_null( $subDomain ) ){ $subDomain = Ayoola_Application::getDomainSettings( 'sub_domain' ); }
 		if( empty( $subDomain ) ){ return null; }  
+
+		$domainPath = trim( str_ireplace( 'www.', '', strtolower( $subDomain ) ), '\\/' . DS );
+
+	//	var_export( $domainPath );
+
 	//	if( empty( $subDomain ) ){ throw new Application_Domain_Exception( 'NO SUBDOMAIN SPECIFIED.' ); }
 	//	$oldPath = APPLICATION_PATH . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) );
 	
@@ -111,13 +117,13 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 		$myPath = Ayoola_Application::getRealPathPrefix();
 //		$myPath = str_replace( @$_SERVER['CONTEXT_PREFIX'], '', Ayoola_Application::getPathPrefix() );
 	
-		$oldPath = dirname( APPLICATION_DIR ) . DS . 'application'  . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @Ayoola_Application::getPathPrefix();
+		$oldPath = dirname( APPLICATION_DIR ) . DS . 'application'  . DS . 'sub_domain' . DS . $domainPath . $myPath;
 //		var_export( ! is_dir( $oldPath ) );    
 		if( ! is_dir( $oldPath ) )
 		{
-			$oldPath = APPLICATION_DIR . DS . 'application'  . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . @Ayoola_Application::getPathPrefix();  
+			$oldPath = APPLICATION_DIR . DS . 'application'  . DS . 'sub_domain' . DS . $domainPath . $myPath;  
 		}
-		@$newPath = PC_BASE . DS . 'sites' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) ) . $myPath;
+		@$newPath = PC_BASE . DS . 'sites' . DS . $domainPath . $myPath;
 		
 		$pathToUse = $oldPath;
 		    
