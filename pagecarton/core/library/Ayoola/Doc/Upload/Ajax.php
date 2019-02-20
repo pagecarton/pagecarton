@@ -61,7 +61,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			{
 				if( @$_FILES['upload']['tmp_name'] ) 
 				{
-					$tempFilename = tempnam( sys_get_temp_dir(), '/upload/' );
+					$tempFilename = tempnam( CACHE_DIR, '/upload/' ); 
 					move_uploaded_file( $_FILES['upload']['tmp_name'], $tempFilename );
 					$_POST['name'] = $_FILES['upload']['name'];
 					$_POST['mime_type'] = $_FILES['upload']['type'];

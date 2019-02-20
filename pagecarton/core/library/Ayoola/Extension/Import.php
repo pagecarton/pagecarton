@@ -56,7 +56,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				$filter = new Ayoola_Filter_Name();
 				$filter->replace = '-';
 				$customName = time();   
-				$filename = sys_get_temp_dir() . DS . $customName . '.' . $filter->filter( $result['extension'] );
+				$filename = CACHE_DIR . DS . $customName . '.' . $filter->filter( $result['extension'] );
 				
 				file_put_contents( $filename, $result['data'] );
 				$newFilename = array_shift( explode( '.', $filename ) ) . '.tar.gz';

@@ -92,7 +92,7 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 			$filter = new Ayoola_Filter_Name();
 			$filter->replace = '_';
 			$values['extension_name'] = strtolower( $filter->filter( $values['extension_title'] ) );
-			$filename = sys_get_temp_dir() . DS . $values['extension_name'] . '.tar';
+			$filename = CACHE_DIR . DS . $values['extension_name'] . '.tar';
 			
 			//	remove previous files
 			@unlink( $filename );

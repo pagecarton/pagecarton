@@ -77,7 +77,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				if( $isZip || ( ! isset( $export['template'] ) && ! isset( $export['template.html'] ) && ! isset( $export['index.html'] ) && ! isset( $export['home.html'] ) ) )
 				{
 					
-					$tempDestination = ( @constant( 'PC_TEMP_DIR' ) ? : sys_get_temp_dir() ) . '/layout/';
+					$tempDestination = ( @constant( 'PC_TEMP_DIR' ) ? : CACHE_DIR ) . '/layout/';
 					
 					//	Clean up temp dir
 					if( is_dir( $tempDestination ) )

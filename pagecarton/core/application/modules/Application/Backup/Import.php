@@ -47,7 +47,6 @@ class Application_Backup_Import extends Application_Backup_Abstract
 		//	var_export( $values );
 
 		//	exit();
-		//	$tempName = tempnam( sys_get_temp_dir(), '' ) . '.tar.gz';
 			$tempName = CACHE_DIR . DS . 'imported-backups' . DS . md5( serialize( $values ) ) . '.tar.gz';
 			Ayoola_Doc::createDirectory( dirname( $tempName ) );
 			$option = $values['import_option'] ? : @$_REQUEST['import_option'];

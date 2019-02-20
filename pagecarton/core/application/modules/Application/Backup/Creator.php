@@ -36,7 +36,6 @@ class Application_Backup_Creator extends Application_Backup_Abstract
     {
 	//	var_export( getcwd() );
 	//	var_export( basename( dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
-	//	var_export( sys_get_temp_dir() );
 	//	var_export( $_SERVER['SCRIPT_FILENAME'] );
 		//	$dir = Ayoola_Application::getDomainSettings( APPLICATION_DIR );
 	//	var_export( APPLICATION_DIR );

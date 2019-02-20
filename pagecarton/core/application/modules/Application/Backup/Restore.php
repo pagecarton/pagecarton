@@ -146,7 +146,6 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 			break;
 		}
  */		
-	//	sys_get_temp_dir();
 	
 		//	save the previous backups to the temp dir
 		$previousBackupFiles = Ayoola_Doc::getFilesRecursive( self::getBackupDirectory() );

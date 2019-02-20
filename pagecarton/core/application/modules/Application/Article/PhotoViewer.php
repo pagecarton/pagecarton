@@ -105,7 +105,7 @@ class Application_Article_PhotoViewer extends Application_Article_Abstract
 			//	exit();
 				if( $xX = base64_decode( $data['document_url_base64'] ) )
 				{
-					$path = tempnam( sys_get_temp_dir(), __CLASS__ );
+					$path = tempnam( CACHE_DIR, __CLASS__ );
 					switch( strtolower( $type ) ) 
 					{
 						case 'image/gif' :
