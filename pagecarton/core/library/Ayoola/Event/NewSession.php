@@ -63,7 +63,7 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 					{
 						if( ! empty( $_REQUEST['pc_auto_signup'] ) )
 						{
-							$class = new Application_User_Creator( array( 'fake_values' => $userInfo ) );
+							$class = new Application_User_AdminCreator( array( 'fake_values' => $userInfo ) );
 							$class->initOnce();
 						//	echo $class->view();
 						}
