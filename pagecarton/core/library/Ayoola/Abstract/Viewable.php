@@ -2013,6 +2013,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//		self::v( $template );  
 			// 		self::v( $this->_objectTemplateValues );  
 					$template = Ayoola_Abstract_Playable::replacePlaceholders( $template, $this->_objectTemplateValues + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+
+					//	fix case where ajax auto-loading didn't fix url prefix in posts
+					$template = Ayoola_Page_Editor_Text::fixUrlPrefix( $template, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
+
 				//	self::v( $this->getParameter() );  
 					$html = $template; 
 				}   

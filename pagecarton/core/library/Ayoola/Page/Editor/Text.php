@@ -85,7 +85,37 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		return $this->_markupTemplateObjects;
 	}
 	
-    /**
+	/**
+	* This method
+	*
+	* @param 
+	* @return 
+	*/
+	public static function fixUrlPrefix( $content, $prefixBefore, $prefixNow )
+	{
+		if( $prefixBefore !== $prefixNow || $prefixNow )
+		{
+			$search = array( '"' . $prefixBefore, "'" . $prefixBefore, "url(" . $prefixBefore, '"' . $prefixNow, "'" . $prefixNow, "url(" . $prefixNow, );
+
+			//	fix issue of $prefixBefore = /test and $prefixNow = /test/store
+			if( stripos( $prefixBefore, $prefixNow ) === 0 )
+			{
+				$search = array( '"' . $prefixBefore, "'" . $prefixBefore, "url(" . $prefixBefore, '"' . $prefixNow, "'" . $prefixNow, "url(" . $prefixNow, );
+			}
+			elseif( stripos( $prefixNow, $prefixBefore ) === 0 )
+			{
+				$search = array( '"' . $prefixNow, "'" . $prefixNow, "url(" . $prefixNow, '"' . $prefixBefore, "'" . $prefixBefore, "url(" . $prefixBefore, );
+			}
+			$replace = array( '"', "'", "url(", '"', "'", "url(", );
+			$content = str_ireplace( $search, $replace, $content );
+			$search = array( '"/', "'/", "url(/", $prefixNow . '//' );
+			$replace = array( '"' . $prefixNow . '/', "'". $prefixNow . '/', "url(". $prefixNow . '/', '//' );
+			$content = str_ireplace( $search, $replace, $content );
+		}
+		return $content;
+	}
+
+	/**
      * This method
      *
      * @param 
@@ -236,30 +266,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	//	var_export( $content );  
 //		var_export( $this->getParameter() );  
 		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() ||  Ayoola_Application::getUrlPrefix() )
-//		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
-		{
-			$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), "url(" . $this->getParameter( 'url_prefix' ), '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), "url(" . Ayoola_Application::getUrlPrefix(), );
-			//	fix issue of $this->getParameter( 'url_prefix' ) = /test and Ayoola_Application::getUrlPrefix() = /test/store
-			if( stripos( $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() ) === 0 )
-			{
-				$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), "url(" . $this->getParameter( 'url_prefix' ), '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), "url(" . Ayoola_Application::getUrlPrefix(), );
-			}
-			elseif( stripos( Ayoola_Application::getUrlPrefix(), $this->getParameter( 'url_prefix' ) ) === 0 )
-			{
-				$search = array( '"' . Ayoola_Application::getUrlPrefix(), "'" . Ayoola_Application::getUrlPrefix(), "url(" . Ayoola_Application::getUrlPrefix(), '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), "url(" . $this->getParameter( 'url_prefix' ), );
-			}
-		//	$search = array( '"' . $this->getParameter( 'url_prefix' ), "'" . $this->getParameter( 'url_prefix' ), );
-		//	$replace = array( '"' . Ayoola_Application::getUrlPrefix(), "'". Ayoola_Application::getUrlPrefix(), );
-			$replace = array( '"', "'", "url(", '"', "'", "url(", );
-			$content = str_ireplace( $search, $replace, $content );
-	//		var_export( $search );  
-	//		var_export( $replace );  
-		//	var_export( $content );  
-			$search = array( '"/', "'/", "url(/", Ayoola_Application::getUrlPrefix() . '//' );
-			$replace = array( '"' . Ayoola_Application::getUrlPrefix() . '/', "'". Ayoola_Application::getUrlPrefix() . '/', "url(". Ayoola_Application::getUrlPrefix() . '/', '//' );
-			$content = str_ireplace( $search, $replace, $content );
-
-	//		$replace = Ayoola_Application::getUrlPrefix();
+		{		
+			$content = self::fixUrlPrefix( $content, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
 		}
 		
 		$this->setParameter( array( 'editable' => $content ) );

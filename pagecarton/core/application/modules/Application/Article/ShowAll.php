@@ -1315,7 +1315,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					}
 			//		while( false );
 				//	var_export( $data['article_title'] );
-					$template .= self::replacePlaceholders( $templateToUse, $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+					$templateD = self::replacePlaceholders( $templateToUse, $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+					
+					//	fix case where ajax auto-loading didn't fix url prefix in posts
+					$templateD = Ayoola_Page_Editor_Text::fixUrlPrefix( $templateD, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
+					$template .= $templateD;
 				}
 			}
 			if( @$_POST['PAGECARTON_RESPONSE_WHITELIST'] )
@@ -1388,7 +1392,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	var_export( $this->_parameter['markup_template'] );
 		
 		if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false )  
-//		if( ! $this->_parameter['array_key_placeholders'] )  
 		{
 			//	update the markup template
 			@$this->_parameter['markup_template'] = null;
