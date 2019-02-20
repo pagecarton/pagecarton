@@ -894,16 +894,30 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				}
 				while( $row = array_shift( $result ) ) 
 				{
-					ksort( $row );
+					unset( $row['form_data'] );
 					if( ! $flag ) 
 					{
 						// display field/column names as first row
-						fputcsv( $out, array_keys( $row ), ',', '"' );
-					//	fputcsv( $out, array_keys( $this->fields ), ',', '"' );
+					//	var_export( array_keys( $row ) );
+						ksort( $row );
+						$header = $row;
+						fputcsv( $out, array_keys( $header ), ',', '"' );
+					//	var_export( $this->fields );
+					//	fputcsv( $out, array_keys( $this->fields ), ',', '"' ); 
 						$flag = true;
 					}
+				//	foreach( $row )
+					$notFoundKeys = array_diff_key( $header, $row );
+
+					$notFoundKeys = array_combine( array_keys( $notFoundKeys ), array_fill( 0, count( $notFoundKeys ), ' ' ) );
+				//	var_export( $notFoundKeys );
+					$row += $notFoundKeys;
+					$row = array_intersect_key( $row, $header );
+					ksort( $row );
 					array_walk( $row, __NAMESPACE__ . '\cleanData' );
 					fputcsv( $out, array_values( $row ), ',', '"' );
+				//	var_export( $row );
+					//	fputcsv( $out, array_values( $row ), ',', '"' );
 				}
 
 				fclose($out);
