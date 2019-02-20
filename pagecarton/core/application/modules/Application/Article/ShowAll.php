@@ -891,8 +891,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
 		//		var_export( $data['post_link'] );
 			}
-			if( @$data['article_url'] )
-			$data['document_url'] = ( $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ) ) ? : '/img/placeholder-image.jpg'; 
+	//	var_export( $data );
+			if( @$data['article_url'] && empty( $data['document_url_base64'] )  )
+			{
+				$data['document_url'] = ( $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ) ) ? : '/img/placeholder-image.jpg'; 
+			}
 			$data['document_url_plain'] = Ayoola_Application::getUrlPrefix() . $data['document_url']; 
 			$data['document_url_uri'] = $data['document_url']; 
 			$data['document_url_cropped'] = $data['document_url']; 

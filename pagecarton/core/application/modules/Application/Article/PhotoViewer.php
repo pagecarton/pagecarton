@@ -64,7 +64,8 @@ class Application_Article_PhotoViewer extends Application_Article_Abstract
 				
 			//	header( 'Location: https://placeholdit.imgix.net/~text?txtsize=200&txt=No Photo&w=' . $maxWith . '&h=' . $maxHeight . '' );
 		//		exit( 'die' );
-				$data['document_url'] = '/img/placeholder-image.jpg';
+				$data['document_url'] = ( $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ) ) ? : '/img/placeholder-image.jpg'; 
+			//	$data['document_url'] = '/img/placeholder-image.jpg';
 			}
 			elseif( ! empty( $data['document_url_base64'] ) )
 			{

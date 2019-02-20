@@ -367,14 +367,14 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$secDir = self::getSecondaryFolder() . $values['article_url'];
 	//	self::v( get_called_class() );
 	//	self::v( $values );
-		if( $previousData = json_decode ( file_get_contents( $secDir ), true ) )
+		if( $previousData = json_decode( file_get_contents( $secDir ), true ) )
 		{
 			$values += $previousData;
 		}
-	//	self::v( $values );
+	//	self::v( $values ); 
 	//	exit();
 		Ayoola_Doc::createDirectory( dirname( $secDir ) );
-		unset( $values['document_url_base64'], $values['download_base64'] );
+	//	unset( $values['document_url_base64'], $values['download_base64'] );
 		$values['has_secondary_data'] = true;   
 		file_put_contents( $secDir, json_encode( $values ) );  
 		return true;
