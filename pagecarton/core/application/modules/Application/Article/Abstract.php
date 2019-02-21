@@ -784,7 +784,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				var pc_autoloadFunc_' . $postListId . ' = function( done ) 
 					{
 						var a = document.createElement( "div" ); 
-						a.innerHTML = "<div title=\"Loading more...\" style=\"text-align: center;\"><img style="width:unset;min-idth:unset;height:unset;" alt=\"Loading more...\" src=\"' . Ayoola_Application::getUrlPrefix() . '/loading.gif?document_time=1\" ></div>";
+						a.innerHTML = "<div title=\"Loading more...\" style=\"text-align: center;\"><img style=\"width:unset;max-width:unset;\" alt=\"Loading more...\" src=\"' . Ayoola_Application::getUrlPrefix() . '/loading.gif?document_time=1\" ></div>";
 						var b = document.getElementById( "' . $postListId . '_pagination" );
 						b.appendChild( a );
 						var url = "' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . get_class( $this ) . '/?pc_post_list_autoload=1&pc_post_list_id=' . $postListId . '&list_page_number=" + pc_autoloadPostPageNumber_' . $postListId . ';
