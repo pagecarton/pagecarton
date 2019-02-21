@@ -720,7 +720,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				else
 				{
 					$item = array( 
-						'article_url' => 'javascript:', 
+						'article_url' => 'javascript:' . rand( 100, 8900 ), 
 						'allow_raw_data' => true, 
 						'not_real_post' => true, 
 						'always_allow_article' => $this->getParameter( 'article_types' ), 
@@ -729,7 +729,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						'publish' => true, 
 						'auth_level' => $articleSettings['allowed_writers'], 
 						'article_title' => '...', 
-						'article_description' => $this->getParameter( 'article_types' ) . ' will show here when its available', 
+						'article_description' => 'A short description for ' . $newArticleTypeToShow . ' will show here when its available.', 
 					);  
 				}
 

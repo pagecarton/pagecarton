@@ -194,17 +194,18 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 
 					$search[] = '<!--{{{0}}}' . $postTheme . '{{{0}}}-->';
 					$replace[] = '';  
-					
-					//	CLEAR HTML comments like <!--{{{0}}} {{{0}}}-->
-					$search[] = '<!--' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '';
-					$replace[] = '';  
-					$search[] = '' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '-->';
-					$replace[] = ''; 
 				//	var_export( $start );
 				//	var_export( $length );
-				//	var_export( $postTheme );
+				//	var_export( $postTheme );  
 					$replaceInternally = true;
 				}
+					
+				//	CLEAR HTML comments like <!--{{{0}}} {{{0}}}-->
+				$search[] = '<!--' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '';
+				$replace[] = '';  
+				$search[] = '' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '-->';
+				$replace[] = ''; 
+
 				$iSearch = array();
 				$iReplace = array();
 				$jSearch = array();
