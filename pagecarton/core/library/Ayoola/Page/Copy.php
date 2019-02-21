@@ -41,24 +41,69 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 			$this->createForm( 'Continue...', 'Copy contents of one page to another' );     
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
+			$this->setViewContent( '<h3 class="goodnews">Page copied successfully</h3>', true ); 
 			
 			$origin = $this->getPageFilesPaths( $values['origin'] );
 			$destination = $this->getPageFilesPaths( $values['destination'] );
+			if( $values['theme'] )
+			{
+				$parameters = array( 
+										'fake_values' => 
+															array( 
+																'old_page' => '/', 
+																'new_page' => $values['destination'] 
+															),
+										'no_init' => true,
+										);
+
+				$class = new Ayoola_Page_Layout_Pages_Duplicate( $parameters );
+				if( $class->init() )
+				{
+				//	$this->setViewContent( '<div>' . $class->view() . '</div>' ); 
+				}
+			//	var_export( $class->view() );
+
+            //    $fPaths = Ayoola_Page_Layout_Pages_Duplicate::getPagePaths( $themeName, $values['old_page'] );
+				$tPaths = Ayoola_Page_Layout_Pages::getPagePaths( Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ), $values['destination'] );
+			//	var_export( $values);
+			//	var_export( $tPaths);
+				foreach( $origin as $key => $file )
+				{			
+					$to = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $tPaths[$key];
+					Ayoola_Doc::createDirectory( dirname( $to ) );
+					if( $origin[$key] === $to || ! $tPaths[$key] || ! $origin[$key] )
+					{
+						continue;
+					}
+				//	var_export( $origin[$key] );
+				//	var_export( $tPaths[$key] );
+						//	Create the Directory  
+					if( is_file( $origin[$key] ) &&  ! @copy( $origin[$key], $to ) )  
+					{
+						$this->setViewContent( '<p>Contents "' . $origin[$key] . '" could not be copied to "' . $tPaths[$key] . '".</p>' ); 
+					}
+				
+				}
+	
+			}
 			
 		//	$values['default_url'] = $values['default_url'] == '/' ? '' : $values['default_url'];
 		//	var_export( $pageInfo );
-	//		var_export( $values );
+		//	var_export( $values );
 	//		var_export( $origin );
 		//	var_export( $destination );
 		//	var_export( $default );
-			$this->setViewContent( '<h3 class="goodnews">Page copied successfully</h3>', true ); 
 			foreach( $destination as $key => $file )
 			{			
+				if( $origin[$key] === $destination[$key] )
+				{
+					continue;
+				}
 				//	Create the Directory  
 				Ayoola_Doc::createDirectory( dirname( $file ) );
-				if( ! @copy( $origin[$key], $destination[$key] ) )  
+				if( is_file( $origin[$key] ) && ! @copy( $origin[$key], $destination[$key] ) )  
 				{
-				//	$this->setViewContent( '<p>Contents of "' . $origin[$key] . '" could not be copied to "' . $destination[$key] . '".</p>' ); 
+					$this->setViewContent( '<p>Contents of "' . $origin[$key] . '" could not be copied to "' . $destination[$key] . '".</p>' ); 
 				}
 			
 			}
@@ -92,6 +137,10 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 		$option = $filter->filter( $option );
 		$fieldset->addElement( array( 'name' => 'origin', 'label' => 'Origin Page', 'type' => 'Select', 'value' => @$settings['origin'] ), array( '' => 'Please Select' ) + $option );
 		$fieldset->addElement( array( 'name' => 'destination', 'label' => 'Destination Page', 'type' => 'Select', 'value' => @$settings['destination'] ), array( '' => 'Please Select' ) + $option );
+
+
+		$fieldset->addElement( array( 'name' => 'theme', 'label' => 'Copy to Theme Page', 'type' => 'Select', 'value' => @$settings['theme'] ), array( '' => 'No', 1 => 'Yes' ) );
+
 		$fieldset->addRequirement( 'origin', array( 'InArray' => $option + array( 'badnews' => 'Please select a page. ' ) ) ); 
 		$fieldset->addRequirement( 'destination', array( 'InArray' => $option + array( 'badnews' => 'Please select a page. ' ) ) ); 
 		

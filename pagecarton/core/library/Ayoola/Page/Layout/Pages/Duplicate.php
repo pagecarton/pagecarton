@@ -51,12 +51,18 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
             //  Code that runs the widget goes here...
 
             //  Output demo content to screen
-			if( ! $data = $this->getIdentifierData() ){ return false; }
+			if( ! $data = $this->getIdentifierData() ){ ; }
 		
 		//	var_export( $this->getFilename() );
             $url = @$_REQUEST['url'];
-            $themeName = strtolower( $data['layout_name'] );
-            
+            $themeName = strtolower( $data['layout_name'] ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) );
+            if( ! $themeName )
+            {
+                return false;
+            }
+        //    var_export( $data );
+        //    var_export( $themeName );
+           
             $allPages = self::getPages( $themeName, 'list' );
             $allPages = array_combine( $allPages, $allPages );
             if( ! in_array( $url, $allPages ) )
@@ -73,8 +79,10 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
             $fieldset->addElement( array( 'name' => 'new_page', 'label' => 'To', 'placeholder' => 'e.g. /new-page', 'type' => 'InputText', 'value' => null ) );
 
             $form->addFieldset( $fieldset );
+            $this->setForm( $form );
 			$this->setViewContent( $form->view(), true);
 			if( ! $values = $form->getValues() ){ return false; }
+        //    var_export( $values );
 
             $values['new_page'] = '' . trim( preg_replace( '|[^a-zA-Z0-9]|', '-', $values['new_page'] ), '-/ ' );
 
@@ -85,6 +93,7 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
                 $this->setViewContent( '<p class="badnews">Invalid page name</p>' ); 
                 return false;   
             }
+        //    var_export( $values );
 
        //     return;
             if( $values['old_page'] === '/' )
@@ -96,7 +105,12 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
                 $values['new_page'] = '/index';
             }
             $from = 'documents/layout/' . $themeName . '' . $values['old_page'] . '.html';
+        //    var_export( $values );
         //    var_export( $from );
+        //     $all = Ayoola_Loader::getValidIncludePaths( $from );
+        //    var_export( $all );
+
+
             if( ! $from = Ayoola_Loader::getFullPath( $from, array( 'prioritize_my_copy' => true ) ) )
             {
                 $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
@@ -111,21 +125,14 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
             }
 
        //     ;
-        //    var_export( $values );
+        //    var_export( $from );
+        //    var_export( $to );
 
             if( copy( $from, $to ) )
             {
-                $this->setViewContent( '<p class="goodnews">"' . $values['new_page'] . '" created successfully.</p>', true ); 
+                $this->setViewContent( '<p class="goodnews">"' . $values['new_page'] . '" theme page created successfully.</p>', true ); 
                 $fPaths = array();
                 $tPaths = array();
-            //    $themeName = strtolower( $data['layout_name'] );
-                /* 
-                $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $values['old_page'] . '/include';
-                $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $values['old_page'] . '/template';
-                $fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $values['old_page'] . '/data_json';
-                $tPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $values['new_page'] . '/include';
-                $tPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $values['new_page'] . '/template';
-                $tPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $values['new_page'] . '/data_json'; */
                 $fPaths = static::getPagePaths( $themeName, $values['old_page'] );
                 $tPaths = static::getPagePaths( $themeName, $values['new_page'] );
                 foreach( $fPaths as $key => $each )

@@ -51,6 +51,10 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
     {
         $fPaths = array();
     //    $themeName = strtolower( $data['layout_name'] );
+		if(  $pageThemeFileUrl === '/' )
+		{
+			$pageThemeFileUrl = '/index';
+		}
         $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
         $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 		$fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
