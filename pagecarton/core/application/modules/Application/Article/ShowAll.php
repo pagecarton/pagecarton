@@ -942,7 +942,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['article_description'] = trim( $data['article_description'] );
 			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
 			{
-				$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 200 );
+				$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 200 ) . '...';
 			}
 			if( $this->getParameter( 'length_of_description' ) )
 			{
@@ -960,7 +960,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			if( $this->getParameter( 'length_of_title' ) )
 			{
-				$titleToUse = trim( $data['article_title'] . ' - ' .  $data['article_description'], '- ' );
+				$titleToUse = trim( $data['article_title'], '- ' );
 				if( ! function_exists( 'mb_strimwidth' ) )
 				{
 					

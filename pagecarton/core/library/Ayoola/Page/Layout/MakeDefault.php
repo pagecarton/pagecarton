@@ -51,6 +51,8 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
             }
             $this->setViewContent( '<p class="goodnews">Theme successfully set as main site theme. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/PageCarton_NewSiteWizard">New Website Wizard</a></p>', true );   
 
+            //  some pages were not working fine after this
+            Application_Cache_Clear::viewInLine();
              // end of widget process
           
 		}  
