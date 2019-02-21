@@ -109,8 +109,16 @@ class Application_Article_Publisher extends Application_Article_Creator
                             $widget['parameters'] =  ( $widget['parameters'] ? : array() ) + array( 'add_a_new_post_classplayer' => '/tools/classplayer/get/name' );
              //   self::v( $widget['parameters'] );
                             $class = new $class( $widget['parameters'] );
-                            if( $class->getMarkupTemplateObjects() ) 
-                            foreach( $class->getMarkupTemplateObjects() as $eachWidget ) 
+                            $widgets = array();
+                            if( method_exists( $class, 'getMarkupTemplateObjects' ) )
+                            {
+                                $widgets = $class->getMarkupTemplateObjects();
+                            }
+                            else
+                            {
+                                $widgets[] = $class;
+                            }
+                            foreach( $widgets as $eachWidget ) 
                             {
             //    self::v( $eachWidget->getParameter() );
                             //    self::v( $eachWidget );
