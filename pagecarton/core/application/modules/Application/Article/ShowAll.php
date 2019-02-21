@@ -239,7 +239,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' ); 
 
 		//	Only allowed users can write
-		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) )
+		if( $this->getParameter( 'add_a_new_post' ) )
 		{
 			$addPostMessage = is_numeric( $this->getParameter( 'add_a_new_post' ) ) ? 'Create a new post' : $this->getParameter( 'add_a_new_post' );
 		}
@@ -692,43 +692,47 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
 		$this->_parameter['add_a_new_post_full_url'] = $addNewPostUrl;
 
-		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) && $this->getParameter( 'add_a_new_post' ) ) 
+		if( $this->getParameter( 'add_a_new_post' ) ) 
 		{ 
 			$myProfileInfo = Application_Profile_Abstract::getMyDefaultProfile();
 			do
 			{
 				$tempItem = array_pop( $values );
-
-			//	$tempItem = array_shift( $values );
-				//	make the first item a link to add a new post
-			//	$newArticleType = is_string( $this->getParameter( 'article_types' ) ) && $this->getParameter( 'article_types' ) ? $this->getParameter( 'article_types' ) : 'post';
-			//	self::v( $tempItem );
-			//	self::v( $howManyPostsToAdd );
-			//	$tempItem2 = $tempItem;
-			//	if( is_string( $tempItem2 ) )
+				if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) ) 
 				{
-				//	$tempItem2 = include( $tempItem );
+					$item = array( 
+						'article_url' => $addNewPostUrl . '&pcx=' . rand( 100, 8900 ), 
+						'allow_raw_data' => true, 
+						'not_real_post' => true, 
+					//	'article_type' => $newArticleType, 
+						'always_allow_article' => $this->getParameter( 'article_types' ), 
+						'category_name' => $this->getParameter( 'category_name' ), 
+						'document_url' => $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg', 
+						'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
+						'publish' => true, 
+						'auth_level' => $articleSettings['allowed_writers'], 
+			//			'article_tags' => '', 
+						'username' => Ayoola_Application::getUserInfo( 'username' ), 
+						'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
+						'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
+					)  + ( $myProfileInfo ? : array() );  
 				}
-			//	if( property_exists( $this, '_itemName' ) )
-				
-				//			$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
+				else
+				{
+					$item = array( 
+						'article_url' => 'javascript:', 
+						'allow_raw_data' => true, 
+						'not_real_post' => true, 
+						'always_allow_article' => $this->getParameter( 'article_types' ), 
+						'category_name' => $this->getParameter( 'category_name' ), 
+						'document_url' => $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg', 
+						'publish' => true, 
+						'auth_level' => $articleSettings['allowed_writers'], 
+						'article_title' => '...', 
+						'article_description' => $this->getParameter( 'article_types' ) . ' will show here when its available', 
+					);  
+				}
 
-				$item = array( 
-								'article_url' => $addNewPostUrl, 
-								'allow_raw_data' => true, 
-								'not_real_post' => true, 
-							//	'article_type' => $newArticleType, 
-								'always_allow_article' => $this->getParameter( 'article_types' ), 
-								'category_name' => $this->getParameter( 'category_name' ), 
-								'document_url' => $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg', 
-								'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
-								'publish' => true, 
-								'auth_level' => $articleSettings['allowed_writers'], 
-					//			'article_tags' => '', 
-								'username' => Ayoola_Application::getUserInfo( 'username' ), 
-								'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
-								'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
-							)  + ( $myProfileInfo ? : array() );  
 			//	$item ? array_unshift( $values, $item ) : null;
 				$tempItem ? array_push( $values, $tempItem ) : null;
 				$item ? array_push( $values, $item ) : null;
@@ -737,7 +741,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			while( --$howManyPostsToAdd );
 
 		}
-		
+	//	var_export( $values );   
 		$i = 0; //	counter
 		$j = 5; //	5 is our max articles to show
 	//	var_export( $this->_viewOption );  
