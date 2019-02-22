@@ -148,8 +148,17 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
     //    var_export( APPLICATION_PATH );
         if( ( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) === APPLICATION_PATH || Ayoola_Page::getDefaultDomain() == 'updates.pagecarton.org' ) && self::hasPriviledge() )
         {
-            unset( $options['simple'] );
-            unset( $options['export'] );
+        //    unset( $options['simple'] );
+        //    unset( $options['export'] );
+            if( ! empty( $values['backup_name'] ) )
+            {
+                $fieldset->addElement( array( 'name' => 'export_expiry', 'label' => 'Link Expiry', 'type' => 'Select', 'value' => @$values['export_expiry'] ? : array_keys( self::$_exportList ) ), array( '3600' => '1 hr', '36000' => '10 hrs' ) );
+                $fieldset->addRequirement( 'export_expiry', array( 'NotEmpty' => null ) );
+            }
+            else
+            {
+                unset( $options['export'] );
+            }
         } 
         else
         {
