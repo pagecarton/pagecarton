@@ -271,11 +271,40 @@ ayoola.xmlHttp =
 	//	alert( ajax );
 		ajax.open( method , linkObject.url, true );
 		ajax = ayoola.xmlHttp.setDefault( ajax );
+		if( ajax.setRequestHeader && linkObject.contentType )
+		{
+			linkObject.dontSetContentType = true;
+			ajax.setRequestHeader( 'Content-Type', linkObject.contentType );
+		}
 		if( method == 'POST' && ajax.setRequestHeader && ! linkObject.dontSetContentType )
 		{
 			ajax.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
 		}
 		ajax.setRequestHeader( 'Request-Type', 'xmlHttp' );
+		if( linkObject.callback )
+		{
+			if( ! linkObject.noSplash )
+			{
+				var splash = ayoola.spotLight.splashScreen();
+			}
+			var ajaxCallback = function()
+			{
+				//	alert( ajax );
+				if( ayoola.xmlHttp.isReady( ajax ) )
+				{
+					if( ! ajax.responseText )
+					{ 
+						return false;
+					}
+				//	alert( ajax.responseText );
+				//	alert( ajax.responseXML );
+					linkObject.callback( ajax );
+					splash ? splash.close() : null;
+				} 
+			}
+			ayoola.events.add( ajax, "readystatechange", ajaxCallback );
+
+		}
 		if( linkObject.container )
 		{
 			if( ! linkObject.noSplash )
@@ -339,7 +368,10 @@ ayoola.xmlHttp =
 		}	
 
 			//	Send ajax request
-		//	ajax.setRequestHeader( 'AYOOLA-PLAY-MODE', 'JSON' );
+		if( ajax.setRequestHeader && linkObject.playMode )
+		{
+			ajax.setRequestHeader( 'AYOOLA_PLAY_MODE', linkObject.playMode );
+		}
 	//		ajax.send( dataObject.data );
 		ajax = ayoola.xmlHttp.setDefault( ajax );
 		! linkObject.skipSend ? ajax.send( linkObject.data ) : null;

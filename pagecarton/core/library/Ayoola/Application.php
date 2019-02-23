@@ -1411,7 +1411,7 @@ class Ayoola_Application
 		}
 
 		//	Client-side	scripting
-		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . filemtime( __FILE__ ) );
+		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . time() );
 		Application_Style::addFile( Ayoola_Page::getPageCssFile() );
 		Application_Style::addFile( '//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css' );
 
@@ -1901,7 +1901,7 @@ class Ayoola_Application
 			$functionName = function_exists( 'posix_getuid' ) ? 'posix_getuid' : 'getmyuid';
 			self::$_userAccountInfo['userid'] =  $functionName();
 			$processUserInfo =  function_exists( 'posix_getpwuid' ) ? posix_getpwuid( self::$_userAccountInfo['userid'] ) : null;
-			self::$_userAccountInfo['username'] =  $processUserInfo['name'] ? : 'UNKWOWN';
+			self::$_userAccountInfo['username'] =  $processUserInfo['name'] ? : 'UNKWOWN';  
 		}
 		return $key ? self::$_userAccountInfo[$key] : self::$_userAccountInfo;
     }

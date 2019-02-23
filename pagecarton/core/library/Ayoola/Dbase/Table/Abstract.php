@@ -25,7 +25,7 @@ require_once 'Ayoola/Dbase/Table/Interface.php';
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-abstract class Ayoola_Dbase_Table_Abstract implements Ayoola_Dbase_Table_Interface
+abstract class Ayoola_Dbase_Table_Abstract  extends PageCarton_Widget implements Ayoola_Dbase_Table_Interface
 {
 	
     /**

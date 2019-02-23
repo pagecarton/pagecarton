@@ -215,7 +215,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 			$multiOptions = Ayoola_Form_MultiOptions::getInstance();
 			$multiOptions = $multiOptions->select();
 			$filter = new Ayoola_Filter_SelectListArray( 'multioptions_name', 'multioptions_title');
-			$multiOptions = array( '' => 'No Multi-Options' ) + $filter->filter( $multiOptions );  
+			$multiOptions = $filter->filter( $multiOptions );  
 	//		while( $j <= count( @$groupIds ) && $j < 9 )//	Do this for all each categories and don't forget the "uncategorized"
 			{ 
 				$i = 0;
@@ -272,7 +272,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 					
 					$newFieldSet->addElement( array( 'name' => 'element_validators', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_validators'][$i] ), $reqOptions );   
 					
-					$newFieldSet->addElement( array( 'name' => 'element_multioptions', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_multioptions'][$i] ), $multiOptions );   
+					$newFieldSet->addElement( array( 'name' => 'element_multioptions', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple',  'onchange' => 'ayoola.div.manageOptions( { database: "Ayoola_Form_MultiOptions", values: "multioptions_name", labels: "multioptions_title", element: this } );', 'type' => 'Select', 'value' => @$values['element_multioptions'][$i] ), array( '' => 'No Multi-Options' ) + $multiOptions + array( '__manage_options' => '[Manage Multi-Options]' ) );    
 					
 					$importanceOptions = array(
 												'' => 'Optional',

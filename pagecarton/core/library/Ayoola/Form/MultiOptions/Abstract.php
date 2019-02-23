@@ -65,13 +65,28 @@ class Ayoola_Form_MultiOptions_Abstract extends PageCarton_Widget
 
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'multioptions_title', 'type' => 'InputText', 'value' => @$values['multioptions_title'] ) ); 
- //       $fieldset->addElement( array( 'name' => 'multioptions_name', 'type' => 'InputText', 'value' => @$values['multioptions_name'] ) );   
-        $fieldset->addElement( array( 'name' => 'db_table_class', 'type' => 'InputText', 'value' => @$values['db_table_class'] ) ); 
-        $fieldset->addElement( array( 'name' => 'values_field', 'type' => 'InputText', 'value' => @$values['values_field'] ) ); 
-        $fieldset->addElement( array( 'name' => 'label_field', 'type' => 'InputText', 'value' => @$values['label_field'] ) ); 
+        $fieldset->addElement( array( 'name' => 'multioptions_title', 'label' => 'Options Name', 'type' => 'InputText', 'value' => @$values['multioptions_title'] ) ); 
+        $fieldset->addRequirement( 'multioptions_title', array( 'WordCount' => array( 3, 100 )  ) ); 
 
-		$fieldset->addLegend( $legend );
+        $options = Ayoola_Object_Dbase::getInstance()->select();
+        $filter = new Ayoola_Filter_SelectListArray( 'class_name', 'class_name');
+        $options = $filter->filter( $options );  
+
+        $fieldset->addElement( array( 'name' => 'db_table_class', 'label' => 'Database',  'onchange' => 'ayoola.div.manageOptions( { database: "Ayoola_Object_Dbase", values: "class_name", labels: "class_name", element: this } );', 'type' => 'Select', 'value' => @$values['db_table_class'] ), $options + array( '__manage_options' => '[Manage Databases]' ) ); 
+
+        $database = $this->getGlobalValue( 'db_table_class' );
+        if( Ayoola_Loader::loadClass( $database ) )
+        {
+            $options = array_keys( $database::getInstance()->getDataTypes() );
+            $options = array_combine( $options, $options );
+            $fieldset->addElement( array( 'name' => 'values_field', 'label' => 'Values Field', 'type' => 'Select', 'value' => @$values['values_field'] ), $options ); 
+            $fieldset->addRequirement( 'values_field', array( 'InArray' => array_keys( $options )  ) ); 
+            $fieldset->addElement( array( 'name' => 'label_field', 'label' => 'Labels Field', 'type' => 'Select', 'value' => @$values['label_field'] ), $options ); 
+            $fieldset->addRequirement( 'label_field', array( 'InArray' => array_keys( $options )  ) ); 
+}
+
+
+		$fieldset->addLegend( $legend );  
 		$form->addFieldset( $fieldset );   
 		$this->setForm( $form );
     } 

@@ -149,11 +149,12 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 		}
 		$max = max( $time );
 		// Checking if the client is validating his cache and if it is current.
-		if ( isset($_SERVER['HTTP_IF_MODIFIED_SINCE'] ) && ( strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) == $max ) ) {
+	//	if ( isset($_SERVER['HTTP_IF_MODIFIED_SINCE'] ) && ( strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) == $max ) ) 
+		{
 			// Client's cache IS current, so we just respond '304 Not Modified'.
-			header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s', $max ). ' GMT', true, 304 );
+		//	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s', $max ). ' GMT', true, 304 );
 		} 
-		else
+	//	else
 		{
 			// Image not cached or cache outdated, we respond '200 OK' and output the image.
 //			header('Cache-Control: private');

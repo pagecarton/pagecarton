@@ -292,7 +292,28 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 			$adapter->setRelationship( $previousRelationship );
  		}
 		while( false );
- 	//	var_export(  static::$_tableInfo );
+	 //	var_export(  static::$_tableInfo );
+		if( $_GET['show_class_data'] === get_class( $this ) )
+		{
+			$records = $this->query( 'TABLE', 'FETCH' );
+		//	var_export( $records );
+
+			if( ! empty( $_GET['pc_form_values'] ) && ! empty( $_GET['pc_form_labels'] ) )
+			{
+			//	var_export( $_GET['pc_form_values'] );
+				$filter = new Ayoola_Filter_SelectListArray( $_GET['pc_form_values'], $_GET['pc_form_labels'] );
+				$records = $filter->filter( $records );  
+			}
+		//	var_export( $records );
+		//	var_export( $_GET );
+		//	krsort( $records );
+			$this->_objectTemplateValues = $this->_objectData = $records;
+		//	var_export( $this->getParameter() );
+			$this->setViewContent( $this->query( 'TABLE', 'VIEW', $fieldsKey, $where ) );
+		}
+	// 	;
+		
+
 		
    }
 
@@ -541,9 +562,9 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      *
      * @return string
      */
-    public function view( Array $fieldsKey = null, Array $where = null )
-    {
-		return $this->query( 'TABLE', 'VIEW', $fieldsKey, $where );
-    }
+  //  public function view( Array $fieldsKey = null, Array $where = null )
+//    {
+	//	return $this->query( 'TABLE', 'VIEW', $fieldsKey, $where );
+//    }
 	// END OF CLASS
 }

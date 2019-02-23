@@ -38,8 +38,12 @@ class Ayoola_Form_MultiOptions_List extends Ayoola_Form_MultiOptions_Abstract
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
-		$list->listTitle = self::getObjectTitle();
-		$list->setData( $this->getDbData() );
+    $list->listTitle = self::getObjectTitle();
+    $table = $this->getTableClass();
+    $table = $table::getInstance( $table::SCOPE_PRIVATE );
+    $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+    $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+    $list->setData(  $table->select() );
 		$list->setListOptions( 
 								array( 
 							//			'Sub Domains' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_SubDomainList/\' );" title="">Sub Domains</a>',    
@@ -54,6 +58,7 @@ class Ayoola_Form_MultiOptions_List extends Ayoola_Form_MultiOptions_Abstract
                     'multioptions_title' => array( 'field' => 'multioptions_title', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'multioptions_name' => array( 'field' => 'multioptions_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'db_table_class' => array( 'field' => 'db_table_class', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    array( 'field' => 'db_table_class', 'value' =>  '<a target="_blank" href="/widgets/%FIELD%_List">Manage Data</a>', 'filter' =>  '' ), 
                     'values_field' => array( 'field' => 'values_field', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'label_field' => array( 'field' => 'label_field', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 

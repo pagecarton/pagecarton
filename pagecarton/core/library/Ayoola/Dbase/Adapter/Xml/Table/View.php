@@ -57,7 +57,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_View extends Ayoola_Dbase_Adapter_Xml_Table
 		$fieldKeys = array_fill_keys( $fieldKeys, null );
 	//	var_export( $fieldKeys );
 	//	foreach( $fieldKeys as $key => $value ){ $fieldKeys[$key] = null; }
-	//	var_export( $records );
+	//	var_export( $records );		
 		$paginate = new Ayoola_Paginator( $records );
 		$paginate->setKey( $this->getTableName() . '_id' );
 		$paginate->showSearchBox = true;

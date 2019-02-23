@@ -517,6 +517,78 @@ ayoola.div =
 	},
 
 	//	Returns form values as query String
+	manageOptions: function( formObject )
+	{
+		if( formObject.element.value != "__manage_options" )
+		{
+			return false;
+		}
+	//	alert( "sup" );
+		var spotlight = ayoola.spotLight.showLinkInIFrame( ayoola.pcPathPrefix + "/tools/classplayer/get/name/" + formObject.database + "_List?" );
+	//	alert( spotlight );
+		var updateOptions = function()
+		{ 
+			var link = ayoola.pcPathPrefix + "/tools/classplayer/get/name/" + formObject.database;
+			var response = ayoola.xmlHttp.fetchLink( 
+
+					{ 
+						url: link + '?pc_widget_output_method=JSON&show_class_data=' + formObject.database + '&pc_form_values=' +  formObject.values + '&pc_form_labels=' + formObject.labels,
+						playMode: 'JSON',
+						callback: function( ajax )
+						{
+							if( ayoola.xmlHttp.isReady( ajax ) )
+							{
+								if( ! ajax.responseText )
+								{ 
+									return false;
+								}
+								var obj = JSON.parse( ajax.responseText );
+							//	alert( ajax.responseText );
+
+								var el = formObject.element;
+
+								for ( var i = 0; i < el.length; i++ )
+								{
+									if( el.options[i].value == undefined )
+									{
+									//	continue;
+									}
+									var t = el.options[i].value.search( '__' );
+								//	alert( i );
+								//	alert( el.options[i].value );
+									if ( el.options[i].value != '' && t != 0 )
+									{
+									//	alert( t );
+									//	alert( el.options[i].innerHTML ); 
+										el.remove( i );
+										i--;
+									}	   
+								}
+								for( var key in obj ) 
+								{
+								//	alert( obj[key] );
+									option = document.createElement('option');
+									option.text = obj[key];
+									option.value = key;
+									formObject.element.add( option );
+								}
+							//	formObject.element.value = '';
+							//	alert( ajax.responseXML );
+							//	alert( ajax.responseXML );
+							} 
+						}
+					} 
+			);
+		//	alert( response );
+		}
+	//	alert( spotlight.container );
+	//	alert( spotlight.element );
+	//	alert( spotlight.deleteButtonElement );
+
+		ayoola.events.add( spotlight.deleteButtonElement, 'click', updateOptions );
+	},
+
+	//	Returns form values as query String
 	getFormValues: function( formObject, dontDisable )
 	{
 		try

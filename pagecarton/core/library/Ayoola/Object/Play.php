@@ -102,8 +102,9 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 						{
 							$playMode = $_REQUEST['pc_widget_output_method'];
 						}
-						$classToPlay = new $identifier['class_name']( array( 'play_mode' => @$playMode ) );
-		
+						$classToPlay = new $identifier['class_name'];
+						$classToPlay->setParameter( array( 'play_mode' => @$playMode ) );
+						$classToPlay->initOnce();
 						$this->setViewContent( $classToPlay->view(), true );
 						if( @$_REQUEST['close_on_success'] )
 						{ 
