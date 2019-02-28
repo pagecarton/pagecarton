@@ -49,13 +49,14 @@ class Application_User_AdminCreator extends Application_User_Creator
 			//	Don't run this if we are a product of multi-site
 			return false;
 		}
-		if( ! is_file( 'pc_installer.php' ) )
+	//	var_export( is_file( 'index.php' ) );
+		if( ! is_file( 'index.php' ) )
 		{
 			//	Don't run this if we didn't just install site
 			return false;
 		}
 
-		if( time() - filemtime( 'pc_installer.php' ) > 3600  )
+		if( time() - filemtime( 'index.php' ) > 3600  )
 		{
 			//	We must activate a new install within an hour
 			return false;
@@ -160,6 +161,18 @@ class Application_User_AdminCreator extends Application_User_Creator
 		if( $response = $table->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
 		{
 			//	Don't run this if we are a product of multi-site
+			return false;
+		}
+	//	var_export( time() - filemtime( 'index.php' ) );
+		if( ! is_file( 'index.php' ) )
+		{
+			//	Don't run this if we didn't just install site
+			return false;
+		}
+
+		if( time() - filemtime( 'index.php' ) > 3600  )
+		{
+			//	We must activate a new install within an hour
 			return false;
 		}
 		$userTable = 'Ayoola_Access_LocalUser';
