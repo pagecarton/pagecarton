@@ -49,6 +49,17 @@ class Application_User_AdminCreator extends Application_User_Creator
 			//	Don't run this if we are a product of multi-site
 			return false;
 		}
+		if( ! is_file( 'pc_installer.php' ) )
+		{
+			//	Don't run this if we didn't just install site
+			return false;
+		}
+
+		if( time() - filemtime( 'pc_installer.php' ) > 3600  )
+		{
+			//	We must activate a new install within an hour
+			return false;
+		}
 
 		//	set table to private so when parent have admin, we dont allow new admin on child
 		//	if not like this, it becomes a security breach on .com
