@@ -677,7 +677,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		//	probably because of xss
 		//	$_POST, $_GET was being cleared
 	//	$url .= 'previous_url=' . urlencode( Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . Ayoola_Page::getDefaultDomain() .  self::getPortNumber() . '' . $currentUrl );
-		$url .= 'previous_url=' . urlencode( '//' . Ayoola_Page::getDefaultDomain() .  self::getPortNumber() . '' . $currentUrl );
+		$url .= 'previous_url=' . urlencode( '//' . $_SERVER['HTTP_HOST'] .  self::getPortNumber() . '' . $currentUrl );
 	return $url;
     }	
 	

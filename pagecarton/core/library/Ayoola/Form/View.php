@@ -511,7 +511,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			$multiOptionsRecord = array();
 			if( $formInfo['element_multioptions'][$i] )
 			{
-				if( $multiOptions = Ayoola_Form_MultiOptions::getInstance()->selectOne( null, array( 'multioptions_name' => $formInfo['element_multioptions'][$i] ) ) )
+			if( $multiOptions = Ayoola_Form_MultiOptions::getInstance()->selectOne( null, array( 'multioptions_name' => $formInfo['element_multioptions'][$i] ) ) )
 				{
 					//	var_export( $multiOptions );
 					$tableDb = $multiOptions['db_table_class'];
@@ -523,6 +523,12 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 						$filter = new Ayoola_Filter_SelectListArray( $multiOptions['values_field'], $multiOptions['label_field'] );
 						$multiOptionsRecord = $filter->filter( $multiOptionsRecord );  
 						asort( $multiOptionsRecord );
+
+						if( self::hasPriviledge( 98 ) )
+						{
+							$elementInfo['onchange'] = 'ayoola.div.manageOptions( { database: "' . $tableDb . '", values: "' . $multiOptions['values_field'] . '", labels: "' . $multiOptions['label_field'] . '", element: this } );';
+							$multiOptionsRecord = $multiOptionsRecord + array( '__manage_options' => '[Manage Multi-Options]' );
+						}
 					}
 				//	var_export( $multiOptions['values_field'] );
 				//	var_export( $tableDb );
@@ -532,7 +538,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					}
 				}
 			}
-	//		var_export( $multiOptionsRecord );
+	//		var_export( $multiOptionsRecord ); 
 			$fieldsets[$key]->addElement( $options + $elementInfo , $multiOptionsRecord );
 			
 			if( $formInfo['element_validators'][$i] )

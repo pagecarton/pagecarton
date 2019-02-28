@@ -53,7 +53,7 @@ class Ayoola_Form_Editor extends Ayoola_Form_Abstract
 			if( ! $this->updateDb( $values ) ){ return false; }
 			
 	//		var_export( $data );
-			$this->setViewContent( 'Form saved Successfully', true ); 
+			$this->setViewContent( 'Form saved successfully', true ); 
 		}
 		catch( Exception $e )
 		{ 
