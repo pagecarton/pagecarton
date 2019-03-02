@@ -50,14 +50,16 @@ class Ayoola_Page_Info extends PageCarton_Widget
             //  Code that runs the widget goes here...
 
             //  Output demo content to screen
-		    $currentUrl = rtrim( Ayoola_Application::getPresentUri(), '/' ) ? : '/';
+		    $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
+		    $settings = Application_Settings_Abstract::getSettings( 'SiteInfo' );  
          //   if( )
+
 			switch( $currentUrl )
 			{
 				case '/tools/classplayer':
 				case '/object':
 		//		case '/pc-admin':
-				case '/widget':
+				case '/widgets':
 		//		case true:
 					//	Do nothing.
 					//	 had to go through this route to process for 0.00
@@ -65,14 +67,27 @@ class Ayoola_Page_Info extends PageCarton_Widget
                     {
                         $currentUrl = $_REQUEST['url'];
                     }
-				break;
+                    $title = explode( "/", Ayoola_Application::getRuntimeSettings( 'url' ) );
+                    $title = array_pop( $title );
+                    $title = ucwords( $title );
+                    if( class_exists( $title ) && method_exists( $title, 'getObjectTitle' ) && $title::getObjectTitle() )
+                    {
+                        $title = $title::getObjectTitle() ? : $title;
+                    }
+                    else
+                    {
+                        $title = str_ireplace( array( 'Ayoola_', 'Application_', 'Article_', 'Object_', 'Classplayer_', ), '', $title );  
+                        $title = ucwords( implode( ' ', explode( '_', $title ) ) );
+                        $title = ucwords( implode( ' ', explode( '-', $title ) ) );
+                    }
+                //    var_export( $title );
+                break;
 				default:
 
 				break;
 			}
 
             //  Output demo content to screen
-		    $settings = Application_Settings_Abstract::getSettings( 'SiteInfo' );
      //       self::v( $settings );   
             $url = $this->getParameter( 'url' ) ? : $currentUrl;
             $pageInfo = Ayoola_Page::getInfo( $url );
@@ -112,6 +127,12 @@ class Ayoola_Page_Info extends PageCarton_Widget
             {
             //    $pageInfo['title'] = ucwords( str_replace( '-', ' ', basename( $pageInfo['url'] ? : $currentUrl ) ) ? : 'Home Page' );
             }
+
+            if( ! empty( $title ) )
+            {
+                $pageInfo['title'] = $title;
+            }
+        //    var_export( $pageInfo );
 
             if( empty( $pageInfo['cover_photo'] ) )
             {

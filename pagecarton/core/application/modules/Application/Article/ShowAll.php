@@ -744,6 +744,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	var_export( $values );   
 		$i = 0; //	counter
 		$j = 5; //	5 is our max articles to show
+		if( intval( $this->getParameter( 'add_a_new_post' ) ) > 1 )
+		{
+			$j = $this->getParameter( 'add_a_new_post' );
+		}
 	//	var_export( $this->_viewOption );  
 		$this->_viewOption = intval( $this->_viewOption ) ? : $this->getParameter( 'no_of_post_to_show' );
 		$j = $this->_viewOption ? : $j;
@@ -1380,7 +1384,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( empty( $_GET['pc_post_list_autoload'] ) )
 		{
 			$this->_xml .= $pagination;
-			if( $template )
+			if( $template && $this->getParameter( 'pagination' ) )
 			{
 				$template = '' . $template . $pagination;
 	//			self::v( $pagination );
@@ -1412,7 +1416,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		else
 		{
-			@$this->_parameter['markup_template'] .= $linkToLoadMore;   
+			//	this adds markup to some that we want clean like slideshows
+			if( $this->getParameter( 'pagination' ) )
+			{
+				@$this->_parameter['markup_template'] .= $linkToLoadMore;   
+			}
 		}
 		//? '<a href="' . $nextPageLink . '"><input type="button" value="Next ' . ( @count( $chunk[( @$offset )] )) . '..." /></a>' : null;
  		if( ! $i ) 

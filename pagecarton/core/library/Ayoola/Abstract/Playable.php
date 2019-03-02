@@ -244,7 +244,9 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 						//	var_export( $eachValue );
 							$iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . '0' . $values['placeholder_suffix'];
 							$iReplace[] = $eachValue;  
-					//		var_export( $iSearch );
+				//			$iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'];
+				//			$iReplace[] = $eachValue; 
+					//		var_export( $iSearch ); 
 						}  
 						else
 						{

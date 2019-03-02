@@ -873,7 +873,7 @@ class Ayoola_Application
 		$uri = trim( $uri );
 		$explodedUri = explode( '.', $uri );
 		$extension = strtolower( array_pop( $explodedUri ) );
-	//	var_export( $extension );
+	//	PageCarton_Widget::v( $extension );
 		if( count( $explodedUri ) > 0 && strlen( $extension ) <= 15 )
 		{
 			try
@@ -1210,7 +1210,8 @@ class Ayoola_Application
 			//	var_export( $nameForModule );
 			//	var_export( $table->select() );
 				$multiSiteDir = '/' . $nameForModule;
-		//		var_export( $multiSiteDir );
+		//		PageCarton_Widget::v( $multiSiteDir );
+				
 				if( $sites = $table->select( null, array( 'directory' => $multiSiteDir ) ) )
 				{
 					Ayoola_Application::reset( array( 'path' => $multiSiteDir ) );
@@ -1222,8 +1223,12 @@ class Ayoola_Application
 					//	var_export( $requestedUri );
 					array_shift( $requestedUri );
 					//	var_export( $requestedUri );
-					//	$requestedUri = implode( $multiSiteDir, $requestedUri );
-					$requestedUri = array_shift( $requestedUri );
+
+					//	this have to be imploded because of the case of
+					//	https://www.comeriver.com/music/2019/02/25/music-smartex-iya-niwura.html
+					//	two cases of /music
+					$requestedUri = implode( $multiSiteDir, $requestedUri );
+				//	$requestedUri = array_shift( $requestedUri );
 					//	var_export( $requestedUri );
 					self::$_requestedUri = $requestedUri;
 					self::$_presentUri = null;
@@ -1411,7 +1416,8 @@ class Ayoola_Application
 		}
 
 		//	Client-side	scripting
-		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . time() );
+	//	Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . time() );
+		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=x_' . PageCarton::$version );
 		Application_Style::addFile( Ayoola_Page::getPageCssFile() );
 		Application_Style::addFile( '//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css' );
 

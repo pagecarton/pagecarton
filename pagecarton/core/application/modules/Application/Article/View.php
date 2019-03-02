@@ -70,7 +70,7 @@ class Application_Article_View extends Application_Article_Abstract
     {
 		try
 		{
-			//	var_export( $this->getIdentifierData() ); 
+			//	self::v( $this->getIdentifierData() ); 
 			if( ! $data = $this->getIdentifierData() )
 			{
 				return false;				

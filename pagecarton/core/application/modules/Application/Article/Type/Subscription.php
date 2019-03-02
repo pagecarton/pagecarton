@@ -134,6 +134,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		//	exit();
 			$_GET['article_url'] = $values['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
+			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
 			do
 			{
 		//			exit();		
@@ -146,6 +147,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					{
 
 						$pricing = $data['price_option_price'][$key];  
+						$pricing = str_replace( array( ',', ' ' ), '', $pricing );
 
 						//	$data['item_price']
 						if( empty( $data['price_option_price'][$key] ) && ! empty( $data['item_price'] ) )
@@ -235,6 +237,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					{
 						$values['subscription_label'] = ( $values['subscription_selections'] ? ( $values['subscription_selections'] . ' | ' ) : null ) . $values['subscription_label'];
 					}
+					$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
 					$values['price'] = $data['item_price'] + floatval( array_sum( @$values['product_option'] ? : array() ) );
 					$values['product_option'] = @$values['product_option'];
 					$values['cycle_name'] = 'each';

@@ -100,6 +100,15 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
      * Performs the whole widget running process
      * 
      */
+	public static function getDefaultTexts()
+    { 
+        return static::$_defaultTexts;
+    }
+
+    /**
+     * Performs the whole widget running process
+     * 
+     */
 	public static function getUpdates( $getSiteData = false )
     { 
         if( null !== @static::$_textUpdates[$getSiteData] )
@@ -371,12 +380,13 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         $themeInfo = self::getUpdates();
         $themeInfoAll = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => __CLASS__ ) );
         @$themeInfoAll = $themeInfoAll['data'];
-		if( empty( $themeInfo['dummy_search'] )  )
+		if( empty( $themeInfo['dummy_search'] ) )
 		{
-			$percentage += 100;
+		//	$percentage += 100;
 		}
 		elseif( ! @array_diff( $themeInfo['dummy_search'], $themeInfoAll['dummy_search'] ) )
 		{
+	    //	var_export( $percentage );
 			$percentage += 100;
 		}
 	//	var_export( $percentage );

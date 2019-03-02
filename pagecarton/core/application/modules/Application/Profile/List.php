@@ -52,7 +52,9 @@ class Application_Profile_List extends Application_Profile_Abstract
 		$table = $table::getInstance( $table::SCOPE_PRIVATE );
 		$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 		$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
-		$list->setData( $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) ) );  
+		$data = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) );
+	//	self::v( $data );
+		$list->setData( $data );  
 		$this->setIdColumn( 'profile_url' );
 		$list->setKey( 'profile_url' );
 		$list->setNoRecordMessage( 'You have not created any profile yet. <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Creator/">Create!</a>' );

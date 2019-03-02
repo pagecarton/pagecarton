@@ -46,7 +46,6 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 			{ 
 				//	lets be able to delete username
 				$userDir = Application_Profile_Abstract::getProfileFilesDir( Ayoola_Application::getUserInfo( 'username' ) );
-		//      var_export( $userDir );
 				if( is_dir( $userDir ) )
 				{
 					$data = array( 'profile_url' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ) ) + Ayoola_Application::getUserInfo();
@@ -56,10 +55,11 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 					return false; 
 				}
 			}
+		//	var_export( $data );
 			
 			//	Only the owner or priviledged users can delete
 			$profileSettings = Application_Profile_Settings::getSettings( 'Profiles' );
-			if( ! self::isOwner( $data['username'] ) && ! self::hasPriviledge( $profileSettings['allowed_editors'] ) ){ return false; }
+			if( ! self::isOwner( $data['username'] ) && ! self::hasPriviledge( $profileSettings['allowed_editors'] ? : 98 ) ){ return false; }
 			
 			$this->createConfirmationForm( 'Delete forever',  'Delete information and files of this handle: "'  . $data['profile_url'] . '". This cannot be undone. You should create a backup of its content and have it saved elsewhere before you delete.' );
 			$this->setViewContent( $this->getForm()->view(), true );

@@ -146,6 +146,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			@$content = $this->getParameter( 'codes' ) ? : $this->getParameter( 'preserved_content' );
 		}
 		$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
+		if( empty( $textUpdatesSettings['dummy_search'] ) )
+		{
+			$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
+		}
+	//	self::v( $textUpdatesSettings );  
 		$content = str_replace( $textUpdatesSettings['dummy_search'], $textUpdatesSettings['dummy_replace'], $content );
 	//	self::v( $content );  
 	//	exit();          

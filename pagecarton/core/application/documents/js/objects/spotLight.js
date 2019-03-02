@@ -162,11 +162,12 @@ ayoola.spotLight =
 		//	Check if there is a classPlayerUrl
 	//	var barHtmlText = '<div style="width:100%;background-color:#fff;line-height:1em;cursor:move;border:1em groove #ccc;z-index:200000;color:#60F;position:fixed;top:0px;">close</div>';
 	//	alert( changeElementId );
+		//	onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode.parentNode.parentNode ); ayoola.xmlHttp.refreshElement( \'' + changeElementId + '\' ); 			ayoola.style.removeClass( document.body, \'pc_no_scroll\' );ayoola.style.removeClass( document.body.parentNode, \'pc_no_scroll\' );"
 		var deleteButtonId = 'deletButtonForSpotLight' + Math.random();
 		element.innerHTML = '<div style="opacity:0.8; display:none;" title="" class="title_bar">\
 		<div class="pc_container">\
 		  <span  class="pc_content_title" style=\'display: inline-block;\'></span>\
-		  <span class="title_button close_button ' + deleteButtonId + '" id="' + deleteButtonId + '" style="" name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode.parentNode.parentNode ); ayoola.xmlHttp.refreshElement( \'' + changeElementId + '\' ); 			ayoola.style.removeClass( document.body, \'pc_no_scroll\' );ayoola.style.removeClass( document.body.parentNode, \'pc_no_scroll\' );"> x </span>\
+		  <span class="title_button close_button ' + deleteButtonId + '" id="' + deleteButtonId + '"  href="javascript:;" class="" title="Delete this object" > x </span>\
 		  <a style="display:none;" class="title_button" name="" href="javascript:;" title="Click to show or hide advanced settings" onclick="var b = this.parentNode.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'\'; } this.nextElementSibling.style.display = \'\';this.style.display = \'none\';"> &square; </a>  \
 		  <a class="title_button" target="_blank" href="javascript:;" title="Open this widget in a new window or tab" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  this.href = b[a].contentWindow.location.href };"> &#10140; </a>  \
 		  <a class="title_button" name="" href="javascript:;" title="Refresh" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  b[a].contentWindow.location.reload(true); };"> &#8635; </a>  \
@@ -272,6 +273,7 @@ ayoola.spotLight =
 			ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
 			ayoola.xmlHttp.refreshElement( changeElementId ); 
 			ayoola.xmlHttp.refreshElement( changeElement );
+			elementContainer.parentNode.removeChild( elementContainer ); 
 		}
 		ayoola.spotLight.delete = deleteIt;	
 		ayoola.events.add( deleteButton, 'click', deleteIt ); 
@@ -283,7 +285,6 @@ ayoola.spotLight =
 			if( confirm( "Close the modal box?" ) )
 			{
 				deleteIt();
-				elementContainer.parentNode.removeChild( elementContainer ); 
 				ayoola.style.removeClass( document.body, "pc_no_scroll" );
 				ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
 			}

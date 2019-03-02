@@ -102,7 +102,8 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 	//	self::v( $this->getParameter( 'new_menu_name' ) );
 	//	self::v( $this->getParameter( 'new_menu_name' ) );
 		$menuName = $this->getViewOption() ? : $this->getParameter( 'menu_name' );
-		if( ! $menuName && $this->getParameter( 'new_menu_name' ) )
+		$menuName = $menuName ? : 'mainnav';
+		if( ! $menuName && $this->getParameter( 'new_menu_name' ) ) 
 		{
 			$filter = new Ayoola_Filter_Name();
 			$filter->replace = '-';

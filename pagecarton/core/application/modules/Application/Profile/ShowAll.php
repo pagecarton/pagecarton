@@ -135,8 +135,6 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 				'URL' => array( 'field' => 'profile_url', 'value' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/%FIELD%\' );" href="javascript:">/%FIELD%</a>' ), 
 				'Type' => array( 'field' => 'auth_name', 'value' => '%FIELD%' ), 
 				' ' => array( 'field' => 'logon_link', 'value' => '%FIELD%' ), 
-		//		'   ' => array( 'field' => 'profile_url', 'value' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/%FIELD%\' );" href="javascript:">Preview</a>' ), 
-	//			'  ' => array( 'field' => 'profile_url', 'value' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Share/?url=/%FIELD%&title=%FIELD%\' );" href="javascript:">Share</a>' ), 
 				'     ' => array( 'field' => 'profile_url', 'value' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>' ), 
 				'    ' => '<a title="Delete" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" href="javascript:">x</a>', 
 			)

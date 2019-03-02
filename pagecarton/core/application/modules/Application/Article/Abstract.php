@@ -332,7 +332,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public static function updateProfile( $values )
     {
 	//	var_export( $values['username'] );
-		if( $values['username'] )
+		if( $values['profile_url'] )
 		{
 			//	Let's save some info into the owners account
 			$profilePath = Application_Profile_Abstract::getProfilePath( $values['username'] );
@@ -340,7 +340,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$profileInfo = @include $profilePath;
 		//	var_export( $profileInfo );
 			@$profileInfo['posts'] = $profileInfo['posts'] ? : array();
-			@$profileInfo['profile_url'] = $values['username'];
+		//	@$profileInfo['profile_url'] = $values['username'];
+			@$profileInfo['profile_url'] = $values['profile_url'];
 		//	$profileInfo['posts']['url'][$values['article_url']] = array( 'article_url' => $values['article_url'] );
 			$profileInfo['posts']['all'][$values['article_url']] = array( 'article_url' => $values['article_url'], 'file_size' => $values['file_size'] );
 			$profileInfo['posts']['size'][$values['article_url']] = $values['file_size'];
@@ -1296,8 +1297,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$values['post_type'] = $postTypesAvailable[$values['article_type']] ? : $values['article_type'];
 		}
 //		self::v( $articleTypeWeUsing );
-//		self::v( Application_Article_Type_TypeAbstract::$presetTypes );
-		if( ! $postTypeInfo && ! array_key_exists( $articleTypeWeUsing, $options ) && ! array_key_exists( $articleTypeWeUsing, Application_Article_Type_TypeAbstract::$presetTypes ) && ! empty( $_REQUEST['article_type'] ) && ! empty( $_REQUEST['true_post_type'] ) && self::hasPriviledge( array( 99, 98 ) ) )
+	//	self::v( ( ! $postTypeInfo && ! array_key_exists( $articleTypeWeUsing, $options ) && ! array_key_exists( $articleTypeWeUsing, Application_Article_Type_TypeAbstract::$presetTypes ) && ! empty( $_REQUEST['article_type'] ) && ! empty( $_REQUEST['true_post_type'] ) && self::hasPriviledge( array( 99, 98 ) ) ) );
+		if( ! $postTypeInfo && ! array_key_exists( $articleTypeWeUsing, $options ) && ! array_key_exists( $articleTypeWeUsing, Application_Article_Type_TypeAbstract::$presetTypes ) && ! empty( $_REQUEST['article_type'] ) && ( ! empty( $_REQUEST['true_post_type'] ) ||  ! empty( $_REQUEST['post_type_custom_fields'] ) ) && self::hasPriviledge( array( 99, 98 ) ) )
 		{
 			//	auto setup post type
 			$postTypeInfo = array( 

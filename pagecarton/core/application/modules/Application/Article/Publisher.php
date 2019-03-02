@@ -123,7 +123,7 @@ class Application_Article_Publisher extends Application_Article_Creator
             //    self::v( $eachWidget->getParameter() );
                             //    self::v( $eachWidget );
                                 $values = $eachWidget->getObjectTemplateValues();
-                                $noRequired = ( $eachWidget->getParameter( 'no_of_post_to_show' ) ? : 1 );
+                                $noRequired = ( $eachWidget->getParameter( 'add_a_new_post' ) ? : 1 );
                                 $postType = ( $eachWidget->getParameter( 'article_types' ) ? : $eachWidget->getParameter( 'true_post_type' ) ) ? : ( method_exists( $eachWidget, 'getItemName' ) && $eachWidget::getItemName() ? $eachWidget::getItemName() : 'Post' );
                                 $category = $eachWidget->getParameter( 'category_name' ) ? : null;
                                 $kind = $category . $postType;
