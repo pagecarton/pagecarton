@@ -519,9 +519,27 @@ ayoola.div =
 	//	Returns form values as query String
 	manageOptions: function( formObject )
 	{
-		if( formObject.element.value != "__manage_options" )
+		switch( formObject.element.value )
 		{
-			return false;
+			case "__manage_options":
+			
+
+			break;
+			case "__custom":
+				var a = prompt( 'Custom Parameter Name', '' ); 
+				if( ! a )
+				{ 
+					formObject.element.value = ''; 
+					return false; 
+				} 
+				var option = document.createElement( 'option' ); 
+				option.text = a; 
+				option.value = a; 
+				formObject.element.add( option ); 
+				formObject.element.value = a;
+				return true;
+			default:
+				return false;
 		}
 	//	alert( "sup" );
 		var spotlight = ayoola.spotLight.showLinkInIFrame( ayoola.pcPathPrefix + "/tools/classplayer/get/name/" + formObject.database + "_List?" );

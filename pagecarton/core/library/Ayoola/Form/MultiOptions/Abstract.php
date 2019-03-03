@@ -71,8 +71,20 @@ class Ayoola_Form_MultiOptions_Abstract extends PageCarton_Widget
         $options = Ayoola_Object_Dbase::getInstance()->select();
         $filter = new Ayoola_Filter_SelectListArray( 'class_name', 'class_name');
         $options = $filter->filter( $options );  
+    //    var_export( $this->getGlobalValue( 'db_table_class' ) );
+        if( $this->getGlobalValue( 'db_table_class' ) && empty( $options[$this->getGlobalValue( 'db_table_class' )] ) )
+        {
+            $options[$this->getGlobalValue( 'db_table_class' )] = $this->getGlobalValue( 'db_table_class' );
+        }
+        if( ! empty( $values['db_table_class'] ) && empty( $options[@$values['db_table_class']] ) )
+        {
+            $options[@$values['db_table_class']] = @$values['db_table_class'];
+        }
 
-        $fieldset->addElement( array( 'name' => 'db_table_class', 'label' => 'Database',  'onchange' => 'ayoola.div.manageOptions( { database: "Ayoola_Object_Dbase", values: "class_name", labels: "class_name", element: this } );', 'type' => 'Select', 'value' => @$values['db_table_class'] ), $options + array( '__manage_options' => '[Manage Databases]' ) ); 
+        $fieldset->addElement( array( 'name' => 'db_table_class', 'label' => 'Database',  'onchange' => 'ayoola.div.manageOptions( { database: "Ayoola_Object_Dbase", values: "class_name", labels: "class_name", element: this } );', 'type' => 'Select', 'value' => @$values['db_table_class'] ), $options + array( '__manage_options' => '[Manage Databases]', '__custom' => '[Custom Databases]' ) ); 
+
+        $options = array( Ayoola_Form_MultiOptions::SCOPE_PRIVATE, Ayoola_Form_MultiOptions::SCOPE_PROTECTED );
+        $fieldset->addElement( array( 'name' => 'accessibility', 'label' => 'Database Accessibility', 'type' => 'Select', 'value' => @$values['accessibility'] ), array_combine( $options, $options ) ); 
 
         $database = $this->getGlobalValue( 'db_table_class' );
         if( Ayoola_Loader::loadClass( $database ) )
@@ -83,11 +95,38 @@ class Ayoola_Form_MultiOptions_Abstract extends PageCarton_Widget
             $fieldset->addRequirement( 'values_field', array( 'InArray' => array_keys( $options )  ) ); 
             $fieldset->addElement( array( 'name' => 'label_field', 'label' => 'Labels Field', 'type' => 'Select', 'value' => @$values['label_field'] ), $options ); 
             $fieldset->addRequirement( 'label_field', array( 'InArray' => array_keys( $options )  ) ); 
-}
+
+            $i = 0;
+
+        }
 
 
 		$fieldset->addLegend( $legend );  
-		$form->addFieldset( $fieldset );   
+        $form->addFieldset( $fieldset ); 
+    //    var_export( $values );
+        if( Ayoola_Loader::loadClass( $database ) )
+        {
+            $fieldset->addElement( array( 'name' => 'labx', 'type' => 'Html' ), array( 'html' => '<label>Query Where Clause</label>' ) ); 
+            do
+            {
+                            
+                $fieldset = new Ayoola_Form_Element; 
+                $fieldset->hashElementName = false;
+                $fieldset->container = 'div';
+                {
+                    $fieldset->duplicationData = array( 'add' => '+ New Query Parameter', 'remove' => '- Remove Above Query Parameter', 'counter' => 'parameter_counter', );
+                    $fieldset->allowDuplication = true;  
+                }
+                $fieldset->addElement( array( 'name' => 'db_where', 'label' => '', 'style' => 'max-width:40%;', 'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['db_where'][$i] ), $options ); 
+                $fieldset->addElement( array( 'name' => 'db_where_value', 'label' => '', 'style' => 'max-width:40%;', 'multiple' => 'multiple', 'type' => 'InputText', 'value' => @$values['db_where_value'][$i] ) ); 
+                $form->addFieldset( $fieldset );
+                $i++;
+            }
+            while( ! empty( $values['db_where'][$i] ) );
+        }
+    
+        
+
 		$this->setForm( $form );
     } 
 
