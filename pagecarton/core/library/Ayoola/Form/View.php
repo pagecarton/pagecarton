@@ -518,7 +518,18 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					if( Ayoola_Loader::loadClass( $tableDb ) && $tableDb::getInstance() instanceof Ayoola_Dbase_Table_Interface  )
 					{
 					//	$multiOptions = $tableDb::getInstance();
-						$multiOptionsRecord = $tableDb::getInstance()->select();
+						$scope = $tableDb::SCOPE_PROTECTED === $multiOptions['accessibility'] ? $tableDb::SCOPE_PROTECTED : $tableDb::SCOPE_PRIVATE;
+						$tableDb = $tableDb::getInstance( $scope );
+						$tableDb->getDatabase()->getAdapter()->setAccessibility( $scope );
+						$tableDb->getDatabase()->getAdapter()->setRelationship( $scope );
+					//	var_export( $scope );
+						$where = null;
+						if( ! empty( $multiOptions['db_where'] ) )
+						{
+							$where = array_combine( $multiOptions['db_where'], $multiOptions['db_where_value'] );
+						//	self::v( $tableDb->select() );
+						}
+						$multiOptionsRecord = $tableDb->select( null, $where );
 						require_once 'Ayoola/Filter/SelectListArray.php';
 						$filter = new Ayoola_Filter_SelectListArray( $multiOptions['values_field'], $multiOptions['label_field'] );
 						$multiOptionsRecord = $filter->filter( $multiOptionsRecord );  
@@ -526,7 +537,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 
 						if( self::hasPriviledge( 98 ) )
 						{
-							$elementInfo['onchange'] = 'ayoola.div.manageOptions( { database: "' . $tableDb . '", values: "' . $multiOptions['values_field'] . '", labels: "' . $multiOptions['label_field'] . '", element: this } );';
+							$elementInfo['onchange'] = 'ayoola.div.manageOptions( { database: "' . $multiOptions['db_table_class'] . '", values: "' . $multiOptions['values_field'] . '", labels: "' . $multiOptions['label_field'] . '", element: this } );';
 							$multiOptionsRecord = $multiOptionsRecord + array( '__manage_options' => '[Manage Multi-Options]' );
 						}
 					}

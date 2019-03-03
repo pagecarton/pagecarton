@@ -25,7 +25,7 @@ class Ayoola_Form_MultiOptions extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.0';  
+    protected $_tableVersion = '0.2';  
 
     /**
      * Table data types and declaration
@@ -37,6 +37,9 @@ class Ayoola_Form_MultiOptions extends PageCarton_Table
   'multioptions_title' => 'INPUTTEXT',
   'multioptions_name' => 'INPUTTEXT',
   'db_table_class' => 'INPUTTEXT',
+  'accessibility' => 'INPUTTEXT',
+  'db_where' => 'JSON',
+  'db_where_value' => 'JSON',
   'values_field' => 'INPUTTEXT',
   'label_field' => 'INPUTTEXT',
 );

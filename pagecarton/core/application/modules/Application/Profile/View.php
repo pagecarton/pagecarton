@@ -59,7 +59,8 @@ class Application_Profile_View extends Application_Profile_Abstract
 		{
 			if( ! $data = $this->getIdentifierData() )
 			{
-		//		if( )
+        //		if( )
+                return false;
 			}
 			if( ! @$this->_parameter['markup_template'] ) 
 			{  
@@ -73,9 +74,9 @@ class Application_Profile_View extends Application_Profile_Abstract
                     <div class="' . $this->getParameter( 'css_class_of_inner_content' ) . '">
                         <div class="pc-profile-image-div" style="background-image: url(\'{{{display_picture}}}\'); margin-right:1em;">&nbsp;</div>
                         <div style="">
-                            <h3 style="margin-top:0;">' . $displayName . '</h3>
-                            <p>{{{profile_description}}}</p>
-                            <p><i class="fa fa-share-alt"></i> {{{link_to_view_profile}}}</p>
+                            <h3 class="pc_give_space" style="margin-top:0;">' . $displayName . '</h3>
+                            <p class="pc_give_space">{{{profile_description}}}</p>
+                            <p class="pc_give_space"><i class="fa fa-share-alt"></i> {{{link_to_view_profile}}}</p>
                         </div>
                         <div style="clear:both;"></div>
                     </div>
