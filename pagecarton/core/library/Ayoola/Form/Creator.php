@@ -38,8 +38,10 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 		try
 		{
 			@$mode = $_REQUEST['mode'] ? : 'new';
+			$table = Ayoola_Form_Table::getInstance( Ayoola_Form_Table::SCOPE_PROTECTED );
+			$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );  
 			
-			if( $options = Ayoola_Form_Table::getInstance()->select() )
+			if( $options = $table->select( null, null, array( 'xxx' ) ) )
 			{
 
 				$this->setViewContent( '
@@ -64,15 +66,16 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 		
 				//	self::v( $_POST );
 					if( ! $values = $form->getValues() ){ return false; }
-
-					$formData = Ayoola_Form_Table::getInstance()->selectOne( null, array( 'form_name' => $values['form_to_duplicate'] ) );
+					//	var_export( $table->select() );
+				
+					$formData = $table->selectOne( null, array( 'form_name' => $values['form_to_duplicate'] ) );
 
 					$formData['form_title'] = $values['new_form_title'];
 					$filter = new Ayoola_Filter_Name();
 					$filter->replace = '-';
 					$formData['form_name'] = strtolower( $filter->filter( $formData['form_title'] ) );
 
-					Ayoola_Form_Table::getInstance()->insert( $formData );
+					$table->insert( $formData );
 
 				//	$creator = new Ayoola_Form_Creator( array( 'fake_values' => $formData ) );
 					$this->setViewContent( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $formData['form_name'] . '"> Preview it!</a></div>', true ); 
