@@ -720,7 +720,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				else
 				{
 					$item = array( 
-						'article_url' => 'javascript:' . rand( 100, 8900 ), 
+						'article_url' => '#' . rand( 100, 8900 ) . ';', 
 						'allow_raw_data' => true, 
 						'not_real_post' => true, 
 						'always_allow_article' => $this->getParameter( 'article_types' ), 

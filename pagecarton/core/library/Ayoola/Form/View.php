@@ -524,7 +524,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 						$tableDb->getDatabase()->getAdapter()->setRelationship( $scope );
 					//	var_export( $scope );
 						$where = null;
-						if( ! empty( $multiOptions['db_where'] ) )
+						if( ! empty( $multiOptions['db_where'] ) && ! empty( $multiOptions['db_where_value'][0] ) )
 						{
 							$where = array_combine( $multiOptions['db_where'], $multiOptions['db_where_value'] );
 						//	self::v( $tableDb->select() );

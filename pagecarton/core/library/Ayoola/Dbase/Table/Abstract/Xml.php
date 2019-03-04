@@ -30,105 +30,105 @@ require_once 'Ayoola/Dbase/Table/Abstract/Exception.php';
 abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstract implements Ayoola_Dbase_Table_Interface
 {
 
-    /**
-     * The DataTypes of the Table
-     *
-     * @param array
-     * 
-     */
-    protected $_dataTypes;
+		/**
+		 * The DataTypes of the Table
+		 *
+		 * @param array
+		 * 
+		 */
+		protected $_dataTypes;
 
-    /**
-     * The Version of the present table (SVN COMPATIBLE)
-     *
-     * @param int
-     */
+		/**
+		 * The Version of the present table (SVN COMPATIBLE)
+		 *
+		 * @param int
+		 */
 
-    /**
-     * The Version of the general table module
-     *
-     * @param int
-     */
-    protected static $_version = '1.00';
+		/**
+		 * The Version of the general table module
+		 *
+		 * @param int
+		 */
+		protected static $_version = '1.00';
 
-    /**
-     * The Accessibility of the Table
-     *
-     * @param string
-     */
-    protected $_accessibility = SELF::DEFAULT_SCOPE;
+		/**
+		 * The Accessibility of the Table
+		 *
+		 * @param string
+		 */
+		protected $_accessibility = SELF::DEFAULT_SCOPE;
 
-    /**
-     * 
-     *
-     * @param array
-     */
-    protected static $_tableInfo;
+		/**
+		 * 
+		 *
+		 * @param array
+		 */
+		protected static $_tableInfo;
 
-    /**
-     * 
-     *
-     * @param bool
-     */
-    protected static $_alreadyRan;
+		/**
+		 * 
+		 *
+		 * @param bool
+		 */
+		protected static $_alreadyRan;
 
-    /**
-     * This property determines how this table relates to other table
-     *
-     * @param string
-     */
-    protected $_relationship = SELF::DEFAULT_SCOPE;
+		/**
+		 * This property determines how this table relates to other table
+		 *
+		 * @param string
+		 */
+		protected $_relationship = SELF::DEFAULT_SCOPE;
 
-    /**
-     * Table version number
-     *
-     * @param string
-     */
-    protected $_tableVersion = '0.01';
+		/**
+		 * Table version number
+		 *
+		 * @param string
+		 */
+		protected $_tableVersion = '0.01';
 
-    /**
-     * Time to hold the cache before refreshing
-     *
-     * @param int
-     */
-    public static $cacheTimeOut;
+		/**
+		 * Time to hold the cache before refreshing
+		 *
+		 * @param int
+		 */
+		public static $cacheTimeOut;
 	
 	const DEFAULT_SCOPE = SELF::SCOPE_PRIVATE;
 	const SCOPE_PRIVATE = 'PRIVATE';
 	const SCOPE_PROTECTED = 'PROTECTED';
 	const SCOPE_PUBLIC = 'PUBLIC';
 	
-    /**
-     * Constructor
-     *
-     * @param 
-     * 
-     */
-    public function __construct()
-    {
-    //    var_export( get_called_class() );
-    //    var_export( "\r\n" );
+		/**
+		 * Constructor
+		 *
+		 * @param 
+		 * 
+		 */
+		public function __construct()
+		{
+		//    var_export( get_called_class() );
+		//    var_export( "\r\n" );
 
-        // wish i can do this...
-    //    $this = static::getInstance();
-    //    get_class( $this );
+				// wish i can do this...
+		//    $this = static::getInstance();
+		//    get_class( $this );
  
-     //   if( empty( static::$_alreadyRan[get_class( $this )] ) )
-        {
-     //     var_export( get_class( $this ) );
-          //  everything here needs to be ran only once
-          $this->init(); 
-          static::$_alreadyRan[get_class( $this )] = true;
-       }
-    }
+		 //   if( empty( static::$_alreadyRan[get_class( $this )] ) )
+				{
+		 //     var_export( get_class( $this ) );
+					//  everything here needs to be ran only once
+					$this->init(); 
+					static::$_alreadyRan[get_class( $this )] = true;
+			 }
+		}
 	
-    /**
-     * Initialize the Table
-     *
-     * @param void
-     */
-    public function init()
-    {
+		/**
+		 * Initialize the Table
+		 *
+		 * @param void
+		 */
+		public function init()
+		{
 		//	We are using the XML Adapter
 		require_once 'Ayoola/Dbase.php';
 		$database = new Ayoola_Dbase( array( 'adapter' => 'Xml' ) );
@@ -148,15 +148,15 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
  		do
 		{
  	//		var_export(  static::$_tableInfo );
-   //    exit();   
-      $backupFile =  static::$_tableInfo['filename'] . '.backup';
-  //			var_export( $backupFile );
-   //      exit();   
-      
+	 //    exit();   
+			$backupFile =  static::$_tableInfo['filename'] . '.backup';
+	//			var_export( $backupFile );
+	 //      exit();   
+			
 			if( ! $this->exists() && ! file_exists( $backupFile ) )
 	//		if( ! $this->exists() )
 			{
-     //   var_export(  static::$_tableInfo );
+		 //   var_export(  static::$_tableInfo );
 				//	cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
 				break;
 			}
@@ -167,31 +167,31 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 			if( ! empty(  static::$_tableInfo['table_info'] ) && ( @ static::$_tableInfo['table_info']['table_version'] === $this->_tableVersion && @ static::$_tableInfo['table_info']['module_version'] === self::$_version ) )
 			{ 
 /*        if( file_exists( $backupFile ) && time() - filemtime( $backupFile ) > 86400 )
-        { 
-            $values = include( $backupFile );
-            $num = count( $values );
-            rename( $backupFile, $backupFile . '.backup' );
-            set_time_limit( 86400 );
+				{ 
+						$values = include( $backupFile );
+						$num = count( $values );
+						rename( $backupFile, $backupFile . '.backup' );
+						set_time_limit( 86400 );
 //              PageCarton_Widget::v( $num );   
 
-            foreach( $values as $intK => $each )
-            { 
-              try
-              {
-              //    PageCarton_Widget::v( $intK );   
-            //      PageCarton_Widget::v( $each['form_name'] );   
-                $this->insert( $each ); 
-              }
-              catch( Exception $e )
-              {  
-                null;
-              }
-            }
-           
-          //  lets just try to revive the saved data
-    //      self::v( $backupFile );
-            PageCarton_Widget::v( $backupFile );
-        }
+						foreach( $values as $intK => $each )
+						{ 
+							try
+							{
+							//    PageCarton_Widget::v( $intK );   
+						//      PageCarton_Widget::v( $each['form_name'] );   
+								$this->insert( $each ); 
+							}
+							catch( Exception $e )
+							{  
+								null;
+							}
+						}
+					 
+					//  lets just try to revive the saved data
+		//      self::v( $backupFile );
+						PageCarton_Widget::v( $backupFile );
+				}
 */				break; 
 			}
  	//
@@ -201,63 +201,63 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 			$adapter->setRelationship( self::SCOPE_PRIVATE );
 			$adapter->cache = false;
 			$values = $this->select();
-  	//	var_export( $values );
-   //   var_export( static::$_tableInfo['filename'] );
-    //  exit();
+		//	var_export( $values );
+	 //   var_export( static::$_tableInfo['filename'] );
+		//  exit();
 	
 			//	Backup the previous table
-      if( ! empty( static::$_tableInfo['filename'] ) )
-      {
-        $backupFile =  static::$_tableInfo['filename'] . '.backup';
-        if( file_exists( $backupFile ) )
-        { 
-    //      self::v( $backupFile );
-          
-        //	if( time() - filemtime( $backupFile ) < 86400 )
-          if( time() - filemtime( $backupFile ) < 86400 )
-          {
-            //	Backup in progress. Don't duplicate progress unless its more than one day
-            break;
-          }
-          else
-          {
-            //	Something has gone wrong, restore the backup automagically.
-            $values = include( $backupFile );  
-        //    var_export( $values );
-            $newBackUpFile = $backupFile . '_error_' . filemtime( $backupFile );
-            rename( $backupFile, $newBackUpFile ); 
-      //      var_export( $backupFile );
-      //    var_export( $newBackUpFile );   
-        //    exit;
-               Application_Log_View_Error::log( "There is an error on an XML Database. The back up file {$backUpFile} as been copied to {$newBackUpFile} for safe keep." );
-  //   		var_export(  static::$_tableInfo );  
+			if( ! empty( static::$_tableInfo['filename'] ) )
+			{
+				$backupFile =  static::$_tableInfo['filename'] . '.backup';
+				if( file_exists( $backupFile ) )
+				{ 
+		//      self::v( $backupFile );
+					
+				//	if( time() - filemtime( $backupFile ) < 86400 )
+					if( time() - filemtime( $backupFile ) < 86400 )
+					{
+						//	Backup in progress. Don't duplicate progress unless its more than one day
+						break;
+					}
+					else
+					{
+						//	Something has gone wrong, restore the backup automagically.
+						$values = include( $backupFile );  
+				//    var_export( $values );
+						$newBackUpFile = $backupFile . '_error_' . filemtime( $backupFile );
+						rename( $backupFile, $newBackUpFile ); 
+			//      var_export( $backupFile );
+			//    var_export( $newBackUpFile );   
+				//    exit;
+							 Application_Log_View_Error::log( "There is an error on an XML Database. The back up file {$backUpFile} as been copied to {$newBackUpFile} for safe keep." );
+	//   		var_export(  static::$_tableInfo );  
 
-          }
-        }
-        else
-        {
-          file_put_contents( $backupFile, '<?php return ' . var_export( $values, true ) . ';' );		
-        }
-      //	copy(  static::$_tableInfo['filename'], $backupFile );
-      }
+					}
+				}
+				else
+				{
+					file_put_contents( $backupFile, '<?php return ' . var_export( $values, true ) . ';' );		
+				}
+			//	copy(  static::$_tableInfo['filename'], $backupFile );
+			}
 			//	Store the values in the backup file
 		//	var_export( $values );
 		try
-    {
-        $this->drop();
-    }	
-    catch( Exception $e )
-    {
-      null;
-    }		
-    try
-    {
-        $this->create();
-    }	
-    catch( Exception $e )
-    {
-      null;
-    }
+		{
+				$this->drop();
+		}	
+		catch( Exception $e )
+		{
+			null;
+		}		
+		try
+		{
+				$this->create();
+		}	
+		catch( Exception $e )
+		{
+			null;
+		}
 			
 			
 		//	exit( __LINE__ );
@@ -315,64 +315,64 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 		
 
 		
-   }
+	 }
 
-    /**
-     * Returns true if the table exists
-     *
-     * @return boolean
-     */
-    public function exists()
-    {
+		/**
+		 * Returns true if the table exists
+		 *
+		 * @return boolean
+		 */
+		public function exists()
+		{
 		return $this->query( 'TABLE', 'EXISTS', $this->getTableName() );
-    }
+		}
 
-    /**
-     * Select all records matching a criteria
-     *
-     * @param Array Fields to Select
-     * @param Array The Criteria
-     * @return Array
-     */
-    public function select( Array $fieldsToSelect = null, Array $where = null, Array $options = null )
-    {
-      try
-      {
-		    $result = $this->query( 'TABLE', 'FETCH', $fieldsToSelect, $where, $options );
-      }
-      catch( Exception $e )
-      {
+		/**
+		 * Select all records matching a criteria
+		 *
+		 * @param Array Fields to Select
+		 * @param Array The Criteria
+		 * @return Array
+		 */
+		public function select( Array $fieldsToSelect = null, Array $where = null, Array $options = null )
+		{
+			try
+			{
+				$result = $this->query( 'TABLE', 'FETCH', $fieldsToSelect, $where, $options );
+			}
+			catch( Exception $e )
+			{
 				return array();
-      }
+			}
 		
 	//	krsort( $result );
 		
 	//	  return array_map( 'unserialize', array_unique( array_map( 'serialize', $result ) ) );
-		  return $result;
-    }
+			return $result;
+		}
 
-    /**
-     * Select one records matching a criteria
-     *
-     * @param Array The Criteria
-     * @return Array
-     */
-    public function selectOne( Array $fieldsToSelect = null, Array $where = null, Array $options = null )
-    {
-      $options['limit'] = 1;
-      $data = $this->select( $fieldsToSelect, $where, $options );
-      if( ! empty( $data ) ){ $data = array_shift( $data ); }
-      return $data;
-    }
+		/**
+		 * Select one records matching a criteria
+		 *
+		 * @param Array The Criteria
+		 * @return Array
+		 */
+		public function selectOne( Array $fieldsToSelect = null, Array $where = null, Array $options = null )
+		{
+			$options['limit'] = 1;
+			$data = $this->select( $fieldsToSelect, $where, $options );
+			if( ! empty( $data ) ){ $data = array_shift( $data ); }
+			return $data;
+		}
 
-    /**
-     * Insert a record into the database
-     *
-     * @param Array Values
-     * @return boolean
-     */
-    public function insert( Array $values, $options = null )
-    {
+		/**
+		 * Insert a record into the database
+		 *
+		 * @param Array Values
+		 * @return boolean
+		 */
+		public function insert( Array $values, $options = null )
+		{
 		if( ! $this->exists() )
 		{
 			try
@@ -390,116 +390,116 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 		}
 		$values = $this->filterValues( $values );
 		$result = $this->query( 'TABLE', 'INSERT', $values, $options );
-    static::$_alreadyRan[get_class( $this )] = true;
-    return $result;
-    }
+		static::$_alreadyRan[get_class( $this )] = true;
+		return $result;
+		}
 
-    /**
-     * Updates one or more record in the database
-     *
-     * @param Array Values
-     * @param Array Criteria
-     * @return boolean
-     */
-    public function update( Array $values, Array $where = null )  
-    {
-	  	if( ! $this->exists() )
+		/**
+		 * Updates one or more record in the database
+		 *
+		 * @param Array Values
+		 * @param Array Criteria
+		 * @return boolean
+		 */
+		public function update( Array $values, Array $where = null )  
+		{
+			if( ! $this->exists() )
 			{
-     
+		 
 				//	cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
 				return false;
 			}
 		$values = $this->filterValues( $values );
 		$result = $this->query( 'TABLE', 'UPDATE', $values, $where );
-    static::$_alreadyRan[get_class( $this )] = true;
-    return $result;
-    }
+		static::$_alreadyRan[get_class( $this )] = true;
+		return $result;
+		}
 
-    /**
-     * Deletes on or more records in the database
-     *
-     * @param Array Criteria
-     * @return boolean
-     */
-    public function delete( Array $where = null, array $options = null )
-    {
-	  	if( ! $this->exists() )
+		/**
+		 * Deletes on or more records in the database
+		 *
+		 * @param Array Criteria
+		 * @return boolean
+		 */
+		public function delete( Array $where = null, array $options = null )
+		{
+			if( ! $this->exists() )
 			{
-     
+		 
 				//	cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
 				return false;
 			}
-		  $result = $this->query( 'TABLE', 'DELETE', $where, $options );
-      static::$_alreadyRan[get_class( $this )] = true;
-      return $result;
-    } 
+			$result = $this->query( 'TABLE', 'DELETE', $where, $options );
+			static::$_alreadyRan[get_class( $this )] = true;
+			return $result;
+		} 
 
-    /**
-     * Creates a table in the current database
-     *
-     * @param Array Datatypes
-     * @return boolean
-     */
-    public function create( Array $dataTypes = null )
-    {
+		/**
+		 * Creates a table in the current database
+		 *
+		 * @param Array Datatypes
+		 * @return boolean
+		 */
+		public function create( Array $dataTypes = null )
+		{
 		if( is_null( $dataTypes ) ){ $dataTypes = $this->getDataTypes(); }
 		//	exit( get_class( $this ) );
 		//	exit( var_export( $dataTypes ) );
 //var_export( $this->_tableVersion );
 		//	var_export( $dataTypes );
-		  $result = $this->query( 'TABLE', 'CREATE', array( 'table_name' => $this->getTableName(), 
+			$result = $this->query( 'TABLE', 'CREATE', array( 'table_name' => $this->getTableName(), 
 														'table_version' => $this->_tableVersion,
 														'module_version' => self::$_version,
 														'table_class' => get_class( $this ) ), $dataTypes );
-      static::$_alreadyRan[get_class( $this )] = true;
-      return $result;
-    }
+			static::$_alreadyRan[get_class( $this )] = true;
+			return $result;
+		}
 
-    /**
-     * Alters a table
-     *
-     * @param string Table Name
-     * @param Array Datatypes
-     * @return boolean
-     */
-    public function alter( $tableName = null, Array $dataTypes = null )
-    {
+		/**
+		 * Alters a table
+		 *
+		 * @param string Table Name
+		 * @param Array Datatypes
+		 * @return boolean
+		 */
+		public function alter( $tableName = null, Array $dataTypes = null )
+		{
 		$result = $this->query( 'TABLE', 'ALTER', $tableName, $dataTypes );
 		if( ! is_null( $tableName ) ){ $this->getDatabase()->getAdapter()->setTableName( $tableName ); }
-    static::$_alreadyRan[get_class( $this )] = true;
+		static::$_alreadyRan[get_class( $this )] = true;
 		return $result;
 		
-    }
+		}
 
-    /**
-     * Destroys table
-     *
-     * @return boolean
-     */
-    public function drop()
-    {
-		  $result = $this->query( 'TABLE', 'DROP' );
-      static::$_alreadyRan[get_class( $this )] = true;
-      return $result;
-   }
+		/**
+		 * Destroys table
+		 *
+		 * @return boolean
+		 */
+		public function drop()
+		{
+			$result = $this->query( 'TABLE', 'DROP' );
+			static::$_alreadyRan[get_class( $this )] = true;
+			return $result;
+	 }
 
-    /**
-     * Get the table info
-     *
-     * @return array
-     */
-    public function describe()
-    {
+		/**
+		 * Get the table info
+		 *
+		 * @return array
+		 */
+		public function describe()
+		{
 		return $this->query( 'TABLE', 'DESCRIBE' );
-    }
+		}
 
-    /**
-     * Select Classname as the database
-     *
-     * @param Classname
-     */
-    public function selectDatabase( $className = null )
-    {
+		/**
+		 * Select Classname as the database
+		 *
+		 * @param Classname
+		 */
+		public function selectDatabase( $className = null )
+		{
 		if( is_null( $className ) )
 		{
 			$className = get_class( $this );
@@ -514,55 +514,55 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 		}
 //	if( ! $class = Ayoola_Loader::loadClass( $className ) ){ $className = null; }
 		$this->getDatabase()->getAdapter()->select( $className );
-    }
+		}
 
-    /**
-     * Filter values that their keys are not a field on the table
-     *
-     * @param array
-     * @return array
-     */
-    public function filterValues( Array $values )
-    {	
+		/**
+		 * Filter values that their keys are not a field on the table
+		 *
+		 * @param array
+		 * @return array
+		 */
+		public function filterValues( Array $values )
+		{	
 		 static::$_tableInfo = $this->query( 'TABLE', 'DESCRIBE' );
 		foreach( $values as $key => $value )
 		{
 			if( ! array_key_exists( $key,  static::$_tableInfo['data_types'] ) ){ unset( $values[$key] ); }
 		}
 		return $values;
-    }
+		}
 
-    /**
-     * Returns the _dataTypes property
-     *
-     * @param void
-     * @return array
-     */
-    public function getDataTypes()
-    {	
+		/**
+		 * Returns the _dataTypes property
+		 *
+		 * @param void
+		 * @return array
+		 */
+		public function getDataTypes()
+		{	
 		if( is_array( $this->_dataTypes ) )
 		{
 			return $this->_dataTypes;
 		}
-		  throw new Ayoola_Dbase_Table_Abstract_Exception( 'No Datatype on file. Set with ' . __CLASS__ . '::setDataTypes()' );
-    }
+			throw new Ayoola_Dbase_Table_Abstract_Exception( 'No Datatype on file. Set with ' . __CLASS__ . '::setDataTypes()' );
+		}
 
-    /**
-     * Sets the _dataTypes property
-     *
-     * @param array
-     */
-    public function setDataTypes( Array $dataTypes )
-    {	
-		  $this->_dataTypes = $dataTypes;
-    }
+		/**
+		 * Sets the _dataTypes property
+		 *
+		 * @param array
+		 */
+		public function setDataTypes( Array $dataTypes )
+		{	
+			$this->_dataTypes = $dataTypes;
+		}
 
-    /**
-     * View the Table
-     *
-     * @return string
-     */
-  //  public function view( Array $fieldsKey = null, Array $where = null )
+		/**
+		 * View the Table
+		 *
+		 * @return string
+		 */
+	//  public function view( Array $fieldsKey = null, Array $where = null )
 //    {
 	//	return $this->query( 'TABLE', 'VIEW', $fieldsKey, $where );
 //    }

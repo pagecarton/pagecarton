@@ -279,7 +279,7 @@ class Ayoola_Application
 		}
 
 
-		@$storage->storageNamespace = __CLASS__ . 'x-' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
+		@$storage->storageNamespace = __CLASS__ . 'x-x--' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve();
 		if( $data && ! $forceReset && ! @$_GET['reset_domain_information'] )
@@ -377,6 +377,7 @@ class Ayoola_Application
 			}
 			//	var_export( $primaryDomainInfo );
 			//	exit();
+			$userDomain = false;
 			if( ! $data['domain_settings'] )
 			{
 				//	look for domain in the users table
@@ -384,6 +385,7 @@ class Ayoola_Application
 				{
 					//	link it to the profile
 					$subDomain = $userDomainInfo['profile_url'];
+					$userDomain = true;
 					$data['domain_settings'] = $userDomainInfo;
 					$data['domain_settings']['domain_options'] = array( 'user_subdomains' );
 					$data['domain_settings']['main_domain'] = $where['domain_name'];
@@ -627,6 +629,27 @@ class Ayoola_Application
 					}
 					if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) && $userInfo  )
 					{
+						//	we have a user subdomain
+						//	do we have a custom domain?
+						//	look for domain in the users table
+						if( $userDomainInfo = Application_Domain_UserDomain::getInstance()->selectOne( null, array( 'profile_url' => strtolower( $subDomain ) ) ) )
+						{
+							//	link it to the profile
+						//	var_export( 'http://' . $userDomainInfo['domain_name'] . '/pc_check.txt' );
+						//	var_export( PageCarton_Widget::fetchLink( 'http://' . $userDomainInfo['domain_name'] . '/pc_check.txt' ) );
+						//	exit();
+							if( empty( $userDomain ) && empty( $_REQUEST['pc_clean_url_check'] ) && PageCarton_Widget::fetchLink( 'http://' . $userDomainInfo['domain_name'] . '/pc_check.txt?pc_clean_url_check=1' ) )
+							{
+								header( 'Location: ' . $protocol . '://' . $userDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );
+								exit();
+							}
+						//	var_export( $userDomainInfo );
+						//	exit();
+						}
+						//	var_export( $userDomainInfo );
+						//	exit();
+
+
 				//		var_export( $data['domain_settings'] );
 						Ayoola_Application::$GLOBAL = $userInfo;
 						$data['domain_settings'] = $data['domain_settings'] ? : array();

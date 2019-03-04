@@ -37,44 +37,97 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
     {
 		try
 		{
-			$this->createForm( 'Continue..', 'Create a new form' );
-			$this->setViewContent( $this->getForm()->view() );
-
-		//	self::v( $_POST );
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
-		//	self::v( $values );
-
-			if( ! empty( $_REQUEST['form_name'] ) )
-			{
-				$filter = new Ayoola_Filter_Name();
-				$values['form_name'] = strtolower( $filter->filter( '' . $_REQUEST['form_name'] ) );
-			}
-			if( $this->getDbTable()->selectOne( null, array( 'form_name' => $values['form_name'] ) ) )
-			{
-				$this->getForm()->setBadnews( 'Please enter a different name for this form. There is a form with the same name: ' . $values['form_name'] );
-				$this->setViewContent( $this->getForm()->view(), true );
-				return false; 
-			}
+			@$mode = $_REQUEST['mode'] ? : 'new';
 			
-			//	Notify Admin
-			$link = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $values['form_name'] . '';
-			$mailInfo = array();
-			$mailInfo['subject'] = 'A new form created';
-			$mailInfo['body'] = 'A new form has been created on your website with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
-			
-			Preview the form on: ' . $link . '
-			';
-			try
+			if( $options = Ayoola_Form_Table::getInstance()->select() )
 			{
-		//		var_export( $mailInfo );
-				@Ayoola_Application_Notification::mail( $mailInfo );
+
+				$this->setViewContent( '
+								<a class="pc-btn" href="?mode=new"> <i class="fa fa-plus pc_give_space"></i>New Form <i class="pc_give_space"></i></a>
+								<a class="pc-btn" href="?mode=duplicate"><i class="fa fa-edit pc_give_space"></i> Duplicate Existing Form <i class="pc_give_space"></i></a>
+								
+								', true );
 			}
-			catch( Ayoola_Exception $e ){ null; }
-		//	if( ! $this->insertDb() ){ return false; }
-			if( $this->insertDb( $values ) )
-			{ 
-				$this->setViewContent( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a></div>', true ); 
-	//			$this->setViewContent( '<a class="" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a>' ); 
+			switch( $mode )
+			{
+				case 'duplicate':
+
+					$filter = new Ayoola_Filter_SelectListArray( 'form_name', 'form_title' );
+					$options = $filter->filter( $options );  
+					$form = new Ayoola_Form();
+					$form->submitValue = 'Duplicate';
+					$fieldset = new Ayoola_Form_Element();
+					$fieldset->addElement( array( 'name' => 'form_to_duplicate', 'type' => 'Select', 'value' => @$values['form_to_duplicate'] ), $options );
+					$fieldset->addElement( array( 'name' => 'new_form_title', 'type' => 'InputText', 'value' => @$values['new_form_title'] ) );
+					$form->addFieldset( $fieldset );
+					$this->setViewContent( $form->view() );
+		
+				//	self::v( $_POST );
+					if( ! $values = $form->getValues() ){ return false; }
+
+					$formData = Ayoola_Form_Table::getInstance()->selectOne( null, array( 'form_name' => $values['form_to_duplicate'] ) );
+
+					$formData['form_title'] = $values['new_form_title'];
+					$filter = new Ayoola_Filter_Name();
+					$filter->replace = '-';
+					$formData['form_name'] = strtolower( $filter->filter( $formData['form_title'] ) );
+
+					Ayoola_Form_Table::getInstance()->insert( $formData );
+
+				//	$creator = new Ayoola_Form_Creator( array( 'fake_values' => $formData ) );
+					$this->setViewContent( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $formData['form_name'] . '"> Preview it!</a></div>', true ); 
+
+
+				//	self::v( $values );
+
+				break;
+				default:
+					$this->createForm( 'Continue..', 'Create a new form' );
+					$this->setViewContent( $this->getForm()->view() );
+		
+				//	self::v( $_POST );
+					if( ! $values = $this->getForm()->getValues() ){ return false; }
+					case 'new':
+					$this->createForm( 'Continue..', 'Create a new form' );
+					$this->setViewContent( $this->getForm()->view() );
+		
+				//	self::v( $_POST );
+					if( ! $values = $this->getForm()->getValues() ){ return false; }
+				//	self::v( $values );
+		
+					if( ! empty( $_REQUEST['form_name'] ) )
+					{
+						$filter = new Ayoola_Filter_Name();
+						$values['form_name'] = strtolower( $filter->filter( '' . $_REQUEST['form_name'] ) );
+					}
+					if( $this->getDbTable()->selectOne( null, array( 'form_name' => $values['form_name'] ) ) )
+					{
+						$this->getForm()->setBadnews( 'Please enter a different name for this form. There is a form with the same name: ' . $values['form_name'] );
+						$this->setViewContent( $this->getForm()->view(), true );
+						return false; 
+					}
+					
+					//	Notify Admin
+					$link = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $values['form_name'] . '';
+					$mailInfo = array();
+					$mailInfo['subject'] = 'A new form created';
+					$mailInfo['body'] = 'A new form has been created on your website with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+					
+					Preview the form on: ' . $link . '
+					';
+					try
+					{
+				//		var_export( $mailInfo );
+						@Ayoola_Application_Notification::mail( $mailInfo );
+					}
+					catch( Ayoola_Exception $e ){ null; }
+				//	if( ! $this->insertDb() ){ return false; }
+					if( $this->insertDb( $values ) )
+					{ 
+						$this->setViewContent( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a></div>', true ); 
+			//			$this->setViewContent( '<a class="" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a>' ); 
+					}
+				break;
 			}
 		}
 		catch( Exception $e )

@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DOCUMENT_ELEMENT table_name="multioptions" creation_time="1535351347" modified_time="1535351347" table_version="0.0" module_version="1.00" table_class="Ayoola_Form_MultiOptions" creation_ip="2130706433">
-  <RECORDS autoId="3">
+<DOCUMENT_ELEMENT table_name="multioptions" creation_time="1551694425" modified_time="1551694425" table_version="0.2" module_version="1.00" table_class="Ayoola_Form_MultiOptions" creation_ip="2130706433">
+  <RECORDS autoId="4">
     <TABLE_ROW ROW_ID="1">
-      <TABLE_FIELD FIELD_KEY="multioptions_name"><![CDATA[_yesornoanswer]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="multioptions_id"><![CDATA[1535351347-0-1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1535351347]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="multioptions_title"><![CDATA[Yes or No Answer]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="db_table_class"><![CDATA[Application_YesOrNo]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="values_field"><![CDATA[answer]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="label_field"><![CDATA[answer]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1535353246]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="2">
       <TABLE_FIELD FIELD_KEY="multioptions_title"><![CDATA[Gender]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="db_table_class"><![CDATA[Application_Gender]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="values_field"><![CDATA[gender]]></TABLE_FIELD>
@@ -20,10 +10,39 @@
       <TABLE_FIELD FIELD_KEY="multioptions_id"><![CDATA[1535353742-0-2]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1535353742]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="accessibility"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="db_where"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="db_where_value"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="multioptions_name"><![CDATA[_yesornoanswer]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="multioptions_id"><![CDATA[1535351347-0-1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1535351347]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="multioptions_title"><![CDATA[Yes or No Answer]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="db_table_class"><![CDATA[Application_YesOrNo]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="values_field"><![CDATA[answer]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="label_field"><![CDATA[answer]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1535353246]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="accessibility"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="db_where"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="db_where_value"><![CDATA[null]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="multioptions_title"><![CDATA[Traffic Sources]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="db_table_class"><![CDATA[Application_TrafficSource]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="accessibility"><![CDATA[PRIVATE]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="values_field"><![CDATA[source]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="label_field"><![CDATA[source]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="db_where"><![CDATA[[&quot;source&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="db_where_value"><![CDATA[[&quot;&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="multioptions_name"><![CDATA[_trafficsources]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="multioptions_id"><![CDATA[1551694899-0-3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1551694899]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>
-    <DATA_TYPES multioptions_title="INPUTTEXT" multioptions_name="INPUTTEXT" db_table_class="INPUTTEXT" values_field="INPUTTEXT" label_field="INPUTTEXT" multioptions_id="INPUTTEXT" creation_time="INPUTTEXT" modified_time="INPUTTEXT"/>
+    <DATA_TYPES multioptions_title="INPUTTEXT" multioptions_name="INPUTTEXT" db_table_class="INPUTTEXT" accessibility="INPUTTEXT" db_where="JSON" db_where_value="JSON" values_field="INPUTTEXT" label_field="INPUTTEXT" multioptions_id="INPUTTEXT" creation_time="INPUTTEXT" modified_time="INPUTTEXT"/>
     <FOREIGN_KEYS/>
     <RELATIVES/>
   </TABLE_SETTINGS>

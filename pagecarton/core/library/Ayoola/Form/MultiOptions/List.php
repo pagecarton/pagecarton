@@ -58,7 +58,7 @@ class Ayoola_Form_MultiOptions_List extends Ayoola_Form_MultiOptions_Abstract
                     'multioptions_title' => array( 'field' => 'multioptions_title', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'multioptions_name' => array( 'field' => 'multioptions_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'db_table_class' => array( 'field' => 'db_table_class', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-                    array( 'field' => 'db_table_class', 'value' =>  '<a target="_blank" href="/widgets/%FIELD%_List">Manage Data</a>', 'filter' =>  '' ), 
+                    array( 'field' => 'db_table_class', 'value' =>  '<a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/%FIELD%_List">Manage Data</a>', 'filter' =>  '' ), 
                     'values_field' => array( 'field' => 'values_field', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'label_field' => array( 'field' => 'label_field', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
