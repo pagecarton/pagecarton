@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="trafficsource" creation_time="1551695008" modified_time="1551695008" table_version="0.0" module_version="1.00" table_class="Application_TrafficSource" creation_ip="2130706433">
-  <RECORDS autoId="8">
+  <RECORDS autoId="9">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="source"><![CDATA[WhatsApp]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trafficsource_id"><![CDATA[1551695008-0-1]]></TABLE_FIELD>
@@ -41,6 +41,12 @@
       <TABLE_FIELD FIELD_KEY="source"><![CDATA[Other Sources]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trafficsource_id"><![CDATA[1551695107-0-7]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1551695107]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="8">
+      <TABLE_FIELD FIELD_KEY="source"><![CDATA[Media]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trafficsource_id"><![CDATA[1551697381-0-8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1551697380]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
