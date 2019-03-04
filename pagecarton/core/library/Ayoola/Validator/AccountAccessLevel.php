@@ -53,6 +53,7 @@ class Ayoola_Validator_AccountAccessLevel extends Ayoola_Validator_Abstract
 		$validator = new Ayoola_Validator_EmailAddress();
 		$validUserInfo = array();
 		
+		$this->userInfo['username'] = strtolower( trim( $this->userInfo['username'] ) );
 		if( $validator->validate( $this->userInfo['username'] ) )
 		{
 			$this->userInfo['email'] = $this->userInfo['username'];

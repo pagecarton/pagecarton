@@ -273,7 +273,7 @@ class Application_Article_View extends Application_Article_Abstract
 	//	$this->_xml .= $shareLinks;  
 		$this->_objectData['share_link'] = $shareLinks;
 		$this->_objectTemplateValues['share_link'] = $shareLinks;
-		if( self::isOwner( $data['user_id'] ) || self::hasPriviledge( array( 98 ) ) || self::hasPriviledge( $articleSettings['allowed_editors'] ) )
+		if( self::isOwner( $data['user_id'] ) || self::isAllowedToEdit( $data ) || self::hasPriviledge( array( 98 ) ) || self::hasPriviledge( $articleSettings['allowed_editors'] ) )
 		{
 		//	var_export( __LINE__ );
 			$editLink = '' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Article_Editor/?article_url=' . $data['article_url'];

@@ -120,7 +120,10 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			//	update the markup template
 			$this->_parameter['markup_template'] = null;
 		}
-		$this->setViewContent( $render );
+		else
+		{
+			$this->setViewContent( $render );
+		}
     }
 	
     /**

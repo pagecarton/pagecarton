@@ -48,7 +48,7 @@ class Application_Article_Type_Quiz_Whitelist extends Application_Article_Type_Q
 			//	Only the valid editor can view scoreboard
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-			if( ! self::isOwner( $data['user_id'] ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }
+			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }
 			$this->setViewContent( '<h3>Build Invitation List!</h3>' );			
 			$this->setViewContent( '<p>Create an invitation list for: "' . $data['article_title'] . '" or <a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Article_Type_Quiz_WhitelistImport/?article_url=' . $data['article_url'] . '">Bulk email address Import>></a></p>' );		 	
 			$this->createForm( 'Continue...', '', $data ); 

@@ -48,7 +48,7 @@ class Application_Article_Publish extends Application_Article_Abstract
 			//	Only the owner can edit or priviledged user can edit
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-			if( ! self::isOwner( $data['user_id'] ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ) ){ return false; }
+			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ) ){ return false; }
 			@$data['publish'] =  @in_array( 'publish', @$data['article_options'] ) ? '1' :  $data['publish'];
 			$filename = self::getFolder() . $data['article_url'];
 			

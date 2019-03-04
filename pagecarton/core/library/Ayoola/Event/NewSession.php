@@ -89,8 +89,9 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 			//	User is currently logged in
 			if( $userInfo = $auth->getUserInfo() ){ break; }
 		//	var_export( $_COOKIE );
+	//	self::v( $cookieValue );
 
-			list( $cookieUserid, $cookiePassword, $cookieCreationTime, $strict ) = explode( ':', base64_decode( $cookieValue ) );
+			list( $cookieUserid, $cookiePassword, $cookieCreationTime, $strict ) = explode( ':', base64_decode( $cookieValue ) );	
 	//		self::v( base64_decode( $cookieValue ) );
 		//	self::v( $cookieUserid );
 	//		self::v( $cookiePassword );
@@ -99,6 +100,7 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 			if( ! isset( $cookieUserid, $cookiePassword, $cookieCreationTime ) ){ break; }
 			$cookieAge = time() - $cookieCreationTime;
 			if( $cookieAge < 0 || $cookieAge > 1728000 ){ break; }
+		//	self::v( $cookieUserid );
 			if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 			{
 			//	$database = 'file';
@@ -122,7 +124,7 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 				break;
 				default:
 					$table = Ayoola_Access_LocalUser::getInstance();
-					if( ! $info = $table->selectOne( null, array( 'email' => $cookieUserid ) ) ){ break; }
+					if( ! $info = $table->selectOne( null, array( 'email' => strtolower( trim( $cookieUserid ) ) ) ) ){ break; }
 					$realUserInfo = $info['user_information'];
 					$realUserInfo['password'] = $info['password'];
 		//	var_export( $info );
@@ -138,9 +140,10 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 	//		self::v( $cookieCreationTime );
 		//	self::v( $strict );
 		//	self::v( base64_decode( $correctCookiePassword ) );
+		//	self::v( $realUserInfo );
 
 
-			if( $realUserInfo['access_level'] > 98 )
+			if( $realUserInfo['access_level'] >= 99 )
 			{
 				$correctCookiePassword = Ayoola_Access_Login::getPersistentCookieValue( $realUserInfo['email'], $realUserInfo['password'], $cookieCreationTime );
 			//	var_export( $cookieValue );
@@ -163,6 +166,7 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 			}
 	//	exit( $correctCookieValue );
 			$auth->getStorage()->store( $realUserInfo );
+		//	self::v( $realUserInfo );
 			return true;
 		}
 		while( false );

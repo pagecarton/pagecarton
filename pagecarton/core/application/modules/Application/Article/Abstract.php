@@ -245,7 +245,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	//	var_export( self::hasPriviledge( $articleSettings['allowed_editors'] )  ); 
 		if( 
 			self::isOwner( @$data['user_id'] ) 
-			|| self::hasPriviledge( $articleSettings['allowed_editors'] ) 
+			|| self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) 
 			|| Ayoola_Application::getUserInfo( 'username' ) === $data['username']   
 		)
 		{ 
