@@ -75,6 +75,11 @@ class Application_Article_View extends Application_Article_Abstract
 			{
 				return false;				
 			}
+			if( $this->getParameter( 'show_to_editors_only' ) && ! self::isAllowedToEdit( $data ) )
+			{
+				$this->_parameter['markup_template'] = null; 
+				return false;				
+			}
 			//	self::v( $data ); 
 			if( ! $data  
 				|| ( ! @$data['publish'] && ! self::isOwner( @$data['user_id'] ) && ! @in_array( 'publish', @$data['article_options'] ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] )   

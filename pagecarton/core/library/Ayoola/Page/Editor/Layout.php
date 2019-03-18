@@ -527,18 +527,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 			$danglingPlaceholders = array_merge( array_diff( $placeholdersInPageThemeFile, $placeholders ), $danglingPlaceholders );
 
-			krsort( $danglingPlaceholders );
-
-		//	var_export( $placeholdersInPageThemeFile );
-	//		var_export( $placeholders );
-				//		var_export( $danglingPlaceholders );
-	//		$inversePlaceholders = array_flip( $placeholders );
-	//		$inverseThemePlaceholders = array_flip( $placeholdersInPageThemeFile );
-		//	$danglingPlaceholders = implode( '@@@')
-
-
-//		var_export( $placeholdersInPageThemeFile[1] );
-			
+			krsort( $danglingPlaceholders );			
 
 			//	compare the contents here with the original file to discard information that's present in the theme file
 			$originalFile = Ayoola_Doc_Browser::getDocumentsDirectory() . '/layout/' . $theme . '/template';
@@ -577,6 +566,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					$content['template'] = str_ireplace( '</body>', $absentScripts . "\r\n</body>", $content['template'] );
 				}
 			}
+
+			//	use page file here so the script can be in place
+		//	if( $absentScripts && $scriptNotNeededInPage )
+			{
+			//	$content['template'] = $whereToGetPlaceholders;
+			}
 	//		var_export( $absentScripts );
 	//		var_export( $pageScripts[0] );
 	//		var_export( $originalScripts[0] );
@@ -594,7 +589,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$content['template'] = str_ireplace( '</head>', $allLinks . "\r\n</head>", $content['template'] );
 			}
 		//	var_export( $allLinks );
-		//	var_export( $absentScripts );
+		//	var_export( $absentScripts ); 
 //			var_export( $pageScripts[1] );
 //			var_export( $originalScripts[1] );
 			

@@ -27,6 +27,12 @@ require_once 'Application/Subscription/Abstract.php';
 
 class Application_Subscription_Cart extends Application_Subscription_Abstract
 {
+	/**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Shopping Cart'; 
 	
     /**	
      *

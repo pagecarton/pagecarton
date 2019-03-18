@@ -27,6 +27,12 @@
 
 class Application_SearchBox extends Ayoola_Abstract_Table
 {
+	/**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Search Box'; 
 	
     /**
      * Whether class is playable or not

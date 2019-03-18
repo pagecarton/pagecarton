@@ -518,7 +518,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					if( Ayoola_Loader::loadClass( $tableDb ) && $tableDb::getInstance() instanceof Ayoola_Dbase_Table_Interface  )
 					{
 					//	$multiOptions = $tableDb::getInstance();
-						$scope = $tableDb::SCOPE_PROTECTED === $multiOptions['accessibility'] ? $tableDb::SCOPE_PROTECTED : $tableDb::SCOPE_PRIVATE;
+						$scope = $tableDb::SCOPE_PRIVATE === $multiOptions['accessibility'] ? $tableDb::SCOPE_PRIVATE : $tableDb::SCOPE_PROTECTED;
 						$tableDb = $tableDb::getInstance( $scope );
 						$tableDb->getDatabase()->getAdapter()->setAccessibility( $scope );
 						$tableDb->getDatabase()->getAdapter()->setRelationship( $scope );

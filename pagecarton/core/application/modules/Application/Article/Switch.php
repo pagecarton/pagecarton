@@ -27,6 +27,13 @@ require_once 'Application/Article/Abstract.php';
 
 class Application_Article_Switch extends Application_Article_Abstract
 {
+	/**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Post Switch'; 
+
     /**
      * Using another layer of auth for this one
      *
@@ -95,7 +102,7 @@ class Application_Article_Switch extends Application_Article_Abstract
 						}
 						.onoffswitch-label {
 							display: block; overflow: hidden; cursor: pointer;
-							border: 2px solid #999999; border-radius: 20px;
+							border: 2px solid #999999; border-radius: 0;
 						}
 						.onoffswitch-inner {
 							display: block; width: 200%; margin-left: -100%;

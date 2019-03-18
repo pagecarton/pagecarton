@@ -100,9 +100,12 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 
 		//	var_export( self::hasPriviledge() );
 	//	self::v( $this->getParameter( 'new_menu_name' ) );
-	//	self::v( $this->getParameter( 'new_menu_name' ) );
+//	self::v( $this->getParameter( 'raw-options' ) );
 		$menuName = $this->getViewOption() ? : $this->getParameter( 'menu_name' );
-		$menuName = $menuName ? : 'mainnav';
+ 		if( ! $this->getParameter( 'raw-options' ) )
+		{
+			$menuName = $menuName ? : 'mainnav';
+		}
 		if( ! $menuName && $this->getParameter( 'new_menu_name' ) ) 
 		{
 			$filter = new Ayoola_Filter_Name();
@@ -114,14 +117,25 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		
 		$this->setMenu( $menuName );		
 		
-		//	var_export( self::hasPriviledge() );
+		//	var_export( $this->_parameter['markup_template'] );
+		if( ! empty( $this->_parameter['markup_template'] ) )
+		{
+			$x = true;   
+		}
 		if( ! $render = $this->render() )
 		{
 			//	update the markup template
-			$this->_parameter['markup_template'] = null;
+			if( ! empty( $this->_parameter['markup_template'] ) )
+			{
+				$this->_parameter['markup_template'] = '<!--' . __CLASS__ . '-->';   
+			}
 		}
 		else
 		{
+			if( empty( $this->_parameter['markup_template'] ) && ! empty( $x ) )
+			{
+				$this->_parameter['markup_template'] = '<!--' . __CLASS__ . '-->';   
+			}
 			$this->setViewContent( $render );
 		}
     }
@@ -482,10 +496,13 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 			else
 			{
+			//	var_export( __LINE__ );
 				$this->setOptions( $this->getParameter( 'raw-options' ) );
 			}
 		}
-	//	var_export( $options );
+	//	var_export( __LINE__ );
+		//	var_export( $options );
+		//	var_export( $menuInfo );
 		require_once 'Ayoola/Access.php';
 		$access = new Ayoola_Access();
 		$counter = 0;
@@ -543,6 +560,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				Application_Javascript::addCode( $options['css_code'] );
 			}
 		}
+	//	VAR_EXPORT( $this->getOptions() );
 		foreach( $this->getOptions() as $values ) 
 		{
 			

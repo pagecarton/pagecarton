@@ -30,105 +30,105 @@ require_once 'Ayoola/Dbase/Table/Abstract/Exception.php';
 abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstract implements Ayoola_Dbase_Table_Interface
 {
 
-		/**
-		 * The DataTypes of the Table
-		 *
-		 * @param array
-		 * 
-		 */
-		protected $_dataTypes;
+	/**
+	 * The DataTypes of the Table
+	 *
+	 * @param array
+	 * 
+	 */
+	protected $_dataTypes;
 
-		/**
-		 * The Version of the present table (SVN COMPATIBLE)
-		 *
-		 * @param int
-		 */
+	/**
+	 * The Version of the present table (SVN COMPATIBLE)
+	 *
+	 * @param int
+	 */
 
-		/**
-		 * The Version of the general table module
-		 *
-		 * @param int
-		 */
-		protected static $_version = '1.00';
+	/**
+	 * The Version of the general table module
+	 *
+	 * @param int
+	 */
+	protected static $_version = '1.00';
 
-		/**
-		 * The Accessibility of the Table
-		 *
-		 * @param string
-		 */
-		protected $_accessibility = SELF::DEFAULT_SCOPE;
+	/**
+	 * The Accessibility of the Table
+	 *
+	 * @param string
+	 */
+	protected $_accessibility = SELF::DEFAULT_SCOPE;
 
-		/**
-		 * 
-		 *
-		 * @param array
-		 */
-		protected static $_tableInfo;
+	/**
+	 * 
+	 *
+	 * @param array
+	 */
+	protected static $_tableInfo;
 
-		/**
-		 * 
-		 *
-		 * @param bool
-		 */
-		protected static $_alreadyRan;
+	/**
+	 * 
+	 *
+	 * @param bool
+	 */
+	protected static $_alreadyRan;
 
-		/**
-		 * This property determines how this table relates to other table
-		 *
-		 * @param string
-		 */
-		protected $_relationship = SELF::DEFAULT_SCOPE;
+	/**
+	 * This property determines how this table relates to other table
+	 *
+	 * @param string
+	 */
+	protected $_relationship = SELF::DEFAULT_SCOPE;
 
-		/**
-		 * Table version number
-		 *
-		 * @param string
-		 */
-		protected $_tableVersion = '0.01';
+	/**
+	 * Table version number
+	 *
+	 * @param string
+	 */
+	protected $_tableVersion = '0.01';
 
-		/**
-		 * Time to hold the cache before refreshing
-		 *
-		 * @param int
-		 */
-		public static $cacheTimeOut;
+	/**
+	 * Time to hold the cache before refreshing
+	 *
+	 * @param int
+	 */
+	public static $cacheTimeOut;
 	
 	const DEFAULT_SCOPE = SELF::SCOPE_PRIVATE;
 	const SCOPE_PRIVATE = 'PRIVATE';
 	const SCOPE_PROTECTED = 'PROTECTED';
 	const SCOPE_PUBLIC = 'PUBLIC';
 	
-		/**
-		 * Constructor
-		 *
-		 * @param 
-		 * 
-		 */
-		public function __construct()
-		{
-		//    var_export( get_called_class() );
-		//    var_export( "\r\n" );
+	/**
+	 * Constructor
+	 *
+	 * @param 
+	 * 
+	 */
+	public function __construct()
+	{
+	//    var_export( get_called_class() );
+	//    var_export( "\r\n" );
 
-				// wish i can do this...
-		//    $this = static::getInstance();
-		//    get_class( $this );
- 
-		 //   if( empty( static::$_alreadyRan[get_class( $this )] ) )
-				{
-		 //     var_export( get_class( $this ) );
-					//  everything here needs to be ran only once
-					$this->init(); 
-					static::$_alreadyRan[get_class( $this )] = true;
-			 }
-		}
-	
-		/**
-		 * Initialize the Table
-		 *
-		 * @param void
-		 */
-		public function init()
-		{
+			// wish i can do this...
+	//    $this = static::getInstance();
+	//    get_class( $this );
+
+		//   if( empty( static::$_alreadyRan[get_class( $this )] ) )
+			{
+		//     var_export( get_class( $this ) );
+				//  everything here needs to be ran only once
+				$this->initOnce(); 
+				static::$_alreadyRan[get_class( $this )] = true;
+			}
+	}
+
+	/**
+	 * Initialize the Table
+	 *
+	 * @param void
+	 */
+	public function init()
+	{
 		//	We are using the XML Adapter
 		require_once 'Ayoola/Dbase.php';
 		$database = new Ayoola_Dbase( array( 'adapter' => 'Xml' ) );
@@ -311,11 +311,14 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 		//	var_export( $this->getParameter() );
 			$this->setViewContent( $this->query( 'TABLE', 'VIEW', $fieldsKey, $where ) );
 		}
-	// 	;
-		
+		elseif( $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] === get_class( $this ) )
+		{
+			$this->setViewContent( '<a href="?show_class_data=' . get_class( $this ) . '">View Table Data for ' . get_class( $this ) . '</a>' ); 
+		}
+	//	var_export( $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] );
 
 		
-	 }
+	}
 
 		/**
 		 * Returns true if the table exists

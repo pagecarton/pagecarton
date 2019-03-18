@@ -75,16 +75,27 @@ class Application_Article_RSS extends Application_Article_Abstract
                     {
                         $where['category'] = $_REQUEST['category'];
                     }
+
+                    if( $this->getParameter( 'post_switch' ) )
+                    {
+                        $switch = $this->getParameter( 'post_switch' );
+                    }
+                    elseif( ! empty( $_REQUEST['post_switch'] ) )
+                    {
+                        $switch = $_REQUEST['post_switch'];
+                    }
                     
                 }
                 $class = new Application_Article_ShowAll( $where );
                 $class->initOnce();
                 $chunk = $class->getDbData();
-           //     krsort( $chunk );
+                krsort( $chunk );
                 $xml = new Ayoola_Xml();
                 $rss = $xml->createElement( 'rss' );
                 $rss->setAttribute( 'version', '2.0' );
                 $rss->setAttribute( 'xmlns:media', 'http://search.yahoo.com/mrss' );
+                $rss->setAttribute( 'xmlns:content', 'http://purl.org/rss/1.0/modules/content/' );
+                $rss->setAttribute( 'xmlns:dc', 'http://purl.org/dc/elements/1.1/' );
                 $xml->appendChild( $rss );
                 $channel = $xml->createElement( 'channel' );  
                 $rss->appendChild( $channel );
@@ -122,10 +133,16 @@ class Application_Article_RSS extends Application_Article_Abstract
                 foreach( $chunk as $data )
                 {
                     $data = self::loadPostData( $data );
+                    if( ! empty( $switch ) )
+                    {
+                        if( empty( $data[$switch] ) )
+                        {
+                            continue;  
+                        }
+                    }
               //      var_export( $data );
                     $item = $xml->createElement( 'item' );
                     $channel->appendChild( $item );
-
                //     $data['article_title'] = preg_replace('/[^\x20-\x7F]+/', '', $data['article_title']);
                 //    $data['article_description'] = preg_replace('/[^\x20-\x7F]+/', '', $data['article_description']);
             //        $data['article_description'] = preg_replace('/[^\x20-\x7F]+/', '', $data['article_description']);
@@ -138,6 +155,25 @@ class Application_Article_RSS extends Application_Article_Abstract
                     $item->appendChild( $description );
                     $text = $xml->createTextNode( $data['article_description'] );
                     $description->appendChild( $text );
+
+                    if( ! empty( $data['profile_url'] ) )
+                    {
+                        $content = $xml->createElement( 'dc:creator' );
+                        $item->appendChild( $content );
+                        $profileInfo = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] );
+                    //    var_export( $profileInfo );
+                        $text = $xml->createCDataSection( $profileInfo['display_name'] ? : $data['profile_url'] );
+                        $content->appendChild( $text );  
+                    }
+
+                    if( ! empty( $data['article_content'] ) )
+                    {
+                        $content = $xml->createElement( 'content:encoded' );
+                        $item->appendChild( $content );
+                        $data['article_content'] = Ayoola_Page_Editor_Text::addDomainToAbsoluteLinks( $data['article_content'] );
+                        $text = $xml->createCDataSection( $data['article_content'] );
+                        $content->appendChild( $text );  
+                    }
 
                     $url = Ayoola_Page::getHomePageUrl() . $data['article_url'];
                     $postUrl = $xml->createElement( 'link', $url );
@@ -152,6 +188,16 @@ class Application_Article_RSS extends Application_Article_Abstract
 
                     $mediaType = ucfirst( strtolower( $data['true_post_type'] ) );
                   //  var_export
+                    $coverPhoto = Ayoola_Page::getHomePageUrl() . '/widgets/Application_Article_PhotoViewer/?article_url=' . $data['article_url'] . '';
+                    $content = $xml->createElement( 'media:content' );
+                    $content->setAttribute( 'url', $coverPhoto );
+                    $content->setAttribute( 'medium', 'image' );
+                    $item->appendChild( $content );
+
+                    $content = $xml->createElement( 'media:content' );
+                    $content->setAttribute( 'url', $coverPhoto );
+                    $content->setAttribute( 'type', 'image/jpg' );
+                    $item->appendChild( $content );
                     switch( $mediaType )
                     {
                         case 'Audio':

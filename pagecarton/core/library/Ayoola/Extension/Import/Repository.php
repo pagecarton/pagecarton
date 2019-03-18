@@ -142,6 +142,17 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             $this->_parameter['template_name'] = 'ItemsList';
             $this->_parameter['button_value'] = 'Install';
             $this->_parameter['markup_template_prepend'] = self::getMenu();
+            $options = self::getMenuOptions();
+            $category = ( @$_GET['category'] ? : $this->getDefaultCategory() );
+        //    var_export( $options );
+
+        //    var_export( $category );
+        //    var_export( $options[$category]['option_name'] );
+            if( ! empty( $options[$category] ) )
+            {
+            	$this->_parameter['markup_template_prepend'] .= '<h3 class="pc_give_space_top_bottom">' . $options[$category]['option_name'] . ' Themes</h3>';
+            }
+
             parent::init();
         }
     }		
@@ -190,6 +201,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 
             $storage->store( $data );
         }
+     //   var_export( $data );
         return $data;
     }
     
@@ -201,8 +213,8 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
     {
         $data = static::getMenuOptions();
         $data[] = array(
-            'url' => '?',
-            'option_name' => 'Default',
+            'url' => '?category=DEFAULT',
+            'option_name' => 'All Themes',
             'title' => 'All Categories',
             
             'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),
@@ -248,20 +260,31 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
         {
             $category = null;
         }
-		$storage = self::getObjectStorage( array( 'id' => 'cssdcf-fw' . $category, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
+        $featured = null;
+        if( ! empty( $category ) )
+        {
+            $featured = '&post_switch=featured';
+        }
+		$storage = self::getObjectStorage( array( 'id' => 'cssdcf-fw' . $category . $featured, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
 		if( ! $data = $storage->retrieve() )
         {
         //    &category=' . 
-            $url = 'https://' . static::$_site . '/widgets/Application_Article_RSS?category=' . $category;
+            $url = 'https://' . static::$_site . '/widgets/Application_Article_RSS?category=' . $category . $featured;
             $feed = self::fetchLink( $url, array( 'time_out' => 28800, 'connect_time_out' => 28800, ) );
             $allFeed = (array) simplexml_load_string( $feed );
        //   self::v($feed_to_array);
-        //    self::v($url);
+        //   self::v($url);
     //     $allFeed['channel'] = (array) $allFeed['channel'];
             $data = array();
             foreach( $allFeed['channel']->item as  $each )
             {
                 $each = (array) $each;
+            //    self::v( $each );  
+            //    if( empty( $each['featured'] ) )
+                {
+                //    continue; 
+                }
+
                 $data[] = array(
                     'article_url' => '?title=' . $each['title'] . '&layout_type=upload&install=' . $each['guid'] . '&' . http_build_query( $_GET ),
                 //   'article_url' => $each['link'], 

@@ -663,6 +663,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							'/widgets' ) . '/Application_Article_Creator/' )
 							) 
 							) . '?';
+	//	self::v( $addNewPostUrl );
 		if( $newArticleType )
 		{
 			$addNewPostUrl .= '&article_type=' . $newArticleType . '';
@@ -697,6 +698,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$myProfileInfo = Application_Profile_Abstract::getMyDefaultProfile();
 			do
 			{
+		//	self::v( $howManyPostsToAdd );
+		//	self::v( $addNewPostUrl	 );
 				$tempItem = array_pop( $values );
 				if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) ) 
 				{
@@ -720,7 +723,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				else
 				{
 					$item = array( 
-						'article_url' => '#' . rand( 100, 8900 ) . ';', 
+						'article_url' => '#' . rand( 100, 8900 ) . ';',  
 						'allow_raw_data' => true, 
 						'not_real_post' => true, 
 						'always_allow_article' => $this->getParameter( 'article_types' ), 
@@ -741,7 +744,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			while( --$howManyPostsToAdd );
 
 		}
-	//	var_export( $values );   
+	//	self::v( $values );   
 		$i = 0; //	counter
 		$j = 5; //	5 is our max articles to show
 		if( intval( $this->getParameter( 'add_a_new_post' ) ) > 1 )
@@ -1611,16 +1614,23 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
 			switch( $this->getParameter( 'trending_key' ) )
 			{
+				case 'view':
+				case 'views':
 				case 'views_count':
 
 				break;
+				case 'play':
 				case 'audio_play_count':
 					$table = Application_Article_Type_Audio_Table::getInstance();
 				break;
+				case 'download':
+				case 'downloads':
 				case 'download_count':
 					$table = Application_Article_Type_Download_Table::getInstance();
 				break;
 				case 'comments_count':
+				case 'comment':
+				case 'comments':
 					$table = Application_CommentBox_Table::getInstance();
 				break;
 			}
