@@ -62,6 +62,16 @@ class Application_Profile_View extends Application_Profile_Abstract
         //		if( )
                 return false;
 			}
+			if( $this->getParameter( 'show_to_editors_only' ) )
+			{
+                $profileSettings = Application_Profile_Settings::getSettings( 'Profiles' );
+            //    var_export( self::isOwner( $data['username'] ) );
+                if( ! self::isOwner( $data['username'] ) && ! self::hasPriviledge( $profileSettings['allowed_editors'] ) )
+                { 
+                    $this->_parameter['markup_template'] = null; 
+				    return false;				
+                }
+			}
 			if( ! @$this->_parameter['markup_template'] ) 
 			{  
                 $displayName = '{{{display_name}}}';

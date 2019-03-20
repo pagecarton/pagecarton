@@ -1611,13 +1611,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( $this->getParameter( 'trending' ) )
 		{
 			$table = Application_Article_Views::getInstance();
-
 			switch( $this->getParameter( 'trending_key' ) )
 			{
 				case 'view':
 				case 'views':
 				case 'views_count':
-
+					
 				break;
 				case 'play':
 				case 'audio_play_count':

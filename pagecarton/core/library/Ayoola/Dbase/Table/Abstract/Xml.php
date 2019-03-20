@@ -292,7 +292,10 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 			$adapter->setRelationship( $previousRelationship );
  		}
 		while( false );
-	 //	var_export(  static::$_tableInfo );
+	// 	var_export(  $_GET['show_class_data'] === get_class( $this  ) );
+	//	 PageCarton_Widget::v( $_GET['show_class_data'] );
+	//	 PageCarton_Widget::v( get_class( $this  ) );
+	 
 		if( $_GET['show_class_data'] === get_class( $this ) )
 		{
 			$records = $this->query( 'TABLE', 'FETCH' );

@@ -63,23 +63,18 @@ class Application_Article_Switch extends Application_Article_Abstract
 			
 			//	Use modified time to ensure theres no multiple entry.
 			$time = filemtime( $filename );
-		//	var_export( intval( @$_REQUEST['switch_change_time'] ) );
-		//	var_export( $time );
+		//	self::v( intval( @$_REQUEST['switch_change_time'] ) );
+		//	self::v( $time );
 			@$data[$switch] = $data[$switch] ? : false;
 			if( intval( @$_REQUEST['switch_change_time'] ) === intval( $time ) )
 			{
-			//	var_export( $data[$switch] );
+			//	self::v( $data[$switch] );
 				//	switch
 				switch( $data[$switch] )
 				{
-					case 0:
 					case false:
-					case '':
-					case null:
 						$data[$switch] = $switch;
 					break;
-					case 1:
-					case true:
 					default:
 						$data[$switch] = false;
 					break;
@@ -139,8 +134,7 @@ class Application_Article_Switch extends Application_Article_Abstract
 							right: 0px; 
 						}
 					</style>
-			
-					<div onClick="var a = window.location.href +  \'?\' + window.location.search + \'&switch_change_time=' . $time . '\'; ayoola.xmlHttp.fetchLink( { url: a } ); this.onclick=null" class="onoffswitch">
+					<div onClick="var a = \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '\' +  \'?article_url=' . $data['article_url'] . '\&switch_change_time=' . $time . '\'; ayoola.xmlHttp.fetchLink( { url: a } ); this.onclick=null" class="onoffswitch">
 						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" ' . ( @$data[$switch] ? 'checked' : '' ) . '>
 						<label class="onoffswitch-label" for="myonoffswitch">
 							<span class="onoffswitch-inner"></span>

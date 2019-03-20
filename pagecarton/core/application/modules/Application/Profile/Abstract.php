@@ -272,10 +272,12 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		}
 		if( $profileData = $table->selectOne( null, array( 'profile_url' => $profileUrL ), array( 'x' => 'work-around-to-avoid-stupid-cache' ) ) )
 		{
-			$profileData = $profileData['profile_data'];
+			//	main table data should be there because 
+			//	values like display_name is absent in inner data
+			$profileData = $profileData['profile_data'] + $profileData;
 		}
 //			var_export( Application_Profile_Table::getInstance()->selectOne() );
-	//		var_export( $profileData );
+	//	self::v( $profileData );
 		$table = Ayoola_Access_AuthLevel::getInstance();
 		if( @$profileData['access_level'] != 1 && @$profileData['access_level'] != 0 )
 		{

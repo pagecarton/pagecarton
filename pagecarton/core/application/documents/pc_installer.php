@@ -36,7 +36,7 @@
 		$docRoot = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];  
 		if( is_dir( $docRoot ) && is_writable( $docRoot ) )
 		{
-		$home = $docRoot;
+			$home = $docRoot;
 		}
 	}
 //	var_export( $home );

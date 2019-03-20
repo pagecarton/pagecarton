@@ -154,11 +154,11 @@ class Application_Article_View extends Application_Article_Abstract
 		}
 		if( ! empty( $data['profile_url'] ) )
 		{
-		//	self::v( $data );
 			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) )
 			{
 			//	self::v( $profileInfo );
 				$data += $profileInfo ? : array();
+			//	self::v( $profileInfo );  
 			}
 		}
 			
