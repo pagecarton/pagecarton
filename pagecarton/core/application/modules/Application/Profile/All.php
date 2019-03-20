@@ -83,8 +83,8 @@ class Application_Profile_All extends Application_Article_ShowAll
 	//	self::v( $data );
 		if( ! empty( $data['posts']['all'] ) )
 		{
-			$data = false;
-			return false;
+		//	$data = false;
+		//	return false;
 		//	self::v( $data['posts']['all'] );
 		}
 		if( empty( $data['profile_url'] ) )

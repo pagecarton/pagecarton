@@ -335,13 +335,19 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( $values['profile_url'] )
 		{
 			//	Let's save some info into the owners account
-			$profilePath = Application_Profile_Abstract::getProfilePath( $values['username'] );
+			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $values['profile_url'] ) )
+			{
+			//	self::v( $profileInfo );
+				
+			//	self::v( $profileInfo );  
+			}
+		//	$profilePath = Application_Profile_Abstract::getProfilePath( $values['username'] );
 		//	$profileInfo = self::loadPostData( $profilePath );
-			$profileInfo = @include $profilePath;
+		//	$profileInfo = @include $profilePath;
 		//	var_export( $profileInfo );
 			@$profileInfo['posts'] = $profileInfo['posts'] ? : array();
 		//	@$profileInfo['profile_url'] = $values['username'];
-			@$profileInfo['profile_url'] = $values['profile_url'];
+		//	@$profileInfo['profile_url'] = $values['profile_url'];
 		//	$profileInfo['posts']['url'][$values['article_url']] = array( 'article_url' => $values['article_url'] );
 			$profileInfo['posts']['all'][$values['article_url']] = array( 'article_url' => $values['article_url'], 'file_size' => $values['file_size'] );
 			$profileInfo['posts']['size'][$values['article_url']] = $values['file_size'];
@@ -354,7 +360,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				$profileInfo['posts_count_private'] = count( $profileInfo['posts']['private'] );     
 			}
 		//	var_export( $profileInfo );
-			Application_Profile_Abstract::saveProfile( $profileInfo );
+			Application_Profile_Abstract::saveProfile( $profileInfo );  
 
 		}
 	}

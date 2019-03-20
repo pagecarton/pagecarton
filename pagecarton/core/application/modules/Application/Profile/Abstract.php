@@ -202,14 +202,14 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 	public static function saveProfile( $values )
     {
 	//	var_export( $values );
-		if( empty( $values['profile_url'] ) )
+		if( empty( $values['profile_url'] ) ) 
 		{
 			return false;
 		}
 		if( empty( $values['modified_time'] ) )
 		{
 			$values['modified_time'] = array();
-			$values['modified_ip'] = array();
+			$values['modified_ip'] = array();  
 		}
 		if( empty( $values['access_level'] ) )
 		{
