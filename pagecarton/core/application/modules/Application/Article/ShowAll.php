@@ -93,6 +93,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      */
 	protected function init()
     {
+	//	if( DOMAIN === 'funfactory.pagecarton.com' )
+		{
+		//	self::v( $this->getParameter() );
+		//	exit();
+		}
+	//	exit();
+
 		try
 		{
 			if( $this->getParameter( 'template_name' ) )
@@ -693,7 +700,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
 		$this->_parameter['add_a_new_post_full_url'] = $addNewPostUrl;
 
-		if( $this->getParameter( 'add_a_new_post' ) ) 
+		if( $howManyPostsToAdd > 20 ) 
+		{
+			$howManyPostsToAdd = 20;
+
+		}
+
+
+		if( $howManyPostsToAdd ) 
 		{ 
 			$myProfileInfo = Application_Profile_Abstract::getMyDefaultProfile();
 			do
@@ -1616,7 +1630,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				case 'view':
 				case 'views':
 				case 'views_count':
-					
+
 				break;
 				case 'play':
 				case 'audio_play_count':

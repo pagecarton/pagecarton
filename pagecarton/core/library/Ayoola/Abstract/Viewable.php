@@ -229,6 +229,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		if( is_array( $parameter ) ){ $this->setParameter( $parameter ); }
 		//	var_export( self::getHooks() );
+
+	//	self::v( get_class( $this ) );
 		$this->initOnce();
 		static::$_counter++;
     } 
