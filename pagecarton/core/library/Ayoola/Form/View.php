@@ -522,7 +522,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 						$tableDb = $tableDb::getInstance( $scope );
 						$tableDb->getDatabase()->getAdapter()->setAccessibility( $scope );
 						$tableDb->getDatabase()->getAdapter()->setRelationship( $scope );
-					//	var_export( $scope );
+					//	var_export( $scope ); 
 						$where = null;
 						if( ! empty( $multiOptions['db_where'] ) && ! empty( $multiOptions['db_where_value'][0] ) )
 						{
