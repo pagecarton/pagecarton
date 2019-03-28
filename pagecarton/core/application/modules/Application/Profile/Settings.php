@@ -74,7 +74,23 @@ class Application_Profile_Settings extends Application_Settings_Abstract
 		
 		$fieldset->addElement( array( 'name' => 'allowed_writers', 'required' => 'required', 'label' => 'Who can create profiles?', 'type' => 'SelectMultiple', 'value' => @$settings['allowed_writers'] ), $authLevel );
 		$fieldset->addElement( array( 'name' => 'allowed_editors', 'label' => 'Who can edit and manage all profiles?', 'type' => 'SelectMultiple', 'value' => @$settings['allowed_editors'] ), $authLevel );
+
 				
+		//	Allowed Categories
+		$options = new Application_Category;
+		$options = $options->select();
+		foreach( $options as $key => $value )
+		{
+			if( ! $options[$key]['category_label'] )
+			{
+				$options[$key]['category_label'] = $options[$key]['category_name'];        
+			}
+		}
+		require_once 'Ayoola/Filter/SelectListArray.php';
+		$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
+		$options = $filter->filter( $options );
+		$fieldset->addElement( array( 'name' => 'allowed_categories', 'label' => 'Select site-wide categories available for users when creating profiles <a rel="spotlight;changeElementId=page_refresh" title="Manage Categories" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_List/"> Manage All Categories</a>', 'value' => @$settings['allowed_categories'], 'type' => 'Checkbox' ), $options );
+
 		$fieldset->addLegend( 'Profile Settings' );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );

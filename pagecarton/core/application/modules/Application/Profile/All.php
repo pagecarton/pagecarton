@@ -70,15 +70,24 @@ class Application_Profile_All extends Application_Article_ShowAll
      * @var string
      */
 	protected static $_newPostUrl = '/widgets/Application_Profile_Creator';	
-	
+	 
+    /**
+     * 
+     */
+	public function filterData( &$data )
+    {
+	//	var_export( $data );
+	//	if( $this->getParameter( 'category' ) )
+		{
+		//	$data['article_url'] = '' . $this->getParameter( 'category_page' ) . '?category=' . $data['category_name']; 
+		} 
+	}
 			
     /**
      * 
      */
 	public static function sanitizeData( &$data )
     {
-	//	var_export( $data );
-//		$this->_parameter['add_a_new_post_link'] = $this->getParameter( 'add_a_new_post_link' ) ? : '/widgets/Application_Profile_Creator';
 		$data = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] );
 	//	self::v( $data );
 		if( ! empty( $data['posts']['all'] ) )

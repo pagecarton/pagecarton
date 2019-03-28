@@ -440,6 +440,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						}			
 					}
 					static::sanitizeData( $data );
+					$this->filterData( $data );
 					if( ! $data )
 					{
 						continue;

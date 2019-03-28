@@ -139,7 +139,9 @@ abstract class Ayoola_Page_Menu_Abstract extends Ayoola_Abstract_Table
 	//		$fieldset->addElement( array( 'name' => 'keywords', 'placeholder' => 'Comma-separated keywords for search engines', 'type' => 'InputText', 'value' => @$values['keywords'] ) );   
 			
 	//		$options = new Application_Category;
-			$options = Application_Category_ShowAll::getPostCategories();
+		//	$options = Application_Category_ShowAll::getPostCategories();
+			$categoryTable = Application_Category::getInstance();
+			$options = $categoryTable->select();
 			require_once 'Ayoola/Filter/SelectListArray.php';
 			$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label', 'category_name' );
 			$options = $filter->filter( $options );

@@ -290,6 +290,15 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      * 
      * 
      */
+	public function filterData( &$data )
+    {  
+
+	}
+	
+    /**
+     * 
+     * 
+     */
 	public static function sanitizeData( &$data )
     {  
 

@@ -75,8 +75,9 @@ class Application_Domain_UserDomain_Abstract extends PageCarton_Widget
             $table = $table::getInstance();
             $domains = $table->select( null, array( 'username' => Ayoola_Application::getUserInfo( 'username' ) ) );
 			$filter = new Ayoola_Filter_SelectListArray( 'domain_name', 'domain_name' );
-			$domains = $filter->filter( $domains );
-            $fieldset->addElement( array( 'name' => 'domain_name', 'label' => 'Domain Name', 'placeholder' => 'e.g. example.com', 'type' => 'Select', 'value' => @$values['domain_name'] ), array( '' => 'Select Domain' ) + $domains ); 
+            $domains = $filter->filter( $domains );
+            
+            $fieldset->addElement( array( 'name' => 'domain_name', 'label' => 'Domain Name', 'placeholder' => 'e.g. example.com', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$values['domain_name'] ), array( '' => 'Select Domain' ) + $domains + array( '__custom' => 'Custom Domain' ) );   
         }
         $fieldset->addRequirement( 'domain_name', array( 'NotEmpty' => null, 'DuplicateRecord' => array( 'Application_Domain_UserDomain', 'domain_name' ) ) ); 
    //   $fieldset->addElement( array( 'name' => 'user_id', 'type' => 'InputText', 'value' => @$values['user_id'] ) ); 

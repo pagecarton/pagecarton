@@ -558,10 +558,26 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 				);
 			}
 			$fieldset->addElement( array( 'name' => 'profile_url', 'id' => 'profile_url_field', 'label' => static::$_urlName, 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'e.g. MyPage', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
-		//	$fieldset->addFilter( 'profile_url','Username' );  
 			$fieldset->addRequirement( 'profile_url', array( 'NotEmpty' => array( 'badnews' => 'The profile URL cannot be left blank.', ), 'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^0-9a-zA-Z-_', ), 'WordCount' => array( 4,20 ), 'DuplicateUser' => array( 'Username', 'username', 'badnews' => 'Someone else has already chosen "%variable%"', ) ) );
+		//	$fieldset->addFilter( 'profile_url','Username' );  
+		//	self::v( $profileSettings );
+
 		//	$fieldset->addElement( array( 'name' => 'name', 'placeholder' => 'Give this page a name', 'type' => 'InputText', 'value' => @$values['name'] ) );   
 			
+		}
+		$profileSettings = Application_Profile_Settings::retrieve(); 
+		if( @$profileSettings['allowed_categories'] )
+		{
+
+			$categoryTable = Application_Category::getInstance();
+			$siteCategories = $categoryTable->select( null, array( 'category_name' => $profileSettings['allowed_categories'] ) );
+
+			//	Now allowing users to create their own personal categories
+			
+			//	Get information about the user access information
+			$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
+			$siteCategories = $filter->filter( $siteCategories );
+			$fieldset->addElement( array( 'name' => 'category_name', 'label' => 'Select Category ' . $addCategoryLink, 'type' => 'SelectMultiple', 'value' => @$values['category_name']  ), $siteCategories ? : array() );
 		}
 		$form->addFieldset( $fieldset );  
 	

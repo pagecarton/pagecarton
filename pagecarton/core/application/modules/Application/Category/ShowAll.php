@@ -148,7 +148,19 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 		}
 		$data = Application_Category::getInstance()->select( null, $this->_dbWhereClause );
 		$this->_dbData = $data;
-    } 
+	}
+	 
+    /**
+     * 
+     */
+	public function filterData( &$data )
+    {
+	//	var_export( $data );
+		if( $this->getParameter( 'category_page' ) )
+		{
+			$data['article_url'] = '' . $this->getParameter( 'category_page' ) . '?category=' . $data['category_name']; 
+		} 
+	}
 			
     /**
      * 

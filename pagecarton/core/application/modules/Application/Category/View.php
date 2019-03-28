@@ -240,6 +240,10 @@ class Application_Category_View extends Application_Category_Abstract
 				}
 			//	var_export( $category );
 			}
+			elseif( $this->getParameter( 'pc_module_url_values_category_offset' ) == '?' && @$_REQUEST['category'] )
+			{
+				$category = $_REQUEST['category'];
+			}
 			elseif( $this->getParameter( 'allow_dynamic_category_selection' ) && @$_REQUEST['category'] )
 			{
 				$category = $_REQUEST['category'];
