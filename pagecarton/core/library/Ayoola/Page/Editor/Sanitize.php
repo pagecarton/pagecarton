@@ -81,6 +81,30 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 			}
 		}
 
+		//	let normal pages go first so that 
+		//	theres error where old page was being restored after theme update
+		//	let's see if this solves it.
+
+		$pages = $pages->getDbTable()->select( null, $where );
+		$pages = array_merge( $pages, $defaultPages );
+	//	var_export( self::getDefaultLayout() );
+	//	var_export( $pages );
+	//	var_export( $where );
+		foreach( $pages as $page )    
+		{
+			$page = is_string( $page ) ? $page : $page['url'];
+			if( stripos( $page, '/layout/' ) === 0 || stripos( $page, '/default-layout' ) === 0 )
+			{
+				//	dont cause unfinite loop by updating theme when a theme is being sanitized
+				continue;
+			}
+	//	var_export( $page );
+			//	sanitize now on theme level
+			$this->_parameter['page_editor_layout_name'] = null;
+			$this->refresh( $page );   
+		}
+
+		//	now  sanitize theme after normal pages
 		if( $themeName )
 		{
 			$themePages = Ayoola_Page_Layout_Pages::getPages( $themeName );
@@ -103,7 +127,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 					$pageThemeFileUrl = '/index';
 				}
 				$fPaths = Ayoola_Page_Layout_Pages_Copy::getPagePaths( $themeName, $pageThemeFileUrl );
-                $from = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $fPaths['include'];
+        $from = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $fPaths['include'];
 				if( ! is_file( $from ) )
 				{
 					continue;
@@ -118,25 +142,6 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 				$this->_parameter['page_editor_layout_name'] = $themeName;
 				$this->refresh( $page );   
 			}
-		}
-
-		$pages = $pages->getDbTable()->select( null, $where );
-		$pages = array_merge( $pages, $defaultPages );
-	//	var_export( self::getDefaultLayout() );
-	//	var_export( $pages );
-	//	var_export( $where );
-		foreach( $pages as $page )    
-		{
-			$page = is_string( $page ) ? $page : $page['url'];
-			if( stripos( $page, '/layout/' ) === 0 || stripos( $page, '/default-layout' ) === 0 )
-			{
-				//	dont cause unfinite loop by updating theme when a theme is being sanitized
-				continue;
-			}
-	//	var_export( $page );
-			//	sanitize now on theme level
-			$this->_parameter['page_editor_layout_name'] = null;
-			$this->refresh( $page );   
 		}
 		return true;
     }
