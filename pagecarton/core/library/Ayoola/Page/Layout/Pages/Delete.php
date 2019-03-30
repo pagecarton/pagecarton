@@ -41,6 +41,34 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
 	protected static $_table; 
 
     /**
+     * 
+     * 
+     */
+	public function deleteThemePageSupplementaryFiles( $pageThemeFileUrl, $themeName = null )
+    {  
+        //	let's remove dangling theme pages not completely deleted
+        //  case issue in page sanitize
+        //  where when theme page is deleted, still comes up in normal page left not deleted
+        $themeName = $themeName ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+        $themeDataDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '';
+        $themePageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
+    //	var_export( $themeDataDir );
+        if( ! is_file( $themePageFile ) && is_dir( $themeDataDir ) )
+        {
+        //	var_export( $themeDataDir );
+        //    Ayoola_Doc::deleteDirectoryPlusContent( $themeDataDir );
+
+            // don't delete backup data
+            //  just delete current files
+            $files = Ayoola_Doc::getFiles( $themeDataDir );
+            foreach( $files as $each )
+            {
+                unlink( $each );
+            }
+        }     
+    }
+
+    /**
      * Performs the whole widget running process
      * 
      */
@@ -87,6 +115,10 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
             if( unlink( $from ) )
             {
                 $this->setViewContent( '<p class="goodnews">"' . $url . '" deleted successfully.</p>', true ); 
+
+                //	let's remove dangling theme pages not completely deleted
+                Ayoola_Page_Layout_Pages_Delete::deleteThemePageSupplementaryFiles( $url, $data['layout_name'] );
+
             }
             else
             {
