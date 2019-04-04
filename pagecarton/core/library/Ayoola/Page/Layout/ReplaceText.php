@@ -47,6 +47,10 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
           10 => 'Facebook URL',
           11 => 'Twitter URL',
           12 => 'Instagram URL',
+          13 => 'WhatsApp Number',
+          14 => 'Descriptive Video Embed Url',
+          15 => 'Google Maps Embed URL',
+          16 => 'Youtube Channel URL',
         ),
         'dummy_search' => 
         array (
@@ -63,6 +67,10 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
           10 => '{https://www.facebook.com/PageCarton}',
           11 => '{https://www.twitter.com/PageCarton}',
           12 => '{https://www.instagram.com/PageCarton}',
+          13 => '{2348054449535}',
+          14 => '{https://vimeo.com/channels/staffpicks/93951774}',
+          15 => '{https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.7573964262942!2d3.862950314775586!3d7.381062994674082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10398d11e9ff4445%3A0x27cd60c4ec4cbd97!2sNustreams+Conference+%26+Culture+Centre!5e0!3m2!1sen!2sng!4v1550769560125}',
+          16 => '{https://www.youtube.com/channel/UCMjkDODU47J8iKKbaidQpEw?view_as=subscriber}',
         ),
         'dummy_replace' => 
         array (
@@ -79,6 +87,10 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
           10 => 'https://www.facebook.com/PageCarton',
           11 => 'https://www.twitter.com/PageCarton',
           12 => 'https://www.instagram.com/PageCarton',
+          13 => '2348054449535',
+          14 => 'https://vimeo.com/channels/staffpicks/93951774',
+          15 => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.7573964262942!2d3.862950314775586!3d7.381062994674082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10398d11e9ff4445%3A0x27cd60c4ec4cbd97!2sNustreams+Conference+%26+Culture+Centre!5e0!3m2!1sen!2sng!4v1550769560125',
+          16 => 'https://www.youtube.com/channel/UCMjkDODU47J8iKKbaidQpEw?view_as=subscriber',
         ),
       );
 	
