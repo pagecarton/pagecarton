@@ -6,42 +6,42 @@
 //	Object Begins
 ayoola.xmlHttp =
 {
-	objects: new Object, // Stores the xmlHTTP Objects 
-	objectCounter: 0, // Counts the number of xmlHTTP objects created. 
-	afterStateChangeCallbacks: Array(), // Callbacks after state change 
-	beforeStateChangeCallbacks: Array(), // Callbacks after state change 
-	classPlayerUrl: '/tools/classplayer/', // Url for application class player 
-	
+	objects: new Object, // Stores the xmlHTTP Objects
+	objectCounter: 0, // Counts the number of xmlHTTP objects created.
+	afterStateChangeCallbacks: Array(), // Callbacks after state change
+	beforeStateChangeCallbacks: Array(), // Callbacks after state change
+	classPlayerUrl: '/tools/classplayer/', // Url for application class player
+
 	//	Initialize the objects for automatic enablement
 	init: function()
 	{
-		for( var a = 0; a < document.forms.length; a++ )   
+		for( var a = 0; a < document.forms.length; a++ )
 		{
-	//		continue;   
+	//		continue;
 			var formElement = document.forms[a];
 			var callback = ayoola.xmlHttp.sendForm;
 			if( formElement.enctype == 'multipart/form-data' ){ callback = ayoola.xmlHttp.simulateSendFormWithIframe; }
 			if( formElement.getAttribute( 'data-not-playable' ) ){ continue; }
-			if( ! formElement.getAttribute( 'data-pc-form' ) ){ continue; }  
-			if( ! formElement.getAttribute( 'data-playable' ) ){ continue; }  
-			ayoola.events.add( formElement, 'submit', callback );      
+			if( ! formElement.getAttribute( 'data-pc-form' ) ){ continue; }
+			if( ! formElement.getAttribute( 'data-playable' ) ){ continue; }
+			ayoola.events.add( formElement, 'submit', callback );
 		}
 		var links = document.links;
 		for( var a = 0; a < links.length; a++ )
 		{
 			if( ayoola.spotLight.isPlayable( links[a] ) )
-			{ 
-				ayoola.events.add( links[a], 'click', ayoola.spotLight.play ); 
+			{
+				ayoola.events.add( links[a], 'click', ayoola.spotLight.play );
 			}
 			else if( ayoola.xmlHttp.isClassPlayerLink( links[a] ) )
-			{ 
-				ayoola.events.add( links[a], 'click', ayoola.xmlHttp.play ); 
+			{
+				ayoola.events.add( links[a], 'click', ayoola.xmlHttp.play );
 			}
 		}
 	//	ayoola.xmlHttp.setAfterStateChangeCallback( ayoola.xmlHttp.init );
-		
+
 	},
-	
+
 	//	Return a new XmlHttp Object when called
 	getObject: function( uniqueNameForObject )
 	{
@@ -53,20 +53,20 @@ ayoola.xmlHttp =
 		{
 			try{ object = new ActiveXObject( 'MSXML2.XMLHTTP' ); }
 			catch( exception2 )
-			{ 
+			{
 				try{ object = new ActiveXObject( 'Microsoft.XMLHTTP' ); }
 				catch( exception3 ){ null; }
 			}
 		}
  		if( object )
-		{ 
+		{
 			uniqueNameForObject = uniqueNameForObject ? uniqueNameForObject : ayoola.xmlHttp.objectCounter;
 			ayoola.xmlHttp.objectCounter++;
-			ayoola.xmlHttp.objects[uniqueNameForObject] = object; 
+			ayoola.xmlHttp.objects[uniqueNameForObject] = object;
 		}
 		return object;
 	},
-	
+
 	//	Sends a form to server
 	sendForm: function( e )
 	{
@@ -79,14 +79,14 @@ ayoola.xmlHttp =
 		var parents = document.getElementsByName( name + "_container" ); // Gets containers
 	//	alert( parents.length );
 	//	alert( target.getAttribute( 'action' ) );
-		
+
 		//	Allows me to be able to delete rich text editors before getting form values
 		ayoola.xmlHttp.callBeforeStateChangeCallbacks();
-		
+
 		//	Play the class silently
 	//	alert( target.action );
 	//	alert( target.action.search( /\/\// ) );
-		if( target.action && ! target.action.search( /#/ ) )  
+		if( target.action && ! target.action.search( /#/ ) )
 		{
 			return true;
 		}
@@ -98,14 +98,14 @@ ayoola.xmlHttp =
 /* 		alert( method );
 		alert( url );
 		alert( location.search );
- */		
+ */
 		ajax.open( method, url, true );
 		var contentType = target.getAttribute( 'enctype' ) || 'application/x-www-form-urlencoded';
 		ajax.setRequestHeader( 'Content-Type', contentType );
 		var changeContent = function()
-		{ 
+		{
 			if( ayoola.xmlHttp.isReady( ajax ) )
-			{ 
+			{
 				if( ! ajax.responseText )
 				{
 					alert( 'Server returned an empty response.' );
@@ -125,15 +125,15 @@ ayoola.xmlHttp =
 				//			alert( a );
 					//		alert( parents[a] );
 				//			alert( parent.name );
-							
+
 							//	workaround for a bug that is causing infinite loop
 							if( a > 3 ){ break; }
-							
+
 					//		alert( ayoola.scrollToViewMargin );
-					//		parent.style.marginTop = ayoola.scrollToViewMargin; 
+					//		parent.style.marginTop = ayoola.scrollToViewMargin;
 					//		alert( parent.style.marginTop );
-							parent.scrollIntoView(); 
-							parent.focus(); 
+							parent.scrollIntoView();
+							parent.focus();
 							if( parent.parentNode )
 							{
 								var b = document.createElement( 'div' );
@@ -151,23 +151,23 @@ ayoola.xmlHttp =
 									d.parentNode.removeChild( d );
 									d = e;
 								}
-								b.innerHTML = d.outerHTML + ajax.responseText; 
-							//	b.style.paddingTop = ayoola.scrollToViewMargin; 
-							//	b.style.marginTop = '100px'; 
+								b.innerHTML = d.outerHTML + ajax.responseText;
+							//	b.style.paddingTop = ayoola.scrollToViewMargin;
+							//	b.style.marginTop = '100px';
 								b.style.display = 'none';
 							//	alert( b.style.marginTop );
-								b = parent.parentNode.appendChild( b ); 
-								parent.parentNode.replaceChild( b, parent ); 
+								b = parent.parentNode.appendChild( b );
+								parent.parentNode.replaceChild( b, parent );
 								b.style.display = '';
-								b.scrollIntoView(); 
-								b.focus(); 
+								b.scrollIntoView();
+								b.focus();
 							}
 							else
 							{
-								parent.innerHTML = ajax.responseText; 
+								parent.innerHTML = ajax.responseText;
 							}
-						//	parent.scrollIntoView(); 
-						//	parent.focus(); 
+						//	parent.scrollIntoView();
+						//	parent.focus();
 						//	alert( parent.id );
 						//	window.location.hash = "#ssss";
 						//	if( parent.id ){ location.hash = "#ssss" + parent.id; }
@@ -178,7 +178,7 @@ ayoola.xmlHttp =
 					//	var parent = ayoola.div.getParent( target, 2 ); // Two steps backward
 				}
 				ayoola.xmlHttp.callAfterStateChangeCallbacks();
-			} 
+			}
 		}
 		if( ! ayoola.events.add( ajax, 'readystatechange', changeContent ) ){ ajax.onreadystatechange = changeContent; }
 		ajax = ayoola.xmlHttp.setDefault( ajax );
@@ -188,7 +188,7 @@ ayoola.xmlHttp =
 	//	ayoola.xmlHttp.simulateSendFormWithIframe( e );
 		return false;
 	},
-	
+
 	//	Use Iframe to simulate the AJAX feel
 	simulateSendFormWithIframe: function( e )
 	{
@@ -204,7 +204,7 @@ ayoola.xmlHttp =
 		var changeContent = function( ev )
 		{
 			var iframeTarget = ayoola.events.getTarget( ev );
-			
+
 			var iframeParent = window.frames[iframe.name].document.getElementById( name ) || window.frames[iframe.name].document.firstChild;
 			parent.innerHTML = iframeParent.innerHTML;
 			ayoola.xmlHttp.callAfterStateChangeCallbacks();
@@ -217,7 +217,7 @@ ayoola.xmlHttp =
 	//	if( e.preventDefault ){ e.preventDefault(); }
 		return false;
 	},
-	
+
 	//	Use Iframe to simulate fetching content with ajaxs
 /* 	Fetches data from a link and puts it in an element
  */	simulateFetchContentWithIframe: function( link, element )
@@ -242,7 +242,7 @@ ayoola.xmlHttp =
 	//	if( e.preventDefault ){ e.preventDefault(); }
 		return false;
 	},
-	
+
 	//	Retrieves a link via ajax
 	fetchLink: function( linkObject, uniqueNameForObject, dataToSend )
 	{
@@ -259,13 +259,13 @@ ayoola.xmlHttp =
 				linkObject.data = dataToSend;
  */			break;
 			case 'object':
-			
+
 			break;
 		}
 		var method = linkObject.data ? 'POST' : 'GET';
 		method = linkObject.method ? linkObject.method : method;
 /* 		alert( linkObject.url );
-		alert( linkObject.id ); 
+		alert( linkObject.id );
 		alert( linkObject.data );
  */		var ajax = ayoola.xmlHttp.getObject( linkObject.id );
 	//	alert( ajax );
@@ -293,14 +293,14 @@ ayoola.xmlHttp =
 				if( ayoola.xmlHttp.isReady( ajax ) )
 				{
 					if( ! ajax.responseText )
-					{ 
+					{
 						return false;
 					}
 				//	alert( ajax.responseText );
 				//	alert( ajax.responseXML );
 					linkObject.callback( ajax );
 					splash ? splash.close() : null;
-				} 
+				}
 			}
 			ayoola.events.add( ajax, "readystatechange", ajaxCallback );
 
@@ -320,7 +320,7 @@ ayoola.xmlHttp =
 			//		alert( ajax.responseXML );
 				//	if( ! ajax.responseText )
 					if( ! ajax.responseText )
-					{ 
+					{
 						return false;
 					}
 					var a = ajax.responseText.split( '<!--PC-HTML-DEMARCATION-->' );
@@ -328,15 +328,15 @@ ayoola.xmlHttp =
 					{
 						if( linkObject.appendContent )
 						{
-							linkObject.container.innerHTML = linkObject.container.innerHTML + a[0];							
+							linkObject.container.innerHTML = linkObject.container.innerHTML + a[0];
 						}
 						else if( linkObject.insertBefore )
 						{
-							linkObject.container.outerHTML = a[0] + linkObject.container.outerHTML;							
+							linkObject.container.outerHTML = a[0] + linkObject.container.outerHTML;
 						}
 						else if( linkObject.replaceContent )
 						{
-							linkObject.container.outerHTML = a[0];							
+							linkObject.container.outerHTML = a[0];
 						}
 						else
 						{
@@ -362,10 +362,10 @@ ayoola.xmlHttp =
 						ayoola.xmlHttp.nodeScriptReplace( c );
 					}
 					splash ? splash.close() : null;
-				} 
+				}
 			}
 			ayoola.events.add( ajax, "readystatechange", ajaxCallback );
-		}	
+		}
 
 			//	Send ajax request
 		if( ajax.setRequestHeader && linkObject.playMode )
@@ -377,7 +377,7 @@ ayoola.xmlHttp =
 		! linkObject.skipSend ? ajax.send( linkObject.data ) : null;
 		return ajax;
 	},
-	
+
 	//	Refreshes a content
 	refreshElement: function()
 	{
@@ -393,7 +393,7 @@ ayoola.xmlHttp =
 		//		alert( rel.changeElementId );
 		//		alert( element );
 				if( ! b.length )
-				{ 
+				{
 					if( element == 'page_refresh' )
 					{
 					//	var x = window.location.href;
@@ -403,7 +403,7 @@ ayoola.xmlHttp =
 						ayoola.spotLight.splashScreen();
 						window.location.href = window.location.href.split( '#' )[0];
 					}
-					return false; 
+					return false;
 				}
 				if( ! b[0].getAttribute( 'data-object-name' ) ){ return false; }
 				var url = ayoola.xmlHttp.getClassPlayerUrl() + 'get/object_name/' + b[0].getAttribute( 'data-object-name' ) + '/' + location.search;
@@ -427,18 +427,18 @@ ayoola.xmlHttp =
 						{
 					//		alert( b.length );
 							var c = b[a];
-						//	c.innerHTML = ajax.responseText; 
+						//	c.innerHTML = ajax.responseText;
 							var d = document.createElement( 'span' );
 							d.innerHTML = ajax.responseText;
 							var e = c.parentNode;
 							e.removeChild( c );
 							e.appendChild( d );
 						}
-					} 
+					}
 				}
 				else if( element )
 				{
-					element.innerHTML = ajax.responseText; 
+					element.innerHTML = ajax.responseText;
 				}
 			}
 			ayoola.events.add( ajax, 'readystatechange', changeContent );
@@ -446,7 +446,7 @@ ayoola.xmlHttp =
 			ajax.send( null );
 		}
 	},
-	
+
 	//	Play a link by refreshing an identified changeElement
 	play: function( e )
 	{
@@ -459,7 +459,7 @@ ayoola.xmlHttp =
 //		alert( rel.changeElementId );
 //		alert( element );
 		if( ! b.length ){ return false; }
-		
+
 		ajax.open( 'GET', url, true );
 		var changeContent = function()
 		{
@@ -470,32 +470,32 @@ ayoola.xmlHttp =
 				{
 			//		alert( b.length );
 					var c = b[a];
-				//	c.innerHTML = ajax.responseText; 
+				//	c.innerHTML = ajax.responseText;
 					var d = document.createElement( 'span' );
 					d.innerHTML = ajax.responseText;
 					var e = c.parentNode;
 					e.removeChild( c );
 					e.appendChild( d );
 				}
-			} 
+			}
 		}
 		ayoola.events.add( ajax, 'readystatechange', changeContent );
 		ajax = ayoola.xmlHttp.setDefault( ajax );
 		ajax.send( null );
 		if( e.preventDefault ){ e.preventDefault(); }
 	},
-	
+
 	//	Check if the an anchor as a classplayer link
 	isClassPlayerLink: function( anchor )
 	{
 		if( undefined == anchor.href ){ return false; }
-		
+
 		var rel = ayoola.div.getAnchorRel( anchor );
 		if( anchor.href.search( ayoola.xmlHttp.classPlayerUrl ) == -1 )
-		{ 
+		{
 			if( ! rel.classPlayerUrl || rel.classPlayerUrl.search( ayoola.xmlHttp.classPlayerUrl ) == -1 )
 			{
-				return false; 
+				return false;
 			}
 		}
 	//	alert( rel.changeElementId );
@@ -506,20 +506,20 @@ ayoola.xmlHttp =
 	//	alert( rel.classPlayerUrl );
 		return true
 	},
-	
+
 	//	Check if the xmlHttp Object is ready
 	isReady: function( object )
 	{
 		if( object.readyState == 4 && object.status == 200 ){ return true; }
 		return false;
 	},
-	
+
 	//	Set the ajax to some preset settings
 	setDefault: function( ajax )
 	{
 		if( ajax.setRequestHeader ){ ajax.setRequestHeader( 'Request-Type', 'xmlHttp' ); }
 //		ayoola.xmlHttp.callBeforeStateChangeCallbacks();
-		
+
 		//	Instantiate all the registered callbacks for statechange
 	//	for( var a = 0; a < ayoola.xmlHttp.afterStateChangeCallbacks.length; a++ )
 		{
@@ -529,7 +529,7 @@ ayoola.xmlHttp =
 		ayoola.events.add( ajax, 'readystatechange', ayoola.xmlHttp.init );
 		return ajax;
 	},
-	
+
 	//	Include what to do before status changed
 	setBeforeStateChangeCallback: function( callback )
 	{
@@ -540,8 +540,8 @@ ayoola.xmlHttp =
 		}
 		ayoola.xmlHttp.beforeStateChangeCallbacks.push( callback );
 	},
-	
-	//	Do 
+
+	//	Do
 	callBeforeStateChangeCallbacks: function()
 	{
 	//		alert( ayoola.xmlHttp.afterStateChangeCallbacks.length );
@@ -553,7 +553,7 @@ ayoola.xmlHttp =
 		//	alert( callback );
 		}
 	},
-	
+
 	//	Include what to do when status changed
 	setAfterStateChangeCallback: function( callback )
 	{
@@ -564,7 +564,7 @@ ayoola.xmlHttp =
 		}
 		ayoola.xmlHttp.afterStateChangeCallbacks.push( callback );
 	},
-	
+
 	//	Include what to do when status changed
 	callAfterStateChangeCallbacks: function()
 	{
@@ -576,21 +576,21 @@ ayoola.xmlHttp =
 			callback();
 		}
 	},
-	
+
 	//	Include what to do when status changed
 	getClassPlayerUrl: function()
 	{
 		return ayoola.pcPathPrefix + ayoola.xmlHttp.classPlayerUrl;
 	},
 
-	nodeScriptReplace: function (node) 
+	nodeScriptReplace: function (node)
 	{
-        if( node.tagName === 'SCRIPT' ) 
+        if( node.tagName === 'SCRIPT' )
 		{
 			node.parentNode.replaceChild( ayoola.xmlHttp.nodeScriptClone(node) , node );
 	//		node.src ? alert( node.src ) : alert( node.innerHTML );
         }
-        else 
+        else
 		{
 			var i = 0;
 			var children = node.childNodes;

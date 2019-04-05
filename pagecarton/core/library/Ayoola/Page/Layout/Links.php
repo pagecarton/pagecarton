@@ -14,7 +14,7 @@
 /**
  * @see Ayoola_Page_Layout_Abstract
  */
- 
+
 require_once 'Application/Subscription/Abstract.php';
 
 
@@ -27,32 +27,32 @@ require_once 'Application/Subscription/Abstract.php';
 
 class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 {
- 	
+
     /**
-     * 
-     * 
-     * @var string 
+     *
+     *
+     * @var string
      */
-	protected static $_objectTitle = 'Theme Links'; 
- 	
+	protected static $_objectTitle = 'Theme Links';
+
     /**
-     * 
-     * 
-     * @var string 
+     *
+     *
+     * @var string
      */
-	protected static $_regex = '#(<a[^<>]*href[\s]*=[\s]*[\'"])([^\'"]*)([\'"][^<>]*>)(.*)(</a>)#isU'; 
-			
+	protected static $_regex = '#(<a[^<>]*href[\s]*=[\s]*[\'"])([^\'"]*)([\'"][^<>]*>)(.*)(</a>)#isU';
+
     /**
      * The method does the whole Class Process
-     * 
+     *
      */
 	protected function init()
     {
 		try
-		{ 
+		{
 	//		var_export( $files );
 			if( ! $data = $this->getIdentifierData() ){ return false; }
-		
+
 	//		var_export( $this->getMyFilename() );
 			$filename = '/layout/' . $data['layout_name'] . '/theme/data_json';
 
@@ -84,7 +84,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 				}
 				preg_match_all( static::$_regex, $htmlContent[$contentKey], $matches );
 			//	var_export( $matches );
-		//		var_export( $htmlContent ); 
+		//		var_export( $htmlContent );
 				$matches[2] = array_combine( $matches[0], $matches[2] );
 				$matches[4] = array_combine( $matches[0], $matches[4] );
 				$urls += $matches[2];
@@ -93,10 +93,10 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			}
 	//		exit();
 				asort( $urls );
-		//		var_export( $urls ); 
-		//		var_export( $titles ); 
-			$linksData = array(); 		
-			$keyList = array(); 		
+		//		var_export( $urls );
+		//		var_export( $titles );
+			$linksData = array();
+			$keyList = array();
 
 			$form = new Ayoola_Form();
 			$form->submitValue = 'Update';
@@ -126,13 +126,13 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 
 				// Instantiate the object
 				$xml[$contentKey] = new Ayoola_Xml();
-				
+
 				// Build the DOM from the input (X)HTML snippet
 				@$xml[$contentKey]->loadHTML( '<?xml encoding="utf-8" ?>' . $content );
-				# remove <!DOCTYPE 
-				$xml[$contentKey]->removeChild( $xml[$contentKey]->doctype );           
+				# remove <!DOCTYPE
+				$xml[$contentKey]->removeChild( $xml[$contentKey]->doctype );
 
-				# remove <html><body></body></html> 
+				# remove <html><body></body></html>
 				$links = $xml[$contentKey]->getElementsByTagName( 'a' );
 */
 			//	var_export( $_POST );
@@ -218,19 +218,19 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 		//	var_export( $linksData );
 			if( $linksData )
 			{
-				$this->setViewContent( $form->view(), true ); 
-				$this->setViewContent( '<div class="pc-notify-info">Please take caution while using this tool as it is still experimental. </div>' ); 
+				$this->setViewContent( $form->view(), true );
+				$this->setViewContent( '<div class="pc-notify-info">Please take caution while using this tool as it is still experimental. </div>' );
 			}
 			else
 			{
-				$this->setViewContent( '<div class="badnews">There are no editable links on this theme.</div>', true ); 
+				$this->setViewContent( '<div class="badnews">There are no editable links on this theme.</div>', true );
 			}
 			if( ! $values = $form->getValues() ){ return false; }
 		//	var_export( $form->getValues() );
 			$done = array();
 /*			foreach( $linksData as $key => $each )
 			{
-				
+
 				$thisValue = array( 'title' => $each['title'], 'url' => $each['url'] );
 				$linkKey = md5( serialize( $thisValue ) );
 				if( in_array( $thisValue, $done ) )
@@ -261,14 +261,14 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			//		$linkValue[$linkKey]['title'] = htmlspecialchars_decode( $linkValue[$linkKey]['title'] );
 					if( strip_tags( $linkValue[$linkKey]['title'] ) != $linkValue[$linkKey]['title'] )
 					{
-						
+
 						$each['node']->nodeValue = null;
 						$f = new Ayoola_Xml();
 						$f->preserveWhiteSpace = FALSE;
 				//		var_export( $linkValue[$linkKey]['title'] );
-						$f->loadHtml( '<?xml encoding="utf-8" ?>' . trim( $linkValue[$linkKey]['title'] ) );	
-						# remove <!DOCTYPE 
-					//	$f->removeChild( $f->doctype );           
+						$f->loadHtml( '<?xml encoding="utf-8" ?>' . trim( $linkValue[$linkKey]['title'] ) );
+						# remove <!DOCTYPE
+					//	$f->removeChild( $f->doctype );
 				//		$f->replaceChild($f->firstChild, $f->firstChild);
 						$newNode = $f->documentElement->firstChild;
 				//		echo $linkValue[$linkKey]['title'];
@@ -282,11 +282,11 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 					$linkValue[$linkKey]['new_node'] = $newNode;
 				}
 				$each['node']->nodeValue = null;
-			//	$newNode = 
+			//	$newNode =
 				if( empty( $linkValue[$linkKey]['delete'] ) )
 				{
 					$newNode = $each['node']->ownerDocument->importNode( $linkValue[$linkKey]['new_node'], true );
-					$newNode ? $each['node']->appendChild( $newNode ) : null;			
+					$newNode ? $each['node']->appendChild( $newNode ) : null;
 					$each['node']->setAttribute( 'href', $linkValue[$linkKey]['url'] );
 					$class = $each['node']->getAttribute( 'class' );
 					if( stripos( $class, 'scroll' ) !== false )
@@ -294,7 +294,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 						if( $linkValue[$linkKey]['url'][0] !== '#' )
 						{
 							$each['node']->setAttribute( 'class', str_ireplace( 'scroll', '', $class ) );
-						}  
+						}
 					}
 				}
 				else
@@ -307,7 +307,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 					$nodeToDelete->parentNode->removeChild( $nodeToDelete );
 				}
 			}
-*/	//		var_export( $values );     
+*/	//		var_export( $values );
 
 			foreach( $values as $contentKey => $eachContent )
 			{
@@ -317,7 +317,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			foreach( $htmlContent as $contentKey => $eachContent )
 			{
           //  	$doc = str_ireplace( array( '<body>', '</body>', '<p->', '</p->' ), '', $xml[$contentKey]->exportHTML( $xml[$contentKey]->documentElement->firstChild ) );
-				
+
 		//		var_export( $doc );
 				//	delete all paragraphs in anchor
 				$callback = function( $matches ) use( $linksData )
@@ -339,7 +339,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 				$doc = preg_replace_callback( static::$_regex, $callback, $eachContent );
 			//	var_export( $doc );
 		//		var_export( $contentArray[$contentKey] );
-				
+
 				$contentArray[$contentKey] = $doc;
 			//	var_export( $contentArray[$contentKey] );
 		//	var_export( $contentArray[$contentKey] );
@@ -351,13 +351,13 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 		//	$this->updateFile( array( 'plain_text' => $xml->saveHTML() ) );
 			static::refreshThemePage( $data['layout_name'] );
 			$this->setViewContent( '<p class="boxednews goodnews">Theme links saved successfully.</p>', true );
-			
+
 		//	echo $xml->view();
 		//	exit();
 		//	var_export( $linksData );
 		//	var_export( $linkValue );
 		}
 		catch( Ayoola_Page_Layout_Exception $e ){ return false; }
-    } 
+    }
 	// END OF CLASS
 }

@@ -14,7 +14,7 @@
 /**
  * @see Ayoola_Doc_Abstract
  */
- 
+
 require_once 'Ayoola/Doc/Abstract.php';
 
 
@@ -27,24 +27,24 @@ require_once 'Ayoola/Doc/Abstract.php';
 
 class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 {
-	
+
     /**
      * Access level for player
      *
      * @var boolean
      */
 	protected static $_accessLevel = array( 0 );
- 	
+
     /**
-     * 
-     * 
-     * @var string 
+     *
+     *
+     * @var string
      */
-	protected static $_objectTitle = 'File Manager'; 
-		
+	protected static $_objectTitle = 'File Manager';
+
     /**
      * The method does the whole Class Process
-     * 
+     *
      */
 	protected function init()
     {
@@ -54,10 +54,10 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 			@$docSettings['allowed_viewers'] = $docSettings['allowed_viewers'] ? : array();
 			$docSettings['allowed_viewers'][] = 98;
 			if( ! Ayoola_Abstract_Table::hasPriviledge( $docSettings['allowed_viewers'] ) )
-			{ 
+			{
 				return false;
 			}
-			$previousData = self::getObjectStorage( 'values' )->retrieve();			
+			$previousData = self::getObjectStorage( 'values' )->retrieve();
 			//	make a form to select directory
 			$form = new Ayoola_Form();
 		//	$form->submitValue = 'Browse';
@@ -84,7 +84,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 				$fieldset->addElement( array( 'name' => 'doc_browser_directories', 'onchange' => 'ayoola.spotLight.splashScreen(); this.form.submit();', 'type' => 'Select', 'label' => '', 'value' => $previousData['doc_browser_directories'], ), array( '' => 'Select Directory' ) + $options );
 			}
 			$form->addFieldset( $fieldset );
-			
+
 		//	var_export( $options );
 			$this->setViewContent( $form->view(), true );
 
@@ -130,7 +130,7 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 						$data[$url] = array( 'url' => $url, 'time' => $docTime, 'basename' => basename( $url ), 'ext' => strtoupper( $ext ), 'filesize' => $filterSize->filter( filesize( $eachFile ) ), 'modified' => $filterTime->filter( $docTime ), 'created' => $filterTime->filter( filectime( $eachFile ) ), 'by' => '' );
 					}
 				}
-				krsort( $data );  
+				krsort( $data );
 				break;
 				default:
 					if( Ayoola_Application::getUserInfo( 'username' ) )
@@ -167,17 +167,17 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 		//	$this->setViewContent( $html );
 		}
 		catch( Exception $e )
-		{ 
+		{
 		//	var_export( $e->getMessage() );
 			$form->setBadnews( $e->getMessage() );
 			$this->setViewContent( $form->view(), true );
-			return false; 
+			return false;
 		}
-    } 
-	
+    }
+
     /**
-     * creates the Browser 
-     * 
+     * creates the Browser
+     *
      */
 	public function createList( $data )
     {
@@ -191,17 +191,17 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 
 		$list->setData( $data );
 	//	$list->setListOptions( array( 'Creator' => ' ' ) );
-		$list->setListOptions( 
-					array( 
+		$list->setListOptions(
+					array(
 						'Creator' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/" title="Upload a file">Upload File</a>' ) );
 
 		$list->setKey( 'url' );
 		$list->setNoRecordMessage( 'There is no file in the selected directory.' );
-		//			ayoola.image.setElementValue( element, value, { url: value, url: value, } ); 
+		//			ayoola.image.setElementValue( element, value, { url: value, url: value, } );
 
 		$select = empty( $_REQUEST['field_name'] ) ? null : '<a  class="pc-btn pc-btn-small" style="" href="javascript:" onclick="ayoola.div.setFormElementValue( \'' . $_REQUEST['field_name'] . '\', \'%KEY%\', \'' . @$_REQUEST['unique_id'] . '\' );; ">select</a>';
 
-		$list->createList(  
+		$list->createList(
 			array(
 				'  ' => array( 'field' => 'basename', 'value' => '<div style="text-align:center;font-size:x-small;">
 								<div style="padding-bottom:5px;text-align:center;">
@@ -209,18 +209,18 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 								</div>
 								<img width="60" height="60" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=60&max_height=60&url=%KEY%&document_time={{{%time%}}}" alt="" >
 								<div style="padding:5px;"><a class="pc-btn pc-btn-small" style="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '%KEY%">view</a> <a class="pc-btn pc-btn-small" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=%KEY%&crop=1"> Replace </a> ' . $select . '</div>
-								</div>' ), 
-				'url' => '%FIELD%', 
-				'ext' => '%FIELD%', 
-				'filesize' => '%FIELD%', 
-				'created' => '%FIELD%', 
-				'modified' => '%FIELD%', 
-		//		'Download' => '<a rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Download/?' . $this->getIdColumn() . '=%KEY%">Download</a>', 
-				' ' => array( 'field' => 'url', 'value' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Delete/?url=%FIELD%"> x </a>'), 
+								</div>' ),
+				'url' => '%FIELD%',
+				'ext' => '%FIELD%',
+				'filesize' => '%FIELD%',
+				'created' => '%FIELD%',
+				'modified' => '%FIELD%',
+		//		'Download' => '<a rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Download/?' . $this->getIdColumn() . '=%KEY%">Download</a>',
+				' ' => array( 'field' => 'url', 'value' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Delete/?url=%FIELD%"> x </a>'),
 			)
 		);
 		//var_export( $list );
 		return $list;
-    } 
+    }
 	// END OF CLASS
 }

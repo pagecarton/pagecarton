@@ -14,7 +14,7 @@
 /**
  * @see Ayoola_Abstract_Playable
  */
- 
+
 require_once 'Ayoola/Abstract/Playable.php';
 
 
@@ -27,23 +27,23 @@ require_once 'Ayoola/Abstract/Playable.php';
 
 class Application_Settings_SiteInfo extends Application_Settings_Abstract
 {
-	
+
     /**
      * Default Database Table
      *
      * @var string
      */
 	protected $_tableClass = 'Application_Settings';
-	
+
     /**
      * Identifier for the column to edit
-     * 
+     *
      * @var array
      */
 	protected $_identifierKeys = array( 'settingsname_name' );
     /**
      * Calls this after every successful settings change
-     * 
+     *
      */
 	public static function callback()
     {
@@ -72,12 +72,12 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
                 copy( $from, $to );
             }
         }
-        
+
     }
 
     /**
      * creates the form for creating and editing
-     * 
+     *
      * param string The Value of the Submit Button
      * param string Value of the Legend
      * param array Default Values
@@ -91,9 +91,9 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;
-		
-//		var_export( $settings );  
-		
+
+//		var_export( $settings );
+
 		//	Company Info
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->addElement( array( 'name' => 'site_headline', 'placeholder' => 'E.g. My Web', 'label' => 'Headline', 'value' => @$settings['site_headline'], 'type' => 'InputText' ) );
@@ -102,24 +102,24 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
     //    var_export();
 
         if( Ayoola_Abstract_Table::hasPriviledge( array( 99, 98 ) ) )
-        {        
-            $fieldset->addElement( array( 'name' => 'cover_photo', 'label' => 'Banner Image', 'data-document_type' => 'image', 'type' => 'Document', 'value' => @$settings['cover_photo'] ) );    
-            $fieldset->addElement( array( 'name' => 'logo', 'label' => 'Brand Logo', 'data-document_type' => 'image', 'type' => 'Document', 'value' => '/img/logo.png' ) );    
-            $fieldset->addElement( array( 'name' => 'favicon', 'label' => 'Favicon', 'data-document_type' => 'image', 'type' => 'Document', 'value' => @$settings['favicon'] ? : '/favicon.ico' ) );    
+        {
+            $fieldset->addElement( array( 'name' => 'cover_photo', 'label' => 'Banner Image', 'data-document_type' => 'image', 'type' => 'Document', 'value' => @$settings['cover_photo'] ) );
+            $fieldset->addElement( array( 'name' => 'logo', 'label' => 'Brand Logo', 'data-document_type' => 'image', 'type' => 'Document', 'value' => '/img/logo.png' ) );
+            $fieldset->addElement( array( 'name' => 'favicon', 'label' => 'Favicon', 'data-document_type' => 'image', 'type' => 'Document', 'value' => @$settings['favicon'] ? : '/favicon.ico' ) );
         }
 
         $options = Ayoola_Page_Layout_Repository::getMenuOptions();
   //      var_export( $options );
 		$fieldset->addElement( array( 'name' => 'site_type', 'label' => 'Theme Type', 'value' => @$settings['site_type'], 'type' => 'Select' ), array( '' => 'Generic' ) + array_column( $options, 'title', 'category_name' ) ? : array() );
-		$fieldset->addLegend( 'Site Information' );  
+		$fieldset->addLegend( 'Site Information' );
 		$form->addFieldset( $fieldset );
-		
+
 	//	$form->addFieldset( $fieldset );
-				
+
 //		var_export( $fieldsets );
 		$this->setForm( $form );
 		//		$form->addFieldset( $fieldset );
 	//	$this->setForm( $form );
-    } 
+    }
 	// END OF CLASS
 }
