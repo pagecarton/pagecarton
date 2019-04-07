@@ -708,8 +708,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 
 
-		if( $howManyPostsToAdd ) 
+		if( $howManyPostsToAdd && empty( $_GET['pc_post_list_id'] ) ) 
 		{ 
+			//	var_export();
+
 			$myProfileInfo = Application_Profile_Abstract::getMyDefaultProfile();
 			do
 			{
