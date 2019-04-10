@@ -463,10 +463,10 @@ class Application_Article_View extends Application_Article_Abstract
 					}			
 				break;
 				case 'product':
-				case 'service':
+			//	case 'service':
 				case 'subscription':
-				case 'event':
-				case 'events':
+			//	case 'event':
+			//	case 'events':
 					//	By
 					
 					//	title

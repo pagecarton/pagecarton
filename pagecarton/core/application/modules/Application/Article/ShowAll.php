@@ -966,39 +966,39 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['article_description'] = trim( $data['article_description'] );
 			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
 			{
-				$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 200 ) . '...';
+				$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 300 ) . '...';
 			}
-			if( $this->getParameter( 'length_of_description' ) )
+			$lengthOfDescription = $this->getParameter( 'length_of_description' ) ? : 500;
+			if( $lengthOfDescription )
 			{
 				if( ! function_exists( 'mb_strimwidth' ) )
 				{
 					
-					@$data['article_description'] = strlen( $data['article_description'] ) < $this->getParameter( 'length_of_description' ) ? $data['article_description'] : ( trim( substr( $data['article_description'], 0, $this->getParameter( 'length_of_description' ) ) ) . '...' );
+					@$data['article_description'] = strlen( $data['article_description'] ) < $lengthOfDescription ? $data['article_description'] : ( trim( substr( $data['article_description'], 0, $lengthOfDescription ) ) . '...' );
 				}
 				else
 				{
-					@$data['article_description'] = mb_strimwidth( $data['article_description'], 0, $this->getParameter( 'length_of_description' ), "..." );
+					@$data['article_description'] = mb_strimwidth( $data['article_description'], 0, $lengthOfDescription, "..." );
 				}
 			}
-	
-			
-			if( $this->getParameter( 'length_of_title' ) )
+
+			$lengthOfTitle = $this->getParameter( 'length_of_title' ) ? : 160;
+			if( $lengthOfTitle )
 			{
 				$titleToUse = trim( $data['article_title'], '- ' );
 				if( ! function_exists( 'mb_strimwidth' ) )
 				{
 					
-					@$data['article_title'] = strlen( $titleToUse ) < $this->getParameter( 'length_of_title' ) ? $titleToUse : ( trim( substr( $titleToUse, 0, $this->getParameter( 'length_of_title' ) ) ) . '...' );  
+					@$data['article_title'] = strlen( $titleToUse ) < $lengthOfTitle ? $titleToUse : ( trim( substr( $titleToUse, 0, $lengthOfTitle ) ) . '...' );  
 				}
 				else
 				{
-					@$data['article_title'] = mb_strimwidth( $titleToUse, 0, $this->getParameter( 'length_of_title' ), "..." );
+					@$data['article_title'] = mb_strimwidth( $titleToUse, 0, $lengthOfTitle, "..." );
 				}
 			}
 			//		self::v( $data );
-			if( $this->getParameter( 'use_datetime' ) )
+			if( $this->getParameter( 'use_datetime' ) || $data['true_post_type'] == 'event' )
 			{
-
 				if( ! empty( $data['datetime'] ) )
 				{
 					$data['datetime'] = strtotime( $data['datetime'] );
@@ -1235,7 +1235,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					break;  
 					case 'subscription':
 					case 'product':
-					case 'service':
+				//	case 'service':
 						$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( array( 'data' => $data, 'button_value' => $this->getParameter( 'button_value' ) ? : $data['button_value'] ) );
 					break; 
 					case 'category_information':

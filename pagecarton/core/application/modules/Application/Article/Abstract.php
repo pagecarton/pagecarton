@@ -1426,7 +1426,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$fieldset->hashElementName = $this->hashFormElementName;
 
 		//	internal forms to use
-		$features = is_array( @$postTypeInfo['post_type_options'] ) && ( count( $postTypeInfo['post_type_options'] ) !== 1 || $postTypeInfo['post_type_options'][0] !== '' ) ? $postTypeInfo['post_type_options'] : array( 'description', 'cover-photo', 'category', 'privacy', );  
+		$features = is_array( @$postTypeInfo['post_type_options'] ) && ( count( $postTypeInfo['post_type_options'] ) !== 1 || $postTypeInfo['post_type_options'][0] !== '' ) ? $postTypeInfo['post_type_options'] : array( 'article', 'cover-photo', 'category' );  
 	//	self::v( $features );   
 		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
 		$features[] = $values['true_post_type'];
@@ -1782,7 +1782,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					}
 				break;
 				case 'product':
-				case 'service':
+			//	case 'service':
 				case 'subscription':
 					$fieldset->addElement( array( 'name' => 'item_old_price' . $featurePrefix, 'label' => 'Old price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_old_price' . $featurePrefix] ) );
 					$fieldset->addElement( array( 'name' => 'item_price' . $featurePrefix, 'label' => 'Current price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_price' . $featurePrefix] ) );
@@ -1918,15 +1918,17 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$datetime .= ':';
 					$datetime .= strlen( $this->getGlobalValue( 'time_minutes' . $featurePrefix ) ) === 1 ? ( '0' . $this->getGlobalValue( 'time_minutes' . $featurePrefix ) ) : $this->getGlobalValue( 'time_minutes' . $featurePrefix );
 					$fieldset->addFilter( 'datetime' . $featurePrefix, array( 'DefiniteValue' => $datetime ) );
-	//			break;
+				break;
 				case 'location':
 
-					$fieldset->addElement( array( 'name' => 'address' . $featurePrefix, 'label' => $postTypeLabel . ' Address', 'placeholder' => 'e.g. Jogor Centre', 'type' => 'InputText', 'value' => @$values['address' . $featurePrefix] ) );  
+					$fieldset->addElement( array( 'name' => 'address' . $featurePrefix, 'label' => $postTypeLabel . ' Address Line 1', 'placeholder' => 'e.g. 12 Adebisi Street', 'type' => 'InputText', 'value' => @$values['address' . $featurePrefix] ) );  
+					$fieldset->addElement( array( 'name' => 'addresss2' . $featurePrefix, 'label' => $postTypeLabel . ' Address Line 2', 'placeholder' => 'e.g. Nustreams Conference & Culture Centre', 'type' => 'InputText', 'value' => @$values['addresss2' . $featurePrefix] ) );  
 					$fieldset->addElement( array( 'name' => 'city' . $featurePrefix, 'label' => $postTypeLabel . ' City', 'placeholder' => 'e.g. Ibadan', 'type' => 'InputText', 'value' => @$values['city' . $featurePrefix] ) );
 					$fieldset->addElement( array( 'name' => 'province' . $featurePrefix, 'label' => $postTypeLabel . ' - State, Province or Region', 'placeholder' => '', 'type' => 'InputText', 'value' => @$values['province' . $featurePrefix] ) );
+					$fieldset->addElement( array( 'name' => 'country' . $featurePrefix, 'label' => $postTypeLabel . ' - Country', 'placeholder' => '', 'type' => 'InputText', 'value' => @$values['country' . $featurePrefix] ) );
 				break;
 				case 'article':
-					$fieldset->addElement( array( 'name' => 'article_content' . $featurePrefix, 'data-html' => '1', 'label' => '' . $postTypeLabel . ' write up  ' . $featurePrefix, 'rows' => '10', 'placeholder' => 'Enter content here...', 'type' => 'TextArea', 'value' => @$values['article_content' . $featurePrefix] ) );
+					$fieldset->addElement( array( 'name' => 'article_content' . $featurePrefix, 'data-html' => '1', 'label' => '' . $postTypeLabel . ' write up  ' . $featurePrefix, 'rows' => '10', 'placeholder' => 'Enter content here...', 'type' => 'TextArea', 'value' => @$values['article_content' . $featurePrefix] ? : @$values['article_description' . $featurePrefix] ) );
 
 				break;
 				case 'audio':
