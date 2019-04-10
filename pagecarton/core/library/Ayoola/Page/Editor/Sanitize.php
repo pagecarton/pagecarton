@@ -151,6 +151,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 
         	//	let's remove dangling theme pages not completely deleted
 			Ayoola_Page_Layout_Pages_Delete::deleteThemePageSupplementaryFiles( $pageThemeFileUrl, $themeName );
+			//	var_export( $page );
 
 			$this->refresh( $page );   
 		}

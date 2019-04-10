@@ -172,6 +172,7 @@ class Ayoola_Loader
 	//		return $all[Ayoola_Application::getDomainSettings( APPLICATION_PATH )];
 		}
 		//	if we have two, hide PC own
+	//	var_export( $all );
 		if( count( $all ) > 1  )
 		{
 			unset( $all[APPLICATION_PATH] );
@@ -190,8 +191,25 @@ class Ayoola_Loader
     {
 		if( $fullPath = self::getFullPath( $filename, $options ) )
 		{
-			if( is_file( $fullPath ) ){ return $fullPath; }
+			if( is_file( $fullPath ) )
+			{ 
+				return $fullPath; 
+			}
+			else
+			{
+				//	sometimes it was available and it was cached. 
+				//	Now it is no longer available
+				self::resetValidIncludePaths();
+				if( $fullPath = self::getFullPath( $filename, $options ) )
+				{
+					if( is_file( $fullPath ) )
+					{ 
+						return $fullPath; 
+					}
+				}
+			}
 		}
+	//	var_export( $fullPath );
 		return false;
     } 
 	

@@ -44,17 +44,27 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 			{
 				//	if its still a system page, delete and create again
 				//	this is causing problems deleting the home page
-			//	if( $table->select( null, array( 'url' => $page, 'system' => '1' ) ) )
+				if( $table->select( null, array( 'url' => $page, 'system' => '1' ) ) )
 				{
-			//		$table->delete( array( 'url' => $page, 'system' => '1' ) );
+					$parameters = array( 
+											'fake_values' => array( 'auto_submit' => true ),
+											'url' => $page,
+					);
+					$class = new Ayoola_Page_Delete( $parameters );
+					$class->init();
+
+				//	Application_Cache_Clear::viewInLine();
+				//	$deleted = $table->delete( array( 'url' => $page, 'system' => '1' ) );
+				//	var_export( $page );   
+				//	var_export( $class->view() );   
 				}
-		//		var_export( $page );   
 			//	continue;
 				//	create this page if not available.
 				//	must initialize each time so that each page can be handled.
-				$class = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'auto_create_page' => true ) );  
+				$class = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $page, 'auto_create_page' => true ) );  
 
 				$response = $class->sourcePage( $page );
+			//	var_export( $page );   
 		//		var_export( $response );   
 			}
 			catch( Exception $e )
@@ -62,6 +72,7 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 				null;
 			}
 		}
+	//	return false;
 		//	copy page content from theme
 		$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
 	//	var_export( $themeName );

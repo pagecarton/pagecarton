@@ -116,6 +116,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 			}
 		//	var_export( $this->_dbWhereClause['url'] );
+		//	var_export( Ayoola_Page::getInfo( $this->_dbWhereClause['url'] ) );
 			$parentContent = array();
 		//	$isNotLayoutPage = stripos( $page['url'], '/layout/' ) !== 0;
 			$pageToCopy = null;
@@ -135,20 +136,19 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				//	$page = $defaultPage;			
 					$pageToCopy = $defaultPage;
 				}				
-		//		$this->setViewContent( '<div class="">This page with url - "' . $this->_dbWhereClause['url'] . '" exists as part of the preset pages in PageCarton or in a parent website. The system need to make a copy of the page before you can edit it. Do you want to do that right now?</div>', true );
-		//		$this->createConfirmationForm( 'Continue...' );
-			//	$this->setViewContent( $this->getForm()->view() );
-			//	if( ! $values = $this->getForm()->getValues() ){ return false; }
-			//	var_export( Ayoola_Page::getPagePaths( $page['url'] ) );
 				
 				//	Copy the parent files
 				$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
 				$rPaths = self::getDefaultPageFilesToUse( $pageToCopy['url'], $themeName );
 
-				foreach( $rPaths as $key => $each )
+				foreach( $rPaths as $key => $eachX )
 				{
-					if( ! $each = Ayoola_Loader::checkFile( $each ) )
+
+					if( ! $each = Ayoola_Loader::checkFile( $eachX ) )
 					{
+					//	self::v( $each );
+					//	self::v( $eachX );
+					//	self::v( Ayoola_Loader::getValidIncludePaths( $eachX ) );
 						$this->setViewContent( '<p>A new page could not be created because: Some of the files could not be copied. Please go to <a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/?url=' . $this->_dbWhereClause['url'] . '">Create a fresh page at ' . $this->_dbWhereClause['url'] . '.</a></p>', true );
 					}
 					else
@@ -171,7 +171,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 
 			$class->init();
-	//		var_export( $class->getForm()->getValues() );
+		//	var_export( $class->view() );
+		//	var_export( $class->getForm()->getValues() );
 		//	var_export( $pageToCopy );
 		//	self::v( $page );
 		//	self::v( __LINE__ . '<br>' );
@@ -182,6 +183,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				return false;
 			}
 	//		self::v( __LINE__ . '<br>' );
+	//		self::v( __LINE__ . '<br>' );
 			//	save parent template into the new page
 			if( $parentContent )
 			{
@@ -189,12 +191,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				{
 				//	if( $each = Ayoola_Loader::checkFile( $each ) )
 					{
-	//		self::v( $each . '<br>' );
-	//		self::v( $parentContent[$key] );
 						$savePath = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $each;
 						
 						@Ayoola_Doc::createDirectory( dirname( $savePath ) );
 						file_put_contents( $savePath, @$parentContent[$key] ); 
+						@Ayoola_Doc::createDirectory( dirname( $savePath ) );
+					//	self::v( $savePath . '<br>' );
+		//s	self::v( $parentContent[$key] );
 					}
 				}
 

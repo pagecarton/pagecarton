@@ -927,7 +927,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			{
 	//		var_export( $profileInfo );
 			//	$data += $profileInfo ? : array();
-				$html .= ( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '" class="pc_posts_option_items"> by ' . ( @$data['display_name'] ? : $data['profile_url'] ) . '</a>' );
+				$html .= ( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '" class="pc_posts_option_items"> Posted By ' . ( @$data['display_name'] ? : $data['profile_url'] ) . '</a>' );
 			}
 		}
 		
