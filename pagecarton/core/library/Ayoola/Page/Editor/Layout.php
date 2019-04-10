@@ -147,7 +147,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					if( ! $each = Ayoola_Loader::checkFile( $eachX ) )
 					{
 					//	self::v( $each );
-					//	self::v( $eachX ); 
+					//	self::v( $eachX );  
 					//	self::v( Ayoola_Loader::getValidIncludePaths( $eachX ) );
 						$this->setViewContent( '<p>A new page could not be created because: Some of the files could not be copied. Please go to <a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/?url=' . $this->_dbWhereClause['url'] . '">Create a fresh page at ' . $this->_dbWhereClause['url'] . '.</a></p>', true );
 					}

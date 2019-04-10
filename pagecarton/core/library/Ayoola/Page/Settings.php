@@ -38,7 +38,7 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 		  
 		$table = Ayoola_Page_Page::getInstance();
 	//	unset( $_POST );
-		foreach( $defaultPages as $page )     
+		foreach( $defaultPages as $page )      
 		{
 			try
 			{

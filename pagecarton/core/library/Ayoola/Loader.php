@@ -153,7 +153,7 @@ class Ayoola_Loader
 		//	var_export( PC_BASE . $options['path_blacklist'] );
 			//$key = array_search( $options['path_blacklist'], $all );
 			unset( $all[$options['path_blacklist']] );
-			unset( $all[PC_BASE . $options['path_blacklist']] ); 
+			unset( $all[PC_BASE . $options['path_blacklist']] );  
 		}
 	//	if( @$options['prioritize_my_copy'] && stripos( Ayoola_Application::getDomainSettings( APPLICATION_PATH ), 'music' ) )
 		{
