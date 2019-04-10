@@ -146,7 +146,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 			$pageThemeFileUrl = $page;
 			if( $pageThemeFileUrl == '/' )
 			{
-				$pageThemeFileUrl = '/index';
+				$pageThemeFileUrl = '/index'; 
 			}
 
         	//	let's remove dangling theme pages not completely deleted
