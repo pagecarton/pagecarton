@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Wednesday 10th of April 2019 02:13:45 PM	ayoola@ayoo.la $ 
+* @version $Id: account.php	Wednesday 10th of April 2019 02:16:48 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -188,7 +188,13 @@ $_edca16dd549bfe09f69705d257712133 = null;
 									
 $_d687a55ad8784085b5b9dd53060bad5c = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div class="container">
+<p>&nbsp;</p>
+
 <h3>Update Site</h3>
+
+<div>&nbsp;</div>
+
+<div>&nbsp;</div>
 </div>
 ',
   'preserved_content' => '			
