@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Wednesday 10th of April 2019 01:43:54 PM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Wednesday 10th of April 2019 06:48:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -17,10 +17,11 @@
 							{
 								
 $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
-  'codes' => '<p><img src="{{{document_url}}}" alt="Image" style="width:100%"></p>
+  'editable' => '<p><img src="{{{document_url}}}" alt="Image" style="width:100%"></p>
+<p>&nbsp;</p>
 <div class="container">
 <br>
-<h3>{{{article_title}}}</h3>
+<h1>{{{article_title}}}</h1>
 <br>
 <p>{{{article_description}}}</p>
 <br>
@@ -28,13 +29,12 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
 ',
   'preserved_content' => '<p><img src="{{{document_url}}}" alt="Image" style="width:100%"></p>
 <p>&nbsp;</p>
-<div style="container">
-<h3>{{{article_title}}}</h3>
-
-
+<div class="container">
+<br>
+<h1>{{{article_title}}}</h1>
+<br>
 <p>{{{article_description}}}</p>
-
-<p>&nbsp;</p>
+<br>
 </div>
 ',
   'url_prefix' => '',
@@ -91,10 +91,113 @@ $_ccfcd65b00854efe614caba97537085f = null;
 
 							}
 							
+							if( Ayoola_Page::hasPriviledge( array (
+  0 => '98',
+  1 => '99',
+), array( 'strict' => true ) ) )
+							{
+								if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+								{
+									
+$_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<section class="xcontainer" style="padding:2em 1em 2em 1em; ">
+    <p style="text-align: center;"><span style="font-size:11px;">Manage {{{post_type}}}</span></p>
+    <br>
+    <p style="text-align: center;">
+        <a class="btn btn-default" href="/widgets/Application_Article_Editor?article_url={{{article_url}}}" target="_blank">
+            <span style="font-size:11px;">Edit {{{post_type}}} Information</span>
+        </a>
+        <a class="btn btn-warning" href="/widgets/Application_Article_Delete?article_url={{{article_url}}}" target="_blank">
+            <span style="font-size:11px;">Delete {{{post_type}}}</span>
+        </a>
+    </p>
+    <br>
+</section>',
+  'preserved_content' => '<section class="productname" style="padding:2em 1em 2em 1em; ">
+<p style="text-align: center;"><span style="font-size:11px;">Manage Event</span></p>
+
+<p style="text-align: center;">&nbsp;</p>
+
+<p style="text-align: center;"><a class="btn btn-default" href="/object/name/Application_Subscription_Checkout_Order_List?article_url={{{article_url}}}" target="_blank"><span style="font-size:11px;">View Orders</span> </a> <a class="btn btn-default" href="/object/name/Application_Article_Editor?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Edit Event Information</span> </a> <a class="btn btn-warning" href="/object/name/Application_Article_Delete?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Delete Event</span> </a></p>
+</section>
+',
+  'url_prefix' => '',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Article_View',
+  ),
+  'advanced_parameter_value' => 
+  array (
+    0 => 'Application_Article_View',
+  ),
+  'object_access_level' => 
+  array (
+    0 => '98',
+    1 => '99',
+  ),
+  'wrapper_name' => 'well',
+) );
+
+								}
+								else
+								{
+									
+$_000ba5e12fc767f708845d66c62fb715 = null;
+
+								}
+							}    
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_16296832673663f047e30a609ffd4836 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div class="container">
+<p>&nbsp;</p>
+
+<h3>Other {{{post_type}}} similar to {{{article_title}}}</h3>
+
+<p>&nbsp;</p>
+</div>
+',
+  'preserved_content' => '<div class="container">
+<p>&nbsp;</p>
+
+<h3>Other {{{post_type}}} similar to {{{article_title}}}</h3>
+
+<p>&nbsp;</p>
+</div>
+',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'embed_widgets',
+    1 => 'wrappers',
+    2 => 'parameters',
+  ),
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Article_View',
+  ),
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  'wrapper_name' => 'dark',
+  '' => '',
+) );
+
+							}
+							else
+							{
+								
+$_16296832673663f047e30a609ffd4836 = null;
+
+							}
+							
 							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
 							{
 								
-$_43d921b8828bd2347640dfc69302d1e0 = new Application_Article_ShowAll( array (
+$_72d6251312d1901e8b57f2e6638cdc45 = new Application_Article_ShowAll( array (
   'option' => '6',
   'category_name' => '',
   'article_types' => '',
@@ -118,7 +221,7 @@ $_43d921b8828bd2347640dfc69302d1e0 = new Application_Article_ShowAll( array (
 							else
 							{
 								
-$_43d921b8828bd2347640dfc69302d1e0 = null;
+$_72d6251312d1901e8b57f2e6638cdc45 = null;
 
 							}
 							
