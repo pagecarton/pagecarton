@@ -390,7 +390,12 @@ class Application_Article_View extends Application_Article_Abstract
 			self::getCommentsCount( $data );
 		}
 
-		$this->_xml = self::getDefaultPostView( $data );
+	//	var_export( $this->getParameter( 'hide_default_post_view' ) );
+		if( ! $this->getParameter( 'hide_default_post_view' ) )
+		{
+			$this->_xml = self::getDefaultPostView( $data );
+		}
+
 
 		//	internal forms to use
 		$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array();

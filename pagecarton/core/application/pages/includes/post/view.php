@@ -9,14 +9,59 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Monday 31st of December 2018 12:10:05 PM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Wednesday 10th of April 2019 11:28:37 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<p><img src="{{{document_url}}}" alt="Image" style="width:100%"></p>
+<div class="container">
+<br>
+<h3>{{{article_title}}}</h3>
+<br>
+<p>{{{article_description}}}</p>
+<br>
+</div>
+',
+  'preserved_content' => '<p><img src="{{{document_url}}}" alt="Image" style="width:100%"></p>
+<p>&nbsp;</p>
+<div style="container">
+<h3>{{{article_title}}}</h3>
+
+
+<p>{{{article_description}}}</p>
+
+<p>&nbsp;</p>
+</div>
+',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'preserve_content',
+    1 => 'embed_widgets',
+    2 => 'parameters',
+  ),
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Article_View',
+  ),
+) );
+
+							}
+							else
+							{
+								
+$_3fa21d2b3d9c77ddfd69616a823104e6 = null;
+
+							}
+							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_a960555731d7eede33b37a08755a85c3 = new Ayoola_Object_Embed( array (
+$_ccfcd65b00854efe614caba97537085f = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Article_View',
   'advanced_parameter_value' => 
   array (
@@ -24,159 +69,51 @@ $_a960555731d7eede33b37a08755a85c3 = new Ayoola_Object_Embed( array (
     1 => '1',
     2 => '1',
     3 => '1',
+    4 => '1',
   ),
-  'wrapper_name' => '',
   'get_views_count' => '1',
   'get_audio_play_count' => '1',
   'get_download_count' => '1',
   'thumbnail' => '1',
+  'hide_default_post_view' => '1',
 ) );
 
 							}
 							else
 							{
 								
-$_a960555731d7eede33b37a08755a85c3 = null;
+$_ccfcd65b00854efe614caba97537085f = null;
 
 							}
 							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
 							{
 								
-$_663cd0992952a4d9dc532ce83c9a6037 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<div><br></div><div><br></div>',
-  'preserved_content' => '',
-  'url_prefix' => '/x',
-  'markup_template_object_name' => 
+$_43d921b8828bd2347640dfc69302d1e0 = new Application_Article_ShowAll( array (
+  'option' => '6',
+  'category_name' => '',
+  'article_types' => '',
+  'template_name' => 'ProductsandServicesList2',
+  'widget_options' => 
   array (
-    0 => '',
+    0 => 'wrappers',
+    1 => 'parameters',
   ),
-  'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
-    0 => '',
+    0 => '1',
+    1 => 'container',
   ),
-  'wrapper_name' => '',
-  '' => '',
+  'wrapper_name' => 'well',
+  'post_with_same_true_post_type' => '1',
+  'object_class' => 'container',
 ) );
 
 							}
 							else
 							{
 								
-$_663cd0992952a4d9dc532ce83c9a6037 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_575b17636a0d4f79c80ef72f71cf5379 = new Ayoola_Object_Embed( array (
-  'editable' => 'Application_Profile_View',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_575b17636a0d4f79c80ef72f71cf5379 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_c64d813fc7b4ea8d9c4a2a68b3298595 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<div><br></div><div><br></div>',
-  'preserved_content' => '',
-  'url_prefix' => '/x',
-  'markup_template_object_name' => 
-  array (
-    0 => '',
-  ),
-  'phrase_to_replace' => '',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_c64d813fc7b4ea8d9c4a2a68b3298595 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_0728c5a0d4359507c2387cc862aea4b2 = new Ayoola_Object_Embed( array (
-  'editable' => 'Application_Article_ViewPagination',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_0728c5a0d4359507c2387cc862aea4b2 = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_e8a0d6a7408d7168bf04af1b28404aae = new Ayoola_Object_Embed( array (
-  'editable' => 'Application_CommentBox',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_e8a0d6a7408d7168bf04af1b28404aae = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_4e442587b46ac2c732e40d2558305dbf = new Ayoola_Object_Embed( array (
-  'editable' => 'Application_CommentBox_ShowComments',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_4e442587b46ac2c732e40d2558305dbf = null;
+$_43d921b8828bd2347640dfc69302d1e0 = null;
 
 							}
 							
