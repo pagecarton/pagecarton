@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Wednesday 10th of April 2019 11:28:37 AM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Wednesday 10th of April 2019 01:43:54 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -48,6 +48,11 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'Application_Article_View',
   ),
+  'advanced_parameter_value' => 
+  array (
+    0 => '',
+  ),
+  '' => '',
 ) );
 
 							}
@@ -93,7 +98,7 @@ $_43d921b8828bd2347640dfc69302d1e0 = new Application_Article_ShowAll( array (
   'option' => '6',
   'category_name' => '',
   'article_types' => '',
-  'template_name' => 'ProductsandServicesList2',
+  'template_name' => 'ProductsforSale',
   'widget_options' => 
   array (
     0 => 'wrappers',
@@ -106,7 +111,7 @@ $_43d921b8828bd2347640dfc69302d1e0 = new Application_Article_ShowAll( array (
   ),
   'wrapper_name' => 'well',
   'post_with_same_true_post_type' => '1',
-  'object_class' => 'container',
+  'wrapper_inner_class' => 'container',
 ) );
 
 							}
