@@ -171,13 +171,13 @@ class Application_Article_View extends Application_Article_Abstract
 				$data += $userInfo;
 			}
 		}
-
+/* 
 		$data['article_description'] = trim( $data['article_description'] );
 		if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
 		{
 			$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 200 );
 		}
-
+ */
 		if( $this->getParameter( 'modified_time_representation' ) )
 		{
 			if( is_string( $this->getParameter( 'modified_time_representation' ) ) )
@@ -398,9 +398,12 @@ class Application_Article_View extends Application_Article_Abstract
 
 
 		//	internal forms to use
-		$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array();
+		$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : static::$_defaultPostElements;
 		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
-		$features[] = $data['true_post_type'];
+		if( ! in_array( @$data['true_post_type'], $features ) )
+		{
+			$features[] = @$data['true_post_type'];
+		}
 		$featuresPrefix[] = '';
 		$featureCount = array();
 		$featureDone = array();

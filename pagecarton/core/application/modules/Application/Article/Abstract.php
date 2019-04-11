@@ -78,6 +78,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	protected $_identifierKeys = array( 'article_url' );
 	
     /**
+     * 
+     * 
+     * @var array
+     */
+	protected static $_defaultPostElements = array( 'article', 'cover-photo', 'category' );
+	
+    /**
      * Error messages to show in List of Posts
      * 
      * @var array
@@ -1426,10 +1433,21 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$fieldset->hashElementName = $this->hashFormElementName;
 
 		//	internal forms to use
-		$features = is_array( @$postTypeInfo['post_type_options'] ) && ( count( $postTypeInfo['post_type_options'] ) !== 1 || $postTypeInfo['post_type_options'][0] !== '' ) ? $postTypeInfo['post_type_options'] : array( 'article', 'cover-photo', 'category' );  
+		$features = is_array( @$postTypeInfo['post_type_options'] ) && ( count( $postTypeInfo['post_type_options'] ) !== 1 || $postTypeInfo['post_type_options'][0] !== '' ) ? $postTypeInfo['post_type_options'] : static::$_defaultPostElements;  
 	//	self::v( $features );   
 		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
 		$features[] = $values['true_post_type'];
+		if( ! in_array( @$values['true_post_type'], $features ) )
+		{
+			$features[] = @$values['true_post_type'];
+		}
+
+		//	compatibility so article_description may be editable
+		//	when it is no longer in the post type info
+		if( ! in_array( 'article_description', $features ) && @$values['article_description'] )
+		{
+			$features[] = 'article_description';
+		}
 		$featuresPrefix[] = '';
 		$featureCount = array();
 		foreach( $features as $key => $eachPostType )

@@ -966,7 +966,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['article_description'] = trim( $data['article_description'] );
 			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
 			{
-				$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 300 ) . '...';
+				$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 500 ) . '...';
 			}
 			$lengthOfDescription = $this->getParameter( 'length_of_description' ) ? : 500;
 			if( $lengthOfDescription )
@@ -1187,16 +1187,20 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['filtered_time'] = self::filterTime( $data );
 
 			//	internal forms to use
-			$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array();
+			$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : static::$_defaultPostElements;
 			$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
-			$features[] = @$data['true_post_type'];
+
+			if( ! in_array( @$data['true_post_type'], $features ) )
+			{
+				$features[] = @$data['true_post_type'];
+			}
 			$featuresPrefix[] = '';
 			$featureCount = array();
 			$featureDone = array();
 			//		var_export( $features );
 			foreach( $features as $key => $eachPostType )
 			{	
-				$featureSuffix = $featuresPrefix[$key];
+				$featureSuffix = @$featuresPrefix[$key];
 				if( empty( $featureCount[$eachPostType] ) )
 				{
 					$featureCount[$eachPostType] = 1;
