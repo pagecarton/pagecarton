@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Thursday 11th of April 2019 06:51:02 AM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Thursday 11th of April 2019 07:49:10 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -18,23 +18,23 @@
 								
 $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<p><img src="{{{document_url}}}" alt="Image" style="width:100%"></p>
-<p>&nbsp;</p>
+
 <div class="container">
-<br>
-<h1>{{{article_title}}}</h1>
-<br>
-<p>{{{article_description}}}</p>
-<br>
+
+<h1 class="pc_give_space_top_bottom">{{{article_title}}}</h1>
+
+<p class="pc_give_space_top_bottom">{{{article_description}}}</p>
+
 </div>
 ',
   'preserved_content' => '<p><img src="{{{document_url}}}" alt="Image" style="width:100%"></p>
-<p>&nbsp;</p>
+
 <div class="container">
-<br>
-<h1>{{{article_title}}}</h1>
-<br>
-<p>{{{article_description}}}</p>
-<br>
+
+<h1 class="pc_give_space_top_bottom">{{{article_title}}}</h1>
+
+<p class=\'pc_give_space_top_bottom\'>{{{article_description}}}</p>
+
 </div>
 ',
   'url_prefix' => '',
@@ -50,9 +50,9 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
   ),
   'advanced_parameter_value' => 
   array (
-    0 => '',
+    0 => '<p class=\'pc_give_space_top_bottom\'></p>',
   ),
-  '' => '',
+  'content_to_clear[0]' => '<p class=\'pc_give_space_top_bottom\'></p>',
 ) );
 
 							}
@@ -91,24 +91,6 @@ $_ccfcd65b00854efe614caba97537085f = null;
 
 							}
 							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
-  'advanced_parameters' => '',
-  'editable' => '<br>',
-  'preserved_content' => '',
-  'url_prefix' => '',
-) );
-
-							}
-							else
-							{
-								
-$_000ba5e12fc767f708845d66c62fb715 = null;
-
-							}
-							
 							if( Ayoola_Page::hasPriviledge( array (
   0 => '98',
   1 => '99',
@@ -117,7 +99,7 @@ $_000ba5e12fc767f708845d66c62fb715 = null;
 								if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 								{
 									
-$_404f519f911baf2ed0e81c7a822dee71 = new Ayoola_Page_Editor_Text( array (
+$_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<section class="xcontainer" style="padding:2em 1em 2em 1em; ">
     <p style="text-align: center;"><span style="font-size:11px;">Manage {{{post_type}}}</span></p>
     <br>
@@ -152,6 +134,7 @@ $_404f519f911baf2ed0e81c7a822dee71 = new Ayoola_Page_Editor_Text( array (
   'advanced_parameter_value' => 
   array (
     0 => 'Application_Article_View',
+    1 => 'pc_give_space_top_bottom',
   ),
   'object_access_level' => 
   array (
@@ -159,13 +142,14 @@ $_404f519f911baf2ed0e81c7a822dee71 = new Ayoola_Page_Editor_Text( array (
     1 => '99',
   ),
   'wrapper_name' => 'well',
+  'object_class' => 'pc_give_space_top_bottom',
 ) );
 
 								}
 								else
 								{
 									
-$_404f519f911baf2ed0e81c7a822dee71 = null;
+$_000ba5e12fc767f708845d66c62fb715 = null;
 
 								}
 							}    

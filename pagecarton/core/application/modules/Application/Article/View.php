@@ -398,13 +398,19 @@ class Application_Article_View extends Application_Article_Abstract
 
 
 		//	internal forms to use
+	//	var_export( $postTypeInfo );
+		if( empty( @$postTypeInfo['post_type_options'][0] )  )
+		{
+			unset( $postTypeInfo['post_type_options'] );
+			unset( $postTypeInfo['post_type_options_name'] );
+		}
 		$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : static::$_defaultPostElements;
 		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
 		if( ! in_array( @$data['true_post_type'], $features ) )
 		{
 			$features[] = @$data['true_post_type'];
+			$featuresPrefix[] = '';
 		}
-		$featuresPrefix[] = '';
 		$featureCount = array();
 		$featureDone = array();
 		//		var_export( $features );
