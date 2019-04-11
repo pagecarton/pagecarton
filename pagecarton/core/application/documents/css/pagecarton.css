@@ -664,11 +664,11 @@ pc_full_width
     -moz-osx-font-smoothing:grayscale;
 }
 .pc-notify-info:before, .pc-notify-normal:before {
-  content:"\f05a";
+  	content:"\f05a";
 }
 .pc-heading:before {
-  content:"\f02e";
-    margin-right:1em;
+  	content:"\f02e";
+  	margin-right:1em;
     margin-left:1em;
 }
 .goodnews:before {
