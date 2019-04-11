@@ -646,7 +646,7 @@ pc_full_width
     margin-top: 0;
     margin-bottom: 0;
 }
-.pc-notify-info:before, .goodnews:before, .pc-notify-warning:before, .badnews:before, .noRecord:before , .pc-heading:before {
+.pc-notify-info:before, .pc-notify-normal:before, .goodnews:before, .pc-notify-warning:before, .badnews:before, .noRecord:before , .pc-heading:before {
     font-family:FontAwesome;
     font-style:normal;
     font-weight:400;
@@ -663,11 +663,8 @@ pc_full_width
     -webkit-font-smoothing:antialiased;
     -moz-osx-font-smoothing:grayscale;
 }
-.pc-notify-info:before {
+.pc-notify-info:before, .pc-notify-normal:before {
   content:"\f05a";
-}
-.pc-heading:normal {
-    content:"\f05a";
 }
 .pc-heading:before {
   content:"\f02e";
