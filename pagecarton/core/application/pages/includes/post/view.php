@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Wednesday 10th of April 2019 06:48:25 PM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Thursday 11th of April 2019 06:51:02 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -91,6 +91,24 @@ $_ccfcd65b00854efe614caba97537085f = null;
 
 							}
 							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
+  'advanced_parameters' => '',
+  'editable' => '<br>',
+  'preserved_content' => '',
+  'url_prefix' => '',
+) );
+
+							}
+							else
+							{
+								
+$_000ba5e12fc767f708845d66c62fb715 = null;
+
+							}
+							
 							if( Ayoola_Page::hasPriviledge( array (
   0 => '98',
   1 => '99',
@@ -99,7 +117,7 @@ $_ccfcd65b00854efe614caba97537085f = null;
 								if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 								{
 									
-$_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
+$_404f519f911baf2ed0e81c7a822dee71 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<section class="xcontainer" style="padding:2em 1em 2em 1em; ">
     <p style="text-align: center;"><span style="font-size:11px;">Manage {{{post_type}}}</span></p>
     <br>
@@ -113,14 +131,19 @@ $_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
     </p>
     <br>
 </section>',
-  'preserved_content' => '<section class="productname" style="padding:2em 1em 2em 1em; ">
-<p style="text-align: center;"><span style="font-size:11px;">Manage Event</span></p>
-
-<p style="text-align: center;">&nbsp;</p>
-
-<p style="text-align: center;"><a class="btn btn-default" href="/object/name/Application_Subscription_Checkout_Order_List?article_url={{{article_url}}}" target="_blank"><span style="font-size:11px;">View Orders</span> </a> <a class="btn btn-default" href="/object/name/Application_Article_Editor?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Edit Event Information</span> </a> <a class="btn btn-warning" href="/object/name/Application_Article_Delete?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Delete Event</span> </a></p>
-</section>
-',
+  'preserved_content' => '<section class="xcontainer" style="padding:2em 1em 2em 1em; ">
+    <p style="text-align: center;"><span style="font-size:11px;">Manage {{{post_type}}}</span></p>
+    <br>
+    <p style="text-align: center;">
+        <a class="btn btn-default" href="/widgets/Application_Article_Editor?article_url={{{article_url}}}" target="_blank">
+            <span style="font-size:11px;">Edit {{{post_type}}} Information</span>
+        </a>
+        <a class="btn btn-warning" href="/widgets/Application_Article_Delete?article_url={{{article_url}}}" target="_blank">
+            <span style="font-size:11px;">Delete {{{post_type}}}</span>
+        </a>
+    </p>
+    <br>
+</section>',
   'url_prefix' => '',
   'markup_template_object_name' => 
   array (
@@ -142,7 +165,7 @@ $_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
 								else
 								{
 									
-$_000ba5e12fc767f708845d66c62fb715 = null;
+$_404f519f911baf2ed0e81c7a822dee71 = null;
 
 								}
 							}    
