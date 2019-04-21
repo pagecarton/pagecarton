@@ -450,6 +450,17 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			foreach( $eachSection->childNodes as $eachDiv )
 			{
 			//	$i++;
+			//	if(  $eachDiv->tagName && $eachDiv->getAttribute( "data-pc-load-inner-sections" ) )   
+				{
+				//	$func = __FUNCTION__;
+				//	var_export( $func( $eachDiv ) );
+				///	$bodyChildren = $func( $eachDiv );			
+				}
+				if( $eachDiv->tagName && $eachDiv->getAttribute( "data-pc-section-ignore" ) )   
+				{
+					continue;
+				}
+	
 				switch( @strtolower( $eachDiv->tagName ) )
 				{
 					case "footer":
@@ -459,7 +470,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 						{
 							//	find out if default sections was inserted
 							$allSections = true;
-							continue;
+							continue 2;
 						}
 					case "div":
 						@++$countDiv;

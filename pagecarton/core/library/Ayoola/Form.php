@@ -598,7 +598,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			{
 				case 'object':
 					$class = $each;
-					if( ! method_exists( $class, 'createForm' ) ){ continue; }
+					if( ! method_exists( $class, 'createForm' ) ){ continue 2; }
 					$this->_formRequirements[] = $class;
 					$fieldsets = $class->getForm()->getFieldsets();
 					foreach( $fieldsets as $fieldset )
@@ -622,7 +622,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					
 					if( ! Ayoola_Loader::loadClass( $class ) )
 					{
-						continue;
+						continue 2;
 				//		throw new Ayoola_Object_Exception( 'INVALID CLASS: ' . $class );
 					}
 			//		$class = new $class( @self::$_requirementOptions[$combinedInfo]['parameters'] );
@@ -631,7 +631,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				//	$class = new $class();
 				//	continue;
 				//	var_export( $combinedInfo );
-					if( ! method_exists( $class, 'createForm' ) ){ continue; }
+					if( ! method_exists( $class, 'createForm' ) ){ continue 2; }
 					$this->_formRequirements[] = $class;
 					$fieldsets = $class->getForm()->getFieldsets();
 					$this->actions += $class->getForm()->actions;

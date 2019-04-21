@@ -1352,6 +1352,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$typeDisplay = 'Hidden';
 		}
 		$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post Type', 'onchange'=> 'window.location.search += \'&article_type=\' + this.value + \'\';', 'type' => $typeDisplay, 'value' => $articleTypeWeUsing ), $postTypesAvailable );
+	//	$values['true_post_type'] = @$values['true_post_type'] ? : @$values['article_type'];
 		$fieldset->addElement( array( 'name' => 'true_post_type', 'type' => 'Hidden', 'value' => @$values['true_post_type'] ? : @$values['article_type'] ) );
 		   
 		
