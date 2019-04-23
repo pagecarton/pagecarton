@@ -1057,13 +1057,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	var_export( $data['article_modified_date'] );
 			//		var_export( $data['article_title'] );
 				//	var_export( time() );
-					if( $data['article_modified_date'] < time() )
+					if( $data['article_modified_date'] < time() && empty( $data['not_real_post'] ) )
 					{
 						continue 2;
 					}
 				break;
 				case 'past':
-					if( $data['article_modified_date'] > time() )
+					if( $data['article_modified_date'] > time() && empty( $data['not_real_post'] ) )
 					{
 						continue 2;
 					}
