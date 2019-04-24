@@ -436,6 +436,7 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 		//	self::v( $eachPostType );
 			$featureDone[$featureCountKey] = true;
+			$this->_xml .= '<div class="pc_give_space_top_bottom">';
 
 			switch( $eachPostType )
 			{
@@ -579,6 +580,8 @@ class Application_Article_View extends Application_Article_Abstract
 					$this->_xml .= @$data['article_content' . $featureSuffix];
 				break;
 			}
+			$this->_xml .= '</div>';
+
 		}
 		if( $this->getParameter( 'file_size' ) )
 		{
