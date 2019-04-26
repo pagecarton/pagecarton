@@ -98,6 +98,12 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 				$values['subscription_label'] = ( $_REQUEST['subscription_selections'] ? ( $_REQUEST['subscription_selections'] . ' | ' ) : null ) . $values['subscription_label'];
 			}
 			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
+
+			//	skip empty prices
+			if( '' === $data['item_price'] )
+			{
+				return false;
+			}
 			$values['price'] = $data['item_price'] + floatval( array_sum( $values['product_option'] ? : array() ) );
 			$values['product_option'] = $values['product_option'];
 			$values['cycle_name'] = 'each'; 
@@ -135,6 +141,11 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$_GET['article_url'] = $values['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
 			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
+			//	skip empty prices
+			if( '' === $data['item_price'] )
+			{
+				return false;
+			}
 			do
 			{
 		//			exit();		
@@ -519,6 +530,11 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 	//	var_export( $this->getParameter( 'multi-price' ) );
 		if( ! $this->getParameter( 'multi-price' ) )
 		{	
+			//	skip empty prices
+			if( '' === trim( @$subscriptionData['item_price'] ) )
+			{
+				return false;
+			}
 			$fieldset->addElement( array( 'name' => 'quantity', 'id' => 'quantity_' . md5( @$subscriptionData['article_url'] ), 'label' => 'Quantity', 'style' => 'min-width:20px;max-width:60px;display:inline;margin-right:0;', 'type' => $showQuantity, 'value' => @$values['quantity'] ? : 1 ), $optionsForSelect );  
 			$filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
 		//	$data['currency'] = $filter::$symbol;
@@ -588,7 +604,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		$fieldset->addRequirement( 'article_url', array( 'NotEmpty' => null ) );
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset ); 
-		$form->submitValue = $submitValue; 
+		$form->submitValue = $submitValue; 		
 		$this->setForm( $form );
 
     } 
