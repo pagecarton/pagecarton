@@ -99,11 +99,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			}
 			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
 
-			//	skip empty prices
-			if( '' === $data['item_price'] )
-			{
-				return false;
-			}
 			$values['price'] = $data['item_price'] + floatval( array_sum( $values['product_option'] ? : array() ) );
 			$values['product_option'] = $values['product_option'];
 			$values['cycle_name'] = 'each'; 
@@ -141,11 +136,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$_GET['article_url'] = $values['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
 			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
-			//	skip empty prices
-			if( '' === $data['item_price'] )
-			{
-				return false;
-			}
 			do
 			{
 		//			exit();		
