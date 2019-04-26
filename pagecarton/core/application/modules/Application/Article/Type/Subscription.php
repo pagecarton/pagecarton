@@ -69,6 +69,12 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		{
 			$_GET['article_url'] = $subscriptionData['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
+			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
+
+			if( '' === $data['item_price'] )
+			{
+				return false;
+			}
 			//	var_export( $data );
 			$values = $data;
 			unset( $values['document_url_base64'], $values['download_base64'] ); 
@@ -97,7 +103,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			{
 				$values['subscription_label'] = ( $_REQUEST['subscription_selections'] ? ( $_REQUEST['subscription_selections'] . ' | ' ) : null ) . $values['subscription_label'];
 			}
-			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
 			$values['price'] = $data['item_price'] + floatval( array_sum( $values['product_option'] ? : array() ) );
 			$values['product_option'] = $values['product_option'];
 			$values['cycle_name'] = 'each'; 
