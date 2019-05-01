@@ -134,7 +134,7 @@ class Application_User_Help_ResetPassword extends Application_User_Help_ChangePa
 		}
 		$account->addElement( array( 'name' => 'password', 'label' => 'Enter New Password', 'placeholder' => 'Choose New password', 'type' => 'InputPassword' ) );
 		$account->addElement( array( 'name' => 'password2', 'label' => 'Confirm New Password', 'placeholder' => 'Confirm New password', 'type' => 'InputPassword' ) );
-		$account->addRequirement( 'email','WordCount=>6;;50' ); 
+		$account->addRequirement( 'email','WordCount=>2;;500' ); 
 //		$account->addRequirement( 'password','WordCount=>6;;18' ); 
 		$account->addRequirement( 'password2', array( 'DefiniteValueSilent' => $this->getGlobalValue( 'password' ) ) ); 
 		
