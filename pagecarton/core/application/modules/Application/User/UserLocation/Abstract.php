@@ -213,7 +213,7 @@ abstract class Application_User_UserLocation_Abstract extends Ayoola_Abstract_Ta
 			
 			//	Street Address
 			$fieldset->addElement( array( 'name' => 'street_address', 'class' => 'geotext[street-long]', 'label' => 'Address line 1', 'placeholder' => 'e.g. 119 State Road', 'type' => 'InputText', 'value' => @$values['street_address'] ) );			
-			$fieldset->addRequirement( 'street_address', array( 'WordCount' => array( 6, 50 ) ) );
+		//	$fieldset->addRequirement( 'street_address', array( 'WordCount' => array( 6, 50 ) ) );
 						
 			//	Street Address 2
 	//		$fieldset->addElement( array( 'name' => 'street_address2', 'label' => 'Address line 2', 'placeholder' => 'e.g. Apt H-3', 'type' => 'InputText', 'value' => @$values['street_address2'] ) );			
@@ -222,7 +222,7 @@ abstract class Application_User_UserLocation_Abstract extends Ayoola_Abstract_Ta
 			
 			//	City
 			$fieldset->addElement( array( 'name' => 'city', 'class' => 'geotext[city]', 'label' => 'City or town', 'placeholder' => 'e.g. Ibadan', 'type' => 'InputText', 'value' => @$values['city'] ) );	
-			$fieldset->addRequirement( 'city', array( 'WordCount' => array( 2, 30 ) ) );
+		//	$fieldset->addRequirement( 'city', array( 'WordCount' => array( 2, 30 ) ) );
 			
 			//	Retrieve the city_id
 	//		$fieldset->addElement( array( 'name' => 'city_id', 'type' => 'Hidden', 'value' => null ) );	
@@ -249,7 +249,7 @@ abstract class Application_User_UserLocation_Abstract extends Ayoola_Abstract_Ta
 			//	$fieldset->addElement( array( 'name' => 'country_x', 'class' => 'geotext[country]', 'label' => 'Country', 'type' => 'InputText', 'value' => null ) );
 			//	$fieldset->addElement( array( 'name' => 'country_xx', 'class' => 'geotext[country-long]', 'label' => 'Country', 'type' => 'InputText', 'value' => null ) );
 			//	var_export( $listCountry );
-				$listCountry ? $fieldset->addRequirement( 'country', array( 'InArray' => array_keys( array( 0 => 'Please select...' ) + ( is_array( $listCountry ) ? $listCountry : array()  ) )  ) ) : null;
+			//	$listCountry ? $fieldset->addRequirement( 'country', array( 'InArray' => array_keys( array( 0 => 'Please select...' ) + ( is_array( $listCountry ) ? $listCountry : array()  ) )  ) ) : null;
 			}
 			else
 			{
