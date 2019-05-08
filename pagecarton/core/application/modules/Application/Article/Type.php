@@ -33,7 +33,7 @@ class Application_Article_Type extends Ayoola_Dbase_Table_Abstract_Xml_Private
      *
      * @param int
      */
-    protected $_tableVersion = '0.08';
+    protected $_tableVersion = '0.09';
 
 	protected $_dataTypes = array
 	( 
@@ -46,6 +46,7 @@ class Application_Article_Type extends Ayoola_Dbase_Table_Abstract_Xml_Private
 		'preset_values' => 'JSON',
 		'supplementary_form' => 'INPUTTEXT',
 		'post_type_custom_fields' => 'INPUTTEXT',
+		'auth_level' => 'JSON',
 	);
 	// END OF CLASS
 }

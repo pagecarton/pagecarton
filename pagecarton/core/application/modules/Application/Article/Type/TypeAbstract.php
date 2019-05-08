@@ -160,6 +160,15 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
         $fieldset->addElement( array( 'name' => 'supplementary_form', 'label' => 'Supplementary Creation form', 'type' => 'Select', 'value' => @$values['supplementary_form'] ), array( '' => 'Please select...' ) + $options ); 
 
         $fieldset->addElement( array( 'name' => 'post_type_custom_fields', 'label' => 'Supplementary Custom Fields', 'title' => 'Custom Fields for Post Type', 'placeholder' => 'e.g. brand, size, color ', 'type' => 'InputText', 'value' => @$values['post_type_custom_fields'], ) ); 
+        
+        //	Auth Level
+		
+		$authLevel = new Ayoola_Access_AuthLevel;
+		$authLevel = $authLevel->select();
+		require_once 'Ayoola/Filter/SelectListArray.php';
+		$filter = new Ayoola_Filter_SelectListArray( 'auth_level', 'auth_name');
+		$authLevel = $filter->filter( $authLevel );
+		$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Who can use this post type', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel ); 
 
 //		$i++;
         $fieldset->addLegend( $legend );

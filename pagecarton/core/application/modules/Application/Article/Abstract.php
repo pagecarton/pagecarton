@@ -1278,6 +1278,15 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		//	Set Article Type
 		$options = Application_Article_Type::getInstance();
 		$options = $options->select();
+		foreach( $options as $eachTypeKey => $eachType )
+		{
+			if( ! empty( $eachType['auth_level'] ) && ! Ayoola_Abstract_Table::hasPriviledge( $eachType['auth_level'] ) )
+			{ 
+				//	Current user not authorized to use this post type
+				unset( $options[$eachTypeKey] );
+				unset( Application_Article_Type_TypeAbstract::$presetTypes[$eachType['post_type_id']] );
+			}
+		}
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'post_type_id', 'post_type');
 		$options = $filter->filter( $options );
@@ -1310,6 +1319,14 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $articleTypeWeUsing ) )
 		{
 		//	var_export( $postTypeInfo );
+			if( ! empty( $postTypeInfo['auth_level'] ) && ! Ayoola_Abstract_Table::hasPriviledge( $postTypeInfo['auth_level'] ) )
+			{ 
+				//	Current user not authorized to use this post type
+				$postTypeInfo = array();
+				header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/404' );
+				exit();
+			}
+
 			$values['true_post_type'] = $postTypeInfo['article_type'];
 			$values['post_type'] = $postTypeInfo['post_type'];
 		}
