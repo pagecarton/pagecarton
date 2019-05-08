@@ -129,7 +129,7 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
                                        
                                     </div>
                                     <div class="comment-content">
-                                        ' . $each['comment'] . '
+                                        ' . nl2br( strip_tags( $each['comment'] ) ) . '
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +156,7 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
                                             
                                         </div>
                                         <div class="comment-content">
-                                            ' . $eachInnerData['comment'] . '
+                                            ' . nl2br( strip_tags( $eachInnerData['comment'] ) ) . '
                                         </div>
                                     </div>
                                 </li>';
