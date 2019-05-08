@@ -333,7 +333,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		do
 		{
 			//	Put the questions in a separate fieldset
-			$key = md5( $formInfo['element_group_name'][$i] );
+			$key = md5( $formInfo['element_name'][$i] );
 			if( empty( $fieldsets[$key] ) )
 			{
 				$fieldsets[$key] = new Ayoola_Form_Element; 
@@ -345,6 +345,13 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			$options = array();
 			$type = $formInfo['element_type'][$i]; 
 			@$formInfo['element_name'][$i] = $formInfo['element_name'][$i] ? : $formInfo['element_title'][$i];
+		//	var_export( $formInfo['element_access_level'] );
+			if( ! empty( $formInfo['element_access_level'][$i] ) && ! Ayoola_Abstract_Table::hasPriviledge( $formInfo['element_access_level'][$i] ) )
+			{ 
+				$i++;
+				continue;
+			}
+
 			$elementName = $formInfo['element_name'][$i];
 			if( strpos( $elementName, 'base64' ) )
 			{

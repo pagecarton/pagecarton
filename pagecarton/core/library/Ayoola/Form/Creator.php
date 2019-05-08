@@ -78,7 +78,9 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 					$table->insert( $formData );
 
 				//	$creator = new Ayoola_Form_Creator( array( 'fake_values' => $formData ) );
-					$this->setViewContent( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $formData['form_name'] . '"> Preview it!</a></div>', true ); 
+					header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_Editor/?form_name=' . $formData['form_name'] . '' );
+					exit();
+				//	$this->setViewContent( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=' . $formData['form_name'] . '"> Preview it!</a> or <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_Editor/?form_name=' . $formData['form_name'] . '"> Update it!</a></div>', true ); 
 
 
 				//	self::v( $values );

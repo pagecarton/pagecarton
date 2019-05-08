@@ -118,7 +118,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 	//	self::v( $authLevel ); 
 		$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Which user groups should this form be available to?', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel ); 
 //		$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $authLevel )  ) ); 
-		unset( $authLevel );
+	//	unset( $authLevel );
 		
 		$fieldset->addLegend( $legend );
 	//	$fieldset->addFilters( 'StripTags::Trim' );
@@ -278,9 +278,12 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 												'' => 'Optional',
 												'required' => 'Required',
 					);
-					$newFieldSet->addElement( array( 'name' => 'element_importance', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_importance'][$i] ), $importanceOptions );   
+			//		$newFieldSet->addElement( array( 'name' => 'element_importance', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_importance'][$i] ), $importanceOptions ); 
+
+					$newFieldSet->addElement( array( 'name' => 'element_access_level', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_access_level'][$i] ), array( '' => 'Privacy' ) + $authLevel );   
 					$newForm->addFieldset( $newFieldSet );    
-				//	self::v( $i );   
+				//	self::v( $authLevel );   
+			//		self::v( $i );   
 				//	var_export();
 					$i++;
 				}
@@ -288,7 +291,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 		//		var_export( $values );
 				$fieldset = new Ayoola_Form_Element;
 			//	$fieldset->allowDuplication = true;
-				$fieldset->addElement( array( 'name' => 'xxxx', 'type' => 'Html', 'value' => '' ), array( 'html' => '<legend>Build form Elements and Fields</legend>' . $newForm->view(), 'fields' => 'element_title,element_name,element_group_name,element_default_value,element_placeholder,element_type,element_validators,element_importance,element_multioptions' ) );
+				$fieldset->addElement( array( 'name' => 'xxxx', 'type' => 'Html', 'value' => '' ), array( 'html' => '<legend>Build form Elements and Fields</legend>' . $newForm->view(), 'fields' => 'element_title,element_name,element_group_name,element_default_value,element_placeholder,element_type,element_validators,element_access_level,element_multioptions' ) );
 		//		self::v( $newForm->view() );  
 		//		$fieldset->addElement( array( 'name' => 'xxxx', 'type' => 'Html', 'value' => '' ), array( 'html' => $newForm->view(), 'fields' => '' ) );
 				$form->addFieldset( $fieldset );   
