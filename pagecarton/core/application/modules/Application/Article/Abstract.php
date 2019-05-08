@@ -1575,7 +1575,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						$currentCategories +=  is_array( $_GET['category_name'] ) ? $_GET['category_name'] : array();
 						$categories['Preset Categories'] = array_combine( $_GET['category_name'], $_GET['category_name'] );
 					}
-					$fieldset->addElement( array( 'name' => 'category_name', 'label' => 'Categories ' . $addCategoryLink, 'type' => 'SelectMultiple', 'value' => $currentCategories  ), $categories ? : array() );
+					$categories ? $fieldset->addElement( array( 'name' => 'category_name', 'label' => 'Categories ' . $addCategoryLink, 'type' => 'SelectMultiple', 'value' => $currentCategories  ), $categories ? : array() ) : null;
 				break;  
 				case 'book':
 					$fieldset->addElement( array( 'name' => 'isbn', 'label' => 'ISBN', 'type' => 'InputText', 'value' => @$values['isbn']  ) );
