@@ -650,6 +650,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			return false;
 		}
+		$data['article_description'] = trim( $data['article_description'] );
+		if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
+		{
+			$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 501 ) . '';
+		}
 
 	//	if( get_class( $this ) === 'Application_Article_View' && ( ! $this->getParameter( 'markup_template_object_name' ) || $this->getParameter( 'update_meta_data' ) ) )
 		if( get_class( $this ) === 'Application_Article_View' )
