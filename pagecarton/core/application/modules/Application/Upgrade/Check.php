@@ -86,7 +86,10 @@ class Application_Upgrade_Check extends PageCarton_Widget
         }
         elseif( $versionFromServer['response'] != PageCarton::VERSION )
         {
-            $this->setViewContent( '<div class="badnews"> PageCarton ' . $versionFromServer['response']  . ' is available for download. ' . $lastChecked . ' . <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Upgrade?" class="">Begin Upgrade!</a></div>', true ); 
+            $this->setViewContent( '<div class="badnews"> 
+                                        PageCarton ' . $versionFromServer['response']  . ' is available for download. ' . $lastChecked . ' 
+                                        <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Upgrade?" class="">Begin Upgrade!</a> 
+                                        <a style="font-size:smaller;" target="_blank" href="https://www.pagecarton.org/posts?category=releases" class="">What Changed?</a></div>', true ); 
         }
         else
         {
