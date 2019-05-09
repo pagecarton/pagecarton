@@ -333,7 +333,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		do
 		{
 			//	Put the questions in a separate fieldset
-			$key = md5( $formInfo['element_name'][$i] );
+			$key = md5( $formInfo['element_group_name'][$i] );
 			if( empty( $fieldsets[$key] ) )
 			{
 				$fieldsets[$key] = new Ayoola_Form_Element; 
