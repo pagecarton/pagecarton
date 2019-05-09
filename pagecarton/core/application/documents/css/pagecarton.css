@@ -884,6 +884,16 @@ pc_full_width
     display: block;
 }
 
+.pc_page_widgetmode_popup .status_bar, .pc_page_widgetmode_popup .title_bar
+{
+    position: absolute;
+    left: 0;
+	width: 100%;
+	width: -moz-available;          /* For Mozzila */
+	width: -webkit-fill-available;  /* For Chrome. */
+    z-index: 100000;
+}
+
 .pc_add_widget_button
 {
     height: unset;

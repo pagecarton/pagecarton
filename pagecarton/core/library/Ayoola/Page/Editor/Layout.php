@@ -1937,6 +1937,26 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			}
 		};
 		topBarForButtons.appendChild( optionbar );
+		
+		//	Display options
+		var optionbar = document.createElement( "span" );
+		optionbar.innerHTML = \'...\';
+		optionbar.className = " pc-btn pc-hide-children-children";
+		optionbar.title = "Pop-up widget options";
+		optionbar.onclick = function()
+		{
+			var a = document.body;
+			if( ayoola.style.hasClass( a, "pc_page_widgetmode_popup" ) )  
+			{
+				ayoola.style.removeClass( a, "pc_page_widgetmode_popup" );
+			}
+			else
+			{
+				ayoola.style.addClass( a, "pc_page_widgetmode_popup" ); 
+			}
+			
+		};
+		topBarForButtons.appendChild( optionbar );
 
 		//	Add options bar
 		var optionbar = document.createElement( "span" );
