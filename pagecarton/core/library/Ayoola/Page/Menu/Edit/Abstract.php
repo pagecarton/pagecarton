@@ -96,6 +96,8 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 		$fieldset->addElement( array( 'name' => 'option_name', 'label' => 'Link Name', 'placeholder' => 'e.g. Contact Us', 'type' => 'InputText', 'value' => @$values['option_name'] ) );
 		$fieldset->addRequirement( 'option_name', array( 'WordCount' => array( 1, 500 ) ) );
 		$pages = Ayoola_Page::getAll();
+	//	var_export( $pages );
+		$pages = array_combine( $pages, $pages );
 		if( @$values['url'] )
 		{
 			$pages[$values['url']] = $values['url'];
