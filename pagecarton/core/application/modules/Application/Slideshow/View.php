@@ -214,7 +214,7 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 						$each = is_array( $each ) ? $each : @include $each;
 						$slideInfo = array();
 						$slideInfo['record_count'] = $i;
-						$slideInfo['slideshow_image'] = Ayoola_Application::getUrlPrefix() . $each['document_url'] . '&max_width=' . $data['width'] . '&max_height=' . $data['height'] . '';
+						$slideInfo['slideshow_image'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer?url=' . $each['document_url']  . '&max_width=' . $data['width'] . '&max_height=' . $data['height'] . '';
 				//		var_export( $each['document_url'] );
 				//		var_export( $slideInfo['slideshow_image'] );
 						$slideInfo['image_link'] = $each['article_url'];
