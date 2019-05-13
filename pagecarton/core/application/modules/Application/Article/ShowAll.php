@@ -1428,7 +1428,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//	self::v( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) );
 	//	var_export( $this->_parameter['markup_template'] );
 		
-		if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false )  
+		if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false && strpos( $this->_parameter['markup_template'], '<!--{{{0}}}' ) === false )  
 		{
 			//	update the markup template
 			@$this->_parameter['markup_template'] = null;
