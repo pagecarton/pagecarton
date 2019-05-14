@@ -311,7 +311,13 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		{
 			return false;
 		}
-		$sortColumn = create_function  
+		$sortColumn = function( $a, $b ) use ( $key )
+		{
+			@$a = $a[$key];
+			@$b = $b[$key];
+			return is_numeric( $a ) && is_numeric( $b ) ? ( ( $a < $b ) ? -1 : ( ( $a > $b ) ? 1 : 0 ) ) : strcmp( $a, $b );
+		};
+/* 		$sortColumn = create_function  
 		(
 			'$a,$b',
 			'
@@ -321,7 +327,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		//	strcmp($a["fruit"], $b["fruit"]);
 		
 		);  
-		usort( $array, $sortColumn );
+ */		usort( $array, $sortColumn );
 		return $array;
     } 
 	
