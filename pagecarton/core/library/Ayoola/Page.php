@@ -671,13 +671,20 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 	//	$currentUrl = Ayoola_Application::getRequestedUri();
 		$currentUrl = self::getCurrentUrl();
 	//	var_export( $currentUrl );
+		$host = $_SERVER['HTTP_HOST'];
+		if( ! stripos( $host, ':' ) )
+		{
+			$host = $host .  self::getPortNumber();
+		}
+	//	var_export( $_SERVER['HTTP_HOST'] );
+	//	exit();
 
 		//	https://www.example.com/account/signin?previous_url=https://www.example.com/account 
 		//	is being blocked by some servers
 		//	probably because of xss
 		//	$_POST, $_GET was being cleared
 	//	$url .= 'previous_url=' . urlencode( Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . Ayoola_Page::getDefaultDomain() .  self::getPortNumber() . '' . $currentUrl );
-		$url .= 'previous_url=' . urlencode( '//' . $_SERVER['HTTP_HOST'] .  self::getPortNumber() . '' . $currentUrl );
+		$url .= 'previous_url=' . urlencode( '//' . $host . '' . $currentUrl );
 	return $url;
     }	
 	
