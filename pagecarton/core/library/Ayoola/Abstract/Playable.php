@@ -184,20 +184,32 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		//			$replaceInternally = true;
 				}
 			//	var_export( ( stripos( $template, $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'] ) !== false ) );
-				if( ( stripos( $template, $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'] ) !== false || stripos( $template, $values['placeholder_prefix'] . 'pc_post_item_' ) !== false ) && stripos( $template, '<!--{{{0}}}' ) !== false )
+				if( stripos( $template, '<!--{{{0}}}' ) !== false )
 				{
 					$start = strpos( $template, '<!--{{{0}}}' ) + strlen( '<!--{{{0}}}' );
 				//	var_export( $postTheme );
 					$length = strpos( $template, '{{{0}}}-->' ) - $start;
 					$postTheme = substr( $template, $start, $length );
 
-
-					$search[] = '<!--{{{0}}}' . $postTheme . '{{{0}}}-->';
-					$replace[] = '';  
+					$taggedPostTheme = '<!--{{{0}}}' . $postTheme . '{{{0}}}-->';
+					$otherPostsPlaceholder = $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'];
+					if( stripos( $template, $otherPostsPlaceholder ) !== false || stripos( $template, $values['placeholder_prefix'] . 'pc_post_item_' ) !== false )
+					{
+						$replaceInternally = true;
+						$search[] = $taggedPostTheme;
+						$replace[] = '';  
+					}
+					elseif(  stripos( $template, '<!--{{{1}}}' ) === false  )
+					{
+						//	if we are not listing one by one, then autofix {{{pc_other_posts_goes_here}}}
+						$template = str_replace( $taggedPostTheme, $taggedPostTheme . $otherPostsPlaceholder, $template );
+						$replaceInternally = true;
+						$search[] = $taggedPostTheme;
+						$replace[] = '';  
+					}
 				//	var_export( $start );
 				//	var_export( $length );
 				//	var_export( $postTheme );  
-					$replaceInternally = true;
 				}
 					
 				//	CLEAR HTML comments like <!--{{{0}}} {{{0}}}-->
