@@ -184,7 +184,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		//			$replaceInternally = true;
 				}
 			//	var_export( ( stripos( $template, $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'] ) !== false ) );
-				if( stripos( $template, '<!--{{{0}}}' ) !== false )
+				if( empty( $postTheme ) && stripos( $template, '<!--{{{0}}}' ) !== false )
 				{
 					$start = strpos( $template, '<!--{{{0}}}' ) + strlen( '<!--{{{0}}}' );
 				//	var_export( $postTheme );
@@ -196,16 +196,14 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 					if( stripos( $template, $otherPostsPlaceholder ) !== false || stripos( $template, $values['placeholder_prefix'] . 'pc_post_item_' ) !== false )
 					{
 						$replaceInternally = true;
-						$search[] = $taggedPostTheme;
-						$replace[] = '';  
+						$template = @str_replace( $taggedPostTheme, '', $template );  
 					}
 					elseif(  stripos( $template, '<!--{{{1}}}' ) === false  )
 					{
 						//	if we are not listing one by one, then autofix {{{pc_other_posts_goes_here}}}
 						$template = str_replace( $taggedPostTheme, $taggedPostTheme . $otherPostsPlaceholder, $template );
 						$replaceInternally = true;
-						$search[] = $taggedPostTheme;
-						$replace[] = '';  
+						$template = @str_replace( $taggedPostTheme, '', $template );  
 					}
 				//	var_export( $start );
 				//	var_export( $length );
@@ -312,6 +310,9 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		}
 		$search[] = $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'];
 		$replace[] = @$iTemplate;  
+	//	var_export( $search );
+	//	var_export( $replace );
+	//	var_export( $template );
 		$template = @str_replace( $search, $replace, $template );  
 		$search = array();
 		$search[] = '/' . $values['placeholder_prefix'] . '([\w+]+)' . $values['placeholder_suffix'] . '/';
