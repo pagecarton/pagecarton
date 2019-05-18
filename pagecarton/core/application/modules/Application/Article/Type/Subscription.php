@@ -409,7 +409,10 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 	//	self::v( $subscriptionData );
 	//	var_export( $subscriptionData['no_of_items_in_stock'] );
 		$showQuantity = 'Hidden';
-		$optionsForSelect = array( 0 );
+
+		// this cause empty zero box in multi options
+	//	$optionsForSelect = array( 0 );
+		$optionsForSelect = array();
 		if( @intval( $subscriptionData['no_of_items_in_stock'] ) > 1 )
 		{
 			$showQuantity = 'InputText';
@@ -564,6 +567,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			}
 	//		$optionsForSelect = array();
 	//		self::v( $subscriptionData['price_option_title'] );
+			var_export( $optionsForSelect );
 			foreach( $subscriptionData['price_option_title'] as $key => $each )
 			{
 				if( empty( $subscriptionData['price_option_price'][$key] ) && empty( $subscriptionData['price_option_title'][$key] ) )
@@ -575,7 +579,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					$pricing = ' - ' . $filter->filter( $subscriptionData['price_option_price'][$key] );
 				}
 				$optionsForSelect = empty( $optionsForSelect ) ? array_combine( range( 0, 100 ), range( 0, 100 ) ) : $optionsForSelect;
-		//	var_export( $optionsForSelect );
 				$fieldset->addElement( array( 'name' => 'price_option' . $each, 'label' => $each . $pricing , 'type' => 'Select', 'value' => 'price_option' . $each ), $optionsForSelect );
 			}
 			if( ! $optionsForSelect )
