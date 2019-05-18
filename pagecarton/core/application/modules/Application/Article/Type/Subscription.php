@@ -567,7 +567,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			}
 	//		$optionsForSelect = array();
 	//		self::v( $subscriptionData['price_option_title'] );
-			var_export( $optionsForSelect );
+		//	var_export( $optionsForSelect );
 			foreach( $subscriptionData['price_option_title'] as $key => $each )
 			{
 				if( empty( $subscriptionData['price_option_price'][$key] ) && empty( $subscriptionData['price_option_title'][$key] ) )
