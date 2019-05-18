@@ -517,85 +517,92 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     public static function fetchLink( $link, array $settings = null )
     {	
 	//	self::V( $link );
-		if( ! function_exists( 'curl_init' ) )
+		$key = md5( $link . serialize( $settings ) );
+		if( ! $response = static::getObjectStorage( $key )->retrieve() )
 		{
-			//trigger_error( __METHOD__ . ' WORKS BETTER WHEN CURL IS ENABLED. PLEASE ENABLE CURL ON YOUR SERVER.' );
-			return false;
-		//	return file_get_contents( $link );
-		}
-		$request = curl_init( $link );
-//		curl_setopt( $request, CURLOPT_HEADER, true );
-		curl_setopt( $request, CURLOPT_URL, $link );
-
-		//	dont check ssl
-		curl_setopt($request, CURLOPT_SSL_VERIFYHOST, 0);
-		curl_setopt($request, CURLOPT_SSL_VERIFYPEER, 0);   
-
-		curl_setopt( $request, CURLOPT_USERAGENT, @$settings['user_agent'] ? : self::$userAgent );
-		curl_setopt( $request, CURLOPT_AUTOREFERER, true );
-		curl_setopt( $request, CURLOPT_REFERER, @$settings['referer'] ? : $link );
-		if( @$settings['destination_file'] )
-		{
-		//	var_export( $settings );
-			$fp = fopen( $settings['destination_file'], 'w' );
-			curl_setopt( $request, CURLOPT_FILE, $fp );
-			curl_setopt( $request, CURLOPT_BINARYTRANSFER, true );
-			curl_setopt( $request, CURLOPT_HEADER, 0 ); 
-		}
-		else
-		{
-			curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
-		}
-//		curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
-		curl_setopt( $request, CURLOPT_FOLLOWLOCATION, @$settings['follow_redirect'] === false ? false : true ); //	By default, we follow redirect
-		curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 2 );	//	Max of 1 Secs on a single request  
-		curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 2 );	//	Max of 1 Secs on a single request
-		if( @$settings['post_fields'] )
-		{
-			curl_setopt( $request, CURLOPT_POST, true );
-		//	var_export( $request );
-		//	var_export( $settings['post_fields'] );   
-			curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );  
-		}
-		if( @$settings['raw_response_header'] )
-		{
-		//	var_export( $settings );
-			$headerBuff = fopen( '/tmp/headers' . time(), 'w+' );
-			//	var_export( $headerBuff );
-			curl_setopt( $request, CURLOPT_WRITEHEADER, $headerBuff );
-		}
-		if( is_array( @$settings['http_header'] ) )
-		{
-			curl_setopt( $request, CURLOPT_HTTPHEADER, $settings['http_header'] );
-		}
-		$response = curl_exec( $request );
-		$responseOptions = curl_getinfo( $request );
-
-			// close cURL resource, and free up system resources
-		curl_close( $request );
-	//	var_export( htmlentities( $response ) );
-		
- 		//	var_export( $responseOptions );
-	//	exit( var_export( $responseOptions ) );
-		//	var_export( $settings['post_fields'] );
- 	//	if( ! $response || $responseOptions['http_code'] != 200 ){ return false; }
-		if( empty( $settings['return_error_response'] ) )
-		{   
-		//	var_export( $response );
-		//	var_export( $responseOptions );
- 			if( $responseOptions['http_code'] != 200 ){ return false; }
-		}
-		if( @$settings['return_as_array'] == true )
-		{   
+	//	self::V( $response );
+			if( ! function_exists( 'curl_init' ) )
+			{
+				//trigger_error( __METHOD__ . ' WORKS BETTER WHEN CURL IS ENABLED. PLEASE ENABLE CURL ON YOUR SERVER.' );
+				return false;
+			//	return file_get_contents( $link );
+			}
+			$request = curl_init( $link );
+	//		curl_setopt( $request, CURLOPT_HEADER, true );
+			curl_setopt( $request, CURLOPT_URL, $link );
+	
+			//	dont check ssl
+			curl_setopt($request, CURLOPT_SSL_VERIFYHOST, 0);
+			curl_setopt($request, CURLOPT_SSL_VERIFYPEER, 0);   
+	
+			curl_setopt( $request, CURLOPT_USERAGENT, @$settings['user_agent'] ? : self::$userAgent );
+			curl_setopt( $request, CURLOPT_AUTOREFERER, true );
+			curl_setopt( $request, CURLOPT_REFERER, @$settings['referer'] ? : $link );
+			if( @$settings['destination_file'] )
+			{
+			//	var_export( $settings );
+				$fp = fopen( $settings['destination_file'], 'w' );
+				curl_setopt( $request, CURLOPT_FILE, $fp );
+				curl_setopt( $request, CURLOPT_BINARYTRANSFER, true );
+				curl_setopt( $request, CURLOPT_HEADER, 0 ); 
+			}
+			else
+			{
+				curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
+			}
+	//		curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
+			curl_setopt( $request, CURLOPT_FOLLOWLOCATION, @$settings['follow_redirect'] === false ? false : true ); //	By default, we follow redirect
+			curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 2 );	//	Max of 1 Secs on a single request  
+			curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 2 );	//	Max of 1 Secs on a single request
+			if( @$settings['post_fields'] )
+			{
+				curl_setopt( $request, CURLOPT_POST, true );
+			//	var_export( $request );
+			//	var_export( $settings['post_fields'] );   
+				curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );  
+			}
 			if( @$settings['raw_response_header'] )
 			{
-			//	var_export( $headerBuff );
-				rewind($headerBuff);
-				$headers = stream_get_contents( $headerBuff );
-				@$responseOptions['raw_response_header'] = $headers;
+			//	var_export( $settings );
+				$headerBuff = fopen( '/tmp/headers' . time(), 'w+' );
+				//	var_export( $headerBuff );
+				curl_setopt( $request, CURLOPT_WRITEHEADER, $headerBuff );
 			}
-			$response = array( 'response' => $response, 'options' => $responseOptions );
+			if( is_array( @$settings['http_header'] ) )
+			{
+				curl_setopt( $request, CURLOPT_HTTPHEADER, $settings['http_header'] );
+			}
+			$response = curl_exec( $request );
+			$responseOptions = curl_getinfo( $request );
+	
+				// close cURL resource, and free up system resources
+			curl_close( $request );
+		//	var_export( htmlentities( $response ) );
+			
+			 //	var_export( $responseOptions );
+		//	exit( var_export( $responseOptions ) );
+			//	var_export( $settings['post_fields'] );
+		 //	if( ! $response || $responseOptions['http_code'] != 200 ){ return false; }
+			if( empty( $settings['return_error_response'] ) )
+			{   
+			//	var_export( $response );
+			//	var_export( $responseOptions );
+				 if( $responseOptions['http_code'] != 200 ){ return false; }
+			}
+			if( @$settings['return_as_array'] == true )
+			{   
+				if( @$settings['raw_response_header'] )
+				{
+				//	var_export( $headerBuff );
+					rewind($headerBuff);
+					$headers = stream_get_contents( $headerBuff );
+					@$responseOptions['raw_response_header'] = $headers;
+				}
+				$response = array( 'response' => $response, 'options' => $responseOptions );
+			}
+			static::getObjectStorage( $key )->store( $response );
 		}
+		
  		//	var_export( $response );
 		return $response;
     } 
