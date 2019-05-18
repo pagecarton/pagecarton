@@ -89,13 +89,17 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
             $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';
 
-            if(preg_match('/Content-Disposition: .*filename=([^ ]+)/', $content['options']['raw_response_header'], $matches)) {
+            if(preg_match('/Content-Disposition: .*filename=([^0-9A-Za-z_-.]+)/', $content['options']['raw_response_header'], $matches)) {
                 $filename .= $matches[1];
+            //    var_export( $matches );
             }
             else
             {
                 $filename .= '.tar.gz';
             }
+                
+        
+
        //     var_export( $filename );   
         //    var_export( $content['options'] );
         //    exit();
@@ -103,6 +107,20 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
          //   file_put_contents( $filename, fopen( $link, 'r' ) );
             file_put_contents( $filename, $content['response'] );
             $values = static::getOtherInstallOptions( $filename );
+
+            copy( $filename, $filename . '.copy.tar.gz' );
+
+            // add screenshot
+            $repository = 'Ayoola_Phar_Data';
+
+            $repository = new $repository( $filename );
+        //    var_export( $filename );
+            $repository->startBuffering(); 
+            $repository['screenshot.jpg'] = file_get_contents( $photoUrl );
+            $repository->stopBuffering();
+        //    $repository->compress( Ayoola_Phar::GZ ); 
+        //    var_export( Ayoola_Doc::getFiles( dirname( $filename ) ) );
+        //    exit();
 
             try
             {
