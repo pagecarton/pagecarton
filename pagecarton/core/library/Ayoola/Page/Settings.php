@@ -129,9 +129,9 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 		//	</div>';
 			$layouts[$each['layout_name']] = '
 					<div style="cursor:pointer;" class="pc_inline_block ' . $class . '" name="layout_screenshot" onClick="this.parentNode.parentNode.click(); ayoola.div.selectElement( { element: this, selectMultiple: false } ); ">
-						<span style="font-size:20px;"><img height="100" alt="" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?url=/layout/' . $each['layout_name'] . '/screenshot.jpg&max_width=900&max_height=600;" ></span>
+						<span style="font-size:20px;"><img height="100" alt="" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?url=/layout/' . $each['layout_name'] . '/screenshot.jpg&max_width=850&max_height=540;" ></span>
 						<br>
-						<div  class="pc_give_space" style="height:2em;overflow:hidden;"> ' . $each['layout_label'] . ' </div>
+						<div class="xpc_give_space" style="padding:1em;height:2em;overflow:hidden;background:#eee;color:#000;"> ' . $each['layout_label'] . ' </div>
 					</div>
 				';
 //			$layouts[$each['layout_name']] = $each['layout_name'];
