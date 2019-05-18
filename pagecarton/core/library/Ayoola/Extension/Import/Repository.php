@@ -108,7 +108,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             file_put_contents( $filename, $content['response'] );
             $values = static::getOtherInstallOptions( $filename );
 
-            copy( $filename, $filename . '.copy.tar.gz' );
+        //    copy( $filename, $filename . '.copy.tar.gz' );
 
             // add screenshot
             $repository = 'Ayoola_Phar_Data';
