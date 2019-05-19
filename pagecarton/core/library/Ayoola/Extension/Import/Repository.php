@@ -151,7 +151,10 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 
             }
         //    var_export( $previousData );
-            $previousData['modified_time'] = array_pop( $allFeed['modified_time'] );
+
+            //  set current time to be able to calculate updates
+            $previousData['modified_time'] = time();
+            $previousData['creation_time'] = time();
         //    var_export( $previousData );
 
             $repository['layout_information'] = json_encode( $previousData );

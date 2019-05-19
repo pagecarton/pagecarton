@@ -605,7 +605,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					// I made this to allow for links like delete, edit, etc
 					$value = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], '' ), $value );
 					$value = str_replace( $columnSearch, $columnReplace, $value );
-						var_export( $value );
+					//	var_export( $value );
 
 					$records .='<td> ' . $value . '</td>';
 				}
