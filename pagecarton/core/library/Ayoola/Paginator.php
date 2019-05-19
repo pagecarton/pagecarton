@@ -493,6 +493,8 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					$columnReplace[] = $eachValue;
 				}
 			}
+		//	var_export( $columnSearch );
+		//	var_export( $columnReplace );
 			
 		//	$bg = $bg == '#ffffff' ? '#eeeeee' : '#ffffff';
 			$rowClass = @$rowClass == 'pc-table-row1' ? 'pc-table-row2' : 'pc-table-row1';
@@ -509,6 +511,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			foreach( $this->getRowOptions() as $option )
 			{
 				$option = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], '' ), $option );
+				$option = str_replace( $columnSearch, $columnReplace, $option );
 				$optionsHtml .= '<span style="" class=""> ' . $option . ' </span> ';			
 			}
 		//	var_export( $fields );
@@ -590,6 +593,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					$value = str_replace( '%KEY%', @$row[$key], $value );
 					$value = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $value );
 					$value = str_replace( $columnSearch, $columnReplace, $value );
+				//	var_export( $value );
 			//		if( $this->crossColumnFields )
 
 					//	we want to include html here // use personal filters for this
@@ -600,6 +604,9 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				{
 					// I made this to allow for links like delete, edit, etc
 					$value = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], '' ), $value );
+					$value = str_replace( $columnSearch, $columnReplace, $value );
+						var_export( $value );
+
 					$records .='<td> ' . $value . '</td>';
 				}
 /*				

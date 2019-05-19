@@ -135,6 +135,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
+		$list->crossColumnFields = true;
 		$list->listTitle = 'My Themes';
 	//	$list->noRowClass = true;
 	//	$list->noOptionsColumn = true;
@@ -174,6 +175,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 								//			'Export' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Export/?' . $this->getIdColumn() . '=%KEY%\' );" title="Export Theme">Export</a>' ,
 											'Default' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?' . $this->getIdColumn() . '=%KEY%\' );" title="Make this the default site theme">Make Default</a>' ,
 											'Preview' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Layout_Preview/?' . $this->getIdColumn() . '=%KEY%\' );" title="Preview">Preview</a>' ,
+											'Update' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Layout_Repository?title={{{%layout_label%}}}&layout_type=upload&install={{{%article_url%}}}&update={{{%article_url%}}}\' );" title="Preview">Re-install</a>',
 											'Delete' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="Delete">Delete</a>' ,
 										) 
 								);

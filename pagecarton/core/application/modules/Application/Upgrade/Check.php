@@ -97,6 +97,22 @@ class Application_Upgrade_Check extends PageCarton_Widget
         //    $this->setViewContent( '' ); 
         }
 
+        //  check update for themes
+        foreach( Ayoola_Page_PageLayout::getInstance()->select() as $layout )
+        {
+            if( empty( $layout['article_url'] ) )
+            {
+                //  only check update for one that is in repo
+                continue;
+            }
+            $url = 'https://themes.pagecarton.org/tools/classplayer/get/name/Application_Article_View?article_url=' . $layout['article_url'] . '&pc_widget_output_method=JSON';
+            $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
+            $layoutInfo = json_decode( $feed, true );
+            if( $layoutInfo['creation_time'] !==  $layout['creation_time'] )
+            {
+                $this->setViewContent( '<div  style="font-size:smaller;" class="badnews">' . $layout['layout_label'] . ' theme is outdated. <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Repository?title=' . $layout['layout_label'] . '&layout_type=upload&install=' . $layout['article_url'] . '&update=' . $layout['article_url'] . '" class="">Update now!</a>   </div>', true ); 
+            }
+        }
 
 
              // end of widget process

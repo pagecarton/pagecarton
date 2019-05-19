@@ -67,22 +67,49 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 		{
        //     var_export( array( 'article_url' =>  @$_GET['install'] ) );
          //   var_export( Ayoola_Page_PageLayout::getInstance()->select( null, array( 'article_url' =>  @$_GET['install'] ) ) );
+
             $layout = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'article_url' =>  @$_GET['install'] ) );
-            if( $layout['article_url'] === @$_GET['install'] )
+            $url = 'https://' . static::$_site . '/tools/classplayer/get/name/Application_Article_View?article_url=' . $_GET['install'] . '&pc_widget_output_method=JSON';
+            $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
+            $allFeed = json_decode( $feed, true );
+
+        //    var_export( $allFeed );
+            $install = 'Install';
+            if( ! empty( $_GET['update'] ) )
+            {
+                $install = 'Update';
+            }
+            
+            
+
+            if( $layout['article_url'] === @$_GET['install'] && empty( $_GET['update'] ) )
             {
                 $this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . ' Installed</h1>' );
-            //    $this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . ' Installed</h1>' );
+                $this->setViewContent( '<a class="pc-btn" href="#" onclick="location.search+=\'&update=' . $_GET['install'] . '\'">Update</a></p>' );
             }
             else
             {
-                $this->createConfirmationForm( 'Install ' . static::$_pluginType . '', 'Download and install ' . static::$_pluginType . ' and its components' );
+                $this->createConfirmationForm( $install . ' ' . static::$_pluginType . '', 'Download and install latest ' . static::$_pluginType . ' files and its components' );
                 $this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' );
                 $this->setViewContent( $this->getForm()->view() );
             }
             $photoUrl = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . $_GET['install'] . '';
 			$this->setViewContent( '<img style="width:100%;" src="' . $photoUrl . '&width=1500&height=600" alt="">' );
 			$this->setViewContent( self::getMenu() );
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
+            if( ! $values = $this->getForm()->getValues() ){ return false; }
+            
+
+            //   delete first if this is upgrade
+       //     var_export( $layout['article_url'] );
+        //    var_export( @$_GET['update'] );
+        
+            if( $layout['article_url'] === @$_GET['update'] )
+            {
+                $layout = Ayoola_Page_PageLayout::getInstance()->delete( array( 'article_url' =>  @$_GET['update'] ) );
+                var_export( $layout['article_url'] );
+                var_export( @$_GET['update'] );
+            }
+
             $link = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $_GET['install'] . '&auto_download=1';
         //    var_export(  $link );
 

@@ -261,6 +261,8 @@ class Application_Article_View extends Application_Article_Abstract
 		$data['category_id'] = @$data['category_id'] ? : array();
 		$data['category_name'] = array_merge( $data['category_name'], $data['category_id'] );
 		$categoryText = self::getCategories( $data['category_name'], array( 'template' => $this->getParameter( 'category_template' ), 'glue' => ( $this->getParameter( 'category_template_glue' ) ? : ', ' ) ) );
+		$this->_objectData = $data;
+		$this->_objectTemplateValues = $data;
 		$this->_objectData['category_text'] = $categoryText;
 		$this->_objectTemplateValues['category_text'] = $categoryText;
 		$categoryText = $categoryText ? 'Category:  ' . $categoryText : null;		
