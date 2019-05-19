@@ -109,9 +109,9 @@ class Application_Upgrade_Check extends PageCarton_Widget
             $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
             $layoutInfo = json_decode( $feed, true );
         //   var_export( array_pop( $layoutInfo['modified_time'] ) );
-       //   var_export( $layout['modified_time'] );
-            $version = count( $layoutInfo['modified_time'] );
-            $lastEdited = array_pop( $layoutInfo['modified_time'] );
+        //  var_export( $layoutInfo );
+            $version = count( $layoutInfo['article_editor_username'] );
+            $lastEdited = $layoutInfo['article_modified_date'];
        //     var_export( $layoutInfo['article_title'] );
         //    var_export( $layoutInfo['modified_time'] );
       //     var_export( $layout['modified_time'] );
