@@ -110,13 +110,14 @@ class Application_Upgrade_Check extends PageCarton_Widget
             $layoutInfo = json_decode( $feed, true );
         //   var_export( array_pop( $layoutInfo['modified_time'] ) );
        //   var_export( $layout['modified_time'] );
+            $version = count( $layoutInfo['modified_time'] );
             $lastEdited = array_pop( $layoutInfo['modified_time'] );
        //     var_export( $layoutInfo['article_title'] );
         //    var_export( $layoutInfo['modified_time'] );
       //     var_export( $layout['modified_time'] );
             if( $lastEdited > $layout['modified_time'] )
             {
-                $this->setViewContent( '<div  style="font-size:smaller;" class="badnews">' . $layout['layout_label'] . ' theme is outdated. <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Repository?title=' . $layout['layout_label'] . '&layout_type=upload&install=' . $layout['article_url'] . '&update=' . $layout['article_url'] . '" class="">Update now!</a>   </div>', true ); 
+                $this->setViewContent( '<div  style="font-size:smaller;" class="badnews">' . $layout['layout_label'] . ' theme version ' . $version . ' is available. <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Repository?title=' . $layout['layout_label'] . '&layout_type=upload&install=' . $layout['article_url'] . '&update=' . $layout['article_url'] . '" class="">Update now!</a>   </div>' ); 
             }
         }
 
