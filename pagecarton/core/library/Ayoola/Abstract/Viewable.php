@@ -518,7 +518,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     {	
 	//	self::V( $link );
 		$key = md5( $link . serialize( $settings ) );
-		if( ! $response = static::getObjectStorage( $key )->retrieve() )
+	//	$storage =  static::getObjectStorage( $key )
+		$storage = self::getObjectStorage( array( 'id' => $key, 'device' => 'File', 'time_out' => 10000, ) );
+		if( ! $response = $storage->retrieve() )
 		{
 	//	self::V( $response );
 			if( ! function_exists( 'curl_init' ) )
@@ -600,7 +602,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				}
 				$response = array( 'response' => $response, 'options' => $responseOptions );
 			}
-			static::getObjectStorage( $key )->store( $response );
+			$storage->store( $response );
 		}
 		
  		//	var_export( $response );

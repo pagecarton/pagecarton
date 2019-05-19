@@ -106,8 +106,8 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             if( $layout['article_url'] === @$_GET['update'] )
             {
                 $layout = Ayoola_Page_PageLayout::getInstance()->delete( array( 'article_url' =>  @$_GET['update'] ) );
-                var_export( $layout['article_url'] );
-                var_export( @$_GET['update'] );
+          //      var_export( $layout['article_url'] );
+           //     var_export( @$_GET['update'] );
             }
 
             $link = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $_GET['install'] . '&auto_download=1';
@@ -141,9 +141,21 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             $repository = 'Ayoola_Phar_Data';
 
             $repository = new $repository( $filename );
-        //    var_export( $filename );
+            //   var_export( $allFeed['modified_time'] );
             $repository->startBuffering(); 
             $repository['screenshot.jpg'] = file_get_contents( $photoUrl );
+         //   var_export( $repository['layout_information'] );
+        //    $previousData = json_decode( file_get_contents( $repository['layout_information'] ), true );
+            if( $previousData = json_decode( file_get_contents( $repository['layout_information'] ), true ) OR $previousData = unserialize( file_get_contents( $repository['layout_information'] ) ) )
+            {
+
+            }
+        //    var_export( $previousData );
+            $previousData['modified_time'] = array_pop( $allFeed['modified_time'] );
+        //    var_export( $previousData );
+
+            $repository['layout_information'] = json_encode( $previousData );
+
             $repository->stopBuffering();
         //    $repository->compress( Ayoola_Phar::GZ ); 
         //    var_export( Ayoola_Doc::getFiles( dirname( $filename ) ) );
