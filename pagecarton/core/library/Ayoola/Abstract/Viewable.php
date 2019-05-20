@@ -1666,7 +1666,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 
 				$documentElementOTag = '<div>
-											<' . $element . '>';
+											<' . $element . ' data-object-name="' . $this->getObjectName() . '" name="' . $this->getObjectName() . '_container' . '">';
 
 				$documentElementCTag = '	</' . $element . '>
 										</div>';
@@ -1699,7 +1699,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$this->_viewContent->appendChild( $contentData );  
 		}
-		$this->_viewContentHTML .= 	$documentElementOTag . 
+		$this->_viewContentHTML = 	$documentElementOTag . 
 										$contentTagO .
 										$this->_viewContentText . 
 										$contentTagC .
