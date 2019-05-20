@@ -132,8 +132,15 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 				$class->updateLayoutOnEveryLoad = true;
 				$class->init(); // invoke the template update for this page.
  */		
+				//	once page is created, let's have blank content
+				$page = new Ayoola_Page_Editor_Sanitize();
+				$page->refresh( $values['url'] );
+
 				$this->setViewContent( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>', true );   
-				$this->setViewContent( '<p><a class="boxednews centerednews" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '"> Add Content!</a></p>' ); 
+				$this->setViewContent( '<p>
+																		<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '"><i class="fa fa-edit pc_give_space"></i> Add Content!</a>
+																		<a class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $values['url'] . '"> <i class="fa fa-cog pc_give_space"></i> Settings</a>
+				</p>' ); 
 	//		}
 	//		else
 	//		{ 
