@@ -1698,7 +1698,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     public function getViewContent()     
 	{
 		if( null === $this->_viewContent ){ return; } 	//	don't return empty tags
-		return $this->_viewContent->saveHTML();
+		$content = html_entity_decode( $this->_viewContent->saveHTML(), ENT_QUOTES,"UTF-8" );
+		return $content;
 	}
 
     /**
