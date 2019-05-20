@@ -175,7 +175,10 @@ class Application_Article_Creator extends Application_Article_Abstract
 		//	idn_to_ascii( );
 			$filter = new Ayoola_Filter_Transliterate();
 			$values['article_url'] = $filter->filter( $values['article_title'] );
-			
+
+			$filter = new Ayoola_Filter_SimplyUri();
+			$values['article_url'] = $filter->filter( $values['article_url'] );
+	
 			$filter = new Ayoola_Filter_Name();
 			$filter->replace = '-';
 			if( function_exists( 'mb_substr') )

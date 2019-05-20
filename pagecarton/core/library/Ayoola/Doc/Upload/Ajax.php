@@ -95,6 +95,10 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			@$_POST['name'] = $_POST['name'] ? : '_file_';
 			$filter = new Ayoola_Filter_Transliterate();
 			$_POST['name'] = $filter->filter( $_POST['name'] );
+
+			$filter = new Ayoola_Filter_SimplyUrl();
+			$_POST['name'] = $filter->filter( $_POST['name'] );
+
 //			if( ! Ayoola_Abstract_Table::hasPriviledge( ) )
 			$filenameToUse = null;
 			@$docSettings['allowed_uploaders'] = @$docSettings['allowed_uploaders'] ? : array();
@@ -209,7 +213,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					}
 					$url .= date( 'Y/m/d/' );
 					$filter = new Ayoola_Filter_Name(); 
-					$filter->replace = '_'; 
+					$filter->replace = '-'; 
 					
 				//	var_export( strtolower( array_pop( explode( '.', trim( $_POST['suggested_url'], '.' ) ) ) ) );
 					if( ! in_array( strlen( $extension ), range( 1, 4 ) ) )
@@ -219,7 +223,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				//	$_POST['name'] = array_shift( explode( '.', $_POST['name'] ) );
 					$_POST['name'] = substr( $_POST['name'], 0, 30 );
 					$_POST['name'] = $_POST['name'] ? : uniqid();
-					$_POST['name'] = str_replace( '.', '_', $_POST['name'] );
+					$_POST['name'] = str_replace( '.', '-', $_POST['name'] );
 					$newName = $filter->filter( $_POST['name'] );
 					$dir .= $url;
 					Ayoola_Doc::createDirectory( $dir );
