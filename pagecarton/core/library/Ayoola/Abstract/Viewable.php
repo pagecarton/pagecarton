@@ -1641,6 +1641,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		if( null === $this->_viewContent || true === $refresh )
 		{ 
+			$this->_viewContentText = null;
 			$this->_viewContent = new Ayoola_Xml();
 		//	self::v( get_class( $this ) );
 		//	self::v( $this->wrapViewContent );
@@ -1662,10 +1663,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$documentElement = $this->_viewContent->createElement( $element );  
 				$documentElement->setAttribute( 'data-object-name', $this->getObjectName() );
 				$documentElement->setAttribute( 'name', $this->getObjectName() . '_container' );
-			//	$this->getParameter( 'object_class' ) ? $documentElement->setAttribute( 'class', $this->getParameter( 'object_class' ) ) : null;
-		//		$this->getParameter( 'object_style' ) ? $documentElement->setAttribute( 'style', $this->getParameter( 'object_style' ) ) : null;   
+
+
+				$documentElementOTag = '<div>
+											<' . $element . '>';
+
+				$documentElementCTag = '	</' . $element . '>
+										</div>';
+				
 				$b = $this->_viewContent->createElement( 'div' );
-		//		$b->setAttribute( 'name', 'over-all-container' );   
 				$b->appendChild( $documentElement );
 				$this->_viewContent->appendChild( $b );
 				
@@ -1673,11 +1679,18 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$a = $this->_viewContent->createElement( 'div' );
 				$a->setAttribute( 'name', $this->getObjectName() );   
 				$documentElement->appendChild( $a );
+
+				$containerOTag = '<div name="' . $this->getObjectName() . '">';
+				$containerCTag = '</div>';
 			}
 		}
 		$contentData = $this->_viewContent->createCDATASection( $content );
+		$this->_viewContentText .= $content;
 		if( $this->wrapViewContent && ! $this->getParameter( 'no_view_content_wrap' ) )
 		{
+				$contentTagO = '<' . static::$_viewContentElementContainer . '>';
+											
+				$contentTagC = '</' . static::$_viewContentElementContainer . '>';
 			$contentTag = $this->_viewContent->createElement( static::$_viewContentElementContainer ); 
 			$contentTag->appendChild( $contentData );
 			$this->_viewContent->documentElement->firstChild->appendChild( $contentTag );
@@ -1686,6 +1699,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$this->_viewContent->appendChild( $contentData );  
 		}
+		$this->_viewContentHTML .= 	$documentElementOTag . 
+										$contentTagO .
+										$this->_viewContentText . 
+										$contentTagC .
+									$documentElementCTag;
 	//	$this->_viewContent->view(); exit();
 	//	var_export( $content );
 		
@@ -1697,9 +1715,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     public function getViewContent()     
 	{
-		if( null === $this->_viewContent ){ return; } 	//	don't return empty tags
-		$content = html_entity_decode( $this->_viewContent->saveHTML(), ENT_QUOTES,"UTF-8" );
-		return $content;
+		return $this->_viewContentHTML;
+	//	if( null === $this->_viewContent ){ return; } 	//	don't return empty tags
+	//	$content = html_entity_decode( $this->_viewContent->saveHTML(), ENT_QUOTES,"UTF-8" );
+	//	return $content;
 	}
 
     /**
