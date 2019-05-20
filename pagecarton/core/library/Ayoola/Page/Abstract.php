@@ -253,7 +253,8 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 					var a = false;
 					var xry = target.value;
 					xry = xry.toLowerCase();
-					xry = xry.replace( /[^a-zA-Z0-9\/]/gi, "-" );
+			//		xry = xry.replace( /[^a-zA-Z0-9\/]/gi, "-" );
+					xry = xry.replace( /[ _.=]/gi, "-" );
 					xry = xry.replace( /([-])+/gi, "-" );
 					xry = xry.replace( /[-\/]$/gi, "" );
 					xry = xry.replace( /^[-\/]/gi, "" );
@@ -287,13 +288,16 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		if( is_null( $values ) )
 		{
 		//	$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html' ), array( 'html' => 'http://' . Ayoola_Page::getDefaultDomain() . ' ' ) );
-			$option = array( $_SERVER['HTTP_HOST'] => 'http://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() );
+		//	$option = array( $_SERVER['HTTP_HOST'] => 'http://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() );
 		//	$fieldset->addElement( array( 'name' => 'domain', 'style' => 'max-width:20%;', 'label' => '', 'type' => 'Select', 'value' => 'http://' . $_SERVER['HTTP_HOST'] ), $option );
-			$domain = 'http://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix();
+		//	$domain = 'http://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix();
 	//		$fieldset->addElement( array( 'name' => 'domain', 'style' => 'max-width:' . strlen( $domain ) . 'em; min-width:20%;', 'label' => 'URL', 'disabled' => 'disabled', 'type' => 'InputText', 'value' => $domain ) );
 			$fieldset->addElement( array( 'name' => 'url', 'class' => 'pc_page_url_field', 'style' => '', 'label' => '', 'placeholder' => '/page', 'onchange' => 'ayoola.addShowAutoUrl( this );', 'type' => 'Hidden', 'value' => @$values['url'] ) ); 
-			$fieldset->addFilter( 'url','Uri' );
-			$fieldset->addRequirement( 'url', array( 'DuplicateRecord' => array( 'Ayoola_Page_Page', 'url', 'badnews' => '"%variable%" already exist as a page.', ),'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^0-9a-z-_\/', ), 'NotEmpty' => null, 'Uri' => null ) );
+
+		//	$url =
+
+			$fieldset->addFilter( 'url', array( 'Transliterate' => null, 'SimplyUrl' => null, 'Uri' => null, 'CharacterWhitelist' => array( 'character_list' => '^\w\-\/', 'replace' => '-', ) ) );
+			$fieldset->addRequirement( 'url', array( 'DuplicateRecord' => array( 'Ayoola_Page_Page', 'url', 'badnews' => '"%variable%" already exist as a page.', ),'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^\w\-\/', ), 'NotEmpty' => null, 'Uri' => null ) );
 		//	$fieldset->addElement( array( 'name' => 'name', 'placeholder' => 'Give this page a name', 'type' => 'InputText', 'value' => @$values['name'] ) );
 		}
 		$fieldset->addElement( array( 'name' => 'description', 'label' => 'Page Description', 'placeholder' => 'Enter a short description of the content of this page. The description will be displayed in search results and page preview...', 'type' => 'TextArea', 'value' => @$values['description'] ) );

@@ -170,18 +170,21 @@ class Application_Article_Creator extends Application_Article_Abstract
 				$values = array_merge( static::$_optionalValues, $values );
 			}
 		//	var_export( $values );
-			$filter = new Ayoola_Filter_Name();
-			$filter->replace = '-';
 			$access = new Ayoola_Access();
 			$userInfo = $access->getUserInfo();
 		//	idn_to_ascii( );
+			$filter = new Ayoola_Filter_Transliterate();
+			$values['article_url'] = $filter->filter( $values['article_title'] );
+			
+			$filter = new Ayoola_Filter_Name();
+			$filter->replace = '-';
 			if( function_exists( 'mb_substr') )
 			{
-				$values['article_url'] = mb_substr( trim( $filter->filter( strtolower( $values['article_title'] ) ) , '-' ), 0, 70 ) ? : microtime();
+				$values['article_url'] = mb_substr( trim( $filter->filter( strtolower( $values['article_url'] ) ) , '-' ), 0, 70 ) ? : microtime();
 			}
 			else
 			{
-				$values['article_url'] = substr( trim( $filter->filter( strtolower( $values['article_title'] ) ) , '-' ), 0, 70 ) ? : microtime();
+				$values['article_url'] = substr( trim( $filter->filter( strtolower( $values['article_url'] ) ) , '-' ), 0, 70 ) ? : microtime();
 			}
 			$values['user_id'] = $userInfo['user_id'];
 			$values['username'] = $userInfo['username'];
@@ -197,9 +200,6 @@ class Application_Article_Creator extends Application_Article_Abstract
 		//	$date = $articleSettings['no-date-in-url'] ? '/' : date( '/Y/m/d/' );
 			$articleSettings['extension'] = @$articleSettings['extension'] ? : 'html';
 			
-			//	Put the extension
-	//		$values['article_url'] .=  '.article.' . $articleSettings['extension'];
-		//	$values['article_url'] .=  '.' . $articleSettings['extension'];
 			
 			//	Check availability of article url
 			$time = null;

@@ -91,7 +91,10 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 
 				}
 			}
+
 			@$_POST['name'] = $_POST['name'] ? : '_file_';
+			$filter = new Ayoola_Filter_Transliterate();
+			$_POST['name'] = $filter->filter( $_POST['name'] );
 //			if( ! Ayoola_Abstract_Table::hasPriviledge( ) )
 			$filenameToUse = null;
 			@$docSettings['allowed_uploaders'] = @$docSettings['allowed_uploaders'] ? : array();

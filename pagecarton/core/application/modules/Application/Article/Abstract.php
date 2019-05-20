@@ -1508,7 +1508,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
 					$fieldName64 = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url_base64' ) : 'document_url_base64' );
 				//	var_export( $link );
-				//	var_export( @$values['article_url'] );
 					$fieldset->addElement( array( 'name' => 'document_url', 'label' => 'Cover Photo', 'placeholder' => 'Cover Photo for this ' . $postTypeLabel . '', 'type' => 'Document', 'value' => @$values['document_url'] ) );
 				break;  
 				case 'category':   
