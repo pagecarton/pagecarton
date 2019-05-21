@@ -176,7 +176,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 			$filter = new Ayoola_Filter_Transliterate();
 			$values['article_url'] = $filter->filter( $values['article_title'] );
 
-			$filter = new Ayoola_Filter_SimplyUri();
+			$filter = new Ayoola_Filter_SimplyUrl();
 			$values['article_url'] = $filter->filter( $values['article_url'] );
 	
 			$filter = new Ayoola_Filter_Name();
