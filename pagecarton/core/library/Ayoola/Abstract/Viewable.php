@@ -1665,10 +1665,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$documentElement->setAttribute( 'name', $this->getObjectName() . '_container' );
 
 
-				$documentElementOTag = '<div>
+				$this->documentElementOTag = '<div>
 											<' . $element . ' data-object-name="' . $this->getObjectName() . '" name="' . $this->getObjectName() . '_container' . '">';
 
-				$documentElementCTag = '	</' . $element . '>
+				$this->documentElementCTag = '	</' . $element . '>
 										</div>';
 				
 				$b = $this->_viewContent->createElement( 'div' );
@@ -1680,17 +1680,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$a->setAttribute( 'name', $this->getObjectName() );   
 				$documentElement->appendChild( $a );
 
-				$containerOTag = '<div name="' . $this->getObjectName() . '">';
-				$containerCTag = '</div>';
+				$this->containerOTag = '<div name="' . $this->getObjectName() . '">';
+				$this->containerCTag = '</div>';
 			}
 		}
 		$contentData = $this->_viewContent->createCDATASection( $content );
 		$this->_viewContentText .= $content;
 		if( $this->wrapViewContent && ! $this->getParameter( 'no_view_content_wrap' ) )
 		{
-				$contentTagO = '<' . static::$_viewContentElementContainer . '>';
+				$this->contentTagO = '<' . static::$_viewContentElementContainer . '>';
 											
-				$contentTagC = '</' . static::$_viewContentElementContainer . '>';
+				$this->contentTagC = '</' . static::$_viewContentElementContainer . '>';
 			$contentTag = $this->_viewContent->createElement( static::$_viewContentElementContainer ); 
 			$contentTag->appendChild( $contentData );
 			$this->_viewContent->documentElement->firstChild->appendChild( $contentTag );
@@ -1699,11 +1699,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$this->_viewContent->appendChild( $contentData );  
 		}
-		$this->_viewContentHTML = 	$documentElementOTag . 
-										$contentTagO .
+		$this->_viewContentHTML = 	$this->documentElementOTag . 
+										$this->containerOTag . $this->containerCTag .
+										$this->contentTagO .
 										$this->_viewContentText . 
-										$contentTagC .
-									$documentElementCTag;
+										$this->contentTagC .
+									$this->documentElementCTag;
 	//	$this->_viewContent->view(); exit();
 	//	var_export( $content );
 		
