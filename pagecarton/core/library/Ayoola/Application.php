@@ -1346,6 +1346,14 @@ class Ayoola_Application
 //			var_export( $PAGE_TEMPLATE_FILE );
 			if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
 			{
+			//	var_export( $pagePaths['include'] );
+
+				//	save first
+				//	once page is created, let's have blank content
+				$page = new Ayoola_Page_Editor_Sanitize();
+				$page->refresh( $uri, $themeName );
+				
+			//	if( )
 				//	not found
 				return false;
 			}

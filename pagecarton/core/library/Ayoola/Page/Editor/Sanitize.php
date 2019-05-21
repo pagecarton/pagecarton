@@ -164,8 +164,12 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
      * @param void
      * @return boolean
      */	
-    public function refresh( $page ) 
+    public function refresh( $page, $themeName = null ) 
     {
+		if( ! empty( $themeName ) )
+		{
+			$this->_parameter['page_editor_layout_name'] = $themeName;
+		}
 		$id = $page . Ayoola_Application::getApplicationNameSpace();
 		if( ! empty( static::$_refreshed[$id] ) )
 		{
