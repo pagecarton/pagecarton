@@ -402,7 +402,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		
 		   
 		//	Fix url();  
-		$content = preg_replace('#url\(([^/\#\{][^:"\(\);]*)\)#', 'url(PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$1)', $content );
+		$content = preg_replace('#url\(\'?"?([^/\#\{][^:\'"\(\);]*)\'?"?\)#', 'url(PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$1)', $content );
 
 //		var_export( $content );
 		// Instantiate the object
