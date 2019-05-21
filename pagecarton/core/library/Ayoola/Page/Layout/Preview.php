@@ -42,7 +42,10 @@ class Ayoola_Page_Layout_Preview extends Ayoola_Page_Layout_Abstract
 		try
 		{ 
             //  Code that runs the widget goes here...
-			if( ! $data = $this->getIdentifierData() ){ return false; }
+            if( ! $data = $this->getIdentifierData() ){ return false; }
+            
+            header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/?pc_page_layout_name=' . $data['layout_name'] . '' );
+            exit();
 
 			$themeName = $data['layout_name'];
 		//	$themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
