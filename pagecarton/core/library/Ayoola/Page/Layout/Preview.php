@@ -47,7 +47,7 @@ class Ayoola_Page_Layout_Preview extends Ayoola_Page_Layout_Abstract
             header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/?pc_page_layout_name=' . $data['layout_name'] . '' );
             exit();
 
-			$themeName = $data['layout_name'];
+/* 			$themeName = $data['layout_name'];
 		//	$themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
 			$pagePaths['include'] = 'documents/layout/' . $themeName . '/theme' . '/include';
 			$pagePaths['template'] = 'documents/layout/' . $themeName . '/theme' . '/template';
@@ -74,7 +74,7 @@ class Ayoola_Page_Layout_Preview extends Ayoola_Page_Layout_Abstract
             include $temIncludeFile;
             unlink( $temIncludeFile );
             exit();
-             // end of widget process
+ */             // end of widget process
           
 		}  
 		catch( Exception $e )
