@@ -1116,17 +1116,32 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	check it here first so that it can set the widget options
 			if( @$object['savedwidget_id'] )
 			{
-			//	$savedWidgets ? $fieldset->addElement( array( 'name' => 'savedwidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['savedwidget_id'] ), array( '' => 'Restore Saved Widgets' ) + $savedWidgets ) : null;
 				if( $widgetToRestore = Ayoola_Object_SavedWidget::getInstance()->selectOne( null, array( 'savedwidget_id' =>  $object['savedwidget_id'], ) ) )
 				{
-				//	var_export( $widgetToRestore );
 					$object = $widgetToRestore['parameters'];
-					
+
 					//	avoid double saves
 					unset( $object['save_widget_as'] );
 					$advanceParameters = $object;
 				}
 			}
+			if( @$object['pagewidget_id'] )
+			{
+				if( $widgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
+				{
+				//	var_export( $widgetToRestore['object_name'] );
+					$object = $widgetToRestore['parameters'];
+			//		var_export( $widgetToRestore );
+			//		var_export( $object );
+					$object['widget_options'][] = 'savings';
+					$object['pagewidget_id'] = $widgetToRestore['pagewidget_id'];
+					
+					//	avoid double saves
+					unset( $object['save_widget_as'] );
+					parse_str( @$object['advanced_parameters'], $advanceParameters );
+				}
+			}
+
 	
 			$availableOptions = ( static::$_widgetOptions ? : array() ) + array( 
 				'wrappers' => 'Wrappers',
@@ -1159,12 +1174,24 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$fieldset = new Ayoola_Form_Element();
 				$fieldset->hashElementName = false;
 				$fieldset->container = 'div';
+				
+				//	My Saved Widgets
 				$savedWidgets = Ayoola_Object_SavedWidget::getInstance()->select( null, array( 'class_name' =>  $object['class_name'], ) );
-			//	var_export( $savedWidgets );
 				$filter = new Ayoola_Filter_SelectListArray( 'savedwidget_id', 'widget_name');
 				$savedWidgets = $filter->filter( $savedWidgets );
 				$savedWidgets ? $fieldset->addElement( array( 'name' => 'savedwidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['savedwidget_id'] ), array( '' => 'Restore Saved Widgets' ) + $savedWidgets ) : null;
+
+				//	PageWidgets
+				
+				$pageWidgets = Ayoola_Object_PageWidget::getInstance()->select( null, array( 'class_name' =>  $object['class_name'], ) );
+			//	var_export( $pageWidgets );
+				$filter = new Ayoola_Filter_SelectListArray( 'pagewidget_id', 'widget_name');
+				$pageWidgets = $filter->filter( $pageWidgets );
+				$pageWidgets ? $fieldset->addElement( array( 'name' => 'pagewidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['pagewidget_id'] ), array( '' => 'Restore Page Widgets' ) + $pageWidgets ) : null;
+
+				
 				$fieldset->addElement( array( 'name' => 'save_widget_as', 'label' => 'Save This Widget As', 'placeholder' => 'e.g. My Widget', 'type' => 'InputText', 'value' => '' ) );
+
 
 		
 				$form->addFieldset( $fieldset );
@@ -1181,6 +1208,19 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	avoid double saves
 					unset( $object['save_widget_as'] );
 					$advanceParameters = $object;
+				}
+			}
+			if( @$object['pagewidget_id'] )
+			{
+				if( $widgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
+				{
+				//	var_export( $widgetToRestore );
+					$object = $widgetToRestore['parameters'];
+					$object['widget_options'][] = 'savings';
+					
+					//	avoid double saves
+					unset( $object['save_widget_as'] );
+					parse_str( @$object['advanced_parameters'], $advanceParameters );
 				}
 			}
 
@@ -1479,7 +1519,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{ 
 			parse_str( $parameters['advanced_parameters'], $advanceParameters );
 		//	var_export( $advanceParameters );
-		@$advanceParameters = array_combine( $advanceParameters['advanced_parameter_name'], @$advanceParameters['advanced_parameter_value'] ) ? : array();
+			@$advanceParameters = array_combine( $advanceParameters['advanced_parameter_name'], @$advanceParameters['advanced_parameter_value'] ) ? : array();
+		//	var_export( $advanceParameters );
 			$parameters += $advanceParameters;
 			unset( $parameters['advanced_parameters'] );
 		}

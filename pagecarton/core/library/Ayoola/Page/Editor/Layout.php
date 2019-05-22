@@ -824,7 +824,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					{ 
 						if( is_string( $values[$numberedSectionName . '_template_defaults'] ) )
 						{
-						$values[$numberedSectionName . '_template_defaults'] = array( 'editable' => $values[$numberedSectionName . '_template_defaults'] );
+							$values[$numberedSectionName . '_template_defaults'] = array( 'editable' => $values[$numberedSectionName . '_template_defaults'] );
 						}
 				//		var_export( $eachObject['editable'] );
 					} 
@@ -898,8 +898,46 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				
 					//	Calculate advanced parameters at this level so that access levels might work
 				//	var_export( $parameters );
+				//	self::sanitizeParameters( $parameters );
+				//	var_export( $parameters );
 					$parameters = self::prepareParameters( $parameters );
-					$pageContent[$section][] = 	array( 'class' => $eachObject['class_name'], 'parameters' => $parameters );			
+					if( $this->isSaveMode() )
+					{
+						$widgetName = ( ( $parameters['preserved_content'] ? : $parameters['codes'] ) ? : $parameters['editable'] ) ? : implode( ' - ', $parameters );
+						$widgetName = trim( strip_tags( $widgetName ) ) ? : ( $eachObject['class_name'] ) . ' - ' . $numberedSectionName;
+						$parametersToSave = $parameters + $eachObject;
+						$parametersKey = md5( json_encode( $parametersToSave ) );
+						$whatToSave = array( 'widget_name' =>  $widgetName, 'url' =>  $page['url'], 'class_name' =>  $eachObject['class_name'], 'parameters' => $parametersToSave, 'parameters_key' => $parametersKey, );
+					//	var_export( $parametersToSave );
+						if( 
+							empty( $parameters['pagewidget_id'] ) 
+							|| ! Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) ) 
+						)
+						{
+						//	var_export( $whatToSave );
+							if( 
+								! Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'class_name' =>  $eachObject['class_name'], 'parameters_key' =>  $parametersKey ) ) 
+							)
+							{
+								$pageWidgetIdText = http_build_query( $response );
+								$response = Ayoola_Object_PageWidget::getInstance()->insert( $whatToSave );
+								$pageWidgetIdText = http_build_query( $response );
+								$values[$numberedSectionName . 'advanced_parameters'] .= '&' . $pageWidgetIdText;
+								$parameters += (array) $response;
+
+							}
+
+						}
+						elseif( 
+							! empty( $parameters['pagewidget_id'] ) && Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) ) 
+						)
+						{
+							$response = Ayoola_Object_PageWidget::getInstance()->update( $whatToSave, array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) );
+						}
+
+					}
+					$pageContent[$section][] = 	array( 'class' => $eachObject['class_name'], 'parameters' => $parameters );	
+
 					$parametersArray = $parameters;
 					$parameters = var_export( $parameters, true );
 				//	$sectionContent['include'] .= "\n\${$objectName}->setParameter( {$parameters} );\n";  
@@ -2149,7 +2187,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		{ 
 			parse_str( $parameters['advanced_parameters'], $advanceParameters );
 			@$injectedValues = array_combine( $advanceParameters['advanced_parameter_name'], @$advanceParameters['advanced_parameter_value'] ) ? : array();
-			unset( $advanceParameters['advanced_parameter_name'] );
 			unset( $advanceParameters['advanced_parameter_name'] );
 		//	var_export( $advanceParameters );
 			$parameters += $advanceParameters ? : array();
