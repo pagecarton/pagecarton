@@ -731,7 +731,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
 						'publish' => true, 
 						'auth_level' => $articleSettings['allowed_writers'], 
-			//			'article_tags' => '', 
+						'display_name' => Ayoola_Application::getUserInfo( 'username' ), 
 						'username' => Ayoola_Application::getUserInfo( 'username' ), 
 						'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
 						'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
