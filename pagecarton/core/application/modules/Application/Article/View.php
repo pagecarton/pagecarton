@@ -202,11 +202,12 @@ class Application_Article_View extends Application_Article_Abstract
 				//	var_export( $data['datetime_' . $key] );
 				}
 			}
-			@$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
-			@$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
-			@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );
 		}
-	//	elseif( $this->getParameter( 'filter_date' ) )  
+		@$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
+		@$data['article_date_m'] = date( 'm', $data['article_modified_date'] );   
+		@$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
+		@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );   
+//	elseif( $this->getParameter( 'filter_date' ) )  
 		{
 			$filter = new Ayoola_Filter_Time();
 		//	if( @$data['article_modified_date'] )
