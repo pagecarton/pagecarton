@@ -1128,16 +1128,29 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$advanceParameters = $object;
 				}
 			}
+			@$object['pagewidget_id'] = @$object['pagewidget_id_switch'] ? : @$object['pagewidget_id'];
 			if( @$object['pagewidget_id'] )
 			{
-				if( $widgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
+				if( $pageWidgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
 				{
-				//	var_export( $widgetToRestore['object_name'] );
-					if( empty( $_REQUEST['rebuild_widget_box'] ) )
+				//	var_export( $pageWidgetToRestore['object_name'] );
+					if( ! empty( $_REQUEST['rebuild_widget_box'] ) && @$object['pagewidget_id_switch'] )
 					{
-						$object = $widgetToRestore['parameters'];
+					//	var_export( $object );
+						$object = $pageWidgetToRestore['parameters'];
 						$object['widget_options'][] = 'savings';
-						$object['pagewidget_id'] = $widgetToRestore['pagewidget_id'];
+						$object['pagewidget_id'] = $pageWidgetToRestore['pagewidget_id'];
+						
+						//	avoid double saves
+						unset( $object['save_widget_as'] );
+						parse_str( @$object['advanced_parameters'], $advanceParameters );
+					}
+					elseif( empty( $_REQUEST['rebuild_widget_box'] ) && @$object['pagewidget_id'] )
+					{
+					//	var_export( $object );
+						$object = $pageWidgetToRestore['parameters'];
+						$object['widget_options'][] = 'savings';
+						$object['pagewidget_id'] = $pageWidgetToRestore['pagewidget_id'];
 						
 						//	avoid double saves
 						unset( $object['save_widget_as'] );
@@ -1146,9 +1159,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					else
 					{
 					//	var_export( $object );
-						$object = $object + $widgetToRestore['parameters'];
+						$object = $object + $pageWidgetToRestore['parameters'];
 					}
-			//		var_export( $widgetToRestore );
+			//		var_export( $pageWidgetToRestore );
 			//		var_export( $object );
 				}
 			}
@@ -1190,7 +1203,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$savedWidgets = Ayoola_Object_SavedWidget::getInstance()->select( null, array( 'class_name' =>  $object['class_name'], ) );
 				$filter = new Ayoola_Filter_SelectListArray( 'savedwidget_id', 'widget_name');
 				$savedWidgets = $filter->filter( $savedWidgets );
-				$savedWidgets ? $fieldset->addElement( array( 'name' => 'savedwidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['savedwidget_id'] ), array( '' => 'Restore Saved Widgets' ) + $savedWidgets ) : null;
+				$savedWidgets ? $fieldset->addElement( array( 'name' => 'savedwidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['savedwidget_id'] ), array( '' => 'Restore My Saved Widgets' ) + $savedWidgets ) : null;
 
 				//	PageWidgets
 				
@@ -1198,16 +1211,20 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	var_export( $pageWidgets );
 				$filter = new Ayoola_Filter_SelectListArray( 'pagewidget_id', 'widget_name');
 				$pageWidgets = $filter->filter( $pageWidgets );
-				$pageWidgets ? $fieldset->addElement( array( 'name' => 'pagewidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['pagewidget_id'] ), array( '' => 'Restore Page Widgets' ) + $pageWidgets ) : null;
+				$pageWidgets ? $fieldset->addElement( array( 'name' => 'pagewidget_id_switch', 'label' => ' ', 'type' => 'Select', 'value' => null ), array( '' => 'Restore Page Widgets' ) + $pageWidgets ) : null;
 
 				
-				$fieldset->addElement( array( 'name' => 'save_widget_as', 'label' => 'Save This Widget As', 'placeholder' => 'e.g. My Widget', 'type' => 'InputText', 'value' => '' ) );
+			//	$fieldset->addElement( array( 'name' => 'save_widget_as', 'label' => 'Save This Widget As', 'placeholder' => 'e.g. My Widget', 'type' => 'InputText', 'value' => '' ) );
 
 
 		
 				$form->addFieldset( $fieldset );
 
 			}
+			
+			$fieldset->addElement( array( 'name' => 'pagewidget_id', 'label' => ' ', 'type' => 'Hidden', 'value' => @$object['pagewidget_id'] ) );
+			$fieldset->addElement( array( 'name' => 'widget_name', 'label' => 'Save This Widget As', 'type' => 'InputText', 'value' => @$object['widget_name'] ? : @$pageWidgetToRestore['widget_name'] ) );
+
 			if( @$object['savedwidget_id'] )
 			{
 			//	$savedWidgets ? $fieldset->addElement( array( 'name' => 'savedwidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['savedwidget_id'] ), array( '' => 'Restore Saved Widgets' ) + $savedWidgets ) : null;
@@ -1221,27 +1238,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$advanceParameters = $object;
 				}
 			}
-			if( @$object['pagewidget_id'] )
-			{
-				if( $widgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
-				{
-				//	var_export( $widgetToRestore['object_name'] );
-					if( empty( $_REQUEST['rebuild_widget_box'] ) )
-					{
-						$object = $widgetToRestore['parameters'];
-						$object['widget_options'][] = 'savings';
-						
-						//	avoid double saves
-						unset( $object['save_widget_as'] );
-						parse_str( @$object['advanced_parameters'], $advanceParameters );
-					}
-					else
-					{
-						$object = $object + $widgetToRestore['parameters'];
-					}
-				}
-			}
-
 			if( method_exists( $object['class_name'], 'getHTMLForLayoutEditorAdvancedSettings' ) )
 			{
 				$fieldset = new Ayoola_Form_Element();
