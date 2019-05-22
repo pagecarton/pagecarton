@@ -907,7 +907,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						$widgetName = trim( strip_tags( $widgetName ) ) ? : ( $eachObject['class_name'] ) . ' - ' . $numberedSectionName;
 						$parametersToSave = $parameters + $eachObject;
 						$parametersKey = md5( json_encode( $parametersToSave ) );
-						$whatToSave = array( 'widget_name' =>  $widgetName, 'url' =>  $page['url'], 'class_name' =>  $eachObject['class_name'], 'parameters' => $parametersToSave, 'parameters_key' => $parametersKey, );
+						$whatToSave = array( 'widget_name' =>  $widgetName , 'url' =>  $page['url'], 'class_name' =>  $eachObject['class_name'], 'parameters' => $parametersToSave, 'parameters_key' => $parametersKey, );
 					//	var_export( $parametersToSave );
 						if( 
 							empty( $parameters['pagewidget_id'] ) 
@@ -932,6 +932,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 							! empty( $parameters['pagewidget_id'] ) && Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) ) 
 						)
 						{
+						//	var_export( $widgetName );
+						//	var_export( $parametersKey );
+						//	var_export( $whatToSave );
 							$response = Ayoola_Object_PageWidget::getInstance()->update( $whatToSave, array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) );
 						}
 

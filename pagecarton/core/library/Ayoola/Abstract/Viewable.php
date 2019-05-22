@@ -968,7 +968,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     {
 		$thisClass = get_called_class();
 //		var_export( $thisClass );
-		$thisObjectID = $thisClass . $parameters['object_unique_id'];
+	//	var_export( $parameters['markup_template_object_name'] );
+		$thisObjectID = md5( $thisClass . $parameters['object_unique_id'] . json_encode( $parameters ) );
 		if( ! empty( static::$_parameterKeys[$thisObjectID] ) )
 		{
 			return static::$_parameterKeys[$thisObjectID];
@@ -980,6 +981,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$classes = array_merge( $classes, $parameterKeysClasses );
 		}
+	//	var_export( $thisClass );
 	//	var_export( $classes );
 		$classes = array_unique( $classes );
 	//	var_export( $classes );
@@ -1024,6 +1026,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 		// 
 		$supplementary = array();	
+	//	var_export( $parameters['markup_template_object_name'] );
 		if( ! empty( $parameters['markup_template_object_name'] ) && is_array( $parameters['markup_template_object_name'] ) )
 		{
 			foreach( $parameters['markup_template_object_name'] as $counter => $eachKey )
@@ -1125,20 +1128,28 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$advanceParameters = $object;
 				}
 			}
-			if( @$object['pagewidget_id'] && empty( $_REQUEST['rebuild_widget_box'] ) )
+			if( @$object['pagewidget_id'] )
 			{
 				if( $widgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
 				{
 				//	var_export( $widgetToRestore['object_name'] );
-					$object = $widgetToRestore['parameters'];
+					if( empty( $_REQUEST['rebuild_widget_box'] ) )
+					{
+						$object = $widgetToRestore['parameters'];
+						$object['widget_options'][] = 'savings';
+						$object['pagewidget_id'] = $widgetToRestore['pagewidget_id'];
+						
+						//	avoid double saves
+						unset( $object['save_widget_as'] );
+						parse_str( @$object['advanced_parameters'], $advanceParameters );
+					}
+					else
+					{
+					//	var_export( $object );
+						$object = $object + $widgetToRestore['parameters'];
+					}
 			//		var_export( $widgetToRestore );
 			//		var_export( $object );
-					$object['widget_options'][] = 'savings';
-					$object['pagewidget_id'] = $widgetToRestore['pagewidget_id'];
-					
-					//	avoid double saves
-					unset( $object['save_widget_as'] );
-					parse_str( @$object['advanced_parameters'], $advanceParameters );
 				}
 			}
 
@@ -1210,17 +1221,24 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$advanceParameters = $object;
 				}
 			}
-			if( @$object['pagewidget_id'] && empty( $_REQUEST['rebuild_widget_box'] ) )
+			if( @$object['pagewidget_id'] )
 			{
 				if( $widgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
 				{
-				//	var_export( $widgetToRestore );
-					$object = $widgetToRestore['parameters'];
-					$object['widget_options'][] = 'savings';
-					
-					//	avoid double saves
-					unset( $object['save_widget_as'] );
-					parse_str( @$object['advanced_parameters'], $advanceParameters );
+				//	var_export( $widgetToRestore['object_name'] );
+					if( empty( $_REQUEST['rebuild_widget_box'] ) )
+					{
+						$object = $widgetToRestore['parameters'];
+						$object['widget_options'][] = 'savings';
+						
+						//	avoid double saves
+						unset( $object['save_widget_as'] );
+						parse_str( @$object['advanced_parameters'], $advanceParameters );
+					}
+					else
+					{
+						$object = $object + $widgetToRestore['parameters'];
+					}
 				}
 			}
 
