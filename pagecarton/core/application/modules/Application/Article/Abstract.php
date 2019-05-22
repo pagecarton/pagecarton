@@ -2075,7 +2075,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		else
 		{
 	//		var_export( Application_Profile_Abstract::getMyDefaultProfile()  );
-			$fieldset->addElement( array( 'name' => 'profile_url', 'type' => 'Hidden', 'value' => @$values['profile_url'] ? : $defaultProfile ) );
+		//	$fieldset->addElement( array( 'name' => 'profile_url', 'type' => 'Hidden', 'value' => @$values['profile_url'] ? : $defaultProfile ) );
 		//	$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
 		}
 

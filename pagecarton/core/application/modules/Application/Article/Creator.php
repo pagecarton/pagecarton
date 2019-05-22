@@ -193,7 +193,12 @@ class Application_Article_Creator extends Application_Article_Abstract
 			$values['username'] = $userInfo['username'];
 			
 		//	$values['profile_url'] = @$userInfo['profile_url'];
-			$values['profile_url'] = strtolower( $values['profile_url'] );
+
+			//	default to my default profile
+			$defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
+			$defaultProfile = $defaultProfile['profile_url'];
+			$values['profile_url'] = $values['profile_url'] ? : $defaultProfile;
+			$values['profile_url'] = strtolower( $values['profile_url'] ) ;
 			$values['article_creation_date'] = time();
 			$values['article_modified_date'] = time();
 			@$values['publish'] = ( ! isset( $values['publish'] ) && ! is_array( @$values['article_options'] ) ) ? '1' :  $values['publish'];
