@@ -916,7 +916,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						{
 						//	var_export( $whatToSave );
 							if( 
-								! Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'class_name' =>  $eachObject['class_name'], 'parameters_key' =>  $parametersKey ) ) 
+								! Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'class_name' =>  $eachObject['class_name'], 'parameters_key' =>  $parametersKey ) )
+								
+								&& 	! Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'widget_name' =>  $widgetName ) )
+
 							)
 							{
 								$pageWidgetIdText = http_build_query( $response );
