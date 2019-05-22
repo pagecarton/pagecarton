@@ -1125,7 +1125,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$advanceParameters = $object;
 				}
 			}
-			if( @$object['pagewidget_id'] )
+			if( @$object['pagewidget_id'] && empty( $_REQUEST['rebuild_widget_box'] ) )
 			{
 				if( $widgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
 				{
@@ -1210,7 +1210,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$advanceParameters = $object;
 				}
 			}
-			if( @$object['pagewidget_id'] )
+			if( @$object['pagewidget_id'] && empty( $_REQUEST['rebuild_widget_box'] ) )
 			{
 				if( $widgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
 				{
