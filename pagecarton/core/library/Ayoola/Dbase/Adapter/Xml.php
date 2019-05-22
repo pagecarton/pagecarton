@@ -723,38 +723,47 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     public function query( $keyword = null )
 	{
 		$arguments = func_get_args();
-	//	PageCarton_Widget::v( $this ); 
+		//	PageCarton_Widget::v( $this ); 
 		$keyword = array_shift( $arguments );
-    $keyword = ucfirst( strtolower( $keyword ) );
+		$keyword = ucfirst( strtolower( $keyword ) );
+
+		//  $paths = Ayoola_Loader::getValidIncludePaths( $this->_globalDirectory );
+		//	PageCarton_Widget::v( $paths ); 
+		//	PageCarton_Widget::v( $paths ); \
+
+		//  TRACK CORE CHANGES
+		$coreFile = APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename );
+
+    	//  TRACK DEFAULT SITE CHANGES
+    	$defaultFile = SITE_APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename ); 
+
     
-  //  $paths = Ayoola_Loader::getValidIncludePaths( $this->_globalDirectory );
-	//	PageCarton_Widget::v( $paths ); 
-  //	PageCarton_Widget::v( $paths ); \
-
-    //  TRACK CORE CHANGES
-    $coreFile = APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename );
-
-    //  TRACK DEFAULT SITE CHANGES
-    $defaultFile = SITE_APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename ); 
-
-    
-   // var_export( $coreFile );
-  //  PageCarton_Widget::v( Ayoola_Application::getDomainSettings( 'domain_name' ) );
-  //  PageCarton_Widget::v( filesize( $defaultFile ) );
-    $hash = md5( json_encode( $arguments ) . $this->_myFilename . $this->_relationship . $this->_accessibility  . Ayoola_Application::getPathPrefix() . Ayoola_Application::getDomainSettings( 'domain_name' ) ) . @filemtime( $this->_myFilename ). @filemtime( $defaultFile ) . @filemtime( $coreFile );
-  //  var_export( $hash );
+		// var_export( $coreFile );
+		//  PageCarton_Widget::v( Ayoola_Application::getDomainSettings( 'domain_name' ) );
+		//  PageCarton_Widget::v( filesize( $defaultFile ) );
+  
+  		$fmTime = filemtime( $coreFile );
+		foreach( $this->getSupplementaryFilenames() as $eachFile )
+		{
+			//	Add supplementary file because of files with so much content like PageWidget.xml
+			$fmTime .= @filemtime( $eachFile );
+		}
+    	$hash = md5( json_encode( $arguments ) . $this->_myFilename . $this->_relationship . $this->_accessibility  . Ayoola_Application::getPathPrefix() . Ayoola_Application::getDomainSettings( 'domain_name' ) ) . @filemtime( $this->_myFilename ) . @filemtime( $defaultFile ) . $fmTime;
 		$storage = PageCarton_Widget::getObjectStorage( array( 'id' => __CLASS__ . '---wefwfff' . $hash, 'device' => 'File', 'time_out' => 1000000, ) );
 		$result = $storage->retrieve();    
 		if( false !== $result )
 		{
-      return $result;
-    }
-    else
-    {
-		//  PageCarton_Widget::v( $arguments );
-		//  PageCarton_Widget::v( $this->_myFilename );  
-		//  PageCarton_Widget::v( $result );
-    }
+		//	PageCarton_Widget::v( $this->_myFilename );  
+		//	PageCarton_Widget::v( $this->getGlobalFilenames() );  
+		//	PageCarton_Widget::v( $this->getSupplementaryFilenames() );  
+			return $result;
+		}
+		else
+		{
+			//  PageCarton_Widget::v( $arguments );
+		//	  PageCarton_Widget::v( $this->_myFilename );  
+			//  PageCarton_Widget::v( $result );
+		}
     
 		$class = __CLASS__ . '_' . $keyword;
 		require_once 'Ayoola/Loader.php';
@@ -778,11 +787,11 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			}
 			catch( ReflectionException $e ){  continue; }
 		}
-    $class = array( $class, __FUNCTION__ );
-    $result = call_user_func_array( $class, $arguments );
-    $result = false === $result ? null : $result;
-    $storage->store( $result );
-    return $result;
+		$class = array( $class, __FUNCTION__ );
+		$result = call_user_func_array( $class, $arguments );
+		$result = false === $result ? null : $result;
+		$storage->store( $result );
+		return $result;
     
 	}
 	// END OF CLASS
