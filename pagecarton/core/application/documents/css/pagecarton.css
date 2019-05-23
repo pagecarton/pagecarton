@@ -718,7 +718,7 @@ pc_full_width
    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
 }
-.pc-well *{
+.pc-well p, .pc-well h1, .pc-well h2, .pc-well h3, .pc-well h4, .pc-well h5, .pc-well h6, .pc-well li  {
   color: inherit;
 }
 
