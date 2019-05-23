@@ -650,23 +650,23 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			return false;
 		}
-		$data['article_description'] = trim( $data['article_description'] );
-		if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
-		{
-			$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 501 ) . '';
-		}
 
 	//	if( get_class( $this ) === 'Application_Article_View' && ( ! $this->getParameter( 'markup_template_object_name' ) || $this->getParameter( 'update_meta_data' ) ) )
 		if( get_class( $this ) === 'Application_Article_View' )
 		{
-			//	dont duplicate
+			$description = trim( $data['article_description'] );
+			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
+			{
+				$description = substr( strip_tags( $data['article_content'] ), 0, 501 ) . '';
+			}
+				//	dont duplicate
 			if( ! self::$_postViewed )
 			{
 				self::$_postViewed = true;
 			//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
 			//	var_export( $data['article_title'] );
 				$pageInfo = array(
-					'description' => @$data['article_description'],
+					'description' => $description,
 					'title' => trim( $data['article_title'] . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
 				);
 		//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
