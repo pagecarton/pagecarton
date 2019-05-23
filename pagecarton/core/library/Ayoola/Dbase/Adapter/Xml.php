@@ -742,7 +742,9 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		//  PageCarton_Widget::v( Ayoola_Application::getDomainSettings( 'domain_name' ) );
 		//  PageCarton_Widget::v( filesize( $defaultFile ) );
   
-  		$fmTime = filemtime( $coreFile );
+		if( is_file( $coreFile ) )
+		$fmTime = filemtime( $coreFile );
+		  
 		foreach( $this->getSupplementaryFilenames() as $eachFile )
 		{
 			//	Add supplementary file because of files with so much content like PageWidget.xml

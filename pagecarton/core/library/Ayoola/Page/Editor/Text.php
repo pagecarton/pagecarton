@@ -91,21 +91,23 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	* @param 
 	* @return 
 	*/
-	public static function fixUrlPrefix( $content, $prefixBefore, $prefixNow )
+	public static function fixUrlPrefix( $content, $prefixBefore = '', $prefixNow = '' )
 	{
 		if( $prefixBefore !== $prefixNow || $prefixNow )
 		{
 			$search = array( '"' . $prefixBefore, "'" . $prefixBefore, "url(" . $prefixBefore, '"' . $prefixNow, "'" . $prefixNow, "url(" . $prefixNow, );
 
 			//	fix issue of $prefixBefore = /test and $prefixNow = /test/store
-			if( stripos( $prefixBefore, $prefixNow ) === 0 )
+			if( stripos( $prefixBefore ? : '', $prefixNow ? : '' ) === 0 )
 			{
 				$search = array( '"' . $prefixBefore, "'" . $prefixBefore, "url(" . $prefixBefore, '"' . $prefixNow, "'" . $prefixNow, "url(" . $prefixNow, );
 			}
-			elseif( stripos( $prefixNow, $prefixBefore ) === 0 )
+			elseif( stripos( $prefixNow ? : '', $prefixBefore ? : '' ) === 0 )
 			{
 				$search = array( '"' . $prefixNow, "'" . $prefixNow, "url(" . $prefixNow, '"' . $prefixBefore, "'" . $prefixBefore, "url(" . $prefixBefore, );
 			}
+		//	var_export( $prefixNow );
+		//	var_export( $prefixBefore );
 			$replace = array( '"', "'", "url(", '"', "'", "url(", );
 			$content = str_ireplace( $search, $replace, $content );
 			$search = array( '"/', "'/", "url(/", $prefixNow . '//' );
