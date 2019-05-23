@@ -910,6 +910,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					$data += $profileInfo ? : array();
 				}
 			}
+			if( @Ayoola_Application::$GLOBAL['post']['article_url'] == $data['article_url'] )
+			{
+				continue;
+			}
 			$data['css_class_of_inner_content'] = $this->getParameter( 'css_class_of_inner_content' );
 		//	if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
 			$data['post_link'] = $data['article_url'];
@@ -1097,8 +1101,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				
 			//	var_export( $values );
 				$previousKey = $data['article_url'];
-				}
-			
+			}
+				
 			
 			//	content
 		//	var_export( $data );
