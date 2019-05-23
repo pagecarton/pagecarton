@@ -415,6 +415,19 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		
 		//	Append css and other things to the head
 		$head = $xml->getElementsByTagName( 'head' );
+		if( ! $head->length )
+		{
+			$newHead = $xml->createElement( 'head' );
+			try
+			{
+				$xml->documentElement->insertBefore( $newHead, $xml->documentElement->firstChild );    
+			}
+			catch( Exception $e )
+			{
+				$xml->documentElement->appendChild( $newHead );    
+			}
+			$head = $xml->getElementsByTagName( 'head' );
+		}
 		foreach( $head as $each )
 		{
 			$each->insertBefore( $xml->createCDATASection( "<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>\r\n" ), $each->firstChild );
@@ -427,6 +440,12 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			$each->parentNode->removeChild( $each );
 		}
 		$body = $xml->getElementsByTagName( 'body' );
+		if( ! $body->length )
+		{
+			$newBody = $xml->createElement( 'body' );
+			$xml->documentElement->appendChild( $newBody );    
+			$body = $xml->getElementsByTagName( 'body' );
+		}
 		$bodyChildren = array();
 		$allSections = false;
 		$firstElement = false;
@@ -447,6 +466,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			$bodyChildren = array();
 		//	$allSections = false;
+			if( $eachSection->childNodes )
 			foreach( $eachSection->childNodes as $eachDiv )
 			{
 			//	$i++;
@@ -544,6 +564,14 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			{
 			//	$section = $bodyChildren;
 			}
+		}
+		if( empty( $bodyChildren ) )
+		{
+			$newElement = $xml->createElement( "section" );
+			$newElement->setAttribute( "data-pc-all-sections", "1" );
+			$newElement->setAttribute( "class", "container" );
+			$body[0]->appendChild( $newElement );    
+			
 		}
 		
 		//	Auto build section
@@ -1212,7 +1240,79 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				default:
 			//	case 'plain_text':
 			//	var_export( $previousContent );
-					$fieldset->addElement( array( 'name' => 'plain_text', 'label' => 'HTML Code', 'rows' => 10, 'style' => 'width:100%;height:200px;', 'placeholder' => trim( '<!DOCTYPE html>
+					$boilerplate = '<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>--- TODO ---</title>
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+		
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- Leave those next 4 lines if you care about users using IE8 -->
+		<!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<!-- TODO: Here goes your content! -->
+		<div class="container">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
+				<a class="xnavbar-brand" href="/">
+					<img style="max-height: 100px;" src="/img/logo.png" alt="{Organization Name}" title="{Organization Name} Logo">
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse pc_give_space" id="navbarSupportedContent">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">Link</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								More
+							</a>
+							<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<a class="dropdown-item" href="#">Action</a>
+								<a class="dropdown-item" href="#">Another action</a>
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Something else here</a>
+							</div>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<div class="container">
+			<h3>&nbsp;</h3>
+			
+			<h3>{Organization Name}</h3>
+			
+			<p>{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}</p>
+			
+			<p>&nbsp;</p>
+			
+			<p>&nbsp;</p>
+		</div>
+		
+		<!-- Including Bootstrap JS (with its jQuery dependency) so that dynamic components work -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</body>
+</html>';
+	$defaultHTML = trim( '<!DOCTYPE html>
 <html>
 	<head>
 		...
@@ -1221,8 +1321,9 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		...
 	</body>
 </html> 
-					
-					' ), 'type' => 'Textarea', 'value' => $previousContent ) );
+										
+										' );
+					$fieldset->addElement( array( 'name' => 'plain_text', 'label' => 'HTML Code', 'rows' => 10, 'style' => 'width:100%;height:200px;', 'placeholder' => $defaultHTML, 'type' => 'Textarea', 'value' => $previousContent ? : $boilerplate ) );
 					
 					$filter = new Ayoola_Filter_HighlightCode();    
 					

@@ -410,13 +410,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		{ 
 			$filePath = Ayoola_Loader::checkFile( $filter->filter( 'bootstrapbasic') );
 		}
-//		var_export( $pageThemeFile );
+	//	var_export( $filePath );
 //		var_export( $filePath );
 	//	$filePath = self::getLayoutTemplateFilePath( $page )
 //		var_export( self::getDefaultLayout() );
 	//	var_export( $theme );
 //		var_export( $theme );
-	//	var_export( is_file( $filePath ) );
+	//	var_export( file_get_contents( $filePath ) );
 //		var_export( $page['pagelayout_filename'] );
 		$page['pagelayout_filename'] = $filePath; 
 		$this->hashListForJs = NULL;
@@ -770,6 +770,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						
 							//	only show this if  && empty( $values )
 						//	if( )
+						//	var_export( );
 							if( ! empty( $_GET['pc_load_theme_defaults'] ) || empty( $values ) || @$values[0] === false )
 							{
 					//		var_Export( $values );
@@ -933,7 +934,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 								$pageWidgetIdText = http_build_query( $response );
 								$response = Ayoola_Object_PageWidget::getInstance()->insert( $whatToSave );
 								$pageWidgetIdText = http_build_query( $response );
-								$values[$numberedSectionName . 'advanced_parameters'] .= '&' . $pageWidgetIdText;
+								if( ! empty( $values ) )
+								{
+									$values[$numberedSectionName . 'advanced_parameters'] .= '&' . $pageWidgetIdText;
+								}
 								$parameters += (array) $response;
 
 							}

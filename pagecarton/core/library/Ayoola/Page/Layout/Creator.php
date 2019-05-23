@@ -309,8 +309,9 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 		//	var_export( $values['screenshot'] );
 			
 			
-		//	dirname( $this->getMyFilename() );			
-			if( ! $this->insertDb( $values ) )  
+		//	dirname( $this->getMyFilename() );		
+		//	if(  )	
+			if( ! empty( $values['plain_text'] ) && ! $this->insertDb( $values ) )  
 			{ 
 			//	$this->setViewContent( '<p class="badnews">Error: could not create layout template.</p>.' ); 
 				return false;
@@ -320,6 +321,13 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 			
 			if( $this->updateFile( $values ) )
 			{ 
+				$indexFile = dirname( $this->getMyFilename() ) . '/index.html';
+				if( ! is_file( $indexFile ) && ! empty( $values['plain_text'] ) )
+				{
+					//	Auto generate index
+					file_put_contents( $indexFile, $values['plain_text'] );
+
+				}
 				$this->setViewContent( '<p class="boxednews goodnews">New theme saved successfully.</p>', true );
 				$this->setViewContent( '<p class="">
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Edit Codes Again</a>
