@@ -657,7 +657,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$description = trim( $data['article_description'] );
 			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
 			{
-				$description = substr( strip_tags( $data['article_content'] ), 0, 501 ) . '';
+				$description = substr( strip_tags( $data['article_content'] ), 0, 501 ) . '...';
 			}
 				//	dont duplicate
 			if( ! self::$_postViewed )
