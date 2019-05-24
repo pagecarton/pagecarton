@@ -84,6 +84,7 @@ class Application_Article_View extends Application_Article_Abstract
 			if( ! $data  
 				|| ( ! @$data['publish'] && ! self::isOwner( @$data['user_id'] ) && ! @in_array( 'publish', @$data['article_options'] ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] )   
 				|| ( ! self::hasPriviledge( @$data['auth_level'] ) && ! self::isOwner( @$data['user_id'] ) )
+				|| ! self::isAllowedToView( $data ) 
 			)
 			{
 		//		var_export( @$data['user_id'] );

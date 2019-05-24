@@ -168,7 +168,9 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'auth_level', 'auth_name');
 		$authLevel = $filter->filter( $authLevel );
-		$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Who can use this post type', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel ); 
+        $fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Who can create a post of this type', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel ); 
+        
+		$fieldset->addElement( array( 'name' => 'view_auth_level', 'label' => 'Who can view a post of this type', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel ); 
 
 //		$i++;
         $fieldset->addLegend( $legend );

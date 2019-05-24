@@ -271,7 +271,15 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function isAllowedToView( array $data )   
 	{
-	//	var_export( $data['username'] );
+		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
+		{
+		//	var_export( $postTypeInfo );
+			if( ! empty( $postTypeInfo['view_auth_level'] ) && ! Ayoola_Abstract_Table::hasPriviledge( $postTypeInfo['view_auth_level'] ) )
+			{ 
+				return false;
+			}
+		}
+
 		if( 
 				( 
 					trim( @$data['publish'] )
