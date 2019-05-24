@@ -50,7 +50,7 @@ class Application_Article_Editor extends Application_Article_Abstract
 			//	Only the owner can edit or priviledged user can edit
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }  
+			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToView( $data )  && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }  
 		//		self::v( $data );
 			if( ! $this->requireProfile() )
 			{

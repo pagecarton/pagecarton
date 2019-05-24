@@ -170,7 +170,7 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 		$authLevel = $filter->filter( $authLevel );
         $fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Who can create a post of this type', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel ); 
         
-		$fieldset->addElement( array( 'name' => 'view_auth_level', 'label' => 'Who can view a post of this type', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel ); 
+		$fieldset->addElement( array( 'name' => 'view_auth_level', 'label' => 'Who can view a post of this type', 'type' => 'SelectMultiple', 'value' => @$values['view_auth_level'] ? : array( 0 ) ), $authLevel ); 
 
 //		$i++;
         $fieldset->addLegend( $legend );
