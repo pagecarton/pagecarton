@@ -2038,25 +2038,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 		static::initHTMLEditor();
 
-
-//		var_export( $values['article_options'] );
-/*		if( $values['true_post_type'] == 'article' || $values['true_post_type'] == 'post' || @$values['article_content'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) 
-		&& in_array( 'article', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) 
-		|| ( is_array( $values['article_options'] ) 
-		&& in_array( 'article', $values['article_options'] ) ) || $values['article_type'] == 'article' || $values['article_type'] == 'post' || in_array( 'article', $internalForms )  )       
-		{
-			$fieldset->addElement( array( 'name' => 'article_content', 'data-html' => '1', 'label' => '' . $postTypeLabel . ' write up (Article)', 'rows' => '10', 'placeholder' => 'Enter content here...', 'type' => 'TextArea', 'value' => @$values['article_content'] ) );
-	//		$fieldset->addRequirement( 'article_content', array( 'WordCount' => array( 0,10000000 ) ) );
-	
-		}
-*/	//	if( @$values['article_tags'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'keywords', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )
-		{
-	//		$fieldset->addElement( array( 'name' => 'article_tags', 'label' => '' . $postTypeLabel . ' Tags', 'placeholder' => 'Enter tags for this ' . $postTypeLabel . ' separated by comma', 'type' => 'InputText', 'value' => @$values['article_tags'] ) );
-	
-		}        
 		$defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
 		$defaultProfile = $defaultProfile['profile_url'];
-		if( ! self::hasPriviledge( 98 ) )
+		$articleSettings['allowed_editors'][] = 98;
+		if( ! self::hasPriviledge( $articleSettings['allowed_editors'] ) )
 		{
 			$profiles = Application_Profile_Abstract::getMyProfiles();
 			if( ! empty( $values['profile_url'] ) && ! in_array( $values['profile_url'], $profiles ) )
