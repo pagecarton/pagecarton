@@ -151,7 +151,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			return intval( $data['views_count_total'] );
 		}
-	//	self::v( $data['views_count_total'] );
+	//	self::v( $data['article_title'] );   
+	//	self::v( $data['views_count_total'] );   
 		if( ! isset( $data['views_count_total'] ) )
 		{
 			$data['views_count'] = count( Application_Article_Views::getInstance()->select( null, array( 'article_url' => $data['article_url'] ) ) );
@@ -598,9 +599,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				// Get the shell output from the syntax check command
 					if( $data2 = json_decode( file_get_contents( $filename ), true ) )
 					{
-						$data += $data2;
+						$data = $data2 + $data;
 					}
-			//		self::v( $data2 );
+				//	self::v( $data2 );
 				}
 			}
 		}
@@ -662,6 +663,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	//	if( get_class( $this ) === 'Application_Article_View' && ( ! $this->getParameter( 'markup_template_object_name' ) || $this->getParameter( 'update_meta_data' ) ) )
 		if( get_class( $this ) === 'Application_Article_View' )
 		{
+			
 			$description = trim( $data['article_description'] );
 			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
 			{
@@ -671,7 +673,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			if( ! self::$_postViewed )
 			{
 				self::$_postViewed = true;
-			//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
 			//	var_export( $data['article_title'] );
 				$pageInfo = array(
 					'description' => $description,
@@ -691,6 +692,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 								) 
 				);
 				$secondaryValues = array( 'article_url' => $data['article_url'], 'views_count_total' => @++$data['views_count_total'] );
+			//	self::v( $secondaryValues );
 				self::saveArticleSecondaryData( $secondaryValues );
 			}
 		}
