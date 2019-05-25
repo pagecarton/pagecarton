@@ -1211,7 +1211,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	var_export( $pageWidgets );
 				$filter = new Ayoola_Filter_SelectListArray( 'pagewidget_id', 'widget_name');
 				$pageWidgets = $filter->filter( $pageWidgets );
-				$pageWidgets ? $fieldset->addElement( array( 'name' => 'pagewidget_id_switch', 'label' => ' ', 'type' => 'Select', 'value' => null ), array( '' => 'Restore Page Widgets' ) + $pageWidgets ) : null;
+				$pageWidgets ? $fieldset->addElement( array( 'name' => 'pagewidget_id_switch', 'label' => ' ', 'type' => 'Select', 'value' => null ), array( '' => 'Restore Page Widgets' ) + $pageWidgets + array( '9x9' => 'New Page Widgets' ) ) : null;
 
 				
 			//	$fieldset->addElement( array( 'name' => 'save_widget_as', 'label' => 'Save This Widget As', 'placeholder' => 'e.g. My Widget', 'type' => 'InputText', 'value' => '' ) );
