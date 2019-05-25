@@ -457,7 +457,11 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 				
 			}
 			$showQuantity = 'Select';
+//			self::v( $min );
 			$range = range( $min, $max, $step );
+		//	self::v( $range );
+
+			array_unshift( $range, 0 ); 
 			$optionsForSelect += array_combine( $range, $range );
 		//	if( ! in_array( 0, $optionsForSelect ) )
 			{
@@ -567,7 +571,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			}
 	//		$optionsForSelect = array();
 	//		self::v( $subscriptionData['price_option_title'] );
-		//	var_export( $optionsForSelect );
+		//	self::v( $optionsForSelect );
 			foreach( $subscriptionData['price_option_title'] as $key => $each )
 			{
 				if( empty( $subscriptionData['price_option_price'][$key] ) && empty( $subscriptionData['price_option_title'][$key] ) )
