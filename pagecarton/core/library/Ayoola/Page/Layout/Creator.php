@@ -262,7 +262,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				}
 
 				//	Use the traditional file saving mechanism so as to sanitize template file
-				$values['plain_text'] = file_get_contents( $export['template'] );  
+				$values['plain_text'] = $this->getPreviousContent( $values['layout_name'] ) ? : file_get_contents( $export['template'] );  
 			//	var_export( $values );
 				$this->updateFile( $values );
 				unset( $export );
