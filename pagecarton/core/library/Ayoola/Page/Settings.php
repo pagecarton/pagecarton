@@ -51,7 +51,10 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 											'url' => $page,
 					);
 					$class = new Ayoola_Page_Delete( $parameters );
-					$class->init();
+                    $class->init();
+
+                    //  upgrade cache
+                    Ayoola_Application::$appNamespace .= microtime();
 
 				//	Application_Cache_Clear::viewInLine();
 				//	$deleted = $table->delete( array( 'url' => $page, 'system' => '1' ) );
@@ -64,6 +67,12 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 				$class = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $page, 'auto_create_page' => true ) );  
 
 				$response = $class->sourcePage( $page );
+
+				// sanitize so it could refresh with latest template
+			//	$class = new Ayoola_Page_Editor_Sanitize();
+
+				//	create this page if not available.
+				$class->refresh( $page );	     		
 			//	var_export( $page );   
 		//		var_export( $response );   
 			}
