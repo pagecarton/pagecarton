@@ -104,7 +104,7 @@ class Application_Backup_Upload extends Application_Backup_Abstract
      * creates the form
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'enctype' => 'multipart/form-data' ) );

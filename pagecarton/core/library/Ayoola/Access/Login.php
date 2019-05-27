@@ -385,7 +385,7 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
      * Creates the form 
      *
      */
-    public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		require_once 'Ayoola/Form.php'; 
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'class' => 'smallFormElements', 'data-not-playable' => 'true' ) );

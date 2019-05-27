@@ -119,7 +119,7 @@ class Ayoola_Api_Reset extends Ayoola_Api implements Ayoola_Api_Interface
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = 'Reset' ;

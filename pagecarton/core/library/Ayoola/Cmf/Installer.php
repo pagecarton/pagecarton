@@ -44,7 +44,7 @@ class Ayoola_Cmf_Installer extends Ayoola_Cmf
     /**
      * creates the form for creating and editing
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = 'Continue Installation';

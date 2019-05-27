@@ -107,7 +107,7 @@ class Ayoola_Access_AccountRequired extends Ayoola_Abstract_Table
      * Creates the form 
      *
      */
-    public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		require_once 'Ayoola/Form.php'; 
 		$form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );

@@ -44,7 +44,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
      * 
      * 
      */
-	public function deleteThemePageSupplementaryFiles( $pageThemeFileUrl, $themeName = null )
+	public static function deleteThemePageSupplementaryFiles( $pageThemeFileUrl, $themeName = null )
     {  
         //	let's remove dangling theme pages not completely deleted
         //  case issue in page sanitize

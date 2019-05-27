@@ -133,7 +133,7 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
      * Creates the form for checkout
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		$formAttributes = array();
 		$formFields = array();

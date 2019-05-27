@@ -295,7 +295,7 @@ class Application_Personalization extends Ayoola_Abstract_Table
      * Creates the form to select which Personalization to view
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = 'Continue Personalization';

@@ -203,7 +203,7 @@ class Application_Info extends Ayoola_Abstract_Playable
      * Creates the form to select which Info to view
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'method' => 'get' ) );
 		$fieldset = new Ayoola_Form_Element();	

@@ -199,7 +199,7 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
      * Creates the form 
      *
      */
-    public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		require_once 'Ayoola/Form.php'; 
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );

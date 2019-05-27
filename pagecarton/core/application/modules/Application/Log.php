@@ -109,7 +109,7 @@ class Application_Log extends Application_Log_Abstract
      * Creates the form to select which Log to view
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'method' => 'GET' ) );
 		$form->submitValue = 'View';

@@ -110,7 +110,7 @@ class Application_Logo extends Ayoola_Abstract_Table
      * Creates the form to select which Logo to view
      * 
      */
-	public function createForm()
+	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$fieldset = new Ayoola_Form_Element();	
