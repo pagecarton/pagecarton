@@ -197,14 +197,14 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 				//	var_export( is_file( $to ) );
 				//	var_export( $to );
 					$this->setViewParameter( '' . 'ERROR 1: "' . $file . '" not enabled before.' );
-					continue;
+					return false;
 				}				
 				elseif( $from !== readlink( $to ) && is_file( readlink( $to ) ) )
 				{
 		//			var_export( $from );
 		//			var_export( readlink( $to ) );
 					$this->setViewParameter( '' . 'ERROR 2: "' . $file . '" is in use by another Plugin.' );
-					continue;
+					return false;
 				}				
 				unlink( $to );
 			//	var_export( unlink( $to ) );
@@ -214,18 +214,19 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 				if( ! file_exists( $from ) )
 				{
 					$this->setViewParameter( '' . 'ERROR 3: "' . $file . '" not found in Plugin files.' );
-					continue;
+					return false;
 				}					
 				elseif( file_exists( $to ) )
 				{
 					$this->setViewParameter( '' . 'ERROR 4: "' . $file . '" has a conflicting file on the server.' );
-					continue;
+					return false;
 				}					
 				//	create this dir if it isnt there before
 				Ayoola_Doc::createDirectory( dirname( $to ) );
 				symlink( $from , $to );
 			break;
 		}
+		return true;
 	}
 	// END OF CLASS
 }
