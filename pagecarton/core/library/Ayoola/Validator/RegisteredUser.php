@@ -74,7 +74,7 @@ class Ayoola_Validator_RegisteredUser extends Ayoola_Validator_Abstract
      * @param array
      * @return void
      */
-	public function autofill( array $parameters )
+	public function autofill( $parameters )
     {
 		$this->userInfo = $parameters;
     }

@@ -69,7 +69,7 @@ class Ayoola_Validator_IsFile extends Ayoola_Validator_Abstract
      * @param array
      * @return void
      */
-	public function autofill( array $parameters )
+	public function autofill( $parameters )
     {
 		$this->_parameters = $parameters;
     }

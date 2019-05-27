@@ -226,7 +226,7 @@ class Ayoola_Access_Adapter_DbaseTable extends Ayoola_Dbase_Table_Abstract imple
      * @param string
      * @return mixed
      */
-    public function setIdColumn( $column )
+	public function setIdColumn( $columnName = null )
     {
         $this->_idColumn = $column;
     } 

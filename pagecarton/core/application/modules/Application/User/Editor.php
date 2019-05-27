@@ -157,7 +157,7 @@ class Application_User_Editor extends Application_User_Abstract
      * @param void
      * @return boolean
      */
-    protected function updateDb( array $autoValues = NULL 	)
+    protected function updateDb( array $autoValues = NULL )
     {
 		
 		if( ! $this->_validate() ){ return false; }

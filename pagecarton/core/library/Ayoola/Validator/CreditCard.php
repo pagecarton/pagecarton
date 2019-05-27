@@ -82,7 +82,7 @@ class Ayoola_Validator_CreditCard extends Ayoola_Validator_Abstract
      * @param array
      * @return void
      */
-	public function autofill( array $parameters )
+	public function autofill( $parameters )
     {
 	//	var_export( $parameters );
 		list( $num, $expm, $expy, $cvv, $type ) = $parameters;

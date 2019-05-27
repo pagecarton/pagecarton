@@ -59,7 +59,7 @@ class Ayoola_Page_Menu_Edit_Creator extends Ayoola_Page_Menu_Edit_Abstract
      * 
      * @return bool
      */
-	protected function insertDb()
+	protected function insertDb( Array $autoValues = null )
     {
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		//var_export( $values );

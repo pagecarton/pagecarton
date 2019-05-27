@@ -121,7 +121,7 @@ class Ayoola_Validator_DuplicateUser extends Ayoola_Validator_DuplicateRecord
      * @param array
      * @return void
      */
-	public function autofill( array $parameters )
+	public function autofill( $parameters )
     {
 		//$args = array_slice( $args, 0, 2 );
 		$this->columnName = $parameters[0];

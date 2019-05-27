@@ -50,7 +50,7 @@ class Ayoola_Filter_PrimaryId implements Ayoola_Filter_Interface
      * @param mixed The Parameter
      * 
      */	
-    public function autofill( array $parameters )
+    public function autofill( $parameters )
 	{
 		$this->_parameters = $parameters;
 	}

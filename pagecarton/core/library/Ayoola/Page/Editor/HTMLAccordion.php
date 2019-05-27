@@ -64,7 +64,7 @@ class Ayoola_Page_Editor_HTMLAccordion extends Ayoola_Page_Editor_Text
      * @param array Object Info
      * @return string HTML
      */
-    public static function getHTMLForLayoutEditor( $object )
+    public static function getHTMLForLayoutEditor( & $object )
 	{
 		$object['editable'] = @$object['editable'] ? : 
        ( "

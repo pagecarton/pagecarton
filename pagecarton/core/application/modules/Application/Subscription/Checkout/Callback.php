@@ -58,11 +58,11 @@ class Application_Subscription_Checkout_Callback extends Application_Subscriptio
      * Plays the API that is selected
      * 
      */
-	public static function getApi()
+	public static function getApi( $checkoutOptionName = null )
     {
 	//	if( ! $identifier = self::getIdentifier() ){ return false; }
 		$table = Application_Subscription_Checkout_CheckoutOption::getInstance();
-		$data = $table->selectOne( null, array( 'checkoutoption_name' => $_GET['api'] ) );
+		$data = $table->selectOne( null, array( 'checkoutoption_name' => $checkoutOptionName ? : $_GET['api'] ) );
 	//	var_export( $data );
 		$className = $data['object_name'] . '_Callback';
 		require_once 'Ayoola/Loader.php';

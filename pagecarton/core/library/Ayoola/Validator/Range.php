@@ -45,7 +45,7 @@ class Ayoola_Validator_Range extends Ayoola_Validator_Abstract
 		$this->setRange( $parameters[0],$parameters[1] );
     }
 	
-   public function __call( $method, array $args )
+   public function __call( $method, $args )
     {
 		//$args = array_slice( $args, 0, 2 );
 		$this->setRange( $args[0],$args[1] );

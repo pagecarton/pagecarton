@@ -45,7 +45,7 @@ class Application_Log_Creator extends Application_Log_Abstract
      * 
      * @return bool
      */
-	protected function insertDb()
+	protected function insertDb( Array $autoValues = null )
     {
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		//var_export( $values );

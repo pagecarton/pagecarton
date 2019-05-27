@@ -253,7 +253,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
      * Plays the API that is selected
      * 
      */
-	public static function getApi( $checkoutOptionName )
+	public static function getApi( $checkoutOptionName = null )
     {
 		//if( ! $values = $this->getForm()->getValues() ){ return false; }
 		$table = Application_Subscription_Checkout_CheckoutOption::getInstance();

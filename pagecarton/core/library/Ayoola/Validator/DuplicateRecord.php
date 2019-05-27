@@ -87,7 +87,7 @@ class Ayoola_Validator_DuplicateRecord extends Ayoola_Validator_Abstract
      * @param array
      * @return void
      */
-	public function autofill( array $parameters )
+	public function autofill( $parameters )
     {
 		//$args = array_slice( $args, 0, 2 );
 		$this->tableClass = $parameters[0];

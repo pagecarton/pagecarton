@@ -63,7 +63,7 @@ class Application_User_Impersonate extends Application_User_Abstract
      * @param void
      * @return boolean
      */
-    protected function updateDb()
+    protected function updateDb( array $autoValues = NULL )
     {
 		
 		if( ! $this->_validate() ){ return false; }
