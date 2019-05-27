@@ -1220,10 +1220,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		
 				$form->addFieldset( $fieldset );
 
+                $fieldset->addElement( array( 'name' => 'widget_name', 'label' => 'Save This Widget As', 'type' => 'InputText', 'value' => @$object['widget_name'] ? : @$pageWidgetToRestore['widget_name'] ) );
 			}
 			
 			$fieldset->addElement( array( 'name' => 'pagewidget_id', 'label' => ' ', 'type' => 'Hidden', 'value' => @$object['pagewidget_id'] ) );
-			$fieldset->addElement( array( 'name' => 'widget_name', 'label' => 'Save This Widget As', 'type' => 'InputText', 'value' => @$object['widget_name'] ? : @$pageWidgetToRestore['widget_name'] ) );
 
 			if( @$object['savedwidget_id'] )
 			{
