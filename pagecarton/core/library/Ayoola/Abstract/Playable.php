@@ -126,16 +126,26 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
      * Filter for xss
      * 
      */
-	public static function filterReplacement( & $replacement )
+	public static function filterReplacement( & $replacement, $key = null )
     {
 		$first = $replacement;
 		if( ! is_scalar( $replacement )  )
 		{
 			return $replacement;
-		}
-		$replacement = ! is_scalar( $replacement ) ? null : html_entity_decode( $replacement );
-		$replacement = strip_tags( $replacement );
-		$replacement = htmlentities( $replacement, null, null, false );
+        }
+        $replacement = ! is_scalar( $replacement ) ? null : html_entity_decode( $replacement );
+        if( $key === 'article_content' )
+        {
+            $replacement = self::cleanHTML( $replacement );
+       //     $replacement = null;
+        //    var_export( $replacement );
+
+        }
+        else
+        {
+            $replacement = strip_tags( $replacement );
+            $replacement = htmlentities( $replacement, null, null, false );
+        }
 		if( $first != $replacement )
 		{
 		//	self::v( get_called_class() );
@@ -172,7 +182,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 			if( ! is_array( $value ) )
 			{
 				$search[] = $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
-				@$values['pc_no_data_filter'] ? : self::filterReplacement( $value );
+				@$values['pc_no_data_filter'] ? : self::filterReplacement( $value, $key );
 				$replace[] = $value;	
 			}
 			elseif( is_array( $value ) && array_values( $value ) != $value )
@@ -225,7 +235,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 
 				foreach( $value as $eachKey => $eachValue )
 				{
-					@$values['pc_no_data_filter'] ? : self::filterReplacement( $eachValue );
+					@$values['pc_no_data_filter'] ? : self::filterReplacement( $eachValue, $eachKey );
 					if( is_array( $eachValue ) )
 					{
 //var_export( $eachValue );

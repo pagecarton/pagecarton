@@ -581,7 +581,7 @@ class Application_Article_View extends Application_Article_Abstract
 				break;
 				case 'article':
 				case 'post':
-					$this->_xml .= @$data['article_content' . $featureSuffix];
+					$this->_xml .= self::cleanHTML( @$data['article_content' . $featureSuffix] );
 				break;
 			}
 			$this->_xml .= '</div>';
