@@ -116,7 +116,8 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
             $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';
 
-            if(preg_match('/Content-Disposition: .*filename=([^0-9A-Za-z_-.]+)/', $content['options']['raw_response_header'], $matches)) {
+            if( preg_match('/Content-Disposition: .*filename=([^0-9A-Za-z_-.]+)/', $content['options']['raw_response_header'], $matches) ) 
+            {
                 $filename .= $matches[1];
             //    var_export( $matches );
             }
@@ -144,25 +145,30 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             //   var_export( $allFeed['modified_time'] );
             $repository->startBuffering(); 
             $repository['screenshot.jpg'] = file_get_contents( $photoUrl );
-         //   var_export( $repository['layout_information'] );
-        //    $previousData = json_decode( file_get_contents( $repository['layout_information'] ), true );
-            if( $previousData = json_decode( file_get_contents( $repository['layout_information'] ), true ) OR $previousData = unserialize( file_get_contents( $repository['layout_information'] ) ) )
+         //   var_export( $repository['layout_information'] );nul
+            try
             {
+                file_get_contents( $repository['layout_information'] );
+                if( $previousData = json_decode( file_get_contents( $repository['layout_information'] ), true ) OR $previousData = unserialize( file_get_contents( $repository['layout_information'] ) ) ) 
+                {
 
+                }
+            //    var_export( $previousData );
+
+                //  set current time to be able to calculate updates
+                $previousData['modified_time'] = time();
+                $previousData['creation_time'] = time();
+            //    var_export( $previousData );
+
+                $repository['layout_information'] = json_encode( $previousData );
+
+                $repository->stopBuffering();
             }
-        //    var_export( $previousData );
-
-            //  set current time to be able to calculate updates
-            $previousData['modified_time'] = time();
-            $previousData['creation_time'] = time();
-        //    var_export( $previousData );
-
-            $repository['layout_information'] = json_encode( $previousData );
-
-            $repository->stopBuffering();
-        //    $repository->compress( Ayoola_Phar::GZ ); 
-        //    var_export( Ayoola_Doc::getFiles( dirname( $filename ) ) );
-        //    exit();
+            catch( Exception $e )
+            {
+                //  Skip this stage if it is not theme
+                null;
+            }
 
             try
             {
