@@ -1137,7 +1137,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					if( ! empty( $_REQUEST['rebuild_widget_box'] ) && @$object['pagewidget_id_switch'] )
 					{
 					//	var_export( $object );
-						$object = $pageWidgetToRestore['parameters'];
+                        $object = $pageWidgetToRestore['parameters'];
 						$object['widget_options'][] = 'savings';
 						$object['pagewidget_id'] = $pageWidgetToRestore['pagewidget_id'];
 						
@@ -1149,7 +1149,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					{
 					//	var_export( $object );
 						$object = $pageWidgetToRestore['parameters'];
-						$object['widget_options'][] = 'savings';
+					//	$object['widget_options'][] = 'savings';
 						$object['pagewidget_id'] = $pageWidgetToRestore['pagewidget_id'];
 						
 						//	avoid double saves

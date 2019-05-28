@@ -908,7 +908,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						if( empty( $parameters['widget_name'] ) )
 						{
 							$parameters['widget_name'] = ( ( $parameters['preserved_content'] ? : $parameters['codes'] ) ? : $parameters['editable'] ) ? : implode( ' - ', $parameters );
-							$parameters['widget_name'] = trim( strip_tags( $parameters['widget_name'] ) ) ? : ( $eachObject['class_name'] ) . ' - ' . $numberedSectionName;
+							$parameters['widget_name'] = strip_tags( $parameters['widget_name'] ) ? : ( $eachObject['class_name'] ) . ' - ' . $numberedSectionName;
+							$parameters['widget_name'] = trim( preg_replace( '|(\s)*|', ' ', $parameters['widget_name'] ) );
 						}
 						else
 						{
@@ -944,12 +945,17 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 						}
 						elseif( 
-							! empty( $parameters['pagewidget_id'] ) && Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) ) 
+							! empty( $parameters['pagewidget_id'] ) AND $previousWidgetInfo = Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) ) 
 						)
 						{
 						//	var_export( $parameters['widget_name'] );
 						//	var_export( $parametersKey );
-						//	var_export( $whatToSave );
+                        //	var_export( $whatToSave );
+                            //  save history
+                            $previousWidgetInfo['history'][time()] = $whatToSave['parameters'];
+                            $whatToSave['history'] = $previousWidgetInfo['history'];
+
+                            //  update
 							$response = Ayoola_Object_PageWidget::getInstance()->update( $whatToSave, array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) );
 						}
 
