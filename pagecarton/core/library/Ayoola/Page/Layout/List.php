@@ -142,7 +142,24 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 	//	$list->noHeader = true;
 	//	$table = $this->getDbTable();
 	//	$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );   
-	//	krsort( $data );       
+    //	krsort( $data ); 
+        if( empty( $data ) )
+        {
+            //  look for lost themes
+            //  There is a bug that kept deleting the themes dir
+            $dir = Ayoola_Doc_Browser::getDocumentsDirectory() . '/layout';
+            if( $dirs = Ayoola_Doc::getDirectories( $dir ) )
+            {
+                $table = new Ayoola_Page_PageLayout();
+                foreach( $dirs as $dir )
+                {
+                    $themeName = basename( $dir );
+                    $table::getInstance()->insert( array( 'layout_name' => $themeName, 'layout_label' => str_replace( 'pc_layout_', '', $themeName ), 'layout_options' => array( 'auto_section', 'auto_menu' ) ) );
+                }
+                $data = $table::getInstance()->select();
+            }
+        //    var_export( $dirs );
+        }  
 		$list->setData( $data );  
 		$list->setListOptions( 
 								array( 
