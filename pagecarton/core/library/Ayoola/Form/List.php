@@ -80,7 +80,7 @@ class Ayoola_Form_List  extends Ayoola_Form_Abstract
 			array(    
 				'form_title' => '%FIELD%', 
 				'   ' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" href="javascript:;">Preview</a>', 
-	//			'Share Link' => array( 'field' => 'form_name', 'value' => '' . Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Form_View/?form_name=%FIELD%' ), 
+	//			'Share Link' => array( 'field' => 'form_name', 'value' => '' . Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() .  '/widgets/Ayoola_Form_View/?form_name=%FIELD%' ), 
 				'  ' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Inspect/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" href="javascript:;" >Responses</a>', 
 				' ' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Editor/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" href="javascript:;">edit</a>', 
 				'' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" href="javascript:;">X</a>', 

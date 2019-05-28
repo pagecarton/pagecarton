@@ -237,7 +237,7 @@ abstract class Application_Slideshow_Abstract extends Ayoola_Abstract_Table
 				$fieldset->addElement( array( 'name' => 'slideshow_article_type', 'label' => 'Select appropriate post types to use as slideshow images', 'type' => 'Select', 'value' => @$values['slideshow_article_type']  ), $categoryInfo );  
 				if( self::hasPriviledge() )
 				{
-					$fieldset->addElement( array( 'name' => 'manage', 'label' => ' ', 'type' => 'Html', 'value' => null  ), array( 'html' => '<a class="pc-btn pc-btn-small"  rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Manage Post Types" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Article_Type_List">Manage Post Types</a> <a  class="pc-btn pc-btn-small" rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Manage categories" href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Access_AccessInformation_Editor?pc_profile_info_to_edit=post_categories">Manage categories</a>' ) );  
+					$fieldset->addElement( array( 'name' => 'manage', 'label' => ' ', 'type' => 'Html', 'value' => null  ), array( 'html' => '<a class="pc-btn pc-btn-small"  rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Manage Post Types" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_List">Manage Post Types</a> <a  class="pc-btn pc-btn-small" rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Manage categories" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Access_AccessInformation_Editor?pc_profile_info_to_edit=post_categories">Manage categories</a>' ) );  
 				}
 				
 		//		$fieldset->addRequirement( 'category_name', array( 'ArrayKeys' => $categoryInfo ) );

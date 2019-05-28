@@ -64,7 +64,7 @@ class Application_Subscription_Checkout_DirectDeposit extends Application_Subscr
 			$this->setViewContent( htmlspecialchars_decode( $each['account_info'] ) );
 		
 		}
-		$this->setViewContent( '<h2><a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Subscription_Checkout_Confirmation/get/api/DirectDeposit/status/1/"><input name="' . __CLASS__ . '_confirm_order" onClick="ayoola.div.selectElement( this )" class="boxednews goodnews" value="Confirm order" type="button" /></a></h2>' );
+		$this->setViewContent( '<h2><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Subscription_Checkout_Confirmation/get/api/DirectDeposit/status/1/"><input name="' . __CLASS__ . '_confirm_order" onClick="ayoola.div.selectElement( this )" class="boxednews goodnews" value="Confirm order" type="button" /></a></h2>' );
 	//	$this->setViewContent( '</p>' );
 		
 		

@@ -251,7 +251,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			$filter = new Ayoola_Filter_SelectListArray( 'layout_name', 'layout_label');
 			$option = $filter->filter( $option );
 			asort( $option );
-			$fieldset->addElement( array( 'name' => 'templates', 'required' => 'required', 'label' => 'Select the layout themes <a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Layout_List/" target="_blank">(themes)</a>', 'type' => 'SelectMultiple', 'value' => @$values['templates'] ), $option );
+			$fieldset->addElement( array( 'name' => 'templates', 'required' => 'required', 'label' => 'Select the layout themes <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Page_Layout_List/" target="_blank">(themes)</a>', 'type' => 'SelectMultiple', 'value' => @$values['templates'] ), $option );
 			if( $option ) 
 			{
 				$fieldset->addRequirement( 'templates', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select themes you want to include in the Plugin' )  ) );

@@ -119,7 +119,7 @@ class Application_Category_View extends Application_Category_Abstract
 										'category_name' => $category, 
 										'post_type' => @$postType, 
 										'category_description' => '', 
-										'category_url' => '' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Category_Editor/?category_name=' . $category . '&auto_create_category=1&parent_category=' . $parentCategory,  
+										'category_url' => '' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Category_Editor/?category_name=' . $category . '&auto_create_category=1&parent_category=' . $parentCategory,  
 										);
 						$data['auto_create_link'] = '<a href="' . $data['category_url'] . '">Create "' . $category . '" category!</a>';
 						$data['update_url'] = $data['category_url'];

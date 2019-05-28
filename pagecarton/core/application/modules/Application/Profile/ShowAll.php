@@ -64,7 +64,7 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 				}
 				
 				$values['full_profile_url'] = Ayoola_Page::getHomePageUrl() . '/' . $values['profile_url'] . '';
-				$values['logon_url'] = Ayoola_Page::setPreviousUrl( '/object/name/Application_Profile_Logon/' ) . '&profile_url=' . $values['profile_url'];
+				$values['logon_url'] = Ayoola_Page::setPreviousUrl( '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Application_Profile_Logon/' ) . '&profile_url=' . $values['profile_url'];
 				if( $url == $userInfo['profile_url'] )
 				{
 					$values['logon_link'] = 'Default';
@@ -74,9 +74,9 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 					$values['logon_link'] = '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_LogOn/?profile_url=%KEY%\', \'' . __CLASS__ . '\' );" href="javascript:">Set as Default</a>';
 				}
 				
-				$values['edit_url'] = Ayoola_Page::setPreviousUrl( '/object/name/Application_Profile_Editor/' ) . '&profile_url=' . $values['profile_url'];
-				$values['delete_url'] = Ayoola_Page::setPreviousUrl( '/object/name/Application_Profile_Delete/' ) . '&profile_url=' . $values['profile_url'];
-				$values['edit_photo_url'] = Ayoola_Page::setPreviousUrl( '/object/name/Application_Profile_Photo/' ) . '&profile_url=' . $values['profile_url'];
+				$values['edit_url'] = Ayoola_Page::setPreviousUrl( '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Application_Profile_Editor/' ) . '&profile_url=' . $values['profile_url'];
+				$values['delete_url'] = Ayoola_Page::setPreviousUrl( '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Application_Profile_Delete/' ) . '&profile_url=' . $values['profile_url'];
+				$values['edit_photo_url'] = Ayoola_Page::setPreviousUrl( '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Application_Profile_Photo/' ) . '&profile_url=' . $values['profile_url'];
 /*				$this->setViewContent( '
 										<div class="boxednews greynews" style="float:left;padding:1em; text-align:center;">
 											<span class=""><a href="' . $fullUrl . '"><strong class="">' . $values['display_name'] . ' </strong></a></span> 

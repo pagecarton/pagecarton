@@ -47,7 +47,7 @@ class Application_Subscription_Checkout_CashOnDelivery extends Application_Subsc
 	//	$this->setViewContent( '<p>Please ensure p <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/site/contact/">contacting us</a>.</p>' );
 		$this->setViewContent( '<h2 class="badnews">Notice!</h2>' );
 		$this->setViewContent( '<p class="badnews">Your online order is NOT yet completed until you confirm you will be making payment on the point of delivery.</p>' );
-		$this->setViewContent( '<h2><a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Subscription_Checkout_Confirmation/get/api/CashOnDelivery/status/1/"><input name="' . __CLASS__ . '_confirm_order" onClick="ayoola.div.selectElement( this )" class="boxednews goodnews" value="Confirm order" type="button" /></a></h2>' );
+		$this->setViewContent( '<h2><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Subscription_Checkout_Confirmation/get/api/CashOnDelivery/status/1/"><input name="' . __CLASS__ . '_confirm_order" onClick="ayoola.div.selectElement( this )" class="boxednews goodnews" value="Confirm order" type="button" /></a></h2>' );
 	//	$this->setViewContent( '</p>' );   
 		
 		

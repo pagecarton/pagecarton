@@ -285,11 +285,11 @@ class Application_Article_View extends Application_Article_Abstract
 		if( self::isOwner( $data['user_id'] ) || self::isAllowedToEdit( $data ) || self::hasPriviledge( array( 98 ) ) || self::hasPriviledge( $articleSettings['allowed_editors'] ) )
 		{
 		//	var_export( __LINE__ );
-			$editLink = '' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Article_Editor/?article_url=' . $data['article_url'];
+			$editLink = '' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Editor/?article_url=' . $data['article_url'];
 			$editLinkHTML = null;
 		//	$editLinkHTML .= '<a href="' . $editLink . '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $editLink . '\' );">Edit...</button></a>';
 			$editLinkHTML .= '<a href="' . $editLink . '"><button style="">Edit Post...</button></a>';
-			$editLinkHTML .= '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Article_Delete/?article_url=' . $data['article_url'] . '\' );">Delete Post...</button>';
+			$editLinkHTML .= '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Delete/?article_url=' . $data['article_url'] . '\' );">Delete Post...</button>';
 			$this->_objectData['edit_link'] = $editLinkHTML;
 			$this->_objectTemplateValues['edit_link'] = $editLinkHTML;
 //			$this->_xml .= $editLinkHTML;

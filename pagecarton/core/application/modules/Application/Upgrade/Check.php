@@ -56,16 +56,16 @@ class Application_Upgrade_Check extends PageCarton_Widget
         //    var_export( $storage );
             if( ! $versionFromServer = $storage->retrieve() )
             {
-                $server = 'http://' . $serverName . '/object/name/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
+                $server = 'http://' . $serverName .  '/widgets/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
           ///    var_export( $server );
                 $versionFromServer = array();
                 $versionFromServer['time'] = time();
                 if( ! $response = self::fetchLink( $server ) )
                 {
-                    $server = 'http://s1.' . $serverName . '/object/name/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
+                    $server = 'http://s1.' . $serverName .  '/widgets/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
                     if( ! $response = self::fetchLink( $server ) )
                     {
-                        $server = 'http://s2.' . $serverName . '/object/name/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
+                        $server = 'http://s2.' . $serverName .  '/widgets/Application_Upgrade_Check/?pc_domain=' . DOMAIN . '&version=' . PageCarton::VERSION;
                         if( ! $response = self::fetchLink( $server ) )
                         {
                             // we don try;

@@ -50,7 +50,7 @@ class Application_Article_Type_Quiz_WhitelistImport extends Application_Article_
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			if( ! self::isOwner( $data['user_id'] ) && ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }
 			$this->setViewContent( '<h3>Bulk Email Address Invitation List!</h3>' );			
-			$this->setViewContent( '<p>Create an invitation list for: "' . $data['article_title'] . '" or <a href="' . Ayoola_Application::getUrlPrefix() . '/object/name/Application_Article_Type_Quiz_Whitelist/?article_url=' . $data['article_url'] . '">Standard Import List>></a></p>' );	  		
+			$this->setViewContent( '<p>Create an invitation list for: "' . $data['article_title'] . '" or <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Quiz_Whitelist/?article_url=' . $data['article_url'] . '">Standard Import List>></a></p>' );	  		
 			$this->setViewContent( '<p>Paste email addresses below</p>' );			
 			$this->createForm( 'Continue...', '', $data );
 			$this->setViewContent( $this->getForm()->view() );

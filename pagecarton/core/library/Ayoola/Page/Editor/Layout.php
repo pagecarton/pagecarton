@@ -1953,7 +1953,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		a.className = "pc-hide-children-children pc-btn";  
 		a.innerHTML = "Preview";  
 		topBarForButtons.appendChild( a );		
-		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/object/name/Ayoola_Page_Layout_Preview/?layout_name=' . $page['layout_name'] . '\' ); } );
+		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Page_Layout_Preview/?layout_name=' . $page['layout_name'] . '\' ); } );
 
 		
 		
