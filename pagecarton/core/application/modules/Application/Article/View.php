@@ -256,7 +256,7 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 		}
 		//	CATEGORIES
-		@$data['category_name'] = is_array( $data['category_name'] ) ? $data['category_name'] : array();
+		@$data['category_name'] = is_array( $data['category_name'] ) ? $data['category_name'] : array( 'Uncategorized' );
 		@$data['category_id'] = is_array( $data['category_id'] ) ? $data['category_id'] : array(); 
 
 		$data['category_name'] = @$data['category_name'] ? : array();

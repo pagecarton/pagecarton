@@ -1117,7 +1117,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			
 			//	CATEGORIES
- 			@$categoryToUse = is_array( $data['category_name'] ) ? $data['category_name'] : array();
+            @$data['category_name'] = is_array( $data['category_name'] ) ? $data['category_name'] : array( 'Uncategorized' );
 			$categoryTextRaw = self::getCategories( $categoryToUse, array( 'template' => $this->getParameter( 'category_template' ), 'glue' => ( $this->getParameter( 'category_template_glue' ) ? : ', ' ) ) );
 			$categoryText = $categoryTextRaw ? ' ' . $categoryTextRaw : null;
 			$data['category_text'] = $categoryText;
