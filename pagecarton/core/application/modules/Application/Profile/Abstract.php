@@ -294,21 +294,12 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		}
 		//	var_export( array( 'profile_url' => $profileUrL ) );
 		//	var_export( Application_Profile_Table::getInstance()->select() );
-		
-		//	getting from php file makes a request call an abitrary php file
-	//	self::v( $_SERVER );
-/*		
-		if( ! $profileData )
-		{
-			$filename = self::getProfilePath( $url );
-			$profileData = @include $profileUrL;
-		}
-*/		
-		if( @$profileData['profile_url'] )
+
+        if( @$profileData['profile_url'] && @$profileData['display_name'] )
 		{
 			if( ! @$profileData['display_picture'] )
 			{
-			//	$profileData['display_picture'] = '/img/placeholder-image.jpg';
+            	$profileData['display_picture'] = '/img/placeholder-image.jpg';
 			}
 			if( ! @$profileData['display_name'] )
 			{
