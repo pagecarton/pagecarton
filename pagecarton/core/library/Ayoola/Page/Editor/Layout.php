@@ -945,14 +945,16 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 						}
 						elseif( 
-							! empty( $parameters['pagewidget_id'] ) AND $previousWidgetInfo = Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) ) 
+							! empty( $parameters['pagewidget_id'] ) AND $previousWidgetInfo = Ayoola_Object_PageWidget::getInstance()->selectOne( null,  array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) ) 
 						)
 						{
 						//	var_export( $parameters['widget_name'] );
 						//	var_export( $parametersKey );
-                        //	var_export( $whatToSave );
+                        //	var_export( $previousWidgetInfo );
                             //  save history
+                            $previousWidgetInfo['history'] = is_array( $previousWidgetInfo['history'] ) ? $previousWidgetInfo['history'] : array();
                             $previousWidgetInfo['history'][time()] = $whatToSave['parameters'];
+
                             $whatToSave['history'] = $previousWidgetInfo['history'];
 
                             //  update
