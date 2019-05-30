@@ -1070,7 +1070,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 		self::$editorInitialized = true;
 		
-	//	Application_Javascript::addFile( '/js/objects/ckeditor/ckeditor.js' );
+		Application_Javascript::addFile( '/js/objects/ckeditor/ckeditor.js' );
 		Application_Javascript::addCode 
 		(  
 			'ayoola.xmlHttp.setAfterStateChangeCallback
