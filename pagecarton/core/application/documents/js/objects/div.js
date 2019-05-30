@@ -542,7 +542,7 @@ ayoola.div =
 				return false;
 		}
 	//	alert( "sup" );
-		var spotlight = ayoola.spotLight.showLinkInIFrame( ayoola.pcPathPrefix + "/tools/classplayer/get/name/" + formObject.database + "_List?" );
+		var spotlight = ayoola.spotLight.showLinkInIFrame( ayoola.pcPathPrefix + "/tools/classplayer/get/name/" + ( formObject.listWidget ? formObject.listWidget : ( formObject.database + "_List?" ) ) );
 	//	alert( spotlight );
 		var updateOptions = function()
 		{ 

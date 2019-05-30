@@ -142,6 +142,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		//	var_export( $data );
 		//	var_export( $this->getForm()->getValues() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
+		//	var_export( $values );
 			
 			
 		//	if( ! $this->updateDb( $values ) ){ return false; }
@@ -328,16 +329,19 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		$form->badnewsBeforeElements = true;
 		
 		$form->setFormRequirements( $formInfo['requirements'] );
-	//	$fieldsets[$key]->placeholderInPlaceOfLabel = false;       
-		$i = 0;
+    //	$fieldsets[$key]->placeholderInPlaceOfLabel = false;       
+        
+        $i = 0;
 		do
 		{
 			//	Put the questions in a separate fieldset
 			$key = md5( $formInfo['element_group_name'][$i] );
 			if( empty( $fieldsets[$key] ) )
 			{
-				$fieldsets[$key] = new Ayoola_Form_Element; 
+                $fieldsets[$key] = new Ayoola_Form_Element; 
+            //    $fieldsets[$key]->hashElementName = false;
 			}
+            $filters = array();
 		
 			//	Question
 			
@@ -398,25 +402,25 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				//	self::v( $defaultValue );       
 					
 					//	Month
-					$options = array_combine( range( 1, 12 ), array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ) );
+					$optionsX = array_combine( range( 1, 12 ), array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ) );
 					$monthValue = intval( @strlen( $values[$elementName . '_month'] ) === 1 ? ( '0' . @$values[$elementName . '_month'] ) : @$values[$elementName . '_month'] );
 					$monthValue = intval( $monthValue ?  : $this->getGlobalValue( $elementName . '_month' ) );
 				//	var_export( $monthValue );
 				//	var_export( $this->getGlobalValue( $elementName . '_month' ) );
-					$fieldsets[$key]->addElement( array( 'name' => $elementName . '_month', 'label' => $formInfo['element_title'][$i], 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $monthValue ), array( 'Month' ) + $options ); 
-					$fieldsets[$key]->addRequirement( $elementName . '_month', array( 'InArray' => array_keys( $options ) ) );
+					$fieldsets[$key]->addElement( array( 'name' => $elementName . '_month', 'label' => $formInfo['element_title'][$i], 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $monthValue ), array( 'Month' ) + $optionsX ); 
+					$fieldsets[$key]->addRequirement( $elementName . '_month', array( 'InArray' => array_keys( $optionsX ) ) );
 					if( strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 )
 					{
 						$fieldsets[$key]->addFilter( $elementName . '_month', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_month' ) ) );
 					}
 					
 					//	Day
-					$options = range( 1, 31 );
-					$options = array_combine( $options, $options );
+					$optionsX = range( 1, 31 );
+					$optionsX = array_combine( $optionsX, $optionsX );
 					$DayValue = intval( @strlen( $values[$elementName . '_day'] ) === 1 ? ( '0' . @$values[$elementName . '_day'] ) : @$values[$elementName . '_day'] );
 					$DayValue = intval( $DayValue ?  : $this->getGlobalValue( $elementName . '_day' ) );
-					$fieldsets[$key]->addElement( array( 'name' => $elementName . '_day', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $DayValue ), array( 'Day' ) + $options );
-					$fieldsets[$key]->addRequirement( $elementName . '_day', array( 'InArray' => array_keys( $options ) ) );
+					$fieldsets[$key]->addElement( array( 'name' => $elementName . '_day', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $DayValue ), array( 'Day' ) + $optionsX );
+					$fieldsets[$key]->addRequirement( $elementName . '_day', array( 'InArray' => array_keys( $optionsX ) ) );
 					if( strlen( $this->getGlobalValue( $elementName . '_day' ) ) === 1 )
 					{
 						$fieldsets[$key]->addFilter( $elementName . '_day', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_day' ) ) );
@@ -424,10 +428,10 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					
 					//	Year
 					//	10 years and 10 years after todays date
-					$options = range( date( 'Y' ) + 100, date( 'Y' ) - 100 );
-					$options = array_combine( $options, $options );
-					$fieldsets[$key]->addElement( array( 'name' => $elementName . '_year', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values[$elementName . '_year'] ? : '' ), array( 'Year' ) + $options );
-					$fieldsets[$key]->addRequirement( $elementName . '_year', array( 'InArray' => array_keys( $options ) ) );
+					$optionsX = range( date( 'Y' ) + 100, date( 'Y' ) - 100 );
+					$optionsX = array_combine( $optionsX, $optionsX );
+					$fieldsets[$key]->addElement( array( 'name' => $elementName . '_year', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values[$elementName . '_year'] ? : '' ), array( 'Year' ) + $optionsX );
+					$fieldsets[$key]->addRequirement( $elementName . '_year', array( 'InArray' => array_keys( $optionsX ) ) );
 					$date = $this->getGlobalValue( $elementName . '_year' );
 					$date .= '-';
 					$date .= strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_month' ) ) : $this->getGlobalValue( $elementName . '_month' );
@@ -438,26 +442,26 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					$fieldsets[$key]->addFilter( $elementName, array( 'DefiniteValue' => $date ) );
 					if( 'datetime' == $formInfo['element_type'][$i] )
 					{
-						$options = range( 0, 23 );
-						foreach( $options as $eachKey => $each )
+						$optionsX = range( 0, 23 );
+						foreach( $optionsX as $eachKey => $each )
 						{
-							if( strlen( $options[$eachKey] ) < 2 )  
+							if( strlen( $optionsX[$eachKey] ) < 2 )  
 							{
-								$options[$eachKey] = '0' . $options[$eachKey];
+								$optionsX[$eachKey] = '0' . $optionsX[$eachKey];
 							}
 						}
-						$fieldsets[$key]->addElement( array( 'name' => $elementName . '_hours', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_hours'] ), array( 'Hour' ) +  array_combine( $options, $options ) );
-						$fieldsets[$key]->addRequirement( $elementName . '_hours', array( 'InArray' => array_keys( $options ) ) );
-						$options = range( 0, 59 );
-						foreach( $options as $eachKey => $each )
+						$fieldsets[$key]->addElement( array( 'name' => $elementName . '_hours', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_hours'] ), array( 'Hour' ) +  array_combine( $optionsX, $optionsX ) );
+						$fieldsets[$key]->addRequirement( $elementName . '_hours', array( 'InArray' => array_keys( $optionsX ) ) );
+						$optionsX = range( 0, 59 );
+						foreach( $optionsX as $eachKey => $each )
 						{
-							if( strlen( $options[$eachKey] ) < 2 )    
+							if( strlen( $optionsX[$eachKey] ) < 2 )    
 							{
-								$options[$eachKey] = '0' . $options[$eachKey];
+								$optionsX[$eachKey] = '0' . $optionsX[$eachKey];
 							}
 						}
-						$fieldsets[$key]->addElement( array( 'name' => $elementName . '_minutes', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_minutes'] ), array( 'Minute' ) + array_combine( $options, $options ) );
-						$fieldsets[$key]->addRequirement( $elementName . '_minutes', array( 'InArray' => array_keys( $options ) ) );
+						$fieldsets[$key]->addElement( array( 'name' => $elementName . '_minutes', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_minutes'] ), array( 'Minute' ) + array_combine( $optionsX, $optionsX ) );
+						$fieldsets[$key]->addRequirement( $elementName . '_minutes', array( 'InArray' => array_keys( $optionsX ) ) );
 
 						//	datetime combined
 						$datetime = $date;
@@ -467,7 +471,9 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 						$datetime .= strlen( $this->getGlobalValue( $elementName . '_minutes' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_minutes' ) ) : $this->getGlobalValue( $elementName . '_minutes' );
 						$fieldsets[$key]->addElement( array( 'name' => $elementName . '_datetime', 'label' => 'Timestamp', 'placeholder' => 'YYYY-MM-DD HH:MM', 'type' => 'Hidden', 'value' => @$values[$elementName . '_datetime'] ) );
 						$fieldsets[$key]->addFilter( $elementName . '_datetime', array( 'DefiniteValue' => $datetime ) );
-						$fieldsets[$key]->addFilter( $elementName, array( 'DefiniteValue' => $datetime ) );
+                    //    $fieldsets[$key]->addFilter( $elementName,  );
+                        $filters[$elementName] = array( 'DefiniteValue' => $datetime );
+                    //    var_export( $datetime );
 					}
 					
 					$type = 'hidden'; 
@@ -557,7 +563,11 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				}
 			}
 	//		var_export( $multiOptionsRecord ); 
-			$fieldsets[$key]->addElement( $options + $elementInfo , $multiOptionsRecord );
+            $fieldsets[$key]->addElement( $options + $elementInfo , $multiOptionsRecord );
+            foreach( $filters as $eachFilter )
+            {
+                $fieldsets[$key]->addFilter( $elementName, $eachFilter );
+            }
 			
 			if( $formInfo['element_validators'][$i] )
 			{

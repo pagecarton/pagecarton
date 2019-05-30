@@ -157,7 +157,7 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
         require_once 'Ayoola/Filter/SelectListArray.php';
         $filter = new Ayoola_Filter_SelectListArray( 'form_name', 'form_title');
         $options = $filter->filter( $options );
-        $fieldset->addElement( array( 'name' => 'supplementary_form', 'label' => 'Supplementary Creation form', 'type' => 'Select', 'value' => @$values['supplementary_form'] ), array( '' => 'Please select...' ) + $options ); 
+        $fieldset->addElement( array( 'name' => 'supplementary_form', 'onchange' => 'ayoola.div.manageOptions( { database: "Ayoola_Form_Table", listWidget: "Ayoola_Form_List", values: "form_name", labels: "form_title", element: this } );', 'label' => 'Supplementary Creation form', 'type' => 'Select', 'value' => @$values['supplementary_form'] ), array( '' => 'Please select...' ) + $options + array( '__manage_options' => '[Manage Multi-Options]' ) ); 
 
         $fieldset->addElement( array( 'name' => 'post_type_custom_fields', 'label' => 'Supplementary Custom Fields', 'title' => 'Custom Fields for Post Type', 'placeholder' => 'e.g. brand, size, color ', 'type' => 'InputText', 'value' => @$values['post_type_custom_fields'], ) ); 
         
