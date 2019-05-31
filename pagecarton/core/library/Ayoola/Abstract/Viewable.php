@@ -429,16 +429,19 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      * Clean HTML
      * 
      */
-	public static function cleanHTML( $text )
+	public static function cleanHTML( $text, $strict = false )
     {
 		$text = strip_tags( $text, '<a> <address> <em> <strong> <b> <i> <big> <small> <sub> <sup> <cite> <code> <img> <ul> <ol> <li> <dl> <lh> <dt> <dd> <br> <p> <table> <th> <td> <tr> <pre> <blockquote> <nowiki> <h1> <h2> <h3> <h4> <h5> <h6> <hr>' );
-		$regex = "#<(/?\w+)\s+[^>]*>#is";
-        $text = preg_replace( $regex, '<${1}>', $text );
-
+        
+		//  remove attributes?
+		if( $strict )
+		{
+    		$regex = "#<(/?\w+)\s+[^>]*>#is";
+    		$text = preg_replace( $regex, '<${1}>', $text );
+		}
         $text = strip_tags( $text, '<a> <address> <em> <strong> <b> <i> <big> <small> <sub> <sup> <cite> <code> <img> <ul> <ol> <li> <dl> <lh> <dt> <dd> <br> <p> <table> <th> <td> <tr> <pre> <blockquote> <nowiki> <h2> <h3> <h4> <h5> <h6> <hr>' );
-        $text = preg_replace( '|on(.)*|i', 'on-$1', $text );
-        $text = preg_replace( '|javascript|i', 'java-script', $text );
-    
+        $text = preg_replace( '|\<([^>]*) on([^><]*)\>|i', '<$1 data-on-$2>', $text );
+        $text = preg_replace( '|\<([^>]*)javascript:([^><]*)\>|i', '<$1#$2>', $text );
 		return $text;
 	}
 	
