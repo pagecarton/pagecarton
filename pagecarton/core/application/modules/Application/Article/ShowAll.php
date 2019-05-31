@@ -545,8 +545,85 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							//	freebies 
 							continue;
 						}
-					//	self::v( $data['new_badge'] );
-
+                    //	self::v( $data['new_badge'] );
+                    
+                        
+                        if( $this->getParameter( 'use_datetime' ) || $data['true_post_type'] == 'event' )
+                        {
+                            if( ! empty( $data['datetime'] ) )
+                            {
+                                $data['datetime'] = strtotime( $data['datetime'] );
+                                $data['article_creation_date'] = $data['datetime'];		
+                                $data['article_modified_date'] = $data['datetime'];		
+                            }
+                    //		var_export( $data['article_modified_date'] );
+                        }
+                        if( $this->getParameter( 'modified_time_representation' ) )
+                        {
+                            if( is_string( $this->getParameter( 'modified_time_representation' ) ) )
+                            {
+                                $timeToShow = array_map( 'trim', explode( ',', $this->getParameter( 'modified_time_representation' ) ) );
+                                $timeToShow = array_combine( $timeToShow, $timeToShow );
+                            }
+                            else
+                            {
+                                $timeToShow = (array) $this->getParameter( 'modified_time_representation' );
+                            }
+                            foreach( $timeToShow as $key => $each )
+                            {
+                            //	var_export( date( $each, $data['article_modified_date'] ) );
+                            //	var_export( $key );
+                                @$data['modified_time_representation_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
+                                @$data['article_modified_date_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
+                                @$data['article_creation_date_' . $key] = date( $each, $data['article_creation_date'] ? : ( time() - 1 ) );
+                                if( ! empty( $data['datetime'] ) )
+                                {
+                                    @$data['datetime_' . $key] = date( $each, $data['datetime'] );
+                                //	var_export( $data['datetime_' . $key] );
+                                }
+                            }
+                        }
+                    //	elseif( $this->getParameter( 'filter_date' ) )
+                        {
+                            $filter = new Ayoola_Filter_Time();
+                        //	if( @$data['article_modified_date'] )
+                            {
+                                @$data['article_modified_date_filtered'] = $filter->filter( $data['article_modified_date'] );
+                            }
+                        //	else
+                            {
+                                $data['article_creation_date_filtered'] = $filter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
+                            }
+                        }
+                        @$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
+                        @$data['article_date_m'] = date( 'm', $data['article_modified_date'] );   
+                        @$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
+                        @$data['article_date_d'] = date( 'd', $data['article_modified_date'] );   
+                        //	var_export( $data['article_modified_date'] );
+                            //		var_export( time() );
+                        switch( $this->getParameter( 'post_expiry_time' ) )
+                        {
+                            case 'future':
+                            //	var_export( $data['article_modified_date'] > time() );
+                            //	var_export( $data['article_modified_date'] );
+                        //		var_export( $data['article_title'] );
+                            //	var_export( time() );
+                                if( $data['article_modified_date'] < time() && empty( $data['not_real_post'] ) )
+                                {
+                                    continue 2;
+                                }
+                            break;
+                            case 'past':
+                                if( $data['article_modified_date'] > time() && empty( $data['not_real_post'] ) )
+                                {
+                                    continue 2;
+                                }
+                            break;
+                            default:
+            
+                            break;
+                        }
+        
 					//	get number of views
 						self::getViewsCount( $data );
 						if( $this->getParameter( 'get_views_count' ) )
@@ -1001,81 +1078,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				}
 			}
 			//		self::v( $data );
-			if( $this->getParameter( 'use_datetime' ) || $data['true_post_type'] == 'event' )
-			{
-				if( ! empty( $data['datetime'] ) )
-				{
-					$data['datetime'] = strtotime( $data['datetime'] );
-					$data['article_creation_date'] = $data['datetime'];		
-					$data['article_modified_date'] = $data['datetime'];		
-				}
-		//		var_export( $data['article_modified_date'] );
-			}
-			if( $this->getParameter( 'modified_time_representation' ) )
-			{
-				if( is_string( $this->getParameter( 'modified_time_representation' ) ) )
-				{
-					$timeToShow = array_map( 'trim', explode( ',', $this->getParameter( 'modified_time_representation' ) ) );
-					$timeToShow = array_combine( $timeToShow, $timeToShow );
-				}
-				else
-				{
-					$timeToShow = (array) $this->getParameter( 'modified_time_representation' );
-				}
-				foreach( $timeToShow as $key => $each )
-				{
-				//	var_export( date( $each, $data['article_modified_date'] ) );
-				//	var_export( $key );
-					@$data['modified_time_representation_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
-					@$data['article_modified_date_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
-					@$data['article_creation_date_' . $key] = date( $each, $data['article_creation_date'] ? : ( time() - 1 ) );
-					if( ! empty( $data['datetime'] ) )
-					{
-						@$data['datetime_' . $key] = date( $each, $data['datetime'] );
-					//	var_export( $data['datetime_' . $key] );
-					}
-				}
-			}
-		//	elseif( $this->getParameter( 'filter_date' ) )
-			{
-				$filter = new Ayoola_Filter_Time();
-			//	if( @$data['article_modified_date'] )
-				{
-					@$data['article_modified_date_filtered'] = $filter->filter( $data['article_modified_date'] );
-				}
-			//	else
-				{
-					$data['article_creation_date_filtered'] = $filter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
-				}
-			}
-			@$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
-			@$data['article_date_m'] = date( 'm', $data['article_modified_date'] );   
-			@$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
-			@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );   
-			//	var_export( $data['article_modified_date'] );
-				//		var_export( time() );
-			switch( $this->getParameter( 'post_expiry_time' ) )
-			{
-				case 'future':
-				//	var_export( $data['article_modified_date'] > time() );
-				//	var_export( $data['article_modified_date'] );
-			//		var_export( $data['article_title'] );
-				//	var_export( time() );
-					if( $data['article_modified_date'] < time() && empty( $data['not_real_post'] ) )
-					{
-						continue 2;
-					}
-				break;
-				case 'past':
-					if( $data['article_modified_date'] > time() && empty( $data['not_real_post'] ) )
-					{
-						continue 2;
-					}
-				break;
-				default:
-
-				break;
-			}
 		//	var_export( $data );
 
 			// build a list
