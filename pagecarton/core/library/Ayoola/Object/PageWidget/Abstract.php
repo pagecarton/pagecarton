@@ -65,7 +65,9 @@ class Ayoola_Object_PageWidget_Abstract extends PageCarton_Widget
 
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'class_name', 'type' => 'InputText', 'value' => @$values['class_name'] ) );         $fieldset->addElement( array( 'name' => 'parameters', 'type' => 'InputText', 'value' => @$values['parameters'] ) );         $fieldset->addElement( array( 'name' => 'widget_name', 'type' => 'InputText', 'value' => @$values['widget_name'] ) ); 
+        $fieldset->addElement( array( 'name' => 'class_name', 'type' => 'InputText', 'value' => @$values['class_name'] ) );        
+        $fieldset->addElement( array( 'name' => 'parameters', 'type' => 'TextArea', 'value' => json_encode( $values['parameters'] ) ) );       
+        $fieldset->addElement( array( 'name' => 'widget_name', 'type' => 'InputText', 'value' => @$values['widget_name'] ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   
