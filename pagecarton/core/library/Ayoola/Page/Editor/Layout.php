@@ -958,7 +958,16 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                             $whatToSave['history'] = $previousWidgetInfo['history'];
 
                             //  update
-							$response = Ayoola_Object_PageWidget::getInstance()->update( $whatToSave, array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) );
+                            $response = Ayoola_Object_PageWidget::getInstance()->update( $whatToSave, array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) );
+                            
+                            $response = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) );
+                            if( $response['parameters'] !== $whatToSave['parameters'] )
+                            {
+                                //  for some reasons, what it is still saving old data.
+                                // Need this as workaround
+                                Ayoola_Object_PageWidget::getInstance()->delete( array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) );
+                                Ayoola_Object_PageWidget::getInstance()->insert( $whatToSave );
+                            }
 						}
 
 					}
