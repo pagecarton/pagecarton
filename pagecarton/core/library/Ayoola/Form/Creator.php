@@ -48,7 +48,7 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 								<a class="pc-btn" href="?mode=new"> <i class="fa fa-plus pc_give_space"></i>New Form <i class="pc_give_space"></i></a>
 								<a class="pc-btn" href="?mode=duplicate"><i class="fa fa-edit pc_give_space"></i> Duplicate Existing Form <i class="pc_give_space"></i></a>
 								
-								', true );
+								', array( 'translate' => true, 'refresh_content' => true ) );
 			}
 			switch( $mode )
 			{
@@ -129,7 +129,7 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 				//	if( ! $this->insertDb() ){ return false; }
 					if( $this->insertDb( $values ) )
 					{ 
-						$this->setViewContent( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a></div>', true ); 
+						$this->setViewContent( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a></div>', array( 'translate' => true, 'refresh_content' => true ) ); 
 			//			$this->setViewContent( '<a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a>' ); 
 					}
 				break;
@@ -138,7 +138,7 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 		catch( Exception $e )
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', array( 'translate' => true, 'refresh_content' => true ) );
 		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
 		}
     } 
