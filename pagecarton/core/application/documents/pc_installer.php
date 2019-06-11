@@ -175,6 +175,14 @@ if (is_null($badnews) || (!is_null($badnews) && (@$_GET['stage'] != Installation
             //    Check if we can write in the application path
             if (!is_writable(APPLICATION_DIR)) {
                 $badnews .= '<p>Application directory is not writable. Please ensure you have correct permissions set on this directory (' . APPLICATION_DIR . '). This is where PageCarton will be installed.</p>';
+
+                //instead of forcing user to make their ../doc_root writeable to us, they may choose to create the required folder
+                $root_pc_folder = dirname(APPLICATION_DIR);
+                $outside_root_pc_folder = dirname($outside_doc_root);
+                $badnews .= "<p>
+                If you do not want to grant server write access to $outside_root_pc_folder, you can simply create $root_pc_folder inside $outside_root_pc_folder,
+                and then grant server write access to only $root_pc_folder
+                </p>";
                 break;
             }
             //    Retrieve the file

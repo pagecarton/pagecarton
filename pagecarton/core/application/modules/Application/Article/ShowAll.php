@@ -1118,8 +1118,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['button_value'] = $this->getParameter( 'button_value' ) ? : 'View';
 			
 			
-			//	CATEGORIES
-            @$data['category_name'] = is_array( $data['category_name'] ) ? $data['category_name'] : array( 'Uncategorized' );
+            //	CATEGORIES
+            
+        //  Category not array in the case of category showall
+        //    @$data['category_name'] = is_array( $data['category_name'] ) ? $data['category_name'] : array( 'Uncategorized' );
 			$categoryTextRaw = self::getCategories( $categoryToUse, array( 'template' => $this->getParameter( 'category_template' ), 'glue' => ( $this->getParameter( 'category_template_glue' ) ? : ', ' ) ) );
 			$categoryText = $categoryTextRaw ? ' ' . $categoryTextRaw : null;
 			$data['category_text'] = $categoryText;

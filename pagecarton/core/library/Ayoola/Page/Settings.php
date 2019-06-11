@@ -44,6 +44,17 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 			{
 				//	if its still a system page, delete and create again
 				//	this is causing problems deleting the home page
+                //	continue;
+				//	create this page if not available.
+				//	must initialize each time so that each page can be handled.
+                Ayoola_Application::$appNamespace .= microtime();
+				$sanitizeClass = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $page, 'auto_create_page' => true ) );  
+                if( ! $response = $sanitizeClass->sourcePage( $page ) )
+                {
+                    //  Auto create
+                //    $table->insert( array( 'url' => $page, 'system' => '1' ) );
+                }
+                Ayoola_Application::$appNamespace .= microtime();
 				if( $table->select( null, array( 'url' => $page, 'system' => '1' ) ) )
 				{
 					$parameters = array( 
@@ -54,30 +65,31 @@ class Ayoola_Page_Settings extends PageCarton_Settings
                     $class->init();
 
                     //  upgrade cache
-                    Ayoola_Application::$appNamespace .= microtime();
-
 				//	Application_Cache_Clear::viewInLine();
 				//	$deleted = $table->delete( array( 'url' => $page, 'system' => '1' ) );
 				//	var_export( $page );   
 				//	var_export( $class->view() );   
 				}
-			//	continue;
-				//	create this page if not available.
-				//	must initialize each time so that each page can be handled.
-				$class = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $page, 'auto_create_page' => true ) );  
+				elseif( $table->select( null, array( 'url' => $page ) ) )
+				{
 
-				$response = $class->sourcePage( $page );
+                }
+                Ayoola_Application::$appNamespace .= microtime();
+
+				$response = $sanitizeClass->sourcePage( $page );
 
 				// sanitize so it could refresh with latest template
 			//	$class = new Ayoola_Page_Editor_Sanitize();
 
 				//	create this page if not available.
-				$class->refresh( $page );	     		
-			//	var_export( $page );   
+				$sanitizeClass->refresh( $page );	     		
+			//	self::v( $page );   
+			//	self::v( $response );   
 		//		var_export( $response );   
 			}
 			catch( Exception $e )
 			{
+            //    echo $e->getMessage();
 				null;
 			}
 		}

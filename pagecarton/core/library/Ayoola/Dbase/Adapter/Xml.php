@@ -750,7 +750,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			//	Add supplementary file because of files with so much content like PageWidget.xml
 			$fmTime .= @filemtime( $eachFile );
 		}
-    	$hash = md5( json_encode( $arguments ) . $this->_myFilename . $this->_relationship . $this->_accessibility  . Ayoola_Application::getPathPrefix() . Ayoola_Application::getDomainSettings( 'domain_name' ) ) . @filemtime( $this->_myFilename ) . @filemtime( $defaultFile ) . $fmTime;
+    	$hash = md5( json_encode( $arguments ) . $this->_myFilename . $this->_relationship . $this->_accessibility  . Ayoola_Application::getApplicationNameSpace() . Ayoola_Application::getDomainSettings( 'domain_name' ) ) . @filemtime( $this->_myFilename ) . @filemtime( $defaultFile ) . $fmTime;
 		$storage = PageCarton_Widget::getObjectStorage( array( 'id' => __CLASS__ . '---wefwfff' . $hash, 'device' => 'File', 'time_out' => 1000000, ) );
 		$result = $storage->retrieve();    
 		if( false !== $result )

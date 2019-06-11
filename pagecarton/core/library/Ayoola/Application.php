@@ -1439,7 +1439,7 @@ class Ayoola_Application
 	//	exit( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 
 		//	check if redirect
-		$pageInfo = Ayoola_Page::getInfo( $uri );
+		$pageInfo = Ayoola_Page::getInfo( $uri ); 
 	//		var_export( $pageInfo );
 		if( @$pageInfo['redirect_url'] && ! @$_REQUEST['pc_redirect_url'] )
 		{

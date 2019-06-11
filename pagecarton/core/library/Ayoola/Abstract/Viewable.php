@@ -411,7 +411,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$device = @$storageInfo['device'] ? : $device;
 			$timeOut = @$storageInfo['time_out'];  
 		}
-		
+		$id .= Ayoola_Application::getApplicationNameSpace();
 		if( isset( static::$_objectStorage[$id] ) )
 		{ 
 			return static::$_objectStorage[$id]; 

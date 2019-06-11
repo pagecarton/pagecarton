@@ -144,7 +144,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     {		
 		do
 		{
-			$id = Ayoola_Application::getPathPrefix() . $url;
+			$id = Ayoola_Application::getApplicationNameSpace() . $url;
 //			$id = $url . Ayoola_Application::getPathPrefix();
 			$storage = self::getObjectStorage( array( 'id' => $id,  ) );
 		//	if( $info = $storage->retrieve() )
