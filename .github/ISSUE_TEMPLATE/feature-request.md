@@ -1,9 +1,10 @@
 ---
 name: Feature request
-about: Suggest an idea for PageCarton
-title: "[Feature request]"
+about: Suggest an idea for PageCarton. (Issue Suggestion that does not following this
+  template may be closed without explanation)
+title: ''
 labels: ''
-assignees: ''
+assignees: damms005
 
 ---
 

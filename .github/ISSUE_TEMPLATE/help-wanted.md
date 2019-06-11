@@ -1,6 +1,7 @@
 ---
 name: Help wanted
-about: Need help on how to use an already existing feature on PageCarton
+about: Need help on how to use an already existing feature on PageCarton. (Issue opened
+  without following this template may be closed without explanation)
 title: "[Help]"
 labels: help wanted
 assignees: ''
