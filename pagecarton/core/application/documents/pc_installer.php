@@ -572,9 +572,14 @@
           //      $badnews .= '<p>The installer could not be upgraded. It need to be refreshed before installation. Make the installer file writable. The part is - ' . $_SERVER['SCRIPT_FILENAME'] . '</p>';
 			}
 		//	header( 'Location: ?stage=start' );
-	//    var_export( $prefix );
-			header( "Location: {$prefix}/pc_installer.php?stage=start" );
-			exit();
+    //    var_export( $prefix );
+            $refreshURL = '{$prefix}/pc_installer.php?stage=start';
+            if( ! fetchLink( $_SERVER['SERVER_NAME'] . $refreshURL ) )
+            {
+                $refreshURL = '/pc_installer.php?stage=start';
+            }
+            header( "Location: " . $refreshURL );
+            exit();
         break;
 	
 	}
