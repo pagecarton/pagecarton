@@ -125,8 +125,28 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 			$userInfo['profile_url'] = @$userInfo['profile_url'] ? : $values['profile_url'];
 			if( intval( $values['access_level'] ) !== 99 && intval( $userInfo['access_level'] ) !== 99 )
 			{
-				$userInfo['access_level'] = $values['access_level'] ? : $userInfo['access_level'];
-			}
+                //  No need to reset main user access level like this
+			//	$userInfo['access_level'] = $values['access_level'] ? : $userInfo['access_level'];
+            }
+
+            //  Make access level for profile defaults to current user level
+            switch( intval( $values['access_level'] ) )
+            {
+                case 0:
+                case 1:
+                    switch( intval( $userInfo['access_level'] ) )
+                    {
+                        case 97:
+                        case 98:
+                        case 99:
+
+                        break;
+                        default:
+                            $values['access_level'] = $userInfo['access_level'];
+                        break;
+                    }
+                break;
+            }
 			
 			//	save the new settings as well
 			Ayoola_Access_Login::login( $userInfo );
