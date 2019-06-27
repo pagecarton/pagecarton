@@ -40,7 +40,7 @@ class Application_User_UserLocation_Editor extends Application_User_UserLocation
 		//	var_export( $data );
 			$this->createForm( 'Edit', 'Address Information', $data );
 			$this->setViewContent( "<h4>Editing {$data['street_address']}</h4>" );
-		//	$this->setViewContent( '<p>You will need to verify this Credit/Debit card if edited.</p>' );
+		//	$this->setViewContent( self::__( '<p>You will need to verify this Credit/Debit card if edited.</p>' ) );
 			$this->setViewContent( $this->getForm()->view() );
 			if( $this->updateDb() ){ $this->setViewContent( 'Address information edited successfully', true ); }
 		}

@@ -60,7 +60,7 @@ class Application_Article_Editor extends Application_Article_Abstract
 		//	self::v( $data );
 			//			var_export( $data['quiz_correct_option'] );
 			$this->createForm( 'Continue...', 'Editing "' . $data['article_title'] . '"', $data );
-//			$this->setViewContent( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' );
+//			$this->setViewContent( self::__( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' ) );
 			$this->setViewContent( $this->getForm()->view() );
 		//	self::v( $this->getForm()->getValues() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -108,7 +108,7 @@ class Application_Article_Editor extends Application_Article_Abstract
 			if( ! $category = $table->selectOne( null, array( 'category_name' => $values['article_type'] ) ) )
 			{
 		//		$this->getForm()->setBadnews( 'Could not find a category ID in the database to save ' . $values['article_type'] );
-		//		$this->setViewContent( '' . showBadnews( $this->getForm()->getBadnews() ) . '' );
+		//		$this->setViewContent( self::__( '' . showBadnews( $this->getForm()->getBadnews() ) . '' ) );
 		//		return false;
 			}
 			//	Changing to category_name to correct error in grep
@@ -144,7 +144,7 @@ class Application_Article_Editor extends Application_Article_Abstract
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '';
 			$this->setViewContent( '<div class="goodnews">Post successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View Post.</a></div>', true );
-	//		$this->setViewContent( '<div class="dpc-notify-info" title="Share this with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );   
+	//		$this->setViewContent( self::__( '<div class="dpc-notify-info" title="Share this with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );   
 	//		$this->setViewContent( 'Post edited successfully. <a href="' . strtolower( $values['article_url'] ) . '">View post.</a>', true );
 			$this->_objectData['article_url'] = $values['article_url'];  
 		}

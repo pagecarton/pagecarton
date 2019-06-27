@@ -169,14 +169,14 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
             }
         }
 
-    //    $this->setViewContent( '<textarea>' . $content . '</textarea>' );
+    //    $this->setViewContent( self::__( '<textarea>' . $content . '</textarea>' ) );
         $this->setViewContent( '<h1 class="goodnews">File created successfully</h1>', true ); 
-        $this->setViewContent( '<p>' . $nextStep . '</p>' ); 
+        $this->setViewContent( self::__( '<p>' . $nextStep . '</p>' ) ); 
 
         if( self::hasPriviledge() )
         {
-            $this->setViewContent( '<p>Customize this ' . $type . ' (' . $values['class_name'] . ') by editing the file below:</p>' ); 
-            $this->setViewContent( '<p style="font-size:smaller;">' . $path . '</p>' ); 
+            $this->setViewContent( self::__( '<p>Customize this ' . $type . ' (' . $values['class_name'] . ') by editing the file below:</p>' ) ); 
+            $this->setViewContent( self::__( '<p style="font-size:smaller;">' . $path . '</p>' ) ); 
         } 
  		
     } 

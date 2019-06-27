@@ -62,7 +62,7 @@ class Application_User_Email_Creator extends Application_User_Email_Abstract
 				{
 					$response = $response['data'];
 					$values['email'] = strtolower( $values['username'] . '@' . $values['domain'] );
-					$this->setViewContent( "Email '{$values['email']}' has been created successfully.", true );
+					$this->setViewContent( self::__( "Email '{$values['email']}' ) has been created successfully.", true ) );
 					if( @$values['user_id'] )
 					{
 						//	lets do a welcome service.
@@ -138,7 +138,7 @@ class Application_User_Email_Creator extends Application_User_Email_Abstract
 			//	var_export( $values );
 			//	var_export( $values );
 				$this->setDbTable();
-				if( $this->insertDb( $values ) ){ $this->setViewContent( "Email '{$values['email']}' has been created successfully.", true ); }
+				if( $this->insertDb( $values ) ){ $this->setViewContent( self::__( "Email '{$values['email']}' ) has been created successfully.", true ) ); }
 			break;
 		
 		}

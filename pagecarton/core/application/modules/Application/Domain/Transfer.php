@@ -44,7 +44,7 @@ class Application_Domain_Transfer extends Application_Domain_Registration
 				return;
 			}
 		//	$this->setParameter( array( 'suggestions' => array( 'abc.com' ) ) );
-		//	$this->setViewContent( '<h2>Avalaible domain name(s)</h2>' );
+		//	$this->setViewContent( self::__( '<h2>Avalaible domain name(s)</h2>' ) );
 			$this->createForm( 'Transfer', 'Transfer domain name(s)' );
 			$this->setViewContent( $this->getForm()->view() );
 		//	var_export( $this->getObjectStorage()->retrieve() );

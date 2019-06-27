@@ -98,7 +98,7 @@ class Application_Article_AuthorProfile extends Application_Article_View
 		catch( Exception $e )
 		{ 
 			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
 	//	var_export( $this->_xml );
     } 

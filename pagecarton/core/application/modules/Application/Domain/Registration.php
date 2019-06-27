@@ -59,7 +59,7 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 		}
 		catch( Exception $e )
 		{ 
-			$this->setViewContent( '<p class="badnews boxednews centerednews">' . $e->getMessage() . '</p>' ); 
+			$this->setViewContent( self::__( '<p class="badnews boxednews centerednews">' . $e->getMessage() . '</p>' ) ); 
 			return false; 
 		}		
 		

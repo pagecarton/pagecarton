@@ -103,7 +103,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 				$this->setViewContent( Ayoola_Object_Embed::viewInLine( array( 'editable' => $this->getParameter( 'class_to_play_when_completed' ) ) + $this->getParameter() ? : array() ) );
 			}
 			$this->setViewContent( self::getQuickLink() );
-	//		$this->setViewContent( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' );
+	//		$this->setViewContent( self::__( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' ) );
 	
 		//	if( ! @$_REQUEST['article_type'] )
 		//	{
@@ -148,7 +148,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 			{
 			//	var_export();
 		//		$this->getForm()->setBadnews( 'POST TYPE MUST BE A VALID CATEGORY: ' . $values['article_type'] );
-		//		$this->setViewContent( '' . showBadnews( $this->getForm()->getBadnews() ) . '' );  
+		//		$this->setViewContent( self::__( '' . showBadnews( $this->getForm()->getBadnews() ) . '' ) );  
 			//	return false;
 			}
 			//	Changing to category_name to correct error in grep
@@ -269,8 +269,8 @@ class Application_Article_Creator extends Application_Article_Abstract
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . ''; 
 			$this->setViewContent( '<div class="goodnews">' . ucfirst( $joinedType ) . ' successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View ' . $joinedType . '</a> or <a href="' . Ayoola_Page::getPreviousUrl() . '">Go Back</a></div>', true );
-//			$this->setViewContent( '<div class="pc-notify-info" title="Share this with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
-		//	$this->setViewContent( '<div class="pc-notify-info"></div>' );  
+//			$this->setViewContent( self::__( '<div class="pc-notify-info" title="Share this with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );  
+		//	$this->setViewContent( self::__( '<div class="pc-notify-info"></div>' ) );  
 						
 			//	Notify Admin
 			$mailInfo['subject'] = 'New ' . $joinedType . ' created';

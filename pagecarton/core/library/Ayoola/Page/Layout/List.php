@@ -43,7 +43,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
      */	
     public function init()
     {
-	//	$this->setViewContent( '<h3>My themes</h3>' );		
+	//	$this->setViewContent( self::__( '<h3>My themes</h3>' ) );		
 		$table = $this->getDbTable();
 	//	var_export( $table->select() );
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );  
@@ -68,7 +68,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 	//	$otherThemes = array_diff( $myThemes, $allThemes );
 	//	var_export( $otherThemes );
 		$this->setViewContent( $this->createPrivateList( $myThemes ), true );		
-	//	$this->setViewContent( '<h3>All Themes</h3>' );		
+	//	$this->setViewContent( self::__( '<h3>All Themes</h3>' ) );		
 		if( empty( $_GET['mini_info'] ) )
 		{
 			$allThemes ? $this->setViewContent( $this->createList( $allThemes ) ) : null;		

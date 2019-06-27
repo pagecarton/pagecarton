@@ -36,8 +36,8 @@ class Application_Subscription_List extends Application_Subscription_Abstract
      */	
     public function init()
     {
-	//	$this->setViewContent( '<h3>Options:</h3>' );		
-	//	$this->setViewContent( '<h4><a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Creator/" title="Add a product or service."> + </a></h4>' );		
+	//	$this->setViewContent( self::__( '<h3>Options:</h3>' ) );		
+	//	$this->setViewContent( self::__( '<h4><a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Creator/" title="Add a product or service."> + </a></h4>' ) );		
 		$this->setViewContent( $this->getList() );		
     } 
 	

@@ -86,7 +86,7 @@ class Application_Domain_UserDomain_Creator extends Application_Domain_UserDomai
 				$this->setViewContent( '<div class="goodnews">Added successfully. </div>', true ); 
 				if( $userIp != $serverIp )
 				{
-					$this->setViewContent( '<div class="badnews">Add a DNS "A" record that is pointing to the ip address "' .$serverIp .  '". It appears to be pointing to "' .$userIp .  '". </div>' ); 				
+					$this->setViewContent( self::__( '<div class="badnews">Add a DNS "A" record that is pointing to the ip address "' .$serverIp .  '". It appears to be pointing to "' .$userIp .  '". </div>' ) ); 				
 				//	$this->setViewContent( $this->getForm()->view() );
 				//	return false;
 				}

@@ -66,7 +66,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 	//				header( 'Location: /accounts/signin/?previous_url=' . $data['article_url'] );
 	//				exit();
 					$this->setViewContent( '<p>You are required to sign in before you can access this document.</p>', true );
-					$this->setViewContent( '<input type="button" value="Sign in to download" onClick="window.location=\'' . $urlToGo . '\'" >' );
+					$this->setViewContent( self::__( '<input type="button" value="Sign in to download" onClick="window.location=\'' . $urlToGo . '\'" >' ) );
 					return false;
 				}
 			}
@@ -84,7 +84,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 					$filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' );
 					$neededFunds = $filter->filter( $amount );
 
-					$this->setViewContent( '<p class="boxednews badnews">You need an additional ' . $neededFunds . ' in your wallet to download this file.</p>' );
+					$this->setViewContent( self::__( '<p class="boxednews badnews">You need an additional ' . $neededFunds . ' in your wallet to download this file.</p>' ) );
 					$this->setViewContent( Application_Wallet_Fund::viewInLine( array( 'amount' => $amount, 'checkout_requirements' => @$data['article_requirements'], 'button_value' => $this->getParameter( 'button_value' ) ? : 'Add funds to download', 'return_url' => 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $data['article_url'] ) ) );
 					return false;
 				}

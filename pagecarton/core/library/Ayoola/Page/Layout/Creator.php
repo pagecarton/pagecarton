@@ -209,7 +209,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				if( ! $this->insertDb( $values ) )
 				{ 
 				//	var_export( $values );
-					$this->setViewContent( '<p class="badnews boxednews">ERROR - COULD NOT INSERT TEMPLATE DATA INTO DATABASES.</p>.' ); 
+					$this->setViewContent( self::__( '<p class="badnews boxednews">ERROR - COULD NOT INSERT TEMPLATE DATA INTO DATABASES.</p>.' ) ); 
 					return false; 
 				}
 			//		var_export( $values );
@@ -275,7 +275,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 			//	unlink( $filename );
 				
 				$this->setViewContent( '<p class="goodnews">New theme saved successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a></p>', true );
-			//	$this->setViewContent( '<p class=""></p>' );
+			//	$this->setViewContent( self::__( '<p class=""></p>' ) );
 				
 				
 				//	Clean up temp dir
@@ -317,7 +317,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 		//	if(  )	
 			if( ! empty( $values['plain_text'] ) && ! $this->insertDb( $values ) )  
 			{ 
-			//	$this->setViewContent( '<p class="badnews">Error: could not create layout template.</p>.' ); 
+			//	$this->setViewContent( self::__( '<p class="badnews">Error: could not create layout template.</p>.' ) ); 
 				return false;
 			}
 			//	This normally would only work with an identifier data
@@ -341,7 +341,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				</p>' );  
 			}
 			
-		//	$this->setViewContent( '<p class="goodnews">Layout created successfully.</p>' );
+		//	$this->setViewContent( self::__( '<p class="goodnews">Layout created successfully.</p>' ) );
 		}
 		catch( Exception $e )
 		{ 

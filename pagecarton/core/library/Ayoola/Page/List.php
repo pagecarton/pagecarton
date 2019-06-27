@@ -60,7 +60,7 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 		
 		$myPages = self::sortMultiDimensionalArray( $myPages, $key );
 	//	$list->listTitle = 'My Pages'; 
-	//	$this->setViewContent( '<h3>My Pages</h3>' );		
+	//	$this->setViewContent( self::__( '<h3>My Pages</h3>' ) );		
 		$this->setViewContent( $this->createList( $myPages, 'My Pages' ) );
 	
 	//	var_export( $myPages );
@@ -103,14 +103,14 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 		{
 			$otherThemes = self::sortMultiDimensionalArray( $otherThemes, $key );
 		//	$list->listTitle = 'Other Pages';
-		//	$this->setViewContent( '<h3>Other Pages</h3>' );		
+		//	$this->setViewContent( self::__( '<h3>Other Pages</h3>' ) );		
 			$this->setViewContent( $this->createList( $otherThemes, 'Other Pages' ) );
 		}
  */	//	var_export( $otherThemes );
 	//	var_export( $allThemes );
 
-	//	$this->setViewContent( '<h3>PAGE OPTIONS:</h3>' );		
-	//	$this->setViewContent( '<h4><a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/" title="Create a new page">+</a> | <a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Sanitize/" title="Sanitize all pages. Recreate all page templates.">o</a></h4>' );		
+	//	$this->setViewContent( self::__( '<h3>PAGE OPTIONS:</h3>' ) );		
+	//	$this->setViewContent( self::__( '<h4><a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/" title="Create a new page">+</a> | <a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Sanitize/" title="Sanitize all pages. Recreate all page templates.">o</a></h4>' ) );		
 //		$this->setViewContent( $this->getList() );		
     } 
 	

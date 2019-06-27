@@ -63,7 +63,7 @@ class Application_Redirect extends Ayoola_Abstract_Table
 			var_export( $pathInfo );
 			if( ! $url )
 			{
-				$this->setViewContent( '<div class="badnews">The link appears to be broken.</div>' ); 
+				$this->setViewContent( self::__( '<div class="badnews">The link appears to be broken.</div>' ) ); 
 			}
 			elseif( empty( $pathInfo['scheme'] ) )
 			{
@@ -74,7 +74,7 @@ class Application_Redirect extends Ayoola_Abstract_Table
 	//		var_export( gethostbyname( $pathInfo['host'] ) );
 			if( empty( $pathInfo['host'] ) || ! strpos( $pathInfo['host'], '.' ) || gethostbyname( $pathInfo['host'] ) === gethostbyname( $_SERVER['SERVER_NAME'] ) )
 			{
-				$this->setViewContent( '<div class="badnews">The link appears to be broken.</div>' ); 
+				$this->setViewContent( self::__( '<div class="badnews">The link appears to be broken.</div>' ) ); 
 				return false;
 			}
 			header( 'Location: ' . $url );

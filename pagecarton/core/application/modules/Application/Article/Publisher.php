@@ -163,8 +163,8 @@ class Application_Article_Publisher extends Application_Article_Creator
                 $this->setViewContent( Application_Article_Creator::viewInLine() ); 
                 $done = Application_Article_Table::getInstance()->select();
             }
-            $this->setViewContent( '<div style="text-align:center;">' . $html . '</div>' ); 
-            $this->setViewContent( '<div style="text-align:center;"><br><br><a style="text-align:center;" class="" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Article_List\', \'page_refresh\' );" href="javascript:;" ><i  style="margin:10px;" class="fa fa-external-link"></i>  Manage all Posts  </a><br><br></div>' ); 
+            $this->setViewContent( self::__( '<div style="text-align:center;">' . $html . '</div>' ) ); 
+            $this->setViewContent( self::__( '<div style="text-align:center;"><br><br><a style="text-align:center;" class="" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Article_List\', \'page_refresh\' );" href="javascript:;" ><i  style="margin:10px;" class="fa fa-external-link"></i>  Manage all Posts  </a><br><br></div>' ) ); 
             return $done;
             // end of widget process
           
@@ -172,8 +172,8 @@ class Application_Article_Publisher extends Application_Article_Creator
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-        //    $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+        //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
 	}

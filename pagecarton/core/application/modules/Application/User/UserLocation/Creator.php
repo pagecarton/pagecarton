@@ -96,7 +96,7 @@ class Application_User_UserLocation_Creator extends Application_User_UserLocatio
 			$this->getForm()->setBadnews( 'Could not add a new address. Possibly trying to add an address twice.' );
 			$this->setViewContent( $this->getForm()->view(), true );
 		}
-	//	$this->setViewContent( '<p>What Next? <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/verify/get/mode/CreditCard/">Verify Credit/Debit Card</a>.</p>' );		
+	//	$this->setViewContent( self::__( '<p>What Next? <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/verify/get/mode/CreditCard/">Verify Credit/Debit Card</a>.</p>' ) );		
     }
 	// END OF CLASS
 }

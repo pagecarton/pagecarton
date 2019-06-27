@@ -46,7 +46,7 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
             $each->fakeValues = array( 'default_layout' => $data['layout_name'] );
             if( ! $each->init() )
             {
-                $this->setViewContent( '<p class="badnews">An error was encountered while changing the theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">An error was encountered while changing the theme.</p>' ) ); 
                 return false;
             }
             $this->setViewContent( '<p class="goodnews">Theme successfully set as main site theme. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/PageCarton_NewSiteWizard">New Website Wizard</a></p>', true );   

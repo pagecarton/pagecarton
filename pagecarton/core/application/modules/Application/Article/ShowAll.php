@@ -166,20 +166,20 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{ 
 				$this->_parameter['markup_template'] = null;
 				$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-			//	return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
+			//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 			}
 			catch( Exception $e )
 			{ 
 				$this->_parameter['markup_template'] = null;
 				$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-			//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+			//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 			}
 		}
 		catch( Exception $e )
 		{
             //  Alert! Clear the all other content and display whats below.
-        //    $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+        //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
 		}
 	//	var_export( $this->getDbData() );
@@ -1011,6 +1011,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['document_url_no_resize'] = $data['document_url']; 
 		//	self::v( $data['document_url'] );  
 		//	var_export( Ayoola_Doc::uriToPath( $data['document_url'] ) );
+			$data['document_url_photoviewer'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
 			if( $fileP = Ayoola_Doc::uriToPath( $data['document_url'] ) )
 			{
 				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?&url=' . @$data['document_url'] . '&document_time=' . @filemtime( $fileP ) . ''; 

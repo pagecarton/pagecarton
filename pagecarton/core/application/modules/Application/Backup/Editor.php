@@ -43,7 +43,7 @@ class Application_Backup_Editor extends Application_Backup_Abstract
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 	//	$this->setViewContent( '<span class="boxednews goodnews">Success.</span>', true );
-	//	$this->setViewContent( '<span class="boxednews greynews">Backup file saved successfully.</span>' );
+	//	$this->setViewContent( self::__( '<span class="boxednews greynews">Backup file saved successfully.</span>' ) );
 //		$this->setViewContent( '', true );
 	//	var_export( $values );
 	//	if( $values['backup_type'] === 'export' )

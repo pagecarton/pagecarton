@@ -126,7 +126,7 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 			//			var_export( __LINE__ );
 			if( @$_GET['previous_url'] )
 			{
-				$this->setViewContent( '<p class="pc-notify-info">Proceed to previous link ( <a href="' . $_GET['previous_url'] . '">' . $_GET['previous_url'] . ' ) </a></p>' );
+				$this->setViewContent( self::__( '<p class="pc-notify-info">Proceed to previous link ( <a href="' . $_GET['previous_url'] . '">' . $_GET['previous_url'] . ' ) </a></p>' ) );
 			//	header( 'Location: ' . $_GET['previous_url'] );
 			//	exit();
 			}

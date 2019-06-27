@@ -49,9 +49,9 @@ class Application_Article_Type_Quiz_WhitelistImport extends Application_Article_
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			if( ! self::isOwner( $data['user_id'] ) && ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }
-			$this->setViewContent( '<h3>Bulk Email Address Invitation List!</h3>' );			
-			$this->setViewContent( '<p>Create an invitation list for: "' . $data['article_title'] . '" or <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Quiz_Whitelist/?article_url=' . $data['article_url'] . '">Standard Import List>></a></p>' );	  		
-			$this->setViewContent( '<p>Paste email addresses below</p>' );			
+			$this->setViewContent( self::__( '<h3>Bulk Email Address Invitation List!</h3>' ) );			
+			$this->setViewContent( self::__( '<p>Create an invitation list for: "' . $data['article_title'] . '" or <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Quiz_Whitelist/?article_url=' . $data['article_url'] . '">Standard Import List>></a></p>' ) );	  		
+			$this->setViewContent( self::__( '<p>Paste email addresses below</p>' ) );			
 			$this->createForm( 'Continue...', '', $data );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -85,14 +85,14 @@ class Application_Article_Type_Quiz_WhitelistImport extends Application_Article_
 		{ 
 		//	$this->_parameter['markup_template'] = null;
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
 		catch( Exception $e )
 		{ 
 			//	self::v( $e->getMessage() );
 		//	$this->_parameter['markup_template'] = null;
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
 	
     } 

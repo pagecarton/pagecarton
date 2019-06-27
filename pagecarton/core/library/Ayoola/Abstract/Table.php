@@ -428,13 +428,13 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			$class->initOnce();
 			if( ! $formV = $class->getForm()->getValues() )
 			{
-				$this->setViewContent( '<h3 style="margin: 1em 0;">Login to continue</h3>' );
+				$this->setViewContent( self::__( '<h3 style="margin: 1em 0;">Login to continue</h3>' ) );
 				$this->setViewContent( $class->view() );
 				return false;
 			}
 			else
 			{
-		//		$this->setViewContent( '<h2 style="margin: 1em 0;">Continue as @' . Ayoola_Application::getUserInfo( 'email' ) . '</h2>' );
+		//		$this->setViewContent( self::__( '<h2 style="margin: 1em 0;">Continue as @' . Ayoola_Application::getUserInfo( 'email' ) . '</h2>' ) );
 				return true;
 			}
 		}
@@ -457,14 +457,14 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			$class->initOnce();
 			if( ! $formV = $class->getForm()->getValues() )
 			{
-				$this->setViewContent( '<h2 style="margin: 1em 0;">Tell us about yourself first...</h2>' );
-				$this->setViewContent( '<p style="margin: 1em 0;">You do not have a profile on your account. Create a free public profile before you can start publishing posts.</p>' );
+				$this->setViewContent( self::__( '<h2 style="margin: 1em 0;">Tell us about yourself first...</h2>' ) );
+				$this->setViewContent( self::__( '<p style="margin: 1em 0;">You do not have a profile on your account. Create a free public profile before you can start publishing posts.</p>' ) );
 				$this->setViewContent( $class->view() );
 				return false;
 			}
 			else
 			{
-			//	$this->setViewContent( '<h2>Continue as @' . $formV['profile_url'] . '</h2>' );
+			//	$this->setViewContent( self::__( '<h2>Continue as @' . $formV['profile_url'] . '</h2>' ) );
 				return true;
 			}
 		}

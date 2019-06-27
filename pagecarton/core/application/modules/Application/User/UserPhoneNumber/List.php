@@ -34,7 +34,7 @@ class Application_User_UserPhoneNumber_List extends Application_User_UserPhoneNu
      */
 	protected function init()
     {
-		$this->setViewContent( '<h4>Personal Address Informations. <span class="goodnews"><a title="Add new Address" rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_UserPhoneNumber_Creator/">+</a></span></h4>' );
+		$this->setViewContent( self::__( '<h4>Personal Address Informations. <span class="goodnews"><a title="Add new Address" rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_UserPhoneNumber_Creator/">+</a></span></h4>' ) );
 		$this->setViewContent( $this->getList() );
     } 
 	

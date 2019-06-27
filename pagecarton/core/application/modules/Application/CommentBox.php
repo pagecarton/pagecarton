@@ -114,10 +114,10 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			{ 
 				$this->createForm( 'Post Another Comment', $fieldset );
 				$this->setViewContent( $this->getForm()->view(), true );
-				$this->setViewContent( '<div class="goodnews">Comment added successfully.</div>' ); 
+				$this->setViewContent( self::__( '<div class="goodnews">Comment added successfully.</div>' ) ); 
 				if( empty( $values['profile_url'] ) )
 				{
-					$this->setViewContent( '<div class="pc-notify-info">Save your profile to be able to manage your future comments on this website and also post a display picture. <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Profile_Creator\' );" href="javascript:" >Save Profile!</a></div>' ); 
+					$this->setViewContent( self::__( '<div class="pc-notify-info">Save your profile to be able to manage your future comments on this website and also post a display picture. <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Profile_Creator\' );" href="javascript:" >Save Profile!</a></div>' ) ); 
 				}
 			}
 

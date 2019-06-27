@@ -70,7 +70,7 @@ class Application_Log_Clear extends Application_Log_Abstract
 		}
 		catch( Exception $e )
 		{ 
-			$this->setViewContent( '<span class="badnews boxednews">' . $e->getMessage() . '</span>' );
+			$this->setViewContent( self::__( '<span class="badnews boxednews">' . $e->getMessage() . '</span>' ) );
 			return false; 
 		}
     } 

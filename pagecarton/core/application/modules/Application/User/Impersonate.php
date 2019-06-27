@@ -44,13 +44,13 @@ class Application_User_Impersonate extends Application_User_Abstract
 			{
 				// return this user
 				Ayoola_Access_Login::login( $userInfo );
-				$this->setViewContent( '<span class="boxednews badnews centerednews">Impersonation not successful!</span>' ); 
+				$this->setViewContent( self::__( '<span class="boxednews badnews centerednews">Impersonation not successful!</span>' ) ); 
 				
 			}
 			else
 			{
-				$this->setViewContent( '<span class="boxednews normalnews centerednews"> You are signed in as ' . $data['username'] . '!</span>' ); 
-				$this->setViewContent( '<a class="boxednews goodnews centerednews" href="' . Ayoola_Application::getUrlPrefix() . '/account">Go to account! ' . $data['username'] . '!</a>' ); 
+				$this->setViewContent( self::__( '<span class="boxednews normalnews centerednews"> You are signed in as ' . $data['username'] . '!</span>' ) ); 
+				$this->setViewContent( self::__( '<a class="boxednews goodnews centerednews" href="' . Ayoola_Application::getUrlPrefix() . '/account">Go to account! ' . $data['username'] . '!</a>' ) ); 
 			}
 	//		var_export( $data );
 		}

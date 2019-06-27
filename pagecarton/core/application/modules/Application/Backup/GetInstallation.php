@@ -176,7 +176,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
         { 
             //  Alert! Clear the all other content and display whats below.
             $this->setViewContent( $e->getMessage() ); 
-            $this->setViewContent( 'Theres an error in the code' ); 
+            $this->setViewContent( self::__( 'Theres an error in the code' ) ); 
             return false; 
         }
 	}

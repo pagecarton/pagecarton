@@ -103,7 +103,7 @@ class Application_User_UserEmail_Creator extends Application_User_UserEmail_Abst
 					if( true !== @$response['data'] )
 					{
 				//		$this->getForm()->setBadnews( 'Database error occurred while adding a new e-mail address to your account.' );
-						$this->setViewContent( '<p class="badnews">Database error occurred while adding a new e-mail address to your account.</p>' );	
+						$this->setViewContent( self::__( '<p class="badnews">Database error occurred while adding a new e-mail address to your account.</p>' ) );	
 					//	$this->setViewContent( $this->getForm()->view(), true );
 						return false; 
 					}
@@ -113,13 +113,13 @@ class Application_User_UserEmail_Creator extends Application_User_UserEmail_Abst
 					if( ! $this->insertDb() )
 					{ 
 					//	$this->getForm()->setBadnews( 'Database error occurred while adding a new e-mail address to your account.' );
-						$this->setViewContent( '<p class="badnews">Database error occurred while adding a new e-mail address to your account.</p>' );	
+						$this->setViewContent( self::__( '<p class="badnews">Database error occurred while adding a new e-mail address to your account.</p>' ) );	
 					//	$this->setViewContent( $this->getForm()->view(), true );
 						return false; 
 					}
 				break;
 			}
-			$this->setViewContent( '<p>E-mail address saved to your account.</p>' );	
+			$this->setViewContent( self::__( '<p>E-mail address saved to your account.</p>' ) );	
 */	
 		}
 		catch( Ayoola_Exception $e )
@@ -128,7 +128,7 @@ class Application_User_UserEmail_Creator extends Application_User_UserEmail_Abst
 			$this->getForm()->setBadnews( 'Could not add a new e-mail address.' );
 			$this->setViewContent( $this->getForm()->view(), true );
 		}
-	//	$this->setViewContent( '<p>What Next? <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/verify/get/mode/CreditCard/">Verify Credit/Debit Card</a>.</p>' );		
+	//	$this->setViewContent( self::__( '<p>What Next? <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/verify/get/mode/CreditCard/">Verify Credit/Debit Card</a>.</p>' ) );		
     }
 	// END OF CLASS
 }

@@ -51,7 +51,7 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                 if( $html = self::task( $data ) )
                 {
                     $this->setViewContent( $html, true );
-                    $this->setViewContent( '<div class="goodnews">Cron task processed successfully</div>' );
+                    $this->setViewContent( self::__( '<div class="goodnews">Cron task processed successfully</div>' ) );
                 }
             }
             else
@@ -98,7 +98,7 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                     $runData = array( 'cron_id' => $data['table_id'], 'runtime' => $cTime, );
                     PageCarton_Cron_Run_Table::getInstance()->insert( $runData );
                 }
-                $this->setViewContent( '<div class="goodnews">' . $u . ' cron tasks processed successfully</div>' );
+                $this->setViewContent( self::__( '<div class="goodnews">' . $u . ' cron tasks processed successfully</div>' ) );
             }
 
             //  if you are not admin, don't see updates.
@@ -135,7 +135,7 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                 }
                 $html = $class::viewInline(  $parameters );
 		//	    $this->setViewContent( $html, true );
-		//	    $this->setViewContent( '<div class="goodnews">Cron task processed successfully</div>' );
+		//	    $this->setViewContent( self::__( '<div class="goodnews">Cron task processed successfully</div>' ) );
             }
 	//		$data['cron_run_time_history'] = $data['cron_run_time_history'] ? : array();
 	//		$data['cron_run_time_history'][] = time();
@@ -148,7 +148,6 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
             return false; 
         }
 	}

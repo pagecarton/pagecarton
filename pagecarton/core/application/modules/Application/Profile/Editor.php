@@ -53,7 +53,7 @@ class Application_Profile_Editor extends Application_Profile_Abstract
 		//	var_export( $data );
 			//			var_export( $data['quiz_correct_option'] );
 			$this->createForm( 'Continue...', 'Edit "' . $data['display_name'] . '"', $data );
-//			$this->setViewContent( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' );
+//			$this->setViewContent( self::__( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' ) );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
@@ -82,10 +82,10 @@ class Application_Profile_Editor extends Application_Profile_Abstract
 									<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Share/?url=/' . $values['profile_url'] . '%&title=' . $values['display_name'] . '\' );" href="javascript:">Share</a>
 									
 									</div>', true );
-	//		$this->setViewContent( '<div class="boxednews greynews" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+	//		$this->setViewContent( self::__( '<div class="boxednews greynews" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );  
 			if( @$_GET['previous_url'] )
 			{
-				$this->setViewContent( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
+				$this->setViewContent( self::__( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' ) );
 			}
 			$this->_objectData['profile_url'] = $values['profile_url'];  
 						

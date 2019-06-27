@@ -49,8 +49,8 @@ class Application_Article_Type_Quiz_Whitelist extends Application_Article_Type_Q
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }
-			$this->setViewContent( '<h3>Build Invitation List!</h3>' );			
-			$this->setViewContent( '<p>Create an invitation list for: "' . $data['article_title'] . '" or <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Quiz_WhitelistImport/?article_url=' . $data['article_url'] . '">Bulk email address Import>></a></p>' );		 	
+			$this->setViewContent( self::__( '<h3>Build Invitation List!</h3>' ) );			
+			$this->setViewContent( self::__( '<p>Create an invitation list for: "' . $data['article_title'] . '" or <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Quiz_WhitelistImport/?article_url=' . $data['article_url'] . '">Bulk email address Import>></a></p>' ) );		 	
 			$this->createForm( 'Continue...', '', $data ); 
 			$this->setViewContent( $this->getForm()->view() );
 		//	var_export( $this->getForm()->getBadnews() );
@@ -68,7 +68,7 @@ class Application_Article_Type_Quiz_Whitelist extends Application_Article_Type_Q
 			
 			
 			$this->setViewContent( '<h3>Success!</h3>', true );
-			$this->setViewContent( '<p>You now have a total of ' . count( @$values['whitelist_email_address'] ) . ' invitee(s) for this test titled "' . $data['article_title'] . '"</p>' );
+			$this->setViewContent( self::__( '<p>You now have a total of ' . count( @$values['whitelist_email_address'] ) . ' invitee(s) for this test titled "' . $data['article_title'] . '"</p>' ) );
 			//	Send email
 			
 			//	Get the profile information to personalize email.
@@ -124,7 +124,7 @@ class Application_Article_Type_Quiz_Whitelist extends Application_Article_Type_Q
 						$profileInfo['post_whitelist_allowed'] = $profileInfo['post_whitelist_allowed'] ? : 0;
 						if( $profileInfo['post_whitelist_allowed'] < 1 )
 						{
-							$this->setViewContent( '<p>The number of users can can be invited has been exhausted. Please contact administrator to reload your account with more passes.</p>' );
+							$this->setViewContent( self::__( '<p>The number of users can can be invited has been exhausted. Please contact administrator to reload your account with more passes.</p>' ) );
 							break 2;
 						}
 						$profileInfo['post_whitelist_log'][] = $values['whitelist_email_address'][$eachOne];
@@ -184,7 +184,7 @@ Best Regards,
 http://' . Ayoola_Page::getDefaultDomain() . '/' . @$data['profile_url'] . '
 ';
 				@self::sendMail( $emailInfo );
-				$this->setViewContent( '<p>Email notification has been sent to:  "' . $values['whitelist_email_address'][$eachOne] . '".</p>' );
+				$this->setViewContent( self::__( '<p>Email notification has been sent to:  "' . $values['whitelist_email_address'][$eachOne] . '".</p>' ) );
 			}
 
 		}
@@ -192,14 +192,14 @@ http://' . Ayoola_Page::getDefaultDomain() . '/' . @$data['profile_url'] . '
 		{ 
 		//	$this->_parameter['markup_template'] = null;
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
 		catch( Exception $e )
 		{ 
 			//	self::v( $e->getMessage() );
 		//	$this->_parameter['markup_template'] = null;
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
 	
     } 

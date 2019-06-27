@@ -78,11 +78,11 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					$formName = @$_REQUEST['form_name'] ? : $this->getParameter( 'form_name' );
 					if( ! $this->getParameter( 'new_form' ) )
 					{
-						$this->setViewContent( '<p class=" badnews">Form not set up yet.</p>' );
+						$this->setViewContent( self::__( '<p class=" badnews">Form not set up yet.</p>' ) );
 					}
 					else
 					{
-						$this->setViewContent( '<p class=" goodnews">New custom form ready.</p>' );
+						$this->setViewContent( self::__( '<p class=" goodnews">New custom form ready.</p>' ) );
 					}
 					if( $formName  )
 					{
@@ -117,7 +117,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			if( ! $this->getParameter( 'hide_form_information' ) && ! $_POST )
 			{
 				$this->setViewContent( '<h1 class="pc-heading">' . $data['form_title'] . '</h1>', true );
-				$this->setViewContent( '<p style="margin-top:2em;margin-bottom:2em;">' . ( strip_tags( $data['form_description'] ) === $data['form_description'] ? nl2br( $data['form_description'] ) : $data['form_description'] ) . '</p>'  );
+				$this->setViewContent( self::__( '<p style="margin-top:2em;margin-bottom:2em;">' . ( strip_tags( $data['form_description'] ) === $data['form_description'] ? nl2br( $data['form_description'] ) : $data['form_description'] ) . '</p>' )  );
 			}
 			if( self::hasPriviledge() )
 			{
@@ -128,7 +128,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 					<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_List/\' )" class="pc-btn pc-btn-small">Manage Forms</a>
 					';
 */			
-	//			$this->setViewContent( '<p>' . $manageForms . '</p>' );
+	//			$this->setViewContent( self::__( '<p>' . $manageForms . '</p>' ) );
 			}
 			$this->setViewContent( $this->getForm()->view() );
 			
@@ -227,7 +227,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		{ 
 			$this->_parameter['markup_template'] = null;
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
     } 
 	

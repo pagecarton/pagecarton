@@ -149,7 +149,7 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 			@unlink( $filename . '.gz' );
 			exit();
 			
-		//	$this->setViewContent( '<p class="boxednews goodnews">Plugin has been saved successfuly.</p>, true' );
+		//	$this->setViewContent( self::__( '<p class="boxednews goodnews">Plugin has been saved successfuly.</p>, true' ) );
 		}
 		catch( Exception $e )
 		{ 

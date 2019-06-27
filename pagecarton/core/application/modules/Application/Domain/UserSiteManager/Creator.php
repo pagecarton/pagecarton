@@ -68,10 +68,10 @@ class Application_Domain_UserSiteManager_Creator extends Application_Profile_Cre
             New site created successfully. 
             <a href="' . $fullUrl . '/new-site-wizard" target="_blank">New Website Wizard</a>
         </div>', true );
-//		$this->setViewContent( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+//		$this->setViewContent( self::__( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );  
 		if( @$_GET['previous_url'] )
 		{
-			$this->setViewContent( '<div class="pc-info-notify"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
+			$this->setViewContent( self::__( '<div class="pc-info-notify"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' ) );
 		}
 		$this->_objectData['profile_url'] = $values['profile_url']; 
 	//	$this->setViewContent(  );

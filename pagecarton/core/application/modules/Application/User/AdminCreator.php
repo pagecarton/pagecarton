@@ -76,7 +76,7 @@ class Application_User_AdminCreator extends Application_User_Creator
 		}
 	//	$auth = new Ayoola_Access();
 		$this->createForm( 'Create Admin Account' );
-	//	$this->setViewContent( '<h2>Sign up for a free account.</h2>' ); 
+	//	$this->setViewContent( self::__( '<h2>Sign up for a free account.</h2>' ) ); 
  		$this->setViewContent( $this->getForm()->view() );
 		
 		//	Try to use curent userInfo
@@ -141,11 +141,11 @@ class Application_User_AdminCreator extends Application_User_Creator
 			return false;
 		}
  		$this->setViewContent( '<h2>Account Opening Confirmation:</h2>', true );
- 		$this->setViewContent( '<p>Your account opening process is now complete. An email has been sent to you, containing how to activate and verify your new account.</p>' );
- 		$this->setViewContent( '<h4>What Next?</h4>' );
- 		$this->setViewContent( '<p>Go to </p>' );
- 		$this->setViewContent( '<ul>' );
- 		$this->setViewContent( '<li><a href="' . Ayoola_Page::getPreviousUrl() . '">Previous page,</a></li>' );
+ 		$this->setViewContent( self::__( '<p>Your account opening process is now complete. An email has been sent to you, containing how to activate and verify your new account.</p>' ) );
+ 		$this->setViewContent( self::__( '<h4>What Next?</h4>' ) );
+ 		$this->setViewContent( self::__( '<p>Go to </p>' ) );
+ 		$this->setViewContent( self::__( '<ul>' ) );
+ 		$this->setViewContent( self::__( '<li><a href="' . Ayoola_Page::getPreviousUrl() . '">Previous page,</a></li>' ) );
 		
     }
 	

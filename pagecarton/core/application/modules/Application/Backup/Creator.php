@@ -93,7 +93,7 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 					
 					$this->setViewContent( '<p class="goodnews">Archive for installation has been created successfully. It is now accessible publicly for download at <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Backup_GetInstallation/">' . 'http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() .  '/widgets/Application_Backup_GetInstallation/</a></p>', true );
 	//				$this->setViewContent( '<p class="goodnews">Archive for installation has been created successfully. It is now accessible publicly for download at <a href="' . self::getInstallerLink() . '?r=' . time() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() .  self::getInstallerLink() . '</a></p>', true );
-					$this->setViewContent( '<p class="">The script to install the archive on a new server has been auto-generated and could be found on this link <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/' . $simpleFilename . '?r=' . time() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() . '/' . $simpleFilename . '</a></p>' );
+					$this->setViewContent( self::__( '<p class="">The script to install the archive on a new server has been auto-generated and could be found on this link <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/' . $simpleFilename . '?r=' . time() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() . '/' . $simpleFilename . '</a></p>' ) );
 				break;
 				case 'export':
 					if( ! $values  = $this->createFile() ){ return false; }
@@ -101,7 +101,7 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 					$values['export_information']['time'] = time();
 					if( ! $data = $this->insertDb( $values ) ){ return false; }
 					$this->setViewContent( '<p class="boxednews goodnews">Backup created successfully.</p>', true );
-					$this->setViewContent( '<p class="">Export URL is "http://' . DOMAIN . '' . Ayoola_Application::getUrlPrefix() .'/tools/classplayer/get/object_name/Application_Backup_Export/?backup_id=' . $data['backup_id'] . '"</p>' );
+					$this->setViewContent( self::__( '<p class="">Export URL is "http://' . DOMAIN . '' . Ayoola_Application::getUrlPrefix() .'/tools/classplayer/get/object_name/Application_Backup_Export/?backup_id=' . $data['backup_id'] . '"</p>' ) );
 				break;
 				default:
 					if( ! $values  = $this->createFile() ){ return false; }

@@ -57,7 +57,7 @@ class Ayoola_Page_Layout_Preview extends Ayoola_Page_Layout_Abstract
 			$PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
 			if( ! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE )
 			{
-                $this->setViewContent( '<p class="badnews">Theme files not found.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Theme files not found.</p>' ) ); 
 				//	not found
 				return false;
 			}

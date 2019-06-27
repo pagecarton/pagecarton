@@ -84,17 +84,17 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 
             if( $layout['article_url'] === @$_GET['install'] && empty( $_GET['update'] ) )
             {
-                $this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . ' Installed</h1>' );
-                $this->setViewContent( '<a class="pc-btn" href="#" onclick="location.search+=\'&update=' . $_GET['install'] . '\'">Update</a></p>' );
+                $this->setViewContent( self::__( '<h1 class="pc-heading">' . @$_GET['title'] . ' Installed</h1>' ) );
+                $this->setViewContent( self::__( '<a class="pc-btn" href="#" onclick="location.search+=\'&update=' . $_GET['install'] . '\'">Update</a></p>' ) );
             }
             else
             {
                 $this->createConfirmationForm( $install . ' ' . static::$_pluginType . '', 'Download and install latest ' . static::$_pluginType . ' files and its components' );
-                $this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' );
+                $this->setViewContent( self::__( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' ) );
                 $this->setViewContent( $this->getForm()->view() );
             }
             $photoUrl = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . $_GET['install'] . '';
-			$this->setViewContent( '<img style="width:100%;" src="' . $photoUrl . '&width=1500&height=600" alt="">' );
+			$this->setViewContent( self::__( '<img style="width:100%;" src="' . $photoUrl . '&width=1500&height=600" alt="">' ) );
 			$this->setViewContent( self::getMenu() );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
             
@@ -179,16 +179,16 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             catch( Exception $e )
             {
             //    echo $e->getMessage();
-            //    $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
+            //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
             }
         //    var_export( $class->getForm()->getValues() );
         //    var_export( $class->getForm()->getBadnews() );
-        //	$this->setViewContent( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' );
+        //	$this->setViewContent( self::__( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' ) );
             if( ! $class->getForm()->getBadnews() )
             {
                 
                 $this->setViewContent( $class->view(), true );
-             //   $this->setViewContent( '<p class="badnews">' . array_pop( $class->getForm()->getBadnews() ) . '</p>' );
+             //   $this->setViewContent( self::__( '<p class="badnews">' . array_pop( $class->getForm()->getBadnews() ) . '</p>' ) );
             }
             else
             {
@@ -245,7 +245,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
         else
         {
         //    $this->setViewContent( '<h2 class="">Upload theme manually</h2>', true );
-            $this->setViewContent( '<p class="pc-notify-info">Connect to the internet to download plugins directly from <a target="_blank" href="https://plugins.pagecarton.org">PageCarton Plugins </a> or download manually and upload here. <a target="_blank" href="https://plugins.pagecarton.org"><i class="fa fa-external-link pc_give_space"></i> PageCarton plugins </a></p>' );
+            $this->setViewContent( self::__( '<p class="pc-notify-info">Connect to the internet to download plugins directly from <a target="_blank" href="https://plugins.pagecarton.org">PageCarton Plugins </a> or download manually and upload here. <a target="_blank" href="https://plugins.pagecarton.org"><i class="fa fa-external-link pc_give_space"></i> PageCarton plugins </a></p>' ) );
             $this->setViewContent( Ayoola_Extension_Import::viewInLine() );
             return false;
         }
