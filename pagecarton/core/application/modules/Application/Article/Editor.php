@@ -52,6 +52,10 @@ class Application_Article_Editor extends Application_Article_Abstract
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToView( $data )  && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }  
 		//		self::v( $data );
+            if( ! $this->requireRegisteredAccount() )
+            {
+                return false;
+            }
 			if( ! $this->requireProfile() )
 			{
 				return false;
