@@ -48,11 +48,25 @@ $dir        = $newDir        = $dir . '/pagecarton';
 $temDirMain = $dir . '/temp/';
 $temDir     = $dir . '/temp/install/';
 
-$oldAppPath = null;
+$oldAppPath  = null;
+$filename    = 'pc_installer.php.tar.gz';
+$content     = null;
+$badnews     = null;
+$remoteSite  = 'http://updates.pagecarton.org';
+$remoteSite2 = 'http://s1.updates.pagecarton.org';
+$remoteSite3 = 'http://s2.updates.pagecarton.org';
 
 //    Create dir
 if (!is_dir($dir)) {
-    mkdir($dir, 0777, true);
+
+    //ensure we have the access before creating dirs
+    if (is_writable(dirname($dir))) {
+        if (!mkdir($dir, 0777, true)) {
+            $badnews = "Error creating directory: <code class='annotated'>$dir</code>";
+        }
+    } else {
+        $badnews = "<p>The directory <code class='annotated'>" . dirname($dir) . "</code> is not writeable. Please grant access to the directory and try again.</p>";
+    }
 
     if (is_dir($oldDir . DS . 'application')) {
         //    this is an upgrade from before we had the new dir structure of /pagecarton
@@ -64,21 +78,33 @@ if (!is_dir($dir)) {
 //    introducing separate core dir to make this one easily replaceable during upgrades
 $newDir2 = $newDir . DS . 'core';
 if (!is_dir($newDir2)) {
-    mkdir($newDir2, 0777, true);
-}
 
-//    Retrieve the file
-$filename    = 'pc_installer.php.tar.gz';
-$content     = null;
-$badnews     = null;
-$remoteSite  = 'http://updates.pagecarton.org';
-$remoteSite2 = 'http://s1.updates.pagecarton.org';
-$remoteSite3 = 'http://s2.updates.pagecarton.org';
+    //ensure we have the access before creating dirs
+    if (is_writable(dirname($newDir2))) {
+        if (!mkdir($newDir2, 0777, true)) {
+            $badnews = "Error creating directory: <code class='annotated'>$newDir2</code>";
+        }
+    } else {
+        $badnews = "
+        <p>
+        PageCarton installer could not create <code class='annotated'>$newDir2</code> because
+		there is no access to create <code class='annotated'>" . basename(dirname($newDir2)) . "</code> folder inside
+        <code class='annotated'>" . dirname(dirname($newDir2)) . "</code>.
+        </p>
+		<p>
+		Please adjust the permission on <code class='annotated'>" . dirname(dirname($newDir2)) . "</code> so that the server can write to it.
+		However, if you do not want server access to <code class='annotated'>" . dirname(dirname($newDir2)) . "</code>,
+		you can manully create a folder named <code class='annotated'>" . basename(dirname($newDir2)) . "</code> inside <code class='annotated'>" . dirname(dirname($newDir2)) . "</code>
+		and then grant server write access to the <code class='annotated'>" . dirname($newDir2) . "</code> directory only.
+		</p>
+		";
+    }
+}
 
 //$filename signifies the file that downloaded installation will be written to in the current directory. Hence, it
 //is important that curr dir is writeable to PHP
-if (is_writable($filename)) {
-    $badnews = "The current directory (" . realpath(__DIR__) . ") is not writeable for your web server process. Please check this folder permission and try again";
+if (!is_writable(__DIR__)) {
+    $badnews = "The current directory <code class='annotated'>" . realpath(__DIR__) . "</code> is not writeable for your web server process. Please check this folder permission and try again.";
 }
 
 defined('APPLICATION_DIR') || define('APPLICATION_DIR', $newDir2);
@@ -128,20 +154,20 @@ $class_dependencies = ["PharData"];
 
 foreach ($function_dependencies as $key => $each) {
     if (!function_exists($key)) {
-        $badnews .= '<p>An important component is missing on your web server. Please ensure "' . $each . '" library is installed and try again.</p>';
+        $badnews .= '<p>An important component is missing on your web server. Please ensure <code class="annotated">' . $each . '</code> library is installed and try again.</p>';
     }
 }
 
 foreach ($class_dependencies as $class_dependency) {
     if (!class_exists($class_dependency)) {
-        $badnews .= "<p>An important component is missing on your web server. Please ensure that $class_dependency is installed and try again.</p>";
+        $badnews .= "<p>An important component is missing on your web server. Please ensure that <code class='annotated'>$class_dependency</code> is installed and try again.</p>";
     }
 }
 
 if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
     //    echo 'I am at least PHP version 5.3.0, my version: ' . PHP_VERSION . "\n";
 } else {
-    $badnews .= '<p>PageCarton requires PHP 5.3 or later. You are running version "' . PHP_VERSION . '". We recommend PHP 7.0 or later.</p>';
+    $badnews .= '<p>PageCarton requires PHP 5.3 or later. You are running version <code class="annotated">' . PHP_VERSION . '</code>. We recommend PHP 7.0 or later.</p>';
 }
 
 //    Now use back-up server
@@ -153,20 +179,25 @@ if (!$res = fetchLink($remoteSite . '/pc_check.txt')) {
 }
 
 //non-null bad news signifies that something went wrong. So ensure that everyhting is fine before proceeding (in case of non-nullness, $badnews already contains info about what went wrong)
-if (is_null($badnews) || (!is_null($badnews) && (@$_GET['stage'] != InstallationStages::START))) {
+if (
+    !isset($_GET['stage']) ||
+    (isset($_GET['stage']) && empty($_GET['stage'])) ||
+    is_null($badnews) ||
+    !isset($_GET['stage']) ||
+    ((isset($_GET['stage']) && !empty($_GET['stage']) && ($_GET['stage'] == InstallationStages::START)))) {
 
     switch (@$_GET['stage']) {
 
         case InstallationStages::START:
             $content .= '<h1>PageCarton Installation</h1>';
             $content .= '<p>A tool to build a great website in 2 hrs or less - fast and easy. Automate things programmers & designers spend several hours putting together. When installed on your server, PageCarton will help you publish contents to the internet.</p>';
-            $content .= '<p>Follow these simple steps to install PageCarton on your server. To find out more about PageCarton, visit <a target="_blank" href="http://www.PageCarton.org/">www.PageCarton.org</a>. To continue installation, click the button below if you agree to be bound by the license terms below.</p>';
+            $content .= '<p>Follow these simple steps to install PageCarton on your server. To find out more about PageCarton, visit <a target="_blank" href="http://www.PageCarton.org/">www.PageCarton.org</a>. To continue installation, click the button below if you agree to be bound by the license terms below:</p>';
             //        $content .= '<input value="Continue..." type="button" onClick="location.href=`?stage=licence`" />';
             //      break;
             //        case 'licence':
             //            $content .= '<h1>Continue installation, only if you agree to be bound by the following license terms.</h1>';
             //        $content .= '<p>Please note that the license terms may change from time to time. Changes will always be on <a href="http://PageCarton.org/license.txt">http://www.PageCarton.org/license.txt</a>.</p>';
-            $content .= '<textarea rows="10" style="min-width:90%;display:block;">' . ((@file_get_contents('license.txt') ?: @fetchLink($remoteSite . '/license.txt')) ?: @fetchLink($remoteSite2 . '/license.txt')) . '</textarea>';
+            $content .= '<textarea rows="10" class="leading-normal" style="min-width:90%;display:block; margin-top:20px; font-family:mono;">' . ((@file_get_contents('license.txt') ?: @fetchLink($remoteSite . '/license.txt')) ?: @fetchLink($remoteSite2 . '/license.txt')) . '</textarea>';
             //        $content .= '<p>Having an active internet connection is preferred when installing PageCarton</p>';
             $content .= '<input value="I agree" type="button" onClick = "location.href=`?stage=' . InstallationStages::DOWNLOAD . '`" />';
             break;
@@ -174,14 +205,15 @@ if (is_null($badnews) || (!is_null($badnews) && (@$_GET['stage'] != Installation
         case InstallationStages::DOWNLOAD:
             //    Check if we can write in the application path
             if (!is_writable(APPLICATION_DIR)) {
-                $badnews .= '<p>Application directory is not writable. Please ensure you have correct permissions set on this directory (' . APPLICATION_DIR . '). This is where PageCarton will be installed.</p>';
+                $badnews .= '<p>Application directory is not writable. Please ensure you have correct permissions set on <code class="annotated">' . APPLICATION_DIR . '</code>. This is where PageCarton will be installed.</p>';
 
                 //instead of forcing user to make their ../doc_root writeable to us, they may choose to create the required folder
-                $root_pc_folder = dirname(APPLICATION_DIR);
-                $outside_root_pc_folder = dirname($outside_doc_root);
+                $root_pc_folder         = dirname(APPLICATION_DIR);
+                $outside_root_pc_folder = dirname($root_pc_folder);
                 $badnews .= "<p>
-                If you do not want to grant server write access to $outside_root_pc_folder, you can simply create $root_pc_folder inside $outside_root_pc_folder,
-                and then grant server write access to only $root_pc_folder
+				If you do not want to grant server write access to <code class='annotated'>$outside_root_pc_folder</code>,
+				you can simply create a folder named <code class='annotated'>" . basename($root_pc_folder) . "</code> in the <code class='annotated'>$outside_root_pc_folder</code> directory,
+                and then grant server write access to only <code class='annotated'>$root_pc_folder</code>.
                 </p>";
                 break;
             }
@@ -203,10 +235,15 @@ if (is_null($badnews) || (!is_null($badnews) && (@$_GET['stage'] != Installation
                     $badnews .= '<p>Please try copying the files back into your web root again and restart your installation. You may also resolve this issue by connecting to the internet.</p>';
                     break;
                 }
-                $f ? file_put_contents($filename, $f) : null;
+
+                $bytes_written = file_put_contents($filename, $f);
+                if ($bytes_written === false) {
+                    $badnews .= "<p>PageCarton installer could not write downloaded data into <code class='annotated'>$filename</code></p>";
+                }
             }
+
             if (!is_readable($filename)) {
-                $badnews .= '<p>Downloaded application is not readable. Please ensure you have correct permissions set on this directory (' . APPLICATION_DIR . '). This is where PageCarton is being installed.</p>';
+                $badnews .= '<p>Downloaded application is not readable. Please ensure you have correct permissions set on <code class="annotated">' . APPLICATION_DIR . '</code>. This is where PageCarton is being installed.</p>';
                 break;
             }
             $content .= '<h1>PageCarton Ready for Installation</h1>';
@@ -382,14 +419,14 @@ if (is_null($badnews) || (!is_null($badnews) && (@$_GET['stage'] != Installation
             $modRewriteEnabled = get_headers($urlToLocalInstallerFile);
             $responseCode      = explode(' ', $modRewriteEnabled[0]);
             if (in_array('200', $responseCode)) {
-                $content .= '<p><input value="Proceed to Personalization" type="button" onClick = "location.href=`' . $prefix . '/widgets/name/Application_Personalization/`" /></p>';
+                $content .= '<br /><input value="Proceed to Personalization" type="button" onClick = "location.href=`' . $prefix . '/widgets/name/Application_Personalization/`" />';
             } else {
                 $content .= '<p>You do not have URL rewriting feature (e.g. mod-rewrite) on your webserver? PageCarton would work without it; But you would need to prefix your URLs with "index.php" when entering it on the web browser e.g. http://' . $_SERVER['HTTP_HOST'] . $prefix . '/index.php/page/url. On many of your pages, PageCarton will add this automatically.  </p>';
                 //    $content .= '<p><a href="index.php/widgets/name/Application_Personalization/"> Proceed to Personalization...</a></p>';
-                $content .= '<p><input value="Proceed to Personalization" type="button" onClick = "location.href=`index.php/widgets/name/Application_Personalization/`" /></p>';
+                $content .= '<br /><input value="Proceed to Personalization" type="button" onClick = "location.href=`index.php/widgets/name/Application_Personalization/`" />';
             }
             //    Self destroy file
-            unlink($filename);
+            @unlink($filename);//suppress warnings AARO refreshing the page (re-POSTing)
             //        $phar::unlinkArchive( $filename );
             //        unlink( $filename );
 
@@ -431,6 +468,11 @@ if (is_null($badnews) || (!is_null($badnews) && (@$_GET['stage'] != Installation
     }
 }
 
+//let's not start with errors
+if (!is_null($badnews) && !empty($badnews) && (empty($_GET['stage']) || $_GET['stage'] == InstallationStages::START)) {
+    $badnews = null;
+}
+
 /**
  * Class to ensure SOT (source-of-truth) identifiers for installation stages - The const props ensure that we don't introduce bugs when we have any reason to change names for any of the stage verbatim,
  * This will also make UI progress notification to be agnostic to the name of any of the installation stages
@@ -449,6 +491,13 @@ class InstallationStages
     public const SELFDESTRUCT              = "selfdestruct";
 
 }
+
+//Not all installation stages are visible to the user
+$gui_steps = [
+    InstallationStages::START            => "Licence Agreement",
+    InstallationStages::DOWNLOAD         => "Files Installation",
+    InstallationStages::INSTALL_COMPLETE => "Proceed to Personalization",
+];
 
 /**
  * Fetches a remote link. Lifted from Ayoola_Abstract_Viewable
@@ -546,36 +595,39 @@ function deleteDirectoryPlusContent($eachDir)
     return !is_dir($eachDir);
 }
 
-echo '
+?>
+
 <!DOCTYPE html>
-<html lang="en" style="background-color:#ccc;">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="">
 <title>PageCarton Installation</title>
+
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
 <style>
-body
-{
+body{
 	max-width: 720px;
 	margin: auto auto;
 }
-p
-{
+
+p{
 	margin-top: 1em;
 	margin-bottom: 1em;
 	text-align:justify;
 }
-textarea
-{
+
+textarea{
 	width: 100%;
 	background: inherit;
 	padding-top: 2em;
 }
+
 input[type="button"],
-input[type="submit"]
-{
+input[type="submit"]{
     -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
     -webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
     box-shadow: inset 0px 1px 0px 0px #45D6D6;
@@ -586,34 +638,660 @@ input[type="submit"]
     color: #FFFFFF;
     font-size: 14px;
     padding: 8px 18px;
-	margin-top: 1em;
-    text-decoration: none;
+	margin: 2.5em auto;
     text-transform: uppercase;
+    text-decoration: none;
 }
+
 input[type="button"]:hover,
-input[type="submit"]:hover
-{
+input[type="submit"]:hover{
     background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
     background-color:#34CACA;
 }
 
-</style>
-</head>
-<body style="padding:1em; background-color:#ccc;">
-<div>';
-if ($badnews) {
-    $a = '<h1>ERROR: ' . @$_GET['badnews'] . '</h1>';
-    $a .= '<p>While installing PageCarton, and error was encountered. Please contact your site administrator to find out if your system has the minimum requirement for installation.</p>';
-    $a .= $badnews;
-    $a .= '<input value="Try Again" type="button" onClick = "location.href=`?stage=' . InstallationStages::START . '`" />';
-    echo $a;
-} else {
-    echo $content;
-    //        echo '<p style="font-size:x-small; margin: 1em; text-align:center;">PageCarton version 1.7.5</p>';
+h1{
+    margin: auto;
 }
-echo '
-</div>
-</body>
-</html>';
 
+
+/***************************************************************************
+************************ P R O G R E S S   S T E P S ***********************
+****************************************************************************/
+
+.container {
+  width: 100%;
+  margin: 60px auto auto 70px;
+}
+.progressbar {
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+}
+.progressbar li {
+  list-style-type: none;
+  width: 25%;
+  float: left;
+  font-size: 12px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  color: #7d7d7d;
+}
+.progressbar li:before {
+  width: 30px;
+  height: 30px;
+  content: counter(step);
+  counter-increment: step;
+  line-height: 32px;
+  border: 2px solid #7d7d7d;
+  display: block;
+  text-align: center;
+  margin: 0 auto 10px auto;
+  border-radius: 50%;
+  background-color: white;
+}
+.progressbar li:after {
+  width: 100%;
+  height: 2px;
+  content: '';
+  position: absolute;
+  background-color: #7d7d7d;
+  top: 15px;
+  left: -50%;
+  z-index: -1;
+}
+.progressbar li:first-child:after {
+  content: none;
+}
+.progressbar li.active {
+  color: green;
+}
+.progressbar li.active:before {
+  border-color: #55b776;
+}
+.progressbar li.active + li:after {
+  background-color: #55b776;
+}
+
+/***************************************************************************
+************************ C O D E   A N N O T A T I O N *********************
+****************************************************************************/
+
+code {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-weight: 500;
+	vertical-align: baseline;
+	box-sizing: inherit;
+	font-family: monospace, sans-serif;
+	-moz-osx-font-smoothing: auto;
+	-webkit-font-smoothing: auto;
+	font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+	line-height: 1.25;
+	background-color: #f5f7fa;
+	color: #ed6c63;
+	font-size: 12px;
+	padding: 1px 2px 2px;
+}
+
+code.annotated {
+	background: rgba(238, 238, 238, 0.35);
+	border-radius: 3px;
+	padding: 10px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
+	color: #f4645f;
+	padding: 1px 5px;
+	border-radius: 3px;
+}
+
+* {
+	font-family: 'Roboto Condensed', sans-serif;
+}
+
+button,
+input {
+	font-family: inherit;
+	font-size: 100%;
+	line-height: 1.15;
+	margin: 0;
+}
+
+button,
+input {
+	overflow: visible;
+}
+
+button {
+	text-transform: none;
+}
+
+button {
+	-webkit-appearance: button;
+}
+
+button::-moz-focus-inner {
+	border-style: none;
+	padding: 0;
+}
+
+button:-moz-focusring {
+	outline: 1px dotted ButtonText;
+}
+
+*,
+:after,
+:before {
+	box-sizing: inherit;
+}
+
+button {
+	background: 0 0;
+	padding: 0;
+}
+
+button:focus {
+	outline: 1px dotted;
+	outline: 5px auto -webkit-focus-ring-color;
+}
+
+input::-webkit-input-placeholder {
+	color: inherit;
+	opacity: .5;
+}
+
+input::-moz-placeholder {
+	color: inherit;
+	opacity: .5;
+}
+
+input:-ms-input-placeholder {
+	color: inherit;
+	opacity: .5;
+}
+
+input::-ms-input-placeholder {
+	color: inherit;
+	opacity: .5;
+}
+
+input::placeholder {
+	color: inherit;
+	opacity: .5;
+}
+
+button {
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+button,
+input {
+	padding: 0;
+	line-height: inherit;
+	color: inherit;
+}
+
+
+.bg-white {
+	background-color: #fff;
+}
+
+.bg-gray-200 {
+	background-color: #edf2f7;
+}
+
+.bg-gray-500 {
+	background-color: #a0aec0;
+}
+
+.bg-teal-400 {
+	background-color: #4fd1c5;
+}
+
+.hover\:bg-teal-600:hover {
+	background-color: #319795;
+}
+
+.border-white {
+	border-color: #fff;
+}
+
+.border-teal-500 {
+	border-color: #38b2ac;
+}
+
+.rounded {
+	border-radius: .25rem;
+}
+
+.rounded-full {
+	border-radius: 9999px;
+}
+
+.border-2 {
+	border-width: 2px;
+}
+
+.border {
+	border-width: 1px;
+}
+
+.border-b-2 {
+	border-bottom-width: 2px;
+}
+
+.border-b-4 {
+	border-bottom-width: 4px;
+}
+
+.border-t {
+	border-top-width: 1px;
+}
+
+.border-l {
+	border-left-width: 1px;
+}
+
+.cursor-pointer {
+	cursor: pointer;
+}
+
+.block {
+	display: block;
+}
+
+.inline {
+	display: inline;
+}
+
+.flex {
+	display: flex;
+}
+
+.hidden {
+	display: none;
+}
+
+.flex-row {
+	flex-direction: row;
+}
+
+.flex-row-reverse {
+	flex-direction: row-reverse;
+}
+
+.flex-col {
+	flex-direction: column;
+}
+
+.flex-wrap {
+	flex-wrap: wrap;
+}
+
+.items-center {
+	align-items: center;
+}
+
+.self-start {
+	align-self: flex-start;
+}
+
+.self-center {
+	align-self: center;
+}
+
+.justify-start {
+	justify-content: flex-start;
+}
+
+.justify-end {
+	justify-content: flex-end;
+}
+
+.justify-center {
+	justify-content: center;
+}
+
+.justify-between {
+	justify-content: space-between;
+}
+
+.justify-around {
+	justify-content: space-around;
+}
+
+.float-right {
+	float: right;
+}
+
+.font-medium {
+	font-weight: 500;
+}
+
+.font-semibold {
+	font-weight: 600;
+}
+
+.font-bold,
+.hover\:font-bold:hover {
+	font-weight: 700;
+}
+
+
+.m-4 {
+    margin: 1rem
+}
+
+.m-6 {
+    margin: 1.5rem
+}
+.m-6 {
+    margin: 1.5rem
+}
+
+.mx-auto {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.mr-1 {
+	margin-right: .25rem;
+}
+
+.mt-4 {
+	margin-top: 4rem;
+}
+
+.mb-8 {
+	margin-bottom: 2rem;
+}
+
+.p-2 {
+	padding: .5rem;
+}
+
+.p-4 {
+	padding: 1rem;
+}
+
+.p-8 {
+	padding: 2rem;
+}
+
+.py-2 {
+	padding-top: .5rem;
+	padding-bottom: .5rem;
+}
+
+.px-2 {
+	padding-left: .5rem;
+	padding-right: .5rem;
+}
+
+.py-3 {
+	padding-top: .75rem;
+	padding-bottom: .75rem;
+}
+
+.px-3 {
+	padding-left: .75rem;
+	padding-right: .75rem;
+}
+
+.px-4 {
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+.pt-2 {
+	padding-top: .5rem;
+}
+
+.pb-3 {
+	padding-bottom: .75rem;
+}
+
+.pt-4 {
+	padding-top: 1rem;
+}
+
+.pr-4 {
+	padding-right: 1rem;
+}
+
+.pt-8 {
+	padding-top: 2rem;
+}
+
+.fixed {
+	position: fixed;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.relative {
+	position: relative;
+}
+
+
+.text-center {
+	text-align: center;
+}
+
+.text-white {
+	color: #fff;
+}
+
+.text-gray-500 {
+	color: #a0aec0;
+}
+
+.text-gray-600 {
+	color: #718096;
+}
+
+.text-gray-700 {
+	color: #4a5568;
+}
+
+.text-gray-800 {
+	color: #2d3748;
+}
+
+.text-red-400 {
+	color: #fc8181;
+}
+
+.text-teal-400 {
+	color: #4fd1c5;
+}
+
+.text-teal-500 {
+	color: #38b2ac;
+}
+
+.text-pink-500 {
+	color: #ed64a6;
+}
+
+.text-sm {
+	font-size: .875rem;
+}
+
+.text-base {
+	font-size: 1rem;
+}
+
+.text-xl {
+	font-size: 1.25rem;
+}
+
+.text-2xl {
+	font-size: 1.5rem;
+}
+
+.text-4xl {
+	font-size: 2.25rem;
+}
+
+.no-underline {
+	text-decoration: none;
+}
+
+.w-full {
+	width: 100%;
+}
+
+
+.shadow {
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)
+}
+
+.shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06)
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05)
+}
+
+.shadow-outline {
+    box-shadow: 0 0 0 3px rgba(66,153,225,.5)
+}
+
+
+.leading-none {
+    line-height: 1
+}
+
+.leading-tight {
+    line-height: 1.25
+}
+
+.leading-normal {
+    line-height: 1.5
+}
+
+.leading-spaced {
+    line-height: 2.5
+}
+
+.flex {
+    display: flex
+}
+
+.inline-flex {
+    display: inline-flex
+}
+
+.hidden {
+    display: none
+}
+
+.flex-row {
+    flex-direction: row
+}
+
+.flex-row-reverse {
+    flex-direction: row-reverse
+}
+
+.flex-col {
+    flex-direction: column
+}
+
+.flex-col-reverse {
+    flex-direction: column-reverse
+}
+
+.flex-wrap {
+    flex-wrap: wrap
+}
+
+.items-start {
+    align-items: flex-start
+}
+
+.items-center {
+    align-items: center
+}
+
+.self-start {
+    align-self: flex-start
+}
+
+.self-center {
+    align-self: center
+}
+
+.self-stretch {
+    align-self: stretch
+}
+
+.justify-start {
+    justify-content: flex-start
+}
+
+.justify-end {
+    justify-content: flex-end
+}
+
+.justify-center {
+    justify-content: center
+}
+
+.justify-between {
+    justify-content: space-between
+}
+
+.justify-around {
+    justify-content: space-around
+}
+</style>
+
+</head>
+
+<body class="bg-gray-200 text-gray-700 leading-normal">
+
+    <div class="container">
+		<ul class="progressbar">
+            <?php
+            foreach ($gui_steps as $step => $text ) {
+    			echo "<li class='" . ($_GET['stage'] == $step ? 'active' : '') . "'> $text </li>";
+            }
+            ?>
+		</ul>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="bg-white shadow-md flex flex-row flex-wrap items-center text-justify rounded m-4 leading-spaced p-8 mt-4">
+        <?php
+        if ($badnews) {
+            $a = '<h1>ERROR: ' . @$_GET['badnews'] . '</h1>';
+            $a .= '<p>While installing PageCarton, and error was encountered. Please contact your site administrator to find out if your system has the minimum requirement for installation.</p>';
+            $a .= $badnews;
+            $a .= '<br /> <input value="Try Again" type="button" onClick = "location.href=`?stage=' . InstallationStages::START . '`" />';
+            echo $a;
+        } else {
+            echo $content;
+            // echo '<p style="font-size:x-small; margin: 1em; text-align:center;">PageCarton version 1.7.5</p>';
+        }
+        ?>
+    </div>
+</body>
+</html>
+
+<?php
 exit();
+?>
