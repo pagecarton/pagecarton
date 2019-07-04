@@ -14,7 +14,7 @@
 /**
  * @see Ayoola_Dbase_Adapter_Interface
  */
- 
+
 require_once 'Ayoola/Dbase/Adapter/Interface.php';
 require_once 'Ayoola/Dbase/Adapter/Exception.php';
 require_once 'Ayoola/Dbase/Adapter/Abstract.php';
@@ -60,7 +60,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
      * @param array
      */
     protected static $_allowedScopes = array( SELF::SCOPE_PRIVATE, SELF::SCOPE_PROTECTED, SELF::SCOPE_PUBLIC );
-		
+
     /**
      * Default Scope Definition
      *
@@ -70,63 +70,63 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	const SCOPE_PRIVATE = 'PRIVATE';
 	const SCOPE_PROTECTED = 'PROTECTED';
 	const SCOPE_PUBLIC = 'PUBLIC';
-		
+
     /**
      * The Directory of The Present Table
      *
      * @var string
      */
 	protected $_directory;
-		
+
     /**
      * The Global directory
      *
      * @var string
      */
 	protected $_globalDirectory;
-		
+
     /**
      * The private directory
      *
      * @var string
      */
 	protected $_myDirectory;
-		
+
     /**
      * The private file
      *
      * @var string
      */
 	protected $_myFilename;
-		
+
     /**
      * The File of The Present Table
      *
      * @var string
      */
 	protected $_filename;
-		
+
     /**
      * The Files in different accessibilty scopes
      *
      * @var array
      */
 	protected $_globalFilenames;
-		
+
     /**
      * Xml Object
      *
      * @var Ayoola_Xml
      */
 	protected $_xml;
-		
+
     /**
      * The className
      *
      * @var string
      */
 	protected $className;
-		
+
     /**
      * Name of the Table
      *
@@ -138,13 +138,13 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
      * Constructor
      *
      * @param array Database Info
-     * 
+     *
      */
     public function __construct( $databaseInfo = null )
     {
 		if( ! is_null( $databaseInfo ) ){ $this->setDatabaseInfo( $databaseInfo ); }
     }
-	
+
     /**
      * Selects A Database ( A valid Class in this case )
      *
@@ -155,8 +155,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	{
 		if( is_null( $className ) ){ $className = get_class( $this ); }
 		if( ! $class = Ayoola_Loader::loadClass( $className ) )
-		{ 
-	//		throw new Ayoola_Dbase_Adapter_Exception( "XMLDB not available for $className" ); 
+		{
+	//		throw new Ayoola_Dbase_Adapter_Exception( "XMLDB not available for $className" );
 		}
 //		PageCarton_Widget::v( $className );
  //   var_export( $className );
@@ -169,7 +169,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		}
 		$this->setGlobalDirectory( $directory );
 	}
-	
+
     /**
      * Sets personal _globalDirectory to a value
      *
@@ -183,7 +183,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		$this->setDirectory();
 		return $this->_globalDirectory;
 	}
-	
+
     /**
      * This method returns _globalDirectory
      *
@@ -193,8 +193,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     {
 		if( $this->_globalDirectory ){ return $this->_globalDirectory; }
 		throw new Ayoola_Dbase_Adapter_Exception( 'No Global Directory' );
-    } 
-	
+    }
+
     /**
      * Sets _directory to a value
      *
@@ -212,7 +212,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		//var_export( $directory );
 		$this->_directory = $path;
 	}
-	
+
     /**
      * This method returns _filename
      *
@@ -222,8 +222,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     {
 		if( $this->_directory ){ return $this->_directory; }
 		throw new Ayoola_Dbase_Adapter_Exception( 'No Database Selected' );
-    } 
-	
+    }
+
     /**
      * Sets personal _myDirectory to a value
      *
@@ -246,14 +246,14 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	//	var_export( $directory );
 	//	var_export( $this->getAccessibility() );
 			break;
-			
+
 			case self::SCOPE_PUBLIC:
-      //	$path = APPLICATION_PATH . DS . $directory;   
+      //	$path = APPLICATION_PATH . DS . $directory;
 
         //  CHANING PUBLIC DB BASE TO DEFAULT SINCE IT IS MOST CONSTANT DIR
         //  CORE GETS DELETED ON NEW INSTALL
-        $path = SITE_APPLICATION_PATH . DS . $directory;   
-          
+        $path = SITE_APPLICATION_PATH . DS . $directory;
+
 	//	var_export( $directory );
 		//		Ayoola_Page_Creator::v( $path );
 	//	var_export( $path );
@@ -262,19 +262,19 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	//	var_export( $directory );
 			//	$path = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $directory;
 			break;
-		
+
 		}
 	//	require_once 'Ayoola/Doc.php';
 	//	if( ! Ayoola_Doc::createDirectory( $path ) )
 	//	{
-	//		throw new Ayoola_Dbase_Adapter_Exception( 'Could not create a database - ' . basename( $path ) ); 
+	//		throw new Ayoola_Dbase_Adapter_Exception( 'Could not create a database - ' . basename( $path ) );
 	//	}
 		//var_export( $path );
 		$this->_myDirectory = $path;
 		return $this->_myDirectory;
 
 	}
-	
+
     /**
      * This method returns _myDirectory
      *
@@ -284,8 +284,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     {
 		if( $this->_myDirectory ){ return $this->_myDirectory; }
 		throw new Ayoola_Dbase_Adapter_Exception( 'No Database Selected' );
-    } 
-	
+    }
+
     /**
      * This method sets _tableName to a Value
      *
@@ -296,8 +296,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     {
 		$this->_tableName = $tableName;
 		$this->setFilename( $this->getTableName() );
-    } 
-	
+    }
+
     /**
      * This method returns _tableName
      *
@@ -307,8 +307,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     {
 		if( $this->_tableName ){ return $this->_tableName; }
 		throw new Ayoola_Dbase_Adapter_Exception( 'No Table Selected' );
-    } 
-	
+    }
+
     /**
      * This method sets _filename to a Value
      *
@@ -320,8 +320,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		//var_export( $tableName );
 		$this->_filename = self::buildFilename( $this->getDirectory(), $tableName );
 		$this->setMyFilename( $tableName );
-    } 
-	
+    }
+
     /**
      * This method returns _filename
      *
@@ -331,8 +331,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     public function getFilename( $checkFile = false )
     {
 		return self::checkFile( $this->_filename, $checkFile );
-    } 
-	
+    }
+
     /**
      * This method sets _myFilename to a Value
      *
@@ -342,8 +342,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     public function setMyFilename( $tableName )
     {
 		$this->_myFilename = self::buildFilename( $this->getMyDirectory(), $tableName );
-    } 
-	
+    }
+
     /**
      * This method returns _myFilename
      *
@@ -351,10 +351,10 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
      * @return string the XML Filename
      */
     public function getMyFilename( $checkFile = false )
-    {	
+    {
 		return self::checkFile( $this->_myFilename, $checkFile );
-    } 
-	
+    }
+
     /**
      * SUPPLEMENTARY DIR FOR FILES FOR LARGE RECORDS
      *
@@ -370,7 +370,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		$dir = dirname( $filePath ) . DS . '__' . DS . $this->getTableName();
 		return $dir;
 	}
-	
+
     /**
      * SUPPLEMENTARY FILES FOR LARGE RECORDS
      *
@@ -381,8 +381,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     {
 		try
 		{
- 		//	LOOK FOR SUPPLEMENTARY FILES FOR LARGE RECORDS	
-    //    var_export( $this->getGlobalFilenames() );		
+ 		//	LOOK FOR SUPPLEMENTARY FILES FOR LARGE RECORDS
+    //    var_export( $this->getGlobalFilenames() );
      //   if( basename( $this->getMySupplementaryDirectory( $filePath ) ) === 'data' )
         {
       //       PageCarton_Widget::v( $filePath );
@@ -401,7 +401,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		}
 		return @$files ? : array();
 	}
-	
+
     /**
      * This method sets _globalFilenames to a Value
      *
@@ -426,11 +426,11 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
    //   var_export( $paths );
 	//		$this->_globalFilenames = array_merge( $paths, $this->getSupplementaryFilenames() );
 			$this->_globalFilenames = array_merge( $paths, $supplementaryFiles );
-		} 
-		
-		
+		}
+
+
 	//	var_export( $dir );
-		
+
 	//	var_export( $paths );
 	}
     /**
@@ -441,9 +441,9 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     public function getGlobalFilenames()
     {
 		if( is_null( $this->_globalFilenames ) ){ $this->setGlobalFilenames(); }
-		return $this->_globalFilenames ? : array();     
-    } 
-	
+		return $this->_globalFilenames ? : array();
+    }
+
     /**
      * This method sets builds filename
      *
@@ -453,10 +453,10 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
      */
     public static function buildFilename( $directory, $tableName )
     {
-	
+
 		return str_ireplace( '/', DS, $directory . DS . $tableName . EXT_DATA );
-    } 
-	
+    }
+
     /**
      * Checks if file exists
      *
@@ -469,16 +469,16 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	//	var_export( is_file( $filename ) );
 		require_once 'Ayoola/Loader.php';
 		if( ( $checkFile  === true && $path = Ayoola_Loader::checkFile( $filename ) ) || $checkFile  === false && $filename )
-		{ 
-			return $filename; 
+		{
+			return $filename;
 		}
 	//	var_export( $filename );
-		
+
 		//	cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
 		return false;
 	//	throw new Ayoola_Dbase_Adapter_Exception( 'No Filename to Check' );
-    } 
-	
+    }
+
     /**
      * This method sets _xml to a Value
      *
@@ -497,8 +497,8 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		}
 		catch( Ayoola_Dbase_Adapter_Exception $e ){ return; }
 		$this->loadFile( $filename );
-    } 
-	
+    }
+
     /**
      * This method gets _xml
      *
@@ -508,13 +508,13 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     {
 		if( is_null( $this->_xml ) ){ $this->setXml(); }
         return $this->_xml;
-    } 
-	
+    }
+
     /**
      * This method sets _accessibility to a value
      *
-     * @param string 
-     * @throws Ayoola_Dbase_Adapter_Xml_Exception 
+     * @param string
+     * @throws Ayoola_Dbase_Adapter_Xml_Exception
      */
     public function setAccessibility( $scope )
     {
@@ -528,12 +528,12 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			return $this->_accessibility;
 		}
 		throw new Ayoola_Dbase_Adapter_Xml_Exception( "Invalid scope for accessibility - $scope" );
-    } 
-	
+    }
+
     /**
      * This method returns _accessibility
      *
-     * @return string 
+     * @return string
      */
     public function getAccessibility()
     {
@@ -549,13 +549,13 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	//	var_export( $this->_accessibility );
 		return $this->setAccessibility( self::DEFAULT_SCOPE );
 		return $this->_accessibility;
-	} 
-	
+	}
+
     /**
      * This method sets _relationship to a value
      *
-     * @param string 
-     * @throws Ayoola_Dbase_Adapter_Xml_Exception 
+     * @param string
+     * @throws Ayoola_Dbase_Adapter_Xml_Exception
      */
     public function setRelationship( $scope )
     {
@@ -565,19 +565,19 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			return $this->_relationship;
 		}
 		throw new Ayoola_Dbase_Adapter_Xml_Exception( "Invalid scope for accessibility - $scope" );
-    } 
-	
+    }
+
     /**
      * This method returns _relationship
      *
-     * @return string 
+     * @return string
      */
     public function getRelationship()
     {
 		if( in_array( $this->_relationship, self::$_allowedScopes ) ){ return $this->_relationship; }
 		return $this->setAccessibility( self::DEFAULT_SCOPE );
-	} 
-	
+	}
+
     /**
      * Returns the Most Appropriate Filename, based on the scope
      *
@@ -594,7 +594,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		}
 /* 		switch( $scope )
 		{
-			case self::SCOPE_PRIVATE: 
+			case self::SCOPE_PRIVATE:
 			case self::SCOPE_PROTECTED:
 				$filename = $this->getMyfilename( $checkFile );
 				break;
@@ -602,35 +602,35 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 				$filename = $this->getFilename( $checkFile );
 				break;
 			default:
-				throw new Ayoola_Dbase_Adapter_Xml_Exception( $scope . ' is invalid accessibility scope' );	
+				throw new Ayoola_Dbase_Adapter_Xml_Exception( $scope . ' is invalid accessibility scope' );
 		}
- */	
+ */
 		switch( $scope )
 		{
-			case self::SCOPE_PRIVATE: 
+			case self::SCOPE_PRIVATE:
 			case self::SCOPE_PROTECTED:
 				$filename = $this->getMyfilename( $checkFile );
 			//	var_export( $filename );
 			break;
 			case self::SCOPE_PUBLIC;
 			//	There is a bug setting scope to private first by default. lets start again
-			
+
 			//	$this->_myFilename = null;
 			//	$this->_myDirectory = null;
 			//	$this->select();
 				$this->setMyDirectory();
 				$this->setMyfilename( $this->getTableName() );
 				$filename = $this->getMyfilename( $checkFile );
-	//	trigger_error( $filename ); 
+	//	trigger_error( $filename );
 			//	Ayoola_Page_Creator::v( $filename );
-			//	var_export( $checkFile ); 
+			//	var_export( $checkFile );
 			break;
 			default:
-				throw new Ayoola_Dbase_Adapter_Xml_Exception( $scope . ' is invalid accessibility scope' );	
+				throw new Ayoola_Dbase_Adapter_Xml_Exception( $scope . ' is invalid accessibility scope' );
 		}
 		return $filename;
-	} 
-	
+	}
+
     /**
      * Save the XML File
      *
@@ -642,38 +642,38 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		//var_export( $this->getMyFilename() );
 		if( ! Ayoola_Doc::createDirectory( dirname( $filename ) ) )
 		{
-			throw new Ayoola_Dbase_Adapter_Exception( 'COULD NOT CREATE A DATABASE - ' . dirname( $filename ) ); 
+			throw new Ayoola_Dbase_Adapter_Exception( 'COULD NOT CREATE A DATABASE - ' . dirname( $filename ) );
 		}
-		
+
 		//	Backup is causing a lot of issues in logs.
 	//	$backUpFile = $filename . '.backup';
 //	 	if( is_file( $backUpFile ) )
 		{
-			// log error 
-		
+			// log error
+
 		//	if( is_file( $backUpFile ) )
-			{ 
+			{
 			//	$newBackUpFile = $backUpFile . time();
 			//	Application_Log_View_Error::log( "There is an error on an XML Database. The back up file $backUpFile as been copied to $newBackUpFile for safe keep." );
-			//	copy( $backUpFile, $newBackUpFile ); 
+			//	copy( $backUpFile, $newBackUpFile );
 			} // operation ended. Delete backup
-			
-		} 
-	 
+
+		}
+
 	/* 	while( is_file( $backUpFile ) )
 		{
 			//	Availability of Backup file means that a "saveFile" process is ON
-			
+
 			usleep( round( rand( 0, 100 ) * 1000 ) );
-		} 
+		}
 	*/
 		//	exit( var_export( $backUpFile ) );
-		
+
 	//	if( is_file( $filename ) ){ copy( $filename, $backUpFile ); } // backup file before overwritting
 		$this->getXml()->save( $filename );
 	//	if( is_file( $backUpFile ) ){ unlink( $backUpFile ); } // operation ended. Delete backup
-	} 
-	
+	}
+
     /**
      * Loads XML File
      *
@@ -688,11 +688,11 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	//	flock( $handle, LOCK_EX ); //	lock the file
  		do
 		{
-			if( is_resource( $handle ) && flock( $handle, LOCK_EX | LOCK_NB ) ) 
-			{ 
+			if( is_resource( $handle ) && flock( $handle, LOCK_EX | LOCK_NB ) )
+			{
 				flock( $handle, LOCK_UN );
 				break;
-			}	
+			}
 			//	Lock not acquired, try again in:
 			usleep( round( rand( 0, 100 ) * 1000 ) ); //	0-100 miliseconds
 		}
@@ -704,16 +704,16 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
  		do
 		{
 			if( is_resource( $handle ) && flock( $handle, LOCK_EX | LOCK_NB ) )
-			{ 
+			{
 			//	flock( $handle, LOCK_UN );
 				break;
-			}	
+			}
 			//	Lock not acquired, try again in:
 			usleep( round( rand( 0, 100 ) * 1000 ) ); //	0-100 miliseconds
 		}
 		while( true );
-		
-	} 
+
+	}
 
     /**
      * Queries Database Table
@@ -723,50 +723,57 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     public function query( $keyword = null )
 	{
 		$arguments = func_get_args();
-		//	PageCarton_Widget::v( $this ); 
+		//	PageCarton_Widget::v( $this );
 		$keyword = array_shift( $arguments );
 		$keyword = ucfirst( strtolower( $keyword ) );
 
 		//  $paths = Ayoola_Loader::getValidIncludePaths( $this->_globalDirectory );
-		//	PageCarton_Widget::v( $paths ); 
+		//	PageCarton_Widget::v( $paths );
 		//	PageCarton_Widget::v( $paths ); \
 
 		//  TRACK CORE CHANGES
 		$coreFile = APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename );
 
     	//  TRACK DEFAULT SITE CHANGES
-    	$defaultFile = SITE_APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename ); 
+    	$defaultFile = SITE_APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename );
 
-    
+
 		// var_export( $coreFile );
 		//  PageCarton_Widget::v( Ayoola_Application::getDomainSettings( 'domain_name' ) );
 		//  PageCarton_Widget::v( filesize( $defaultFile ) );
-  
+
 		if( is_file( $coreFile ) )
 		$fmTime = filemtime( $coreFile );
-		  
+
 		foreach( $this->getSupplementaryFilenames() as $eachFile )
 		{
 			//	Add supplementary file because of files with so much content like PageWidget.xml
 			$fmTime .= @filemtime( $eachFile );
 		}
-    	$hash = md5( json_encode( $arguments ) . $this->_myFilename . $this->_relationship . $this->_accessibility  . Ayoola_Application::getApplicationNameSpace() . Ayoola_Application::getDomainSettings( 'domain_name' ) ) . @filemtime( $this->_myFilename ) . @filemtime( $defaultFile ) . $fmTime;
+
+		$hash = md5(
+			json_encode( $arguments ) . $this->_myFilename . $this->_relationship . $this->_accessibility  .
+			Ayoola_Application::getApplicationNameSpace() . Ayoola_Application::getDomainSettings( 'domain_name' ) ) .
+			( is_file( $this->_myFilename ) ? filemtime( $this->_myFilename ) : "" ).
+			( is_file( $defaultFile ) ? filemtime( $defaultFile ) : "" ).
+			( isset( $fmTime ) ? $fmTime : "" );
+
 		$storage = PageCarton_Widget::getObjectStorage( array( 'id' => __CLASS__ . '---wefwfff' . $hash, 'device' => 'File', 'time_out' => 1000000, ) );
-		$result = $storage->retrieve();    
+		$result = $storage->retrieve();
 		if( false !== $result )
 		{
-		//	PageCarton_Widget::v( $this->_myFilename );  
-		//	PageCarton_Widget::v( $this->getGlobalFilenames() );  
-		//	PageCarton_Widget::v( $this->getSupplementaryFilenames() );  
+		//	PageCarton_Widget::v( $this->_myFilename );
+		//	PageCarton_Widget::v( $this->getGlobalFilenames() );
+		//	PageCarton_Widget::v( $this->getSupplementaryFilenames() );
 			return $result;
 		}
 		else
 		{
 			//  PageCarton_Widget::v( $arguments );
-		//	  PageCarton_Widget::v( $this->_myFilename );  
+		//	  PageCarton_Widget::v( $this->_myFilename );
 			//  PageCarton_Widget::v( $result );
 		}
-    
+
 		$class = __CLASS__ . '_' . $keyword;
 		require_once 'Ayoola/Loader.php';
 		if( ! Ayoola_Loader::loadClass( $class ) )
@@ -775,14 +782,14 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			throw new Ayoola_Dbase_Adapter_Xml_Exception( $keyword . ' is an invalid keyword' );
 		}
 		$class = new $class;
-		$class->tableClass = get_class( $this );		
-//		PageCarton_Widget::v( $this ); 
+		$class->tableClass = get_class( $this );
+//		PageCarton_Widget::v( $this );
 		foreach( $this as $key => $value )
 		{
 			require_once 'Ayoola/Reflection/Property.php';
 			try
-			{ 
-				$thisProperty = new Ayoola_Reflection_Property( __CLASS__, $key ); 
+			{
+				$thisProperty = new Ayoola_Reflection_Property( __CLASS__, $key );
 				$thisProperty->setAccessible( true );
 				$thisProperty->setValue( $class, $value );
 				//var_export( $key );
@@ -794,7 +801,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		$result = false === $result ? null : $result;
 		$storage->store( $result );
 		return $result;
-    
+
 	}
 	// END OF CLASS
 }
