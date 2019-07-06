@@ -505,7 +505,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						//	Post without image is not allowed 
 						continue;
 					}
-					if( $this->getParameter( 'skip_ariticles_without_this_key' ) )
+					elseif( $this->getParameter( 'skip_ariticles_without_this_key' ) )
 					{
 						$keys = $this->getParameter( 'skip_ariticles_without_this_key' );
 						if( is_string( $keys ) )
@@ -520,6 +520,26 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					//		var_export( $data['article_title'] );
 					//		var_export( $data[$eachKey] );
 								//	Post without this is not allowed 
+								continue 2;
+							}
+						//	var_export( $data[$eachKey] );
+						}
+					}
+					elseif( $this->getParameter( 'show_posts_without_this_key' ) )
+					{
+						$keys = $this->getParameter( 'show_posts_without_this_key' );
+						if( is_string( $keys ) )
+						{
+							$keys = array_map( 'trim', explode( ',', $keys ) );
+						}
+					//	var_export( $keys );
+						foreach( $keys as $eachKey )
+						{
+							if( @$data[$eachKey] )
+							{
+					//		var_export( $data['article_title'] );
+					//		var_export( $data[$eachKey] );
+								//	Post with this is not allowed 
 								continue 2;
 							}
 						//	var_export( $data[$eachKey] );
