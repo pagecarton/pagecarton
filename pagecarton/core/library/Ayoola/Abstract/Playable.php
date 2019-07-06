@@ -172,10 +172,6 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		$defaultSearch['pc_url_prefix'] = Ayoola_Application::getUrlPrefix();
 		$defaultSearch['pc_background_color'] = Application_Settings_Abstract::getSettings( 'Page', 'background_color' );
         $defaultSearch['pc_font_color'] = Application_Settings_Abstract::getSettings( 'Page', 'font_color' );
-        
-        //  comment some content till real output
-		$defaultSearch['<!--//'] = '';
-		$defaultSearch['//-->'] = '';
 	//	$search += array_keys( $defaultSearch );
 	//	$replace += array_values( $defaultSearch );
 		$values = $values + $defaultSearch;
@@ -325,14 +321,25 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 			$replace[] = $cccc;
 		}
 		$search[] = $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'];
-		$replace[] = @$iTemplate;  
+        $replace[] = @$iTemplate;  
+        
+        //  comment some content till real output
+        $search[] = '<!--//';
+        $replace[] = '';  
+        $search[] = '//-->';
+        $replace[] = '';  
+
 	//	var_export( $search );
 	//	var_export( $replace );
 	//	var_export( $template );
 		$template = @str_replace( $search, $replace, $template );  
 		$search = array();
+        
+        
 		$search[] = '/' . $values['placeholder_prefix'] . '([\w+]+)' . $values['placeholder_suffix'] . '/';
-		$search[] = '/<!--([.]+)-->/';   
+        $search[] = '/<!--([.]+)-->/';   
+        
+        
 	//	var_export( $search );
 		@$template = preg_replace( $search, '', $template );
 		
