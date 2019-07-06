@@ -258,6 +258,30 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	Change Title
 			if( stripos( $page['url'], '/layout/' ) !== 0 )
 			{
+                //  if there is theme version, always ASK which to edit
+                if( ! $this->getPageEditorLayoutName() && empty( $_REQUEST['pc_edit_main_site_page'] ) )
+                {
+                    // check if theres a page specific theme file
+                    $pageThemeFileUrl = $page['url'];
+                    if( $pageThemeFileUrl == '/' )
+                    {
+                        $pageThemeFileUrl = '/index';
+                    }
+                    $themeDataFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . self::getDefaultLayout() . '/theme' . $pageThemeFileUrl . '/include';
+
+                    if( file_exists( $themeDataFile ) )
+                    {
+                        $query = '?' . http_build_query( $_GET );
+                        $this->setViewContent( '<h3>There are multiple versions of this page that is editable</h3>' );
+                        $this->setViewContent( '
+                                        <a class="pc-btn" href="' . $query . '&pc_edit_main_site_page=1">Edit Main Site ' . $page['url'] . ' Page</a>
+                                        <a class="pc-btn" href="' . $query . '&pc_page_editor_layout_name=' . self::getDefaultLayout() . '">Edit Default Theme ' . $page['url'] . ' Page</a>
+                                        ' );
+                        return false;
+                    }
+
+
+                }
 				$title = 'Editing "' . $page['url'] . '"';
 			}
 			else
@@ -932,7 +956,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 							)
 							{
-								$pageWidgetIdText = http_build_query( $response );
 								$response = Ayoola_Object_PageWidget::getInstance()->insert( $whatToSave );
 								$pageWidgetIdText = http_build_query( $response );
 								if( ! empty( $values ) )
