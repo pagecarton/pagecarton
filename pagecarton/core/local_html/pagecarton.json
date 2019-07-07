@@ -1,5 +1,6 @@
 {
     "PC_BASE": "",
     "application_dir": "",
-    "run_as_core": false
+    "run_as_core": false,
+    "repository": ""
 }
