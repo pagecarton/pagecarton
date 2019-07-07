@@ -561,8 +561,12 @@
              	if( $f = fetchLink( $remoteSite . '/pc_installer.php?do_not_highlight_file=1' ) )
                 {
 				//	var_export( $f );
-				//	exit();
-					file_put_contents( 'pc_installer.php', $f );   
+                //	exit();
+                    if( stripos( $f, '<?php' ) !== false )
+                    {
+                        //  fix where installer downloads nonsense
+                        file_put_contents( 'pc_installer.php', $f );   
+                    }
 				//	file_put_contents( 'pc_installer.php',  );
                 }
           	}
