@@ -576,6 +576,7 @@
             $refreshURL = '{$prefix}/pc_installer.php?stage=start';
             if( ! fetchLink( $_SERVER['SERVER_NAME'] . $refreshURL ) )
             {
+                //  sometimes $prefix is set wrongly with errorneous CONTEXT_PREFIX
                 $refreshURL = '/pc_installer.php?stage=start';
             }
             header( "Location: " . $refreshURL );
