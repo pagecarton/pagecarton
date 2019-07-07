@@ -53,7 +53,6 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $file1 = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $loc;
             }
             $coreZip = dirname( $file1 ) . DS . 'pagecarton.zip';
-
             if( ! file_exists( $coreZip ) || ! file_exists( $file1 ) || ! empty( $_REQUEST['pc_recreate_installer'] ) )   
             {
                 set_time_limit( 0 );
@@ -62,8 +61,20 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $version = implode( '.', $version ) . '.x';
 
                 //  download main core
-                $link = 'https://github.com/pagecarton/pagecarton/archive/' . $version . '.zip'; 
-                $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
+
+                $config = PageCarton::getDomainSettings( 'site_configuraton' );
+            //    var_export( $config );
+            //    exit();
+
+                if( empty( $config['repository'] ) )
+                {
+                    $config['repository'] = 'https://github.com/pagecarton/pagecarton/archive/' . $version . '.zip'; 
+                }
+
+                if( ! $content = self::fetchLink( $config['repository'], array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) ) )
+                {
+                    die( 'NOT ABLE TO CONNECT TO REPOSITORY - ' . $config['repository'] . ' ' );
+                }
                 $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';  
     
                 $filename .= '.zip';
