@@ -423,7 +423,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			return false;
 		}
-	//	$text = '<?php return ' . var_export( $values, true ) . ';';
 		$values['file_size'] = intval( strlen( var_export( $values, true ) ) );
 		
 		$validator = new Ayoola_Validator_UserRestrictions();
@@ -478,7 +477,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 	 	return true;
 
-	//	return file_put_contents( self::getFolder() . $values['article_url'], '<?php return ' . var_export( $values, true ) . ';' );   
 	}
 	 
     /**

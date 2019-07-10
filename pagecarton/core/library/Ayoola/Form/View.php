@@ -195,7 +195,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			$link = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Ayoola_Form_View/?form_name=' . $data['form_name'] . '';
 			$mailInfo = array();
 			$mailInfo['subject'] = 'Form filled [' . $data['form_title'] . ']';
-			$mailInfo['body'] = 'Form titled "' . $data['form_title'] . '" has been filled on your website with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'Form titled "' . $data['form_title'] . '" has been filled on your website with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			Preview the form on: ' . $link . '
 			';

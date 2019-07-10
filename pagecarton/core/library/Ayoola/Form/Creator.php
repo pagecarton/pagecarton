@@ -116,7 +116,7 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 					$link = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '';
 					$mailInfo = array();
 					$mailInfo['subject'] = 'A new form created';
-					$mailInfo['body'] = 'A new form has been created on your website with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+					$mailInfo['body'] = 'A new form has been created on your website with the following information: "' . self::arrayToString( $values ) . '". 
 					
 					Preview the form on: ' . $link . '
 					';

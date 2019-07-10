@@ -125,7 +125,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 				$mailInfo['body'] = 'A document titled "' . $data['article_title'] . '", has been downloaded by a user. You can view the file by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . strtolower( $data['article_url'] ) . '.
 				
 				Here is a captured information of the user: ' . var_export( Ayoola_Application::getUserInfo(), true ) . '.
-				Here is a captured information provided by the user when accessing the file: ' . var_export( $values, true ) . '.
+				Here is a captured information provided by the user when accessing the file: ' . self::arrayToString( $values ) . '.
 				';
 				Application_Log_View_General::log( array( 'type' => 'Download', 'info' => array( $mailInfo ) ) );
 				
@@ -157,7 +157,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 					$mailInfo['to'] = $userInfo['email'];
 					$mailInfo['body'] = 'A file titled "' . $data['article_title'] . '", has been downloaded by a user. You can view the file by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . strtolower( $data['article_url'] ) . '.
 					
-					Here is a captured information provided by the user when accessing the file: ' . var_export( $values, true ) . '.
+					Here is a captured information provided by the user when accessing the file: ' . self::arrayToString( $values ) . '.
 					';
 					try
 					{

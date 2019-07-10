@@ -79,7 +79,6 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
    //     var_export( $path );
    //     exit();
  //       $this->setViewContent( $path );
- //      $this->setViewContent( var_export( $values, true ) );
      //   var_export( $path );
         $otherFiles = array();
         $search = array();

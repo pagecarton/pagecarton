@@ -97,7 +97,7 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			$link = '' . Ayoola_Page::getHomePageUrl() . '' . $url;
 			$mailInfo = array();
 			$mailInfo['subject'] = 'A new comment added';
-			$mailInfo['body'] = 'A new comment has been added on your site with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'A new comment has been added on your site with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			View the page where the comment was posted: ' . $link . '
 

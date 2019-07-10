@@ -56,7 +56,7 @@ class Ayoola_Doc_Upload extends Ayoola_Doc_Abstract
 			//	Notify Admin
 			$mailInfo = array();
 			$mailInfo['subject'] = 'Document upload successful.';
-			$mailInfo['body'] = 'A new document have been uploaded on your application with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'A new document have been uploaded on your application with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			Here is the link to the newly uploaded document: http://' . Ayoola_Page::getDefaultDomain() . $url . '/
 			Document administration options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/document/.
