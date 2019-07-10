@@ -213,6 +213,9 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 
 		if( ! $response = Application_User_Abstract::getUsers( array( 'access_level' => 99 ) ) )  
 		{
+            //  refresh index to allow admin creator to work
+            file_put_contents( 'index.php', file_get_contents( 'index.php' ) );
+            
 			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Personalization' );
 			exit();
 		//	$this->setViewContent( '<div class="pc-notify-info">Back up restored successfully.</div>', true );
