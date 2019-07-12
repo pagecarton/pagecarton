@@ -141,6 +141,8 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 						self::changeStatus( $currentStatus, $from , $to );
 					}
 				}
+                $sanitizeClass = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $uri, 'auto_create_page' => true ) );  
+                $sanitizeClass->refresh( $uri );	     		
 			}
 		}
 		if( @$data['templates'] )
