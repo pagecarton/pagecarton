@@ -1999,7 +1999,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 												'require_user_info' => 'Require log-in before download', 
 												'download_notification' => 'Notify me on every download', 
 											);
-					$fieldset->addElement( array( 'name' => 'download_options' . $featurePrefix, 'label' => '' . $postTypeLabel . ' Options', 'type' => 'Checkbox', 'value' => @$values['download_options' . $featurePrefix] ), $downloadOptions  );
+				//	$fieldset->addElement( array( 'name' => 'download_options' . $featurePrefix, 'label' => '' . $postTypeLabel . ' Options', 'type' => 'Checkbox', 'value' => @$values['download_options' . $featurePrefix] ), $downloadOptions  );
 					
 					$fieldset->addElement( array( 'name' => 'download_url' . $featurePrefix, 'label' => 'Download File', 'placeholder' => 'e.g. http://example.com/path/to/file.mp3', 'type' => 'Document', 'optional' => 'optional', 'value' => @$values['download_url' . $featurePrefix] ) );
 					$fieldset->addRequirement( 'download_url' . $featurePrefix, array( 'NotEmpty' => null ) );
