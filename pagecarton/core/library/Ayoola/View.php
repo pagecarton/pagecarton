@@ -62,18 +62,7 @@ class Ayoola_View
     {
         
     } 
-	
-    /**
-     * This method makes sure there is only a single instance
-     * of this class.
-     * @param void
-     * @return __CLASS__
-     */
-	public static function getInstance()
-    {
-		return is_null($this->instance) ? new self() : $this->instance; 
-    } 
-	
+		
     public function __get($property)
     {
     }    

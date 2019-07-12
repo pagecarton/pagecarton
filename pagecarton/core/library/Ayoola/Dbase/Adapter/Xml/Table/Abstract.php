@@ -637,7 +637,7 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
      *
      * @param string The Field Key
      */
-    public static function getDataTypeKeyValue( $key )
+    public function getDataTypeKeyValue( $key )
     {
 		if( array_key_exists( $key, $this->getTableDataTypes() ) )
 		{
