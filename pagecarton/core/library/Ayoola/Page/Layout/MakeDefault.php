@@ -43,7 +43,10 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
             $each = new Application_Settings_Editor( array( 'settingsname_name' => 'Page' ) );
-            $each->fakeValues = array( 'default_layout' => $data['layout_name'] );
+            $settings = Ayoola_Page_Settings::retrieve();
+            $settings['default_layout'] = $data['layout_name'];
+            $each->fakeValues = $settings;
+        //  $each->fakeValues = array( 'default_layout' => $data['layout_name'] );
             if( ! $each->init() )
             {
                 $this->setViewContent( self::__( '<p class="badnews">An error was encountered while changing the theme.</p>' ) ); 
