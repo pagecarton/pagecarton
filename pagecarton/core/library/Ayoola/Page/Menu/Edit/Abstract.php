@@ -97,12 +97,12 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 		$fieldset->addRequirement( 'option_name', array( 'WordCount' => array( 1, 500 ) ) );
 		$pages = Ayoola_Page::getAll();
 	//	var_export( $pages );
-		$pages = array_combine( $pages, $pages );
+		$pages = array_combine( $pages, $pages ) ? : array( '/' => '/' );
 		if( @$values['url'] )
 		{
 			$pages[$values['url']] = $values['url'];
-		}
-		$fieldset->addElement( array( 'name' => 'url', 'label' => 'URL', 'onchange' => 'if( this.value == \'\' ){ a = prompt( \'New Url\', \'/url\' ); if( ! a ) return false; var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'placeholder' => $url, 'type' => 'Select', 'value' => @$values['url'] ), array_unique( $pages + array( '' => 'Custom URL' ) ) );
+		} 
+		$fieldset->addElement( array( 'name' => 'url', 'label' => 'URL',  'onchange' => 'ayoola.div.manageOptions( { database: "Ayoola_Page_Page", listWidget: "Ayoola_Page_List", values: "url", labels: "url", element: this } );', 'placeholder' => $url, 'type' => 'Select', 'value' => @$values['url'] ), array_unique( $pages + array( '__manage_options' => '[Manage Pages]', '__custom' => '[Custom URL]' ) ) );
 	//	$fieldset->addElement( array( 'name' => 'url', 'placeholder' => 'e.g. /site/contact', 'type' => 'InputText', 'value' => @$values['url'] ) );
 		$options =  array( 
 							'logged_in' => 'Show this menu option to logged inn users', 

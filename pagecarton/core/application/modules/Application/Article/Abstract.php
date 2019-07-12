@@ -2069,7 +2069,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( count( $profiles )  > 1 )
 		{
 		//	var_dump()
-			$fieldset->addElement( array( 'name' => 'profile_url', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles );
+			$fieldset->addElement( array( 'name' => 'profile_url',  'onchange' => 'ayoola.div.manageOptions( { database: "Application_Profile_Table", listWidget: "Application_Profile_ShowAll", values: "profile_url", labels: "display_name", element: this } );', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles + array( '__manage_options' => '[Manage Profiles]' ) );
 		//	$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
 		}
 		else
