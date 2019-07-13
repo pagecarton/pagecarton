@@ -539,20 +539,48 @@ pc_full_width {
   max-width: 100%;
 }
 
-pc-form button {
+
+
+/* .pc-btn-parent a,
+.pc-btn,
+.pc-element-like-btn {
+  background-color: #ccc;
+  border: 1px outset #aaa;
+  display: inline-block;
+  cursor: pointer;
+  color: #000;
+  font-family: 'open_sansregular', sans-serif;
+  padding: 8px 60px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 10px;
+} */
+
+/* .pc-btn-parent a:hover,
+.pc-btn:hover,
+.pc-element-like-btn:hover {
+  background: linear-gradient(to bottom, #eee 5%, #ccc 100%);
+  background-color: #eee;
+
+} */
+
+.pc-btn-parent a,
+.pc-btn,
+.pc-element-like-btn,
+.pc-btn,
+.pc-form button {
   align-items: flex-start;
   text-align: center;
   cursor: default;
-  color: buttontext;
-  background-color: buttonface;
+  /* color: buttontext;
+  background-color: buttonface; */
   box-sizing: border-box;
-  padding: 2px 6px 3px;
-  border-width: 2px;
+  /* padding: 2px 6px 3px; */
+  /* border-width: 2px;
   border-style: outset;
-  border-color: buttonface;
+  border-color: buttonface; */
   border-image: initial;
   text-rendering: auto;
-  color: initial;
   letter-spacing: normal;
   word-spacing: normal;
   text-transform: none;
@@ -562,6 +590,29 @@ pc-form button {
   text-align: start;
   margin: 0em;
   font: 400 11px system-ui;
+
+  color: #0099CC;
+  background-color: white;
+  border: 2px solid #0099CC;
+  border-radius: 6px;
+  padding: 4px 8px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s;
+  /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.pc-btn-parent a:hover,
+.pc-btn:hover,
+.pc-element-like-btn:hover,
+.pc-btn:hover,
+.pc-form button:hover {
+  background-color: #008CBA;
+  color: white;
 }
 
 /*PC FORM STYLE 2*/
@@ -701,22 +752,6 @@ pc-form button {
   /*border: 1px groove #333;*/
 }
 
-
-.pc-btn-parent a,
-.pc-btn,
-.pc-element-like-btn {
-  background-color: #ccc;
-  border: 1px outset #aaa;
-  display: inline-block;
-  cursor: pointer;
-  color: #000;
-  font-family: 'open_sansregular', sans-serif;
-  padding: 8px 60px;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-size: 10px;
-}
-
 @media screen and (max-width: 480px) {
 
   .pc-btn-parent a,
@@ -738,15 +773,6 @@ pc-form button {
   padding: 0.2em;
   margin-top: 0.2em;
   margin-bottom: 0.2em;
-}
-
-
-.pc-btn-parent a:hover,
-.pc-btn:hover,
-.pc-element-like-btn:hover {
-  background: linear-gradient(to bottom, #eee 5%, #ccc 100%);
-  background-color: #eee;
-
 }
 
 .pc-hide-children-parent:hover>.pc-hide-children-children {
@@ -1339,12 +1365,28 @@ ul {
 }
 
 
-/*LOGIN FROM CONTAINER*/
+/*
 
-#Ayoola_Access_Login_form_id_container {
-  min-height: 400px;
+MAKE LOGIN FORM CONSPICOUS AT ALL TIMES
+
+layout form such that even when no much content on page when login box displayed,
+forcing form up the page will not cause distortion
+
+*/
+
+.row {
+  min-height: 100px;
 }
 
 #Ayoola_Access_Login_form_id_container {
-  min-height: 400px;
+  min-height: 350px;
+  text-align: center;
+  display: table;
+
+}
+
+#Ayoola_Access_Login_form_id_container form {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
 }
