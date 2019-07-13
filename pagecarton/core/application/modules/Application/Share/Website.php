@@ -18,29 +18,29 @@
 
 class Application_Share_Website extends PageCarton_Widget
 {
-	
+
     /**
-     * Access level for player. Defaults to everyone   
+     * Access level for player. Defaults to everyone
      *
      * @var boolean
      */
 	protected static $_accessLevel = array( 0 );
-	
+
     /**
-     * 
-     * 
-     * @var string 
+     *
+     *
+     * @var string
      */
-	protected static $_objectTitle = 'Share Website'; 
+	protected static $_objectTitle = 'Share Website';
 
     /**
      * Performs the whole widget running process
-     * 
+     *
      */
 	public function init()
-    {    
+    {
 		try
-		{ 
+		{
             //  Code that runs the widget goes here...
 
             //  Output demo content to screen
@@ -51,10 +51,10 @@ class Application_Share_Website extends PageCarton_Widget
              $this->setViewContent( self::__( '<a target="_blank" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Share/?url=/&title=' . htmlentities( $text ) . '" href="javascript:;"><i  style="margin:5px;" class="fa fa-external-link"></i> Share...</a>' ) );  
 
              // end of widget process
-          
-		}  
+
+		}
 		catch( Exception $e )
-        { 
+        {
             //  Alert! Clear the all other content and display whats below.
         //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
             $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 

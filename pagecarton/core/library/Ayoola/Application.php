@@ -128,7 +128,7 @@ class Ayoola_Application
 	public static $installer = 'pc_installer.php';
 
     /**
-     * 
+     *
      *
      * @var string
      */
@@ -176,7 +176,8 @@ class Ayoola_Application
 			$storage->setDevice( 'File' );
 			$data = $storage->retrieve();
 		}
-		if( @$data )
+
+		if( isset($data) && $data )
 		{
 			self::$_domainName =  $data;
 			return self::$_domainName;
@@ -264,7 +265,7 @@ class Ayoola_Application
 	//		var_export( self::$_domainSettings );
 		}
 	//	PageCarton_Widget::v( self::$_domainSettings );
-		return $key ? @self::$_domainSettings[$key] : self::$_domainSettings;
+		return $key ? ( isset( self::$_domainSettings[$key] ) ? self::$_domainSettings[$key] : "" ) : self::$_domainSettings;
 	}
 
     /**
@@ -289,7 +290,7 @@ class Ayoola_Application
 		@$storage->storageNamespace = __CLASS__ . 'x-x--' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve();
-		if( $data && ! $forceReset && ! @$_GET['reset_domain_information'] )
+		if( $data && ! $forceReset && ( isset($_GET['reset_domain_information']) && !$_GET['reset_domain_information']) )
 		{
 		//	var_export( $data );
  			//	Allows the sub-domains to have an include path too.
@@ -402,11 +403,14 @@ class Ayoola_Application
 			}
 		//	PageCarton_Widget::v( $data['domain_settings'] );
 		//	exit();
-			if( ! @$subDomain && @in_array( 'ssl', @$data['domain_settings']['domain_options'] ) && $protocol != 'https' && empty( $domainSettings['no_redirect'] ) )
-			{
-				header( 'Location: https://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
-				exit();
+			if (isset($subDomain) && isset($data['domain_settings']['domain_options'])) {
+				if( !$subDomain && @in_array( 'ssl', $data['domain_settings']['domain_options'] ) && $protocol != 'https' && empty( $domainSettings['no_redirect'] ) )
+				{
+					header( 'Location: https://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
+					exit();
+				}
 			}
+
 			if( ! @$subDomain && @strlen( $data['domain_settings']['enforced_destination'] ) > 3 && empty( $domainSettings['no_redirect'] ) )
 			{
 			//	var_export( $subDomain );
@@ -580,7 +584,7 @@ class Ayoola_Application
 			//		var_export( $subDomain );
 		//			var_export( $data['domain_settings'] );
 	//		$data['domain_settings'];
-			if( @$subDomain && empty( $_SERVER['CONTEXT_PREFIX'] ) )
+			if( isset($subDomain) && $subDomain && empty( $_SERVER['CONTEXT_PREFIX'] ) )
 			{
 				if( $subDomainInfo = $domain->selectOne( null, array( 'domain_name' => $subDomain ) ) )
 				{
@@ -780,48 +784,50 @@ class Ayoola_Application
 		// throw new Exception();
 
 		//	Handle encryption
-		switch( @$_SERVER['HTTP_AYOOLA_PLAY_MODE'] )
-		{
-			case 'ENCRYPTION':
-				$_POST = array();
-				$data = file_get_contents( "php://input" );
-			//	echo $data;
-			//	var_export( $data );
-			//	exit();
-				if( $decrypted = OpenSSL::decrypt( $data, $_SERVER['HTTP_PAGECARTON_REQUEST_ENCRYPTION'] ) )
-				{
-					parse_str( $decrypted, $result );
-					$_POST = is_array( $result ) ? $result : array();
-					if( isset( $_POST['pagecarton_request_timezone'], $_POST['pagecarton_request_time'], $_POST['pagecarton_request_timeout'] ) )
-					{
-					//	$_POST['pagecarton_request_datetime'] = date_create( $_POST['pagecarton_request_datetime'] );
-					//	$_POST['pagecarton_request_time'] = date_timestamp_get( $_POST['pagecarton_request_datetime'] );
-						date_default_timezone_set( $_POST['pagecarton_request_timezone'] );
-						//	var_export( time() );
-						//	var_export( $_POST['pagecarton_request_time'] );
-						//	var_export( time() - $_POST['pagecarton_request_time'] );
-						if( ( time() - $_POST['pagecarton_request_time'] ) > $_POST['pagecarton_request_timeout'] )
-						{
-							$_POST = array();
-						}
-
-					}
-				//	var_export( $decrypted );
-			//		var_export( $_POST );
-			//		exit();
-				}
-			//	var_export( $encrypted );
-			//	echo $decrypted;
-
-			//	var_export( $data );
-			//	exit();
-				//	Log early before we exit
-		//		Ayoola_Application::log();
-			//	if( ! self::hasPriviledge() )
-				{
+		if(isset($_SERVER['HTTP_AYOOLA_PLAY_MODE']) ){
+			switch( $_SERVER['HTTP_AYOOLA_PLAY_MODE'] )
+			{
+				case 'ENCRYPTION':
+					$_POST = array();
+					$data = file_get_contents( "php://input" );
+				//	echo $data;
+				//	var_export( $data );
 				//	exit();
-				}
-			break;
+					if( $decrypted = OpenSSL::decrypt( $data, $_SERVER['HTTP_PAGECARTON_REQUEST_ENCRYPTION'] ) )
+					{
+						parse_str( $decrypted, $result );
+						$_POST = is_array( $result ) ? $result : array();
+						if( isset( $_POST['pagecarton_request_timezone'], $_POST['pagecarton_request_time'], $_POST['pagecarton_request_timeout'] ) )
+						{
+						//	$_POST['pagecarton_request_datetime'] = date_create( $_POST['pagecarton_request_datetime'] );
+						//	$_POST['pagecarton_request_time'] = date_timestamp_get( $_POST['pagecarton_request_datetime'] );
+							date_default_timezone_set( $_POST['pagecarton_request_timezone'] );
+							//	var_export( time() );
+							//	var_export( $_POST['pagecarton_request_time'] );
+							//	var_export( time() - $_POST['pagecarton_request_time'] );
+							if( ( time() - $_POST['pagecarton_request_time'] ) > $_POST['pagecarton_request_timeout'] )
+							{
+								$_POST = array();
+							}
+
+						}
+					//	var_export( $decrypted );
+				//		var_export( $_POST );
+				//		exit();
+					}
+				//	var_export( $encrypted );
+				//	echo $decrypted;
+
+				//	var_export( $data );
+				//	exit();
+					//	Log early before we exit
+			//		Ayoola_Application::log();
+				//	if( ! self::hasPriviledge() )
+					{
+					//	exit();
+					}
+				break;
+			}
 		}
 
 	//	throw new Exception( 'aaaa' );
@@ -836,8 +842,12 @@ class Ayoola_Application
 		self::$_runtimeSetting['start_time'] = $time_start; //	Record start time
 
 		//	Record IP Address
-		@self::$_runtimeSetting['user_ip'] = array( 'REMOTE_ADDR' => $_SERVER['REMOTE_ADDR'], 'HTTP_CLIENT_IP' => $_SERVER['HTTP_CLIENT_IP'], 'HTTP_X_FORWARDED_FOR' => $_SERVER['HTTP_X_FORWARDED_FOR'], );
-;
+		self::$_runtimeSetting['user_ip'] = [
+				'REMOTE_ADDR'          => $_SERVER['REMOTE_ADDR'],
+				'HTTP_CLIENT_IP'       => isset($_SERVER['HTTP_CLIENT_IP'] ) ? $_SERVER['HTTP_CLIENT_IP'] : "",
+				'HTTP_X_FORWARDED_FOR' => isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : "",
+			];
+
 		self::boot();
 	//	self::$_runtimeSetting['real_url'] = URI;
 	//	self::$_runtimeSetting['url'] = URI;
@@ -1241,7 +1251,7 @@ class Ayoola_Application
 			//	var_export( $table->select() );
 				$multiSiteDir = '/' . $nameForModule;
 		//		PageCarton_Widget::v( $multiSiteDir );
-				
+
 				if( $sites = $table->select( null, array( 'directory' => $multiSiteDir ) ) )
 				{
 					Ayoola_Application::reset( array( 'path' => $multiSiteDir ) );
@@ -1359,7 +1369,7 @@ class Ayoola_Application
 				//	once page is created, let's have blank content
 				$page = new Ayoola_Page_Editor_Sanitize();
 				$page->refresh( $uri, $themeName );
-				
+
 			//	if( )
 				//	not found
 				return false;
@@ -1439,7 +1449,7 @@ class Ayoola_Application
 	//	exit( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 
 		//	check if redirect
-		$pageInfo = Ayoola_Page::getInfo( $uri ); 
+		$pageInfo = Ayoola_Page::getInfo( $uri );
 	//		var_export( $pageInfo );
 		if( @$pageInfo['redirect_url'] && ! @$_REQUEST['pc_redirect_url'] )
 		{
@@ -1681,10 +1691,10 @@ class Ayoola_Application
      */
     public static function getPresentUri( $url = null )
     {
-		if( @self::$_presentUri[$url] )
-		{
+		if( isset(self::$_presentUri[$url]) && @self::$_presentUri[$url] ) {
 			return self::$_presentUri[$url];
 		}
+
 		$url = $url ? : self::getRequestedUri();
 		require_once 'Ayoola/Filter/Uri.php';
 		$filter = new Ayoola_Filter_Uri;
@@ -1707,9 +1717,11 @@ class Ayoola_Application
 		//	because of url prefix that has space in them
 		@$requestedUriDecoded = $_SERVER['REQUEST_URI'];
 
-
 		//	remove query strings
-		$requestedUriDecoded = array_shift( explode( '?', $requestedUriDecoded ) );
+		//array_shift works with array reference, so a variables parameter is required
+		$shift = explode( '?', $requestedUriDecoded ) ;
+		$requestedUriDecoded = array_shift($shift );
+
 		@$requestedUriDecoded = rawurldecode( $requestedUriDecoded );
 //		var_export( $_SERVER['REQUEST_URI'] );
 //		var_export( $requestedUriDecoded );
@@ -1945,7 +1957,7 @@ class Ayoola_Application
 			$functionName = function_exists( 'posix_getuid' ) ? 'posix_getuid' : 'getmyuid';
 			self::$_userAccountInfo['userid'] =  $functionName();
 			$processUserInfo =  function_exists( 'posix_getpwuid' ) ? posix_getpwuid( self::$_userAccountInfo['userid'] ) : null;
-			self::$_userAccountInfo['username'] =  $processUserInfo['name'] ? : 'UNKWOWN';  
+			self::$_userAccountInfo['username'] =  $processUserInfo['name'] ? : 'UNKWOWN';
 		}
 		return $key ? self::$_userAccountInfo[$key] : self::$_userAccountInfo;
     }
