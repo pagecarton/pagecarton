@@ -81,7 +81,7 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 			$newSiteLink = '' . Ayoola_Page::getRootUrl() . '' . $values['directory'] . '/new-site-wizard';
 			$mailInfo = array();
 			$mailInfo['subject'] = 'A new site created';
-			$mailInfo['body'] = 'A new site has been created on your PageCarton Installation with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'A new site has been created on your PageCarton Installation with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			Preview the site on: ' . $link . '
 			';

@@ -74,13 +74,13 @@ class Application_Message_Creator extends Application_Message_Abstract
 	//		Application_Profile_Abstract::getMyDefaultProfile()
 			if( ! $senderInfo = Application_Profile_Abstract::getProfileInfo( $values['from'] ) )
 			{
-				$this->setViewContent( '<p class="badnews">Invalid sender.</p>' );
+				$this->setViewContent( self::__( '<p class="badnews">Invalid sender.</p>' ) );
 				return false;
 			//	throw new Application_Message_Exception( 'UNABLE TO POST AN UPDATE BECAUSE USER IS INVALID.' );
 			}
 			if( ! $receiverInfo = Application_Profile_Abstract::getProfileInfo( $values['to'] ) )
 			{
-				$this->setViewContent( '<p class="badnews">Invalid receiver information.</p>' );
+				$this->setViewContent( self::__( '<p class="badnews">Invalid receiver information.</p>' ) );
 				return false;
 			//	throw new Application_Message_Exception( 'UNABLE TO POST AN UPDATE BECAUSE USER IS INVALID.' );
 			}

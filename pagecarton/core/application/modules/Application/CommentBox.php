@@ -97,7 +97,7 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			$link = '' . Ayoola_Page::getHomePageUrl() . '' . $url;
 			$mailInfo = array();
 			$mailInfo['subject'] = 'A new comment added';
-			$mailInfo['body'] = 'A new comment has been added on your site with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'A new comment has been added on your site with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			View the page where the comment was posted: ' . $link . '
 
@@ -114,10 +114,10 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			{ 
 				$this->createForm( 'Post Another Comment', $fieldset );
 				$this->setViewContent( $this->getForm()->view(), true );
-				$this->setViewContent( '<div class="goodnews">Comment added successfully.</div>' ); 
+				$this->setViewContent( self::__( '<div class="goodnews">Comment added successfully.</div>' ) ); 
 				if( empty( $values['profile_url'] ) )
 				{
-					$this->setViewContent( '<div class="pc-notify-info">Save your profile to be able to manage your future comments on this website and also post a display picture. <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Profile_Creator\' );" href="javascript:" >Save Profile!</a></div>' ); 
+					$this->setViewContent( self::__( '<div class="pc-notify-info">Save your profile to be able to manage your future comments on this website and also post a display picture. <a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Profile_Creator\' );" href="javascript:" >Save Profile!</a></div>' ) ); 
 				}
 			}
 

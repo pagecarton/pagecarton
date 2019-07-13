@@ -89,12 +89,12 @@ class Application_Article_Type_Audio extends Application_Article_Type_Abstract
 					);' 							
 				  );   
 			}
-			$this->setViewContent( '<div class="badnews">Audio file has not been set</div>' );
+			$this->setViewContent( self::__( '<div class="badnews">Audio file has not been set</div>' ) );
 			return false;
 		}
 		if( $data['true_post_type'] != 'audio' )
 		{
-			$this->setViewContent( '<div class="badnews">This is not a true audio post</div>' );
+			$this->setViewContent( self::__( '<div class="badnews">This is not a true audio post</div>' ) );
 			return false;
 		}
 		$tagName = '' . __CLASS__ . '_audio';

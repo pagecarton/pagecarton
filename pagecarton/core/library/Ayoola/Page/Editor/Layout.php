@@ -258,6 +258,31 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	Change Title
 			if( stripos( $page['url'], '/layout/' ) !== 0 )
 			{
+                //  if there is theme version, always ASK which to edit
+                if( ! $this->getPageEditorLayoutName() && empty( $_REQUEST['pc_edit_main_site_page'] ) )
+                {
+                    // check if theres a page specific theme file
+                    $pageThemeFileUrl = $page['url'];
+                    if( $pageThemeFileUrl == '/' )
+                    {
+                        $pageThemeFileUrl = '/index';
+                    }
+                    $themeDataFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . self::getDefaultLayout() . '/theme' . $pageThemeFileUrl . '/include';
+
+                    if( file_exists( $themeDataFile ) )
+                    {
+                        $query = '?' . http_build_query( $_GET );
+                        $this->setViewContent( '<h3>There are multiple versions of this page that is editable</h3>' );
+                        $this->setViewContent( '
+                                        <a class="pc-btn" href="' . $query . '&pc_edit_main_site_page=1">Edit Main Site ' . $page['url'] . ' Page</a>
+                                        <a class="pc-btn" href="' . $query . '&pc_page_editor_layout_name=' . self::getDefaultLayout() . '">Edit Default Theme ' . $page['url'] . ' Page</a>
+                                        ' );
+                        return false;
+                    }
+
+
+                }
+
 				$title = 'Editing "' . $page['url'] . '"';
 			}
 			else
@@ -424,7 +449,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	// 	var_export( $filter->filter( self::getDefaultLayout() ) );
 		if( ! $content['template'] = @file_get_contents( $filePath ) )
 		{
-			$this->setViewContent( '<p class="boxednews badnews">You need to select a default page "template" layout. </p><a  class="boxednews goodnews" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Page/?previous_url=/ayoola/page/edit/layout/?url=' . $page['url'] . '">Choose a template</a>.' );
+			$this->setViewContent( self::__( '<p class="boxednews badnews">You need to select a default page "template" layout. </p><a  class="boxednews goodnews" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Page/?previous_url=/ayoola/page/edit/layout/?url=' . $page['url'] . '">Choose a template</a>.' ) );
 			return false;
 		}
 		
@@ -916,7 +941,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						//	var_export( $parameters['widget_name'] );
 						}
 						$parametersToSave = $parameters + $eachObject;
-						$parametersKey = md5( json_encode( $parametersToSave ) );
+						$parametersKey = md5( static::safe_json_encode( $parametersToSave ) );
 						$whatToSave = array( 'widget_name' =>  $parameters['widget_name'] , 'url' =>  $page['url'], 'class_name' =>  $eachObject['class_name'], 'parameters' => $parametersToSave, 'parameters_key' => $parametersKey, );
 					//	var_export( $parametersToSave );
 						if( 
@@ -932,7 +957,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 							)
 							{
-								$pageWidgetIdText = http_build_query( $response );
 								$response = Ayoola_Object_PageWidget::getInstance()->insert( $whatToSave );
 								$pageWidgetIdText = http_build_query( $response );
 								if( ! empty( $values ) )
@@ -1124,7 +1148,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	var_export( $page['url'] );
 			//	var_export( get_called_class() );
 		//		exit();  
-			$dataToSave = json_encode( $values ? : $sectionalValues );
+			$dataToSave = static::safe_json_encode( $values ? : $sectionalValues );
 			//	Get new relative paths
 			$rPaths = Ayoola_Page::getPagePaths( $page['url'] );
 			$rPaths['data-backup'] = self::getPageContentsBackupLocation( $page['url'] ) . DS . time();
@@ -1196,8 +1220,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 			//	save default values if no value is set so we can preload themes.
 		//	var_export();
-			file_put_contents( $rPaths['data_json'], $dataToSave );
-			file_put_contents( $rPaths['data_json_content'], json_encode( $pageContent ) );
+            file_put_contents( $rPaths['data_json'], $dataToSave );
+			file_put_contents( $rPaths['data_json_content'], static::safe_json_encode( $pageContent ) );
 
 			//	back up current data and not previous one
 			if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  
@@ -1283,8 +1307,44 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		}
 		$this->_layoutRepresentation = str_ireplace( '</body>', '<div style="display:none;">'. $this->getViewableObjects() . '</div></body>', $this->_layoutRepresentation );
 		return $this->_layoutRepresentation;
-	} 
-			
+    } 
+    
+    public static function safe_json_encode ($value, $options = 0, $depth = 512, $utfErrorFlag = false) {
+        $encoded = json_encode($value, $options, $depth);
+        switch (json_last_error()) {
+            case JSON_ERROR_NONE:
+                return $encoded;
+            case JSON_ERROR_DEPTH:
+                return 'Maximum stack depth exceeded'; // or trigger_error() or throw new Exception()
+            case JSON_ERROR_STATE_MISMATCH:
+                return 'Underflow or the modes mismatch'; // or trigger_error() or throw new Exception()
+            case JSON_ERROR_CTRL_CHAR:
+                return 'Unexpected control character found';
+            case JSON_ERROR_SYNTAX:
+                return 'Syntax error, malformed JSON'; // or trigger_error() or throw new Exception()
+            case JSON_ERROR_UTF8:
+                $clean = static::utf8ize($value);
+                if ($utfErrorFlag) {
+                    return 'UTF8 encoding error'; // or trigger_error() or throw new Exception()
+                }
+                return static::safe_json_encode($clean, $options, $depth, true);
+            default:
+                return 'Unknown error'; // or trigger_error() or throw new Exception()
+    
+        }
+    }
+    
+    public static function utf8ize($mixed) {
+        if (is_array($mixed)) {
+            foreach ($mixed as $key => $value) {
+                $mixed[$key] = static::utf8ize($value);
+            }
+        } else if (is_string ($mixed)) {
+            return utf8_encode($mixed);
+        }
+        return $mixed;
+    }
+    
     /**
      * Overall DB operation 
      * @param void

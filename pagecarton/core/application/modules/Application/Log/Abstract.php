@@ -70,7 +70,8 @@ abstract class Application_Log_Abstract extends Ayoola_Abstract_Table
 	public function setLog()
 	{
 	//	var_export( $_SERVER );
-		$data = $this->getIdentifierData();
+        $data = $this->getIdentifierData();
+	//	var_export( $data );
 		$logViewer = $data['log_viewer'];
 		if( $path = Ayoola_Loader::checkFile( $logViewer ) )
 		{
@@ -84,7 +85,14 @@ abstract class Application_Log_Abstract extends Ayoola_Abstract_Table
 			{
 				throw new Application_Log_Exception( 'INVALID LOG VIEWER' );
 			}
-			$log = $logViewer::viewLog();
+        //    $log = $logViewer::viewLog();
+            $log = get_class( $logViewer::getLogTable() );
+            $log = '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $log . '/?show_class_data=' . $log . '">Show log in ' . $log . '</a>';
+            //static::$_logTable
+            //Application_Log_View_Error_Log
+        //    var_export( $logViewer );
+       //     var_export( $logViewer::getLogTable() );
+        //    var_export( $log );
 		}
 		$this->_log = $log;	
     }

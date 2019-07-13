@@ -100,7 +100,7 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 				//	Notify Admin
 				$mailInfo = array();
 				$mailInfo['subject'] = 'A new page created';
-				$mailInfo['body'] = 'A new page have been created on your application with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+				$mailInfo['body'] = 'A new page have been created on your application with the following information: "' . self::arrayToString( $values ) . '". 
 				
 				Preview the page on: http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . $values['url'] . '';
 				try
@@ -136,11 +136,11 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 				$page = new Ayoola_Page_Editor_Sanitize();
 				$page->refresh( $values['url'] );
 
-				$this->setViewContent( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>', true );   
+				$this->setViewContent( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>', array( 'translate' => true, 'refresh_content' => true ) );   
 				$this->setViewContent( '<p>
 																		<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '"><i class="fa fa-edit pc_give_space"></i> Add Content!</a>
 																		<a class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $values['url'] . '"> <i class="fa fa-cog pc_give_space"></i> Settings</a>
-				</p>' ); 
+				</p>', array( 'translate' => true, 'xrefresh_content' => true ) ); 
 	//		}
 	//		else
 	//		{ 
@@ -151,7 +151,7 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 		{ 
 			$this->_parameter['markup_template'] = null;
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
     } 
 	

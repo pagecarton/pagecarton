@@ -98,7 +98,7 @@ class Ayoola_Page_Layout_Editor extends Ayoola_Page_Layout_Abstract
 			}  
 			unset( $values['screenshot_url'] );
 		
-	//	$this->setViewContent( 'Layout saved successfully' );
+	//	$this->setViewContent( self::__( 'Layout saved successfully' ) );
 		}
 		catch( Exception $e )
 		{ 

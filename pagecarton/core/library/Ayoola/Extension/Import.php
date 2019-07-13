@@ -93,7 +93,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				{
 					if( ! is_dir( $dir ) )
 					{
-						$this->setViewContent( '<p class="boxednews badnews">ERROR: DIRECTORY TO UPDATE IS NOT AVAILABLE.</p>.' ); 
+						$this->setViewContent( self::__( '<p class="boxednews badnews">ERROR: DIRECTORY TO UPDATE IS NOT AVAILABLE.</p>.' ) ); 
 						return false;
 					}
 					//	Disable extension
@@ -119,7 +119,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				{
 					if( ! $result )
 					{ 
-						$this->setViewContent( '<p class="boxednews badnews">ERROR: COULD NOT SAVE PLUGIN DATA.</p>.' ); 
+						$this->setViewContent( self::__( '<p class="boxednews badnews">ERROR: COULD NOT SAVE PLUGIN DATA.</p>.' ) ); 
 						return false;
 					}
 				}
@@ -134,7 +134,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				unlink( $filename );
 				
 				$this->setViewContent( '<p class="goodnews">Plugin imported successfully. New plugins are deactivated by default when they are imported. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?extension_name=' . $extensionInfo['extension_name'] . '">Turn on!</a></p>', true );
-			//	$this->setViewContent( '' );
+			//	$this->setViewContent( self::__( '' ) );
 				
 				
 				//	Clean up temp dir

@@ -51,8 +51,8 @@ class Application_User_Help_ChangePassword extends Application_User_Help_Abstrac
 		try
 		{ 
 			$this->createForm( 'Change Password' );
-			$this->setViewContent( '<h4>Change Password</h4>' );   
-		//	$this->setViewContent( '' );
+			$this->setViewContent( self::__( '<h4>Change Password</h4>' ) );   
+		//	$this->setViewContent( self::__( '' ) );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			

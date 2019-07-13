@@ -84,7 +84,7 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 				$emailInfo = array(
 									'subject' => 'Contact Message Received!',
 									'body' => 'We have received the message with the following information:
-									' . var_export( $values, true ) . '
+									' . self::arrayToString( $values ) . '
 									',
 				
 				);

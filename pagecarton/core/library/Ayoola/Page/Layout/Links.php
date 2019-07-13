@@ -219,7 +219,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			if( $linksData )
 			{
 				$this->setViewContent( $form->view(), true ); 
-				$this->setViewContent( '<div class="pc-notify-info">Please take caution while using this tool as it is still experimental. </div>' ); 
+				$this->setViewContent( self::__( '<div class="pc-notify-info">Please take caution while using this tool as it is still experimental. </div>' ) ); 
 			}
 			else
 			{

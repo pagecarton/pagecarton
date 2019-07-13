@@ -110,7 +110,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 	//		echo $e->getMessage();
 		//	return $this->setViewContent( '<p class="badnews boxednews centerednews">Error with subscription package.</p>', true ); 
 			$this->setViewContent( '<p class="badnews boxednews centerednews">Error with subscription package.</p>', true ); 
-			$this->setViewContent( '<p class="badnews boxednews centerednews">' . $e->getMessage() . '</p>' ); 
+			$this->setViewContent( self::__( '<p class="badnews boxednews centerednews">' . $e->getMessage() . '</p>' ) ); 
 		}
     }
 	

@@ -972,7 +972,9 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				if( ! trim( $option ) )
 				{
 					continue;
-				}
+                }
+                $option = self::__( $option );
+
 				$content .= '' . $option . '';			
 			}
 		}

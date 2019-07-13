@@ -158,7 +158,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             
             if( ! in_array( $url, self::getPages( $data['layout_name'], 'list' ) ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
             
@@ -191,7 +191,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             }
             else
             {
-                $this->setViewContent( '<p class="badnews">Page could not be copied.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page could not be copied.</p>' ) ); 
             }
 
              // end of widget process

@@ -123,9 +123,9 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			//	show form
 			$this->_objectData['badnews'] = $this->getForm()->getBadnews();	
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();  
-			$this->setViewContent( '<span class="badnews" name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_badnews" style="display:none;"></span>' );
+			$this->setViewContent( self::__( '<span class="badnews" name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_badnews" style="display:none;"></span>' ) );
 			$this->setViewContent( $form );
-			$this->setViewContent( '<span name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_confirmation" style="display:none;">' . $confirmation . '</span>' );
+			$this->setViewContent( self::__( '<span name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_confirmation" style="display:none;">' . $confirmation . '</span>' ) );
 			//	var_export( $data );
 			//	return false; 
 		}
@@ -271,7 +271,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 
 
 			//	not supposed to show this but lets put it just in case the browser didnt redirect.  
-			$this->setViewContent( '<span name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_confirmation" style="">' . $confirmation . '</span>' );
+			$this->setViewContent( self::__( '<span name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_confirmation" style="">' . $confirmation . '</span>' ) );
 			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/cart' );
 			exit();
 			//	self::saveArticle( $data );

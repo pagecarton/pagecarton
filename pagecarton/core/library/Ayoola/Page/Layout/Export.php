@@ -51,7 +51,7 @@ class Ayoola_Page_Layout_Export extends Ayoola_Page_Layout_Abstract
 			else
 			{
 				$this->setViewContent( '<p>Layout cannot be exported</p>', true ); 
-				$this->setViewContent( '<p>' . $response . '</p>' ); 
+				$this->setViewContent( self::__( '<p>' . $response . '</p>' ) ); 
 			}
 		}
 		catch( Ayoola_Page_Layout_Exception $e ){ return false; }

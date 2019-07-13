@@ -71,7 +71,7 @@ abstract class Application_Article_Type_Abstract extends Application_Article_Abs
     {
 		foreach( self::getHooks() as $class )
 		{
-			$class::hook( $this, __FUNCTION__, $data );
+		//	$class::hook( $this, __FUNCTION__, $data );
 		}
 	//	self::v( $data );
 		//				exit();  
@@ -136,7 +136,7 @@ abstract class Application_Article_Type_Abstract extends Application_Article_Abs
 		{
 			case 'ENCRYPTION':
 			case 'JSON':
-				$this->_objectData = $data; 
+			//	$this->_objectData = $data; 
 			break;
 			default:
 				if( @$path )

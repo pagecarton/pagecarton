@@ -125,8 +125,8 @@ class Application_Article_Play extends Application_Article_Abstract
 		catch( Exception $e )
 		{ 
 			$this->setViewContent( Application_Article_Generator::viewInLine, true );
-			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' );
-			return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
+			$this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) );
+			return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
 	//	var_export( $this->getDbData() );
     } 

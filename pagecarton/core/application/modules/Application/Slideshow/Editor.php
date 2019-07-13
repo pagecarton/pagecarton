@@ -65,11 +65,11 @@ class Application_Slideshow_Editor extends Application_Slideshow_Abstract
 			switch( $values['slideshow_type'] )
 			{
 				case 'post':
-					$this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Creator?article_type=' .  @$values['slideshow_article_type'] . '&category=' .  @$values['category_name'] . '" class="boxednews pc-bg-color">Add new post</a>' );    
+					$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Creator?article_type=' .  @$values['slideshow_article_type'] . '&category=' .  @$values['category_name'] . '" class="boxednews pc-bg-color">Add new post</a>' ) );    
 				break;
 			//	case 'upload':
 				default:
-					$this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Manage/?slideshow_name=' .  ( @$values['slideshow_name'] ? : $data['slideshow_name'] ) . '" class="boxednews pc-bg-color">Update photos</a>' ); 
+					$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Manage/?slideshow_name=' .  ( @$values['slideshow_name'] ? : $data['slideshow_name'] ) . '" class="boxednews pc-bg-color">Update photos</a>' ) ); 
 				break;
 			}
 		}

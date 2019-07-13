@@ -10,12 +10,6 @@ abstract class Ayoola_Validator implements Ayoola_Validator_Interface
     {
         /* Initialize action controller here */
     }
-	    public static function getInstance()
-    {
-        // action body
-		return is_null($this->_instance) ? new self() : $this->_instance; 
-		
-    }
 
     public function notEmpty( $value )
     {

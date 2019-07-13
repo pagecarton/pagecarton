@@ -375,7 +375,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			{
 				$account = new Ayoola_Form_Element;
 			//	$account->id = __CLASS__ . 'level';
-				$account->addElement( array( 'name' => 'access_level', 'label' => '', 'onchange' => 'location.search+=\'&access_level=\'+ this.value;', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), array( 'Select Profile Type' ) + $options );  
+				$account->addElement( array( 'name' => 'access_level', 'label' => 'Profile Category', 'onchange' => 'location.search+=\'&access_level=\'+ this.value;', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), array( 'Select Profile Type' ) + $options );  
 				$account->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
 				$account->addLegend( $legend );
 				unset( $authLevel );
@@ -385,7 +385,22 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			{
 				$fieldset->addElement( array( 'name' => 'access_level', 'type' => 'Hidden', 'value' => $_REQUEST['access_level'] ) );  
 				$fieldset->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
-			}
+            }
+            elseif( self::hasPriviledge( 98 ) )
+            {
+				$account = new Ayoola_Form_Element;
+                $authLevel = new Ayoola_Access_AuthLevel;
+                $authLevel = $authLevel->select();
+                $options = array();
+                foreach( $authLevel as $each )
+                {
+                    $options[$each['auth_level']] =  "{$each['auth_name']}";
+                }
+                unset( $options[99], $options['99'], $options[98], $options['98'], $options[97], $options['97'], $options[0], $options['0'] );
+                $account->addElement( array( 'name' => 'access_level', 'label' => 'Profile Category', 'onchange' => 'location.search+=\'&access_level=\'+ this.value;', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), array( 'Select Profile Type' ) + $options );  
+				$form->addFieldset( $account ); 
+			//	$fieldset->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
+            }
 			$accessLevel = ( @$_REQUEST['access_level'] ? : $this->getGlobalValue( 'access_level' ) ) ? : $values['access_level'];
 	//		var_export( $accessLevel );
 	//		var_export( $values['access_level'] );

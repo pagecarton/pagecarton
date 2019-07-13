@@ -74,7 +74,7 @@ class Application_Article_Type_Poll extends Application_Article_Type_Abstract
 		//	Display Graph
 		$data['poll_graph'] = self::showGraph( $data );
 		$this->setViewContent( $data['poll_graph'] );
-		$this->setViewContent( '<p>' . $data['article_description'] . '</p>' );
+		$this->setViewContent( self::__( '<p>' . $data['article_description'] . '</p>' ) );
 		$this->_objectTemplateValues = array_merge( $data ? : array(), $this->_objectTemplateValues ? : array() );
 	//	var_export( $data );
 	//	var_export( $pollData );

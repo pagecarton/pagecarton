@@ -21,7 +21,7 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
 
             // to outputs something to the screen
             {
-                $this->setViewContent( '<h1>Hello World</h1>' ); 
+                $this->setViewContent( self::__( '<h1>Hello World</h1>' ) ); 
                 $this->setViewContent( '
                 <p>This is sample PageCarton Widget. 
                 Create a widget file on 

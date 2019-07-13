@@ -61,7 +61,7 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
     {
 		try
 		{
-		//	$this->setViewContent( '<h2>Choose a Domain Name</h2>' );
+		//	$this->setViewContent( self::__( '<h2>Choose a Domain Name</h2>' ) );
 			$this->createForm( 'Search Domain', self::$_defaultFieldset );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }

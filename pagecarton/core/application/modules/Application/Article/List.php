@@ -41,8 +41,8 @@ class Application_Article_List extends Application_Article_ShowAll
      */
 	protected function init()
     {
-//		$this->setViewContent( '<h3>OPTIONS:</h3>' );		
-	//	$this->setViewContent( '<a title="Compose an article..." rel="shadowbox;changeElementId=' . $this->getObjectName() . /'" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Creator/">+</a>' );
+//		$this->setViewContent( self::__( '<h3>OPTIONS:</h3>' ) );		
+	//	$this->setViewContent( self::__( '<a title="Compose an article..." rel="shadowbox;changeElementId=' . $this->getObjectName() . /'" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Creator/">+</a>' ) );
 		$this->setViewContent( $this->getList() );
     } 
 	

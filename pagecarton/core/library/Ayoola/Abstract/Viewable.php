@@ -759,31 +759,36 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//	if( ! Ayoola_Loader::loadClass( 'PageCarton_Locale' ) )
 		{
 			//	was slowing down app
-			return $string;
+	//		return $string;
 		}
-		if( preg_match( '#^[\s]*\{\{\{[^\{\}\s]*\}\}\}[\s]*$#', $string ) )
+    //	var_export( $string );
+    
+		if( preg_match( '#(^[\s]*\{\{\{[^\{\}\s]*\}\}\}[\s]*$)|(^[\s]*\%[^%}\s]*\%[\s]*$)|(^[^a-zA-Z]+$)#', $string ) )
 		{
 		//	var_export( $string );
 			return $string;
 		}
-		if( ! trim( $string ) || strpos( $string, '<style>' ) !== false || strpos( $string, '<script>' ) !== false )
+		if( ! trim( $string ) || strpos( $string, '<style>' ) !== false || strpos( $string, '<script>' ) !== false || is_numeric( $string ) )
 		{
-
-			return $string;
+      return $string;
 		}
 		if( strip_tags( $string ) != $string )
 		{
-			$allStrings = preg_split( '#<(?!a|span|/a|/span)[\s]?[^<>]*>#', $string );
+			$allStrings = preg_split( '#(\<[^<>]+\>)|(<!--)|(-->)|([\s]*\{\{\{[^\{\}\s]*\}\}\}[\s]*)#misU', $string );
+		//	$allStrings = preg_split( '#<(?!a|span|/a|/span)[\s]?[^<>]*>#', $string );
 		//	preg_match_all( '#[^<>]*(\<(?!a|span|/a|/span)[^<>]*>)?[^<>]*(\<(?!a|span|/a|/span)[^<>]*>)?[^<>]*#', $string, $matches );
-	//		var_export( $allStrings );
+	    //	var_export( $allStrings );
 			if( count( $allStrings ) > 1 )
 			{
 				foreach( $allStrings as $each )
 				{
+                    if( ! trim( str_ireplace( '&nbsp;', '', $each ), "\r\n\t\s " ) ){ continue; }
+                //    if( ! trim( $each, "\r\n\t\s " ) ){ continue; }
+                //    var_export( $each );
 					$translated = self::__( $each );
 					$string = str_ireplace( '>' . $each . '<', '>' . $translated . '<', $string );
 				}
-			//	var_export( $string );
+				//var_export( $string );
 				return $string;
 			}
 		}
@@ -791,7 +796,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//	var_export( $arr );
 	//	$string = trim( $string );
 
-		$storage = self::getObjectStorage( 'locale' );
+		$storage = self::getObjectStorage( array( 'id' => 'locale', 'time_out' => 1000000, ) );
 		do
 		{
 			if( ! $locale = $storage->retrieve() )
@@ -815,18 +820,18 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	var_export( $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
 				$getPreferredLanguage = function ( array $available_languages, $http_accept_language = null )
 				{
-					if (is_null($http_accept_language))
+					if( is_null( $http_accept_language ) ) 
 					{
-						if (!isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+						if ( ! isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) 
 						{
 							return array();
 						}
 						$http_accept_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
 					}
-					$available_languages = array_flip($available_languages);
+					$available_languages = array_flip( $available_languages );
 
 					$langs;
-					preg_match_all('~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower($http_accept_language), $matches, PREG_SET_ORDER);
+					preg_match_all(' ~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower( $http_accept_language ), $matches, PREG_SET_ORDER);
 					foreach($matches as $match) {
 
 						list($a, $b) = explode('-', $match[1]) + array('', '');
@@ -860,7 +865,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 			//	cache is workaround because of insert not active until next load
 			//	was causing double inserting of words when the words are double on same page
-			$stringStorage = self::getObjectStorage( 'stringInfo' . $string . 'dddss' );
+			$stringStorage = self::getObjectStorage( array( 'id' => 'stringInfo' . $string . 'dddss', 'device' => 'File', 'time_out' => 100000, ) );     
 			if( ! $stringInfo = $stringStorage->retrieve() )
 			{
 				$words = PageCarton_Locale_OriginalString::getInstance();
@@ -1706,22 +1711,32 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	 * Sets the _viewContent
 	 *
      */
-    public function setViewContent( $content = null, $refresh = false )
+    public function setViewContent( $content = null, $options = '' )
 	{
-	//	if( is_object( $content ) ) var_export( $content );
+    //    var_export( $options );
 		if( is_object( $content ) ){ $content = $content->view(); }
 		if( ! trim( $content ) )
 		{
 		//	var_export( $content );
 			//	don't return empty tags
 			return false;
-		}
+        }
+        if( $options && ! is_array( $options ) )
+        {
+            $ix = $options;
+            $options = array();
+            $options['refresh_content'] = $ix;
+        }
+        if( @$options['translate'] )
+        {
+            $content = self::__( $content );
+        }
 		foreach( self::getHooks() as $class )
 		{
 			$class::hook( $this, __FUNCTION__, $content );
 		}
-		if( null === $this->_viewContent || true === $refresh )
-		{
+		if( null === $this->_viewContent || true === @$options['refresh_content'] )
+		{ 
 			$this->_viewContentText = null;
 			$this->_viewContent = new Ayoola_Xml();
 		//	self::v( get_class( $this ) );

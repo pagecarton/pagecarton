@@ -193,7 +193,10 @@ class Ayoola_Doc_Browser extends Ayoola_Doc_Abstract
 	//	$list->setListOptions( array( 'Creator' => ' ' ) );
 		$list->setListOptions( 
 					array( 
-						'Creator' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/" title="Upload a file">Upload File</a>' ) );
+                        'Creator' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/" title="Upload a file">Upload File</a>',
+                        'Settings' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Settings/" title="Files Settings">Document Settings</a>' 
+                        ) 
+                    );
 
 		$list->setKey( 'url' );
 		$list->setNoRecordMessage( 'There is no file in the selected directory.' );

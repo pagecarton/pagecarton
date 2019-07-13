@@ -60,7 +60,7 @@ class Ayoola_Page_Layout_Pages_Code extends Ayoola_Page_Layout_Pages
             $allPages = array_combine( $allPages, $allPages );
             if( ! in_array( $url, $allPages ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
             $realUrl = $url;
@@ -72,7 +72,7 @@ class Ayoola_Page_Layout_Pages_Code extends Ayoola_Page_Layout_Pages
         //    var_export( $from );
             if( ! $from = Ayoola_Loader::getFullPath( $from, array( 'prioritize_my_copy' => true ) ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
             $code = file_get_contents( $from );

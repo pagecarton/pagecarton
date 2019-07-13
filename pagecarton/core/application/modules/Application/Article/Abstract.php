@@ -423,7 +423,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			return false;
 		}
-	//	$text = '<?php return ' . var_export( $values, true ) . ';';
 		$values['file_size'] = intval( strlen( var_export( $values, true ) ) );
 		
 		$validator = new Ayoola_Validator_UserRestrictions();
@@ -478,7 +477,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 	 	return true;
 
-	//	return file_put_contents( self::getFolder() . $values['article_url'], '<?php return ' . var_export( $values, true ) . ';' );   
 	}
 	 
     /**
@@ -608,7 +606,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	//	var_export( $jsonData );
 	//	var_export( $data );
 		$storage = self::getObjectStorage( array( 'id' => __CLASS__ . 'xxweeff', 'device' => 'File', 'time_out' => 10000, ) );
-		$presetValues = $storage->retrieve();  
+        $presetValues = $storage->retrieve();  
+        
 		if( ! is_array( $presetValues ) )
 		{
 			$presetValues = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $data['article_type'] ) );
@@ -616,7 +615,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 		if( ! empty( $presetValues['preset_keys'] ) && ! empty( $presetValues['preset_values'] ) )
 		{
-			$presetValues = array_combine( $presetValues['preset_keys'], $presetValues['preset_values'] );
+            $presetValues = array_combine( $presetValues['preset_keys'], $presetValues['preset_values'] );
+            $data = is_array( $data ) ? $data : array();
+            $presetValues = is_array( $presetValues ) ? $presetValues : array();
 			$data += $presetValues;
 		}
 	//	$presetValues = Application_Article_Type::getInstance()->select();
@@ -1519,6 +1520,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$fieldName64 = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url_base64' ) : 'document_url_base64' );
 				//	var_export( $link );
 					$fieldset->addElement( array( 'name' => 'document_url', 'label' => 'Cover Photo', 'placeholder' => 'Cover Photo for this ' . $postTypeLabel . '', 'type' => 'Document', 'value' => @$values['document_url'] ) );
+					$fieldset->addRequirement( 'document_url', array( 'NotEmpty' => null ) );
 				break;  
 				case 'category':   
 
@@ -1880,10 +1882,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				case 'video':
 					//	video
 					$fieldset->addElement( array( 'name' => 'video_url' . $featurePrefix, 'type' => 'InputText', 'value' => @$values['video_url' . $featurePrefix] ) );
+					$fieldset->addRequirement( 'video_url' . $featurePrefix, array( 'NotEmpty' => null ) );
 				break;
 				case 'link':
 					//	link
 					$fieldset->addElement( array( 'name' => 'link_url' . $featurePrefix, 'type' => 'InputText', 'value' => @$values['link_url' . $featurePrefix] ) );
+					$fieldset->addRequirement( 'link_url' . $featurePrefix, array( 'NotEmpty' => null ) );
 				break;
 				case 'date':
 				case 'datetime':
@@ -1980,7 +1984,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				break;
 				case 'article':
 					$fieldset->addElement( array( 'name' => 'article_content' . $featurePrefix, 'data-html' => '1', 'label' => '' . $postTypeLabel . ' write up  ' . $featurePrefix, 'rows' => '10', 'placeholder' => 'Enter content here...', 'type' => 'TextArea', 'value' => @$values['article_content' . $featurePrefix] ? : @$values['article_description' . $featurePrefix] ) );
-
+					$fieldset->addRequirement( 'article_content' . $featurePrefix, array( 'NotEmpty' => null ) );
 				break;
 				case 'audio':
 				case 'music':
@@ -1995,9 +1999,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 												'require_user_info' => 'Require log-in before download', 
 												'download_notification' => 'Notify me on every download', 
 											);
-					$fieldset->addElement( array( 'name' => 'download_options' . $featurePrefix, 'label' => '' . $postTypeLabel . ' Options', 'type' => 'Checkbox', 'value' => @$values['download_options' . $featurePrefix] ), $downloadOptions  );
+				//	$fieldset->addElement( array( 'name' => 'download_options' . $featurePrefix, 'label' => '' . $postTypeLabel . ' Options', 'type' => 'Checkbox', 'value' => @$values['download_options' . $featurePrefix] ), $downloadOptions  );
 					
 					$fieldset->addElement( array( 'name' => 'download_url' . $featurePrefix, 'label' => 'Download File', 'placeholder' => 'e.g. http://example.com/path/to/file.mp3', 'type' => 'Document', 'optional' => 'optional', 'value' => @$values['download_url' . $featurePrefix] ) );
+					$fieldset->addRequirement( 'download_url' . $featurePrefix, array( 'NotEmpty' => null ) );
 				break;
 				default:
 					
@@ -2064,7 +2069,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( count( $profiles )  > 1 )
 		{
 		//	var_dump()
-			$fieldset->addElement( array( 'name' => 'profile_url', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles );
+			$fieldset->addElement( array( 'name' => 'profile_url',  'onchange' => 'ayoola.div.manageOptions( { database: "Application_Profile_Table", listWidget: "Application_Profile_ShowAll", values: "profile_url", labels: "display_name", element: this } );', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles + array( '__manage_options' => '[Manage Profiles]' ) );
 		//	$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
 		}
 		else

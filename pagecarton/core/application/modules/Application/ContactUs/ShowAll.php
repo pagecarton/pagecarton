@@ -53,7 +53,7 @@ class Application_ContactUs_ShowAll extends Application_ContactUs_Abstract
 		//	$this->setViewContent( '<h2>' . self::getObjectTitle() . '</h2>', true );
 			if( ! $this->getDbData() )
 			{ 
-				return $this->setViewContent( '<div class="noRecord">No one has left a message using the contact form yet.</div>' ); 
+				return $this->setViewContent( self::__( '<div class="noRecord">No one has left a message using the contact form yet.</div>' ) ); 
 				
 				return false;
 			}

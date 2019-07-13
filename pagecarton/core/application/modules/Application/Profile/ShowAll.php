@@ -100,7 +100,7 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 		//	$this->createList( $data );
 			$this->setViewContent( $this->createList( $data ) );
 		//	var_export( $template );
-		//	$this->setViewContent( '<div style="clear:both"></div>' );
+		//	$this->setViewContent( self::__( '<div style="clear:both"></div>' ) );
 	//		$this->_parameter['markup_template'] = $template;
 		//	var_export( $this->_parameter['markup_template'] );
 		}
@@ -108,7 +108,7 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 		{ 
 			$this->_parameter['markup_template'] = null;
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with profile package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with profile package.</p>' ) ); 
 		}
 	//	var_export( $this->getDbData() );
     } 

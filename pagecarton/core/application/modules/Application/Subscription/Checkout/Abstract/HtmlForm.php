@@ -73,7 +73,7 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
 			$this->setViewContent( "<p class='badnews'>Please select other payment methods.</p>" ); 
 			return;  
 		}
-	//	$this->setViewContent( '<p></p><h4></h4>' );
+	//	$this->setViewContent( self::__( '<p></p><h4></h4>' ) );
 		$this->setViewContent( $this->getForm()->view() );
     } 
 	

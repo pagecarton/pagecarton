@@ -44,7 +44,7 @@ class Application_CommentBox_Table_Creator extends Application_CommentBox_Table_
 			//	Notify Admin
 			$mailInfo = array();
 			$mailInfo['subject'] = __CLASS__;
-			$mailInfo['body'] = 'Form submitted on your PageCarton Installation with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'Form submitted on your PageCarton Installation with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			';
 			try

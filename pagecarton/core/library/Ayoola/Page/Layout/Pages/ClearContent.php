@@ -58,7 +58,7 @@ class Ayoola_Page_Layout_Pages_ClearContent extends Ayoola_Page_Layout_Pages
             
             if( ! in_array( $url, self::getPages( $data['layout_name'], 'list' ) ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
             $pageThemeFileUrl = $url;
@@ -79,7 +79,7 @@ class Ayoola_Page_Layout_Pages_ClearContent extends Ayoola_Page_Layout_Pages
             if( ! is_file( $from ) )
             {
                 //  don't create this page unless it's saved
-                $this->setViewContent( '<p class="badnews">Theme page has no saved content</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Theme page has no saved content</p>' ) ); 
                 return false;
             }
             
@@ -101,7 +101,7 @@ class Ayoola_Page_Layout_Pages_ClearContent extends Ayoola_Page_Layout_Pages
             }
          //   else
             {
-          //      $this->setViewContent( '<p class="badnews">Page could not be copied.</p>' ); 
+          //      $this->setViewContent( self::__( '<p class="badnews">Page could not be copied.</p>' ) ); 
             }
 
              // end of widget process

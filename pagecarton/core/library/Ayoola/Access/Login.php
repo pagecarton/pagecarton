@@ -121,7 +121,7 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 		}
 		if( Ayoola_Page::getPreviousUrl() && ! empty( $_REQUEST['pc_coded_login_message'] ) )
 		{
-			$this->setViewContent( '<p class="badnews boxednews">' . $this->getObjectStorage( 'pc_coded_login_message' )->retrieve() . '</p>' );
+			$this->setViewContent( self::__( '<p class="badnews boxednews">' . $this->getObjectStorage( 'pc_coded_login_message' )->retrieve() . '</p>' ) );
 		}
 		$this->setViewContent( $this->getForm()->view() );
 
@@ -222,7 +222,7 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			if( $urlToGo )
 			{
 				$this->setViewContent( 'Login Successful. You are being redirected to the previous page... <a href="' . $urlToGo . '">Click here if you are not redirected to the page in 5 seconds.</a>', true );
-				$this->setViewContent( '<span id="ayoola-js-redirect-whole-page"></span>' );
+				$this->setViewContent( self::__( '<span id="ayoola-js-redirect-whole-page"></span>' ) );
 			}
 			return true;
 		}

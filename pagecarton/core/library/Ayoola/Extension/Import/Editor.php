@@ -55,7 +55,7 @@ class Ayoola_Extension_Import_Editor extends Ayoola_Extension_Import_Abstract
 			return false;
 		}
 			$this->setViewContent( '<p class="boxednews goodnews">Plugin saved successfully.</p>', true );
-			$this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Extension_Import_Download/?extension_name=' . $identifierData['extension_name'] . '" class="boxednews goodnews">Download</a>' );
+			$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Extension_Import_Download/?extension_name=' . $identifierData['extension_name'] . '" class="boxednews goodnews">Download</a>' ) );
     } 
 	// END OF CLASS
 }

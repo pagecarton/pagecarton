@@ -59,7 +59,7 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 				$class = new Ayoola_Page_Layout_Pages_Duplicate( $parameters );
 				if( $class->init() )
 				{
-				//	$this->setViewContent( '<div>' . $class->view() . '</div>' ); 
+				//	$this->setViewContent( self::__( '<div>' . $class->view() . '</div>' ) ); 
 				}
 			//	var_export( $class->view() );
 
@@ -80,7 +80,7 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 						//	Create the Directory  
 					if( is_file( $origin[$key] ) &&  ! @copy( $origin[$key], $to ) )  
 					{
-						$this->setViewContent( '<p>Contents "' . $origin[$key] . '" could not be copied to "' . $tPaths[$key] . '".</p>' ); 
+						$this->setViewContent( self::__( '<p>Contents "' . $origin[$key] . '" could not be copied to "' . $tPaths[$key] . '".</p>' ) ); 
 					}
 				
 				}
@@ -103,14 +103,14 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 				Ayoola_Doc::createDirectory( dirname( $file ) );
 				if( is_file( $origin[$key] ) && ! @copy( $origin[$key], $destination[$key] ) )  
 				{
-					$this->setViewContent( '<p>Contents of "' . $origin[$key] . '" could not be copied to "' . $destination[$key] . '".</p>' ); 
+					$this->setViewContent( self::__( '<p>Contents of "' . $origin[$key] . '" could not be copied to "' . $destination[$key] . '".</p>' ) ); 
 				}
 			
 			}
 			
 			
 	//		var_export( $data );
-			$this->setViewContent( '<p>Contents of "' . $values['origin'] . '" was copied to "' . $values['destination'] . '".</p>' ); 
+			$this->setViewContent( self::__( '<p>Contents of "' . $values['origin'] . '" was copied to "' . $values['destination'] . '".</p>' ) ); 
 			
 		}
 		catch( Exception $e )

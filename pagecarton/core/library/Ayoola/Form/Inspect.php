@@ -145,7 +145,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 		{ 
 			$this->_parameter['markup_template'] = null;
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
     } 
 	

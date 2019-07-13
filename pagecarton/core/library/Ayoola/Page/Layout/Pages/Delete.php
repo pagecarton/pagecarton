@@ -88,12 +88,12 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
             $allPages = array_combine( $allPages, $allPages );
             if( ! in_array( $url, $allPages ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
             if( $url === '/' )
             {
-                $this->setViewContent( '<p class="badnews">You can not delete the index page.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">You can not delete the index page.</p>' ) ); 
                 return false;   
             }
             
@@ -108,7 +108,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
         //    var_export( $from );
             if( ! $from = Ayoola_Loader::getFullPath( $from, array( 'prioritize_my_copy' => true ) ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
 
@@ -122,7 +122,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
             }
             else
             {
-                $this->setViewContent( '<p class="badnews">Theme Page could not be deleted.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Theme Page could not be deleted.</p>' ) ); 
             }
 
              // end of widget process

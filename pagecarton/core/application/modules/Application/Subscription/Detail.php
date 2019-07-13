@@ -68,7 +68,7 @@ class Application_Subscription_Detail extends Application_Subscription_Abstract
 		catch( Exception $e )
 		{ 
 			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true ); 
-			return $this->setViewContent( '<p>Error with subscription package</p>' ); 
+			return $this->setViewContent( self::__( '<p>Error with subscription package</p>' ) ); 
 		}
 	//	var_export( $this->_xml );
     } 

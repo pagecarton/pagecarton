@@ -51,8 +51,8 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 		try
 		{ 
 			$this->createForm( 'Reset Password' );
-	//		$this->setViewContent( '<h3>Reset Password</h3>' );
-			$this->setViewContent( '<p class="pc-notify-info">Fill the following information to reset your password</p>' );
+	//		$this->setViewContent( self::__( '<h3>Reset Password</h3>' ) );
+			$this->setViewContent( self::__( '<p class="pc-notify-info">Fill the following information to reset your password</p>' ) );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			

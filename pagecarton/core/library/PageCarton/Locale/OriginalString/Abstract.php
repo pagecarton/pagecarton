@@ -65,7 +65,7 @@ class PageCarton_Locale_OriginalString_Abstract extends PageCarton_Widget
 
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'string', 'type' => 'InputText', 'value' => @$values['string'] ) ); 
+        $fieldset->addElement( array( 'name' => 'string', 'type' => 'TextArea', 'value' => @$values['string'] ) ); 
 //      $fieldset->addElement( array( 'name' => 'pages', 'type' => 'InputText', 'value' => @$values['pages'] ) ); 
 
 		$fieldset->addLegend( $legend );

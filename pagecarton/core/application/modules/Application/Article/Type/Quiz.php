@@ -346,13 +346,13 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 			Application_Javascript::addFile( '/ayoola/js/form.js' );
 			Application_Javascript::addFile( '/ayoola/js/countdown.js' );
 		//	var_export( @$dataToSend['container']);
-		//	$this->setViewContent( '<p>' . $data['article_description'] . '</p>' );   
+		//	$this->setViewContent( self::__( '<p>' . $data['article_description'] . '</p>' ) );   
 			//	Prompt user to login before they continue test
 			
 		//	if( ! $access->isLoggedIn() )
 			{ 
-		//		$this->setViewContent( '<h2 class="badnews">Notice!</h2>' );
-		//		$this->setViewContent( '<p class="badnews boxednews">To save your score and other information about this test, please login with your username and password before you start the test.</p>' );
+		//		$this->setViewContent( self::__( '<h2 class="badnews">Notice!</h2>' ) );
+		//		$this->setViewContent( self::__( '<p class="badnews boxednews">To save your score and other information about this test, please login with your username and password before you start the test.</p>' ) );
 		//		$this->setViewContent( Ayoola_Access_AccountRequired::viewInLine() );
 			}
 			$this->setViewContent
@@ -380,7 +380,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 		{
 			
 		}
- */	//	$this->setViewContent( '<p>' . $data['article_description'] . '</p>' );
+ */	//	$this->setViewContent( self::__( '<p>' . $data['article_description'] . '</p>' ) );
 	//	var_export( $data );
 	//	var_export( $pollData );
 		}
@@ -388,14 +388,14 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 		{ 
 		//	$this->_parameter['markup_template'] = null;
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
 		catch( Exception $e )
 		{ 
 			//	self::v( $e->getMessage() );
 		//	$this->_parameter['markup_template'] = null;
 			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
 	
     } 

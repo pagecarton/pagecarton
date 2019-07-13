@@ -87,7 +87,7 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 			$this->setViewContent( '<div class="boxednews badnews">Profile deleted successfully</div>', true ); 
 			if( @$_GET['previous_url'] )
 			{
-				$this->setViewContent( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
+				$this->setViewContent( self::__( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' ) );
 			}
 						
 			//	Notify Admin

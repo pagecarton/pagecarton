@@ -185,8 +185,8 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 	//		var_export( $identifier );
 	//		var_export( $this->getParameter() );
 	//		var_export( $e->getMessage() );
-			$this->setViewContent( '<h2 class="badnews">WIDGET ERROR</h2>' );
-			$this->setViewContent( '<p class="pc-notify">' . $e->getMessage() . '</p>' );
+			$this->setViewContent( self::__( '<h2 class="badnews">WIDGET ERROR</h2>' ) );
+			$this->setViewContent( self::__( '<p class="pc-notify">' . $e->getMessage() . '</p>' ) );
 	//		throw new Ayoola_Exception( 'OBJECT TO BE PLAYED NOT FOUND' );
  	//		$this->setViewContent( '<h4>ERROR:</h4>', true );
 			
@@ -196,7 +196,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 		}
 		if( ! $this->getParameter( 'silent_when_object_not_found' ) )
 		{
-			$this->setViewContent( '<p class="badnews">No valid widget embedded.</p>' );
+			$this->setViewContent( self::__( '<p class="badnews">No valid widget embedded.</p>' ) );
 		}
 		
     }

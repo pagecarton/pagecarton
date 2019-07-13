@@ -53,7 +53,6 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $file1 = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $loc;
             }
             $coreZip = dirname( $file1 ) . DS . 'pagecarton.zip';
-
             if( ! file_exists( $coreZip ) || ! file_exists( $file1 ) || ! empty( $_REQUEST['pc_recreate_installer'] ) )   
             {
                 set_time_limit( 0 );
@@ -62,8 +61,20 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $version = implode( '.', $version ) . '.x';
 
                 //  download main core
-                $link = 'https://github.com/pagecarton/pagecarton/archive/' . $version . '.zip'; 
-                $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
+
+                $config = PageCarton::getDomainSettings( 'site_configuraton' );
+            //    var_export( $config );
+            //    exit();
+
+                if( empty( $config['repository'] ) )
+                {
+                    $config['repository'] = 'https://github.com/pagecarton/pagecarton/archive/' . $version . '.zip'; 
+                }
+
+                if( ! $content = self::fetchLink( $config['repository'], array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) ) )
+                {
+                    die( 'NOT ABLE TO CONNECT TO REPOSITORY - ' . $config['repository'] . ' ' );
+                }
                 $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';  
     
                 $filename .= '.zip';
@@ -89,11 +100,14 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $backup->startBuffering(); 
 
            //     var_export( APPLICATION_DIR );
+                
+                $dirPcBase = Ayoola_Doc::getDirectories( $tempDir );
+                $dirPcBase = array_pop( $dirPcBase );
 
-                $from = $tempDir . DS . 'pagecarton-' . $version . '/pagecarton/core';
+                $from = $dirPcBase . '/pagecarton/core';
                 $to = APPLICATION_DIR . '';
-           //     var_export( $from );
-           //     var_export( $to );
+            //    var_export( $from );
+            //    var_export( $to );
                 Ayoola_Doc::createDirectory( $to );
                 Ayoola_Doc::recursiveCopy( $to, $to . '-' . PageCarton::VERSION );    
            //     $to = rename( $to, $to . '-' . PageCarton::VERSION );
@@ -176,7 +190,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
         { 
             //  Alert! Clear the all other content and display whats below.
             $this->setViewContent( $e->getMessage() ); 
-            $this->setViewContent( 'Theres an error in the code' ); 
+            $this->setViewContent( self::__( 'Theres an error in the code' ) ); 
             return false; 
         }
 	}

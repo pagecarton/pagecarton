@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="settingsname" creation_time="1508122209" table_version="0.05" module_version="1.00" table_class="Application_Settings_SettingsName" creation_ip="2130706433">
-  <RECORDS autoId="14">
+  <RECORDS autoId="15">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Payments]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[1]]></TABLE_FIELD>
@@ -79,6 +79,13 @@
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[environment]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1526319838]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="14">
+      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Locale]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[PageCarton_Locale_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[locale]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[1559818234]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1559818234]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

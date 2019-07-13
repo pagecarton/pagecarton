@@ -104,7 +104,7 @@ class Ayoola_Api extends Ayoola_Abstract_Table
 /* 			$data['data'] = array ( 'x' => '', 'country_id' => '1770', 'dial_code' => '234 (NIGERIA)', 'phonenumber' => '8054449535', 'phonenumber_id' => '20', '' => '', 'method' => 'insert', 'table' => 'Application_User_UserPhoneNumber', );
 			echo self::check( $data );
 			echo self::call( $data );
- */			$this->setViewContent( 'The API connection on this application is powered by Ayoola Content Management Framework (Ayoola CMF). To learn about how to connect securely to this application, visit <a href="http://ayoo.la/cmf/">Ayoola CMF website.</a>' );
+ */			$this->setViewContent( self::__( 'The API connection on this application is powered by Ayoola Content Management Framework (Ayoola CMF). To learn about how to connect securely to this application, visit <a href="http://ayoo.la/cmf/">Ayoola CMF website.</a>' ) );
 		}
 		
     } 

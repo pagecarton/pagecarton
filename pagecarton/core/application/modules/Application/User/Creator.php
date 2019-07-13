@@ -96,7 +96,7 @@ class Application_User_Creator extends Application_User_Abstract
     protected function init()
     {
 		$this->createForm( $this->getParameter( 'submit_value' ) ?  : 'Create Account', $this->getParameter( 'legend' ) );
-	//	$this->setViewContent( '<h2>Sign up for a free account.</h2>' ); 
+	//	$this->setViewContent( self::__( '<h2>Sign up for a free account.</h2>' ) ); 
 		$auth = new Ayoola_Access();
 		$urlToGo = $this->getParameter( 'return_url' ) ? : Ayoola_Page::getPreviousUrl();
 		//	var_export( $urlToGo ); 
@@ -238,12 +238,12 @@ class Application_User_Creator extends Application_User_Abstract
 			return false;
 		}
  		$this->setViewContent( '<h2 class="goodnews">Account Confirmation</h2>', true );
- 		$this->setViewContent( '<p>New user account has been created successfully. An email has been sent to ' . $values['email'] . ' containing how to activate and verify the new account. You can login immediately.</p>' );
- 		$this->setViewContent( '<h4></h4>' );
+ 		$this->setViewContent( self::__( '<p>New user account has been created successfully. An email has been sent to ' . $values['email'] . ' containing how to activate and verify the new account. You can login immediately.</p>' ) );
+ 		$this->setViewContent( self::__( '<h4></h4>' ) );
 		
 		if( ! Ayoola_Application::isClassPlayer() )
 		{
- 			$this->setViewContent( '<p><a target="_parent" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl( '/account' ) . '">Continue...</a></p>' );     
+ 			$this->setViewContent( self::__( '<p><a target="_parent" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl( '/account' ) . '">Continue...</a></p>' ) );     
 		}
 
 
@@ -265,12 +265,12 @@ class Application_User_Creator extends Application_User_Abstract
 				header( 'Location: ' . Ayoola_Application::getUrlPrefix() . $urlToGo );
 				exit();
 			}
-			$this->setViewContent( '<div id="ayoola-js-redirect-whole-page"></div>' );
+			$this->setViewContent( self::__( '<div id="ayoola-js-redirect-whole-page"></div>' ) );
 		}
 		
 		if( ! @$this->_sendActivationEmail() )
 		{ 
-			$this->setViewContent( '<p class="badnews">We were unable to deliver the email to you due to system error</p>' ); 
+			$this->setViewContent( self::__( '<p class="badnews">We were unable to deliver the email to you due to system error</p>' ) ); 
 		}
 		
 		//	Referrers

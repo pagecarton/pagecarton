@@ -44,7 +44,7 @@ class PageCarton_Locale_OriginalString_Creator extends PageCarton_Locale_Origina
 			//	Notify Admin
 			$mailInfo = array();
 			$mailInfo['subject'] = __CLASS__;
-			$mailInfo['body'] = 'Form submitted on your PageCarton Installation with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'Form submitted on your PageCarton Installation with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			';
 			try
@@ -68,8 +68,8 @@ class PageCarton_Locale_OriginalString_Creator extends PageCarton_Locale_Origina
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+            $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
 	}

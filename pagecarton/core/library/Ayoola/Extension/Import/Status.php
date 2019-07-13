@@ -141,6 +141,8 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 						self::changeStatus( $currentStatus, $from , $to );
 					}
 				}
+                $sanitizeClass = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $uri, 'auto_create_page' => true ) );  
+                $sanitizeClass->refresh( $uri );	     		
 			}
 		}
 		if( @$data['templates'] )
@@ -167,10 +169,10 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 		unset( $data['extension_id'] );
  		if( ! $this->updateDb( $data ) )
 		{ 
-			$this->setViewContent( '<p class="badnews">Error: could not save Plugin.</p>.' ); 
+			$this->setViewContent( self::__( '<p class="badnews">Error: could not save Plugin.</p>.' ) ); 
 			return false;
 		}
-		$this->setViewContent( '<p class="boxednews goodnews">Plugin switch "' . $data['status'] . '" successfully. ' . $settings . '</p>' );
+		$this->setViewContent( self::__( '<p class="boxednews goodnews">Plugin switch "' . $data['status'] . '" successfully. ' . $settings . '</p>' ) );
 	//	var_Export( $data );  
 		//	clear cache
 		Application_Cache_Clear::viewInLine();	

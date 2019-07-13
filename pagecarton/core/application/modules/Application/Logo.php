@@ -50,8 +50,8 @@ class Application_Logo extends Ayoola_Abstract_Table
     {
 		try
 		{ 
-			$this->setViewContent( '<h2>Website Logo</h2>' );
-			$this->setViewContent( '<p>Right here, you will be able to view or modify the logo that would be displayed accross all pages on the website.</p>' );
+			$this->setViewContent( self::__( '<h2>Website Logo</h2>' ) );
+			$this->setViewContent( self::__( '<p>Right here, you will be able to view or modify the logo that would be displayed accross all pages on the website.</p>' ) );
 		//	$this->setViewContent( $this->getForm()->view() ); 
 		//	$this->setViewContent( Ayoola_Page_Editor_Image::viewInLine( array( 'image_url' => '/img/logo.png', 'crop' => true, ) ) ); 
 			$this->setViewContent( Ayoola_Page_Editor_Image::viewInLine( array( 'image_url' => '/img/logo.png', 'ignore_width_and_height' => true, ) ) ); 
