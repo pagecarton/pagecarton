@@ -1372,9 +1372,11 @@ MAKE LOGIN FORM CONSPICOUS AT ALL TIMES
 layout form such that even when no much content on page when login box displayed,
 forcing form up the page will not cause distortion
 
+    --> .row conflicts with bootstrap and other popular library classes
+
 */
 
-.row {
+.pc-row {
   min-height: 100px;
 }
 
