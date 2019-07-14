@@ -87,7 +87,6 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 		$mailInfo['subject'] = 'Domain Information Altered';
 		$mailInfo['body'] = 'The domain table have been altered: Here is the domain information: "' . self::arrayToString( $values ) . '". 
 		
-		Domain options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/domain/.
 		';
 		try
 		{

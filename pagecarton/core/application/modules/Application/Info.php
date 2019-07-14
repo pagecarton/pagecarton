@@ -145,8 +145,8 @@ class Application_Info extends Ayoola_Abstract_Playable
  */		
 			$options = array(
 							'Default Domain' => Ayoola_Page::getDefaultDomain(), 
-							'Last Backup' => "<a href='" . Ayoola_Application::getUrlPrefix() . "/ayoola/backup/'>$backup</a>", 
-							'Total Signed Up Accounts' => "<a href='" . Ayoola_Application::getUrlPrefix() . "/ayoola/accounts/'>$users</a>", 
+							'Last Backup' => "", 
+							'Total Signed Up Accounts' => "", 
 					//		'Disk Space Used' => $diskspace . ' (' . $this->getObjectStorage( array( 'id' => 'file_count', 'device' => 'File', 'time_out' => 86400, ) )->retrieve() . ' files; ' . $filterTime->filter( $this->getObjectStorage( array( 'id' => 'time', 'device' => 'File', 'time_out' => 86400, ) )->retrieve() ) . ') ',
 							'Upgrade' => '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Upgrade/" class="pc-btn pc-bg-color pc-btn-small">Upgrade PageCarton</a>'
 						);
