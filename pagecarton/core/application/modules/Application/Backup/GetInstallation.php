@@ -133,7 +133,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 file_put_contents( $coreZip, $content['response'] );
                 if( ! empty( $_REQUEST['pc_recreate_installer'] ) )   
                 {
-                    exit( 'pc_recreate_installer done!' );  
+                    exit( $config['repository'] . ' pc_recreate_installer done!' );  
                 }
     
 
