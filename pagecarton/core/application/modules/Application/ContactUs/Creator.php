@@ -99,19 +99,7 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 				@self::sendMail( $emailInfo );
 				
 			}
-			
-/* 			//	Notify Admin
-			$mailInfo['subject'] = 'New Contact Message';
-			$mailInfo['body'] = 'Someone left a message titled "' . $values['contactus_subject'] . '", using the contact form. 
-			
-			You can view the new message by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/.
-			';
-			try
-			{
-				Ayoola_Application_Notification::mail( $mailInfo );
-			}
-			catch( Ayoola_Exception $e ){ null; }
- */		}
+		}
 		catch( Application_ContactUs_Exception $e ){ return false; }
     } 
 	// END OF CLASS
