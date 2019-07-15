@@ -79,20 +79,24 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 			
 			if( $emailAddress )
 			{
-			
+            
+                unset( $values['contactus_creator_user_id'] );
+                unset( $values['contactus_creation_date'] );
 
 				$emailInfo = array(
-									'subject' => 'Contact Message Received!',
-									'body' => 'We have received the message with the following information:
+									'subject' => 'Re: ' . $values['contactus_subject'],
+									'body' => 'We have received the message with the following information from the contact form:
 									' . self::arrayToString( $values ) . '
 									',
 				
 				);
 				$emailInfo['to'] = implode( ',', array_unique( $emailAddress ) );
-				$emailInfo['bcc'] = Ayoola_Application_Notification::getEmails();
+			//	$emailInfo['bcc'] = Ayoola_Application_Notification::getEmails();
 			//	$emailInfo['html'] = true; 
 				@self::sendMail( $emailInfo );
-			//	self::v( $emailInfo );
+            //    self::v( $emailInfo );
+                $emailInfo['to'] = Ayoola_Application_Notification::getEmails();;
+				@self::sendMail( $emailInfo );
 				
 			}
 			
