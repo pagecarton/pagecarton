@@ -190,7 +190,9 @@ class Ayoola_Xml extends DOMDocument
 			{
 				unlink( $tempName );
 			//	Application_Log_View_Error::log( $tempName . ' stayed too long. It is now removed.' );
-			}
+            }
+            //  no waiting because causing delay and crashing servers.
+            //  Will reserve inserts
 		}
 		else 
 		{
@@ -256,6 +258,9 @@ class Ayoola_Xml extends DOMDocument
         {
 			throw new Ayoola_Xml_Exception( 'Error while saving ' . basename( $filename ) ); 
         }
+        //  no waiting because causing delay and crashing servers.
+        //  Will reserve inserts
+    
 	//	while( ! @$result = parent::save( $filename, $options ) )
 		{ 
 	//		if( time() > $time + $giveUpAfter )
