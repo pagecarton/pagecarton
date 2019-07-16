@@ -71,7 +71,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                     $config['repository'] = 'https://github.com/pagecarton/pagecarton/archive/' . $version . '.zip'; 
                 }
 
-                if( ! $content = self::fetchLink( $config['repository'], array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) ) )
+                if( ! $content = self::fetchLink( $config['repository'], array( 'rand' => time(), 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) ) )
                 {
                     die( 'NOT ABLE TO CONNECT TO REPOSITORY - ' . $config['repository'] . ' ' );
                 }
