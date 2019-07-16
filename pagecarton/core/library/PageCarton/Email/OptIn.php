@@ -19,6 +19,13 @@
 class PageCarton_Email_OptIn extends Application_User_UserEmail_Creator
 {
 	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Email Opt-In'; 
+	
 
-	// END OF CLASS         
+	// END OF CLASS          
 }

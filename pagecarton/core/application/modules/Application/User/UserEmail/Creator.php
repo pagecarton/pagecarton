@@ -65,14 +65,21 @@ class Application_User_UserEmail_Creator extends Application_User_UserEmail_Abst
 					
 					//	confirmation email
 					$this->sendConfirmationMail( $values );  
+
+				$emailInfo = array(
+									'subject' => 'New Email Opt-In',
+									'body' => 'New email opt-in received:
+									' . self::arrayToString( $values ) . '
+									',
+				
+				);
+                $emailInfo['to'] = Ayoola_Application_Notification::getEmails();;
+				@self::sendMail( $emailInfo );
 			//	$goodnews .= "Email was successfully added to our mailing list. ";
 					$this->setViewContent( '<p class="goodnews">Email was successfully added to our mailing list.</p>', true );	
 				}
 				catch( Ayoola_Exception $e )
 				{ 
-				//	var_export( $e->getMessage() );	
-				//	$this->getForm()->setBadnews( 'Could not add e-mail address to mailing list.' );
-			//		$this->setViewContent( $this->getForm()->view(), true );
 					$this->setViewContent( '<p class="badnews">Email was not added to our mailing list. This is likely because you are already on our list.</p>', true );	
 				}
 			}
