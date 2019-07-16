@@ -191,14 +191,6 @@ class Ayoola_Xml extends DOMDocument
 				unlink( $tempName );
 			//	Application_Log_View_Error::log( $tempName . ' stayed too long. It is now removed.' );
 			}
-			while( time() < $time )
-			{
-				usleep( 100 );
-				if( ! is_file( $tempName ) )
-				{
-					return true;
-				}
-			}
 		}
 		else 
 		{
@@ -259,14 +251,18 @@ class Ayoola_Xml extends DOMDocument
 		
 		//	Make sure the file is saved before you give up
 		$giveUpAfter = 5; //sec
-		$time = time();
-		while( ! @$result = parent::save( $filename, $options ) )
+        $time = time();
+        if( ! $result = parent::save( $filename, $options ) )
+        {
+			throw new Ayoola_Xml_Exception( 'Error while saving ' . basename( $filename ) ); 
+        }
+	//	while( ! @$result = parent::save( $filename, $options ) )
 		{ 
-			if( time() > $time + $giveUpAfter )
+	//		if( time() > $time + $giveUpAfter )
 			{ 
-				throw new Ayoola_Xml_Exception( 'Error while saving ' . basename( $filename ) ); 
+	//			throw new Ayoola_Xml_Exception( 'Error while saving ' . basename( $filename ) ); 
 			}
-			continue; 
+	//		continue; 
 		}
 		$this->setFilename( $filename );
 		@unlink( $tempName );
