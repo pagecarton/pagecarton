@@ -246,6 +246,23 @@ class Application_User_Creator extends Application_User_Abstract
  			$this->setViewContent( self::__( '<p><a target="_parent" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl( '/account' ) . '">Continue...</a></p>' ) );     
 		}
 
+        if( $_REQUEST['notify_us'] )
+        {
+            $emailInfo = array(
+                                'subject' => $values['email'] . ' signed up',
+                                'body' => 'A new user has been created with the following information:
+                                ' . self::arrayToString( $values ) . '
+                                
+                                New accounts will have a standard access to the website and will not have administrative privileges. If you would like to grant some access, consider upgrading the user by clicking the link below.
+
+                                <a href="/widgets/Application_User_Editor?username=' . $values['username'] . '"></a>
+                                ',
+            
+            );
+            $emailInfo['to'] = Ayoola_Application_Notification::getEmails();;
+            @self::sendMail( $emailInfo );
+
+        }
 
 		//	Auto log me in now without confirmation
 		if( $this->getParameter( 'signin' ) || ! empty( $urlToGo ) ) 
