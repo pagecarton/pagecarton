@@ -64,7 +64,6 @@ class Application_Domain_Creator extends Application_Domain_Abstract
 			$mailInfo['subject'] = 'Domain name added';
 			$mailInfo['body'] = 'A new domain have been added to your application. Here is the domain information: "' . self::arrayToString( $values ) . '". 
 			
-			Domain options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/domain/.
 			';
 			//	var_export( $newCart );
 			Ayoola_Application_Notification::mail( $mailInfo );

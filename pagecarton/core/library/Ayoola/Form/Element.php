@@ -519,7 +519,6 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 			$link .= '&unique_id=' . $uniqueIDForElement;
 		}
-//		$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . $element['name'];
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 		
 		//	Need to be up so as to serve the JS

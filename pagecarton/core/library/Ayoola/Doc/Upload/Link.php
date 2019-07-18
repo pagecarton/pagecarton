@@ -213,7 +213,6 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
  			
 			$dropZoneJs = ' var a = document.getElementsByName(\'' . $dropZoneName . '\'); for( var b = 0; b < a.length; b++ ){ ayoola.image.setDropZone( a[b] ); a[b].style.display == \'none\' ? a[b].style.display=\'block\' : a[b].style.display=\'none\'; } ';
 			$showMenuJs = ' var a = document.getElementsByName(\'' . $optionName . '\'); for( var b = 0; b < a.length; b++ ){ a[b].style.display == \'none\' ? a[b].style.display=\'inline-block\' : a[b].style.display=\'none\'; }  this.style.display=\'inline-block\';  this.innerHTML=\'Show or hide menu...\';';
-		//	$link = '' . Ayoola_Application::getUrlPrefix() . '/ayoola/thirdparty/Filemanager/index.php?field_name=' . $this->getParameter( 'field_name' );
 		//	var_export( $this->getParameter( 'field_name' ) );
 		//	var_export( $this->getGlobalValue( $this->getParameter( 'field_name' ) ) ); 
 			$uri = $plainUrl;

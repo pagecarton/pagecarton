@@ -287,7 +287,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 							<body>
 								Someone added an item into their shopping cart. The current cart contents are as follows:
 								' . Application_Subscription_Cart::viewInLine() . '		
-								Subscription options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/subscription/.
 							</body></html>       
 		';
 		try

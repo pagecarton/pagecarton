@@ -210,8 +210,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	$_POST = array();
 
 			//	Long journey
-		//	$this->setViewContent( '<span class="boxednews">Page successfully created.</span> <span class="boxednews goodnews"><a href="' . Ayoola_Application::getUrlPrefix() . '/ayoola/page/edit/layout/?url=' . $page['url'] . '"> Edit</a></span>', true );
-		//	header( 'Location: /ayoola/page/edit/layout/?url=' . $page['url'] );
 		//	return false;
 		
 			//	reload the page settings to get settings for new page.
