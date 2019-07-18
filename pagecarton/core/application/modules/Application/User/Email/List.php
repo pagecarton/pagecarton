@@ -63,7 +63,9 @@ class Application_User_Email_List extends Application_User_Email_Abstract
 		$list->pageName = $this->getObjectName();
 		$list->setData( $this->getDbData() );
 //		var_export( $this->getDbData() );
-		$list->setListOptions( array( 'Settings' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/E-mail/" title="Advanced E-mail Settings">Advanced Settings</a>' ) );
+		$list->setListOptions( array( 
+         //   'Settings' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/E-mail/" title="Advanced E-mail Settings">Advanced Settings</a>' 
+         ) );
 		$this->setIdColumn( 'email_id' );
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No Email Accounts' );  
