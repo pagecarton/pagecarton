@@ -25,7 +25,7 @@ class PageCarton_MultiSite_Table extends PageCarton_Table_Public
      *
      * @param string
      */
-    protected $_tableVersion = '0.5';  
+    protected $_tableVersion = '0.6';  
 
     /**
      * Table data types and declaration
@@ -36,6 +36,8 @@ class PageCarton_MultiSite_Table extends PageCarton_Table_Public
 	protected $_dataTypes = array (
   'directory' => 'INPUTTEXT',
   'parent_dir' => 'INPUTTEXT',
+  'redirect_url' => 'INPUTTEXT',
+  'options' => 'JSON',
   'creation_time' => 'INPUTTEXT',
 );
 

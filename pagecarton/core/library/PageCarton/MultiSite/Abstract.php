@@ -150,7 +150,9 @@ class PageCarton_MultiSite_Abstract extends PageCarton_Widget
 		$fieldset = new Ayoola_Form_Element;
 		$form->submitValue = $submitValue ;
 //		$form->oneFieldSetAtATime = true;
-		$fieldset->placeholderInPlaceOfLabel = false;
+        $fieldset->placeholderInPlaceOfLabel = false;
+        
+        if( empty( $values ) )
 		{
 			
 			Application_Javascript::addCode
@@ -181,6 +183,17 @@ class PageCarton_MultiSite_Abstract extends PageCarton_Widget
 //$fieldset->addFilter( 'directory','Username' );
 			$fieldset->addRequirement( 'directory', array( 'NotEmpty' => array( 'badnews' => 'Directory cannot be left blank.', ), 'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^0-9a-zA-Z-_\/', ), 'WordCount' => array( 1,50 ), 'DuplicateUser' => array( 'Username', 'username', 'badnews' => '"%variable%" has already been used.', ) ) );
         }
+        else
+        {
+            $fieldset->addElement( array( 'name' => 'redirect_url', 'label' => 'Redirect Site to This URL', 'placeholder' => 'e.g. /url or https://example.com/url', 'type' => 'InputText', 'value' => @$values['redirect_url'] ) ); 
+        }
+
+
+        $options = array(
+            'enforce_ssl' => 'Enforce SSL',
+        );
+        $fieldset->addElement( array( 'name' => 'options', 'label' => 'Site Options', 'type' => 'Checkbox', 'value' => @$values['options'] ), $options ); 
+
 		$fieldset->addLegend( $legend );
 		$fieldset->addFilters( 'StripTags::Trim' );
 		$form->addFieldset( $fieldset );   

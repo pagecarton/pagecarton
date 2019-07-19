@@ -1252,12 +1252,14 @@ class Ayoola_Application
 				$multiSiteDir = '/' . $nameForModule;
 		//		PageCarton_Widget::v( $multiSiteDir );
 
-				if( $sites = $table->select( null, array( 'directory' => $multiSiteDir ) ) )
+				if( $sites = $table->selectOne( null, array( 'directory' => $multiSiteDir ) ) )
 				{
 					Ayoola_Application::reset( array( 'path' => $multiSiteDir ) );
 					//	change requested url
-					$requestedUri = self::getRequestedUri();
-					//	var_export( $requestedUri );
+                    $requestedUri = self::getRequestedUri();
+                    
+					//	var_export( $sites['redirect_url'] );
+					//	var_export( $sites );
 					//	var_export( $multiSiteDir );
 					$requestedUri = explode( $multiSiteDir, $requestedUri );
 					//	var_export( $requestedUri );
@@ -1268,6 +1270,17 @@ class Ayoola_Application
 					//	https://www.comeriver.com/music/2019/02/25/music-smartex-iya-niwura.html
 					//	two cases of /music
 					$requestedUri = implode( $multiSiteDir, $requestedUri );
+                    if( $sites['redirect_url'] && empty( $_REQUEST['ignore_domain_redirect'] ) )
+                    {
+                        $toGo = rtrim( $sites['redirect_url'], '/' ) . $requestedUri . '?' . http_build_query( $_GET );
+                                           //     var_export( rtrim( $sites['redirect_url'], '/' ) );
+                                            //    var_export( $toGo );
+                                           //     exit();
+
+                        header( 'Location: ' . $toGo  );
+                    //	var_export( $data );
+                        exit( 'REDIRECTING TO' );
+                    }
 				//	$requestedUri = array_shift( $requestedUri );
 					//	var_export( $requestedUri );
 					self::$_requestedUri = $requestedUri;
