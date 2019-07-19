@@ -372,6 +372,22 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	}
 
     /**
+     * Where to temporarily dump data if table files are busy
+     *
+     * @param void
+     * @return string
+     */
+    public function getMyTempProcessDirectory( $filePath = null )
+    {
+        if( ! $filePath )
+        {
+          $filePath = $this->getMyFilename();
+        }
+		$dir = dirname( $filePath ) . DS . '__' . DS . get_class( $this ) . DS . $this->getTableName();
+		return $dir;
+	}
+
+    /**
      * SUPPLEMENTARY FILES FOR LARGE RECORDS
      *
      * @param void

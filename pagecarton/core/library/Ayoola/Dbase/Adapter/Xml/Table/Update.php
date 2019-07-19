@@ -44,8 +44,20 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 		foreach( $files as $filename )
 		{
 		//	var_export( $this->getMyFilename() );
-			$this->setXml();
-			$this->getXml()->load( $filename );
+            $this->setXml();
+
+            $processDir = $this->getMyTempProcessDirectory();
+            if( ! $this->loadTableDataFromFile( $filename  ) )
+            {
+                Ayoola_Doc::createDirectory( $processDir );
+                $tempData = serialize( func_get_args() );
+                $tempFile = $processDir . DS . md5( $tempData . time() );
+            //    var_export( func_get_args() );
+                file_put_contents( $tempFile, $tempData );
+                continue;
+            }
+    
+		//	$this->getXml()->load( $filename );
 			$this->getXml()->setId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );
 			$rows = $this->query( 'SELECT', null, $where, array( 'filename' => $filename ) );
 	//		return $rows;
@@ -80,6 +92,24 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 			$result ? $this->saveFile( $filename ) : null;
 		//	$this->saveFile( $filename );
 		}
+        if( $processes = Ayoola_Doc::getFilesRecursive( $processDir ) AND empty( $this->proccesses ) )
+        {
+            $this->proccesses = $processes;
+        //    var_export( $processes );
+        //    exit( $processes );
+            foreach( $processes as $process )
+            {
+                if( $tempData = unserialize( file_get_contents( $process ) ) )
+                {
+                    $response = $this->init( $tempData[0], $tempData[1] );
+                //    var_export( $response );
+                //    var_export( $tempData );
+                    unlink( $process );
+                }
+
+            }
+        }    
+
 	//	$this->clearCache();
 		return $count;
     } 

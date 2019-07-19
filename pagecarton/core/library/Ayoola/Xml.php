@@ -210,10 +210,10 @@ class Ayoola_Xml extends DOMDocument
      */
     public function load( $filename, $options = null )
     {
-		$tempName = $filename . '.lock';
+        $tempName = $filename . '.lock';
 		if( ! self::checkLockFile( $tempName ) )
 		{
-			throw new Ayoola_Xml_Exception( 'XML FILE TOO BUSY' );
+			return false;
 		}
 		if( ! $path = Ayoola_Loader::checkFile( $filename ) )
 		{
@@ -242,7 +242,7 @@ class Ayoola_Xml extends DOMDocument
 		$tempName = $filename . '.lock';  
 		if( ! self::checkLockFile( $tempName ) )
 		{
-			throw new Ayoola_Xml_Exception( 'XML FILE TOO BUSY' );
+			return false;
 		}
 		if( is_file( $filename ) )
 		{

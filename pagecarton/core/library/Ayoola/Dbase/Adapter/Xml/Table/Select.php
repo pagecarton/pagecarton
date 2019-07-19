@@ -65,7 +65,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		{
 		//	var_export( $this->getMyFilename() );
 			$this->setXml();
-			$this->getXml()->load( $options['filename'] );
+		//	$this->getXml()->load( $options['filename'] );
+            if( ! $this->loadTableDataFromFile( $options['filename'], true ) )
+            {
+
+            }
 			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );
 	//		PageCarton_Widget::v( $rows );
 		}
@@ -131,7 +135,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//			Ayoola_Page::v( $filename );
 		//	var_export( $this->getMyFilename() );
 			$this->setXml();
-			$this->getXml()->load( $filename );
+		//	$this->getXml()->load( $filename );
+            if( ! $this->loadTableDataFromFile( $filename, true ) )
+            {
+
+            }
 			$rowsInThisFile = $this->doSelect( $fieldsToFetch, $where, $innerOptions );
 			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $rowsInThisFile ) : $rows + $rowsInThisFile;
 			$totalRows = count( $rows );

@@ -407,6 +407,27 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
     } 
 
     /**
+     * Load data into table
+     *
+     * @param string $filename
+     * @return bool
+     */
+    public function loadTableDataFromFile( $filename, $fallback = false )
+    {
+        if( ! $this->getXml()->load( $filename )  )
+        {
+            //  fall back to backed up lock file
+            if( $fallback && $this->getXml()->load( $filename . '.lock' ) )
+            {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
      * Gets data types of fields on a table
      *
      * @return array
@@ -444,7 +465,10 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
 		//	is_file( $filename ) ? $this->getXml()->load( $filename ) : null;
 		
 			//	Giving last chance helps in some cases
-			$this->getXml()->load( $filename );
+            if( ! $this->loadTableDataFromFile( $filename, true ) )
+            {
+
+            }
 			if( $node = $this->getXml()->getElementsByTagName( self::TAGNAME_DATA_TYPES )->item( 0 ) )
 			{
 			//	var_export( $this->getXml()->getTagAttributes( $node ) );

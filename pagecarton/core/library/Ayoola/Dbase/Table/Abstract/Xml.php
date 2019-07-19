@@ -159,38 +159,31 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
                 //    cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
                 break;
             }
-            if (!empty(static::$_tableInfo['table_info']) && (empty(static::$_tableInfo['table_info']['table_version']) || empty(static::$_tableInfo['table_info']['module_version']))) {
+            if(
+                ! empty( static::$_tableInfo['table_info'] ) && ( empty( static::$_tableInfo['table_info']['table_version'] ) || empty( static::$_tableInfo['table_info']['module_version'] ) ) ) 
+            {
                 break;
             }
-            if (!empty(static::$_tableInfo['table_info']) && (@static::$_tableInfo['table_info']['table_version'] === $this->_tableVersion && @static::$_tableInfo['table_info']['module_version'] === self::$_version)) {
-/*        if( file_exists( $backupFile ) && time() - filemtime( $backupFile ) > 86400 )
-{
-$values = include( $backupFile );
-$num = count( $values );
-rename( $backupFile, $backupFile . '.backup' );
-set_time_limit( 86400 );
-//              PageCarton_Widget::v( $num );
-
-foreach( $values as $intK => $each )
-{
-try
-{
-//    PageCarton_Widget::v( $intK );
-//      PageCarton_Widget::v( $each['form_name'] );
-$this->insert( $each );
-}
-catch( Exception $e )
-{
-null;
-}
-}
-
-//  lets just try to revive the saved data
-//      self::v( $backupFile );
-PageCarton_Widget::v( $backupFile );
-}
- */break;
+            if(
+                ! empty( static::$_tableInfo['table_info'] ) && ( @static::$_tableInfo['table_info']['table_version'] === $this->_tableVersion && @static::$_tableInfo['table_info']['module_version'] === self::$_version)
+            ) 
+            {
+                break;
             }
+            //  don't recreate if we are locked
+            $xml = new Ayoola_Xml();
+            if( ! $xml->load( static::$_tableInfo['filename'] ) )
+            {
+                break;
+            }
+            if(
+                empty( static::$_tableInfo['table_info'] )
+            ) 
+            {
+                //  for some reasons this is not set after file lock is removed on article views
+                break;
+            }
+
             //
             $previousAccessibility = $this->_accessibility;
             $previousRelationship  = $this->_relationship;
@@ -231,6 +224,7 @@ PageCarton_Widget::v( $backupFile );
                 //    copy(  static::$_tableInfo['filename'], $backupFile );
             }
             //    Store the values in the backup file
+            //    var_export( static::$_tableInfo );
             //    var_export( $values );
             try
             {
