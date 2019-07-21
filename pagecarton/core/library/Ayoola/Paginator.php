@@ -943,27 +943,6 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		$noToShow = null;
 		$order = null;
 		$content .= ' <div style="" class="pc-btn-parent">';			
-		if( $this->_noOfRecords > 10 ) 
-		{
-		
-			$noToShow = '<select class="pc-element-like-btn" onChange="window.location.search = window.location.search + \'&noPerPage=\' + this.value;">
-						<option>' . $this->_noOfPageRecords . ' out of ' . $this->_noOfRecords . '</option>  O
-						<option>10</option>
-						<option>20</option>
-						<option>50</option>
-						<option>100</option>
-						<option>200</option>
-						<option>300</option>
-						<option>500</option>
-					</select>
-					';
-			$order = '<select class="pc-element-like-btn" onChange="window.location.search = window.location.search + \'&pc_sort_order_inverse=\' + this.value;">
-						<option>Order...</option>  
-						<option value=' . ( @$_GET['pc_sort_order_inverse'] ? '0' : '1' ) . '>Inverse</option>
-					</select>
-					';
-			$content .='' . $noToShow .' ' . $order .'';
-		}  
 		if( $this->_listOptions )
 		{
 		//	$content .= '<h4>OPTIONS:</h4>';
@@ -982,31 +961,56 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		if( $this->_noOfPageRecords !== $this->_noOfRecords )     
 		{	
 			if( $this->showPagination  ){ $content .= $this->getPagination(); }
-		}
-		if( $this->showSearchBox  )
-		{ 
-			$keys = @array_keys( array_pop( $this->getData() ) );
-			if( $keys  )
-			{ 
-				//	Put search 
-				$keys = array_combine( $keys, $keys );
-				$newForm = new Ayoola_Form( array( 'name' => 'xxx', 'class' => 'xxx', 'data-not-playable' => true, 'method' => 'GET', 'action' => '?' . http_build_query( $_GET ), ) );
-				$newForm->setParameter( array( 'no_fieldset' => true, 'no_required_fieldset' => true, ) );
-				$newFieldSet = new Ayoola_Form_Element;
-				$newFieldSet->container = 'span';
-				$newFieldSet->hashElementName = false;
-				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_value',  'label' => '',  'multiple' => 'multiple', 'placeholder' => 'Search ' . $this->listTitle . '...', 'style' => 'width:100%; max-width:500px;text-transform:none;cursor:auto', 'class' => 'pc-element-like-btn', 'type' => 'InputText', 'value' => null ) );
-				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_name', 'onchange' => 'this.form.submit()', 'class' => 'pc-element-like-btn', 'style' => 'width:100%; max-width:300px;cursor:auto',  'label' => '  ',  'multiple' => 'multiple', 'type' => 'Select', 'value' => null ), array( 'Select Search Column...' ) + $keys );
-				$newForm->addFieldset( $newFieldSet );  
-				
-				$newFieldSet = new Ayoola_Form_Element;
-				$newFieldSet->container = 'span';
-				$newFieldSet->hashElementName = false;
-				$newFieldSet->addElement( array( 'name' => 'search-object', 'type' => 'Hidden', 'value' => $this->pageName ) );
-				$newForm->addFieldset( $newFieldSet );     
-				$content .= $newForm->view();  
-			}
-		}
+        }
+        
+		if( $this->_noOfRecords > 10 ) 
+		{
+		
+			$noToShow = '<select style="height:2em; padding:1em;" onChange="window.location.search = window.location.search + \'&noPerPage=\' + this.value;">
+						<option>' . $this->_noOfPageRecords . ' out of ' . $this->_noOfRecords . '</option>  O
+						<option>10</option>
+						<option>20</option>
+						<option>50</option>
+						<option>100</option>
+						<option>200</option>
+						<option>300</option>
+						<option>500</option>
+					</select>
+					';
+			$order = '<select style="height:2em; padding:1em;" onChange="window.location.search = window.location.search + \'&pc_sort_order_inverse=\' + this.value;">
+						<option>Order...</option>  
+						<option value=' . ( @$_GET['pc_sort_order_inverse'] ? '0' : '1' ) . '>Inverse</option>
+					</select>
+					';
+            $orderEtall ='' . $noToShow .' ' . $order .'';
+            
+        //    if( $this->showSearchBox  )
+            { 
+                $keys = @array_keys( array_pop( $this->getData() ) );
+                if( $keys  )
+                { 
+                    //	Put search 
+                    $keys = array_combine( $keys, $keys );
+                    $newForm = new Ayoola_Form( array( 'name' => 'xxx', 'class' => 'xxx', 'data-not-playable' => true, 'method' => 'GET', 'action' => '?' . http_build_query( $_GET ), ) );
+                    $newForm->setParameter( array( 'no_fieldset' => true, 'no_required_fieldset' => true, ) );
+                    $newFieldSet = new Ayoola_Form_Element;
+                    $newFieldSet->container = 'span';
+                    $newFieldSet->hashElementName = false;
+                    $newFieldSet->addElement( array( 'name' => 'xxx', 'type' => 'Html', 'value' => null ), array( 'html' => $orderEtall ) );
+                    $newFieldSet->addElement( array( 'name' => 'db_where_clause_field_value',  'label' => '',  'multiple' => 'multiple', 'placeholder' => 'Search ' . $this->listTitle . '...', 'style' => 'width:100%; max-width:500px;text-transform:none;cursor:auto; height:2em; padding:1em;', 'type' => 'InputText', 'value' => null ) );
+                    $newFieldSet->addElement( array( 'name' => 'db_where_clause_field_name', 'onchange' => 'this.form.submit()', 'class' => '', 'style' => 'width:100%; max-width:300px;cursor:auto; height:2em; padding:1em;',  'label' => '  ',  'multiple' => 'multiple', 'type' => 'Select', 'value' => null ), array( 'Select Search Column...' ) + $keys );
+                    $newForm->addFieldset( $newFieldSet );  
+                    
+                    
+                    $newFieldSet = new Ayoola_Form_Element;
+                    $newFieldSet->container = 'span';
+                    $newFieldSet->hashElementName = false;
+                    $newFieldSet->addElement( array( 'name' => 'search-object', 'type' => 'Hidden', 'value' => $this->pageName ) );
+                    $newForm->addFieldset( $newFieldSet );     
+                    $content .= $newForm->view();  
+                }
+            }
+		}  
 		$content .= '</div>';     		
 		$content .= $list;
 		return $content;
