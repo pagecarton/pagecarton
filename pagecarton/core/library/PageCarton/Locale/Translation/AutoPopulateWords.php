@@ -61,8 +61,8 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                     continue;
                 }
                 Ayoola_Application::setRuntimeSettings( 'real_url', $page['url'] );
-            //    include_once( $pagePaths['include'] );
-                $this->setViewContent(  '' . self::__( '<div class="pc-notify-info"><a href="' . $link . '">' . $link . '</a> viewed successfully</div>' ) . ''  );
+                include_once( $pagePaths['include'] );
+                $this->setViewContent(  '<li class=""><a href="' . $link . '">' . $link . '</a>  viewed successfully</li>' );
                 //                self::v( $link );
             //    self::fetchLink( $link );
             }
@@ -70,6 +70,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
 
             foreach( Ayoola_Object_Embed::getWidgets() as $class )
             {
+                
                 $filter = new Ayoola_Filter_ClassToFilename();
 				$classFile = $filter->filter( $class );
 				$classFile = Ayoola_Loader::getFullPath( $classFile );
@@ -83,16 +84,16 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
 
                 foreach( $output[2] as $phrase )
                 {
+                    $phrase = trim( $phrase );
                     if( false === strpos( $phrase, ' ' ) )
                     {
                         continue;
                     }
-                    self::v( $phrase );
-
-                //   self::__( $phrase );
+                   self::__( $phrase );
                 //    $this->setViewContent( $phrase );
                 }
-                $this->setViewContent(  '' . self::__( '<div class="pc-notify-info"><a href="' . $link . '">' . $class . '</a> widget viewed successfully</div>' ) . ''  );
+                $class::viewInLine();
+                $this->setViewContent( '<li class=""><a href="' . Ayoola_Page::getHomePageUrl() . $link . '">' . $class . '</a>  widget viewed successfully</li>' );
             }
             Ayoola_Application::setRuntimeSettings( 'real_url', $currentUrl );
 

@@ -861,7 +861,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				return $string;
 			}
 		}
-	//	var_export( $string );
+        if( false !== strpos( $string, '<' ) )
+        {
+            return $string;
+        }
+        if( false !== strpos( $string, '>' ) )
+        {
+            return $string;
+        }
+
+//	var_export( $string );
 	//	var_export( $arr );
 	//	$string = trim( $string );
 
@@ -882,19 +891,28 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$stringStorage = self::getObjectStorage( array( 'id' => 'stringInfo' . $string . 'dddss', 'device' => 'File', 'time_out' => 100000, ) );     
 			if( ! $stringInfo = $stringStorage->retrieve() )
 			{
-				$words = PageCarton_Locale_OriginalString::getInstance();
+                $words = PageCarton_Locale_OriginalString::getInstance();
+                $url = Ayoola_Application::getRuntimeSettings( 'real_url' );
+                switch( $url )
+                {
+                    case '/widgets':
+                    case '/object':
+                    case '/tools/classplayer':
+                        $url = '/widgets/' . $_SERVER['HTTP_AYOOLA_PLAY_CLASS'];
+                    break;
+                }
 				if( ! $stringInfo = $words->selectOne( null, array( 'string' => $string ) ) )
 				{
 			//		var_export( $string );
 					$options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
 					if( is_array( $options ) && in_array( 'autosave_new_words', $options ) )
 					{
-						$stringInfo = $words->insert( array( 'string' => $string, 'pages' => array( Ayoola_Application::getRuntimeSettings( 'real_url' ) ), ) );
+						$stringInfo = $words->insert( array( 'string' => $string, 'pages' => array( $url ), ) );
 					}
                 }
-                if( ! empty( $stringInfo['pages'] ) && ! in_array( Ayoola_Application::getRuntimeSettings( 'real_url' ), $stringInfo['pages'] ) )
+                if( ! empty( $stringInfo['pages'] ) && ! in_array( $url, $stringInfo['pages'] ) )
                 {
-                    $stringInfo['pages'][] = Ayoola_Application::getRuntimeSettings( 'real_url' );
+                    $stringInfo['pages'][] = $url;
                     $words->update( $stringInfo, array( 'originalstring_id' => $stringInfo['originalstring_id'] ) );
                 }
 				$stringStorage->store( $stringInfo );
