@@ -39,7 +39,7 @@ class Application_Category_Delete extends Application_Category_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['category_name'],  'Delete Category' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Category deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Category deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Category_Exception $e ){ return false; }
     } 

@@ -43,7 +43,7 @@ class Application_ContactUs_View extends Application_ContactUs_Abstract
     {
 		try
 		{
-			if( ! $data = $this->getIdentifierData() ){ return $this->setViewContent( 'Message Not Found', true ); }
+			if( ! $data = $this->getIdentifierData() ){ return $this->setViewContent(  '' . self::__( 'Message Not Found' ) . '', true  ); }
 			$pageInfo = array(
 				'title' => $data['contactus_subject'] . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' )
 			);
@@ -53,7 +53,7 @@ class Application_ContactUs_View extends Application_ContactUs_Abstract
 			if( ! $data['contactus_first_view_date'] ){ $update['contactus_first_view_date'] = time(); }
 			@$this->updateDb( $update );
 		}
-		catch( Exception $e ){ return $this->setViewContent( 'Error with contactus package', true ); }
+		catch( Exception $e ){ return $this->setViewContent(  '' . self::__( 'Error with contactus package' ) . '', true  ); }
 	//	var_export( $this->_xml );
     } 
 	

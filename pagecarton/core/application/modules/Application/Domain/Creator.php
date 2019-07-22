@@ -57,7 +57,7 @@ class Application_Domain_Creator extends Application_Domain_Abstract
 			//	clear domain cache
 			Ayoola_File_Storage::purgeDomain( $values['domain_name'] );
 
-			$this->setViewContent( '<p>Domain name added successfully.</p>', true );
+			$this->setViewContent(  '' . self::__( '<p>Domain name added successfully.</p>' ) . '', true  );
 			
 			//	Notify Admin
 			$mailInfo = array();

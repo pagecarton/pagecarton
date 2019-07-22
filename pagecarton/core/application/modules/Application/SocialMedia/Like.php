@@ -36,7 +36,7 @@ class Application_SocialMedia_Like extends Application_SocialMedia_Abstract
 	public function init()
     {
 		self::load();
-		$this->setViewContent( '<div class="fb-like" data-href="' . $this->getUrl() . '" data-send="true" data-width="520" data-show-faces="false"></div>', true );
+		$this->setViewContent(  '' . self::__( '<div class="fb-like" data-href="' . $this->getUrl() . '" data-send="true" data-width="520" data-show-faces="false"></div>' ) . '', true  );
     } 
 	// END OF CLASS
 }

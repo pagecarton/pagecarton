@@ -149,7 +149,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					//	self::v( $each );
 					//	self::v( $eachX );  
 					//	self::v( Ayoola_Loader::getValidIncludePaths( $eachX ) );
-						$this->setViewContent( '<p>A new page could not be created because: Some of the files could not be copied. Please go to <a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/?url=' . $this->_dbWhereClause['url'] . '">Create a fresh page at ' . $this->_dbWhereClause['url'] . '.</a></p>', true );
+						$this->setViewContent(  '' . self::__( '<p>A new page could not be created because: Some of the files could not be copied. Please go to <a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/?url=' . $this->_dbWhereClause['url'] . '">Create a fresh page at ' . $this->_dbWhereClause['url'] . '.</a></p>' ) . '', true  );
 					}
 					else
 					{
@@ -179,7 +179,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			if( ! $class->getForm()->getValues() || $class->getForm()->getBadnews() )
 			{
 		//	self::v( __LINE__ . '<br>' );
-				$this->setViewContent( '<p>A new page could not be created because: ' . array_shift( $class->getForm()->getBadnews() ) . '. Please go to <a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/?url=' . $this->_dbWhereClause['url'] . '">Create a fresh page at ' . $this->_dbWhereClause['url'] . '.</a></p>', true );
+				$this->setViewContent(  '' . self::__( '<p>A new page could not be created because: ' . array_shift( $class->getForm()->getBadnews() ) . '. Please go to <a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/?url=' . $this->_dbWhereClause['url'] . '">Create a fresh page at ' . $this->_dbWhereClause['url'] . '.</a></p>' ) . '', true  );
 				return false;
 			}
 	//		self::v( __LINE__ . '<br>' );
@@ -270,11 +270,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                     if( file_exists( $themeDataFile ) )
                     {
                         $query = '?' . http_build_query( $_GET );
-                        $this->setViewContent( '<h3>There are multiple versions of this page that is editable</h3>' );
-                        $this->setViewContent( '
+                        $this->setViewContent(  '' . self::__( '<h3>There are multiple versions of this page that is editable</h3>' ) . ''  );
+                        $this->setViewContent(  self::__( '
                                         <a class="pc-btn" href="' . $query . '&pc_edit_main_site_page=1">Edit Main Site ' . $page['url'] . ' Page</a>
                                         <a class="pc-btn" href="' . $query . '&pc_page_editor_layout_name=' . self::getDefaultLayout() . '">Edit Default Theme ' . $page['url'] . ' Page</a>
-                                        ' );
+                                        ' ) );
                         return false;
                     }
 

@@ -188,7 +188,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 			$this->setViewContent( self::__( '<h2 class="badnews">WIDGET ERROR</h2>' ) );
 			$this->setViewContent( self::__( '<p class="pc-notify">' . $e->getMessage() . '</p>' ) );
 	//		throw new Ayoola_Exception( 'OBJECT TO BE PLAYED NOT FOUND' );
- 	//		$this->setViewContent( '<h4>ERROR:</h4>', true );
+ 	//		$this->setViewContent(  '' . self::__( '<h4>ERROR:</h4>' ) . '', true  );
 			
  	//		header( 'Location: /404/' ); 
 	//		exit();

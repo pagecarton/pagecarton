@@ -36,7 +36,7 @@ class Application_Subscription_Cycle_Creator extends Application_Subscription_Cy
     {
 		$this->createForm( 'Create Cycle', 'Create a new Billing Cycle' );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->insertDb() ){ $this->setViewContent( 'Subscription cycle created successfully', true ); }
+		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Subscription cycle created successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

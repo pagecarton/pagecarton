@@ -43,7 +43,7 @@ class Application_Cron_Editor extends Application_Cron_Abstract
 			
 			//	Delete previous and insert present
 			$this->update( array( 'delete' => $data['task'], 'insert' => $values['task'] ) );
-			if( $this->updateDb() ){ $this->setViewContent( 'Cron edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Cron edited successfully' ) . '', true  ); }
 		}
 		catch( Application_Cron_Exception $e ){ return false; }
     } 

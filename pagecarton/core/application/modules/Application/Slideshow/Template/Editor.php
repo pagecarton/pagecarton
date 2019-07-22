@@ -47,7 +47,7 @@ class Application_Slideshow_Template_Editor extends Application_Slideshow_Templa
 			if( ! $this->updateDb( $values ) ){ return false; }
 			
 	//		var_export( $data );
-			$this->setViewContent( 'Slideshow template edited successfully', true );
+			$this->setViewContent(  '' . self::__( 'Slideshow template edited successfully' ) . '', true  );
 			
 		}
 		catch( Exception $e ){ return false; }

@@ -35,7 +35,7 @@ class Ayoola_Form_Requirement_Creator extends Ayoola_Form_Requirement_Abstract
 	protected function init()
     {
 		$this->createForm( 'Create', 'Create a Form Requirement' );
-		$this->setViewContent( '<blockquote>Creating a form requirement offers a way of dynamically requesting for frequently needed information, like e-mail address in other forms. The require information must be submitted by a user before the form is finally submitted.</blockquote>', true );
+		$this->setViewContent(  '' . self::__( '<blockquote>Creating a form requirement offers a way of dynamically requesting for frequently needed information, like e-mail address in other forms. The require information must be submitted by a user before the form is finally submitted.</blockquote>' ) . '', true  );
 		$this->setViewContent( $this->getForm()->view() );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		$values['requirement_name'] = $values['requirement_label'];
@@ -44,7 +44,7 @@ class Ayoola_Form_Requirement_Creator extends Ayoola_Form_Requirement_Abstract
 		$access = new Ayoola_Access();
 		$values['requirement_name'] = trim( $filter->filter( strtolower( $values['requirement_name'] ) ) , '-' );
 		if( ! $this->insertDb( $values ) ){ return $this->setViewContent( $this->getForm()->view(), true ); }
-		$this->setViewContent( 'Form Requirement created successfully.', true );
+		$this->setViewContent(  '' . self::__( 'Form Requirement created successfully.' ) . '', true  );
    } 
 	// END OF CLASS
 }

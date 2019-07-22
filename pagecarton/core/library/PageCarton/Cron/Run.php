@@ -104,7 +104,7 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
             //  if you are not admin, don't see updates.
             if( ! self::hasPriviledge( 98 ) )
             {
-                $this->setViewContent( '<div class="goodnews">Done</div>', true );
+                $this->setViewContent(  '' . self::__( '<div class="goodnews">Done</div>' ) . '', true  );
             }
             // end of widget process
           
@@ -112,7 +112,7 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p class="badnews">Theres an error in the code</p>' ) . '', true  ); 
             return false; 
         }
 	}

@@ -165,13 +165,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			catch( Application_Article_Exception $e )
 			{ 
 				$this->_parameter['markup_template'] = null;
-				$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+				$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 			//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 			}
 			catch( Exception $e )
 			{ 
 				$this->_parameter['markup_template'] = null;
-				$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+				$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 			//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 			}
 		}
@@ -239,8 +239,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//		$this->_parameter['markup_template'] = null; 
 		}
 		
-		$this->setViewContent( '<p style="clear: both;" class="pc-notify-normal pc_no_post_to_show pc_give_space_top_bottom"> ' . $message . ' ' . self::getQuickLink() . '</p>', true );
-	//	$message ? $this->setViewContent( ' ' . $message . ' ', true ) : null;
+		$this->setViewContent(  '' . self::__( '<p style="clear: both;" class="pc-notify-normal pc_no_post_to_show pc_give_space_top_bottom"> ' . $message . ' ' . self::getQuickLink() . '</p>' ) . '', true  );
+	//	$message ? $this->setViewContent(  '' . self::__( ' ' . $message . ' ' ) . '', true  ) : null;
 		
 		//	Check settings
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' ); 
@@ -1796,7 +1796,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( $children );
 	//		$whereClause['category_name'][] = $categoryId ? : 'workaround_avoid_error_in_search';
 		//	$this->_dbWhereClause['category_id'] = $categoryId;
-		//	$this->setViewContent( '<p>Showing articles from ', true );
+		//	$this->setViewContent(  '' . self::__( '<p>Showing articles from ' ) . '', true  );
 		//	if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 ) 
 			{
 		//		var_export( count( $files ) );

@@ -56,7 +56,7 @@ class Application_SearchBox_Table_Creator extends Application_SearchBox_Table_Ab
 		//	if( ! $this->insertDb() ){ return false; }
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent( '<div class="goodnews">Added successfully. </div>', true ); 
+				$this->setViewContent(  '' . self::__( '<div class="goodnews">Added successfully. </div>' ) . '', true  ); 
 			}
 		//	$this->setViewContent( $this->getForm()->view() );
             

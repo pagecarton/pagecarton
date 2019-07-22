@@ -65,7 +65,7 @@ class Ayoola_Extension_Import_Delete extends Ayoola_Extension_Import_Abstract
 			//delete from db	
 			if( $this->deleteDb( false ) )
 			{ 
-				$this->setViewContent( '<p class="goodnews">Plugin deleted successfully</p>', true ); 
+				$this->setViewContent(  '' . self::__( '<p class="goodnews">Plugin deleted successfully</p>' ) . '', true  ); 
 			} 
 		}
 		catch( Ayoola_Extension_Import_Exception $e ){ return false; }

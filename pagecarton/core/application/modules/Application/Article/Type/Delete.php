@@ -39,7 +39,7 @@ class Application_Article_Type_Delete extends Application_Article_Type_TypeAbstr
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['post_type'],  'Delete Post Type' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Post type deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Post type deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Article_Type_Exception $e ){ return false; }
     } 

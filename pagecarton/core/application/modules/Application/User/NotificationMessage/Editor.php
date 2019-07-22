@@ -41,7 +41,7 @@ class Application_User_NotificationMessage_Editor extends Application_User_Notif
 			$this->createForm( 'Edit', $data['subject'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 		//	var_export( $data );
-			if( $this->updateDb() ){ $this->setViewContent( 'Notification Message Edited Successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Notification Message Edited Successfully' ) . '', true  ); }
 		}
 		catch( Exception $e ){ return false; }
     } 

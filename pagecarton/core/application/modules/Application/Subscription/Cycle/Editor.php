@@ -39,7 +39,7 @@ class Application_Subscription_Cycle_Editor extends Application_Subscription_Cyc
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 		$this->createForm( 'Edit Cycle', 'Edit ' . $identifierData['cycle_name'], $identifierData );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->updateDb() ){ $this->setViewContent( 'Billing cycle edited successfully', true ); }
+		if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Billing cycle edited successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

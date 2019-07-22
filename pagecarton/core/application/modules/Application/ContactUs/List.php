@@ -34,7 +34,7 @@ class Application_ContactUs_List extends Application_ContactUs_Abstract
      */
 	protected function init()
     {
-	//	$this->setViewContent( '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/contactusCreator/">Create new ContactUs</a>', true );
+	//	$this->setViewContent(  '' . self::__( '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/contactusCreator/">Create new ContactUs</a>' ) . '', true  );
 		$this->setViewContent( $this->getList() );
     } 
 	

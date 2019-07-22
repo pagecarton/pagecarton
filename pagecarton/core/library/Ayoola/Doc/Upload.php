@@ -50,7 +50,7 @@ class Ayoola_Doc_Upload extends Ayoola_Doc_Abstract
 		if( $url = $this->upload() )
 		{ 
 			$this->setViewContent( "<p>Document Uploaded Successfully.</p>", true );
-			$this->setViewContent( "<p><a href='$url'>Right-click to copy link or click to view file</a></p>" ); 
+			$this->setViewContent( "<p><a href= '' . self::__( '$url' ) . ''>Right-click to copy link or click to view file</a></p>"  ); 
 			$this->setViewContent( $this->getForm()->view() );		
 			
 			//	Notify Admin

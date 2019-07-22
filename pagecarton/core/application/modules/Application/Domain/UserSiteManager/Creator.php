@@ -63,11 +63,11 @@ class Application_Domain_UserSiteManager_Creator extends Application_Profile_Cre
 		
 		$fullUrl = 'http://' . $values['profile_url'] . '.' . Ayoola_Application::getDomainName() . '';
 		
-        $this->setViewContent( '
+        $this->setViewContent(  self::__( '
         <div class="goodnews">
             New site created successfully. 
             <a href="' . $fullUrl . '/new-site-wizard" target="_blank">New Website Wizard</a>
-        </div>', true );
+        </div>' ), true );
 //		$this->setViewContent( self::__( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );  
 		if( @$_GET['previous_url'] )
 		{

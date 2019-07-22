@@ -91,7 +91,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				}
 				else
 				{
-					$this->setViewContent( '<p class=" badnews">The requested form was not found on the server. Please check the URL and try again. </p>', true );
+					$this->setViewContent(  '' . self::__( '<p class=" badnews">The requested form was not found on the server. Please check the URL and try again. </p>' ) . '', true  );
 
 				}
 				return false;
@@ -111,12 +111,12 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			}
 		//	var_export( $data );
 			$this->createForm( 'Continue...', null, $previousData );          
-			$this->setViewContent( '', true );
+			$this->setViewContent(  '' . self::__( '' ) . '', true  );
 			
 			//	We show form information by default
 			if( ! $this->getParameter( 'hide_form_information' ) && ! $_POST )
 			{
-				$this->setViewContent( '<h1 class="pc-heading">' . $data['form_title'] . '</h1>', true );
+				$this->setViewContent(  '' . self::__( '<h1 class="pc-heading">' . $data['form_title'] . '</h1>' ) . '', true  );
 				$this->setViewContent( self::__( '<p style="margin-top:2em;margin-bottom:2em;">' . ( strip_tags( $data['form_description'] ) === $data['form_description'] ? nl2br( $data['form_description'] ) : $data['form_description'] ) . '</p>' )  );
 			}
 			if( self::hasPriviledge() )
@@ -168,7 +168,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			}     
 			
 	//		var_export( $data );
-		//	$this->setViewContent( 'Form Edited Successfully', true ); 
+		//	$this->setViewContent(  '' . self::__( 'Form Edited Successfully' ) . '', true  ); 
 			//	Add all fieldsets
 			if( ! empty( $data['callbacks'] ) && is_array( $data['callbacks'] ) )
 			{
@@ -205,8 +205,8 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			}
 			catch( Ayoola_Exception $e ){ null; }
 		//	if( ! $this->insertDb() ){ return false; }
-		//	$this->setViewContent( '<h1>Thank you!</h1>', true );
-			$this->setViewContent( ' ', true );
+		//	$this->setViewContent(  '' . self::__( '<h1>Thank you!</h1>' ) . '', true  );
+			$this->setViewContent(  '' . self::__( ' ' ) . '', true  );
 			$data['form_success_message'] = $data['form_success_message'] ? : 'Thank you! Form is successfully submitted.';
 			$data['form_success_message'] = ( strip_tags( $data['form_success_message'] ) === $data['form_success_message'] ? ( '<p>' . nl2br( $data['form_success_message'] ) . '</p>' ) : $data['form_success_message'] );
 
@@ -226,7 +226,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		catch( Exception $e )
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
     } 

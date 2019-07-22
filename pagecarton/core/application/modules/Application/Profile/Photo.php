@@ -81,7 +81,7 @@ class Application_Profile_Photo extends Application_Profile_Abstract
 			
 
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '/' . $data['profile_url'] . '';
-			$this->setViewContent( '<div class="boxednews greynews">Profile picture successfully saved for "'  . $data['display_name'] . '".</div>', true );
+			$this->setViewContent(  '' . self::__( '<div class="boxednews greynews">Profile picture successfully saved for "'  . $data['display_name'] . '".</div>' ) . '', true  );
 			$this->setViewContent( self::__( '<div class="boxednews greynews" title="Share this profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );  
 			if( @$_GET['previous_url'] )
 			{

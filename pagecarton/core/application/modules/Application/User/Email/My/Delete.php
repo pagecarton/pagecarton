@@ -54,11 +54,11 @@ class Application_User_Email_My_Delete extends Application_User_Email_My_Abstrac
 		//	var_export( $response );
 					if( ! empty( $response['data'] ) )
 					{
-						$this->setViewContent( 'Email Account deleted', true );
+						$this->setViewContent(  '' . self::__( 'Email Account deleted' ) . '', true  );
 					}
 				break;
 				case 'self':
-					if( $this->deleteDb( false ) ){ $this->setViewContent( 'Email Account deleted', true ); }
+					if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Email Account deleted' ) . '', true  ); }
 				break;
 			
 			}

@@ -56,7 +56,7 @@ class PageCarton_Locale_Translation_Creator extends PageCarton_Locale_Translatio
 		//	if( ! $this->insertDb() ){ return false; }
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent( '<div class="goodnews">Added successfully. </div>', true ); 
+				$this->setViewContent(  '' . self::__( '<div class="goodnews">Added successfully. </div>' ) . '', true  ); 
 			}
 		//	$this->setViewContent( $this->getForm()->view() );
             

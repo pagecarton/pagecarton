@@ -46,11 +46,11 @@ class Ayoola_Page_Layout_Export extends Ayoola_Page_Layout_Abstract
 			$response = $this->buildArchive();
 			if( true === $response )
 			{ 
-		//		$this->setViewContent( 'Layout export successfully. You may <a href="' . Ayoola_Application::getUrlPrefix() . '/layout/' . $data['layout_name'] . '/' . $data['layout_name'] . '.tar.gz">download</a> it now or copy the download link.', true ); 
+		//		$this->setViewContent(  '' . self::__( 'Layout export successfully. You may <a href="' . Ayoola_Application::getUrlPrefix() . '/layout/' . $data['layout_name'] . '/' . $data['layout_name'] . '.tar.gz">download</a> it now or copy the download link.' ) . '', true  ); 
 			} 
 			else
 			{
-				$this->setViewContent( '<p>Layout cannot be exported</p>', true ); 
+				$this->setViewContent(  '' . self::__( '<p>Layout cannot be exported</p>' ) . '', true  ); 
 				$this->setViewContent( self::__( '<p>' . $response . '</p>' ) ); 
 			}
 		}

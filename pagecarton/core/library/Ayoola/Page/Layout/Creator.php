@@ -274,7 +274,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				//	don't delete again
 			//	unlink( $filename );
 				
-				$this->setViewContent( '<p class="goodnews">New theme saved successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a></p>', true );
+				$this->setViewContent(  '' . self::__( '<p class="goodnews">New theme saved successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a></p>' ) . '', true  );
 			//	$this->setViewContent( self::__( '<p class=""></p>' ) );
 				
 				
@@ -332,13 +332,13 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					file_put_contents( $indexFile, $values['plain_text'] );
 
 				}
-				$this->setViewContent( '<p class="boxednews goodnews">New theme saved successfully.</p>', true );
-				$this->setViewContent( '<p class="">
+				$this->setViewContent(  '' . self::__( '<p class="boxednews goodnews">New theme saved successfully.</p>' ) . '', true  );
+				$this->setViewContent(  self::__( '<p class="">
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Edit Codes Again</a>
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout?url=/layout/' . $values['layout_name'] . '/template" class="pc-btn pc-btn-small">Launch Theme Editor</a>
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Page/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Change Default Theme</a>
 				
-				</p>' );  
+				</p>' ) );  
 			}
 			
 		//	$this->setViewContent( self::__( '<p class="goodnews">Layout created successfully.</p>' ) );

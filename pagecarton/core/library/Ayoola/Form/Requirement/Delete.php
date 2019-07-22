@@ -39,7 +39,7 @@ class Ayoola_Form_Requirement_Delete extends Ayoola_Form_Requirement_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['requirement_label'],  'Delete Requirement' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Requirement deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Requirement deleted successfully' ) . '', true  ); }
 		}
 		catch( Ayoola_Form_Requirement_Exception $e ){ return false; }
     } 

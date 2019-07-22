@@ -140,7 +140,7 @@ class Application_User_AdminCreator extends Application_User_Creator
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false;
 		}
- 		$this->setViewContent( '<h2>Account Opening Confirmation:</h2>', true );
+ 		$this->setViewContent(  '' . self::__( '<h2>Account Opening Confirmation:</h2>' ) . '', true  );
  		$this->setViewContent( self::__( '<p>Your account opening process is now complete. An email has been sent to you, containing how to activate and verify your new account.</p>' ) );
  		$this->setViewContent( self::__( '<h4>What Next?</h4>' ) );
  		$this->setViewContent( self::__( '<p>Go to </p>' ) );

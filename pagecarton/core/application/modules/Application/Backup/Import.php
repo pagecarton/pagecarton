@@ -112,7 +112,7 @@ class Application_Backup_Import extends Application_Backup_Abstract
 			{
 				//	if not valid tar then we need to delete 
 			//	var_export( $e->getMessage() );
-				$this->setViewContent( '<div class="badnews">Invalid Backup File ' . filesize( $tempName )  .  '</div>', true );
+				$this->setViewContent(  '' . self::__( '<div class="badnews">Invalid Backup File ' . filesize( $tempName )  .  '</div>' ) . '', true  );
 				$this->setViewContent( self::__( '<div class="pc-notify-info">' . $e->getMessage() . '</div>' ) );
 				$this->setViewContent( $this->getForm()->view() );		
 				unlink( $tempName );
@@ -134,7 +134,7 @@ class Application_Backup_Import extends Application_Backup_Abstract
 			//	rename( $fileToUpload, $newFilename );
 				copy( $fileToUpload, $newFilename );
 			}
-			$this->setViewContent( '<div class="goodnews">Success! "' .$information['backup_name']. '" imported.</div>', true );
+			$this->setViewContent(  '' . self::__( '<div class="goodnews">Success! "' .$information['backup_name']. '" imported.</div>' ) . '', true  );
 		}
   		catch( Exception $e )
 		{

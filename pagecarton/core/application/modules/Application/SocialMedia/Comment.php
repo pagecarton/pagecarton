@@ -43,7 +43,7 @@ class Application_SocialMedia_Comment extends Application_SocialMedia_Abstract
 	public function init()
     {
 		self::load();
-		$this->setViewContent( '<div class="fb-comments" data-href="' . $this->getUrl() . '" data-num-posts="2" data-width="470"></div>', true );
+		$this->setViewContent(  '' . self::__( '<div class="fb-comments" data-href="' . $this->getUrl() . '" data-num-posts="2" data-width="470"></div>' ) . '', true  );
     } 
 	// END OF CLASS
 }

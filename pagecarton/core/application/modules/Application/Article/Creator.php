@@ -57,7 +57,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 		}
 		if( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
 		{ 
-			$this->setViewContent( '<span class="badnews">You do not have enough priviledge to publish on this website. </span>', true );
+			$this->setViewContent(  '' . self::__( '<span class="badnews">You do not have enough priviledge to publish on this website. </span>' ) . '', true  );
 			return false;     
 		}
 		if( ! $this->requireProfile() )
@@ -230,7 +230,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 								continue 2;
 							}
 						}
-						$this->setViewContent( '<div class="badnews">' . ucfirst( $joinedType ) . ' With the same info exists. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $newUrl . '">View ' . $joinedType . '</a> or <a href="' . Ayoola_Page::getPreviousUrl() . '">Go Back</a></div>', true );
+						$this->setViewContent(  '' . self::__( '<div class="badnews">' . ucfirst( $joinedType ) . ' With the same info exists. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $newUrl . '">View ' . $joinedType . '</a> or <a href="' . Ayoola_Page::getPreviousUrl() . '">Go Back</a></div>' ) . '', true  );
 						return false;
 
 					}
@@ -268,7 +268,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 		
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . ''; 
-			$this->setViewContent( '<div class="goodnews">' . ucfirst( $joinedType ) . ' successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View ' . $joinedType . '</a> or <a href="' . Ayoola_Page::getPreviousUrl() . '">Go Back</a></div>', true );
+			$this->setViewContent(  '' . self::__( '<div class="goodnews">' . ucfirst( $joinedType ) . ' successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View ' . $joinedType . '</a> or <a href="' . Ayoola_Page::getPreviousUrl() . '">Go Back</a></div>' ) . '', true  );
 						
 			//	Notify Admin
 			$mailInfo['subject'] = 'New ' . $joinedType . ' created';

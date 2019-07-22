@@ -40,7 +40,7 @@ class Application_GooglePlus_One extends Application_GooglePlus_Abstract
 	//	var_export( $appId );
 		if( empty( $username['googleplus_id'] ) ){ return; }
 		$username = $username['googleplus_id'];
-		$this->setViewContent( '<div class="g-plusone" data-size="medium" data-href="' . $this->getUrl() . '" ></div>', true );
+		$this->setViewContent(  '' . self::__( '<div class="g-plusone" data-size="medium" data-href="' . $this->getUrl() . '" ></div>' ) . '', true  );
     } 
 	// END OF CLASS
 }

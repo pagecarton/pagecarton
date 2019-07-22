@@ -120,7 +120,7 @@ class Application_Article_Play extends Application_Article_Abstract
 			Ayoola_Menu::setRawMenuOption( 'Posts', $option );
 			$option = array( 'option_name' => 'Settings', 'url' => '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Articles/', 'title' => 'Advanced posts settings.', 'logged_in' => 1, 'logged_out' => 0, 'append_previous_url' => 0, 'auth_level' => 99, 'rel' => 'spotlight', 'link_options' => NULL, 'sub_menu_name' => '', );
 			Ayoola_Menu::setRawMenuOption( 'Posts', $option );
-		//	$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
+		//	$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
 		catch( Exception $e )
 		{ 

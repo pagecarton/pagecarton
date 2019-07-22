@@ -41,7 +41,7 @@ class Application_User_ShowAll extends Application_User_Abstract
      */
 	protected function init()
     {
-		$this->setViewContent( '', true );
+		$this->setViewContent(  '' . self::__( '' ) . '', true  );
 		
 		//	Choose the kind of users to show
 		switch( $this->getParameter( 'profile_type' ) )
@@ -107,7 +107,7 @@ class Application_User_ShowAll extends Application_User_Abstract
 			$this->_objectTemplateValues = $class->getObjectTemplateValues();
 			//	break;
 		}
-	//	$this->setViewContent( '', true );
+	//	$this->setViewContent(  '' . self::__( '' ) . '', true  );
     } 
 		// END OF CLASS
 }

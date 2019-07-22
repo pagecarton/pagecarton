@@ -221,7 +221,7 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			// Do ajax
 			if( $urlToGo )
 			{
-				$this->setViewContent( 'Login Successful. You are being redirected to the previous page... <a href="' . $urlToGo . '">Click here if you are not redirected to the page in 5 seconds.</a>', true );
+				$this->setViewContent(  '' . self::__( 'Login Successful. You are being redirected to the previous page... <a href="' . $urlToGo . '">Click here if you are not redirected to the page in 5 seconds.</a>' ) . '', true  );
 				$this->setViewContent( self::__( '<span id="ayoola-js-redirect-whole-page"></span>' ) );
 			}
 			return true;

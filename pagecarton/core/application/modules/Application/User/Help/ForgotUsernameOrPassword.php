@@ -165,8 +165,8 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 				//		var_export( $informationToSend );
 						if( Ayoola_Access_Localize::info( $info ) )
 						{
-							$this->setViewContent( 'Password reset was successful; a new password has been sent to your email address.', true );
-						//	$this->setViewContent( '<div class="boxednews goodnews">User account edited successfully</div>', true );
+							$this->setViewContent(  '' . self::__( 'Password reset was successful; a new password has been sent to your email address.' ) . '', true  );
+						//	$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account edited successfully</div>' ) . '', true  );
 						}
 					}
 				}

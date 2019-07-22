@@ -38,7 +38,7 @@ class Application_Domain_Registration_Whois_Creator extends Application_Domain_R
 		$this->setViewContent( $this->getForm()->view() );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		if( ! $this->insertDb( $values ) ){ return $this->setViewContent( $this->getForm()->view(), true ); }
-		$this->setViewContent( 'A new item added to the domain whois list.', true );
+		$this->setViewContent(  '' . self::__( 'A new item added to the domain whois list.' ) . '', true  );
     } 
 	// END OF CLASS
 }

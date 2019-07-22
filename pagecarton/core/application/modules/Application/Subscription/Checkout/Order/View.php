@@ -50,7 +50,7 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 
 		#
-		$this->setViewContent( '<h2>Order number '  . $identifierData['order_id'] . '</h2>', true );
+		$this->setViewContent(  '' . self::__( '<h2>Order number '  . $identifierData['order_id'] . '</h2>' ) . '', true  );
 
 
 		$this->setViewContent( self::__( '<h3>Details</h3>' ) );
@@ -97,7 +97,7 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 //		var_export( $data );
 
 
-//		if( $this->updateDb() ){ $this->setViewContent( 'Order edited successfully', true ); }
+//		if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Order edited successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

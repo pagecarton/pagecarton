@@ -65,7 +65,7 @@ class Application_User_UserBankAccount_Creator extends Application_User_UserBank
 		
 			return false; 
 		}
-		$this->setViewContent( '<h4>Bank Account Information Added.</h4>', true );		
+		$this->setViewContent(  '' . self::__( '<h4>Bank Account Information Added.</h4>' ) . '', true  );		
 		$this->setViewContent( self::__( '<p>What Next? <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/verify/get/mode/BankAccount/">Verify Bank Accounts</a>.</p>' ) );		
     }
 	// END OF CLASS

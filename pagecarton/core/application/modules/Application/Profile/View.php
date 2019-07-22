@@ -113,7 +113,7 @@ class Application_Profile_View extends Application_Profile_Abstract
 		}
 		catch( Exception $e )
 		{ 
-			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
 	//	var_export( $this->_xml );
     } 

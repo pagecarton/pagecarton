@@ -51,7 +51,7 @@ class Application_User_UserEmail_Creator extends Application_User_UserEmail_Abst
 		//	var_export( Ayoola_Application::getUserInfo( 'user_id' ) );
 			//		var_export( (int) '08054449535' );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-	//		$this->setViewContent( '<p>Thank you!</p>', true );	
+	//		$this->setViewContent(  '' . self::__( '<p>Thank you!</p>' ) . '', true  );	
 			$goodnews = null;
 			
 			//	first add to mailing list if selected.
@@ -76,11 +76,11 @@ class Application_User_UserEmail_Creator extends Application_User_UserEmail_Abst
                 $emailInfo['to'] = Ayoola_Application_Notification::getEmails();;
 				@self::sendMail( $emailInfo );
 			//	$goodnews .= "Email was successfully added to our mailing list. ";
-					$this->setViewContent( '<p class="goodnews">Email was successfully added to our mailing list.</p>', true );	
+					$this->setViewContent(  '' . self::__( '<p class="goodnews">Email was successfully added to our mailing list.</p>' ) . '', true  );	
 				}
 				catch( Ayoola_Exception $e )
 				{ 
-					$this->setViewContent( '<p class="badnews">Email was not added to our mailing list. This is likely because you are already on our list.</p>', true );	
+					$this->setViewContent(  '' . self::__( '<p class="badnews">Email was not added to our mailing list. This is likely because you are already on our list.</p>' ) . '', true  );	
 				}
 			}
 /*			

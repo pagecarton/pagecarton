@@ -72,7 +72,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 					throw new Application_Subscription_Exception( 'COULD NOT LOCATE THE SELECTED PRODUCT OR SERVICE.' );
 				}
 			}
-			if( ! $data = $this->getIdentifierData() ){ return $this->setViewContent( '<p>Subscription Package Not Found</p>', true ); }
+			if( ! $data = $this->getIdentifierData() ){ return $this->setViewContent(  '' . self::__( '<p>Subscription Package Not Found</p>' ) . '', true  ); }
 			$this->setViewContent( $this->getForm()->view(), true );
 			
 			//	workarround for infinite loop at App_Domain_Reg "no_init"
@@ -94,7 +94,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 			}
 			if( ! $this->subscribe() )
 			{ 
-			//	$this->setViewContent( '<p>Unable to add product or service to cart.</p>', true ); 
+			//	$this->setViewContent(  '' . self::__( '<p>Unable to add product or service to cart.</p>' ) . '', true  ); 
 				return;
 			}
 			$this->setViewContent( self::getConfirmation(), true );
@@ -108,8 +108,8 @@ class Application_Subscription extends Application_Subscription_Abstract
 		catch( Exception $e )
 		{ 
 	//		echo $e->getMessage();
-		//	return $this->setViewContent( '<p class="badnews boxednews centerednews">Error with subscription package.</p>', true ); 
-			$this->setViewContent( '<p class="badnews boxednews centerednews">Error with subscription package.</p>', true ); 
+		//	return $this->setViewContent(  '' . self::__( '<p class="badnews boxednews centerednews">Error with subscription package.</p>' ) . '', true  ); 
+			$this->setViewContent(  '' . self::__( '<p class="badnews boxednews centerednews">Error with subscription package.</p>' ) . '', true  ); 
 			$this->setViewContent( self::__( '<p class="badnews boxednews centerednews">' . $e->getMessage() . '</p>' ) ); 
 		}
     }
@@ -173,7 +173,7 @@ class Application_Subscription extends Application_Subscription_Abstract
     {
 	//	var_export( $this->getForm()->getValues() );
 
-	//	$this->setViewContent( 'Please choose an option', true );
+	//	$this->setViewContent(  '' . self::__( 'Please choose an option' ) . '', true  );
 	//	var_export( $values );      
 	//	exit(); 
 		if( ! $values )

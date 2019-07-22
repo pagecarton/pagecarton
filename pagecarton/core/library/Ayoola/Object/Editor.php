@@ -51,7 +51,7 @@ class Ayoola_Object_Editor extends Ayoola_Object_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
 		//	self::v( $values );
-			if( $this->updateDb() ){ $this->setViewContent( 'Widget saved Successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Widget saved Successfully' ) . '', true  ); }
 		}
 		catch( Exception $e ){ return false; }
 		

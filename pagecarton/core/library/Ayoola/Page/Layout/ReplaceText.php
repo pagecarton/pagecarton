@@ -268,13 +268,13 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             if( count( $values['dummy_replace'] ) !== count( $values['dummy_search'] ) )
             {
             //    var_export( $values );
-                $this->setViewContent( '<div class="badnews" style="xtext-align:center;">Something went wrong. Please go back and try again. </div>', true );
+                $this->setViewContent(  '' . self::__( '<div class="badnews" style="xtext-align:center;">Something went wrong. Please go back and try again. </div>' ) . '', true  );
                 $this->setViewContent( $this->getForm()->view() );
             }
             else
             {
                 $table->insert( array( 'data' => $values, 'settings' => json_encode( $values ), 'settingsname_name' => $settingsName ) );
-                $this->setViewContent( '<div class="goodnews" style="xtext-align:center;">Update saved successfully. Further text update could be done in <a href="/tools/classplayer/get/name/Ayoola_Page_List">Pages</a>. </div>', true );
+                $this->setViewContent(  '' . self::__( '<div class="goodnews" style="xtext-align:center;">Update saved successfully. Further text update could be done in <a href="/tools/classplayer/get/name/Ayoola_Page_List">Pages</a>. </div>' ) . '', true  );
             //    $this->setViewContent( $this->getForm()->view() );
             }
         //    var_export( $values );

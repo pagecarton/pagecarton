@@ -70,11 +70,11 @@ class Application_User_Email_Editor extends Application_User_Email_Abstract
 					//	var_export( $response );
 					if( ! empty( $response['data'] ) )
 					{
-						$this->setViewContent( 'Email Account Edited Successfully', true ); 
+						$this->setViewContent(  '' . self::__( 'Email Account Edited Successfully' ) . '', true  ); 
 					}
 				break;
 				case 'self':
-					if( $this->updateDb( $values ) ){ $this->setViewContent( 'Email Account Edited Successfully', true ); }
+					if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( 'Email Account Edited Successfully' ) . '', true  ); }
 				break;
 			
 			}

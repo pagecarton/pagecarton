@@ -39,7 +39,7 @@ class Application_Domain_Registration_Price_Creator extends Application_Domain_R
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 	//	var_export( $values );
 		if( ! $this->insertDb( $values ) ){ return $this->setViewContent( $this->getForm()->view(), true ); }
-		$this->setViewContent( 'A new item added to the domain price list.', true );
+		$this->setViewContent(  '' . self::__( 'A new item added to the domain price list.' ) . '', true  );
     } 
 	// END OF CLASS
 }

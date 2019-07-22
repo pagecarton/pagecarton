@@ -43,7 +43,7 @@ class PageCarton_Cron_Editor extends PageCarton_Cron_Abstract
 	//		$values['cron_next_run_time'] = time();
 			$values['cron_parameters'] = $values['cron_parameters'] ? json_decode( $values['cron_parameters'], true ) : $values['cron_parameters'];
 
-			if( $this->updateDb( $values ) ){ $this->setViewContent( '<div class="goodnews">Cron task updated successfully</div>', true ); } 
+			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Cron task updated successfully</div>' ) . '', true  ); } 
 
              // end of widget process
           
@@ -51,7 +51,7 @@ class PageCarton_Cron_Editor extends PageCarton_Cron_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p class="badnews">Theres an error in the code</p>' ) . '', true  ); 
             return false; 
         }
 	}

@@ -39,7 +39,7 @@ class Application_Link_Delete extends Application_Link_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['link_url'],  'Delete Link Information' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Link deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Link deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Link_Exception $e ){ return false; }
     } 

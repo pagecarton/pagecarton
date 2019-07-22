@@ -37,7 +37,7 @@ class Application_Backup_Download extends Application_Backup_Abstract
 		try{ $this->setIdentifier(); }
 		catch( Application_Backup_Exception $e ){ return false; }
 		if( ! $data = self::getIdentifierData() ){ return false; }
-		$this->setViewContent( 'You download will start in a moment', true );
+		$this->setViewContent(  '' . self::__( 'You download will start in a moment' ) . '', true  );
 /* 		$this->createConfirmationForm( 'Download ' . $data['backup_name'],  'Download the backup. Be aware that it is a security risk to keep this file in a loose location' );
  */		
 	//	if( ! $values = $this->getForm()->getValues() ){ return false; }

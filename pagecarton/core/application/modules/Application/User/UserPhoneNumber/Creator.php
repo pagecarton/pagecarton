@@ -80,7 +80,7 @@ class Application_User_UserPhoneNumber_Creator extends Application_User_UserPhon
 					}
 				break;
 			}
-			$this->setViewContent( '<p>Phone number information saved.</p>', true );	
+			$this->setViewContent(  '' . self::__( '<p>Phone number information saved.</p>' ) . '', true  );	
 	
 		}
 		catch( Ayoola_Exception $e )

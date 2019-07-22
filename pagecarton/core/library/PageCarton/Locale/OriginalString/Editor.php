@@ -34,7 +34,7 @@ class PageCarton_Locale_OriginalString_Editor extends PageCarton_Locale_Original
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
 
-			if( $this->updateDb( $values ) ){ $this->setViewContent( '<div class="goodnews">Data updated successfully</div>', true ); } 
+			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Data updated successfully</div>' ) . '', true  ); } 
 
              // end of widget process
           

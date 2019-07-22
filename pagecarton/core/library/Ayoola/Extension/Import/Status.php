@@ -82,7 +82,7 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 		}
 //		var_export( $data );
 //		var_export( $toDir );
-		$this->setViewContent( '<span></span> ', true );
+		$this->setViewContent(  '' . self::__( '<span></span> ' ) . '', true  );
 		$fromDir = ( @constant( 'EXTENSIONS_PATH' ) ? Ayoola_Application::getDomainSettings( EXTENSIONS_PATH ) : ( APPLICATION_DIR . DS . 'extensions' ) ) . DS . $data['extension_name'] . DS . 'application';
 		$toDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH );
 		if( @$data['modules'] )

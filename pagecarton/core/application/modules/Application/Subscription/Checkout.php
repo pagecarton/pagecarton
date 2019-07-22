@@ -67,7 +67,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		{
 		if( ! $cart = self::getStorage()->retrieve() )
 		{ 
-			return $this->setViewContent( '<span class="boxednews centerednews badnews">You have no item in your shopping cart.</span>', true );
+			return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">You have no item in your shopping cart.</span>' ) . '', true  );
 		}
 	//	var_export( self::getOrderNumber() );
 	//	var_export( $cart );

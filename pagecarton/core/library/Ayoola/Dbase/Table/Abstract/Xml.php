@@ -284,7 +284,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             //    var_export( $this->getParameter() );
             $this->setViewContent($this->query('TABLE', 'VIEW', $fieldsKey, $where));
         } elseif (isset($_SERVER['HTTP_AYOOLA_PLAY_CLASS']) && ($_SERVER['HTTP_AYOOLA_PLAY_CLASS'] === get_class($this))) {
-            $this->setViewContent('<a href="?show_class_data=' . get_class($this) . '">View Table Data for ' . get_class($this) . '</a>');
+            $this->setViewContent(  '' . self::__( '<a href="?show_class_data=' . get_class($this) . '">View Table Data for ' . get_class($this) . '</a>' ) . '' );
         }
         //    var_export( $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] );
 

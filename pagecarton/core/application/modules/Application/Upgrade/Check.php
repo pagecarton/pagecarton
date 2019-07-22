@@ -82,18 +82,18 @@ class Application_Upgrade_Check extends PageCarton_Widget
 //        $lastChecked = '<span  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $serverName . ')</span>';
         if( empty( $versionFromServer['response'] ) )
         {
-            $this->setViewContent( '<div  style="font-size:smaller;" class="badnews">PageCartion is not able to check for updates (cURL error). ' . $lastChecked . '  </div>', true ); 
+            $this->setViewContent(  '' . self::__( '<div  style="font-size:smaller;" class="badnews">PageCartion is not able to check for updates (cURL error). ' . $lastChecked . '  </div>' ) . '', true  ); 
         }
         elseif( $versionFromServer['response'] != PageCarton::VERSION )
         {
-            $this->setViewContent( '<div class="badnews"> 
+            $this->setViewContent(  self::__( '<div class="badnews"> 
                                         PageCarton ' . $versionFromServer['response']  . ' is available for download. ' . $lastChecked . ' 
                                         <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Upgrade?" class="">Begin Upgrade!</a> 
-                                        <a style="font-size:smaller;" target="_blank" href="https://www.pagecarton.org/posts?category=releases" class="">What Changed?</a></div>', true ); 
+                                        <a style="font-size:smaller;" target="_blank" href="https://www.pagecarton.org/posts?category=releases" class="">What Changed?</a></div>' ), true ); 
         }
         else
         {
-            $this->setViewContent( '<p  style="font-size:smaller; text-align:center;" class="goodnews"> PageCarton Up-to-date (' . $versionFromServer['response']  . '). ' . $lastChecked . '</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p  style="font-size:smaller; text-align:center;" class="goodnews"> PageCarton Up-to-date (' . $versionFromServer['response']  . '). ' . $lastChecked . '</p>' ) . '', true  ); 
         //    $this->setViewContent( self::__( '' ) ); 
         }
 
@@ -128,7 +128,7 @@ class Application_Upgrade_Check extends PageCarton_Widget
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

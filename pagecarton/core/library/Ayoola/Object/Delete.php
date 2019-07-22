@@ -45,7 +45,7 @@ class Ayoola_Object_Delete extends Ayoola_Object_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['class_name'],  'Delete Object' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Object deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Object deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Object_Exception $e ){ return false; }
     } 

@@ -139,7 +139,7 @@ class Application_User_NotificationMessage_Send extends Application_User_Notific
 				//	Wait a few more seconds before you send another to prevent spam.
 				sleep( 10 );
 			}
-			$this->setViewContent( '<span class="goodnews boxednews centerednews">Message sent to ' . count( $select ) . ' users.</span>', true );
+			$this->setViewContent(  '' . self::__( '<span class="goodnews boxednews centerednews">Message sent to ' . count( $select ) . ' users.</span>' ) . '', true  );
 		}
 		catch( Exception $e ){ return false; }
 						//var_export( $list );

@@ -57,7 +57,7 @@ class Ayoola_Page_Layout_Delete extends Ayoola_Page_Layout_Abstract
 				
 				$class->sanitize( $themeToSanitize );
 				
-				$this->setViewContent( '<p class="goodnews">Theme Layout deleted successfully</p>', true ); 
+				$this->setViewContent(  '' . self::__( '<p class="goodnews">Theme Layout deleted successfully</p>' ) . '', true  ); 
 			} 
 		}
 		catch( Ayoola_Page_Layout_Exception $e ){ return false; }

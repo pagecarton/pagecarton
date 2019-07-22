@@ -65,7 +65,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 				if(  ! self::hasPriviledge() )
 				{
 				//	var_export( $data );
-					$this->setViewContent( '<p class="boxednews badnews">The requested form was not found on the server. Please check the URL and try again. </p>', true );
+					$this->setViewContent(  '' . self::__( '<p class="boxednews badnews">The requested form was not found on the server. Please check the URL and try again. </p>' ) . '', true  );
 					return false;
 				//	self::setIdentifierData( $data );
 				}
@@ -144,7 +144,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 		catch( Exception $e )
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
     } 

@@ -51,7 +51,7 @@ class Application_Status_View extends Application_Status_Abstract
 			}
 			$this->setViewContent( self::__( '<a class="goodnews boxednews" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Status_Creator/">Add a testimonial</a>' ) );
 		}
-		catch( Exception $e ){ return $this->setViewContent( 'Error with Status package', true ); }
+		catch( Exception $e ){ return $this->setViewContent(  '' . self::__( 'Error with Status package' ) . '', true  ); }
 	//	var_export( $this->getDbData() );
     } 
 	

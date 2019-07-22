@@ -224,7 +224,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 			)
 			{
 				
-				return $this->setViewContent( '<p class="badnews">The requested article was not found on the server. Please check the URL and try again. ' . self::getQuickLink() . '</p>', true );
+				return $this->setViewContent(  '' . self::__( '<p class="badnews">The requested article was not found on the server. Please check the URL and try again. ' . self::getQuickLink() . '</p>' ) . '', true  );
 			//	self::setIdentifierData( $data );
 			}
 			
@@ -387,14 +387,14 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 		catch( Application_Article_Exception $e )
 		{ 
 		//	$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
 		catch( Exception $e )
 		{ 
 			//	self::v( $e->getMessage() );
 		//	$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
 	

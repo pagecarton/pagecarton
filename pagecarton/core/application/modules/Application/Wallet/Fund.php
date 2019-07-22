@@ -79,7 +79,7 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
 		catch( Exception $e )
 		{ 
 		
-			$this->setViewContent( '<p class="badnews boxednews">' . $e->getMessage() . '</p>', true ); 
+			$this->setViewContent(  '' . self::__( '<p class="badnews boxednews">' . $e->getMessage() . '</p>' ) . '', true  ); 
 			$this->setViewContent( self::__( '<p class="badnews boxednews">Error with Wallet package</p>' ) ); 
 		}
 	//	var_export( $this->getDbData() );

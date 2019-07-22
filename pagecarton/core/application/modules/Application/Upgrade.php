@@ -54,19 +54,14 @@ class Application_Upgrade extends Ayoola_Abstract_Table
 			$this->createConfirmationForm( 'Upgrade', '<p>Upgrade your PageCarton to the latest version. You are currently running version ' . PageCarton::VERSION . '</p>' ); 
 			$this->setViewContent( self::__( '<h1 class="pc-heading">PageCarton Upgrade</h1>' ) );
 			$this->setViewContent( self::__( '<div style="padding-top:1.5em;">Upgrade your PageCarton to the latest version. You are currently running version ' . PageCarton::VERSION . '. It is recommended that you do a backup of your application before you go ahead, do you want to do that now? </div>' ) );
-			$this->setViewContent( '<div style="padding-top:1.5em;padding-bottom:1em;"><a onClick="ayoola.spotLight.showLinkInIFrame( this.href ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Backup_List" class="pc-btn">Backup Now!</a>
-			<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '?stage=upgrade" class="pc-btn pc-bg-color">Begin Upgrade!</a></div>' );
-		//	$this->setViewContent( self::__( '' ) );
-		//	$this->setViewContent( $this->getForm()->view() ); 
+			$this->setViewContent(  self::__( '<div style="padding-top:1.5em;padding-bottom:1em;"><a onClick="ayoola.spotLight.showLinkInIFrame( this.href ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Backup_List" class="pc-btn">Backup Now!</a>
+			<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '?stage=upgrade" class="pc-btn pc-bg-color">Begin Upgrade!</a></div>' ) );
 			$values = $this->getForm()->getValues();
-	//		var_export( $values );
-	//		var_export( isset( $_GET['stage'] ) ); 
 			if( ! isset( $_GET['stage'] ) && ! $values )
 			{
-			//	if( ! $values = $this->getForm()->getValues() ){ return false; }
 				return false;
 			}
-			$this->setViewContent( '<p></p>', true );
+			$this->setViewContent(  '' . self::__( '<p></p>' ) . '', true  );
 			
 			//	Installer would do the whole process
 		//	$documentsDir = Ayoola_Doc::getDocumentsDirectory();

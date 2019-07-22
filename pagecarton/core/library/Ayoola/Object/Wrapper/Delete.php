@@ -39,7 +39,7 @@ class Ayoola_Object_Wrapper_Delete extends Ayoola_Object_Wrapper_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['wrapper_label'],  'Delete Wrapper' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Wrapper deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Wrapper deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Object_Wrapper_Exception $e ){ return false; }
     } 

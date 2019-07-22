@@ -52,7 +52,7 @@ class Application_Domain_Registration_Price_Editor extends Application_Domain_Re
 			}
 			$this->createForm( 'Edit', 'Edit price for ' . $data['extension'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->updateDb() ){ $this->setViewContent( 'Item edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Item edited successfully' ) . '', true  ); }
 		}
 		catch( Application_Domain_Registration_Price_Exception $e ){ return false; }
     } 

@@ -42,7 +42,7 @@ class Application_Slideshow_Creator extends Application_Slideshow_Abstract
 		$values['slideshow_name'] = $filter->filter( $values['slideshow_title'] );
 		
 		if( ! $this->insertDb( $values ) ){ return $this->setViewContent( $this->getForm()->view(), true ); }
-		$this->setViewContent( '<div class="boxednews goodnews"  style="clear:both;">Slideshow settings created successfully.</div>', true ); 
+		$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews"  style="clear:both;">Slideshow settings created successfully.</div>' ) . '', true  ); 
 		switch( $values['slideshow_type'] )
 		{
 			case 'post':

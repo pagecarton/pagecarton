@@ -114,7 +114,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
 
             if( unlink( $from ) )
             {
-                $this->setViewContent( '<p class="goodnews">"' . $url . '" deleted successfully.</p>', true ); 
+                $this->setViewContent(  '' . self::__( '<p class="goodnews">"' . $url . '" deleted successfully.</p>' ) . '', true  ); 
 
                 //	let's remove dangling theme pages not completely deleted
                 Ayoola_Page_Layout_Pages_Delete::deleteThemePageSupplementaryFiles( $url, $data['layout_name'] );
@@ -131,7 +131,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

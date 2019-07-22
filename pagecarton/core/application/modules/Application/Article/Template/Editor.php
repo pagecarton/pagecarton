@@ -47,7 +47,7 @@ class Application_Article_Template_Editor extends Application_Article_Template_A
 			if( ! $this->updateDb( $values ) ){ return false; }
 			
 	//		var_export( $data );
-			$this->setViewContent( 'Post template edited successfully', true );
+			$this->setViewContent(  '' . self::__( 'Post template edited successfully' ) . '', true  );
 			
 		}
 		catch( Exception $e ){ return false; }

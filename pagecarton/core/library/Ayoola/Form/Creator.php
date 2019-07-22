@@ -80,7 +80,7 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 				//	$creator = new Ayoola_Form_Creator( array( 'fake_values' => $formData ) );
 					header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_Editor/?form_name=' . $formData['form_name'] . '' );
 					exit();
-				//	$this->setViewContent( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $formData['form_name'] . '"> Preview it!</a> or <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_Editor/?form_name=' . $formData['form_name'] . '"> Update it!</a></div>', true ); 
+				//	$this->setViewContent(  '' . self::__( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $formData['form_name'] . '"> Preview it!</a> or <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_Editor/?form_name=' . $formData['form_name'] . '"> Update it!</a></div>' ) . '', true  ); 
 
 
 				//	self::v( $values );
@@ -129,8 +129,7 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 				//	if( ! $this->insertDb() ){ return false; }
 					if( $this->insertDb( $values ) )
 					{ 
-						$this->setViewContent( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a></div>', array( 'translate' => true, 'refresh_content' => true ) ); 
-			//			$this->setViewContent( self::__( '<a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a>' ) ); 
+						$this->setViewContent(  '' . self::__( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a></div>' )  ); 
 					}
 				break;
 			}
@@ -138,8 +137,7 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 		catch( Exception $e )
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', array( 'translate' => true, 'refresh_content' => true ) );
-		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
+			$this->setViewContent( $e->getMessage() );
 		}
     } 
 }

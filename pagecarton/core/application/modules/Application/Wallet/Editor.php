@@ -60,7 +60,7 @@ class Application_Wallet_Editor extends Application_Wallet_Abstract
 
 			$values = $values + $data;
 		//	var_export( $data );
-			if( Ayoola_Access::setAccessInformation( $values ) ){ $this->setViewContent( 'Wallet balance updated successfully.', true ); }
+			if( Ayoola_Access::setAccessInformation( $values ) ){ $this->setViewContent(  '' . self::__( 'Wallet balance updated successfully.' ) . '', true  ); }
 		}
 		catch( Application_Wallet_Exception $e ){ return false; }
     } 

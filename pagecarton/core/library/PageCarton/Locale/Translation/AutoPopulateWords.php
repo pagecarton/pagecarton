@@ -43,7 +43,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
             $pages->getDatabase()->getAdapter()->setAccessibility( $pages::SCOPE_PROTECTED );
             $pages->getDatabase()->getAdapter()->setRelationship( $pages::SCOPE_PROTECTED );
             $pages = $pages->select();
-			$this->setViewContent( '<div class="goodnews">Words populated successfully</div>', true );
+			$this->setViewContent(  '' . self::__( '<div class="goodnews">Words populated successfully</div>' ) . '', true  );
             $currentUrl = Ayoola_Application::getRuntimeSettings( 'real_url' );
             set_time_limit( 0 );
             foreach( $pages as $page )
@@ -62,7 +62,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                 }
                 Ayoola_Application::setRuntimeSettings( 'real_url', $page['url'] );
             //    include_once( $pagePaths['include'] );
-                $this->setViewContent( '<div class="pc-notify-info"><a href="' . $link . '">' . $link . '</a> viewed successfully</div>' );
+                $this->setViewContent(  '' . self::__( '<div class="pc-notify-info"><a href="' . $link . '">' . $link . '</a> viewed successfully</div>' ) . ''  );
                 //                self::v( $link );
             //    self::fetchLink( $link );
             }
@@ -92,7 +92,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                 //   self::__( $phrase );
                 //    $this->setViewContent( $phrase );
                 }
-                $this->setViewContent( '<div class="pc-notify-info"><a href="' . $link . '">' . $class . '</a> widget viewed successfully</div>' );
+                $this->setViewContent(  '' . self::__( '<div class="pc-notify-info"><a href="' . $link . '">' . $class . '</a> widget viewed successfully</div>' ) . ''  );
             }
             Ayoola_Application::setRuntimeSettings( 'real_url', $currentUrl );
 

@@ -49,7 +49,7 @@ class Application_Domain_Editor extends Application_Domain_Abstract
 			$this->resetDefaultDomain();
 			if( $this->updateDb() )
 			{ 
-				$this->setViewContent( 'Domain edited successfully', true );   
+				$this->setViewContent(  '' . self::__( 'Domain edited successfully' ) . '', true  );   
 				
 				//	clear domain cache
 				Ayoola_File_Storage::purgeDomain( $data['domain_name'] );

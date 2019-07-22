@@ -42,7 +42,7 @@ class Application_Log_View extends Application_Log_Abstract
 			
 			if( ! $this->getLog() )
 			{ 
-				$this->setViewContent( 'LOG IS EMPTY', true );
+				$this->setViewContent(  '' . self::__( 'LOG IS EMPTY' ) . '', true  );
 				return false;
 			}
 			if( is_string( $this->getLog() ) )
@@ -55,7 +55,7 @@ class Application_Log_View extends Application_Log_Abstract
 				$this->setViewContent( $this->getXml()->saveHTML() );
 			}
 		}
-		catch( Ayoola_Exception $e ){ $this->setViewContent( 'ERROR OCCURED WHILE TRYING TO VIEW LOG', true ); }
+		catch( Ayoola_Exception $e ){ $this->setViewContent(  '' . self::__( 'ERROR OCCURED WHILE TRYING TO VIEW LOG' ) . '', true  ); }
 	}
 	
     /**

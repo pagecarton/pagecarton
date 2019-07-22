@@ -133,7 +133,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				unset( $export );
 				unlink( $filename );
 				
-				$this->setViewContent( '<p class="goodnews">Plugin imported successfully. New plugins are deactivated by default when they are imported. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?extension_name=' . $extensionInfo['extension_name'] . '">Turn on!</a></p>', true );
+				$this->setViewContent(  '' . self::__( '<p class="goodnews">Plugin imported successfully. New plugins are deactivated by default when they are imported. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?extension_name=' . $extensionInfo['extension_name'] . '">Turn on!</a></p>' ) . '', true  );
 			//	$this->setViewContent( self::__( '' ) );
 				
 				
@@ -144,7 +144,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 			}
 			else
 			{
-				$this->setViewContent( '<p class="badnews">Plugin file not found.</p>', true );
+				$this->setViewContent(  '' . self::__( '<p class="badnews">Plugin file not found.</p>' ) . '', true  );
 			}
 		}
 		catch( Exception $e )

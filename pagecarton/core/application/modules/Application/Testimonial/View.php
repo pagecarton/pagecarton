@@ -51,7 +51,7 @@ class Application_Testimonial_View extends Application_Testimonial_Abstract
 			}
 			$this->setViewContent( self::__( '<a class="goodnews boxednews" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Testimonial_Creator/">Add a testimonial</a>' ) );
 		}
-		catch( Exception $e ){ return $this->setViewContent( 'Error with Testimonial package', true ); }
+		catch( Exception $e ){ return $this->setViewContent(  '' . self::__( 'Error with Testimonial package' ) . '', true  ); }
 	//	var_export( $this->getDbData() );
     } 
 	

@@ -73,7 +73,7 @@ class Ayoola_Page_Editor extends Ayoola_Page_Abstract
 			self::resetCacheForPage( $data['url'] );
 			
 	//		var_export( $data );
-			$this->setViewContent( '<p class="goodnews">Page Option Edited Successfully</p>', true );   
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Page Option Edited Successfully</p>' ) . '', true  );   
 			
 /* 			require_once 'Ayoola/Xml.php';
 			$data['url'] = rtrim( $data['url'], '/' );
@@ -84,12 +84,12 @@ class Ayoola_Page_Editor extends Ayoola_Page_Abstract
 			$xml->load( $filename );
 			$xml->arrayAsCData( $values );
 			$xml->save( $filename );
- */			//	if( $this->_createXml() ){ $this->setViewContent( 'Page Option Edited Successfully', true ); }
+ */			//	if( $this->_createXml() ){ $this->setViewContent(  '' . self::__( 'Page Option Edited Successfully' ) . '', true  ); }
 		}
 		catch( Exception $e )
 		{ 
 		//	return false; 
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
 		
     } 

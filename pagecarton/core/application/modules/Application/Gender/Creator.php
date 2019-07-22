@@ -56,7 +56,7 @@ class Application_Gender_Creator extends Application_Gender_Abstract
 		//	if( ! $this->insertDb() ){ return false; }
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent( '<div class="goodnews">Added successfully. </div>', true ); 
+				$this->setViewContent(  '' . self::__( '<div class="goodnews">Added successfully. </div>' ) . '', true  ); 
 			}
 		//	$this->setViewContent( $this->getForm()->view() );
             

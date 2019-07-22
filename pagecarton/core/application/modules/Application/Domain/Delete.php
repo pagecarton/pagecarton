@@ -68,12 +68,12 @@ class Application_Domain_Delete extends Application_Domain_Abstract
 			{
 				if( Ayoola_Doc::removeDirectory( self::getSubDomainDirectory( $data['domain_name'] ), true ) )
 				{
-					if( $this->deleteDb( false ) ){ $this->setViewContent( 'Domain deleted successfully', true ); }
+					if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Domain deleted successfully' ) . '', true  ); }
 				}
 			}
 			else
 			{
-				if( $this->deleteDb( false ) ){ $this->setViewContent( 'Domain deleted successfully', true ); }
+				if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Domain deleted successfully' ) . '', true  ); }
 			}
 			
 			//	reset domain

@@ -35,8 +35,8 @@ class Application_Backup_Upload extends Application_Backup_Abstract
 	protected function init()
     {
 		$this->setViewContent( $this->getForm()->view() );		
-	//	if( $this->upload() ){ $this->setViewContent( 'Backup Uploaded Successfully', true ); }
-		if( $this->upload( $this->getParameter( 'local_file' ) ) ){ $this->setViewContent( 'Backup uploaded successfully.', true ); }
+	//	if( $this->upload() ){ $this->setViewContent(  '' . self::__( 'Backup Uploaded Successfully' ) . '', true  ); }
+		if( $this->upload( $this->getParameter( 'local_file' ) ) ){ $this->setViewContent(  '' . self::__( 'Backup uploaded successfully.' ) . '', true  ); }
 		else{ $this->getForm()->setBadnews( 'Error while Uploading Backup File' ); }
 		return true;
     } 

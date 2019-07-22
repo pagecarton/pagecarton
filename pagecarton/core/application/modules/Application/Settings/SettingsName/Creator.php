@@ -45,7 +45,7 @@ class Application_Settings_SettingsName_Creator extends Application_Settings_Set
 			$values['settingsname_name'] = strtolower( $filter->filter( $values['settingsname_title'] ) );
 
 			if( ! $this->insertDb( $values ) ){ return false; }
-			$this->setViewContent( '<p class="goodnews">Settings Name created successfully</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Settings Name created successfully</p>' ) . '', true  );
 		}
 		catch( Application_Settings_SettingsName_Exception $e ){ return false; }
     } 

@@ -64,7 +64,7 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 			$values['contactus_subject'] = $values['contactus_subject'] ? : $values['contactus_message'];
 			if( ! $this->insertDb( $values ) ){ return false; }
 			//	self::v( $values );
-			$this->setViewContent( 'Thank you! Your message has reached us, we will get back to you as soon as possible.', true );
+			$this->setViewContent(  '' . self::__( 'Thank you! Your message has reached us, we will get back to you as soon as possible.' ) . '', true  );
 			
 			$emailAddress = array();
 			if( Ayoola_Application::getUserInfo( 'email' ) )

@@ -105,7 +105,7 @@ print_r($ciphers_and_aliases);
 		//	if( ! $this->insertDb() ){ return false; }
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent( '<span class="boxednews goodnews centerednews">Encryption keys created successfully. </span><br>', true ); 
+				$this->setViewContent(  '' . self::__( '<span class="boxednews goodnews centerednews">Encryption keys created successfully. </span><br>' ) . '', true  ); 
 				$this->setViewContent( self::__( '<pre class="boxednews normalnews centerednews">' . var_export( $values['encryption_key'], true ) . '</pre><br>' ) ); 
 			//	$this->setViewContent( self::__( '<pre class="boxednews normalnews centerednews">' . $values['public_key'] . '</pre><br>' ) ); 
 			}
@@ -113,7 +113,7 @@ print_r($ciphers_and_aliases);
 		catch( Exception $e )
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
     } 

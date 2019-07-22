@@ -87,7 +87,7 @@ class Application_User_UserLocation_Creator extends Application_User_UserLocatio
 					}
 				break;
 			}
-			$this->setViewContent( '<p>Address information saved.</p>', true );	
+			$this->setViewContent(  '' . self::__( '<p>Address information saved.</p>' ) . '', true  );	
 	
 		}
 		catch( Ayoola_Exception $e )

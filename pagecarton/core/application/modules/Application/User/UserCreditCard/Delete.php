@@ -40,7 +40,7 @@ class Application_User_UserCreditCard_Delete extends Application_User_UserCredit
 			$this->createConfirmationForm( 'Delete ' . $data['card_number'],  'Delete Credit/Debit Card' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Credit/Debit Card Information deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Credit/Debit Card Information deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_User_UserCreditCard_Exception $e ){ return false; }
     } 

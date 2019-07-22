@@ -44,7 +44,7 @@ class Application_Facebook_Comment extends Application_Facebook_Abstract
 	public function init()
     {  
 		self::load();
-		$this->setViewContent( '<div class="fb-comments" data-href="' . $this->getUrl() . '" data-num-posts="5" data-width="100%"></div>', true );
+		$this->setViewContent(  '' . self::__( '<div class="fb-comments" data-href="' . $this->getUrl() . '" data-num-posts="5" data-width="100%"></div>' ) . '', true  );
     } 
 	// END OF CLASS
 }

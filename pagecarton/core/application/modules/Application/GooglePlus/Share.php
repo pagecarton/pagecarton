@@ -40,7 +40,7 @@ class Application_GooglePlus_Share extends Application_GooglePlus_Abstract
 	//	if( empty( $usernames['googleplus_id'] ) ){ return; }
 		$usernames = @$usernames['googleplus_id'];
 		$username = array_shift( explode( ',', $usernames ) );
-		$this->setViewContent( '<div class="g-plus" data-annotation="bubble" data-action="share" data-href="' . $this->getUrl() . '"></div>', true );
+		$this->setViewContent(  '' . self::__( '<div class="g-plus" data-annotation="bubble" data-action="share" data-href="' . $this->getUrl() . '"></div>' ) . '', true  );
     } 
 	// END OF CLASS
 }

@@ -34,7 +34,7 @@ class Application_Link_SearchEngine_List extends Application_Link_SearchEngine_A
      */
 	protected function init()
     {
-	//	$this->setViewContent( '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/linkCreator/">Create new Link</a>', true );
+	//	$this->setViewContent(  '' . self::__( '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/linkCreator/">Create new Link</a>' ) . '', true  );
 		$this->setViewContent( $this->getList() );
     } 
 	

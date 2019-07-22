@@ -34,7 +34,7 @@ class Application_CommentBox_Table_Editor extends Application_CommentBox_Table_A
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
 
-			if( $this->updateDb( $values ) ){ $this->setViewContent( '<div class="goodnews">Data updated successfully</div>', true ); } 
+			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Data updated successfully</div>' ) . '', true  ); } 
 
              // end of widget process
           
@@ -42,7 +42,7 @@ class Application_CommentBox_Table_Editor extends Application_CommentBox_Table_A
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p class="badnews">Theres an error in the code</p>' ) . '', true  ); 
             return false; 
         }
 	}

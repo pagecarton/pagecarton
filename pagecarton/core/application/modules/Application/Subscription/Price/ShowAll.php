@@ -56,10 +56,10 @@ class Application_Subscription_Price_ShowAll extends Application_Subscription_Pr
     {
 		try
 		{
-			if( ! $this->getDbData() ){ return $this->setViewContent( '<p>There are no packages to show</p>', true ); }
+			if( ! $this->getDbData() ){ return $this->setViewContent(  '' . self::__( '<p>There are no packages to show</p>' ) . '', true  ); }
 			$this->setViewContent( self::getXml()->saveHTML(), true );
 		}
-		catch( Exception $e ){ return $this->setViewContent( '<p>Error with subscription package</p>', true ); }
+		catch( Exception $e ){ return $this->setViewContent(  '' . self::__( '<p>Error with subscription package</p>' ) . '', true  ); }
 	//	var_export( $this->_xml );
     } 
 	

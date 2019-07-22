@@ -39,7 +39,7 @@ class Application_Domain_Registration_Price_Delete extends Application_Domain_Re
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['extension'],  'Delete price for ' . $data['extension'] );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Item removed from price list successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Item removed from price list successfully' ) . '', true  ); }
 		}
 		catch( Application_Domain_Registration_Price_Exception $e ){ return false; }
     } 

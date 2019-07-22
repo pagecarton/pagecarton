@@ -48,7 +48,7 @@ class Application_User_Delete extends Application_User_Abstract
 	//		var_export( $response );
 			if( true === $response['data'] )
 			{
-				$this->setViewContent( '<p class="goodnews">User deleted successfully in the API</p>', true );
+				$this->setViewContent(  '' . self::__( '<p class="goodnews">User deleted successfully in the API</p>' ) . '', true  );
 			}
 //		break;
 //		case 'file':
@@ -58,7 +58,7 @@ class Application_User_Delete extends Application_User_Abstract
 
 			if( $info = $table->delete( array( 'username' => strtolower( $data['username'] ) ) ) )
 			{
-				$this->setViewContent( '<p class="goodnews">User deleted successfully on the local table</p>', true );
+				$this->setViewContent(  '' . self::__( '<p class="goodnews">User deleted successfully on the local table</p>' ) . '', true  );
 			}
 			if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 			{
@@ -79,7 +79,7 @@ class Application_User_Delete extends Application_User_Abstract
 						//	return false;
 						}
 					}
- */					if( $this->deleteDb( false ) ){ $this->setViewContent( '<p class="goodnews">User deleted successfully</p>', true ); }
+ */					if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( '<p class="goodnews">User deleted successfully</p>' ) . '', true  ); }
 				break;
 			
 			}

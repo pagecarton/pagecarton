@@ -43,7 +43,7 @@ class Ayoola_Api_Whitelist_Editor extends Ayoola_Api_Whitelist_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
 			if( ! $this->updateDb( $values ) ){ return false; }
-			$this->setViewContent( 'Api link edited successfully.', true );
+			$this->setViewContent(  '' . self::__( 'Api link edited successfully.' ) . '', true  );
 		}
 		catch( Application_Blog_Exception $e ){ return false; }
      

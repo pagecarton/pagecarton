@@ -53,7 +53,7 @@ class Application_Article_Generator extends Application_Article_Abstract
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			if( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
 			{ 
-			//	$this->setViewContent( '<p class="badnews">You are not enabled to write articles on this website. Please check that you are properly logged inn. <a rel="spotlight;width=300px;height=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/accessLogin/">Check your login status.</a></p>', true );
+			//	$this->setViewContent(  '' . self::__( '<p class="badnews">You are not enabled to write articles on this website. Please check that you are properly logged inn. <a rel="spotlight;width=300px;height=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/accessLogin/">Check your login status.</a></p>' ) . '', true  );
 				return false; 
 			}
 			  
@@ -93,7 +93,7 @@ class Application_Article_Generator extends Application_Article_Abstract
 				//	Application_Javascript::addCode( "ayoola.post.categories = '{$fieldset->view()}';" );
 				//	$this->setViewContent( Application_Article_Creator::viewInLine(), true );
 					$this->setViewContent( self::__( '<div id="xcontainer">Please wait...</div>' ) );
-					$this->setViewContent( '<div style= "display:none;" id="ayoola_post_categories">' . $elementsMarkUp . '</div>' ) ;
+					$this->setViewContent(  '' . self::__( '<div style= "display:none;" id="ayoola_post_categories">' . $elementsMarkUp . '</div>' ) . ''  ) ;
 				break;
 			}
 			

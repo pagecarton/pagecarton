@@ -34,7 +34,7 @@ class Application_Domain_Order_Editor extends Application_Domain_Order_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
 
-			if( $this->updateDb( $values ) ){ $this->setViewContent( '<div class="goodnews">Data updated successfully</div>', true ); } 
+			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Data updated successfully</div>' ) . '', true  ); } 
 
              // end of widget process
           

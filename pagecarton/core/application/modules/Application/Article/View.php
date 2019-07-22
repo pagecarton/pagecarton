@@ -103,7 +103,7 @@ class Application_Article_View extends Application_Article_Abstract
 					exit();
 				}
 				
-				return $this->setViewContent( '<p class="badnews">The requested article was not found on the server. Please check the URL and try again. ' . self::getQuickLink() . '</p>', true );
+				return $this->setViewContent(  '' . self::__( '<p class="badnews">The requested article was not found on the server. Please check the URL and try again. ' . self::getQuickLink() . '</p>' ) . '', true  );
 			//	self::setIdentifierData( $data );
 			}
 		//	var_export( self::hasPriviledge( @$data['auth_level'] ) );
@@ -112,7 +112,7 @@ class Application_Article_View extends Application_Article_Abstract
 		}
 		catch( Exception $e )
 		{ 
-			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );
 			return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
 	//	var_export( $this->_xml );

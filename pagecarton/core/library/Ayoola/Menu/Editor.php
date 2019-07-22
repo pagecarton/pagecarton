@@ -47,7 +47,7 @@ class Ayoola_Menu_Editor extends Ayoola_Menu_Abstract
 			if( ! $this->updateDb( $values ) ){ return false; }
 			
 	//		var_export( $data );
-			$this->setViewContent( 'Menu template edited successfully', true );
+			$this->setViewContent(  '' . self::__( 'Menu template edited successfully' ) . '', true  );
 			
 		}
 		catch( Exception $e ){ return false; }

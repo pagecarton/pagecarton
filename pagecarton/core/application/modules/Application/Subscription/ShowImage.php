@@ -46,7 +46,7 @@ class Application_Subscription_ShowImage extends Application_Subscription_Detail
 			if( ! $data = $this->getIdentifierData() ){ return null; }
 		//	Ayoola_Doc::viewInLine( null, $data['document_url'] );
 			$this->setViewContent( Ayoola_Doc::viewInLine( null, $data['document_url'] ), true );
-		//	$this->setViewContent( '<img src="' . $data['document_url'] . '"/>', true );
+		//	$this->setViewContent(  '' . self::__( '<img src="' . $data['document_url'] . '"/>' ) . '', true  );
 		}
 		catch( Exception $e ){ return; }
 	//	var_export( $this->_xml );

@@ -72,7 +72,7 @@ class Application_Profile_Logon extends Application_Profile_Abstract
 			Ayoola_Access_Localize::info( $userInfo );
 
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '/' . $data['profile_url'] . '';
-			$this->setViewContent( '<div class="boxednews greynews">You have successfully logged on as "'  . $data['display_name'] . '"</div>', true );
+			$this->setViewContent(  '' . self::__( '<div class="boxednews greynews">You have successfully logged on as "'  . $data['display_name'] . '"</div>' ) . '', true  );
 			$this->setViewContent( self::__( '<div class="boxednews greynews" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );  
 			if( @$_GET['previous_url'] )
 			{

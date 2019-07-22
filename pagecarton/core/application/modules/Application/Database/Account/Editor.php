@@ -42,7 +42,7 @@ class Application_Database_Account_Editor extends Application_Database_Account_A
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
 			//	Delete previous and insert present
-			if( $this->updateDb() ){ $this->setViewContent( 'Database account edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Database account edited successfully' ) . '', true  ); }
 		}
 		catch( Application_Database_Account_Exception $e ){ return false; }
     } 

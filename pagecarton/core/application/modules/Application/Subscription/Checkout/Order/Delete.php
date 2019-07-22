@@ -39,7 +39,7 @@ class Application_Subscription_Checkout_Order_Delete extends Application_Subscri
 			if( ! $data = $this->getIdentifierData() ){ return false; }
 			$this->createDeleteForm( $data['order_id'] );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Order deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Order deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Subscription_Checkout_Order_Exception $e ){ return false; }
 

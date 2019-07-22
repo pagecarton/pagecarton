@@ -36,7 +36,7 @@ class Application_Subscription_Checkout_DirectDeposit_Creator extends Applicatio
     {
 		$this->createForm( 'Add', 'Add a new Account Information' );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->insertDb() ){ $this->setViewContent( 'Account information added successfully', true ); }
+		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Account information added successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

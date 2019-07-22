@@ -41,7 +41,7 @@ class Ayoola_Page_Layout_Edit_File extends Ayoola_Page_Layout_Edit_Abstract
 		@$values[self::VALUE_CONTENT] = file_get_contents( $this->getMyFilename() );
 		$this->createForm( 'Edit File', 'Edit ' . $identifierData['layout_name'], $values  );
 		$this->setViewContent( $this->getForm()->view() );
-		if( $this->updateFile() ){ $this->setViewContent( 'Layout file edited successfully', true ); }
+		if( $this->updateFile() ){ $this->setViewContent(  '' . self::__( 'Layout file edited successfully' ) . '', true  ); }
     } 
 
     /**

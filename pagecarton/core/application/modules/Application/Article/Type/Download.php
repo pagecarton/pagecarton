@@ -65,7 +65,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 					@$urlToGo = '' . Ayoola_Application::getUrlPrefix() . '/accounts/signin/?previous_url=' . htmlentities( $data['article_url'] . '&x_url=' . $_REQUEST['x_url'] );
 	//				header( 'Location: /accounts/signin/?previous_url=' . $data['article_url'] );
 	//				exit();
-					$this->setViewContent( '<p>You are required to sign in before you can access this document.</p>', true );
+					$this->setViewContent(  '' . self::__( '<p>You are required to sign in before you can access this document.</p>' ) . '', true  );
 					$this->setViewContent( self::__( '<input type="button" value="Sign in to download" onClick="window.location=\'' . $urlToGo . '\'" >' ) );
 					return false;
 				}
@@ -182,7 +182,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 		}
 		catch( Exception $e )
 		{ 
-			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );
 			$this->getForm()->setBadnews( $e->getMessage() );
 			$this->setViewContent( $this->getForm()->view() );
 			return false;

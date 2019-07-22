@@ -42,7 +42,7 @@ class Application_Settings_SettingsName_Editor extends Application_Settings_Sett
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( ! $this->updateDb( $values ) ){ return false; }
-			$this->setViewContent( '<p class="goodnews">Settings Name and Class saved successfully</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Settings Name and Class saved successfully</p>' ) . '', true  );
 		}
 		catch( Application_Settings_SettingsName_Exception $e ){ return false; }
     } 

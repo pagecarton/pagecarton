@@ -84,7 +84,7 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 			Ayoola_Doc::deleteDirectoryPlusContent( $backup );
 			
 			@Ayoola_Doc::removeDirectory( dirname( self::getFolder() . $data['profile_url'] ) );
-			$this->setViewContent( '<div class="boxednews badnews">Profile deleted successfully</div>', true ); 
+			$this->setViewContent(  '' . self::__( '<div class="boxednews badnews">Profile deleted successfully</div>' ) . '', true  ); 
 			if( @$_GET['previous_url'] )
 			{
 				$this->setViewContent( self::__( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' ) );

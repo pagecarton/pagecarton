@@ -41,7 +41,7 @@ class Application_ContactUs_Editor extends Application_ContactUs_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( ! $this->updateDb( $values ) ){ return false; }
-			$this->setViewContent( 'Contact message edited successfully', true );
+			$this->setViewContent(  '' . self::__( 'Contact message edited successfully' ) . '', true  );
 		}
 		catch( Application_ContactUs_Exception $e ){ return false; }
     } 

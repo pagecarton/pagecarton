@@ -88,9 +88,9 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$this->cartUpdate();
 		if( ! $data = $this->getCartContents() )
 		{ 
-			return $this->setViewContent( '<span class="boxednews centerednews badnews">Your shopping cart is empty.</span>', true );
+			return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">Your shopping cart is empty.</span>' ) . '', true  );
 		}
-		$this->setViewContent( '<div class="">' . self::getXml()->saveHTML() . '</div>', true );
+		$this->setViewContent(  '' . self::__( '<div class="">' . self::getXml()->saveHTML() . '</div>' ) . '', true  );
 	//	$this->setViewContent( Application_Subscription_Checkout::viewInLine() );
 	//	var_export( $this->_xml );
     } 
@@ -152,7 +152,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$table->setAttribute( 'class', 'pc-table'  );
 		if( ! $data = $this->getCartContents() )
 		{ 
-		//	return $this->setViewContent( '<span class="boxednews centerednews badnews">You have no item in your shopping cart.</span>', true );
+		//	return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">You have no item in your shopping cart.</span>' ) . '', true  );
 			$columnNode = $this->_xml->createElement( 'td', 'There is no item in the shopping cart' );
 			$row->appendChild( $columnNode );
 			return $this->_xml->appendChild( $table );

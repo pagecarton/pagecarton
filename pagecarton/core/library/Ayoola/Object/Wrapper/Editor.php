@@ -41,7 +41,7 @@ class Ayoola_Object_Wrapper_Editor extends Ayoola_Object_Wrapper_Abstract
 			if( ! $identifierData = self::getIdentifierData() ){ return false; }
 			$this->createForm( 'Save', 'Edit ' . $identifierData['wrapper_label'], $identifierData );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->updateDb() ){ $this->setViewContent( '<p>Wrapper Edited Successfully</p>', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( '<p>Wrapper Edited Successfully</p>' ) . '', true  ); }
 		}
 		catch( Exception $e ){ return false; }
 		

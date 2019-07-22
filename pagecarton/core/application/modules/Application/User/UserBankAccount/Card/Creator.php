@@ -55,7 +55,7 @@ class Application_User_UserBankAccount_Card_Creator extends Application_User_Use
 		
 			return false; 
 		}
-		$this->setViewContent( '<h4>Credit/Debit Card Information Added.</h4>', true );		
+		$this->setViewContent(  '' . self::__( '<h4>Credit/Debit Card Information Added.</h4>' ) . '', true  );		
 		$this->setViewContent( self::__( '<p>What Next? <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/verify/get/mode/CreditCard/">Verify Credit/Debit Card</a>.</p>' ) );		
     }
 	// END OF CLASS

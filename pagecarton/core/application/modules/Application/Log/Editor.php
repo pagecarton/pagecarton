@@ -40,7 +40,7 @@ class Application_Log_Editor extends Application_Log_Abstract
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 		$this->createForm( 'Edit', 'Edit Log Viewer - ' . $identifierData['log_name'], $identifierData );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->updateDb() ){ $this->setViewContent( 'Log Viewer Edited Successfully', true ); }
+		if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Log Viewer Edited Successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

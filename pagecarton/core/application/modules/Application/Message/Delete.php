@@ -39,7 +39,7 @@ class Application_Message_Delete extends Application_Message_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['message'],  'Delete Message' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Message deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Message deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Message_Exception $e ){ return false; }
     } 

@@ -45,7 +45,7 @@ class Application_Twitter_Tweet extends Application_Twitter_Abstract
 		$text = $title ? 'data-text="' . $title . '"' : null;
 	//	var_export( $text );
 	//	var_export( $this->getUrl() );
-		$this->setViewContent( '<a style="display:inline;" href="https://twitter.com/share" class="twitter-share-button" ' . $text . ' data-url="' . $this->getUrl() . '" data-via="' . $username . '" data-related="' . $usernames . '">Tweet</a>', true );
+		$this->setViewContent(  '' . self::__( '<a style="display:inline;" href="https://twitter.com/share" class="twitter-share-button" ' . $text . ' data-url="' . $this->getUrl() . '" data-via="' . $username . '" data-related="' . $usernames . '">Tweet</a>' ) . '', true  );
 //		var_export( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) );
     } 
 	// END OF CLASS

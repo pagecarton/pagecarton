@@ -47,7 +47,7 @@ class Ayoola_Access_AuthLevel_Editor extends Ayoola_Access_AuthLevel_Abstract
 		if( ! $this->updateDb( $values ) ){ return false; }
 		
 	//	var_export( $data );
-		$this->setViewContent( 'Auth level updated successfully.', true ); 
+		$this->setViewContent(  '' . self::__( 'Auth level updated successfully.' ) . '', true  ); 
     } 
 	// END OF CLASS
 }

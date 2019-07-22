@@ -56,7 +56,7 @@ class Application_Domain_Order_Process extends Application_Domain_Order_Abstract
 				case '100':
 					if( $this->insertDb( $values ) )
 					{ 
-						$this->setViewContent( '<div class="goodnews">' . $parameters['domain_name'] . ' added to your account</div>', true ); 
+						$this->setViewContent(  '' . self::__( '<div class="goodnews">' . $parameters['domain_name'] . ' added to your account</div>' ) . '', true  ); 
 					}
 					$domainArray = explode( '.', $values['domain_name'] );
 					$firstPart = array_shift( $domainArray );

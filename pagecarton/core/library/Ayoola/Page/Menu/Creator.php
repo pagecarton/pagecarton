@@ -56,7 +56,7 @@ class Ayoola_Page_Menu_Creator extends Ayoola_Page_Menu_Abstract
 		if( $this->insertDb( $values ) )
 		{ 
 			$menuInfo = $this->getDbTable()->selectOne( null, array( 'menu_name' => $values['menu_name'] ) );
-			$this->setViewContent( '<p class="goodnews">A new menu has been created successfully.</p>', true ); 
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">A new menu has been created successfully.</p>' ) . '', true  ); 
 			$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_List/?menu_id=' . $menuInfo['menu_id'] . '" class="pc-btn">Manage options</a>' ) );     
 		}
     } 

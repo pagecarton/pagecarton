@@ -70,7 +70,7 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
 		if( ! self::isValidCurrency() )
 		{  
 			$this->setViewContent( "<p class='badnews'>ERROR - Invalid Currency ({$values['settings']['currency_abbreviation']}).  " . static::$_apiName . " does not process this currency type.</p>" ); 
-			$this->setViewContent( "<p class='badnews'>Please select other payment methods.</p>" ); 
+			$this->setViewContent( "<p class= '' . self::__( 'badnews' ) . ''>Please select other payment methods.</p>"  ); 
 			return;  
 		}
 	//	$this->setViewContent( self::__( '<p></p><h4></h4>' ) );

@@ -50,10 +50,10 @@ class Application_Link_View extends Application_Link_Abstract
     {
 		try
 		{
-			if( ! $this->getIdentifierData() ){ return $this->setViewContent( 'Link Not Found', true ); }
+			if( ! $this->getIdentifierData() ){ return $this->setViewContent(  '' . self::__( 'Link Not Found' ) . '', true  ); }
 			$this->setViewContent( self::getXml()->saveHTML(), true );
 		}
-		catch( Exception $e ){ return $this->setViewContent( 'Error with link package', true ); }
+		catch( Exception $e ){ return $this->setViewContent(  '' . self::__( 'Error with link package' ) . '', true  ); }
 	//	var_export( $this->_xml );
     } 
 	

@@ -41,7 +41,7 @@ class Application_Log_Delete extends Application_Log_Abstract
 			$this->setViewContent( $this->getForm()->view() );
 			if( $this->deleteDb( false ) )
 			{ 
-				$this->setViewContent( 'Log deleted', true ); 
+				$this->setViewContent(  '' . self::__( 'Log deleted' ) . '', true  ); 
 			}
 		}
 		catch( Application_Log_Exception $e ){ return false; }

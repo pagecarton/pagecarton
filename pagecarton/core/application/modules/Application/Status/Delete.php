@@ -39,7 +39,7 @@ class Application_Status_Delete extends Application_Status_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ',  'Delete Status' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Status deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Status deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Status_Exception $e ){ return false; }
     } 

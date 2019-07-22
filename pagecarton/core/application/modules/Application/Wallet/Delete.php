@@ -39,7 +39,7 @@ class Application_Wallet_Delete extends Application_Wallet_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['Wallet_title'],  'Delete Wallet' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Wallet deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Wallet deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Wallet_Exception $e ){ return false; }
     } 

@@ -40,7 +40,7 @@ class Application_User_UserPhoneNumber_Delete extends Application_User_UserPhone
 			$this->createConfirmationForm( 'Delete ' . $data['street_address'],  'Delete Address' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Address Information deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Address Information deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_User_UserPhoneNumber_Exception $e ){ return false; }
     } 

@@ -50,7 +50,7 @@ class Application_ContactUs_ShowAll extends Application_ContactUs_Abstract
     {
 		try
 		{
-		//	$this->setViewContent( '<h2>' . self::getObjectTitle() . '</h2>', true );
+		//	$this->setViewContent(  '' . self::__( '<h2>' . self::getObjectTitle() . '</h2>' ) . '', true  );
 			if( ! $this->getDbData() )
 			{ 
 				return $this->setViewContent( self::__( '<div class="noRecord">No one has left a message using the contact form yet.</div>' ) ); 
@@ -59,7 +59,7 @@ class Application_ContactUs_ShowAll extends Application_ContactUs_Abstract
 			}
 			$this->setViewContent( self::getXml()->saveHTML() );
 		}
-		catch( Exception $e ){ return $this->setViewContent( 'Error with contact us package', true ); }
+		catch( Exception $e ){ return $this->setViewContent(  '' . self::__( 'Error with contact us package' ) . '', true  ); }
 	//	var_export( $this->getDbData() );
     } 
 	

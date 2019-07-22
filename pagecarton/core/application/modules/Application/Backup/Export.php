@@ -68,8 +68,8 @@ class Application_Backup_Export extends Application_Backup_Abstract
 		else
 		{
 		//	var_export( intval( @$data['export_information']['export_expiry'] ) + intval( @$data['export_information']['time'] ) );
-			$this->setViewContent( '<div class="boxednews greynews">Export expire.</div> <div class="boxednews greynews">' . ( time() - intval( @$data['export_information']['export_expiry'] ) + intval( @$data['export_information']['time'] ) ) . '</div>', true );
-		//	$this->setViewContent( '<div class="boxednews greynews">Export expire.</div> <div class="boxednews greynews"><a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Backup_Download/?backup_id=' . $data['backup_id'] . '">Download It!</a></div>', true );
+			$this->setViewContent(  '' . self::__( '<div class="boxednews greynews">Export expire.</div> <div class="boxednews greynews">' . ( time() - intval( @$data['export_information']['export_expiry'] ) + intval( @$data['export_information']['time'] ) ) . '</div>' ) . '', true  );
+		//	$this->setViewContent(  '' . self::__( '<div class="boxednews greynews">Export expire.</div> <div class="boxednews greynews"><a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Backup_Download/?backup_id=' . $data['backup_id'] . '">Download It!</a></div>' ) . '', true  );
 		}
     } 
 	// END OF CLASS

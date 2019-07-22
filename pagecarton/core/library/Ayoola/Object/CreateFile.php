@@ -169,7 +169,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
         }
 
     //    $this->setViewContent( self::__( '<textarea>' . $content . '</textarea>' ) );
-        $this->setViewContent( '<h1 class="goodnews">File created successfully</h1>', true ); 
+        $this->setViewContent(  '' . self::__( '<h1 class="goodnews">File created successfully</h1>' ) . '', true  ); 
         $this->setViewContent( self::__( '<p>' . $nextStep . '</p>' ) ); 
 
         if( self::hasPriviledge() )

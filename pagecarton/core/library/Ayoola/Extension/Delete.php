@@ -49,7 +49,7 @@ class Ayoola_Extension_Delete extends Ayoola_Extension_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( $this->deleteDb( false ) )
 			{ 
-				$this->setViewContent( '<p class="goodnews">Plugin deleted successfully</p>', true ); 
+				$this->setViewContent(  '' . self::__( '<p class="goodnews">Plugin deleted successfully</p>' ) . '', true  ); 
 			} 
 		}
 		catch( Ayoola_Extension_Exception $e ){ return false; }

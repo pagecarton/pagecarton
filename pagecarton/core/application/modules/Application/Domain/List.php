@@ -52,7 +52,7 @@ class Application_Domain_List extends Application_Domain_Abstract
 		{
 			$this->setViewContent( $this->getList(), true );
 		}
-		catch( Exception $e ){ $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );; }
+		catch( Exception $e ){ $this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );; }
     } 
 	
     /**

@@ -43,12 +43,12 @@ class Ayoola_Page_Delete extends Ayoola_Page_Abstract
 			$this->createConfirmationForm( 'Delete', 'Delete this page, "' . $data['url'] . '" and all its associated files? This cannot be undone.' );
 			self::resetCacheForPage( $data['url'] );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->_deleteFiles() ){ $this->setViewContent( '<p class=" goodnews ">Page deleted successfully</p>', true ); } 
+			if( $this->_deleteFiles() ){ $this->setViewContent(  '' . self::__( '<p class=" goodnews ">Page deleted successfully</p>' ) . '', true  ); } 
 		}
 		catch( Exception $e )  
 		{ 
 		//	return false; 
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
     } 
 	

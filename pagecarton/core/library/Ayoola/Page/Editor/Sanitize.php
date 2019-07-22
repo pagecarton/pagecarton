@@ -50,12 +50,12 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
     {
 
 		$this->createConfirmationForm( 'Sanitize Pages', 'Sanitize all page files and information' );
-		$this->setViewContent( '<h3>NOTE:</h3>', true );		
+		$this->setViewContent(  '' . self::__( '<h3>NOTE:</h3>' ) . '', true  );		
 		$this->setViewContent( self::__( '<p>This process will create a fresh copy of all the pages. A fresh copy of the layout template will be used in generating the new pages. A backup of the application is recommended.</p>' ) );		
 	//	$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/ayoola/backup" class="pc-btn pc-btn-small">Backup Now!</a>' ) );
 		$this->setViewContent( $this->getForm()->view() );
         if( ! $values = $this->getForm()->getValues() ){ return false; }
-		if( $this->sanitize() ){ $this->setViewContent( 'Pages Sanitized Successfully', true ); }
+		if( $this->sanitize() ){ $this->setViewContent(  '' . self::__( 'Pages Sanitized Successfully' ) . '', true  ); }
     }
 		
     /**

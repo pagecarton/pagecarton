@@ -187,7 +187,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
 
             if( self::this( $url, $data['layout_name'] ) )
             {
-                $this->setViewContent( '<p class="goodnews">"' . $url . '" page copied successfully.</p>', true ); 
+                $this->setViewContent(  '' . self::__( '<p class="goodnews">"' . $url . '" page copied successfully.</p>' ) . '', true  ); 
             }
             else
             {
@@ -200,7 +200,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

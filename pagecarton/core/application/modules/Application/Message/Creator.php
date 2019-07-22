@@ -124,7 +124,7 @@ http://' . Ayoola_Page::getDefaultDomain() . '/' . $senderInfo['profile_url'] . 
 			$emailInfo['from'] = '' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . '<no-reply@' . Ayoola_Page::getDefaultDomain() . '>';
 			@self::sendMail( $emailInfo );
 			
-			$this->setViewContent( '<p class="goodnews">Private message has been sent successfully.</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Private message has been sent successfully.</p>' ) . '', true  );
 		}
 		catch( Application_Message_Exception $e ){ return false; }
    } 

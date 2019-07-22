@@ -42,7 +42,7 @@ class Application_User_UserBankAccount_Card_Editor extends Application_User_User
 			$this->setViewContent( "<h4>Editing {$data['card_number']}</h4>" );
 			$this->setViewContent( self::__( '<p>You will need to verify this Credit/Debit card if edited.</p>' ) );
 			$this->setViewContent( $this->getForm()->view() );
-			if( $this->updateDb() ){ $this->setViewContent( 'Credit/Debit card edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Credit/Debit card edited successfully' ) . '', true  ); }
 		}
 		catch( Application_User_UserBankAccount_Card_Exception $e ){ return false; }
     } 

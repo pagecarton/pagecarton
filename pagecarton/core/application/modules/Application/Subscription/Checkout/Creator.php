@@ -36,7 +36,7 @@ class Application_Subscription_Checkout_Creator extends Application_Subscription
     {
 		$this->createForm( 'Create Option', 'Create a new Checkout Option' );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->insertDb() ){ $this->setViewContent( 'Checkout option created successfully', true ); }
+		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Checkout option created successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

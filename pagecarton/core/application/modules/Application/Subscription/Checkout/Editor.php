@@ -39,7 +39,7 @@ class Application_Subscription_Checkout_Editor extends Application_Subscription_
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 		$this->createForm( 'Edit Checkout Option', 'Edit ' . $identifierData['checkoutoption_name'], $identifierData );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->updateDb() ){ $this->setViewContent( 'Checkout option edited successfully', true ); }
+		if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Checkout option edited successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

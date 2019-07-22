@@ -41,7 +41,7 @@ class Application_Twitter_Follow extends Application_Twitter_Abstract
 		if( empty( $usernames['twitter_username'] ) ){ return; }
 		$usernames = $usernames['twitter_username'];
 		$username = array_shift( explode( ',', $usernames ) );
-		$this->setViewContent( '<a href="https://twitter.com/' . $username . '" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @' . $username . '</a>', true );
+		$this->setViewContent(  '' . self::__( '<a href="https://twitter.com/' . $username . '" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @' . $username . '</a>' ) . '', true  );
     } 
 	// END OF CLASS
 }

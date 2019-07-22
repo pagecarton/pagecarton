@@ -82,9 +82,9 @@ class Application_Article_Category extends Ayoola_Abstract_Table
 				//	refresh
 				//	workaround for markup template not working
 				$this->_markupTemplate = null;
-				return $this->setViewContent( '', true ); 
+				return $this->setViewContent(  '' . self::__( '' ) . '', true  ); 
 			}
-		//	$this->setViewContent( '<h4>Categories</h4>', true );
+		//	$this->setViewContent(  '' . self::__( '<h4>Categories</h4>' ) . '', true  );
 			$this->setViewContent( self::getXml() );
 	//	self::v( $this->_parameter['markup_template'] );
 
@@ -92,13 +92,13 @@ class Application_Article_Category extends Ayoola_Abstract_Table
 		catch( Application_Article_Exception $e ) 
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
 		catch( Exception $e )
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
 

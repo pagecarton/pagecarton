@@ -55,7 +55,7 @@ class Application_Twitter_EzTweet_View extends Application_Twitter_Abstract
 	//	Application_Javascript::addFile( 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js', array( 'js_mode' => true ) );
 		Application_Javascript::addFile( '/js/objects/jquery/tweet/min.js' );
 		Application_Style::addFile( '/js/objects/jquery/tweet/css.css' );
-		$this->setViewContent( '<div id="twitterbody"></div>', true );
+		$this->setViewContent(  '' . self::__( '<div id="twitterbody"></div>' ) . '', true  );
 	} 
 	// END OF CLASS
 }

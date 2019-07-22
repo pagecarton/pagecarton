@@ -42,7 +42,7 @@ class Ayoola_Object_Wrapper_Creator extends Ayoola_Object_Wrapper_Abstract
 		$values['wrapper_name'] = strtolower( $filter->filter( $values['wrapper_label'] ) );
 		if( $this->insertDb( $values ) )
 		{ 
-			$this->setViewContent( '<span class="boxednews normalnews centerednews">A new wrapper has been created successfully.</span>', true ); 
+			$this->setViewContent(  '' . self::__( '<span class="boxednews normalnews centerednews">A new wrapper has been created successfully.</span>' ) . '', true  ); 
 		}
     } 
 	// END OF CLASS

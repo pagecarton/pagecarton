@@ -49,7 +49,7 @@ class Ayoola_Page_Menu_Edit_Creator extends Ayoola_Page_Menu_Edit_Abstract
 			$this->createForm( 'Save', 'Add a new navigation link' );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
-			if( $this->insertDb() ){ $this->setViewContent( '<p class="goodnews">A new link added successfully.</p>', true ); }
+			if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( '<p class="goodnews">A new link added successfully.</p>' ) . '', true  ); }
 		}
 		catch( Ayoola_Page_Menu_Edit_Exception $e ){ return false; }    
     } 

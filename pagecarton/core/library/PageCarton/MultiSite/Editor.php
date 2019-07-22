@@ -48,7 +48,7 @@ class PageCarton_MultiSite_Editor extends PageCarton_MultiSite_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
             
-			if( $this->updateDb() ){ $this->setViewContent( '<div class="goodnews">Site information saved successfully</div>', true ); } 
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Site information saved successfully</div>' ) . '', true  ); } 
             
             if( ! $data['redirect_url'] && trim( $values['redirect_url'] ) )
             {
@@ -70,7 +70,7 @@ class PageCarton_MultiSite_Editor extends PageCarton_MultiSite_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p class="badnews">Theres an error in the code</p>' ) . '', true  ); 
             return false; 
         }
 	}

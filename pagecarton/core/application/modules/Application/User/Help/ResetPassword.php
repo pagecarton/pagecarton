@@ -91,7 +91,7 @@ class Application_User_Help_ResetPassword extends Application_User_Help_ChangePa
 			
 			if( self::changePassword( $identifier, $info, $values['password'] ) )
 			{
-				$this->setViewContent( '<p class="goodnews boxednews">New password saved successfully.</p>', true );
+				$this->setViewContent(  '' . self::__( '<p class="goodnews boxednews">New password saved successfully.</p>' ) . '', true  );
 				$this->setViewContent( $this->getForm()->view() );
 				return true;
 			}

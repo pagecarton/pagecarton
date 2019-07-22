@@ -41,7 +41,7 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 			$this->createForm( 'Continue...', 'Copy contents of one page to another' );     
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			$this->setViewContent( '<h3 class="goodnews">Page copied successfully</h3>', true ); 
+			$this->setViewContent(  '' . self::__( '<h3 class="goodnews">Page copied successfully</h3>' ) . '', true  ); 
 			
 			$origin = $this->getPageFilesPaths( $values['origin'] );
 			$destination = $this->getPageFilesPaths( $values['destination'] );
@@ -116,7 +116,7 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 		catch( Exception $e )
 		{ 
 		//	return false; 
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
 		
     } 

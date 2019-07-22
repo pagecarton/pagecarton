@@ -60,7 +60,7 @@ class Application_Slideshow_Editor extends Application_Slideshow_Abstract
 			{ 
 				return false;
 			}
-			$this->setViewContent( '<div class="boxednews goodnews" style="clear:both;">Slideshow settings saved successfully. </div>', true ); 
+			$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews" style="clear:both;">Slideshow settings saved successfully. </div>' ) . '', true  ); 
 		//	$values['slideshow_type'] = $values['slideshow_type'] ? : 'upload';
 			switch( $values['slideshow_type'] )
 			{

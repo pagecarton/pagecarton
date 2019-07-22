@@ -56,9 +56,9 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 		{
 			$fullUrl = 'http://' . $values['profile_url'] . '.' . Ayoola_Application::getDomainName() . '';
 		}
-		$this->setViewContent( '<div class="goodnews">Profile saved successfully. 
+		$this->setViewContent(  self::__( '<div class="goodnews">Profile saved successfully. 
 						<a href="' . $fullUrl . '" target="_blank">Preview</a>							
-						</div>', true );
+						</div>' ), true );
 //		$this->setViewContent( self::__( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );  
 		if( @$_GET['previous_url'] )
 		{

@@ -38,7 +38,7 @@ class Ayoola_Menu_Delete extends Ayoola_Menu_Abstract
 			if( ! $data = $this->getIdentifierData() ){ return false; } 
 			$this->createConfirmationForm( 'Delete', 'Delete this menu template, "' . $data['url'] . '" and all its associated files? This cannot be undone.' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			$this->setViewContent( 'Menu deleted successfully', true );
+			$this->setViewContent(  '' . self::__( 'Menu deleted successfully' ) . '', true  );
 		}
 		catch( Ayoola_Exception $e ){ return false; }
     } 

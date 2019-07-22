@@ -237,7 +237,7 @@ class Application_User_Creator extends Application_User_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false;
 		}
- 		$this->setViewContent( '<h2 class="goodnews">Account Confirmation</h2>', true );
+ 		$this->setViewContent(  '' . self::__( '<h2 class="goodnews">Account Confirmation</h2>' ) . '', true  );
  		$this->setViewContent( self::__( '<p>New user account has been created successfully. An email has been sent to ' . $values['email'] . ' containing how to activate and verify the new account. You can login immediately.</p>' ) );
  		$this->setViewContent( self::__( '<h4></h4>' ) );
 		

@@ -90,7 +90,7 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 		
 		//	Destroy the session. User information is lost.
 	//	Ayoola_Session::destroy();
-		$this->setViewContent( '<h1 class="badnews">Cache Cleared!</h1>', true ); 
+		$this->setViewContent(  '' . self::__( '<h1 class="badnews">Cache Cleared!</h1>' ) . '', true  ); 
 	//	$this->setViewContent( self::__( '<p class="">Your session might have been lost. Which means you may need to sign in again.</p>' ) ); 
     } 
 	// END OF CLASS

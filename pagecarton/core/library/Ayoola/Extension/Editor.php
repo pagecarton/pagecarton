@@ -51,10 +51,10 @@ class Ayoola_Extension_Editor extends Ayoola_Extension_Abstract
 		
 		if( ! $this->updateDb( $values ) )
 		{ 
-			$this->setViewContent( '<p class="badnews">Error: could not save plugin.</p>.', true ); 
+			$this->setViewContent(  '' . self::__( '<p class="badnews">Error: could not save plugin.</p>.' ) . '', true  ); 
 			return false;
 		}
-			$this->setViewContent( '<p class=" goodnews">Plugin saved successfully.</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class=" goodnews">Plugin saved successfully.</p>' ) . '', true  );
 			$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Extension_Download/?extension_name=' . $identifierData['extension_name'] . '" class="boxednews goodnews">Download</a>' ) );
     } 
 	// END OF CLASS

@@ -108,8 +108,8 @@ class Application_User_Editor extends Application_User_Abstract
 			//		var_export( $response );
 					if( true === $response['data'] )
 					{
-					//	$this->setViewContent( 'User account edited successfully', true );
-						$this->setViewContent( '<div class="boxednews goodnews">User account edited successfully</div>', true );
+					//	$this->setViewContent(  '' . self::__( 'User account edited successfully' ) . '', true  );
+						$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account edited successfully</div>' ) . '', true  );
 						
 						
 						//	localize
@@ -120,8 +120,8 @@ class Application_User_Editor extends Application_User_Abstract
 				case 'relational':
 					if( $this->updateDb() )
 					{
-					//	$this->setViewContent( 'User account edited successfully', true );
-						$this->setViewContent( '<div class="boxednews goodnews">User account edited successfully</div>', true );
+					//	$this->setViewContent(  '' . self::__( 'User account edited successfully' ) . '', true  );
+						$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account edited successfully</div>' ) . '', true  );
 					}
 				break;
 				case 'file':
@@ -136,7 +136,7 @@ class Application_User_Editor extends Application_User_Abstract
 						$values = $hashedCredentials + $values;
 						if( Ayoola_Access_Localize::info( $values ) )
 						{
-							$this->setViewContent( '<div class="boxednews goodnews">User account changes saved successfully.</div>', true );
+							$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account changes saved successfully.</div>' ) . '', true  );
 						}
 					}
 					catch( Exception $e )

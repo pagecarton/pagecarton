@@ -68,7 +68,7 @@ class Application_Article_Delete extends Application_Article_Abstract
 			$table = Application_Article_Table::getInstance();
 			$table->delete( array( 'article_url' => $data['article_url'] ) );
 
-			$this->setViewContent( '<p class="goodnews">Post deleted successfully</p>', true ); 
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Post deleted successfully</p>' ) . '', true  ); 
 		}
 		catch( Exception $e )
 		{ 

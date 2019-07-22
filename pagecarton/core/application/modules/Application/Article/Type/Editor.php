@@ -46,7 +46,7 @@ class Application_Article_Type_Editor extends Application_Article_Type_TypeAbstr
 			}
 			$this->createForm( 'Save', 'Edit "' . $data['post_type'] . '" post type' , $data );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->updateDb() ){ $this->setViewContent( '<p>Post type saved successfully</p>', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( '<p>Post type saved successfully</p>' ) . '', true  ); }
 		}
 		catch( Application_Article_Type_Exception $e ){ return false; }
     } 

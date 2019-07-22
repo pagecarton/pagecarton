@@ -58,7 +58,7 @@ class Ayoola_Extension_Creator extends Ayoola_Extension_Abstract
 				$this->setViewContent( self::__( '<p class="boxednews badnews">Error: could not create plugin.</p>.' ) ); 
 				return false;
 			}
-			$this->setViewContent( '<p class="goodnews">Plugin built successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Extension_Download/?extension_name=' . $values['extension_name'] . '" class="">Download</a></p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Plugin built successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Extension_Download/?extension_name=' . $values['extension_name'] . '" class="">Download</a></p>' ) . '', true  );
 //			$this->setViewContent( self::__( '' ) );
 			
 		}

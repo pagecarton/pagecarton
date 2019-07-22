@@ -55,7 +55,7 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 				}
 				else
 				{
-					return $this->setViewContent( '<div class="pc-notify-info">Class settings need to be setup. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_SettingsName_Creator/?class_name=' . $class . '" >Setup Now</a></div>', true );
+					return $this->setViewContent(  '' . self::__( '<div class="pc-notify-info">Class settings need to be setup. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_SettingsName_Creator/?class_name=' . $class . '" >Setup Now</a></div>' ) . '', true  );
 				}
 			//	var_export(  $settingsNameInfo );
 			}
@@ -77,7 +77,7 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 				if( ! $settingsNameInfo )
 				{
 					$this->insertDb( $settingsNameInfo );
-					return $this->setViewContent( 'Invalid Settings Name', true );
+					return $this->setViewContent(  '' . self::__( 'Invalid Settings Name' ) . '', true  );
 				}
 				$settings = new Application_Settings();
 				$settingsInfo = $settings->selectOne( null, array( 'settingsname_id' => $settingsNameInfo['settingsname_id'] ) ) ? : $settings->selectOne( null, array( 'settingsname_name' => $settingsNameInfo['settingsname_name'] ) ) ;
@@ -116,7 +116,7 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 
 			//	 clear this in the settings data so the rest of the app can feel the difference immediately.
 			unset( self::$_settings[$data['settingsname_name']] );
-			$this->setViewContent( '<p class="goodnews">Settings saved successfully.</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Settings saved successfully.</p>' ) . '', true  );
 			if( ! empty( $data['class_name'] ) && class_exists( $data['class_name'] ) )
 			{
 			//	var_export( $data['class_name'] );

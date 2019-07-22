@@ -43,7 +43,7 @@ class Ayoola_Access_AccessInformation_Creator extends Ayoola_Access_AccessInform
     {
 		$this->createForm( 'Create profile', '' );
 		$this->setViewContent( $this->getForm()->view(), true );				
-		if( $this->insertDb() ){ $this->setViewContent( '<div class="boxednews greynews">Profile saved successfully.</div>', true ); }
+		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( '<div class="boxednews greynews">Profile saved successfully.</div>' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

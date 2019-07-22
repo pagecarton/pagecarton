@@ -46,7 +46,7 @@ class Application_User_Email_List extends Application_User_Email_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             $this->setViewContent( $e->getMessage(), true ); 
             return false; 
         }

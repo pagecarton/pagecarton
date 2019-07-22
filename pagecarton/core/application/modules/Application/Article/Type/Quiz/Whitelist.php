@@ -67,7 +67,7 @@ class Application_Article_Type_Quiz_Whitelist extends Application_Article_Type_Q
 			
 			
 			
-			$this->setViewContent( '<h3>Success!</h3>', true );
+			$this->setViewContent(  '' . self::__( '<h3>Success!</h3>' ) . '', true  );
 			$this->setViewContent( self::__( '<p>You now have a total of ' . count( @$values['whitelist_email_address'] ) . ' invitee(s) for this test titled "' . $data['article_title'] . '"</p>' ) );
 			//	Send email
 			
@@ -191,14 +191,14 @@ http://' . Ayoola_Page::getDefaultDomain() . '/' . @$data['profile_url'] . '
 		catch( Application_Article_Exception $e )
 		{ 
 		//	$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
 		catch( Exception $e )
 		{ 
 			//	self::v( $e->getMessage() );
 		//	$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
 	

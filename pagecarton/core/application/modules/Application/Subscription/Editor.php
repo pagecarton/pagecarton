@@ -39,7 +39,7 @@ class Application_Subscription_Editor extends Application_Subscription_Abstract
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 		$this->createForm( 'Edit Package', 'Edit ' . $identifierData['subscription_name'], $identifierData );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->updateDb() ){ $this->setViewContent( 'Subscription package edited successfully', true ); }
+		if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Subscription package edited successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

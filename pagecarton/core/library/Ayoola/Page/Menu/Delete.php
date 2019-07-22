@@ -43,7 +43,7 @@ class Ayoola_Page_Menu_Delete extends Ayoola_Page_Menu_Abstract
 			//	Delete the meu style file
 		//	var_export( Ayoola_Menu::getCssFilename( $subscriptionInfo['menu_name'] ) );
 		//	@unlink( APPLICATION_PATH . DS . Ayoola_Menu::getCssFilename( $data['menu_name'] ) );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( '<p class="goodnews">Menu deleted successfully</p>', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( '<p class="goodnews">Menu deleted successfully</p>' ) . '', true  ); }
 		}
 		catch( Application_Backup_Exception $e ){ return false; }
  	} 

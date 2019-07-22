@@ -35,7 +35,7 @@ class Ayoola_Object_SavedWidget_Editor extends Ayoola_Object_SavedWidget_Abstrac
 			$values['parameters'] = json_decode( trim( $values['parameters'] ), true );
 
 
-			if( $this->updateDb( $values ) ){ $this->setViewContent( '<div class="goodnews">Data updated successfully</div>', true ); } 
+			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Data updated successfully</div>' ) . '', true  ); } 
 
              // end of widget process
           

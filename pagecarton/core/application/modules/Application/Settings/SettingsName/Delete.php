@@ -43,7 +43,7 @@ class Application_Settings_SettingsName_Delete extends Application_Settings_Sett
 			//	Only remove from DB if file deleted.
 			if( $this->deleteDb( false ) )
 			{ 
-				$this->setViewContent( 'Settings Name deleted successfully', true );
+				$this->setViewContent(  '' . self::__( 'Settings Name deleted successfully' ) . '', true  );
 			}
 		}
 		catch( Application_Settings_SettingsName_Exception $e ){ return false; }

@@ -192,7 +192,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             }
             else
             {
-            	$this->setViewContent( '<p class="badnews">' . array_pop( $class->getForm()->getBadnews() ) . '</p>', true );
+            	$this->setViewContent(  '' . self::__( '<p class="badnews">' . array_pop( $class->getForm()->getBadnews() ) . '</p>' ) . '', true  );
             }
  //           unlink( $filename );
 	//		if( $this->deleteDb( false ) )
@@ -244,7 +244,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
         }
         else
         {
-        //    $this->setViewContent( '<h2 class="">Upload theme manually</h2>', true );
+        //    $this->setViewContent(  '' . self::__( '<h2 class="">Upload theme manually</h2>' ) . '', true  );
             $this->setViewContent( self::__( '<p class="pc-notify-info">Connect to the internet to download plugins directly from <a target="_blank" href="https://plugins.pagecarton.org">PageCarton Plugins </a> or download manually and upload here. <a target="_blank" href="https://plugins.pagecarton.org"><i class="fa fa-external-link pc_give_space"></i> PageCarton plugins </a></p>' ) );
             $this->setViewContent( Ayoola_Extension_Import::viewInLine() );
             return false;
