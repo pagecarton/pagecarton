@@ -62,7 +62,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                 }
                 Ayoola_Application::setRuntimeSettings( 'real_url', $page['url'] );
                 include_once( $pagePaths['include'] );
-                $this->setViewContent(  '<li class=""><a href="' . $link . '">' . $link . '</a>  viewed successfully</li>' );
+                $this->setViewContent(  '<li class=""><a  target="_blank" href="' . $link . '">' . $link . '</a>  viewed successfully</li>' );
                 //                self::v( $link );
             //    self::fetchLink( $link );
             }
@@ -93,7 +93,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                 //    $this->setViewContent( $phrase );
                 }
                 $class::viewInLine();
-                $this->setViewContent( '<li class=""><a href="' . Ayoola_Page::getHomePageUrl() . $link . '">' . $class . '</a>  widget viewed successfully</li>' );
+                $this->setViewContent( '<li class=""><a target="_blank" href="' . Ayoola_Page::getHomePageUrl() . $link . '">' . $class . '</a>  widget viewed successfully</li>' );
             }
             Ayoola_Application::setRuntimeSettings( 'real_url', $currentUrl );
 

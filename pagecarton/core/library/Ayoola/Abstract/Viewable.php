@@ -756,7 +756,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function getLocale()
     {
-        $storage = self::getObjectStorage( array( 'id' => 'locale', 'time_out' => 1000000, ) );
+        $locale = PageCarton_Locale_Settings::retrieve( 'default_locale' );
+        $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
+        if( ! is_array( $options ) || ! in_array( 'auto_detect_user_locale', $options ) )
+        {
+            return $locale;
+        }
+        $storage = self::getObjectStorage( array( 'id' => 'locale' . $locale, 'time_out' => 1000000, ) );
         if( ! $locale = $storage->retrieve() )
         {
             if( ! $languages = PageCarton_Locale::getInstance()->select() )
@@ -771,7 +777,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             }
             //	system locale
         //	$locale = setlocale( LC_ALL, 0 );
-            $locale = PageCarton_Locale_Settings::retrieve( 'default_locale' );
     //		var_export( $localeSettings );
 
         //	var_export( $languages );
@@ -851,7 +856,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			{
 				foreach( $allStrings as $each )
 				{
-                    if( ! trim( str_ireplace( '&nbsp;', '', $each ), "\r\n\t\s " ) ){ continue; }
+                    if( ! trim( str_ireplace( '&nbsp;', ' ', $each ), "\r\n\t\s " ) ){ continue; }
                 //    if( ! trim( $each, "\r\n\t\s " ) ){ continue; }
                 //    var_export( $each );
 					$translated = self::__( $each );
@@ -883,8 +888,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 		//	var_export( $locale );
 		//	var_export( $string );
-		//	$translation = PageCarton_Locale_Translation::getInstance();
-			$string = trim( $string );
+        //	$translation = PageCarton_Locale_Translation::getInstance();
+        
+        //  don't store trimmed because of some valid spaces around html
+		//	$string = trim( $string );
 
 			//	cache is workaround because of insert not active until next load
 			//	was causing double inserting of words when the words are double on same page
@@ -930,7 +937,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				elseif( ! empty( $translatedString['translation'] ) )
 				{
 					$string = $translatedString['translation'];
-				}
+                }
+            //    self::v( $string );
+            //    self::v( $stringInfo['originalstring_id'] );
+            //    self::v( $locale );
+            //    self::v( $translatedString );
 			}
 		//	var_export( $stringInfo );
 		}

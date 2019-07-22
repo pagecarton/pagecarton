@@ -55,7 +55,7 @@ class PageCarton_Locale_OriginalString_List extends PageCarton_Locale_OriginalSt
 							);
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No data added to this table yet.' );
-		
+    
 		$list->createList
 		(
 			array(

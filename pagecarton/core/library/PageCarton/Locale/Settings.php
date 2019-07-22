@@ -53,7 +53,7 @@ class PageCarton_Locale_Settings extends PageCarton_Settings
 		$options = array( 
 							'auto_translate' => 'Auto Translate Output Text', 
 							'autosave_new_words' => 'Save new words', 
-							'auto-detect-user-locale' => 'Auto-Detect Locale', 
+							'auto_detect_user_locale' => 'Auto-Detect Locale', 
 							);
 		$fieldset->addElement( array( 'name' => 'locale_options', 'label' => 'Locale Options', 'value' => @$settings['locale_options'], 'type' => 'Checkbox' ), $options );
 		
