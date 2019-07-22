@@ -208,7 +208,6 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		$list->createList(  
 			array(
 					array( 'field' => 'layout_label', 'header' => 'Theme Name', 'value' => '%FIELD%' ),   
-				//	array( 'field' => 'layout_name', 'header' => '', 'value' => '<a style="" title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/%KEY%/template\' );" href="javascript:;"> Edit Theme</a>' ),   
 					array( 'field' => 'layout_name', 'header' => 'Default', 'value' => '%FIELD%', 'value_representation' => $default ),
 			)
 		);

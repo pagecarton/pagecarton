@@ -24,7 +24,7 @@ class PageCarton_Locale_Creator extends PageCarton_Locale_Abstract
      * 
      * @var string 
      */
-	protected static $_objectTitle = 'Add new'; 
+	protected static $_objectTitle = 'Add new locale'; 
 
     /**
      * Performs the whole widget running process
@@ -35,7 +35,7 @@ class PageCarton_Locale_Creator extends PageCarton_Locale_Abstract
 		try
 		{ 
             //  Code that runs the widget goes here...
-			$this->createForm( 'Submit...', 'Add new' );
+			$this->createForm( 'Submit...', 'Add new locale' );
 			$this->setViewContent( $this->getForm()->view() );
 
 		//	self::v( $_POST );

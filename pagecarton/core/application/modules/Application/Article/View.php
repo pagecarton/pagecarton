@@ -204,10 +204,10 @@ class Application_Article_View extends Application_Article_Abstract
 				}
 			}
 		}
-		@$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
-		@$data['article_date_m'] = date( 'm', $data['article_modified_date'] );   
-		@$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
-		@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );   
+        @$data['article_date_M'] = strftime( '%B', $data['article_modified_date'] );
+        @$data['article_date_m'] = strftime( '%b', $data['article_modified_date'] );   
+        @$data['article_date_Y'] = strftime( '%Y', $data['article_modified_date'] );
+        @$data['article_date_d'] = strftime( '%d', $data['article_modified_date'] );   
 //	elseif( $this->getParameter( 'filter_date' ) )  
 		{
 			$filter = new Ayoola_Filter_Time();

@@ -603,23 +603,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
                                 }
                             }
                         }
-                    //	elseif( $this->getParameter( 'filter_date' ) )
-                        {
-                            $filter = new Ayoola_Filter_Time();
-                        //	if( @$data['article_modified_date'] )
-                            {
-                                @$data['article_modified_date_filtered'] = $filter->filter( $data['article_modified_date'] );
-                            }
-                        //	else
-                            {
-                                $data['article_creation_date_filtered'] = $filter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
-                            }
-                        }
-                        @$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
-                        @$data['article_date_m'] = date( 'm', $data['article_modified_date'] );   
-                        @$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
-                        @$data['article_date_d'] = date( 'd', $data['article_modified_date'] );   
-                        //	var_export( $data['article_modified_date'] );
+                    //    self::v( $data['article_modified_date'] );
+                    //    self::v( $data['article_creation_date'] );
                             //		var_export( time() );
                         switch( $this->getParameter( 'post_expiry_time' ) )
                         {
@@ -970,7 +955,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$values = $values ? array_unique( $values, SORT_REGULAR ) : array(); 
 	//	self::v( $values[''] );
 	//	var_export( $values );
-		$singlePostPaginationInfo = array();
+        $singlePostPaginationInfo = array();
+        $timeFilter = new Ayoola_Filter_Time();
 		while( $values )
 		{
 			if( $i >= $j )
@@ -1083,6 +1069,16 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					@$data['article_description'] = mb_strimwidth( $data['article_description'], 0, $lengthOfDescription, "..." );
 				}
 			}
+            {
+                @$data['article_modified_date_filtered'] = $timeFilter->filter( $data['article_modified_date'] );
+            }
+            {
+                $data['article_creation_date_filtered'] = $timeFilter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
+            }
+            @$data['article_date_M'] = strftime( '%B', $data['article_modified_date'] );
+            @$data['article_date_m'] = strftime( '%b', $data['article_modified_date'] );   
+            @$data['article_date_Y'] = strftime( '%Y', $data['article_modified_date'] );
+            @$data['article_date_d'] = strftime( '%d', $data['article_modified_date'] );   
 
 			$lengthOfTitle = $this->getParameter( 'length_of_title' ) ? : 160;
 			if( $lengthOfTitle )

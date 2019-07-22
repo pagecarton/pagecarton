@@ -65,9 +65,12 @@ class PageCarton_Locale_Abstract extends PageCarton_Widget
 
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'locale_name', 'type' => 'InputText', 'value' => @$values['locale_name'] ) ); 
-        $fieldset->addElement( array( 'name' => 'native_name', 'type' => 'InputText', 'value' => @$values['native_name'] ) ); 
-        $fieldset->addElement( array( 'name' => 'locale_code', 'type' => 'InputText', 'value' => @$values['locale_code'] ) ); 
+        $fieldset->addElement( array( 'name' => 'locale_name', 'type' => 'InputText', 'placeholder' => 'e.g. Yoruba', 'value' => @$values['locale_name'] ) ); 
+        $fieldset->addElement( array( 'name' => 'native_name', 'type' => 'InputText', 'placeholder' => 'e.g. Yorùbá', 'value' => @$values['native_name'] ) ); 
+
+        $options = ResourceBundle::getLocales( '' );
+        $options = array_combine( $options, $options );
+        $fieldset->addElement( array( 'name' => 'locale_code',  'onchange' => 'ayoola.div.manageOptions( { database: "", listWidget: "", values: "", labels: "", element: this } );', 'type' => 'Select', 'value' => @$values['locale_code'] ), array( '' => 'Please Select' ) + $options + array( '__custom' => '[Custom Locale Code]' ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

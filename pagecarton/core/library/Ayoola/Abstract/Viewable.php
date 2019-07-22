@@ -751,6 +751,75 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	}
 
     /**
+     * Get site locale
+     *
+     */
+	public static function getLocale()
+    {
+        $storage = self::getObjectStorage( array( 'id' => 'locale', 'time_out' => 1000000, ) );
+        if( ! $locale = $storage->retrieve() )
+        {
+            if( ! $languages = PageCarton_Locale::getInstance()->select() )
+            {
+                return false;
+            }
+
+            $availableLocale = array();
+            foreach( $languages as $each )
+            {
+                $availableLocale[] = $each['locale_code'];
+            }
+            //	system locale
+        //	$locale = setlocale( LC_ALL, 0 );
+            $locale = PageCarton_Locale_Settings::retrieve( 'default_locale' );
+    //		var_export( $localeSettings );
+
+        //	var_export( $languages );
+        //	var_export( $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
+            $getPreferredLanguage = function ( array $available_languages, $http_accept_language = null )
+            {
+                if( is_null( $http_accept_language ) ) 
+                {
+                    if ( ! isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) 
+                    {
+                        return array();
+                    }
+                    $http_accept_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+                }
+                $available_languages = array_flip( $available_languages );
+
+                $langs;
+                preg_match_all(' ~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower( $http_accept_language ), $matches, PREG_SET_ORDER);
+                foreach($matches as $match) {
+
+                    list($a, $b) = explode('-', $match[1]) + array('', '');
+                    $value = isset($match[2]) ? (float) $match[2] : 1.0;
+
+                    if(isset($available_languages[$match[1]])) {
+                        $langs[$match[1]] = $value;
+                        continue;
+                    }
+
+                    if(isset($available_languages[$a])) {
+                        $langs[$a] = $value - 0.1;
+                    }
+
+                }
+                $langs ? arsort( $langs ) : null;
+
+                return $langs ? : array();
+            };
+            if( $allPreferred = $getPreferredLanguage( $availableLocale ) )
+            {
+                $locale = array_shift( array_keys( $allPreferred ) );
+            }
+            $storage->store( $locale );
+        //	var_export( $locale );
+        }
+        return $locale;
+	}
+
+    /**
      * Translate a string of text.
      *
      */
@@ -770,7 +839,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		if( ! trim( $string ) || strpos( $string, '<style>' ) !== false || strpos( $string, '<script>' ) !== false || is_numeric( $string ) )
 		{
-      return $string;
+            return $string;
 		}
 		if( strip_tags( $string ) != $string )
 		{
@@ -796,69 +865,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//	var_export( $arr );
 	//	$string = trim( $string );
 
-		$storage = self::getObjectStorage( array( 'id' => 'locale', 'time_out' => 1000000, ) );
 		do
 		{
-			if( ! $locale = $storage->retrieve() )
-			{
-				if( ! $languages = PageCarton_Locale::getInstance()->select() )
-				{
-					break;
-				}
+            if( ! $locale = self::getLocale() )
+            {
+                continue;
+            }
 
-				$availableLocale = array();
-				foreach( $languages as $each )
-				{
-					$availableLocale[] = $each['locale_code'];
-				}
-				//	system locale
-			//	$locale = setlocale( LC_ALL, 0 );
-				$locale = PageCarton_Locale_Settings::retrieve( 'default_locale' );
-		//		var_export( $localeSettings );
-
-			//	var_export( $languages );
-			//	var_export( $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
-				$getPreferredLanguage = function ( array $available_languages, $http_accept_language = null )
-				{
-					if( is_null( $http_accept_language ) ) 
-					{
-						if ( ! isset( $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) 
-						{
-							return array();
-						}
-						$http_accept_language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-					}
-					$available_languages = array_flip( $available_languages );
-
-					$langs;
-					preg_match_all(' ~([\w-]+)(?:[^,\d]+([\d.]+))?~', strtolower( $http_accept_language ), $matches, PREG_SET_ORDER);
-					foreach($matches as $match) {
-
-						list($a, $b) = explode('-', $match[1]) + array('', '');
-						$value = isset($match[2]) ? (float) $match[2] : 1.0;
-
-						if(isset($available_languages[$match[1]])) {
-							$langs[$match[1]] = $value;
-							continue;
-						}
-
-						if(isset($available_languages[$a])) {
-							$langs[$a] = $value - 0.1;
-						}
-
-					}
-					$langs ? arsort( $langs ) : null;
-
-					return $langs ? : array();
-				};
-				if( $allPreferred = $getPreferredLanguage( $availableLocale ) )
-				{
-					$locale = array_shift( array_keys( $allPreferred ) );
-				}
-				$storage->store( $locale );
-			//	var_export( $locale );
-			}
-
+		//	var_export( $locale );
 		//	var_export( $string );
 		//	$translation = PageCarton_Locale_Translation::getInstance();
 			$string = trim( $string );
@@ -875,9 +889,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
 					if( is_array( $options ) && in_array( 'autosave_new_words', $options ) )
 					{
-						$stringInfo = $words->insert( array( 'string' => $string, 'pages' => array( Ayoola_Application::getRequestedUri() ), ) );
+						$stringInfo = $words->insert( array( 'string' => $string, 'pages' => array( Ayoola_Application::getRuntimeSettings( 'real_url' ) ), ) );
 					}
-				}
+                }
+                if( ! empty( $stringInfo['pages'] ) && ! in_array( Ayoola_Application::getRuntimeSettings( 'real_url' ), $stringInfo['pages'] ) )
+                {
+                    $stringInfo['pages'][] = Ayoola_Application::getRuntimeSettings( 'real_url' );
+                    $words->update( $stringInfo, array( 'originalstring_id' => $stringInfo['originalstring_id'] ) );
+                }
 				$stringStorage->store( $stringInfo );
 
 			}

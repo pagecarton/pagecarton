@@ -590,7 +590,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					{
 						$value = null;
 					}
-					$value = str_replace( '%KEY%', @$row[$key], $value );
+					$value = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], $row[$field] ), $value );
 					$value = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $value );
 					$value = str_replace( $columnSearch, $columnReplace, $value );
 				//	var_export( $value );

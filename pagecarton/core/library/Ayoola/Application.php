@@ -146,6 +146,17 @@ class Ayoola_Application
 		return ! array_key_exists( $key, self::$_runtimeSetting ) ? (array) self::$_runtimeSetting : self::$_runtimeSetting[$key];
     }
 
+
+    /**
+     * Set the runtime settings
+     *
+     * @return array
+     */
+	public static function setRuntimeSettings( $key, $value )
+    {
+		self::$_runtimeSetting[$key] = $value;
+    }
+
     /**
      *
      *
@@ -774,6 +785,15 @@ class Ayoola_Application
 		{
 			$_SESSION['PC_SESSION_START_TIME'] = time();
 		}
+        if( $locale = PageCarton_Locale_Settings::retrieve( 'default_locale' ) )
+        {
+            $locale = setlocale( LC_ALL, $locale );
+        }
+        
+    //    $locale = setlocale( LC_ALL, 'nl_NL' );
+    //  echo strftime("%A %e %B %Y", mktime(0, 0, 0, 12, 22, 1978));
+
+    //    var_export( setlocale( LC_ALL, 0 ) );
 
 		// Error / Exception handling
 		// create_function is deprecated: use closuers instead
@@ -1307,29 +1327,13 @@ class Ayoola_Application
 
     /**
 
-     * Include required file to view page
+     * Get the Include required file to view page
      *
      * @param string URI to view
-     * @return void
+     * @return array array(  )
      */
-    public static function view( $uriToView = null )
+    public static function getViewFiles( $uri )
     {
-		//	var_export( $_SERVER );
-		//	exit();
-		$uri = $uriToView;
-		if( ! $uri )
-		{
-			$uri =  self::$_notFoundPage;
-			self::$_runtimeSetting['real_url'] = self::$_notFoundPage;
-			header( "HTTP/1.0 404 Not Found" );
-			header( "HTTP/1.1 404 Not Found" );
-			header('Status: 404 Not Found');
-			function_exists( 'http_response_code' ) ? http_response_code(404) : null;
-	//		var_export( headers_list() );
-		//	exit();
-		}
-		//	now because of situation where we have username domains
-		//	we should be able to overide page inheritance
 
 		//	my copy first
 		$pagePaths = Ayoola_Page::getPagePaths( $uri );
@@ -1345,7 +1349,7 @@ class Ayoola_Application
 	//	var_export( is_file( $PAGE_INCLUDE_FILE ) );
 	//	var_export( is_file( $PAGE_TEMPLATE_FILE ) );
 	//	exit();
-	$noRestriction = false;
+	    $noRestriction = false;
 		$previewTheme = function() use ( $pagePaths, $uri, &$PAGE_INCLUDE_FILE, &$PAGE_TEMPLATE_FILE )
 		{
 
@@ -1451,14 +1455,47 @@ class Ayoola_Application
 				}
 			}
 		}
-		while( false );
-	//	var_export( $PAGE_INCLUDE_FILE );
-	//	var_export( $PAGE_TEMPLATE_FILE );
-	//	var_export( $pagePaths['template'] );
-	//	var_export( Ayoola_Loader::checkFile( $pagePaths['template'] ) );
+        while( false );
+        $pagePaths['include'] = $PAGE_INCLUDE_FILE;
+        $pagePaths['template'] = $PAGE_TEMPLATE_FILE;
+        $pagePaths['no_restrictions'] = $noRestriction;
+        return $pagePaths;
+    }
+
+    /**
+
+     * Include required file to view page
+     *
+     * @param string URI to view
+     * @return void
+     */
+    public static function view( $uriToView = null )
+    {
+		//	var_export( $_SERVER );
+		//	exit();
+		$uri = $uriToView;
+		if( ! $uri )
+		{
+			$uri =  self::$_notFoundPage;
+			self::$_runtimeSetting['real_url'] = self::$_notFoundPage;
+			header( "HTTP/1.0 404 Not Found" );
+			header( "HTTP/1.1 404 Not Found" );
+			header('Status: 404 Not Found');
+			function_exists( 'http_response_code' ) ? http_response_code(404) : null;
+	//		var_export( headers_list() );
+		//	exit();
+		}
+		//	now because of situation where we have username domains
+		//	we should be able to overide page inheritance
+
+        if( ! $pagePaths = self::getViewFiles( $uri ) )
+        {
+            return false;
+        }
+
 
 		//	Put in Access Restriction
-		$noRestriction ? : self::restrictAccess();
+		$pagePaths['no_restrictions'] ? : self::restrictAccess();
 	//	exit( microtime( true ) - self::$_runtimeSetting['start_time'] . '<br />' );
 
 		//	check if redirect
@@ -1501,10 +1538,10 @@ class Ayoola_Application
 	//	PageCarton_Widget::v( $PAGE_INCLUDE_FILE );
 	//	PageCarton_Widget::v( $PAGE_TEMPLATE_FILE );
 
-		include_once $PAGE_INCLUDE_FILE;
+		include_once $pagePaths['include'];
 	//	var_export( $PAGE_INCLUDE_FILE );
 //		exit( microtime( true ) - Ayoola_Application::getRuntimeSettings( 'start_time' ) . '<br />' );
-		include_once $PAGE_TEMPLATE_FILE;
+		include_once $pagePaths['template'];
 	//	var_export( $PAGE_INCLUDE_FILE );
 		return true;
 	}
