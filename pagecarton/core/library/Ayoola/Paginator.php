@@ -863,7 +863,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		$list = $this->getList();
 		$content = null;  
         $this->listTitle = self::__( $this->listTitle );
-		$content .= $this->listTitle ? '<div><h3 class="pc-heading">' . $this->listTitle . '</h3></div>' : null;     
+		$content .= $this->listTitle ? '<div><h3 class="pc-heading">' . $this->listTitle . ' (' . $this->_noOfRecords . ')</h3></div>' : null;     
 		$content .= '<div style="background-color:#d4d4d4;">';     		
 		if( $this->_noOfPageRecords !== $this->_noOfRecords )     
 		{	
