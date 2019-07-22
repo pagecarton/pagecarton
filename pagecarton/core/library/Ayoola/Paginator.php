@@ -569,7 +569,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
  					elseif( is_array( $row[$field] ) )
 					{ 
 					//	var_export( $value );
-						$row[$field] = print_r( $row[$field], true ); 
+					//	$row[$field] = print_r( $row[$field], true ); 
 					}
 					elseif( is_object( $row[$field] ) )
 					{ 
@@ -577,7 +577,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 						$row[$field] = print_r( (array) $row[$field], true ); 
 					}
 				//	$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, $value );
-					$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, is_scalar( $value ) ? $value : null );
+				//	$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, is_scalar( $value ) ? $value : null );
 					if( isset( $rawFieldValues['value_representation'][$value] ) )
 					{
 						$value = $rawFieldValues['value_representation'][$value];
@@ -589,10 +589,17 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					elseif( isset( $rawFieldValues['value_representation'] ) )
 					{
 						$value = null;
-					}
-					$value = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], $row[$field] ), $value );
-					$value = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $value );
-					$value = str_replace( $columnSearch, $columnReplace, $value );
+                    }
+                    $markupX = $value;
+                    $value = null;
+                    foreach( (array) $row[$field] as $rowField )
+                    {
+                        $markup = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], $rowField ), $markupX );
+                        $markup = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $markup );
+                        $markup = str_replace( $columnSearch, $columnReplace, $markup );
+                    //    var_export( $markup );
+                        $value .= $markup;
+                    }
 				//	var_export( $value );
 			//		if( $this->crossColumnFields )
 
@@ -729,6 +736,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      */
     public function setListOptions( $option )
     {	
+        $option = self::__( $option );
 		is_array( $option ) ? $this->_listOptions = array_merge( $this->_listOptions, $option ) : $this->_listOptions[] = $option;
     }
 
@@ -751,6 +759,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      */
     public function setRowOptions( $option )
     {	
+        $option = self::__( $option );
 		is_array( $option ) ? $this->_rowOptions = array_merge( $this->_rowOptions, $option ) : $this->_rowOptions[] = $option;
     }
 	
@@ -776,6 +785,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      */
     public function setNoRecordMessage( $msg )
     {	
+        $msg = self::__( $msg );
 		$this->_noRecordMessage	= strlen( $msg ) > 7 ? $msg : $this->_noRecordMessage;
     }
 	
@@ -852,6 +862,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
     {	
 		$list = $this->getList();
 		$content = null;  
+        $this->listTitle = self::__( $this->listTitle );
 		$content .= $this->listTitle ? '<div><h3 class="pc-heading">' . $this->listTitle . '</h3></div>' : null;     
 		$content .= '<div style="background-color:#d4d4d4;">';     		
 		if( $this->_noOfPageRecords !== $this->_noOfRecords )     
@@ -978,8 +989,8 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					</select>
 					';
 			$order = '<select style="height:2em; padding:1em;" onChange="window.location.search = window.location.search + \'&pc_sort_order_inverse=\' + this.value;">
-						<option>Order...</option>  
-						<option value=' . ( @$_GET['pc_sort_order_inverse'] ? '0' : '1' ) . '>Inverse</option>
+						<option>' . self::__( 'Order...' ) . '</option>  
+						<option value=' . ( @$_GET['pc_sort_order_inverse'] ? '0' : '1' ) . '>' . self::__( 'Inverse' ) . '</option>
 					</select>
 					';
             $orderEtall ='' . $noToShow .' ' . $order .'';
