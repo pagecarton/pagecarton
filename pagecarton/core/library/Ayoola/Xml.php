@@ -217,8 +217,7 @@ class Ayoola_Xml extends DOMDocument
 		}
 		if( ! $path = Ayoola_Loader::checkFile( $filename ) )
 		{
-			require_once 'Ayoola/Xml/Exception.php';
-			throw new Ayoola_Xml_Exception( "Invalid Filename {$filename}");     
+			return false;     
 		}
 	//	var_export( $path );
         @$result = parent::load( $path, $options );
