@@ -84,27 +84,27 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                 foreach( $output[2] as $phrase )
                 {
                     $phrase = trim( $phrase );
-                    if( false === strpos( $phrase, ' ' ) )
+                    if( false === strpos( trim( $phrase ), ' ' ) )
                     {
                         continue;
                     }
                    self::__( $phrase );
                 //    $this->setViewContent( $phrase );
                 }
-                if( false === strpos( $fileContent, 'exit(' ) 
+                if( false === stripos( $fileContent, 'exit(' ) 
                 
                 &&
                 
-                false === strpos( $fileContent, 'die(' ) 
-                
-                &&
-
-                false === strpos( $fileContent, 'header(' ) 
-                
+                false === stripos( $fileContent, 'die(' ) 
                 
                 &&
 
-                false === strpos( $fileContent, 'echo' ) 
+                false === stripos( $fileContent, 'header(' ) 
+                
+                
+                &&
+
+                false === stripos( $fileContent, 'echo' ) 
                 
                 )
                 {
