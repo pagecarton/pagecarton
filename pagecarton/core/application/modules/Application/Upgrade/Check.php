@@ -84,7 +84,7 @@ class Application_Upgrade_Check extends PageCarton_Widget
         //    var_export( $versionFromServer['response'] );
         //    var_export( PageCarton::VERSION );
 
-            $versionFromServerX = explode( '.', $versionFromServer );
+            $versionFromServerX = explode( '.', $versionFromServer['response'] );
             $myVersionX = explode( '.', PageCarton::VERSION );
 
             if( empty( $versionFromServer['response'] ) )

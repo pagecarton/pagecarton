@@ -835,8 +835,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	was slowing down app
 	//		return $string;
 		}
-    //	var_export( $string );
-    
+        if( is_array( $string ) )
+        {
+            foreach( $string as $key => $eachString )
+            {
+                $string[$key] = self::__( $eachString );
+            }
+            return $string;
+        }
 		if( preg_match( '#(^[\s]*\{\{\{[^\{\}\s]*\}\}\}[\s]*$)|(^[\s]*\%[^%}\s]*\%[\s]*$)|(^[^a-zA-Z]+$)#', $string ) )
 		{
 		//	var_export( $string );

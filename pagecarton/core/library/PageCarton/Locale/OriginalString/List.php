@@ -24,7 +24,7 @@ class PageCarton_Locale_OriginalString_List extends PageCarton_Locale_OriginalSt
      * 
      * @var string 
      */
-	  protected static $_objectTitle = 'List';   
+	  protected static $_objectTitle = 'Word List';   
 
     /**
      * Performs the creation process

@@ -76,7 +76,6 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
 				$classFile = Ayoola_Loader::getFullPath( $classFile );
 			//	var_export( $classFile );
 				$fileContent = file_get_contents( $classFile );
-				$content .= $fileContent;
                 preg_match_all( "|setViewContent\( ?([^']*)'([^$()_]*)'([^']*) ?\)|", $fileContent, $output );
                 $link = '/widgets/' . $class;
                 Ayoola_Application::setRuntimeSettings( 'real_url', $link );
@@ -92,7 +91,25 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                    self::__( $phrase );
                 //    $this->setViewContent( $phrase );
                 }
-                $class::viewInLine();
+                if( false === strpos( $fileContent, 'exit(' ) 
+                
+                &&
+                
+                false === strpos( $fileContent, 'die(' ) 
+                
+                &&
+
+                false === strpos( $fileContent, 'header(' ) 
+                
+                
+                &&
+
+                false === strpos( $fileContent, 'echo' ) 
+                
+                )
+                {
+                    $class::viewInLine();
+                }
                 $this->setViewContent( '<li class=""><a target="_blank" href="' . Ayoola_Page::getHomePageUrl() . $link . '">' . $class . '</a>  widget viewed successfully</li>' );
             }
             Ayoola_Application::setRuntimeSettings( 'real_url', $currentUrl );
