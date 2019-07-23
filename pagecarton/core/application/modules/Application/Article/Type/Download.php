@@ -173,7 +173,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 			//		$this->setViewContent( $this->getForm()->view(), true );
 					return false;
 				}
-				static::getDownloadContent( $data );
+				$this->getDownloadContent( $data );
 			}
 			else
 			{

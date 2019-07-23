@@ -67,7 +67,7 @@ class Application_Article_Type_Audio_Play extends Application_Article_Type_Audio
 		);
 		$secondaryValues = array( 'article_url' => $data['article_url'], 'audio_play_count_total' => @++$data['audio_play_count_total'] );
 		self::saveArticleSecondaryData( $secondaryValues );
-		static::getDownloadContent( $data );
+		$this->getDownloadContent( $data );
 
 
     } 
