@@ -38,11 +38,11 @@ class Application_Settings_SettingsName_Editor extends Application_Settings_Sett
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
 		//	var_export( $data );
-			$this->createForm( 'Save', 'Edit "' . $data['settingsname_name'] . '" settings name & class', $data );
+			$this->createForm( 'Save', 'Edit "' . $data['settingsname_name'] . '" settings widget', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( ! $this->updateDb( $values ) ){ return false; }
-			$this->setViewContent(  '' . self::__( '<p class="goodnews">Settings Name and Class saved successfully</p>' ) . '', true  );
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Settings widget saved successfully</p>' ) . '', true  );
 		}
 		catch( Application_Settings_SettingsName_Exception $e ){ return false; }
     } 

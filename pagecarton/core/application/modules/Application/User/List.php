@@ -68,7 +68,7 @@ class Application_User_List extends Application_User_Abstract
 		$list->setListOptions
 		( 
 			array( 
-						'Settings' => '<a rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/UserAccount/" title="User Account settings">User Account Settings</a>'
+					//	'Settings' => '<a rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Settings" title="User Account settings">User Account Settings</a>'
 						) 
 		);
 	//	var_export( base64_encode( hash( 'sha512', 'tymyjope' ) ) );
