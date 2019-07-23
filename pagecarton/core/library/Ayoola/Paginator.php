@@ -313,7 +313,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 	//	$html = str_ireplace( '{{{---@@@BADNEWS@@@---}}}', '', $html );
 	//	$html .='<p>Showing ' . $this->_noOfPageRecords . ' out of ' . $this->_noOfRecords . ' Record(s). Show ' . $noToShow .'</p>';
 		require_once 'Ayoola/Page.php';
-		$html .='<table class="pc-table">
+		$html .='<table style="background-color:#666;" class="pc-table">
 					<tr>';
 		$html .= is_null( $this->_firstPage ) ? NULL : ( '<td>
 							<a name="paginator_navigation" class="pc-btn" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_firstPage . '/;changeElementId=' . $this->pageName . '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_firstPage ) ) . '">' . $first. '
