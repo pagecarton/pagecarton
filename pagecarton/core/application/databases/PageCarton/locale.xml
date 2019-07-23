@@ -3,7 +3,7 @@
   <RECORDS autoId="2">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="locale_name"><![CDATA[Default]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="native_name"><![CDATA[English]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="native_name"><![CDATA[English (Default)]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="locale_code"><![CDATA[en_US]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="locale_id"><![CDATA[1563905764-0-1]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905764]]></TABLE_FIELD>
