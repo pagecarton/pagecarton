@@ -523,7 +523,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		if( $this->submitValue && ! $this->callToAction )
 		{
 		//	var_export( $this->submitValue );
-			$element->addElement( array( 'name' => 'pc-submit-button', 'value' => '<i class="pc_give_space"> </i>' . $this->submitValue . ' <i class="fa fa-chevron-right pc_give_space "></i> <div style="clear:both;"></div> ', 'type' => 'SubmitButton', 'onclick' => 'this.form.submit(); this.value=\'Loading...\'; this.disabled=true; return false;', 'style' => 'display:block;clear:both;', 'class' => '', 'data-pc-ignore-field' => 'true' ) );    
+			$element->addElement( array( 'name' => 'pc-submit-button', 'value' => '<i class="pc_give_space"> </i>' . $this->submitValue . ' <i class="fa fa-chevron-right pc_give_space "></i> <div style="clear:both;"></div> ', 'type' => 'SubmitButton', 'onclick' => 'this.form.submit(); this.value=\'Loading...\'; this.disabled=true; return false;', 'style' => 'display:block;clear:both;margin-top:1em;', 'class' => '', 'data-pc-ignore-field' => 'true' ) );    
 		}
 		foreach( $this->requiredElements as $key => $value )
 		{
@@ -901,33 +901,23 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				//	To save required elements values - not working
 				$tempValues = $this->_values ? : array();
 				$this->_values = array(); 
-			//	var_export( $tempValues );
 				if( count( @$values['oneFieldSetAtATime'] ) === count( $this->_fieldsets ) )
 				{
-				//	var_export( $tempValues );
-				//	var_export( __LINE__ );
 					unset( $values['oneFieldSetAtATime'] ); //	disturbing my db
 					unset( $values[''] ); //	disturbing my db
 					$this->_values = $values + $tempValues;
 					self::getStorage( $this->_attributes['id'] )->clear();
-				//	self::getStorage( 'global_values' )->clear();
 				}
 			}
 		}
 		
 		
-	//	self::getStorage( $this->_attributes['id'] )->clear();
 		if( $this->getOneFieldSetAtATime() && @$values['oneFieldSetAtATime'] )
 		{
-		//	$form .= '<button rel="ignore" onclick="var result=confirm( \'Do you want to go back to the previous stage?\' );result?this.setAttribute( \'rel\', \'\' ):null; return result;" type="submit" name="' . self::BACKBUTTON_INDICATOR . '" value="<"><img height="25" src="/img/backbutton.png" title="Go back to previous form fields" alt="<"></button>';
 			$form .= '<input class="pc-btn pc-btn-small" rel="ignore" onclick="var result=confirm( \'Do you want to go back to the previous stage?\' );result?this.setAttribute( \'rel\', \'\' ):null; return result;" type="submit" title="Go back to previous form fields" name="' . self::BACKBUTTON_INDICATOR . '" value="&laquo;  Back ">';
 			
-		//	$form .= '<button rel="ignore" onclick="var result=confirm( \'Do you want to start all over?\' );result?this.setAttribute( \'rel\', \'\' ):null; return result;" type="submit" name="' . self::REFRESH_INDICATOR . '" value="o"><img height="25" src="/img/reload.png" title="Start form all over" alt="o"></button>';
 			$form .= '<input class="pc-btn pc-btn-small" rel="ignore" onclick="var result=confirm( \'Do you want to start all over?\' );result?this.setAttribute( \'rel\', \'\' ):null; return result;" type="submit" name="' . self::REFRESH_INDICATOR . '" value="&laquo;&laquo; Start all over " title="Start form all over"/>';     
 		}
-			//		var_export( $values );
-		//			var_export( count( $values['oneFieldSetAtATime'] ) );
-			//	var_export( count( $this->_fieldsets ) );
 		if( $this->callToAction )
 		{
 			$form .= '</span>';
@@ -1013,21 +1003,13 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */		
     public function getElementMarkup( $fieldset )
     {
-	//	self::v( $this->_global );
-	//	self::v( $this->_names );
 		@++$this->counter;
 		$form = null;
 		$form .= @$fieldset->getPreHtml();
-//		$form .= @$fieldset->container ? "<{$fieldset->container}>\n" : null;
 		$fieldsetTag = @$fieldset->tag ? : "fieldset";
 		$form .= ! @$fieldset->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "<{$fieldsetTag} class='pc-form-fieldset-{$this->counter}'>\n" : null;
-	//	$form .= $fieldset->getLegend() ? "\n<legend>{$fieldset->getLegend()}</legend>\n" : null;
 		$allElements = $fieldset->getElements();
-/* 		if( $this->getParameter( 'return_required_fieldset_values' ) )
-		{
-			array_push( $allElements, $this->getRequiredFieldset() );
-		}
- */		$elementMarkups = null;
+		$elementMarkups = null;
 		if( ! empty( $_REQUEST['pc_form_element_whitelist'] ) )
 		{
 			$whiteList = array_map( 'trim', explode( ',', $_REQUEST['pc_form_element_whitelist'] ) );
@@ -1038,8 +1020,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 		foreach( $allElements as $name => $markup )
 		{
-		//	var_export( $name . '<br>' );
-		//	var_export( $this->_names[$name]['real_name'] . '<br>' );
 			//	If we have a whitelist, we only want to see some elements and discard the rest
 			if( ! empty( $this->_names[$name]['data-pc-ignore-field'] ) )
 			{
@@ -1047,33 +1027,18 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			}   
 			elseif( $whiteList && ! in_array( $this->_names[$name]['real_name'], $whiteList ) && ! in_array( @$this->_names[$name]['data-pc-element-whitelist-group'], $whiteList ) )       
 			{
-			//	var_export( $this->_names[$name]['real_name'] );
-			//	var_export( @$this->_names[$name]['data-pc-element-whitelist-group'] );  
-			//	self::v( $this->getParameter( 'element_whitelist' ) );
 				continue;
 			}
 			else
 			{
-			//	self::v( $this->_names[$name]['real_name'] );
-			//	self::v( $this->_names[$name]['real_name'] );
-			}
+
+            }
 			if( $this->isSubmitted() )
 			{
-			//	if( $this->fakeValues[$this->_names[$name]['real_name']] ){ $this->_values = array(); }
-			//	var_export( $this->_global[$name] );
-			//	var_export( $this->_global[$name]['real_name'] );
-		//		var_export( $this->fakeValues );
-		//		var_export( $this->fakeValues[$this->_names[$name]['real_name']] );
 				if( empty( $this->_names[$name]['data-pc-ignore-field'] ) )
 				{
-			//		var_export( $this->_names[$name]['data-pc-ignore-field'] );
 					
 					$this->_values[@$this->_names[$name]['real_name']] = isset( $this->_global[$name] ) ? $this->_global[$name] : @$this->_global[@$this->_names[$name]['real_name']];
-				//	var_export( $name . '<br>' );
-			//		var_export( $this->_names[$name]['real_name'] . '<br>' );
-				//	var_export( @$this->_names[$name]['real_name'] );
-				//	var_export( $this->_values[@$this->_names[$name]['real_name']] );
-				//	var_export( $this->_global[$name] );
 					$this->_filter( $name );
 					$this->_validate( $name );     
 				}
@@ -1089,29 +1054,14 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				)
 			{
 				$this->_badnews[$name] = @$this->_badnews[$name] ? : @$this->_badnews[@$this->_names[$name]['real_name']];
-			//	$form .= "<span style='display:block' class='badnews'>{$this->_badnews[$name]}</span>\n";
-		//		$form .= "<span style='display:inline-block;' class='badnews'>{$this->_badnews[$name]}</span>\n";
-			//	$this->_badnews[] = $this->_badnews[$name];
-			//	unset( $this->_badnews[$name] );
-			//	self::$_checkValues = true;
 				$replace = "<div style='margin-top:0.5em;margin-bottom:0.5em' class='badnews'>{$this->_badnews[$name]}</div>\n";
 
 			}
 			$elementMarkups .= str_ireplace( self::$_placeholders['badnews'], $replace, $markup );
-		//	$form .= $markup;
-//			$form .= "</div>\n";    
 		}
-	//	var_export( Ayoola_Object_Wrapper_Abstract::wrap( $elementMarkups, @$fieldset->wrapper  ) );
 		$form .= Ayoola_Object_Wrapper_Abstract::wrapContent( $elementMarkups, @$fieldset->wrapper  );
-//		$form .= $fieldset->allowDuplication ? "<div><a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$fieldset->duplicationData['add'] ? : "Duplicate this fieldset" ) . "' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.parentNode.cloneNode( true ); var fieldtags= [ \"input\", \"textarea\", \"select\"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= \"\"; } } this.parentNode.parentNode.parentNode.insertBefore( fieldset, this.parentNode.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name=\"\"; ayoola.div.refreshVisibleCounter(\"" . @$fieldset->duplicationData['counter'] . "\");'>" . ( @$fieldset->duplicationData['add'] ? : " + " ) . "</a>\n" : null; 
-	//	$form .= $fieldset->allowDuplication ? "<a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$fieldset->duplicationData['add'] ? : "Remove this fieldset" ) . "' onClick='confirm( \"Delete all the elements in these fieldset?\") ? this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode ) : null; ayoola.div.refreshVisibleCounter(\"" . @$fieldset->duplicationData['counter'] . "\");'>" . ( @$fieldset->duplicationData['remove'] ? : " - " ) . "</a></div>\n" : null; 
-	//	var_export( $div );  
-	//	var_export( $this->_values );
-	//	$form .= $fieldset->allowDuplication ? "<button title='Duplicate this fieldset' onClick='this.parentNode.parentNode.insertBefore( this.parentNode.cloneNode( true ), this.parentNode );'>+</button>\n" : null;
-	//	referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 		$form .= @$fieldset->getPostHtml();
 		$form .= ! @$fieldset->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "</{$fieldsetTag}>\n" : null;
-	//	$form .= @$fieldset->container ? "</{$fieldset->container}>\n" : null;
 		return $form;  
     }
 	
