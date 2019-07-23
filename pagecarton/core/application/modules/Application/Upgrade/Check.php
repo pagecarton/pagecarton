@@ -76,50 +76,63 @@ class Application_Upgrade_Check extends PageCarton_Widget
 			//	var_export( $versionFromServer );
                 $storage->store( $versionFromServer ); 
             }
-        //    var_export( $versionFromServer );
-        $filter = new Ayoola_Filter_Time();
-        $lastChecked = null;
-//        $lastChecked = '<span  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $serverName . ')</span>';
-        if( empty( $versionFromServer['response'] ) )
-        {
-            $this->setViewContent(  '' . self::__( '<div  style="font-size:smaller;" class="badnews">PageCartion is not able to check for updates (cURL error). ' . $lastChecked . '  </div>' ) . '', true  ); 
-        }
-        elseif( $versionFromServer['response'] != PageCarton::VERSION )
-        {
-            $this->setViewContent(  self::__( '<div class="badnews"> 
-                                        PageCarton ' . $versionFromServer['response']  . ' is available for download. ' . $lastChecked . ' 
-                                        <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Upgrade?" class="">Begin Upgrade!</a> 
-                                        <a style="font-size:smaller;" target="_blank" href="https://www.pagecarton.org/posts?category=releases" class="">What Changed?</a></div>' ), true ); 
-        }
-        else
-        {
-            $this->setViewContent(  '' . self::__( '<p  style="font-size:smaller; text-align:center;" class="goodnews"> PageCarton Up-to-date (' . $versionFromServer['response']  . '). ' . $lastChecked . '</p>' ) . '', true  ); 
-        //    $this->setViewContent( self::__( '' ) ); 
-        }
+            //    var_export( $versionFromServer );
+            $filter = new Ayoola_Filter_Time();
+            $lastChecked = null;
+    //        $lastChecked = '<span  class="" style="font-size:smaller;">Update last checked ' . $filter->filter( $versionFromServer['time'] )  . ' (' . $serverName . ')</span>';
 
-        //  check update for themes
-        foreach( Ayoola_Page_PageLayout::getInstance()->select() as $layout )
-        {
-            if( empty( $layout['article_url'] ) )
+        //    var_export( $versionFromServer['response'] );
+        //    var_export( PageCarton::VERSION );
+
+            $versionFromServerX = explode( '.', $versionFromServer );
+            $myVersionX = explode( '.', PageCarton::VERSION );
+
+            if( empty( $versionFromServer['response'] ) )
             {
-                //  only check update for one that is in repo
-                continue;
+                $this->setViewContent(  '' . self::__( '<div  style="font-size:smaller;" class="badnews">PageCartion is not able to check for updates (cURL error). ' . $lastChecked . '  </div>' ) . '', true  ); 
             }
-            $url = 'https://themes.pagecarton.org/tools/classplayer/get/name/Application_Article_View?article_url=' . $layout['article_url'] . '&pc_widget_output_method=JSON';
-            $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
-            $layoutInfo = json_decode( $feed, true );
-        //   var_export( array_pop( $layoutInfo['modified_time'] ) );
-        //  var_export( $layoutInfo );
-            $version = count( $layoutInfo['article_editor_username'] );
-            $lastEdited = $layoutInfo['article_modified_date'];
-       //     var_export( $layoutInfo['article_title'] );
-        //    var_export( $layoutInfo['modified_time'] );
-      //     var_export( $layout['modified_time'] );
-            if( $lastEdited > $layout['modified_time'] )
+            elseif( $myVersionX[0] > $versionFromServerX[0] || $myVersionX[1] > $versionFromServerX[1] || $myVersionX[2] > $versionFromServerX[2] || $myVersionX[3] > $versionFromServerX[3] )
             {
-                $this->setViewContent( self::__( '<div  style="font-size:smaller;" class="badnews">' . $layout['layout_label'] . ' theme version ' . $version . ' is available. <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Repository?title=' . $layout['layout_label'] . '&layout_type=upload&install=' . $layout['article_url'] . '&update=' . $layout['article_url'] . '" class="">Update now!</a>   </div>' ) ); 
+                $this->setViewContent(  self::__( '<div class="badnews"> 
+                                            You are running PageCarton ' . PageCarton::VERSION . '. This is still a future version of PageCarton that is yet to be released.
+                                            <a style="font-size:smaller;" target="_blank" href="https://www.pagecarton.org/posts?category=releases" class="">What Changed?</a></div>' ), true ); 
             }
-        }
+            elseif( $versionFromServer['response'] != PageCarton::VERSION )
+            {
+                $this->setViewContent(  self::__( '<div class="badnews"> 
+                                            PageCarton ' . $versionFromServer['response']  . ' is available for download. ' . $lastChecked . ' 
+                                            <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Upgrade?" class="">Begin Upgrade!</a> 
+                                            <a style="font-size:smaller;" target="_blank" href="https://www.pagecarton.org/posts?category=releases" class="">What Changed?</a></div>' ), true ); 
+            }
+            else
+            {
+                $this->setViewContent(  '' . self::__( '<p  style="font-size:smaller; text-align:center;" class="goodnews"> PageCarton Up-to-date (' . $versionFromServer['response']  . '). ' . $lastChecked . '</p>' ) . '', true  ); 
+            //    $this->setViewContent( self::__( '' ) ); 
+            }
+
+            //  check update for themes
+            foreach( Ayoola_Page_PageLayout::getInstance()->select() as $layout )
+            {
+                if( empty( $layout['article_url'] ) )
+                {
+                    //  only check update for one that is in repo
+                    continue;
+                }
+                $url = 'https://themes.pagecarton.org/tools/classplayer/get/name/Application_Article_View?article_url=' . $layout['article_url'] . '&pc_widget_output_method=JSON';
+                $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
+                $layoutInfo = json_decode( $feed, true );
+            //   var_export( array_pop( $layoutInfo['modified_time'] ) );
+            //  var_export( $layoutInfo );
+                $version = count( $layoutInfo['article_editor_username'] );
+                $lastEdited = $layoutInfo['article_modified_date'];
+        //     var_export( $layoutInfo['article_title'] );
+            //    var_export( $layoutInfo['modified_time'] );
+        //     var_export( $layout['modified_time'] );
+                if( $lastEdited > $layout['modified_time'] )
+                {
+                    $this->setViewContent( self::__( '<div  style="font-size:smaller;" class="badnews">' . $layout['layout_label'] . ' theme version ' . $version . ' is available. <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Repository?title=' . $layout['layout_label'] . '&layout_type=upload&install=' . $layout['article_url'] . '&update=' . $layout['article_url'] . '" class="">Update now!</a>   </div>' ) ); 
+                }
+            }
 
 
              // end of widget process
