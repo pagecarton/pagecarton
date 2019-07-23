@@ -211,7 +211,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      *
      * @var string
      */
-	public static $userAgent = 'Mozilla/5.0 ( compatible; ayoolabot/0.1; +http://ayoo.la/bot/ )';
+	public static $userAgent = 'Mozilla/5.0 ( compatible; pagecarton-bot/0.1; +http://pagecarton.org/bot/ )';
 
 	/**
      * constructor
@@ -228,11 +228,91 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			if( Ayoola_Application::isXmlHttpRequest() || Ayoola_Application::isClassPlayer() ){ return null; }
 		}
 		if( is_array( $parameter ) ){ $this->setParameter( $parameter ); }
-		//	var_export( self::getHooks() );
+        //	var_export( self::getHooks() );
+    //    var_export( $this->getParameter( 'device_whitelist' ) );
+    //    var_export( self::deviceIsAllowed() );
+
+        if( ! $this->deviceIsAllowed() )
+        {
+            return false;
+        }
 
 	//	self::v( get_class( $this ) );
 		$this->initOnce();
 		static::$_counter++;
+    }
+
+	/**
+     * Check if a device is allowed to view
+     *
+     */
+	public function deviceIsAllowed()
+    {
+        if( $this->getParameter( 'device_whitelist' ) )
+        {
+        //    var_export( PageCarton_Device::getInstance()->selectOne( null, array( 'device_name' => $this->getParameter( 'device_whitelist' ) ) ) );
+            if( $device = PageCarton_Device::getInstance()->selectOne( null, array( 'device_name' => $this->getParameter( 'device_whitelist' ) ) ) )
+            {
+                foreach( $device['environment_key'] as $key => $x )
+                {
+                    switch( $device['equator'][$key] )
+                    {
+                        case 0:
+                            if( is_int( stripos( $_SERVER[$device['environment_key'][$key]], $device['environment_value'][$key] )) )
+                            {
+                                return false;
+                            }
+                        break;
+                        case 1:
+                            if( ! is_int( stripos( $_SERVER[$device['environment_key'][$key]], $device['environment_value'][$key] )) )
+                            {
+                                return false;
+                            }
+                        break;
+                        case 2:
+                            if( ! preg_match( '/' . $device['environment_value'][$key] . '/i', $_SERVER[$device['environment_key']][$key] ) )
+                            {
+                                return false;
+                            }
+                        break;
+
+                    }
+                }
+            }
+        }
+        elseif( $this->getParameter( 'device_blacklist' ) )
+        {
+            if( $device = PageCarton_Device::getInstance()->selectOne( null, array( 'device_name' => $this->getParameter( 'device_blacklist' ) ) ) )
+            {
+                foreach( $device['environment_key'] as $key => $x )
+                {
+                    switch( $device['equator'][$key] )
+                    {
+                        case 0:
+                            if( ! is_int( stripos( $_SERVER[$device['environment_key'][$key]], $device['environment_value'][$key] )) )
+                            {
+                                return false;
+                            }
+                        break;
+                        case 1:
+                            if( is_int( stripos( $_SERVER[$device['environment_key'][$key]], $device['environment_value'][$key] )) )
+                            {
+                                return false;
+                            }
+                        break;
+                        case 2:
+                            if( preg_match( '/' . $device['environment_value'][$key] . '/i', $_SERVER[$device['environment_key']][$key] ) )
+                            {
+                                return false;
+                            }
+                        break;
+
+                    }
+                }
+            }
+
+        }
+        return true;
     }
 
     /**
@@ -1246,6 +1326,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				'parameters' => 'Parameters',
 				'privacy' => 'Privacy',
 				'savings' => 'Savings',
+				'devices' => 'Devices',
 			);
 			$fieldset = new Ayoola_Form_Element();
 			$fieldset->hashElementName = false;
@@ -1485,18 +1566,50 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						$currentWrapper = $eachWrapper;
 						$selected = 'selected=selected';
 					}
-			//		$options .= '<option ' . $selected . ' value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
 					if( ! $inlineWrapperChange )
 					{
 						$eachWrapper['wrapper_suffix'] = null;
 						$eachWrapper['wrapper_prefix'] = null;
 					}
 					$options .= '<option ' . $selected . ' value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
-	//				$options .= '<option ' . $selected . ' data-wrapper_prefix="' . htmlentities( $eachWrapper['wrapper_prefix'] ). '" data-wrapper_suffix="' .  htmlentities( $eachWrapper['wrapper_suffix'] ) . '" value="' . $eachWrapper['wrapper_name'] . '">' . $eachWrapper['wrapper_label'] . '</option>';
 				}
 				$options .= '</select>';
 				$fieldset->addElement( array( 'name' => 'wrapper_label', 'type' => 'Html' ), array( 'html' => '<p><label>Wrapper</label>' . $options . '</p>', 'fields' => 'wrapper_name' ) );
+            }
+			if( @in_array( 'devices', $object['widget_options'] ) || @$advanceParameters['device_whitelist'] || @$advanceParameters['device_blacklist'] )
+			{
+                $options = '<label>Choose Device to Show Widget To...</label>
+                            <select name="device_whitelist" onChange="">
+								<option value="">None</option>';
+				foreach( PageCarton_Device::getInstance()->select() as $eachDevice )
+				{
+                    $selected = null;
+					if( @$advanceParameters['device_whitelist'] && @$eachDevice['device_name'] === @$advanceParameters['device_whitelist'] )
+					{
+						$selected = 'selected=selected';
+					}
+					$options .= '<option ' . $selected . ' value="' . $eachDevice['device_name'] . '">' . $eachDevice['device_name'] . '</option>';
+				}
+				$options .= '</select>';
+                $fieldset->addElement( array( 'name' => 'devices-x', 'type' => 'Html' ), array( 'html' => '<p>' . $options . '</p>', 'fields' => 'device_whitelist' ) );
+                
+                $options = '<label>Choose Device to Hide Widget From...</label>
+                            <select name="device_blacklist" onChange="">
+								<option value="">None</option>';
+				foreach( PageCarton_Device::getInstance()->select() as $eachDevice )
+				{
+                    $selected = null;
+					if( @$advanceParameters['device_blacklist'] && @$eachDevice['device_name'] === @$advanceParameters['device_blacklist'] )
+					{
+						$selected = 'selected=selected';
+					}
+					$options .= '<option ' . $selected . ' value="' . $eachDevice['device_name'] . '">' . $eachDevice['device_name'] . '</option>';
+				}
+				$options .= '</select>';
+				$fieldset->addElement( array( 'name' => 'devices-xy', 'type' => 'Html' ), array( 'html' => '<p>' . $options . '</p>', 'fields' => 'device_blacklist' ) );
+
 			}
+            
 			$fieldset->placeholderInPlaceOfLabel = true;
 			$form->addFieldset( $fieldset );
 			$html .= $form->view();
@@ -1981,6 +2094,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//	Ayoola_Form::v( ( $this->timeStart ) . '<br />' );
 	//	Ayoola_Form::v( ( microtime( true ) - $this->timeStart ) . '<br />' );
 	//	Ayoola_Form::v( ( microtime( true ) - Ayoola_Application::getRuntimeSettings( 'start_time' ) ) . '<br />' );
+        if( ! $this->deviceIsAllowed() )
+        {
+            return false;
+        }
 		foreach( self::getHooks() as $class )
 		{
 			$class::hook( $this, __FUNCTION__ );
