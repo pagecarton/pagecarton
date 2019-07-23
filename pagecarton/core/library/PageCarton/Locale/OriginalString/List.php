@@ -50,7 +50,7 @@ class PageCarton_Locale_OriginalString_List extends PageCarton_Locale_OriginalSt
 		$list->setData( $this->getDbData() );
 		$list->setListOptions( 
 								array( 
-							//			'Sub Domains' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_SubDomainList/\' );" title="">Sub Domains</a>',    
+                                    '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Translation_AutoPopulateWords/\' );" title="">Populate Words Automatically</a>',    
 									) 
 							);
 		$list->setKey( $this->getIdColumn() );
