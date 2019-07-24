@@ -927,6 +927,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					$parameters = self::prepareParameters( $parameters );
 					if( $this->isSaveMode() )
 					{
+                        //  widget-based filter
+                        //  widget may want to perform a one-time filter onsubmit
+                        $eachObject['class_name']::filterParameters( $parameters );
+
+
 					//	var_export();
 						if( empty( $parameters['widget_name'] ) )
 						{
@@ -937,7 +942,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						else
 						{
 						//	var_export( $parameters['widget_name'] );
-						}
+                        }
+
+                        
 						$parametersToSave = $parameters + $eachObject;
 						$parametersKey = md5( static::safe_json_encode( $parametersToSave ) );
 						$whatToSave = array( 'widget_name' =>  $parameters['widget_name'] , 'url' =>  $page['url'], 'class_name' =>  $eachObject['class_name'], 'parameters' => $parametersToSave, 'parameters_key' => $parametersKey, );

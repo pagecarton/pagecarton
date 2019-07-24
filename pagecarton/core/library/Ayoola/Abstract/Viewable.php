@@ -831,6 +831,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	}
 
     /**
+     * Do a one time parameter filter within widgets
+     *
+     */
+	public static function filterParameters( & $parameters )
+    {
+        //  to be executed within the widget class
+    }
+
+    /**
      * Get site locale
      *
      */
