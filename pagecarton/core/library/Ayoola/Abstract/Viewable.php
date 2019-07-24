@@ -840,8 +840,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
         $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
         if( ! is_array( $options ) || ! in_array( 'auto_detect_user_locale', $options ) )
         {
-            return $locale;
+            return $defaultLocale;
         }
+    //    var_export();
         $storage = self::getObjectStorage( array( 'id' => 'locale' . $locale, 'time_out' => 1000000, ) );
         if( ! $locale = $storage->retrieve() )
         {
@@ -962,7 +963,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             return $string;
         }
 
-//	var_export( $string );
+//==	var_export( $string );
 	//	var_export( $arr );
 	//	$string = trim( $string );
 

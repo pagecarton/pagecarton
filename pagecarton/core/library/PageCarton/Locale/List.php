@@ -51,7 +51,7 @@ class PageCarton_Locale_List extends PageCarton_Locale_Abstract
 		$list->setListOptions( 
 								array( 
 										'<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Settings/\' );" title="">Locale Settings</a>',    
-										'<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Translation_AutoPopulateWords/\' );" title="">Build Words</a>',    
+										'<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_OriginalString_List/\' );" title="">Words & Phrases List</a>',    
 									) 
 							);
         $list->setKey( $this->getIdColumn() );

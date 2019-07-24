@@ -38,6 +38,28 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
 			$this->createConfirmationForm( 'Load', 'Try to view all the pages and widgets in the background so as to populate new words for translation' );
 			$this->setViewContent( $this->getForm()->view(), true );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
+
+
+            $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
+            if( is_array( $options ) && in_array( 'autosave_new_words', $options ) )
+            {
+                
+            }
+            else
+            {
+                $each = new Application_Settings_Editor( array( 'settingsname_name' => 'Locale' ) );
+                $settings = Ayoola_Page_Settings::retrieve();
+                $settings['locale_options'] = is_array( $settings['locale_options'] ) ? $settings['locale_options'] : array();
+                $settings['locale_options'][] = 'autosave_new_words';
+                $each->fakeValues = $settings;
+                if( ! $each->init() )
+                {
+                    $this->setViewContent( self::__( '<p class="badnews">We could not set the system to save new words automatically.</p>' ) ); 
+                    return false;
+                }
+    
+            }
+
             
             $pages = new Ayoola_Page_Page();
             $pages->getDatabase()->getAdapter()->setAccessibility( $pages::SCOPE_PROTECTED );
