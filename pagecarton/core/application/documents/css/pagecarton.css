@@ -561,11 +561,11 @@ pc_full_width {
   font: 400 11px system-ui;
   color: grey;
   background-color: white;
-  border: 2px solid grey;
+  border: 1px solid grey;
   border-radius: 6px;
-  padding: 4px 8px;
   text-align: center;
   font-size: 16px;
+  padding:0.5em;
   margin: 4px 2px;
   -webkit-transition-duration: 0.4s;
   /* Safari */
@@ -573,6 +573,13 @@ pc_full_width {
   cursor: pointer;
   text-decoration: none;
 }
+
+.pc-btn-parent a:before, .pc-btn:before {
+    content: "\f0c1";
+    padding:4px;
+    margin-right: 0.5em;
+  }
+  
 
 .pc-btn-parent a:hover,
 .pc-btn:hover,
@@ -603,16 +610,13 @@ pc_full_width {
 .pc-form2 h2 {
   background: inherit;
   text-transform: uppercase;
-  /* font-family: 'open_sansregular', sans-serif; */
   color: inherit;
   font-size: 21px;
   font-weight: 100;
   padding: 21px 0;
   border-top: 0;
   border-bottom: 0;
-  /*width: 100%;*/
   display: block !important;
-  /* background-color: #eee; */
 }
 
 .pc-form2 input[type="text"],
@@ -779,6 +783,8 @@ pc_full_width {
 .goodnews:before,
 .pc-notify-warning:before,
 .badnews:before,
+.pc-btn:before,
+.pc-btn-parent a:before,
 .noRecord:before,
 .pc-heading:before {
   font-family: FontAwesome;
@@ -787,12 +793,34 @@ pc_full_width {
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
-  margin-right: 0.2em;
+  margin-right: 1em;
   text-align: center;
   font-variant: normal;
   text-transform: none;
   line-height: 1em;
-  margin-left: 0.2em;
+  margin-left: 0.5em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.pc-notify-info:after,
+.pc-notify-normal:after,
+.goodnews:after,
+.pc-notify-warning:after,
+.badnews:after,
+.pc-btn:after,
+.pc-btn-parent a:after,
+.noRecord:after,
+.pc-heading:after {
+  content: " ";
+  font-style: normal;
+  font-weight: 400;
+  display: inline-block;
+  text-decoration: inherit;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  margin-left: 1em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
