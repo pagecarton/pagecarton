@@ -1,4 +1,5 @@
 <?php
+
 /**
  * PageCarton
  *
@@ -131,6 +132,42 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		$content = str_ireplace( $search, $replace, $content );
 		return $content;
 	}
+
+    /**
+     * Do a one time parameter filter within widgets
+     *
+     */
+	public static function filterParameters( & $parameters )
+    {
+		$content = $parameters['codes'] ? : ( $parameters['editable'] ? : $parameters['view'] );
+		if( ( @in_array( 'preserve_content', $parameters['widget_options'] ) || @in_array( 'preserve_content', $parameters['text_widget_options'] ) ) && $parameters['preserved_content'] )
+		{
+			@$content = $parameters['codes'] ? : $parameters['preserved_content'];
+		}
+        preg_match_all( '|\{-(.*)-\}|', $content, $matches );
+        #   '{-Lorem Ipsum dolor-}'
+      //  self::v( $content );
+      //  self::v( $matches );
+        $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates();
+
+        foreach( $matches[0] as $count => $each )
+        {
+        //    self::v( $each );
+            $previousData['dummy_title'][] = 'Replaceable Text ' . self::$_counter . $count;
+            $previousData['dummy_search'][] = $each;
+            $previousData['dummy_replace'][] = trim( $each, '{-}' );
+            Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
+        }
+
+        //  to be executed within the widget class
+        foreach( [ 'codes', 'editable', 'preserved_content' ] as $each  )
+        {
+       //   if( @$parameters['url_prefix'] !== Ayoola_Application::getUrlPrefix() ||  Ayoola_Application::getUrlPrefix() )
+            {		
+            //    @$parameters[$each] = self::fixUrlPrefix( $parameters[$each], @$parameters['url_prefix'], Ayoola_Application::getUrlPrefix() );
+            }
+        }
+    }
 	
     /**
      * This method
@@ -244,12 +281,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				}  
 			}
 
-		//	$this->clearParametersThatMayBeDuplicated();
 			$content .= '<div style="clear:both;"></div>';  
 			$content .= '<div style="clear:both;"></div>';  
-		//	$content = Ayoola_Object_Embed::viewInLine( $parameters );
-		//	var_export( $parameters );
-		//	var_export( $content );
 		}
 		if( $this->getParameter( 'page_title' ) || $this->getParameter( 'page_description' )  )
 		{

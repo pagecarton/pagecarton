@@ -169,6 +169,57 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
     }
 
     /**
+     * Save Values
+     * 
+     */
+	public static function saveTexts( $values, $themeName = null )
+    {
+        $themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
+        unset( $values['layout_name'] );
+        Ayoola_Page_PageLayout::getInstance()->update( $values, array( 'layout_name' => $themeName ) );
+        $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
+        $table = Application_Settings::getInstance();
+    //    self::v( $values );
+    //    self::v( $previousData );
+
+        //  merge now with settings
+        if( $previousData )
+        {
+            $table->delete( array( 'settingsname_name' => __CLASS__ ) );
+            $values['dummy_title'] = array_merge( $values['dummy_title'] ? : array(), $previousData['dummy_title'] ? : array() );
+            $values['dummy_search'] = array_merge( $values['dummy_search'] ? : array(), $previousData['dummy_search'] ? : array() );
+            $values['dummy_replace'] = array_merge( $values['dummy_replace'] ? : array(), $previousData['dummy_replace'] ? : array() );
+        }
+        $record = array();
+//            var_export( $values );
+
+        //  delete duplicates
+        foreach( $values['dummy_search'] as $key => $each )
+        {
+            if( ! empty( $record[$values['dummy_search'][$key]] ) )
+            {
+                unset( $values['dummy_title'][$key] );
+                unset( $values['dummy_search'][$key] );
+                unset( $values['dummy_replace'][$key] );
+            }
+            $record[$values['dummy_search'][$key]] = true;
+
+        }
+        //    var_export( $values );
+        if( count( $values['dummy_replace'] ) !== count( $values['dummy_search'] ) )
+        {
+        //    var_export( $values );
+            return false;
+        }
+        else
+        {
+            $table->insert( array( 'data' => $values, 'settings' => json_encode( $values ), 'settingsname_name' => __CLASS__ ) );
+            return true;
+        //    $this->setViewContent( $this->getForm()->view() );
+        }
+    }
+
+    /**
      * Performs the whole widget running process
      * 
      */
@@ -230,42 +281,13 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $values['dummy_replace'][$key] = trim( $values['dummy_replace'][$key] );
                 if( '' === $each )
                 {
-                    $values['dummy_replace'][$key] = trim( $values['dummy_search'][$key], '{}' );
+                    $values['dummy_replace'][$key] = trim( $values['dummy_search'][$key], '{-}' );
                 }
 
             }
         //  self::v( $values );
-            Ayoola_Page_PageLayout::getInstance()->update( $values, $this->getIdentifier() );
-        //    $this->updateDb( $values );
-            $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
-            $table = Application_Settings::getInstance();
-        //    var_export( $previousData );
-
-            //  merge now with settings
-            if( $previousData )
-            {
-                $table->delete( array( 'settingsname_name' => $settingsName ) );
-                $values['dummy_title'] = array_merge( $values['dummy_title'] ? : array(), $previousData['dummy_title'] ? : array() );
-                $values['dummy_search'] = array_merge( $values['dummy_search'] ? : array(), $previousData['dummy_search'] ? : array() );
-                $values['dummy_replace'] = array_merge( $values['dummy_replace'] ? : array(), $previousData['dummy_replace'] ? : array() );
-            }
-            $record = array();
-//            var_export( $values );
-
-            //  delete duplicates
-            foreach( $values['dummy_search'] as $key => $each )
-            {
-                if( ! empty( $record[$values['dummy_search'][$key]] ) )
-                {
-                    unset( $values['dummy_title'][$key] );
-                    unset( $values['dummy_search'][$key] );
-                    unset( $values['dummy_replace'][$key] );
-                }
-                $record[$values['dummy_search'][$key]] = true;
-
-            }
-            //    var_export( $values );
-            if( count( $values['dummy_replace'] ) !== count( $values['dummy_search'] ) )
+           //    var_export( $values );
+            if( ! self::saveTexts( $values, $this->_identifier['layout_name'] ) )
             {
             //    var_export( $values );
                 $this->setViewContent(  '' . self::__( '<div class="badnews" style="xtext-align:center;">Something went wrong. Please go back and try again. </div>' ) . '', true  );
@@ -273,7 +295,6 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             }
             else
             {
-                $table->insert( array( 'data' => $values, 'settings' => json_encode( $values ), 'settingsname_name' => $settingsName ) );
                 $this->setViewContent(  '' . self::__( '<div class="goodnews" style="xtext-align:center;">Update saved successfully. Further text update could be done in <a href="/tools/classplayer/get/name/Ayoola_Page_List">Pages</a>. </div>' ) . '', true  );
             //    $this->setViewContent( $this->getForm()->view() );
             }
@@ -343,7 +364,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $fieldset->addElement( array( 'name' => 'dummy_search', 'multiple' => 'multiple', 'label' => 'Dummy Text', 'placeholder' => @$data['dummy_search'][$i], 'type' => 'TextArea', 'value' => @$data['dummy_search'][$i] ) );
             }
 
-            $data['dummy_replace'][$i] = ( @$data['dummy_replace'][$i] || ! empty( $_REQUEST['editing_dummy_text'] ) ) ? $data['dummy_replace'][$i] : trim( @$data['dummy_search'][$i], '{}' );
+            $data['dummy_replace'][$i] = ( @$data['dummy_replace'][$i] || ! empty( $_REQUEST['editing_dummy_text'] ) ) ? $data['dummy_replace'][$i] : trim( @$data['dummy_search'][$i], '{-}' );
 
             //  always default to own prefilled data
          //   var_export( $allMyData );
