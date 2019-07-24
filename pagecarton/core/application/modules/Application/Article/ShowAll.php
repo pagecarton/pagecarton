@@ -462,7 +462,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							$class = Application_Article_Table::getInstance();
 							$class->update( $dataX, array( 'article_url' => $data['article_url'] ) );
 							$data = $dataX;
-						}
+                        }
+                        $data = is_array( $data ) ? $data : array();
+                        $dataX = is_array( $dataX ) ? $dataX : array();
 						$data += $dataX;
 					}
 					
