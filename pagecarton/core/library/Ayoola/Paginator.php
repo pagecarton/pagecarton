@@ -598,7 +598,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
                         $markup = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $markup );
                         $markup = str_replace( $columnSearch, $columnReplace, $markup );
                     //    var_export( $markup );
-                        $value .= $markup;
+                        $value .= ' ' . $markup;
                     }
 				//	var_export( $value );
 			//		if( $this->crossColumnFields )
