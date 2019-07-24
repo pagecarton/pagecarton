@@ -422,12 +422,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//		if( $this->getParameter( 'sort_column' ) )
 			{ 
 				$previousKey = null;
-			//	$singlePostPaginationInfo = array();
 				foreach( $values as $key => $data )
 				{
-				//	var_export( $data );
-			//		var_export( $data );
-			//		self::v( $data );
 					unset( $values[$key] );
 
 					//	quick fix for older posts that the dates were not set in the table
@@ -445,10 +441,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					{
 						continue;
 					}
-			//		var_export( $data );
-		//			$oldData = $data;
-			//		$dataX = $this->retrieveArticleData( $data );
-			//		self::v( $data );
 					if( ! empty( $data['true_post_type'] ) || empty( $data['not_real_post'] ) )
 					{
 						if( ! $dataX = $this->retrieveArticleData( $data ) )
@@ -467,25 +459,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
                         $dataX = is_array( $dataX ) ? $dataX : array();
 						$data += $dataX;
 					}
-					
-		//			self::v( $data );
-//					var_export( $data['article_type'] );
-					
 
 					if( ! is_array( $data ) || ! self::isAllowedToView( $data ) )    
 					{
-					//	self::v( @$data['auth_level'] );
-					//	self::v( self::hasPriviledge( @$data['auth_level'] ) );
-					//	self::v( $data['publish'] );
-					//	self::v( self::isAllowedToView( $data ) );
-				//	self::v( $data );
 						continue;
-					//	self::setIdentifierData( $data );
 					}
 					$data['post_list_id'] = $postListId;
-			//		self::v( $data );
-				//	var_export( $data );
-					//	Switch
+
+                    //	Switch
 					if( $this->getParameter( 'post_switch' ) )
 					{
 						$switches = array_map( 'trim', explode( ',', $this->getParameter( 'post_switch' ) ) );
