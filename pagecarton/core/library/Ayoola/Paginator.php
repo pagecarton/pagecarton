@@ -577,10 +577,14 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 						$row[$field] = print_r( (array) $row[$field], true ); 
 					}
 				//	$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, $value );
-				//	$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, is_scalar( $value ) ? $value : null );
+                //	$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, is_scalar( $value ) ? $value : null );
 					if( isset( $rawFieldValues['value_representation'][$value] ) )
 					{
-						$value = $rawFieldValues['value_representation'][$value];
+                        $value = $rawFieldValues['value_representation'][$value];
+					}
+					elseif( isset( $rawFieldValues['value_representation'][$row[$field]] ) )
+					{
+                        $value = $rawFieldValues['value_representation'][$row[$field]];
 					}
 					elseif( isset( $rawFieldValues['value_representation']['pc_paginator_default'] ) )
 					{

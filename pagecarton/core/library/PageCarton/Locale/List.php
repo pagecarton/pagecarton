@@ -54,7 +54,8 @@ class PageCarton_Locale_List extends PageCarton_Locale_Abstract
 										'<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Translation_AutoPopulateWords/\' );" title="">Build Words</a>',    
 									) 
 							);
-		$list->setKey( $this->getIdColumn() );
+        $list->setKey( $this->getIdColumn() );
+    //    var_export( PageCarton_Locale_Settings::retrieve( 'default_locale' ) );
 		$list->setNoRecordMessage( 'No data added to this table yet.' );
 		$default = array(
             PageCarton_Locale_Settings::retrieve( 'default_locale' ) => '<i class="fa fa-check"></i>',

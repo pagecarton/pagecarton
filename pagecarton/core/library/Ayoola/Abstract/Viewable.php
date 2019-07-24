@@ -836,7 +836,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function getLocale()
     {
-        $locale = PageCarton_Locale_Settings::retrieve( 'default_locale' );
+        $defaultLocale = PageCarton_Locale_Settings::retrieve( 'default_locale' );
         $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
         if( ! is_array( $options ) || ! in_array( 'auto_detect_user_locale', $options ) )
         {
@@ -845,9 +845,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
         $storage = self::getObjectStorage( array( 'id' => 'locale' . $locale, 'time_out' => 1000000, ) );
         if( ! $locale = $storage->retrieve() )
         {
+            $locale = $defaultLocale;
             if( ! $languages = PageCarton_Locale::getInstance()->select() )
             {
-                return false;
+                return $locale;
             }
 
             $availableLocale = array();
@@ -971,9 +972,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             {
                 continue;
             }
-
-		//	var_export( $locale );
-		//	var_export( $string );
         //	$translation = PageCarton_Locale_Translation::getInstance();
         
         //  don't store trimmed because of some valid spaces around html
