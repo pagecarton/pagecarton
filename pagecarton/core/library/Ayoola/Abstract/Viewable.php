@@ -972,7 +972,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             return $string;
         }
 
-//==	var_export( $string );
+    //	var_export( $string );
 	//	var_export( $arr );
 	//	$string = trim( $string );
 
@@ -980,8 +980,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
             if( ! $locale = self::getLocale() )
             {
-                continue;
+                $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
+            //    var_export( $options );
+                if( ! is_array( $options ) || ! in_array( 'autosave_new_words', $options ) )
+                {
+                    continue;
+                }
             }
+    //	var_export( $string );
         //	$translation = PageCarton_Locale_Translation::getInstance();
         
         //  don't store trimmed because of some valid spaces around html

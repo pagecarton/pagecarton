@@ -9,21 +9,123 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Wednesday 26th of December 2018 10:13:02 AM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Wednesday 24th of July 2019 02:05:10 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_dac83995f15adeba352e9940462f4228 = new Ayoola_Page_Editor_Text( array (
+$_acd6c67e7aeba849612416a4d14168e1 = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<ul class="nav" id="side-menu">
+    <li>
+        <a href="#"><i class="fa fa-cogs nav_icon"></i>Settings <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse">
+            <li>
+                <a href="/pc-admin/Application_Settings_SettingsName_List/">Options</a>
+            </li>
+            <li>
+                <a href="/pc-admin/Ayoola_Access_AuthLevel_List/">Privileges</a>
+            </li>
+            <li>
+                <a href="/pc-admin/Ayoola_Object_List/">Widgets</a>
+            </li>
+            <li>
+                <a href="/pc-admin/PageCarton_MultiSite_List/">Multi-site Manager</a>
+            </li>
+            <li>
+                <a href="/pc-admin/Application_Backup_List/">Back up & Restore</a>
+            </li>
+            <li>
+                <a href="/pc-admin/Application_Log/">Logs</a>
+            </li>
+            <li>
+                <a href="/pc-admin/Application_Cache_Clear/">Clear Cache</a>
+            </li>
+            <li>
+                <a href="/pc-admin/Application_Upgrade/">Upgrades</a>
+            </li>
+        </ul>
+        <!-- /nav-second-level -->
+    </li>
+    <li>
+        <a href="#"><i class="fa fa-file-text-o nav_icon"></i>Appearance <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse">
+            <li>
+                <a href="/pc-admin/Ayoola_Page_List/">Pages</a>
+            </li>
+            <li>
+                <a href="/pc-admin/Ayoola_Page_Layout_List/">Themes</a>
+            </li>
+            <li>
+                <a href="/pc-admin/Ayoola_Page_Menu_List/">Navigation</a>
+            </li>
+            <li>
+                <a onclick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/img/logo.png\' );"
+                    href="javascript:">Logo</a>
+            </li>
+            <li>
+                <a onclick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/favicon.ico\' );"
+                    href="javascript:">Favicon</a>
+            </li>
+        </ul>
+        <!-- //nav-second-level -->
+    </li>
+    <li class="">
+        <a href="#"><i class="fa fa-users nav_icon"></i>Users <span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse">
+            <li>
+                <a href="/pc-admin/Application_User_List/">User Accounts</a>
+            </li>
+            <li>
+                <a
+                    href="/pc-admin/Application_User_UserEmail_MailingList/">Mailing
+                    List</a>
+            </li>
+            <li>
+                <a href="/pc-admin/Application_User_NotificationMessage_List/">Bulk Mails</a>
+            </li>
+        </ul>
+        <!-- /nav-second-level -->
+    </li>
+    <li>
+        <a href="/pc-admin/Ayoola_Extension_Import_List/"><i class="fa fa-circle nav_icon"></i>Plugins</a>
+        <!-- /nav-second-level -->
+    </li>
+    <li>
+        <a href="/pc-admin/Ayoola_Form_List/"><i class="fa fa-check-square-o nav_icon"></i>Forms </a>
+    </li>
+    <li>
+        <a href="/pc-admin/Application_Article_List/"><i class="fa fa-th-large nav_icon"></i>Posts
+        </a>
+    </li>
+
+</ul>',
+  'preserved_content' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '1563976816-0-20',
+  'widget_name' => 'S e t t i n g s  O p t i o n s  P r i v i l e g e s  W i d g e t s  M u l t i - s i t e  M a n a g e r  B a c k  u p  &  R e s t o r e  L o g s  C l e a r  C a c h e  U p g r a d e s  A p p e a r a n c e  P a g e s  T h e m e s  N a v i g a t i o n  L o g o  F a v i c o n  U s e r s  U s e r  A c c o u n t s  M a i l i n g  L i s t  B u l k  M a i l s  P l u g i n s  F o r m s  P o s t s',
+) );
+
+							}
+							else
+							{
+								
+$_acd6c67e7aeba849612416a4d14168e1 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_7dd175ad4ab7614d4cc6b13e510bd274 = new Ayoola_Page_Editor_Text( array (
   'codes' => '<style>
 .row {
     margin: 0 0 0;
 }
 .logo a h1 {
     color: transparent;
-    background-image: url(/x "/x/img/logo.png");
+    background-image: url( "/img/logo.png");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -42,19 +144,21 @@ $_dac83995f15adeba352e9940462f4228 = new Ayoola_Page_Editor_Text( array (
 
 </style>',
   'preserved_content' => '',
-  'url_prefix' => '/x',
+  'url_prefix' => '',
+  'pagewidget_id' => '1563976050-0-6',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
   '' => '',
+  'widget_name' => '. r o w  {  m a r g i n :  0  0  0 ;  }  . l o g o  a  h 1  {  c o l o r :  t r a n s p a r e n t ;  b a c k g r o u n d - i m a g e :  u r l (  " / i m g / l o g o . p n g " ) ;  b a c k g r o u n d - p o s i t i o n :  c e n t e r ;  b a c k g r o u n d - s i z e :  c o n t a i n ;  b a c k g r o u n d - r e p e a t :  n o - r e p e a t ;  }  . l o g o  {  b a c k g r o u n d :  # 4 d 4 d 4 d ;  f l o a t :  u n s e t ;  }  . c b p - s p m e n u - v e r t i c a l  {  b a c k g r o u n d - c o l o r :  # 3 3 3 ;  }  . h e a d e r - l e f t  {  f l o a t :  u n s e t ;  w i d t h :  u n s e t ;  }',
 ) );
 
 							}
 							else
 							{
 								
-$_dac83995f15adeba352e9940462f4228 = null;
+$_7dd175ad4ab7614d4cc6b13e510bd274 = null;
 
 							}
 							

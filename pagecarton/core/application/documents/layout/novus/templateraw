@@ -93,99 +93,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<div class=" sidebar" role="navigation">
 			<div class="navbar-collapse">
 				<nav data-pc-menu-ignore=1 class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-					<ul class="nav" id="side-menu">
-						<li>
-							<a href="#"><i class="fa fa-cogs nav_icon"></i>Settings <span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Settings_SettingsName_List/">Options</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Access_AuthLevel_List/">Privileges</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Object_List/">Widgets</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/PageCarton_MultiSite_List/">Multi-site Manager</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Backup_List/">Back up & Restore</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Log/">Logs</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Cache_Clear/">Clear Cache</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_Upgrade/">Upgrades</a>
-								</li>
-							</ul>
-							<!-- /nav-second-level -->
-						</li>
-						<li>
-							<a href="#"><i class="fa fa-file-text-o nav_icon"></i>Appearance <span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Page_List/">Pages</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Page_Layout_List/">Themes</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Page_Menu_List/">Navigation</a>
-								</li>
-								<li>
-									<a onclick="ayoola.spotLight.showLinkInIFrame( '#PC_URL_PREFIX/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/img/logo.png' );"
-									 href="javascript:">Logo</a>
-								</li>
-								<li>
-									<a onclick="ayoola.spotLight.showLinkInIFrame( '#PC_URL_PREFIX/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/favicon.ico' );"
-									 href="javascript:">Favicon</a>
-								</li>
-							</ul>
-							<!-- //nav-second-level -->
-						</li>
-						<li class="">
-							<a href="#"><i class="fa fa-users nav_icon"></i>Users <span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_User_List/">User Accounts</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_XmlTableViewer/table_name/Application_User_UserEmail_MailingList/">Mailing
-										List</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Application_User_NotificationMessage_List/">Bulk Mails</a>
-								</li>
-							</ul>
-							<!-- /nav-second-level -->
-						</li>
-						<li>
-							<a href="#"><i class="fa fa-circle nav_icon"></i>Plugins <span class="fa arrow"></span></a>
-							<ul class="nav nav-second-level collapse">
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Extension_Import_List/">Installed Plugins</a>
-								</li>
-								<li>
-									<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Extension_List/">My Plugins</a>
-								</li>
-							</ul>
-							<!-- /nav-second-level -->
-						</li>
-						<li>
-							<a href="#PC_URL_PREFIX/pc-admin/name/Ayoola_Form_List/"><i class="fa fa-check-square-o nav_icon"></i>Forms </a>
-						</li>
-						<li>
-							<a href="#PC_URL_PREFIX/pc-admin/name/Application_Article_List/"><i class="fa fa-th-large nav_icon"></i>Posts
-							</a>
-						</li>
-
-					</ul>
-					<!-- //sidebar-collapse -->
-				</nav>
+                    <!-- //sidebar-collapse -->
+                    <section data-pc-section-name="nav-one">
+                        <br>
+                    </section>
+                    
+                </nav>
 			</div>
 		</div>
 		<!--left-fixed -navigation-->
@@ -232,7 +145,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					</section>
 				</section>
 
-				<section id="row-one">
+				<section data-pc-section-name="row-one">
 					<div class="row-one">
 						<div class="col-md-4 widget">
 							<div class="stats-left ">
@@ -267,7 +180,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<div class="clearfix"> </div>
 					</div>
 				</section>
-				<section id="charts">
+				<section data-pc-section-name="charts">
 					<div class="charts">
 						<div class="col-md-4 charts-grids widget">
 							<h4 class="title">Bar Chart Example</h4>
@@ -357,7 +270,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 					</div>
 				</section>
-				<section id="three">
+				<section data-pc-section-name="three">
 					<div class="row">
 						<div class="col-md-4 stats-info widget">
 							<div class="stats-title">
@@ -463,7 +376,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<div class="clearfix"> </div>
 					</div>
 				</section>
-				<section id="four">
+				<section data-pc-section-name="four">
 					<div class="row">
 						<div class="col-md-8 map widget-shadow">
 							<h4 class="title">Visitors Map </h4>
@@ -589,7 +502,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<div class="clearfix"> </div>
 					</div>
 				</section>
-				<section id="five">
+				<section data-pc-section-name="five">
 					<div class="row calender widget-shadow">
 						<h4 class="title">Calender</h4>
 						<div class="cal1">
@@ -603,7 +516,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<!--footer-->
 		<div class="main-page">
 			<div class="footer">
-				<section id="footer">
+				<section data-pc-section-name="footer">
 					<p>© 2016 Novus Admin Panel. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">w3layouts</a></p>
 				</section>
 			</div>
