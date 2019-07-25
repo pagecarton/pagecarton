@@ -248,7 +248,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	Only allowed users can write
 		if( $this->getParameter( 'add_a_new_post' ) )
 		{
-			$addPostMessage = is_numeric( $this->getParameter( 'add_a_new_post' ) ) ? 'Create a new post' : $this->getParameter( 'add_a_new_post' );
+			$addPostMessage = is_numeric( $this->getParameter( 'add_a_new_post' ) ) ? self::__( 'Create a new post' ) : $this->getParameter( 'add_a_new_post' );
 		}
 		else
 	//	if( ! $values )
@@ -782,7 +782,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
 		//	self::v( $howManyPostsToAdd );
 		//	self::v( $addNewPostUrl	 );
-				$tempItem = array_pop( $values );
+                $tempItem = array_pop( $values );
+
+
 				if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) ) 
 				{
 					$item = array( 
@@ -798,8 +800,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						'auth_level' => $articleSettings['allowed_writers'], 
 						'display_name' => Ayoola_Application::getUserInfo( 'username' ), 
 						'username' => Ayoola_Application::getUserInfo( 'username' ), 
-						'article_title' => 'Post new ' . $newArticleTypeToShow . '', 
-						'article_description' => 'The short description for the new ' . $newArticleTypeToShow . ' will appear here. The short description should be between 100 and 300 characters.', 
+						'article_title' => sprintf( PageCarton_Widget::__( 'Post new %s' ), $newArticleTypeToShow ), 
+						'article_description' => sprintf( PageCarton_Widget::__( 'The short description for the new %s  will appear here. The short description should be between 100 and 300 characters.' ), $newArticleTypeToShow ), 
 					)  + ( $myProfileInfo ? : array() );  
 				}
 				else
@@ -814,7 +816,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						'publish' => true, 
 						'auth_level' => $articleSettings['allowed_writers'], 
 						'article_title' => '...', 
-						'article_description' => 'A short description for ' . $newArticleTypeToShow . ' will show here when its available.', 
+						'article_description' => sprintf( PageCarton_Widget::__( 'The short description for the new %s  will appear here. The short description should be between 100 and 300 characters.' ), $newArticleTypeToShow ), 
 					);  
 				}
 
@@ -899,7 +901,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//		var_export( $offset );
 			$nextPageLink = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . @$offset;
 			$this->_objectTemplateValues['paginator_next_page'] = $nextPageLink;
-			$this->_objectTemplateValues['paginator_next_page_button'] = '<a class="pc-btn" href="' . $nextPageLink . '"> Next &rarr;</a>';       
+			$this->_objectTemplateValues['paginator_next_page_button'] = '<a class="pc-btn" href="' . $nextPageLink . '"> ' . self::__( 'Next' ) . ' &rarr;</a>';       
 			if( empty( $_GET['pc_post_list_autoload'] ) && $this->getParameter( 'pagination' ) && ! $this->getParameter( 'hide_pagination_buttons' ) )
 			{
 				$this->_objectTemplateValues['click_to_load_more'] = $linkToLoadMore = '<div style="text-align:center;" class="pc_posts_distinguish_sets" id="' . $postListId . '_pagination"><a class="pc-btn pc-btn-small" href="javascript:" onclick="pc_autoloadFunc_' . $postListId . '();"> Load more</a></div>';     
@@ -907,8 +909,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		if( @$chunk[( @$offset - 2 )] )
 		{
-			$this->_objectTemplateValues['paginator_previous_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . ( @$offset - 2 );
-			$this->_objectTemplateValues['paginator_previous_page_button'] = '<a class="pc-btn" href="' . $this->_objectTemplateValues['paginator_previous_page'] . '">&larr; Previous</a>';
+            $this->_objectTemplateValues['paginator_previous_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . ( @$offset - 2 );
+			$this->_objectTemplateValues['paginator_previous_page_button'] = '<a class="pc-btn" href="' . $this->_objectTemplateValues['paginator_previous_page'] . '">&larr; ' . self::__( 'Previous' ) . '</a>';
 		}
 //		var_export( $offset );
 		if( $offset != 1 )
@@ -1110,12 +1112,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	var_export( $data );
 			if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )
 			{
-				$imageLink = '<div style=""><a href="' . Ayoola_Application::getUrlPrefix() . $url . '" onClick=""><img class="' . __CLASS__ . '_IMG" style="filter: brightness(50%);-webkit-filter: brightness(50%);-moz-filter: brightness(50%);" src="' . Ayoola_Application::getUrlPrefix() . $image . '" alt="' . $data['article_title'] . "'s cover photo" . '" title="' . $data['article_title'] . "'s cover photo" . '"/></a></div>';  
+                $alt = sprintf( PageCarton_Widget::__( "%s's cover photo" ), $data['article_title'] );
+				$imageLink = '<div style=""><a href="' . Ayoola_Application::getUrlPrefix() . $url . '" onClick=""><img class="' . __CLASS__ . '_IMG" style="filter: brightness(50%);-webkit-filter: brightness(50%);-moz-filter: brightness(50%);" src="' . Ayoola_Application::getUrlPrefix() . $image . '" alt="' . $alt . "" . '" title="' . $alt . '"/></a></div>';  
 				
 				//	Create this template placeholder value so we can have solve the problem of blank image tags in template markups
 				$data['cover_photo_with_link'] = $imageLink;
-			}
-			$data['button_value'] = $this->getParameter( 'button_value' ) ? : 'View';
+            }
+
+			$data['button_value'] = self::__( $this->getParameter( 'button_value' ) ) ? : '' . self::__( 'Previous' ) . '';
 			
 			
             //	CATEGORIES
@@ -1381,7 +1385,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//	Save
 			$allTemplate .= $this->_xml;
 			$this->_xml = null; //	reset
-			$i++;
+            $i++;
+            $data['post_type'] = self::__( $data['post_type'] );
+            $data['article_type'] = self::__( $data['article_type'] );
+            $data['true_post_type'] = self::__( $data['true_post_type'] );
 			$this->_objectData[] = $data;
 			$this->_objectTemplateValues[] = $data;
 			
@@ -1484,10 +1491,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 	//	if( $this->getParameter( 'allow_dynamic_category_selection' ) )
 		{
-	///		self::v( $_REQUEST['pc_module_url_values'] );      
-	//		self::v( intval( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) );      
-	//		self::v( $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_post_type_offset' ) )] );      
-
 			if( is_numeric( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_post_type_offset' ), $_REQUEST['pc_module_url_values'] ) )
 			{
 				$postType = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_post_type_offset' ) )];
@@ -1529,11 +1532,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 //		var_export( $this->getParameter( 'category_name' ) );
 	//	self::v( $categoryId );
 		$categoryName = null;
-		$table = Application_Category::getInstance();
+        $table = Application_Category::getInstance();
+        $categoryError = sprintf( PageCarton_Widget::__( 'There are no recent posts in the %s category.' ), $category['category_label'] );
 		if( $categoryId && is_numeric( $categoryId ) ) 
 		{
 			$category = $table->selectOne( null, array( 'category_id' => $categoryId ) );
-			$this->_badnews[] = 'There are no recent posts in the "' . $category['category_label'] . '" category.';
+			$this->_badnews[] = $categoryError;
 		}
 		elseif( $categoryId && is_string( $categoryId ) )
 		{
@@ -1541,7 +1545,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$category = $table->selectOne( null, array( 'category_name' => $categoryId ) );
 		
 		//	self::v( $categoryId );
-			$this->_badnews[] = 'There are no recent posts in the "' . ( @$category['category_label'] ? : $categoryId ) . '" category.';
+			$this->_badnews[] = $categoryError;
 			
 			if( ! $category )
 			{
@@ -1567,16 +1571,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
 			}
 		}
-		elseif( $categoryId && is_array( $categoryId ) )
-		{
-			//	
-		//	var_export( $categoryId );
-		//	$categoryName = count( $categoryId ) === 1 ? ( '' . $categoryId[key( $categoryId )] . '' ) : ( '(' . implode( ')|(', $categoryId ) . ')' );
-		//	$categoryId = null;
-		}
-	//	self::v( $categoryId );
-	//	self::v( $categoryName );
-	//	var_export( $this->getParameter() );
 		$path = self::getFolder();
 		$pathToSearch = $path;
 		$output = array();
@@ -1608,28 +1602,16 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					while( $keywords )
 					{
 						$keyword = array_shift( $keywords );
-				//		$command = "find $path -type f -print0 | xargs -0 egrep -l \"*" . $keyword . "*\"";
-				//		$pattern = implode('\|', $contents_list) ;
-				//		@exec( $command, $output );
-				//		$keywordPaths .= implode( ' ', $output ); 
 						$whereClause['*'][] = $keyword;
 					}
 					$path = $keywordPaths ? : $path; 
 				break;
 				case 'phrase':
 				default:      
-				//	$command = "find $path -type f -print0 | xargs -0 egrep -l \"*" . $_REQUEST['q'] . "*\"";
-			//		$pattern = implode('\|', $contents_list) ;
-				//	exec( $command, $output );
-				//	$path = implode( ' ', $output ); 
 					$whereClause['*'] = $_REQUEST['q'];
-
 				break;
 			}
-		//	var_export( $path ); 
-		//	var_export( $command );
 		}
-//		var_export( $this->getParameter( 'username_to_show' ) ); 
 		if( $this->getParameter( 'username_to_show' ) )
 		{
 			$whereClause['username'][] = $this->getParameter( 'username_to_show' );
@@ -1704,18 +1686,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	var_export( $postType );
 		if( $postType )
 		{
-		//	var_export( $postType );
-		//	var_export( $postTypeInfo );
-			//	//	Show this here to avoid looping in Article_ShowAll
-		//	$path = self::getFolder();
 			$whereClause['article_type'][] = $postType;
-//			$command = "find $path -type f -print0 | xargs -0 egrep -l \"'article_type' => '" . $postType . "'\"";
-	//		$pattern = implode('\|', $contents_list) ;
-//			@exec( $command, $output );
-	//		$realPostTypePath = implode( ' ', $output ) ? : 'work_around_to_avoid_it_showing_all_posts';
-		//	var_export( $path );
-		//	$allOriginalPostTypes = array();
-			//	var_export( $postType );
 			if( @$this->_parameter['article_types_plus_original'] ) 
 			{
 				if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $postType ) )
@@ -1735,20 +1706,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$whereClause['access_level'][] = $this->_parameter['access_level'];
 
 		}
-		elseif( @$_REQUEST['type'] )
-		{
-			$typeInfo = Ayoola_Access_AuthLevel::getInstance();
-			if( $typeInfo = $typeInfo->selectOne( null, array( 'auth_name' => $_REQUEST['type'] ) ) )
-			{
-	//			$command = "find $path -type f -print0 | xargs -0 egrep -l \"'access_level' => '" . $typeInfo['auth_level'] . "'\"";
-	//			@exec( $command, $output );
-	//			$path = implode( ' ', $output ) ? : 'work_around_to_avoid_it_showing_all_posts';
-			}
-		//	var_export( $typeInfo );
-		//	var_export( $path );
-		}
-	//	var_export( $path );
-	//	self::v( $path );
 		//		self::v( $categoryName );      
 		if( $this->getParameter( 'post_with_same_true_post_type' ) && @Ayoola_Application::$GLOBAL['post']['true_post_type'] )
 		{
@@ -1776,161 +1733,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$whereClause['category_name'] = array_merge( $whereClause['category_name'], $children );
 				;
 			}
-		//	var_export( $children );
-	//		$whereClause['category_name'][] = $categoryId ? : 'workaround_avoid_error_in_search';
-		//	$this->_dbWhereClause['category_id'] = $categoryId;
-		//	$this->setViewContent(  '' . self::__( '<p>Showing articles from ' ) . '', true  );
-		//	if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 ) 
-			{
-		//		var_export( count( $files ) );
-				//	Removing dependence on Ayoola_Api for showing posts
-			//
-			//	$categoryId = $categoryId ? : 'workaround_avoid_error_in_search';
-			//	$this->_dbData = $output;   
-			}
-		}
-		elseif( ! empty( $_GET['tag'] ) )
-		{
-			switch( $_GET['tag'] )
-			{
-				case 'mine';
-					$pageInfo = array(
-						'description' => 'Manage my posts on ' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ),
-						'title' => trim( 'My Posts ' . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
-					);
-					//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
-					Ayoola_Page::setCurrentPageInfo( $pageInfo );
-					$this->_dbWhereClause['username'] = Ayoola_Application::getUserInfo( 'username' );
-		//			if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
-					{
-				//		var_export( count( $files ) );
-						//	Removing dependence on Ayoola_Api for showing posts
-					//	$path = self::getFolder();
-				//		$command = "find $path -type f -print0 | xargs -0 egrep -l \"'username' => '{$this->_dbWhereClause['username']}'\"";
-				//		$pattern = implode('\|', $contents_list) ;
-				//		@exec( $command, $output );
-				//		$path = implode( ' ', $output ) ? : 'work_around_to_avoid_it_showing_all_posts';
-					//	var_export( '<br />' );
-				//		var_export( $this->_dbData );
-				//		var_export( $command );
-				//		var_export( $output );
-				//		var_export( '<br />' );
-						$this->_dbData = $output;
-					}
-					$this->_badnews[] = 'You have not created any post yet.';
-				break;
-				case 'trend';
-					$pageInfo = array(
-						'description' => 'View trending posts on ' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ),
-						'title' => trim( 'Trending Posts ' . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
-					);
-					//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
-					Ayoola_Page::setCurrentPageInfo( $pageInfo );
-					$values = Application_HashTag_Abstract::getAll( 'articles' );
-					$this->_dbData = array();
-			//		var_export( $values );
-					$this->_badnews[] = 'The trending posts have not been collated yet. Please check back later.';					
-					foreach( $values as $each )
-					{
-						if( ! is_array( $each ) ){ continue; }
-						$this->_dbData[] = key( $each );
-						
-					}
-				//	if( ! empty( $values[$_GET['tag']] ) )
-					{
-			//			$this->_dbData = array_keys( $values[$_GET['tag']] );				
-					}
-					$this->_dbData = array_unique( $this->_dbData );
-					return true;
-				break;
-				default;
-					$pageInfo = array(
-						'description' => 'View trending posts with hash tag #"' . $_GET['tag'] . '" on ' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ),
-						'title' => trim( '#' . $_GET['tag'] . ' - Trending Posts ' . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
-					);
-										
-					//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
-					Ayoola_Page::setCurrentPageInfo( $pageInfo );
-					$values = Application_HashTag_Abstract::getTrending( 'articles' );
-					$this->_dbData = array();
-					if( ! empty( $values[$_GET['tag']] ) )
-					{
-						$this->_dbData = array_keys( $values[$_GET['tag']] );				
-						$this->_badnews[] = 'There are not recent posts with the hash tag #' . $_GET['tag'] ;					
-					}
-					return true; 
-				break;
-			
-			}
-			//	Reset canonical url
-			//	Reset canonical url
-			Ayoola_Page::getCanonicalUri( self::getPostUrl() );
-			Ayoola_Page::getCanonicalUri( self::getPostUrl() . '/tag/' . $_GET['tag'] . '/' );
-		//	var_export( $this->_dbData );
-		}
-		elseif( ! empty( $_GET['by'] ) )
-		{
-			$pageInfo = array(
-				'description' => 'Recent posts by "' . $_GET['by'] . '" on ' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ),
-				'title' => trim( 'Posts by ' . $_GET['by'] . ' - Trending Posts ' . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
-			);
-			//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
-			Ayoola_Page::setCurrentPageInfo( $pageInfo );
-			$this->_dbWhereClause['username'] = $_GET['by'];			
-			$this->_badnews[] = $this->_dbWhereClause['username'] . ' does not have any recent posts. ';
-			$whereClause['username'][] = $this->_dbWhereClause['username'];
-	//		if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
-			{
-		//		var_export( count( $files ) );
-				//	Removing dependence on Ayoola_Api for showing posts
-			//	$path = self::getFolder();
-		//		$command = "find $path -type f -print0 | xargs -0 egrep -l \"'username' => '{$this->_dbWhereClause['username']}'\"";
-				
-	//			$pattern = implode('\|', $contents_list) ;
-		//		@exec( $command, $output );
-		//		$path = implode( ' ', $output ) ? : 'work_around_to_avoid_it_showing_all_posts';
-		//		var_export( '<br />' );
-		//		var_export( $this->_dbData ); 
-		//		var_export( $command );
-		//		var_export( $output );
-		//		var_export( '<br />' );
-		//		$this->_dbData = $output;
-			} 
-			
-			//	Reset canonical url
-			//	Reset canonical url
-			Ayoola_Page::getCanonicalUri( self::getPostUrl() );
-			Ayoola_Page::getCanonicalUri( self::getPostUrl() . '/by/' . $_GET['by'] . '/' );
 		}
 //		else
 		{
-	//	var_export( $path );
-		//	Removing dependence on Ayoola_Api for showing posts
-/* 			$keyFunction = create_function
-			( 
-				'& $value, & $otherData, & $searchTerm', 
-				'
-				//	$otherData = Application_Article_ShowAll::loadPostData( $value );
-					$searchTerm = json_encode( Application_Article_ShowAll::loadPostData( $value ) );
-				//	var_export( $otherData );
-				//	return $otherData;
-				'
-			); 
- */		//	$keyFunction = function( & $value, & $otherData, & $searchTerm )
-		//	{
-		//		$searchTerm = json_encode( Application_Article_ShowAll::loadPostData( $value ) );
-		//	};
 			$classKey = __CLASS__;
 			$keyFunction = array( __CLASS__, 'filterSearch' );
 			try
 			{
-				//	var_export( $path . " 1 \r\n" );
-				//	var_export(  );
-				//	var_export( self::getFolder() . " 2 \r\n" );
-			
-		//		if( $path === self::getFolder() )
 				$table = $this->_postTable;
-	////			var_export( $table );
 				if( empty( $whereClause ) )
 				{
 				//	var_export( $path );
@@ -1947,33 +1757,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					//	var_export( $result  . "<br>");
 						return $result;
 					};
-/* 					$sortFunction = create_function
-					( 
-						'$filePath', 
-						'
-						$values = Application_Article_Abstract::loadPostData( $filePath );
-			//			var_export( $values[\'article_title\'] );
-						if( ! $values )
-						{
-				//			var_export( $values[\'article_title\'] );
-							return false;
-						}
-						return $values[\'article_creation_date\'] ? : $values[\'article_modified_date\'];
-				//		if( filesize( $filePath ) > 300000 )
-						{
-					//		$result = filectime( $filePath );
-							
-			//				var_export( $values[\'article_title\'] );
-						}
-					//	var_export( $result  . "<br>");
-						return $result;
-						'
-					); 
- */				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => 'filectime' ) );
-		//			$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => $sortFunction ) );
-		//			krsort( $this->_dbData );
-				//	self::v( $this->_dbData );
-				//	self::v( $_REQUEST );
 					if( empty( $_REQUEST['pc_load_old_posts']))
 					{
 						$table = $table::getInstance( $table::SCOPE_PRIVATE );
@@ -1990,31 +1773,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );
 						krsort( $this->_dbData ); 
 					}
-	//					var_export( $this->_dbData );        
-				//	self::v( Ayoola_Doc::getFilesRecursive( self::getFolder() ) );
-				//	var_export( count( $files ) );  
-					//	Removing dependence on Ayoola_Api for showing posts
-				//	$path = self::getFolder();   
 				}
 				else
 				{
-/*					$command = "find $path -type f -print0 | xargs -0 egrep -l \"'article_url' => '\"";
-			//		$pattern = implode('\|', $contents_list) ;
-					@exec( $command, $output );
-					$this->_dbData = array_unique( $output ); 
-*/
 					$table = $table::getInstance();
 					$this->_dbData = $table->select( null, $whereClause, array( 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
 					$this->_dbWhereClause = $whereClause;
-			//		var_export( $this->_postTable );
-		//			var_export( $this->_dbData );
-		//			var_export( $whereClause );
 				}
-//self::v( $table->select() );
-			//	self::v( $whereClause );
-					//	Posts created same time causing issues.
-				//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );
-				//		self::v( $this->_dbData );
 			}
 			catch( Exception $e )
 			{ 
@@ -2023,8 +1788,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
   		}
 		//	Removing dependence on Ayoola_Api for showing posts
- 	//	$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder(), array( 'key_function' => 'filectime' ) );
-	//	self::v( $this->_dbData );
 		
  		if( ! is_null( $this->_dbData ) )
 		{ 
@@ -2036,10 +1799,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_dbData = array();
 			return false; 
 		}
- 	//	if( ! $response = Application_Article_Api_Select::send( $this->_dbWhereClause ) ){ return false; }
-	//	var_export( $response );
-	//	if( ! is_array( $response['data'] ) ){ throw new Application_Article_Exception( $response ); }
-	//	$this->_dbData = $response['data'];
     } 
 	
     /**
