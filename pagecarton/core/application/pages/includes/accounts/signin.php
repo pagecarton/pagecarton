@@ -9,34 +9,37 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Monday 31st of December 2018 12:10:10 PM	ayoola@ayoo.la $ 
+* @version $Id: signin.php	Thursday 25th of July 2019 10:42:44 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Access_Login' ) )
 							{
 								
-$_e2590564ad28e0d0e33673544c3cc1d8 = new Ayoola_Access_Login( array (
+$_f89ed25eb8000a8632b9039a7a07a7ec = new Ayoola_Access_Login( array (
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
   'wrapper_name' => 'white-background',
   '' => '',
+  'widget_name' => 'A r r a y  -  w h i t e - b a c k g r o u n d  -',
+  'insert_id' => '1564094564-0-102',
+  'pagewidget_id' => '1564094564-0-102',
 ) );
 
 							}
 							else
 							{
 								
-$_e2590564ad28e0d0e33673544c3cc1d8 = null;
+$_f89ed25eb8000a8632b9039a7a07a7ec = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_857c0c44af7d4df602b5990ce7629e67 = new Ayoola_Page_Editor_Text( array (
+$_f47d74d2e3820ecf6d805a5f37d546a8 = new Ayoola_Page_Editor_Text( array (
   'editable' => 'Forgot Password? <a rel="spotlight;" href="/x/index.php/object/name/Application_User_Help_ForgotUsernameOrPassword">Sign in Help</a>!',
   'url_prefix' => '/x/index.php',
   'advanced_parameter_value' => 
@@ -44,14 +47,17 @@ $_857c0c44af7d4df602b5990ce7629e67 = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   'wrapper_name' => 'well',
+  'insert_id' => '1564094540-0-63',
+  'pagewidget_id' => '1564094540-0-63',
   '' => '',
+  'widget_name' => 'F o r g o t  P a s s w o r d ?  S i g n  i n  H e l p !',
 ) );
 
 							}
 							else
 							{
 								
-$_857c0c44af7d4df602b5990ce7629e67 = null;
+$_f47d74d2e3820ecf6d805a5f37d546a8 = null;
 
 							}
 							

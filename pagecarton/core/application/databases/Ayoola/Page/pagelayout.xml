@@ -5,14 +5,14 @@
       <TABLE_FIELD FIELD_KEY="layout_name"><![CDATA[bootstrapbasic]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="pagelayout_filename"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="pagelayout_id"><![CDATA[1496-0-11]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="layout_label"><![CDATA[Bootstrap Basic]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="layout_options"><![CDATA[[&quot;auto_section&quot;,&quot;auto_menu&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="dummy_title"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="dummy_search"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="dummy_replace"><![CDATA[null]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="article_url"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1550096967]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="layout_label"><![CDATA[Bootstrap Basic]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="layout_options"><![CDATA[[&quot;auto_section&quot;,&quot;auto_menu&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="article_url"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1564094554]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

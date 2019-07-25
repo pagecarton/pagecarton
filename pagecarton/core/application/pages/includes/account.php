@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Wednesday 10th of April 2019 02:16:48 PM	ayoola@ayoo.la $ 
+* @version $Id: account.php	Thursday 25th of July 2019 10:42:42 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -32,7 +32,10 @@ $_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
   array (
     0 => '',
   ),
+  'insert_id' => '1564094539-0-52',
+  'pagewidget_id' => '1564094539-0-52',
   '' => '',
+  'widget_name' => 'A c c o u n t  D a s h b o a r d',
 ) );
 
 							}
@@ -69,7 +72,10 @@ $_692509e191fac1d67c625e321c4395b7 = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   'wrapper_name' => 'dark',
+  'insert_id' => '1564094539-0-53',
+  'pagewidget_id' => '1564094539-0-53',
   '' => '',
+  'widget_name' => 'E m a i l :  { { { e m a i l } } }  U s e r n a m e :  { { { u s e r n a m e } } }',
 ) );
 
 							}
@@ -90,7 +96,10 @@ $_356f72d00671943948b1fee15fdc71ec = new Ayoola_Menu( array (
   array (
     0 => '',
   ),
+  'insert_id' => '1564094539-0-54',
+  'pagewidget_id' => '1564094539-0-54',
   '' => '',
+  'widget_name' => 'M y A c c o u n t  -  W h i t e S i d e b a r M e n u  -  A r r a y  -  1 5 6 4 0 9 4 5 3 9 - 0 - 5 4  -  1 5 6 4 0 9 4 5 3 9 - 0 - 5 4  -',
 ) );
 
 							}
@@ -122,7 +131,10 @@ $_812a3c03c828e0fad72b06706dd89e2c = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   'wrapper_name' => 'dark',
+  'insert_id' => '1564094539-0-55',
+  'pagewidget_id' => '1564094539-0-55',
   '' => '',
+  'widget_name' => 'M y  P o s t s',
 ) );
 
 							}
@@ -165,9 +177,12 @@ $_edca16dd549bfe09f69705d257712133 = new Ayoola_Page_Editor_Text( array (
     2 => '2',
   ),
   'wrapper_name' => 'well',
+  'insert_id' => '1564094539-0-56',
+  'pagewidget_id' => '1564094539-0-56',
   'add_a_new_post' => '1',
   'show_post_by_me' => '1',
   'no_of_post_to_show' => '2',
+  'widget_name' => '{ { { a r t i c l e _ t i t l e } } }  E d i t  P o s t  -  D e l e t e  P o s t',
 ) );
 
 							}
@@ -212,6 +227,9 @@ $_d687a55ad8784085b5b9dd53060bad5c = new Ayoola_Page_Editor_Text( array (
     1 => '99',
   ),
   'wrapper_name' => '',
+  'insert_id' => '1564094539-0-57',
+  'pagewidget_id' => '1564094539-0-57',
+  'widget_name' => 'U p d a t e  S i t e',
 ) );
 
 								}
@@ -237,6 +255,7 @@ $_a7e752f58e7a7c50ee706917a2a53a70 = new Ayoola_Object_Embed( array (
     0 => '1',
   ),
   'publisher_mode' => '1',
+  'widget_name' => 'P a g e C a r t o n _ N e w S i t e W i z a r d',
 ) );
 
 							}

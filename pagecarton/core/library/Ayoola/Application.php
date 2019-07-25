@@ -753,7 +753,7 @@ class Ayoola_Application
 								);
 */			}
 		//	var_export( $data );
-			$storage->store( $data );
+			$storage->store( $data ); 
 		}
 		//	Allows the sub-domains to have an include path too.
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );

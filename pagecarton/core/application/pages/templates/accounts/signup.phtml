@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signup.php	Monday 31st of December 2018 12:10:09 PM	ayoola@ayoo.la $ 
+* @version $Id: signup.php	Thursday 25th of July 2019 10:42:44 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -26,17 +26,17 @@
 							if
 							( 
 
-								$x_1546258209 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+								$x_1564094564 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
 							)
 							{
-							//	var_export( $x_1546258209 );
-							//	echo file_get_contents( $x_1546258209 );
-								foreach( $x_1546258209 as $each )
+							//	var_export( $x_1564094564 );
+							//	echo file_get_contents( $x_1564094564 );
+								foreach( $x_1564094564 as $each )
 								{	
 									include_once $each;
 								}
 							}
-		//					var_export( $x_1546258209 );
+		//					var_export( $x_1564094564 );
 						?>
 						 <?php
 /**
@@ -49,7 +49,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Thursday 19th of April 2018 11:14:54 AM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Thursday 25th of July 2019 10:42:34 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <!DOCTYPE html>
@@ -68,6 +68,7 @@
     <![endif]--><link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <body style="background-color: #ddd;" data-pc-section-name="body">
+<?php include_once( LAYOUT_PATH . DS . 'header' . TPL ) ?>
 
     <!-- Navigation -->
 <nav id="mainnav" class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-pc-menu-id-list=",bs-example-navbar-collapse-1" data-pc-menu-ul-class-bs-example-navbar-collapse-1="nav navbar-nav navbar-right" data-pc-menu-li-active-class-bs-example-navbar-collapse-1="dropdown" data-pc-menu-li-ul-class-bs-example-navbar-collapse-1="dropdown-menu"><div class="container">
@@ -91,23 +92,22 @@
     </nav><!-- Page Content --><div class="container" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
 
         <!-- Heading Row -->
-		<section data-pc-all-sections="1">	
-									<?php
+		<?php
 //oneness Begins Here
 
-echo ( ! empty( $_b7050bae07234eabc14cec6521a7fe97 ) &&  is_object( $_b7050bae07234eabc14cec6521a7fe97 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_b7050bae07234eabc14cec6521a7fe97->view(), '' ) : null );
+echo ( ! empty( $_e3acf1a6d0ebcd48a43915385589e71e ) &&  is_object( $_e3acf1a6d0ebcd48a43915385589e71e ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_e3acf1a6d0ebcd48a43915385589e71e->view(), '' ) : null );
 
 //oneness Ends Here
 ?><?php
 //oneness Begins Here
 
-echo ( ! empty( $_eb66c77c79369c628d572955c4456516 ) &&  is_object( $_eb66c77c79369c628d572955c4456516 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_eb66c77c79369c628d572955c4456516->view(), '' ) : null );
+echo ( ! empty( $_678fb5028e08009663a4b1cf1f7ff896 ) &&  is_object( $_678fb5028e08009663a4b1cf1f7ff896 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_678fb5028e08009663a4b1cf1f7ff896->view(), '' ) : null );
 
 //oneness Ends Here
-?>
+?><section data-pc-all-sections="1">	
 									<div class="">
 										<div class="row">
-											<div class="col-md-12 12u">
+											<div class="pc_page_layout_grid col-md-12 12u">
 												<?php
 //middlebar Begins Here
 
@@ -115,14 +115,14 @@ echo ( ! empty( $_eb66c77c79369c628d572955c4456516 ) &&  is_object( $_eb66c77c79
 ?><?php
 //middlebar Begins Here
 
-echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e92fdfa3d78de1f38ae44f5b ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_3252a060e92fdfa3d78de1f38ae44f5b->view(), 'white-background' ) : null );
+echo ( ! empty( $_1572e1dbac02e1a35b6367fd0877527a ) &&  is_object( $_1572e1dbac02e1a35b6367fd0877527a ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_1572e1dbac02e1a35b6367fd0877527a->view(), 'white-background' ) : null );
 
 //middlebar Ends Here
 ?>
 										   </div>
 										</div> 
 										<div class="row">
-											<div class="col-sm-6 6u 6u(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //twosome1 Begins Here
 
@@ -133,7 +133,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 //twosome1 Ends Here
 ?>
 											</div>
-											<div class="col-sm-6 6u 6u(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //twosome2 Begins Here
 
@@ -146,7 +146,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)"> 
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)"> 
 												<?php
 //threesome1 Begins Here
 
@@ -157,7 +157,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 //threesome1 Ends Here
 ?>
 										   </div>
-											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //threesome2 Begins Here
 
@@ -168,7 +168,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 //threesome2 Ends Here
 ?>
 											</div> 
-											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //threesome3 Begins Here
 
@@ -181,7 +181,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-md-3 3u 6u(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //foursome1 Begins Here
 
@@ -192,7 +192,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 //foursome1 Ends Here
 ?>
 										   </div>
-											<div class="col-md-3 3u 6u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //foursome2 Begins Here
 
@@ -203,7 +203,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 //foursome2 Ends Here
 ?>
 											</div> 
-											<div class="col-md-3 3u 6u(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //foursome3 Begins Here
 
@@ -214,7 +214,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 //foursome3 Ends Here
 ?>
 											</div> 
-											<div class="col-md-3 3u 6u$(medium) 12u$(xsmall)">    
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
 												<?php
 //foursome4 Begins Here
 
@@ -227,7 +227,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //leftbar Begins Here
 
@@ -238,7 +238,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 //leftbar Ends Here
 ?>
 										   </div>
-											<div class="col-md-8 8u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //leftbarright Begins Here
 
@@ -251,7 +251,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-md-8 8u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //rightbarleft Begins Here
 
@@ -262,7 +262,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 //rightbarleft Ends Here
 ?>
 											</div> 
-											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
 //rightbar Begins Here
 
@@ -275,7 +275,7 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 											</div>   
 										</div> 
 									</div> 
-									<?php
+								</section><?php
 //lastoneness Begins Here
 
 //lastoneness Ends Here
@@ -284,73 +284,58 @@ echo ( ! empty( $_3252a060e92fdfa3d78de1f38ae44f5b ) &&  is_object( $_3252a060e9
 
 //lastoneness Ends Here
 ?>
-								</section><div class="row" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
-		
 <?php
-//headline Begins Here
+//pc_body_1 Begins Here
 
-//headline Ends Here
+//pc_body_1 Ends Here
 ?><?php
-//headline Begins Here
+//pc_body_1 Begins Here
 
-//headline Ends Here
+//pc_body_1 Ends Here
 ?>
 
 
 
-</div>
         <!-- /.row -->
 
         <hr>
 <!-- Call to Action Well -->
 <?php
-//actionwell Begins Here
+//pc_body_2 Begins Here
 
-//actionwell Ends Here
+//pc_body_2 Ends Here
 ?><?php
-//actionwell Begins Here
+//pc_body_2 Begins Here
 
-//actionwell Ends Here
+//pc_body_2 Ends Here
 ?>
 
 
-<!-- /.row --><!-- Content Row --><div class="row" data-pc-section-autonamed="3" data-pc-section-name="pc-body-3">
- 		
+<!-- /.row --><!-- Content Row -->
 <?php
-//content Begins Here
+//pc_body_3 Begins Here
 
-//content Ends Here
+//pc_body_3 Ends Here
 ?><?php
-//content Begins Here
+//pc_body_3 Begins Here
 
-//content Ends Here
+//pc_body_3 Ends Here
 ?>
 
 
 
-</div>
         <!-- /.row -->
 
         <!-- Footer -->
         
 <?php
-//footer Begins Here
+//pc_body_4 Begins Here
 
-echo ( ! empty( $_b71609262e8e97539bd6fa137dd38be4 ) &&  is_object( $_b71609262e8e97539bd6fa137dd38be4 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_b71609262e8e97539bd6fa137dd38be4->view(), '' ) : null );
-
-							if( Ayoola_Page::hasPriviledge( array (
-  0 => '98',
-  1 => '99',
-), array( 'strict' => true ) ) && ! empty( $_199d60ed2c8487d949bc81e7e1cdd92e ) && is_object( $_199d60ed2c8487d949bc81e7e1cdd92e ) )
-							{
-								echo $_199d60ed2c8487d949bc81e7e1cdd92e->view();
-							}
-							
-//footer Ends Here
+//pc_body_4 Ends Here
 ?><?php
-//footer Begins Here
+//pc_body_4 Begins Here
 
-//footer Ends Here
+//pc_body_4 Ends Here
 ?>
 
 
@@ -359,6 +344,6 @@ echo ( ! empty( $_b71609262e8e97539bd6fa137dd38be4 ) &&  is_object( $_b71609262e
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/jquery.js"></script><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/bootstrap.min.js"></script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/jquery.js"></script><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/bootstrap.min.js"></script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?><?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?>
 </body>
 </html>

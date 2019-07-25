@@ -9,90 +9,29 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Thursday 19th of April 2018 11:14:54 AM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Thursday 25th of July 2019 10:42:34 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_b7050bae07234eabc14cec6521a7fe97 = new Ayoola_Object_Embed( array (
+$_e3acf1a6d0ebcd48a43915385589e71e = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Breadcrumb',
+  'pagewidget_id' => '',
   'advanced_parameter_value' => 
   array (
     0 => 'margin-bottom:1em;',
   ),
-  'wrapper_name' => '',
   'object_style' => 'margin-bottom:1em;',
+  'widget_name' => 'A p p l i c a t i o n _ B r e a d c r u m b',
 ) );
 
 							}
 							else
 							{
 								
-$_b7050bae07234eabc14cec6521a7fe97 = null;
+$_e3acf1a6d0ebcd48a43915385589e71e = null;
 
 							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_b71609262e8e97539bd6fa137dd38be4 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<p style="text-align: center;">&nbsp;</p>
-
-<p style="text-align: center;"><a href="/sitemap">SITEMAP</a></p>
-
-<p style="text-align: center;">&nbsp;</p>
-',
-  'preserved_content' => '',
-  'url_prefix' => '/x',
-  'markup_template_object_name' => '',
-  'phrase_to_replace' => '',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_b71609262e8e97539bd6fa137dd38be4 = null;
-
-							}
-							
-							if( Ayoola_Page::hasPriviledge( array (
-  0 => '98',
-  1 => '99',
-), array( 'strict' => true ) ) )
-							{
-								if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-								{
-									
-$_199d60ed2c8487d949bc81e7e1cdd92e = new Ayoola_Object_Embed( array (
-  'editable' => 'Ayoola_Page_EditLink',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'object_access_level' => 
-  array (
-    0 => '98',
-    1 => '99',
-  ),
-  'wrapper_name' => '',
-  '' => '',
-) );
-
-								}
-								else
-								{
-									
-$_199d60ed2c8487d949bc81e7e1cdd92e = null;
-
-								}
-							}    
 							

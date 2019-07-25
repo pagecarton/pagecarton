@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: widgets.php	Saturday 16th of February 2019 12:47:39 PM	ayoola@ayoo.la $ 
+* @version $Id: widgets.php	Thursday 25th of July 2019 10:42:38 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -23,6 +23,7 @@ $_c090ed53b443428c31984cd34d305eba = new Ayoola_Object_Embed( array (
     0 => '',
   ),
   '' => '',
+  'widget_name' => 'A y o o l a _ O b j e c t _ P l a y',
 ) );
 
 							}

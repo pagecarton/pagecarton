@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: blog.php	Wednesday 8th of May 2019 09:56:35 PM	ayoola@ayoo.la $ 
+* @version $Id: blog.php	Thursday 25th of July 2019 10:42:35 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -50,12 +50,15 @@ $_08eec67b94fa37d95c9f51eb1d9718be = new Ayoola_Page_Editor_Text( array (
     4 => '1',
     5 => '6',
   ),
+  'insert_id' => '1564094536-0-22',
+  'pagewidget_id' => '1564094536-0-22',
   'pagination[0]' => '1',
   'cover_photo_width' => '1800',
   'cover_photo_height' => '1500',
   'skip_ariticles_without_cover_photo[0]' => '1',
   'add_a_new_post[0]' => '1',
   'no_of_post_to_show[0]' => '6',
+  'widget_name' => '{ { { a r t i c l e _ t i t l e } } }  S h a r e  { { { p o s t _ t y p e } } }  b y  { { { d i s p l a y _ n a m e } } }  i n  { { { c a t e g o r y _ t e x t } } }  { { { a r t i c l e _ d e s c r i p t i o n } } }  { { { a r t i c l e _ c o n t e n t } } }  V i e w  { { { v i e w s _ c o u n t _ t o t a l } } }  { { { c o m m e n t s _ c o u n t _ t o t a l } } }  { { { a r t i c l e _ c r e a t i o n _ d a t e _ f i l t e r e d } } }',
 ) );
 
 							}

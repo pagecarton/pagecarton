@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Thursday 23rd of May 2019 01:45:19 AM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Thursday 25th of July 2019 10:42:39 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -44,10 +44,8 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
     1 => 'embed_widgets',
     2 => 'parameters',
   ),
-  'pagewidget_id' => '',
-  'widget_name' => '{{{article_title}}}
-
-{{{article_description}}}',
+  'pagewidget_id' => '1564094537-0-40',
+  'widget_name' => '{ { { a r t i c l e _ t i t l e } } }  { { { a r t i c l e _ d e s c r i p t i o n } } }',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_View',
@@ -56,8 +54,8 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => '<p class=\'pc_give_space_top_bottom\'></p>',
   ),
+  'insert_id' => '1564094537-0-40',
   'content_to_clear[0]' => '<p class=\'pc_give_space_top_bottom\'></p>',
-  'insert_id' => '1558575919-0-1',
 ) );
 
 							}
@@ -73,8 +71,8 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = null;
 								
 $_ccfcd65b00854efe614caba97537085f = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Article_View',
-  'pagewidget_id' => '',
-  'widget_name' => 'Application_Article_View',
+  'pagewidget_id' => '1564094538-0-41',
+  'widget_name' => 'A p p l i c a t i o n _ A r t i c l e _ V i e w',
   'advanced_parameter_value' => 
   array (
     0 => '1',
@@ -83,12 +81,12 @@ $_ccfcd65b00854efe614caba97537085f = new Ayoola_Object_Embed( array (
     3 => '1',
     4 => '1',
   ),
+  'insert_id' => '1564094538-0-41',
   'get_views_count' => '1',
   'get_audio_play_count' => '1',
   'get_download_count' => '1',
   'thumbnail' => '1',
   'hide_default_post_view' => '1',
-  'insert_id' => '1558575919-0-2',
 ) );
 
 							}
@@ -135,15 +133,8 @@ $_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
     <br>
 </section>',
   'url_prefix' => '',
-  'pagewidget_id' => '',
-  'widget_name' => 'Manage {{{post_type}}}
-    
-    
-        
-            Edit {{{post_type}}} Information
-        
-        
-            Delete {{{post_type}}}',
+  'pagewidget_id' => '1564094538-0-42',
+  'widget_name' => 'M a n a g e  { { { p o s t _ t y p e } } }  E d i t  { { { p o s t _ t y p e } } }  I n f o r m a t i o n  D e l e t e  { { { p o s t _ t y p e } } }',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_View',
@@ -159,8 +150,8 @@ $_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
     1 => '99',
   ),
   'wrapper_name' => 'well',
+  'insert_id' => '1564094538-0-42',
   'object_class' => 'pc_give_space_top_bottom',
-  'insert_id' => '1558575919-0-3',
 ) );
 
 								}
@@ -199,12 +190,8 @@ $_16296832673663f047e30a609ffd4836 = new Ayoola_Page_Editor_Text( array (
     1 => 'wrappers',
     2 => 'parameters',
   ),
-  'pagewidget_id' => '',
-  'widget_name' => '&nbsp;
-
-Other {{{post_type}}} similar to {{{article_title}}}
-
-&nbsp;',
+  'pagewidget_id' => '1564094538-0-43',
+  'widget_name' => '& n b s p ;  O t h e r  { { { p o s t _ t y p e } } }  s i m i l a r  t o  { { { a r t i c l e _ t i t l e } } }  & n b s p ;',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_View',
@@ -214,8 +201,8 @@ Other {{{post_type}}} similar to {{{article_title}}}
     0 => '',
   ),
   'wrapper_name' => 'dark',
+  'insert_id' => '1564094538-0-43',
   '' => '',
-  'insert_id' => '1558575919-0-4',
 ) );
 
 							}
@@ -239,17 +226,17 @@ $_72d6251312d1901e8b57f2e6638cdc45 = new Application_Article_ShowAll( array (
     0 => 'wrappers',
     1 => 'parameters',
   ),
-  'pagewidget_id' => '',
-  'widget_name' => '6 -  -  - ProductsforSale - Array -  -  - Array - well - 1 - container',
+  'pagewidget_id' => '1564094538-0-44',
+  'widget_name' => '6  -  -  -  P r o d u c t s f o r S a l e  -  A r r a y  -  1 5 6 4 0 9 4 5 3 8 - 0 - 4 4  -  -  A r r a y  -  w e l l  -  1 5 6 4 0 9 4 5 3 8 - 0 - 4 4  -  1  -  c o n t a i n e r',
   'advanced_parameter_value' => 
   array (
     0 => '1',
     1 => 'container',
   ),
   'wrapper_name' => 'well',
+  'insert_id' => '1564094538-0-44',
   'post_with_same_true_post_type' => '1',
   'wrapper_inner_class' => 'container',
-  'insert_id' => '1558575919-0-5',
 ) );
 
 							}

@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: 404.php	Monday 31st of December 2018 12:10:10 PM	ayoola@ayoo.la $ 
+* @version $Id: 404.php	Thursday 25th of July 2019 10:42:45 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_e3c85fbe1daeb8a0091aff70f2532d3e = new Ayoola_Page_Editor_Text( array (
+$_839ecb3efc70cb6eb1bbb7b7f8b29574 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h1>Error 404 - Page Not Found</h1>
 ',
   'preserved_content' => '<h1>Error 404 - Page Not Found</h1>
@@ -29,21 +29,24 @@ $_e3c85fbe1daeb8a0091aff70f2532d3e = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   'wrapper_name' => 'well',
+  'insert_id' => '1564094540-0-64',
+  'pagewidget_id' => '1564094540-0-64',
   '' => '',
+  'widget_name' => 'E r r o r  4 0 4  -  P a g e  N o t  F o u n d',
 ) );
 
 							}
 							else
 							{
 								
-$_e3c85fbe1daeb8a0091aff70f2532d3e = null;
+$_839ecb3efc70cb6eb1bbb7b7f8b29574 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_df10f2f0702f2f3a30281aa9f423898e = new Ayoola_Page_Editor_Text( array (
+$_c7269e6f48bd5c84816662981df32805 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<p>You are seeing this page because you have requested a page that is not available. Please check the URL and try again.</p>
 ',
   'preserved_content' => '<p>You are seeing this page because you have requested a page that is not available. Please check the URL and try again.</p>
@@ -56,35 +59,41 @@ $_df10f2f0702f2f3a30281aa9f423898e = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   'wrapper_name' => 'white-background',
+  'insert_id' => '1564094540-0-65',
+  'pagewidget_id' => '1564094540-0-65',
   '' => '',
+  'widget_name' => 'Y o u  a r e  s e e i n g  t h i s  p a g e  b e c a u s e  y o u  h a v e  r e q u e s t e d  a  p a g e  t h a t  i s  n o t  a v a i l a b l e .  P l e a s e  c h e c k  t h e  U R L  a n d  t r y  a g a i n .',
 ) );
 
 							}
 							else
 							{
 								
-$_df10f2f0702f2f3a30281aa9f423898e = null;
+$_c7269e6f48bd5c84816662981df32805 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_e47786f32dc36a9b8e711d8c0f6fb2ab = new Ayoola_Object_Embed( array (
+$_6f2ca00dd66ccaf3d4af877d389f74c4 = new Ayoola_Object_Embed( array (
   'editable' => 'Ayoola_Page_AutoCreator',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
   'wrapper_name' => '',
+  'insert_id' => '1564094540-0-66',
+  'pagewidget_id' => '1564094540-0-66',
   '' => '',
+  'widget_name' => 'A y o o l a _ P a g e _ A u t o C r e a t o r',
 ) );
 
 							}
 							else
 							{
 								
-$_e47786f32dc36a9b8e711d8c0f6fb2ab = null;
+$_6f2ca00dd66ccaf3d4af877d389f74c4 = null;
 
 							}
 							

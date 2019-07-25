@@ -14,6 +14,7 @@
     <![endif]--><link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <body style="background-color: #ddd;" data-pc-section-name="body">
+<?php include_once( LAYOUT_PATH . DS . 'header' . TPL ) ?>
 
     <!-- Navigation -->
 <nav id="mainnav" class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-pc-menu-id-list=",bs-example-navbar-collapse-1" data-pc-menu-ul-class-bs-example-navbar-collapse-1="nav navbar-nav navbar-right" data-pc-menu-li-active-class-bs-example-navbar-collapse-1="dropdown" data-pc-menu-li-ul-class-bs-example-navbar-collapse-1="dropdown-menu"><div class="container">
@@ -37,135 +38,87 @@
     </nav><!-- Page Content --><div class="container" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
 
         <!-- Heading Row -->
-		<section data-pc-all-sections="1">	
-									@@@oneness@@@
+		@@@oneness@@@<section data-pc-all-sections="1">	
 									<div class="">
 										<div class="row">
-											<div class="col-md-12 12u">
+											<div class="pc_page_layout_grid col-md-12 12u">
 												@@@middlebar@@@
 										   </div>
 										</div> 
 										<div class="row">
-											<div class="col-sm-6 6u 6u(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@twosome1@@@
 											</div>
-											<div class="col-sm-6 6u 6u(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@twosome2@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)"> 
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)"> 
 												@@@threesome1@@@
 										   </div>
-											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@threesome2@@@
 											</div> 
-											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@threesome3@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-md-3 3u 6u(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@foursome1@@@
 										   </div>
-											<div class="col-md-3 3u 6u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@foursome2@@@
 											</div> 
-											<div class="col-md-3 3u 6u(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@foursome3@@@
 											</div> 
-											<div class="col-md-3 3u 6u$(medium) 12u$(xsmall)">    
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
 												@@@foursome4@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@leftbar@@@
 										   </div>
-											<div class="col-md-8 8u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@leftbarright@@@
 											</div> 
 										</div> 
 										<div class="row">
-											<div class="col-md-8 8u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@rightbarleft@@@
 											</div> 
-											<div class="col-md-4 4u 12u$(medium) 12u$(xsmall)">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												@@@rightbar@@@
 											</div>   
 										</div> 
 									</div> 
-									@@@lastoneness@@@
-								</section><div class="row" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
-		
-@@@headline@@@
+								</section>@@@lastoneness@@@
+@@@pc_body_1@@@
 
-{@@@headline
-<section id="headline"><div class="col-md-8">
-                <img class="img-responsive img-rounded" src="http://placehold.it/900x350" alt="">
-</div>
-            <!-- /.col-md-8 -->
-            <div class="col-md-4">
-                <h1>Business Name or Tagline</h1>
-                <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
-                <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
-            </div>
-            <!-- /.col-md-4 -->
- 		</section>
-headline@@@}
 
-</div>
+
         <!-- /.row -->
 
         <hr>
 <!-- Call to Action Well -->
-@@@actionwell@@@
+@@@pc_body_2@@@
 
-{@@@actionwell
-<section id="actionwell"><div class="row">
-            <div class="col-lg-12">
-                <div class="well text-center">
-                    This is a well that is a great spot for a business tagline or phone number for easy access!
-                </div>
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
-        </section>
-actionwell@@@}
-<!-- /.row --><!-- Content Row --><div class="row" data-pc-section-autonamed="3" data-pc-section-name="pc-body-3">
- 		
-@@@content@@@
 
-{@@@content
-<section id="content"><div class="col-md-4">
-                <h2>Heading 1</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                <a class="btn btn-default" href="#">More Info</a>
-            </div>
-            <!-- /.col-md-4 -->
-            <div class="col-md-4">
-                <h2>Heading 2</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                <a class="btn btn-default" href="#">More Info</a>
-            </div>
-            <!-- /.col-md-4 -->
-            <div class="col-md-4">
-                <h2>Heading 3</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-                <a class="btn btn-default" href="#">More Info</a>
-            </div>
-            <!-- /.col-md-4 -->
-        </section>
-content@@@}
+<!-- /.row --><!-- Content Row -->
+@@@pc_body_3@@@
 
-</div>
+
+
         <!-- /.row -->
 
         <!-- Footer -->
         
-@@@footer@@@
+@@@pc_body_4@@@
 
-{@@@footer
+{@@@pc_body_4
 <footer id="footer"><style type="text/css">.pc-social 
 {
 	text-align: center;
@@ -223,16 +176,16 @@ content@@@}
 
             <div class="row">
                 <div style="text-align:center; font-size:smaller;" class="col-lg-12">
-                    <p>Copyright &Acirc;&copy; Your Website 2016. | Built with <a href="http://www.pagecarton.org/" target="parent"> PageCarton CMS</a></p>
+                    <p>Copyright &copy; Your Website 2016. | Built with <a href="http://www.pagecarton.org/" target="parent"> PageCarton CMS</a></p>
                 </div>
             </div>
         </footer>
-footer@@@}
+pc_body_4@@@}
 
 </div>
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/jquery.js"></script><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/bootstrap.min.js"></script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
+    <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/jquery.js"></script><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/bootstrap.min.js"></script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?><?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?>
 </body>
 </html>
