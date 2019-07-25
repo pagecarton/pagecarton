@@ -768,7 +768,7 @@ class Ayoola_Application
         {
             if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) )
             {
-                if( PageCarton_Widget::fetchLink( 'https://' . $domainName . Ayoola_Application::getUrlPrefix() . '/pc_check.txt?pc_clean_url_check=1', array( 'check_ssl' => true ) ) === 'pc' )
+                if( PageCarton_Widget::fetchLink( 'https://' . $domainName . Ayoola_Application::getUrlPrefix() . '/pc_check.txt?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) === 'pc' )
                 {
                     header( 'Location: https://' . $domainName . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
                     exit();
