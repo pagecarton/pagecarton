@@ -766,9 +766,9 @@ class Ayoola_Application
         //  so it wont be auto issue ssl for domains we dont need for autossl settings
         if( isset( $data['domain_settings']['domain_options'] ) && in_array( 'ssl', $data['domain_settings']['domain_options'] ) ) 
         {
-            if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) )
+            if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) )
             {
-                if( PageCarton_Widget::fetchLink( 'https://' . $domainName . Ayoola_Application::getUrlPrefix() . '/pc_check.txt?pc_clean_url_check=1' ) === 'pc' )
+                if( PageCarton_Widget::fetchLink( 'https://' . $domainName . Ayoola_Application::getUrlPrefix() . '/pc_check.txt?pc_clean_url_check=1', array( 'check_ssl' => true ) ) === 'pc' )
                 {
                     header( 'Location: https://' . $domainName . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
                     exit();

@@ -621,9 +621,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//		curl_setopt( $request, CURLOPT_HEADER, true );
 			curl_setopt( $request, CURLOPT_URL, $link );
 
-			//	dont check ssl
-			curl_setopt($request, CURLOPT_SSL_VERIFYHOST, 0);
-			curl_setopt($request, CURLOPT_SSL_VERIFYPEER, 0);
+            //	dont check ssl
+            if( empty( $settings['verify_ssl'] ) )
+            {
+                curl_setopt( $request, CURLOPT_SSL_VERIFYHOST, 0 );
+                curl_setopt( $request, CURLOPT_SSL_VERIFYPEER, 0 );
+            }
 
 			curl_setopt( $request, CURLOPT_USERAGENT, @$settings['user_agent'] ? : self::$userAgent );
 			curl_setopt( $request, CURLOPT_AUTOREFERER, true );
