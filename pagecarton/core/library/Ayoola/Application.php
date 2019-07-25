@@ -414,13 +414,6 @@ class Ayoola_Application
 			}
 		//	PageCarton_Widget::v( $data['domain_settings'] );
 		//	exit();
-			if (isset($subDomain) && isset($data['domain_settings']['domain_options'])) {
-				if( !$subDomain && @in_array( 'ssl', $data['domain_settings']['domain_options'] ) && $protocol != 'https' && empty( $domainSettings['no_redirect'] ) )
-				{
-					header( 'Location: https://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
-					exit();
-				}
-			}
 
 			if( ! @$subDomain && @strlen( $data['domain_settings']['enforced_destination'] ) > 3 && empty( $domainSettings['no_redirect'] ) )
 			{
@@ -766,8 +759,23 @@ class Ayoola_Application
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] . '/modules' );
 	//	set_include_path( $data['domain_settings'][APPLICATION_PATH] . PS . $data['domain_settings'][APPLICATION_PATH] . '/modules' . PS . get_include_path() );
-		self::$_domainSettings = $data['domain_settings'];
-		//	var_export( $data );
+        self::$_domainSettings = $data['domain_settings'];
+        
+
+        //  redirect ssl last 
+        //  so it wont be auto issue ssl for domains we dont need for autossl settings
+        if( isset( $data['domain_settings']['domain_options'] ) && in_array( 'ssl', $data['domain_settings']['domain_options'] ) ) 
+        {
+            if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) )
+            {
+                if( PageCarton_Widget::fetchLink( 'https://' . $domainName . Ayoola_Application::getUrlPrefix() . '/pc_check.txt?pc_clean_url_check=1' ) === 'pc' )
+                {
+                    header( 'Location: https://' . $domainName . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
+                    exit();
+                }
+            }
+        }
+    //	var_export( $data );
 		return true;
     }
 

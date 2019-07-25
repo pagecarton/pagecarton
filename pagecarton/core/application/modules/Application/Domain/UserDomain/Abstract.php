@@ -120,9 +120,8 @@ class Application_Domain_UserDomain_Abstract extends PageCarton_Widget
                 }
             '
         );
-//		$fieldset->addElement( array( 'name' => 'profile_url', 'style' => '', 'label' => 'Profile Handle', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'e.g. MyProfileUrl', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
 		$fieldset->addElement( array( 'name' => 'profile_url', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'label' => 'Linked Profile', 'type' => 'Select', 'value' => @$values['profile_url'] ? : Application_Profile_Abstract::getMyDefaultProfile() ), array( '' => 'Select Profile' ) + $profiles );
-        $fieldset->addRequirement( 'profile_url', array( 'ArrayKeys' => $profiles, 'DuplicateRecord' => array( 'Application_Domain_UserDomain', 'profile_url' ) ) ); 
+        $fieldset->addRequirement( 'profile_url', array( 'ArrayKeys' => $profiles ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

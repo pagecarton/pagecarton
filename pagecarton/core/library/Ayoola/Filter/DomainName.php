@@ -10,7 +10,7 @@ class Ayoola_Filter_DomainName implements Ayoola_Filter_Interface
 		
 		//	debug
 	//	$domainName = 'pagecarton.com';
-		$domainName = str_ireplace( 'www.', '', strtolower( $domainName ) ); 
+		$domainName = str_ireplace( array( 'www.', 'www.pc-domain-manager.' ), '', strtolower( $domainName ) ); 
 		$domainName = explode( ':', $domainName );
 		$domainName = array_shift( $domainName );
 		
