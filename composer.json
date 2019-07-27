@@ -8,11 +8,11 @@
     "config": {
         "optimize-autoloader": true,
         "platform": {
-            "php": "5.3.10"
+            "php": "7.1.0"
         },
         "vendor-dir": "libraries/vendor"
     },
     "require": {
-        "php": ">=5.3.10"
+        "php": ">=5.4.0"
     }
 }

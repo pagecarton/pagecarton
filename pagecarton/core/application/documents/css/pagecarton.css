@@ -1378,14 +1378,10 @@ forcing form up the page will not cause distortion
 }
 
 #Ayoola_Access_Login_form_id_container {
-  min-height: 350px;
-  text-align: center;
-  display: table;
 
+    
 }
 
 #Ayoola_Access_Login_form_id_container form {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
+  padding: 3em;
 }

@@ -9,22 +9,20 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: profile.php	Thursday 25th of July 2019 10:42:36 PM	ayoola@ayoo.la $ 
+* @version $Id: profile.php	Friday 26th of July 2019 09:04:21 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_13623cb60ab2803bb12e3f417fe6d606 = new Ayoola_Object_Embed( array (
+$_5624cf8c5adba1f8d7bdb295e1423e72 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Profile_View',
+  'pagewidget_id' => '1564094536-0-28',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  'wrapper_name' => '',
-  'insert_id' => '1564094536-0-28',
-  'pagewidget_id' => '1564094536-0-28',
   '' => '',
   'widget_name' => 'A p p l i c a t i o n _ P r o f i l e _ V i e w',
 ) );
@@ -33,7 +31,7 @@ $_13623cb60ab2803bb12e3f417fe6d606 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_13623cb60ab2803bb12e3f417fe6d606 = null;
+$_5624cf8c5adba1f8d7bdb295e1423e72 = null;
 
 							}
 							
@@ -45,7 +43,7 @@ $_13623cb60ab2803bb12e3f417fe6d606 = null;
 								if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 								{
 									
-$_10d31fc51e7087ae53d06feb63f46eda = new Ayoola_Page_Editor_Text( array (
+$_4271e658c6bccc97ba5b3cf6db86f81a = new Ayoola_Page_Editor_Text( array (
   'editable' => '
 
 <p style="text-align: center;">
@@ -53,17 +51,18 @@ $_10d31fc51e7087ae53d06feb63f46eda = new Ayoola_Page_Editor_Text( array (
 <a class="btn btn-danger" href="/widgets/Application_Profile_Delete/?profile_url={{{profile_url}}}">Delete Profile</a>
 
 </p>',
-  'preserved_content' => '<p style="text-align: center;">
+  'preserved_content' => '
+<p style="text-align: center;">
 <a class="btn btn-default" href="/widgets/Application_Profile_Editor/?profile_url={{{profile_url}}}">Edit Profile</a>
 <a class="btn btn-danger" href="/widgets/Application_Profile_Delete/?profile_url={{{profile_url}}}">Delete Profile</a>
 
 </p>',
   'url_prefix' => '',
+  'pagewidget_id' => '1564094536-0-29',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Profile_View',
   ),
-  'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -74,8 +73,6 @@ $_10d31fc51e7087ae53d06feb63f46eda = new Ayoola_Page_Editor_Text( array (
     1 => '99',
   ),
   'wrapper_name' => 'well',
-  'insert_id' => '1564094536-0-29',
-  'pagewidget_id' => '1564094536-0-29',
   '' => '',
   'widget_name' => 'E d i t  P r o f i l e  D e l e t e  P r o f i l e',
 ) );
@@ -84,7 +81,7 @@ $_10d31fc51e7087ae53d06feb63f46eda = new Ayoola_Page_Editor_Text( array (
 								else
 								{
 									
-$_10d31fc51e7087ae53d06feb63f46eda = null;
+$_4271e658c6bccc97ba5b3cf6db86f81a = null;
 
 								}
 							}    
@@ -92,27 +89,25 @@ $_10d31fc51e7087ae53d06feb63f46eda = null;
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_72e4c28e12f3d800d05d70406294635a = new Ayoola_Page_Editor_Text( array (
+$_51ad269b2804228e073d6ded3588f388 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<br>',
   'preserved_content' => '<br>',
-  'url_prefix' => '/x',
-  'phrase_to_replace' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '1564094536-0-30',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  'wrapper_name' => '',
-  'insert_id' => '1564094536-0-30',
-  'pagewidget_id' => '1564094536-0-30',
   '' => '',
-  'widget_name' => 'A y o o l a _ P a g e _ E d i t o r _ T e x t  -  a y _ _ m i d d l e b a r 0',
+  'widget_name' => 'A y o o l a _ P a g e _ E d i t o r _ T e x t  -  a y _ _ m i d d l e b a r 2',
+  'insert_id' => '1564131861-0-14',
 ) );
 
 							}
 							else
 							{
 								
-$_72e4c28e12f3d800d05d70406294635a = null;
+$_51ad269b2804228e073d6ded3588f388 = null;
 
 							}
 							
@@ -120,23 +115,21 @@ $_72e4c28e12f3d800d05d70406294635a = null;
 							{
 								
 $_166a149c8ae9cfb5621fc376dd6613a1 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/x/tools/classplayer/get/name/Application_Message_ShowAll/?to={{{profile_url}}}\' );" href="javascript:"> <i class="fa fa-envelope" style="margin-right: 1em;"></i> Message</a>
+  'editable' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/name/Application_Message_ShowAll/?to={{{profile_url}}}\' );" href="javascript:"> <i class="fa fa-envelope" style="margin-right: 1em;"></i> Message</a>
 ',
-  'preserved_content' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/x/tools/classplayer/get/name/Application_Message_ShowAll/?to={{{profile_url}}}\' );" href="javascript:"> <i class="fa fa-envelope" style="margin-right: 1em;"></i> Message</a>
+  'preserved_content' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/name/Application_Message_ShowAll/?to={{{profile_url}}}\' );" href="javascript:"> <i class="fa fa-envelope" style="margin-right: 1em;"></i> Message</a>
 ',
-  'url_prefix' => '/x',
+  'url_prefix' => '',
+  'pagewidget_id' => '1564094536-0-31',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Global',
   ),
-  'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
   'wrapper_name' => 'white-well',
-  'insert_id' => '1564094536-0-31',
-  'pagewidget_id' => '1564094536-0-31',
   '' => '',
   'widget_name' => 'M e s s a g e',
 ) );
@@ -157,19 +150,17 @@ $_d41c138d6ef884c18d72b5e988f6e6c2 = new Ayoola_Page_Editor_Text( array (
 ',
   'preserved_content' => '<a style="margin-right:1em;" onclick="ayoola.spotLight.showLinkInIFrame( \'{{{share_url}}}\' );" href="javascript:"> <i class="fa fa-share-alt" style="margin-right: 1em;"></i> Share ({{{share_count}}})</a>
 ',
-  'url_prefix' => '/x',
+  'url_prefix' => '',
+  'pagewidget_id' => '1564094537-0-32',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Share',
   ),
-  'phrase_to_replace' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
   'wrapper_name' => 'well',
-  'insert_id' => '1564094537-0-32',
-  'pagewidget_id' => '1564094537-0-32',
   '' => '',
   'widget_name' => 'S h a r e  ( { { { s h a r e _ c o u n t } } } )',
 ) );
@@ -188,15 +179,12 @@ $_d41c138d6ef884c18d72b5e988f6e6c2 = null;
 $_5b583620a69a1074ce34c80deaf8c812 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<br>',
   'preserved_content' => '<br>',
-  'url_prefix' => '/x',
-  'phrase_to_replace' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '1564094537-0-33',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  'wrapper_name' => '',
-  'insert_id' => '1564094537-0-33',
-  'pagewidget_id' => '1564094537-0-33',
   '' => '',
   'widget_name' => 'A y o o l a _ P a g e _ E d i t o r _ T e x t  -  a y _ _ l a s t o n e n e s s 0',
 ) );
@@ -217,21 +205,21 @@ $_007a086925f4447b298f90a895538b81 = new Application_Article_ShowAll( array (
   'category_name' => '',
   'article_types' => '',
   'template_name' => '',
+  'pagewidget_id' => '1564094537-0-34',
   'advanced_parameter_value' => 
   array (
     0 => '1',
     1 => '1',
     2 => '1',
     3 => '<span class="pc_posts_option_items" style="text-decoration:line-through;" ></span>',
+    4 => 'container',
   ),
-  'wrapper_name' => '',
-  'insert_id' => '1564094537-0-34',
-  'pagewidget_id' => '1564094537-0-34',
   'show_profile_posts' => '1',
   'add_a_new_post' => '1',
   'pagination' => '1',
   'content_to_clear' => '<span class="pc_posts_option_items" style="text-decoration:line-through;" ></span>',
-  'widget_name' => '5  -  -  -  -  A r r a y  -  -  1 5 6 4 0 9 4 5 3 7 - 0 - 3 4  -  1 5 6 4 0 9 4 5 3 7 - 0 - 3 4  -  1  -  1  -  1  -',
+  'object_class' => 'container',
+  'widget_name' => '5  -  -  -  -  1 5 6 4 0 9 4 5 3 7 - 0 - 3 4  -  A r r a y  -  1  -  1  -  1  -  -  c o n t a i n e r',
 ) );
 
 							}

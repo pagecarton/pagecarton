@@ -154,9 +154,14 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
                 foreach( $dirs as $dir )
                 {
                     $themeName = basename( $dir );
-                    $table::getInstance()->insert( array( 'layout_name' => $themeName, 'layout_label' => str_replace( 'pc_layout_', '', $themeName ), 'layout_options' => array( 'auto_section', 'auto_menu' ) ) );
+                    if( ! $table::getInstance()->select( null, array( 'layout_name' =>$themeName  ) ) )
+                    {
+                        $table::getInstance()->insert( array( 'layout_name' => $themeName, 'layout_label' => str_replace( 'pc_layout_', '', $themeName ), 'layout_options' => array( 'auto_section', 'auto_menu' ) ) );
+                    }
                 }
-                $data = $table::getInstance()->select();
+                $table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );
+
+                $data = $table->select( null, null, array( 'workwwd-s---acrrwwwosssuwdnd-1-333' => true ) );
             }
         //    var_export( $dirs );
         }  

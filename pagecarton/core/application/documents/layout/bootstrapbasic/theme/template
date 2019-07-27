@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Thursday 25th of July 2019 10:42:34 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Friday 26th of July 2019 08:58:26 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <!DOCTYPE html>
@@ -49,16 +49,24 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
-    </nav><!-- Page Content --><div class="container" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
+    </nav><!-- Page Content --><div class="xcontainer" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
 
         <!-- Heading Row -->
-		<?php
+        
+<?php
+//pc_body_1 Begins Here
+
+echo ( ! empty( $_37de1278686bad05803e50ef40b938dc ) &&  is_object( $_37de1278686bad05803e50ef40b938dc ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_37de1278686bad05803e50ef40b938dc->view(), '' ) : null );
+
+//pc_body_1 Ends Here
+?>@@@pc_body_1@@@
+
+
+<?php
 //oneness Begins Here
 
-echo ( ! empty( $_e3acf1a6d0ebcd48a43915385589e71e ) &&  is_object( $_e3acf1a6d0ebcd48a43915385589e71e ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_e3acf1a6d0ebcd48a43915385589e71e->view(), '' ) : null );
-
 //oneness Ends Here
-?>@@@oneness@@@<section data-pc-all-sections="1">	
+?>@@@oneness@@@<section data-pc-all-sections="1" class="container">	
 									<div class="">
 										<div class="row">
 											<div class="pc_page_layout_grid col-md-12 12u">
@@ -176,14 +184,6 @@ echo ( ! empty( $_e3acf1a6d0ebcd48a43915385589e71e ) &&  is_object( $_e3acf1a6d0
 
 //lastoneness Ends Here
 ?>@@@lastoneness@@@
-<?php
-//pc_body_1 Begins Here
-
-//pc_body_1 Ends Here
-?>@@@pc_body_1@@@
-
-
-
         <!-- /.row -->
 
         <hr>
@@ -210,6 +210,8 @@ echo ( ! empty( $_e3acf1a6d0ebcd48a43915385589e71e ) &&  is_object( $_e3acf1a6d0
         
 <?php
 //pc_body_4 Begins Here
+
+echo ( ! empty( $_4a40c5f22289378580a8293281ac9ac2 ) &&  is_object( $_4a40c5f22289378580a8293281ac9ac2 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_4a40c5f22289378580a8293281ac9ac2->view(), '' ) : null );
 
 //pc_body_4 Ends Here
 ?>@@@pc_body_4@@@

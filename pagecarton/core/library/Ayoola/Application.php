@@ -753,7 +753,7 @@ class Ayoola_Application
 								);
 */			}
 		//	var_export( $data );
-			$storage->store( $data ); 
+			$storage->store( $data );  
 		}
 		//	Allows the sub-domains to have an include path too.
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
@@ -1358,7 +1358,7 @@ class Ayoola_Application
 	//	var_export( is_file( $PAGE_TEMPLATE_FILE ) );
 	//	exit();
 	    $noRestriction = false;
-		$previewTheme = function() use ( $pagePaths, $uri, &$PAGE_INCLUDE_FILE, &$PAGE_TEMPLATE_FILE )
+		$previewTheme = function( array $options = null ) use ( $pagePaths, $uri, &$PAGE_INCLUDE_FILE, &$PAGE_TEMPLATE_FILE )
 		{
 
 			$pageThemeFileUrl = $uri;
@@ -1391,9 +1391,14 @@ class Ayoola_Application
 			//	var_export( $pagePaths['include'] );
 
 				//	save first
-				//	once page is created, let's have blank content
-				$page = new Ayoola_Page_Editor_Sanitize();
-				$page->refresh( $uri, $themeName );
+                //	once page is created, let's have blank content
+                //  was causing "Editing /" in title
+                //  and blank pages
+                if( ! empty( $options['auto_init_theme_page'] ) )
+                {
+			    	$page = new Ayoola_Page_Editor_Sanitize();
+			    	$page->refresh( $uri, $themeName );
+                }
 
 			//	if( )
 				//	not found
@@ -1405,7 +1410,7 @@ class Ayoola_Application
 		{
 			if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
 			{
-				if( $previewTheme() )
+				if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
 				{
 					break;
 				}

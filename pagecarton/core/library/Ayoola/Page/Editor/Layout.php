@@ -247,54 +247,59 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 		//	Allows the htmlHeader to get the correct layout name to use for <base>
 		Ayoola_Page::$layoutName = @$page['layout_name'] ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ); 
-			
+        if( stripos( $page['url'], '/layout/' ) !== 0 && ! $this->isSaveMode())
+        {
+            //  if there is theme version, always ASK which to edit
+            if( ! $this->getPageEditorLayoutName() && empty( $_REQUEST['pc_edit_main_site_page'] ) )
+            {
+                // check if theres a page specific theme file
+                $pageThemeFileUrl = $page['url'];
+                if( $pageThemeFileUrl == '/' )
+                {
+                    $pageThemeFileUrl = '/index';
+                }
+                $themeDataFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . self::getDefaultLayout() . '/theme' . $pageThemeFileUrl . '/include';
+
+                if( file_exists( $themeDataFile ) )
+                {
+                    $query = '?' . http_build_query( $_GET );
+                    $this->setViewContent(  '' . self::__( '<h3>There are multiple versions of this page that is editable</h3>' ) . ''  );
+                    $this->setViewContent(  self::__( '
+                                    <a class="pc-btn" href="' . $query . '&pc_edit_main_site_page=1">Edit Main Site ' . $page['url'] . ' Page</a>
+                                    <a class="pc-btn" href="' . $query . '&pc_page_editor_layout_name=' . self::getDefaultLayout() . '">Edit Default Theme ' . $page['url'] . ' Page</a>
+                                    ' ) );
+                    return false;
+                }
+
+
+            }
+        }
+        
 		//	var_export( $_POST ); 
 		
 		$this->getLayoutRepresentation();
 		if( ! @$_POST )
 		{
-			//	Change Title
-			if( stripos( $page['url'], '/layout/' ) !== 0 )
-			{
-                //  if there is theme version, always ASK which to edit
-                if( ! $this->getPageEditorLayoutName() && empty( $_REQUEST['pc_edit_main_site_page'] ) )
+            //	Change Title
+            if( ! $this->isSaveMode() )
+            {
+                if( stripos( $page['url'], '/layout/' ) !== 0 )
                 {
-                    // check if theres a page specific theme file
-                    $pageThemeFileUrl = $page['url'];
-                    if( $pageThemeFileUrl == '/' )
-                    {
-                        $pageThemeFileUrl = '/index';
-                    }
-                    $themeDataFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . self::getDefaultLayout() . '/theme' . $pageThemeFileUrl . '/include';
-
-                    if( file_exists( $themeDataFile ) )
-                    {
-                        $query = '?' . http_build_query( $_GET );
-                        $this->setViewContent(  '' . self::__( '<h3>There are multiple versions of this page that is editable</h3>' ) . ''  );
-                        $this->setViewContent(  self::__( '
-                                        <a class="pc-btn" href="' . $query . '&pc_edit_main_site_page=1">Edit Main Site ' . $page['url'] . ' Page</a>
-                                        <a class="pc-btn" href="' . $query . '&pc_page_editor_layout_name=' . self::getDefaultLayout() . '">Edit Default Theme ' . $page['url'] . ' Page</a>
-                                        ' ) );
-                        return false;
-                    }
-
-
+                    $title = 'Editing "' . $page['url'] . '"';
+                }
+                else
+                {
+                    $title = 'Editing Theme';
                 }
 
-				$title = 'Editing "' . $page['url'] . '"';
-			}
-			else
-			{
-				$title = 'Editing Theme';
-			}
-
-			if( strpos( Ayoola_Page::getCurrentPageInfo( 'title' ), $title ) === false )
-			{
-				$pageInfo = array(
-					'title' => trim( $title . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
-				);
-				Ayoola_Page::setCurrentPageInfo( $pageInfo );
-			}
+                if( strpos( Ayoola_Page::getCurrentPageInfo( 'title' ), $title ) === false )
+                {
+                    $pageInfo = array(
+                        'title' => trim( $title . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
+                    );
+                    Ayoola_Page::setCurrentPageInfo( $pageInfo );
+                }
+            }
 			
  			//	Create TMP file for the template
 			$path = $this->getPagePaths();

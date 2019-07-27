@@ -317,14 +317,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 				$rPaths['data_json'] = $backupFile;
 			}
 		}
-/* 		elseif( $themeName && is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $defaulThemeDataFile ) )
-		{
-			//	dont allow main page content slip here.
-			$rPaths['data_json'] = $defaulThemeDataFile;
-			$rPaths['data_php'] = null;
-			$rPaths['data_php'] = null;
-		}
- */		//	now using json to store this data
+		//	now using json to store this data
 //	var_export( $rPaths );
 		$newFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths['data_json'];
 	//	var_export( $newFile );

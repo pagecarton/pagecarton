@@ -653,7 +653,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	var_export( $request );
 			//	var_export( $settings['post_fields'] );
 				curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );
-			}
+            }
+            elseif( @$settings['post'] )
+            {
+				curl_setopt( $request, CURLOPT_POST, true );
+            }
 			if( @$settings['raw_response_header'] )
 			{
 			//	var_export( $settings );

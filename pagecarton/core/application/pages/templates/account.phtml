@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Thursday 25th of July 2019 10:42:42 PM	ayoola@ayoo.la $ 
+* @version $Id: account.php	Friday 26th of July 2019 09:22:19 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -26,17 +26,17 @@
 							if
 							( 
 
-								$x_1564094562 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+								$x_1564132939 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
 							)
 							{
-							//	var_export( $x_1564094562 );
-							//	echo file_get_contents( $x_1564094562 );
-								foreach( $x_1564094562 as $each )
+							//	var_export( $x_1564132939 );
+							//	echo file_get_contents( $x_1564132939 );
+								foreach( $x_1564132939 as $each )
 								{	
 									include_once $each;
 								}
 							}
-		//					var_export( $x_1564094562 );
+		//					var_export( $x_1564132939 );
 						?>
 						 <?php
 /**
@@ -49,7 +49,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Thursday 25th of July 2019 10:42:34 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Friday 26th of July 2019 08:58:26 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <!DOCTYPE html>
@@ -89,20 +89,32 @@
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
-    </nav><!-- Page Content --><div class="container" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
+    </nav><!-- Page Content --><div class="xcontainer" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
 
         <!-- Heading Row -->
-		<?php
-//oneness Begins Here
+        
+<?php
+//pc_body_1 Begins Here
 
-echo ( ! empty( $_e3acf1a6d0ebcd48a43915385589e71e ) &&  is_object( $_e3acf1a6d0ebcd48a43915385589e71e ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_e3acf1a6d0ebcd48a43915385589e71e->view(), '' ) : null );
+echo ( ! empty( $_37de1278686bad05803e50ef40b938dc ) &&  is_object( $_37de1278686bad05803e50ef40b938dc ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_37de1278686bad05803e50ef40b938dc->view(), '' ) : null );
+
+//pc_body_1 Ends Here
+?><?php
+//pc_body_1 Begins Here
+
+//pc_body_1 Ends Here
+?>
+
+
+<?php
+//oneness Begins Here
 
 //oneness Ends Here
 ?><?php
 //oneness Begins Here
 
 //oneness Ends Here
-?><section data-pc-all-sections="1">	
+?><section data-pc-all-sections="1" class="container">	
 									<div class="">
 										<div class="row">
 											<div class="pc_page_layout_grid col-md-12 12u">
@@ -128,10 +140,6 @@ echo ( ! empty( $_2f63bc0963e9afc89bc511de893c11fc ) &&  is_object( $_2f63bc0963
 ?><?php
 //twosome1 Begins Here
 
-echo ( ! empty( $_692509e191fac1d67c625e321c4395b7 ) &&  is_object( $_692509e191fac1d67c625e321c4395b7 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_692509e191fac1d67c625e321c4395b7->view(), 'dark' ) : null );
-
-echo ( ! empty( $_356f72d00671943948b1fee15fdc71ec ) &&  is_object( $_356f72d00671943948b1fee15fdc71ec ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_356f72d00671943948b1fee15fdc71ec->view(), '' ) : null );
-
 //twosome1 Ends Here
 ?>
 											</div>
@@ -142,10 +150,6 @@ echo ( ! empty( $_356f72d00671943948b1fee15fdc71ec ) &&  is_object( $_356f72d006
 //twosome2 Ends Here
 ?><?php
 //twosome2 Begins Here
-
-echo ( ! empty( $_812a3c03c828e0fad72b06706dd89e2c ) &&  is_object( $_812a3c03c828e0fad72b06706dd89e2c ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_812a3c03c828e0fad72b06706dd89e2c->view(), 'dark' ) : null );
-
-echo ( ! empty( $_edca16dd549bfe09f69705d257712133 ) &&  is_object( $_edca16dd549bfe09f69705d257712133 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_edca16dd549bfe09f69705d257712133->view(), 'well' ) : null );
 
 //twosome2 Ends Here
 ?>
@@ -265,6 +269,8 @@ echo ( ! empty( $_edca16dd549bfe09f69705d257712133 ) &&  is_object( $_edca16dd54
 ?><?php
 //rightbarleft Begins Here
 
+echo ( ! empty( $_0a8d876c1a5bdfa414e91126c8475772 ) &&  is_object( $_0a8d876c1a5bdfa414e91126c8475772 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_0a8d876c1a5bdfa414e91126c8475772->view(), '' ) : null );
+
 //rightbarleft Ends Here
 ?>
 											</div> 
@@ -275,6 +281,10 @@ echo ( ! empty( $_edca16dd549bfe09f69705d257712133 ) &&  is_object( $_edca16dd54
 //rightbar Ends Here
 ?><?php
 //rightbar Begins Here
+
+echo ( ! empty( $_7aac6aa09cee3843d266ebfb57a2baf1 ) &&  is_object( $_7aac6aa09cee3843d266ebfb57a2baf1 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_7aac6aa09cee3843d266ebfb57a2baf1->view(), 'dark' ) : null );
+
+echo ( ! empty( $_1e879530f660cb8dced12756d01cc160 ) &&  is_object( $_1e879530f660cb8dced12756d01cc160 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_1e879530f660cb8dced12756d01cc160->view(), '' ) : null );
 
 //rightbar Ends Here
 ?>
@@ -288,30 +298,8 @@ echo ( ! empty( $_edca16dd549bfe09f69705d257712133 ) &&  is_object( $_edca16dd54
 ?><?php
 //lastoneness Begins Here
 
-							if( Ayoola_Page::hasPriviledge( array (
-  0 => '98',
-  1 => '99',
-), array( 'strict' => true ) ) && ! empty( $_d687a55ad8784085b5b9dd53060bad5c ) && is_object( $_d687a55ad8784085b5b9dd53060bad5c ) )
-							{
-								echo $_d687a55ad8784085b5b9dd53060bad5c->view();
-							}
-							
-echo ( ! empty( $_a7e752f58e7a7c50ee706917a2a53a70 ) &&  is_object( $_a7e752f58e7a7c50ee706917a2a53a70 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_a7e752f58e7a7c50ee706917a2a53a70->view(), '' ) : null );
-
 //lastoneness Ends Here
 ?>
-<?php
-//pc_body_1 Begins Here
-
-//pc_body_1 Ends Here
-?><?php
-//pc_body_1 Begins Here
-
-//pc_body_1 Ends Here
-?>
-
-
-
         <!-- /.row -->
 
         <hr>
@@ -346,6 +334,8 @@ echo ( ! empty( $_a7e752f58e7a7c50ee706917a2a53a70 ) &&  is_object( $_a7e752f58e
         
 <?php
 //pc_body_4 Begins Here
+
+echo ( ! empty( $_4a40c5f22289378580a8293281ac9ac2 ) &&  is_object( $_4a40c5f22289378580a8293281ac9ac2 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_4a40c5f22289378580a8293281ac9ac2->view(), '' ) : null );
 
 //pc_body_4 Ends Here
 ?><?php
