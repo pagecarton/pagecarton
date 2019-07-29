@@ -34,6 +34,12 @@ class Ayoola_Access_AuthLevel_List extends Ayoola_Access_AuthLevel_Abstract
      * @var string 
      */
 	protected static $_objectTitle = 'Priviledges'; 
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public $translateInnerWidgetContent = true;
 		
 	
     /**

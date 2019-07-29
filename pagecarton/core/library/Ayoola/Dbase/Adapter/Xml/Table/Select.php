@@ -272,32 +272,74 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 					{ 
 						if( array_key_exists( $key, $where ) )
 						{
+                        //    if( $options[$key . '_operator'] === '!=' )
+                            {
+                            //    var_export( $fields[$key] );
+                            //    var_export( $where[$key] );
+                            }
 							if( ! is_array( $fields[$key] ) )
 							{
-								if( ! is_array( $where[$key] ) && $where[$key] != $fields[$key] )
-								{ 
-									continue 3; 
-								}
-								elseif( is_array( $where[$key] ) && ! in_array( $fields[$key], $where[$key] ) )
-								{
-								//	var_export( $fields[$key] );
-									continue 3; 
-								}
+                                switch (@$options[$key . '_operator']) 
+                                {
+                                    case '!=':
+                                        if( ! is_array( $where[$key] ) && $where[$key] == $fields[$key] )
+                                        { 
+                                        //    var_export( $fields[$key] );
+                                        //    exit();
+                                            continue 4; 
+                                        }
+                                        elseif( is_array( $where[$key] ) && in_array( $fields[$key], $where[$key] ) )
+                                        {
+                                        //    var_export( $fields[$key] );
+                                        //    exit();
+                                            continue 4; 
+                                        }
+                                    break;
+                                    default:
+                                        if( ! is_array( $where[$key] ) && $where[$key] != $fields[$key] )
+                                        { 
+                                            continue 4; 
+                                        }
+                                        elseif( is_array( $where[$key] ) && ! in_array( $fields[$key], $where[$key] ) )
+                                        {
+                                        //	var_export( $fields[$key] );
+                                            continue 4; 
+                                        }
+                                    break;
+                                }
 							}
 							else
 							{
-								//	An array is matched if a single member is present.
-								if( ! is_array( $where[$key] ) && ! in_array( $where[$key], $fields[$key] ) )
-								{
-									//	only the record is array
-									continue 3; 
-								}
-								elseif( is_array( $where[$key] ) && ! array_intersect( $where[$key], $fields[$key]) )
-								{
-									//	both element are arrays
-								//	var_export( $fields[$key] );
-									continue 3; 
-								}
+                                //	An array is matched if a single member is present.
+                                switch( @$options[$key . '_operator'] )
+                                {
+                                    case '!=':
+                                        if( ! is_array( $where[$key] ) && in_array( $where[$key], $fields[$key] ) )
+                                        {
+                                            //	only the record is array
+                                            continue 4; 
+                                        }
+                                        elseif( is_array( $where[$key] ) && array_intersect( $where[$key], $fields[$key]) )
+                                        {
+                                            //	both element are arrays
+                                        //	var_export( $fields[$key] );
+                                            continue 4; 
+                                        }
+                                    break;
+                                    default:
+                                        if( ! is_array( $where[$key] ) && ! in_array( $where[$key], $fields[$key] ) )
+                                        {
+                                            //	only the record is array
+                                            continue 4; 
+                                        }
+                                        elseif( is_array( $where[$key] ) && ! array_intersect( $where[$key], $fields[$key]) )
+                                        {
+                                            //	both element are arrays
+                                        //	var_export( $fields[$key] );
+                                            continue 4; 
+                                        }
+                                    break;
+                                }
 							//	var_export( $where[$key] );
 							//	var_export( $fields[$key] );
 							//	continue 2; 

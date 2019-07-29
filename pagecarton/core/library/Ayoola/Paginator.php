@@ -598,6 +598,11 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
                     $value = null;
                     foreach( (array) $row[$field] as $rowField )
                     {
+                        if( $this->pageName && Ayoola_Object_Embed::isWidget( $this->pageName ) && $this->pageName->translateInnerWidgetContent )
+                        {
+                            $row[$key] = self::__( $row[$key] );
+                        }
+
                         $markup = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], $rowField ), $markupX );
                         $markup = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $markup );
                         $markup = str_replace( $columnSearch, $columnReplace, $markup );
@@ -631,7 +636,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			}
 			if( $this->getRowOptions() && ! @$this->noOptionsColumn )
 			{
-				$records .='<td style="text-align:center;"><a onclick="var a = this.parentNode.parentNode.nextElementSibling; a.style.display = ( a.style.display == \'none\' ) ? \'\'  : \'none\';" href="javascript:"> options </a></td>';
+				$records .='<td style="text-align:center;"><a onclick="var a = this.parentNode.parentNode.nextElementSibling; a.style.display = ( a.style.display == \'none\' ) ? \'\'  : \'none\';" href="javascript:"> ' . self::__( 'options' ) . ' </a></td>';
 			}
 			$records .= '</tr>';
 			if( $this->getRowOptions() )
@@ -673,7 +678,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		}
 		$multiDoOption[] = array( 
 									'url' => Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Pagination_MultiDo_Delete/' . ( $deletePrefix ) . '',
-									'name' => 'Delete',
+									'name' => '' . self::__( 'Delete' ) . '',
 									);
 
 		$html .='<div class="pc-btn-parent pc-paginator-multioption-area" style="background-color:#d4d4d4;display:none;">';		

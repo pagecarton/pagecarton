@@ -351,7 +351,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		{
 	//		var_export( self::hasPriviledge( array( 99, 98 ) ) );
 	//		var_export( self::hasPriviledge() );
-			$options[] = array( 'option_name' => $this->getParameter( 'edit_option_text' ) ? : '[Manage ' . $menu['menu_label']  . ' Menu]', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_List/menu_id/' . $menu['menu_id'] . '/', 'title' => 'Edit menu options', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => $menu['menu_id'], 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in','logged_out' ), ); 
+			$options[] = array( 'option_name' => $this->getParameter( 'edit_option_text' ) ? : '...', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_List/menu_id/' . $menu['menu_id'] . '/', 'title' => '' . self::__( 'Edit Menu Option' ) . '', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => $menu['menu_id'], 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in','logged_out' ), ); 
 		}
 		$this->_options = $options;
     } 	
@@ -486,7 +486,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				if( self::hasPriviledge( array( 99, 98 ) ) && $menuName )
 				{
 					$options = array();
-					$options[] = array( 'option_name' => $this->getParameter( 'sub_menu' ) ? 'Add sub-menu' : 'Set up new menu here', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Creator/?menu_name=' . ( $menuName ) . '', 'title' => 'Add another menu option', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in' ), );
+					$options[] = array( 'option_name' => $this->getParameter( 'sub_menu' ) ? '' . self::__( 'Add sub-menu' ) . '' : '' . self::__( 'Set up new menu here' ) . '', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Creator/?menu_name=' . ( $menuName ) . '', 'title' => '' . self::__( 'Add another menu option' ) . '', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in' ), );
 					$this->setOptions( $options );      
 				}
 				else
@@ -682,11 +682,11 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			$link->setAttribute( 'href', $values['url'] );
 		//	$link->setAttribute( 'rel', @$values['rel'] );
 		//	$link->setAttribute( 'href', $values['url'] );
-			$link->setAttribute( 'title', $values['title'] ? : $values['option_name']  );
+			$link->setAttribute( 'title', self::__( $values['title'] ? : $values['option_name'] )  );
 			$link->setAttribute( 'class', $linkClass );
 			if( empty( $values['url'] ) )
 			{ 
-				$link = $xml->createHTMLElement( $values['option_name'] ); 
+				$link = $xml->createHTMLElement( self::__( $values['option_name'] ) ); 
 			}
 			$option->appendChild( $link );
 			$values['li-ul-class'] = null;
@@ -870,10 +870,10 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 
 	//	if( $options = (array) $options->getClassOptions() )
 		{
-			$html .= '<span style=""> Menu:  </span>';
+			$html .= '<span style=""> ' . self::__( 'Menu' ) . ':  </span>';
 	//		$options = (array) $options->getClassOptions();
 			$html .= '<select data-parameter_name="option">';
-			$html .= '<option value="' . $newMenuName . '">New Menu</option>';
+			$html .= '<option value="' . $newMenuName . '">' . self::__( 'New Menu' ) . '</option>';
 			if( empty( $object['option'] ) && ! empty( $object['new_menu_name'] ) )  
 			{
 				$filter = new Ayoola_Filter_Name();
@@ -907,7 +907,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		}
 	//	$html .= '<span style=""> new menu:  </span>';
 	//	$html .= '<input value="' . ( $newMenuName ) . '" type="text" placeholder="new menu name in lowercase" data-parameter_name="new_menu_name">';
-		$html .= '<span style=""> Style: </span>';
+		$html .= '<span style=""> ' . self::__( 'Style' ) . ': </span>';
 		
 		$options = new Ayoola_Menu_Template;
 		$options = $options->select();
@@ -949,38 +949,5 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		return new static( $parameter );
     } 	
 	
-    /**
-     * This echos a menu
-     *
-     * @param string menu name
-     */
-/*     public static function viewInLine( $viewParameter = null, $viewOption = null )
-    {
-		$parameter = $viewParameter;
-		if( ! is_array( $viewParameter ) )
-		{
-			$parameter = array( 'view' => $viewParameter, 'option' => $viewOption, );
-		}
-		$view = new static( $parameter );
-	//	$view->setViewParameter( $viewParameter );
-	//	$view->setViewOption( $viewOption );
-	//	var_export( __LINE__ );
-		$view->initOnce();
 
-//		var_export( get_class( $view ) );
-	//	var_export( @$view->getForm()->getValues() );
-		return isset( $viewParameter['return_as_object'] ) ? $view : $view->view();
-    } 	
- *//*     public static function viewInLine( $viewParameter = null, $viewOption = null )
-    {
-		if( is_null( $viewParameter ) && is_null( $viewOption ) )
-		{
-			//throw new Ayoola_Doc_Exception( 'We must have either a view parameter or option to run this method' );
-		}
-		$menuView = self::getInstance( array( 'option' => $viewOption, 'view' => $viewParameter ) );
-	//	$menuView->setParameter( array( 'option' => $viewOption, 'view' => $viewParameter ) );
-		$menuView->initOnce();
-		return $menuView->view();
-    } 		
- */	// END OF CLASS
 }

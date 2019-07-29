@@ -60,7 +60,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 			{ 
 			//	$message = 'You are not allowed to use the file manager.';
 				$message = '';
-				$this->_objectData['badnews'][1] = 'You are not allowed to use the file manager.';
+				$this->_objectData['badnews'][1] = '' . self::__( 'You are not allowed to use the file manager' ) . '';
 				$this->setViewContent( $message );
 			//	throw new Ayoola_Doc_Upload_Exception( $message );
 				return false;
@@ -212,7 +212,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 											);
  			
 			$dropZoneJs = ' var a = document.getElementsByName(\'' . $dropZoneName . '\'); for( var b = 0; b < a.length; b++ ){ ayoola.image.setDropZone( a[b] ); a[b].style.display == \'none\' ? a[b].style.display=\'block\' : a[b].style.display=\'none\'; } ';
-			$showMenuJs = ' var a = document.getElementsByName(\'' . $optionName . '\'); for( var b = 0; b < a.length; b++ ){ a[b].style.display == \'none\' ? a[b].style.display=\'inline-block\' : a[b].style.display=\'none\'; }  this.style.display=\'inline-block\';  this.innerHTML=\'Show or hide menu...\';';
+			$showMenuJs = ' var a = document.getElementsByName(\'' . $optionName . '\'); for( var b = 0; b < a.length; b++ ){ a[b].style.display == \'none\' ? a[b].style.display=\'inline-block\' : a[b].style.display=\'none\'; }  this.style.display=\'inline-block\';  this.innerHTML=\'' . self::__( 'Show/Hide Upload Options' ) . '...\';';
 		//	var_export( $this->getParameter( 'field_name' ) );
 		//	var_export( $this->getGlobalValue( $this->getParameter( 'field_name' ) ) ); 
 			$uri = $plainUrl;
@@ -225,7 +225,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 			}
 			$filter = new Ayoola_Filter_FileSize();
 			$html = '
-				<div title="This is a live preview of the selected file." style="display:block;clear:both; text-align:center;max-height:80%;" class="" >
+				<div title="' . self::__( 'This is a LIVE preview of the selected file' ) . '" style="display:block;clear:both; text-align:center;max-height:80%;" class="" >
 					<img name="' . $previewImageName . '" src="' . 
 					( ( $uri ? 
 					$uri : 
@@ -237,28 +237,28 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 					( 'Preview' ) . '' ) ) . '"  class="" onClick="" style="max-height:50vh;"  > 
 					<div style="margin:1em; font-size:x-small;">
 						' . ( is_file( $path ) ? ( '
-						URL: <a target="_blank" href="' . ( $imageUrl ) . '">' .  $plainUrl . '</a><br>
-						SIZE: ' . $filter->filter( filesize( $path ) ) . '<br>
+						' . self::__( 'URL' ) . ': <a target="_blank" href="' . ( $imageUrl ) . '">' .  $plainUrl . '</a><br>
+						' . self::__( 'FILE SIZE' ) . ': ' . $filter->filter( filesize( $path ) ) . '<br>
 						' ) : null ) . ' 
 
 						' . ( $this->getParameter( 'width' ) ? ( '
-						DIMENSIONS: ' . $this->getParameter( 'width' ) . ' / ' . $this->getParameter( 'height' ) . ' <br>
+						' . self::__( 'DIMENSION' ) . ': ' . $this->getParameter( 'width' ) . ' / ' . $this->getParameter( 'height' ) . ' <br>
 						' ) : null ) . ' 
 					</div>
 				</div>
-				<div title="Click here to select a file to upload or drag and drop a file here." style="text-align:center;" class="" name="upload_through_ajax_link">
-					<div title="Select an option here" style="display:block;" >
-						<span name="' . @$optionName . '" onClick="' . @$js . ' ' . @$jsSelectElement . ' ' . @$jsSetFieldName . ' ayoola.image.clickBrowseButton( { accept: \'' . $this->getParameter( 'file_types_to_accept' ) . '\', } ); " title="Click here to upload a file" class="pc-btn"  >
-							Upload New
+				<div title="' . self::__( 'Click here to select a file or drag and drop file here' ) . '" style="text-align:center;" class="" name="upload_through_ajax_link">
+					<div title="' . self::__( 'Select an option' ) . '" style="display:block;" >
+						<span name="' . @$optionName . '" onClick="' . @$js . ' ' . @$jsSelectElement . ' ' . @$jsSetFieldName . ' ayoola.image.clickBrowseButton( { accept: \'' . $this->getParameter( 'file_types_to_accept' ) . '\', } ); " title="' . self::__( 'Click here to upload a file' ) . '" class="pc-btn"  >
+                        ' . self::__( 'Upload new' ) . '
 						</span>
-						<span name="' . $optionName . '" onClick="' . $js . ' ' . $dropZoneJs . ' ' . $jsSetFieldName . ' " title="Click here to select a file from the previous files on the website" class="pc-btn">
-							Drag N Drop
+						<span name="' . $optionName . '" onClick="' . $js . ' ' . $dropZoneJs . ' ' . $jsSetFieldName . ' " title="" class="pc-btn">
+                        ' . self::__( 'Drag N Drop' ) . '
 						</span>
 					</div>
-					<div name="' . $dropZoneName . '" style="max-width:100%;display:none;text-align:center;" title="Drag and drop files here" class="boxednews centerednews badnews">	
+					<div name="' . $dropZoneName . '" style="max-width:100%;display:none;text-align:center;" title="' . self::__( 'Drag and drop files here' ) . '" class="boxednews centerednews badnews">	
 						<img src="' . Ayoola_Application::getUrlPrefix() . '/public/drag_and_drop.png?document_time=1" onClick="" style="max-height:7em;max-width:100%;"  >
 					</div>
-					<div name="' . $previewZoneName . '" style="max-width:100%;" title="Upload previews" class="">	
+					<div name="' . $previewZoneName . '" style="max-width:100%;" title="' . self::__( 'Upload preview here' ) . '" class="">	
 					</div>
 				</div>
 			';

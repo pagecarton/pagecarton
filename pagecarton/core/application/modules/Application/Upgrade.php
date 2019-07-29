@@ -51,11 +51,14 @@ class Application_Upgrade extends Ayoola_Abstract_Table
 		try
 		{
 		//	$this->setViewContent( self::__( '<p></p>' ) );
-			$this->createConfirmationForm( 'Upgrade', '<p>Upgrade your PageCarton to the latest version. You are currently running version ' . PageCarton::VERSION . '</p>' ); 
-			$this->setViewContent( self::__( '<h1 class="pc-heading">PageCarton Upgrade</h1>' ) );
-			$this->setViewContent( self::__( '<div style="padding-top:1.5em;">Upgrade your PageCarton to the latest version. You are currently running version ' . PageCarton::VERSION . '. It is recommended that you do a backup of your application before you go ahead, do you want to do that now? </div>' ) );
-			$this->setViewContent(  self::__( '<div style="padding-top:1.5em;padding-bottom:1em;"><a onClick="ayoola.spotLight.showLinkInIFrame( this.href ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Backup_List" class="pc-btn">Backup Now!</a>
-			<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '?stage=upgrade" class="pc-btn pc-bg-color">Begin Upgrade!</a></div>' ) );
+            $output = 'Upgrade your PageCarton to the latest version. You are currently running version %s';
+            $output = PageCarton_Widget::__( $output );
+            $output = sprintf( $output, '' . PageCarton::VERSION . '' );
+			$this->createConfirmationForm( '' . self::__( 'Upgrade' ) . '', '<p>' . $output . '</p>' ); 
+			$this->setViewContent( self::__( '<h1 class="pc-heading">' . self::__( 'PageCarton Upgrade' ) . '</h1>' ) );
+			$this->setViewContent( self::__( '<div style="padding-top:1.5em;">' . sprintf( 'Upgrade your PageCarton to the latest version. You are currently running version %s. It is recommended that you do a backup of your application before you go ahead, do you want to do that now? ', '' . PageCarton::VERSION . '' ) . '</div>' ) );
+			$this->setViewContent(  self::__( '<div style="padding-top:1.5em;padding-bottom:1em;"><a onClick="ayoola.spotLight.showLinkInIFrame( this.href ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Backup_List" class="pc-btn">' . self::__( 'Back up now' ) . '!</a>
+			<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '?stage=upgrade" class="pc-btn pc-bg-color">' . self::__( 'Begin Upgrade' ) . '</a></div>' ) );
 			$values = $this->getForm()->getValues();
 			if( ! isset( $_GET['stage'] ) && ! $values )
 			{
@@ -79,19 +82,12 @@ class Application_Upgrade extends Ayoola_Abstract_Table
 		//	var_export( $installerFilenamePhp );
 			if( ! is_file( $installerFilenamePhp ) )
 			{
-				$this->setViewContent( self::__( '<h1 href="" class="badnews blockednews">ERROR: </h1>' ) );
-				$this->setViewContent( self::__( '<p href="" class="badnews blockednews">Installer not found. Upgrade aborted.</p>' ) );
+				$this->setViewContent( self::__( '<h1 href="" class="badnews blockednews">' . self::__( 'Error' ) . ': </h1>' ) );
+				$this->setViewContent( self::__( '<p href="" class="badnews blockednews">' . self::__( 'Installer not found. Upgrade aborted.' ) . '</p>' ) );
 				return false;
 			}
-		//	$this->setViewContent( self::__( '<a href="" class="goodnews blockednews">Continue Upgrade...</a>' ) );			
 			include $installerFilenamePhp;
 			//	make upgrader
-		//	copy( $installerFilenamePhp, Ayoola_Application::$upgrader );
-			
-		//	header( 'Location: /' . Ayoola_Application::$upgrader );
-		//	exit();
-			
-	//		file_get_contents( Ayoola_Application::$upgrader );
 		}
 		catch( Ayoola_Exception $e ){ return false; }
 	}

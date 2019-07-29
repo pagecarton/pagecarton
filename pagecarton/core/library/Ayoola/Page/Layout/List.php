@@ -34,6 +34,13 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
      * @var string 
      */
 	protected static $_objectTitle = 'Themes'; 
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public $translateInnerWidgetContent = true;
+		
 	
     /**
      * Performs the creation process
@@ -104,7 +111,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 											'Images' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Images/?' . $this->getIdColumn() . '=%KEY%\' );" title="Update theme pictures">Pictures</a>' ,
 											'<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_ReplaceText/?' . $this->getIdColumn() . '=%KEY%\' );" title="">Text Update</a>' ,
 											'Pages' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Pages/?' . $this->getIdColumn() . '=%KEY%\' );" title="Manage Theme Pages">Pages</a>' ,
-											'Default' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?' . $this->getIdColumn() . '=%KEY%\' );" title="Make this the default site theme">Make Default</a>' ,
+											'Default' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?' . $this->getIdColumn() . '=%KEY%\' );" title="' . self::__( 'Make this theme default for all pages' ) . '">' . self::__( 'Make Default' ) . '</a>' ,
 											'Preview' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/name/Ayoola_Page_Layout_Preview/?' . $this->getIdColumn() . '=%KEY%\' );" title="Preview">Preview</a>' ,
 										) 
 								);
@@ -112,7 +119,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		$list->setKey( $this->getIdColumn() );  
 		$default = array(
 				Ayoola_Page_Editor_Layout::getDefaultLayout() => '<i class="fa fa-check"></i>',
-				'pc_paginator_default' => '<a href="javascript:" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="Make this the default site theme">Make Default</a>',
+				'pc_paginator_default' => '<a href="javascript:" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="' . self::__( 'Make this theme default for all pages' ) . '">' . self::__( 'Make Default' ) . '</a>',
 
 		);
 		$list->createList(  

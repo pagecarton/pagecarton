@@ -34,6 +34,13 @@ class Ayoola_Object_List extends Ayoola_Object_Abstract
      * @var string 
      */
 	protected static $_objectTitle = 'Widgets'; 
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public $translateInnerWidgetContent = true;
+		
 		
     /**
      * The method does the whole Class Process

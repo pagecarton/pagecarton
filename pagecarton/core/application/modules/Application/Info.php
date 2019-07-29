@@ -80,7 +80,7 @@ class Application_Info extends Ayoola_Abstract_Playable
 		$row  = $table->appendChild( $row );
 		
 		//	Show the name of the Info
-		$data = $xml->createHTMLElement( 'th', 'PageCarton Version' );
+		$data = $xml->createHTMLElement( 'th', '' . self::__( 'PageCarton Version' ) . '' );
 	//	$data->setAttribute( 'colspan', 2 );
 		$data  = $row->appendChild( $data );
 		
@@ -89,7 +89,7 @@ class Application_Info extends Ayoola_Abstract_Playable
 		$installationInfo = unserialize( $installationInfo );
 		$installationInfo = @$installationInfo['backup_name'] ? : filemtime( __FILE__ );
 		
-		$data = $xml->createHTMLElement( 'td', 'PageCarton ' . PageCarton::VERSION . ' ( ' . $installationInfo . ' )' );
+		$data = $xml->createHTMLElement( 'td', '' . self::__( 'PageCarton' ) . ' ' . PageCarton::VERSION . ' ( ' . $installationInfo . ' )' );
 		$data  = $row->appendChild( $data );
 		$backup = new Application_Backup_Backup();
 		$backup = array_pop( $backup->select() );
@@ -100,7 +100,7 @@ class Application_Info extends Ayoola_Abstract_Playable
 		//	$filterTime = new Ayoola_Filter_Time();
 			$backup = $filterTime->filter( $backup );
 		}
-		else{ $backup = 'NEVER'; }
+		else{ $backup = '' . self::__( 'Never' ) . ''; }
 		$users = 0;
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{

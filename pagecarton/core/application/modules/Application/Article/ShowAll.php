@@ -1119,7 +1119,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$data['cover_photo_with_link'] = $imageLink;
             }
 
-			$data['button_value'] = self::__( $this->getParameter( 'button_value' ) ) ? : '' . self::__( 'Previous' ) . '';
+			$data['button_value'] = self::__( $this->getParameter( 'button_value' ) ) ? : '' . self::__( 'Details' ) . '';
 			
 			
             //	CATEGORIES

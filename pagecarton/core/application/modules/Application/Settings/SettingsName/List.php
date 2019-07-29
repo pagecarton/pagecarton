@@ -41,6 +41,12 @@ class Application_Settings_SettingsName_List extends Application_Settings_Settin
      * @var string 
      */
 	protected static $_objectTitle = 'Site Options'; 
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public $translateInnerWidgetContent = true;
 		
     /**
      * The method does the whole Class Process
@@ -67,9 +73,10 @@ class Application_Settings_SettingsName_List extends Application_Settings_Settin
 		$list->setKey( $this->getIdColumn() );
         $list->setNoRecordMessage( 'No settings on this application <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Creator/">Create</a>' );
 
-        $output = '%s Settings';
-        $output = PageCarton_Widget::__( $output );
-        $output = sprintf( $output, '%FIELD%' );
+    //    $output = '%s Settings';
+    //    $output = PageCarton_Widget::__( $output );
+    //    $output = sprintf( $output, '%FIELD%' );
+        $output = '%FIELD% Settings';
         
 		$list->createList(  
 			array(

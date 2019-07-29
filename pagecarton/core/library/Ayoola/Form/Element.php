@@ -137,6 +137,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 		@$element['title'] = trim( $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) ) , ':' );
 		@$element['placeholder'] = ( $element['placeholder'] ? : $element['label'] ) ? : ucwords( str_replace( '_', ' ', $element['name'] ) );
 		$element['hashed_name'] = self::hashElementName( $element['name'] );
+		$element['title'] = self::__( $element['title'] );
+		$element['placeholder'] = self::__( $element['placeholder'] );
 		if( $this->hashElementName )
 		{
 			$element['name'] = $element['hashed_name'];
@@ -204,7 +206,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 				unset( $element['type'] );
 			}
 			$element['name'] = @$element['multiple'] ? ( $element['name'] . '[]' ) : $element['name']; 
-			unset( $element['multiple'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
+            unset( $element['multiple'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
+            if( ! empty( $values ) && empty( $values['html'] ) )
+            {
+                $values = self::__( $values );
+            }
 			$markup .= $this->$method( $element, $values );
 		}
 		$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;	
@@ -221,7 +227,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 			case 'addselect':
 			//	self::v( $method );
 				//	Set Element ID and Label to default if undeclared
-				$element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $realName ) );	
+                $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $realName ) );
 			break;
 			case 'addhidden':
 				$element['label'] = null;	
@@ -233,6 +239,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
+            $element['label'] = self::__( $element['label'] );
 			@$markup = "<label style=\"{$element['label_style']}\" for=\"{$element['name']}\">{$element['label']}</label>{$markup}";
 		}
 		if( strtolower( $method ) == 'adddocument' )
@@ -1056,7 +1063,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 	
     public function addLegend( $legend )
     {
-		$this->_legend = (string) $legend;
+		$this->_legend = '' . self::__( $legend ) . '';
     }
     public function getLegend(  )
     {

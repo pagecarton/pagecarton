@@ -73,12 +73,12 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 			//	var_export( Ayoola_Application::getUrlPrefix() );
 				if( Ayoola_Application::getUrlPrefix() && Ayoola_Application::getUrlPrefix() !== '/index.php' ) 
 				{
-					$this->_parameter['markup_template_prefix'] .= '<li><a href="/" title="Home Page">Home</a></li>';
+					$this->_parameter['markup_template_prefix'] .= '<li><a href="/" title="' . self::__( 'Home Page' ) . '">' . self::__( 'Home' ) . '</a></li>';
 					$homeDone = false;
 				}
 				else
 				{
-					$this->_parameter['markup_template_prefix'] .= '<li><a href="' . Ayoola_Application::getUrlPrefix() . '/" title="Home Page">Home</a></li>';
+					$this->_parameter['markup_template_prefix'] .= '<li><a href="' . Ayoola_Application::getUrlPrefix() . '/" title="' . self::__( 'Home Page' ) . '">' . self::__( 'Home' ) . '</a></li>';
 				}
 				$this->_parameter['markup_template_suffix'] = 
 				'
@@ -120,7 +120,9 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 				if( ! $each['title'] )
 				{
 					continue;    
-				}
+                }
+                $each['title'] = '' . self::__( $each['title'] ) . '';
+                $each['description'] = '' . self::__( $each['description'] ) . '';
 				$urlLog[$each['url']] = $each['url'];
 				if( $template )
 				{

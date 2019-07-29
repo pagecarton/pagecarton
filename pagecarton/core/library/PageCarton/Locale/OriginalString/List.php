@@ -24,7 +24,7 @@ class PageCarton_Locale_OriginalString_List extends PageCarton_Locale_OriginalSt
      * 
      * @var string 
      */
-	  protected static $_objectTitle = 'Word List';   
+	  protected static $_objectTitle = 'Word List';    
 
     /**
      * Performs the creation process
@@ -46,11 +46,31 @@ class PageCarton_Locale_OriginalString_List extends PageCarton_Locale_OriginalSt
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
-		$list->listTitle = self::getObjectTitle();
-		$list->setData( $this->getDbData() );
+        $list->listTitle = self::getObjectTitle();
+        $data = array();
+        if( @$_REQUEST['not_yet_translated'] )
+        {
+            $list->listTitle = 'Locale words not yet translated';
+            $translated = PageCarton_Locale_Translation::getInstance()->select();
+            $translatedIds = array();
+        //    var_export( $translated );
+            foreach( $translated as $each )
+            {
+                $translatedIds[] = $each['originalstring_id'];
+            }
+            $data = PageCarton_Locale_OriginalString::getInstance()->select( null, array( 'originalstring_id' => $translatedIds ), array( 'originalstring_id_operator' => '!=' ) );
+        }
+        else
+        {
+            $data = $this->getDbData();
+        //    self::v( count( $data ) );
+        //    exit();
+        }
+		$list->setData( $data );
 		$list->setListOptions( 
 								array( 
                                     '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Translation_AutoPopulateWords/\' );" title="">Populate Words Automatically</a>',    
+                                    '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Translation_List/\' );" title="">Translated Words</a>',    
 									) 
 							);
 		$list->setKey( $this->getIdColumn() );
@@ -58,13 +78,20 @@ class PageCarton_Locale_OriginalString_List extends PageCarton_Locale_OriginalSt
         $translate = null;
         if( @$_REQUEST['locale_code'] )
         {
+
             $translate = 
             '<a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Translation_Editor/?' . $this->getIdColumn() . '=%KEY%&locale_code=' . @$_REQUEST['locale_code'] . '">translate</a>';
+            $list->setListOptions( 
+								array( 
+                                    '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_OriginalString_List/?not_yet_translated=' . $_REQUEST['locale_code'] . '&locale_code=' . $_REQUEST['locale_code'] . '" >Words Not Yet Translated</a>',    
+									) 
+							);
         }
         
 		$list->createList
 		(
 			array(
+                    'originalstring_id' => array( 'field' => 'originalstring_id', 'value' =>  '%FIELD% ', 'filter' =>  'Ayoola_Filter_HtmlSpecialChars' ), 
                     'string' => array( 'field' => 'string', 'value' =>  '%FIELD% ' . $translate, 'filter' =>  'Ayoola_Filter_HtmlSpecialChars' ), 
                     'pages' => array( 'field' => 'pages', 'value' =>  '<span style="font-size:small;">%FIELD% <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '%FIELD%">preview</a></span> <br>', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 

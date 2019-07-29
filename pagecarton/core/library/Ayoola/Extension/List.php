@@ -34,6 +34,12 @@ class Ayoola_Extension_List extends Ayoola_Extension_Abstract
      * @var string 
      */
 	protected static $_objectTitle = 'Plugins Built on this Installation'; 
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public $translateInnerWidgetContent = true;
 	
     /**
      * Performs the creation process

@@ -57,6 +57,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	protected $_list;
 
+
+    /**
+     * Save translated strings
+     *
+     * @var array
+     */
+	protected static $_translated;
+
     /**
      * Content for the view method
      *
@@ -168,6 +176,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      * @var string
      */
 	public $objectName;
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public $translateInnerWidgetContent;
 
     /**	Set to true if the init method has been run
      *
@@ -928,26 +942,47 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function __( $string )
     {
-	//	if( ! Ayoola_Loader::loadClass( 'PageCarton_Locale' ) )
+        
+        if( ! self::getLocale() || ! @in_array( 'auto_translate', PageCarton_Locale_Settings::retrieve( 'locale_options' ) ) )
 		{
 			//	was slowing down app
-	//		return $string;
-		}
+			return $string;
+        }
+        $id = sha1( json_encode( $string ) . json_encode( PageCarton_Locale_Settings::retrieve() ) );
+        if( isset( static::$_translated[$id] ) )
+        {
+        //    return static::$_translated[$id];
+        }
+        $translationStorage = self::getObjectStorage( array( 'id' => 'translation' . $id . 'dddss' . self::getLocale(), 'device' => 'File', 'time_out' => 1000000, ) );  
+    //	var_export( json_encode( $string ) );
+    //	var_export( $id );
+    //	var_export( $translationStorage->retrieve() );
+        if( $stored = $translationStorage->retrieve() )
+        {
+        //    var_export( $stored );
+            static::$_translated[$id] = $stored; 
+        //    return $stored;
+        }   
         if( is_array( $string ) )
         {
             foreach( $string as $key => $eachString )
             {
                 $string[$key] = self::__( $eachString );
             }
+            static::$_translated[$id] = $string; 
+            $translationStorage->store( $string );
             return $string;
         }
 		if( preg_match( '#(^[\s]*\{\{\{[^\{\}\s]*\}\}\}[\s]*$)|(^[\s]*\%[^%}\s]*\%[\s]*$)|(^[^a-zA-Z]+$)#', $string ) )
 		{
-		//	var_export( $string );
+        //	var_export( $string );
+            $translationStorage->store( $string );
 			return $string;
 		}
 		if( ! trim( $string ) || strpos( $string, '<style>' ) !== false || strpos( $string, '<script>' ) !== false || is_numeric( $string ) )
 		{
+            static::$_translated[$id] = $string; 
+            $translationStorage->store( $string );
             return $string;
 		}
 		if( strip_tags( $string ) != $string )
@@ -966,16 +1001,32 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$translated = self::__( $each );
 					$string = str_ireplace( '>' . $each . '<', '>' . $translated . '<', $string );
 				}
-				//var_export( $string );
+                if( preg_match_all( '#(<input([^<>]*)placeholder="([a-zA-Z0-9 \.]*)"([^<>]*)>)#', $string, $allPlaceholders ) )
+                {
+                    foreach( $allPlaceholders[2] as $eachPlaceholder)
+                    {
+                        $translated = self::__( $eachPlaceholder );
+                        $string = str_ireplace( 'placeholder="' . $eachPlaceholder . '"', 'placeholder="' . $translated . '"', $string );
+                    }
+                //	var_export( $string );
+                    return $string;
+                }
+             //var_export( $string );
+                static::$_translated[$id] = $string; 
+                $translationStorage->store( $string );
 				return $string;
 			}
 		}
         if( false !== strpos( $string, '<' ) )
         {
+            static::$_translated[$id] = $string; 
+            $translationStorage->store( $string );
             return $string;
         }
         if( false !== strpos( $string, '>' ) )
         {
+            static::$_translated[$id] = $string; 
+            $translationStorage->store( $string );
             return $string;
         }
 
@@ -987,22 +1038,21 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
             if( ! $locale = self::getLocale() )
             {
-                $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
             //    var_export( $options );
                 if( ! is_array( $options ) || ! in_array( 'autosave_new_words', $options ) )
                 {
                     continue;
                 }
             }
-    //	var_export( $string );
-        //	$translation = PageCarton_Locale_Translation::getInstance();
+            //	var_export( $string );
+            //	$translation = PageCarton_Locale_Translation::getInstance();
         
-        //  don't store trimmed because of some valid spaces around html
-		//	$string = trim( $string );
+            //  don't store trimmed because of some valid spaces around html
+            //	$string = trim( $string );
 
 			//	cache is workaround because of insert not active until next load
 			//	was causing double inserting of words when the words are double on same page
-			$stringStorage = self::getObjectStorage( array( 'id' => 'stringInfo' . $string . 'dddss', 'device' => 'File', 'time_out' => 100000, ) );     
+			$stringStorage = self::getObjectStorage( array( 'id' => 'stringInfo' . $string . $id . 'dddss', 'device' => 'File', 'time_out' => 100000, ) );     
 			if( ! $stringInfo = $stringStorage->retrieve() )
 			{
                 $words = PageCarton_Locale_OriginalString::getInstance();
@@ -1045,14 +1095,23 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				{
 					$string = $translatedString['translation'];
                 }
-            //    self::v( $string );
             //    self::v( $stringInfo['originalstring_id'] );
             //    self::v( $locale );
-            //    self::v( $translatedString );
+            //    if( empty( $translatedString['translation'] ) )
+            //    if( $allStringEntries = PageCarton_Locale_OriginalString::getInstance()->select( null, array( 'string' => $string ) ) )
+                {
+                //    self::v( $string );
+                //    self::v( $stringInfo );
+                //    var_export( count( $allStringEntries ) );
+                }
+            //    self::v( $translatedString['translation'] );
 			}
 		//	var_export( $stringInfo );
 		}
 		while( false );
+		//	var_export( $string );
+        static::$_translated[$id] = $string; 
+        $translationStorage->store( $string );
 		return $string;
 	}
 
@@ -1876,7 +1935,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 			self::$_objectTitle = $title;;
 		}
-		return self::$_objectTitle;
+		return self::__( self::$_objectTitle );
 	 }
 
     /**

@@ -102,7 +102,15 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 			{
 				$from = $fromDir . $directory . $each;
 				$to = $toDir . $directory . $each;
-				$to = dirname( $to ) . '/__/' . array_shift( explode( '.', basename( $each ) ) ) . '/extensions/' . $data['extension_name'] . '.xml';
+				$databaseExtension = dirname( $to ) . '/__/' . array_shift( explode( '.', basename( $each ) ) ) . '/extensions/' . $data['extension_name'] . '.xml';
+                self::changeStatus( $currentStatus, $from , $databaseExtension );
+                
+                //  Supplementary files
+                $from = $fromDir . $directory . dirname( $each ) . DS . '__' . DS . array_shift( explode( '.', basename( $each ) ) );
+                $to = dirname( $databaseExtension ) . DS . '' . $data['extension_name'] . '/supplementary';
+            //    var_export( $from );
+            //    var_export( $to );
+            //    exit();
 				self::changeStatus( $currentStatus, $from , $to );
 			}
 		}

@@ -34,6 +34,12 @@ class Ayoola_Extension_Import_List extends Ayoola_Extension_Import_Abstract
      * @var string 
      */
 	protected static $_objectTitle = 'Installed Plugins'; 
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public $translateInnerWidgetContent = true;
 	
     /**
      * Performs the creation process

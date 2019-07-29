@@ -55,7 +55,11 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 				$directory =  '/databases';
 				foreach( $values['databases'] as $each )
 				{
-					$files[] = $directory . $each;
+                    $files[] = $directory . $each;
+                    
+                    //  Supplementary files
+                    $supDir = $directory . dirname( $each ) . DS . '__' . DS . array_shift( explode( '.', basename( $each ) ) );
+                    $files[] = $supDir;
 				}
 			}
 			if( @$values['documents'] )
@@ -107,7 +111,9 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 			$export = new $phar( $filename  );
 			$export->startBuffering();
 			$regex = null;
-			$fullFiles = array();
+            $fullFiles = array();
+        //    self::v( $files );
+        //    exit();
 			foreach( $files as $each )
 			{
 			//	$regex .= '(' . $each . ')|';			
@@ -115,14 +121,23 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 			//	$regex .= '(/application' . $each . ')|';	
 				$each = str_replace( array( '/', '\\' ), DS, $each );
 				$fullFiles[$each] = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . $each;	
-				$fullFiles[$each] = str_replace( array( '/', '\\' ), DS, $fullFiles[$each] );
-				if( ! is_file( $fullFiles[$each] ) || ! is_readable( $fullFiles[$each] ) )
+                $fullFiles[$each] = str_replace( array( '/', '\\' ), DS, $fullFiles[$each] );
+            //    var_export( $fullFiles[$each] );
+            //    var_export( is_dir( $fullFiles[$each] ) );
+				if( is_dir( $fullFiles[$each] ) && is_readable( $fullFiles[$each] ) )
+				{
+                    $innerFiles = Ayoola_Doc::getFilesRecursive( $fullFiles[$each] );
+                    $fullFiles += $innerFiles;
+                    unset( $fullFiles[$each] );
+                    
+				}
+				elseif( ! is_file( $fullFiles[$each] ) || ! is_readable( $fullFiles[$each] ) )
 				{
 					unset( $fullFiles[$each] );
 				}
 			}
 		//	var_export( $fullFiles );
-		//	exit();
+		//p	exit();
 			$regex = trim( $regex, '|' );
 			$regex = str_replace( DS, '/', "#({$regex})#" );
 		//	$export->buildFromDirectory( Ayoola_Application::getDomainSettings( APPLICATION_DIR ), $regex );

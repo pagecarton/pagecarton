@@ -59,7 +59,7 @@ class PageCarton_Locale_Translation_List extends PageCarton_Locale_Translation_A
 		$list->createList
 		(
 			array(
-                    'word' => array( 'field' => 'word', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_HtmlSpecialChars' ), 
+                    'originalstring_id' => array( 'field' => 'originalstring_id', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_HtmlSpecialChars' ), 
                     'translation' => array( 'field' => 'translation', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_HtmlSpecialChars' ), 
                     'locale_code' => array( 'field' => 'locale_code', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 

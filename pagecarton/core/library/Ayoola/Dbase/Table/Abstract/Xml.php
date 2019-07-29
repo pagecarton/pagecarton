@@ -283,8 +283,14 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             $this->_objectTemplateValues = $this->_objectData = $records;
             //    var_export( $this->getParameter() );
             $this->setViewContent($this->query('TABLE', 'VIEW', $fieldsKey, $where));
-        } elseif (isset($_SERVER['HTTP_AYOOLA_PLAY_CLASS']) && ($_SERVER['HTTP_AYOOLA_PLAY_CLASS'] === get_class($this))) {
-            $this->setViewContent(  '' . self::__( '<a href="?show_class_data=' . get_class($this) . '">View Table Data for ' . get_class($this) . '</a>' ) . '' );
+        } 
+        elseif (isset($_SERVER['HTTP_AYOOLA_PLAY_CLASS']) && ($_SERVER['HTTP_AYOOLA_PLAY_CLASS'] === get_class($this))) 
+        {
+            $output = 'View data on %s database table';
+            $output = PageCarton_Widget::__( $output );
+            $output = sprintf( $output, '' . get_class($this) . '' );
+
+            $this->setViewContent(  '' . self::__( '<a class="pc-btn" href="?show_class_data=' . get_class($this) . '">' . $output . '</a>' ) . '' );
         }
         //    var_export( $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] );
 

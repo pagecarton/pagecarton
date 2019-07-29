@@ -75,7 +75,7 @@ class Application_User_AdminCreator extends Application_User_Creator
 			return false;
 		}
 	//	$auth = new Ayoola_Access();
-		$this->createForm( 'Create Admin Account' );
+		$this->createForm( '' . self::__( 'Create admin account' ) . '' );
 	//	$this->setViewContent( self::__( '<h2>Sign up for a free account.</h2>' ) ); 
  		$this->setViewContent( $this->getForm()->view() );
 		
