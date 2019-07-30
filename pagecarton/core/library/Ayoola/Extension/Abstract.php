@@ -82,22 +82,8 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 		$form->submitValue = $submitValue ;
 		$fieldset->addElement( array( 'name' => 'extension_title', 'label' => 'Plugin Name', 'placeholder' => 'e.g. My Super Plugin', 'onClick' => '', 'type' => 'InputText', 'value' => @$values['extension_title'] ) );
 		$fieldset->addRequirement( 'extension_title', array( 'WordCount' => array( 3,100, 'badnews' => 'A Plugin name should be made up of 3 to 100  alphanumeric characters.' ) ) ); 
-/*
-		$options = array( 
-							'modules' => 'Modules',
-							'databases' => 'Database Tables Data',
-							'documents' => 'Documents & Files',
-					//		'settings' => 'Settings',
-							'pages' => 'Pages',
-					//		'templates' => 'Themes',
-						);
-		$fieldset->addElement( array( 'name' => 'components', 'label' => 'Plugin Components', 'required' => 'required', 'type' => 'Checkbox', 'value' => @$values['components'] ), $options );
-		$fieldset->addRequirement( 'components', array( 'ArrayKeys' => $options + array( 'badnews' => 'You cannot create an empty Plugin. Please select components to include.' ) ) );
-*/		
-
 		$filter = new Ayoola_Filter_FilenameToClassname();
 		
-	//	if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'modules', Ayoola_Form::getGlobalValue( 'components' ) ) )
 		{
 			try
 			{
@@ -127,21 +113,14 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			}
 			ksort( $classes );
 			asort( $files );
-			$fieldset->addElement( array( 'name' => 'modules', 'required' => 'required', 'label' => 'Plugin Modules', 'type' => 'SelectMultiple', 'value' => @$values['modules'] ), $files );
+			$fieldset->addElement( array( 'name' => 'modules', 'required' => 'required', 'label' => 'Widgets to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['modules'] ), $files );
 			if( $files ) 
 			{
 			//	$fieldset->addRequirement( 'modules', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the modules you want to include in the Plugin' )  ) );
 			}
-			$fieldset->addElement( array( 'name' => 'settings_class', 'label' => 'Settings Module', 'type' => 'Select', 'value' => @$values['settings_class'] ), array( '' => 'No Settings' ) + $classes );
+			$fieldset->addElement( array( 'name' => 'settings_class', 'label' => 'Settings Widgets', 'type' => 'Select', 'value' => @$values['settings_class'] ), array( '' => 'No Settings' ) + $classes );
  	
 		}
-/*		else
-		{
-			$fieldset->addElement( array( 'name' => 'modules', 'type' => 'Hidden', 'value' => '' ) );
-			$fieldset->addElement( array( 'name' => 'settings_class', 'type' => 'Hidden', 'value' => '' ) );
-		}
-*/		
-//		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'databases', Ayoola_Form::getGlobalValue( 'components' ) ) )
 		{
  			$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'databases';  
 		//	var_export( $options );
@@ -174,17 +153,11 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			asort( $files );
 			if( $files ) 
 			{
-				$fieldset->addElement( array( 'name' => 'databases', 'required' => 'required', 'label' => 'Database Table Data', 'type' => 'SelectMultiple', 'value' => @$values['databases'] ), $files );
+				$fieldset->addElement( array( 'name' => 'databases', 'required' => 'required', 'label' => 'Database Data to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['databases'] ), $files );
 			//	$fieldset->addRequirement( 'databases', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the database tables you want to include in the Plugin' )  ) );
 			}
  	
 		}
-/*		else
-		{
-			$fieldset->addElement( array( 'name' => 'databases', 'type' => 'Hidden', 'value' => '' ) );
-		}
-*/		
-//		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'documents', Ayoola_Form::getGlobalValue( 'components' ) ) )
 		{
  			$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents';  
 		//	var_export( $options );
@@ -207,7 +180,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 				$files[$file] = $file;
 			}
 			asort( $files );
-			$fieldset->addElement( array( 'name' => 'documents', 'required' => 'required', 'label' => 'Documents & Files', 'type' => 'SelectMultiple', 'value' => @$values['documents'] ), $files );
+			$fieldset->addElement( array( 'name' => 'documents', 'required' => 'required', 'label' => 'Documents & Files  to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['documents'] ), $files );
 	//		$fieldset->addElement( array( 'name' => 'upload_document', 'label' => ' ', 'type' => 'document', 'value' => @$values['upload_document'] ) );
 			if( $files ) 
 			{
@@ -215,14 +188,8 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			}
  	
 		}
-/*		else
-		{
-			$fieldset->addElement( array( 'name' => 'documents', 'type' => 'Hidden', 'value' => '' ) );
-		}
-*/		
 
 		
-	//	if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'pages', Ayoola_Form::getGlobalValue( 'components' ) ) )
 		{
 			$option = new Ayoola_Page_Page;
 			$option = $option->select();
@@ -230,39 +197,14 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
 			$option = $filter->filter( $option );
 			asort( $option );
-			$fieldset->addElement( array( 'name' => 'pages', 'required' => 'required', 'label' => 'Pages', 'type' => 'SelectMultiple', 'value' => @$values['pages'] ), $option );
+			$fieldset->addElement( array( 'name' => 'pages', 'required' => 'required', 'label' => 'Pages to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['pages'] ), $option );
 			if( $option )     
 			{
 			//	$fieldset->addRequirement( 'pages', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select pages you want to include in the Plugin' )  ) );
 			}
  	
 		}
-/*		else
-		{
-			$fieldset->addElement( array( 'name' => 'pages', 'type' => 'Hidden', 'value' => '' ) );
-		}
-*//*		
-		if( is_array( Ayoola_Form::getGlobalValue( 'components' ) ) && in_array( 'templates', Ayoola_Form::getGlobalValue( 'components' ) ) )
-		{
-			$option = new Ayoola_Page_PageLayout;
-			$option->getDatabase()->setAccessibility( $option::SCOPE_PRIVATE );      
-			$option = $option->select( null, null, array( 'work-arround-333' => true ) );
-			require_once 'Ayoola/Filter/SelectListArray.php';
-			$filter = new Ayoola_Filter_SelectListArray( 'layout_name', 'layout_label');
-			$option = $filter->filter( $option );
-			asort( $option );
-			$fieldset->addElement( array( 'name' => 'templates', 'required' => 'required', 'label' => 'Select the layout themes <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Page_Layout_List/" target="_blank">(themes)</a>', 'type' => 'SelectMultiple', 'value' => @$values['templates'] ), $option );
-			if( $option ) 
-			{
-				$fieldset->addRequirement( 'templates', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select themes you want to include in the Plugin' )  ) );
-			}
- 	
-		}
-		else
-		{
-			$fieldset->addElement( array( 'name' => 'templates', 'type' => 'Hidden', 'value' => '' ) );
-		}
-*/		$fieldset->addLegend( $legend );
+		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
     } 
