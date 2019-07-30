@@ -191,21 +191,23 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             $adapter->setRelationship(self::SCOPE_PRIVATE);
             $adapter->cache = false;
             $values         = $this->select();
-            //    var_export( $values );
-            //   var_export( static::$_tableInfo['filename'] );
-            //  exit();
 
             //    Backup the previous table
-            if (!empty(static::$_tableInfo['filename'])) {
+            if (!empty(static::$_tableInfo['filename'])) 
+            {
                 $backupFile = static::$_tableInfo['filename'] . '.backup';
-                if (file_exists($backupFile)) {
+                if (file_exists($backupFile)) 
+                {
                     //      self::v( $backupFile );
 
                     //    if( time() - filemtime( $backupFile ) < 86400 )
-                    if (time() - filemtime($backupFile) < 86400) {
+                    if( time() - filemtime($backupFile) < 86400 ) 
+                    {
                         //    Backup in progress. Don't duplicate progress unless its more than one day
                         break;
-                    } else {
+                    } 
+                    else 
+                    {
                         //    Something has gone wrong, restore the backup automagically.
                         $values = include $backupFile;
                         //    var_export( $values );
@@ -218,7 +220,9 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
                         //           var_export(  static::$_tableInfo );
 
                     }
-                } else {
+                } 
+                else 
+                {
                     file_put_contents($backupFile, '<?php return ' . var_export($values, true) . ';');
                 }
                 //    copy(  static::$_tableInfo['filename'], $backupFile );
@@ -242,14 +246,22 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             //    exit( __LINE__ );
             set_time_limit(86400); //    We may need time to update a very large table
             //    ignore_user_abort( true );
-            foreach ($values as $each) {
+            foreach( $values as $each ) 
+            {
+            //    var_export( $each );
                 //    $this->insert( $each, array( 'record_row_id' => $each[$this->getTableName() . '_id'] ) );
                 //    set_time_limit( 30 );
                 try
                 {
-                    $this->insert($each);
+
+                    //  sometimes, cache won't allow insert to go through
+                    //  workaround
+                    $each['cache_work_around_xyz'] = time();
+
+                    $resultInsert = $this->insert( $each );
+
                 } catch (Exception $e) {
-                    null;
+                //    var_export( $e );
                 }
             }
             if (count($values) === count($this->select())) {

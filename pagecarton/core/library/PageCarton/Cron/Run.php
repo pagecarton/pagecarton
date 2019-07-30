@@ -98,7 +98,7 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                     $runData = array( 'cron_id' => $data['table_id'], 'runtime' => $cTime, );
                     PageCarton_Cron_Run_Table::getInstance()->insert( $runData );
                 }
-                $this->setViewContent( self::__( '<div class="goodnews">' . $u . ' cron tasks processed successfully</div>' ) );
+                $this->setViewContent( self::__( '<div class="goodnews">' . sprintf( PageCarton_Widget::__( "%s cron tasks processed successfully" ), $u ) . '</div>' ) );
             }
 
             //  if you are not admin, don't see updates.
