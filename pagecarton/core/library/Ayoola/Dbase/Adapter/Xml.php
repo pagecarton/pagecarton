@@ -661,29 +661,6 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			throw new Ayoola_Dbase_Adapter_Exception( 'COULD NOT CREATE A DATABASE - ' . dirname( $filename ) );
 		}
 
-		//	Backup is causing a lot of issues in logs.
-	//	$backUpFile = $filename . '.backup';
-//	 	if( is_file( $backUpFile ) )
-		{
-			// log error
-
-		//	if( is_file( $backUpFile ) )
-			{
-			//	$newBackUpFile = $backUpFile . time();
-			//	Application_Log_View_Error::log( "There is an error on an XML Database. The back up file $backUpFile as been copied to $newBackUpFile for safe keep." );
-			//	copy( $backUpFile, $newBackUpFile );
-			} // operation ended. Delete backup
-
-		}
-
-	/* 	while( is_file( $backUpFile ) )
-		{
-			//	Availability of Backup file means that a "saveFile" process is ON
-
-			usleep( round( rand( 0, 100 ) * 1000 ) );
-		}
-	*/
-		//	exit( var_export( $backUpFile ) );
 
 	//	if( is_file( $filename ) ){ copy( $filename, $backUpFile ); } // backup file before overwritting
 		$this->getXml()->save( $filename );
