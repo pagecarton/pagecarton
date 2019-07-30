@@ -134,11 +134,11 @@ class Ayoola_Form_Element extends Ayoola_Form
     //    $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $element['name'] ) );	
 			
 		$element['real_name'] = $element['name'];
-		@$element['title'] = trim( $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) ) , ':' );
+		@$element['title'] = trim( $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) ), ':' );
 		@$element['placeholder'] = ( $element['placeholder'] ? : $element['label'] ) ? : ucwords( str_replace( '_', ' ', $element['name'] ) );
 		$element['hashed_name'] = self::hashElementName( $element['name'] );
-		$element['title'] = self::__( $element['title'] );
-		$element['placeholder'] = self::__( $element['placeholder'] );
+    //    var_export( $element['title'] );
+    //    var_export( $element['placeholder'] );
 		if( $this->hashElementName )
 		{
 			$element['name'] = $element['hashed_name'];
@@ -209,6 +209,7 @@ class Ayoola_Form_Element extends Ayoola_Form
             unset( $element['multiple'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
             if( ! empty( $values ) && empty( $values['html'] ) )
             {
+            //    var_export( $values );
                 $values = self::__( $values );
             }
 			$markup .= $this->$method( $element, $values );
@@ -225,10 +226,15 @@ class Ayoola_Form_Element extends Ayoola_Form
 			case 'addinputtext':
 			case 'addtextarea':
 			case 'addselect':
+			case 'addcheckbox':
+			case 'addradio':
+			case 'addselectmultiple':
 			//	self::v( $method );
 				//	Set Element ID and Label to default if undeclared
                 $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $realName ) );
-			break;
+                $element['title'] = self::__( trim( $element['title'], ': ' ) );
+                $element['placeholder'] = self::__( $element['placeholder'] );
+            break;
 			case 'addhidden':
 				$element['label'] = null;	
 			break;

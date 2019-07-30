@@ -39,7 +39,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
      *
      * @var bool
      */
-	public $translateInnerWidgetContent = true;
+	public static $translateInnerWidgetContent = true;
 		
 	
     /**

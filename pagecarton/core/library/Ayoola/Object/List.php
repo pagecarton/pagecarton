@@ -39,7 +39,7 @@ class Ayoola_Object_List extends Ayoola_Object_Abstract
      *
      * @var bool
      */
-	public $translateInnerWidgetContent = true;
+	public static $translateInnerWidgetContent = true;
 		
 		
     /**

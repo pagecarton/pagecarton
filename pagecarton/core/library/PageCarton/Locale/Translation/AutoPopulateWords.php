@@ -67,7 +67,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
             $pages = $pages->select();
 			$this->setViewContent(  '' . self::__( '<div class="goodnews">Words populated successfully</div>' ) . '', true  );
             $currentUrl = Ayoola_Application::getRuntimeSettings( 'real_url' );
-            set_time_limit( 0 );
+        //    set_time_limit( 0 );
             foreach( $pages as $page )
             {
                 if( $page['url'] === '/accounts/signout' )
@@ -98,11 +98,29 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
 				$classFile = Ayoola_Loader::getFullPath( $classFile );
 			//	var_export( $classFile );
 				$fileContent = file_get_contents( $classFile );
-                preg_match_all( "|setViewContent\( ?([^']*)'([^$()_]*)'([^']*) ?\)|", $fileContent, $output );
                 $link = '/widgets/' . $class;
                 Ayoola_Application::setRuntimeSettings( 'real_url', $link );
             //    var_export( $output[2] );
 
+                //  set words set right
+                preg_match_all( "|self::__\( ?'([^:>']*)' ?\)|", $fileContent, $output );
+            //    var_export( $output[1] );
+            //    exit();
+                foreach( $output[1] as $phrase )
+                {
+
+                //    self::v( $phrase );
+                    $phrase = trim( $phrase );
+                    if( false === strpos( trim( $phrase ), ' ' ) )
+                    {
+                        continue;
+                    }
+                   self::__( $phrase );
+                //    $this->setViewContent( $phrase );
+                }
+
+                //  other words
+                preg_match_all( "|setViewContent\( ?([^']*)'([^$()_]*)'([^']*) ?\)|", $fileContent, $output );
                 foreach( $output[2] as $phrase )
                 {
                     $phrase = trim( $phrase );
@@ -113,6 +131,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                    self::__( $phrase );
                 //    $this->setViewContent( $phrase );
                 }
+
                 if( false === stripos( $fileContent, 'exit(' ) 
                 
                 &&

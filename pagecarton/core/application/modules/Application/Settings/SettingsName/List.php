@@ -46,7 +46,7 @@ class Application_Settings_SettingsName_List extends Application_Settings_Settin
      *
      * @var bool
      */
-	public $translateInnerWidgetContent = true;
+	public static $translateInnerWidgetContent = true;
 		
     /**
      * The method does the whole Class Process

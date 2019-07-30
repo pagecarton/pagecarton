@@ -598,8 +598,11 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
                     $value = null;
                     foreach( (array) $row[$field] as $rowField )
                     {
-                        if( $this->pageName && Ayoola_Object_Embed::isWidget( $this->pageName ) && $this->pageName->translateInnerWidgetContent )
+                    //    var_export( $this->pageName );
+                    //    var_export( $this->pageName::$translateInnerWidgetContent );
+                        if( $this->pageName && Ayoola_Object_Embed::isWidget( $this->pageName ) && $this->pageName::$translateInnerWidgetContent  )
                         {
+                            
                             $row[$key] = self::__( $row[$key] );
                         }
 

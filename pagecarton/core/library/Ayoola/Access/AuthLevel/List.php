@@ -39,7 +39,7 @@ class Ayoola_Access_AuthLevel_List extends Ayoola_Access_AuthLevel_Abstract
      *
      * @var bool
      */
-	public $translateInnerWidgetContent = true;
+	public static $translateInnerWidgetContent = true;
 		
 	
     /**

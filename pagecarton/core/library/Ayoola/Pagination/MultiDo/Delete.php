@@ -82,7 +82,7 @@ class Ayoola_Pagination_MultiDo_Delete extends PageCarton_Widget
                 return false;
             }
             $recordIds = $_GET[$classId];
-            $this->createConfirmationForm( 'Delete',  'Delete ' . count( $recordIds ) . ' item(s)' );
+            $this->createConfirmationForm( 'Delete',  '' . sprintf( self::__( 'Delete %d item(s)' ), count( $recordIds ) ) );
             $this->setViewContent( $this->getForm()->view(), true );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
             $this->setViewContent(  '' . self::__( '<div></div>' ) . '', true  );

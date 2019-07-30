@@ -38,7 +38,7 @@ class Ayoola_Menu_List  extends Ayoola_Menu_Abstract
      *
      * @var bool
      */
-	public $translateInnerWidgetContent = true;
+	public static $translateInnerWidgetContent = true;
 		
 	
     /**

@@ -39,7 +39,7 @@ class Ayoola_Extension_Import_List extends Ayoola_Extension_Import_Abstract
      *
      * @var bool
      */
-	public $translateInnerWidgetContent = true;
+	public static $translateInnerWidgetContent = true;
 	
     /**
      * Performs the creation process

@@ -39,7 +39,7 @@ class Application_User_NotificationMessage_List extends Application_User_Notific
      *
      * @var bool
      */
-	public $translateInnerWidgetContent = true;
+	public static $translateInnerWidgetContent = true;
 	
     /**
      * Performs the creation process

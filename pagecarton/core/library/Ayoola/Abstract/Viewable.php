@@ -181,7 +181,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      *
      * @var bool
      */
-	public $translateInnerWidgetContent;
+	public static $translateInnerWidgetContent;
 
     /**	Set to true if the init method has been run
      *
@@ -942,16 +942,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function __( $string )
     {
-        
-        if( ! self::getLocale() || ! @in_array( 'auto_translate', PageCarton_Locale_Settings::retrieve( 'locale_options' ) ) )
+        $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
+    //    if( ! self::getLocale() || ! @in_array( 'auto_translate', $options ) )
 		{
 			//	was slowing down app
-			return $string;
+		//	return $string;
         }
-        $id = sha1( json_encode( $string ) . json_encode( PageCarton_Locale_Settings::retrieve() ) );
+        $id = sha1( json_encode( $string ) . 'ccc' . json_encode( PageCarton_Locale_Settings::retrieve() ) );
         if( isset( static::$_translated[$id] ) )
         {
-        //    return static::$_translated[$id];
+            return static::$_translated[$id];
         }
         $translationStorage = self::getObjectStorage( array( 'id' => 'translation' . $id . 'dddss' . self::getLocale(), 'device' => 'File', 'time_out' => 1000000, ) );  
     //	var_export( json_encode( $string ) );
@@ -1017,7 +1017,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				return $string;
 			}
 		}
-        if( false !== strpos( $string, '<' ) )
+        if( false !== strpos( $string, '<' ) 
+            || false !== strpos( $string, '[]' ) 
+            || false !== strpos( $string, DS ) 
+            || false !== strpos( $string, '_' ) 
+            || false !== strpos( $string, '://' ) 
+        )
         {
             static::$_translated[$id] = $string; 
             $translationStorage->store( $string );
@@ -1052,7 +1057,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 			//	cache is workaround because of insert not active until next load
 			//	was causing double inserting of words when the words are double on same page
-			$stringStorage = self::getObjectStorage( array( 'id' => 'stringInfo' . $string . $id . 'dddss', 'device' => 'File', 'time_out' => 100000, ) );     
+			$stringStorage = self::getObjectStorage( array( 'id' => 'stringInssfssso' . $id . 'dddss', 'device' => 'File', 'time_out' => 100000, ) );     
 			if( ! $stringInfo = $stringStorage->retrieve() )
 			{
                 $words = PageCarton_Locale_OriginalString::getInstance();
@@ -1065,14 +1070,19 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                         $url = '/widgets/' . $_SERVER['HTTP_AYOOLA_PLAY_CLASS'];
                     break;
                 }
+            //    var_export( $string );
 				if( ! $stringInfo = $words->selectOne( null, array( 'string' => $string ) ) )
 				{
-			//		var_export( $string );
-					$options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
-					if( is_array( $options ) && in_array( 'autosave_new_words', $options ) )
-					{
-						$stringInfo = $words->insert( array( 'string' => $string, 'pages' => array( $url ), ) );
-					}
+                    $trimmedString = trim( $string, " \t\r\n" );
+                    if( ! $stringInfo = $words->selectOne( null, array( 'string' => $trimmedString ) ) ) 
+                    {
+                        //	var_export( $string );
+                        $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
+                        if( is_array( $options ) && in_array( 'autosave_new_words', $options ) )
+                        {
+                            $stringInfo = $words->insert( array( 'string' => $string, 'trimmed_string' => $trimmedString, 'pages' => array( $url ), ) );
+                        }
+                    }
                 }
                 if( ! empty( $stringInfo['pages'] ) && ! in_array( $url, $stringInfo['pages'] ) )
                 {
