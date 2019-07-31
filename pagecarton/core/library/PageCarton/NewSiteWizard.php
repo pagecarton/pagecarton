@@ -48,13 +48,13 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             //  may be the cause of cache clearing every time
             //    Application_Personalization::viewInLine();
             $stages = array(
-                array('key' => self::__( 'Basic information' ), 'title' => '' . self::__( 'Set site basic information' ) . '', 'class' => 'Application_Personalization'),
+                array('key' => self::__( 'Update Basic Info' ), 'title' => '' . self::__( 'Set site basic branding information' ) . '', 'class' => 'Application_Personalization'),
                 array('key' => '' . self::__( 'Browse themes' ) . '', 'title' => '' . self::__( 'Choose from hundreds of great themes for your site' ) . '', 'class' => 'Ayoola_Page_Layout_Repository'),
                 array('key' => '' . self::__( 'Choose a theme' ) . '', 'title' => '' . self::__( 'Make a theme the default site theme' ) . '', 'class' => 'Ayoola_Page_Settings'),
-                array('key' => '' . self::__( 'Set static content' ) . '', 'title' => '' . self::__( 'Replace dummy text content' ) . '', 'class' => 'Ayoola_Page_Layout_ReplaceText'),
-                array('key' => '' . self::__( 'Update static images' ) . '', 'title' => '' . self::__( 'Change some theme dummy pictures' ) . '', 'class' => 'Ayoola_Page_Layout_Images'),
+                array('key' => '' . self::__( 'Set static content' ) . '', 'title' => '' . self::__( 'Update site static/dummy text content' ) . '', 'class' => 'Ayoola_Page_Layout_ReplaceText'),
+                array('key' => '' . self::__( 'Update static images' ) . '', 'title' => '' . self::__( 'Change some of the theme dummy pictures' ) . '', 'class' => 'Ayoola_Page_Layout_Images'),
                 array('key' => '' . self::__( 'Publish Content' ) . '', 'title' => '' . self::__( 'Start building up the site by adding some structured posts' ) . '', 'class' => 'Application_Article_Publisher'),
-                array('key' => '' . self::__( 'Share Site' ) . '', 'title' => '' . self::__( 'Your are done building your site. Next is to share with the world with social tools' ) . '', 'class' => 'Application_Share_Website'),
+                array('key' => '' . self::__( 'Share the site now' ) . '', 'title' => '' . self::__( 'Your are done building your site. Next is to share with the world with social tools' ) . '', 'class' => 'Application_Share_Website'),
             );
 
             if (@$_GET['mode'] === 'publisher' || $this->getParameter('publisher_mode')) {
@@ -113,9 +113,9 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             $this->setViewContent($html, true);
             if (Ayoola_Loader::loadClass($class)) {
                 $this->setViewContent('<div style="text-align:center;">' . sprintf( PageCarton_Widget::__( ' Step %d of %d' ), $weAreOn, count( $stages ) ) . '
-               Step ' . ($weAreOn) . ' of ' . count( $stages ) . ' <br><br>
-               ' . $xT[$class]['title'] . ' <br><br>
-                <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . $xT[$class]['key'] . '</a><br><br>
+              <br><br><br><br>
+               ' . $xT[$class]['title'] . ' <br><br><br><br>
+                <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . $xT[$class]['key'] . '</a><br><br><br><br>
                 <a style="font-size:x-small;" class="" href="' . Ayoola_Application::getUrlPrefix() . '/" target="_blank"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . self::__( 'Preview Site' ) . ' </a><br><br>
 
                 </div>');

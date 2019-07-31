@@ -67,7 +67,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
             $pages = $pages->select();
 			$this->setViewContent(  '' . self::__( '<div class="goodnews">Words populated successfully</div>' ) . '', true  );
             $currentUrl = Ayoola_Application::getRuntimeSettings( 'real_url' );
-        //    set_time_limit( 0 );
+            set_time_limit( 0 );
             foreach( $pages as $page )
             {
                 if( $page['url'] === '/accounts/signout' )
