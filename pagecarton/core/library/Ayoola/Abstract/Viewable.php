@@ -1017,24 +1017,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				return $string;
 			}
 		}
-        if( false !== strpos( $string, '<' ) 
-            || false !== strpos( $string, '[]' ) 
-            || false !== strpos( $string, DS ) 
-            || false !== strpos( $string, '_' ) 
-            || false !== strpos( $string, '://' ) 
-        )
-        {
-            static::$_translated[$id] = $string; 
-            $translationStorage->store( $string );
-            return $string;
-        }
-        if( false !== strpos( $string, '>' ) )
-        {
-            static::$_translated[$id] = $string; 
-            $translationStorage->store( $string );
-            return $string;
-        }
-
     //	var_export( $string );
 	//	var_export( $arr );
 	//	$string = trim( $string );
@@ -1080,7 +1062,23 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                         $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
                         if( is_array( $options ) && in_array( 'autosave_new_words', $options ) )
                         {
-                            $stringInfo = $words->insert( array( 'string' => $string, 'trimmed_string' => $trimmedString, 'pages' => array( $url ), ) );
+                            if( 
+                                false !== strpos( $string, '<' ) 
+                                || false !== strpos( $string, '[]' ) 
+                                || ( strpos( $string, '[' ) && ( strpos( $string, '[' ) - strpos( $string, ']' ) < 3 ) )
+                                || ( substr_count( $string, '{' ) > 2 ) 
+                                || ( strlen( $string, '{' ) < 4 ) 
+                                || false !== strpos( $string, DS ) 
+                                || false !== strpos( $string, '_' ) 
+                                || false !== strpos( $string, '://' ) 
+                            )
+                            {
+
+                            }
+                            else
+                            {
+                                $stringInfo = $words->insert( array( 'string' => $string, 'trimmed_string' => $trimmedString, 'pages' => array( $url ), ) );
+                            }
                         }
                     }
                 }
