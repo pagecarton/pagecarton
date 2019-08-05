@@ -1073,7 +1073,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                                 || false !== strpos( $string, '://' ) 
                             )
                             {
-
+                                // don't autoinser
                             }
                             else
                             {
