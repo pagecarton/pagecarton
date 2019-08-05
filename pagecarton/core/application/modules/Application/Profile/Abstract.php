@@ -355,13 +355,15 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		$form->oneFieldSetAtATime = false;
 		$form->submitValue = $submitValue ;
 		$fieldset = new Ayoola_Form_Element;
+        $authTable = new Ayoola_Access_AuthLevel;
+        $authTable->getDatabase()->getAdapter()->setAccessibility( $authTable::SCOPE_PRIVATE );
+        $authTable->getDatabase()->getAdapter()->setRelationship( $authTable::SCOPE_PRIVATE );
 		if( ! static::isSubDomain() )
 		{
 		//	$fieldset->addRequirement( 'display_picture', array( 'NotEmpty' => array( 'badnews' => 'Please select a valid file to upload...', ) ) );
 			
 			//	Profile type
-			$authLevel = new Ayoola_Access_AuthLevel;
-			$authLevel = $authLevel->select();
+			$authLevel = $authTable->select( null, null, array( 'xx' => 'ss') );
 			$options = array();
 			foreach( $authLevel as $each )
 			{
@@ -386,11 +388,10 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 				$fieldset->addElement( array( 'name' => 'access_level', 'type' => 'Hidden', 'value' => $_REQUEST['access_level'] ) );  
 				$fieldset->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
             }
-            elseif( self::hasPriviledge( 98 ) )
+            elseif( self::hasPriviledge( 98 ) AND $authLevel = $authTable->select()  )
             {
 				$account = new Ayoola_Form_Element;
-                $authLevel = new Ayoola_Access_AuthLevel;
-                $authLevel = $authLevel->select();
+                
                 $options = array();
                 foreach( $authLevel as $each )
                 {
@@ -407,8 +408,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			$customForm = false;
 			if( $accessLevel )
 			{
-				$authLevel = new Ayoola_Access_AuthLevel;
-				$authLevel = $authLevel->selectOne( null, array( 'auth_level' => $accessLevel ) );
+				$authLevel = $authTable->selectOne( null, array( 'auth_level' => $accessLevel ) );
 		//		var_export( $authLevel );
 				if( ! empty( $authLevel['additional_forms'] ) && is_array( $authLevel['auth_options'] ) && in_array( 'attach_forms', $authLevel['auth_options'] ) ) 
 				{
