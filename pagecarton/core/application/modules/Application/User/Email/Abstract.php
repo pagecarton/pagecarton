@@ -251,7 +251,7 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
 			$options = array();
 		//	$options = $table->select( null, array( 'sub_domain' => 0 ) );
 		//	$options = $table->select();   
-			$mainDomain = str_ireplace( 'www.', '', Ayoola_Page::getDefaultDomain() );
+			$mainDomain = str_ireplace( array( 'www.', 'www.pc-domain-manager.' ), '', Ayoola_Page::getDefaultDomain() );
 			$options[] = array( 'domain_name' => $mainDomain );
 			require_once 'Ayoola/Filter/SelectListArray.php';
 			$filter = new Ayoola_Filter_SelectListArray( 'domain_name', 'domain_name');
@@ -275,25 +275,7 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
 		if( ( $this->getGlobalValue( 'editing_options' ) && in_array( 'user', $this->getGlobalValue( 'editing_options' ) ) ) || ! $values ) 
 		{
 			//	commented out to allow it to work in the cloud. Think of another solution later.
-		//	if( intval( $userInfo['access_level'] ) > 4 )
-			{ 
-/* 				//	Assign to user account
-				$fieldset = new Ayoola_Form_Element;
-				$class = new Application_User_List();
-				$options = $class->getDbData();
-				
-				require_once 'Ayoola/Filter/SelectListArray.php';
-		//		var_export( $options );
-				$filter = new Ayoola_Filter_SelectListArray( 'username', 'username');
-				$options = $filter->filter( $options );
-		//		var_export( $options );
-				unset
-				$fieldset->addElement( array( 'name' => 'user_id', 'type' => 'Select', 'value' => @$values['user_id'] ), $options );
-			//	$fieldset->addRequirement( 'user_id', array( 'ArrayKeys' => $options ) );
-				$fieldset->addRequirement( 'user_id', array( 'Int' => null ) );
-				$fieldset->addLegend( 'Assign E-mail to an Application User' );
-				$form->addFieldset( $fieldset );
- */			}
+
 		}
 		if( ( $this->getGlobalValue( 'editing_options' ) && in_array( 'password', $this->getGlobalValue( 'editing_options' ) ) ) || ! $values )
 		{ 
