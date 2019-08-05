@@ -251,7 +251,7 @@ abstract class Application_User_Email_Abstract extends Ayoola_Abstract_Table
 			$options = array();
 		//	$options = $table->select( null, array( 'sub_domain' => 0 ) );
 		//	$options = $table->select();   
-			$mainDomain = str_ireplace( array( 'www.', 'www.pc-domain-manager.' ), '', Ayoola_Page::getDefaultDomain() );
+			$mainDomain = str_ireplace( array( 'www.', 'pc-domain-manager.' ), '', Ayoola_Page::getDefaultDomain() );
 			$options[] = array( 'domain_name' => $mainDomain );
 			require_once 'Ayoola/Filter/SelectListArray.php';
 			$filter = new Ayoola_Filter_SelectListArray( 'domain_name', 'domain_name');
