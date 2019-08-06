@@ -452,8 +452,8 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			self::setFormRequirements( $form, $requirements );
 		}
 		$fieldset = new Ayoola_Form_Element();		
-	//		self::v( $cart['settings']['total'] );
-		if( ! empty( floatval( $cart['settings']['total'] ) ) )
+			self::v( $cart['settings']['total'] );
+		if( ! empty( intval( $cart['settings']['total'] ) ) )
 		{
 			$table = 'Application_Subscription_Checkout_CheckoutOption';
 			$table = $table::getInstance( $table::SCOPE_PRIVATE );
