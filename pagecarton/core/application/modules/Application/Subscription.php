@@ -381,42 +381,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 		$previousData = @$previousData['cart'][$value['subscription_name']];
   //  	var_export( $previousData );
 		
-/* 		//	INTRODUCING CALL-TO-ACTION
-		if( $this->getParameter( 'call_to_action' ) )
-		{
-			$fieldset = new Ayoola_Form_Element();		
-		//	$callToActionStorage = $this->getObjectStorage( 'call_to_action' .  $value['subscription_name'] );
-		//	$callToAction = $this->getParameter( 'call_to_action' ) ? : $callToActionStorage->retrieve();
-		//	$callToAction = $this->getParameter( 'call_to_action' ) ? : $callToActionStorage->retrieve();
-		
-			//	Post the subscription name so it could retain state
-			$fieldset->addElement( array( 'name' => 'subscription_name', 'type' => 'hidden', 'value' => null ) );
-			$fieldset->addFilter( 'subscription_name', array( 'DefiniteValue' => $value['subscription_name'] ) );
-			$fieldset->addElement( array( 'type' => 'html', 'name' => 'e' ), array( 'html' => '<span class="calltoactionnews" onClick="">' . $this->getParameter( 'call_to_action' ) . '</span>' ) );
-	//		$fieldset->addElement( array( 'type' => 'html', 'name' => 'e' ), array( 'html' => '<span class="calltoactionnews" onClick="">' . $callToAction  . '</span>' ) );
-			$form->addFieldset( $fieldset );
-	//		$callToActionStorage->store( $callToAction );
-			//	switch off standard submit
-			$form->submitValue = null;
-		}
- *//* 		elseif( $callToAction )
-		{
-			//	This will be our call_to_action
-			$form->submitValue = 'Go';
-		}
- */		/* else
-		{
-			//	This will be our call_to_action
-			$form->submitValue = 'Add to Cart';
-		} */
-/* 
-		//	Post the subscription name so it could retain state
-		$fieldset = new Ayoola_Form_Element();		
-		$fieldset->hashElementName = false;
-		$fieldset->addElement( array( 'name' => 'subscription_name', 'type' => 'hidden', 'value' => $value['subscription_name'] ) );
-		$form->addFieldset( $fieldset );
-		
- */		
 		//	First fieldset
 		$fieldset = new Ayoola_Form_Element();		
 		$priceId = $value['subscription_name'] . 'price_id';

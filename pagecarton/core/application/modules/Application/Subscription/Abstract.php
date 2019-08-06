@@ -163,15 +163,18 @@ abstract class Application_Subscription_Abstract extends Ayoola_Abstract_Table
 				case 'delete':
 					foreach( $items as $name => $value )
 					{
-		//	var_export( $value );
-		//	var_export( md5( serialize( $value ) ) );
-						if( md5( serialize( $value ) ) == $_GET['cart_id'] ){ unset( $items[$name] ); }
+                        if( md5( serialize( $value ) ) == $_GET['cart_id'] )
+                        {
+                            @$data['settings']['total'] -= $items[$name]['price'] * $items[$name]['multiple'];
+                            unset( $items[$name] ); 
+                        }
 					}
 					break;
 				case 'empty':
 					if( md5( serialize( $items ) ) == $_GET['cart_id'] ){ $items = array(); }
 					break;
-			}
+            }
+            
 			$this->cartSave( $items, @$data['settings'] );
 			break;
 		}
@@ -213,43 +216,17 @@ abstract class Application_Subscription_Abstract extends Ayoola_Abstract_Table
 		//	We don't allow editing UNIQUE Keys
 		$fieldset->addElement( array( 'name' => 'subscription_label', 'label' => 'Product / Service', 'description' => 'What do you want to sell on this website?', 'type' => 'InputText', 'value' => @$values['subscription_label'] ) );
 		$fieldset->addRequirement( 'subscription_label', array( 'WordCount' => array( 3,100 ) ) );
-		$fieldset->addElement( array( 'name' => 'subscription_description', 'label' => 'Description', 'description' => 'Briefly Describe this product or service.', 'type' => 'Textarea', 'value' => @$values['subscription_description'] ) );
-/* 		
-		$authLevel = new Ayoola_Access_AuthLevel;
-		$authLevel = $authLevel->select();
-		require_once 'Ayoola/Filter/SelectListArray.php';
-		$filter = new Ayoola_Filter_SelectListArray( 'auth_level', 'auth_name');
-		$authLevel = $filter->filter( $authLevel );
-		$fieldset->addElement( array( 'name' => 'auth_level', 'description' => 'Minimum user level that can subscribe to this product or service.', 'type' => 'Select', 'value' => @$values['auth_level'] ), $authLevel );
-		$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $authLevel )  ) );
-		unset( $authLevel );
- */		
-/* 		$doc = new Ayoola_Doc_Document;
-		$doc = $doc->select();
-		require_once 'Ayoola/Filter/SelectListArray.php';
-		$filter = new Ayoola_Filter_SelectListArray( 'document_id', 'document_name');
-		$doc = array( 0 => 'No Picture' ) + $filter->filter( $doc );
-		$fieldset->addElement( array( 'name' => 'document_id', 'label' => 'Screenshot', 'description' => 'Screenshot of product.', 'type' => 'Select', 'value' => @$values['document_id'] ), $doc );
-		$fieldset->addRequirement( 'document_id', array( 'InArray' => array_keys( $doc )  ) );
-		unset( $doc );
- */		
+		$fieldset->addElement( array( 'name' => 'subscription_description', 'label' => 'Description', 'description' => 'Briefly Describe this product or service.', 'type' => 'Textarea', 'value' => @$values['subscription_description'] ) );		
 	
 		//	Cover photo
 	
 		//	Cover photo
-	//	$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
 		$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
 	//	var_export( $link );
 		$fieldset->addElement( array( 'name' => 'document_url', 'label' => '', 'placeholder' => 'Screen shot for product or service', 'type' => 'Hidden', 'value' => @$values['document_url'] ) );
 		$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html' ), array( 'html' => Ayoola_Doc_Upload_Link::viewInLine( array( 'image_preview' => ( @$values['document_url'] ? : null ), 'field_name' => $fieldName, 'width' => '900', 'height' => '300', 'crop' => true, 'field_name_value' => 'url' ) ) ) );
-/* 
-		$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . Ayoola_Form::hashElementName( 'document_url' );
-	//	var_export( $link );
-		$fieldset->addElement( array( 'name' => 'document_url', 'label' => '<input type=\'button\' value=\'Select Photo\' />', 'placeholder' => 'Screen shot for product or service', 'onClick' => 'ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' );', 'type' => 'InputText', 'value' => @$values['document_url'] ) );
- *//* 		$options =  array( 'No', 'Yes' );
-		$fieldset->addElement( array( 'name' => 'enabled', 'description' => 'Enable subscription to this product or service by default?', 'type' => 'Select', 'value' => @$values['enabled'] ), $options );
-	//	$fieldset->addElement( array( 'name' => __CLASS__, 'value' => $submitValue, 'type' => 'Submit' ) );
- */		$time = is_null( $values ) ? 'creation_date' : 'modified_date';
+
+		$time = is_null( $values ) ? 'creation_date' : 'modified_date';
 		$fieldset->addElement( array( 'name' => $time, 'type' => 'Hidden' ) );
 		
 //		$fieldset->addRequirements( array( 'WordCount' => array( 1,100 ) ) );

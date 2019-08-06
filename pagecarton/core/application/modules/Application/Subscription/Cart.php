@@ -199,9 +199,8 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			$row->appendChild( $columnNode );
 		}
 		$cartID = md5( serialize( $values ) );
-	//	var_export( $deleteMessage );
-	//	var_export( $data['settings']['edit_cart_url'] );
-		$deleteUrl = $deleteMessage ? $data['settings']['edit_cart_url'] : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'empty', 'cart_id' => $cartID  ) );
+
+        $deleteUrl = $deleteMessage ? $data['settings']['edit_cart_url'] : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'empty', 'cart_id' => $cartID  ) );
 		$columnNode = @$this->_xml->createHTMLElement( 'td', '<a href="' . $deleteUrl . '" title="' . $deleteMessage . ' Empty Cart">x</a>' );
 		$columnNode->setAttribute( 'align', 'center'  );
 		$row->appendChild( $columnNode );

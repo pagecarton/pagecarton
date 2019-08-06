@@ -81,18 +81,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		//	Dont save plaintext password
 		unset( $values['password'] );
 		unset( $values['password2'] );
-		
-	//	var_export( $values );
-		
-/* 		//	Email form values
-		$stringValues = "\r\n<br>";
-		foreach( $values as $key => $value )
-		{
-			$key = implode( ' ', array_map( 'ucfirst', explode( '_', $key ) ) );
-			$stringValues .= "<strong>$key</strong>: $value\r\n<br>";
-		}
-		$stringValues .= "\r\n<br>";
- */		
+			
 		//	Put the checkout info in the cart
 		$cart = self::getStorage()->retrieve();
 		$cart['checkout_info'] = $values;
@@ -452,7 +441,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			self::setFormRequirements( $form, $requirements );
 		}
 		$fieldset = new Ayoola_Form_Element();		
-			self::v( $cart['settings']['total'] );
+		//	self::v( $cart['settings']['total'] );
 		if( ! empty( intval( $cart['settings']['total'] ) ) )
 		{
 			$table = 'Application_Subscription_Checkout_CheckoutOption';
