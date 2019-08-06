@@ -112,11 +112,13 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             //  Output demo content to screen
             $this->setViewContent($html, true);
             if (Ayoola_Loader::loadClass($class)) {
-                $this->setViewContent('<div style="text-align:center;">' . sprintf( PageCarton_Widget::__( ' Step %d of %d' ), $weAreOn, count( $stages ) ) . '
-              <br><br><br><br>
-               ' . $xT[$class]['title'] . ' <br><br><br><br>
-                <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . $xT[$class]['key'] . '</a><br><br><br><br>
-                <a style="font-size:x-small;" class="" href="' . Ayoola_Application::getUrlPrefix() . '/" target="_blank"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . self::__( 'Preview Site' ) . ' </a><br><br>
+                $this->setViewContent('<div style="text-align:center;">
+                <br><br>
+                ' . sprintf( PageCarton_Widget::__( ' Step %d of %d' ), $weAreOn, count( $stages ) ) . '
+              <br><br>
+               ' . $xT[$class]['title'] . ' <br><br>
+                <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;">  ' . $xT[$class]['key'] . ' <i  style="margin:5px;" class="fa fa-external-link"></i></a><br><br>
+                <a style="font-size:x-small;" class="" href="' . Ayoola_Application::getUrlPrefix() . '/" target="_blank">  ' . self::__( 'Preview Site' ) . ' <i  style="margin:5px;" class="fa fa-external-link"></i></a><br><br>
 
                 </div>');
                 //    $this->setViewContent( $class::viewInLine() );

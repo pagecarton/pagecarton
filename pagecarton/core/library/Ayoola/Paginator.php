@@ -547,7 +547,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 
 				}
 			//	self::filterReplacement( $value );
-		//		var_export( $value );
+			//	var_export( $value );
 				$value = self::__( $value );    
 				if( array_key_exists( $field, $row ) )
 				{
@@ -603,6 +603,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
                         $pageName = $this->pageName;
                         if( $pageName && Ayoola_Object_Embed::isWidget( $pageName ) && $pageName::$translateInnerWidgetContent  )
                         {                          
+                        //    var_export( $row[$key] );
                             $row[$key] = self::__( $row[$key] );
                         }
 

@@ -587,15 +587,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				{
 					@$each = array_shift( $valuesForPreview );
 					$valuePreview = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . @$each . '&crop=1&max_width=64&max_height=64';
-
-			//		var_export( $element['value'] );
-					
-/*					$html .= '
-					<span class="" style="max-height:50px;display:inline-block;vertical-align:middle;" onclick="var a = this.parentNode.getElementsByTagName( \'input\' ); for( var b = 0; b < a.length; b++ ){var c = a[b].type; if( c == \'text\' ){ a[b].type = \'hidden\' }else{ a[b].type = \'text\'; }  a[b].style.display=\'\';  a[b].focus();  a[b].click(); }" title="The preview thumbnail image for the uploaded file will show here...">    
-						<img onerror="this.src=\'' . $defaultPix . '\';this.onerror=\'/\';" alt="" style="max-height:50px" name="' . $uniqueIDForElement . '_preview_zone_image' . '" src="' . ( @$element['data-previous-url'] ? : ( ( @$each && is_scalar( $each ) ? $valuePreview : Ayoola_Form::getGlobalValue( $element['name'] ) ) ? : '' . $defaultPix . '' ) ) . '"  class="" onClick=""  > 
-					</span>
-					';
-*/				}
+				}
 				while( $valuesForPreview );
 				if( @$element['data-allow_base64'] )
 				{
@@ -606,24 +598,13 @@ class Ayoola_Form_Element extends Ayoola_Form
  				$html .= '<div style="">';
 				if( @$element['data-allow_base64']  )
 				{ 
-/*				//	if( @$element['data-allow_base64'] )
-					{
-						$html .= '
-						<span title="Click to upload new photo" style="cursor: pointer;max-height:100px;vertical-align:middle;display:inline-block;" class="" onClick="ayoola.image.formElement = this; ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\'; ayoola.image.fieldNameValue = \'url\'; ayoola.image.formElement = this.parentNode.getElementsByTagName( \'input\' ).item(0); ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
-							<img  style="max-height:32px;" alt="Upload" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-top-8x.png" >
-						</span>
-						'; 
-					}
-				//	else
-					{  
-					//	return ;
-					}
-*/				}
+
+				}
 				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ? : 98 )  )
 				{
 					$html .= '
 					<a  title="Upload new file" style="padding: 2px;font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
-						<i class="fa fa-arrow-up pc_give_space"></i>	Upload <i class="fa fa-chevron-right pc_give_space"></i>
+							Upload <i class="fa fa-arrow-up" style="margin-left:1em;"></i>
 					</a>
 					'; 
 				}
@@ -634,7 +615,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				{ 
 					$html .= '
 					<a title="Browse Existing files on site" style="padding: 2px;font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
-					<i class="fa fa-eye pc_give_space"></i>	Browse <i class="fa fa-chevron-right pc_give_space"></i>
+						Browse <i class="fa fa-eye" style="margin-left:1em;"></i>
 					</a>
 					
 					'; 
