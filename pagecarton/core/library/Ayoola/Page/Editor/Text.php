@@ -341,46 +341,9 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
     public static function getHTMLForLayoutEditorAdvancedSettings( & $object )
 	{
-	//	var_export( $object );
-/* 		$html = '<select onchange="" class="" name="markup_template_object_name[]" style="width:100%;" >';  
-		$html .= '<option value="" >Embed Widgets</option>';  
-	//	var_export( $object['markup_template_object_name'] );
-		foreach( $widgets as $key => $value )
-		{
-			$html .=  '<option value="' . $key . '"';   
-			if( in_array( $key, $object['markup_template_object_name'] ) )
-			{ 
-				$present = true;
-				$html .= ' selected = selected '; 
-			}
-			$html .=  '>' . $value . '</option>';  
-		}
-	//	if( empty( $present ) && ! empty( $object['markup_template_object_name'] ) )
-		{
-//		$html .= '<option value="' . $object['markup_template_object_name'] . '" selected = selected>' . $object['markup_template_object_name'] . '</option> '; 
-		}
-		$html .= '</select>'; 
- */
+
 		$html = null;
-/* 		$optionsName = 'text_widget_options';
-	//	if( ! empty( $object[$optionsName] ) && in_array( $key, $object[$optionsName] ) )
-		$html .= '<select multiple class="" name="' . $optionsName . '[]" style="width:100%;" >';     
-	//	$html .= '<option value="" >Text Options</option>';  
-		$availableOptions = array( 
-				'preserve_content' => 'Disable WYSIWYG',
-				'embed_widgets' => 'Embed Widgets',
-			);
-		foreach( $availableOptions as $key => $value )
-		{
-			$html .=  '<option value="' . $key . '"';   
-			if( ! empty( $object[$optionsName] ) && in_array( $key, $object[$optionsName] ) )
-			{ 
-				$html .= ' selected = selected '; 
-			}
-			$html .=  '>' . $value . '</option>';  
-		}
-		$html .= '</select>'; 
- */		if( ( @in_array( 'embed_widgets', $object['widget_options'] ) || @in_array( 'embed_widgets', $object['text_widget_options'] ) ) || @$object['markup_template_object_name'] )
+		if( ( @in_array( 'embed_widgets', $object['widget_options'] ) || @in_array( 'embed_widgets', $object['text_widget_options'] ) ) || @$object['markup_template_object_name'] )
 		{
 			$object['markup_template_object_name'] = (array) $object['markup_template_object_name'];
 			$widgets = Ayoola_Object_Embed::getWidgets();
@@ -397,7 +360,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				$fieldset = new Ayoola_Form_Element; 
 				$fieldset->hashElementName = false;
 				$fieldset->container = 'span';
-				$fieldset->addElement( array( 'name' => 'markup_template_object_name[]', 'label' => 'Widget  <span name="embed_widget_counter" class="embed_widget_counter">' . ( $i ) . '</span>', 'style' => '', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$object['markup_template_object_name'][$i] ), array( '' => 'Select Widget' ) + $widgets + array( '__custom' => 'Custom Widget' ) );  
+				$fieldset->addElement( array( 'name' => 'markup_template_object_name[]', 'label' => 'Widget  <span name="embed_widget_counter" class="embed_widget_counter">' . ( $i ) . '</span>', 'style' => '', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'' . self::__( 'Custom Parameter Name' ) . '\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$object['markup_template_object_name'][$i] ), array( '' => 'Select Widget' ) + $widgets + array( '__custom' => 'Custom Widget' ) );  
 				if( $object['markup_template_object_name'][$i] )
 				{
 					$fieldset->allowDuplication = true;  
@@ -419,10 +382,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	
 					$content = file_get_contents( $classFile ) ;
 					preg_match_all( "/\['([a-z_-]*)'\]/", $content, $resultsVar );
-				//	self::v( $class );
-				//	self::v( $classFile );
-				//	self::v( strlen( $content ) );
-				//	self::v( $resultsVar );
 					$resultsVar = ( is_array( $resultsVar[1] ) ? $resultsVar[1] : array() );
 				}
 				if( $resultsVar )
@@ -435,15 +394,14 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 					$html .= '<textarea style="font-size:12px;" readonly rows="5" style="height:auto;" ondblclick="ayoola.div.autoExpand( this );">';  
 					$html .= '<!-- How to embed ' . $class . ' -->
 <!--{{{@' . $i . '(' . $class . ')-->
-<p>Insert HTML content here. Use varables like {{{' . ( $resultsVar[0] ? : $resultsVar[1] ) . '}}} here.</p>
+<p>' . self::__( 'Insert HTML content here. Use varables like' ) . ' {{{' . ( $resultsVar[0] ? : $resultsVar[1] ) . '}}} here.</p>
 <!--(' . $class . ')@' . $i . '}}}-->
 <!-- Place this code in code view -->';  
 								
 					$html .= '</textarea>'; 
 
 					$html .= '<textarea  style="font-size:12px;" readonly ondblclick="ayoola.div.autoExpand( this );">';  
-					$html .= '' . $class . ' variables to use in content: ' . $data . '
-
+					$html .= '' . $class . ' ' . self::__( 'variables to use in content' ) . ': ' . $data . '
 									';  
 								
 					$html .= '</textarea>';  
@@ -453,76 +411,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
 			}
 			while( isset( $object['markup_template_object_name'][$i] ) );
-/* 			$content = null;
-			$resultsVar = null;
-			foreach( $object['markup_template_object_name'] as $each )
-			{
-			//	var_export( $each );
-				$class = $each;
-				if( ! empty( $class ) && Ayoola_Loader::loadClass( $class ) )
-				{
-					$filter = new Ayoola_Filter_ClassToFilename();
-					$classFile = $filter->filter( $class );
-					$classFile = Ayoola_Loader::getFullPath( $classFile );
-	
-					$content .= file_get_contents( $classFile ) ;
-					preg_match_all( "/$data\['([a-z_-]*)'\]/", $content, $resultsVar );
-					$resultsVar = ( is_array( $resultsVar[1] ) ? $resultsVar[1] : array() );
-				}
-			}
-			if( $resultsVar )
-			{
-				$resultsVar = array_unique( $resultsVar );
-				sort( $resultsVar );
-				$data = trim( str_replace( '{{{}}},', '', '{{{' . implode( '}}}, {{{', $resultsVar ) . '}}}' ), ' ' );
-				
-				$html .= '<textarea readonly ondblclick="ayoola.div.autoExpand( this );">';  
-				$html .= 'Available variables to use in content: ' . $data . '';  
-				$html .= '</textarea>';  
-			}
- */		}
-/* 		if( ! empty( $object['phrase_to_replace_with'] ) &&  ! empty( $object['phrase_to_replace'] ) )
-		{
-			$object['preserved_content'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['preserved_content'] );
-			$object['editable'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['editable'] );
-			$object['codes'] = str_replace( '>' . $object['phrase_to_replace'] . '<', '>' . $object['phrase_to_replace_with'] . '<', $object['codes'] );
-		//	$object['phrase_to_replace'] = $object['phrase_to_replace_with'];
 		}
-		preg_match_all( '#\>([^<>]+)\<#', $object['editable'] . $object['codes'], $matches );
-	//	var_export( $matches[1] );
-		$matches[1] = array_unique( $matches[1] );
-		$html .= '<select data-pc-return-focus-to="phrase_to_replace_with" onchange="" class="" name="phrase_to_replace" style="width:100%;" >';  
-		$html .= '<option value="" >Replace Words & Phrases</option>';  
-
-		foreach( $matches[1] as $key => $value )
-		{
-			if( ! trim( $value ) )
-			{
-				continue;
-			}
-			$html .=  '<option value="' . $value . '"';   
-			if( @$object['phrase_to_replace'] == $value )
-			{ 
-				$present = true;
-				$html .= ' selected = selected '; 
-			}
-			$html .=  '>' . $value . '</option>';  
-		}
-		if( empty( $present ) && ! empty( $object['phrase_to_replace'] ) )
-		{
-		//	$html .= '<option value="' . $object['phrase_to_replace'] . '" selected = selected>' . $object['phrase_to_replace'] . '</option> '; 
-		}
-		$html .= '</select>'; 
-		if( ! empty( $object['phrase_to_replace_with'] ) )
-		{
-		//	$object['editable'] = str_replace( $object['phrase_to_replace'], $object['phrase_to_replace_with'], $object['editable'] );
-		}
-		elseif( ! empty( $object['phrase_to_replace'] ) )
-		{
-		//	var_export( $object );
-			$html .= '<textarea class="phrase_to_replace_with" placeholder="' . htmlentities( $object['phrase_to_replace'] ) . '" name="phrase_to_replace_with">' . $object['phrase_to_replace'] . '</textarea> '; 
-		}
- */		
+		
 		return $html;
 	}
 
@@ -540,19 +430,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$object['widget_options'] = $object['text_widget_options'];
 		}
 
-/* 		Application_Style::addCode( 'div.editable
-					{
-						border: solid 2px #90F;
-						min-height: 1em;
-					}
-
-					div.editable:hover
-					{
-						border-color: black;
-					}' );
-					<script src="//cdn.ckeditor.com/4.6.2/basic/ckeditor.js"></script>
- */		Application_Javascript::addFile( '' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/ckeditor.js?x' );    
-	//	Application_Javascript::addFile( '//cdn.ckeditor.com/4.6.2/full-all/ckeditor.js' );  
+		Application_Javascript::addFile( '' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/ckeditor.js?x' );    
 		Application_Javascript::addCode
 										( 	'
 												CKEDITOR.plugins.addExternal( "uploadimage", "' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/plugins/uploadimage/plugin.js", "" );
@@ -649,25 +527,25 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
 			if( ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
 			{
-				$html .= '<div data-pc-preserve-content="1" class="preserved_content_view pc_html_editor" data-parameter_name="editable" title="The content has been locked from editing...">';
+				$html .= '<div data-pc-preserve-content="1" class="preserved_content_view pc_html_editor" data-parameter_name="editable" title="' . self::__( 'The content has been locked from editing...' ) . '">';
 			}
 			else
 			{
-				$html .= '<div style=" cursor: text;" data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor pc_html_editor" onDblClick="replaceDiv( this );">';
+				$html .= '<div style=" cursor: text;" data-parameter_name="editable" title="' . self::__( 'You may click to edit the content here...' ) . '" contentEditable="true" class="ckeditor pc_html_editor" onDblClick="replaceDiv( this );">';
 			}
 			
 			
 			$html .= ( isset( $object['editable'] ) ? $object['editable'] : '
 			
-			<h3>Lorem Ipsum dolor</h3>
-			<p>Vivamus sit amet dolor sit amet nunc maximus finibus. Donec vel ornare leo, eget gravida orci. Etiam vitae rutrum nisi. Mauris auctor velit et ultricies mollis. Donec in mattis lectus. In hac habitasse platea dictumst. Sed ultricies magna ut ligula fringilla facilisis. Ut sodales erat ut libero rhoncus hendrerit. Vivamus nunc magna, finibus vel velit in, tempus venenatis dolor. Aenean a leo non tellus semper ultricies eget quis enim.</p>
+			<h3>' . self::__( 'Lorem Ipsum dolor' ) . '</h3>
+			<p>' . self::__( 'Vivamus sit amet dolor sit amet nunc maximus finibus. Donec vel ornare leo, eget gravida orci. Etiam vitae rutrum nisi. Mauris auctor velit et ultricies mollis. Donec in mattis lectus. In hac habitasse platea dictumst. Sed ultricies magna ut ligula fringilla facilisis. Ut sodales erat ut libero rhoncus hendrerit. Vivamus nunc magna, finibus vel velit in, tempus venenatis dolor. Aenean a leo non tellus semper ultricies eget quis enim.' ) . '</p>
 			' ) .
 			
 			'</div>';  
 		}
 		elseif( @$object['codes']  )
 		{
-			$html .= '<textarea class="pc_page_object_specific_item" data-parameter_name="codes" style="' . $hiddenStyle . 'width:100%; background-color:inherit; color:inherit;" title="You may click to edit the content here..." >' . htmlspecialchars( @$object['codes'] ? : $object['editable'] ) . '</textarea>';     
+			$html .= '<textarea class="pc_page_object_specific_item" data-parameter_name="codes" style="' . $hiddenStyle . 'width:100%; background-color:inherit; color:inherit;" title="' . self::__( 'You may click to edit the content here...' ) . '" >' . htmlspecialchars( @$object['codes'] ? : $object['editable'] ) . '</textarea>';     
 		}
 		$html .= '<textarea class="" data-parameter_name="preserved_content" style="display:none;" title="" >' . htmlspecialchars( @$object['editable'] ) . '</textarea>';     
 
@@ -708,7 +586,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 								//	alert( f.innerHTML );
 									if( f.outerHTML )
 									{
-										f.outerHTML = \'<div data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor"  onClick="replaceDiv( this );" onDblClick="replaceDiv( this );">\' + e[b].value +  \'</div>\';  
+										f.outerHTML = \'<div data-parameter_name="editable" title="' . self::__( 'You may click to edit the content here...' ) . '" contentEditable="true" class="ckeditor"  onClick="replaceDiv( this );" onDblClick="replaceDiv( this );">\' + e[b].value +  \'</div>\';  
 									}
 							//		f. = 5; 
 									f.setAttribute( \'onClick\', \'replaceDiv( this );\' ); 
@@ -768,7 +646,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 								
 								a[b].style.display = \'block\'; 
 								c.style.display = \'none\'; 
-								trigger.innerHTML = \'Code View\'; 
+								trigger.innerHTML = \'' . self::__( 'Code View' ) . '\'; 
 								c.setAttribute( \'data-parameter_name\', \'\' ); 
 								a[b].setAttribute( \'data-parameter_name\', \'editable\' ); 
 								c.parentNode.removeChild( c ); 
@@ -784,7 +662,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 								}
 								a[b].parentNode.insertBefore( c, a[b] ); 
 								a[b].style.display = \'none\';  
-								trigger.innerHTML = \'WYSIWYG\'; 
+								trigger.innerHTML = \'' . self::__( 'WYSIWYG' ) . '\'; 
 								c.value = a[b].innerHTML; 
 								c.setAttribute( \'data-parameter_name\', \'codes\' ); 
 								a[b].setAttribute( \'data-parameter_name\', \'\' ); 
@@ -796,12 +674,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				'
 			);
 		}					
-//		$html .= '<p style="clear:both;"></p>';
-	//	$html .= '</div>';	//	 status bar
-	//	$html .= '<button href="javascript:;" title="Launch the HTML Editor" class="normalnews boxednews" onclick="ayoola.div.makeEditable( this.previousSibling ); replaceDiv( this.previousSibling ); this.innerHTML = this.innerHTML == \'edit\' ? \'preview\' : \'edit\'">HTML Editor</button>';
-	//	$html .= '<button href="javascript:;" title="Launch the HTML Editor" class="" onclick="ayoola.div.makeEditable( this.previousSibling ); replaceDiv( this.previousSibling ); this.innerHTML = \'Edit or Preview\'">HTML Editor</button>'; 
-	//	$html .= '<button href="javascript:;" title="Launch the HTML Editor" class="ckeditor" onclick="replaceDiv( this.previousSibling ); this.innerHTML = \'Edit or Preview\'">HTML Editor</button>'; 
-	//	$html .= '<a href="javascript:;" title="Close editor the preview content" class="normalnews boxednews" style="padding:1em;" onclick="ayoola.div.wysiwygEditor.destroy();"> preview </a>';
 		return $html;
 	}
 
@@ -834,19 +706,9 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		$optionsName = 'text_widget_options';
 	//	if( ! @in_array( 'preserve_content', $object[$optionsName] ) )
 		{
-			return '<a class="title_button" title="Switch the editing mode" name="" href="javascript:;" onclick="divToCodeEditor( this );return true;">' . ( isset( $object['codes'] ) ? 'WYSIWYG' : 'Code View' ) . '</a>';
+			return '<a class="title_button" title="' . self::__( 'Switch the editing mode' ) . '" name="" href="javascript:;" onclick="divToCodeEditor( this );return true;">' . ( isset( $object['codes'] ) ? '' . self::__( 'WYSIWYG' ) . '' : '' . self::__( 'Code View' ) . '' ) . '</a>';
 		}
 	}
 	
-    /**
-     * This method
-     *
-     * @param 
-     * @return 
-     */
-/*    public function view()
-    {
-        return $this->getParameter( 'editable' ) . $this->getParameter( 'raw_html' );  
-    } 
-*/	// END OF CLASS
+	// END OF CLASS
 }

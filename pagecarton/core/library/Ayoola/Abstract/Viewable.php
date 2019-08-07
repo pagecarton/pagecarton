@@ -1065,12 +1065,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                             if( 
                                 false !== strpos( $string, '<' ) 
                                 || false !== strpos( $string, '[]' ) 
+                                || false !== stripos( $string, '%FIELD%' ) 
+                                || false !== strpos( $string, '%KEY%' ) 
                                 || ( strpos( $string, '[' ) && ( strpos( $string, '[' ) - strpos( $string, ']' ) < 3 ) )
                                 || ( substr_count( $string, '{' ) > 2 ) 
-                                || ( strlen( $string, '{' ) < 4 ) 
+                                || ( strlen( $string ) < 4 ) 
                                 || false !== strpos( $string, DS ) 
                                 || false !== strpos( $string, '_' ) 
                                 || false !== strpos( $string, '://' ) 
+                                || false !== strpos( $string, '=>' ) 
                             )
                             {
                                 // don't autoinser
@@ -1318,7 +1321,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '<span class="title_button close_button"  name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode );"> x </span>';
 
 		//	Maximize
-		$html .= '<a class="title_button" name="' . $advancedName . '" href="javascript:;" title="Click to show or hide advanced settings" onclick="  var b = this.parentNode.parentNode.getElementsByClassName( \'advanced_options\' );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == \'none\' ) ? \'\' : \'none\'; this.style.display = \'\'; } "> &square; </a>';
+		$html .= '<a class="title_button" name="' . $advancedName . '" href="javascript:;" title="Click to show or hide advanced settings" onclick="  var b = this.parentNode.parentNode.getElementsByClassName( \'advanced_options\' );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == \'none\' ) ? \'\' : \'none\'; this.style.display = \'\'; } "> <i class="fa fa-cog"></i> </a>';
 
 		//	Minimize
 		$html .= '<a class="title_button" name="' . $advancedName . '_interior" href="javascript:;" title="Minimize or open the body of this object" onclick="  var b = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' );for( var a = 0; a < b.length; a++ ){  b[a].style.display = ( b[a].style.display == \'none\' ) ? \'\' : \'none\'; this.style.display = \'\'; } "> _ </a>';

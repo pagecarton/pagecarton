@@ -62,6 +62,8 @@ class Ayoola_Object_SavedWidget_List extends Ayoola_Object_SavedWidget_Abstract
                     'Widget Name' => array( 'field' => 'widget_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'class_name' => array( 'field' => 'class_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
            //         'parameters' => array( 'field' => 'parameters', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    '   ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/?widget_id=%KEY%">preview</a>', 
+
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
                     '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_SavedWidget_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
                     ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_SavedWidget_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 

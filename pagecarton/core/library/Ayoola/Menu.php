@@ -641,7 +641,9 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			{
 				@$values['option_name'] = strlen( $values['option_name'] ) < $this->getParameter( 'length_of_option_name' ) ? $values['option_name'] : ( trim( substr( $values['option_name'], 0, $this->getParameter( 'length_of_option_name' ) ) ) . '...' );
 			}
-		
+        //    var_export( $values['option_name'] );
+        //    var_export( $values['option_name'] );
+            $values['option_name'] = self::__( $values['option_name'] );
 			$link = @$xml->createElement( 'a', $values['option_name'] );
 			
 		//	$values['url'] = ! empty( $values['url'] ) ? Ayoola_Page::appendQueryStrings( array( 'menu_option' => $values['option_id'] ), $values['url'], false ) : null;
@@ -682,7 +684,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			$link->setAttribute( 'href', $values['url'] );
 		//	$link->setAttribute( 'rel', @$values['rel'] );
 		//	$link->setAttribute( 'href', $values['url'] );
-			$link->setAttribute( 'title', self::__( $values['title'] ? : $values['option_name'] )  );
+			$link->setAttribute( 'title', self::__( $values['title'] ? : $values['option_name'] ) );
 			$link->setAttribute( 'class', $linkClass );
 			if( empty( $values['url'] ) )
 			{ 

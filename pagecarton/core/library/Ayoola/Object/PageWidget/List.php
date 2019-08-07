@@ -63,7 +63,8 @@ class Ayoola_Object_PageWidget_List extends Ayoola_Object_PageWidget_Abstract
                 //    'parameters_key' => array( 'field' => 'parameters_key', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
                     'class_name' => array( 'field' => 'class_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
-                    '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_PageWidget_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
+                    '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/?widget_id=%KEY%">preview</a>', 
+                    '  ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_PageWidget_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
                     ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_PageWidget_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
 				)
 		);

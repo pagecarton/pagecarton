@@ -1832,8 +1832,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 //		$options = array();
 		$options = (array) $options->getClassOptions();
 //		$options = (array) $options->getClassOptions();
-		$html .= '<span style=""> Show a List of </span>';
-		$html .= '<select data-parameter_name="option">';
+        $html .= '<select data-parameter_name="option">';
+        $html .=  '<option value="">' . self::__( 'No of Posts to Show' ) . '</option>';  
+
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';  
@@ -1842,8 +1843,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>';
-		$html .= '<span style=""> posts </span>';
-		$html .= '<span style=""> in </span>';
 		
 		$options = Application_Category_ShowAll::getPostCategories();
 	//	var_export( $options );
@@ -1851,15 +1850,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$options = array( '' => 'All' ) + $filter->filter( $options );
 		
 		$html .= '<select data-parameter_name="category_name">';
+        $html .=  '<option value="">' . self::__( 'Category' ) . '</option>';  
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';  
 		//	var_export( $object['view'] );
 			if( @$object['category_name'] == $key ){ $html .= ' selected = selected '; }
-			$html .=  '>' . $value . '</option>';  
+			$html .=  '>' . self::__( '' . $value . '' ) . '</option>';  
 		}
 		$html .= '</select>';
-		$html .= '<span style=""> Category; Of </span>';
 		
 		//	Article Types
 		$options = Application_Article_Type::getInstance();
@@ -1872,18 +1871,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$options = array( '' => 'All' ) + $options;
 		  
 		$html .= '<select data-parameter_name="article_types">';
+        $html .=  '<option value="">' . self::__( 'Post Type' ) . '</option>';  
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';  
 		//	var_export( $object['view'] );
 			if( @$object['article_types'] == $key ){ $html .= ' selected = selected '; }
-			$html .=  '>' . $value . '</option>';  
+			$html .=  '>' . self::__( '' . $value . '' ) . '</option>';  
 		}
 		$html .= '</select>';
-		$html .= '<span style=""> type. </span>';
-		
-		$html .= '<span style=""> In </span>';
-		
 		$options = Application_Article_Template::getInstance();
 		$options = $options->select();
 		require_once 'Ayoola/Filter/SelectListArray.php';
@@ -1891,22 +1887,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$options = array( '' => 'Default' ) + $filter->filter( $options ); 
 		
 		$html .= '<select data-parameter_name="template_name">'; 
+        $html .=  '<option value="">' . self::__( 'Post Display Style' ) . '</option>';  
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';  
 		//	var_export( $object['view'] );
 			if( @$object['template_name'] == $key ){ $html .= ' selected = selected '; }
-			$html .=  '>' . $value . '</option>';  
+			$html .=  '>' . self::__( '' . $value . '' ) . '</option>';  
 		}
 		$html .= '</select>';
-		$html .= '<span style=""> style. </span>';  
-		if( static::$_editableTitle )
-		{
-			$html .= '<a href="javascript:;" title="' . static::$_editableTitle . '" onclick="ayoola.div.makeEditable( this.nextSibling ); this.nextSibling.style.display=\'block\';"> edit </a>';
-				//	var_export( $object );
-			$html .= '<span data-parameter_name="editable" style="padding:1em;display:none;" onclick="this.nextSibling.style.display=\'block\';">' . @$object['editable'] . '</span>';
-			$html .= '<a href="javascript:;" style="display:none;" title="' . static::$_editableTitle . '" onclick="this.previousSibling.style.display=\'none\';this.style.display=\'none\';"> hide </a>';
-		}
 		return $html;
 	}
 

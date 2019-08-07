@@ -416,9 +416,11 @@ class Ayoola_Form_Element extends Ayoola_Form
      */
     public function getPostHtml()
     {
-		$html = null;
-		$html .= $this->allowDuplication ? "<div><a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "Duplicate this fieldset" ) . "' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.parentNode.cloneNode( true ); var fieldtags= [ \"input\", \"textarea\", \"select\"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= \"\"; } } this.parentNode.parentNode.parentNode.insertBefore( fieldset, this.parentNode.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name=\"\"; ayoola.div.refreshVisibleCounter( \"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['add'] ? : " + " ) . "</a>\n" : null; 
-		$html .= $this->allowDuplication ? "<a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "Remove this fieldset" ) . "' onClick='confirm( \"Delete all the elements in these fieldset?\") ? this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode ) : null; ayoola.div.refreshVisibleCounter(\"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['remove'] ? : " - " ) . "</a></div>\n" : null; 
+        $html = null;
+        @$this->duplicationData['add'] = "" . self::__( $this->duplicationData['add'] ) . "";
+        @$this->duplicationData['remove'] = "" . self::__( $this->duplicationData['remove'] ) . "";
+		$html .= $this->allowDuplication ? "<div><a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "" . self::__( 'Duplicate this fieldset' ) . "" ) . "' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.parentNode.cloneNode( true ); var fieldtags= [ \"input\", \"textarea\", \"select\"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= \"\"; } } this.parentNode.parentNode.parentNode.insertBefore( fieldset, this.parentNode.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name=\"\"; ayoola.div.refreshVisibleCounter( \"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['add'] ? : " + " ) . "</a>\n" : null; 
+		$html .= $this->allowDuplication ? "<a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "" . self::__( 'Remove this fieldset' ) . "" ) . "' onClick='confirm( \"" . self::__( 'Delete all the fields in this set' ) . "\") ? this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode ) : null; ayoola.div.refreshVisibleCounter(\"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['remove'] ? : " - " ) . "</a></div>\n" : null; 
 //		$html .= ! @$this->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "</{$fieldsetTag}>\n" : null;
 		$html .= @$this->container ? "</{$this->container}>\n" : null;
 		return $html;
@@ -603,8 +605,8 @@ class Ayoola_Form_Element extends Ayoola_Form
 				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ? : 98 )  )
 				{
 					$html .= '
-					<a  title="Upload new file" style="padding: 2px;font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
-							Upload <i class="fa fa-arrow-up" style="margin-left:1em;"></i>
+					<a  title="' . self::__( 'Upload new file' ) . '" style="padding: 2px;font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
+                    ' . self::__( 'Upload' ) . ' <i class="fa fa-arrow-up" style="margin-left:1em;"></i>
 					</a>
 					'; 
 				}
@@ -614,8 +616,8 @@ class Ayoola_Form_Element extends Ayoola_Form
  				if( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_viewers'] ? : 98 ) && ! @$element['data-allow_base64'] )
 				{ 
 					$html .= '
-					<a title="Browse Existing files on site" style="padding: 2px;font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
-						Browse <i class="fa fa-eye" style="margin-left:1em;"></i>
+					<a title="' . self::__( 'Browse existing files on the site' ) . '" style="padding: 2px;font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
+                    ' . self::__( 'Browse' ) . ' <i class="fa fa-eye" style="margin-left:1em;"></i>
 					</a>
 					
 					'; 

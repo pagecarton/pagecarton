@@ -547,8 +547,12 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 
 				}
 			//	self::filterReplacement( $value );
-			//	var_export( $value );
-				$value = self::__( $value );    
+            //	var_export( $value );
+                if( false === stripos( $value, '%FIELD%' ) )
+                {
+                //	var_export( $value );
+                    $value = self::__( $value );    
+                }
 				if( array_key_exists( $field, $row ) )
 				{
 					
@@ -601,15 +605,17 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
                     //    var_export( $this->pageName );
                     //    var_export( $this->pageName::$translateInnerWidgetContent );
                         $pageName = $this->pageName;
-                        if( $pageName && Ayoola_Object_Embed::isWidget( $pageName ) && $pageName::$translateInnerWidgetContent  )
-                        {                          
-                        //    var_export( $row[$key] );
-                            $row[$key] = self::__( $row[$key] );
-                        }
 
                         $markup = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], $rowField ), $markupX );
                         $markup = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $markup );
                         $markup = str_replace( $columnSearch, $columnReplace, $markup );
+                        if( $pageName && Ayoola_Object_Embed::isWidget( $pageName ) && $pageName::$translateInnerWidgetContent  )
+                        {                          
+                            //    var_export( $markup );
+                            //   var_export( $rowField );
+                            //    $row[$key] = self::__( $row[$key] );
+                            $markup = self::__( $markup );
+                        }
                     //    var_export( $markup );
                         $value .= ' ' . $markup;
                     }

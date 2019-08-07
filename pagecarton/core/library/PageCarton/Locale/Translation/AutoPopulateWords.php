@@ -90,9 +90,8 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
             }
             Ayoola_Application::setRuntimeSettings( 'real_url', $currentUrl );
 
-            foreach( Ayoola_Object_Embed::getWidgets() as $class )
+            foreach( Ayoola_Object_Embed::getWidgets( false ) as $class )
             {
-                
                 $filter = new Ayoola_Filter_ClassToFilename();
 				$classFile = $filter->filter( $class );
 				$classFile = Ayoola_Loader::getFullPath( $classFile );
@@ -115,7 +114,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                     {
                         continue;
                     }
-                   self::__( $phrase );
+                    self::__( $phrase );
                 //    $this->setViewContent( $phrase );
                 }
 

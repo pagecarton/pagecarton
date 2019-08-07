@@ -264,10 +264,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                 {
                     $query = '?' . http_build_query( $_GET );
                     $this->setViewContent(  '' . self::__( '<h3>There are multiple versions of this page that is editable</h3>' ) . ''  );
-                    $this->setViewContent(  self::__( '
-                                    <a class="pc-btn" href="' . $query . '&pc_edit_main_site_page=1">Edit Main Site ' . $page['url'] . ' Page</a>
-                                    <a class="pc-btn" href="' . $query . '&pc_page_editor_layout_name=' . self::getDefaultLayout() . '">Edit Default Theme ' . $page['url'] . ' Page</a>
-                                    ' ) );
+                    $this->setViewContent(  '
+                                    <a class="pc-btn" href="' . $query . '&pc_edit_main_site_page=1">' . sprintf( self::__( 'Edit Main Site %s Page' ), '' . $page['url'] . ''  ) . '</a>
+                                    <a class="pc-btn" href="' . $query . '&pc_page_editor_layout_name=' . self::getDefaultLayout() . '">' . sprintf( self::__( 'Edit Default Theme %s Page' ), '' . $page['url'] . ''  ) . '</a>
+                                    ' );
                     return false;
                 }
 
@@ -1446,7 +1446,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	var_export( $page['layout_name'] );
 			$backupDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $page['layout_name'] . '/theme/data-backup';
 	//		var_export( $backupDir );
-			$optionHTML = ' <span style="display:inline-block;padding: 0 5px 0 5px;"> Theme Editor </span>';
+			$optionHTML = ' <span style="display:inline-block;padding: 0 5px 0 5px;"> ' . self::__( 'Theme editor' ) . ' </span>';
 		}
 //		var_export( $backupDir );
 		// content version
@@ -1457,7 +1457,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$pageVersions = Ayoola_Doc::getFiles( $backupDir );
 			rsort( $pageVersions );
 		//	var_export( $pageVersions );
-			$pageVersionHTML = ' <span style="display:inline-block;padding: 0 5px 0 5px;"><select class="pc-btn" onChange="location.search = location.search + \\\'&pc_page_editor_content_version=\\\' + this.value;"><option value="">Last Saved Content</option>';
+			$pageVersionHTML = ' <span style="display:inline-block;padding: 0 5px 0 5px;"><select class="pc-btn" onChange="location.search = location.search + \\\'&pc_page_editor_content_version=\\\' + this.value;"><option value="">' . self::__( 'Last saved content' ) . '</option>';
 			$filter = new Ayoola_Filter_Time();
 			foreach( $pageVersions as $eachVersion )
 			{
@@ -1472,7 +1472,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				{
 					$selected = 'selected=selected';
 				}
-				$pageVersionHTML .= '<option ' . $selected . ' value="' . $eachVersion . '">Content Saved ' . $filter->filter( $eachVersion ) . '</option>';
+				$pageVersionHTML .= '<option ' . $selected . ' value="' . $eachVersion . '">' . sprintf( self::__( 'Content Saved %s' ), '' . $filter->filter( $eachVersion ) . ''  ) . '</option>';
 			}
 			$pageVersionHTML .= '</select></span>';
 		}
@@ -1733,9 +1733,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 
 			var select = document.createElement( "select" );
-			select.innerHTML = "<option value=\"\">Insert Widget Here</option>' . $this->_viewableSelect . '";
+			select.innerHTML = "<option value=\"\">' . self::__( 'Insert widget here' ) . '</option>' . $this->_viewableSelect . '";
 			select.className = "pc_add_widget_button greynews boxednews centerednews pc-btn";
-			select.title = "Select a widget to insert below";
+			select.title = "' . self::__( 'Select widget to insert below' ) . '";
 			ayoola.events.add
 			( 
 				select, 
@@ -1744,6 +1744,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				{ 
 					var target = ayoola.events.getTarget( e );
 					var a = document.getElementById( target.value );
+                //    		alert( target.value );
+            	//	alert( a.innerHTML );
 					var b = target.parentNode;
 
 					//	Clone the node to replenish the main viewable objects.
@@ -1752,8 +1754,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						c = a.cloneNode( true );
 						c.id = "";
 				//		alert( c );
+            	//	alert( c.innerHTML );
 						b.parentNode.appendChild( c ); 
-						c.scrollIntoView( {block: "end",  behaviour: "smooth"} );;    
+						c.scrollIntoView( {block: "end",  behaviour: "smooth"} );    
 						pc_makeInnerSettingsAutoRefresh();
 					}
 					target.value = "";
@@ -1768,9 +1771,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		var saveButton = document.createElement( "a" );
 		saveButton.style.cssText = "";
 		saveButton.href = "javascript:";
-		saveButton.title = "Save the layout template for this page.";
+		saveButton.title = "' . self::__( 'Save the layout template' ) . '";
 		saveButton.className = "pc-btn pc-bg-color";  
-		saveButton.innerHTML = "Save";  
+		saveButton.innerHTML = "' . self::__( 'Save' ) . '";  
 		topBarForButtons.appendChild( saveButton );
 		
 		var functionToSaveTemplate = function()
@@ -1956,7 +1959,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	//	a.target = "_blank";
 	//	a.rel = "spotlight";
 		a.className = "pc-hide-children-children pc-btn";  
-		a.innerHTML = "Preview";  
+		a.innerHTML = "' . self::__( 'Preview' ) . '";  
 		topBarForButtons.appendChild( a );		
 		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '' . $page['url'] . '' . ( '?pc_page_layout_name=' . $page['layout_name'] ) . '\' ); } );
 //		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '' . $page['url'] . '' . ( $page['layout_name'] == self::getDefaultLayout() ? null : ( '?pc_page_layout_name=' . $page['layout_name'] ) ) . '\' ); } );
@@ -1979,7 +1982,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		a.onclick = "";
 		a.title = "Load default HTML Content to this theme";
 		a.className = "pc-hide-children-children pc-btn";  
-		a.innerHTML = "Load Default";  
+		a.innerHTML = "' . self::__( 'Load Default' ) . '";  
 		topBarForButtons.appendChild( a );
 '			
 		)
@@ -1987,32 +1990,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 '
 
-		//	button to edit page info
-		var a = document.createElement( "a" );
-		a.style.cssText = "";
-		a.href = "javascript:";
-		a.title = "Edit page title, description and other information.";
-		a.className = "pc-hide-children-children pc-btn";  
-		a.innerHTML = "Options";  
-	//	topBarForButtons.appendChild( a );
-		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor/?url=' . $page['url'] . '\' ); } );
-
-		//	button to delete page
-		var a = document.createElement( "a" );
-		a.style.cssText = "";
-		a.href = "javascript:";
-		a.title = "Delete page";
-		a.className = "pc-hide-children-children pc-btn";  
-		a.innerHTML = "Delete";  
-//		topBarForButtons.appendChild( a );
-		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Delete/?url=' . $page['url'] . '\' ); } );
-
 		//	button to edit template
 		var a = document.createElement( "a" );
 		a.style.cssText = "";
 		a.href = "javascript:";
 		a.className = "pc-hide-children-children pc-btn";  
-		a.innerHTML = "Theme";  
+		a.innerHTML = "' . self::__( 'Theme' ) . '";  
 		topBarForButtons.appendChild( a );
 		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/layout/' . strtolower( $page['layout_name'] ) . '/template\' ); } );
 
@@ -2030,7 +2013,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	//	a.target = "_blank";
 	//	a.rel = "spotlight";
 		a.className = "pc-hide-children-children pc-btn";  
-		a.innerHTML = "Preview";  
+		a.innerHTML = "' . self::__( 'Preview' ) . '";  
 		topBarForButtons.appendChild( a );		
 		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Page_Layout_Preview/?layout_name=' . $page['layout_name'] . '\' ); } );
 
@@ -2043,7 +2026,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		loadButton.onclick = "";
 		loadButton.title = "Load default HTML Content to this theme";
 		loadButton.className = "pc-hide-children-children pc-btn";  
-		loadButton.innerHTML = "Load Default";  
+		loadButton.innerHTML = "' . self::__( 'Load Default' ) . '";  
 		topBarForButtons.appendChild( loadButton );
 
 		'		
@@ -2053,16 +2036,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		.
 		
 		'		
-		//	Add options bar
-		var optionbar = document.createElement( "span" );
-		optionbar.innerHTML = \' ' . $optionHTML . '\';
-		optionbar.className = "pc-hide-children-children";
-		optionbar.title = "Select page to edit";
-//		topBarForButtons.appendChild( optionbar );
 		
 		//	Display Widgets Editor
 		var optionbar = document.createElement( "span" );
-		optionbar.innerHTML = \'Widget Options\';
+		optionbar.innerHTML = \'' . self::__( 'Widget Options' ) . '\';
 		optionbar.className = " pc-btn";
 		optionbar.title = "Show or hide widget options";
 		optionbar.onclick = function()
@@ -2071,11 +2048,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			if( ayoola.style.hasClass( a, "pc_page_widgetmode" ) )  
 			{
 				ayoola.style.removeClass( a, "pc_page_widgetmode" );
-				this.innerHTML = \'Show Widget Options\';      
+				this.innerHTML = \'' . self::__( 'Show Widget Options' ) . '\';      
 			}
 			else
 			{
-				this.innerHTML = \'Hide Widget Options\';
+				this.innerHTML = \'' . self::__( 'Hide Widget Options' ) . '\';
 				ayoola.style.addClass( a, "pc_page_widgetmode" ); 
 			}
 		};
@@ -2255,19 +2232,14 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		$html = "<div id='viewable_objects'>";
 	//	$select = "<select>";
 		$this->_viewableSelect = null;
-		//	var_export( $object );
-/* 		if( ! $object['object_name'] )
-		{
-			var_export( $object );
-		}
- */		
+	
 		$objects = self::sortMultiDimensionalArray( $objects, 'view_parameters' );
 	//	var_export( $objects );
 		foreach( $objects as $object )
 		{
-			$object['object_unique_id'] = 'object_unique_id_' . md5( $object['object_name'] );
+            $object['object_unique_id'] = 'object_unique_id_' . md5( $object['object_name'] );
 			$html .= $this->getViewableObject( $object );
-			$this->_viewableSelect .= "<option style='text-align:initial;' value='{$object['object_unique_id']}'>" . htmlspecialchars( $object['view_parameters'] ) . "</option>";	
+			$this->_viewableSelect .= "<option style='text-align:initial;' value='{$object['object_unique_id']}'>" . htmlspecialchars( self::__( $object['view_parameters'] ) ) . "</option>";	
 		}
 				//	var_export( $objects );
 		//	echo __LINE__;

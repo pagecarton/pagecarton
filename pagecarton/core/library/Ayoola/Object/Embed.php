@@ -252,9 +252,9 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 	 * 		
      * @return array widgets
      */
-    public static function getWidgets()
+    public static function getWidgets( $deepCheck = true )
 	{
-		$keyZ = md5( __METHOD__ . serialize( func_get_args() ) . 'fff=-' );
+		$keyZ = md5( __METHOD__ . serialize( func_get_args() ) . 'ff-f=-' );
 		
 	//	if( ! empty( $options['cache'] ) )
 		{
@@ -291,7 +291,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				foreach( $options as $file )
 				{
 					$className = $filter->filter( $file );
-					if( self::isWidget( $className ) )
+					if( self::isWidget( $className, $deepCheck ) )
 					{
 						$files[$className] = $className;
 					}
@@ -307,7 +307,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				foreach( $options as $file )
 				{
 					$className = $filter->filter( $file );
-					if( self::isWidget( $className ) )
+					if( self::isWidget( $className, $deepCheck ) )
 					{
 						$files[$className] = $className;
 					}
@@ -322,7 +322,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				foreach( $options as $file )
 				{
 					$className = $filter->filter( $file );
-					if( self::isWidget( $className ) )
+					if( self::isWidget( $className, $deepCheck ) )
 					{
 						if( stripos( $className, 'Ayoola' ) === 0 )
 						{

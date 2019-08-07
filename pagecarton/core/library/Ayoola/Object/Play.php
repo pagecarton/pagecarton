@@ -69,9 +69,32 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 				{
 					$identifier = array( 'class_name' => $_REQUEST['pc_module_url_values'][0] );
 				}
-				else
+				elseif( $this->getParameter( 'list_all_widgets' ) || @$_REQUEST['list_all_widgets'] )
 				{
-					return false;
+                    foreach( Ayoola_Object_Embed::getWidgets( false ) as $class ) 
+                    {
+                        $this->setViewContent( '<div>' . $class . ' - <a href="?object_name=' . $class . '">content</a>  - <a href="?object_name=' . $class . '">code</a> </div>' );
+                    }
+                    return false;
+				}
+				elseif( $widgetId = $this->getParameter( 'widget_id' ) ? : @$_REQUEST['widget_id'] )
+				{
+                    if( $widget = Ayoola_Object_PageWidget::getInstance()->selectOne( null,  array( 'pagewidget_id' => $widgetId ) ) )
+                    {
+                        $class = $widget['class_name'];
+                        $class = new $class( $widget['parameters'] );
+                    //    var_export( $widget['parameters'] );
+                        $this->setViewContent( '' . $class->view() . '' );
+                        return true;
+                    }
+                    elseif( $widget = Ayoola_Object_SavedWidget::getInstance()->selectOne( null,  array( 'pagewidget_id' => $widgetId ) ) )
+                    {
+                        $class = $widget['class_name'];
+                        $class = new $class( $widget['parameters'] );
+                    //    var_export( $widget['parameters'] );
+                        $this->setViewContent( '' . $class->view() . '' );
+                        return true;
+                    }
 				}
 			//	var_export( $_REQUEST['pc_module_url_values'][0] );
 			//	$identifier = array( 'class_name' => $identifierKey );

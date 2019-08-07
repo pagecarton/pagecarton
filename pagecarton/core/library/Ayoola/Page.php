@@ -246,7 +246,11 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		if( empty( self::$_currentPageInfo ) )
 		{
 			self::$_currentPageInfo = self::getInfo( $url );
-		}
+        }
+        elseif( ! empty( $info ) )
+        {
+            $info = self::__( $info );
+        }
 	//	exit( microtime( true ) - Ayoola_Application::getRuntimeSettings( 'start_time' ) . '<br />' );
 	//	var_export( self::$_currentPageInfo );
 		self::$_currentPageInfo = is_array( self::$_currentPageInfo ) ? array_merge( self::$_currentPageInfo, $info ) : $info;
