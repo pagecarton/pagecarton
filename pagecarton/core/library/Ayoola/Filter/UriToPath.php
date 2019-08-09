@@ -159,17 +159,12 @@ class Ayoola_Filter_UriToPath implements Ayoola_Filter_Interface
     public function filter( $value )
 	{
 		$paths = $this->getPathTemplates( $value );
-		if( is_array( $value) )
-    {
-    //  throw new Exception();
-	  //  var_export( get_ );
-    }
 		$result = array();
 		require_once 'Ayoola/Loader.php';
 //	var_export( $this->getUriPlaceholder() );
 		foreach( $paths as $name => $path )
 		{
-  $result[$name] = str_ireplace( $this->getUriPlaceholder(), $value, $path );
+            $result[$name] = str_ireplace( $this->getUriPlaceholder(), $value, $path );
 			if( $filePath = Ayoola_Loader::checkFile( $result[$name] ) )
 			{
 			//	$result[$name] = $filePath;

@@ -166,7 +166,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				}
 			
 				//	We cant upload to /ayoola/ 
-			//	var_export( strtolower( array_pop( explode( '.', trim( $_POST['suggested_url'], '.' ) ) ) ) );
+			    //	var_export( strtolower( array_pop( explode( '.', trim( $_POST['suggested_url'], '.' ) ) ) ) );
 				if( array_shift( explode( '/', trim( $_POST['suggested_url'], '/' ) ) ) == 'ayoola' )
 				{
 					throw new Ayoola_Doc_Upload_Exception( 'UPLOADING IN /ayoola/ NOT ALLOWED' );
@@ -176,7 +176,19 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			//	$url = $_POST['suggested_url'];
 				$url = '';
 				$dir .= $url;
-				$path = $dir . $_POST['suggested_url'];
+                $path = $dir . $_POST['suggested_url'];
+
+                //  Now store file replacement but don't replace actual file of suggestion
+                if( is_file( $path ) )
+                {
+                    $path = $dir . '/__' . $_POST['suggested_url'];
+                    $nextPath = $dir . '/__' . '/data-backup' . $_POST['suggested_url'] . '/' . time() . '.' . $extension;
+                    if( is_file( $path ) ) 
+                    {
+                        Ayoola_Doc::createDirectory( dirname( $nextPath ) );
+                        copy( $path, $nextPath );
+                    }
+                }
 				$url = $url . $_POST['suggested_url'];
 				Ayoola_Doc::createDirectory( dirname( $path ) );
 				
