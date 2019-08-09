@@ -88,8 +88,9 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 			$this->createForm( 'Continue..', 'Create a new page' );
 			$this->setViewContent( $this->getForm()->view() );
 		//	self::v( $_POST );
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
-	//		self::v( $values );
+			if( ! $values = $this->getForm()->getValues() OR ! $values['url'] ){ return false; }
+        //    self::v( $this->getForm()->getbadnews() );
+            
 			//	Default settings 
 			$values['auth_level'] = (array) ( isset( $values['auth_level'] ) ? $values['auth_level'] : 0 );
 		//	self::v( $values );
@@ -122,30 +123,16 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 			
 			//	let's allow only page editor create this files
 			//	the themes are also created this way... we don't want that
-	//		if( $this->_createFile() )
-		//	if( $this->insertDb() )
-	//		{
-/* 				$class = new Ayoola_Page_Editor_Layout();
-				$class->setPageInfo( array( 'url' => $values['url'] ) );
-				$class->setPagePaths();
-				$class->setValues();
-				$class->updateLayoutOnEveryLoad = true;
-				$class->init(); // invoke the template update for this page.
- */		
+	
 				//	once page is created, let's have blank content
 				$page = new Ayoola_Page_Editor_Sanitize();
 				$page->refresh( $values['url'] );
 
-				$this->setViewContent( self::__( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>' )  );   
+				$this->setViewContent( self::__( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>', true )  );   
 				$this->setViewContent( self::__( '<p>
 																		<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '"><i class="fa fa-edit pc_give_space"></i> Add Content!</a>
 																		<a class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $values['url'] . '"> <i class="fa fa-cog pc_give_space"></i> Settings</a>
 				</p>' ) ); 
-	//		}
-	//		else
-	//		{ 
-		//		$this->getForm()->setBadnews( 'Error encountered while creating a new page' ); 
-	//		}
 		}
 		catch( Exception $e )
 		{ 

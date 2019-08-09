@@ -90,13 +90,10 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
         elseif( @$_GET['embed_image_url'] )
         {
             $uri = Ayoola_Doc::pathToUri( $paths[0] );
-            $path = Ayoola_Doc_Browser::getDocumentsDirectory() . DS . $_GET['embed_image_url'];
+            $path = Ayoola_Loader::getFullPath(  'documents' . $_GET['embed_image_url'] );
             if( is_file( $path ) )
             {
                 $imageInfo = Application_Slideshow_Abstract::getImageInfo( $uri );
-            //    var_export( $uri );
-            //    var_export( $imageInfo );
-            //    exit();
                 $paths = array( $path );
             }
         }

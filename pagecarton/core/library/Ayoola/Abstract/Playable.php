@@ -240,7 +240,6 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 					@$values['pc_no_data_filter'] ? : self::filterReplacement( $eachValue, $eachKey );
 					if( is_array( $eachValue ) )
 					{
-//var_export( $eachValue );
 						foreach( $eachValue as $vKey => $eachValueV )
 						{
 							if( $replaceInternally & is_numeric( $key ) )
@@ -259,16 +258,16 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 					else
 					{
 						//	placeholder now {{{key}}}{{{0}}}
-					//	if( $replaceInternally & $key > 0 )
+					    //	if( $replaceInternally & $key > 0 )
 						//	skipping index 0 makes the first on the list be info about current post on the page
 						if( $replaceInternally & is_numeric( $key ) )
 						{
-						//	var_export( $eachValue );
+						    //	var_export( $eachValue );
 							$iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . '0' . $values['placeholder_suffix'];
 							$iReplace[] = $eachValue;  
 							$iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'];
 							$iReplace[] = $eachValue; 
-					//		var_export( $iSearch ); 
+                            //		var_export( $iSearch ); 
 						}  
 						else
 						{
@@ -276,6 +275,8 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 						//	var_export( $eachValue );
 							$jSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
 							$jReplace[] = $eachValue;  							
+							$jSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'];
+							$jReplace[] = $eachValue; 
 						}
 					}
  				}

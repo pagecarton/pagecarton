@@ -162,14 +162,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	self::v( __LINE__ . '<br>' );
 			//	Create a new page using the values of the parent application
 			//	Ayoola_Page_Page
-			$class = new Ayoola_Page_Creator();
-
 			//	make sure this is a system file.
 			$pageToCopy = array_merge( $pageToCopy ? : $page, array( 'system' => 1 ) );
-		//	var_export( $pageToCopy );
+            
+			$class = new Ayoola_Page_Creator( array( 'no_init' => true, 'fake_values' => $pageToCopy ) );
 			$class->fakeValues = $pageToCopy;
-
-
 			$class->init();
 		//	var_export( $class->view() );
 		//	var_export( $class->getForm()->getValues() );
@@ -940,15 +937,20 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					//	var_export();
 						if( empty( $parameters['widget_name'] ) )
 						{
-							$parameters['widget_name'] = ( ( $parameters['preserved_content'] ? : $parameters['codes'] ) ? : $parameters['editable'] ) ? : implode( ' - ', $parameters );
-							$parameters['widget_name'] = strip_tags( $parameters['widget_name'] ) ? : ( $eachObject['class_name'] ) . ' - ' . $numberedSectionName;
+							$parameters['widget_name'] = trim( ( $parameters['preserved_content'] ? : $parameters['codes'] ) ? : $parameters['editable'] ) ? : implode( ' - ', $parameters );
+							$parameters['widget_name'] = trim( strip_tags( $parameters['widget_name'] ) ? : ( $eachObject['class_name'] ) . ' - ' . $numberedSectionName );
 							$parameters['widget_name'] = trim( preg_replace( '|(\s)+|', ' ', $parameters['widget_name'] ) );
-						}
+                            if( empty( $parameters['widget_name'] ) )
+                            {
+                                $parameters['widget_name'] =  implode( ', ', $parameters );
+                            }
+                            $parameters['widget_name'] = trim( str_ireplace( array( 'array', ',', Ayoola_Application::getUrlPrefix() ), '', ( $parameters['widget_name'] ) ) );
+                            $parameters['widget_name'] = trim( preg_replace( '|(\s)+|', ' ', strip_tags( $parameters['widget_name'] ) ) );
+                        }
 						else
 						{
 						//	var_export( $parameters['widget_name'] );
                         }
-
                         
 						$parametersToSave = $parameters + $eachObject;
 						$parametersKey = md5( static::safe_json_encode( $parametersToSave ) );

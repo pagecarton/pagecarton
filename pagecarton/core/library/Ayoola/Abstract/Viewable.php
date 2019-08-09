@@ -1367,11 +1367,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				}
 			}
 			@$object['pagewidget_id'] = @$object['pagewidget_id_switch'] ? : @$object['pagewidget_id'];
-			if( @$object['pagewidget_id'] )
+            if( @$object['pagewidget_id'] )
 			{
 				if( $pageWidgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
 				{
-				//	var_export( $pageWidgetToRestore['object_name'] );
 					if( ! empty( $_REQUEST['rebuild_widget_box'] ) && ( @$object['pagewidget_id_switch'] || @$object['pagewidget_id_version'] ) )
 					{
 					//	var_export( $object );
