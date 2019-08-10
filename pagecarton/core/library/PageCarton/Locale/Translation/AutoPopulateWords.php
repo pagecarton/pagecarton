@@ -133,18 +133,13 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
 
                 if( false === stripos( $fileContent, 'exit(' ) 
                 
-                &&
+                && false === stripos( $fileContent, 'die(' ) 
                 
-                false === stripos( $fileContent, 'die(' ) 
+                && false === stripos( $fileContent, 'header(' ) 
                 
-                &&
+                && false === stripos( $fileContent, 'echo' )
 
-                false === stripos( $fileContent, 'header(' ) 
-                
-                
-                &&
-
-                false === stripos( $fileContent, 'echo' ) 
+                && false === stripos( $fileContent, '_logout' ) 
                 
                 )
                 {

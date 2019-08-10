@@ -720,8 +720,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		self::$_articleInfo = $class->getIdentifierData();
 		if( ! self::$_articleInfo )
 		{ 
-			header( 'Location: /404/' ); 
-			exit();
+            // breaking autopopulation of words 
+		//	header( 'Location: /404/' ); 
+		//	exit();
 		}
 		return self::$_articleInfo;
     } 

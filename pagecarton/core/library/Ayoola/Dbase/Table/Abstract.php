@@ -73,7 +73,7 @@ abstract class Ayoola_Dbase_Table_Abstract  extends PageCarton_Widget implements
      */
     public function __construct( $database = null )
     {		
-		if( ! is_null( $database ) ){ $this->setDatabase( $database ); }
+		if( is_a( $database, 'Ayoola_Dbase' ) ){ $this->setDatabase( $database ); }
     }
 
     /**

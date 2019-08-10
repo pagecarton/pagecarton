@@ -237,7 +237,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 					( 'Preview' ) . '' ) ) . '"  class="" onClick="" style="max-height:50vh;"  > 
 					<div style="margin:1em; font-size:x-small;">
 						' . ( is_file( $path ) ? ( '
-						' . self::__( 'URL' ) . ': <a target="_blank" href="' . ( $imageUrl ) . '">' .  $plainUrl . '</a><br>
+						' . self::__( 'FILE URL' ) . ': <a target="_blank" href="' . ( $imageUrl ) . '">' .  $plainUrl . '</a><br>
 						' . self::__( 'FILE SIZE' ) . ': ' . $filter->filter( filesize( $path ) ) . '<br>
 						' ) : null ) . ' 
 

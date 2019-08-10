@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="originalstring" creation_time="1564485956" modified_time="1564485956" table_version="0.1" module_version="1.00" table_class="PageCarton_Locale_OriginalString" creation_ip="0">
-  <RECORDS autoId="261">
+  <RECORDS autoId="381">
     <TABLE_ROW ROW_ID="33">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[[Custom Locale Code]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[[Custom Locale Code]]]></TABLE_FIELD>
@@ -289,7 +289,7 @@
     <TABLE_ROW ROW_ID="68">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Update Basic Info]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Update Basic Info]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565119749-0-68]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565119749]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143172]]></TABLE_FIELD>
@@ -297,7 +297,7 @@
     <TABLE_ROW ROW_ID="69">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Set site basic branding information]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Set site basic branding information]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565119750-0-69]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565119750]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143172]]></TABLE_FIELD>
@@ -305,7 +305,7 @@
     <TABLE_ROW ROW_ID="70">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Change some of the theme dummy pictures]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Change some of the theme dummy pictures]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565119750-0-70]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565119750]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143173]]></TABLE_FIELD>
@@ -313,7 +313,7 @@
     <TABLE_ROW ROW_ID="71">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Share the site now]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Share the site now]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565119750-0-71]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565119750]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143174]]></TABLE_FIELD>
@@ -353,10 +353,10 @@
     <TABLE_ROW ROW_ID="79">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[%d wks ]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[%d wks]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;,&quot;\/widgets\/PageCarton_Device_List&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565120342-0-79]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565120342]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565440571]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="83">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Exporting Locale Translation]]></TABLE_FIELD>
@@ -809,10 +809,10 @@
     <TABLE_ROW ROW_ID="140">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Post Settings]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Post Settings]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_SettingsName_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_SettingsName_List&quot;,&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565121343-0-140]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565121343]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565430918]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="141">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Profile Settings]]></TABLE_FIELD>
@@ -1102,7 +1102,7 @@
     <TABLE_ROW ROW_ID="177">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Upload new file]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Upload new file]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565135214-0-177]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565135214]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143176]]></TABLE_FIELD>
@@ -1110,7 +1110,7 @@
     <TABLE_ROW ROW_ID="178">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Upload]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Upload]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565135214-0-178]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565135214]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143177]]></TABLE_FIELD>
@@ -1118,7 +1118,7 @@
     <TABLE_ROW ROW_ID="179">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Browse existing files on the site]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Browse existing files on the site]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565135215-0-179]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565135215]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143177]]></TABLE_FIELD>
@@ -1126,7 +1126,7 @@
     <TABLE_ROW ROW_ID="180">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Browse]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Browse]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565135215-0-180]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565135215]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143178]]></TABLE_FIELD>
@@ -1427,26 +1427,26 @@
     <TABLE_ROW ROW_ID="217">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Delete all the fields in this set]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Delete all the fields in this set]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Type_Creator&quot;,&quot;\/widgets\/Application_Settings_Payment&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565172855-0-217]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565172855]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432537]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="218">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[You may click to edit the content here...]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[You may click to edit the content here...]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Text&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174074-0-218]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174074]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565440539]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="219">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Code View]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Code View]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Text&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174074-0-219]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174074]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565440542]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="220">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[WYSIWYG]]></TABLE_FIELD>
@@ -1459,138 +1459,138 @@
     <TABLE_ROW ROW_ID="221">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Switch the editing mode]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Switch the editing mode]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Text&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174075-0-221]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174075]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565440543]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="222">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Lorem Ipsum dolor]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Lorem Ipsum dolor]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Text&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174079-0-222]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174079]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565440540]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="223">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Vivamus sit amet dolor sit amet nunc maximus finibus. Donec vel ornare leo, eget gravida orci. Etiam vitae rutrum nisi. Mauris auctor velit et ultricies mollis. Donec in mattis lectus. In hac habitasse platea dictumst. Sed ultricies magna ut ligula fringilla facilisis. Ut sodales erat ut libero rhoncus hendrerit. Vivamus nunc magna, finibus vel velit in, tempus venenatis dolor. Aenean a leo non tellus semper ultricies eget quis enim.]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Vivamus sit amet dolor sit amet nunc maximus finibus. Donec vel ornare leo, eget gravida orci. Etiam vitae rutrum nisi. Mauris auctor velit et ultricies mollis. Donec in mattis lectus. In hac habitasse platea dictumst. Sed ultricies magna ut ligula fringilla facilisis. Ut sodales erat ut libero rhoncus hendrerit. Vivamus nunc magna, finibus vel velit in, tempus venenatis dolor. Aenean a leo non tellus semper ultricies eget quis enim.]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Text&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174079-0-223]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174079]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565440541]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="224">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[No of Posts to Show]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[No of Posts to Show]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_ShowAll&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174080-0-224]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174080]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432526]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="225">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Post Type]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Post Type]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;,&quot;\/widgets\/Application_Article_ShowAll&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174081-0-225]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174081]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432522]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="226">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Article]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Article]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174081-0-226]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174081]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432515]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="227">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Audio]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Audio]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174081-0-227]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174081]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432516]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="228">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Embed YouTube Video]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Embed YouTube Video]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174081-0-228]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174081]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432517]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="229">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Online Quiz]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Online Quiz]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174081-0-229]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174081]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432517]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="230">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Online Poll]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Online Poll]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174082-0-230]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174082]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432518]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="231">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Downloadables]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Downloadables]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174082-0-231]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174082]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432519]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="232">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[External Web Link]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[External Web Link]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174082-0-232]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174082]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432519]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="233">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Event]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Event]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174082-0-233]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174082]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432520]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="234">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Product]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Product]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174082-0-234]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174082]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432521]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="235">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Service]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Service]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174082-0-235]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174082]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432521]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="236">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Book]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Book]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174082-0-236]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174082]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432522]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="237">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Post Display Style]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Post Display Style]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_ShowAll&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565174082-0-237]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565174082]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432527]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="238">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Items List]]></TABLE_FIELD>
@@ -1755,10 +1755,10 @@
     <TABLE_ROW ROW_ID="258">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Continue..]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Continue..]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565205300-0-258]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565205300]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565432530]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="259">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Duplicate this fieldset]]></TABLE_FIELD>
@@ -1774,6 +1774,971 @@
       <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/404&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565269171-0-260]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565269171]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="261">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[FILE URL]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[FILE URL]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Doc_Upload_Link&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565430175-0-261]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565430175]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="262">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[FILE SIZE]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[FILE SIZE]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Doc_Upload_Link&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565430175-0-262]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565430175]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="263">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Doc Upload Link]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Doc Upload Link]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Doc_Upload_Link&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565430175-0-263]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565430175]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="264">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Locale List - PageCarton Admin Panel]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Locale List - PageCarton Admin Panel]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565430265-0-264]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565430265]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="265">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[%d day ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[%d day]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Repository&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565430275-0-265]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565430275]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565440556]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="266">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Who can create posts?]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Who can create posts?]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565430917-0-266]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565430917]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="267">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Who can edit and manage all posts?]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Who can edit and manage all posts?]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565430917-0-267]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565430917]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="268">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Select site-wide categories available for users when creating posts ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Select site-wide categories available for users when creating posts]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565430918-0-268]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565430918]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="269">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[ Manage All Categories]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Manage All Categories]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565430918-0-269]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565430918]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="270">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Update Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Update Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;,&quot;\/widgets\/Application_Settings_Payment&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565430919-0-270]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565430919]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565441160]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="271">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Personalization]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Personalization]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Personalization&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565431118-0-271]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565431118]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="272">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Access]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Access]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432085-0-272]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432085]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="273">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Error]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Error]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432085-0-273]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432085]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="274">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[ForgotUsernameOrPassword]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[ForgotUsernameOrPassword]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432085-0-274]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432085]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="275">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[General]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[General]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432086-0-275]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432086]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="276">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[SignIn]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[SignIn]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432086-0-276]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432086]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="277">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[SignOut]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[SignOut]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432086-0-277]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432086]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="278">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Choose a log]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Choose a log]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432086-0-278]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432086]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="279">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Log View Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Log View Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432086-0-279]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432086]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="280">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[View]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[View]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432086-0-280]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432086]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="281">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Log - PageCarton Admin Panel]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Log - PageCarton Admin Panel]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432087-0-281]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432087]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="282">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Log Information for %s]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Log Information for %s]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432103-0-282]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432103]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="283">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[New Log]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[New Log]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432103-0-283]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432103]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="284">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Clear Log]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Clear Log]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432103-0-284]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432103]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="285">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Edit Log Viewer]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Edit Log Viewer]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432103-0-285]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432103]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="286">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[View Log]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[View Log]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432103-0-286]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432103]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="287">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Log View]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Log View]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Log_View&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432109-0-287]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432109]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="288">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Error Message]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Error Message]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432111-0-288]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432111]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="289">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Error Time]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Error Time]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432111-0-289]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432111]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="290">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Log Id]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Log Id]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432111-0-290]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432111]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="291">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Modified Time]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Modified Time]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432112-0-291]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432112]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="292">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Log View Error Log]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Log View Error Log]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Log_View_Error_Log&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432113-0-292]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432113]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="293">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[The API connection on this application is powered by Ayoola Content Management Framework (Ayoola CMF). To learn about how to connect securely to this application, visit ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[The API connection on this application is powered by Ayoola Content Management Framework (Ayoola CMF). To learn about how to connect securely to this application, visit]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Api&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432515-0-293]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432515]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="294">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Ayoola CMF website.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Ayoola CMF website.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Api&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432515-0-294]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432515]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="295">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Please wait...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Please wait...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432515-0-295]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432515]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="296">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Article Title: Enter a title for the Article here...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Article Title: Enter a title for the Article here...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432523-0-296]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432523]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="297">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Enter a title for the Article here...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Enter a title for the Article here...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432523-0-297]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432523]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="298">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Article Title]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Article Title]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432523-0-298]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432523]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="299">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Article write up  : Enter content here...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Article write up  : Enter content here...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432523-0-299]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432523]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="300">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Enter content here...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Enter content here...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432524-0-300]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432524]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="301">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Article write up  ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Article write up]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432524-0-301]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432524]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="302">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Cover Photo]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Cover Photo]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Generator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432524-0-302]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432524]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="303">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Choose a name for this template]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Choose a name for this template]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432528-0-303]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432528]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="304">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Template Label]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Template Label]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432528-0-304]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432528]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="305">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Markup Template]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Markup Template]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432529-0-305]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432529]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="306">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Select a screenshot for this template.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Select a screenshot for this template.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432529-0-306]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432529]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="307">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Add external CSS files]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Add external CSS files]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432529-0-307]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432529]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="308">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Add external Javascript files]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Add external Javascript files]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432529-0-308]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432529]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="309">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Pad the template with template prefix and suffix]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Pad the template with template prefix and suffix]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432529-0-309]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432529]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="310">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Template Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Template Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432529-0-310]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432529]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="311">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Create a post template]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Create a post template]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432530-0-311]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432530]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="312">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Post template deleted successfully]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Post template deleted successfully]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Delete&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432531-0-312]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432531]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="313">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Post template edited successfully]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Post template edited successfully]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432531-0-313]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432531]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="314">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[ New Post Template ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[New Post Template]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432531-0-314]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432531]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="315">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[There are no Post templates on this application, please add one.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[There are no Post templates on this application, please add one.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432531-0-315]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432531]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="316">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[List of Post Templates on this website]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[List of Post Templates on this website]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432532-0-316]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432532]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="317">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Enter post type name, e.g. Article]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Enter post type name, e.g. Article]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432533-0-317]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432533]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="318">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[e.g. Article]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[e.g. Article]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432533-0-318]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432533]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="319">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Type Name]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Type Name]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432533-0-319]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432533]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="320">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Choose the kind of post this is...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Choose the kind of post this is...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432533-0-320]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432533]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="321">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Post is similar to]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Post is similar to]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432534-0-321]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432534]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="322">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Select Feature]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Select Feature]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432534-0-322]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432534]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="323">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Video Embed URL]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Video Embed URL]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432534-0-323]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432534]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="324">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Download URL]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Download URL]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432534-0-324]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432534]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="325">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Price]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Price]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432534-0-325]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432534]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="326">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Multiple Pricing]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Multiple Pricing]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432534-0-326]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432534]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="327">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Subscription Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Subscription Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432535-0-327]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432535]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="328">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Date and Time]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Date and Time]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432535-0-328]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432535]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="329">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Location]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Location]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432535-0-329]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432535]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="330">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Play Audio]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Play Audio]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432535-0-330]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432535]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="331">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Gallery Images]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Gallery Images]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432535-0-331]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432535]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="332">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Privacy Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Privacy Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432535-0-332]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432535]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="333">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Short Description]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Short Description]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432536-0-333]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432536]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="334">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Post Type Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Post Type Options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432536-0-334]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432536]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="335">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Field name suffix (optional)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Field name suffix (optional)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432536-0-335]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432536]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="336">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[+ Add feature]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[+ Add feature]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432536-0-336]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432536]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="337">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[- Remove feature]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[- Remove feature]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432536-0-337]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432536]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="338">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[[Manage Multi-Options]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[[Manage Multi-Options]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432540-0-338]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432540]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="339">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Supplementary Creation form]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Supplementary Creation form]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432540-0-339]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432540]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="340">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Custom Fields for Post Type]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Custom Fields for Post Type]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432540-0-340]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432540]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="341">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[e.g. brand, size, color ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[e.g. brand, size, color]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432540-0-341]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432540]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="342">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Supplementary Custom Fields]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Supplementary Custom Fields]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432541-0-342]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432541]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="343">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Who can create a post of this type]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Who can create a post of this type]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432544-0-343]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432544]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="344">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Who can view a post of this type]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Who can view a post of this type]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432545-0-344]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432545]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="345">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Add a new post type]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Add a new post type]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432545-0-345]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432545]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="346">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[value]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[value]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432545-0-346]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432545]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="347">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[+ Add preset field]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[+ Add preset field]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432545-0-347]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432545]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="348">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[- Remove preset field]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[- Remove preset field]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432546-0-348]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432546]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="349">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Post type deleted successfully]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Post type deleted successfully]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Delete&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432546-0-349]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432546]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="350">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[You have not defined any post type yet]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[You have not defined any post type yet]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432546-0-350]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432546]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="351">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Manage Post Types]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Manage Post Types]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432546-0-351]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432546]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="352">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Add new item to Manage Post Types]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Add new item to Manage Post Types]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432546-0-352]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432546]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="353">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Poll Answer]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Poll Answer]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Poll&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432547-0-353]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432547]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="354">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Vote]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Vote]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Poll&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432547-0-354]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432547]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="355">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Notice!]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Notice!]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Quiz&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432547-0-355]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432547]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="356">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[To save your score and other information about this test, please login with your username and password before you start the test.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[To save your score and other information about this test, please login with your username and password before you start the test.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Quiz&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432547-0-356]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432547]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="357">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Build Invitation List!]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Build Invitation List!]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Quiz_Whitelist&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432548-0-357]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432548]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="358">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[The number of users can can be invited has been exhausted. Please contact administrator to reload your account with more passes.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[The number of users can can be invited has been exhausted. Please contact administrator to reload your account with more passes.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Quiz_Whitelist&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432548-0-358]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432548]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="359">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Bulk Email Address Invitation List!]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Bulk Email Address Invitation List!]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Quiz_WhitelistImport&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432548-0-359]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432548]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="360">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Paste email addresses below]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Paste email addresses below]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Type_Quiz_WhitelistImport&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432548-0-360]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432548]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="361">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[username'] ? : 'Anonymous]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[username'] ? : 'Anonymous]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_View_Author&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565432549-0-361]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565432549]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="362">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[+ Add New Surcharge Below]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[+ Add New Surcharge Below]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Payment&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565439916-0-362]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565439916]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="363">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[- Remove Above Surcharge]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[- Remove Above Surcharge]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Payment&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565439916-0-363]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565439916]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="364">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[edit site headline and description]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[edit site headline and description]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_SiteInfo&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565439921-0-364]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565439921]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="365">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[+ Add New Validation Below]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[+ Add New Validation Below]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Form_Validator_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440530-0-365]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440529]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="366">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[- Remove Above Validation]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[- Remove Above Validation]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Form_Validator_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440530-0-366]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440530]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="367">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Edit Main Site %s Page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Edit Main Site %s Page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440535-0-367]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440535]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="368">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Edit Default Theme %s Page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Edit Default Theme %s Page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440535-0-368]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440535]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="369">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Theme editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Theme editor]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440536-0-369]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440536]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="370">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Load Default]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Load Default]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440536-0-370]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440536]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="371">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Custom Parameter Name]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Custom Parameter Name]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Text&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440538-0-371]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440538]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="372">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Insert HTML content here. Use varables like]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Insert HTML content here. Use varables like]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Text&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440538-0-372]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440538]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="373">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[variables to use in content]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[variables to use in content]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Text&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440538-0-373]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440538]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="374">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[The content has been locked from editing...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[The content has been locked from editing...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Text&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440539-0-374]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440539]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="375">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Description for this page has not been set. Page Description will appear here when they become available.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Description for this page has not been set. Page Description will appear here when they become available.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Info&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440544-0-375]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440544]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="376">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[edit page headline and description]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[edit page headline and description]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Info&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440544-0-376]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440544]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="377">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[New Detector]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[New Detector]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Device_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440570-0-377]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440570]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="378">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Remove Detector]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Remove Detector]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Device_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440570-0-378]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440570]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="379">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Widget_Sample&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440660-0-379]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440660]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="380">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Widget_Sample&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440660-0-380]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440660]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
