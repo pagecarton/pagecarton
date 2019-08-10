@@ -838,14 +838,21 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		{
 			if( ! is_file( $value ) )
 			{
-				require_once 'Ayoola/Filter/UriToPath.php';
-				$filter = new Ayoola_Filter_UriToPath();
-				$path = $filter->filter( $value );
+			//	require_once 'Ayoola/Filter/UriToPath.php';
+			//	$filter = new Ayoola_Filter_UriToPath();
+			//	$path = $filter->filter( $value );
 			}
 		}
     //    var_export( $path );
     //    exit();
         $realPath = self::getDocumentPath( $value );
+        if( is_file( $value ) )
+        {
+            $realPath = $value;
+        }
+    //    var_export( $value );
+    //    var_export( $realPath );
+    //    exit();
 		$this->loadFile( $realPath ); 
         //		$this->loadFile( $path['include'] ); 
 	//	try{ $this->loadFile( $path['include'] ); } 
@@ -853,7 +860,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 	//	catch( Ayoola_Doc_Exception $e ){ return false; }
     //    var_export( $path );
     //    exit();
-		$this->_viewOption = $path;
+		$this->_viewOption = $realPath;
     } 
 	
     /**
