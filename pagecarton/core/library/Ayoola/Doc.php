@@ -206,7 +206,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			{
 			//	$filePath = DOCUMENTS_DIR . $file;
 				$storage = new Ayoola_Storage(); 
-				$storage->storageNamespace = __CLASS__ . Ayoola_Application::getUrlPrefix() . $uri . 's-d-d-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
+				$storage->storageNamespace = __CLASS__ . Ayoola_Application::getUrlPrefix() . $uri . 's--d-d-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
 				$storage->setDevice( 'File' );
 			//	self::v( $storage->retrieve() );
 				if( ! $dedicatedUrl = $storage->retrieve() OR $options['disable_cache'] )  
@@ -226,7 +226,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 					//	exit();
 						$dedicatedUrl = Ayoola_Application::getDomainSettings( 'protocol' ) . "://{$domain}" . Ayoola_Application::getUrlPrefix() . "{$uri}?document_time={$j}";					
                     }	
-                    var_export( $dedicatedUrl );
+                //    var_export( $dedicatedUrl );
 					$storage->store( $dedicatedUrl );
 				}
 			}

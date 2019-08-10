@@ -348,7 +348,7 @@
     <TABLE_ROW ROW_ID="44">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Edit Menu Option]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Edit Menu Option]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/posts&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Extension_Import_Delete&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/404&quot;,&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/posts&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Extension_Import_Delete&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/404&quot;,&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485800-0-44]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485800]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565119585]]></TABLE_FIELD>
@@ -356,7 +356,7 @@
     <TABLE_ROW ROW_ID="45">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Home]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Home]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/posts&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Extension_Import_Delete&quot;,&quot;\/404&quot;,&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/posts&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Extension_Import_Delete&quot;,&quot;\/404&quot;,&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485800-0-45]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485800]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565119558]]></TABLE_FIELD>
@@ -828,7 +828,7 @@
     <TABLE_ROW ROW_ID="104">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Full name]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Full name]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485819-0-104]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485819]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565166748]]></TABLE_FIELD>
@@ -836,7 +836,7 @@
     <TABLE_ROW ROW_ID="105">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Phone Number]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Phone Number]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485819-0-105]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485819]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565166749]]></TABLE_FIELD>
@@ -844,7 +844,7 @@
     <TABLE_ROW ROW_ID="106">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Contact Form]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Contact Form]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485819-0-106]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485819]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565166749]]></TABLE_FIELD>
@@ -852,7 +852,7 @@
     <TABLE_ROW ROW_ID="107">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Subject: Contact subject...]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Subject: Contact subject...]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485819-0-107]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485819]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565166750]]></TABLE_FIELD>
@@ -860,7 +860,7 @@
     <TABLE_ROW ROW_ID="108">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Contact subject...]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Contact subject...]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485819-0-108]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485819]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565166750]]></TABLE_FIELD>
@@ -868,7 +868,7 @@
     <TABLE_ROW ROW_ID="109">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Message: Please briefly describe what you are contacting us about...]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Message: Please briefly describe what you are contacting us about...]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485819-0-109]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485819]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565166752]]></TABLE_FIELD>
@@ -876,7 +876,7 @@
     <TABLE_ROW ROW_ID="110">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Please briefly describe what you are contacting us about...]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Please briefly describe what you are contacting us about...]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485819-0-110]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485819]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565166752]]></TABLE_FIELD>
@@ -884,7 +884,7 @@
     <TABLE_ROW ROW_ID="111">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Message]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Message]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485819-0-111]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485819]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565166753]]></TABLE_FIELD>
@@ -892,7 +892,7 @@
     <TABLE_ROW ROW_ID="112">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Send message]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Send message]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_ContactUs_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485820-0-112]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485820]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565166753]]></TABLE_FIELD>

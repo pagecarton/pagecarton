@@ -48,7 +48,7 @@ Basic Style
 .cd-multi-steps li>* {
   /* single step */
   display: inline-block;
-  font-size: 1.2rem;
+  /* font-size: 1.2rem; */
   color: #2c3f4c;
 }
 
@@ -141,10 +141,10 @@ Basic Style
     margin: 0 1em;
   }
 
-  .cd-breadcrumb li>*,
+  /* .cd-breadcrumb li>*,
   .cd-multi-steps li>* {
     font-size: 1.2rem;
-  }
+  } */
 }
 
 /* --------------------------------
@@ -368,7 +368,7 @@ Basic Style
     height: 26px;
     width: 26px;
     line-height: 26px;
-    font-size: 1.4rem;
+    /* font-size: 1.4rem; */
     color: #ffffff;
   }
 
