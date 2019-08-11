@@ -244,7 +244,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 								{ 
 								//	PageCarton_Widget::v( $phrase ); 
 								//	PageCarton_Widget::v( $searchTermSlim ); 
-									$fields['pc_search_score'] += 100;
+									$fields['pc_search_score'] += 20;
 									//	var_export( $searchTermSlim );
 							//	var_export( $fields );
 						//	var_export( $fields[$key] );
@@ -256,7 +256,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 									if( stripos( $searchTerm, $keyword ) !== false )
 									{ 
                                         $fields['pc_search_score'] += 5;
-                                        if( stripos( 'article_title', $searchTerm ) !== false )
+                                        if('article_title' === $searchTerm )
                                         {
                                             $fields['pc_search_score'] += 20;
                                         }
