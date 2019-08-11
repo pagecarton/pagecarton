@@ -246,7 +246,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 								//	PageCarton_Widget::v( $phrase ); 
 								//	PageCarton_Widget::v( $searchTermSlim ); 
 								//	PageCarton_Widget::v( stripos( $searchTermSlim, $phrase ) ); 
-									$fields['pc_search_score'] += 20;
+									$fields['pc_search_score'] += 200;
 									//	var_export( $searchTermSlim );
 							//	var_export( $fields );
 						//	var_export( $fields[$key] );
@@ -257,18 +257,18 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 								{
 									if( stripos( $searchTerm, $keyword ) !== false )
 									{ 
-                                        $fields['pc_search_score'] += 5;
+                                        $fields['pc_search_score'] += ( 2 * strlen( $keyword ) );
                                         if('article_title' === $key )
                                         {
-                                            $fields['pc_search_score'] += 20;
+                                            $fields['pc_search_score'] +=  ( 5 * strlen( $keyword ) );
                                         }
                                         elseif( stripos( '_title', $key ) !== false )
                                         {
-                                            $fields['pc_search_score'] += 10;
+                                            $fields['pc_search_score'] += ( 2 * strlen( $keyword ) );
                                         }
                                         elseif( stripos( '_name', $key ) !== false )
                                         {
-                                            $fields['pc_search_score'] += 10;
+                                            $fields['pc_search_score'] +=  ( 2 * strlen( $keyword ) );
                                         }
 										$recordMatch = true;
 									//	break 3;  
