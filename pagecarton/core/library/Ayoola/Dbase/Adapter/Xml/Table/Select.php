@@ -111,7 +111,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		rsort( $files );
 	//	if( stripos( $this->getMyFilename(), 'localuser' ) )
 		{
-	//		PageCbarton_Widget::v( $files );
+	//		PageCarton_Widget::v( $files );
 		}
 //		PageCarton_Widget::v( count( $files ) . '<br>' );
 	//	PageCarton_Widget::v( $files );
@@ -242,8 +242,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
  							//	PageCarton_Widget::v( $phrase ); 
 								if( stripos( $searchTermSlim, $phrase ) !== false )
 								{ 
+								//	PageCarton_Widget::v( $key ); 
 								//	PageCarton_Widget::v( $phrase ); 
 								//	PageCarton_Widget::v( $searchTermSlim ); 
+								//	PageCarton_Widget::v( stripos( $searchTermSlim, $phrase ) ); 
 									$fields['pc_search_score'] += 20;
 									//	var_export( $searchTermSlim );
 							//	var_export( $fields );
@@ -256,15 +258,15 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 									if( stripos( $searchTerm, $keyword ) !== false )
 									{ 
                                         $fields['pc_search_score'] += 5;
-                                        if('article_title' === $searchTerm )
+                                        if('article_title' === $key )
                                         {
                                             $fields['pc_search_score'] += 20;
                                         }
-                                        elseif( stripos( '_title', $searchTerm ) !== false )
+                                        elseif( stripos( '_title', $key ) !== false )
                                         {
                                             $fields['pc_search_score'] += 10;
                                         }
-                                        elseif( stripos( '_name', $searchTerm ) !== false )
+                                        elseif( stripos( '_name', $key ) !== false )
                                         {
                                             $fields['pc_search_score'] += 10;
                                         }
