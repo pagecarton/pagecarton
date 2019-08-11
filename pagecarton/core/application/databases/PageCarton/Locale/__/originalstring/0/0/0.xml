@@ -3968,7 +3968,7 @@ Visit: http://localhost:8888   and please help share!]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="493">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[0 cron tasks processed successfully]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/&quot;,&quot;\/widgets\/PageCarton_Cron_Run&quot;,&quot;\/pc-admin\/PageCarton_Locale_List&quot;,&quot;\/pc_check.txt&quot;,&quot;\/pc-admin\/Application_Upgrade&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/&quot;,&quot;\/widgets\/PageCarton_Cron_Run&quot;,&quot;\/pc-admin\/PageCarton_Locale_List&quot;,&quot;\/pc_check.txt&quot;,&quot;\/pc-admin\/Application_Upgrade&quot;,&quot;\/js\/objects\/ckeditor\/plugins\/link\/dialogs\/link.js&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905858-0-2]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905858]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563905914]]></TABLE_FIELD>
@@ -4105,7 +4105,7 @@ Visit: http://localhost:8888   and please help share!]]></TABLE_FIELD>
     <TABLE_ROW ROW_ID="510">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[%s cron tasks processed successfully]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[%s cron tasks processed successfully]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/&quot;,&quot;\/pc_check.txt&quot;,&quot;\/pc-admin\/Application_Upgrade&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/&quot;,&quot;\/pc_check.txt&quot;,&quot;\/pc-admin\/Application_Upgrade&quot;,&quot;\/js\/objects\/ckeditor\/plugins\/link\/dialogs\/link.js&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485782-0-510]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485782]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1564486018]]></TABLE_FIELD>

@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: search.php	Sunday 11th of August 2019 01:54:09 PM	ayoola@ayoo.la $ 
+* @version $Id: search.php	Sunday 11th of August 2019 11:00:04 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -93,30 +93,53 @@ $_5fcc604b55cca1d4c9405badf0bb4939 = null;
 
 							}
 							
-							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_3c08fca34939362871065aff1b37b5c4 = new Application_Article_ShowAll( array (
-  'option' => '12',
-  'category_name' => '',
-  'article_types' => '',
-  'template_name' => 'ProductsforSale',
-  'pagewidget_id' => '1564131915-0-15',
+$_7b6ed22e579155513255b47c8331923c = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<a href="{{{post_link}}}"><img src="{{{document_url_uri}}}?width=100&height=100" style=" border-radius: 50%; float:right;" alt=""></a>
+<h3><a href="{{{post_link}}}">{{{article_title}}}</a></h3>
+<p>{{{article_description}}}</p>
+<p>{{{post_type}}} | {{{category_text}}}</p>
+
+<div style="clear:both;"> </div>
+<hr>
+<br>
+',
+  'preserved_content' => '<h3><a href="http://{{{post_link}}}">[{{{post_type}}}] - {{{article_title}}}</a></h3>
+
+<div>&nbsp;</div>
+
+<p>{{{article_description}}}</p>
+',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'embed_widgets',
+    1 => 'parameters',
+  ),
+  'pagewidget_id' => '',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Article_ShowAll',
+  ),
   'advanced_parameter_value' => 
   array (
     0 => 'keyword',
-    1 => 'View',
+    1 => 'pc_search_score',
+    2 => '1',
   ),
-  'search_mode' => 'keyword',
-  'button_value' => 'View',
-  'widget_name' => '12 - - - ProductsforSale - 1564131915-0-15 - - keyword - View',
+  'search_mode[0]' => 'keyword',
+  'sort_column[0]' => 'pc_search_score',
+  'inverse_order[0]' => '1',
+  'widget_name' => '[{{{post_type}}}] - {{{article_title}}} &nbsp; {{{article_description}}}',
 ) );
 
 							}
 							else
 							{
 								
-$_3c08fca34939362871065aff1b37b5c4 = null;
+$_7b6ed22e579155513255b47c8331923c = null;
 
 							}
 							
