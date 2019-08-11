@@ -2396,8 +2396,21 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	like username
 					#	Don't display user infor for signed out user
 				//	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['post'] ? : array(), $this->_objectTemplateValues );
-				//	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['profile'] ? : array(), $this->_objectTemplateValues );
+                //	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['profile'] ? : array(), $this->_objectTemplateValues );
+                    //  only show widget if some parameters are true
+                    if( $this->getParameter( 'required_template_variables' ) )
+                    {
+                        $mustHaves = array_map( 'trim', explode( ',', $this->getParameter( 'required_template_variables' ) ) );
+                        foreach( $mustHaves as $mustHave )
+                        {
+                            if( empty( $this->_objectTemplateValues[$mustHave] ) )
+                            {
+                                return false;
+                            }
+                        }
 
+                    }
+                            
 					//	allows me to add pagination on post listing with predefined suffix
 					$template = $this->getParameter( 'markup_template_prepend' ) . $template;
 					$template = $template . $this->getParameter( 'markup_template_append' );

@@ -9,10 +9,68 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: search.php	Friday 26th of July 2019 09:05:15 AM	ayoola@ayoo.la $ 
+* @version $Id: search.php	Sunday 11th of August 2019 01:54:09 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_e90c57a46504076dd6f4c11db23dd9c0 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div class="container">
+<p><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span>&nbsp;</p>
+
+<p>You searched for</p>
+
+<h1>{{{q}}}</h1>
+
+<div>&nbsp;</div>
+
+<div>&nbsp;Here are the top results:<span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span></div><div><br></div>
+</div>',
+  'preserved_content' => '<div class="container">
+<p><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span>&nbsp;</p>
+
+<p>You searched for</p>
+
+<h1>{{{q}}}</h1>
+
+<div>&nbsp;</div>
+
+<div>&nbsp;Here are the top results:<span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span></div><div><br></div>
+</div>',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'preserve_content',
+    1 => 'embed_widgets',
+    2 => 'wrappers',
+    3 => 'parameters',
+  ),
+  'pagewidget_id' => '1565528051-0-4',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Global',
+  ),
+  'advanced_parameter_value' => 
+  array (
+    0 => '1',
+    1 => 'q',
+  ),
+  'wrapper_name' => 'dark',
+  'include_request[0]' => '1',
+  'required_template_variables[0]' => 'q',
+  'widget_name' => '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; You searched for {{{q}}} &nbsp; &nbsp;Here are the top results:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
+) );
+
+							}
+							else
+							{
+								
+$_e90c57a46504076dd6f4c11db23dd9c0 = null;
+
+							}
+							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
@@ -24,7 +82,7 @@ $_5fcc604b55cca1d4c9405badf0bb4939 = new Ayoola_Object_Embed( array (
     0 => '',
   ),
   '' => '',
-  'widget_name' => 'A p p l i c a t i o n _ S e a r c h B o x',
+  'widget_name' => 'Application_SearchBox',
 ) );
 
 							}
@@ -35,37 +93,15 @@ $_5fcc604b55cca1d4c9405badf0bb4939 = null;
 
 							}
 							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_7b6ed22e579155513255b47c8331923c = new Ayoola_Page_Editor_Text( array (
-  'editable' => '
-			
-			<h3><br></h3><div><br></div>
-			',
-  'preserved_content' => '',
-  'url_prefix' => '',
-  'pagewidget_id' => '',
-  'widget_name' => '',
-) );
-
-							}
-							else
-							{
-								
-$_7b6ed22e579155513255b47c8331923c = null;
-
-							}
-							
 							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
 							{
 								
-$_d65f24c17d419435f6d9a14542821260 = new Application_Article_ShowAll( array (
+$_3c08fca34939362871065aff1b37b5c4 = new Application_Article_ShowAll( array (
   'option' => '12',
   'category_name' => '',
   'article_types' => '',
   'template_name' => 'ProductsforSale',
-  'pagewidget_id' => '1564094539-0-59',
+  'pagewidget_id' => '1564131915-0-15',
   'advanced_parameter_value' => 
   array (
     0 => 'keyword',
@@ -73,15 +109,14 @@ $_d65f24c17d419435f6d9a14542821260 = new Application_Article_ShowAll( array (
   ),
   'search_mode' => 'keyword',
   'button_value' => 'View',
-  'widget_name' => '1 2  -  -  -  P r o d u c t s f o r S a l e  -  1 5 6 4 0 9 4 5 3 9 - 0 - 5 9  -  A r r a y  -  k e y w o r d  -  V i e w',
-  'insert_id' => '1564131915-0-15',
+  'widget_name' => '12 - - - ProductsforSale - 1564131915-0-15 - - keyword - View',
 ) );
 
 							}
 							else
 							{
 								
-$_d65f24c17d419435f6d9a14542821260 = null;
+$_3c08fca34939362871065aff1b37b5c4 = null;
 
 							}
 							

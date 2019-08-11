@@ -233,28 +233,41 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 							}
 							else
 							{
-								$phrase = implode( '', $where['*'] );
-								$searchTermSlim = str_replace( ' ', '', $searchTerm );
- 		//						PageCarton_Widget::v( $searchTermSlim ); 
+                                $slimer = array( ' ', ',', '-', '_', '"', '\'' );
+								$phrase = implode( ' ', $where['*'] );
+								$phrase = str_replace( $slimer, '', $phrase );
+								$searchTermSlim = str_replace( $slimer, '', $searchTerm );
+ 							//	PageCarton_Widget::v( $searchTermSlim ); 
+ 							//	PageCarton_Widget::v( $where ); 
+ 							//	PageCarton_Widget::v( $phrase ); 
 								if( stripos( $searchTermSlim, $phrase ) !== false )
 								{ 
 								//	PageCarton_Widget::v( $phrase ); 
 								//	PageCarton_Widget::v( $searchTermSlim ); 
-									$fields['pc_search_score'] += 10;
+									$fields['pc_search_score'] += 100;
 									//	var_export( $searchTermSlim );
 							//	var_export( $fields );
 						//	var_export( $fields[$key] );
 									$recordMatch = true;
 								//	break 3;  
 								}
-							foreach( $where['*'] as $keyword )
+							    foreach( $where['*'] as $keyword )
 								{
 									if( stripos( $searchTerm, $keyword ) !== false )
 									{ 
-										$fields['pc_search_score'] += 1;
-										//	var_export( $where );
-								//	var_export( $fields );
-							//	var_export( $fields[$key] );
+                                        $fields['pc_search_score'] += 5;
+                                        if( stripos( 'article_title', $searchTerm ) !== false )
+                                        {
+                                            $fields['pc_search_score'] += 20;
+                                        }
+                                        elseif( stripos( '_title', $searchTerm ) !== false )
+                                        {
+                                            $fields['pc_search_score'] += 10;
+                                        }
+                                        elseif( stripos( '_name', $searchTerm ) !== false )
+                                        {
+                                            $fields['pc_search_score'] += 10;
+                                        }
 										$recordMatch = true;
 									//	break 3;  
 									}

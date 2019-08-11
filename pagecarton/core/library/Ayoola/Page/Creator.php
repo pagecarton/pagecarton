@@ -27,6 +27,14 @@ require_once 'Ayoola/Page/Abstract.php';
 class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 {
 	
+ 	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Create a page'; 
+	
     /**
      * Attempts to delete a file
      *
@@ -128,10 +136,11 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 				$page = new Ayoola_Page_Editor_Sanitize();
 				$page->refresh( $values['url'] );
 
-				$this->setViewContent( self::__( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>', true )  );   
+				$this->setViewContent( self::__( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>' ), true  );   
 				$this->setViewContent( self::__( '<p>
-																		<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '"><i class="fa fa-edit pc_give_space"></i> Add Content!</a>
-																		<a class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $values['url'] . '"> <i class="fa fa-cog pc_give_space"></i> Settings</a>
+																		<a target="_blank" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '">Add Content <i class="fa fa-edit pc_give_space"></i></a>
+																		<a target="_blank" class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Menu_Edit_Creator/?url=' . $values['url'] . '"> Add to site navigation <i class="fa fa-cog pc_give_space"></i></a>
+																		<a target="_blank" class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $values['url'] . '"> Settings <i class="fa fa-cog pc_give_space"></i></a>
 				</p>' ) ); 
 		}
 		catch( Exception $e )

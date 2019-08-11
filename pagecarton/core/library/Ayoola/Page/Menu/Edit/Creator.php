@@ -28,6 +28,14 @@ require_once 'Ayoola/Page/Menu/Edit/Abstract.php';
 class Ayoola_Page_Menu_Edit_Creator extends Ayoola_Page_Menu_Edit_Abstract
 {
 	
+ 	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Add an option to site navigation'; 
+	
     /**
      * Identifier for the column to edit
      * 
@@ -43,13 +51,12 @@ class Ayoola_Page_Menu_Edit_Creator extends Ayoola_Page_Menu_Edit_Abstract
     {
 		try
 		{ 
-			//if( ! parent::_process() ){ return false; }
-		//	$data = $this->getIdentifierData();
-		//	var_export( $data );
-			$this->createForm( 'Save', 'Add a new navigation link' );
+			$this->createForm( 'Save', 'Add a new navigation option' );
 			$this->setViewContent( $this->getForm()->view() );
-			if( ! $values = $this->getForm()->getValues() ){ return false; } 
-			if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( '<p class="goodnews">A new link added successfully.</p>' ) . '', true  ); }
+            if( ! $values = $this->getForm()->getValues() ){ return false; } 
+            $values['link_options'] = [ 'logged_in', 'logged_out' ];
+            $values['auth_level'] = [ 0 ];
+			if( $this->insertDb( $values ) ){ $this->setViewContent(  '' . self::__( '<p class="goodnews">A new navigation option added successfully.</p>' ) . '', true  ); }
 		}
 		catch( Ayoola_Page_Menu_Edit_Exception $e ){ return false; }    
     } 
@@ -59,10 +66,12 @@ class Ayoola_Page_Menu_Edit_Creator extends Ayoola_Page_Menu_Edit_Abstract
      * 
      * @return bool
      */
-	protected function insertDb( Array $autoValues = null )
+	protected function insertDb( Array $values = null )
     {
-		if( ! $values = $this->getForm()->getValues() ){ return false; }
-		//var_export( $values );
+        if( empty( $values ) )
+        {
+            if( ! $values = $this->getForm()->getValues() ){ return false; }
+        }
 		try{ $this->getDbTable()->insert( $values ); }
 		catch( Ayoola_Dbase_Adapter_Xml_Table_Exception $e )
 		{

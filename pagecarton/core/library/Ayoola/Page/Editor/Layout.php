@@ -235,22 +235,18 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		Ayoola_Object_Embed::ignoreClass( 'Ayoola_Object_Play' );
 
 	//		var_export( $_POST );
-		if( ! $page = $this->sourcePage() )
-		{
-	//		var_export( $page );
-			return false;
-		}
 	//	var_export( $page );
 
 		//	Allows the htmlHeader to get the correct layout name to use for <base>
-		Ayoola_Page::$layoutName = @$page['layout_name'] ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ); 
-        if( stripos( $page['url'], '/layout/' ) !== 0 && ! $this->isSaveMode())
+        Ayoola_Page::$layoutName = @$page['layout_name'] ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ); 
+        $url = @$_REQUEST['url'];
+        if( $url && stripos( $url, '/layout/' ) !== 0 && ! $this->isSaveMode())
         {
             //  if there is theme version, always ASK which to edit
             if( ! $this->getPageEditorLayoutName() && empty( $_REQUEST['pc_edit_main_site_page'] ) )
             {
                 // check if theres a page specific theme file
-                $pageThemeFileUrl = $page['url'];
+                $pageThemeFileUrl = $url;
                 if( $pageThemeFileUrl == '/' )
                 {
                     $pageThemeFileUrl = '/index';
@@ -262,8 +258,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                     $query = '?' . http_build_query( $_GET );
                     $this->setViewContent(  '' . self::__( '<h3>There are multiple versions of this page that is editable</h3>' ) . ''  );
                     $this->setViewContent(  '
-                                    <a class="pc-btn" href="' . $query . '&pc_edit_main_site_page=1">' . sprintf( self::__( 'Edit Main Site %s Page' ), '' . $page['url'] . ''  ) . '</a>
-                                    <a class="pc-btn" href="' . $query . '&pc_page_editor_layout_name=' . self::getDefaultLayout() . '">' . sprintf( self::__( 'Edit Default Theme %s Page' ), '' . $page['url'] . ''  ) . '</a>
+                                    <a class="pc-btn" href="' . $query . '&pc_edit_main_site_page=1">' . sprintf( self::__( 'Edit Main Site %s Page' ), '' . $url . ''  ) . '</a>
+                                    <a class="pc-btn" href="' . $query . '&pc_page_editor_layout_name=' . self::getDefaultLayout() . '">' . sprintf( self::__( 'Edit Default Theme %s Page' ), '' . $url . ''  ) . '</a>
                                     ' );
                     return false;
                 }
@@ -271,7 +267,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
             }
         }
-        
+ 		if( ! $page = $this->sourcePage() )
+		{
+	//		var_export( $page );
+			return false;
+		}
+       
 		//	var_export( $_POST ); 
 		
 		$this->getLayoutRepresentation();

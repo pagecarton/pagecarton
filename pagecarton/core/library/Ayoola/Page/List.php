@@ -95,23 +95,7 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 			}
 				$this->setViewContent( $this->createList( $all, 'All Pages' ), true );
 		}
-
-
-
-
-/* 		if( $otherThemes = $table->select( null, array( 'system' => 1 ) ) )
-		{
-			$otherThemes = self::sortMultiDimensionalArray( $otherThemes, $key );
-		//	$list->listTitle = 'Other Pages';
-		//	$this->setViewContent( self::__( '<h3>Other Pages</h3>' ) );		
-			$this->setViewContent( $this->createList( $otherThemes, 'Other Pages' ) );
-		}
- */	//	var_export( $otherThemes );
-	//	var_export( $allThemes );
-
-	//	$this->setViewContent( self::__( '<h3>PAGE OPTIONS:</h3>' ) );		
-	//	$this->setViewContent( self::__( '<h4><a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/" title="Create a new page">+</a> | <a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Sanitize/" title="Sanitize all pages. Recreate all page templates.">o</a></h4>' ) );		
-//		$this->setViewContent( $this->getList() );		
+	
     } 
 	
     /**
@@ -123,11 +107,9 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
-	//	$list->listTitle = self::getObjectTitle();   
 		$list->listTitle = $title;  
 		
 		//	remove themes
-//		$data = $data ? : $this->getDbData();
 		foreach( $data as $key => $value )
 		{
 			if( stripos( $value['url'], '/layout/' ) === 0 )
@@ -139,8 +121,6 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 		if( $title === 'My Pages' )
 		{
 			$list->showSearchBox = true;
-		//	$list->setData( $data );
-		//	$list->setData( $this->getDbTable->select( null, array() ) );
 			$list->setListOptions( 
 									array( 
 											'Create Home' => '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/\' );" title="Edit Home Page">Edit Home Page</a>',
@@ -160,31 +140,22 @@ class Ayoola_Page_List  extends Ayoola_Page_Abstract
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No web page created yet.' );
 		
-/* 		// _Array function will convert this to array for me
-		$options = "<div>
-						<a class='pc-btn' href='" . Ayoola_Application::getUrlPrefix() . "/tools/classplayer/get/object_name/Ayoola_Page_Editor/?" . $this->getIdColumn() . "=%KEY%'>Copy Page Contents</a>
-					</div>";
- */		require_once 'Ayoola/Page.php';
+		require_once 'Ayoola/Page.php';
 		$list->setRowOptions( 
 								array( 
-										'Edit' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="">Edit Page Layout</a>' ,
-										'Delete' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="">Delete Page</a>' ,
-										'Options' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="">Page Options</a>' ,
-										'Copy' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Copy/?origin=%KEY%\' );" title="">Copy Page</a>' ,
-										'Preview' => '<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '%KEY%\' );" title="">Preview Page</a>' ,
+										'<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="">Edit Page Layout</a>' ,
+										'<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="">Page Settings</a>' ,
+										'<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Copy/?origin=%KEY%\' );" title="">Copy to Another Page</a>' ,
+										'<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Creator/?url=%KEY%\' );" title="">Add page to site navigation</a>' ,
+										'<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '%KEY%\' );" title="">Preview</a>' ,
+										'<a href="javascript:;" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="">x</a>' ,
 									) 
 							);
 
 		$list->createList(  
 			array(
-			//	'url' => '<span>%FIELD%</span>', 
-			'url' => '<span style="font-size:smaller;"></span><span>%FIELD%</span> <a style="font-size:smaller;" target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '%FIELD%" >preview</a>', 
-//			'url' => '<span style="font-size:smaller;">' . Ayoola_Application::getUrlPrefix() . '</span><span>%FIELD%</span> <a style="font-size:smaller;" target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '%FIELD%" >preview</a>', 
-	//			'title' => '%FIELD%', 
-				'title' => '%FIELD% <a style="font-size:smaller;" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor/?' . $this->getIdColumn() . '=%KEY%"> update page info</a>', 
-		//		' ' => '<a rel="" href="javascript:;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" >Edit</a>', 
-		//		'   ' => '<a rel="" href="javascript:" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Copy/?origin=%KEY%\' );">Copy</a>', 
-		//		'  ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+			'url' => '<span style="font-size:smaller;"></span><span>%FIELD%</span>', 
+			array( 'field' => 'title', 'value' =>  '%FIELD% ', 'label' =>  '', 'filter' =>  'Ayoola_Filter_HtmlSpecialChars' ), 
 			)
 		);
 		return $list;
