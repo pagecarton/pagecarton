@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: search.php	Monday 12th of August 2019 12:24:24 AM	ayoola@ayoo.la $ 
+* @version $Id: search.php	Monday 12th of August 2019 12:29:17 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -97,13 +97,13 @@ $_5fcc604b55cca1d4c9405badf0bb4939 = null;
 							{
 								
 $_cf38cfcaaadf4c77fd272763a75d99f0 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<p><a href="{{{post_link}}}"><img alt="" src="{{{document_url_uri}}}?width=100&amp;height=100" style=" border-radius: 50%; float:right;"></a></p>
+  'codes' => '<p><a href="{{{post_link}}}"><img alt="" src="{{{document_url_uri}}}?width=100&amp;height=100" style=" border-radius: 50%; float:right;"></a></p>
 
 <h2><a href="{{{post_link}}}">{{{article_title}}}</a></h2>
 
 <p>{{{article_description}}}</p>
 
-<p>{{{post_type}}} | {{{category_text}}}</p>
+<i>{{{post_type}}}</i>
 
 <div style="clear:both;">&nbsp;</div>
 
@@ -135,7 +135,8 @@ $_cf38cfcaaadf4c77fd272763a75d99f0 = new Ayoola_Page_Editor_Text( array (
   'inverse_order[0]' => '1',
   'pagination' => '1',
   'no_of_post_to_show[0]' => '12',
-  'widget_name' => '{{{article_title}}} {{{article_description}}} {{{post_type}}} | {{{category_text}}} &nbsp; &nbsp;',
+  'widget_name' => '{{{article_title}}} {{{article_description}}} {{{post_type}}} &nbsp; &nbsp;',
+  'insert_id' => '1565569757-0-11',
 ) );
 
 							}
