@@ -133,21 +133,15 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = true;
 		
-		$option = new Ayoola_Page_PageLayout;
-		$option = $option->select( array( 'pagelayout_id', 'layout_name', 'layout_label' ) );
-	//	require_once 'Ayoola/Filter/SelectListArray.php';
-	//	$filter = new Ayoola_Filter_SelectListArray( 'layout_name', 'layout_name');
-	//	$option = $filter->filter( $option );
+		$table = new Ayoola_Page_PageLayout;
+        $table = $table::getInstance( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+        $option = $table->select( array( 'pagelayout_id', 'layout_name', 'layout_label' ) ); 
 		$class = null; 
-	//	var_export( $option );
-		array_unshift( $option, array( 'layout_name' => 'bootstrapbasic', 'layout_label' => 'PageCarton Default', ) );   
 		foreach( $option as $each )
 		{
 			$class = $each['layout_name'] === Ayoola_Page_Editor_Layout::getDefaultLayout() ? 'defaultnews' : 'normalnews';  
-		//	$layouts[$each['layout_name']] = '
-		//	<div class="' . $class . '" name="layout_screenshot" onClick="this.parentNode.parentNode.click(); ayoola.div.selectElement( { element: this, selectMultiple: false } ); " style="display:inline-block;text-align:center;padding:3em 2em 3em 2em; xwidth:100px; overflow:hidden;  background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=' . ( $each['layout_name'] ) . '\');  background-size: cover;  color: #fff !important; cursor:pointer; ">
-		//	' . $each['layout_label'] . '
-		//	</div>';
 			$layouts[$each['layout_name']] = '
 					<div style="cursor:pointer;" class="pc_inline_block ' . $class . '" name="layout_screenshot" onClick="this.parentNode.parentNode.click(); ayoola.div.selectElement( { element: this, selectMultiple: false } ); ">
 						<span style="font-size:20px;"><img height="100" alt="" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?url=/layout/' . $each['layout_name'] . '/screenshot.jpg&max_width=850&max_height=540;" ></span>
@@ -157,8 +151,8 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 				';
 //			$layouts[$each['layout_name']] = $each['layout_name'];
 		}
-		$fieldset->addElement( array( 'name' => 'default_layout', 'label' => 'Default Theme', 'title' => 'Select this', 'type' => 'Radio', 'style' => 'display:none;', 'value' => @$values['default_layout'] ), $layouts );
-		$fieldset->addRequirement( 'default_layout','InArray=>' . implode( ';;', array_keys( $layouts ) ) );
+		$fieldset->addElement( array( 'name' => 'default_layout', 'label' => 'Default Theme', 'title' => 'Select this', 'type' => 'Select', 'style' => 'xdisplay:none;', 'value' => @$values['default_layout'] ), $layouts );
+	//	$fieldset->addRequirement( 'default_layout','InArray=>' . implode( ';;', array_keys( $layouts ) ) );
 		
 		
 		
@@ -168,29 +162,13 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 		Application_Javascript::addFile( '/js/objects/mcColorPicker/mcColorPicker.js' );
 		Application_Style::addFile( '/js/objects/mcColorPicker/mcColorPicker.css' );
 		$fieldset->addElement( array( 'name' => 'background_color', 'label' => 'Background color', 'style' => 'max-width:300px;', 'placeholder' => '#FFBB33', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['background_color'] ) );
-	//	$fieldset->addElement( array( 'name' => 'background_image', 'label' => 'Background Image', 'placeholder' => 'e.g. http://domain.tld/path/to/file.jpg', 'type' => 'Hidden', 'value' => @$values['background_image'] ) );
-	//	$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'background_image' ) : 'background_image' );
-	//	var_export( $link );
-	//	$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html' ), array( 'html' => Ayoola_Doc_Upload_Link::viewInLine( array( 'image_preview' => ( @$values['background_image'] ? : $this->getGlobalValue( 'background_image' ) ), 'field_name' => $fieldName, 'field_name_value' => 'url', 'preview_text' => 'Background Image', 'call_to_action' => 'Change Background Image' ) ) ) ); 
- 		
-	//	$form->addFieldset( $fieldset );  
 		
-	//	if( $this->getGlobalValue( 'background_color' ) || $this->getGlobalValue( 'background_image' ) )
 		{
-		//	$fieldset = new Ayoola_Form_Element;
  			$fieldset->addElement( array( 'name' => 'font_color', 'label' => 'Color of Fonts', 'style' => 'max-width:300px;', 'placeholder' => '#FF0033', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['font_color'] ) ); 
-		//	$fieldset->addElement( array( 'name' => 'link_color', 'label' => 'Color of Links', 'placeholder' => '#FF00EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color'] ) ); 
-		//	$fieldset->addElement( array( 'name' => 'link_color_active', 'label' => 'Color of Links (Active)', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_active'] ) ); 
-		//	$fieldset->addElement( array( 'name' => 'link_color_hover', 'label' => 'Color of Links Text(Hover)', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_hover'] ) ); 
-		//	$fieldset->addElement( array( 'name' => 'link_color_hover_background', 'label' => 'Color of Links Background (Hover)', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_hover_background'] ) ); 
-		//	$fieldset->addElement( array( 'name' => 'link_color_visited', 'label' => 'Color of Visited Links', 'placeholder' => '#CC44EE', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['link_color_visited'] ) );
- 		//	$fieldset->addRequirement( 'font_color', array( 'NotEmpty' => null  ) );
 			$form->addFieldset( $fieldset );
 		}
 		 
 		$this->setForm( $form );
-		//		$form->addFieldset( $fieldset );
-	//	$this->setForm( $form );
     } 
 		
     /**
