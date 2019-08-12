@@ -232,14 +232,20 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 							$parameters = array( 
 												'markup_template' => $content, 
 												'markup_template_namespace' => 'x1234', 
+												'markup_template_mode' => __CLASS__, 
+												'no_init' => true, 
 												'parameter_suffix' => '[' . $counter . ']', 
 										//		'editable' => $each 
 												) 
 												+ $this->getParameter();  
 							self::unsetParametersThatMayBeDuplicated( $parameters );
-							$class = new $each( $parameters );
+                            $class = new $each( $parameters );
+                            $class->setParameter( $parameters );
+                            $class->init();
 							$content = $class->view();
-							$this->_markupTemplateObjects[] = $class;
+                        //    var_export( $each );
+                        //    var_export( $content );
+                            $this->_markupTemplateObjects[] = $class;
 						}
 					}
 				}
@@ -261,15 +267,19 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 					$partTemplateToUse = str_ireplace( $searchY, $replaceY, $partTemplate );
 					$parameters = array( 
 						'markup_template' => $partTemplateToUse, 
-						'markup_template_namespace' => 'x1234', 
+                        'markup_template_namespace' => 'x1234', 
+                        'markup_template_mode' => __CLASS__, 
+                        'no_init' => true, 
 						'parameter_suffix' => '[' . $counter . ']', 
 					//	'editable' => $each 
 						) 
 						+ $this->getParameter();  
 					
 					self::unsetParametersThatMayBeDuplicated( $parameters );
-					$class = new $each( $parameters );
-					$returnedContent = $class->view();
+                    $class = new $each( $parameters );
+                    $class->setParameter( $parameters );
+                    $class->init();
+                    $returnedContent = $class->view();
 					$this->_markupTemplateObjects[] = $class;
 					$returnedContent = str_ireplace( $searchY, $replaceY, $returnedContent );
 					

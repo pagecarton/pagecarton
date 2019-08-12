@@ -279,10 +279,15 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
         //     var_export(  $_GET['show_class_data'] === get_class( $this  ) );
         //     PageCarton_Widget::v( $_GET['show_class_data'] );
         //     PageCarton_Widget::v( get_class( $this  ) );
+        //     PageCarton_Widget::v( $this->getParameter() );
 
-        if (isset($_GET['show_class_data']) && ($_GET['show_class_data'] === get_class($this))) {
-            $records = $this->query('TABLE', 'FETCH');
-            //    var_export( $records );
+        if( 
+            ( isset( $_GET['show_class_data'] ) && ( $_GET['show_class_data'] === get_class( $this ) ) ) 
+            || $this->getParameter( 'markup_template_mode' ) 
+        ) 
+        {
+            $records = $this->query( 'TABLE', 'FETCH', null, null, array( 'limit' => $this->getParameter( 'limit' ) ? : 50 ) );
+             //   var_export( $records );
 
             if (!empty($_GET['pc_form_values']) && !empty($_GET['pc_form_labels'])) {
                 //    var_export( $_GET['pc_form_values'] );
@@ -294,9 +299,9 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             //    krsort( $records );
             $this->_objectTemplateValues = $this->_objectData = $records;
             //    var_export( $this->getParameter() );
-            $this->setViewContent($this->query('TABLE', 'VIEW', $fieldsKey, $where));
+            $this->setViewContent( $this->query( 'TABLE', 'VIEW', $fieldsKey ) );
         } 
-        elseif (isset($_SERVER['HTTP_AYOOLA_PLAY_CLASS']) && ($_SERVER['HTTP_AYOOLA_PLAY_CLASS'] === get_class($this))) 
+        elseif( isset( $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] ) && ( $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] === get_class( $this ) ) ) 
         {
             $output = 'View data on %s database table';
             $output = PageCarton_Widget::__( $output );

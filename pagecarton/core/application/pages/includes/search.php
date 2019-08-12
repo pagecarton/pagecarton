@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: search.php	Sunday 11th of August 2019 11:11:35 PM	ayoola@ayoo.la $ 
+* @version $Id: search.php	Monday 12th of August 2019 12:24:24 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -96,22 +96,21 @@ $_5fcc604b55cca1d4c9405badf0bb4939 = null;
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_7b6ed22e579155513255b47c8331923c = new Ayoola_Page_Editor_Text( array (
-  'codes' => '<a href="{{{post_link}}}"><img src="{{{document_url_uri}}}?width=100&height=100" style=" border-radius: 50%; float:right;" alt=""></a>
-<h3><a href="{{{post_link}}}">{{{article_title}}}</a></h3>
+$_cf38cfcaaadf4c77fd272763a75d99f0 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<p><a href="{{{post_link}}}"><img alt="" src="{{{document_url_uri}}}?width=100&amp;height=100" style=" border-radius: 50%; float:right;"></a></p>
+
+<h2><a href="{{{post_link}}}">{{{article_title}}}</a></h2>
+
 <p>{{{article_description}}}</p>
+
 <p>{{{post_type}}} | {{{category_text}}}</p>
 
-<div style="clear:both;"> </div>
+<div style="clear:both;">&nbsp;</div>
+
 <hr>
-<br>
+<p>&nbsp;</p>
 ',
-  'preserved_content' => '<h3><a href="http://{{{post_link}}}">[{{{post_type}}}] - {{{article_title}}}</a></h3>
-
-<div>&nbsp;</div>
-
-<p>{{{article_description}}}</p>
-',
+  'preserved_content' => '',
   'url_prefix' => '',
   'widget_options' => 
   array (
@@ -136,14 +135,49 @@ $_7b6ed22e579155513255b47c8331923c = new Ayoola_Page_Editor_Text( array (
   'inverse_order[0]' => '1',
   'pagination' => '1',
   'no_of_post_to_show[0]' => '12',
-  'widget_name' => '[{{{post_type}}}] - {{{article_title}}} &nbsp; {{{article_description}}}',
+  'widget_name' => '{{{article_title}}} {{{article_description}}} {{{post_type}}} | {{{category_text}}} &nbsp; &nbsp;',
 ) );
 
 							}
 							else
 							{
 								
-$_7b6ed22e579155513255b47c8331923c = null;
+$_cf38cfcaaadf4c77fd272763a75d99f0 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_b32defe207938e4e6b3ceb85189d7562 = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<h3>Recent Searches</h3>
+<ul class="pc_same_height_container">
+<!--{{{0}}}
+<li><a href="/search?q={{{query}}}">{{{query}}}</a></li>
+{{{0}}}-->
+</ul>	',
+  'preserved_content' => '			
+			<h3>Lorem Ipsum dolor</h3>
+			<p>Vivamus sit amet dolor sit amet nunc maximus finibus. Donec vel ornare leo, eget gravida orci. Etiam vitae rutrum nisi. Mauris auctor velit et ultricies mollis. Donec in mattis lectus. In hac habitasse platea dictumst. Sed ultricies magna ut ligula fringilla facilisis. Ut sodales erat ut libero rhoncus hendrerit. Vivamus nunc magna, finibus vel velit in, tempus venenatis dolor. Aenean a leo non tellus semper ultricies eget quis enim.</p>
+			',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'embed_widgets',
+  ),
+  'pagewidget_id' => '',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_SearchBox_Table',
+  ),
+  'widget_name' => 'Lorem Ipsum dolor Vivamus sit amet dolor sit amet nunc maximus finibus. Donec vel ornare leo eget gravida orci. Etiam vitae rutrum nisi. Mauris auctor velit et ultricies mollis. Donec in mattis lectus. In hac habitasse platea dictumst. Sed ultricies magna ut ligula fringilla facilisis. Ut sodales erat ut libero rhoncus hendrerit. Vivamus nunc magna finibus vel velit in tempus venenatis dolor. Aenean a leo non tellus semper ultricies eget quis enim.',
+) );
+
+							}
+							else
+							{
+								
+$_b32defe207938e4e6b3ceb85189d7562 = null;
 
 							}
 							
