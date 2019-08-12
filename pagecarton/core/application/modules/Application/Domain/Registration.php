@@ -176,8 +176,6 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 		if( $this->getGlobalValue( 'suggestions' ) || $this->getGlobalValue( 'unavailable' ) )
 		{ 
 			$suggestions = array_merge( $this->getGlobalValue( 'suggestions' ) ? : array(), $this->getGlobalValue( 'unavailable' ) ? : array() );
-		//		var_export( $this->getGlobalValue( 'unavailable' ) );
-		//		var_export( $suggestions );
 			$domainSettings = Application_Settings_Abstract::getSettings( 'Domains' ) ? : array();
 				
 			//	Filter the price to display unit in domain price
@@ -198,8 +196,6 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 			//	$price = $filter->filter( $price );
 			
 				$options = array();
-			//	$options = range( 1, 5 );
-			//	$options = array_combine( $options, $options );
 				foreach( range( 1, 5 ) as $value )
 				{
 				//	unset( $options[$key] );
@@ -211,16 +207,10 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 		//		$fieldset->addRequirement( 'no_of_yrs_for_' . $each, array( 'NotEmpty' => null ) );
 			
 				$selectOption = array( 'No', 'Yes' => 'Yes' );
-			//	var_export( $domainSettings['domain_registration_options'] );
-			//	var_export( $domainSettings );
 				$options = array();
-		//		if( array_key_exists( 'domain_registration_options', $domainSettings ) && in_array( 'domain_auto_renewal', $domainSettings['domain_registration_options'] ) )
 				{
 					$options += array( 'domain_auto_renewal' => 'Auto renew: Protect your domain from accidental expiration. (' . $filter->filter( 0 ) . '/yr)' );
-				//	$fieldset->addElement( array( 'name' => 'domain_auto_renew_for_' . $each, 'label' => 'Auto renew: Protect your domain from accidental expiration', 'type' => 'Select', 'value' => @$values['domain_auto_renew_for_' . $each] ), $selectOption );
-			//		$fieldset->addRequirement( 'domain_auto_renew_for_' . $each, array( 'NotEmpty' => null ) );
 				}
-		//		if( array_key_exists( 'domain_registration_options', $domainSettings ) && in_array( 'private_domain_registration', $domainSettings['domain_registration_options'] ) )
 				{
 					$options += array( 'private_domain_registration' => 'Private Registration: shield your personal information from the public while preserving your rights. (' . $filter->filter( @$domainSettings['private_domain_registration_price'] ) . '/yr)' );
 				}
@@ -246,9 +236,6 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 					$newOption[$eachSubscription['subscription_name']] = '<span title="' . $eachSubscription['subscription_description'] . '"><strong>' . $eachSubscription['subscription_label'] . '</strong>: ' . $eachSubscription['subscription_description'] . ' (From ' . $filter->filter( $eachSubscription['price'] ) . ' ' . $eachSubscription['cycle_name'] . ')</span>';
 					$priceList[$eachSubscription['subscription_name']] = $eachSubscription['price'];
 				}
-		//		require_once 'Ayoola/Filter/SelectListArray.php';
-		//		$filter = new Ayoola_Filter_SelectListArray( 'subscription_name', 'subscription_label'); 
-		//		$options1 = $filter->filter( $options );
 				if( $newOption )
 				{
 					$fieldset = new Ayoola_Form_Element;	
@@ -260,29 +247,37 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 			}
 			
 		}
-		//	Register how many yrs
-/*				$requirements = array( 
-										array( 'requirement' => 'address', 'requirement_legend' => 'Domain Contact', 'parameters' => array( 'location_prefix' => 'domain_contact' ), 'requirement_goodnews' => 'Provide information for the domain WHOIS contact information' ), 
-								//		array( 'requirement' => 'phone-number' ), 
-										array( 'requirement' => 'email-address' ), 
-									);
-*/	//	var_export( $requirements );
-	//	$form->setFormRequirements( $requirements );
-	$fieldset = new Ayoola_Form_Element;	
-	$fieldset->addElement( array( 'name' => 'firstname', 'label' => 'First Name', 'placeholder' => 'e.g. John', 'type' => 'InputText', 'value' => @$values['firstname'] ) );
-	$fieldset->addElement( array( 'name' => 'lastname', 'label' => 'Last Name', 'placeholder' => 'e.g. Smith', 'type' => 'InputText', 'value' => @$values['lastname'] ) );
-	$fieldset->addElement( array( 'name' => 'organization_name', 'label' => 'Organization Name', 'placeholder' => 'e.g. Sethlene Inc.', 'type' => 'InputText', 'value' => @$values['organization_name'] ) );
-	$fieldset->addElement( array( 'name' => 'email', 'label' => 'Contact Email Address', 'placeholder' => 'e.g. email@example.com', 'type' => 'InputText', 'value' => @$values['email'] ) );
-	$fieldset->addElement( array( 'name' => 'country_code', 'label' => 'Contact Phone Number', 'placeholder' => '234', 'style' => 'width:50px;', 'type' => 'InputText', 'value' => @$values['country_code'] ) );
-	$fieldset->addElement( array( 'name' => 'phone_number', 'label' => '', 'placeholder' => '8032100555', 'style' => 'width:150px;', 'type' => 'InputText', 'value' => @$values['phone_number'] ) );
-	$fieldset->addRequirement( 'firstname', array( 'NotEmpty' => null ) );
-	$fieldset->addRequirement( 'lastname', array( 'NotEmpty' => null ) );
 
-	$fieldset->addRequirement( 'email', array( 'EmailAddress' => null ) );
-	$fieldset->addRequirement( 'country_code', array( 'NotEmpty' => null, 'Digits' => null ) );
-	$fieldset->addRequirement( 'phone_number', array( 'NotEmpty' => null, 'Digits' => null ) );
-	$fieldset->addLegend( 'Domain Contact Information' );
-	$form->addFieldset( $fieldset );				
+        $fieldset = new Ayoola_Form_Element;	
+        $fieldset->addElement( array( 'name' => 'firstname', 'label' => 'First Name', 'placeholder' => 'e.g. John', 'type' => 'InputText', 'value' => @$values['firstname'] ) );
+        $fieldset->addElement( array( 'name' => 'lastname', 'label' => 'Last Name', 'placeholder' => 'e.g. Smith', 'type' => 'InputText', 'value' => @$values['lastname'] ) );
+        $fieldset->addElement( array( 'name' => 'organization_name', 'label' => 'Organization Name', 'placeholder' => 'e.g. Sethlene Inc.', 'type' => 'InputText', 'value' => @$values['organization_name'] ) );
+        $fieldset->addElement( array( 'name' => 'email', 'label' => 'Contact Email Address', 'placeholder' => 'e.g. email@example.com', 'type' => 'InputText', 'value' => @$values['email'] ) );        
+
+        $country = PageCarton_Country::getInstance()->select();  
+        $options = array();
+        foreach( $country as $each )
+        {
+            if( empty( $options[$each['dial_code']] ) )
+            {
+                $options[$each['dial_code']] = '+' . $each['dial_code'] . ' (' . $each['country_name'] . ')';
+            }
+            else
+            {
+                $options[$each['dial_code']] .= ' & ' . ' (' . $each['country_name'] . ')';
+            }
+        }
+        ksort( $options );
+        $fieldset->addElement( array( 'name' => 'country_code', 'label' => 'Contact Phone Number', 'placeholder' => '234', 'style' => 'width:50px;', 'type' => 'Select', 'value' => @$values['country_code'] ), $options );
+        $fieldset->addElement( array( 'name' => 'phone_number', 'label' => '', 'placeholder' => '8032100555', 'style' => 'width:150px;', 'type' => 'InputText', 'value' => @$values['phone_number'] ) );
+        $fieldset->addRequirement( 'firstname', array( 'NotEmpty' => null ) );
+        $fieldset->addRequirement( 'lastname', array( 'NotEmpty' => null ) );
+
+        $fieldset->addRequirement( 'email', array( 'EmailAddress' => null ) );
+        $fieldset->addRequirement( 'country_code', array( 'NotEmpty' => null, 'Digits' => null ) );
+        $fieldset->addRequirement( 'phone_number', array( 'NotEmpty' => null, 'Digits' => null ) );
+        $fieldset->addLegend( 'Domain Contact Information' );
+        $form->addFieldset( $fieldset );				
 
 
 		//	Domain Contact
