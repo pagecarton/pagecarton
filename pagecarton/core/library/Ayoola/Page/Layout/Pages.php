@@ -160,7 +160,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
             $list->setListOptions( 
                                     array( 
                                             '<a style="" title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/' . $this->_identifier['layout_name'] . '/template\' );" href="javascript:;">Main Theme Layout</a>',
-                                            '<a style="" title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/' . $this->_identifier['layout_name'] . '/template\' );" href="javascript:;">Main HTML Code</a>',
+                                            '<a style="" title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Editor/?layout_name=' . $this->_identifier['layout_name'] . '\' );" href="javascript:;">Main HTML Code</a>',
                                             'Images' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Images/?' . $this->getIdColumn() . '=' . $this->_identifier['layout_name'] . '\' );" title="Update theme pictures">Images</a>' ,
                                             '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_ReplaceText/?' . $this->getIdColumn() . '=' . $this->_identifier['layout_name'] . '\' );" title="">Static Texts</a>' ,
                                     ) 
@@ -179,7 +179,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 				array(
 					'title' => '%FIELD%',   
 					'url' => '%FIELD%',   
-					' ' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=%KEY%&pc_page_editor_layout_name=' . $data['layout_name'] . '\' );" style="">edit layout</a>',   
+					' ' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=%KEY%&pc_page_editor_layout_name=' . $data['layout_name'] . '\' );" style="">edit</a>',   
 			//		'' => '',   
 				)
 			);
