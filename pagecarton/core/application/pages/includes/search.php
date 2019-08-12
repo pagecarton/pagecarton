@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: search.php	Monday 12th of August 2019 12:29:17 AM	ayoola@ayoo.la $ 
+* @version $Id: search.php	Monday 12th of August 2019 12:35:30 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -136,7 +136,6 @@ $_cf38cfcaaadf4c77fd272763a75d99f0 = new Ayoola_Page_Editor_Text( array (
   'pagination' => '1',
   'no_of_post_to_show[0]' => '12',
   'widget_name' => '{{{article_title}}} {{{article_description}}} {{{post_type}}} &nbsp; &nbsp;',
-  'insert_id' => '1565569757-0-11',
 ) );
 
 							}
