@@ -455,17 +455,17 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$values['has_secondary_data'] = true;   
 			self::saveArticleSecondaryData( $secondaryValues );
         }
-        if( $data['download_url'][0] === '/' )
+        if( $values['download_url'][0] === '/' )
         {
-            $values['file_size'] = intval( filesize( Ayoola_Doc::getDocumentsDirectory() . @$data['download_url'] ) );
+            $values['file_size'] = intval( filesize( Ayoola_Doc::getDocumentsDirectory() . @$values['download_url'] ) );
         }
-        elseif( stripos( ':', $data['download_url'][0] ) !== false )
+        elseif( stripos( ':', $values['download_url'][0] ) !== false )
         {
-            $values['file_size'] = intval( filesize( $data['download_url'][0] ) );
+            $values['file_size'] = intval( filesize( $values['download_url'][0] ) );
         }
         elseif(  @$values['download_path'] )
         {
-            $values['file_size'] += intval( filesize( @$values['download_path'] ) );
+            $values['file_size'] = intval( filesize( @$values['download_path'] ) );
         }
 
  	//	unset( $_POST, $_REQUEST );

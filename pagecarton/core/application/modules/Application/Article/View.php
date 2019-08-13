@@ -541,26 +541,19 @@ class Application_Article_View extends Application_Article_Abstract
 				case 'download':
 				//	self::v( $data );
 					//	title
-					if( @$data['download_url'] )
-					{
-						if( $data['download_url'][0] === '/' )
-						{
-							//	this is still a local file we can load with Ayoola_Doc
-							$data['file_size'] =  filesize( Ayoola_Loader::checkFile(  'documents/' . $data['download_url'] ) );
-						}
-						else
-						{
-								#	we don't want to use get_headers again. Can make site slow
-						//	$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
-						//	$data['file_size'] = $head['content-length'];							
-						}
-					}
-					elseif( @$data['download_path'] )
-					{
-						$path = APPLICATION_DIR . $data['download_path'];
-						$data['file_size'] =  filesize( $path );
-					}
-					elseif( @$data['download_base64'] )
+                    if( $data['download_url'][0] === '/' )
+                    {
+                        $data['file_size'] = intval( filesize( Ayoola_Doc::getDocumentsDirectory() . @$data['download_url'] ) );
+                    }
+                    elseif( stripos( ':', $data['download_url'][0] ) !== false )
+                    {
+                        $data['file_size'] = intval( filesize( $data['download_url'][0] ) );
+                    }
+                    elseif(  @$data['download_path'] )
+                    {
+                        $data['file_size'] = intval( filesize( @$data['download_path'] ) );
+                    }
+                    if( @$data['download_base64'] )
 					{
 						$result = self::splitBase64Data( $data['download_base64'] );
 						$data['file_size'] =  strlen( $result['data'] );
