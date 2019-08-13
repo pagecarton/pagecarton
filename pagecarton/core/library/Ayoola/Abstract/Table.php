@@ -218,8 +218,30 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		{
 			return array();
 		}
-		$this->_identifierData = (array) $table->selectOne( null, $identifier );
-	//	var_export( $this->_identifierData );
+        $data = $table->selectOne( null, $identifier );
+        
+        //  lets authenticate data that has userinfo
+        if( ! is_a( $this, Application_Article_Abstract ) )
+        {
+            if( 
+                ! empty( $data['username'] ) 
+                && Ayoola_Application::getUserInfo( 'username' ) !== $data['username']
+                && self::hasPriviledge( 98 )
+                )
+            {
+                return false;
+            }
+            //  lets authenticate data that has userinfo
+            if( 
+                ! empty( $data['user_id'] ) 
+                && Ayoola_Application::getUserInfo( 'user_id' ) !== $data['user_id']
+                && self::hasPriviledge( 98 )
+                )
+            {
+                return false;
+            }
+        }
+        $this->_identifierData = $data;
 		
 		//	this is needed in Ayoola_Abstract_Viewable::view();
 		$this->_objectTemplateValues = $this->_identifierData;

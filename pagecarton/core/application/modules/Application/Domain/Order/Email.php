@@ -87,6 +87,7 @@ class Application_Domain_Order_Email extends Application_Domain_Order_Abstract
                     }  
         
                     $emailInfo = array(
+                        
                                         'subject' => '' . self::__( 'Domain email settings updated' ) . '',
                                         'body' => '' . self::__( 'Domain email settings updated successfully for your domain name. Here is the full information on the domain:' ) . '',
                     
