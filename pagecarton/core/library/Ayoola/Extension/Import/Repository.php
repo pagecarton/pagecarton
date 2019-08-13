@@ -83,16 +83,24 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             
             
             $existingPluginSettings = array();
-
+            $fileFilter = new Ayoola_Filter_FileSize();
+            $content = Ayoola_Object_Wrapper_Abstract::wrapContent( '
+            <div class="xpc_same_height_container">
+                <p>' . strip_tags( $allFeed['article_content'] ) . '</p>
+                <br>
+                <p>Size: ' . $fileFilter->filter( $allFeed['file_size'] ) . ' | view on: <a target="_blank" href="https://' . static::$_site . '' . $allFeed['article_url'] . '">' . static::$_site . '</a></p>
+            </div>', 'white-background' );
             if( $pluginInfo['article_url'] === @$_GET['install'] && empty( $_GET['update'] ) )
             {
-                $this->setViewContent( self::__( '<h1 class="pc-heading">' . @$_GET['title'] . ' Installed</h1>' ) );
+                $this->setViewContent( self::__( '<h1 class="pc-heading">' . @$allFeed['article_title'] . ' Installed</h1>' ) );
+                $this->setViewContent( self::__( $content ) );
                 $this->setViewContent( self::__( '<a class="pc-btn" href="#" onclick="location.search+=\'&update=' . $_GET['install'] . '\'">Update</a></p>' ) );
             }
             else
             {
-                $this->createConfirmationForm( $install . ' ' . static::$_pluginType . '', 'Download and install latest ' . static::$_pluginType . ' files and its components' );
-                $this->setViewContent( self::__( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' ) );
+                $this->createConfirmationForm( $install . ' ' . static::$_pluginType . '', '' );
+                $this->setViewContent( self::__( '<h1 class="pc-heading">' . @$allFeed['article_title'] . '</h1>' ) );
+                $this->setViewContent( self::__( $content ) );
                 $this->setViewContent( $this->getForm()->view() );
             }
             $photoUrl = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . $_GET['install'] . '';
