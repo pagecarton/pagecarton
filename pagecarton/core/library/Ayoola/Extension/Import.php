@@ -47,9 +47,13 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 			$this->createForm( 'Continue', 'Import new plugin' );
 		//	$this->setViewContent( $this->getForm()->view(), true );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( ! $values = $this->getForm()->getValues() ){ return false; } 
+            if( ! $values = $this->getForm()->getValues() ){ return false; } 
+            $values += $this->getParameter( 'fake_values' ) ? : array();
+			unset( $values['extension_id'] );
 		//	var_export( $values );
-			//	Import mode
+		//	var_export( $this->getParameter() );
+            //	Import mode
+            
 			if( @$values['upload'] )
 			{ 
 				$result = self::splitBase64Data( $values['upload'] );
@@ -73,15 +77,21 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 			{ 
 				$filename = $this->getParameter( 'path' );
 			}
-		//	var_export( $values );
-		//	var_export( $filename );
+            //	var_export( $values );
+            //	var_export( $filename );
+            //    var_export( file_exists( $filename ) );
+
+            //  switching status clears the cache where plugin is sometimes saved
+            $tempFile = Ayoola_Doc_Browser::getDocumentsDirectory() . DS . 'plugin-temp.tar.gz';
+            Ayoola_Doc::createDirectory( dirname( $tempFile ) );
+            copy( $filename, $tempFile );
+            $filename = $tempFile;
 
 			if( file_exists( $filename ) )
 			{ 
 				$export = new Ayoola_Phar_Data( $filename );
-				
 				$extensionInfo = json_decode( file_get_contents( $export['extension_information'] ), true );
-		//	var_export( $extensionInfo );
+            //    var_export( file_exists( $filename ) );
 				if( empty( $extensionInfo['extension_name'] ) )
 				{
 					return false;
@@ -89,6 +99,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				$result = $this->insertDb( $extensionInfo );
 				$dir = @constant( 'EXTENSIONS_PATH' ) ? Ayoola_Application::getDomainSettings( EXTENSIONS_PATH ) : ( APPLICATION_DIR . DS . 'extensions' );
 				$dir = $dir . DS . $extensionInfo['extension_name'];
+            //    var_export( file_exists( $filename ) );
 				if( $values['extension_name'] )
 				{
 					if( ! is_dir( $dir ) )
@@ -97,8 +108,10 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 						return false;
 					}
 					//	Disable extension
+                //    var_export( file_exists( $filename ) );
 					$class = new Ayoola_Extension_Import_Status( array( 'switch' => 'off', 'extension_name' => $extensionInfo['extension_name'] ) );
 					$class->init();
+                //    var_export( file_exists( $filename ) );
 					
 					//	remove files
 			//		Ayoola_Doc::removeDirectory( $dir, true );
@@ -128,7 +141,9 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				if( ! is_dir( $dir ) )
 				{
 					Ayoola_Doc::createDirectory( $dir );
-				}
+                }
+            //    var_export( file_exists( $filename ) );
+
 				$export->extractTo( $dir, null, true );
 				unset( $export );
 				unlink( $filename );

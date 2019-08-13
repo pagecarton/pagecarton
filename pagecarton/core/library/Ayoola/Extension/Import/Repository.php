@@ -67,8 +67,9 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 		{
        //     var_export( array( 'article_url' =>  @$_GET['install'] ) );
          //   var_export( Ayoola_Page_PageLayout::getInstance()->select( null, array( 'article_url' =>  @$_GET['install'] ) ) );
+            $class = new static::$_pluginClass( array( 'no_init' => true ) ); 
 
-            $layout = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'article_url' =>  @$_GET['install'] ) );
+            $pluginInfo = $class->getDbTable()->selectOne( null, array( 'article_url' =>  @$_GET['install'] ) );
             $url = 'https://' . static::$_site . '/tools/classplayer/get/name/Application_Article_View?article_url=' . $_GET['install'] . '&pc_widget_output_method=JSON';
             $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
             $allFeed = json_decode( $feed, true );
@@ -81,8 +82,9 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             }
             
             
+            $existingPluginSettings = array();
 
-            if( $layout['article_url'] === @$_GET['install'] && empty( $_GET['update'] ) )
+            if( $pluginInfo['article_url'] === @$_GET['install'] && empty( $_GET['update'] ) )
             {
                 $this->setViewContent( self::__( '<h1 class="pc-heading">' . @$_GET['title'] . ' Installed</h1>' ) );
                 $this->setViewContent( self::__( '<a class="pc-btn" href="#" onclick="location.search+=\'&update=' . $_GET['install'] . '\'">Update</a></p>' ) );
@@ -102,12 +104,21 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             //   delete first if this is upgrade
        //     var_export( $layout['article_url'] );
         //    var_export( @$_GET['update'] );
+        //    var_export( $pluginInfo );
         
-            if( $layout['article_url'] === @$_GET['update'] )
+            if( $pluginInfo['article_url'] === @$_GET['update'] )
             {
-                $layout = Ayoola_Page_PageLayout::getInstance()->delete( array( 'article_url' =>  @$_GET['update'] ) );
-          //      var_export( $layout['article_url'] );
-           //     var_export( @$_GET['update'] );
+                //  dont delete for extensions
+                //  extensions hav their own way of update
+                if( empty( $pluginInfo['extension_name'] ) )
+                {
+                    $deleted = $class->getDbTable()->delete( array( 'article_url' => @$_GET['update'] ) );
+                }
+                else
+                {
+                    $existingPluginSettings = $pluginInfo ? : $existingPluginSettings;
+                }
+
             }
 
             $link = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $_GET['install'] . '&auto_download=1';
@@ -135,7 +146,8 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
          //   file_put_contents( $filename, fopen( $link, 'r' ) );
             file_put_contents( $filename, $content['response'] );
             $values = static::getOtherInstallOptions( $filename );
-
+            $values += $existingPluginSettings;
+        //    var_export( $values );
         //    copy( $filename, $filename . '.copy.tar.gz' );
 
             // add screenshot
@@ -148,6 +160,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
          //   var_export( $repository['layout_information'] );nul
             try
             {
+                
                 file_get_contents( $repository['layout_information'] );
                 if( $previousData = json_decode( file_get_contents( $repository['layout_information'] ), true ) OR $previousData = unserialize( file_get_contents( $repository['layout_information'] ) ) ) 
                 {
@@ -167,6 +180,31 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             catch( Exception $e )
             {
                 //  Skip this stage if it is not theme
+                null;
+            }
+            try
+            {
+                
+                file_get_contents( $repository['extension_information'] );
+                if( $previousData = json_decode( file_get_contents( $repository['extension_information'] ), true ) OR $previousData = unserialize( file_get_contents( $repository['extension_information'] ) ) ) 
+                {
+
+                }
+            //    var_export( $previousData );
+
+                //  set current time to be able to calculate updates
+                $previousData['modified_time'] = time();
+                $previousData['creation_time'] = time();
+                $previousData['article_url'] = $_GET['install'];
+                //    var_export( $previousData );
+
+                $repository['extension_information'] = json_encode( $previousData );
+
+                $repository->stopBuffering();
+            }
+            catch( Exception $e )
+            {
+                //  Skip this stage if it is not plugin
                 null;
             }
 
@@ -194,11 +232,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             {
             	$this->setViewContent(  '' . self::__( '<p class="badnews">' . array_pop( $class->getForm()->getBadnews() ) . '</p>' ) . '', true  );
             }
- //           unlink( $filename );
-	//		if( $this->deleteDb( false ) )
-			{ 
 
-            }
         }
         else
         {

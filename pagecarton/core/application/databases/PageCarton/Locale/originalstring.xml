@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="originalstring" creation_time="1564485956" modified_time="1564485956" table_version="0.1" module_version="1.00" table_class="PageCarton_Locale_OriginalString" creation_ip="0">
-  <RECORDS autoId="404">
+  <RECORDS autoId="408">
     <TABLE_ROW ROW_ID="33">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[[Custom Locale Code]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[[Custom Locale Code]]]></TABLE_FIELD>
@@ -2928,6 +2928,38 @@
       <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_Template_Creator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565607067-0-403]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565607067]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="404">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Country Name]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Country Name]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Country_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565693442-0-404]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565693442]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="405">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Country Code]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Country Code]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Country_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565693442-0-405]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565693442]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="406">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Dial Code]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Dial Code]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Country_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565693442-0-406]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565693442]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="407">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Search List...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Search List...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Country_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565693451-0-407]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565693451]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
