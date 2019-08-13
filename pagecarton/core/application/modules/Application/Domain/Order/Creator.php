@@ -34,7 +34,11 @@ class Application_Domain_Order_Creator extends Application_Domain_Order_Abstract
     {    
 		try
 		{ 
-            //  Code that runs the widget goes here...
+            if( ! self::hasPriviledge() )
+            {
+                return false;
+            }
+                //  Code that runs the widget goes here...
 			$this->createForm( 'Submit...', 'Add new' );
 			$this->setViewContent( $this->getForm()->view() );
 

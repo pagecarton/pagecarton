@@ -51,7 +51,7 @@ class Application_Domain_UserDomain_Creator extends Application_Domain_UserDomai
 				return false;
 			}
             //  Code that runs the widget goes here...
-			$this->createForm( 'Submit...', 'Link a domain name to your account' );
+			$this->createForm( 'Submit...', 'Link a domain name to your site' );
 			$this->setViewContent( $this->getForm()->view() );
 
 		//	self::v( $_POST );

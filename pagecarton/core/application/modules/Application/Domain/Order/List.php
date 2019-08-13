@@ -24,7 +24,7 @@ class Application_Domain_Order_List extends Application_Domain_Order_Abstract
      * 
      * @var string 
      */
-	  protected static $_objectTitle = 'List';   
+	  protected static $_objectTitle = 'Domain Orders';   
 
     /**
      * Performs the creation process
@@ -47,32 +47,28 @@ class Application_Domain_Order_List extends Application_Domain_Order_Abstract
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = self::getObjectTitle();
-		$list->setData( $this->getDbData() );
-		$list->setListOptions( 
-								array( 
-							//			'Sub Domains' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_SubDomainList/\' );" title="">Sub Domains</a>',    
-									) 
-							);
+        $list->setData( $this->getDbData() );
+        $listOptions = 	array( 
+                                'Creator' => self::hasPriviledge() ? 
+                                ( '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Order_List/\' );" title="">Add domain to list</a>' ) :  
+                                ( '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Registration/\', \'' . $this->getObjectName() . '\' );" title="">Register new Domain Name</a>' ),    
+        );
+
+		$list->setListOptions( $listOptions );
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No data added to this table yet.' );
 		
 		$list->createList
 		(
 			array(
-                    'domain_name' => array( 'field' => 'domain_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-           //         'username' => array( 'field' => 'username', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-           //         'user_id' => array( 'field' => 'user_id', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-            //        'email' => array( 'field' => 'email', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-           //         'street_address' => array( 'field' => 'street_address', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-            //        'street_address2' => array( 'field' => 'street_address2', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-          //          'city' => array( 'field' => 'city', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-         //           'province' => array( 'field' => 'province', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-          //          'country' => array( 'field' => 'country', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-          //          'zip' => array( 'field' => 'zip', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-                    'active' => array( 'field' => 'active', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-                    'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
-                    '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Order_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
-                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Order_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+                    'domain_name' => array( 'field' => 'domain_name', 'value' =>  '%FIELD%' ), 
+                    'active' => array( 'field' => 'active', 'header' => 'Status', 'value' =>  '%FIELD%', 'value_representation' =>  array( '0' => '<i class="fa fa-close"></i>', '1' => '<i class="fa fa-check"></i>' ), 'filter' =>  '' ), 
+                    array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ),
+                    '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Order_DNS/?' . $this->getIdColumn() . '=%KEY%">DNS</a>', 
+                    '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Order_Email/?' . $this->getIdColumn() . '=%KEY%">Emails</a>', 
+                    '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Order_Editor/?' . $this->getIdColumn() . '=%KEY%">contact</a>', 
+                    '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Creator/?' . $this->getIdColumn() . '=%KEY%">site</a>', 
+                    '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Order_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
 				)
 		);
 		return $list;
