@@ -257,8 +257,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			|| Ayoola_Application::getUserInfo( 'username' ) === $data['username']   
 		)
 		{ 
-		//	var_export( Ayoola_Application::getUserInfo( 'username' ) );
-	//		var_export( Ayoola_Application::$GLOBAL['username'] );
 			return true; 
 		}
 		return false;

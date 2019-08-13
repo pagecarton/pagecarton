@@ -58,7 +58,7 @@ class Application_Domain_UserSiteManager extends PageCarton_Widget
             //  Code that runs the widget goes here...
             if( ! self::hasPriviledge() )
             {
-                $this->_dbWhereClause['username'] = Ayoola_Application::getUserInfo( 'username' );
+                $this->_dbWhereClause['username'] = strtolower( Ayoola_Application::getUserInfo( 'username' ) );
                 $this->_dbWhereClause['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
             }
             $this->setViewContent( $this->getList() );		

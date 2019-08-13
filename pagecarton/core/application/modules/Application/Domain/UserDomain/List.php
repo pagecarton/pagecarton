@@ -37,7 +37,7 @@ class Application_Domain_UserDomain_List extends Application_Domain_UserDomain_A
     {
       if( ! self::hasPriviledge() )
       {
-        $this->_dbWhereClause['username'] = Ayoola_Application::getUserInfo( 'username' );
+        $this->_dbWhereClause['username'] = strtolower( Ayoola_Application::getUserInfo( 'username' ) );
         $this->_dbWhereClause['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
       }
       $this->setViewContent( $this->getList() );		
