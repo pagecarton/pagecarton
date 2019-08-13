@@ -67,6 +67,9 @@ class Application_Domain_Order_List extends Application_Domain_Order_Abstract
 		(
 			array(
                     'domain_name' => array( 'field' => 'domain_name', 'value' =>  '%FIELD%' ), 
+                    'domain_name' => array( 'field' => 'domain_name', 'value' =>  '%FIELD%' ), 
+                    'order_date' => array( 'field' => 'order_date', 'value' =>  '%FIELD%' ), 
+                    'expiry_date' => array( 'field' => 'expiry_date', 'value' =>  '%FIELD%' ), 
                     'active' => array( 'field' => 'active', 'header' => 'Status', 'value' =>  '%FIELD%', 'value_representation' =>  array( '0' => '<i class="fa fa-close"></i>', '1' => '<i class="fa fa-check"></i>' ), 'filter' =>  '' ), 
                     array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ),
                     '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Order_DNS/?' . $this->getIdColumn() . '=%KEY%">DNS</a>', 

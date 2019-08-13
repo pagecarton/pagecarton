@@ -221,7 +221,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
         $data = $table->selectOne( null, $identifier );
     //    var_export( $data );
         //  lets authenticate data that has userinfo
-        if( ! is_a( $this, Application_Article_Abstract ) )
+        if( ! is_a( $this, 'Application_Article_Abstract' ) )
         {
             if( 
                 ! empty( $data['username'] ) 

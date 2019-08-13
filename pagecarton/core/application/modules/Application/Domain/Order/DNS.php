@@ -34,7 +34,8 @@ class Application_Domain_Order_DNS extends Application_Domain_Order_Abstract
     {    
 		try
 		{ 
-			if( ! $data = $this->getIdentifierData() ){ return false; }
+            if( ! $data = $this->getIdentifierData() ){ return false; }
+    
 			if( empty( $data['active'] ) )
 			{ 
                 if( Ayoola_Loader::loadClass( $data['api'] ) && method_exists( $data['api'], 'getInfo' ) )
