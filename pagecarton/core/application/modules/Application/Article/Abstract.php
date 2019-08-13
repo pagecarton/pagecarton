@@ -454,9 +454,20 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			unset( $values['document_url_base64'], $values['download_base64'] );
 			$values['has_secondary_data'] = true;   
 			self::saveArticleSecondaryData( $secondaryValues );
-		}
-		$values['file_size'] += intval( filesize( Ayoola_Doc::uriToDedicatedUrl( @$data['download_url'] ) ) );
-		$values['file_size'] += intval( filesize( @$values['download_path'] ) );
+        }
+        if( $data['download_url'][0] === '/' )
+        {
+            $values['file_size'] = intval( filesize( Ayoola_Doc::getDocumentsDirectory() . @$data['download_url'] ) );
+        }
+        elseif( stripos( ':', $data['download_url'][0] ) !== false )
+        {
+            $values['file_size'] = intval( filesize( $data['download_url'][0] ) );
+        }
+        elseif(  @$values['download_path'] )
+        {
+            $values['file_size'] += intval( filesize( @$values['download_path'] ) );
+        }
+
  	//	unset( $_POST, $_REQUEST );
 
 	 	//	we now using json
