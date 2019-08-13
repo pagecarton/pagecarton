@@ -73,7 +73,7 @@ class Application_Domain_UserDomain_Abstract extends PageCarton_Widget
         {
             $table = "Application_Domain_Order";
             $table = $table::getInstance();
-            $domains = $table->select( null, array( 'username' => Ayoola_Application::getUserInfo( 'username' ) ) );
+            $domains = $table->select( null, array( 'username' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ) ) );
 			$filter = new Ayoola_Filter_SelectListArray( 'domain_name', 'domain_name' );
             $domains = $filter->filter( $domains );
             
