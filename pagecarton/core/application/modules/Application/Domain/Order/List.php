@@ -61,7 +61,7 @@ class Application_Domain_Order_List extends Application_Domain_Order_Abstract
 
 		$list->setListOptions( $listOptions );
 		$list->setKey( $this->getIdColumn() );
-		$list->setNoRecordMessage( 'No data added to this table yet.' );
+		$list->setNoRecordMessage( 'You have not registered any domain yet.' );
 		
 		$list->createList
 		(
