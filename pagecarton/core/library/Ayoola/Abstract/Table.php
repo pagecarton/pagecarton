@@ -231,6 +231,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
             {
                 return false;
             }
+            
             //  lets authenticate data that has userinfo
             if( 
                 ! empty( $data['user_id'] ) 
