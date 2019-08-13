@@ -219,24 +219,24 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			return array();
 		}
         $data = $table->selectOne( null, $identifier );
-        
+    //    var_export( $data );
         //  lets authenticate data that has userinfo
         if( ! is_a( $this, Application_Article_Abstract ) )
         {
             if( 
                 ! empty( $data['username'] ) 
                 && Ayoola_Application::getUserInfo( 'username' ) !== $data['username']
-                && self::hasPriviledge( 98 )
+                && ! self::hasPriviledge( 98 )
                 )
             {
                 return false;
             }
-            
+
             //  lets authenticate data that has userinfo
             if( 
                 ! empty( $data['user_id'] ) 
                 && Ayoola_Application::getUserInfo( 'user_id' ) !== $data['user_id']
-                && self::hasPriviledge( 98 )
+                && ! self::hasPriviledge( 98 )
                 )
             {
                 return false;
