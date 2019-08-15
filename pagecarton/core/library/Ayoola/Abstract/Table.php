@@ -307,7 +307,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		//	power our search box
 		$this->prepareDbWhereClauseForSearch();
 		
-		$this->_dbData = (array) $table->select( null, $this->_dbWhereClause );
+		$this->_dbData = (array) $table->select( null, $this->_dbWhereClause, array( 'case_insensitive' => true ) );
 		$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
 	//	@$this->_sortColumn = ( $_REQUEST['pc_sort_column'] && $_REQUEST['pc_sort_column_table'] == get_class( $table ) ) ? $_REQUEST['pc_sort_column'] : $this->_sortColumn;
 //		var_Export( $this->_sortColumn );
