@@ -292,6 +292,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                             //    var_export( $fields[$key] );
                             //    var_export( $where[$key] );
                             }
+                            if( ! empty( $options['case_insensitive'] ) && is_string( $fields[$key] ) && is_string( $fields[$key] ) )
+                            {
+                                $fields[$key] = strtolower( $fields[$key] );
+                                $where[$key] = strtolower( $where[$key] );
+                            }
 							if( ! is_array( $fields[$key] ) )
 							{
                                 switch (@$options[$key . '_operator']) 
