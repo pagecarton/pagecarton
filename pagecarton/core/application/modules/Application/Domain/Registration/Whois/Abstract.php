@@ -88,7 +88,8 @@ abstract class Application_Domain_Registration_Whois_Abstract extends Ayoola_Abs
 		$fieldset->addElement( array( 'name' => 'server', 'label' => 'Server for Whois', 'style' => 'display:block;margin-left:0;', 'placeholder' => 'server.net', 'type' => 'InputText', 'value' => @$values['server'] ) );	
 
 		//	server
-		$fieldset->addElement( array( 'name' => 'badnews_length', 'label' => 'Length of error message. Used in detecting validation of domain names', 'style' => 'display:block;margin-left:0;', 'placeholder' => 'e.g. 20', 'type' => 'InputText', 'value' => @$values['badnews_length'] ) );	
+		$fieldset->addElement( array( 'name' => 'badnews_length', 'label' => 'Expected length of error message', 'style' => 'display:block;margin-left:0;', 'placeholder' => 'e.g. 20', 'type' => 'InputText', 'value' => @$values['badnews_length'] ) );	
+		$fieldset->addElement( array( 'name' => 'badnews_content', 'label' => 'Error words too look out for', 'style' => 'display:block;margin-left:0;', 'placeholder' => 'e.g. No match for', 'type' => 'InputText', 'value' => @$values['badnews_content'] ) );	
 	//	$fieldset->addRequirement( 'whois', array( 'WordCount' => array( 1, 10 )  ) );
 	//	$fieldset->addFilter( 'whois', array( 'float' => null ) );
 		$fieldset->addLegend( $legend );

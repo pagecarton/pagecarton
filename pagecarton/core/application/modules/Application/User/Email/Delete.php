@@ -38,7 +38,7 @@ class Application_User_Email_Delete extends Application_User_Email_Abstract
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
 		//	var_export( $data );
-			$this->createConfirmationForm( 'Delete ' . $data['email'],  'Delete notification message' );
+			$this->createConfirmationForm( 'Delete ' . $data['email'],  'Delete email account' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( ! $provider = Application_Settings_Abstract::getSettings( 'E-mail', 'provider' ) )

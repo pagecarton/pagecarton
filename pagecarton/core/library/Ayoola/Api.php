@@ -80,7 +80,6 @@ class Ayoola_Api extends Ayoola_Abstract_Table
 		'https://accounty.comeriver.com/tools/classplayer/get/object_name/Ayoola_Api/',
 		'https://account.comeriver.com/tools/classplayer/get/object_name/Ayoola_Api/',
 	);
-//	protected static $_url = 'http://account.ayoo.la/tools/classplayer/get/object_name/Ayoola_Api/';
 	protected static $_url = 'https://accounty.comeriver.com/tools/classplayer/get/object_name/Ayoola_Api/';
 	
     /**
@@ -100,11 +99,7 @@ class Ayoola_Api extends Ayoola_Abstract_Table
 		}
 		else
 		{
-			//	Debug
-/* 			$data['data'] = array ( 'x' => '', 'country_id' => '1770', 'dial_code' => '234 (NIGERIA)', 'phonenumber' => '8054449535', 'phonenumber_id' => '20', '' => '', 'method' => 'insert', 'table' => 'Application_User_UserPhoneNumber', );
-			echo self::check( $data );
-			echo self::call( $data );
- */			$this->setViewContent( self::__( 'The API connection on this application is powered by Ayoola Content Management Framework (Ayoola CMF). To learn about how to connect securely to this application, visit <a href="http://ayoo.la/cmf/">Ayoola CMF website.</a>' ) );
+			$this->setViewContent( self::__( 'The API connection on this application is powered by Ayoola Content Management Framework (Ayoola CMF). To learn about how to connect securely to this application, visit <a href="http://ayoo.la/cmf/">Ayoola CMF website.</a>' ) );
 		}
 		
     } 
@@ -203,7 +198,7 @@ class Ayoola_Api extends Ayoola_Abstract_Table
 		{
 			$table = new Ayoola_Api_Api();
 			$urlInfo = $table->selectOne( null, array( 'api_url' => $url ) );
-			self::$_url = $urlInfo['api_url'];
+		//	self::$_url = $urlInfo['api_url'];
 
 			self::$_settings[self::$_url] = $urlInfo;
 		//	var_export( $urlInfo );
@@ -253,7 +248,6 @@ class Ayoola_Api extends Ayoola_Abstract_Table
 		//	var_export( get_class( $class ) );
 	//		return $info;
 		}
-	//	var_export( $info );
  	
 		//	var_export( $data );
 		if( ! isset( $data['data'] ) )
@@ -261,25 +255,12 @@ class Ayoola_Api extends Ayoola_Abstract_Table
 			$data = array( 'data' => $data );
 		}
 		
-/* 		//	Debug in localhost
-		if( ! strpos( $_SERVER['HTTP_HOST'], '.' ) ) 
-		{
-			static::$_url = 'http://account/tools/classplayer/get/object_name/Ayoola_Api/';
-	//		break; 
-		}
- */		//	Debug in localhost
-		if( $_SERVER['HTTP_HOST'] === 'localhost' ) 
-		{
-			static::$_url = 'http://account/tools/classplayer/get/object_name/Ayoola_Api/';
-	//		break; 
-		}
 		
 		@$data['options'] = $data['options'] ? : array(); 
 		@$data['options']['url'] = $data['options']['url'] ? : static::$_url;
 		
 		//	pass inn the public and private keys
 		$keys = self::getSettings( $data['options']['url'] );
-	//		var_export( $keys );
 		@$data['options']['authentication_info']['application_id'] = $keys['application_id'];
 		$keys = self::getKeyArray( $keys );
 		$data['options']['authentication_info']['public_key'] = $keys['public_key'];
@@ -287,48 +268,33 @@ class Ayoola_Api extends Ayoola_Abstract_Table
 		$data['options']['authentication_info']['server_ip'] = $_SERVER['REMOTE_ADDR'];
 		$data['options']['authentication_info']['domain_name'] = Ayoola_Page::getDefaultDomain();
 		static::check( $data );
-	//	var_export( $data );
 		$settings = array();
-	//	var_export( $settings['post_fields'] );
 		$settings['post_fields'] = serialize( $data );
 		$settings['time_out'] = 50; 
 		$settings['connect_time_out'] = 50;
 		$headers = array();
 		$headers[] = "Content-Type: application/json; charset=UTF-8";
 		$headers[] = "Accept: application/json; charset=UTF-8";
-		$settings['http_header'] = $headers;
-	//	var_export( file_get_contents( $data['options']['url'] ) );
+        $settings['http_header'] = $headers;
+        
+		$settings['workaround_disable_cache'] = time();
 
 		$response = Ayoola_Abstract_Viewable::fetchLink( $data['options']['url'], $settings );
-//		var_export( $settings );
-	//	var_export( $data );
-//		var_export( $data['options']['url'] );
-	//	var_export( $response );
-	//	echo $response;
-	//	exit( var_export( $settings ) );
 		$response = explode( sha1( '0' ), $response );
 		@$response = $response[1];
-	//	return $response;
-	//	var_export( $response );
-				//	var_export( $data['options']['callbacks'] );
 		if( $data = @unserialize( trim( $response ) ) )
 		{
 			if( ! empty( $data['options']['callbacks'] ) )
 			{
 				foreach( $data['options']['callbacks'] as $callback => $argument )
 				{
-				//	var_export( $callback );
 					call_user_func( $callback, $argument );
 				}
 			}
 			$storage->store( $data );
-		//	var_export( $response );
 			return $data;
 		}
-	//	echo $response;
-	//	var_export( $response );
 		return $response;
-	//	return static::recieve( $data );
     } 
 	
     /**

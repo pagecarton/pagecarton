@@ -82,25 +82,43 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 	public static function check( $domain )
     {
 		//	var_export( $domain );
-	//	return false;
+    //	return false;
+        $storage = self::getObjectStorage( $domain );
+        if( $data = $storage->retrieve() )
+        { 
+            return $data['result'];
+        }	
 		$pieces = explode( ".", $domain );
 		$extension = (count($pieces) == 2) ? $pieces[1] : $pieces[1] . "." . $pieces[2];
 
 		$server = $extension . ".whois-servers.net";
 		if( @$response = self::getResponse( $server, $domain ) )
 		{
-			if( stripos( $response, 'no match for' ) !== FALSE ){ return false; }
-			if( stripos( $response, 'NOT FOUND' ) === 0 ){ return false; }
+            if( stripos( $response, 'no match for' ) !== FALSE )
+            { 
+                $storage->store( array( 'result' => false ) );
+                return false; 
+            }
+            if( stripos( $response, 'NOT FOUND' ) === 0 )
+            { 
+                $storage->store( array( 'result' => false ) );
+                return false; 
+            }
+
 			
 			switch( trim( strtolower( $response ) ) )
 			{
 				case 'notfound':
 				case 'not found':
-				return false;
-				break;
+                { 
+                    $storage->store( array( 'result' => false ) );
+                    return false; 
+                }
+                break;
 			}
 		//	var_export( $domain . '<br>' );
 		//	var_export( $response . '<br>' );
+            $storage->store( array( 'result' => true ) );
 			return true;
 		}
 		else
@@ -111,22 +129,37 @@ class Application_Domain_Registration_CheckAvailability extends Application_Doma
 			$extension = array_pop( $extension );
 			if( ! $whoisInfo = $table->selectOne( null, array( 'extension' => $extension ) ) )
 			{
-				return true;
-			}
+                $storage->store( array( 'result' => true ) );
+                return true;
+            }
 			
 	//		var_export( $extension );
 	//		var_export( $whoisInfo );
 			$server = $whoisInfo['server'];
 			if( ! @$response = self::getResponse( $server, $domain ) )
 			{
-				return true;
+                $storage->store( array( 'result' => true ) );
+                return true;
 			}
 	//		var_export( $server . '<br>' );
 		//	var_export( strlen( $response ) . '<br>' );
 			$response = str_ireplace( $domain, '', $response );
-			$response = strlen( $response );
+			$responseLen = strlen( $response );
 //			var_export( $response . '<br>' );
-			if( $response == $whoisInfo['badnews_length'] ){ return false; }
+            if( $responseLen == $whoisInfo['badnews_length'] )
+            { 
+                $storage->store( array( 'result' => false ) );
+                return false; 
+            }
+        //    var_export( $whoisInfo['badnews_content'] );
+        //    var_export( $response );
+            if( ! empty( $whoisInfo['badnews_content'] ) && stripos( $response, $whoisInfo['badnews_content'] ) !== false )
+            { 
+                $storage->store( array( 'result' => false ) );
+                return false; 
+            }
+        //    exit();
+            $storage->store( array( 'result' => true ) );
 			return true;
 		}
     } 
