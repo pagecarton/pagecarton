@@ -482,7 +482,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	public function setList( Ayoola_Paginator $list = null )
     {
 		if( is_null( $list ) ){ $list = $this->createList(); }
-		$this->_list = $list;
+		$this->_list = $list; 
     }
 
     /**
