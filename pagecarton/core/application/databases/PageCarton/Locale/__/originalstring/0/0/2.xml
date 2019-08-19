@@ -289,7 +289,7 @@
     <TABLE_ROW ROW_ID="68">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Update Basic Info]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Update Basic Info]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565119749-0-68]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565119749]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143172]]></TABLE_FIELD>
@@ -297,7 +297,7 @@
     <TABLE_ROW ROW_ID="69">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Set site basic branding information]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Set site basic branding information]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565119750-0-69]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565119750]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143172]]></TABLE_FIELD>
@@ -305,7 +305,7 @@
     <TABLE_ROW ROW_ID="70">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Change some of the theme dummy pictures]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Change some of the theme dummy pictures]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565119750-0-70]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565119750]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143173]]></TABLE_FIELD>
@@ -313,7 +313,7 @@
     <TABLE_ROW ROW_ID="71">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Share the site now]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Share the site now]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_NewSiteWizard&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565119750-0-71]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565119750]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143174]]></TABLE_FIELD>
@@ -1102,7 +1102,7 @@
     <TABLE_ROW ROW_ID="177">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Upload new file]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Upload new file]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Domain_UserDomain_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Domain_UserDomain_Creator&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565135214-0-177]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565135214]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143176]]></TABLE_FIELD>
@@ -1110,7 +1110,7 @@
     <TABLE_ROW ROW_ID="178">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Upload]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Upload]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Article_Generator&quot;,&quot;\/widgets\/Application_Domain_UserDomain_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Article_Generator&quot;,&quot;\/widgets\/Application_Domain_UserDomain_Creator&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565135214-0-178]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565135214]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143177]]></TABLE_FIELD>
@@ -1118,7 +1118,7 @@
     <TABLE_ROW ROW_ID="179">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Browse existing files on the site]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Browse existing files on the site]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Domain_UserDomain_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Domain_UserDomain_Creator&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565135215-0-179]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565135215]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143177]]></TABLE_FIELD>
@@ -1126,7 +1126,7 @@
     <TABLE_ROW ROW_ID="180">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Browse]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Browse]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Article_Generator&quot;,&quot;\/widgets\/Application_Domain_UserDomain_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/new-site-wizard&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Article_Generator&quot;,&quot;\/widgets\/Application_Domain_UserDomain_Creator&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565135215-0-180]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565135215]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565143178]]></TABLE_FIELD>
@@ -2691,7 +2691,7 @@
     <TABLE_ROW ROW_ID="375">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Description for this page has not been set. Page Description will appear here when they become available.]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Description for this page has not been set. Page Description will appear here when they become available.]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Info&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Info&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Editor&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565440544-0-375]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565440544]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1566242629]]></TABLE_FIELD>
