@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Friday 26th of July 2019 08:58:30 AM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Monday 19th of August 2019 07:24:34 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -45,7 +45,7 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
     2 => 'parameters',
   ),
   'pagewidget_id' => '1564094537-0-40',
-  'widget_name' => '{ { { a r t i c l e _ t i t l e } } }  { { { a r t i c l e _ d e s c r i p t i o n } } }',
+  'widget_name' => '{{{article_title}}} {{{article_description}}}',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_View',
@@ -72,7 +72,7 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = null;
 $_ccfcd65b00854efe614caba97537085f = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Article_View',
   'pagewidget_id' => '1564094538-0-41',
-  'widget_name' => 'A p p l i c a t i o n _ A r t i c l e _ V i e w',
+  'widget_name' => 'Application_Article_View',
   'advanced_parameter_value' => 
   array (
     0 => '1',
@@ -134,7 +134,7 @@ $_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
 </section>',
   'url_prefix' => '',
   'pagewidget_id' => '1564094538-0-42',
-  'widget_name' => 'M a n a g e  { { { p o s t _ t y p e } } }  E d i t  { { { p o s t _ t y p e } } }  I n f o r m a t i o n  D e l e t e  { { { p o s t _ t y p e } } }',
+  'widget_name' => 'Manage {{{post_type}}} Edit {{{post_type}}} Information Delete {{{post_type}}}',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_View',
@@ -191,7 +191,7 @@ $_16296832673663f047e30a609ffd4836 = new Ayoola_Page_Editor_Text( array (
     2 => 'parameters',
   ),
   'pagewidget_id' => '1564094538-0-43',
-  'widget_name' => '& n b s p ;  O t h e r  { { { p o s t _ t y p e } } }  s i m i l a r  t o  { { { a r t i c l e _ t i t l e } } }  & n b s p ;',
+  'widget_name' => '&nbsp; Other {{{post_type}}} similar to {{{article_title}}} &nbsp;',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_View',
@@ -227,7 +227,7 @@ $_72d6251312d1901e8b57f2e6638cdc45 = new Application_Article_ShowAll( array (
     1 => 'parameters',
   ),
   'pagewidget_id' => '1564094538-0-44',
-  'widget_name' => '6  -  -  -  P r o d u c t s f o r S a l e  -  A r r a y  -  1 5 6 4 0 9 4 5 3 8 - 0 - 4 4  -  -  A r r a y  -  w e l l  -  1 5 6 4 0 9 4 5 3 8 - 0 - 4 4  -  1  -  c o n t a i n e r',
+  'widget_name' => '6 - - - ProductsforSale - - 1564094538-0-44 - - - well - 1564094538-0-44 - 1 - container',
   'advanced_parameter_value' => 
   array (
     0 => '1',

@@ -50,8 +50,8 @@ class Ayoola_Object_PageWidget_List extends Ayoola_Object_PageWidget_Abstract
 		$list->setData( $this->getDbData() );
 		$list->setListOptions( 
 								array( 
-							//			'Sub Domains' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_SubDomainList/\' );" title="">Sub Domains</a>',    
-									) 
+										'Page Widgets on La' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/sitewide-page-widgets\' );" title="">Site-wide page widgets layout</a>',    
+                                        ) 
 							);
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No data added to this table yet.' );
@@ -62,6 +62,8 @@ class Ayoola_Object_PageWidget_List extends Ayoola_Object_PageWidget_Abstract
                     'widget_name' => array( 'field' => 'widget_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),
                 //    'parameters_key' => array( 'field' => 'parameters_key', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
                     'class_name' => array( 'field' => 'class_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
+                    'url' => array( 'field' => 'url', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
+                    'section' => array( 'field' => 'section_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
                     '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/?widget_id=%KEY%">preview</a>', 
                     '  ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_PageWidget_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 

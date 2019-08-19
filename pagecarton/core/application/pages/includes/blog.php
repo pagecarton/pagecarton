@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: blog.php	Friday 26th of July 2019 08:58:27 AM	ayoola@ayoo.la $ 
+* @version $Id: blog.php	Monday 19th of August 2019 07:24:32 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -57,7 +57,8 @@ $_56f2567a47ba97cf2adc43c06443ff27 = new Ayoola_Page_Editor_Text( array (
   'skip_ariticles_without_cover_photo[0]' => '1',
   'add_a_new_post[0]' => '1',
   'no_of_post_to_show[0]' => '6',
-  'widget_name' => '{ { { a r t i c l e _ t i t l e } } }  S h a r e  { { { p o s t _ t y p e } } }  b y  { { { d i s p l a y _ n a m e } } }  i n  { { { c a t e g o r y _ t e x t } } }  { { { a r t i c l e _ d e s c r i p t i o n } } }  { { { a r t i c l e _ c o n t e n t } } }  V i e w  { { { v i e w s _ c o u n t _ t o t a l } } }  { { { c o m m e n t s _ c o u n t _ t o t a l } } }  { { { a r t i c l e _ c r e a t i o n _ d a t e _ f i l t e r e d } } }',
+  'widget_name' => '{{{article_title}}} Share {{{post_type}}} by {{{display_name}}} in {{{category_text}}} {{{article_description}}} {{{article_content}}} View {{{views_count_total}}} {{{comments_count_total}}} {{{article_creation_date_filtered}}}',
+  'insert_id' => '1566242672-0-17',
 ) );
 
 							}

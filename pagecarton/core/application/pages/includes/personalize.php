@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: personalize.php	Friday 26th of July 2019 08:58:31 AM	ayoola@ayoo.la $ 
+* @version $Id: personalize.php	Monday 19th of August 2019 07:24:35 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -26,7 +26,7 @@ $_3837180a280c3d557a0113827ea8cce4 = new Ayoola_Object_Embed( array (
   'insert_id' => '1564094538-0-45',
   'pagewidget_id' => '1564094538-0-45',
   '' => '',
-  'widget_name' => 'A p p l i c a t i o n _ P e r s o n a l i z a t i o n',
+  'widget_name' => 'Application_Personalization',
 ) );
 
 							}

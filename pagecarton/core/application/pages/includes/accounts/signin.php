@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Friday 26th of July 2019 08:58:34 AM	ayoola@ayoo.la $ 
+* @version $Id: signin.php	Monday 19th of August 2019 07:24:36 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -25,7 +25,7 @@ $_f89ed25eb8000a8632b9039a7a07a7ec = new Ayoola_Access_Login( array (
   'insert_id' => '1564094564-0-102',
   'pagewidget_id' => '1564094564-0-102',
   '' => '',
-  'widget_name' => 'A r r a y  -  w h i t e - b a c k g r o u n d  -  1 5 6 4 0 9 4 5 6 4 - 0 - 1 0 2  -  1 5 6 4 0 9 4 5 6 4 - 0 - 1 0 2  -',
+  'widget_name' => '- white-background - 1564094564-0-102 - 1564094564-0-102 -',
 ) );
 
 							}
@@ -50,7 +50,7 @@ $_f47d74d2e3820ecf6d805a5f37d546a8 = new Ayoola_Page_Editor_Text( array (
   'insert_id' => '1564094540-0-63',
   'pagewidget_id' => '1564094540-0-63',
   '' => '',
-  'widget_name' => 'F o r g o t  P a s s w o r d ?  S i g n  i n  H e l p !',
+  'widget_name' => 'Forgot Password? Sign in Help!',
 ) );
 
 							}

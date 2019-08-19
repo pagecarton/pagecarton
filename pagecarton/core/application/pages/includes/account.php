@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Friday 26th of July 2019 09:22:19 AM	ayoola@ayoo.la $ 
+* @version $Id: account.php	Monday 19th of August 2019 07:24:35 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -34,7 +34,8 @@ $_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   '' => '',
-  'widget_name' => 'A c c o u n t  D a s h b o a r d',
+  'widget_name' => 'Account Dashboard',
+  'insert_id' => '1566242675-0-12',
 ) );
 
 							}
@@ -72,7 +73,7 @@ $_0a8d876c1a5bdfa414e91126c8475772 = new Ayoola_Page_Editor_Text( array (
   ),
   'savedwidget_id' => '',
   'pagewidget_id_switch' => '',
-  'widget_name' => '{ { { a r t i c l e _ t i t l e } } }  S h a r e  { { { p o s t _ t y p e } } }  b y  { { { d i s p l a y _ n a m e } } }  i n  { { { c a t e g o r y _ t e x t } } }  { { { a r t i c l e _ d e s c r i p t i o n } } }  { { { a r t i c l e _ c o n t e n t } } }  V i e w  { { { v i e w s _ c o u n t _ t o t a l } } }  { { { c o m m e n t s _ c o u n t _ t o t a l } } }  { { { a r t i c l e _ c r e a t i o n _ d a t e _ f i l t e r e d } } }',
+  'widget_name' => '{{{article_title}}} Share {{{post_type}}} by {{{display_name}}} in {{{category_text}}} {{{article_description}}} {{{article_content}}} View {{{views_count_total}}} {{{comments_count_total}}} {{{article_creation_date_filtered}}}',
   'pagewidget_id' => '',
   'markup_template_object_name' => 
   array (
@@ -133,7 +134,8 @@ $_7aac6aa09cee3843d266ebfb57a2baf1 = new Ayoola_Page_Editor_Text( array (
   ),
   'wrapper_name' => 'dark',
   '' => '',
-  'widget_name' => 'E m a i l :  { { { e m a i l } } }  U s e r n a m e :  { { { u s e r n a m e } } }',
+  'widget_name' => 'Email: {{{email}}} Username: {{{username}}}',
+  'insert_id' => '1566242675-0-13',
 ) );
 
 							}
@@ -156,7 +158,8 @@ $_1e879530f660cb8dced12756d01cc160 = new Ayoola_Menu( array (
     0 => '',
   ),
   '' => '',
-  'widget_name' => 'M y A c c o u n t  -  W h i t e S i d e b a r M e n u  -  1 5 6 4 0 9 4 5 3 9 - 0 - 5 4  -  A r r a y  -',
+  'widget_name' => 'MyAccount - WhiteSidebarMenu - 1564094539-0-54 - -',
+  'insert_id' => '1566242675-0-14',
 ) );
 
 							}

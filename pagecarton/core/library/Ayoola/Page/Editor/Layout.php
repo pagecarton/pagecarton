@@ -371,7 +371,34 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	//	return 'alissa-coming-soon';
 		return 'bootstrapbasic';
 	}
-	
+		
+    /**
+     * Returns the site-wide widgets
+     * 
+     * @param string $section
+     * @return array
+     */
+    public static function getSiteWideWidgets( $section )   
+    {
+        $widgets = Ayoola_Object_PageWidget::getInstance()->select( null, array( 'section_name' => $section, 'url' =>  '/sitewide-page-widgets' ) );
+        $classes = array();
+    //    var_export( $section );
+    //    var_export( $widgets );
+        foreach( $widgets as $eachSiteWidget => $sitewideWidget )
+        {
+            $class = $sitewideWidget['class_name'];
+            if( ! Ayoola_Loader::loadClass( $class ) )
+            {
+                continue;
+            }
+            $class = new $class( $sitewideWidget['parameters'] );
+            $class->initOnce();
+            $classes[] = $class;
+        }
+    //    var_export( $classes );
+        return $classes;
+    }
+    
     /**
      * Produces the layout representation and also proccess POSTed data
      * 
@@ -675,17 +702,38 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		$this->_layoutRepresentation = $content['template'];
 //		var_export( $placeholders );
 		//			self::v(  $values );
-		$pageContent = array();  
+        $pageContent = array();  
+        if( $this->isSaveMode() )
+        {
+            if( $page['url'] === '/sitewide-page-widgets' )
+            {
+                Ayoola_Object_PageWidget::getInstance()->delete( array( 'url' =>  $page['url'] ) ); 
+            }
+        }
 		foreach( $placeholders as $section => $v )
 		{
 			$section = strtolower( $section );
 			
 			$sectionContent = array();
-			$sectionalObjectCollection = null;
+            $sectionalObjectCollection = null;
+            
 			
 			//	We are working on two files
 			$sectionContent['template'] = null;
 			$sectionContent['include'] = null;
+            if( stripos( $page['url'], '/layout/' ) === 0 )
+            {
+                $siteObjectName = '_sitePageWidget_' . $section;
+                $sectionContent['include'] .= "
+                \${$siteObjectName} = " . __CLASS__ . "::getSiteWideWidgets( '" . $section . "' );
+                ";
+                $sectionContent['template'] .= "
+                foreach( \${$siteObjectName} as \$eachSitePageWidget )
+                {
+                    echo \$eachSitePageWidget->view();
+                }
+                ";
+            }
 		//	$hashSectionName = $section;
 		//	var_export( $hashSectionName );
 
@@ -935,7 +983,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                         $eachObject['class_name']::filterParameters( $parameters );
 
 
-					//	var_export();
+                    //	var_export();
+                        
 						if( empty( $parameters['widget_name'] ) )
 						{
 							$parameters['widget_name'] = trim( ( $parameters['preserved_content'] ? : $parameters['codes'] ) ? : $parameters['editable'] ) ? : implode( ' - ', $parameters );
@@ -947,6 +996,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                             }
                             $parameters['widget_name'] = trim( str_ireplace( array( 'array', ',', Ayoola_Application::getUrlPrefix() ), '', ( $parameters['widget_name'] ) ) );
                             $parameters['widget_name'] = trim( preg_replace( '|(\s)+|', ' ', strip_tags( $parameters['widget_name'] ) ) );
+                            if( strlen( $parameters['widget_name'] ) > 120 )
+                            {
+                                $parameters['widget_name'] = substr( $parameters['widget_name'], 0, 100 ) . ' - ' . strlen( $parameters['widget_name'] );
+                            }
                         }
 						else
 						{
@@ -955,7 +1008,14 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                         
 						$parametersToSave = $parameters + $eachObject;
 						$parametersKey = md5( static::safe_json_encode( $parametersToSave ) );
-						$whatToSave = array( 'widget_name' =>  $parameters['widget_name'] , 'url' =>  $page['url'], 'class_name' =>  $eachObject['class_name'], 'parameters' => $parametersToSave, 'parameters_key' => $parametersKey, );
+						$whatToSave = array( 
+                                                'widget_name' =>  $parameters['widget_name'] , 
+                                                'url' =>  $page['url'], 
+                                                'class_name' =>  $eachObject['class_name'], 
+                                                'parameters' => $parametersToSave, 
+                                                'parameters_key' => $parametersKey, 
+                                                'section_name' => $section, 
+                                            );
 					//	var_export( $parametersToSave );
 						if( 
 							empty( $parameters['pagewidget_id'] ) 
@@ -964,9 +1024,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						{
 						//	var_export( $whatToSave );
 							if( 
-								! Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'class_name' =>  $eachObject['class_name'], 'parameters_key' =>  $parametersKey ) )
+                            
+                                	! Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'class_name' =>  $eachObject['class_name'], 'parameters_key' =>  $parametersKey ) )
 								
-								&& 	! Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'widget_name' =>  $parameters['widget_name'] ) )
+                                && 	
+                                
+                                ! Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'widget_name' =>  $parameters['widget_name'] ) )
 
 							)
 							{
@@ -1714,61 +1777,69 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			target.parentNode.appendChild( select );
 			ayoola.events.remove( target, "click", addANewItemToContainer ); 
 			target.parentNode.removeChild( target );
-		}
-		for( var a = 0; a < sections.length; a++ )
-		{  
-			var sectionName = sections[a];
-			var section = document.getElementById( sectionName ); // e.g. header
-			if( ! section ){ continue; }
-			
-			//	ADDING A LINK TO ADD A NEW OBECT TO THE SECTION
-			//
-			var addItemContainer = document.createElement( "div" );
-			addItemContainer.style.cssText = "text-align:center;";  
-			addItemContainer.className = "pc_page_object_specific_item pc_page_object_insert_button_area";
-			addItemContainer.name = "add_a_new_item_to_parent_section";
-	
-			var addItemButton = document.createElement( "span" );
-			addItemButton.className = "pc_add_widget_button greynews boxednews centerednews pc-btn";
-			addItemButton.innerHTML = "Add Widget Here";
-			ayoola.events.add( addItemButton, "click", addANewItemToContainer ); 
+        }
+		ayoola.events.add
+		(
+			window,
+			"load",
+			function()
+			{
+                for( var a = 0; a < sections.length; a++ )
+                {  
+                    var sectionName = sections[a];
+                    var section = document.getElementById( sectionName ); // e.g. header
+                    if( ! section ){ continue; }
+                    
+                    //	ADDING A LINK TO ADD A NEW OBECT TO THE SECTION
+                    //
+                    var addItemContainer = document.createElement( "div" );
+                    addItemContainer.style.cssText = "text-align:center;";  
+                    addItemContainer.className = "pc_page_object_specific_item pc_page_object_insert_button_area";
+                    addItemContainer.name = "add_a_new_item_to_parent_section";
+            
+                    var addItemButton = document.createElement( "span" );
+                    addItemButton.className = "pc_add_widget_button greynews boxednews centerednews pc-btn";
+                    addItemButton.innerHTML = "Add Widget Here";
+                    ayoola.events.add( addItemButton, "click", addANewItemToContainer ); 
 
 
 
-			var select = document.createElement( "select" );
-			select.innerHTML = "<option value=\"\">' . self::__( 'Insert widget here' ) . '</option>' . $this->_viewableSelect . '";
-			select.className = "pc_add_widget_button greynews boxednews centerednews pc-btn";
-			select.title = "' . self::__( 'Select widget to insert below' ) . '";
-			ayoola.events.add
-			( 
-				select, 
-				"change", 
-				function( e )  
-				{ 
-					var target = ayoola.events.getTarget( e );
-					var a = document.getElementById( target.value );
-                //    		alert( target.value );
-            	//	alert( a.innerHTML );
-					var b = target.parentNode;
+                    var select = document.createElement( "select" );
+                    select.innerHTML = "<option value=\"\">' . self::__( 'Insert widget here' ) . '</option>' . $this->_viewableSelect . '";
+                    select.className = "pc_add_widget_button greynews boxednews centerednews pc-btn";
+                    select.title = "' . self::__( 'Select widget to insert below' ) . '";
+                    ayoola.events.add
+                    ( 
+                        select, 
+                        "change", 
+                        function( e )  
+                        { 
+                            var target = ayoola.events.getTarget( e );
+                            var a = document.getElementById( target.value );
+                        //    		alert( target.value );
+                        //	alert( a.innerHTML );
+                            var b = target.parentNode;
 
-					//	Clone the node to replenish the main viewable objects.
-					if( a && b && b.parentNode )
-					{
-						c = a.cloneNode( true );
-						c.id = "";
-				//		alert( c );
-            	//	alert( c.innerHTML );
-						b.parentNode.appendChild( c ); 
-						c.scrollIntoView( {block: "end",  behaviour: "smooth"} );    
-						pc_makeInnerSettingsAutoRefresh();
-					}
-					target.value = "";
-				} 
-			); 
-			addItemContainer.appendChild( select );  
-			section.appendChild( addItemContainer );
-		
-		}  
+                            //	Clone the node to replenish the main viewable objects.
+                            if( a && b && b.parentNode )
+                            {
+                                c = a.cloneNode( true );
+                                c.id = "";
+                        //		alert( c );
+                        //	alert( c.innerHTML );
+                                b.parentNode.appendChild( c ); 
+                                c.scrollIntoView( {block: "end",  behaviour: "smooth"} );    
+                                pc_makeInnerSettingsAutoRefresh();
+                            }
+                            target.value = "";
+                        } 
+                    ); 
+                    addItemContainer.appendChild( select );  
+                    section.appendChild( addItemContainer );
+                
+                }
+            } 
+        );
 		
 		//	button to save the layout
 		var saveButton = document.createElement( "a" );

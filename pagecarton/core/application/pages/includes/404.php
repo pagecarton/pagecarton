@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: 404.php	Friday 26th of July 2019 08:58:34 AM	ayoola@ayoo.la $ 
+* @version $Id: 404.php	Monday 19th of August 2019 07:24:36 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -29,7 +29,8 @@ $_839ecb3efc70cb6eb1bbb7b7f8b29574 = new Ayoola_Page_Editor_Text( array (
   ),
   'wrapper_name' => 'well',
   '' => '',
-  'widget_name' => 'E r r o r  4 0 4  -  P a g e  N o t  F o u n d',
+  'widget_name' => 'Error 404 - Page Not Found',
+  'insert_id' => '1566242676-0-20',
 ) );
 
 							}
@@ -56,7 +57,8 @@ $_c7269e6f48bd5c84816662981df32805 = new Ayoola_Page_Editor_Text( array (
   ),
   'wrapper_name' => 'white-background',
   '' => '',
-  'widget_name' => 'Y o u  a r e  s e e i n g  t h i s  p a g e  b e c a u s e  y o u  h a v e  r e q u e s t e d  a  p a g e  t h a t  i s  n o t  a v a i l a b l e .  P l e a s e  c h e c k  t h e  U R L  a n d  t r y  a g a i n .',
+  'widget_name' => 'You are seeing this page because you have requested a page that is not available. Please check the URL and try again.',
+  'insert_id' => '1566242676-0-21',
 ) );
 
 							}
@@ -78,7 +80,8 @@ $_6f2ca00dd66ccaf3d4af877d389f74c4 = new Ayoola_Object_Embed( array (
     0 => '',
   ),
   '' => '',
-  'widget_name' => 'A y o o l a _ P a g e _ A u t o C r e a t o r',
+  'widget_name' => 'Ayoola_Page_AutoCreator',
+  'insert_id' => '1566242676-0-22',
 ) );
 
 							}

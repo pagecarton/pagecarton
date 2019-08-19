@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Friday 26th of July 2019 08:58:26 AM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Monday 19th of August 2019 07:23:16 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <!DOCTYPE html>
@@ -211,8 +211,6 @@ echo ( ! empty( $_37de1278686bad05803e50ef40b938dc ) &&  is_object( $_37de127868
 <?php
 //pc_body_4 Begins Here
 
-echo ( ! empty( $_4a40c5f22289378580a8293281ac9ac2 ) &&  is_object( $_4a40c5f22289378580a8293281ac9ac2 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_4a40c5f22289378580a8293281ac9ac2->view(), '' ) : null );
-
 //pc_body_4 Ends Here
 ?>@@@pc_body_4@@@
 
@@ -223,5 +221,11 @@ echo ( ! empty( $_4a40c5f22289378580a8293281ac9ac2 ) &&  is_object( $_4a40c5f222
 
     <!-- jQuery -->
     <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/jquery.js"></script><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/bootstrap.min.js"></script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?><?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?>
+<?php
+//pc_section_after_js Begins Here
+
+//pc_section_after_js Ends Here
+?>@@@pc_section_after_js@@@
+
 </body>
 </html>

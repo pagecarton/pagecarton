@@ -187,5 +187,7 @@ pc_body_4@@@}
 
     <!-- jQuery -->
     <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/jquery.js"></script><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/bootstrapbasic/js/bootstrap.min.js"></script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?><?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?>
+@@@pc_section_after_js@@@
+
 </body>
 </html>
