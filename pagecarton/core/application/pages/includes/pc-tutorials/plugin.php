@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: plugin.php	Monday 19th of August 2019 11:51:18 PM	ayoola@ayoo.la $ 
+* @version $Id: plugin.php	Tuesday 20th of August 2019 12:11:42 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -39,7 +39,7 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 <p>&nbsp;</p>
 
 <ol>
-	<li>Widgets&nbsp;<br>
+	<li><strong>Widgets</strong>&nbsp;<br>
 	<br>
 	Widgets are basically PHP classes of for some site-specific functions. Widgets can be built into plugins to export whatever functionalities such plugins are created for. Widgets&nbsp;bring specific functionalities to the site, depending on the kind of widget they are: Here are the kinds of widgets available:<br>
 	&nbsp;
@@ -58,11 +58,11 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 		&nbsp;</li>
 	</ol>
 	</li>
-	<li>Documents<br>
+	<li><strong>Documents</strong><br>
 	<br>
 	Documents are files uploaded on&nbsp;the site, which can be retrieved directly using for example a URL:&nbsp;https://example.com/path/to/file.jpg. Documents can be built into plugins so that site that have them installed can also have those files on them.&nbsp;<br>
 	&nbsp;</li>
-	<li>Pages<br>
+	<li><strong>Pages</strong><br>
 	<br>
 	Plugins in PageCarton can also include pages. This allows for plugin developers to have pages defined in the plugin so that whenever the plugin is installed and activated on a new site, the defined pages becomes available immediately.<br>
 	&nbsp;</li>
@@ -85,12 +85,12 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 	<li>Click on “<a href="http://localhost:8888/pc-admin/Ayoola_Extension_Creator/" target="_blank">Build New Plugins</a>”<br>
 	&nbsp;
 	<ul>
-		<li>Plugin Name could be the name of the plugin e.g. “Hello World”</li>
-		<li>Plugin Widgets - Select the widgets to include in the plugin</li>
-		<li>Settings - Select the settings widget to use as Pluging Settings</li>
-		<li>Databases - Which database table data to include in the plugins</li>
-		<li>Documents - What files should be included in the plugin.</li>
-		<li>Pages - What pages should be included in the plugin</li>
+		<li><strong>Plugin Name</strong> could be the name of the plugin e.g. “Hello World”</li>
+		<li><strong>Widgets</strong> - Select the widgets to include in the plugin</li>
+		<li><strong>Settings</strong> - Select the settings widget to use as Plugin Settings</li>
+		<li><strong>Databases</strong> - Which database table data to include in the plugins</li>
+		<li><strong>Documents</strong> - What files should be included in the plugin.</li>
+		<li><strong>Pages</strong> - What pages should be included in the plugin</li>
 		<li>Click “Continue” to submit</li>
 	</ul>
 	</li>
@@ -104,13 +104,14 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 <div>
 <h2>Installing the Plugin on Another Site</h2>
 
-<h2>&nbsp;</h2>
+<p>&nbsp;</p>
 
 <ul>
-	<li>Go to Installed Plugins<br>
+	<li>
+	<p>Go to Installed Plugins<br>
 	<br>
-	<a class="pc-btn" href="http://localhost:8888/pc-admin/Ayoola_Extension_Import_List" target="_blank">Installed Plugins</a><br>
-	&nbsp;</li>
+	<a class="pc-btn" href="http://localhost:8888/pc-admin/Ayoola_Extension_Import_List" target="_blank">Installed Plugins</a></p>
+	</li>
 	<li>Click on “<a href="http://localhost:8888/pc-admin/Ayoola_Extension_Import_Creator" target="_blank">Upload New</a>” to upload the plugin you have downloaded to your computer/device. The file should be a “tar.gz” archive.</li>
 	<li>Continue to Install and “Turn On” the plugin to enable the plugin</li>
 	<li>The components of the plugin should now be available on the site.</li>
@@ -161,16 +162,22 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 	To populate this database we need to&nbsp;<br>
 	&nbsp;
 	<ol>
-		<li>External Javascript or CSS files<br>
-		<br>
-		External files can be uploaded directly using the file manager. The URL may now be used in the content as a valid image, JS/CSS script<br>
+		<li>External Javascript or CSS files - External files can be uploaded directly using the file manager. The URL may now be used in the content as a valid image, JS/CSS script<br>
 		<br>
 		<a class="pc-btn" href="/widgets/Ayoola_Doc_Browser" target="_blank">File Manager</a><br>
 		&nbsp;</li>
 		<li>Update&nbsp;"/sitewide-page-widgets" page to include all content to include in all the pages of the site.<br>
 		<br>
-		<a class="pc-btn" href="/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/sitewide-page-widgets" target="_blank">Edit&nbsp;/sitewide-page-widgets</a><br>
-		&nbsp;
+		<a class="pc-btn" href="/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/sitewide-page-widgets" target="_blank">Edit&nbsp;/sitewide-page-widgets</a>
+		<pre><code>&lt;!--sample HTML Text Content--&gt; 
+&lt;script src="/public/2019/01/01/cookieBubble.js"&gt;&lt;/script&gt; &lt;!--Include uploaded external javascript and other files --&gt; 
+&lt;script&gt;
+&nbsp; &nbsp; (function ($) {
+&nbsp; &nbsp; &nbsp; $.cookieBubble();
+&nbsp; &nbsp; &nbsp;})(jQuery);
+&lt;/script&gt;</code>
+</pre>
+
 		<ol>
 			<li>Click on "Widget Options" if you can\'t see widget containers (where you have "Insert Widget Here")&nbsp;on&nbsp;the page</li>
 			<li>Click on "Insert Widget Here"</li>
@@ -179,7 +186,7 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 			<li>Paste the codes of the content to the code text area.</li>
 			<li>Click Save on the lower left corner of the screen<br>
 			<br>
-			Click on the "Insert Widget Here" wherever you want the content to be, then select "HTML Text".&nbsp;When adding javascript files/code in "&lt;script&gt;" tags, it is best to include such in the last widget container (where you have "Insert Widget Here")&nbsp;on&nbsp;the page, it is best to switch the HTML Text widget to "Code View" mode when writing codes.<br>
+			Click on the "Insert Widget Here" wherever you want the content to be, then select "HTML Text".&nbsp;When adding javascript files/code in "&lt;script&gt;" tags, it is best to include such in the last widget container (where you have "Insert Widget Here")&nbsp;on&nbsp;the page, it is best to switch the HTML Text widget to "Code View" mode when writing codes. The uploaded external files can be used here to display images, include CSS and JS in the page, etc.<br>
 			&nbsp;</li>
 		</ol>
 		</li>
@@ -200,12 +207,17 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 	&nbsp;
 	<ul>
 		<li>Plugin Name could be the name of the plugin e.g. “Cookie Compliance Plugin”</li>
-		<li>Plugin Widgets - Should be left blank since our pluging does not require a plugin</li>
-		<li>Settings - Should be left blank since our pluging does not require a plugin</li>
-		<li>Databases - Should be left blank since our pluging does not require a plugin</li>
+		<li>Plugin Widgets - Should be left blank since our plugin does not require a widget</li>
+		<li>Settings - Should be left blank since our plugin does not require settings</li>
+		<li>Databases - just one databases to include:
+		<ul>
+			<li>Ayoola_Object_PageWidget - The database for the page widgets</li>
+		</ul>
+		</li>
 		<li>Documents - Select all the uploaded external files</li>
-		<li>Pages - What pages should be included in the plugin</li>
+		<li>Pages -&nbsp;Should be left blank since our plugin does not require a page</li>
 		<li>Click “Continue” to submit</li>
+		<li>Download plugin</li>
 	</ul>
 	</li>
 </ul>
