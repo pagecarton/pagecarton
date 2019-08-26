@@ -29,7 +29,7 @@ class Application_Domain_Order_Editor extends Application_Domain_Order_Abstract
 		{ 
             //  Code that runs the widget goes here...
 			if( ! $data = $this->getIdentifierData() ){ return false; }
-            if( $data['username'] !== Ayoola_Application::getUserInfo( 'username' ) && ! self::hasPriviledge() )
+            if( strtolower( $data['username'] ) !== Ayoola_Application::getUserInfo( 'username' ) && ! self::hasPriviledge() )
             {
                 return false;
             }

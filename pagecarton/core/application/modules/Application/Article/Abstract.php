@@ -254,7 +254,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( 
 			self::isOwner( @$data['user_id'] ) 
 			|| self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) 
-			|| Ayoola_Application::getUserInfo( 'username' ) === $data['username']   
+			|| strtolower( Ayoola_Application::getUserInfo( 'username' ) ) === strtolower( $data['username'] )  
 		)
 		{ 
 			return true; 
@@ -696,7 +696,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				self::getViewsCount( $data );
 				$table = Application_Article_Views::getInstance();
 				$table->insert( array(
-										'username' => Ayoola_Application::getUserInfo( 'username' ),
+										'username' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ),
 										'article_url' => $data['article_url'],
 										'timestamp' => time(),
 								) 

@@ -355,10 +355,11 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
      */
 	public static function isOwner( $userId  )
 	{
-		if( $userId && Ayoola_Application::getUserInfo( 'access_level' ) && ( intval( Ayoola_Application::getUserInfo( 'access_level' ) ) === 99 || Ayoola_Application::getUserInfo( 'user_id') === $userId || Ayoola_Application::getUserInfo( 'username') === $userId ) )
+		if( $userId && Ayoola_Application::getUserInfo( 'access_level' ) && ( intval( Ayoola_Application::getUserInfo( 'access_level' ) ) === 99 || Ayoola_Application::getUserInfo( 'user_id') === $userId || strtolower( Ayoola_Application::getUserInfo( 'username' ) ) === strtolower( $userId ) ) )
 		{
 			return true;
-		}
+        }
+    //    var_export( $userId );
 		return false;
 	}
 	

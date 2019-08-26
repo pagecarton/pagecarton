@@ -46,7 +46,7 @@ class Application_User_Editor extends Application_User_Abstract
 			if( ! $data = self::getIdentifier() ){ return false; }
 		//	var_Export( $data );
 		//	var_Export( self::hasPriviledge( 98 ) );
-			if( $data['username'] !== Ayoola_Application::getUserInfo( 'username' ) && ! self::hasPriviledge( 98 ) )
+			if( strtolower( $data['username'] ) !== Ayoola_Application::getUserInfo( 'username' ) && ! self::hasPriviledge( 98 ) )
 			{
 				//	We are not the owner of data and we are not admin
 				return false;
@@ -54,7 +54,7 @@ class Application_User_Editor extends Application_User_Abstract
 //			var_export( $data );
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			
-			if( $data['username'] !== Ayoola_Application::getUserInfo( 'username' )  && ! self::hasPriviledge( 98 ) )
+			if( strtolower( $data['username'] ) !== Ayoola_Application::getUserInfo( 'username' )  && ! self::hasPriviledge( 98 ) )
 			{
 				//	We are not the owner of data and we are not admin
 				return false;

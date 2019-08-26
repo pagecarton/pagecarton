@@ -48,7 +48,7 @@ class Application_Article_Type_Quiz_WhitelistImport extends Application_Article_
 			//	Only the valid editor can view scoreboard
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-			if( ! self::isOwner( $data['user_id'] ) && ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }
+			if( ! self::isOwner( $data['user_id'] ) && ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && Ayoola_Application::getUserInfo( 'username' ) !== strtolower( $data['username'] ) ){ return false; }
 			$this->setViewContent( self::__( '<h3>Bulk Email Address Invitation List!</h3>' ) );			
 			$this->setViewContent( self::__( '<p>Create an invitation list for: "' . $data['article_title'] . '" or <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Type_Quiz_Whitelist/?article_url=' . $data['article_url'] . '">Standard Import List>></a></p>' ) );	  		
 			$this->setViewContent( self::__( '<p>Paste email addresses below</p>' ) );			

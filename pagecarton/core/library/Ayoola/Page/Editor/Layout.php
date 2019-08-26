@@ -987,8 +987,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                         
 						if( empty( $parameters['widget_name'] ) )
 						{
-							$parameters['widget_name'] = trim( ( $parameters['preserved_content'] ? : $parameters['codes'] ) ? : $parameters['editable'] ) ? : implode( ' - ', $parameters );
-							$parameters['widget_name'] = trim( strip_tags( $parameters['widget_name'] ) ? : ( $eachObject['class_name'] ) . ' - ' . $numberedSectionName );
+                            $parameters['widget_name'] = trim( ( $parameters['preserved_content'] ? : $parameters['codes'] ) ? : $parameters['editable'] ) ? : implode( ' - ', $parameters );
+                            if( ! empty( trim( strip_tags( $parameters['widget_name'] ) ) ) )
+                            {
+                                $parameters['widget_name'] = trim( strip_tags( $parameters['widget_name'] ) );
+                            }
+							$parameters['widget_name'] = trim( ( $parameters['widget_name'] ) ? : ( $eachObject['class_name'] ) . ' - ' . $numberedSectionName );
 							$parameters['widget_name'] = trim( preg_replace( '|(\s)+|', ' ', $parameters['widget_name'] ) );
                             if( empty( $parameters['widget_name'] ) )
                             {

@@ -65,7 +65,7 @@ class Application_Domain_Order_Abstract extends PageCarton_Widget
 
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = false;
-        if( $values['username'] === Ayoola_Application::getUserInfo( 'username' ) || self::hasPriviledge() )
+        if( strtolower( $values['username'] ) === Ayoola_Application::getUserInfo( 'username' ) || self::hasPriviledge() )
         {
             if( empty( $values ) )
             {

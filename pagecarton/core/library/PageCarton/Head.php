@@ -66,18 +66,21 @@ class PageCarton_Head extends PageCarton_Widget
             if( Application_Settings_Abstract::getSettings( 'Page', 'background_color' ) )
             {
                 $html .= '
-            <style>
-                .pc-bg-color
-                {
-                    background-color: ' . Application_Settings_Abstract::getSettings( 'Page', 'background_color' ) . ';
-                    color: ' . Application_Settings_Abstract::getSettings( 'Page', 'font_color' ) . ';
-                }
-            </style>';
-            }            
-                        
+<style>
+    .pc-bg-color
+    {
+        background-color: ' . Application_Settings_Abstract::getSettings( 'Page', 'background_color' ) . ';
+        color: ' . Application_Settings_Abstract::getSettings( 'Page', 'font_color' ) . ';
+    }
+</style>';
+            }     
+            $widgets = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'pc_section_within_head' ); 
+            foreach( $widgets as $widget )
+            {
+                $html .= $widget->view();
+            }           
             echo $html;
             // end of widget process
-          
 		}  
 		catch( Exception $e )
         { 
