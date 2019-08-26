@@ -746,10 +746,11 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 
 		$hash = md5(
 			json_encode( $arguments ) . $this->_myFilename . $this->_relationship . $this->_accessibility  .
-			Ayoola_Application::getApplicationNameSpace() . Ayoola_Application::getDomainSettings( 'domain_name' ) ) .
-			( is_file( $this->_myFilename ) ? filemtime( $this->_myFilename ) : "" ).
-			( is_file( $defaultFile ) ? filemtime( $defaultFile ) : "" ).
-			( isset( $fmTime ) ? $fmTime : "" );
+            Ayoola_Application::getApplicationNameSpace() . Ayoola_Application::getDomainSettings( 'domain_name' ) ) . 
+            md5(
+			( is_file( $this->_myFilename ) ? filemtime( $this->_myFilename ) : "" ) .
+			( is_file( $defaultFile ) ? filemtime( $defaultFile ) : "" ) .
+			( isset( $fmTime ) ? $fmTime : "" ) );
 
 		$storage = PageCarton_Widget::getObjectStorage( array( 'id' => __CLASS__ . '---wefwfff' . $hash, 'device' => 'File', 'time_out' => 1000000, ) );
 		$result = $storage->retrieve();
