@@ -1735,9 +1735,11 @@ class Ayoola_Application
 		if( is_null( self::$_userInfo ) || $key === false )
 		{
 			self::$_userInfo = new Ayoola_Access();
-            self::$_userInfo = self::$_userInfo->getUserInfo();
-            self::$_userInfo['username'] = strtolower( self::$_userInfo['username'] );
-            self::$_userInfo['email'] = strtolower( self::$_userInfo['email'] );
+            if( self::$_userInfo = self::$_userInfo->getUserInfo() )
+            {
+                self::$_userInfo['username'] = strtolower( self::$_userInfo['username'] );
+                self::$_userInfo['email'] = strtolower( self::$_userInfo['email'] );
+            }
 			if( ! self::$_userInfo ){ return false; }
 		}
 	//	var_export( self::$_userInfo );
