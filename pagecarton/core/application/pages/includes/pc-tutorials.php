@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-tutorials.php	Monday 19th of August 2019 07:24:31 PM	ayoola@ayoo.la $ 
+* @version $Id: pc-tutorials.php	Friday 30th of August 2019 08:13:31 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_7e559ca9f527527b35db37ac74db2c6d = new Ayoola_Page_Editor_Text( array (
+$_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div>
 <p>&nbsp;</p>
 
@@ -254,7 +254,7 @@ $_7e559ca9f527527b35db37ac74db2c6d = new Ayoola_Page_Editor_Text( array (
 
 <p>&nbsp;</p>
 
-<h2>Feedbacks &amp; Responses&nbsp;</h2>
+<h2><a id="feedback" name="feedback">Feedbacks &amp; Responses&nbsp;</a></h2>
 
 <p>&nbsp;</p>
 
@@ -527,21 +527,41 @@ $_7e559ca9f527527b35db37ac74db2c6d = new Ayoola_Page_Editor_Text( array (
   'widget_options' => 
   array (
     0 => 'embed_widgets',
+    1 => 'wrappers',
   ),
-  'pagewidget_id' => '',
+  'pagewidget_id' => '1566242671-0-14',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Global',
   ),
-  'widget_name' => '&nbsp; Admin access &nbsp; Your website allows you to have unlimited number of administrators – people who would have access to the backend to perform specific administrative functions. Adding new pages editing existing pages reading contact form feedbacks changing logos and favicon creating posts or adding new products and services are some of the functions users are able to perform when they have admin access to the website. The direct link to your administrative backend of your website is on Control Panel. By default only the website developer&nbsp;would have access to the website admin panel to update the website&nbsp;but he could grant as many individuals as needed access to do the same tasks. &nbsp; Request admin access To be able to gain admin access to the website so you could update the website you should request admin access. Only current admin users are able to grant admin access to others. If you are in doubt who would give you access to the website you should talk to your website or service providers as they should have the capacity to do this for you. Meanwhile any other person with admin access could create other admin users. Request Admin Access by following the link below. Request Admin Access All current admin will now be notified of your request and they would grant you access easily with a few clicks &nbsp; Visit Control Panel You are able to administer your website from any internet enabled device where ever you are. Updates you make on the website would take effect immediately in real-time. Go to Control Panel Granting Others Admin Access Any admin can grant admin access to other registered users of the website. Follow the following instructions Ask the individuals to create an account and request for admin access by filling this form:&nbsp;Request Admin Access - {{{pc_domain}}}/widgets/Application_User_Creator/notify_us/create Go to "Users" under Control Panel and locate the email address of the user you want to give admin access to Click "options" then under the options that appear click "Update Account"&nbsp; On the Pop Up set the "Access Level" to "Owner" and save the settings Go to Users &nbsp; Corporate Emails &nbsp; Fully hosted websites come with corporate emails and it is very likely that there is capacity for you to create emails like example@{{{pc_domain}}}. Only requirement in managing email accounts is Admin Access. If you don\'t have admin access and you would like to create a corporate email @{{{pc_domain}}} you would need to either request admin access or ask someone who has the access to help create the email accounts you need. The email service for PageCarton websites are provided by ComeRiver Mail. &nbsp; Creating Email Account Creating a new email is as easy as just few clicks. Follow the link below to create new emails: Create a new email account&nbsp;@{{{pc_domain}}} &nbsp; Managing Existing Emails Change passwords delete emails and manage generally all the email accounts linked to this website using a web interface. Follow the link below to manage email accounts.&nbsp; Manage existing email accounts &nbsp; Sending &amp; Receiving Emails You have several options of checking your emails. The easiest to set you is to use our webmail interface to check your email. But you can as well integrate the email account to any digital device like your mobile phones and/or computer.&nbsp; &nbsp; Access Mail Through the Web This is especially useful because you could have your email anywhere you are around the world. So far you have access to the internet. Using any web browser visit https://mail.comeriver.com then enter your email and password you created above. Check through Web&nbsp;Mail &nbsp; Integrating Corporate Email to a Digital Device When you integrate corporate email to your digital device emails automatically synchronizes to your phone. So that you don\'t have to keep checking for new mails every time. &nbsp; Integrating to iPhone Go to iPhone "Settings" Select "Passwords &amp; Accounts" Select "Add Account" Select "Other" Select "Add Mail Account Name: your full name e.g. John Bello Email: the email e.g. &nbsp;example@{{{pc_domain}}} Password; the email password Description: Anything to describe the email Select "IMAP" on the next sceen Incoming Mail Server Hostname: mail.comeriver.com Username:&nbsp;the email e.g. &nbsp;example@{{{pc_domain}}} Password: the email password Outgoing Mail Server Hostname: mail.comeriver.com Username:&nbsp;the email e.g. &nbsp;example@{{{pc_domain}}} Password: the email password Select "Next" After verification the email would have being added successfully. The email will come in automatically and you can use the "Mail" app on the phone to send and receive emails from the added account. &nbsp; Integrating to Android &nbsp; Open the Gmail app and navigate to the&nbsp;Settings&nbsp;section. Tap&nbsp;Add account. Tap&nbsp;Personal (IMAP/POP)&nbsp;and then&nbsp;Next. Enter your full email address&nbsp;e.g. &nbsp;example@{{{pc_domain}}} and tap&nbsp;Next. Choose "IMAP" Enter the password for your email address and tap&nbsp;Next. Incoming Server Settings Username:&nbsp;Enter your full email address&nbsp;e.g. &nbsp;example@{{{pc_domain}}} Password:&nbsp;Enter the password for your email account Server:&nbsp;mail.comeriver.com Port&nbsp;and&nbsp;Security Type: Secure - Port: 993 and Security Type: SSL/TLS (Accept all certificates) Once the settings are entered tap&nbsp;Next. &nbsp; Outgoing Server Settings Select&nbsp;Require Sign-In. Username:&nbsp;Enter your full email address&nbsp;&nbsp;e.g. &nbsp;example@{{{pc_domain}}} Password:&nbsp;Enter the password for your email account Server:&nbsp;mail.comeriver.com For SMTP&nbsp;Port&nbsp;and&nbsp;Security Type choose: Secure -&nbsp;Port:&nbsp;465 and&nbsp;Security Type:&nbsp;SSL/TLS (Accept all certificates) Once the settings are entered tap&nbsp;Next. &nbsp; Adding Content &nbsp; Adding content to your website is incredibly easy. There are a number of ways to add content but the easiest ways are going to be highlighted here. More advanced methods are covered in other documentations articles and forums. Content on this website is categorized into three different types: &nbsp; Branding Content This includes logo icons banners site title and descriptions. This is also where the site theme type is set.&nbsp;The content here are not expected to change frequently. On most cases the things set here are never changed.&nbsp; &nbsp; Update Branding Content &nbsp; Static Content This contains some information some other content that may not change frequently but are&nbsp;likely to change more often than Branding Content. Examples are content of the About Us section contact information etc. Basically the items in this category are not related to one another. Static images are the photos on the website that can be easily replaced with new ones. &nbsp; Update Static Text Content&nbsp; Update Static Images&nbsp; &nbsp; Dynamic Content Dynamic contents are called "posts" because they do have related characteristics like titles descriptions and image. Dynamic site content on PageCarton sites are content that are expected to change frequently. In fact it allows one to add new dynamic content more frequently so that they could replace the old content on the website. When new dynamic content are added they don\'t delete the old ones the old ones may just be taken off the home page but they are also archived and can be accessed by search engines. This is a great way to build up site content to have a lot of information about the organization. Example dynamic contents are blog posts event &amp; news testimonials products &amp; services etc. Dynamic content also have dynamic categories which can be easily updated &nbsp; Add New Dynamic Content&nbsp; Clicking the link above will display an of the kind of dynamic posts available for this website. Just select "Add a new item" under the particular kind of post you want to add. On the first time a post is being added one would have to create a profile: Display Name: Your full name Profile description: A profile description for yourself Profile URL: Url would be the page to create for your content like {{{pc_domain}}}/example&nbsp; On the post creation: "Title" is like the name of the content. "Article Content" would be text information of the content.&nbsp; "Cover Photo" would be the image that would accompany the content as the main photo Other information may be required based on the type of content being added. Most of the fields would be self explanatory. &nbsp; To edit delete or just change the settings for dynamic content:&nbsp; Manage All Dynamic Content &nbsp; Feedbacks &amp; Responses&nbsp; &nbsp; There are features on the websites where users of the website will leave feedback on the website through pre-designed forms and other systems. When a user takes an action on the site we have built a system to record the information in a database and such is accessible by the admin users of the website. Feedbacks could be in one of the following forms: &nbsp; Custom Forms Data Contact Us Form Data Product &amp; Service Orders Email Opt-In &nbsp;',
-  'insert_id' => '1566242671-0-14',
+  'wrapper_name' => 'white-well',
+  'widget_name' => '&nbsp; Admin access &nbsp; Your website allows you to have unlimited number of administrators – pe - 9156',
 ) );
 
 							}
 							else
 							{
 								
-$_7e559ca9f527527b35db37ac74db2c6d = null;
+$_62811ae5aaaa125443b3142baae4a203 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
+							{
+								
+$_e2bfc504239e8d32ae90e710ee38d29b = new Ayoola_Menu( array (
+  'option' => 'menu_1567195621',
+  'template_name' => 'BlackAccordionSide-menu',
+  'pagewidget_id' => '',
+  'widget_name' => 'menu_1567195621 - BlackAccordionSide-menu -',
+  'insert_id' => '1567195628-0-2',
+) );
+
+							}
+							else
+							{
+								
+$_e2bfc504239e8d32ae90e710ee38d29b = null;
 
 							}
 							

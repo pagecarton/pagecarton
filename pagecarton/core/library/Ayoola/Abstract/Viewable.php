@@ -2180,27 +2180,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     public function view()
 	{
-	//	Ayoola_Form::v( ( get_class( $this ) ) . '<br />' );
-	//	Ayoola_Form::v( ( $this->timeStart ) . '<br />' );
-	//	Ayoola_Form::v( ( microtime( true ) - $this->timeStart ) . '<br />' );
-	//	Ayoola_Form::v( ( microtime( true ) - Ayoola_Application::getRuntimeSettings( 'start_time' ) ) . '<br />' );
         if( ! $this->deviceIsAllowed() )
         {
             return false;
         }
-		foreach( self::getHooks() as $class )
-		{
-			$class::hook( $this, __FUNCTION__ );
-		}
 
 		$this->_playMode = $this->getParameter( 'play_mode' ) ? : $this->_playMode;
-	//	var_export( get_class( $this ) );
-	//	var_export( $this->_playMode );
-/* 		if( @$_POST['a'] == 'test' )
-		{
-		//	var_export( $_SERVER );
-		}
- */
 		switch( $this->_playMode )
 		{
 			case static::PLAY_MODE_MUTE:
@@ -2209,7 +2194,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			case static::PLAY_MODE_JSON:
 				error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
 				ini_set( 'display_errors', "0" );
-			//	var_export( $this->_objectData );
 				header( 'Content-Type: application/json; charset=utf-8' );
 				if( @$_POST['PAGECARTON_RESPONSE_WHITELIST'] )
 				{
@@ -2223,12 +2207,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$dataToSend = json_encode( $this->_objectData );
 
 				//	json data was being truncated
-			//	header( 'Content-Length: ' . strlen( $dataToSend ) );
+			    //	header( 'Content-Length: ' . strlen( $dataToSend ) );
 				echo $dataToSend;
 
 				//	Log early before we exit
 				Ayoola_Application::log();
-			//	if( ! self::hasPriviledge() )
 				{
 					exit();
 				}
@@ -2253,7 +2236,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				echo $dataToSend;
 				//	Log early before we exit
 				Ayoola_Application::log();
-			//	if( ! self::hasPriviledge() )
 				{
 					exit();
 				}
@@ -2280,27 +2262,21 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				}
 
 				$dataToSend = json_encode( $this->_objectData );
-			//	var_export( $_SERVER['HTTP_PAGECARTON_RESPONSE_ENCRYPTION'] );
 				$encrypted = OpenSSL::encrypt( $dataToSend, $_SERVER['HTTP_PAGECARTON_RESPONSE_ENCRYPTION'] );
-			//	var_export( $encrypted );
-			//	echo $dataToSend;
-			//	echo base64_encode( $encrypted );
-			//	header( 'Content-Length: ' . strlen( $encrypted ) );
-				echo $encrypted;
+                echo $encrypted;
+                
 				//	Log early before we exit
 				Ayoola_Application::log();
-			//	if( ! self::hasPriviledge() )
 				{
 					exit();
 				}
 			break;
 			case static::PLAY_MODE_PHP:
 				$dataToSend = serialize( $this->_objectData );
-			//	header( 'Content-Length: ' . strlen( $dataToSend ) );
-				echo $dataToSend;
+                echo $dataToSend;
+                
 				//	Log early before we exit
 				Ayoola_Application::log();
-			//	if( ! self::hasPriviledge() )
 				{
 					exit();
 				}
@@ -2309,19 +2285,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$content = null;
 				$html = null;
 				$content = $this->getViewContent();
-			//	if( get_class( $this ) === 'Application_Article_Category' )
-				{
-				//	var_export( $this->getMarkupTemplate() );
-				}
 
 				if( ! $template = $this->getMarkupTemplate() )
 				{
 					//	Allow page builder to be able to set a default content incase theres no data used as template markup
-			//		$html = $this->getParameter( 'markup_template_no_data' );
+			        //		$html = $this->getParameter( 'markup_template_no_data' );
 					if( ! $template )
 					{
 						$html = $content;
-					//	return $content;
 					}
 					else
 					{
@@ -2363,7 +2334,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						);
 						//	Lets insert form requirements in the artificial form fields
 						$this->_objectTemplateValues = array_merge( $_REQUEST, $this->_objectTemplateValues );
-					//	var_export( $this->getParameter() );
 						$this->_objectTemplateValues['template_object_name'] = $this->getObjectName();
 
 						//	internally count the instance
@@ -2390,13 +2360,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						}
 					}
 
-	//				self::v( $this->_objectTemplateValues );
 					//	Add the Ayoola_Application Global
 					//	adding this global causes variable to be available on widgets using same variables
 					//	like username
 					#	Don't display user infor for signed out user
-				//	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['post'] ? : array(), $this->_objectTemplateValues );
-                //	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['profile'] ? : array(), $this->_objectTemplateValues );
+				    //	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['post'] ? : array(), $this->_objectTemplateValues );
+                    //	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['profile'] ? : array(), $this->_objectTemplateValues );
                     //  only show widget if some parameters are true
                     if( $this->getParameter( 'required_template_variables' ) )
                     {
@@ -2414,17 +2383,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	allows me to add pagination on post listing with predefined suffix
 					$template = $this->getParameter( 'markup_template_prepend' ) . $template;
 					$template = $template . $this->getParameter( 'markup_template_append' );
-			//		self::v( $template );
-			// 		self::v( $this->_objectTemplateValues );
 					$template = Ayoola_Abstract_Playable::replacePlaceholders( $template, $this->_objectTemplateValues + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
 
 					//	fix case where ajax auto-loading didn't fix url prefix in posts
 					$template = Ayoola_Page_Editor_Text::fixUrlPrefix( $template, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
 
-				//	self::v( $this->getParameter() );
 					$html = $template;
 				}
-			//		var_export( $this->getParameter( 'wrapper_name' ) );
 				if( $this->getParameter( 'wrapper_name' ) && $html )
 				{
 					$html =  '<div class="'. $this->getParameter( 'wrapper_inner_class' ) .'">' . $html . '</div>';
@@ -2432,22 +2397,24 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				}
 				if( ( $this->getParameter( 'object_style' ) || $this->getParameter( 'object_class' ) ) && $html )
 				{
-			//		var_export( $this->getParameter( 'object_style' ) );
-			//		var_export( $html );
 					$html = '<div class="'. $this->getParameter( 'object_class' ) .'" style="'. $this->getParameter( 'object_style' ) . '">' . $html . '</div>';
 					//	self::v( $template );
 				}
-			//		var_export( $this->getParameter( 'content_to_clear' ) );
-				//	Define content to clear from the screen
-					$contentToClear = $this->getParameter( 'content_to_clear' ) . ( isset( $this->_parameter['content_to_clear_internal'] ) ? $this->_parameter['content_to_clear_internal'] : "" );
-					if( $contentToClear )
-					{
-						$search = array_map( 'trim', explode( "\n", $contentToClear ) );
-				//		var_export( $search );
-						$html = str_replace( $search, '', $html );
-						//	self::v( $template );
-					}
+                //	Define content to clear from the screen
+                $contentToClear = $this->getParameter( 'content_to_clear' ) . ( isset( $this->_parameter['content_to_clear_internal'] ) ? $this->_parameter['content_to_clear_internal'] : "" );
+                if( $contentToClear )
+                {
+                    $search = array_map( 'trim', explode( "\n", $contentToClear ) );
+                    $html = str_replace( $search, '', $html );
+                    //	self::v( $template );
+                }
 
+                //  allow view to be filtered or maninpulated by hooks
+                foreach( self::getHooks() as $class )
+                {
+                    $class::hook( $this, __FUNCTION__, $html );
+                }
+            
 				return $html;
 			break;
 			default:

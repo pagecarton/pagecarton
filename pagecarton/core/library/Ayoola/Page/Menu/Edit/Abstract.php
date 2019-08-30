@@ -114,7 +114,7 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
         
         
         $options = new Ayoola_Page_Menu_Menu;
-        $options = $options->select();
+        $menuItems = $options->select();
         if( $identifier = $this->getIdentifier() )
         {
             $fieldset->addElement( array( 'name' => 'menu_id', 'type' => 'Hidden' ) );
@@ -128,9 +128,9 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
             $table = new Ayoola_Page_Menu_Menu;
             //	look in parent tables
             $table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-            $options = $table->select();
-                $menuList = array();
-            foreach( $options as $each )
+            $menuItems = $table->select();
+            $menuList = array();
+            foreach( $menuItems as $each )
             {
                 $menuList[$each['menu_id']] = $each['menu_label'];
             }
@@ -170,7 +170,7 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 
                 //	Sub menu
             $menuList = array();
-            foreach( $options as $each )
+            foreach( $menuItems as $each )
             {
                 if( $each['menu_id'] == $identifier['menu_id'] )
                 {
