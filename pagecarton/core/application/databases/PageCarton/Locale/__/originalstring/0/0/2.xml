@@ -353,7 +353,7 @@
     <TABLE_ROW ROW_ID="79">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[%d wks ]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[%d wks]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;,&quot;\/widgets\/PageCarton_Device_List&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;,&quot;\/widgets\/PageCarton_Device_List&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Object_Dbase_List&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565120342-0-79]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565120342]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565440571]]></TABLE_FIELD>

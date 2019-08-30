@@ -66,8 +66,29 @@ class PageCarton_Hook_Abstract extends PageCarton_Widget
 //		$form->oneFieldSetAtATime = true;
 		$fieldset->placeholderInPlaceOfLabel = false;
         
-        $fieldset->addElement( array( 'name' => 'class_name', 'type' => 'InputText', 'value' => @$values['class_name'] ) ); 
-        $fieldset->addElement( array( 'name' => 'hook_class_name', 'type' => 'InputText', 'value' => @$values['hook_class_name'] ) ); 
+        $fieldset->addElement( array( 'name' => 'class_name', 'placeholder' => 'Class widget hosting the event', 'type' => 'Select', 'value' => @$values['class_name'] ), array( '' => 'Select class widget hosting the event' ) + Ayoola_Object_Embed::getWidgets() ); 
+
+        $options = Ayoola_Object_Widget::getInstance()->select();
+        //  var_export( $options );
+        $filter = new Ayoola_Filter_SelectListArray( 'class_name', 'class_name' );
+        $options = $filter->filter( $options );
+        foreach( $options as $key => $value )
+        {
+            if( ! Ayoola_Loader::loadClass( $value ) || ! method_exists( $value, 'hook' ) )
+            {
+                unset( $options[$key] );
+            }
+        }
+        if( empty( $options ) )
+        {
+            $options[''] = 'No hooks created yet'; 
+        }
+        else
+        {
+            $options = array( '' => 'Select class widget hosting the event' ) + $options;
+        }
+        $fieldset->addElement( array( 'name' => 'hook_class_name', 'placeholder' => 'Class widget with the hook method', 'type' => 'Select', 'value' => @$values['hook_class_name'] ), $options ); 
+        $fieldset->addRequirements( array( 'NotEmpty' => null ) );
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   
