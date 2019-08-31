@@ -222,7 +222,7 @@ class Application_Article_RSS extends Application_Article_Abstract
                 }
                 header( 'Content-Type: application/rss+xml' );
                 echo $xml->view();
-            //    exit();
+                exit();
 			//	var_export( $postListId );
 			//	var_export( $postList );
 		//		var_export( $postList );
