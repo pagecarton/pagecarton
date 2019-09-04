@@ -18,7 +18,7 @@ ayoola.spotLight =
 	spotLightLinkClassName: 'spotLightLink', // Classname given to the background of the spotlight
 	spotLightContainerClassName: 'spotLightContainer', // Classname given to the background of the spotlight
 	spotLightClassName: 'spotLight', //	Classname of the spotlight
-	iframeStyle: 'width: 100% ! important; border: medium none ! important; overflow: auto ! important; height: 90% ! important;', //	Classname of the spotlight
+	iframeStyle: 'width: 100% ! important; border: medium none ! important; overflow: auto ! important; height: 92% ! important;', //	Classname of the spotlight 
 	splashScreenObject: new Object, //	Classname of the spotlight
 	delete: null, //	Classname of the spotlight
 	instance: new Object, //	Classname of the spotlight
@@ -96,7 +96,7 @@ ayoola.spotLight =
 	//	Using this to replace the iframe spotlight
 	splashScreen: function()     
 	{		
-		var elementInfo = ayoola.spotLight.popUp( "<div style=\"height:100%; background: rgba( 0, 0, 0, 0 ) url('" + ayoola.pcPathPrefix + "/loading2.gif?y') 50% 50% no-repeat;\"></div>" ); 
+		var elementInfo = ayoola.spotLight.popUp( "<div></div>" ); 
 
 		//	remove title
 		elementInfo.element.removeChild( elementInfo.element.firstChild );
@@ -164,13 +164,12 @@ ayoola.spotLight =
 	//	alert( changeElementId );
 		//	onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode.parentNode.parentNode ); ayoola.xmlHttp.refreshElement( \'' + changeElementId + '\' ); 			ayoola.style.removeClass( document.body, \'pc_no_scroll\' );ayoola.style.removeClass( document.body.parentNode, \'pc_no_scroll\' );"
 		var deleteButtonId = 'deletButtonForSpotLight' + Math.random();
-		element.innerHTML = '<div style="opacity:0.8; display:none;" title="" class="title_bar">\
+		element.innerHTML = '<div style="opacity:0.8; visibility:hidden;" title="" class="title_bar">\
 		<div class="pc_container">\
 		  <span  class="pc_content_title" style=\'display: inline-block;\'></span>\
 		  <span class="title_button close_button ' + deleteButtonId + '" id="' + deleteButtonId + '"  href="javascript:;" class="" title="Delete this object" > x </span>\
-		  <a style="display:none;" class="title_button" name="" href="javascript:;" title="Click to show or hide advanced settings" onclick="var b = this.parentNode.parentNode.parentNode.childNodes;for( var a = 0; a < b.length; a++ ){  b[a].style.display = \'\'; } this.nextElementSibling.style.display = \'\';this.style.display = \'none\';"> &square; </a>  \
-		  <a class="title_button" target="_blank" href="javascript:;" title="Open this widget in a new window or tab" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  this.href = b[a].contentWindow.location.href };"> &#10140; </a>  \
-		  <a class="title_button" name="" href="javascript:;" title="Refresh" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  b[a].contentWindow.location.reload(true); };"> &#8635; </a>  \
+		  <a class="title_button" target="_blank" href="javascript:;" title="Open this widget in a new window or tab" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  this.href = b[a].contentWindow.location.href };"> <i class="fa fa-external-link"></i> </a>  \
+		  <a class="title_button" name="" href="javascript:;" title="Refresh" onclick="var b = this.parentNode.parentNode.parentNode.getElementsByTagName( \'iframe\' );for( var a = 0; a < b.length; a++ ){  b[a].contentWindow.location.reload(true); };"> <i class="fa fa-refresh"></i> </a>  \
 		   </div><div style="clear:both;"></div>  \
 		  </div>';  
 		switch( typeof htmlText )
@@ -225,8 +224,8 @@ ayoola.spotLight =
 				{
 				//	x[y].parentNode.removeChild( x[y] );
 				}
-				target.style.display = "";
-				titleBar.style.display = "";
+				target.style.visibility = "visible";
+				titleBar.style.visibility = "visible";
 				background.style.backgroundImage = "none";
 		//		titleBar.insertBefore( title, titleBar.firstChild ); 
 			}
@@ -473,10 +472,10 @@ ayoola.spotLight =
 		}
 		else
 		{
-			element.style.width =  '100%'; 
-			element.style.height =  '96%'; 
-			element.style.top =  '3%'; 
-			element.style.left =  '0%'; 
+		//	element.style.width =  '100%'; 
+		//	element.style.height =  '96%'; 
+		//	element.style.top =  '3%'; 
+		//	element.style.left =  '0%'; 
 		//	alert( element.offsetHeight );
 		}
 	//	element.style.padding =  '5px'; 
@@ -497,7 +496,7 @@ ayoola.spotLight =
 //		if( ! ayoola.spotLight.background )
 		{ 
 			var background = document.createElement( 'div' );
-			background.style.cssText = "background-image:url('" + ayoola.pcPathPrefix + "/loading2.gif?y');background-position: 50% 50%; background-repeat: no-repeat;"
+			background.style.cssText = "background-image:url('" + ayoola.pcPathPrefix + "/loading.gif?x');background-position: 50% 50%; background-repeat: no-repeat;"
 			background.id = ayoola.spotLight.backgroundClassName;
 			ayoola.style.addClass( background, ayoola.spotLight.backgroundClassName );
 			ayoola.spotLight.background = background;

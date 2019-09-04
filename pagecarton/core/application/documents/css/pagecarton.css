@@ -978,16 +978,18 @@ pc_full_width {
 
 .title_bar,
 .status_bar {
-  background-color: #ebebeb;
-  padding: 0.5em;
-  color: #000;
-  border-top: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-  cursor: default;
-  /* 	display:none;
- */
-  opacity: 0.1;
+    background-color: #999;
+    padding: 1em;
+    color: #fff;
+    border-top: 1px groove #000;
+        border-top-style: groove;
+    border-right: 1px groove #000;
+        border-right-style: groove;
+    border-left: 1px groove #000;
+        border-left-style: groove;
+    cursor: default;
+    opacity: 0.1;
+    border-style: groove;  
 }
 
 .title_bar:hover {
@@ -1015,7 +1017,7 @@ a.title_button:hover,
 a.title_button:visited {
   background-color: transparent;
   float: right;
-  color: #000 !important;
+  color: #fff !important;
   padding: 0 0.5em 0 0.5em;
   text-decoration: none;
 }
@@ -1030,7 +1032,7 @@ a.title_button:hover {
 }
 
 .status_bar>.title_button:hover {
-  background-color: #333;
+  background-color: #aaa;
   color: #fff !important;
   cursor: pointer;
   cursor: hand;
@@ -1210,13 +1212,15 @@ a.title_button:hover {
 /* Spotlight Object
  */
 .spotLight {
-  top: 50%;
-  left: 50%;
-  max-width: 100%;
-  max-height: 94%;
-  position: fixed;
-  overflow: visible;
-  z-index: 200001;
+    bottom: 0;
+    left: 0;
+    max-width: 100%;
+    max-height: 94%;
+    position: fixed;
+    overflow: visible;
+    z-index: 200001;
+    width: 100%;
+    height: 95%;
 }
 
 .spotLight>iframe>html>body {
@@ -1242,7 +1246,7 @@ a.title_button:hover {
   filter: alpha(opacity=80);
   opacity: 0.8;
   overflow: visible;
-  background-color: #000;
+  background-color: #fff;
 }
 
 .spotLightLink {
