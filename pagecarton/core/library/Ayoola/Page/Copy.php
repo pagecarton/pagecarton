@@ -42,9 +42,35 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			$this->setViewContent(  '' . self::__( '<h3 class="goodnews">Page copied successfully</h3>' ) . '', true  ); 
-			
-			$origin = $this->getPageFilesPaths( $values['origin'] );
-			$destination = $this->getPageFilesPaths( $values['destination'] );
+            
+            
+            $values['origin'] = '/' . trim( $values['origin'], '/' );
+            $values['destination'] = '/' . trim( $values['destination'], '/' );
+            if( ! $origin = $this->getPageFilesPaths( $values['origin'], true ) )
+            {
+                $filter = new Ayoola_Filter_UriToPath;
+                $origin = $filter->filter( $values['origin'] );
+                foreach( $origin as $key => $file )
+                {
+                    $bFile = Ayoola_Loader::checkFile( $file );
+                    if( ! is_file( $bFile ) )
+                    {
+                        unset( $origin[$key] );
+                        continue;
+                    }
+                    $origin[$key] = $bFile; 
+                }
+            }
+            if( ! $destination = $this->getPageFilesPaths( $values['destination'], true ) )
+            {
+				$sanitizeClass = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $values['destination'], 'auto_create_page' => true ) );  
+                if( ! $response = $sanitizeClass->sourcePage( $values['destination'] ) )
+                {
+                    //  Auto create
+                    //    $table->insert( array( 'url' => $page, 'system' => '1' ) );
+                }
+                $destination = $this->getPageFilesPaths( $values['destination'] );
+            }
 			if( $values['theme'] )
 			{
 				$parameters = array( 
@@ -67,6 +93,7 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 				$tPaths = Ayoola_Page_Layout_Pages::getPagePaths( Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ), $values['destination'] );
 			//	var_export( $values);
 			//	var_export( $tPaths);
+			//	var_export( $origin);
 				foreach( $origin as $key => $file )
 				{			
 					$to = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $tPaths[$key];
@@ -75,9 +102,8 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 					{
 						continue;
 					}
-				//	var_export( $origin[$key] );
-				//	var_export( $tPaths[$key] );
-						//	Create the Directory  
+
+                    //	Create the Directory  
 					if( is_file( $origin[$key] ) &&  ! @copy( $origin[$key], $to ) )  
 					{
 						$this->setViewContent( self::__( '<p>Contents "' . $origin[$key] . '" could not be copied to "' . $tPaths[$key] . '".</p>' ) ); 
@@ -90,7 +116,7 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 		//	$values['default_url'] = $values['default_url'] == '/' ? '' : $values['default_url'];
 		//	var_export( $pageInfo );
 		//	var_export( $values );
-	//		var_export( $origin );
+		//	var_export( $origin );
 		//	var_export( $destination );
 		//	var_export( $default );
 			foreach( $destination as $key => $file )
@@ -133,16 +159,17 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 		$option = new Ayoola_Page_Page;
 		$option = $option->select();
 		require_once 'Ayoola/Filter/SelectListArray.php';
-		$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
-		$option = $filter->filter( $option );
-		$fieldset->addElement( array( 'name' => 'origin', 'label' => 'Origin Page', 'type' => 'Select', 'value' => @$settings['origin'] ), array( '' => 'Please Select' ) + $option );
-		$fieldset->addElement( array( 'name' => 'destination', 'label' => 'Destination Page', 'type' => 'Select', 'value' => @$settings['destination'] ), array( '' => 'Please Select' ) + $option );
+		$filter = new Ayoola_Filter_SelectListArray( 'url', 'url'); 
+        $option = $filter->filter( $option );
+        $option = $option + array( '__custom' => 'Custom Page' );
+		$fieldset->addElement( array( 'name' => 'origin', 'label' => 'Origin Page', 'type' => 'Select', 'value' => @$settings['origin'], 'onchange' => 'if( this.value == \'__custom\' ){  var a = prompt( \'Custom Page URL\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }' ), array( '' => 'Please Select' ) + $option );
+		$fieldset->addElement( array( 'name' => 'destination', 'label' => 'Destination Page', 'type' => 'Select', 'value' => @$settings['destination'], 'onchange' => 'if( this.value == \'__custom\' ){  var a = prompt( \'Custom Page URL\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }' ), array( '' => 'Please Select' ) + $option );
 
 
 		$fieldset->addElement( array( 'name' => 'theme', 'label' => 'Copy to Theme Page', 'type' => 'Select', 'value' => @$settings['theme'] ), array( '' => 'No', 1 => 'Yes' ) );
 
-		$fieldset->addRequirement( 'origin', array( 'InArray' => $option + array( 'badnews' => 'Please select a page. ' ) ) ); 
-		$fieldset->addRequirement( 'destination', array( 'InArray' => $option + array( 'badnews' => 'Please select a page. ' ) ) ); 
+	//	$fieldset->addRequirement( 'origin', array( 'InArray' => $option + array( 'badnews' => 'Please select a page. ' ) ) ); 
+	//	$fieldset->addRequirement( 'destination', array( 'InArray' => $option + array( 'badnews' => 'Please select a page. ' ) ) ); 
 		
 		
 	//	$fieldset->addElement( array( 'name' => __CLASS__, 'value' => $submitValue, 'type' => 'Submit' ) );

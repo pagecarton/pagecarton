@@ -143,7 +143,7 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
      * @param void
      * @return array The Path to the Page Files
      */
-    public function setPageFilesPaths( $url = null )
+    public function setPageFilesPaths( $url = null, $check = false )
     {
 		$urlToUse = $url;
 		if( is_null( $urlToUse ) )
@@ -162,7 +162,17 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		$filter = new Ayoola_Filter_UriToPath;
 		$files = $filter->filter( $urlToUse );
 		require_once 'Ayoola/Loader.php';
-		foreach( $files as $key => $file ){ $files[$key] = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $file; }
+        foreach( $files as $key => $file )
+        {
+            $bFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $file;
+        //    var_export( $check );
+            if( $check && ! is_file( $bFile ) )
+            {
+                unset( $files[$key] );
+                continue;
+            }
+            $files[$key] = $bFile; 
+        }
 	//	var_export( $files );
 		$this->_pageFilesPaths[$url] = $files;
     } 
@@ -173,13 +183,12 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
      * @param void
      * @return array The Path to the Page Files
      */
-    public function getPageFilesPaths( $url = null )
+    public function getPageFilesPaths( $url = null, $check = false )
     {
-		if( is_null( @$this->_pageFilesPaths[$url] ) ){ $this->setPageFilesPaths( $url ); }
-	//	var_export( $this->_pageFilesPaths );
-	//	var_export( $url );
-	//	var_export( $this->_pageFilesPaths[$url] );
-
+        if( empty( @$this->_pageFilesPaths[$url] ) )
+        { 
+            $this->setPageFilesPaths( $url, $check ); 
+        }
         return (array) @$this->_pageFilesPaths[$url];  
     } 
 	
