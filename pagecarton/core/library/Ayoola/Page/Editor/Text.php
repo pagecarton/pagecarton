@@ -147,18 +147,21 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         preg_match_all( '|\{-(.*)-\}|', $content, $matches );
         #   '{-Lorem Ipsum dolor-}'
       //  self::v( $content );
-      //  self::v( $matches );
+        self::v( $matches );
         $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates() ? : static::$_defaultTexts;
 
-        foreach( $matches[0] as $count => $each )
+        if( $matches[0] )
         {
-        //    self::v( $each );
-            $previousData['dummy_title'][] = 'Replaceable Text ' . self::$_counter . $count;
-            $previousData['dummy_search'][] = $each;
-            $previousData['dummy_replace'][] = trim( $each, '{-}' );
-            Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
-        }
+            foreach( $matches[0] as $count => $each )
+            {
+            //    self::v( $each );
+                $previousData['dummy_title'][] = 'Replaceable Text ' . self::$_counter . $count;
+                $previousData['dummy_search'][] = $each;
+                $previousData['dummy_replace'][] = trim( $each, '{-}' );
+            }
+        //    Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
 
+        }
         //  to be executed within the widget class
         foreach( [ 'codes', 'editable', 'preserved_content' ] as $each  )
         {
