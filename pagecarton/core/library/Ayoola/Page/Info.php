@@ -147,7 +147,7 @@ class Ayoola_Page_Info extends PageCarton_Widget
             
             if( self::hasPriviledge( 98 ) )
             {
-                $pageInfo['link_to_edit'] = '<a  style="font-size:x-small; color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . ( $pageInfo['url'] ? : $url ) . '&pc_form_element_whitelist=title,description,cover_photo,url\', \'page_refresh\' );" href="javascript:">[' . self::__( 'edit page headline and description' ) . ']</a>';
+                $pageInfo['link_to_edit'] = '<a style="font-size:x-small; color:inherit;text-transform:uppercase;display:inline-block;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . ( $pageInfo['url'] ? : $url ) . '&pc_form_element_whitelist=title,description,cover_photo,url\', \'page_refresh\' );" href="javascript:">[' . self::__( 'edit page headline and description' ) . ']</a>';
                 $pageInfo['pc_no_data_filter'] = true;
             }
 

@@ -80,7 +80,7 @@ class Application_SiteInfo extends PageCarton_Widget
             
             if( self::hasPriviledge( 98 ) )
             {
-                $settings['link_to_edit'] = '<a  style="font-size:x-small; color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SiteInfo/?' . '&xpc_form_element_whitelist=site_headline,site_description,cover_photo\', \'page_refresh\' );" href="javascript:">[' . self::__( 'edit site headline and description' ) . ']</a>';
+                $settings['link_to_edit'] = '<a  style="font-size:x-small; color:inherit;text-transform:uppercase;display:inline-block;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SiteInfo/?' . '&xpc_form_element_whitelist=site_headline,site_description,cover_photo\', \'page_refresh\' );" href="javascript:">[' . self::__( 'edit site headline and description' ) . ']</a>';
                 $settings['pc_no_data_filter'] = true;
 
             }

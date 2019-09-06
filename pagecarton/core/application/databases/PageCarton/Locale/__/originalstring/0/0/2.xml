@@ -2973,7 +2973,7 @@
     <TABLE_ROW ROW_ID="409">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[1 cron tasks processed successfully]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[1 cron tasks processed successfully]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/pc-admin&quot;,&quot;\/sample{{{document_url_uri}}}&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565991361-0-409]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565991361]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1567193916]]></TABLE_FIELD>
