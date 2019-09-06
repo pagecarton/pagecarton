@@ -943,10 +943,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	public static function __( $string )
     {
         $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
-    //    if( ! self::getLocale() || ! @in_array( 'auto_translate', $options ) )
+        if( ! self::getLocale() && ! @in_array( 'auto_translate', $options ) )
 		{
 			//	was slowing down app
-		//	return $string;
+			return $string;
         }
         $id = sha1( json_encode( $string ) . 'ccc' . json_encode( PageCarton_Locale_Settings::retrieve() ) );
         if( isset( static::$_translated[$id] ) )
@@ -955,6 +955,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
         }
         $translationStorage = self::getObjectStorage( array( 'id' => 'translation' . $id . 'dddss' . self::getLocale(), 'device' => 'File', 'time_out' => 1000000, ) );  
     //	var_export( json_encode( $string ) );
+    //	var_export( $options );
     //	var_export( $id );
     //	var_export( $translationStorage->retrieve() );
         if( $stored = $translationStorage->retrieve() )
