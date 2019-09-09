@@ -535,11 +535,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 			
 			//	Check file before it is included.
-			// Get the shell output from the syntax check command
-			$output = shell_exec('php -l "'.$data.'"');
+            // Get the shell output from the syntax check command
+            //  this check is causing so much php processes in some cpanels
+		//	$output = shell_exec('php -l "'.$data.'"');
 		
 			// Try to find the parse error text and chop it off
-			$syntaxError = preg_replace("/Errors parsing.*$/", "", $output, -1, $count);
+		//	$syntaxError = preg_replace("/Errors parsing.*$/", "", $output, -1, $count);
 		
 			// If the error text above was matched, throw an exception containing the syntax error
 		//	var_export( $output );
