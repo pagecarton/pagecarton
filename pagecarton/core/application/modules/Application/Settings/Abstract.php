@@ -81,16 +81,26 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 	public static function retrieve( $key = null )
     {
 		$class = get_called_class();
-		$settings = new Application_Settings_SettingsName();
+        $id = Ayoola_Application::getUrlPrefix() . Ayoola_Application::getApplicationNameSpace() . $class . $key;
+		if( isset( self::$_settings[$class][$id] ) )
+		{
+            return self::$_settings[$class][$id];
+        }
+        
+		$settings = Application_Settings_SettingsName::getInstance();
 		if( $settingsNameInfo = $settings->selectOne( null, array( 'class_name' => $class ) ) )
 		{
-			$settingsNameToUse = $settingsNameInfo['settingsname_name'];
-			return self::getSettings( $settingsNameToUse, $key );
+            $settingsNameToUse = $settingsNameInfo['settingsname_name'];
+            self::$_settings[$class][$id] = self::getSettings( $settingsNameToUse, $key );
+			return self::$_settings[$class][$id];
 		}
 		elseif( $extensionInfo = Ayoola_Extension_Import_Table::getInstance()->selectOne( null,  array( 'settings_class' => $class ) ) )
 		{
-			return self::getSettings( $extensionInfo['extension_name'], $key );
+            self::$_settings[$class][$id] = self::getSettings( $extensionInfo['extension_name'], $key );
+			return self::$_settings[$class][$id];
 		}
+        self::$_settings[$class][$id] = false;
+        return self::$_settings[$class][$id];
 //	var_export(  $settingsNameToUse );
 	}
 	

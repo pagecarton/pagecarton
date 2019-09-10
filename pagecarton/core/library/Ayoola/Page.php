@@ -508,11 +508,11 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 	//	var_export( $uri );
 
 		//	Look in the links table for SEO friendly and short URLS
-		$table = Application_Link::getInstance();
+	//	$table = Application_Link::getInstance();
 	//\\	var_export( $table->select() );
-		if( $link = $table->selectOne( null, array( 'link_url' => $uri ) ) )
+	//	if( $link = $table->selectOne( null, array( 'link_url' => $uri ) ) )
 		{
-			$uri = '/' . $link['link_name'] . '/';
+	//		$uri = '/' . $link['link_name'] . '/';
 		}
 		if( $uri == Ayoola_Application::$_homePage || ! $uri || $uri == '/' )
 		{

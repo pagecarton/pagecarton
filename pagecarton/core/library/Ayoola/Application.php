@@ -1982,7 +1982,7 @@ class Ayoola_Application
     {
 		if( is_null( self::$_pathPrefix ) )
 		{
-			self::$_pathPrefix = constant( 'PC_PATH_PREFIX' );
+			self::$_pathPrefix = constant( 'PC_PATH_PREFIX' ) ? : '';
 		}
 
 		return self::$_pathPrefix;

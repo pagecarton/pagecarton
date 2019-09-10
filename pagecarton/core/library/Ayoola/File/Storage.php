@@ -145,16 +145,23 @@ class Ayoola_File_Storage extends Ayoola_File
     public function read()
     {
 		$path = $this->getFile()->getPath();
-		$timeOut = intval( $this->timeOut );
+        $timeOut = intval( $this->timeOut );
+        $ctime = filectime( $path ) . filemtime( $path );
+        $key = $path . $ctime;
+        if( null !== @$this->readMCache[$key] )
+        {
+            return $this->readMCache[$key];
+        }
 	//	var_export( $this );
 		if( is_file( $path ) )
 		{
             if( $timeOut )
             {
                 //	Check the time out 
-                if( $timeOut < time() - filectime( $path ) )
+                if( $timeOut < time() - $ctime )
                 {
                     unlink( $path );
+                    $this->readMCache[$key] = false;
                     return false;
                 }
             }
@@ -166,9 +173,11 @@ class Ayoola_File_Storage extends Ayoola_File
                 $data = json_decode( $content, true );
             }
     //        var_export( $data );
+            $this->readMCache[$key] = $data;
             return $data;
 			
 		}
+        $this->readMCache[$key] = false;
         return false;
     } 
 	

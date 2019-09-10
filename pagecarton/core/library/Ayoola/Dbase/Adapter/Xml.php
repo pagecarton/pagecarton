@@ -395,26 +395,22 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
      */
     public function getSupplementaryFilenames( $filePath = null )
     {
+        if( null !== @$this->supplementaryFilenames[$filePath] )
+        {
+            return $this->supplementaryFilenames[$filePath];
+        }
 		try
 		{
- 		//	LOOK FOR SUPPLEMENTARY FILES FOR LARGE RECORDS
-    //    var_export( $this->getGlobalFilenames() );
-     //   if( basename( $this->getMySupplementaryDirectory( $filePath ) ) === 'data' )
-        {
-      //       PageCarton_Widget::v( $filePath );
-     //       PageCarton_Widget::v( Ayoola_Doc::getDirectoriesRecursive( $this->getMySupplementaryDirectory( $filePath ) ) );
-   //       PageCarton_Widget::v( Ayoola_Doc::getFilesRecursive( $this->getMySupplementaryDirectory( $filePath ) ) );
-        }
-	//	  if( $files = Ayoola_Doc::getFilesRecursive( $this->getMySupplementaryDirectory( $filePath ), array( 'key_function' => 'filectime' ) ) )
-		  if( $files = Ayoola_Doc::getFilesRecursive( $this->getMySupplementaryDirectory( $filePath ) ) )
-      {
-    //    var_export( $files );
-      }
+            if( $files = Ayoola_Doc::getFilesRecursive( $this->getMySupplementaryDirectory( $filePath ) ) )
+            {
+
+            }
 		}
 		catch( Exception $e )
 		{
-		//	var_export( $e->getMessage() );
-		}
+
+        }
+        $this->supplementaryFilenames[$filePath] = @$files;
 		return @$files ? : array();
 	}
 
@@ -432,15 +428,13 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	//	var_export( $globalFilename );
 		if( $paths = Ayoola_Loader::getValidIncludePaths( $globalFilename, array( 'no_availability_check' => 1 ) ) )
 		{
-      $supplementaryFiles = array();
-      $fakePaths = Ayoola_Loader::getValidIncludePaths( $globalFilename, array( 'no_availability_check' => 1 ) );
-   //   var_export( $fakePaths );
-      foreach( $fakePaths as $eachPath )
-      {
-          $supplementaryFiles = ( $supplementaryFiles ? : array() ) + ( $this->getSupplementaryFilenames( $eachPath ) ? : array() );
-      }
-   //   var_export( $paths );
-	//		$this->_globalFilenames = array_merge( $paths, $this->getSupplementaryFilenames() );
+            $supplementaryFiles = array();
+            $fakePaths = Ayoola_Loader::getValidIncludePaths( $globalFilename, array( 'no_availability_check' => 1 ) );
+            //   var_export( $fakePaths );
+            foreach( $fakePaths as $eachPath )
+            {
+                $supplementaryFiles = ( $supplementaryFiles ? : array() ) + ( $this->getSupplementaryFilenames( $eachPath ) ? : array() );
+            }
 			$this->_globalFilenames = array_merge( $paths, $supplementaryFiles );
 		}
 
@@ -717,6 +711,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	{
 		$arguments = func_get_args();
 		//	PageCarton_Widget::v( $this );
+	//	PageCarton_Widget::v( $arguments );
 		$keyword = array_shift( $arguments );
 		$keyword = ucfirst( strtolower( $keyword ) );
 

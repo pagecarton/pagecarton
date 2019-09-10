@@ -344,20 +344,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$postListId = 'pc_post_list_' . md5( serialize( $_GET ) . 'x-----==-.---' . serialize( $this->getParameter() ) );
 		}
-	//	var_export( $_GET );
-//		var_export( $postListId );
-//		var_export( $postListId );
-		//			self::v( $postListId  );   
 
 		$storage = self::getObjectStorage( array( 'id' => $postListId, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
-	//	$storage = new Ayoola_Storage( array( 'id' => $postListId, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
 		$storedValues = $storage->retrieve();
-//		self::v( $storage  );   
-
-//		var_export( $storedValues );
 		if( ! empty( $storedValues['parameter'] ) && ! empty( $_GET['pc_post_list_autoload'] ) )
 		{	
-		//	var_export( $storedValues['parameter'] );
 
 			//	Bring out stored parameters
 			$this->setParameter( $storedValues['parameter'] );
@@ -366,8 +357,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		
 		//	Using menu template?
 		//	autoload new posts
-//		self::v( $postListId );
-//		self::v( $storedValues );
 		$values = array();
 
 		if( ! empty( $storedValues['values'] )  )
@@ -376,48 +365,30 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 
 	//	if( ! $storedValues || ! $this->getParameter( 'cache_post_list' ) )
-		if( ! $this->getParameter( 'cache_post_list' ) )
+		if( ! $values || ! $this->getParameter( 'cache_post_list' ) )
+	//	if( ! $this->getParameter( 'cache_post_list' ) )
 		{   
-		//	var_export( $values );    
-	//		self::v( $this->getParameter() );       
-	//		self::v( $this->getParameter() );       
-		//	self::v( $postListId );
 
 			//	This ensures that data altered by query strings is uploaded when autoloaded
 			if( empty( $_REQUEST['pc_post_list_autoload'] ) || empty( $_REQUEST['pc_post_list_id'] )  )
 			{
 				$values = $this->getDbData();
 			}
-		//	self::v( $values );
 			
-		//	var_export( $this->getParameter( 'sort_column' ) );
 			if( $this->getParameter( 'sort_column' ) )
 			{   
-				
-		//	var_export( $values );
-		//	var_export( $this->getParameter( 'sort_column' ) );
 				$values = self::sortMultiDimensionalArray( $values, $this->getParameter( 'sort_column' ) );
-		//	self::v( $this->getParameter( 'sort_column' ) );
-		//	self::v( $values );
 			}
 			else
 			{   
 				
-		//	var_export( $values );
-		//	var_export( $this->getParameter( 'sort_column' ) );
 				if( $values )
 				{
 					$sortColumn = @$values[0]['profile_creation_date'] ? 'profile_creation_date' : 'article_creation_date';
-			//		var_export( $sortColumn );
 					$values = self::sortMultiDimensionalArray( $values, $sortColumn );
 					$values = array_reverse( $values );
 				}
 			}			
-	//
-	
-	//		var_export( $values );
-	//		self::v( $values );
-			
 			//	sort
 	//		if( $this->getParameter( 'sort_column' ) )
 			{ 

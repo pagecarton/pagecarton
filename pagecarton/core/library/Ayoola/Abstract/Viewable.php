@@ -370,6 +370,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	protected function initOnce()
 	{
+
 		if( ! $this->initiated && ! $this->getParameter( 'no_init' ) ) //	compatibility
 		{
 	//		var_export( $this->initiated );
