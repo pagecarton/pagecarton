@@ -720,12 +720,20 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			
 			//	We are working on two files
 			$sectionContent['template'] = null;
-			$sectionContent['include'] = null;
+            $sectionContent['include'] = null;
+            //    method_exists(  )
             if( stripos( $page['url'], '/layout/' ) === 0 )
             {
                 $siteObjectName = '_sitePageWidget_' . $section;
                 $sectionContent['include'] .= "
-                \${$siteObjectName} = " . __CLASS__ . "::getSiteWideWidgets( '" . $section . "' );
+                if( method_exists( '" . __CLASS__ . "', 'getSiteWideWidgets' ) )
+                {
+                    \${$siteObjectName} = " . __CLASS__ . "::getSiteWideWidgets( '" . $section . "' );
+                }
+                else
+                {
+                    \${$siteObjectName} = array();
+                }
                 ";
                 $sectionContent['template'] .= "
                 foreach( \${$siteObjectName} as \$eachSitePageWidget )

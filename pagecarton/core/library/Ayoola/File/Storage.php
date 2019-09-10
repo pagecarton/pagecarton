@@ -146,7 +146,7 @@ class Ayoola_File_Storage extends Ayoola_File
     {
 		$path = $this->getFile()->getPath();
         $timeOut = intval( $this->timeOut );
-        $ctime = filectime( $path ) . filemtime( $path );
+        @$ctime = filectime( $path ) . filemtime( $path );
         $key = $path . $ctime;
         if( null !== @$this->readMCache[$key] )
         {
