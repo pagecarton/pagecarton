@@ -187,8 +187,12 @@ class Application_Info extends Ayoola_Abstract_Playable
 		
 		foreach( $options as $key => $value )
 		{
-			$row = $xml->createElement( 'tr' );
-			$row  = $table->appendChild( $row );
+            $row = $xml->createElement( 'tr' );
+            if( ! $row  = $table->appendChild( $row ) )
+            {
+                continue;
+            }
+			
 			$data = $xml->createElement( 'th', $key );
 		//	$data->setAttribute( 'colspan', 1 );
 			$data  = $row->appendChild( $data );
