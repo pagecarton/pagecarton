@@ -147,7 +147,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         preg_match_all( '|\{-(.*)-\}|', $content, $matches );
         #   '{-Lorem Ipsum dolor-}'
       //  self::v( $content );
-        self::v( $matches );
+        //  self::v( $matches );
         $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates() ? : static::$_defaultTexts;
 
         if( $matches[0] )
