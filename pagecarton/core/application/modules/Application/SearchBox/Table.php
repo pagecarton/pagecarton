@@ -25,7 +25,14 @@ class Application_SearchBox_Table extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.0';  
+    protected $_tableVersion = '0.0';   
+
+    /**
+     * Time to hold the cache before refreshing
+     *
+     * @param int
+     */
+    public static $cacheTimeOut = 86400;
 
     /**
      * Table data types and declaration

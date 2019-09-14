@@ -35,6 +35,13 @@ class Application_Log_View_Access_Log extends Ayoola_Dbase_Table_Abstract_Xml
      */
     protected $_tableVersion = '0.04';
 
+    /**
+     * Time to hold the cache before refreshing
+     *
+     * @param int
+     */
+    public static $cacheTimeOut = 86400;
+
 	protected $_dataTypes = array
 	( 
 		'uri' => 'INPUTTEXT',

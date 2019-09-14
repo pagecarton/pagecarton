@@ -400,7 +400,7 @@ class Ayoola_Application
 			if( ! $data['domain_settings'] )
 			{
 				//	look for domain in the users table
-				if( $userDomainInfo = Application_Domain_UserDomain::getInstance()->selectOne( null, array( 'domain_name' => $where['domain_name'] ) ) )
+				if( $userDomainInfo = Application_Domain_UserDomain::getInstance()->selectOne( null, array( 'domain_name' => array( $where['domain_name'], @$_SERVER['HTTP_HOST'] ) ) ) )
 				{
 					//	link it to the profile
 					$subDomain = $userDomainInfo['profile_url'];
@@ -411,9 +411,13 @@ class Ayoola_Application
 				//	var_export( $userDomainInfo );
 				//	exit();
 				}
-			}
-		//	PageCarton_Widget::v( $data['domain_settings'] );
-		//	exit();
+            }
+        //    if( @$where['domain_name'] === 'xxx.com.ng' )
+            {
+            //    PageCarton_Widget::v( $where );
+            //       PageCarton_Widget::v( $_SERVER['HTTP_HOST'] );
+            //    exit();
+            }
 
 			if( ! @$subDomain && @strlen( $data['domain_settings']['enforced_destination'] ) > 3 && empty( $domainSettings['no_redirect'] ) )
 			{
@@ -595,30 +599,22 @@ class Ayoola_Application
 					//	var_export( $subDomainInfo );
 					if( @$subDomainInfo['sub_domain'] || @$subDomainInfo['domain_type'] === 'sub_domain' )
 					{
-				//		var_export( $data['domain_settings'] );
 						$data['domain_settings'] = $subDomainInfo;
-					//	var_export( $subDomainInfo );
-					//	primaryDomainInfo
-					//	$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
 						$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $primaryDomainInfo['domain_name'];
-					//	$data['domain_settings']['domain_name'] = $subDomain . '.' . $tempWhere['domain_name'];
 						$data['domain_settings']['domain_name'] = $subDomain . '.' . $primaryDomainInfo['domain_name'];
 
 						$subDomainDir = $subDomainInfo['application_dir'] ? : $subDomainInfo['domain_name'];
 						$subDomainDir = Application_Domain_Abstract::getSubDomainDirectory( $subDomainDir );
-					//	var_export( $subDomainDir );
 
 						$data['domain_settings'][APPLICATION_DIR] = str_replace( '/', DS, $subDomainDir );
 						$data['domain_settings']['dynamic_domain'] = true;
 						$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
 						@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'extensions';
-					//	$storage->store( $data );
-					//	setcookie( 'SUB_DIRECTORY', $subDomainInfo['domain_name'], time() + 9999999, '/' );
 					}
 					elseif( $data['domain_settings']['*'] )
 					{
-				//		setcookie( 'SUB_DIRECTORY', false, time() - 9999999, '/', $domainName );				header( "HTTP/1.0 404 Not Found" );
 
+                        
 					}
 					else
 					{
@@ -634,14 +630,6 @@ class Ayoola_Application
 					{
 						$userInfo = Application_Profile_Abstract::getProfileInfo( $subDomain );
 					}
-	//				var_export( $subDomain );
-	//				exit();
-				//	if( $subDomain == 'pagecartonad' )
-					{
-				//		var_export( self::$_includePaths );
-				//		var_export( $userInfo );
-					//	exit( var_export( $userInfo ) );
-					}
 					if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) && $userInfo  )
 					{
 						//	we have a user subdomain
@@ -650,9 +638,6 @@ class Ayoola_Application
 						if( $userDomainInfo = Application_Domain_UserDomain::getInstance()->selectOne( null, array( 'profile_url' => strtolower( $subDomain ) ) ) )
 						{
 							//	link it to the profile
-						//	var_export( 'http://' . $userDomainInfo['domain_name'] . '/pc_check.txt' );
-						//	var_export( PageCarton_Widget::fetchLink( 'http://' . $userDomainInfo['domain_name'] . '/pc_check.txt' ) );
-						//	exit();
 							if( empty( $userDomain ) && empty( $_REQUEST['pc_clean_url_check'] ) && PageCarton_Widget::fetchLink( 'http://' . $userDomainInfo['domain_name'] . '/pc_check.txt?pc_clean_url_check=1' ) )
 							{
 								header( 'Location: ' . $protocol . '://' . $userDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );

@@ -159,7 +159,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                 $previousData['dummy_search'][] = $each;
                 $previousData['dummy_replace'][] = trim( $each, '{-}' );
             }
-        //    Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
+            Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
 
         }
         //  to be executed within the widget class

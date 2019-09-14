@@ -120,7 +120,7 @@ class Application_Upgrade_Check extends PageCarton_Widget
                         continue;
                     }
                     $url = 'https://themes.pagecarton.org/tools/classplayer/get/name/Application_Article_View?article_url=' . $layout['article_url'] . '&pc_widget_output_method=JSON';
-                    $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
+                    $feed = self::fetchLink( $url, array( 'time_out' => 2, 'connect_time_out' => 2, ) );
                     $layoutInfo = json_decode( $feed, true );
                     $version = count( $layoutInfo['article_editor_username'] );
                     $lastEdited = $layoutInfo['article_modified_date'];
@@ -139,7 +139,7 @@ class Application_Upgrade_Check extends PageCarton_Widget
                     }
                 //    var_export( $plugin );
                     $url = 'https://plugins.pagecarton.org/tools/classplayer/get/name/Application_Article_View?article_url=' . $plugin['article_url'] . '&pc_widget_output_method=JSON&y=l1y';
-                    $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
+                    $feed = self::fetchLink( $url, array( 'time_out' => 2, 'connect_time_out' => 2, ) );
                     $pluginInfo = json_decode( $feed, true );
                 //    var_export( $url );
                 //    var_export( $feed );
@@ -152,9 +152,6 @@ class Application_Upgrade_Check extends PageCarton_Widget
                     }
                 }
             }
-            
-
-
              // end of widget process
           
 		}  
