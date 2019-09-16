@@ -826,7 +826,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	//	var_export( $values );
 		if( empty( $_GET['pc_post_list_autoload'] ) && ( $this->getParameter( 'pagination' ) || $this->getParameter( 'pc_post_list_autoload' ) ) )
 		{
-			Application_Javascript::addFile( '/js/objects/infinite-scroll.js' );	
+		//	Application_Javascript::addFile( '/js/objects/infinite-scroll.js' );	
 			Application_Javascript::addCode
 			( 
 				'
@@ -871,7 +871,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				} 
 					
 				// setup infinite scroll
-				infiniteScroll(options);		
+			//	infiniteScroll(options);		
 				' 
 			);	
 		}

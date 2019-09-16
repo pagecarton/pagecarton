@@ -857,7 +857,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		elseif( intval( $offset ) > 0 && $offsetDefined  )
 		{
-		//	var_export( $offset );
 			//	Seeking a chunk that isn't available'
 			$values = array();
 		}
