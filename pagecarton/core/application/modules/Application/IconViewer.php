@@ -60,6 +60,10 @@ class Application_IconViewer extends PageCarton_Widget
         //          exit();
         //          return false;
                 }
+                elseif( Ayoola_Loader::checkFile( '/documents/__' . $url ) )
+                {
+                    $url = '/__' . $url;
+                } 
                 //  Code that runs the widget goes here...
                 $realExt = explode( '.', $url );
                 $realExt = array_pop( $realExt );

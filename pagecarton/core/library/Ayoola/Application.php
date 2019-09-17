@@ -1029,12 +1029,16 @@ class Ayoola_Application
 					$expires = 60 * 60 * 24 * 14; // 14 days
 					require_once 'Ayoola/Doc.php';
 			//		var_export( $uri );
-					$fn = DOCUMENTS_DIR . DS . $uri;
+					$fn = DOCUMENTS_DIR . $uri;
 				//	var_export( $fn );
 				//	exit();
-					if( ! $fn = Ayoola_Loader::checkFile( $fn, array( 'prioritize_my_copy' => true ) ) )
+					if( $fn = Ayoola_Loader::checkFile( $fn, array( 'prioritize_my_copy' => true ) ) )
 					{
-					//	throw new Exception( 'File not found' );
+                        $changedFile = DOCUMENTS_DIR . DS . '__' . $uri;
+                        if( $changedFile = Ayoola_Loader::checkFile( $changedFile, array( 'prioritize_my_copy' => true ) ) )
+                        {
+                            $fn = $changedFile;
+                        }
 					}
 
 	//	var_export( $fn );
