@@ -5,544 +5,605 @@
 * LICENSE
 *
 * @category PageCarton
-* @package /pc-admin
-* @generated Ayoola_Page_Editor_Layout
-* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
-* @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Friday 15th of February 2019 09:14:29 AM	ayoola@ayoo.la $ 
-*/
-//	Template Content ?>
-
-						<?php 
-						//		var_export( array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) );
-					//			var_export( __FILE__ );
-					//			var_export( CACHE_DIR );
-					//			var_export( stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) );
-								//	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
-								//	THEY WON'T HAVE CORRECT APPDIR
-//								var_export( stripos( __FILE__,CACHE_DIR ) );
-			//					var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );
-			//					var_export( Ayoola_Application::getDomainSettings() );
-							if
-							( 
-
-								$x_1550222069 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'novus', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
-							)
-							{
-							//	var_export( $x_1550222069 );
-							//	echo file_get_contents( $x_1550222069 );
-								foreach( $x_1550222069 as $each )
-								{	
-									include_once $each;
-								}
-							}
-		//					var_export( $x_1550222069 );
-						?>
-						 <?php
-/**
-* PageCarton Page Generator
-*
-* LICENSE
-*
-* @category PageCarton
 * @package /layout/novus/template
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Wednesday 26th of December 2018 10:13:02 AM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Wednesday 26th of December 2018 10:13:02 AM	ayoola@ayoo.la $
 */
 //	Template Content ?>
 <!DOCTYPE HTML>
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
---><html>
+<html>
 <head>
 <?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script><!-- Bootstrap Core CSS --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/bootstrap.css" rel="stylesheet" type="text/css">
-<!-- Custom CSS --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/style.css" rel="stylesheet" type="text/css">
-<!-- font CSS --><!-- font-awesome icons --><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/font-awesome.css" rel="stylesheet">
-<!-- //font-awesome icons --><!-- js--><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/jquery-1.11.1.min.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/modernizr.custom.js"></script><!--webfonts--><link href="//fonts.googleapis.com/css?family=Roboto+Condensed:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
-<!--//webfonts--><!--animate--><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/animate.css" rel="stylesheet" type="text/css" media="all">
-<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/wow.min.js"></script><script>
-		 new WOW().init();
-	</script><!--//end-animate--><!-- chart --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/Chart.js"></script><!-- //chart --><!--Calender--><link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/clndr.css" type="text/css">
-<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/underscore-min.js" type="text/javascript"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/moment-2.2.1.js" type="text/javascript"></script><!--<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/clndr.js" type="text/javascript"></script>  
-<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/site.js" type="text/javascript"></script>--><!--End Calender--><!-- Metis Menu --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/metisMenu.min.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/custom.js"></script><link href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/css/custom.css" rel="stylesheet">
-<!--//Metis Menu -->
-<style>
-.logo a h1 {
-    color: transparent;
-    background-image: url("<?php echo Ayoola_Application::getUrlPrefix(); ?>/img/logo.png");
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-		.logo {
-			background: #4d4d4d;
-			float: unset;
-		}
-.cbp-spmenu-vertical {
-    background-color: #333;
-}
 
-		.header-left {
-			float: unset;
-			width: unset;
-		}
-@media(max-width:640px){
-.cbp-spmenu-push div#page-wrapper {
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+<link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/adminlte/dist/bootstrap/css/bootstrap.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/adminlte/dist/font-awesome/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/adminlte/dist/Ionicons/css/ionicons.min.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/adminlte/dist/css/AdminLTE.min.css">
+<!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+			page. However, you can choose any other skin. Make sure you
+			apply the skin class to the body tag so the changes take effect. -->
+<link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/adminlte/dist/css/skins/skin-blue.min.css">
 
-    padding: 5em 1em 2em;
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 
-}
-}
-</style>
+
 </head>
-<body class="cbp-spmenu-push" data-pc-section-name="body">
+<body class="hold-transition skin-blue sidebar-mini" data-pc-section-name="body">
+
 <?php include_once( LAYOUT_PATH . DS . 'header' . TPL ) ?>
-	<div class="main-content" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
-		<!--left-fixed -navigation-->
-		<div class=" sidebar" role="navigation" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
-            <div class="navbar-collapse"> 
-				<nav data-pc-menu-ignore="1" class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1"><ul class="nav" id="side-menu">
-<li>   
-							<a href="#"><i class="fa fa-cogs nav_icon">&nbsp;</i>Settings <span class="fa arrow">&nbsp;</span></a>
-							<ul class="nav nav-second-level collapse">
-<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Settings_SettingsName_List/">Options</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Access_AuthLevel_List/">Privileges</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Object_List/">Widgets</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/PageCarton_MultiSite_List/">Multi-site Manager</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Backup_List/">Back up &amp; Restore</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Log/">Logs</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Cache_Clear/">Clear Cache</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Upgrade/">Upgrades</a>
-								</li>
-							</ul>
-<!-- /nav-second-level -->
-</li>
+
+<?php
+	// user full data
+	$userObj = new Ayoola_Access;
+	$userDbObj = new Ayoola_Access_LocalUser;
+	$parameters['email'] = $userObj->getUserInfo()['email'];
+	$userInfo = $userDbObj->selectOne(null , $parameters );
+
+	// user access_level name
+	$accessLevelObj = new Ayoola_Access_authlevel;
+	unset($parameters);
+	$parameters['id'] = $userInfo['access_level'];
+	$userAccessLevel = $accessLevelObj->selectOne( null , $parameters );
+	// var_export( $userInfo );
+
+	// widget function
+	function widget( array $data = null ){
+		$icon 			= $data['icon'] ? : "desktop";
+		$size 			= $data['size'] ? : 3;
+		$title 			= $data['title'] ? : "";
+		$counter		= $data['counter'] ? : 0;
+		$color 			= $data['color'] ? : "default";
+		$footerLink = $data['footerLink'] ? : "#";
+		$footerText = $data['footerText'] ? : "";
+		$template = "<div class='col-lg-$size col-xs-6'>
+		      <!-- small box -->
+		      <div class='small-box bg-$color'>
+		        <div class='inner'>
+		          <h3>$counter</h3>
+
+		          <p>$title</p>
+		        </div>
+		        <div class='icon'>
+		          <i class='fa fa-$icon'></i>
+		        </div>
+		        <a href='$footerLink' class='small-box-footer'>$footerText <i class='-circle-right'></i></a>
+		      </div>
+		    </div>";
+			return $template;
+	}
+?>
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>PC</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>PAGECARTON</b></span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <img  src="<?php echo $userObj->getUserInfo()['display_picture']; ?>" class="user-image" alt="User Image">
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <span class="hidden-xs"><?php echo $userObj->getUserInfo()['username']; ?></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <li class="user-header">
+                <img  src="<?php echo $userObj->getUserInfo()['display_picture']; ?>" class="img-circle" alt="<?php echo $userObj->getUserInfo()['username']; ?>">
+                <p>
+                <?php echo $userObj->getUserInfo()['username']; ?>
+                  <small>Member since <?php echo strftime( '%D %I:%M:%S %p' , $userInfo['creation_time'] ) ?>  </small>
+                </p>
+              </li>
+
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li>
+            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="<?php echo $userObj->getUserInfo()['display_picture']; ?>"  ="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p><?php echo $userObj->getUserInfo()['username']; ?></p>
+					<p><?php echo strtoupper($userAccessLevel['auth_name']) ?></p>
+        </div>
+      </div>
+
+      <!-- search form (Optional) -->
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+              </button>
+            </span>
+        </div>
+      </form>
+      <!-- /.search form -->
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="header">Navigation</li>
+				<li class="active">
+					<a target="_blank" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/"><i class="fa fa-dashboard" ></i> My Dashboard  </a>
+				</li>
+				<li class="treeview">
+					<a href="#"><i class="fa fa-user-circle"></i> <span>My Account</span>
+						<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+					</a>
+					<ul class="treeview-menu">
 						<li>
-							<a href="#"><i class="fa fa-file-text-o nav_icon">&nbsp;</i>Appearance <span class="fa arrow">&nbsp;</span></a>
-							<ul class="nav nav-second-level collapse">
-<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_List/">Pages</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_Layout_List/">Themes</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_Menu_List/">Navigation</a>
-								</li>
-								<li>
-									<a onclick="ayoola.spotLight.showLinkInIFrame( '<?php echo Ayoola_Application::getUrlPrefix(); ?>/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/img/logo.png' );" href="javascript:">Logo</a>
-								</li>
-								<li>
-									<a onclick="ayoola.spotLight.showLinkInIFrame( '<?php echo Ayoola_Application::getUrlPrefix(); ?>/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/favicon.ico' );" href="javascript:">Favicon</a>
-								</li>
-							</ul>
-<!-- //nav-second-level -->
-</li>
-						<li class="">
-							<a href="#"><i class="fa fa-users nav_icon">&nbsp;</i>Users   <span class="fa arrow">&nbsp;</span></a>
-							<ul class="nav nav-second-level collapse">
-<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_User_List/">User Accounts</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_XmlTableViewer/table_name/Application_User_UserEmail_MailingList/">Mailing List</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_User_NotificationMessage_List/">Bulk Mails</a>
-								</li>
-							</ul>
-<!-- /nav-second-level -->
-</li>
+							<a target="_blank" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/account/">My Account </a>
+						</li>
+
 						<li>
-							<a href="#"><i class="fa fa-circle nav_icon">&nbsp;</i>Plugins <span class="fa arrow">&nbsp;</span></a>
-							<ul class="nav nav-second-level collapse">
-<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Extension_Import_List/">Installed Plugins</a>
-								</li>
-								<li>
-									<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Extension_List/">My Plugins</a>
-								</li>
-							</ul>
-<!-- /nav-second-level -->
-</li>
+							<a onclick="ayoola.spotLight.showLinkInIFrame( '<?php echo Ayoola_Application::getUrlPrefix(); ?>/tools/classplayer/get/object_name/Application_User_Help_ChangePassword' );" href="javascript:" > Change Password</a>
+						</li>
+
+
 						<li>
-							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Form_List/"><i class="fa fa-check-square-o nav_icon">&nbsp;</i>Forms </a>
+							<a onClick="return confirm('<?php echo $userObj->getUserInfo()['username'];  ?> are you sure you want to log out of your account')" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/accounts/signout/">Signout </a>
+						</li>
+
+					</ul>
+
+				</li>
+
+				<li class="treeview">
+					<a href="#"><i class="fa fa-users"></i> <span>Application Users</span> <span class="label label-danger"> <?php $userObj = new Ayoola_Access_LocalUser; echo count( $userObj->select() ); ?>  </span>
+						<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_User_List/">User Accounts</a>
 						</li>
 						<li>
-							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Article_List/"><i class="fa fa-th-large nav_icon">&nbsp;</i>Posts </a>
-						</li>						
-						
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_XmlTableViewer/table_name/Application_User_UserEmail_MailingList/">Mailing List</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_User_NotificationMessage_List/">Bulk Mails</a>
+						</li>
 					</ul>
-<!-- //sidebar-collapse --></nav>
-</div>
-		</div>
-		<!--left-fixed -navigation-->
-		<!-- header-starts -->
-		<div class="sticky-header header-section " data-pc-section-autonamed="2" data-pc-section-name="pc-body-2">
-			<div class="header-left">
-				<!--toggle button start-->
-				<button id="showLeftPush"><i class="fa fa-bars">&nbsp;</i></button>
-				<!--toggle button end-->
-				<!--logo -->
-				<div class="logo">
-					<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin">
-						<h1>PageCarton</h1>
-						<span>PageCarton Admin Panel</span>
-					</a>				
-				</div>
-				<!--//logo-->
-				<!--search-box-
-				<div class="search-box">
-					<form action="<?php echo Ayoola_Application::getUrlPrefix(); ?>/search/" class="input">
-						<input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
-						<label class="input__label" for="input-31">
-							<svg class="graphic" width="100%" height="100%" viewBox="0 0 404 77" preserveAspectRatio="none">
-								<path d="m0,0l404,0l0,77l-404,0l0,-77z"/>    
-							</svg>
-						</label>
-					</form>
-				</div><!--//end-search-box-->
-				<div class="clearfix"> </div>
-			</div>
-			<div class="clearfix"> </div>	
-		</div>
-		<!-- //header-ends -->
-		<!-- main content start-->
-		<div id="page-wrapper" data-pc-section-name="page-wrapper">
-			<div class="main-page">
-				<section><?php
-//oneness Begins Here
-
-echo ( ! empty( $_dac83995f15adeba352e9940462f4228 ) &&  is_object( $_dac83995f15adeba352e9940462f4228 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_dac83995f15adeba352e9940462f4228->view(), '' ) : null );
-
-//oneness Ends Here
-?><?php
-//oneness Begins Here
-
-echo ( ! empty( $_183a467e23cc670297e6c5bd0c5c0829 ) &&  is_object( $_183a467e23cc670297e6c5bd0c5c0829 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_183a467e23cc670297e6c5bd0c5c0829->view(), 'well' ) : null );
-
-echo ( ! empty( $_dd6c65cbd2cd676c37a9abfde6efd317 ) &&  is_object( $_dd6c65cbd2cd676c37a9abfde6efd317 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_dd6c65cbd2cd676c37a9abfde6efd317->view(), '' ) : null );
-
-							if( Ayoola_Page::hasPriviledge( array (
-  0 => '99',
-), array( 'strict' => true ) ) && ! empty( $_f02b87ccc33a26259b03001b75547ac7 ) && is_object( $_f02b87ccc33a26259b03001b75547ac7 ) )
-							{
-								echo $_f02b87ccc33a26259b03001b75547ac7->view();
-							}
-							
-echo ( ! empty( $_812e2aa44bc048b65f0488edd3206e29 ) &&  is_object( $_812e2aa44bc048b65f0488edd3206e29 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_812e2aa44bc048b65f0488edd3206e29->view(), 'white-well' ) : null );
-
-echo ( ! empty( $_bf2a002fc6578717a36bf0f78ea87160 ) &&  is_object( $_bf2a002fc6578717a36bf0f78ea87160 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_bf2a002fc6578717a36bf0f78ea87160->view(), '' ) : null );
-
-echo ( ! empty( $_ec42b8d03cb407c2a48fb9be1a94f821 ) &&  is_object( $_ec42b8d03cb407c2a48fb9be1a94f821 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_ec42b8d03cb407c2a48fb9be1a94f821->view(), 'white-well' ) : null );
-
-echo ( ! empty( $_4e8fd3c1ce6442243ee625dc127bf58a ) &&  is_object( $_4e8fd3c1ce6442243ee625dc127bf58a ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_4e8fd3c1ce6442243ee625dc127bf58a->view(), '' ) : null );
-
-//oneness Ends Here
-?><section data-pc-all-sections="1">	
-									<div class="">
-										<div class="row">
-											<div class="pc_page_layout_grid col-md-12 12u">
-												<?php
-//middlebar Begins Here
-
-//middlebar Ends Here
-?><?php
-//middlebar Begins Here
-
-//middlebar Ends Here
-?>
-										   </div>
-										</div> 
-										<div class="row">
-											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//twosome1 Begins Here
-
-//twosome1 Ends Here
-?><?php
-//twosome1 Begins Here
-
-//twosome1 Ends Here
-?>
-											</div>
-											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//twosome2 Begins Here
-
-//twosome2 Ends Here
-?><?php
-//twosome2 Begins Here
-
-//twosome2 Ends Here
-?>
-											</div> 
-										</div> 
-										<div class="row">
-											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)"> 
-												<?php
-//threesome1 Begins Here
-
-//threesome1 Ends Here
-?><?php
-//threesome1 Begins Here
-
-//threesome1 Ends Here
-?>
-										   </div>
-											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//threesome2 Begins Here
-
-//threesome2 Ends Here
-?><?php
-//threesome2 Begins Here
-
-//threesome2 Ends Here
-?>
-											</div> 
-											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//threesome3 Begins Here
-
-//threesome3 Ends Here
-?><?php
-//threesome3 Begins Here
-
-//threesome3 Ends Here
-?>
-											</div> 
-										</div> 
-										<div class="row">
-											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//foursome1 Begins Here
-
-//foursome1 Ends Here
-?><?php
-//foursome1 Begins Here
-
-//foursome1 Ends Here
-?>
-										   </div>
-											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//foursome2 Begins Here
-
-//foursome2 Ends Here
-?><?php
-//foursome2 Begins Here
-
-//foursome2 Ends Here
-?>
-											</div> 
-											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//foursome3 Begins Here
-
-//foursome3 Ends Here
-?><?php
-//foursome3 Begins Here
-
-//foursome3 Ends Here
-?>
-											</div> 
-											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
-												<?php
-//foursome4 Begins Here
-
-//foursome4 Ends Here
-?><?php
-//foursome4 Begins Here
-
-//foursome4 Ends Here
-?>
-											</div> 
-										</div> 
-										<div class="row">
-											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//leftbar Begins Here
-
-//leftbar Ends Here
-?><?php
-//leftbar Begins Here
-
-//leftbar Ends Here
-?>
-										   </div>
-											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//leftbarright Begins Here
-
-//leftbarright Ends Here
-?><?php
-//leftbarright Begins Here
-
-//leftbarright Ends Here
-?>
-											</div> 
-										</div> 
-										<div class="row">
-											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//rightbarleft Begins Here
-
-//rightbarleft Ends Here
-?><?php
-//rightbarleft Begins Here
-
-//rightbarleft Ends Here
-?>
-											</div> 
-											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
-												<?php
-//rightbar Begins Here
-
-//rightbar Ends Here
-?><?php
-//rightbar Begins Here
-
-//rightbar Ends Here
-?>
-											</div>   
-										</div> 
-									</div> 
-								</section><?php
-//lastoneness Begins Here
-
-//lastoneness Ends Here
-?><?php
-//lastoneness Begins Here
-
-//lastoneness Ends Here
-?></section>
-<?php
-//row_one Begins Here
-
-//row_one Ends Here
-?><?php
-//row_one Begins Here
-
-//row_one Ends Here
-?>
-
-
-
-<?php
-//charts Begins Here
-
-//charts Ends Here
-?><?php
-//charts Begins Here
-
-//charts Ends Here
-?>
-
-
-
-<?php
-//three Begins Here
-
-//three Ends Here
-?><?php
-//three Begins Here
-
-//three Ends Here
-?>
-
-
-
-<?php
-//four Begins Here
-
-//four Ends Here
-?><?php
-//four Begins Here
-
-//four Ends Here
-?>
-
-
-
-<?php
-//five Begins Here
-
-//five Ends Here
-?><?php
-//five Begins Here
-
-//five Ends Here
-?>
-
-
-<div class="clearfix"> </div>
-			</div>
-		</div>
-		<!--footer-->
-			<div class="main-page" data-pc-section-autonamed="4" data-pc-section-name="pc-body-4">
-		<div class="footer">
-		
-<?php
-//footer Begins Here
-
-//footer Ends Here
-?><?php
-//footer Begins Here
-
-echo ( ! empty( $_8f94b54f70cde9623d9cc279007489dd ) &&  is_object( $_8f94b54f70cde9623d9cc279007489dd ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_8f94b54f70cde9623d9cc279007489dd->view(), '' ) : null );
-
-//footer Ends Here
-?>
-
-
-
-</div>
-		</div>
-        <!--//footer-->
-	</div>
-	<!-- Classie -->
-		<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/classie.js"></script><script>
-			var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-				showLeftPush = document.getElementById( 'showLeftPush' ),
-				body = document.body;
-				
-			showLeftPush.onclick = function() {
-				classie.toggle( this, 'active' );
-				classie.toggle( body, 'cbp-spmenu-push-toright' );
-				classie.toggle( menuLeft, 'cbp-spmenu-open' );
-				disableOther( 'showLeftPush' );
-			};
-			
-
-			function disableOther( button ) {
-				if( button !== 'showLeftPush' ) {
-					classie.toggle( showLeftPush, 'disabled' );
+					<!-- /nav-second-level -->
+				</li>
+				<li class="treeview">
+					<a href="#"><i class="fa fa-cogs"></i> <span>Settings</span>
+						<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Settings_SettingsName_List/">Options</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Access_AuthLevel_List/">Privileges</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Object_List/">Widgets</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/PageCarton_MultiSite_List/">Multi-site Manager</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Backup_List/">Back up &amp; Restore</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Log/">Logs</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Cache_Clear/">Clear Cache</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Upgrade/">Upgrades</a>
+						</li>
+					</ul>
+				<!-- /nav-second-level -->
+				</li>
+
+				<li class="treeview">
+					<a href="#"><i class="fa fa-cogs"></i> <span>Application Modules</span>
+						<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/PageCarton_Cron_List/"> Application Crons</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/PageCarton_MultiSite_List/">Multi-site Manager</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_PhpInfo/">Application Server Info</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Personalization/">Application Personalizer</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Doc_Browser/">Application File Manager</a>
+						</li>
+					</ul>
+				</li>
+
+				<li class="treeview">
+					<a href="#"><i class="fa fa-files-o"></i> <span>Plugs & Widgets</span>
+						<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Extension_Import_List/">Installed Plugins</a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Extension_List/">My Plugins</a>
+						</li>
+					</ul>
+				<!-- /nav-second-level -->
+				</li>
+				<li>
+					<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Form_List/"><i class="fa fa-check-square-o nav_icon">&nbsp;</i>Forms </a>
+				</li>
+				<li>
+					<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Article_List/"><i class="fa fa-edit">&nbsp;</i>Posts  <span class="label label-success"> <?php $articleObj = new Application_Article_Table; echo count( $articleObj->select() ); ?>  </span></a>
+				</li>
+
+				<li>
+					<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Application_Subscription_Checkout_Order_List/"><i class="fa fa-shopping-cart">&nbsp;</i>Order Manager  <span class="label label-warning"> <?php $orderObj = new Application_Subscription_Checkout_Order; echo count( $orderObj->select() ); ?>  </span></a>
+				</li>
+
+
+				<li  class="treeview">
+					<a href="#"><i class="fa fa-files-o"></i> <span>Appearance</span>
+						<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_List/">  Pages <span class="label label-success"> <?php $pageObj = new Ayoola_Page_page; echo count( $pageObj->select() ); ?></span></a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_Layout_List/">Themes </a>
+						</li>
+						<li>
+							<a href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/pc-admin/name/Ayoola_Page_Menu_List/">Navigation</a>
+						</li>
+						<li>
+							<a onclick="ayoola.spotLight.showLinkInIFrame( '<?php echo Ayoola_Application::getUrlPrefix(); ?>/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/img/logo.png' );" href="javascript:">Logo</a>
+						</li>
+						<li>
+							<a onclick="ayoola.spotLight.showLinkInIFrame( '<?php echo Ayoola_Application::getUrlPrefix(); ?>/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/favicon.ico' );" href="javascript:">Favicon</a>
+						</li>
+		      </ul>
+				</li>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <!-- <li class="active">Here</li> -->
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+			<?php
+				//oneness Begins Here
+				// if ( ! empty( $_183a467e23cc670297e6c5bd0c5c0829 ) &&  is_object( $_183a467e23cc670297e6c5bd0c5c0829 ) ){
+				// 		echo Ayoola_Object_Wrapper_Abstract::wrap( $_183a467e23cc670297e6c5bd0c5c0829->view(), 'well' );
+				// }
+				if ( ! empty( $_dd6c65cbd2cd676c37a9abfde6efd317 ) &&  is_object( $_dd6c65cbd2cd676c37a9abfde6efd317 ) ){
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_dd6c65cbd2cd676c37a9abfde6efd317->view(), 'well' );
 				}
-			}
-		</script><!--scrolling js--><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/jquery.nicescroll.js"></script><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/scripts.js"></script><!--//scrolling js--><!-- Bootstrap Core JavaScript --><script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/novus/js/bootstrap.js"> </script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?><?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?>
+				if( trim( $_SERVER['REQUEST_URI'] , '/') == "pc-admin" ){
+					// user widget
+					$data['counter']		= count($userObj->select());
+				 	$data['title'] 			= "Users";
+					$data['icon'] 			= "users";
+					$data['size'] 			= 4;
+					$data['color'] 			= "aqua";
+					$data['footerText'] = "Users Info";
+					$data['footerLink'] = "#";
+					echo widget( $data );
+					unset( $data );
+
+					// page Widgets
+					$data['counter']		= count( $pageObj->select() );
+					$data['title'] 			= "Pages";
+					$data['icon'] 			= "file-text";
+					$data['size'] 			= 4;
+					$data['color'] 			= "orange";
+					$data['footerText'] = "Pages Info";
+					$data['footerLink'] = "#";
+					echo widget( $data );
+					unset( $data );
+
+					// articles Widgets
+					$data['title'] 			= "Articles";
+					$data['counter']		= count($articleObj->select() );
+					$data['icon'] 			= "edit";
+					$data['size'] 			= 4;
+					$data['color'] 			= "green";
+					$data['footerText'] = "Articles Info";
+					$data['footerLink'] = "#";
+					echo widget( $data );
+					unset( $data );
+
+					// shopping-cart Widgets
+					$data['title'] 			= "Orders";
+					$data['counter']		= count( $orderObj->select() );
+					$data['icon'] 			= "shopping-cart";
+					$data['size'] 			= 4;
+					$data['color'] 			= "red";
+					$data['footerText'] = "Order Info";
+					$data['footerLink'] = "#";
+					echo widget( $data );
+					unset( $data );
+
+				}
+			?>
+    </section>
+		<?php if( trim( $_SERVER['REQUEST_URI'] , '/') == "pc-admin" ){ ?>
+		<div class="col-md-12">
+			<div class="row">
+				<div class="col-md-6">
+
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<div class="user-block">
+                <img class="img-circle" src="https://www.pagecarton.org/img/logo.png" alt="PageCarton Logo">
+								<h3 class="box-title"> PageCarton News Feed</h3>
+                <!-- <span class="description">Shared publicly - 7:30 PM Today</span> -->
+              </div>
+
+							<?php
+							 function getFeed( $url = "https://www.pagecarton.org/widgets/Application_Article_ShowAll?pc_widget_output_method=JSON" )
+				    	{
+				        if ( is_null( $url ) ) {
+				          return false;
+				        }
+				    		$ch = curl_init();
+				    		curl_setopt ($ch, CURLOPT_URL, $url);
+				    		curl_setopt ($ch, CURLOPT_HEADER, 0);
+				    		curl_setopt ($ch, CURLOPT_FOLLOWLOCATION, $url);
+				    		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+				    		$result = curl_exec($ch);
+				        curl_close($ch);
+				    		return $result;
+				    	}
+
+
+							?>
+
+							<div class="box-tools pull-right">
+								<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+								</button>
+								<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+							</div>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body" style=" height: 150px; overflow: auto;  "  >
+							<ul class="products-list product-list-in-box" onload="loadFeed();" id="PageCartonFeedLoader">
+
+								<!-- /.item -->
+								<?php
+									if ( is_array( $feed = json_decode( getFeed() , true ) ) ) {
+										// var_export($feed );
+										foreach ( $feed as $key => $v ) {
+								?>
+								<li class="item">
+									<div class="product-img">
+										<img src="https://pagecarton.org<?php echo $v['document_url'] ?>" style="max-width: 60px; max-height: 60px;" alt="<?php echo $v['article_title']; ?>">
+									</div>
+									<div class="product-info">
+										<a href="javascript:void(0)" class="product-title">	<?php echo $v['article_title']; ?>
+											<span class="label label-info pull-right">	<?php echo $v['article_type']; ?></span></a>
+										<span class="product-description">
+											<?php echo substr($v['article_content'] , 0 , 50); ?>
+											<p>
+												<a href="https://pagecarton.org<?php echo $v['article_url'] ?>" class="text-danger" target="_blank"> Read More</a>
+											</p>
+										</span>
+										<address class="text-info">
+											 <i class="fa fa-calendar"></i> <?php echo strftime('%B %M %Y ' , $v['creation_time'] ) ?>
+										</address>
+
+									</div>
+								</li>
+								<!-- <hr> -->
+								<?php
+											}
+										}
+								 ?>
+
+							</ul>
+						</div>
+						<!-- /.box-body -->
+						<div class="box-footer text-center" style="">
+							<a href="https://www.pagecarton.org/posts" target="_blank" class="uppercase text-danger ">View All Posts</a>
+						</div>
+						<!-- /.box-footer -->
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<?php } ?>
+    <!-- /.content -->
+
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+    <div class="pull-right hidden-xs">
+      Anything you want
+    </div>
+    <!-- Default to the left -->
+    <!-- <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved. -->
+		<?php
+		//footer Begins Here
+		echo ( ! empty( $_8f94b54f70cde9623d9cc279007489dd ) &&  is_object( $_8f94b54f70cde9623d9cc279007489dd ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_8f94b54f70cde9623d9cc279007489dd->view(), '' ) : null );
+		//footer Ends Here
+		?>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+      <div class="tab-pane active" id="control-sidebar-home-tab">
+        <h3 class="control-sidebar-heading">Recent Activity</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
+
+              <div class="menu-info">
+                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
+
+                <p>Will be 23 on April 24th</p>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+        <h3 class="control-sidebar-heading">Tasks Progress</h3>
+        <ul class="control-sidebar-menu">
+          <li>
+            <a href="javascript:;">
+              <h4 class="control-sidebar-subheading">
+                Custom Template Design
+                <span class="pull-right-container">
+                    <span class="label label-danger pull-right">70%</span>
+                  </span>
+              </h4>
+
+              <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+        <!-- /.control-sidebar-menu -->
+
+      </div>
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+  immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+	<!-- jQuery 3 -->
+	<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/adminlte/dist/jquery/jquery.min.js"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/adminlte/dist/bootstrap/js/bootstrap.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/adminlte/dist/js/adminlte.min.js"></script>
+
+ </script><?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?><?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?>
 </body>
 </html>
