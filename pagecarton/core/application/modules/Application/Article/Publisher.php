@@ -124,13 +124,31 @@ class Application_Article_Publisher extends Application_Article_Creator
                             //    self::v( $eachWidget );
                                 $values = $eachWidget->getObjectTemplateValues();
                                 $noRequired = ( $eachWidget->getParameter( 'add_a_new_post' ) ? : 1 );
-                                $postType = ( $eachWidget->getParameter( 'article_types' ) ? : $eachWidget->getParameter( 'true_post_type' ) ) ? : ( method_exists( $eachWidget, 'getItemName' ) && $eachWidget::getItemName() ? $eachWidget::getItemName() : 'Post' );
                                 $category = $eachWidget->getParameter( 'category_name' ) ? : null;
-                                $kind = $category . $postType;
+
+                                switch( get_class( $eachWidget ) )
+                                {
+                                    case 'Application_Article_ShowAll':
+                                        $postType = ( $eachWidget->getParameter( 'article_types' ) ? : $eachWidget->getParameter( 'true_post_type' ) ) ? : ( method_exists( $eachWidget, 'getItemName' ) && $eachWidget::getItemName() ? $eachWidget::getItemName() : 'Post' );
+                                        $kind = $category . $postType;
+                                    break;
+                                    case 'Application_Category_ShowAll':
+                                        $postType = 'Category';
+                                        $kind = get_class( $eachWidget );
+
+                                    default:
+                                    $kind = get_class( $eachWidget );
+                                    break;
+                                }
+//                                self::v( $kind );
+                             //   self::v( get_class( $eachWidget ) );
+                            //    self::v( $eachWidget->getParameter( 'add_a_new_post_full_url' ) );
+                            //    self::v( $each );
                                 if( ( $kind && @$postTypes[$kind] ) || ! $eachWidget->getParameter( 'add_a_new_post_full_url' ) || @$postTypes[$eachWidget->getParameter( 'add_a_new_post_full_url' )] )
                                 {
                                     continue;
                                 }
+                            //    self::v( $kind );
                                 $postTypes[$kind] = $kind;
                                 $postTypes[$eachWidget->getParameter( 'add_a_new_post_full_url' )] = $eachWidget->getParameter( 'add_a_new_post_full_url' );
                                 $cssClass = 'goodnews';
@@ -142,13 +160,16 @@ class Application_Article_Publisher extends Application_Article_Creator
                             //    var_export( get_class( $eachWidget ) );
                                 $link = '' . Ayoola_Application::getUrlPrefix() . '' . $eachWidget->getParameter( 'add_a_new_post_full_url' ) . '&close_on_success=1';
                                 $html .= '<a style="text-align:center;" class="pc-btn ' .  $cssClass  . '" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\', \'' . $this->getObjectName() . '\' );" href="javascript:" > 
-                                ' . $postType . ' ' . ( $category ? ' [' . $category . '] ' : $category ) . '
+                                <br><br>
+                                ' . ucfirst( $postType ) . ' ' . ( $category ? ' [' . $category . '] ' : $category ) . '
                                 
                                 <br><br>
                                 ' . $values['total_no_of_posts'] . ( $values['total_no_of_posts'] > $noRequired ? null : ( '/' .  $noRequired )  ) . '
                                
-                                <br>
-                               <i  style="margin:10px;" class="fa fa-external-link"></i>  Add a new item  </a>';
+                                <br><br>
+                               <i  style="margin:10px;" class="fa fa-plus"></i>  Add a new ' . ucfirst( $postType ) . ' <i  style="margin:10px;" class="fa"></i>
+                               <br><br>
+                               </a>';
                             //    self::v( $eachWidget->getParameter( 'add_a_new_post_full_url' ) );
                             }
 
@@ -164,7 +185,7 @@ class Application_Article_Publisher extends Application_Article_Creator
                 $done = Application_Article_Table::getInstance()->select();
             }
             $this->setViewContent( self::__( '<div style="text-align:center;">' . $html . '</div>' ) ); 
-            $this->setViewContent( self::__( '<div style="text-align:center;"><br><br><a style="text-align:center;" class="" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Article_List\', \'page_refresh\' );" href="javascript:;" ><i  style="margin:10px;" class="fa fa-external-link"></i>  Manage all Posts  </a><br><br></div>' ) ); 
+            $this->setViewContent( self::__( '<div style="text-align:center;"><br><br><a style="text-align:center;" class="" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Article_List\', \'page_refresh\' );" href="javascript:;" ><i  style="margin:10px;" class="fa fa-external-link"></i>  Manage posts  </a><br><br></div>' ) ); 
             return $done;
             // end of widget process
           
