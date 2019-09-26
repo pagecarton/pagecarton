@@ -1362,25 +1362,45 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$values['true_post_type'] = $values['article_type'];
 			$values['post_type'] = $postTypesAvailable[$values['article_type']] ? : $values['article_type'];
 		}
-//		self::v( $articleTypeWeUsing );
+	//	self::v( $articleTypeWeUsing );
+	//	self::v( $postTypeInfo );
+	//	self::v( $options );
 	//	self::v( ( ! $postTypeInfo && ! array_key_exists( $articleTypeWeUsing, $options ) && ! array_key_exists( $articleTypeWeUsing, Application_Article_Type_TypeAbstract::$presetTypes ) && ! empty( $_REQUEST['article_type'] ) && ! empty( $_REQUEST['true_post_type'] ) && self::hasPriviledge( array( 99, 98 ) ) ) );
-		if( ! $postTypeInfo && ! array_key_exists( $articleTypeWeUsing, $options ) && ! array_key_exists( $articleTypeWeUsing, Application_Article_Type_TypeAbstract::$presetTypes ) && ! empty( $_REQUEST['article_type'] ) && ( ! empty( $_REQUEST['true_post_type'] ) ||  ! empty( $_REQUEST['post_type_custom_fields'] ) ) && self::hasPriviledge( array( 99, 98 ) ) )
+		if( ! empty( $_REQUEST['article_type'] ) && ( ! empty( $_REQUEST['true_post_type'] ) ||  ! empty( $_REQUEST['post_type_custom_fields'] ) ) && self::hasPriviledge( array( 99, 98 ) ) )
 		{
 			//	auto setup post type
-			$postTypeInfo = array( 
+			$postTypeInfoForThisPost = array( 
 									'post_type' => $articleTypeWeUsing, 
 									'article_type' => @$_REQUEST['true_post_type'], 
 									'post_type_custom_fields' => @$_REQUEST['post_type_custom_fields'], 
 									'post_type_options' => @array_map( 'trim', explode( ',', $_REQUEST['post_type_options'] ) ), 
 									'post_type_options_name' => @array_map( 'trim', explode( ',', $_REQUEST['post_type_options_name'] ) ), 
-								);
-			$classToCreatePostType = new Application_Article_Type_Creator( array( 'fake_values' => array( 'post_type' => ucwords( str_replace( array( '-', ' ' ), ' ', $articleTypeWeUsing ) ) ) + $postTypeInfo ) );
-			$result = $classToCreatePostType->view();
-			$values['true_post_type'] = $postTypeInfo['article_type'];
-			$values['post_type'] = $postTypeInfo['post_type'];
-	//		var_export( $articleTypeWeUsing );
-	//		var_export( $postTypeInfo );
-	//		var_export( $result );
+                                );
+                                
+            if( ! $postTypeInfo )
+            {
+                $classToCreatePostType = new Application_Article_Type_Creator( array( 'fake_values' => array( 'post_type' => ucwords( str_replace( array( '-', ' ' ), ' ', $articleTypeWeUsing ) ) ) + $postTypeInfoForThisPost ) );
+                $result = $classToCreatePostType->view();
+                $values['true_post_type'] = $postTypeInfoForThisPost['article_type'];
+                $values['post_type'] = $postTypeInfoForThisPost['post_type'];
+            }
+            elseif( 
+                strtolower( $postTypeInfoForThisPost['article_type'] ) != strtolower( $postTypeInfo['article_type'] )
+                || $postTypeInfoForThisPost['post_type_custom_fields'] != $postTypeInfo['post_type_custom_fields'] 
+                || $postTypeInfoForThisPost['post_type_options'] != $postTypeInfo['post_type_options'] 
+                || $postTypeInfoForThisPost['post_type_options_name'] != $postTypeInfo['post_type_options_name'] 
+                )
+            {
+            //    var_export( $postTypeInfo );
+                $postTypeInfo = $postTypeInfoForThisPost + $postTypeInfo; 
+                $toUpdate = $postTypeInfo;
+                unset( $toUpdate['post_type'] );
+                $response = Application_Article_Type::getInstance()->update( $toUpdate, array( 'post_type_id' => $articleTypeWeUsing ) );
+           //     var_export( Application_Article_Type::getInstance()->select() );
+            //    var_export( $response );
+             //   var_export( $postTypeInfo );
+            }
+
 		}
 //		var_export( $values['true_post_type'] );
 		
