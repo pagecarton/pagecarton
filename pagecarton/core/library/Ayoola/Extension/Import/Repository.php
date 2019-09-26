@@ -315,10 +315,10 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 		$storage = self::getObjectStorage( array( 'id' => 'mdenu=ddffd', 'device' => 'File', 'time_out' => 446000, ) );
 		if( ! $data = $storage->retrieve() )
         {
-            $url = 'https://' . static::$_site . '/tools/classplayer/get/name/Application_Category_ShowAll?pc_widget_output_method=JSON';
+            $url = 'https://' . static::$_site . '/tools/classplayer/get/name/Application_Category_ShowAll?pc_widget_output_method=JSON&no_of_post_to_show=10';
             $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
             $allFeed = json_decode( $feed, true );
-           //    var_export( $url );
+            //   var_export( $url );
             //   var_export( $allFeed );
             $data = array();
             foreach( $allFeed as $each )
