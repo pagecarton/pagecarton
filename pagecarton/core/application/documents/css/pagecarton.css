@@ -902,7 +902,19 @@ pc_full_width {
 .pc-well li {
   color: inherit;
 }
-
+.bg-fixed 
+{
+    background-attachment: fixed;
+    background-size: cover;     
+}
+ 
+ @supports (-webkit-overflow-scrolling: touch) 
+ {
+   .bg-fixed 
+   {
+    background-attachment: scroll;
+   }
+ }
 
 .defaultnews,
 .normalnews,

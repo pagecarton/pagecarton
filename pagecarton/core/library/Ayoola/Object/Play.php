@@ -37,23 +37,10 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
     {
 		//	Make the application know we are using class player
 		$_SERVER['HTTP_APPLICATION_MODE'] = $this->getObjectName();
-	//	Ayoola_Application::$mode = 'module';
-	//	unset( $parameters['markup_template_no_data'] );  
-		//	self::v( __LINE__ );
-		//	exit();     
 		try
 		{
-	//		try
-			{
-		//		if( ! $object = $this->getIdentifierData() )
-				{ 
-		//			throw new Ayoola_Object_Exception( self::ERROR_MESSAGE_OBJECT_NOT_FOUND ); 
-				}
-			}
-	//		catch( Ayoola_Exception $e )
 			{
 			//	ALLOW THE USE OF CLASS_NAME
-		//			var_export( $object );
 				$identifier = null;
 
 				if( @$_REQUEST['object_name'] )
@@ -83,7 +70,6 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
                     {
                         $class = $widget['class_name'];
                         $class = new $class( $widget['parameters'] );
-                    //    var_export( $widget['parameters'] );
                         $this->setViewContent( '' . $class->view() . '' );
                         return true;
                     }
@@ -91,21 +77,16 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
                     {
                         $class = $widget['class_name'];
                         $class = new $class( $widget['parameters'] );
-                    //    var_export( $widget['parameters'] );
                         $this->setViewContent( '' . $class->view() . '' );
                         return true;
                     }
 				}
-			//	var_export( $_REQUEST['pc_module_url_values'][0] );
-			//	$identifier = array( 'class_name' => $identifierKey );
 				$this->setIdentifierData( $identifier );
-	///			if( ! $object = $this->getIdentifierData() ){ throw new Ayoola_Object_Exception( self::ERROR_MESSAGE_OBJECT_NOT_FOUND ); }
 			}
 			//	I want to allow a convenient way of playing class
 			if( $identifier['class_name'] === __CLASS__ )
 			{
 				exit( $identifier['class_name'] );
-			//	return false;
 			}
 			if( Ayoola_Loader::loadClass( @$identifier['class_name'] ) )
 			{ 
