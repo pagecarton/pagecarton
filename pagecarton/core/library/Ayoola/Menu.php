@@ -726,7 +726,12 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			$menu->appendChild( $option );
 			if( $this->getParameter( 'markup_template' ) )
 			{
-				$template .= self::replacePlaceholders( $this->getParameter( 'markup_template' ), $values + ( $this->getParameter() ? : array() ) + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', 'pc_no_data_filter' => true, ) );
+                $iTemplate = $this->getParameter( 'markup_template' );
+                if( ! stripos( $iTemplate, '{{{ayoola_spotlight}}}' ) )
+                {
+                    $iTemplate = str_ireplace( '<a ', '<a onclick="{{{ayoola_spotlight}}}" ', $iTemplate );
+                }
+				$template .= self::replacePlaceholders( $iTemplate, $values + ( $this->getParameter() ? : array() ) + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', 'pc_no_data_filter' => true, ) );
 			}
 		}
 		//	update the markup template
