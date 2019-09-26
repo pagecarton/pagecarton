@@ -526,7 +526,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function cleanHTML( $text, $strict = false )
     {
-		$text = strip_tags( $text, '<a> <address> <em> <strong> <b> <i> <big> <small> <sub> <sup> <cite> <code> <img> <ul> <ol> <li> <dl> <lh> <dt> <dd> <br> <p> <table> <th> <td> <tr> <pre> <blockquote> <nowiki> <h1> <h2> <h3> <h4> <h5> <h6> <hr>' );
+        $allowed = '<a> <address> <em> <strong> <b> <i> <big> <small> <sub> <sup> <cite> <code> <img> <ul> <ol> <li> <dl> <lh> <dt> <dd> <br> <p> <table> <th> <td> <tr> <pre> <blockquote> <nowiki> <h1> <h2> <h3> <h4> <h5> <h6> <hr> <select> <option> <input>';
+		$text = strip_tags( $text, $allowed );
 
 		//  remove attributes?
 		if( $strict )
@@ -534,7 +535,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     		$regex = "#<(/?\w+)\s+[^>]*>#is";
     		$text = preg_replace( $regex, '<${1}>', $text );
 		}
-        $text = strip_tags( $text, '<a> <address> <em> <strong> <b> <i> <big> <small> <sub> <sup> <cite> <code> <img> <ul> <ol> <li> <dl> <lh> <dt> <dd> <br> <p> <table> <th> <td> <tr> <pre> <blockquote> <nowiki> <h2> <h3> <h4> <h5> <h6> <hr>' );
+        $text = strip_tags( $text, $allowed );
         $text = preg_replace( '|\<([^>]*) on([^><]*)\>|i', '<$1 data-on-$2>', $text );
         $text = preg_replace( '|\<([^>]*)javascript:([^><]*)\>|i', '<$1#$2>', $text );
 		return $text;

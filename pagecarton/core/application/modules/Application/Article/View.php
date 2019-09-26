@@ -452,9 +452,9 @@ class Application_Article_View extends Application_Article_Abstract
 					}
 					unset( $data[$imagesKey] );
 				break;  
-				case 'subscription-options':
-			//		var_export( $featureSuffix );
-			//		var_export( $data['subscription_selections' . $featureSuffix] );
+                case 'subscription-options':
+                //    self::v( $this->getParameter( 'subscription_selections_template' ) );
+                //    self::v( $data['subscription_selections' . $featureSuffix] );
 					if( $this->getParameter( 'subscription_selections_template' ) && $data['subscription_selections' . $featureSuffix] )
 					{
 						$data['subscription_selections_html' . $featureSuffix] = null;
@@ -466,8 +466,9 @@ class Application_Article_View extends Application_Article_Abstract
 							}
 							$data['subscription_selections_html' . $featureSuffix] .= str_ireplace( array( '{{{subscription_selections}}}', '{{{suffix}}}', ), array( $eachSelection, $featureSuffix ), $this->getParameter( 'subscription_selections_template' ) );
 						}
-					//	var_export( $data['subscription_selections_html' . $featurePrefix] );
 					}			
+                //    self::v( 'subscription_selections_html' . $featureSuffix );
+                //    self::v( $data['subscription_selections_html' . $featureSuffix] );
 				break;
 				case 'product':
 			//	case 'service':

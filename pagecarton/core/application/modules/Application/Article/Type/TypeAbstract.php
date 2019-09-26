@@ -119,7 +119,6 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
                             'location' => 'Location', 
                             'audio' => 'Play Audio', 
                             'gallery' => 'Gallery Images', 
-                            'category' => 'Categories', 
                             'privacy' => 'Privacy Options', 
                             'description' => 'Short Description', 
                             'cover-photo' => 'Cover Photo', 

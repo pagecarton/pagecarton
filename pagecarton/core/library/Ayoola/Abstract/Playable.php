@@ -141,6 +141,11 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
         //    var_export( $replacement );
 
         }
+        elseif( stripos( $key, '_html' ) )
+        {
+        //    var_export( $replacement );
+            $replacement = self::cleanHTML( $replacement );
+        }
         else
         {
             $replacement = strip_tags( $replacement );

@@ -562,17 +562,13 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$samePricing = false;
 			if( @$subscriptionData['price_option_price'] )   
 			{
-		//		$samePricing = array_flip( $subscriptionData['price_option_price'] );
-			//	var_export( array_flip( $subscriptionData['price_option_price'] ) );
 				if( $samePricing = count( array_flip( $subscriptionData['price_option_price'] ) ) === 1 )
 				{
-			//		;
-				}
+
+                }
 			}
-	//		$optionsForSelect = array();
-	//		self::v( $subscriptionData['price_option_title'] );
-		//	self::v( $optionsForSelect );
-			foreach( $subscriptionData['price_option_title'] as $key => $each )
+
+            foreach( $subscriptionData['price_option_title'] as $key => $each )
 			{
 				if( empty( $subscriptionData['price_option_price'][$key] ) && empty( $subscriptionData['price_option_title'][$key] ) )
 				{
@@ -596,7 +592,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			return false;
 		}
 		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden', 'value' => @$subscriptionData['article_url'] ) );
-	//	$fieldset->addElement( array( 'name' => 'submit',  'type' => 'Button',  'onClick' => 'addToCartNow( this.form );', 'value' => $submitValue ) );
 		 @$subscriptionData['no_of_items_in_stock'] ? $fieldset->addRequirement( 'quantity', array( 'Int' => null, 'MinMax' => array( 1, @$subscriptionData['no_of_items_in_stock'] ? : 100 ) ) ) : null;
 		$fieldset->addRequirement( 'article_url', array( 'NotEmpty' => null ) );
 		$fieldset->addLegend( $legend );
