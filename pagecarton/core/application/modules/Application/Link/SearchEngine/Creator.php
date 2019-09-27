@@ -36,7 +36,7 @@ class Application_Link_SearchEngine_Creator extends Application_Link_SearchEngin
     {
 		try
 		{ 
-			$this->createForm( 'Create', 'Add a Search Engine ' );
+			$this->createForm( 'Continue', 'Add a Search Engine ' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Search engine created successfully' ) . '', true  ); }
 		}

@@ -34,7 +34,7 @@ class Application_Category_Creator extends Application_Category_Abstract
      */
 	protected function init()
     {
-		$this->createForm( 'Create', 'Create a Category' );
+		$this->createForm( 'Continue', 'Create a Category' );
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		

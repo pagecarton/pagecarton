@@ -37,7 +37,7 @@ class Ayoola_Api_Whitelist_Editor extends Ayoola_Api_Whitelist_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['api_label'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['api_label'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 
 			if( ! $values = $this->getForm()->getValues() ){ return false; }

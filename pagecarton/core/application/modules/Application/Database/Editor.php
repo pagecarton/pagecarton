@@ -37,7 +37,7 @@ class Application_Database_Editor extends Application_Database_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit Database', $data );
+			$this->createForm( 'Save', 'Edit Database', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			

@@ -37,7 +37,7 @@ class Ayoola_Form_Requirement_Editor extends Ayoola_Form_Requirement_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['requirement_label'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['requirement_label'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Requirement edited successfully' ) . '', true  ); }
 		}

@@ -52,7 +52,7 @@ class Application_Slideshow_Editor extends Application_Slideshow_Abstract
 				}
 			//	return false; 
 			}
-			$this->createForm( 'Edit', 'Editing "' . $data['slideshow_title'] . '"', $data );
+			$this->createForm( 'Save', 'Editing "' . $data['slideshow_title'] . '"', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			
 			if( ! $values = $this->getForm()->getValues() ){ return false; }

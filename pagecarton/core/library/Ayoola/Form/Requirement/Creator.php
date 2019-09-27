@@ -34,7 +34,7 @@ class Ayoola_Form_Requirement_Creator extends Ayoola_Form_Requirement_Abstract
      */
 	protected function init()
     {
-		$this->createForm( 'Create', 'Create a Form Requirement' );
+		$this->createForm( 'Continue', 'Create a Form Requirement' );
 		$this->setViewContent(  '' . self::__( '<blockquote>Creating a form requirement offers a way of dynamically requesting for frequently needed information, like e-mail address in other forms. The require information must be submitted by a user before the form is finally submitted.</blockquote>' ) . '', true  );
 		$this->setViewContent( $this->getForm()->view() );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }

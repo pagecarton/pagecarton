@@ -34,7 +34,7 @@ class Application_User_NotificationMessage_Creator extends Application_User_Noti
      */
 	protected function init()
     {
-		$this->createForm( 'Create', 'Create a new notification message' );
+		$this->createForm( 'Continue', 'Create a new notification message' );
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Notification message created successfully' ) . '', true  ); }
     } 

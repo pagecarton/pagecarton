@@ -38,7 +38,7 @@ class Application_User_Email_Editor extends Application_User_Email_Abstract
 		try
 		{
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['email'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['email'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( $values['password'] != $values['password2'] )

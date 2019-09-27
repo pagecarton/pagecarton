@@ -43,7 +43,7 @@ class Application_Domain_Creator extends Application_Domain_Abstract
     {
 		try
 		{
-			$this->createForm( 'Create', 'Add a new Domain' );
+			$this->createForm( 'Continue', 'Add a new Domain' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
 		//	var_export( $values ); 

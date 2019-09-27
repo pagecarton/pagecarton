@@ -37,7 +37,7 @@ class Application_Cron_Editor extends Application_Cron_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit Cron', $data );
+			$this->createForm( 'Save', 'Edit Cron', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			

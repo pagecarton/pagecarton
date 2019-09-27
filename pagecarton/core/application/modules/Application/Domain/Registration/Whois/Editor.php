@@ -37,7 +37,7 @@ class Application_Domain_Registration_Whois_Editor extends Application_Domain_Re
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit whois lookup info for ' . $data['extension'], $data );
+			$this->createForm( 'Save', 'Edit whois lookup info for ' . $data['extension'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Item edited successfully' ) . '', true  ); }
 		}

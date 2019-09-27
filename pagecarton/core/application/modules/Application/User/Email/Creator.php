@@ -37,7 +37,7 @@ class Application_User_Email_Creator extends Application_User_Email_Abstract
 	//	$table = new Application_User_Email( new Ayoola_Dbase(  ) );
 	//	$table->setTableName( 'users' );
 	//	var_export( get_current_user() );
-		$this->createForm( 'Create', 'Create a new email' );
+		$this->createForm( 'Continue', 'Create a new email' );
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 	//	var_export( $values );

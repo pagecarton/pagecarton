@@ -164,7 +164,7 @@ class Application_User_Verify_Email extends Application_User_Verify_Abstract
 		switch( $database )
 		{
 			case 'cloud':
-				throw new Application_User_Verify_Exception( 'YOU CANNOT RESET VERIFICATION CODE FROM THIS APPLICATION.' );
+			//	throw new Application_User_Verify_Exception( 'YOU CANNOT RESET VERIFICATION CODE FROM THIS APPLICATION.' );
 			break;
 			case 'relational':
 				//	You are welcome

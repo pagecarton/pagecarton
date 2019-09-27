@@ -36,7 +36,7 @@ class Application_Settings_Creator extends Application_Settings_Abstract
     {
 		try
 		{ 
-			$this->createForm( 'Create', 'Create a Settings Name' );
+			$this->createForm( 'Continue', 'Create a Settings Name' );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( ! $this->insertDb( $values ) ){ return false; }

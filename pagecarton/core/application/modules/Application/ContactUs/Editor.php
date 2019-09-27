@@ -37,7 +37,7 @@ class Application_ContactUs_Editor extends Application_ContactUs_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['contactus_subject'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['contactus_subject'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( ! $this->updateDb( $values ) ){ return false; }

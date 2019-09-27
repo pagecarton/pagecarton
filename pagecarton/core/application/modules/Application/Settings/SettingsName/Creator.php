@@ -36,7 +36,7 @@ class Application_Settings_SettingsName_Creator extends Application_Settings_Set
     {
 		try
 		{ 
-			$this->createForm( 'Create', 'Add a settings widget' );
+			$this->createForm( 'Continue', 'Add a settings widget' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 

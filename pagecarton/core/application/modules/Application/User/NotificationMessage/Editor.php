@@ -38,7 +38,7 @@ class Application_User_NotificationMessage_Editor extends Application_User_Notif
 		try
 		{
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', $data['subject'], $data );
+			$this->createForm( 'Save', $data['subject'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 		//	var_export( $data );
 			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Notification Message Edited Successfully' ) . '', true  ); }

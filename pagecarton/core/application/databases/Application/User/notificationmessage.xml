@@ -7,24 +7,22 @@
       <TABLE_FIELD FIELD_KEY="from"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="to"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="subject"><![CDATA[New Account Opened]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="body"><![CDATA[Hello @@@firstname@@@,
+      <TABLE_FIELD FIELD_KEY="body"><![CDATA[Hello @@@username@@@,
 
-Thank you for creating an account. This is a confirmation that you have successfully gone through our account opening process.
-We have included in this email useful information about your account. For your record, you can print this email as a confirmation.
+Thank you for creating an account. This is a confirmation that your sign up was complete on our site.
 
 Username: @@@username@@@
 Email: @@@email@@@
+Login Link: http://@@@domain@@@/account/signin
 
 
 Regards,
 
 Registration Team 
-@@@domain@@@
-______________________________________________________
-THIS IS AN AUTOMATED RESPONSE. 
-***DO NOT REPLY TO THIS EMAIL****]]></TABLE_FIELD>
+@@@domain@@@]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="mode_id"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1508020198]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_date"><![CDATA[1569523706]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1569523706]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="creation_date"><![CDATA[1337779574]]></TABLE_FIELD>

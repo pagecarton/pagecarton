@@ -34,7 +34,7 @@ class Application_Wallet_Creator extends Application_Wallet_Abstract
      */
 /* 	protected function init()
     {
-		$this->createForm( 'Create', 'Create an Wallet' );
+		$this->createForm( 'Continue', 'Create an Wallet' );
 		$this->setViewContent( $this->getForm()->view(), true );
 	//	if( $this->getForm()->getValues() ){ return false; }
 		if( ! $this->insertDb() ){ return $this->setViewContent( $this->getForm()->view(), true ); }

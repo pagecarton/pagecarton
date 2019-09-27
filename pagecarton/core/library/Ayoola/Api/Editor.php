@@ -51,7 +51,7 @@ class Ayoola_Api_Editor extends Ayoola_Api_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['api_label'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['api_label'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
