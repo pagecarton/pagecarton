@@ -151,30 +151,21 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 
 				//	Filter the result to save time
-				$sortFunction2 = create_function
-				( 
-					'& $key, & $values', 
-					'
-					//	var_export( $key );
-					//	var_export( $values );
-						$values = $values["user_information"];
-						
-				//		var_export( $values );
-						if( empty( $values["username"] ) || empty( $values["email"] ) )
-						{
-							$values = false;
-						}
-						$key = $values["username"];
-				//		var_export( $values );
-					'
-				); 
+				$sortFunction2 = function( & $key, & $values )
+				{ 
+					$values = $values["user_information"];
+                    if( empty( $values["username"] ) || empty( $values["email"] ) )
+                    {
+                        $values = false;
+                    }
+                    $key = $values["username"];	
+                }; 
 				$this->_dbData = array();
 		//		if( Ayoola_Application::getUserInfo( 'username' ) )
 				{
 					$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ), array( 'result_filter_function' => $sortFunction2 ) );
 				}
 				$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
-		//		var_export( $this->_sortColumn );
 				if( $this->_sortColumn )    
 				{
 					$this->_dbData = self::sortMultiDimensionalArray( $this->_dbData, $this->_sortColumn );

@@ -212,6 +212,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      * @var array
      */
 	protected static $_authLevelOptions;
+	
+    /**
+     * Singleton instance
+     *
+     * @var self
+     */
+	protected static $_instance;
 
     /**
      *
@@ -255,6 +262,20 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$this->initOnce();
 		static::$_counter++;
     }
+
+    /**
+     * Returns a singleton Instance
+     *
+     * @param void
+     * @return self
+     */
+    public static function getInstance()
+    {
+        $class = get_called_class();
+    //    var_export( $class );
+        if( empty( self::$_instance[$class] ) ){ self::$_instance[$class] = new $class( array( 'no_init' => true ) ); }
+		return self::$_instance[$class];
+    } 	
 
 	/**
      * Check if a device is allowed to view
@@ -549,19 +570,18 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     {
 //		var_export( $mailInfo );
 //		var_export( empty( $mailInfo['body'] ) );
+	//	var_export( self::getInstance() );
+		foreach( self::getHooks() as $class )
+		{
+			$class::hook( static::getInstance(), __FUNCTION__, $parameter );
+        }
 		if( empty( $mailInfo['body'] ) )
 		{
 			return false;
-		//	throw new Ayoola_Abstract_Exception( 'E-mail cannot be sent without a body' );
-		}
-		if( empty( $mailInfo['to'] ) )
-		{
-			return false;
-		//	throw new Ayoola_Abstract_Exception( 'E-mail destination was not specified' );
-		}
+        }
+        $realBody = $mailInfo['body'];
 		if( empty( $mailInfo['from'] ) )
 		{
-		//	$mailInfo['from'] = 'no-reply@' . Ayoola_Page::getDefaultDomain();
 			$mailInfo['from'] = '"' . htmlspecialchars( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Application::getDomainName() ) . '" <no-reply@' . Ayoola_Application::getDomainName() . '>' . "";
 		}
 
@@ -585,6 +605,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			{
 				$mailInfo['body'] = '<body>' . $mailInfo['body'] . '</body>';
 			}
+            $mailInfo['body'] = Ayoola_Page_Editor_Text::addDomainToAbsoluteLinks( $mailInfo['body'] );
+            $realBody = $mailInfo['body'];
 			if( stripos( $mailInfo['body'], '<html>' ) === false )
 			{
 				$styleFile = Ayoola_Loader::checkFile( 'documents/css/pagecarton.css' );
@@ -600,16 +622,23 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			}
 			$header .= "MIME-Version: 1.0\r\n";
 			$header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-            $mailInfo['body'] = Ayoola_Page_Editor_Text::addDomainToAbsoluteLinks( $mailInfo['body'] );
 	//		var_export( $styleFile );
 	//		var_export( htmlentities( $mailInfo['body'] ) );
 	//		return false;
 
 		}
-		$sent = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], $header );
-	//	exit( var_export( $mailInfo ) );
-	//	if( ! $sent ){ throw new Ayoola_Abstract_Exception( 'Error encountered while sending e-mail' ); }
-		return true;
+//		var_export( $mailInfo );
+		if( empty( $mailInfo['to'] ) )
+		{
+            $sent = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], $header );
+        }
+        $mailInfo['to'] = array_map( 'trim', explode( ',', $mailInfo['to'] ) );
+        $mailInfo['cc'] = array_map( 'trim', explode( ',', $mailInfo['cc'] ) );
+        $mailInfo['bcc'] = array_map( 'trim', explode( ',', $mailInfo['bcc'] ) );
+        $mailInfo['body'] = $realBody;
+    //    var_export( $mailInfo );
+        Application_Notification::getInstance()->insert( $mailInfo );
+		return $sent;
     }
 
     /**

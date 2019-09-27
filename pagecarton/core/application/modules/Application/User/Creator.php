@@ -236,17 +236,25 @@ class Application_User_Creator extends Application_User_Abstract
 		{ 
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false;
-		}
- 		$this->setViewContent(  '' . self::__( '<h2 class="goodnews">Account Confirmation</h2>' ) . '', true  );
- 		$this->setViewContent( self::__( '<p>New user account has been created successfully. An email has been sent to ' . $values['email'] . ' containing how to activate and verify the new account. You can login immediately.</p>' ) );
- 		$this->setViewContent( self::__( '<h4></h4>' ) );
+        }
+        
+        if( ! $this->getParameter( 'goodnews' ) )
+        {
+            $this->setViewContent( '<h2 class="pc_give_space_top_bottom">' . self::__( 'Account Confirmation' ) . '</h2>', true  );
+            $this->setViewContent( '<p class="pc_give_space_top_bottom">' . sprintf( self::__( 'New user account has been created successfully. An email has been sent to <b>%s</b> containing how to activate and verify the new account. You can login immediately.' ), $values['email'] ) . '</p>' );
+        }
+        else
+        {
+            $this->setViewContent( $this->getParameter( 'goodnews' ), true  );
+        }
 		
 		if( ! Ayoola_Application::isClassPlayer() )
 		{
- 			$this->setViewContent( self::__( '<p><a target="_parent" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl( '/account' ) . '">Continue...</a></p>' ) );     
+ 			$this->setViewContent( self::__( '<p><a target="_parent" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl( '/account' ) . '">Continue <i class="fa fa-chevron-right"></i></a></p>' ) );     
 		}
-
-        if( $_REQUEST['notify_us'] )
+    //    var_export( $_REQUEST );
+    //    var_export( $_GET );
+        if( $_REQUEST['notify_us'] || @in_array( 'notify_us', $_GET['pc_module_url_values'] ) || @in_array( 'notify_admin_of_sign_up', Application_User_Settings::retrieve( 'user_options' ) )  )
         {
             $emailInfo = array(
                                 'subject' => $values['email'] . ' signed up',
@@ -256,11 +264,15 @@ class Application_User_Creator extends Application_User_Abstract
                                 
                                 New accounts will have a standard access to the website and will not have administrative privileges. If you would like to grant some access, consider upgrading the user by clicking the link below.
 
-                                <a href="/widgets/Application_User_Editor?username=' . $values['username'] . '">Account Settings</a>. Set the access level to "Owner"
+                                <a href="/widgets/Application_User_Editor?username=' . $values['username'] . '">Change Account Settings</a>. 
+                                
+                                Set the access level to "Owner" to make this account admin.
+
                                 ',
             
             );
             $emailInfo['to'] = Ayoola_Application_Notification::getEmails();;
+        //    var_export( $emailInfo );
             @self::sendMail( $emailInfo );
 
         }
@@ -350,7 +362,8 @@ class Application_User_Creator extends Application_User_Abstract
 		$valuesForReplace = $values;
 		$valuesForReplace['domain'] = $domain;
 		$email['to'] = $values['email'];
-		$email['from']  = "From: \"{$domain}\" <accounts@{$domain}>\r\n";
+		$email['username'] = $values['username'];
+	//	$email['from']  = "From: \"{$domain}\" <accounts@{$domain}>\r\n";
 	//	var_export( $email );
 		$email['body'] = self::replacePlaceholders( $email['body'], $valuesForReplace );
 	//	var_export( $values );
@@ -382,9 +395,8 @@ class Application_User_Creator extends Application_User_Abstract
 		$email = $this->getActivationEmail();
 		if( empty( $email['body'] ) ){ return false; }
 
-		$header = 	$email['from'] . "X-Mailer: PHP/" . phpversion() ;
-		$sent = mail( $email['to'], $email['subject'], $email['body'], $header );
-		//var_export( $email['to'] );
+	//	$header = 	$email['from'] . "X-Mailer: PHP/" . phpversion() ;
+		$sent = self::sendMail( $email );
 		if( ! $sent ){ return false; }
 		return true;
     } 

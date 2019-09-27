@@ -51,13 +51,6 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
      *
      * @var self
      */
-	protected static $_instance;
-	
-    /**
-     * Singleton instance
-     *
-     * @var self
-     */
 	protected static $_properties;
 	
     /**
@@ -109,18 +102,6 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
      *
      */
 	const PLAY_MODE_PHP = 'PHP';
-
-    /**
-     * Returns a singleton Instance
-     *
-     * @param void
-     * @return self
-     */
-    public static function getInstance()
-    {
-	//	if( is_null( self::$_instance ) ){ self::$_instance = new static; }
-		return new static;
-    } 	
 	
     /** 
      * Filter for xss

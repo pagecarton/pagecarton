@@ -84,6 +84,7 @@ class Application_User_Settings extends Application_Settings_Abstract
 		$options = array( 	
 							'allow_level_selection' => 'Allow users to select there user groups during signup',
 							'allow_level_injection' => 'Allow the possibility of injecting user groups using forms.',
+							'notify_admin_of_sign_up' => 'Notify admin of new user sign up',
 
 							);
 		$fieldset->addElement( array( 'name' => 'user_options', 'label' => 'Options', 'value' => @$settings['user_options'], 'type' => 'Checkbox' ), $options );
