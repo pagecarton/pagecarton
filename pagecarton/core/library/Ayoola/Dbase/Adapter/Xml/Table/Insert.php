@@ -119,8 +119,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		if( empty( $values['creation_time'] ) )   
 		{
 			$values['creation_time'] = time();
-		}
-	//	var_export( $values['creation_time'] );
+        }
+        $values['__user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
+        $values['__ip'] = Ayoola_Application::getRuntimeSettings( 'user_ip' );
+    //  $values['__long_lang'] = '';
+        //	var_export( $values['creation_time'] );
 	//		var_export( $recordRowId );
 	//		var_export( $values[$idColumn] );
 		if( empty( $options['record_row_id'] ) && empty( $values[$idColumn] ) )

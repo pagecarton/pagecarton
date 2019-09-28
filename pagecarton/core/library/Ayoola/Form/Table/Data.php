@@ -33,7 +33,7 @@ class Ayoola_Form_Table_Data extends Ayoola_Dbase_Table_Abstract_Xml
      *
      * @param int
      */
-    protected $_tableVersion = '0.12';      
+    protected $_tableVersion = '0.13';      
 
 	protected $_dataTypes = array
 	( 

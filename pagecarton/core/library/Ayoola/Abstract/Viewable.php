@@ -628,7 +628,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 		}
 //		var_export( $mailInfo );
-		if( empty( $mailInfo['to'] ) )
+		if( ! empty( $mailInfo['to'] ) )
 		{
             $sent = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], $header );
         }

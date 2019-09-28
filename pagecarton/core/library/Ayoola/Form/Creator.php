@@ -80,7 +80,6 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 				//	$creator = new Ayoola_Form_Creator( array( 'fake_values' => $formData ) );
 					header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_Editor/?form_name=' . $formData['form_name'] . '' );
 					exit();
-				//	$this->setViewContent(  '' . self::__( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $formData['form_name'] . '"> Preview it!</a> or <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_Editor/?form_name=' . $formData['form_name'] . '"> Update it!</a></div>' ) . '', true  ); 
 
 
 				//	self::v( $values );
@@ -113,7 +112,7 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 					}
 					
 					//	Notify Admin
-					$link = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '';
+					$link = '' . Ayoola_Page::getHomePageUrl() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '';
 					$mailInfo = array();
 					$mailInfo['subject'] = 'A new form created';
 					$mailInfo['body'] = 'A new form has been created on your website with the following information: "' . self::arrayToString( $values ) . '". 
@@ -129,7 +128,7 @@ class Ayoola_Form_Creator extends Ayoola_Form_Abstract
 				//	if( ! $this->insertDb() ){ return false; }
 					if( $this->insertDb( $values ) )
 					{ 
-						$this->setViewContent(  '' . self::__( '<div class="goodnews">Form created successfully. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> Preview it!</a></div>' )  ); 
+						$this->setViewContent(  '<div class="goodnews">' . self::__( 'Form created successfully' ) . ' <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Form_View/?form_name=' . $values['form_name'] . '"> ' . self::__( 'Preview form' ) . '</a></div>', true  ); 
 					}
 				break;
 			}

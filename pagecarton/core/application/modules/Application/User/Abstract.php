@@ -160,10 +160,11 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
                     }
                     $key = $values["username"];	
                 }; 
-				$this->_dbData = array();
+			//	$this->_dbData = array();
 		//		if( Ayoola_Application::getUserInfo( 'username' ) )
 				{
-					$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ), array( 'result_filter_function' => $sortFunction2 ) );
+				//	$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ), array( 'result_filter_function' => $sortFunction2 ) );
+					$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ) );
 				}
 				$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
 				if( $this->_sortColumn )    

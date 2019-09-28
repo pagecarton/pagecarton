@@ -66,24 +66,19 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 			{
 				$update['modified_time'] = time();
 			}
+            $update['__update_user_id'] = is_array( $update['__update_user_id'] ) ? $update['__update_user_id'] : array();
+            $update['__update_user_id'][] = Ayoola_Application::getUserInfo( 'user_id' );
 			foreach( $update as $key => $value )
 			{
 				foreach( $rows as $rowId => $row )
 				{
 					$count++;
-			//		var_export( $rowId );
 					if( ! $recordRow = $this->getXml()->getElementById( $rowId ) )
 					{
 						
 						continue 3;
-					//	require_once 'Ayoola/Dbase/Adapter/Xml/Table/Exception.php';
-					//	throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( "Cannot find the row data to update for row ID {$rowId}" );
 					}
-				//	var_export( $recordRow );
-				//	var_export( $rowId );
 					$result = $this->setRowColumnValue( $recordRow, $key, $value, true );
-					//try{ $this->setRowColumnValue( $row, $key, $value, true ); }
-					//catch( Ayoola_Dbase_Adapter_Xml_Table_Exception $e ){ null; }
 				}
 			}
 			

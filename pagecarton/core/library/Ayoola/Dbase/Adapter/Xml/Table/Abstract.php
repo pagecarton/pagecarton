@@ -902,7 +902,11 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
     {
 		$dataTypes = $this->getTableDataTypes( $key );
 		$value = self::filterDataType( $value, $dataTypes  );
-		//var_export( self::retrieveReferenceKey( $dataTypes ) );
+        //var_export( self::retrieveReferenceKey( $dataTypes ) );
+        if( ! is_scalar( $value ) )
+        {
+            $value = json_encode( $value );
+        }
 		$value = is_string( $value ) ? htmlspecialchars( $value ) : $value;
 		if( self::retrieveReferenceKey( $dataTypes ) == 'UNIQUE' && $this->checkDuplicateValue( $key, $value ) )
 		{

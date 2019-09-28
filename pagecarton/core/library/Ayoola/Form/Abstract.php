@@ -101,9 +101,10 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 							
 							//	Saving all information to db by default 
 					//		'database' => 'Save the data filled by user to database.', 
-							'group' => 'Group this form into fieldsets', 
-							'requirements' => 'This form has some requirements.', 
-							'callbacks' => 'Perform some actions (Call some PHP classes) after the form is filled.', 
+							'disable_updates' => 'Do not allow users to be able to update form entries once submitted', 
+						//	'group' => 'Group this form into fieldsets', 
+						//	'requirements' => 'This form has some requirements.', 
+						//	'callbacks' => 'Perform some actions (Call some PHP classes) after the form is filled.', 
 						);
 		$fieldset->addElement( array( 'name' => 'form_options', 'label' => 'Form Options', 'type' => 'Checkbox', 'value' => @$values['form_options'] ), $options );
 		

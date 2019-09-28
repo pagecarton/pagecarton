@@ -102,16 +102,16 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			{
 				$previousData = $this->getParameter( 'form_data' );
 			}
-			elseif( ! empty( $_REQUEST['data_id'] ) && ( self::hasPriviledge() || $_REQUEST['data_id'] == Ayoola_Application::getUserInfo( 'user_id' ) ) )
+			elseif( ! empty( $_REQUEST['data_id'] ) )
 			{
-				$previousData = Ayoola_Form_Table_Data::getInstance()->selectOne( null, array( 'data_id' => $_REQUEST['data_id'] ) );
-		//		var_export( $_REQUEST['data_id'] );
-			//	var_export( $previousData );
-				$previousData = $previousData['form_data'];
+                $dataResponse = Ayoola_Form_Table_Data::getInstance()->selectOne( null, array( 'data_id' => $_REQUEST['data_id'] ) );
+                if( self::hasPriviledge() || ( $dataResponse['user_id'] && $dataResponse['user_id'] == (string) Ayoola_Application::getUserInfo( 'user_id' ) && ! in_array( 'disable_updates', $data['form_options'] ) ) )
+                {
+                    $previousData = $dataResponse['form_data'];
+                }
 			}
-		//	var_export( $data );
 			$this->createForm( 'Continue...', null, $previousData );          
-			$this->setViewContent(  '' . self::__( '' ) . '', true  );
+			$this->setViewContent( '', true  );
 			
 			//	We show form information by default
 			if( ! $this->getParameter( 'hide_form_information' ) && ! $_POST )
@@ -143,7 +143,8 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		//	var_export( $this->getForm()->getValues() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 		//	var_export( $values );
-			
+			$values['username'] = $previousData['username'] ? : Ayoola_Application::getUserInfo( 'username' );
+			$values['email'] = $previousData['email'] ? : Ayoola_Application::getUserInfo( 'email' );
 			
 		//	if( ! $this->updateDb( $values ) ){ return false; }
 		
@@ -159,11 +160,13 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		//		var_export( $infoToInsert );
 				if( $previousData )
 				{
-					$table->update( $infoToInsert, array( 'data_id' => $_REQUEST['data_id'] ) );
+                    $table->update( $infoToInsert, array( 'data_id' => $_REQUEST['data_id'] ) );
+                    $dataId = $_REQUEST['data_id'];
 				}
 				else
 				{
-					$table->insert( $infoToInsert );
+					$dataId = $table->insert( $infoToInsert );
+					$dataId = $dataId['data_id'];
 				}
 			}     
 			
@@ -192,36 +195,39 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			}
 			
 			//	Notify Admin
-			$link = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Ayoola_Form_View/?form_name=' . $data['form_name'] . '';
+			$link = '' . Ayoola_Page::getHomePageUrl() . '/widgets/Ayoola_Form_Inspect/?form_name=' . $data['form_name'] . '';
 			$mailInfo = array();
 			$mailInfo['subject'] = 'Form filled [' . $data['form_title'] . ']';
-			$mailInfo['body'] = 'Form titled "' . $data['form_title'] . '" has been filled on your website with the following information: "' . self::arrayToString( $values ) . '". 
+			$mailInfo['body'] = 'Form titled "' . $data['form_title'] . '" has been filled on your website with the following information: ' . self::arrayToString( $values ) . '
 			
-			Preview the form on: ' . $link . '
+			Check all form responses in the database: ' . $link . '
 			';
 			try
 			{
 				@self::sendMail( $mailInfo + array( 'to' => $data['email'] ) ); 
 			}
-			catch( Ayoola_Exception $e ){ null; }
-		//	if( ! $this->insertDb() ){ return false; }
-		//	$this->setViewContent(  '' . self::__( '<h1>Thank you!</h1>' ) . '', true  );
-			$this->setViewContent(  '' . self::__( ' ' ) . '', true  );
-			$data['form_success_message'] = $data['form_success_message'] ? : 'Thank you! Form is successfully submitted.';
+            catch( Ayoola_Exception $e ){ null; }
+            $updateLink = null;
+            if( ! @in_array( 'disable_updates', $data['form_options'] )	)
+            {
+                $updateLink = '<a class="pc-btn" href="' . Ayoola_Page::getHomePageUrl() . '/widgets/' . __CLASS__ . '?form_name=' . $data['form_name'] . '&data_id=' . $dataId . '">' . self::__( 'Update Form Entry' ) . '</a>';
+            }		
+
+            $data['form_success_message'] = $data['form_success_message'] ? : sprintf( self::__( 'Thank you! Your entry to form %s has been received.' ), $data['form_title'] );
 			$data['form_success_message'] = ( strip_tags( $data['form_success_message'] ) === $data['form_success_message'] ? ( '<p>' . nl2br( $data['form_success_message'] ) . '</p>' ) : $data['form_success_message'] );
 
 			$mailInfo = array();
 			$mailInfo['subject'] = $data['form_title'];
-			$mailInfo['body'] = '' . $data['form_success_message'] . '';
+			$mailInfo['body'] =  $data['form_success_message'] . '<p>' . $updateLink . '</p>';
 			$mailInfo['to'] = Ayoola_Form::getGlobalValue( 'email' ) ? : ( Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Application::getUserInfo( 'email' ) );
 			try
 			{
 				@self::sendMail( $mailInfo ); 
 			}
 			catch( Ayoola_Exception $e ){ null; }
-
-			$this->setViewContent( $data['form_success_message'] . '<p> <a href="#" onClick="history.go(-1)">Go Back</a> </p>' , true );
-			
+        //    self::v( $data['form_success_message'] );
+			$this->setViewContent( '<div class="pc_give_space_top_bottom" >' . $data['form_success_message'] . '</div>', true );
+            $this->setViewContent( '<p> <a class="pc-btn" href="#" onClick="history.go(-1)">' . self::__( 'Go back' ) . '</a> ' . $updateLink . '</p>' );
 		}
 		catch( Exception $e )
 		{ 
