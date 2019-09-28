@@ -329,9 +329,18 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . @$formInfo['form_name'] ) );
 		$fieldset = new Ayoola_Form_Element;
-	//	var_export( $formInfo );
-		$form->submitValue = @$formInfo['button_value'] ? : $submitValue ;
-		$form->oneFieldSetAtATimeJs = true;
+    //	var_export( $formInfo );
+    
+        if( in_array( 'disable_updates', $formInfo['form_options'] ) && ! self::hasPriviledge( 98 ) )
+        {
+        //	var_export( $formInfo );
+        }
+        else
+        {
+        //	var_export( $formInfo );
+            $form->submitValue = @$formInfo['button_value'] ? : $submitValue ;
+        }
+	//	$form->oneFieldSetAtATimeJs = true;
 		$form->badnewsBeforeElements = true;
 		
 		$form->setFormRequirements( $formInfo['requirements'] );
@@ -560,15 +569,8 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 							$multiOptionsRecord = $multiOptionsRecord + array( '__manage_options' => '[Manage Multi-Options]' );
 						}
 					}
-				//	var_export( $multiOptions['values_field'] );
-				//	var_export( $tableDb );
-				//	if( $tableDb === 'Application_Profile_Table' )
-					{
-				//		var_export( $tableDb::getInstance()->select() );
-					}
 				}
 			}
-	//		var_export( $multiOptionsRecord ); 
             $fieldsets[$key]->addElement( $options + $elementInfo , $multiOptionsRecord );
             foreach( $filters as $eachFilter )
             {
