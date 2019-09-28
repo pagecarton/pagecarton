@@ -724,14 +724,18 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 
     	//  TRACK DEFAULT SITE CHANGES
     	$defaultFile = SITE_APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename );
+    	$mFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $this->_globalDirectory . DS . basename( $this->_myFilename );
+
 
 
 		// var_export( $coreFile );
 		//  PageCarton_Widget::v( Ayoola_Application::getDomainSettings( 'domain_name' ) );
 		//  PageCarton_Widget::v( filesize( $defaultFile ) );
 
-		if( is_file( $coreFile ) )
-		$fmTime = filemtime( $coreFile );
+    //  if( is_file( $coreFile ) )
+        {
+            @$fmTime = filemtime( $coreFile ) . filemtime( $mFile );
+        }
 
 		foreach( $this->getSupplementaryFilenames() as $eachFile )
 		{
@@ -753,7 +757,15 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		{
 		//	PageCarton_Widget::v( $this->_myFilename );
 		//	PageCarton_Widget::v( $this->getGlobalFilenames() );
-		//	PageCarton_Widget::v( $this->getSupplementaryFilenames() );
+        //	PageCarton_Widget::v( $this->getSupplementaryFilenames() );
+        //    if( stripos( $this->_myFilename, 'localuser' ) && stripos( $_SERVER['HTTP_HOST'], 'direct-credit' ) !== false )
+            {
+            //    var_export( $mFile );  
+            //    var_export( $this->getGlobalFilenames() );  
+            //    var_export( Ayoola_Application::getDomainSettings() ); 
+                    
+            }
+        //    var_export( $this->_myFilename );  
 			return $result;
 		}
 		else
