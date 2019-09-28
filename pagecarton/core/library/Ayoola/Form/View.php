@@ -158,7 +158,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				$infoToInsert = array( 'form_name' => $data['form_name'], 'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 'form_data' => $values );
 			//		var_export( $table->select() );
 		//		var_export( $infoToInsert );
-				if( $previousData && ( ! in_array( 'disable_updates', $data['form_options'] ) || self::hasPriviledge() ) )
+				if( $previousData && ( ! in_array( 'disable_updates', $data['form_options'] ) || self::hasPriviledge( 98 ) ) )
 				{
                     $table->update( $infoToInsert, array( 'data_id' => $_REQUEST['data_id'] ) );
                     $dataId = $_REQUEST['data_id'];
