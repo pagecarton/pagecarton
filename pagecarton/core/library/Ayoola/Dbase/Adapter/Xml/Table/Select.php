@@ -161,8 +161,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		$rows = array();
 	//	var_export( $this->getRecords()->childNodes->length );
 
-		$nextRecord = $this->getRecords()->lastChild;
-		while( $nextRecord )
+        $nextRecord = $this->getRecords()->lastChild;
+        while( $nextRecord )
 //		foreach( $this->getRecords()->childNodes as $eachRecord )
 		{
 			$eachRecord = $nextRecord;
