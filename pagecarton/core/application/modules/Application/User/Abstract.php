@@ -206,16 +206,12 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		}
 		//	Check from local table
 		$table = self::getLocalTable();
-	//	var_export( $identifier );    
 
 		//	look in all lookable places for login info
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
 		
 		if( $info = $table->selectOne( null, $identifier ) )
 		{
-	//		var_export( $info );
-	//		var_export( $info );
-		//	var_export( $identifierInfo['username'] );
 			if( $info['user_information'] )  
 			{
 				$info = $info['user_information'];
@@ -231,9 +227,6 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
      */
 	public function setIdentifierData( $identifier = NULL )
     {
-		{
-		//	$database = 'cloud';
-		}
 		
 		do
 		{
@@ -241,37 +234,11 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 
 			$identifierInfo = $this->getIdentifier();
 			$where = array( $this->getIdColumn() => array( $identifierInfo[$this->getIdColumn()], strtolower( $identifierInfo[$this->getIdColumn()] ) ) );
-		//	$info = self::v( $where );
 			if( $info = self::getUserInfo( $where ) )
 			{
 				$this->_identifierData = $info;
 				break;
 			}
-		//	var_export( $info );
-		//	var_export( $where );
-			
-		//	$info = array();
-			//	var_export( $table->select( null, array( 'username' => @$identifierInfo['username'] ) ) );
-		//	var_export( $identifierInfo['username'] );
-		//	var_export( $info );
-		//	var_export( array( 'username' => array( $identifierInfo['username'], strtolower( $identifierInfo['username'] ) ) ) );
-		//	var_export( $table->selectOne( null, array( 'username' => array( 'username' => strtolower( $identifierInfo['username'] ) ) ) ) );
-			//	case 'cloud':
-/* 			$response = Ayoola_Api_UserList::send( $this->getIdentifier() );
-			if( is_array( @$response['data'] ) )
-			{
-				$this->_identifierData = $response['data'];
-				
-				//	Localize information 
-		//		$table->delete( array( 'username' => array( '', $this->_identifierData['username'] ) ) );
-		//		$table->delete( array( 'username' => $this->_identifierData['username'] ) );
-		//		var_export( $this->_identifierData );
-			//	$table->insert( array( 'username' => $identifierInfo['username'], 'password' => $identifierInfo['password'], 'user_information' => $this->_identifierData, ) );		
-
-				Ayoola_Access_Localize::info( $this->_identifierData );  
-				break;
-			}
- */			
 			//	case 'relational':
 			if( $database === 'relational' )
 			{
@@ -279,13 +246,9 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				//	var_export( $data );
 				$this->_identifierData = $data;
 				break;
-			}
-	//		break;
-		
+			}		
 		}
 		while( false );
-	//	var_export( $table->drop() );
-	//	var_export( $table->select() );
     } 
 	
     /**
