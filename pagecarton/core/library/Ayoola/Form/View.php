@@ -105,7 +105,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			elseif( ! empty( $_REQUEST['data_id'] ) )
 			{
                 $dataResponse = Ayoola_Form_Table_Data::getInstance()->selectOne( null, array( 'data_id' => $_REQUEST['data_id'] ) );
-                if( self::hasPriviledge( 98 ) || ( $dataResponse['user_id'] && $dataResponse['user_id'] == (string) Ayoola_Application::getUserInfo( 'user_id' ) && ! in_array( 'disable_updates', $data['form_options'] ) ) )
+                if( self::hasPriviledge( 98 ) || ( $dataResponse['user_id'] && $dataResponse['user_id'] == (string) Ayoola_Application::getUserInfo( 'user_id' ) ) )
                 {
                     $previousData = $dataResponse['form_data'];
                 }
@@ -158,7 +158,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				$infoToInsert = array( 'form_name' => $data['form_name'], 'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 'form_data' => $values );
 			//		var_export( $table->select() );
 		//		var_export( $infoToInsert );
-				if( $previousData )
+				if( $previousData && ( ! in_array( 'disable_updates', $data['form_options'] ) || self::hasPriviledge() ) )
 				{
                     $table->update( $infoToInsert, array( 'data_id' => $_REQUEST['data_id'] ) );
                     $dataId = $_REQUEST['data_id'];
