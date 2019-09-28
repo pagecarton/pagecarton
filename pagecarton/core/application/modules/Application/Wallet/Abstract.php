@@ -54,7 +54,7 @@ abstract class Application_Wallet_Abstract extends Ayoola_Abstract_Table
      *
      * @var string
      */
-	protected $_tableClass = 'Ayoola_Access_AccessInformation';
+	protected $_tableClass = 'Ayoola_Access_LocalUser';
 	
     /**
      * creates the form
@@ -69,12 +69,13 @@ abstract class Application_Wallet_Abstract extends Ayoola_Abstract_Table
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = 'Update' ;
 		$fieldset = new Ayoola_Form_Element;
-		$html = null;
+        $html = null;
+    //    var_export( $values );
 	//	$html .= '<p><strong>Update wallet balance for ' . ( $values['username'] ? : $this->getIdentifier( 'username' ) ) . '</strong></p>';
 		$html .= '' . ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$ ' ) . '';
 		$html .= '';
-		$fieldset->addElement( array( 'name' => 'html', 'placeholder' => '0.00', 'description' => 'Enter balance for this user', 'type' => 'Html', 'value' => @$values['html'] ), array( 'html' => $html ) );
-		$fieldset->addElement( array( 'name' => 'wallet_balance', 'label' => '', 'style' => 'min-width:20px;max-width:60px;', 'placeholder' => '0.00', 'description' => 'Enter balance for this user', 'type' => 'InputText', 'value' => @$values['access_information']['wallet_balance'] ) );
+		$fieldset->addElement( array( 'name' => 'html', 'description' => 'Enter balance for this user', 'type' => 'Html', 'value' => @$values['html'] ), array( 'html' => $html ) );
+		$fieldset->addElement( array( 'name' => 'wallet_balance', 'label' => '', 'style' => 'min-width:20px;max-width:100px;', 'placeholder' => '0.00', 'description' => 'Enter balance for this user', 'type' => 'InputText', 'value' => @$values['wallet_balance'] ) );
 		$fieldset->addElement( array( 'name' => 'username', 'type' => 'Hidden', 'value' => @$values['username'] ) );
 		$fieldset->addRequirement( 'wallet_balance', array( 'WordCount' => array( 1, 10 )  ) );
 		$fieldset->addFilter( 'wallet_balance', array( 'float' => null, 'Currency' => null ) ); 

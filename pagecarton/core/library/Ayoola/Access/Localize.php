@@ -139,21 +139,12 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
      */
     public static function info( array $userInfo )
 	{
-	//	ini_set( 'display_errors', "1" );	
-		//   var_export( $userInfo['password'] );
-		 //  var_export( $oldInfo['password'] );  
 		
 		//	Localize information 
 		$table = Ayoola_Access_LocalUser::getInstance();
 		if( $oldInfo = $table->selectOne( null, array( 'username' => array( $userInfo['username'], strtolower( $userInfo['username'] ) ) ) ) )
 		{
 		
-/* 		var_export( $userInfo );
-		var_export( array( 'username' => array( '', $userInfo['username'], strtolower( $userInfo['username'] ) ) ) );
-		var_export( $table->delete( array( 'username' => strtolower( $userInfo['username'] ) ) ) );
-		return; 
- */		//	var_export( $userInfo );
-		//	   var_export( array( 'username' => array( '', $userInfo['username'], strtolower( $userInfo['username'] ) ) ) );       
 			try
 			{
 				if( ! $table->delete( array( 'username' => array( '', $userInfo['username'], strtolower( $userInfo['username'] ) ) ) ) )
