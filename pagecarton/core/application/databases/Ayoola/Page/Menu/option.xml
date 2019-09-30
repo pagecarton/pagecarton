@@ -869,7 +869,7 @@
       <TABLE_FIELD FIELD_KEY="option_id"><![CDATA[0-0-92]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1529201993]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Contact Messages]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/name/Application_ContactUs_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[?name=Application_ContactUs_List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:1:{i:0;s:9:&quot;logged_in&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[0-0-21]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:2:{i:0;s:2:&quot;98&quot;;i:1;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
@@ -878,7 +878,7 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="93">
       <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Comments]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/name/Application_CommentBox_Table_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[?name=Application_CommentBox_Table_List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:1:{i:0;s:9:&quot;logged_in&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[0-0-21]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:2:{i:0;s:2:&quot;98&quot;;i:1;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
@@ -893,7 +893,7 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="94">
       <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Direct Messages]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/name/Application_Message_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[?name=Application_Message_List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:1:{i:0;s:9:&quot;logged_in&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[0-0-21]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:2:{i:0;s:2:&quot;98&quot;;i:1;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
@@ -923,7 +923,7 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="96">
       <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Multi-sites]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/PageCarton_MultiSite_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[?name=PageCarton_MultiSite_List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:1:{i:0;s:9:&quot;logged_in&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[1529498386-0-22]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:2:{i:0;s:2:&quot;98&quot;;i:1;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
@@ -985,7 +985,7 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="101">
       <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Cron]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/PageCarton_Cron_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[?name=PageCarton_Cron_List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:1:{i:0;s:9:&quot;logged_in&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[1529498386-0-22]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:2:{i:0;s:2:&quot;98&quot;;i:1;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
@@ -1032,7 +1032,7 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="106">
       <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Simple Website Builder]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/PageCarton_NewSiteWizard]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[?name=PageCarton_NewSiteWizard]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:1:{i:0;s:9:&quot;logged_in&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[9]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:2:{i:0;s:2:&quot;98&quot;;i:1;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
@@ -1078,7 +1078,7 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="109">
       <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Hooks]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/PageCarton_Hook_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[?name=PageCarton_Hook_List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:1:{i:0;s:9:&quot;logged_in&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[1529498386-0-22]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:1:{i:0;s:2:&quot;98&quot;;}]]></TABLE_FIELD>
@@ -1109,7 +1109,7 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="111">
       <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Localization]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/PageCarton_Locale_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[?name=PageCarton_Locale_List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:1:{i:0;s:9:&quot;logged_in&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[1529498386-0-22]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:2:{i:0;s:2:&quot;98&quot;;i:1;s:2:&quot;99&quot;;}]]></TABLE_FIELD>
