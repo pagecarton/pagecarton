@@ -9,10 +9,19 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Wednesday 24th of July 2019 02:05:10 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Monday 30th of September 2019 02:35:38 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_nav_one = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'nav_one' );
+                }
+                else
+                {
+                    $_sitePageWidget_nav_one = array();
+                }
+                
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -22,28 +31,28 @@ $_acd6c67e7aeba849612416a4d14168e1 = new Ayoola_Page_Editor_Text( array (
         <a href="#"><i class="fa fa-cogs nav_icon"></i>Settings <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level collapse">
             <li>
-                <a href="/pc-admin/Application_Settings_SettingsName_List/">Options</a>
+                <a href="?name=Application_Settings_SettingsName_List">Options</a>
             </li>
             <li>
-                <a href="/pc-admin/Ayoola_Access_AuthLevel_List/">Privileges</a>
+                <a href="?name=Ayoola_Access_AuthLevel_List">Privileges</a>
             </li>
             <li>
-                <a href="/pc-admin/Ayoola_Object_List/">Widgets</a>
+                <a href="?name=Ayoola_Object_List">Widgets</a>
             </li>
             <li>
-                <a href="/pc-admin/PageCarton_MultiSite_List/">Multi-site Manager</a>
+                <a href="?name=PageCarton_MultiSite_List">Multi-site Manager</a>
             </li>
             <li>
-                <a href="/pc-admin/Application_Backup_List/">Back up & Restore</a>
+                <a href="?name=Application_Backup_List">Back up & Restore</a>
             </li>
             <li>
-                <a href="/pc-admin/Application_Log/">Logs</a>
+                <a href="?name=Application_Log">Logs</a>
             </li>
             <li>
-                <a href="/pc-admin/Application_Cache_Clear/">Clear Cache</a>
+                <a href="?name=Application_Cache_Clear">Clear Cache</a>
             </li>
             <li>
-                <a href="/pc-admin/Application_Upgrade/">Upgrades</a>
+                <a href="?name=Application_Upgrade">Upgrades</a>
             </li>
         </ul>
         <!-- /nav-second-level -->
@@ -52,13 +61,13 @@ $_acd6c67e7aeba849612416a4d14168e1 = new Ayoola_Page_Editor_Text( array (
         <a href="#"><i class="fa fa-file-text-o nav_icon"></i>Appearance <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level collapse">
             <li>
-                <a href="/pc-admin/Ayoola_Page_List/">Pages</a>
+                <a href="?name=Ayoola_Page_List">Pages</a>
             </li>
             <li>
-                <a href="/pc-admin/Ayoola_Page_Layout_List/">Themes</a>
+                <a href="?name=Ayoola_Page_Layout_List">Themes</a>
             </li>
             <li>
-                <a href="/pc-admin/Ayoola_Page_Menu_List/">Navigation</a>
+                <a href="?name=Ayoola_Page_Menu_List">Navigation</a>
             </li>
             <li>
                 <a onclick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=/img/logo.png\' );"
@@ -75,28 +84,28 @@ $_acd6c67e7aeba849612416a4d14168e1 = new Ayoola_Page_Editor_Text( array (
         <a href="#"><i class="fa fa-users nav_icon"></i>Users <span class="fa arrow"></span></a>
         <ul class="nav nav-second-level collapse">
             <li>
-                <a href="/pc-admin/Application_User_List/">User Accounts</a>
+                <a href="?name=Application_User_List">User Accounts</a>
             </li>
             <li>
                 <a
-                    href="/pc-admin/Application_User_UserEmail_MailingList/">Mailing
+                    href="?name=Application_User_UserEmail_MailingList">Mailing
                     List</a>
             </li>
             <li>
-                <a href="/pc-admin/Application_User_NotificationMessage_List/">Bulk Mails</a>
+                <a href="?name=Application_User_NotificationMessage_List">Bulk Mails</a>
             </li>
         </ul>
         <!-- /nav-second-level -->
     </li>
     <li>
-        <a href="/pc-admin/Ayoola_Extension_Import_List/"><i class="fa fa-circle nav_icon"></i>Plugins</a>
+        <a href="?name=Ayoola_Extension_Import_List"><i class="fa fa-circle nav_icon"></i>Plugins</a>
         <!-- /nav-second-level -->
     </li>
     <li>
-        <a href="/pc-admin/Ayoola_Form_List/"><i class="fa fa-check-square-o nav_icon"></i>Forms </a>
+        <a href="?name=Ayoola_Form_List"><i class="fa fa-check-square-o nav_icon"></i>Forms </a>
     </li>
     <li>
-        <a href="/pc-admin/Application_Article_List/"><i class="fa fa-th-large nav_icon"></i>Posts
+        <a href="?name=Application_Article_List"><i class="fa fa-th-large nav_icon"></i>Posts
         </a>
     </li>
 
@@ -104,7 +113,8 @@ $_acd6c67e7aeba849612416a4d14168e1 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '1563976816-0-20',
-  'widget_name' => 'S e t t i n g s  O p t i o n s  P r i v i l e g e s  W i d g e t s  M u l t i - s i t e  M a n a g e r  B a c k  u p  &  R e s t o r e  L o g s  C l e a r  C a c h e  U p g r a d e s  A p p e a r a n c e  P a g e s  T h e m e s  N a v i g a t i o n  L o g o  F a v i c o n  U s e r s  U s e r  A c c o u n t s  M a i l i n g  L i s t  B u l k  M a i l s  P l u g i n s  F o r m s  P o s t s',
+  'widget_name' => 'Settings Options Privileges Widgets Multi-site Manager Back up & Restore Logs Clear Cache Upgrades A - 210',
+  'insert_id' => '1569854138-0-3',
 ) );
 
 							}
@@ -115,6 +125,15 @@ $_acd6c67e7aeba849612416a4d14168e1 = null;
 
 							}
 							
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_oneness = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'oneness' );
+                }
+                else
+                {
+                    $_sitePageWidget_oneness = array();
+                }
+                
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -151,7 +170,8 @@ $_7dd175ad4ab7614d4cc6b13e510bd274 = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   '' => '',
-  'widget_name' => '. r o w  {  m a r g i n :  0  0  0 ;  }  . l o g o  a  h 1  {  c o l o r :  t r a n s p a r e n t ;  b a c k g r o u n d - i m a g e :  u r l (  " / i m g / l o g o . p n g " ) ;  b a c k g r o u n d - p o s i t i o n :  c e n t e r ;  b a c k g r o u n d - s i z e :  c o n t a i n ;  b a c k g r o u n d - r e p e a t :  n o - r e p e a t ;  }  . l o g o  {  b a c k g r o u n d :  # 4 d 4 d 4 d ;  f l o a t :  u n s e t ;  }  . c b p - s p m e n u - v e r t i c a l  {  b a c k g r o u n d - c o l o r :  # 3 3 3 ;  }  . h e a d e r - l e f t  {  f l o a t :  u n s e t ;  w i d t h :  u n s e t ;  }',
+  'widget_name' => '.row { margin: 0 0 0; } .logo a h1 { color: transparent; background-image: url( "/img/logo.png"); ba - 323',
+  'insert_id' => '1569854138-0-4',
 ) );
 
 							}
@@ -162,3 +182,192 @@ $_7dd175ad4ab7614d4cc6b13e510bd274 = null;
 
 							}
 							
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_middlebar = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'middlebar' );
+                }
+                else
+                {
+                    $_sitePageWidget_middlebar = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_twosome1 = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'twosome1' );
+                }
+                else
+                {
+                    $_sitePageWidget_twosome1 = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_twosome2 = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'twosome2' );
+                }
+                else
+                {
+                    $_sitePageWidget_twosome2 = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_threesome1 = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'threesome1' );
+                }
+                else
+                {
+                    $_sitePageWidget_threesome1 = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_threesome2 = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'threesome2' );
+                }
+                else
+                {
+                    $_sitePageWidget_threesome2 = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_threesome3 = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'threesome3' );
+                }
+                else
+                {
+                    $_sitePageWidget_threesome3 = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_foursome1 = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'foursome1' );
+                }
+                else
+                {
+                    $_sitePageWidget_foursome1 = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_foursome2 = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'foursome2' );
+                }
+                else
+                {
+                    $_sitePageWidget_foursome2 = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_foursome3 = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'foursome3' );
+                }
+                else
+                {
+                    $_sitePageWidget_foursome3 = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_foursome4 = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'foursome4' );
+                }
+                else
+                {
+                    $_sitePageWidget_foursome4 = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_leftbar = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'leftbar' );
+                }
+                else
+                {
+                    $_sitePageWidget_leftbar = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_leftbarright = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'leftbarright' );
+                }
+                else
+                {
+                    $_sitePageWidget_leftbarright = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_rightbarleft = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'rightbarleft' );
+                }
+                else
+                {
+                    $_sitePageWidget_rightbarleft = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_rightbar = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'rightbar' );
+                }
+                else
+                {
+                    $_sitePageWidget_rightbar = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_lastoneness = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'lastoneness' );
+                }
+                else
+                {
+                    $_sitePageWidget_lastoneness = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_row_one = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'row_one' );
+                }
+                else
+                {
+                    $_sitePageWidget_row_one = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_charts = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'charts' );
+                }
+                else
+                {
+                    $_sitePageWidget_charts = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_three = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'three' );
+                }
+                else
+                {
+                    $_sitePageWidget_three = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_four = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'four' );
+                }
+                else
+                {
+                    $_sitePageWidget_four = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_five = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'five' );
+                }
+                else
+                {
+                    $_sitePageWidget_five = array();
+                }
+                
+                if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
+                {
+                    $_sitePageWidget_footer = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'footer' );
+                }
+                else
+                {
+                    $_sitePageWidget_footer = array();
+                }
+                

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="originalstring" creation_time="1569577985" modified_time="1569577985" table_version="0.1" module_version="1.00" table_class="PageCarton_Locale_OriginalString" creation_ip="0">
-  <RECORDS autoId="16">
+  <RECORDS autoId="35">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Field name e.g. full name]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Field name e.g. full name]]></TABLE_FIELD>
@@ -125,6 +125,201 @@
       <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Subscription_Checkout_Order_List&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569681838-0-15]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569681838]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="16">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Users - PageCarton Admin Panel]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Users - PageCarton Admin Panel]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853229-0-16]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853229]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="17">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Site Options - PageCarton Admin Panel]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Site Options - PageCarton Admin Panel]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853428-0-17]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853428]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="18">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Signed in users only]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Signed in users only]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853458-0-18]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853458]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="19">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Users not logged in only]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Users not logged in only]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853458-0-19]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853458]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="20">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Page Owners]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Page Owners]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853459-0-20]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853459]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="21">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Who can view widget]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Who can view widget]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853461-0-21]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853461]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="22">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[a-active-class]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[a-active-class]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853462-0-22]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853462]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="23">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[a-ul-append]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[a-ul-append]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853462-0-23]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853462]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="24">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[a-ul-attributes]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[a-ul-attributes]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853462-0-24]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853462]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="25">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[a-ul-class]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[a-ul-class]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853462-0-25]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853462]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="26">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[li-active-class]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[li-active-class]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853463-0-26]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853463]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="27">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[li-ul-class]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[li-ul-class]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853463-0-27]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853463]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="28">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[raw-options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[raw-options]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853464-0-28]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853464]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="29">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[scope]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[scope]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853464-0-29]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853464]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="30">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[ul-class]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[ul-class]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853465-0-30]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853465]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="31">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[ul-id]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[ul-id]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853465-0-31]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853465]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="32">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853506-0-32]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853506]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="33">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853506-0-33]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853506]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="34">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Editing Theme]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Editing Theme]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1569853951-0-34]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1569853951]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>

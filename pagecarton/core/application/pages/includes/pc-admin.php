@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Friday 26th of July 2019 09:01:30 AM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Monday 30th of September 2019 02:35:39 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -25,7 +25,8 @@ $_183a467e23cc670297e6c5bd0c5c0829 = new Ayoola_Object_Embed( array (
   ),
   'wrapper_name' => 'well',
   '' => '',
-  'widget_name' => 'A p p l i c a t i o n _ B r e a d c r u m b',
+  'widget_name' => 'Application_Breadcrumb',
+  'insert_id' => '1569854139-0-5',
 ) );
 
 							}
@@ -47,7 +48,8 @@ $_dd6c65cbd2cd676c37a9abfde6efd317 = new Ayoola_Object_Embed( array (
     0 => '1',
   ),
   'silent_when_object_not_found' => '1',
-  'widget_name' => 'A y o o l a _ O b j e c t _ P l a y',
+  'widget_name' => 'Ayoola_Object_Play',
+  'insert_id' => '1569854139-0-6',
 ) );
 
 							}
@@ -70,6 +72,7 @@ $_a0d1dbe8cd91f74655801013c1a9fded = new Ayoola_Page_Editor_Text( array (
   'url_prefix' => '',
   'pagewidget_id' => '',
   'widget_name' => '',
+  'insert_id' => '1569854139-0-7',
 ) );
 
 							}
@@ -99,7 +102,8 @@ $_812e2aa44bc048b65f0488edd3206e29 = new Ayoola_Object_Embed( array (
     0 => '99',
   ),
   '' => '',
-  'widget_name' => 'A p p l i c a t i o n _ U p g r a d e _ C h e c k',
+  'widget_name' => 'Application_Upgrade_Check',
+  'insert_id' => '1569854139-0-8',
 ) );
 
 								}
@@ -125,7 +129,8 @@ $_103e5ff7f83a41a3e7e18f307a3876ea = new Ayoola_Object_Embed( array (
   'wrapper_name' => 'white-well',
   'wrap_widget' => '1',
   'hide_if_stages_completed' => '1',
-  'widget_name' => 'P a g e C a r t o n _ N e w S i t e W i z a r d',
+  'widget_name' => 'PageCarton_NewSiteWizard',
+  'insert_id' => '1569854139-0-9',
 ) );
 
 							}
@@ -142,14 +147,14 @@ $_103e5ff7f83a41a3e7e18f307a3876ea = null;
 $_720295cbdf8d3b2b8ecc0c0c37aca03a = new Ayoola_Menu( array (
   'option' => 'admin',
   'template_name' => 'HorizontalWhite',
-  'pagewidget_id' => '1563976050-0-11',
+  'pagewidget_id' => '1564131691-0-11',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  '' => '',
-  'widget_name' => 'a d m i n  -  H o r i z o n t a l W h i t e  -  1 5 6 3 9 7 6 0 5 0 - 0 - 1 1  -  A r r a y  -',
   'insert_id' => '1564131691-0-11',
+  '' => '',
+  'widget_name' => 'admin - HorizontalWhite - 1564131691-0-11 - - 1564131691-0-11 -',
 ) );
 
 							}
@@ -201,7 +206,8 @@ $_4e8fd3c1ce6442243ee625dc127bf58a = new Ayoola_Page_Editor_Text( array (
     0 => 'Application_Info',
   ),
   'wrapper_name' => 'white-well',
-  'widget_name' => 'D a s h b o a r d  H o m e  P a g e { { { h o m e p a g e } } }  L a s t  B a c k  U p { { { l a s t _ b a c k u p } } }',
+  'widget_name' => 'Dashboard Home Page{{{homepage}}} Last Back Up{{{last_backup}}}',
+  'insert_id' => '1569854140-0-11',
 ) );
 
 							}
@@ -284,7 +290,8 @@ $_6e0c10910d5fbb6ad4e9ead328450193 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'Application_Info',
   ),
-  'widget_name' => 'U S E R  A c c o u n t s  { { { u s e r _ c o u n t } } }  A L L  P o s t s  { { { p o s t _ c o u n t } } }  M Y  P a g e s  { { { p a g e _ c o u n t } } }',
+  'widget_name' => 'USER Accounts {{{user_count}}} ALL Posts {{{post_count}}} MY Pages {{{page_count}}}',
+  'insert_id' => '1569854140-0-12',
 ) );
 
 							}
@@ -308,7 +315,8 @@ $_8f94b54f70cde9623d9cc279007489dd = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   '' => '',
-  'widget_name' => 'Â ©  2 0 1 9  P a g e C a r t o n .  A l l  R i g h t s  R e s e r v e d .',
+  'widget_name' => 'Â© 2019 PageCarton. All Rights Reserved.',
+  'insert_id' => '1569854140-0-13',
 ) );
 
 							}

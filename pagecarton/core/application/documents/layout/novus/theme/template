@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Wednesday 24th of July 2019 02:05:10 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Monday 30th of September 2019 02:35:38 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <!DOCTYPE HTML>
@@ -78,6 +78,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <?php
 //nav_one Begins Here
 
+                foreach( $_sitePageWidget_nav_one as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 echo ( ! empty( $_acd6c67e7aeba849612416a4d14168e1 ) &&  is_object( $_acd6c67e7aeba849612416a4d14168e1 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_acd6c67e7aeba849612416a4d14168e1->view(), '' ) : null );
 
 //nav_one Ends Here
@@ -128,6 +133,11 @@ echo ( ! empty( $_acd6c67e7aeba849612416a4d14168e1 ) &&  is_object( $_acd6c67e7a
 				<section><?php
 //oneness Begins Here
 
+                foreach( $_sitePageWidget_oneness as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4ab7614d4cc6b13e510bd274 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_7dd175ad4ab7614d4cc6b13e510bd274->view(), '' ) : null );
 
 //oneness Ends Here
@@ -138,6 +148,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //middlebar Begins Here
 
+                foreach( $_sitePageWidget_middlebar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //middlebar Ends Here
 ?>@@@middlebar@@@
 										   </div>
@@ -147,6 +162,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //twosome1 Begins Here
 
+                foreach( $_sitePageWidget_twosome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //twosome1 Ends Here
 ?>@@@twosome1@@@
 											</div>
@@ -154,6 +174,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //twosome2 Begins Here
 
+                foreach( $_sitePageWidget_twosome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //twosome2 Ends Here
 ?>@@@twosome2@@@
 											</div> 
@@ -163,6 +188,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //threesome1 Begins Here
 
+                foreach( $_sitePageWidget_threesome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //threesome1 Ends Here
 ?>@@@threesome1@@@
 										   </div>
@@ -170,6 +200,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //threesome2 Begins Here
 
+                foreach( $_sitePageWidget_threesome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //threesome2 Ends Here
 ?>@@@threesome2@@@
 											</div> 
@@ -177,6 +212,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //threesome3 Begins Here
 
+                foreach( $_sitePageWidget_threesome3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //threesome3 Ends Here
 ?>@@@threesome3@@@
 											</div> 
@@ -186,6 +226,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //foursome1 Begins Here
 
+                foreach( $_sitePageWidget_foursome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //foursome1 Ends Here
 ?>@@@foursome1@@@
 										   </div>
@@ -193,6 +238,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //foursome2 Begins Here
 
+                foreach( $_sitePageWidget_foursome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //foursome2 Ends Here
 ?>@@@foursome2@@@
 											</div> 
@@ -200,6 +250,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //foursome3 Begins Here
 
+                foreach( $_sitePageWidget_foursome3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //foursome3 Ends Here
 ?>@@@foursome3@@@
 											</div> 
@@ -207,6 +262,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //foursome4 Begins Here
 
+                foreach( $_sitePageWidget_foursome4 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //foursome4 Ends Here
 ?>@@@foursome4@@@
 											</div> 
@@ -216,6 +276,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //leftbar Begins Here
 
+                foreach( $_sitePageWidget_leftbar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //leftbar Ends Here
 ?>@@@leftbar@@@
 										   </div>
@@ -223,6 +288,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //leftbarright Begins Here
 
+                foreach( $_sitePageWidget_leftbarright as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //leftbarright Ends Here
 ?>@@@leftbarright@@@
 											</div> 
@@ -232,6 +302,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //rightbarleft Begins Here
 
+                foreach( $_sitePageWidget_rightbarleft as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //rightbarleft Ends Here
 ?>@@@rightbarleft@@@
 											</div> 
@@ -239,6 +314,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 												<?php
 //rightbar Begins Here
 
+                foreach( $_sitePageWidget_rightbar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //rightbar Ends Here
 ?>@@@rightbar@@@
 											</div>   
@@ -247,11 +327,21 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 								</section><?php
 //lastoneness Begins Here
 
+                foreach( $_sitePageWidget_lastoneness as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //lastoneness Ends Here
 ?>@@@lastoneness@@@</section>
 <?php
 //row_one Begins Here
 
+                foreach( $_sitePageWidget_row_one as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //row_one Ends Here
 ?>@@@row_one@@@
 
@@ -260,6 +350,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 <?php
 //charts Begins Here
 
+                foreach( $_sitePageWidget_charts as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //charts Ends Here
 ?>@@@charts@@@
 
@@ -268,6 +363,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 <?php
 //three Begins Here
 
+                foreach( $_sitePageWidget_three as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //three Ends Here
 ?>@@@three@@@
 
@@ -276,6 +376,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 <?php
 //four Begins Here
 
+                foreach( $_sitePageWidget_four as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //four Ends Here
 ?>@@@four@@@
 
@@ -284,6 +389,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 <?php
 //five Begins Here
 
+                foreach( $_sitePageWidget_five as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //five Ends Here
 ?>@@@five@@@
 
@@ -298,6 +408,11 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 <?php
 //footer Begins Here
 
+                foreach( $_sitePageWidget_footer as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
 //footer Ends Here
 ?>@@@footer@@@
 
