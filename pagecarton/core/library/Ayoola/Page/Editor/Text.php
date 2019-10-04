@@ -165,10 +165,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         //  to be executed within the widget class
         foreach( [ 'codes', 'editable', 'preserved_content' ] as $each  )
         {
-       //   if( @$parameters['url_prefix'] !== Ayoola_Application::getUrlPrefix() ||  Ayoola_Application::getUrlPrefix() )
-            {		
-            //    @$parameters[$each] = self::fixUrlPrefix( $parameters[$each], @$parameters['url_prefix'], Ayoola_Application::getUrlPrefix() );
+            if( empty( $parameters[$each] ) )
+            {
+                continue;
             }
+            $parameters[$each] = str_ireplace( '>&nbsp;</', '></', $parameters[$each] );
         }
     }
 	
@@ -534,6 +535,14 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			@$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, $object['editable'] ): null;
 	//		$replace = Ayoola_Application::getUrlPrefix();
 		}
+        foreach( [ 'codes', 'editable', 'preserved_content' ] as $each  )
+        {
+            if( empty( $object[$each] ) )
+            {
+                continue;
+            }
+            $object[$each] = str_ireplace( '></', '>&nbsp;</', $object[$each] );
+        }
 
 		if( ! @$object['codes'] )
 		{
