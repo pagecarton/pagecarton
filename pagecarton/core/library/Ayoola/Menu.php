@@ -665,6 +665,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 			elseif( is_array( $values['link_options'] ) && in_array( 'new_window', $values['link_options'] ) )
 			{
+				$values['target'] = $values['option_name'];
 				$link->setAttribute( 'target', $values['option_name'] );
 			}
 			else
@@ -730,6 +731,10 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
                 if( ! stripos( $iTemplate, '{{{ayoola_spotlight}}}' ) )
                 {
                     $iTemplate = str_ireplace( '<a ', '<a onclick="{{{ayoola_spotlight}}}" ', $iTemplate );
+                }
+                if( ! stripos( $iTemplate, '{{{target}}}' ) )
+                {
+                    $iTemplate = str_ireplace( '<a ', '<a target="{{{target}}}" ', $iTemplate );
                 }
 				$template .= self::replacePlaceholders( $iTemplate, $values + ( $this->getParameter() ? : array() ) + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', 'pc_no_data_filter' => true, ) );
 			}
