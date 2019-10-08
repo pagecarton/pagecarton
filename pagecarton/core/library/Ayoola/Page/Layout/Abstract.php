@@ -493,6 +493,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 							continue 2;
 						}
 					case "div":
+					case "nav":
+					case "main":
 						@++$countDiv;
 				//		if( ! $eachDiv->getAttribute( "data-pc-section-name" ) && ! $eachDiv->getAttribute( "id" ) )   
 						if( ! $eachDiv->getAttribute( "data-pc-section-name" ) )   

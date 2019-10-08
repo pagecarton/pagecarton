@@ -1383,6 +1383,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
                 $result = $classToCreatePostType->view();
                 $values['true_post_type'] = $postTypeInfoForThisPost['article_type'];
                 $values['post_type'] = $postTypeInfoForThisPost['post_type'];
+                $postTypeInfo = $postTypeInfoForThisPost; 
             }
             elseif( 
                 strtolower( $postTypeInfoForThisPost['article_type'] ) != strtolower( $postTypeInfo['article_type'] )

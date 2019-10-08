@@ -477,7 +477,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 	// 	var_export( $filter->filter( self::getDefaultLayout() ) );
 		if( ! $content['template'] = @file_get_contents( $filePath ) )
 		{
-			$this->setViewContent( self::__( '<p class="boxednews badnews">You need to select a default page "template" layout. </p><a  class="boxednews goodnews" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Page/?previous_url=/ayoola/page/edit/layout/?url=' . $page['url'] . '">Choose a template</a>.' ) );
+			$this->setViewContent( self::__( '<p class="boxednews badnews">You need to select a default page "template" layout. </p><a  class="boxednews goodnews" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Page/?previous_url=/tools/classplayer/get/name/' . __CLASS__ . '/?url=' . $page['url'] . '">Choose a template</a>.' ) );
 			return false;
 		}
 		
@@ -1165,9 +1165,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$search = array( '%%' . $section . '%%', '@@@' . $section . '@@@' );
 				
 				//	ALLOWING ADMINISTRATORS TO EDIT TEMPLATES ON THE FLY ( MARCH 29, 2014 )
-			//	$editLink = "<a style='' class='badnews' title='Edit the \"{$section}\" section of this page.' href='javascript:' onClick='ayoola.spotLight.showLinkInIFrame( \"/ayoola/page/edit/layout/?url={$page['url']}\" );'>[edit]</a>";
 				$urlPrefix = Ayoola_Application::getUrlPrefix();
-				$editLink =  "\" . Ayoola_Application::getUrlPrefix() . \"/ayoola/page/edit/layout/?url={$page['url']}";
+				$editLink =  "\" . Ayoola_Application::getUrlPrefix() . \"/tools/classplayer/get/name/" . __CLASS__ . "/?url={$page['url']}";
 				    
 				$replace = "<?php\n//{$section} Begins Here\n";
 				$replace .= "{$sectionContent['template']}";
