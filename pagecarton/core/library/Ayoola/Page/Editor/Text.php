@@ -330,6 +330,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		{
 			$html = nl2br( $html );  
 		}
+		if( $this->getParameter( 'strip_tags' ) )
+		{
+			$html = strip_tags( $html, $this->getParameter( 'strip_tags_allowed_tags' ) );  
+		}
 	//	$this->
 		$this->_parameter['no_view_content_wrap'] = true;
 		$this->setViewContent( $html );
