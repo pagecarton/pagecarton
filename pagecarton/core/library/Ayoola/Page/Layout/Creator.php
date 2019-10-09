@@ -187,7 +187,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 							//	send all content because of text update
                             foreach( $previousData['dummy_replace'] as $key => $each )
                             {
-                                $previousData['dummy_replace'][$key] = trim( $previousData['dummy_search'][$key], '{}' );
+                                $previousData['dummy_replace'][$key] = trim( $previousData['dummy_search'][$key], '{-}' );
                             }
 							$values += $previousData;
 						}

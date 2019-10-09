@@ -149,13 +149,19 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
       //  self::v( $content );
         //  self::v( $matches );
         $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates() ? : static::$_defaultTexts;
+        if( 
+            empty( $previousData['dummy_title'] ) || empty( $previousData['dummy_search'] ) || empty( $previousData['dummy_replace'] )
+            )
+        {
+            $previousData = static::$_defaultTexts;
+        }
 
         if( $matches[0] )
         {
             foreach( $matches[0] as $count => $each )
             {
             //    self::v( $each );
-                $previousData['dummy_title'][] = 'Replaceable Text ' . self::$_counter . $count;
+                $previousData['dummy_title'][] = 'Replaceable Text ' . ( $count + 1 );
                 $previousData['dummy_search'][] = $each;
                 $previousData['dummy_replace'][] = trim( $each, '{-}' );
             }
