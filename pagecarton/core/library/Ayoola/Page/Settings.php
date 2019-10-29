@@ -47,42 +47,40 @@ class Ayoola_Page_Settings extends PageCarton_Settings
                 //	continue;
 				//	create this page if not available.
 				//	must initialize each time so that each page can be handled.
-                Ayoola_Application::$appNamespace .= microtime();
+                Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
 				$sanitizeClass = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $page, 'auto_create_page' => true ) );  
-                if( ! $response = $sanitizeClass->sourcePage( $page ) )
+            //    if( ! $response = $sanitizeClass->sourcePage( $page ) )
                 {
                     //  Auto create
                 //    $table->insert( array( 'url' => $page, 'system' => '1' ) );
                 }
-                Ayoola_Application::$appNamespace .= microtime();
-				if( $table->select( null, array( 'url' => $page, 'system' => '1' ) ) )
+                Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
+				if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
 				{
 					$parameters = array( 
 											'fake_values' => array( 'auto_submit' => true ),
 											'url' => $page,
 					);
 					$class = new Ayoola_Page_Delete( $parameters );
-                    $class->init();
+                //    $class->init();
 
                     //  upgrade cache
 				//	Application_Cache_Clear::viewInLine();
 				//	$deleted = $table->delete( array( 'url' => $page, 'system' => '1' ) );
 				//	var_export( $page );   
 				//	var_export( $class->view() );   
-				}
-				elseif( $table->select( null, array( 'url' => $page ) ) )
-				{
-
                 }
-                Ayoola_Application::$appNamespace .= microtime();
+                Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
+                //  Application_Cache_Clear::viewInLine();
 
-				$response = $sanitizeClass->sourcePage( $page );
+                    $response = $sanitizeClass->sourcePage( $page );
 
-				// sanitize so it could refresh with latest template
-			//	$class = new Ayoola_Page_Editor_Sanitize();
+                    // sanitize so it could refresh with latest template
+                //	$class = new Ayoola_Page_Editor_Sanitize();
 
-				//	create this page if not available.
-				$sanitizeClass->refresh( $page );	     		
+                    //	create this page if not available.
+                    $sanitizeClass->refresh( $page );	     		
+
 			//	self::v( $page );   
 			//	self::v( $response );   
 		//		var_export( $response );   

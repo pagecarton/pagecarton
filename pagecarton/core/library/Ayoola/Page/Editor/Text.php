@@ -148,12 +148,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         #   '{-Lorem Ipsum dolor-}'
       //  self::v( $content );
         //  self::v( $matches );
-        $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates() ? : static::$_defaultTexts;
+        $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates() ? : Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
         if( 
             empty( $previousData['dummy_title'] ) || empty( $previousData['dummy_search'] ) || empty( $previousData['dummy_replace'] )
             )
         {
-            $previousData = static::$_defaultTexts;
+            $previousData = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
         }
 
         if( $matches[0] )
