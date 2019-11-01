@@ -253,7 +253,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 
 			// Excempt the header content, and the nav and footer
-			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ( empty( $isRealNavigation ) ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy' ) && ! stripos( $placeholder[1], '&amp;copy' ) )
+            //  content with this means it is meant to be in theme file
+			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ( empty( $isRealNavigation ) ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy' ) && ! stripos( $placeholder[1], '&amp;copy' ) && ! stripos( $placeholder[1], '</nav>' ) )
 			{
 		//		var_export( stripos( $placeholder[1], '©' ) );
 		//		var_export( $match );

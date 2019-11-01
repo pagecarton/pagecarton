@@ -832,8 +832,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 									{
 										$defaultPlaceHolder = null;
 									}
-								}
-								if( stripos( $originalFile, $check  ) || stripos( $check, '©' ) || stripos( $check, '&copy;' ) || stripos( $check, '&amp;copy' ) )
+                                }
+                                
+                                //  content with this means it is meant to be in theme file
+								if( stripos( $originalFile, $check  ) || stripos( $check, '©' ) || stripos( $check, '&copy;' ) || stripos( $check, '&amp;copy' ) || stripos( $check, '</nav>' ) )
 								{
 									//	Don't duplicate whats in theme file and navigation'
 							//		var_export( $sectionPlaceholder[1] );
