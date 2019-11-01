@@ -560,7 +560,20 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				Application_Javascript::addCode( $options['css_code'] );
 			}
 		}
-	//	VAR_EXPORT( $this->getOptions() );
+    //	VAR_EXPORT( $this->getOptions() );
+        if( $this->getParameter( 'markup_template' ) )
+        {
+            $iTemplate = $this->getParameter( 'markup_template' );
+            if( ! stripos( $iTemplate, '{{{ayoola_spotlight}}}' ) && ! stripos( $iTemplate, 'onclick' ) )
+            {
+                $iTemplate = str_ireplace( '<a ', '<a onclick="{{{ayoola_spotlight}}}" ', $iTemplate );
+            }
+            if( ! stripos( $iTemplate, '{{{target}}}' ) && ! stripos( $iTemplate, 'target' ) )
+            {
+                $iTemplate = str_ireplace( '<a ', '<a target="{{{target}}}" ', $iTemplate );
+            }
+        }
+
 		foreach( $this->getOptions() as $values ) 
 		{
 			
@@ -727,15 +740,6 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			$menu->appendChild( $option );
 			if( $this->getParameter( 'markup_template' ) )
 			{
-                $iTemplate = $this->getParameter( 'markup_template' );
-                if( ! stripos( $iTemplate, '{{{ayoola_spotlight}}}' ) )
-                {
-                    $iTemplate = str_ireplace( '<a ', '<a onclick="{{{ayoola_spotlight}}}" ', $iTemplate );
-                }
-                if( ! stripos( $iTemplate, '{{{target}}}' ) )
-                {
-                    $iTemplate = str_ireplace( '<a ', '<a target="{{{target}}}" ', $iTemplate );
-                }
 				$template .= self::replacePlaceholders( $iTemplate, $values + ( $this->getParameter() ? : array() ) + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', 'pc_no_data_filter' => true, ) );
 			}
 		}
