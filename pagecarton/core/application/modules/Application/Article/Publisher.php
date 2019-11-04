@@ -141,6 +141,7 @@ class Application_Article_Publisher extends Application_Article_Creator
                                     break;
                                 }
 //                                self::v( $kind );
+                                $kind = $kind . $noRequired;
                              //   self::v( get_class( $eachWidget ) );
                             //    self::v( $eachWidget->getParameter( 'add_a_new_post_full_url' ) );
                             //    self::v( $each );
