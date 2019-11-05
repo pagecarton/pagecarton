@@ -861,7 +861,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( in_array( 1, $allowedLevels ) && intval( $myLevel ) > 1 && ! @$options['strict'] ) //	Deleted user levels should at least have the level of a standard user
 		{
             //  this is making all user level have parent access of standard user
-			return true;
+		///	return true;
 		}
 
 
