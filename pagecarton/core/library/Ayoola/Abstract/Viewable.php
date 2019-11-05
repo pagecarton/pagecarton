@@ -796,7 +796,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$username = trim( strtolower( Ayoola_Application::getUserInfo( 'username' ) ) );
 		if(
 			( $myLevel === 99 && ! @$options['strict'] ) // Super user except if its strict
-		|| ( in_array( 98, $allowedLevels ) && $username && $username === strtolower( @Ayoola_Application::$GLOBAL['username'] ) ) //	Profile owner means he is authorized
+		|| ( in_array( 98, $allowedLevels ) && $username && $username === strtolower( @Ayoola_Application::$GLOBAL['username'] )  && ! @$options['strict'] ) //	Profile owner means he is authorized
 		|| ( in_array( 97, $allowedLevels ) && $username && ( in_array( strtolower( Ayoola_Application::getUserInfo( 'email' ) ), array_map( 'strtolower', @Ayoola_Application::$GLOBAL['post']['whitelist_email_address'] ? : array() ) ) || $username === strtolower( @Ayoola_Application::$GLOBAL['post']['username'] ) ) ) //	We were invited to view a post/article
 		|| ( in_array( 0, $allowedLevels ) && ! @$options['strict'] ) //	Public means everyone is welcome except if its strict
 		|| in_array( $myLevel, $allowedLevels ) //	We are explicitly allowed
@@ -861,7 +861,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( in_array( 1, $allowedLevels ) && intval( $myLevel ) > 1 && ! @$options['strict'] ) //	Deleted user levels should at least have the level of a standard user
 		{
             //  this is making all user level have parent access of standard user
-		///	return true;
+			return true;
 		}
 
 
