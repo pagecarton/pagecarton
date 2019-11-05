@@ -853,7 +853,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		//	$previous = Ayoola_Page::setPreviousUrl( '' );
 	//		var_export( $userInfo );
 
-		if( in_array( 98, $allowedLevels ) && ! empty( Ayoola_Application::$GLOBAL['profile_url'] ) && is_array( $userInfo['profiles'] ) && in_array( Ayoola_Application::$GLOBAL['profile_url'], $userInfo['profiles'] ) ) //	profile owner
+		if( in_array( 98, $allowedLevels ) && ! empty( Ayoola_Application::$GLOBAL['profile_url'] ) && is_array( $userInfo['profiles'] ) && in_array( Ayoola_Application::$GLOBAL['profile_url'], $userInfo['profiles'] )  && ! @$options['strict'] ) //	profile owner
 		{
 			return true;
 		}
@@ -861,7 +861,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( in_array( 1, $allowedLevels ) && intval( $myLevel ) > 1 && ! @$options['strict'] ) //	Deleted user levels should at least have the level of a standard user
 		{
             //  this is making all user level have parent access of standard user
-		//	return true;
+			return true;
 		}
 
 
