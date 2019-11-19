@@ -35,7 +35,7 @@ class Application_Domain_Order_DNS extends Application_Domain_Order_Abstract
 		try
 		{ 
             if( ! $data = $this->getIdentifierData() ){ return false; }
-    
+
 			if( empty( $data['active'] ) )
 			{ 
                 if( Ayoola_Loader::loadClass( $data['api'] ) && method_exists( $data['api'], 'getInfo' ) )
@@ -134,6 +134,17 @@ class Application_Domain_Order_DNS extends Application_Domain_Order_Abstract
 
         if( @$values['dns_mode'] || Ayoola_Form::getGlobalValue( 'dns_mode' ) )
         {
+            if( ! $data = $this->getIdentifierData() ){ return false; }
+        //    var_export( $data );
+            if( Ayoola_Loader::loadClass( $data['api'] ) && method_exists( $data['api'], 'getNameservers' ) )
+            {
+                $class = $data['api'];
+                if( $nameservers = $class::getNameservers( $data ) )
+                {
+                    @$values['nameserver1'] = @$nameservers['nameserver1'] ? : @$values['nameserver1'];
+                    @$values['nameserver2'] = @$nameservers['nameserver2'] ? : @$values['nameserver2'];
+                }
+            }
             $fieldset->addElement( array( 'name' => 'nameserver1', 'label' => 'Primary Nameserver', 'placeholder' => 'e.g. ns1.example.com', 'type' => 'InputText', 'value' => @$values['nameserver1'] ) ); 
             $fieldset->addElement( array( 'name' => 'nameserver2', 'label' => 'Secondary Nameserver', 'placeholder' => 'e.g. ns2.example.com', 'type' => 'InputText', 'value' => @$values['nameserver2'] ) ); 
 			$fieldset->addRequirement( 'nameserver1', array( 'NotEmpty' => true ) );

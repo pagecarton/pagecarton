@@ -62,20 +62,17 @@ class Application_Domain_Order_Process extends Application_Domain_Order_Abstract
 					$firstPart = array_shift( $domainArray );
 					$ext = implode( '.', $domainArray );
 					$apiInfo = Application_Domain_Registration_Api::getInstance()->select( null, array( 'extension' => $ext ) );
-	//		var_export( $ext );
-	//		var_export( $apiInfo );
+		//	var_export( $ext );
+		//	var_export( $apiInfo );
 					foreach( $apiInfo as $eachApi )
 					{
-						if( empty( $eachApi['class_name'] ) )
-						{
-							continue;
-						}
 						if( ! Ayoola_Loader::loadClass( $eachApi['class_name'] ) )
 						{ 
 							continue;
 						}
 						$class = $eachApi['class_name'];
 						$class = new $class( $parameters );
+			//			var_export( $this->getDbTable()->select() );  
 			//			var_export( $this->getDbTable()->select() );  
 						$this->setViewContent( $class->view() ); 
                         if( $this->getDbTable()->update( array( 'api' => $eachApi['class_name'] ), array( 'domain_name' => $values['domain_name'] ) ) )

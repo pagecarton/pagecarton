@@ -627,9 +627,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//		return false;
 
 		}
-//		var_export( $mailInfo );
 		if( ! empty( $mailInfo['to'] ) )
 		{
+    //		var_export( $mailInfo );
             $sent = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], $header );
         }
         $mailInfo['to'] = array_map( 'trim', explode( ',', $mailInfo['to'] ) );

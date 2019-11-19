@@ -1594,12 +1594,12 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="197">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Email]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/Application_CommentBox_Table_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Editor&quot;,&quot;\/widgets\/PageCarton_MultiSite_Creator&quot;,&quot;\/widgets\/Application_User_NotificationMessage_Editor&quot;,&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/Application_CommentBox_Table_Creator&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Editor&quot;,&quot;\/widgets\/PageCarton_MultiSite_Creator&quot;,&quot;\/widgets\/Application_User_NotificationMessage_Editor&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Application_User_Help_ForgotUsernameOrPassword&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905890-0-298]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905890]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1564485818]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[false,false,false,false,false]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="198">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Download VCARD]]></TABLE_FIELD>
@@ -1621,12 +1621,12 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="200">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Reset Password]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/PageCarton_MultiSite_Creator&quot;,&quot;\/pc-admin&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/PageCarton_MultiSite_Creator&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Application_User_Help_ForgotUsernameOrPassword&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905890-0-295]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905890]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1566470099]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[false,false,false,false,false]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="201">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Update Account]]></TABLE_FIELD>

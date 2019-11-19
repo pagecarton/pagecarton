@@ -39,7 +39,13 @@ class Application_Domain_Registration_Api_Creator extends Application_Domain_Reg
 			$this->setViewContent( $this->getForm()->view() );
 
 		//	self::v( $_POST );
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
+            if( ! $values = $this->getForm()->getValues() ){ return false; }
+            
+            if( empty( $values['extension'] ) && Ayoola_Loader::loadClass( $values['class_name'] ) && method_exists( $values['class_name'], 'getTldList' ) )
+            {
+                $class = $values['class_name'];
+                $values['extension'] = $class::getTldList();
+            }
 			
 			//	Notify Admin
 			$mailInfo = array();
@@ -56,7 +62,7 @@ class Application_Domain_Registration_Api_Creator extends Application_Domain_Reg
 		//	if( ! $this->insertDb() ){ return false; }
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent(  '' . self::__( '<div class="goodnews">Added successfully. </div>' ) . '', true  ); 
+				$this->setViewContent(  '<div class="goodnews">' . self::__( 'Added successfully.' ) . '</div>', true  ); 
 			}
 		//	$this->setViewContent( $this->getForm()->view() );
             
