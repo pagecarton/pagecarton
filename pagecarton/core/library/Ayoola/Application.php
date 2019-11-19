@@ -1805,7 +1805,7 @@ class Ayoola_Application
 		//	var_export( $requestedUri );
 		//	var_export( Ayoola_Application::getPathPrefix() );
 		//	REMOVE PATH PREFIX
-		if( strpos( $requestedUri, Ayoola_Application::getPathPrefix() ) === 0 )
+		if( Ayoola_Application::getPathPrefix() && strpos( $requestedUri, Ayoola_Application::getPathPrefix() ) === 0 )
 		{
 			$requestedUri = explode( Ayoola_Application::getPathPrefix(), $requestedUri );
 		//	var_export( $requestedUri );
