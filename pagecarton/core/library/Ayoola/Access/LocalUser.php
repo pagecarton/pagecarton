@@ -35,6 +35,14 @@ class Ayoola_Access_LocalUser extends Ayoola_Dbase_Table_Abstract_Xml_Private
      */
     protected $_tableVersion = '0.07';
 
+    /**
+     * 
+     *
+     * @param array
+     */
+    protected static $_defaultSelectOptions = array( 'supplementary_data_key' => 'user_information' );
+
+
 	protected $_dataTypes = array 
 	( 
 		'username' => 'INPUTTEXT,UNIQUE', 

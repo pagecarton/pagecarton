@@ -1211,7 +1211,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				{
 					case 'gallery':
 						$imagesKey = 'images' . $featurePrefix;
-						$images = $data[$imagesKey];
+						if( $images = $data[$imagesKey] )
 						foreach( $images as $imageCounter => $eachImage )
 						{
 							if( ! trim( $eachImage ) )

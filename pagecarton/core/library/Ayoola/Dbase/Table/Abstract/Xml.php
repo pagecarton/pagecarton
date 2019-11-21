@@ -52,6 +52,13 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
     protected static $_version = '1.00';
 
     /**
+     * 
+     *
+     * @param array
+     */
+    protected static $_defaultSelectOptions = array();
+
+    /**
      * The Accessibility of the Table
      *
      * @param string
@@ -291,7 +298,9 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             {
                 $where = json_decode( $this->getParameter( 'where_clause_json' ), true );
                 $where = is_array( $where ) ? $where : array();
-            }
+            //    var_export( json_decode( $this->getParameter( 'where_clause_json' ) ) );
+            //    var_export( $where );
+             }
             if( $this->getParameter( 'where_clause_user_data' ) )
             {
                 if( empty( Ayoola_Application::getUserInfo( $this->getParameter( 'where_clause_user_data' ) ) ) )
@@ -300,9 +309,12 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
                 }
                 $where[$this->getParameter( 'where_clause_user_data' )] = (string) Ayoola_Application::getUserInfo( $this->getParameter( 'where_clause_user_data' ) );
             }
-            //   var_export( $where );
              //   var_export( $records );
-             $records = $this->query( 'TABLE', 'FETCH', null, $where, array( 'limit' => $this->getParameter( 'limit' ) ? : 50 ) );
+             @$options = array( 'limit' => $this->getParameter( 'limit' ) ? : 50 );
+             @static::$_defaultSelectOptions = is_array( static::$_defaultSelectOptions ) ? static::$_defaultSelectOptions : array();
+             $options = $options + static::$_defaultSelectOptions;
+        //     var_export( static::$_defaultSelectOptions );
+              $records = $this->query( 'TABLE', 'FETCH', null, $where, $options );
              //   var_export( $records );
 
             if (!empty($_GET['pc_form_values']) && !empty($_GET['pc_form_labels'])) {
@@ -350,8 +362,14 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
     {
         try
         {
-            $result = $this->query('TABLE', 'FETCH', $fieldsToSelect, $where, $options);
-        } catch (Exception $e) {
+            @$options = $options ? : array();
+            @static::$_defaultSelectOptions = is_array( static::$_defaultSelectOptions ) ? static::$_defaultSelectOptions : array();
+            $options = $options + static::$_defaultSelectOptions;
+        //    var_export( $options );
+            $result = $this->query( 'TABLE', 'FETCH', $fieldsToSelect, $where, $options );
+        } 
+        catch( Exception $e ) 
+        {
             return array();
         }
 
