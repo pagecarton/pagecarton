@@ -1556,8 +1556,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					if( ! array_key_exists( @$advanceParameters['advanced_parameter_name'][$i], $parameterOptions ) )
 					{
 						$parameterOptions[$advanceParameters['advanced_parameter_name'][$i]] = $advanceParameters['advanced_parameter_name'][$i];
-					}
-					switch( @$advanceParameters['advanced_parameter_name'][$i] )
+                    }
+                    list( $aPName, ) = explode( '[', @$advanceParameters['advanced_parameter_name'][$i] );
+					switch( $aPName )
 					{
 						case 'markup_template':
 						case 'markup_template_no_data':
@@ -1568,6 +1569,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						case 'call_to_action':
 						case 'content_to_clear':
 						case 'javascript_code':
+						case 'where_clause_json':
 						case 'body':
 						//	if( $advanceParameters['advanced_parameter_value'][$i] )
 							{
