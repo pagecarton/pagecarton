@@ -246,29 +246,29 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 					$newFieldSet->addElement( array( 'name' => 'element_default_value',  'multiple' => 'multiple', 'label' => ' ', 'style' => 'max-width: 240px;', 'placeholder' => 'Default Value e.g. John C. Smith', 'type' => 'InputText', 'value' => @$values['element_default_value'][$i] ) );
 					
 				//	$newFieldSet->addRequirement( 'element_name', array( 'Name' => null  ) ); 
-					$newFieldSet->addElement( array( 'name' => 'element_placeholder',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Placeholder e.g. John Smith', 'type' => 'InputText', 'value' => @$values['element_placeholder'][$i] ) );
-					$newFieldSet->addElement( array( 'name' => 'element_type',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'type' => 'Select', 'value' => @$values['element_type'][$i] ), 
-					
-						array( 
-								'text' => 'Text Input', 
-								'hidden' => 'Hidden Field', 
-								'radio' => 'Radio Button', 
-								'select' => 'Select Option', 
-								'checkbox' => 'Checkbox', 
-								'email' => 'Email Input', 
-								'textarea' => 'Text Area', 
-								'html' => 'HTML Editor', 
-								'submit' => 'Submit Button', 
-								'file' => 'File', 
-								'document' => 'Document', 
-								'document-multiple' => 'Multiple Documents', 
-								'image' => 'Image', 
-								'image-multiple' => 'Multiple Images', 
-							//	'profile_picture' => 'Profile Picture', 
-								'audio' => 'Audio',
-								'date' => 'Date',
-								'datetime' => 'Date & Time',
-								 ) );
+                    $newFieldSet->addElement( array( 'name' => 'element_placeholder',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Placeholder e.g. John Smith', 'type' => 'InputText', 'value' => @$values['element_placeholder'][$i] ) );
+                    $types = array( 
+                        'text' => 'Text Input', 
+                        'hidden' => 'Hidden Field', 
+                        'radio' => 'Radio Button', 
+                        'select' => 'Select Option', 
+                        'checkbox' => 'Checkbox', 
+                        'email' => 'Email Input', 
+                        'textarea' => 'Text Area', 
+                        'html' => 'HTML Editor', 
+                        'submit' => 'Submit Button', 
+                        'file' => 'File', 
+                        'document' => 'Document', 
+                        'document-multiple' => 'Multiple Documents', 
+                        'image' => 'Image', 
+                        'image-multiple' => 'Multiple Images', 
+                    //	'profile_picture' => 'Profile Picture', 
+                        'audio' => 'Audio',
+                        'date' => 'Date',
+                        'datetime' => 'Date & Time',
+                    );
+                    asort( $types );
+					$newFieldSet->addElement( array( 'name' => 'element_type',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'type' => 'Select', 'value' => @$values['element_type'][$i] ), $types );
 					$this->getGlobalValue( 'group_names' ) ? $newFieldSet->addElement( array( 'name' => 'element_group_name',  'multiple' => 'multiple', 'label' => 'Group Name (Optional)', 'type' => 'Select', 'value' => @$values['element_group_name'][$i] ), array_combine( $this->getGlobalValue( 'group_ids' ), $this->getGlobalValue( 'group_names' ) ) ) : null; 
 					
 					$newFieldSet->addElement( array( 'name' => 'element_validators', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_validators'][$i] ), $reqOptions );   

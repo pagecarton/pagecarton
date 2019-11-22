@@ -367,9 +367,17 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                 //    var_export(  $where );
 					if( ! empty( $where ) )
 					{ 
-                       if( @$options['supplementary_data_key'] == $key && is_array( $fields[$key] ) )
+						if( array_key_exists( $key, $where ) )
+						{
+                            if( ! self::where( $key, $fields[$key], $where, $options ) )
+                            {
+                                continue 3;
+                            }
+						}
+                        elseif( @$options['supplementary_data_key'] == $key && is_array( $fields[$key] ) )
                         {
                             //   var_export(  $options );
+                            $foundInSup = false;
                             foreach( $where as $eachKeyWhere => $valueWhere )
                             {
                                 if( array_key_exists( $eachKeyWhere, $fields[$key] ) )
@@ -380,16 +388,14 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                                     {
                                         continue 4;
                                     }
+                                    $foundInSup = true;
                                 }
                             }
-                        }
-						if( array_key_exists( $key, $where ) )
-						{
-                            if( ! self::where( $key, $fields[$key], $where, $options ) )
+                            if( empty( $foundInSup ) )
                             {
                                 continue 3;
                             }
-						}
+                        }
 					}
 				}
 				while( false );
