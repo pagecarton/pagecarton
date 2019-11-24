@@ -92,6 +92,7 @@ class Application_Article_Publisher extends Application_Article_Creator
                                 case 'Application_Article_ShowAll':        
                                 case 'Application_Category_ShowAll':                                            
                                 case 'Application_Profile_ShowAll':
+                                case 'Application_Profile_All':
 
                                 break;
                                 case 'Ayoola_Page_Editor_Text':

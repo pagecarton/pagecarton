@@ -1492,10 +1492,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$pageWidgets ? $fieldset->addElement( array( 'name' => 'pagewidget_id_switch', 'label' => ' ', 'type' => 'Select', 'value' => null ), array( '' => 'Restore Page Widgets' ) + $pageWidgets + array( '9x9' => 'New Page Widgets' ) ) : null;
 
 
-			//	$fieldset->addElement( array( 'name' => 'save_widget_as', 'label' => 'Save This Widget As', 'placeholder' => 'e.g. My Widget', 'type' => 'InputText', 'value' => '' ) );
-
-
-
                 $form->addFieldset( $fieldset );
 
                 $pageWidgetsVersionsKeys = array_keys( $pageWidgetToRestore['history'] );
@@ -1512,7 +1508,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $fieldset->addElement( array( 'name' => 'widget_name', 'label' => 'Save This Widget As', 'type' => 'InputText', 'value' => @$object['widget_name'] ? : @$pageWidgetToRestore['widget_name'] ) );
 			}
 
-			$fieldset->addElement( array( 'name' => 'pagewidget_id', 'label' => ' ', 'type' => 'Hidden', 'value' => @$object['pagewidget_id'] ) );
+			$fieldset->addElement( array( 'name' => 'pagewidget_id', 'label' => '', 'type' => 'Hidden', 'value' => @$object['pagewidget_id'] ) );
 
 			if( @$object['savedwidget_id'] )
 			{
@@ -1548,8 +1544,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				do
 				{
 
-				//	$each = array_pop( $object['advanced_parameter_name'] );
-
 					$fieldset = new Ayoola_Form_Element;
 					$fieldset->hashElementName = false;
 					$fieldset->container = 'div';
@@ -1558,43 +1552,36 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						$parameterOptions[$advanceParameters['advanced_parameter_name'][$i]] = $advanceParameters['advanced_parameter_name'][$i];
                     }
                     list( $aPName, ) = explode( '[', @$advanceParameters['advanced_parameter_name'][$i] );
-					switch( $aPName )
-					{
-						case 'markup_template':
-						case 'markup_template_no_data':
-						case 'markup_template_prepend':
-						case 'markup_template_append':
-						case 'markup_template_prefix':
-						case 'markup_template_suffix':
-						case 'call_to_action':
-						case 'content_to_clear':
-						case 'javascript_code':
-						case 'where_clause_json':
-						case 'body':
-						//	if( $advanceParameters['advanced_parameter_value'][$i] )
-							{
-								if( ! array_key_exists( @$advanceParameters['advanced_parameter_name'][$i], $parameterOptions ) )
-								{
-									$parameterOptions[@$advanceParameters['advanced_parameter_name'][$i]] = @$advanceParameters['advanced_parameter_name'][$i];
-								}
-								$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Select Parameter', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
-								$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'TextArea', 'style' => 'width:100%;', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
-						//		$fieldset->allowDuplication = true;
-								$fieldset->placeholderInPlaceOfLabel = true;
-							}
-						break;
-						default:
-							if( static::getParameterKeys( $object ) )
-							{
-						//		var_export( $advanceParameters['advanced_parameter_name'][$i] );
-						//		var_export( $parameterOptions );
-								$fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Select Parameter', 'onchange' => 'if( this.value == \'__custom\' ){  var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
-								$fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'InputText', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
-					//			$fieldset->allowDuplication = true;
-								$fieldset->placeholderInPlaceOfLabel = true;
-							}
-						break;
-					}
+
+                    $textAreaData = array(
+                        'markup_template',
+                        'code',
+                        'json',
+                    );
+                    $textArea = false;
+                    foreach( $textAreaData as $eachTextArea )
+                    {
+                        if( stripos( $aPName, $eachTextArea ) !== false )
+                        {
+                            $textArea = true;
+                        }
+                    }
+                    if( $textArea )
+                    {
+                        if( ! array_key_exists( @$advanceParameters['advanced_parameter_name'][$i], $parameterOptions ) )
+                        {
+                            $parameterOptions[@$advanceParameters['advanced_parameter_name'][$i]] = @$advanceParameters['advanced_parameter_name'][$i];
+                        }
+                        $fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Select Parameter', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
+                        $fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'TextArea', 'style' => 'width:100%;', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
+                        $fieldset->placeholderInPlaceOfLabel = true;
+                    }
+                    elseif( static::getParameterKeys( $object ) )
+                    {
+                        $fieldset->addElement( array( 'name' => 'advanced_parameter_name[]', 'label' => '', 'placeholder' => 'Select Parameter', 'onchange' => 'if( this.value == \'__custom\' ){  var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'type' => 'Select', 'value' => @$advanceParameters['advanced_parameter_name'][$i] ), $parameterOptions );
+                        $fieldset->addElement( array( 'name' => 'advanced_parameter_value[]', 'label' => '', 'placeholder' => 'Parameter Value', 'type' => 'InputText', 'value' => @$advanceParameters['advanced_parameter_value'][$i] ) );
+                        $fieldset->placeholderInPlaceOfLabel = true;
+                    }
 					if( @$advanceParameters['advanced_parameter_name'][$i] && ( @$advanceParameters['advanced_parameter_value'][$i]
 					||  @$advanceParameters['advanced_parameter_value'][$i] === '0' )
 					)
@@ -1619,20 +1606,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$authLevelOptions[98] = 'Page Owners';
 				self::$_authLevelOptions =  $authLevelOptions;
 			}
-		//	$options[97] = 'Page Owners Only';
 			$fieldset = new Ayoola_Form_Element;
 			$fieldset->hashElementName = false;
-		//	$fieldset->addLegend( 'Select user groups that would be able to view this object...' );
-	//	var_export( $object );
 			if( @in_array( 'privacy', $object['widget_options'] ) || @$advanceParameters['object_access_level'] )
 		//	if( $object['set_access_level'] || $advanceParameters['object_access_level'] )
 			{
-			//	$fieldset->addElement( array( 'name' => 'xx', 'type' => 'Html' ), array( 'html' => '<label>Widget Privacy</label>' ) );
 				$fieldset->addElement( array( 'name' => 'object_access_level', 'id' => $object['object_unique_id'] . '_object_access_level', 'label' => 'Who can view widget', 'placeholder' => '', 'type' => 'SelectMultiple', 'value' => @$advanceParameters['object_access_level'] ), self::$_authLevelOptions );
 			}
 			$inlineWrapperChange = false;
-	//		var_export( is_a( $object['class_name'], Ayoola_Page_Editor_Text ) );
-	//		var_export( $object['class_name'] );
 			if( $object['class_name'] == 'Ayoola_Page_Editor_Text' || $object['class_name'] == 'Ayoola_Page_Editor_Image' )
 			{
 			//	$inlineWrapperChange = true;

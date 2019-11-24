@@ -313,7 +313,13 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
              @$options = array( 'limit' => $this->getParameter( 'limit' ) ? : 50 );
              @static::$_defaultSelectOptions = is_array( static::$_defaultSelectOptions ) ? static::$_defaultSelectOptions : array();
              $options = $options + static::$_defaultSelectOptions;
-        //     var_export( static::$_defaultSelectOptions );
+             if( $this->getParameter( 'select_option_json' ) )
+             {
+                $selectOption = json_decode( $this->getParameter( 'select_option_json' ), true );
+                $selectOption = is_array( $selectOption ) ? $selectOption : array();
+                $options += $selectOption;
+             }
+         //  var_export( static::$_defaultSelectOptions );
               $records = $this->query( 'TABLE', 'FETCH', null, $where, $options );
              //   var_export( $records );
 
