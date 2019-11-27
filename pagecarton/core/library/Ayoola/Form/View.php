@@ -96,7 +96,9 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				}
 				return false;
 			//	self::setIdentifierData( $data );
-			}
+            }
+        //    var_export( $data );
+
 			$previousData = null;
 			if( $this->getParameter( 'form_data' ) )
 			{
@@ -105,6 +107,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			elseif( ! empty( $_REQUEST['data_id'] ) )
 			{
                 $dataResponse = Ayoola_Form_Table_Data::getInstance()->selectOne( null, array( 'data_id' => $_REQUEST['data_id'] ) );
+            //    var_export( $dataResponse );
                 if( self::hasPriviledge( 98 ) || ( $dataResponse['user_id'] && $dataResponse['user_id'] == (string) Ayoola_Application::getUserInfo( 'user_id' ) ) )
                 {
                     $previousData = $dataResponse['form_data'];
@@ -119,17 +122,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				$this->setViewContent(  '' . self::__( '<h1 class="pc-heading">' . $data['form_title'] . '</h1>' ) . '', true  );
 				$this->setViewContent( self::__( '<p style="margin-top:2em;margin-bottom:2em;">' . ( strip_tags( $data['form_description'] ) === $data['form_description'] ? nl2br( $data['form_description'] ) : $data['form_description'] ) . '</p>' )  );
 			}
-			if( self::hasPriviledge() )
-			{
-/*				$manageForms = '
-					<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Delete/?form_name=' . $data['form_name'] . '\' )" class="pc-btn pc-btn-small">Delete</a>
-					<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Editor/?form_name=' . $data['form_name'] . '\' )" class="pc-btn pc-btn-small">Edit</a>
-					<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Creator/\' )" class="pc-btn pc-btn-small">New</a>
-					<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_List/\' )" class="pc-btn pc-btn-small">Manage Forms</a>
-					';
-*/			
-	//			$this->setViewContent( self::__( '<p>' . $manageForms . '</p>' ) );
-			}
+
 			$this->setViewContent( $this->getForm()->view() );
 			
 			$pageInfo = array(

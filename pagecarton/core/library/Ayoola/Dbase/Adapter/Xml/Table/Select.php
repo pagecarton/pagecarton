@@ -161,6 +161,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
      */
     public static function where( $key, $fieldValue, Array $where, Array $options = null )
     {
+    //    var_export( func_get_args() );
         if( ! empty( $options['case_insensitive'] ) && is_string( $where[$key] ) && is_string( $fieldValue ) )
         {
             $fieldValue = strtolower( $fieldValue );
@@ -203,6 +204,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                     }
                 break;
                 default:
+                //    var_export( $where[$key] );
+                //    var_export( $fieldValue );
                     if( ! is_array( $where[$key] ) && $where[$key] != $fieldValue )
                     { 
                         return false; 
@@ -281,6 +284,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$rowId = self::getRecordRowId( $eachRecord );
 			$recordMatch = false;
 			$keyCount = 0;
+            $keyFound = false;
 			foreach( $eachRecord->childNodes as $countField => $field )
 			{
 				$keyCount++;
@@ -312,7 +316,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 					{
 						$fields += $otherData;
 					}
-				}
+                }
 				do
 				{
 					if( ! empty( $where['*'] ) )
@@ -389,8 +393,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                 //    var_export(  $where );
 					if( ! empty( $where ) )
 					{ 
+                    //    var_export(  $key );
+                    //    var_export(  $where );
 						if( array_key_exists( $key, $where ) )
 						{
+                            $keyFound = true;
                             if( ! self::where( $key, $fields[$key], $where, $options ) )
                             {
                                 continue 3;
@@ -399,29 +406,24 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                         elseif( @$options['supplementary_data_key'] == $key && is_array( $fields[$key] ) )
                         {
                             //   var_export(  $options );
-                            $foundInSup = false;
                             foreach( $where as $eachKeyWhere => $valueWhere )
                             {
                                 if( array_key_exists( $eachKeyWhere, $fields[$key] ) )
                                 {
                                 //    var_export( $eachKeyWhere );
                                 //    var_export( $fields[$key][$eachKeyWhere] );
+                                    $keyFound = true;
                                     if( ! self::where( $eachKeyWhere, $fields[$key][$eachKeyWhere], $where, $options ) )
                                     {
                                         continue 4;
                                     }
-                                    $foundInSup = true;
                                 }
-                            }
-                            if( empty( $foundInSup ) )
-                            {
-                                continue 3;
                             }
                         }
 					}
 				}
 				while( false );
-				
+    
 				//	Retrieve values from the foreign keys
 			//	$temp = array();
 				foreach( $this->getForeignKeys() as $foreignTable => $foreignKey )
@@ -457,7 +459,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				}
 
 			}
-	//		$rowId = $this->_useParentNamespace ? 'parent_' . $rowId : $rowId;
+            if( $where && empty( $keyFound ) )
+            {
+               continue;
+            }
+//		$rowId = $this->_useParentNamespace ? 'parent_' . $rowId : $rowId;
 			//	Introducing a way to manipulate content of the results on this level might allow 
 			//	us to be able to limit the number of times we need to loop through the results.
 			//	Saving time or resources? Let's confirm if this is useful for programmers.
