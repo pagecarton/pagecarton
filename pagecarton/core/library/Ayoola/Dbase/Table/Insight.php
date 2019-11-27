@@ -43,6 +43,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
 		{ 
             //  Code that runs the widget goes here...
 
+            set_time_limit( 0 );
             $class = 'Application_Log_View_Access_Log';
             $timeVariation = 60 * 60 * 24 * 1;
             $noOfDatasets = 6;
@@ -59,7 +60,8 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 $from = $currentDataTime;
                 $currentDataTime = $currentDataTime - $timeVariation;
                 $to = $currentDataTime;
-                $result = $class::getInstance()->select( null, array( 'creation_time' => array( $from, $to ) ), array( 'creation_time_operator' => 'range', 'disable_cache' => true ) );
+            //    $result = $class::getInstance()->select( null, array( 'creation_time' => array( $from, $to ) ), array( 'creation_time_operator' => 'range', 'disable_cache' => true ) );
+                $result = $class::getInstance()->select( null, array( 'creation_time' => array( $from, $to ) ), array( 'creation_time_operator' => 'range' ) );
             //    $result = $class::getInstance()->select(  );
             //    var_export( $resultx );
                 
