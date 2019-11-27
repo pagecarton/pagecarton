@@ -170,6 +170,28 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
         {
             switch (@$options[$key . '_operator']) 
             {
+                case 'range':
+                //    var_export( $fieldValue );
+                //    var_export( $where );
+                    if( ! empty( $where[$key][0] ) && ! empty( $where[$key][1] ) )
+                    {
+                        $filter = new Ayoola_Filter_Time();
+                        //   var_export( $filter->filter( $fieldValue ) );
+                    //    var_export( range( $where[$key][0], $where[$key][1] ) );
+
+                        if( 
+                            ( $fieldValue >= $where[$key][1] && $fieldValue <= $where[$key][0] )
+
+                            ||
+
+                            ( $fieldValue <= $where[$key][1] && $fieldValue >= $where[$key][0] )
+                        )
+                        {
+                            break;
+                        }
+                    }   
+                    return false;
+                break;
                 case '!=':
                     if( ! is_array( $where[$key] ) && $where[$key] == $fieldValue )
                     { 

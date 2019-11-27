@@ -231,7 +231,7 @@ if (
                 file_put_contents( $filename, $f );
                  */
                 if (!$f = fetchLink($remoteSite . '/widgets/Application_Backup_GetInstallation/?pc_core_only=1', array('time_out' => 300))) {
-                    $badnews .= '<p>The installation archive is missing. We also tried to connect to the internet to download it but application coult not connect to the internet. Please ensure that allow_fopen_url is not switched off in your server configuration.</p>';
+                    $badnews .= '<p>The installation archive is missing. We also tried to connect to the internet to download it but application could not connect to the internet. Please ensure that allow_fopen_url is not switched off in your server configuration.</p>';
                     $badnews .= '<p>Please try copying the files back into your web root again and restart your installation. You may also resolve this issue by connecting to the internet.</p>';
                     break;
                 }
