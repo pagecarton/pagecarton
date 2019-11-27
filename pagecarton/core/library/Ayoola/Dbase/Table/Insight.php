@@ -43,7 +43,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
 		{ 
             //  Code that runs the widget goes here...
 
-            $class = 'Application_Log_View_Error_Log';
+            $class = 'Application_Log_View_Access_Log';
             $timeVariation = 60 * 60 * 24 * 1;
             $noOfDatasets = 6;
 
