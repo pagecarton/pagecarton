@@ -462,7 +462,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
             if( $where && empty( $keyFound ) && @$options['supplementary_data_key'] )
             {
                 // this was making some records in other files not get to the point of checking
-            //   continue;
+                //  later found it was not causing it o
+               continue;
             }
 //		$rowId = $this->_useParentNamespace ? 'parent_' . $rowId : $rowId;
 			//	Introducing a way to manipulate content of the results on this level might allow 
