@@ -397,7 +397,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$secDir = self::getSecondaryFolder() . $values['article_url'];
 	//	self::v( get_called_class() );
 	//	self::v( $values );
-		if( $previousData = json_decode( file_get_contents( $secDir ), true ) )
+		if( $previousData = @json_decode( file_get_contents( $secDir ), true ) )
 		{
 			$values += $previousData;
 		}
