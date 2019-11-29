@@ -114,7 +114,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
         //    var_export( @$_GET['update'] );
         //    var_export( $pluginInfo );
         
-            if( $pluginInfo['article_url'] === @$_GET['update'] )
+            if( ! empty( $pluginInfo['article_url'] ) && $pluginInfo['article_url'] === @$_GET['update'] )
             {
                 //  dont delete for extensions
                 //  extensions hav their own way of update
