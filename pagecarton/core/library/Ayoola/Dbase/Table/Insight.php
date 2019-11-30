@@ -145,7 +145,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                             $value = trim( $each[$field] ) ? : 'Undefined';
                             $valueArray = (array) $value;
                         //    var_export( $valueArray );
-                            if( ! is_scalar( $field ) || stripos( $field, '_id' ) || stripos( $field, '_ip' ) || stripos( $field, '_time' ) )
+                            if( ! is_scalar( $field ) || stripos( $field, '_id' ) || stripos( $field, '_ip' ) || stripos( $field, '_time' ) || stripos( $field, '_date' ) )
                             {
                                 continue;
                             }
@@ -287,22 +287,27 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
             foreach( $fieldsToExhibit as $field )
             {
                 
-                if( empty( $records[$field] ) )
-                {
-                    continue;
-                }
-
-                while( count( $records[$field] ) > $maxTopFields )
-                {
-                    $xV = $records[$field];
-                    asort( $xV );
-                    array_shift( $xV );
-                    $records[$field] = array_intersect_assoc( $xV, $records[$field] );
-                }
-
             //    var_export( $records[$field] );
                 if( count( ( $records[$field] ) ) > 1 )
                 {
+                    if( empty( $records[$field] ) )
+                    {
+                        continue;
+                    }
+    
+                    if( count( array_unique( $records[$field] ) ) < 2 )
+                    {
+                        continue;
+                    }
+    
+                    while( count( $records[$field] ) > $maxTopFields )
+                    {
+                        $xV = $records[$field];
+                        asort( $xV );
+                        array_shift( $xV );
+                        $records[$field] = array_intersect_assoc( $xV, $records[$field] );
+                    }
+    
                     $chartName = 'myChart' . $field . __CLASS__;
                     $chatData = "{
                         type: '" . ( 'doughnut' ) . "',
@@ -387,9 +392,10 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 $element = new Ayoola_Form_Element();
                 $element->hashElementName = false;
                 $form->hashFormElementName = false;
-                $options = Ayoola_Object_Dbase::getInstance()->select();
-                $filter = new Ayoola_Filter_SelectListArray( 'class_name', 'class_name');
-                $options = $filter->filter( $options );  
+                $options = Ayoola_Object_Embed::getWidgets( true, array( 'type' => 'database' ) );
+            //  var_export( $options );
+            //    $filter = new Ayoola_Filter_SelectListArray( 'class_name', 'class_name');
+            //    $options = $filter->filter( $options );  
                 $element->addElement( array( 'name' => 'table_class', 'label' => '', 'type' => 'Select', 'value' => $class,  'onchange'=> "this.form.submit();" ), array( '' => 'Database' ) + $options );
                 $options = array_combine( array_keys( self::$_timeTable ), array_keys( self::$_timeTable ) );
                 $element->addElement( array( 'name' => 'time_variation', 'label' => '', 'type' => 'Select', 'value' => $timeVariation,  'onchange'=> "this.form.submit();" ), array( '' => 'Time Variation' ) + $options );

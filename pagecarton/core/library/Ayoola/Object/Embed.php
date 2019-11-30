@@ -249,10 +249,38 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 	
     /**
 	 * 
+	 * Verifies if a class is valid DB table
+	 * 		
+     * @param mixed Object
+     * @return bool
+     */
+    public static function isXMLTable( $className )
+	{
+		if( ! Ayoola_Loader::loadClass( $className ) )
+		{
+			return false;
+		}
+		if( ! method_exists( $className, 'insert' ) )
+		{
+			return false;
+		}
+		if( ! method_exists( $className, 'select' ) )
+		{
+			return false;
+		}
+		if( ! is_subclass_of( $className, 'Ayoola_Dbase_Table_Abstract_Xml' ) )
+		{
+			return false;
+		}
+		return true;
+	}
+	
+    /**
+	 * 
 	 * 		
      * @return array widgets
      */
-    public static function getWidgets( $deepCheck = true )
+    public static function getWidgets( $deepCheck = true, array $settings = null )
 	{
 		$keyZ = md5( __METHOD__ . serialize( func_get_args() ) . 'ff-f=-' );
 		
@@ -290,11 +318,22 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				$options = Ayoola_Doc::getFilesRecursive( $directory );  
 				foreach( $options as $file )
 				{
-					$className = $filter->filter( $file );
-					if( self::isWidget( $className, $deepCheck ) )
-					{
-						$files[$className] = $className;
-					}
+                    $className = $filter->filter( $file );
+                    switch( $settings['type'] )
+                    {
+                        case 'database':
+                            if( self::isXMLTable( $className ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                        default:
+                            if( self::isWidget( $className, $deepCheck ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                    }
 				}
 			}
 	//			var_export( $directory );
@@ -307,10 +346,21 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				foreach( $options as $file )
 				{
 					$className = $filter->filter( $file );
-					if( self::isWidget( $className, $deepCheck ) )
-					{
-						$files[$className] = $className;
-					}
+                    switch( $settings['type'] )
+                    {
+                        case 'database':
+                            if( self::isXMLTable( $className ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                        default:
+                            if( self::isWidget( $className, $deepCheck ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                    }
 				}
 			}
 
@@ -322,14 +372,21 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				foreach( $options as $file )
 				{
 					$className = $filter->filter( $file );
-					if( self::isWidget( $className, $deepCheck ) )
-					{
-						if( stripos( $className, 'Ayoola' ) === 0 )
-						{
-					//		continue;
-						}
-						$files[$className] = $className;
-					}
+                    switch( $settings['type'] )
+                    {
+                        case 'database':
+                            if( self::isXMLTable( $className ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                        default:
+                            if( self::isWidget( $className, $deepCheck ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                    }
 				}
 			}
 			asort( $files );
