@@ -85,7 +85,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
         //    $noOfDatasets = $this->getParameter( 'no_of_datasets' ) ? : 10;
             $noOfDatasets = $this->getParameter( 'no_of_datasets' ) ;
             $noOfDatasets = @$_POST['no_of_datasets'] ? : $noOfDatasets;
-            $noOfDatasets = $noOfDatasets ? : 10;
+            $noOfDatasets = $noOfDatasets ? : 5;
             $storage = self::getObjectStorage( array( 'id' => 'start_time', 'device' => 'File', 'time_out' => 300 ) );
             if( ! $currentTime = $storage->retrieve() )
             {
@@ -142,14 +142,33 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                     //    var_export( $field );
                         foreach( $result as $each )
                         {
-                            $value = $each[$field] ? : 'Undefined';
-                            if( ! is_scalar( $field ) || ! is_scalar( $value ) )
+                            $value = trim( $each[$field] ) ? : 'Undefined';
+                            $valueArray = (array) $value;
+                        //    var_export( $valueArray );
+                            if( ! is_scalar( $field ) || stripos( $field, '_id' ) || stripos( $field, '_ip' ) || stripos( $field, '_time' ) )
                             {
                                 continue;
                             }
-                            $records[$field] = @$records[$field] ? : array();
-                            $records[$field][$value] = @$records[$field][$value] ? : 0;
-                            $records[$field][$value]++;
+                            foreach( $valueArray as $eachKey => $eachValue )
+                            {
+                                $fieldToUse = $field;
+                                if( ! is_numeric( $eachKey ) )
+                                {
+                                    //  no assoc array
+                                //    break;
+                                    $fieldToUse = $eachKey;
+                                    $fieldsToExhibit[$eachKey] = $eachKey;
+                                //    var_export( $eachKey );
+                                }
+                                if( ! is_scalar( $eachValue ) )
+                                {
+                                    continue;
+                                }
+                                $records[$fieldToUse] = @$records[$fieldToUse] ? : array();
+                                $records[$fieldToUse][$eachValue] = @$records[$fieldToUse][$eachValue] ? : 0;
+                                $records[$fieldToUse][$eachValue]++;
+                            }
+                            
 
                             if( is_numeric( $value ) )
                             {

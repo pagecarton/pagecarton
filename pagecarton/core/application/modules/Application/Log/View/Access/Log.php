@@ -51,14 +51,20 @@ class Application_Log_View_Access_Log extends Ayoola_Dbase_Table_Abstract_Xml
 		//	NUMBER OF PAGES VIEWED IN THIS SESSION
 		'NPS' => 'INPUTTEXT',
 		
-		'ip' => 'INPUTTEXT',
+		'ip' => 'JSON',
 		'http_host' => 'INPUTTEXT',
 		'http_user_agent' => 'INPUTTEXT',
 		'request_method' => 'INPUTTEXT', 
 		'request_time' => 'INPUTTEXT',
 		'total_run_time' => 'INPUTTEXT',
 		'user_id' => 'INPUTTEXT',
+		'username' => 'INPUTTEXT',
 		'request' => 'JSON', 
+		'utm_source' => 'INPUTTEXT',
+		'utm_medium' => 'INPUTTEXT',
+		'utm_campaign' => 'INPUTTEXT',
+		'utm_content' => 'INPUTTEXT',
+		'user_id' => 'INPUTTEXT',
 	);
 	// END OF CLASS
 }
