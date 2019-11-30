@@ -33,7 +33,7 @@ class Application_Log_View_Access_Log extends Ayoola_Dbase_Table_Abstract_Xml
      *
      * @param int
      */
-    protected $_tableVersion = '0.04';
+    protected $_tableVersion = '0.05';
 
     /**
      * Time to hold the cache before refreshing
@@ -46,30 +46,19 @@ class Application_Log_View_Access_Log extends Ayoola_Dbase_Table_Abstract_Xml
 	( 
 		'uri' => 'INPUTTEXT',
 		'http_referer' => 'INPUTTEXT',
+		'referal_domain' => 'INPUTTEXT',
 		
 		//	NUMBER OF PAGES VIEWED IN THIS SESSION
 		'NPS' => 'INPUTTEXT',
 		
 		'ip' => 'INPUTTEXT',
-//		'server_name' => 'INPUTTEXT',
 		'http_host' => 'INPUTTEXT',
 		'http_user_agent' => 'INPUTTEXT',
-//		'http_request_type' => 'INPUTTEXT',
-//		'http_application_mode' => 'INPUTTEXT',
-//		'redirect_status' => 'INPUTTEXT',
-//		'server_protocol' => 'INPUTTEXT',
 		'request_method' => 'INPUTTEXT', 
-	//	'request_uri' => 'INPUTTEXT',
-//		'redirect_url' => 'INPUTTEXT',
 		'request_time' => 'INPUTTEXT',
 		'total_run_time' => 'INPUTTEXT',
 		'user_id' => 'INPUTTEXT',
-	//	'post' => 'JSON', 
-	//	'get' => 'JSON',
-	//	'request' => 'ARRAY', 
 		'request' => 'JSON', 
-	//	'log_time' => 'INPUTTEXT', 
-//		'session_id' => 'INPUTTEXT'
 	);
 	// END OF CLASS
 }

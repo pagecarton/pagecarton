@@ -696,6 +696,8 @@ pc_full_width {
 .pc-form2 label.clearTransformation {
 
   display: inline-block;
+  font-weight: normal;
+  margin: 0;
 }
 
 .pc-form2 label.clearTransformation>.pc_give_space {

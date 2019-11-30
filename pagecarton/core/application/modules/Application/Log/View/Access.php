@@ -55,7 +55,7 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 	//	var_export( $log ); 
 		$timestamp = date( "Y-m-d H:i:s" ); // this line is for demonstration
 
-		$log['total_run_time'] = number_format( is_numeric( $log['total_run_time'] ) ? : 0, 2, '.', '' );
+		$log['total_run_time'] = number_format( $log['total_run_time'], 2 );
 	//	var_export( $log['total_run_time'] );
 		$log['ip'] = trim( implode( ':', Ayoola_Application::getRuntimeSettings( 'user_ip' ) ), ':' );
 	//	$log['session_id'] = sha1( session_id() );
@@ -70,8 +70,16 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 		}
 		
 		//	NUMBER OF PAGES VIEWED IN THIS SESSION
-		@$log['NPS'] = ++$_SESSION['NPS']; 
-		$log['log_time'] = time();  
+        @$log['NPS'] = ++$_SESSION['NPS']; 
+        
+        
+    //    $referer = parse_url( 'http://localhost:8888/sample/pc-admin' );
+        $referer = parse_url( $log['http_referer'] );
+    //    var_export( $log['http_referer'] );
+    //    var_export( $referer );
+        $log['log_time'] = time();
+          
+		$log['referal_domain'] = $referer['host'];  
 		
 		unset( $log['request']['password'], $log['request']['password2'], $log['request'][Ayoola_Form::hashElementName( 'password' )], $log['request'][Ayoola_Form::hashElementName( 'password2' )], $log['request']['local_password'], $log['request'][Ayoola_Form::hashElementName( 'local_password' )] );
 		$log['uri'] = Ayoola_Application::getPresentUri(); 
@@ -79,6 +87,8 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 		{
 			case '/tools/classplayer':
 			case '/object':
+			case '/widgets':
+			case '/pc-admin':
 				$log['uri'] = @$_GET['object_name'] ? : $_GET['name'];
 			break;
 		}

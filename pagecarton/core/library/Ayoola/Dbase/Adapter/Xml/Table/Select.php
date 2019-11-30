@@ -572,11 +572,19 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			//	PageCarton_Widget::v( $classCachePeriod + $fileMTime < $cTime );  
 
 			}
-			if( $cacheTime <= $fileMTime && ( ! $classCachePeriod || $classCachePeriod + $fileMTime <= $cTime ) )
+			if( $cacheTime <= $fileMTime && ( ! $classCachePeriod || ( $classCachePeriod + $fileMTime <= $cTime & stripos( $tableFile, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) !== false ) ) )
 			{ 
+             //   $filter = new Ayoola_Filter_Time();
+			//	var_export( $tableFile );
+			//	var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );
+			//	var_export( $filter->filter( $fileMTime ) );
+			//	var_export( $filter->filter( $cacheTime ) );
+			//	var_export( $classCachePeriod . '<br>' );
 			//	var_export( $cacheTime . '<br>' );
 			//	var_export( $fileMTime . '<br>' );  
-			//	var_export( $tableFile );
+			//	var_export( $cTime . '<br>' );  
+			//	var_export( $filter->filter( $classCachePeriod + $fileMTime ) );
+			//	var_export( $filter->filter( $cTime )  );
 			//	var_export( $cacheFile );
 				@unlink( $cacheFile ); 
 				break;
