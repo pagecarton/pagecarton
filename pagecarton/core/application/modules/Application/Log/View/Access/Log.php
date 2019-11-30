@@ -33,7 +33,7 @@ class Application_Log_View_Access_Log extends Ayoola_Dbase_Table_Abstract_Xml
      *
      * @param int
      */
-    protected $_tableVersion = '0.05';
+    protected $_tableVersion = '0.04';
 
     /**
      * Time to hold the cache before refreshing
