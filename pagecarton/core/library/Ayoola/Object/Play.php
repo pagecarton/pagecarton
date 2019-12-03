@@ -66,17 +66,20 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 				}
 				elseif( $widgetId = $this->getParameter( 'widget_id' ) ? : @$_REQUEST['widget_id'] )
 				{
+                //    var_export( Ayoola_Object_PageWidget::getInstance()->select() );
+                //    var_export( $widgetId );
                     if( $widget = Ayoola_Object_PageWidget::getInstance()->selectOne( null,  array( 'pagewidget_id' => $widgetId ) ) )
                     {
+                    //    var_export( $widget );
                         $class = $widget['class_name'];
-                        $class = new $class( $widget['parameters'] );
+                        $class = new $class( array( 'pagewidget_id' => $widgetId ) + $widget['parameters'] );
                         $this->setViewContent( '' . $class->view() . '' );
                         return true;
                     }
-                    elseif( $widget = Ayoola_Object_SavedWidget::getInstance()->selectOne( null,  array( 'pagewidget_id' => $widgetId ) ) )
+                    elseif( $widget = Ayoola_Object_SavedWidget::getInstance()->selectOne( null,  array( 'savedwidget_id' => $widgetId ) ) )
                     {
                         $class = $widget['class_name'];
-                        $class = new $class( $widget['parameters'] );
+                        $class = new $class( array( 'pagewidget_id' => $widgetId ) + $widget['parameters'] );
                         $this->setViewContent( '' . $class->view() . '' );
                         return true;
                     }

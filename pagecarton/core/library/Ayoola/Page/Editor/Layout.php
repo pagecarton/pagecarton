@@ -994,8 +994,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                         
 						$parametersToSave = $parameters + $eachObject;
                         Ayoola_Abstract_Viewable::saveWidget( $eachObject['class_name'], $parametersToSave, $page['url'], $section );
-                        if( empty( $parameters['pagewidget_id'] ) )
+                    //    var_export( $parameters['pagewidget_id'] );
+                    //    var_export( $parametersToSave['pagewidget_id'] );
+                        if( empty( $parameters['pagewidget_id'] ) || $parameters['pagewidget_id'] !== $parametersToSave['pagewidget_id'] )
                         {
+                            $parameters['pagewidget_id'] = $parametersToSave['pagewidget_id'];
+                       //     var_export( $parameters );
                             $pageWidgetIdText = http_build_query( array( 'pagewidget_id' =>  $parametersToSave['pagewidget_id'] ) );
                             if( ! empty( $values ) )
                             {

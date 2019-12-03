@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Monday 30th of September 2019 02:35:38 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Monday 2nd of December 2019 11:38:46 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -112,9 +112,7 @@ $_acd6c67e7aeba849612416a4d14168e1 = new Ayoola_Page_Editor_Text( array (
 </ul>',
   'preserved_content' => '',
   'url_prefix' => '',
-  'pagewidget_id' => '1563976816-0-20',
-  'widget_name' => 'Settings Options Privileges Widgets Multi-site Manager Back up & Restore Logs Clear Cache Upgrades A - 210',
-  'insert_id' => '1569854138-0-3',
+  'pagewidget_id' => '1575286294-0-162',
 ) );
 
 							}
@@ -164,14 +162,12 @@ $_7dd175ad4ab7614d4cc6b13e510bd274 = new Ayoola_Page_Editor_Text( array (
 </style>',
   'preserved_content' => '',
   'url_prefix' => '',
-  'pagewidget_id' => '1563976050-0-6',
+  'pagewidget_id' => '1575286294-0-163',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
   '' => '',
-  'widget_name' => '.row { margin: 0 0 0; } .logo a h1 { color: transparent; background-image: url( "/img/logo.png"); ba - 323',
-  'insert_id' => '1569854138-0-4',
 ) );
 
 							}

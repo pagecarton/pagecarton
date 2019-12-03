@@ -59,6 +59,7 @@ class Ayoola_Object_PageWidget_List extends Ayoola_Object_PageWidget_Abstract
 		$list->createList
 		(
 			array(
+                    'pagewidget_id' => array( 'field' => 'pagewidget_id', 'value' =>  '%FIELD%', 'filter' =>  '' ),
                     'widget_name' => array( 'field' => 'widget_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),
                 //    'parameters_key' => array( 'field' => 'parameters_key', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
                     'class_name' => array( 'field' => 'class_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     

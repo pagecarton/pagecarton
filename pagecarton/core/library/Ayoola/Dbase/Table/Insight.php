@@ -386,17 +386,15 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
             }
             $formHTML = null;
         //    var_export( $this->getParameter( 'table_class' )  );
-            if( ! $this->getParameter( 'table_class' ) || ! Ayoola_Loader::loadClass( $this->getParameter( 'table_class' ) )  )
-            {
-                $form = new Ayoola_Form( array( 'method' => 'POST' ) );
+                $form = new Ayoola_Form( array( 'method' => 'POST', 'class' => 'pc-form2' ) );
                 $element = new Ayoola_Form_Element();
                 $element->hashElementName = false;
                 $form->hashFormElementName = false;
-                $options = Ayoola_Object_Embed::getWidgets( true, array( 'type' => 'database' ) );
-            //  var_export( $options );
-            //    $filter = new Ayoola_Filter_SelectListArray( 'class_name', 'class_name');
-            //    $options = $filter->filter( $options );  
-                $element->addElement( array( 'name' => 'table_class', 'label' => '', 'type' => 'Select', 'value' => $class,  'onchange'=> "this.form.submit();" ), array( '' => 'Database' ) + $options );
+                if( ! $this->getParameter( 'table_class' ) || ! Ayoola_Loader::loadClass( $this->getParameter( 'table_class' ) )  )
+                {
+                    $options = Ayoola_Object_Embed::getWidgets( true, array( 'type' => 'database' ) );
+                    $element->addElement( array( 'name' => 'table_class', 'label' => '', 'type' => 'Select', 'value' => $class,  'onchange'=> "this.form.submit();" ), array( '' => 'Database' ) + $options );
+                }
                 $options = array_combine( array_keys( self::$_timeTable ), array_keys( self::$_timeTable ) );
                 $element->addElement( array( 'name' => 'time_variation', 'label' => '', 'type' => 'Select', 'value' => $timeVariation,  'onchange'=> "this.form.submit();" ), array( '' => 'Time Variation' ) + $options );
                 $options = array_combine( range( 2, 20 ), range( 2, 20 ) );
@@ -410,12 +408,11 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 {
                     $options = array_keys( $class::getInstance()->getDataTypes() );
                     $options = array_combine( $options, $options );
-                    $element->addElement( array( 'name' => 'fields_to_exhibit', 'label' => 'Fields to Exhibit', 'type' => 'Checkbox', 'value' => $fieldsToExhibit,  'onchange'=> "this.form.submit();" ), $options );
+                    $element->addElement( array( 'name' => 'fields_to_exhibit', 'label' => 'Fields to Exhibit', 'type' => 'Checkbox', 'value' => $fieldsToExhibit,  'onchange'=> "this.form.submit();", 'style' => 'max-height: 100px; overflow:auto;' ), $options );
                 }
             
                 $form->addFieldset( $element );
                 $formHTML = $form->view();
-            }
             $html = '
                                     <div class="row">
                                     <div class="col-md-4" >

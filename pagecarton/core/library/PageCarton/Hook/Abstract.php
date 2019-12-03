@@ -66,7 +66,7 @@ class PageCarton_Hook_Abstract extends PageCarton_Widget
 //		$form->oneFieldSetAtATime = true;
 		$fieldset->placeholderInPlaceOfLabel = false;
         
-        $fieldset->addElement( array( 'name' => 'class_name', 'placeholder' => 'Class widget hosting the event', 'type' => 'Select', 'value' => @$values['class_name'] ), array( '' => 'Select class widget hosting the event' ) + Ayoola_Object_Embed::getWidgets() ); 
+        $fieldset->addElement( array( 'name' => 'class_name', 'label' => 'Hook this', 'placeholder' => 'Class widget to affect by this', 'type' => 'Select', 'value' => @$values['class_name'] ), array( '' => 'Class widget to influence', '*' => 'All widgets' ) + Ayoola_Object_Embed::getWidgets() ); 
 
         $options = Ayoola_Object_Widget::getInstance()->select();
         //  var_export( $options );
@@ -85,9 +85,9 @@ class PageCarton_Hook_Abstract extends PageCarton_Widget
         }
         else
         {
-            $options = array( '' => 'Select class widget hosting the event' ) + $options;
+            $options = array( '' => 'Class widget with the hook method' ) + $options;
         }
-        $fieldset->addElement( array( 'name' => 'hook_class_name', 'placeholder' => 'Class widget with the hook method', 'type' => 'Select', 'value' => @$values['hook_class_name'] ), $options ); 
+        $fieldset->addElement( array( 'name' => 'hook_class_name', 'label' => 'To this', 'type' => 'Select', 'value' => @$values['hook_class_name'] ), $options ); 
         $fieldset->addRequirements( array( 'NotEmpty' => null ) );
 
 		$fieldset->addLegend( $legend );

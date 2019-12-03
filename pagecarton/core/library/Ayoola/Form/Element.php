@@ -787,7 +787,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		$html .= self::$_placeholders['badnews'];
 		$counter = 0;
 		//		var_export( $element['value'] );
-       	$html .= '<div style="display:inline-block;">';
+       	$html .= '<div style="display:inline-block; ' . $element['style'] . '">';
 		foreach( $values as $value => $label )
 		{ 
 		//	var_export( $label );
