@@ -36,7 +36,7 @@ class Application_Domain_Order_DNS extends Application_Domain_Order_Abstract
 		{ 
             if( ! $data = $this->getIdentifierData() ){ return false; }
 
-			if( empty( $data['active'] ) )
+			if( empty( $data['active'] ) || empty( $data['expiry_date'] ) )
 			{ 
                 if( Ayoola_Loader::loadClass( $data['api'] ) && method_exists( $data['api'], 'getInfo' ) )
                 {
@@ -131,10 +131,9 @@ class Application_Domain_Order_DNS extends Application_Domain_Order_Abstract
 		$fieldset = new Ayoola_Form_Element;
 
         $fieldset->addElement( array( 'name' => 'dns_mode', 'label' => 'DNS Mode', 'type' => 'Select', 'value' => @$values['dns_mode'] ), array( '0' => 'Use default servers', '1' => 'Custom Nameservers', ) ); 
-
+        if( ! $data = $this->getIdentifierData() ){ return false; }
         if( @$values['dns_mode'] || Ayoola_Form::getGlobalValue( 'dns_mode' ) )
         {
-            if( ! $data = $this->getIdentifierData() ){ return false; }
         //    var_export( $data );
             if( Ayoola_Loader::loadClass( $data['api'] ) && method_exists( $data['api'], 'getNameservers' ) )
             {
@@ -152,6 +151,17 @@ class Application_Domain_Order_DNS extends Application_Domain_Order_Abstract
         }
         else
         {
+        //    var_export( $data );
+            if( Ayoola_Loader::loadClass( $data['api'] ) && method_exists( $data['api'], 'getDns' ) )
+            {
+                $class = $data['api'];
+            //    var_export( $data );
+
+                if( $dns = $class::getDns( $data ) )
+                {
+                //    var_export( $dns );
+                }
+            }
             $fieldset->addElement( array( 'name' => 'nameserver1', 'type' => 'Hidden', 'value' => @$values['nameserver1'] ) ); 
             $fieldset->addElement( array( 'name' => 'nameserver2', 'type' => 'Hidden', 'value' => @$values['nameserver2'] ) ); 
         }
