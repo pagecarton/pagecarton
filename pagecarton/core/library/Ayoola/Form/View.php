@@ -323,16 +323,13 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . @$formInfo['form_name'] ) );
 		$fieldset = new Ayoola_Form_Element;
     //	var_export( $formInfo );
+        $form->submitValue = @$formInfo['button_value'] ? : $submitValue ;
     
         if( in_array( 'disable_updates', $formInfo['form_options'] ) && ! self::hasPriviledge( 98 ) )
         {
-        //	var_export( $formInfo );
+            $form->submitValue = false;
         }
-        else
-        {
-        //	var_export( $formInfo );
-            $form->submitValue = @$formInfo['button_value'] ? : $submitValue ;
-        }
+        
 	//	$form->oneFieldSetAtATimeJs = true;
 		$form->badnewsBeforeElements = true;
 		
