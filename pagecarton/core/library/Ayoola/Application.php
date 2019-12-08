@@ -1516,7 +1516,6 @@ class Ayoola_Application
 		}
 
 		//	Client-side	scripting
-	//	Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . time() );
 		Application_Javascript::addFile( '' . self::getUrlPrefix() . '/tools/classplayer/get/name/Application_Javascript/?v=' . PageCarton::$version . '-' . filemtime( __FILE__ ) );
 		Application_Style::addFile( Ayoola_Page::getPageCssFile() );
 		Application_Style::addFile( '//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css' );
@@ -1717,10 +1716,6 @@ class Ayoola_Application
      */
     public static function getUserInfo( $key = null )
     {
-	//	if( $key === '' )
-		{
-	//		$key = null;
-		}
 		if( is_null( self::$_userInfo ) || $key === false )
 		{
 			self::$_userInfo = new Ayoola_Access();
@@ -1747,10 +1742,22 @@ class Ayoola_Application
      */
     public static function getPresentUri( $url = null )
     {
-		if( isset(self::$_presentUri[$url]) && @self::$_presentUri[$url] ) {
+        if( isset( self::$_presentUri[$url] ) && @self::$_presentUri[$url] ) 
+        {
 			return self::$_presentUri[$url];
-		}
+        }
+    //    var_export( $url );
+        return self::setPresentUri( $url );
+    }
 
+    /**
+     * This method basically removes the /get/ seo query from the requested Uri
+     *
+     * @param void
+     * @return null
+     */
+    public static function setPresentUri( $url = null )
+    {
 		$url = $url ? : self::getRequestedUri();
 		require_once 'Ayoola/Filter/Uri.php';
 		$filter = new Ayoola_Filter_Uri;
@@ -1767,87 +1774,76 @@ class Ayoola_Application
      */
     public static function getRequestedUri()
     {
-		if( self::$_requestedUri ){ return self::$_requestedUri; }
-		$requestedUri = self::$_homePage;	// Default
+        if( self::$_requestedUri ){ return self::$_requestedUri; }
+        self::setRequestedUri();
+		return self::$_requestedUri;
+    }
 
-		//	because of url prefix that has space in them
-		@$requestedUriDecoded = $_SERVER['REQUEST_URI'];
+    /**
+     * This method returns the requested Uri
+     *
+     * @param void
+     * @return null
+     */
+    public static function setRequestedUri( $requestedUri = null )
+    {
+        if (empty($requestedUri)) {
+            $requestedUri = self::$_homePage;	// Default
 
-		//	remove query strings
-		//array_shift works with array reference, so a variables parameter is required
-		$shift = explode( '?', $requestedUriDecoded ) ;
-		$requestedUriDecoded = array_shift($shift );
+            //	because of url prefix that has space in them
+            @$requestedUriDecoded = $_SERVER['REQUEST_URI'];
 
-		@$requestedUriDecoded = rawurldecode( $requestedUriDecoded );
-//		var_export( $_SERVER['REQUEST_URI'] );
-//		var_export( $requestedUriDecoded );
+            //	remove query strings
+            //array_shift works with array reference, so a variables parameter is required
+            $shift = explode('?', $requestedUriDecoded) ;
+            $requestedUriDecoded = array_shift($shift);
 
-		if( isset( $_SERVER['REQUEST_URI'] ) && $_SERVER['REQUEST_URI'] != '/' && $_SERVER['SCRIPT_NAME'] != $requestedUriDecoded )
-		{
-			$requestedUri = $requestedUriDecoded;
-		//	var_export( $requestedUri );
-		}
-	//	Application_Profile_Abstract::v( $_SERVER );
+            @$requestedUriDecoded = rawurldecode($requestedUriDecoded);
 
-		if( isset( $_SERVER['PATH_INFO'] ) )
-		{
-			$requestedUri = $_SERVER['PATH_INFO'];
-		}
-		else
-		{
-		//	var_export( $_SERVER['PATH_INFO'] );
+            if (isset($_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] != '/' && $_SERVER['SCRIPT_NAME'] != $requestedUriDecoded) {
+                $requestedUri = $requestedUriDecoded;
+            }
 
-		}
-	//	$requestedUri = rawurldecode( $requestedUri );
-	//	var_export( $_SERVER );
+            if (isset($_SERVER['PATH_INFO'])) {
+                $requestedUri = $_SERVER['PATH_INFO'];
+            } else {
+            }
+        }
+        //	REMOVE PATH PREFIX
+        if( Ayoola_Application::getPathPrefix() && strpos( $requestedUri, Ayoola_Application::getPathPrefix() ) === 0 )
+        {
+            $requestedUri = explode( Ayoola_Application::getPathPrefix(), $requestedUri );
+            array_shift( $requestedUri );
+            $requestedUri = implode( Ayoola_Application::getPathPrefix(), $requestedUri ) ? : '/';
+        }
+        elseif( strpos( $requestedUri, '/index.php/' ) !== false )
+        {
+            $requestedUri = explode( '/index.php', $requestedUri );
+            if( count( $requestedUri ) === 2 )
+            {
+                #	https://www.comeriver.com/music/index.php/trending
+                list( $pathPrefix, $requestedUri ) = $requestedUri;
+                if( ! Ayoola_Application::getPathPrefix() )
+                {
+                    self::$_pathPrefix = $pathPrefix;
+                }
+            }
+        }
+        $requestedUri = parse_url( $requestedUri );
+        $requestedUri = $requestedUri['path'];
+        if( $requestedUri == '/' )
+        {
+            $requestedUri = self::$_homePage;
+        }
 
-	//	var_export( $requestedUri );
-		//	var_export( $requestedUri );
-		//	var_export( Ayoola_Application::getPathPrefix() );
-		//	REMOVE PATH PREFIX
-		if( Ayoola_Application::getPathPrefix() && strpos( $requestedUri, Ayoola_Application::getPathPrefix() ) === 0 )
-		{
-			$requestedUri = explode( Ayoola_Application::getPathPrefix(), $requestedUri );
-		//	var_export( $requestedUri );
-			array_shift( $requestedUri );
-			$requestedUri = implode( Ayoola_Application::getPathPrefix(), $requestedUri ) ? : '/';
-		//	exit();
-		}
-		elseif( strpos( $requestedUri, '/index.php/' ) !== false )
-		{
-			$requestedUri = explode( '/index.php', $requestedUri );
-			if( count( $requestedUri ) === 2 )
-			{
-				#	https://www.comeriver.com/music/index.php/trending
-				list( $pathPrefix, $requestedUri ) = $requestedUri;
-				if( ! Ayoola_Application::getPathPrefix() )
-				{
-					self::$_pathPrefix = $pathPrefix;
-				}
-			//	var_export( $pathPrefix );
-			//	var_export( self::$_pathPrefix );
-			}//
-		//	var_export( $requestedUri );
-		//	var_export( $requestedUri );
-		}
-
-	//	var_Export( $_SERVER );
-	//	var_Export( $requestedUri );
-		$requestedUri = parse_url( $requestedUri );
-		$requestedUri = $requestedUri['path'];
-		if( $requestedUri == '/' )
-		{
-			$requestedUri = self::$_homePage;
-		}
-
-		//	an nginx installation not recognizing url like
-		//	https://www.example.com/index.php/url
-		$controller = '/index.php/';
-		if( stripos( $requestedUri, $controller ) === 0 )
-		{
-			$requestedUri = '/' . array_pop( explode( $controller, $requestedUri ) );
-		}
-	//	var_export( $requestedUri );
+        //	an nginx installation not recognizing url like
+        //	https://www.example.com/index.php/url
+        $controller = '/index.php/';
+        if( stripos( $requestedUri, $controller ) === 0 )
+        {
+            $requestedUri = '/' . array_pop( explode( $controller, $requestedUri ) );
+        }
+        
 
 		//	Fetch the GET parameters from the url
 		require_once 'Ayoola/Filter/Get.php';
@@ -1855,7 +1851,6 @@ class Ayoola_Application
 		$get = $filter->filter( $requestedUri );
 		$_GET = array_merge( $_GET, $get ); // Combines our generated params with the original
 		$_REQUEST = array_merge( $_REQUEST, $get ); // Combines our generated params with the original
-//		var_export( $requestedUri ); //
 		self::$_requestedUri = $requestedUri;
 		return self::$_requestedUri;
     }
@@ -1913,31 +1908,14 @@ class Ayoola_Application
 		$storage->storageNamespace = __CLASS__  . 'url_prefix-' . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve();
-	//	var_export( $data );
  		if(  ! $data  )
 		{
-		//	var_export( $data );
  			//	Detect if we have mod-rewrite
 			$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt?pc_clean_url_check=1';
-	//		var_export( $urlToLocalInstallerFile );
-/*			$response = PageCarton_Widget::fetchLink( $urlToLocalInstallerFile, array( 'connect_time_out' => 1, 'time_out' => 2 ) );
-		//	var_export( $urlToLocalInstallerFile );
-		//	var_export( $response );
-			if( $response )
-			{
-				$data = 1;
-			}
-			else
-			{
-				$data = 2;
-			}
- */ 		$modRewriteEnabled = get_headers( $urlToLocalInstallerFile );
+    		$modRewriteEnabled = get_headers( $urlToLocalInstallerFile );
 			$responseCode = explode( ' ', $modRewriteEnabled[0] );
-	//		var_export( $urlToLocalInstallerFile );
-	//		var_export( $responseCode );
-		//	exit();
-			if( ! in_array( '404', $responseCode ) )
-//			if( in_array( '200', $responseCode ) )
+
+            if( ! in_array( '404', $responseCode ) )
 			{
 				$data = 1;
 			}
@@ -1958,7 +1936,6 @@ class Ayoola_Application
 		elseif( @self::getPathPrefix() )
 		{
 			self::$_urlPrefix .= self::getPathPrefix();
-		//	exit();
 		}
 		return self::$_urlPrefix;
 	}

@@ -184,7 +184,7 @@ class Application_Info extends Ayoola_Abstract_Playable
 		
 		$this->_objectData = $dataX;
 		$this->_objectTemplateValues = $dataX;
-		
+/* 		
 		foreach( $options as $key => $value )
 		{
             $row = $xml->createElement( 'tr' );
@@ -200,7 +200,7 @@ class Application_Info extends Ayoola_Abstract_Playable
 		//	$data->setAttribute( 'colspan', 1 );
 			$data  = $row->appendChild( $data );
 		}
-		return $xml;
+ */		return $xml;
 	}
 	  
     /**

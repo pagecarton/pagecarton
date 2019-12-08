@@ -142,13 +142,13 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                     //    var_export( $field );
                         foreach( $result as $each )
                         {
-                            $value = trim( $each[$field] ) ? : 'Undefined';
-                            $valueArray = (array) $value;
                         //    var_export( $valueArray );
-                            if( ! is_scalar( $field ) || stripos( $field, '_id' ) || stripos( $field, '_ip' ) || stripos( $field, '_time' ) || stripos( $field, '_date' ) )
+                            if( ! is_scalar( $field ) || ! is_scalar( $each[$field] ) || stripos( $field, '_id' ) || stripos( $field, '_ip' ) || stripos( $field, '_time' ) || stripos( $field, '_date' ) )
                             {
                                 continue;
                             }
+                            $value = trim( $each[$field] ) ? : 'Undefined';
+                            $valueArray = (array) $value;
                             foreach( $valueArray as $eachKey => $eachValue )
                             {
                                 $fieldToUse = $field;
@@ -288,17 +288,8 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
             {
                 
             //    var_export( $records[$field] );
-                if( count( ( $records[$field] ) ) > 1 )
+                if( ! empty( $records[$field] ) && count( ( $records[$field] ) ) > 1 )
                 {
-                    if( empty( $records[$field] ) )
-                    {
-                        continue;
-                    }
-    
-                    if( count( array_unique( $records[$field] ) ) < 2 )
-                    {
-                        continue;
-                    }
     
                     while( count( $records[$field] ) > $maxTopFields )
                     {
@@ -350,7 +341,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                     $vhX = $values[$field];
                     foreach( $vhX as $id => $v )
                     {
-                        if( count( $values[$field] ) <= 3 )
+                        if( count( $values[$field] ) <= $maxTopFields  )
                         {
                             break;
                         }

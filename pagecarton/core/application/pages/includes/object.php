@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: object.php	Monday 19th of August 2019 07:24:34 PM	ayoola@ayoo.la $ 
+* @version $Id: object.php	Thursday 5th of December 2019 08:23:38 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -24,7 +24,7 @@ $_cab293e234448a2f7ac37b059d5cd1ce = new Ayoola_Object_Embed( array (
   ),
   'wrapper_name' => '',
   '' => '',
-  'widget_name' => 'Ayoola_Object_Play',
+  'pagewidget_id' => '1575534218-0-23',
 ) );
 
 							}

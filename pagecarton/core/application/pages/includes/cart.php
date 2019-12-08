@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: cart.php	Monday 19th of August 2019 07:24:32 PM	ayoola@ayoo.la $ 
+* @version $Id: cart.php	Thursday 5th of December 2019 08:23:34 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -25,10 +25,9 @@ $_72695e711f8fb6fd27ff426f3d8c5bbd = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   'wrapper_name' => '',
-  'insert_id' => '1564094536-0-23',
-  'pagewidget_id' => '1564094536-0-23',
+  'insert_id' => '1566242672-0-18',
+  'pagewidget_id' => '1575534209-0-4',
   '' => '',
-  'widget_name' => 'Shopping Cart',
 ) );
 
 							}
@@ -49,11 +48,10 @@ $_935dd3d6e0cc85fee8b541146ed7fa22 = new Application_Subscription_Cart( array (
     1 => '',
   ),
   'wrapper_name' => '',
-  'insert_id' => '1564094536-0-24',
-  'pagewidget_id' => '1564094536-0-24',
+  'insert_id' => '1566242672-0-19',
+  'pagewidget_id' => '1575534209-0-5',
   'multiple_label' => '',
   '' => '',
-  'widget_name' => '- - 1564094536-0-24 - 1564094536-0-24 - -',
 ) );
 
 							}
@@ -76,10 +74,9 @@ $_eeb501f955d5c45e95ed4e97f4c7d442 = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   'wrapper_name' => '',
-  'insert_id' => '1564094536-0-25',
-  'pagewidget_id' => '1564094536-0-25',
+  'insert_id' => '1566242672-0-20',
+  'pagewidget_id' => '1575534209-0-6',
   '' => '',
-  'widget_name' => 'Checkout',
 ) );
 
 							}
@@ -100,10 +97,9 @@ $_7ed276139802b774216170fc44b3858f = new Ayoola_Object_Embed( array (
     0 => '',
   ),
   'wrapper_name' => '',
-  'insert_id' => '1564094536-0-26',
-  'pagewidget_id' => '1564094536-0-26',
+  'insert_id' => '1566242672-0-21',
+  'pagewidget_id' => '1575534209-0-7',
   '' => '',
-  'widget_name' => 'Application_Subscription_Checkout',
 ) );
 
 							}

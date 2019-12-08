@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: plugin.php	Tuesday 20th of August 2019 12:11:42 AM	ayoola@ayoo.la $ 
+* @version $Id: plugin.php	Thursday 5th of December 2019 08:23:32 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -19,24 +19,24 @@
 $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h1>Creating PageCarton Plugins</h1>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>Creating plugins with PageCarton is pretty easy. Unlike many other frameworks, PageCarton Plugins doesn\'t really need to be created with codes. In fact, PageCarton plugins are built using a Graphic Interface. Now, the built plugins may now contain widgets, templates, etc which are created with codes but the way PageCarton plugins work make it simply to create and use.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>The concept of PageCarton plugins is to pack some components of a site in a way that it could be integrated into another website. So when a Plugin is built on Site A, it includes certain components - files, pages and other resources so that when such plugin is installed and activated on Site B, all the resources are available on site B just like they were originally on Site B. The moment the plugin is deactivated on Site B, the site go back to the way it was before the plugin was installed - without the components and functionalities introduced by the plugin built on Site A. In other words, a building a plugin is a way of creating a package which copies a functionality of a site into another.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h2>Components of a plugin<br>
 &nbsp;</h2>
 
 <p>Plugins could have a number of files and other resources which provides the functionalities the plugin introduces into the site it is installed on. There are a number of components on which a plugin can be built. Each of this component types introduces a diverse kind of functionality into a site. The components to build into a plugin must first be created on the site which the plugin is being built on. There are three basic categories of the components, they are:</p>
 
-<p>&nbsp;</p>
+<p></p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ol>
 	<li><strong>Widgets</strong>&nbsp;<br>
@@ -70,11 +70,11 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 
 <div>When creating a plugin, a developer will need to know the components required to make the plugin. While simple plugins may only contain one component, some complex plugins may combine some of the components to introduce a fantastic feature.&nbsp;</div>
 
-<div>&nbsp;</div>
+<div></div>
 
 <h2>Building a Plugin</h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <div>
 <ul>
@@ -97,14 +97,14 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 </ul>
 </div>
 
-<div>&nbsp;</div>
+<div></div>
 
-<div>&nbsp;</div>
+<div></div>
 
 <div>
 <h2>Installing the Plugin on Another Site</h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ul>
 	<li>
@@ -118,7 +118,7 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 </ul>
 </div>
 
-<div>&nbsp;</div>
+<div></div>
 
 <div>
 <h2>Uploading Plugin to PageCarton Plugin Repository<br>
@@ -136,23 +136,23 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 </ul>
 </div>
 
-<div>&nbsp;</div>
+<div></div>
 
 <h2>Examples</h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h3>Content-based Plugin - Cookie notices plugin</h3>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>A content based plugin is that which embeds/include a certain content into it\'s installed sites. We will consider a plugin to pop up cookie notices for&nbsp;<a href="https://ec.europa.eu/commission/priorities/justice-and-fundamental-rights/data-protection/2018-reform-eu-data-protection-rules_en" rel="noopener noreferrer" target="_blank">GDPR</a>&nbsp;and&nbsp;<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex%3A32009L0136" rel="noopener noreferrer" target="_blank">ePR</a>&nbsp;compliance. For this plugin, we need two components</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p><strong>Creating Files</strong></p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ol>
 	<li>Populate Site-wide widgets database<br>
@@ -196,7 +196,7 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 
 <div><strong>Build Plugin</strong></div>
 
-<div>&nbsp;</div>
+<div></div>
 
 <ul>
 	<li>Go to My Plugins<br>
@@ -222,28 +222,28 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 	</li>
 </ul>
 
-<h3>&nbsp;</h3>
+<h3></h3>
 ',
   'preserved_content' => '<h1>Creating PageCarton Plugins</h1>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>Creating plugins with PageCarton is pretty easy. Unlike many other frameworks, PageCarton Plugins doesn\'t really need to be created with codes. In fact, PageCarton plugins are built using a Graphic Interface. Now, the built plugins may now contain widgets, templates, etc which are created with codes but the way PageCarton plugins work make it simply to create and use.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>The concept of PageCarton plugins is to pack some components of a site in a way that it could be integrated into another website. So when a Plugin is built on Site A, it includes certain components - files, pages and other resources so that when such plugin is installed and activated on Site B, all the resources are available on site B just like they were originally on Site B. The moment the plugin is deactivated on Site B, the site go back to the way it was before the plugin was installed - without the components and functionalities introduced by the plugin built on Site A. In other words, a building a plugin is a way of creating a package which copies a functionality of a site into another.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h2>Components of a plugin<br>
 &nbsp;</h2>
 
 <p>Plugins could have a number of files and other resources which provides the functionalities the plugin introduces into the site it is installed on. There are a number of components on which a plugin can be built. Each of this component types introduces a diverse kind of functionality into a site. The components to build into a plugin must first be created on the site which the plugin is being built on. There are three basic categories of the components, they are:</p>
 
-<p>&nbsp;</p>
+<p></p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ol>
 	<li>Widgets&nbsp;<br>
@@ -277,11 +277,11 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 
 <div>When creating a plugin, a developer will need to know the components required to make the plugin. While simple plugins may only contain one component, some complex plugins may combine some of the components to introduce a fantastic feature.&nbsp;</div>
 
-<div>&nbsp;</div>
+<div></div>
 
 <h2>Building a Plugin</h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <div>
 <ul>
@@ -301,25 +301,24 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 </ul>
 </div>
 
-<div>&nbsp;</div>
+<div></div>
 
-<div>&nbsp;</div>
+<div></div>
 
-<div>&nbsp;</div>
+<div></div>
 
-<div>&nbsp;</div>
+<div></div>
 
-<div>&nbsp;</div>
+<div></div>
 
-<div>&nbsp;</div>
+<div></div>
 
-<div>&nbsp;</div>
+<div></div>
 
-<p>&nbsp;</p>
+<p></p>
 ',
   'url_prefix' => '',
-  'pagewidget_id' => '1566253432-0-14',
-  'widget_name' => 'Creating PageCarton Plugins &nbsp; Creating plugins with PageCarton is pretty easy. Unlike many othe - 4691',
+  'pagewidget_id' => '1575534212-0-15',
 ) );
 
 							}

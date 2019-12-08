@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-tutorials.php	Friday 30th of August 2019 08:13:31 PM	ayoola@ayoo.la $ 
+* @version $Id: pc-tutorials.php	Thursday 5th of December 2019 08:23:32 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -18,18 +18,18 @@
 								
 $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div>
-<p>&nbsp;</p>
+<p></p>
 
 <h2><a id="admin" name="admin">Admin access</a></h2>
 
-<p>&nbsp;</p>
+<p></p>
 </div>
 
 <p>Your website allows you to have unlimited number of administrators – people, who would have access to the backend to perform specific administrative functions. Adding new pages, editing existing pages, reading contact form feedbacks, changing logos and favicon, creating posts or adding new products and services are some of the functions users are able to perform when they have admin access to the website.</p>
 
 <p>The direct link to your administrative backend of your website is on <a href="/pc-admin">Control Panel</a>. By default, only the website developer&nbsp;would have access to the website admin panel to update the website&nbsp;but he could grant as many individuals as needed access to do the same tasks.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ul>
 	<li>
@@ -73,15 +73,15 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	</li>
 </ul>
 
-<div>&nbsp;</div>
+<div></div>
 
 <h2><a id="emails" name="emails">Corporate Emails</a></h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>Fully hosted websites come with corporate emails and it is very likely that there is capacity for you to create emails like example@{{{pc_domain}}}. Only requirement in managing email accounts is Admin Access. If you don\'t have admin access and you would like to create a corporate email @{{{pc_domain}}}, you would need to either request admin access or ask someone who has the access to help create the email accounts you need. The email service for PageCarton websites are provided by ComeRiver Mail.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ul>
 	<li><strong>Creating Email Account</strong><br>
@@ -197,7 +197,7 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 
 <h2><a id="content" name="content">Adding Content</a></h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>Adding content to your website is incredibly easy. There are a number of ways to add content but the easiest ways are going to be highlighted here. More advanced methods are covered in other documentations articles and forums. Content on this website is categorized into three different types:<br>
 &nbsp;</p>
@@ -217,7 +217,7 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	This contains some information some other content that may not change frequently but are&nbsp;likely to change more often than Branding Content. Examples are content of the About Us section, contact information etc. Basically, the items in this category are not related to one another. Static images are the photos on the website that can be easily replaced with new ones.<br>
 	&nbsp;
 	<ul>
-		<li><a class="pc-btn" href="/pc-admin/Ayoola_Page_Layout_ReplaceText" target="_blank">Update Static Text Content</a>&nbsp;</li>
+		<li><a class="pc-btn" href="/pc-admin/Ayoola_Page_Layout_ReplaceText" target="_blank">Update Static Text Content</a></li>
 		<li><a class="pc-btn" href="/pc-admin/Ayoola_Page_Layout_Images" target="_blank">Update Static Images</a>&nbsp;<br>
 		&nbsp;</li>
 	</ul>
@@ -252,11 +252,11 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	</li>
 </ol>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h2><a id="feedback" name="feedback">Feedbacks &amp; Responses&nbsp;</a></h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>There are features on the websites where users of the website will leave feedback on the website through pre-designed forms and other systems. When a user takes an action on the site, we have built a system to record the information in a database and such is accessible by the admin users of the website. Feedbacks could be in one of the following forms:<br>
 &nbsp;</p>
@@ -268,21 +268,21 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	<li><a class="pc-btn" href="/pc-admin/Application_User_UserEmail_Table" target="_blank">Email Opt-In</a></li>
 </ul>
 
-<p>&nbsp;</p>
+<p></p>
 ',
   'preserved_content' => '<div>
-<p>&nbsp;</p>
+<p></p>
 
 <h2><a id="admin" name="admin">Admin access</a></h2>
 
-<p>&nbsp;</p>
+<p></p>
 </div>
 
 <p>Your website allows you to have unlimited number of administrators – people, who would have access to the backend to perform specific administrative functions. Adding new pages, editing existing pages, reading contact form feedbacks, changing logos and favicon, creating posts or adding new products and services are some of the functions users are able to perform when they have admin access to the website.</p>
 
 <p>The direct link to your administrative backend of your website is on <a href="/pc-admin">Control Panel</a>. By default, only the website developer&nbsp;would have access to the website admin panel to update the website&nbsp;but he could grant as many individuals as needed access to do the same tasks.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ul>
 	<li>
@@ -326,15 +326,15 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	</li>
 </ul>
 
-<div>&nbsp;</div>
+<div></div>
 
 <h2><a id="emails" name="emails">Corporate Emails</a></h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>Fully hosted websites come with corporate emails and it is very likely that there is capacity for you to create emails like example@{{{pc_domain}}}. Only requirement in managing email accounts is Admin Access. If you don\'t have admin access and you would like to create a corporate email @{{{pc_domain}}}, you would need to either request admin access or ask someone who has the access to help create the email accounts you need. The email service for PageCarton websites are provided by ComeRiver Mail.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ul>
 	<li><strong>Creating Email Account</strong><br>
@@ -450,7 +450,7 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 
 <h2><a id="content" name="content">Adding Content</a></h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>Adding content to your website is incredibly easy. There are a number of ways to add content but the easiest ways are going to be highlighted here. More advanced methods are covered in other documentations articles and forums. Content on this website is categorized into three different types:<br>
 &nbsp;</p>
@@ -470,7 +470,7 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	This contains some information some other content that may not change frequently but are&nbsp;likely to change more often than Branding Content. Examples are content of the About Us section, contact information etc. Basically, the items in this category are not related to one another. Static images are the photos on the website that can be easily replaced with new ones.<br>
 	&nbsp;
 	<ul>
-		<li><a class="pc-btn" href="/pc-admin/Ayoola_Page_Layout_ReplaceText" target="_blank">Update Static Text Content</a>&nbsp;</li>
+		<li><a class="pc-btn" href="/pc-admin/Ayoola_Page_Layout_ReplaceText" target="_blank">Update Static Text Content</a></li>
 		<li><a class="pc-btn" href="/pc-admin/Ayoola_Page_Layout_Images" target="_blank">Update Static Images</a>&nbsp;<br>
 		&nbsp;</li>
 	</ul>
@@ -505,11 +505,11 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	</li>
 </ol>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h2>Feedbacks &amp; Responses&nbsp;</h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>There are features on the websites where users of the website will leave feedback on the website through pre-designed forms and other systems. When a user takes an action on the site, we have built a system to record the information in a database and such is accessible by the admin users of the website. Feedbacks could be in one of the following forms:<br>
 &nbsp;</p>
@@ -521,7 +521,7 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	<li><a class="pc-btn" href="/pc-admin/Application_User_UserEmail_Table" target="_blank">Email Opt-In</a></li>
 </ul>
 
-<p>&nbsp;</p>
+<p></p>
 ',
   'url_prefix' => '',
   'widget_options' => 
@@ -529,13 +529,12 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
     0 => 'embed_widgets',
     1 => 'wrappers',
   ),
-  'pagewidget_id' => '1566242671-0-14',
+  'pagewidget_id' => '1575534212-0-17',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Global',
   ),
   'wrapper_name' => 'white-well',
-  'widget_name' => '&nbsp; Admin access &nbsp; Your website allows you to have unlimited number of administrators – pe - 9156',
 ) );
 
 							}
@@ -552,8 +551,7 @@ $_62811ae5aaaa125443b3142baae4a203 = null;
 $_e2bfc504239e8d32ae90e710ee38d29b = new Ayoola_Menu( array (
   'option' => 'menu_1567195621',
   'template_name' => 'BlackAccordionSide-menu',
-  'pagewidget_id' => '',
-  'widget_name' => 'menu_1567195621 - BlackAccordionSide-menu -',
+  'pagewidget_id' => '1575534213-0-18',
   'insert_id' => '1567195628-0-2',
 ) );
 

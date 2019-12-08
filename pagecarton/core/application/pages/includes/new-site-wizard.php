@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: new-site-wizard.php	Monday 19th of August 2019 07:24:31 PM	ayoola@ayoo.la $ 
+* @version $Id: new-site-wizard.php	Thursday 5th of December 2019 08:23:33 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -21,17 +21,16 @@ $_c4d914064ec19a4e55e94291d545adb4 = new Ayoola_Page_Editor_Text( array (
 
 <p style="text-align: center;">Complete a new website with these simple steps</p>
 
-<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;"></p>
 ',
   'preserved_content' => '<h3 style="text-align: center;">New Site Wizard</h3>
 
 <p style="text-align: center;">Complete a new website with these simple steps</p>
 
-<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: center;"></p>
 ',
   'url_prefix' => '',
-  'pagewidget_id' => '1564094536-0-21',
-  'widget_name' => 'New Site Wizard Complete a new website with these simple steps &nbsp;',
+  'pagewidget_id' => '1575534213-0-19',
   'insert_id' => '1566242671-0-15',
 ) );
 
@@ -52,9 +51,8 @@ $_bc578534928bf0c3433575dfb1ad2818 = new Ayoola_Object_Embed( array (
   array (
     0 => 'wrappers',
   ),
-  'pagewidget_id' => '',
+  'pagewidget_id' => '1575534213-0-20',
   'wrapper_name' => 'white-well',
-  'widget_name' => 'PageCarton_NewSiteWizard',
   'insert_id' => '1566242671-0-16',
 ) );
 

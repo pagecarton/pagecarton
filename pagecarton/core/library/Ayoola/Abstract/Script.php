@@ -109,7 +109,24 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      * 
      * @var array
      */
-	protected static $_files = array();
+    protected static $_files = array();
+    
+    /**
+     * @var string
+     */
+	protected static $_codesOnLoad = array();
+	
+    /**
+     * @var string
+     */
+	protected static $_filesOnLoad = array();
+	
+    /**
+     * @var string
+     */
+	protected static $_jsMode = array();
+	protected static $_filesToHead = array();
+	protected static $_codesToHead = array();
 
     /**
      * All the Script files to include in the safe
@@ -147,26 +164,12 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
                 $content .= file_get_contents( $path ) . "\r\n/* {$each} ends */\r\n";
             }
 		}
-		$max = max( $time );
-		// Checking if the client is validating his cache and if it is current.
-	//	if ( isset($_SERVER['HTTP_IF_MODIFIED_SINCE'] ) && ( strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) == $max ) ) 
-		{
-			// Client's cache IS current, so we just respond '304 Not Modified'.
-		//	header( 'Last-Modified: ' . gmdate( 'D, d M Y H:i:s', $max ). ' GMT', true, 304 );
-		} 
-	//	else
-		{
-			// Image not cached or cache outdated, we respond '200 OK' and output the image.
-//			header('Cache-Control: private');
-//			header( 'Last-Modified: ' . gmdate('D, d M Y H:i:s', $max ) . ' GMT', true, 200 );  
 
-			#  https://stackoverflow.com/questions/7324242/headers-for-png-image-output-to-make-sure-it-gets-cached-at-browser
-			header('Pragma: public');
-			header('Cache-Control: max-age=86400');
-			header('Expires: '. gmdate('D, d M Y H:i:s \G\M\T', time() + 86400));
-			echo $content;
-	//		header('Content-Length: '.filesize($fn));
-		}
+        #  https://stackoverflow.com/questions/7324242/headers-for-png-image-output-to-make-sure-it-gets-cached-at-browser
+        header('Pragma: public');
+        header('Cache-Control: max-age=86400');
+        header('Expires: '. gmdate('D, d M Y H:i:s \G\M\T', time() + 86400));
+        echo $content;
 		exit();
 	}
 	
@@ -249,7 +252,7 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 			if( ! $file ){ continue; }
 			$file = Ayoola_Doc::uriToDedicatedUrl( $file );
 			if( ! $file ){ continue; }
-			$files .= str_ireplace( array( self::CONTENT_PLACEHOLDER, self::TYPE_PLACEHOLDER, self::ID_PLACEHOLDER ),
+			$files .= str_ireplace( array( static::CONTENT_PLACEHOLDER, static::TYPE_PLACEHOLDER, static::ID_PLACEHOLDER ),
 									array( $file, static::$_type, md5( $file ) ),
 									static::$_markup['file'] 
 								);
@@ -295,7 +298,7 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 	public static function getCodes( $noTags = false )
     {
 		$codes = null;
-	//		var_export( self::$_codes );
+		//	var_export( static::$_codes );
 		static::$_codes = array_merge( static::$_codes, static::$_codesToHead );
 		foreach( static::$_codes as $key => $code )
 		{
@@ -306,7 +309,7 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 			}
 			else
 			{
-				$codes .= str_ireplace( array( self::CONTENT_PLACEHOLDER, self::TYPE_PLACEHOLDER, self::ID_PLACEHOLDER ),
+				$codes .= str_ireplace( array( static::CONTENT_PLACEHOLDER, static::TYPE_PLACEHOLDER, static::ID_PLACEHOLDER ),
 										array( $code, static::$_type, $key ),
 										static::$_markup['code'] 
 									);
@@ -336,8 +339,23 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      */
 	public static function getAll()
     {
-		return self::getFiles() . self::getCodes();
-		
+		return static::getFiles() . static::getCodes();
+	}
+	
+    /**
+     * Returns all Script markups
+     * 
+     */
+	public static function clearAll()
+    {
+		static::$_files = array();
+		static::$_filesDedicatedUrl = array();
+		static::$_filesOnLoad= array();
+		static::$_filesToHead = array();
+		static::$_codes = array();
+		static::$_codesOnLoad = array();	//	Reset it.
+		static::$_codesToHead = array();	//	Reset it.
+		return true;
 	}
 	
     /**
@@ -348,7 +366,7 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      */
 	public static function redirect( $urlToGo )
     {
-		if( array_key_exists( $urlToGo, self::$_redirectRequests ) )
+		if( array_key_exists( $urlToGo, static::$_redirectRequests ) )
 		{
 			if( ! Ayoola_Application::isXmlHttpRequest() && ! Ayoola_Application::isClassPlayer() )
 			{			
@@ -360,7 +378,7 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 		else
 		{
 		//	echo '<div id="ayoola-js-redirect-whole-page"></div>';
-			self::header( $urlToGo );
+        static::header( $urlToGo );
 		}
 	}
 	
@@ -373,9 +391,9 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      */
 	public static function header( $urlToGo, $objectName = null )
     {
-		self::$_redirectRequests[$urlToGo] = $urlToGo;
+		static::$_redirectRequests[$urlToGo] = $urlToGo;
 		$location = Ayoola_Application::isClassPlayer() ? 'parent.location' : 'location';
-		self::addCode
+		static::addCode
 		(
 			
 			'

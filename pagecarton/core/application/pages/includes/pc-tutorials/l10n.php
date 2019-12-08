@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: l10n.php	Monday 19th of August 2019 11:02:04 PM	ayoola@ayoo.la $ 
+* @version $Id: l10n.php	Thursday 5th of December 2019 08:23:32 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -17,15 +17,15 @@
 							{
 								
 $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<h1>&nbsp;</h1>
+  'editable' => '<h1></h1>
 
 <h1>Localization</h1>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>Localization&nbsp;of PageCarton refers to the&nbsp;adaptation&nbsp;of web content to meet the language, cultural and other requirements of a specific target market. PageCarton has been made to support internationalization and so, it is ready to be localized into any such language which its users may want. This feature is supported from PageCarton 1.9 and above.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h2>Locale Settings</h2>
 
@@ -45,18 +45,18 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 
 <p><a class="pc-btn" href="/pc-admin/PageCarton_Locale_Settings" target="_blank">View or Set Locale Settings</a></p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h2>Translation</h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>You are able to translate your site&nbsp;into any other language of choice. Here are the few steps to achieve this</p>
 
 <ol>
 </ol>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ol>
 	<li>Add new language locale to the <a href="/pc-admin/PageCarton_Locale_List" target="_blank">Locale List</a>&nbsp;on your site.&nbsp;<br>
@@ -91,21 +91,21 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 	<li>Enter the translation of the word into the space provided on the screen that opens up</li>
 </ol>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h2>Exporting Locale Translation</h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>Once translation is done for words and phrases in a particular locale, it is possible to export the translation as a plugin and make it available for other users with PageCarton sites.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h3>Building Language Plugin</h3>
 
 <p>The process of creating a plugin is easy and only a few steps:</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ul>
 	<li>Go to My Plugins<br>
@@ -133,11 +133,11 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 	<li>Click on “Download” to download this plugin to your device. The downloaded file should be a “tar.gz” archive</li>
 </ul>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h3>Installing the language on another site</h3>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ul style="list-style-type:circle;">
 	<li>Go to Installed Plugins<br>
@@ -151,7 +151,7 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 	<li>PageCarton should now be displayed in the new language</li>
 </ul>
 
-<div>&nbsp;</div>
+<div></div>
 
 <h3>Uploading Language Plugin to PageCarton Plugin Repository<br>
 &nbsp;</h3>
@@ -167,19 +167,19 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 	<li>That\'s it</li>
 </ul>
 
-<p>&nbsp;</p>
+<p></p>
 
-<p>&nbsp;</p>
+<p></p>
 ',
-  'preserved_content' => '<h1>&nbsp;</h1>
+  'preserved_content' => '<h1></h1>
 
 <h1>Localization</h1>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>Localization&nbsp;of PageCarton refers to the&nbsp;adaptation&nbsp;of web content to meet the language, cultural and other requirements of a specific target market. PageCarton has been made to support internationalization and so, it is ready to be localized into any such language which its users may want. This feature is supported from PageCarton 1.9 and above.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h2>Locale Settings</h2>
 
@@ -199,18 +199,18 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 
 <p><a class="pc-btn" href="/pc-admin/PageCarton_Locale_Settings" target="_blank">View or Set Locale Settings</a></p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h2>Translation</h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>You are able to translate your site&nbsp;into any other language of choice. Here are the few steps to achieve this</p>
 
 <ol>
 </ol>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ol>
 	<li>Add new language locale to the <a href="/pc-admin/PageCarton_Locale_List" target="_blank">Locale List</a>&nbsp;on your site.&nbsp;<br>
@@ -245,21 +245,21 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 	<li>Enter the translation of the word into the space provided on the screen that opens up</li>
 </ol>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h2>Exporting Locale Translation</h2>
 
-<p>&nbsp;</p>
+<p></p>
 
 <p>Once translation is done for words and phrases in a particular locale, it is possible to export the translation as a plugin and make it available for other users with PageCarton sites.</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h3>Building Language Plugin</h3>
 
 <p>The process of creating a plugin is easy and only a few steps:</p>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ul>
 	<li>Go to My Plugins<br>
@@ -284,7 +284,7 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 	</li>
 </ul>
 
-<p style="margin-left:1.5in;">&nbsp;</p>
+<p style="margin-left:1.5in;"></p>
 
 <ul style="list-style-type:circle;">
 	<li>Documents should be left blank</li>
@@ -297,11 +297,11 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 	<li>Click on “Download” to download this plugin to your device. The downloaded file should be a “tar.gz” archive</li>
 </ul>
 
-<p>&nbsp;</p>
+<p></p>
 
 <h3>Installing the language on another site</h3>
 
-<p>&nbsp;</p>
+<p></p>
 
 <ul style="list-style-type:circle;">
 	<li>Go to Installed Plugins<br>
@@ -315,7 +315,7 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 	<li>PageCarton should now be displayed in the new language</li>
 </ul>
 
-<div>&nbsp;</div>
+<div></div>
 
 <h3>Uploading Language Plugin to PageCarton Plugin Repository<br>
 &nbsp;</h3>
@@ -331,13 +331,12 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 	<li>That\'s it</li>
 </ul>
 
-<p>&nbsp;</p>
+<p></p>
 
-<p>&nbsp;</p>
+<p></p>
 ',
   'url_prefix' => '',
-  'pagewidget_id' => '1566242671-0-13',
-  'widget_name' => '&nbsp; Localization &nbsp; Localization&nbsp;of PageCarton refers to the&nbsp;adaptation&nbsp;of web - 4840',
+  'pagewidget_id' => '1575534212-0-16',
   'insert_id' => '1566255724-0-15',
 ) );
 

@@ -557,7 +557,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 			if( @$options['css_code'] )
 			{
-				Application_Javascript::addCode( $options['css_code'] );
+				Application_Style::addCode( $options['css_code'] );
 			}
 		}
     //	VAR_EXPORT( $this->getOptions() );

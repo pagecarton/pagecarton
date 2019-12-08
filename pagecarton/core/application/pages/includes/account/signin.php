@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Monday 19th of August 2019 07:24:33 PM	ayoola@ayoo.la $ 
+* @version $Id: signin.php	Thursday 5th of December 2019 08:23:35 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -23,9 +23,8 @@ $_1823d82978b6248da233ba22f90dfff5 = new Ayoola_Page_Editor_Text( array (
 			',
   'preserved_content' => '',
   'url_prefix' => '',
-  'pagewidget_id' => '1564130403-0-5',
-  'insert_id' => '1564130403-0-5',
-  'widget_name' => 'Ayoola_Page_Editor_Text - ay__middlebar0',
+  'pagewidget_id' => '1575534203-0-177',
+  'insert_id' => '1566242673-0-30',
 ) );
 
 							}
@@ -46,8 +45,7 @@ $_819b0d226cfbe09b764ec0d18e3de388 = new Ayoola_Page_Editor_Text( array (
 			',
   'preserved_content' => '',
   'url_prefix' => '',
-  'pagewidget_id' => '',
-  'widget_name' => 'Ayoola_Page_Editor_Text - ay__threesome10',
+  'pagewidget_id' => '1575534203-0-178',
   'insert_id' => '1566242673-0-31',
 ) );
 
@@ -63,14 +61,13 @@ $_819b0d226cfbe09b764ec0d18e3de388 = null;
 							{
 								
 $_e288e0ae88eb247332f74b296fc90f41 = new Ayoola_Access_Login( array (
-  'pagewidget_id' => '1564130403-0-6',
+  'pagewidget_id' => '1575534203-0-179',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  'insert_id' => '1564130403-0-6',
+  'insert_id' => '1566242673-0-32',
   '' => '',
-  'widget_name' => '1564130403-0-6 - - 1564130403-0-6 -',
 ) );
 
 							}
@@ -90,15 +87,14 @@ $_29dee3838ed48fbd1732353450c0ade7 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '<div style="text-align: center;"><a href="/tools/classplayer/get/name/Application_User_Help_ForgotUsernameOrPassword" rel="spotlight;">Forgot password</a> <span style="color:#808080;"><span style="font-size:20px;">|</span></span> <a href="/widgets/Application_User_Creator" onclick="this.href=this.href + location.search;">Create a new account</a></div>
 ',
   'url_prefix' => '',
-  'pagewidget_id' => '1564094537-0-36',
+  'pagewidget_id' => '1575534203-0-180',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
   'wrapper_name' => 'well',
-  '' => '',
-  'widget_name' => 'Forgot password | Create a new account',
   'insert_id' => '1566242673-0-33',
+  '' => '',
 ) );
 
 							}
@@ -119,8 +115,7 @@ $_a8a7a9b2921b861baf512f69102991b3 = new Ayoola_Page_Editor_Text( array (
 			',
   'preserved_content' => '',
   'url_prefix' => '',
-  'pagewidget_id' => '',
-  'widget_name' => 'Ayoola_Page_Editor_Text - ay__threesome30',
+  'pagewidget_id' => '1575534203-0-181',
   'insert_id' => '1566242674-0-34',
 ) );
 

@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: blog.php	Monday 19th of August 2019 07:24:32 PM	ayoola@ayoo.la $ 
+* @version $Id: blog.php	Thursday 5th of December 2019 08:23:33 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -37,7 +37,7 @@ $_56f2567a47ba97cf2adc43c06443ff27 = new Ayoola_Page_Editor_Text( array (
     0 => 'embed_widgets',
     1 => 'parameters',
   ),
-  'pagewidget_id' => '1564094536-0-22',
+  'pagewidget_id' => '1575534213-0-21',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_ShowAll',
@@ -51,14 +51,13 @@ $_56f2567a47ba97cf2adc43c06443ff27 = new Ayoola_Page_Editor_Text( array (
     4 => '1',
     5 => '6',
   ),
+  'insert_id' => '1566242672-0-17',
   'pagination[0]' => '1',
   'cover_photo_width' => '1800',
   'cover_photo_height' => '1500',
   'skip_ariticles_without_cover_photo[0]' => '1',
   'add_a_new_post[0]' => '1',
   'no_of_post_to_show[0]' => '6',
-  'widget_name' => '{{{article_title}}} Share {{{post_type}}} by {{{display_name}}} in {{{category_text}}} {{{article_description}}} {{{article_content}}} View {{{views_count_total}}} {{{comments_count_total}}} {{{article_creation_date_filtered}}}',
-  'insert_id' => '1566242672-0-17',
 ) );
 
 							}

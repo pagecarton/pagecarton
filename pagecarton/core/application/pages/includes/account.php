@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Monday 19th of August 2019 07:24:35 PM	ayoola@ayoo.la $ 
+* @version $Id: account.php	Thursday 5th of December 2019 08:23:39 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -28,14 +28,13 @@ $_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
 
 <br>',
   'url_prefix' => '',
-  'pagewidget_id' => '1564094539-0-52',
+  'pagewidget_id' => '1575534201-0-173',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  '' => '',
-  'widget_name' => 'Account Dashboard',
   'insert_id' => '1566242675-0-12',
+  '' => '',
 ) );
 
 							}
@@ -73,8 +72,8 @@ $_0a8d876c1a5bdfa414e91126c8475772 = new Ayoola_Page_Editor_Text( array (
   ),
   'savedwidget_id' => '',
   'pagewidget_id_switch' => '',
-  'widget_name' => '{{{article_title}}} Share {{{post_type}}} by {{{display_name}}} in {{{category_text}}} {{{article_description}}} {{{article_content}}} View {{{views_count_total}}} {{{comments_count_total}}} {{{article_creation_date_filtered}}}',
-  'pagewidget_id' => '',
+  'widget_name' => '',
+  'pagewidget_id' => '1575534201-0-174',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_ShowAll',
@@ -123,7 +122,7 @@ $_7aac6aa09cee3843d266ebfb57a2baf1 = new Ayoola_Page_Editor_Text( array (
 
 ',
   'url_prefix' => '',
-  'pagewidget_id' => '1564094539-0-53',
+  'pagewidget_id' => '1575534202-0-175',
   'markup_template_object_name' => 
   array (
     0 => 'Ayoola_Access_Dashboard',
@@ -133,9 +132,8 @@ $_7aac6aa09cee3843d266ebfb57a2baf1 = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   'wrapper_name' => 'dark',
-  '' => '',
-  'widget_name' => 'Email: {{{email}}} Username: {{{username}}}',
   'insert_id' => '1566242675-0-13',
+  '' => '',
 ) );
 
 							}
@@ -152,14 +150,13 @@ $_7aac6aa09cee3843d266ebfb57a2baf1 = null;
 $_1e879530f660cb8dced12756d01cc160 = new Ayoola_Menu( array (
   'option' => 'MyAccount',
   'template_name' => 'WhiteSidebarMenu',
-  'pagewidget_id' => '1564094539-0-54',
+  'pagewidget_id' => '1575534202-0-176',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
-  '' => '',
-  'widget_name' => 'MyAccount - WhiteSidebarMenu - 1564094539-0-54 - -',
   'insert_id' => '1566242675-0-14',
+  '' => '',
 ) );
 
 							}
