@@ -1569,7 +1569,7 @@ class Ayoola_Application
 				//	By default, don't display error'
 				{
 					error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
-					ini_set( 'display_errors', "0" );
+				//	ini_set( 'display_errors', "0" );
 				}
 
 				//	If the mode is selected, we don't want to see errors.
@@ -1822,7 +1822,7 @@ class Ayoola_Application
             if( count( $requestedUri ) === 2 )
             {
                 #	https://www.comeriver.com/music/index.php/trending
-                list( $pathPrefix, $requestedUri ) = $requestedUri;
+                list( $pathPrefix, $requestedUri ) = $requestedUri; 
                 if( ! Ayoola_Application::getPathPrefix() )
                 {
                     self::$_pathPrefix = $pathPrefix;

@@ -2213,7 +2213,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             {
                 $this->_viewContent->appendChild( $contentData );
             }
-            $this->_viewContentHTML = 	$this->documentElementOTag .
+            @$this->_viewContentHTML = 	$this->documentElementOTag .
                                             $this->containerOTag . $this->containerCTag .
                                             $this->contentTagO .
                                             $this->_viewContentText .

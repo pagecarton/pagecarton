@@ -92,7 +92,8 @@ class Application_Info extends Ayoola_Abstract_Playable
 		$data = $xml->createHTMLElement( 'td', '' . self::__( 'PageCarton' ) . ' ' . PageCarton::VERSION . ' ( ' . $installationInfo . ' )' );
 		$data  = $row->appendChild( $data );
 		$backup = new Application_Backup_Backup();
-		$backup = array_pop( $backup->select() );
+		$backup = $backup->select();
+		$backup = array_pop( $backup );
 		$filterTime = new Ayoola_Filter_Time();
 		if( ! empty( $backup['backup_creation_date'] ) )
 		{

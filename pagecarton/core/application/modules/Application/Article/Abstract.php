@@ -1360,7 +1360,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		else
 		{
 			$values['true_post_type'] = $values['article_type'];
-			$values['post_type'] = $postTypesAvailable[$values['article_type']] ? : $values['article_type'];
+			$values['post_type'] = @$postTypesAvailable[$values['article_type']] ? : $values['article_type'];
 		}
 	//	self::v( $articleTypeWeUsing );
 	//	self::v( $postTypeInfo );
@@ -1519,7 +1519,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$featureCount = array();
 		foreach( $features as $key => $eachPostType )
 		{	
-			$featurePrefix = $featuresPrefix[$key];
+			$featurePrefix = @$featuresPrefix[$key];
 			if( empty( $featureCount[$eachPostType] ) )
 			{
 				$featureCount[$eachPostType] = 1;
@@ -1608,7 +1608,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				//	$addCategoryLink = ( '<a rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Add new Category" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Access_AccessInformation_Editor?pc_profile_info_to_edit=post_categories">My categories</a>' );     
 					if( self::hasPriviledge( 98 ) )
 					{
-						$addCategoryLink .= ( '<a rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Add new Category" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Articles/">Manage Categories</a>' );
+						@$addCategoryLink .= ( '<a rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Add new Category" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Articles/">Manage Categories</a>' );
 					}
 					$currentCategories =  is_array( @$values['category_name'] ) ? $values['category_name'] : array();
 

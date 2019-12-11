@@ -562,7 +562,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     public static function getRootUrl()
     {
 		$domain = self::getDefaultDomain();
-		$url = Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . $domain . self::getPortNumber() . $_SERVER['CONTEXT_PREFIX'];   
+		$url = Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . $domain . self::getPortNumber() . @$_SERVER['CONTEXT_PREFIX'];   
 		return $url;
     }
 	

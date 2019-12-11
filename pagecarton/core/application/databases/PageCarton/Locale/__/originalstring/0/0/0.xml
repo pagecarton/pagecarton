@@ -2366,7 +2366,7 @@ Visit: http://localhost:8888   and please help share!]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="287">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Cache Cleared!]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/personalize&quot;,&quot;\/&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/pc-admin&quot;,&quot;\/sample{{{document_url_uri}}}&quot;,&quot;\/pc_check.txt&quot;,&quot;\/widgets\/Ayoola_Page_Layout_MakeDefault&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/personalize&quot;,&quot;\/&quot;,&quot;\/widgets\/Application_Personalization&quot;,&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/pc-admin&quot;,&quot;\/sample{{{document_url_uri}}}&quot;,&quot;\/pc_check.txt&quot;,&quot;\/widgets\/Ayoola_Page_Layout_MakeDefault&quot;,&quot;\/spa.js&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905876-0-208]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905876]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563905878]]></TABLE_FIELD>
@@ -4202,7 +4202,7 @@ Visit: http://localhost:8888   and please help share!]]></TABLE_FIELD>
     <TABLE_ROW ROW_ID="510">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[%s cron tasks processed successfully]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[%s cron tasks processed successfully]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/&quot;,&quot;\/pc_check.txt&quot;,&quot;\/pc-admin\/Application_Upgrade&quot;,&quot;\/js\/objects\/ckeditor\/plugins\/link\/dialogs\/link.js&quot;,&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/pc-admin&quot;,&quot;\/sample{{{document_url_uri}}}&quot;,&quot;\/img\/logo.png&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/&quot;,&quot;\/pc_check.txt&quot;,&quot;\/pc-admin\/Application_Upgrade&quot;,&quot;\/js\/objects\/ckeditor\/plugins\/link\/dialogs\/link.js&quot;,&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/pc-admin&quot;,&quot;\/sample{{{document_url_uri}}}&quot;,&quot;\/img\/logo.png&quot;,&quot;\/spa.js&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485782-0-510]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485782]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1564486018]]></TABLE_FIELD>

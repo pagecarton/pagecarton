@@ -172,10 +172,11 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
 
                             if( is_numeric( $value ) )
                             {
-                            //    var_export( $value );
+                            //    var_export( $rowKey );
+                            //   var_export( $value );
                             //    var_export( $each['url'] );
                                 $values[$field][] = intval( $value );
-                                $keyToUse = $each[$rowKey];
+                                $keyToUse = empty( $each[$rowKey] ) ? null : $each[$rowKey];
                                 $keyToUse = $keyToUse ? : $each['username'];
                                 $keyToUse = $keyToUse ? : $each['profile_url'];
                                 $keyToUse = $keyToUse ? : $each['url'];
@@ -437,8 +438,8 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
 
                                     </div>
                                         ';
-            $this->_parameter['content_to_clear_internal'] .= ' <span style="font-size:1em;color:green; display:inline-block;"><i class="fa fa-arrow-up"></i> %</span>' . "\r\n";
-            $this->_parameter['content_to_clear_internal'] .= '<span style="font-size:1em;color:red; display:inline-block;"><i class="fa fa-arrow-down"></i> %</span>' . "\r\n";
+            @$this->_parameter['content_to_clear_internal'] .= ' <span style="font-size:1em;color:green; display:inline-block;"><i class="fa fa-arrow-up"></i> %</span>' . "\r\n";
+            @$this->_parameter['content_to_clear_internal'] .= '<span style="font-size:1em;color:red; display:inline-block;"><i class="fa fa-arrow-down"></i> %</span>' . "\r\n";
             $this->setViewContent( $html ); 
 
 

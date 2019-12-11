@@ -1050,7 +1050,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		}  
 		$content .= '</div>';     		
 		$content .= $list;
-		$content .= $searchFormHtml;
+		@$content .= $searchFormHtml;
 		return $content;
     }
 	

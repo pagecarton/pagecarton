@@ -1503,7 +1503,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	self::v( $categoryId );
 		$categoryName = null;
         $table = Application_Category::getInstance();
-        $categoryError = sprintf( PageCarton_Widget::__( 'There are no recent posts in the %s category.' ), $category['category_label'] );
+        $categoryError = sprintf( PageCarton_Widget::__( 'There are no recent posts in the %s category.' ), $categoryId );
 		if( $categoryId && is_numeric( $categoryId ) ) 
 		{
 			$category = $table->selectOne( null, array( 'category_id' => $categoryId ) );

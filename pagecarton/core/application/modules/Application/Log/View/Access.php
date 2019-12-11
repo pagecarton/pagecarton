@@ -70,12 +70,12 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
         
         
     //    $referer = parse_url( 'http://localhost:8888/sample/pc-admin' );
-        $referer = parse_url( $log['http_referer'] );
+        $referer = parse_url( @$log['http_referer'] );
     //    var_export( $log['http_referer'] );
     //    var_export( $referer );
         $log['log_time'] = time();
           
-		$log['referal_domain'] = $referer['host'];  
+		$log['referal_domain'] = @$referer['host'];  
 		
 		unset( $log['request']['password'], $log['request']['password2'], $log['request'][Ayoola_Form::hashElementName( 'password' )], $log['request'][Ayoola_Form::hashElementName( 'password2' )], $log['request']['local_password'], $log['request'][Ayoola_Form::hashElementName( 'local_password' )] );
 		$log['uri'] = Ayoola_Application::getPresentUri(); 
@@ -85,7 +85,7 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 			case '/object':
 			case '/widgets':
 			case '/pc-admin':
-				$log['uri'] = @$_GET['object_name'] ? : $_GET['name'];
+				@$log['uri'] = @$_GET['object_name'] ? : $_GET['name'];
 			break;
 		}
 		$access = new Ayoola_Access();

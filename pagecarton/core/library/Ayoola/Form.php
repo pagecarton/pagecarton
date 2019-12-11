@@ -284,7 +284,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     public function __construct( $attributes = null )
     {
 		$this->_attributes = _Array( $attributes );
-		$this->_attributes['id'] = @$this->_attributes['id'] ? : $this->_attributes['name'] . '_form_id';
+		$this->_attributes['id'] = @$this->_attributes['id'] ? : @$this->_attributes['name'] . '_form_id';
 		
 		//	testing 123
 	//	$this->_attributes['action'] = '/tools/classplayer/get/object_name/' . $this->_attributes['name'] . '/';
@@ -530,7 +530,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		//	var_export( $this->submitValue );
 			$element->addElement( array( 'name' => $key, 'value' => $value, 'type' => 'Hidden' ) );
 		}
-		$element->addElement( array( 'name' => $this->_attributes['name'] . self::SUBMIT_DETECTOR, 'value' => $this->_attributes['name'], 'type' => 'Hidden', 'data-pc-ignore-field' => 'true' ) );
+		$element->addElement( array( 'name' => @$this->_attributes['name'] . self::SUBMIT_DETECTOR, 'value' => @$this->_attributes['name'], 'type' => 'Hidden', 'data-pc-ignore-field' => 'true' ) );
 	//	$element->addElement( array( 'name' => 'MAX_FILE_SIZE', 'type' => 'Hidden', 'value' => '107374182', 'data-pc-ignore-field' => 'true' ) );
 		$element->addElement( array( 'name' => self::HONEY_POT, 'type' => 'HoneyPot', 'value' => '', 'data-pc-ignore-field' => 'true' ) );
 //		$element->addRequirement( self::HONEY_POT, array( 'Blank' ) );   

@@ -75,7 +75,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 			}
 	//		var_export( $plainUrl ); 
 	//		var_export( $imageUrl ); 
-			switch( array_pop( explode( '.', strtolower( $imageUrl ) ) ) )
+			switch( @array_pop( explode( '.', strtolower( $imageUrl ) ) ) )
 			{
 				case 'jpg':
 				case 'jpeg':

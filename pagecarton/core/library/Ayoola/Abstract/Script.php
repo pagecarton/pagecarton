@@ -303,6 +303,7 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 		foreach( static::$_codes as $key => $code )
 		{
 			if( ! $code ){ continue; }
+            $code .= ';' . $code;
 			if( $noTags )
 			{
 				$codes .= $code;
