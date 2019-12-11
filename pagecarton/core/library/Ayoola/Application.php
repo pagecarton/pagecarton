@@ -1569,7 +1569,7 @@ class Ayoola_Application
 				//	By default, don't display error'
 				{
 					error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
-				//	ini_set( 'display_errors', "0" );
+					ini_set( 'display_errors', "0" );
 				}
 
 				//	If the mode is selected, we don't want to see errors.
