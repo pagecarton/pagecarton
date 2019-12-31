@@ -251,8 +251,15 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 							self::unsetParametersThatMayBeDuplicated( $parameters );
                             $class = new $each( $parameters );
                             $class->setParameter( $parameters );
-                            $class->init();
-							$content = $class->view();
+                            if( false === $class->init() )
+                            {
+                                $content = null;
+                            }
+                            else
+                            {
+                                $content = $class->view();
+                            }
+
                         //    var_export( $each );
                         //    var_export( $content );
                             $this->_markupTemplateObjects[] = $class;

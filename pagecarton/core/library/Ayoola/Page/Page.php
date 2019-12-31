@@ -50,6 +50,8 @@ class Ayoola_Page_Page extends Ayoola_Dbase_Table_Abstract_Xml
 		'system' => 'INT',
 		'cover_photo' => 'INPUTTEXT',
 		'page_options' => 'ARRAY',
+		'pagewidget_id' => 'JSON',
+		'section_name' => 'JSON',
 		'creation_date' => 'INT', 'modified_date' => 'INT',
 	);
 	// END OF CLASS

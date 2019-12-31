@@ -62,6 +62,12 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 	protected static $_widgets;
 	
     /**
+     * 
+     * @var array
+     */
+	protected static $_embedInstances = array();
+	
+    /**
      * The method does the whole Class Process
      * 
      */
@@ -75,9 +81,19 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			//	One way or the other, leaving this causes a situation 
 			//	where classes are played twice
 			unset( $this->_parameter['editable'] );
+		//	unset( $this->_parameter['pagewidget_id'] );
 			unset( $this->_parameter['view'] );
 
-			//	don't run when page editor is invoked.
+            //	don't run when page editor is invoked.
+        //    if( $this->getParameter( 'pagewidget_id' ) )
+        //    throw new Ayoola_Exception();
+            $id = md5( serialize( $this->getParameter() ) );
+            if( in_array( $id, static::$_embedInstances ) )
+            {
+            //    return false;
+            }
+            static::$_embedInstances[] = $id;
+        //   var_export( $this->getParameter() );
 
 			//	var_Export( $classes );
 			$this->initiated = false; //	compatibility
@@ -94,6 +110,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 					foreach( $classes as $class )
 					{
 						if( ! $class ){ continue; }
+						if( $class === __CLASS__ ){ continue; }
 						if( in_array( $class, self::$_ignoredClasses ) ){ continue; }
 						$this->play( $class, $this->getParameter() );
 					}
@@ -102,7 +119,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 		}
 		catch( Ayoola_Exception $e )
 		{ 
-		//	echo $e->getMessage(); 
+			echo $e->getTraceAsString(); 
 		}
     } 
 	

@@ -380,23 +380,34 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      */
     public static function getSiteWideWidgets( $section )   
     {
-        $widgets = Ayoola_Object_PageWidget::getInstance()->select( null, array( 'section_name' => $section, 'url' =>  '/sitewide-page-widgets' ) );
-        $classes = array();
-    //    var_export( $section );
-    //    var_export( $widgets );
-        foreach( $widgets as $eachSiteWidget => $sitewideWidget )
+        try
         {
-            $class = $sitewideWidget['class_name'];
-            if( ! Ayoola_Loader::loadClass( $class ) )
+            $widgets = Ayoola_Object_PageWidget::getInstance()->select( null, array( 'section_name' => $section, 'url' =>  '/sitewide-page-widgets' ) );
+
+            self::setHook( static::getInstance(), __FUNCTION__, $widgets );
+
+            $classes = array();
+        //    var_export( $section );
+        //    var_export( $widgets );
+            foreach( $widgets as $widget )
             {
-                continue;
+                $class = $widget['class_name'];
+                if( ! Ayoola_Loader::loadClass( $class ) )
+                {
+                    continue;
+                }
+                $class = new $class( $widget['parameters'] + array( 'pc_section_name' => $section ) );
+                $class->initOnce();
+                $classes[] = $class;
             }
-            $class = new $class( $sitewideWidget['parameters'] );
-            $class->initOnce();
-            $classes[] = $class;
+        //    var_export( $classes );
+            return $classes;
         }
-    //    var_export( $classes );
-        return $classes;
+        catch( Ayoola_Page_Editor_Exception $e  )
+        {
+            //  now hooks can avoid execution of a class init method
+        }
+
     }
     
     /**
@@ -710,6 +721,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                 Ayoola_Object_PageWidget::getInstance()->delete( array( 'url' =>  $page['url'] ) ); 
             }
         }
+        $pageUpdateInfo = array();
 		foreach( $placeholders as $section => $v )
 		{
 			$section = strtolower( $section );
@@ -1006,6 +1018,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                                 $values[$numberedSectionName . 'advanced_parameters'] .= '&' . $pageWidgetIdText;
                             }
                         }
+
+                        //  send page widgets to DB
+                        $pageUpdateInfo['pagewidget_id'][] = $parameters['pagewidget_id'];
+                        $pageUpdateInfo['section_name'][] = $section;
 					}
 					$pageContent[$section][] = 	array( 'class' => $eachObject['class_name'], 'parameters' => $parameters );	
 
@@ -1174,6 +1190,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$rPaths['data_php'] = 'documents/layout/' . $themeName . '/theme/data_php';
 				$rPaths['data_json'] = 'documents/layout/' . $themeName . '/theme/data_json';
 				$rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme/data_json_content';
+				$rPaths['data_page_info'] = 'documents/layout/' . $themeName . '/theme/data_page_info';
 				$rPaths['data-backup'] = 'documents/layout/' . $themeName . '/theme/data-backup/' . time();
 			}
 			elseif( $this->getPageEditorLayoutName() )
@@ -1205,6 +1222,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 				$rPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
 				$rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json_content';
+				$rPaths['data_page_info'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_page_info';
 				$rPaths['data-backup'] ='documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data-backup/' . time();
 			}
 			else
@@ -1233,6 +1251,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	var_export();
             file_put_contents( $rPaths['data_json'], $dataToSave );
 			file_put_contents( $rPaths['data_json_content'], static::safe_json_encode( $pageContent ) );
+			file_put_contents( $rPaths['data_page_info'], static::safe_json_encode( $pageUpdateInfo ) );
 
 			//	back up current data and not previous one
 			if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  

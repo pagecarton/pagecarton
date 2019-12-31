@@ -74,7 +74,10 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
      */
     public function filter( $value )
     {
-	//	var_export( $value );
+        if( ! trim( $value ) )
+        {
+            return null;
+        }
         $settings = $this->getTimeSettings();
     	switch( $settings['mode'] )
 		{

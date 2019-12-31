@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: plugin.php	Thursday 5th of December 2019 08:23:32 AM	ayoola@ayoo.la $ 
+* @version $Id: plugin.php	Saturday 14th of December 2019 09:18:32 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
+$_29fb4f7c3d0179fee173344ca9b11071 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h1>Creating PageCarton Plugins</h1>
 
 <p></p>
@@ -325,7 +325,7 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_be52de7bd6cdef876aa721a6b16621a0 = null;
+$_29fb4f7c3d0179fee173344ca9b11071 = null;
 
 							}
 							

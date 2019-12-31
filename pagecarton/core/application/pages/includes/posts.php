@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: posts.php	Thursday 5th of December 2019 08:23:36 AM	ayoola@ayoo.la $ 
+* @version $Id: posts.php	Saturday 14th of December 2019 09:18:37 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_3656dfc60fdb8b17da2a74e1cdbada81 = new Ayoola_Object_Embed( array (
+$_b4e2bca575bd6d3aefe5828c58005eee = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Category_View',
   'category_name' => '',
   'pc_module_url_values_category_offset' => '?',
@@ -38,14 +38,14 @@ $_3656dfc60fdb8b17da2a74e1cdbada81 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_3656dfc60fdb8b17da2a74e1cdbada81 = null;
+$_b4e2bca575bd6d3aefe5828c58005eee = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_d137c0781f268d08fc4dd0c4966e1415 = new Ayoola_Page_Editor_Text( array (
+$_123e4c1aa1e87ec563a666e390ed73dd = new Ayoola_Page_Editor_Text( array (
   'editable' => '
 			
 			<h3><br></h3><div><br></div>
@@ -59,14 +59,14 @@ $_d137c0781f268d08fc4dd0c4966e1415 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_d137c0781f268d08fc4dd0c4966e1415 = null;
+$_123e4c1aa1e87ec563a666e390ed73dd = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
 							{
 								
-$_b69721fe0cd7e9b64c6dbac7caf5d0e9 = new Ayoola_Menu( array (
+$_83486cc88adcfeec8136e8738425fb1b = new Ayoola_Menu( array (
   'option' => 'menu_2',
   'template_name' => 'WhiteSidebarMenu',
   'pagewidget_id' => '1575534206-0-187',
@@ -82,14 +82,14 @@ $_b69721fe0cd7e9b64c6dbac7caf5d0e9 = new Ayoola_Menu( array (
 							else
 							{
 								
-$_b69721fe0cd7e9b64c6dbac7caf5d0e9 = null;
+$_83486cc88adcfeec8136e8738425fb1b = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
 							{
 								
-$_b25448002023eba7e4eb94ab6a3a6603 = new Application_Article_ShowAll( array (
+$_ffd76c31c4cc225a13d2e6f3435718f6 = new Application_Article_ShowAll( array (
   'option' => '5',
   'category_name' => '',
   'article_types' => '',
@@ -119,7 +119,7 @@ $_b25448002023eba7e4eb94ab6a3a6603 = new Application_Article_ShowAll( array (
 							else
 							{
 								
-$_b25448002023eba7e4eb94ab6a3a6603 = null;
+$_ffd76c31c4cc225a13d2e6f3435718f6 = null;
 
 							}
 							

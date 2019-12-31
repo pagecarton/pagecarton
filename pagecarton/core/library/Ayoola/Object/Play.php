@@ -36,7 +36,9 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
     public function init()
     {
 		//	Make the application know we are using class player
-		$_SERVER['HTTP_APPLICATION_MODE'] = $this->getObjectName();
+        $_SERVER['HTTP_APPLICATION_MODE'] = $this->getObjectName();
+        //   var_export( $this->getParameter() );
+        //   var_export( $_REQUEST );
 		try
 		{
 			{
@@ -46,15 +48,18 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 				if( @$_REQUEST['object_name'] )
 				{ 
 					$identifier = array( 'class_name' => $_REQUEST['object_name'] );
+                //    var_export( $identifier );
 				}
 				elseif( @$_REQUEST['name'] )
 				{
 				//	var_export( $_REQUEST['name'] );
 					$identifier = array( 'class_name' => $_REQUEST['name'] );
+                //    var_export( $identifier );
 				}
 				elseif( ! empty( $_REQUEST['pc_module_url_values'][0] ) )
 				{
 					$identifier = array( 'class_name' => $_REQUEST['pc_module_url_values'][0] );
+                //    var_export( $identifier );
 				}
 				elseif( $this->getParameter( 'list_all_widgets' ) || @$_REQUEST['list_all_widgets'] )
 				{
@@ -68,12 +73,14 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 				{
                 //    var_export( Ayoola_Object_PageWidget::getInstance()->select() );
                 //    var_export( $widgetId );
+                //    unset( $_REQUEST['widget_id'] );
                     if( $widget = Ayoola_Object_PageWidget::getInstance()->selectOne( null,  array( 'pagewidget_id' => $widgetId ) ) )
                     {
                     //    var_export( $widget );
                         $class = $widget['class_name'];
                         $class = new $class( array( 'pagewidget_id' => $widgetId ) + $widget['parameters'] );
-                        $this->setViewContent( '' . $class->view() . '' );
+                     //    var_export( $widget );
+                       $this->setViewContent( '' . $class->view() . '' );
                         return true;
                     }
                     elseif( $widget = Ayoola_Object_SavedWidget::getInstance()->selectOne( null,  array( 'savedwidget_id' => $widgetId ) ) )
@@ -86,6 +93,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 				}
 				$this->setIdentifierData( $identifier );
 			}
+        //   var_export( $this->getParameter() );
 			//	I want to allow a convenient way of playing class
 			if( $identifier['class_name'] === __CLASS__ )
 			{

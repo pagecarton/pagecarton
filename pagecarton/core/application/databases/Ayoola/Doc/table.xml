@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="table" creation_time="1505176754" table_version="0.0" module_version="1.00" table_class="Ayoola_Doc_Table" creation_ip="0">
-  <RECORDS autoId="6">
+  <RECORDS autoId="7">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/public/2017/09/12/Capture_PNG.png]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="upload_time"><![CDATA[1505176754]]></TABLE_FIELD>
@@ -38,6 +38,16 @@
       <TABLE_FIELD FIELD_KEY="access_level"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[1566292660-0-5]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1566292660]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="6">
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/public/2019/12/14/pc-layout-miniblog-tar-gz.gz]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="upload_time"><![CDATA[1576318110]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="username"><![CDATA[joywealth]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="access_level"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="table_id"><![CDATA[1576318110-0-6]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1576318110]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;127.0.0.1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Thursday 5th of December 2019 08:23:39 AM	ayoola@ayoo.la $ 
+* @version $Id: account.php	Saturday 14th of December 2019 09:18:43 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
+$_5d0205259c2cf515c9cf6cca2425f3c4 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<br>
 
 <h1>Account Dashboard</h1>
@@ -41,14 +41,14 @@ $_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_2f63bc0963e9afc89bc511de893c11fc = null;
+$_5d0205259c2cf515c9cf6cca2425f3c4 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_0a8d876c1a5bdfa414e91126c8475772 = new Ayoola_Page_Editor_Text( array (
+$_1f640bacaa91af5b88cd27ebb94625c0 = new Ayoola_Page_Editor_Text( array (
   'codes' => '<a href="{{{post_link}}}"><img class="pc_give_space_top_bottom" style="width:100%;" alt="" src="{{{document_url_cropped}}}"></a>
 
 <div class="xcontainer xpc_container">
@@ -101,14 +101,14 @@ $_0a8d876c1a5bdfa414e91126c8475772 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_0a8d876c1a5bdfa414e91126c8475772 = null;
+$_1f640bacaa91af5b88cd27ebb94625c0 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_7aac6aa09cee3843d266ebfb57a2baf1 = new Ayoola_Page_Editor_Text( array (
+$_d9c85b7ec581d502ad8d1e97ae5d62fb = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div style="">Email: {{{email}}}</div>
 
 <div style="">Username: {{{username}}}</div>
@@ -140,14 +140,14 @@ $_7aac6aa09cee3843d266ebfb57a2baf1 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_7aac6aa09cee3843d266ebfb57a2baf1 = null;
+$_d9c85b7ec581d502ad8d1e97ae5d62fb = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
 							{
 								
-$_1e879530f660cb8dced12756d01cc160 = new Ayoola_Menu( array (
+$_85e1debfaf199a689ecda4fc12a7f75d = new Ayoola_Menu( array (
   'option' => 'MyAccount',
   'template_name' => 'WhiteSidebarMenu',
   'pagewidget_id' => '1575534202-0-176',
@@ -163,7 +163,7 @@ $_1e879530f660cb8dced12756d01cc160 = new Ayoola_Menu( array (
 							else
 							{
 								
-$_1e879530f660cb8dced12756d01cc160 = null;
+$_85e1debfaf199a689ecda4fc12a7f75d = null;
 
 							}
 							

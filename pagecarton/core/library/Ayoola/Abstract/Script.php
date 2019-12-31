@@ -207,6 +207,7 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      */
 	public static function addCode( $code, array $settings = null )
     {
+        $code .=  ';';
 		$key = 'A' . md5( $code );
 		if( @$settings['js_mode'] )
 		{
@@ -303,7 +304,6 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 		foreach( static::$_codes as $key => $code )
 		{
 			if( ! $code ){ continue; }
-            $code .= ';' . $code;
 			if( $noTags )
 			{
 				$codes .= $code;

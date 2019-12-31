@@ -131,6 +131,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 
             $link = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $_GET['install'] . '&auto_download=1';
         //    var_export(  $link );
+        //    exit();
 
             $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
             $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';

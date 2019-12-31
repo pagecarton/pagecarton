@@ -16,6 +16,7 @@
  */
  
 require_once 'Ayoola/Dbase/Table/Interface.php';
+require_once 'PageCarton/Widget.php';
 
 
 /**

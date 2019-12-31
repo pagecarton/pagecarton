@@ -454,7 +454,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     public static function getPageCrumbs( $page )
     {
 		$sections = self::splitUrl( $page );
-		$table = Ayoola_Page_Page::getInstance();
+		$table = Ayoola_Page_Page::getInstance( __METHOD__ );
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );
 		$pages = $table->select( null, array( 'url' => $sections ), array( 'work-arround-ddd111' => true ) );
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );

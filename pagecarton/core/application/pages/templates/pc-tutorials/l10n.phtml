@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: l10n.php	Thursday 5th of December 2019 08:23:32 AM	ayoola@ayoo.la $ 
+* @version $Id: l10n.php	Saturday 14th of December 2019 09:18:32 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -26,17 +26,17 @@
 							if
 							( 
 
-								$x_1575534212 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+								$x_1576315112 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
 							)
 							{
-							//	var_export( $x_1575534212 );
-							//	echo file_get_contents( $x_1575534212 );
-								foreach( $x_1575534212 as $each )
+							//	var_export( $x_1576315112 );
+							//	echo file_get_contents( $x_1576315112 );
+								foreach( $x_1576315112 as $each )
 								{	
 									include_once $each;
 								}
 							}
-		//					var_export( $x_1575534212 );
+		//					var_export( $x_1576315112 );
 						?>
 						 <?php
 /**
@@ -125,7 +125,7 @@ echo ( ! empty( $_37de1278686bad05803e50ef40b938dc ) &&  is_object( $_37de127868
 ?><?php
 //middlebar Begins Here
 
-echo ( ! empty( $_7b8a8a969c5afc068e8279e7c4bded04 ) &&  is_object( $_7b8a8a969c5afc068e8279e7c4bded04 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_7b8a8a969c5afc068e8279e7c4bded04->view(), '' ) : null );
+echo ( ! empty( $_0ae3f260d0e381eabbbe6e4d5ec27b7c ) &&  is_object( $_0ae3f260d0e381eabbbe6e4d5ec27b7c ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_0ae3f260d0e381eabbbe6e4d5ec27b7c->view(), '' ) : null );
 
 //middlebar Ends Here
 ?>

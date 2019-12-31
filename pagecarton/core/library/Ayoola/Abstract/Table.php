@@ -503,10 +503,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
     public function setForm( Ayoola_Form $form )
     {
-		foreach( self::getHooks() as $class )
-		{
-			$class::hook( $this, __FUNCTION__, func_get_args() );
-		}
+        self::setHook( $this, __FUNCTION__, $form );
 		
 		//	INTRODUCING CALL-TO-ACTION
 		if( $this->getParameter( 'call_to_action' ) )

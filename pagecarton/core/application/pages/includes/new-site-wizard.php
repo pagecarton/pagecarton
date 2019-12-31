@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: new-site-wizard.php	Thursday 5th of December 2019 08:23:33 AM	ayoola@ayoo.la $ 
+* @version $Id: new-site-wizard.php	Saturday 14th of December 2019 09:18:33 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_c4d914064ec19a4e55e94291d545adb4 = new Ayoola_Page_Editor_Text( array (
+$_60aceb99a8fd256af315711dff83a557 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h3 style="text-align: center;">New Site Wizard</h3>
 
 <p style="text-align: center;">Complete a new website with these simple steps</p>
@@ -38,14 +38,14 @@ $_c4d914064ec19a4e55e94291d545adb4 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_c4d914064ec19a4e55e94291d545adb4 = null;
+$_60aceb99a8fd256af315711dff83a557 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_bc578534928bf0c3433575dfb1ad2818 = new Ayoola_Object_Embed( array (
+$_0144bdc2a0f77dbb895856be397ef42f = new Ayoola_Object_Embed( array (
   'editable' => 'PageCarton_NewSiteWizard',
   'widget_options' => 
   array (
@@ -60,7 +60,7 @@ $_bc578534928bf0c3433575dfb1ad2818 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_bc578534928bf0c3433575dfb1ad2818 = null;
+$_0144bdc2a0f77dbb895856be397ef42f = null;
 
 							}
 							

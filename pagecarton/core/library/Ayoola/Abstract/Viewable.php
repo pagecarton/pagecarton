@@ -242,16 +242,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     {
         try
         {
-            foreach( self::getHooks() as $class )
-            {
-                $class::hook( $this, __FUNCTION__, $parameter );
-            }
+            self::setHook( $this, __FUNCTION__, $parameter );
+
             if( ! $parameter )
             {
                 if( Ayoola_Application::isXmlHttpRequest() || Ayoola_Application::isClassPlayer() ){ return null; }
             }
             if( is_array( $parameter ) ){ $this->setParameter( $parameter ); }
-            //	var_export( self::getHooks() );
         //    var_export( $this->getParameter( 'device_whitelist' ) );
         //    var_export( self::deviceIsAllowed() );
     
@@ -353,6 +350,29 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 }
             }
 
+        }
+        return true;
+    }
+
+    /**
+     * Method to set up a hook action in object. Hooks PageCarton_Widget to another PageCarton_Widget 
+     *
+     * @param PageCarton_Widget - Class to hook to this class
+     * @param string method where the hook is being set up for
+     * @param mixed Extra data passed to the PageCarton_Widget. This could be filtered in the hook class
+     * 
+     * @return boolean True on success
+     *
+     */
+	public static function setHook( Ayoola_Abstract_Playable $object, $method, & $data )
+	{
+        foreach( self::getHooks() as $hook )
+        {
+            if( ! Ayoola_Loader::loadClass( $hook ) )
+            {
+                continue;
+            }
+            $hook::hook( $object, $method, $data );
         }
         return true;
     }
@@ -578,10 +598,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
         try
         {
 
-            foreach( self::getHooks() as $class )
-            {
-                $class::hook( static::getInstance(), __FUNCTION__, $parameter );
-            }
+            self::setHook( static::getInstance(), __FUNCTION__, $mailInfo );
+
             if( empty( $mailInfo['body'] ) )
             {
                 return false;
@@ -1990,10 +2008,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	{
         try
         {
-            foreach( self::getHooks() as $class )
-            {
-                $class::hook( $this, __FUNCTION__, $parameters );
-            }
+            self::setHook( $this, __FUNCTION__, $parameter );
+
             self::sanitizeParameters( $parameters );
             if( isset( $parameters['view'] ) ){ $this->setViewParameter( $parameters['view'] ); }
             if( isset( $parameters['editable'] ) ){ $this->setViewParameter( $parameters['editable'] ); }
@@ -2149,10 +2165,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             {
                 $content = self::__( $content );
             }
-            foreach( self::getHooks() as $class )
-            {
-                $class::hook( $this, __FUNCTION__, $content );
-            }
+            self::setHook( $this, __FUNCTION__, $content );
             if( null === $this->_viewContent || true === @$options['refresh_content'] )
             { 
                 $this->_viewContentText = null;
@@ -2532,6 +2545,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				}
 				if( $this->getParameter( 'wrapper_name' ) && $html )
 				{
+                //    var_export( $this );
 					$html =  '<div class="'. $this->getParameter( 'wrapper_inner_class' ) .'">' . $html . '</div>';
 					$html =  Ayoola_Object_Wrapper_Abstract::wrapContent( $html, $this->getParameter( 'wrapper_name' ) );
 				}
@@ -2551,10 +2565,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 try
                 {        
                     //  allow view to be filtered or maninpulated by hooks
-                    foreach( self::getHooks() as $class )
-                    {
-                        $class::hook( $this, __FUNCTION__, $html );
-                    }
+                    self::setHook( $this, __FUNCTION__, $html );
+                    
                     return $html;
                 }
                 catch( Ayoola_Abstract_Exception $e  )

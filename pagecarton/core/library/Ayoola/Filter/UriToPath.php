@@ -44,6 +44,7 @@ class Ayoola_Filter_UriToPath implements Ayoola_Filter_Interface
 								'data_php' => array( 'path' => PAGE_DATA, 'ext' => EXT  ),	//	now saving data as .php extension
 								'data_json' => array( 'path' => PAGE_DATA, 'ext' => '.json'  ),	//	now saving data as .json extension
 								'data_json_content' => array( 'path' => PAGE_DATA, 'ext' => 'content.json'  ),	//	now saving data as .json extension
+								'data_page_info' => array( 'path' => PAGE_DATA, 'ext' => 'pageinfo.json'  ),	//	now saving data as .json extension
 								'template' => array( 'path' => PAGE_TEMPLATE, 'ext' => TPL ), 
 								'include' =>  array( 'path' => PAGE_INCLUDES, 'ext' => EXT )  
 							);

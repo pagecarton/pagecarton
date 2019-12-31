@@ -15,7 +15,7 @@
  * @see Ayoola_
  */
  
-//require_once 'Ayoola/.php';
+require_once 'Ayoola/File.php';
 
 
 /**
@@ -249,6 +249,7 @@ class Ayoola_File_Storage extends Ayoola_File
 		{ 
 			$namespace = __CLASS__; 
 		}
+        require_once 'Ayoola/Filter/Alnum.php';
 		$filter = new Ayoola_Filter_Alnum();
 		$filter->replace = DS;
 		$namespace = $filter->filter( $namespace );

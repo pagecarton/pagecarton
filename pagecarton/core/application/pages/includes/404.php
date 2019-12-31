@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: 404.php	Thursday 5th of December 2019 08:23:42 AM	ayoola@ayoo.la $ 
+* @version $Id: 404.php	Saturday 14th of December 2019 09:18:47 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_839ecb3efc70cb6eb1bbb7b7f8b29574 = new Ayoola_Page_Editor_Text( array (
+$_4d35a2f8b75a6c871db69ea77eaa429b = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h1>Error 404 - Page Not Found</h1>
 ',
   'preserved_content' => '<h1>Error 404 - Page Not Found</h1>
@@ -36,14 +36,14 @@ $_839ecb3efc70cb6eb1bbb7b7f8b29574 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_839ecb3efc70cb6eb1bbb7b7f8b29574 = null;
+$_4d35a2f8b75a6c871db69ea77eaa429b = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_c7269e6f48bd5c84816662981df32805 = new Ayoola_Page_Editor_Text( array (
+$_9a4fde679f4eede52846a94d97458b92 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<p>You are seeing this page because you have requested a page that is not available. Please check the URL and try again.</p>
 ',
   'preserved_content' => '<p>You are seeing this page because you have requested a page that is not available. Please check the URL and try again.</p>
@@ -63,14 +63,14 @@ $_c7269e6f48bd5c84816662981df32805 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_c7269e6f48bd5c84816662981df32805 = null;
+$_9a4fde679f4eede52846a94d97458b92 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_6f2ca00dd66ccaf3d4af877d389f74c4 = new Ayoola_Object_Embed( array (
+$_b61d4ba425ef51780ce51d8dcfdc051c = new Ayoola_Object_Embed( array (
   'editable' => 'Ayoola_Page_AutoCreator',
   'pagewidget_id' => '1575534205-0-184',
   'advanced_parameter_value' => 
@@ -85,7 +85,7 @@ $_6f2ca00dd66ccaf3d4af877d389f74c4 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_6f2ca00dd66ccaf3d4af877d389f74c4 = null;
+$_b61d4ba425ef51780ce51d8dcfdc051c = null;
 
 							}
 							

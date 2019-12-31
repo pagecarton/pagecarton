@@ -82,6 +82,7 @@ class Ayoola_Loader
             return self::$_validIncludePaths[$pathsId];
         }
         $availableFullPaths = array();
+    //    var_export( $relativePath );
         if (is_readable($relativePath)) {
             //throw new Ayoola_Loader_Exception( 'Invalid File - ' . $relativePath );
             $availableFullPaths['.'] = $relativePath;

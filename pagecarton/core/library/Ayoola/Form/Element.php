@@ -513,6 +513,113 @@ class Ayoola_Form_Element extends Ayoola_Form
 		 return $html;
     }
 	
+    public function addDatetime( array & $element )
+    {
+    //    var_export( $element );
+        $values = array();
+        $elementName = $this->_names[trim( $element['name'], '[]' )]['real_name'];
+        if( ! @$defaultValue = $element['value'] )
+        {
+            $defaultValue = date( "Y-m-d H:i:s" );
+        }
+        else
+        {
+            $defaultValue = date( "Y-m-d H:i:s", $defaultValue );
+        }
+        $defaultValueDigits = str_replace( array( '-', ' ', ':' ), '', $defaultValue );
+        $values[$elementName . '_year'] = $defaultValueDigits[0] . $defaultValueDigits[1] . $defaultValueDigits[2] . $defaultValueDigits[3];
+        $values[$elementName . '_month'] = $defaultValueDigits[4] . $defaultValueDigits[5];
+        $values[$elementName . '_day'] = $defaultValueDigits[6] . $defaultValueDigits[7];
+        $values[$elementName . '_hours'] = $defaultValueDigits[8] . $defaultValueDigits[9];
+        $values[$elementName . '_minutes'] = $defaultValueDigits[10] . $defaultValueDigits[11];
+        //	self::v( $defaultValue );       
+        
+        //	Month
+        $optionsX = array_combine( range( 1, 12 ), array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ) );
+        $monthValue = intval( @strlen( $values[$elementName . '_month'] ) === 1 ? ( '0' . @$values[$elementName . '_month'] ) : @$values[$elementName . '_month'] );
+        $monthValue = intval( $monthValue ?  : $this->getGlobalValue( $elementName . '_month' ) );
+    //	var_export( $monthValue );
+    //	var_export( $this->getGlobalValue( $elementName . '_month' ) );
+        $this->addElement( array( 'name' => $elementName . '_month', 'label' => $element['label'], 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $monthValue ), array( 'Month' ) + $optionsX ); 
+        $this->addRequirement( $elementName . '_month', array( 'InArray' => array_keys( $optionsX ) ) );
+        if( strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 )
+        {
+            $this->addFilter( $elementName . '_month', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_month' ) ) );
+        }
+        
+        //	Day
+        $optionsX = range( 1, 31 );
+        $optionsX = array_combine( $optionsX, $optionsX );
+        $DayValue = intval( @strlen( $values[$elementName . '_day'] ) === 1 ? ( '0' . @$values[$elementName . '_day'] ) : @$values[$elementName . '_day'] );
+        $DayValue = intval( $DayValue ?  : $this->getGlobalValue( $elementName . '_day' ) );
+        $this->addElement( array( 'name' => $elementName . '_day', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $DayValue ), array( 'Day' ) + $optionsX );
+        $this->addRequirement( $elementName . '_day', array( 'InArray' => array_keys( $optionsX ) ) );
+        if( strlen( $this->getGlobalValue( $elementName . '_day' ) ) === 1 )
+        {
+            $this->addFilter( $elementName . '_day', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_day' ) ) );
+        }
+        
+        //	Year
+        //	10 years and 10 years after todays date
+        $optionsX = range( date( 'Y' ) + 100, date( 'Y' ) - 100 );
+        $optionsX = array_combine( $optionsX, $optionsX );
+        $this->addElement( array( 'name' => $elementName . '_year', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values[$elementName . '_year'] ? : '' ), array( 'Year' ) + $optionsX );
+        $this->addRequirement( $elementName . '_year', array( 'InArray' => array_keys( $optionsX ) ) );
+        $date = $this->getGlobalValue( $elementName . '_year' );
+        $date .= '-';
+        $date .= strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_month' ) ) : $this->getGlobalValue( $elementName . '_month' );
+        $date .= '-';
+        $date .= strlen( $this->getGlobalValue( $elementName . '_day' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_day' ) ) : $this->getGlobalValue( $elementName . '_day' );
+        $this->addElement( array( 'name' => $elementName . '_date', 'label' => 'Timestamp', 'placeholder' => 'YYYY-MM-DD HH:MM', 'type' => 'Hidden', 'value' => @$values[$elementName . '_date'] ) );
+        $this->addFilter( $elementName . '_date', array( 'DefiniteValue' => $date ) );
+        $this->addFilter( $elementName, array( 'DefiniteValue' => $date ) );
+    //  if( 'datetime' == $formInfo['element_type'][$i] )
+        {
+            $optionsX = range( 0, 23 );
+            foreach( $optionsX as $eachKey => $each )
+            {
+                if( strlen( $optionsX[$eachKey] ) < 2 )  
+                {
+                    $optionsX[$eachKey] = '0' . $optionsX[$eachKey];
+                }
+            }
+            $this->addElement( array( 'name' => $elementName . '_hours', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_hours'] ), array( 'Hour' ) +  array_combine( $optionsX, $optionsX ) );
+            $this->addRequirement( $elementName . '_hours', array( 'InArray' => array_keys( $optionsX ) ) );
+            $optionsX = range( 0, 59 );
+            foreach( $optionsX as $eachKey => $each )
+            {
+                if( strlen( $optionsX[$eachKey] ) < 2 )    
+                {
+                    $optionsX[$eachKey] = '0' . $optionsX[$eachKey];
+                }
+            }
+            $this->addElement( array( 'name' => $elementName . '_minutes', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_minutes'] ), array( 'Minute' ) + array_combine( $optionsX, $optionsX ) );
+            $this->addRequirement( $elementName . '_minutes', array( 'InArray' => array_keys( $optionsX ) ) );
+
+            //	datetime combined
+            $datetime = $date;
+            $datetime .= ' ';
+            $datetime .= strlen( $this->getGlobalValue( $elementName . '_hours' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_hours' ) ) : $this->getGlobalValue( $elementName . '_hours' );
+            $datetime .= ':';
+            $datetime .= strlen( $this->getGlobalValue( $elementName . '_minutes' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_minutes' ) ) : $this->getGlobalValue( $elementName . '_minutes' );
+        //    var_export( $date );
+        //    var_export( $datetime );
+        //    var_export( $elementName );
+            $this->addElement( array( 'name' => $elementName . '', 'type' => 'Hidden', 'value' => @$values[$elementName . ''] ) );
+            $this->addElement( array( 'name' => $elementName . '_datetime', 'type' => 'Hidden', 'value' => @$values[$elementName . '_datetime'] ) );
+            $this->addFilter( $elementName . '_datetime', array( 'DefiniteValue' => $datetime ) );
+            $timestamp = strtotime( $datetime );
+            $this->addElement( array( 'name' => $elementName . '_timestamp', 'type' => 'Hidden', 'value' => @$values[$elementName . '_timestamp'] ) );
+            $this->addFilter( $elementName . '_timestamp', array( 'DefiniteValue' => $timestamp ) );
+            $this->addFilter( $elementName, array( 'DefiniteValue' => $timestamp ) );
+        //    $this->addFilter( $elementName,  );
+        //    var_export( $datetime );
+        }
+
+        $element['label'] = null;
+        return '';
+    }
+	
     public function addDocument(array $element, $values = array() )
     {
 	//	var_export( $element );
@@ -826,7 +933,15 @@ class Ayoola_Form_Element extends Ayoola_Form
 		$html .= "<span>\n";
 	//	var_export( $values );
 	//	var_export( $element['value'] );
-		$values = array_unique( ( $values ? : array() ) + ( $element['value'] ? : array() ) ); 
+    //	var_export( $element['label'] );
+        try
+        {
+            $values = array_unique( ( $values ? : array() ) + ( $element['value'] ? : array() ) ); 
+        }
+        catch( Error $e )
+        {
+
+        }
 	//	var_export( $values );
 		if( $this->placeholderInPlaceOfLabel || ! trim( $element['label'] ) )
 		{

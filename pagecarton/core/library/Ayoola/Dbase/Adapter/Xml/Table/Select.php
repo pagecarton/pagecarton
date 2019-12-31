@@ -262,7 +262,14 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		//	Calculate the total fields on the table, extended
 		$allFields = $this->query( 'FIELDLIST' );
 
-		if( is_null( $fieldsToFetch ) ){ $fieldsToFetch = $allFields; }
+        if( is_null( $fieldsToFetch ) )
+        { 
+            $fieldsToFetch = $allFields; 
+        }
+        elseif( is_array( $fieldsToFetch ) &&  is_array( $where ) )
+        {
+            $fieldsToFetch = array_unique( array_merge( $fieldsToFetch, array_keys( $where ) ) );
+        }
 		$rows = array();
 	//	var_export( $this->getRecords()->childNodes->length );
 

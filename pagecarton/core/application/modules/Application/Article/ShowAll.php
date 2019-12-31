@@ -972,8 +972,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['document_url_no_resize'] = $data['document_url']; 
 		//	self::v( $data['document_url'] );  
 		//	var_export( Ayoola_Doc::uriToPath( $data['document_url'] ) );
-			$data['document_url_photoviewer'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
-			if( $fileP = Ayoola_Doc::uriToPath( $data['document_url'] ) )
+            $data['document_url_photoviewer'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
+        //    var_export( $data['document_url'] );
+			if( @$data['document_url'][0] === '/' AND $fileP = Ayoola_Doc::uriToPath( $data['document_url'] ) )
 			{
 				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?&url=' . @$data['document_url'] . '&document_time=' . @filemtime( $fileP ) . ''; 
 				$data['document_url_cropped'] = $data['document_url_no_resize'] . '&max_width=' . $maxWith . '&max_height=' . $maxHeight . ''; 
@@ -1006,6 +1007,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//	error making last post to be part of present one
 	//		$data += is_array( $this->_objectTemplateValues ) ? $this->_objectTemplateValues : array();
 
+        //    var_export( $data );
 			$data['article_description'] = trim( $data['article_description'] );
 			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
 			{
@@ -1253,7 +1255,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							if( $data['download_url'][0] === '/' )
 							{
 								//	this is still a local file we can load with Ayoola_Doc
-								$data['file_size'] =  filesize( Ayoola_Loader::checkFile(  'documents/' . $data['download_url'] ) );
+								$data['file_size'] =  filesize( Ayoola_Loader::checkFile(  'documents' . $data['download_url'] ) );
 							}
 							else
 							{

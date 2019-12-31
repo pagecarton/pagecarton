@@ -69,10 +69,7 @@ abstract class Application_Article_Type_Abstract extends Application_Article_Abs
      */
 	public function getDownloadContent( $data )
     {
-		foreach( self::getHooks() as $class )
-		{
-			$class::hook( $this, __FUNCTION__, $data );
-		}
+        self::setHook( $this, __FUNCTION__, $data );
 
 		if( ! self::isDownloadable( $data ) )
 		{

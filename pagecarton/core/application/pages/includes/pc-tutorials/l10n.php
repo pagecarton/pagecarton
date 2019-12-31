@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: l10n.php	Thursday 5th of December 2019 08:23:32 AM	ayoola@ayoo.la $ 
+* @version $Id: l10n.php	Saturday 14th of December 2019 09:18:32 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
+$_0ae3f260d0e381eabbbe6e4d5ec27b7c = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h1></h1>
 
 <h1>Localization</h1>
@@ -344,7 +344,7 @@ $_7b8a8a969c5afc068e8279e7c4bded04 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_7b8a8a969c5afc068e8279e7c4bded04 = null;
+$_0ae3f260d0e381eabbbe6e4d5ec27b7c = null;
 
 							}
 							

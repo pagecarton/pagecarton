@@ -9,36 +9,37 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: includes.php	Thursday 5th of December 2019 08:23:38 AM	ayoola@ayoo.la $ 
+* @version $Id: includes.php	Saturday 14th of December 2019 04:51:08 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_c609066cfb8de3eeb9570ecc859d5800 = new Ayoola_Page_Editor_Text( array (
+$_4a074e84c5bd38666160c6996ffb675d = new Ayoola_Page_Editor_Text( array (
   'editable' => '
 			
 			<h3><br></h3><div><br></div><div><br></div>
 			',
-  'preserved_content' => '',
-  'url_prefix' => '',
+  'preserved_content' => '			
+			<h3><br></h3><div><br></div><div><br></div>
+			',
+  'url_prefix' => '/index.php',
   'pagewidget_id' => '1575534096-0-164',
-  'insert_id' => '1566242675-0-11',
 ) );
 
 							}
 							else
 							{
 								
-$_c609066cfb8de3eeb9570ecc859d5800 = null;
+$_4a074e84c5bd38666160c6996ffb675d = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_17dee64a2448b86dcfefab3d1cdbc9e8 = new Ayoola_Object_Embed( array (
+$_263a33a6ca77208d284a4161f740e2ba = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Personalization',
   'pagewidget_id' => '1575534096-0-165',
   'advanced_parameter_value' => 
@@ -52,14 +53,14 @@ $_17dee64a2448b86dcfefab3d1cdbc9e8 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_17dee64a2448b86dcfefab3d1cdbc9e8 = null;
+$_263a33a6ca77208d284a4161f740e2ba = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_86e767a3523b2f9e0606912ff8a49973 = new Ayoola_Object_Embed( array (
+$_441da538560ab249292485be9d3d3fbf = new Ayoola_Object_Embed( array (
   'editable' => 'PageCarton_NewSiteWizard',
   'pagewidget_id' => '1575534097-0-166',
   'advanced_parameter_value' => 
@@ -73,7 +74,7 @@ $_86e767a3523b2f9e0606912ff8a49973 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_86e767a3523b2f9e0606912ff8a49973 = null;
+$_441da538560ab249292485be9d3d3fbf = null;
 
 							}
 							
