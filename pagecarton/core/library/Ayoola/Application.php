@@ -1080,6 +1080,7 @@ class Ayoola_Application
     {
 		$uri = Ayoola_Application::getPresentUri();
         $url = Ayoola_Application::getUriToView( $uri );
+		self::$_runtimeSetting['real_url'] = $url;
     //    var_export( $uri );
     //    var_export( $url );
     //    var_export( self::$mode );
