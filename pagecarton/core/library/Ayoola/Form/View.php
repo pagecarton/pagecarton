@@ -108,7 +108,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			{
                 $dataResponse = Ayoola_Form_Table_Data::getInstance()->selectOne( null, array( 'data_id' => $_REQUEST['data_id'], 'form_name' => $data['form_name'] ) );
             //    var_export( $dataResponse );
-                if( self::hasPriviledge( 98 ) || ( $dataResponse['user_id'] && $dataResponse['user_id'] == (string) Ayoola_Application::getUserInfo( 'user_id' ) ) )
+                if( self::hasPriviledge( 98 ) || ( $dataResponse['user_id'] && $dataResponse['user_id'] == (string) Ayoola_Application::getUserInfo( 'user_id' ) ) || md5( json_encode( $dataResponse['form_data'] ) ) === $_REQUEST['data_key'] )
                 {
                     $previousData = $dataResponse['form_data'];
                 }
@@ -137,7 +137,8 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 		//	var_export( $values );
 			$values['username'] = $previousData['username'] ? : Ayoola_Application::getUserInfo( 'username' );
-			$values['email'] = $previousData['email'] ? : Ayoola_Application::getUserInfo( 'email' );
+			$values['email'] = @$values['email'] ? : ( $previousData['email'] ? : Ayoola_Application::getUserInfo( 'email' ) );
+		//	var_export( $values );
 			
 		//	if( ! $this->updateDb( $values ) ){ return false; }
 		
@@ -203,7 +204,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
             $updateLink = null;
             if( ! @in_array( 'disable_updates', $data['form_options'] )	)
             {
-                $updateLink = '<a class="pc-btn" href="' . Ayoola_Page::getHomePageUrl() . '/widgets/' . __CLASS__ . '?form_name=' . $data['form_name'] . '&data_id=' . $dataId . '">' . self::__( 'Update Form Entry' ) . '</a>';
+                $updateLink = '<a class="pc-btn" href="' . Ayoola_Page::getHomePageUrl() . '/widgets/' . __CLASS__ . '?form_name=' . $data['form_name'] . '&data_id=' . $dataId . '&data_key=' . md5( json_encode( $values ) ) . '">' . self::__( 'Update Form Entry' ) . '</a>';
             }		
 
             $data['form_success_message'] = $data['form_success_message'] ? : sprintf( self::__( 'Thank you! Your entry to form %s has been received.' ), $data['form_title'] );
