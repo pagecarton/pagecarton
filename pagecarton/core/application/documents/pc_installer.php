@@ -143,12 +143,12 @@ $preserveList = array
 );
 
 //    system check
-$function_dependencies = [
+$function_dependencies = array(
     'dom_import_simplexml' => 'PHP DOM XML',
     'curl_version'         => 'PHP CURL',
     'imagegd'              => 'PHP GD',
     'zip_open'             => 'PHP ZIP',
-];
+);
 
 $class_dependencies = ["PharData"];
 
@@ -479,25 +479,25 @@ if (!is_null($badnews) && !empty($badnews) && (empty($_GET['stage']) || $_GET['s
  */
 class InstallationStages
 {
-    public const START                     = "start";
-    public const DOWNLOAD                  = "download";
-    public const INSTALL                   = "install";
-    public const INSTALL_DELETE_DIR        = "install-delete-dir";
-    public const INSTALL_EXTRACT           = "install-extract";
-    public const INSTALL_COMPATIBILITY_FIX = "install-compatibility-fix";
-    public const INSTALL_COPY_CONTROLLER   = "install-copy-controller";
-    public const INSTALL_FINALIZE          = "install-finalize";
-    public const INSTALL_COMPLETE          = "install-complete";
-    public const SELFDESTRUCT              = "selfdestruct";
+    const START                     = "start";
+    const DOWNLOAD                  = "download";
+    const INSTALL                   = "install";
+    const INSTALL_DELETE_DIR        = "install-delete-dir";
+    const INSTALL_EXTRACT           = "install-extract";
+    const INSTALL_COMPATIBILITY_FIX = "install-compatibility-fix";
+    const INSTALL_COPY_CONTROLLER   = "install-copy-controller";
+    const INSTALL_FINALIZE          = "install-finalize";
+    const INSTALL_COMPLETE          = "install-complete";
+    const SELFDESTRUCT              = "selfdestruct";
 
 }
 
 //Not all installation stages are visible to the user
-$gui_steps = [
+$gui_steps = array(
     InstallationStages::START            => "Licence Agreement",
     InstallationStages::DOWNLOAD         => "Files Installation",
     InstallationStages::INSTALL_COMPLETE => "Proceed to Personalization",
-];
+);
 
 /**
  * Fetches a remote link. Lifted from Ayoola_Abstract_Viewable
