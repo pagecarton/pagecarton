@@ -104,27 +104,11 @@ class Ayoola_Loader
                 continue;
             }
             $file = $path . DS . $relativePath;
-            //    DEBUG
-            /*             if( $relativePath == 'pages/templates/object.phtml' )
-            {
-            var_export( $file );
-            }
-             *///      'pages/templates/schrob-page.phtml' ==    $relativePath ? var_export( $file ) : null;
-            // '/home/ay1000/www/ayoo.la/application/pages/includes/schrobs-page.php' === $file ? var_export( $file ) : null;
-            /*             if( is_link( $file ) )
-            {
-            'pages/templates/schrob-page.phtml' ==    $relativePath ? var_export( $file ) : null;
-            }
-             */
             if (is_readable($file) || (isset($options['no_availability_check']) && $options['no_availability_check'])) {
                 $availableFullPaths[$path] = $file;
             }
         }
-/*             if( $relativePath == 'pages/templates/object.phtml' )
-{
-var_export( $availableFullPaths );
-}
- *///    var_export( $availableFullPaths );
+
         // End of ZF Code
         self::$_validIncludePaths[$pathsId] = $availableFullPaths;
         return self::$_validIncludePaths[$pathsId];
@@ -146,11 +130,6 @@ var_export( $availableFullPaths );
             //$key = array_search( $options['path_blacklist'], $all );
             unset($all[$options['path_blacklist']]);
             unset($all[PC_BASE . $options['path_blacklist']]);
-        }
-        //    if( @$options['prioritize_my_copy'] && stripos( Ayoola_Application::getDomainSettings( APPLICATION_PATH ), 'music' ) )
-        {
-//            var_export( $relativePath );
-            //            var_export( $all );
         }
         if (@$options['prioritize_my_copy'] && @$all[Ayoola_Application::getDomainSettings(APPLICATION_PATH)]) {
             //$key = array_search( $options['path_blacklist'], $all );

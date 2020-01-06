@@ -280,9 +280,13 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     public static function getDocumentPath( $uri )
     {
         $dir = self::getDocumentDirectory();
-        if( ! $path = Ayoola_Loader::checkFile( 'documents/__/' . $uri, array( 'prioritize_my_copy' => true ) ) )
+    //    if( ! $path = Ayoola_Loader::checkFile( 'documents/__/' . $uri, array( 'prioritize_my_copy' => true ) ) )
+
+        //  looking for changed document only in the current site context so changes
+        //  pc.com changes for child sites isn't proper
+        if( ! $path = Ayoola_Doc_Browser::getDocumentsDirectory() .  '/__' . $uri OR ! is_file( $path)  )
         {
-            $path = Ayoola_Loader::checkFile( 'documents/' . $uri, array( 'prioritize_my_copy' => true )  );
+            $path = Ayoola_Loader::checkFile( 'documents' . $uri, array( 'prioritize_my_copy' => true )  );
         }
         return $path;
     } 

@@ -100,7 +100,7 @@ abstract class Ayoola_Doc_Abstract extends Ayoola_Abstract_Table
 	}
 	
     /**
-     * Returns the Doc files directory
+     * Returns the full path to the directory where PageCarton Documents are made
      * 
      */
 	public static function getDocumentsDirectory()

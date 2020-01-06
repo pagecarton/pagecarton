@@ -13,10 +13,10 @@
  */
 
 //    Always show error
-ini_set('display_errors', "1");
+ini_set( 'display_errors', "1" );
 
 //    We need memory for extraction
-ini_set("memory_limit", "512M");
+ini_set( "memory_limit", "512M" );
 
 //    Download and extraction can take a while
 set_time_limit(0);

@@ -422,8 +422,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( ! $this->initiated && ! $this->getParameter( 'no_init' ) ) //	compatibility
 		{
 	//		var_export( $this->initiated );
-//			var_export( get_class( $this ) );
-		//	self::v( $this->getParameter( 'no_init' ) );
+		//	var_export( get_class( $this ) );
+		//	self::v( $this->getParameter() );
+//			self::v( $this->getParameter( 'no_init' ) );
 
 			$this->initiated = true;
 
