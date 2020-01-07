@@ -412,9 +412,19 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 						}
                         elseif( @$options['supplementary_data_key'] == $key && is_array( $fields[$key] ) )
                         {
+                            //   var_export(  $key );
+                            //   var_export(  $where );
                             //   var_export(  $options );
+                            //   var_export(  $fields[$key] );
+                            //   var_export(  $allFields  );
                             foreach( $where as $eachKeyWhere => $valueWhere )
                             {
+                                if( in_array( $eachKeyWhere, $allFields ) )
+                                {
+                                    //  this is supplementary search
+                                    //  don't check what is going to be checked later in normal search
+                                    continue;
+                                }
                                 if( array_key_exists( $eachKeyWhere, $fields[$key] ) )
                                 {
                                 //    var_export( $eachKeyWhere );
