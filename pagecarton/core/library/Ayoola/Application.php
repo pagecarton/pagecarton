@@ -1927,27 +1927,24 @@ class Ayoola_Application
 		$storage = new Ayoola_Storage();
 		$storage->storageNamespace = __CLASS__  . 'url_prefix-x' . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
-		$data = $storage->retrieve();
- 		if(  ! $data  )
+	//	$response = $storage->retrieve();
+ 		if( ! $response  )
 		{
  			//	Detect if we have mod-rewrite
-			$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt?pc_clean_url_check=1';
+            $urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt?pc_clean_url_check=1';
+            
+        //    var_export( $urlToLocalInstallerFile );
     		$response = PageCarton_Widget::fetchLink( $urlToLocalInstallerFile );
 		//	$responseCode = explode( ' ', $modRewriteEnabled[0] );
-
-            if( $response !== 'pc'  )
-			{
-				$data = 1;
-			}
-			else
-			{
-				$data = 2;
-			}
- 			$storage->store( $data );
-		}
-		if( $data == 2 )
+        //    var_export( $response );
+ 			$storage->store( $response );
+        }
+        //   var_export( $response );
+		if( $response === 'pc' )
 		{
-			self::$_urlPrefix .= $_SERVER['SCRIPT_NAME'];
+            //  this isn't suppose to be there
+            //  causing index.php to appear
+		    self::$_urlPrefix .= Ayoola_Application::getPathPrefix();
 		}
 		elseif( isset( $_SERVER['PATH_INFO'] ) && $_SERVER['PATH_INFO'] != '/' )
 		{
@@ -1957,6 +1954,8 @@ class Ayoola_Application
 		{
 			self::$_urlPrefix .= self::getPathPrefix();
 		}
+    //    var_export( $response );
+    //    var_export( self::$_urlPrefix );
 		return self::$_urlPrefix;
 	}
 
