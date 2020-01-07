@@ -1927,7 +1927,7 @@ class Ayoola_Application
 		$storage = new Ayoola_Storage();
 		$storage->storageNamespace = __CLASS__  . 'url_prefix-x' . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
-	//	$response = $storage->retrieve();
+		$response = $storage->retrieve();
  		if( ! $response  )
 		{
  			//	Detect if we have mod-rewrite
