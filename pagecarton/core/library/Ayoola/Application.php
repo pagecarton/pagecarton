@@ -932,7 +932,6 @@ class Ayoola_Application
                     {
                         return $uri;
                     }
-                //]    var_export( $fn  );
     
 					//	Check if this is an article
 					$article = Application_Article_Abstract::getFolder() . $uri;
@@ -982,8 +981,15 @@ class Ayoola_Application
 								$url = '/post/view';
 								$moduleInfo = Ayoola_Page::getInfo( $url );
 							}
-						}
-					}
+                        }
+                    //    var_export( $url );
+                        if( self::getViewFiles( $url ) )
+                        {
+                     //    var_export( $url );
+                           return $url;
+                        }
+                    //    var_export( $url );
+                    }
 				}
 				while( false );
 			}
@@ -1076,27 +1082,16 @@ class Ayoola_Application
      * @param void
      * @return void
      */
-    public static function display()
+    public static function prepURIforDisplay( $uri )
     {
-		$uri = Ayoola_Application::getPresentUri();
-        $url = Ayoola_Application::getUriToView( $uri );
-		self::$_runtimeSetting['real_url'] = $url;
-    //    var_export( $uri );
-    //    var_export( $url );
-    //    var_export( self::$mode );
-    //    exit();
         $a = explode( '/', trim( $uri, ' /\\' ) );
         $nameForModule = array_shift( $a );
         $module = '/' . $nameForModule;
-     //   var_export( $nameForModule );
-     //   var_export( $a );
-
         switch( self::$mode )
         {
             case 'document':
-            //    var_export( $uri );
-            //    exit();
-                //	Enable Cache for Documents
+
+            //	Enable Cache for Documents
                 // seconds, minutes, hours, days
                 $expires = 60 * 60 * 24 * 14; // 14 days
                 require_once 'Ayoola/Doc.php';
@@ -1167,57 +1162,29 @@ class Ayoola_Application
                     //	This was making site load forever if size sent do not match this
                     // header( 'Content-Length: ' . filesize( $fn ) );
                 }
-
-
-
-                //	DONT LOGG DOCUMENTS
-                self::$accessLogging = false;
-                $doc = new Ayoola_Doc( array( 'option' => $uri ) );
-                $view = $doc->view();
-                return true;
-           //     var_export( $uri );
             break;
             case 'uri':
-				if( self::view( $url ) )
-				{
-					return true;
-				}
+
             break;
             case 'module':
                 //	Check if this is a module url that carries $_GET parameters e.g. /article/category/business/
                 self::setQueryStringsForModule( $uri );
-                if( self::view( $url ) )
-                {
-					return true;
-                }
             break;
             case 'profile':
-
-                if( $nameForModule === '' )
-                {
-                    $nameForModule = array_shift( $a );
-                }
 
                 $userInfo = $nameForModule ? Application_Profile_Abstract::getProfileInfo( $nameForModule ) : null;
 
                 //	Hide superusers
                 if( $userInfo && $userInfo['access_level'] != 99 )
                 {
-
-
-                //	var_export( $module );
                     Ayoola_Page::$title = $userInfo['display_name'];
                     Ayoola_Page::$description = $userInfo['profile_description'];
                     Ayoola_Page::$thumbnail = $userInfo['display_picture'];
-
                     self::$GLOBAL['profile'] = $userInfo; // store this in the global var
-                }
-                if( self::view( $url ) )
-                {
-					return true;
                 }
             break;
             case 'article':
+            case 'post':
                 $articleInfo = Application_Article_Abstract::loadPostData( $uri );
                 if( $articleInfo['username'] )
                 {
@@ -1235,13 +1202,49 @@ class Ayoola_Application
                     }
                 }
                 self::$GLOBAL['post'] = is_array( $articleInfo ) ? $articleInfo : array(); // store this in the global var
-                if( self::view( $url ) )
-                {
-					return true;
-                }
+            //    var_export( self::$GLOBAL );
             break;
         }
+    }
 
+    /**
+     * Display The Page
+     *
+     * @param void
+     * @return void
+     */
+    public static function display()
+    {
+		$uri = Ayoola_Application::getPresentUri();
+        $url = Ayoola_Application::getUriToView( $uri );
+		self::$_runtimeSetting['real_url'] = $url;
+    //    var_export( $uri );
+    //    var_export( $url );
+    //    var_export( self::$mode );
+    //    exit();
+        $a = explode( '/', trim( $uri, ' /\\' ) );
+        $nameForModule = array_shift( $a );
+        $module = '/' . $nameForModule;
+     //   var_export( $nameForModule );
+     //   var_export( $a );
+
+        self::prepURIforDisplay( $uri );
+        
+        switch( self::$mode )
+        {
+            case 'document':
+                //	DONT LOGG DOCUMENTS
+                self::$accessLogging = false;
+                $doc = new Ayoola_Doc( array( 'option' => $uri ) );
+                $view = $doc->view();
+                return true;
+           //     var_export( $uri );
+            break;            
+        }
+        if( self::view( $url ) )
+        {
+            return true;
+        }
 		//	Handle Files and Documents differently, as per type of file
 		
 

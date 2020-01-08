@@ -42,7 +42,15 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
 		try
 		{ 
             //  Code that runs the widget goes here...
-            $articleUrl = Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'];
+        //    var_export( Ayoola_Application::$GLOBAL );
+       //     var_export( $_GET );
+            $articleUrl = @Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'];
+        //    var_export( $articleUrl );
+            if( empty( $articleUrl ) && Ayoola_Application::$mode === 'post' )
+            {
+                $articleUrl = Ayoola_Application::getRequestedUri();
+            }
+        //    var_export( $articleUrl );
             if( $articleUrl )
             {
                 $where = array( 'article_url' => $articleUrl );
