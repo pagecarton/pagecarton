@@ -86,9 +86,10 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 				}
 				$title = $pageInfo['title'];
 			}
-			$access = new Ayoola_Access();
-			$userInfo = $access->getUserInfo();
-			$values['profile_url'] = @$userInfo['profile_url'];
+            $defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
+            $defaultProfile = $defaultProfile['profile_url'];
+        //    var_export( $defaultProfile );
+			$values['profile_url'] = $defaultProfile;
             
 			
 
