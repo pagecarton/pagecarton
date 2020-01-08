@@ -183,7 +183,7 @@
 						//	Must always refresh because we are using file_get_contents on file that could change
 						//	Must include the include file because there is no closing php tag
 						//	Ayoola_Loader::getFullPath( $pagePaths['include'] ) because $PAGE_INCLUDE_FILE is too static. We need to have something that won't break if site is exported to another server  
-						file_put_contents( $temIncludeFile, "
+						Ayoola_File::putContents( $temIncludeFile, "
 						<?php 
 						//		var_export( array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) );
 					//			var_export( __FILE__ );
@@ -243,7 +243,7 @@
 							//	Must always refresh because we are using file_get_contents on file that could change
 							//	Must include the include file because there is no closing php tag
 							//	Ayoola_Loader::checkFile( $pagePaths['include'] ) because $PAGE_INCLUDE_FILE is too static. We need to have something that won't break if site is exported to another server  
-							file_put_contents( $temIncludeFile, "
+							Ayoola_File::putContents( $temIncludeFile, "
 							<?php 
 								if
 								( 

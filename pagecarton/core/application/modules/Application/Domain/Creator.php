@@ -91,7 +91,7 @@ class Application_Domain_Creator extends Application_Domain_Abstract
 		//	Save the config to allow user upgrade later
 /* 		$config = $path . DS . 'config';
 		$a = array( __CLASS__ => Ayoola_Application::getUserInfo( 'username' ) );
-		file_put_contents( $config, 'return ' . var_export( $a, true ) . ';' ); 
+		Ayoola_File::putContents( $config, 'return ' . var_export( $a, true ) . ';' ); 
  */   } 
 	// END OF CLASS
 }

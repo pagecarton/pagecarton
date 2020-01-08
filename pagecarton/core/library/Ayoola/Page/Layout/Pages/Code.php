@@ -88,7 +88,7 @@ class Ayoola_Page_Layout_Pages_Code extends Ayoola_Page_Layout_Pages
 
             if( $values['code'] )
             {
-                if( file_put_contents( $from, $values['code'] ) )
+                if( Ayoola_File::putContents( $from, $values['code'] ) )
                 {
                     $this->setViewContent(  '' . self::__( '<p class="goodnews">Code saved successfully.</p>' ) . '', true  ); 
                 }

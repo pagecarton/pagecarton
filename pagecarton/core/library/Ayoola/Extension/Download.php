@@ -104,7 +104,6 @@ class Ayoola_Extension_Download extends Ayoola_Extension_Abstract
 	//	var_export( $path );
 	//		var_export( $data['document_url_base64'] );
 			
-		//	file_put_contents( $path, $data['document_url_base64'] );
 			
 			$values['files'] = $files;
 			$phar = 'Ayoola_Phar_Data';

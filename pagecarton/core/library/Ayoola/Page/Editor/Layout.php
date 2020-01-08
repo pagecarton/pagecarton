@@ -191,7 +191,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						$savePath = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $each;
 						
 						@Ayoola_Doc::createDirectory( dirname( $savePath ) );
-						file_put_contents( $savePath, @$parentContent[$key] ); 
+						Ayoola_File::putContents( $savePath, @$parentContent[$key] ); 
 						@Ayoola_Doc::createDirectory( dirname( $savePath ) );
 					//	self::v( $savePath . '<br>' );
 		//s	self::v( $parentContent[$key] );
@@ -327,7 +327,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			}
 			if( $this->_layoutRepresentation && ! $this->noLayoutView )
 			{
-				file_put_contents( $tmp, $this->_layoutRepresentation );
+				Ayoola_File::putContents( $tmp, $this->_layoutRepresentation );
 			//	var_export( $tmp );
 			//	var_export( $this->_layoutRepresentation );
 				
@@ -1213,9 +1213,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					if( is_file( $rPaths['include'] ) && is_file( $rPaths['template'] ) &&  is_file( $rPaths['data_json'] )  )
 					{
 						//	only update if files exist already
-						file_put_contents( $rPaths['include'], $content['include'] );
-						file_put_contents( $rPaths['template'], $content['template'] );				
-						file_put_contents( $rPaths['data_json'] , $dataToSave );
+						Ayoola_File::putContents( $rPaths['include'], $content['include'] );
+						Ayoola_File::putContents( $rPaths['template'], $content['template'] );				
+						Ayoola_File::putContents( $rPaths['data_json'] , $dataToSave );
 					}
 				}
 				$rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
@@ -1237,28 +1237,28 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				@Ayoola_Doc::createDirectory( dirname( $rPaths[$eachItem] ) );
 			}
 		//	var_export( $rPaths['include'] . '<br>' );
-			file_put_contents( $rPaths['include'], $content['include'] );
-			file_put_contents( $rPaths['template'], $content['template'] );				
+			Ayoola_File::putContents( $rPaths['include'], $content['include'] );
+			Ayoola_File::putContents( $rPaths['template'], $content['template'] );				
 	
 			if( $previousData = @file_get_contents( $rPaths['data_json'] ) )  
 			{
 				//	now saving current data instead of previous data
-			//	file_put_contents( $rPaths['data-backup'], $previousData );
+			//	Ayoola_File::putContents( $rPaths['data-backup'], $previousData );
 			}
 
 
 			//	save default values if no value is set so we can preload themes.
 		//	var_export();
-            file_put_contents( $rPaths['data_json'], $dataToSave );
-			file_put_contents( $rPaths['data_json_content'], static::safe_json_encode( $pageContent ) );
-			file_put_contents( $rPaths['data_page_info'], static::safe_json_encode( $pageUpdateInfo ) );
+            Ayoola_File::putContents( $rPaths['data_json'], $dataToSave );
+			Ayoola_File::putContents( $rPaths['data_json_content'], static::safe_json_encode( $pageContent ) );
+			Ayoola_File::putContents( $rPaths['data_page_info'], static::safe_json_encode( $pageUpdateInfo ) );
 
 			//	back up current data and not previous one
 			if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  
 			{
 				if( $currentData != $previousData )
 				{
-					file_put_contents( $rPaths['data-backup'], $currentData );
+					Ayoola_File::putContents( $rPaths['data-backup'], $currentData );
 				}
 			}
 			

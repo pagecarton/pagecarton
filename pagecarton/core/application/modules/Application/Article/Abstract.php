@@ -406,7 +406,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		Ayoola_Doc::createDirectory( dirname( $secDir ) );
 	//	unset( $values['document_url_base64'], $values['download_base64'] );
 		$values['has_secondary_data'] = true;   
-		file_put_contents( $secDir, json_encode( $values ) );  
+		Ayoola_File::putContents( $secDir, json_encode( $values ) );  
 		return true;
 	}
 	
@@ -469,7 +469,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
  	//	unset( $_POST, $_REQUEST );
 
 	 	//	we now using json
-		file_put_contents( self::getFolder() . $values['article_url'], json_encode( $values ) ); 
+        Ayoola_File::putContents( self::getFolder() . $values['article_url'], json_encode( $values ) ); 
 
 		// and we want to use tables for sorting categories and all
 		$table = Application_Article_Table::getInstance();

@@ -135,7 +135,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
         $content = file_get_contents( $sampleFile );
         $content = str_ireplace( array_keys( $search ), array_values( $search ), $content );
         Ayoola_Doc::createDirectory( dirname( $path  ) );
-        file_put_contents( $path, $content );
+        Ayoola_File::putContents( $path, $content );
 
         foreach( $otherFiles as $each )
         {
@@ -164,7 +164,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
             $newFileName = $destDir . DS . basename( $each );
             if( ! is_file( $newFileName ) )
             {
-              file_put_contents( $newFileName, $content );
+                Ayoola_File::putContents( $newFileName, $content );
             }
         }
 

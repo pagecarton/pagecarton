@@ -132,8 +132,7 @@ class Ayoola_File_Storage extends Ayoola_File
 		$path = $this->getFile()->getPath();
 		Ayoola_Doc::createDirectory( dirname( $path ) );
         //	PageCarton_Widget::v( $path );
-	//	file_put_contents( $path, '<?php return ' . var_export( $data, true ) . ';' );     
-		file_put_contents( $path, json_encode( $data ) );     
+		Ayoola_File::putContents( $path, json_encode( $data ) );     
     } 
 	
     /**

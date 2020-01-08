@@ -15,7 +15,7 @@
  * @see Ayoola_
  */
  
-//require_once 'Ayoola/.php';
+require_once 'Ayoola/File.php';
 
 
 /**
@@ -25,7 +25,7 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Ayoola_File
+class Ayoola_File 
 {
 	
     /**
@@ -41,6 +41,13 @@ class Ayoola_File
      * @var string
      */
 	protected $_directory;	
+	
+    /**
+     * Singleton instance
+     *
+     * @var self
+     */
+	protected static $_instance;
 	
     /**
 	 * Sets the _path property
@@ -84,6 +91,30 @@ class Ayoola_File
 	}
 	
     /**
+	 * Writes content to a file
+	 * 
+     * @param string $path
+     * @param string $data
+     * @return boolean
+     */
+    public static function putContents( $path, $data )
+	{
+        $x = array( 'path' => $path, 'data' => $data, 'response' => true );
+        try
+        {        
+            //  hook file writing so we can write plugin to manipulate file writing result;
+            PageCarton_Widget::setHook( self::getInstance(), __FUNCTION__, $x );
+            $response = file_put_contents( $x['path'], $x['data'] );
+            return $response;
+        }
+        catch( Ayoola_Abstract_Exception $e  )
+        {
+            //  now hooks can avoid execution of a class method by throwing an exception
+            return $x['response'];
+        }
+    }
+	
+    /**
 	 * Returns the _directory property
 	 * 
      * @param void
@@ -97,5 +128,19 @@ class Ayoola_File
 		}
 		return $this->_directory;
 	}
+
+    /**
+     * Returns a singleton Instance
+     *
+     * @param void
+     * @return self
+     */
+    public static function getInstance()
+    {
+        $class = get_called_class();
+    //    var_export( $class );
+        if( empty( self::$_instance[$class] ) ){ self::$_instance[$class] = new $class( array( 'no_init' => true ) ); }
+		return self::$_instance[$class];
+    } 	
 	
 }

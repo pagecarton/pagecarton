@@ -319,7 +319,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			}
 			
 		//	var_export( $_POST['name'] );
-			$success = file_put_contents( $path, $data );
+			$success = Ayoola_File::putContents( $path, $data );
 			
 			//	refresh cache again after successful upload.
 			if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( $url, array( 'disable_cache' => true ) ) )  

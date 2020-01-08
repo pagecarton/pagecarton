@@ -230,7 +230,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
                 } 
                 else 
                 {
-                    file_put_contents($backupFile, '<?php return ' . var_export($values, true) . ';');
+                    Ayoola_File::putContents($backupFile, '<?php return ' . var_export($values, true) . ';');
                 }
                 //    copy(  static::$_tableInfo['filename'], $backupFile );
             }

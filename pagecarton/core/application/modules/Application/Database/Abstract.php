@@ -69,7 +69,7 @@ abstract class Application_Database_Abstract extends Ayoola_Abstract_Table
 			$database = '<?php' . PHP_EOL . '$_DATABASE = ' . var_export( $values, true ) . ';'; 
 			$filename = APPLICATION_PATH . DS . 'configs/database.php';
 			Ayoola_Doc::createDirectory( dirname( $filename ) );
-			file_put_contents( $filename, $database );
+			Ayoola_File::putContents( $filename, $database );
 		}
 	}
     /**

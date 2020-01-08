@@ -86,7 +86,6 @@ class Ayoola_Page_Layout_Export extends Ayoola_Page_Layout_Abstract
 //	var_export( $path );
 //		var_export( $data['document_url_base64'] );
 		
-	//	file_put_contents( $path, $data['document_url_base64'] );
 
 		$phar = 'Ayoola_Phar_Data';
 		$export = new $phar( $filename  );
