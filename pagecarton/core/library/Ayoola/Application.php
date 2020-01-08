@@ -1085,6 +1085,11 @@ class Ayoola_Application
     //    var_export( $url );
     //    var_export( self::$mode );
     //    exit();
+        $a = explode( '/', trim( $uri, ' /\\' ) );
+        $nameForModule = array_shift( $a );
+        $module = '/' . $nameForModule;
+     //   var_export( $nameForModule );
+     //   var_export( $a );
 
         switch( self::$mode )
         {

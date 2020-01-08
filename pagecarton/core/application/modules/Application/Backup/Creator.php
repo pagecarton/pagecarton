@@ -264,17 +264,7 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 					}
 					catch( Exception $e ){ null; }
 				}
-/* 				try
-				{
-					$backup->delete( 'application/databases/Application/domain.xml' );
-					$backup->delete( 'application/databases/Application/settings.xml' );
-					$backup->delete( 'application/databases/Ayoola/Api/api.xml' );
-					$backup->delete( 'pagecarton/application/databases/Application/domain.xml' );
-					$backup->delete( 'pagecarton/application/databases/Application/settings.xml' );
-					$backup->delete( 'pagecarton/application/databases/Ayoola/Api/api.xml' );
-				}
-				catch( Exception $e ){ null; }
- */			break;
+			break;
 			case 'simple':
 			default:
 
