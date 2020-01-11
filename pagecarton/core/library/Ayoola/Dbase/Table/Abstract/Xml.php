@@ -43,6 +43,13 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      *
      * @param int
      */
+	
+    /**
+     * Access level for player
+     *
+     * @var boolean
+     */
+	protected static $_accessLevel = array( 99, 98 );
 
     /**
      * The Version of the general table module
@@ -280,9 +287,10 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
                 //        var_export( $values );
                 //        var_export( $this->select() );
             }
-            $adapter->setAccessibility($previousAccessibility);
-            $adapter->setRelationship($previousRelationship);
-        } while (false);
+            $adapter->setAccessibility( $previousAccessibility );
+            $adapter->setRelationship( $previousRelationship );
+        } while ( false );
+
         //     var_export(  $_GET['show_class_data'] === get_class( $this  ) );
         //     PageCarton_Widget::v( $_GET['show_class_data'] );
         //     PageCarton_Widget::v( get_class( $this  ) );
@@ -294,6 +302,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
         ) 
         {
             $where = array();
+                var_export( $this->getParameter()  );
             if( $this->getParameter( 'where_clause_json' ) )
             {
                 $where = json_decode( $this->getParameter( 'where_clause_json' ), true );
