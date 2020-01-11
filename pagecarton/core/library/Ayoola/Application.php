@@ -1087,6 +1087,10 @@ class Ayoola_Application
         $a = explode( '/', trim( $uri, ' /\\' ) );
         $nameForModule = array_shift( $a );
         $module = '/' . $nameForModule;
+        $url = Ayoola_Application::getUriToView( $uri );
+        self::$_runtimeSetting['url'] = $uri;
+        self::$_runtimeSetting['real_url'] = $url;
+
         switch( self::$mode )
         {
             case 'document':
