@@ -10,7 +10,7 @@ class Ayoola_Filter_CharacterWhitelist implements Ayoola_Filter_Interface
 		$pattern = "/([^{$this->validationParameters['character_list']}])+/"; 
 	//	var_export( $pattern );
 	//	var_export( $this->validationParameters );
-		$value = preg_replace( $pattern, $this->validationParameters['replace'] ? : $this->replace, (string) $value );
+		$value = trim( preg_replace( $pattern, $this->validationParameters['replace'] ? : $this->replace, (string) $value ), $this->replace );
 		return $value;
 	}
  
