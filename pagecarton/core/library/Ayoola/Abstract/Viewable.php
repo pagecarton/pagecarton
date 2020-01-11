@@ -219,6 +219,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      * @var self
      */
 	protected static $_instance;
+	
+    /**
+     * Singleton instance
+     *
+     * @var array
+     */
+	protected static $_settingHook = array();
 
     /**
      *
@@ -355,6 +362,19 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     }
 
     /**
+     * Checks whether hook is being set for a class
+     * To avoid infinite loop 
+     *
+     * @param string class name
+     * @return boolean
+     *
+     */
+	public static function isSettingHook( $class )
+	{
+        return static::$_settingHook[$class];
+    }
+
+    /**
      * Method to set up a hook action in object. Hooks PageCarton_Widget to another PageCarton_Widget 
      *
      * @param PageCarton_Widget - Class to connect to the hook pool
@@ -366,7 +386,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function setHook( $object, $method, & $data )
 	{
-        foreach( self::getHooks() as $hook )
+        $class = get_class( $object );
+    //    var_export( static::isSettingHook( $class ) );
+    //    if( static::isSettingHook( $class ) )
+        {
+            // Finish one before embarking on another
+            //  possibly avoid infinite loop
+        //    return false;
+        }
+    //    static::$_settingHook[$class] = true;
+        foreach( self::getHooks( $class ) as $hook )
         {
             if( ! Ayoola_Loader::loadClass( $hook ) )
             {
@@ -374,6 +403,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             }
             $hook::hook( $object, $method, $data );
         }
+    //    static::$_settingHook[$class] = false;
+    //    var_export( static::isSettingHook( $class ) );
         return true;
     }
 
@@ -381,15 +412,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      *
      *
      */
-	public static function getHooks()
+	public static function getHooks( $class = null )
 	{
-		$class = get_called_class();
+		$class = $class ? : get_called_class();
 //		var_export( $class );
 		if( isset( static::$_hooks[$class] ) && null !== static::$_hooks[$class] )
 		{
 			return static::$_hooks[$class];
 		}
-		$hooks = array();
+        $hooks = array();
+    //    var_export( new PageCarton_Hook );
 		if( $all = PageCarton_Hook::getInstance()->select( null, array( 'class_name' => array( $class, '*' ) ) ) )
 		{
 			foreach( $all as $each )

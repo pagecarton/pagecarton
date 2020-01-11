@@ -99,16 +99,21 @@ class Ayoola_File
      */
     public static function putContents( $path, $data )
 	{
+    //    var_export( $path );
+    //    var_export( $data );
         $x = array( 'path' => $path, 'data' => $data, 'response' => true );
         try
         {        
             //  hook file writing so we can write plugin to manipulate file writing result;
-            PageCarton_Widget::setHook( self::getInstance(), __FUNCTION__, $x );
+            //  setting hooks causes infinite loop
+            //  probably because it involves also writing files
+        //    PageCarton_Widget::setHook( self::getInstance(), __FUNCTION__, $x );
             $response = file_put_contents( $x['path'], $x['data'] );
             return $response;
         }
         catch( Ayoola_Abstract_Exception $e  )
         {
+        //    var_export( $x );
             //  now hooks can avoid execution of a class method by throwing an exception
             return $x['response'];
         }
@@ -138,8 +143,12 @@ class Ayoola_File
     public static function getInstance()
     {
         $class = get_called_class();
+        if( empty( self::$_instance[$class] ) )
+        { 
+        //    var_export( __LINE__ );
+            self::$_instance[$class] = new $class(); 
+        }
     //    var_export( $class );
-        if( empty( self::$_instance[$class] ) ){ self::$_instance[$class] = new $class( array( 'no_init' => true ) ); }
 		return self::$_instance[$class];
     } 	
 	
