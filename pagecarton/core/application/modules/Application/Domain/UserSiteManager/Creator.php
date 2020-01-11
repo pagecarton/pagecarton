@@ -90,11 +90,12 @@ class Application_Domain_UserSiteManager_Creator extends Application_Profile_Cre
 
 		$mailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
 		$mailInfo['subject'] = 'Your new site';
-		$mailInfo['body'] = 'You have successfully created your site. Next is to add content and build it.
-		
-		Site Homepage Link: ' . $fullUrl . '
-		Start building the site here: ' . $fullUrl . '/new-site-wizard
-		Manage your sites: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/account';
+        $mailInfo['body'] = '
+You have successfully created your site. Next is to add content and customize it into what you want. Kindly note the following important links.
+
+Site Homepage Link: ' . $fullUrl . '
+Start building the site here: ' . $fullUrl . '/new-site-wizard
+Manage all your sites: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/account';
 		self::sendMail( $mailInfo );
 
 	}
