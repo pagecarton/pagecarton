@@ -302,7 +302,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
         ) 
         {
             $where = array();
-                var_export( $this->getParameter()  );
             if( $this->getParameter( 'where_clause_json' ) )
             {
                 $where = json_decode( $this->getParameter( 'where_clause_json' ), true );
