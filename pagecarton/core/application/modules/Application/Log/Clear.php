@@ -53,7 +53,7 @@ class Application_Log_Clear extends Application_Log_Abstract
 					$this->setViewContent(  '' . self::__( 'PROTECTED LOG CANNOT BE MODIFIED' ) . '', true  );
 					return false;
 				}
-				file_put_contents( $path, null );
+				Ayoola_File::putContents( $path, null );
 			}
 			else
 			{

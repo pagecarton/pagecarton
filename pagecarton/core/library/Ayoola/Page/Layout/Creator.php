@@ -306,7 +306,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 			if( $values['screenshot'] )
 			{
 				$filename = dirname( $this->getMyFilename() ) . DS . 'screenshot';   
-				file_put_contents( $filename, $values['screenshot']);
+				Ayoola_File::putContents( $filename, $values['screenshot']);
 			}
 			
 		//	var_export( $values );
@@ -329,7 +329,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				if( ! is_file( $indexFile ) && ! empty( $values['plain_text'] ) )
 				{
 					//	Auto generate index
-					file_put_contents( $indexFile, $values['plain_text'] );
+					Ayoola_File::putContents( $indexFile, $values['plain_text'] );
 
 				}
 				$this->setViewContent(  '' . self::__( '<p class="boxednews goodnews">New theme saved successfully.</p>' ) . '', true  );

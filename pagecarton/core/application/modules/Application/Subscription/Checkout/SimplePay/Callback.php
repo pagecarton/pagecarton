@@ -111,7 +111,6 @@ class Application_Subscription_Checkout_SimplePay_Callback extends Application_S
 								@Ayoola_Application_Notification::mail( $mailInfo );
 							}
 							catch( Ayoola_Exception $e ){ null; }
-						//	file_put_contents( 'C:\exams.txt', var_export( $_POST, true ) );
 							if( $_POST['SP_TRANSACTION_ERROR_CODE'] === 'SP0000' )
 							{
 						//		$response['order_status'] = 'Payment Successful';

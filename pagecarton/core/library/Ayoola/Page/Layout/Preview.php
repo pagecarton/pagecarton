@@ -69,7 +69,6 @@ class Ayoola_Page_Layout_Preview extends Ayoola_Page_Layout_Abstract
 			$content = file_get_contents( $PAGE_TEMPLATE_FILE );
     //        var_export( $content );
 			$content = preg_replace( '/@@@([a-zA-Z_\-0-9]*)@@@/', '', $content );
-            file_put_contents( $temIncludeFile, $content );
    //         var_export( $content );
             include $temIncludeFile;
             unlink( $temIncludeFile );

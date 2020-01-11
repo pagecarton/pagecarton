@@ -347,7 +347,7 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 		//	exit();
 			$newContent = json_encode( $contentArray );
 		//	var_export( $contentArray );
-			file_put_contents( $path, $newContent );
+			Ayoola_File::putContents( $path, $newContent );
 		//	$this->updateFile( array( 'plain_text' => $xml->saveHTML() ) );
 			static::refreshThemePage( $data['layout_name'] );
 			$this->setViewContent(  '' . self::__( '<p class="boxednews goodnews">Theme links saved successfully.</p>' ) . '', true  );

@@ -57,7 +57,6 @@ class Application_PhpInfo extends Ayoola_Abstract_Table
 			//		$context = stream_context_create(array('http' => array('header'=>'Connection: close\r\n')));
  //           $core = file_get_contents( $remoteSite . '/pc_installer.php?do_not_highlight_file=1',false,$context);
 		//			echo  $core  ;  
-             //       file_put_contents( $_SERVER['SCRIPT_FILENAME'], $f );
                 }
  			  
 

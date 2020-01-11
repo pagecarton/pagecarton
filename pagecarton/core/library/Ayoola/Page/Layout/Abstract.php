@@ -134,14 +134,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		if( is_file( $screenshot ) )
 		{
 			$screenshotfile = dirname( $this->getmyfilename() ) . '/screenshot.jpg';
-			file_put_contents( $screenshotfile, file_get_contents( $screenshot ) );
 		}
  */		@$content = $values['plain_text'] ? : $values['wysiwyg'];
 	//	var_export( $content );
 		if( ! $content ){ return false; }
 		
 		//	Save raw content
-		file_put_contents( $this->getMyFilename() . 'raw', $content );
+		Ayoola_File::putContents( $this->getMyFilename() . 'raw', $content );
 
 		
 		//	Sanitize
@@ -265,10 +264,10 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			$isRealNavigation = false;     
 		}
 
-		file_put_contents( $this->getMyFilename() . 'sections', '<?php return ' . var_export( $sectionsToSave, true ) . ';' );
+		Ayoola_File::putContents( $this->getMyFilename() . 'sections', '<?php return ' . var_export( $sectionsToSave, true ) . ';' );
 	//	var_export( $sectionsToSave );
 		
-		file_put_contents( $this->getMyFilename(), $content );
+		Ayoola_File::putContents( $this->getMyFilename(), $content );
 		
 		//	update theme files
 		static::refreshThemePage( $values['layout_name'] );

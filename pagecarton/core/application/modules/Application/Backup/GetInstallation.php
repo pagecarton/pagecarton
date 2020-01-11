@@ -78,7 +78,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';  
     
                 $filename .= '.zip';
-                file_put_contents( $filename, $content['response'] );  
+                Ayoola_File::putContents( $filename, $content['response'] );  
 
                 //  extract to temp
                 $tempDir = CACHE_DIR . DS . __CLASS__ . PageCarton::VERSION;
@@ -130,7 +130,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 @unlink( $coreZip );
             //    rmdir();
                 Ayoola_Doc::createDirectory( dirname( $coreZip ) );  
-                file_put_contents( $coreZip, $content['response'] );
+                Ayoola_File::putContents( $coreZip, $content['response'] );
                 if( ! empty( $_REQUEST['pc_recreate_installer'] ) )   
                 {
                     exit( $config['repository'] . ' pc_recreate_installer done!' );  

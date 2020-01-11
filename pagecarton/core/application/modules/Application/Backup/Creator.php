@@ -82,7 +82,7 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 					$version = PageCarton::VERSION; 
 		//	each
 					//	Build installer into the zipped document so that it always have the fresh content
-		//			file_put_contents( $installerFilenamePhp, $installerText );
+		//			Ayoola_File::putContents( $installerFilenamePhp, $installerText );
 		//			dont do this here again since we switching to upgrades.pagecarton.org
 					
 					if( ! $info  = $this->createFile() ){ return false; }
@@ -192,7 +192,7 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		//	var_export( file_get_contents( $f ) );
 			$c = file_get_contents( $f );
 			unlink( $f );
-			$f = file_put_contents( $f, $c );
+			$f = Ayoola_File::putContents( $f, $c );
 		//	var_export( $f );
 		}
 		

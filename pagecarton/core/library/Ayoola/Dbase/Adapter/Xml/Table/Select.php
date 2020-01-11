@@ -539,7 +539,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		$file = $this->getCacheFilename();
 	//	var_export( $file );
 		Ayoola_Doc::createDirectory( dirname( $file ) );
-		return @file_put_contents( $file, serialize( $result ) );
+		return @Ayoola_File::putContents( $file, serialize( $result ) );
     } 
 		
     /**

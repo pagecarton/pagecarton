@@ -217,7 +217,6 @@ class Application_Personalization extends Ayoola_Abstract_Table
 				Ayoola_Application::setDomainSettings( true );
 				//	Go through the process again to set the info for the personalized app dir
 				//	similate install to allow Ayoola_Access_UpgradeSelf
-				//		file_put_contents( Ayoola_Application::$installer, __CLASS__ );
 				//	Always Log out to allow login again
 				require_once 'Ayoola/Access.php'; 
 				$auth = new Ayoola_Access();

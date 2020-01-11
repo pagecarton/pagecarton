@@ -213,10 +213,10 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 			if( $filePath = Ayoola_Loader::checkFile( $default[$key] ) ){ $default[$key] = $filePath; }
 			if( ! is_file( $file ) )
 			{
-				if( ! file_put_contents( $file, preg_replace( '/{?[%@]{2,3}([a-zA-Z1-9]{3,18})[%@]{2,3}}?/', '', @file_get_contents( $default[$key] ) ) ) )
+				if( ! Ayoola_File::putContents( $file, preg_replace( '/{?[%@]{2,3}([a-zA-Z1-9]{3,18})[%@]{2,3}}?/', '', @file_get_contents( $default[$key] ) ) ) )
 				{
 					// If copying fail, open new file
-					if( false === file_put_contents( $file, '' ) )
+					if( false === Ayoola_File::putContents( $file, '' ) )
 					{						
 						// Attempts a rollback
 						$this->rollback();

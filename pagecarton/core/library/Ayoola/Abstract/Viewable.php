@@ -357,14 +357,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     /**
      * Method to set up a hook action in object. Hooks PageCarton_Widget to another PageCarton_Widget 
      *
-     * @param PageCarton_Widget - Class to hook to this class
-     * @param string method where the hook is being set up for
+     * @param PageCarton_Widget - Class to connect to the hook pool
+     * @param string Method where the hook is being set up for
      * @param mixed Extra data passed to the PageCarton_Widget. This could be filtered in the hook class
      * 
      * @return boolean True on success
      *
      */
-	public static function setHook( Ayoola_Abstract_Playable $object, $method, & $data )
+	public static function setHook( $object, $method, & $data )
 	{
         foreach( self::getHooks() as $hook )
         {

@@ -62,7 +62,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				$customName = time();   
 				$filename = CACHE_DIR . DS . $customName . '.' . $filter->filter( $result['extension'] );
 				
-				file_put_contents( $filename, $result['data'] );
+				Ayoola_File::putContents( $filename, $result['data'] );
 				$newFilename = array_shift( explode( '.', $filename ) ) . '.tar.gz';
 				rename( $filename, $newFilename );
 				$filename = $newFilename;

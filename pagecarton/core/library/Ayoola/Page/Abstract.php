@@ -223,7 +223,7 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		//var_export( $filename );
 		//exit();
 		// If file does not exist, make one
-		if( ! is_file( $filename ) ){ file_put_contents( $filename, '' ); }
+		if( ! is_file( $filename ) ){ Ayoola_File::putContents( $filename, '' ); }
 		$xml->save( $filename );
 		return true;
     } 

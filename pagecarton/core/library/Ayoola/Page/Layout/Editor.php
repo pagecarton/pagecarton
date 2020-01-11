@@ -82,7 +82,6 @@ class Ayoola_Page_Layout_Editor extends Ayoola_Page_Layout_Abstract
 			if( $values['screenshot'] )
 			{
 				$filename = dirname( $this->getMyFilename() ) . DS . 'screenshot';
-				file_put_contents( $filename, $values['screenshot']);
 			}  
 */
 			// remove this so that screenshot don't get updated'   

@@ -56,7 +56,7 @@ class Application_Backup_Import extends Application_Backup_Abstract
 				case 'import_from_local_device':
 					if( $values['backup_base64'] )
 					{
-						file_put_contents( $tempName, base64_decode( $values['backup_base64'] ) );		
+						Ayoola_File::putContents( $tempName, base64_decode( $values['backup_base64'] ) );		
 					}
 					elseif( $values['backup_url'] )
 					{
@@ -64,7 +64,7 @@ class Application_Backup_Import extends Application_Backup_Abstract
 					//	var_export( $file );
 						if( $file = Ayoola_Loader::checkFile( $file ) )
 						{
-							file_put_contents( $tempName, file_get_contents( $file ) );	
+							Ayoola_File::putContents( $tempName, file_get_contents( $file ) );	
 
 							//	Delete this since we will use another means to save it.
 							unlink( $file );	
@@ -77,7 +77,7 @@ class Application_Backup_Import extends Application_Backup_Abstract
 					}					
 				break;
 				case 'upload_from_other_sites':					
-				//	file_put_contents( $tempName, file_get_contents( $values['backup_url'] ) );
+				//	Ayoola_File::putContents( $tempName, file_get_contents( $values['backup_url'] ) );
 				//	@unlink( $tempName );
 					if( ! is_file( $tempName ) )
 					{

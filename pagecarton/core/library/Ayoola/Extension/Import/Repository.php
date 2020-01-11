@@ -152,8 +152,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
         //    var_export( $content['options'] );
         //    exit();
      //       var_export( strlen( $content ) );  
-         //   file_put_contents( $filename, fopen( $link, 'r' ) );
-            file_put_contents( $filename, $content['response'] );
+            Ayoola_File::putContents( $filename, $content['response'] );
             $values = static::getOtherInstallOptions( $filename );
             $values += $existingPluginSettings;
         //    var_export( $values );
