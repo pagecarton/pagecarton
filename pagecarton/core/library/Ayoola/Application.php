@@ -142,7 +142,6 @@ class Ayoola_Application
      */
 	public static function getRuntimeSettings( $key = null )
     {
-	//	new Application_Domain();
 		return ! array_key_exists( $key, self::$_runtimeSetting ) ? (array) self::$_runtimeSetting : self::$_runtimeSetting[$key];
     }
 
@@ -358,7 +357,7 @@ class Ayoola_Application
 			}
 
 			require_once 'Application/Domain.php';
-			$domain = new Application_Domain();
+			$domain = Application_Domain::getInstance();
 		//	var_export( $_SERVER );
 		//	exit( var_export( $domainName ) );
 			$where = array( 'domain_name' => $domainName );
