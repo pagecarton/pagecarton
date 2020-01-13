@@ -454,7 +454,10 @@ class Ayoola_Application
 				//	insert the first domain only
 				if( ( '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] ) && empty( $_SERVER['CONTEXT_PREFIX'] ) )
 				{
-					$domain->insert( $where );
+                    //  pc.com has a bug that is deleting Application_Domain data. 
+                    //  need to remove auto-insert until this is fixed
+                    //  So arbitrary domains don't get inserted as default domain
+				//	$domain->insert( $where );
 				}
 				$data['domain_settings'] = $where;
 				$subDomain = null;
