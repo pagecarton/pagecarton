@@ -134,7 +134,6 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         $themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
     //    $settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ) );
     //    var_export( $getSiteData );
-    //    var_export( $settings );
     //    var_export( $themeInfo );
     //    var_export( Ayoola_Page_PageLayout::getInstance( 'xx' )->select() );
         if( $getSiteData AND $previousData = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ) ) )
@@ -163,10 +162,10 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 }
             }
         }    
-        static::$_textUpdates = $themeInfo;
-    //    var_export( $themeInfo );
-   //     var_export( $previousData );
-    return $themeInfo;   
+        static::$_textUpdates[$getSiteData] = $themeInfo;
+        //    var_export( $themeInfo );
+    //     var_export( $previousData );
+        return $themeInfo;   
     }
 
     /**
@@ -246,7 +245,6 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             }
             if( ! $identifierData = self::getIdentifierData() ){ return false; }
         //    var_export( $identifierData );
-            $settingsName = __CLASS__;
 
             $this->createForm( 'Continue..', '' );
 			$this->setViewContent( $this->getForm()->view() );
@@ -427,20 +425,32 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
     {
         $percentage = 0;
         $themeInfo = self::getUpdates();
+        $themeInfoX = self::getUpdates( true );
         $themeInfoAll = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => __CLASS__ ) );
         @$themeInfoAll = $themeInfoAll['data'];
 		if( empty( $themeInfo['dummy_search'] ) )
 		{
 		//	$percentage += 100;
 		}
-		elseif( ! @array_diff( $themeInfo['dummy_search'], $themeInfoAll['dummy_search'] ) )
+        elseif( 
+            ( array_intersect_assoc( $themeInfo['dummy_replace'], $themeInfoAll['dummy_replace'] ) === $themeInfoAll['dummy_replace'] && $themeInfoAll['dummy_replace'] !== $themeInfo['dummy_replace'] ) 
+            || array_intersect( $themeInfo['dummy_replace'], $themeInfoX['dummy_replace'] ) !== $themeInfo['dummy_replace'] )
+		{
+		//	$percentage += 100;
+		}
+		elseif( array_intersect( $themeInfo['dummy_replace'], $themeInfoX['dummy_replace'] ) === $themeInfo['dummy_replace'] )
 		{
 	    //	var_export( $percentage );
 			$percentage += 100;
 		}
 	//	var_export( $percentage );
- //   var_export( self::getUpdates() );
-//    var_export( $themeInfoAll['dummy_search'] );
+//   var_export( $themeInfo['dummy_search'] );
+//   var_export( $themeInfoAll['dummy_search'] );
+//   var_export( $themeInfoAll['dummy_replace'] );
+//   var_export( $themeInfo['dummy_replace'] );
+//   var_export( $themeInfoX['dummy_replace'] );
+ //  var_export( array_intersect_assoc( $themeInfo['dummy_replace'], $themeInfoAll['dummy_replace'] ) );
+//    var_export( $themeInfoAll['dummy_replace'] );
 		return $percentage;
 	}
 	// END OF CLASS
