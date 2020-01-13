@@ -567,8 +567,13 @@ class Application_Article_View extends Application_Article_Abstract
 					$this->_xml .= $data['download_button'];
 				break;
 				case 'article':
-				case 'post':
-					$this->_xml .= self::cleanHTML( @$data['article_content' . $featureSuffix] );
+                case 'post':
+                    $article = self::cleanHTML( @$data['article_content' . $featureSuffix] );
+                    if( strip_tags( $article ) === $article )
+                    {
+                        $article = nl2br( $article );
+                    }
+					$this->_xml .= $article;
 				break;
 			}
 			$this->_xml .= '</div>';
