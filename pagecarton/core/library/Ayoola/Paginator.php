@@ -952,7 +952,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					$row = array_intersect_key( $row, $header );
 					ksort( $row );
 					array_walk( $row, __NAMESPACE__ . '\cleanData' );
-					fputcsv( $out, array_values( $row ), ',', '"' );
+					fputcsv( $out, array_values( $row ), "\t", '"' );
 				//	var_export( $row );
 					//	fputcsv( $out, array_values( $row ), ',', '"' );
 				}
