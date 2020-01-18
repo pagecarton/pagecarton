@@ -938,8 +938,8 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					//	var_export( array_keys( $row ) );
 						ksort( $row );
 						$header = $row;
-					//	fputcsv( $out, array_keys( $header ), "\t", '"' );
-						var_export( $header );
+						fputcsv( $out, array_keys( $header ), "\t", '"' );
+					//	var_export( $this->fields );
 					//	fputcsv( $out, array_keys( $this->fields ), ',', '"' ); 
 						$flag = true;
 					}
@@ -947,17 +947,17 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					$notFoundKeys = array_diff_key( $header, $row );
 
 					$notFoundKeys = array_combine( array_keys( $notFoundKeys ), array_fill( 0, count( $notFoundKeys ), ' ' ) );
-					var_export( $notFoundKeys );
+				//	var_export( $notFoundKeys );
 					$row += $notFoundKeys;
 					$row = array_intersect_key( $row, $header );
 					ksort( $row );
 					array_walk( $row, __NAMESPACE__ . '\cleanData' );
-				//	fputcsv( $out, array_values( $row ), "\t", '"' );
-					var_export( $row );
+					fputcsv( $out, array_values( $row ), "\t", '"' );
+				//	var_export( $row );
 					//	fputcsv( $out, array_values( $row ), ',', '"' );
 				}
 
-			//	fclose($out);
+				fclose($out);
 				exit;
   			}
 		}
