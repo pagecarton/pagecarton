@@ -158,6 +158,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     //    self::v( Ayoola_Page_Layout_ReplaceText::getUpdates() );
 
 
+    //    var_export( $previousData );
         if( $matches[0] )
         {
             foreach( $matches[0] as $count => $each )
@@ -167,7 +168,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                 $previousData['dummy_search'][] = $each;
                 $previousData['dummy_replace'][] = trim( $each, '{-}' );
             }
-        //    Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
+        //    var_export( $previousData );
+                Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
 
         }
         //  to be executed within the widget class
