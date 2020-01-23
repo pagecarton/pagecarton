@@ -103,7 +103,7 @@ class Application_User_Creator extends Application_User_Abstract
         Application_Javascript::header( Ayoola_Application::getUrlPrefix() . $urlToGo );
 		$sOptions = Application_Settings_Abstract::getSettings( 'UserAccount', 'signup' );
     //    var_export( $accountOptions );
-    //    if( in_array( 'disable-signup', $sOptions ) && ! self::hasPriviledge( 98 ) )
+        if( in_array( 'disable-signup', $sOptions ) && ! self::hasPriviledge( 98 ) )
         {
             $this->setViewContent( '<p class="badnews">' . self::__( 'New registrations has been disabled on this site.' ) . '</p>' );
             return false;
