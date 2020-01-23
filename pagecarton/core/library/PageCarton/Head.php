@@ -42,22 +42,26 @@ class PageCarton_Head extends PageCarton_Widget
      //   echo __CLASS__;   
 		try
 		{ 
+            $title = strip_tags( htmlentities( trim( Ayoola_Page::$title . ' ' . Ayoola_Page::getCurrentPageInfo( 'title' ) ), ENT_QUOTES, "UTF-8", false ) ? : ( Application_SiteInfo::getInfo( 'site_headline' ) ? : Ayoola_Page::getDefaultDomain() ) );
+            $description = strip_tags( htmlentities( trim( Ayoola_Page::$description . ' ' . Ayoola_Page::getCurrentPageInfo( 'description' ) ), ENT_QUOTES, "UTF-8", false ) ? : ( Application_SiteInfo::getInfo( 'site_description' ) ) );
+            $keywords = strip_tags( htmlentities( Ayoola_Page::getCurrentPageInfo( 'keywords' ), ENT_QUOTES, "UTF-8", false ) );
+            $url = strip_tags( Ayoola_Page::getCanonicalUrl() );
             $html = 
             '
-<title>' .  ( htmlentities( trim( Ayoola_Page::$title . ' ' . Ayoola_Page::getCurrentPageInfo( 'title' ) ), ENT_QUOTES, "UTF-8", false ) ? : ( Application_SiteInfo::getInfo( 'site_headline' ) ? : Ayoola_Page::getDefaultDomain() ) ) . '</title>
-<meta name="Description" content="' .  ( htmlentities( trim( Ayoola_Page::$description . ' ' . Ayoola_Page::getCurrentPageInfo( 'description' ) ), ENT_QUOTES, "UTF-8", false ) ? : ( Application_SiteInfo::getInfo( 'site_description' ) ) ) . '" />
-<meta name="Keywords" content="' .  htmlentities( Ayoola_Page::getCurrentPageInfo( 'keywords' ), ENT_QUOTES, "UTF-8", false ) . '" />
+<title>' . $title  . '</title>
+<meta name="Description" content="' . $description . '" />
+<meta name="Keywords" content="' .  $keywords . '" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta property="og:title" content="' .  ( htmlentities( trim( Ayoola_Page::$title . ' ' . Ayoola_Page::getCurrentPageInfo( 'title' ) ), ENT_QUOTES, "UTF-8", false ) ? : ( Application_Settings_Abstract::getSettings( 'SiteInfo', 'site_headline' ) ? : Ayoola_Page::getDefaultDomain() ) ) . '"/>
+<meta property="og:title" content="' . $title . '"/>
 <meta property="og:type" content="' . ( Ayoola_Page::$isHome ? 'website' : 'article' ) . '"/> 
-<meta property="og:url" content="' .  Ayoola_Page::getCanonicalUrl() . '"/>
+<meta property="og:url" content="' .  $url . '"/>
 <meta property="og:image" content="' .  Ayoola_Page::getThumbnail() . '"/>
 <meta property="og:site_name" content="' .  ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . '"/>
-<meta property="og:description" content="' .  ( htmlentities( trim( Ayoola_Page::$description . ' ' . Ayoola_Page::getCurrentPageInfo( 'description' ) ), ENT_QUOTES, "UTF-8", false ) ? : ( Application_Settings_Abstract::getSettings( 'SiteInfo', 'site_description' ) ) ) . '"/>  
+<meta property="og:description" content="' .  $description . '"/>  
 <link rel="icon" href="' .  Ayoola_Page::getFavicon() . '" type="image/x-icon" />
 <link rel="shortcut icon" href="' .  Ayoola_Page::getFavicon() . '" type="image/x-icon" />
 <link rel="bookmark icon" href="' .  Ayoola_Page::getFavicon() . '" type="image/x-icon" />
-<link rel="canonical" href="' .  Ayoola_Page::getCanonicalUrl() . '" />    
+<link rel="canonical" href="' .  $url . '" />    
 <link rel="apple-touch-icon" href="' .  Ayoola_Page::getFavicon() . '">
 <link rel="image_src" href="' .  Ayoola_Page::getThumbnail() . '"> 
 <meta itemprop="image" content="' .  Ayoola_Page::getThumbnail() . '"> 
