@@ -132,7 +132,13 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         $themeName =  ( ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
     //    var_export( $themeName );
         $themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
-    //    $settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ) );
+
+        //  Add default info
+/*         $themeInfo['dummy_title'] = array_merge( $themeInfo['dummy_title'] ? : array(), static::$_defaultTexts['dummy_title'] ? : array() );
+        $themeInfo['dummy_search'] = array_merge( $themeInfo['dummy_search'] ? : array(), static::$_defaultTexts['dummy_search'] ? : array() );
+        $themeInfo['dummy_replace'] = array_merge( $themeInfo['dummy_replace'] ? : array(), static::$_defaultTexts['dummy_replace'] ? : array() );
+ */
+//    $settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ) );
     //    var_export( $getSiteData );
     //    var_export( $themeInfo );
     //    var_export( Ayoola_Page_PageLayout::getInstance( 'xx' )->select() );
@@ -165,7 +171,23 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         static::$_textUpdates[$getSiteData] = $themeInfo;
         //    var_export( $themeInfo );
     //     var_export( $previousData );
-        return $themeInfo;   
+        return static::$_textUpdates[$getSiteData];   
+    }
+
+    /**
+     * Clear Values
+     * 
+     */
+	public static function clearTexts( $themeName = null )
+    {
+        $themeName =  ( ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
+        unset( $values['layout_name'] );
+        $previousData = Ayoola_Page_PageLayout::getInstance()->selectOne( array( 'layout_name' => $themeName ) );
+    //    $previousData['dummy_title'] = array();
+    //    $previousData['dummy_search'] = array();
+        $previousData['dummy_replace'] = array_fill_keys( $previousData['dummy_replace'], null );
+        Ayoola_Page_PageLayout::getInstance()->update( $previousData, array( 'layout_name' => $themeName ) );
+        Application_Settings::getInstance()->delete( array( 'settingsname_name' => __CLASS__ ) );
     }
 
     /**
@@ -243,6 +265,14 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $this->_identifier['layout_name'] = Ayoola_Page_Editor_Layout::getDefaultLayout();
             //	return false; 
             }
+            if( @$_GET['editing_dummy_text'] === 'ddd' )
+            {
+                $this->createConfirmationForm( 'Delete Static Text', 'Delete Static Text Contents..' );
+                $this->setViewContent( $this->getForm()->view() );
+                if( ! $values = $this->getForm()->getValues() ){ return false; }
+                self::clearTexts( $this->_identifier['layout_name'] );
+                return false;
+            }
             if( ! $identifierData = self::getIdentifierData() ){ return false; }
         //    var_export( $identifierData );
 
@@ -250,7 +280,12 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 			$this->setViewContent( $this->getForm()->view() );
             if( empty( $_GET['editing_dummy_text'] ) )
             {
-                $this->setViewContent( self::__( '<div class="pc-notify-info" style="text-align:center;">Update text on the site! <a style="font-size:smaller;" onclick="location.search+=\'&editing_dummy_text=1\'" href="javascript:">Advanced mode</a></div>' ) );
+                $this->setViewContent( self::__( '
+                <div class="pc-notify-info" style="text-align:center;">
+                    Update text on the site! 
+                <a style="font-size:smaller;" onclick="location.search+=\'&editing_dummy_text=1\'" href="javascript:">Advanced mode</a> or 
+                <a style="font-size:smaller;" onclick="location.search+=\'&editing_dummy_text=ddd\'" href="javascript:">Clear saved information</a>
+                </div>' ) );
             }
 		//	self::v( $_POST );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -267,7 +302,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $dataForHiddenFields = static::$_defaultTexts + $dataForHiddenFields;
             //    var_export( $data );
             }
-            elseif( ! empty( $_REQUEST['load_default_dummy_texts'] ) )
+            elseif( ! empty( $_GET['editing_dummy_text'] ) )
             {
                 $dataForHiddenFields['dummy_title'] = array_merge( static::$_defaultTexts['dummy_title'] ? : array(), $dataForHiddenFields['dummy_title'] ? : array() );
                 $dataForHiddenFields['dummy_search'] = array_merge( static::$_defaultTexts['dummy_search'] ? : array(), $dataForHiddenFields['dummy_search'] ? : array() );
@@ -344,7 +379,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             $data = static::$_defaultTexts + $data;
         //    var_export( $data );
         }
-        elseif( ! empty( $_REQUEST['load_default_dummy_texts'] ) )
+        elseif( ! empty( $_REQUEST['editing_dummy_text'] ) )
         {
             $data['dummy_title'] = array_merge( static::$_defaultTexts['dummy_title'] ? : array(), $data['dummy_title'] ? : array() );
             $data['dummy_search'] = array_merge( static::$_defaultTexts['dummy_search'] ? : array(), $data['dummy_search'] ? : array() );

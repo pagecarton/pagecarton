@@ -155,6 +155,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         {
             $previousData = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
         }
+    //    self::v( Ayoola_Page_Layout_ReplaceText::getUpdates() );
+
 
         if( $matches[0] )
         {
@@ -165,7 +167,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                 $previousData['dummy_search'][] = $each;
                 $previousData['dummy_replace'][] = trim( $each, '{-}' );
             }
-            Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
+        //    Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
 
         }
         //  to be executed within the widget class
@@ -423,12 +425,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 					
 					$html .= '<div>';  
 					$html .= '<textarea style="font-size:12px;" readonly rows="5" style="height:auto;" ondblclick="ayoola.div.autoExpand( this );">';  
-					$html .= '<!-- How to embed ' . $class . ' -->
+                    $html .= 
+'<!-- How to embed ' . $class . ' -->
 <!--{{{@' . $i . '(' . $class . ')-->
 <p>' . self::__( 'Insert HTML content here. Use varables like' ) . ' {{{' . ( $resultsVar[0] ? : $resultsVar[1] ) . '}}} here.</p>
 <!--(' . $class . ')@' . $i . '}}}-->
 <!-- Place this code in code view -->';  
-								
 					$html .= '</textarea>'; 
 
 					$html .= '<textarea  style="font-size:12px;" readonly ondblclick="ayoola.div.autoExpand( this );">';  
