@@ -35,10 +35,12 @@ class Ayoola_Event_NewSession extends Ayoola_Event
     {
         //    See if a user is still logged in through cookie
         //    Try to login with persistent cookie variables
-        do {
+        do 
+        {
 
             //    break;
-            if (isset($_COOKIE[Ayoola_Session::getName()])) {
+            if( isset( $_COOKIE[Ayoola_Session::getName()] ) ) 
+            {
                 //    new session
                 //        break;
             }
@@ -50,12 +52,15 @@ class Ayoola_Event_NewSession extends Ayoola_Event
                 $autoAuthFile = SITE_APPLICATION_PATH . '/auto-auth/' . $_REQUEST['pc_auto_auth'];
                 //    var_export( file_get_contents( $autoAuthFile ) );
                 //    exit();
-                if (is_file($autoAuthFile) && is_writable($autoAuthFile)) {
-                    $userInfo = json_decode(file_get_contents($autoAuthFile), true);
+                if ( is_file( $autoAuthFile ) && is_writable( $autoAuthFile ) ) 
+                {
+                    $userInfo = json_decode( file_get_contents( $autoAuthFile ), true );
 
-                    if (unlink($autoAuthFile)) {
-                        if (!empty($_REQUEST['pc_auto_signup'])) {
-                            $class = new Application_User_AdminCreator(array('fake_values' => $userInfo));
+                    if( unlink( $autoAuthFile ) ) 
+                    {
+                        if( ! empty( $_REQUEST['pc_auto_signup'] ) ) 
+                        {
+                            $class = new Application_User_AdminCreator( array( 'fake_values' => $userInfo ) );
                             $class->initOnce();
                             //    echo $class->view();
                         }
@@ -74,8 +79,13 @@ class Ayoola_Event_NewSession extends Ayoola_Event
 
             //    User doesn't have pesistent login cookie
             $cookieValue = isset($_COOKIE[$loginObject->getObjectName()]) ? $_COOKIE[$loginObject->getObjectName()] : "";
-            if (empty($cookieValue)) {break;}
-            //    var_export( $_COOKIE );
+        //    var_export( $cookieValue );
+        //    var_export( $_COOKIE );
+            if( empty( $cookieValue ) )
+            { 
+                break;
+            }
+        //    var_export( $_COOKIE );
 
             //    User is currently logged in
             if ($userInfo = $auth->getUserInfo()) {break;}
@@ -141,7 +151,7 @@ class Ayoola_Event_NewSession extends Ayoola_Event
                     break;
                 }
             }
-            $correctCookiePassword = Ayoola_Access_Login::hashPassWord($realUserInfo['email'] . $realUserInfo['password'], $cookieCreationTime);
+            $correctCookiePassword = Ayoola_Access_Login::hashPassWord( $realUserInfo['email'] . $realUserInfo['password'], $cookieCreationTime );
             //    var_export( $cookiePassword );
             //    var_export( $correctCookiePassword );
             if ($correctCookiePassword != $cookiePassword) {
