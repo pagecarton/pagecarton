@@ -179,7 +179,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
             {
                 continue;
             }
-            $parameters[$each] = str_ireplace( '>&nbsp;</', '></', $parameters[$each] );
+            $parameters[$each] = str_ireplace( array( 'i>&nbsp;</i', 'span>&nbsp;</span', ), array( 'i></i', 'span></span', ), $parameters[$each] );
         }
     }
 	
