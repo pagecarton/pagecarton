@@ -57,8 +57,18 @@ class Application_Article_Creator extends Application_Article_Abstract
 		}
 		if( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
 		{ 
-			$this->setViewContent(  '' . self::__( '<span class="badnews">You do not have enough priviledge to publish on this website. </span>' ) . '', true  );
-			return false;     
+            if( ! self::hasPriviledge( @$articleSettings['restricted_writers'] ) )
+            { 
+                $this->setViewContent(  '<span class="badnews">' . self::__( 'You do not have enough priviledge to publish on this website.' ) . '</span>', true  );
+                return false;     
+            }
+			if( $postTypeInfo = self::getPostTypeInfo() )
+			if( empty( $postTypeInfo['auth_level'] ) || ! Ayoola_Abstract_Table::hasPriviledge( $postTypeInfo['auth_level'] ) )
+			{ 
+                $this->setViewContent(  '<span class="badnews">' . self::__( 'You do not have enough priviledge to publish this kind of post on this website.' ) . '</span>', true  );
+				return false;
+			}
+                
 		}
 		if( ! $this->requireProfile() )
 		{
@@ -68,10 +78,33 @@ class Application_Article_Creator extends Application_Article_Abstract
 	}
 	
     /**
+     * Returns post type to be created
+     * 
+     */
+	public static function getPostTypeInfo()
+    {
+        $options = array();
+        $postType = @$_REQUEST['article_type'] ? : @$_REQUEST['post_type']; 
+        $realType = $postType; 
+        $joinedType = $postType; 
+        if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $postType ) )
+        {
+            $realType = $postTypeInfo['article_type'];
+            $postType = $postTypeInfo['post_type'];
+            $joinedType = $realType . ' (' . $postType . ') item'; 
+        } 
+        $options['real_type'] = $realType;
+        $options['joined_type'] = $joinedType;
+        $options['post_type'] = $postType;
+        $options += $postTypeInfo ? : array();
+        return $options;
+    }
+	
+    /**
      * The method does the whole Class Process
      * 
      */
-	protected function init()
+	public function init()
     {
 		try
 		{ 
@@ -80,16 +113,12 @@ class Application_Article_Creator extends Application_Article_Abstract
 
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );  
-	//		var_export( '1' );
-//			$postType = @$_REQUEST['article_type'] ? : 'post'; 
-			$postType = @$_REQUEST['article_type'] ? : @$_REQUEST['post_type']; 
-			$realType = $postType; 
-			$joinedType = $postType; 
-			if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $postType ) )
+
+			if( $postTypeInfo = self::getPostTypeInfo() )
 			{
-				$realType = $postTypeInfo['article_type'];
+				$realType = $postTypeInfo['real_type'];
 				$postType = $postTypeInfo['post_type'];
-				$joinedType = $realType . ' ('. $postType . ') item'; 
+				$joinedType = $postTypeInfo['joined_type'];
 			}   
 			$joinedType = $joinedType ? : 'Post';
 			if( ! $this->isAuthorized() )
@@ -103,29 +132,16 @@ class Application_Article_Creator extends Application_Article_Abstract
 				$this->setViewContent( Ayoola_Object_Embed::viewInLine( array( 'editable' => $this->getParameter( 'class_to_play_when_completed' ) ) + $this->getParameter() ? : array() ) );
 			}
 			$this->setViewContent( self::getQuickLink() );
-	//		$this->setViewContent( self::__( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' ) );
-	
-		//	if( ! @$_REQUEST['article_type'] )
-		//	{
-				
-		//	}
 			$this->setViewContent( $this->getForm()->view() );
-			
-		//	self::v( $this->getForm()->getValues() );
-		//	self::v( $this->getForm()->getBadnews() );
  			
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
 			// authenticate the article_title here because it may not have been done in custom forms
 			if( strlen( trim( $values['article_title'] ) ) < 3 )
 			{
-				// title is required.
+				// title is required
 				return false;
-			}
-			
-		//	var_export( $values );  
-		//	var_export( '3' );  
-			
+			}			
 		
 			//	Set a category to specify the type of Post this is 
 			$table = Application_Category::getInstance();
@@ -142,15 +158,10 @@ class Application_Article_Creator extends Application_Article_Abstract
 					$values['article_type'] = 'profile';
 				break;
 			}
-		//	$postType = $values['article_type'];
-	//		var_export( $values['article_type'] );
 			if( ! $category = $table->selectOne( null, array( 'category_name' => $values['article_type'] ) ) )
 			{
-			//	var_export();
-		//		$this->getForm()->setBadnews( 'POST TYPE MUST BE A VALID CATEGORY: ' . $values['article_type'] );
-		//		$this->setViewContent( self::__( '' . showBadnews( $this->getForm()->getBadnews() ) . '' ) );  
-			//	return false;
-			}
+
+            }
 			//	Changing to category_name to correct error in grep
 			$values['category_name'] = @$values['category_name'] ? : array();
 			$values['category_name'][] = $values['article_type'];
@@ -169,10 +180,8 @@ class Application_Article_Creator extends Application_Article_Abstract
 			{
 				$values = array_merge( static::$_optionalValues, $values );
 			}
-		//	var_export( $values );
 			$access = new Ayoola_Access();
 			$userInfo = $access->getUserInfo();
-		//	idn_to_ascii( );
 			$filter = new Ayoola_Filter_Transliterate();
 			$values['article_url'] = $filter->filter( $values['article_title'] );
 
@@ -192,8 +201,6 @@ class Application_Article_Creator extends Application_Article_Abstract
 			$values['user_id'] = $userInfo['user_id'];
 			$values['username'] = $userInfo['username'];
 			
-		//	$values['profile_url'] = @$userInfo['profile_url'];
-
 			//	default to my default profile
 			$defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
 			$defaultProfile = $defaultProfile['profile_url'];
@@ -202,19 +209,14 @@ class Application_Article_Creator extends Application_Article_Abstract
 			$values['article_creation_date'] = time();
 			$values['article_modified_date'] = time();
 			@$values['publish'] = ( ! isset( $values['publish'] ) && ! is_array( @$values['article_options'] ) ) ? '1' :  $values['publish'];
-			@$values['auth_level'] = is_array( $values['auth_level'] ) ? $values['auth_level'] : array( 0 );
-			
-		//	$values['article_filename'] = self::getFolder();
-		//	$date = $articleSettings['no-date-in-url'] ? '/' : date( '/Y/m/d/' );
-			$articleSettings['extension'] = @$articleSettings['extension'] ? : 'html';
-			
+			@$values['auth_level'] = is_array( $values['auth_level'] ) ? $values['auth_level'] : array( 0 );			
+			$articleSettings['extension'] = @$articleSettings['extension'] ? : 'html';			
 			
 			//	Check availability of article url
 			$time = null;
 			do
 			{
 			
-			//	$date = ;
 				$newUrl = date( '/Y/m/d/' ) . '' . $values['article_url'] . $time . '.' . $articleSettings['extension'];
 				$path = Application_Article_Abstract::getFolder() . $newUrl;
 				$time = '-' . $values['article_creation_date'] . '';
@@ -237,34 +239,14 @@ class Application_Article_Creator extends Application_Article_Abstract
 				}
 			}
 			while( is_file( $path ) );
-		//	self::v( $newUrl );
 			$values['article_url'] =  $newUrl;
-			
-		//	$values['article_filename'] .=  $values['article_url'];
-		//	$content = $values['article_content'];
-	//		unset( $values['article_content'] ); // Prevent content from going to the database
-	
-			//	SAVE ARTICLES DETAILS IN THE CLOUD
-		//	if( ! $this->insertDb( $values ) ){ return false; }
-			
-			
-			// Save to server
-		//	if( ! $response = Application_Article_Api_Insert::send( $values ) ){ return false; }
-		//	if( ! is_array( $response ) || ! is_array( $response['data'] ) ){ throw new Application_Article_Exception( $response ); }
-		//	$values = $response['data'];
-		//	var_export( $values );
-			
+						
 			//	write to file
-			Ayoola_Doc::createDirectory( dirname( self::getFolder() . $values['article_url'] ) );
+            Ayoola_Doc::createDirectory( dirname( self::getFolder() . $values['article_url'] ) );
+            
 			self::saveArticle( $values );
-			
-			//	Set Hash Tags
-		//	Application_HashTag_Abstract::set( @$values['article_tags'], 'articles', $values['article_url'] );
-			
-//			return false;
-		//	posts var_export( $values['article_filename'] );
-			$this->_objectData['article_url'] = $values['article_url']; 
-		//	$this->setViewContent(  );
+
+            $this->_objectData['article_url'] = $values['article_url']; 
 		
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . ''; 
@@ -284,7 +266,6 @@ class Application_Article_Creator extends Application_Article_Abstract
 			catch( Ayoola_Exception $e ){ null; }
 			
 			//	Do something after creating an article
-		//	self::v( $this->getParameter( 'class_to_play_when_completed' )  );
 			if( $this->getParameter( 'class_to_play_when_completed' ) )
 			{
 				$this->setViewContent( Ayoola_Object_Embed::viewInLine( array( 'editable' => $this->getParameter( 'class_to_play_when_completed' ) ) + $this->getParameter() ? : array() ) );
@@ -292,12 +273,8 @@ class Application_Article_Creator extends Application_Article_Abstract
 			
 			
 		}
-	//	catch( Application_Article_Exception $e )
 		catch( Exception $e )
 		{ 
-		//	print_r(debug_backtrace());
-		//	exit();
-	//		var_export( $e->getTraceAsString() );
 			$this->getForm()->setBadnews( $e->getMessage() );
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false; 
