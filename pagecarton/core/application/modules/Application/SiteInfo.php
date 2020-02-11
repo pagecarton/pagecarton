@@ -60,7 +60,7 @@ class Application_SiteInfo extends PageCarton_Widget
 
         if( empty( $settings['site_description'] ) && self::hasPriviledge( array( 99, 98 ) ) )
         {
-            $settings['site_description'] = $settings['site_description'] ? : 'Description for this site has not been set. Site Description will appear here when they become available.';
+            $settings['site_description'] = $settings['site_description'] ? : 'Describe this site. Site Description will appear here when they become available.';
         }
         return $key ? @$settings[$key] : $settings;
     }  
