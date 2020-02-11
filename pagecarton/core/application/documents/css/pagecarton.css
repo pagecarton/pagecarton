@@ -422,7 +422,7 @@ pc_full_width
 	width: 100%;
 	max-width: 600px;
 	background-color: #f8f8f8;
-	color: #333333 ! important;
+	color: #f44336333 ! important;
 }
 
 .pc-form input[type="submit"] 

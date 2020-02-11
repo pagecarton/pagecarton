@@ -33,7 +33,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			float: unset;
 		}
 .cbp-spmenu-vertical {
-    background-color: #333;
+    background-color: #714e12;
 }
 
 		.header-left {

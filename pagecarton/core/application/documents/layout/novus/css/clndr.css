@@ -266,7 +266,7 @@
   cursor: pointer;
 }
 .cal2 .clndr .clndr-today-button:hover {
-  background-color: #ddd;
+  background-color: #b1f5c5;
 }
 .cal2 .multi-month-controls .quarter-button {
   display: inline-block;
@@ -369,7 +369,7 @@
   cursor: pointer;
 }
 .cal3 .clndr .clndr-today-button:hover {
-  background-color: #ddd;
+  background-color: #b1f5c5;
 }
 .cal3 .multi-month-controls .quarter-button {
   display: inline-block;

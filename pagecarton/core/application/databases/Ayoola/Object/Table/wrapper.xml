@@ -23,7 +23,7 @@ border-radius: 3px;color: #1d2129;margin-bottom:1em;  margin-top:1em;&quot;&gt;]
       <TABLE_FIELD FIELD_KEY="wrapper_id"><![CDATA[0-0-4]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1524492934]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="wrapper_label"><![CDATA[Dark Well]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="wrapper_prefix"><![CDATA[&lt;div class=&quot; pc-well &quot; style=&quot;background-color: #333;color: #fff !important;&quot;&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_prefix"><![CDATA[&lt;div class=&quot; pc-well &quot; style=&quot;background-color: #714e12;color: #fff !important;&quot;&gt;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="wrapper_suffix"><![CDATA[&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;]]></TABLE_FIELD>
     </TABLE_ROW>
@@ -32,7 +32,7 @@ border-radius: 3px;color: #1d2129;margin-bottom:1em;  margin-top:1em;&quot;&gt;]
       <TABLE_FIELD FIELD_KEY="wrapper_id"><![CDATA[0-0-6]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1524493652]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="wrapper_label"><![CDATA[White Well]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="wrapper_prefix"><![CDATA[&lt;div class=&quot; pc-well &quot; style=&quot;background-color: #fff;color: #333 !important;&quot;&gt;]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="wrapper_prefix"><![CDATA[&lt;div class=&quot; pc-well &quot; style=&quot;background-color: #fff;color: #f44336 !important;&quot;&gt;]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="wrapper_suffix"><![CDATA[&lt;div style=&quot;clear:both;&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;]]></TABLE_FIELD>
     </TABLE_ROW>

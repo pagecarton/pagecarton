@@ -27,7 +27,7 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]--><link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
-<body style="background-color: #ddd;" data-pc-section-name="body">
+<body style="background-color: #b1f5c5;" data-pc-section-name="body">
 
     <!-- Navigation -->
 <nav id="mainnav" class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-pc-menu-id-list=",bs-example-navbar-collapse-1" data-pc-menu-ul-class-bs-example-navbar-collapse-1="nav navbar-nav navbar-right" data-pc-menu-li-active-class-bs-example-navbar-collapse-1="dropdown" data-pc-menu-li-ul-class-bs-example-navbar-collapse-1="dropdown-menu"><div class="container">

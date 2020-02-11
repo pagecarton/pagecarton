@@ -222,7 +222,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	//	$this->_parameter['markup_template'] = null;
 		if( empty( $_GET['pc_post_list_id'] ) )
 		{
-			$message = array_pop( $this->_badnews ) ? : 'Posts will be displayed here when they become available.';
+			$message = array_pop( $this->_badnews ) ? : 'Your posts will be displayed here.';
 			$message = $this->getParameter( 'badnews' ) ? : $message;
 		}
 		else

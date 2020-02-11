@@ -33,7 +33,7 @@ $_dac83995f15adeba352e9940462f4228 = new Ayoola_Page_Editor_Text( array (
     float: unset;
 }
 .cbp-spmenu-vertical {
-    background-color: #333;
+    background-color: #714e12;
 }
 .header-left {
     float: unset;
