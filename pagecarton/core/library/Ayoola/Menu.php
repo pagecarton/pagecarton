@@ -405,7 +405,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		if( empty( $menu[$this->getIdColumn()] ) || empty( $menu['menu_name'] ) )
 		{ 
 			$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-			$menu = $table->selectOne( null, array( 'menu_name' => $menuName ), array( 'work-arrewfdfound-333' => true ) );
+			$menu = $table->selectOne( null, array( 'menu_name' => array( $menuName, strtolower( $menuName ) ) ), array( 'work-arrewfdfound-333' => true ) );
 			if( empty( $menu[$this->getIdColumn()] ) || empty( $menu['menu_name'] ) )
 			{ 	
 				return false; 
