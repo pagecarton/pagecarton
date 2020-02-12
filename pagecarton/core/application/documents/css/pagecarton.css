@@ -53,7 +53,7 @@ Basic Style
     content: '';
     height: 16px;
     width: 16px;
-    background: url(../img/abstract.jpg) no-repeat center center;
+    background: url(../img/test.png) no-repeat center center;
     vertical-align: middle;
   }
   .cd-breadcrumb.custom-icons li > *::before, .cd-multi-steps.custom-icons li > *::before {
