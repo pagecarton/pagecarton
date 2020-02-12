@@ -31,7 +31,7 @@ class Application_Article_Publisher extends Application_Article_Creator
      * 
      * @var string 
      */
-	protected static $_objectTitle = 'Post New Content'; 
+	protected static $_objectTitle = 'Create a New Post'; 
 
     /**
      * Performs the whole widget running process
