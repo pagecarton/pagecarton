@@ -613,11 +613,11 @@ pc-form button
 
 
 .pc-btn-parent a, .pc-btn, .pc-element-like-btn {
-    background-color: #ccc;
-    border: 1px outset #aaa;
+    background-color: rgb(247, 167, 223);
+    border: 1px outset rgb(255, 175, 224);
     display: inline-block;
     cursor: pointer;
-    color: #000;
+    color: rgba(1, 129, 76, 0.637);
     font-family: 'open_sansregular', sans-serif;
     padding: 8px 60px;
     text-decoration: none;
@@ -810,9 +810,9 @@ pc-form button
 
 .title_bar, .status_bar
 {  
-	background-color:#ebebeb;
+	background-color:#fcbafc;
 	padding: 0.5em;
-	color:#000;
+	color:rgb(2, 82, 15);
  	border-top: 1px solid #ccc;
  	border-right: 1px solid #ccc;
  	border-left: 1px solid #ccc;
@@ -822,7 +822,7 @@ pc-form button
 }
 .title_bar:hover
 {  
-	background-color:#618bd4;
+	background-color:#ddb08c;
 }
 .status_bar
 {  
@@ -1085,30 +1085,30 @@ a
 
 h1
 {
-    margin-top: 0.8em;
-    margin-bottom: 0.8em; 
+    margin-top: 1em;
+    margin-bottom: 1em; 
 }
 
 h2
+{
+    margin-top: 0.8em;
+    margin-bottom: 0.8em;
+}
+
+h3
+{
+    margin-top: 0.7em;
+    margin-bottom: 0.7em;
+}
+
+p
 {
     margin-top: 0.6em;
     margin-bottom: 0.6em;
 }
 
-h3
-{
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-}
-
-p
-{
-    margin-top: 0.4em;
-    margin-bottom: 0.4em;
-}
-
 ul {
-    padding-left: 3em;
+    padding-left: 4em;
 }  
  
 /* TABLE */
