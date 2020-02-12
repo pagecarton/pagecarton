@@ -63,7 +63,7 @@ class Application_Article_Type_View extends PageCarton_Widget
 				$data['update_url'] = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Editor/?post_type_id=' . $data['post_type_id'] . '';
 				$data['delete_url'] = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Delete/?post_type_id=' . $data['post_type_id'] . '';
 				@$data['category_label'] = $data['post_type'] ? : $data['category_label'];
-				$html = '<div  class="pc_theme_parallax_background" style="background:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $data['cover_photo'] ) . '\');  ">';
+				$html = '<div  class="pc_theme_parallax_background" style="background:     linear-gradient(      rgba(0, 0.6, 0.5, 0.2),      rgba(0, 0.2, 0.4, 1)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $data['cover_photo'] ) . '\');  ">';
 				$html .= '<h1>' . $data['category_label'] . '</h1>';
 			//    $html .= $data['category_description'] ? '<br><br><p>' . $data['category_description'] . '</p>' : null;
 				$html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;">

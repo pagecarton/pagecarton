@@ -25,7 +25,7 @@ Basic Style
   }
   .cd-breadcrumb li::after, .cd-multi-steps li::after {
     /* this is the separator between items */
-    display: inline-block;
+    display: flex;
     content: '\00bb';
     margin: 0 .6em;
     color: #959fa5;
@@ -53,7 +53,7 @@ Basic Style
     content: '';
     height: 16px;
     width: 16px;
-    background: url(../img/cd-custom-separator.svg) no-repeat center center;
+    background: url(../img/abstract.jpg) no-repeat center center;
     vertical-align: middle;
   }
   .cd-breadcrumb.custom-icons li > *::before, .cd-multi-steps.custom-icons li > *::before {
@@ -254,7 +254,7 @@ Basic Style
       top: 3px;
     }
     .cd-multi-steps.text-bottom li > * {
-      padding-top: 20px;
+      padding-top: 15px;
     }
     .cd-multi-steps.text-bottom li > *::before {
       /* this is the spot indicator */
@@ -565,7 +565,8 @@ pc-form button
 {
 	border: 0;
 	margin: 0;
-	padding: 0;
+  padding: 0;
+  background-color: green;
 }
 
 .pc-form2 label
