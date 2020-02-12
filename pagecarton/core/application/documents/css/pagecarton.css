@@ -53,7 +53,7 @@ Basic Style
     content: '';
     height: 16px;
     width: 16px;
-    background: url(../img/test.png) no-repeat center center;
+    background: url(../img/cd-custom-separator.svg) no-repeat center center;
     vertical-align: middle;
   }
   .cd-breadcrumb.custom-icons li > *::before, .cd-multi-steps.custom-icons li > *::before {
@@ -566,7 +566,7 @@ pc-form button
 	border: 0;
 	margin: 0;
   padding: 0;
-  background-color: green;
+   
 }
 
 .pc-form2 label
