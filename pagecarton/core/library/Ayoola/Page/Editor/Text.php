@@ -562,7 +562,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
             {
                 continue;
             }
-            $object[$each] = str_ireplace( '></', '>&nbsp;</', $object[$each] );
+        //    $object[$each] = str_ireplace( '></', '>&nbsp;</', $object[$each] );
         }
 
 		if( ! @$object['codes'] )
