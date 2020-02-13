@@ -58,7 +58,7 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
 	// 	var_export( $userInfo ); 
 
 		$style = 'min-width:25%;max-width:50%;line-height:2em;display:inline-block;';
-		$header = $style . 'font-weight:bold;';
+		$header = $style . 'font-weight:bold;background-color:blue;';
 		
 		//	Account Information
 /* 

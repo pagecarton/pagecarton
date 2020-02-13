@@ -56,7 +56,7 @@
       <TABLE_FIELD FIELD_KEY="template_id"><![CDATA[1077-0-4]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="template_label"><![CDATA[Items List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;div class=&quot;grid_1_of_4 images_1_of_4&quot;&gt;
-					 &lt;h4&gt;&lt;a style=&quot; background-color: transparent !important; color: #E44F2B  !important; padding-bottom: 5px; font-size: 16px; &quot; href=&quot;{{{post_link}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/h4&gt;
+					 &lt;h4&gt;&lt;a style=&quot; background-color: transparent !important; color: aqua  !important; padding-bottom: 5px; font-size: 16px; &quot; href=&quot;{{{post_link}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/h4&gt;
 					  &lt;a style=&quot; background-color: transparent !important; &quot; href=&quot;{{{post_link}}}&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;{{{document_url_cropped}}}&quot;&gt;&lt;/a&gt;
 					  &lt;div class=&quot;price-details&quot;&gt;  
 				       &lt;div class=&quot;price-number&quot;&gt;
