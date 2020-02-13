@@ -53,7 +53,7 @@ class Application_Personalization extends Ayoola_Abstract_Table
 	//	array( 'Ayoola_Access_AccountRequired' => array( 'legend' => 'Sign in or sign up', 'parameters' => array( 'ignore_user_check' => true  ) ) ),
 	//	array( 'Ayoola_Access_UpgradeSelf' => null ),
 		array( 'Application_Settings_Editor' => array( 'legend' => '', 'parameters' => array( 'settingsname_name' => 'SiteInfo' ) ) ),
-		array( 'Application_User_AdminCreator' => array( 'legend' => 'Create the first Admin Account', 'parameters' => null ) ),
+		array( 'Application_User_AdminCreator' => array( 'legend' => 'Create your account as an Admin', 'parameters' => null ) ),
 	//	array( 'Application_Settings_Editor' => array( 'legend' => '', 'parameters' => array( 'settingsname_name' => 'Page' ) ) ),
 	//	array( 'Application_Settings_Editor' => array( 'legend' => 'Your website contact information', 'parameters' => array( 'settingsname_name' => 'CompanyInformation' ) ) ),
 //		array( 'Application_Settings_Editor' => array( 'legend' => 'Your website contact information', 'parameters' => array( 'settingsname_name' => 'SocialMedia' ) ) ),

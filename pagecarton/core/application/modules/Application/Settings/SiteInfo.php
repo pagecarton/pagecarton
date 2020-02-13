@@ -96,8 +96,8 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
 		
 		//	Company Info
 		$fieldset = new Ayoola_Form_Element;
-		$fieldset->addElement( array( 'name' => 'site_headline', 'placeholder' => 'E.g. My Web', 'label' => 'Headline', 'value' => @$settings['site_headline'], 'type' => 'InputText' ) );
-		$fieldset->addElement( array( 'name' => 'site_description', 'label' => 'Description', 'placeholder' => 'What is this site about?', 'value' => @$settings['site_description'], 'type' => 'TextArea' ) );
+		$fieldset->addElement( array( 'name' => 'site_headline', 'placeholder' => 'E.g. My Web', 'label' => 'Your headline', 'value' => @$settings['site_headline'], 'type' => 'InputText' ) );
+		$fieldset->addElement( array( 'name' => 'site_description', 'label' => 'Describe your site', 'placeholder' => 'Tell us about your site?', 'value' => @$settings['site_description'], 'type' => 'TextArea' ) );
 
     //    var_export();
 
@@ -110,8 +110,8 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
 
         $options = Ayoola_Page_Layout_Repository::getMenuOptions();
   //      var_export( $options );
-		$fieldset->addElement( array( 'name' => 'site_type', 'label' => 'Theme Type', 'value' => @$settings['site_type'], 'type' => 'Select' ), array( '' => 'Generic' ) + array_column( $options, 'title', 'category_name' ) ? : array() );
-		$fieldset->addLegend( 'Site Information' );  
+		$fieldset->addElement( array( 'name' => 'site_type', 'label' => 'Choose your choicest Theme', 'value' => @$settings['site_type'], 'type' => 'Select' ), array( '' => 'Generic' ) + array_column( $options, 'title', 'category_name' ) ? : array() );
+		$fieldset->addLegend( 'Website Information' );  
 		$form->addFieldset( $fieldset );
 		
 	//	$form->addFieldset( $fieldset );
