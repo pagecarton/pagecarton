@@ -50,11 +50,11 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             //  may be the cause of cache clearing every time
         //    Application_Personalization::viewInLine();
             $stages = array(
-                array( 'key' => 'Basic Information', 'title' => 'Set site basic information', 'class' => 'Application_Personalization' ),
-                array( 'key' => 'Browse Themes', 'title' => 'Choose from hundreds of great themes for your site', 'class' => 'Ayoola_Page_Layout_Repository' ),
+                array( 'key' => 'Basic Meta information', 'title' => 'Set site basic information', 'class' => 'Application_Personalization' ),
+                array( 'key' => 'Browse Available Themes', 'title' => 'Choose from hundreds of great themes for your site', 'class' => 'Ayoola_Page_Layout_Repository' ),
                 array( 'key' => 'Choose a Theme', 'title' => 'Make a theme the default site theme', 'class' => 'Ayoola_Page_Settings' ),
-                array( 'key' => 'Create Content', 'title' => 'Replace dummy text content', 'class' => 'Ayoola_Page_Layout_ReplaceText' ),
-                array( 'key' => 'Update Images', 'title' => 'Change some theme dummy pictures', 'class' => 'Ayoola_Page_Layout_Images' ),
+                array( 'key' => 'Create Creative Content', 'title' => 'Replace dummy text content', 'class' => 'Ayoola_Page_Layout_ReplaceText' ),
+                array( 'key' => 'Update Images', 'title' => 'Change some lettering text', 'class' => 'Ayoola_Page_Layout_Images' ),
                 array( 'key' => 'Start Publishing', 'title' => 'Start building up the site by adding some structured posts', 'class' => 'Application_Article_Publisher' ),
                 array( 'key' => 'Share Website', 'title' => 'Your are done building your site. Next is to share with the world with social tools', 'class' => 'Application_Share_Website' ),
             );
@@ -128,7 +128,7 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             if( Ayoola_Loader::loadClass( $class ) )
             {
                $this->setViewContent( '<div style="text-align:center;">
-               Step ' . ( $weAreOn ) . ' of ' . count( $stages ) . ' <br><br>
+               Step ' . ( $weAreOn ) . ' in ' . count( $stages ) . ' <br><br>
                ' . $xT[$class]['title'] . ' <br><br>
                 <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;"> <i  style="margin:5px;" class="fa fa-external-link"></i> ' . $xT[$class]['key'] . '</a><br><br>
                 <a style="font-size:x-small;" class="" href="' . Ayoola_Application::getUrlPrefix() . '/" target="_blank"> <i  style="margin:5px;" class="fa fa-external-link"></i> Preview Site </a><br><br>
