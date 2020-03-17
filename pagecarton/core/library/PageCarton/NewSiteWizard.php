@@ -51,7 +51,7 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
         //    Application_Personalization::viewInLine();
             $stages = array(
                 array( 'key' => 'Basic Information', 'title' => 'Set site basic information', 'class' => 'Application_Personalization' ),
-                array( 'key' => 'Browse Themes', 'title' => 'Choose from hundreds of great themes for your site', 'class' => 'Ayoola_Page_Layout_Repository' ),
+                array( 'key' => '<i><strong>Browse Themes<strong></i>', 'title' => 'Choose from hundreds of awesome themes for your website', 'class' => 'Ayoola_Page_Layout_Repository' ),
                 array( 'key' => 'Choose a Theme', 'title' => 'Make a theme the default site theme', 'class' => 'Ayoola_Page_Settings' ),
                 array( 'key' => 'Create Content', 'title' => 'Replace dummy text content', 'class' => 'Ayoola_Page_Layout_ReplaceText' ),
                 array( 'key' => 'Update Images', 'title' => 'Change some theme dummy pictures', 'class' => 'Ayoola_Page_Layout_Images' ),

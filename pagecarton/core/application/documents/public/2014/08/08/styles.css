@@ -61,8 +61,8 @@
 }
 .cssmenuHorizontalWhite > ul li.dropdown > a.active,
 .cssmenuHorizontalWhite > ul li.dropdown > a:hover {
-  background: #d80041 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAA4CAYAAADevImVAAAAOElEQVQ4je3L2wkAMAxCUYd2ADe3H31A00xQPJAfLwFJkXQ5AQBKnOO24j1GRPzJtvxSF9V9nnEAsK9GIS4GfgUAAAAASUVORK5CYII=") no-repeat;
-  background-color: #d80041; 
+  background: #FFBABA url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAA4CAYAAADevImVAAAAOElEQVQ4je3L2wkAMAxCUYd2ADe3H31A00xQPJAfLwFJkXQ5AQBKnOO24j1GRPzJtvxSF9V9nnEAsK9GIS4GfgUAAAAASUVORK5CYII=") no-repeat;
+  background-color: #FFBABA; 
   background-position: 90% 195%;
 }
 .cssmenuHorizontalWhite > ul li a {
@@ -74,8 +74,8 @@
 }
 .cssmenuHorizontalWhite > ul li a.active,
 .cssmenuHorizontalWhite > ul li a:hover {
-  background: #d80041;
-  color: #fff;
+  background: #FFBABA;
+  color: rgb(17, 17, 17);
   text-shadow: 0px 1px 0px #000;
 }
 @media (max-width: 600px) {
@@ -90,7 +90,7 @@
      background-position: 95% -35%;
   }
   .cssmenuHorizontalWhite > ul li#responsive-tab a:hover {
-    background-color: #d80041;
+    background-color: #FFBABA;
     background-position: 95% 135%;
   }
   .cssmenuHorizontalWhite > ul li {
