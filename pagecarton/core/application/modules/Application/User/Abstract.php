@@ -93,7 +93,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		$userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
 		$userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
 		$userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
-		$response = $userTable->select( null, array( 'access_level' => 99 ), array( 'disable_cache' => true ) );
+		$response = $userTable->select( null, $where + array( 'access_level' => 99 ), array( 'disable_cache' => true ) );
 		return $response;
     } 
 	

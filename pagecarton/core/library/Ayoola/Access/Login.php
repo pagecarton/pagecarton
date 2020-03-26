@@ -288,14 +288,23 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
     public static function localLogin( array & $values )
     {
 		// Find user in the LocalUser table
-		$table = Ayoola_Access_LocalUser::getInstance();
+        $table = Ayoola_Access_LocalUser::getInstance();
+
+        if( $values['email'] )
+        {
+            $values['auth_mechanism'] = 'EmailPassword';
+        }
 
 		//	Retrieve the password hash
 		$access = new Ayoola_Access();
 		$hashedCredentials = $access->hashCredentials( $values );
 	//	$table->drop();
 	//	self::v( $table->select() );
-	//	var_export( $hashedCredentials );
+        if( empty( $hashedCredentials ) )
+        {
+            return false;
+        }
+    //    var_export( $values );
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
 		if( $info = $table->selectOne( null, array_map( 'strtolower', $hashedCredentials ) ) )
 		{
