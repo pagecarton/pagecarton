@@ -296,11 +296,15 @@ class Application_User_Creator extends Application_User_Abstract
 			}
 	//		var_export( $values );  
 	//		var_export( $loginResponse );  
-	//		exit();
+    //		exit();
+            if( strpos( $urlToGo, '//') === false )
+            {
+                $urlToGo = Ayoola_Application::getUrlPrefix() . $urlToGo;
+            }
 			
 			if( $urlToGo && ! Ayoola_Application::isXmlHttpRequest() && ! $this->getParameter( 'no_redirect' )  )
 			{
-				header( 'Location: ' . Ayoola_Application::getUrlPrefix() . $urlToGo );
+				header( 'Location: ' . $urlToGo );
 				exit();
 			}
 			$this->setViewContent( self::__( '<div id="ayoola-js-redirect-whole-page"></div>' ) );
@@ -449,7 +453,7 @@ class Application_User_Creator extends Application_User_Abstract
 			return false;
 		}
 		
-		$this->_userId = (int) $this->getDbTable()->insertId(); // stage 1 - get user_id
+		$this->_userId = (int) $this->getDbTable()->insertId(); // stage 1 - get ƒƒ
 		$this->insertId = $this->_userId;
 		
 		$values2 = array( 'user_id' => $this->_userId, 'code' => $this->getActivationCode() ); // Input the server values and constants

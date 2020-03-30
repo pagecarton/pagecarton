@@ -168,7 +168,7 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 		
 		$newInfo = $userInfo;
 		unset( $newInfo['password'] );
-		$defaultUserInfo = array( 'user_id' => microtime( true ), );
+		$defaultUserInfo = array( 'user_id' => strval( microtime( true ) ), );
 		$newInfo = array_merge( $defaultUserInfo, $newInfo ? : array() );      
 		//	
  		try
