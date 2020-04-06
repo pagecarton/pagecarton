@@ -46,7 +46,8 @@ DEVELOPING FOR PAGECARTON
 
 When you need new functionality for your PageCarton site, search for existing
 contributed modules. Create new custom modules only when nothing existing 
-comes close to what you need.
+comes close to what you need. Always remember, being creative is part of being
+a developer.
 
 MORE INFORMATION
 ----------------
