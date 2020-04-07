@@ -463,9 +463,10 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 				$api = 'Application_Subscription_Checkout_' . $each['checkoutoption_name'];
 			//	$options[$key]['checkoutoption_logo'] = $each['checkoutoption_logo'] . htmlspecialchars( '<br />' );
 				$options[$key]['checkoutoption_logo'] = '<div style="max-width:210px; margin: 0 1em 0 1em; display:inline-block">' . ( $each['checkoutoption_logo'] ? : $each['checkoutoption_name'] ) . '</div>';     
+		    //	self::v( $api );
 				if( Ayoola_Loader::loadClass( $api ) )
 				{ 
-					if( ! $api::isValidCurrency() ){ unset( $options[$key] ); }
+				//	if( ! $api::isValidCurrency() ){ unset( $options[$key] ); }
 				}
 				if( $allowedOptions && ! in_array( $each['checkoutoption_name'], $allowedOptions ) )
 				{ 
