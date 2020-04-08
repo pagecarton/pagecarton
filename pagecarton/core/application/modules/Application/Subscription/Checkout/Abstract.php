@@ -81,7 +81,7 @@ abstract class Application_Subscription_Checkout_Abstract extends Application_Su
 		//	We don't allow editing UNIQUE Keys
 		if( is_null( $values ) )
 		{		
-			$fieldset->addElement( array( 'name' => 'checkoutoption_name', 'description' => 'Give this chekout option a name', 'type' => 'InputText', 'value' => @$values['checkoutoption_name'] ) );
+			$fieldset->addElement( array( 'name' => 'checkoutoption_name', 'label' => 'Checkout Option Name', 'type' => 'InputText', 'value' => @$values['checkoutoption_name'] ) );
 		}
 		Application_Javascript::addFile( '/js/objects/ckeditor/ckeditor.js?x=1' );
 		Application_Javascript::addCode 
@@ -218,7 +218,8 @@ abstract class Application_Subscription_Checkout_Abstract extends Application_Su
 				)' 
 			);
 		}		
-		$fieldset->addElement( array( 'name' => 'checkoutoption_logo', 'label' => 'Acceptance Logo', 'description' => 'HTML for checkout option acceptance logo', 'type' => 'TextArea', 'value' => @$values['checkoutoption_logo'] ) );
+        $fieldset->addElement( array( 'name' => 'logo', 'label' => 'Checkout option logo', 'type' => 'Document', 'value' => @$values['logo'] ) );
+	//	$fieldset->addElement( array( 'name' => 'checkoutoption_logo', 'label' => 'Acceptance Logo', 'description' => 'HTML for checkout option acceptance logo', 'type' => 'TextArea', 'value' => @$values['checkoutoption_logo'] ) );
 		$type = @$_REQUEST['checkout_type'] ? : @$values['checkout_type'];
 		switch( $type )
 		{			
@@ -226,7 +227,7 @@ abstract class Application_Subscription_Checkout_Abstract extends Application_Su
 			//	$fieldset->addElement( array( 'name' => 'object_name', 'description' => 'Which object will play this checkout option', 'type' => 'InputText', 'value' => 'Application_Subscription_Checkout_HttpPost' ) );
 			break;               
 			default:
-				$fieldset->addElement( array( 'name' => 'object_name', 'description' => 'Which object will play this checkout option', 'type' => 'InputText', 'value' => @$values['object_name'] ) );
+				$fieldset->addElement( array( 'name' => 'object_name', 'label' => 'Widget Classname', 'type' => 'InputText', 'value' => @$values['object_name'] ) );
 			break;
 		}
 //		$fieldset->addRequirement( 'object_name', array( 'InArray' => array_keys( $list )  ) );

@@ -85,7 +85,6 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
     {		
 		//	Initialize array for the POST parameters
 		$parameters = array();
-	//	self::$_apiName = self::$_apiName ? : ( $this->getParameter( 'checkoutoption_name' ) ? : array_pop( explode( '_', get_class( $this ) ) ) );
 		$parameters['notify_url'] = '' . Ayoola_Page::getRootUrl() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Callback/api/' . self::$_apiName . '/order_id/' . Application_Subscription_Checkout::getOrderNumber( '' . self::$_apiName . '' ) . '/';
 		$parameters['success_url'] = '' . Ayoola_Page::getRootUrl() .  '/widgets/Application_Subscription_Checkout_Confirmation/api/' . self::$_apiName . '/status/1/';
 		$parameters['fail_url'] = '' . Ayoola_Page::getRootUrl() .  '/widgets/Application_Subscription_Checkout_Confirmation/api/' . self::$_apiName . '/status/0/';

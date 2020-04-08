@@ -1357,17 +1357,25 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		{
 	//		$value = $this->fakeValues[$name];
 		}
-		if( isset( $_REQUEST[$name] ) )
+		if( isset( $_POST[$name] ) )
+		{
+			$value = $_POST[$name];
+		}
+		elseif( isset( $_POST[Ayoola_Form::hashElementName( $name )] ) )
+		{
+			$value = $_POST[Ayoola_Form::hashElementName( $name )]; 
+		}
+		elseif( $defaultValue )
+		{
+	//		$value = $defaultValue;
+		}
+		elseif( isset( $_REQUEST[$name] ) )
 		{
 			$value = $_REQUEST[$name];
 		}
 		elseif( isset( $_REQUEST[Ayoola_Form::hashElementName( $name )] ) )
 		{
 			$value = $_REQUEST[Ayoola_Form::hashElementName( $name )]; 
-		}
-		elseif( $defaultValue )
-		{
-	//		$value = $defaultValue;
 		}
 
 		if( $value === false && ! $ignoreSessionValues )

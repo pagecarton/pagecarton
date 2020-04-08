@@ -461,9 +461,9 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			foreach( $options as $key => $each )
 			{
 				$api = 'Application_Subscription_Checkout_' . $each['checkoutoption_name'];
-			//	$options[$key]['checkoutoption_logo'] = $each['checkoutoption_logo'] . htmlspecialchars( '<br />' );
-				$options[$key]['checkoutoption_logo'] = '<div style="max-width:210px; margin: 0 1em 0 1em; display:inline-block">' . ( $each['checkoutoption_logo'] ? : $each['checkoutoption_name'] ) . '</div>';     
-		    //	self::v( $api );
+                $options[$key]['checkoutoption_logo'] = $each['checkoutoption_logo'] 
+                    ? ( '<div style="max-width:210px; margin: 0 1em 0 1em; display:inline-block">' . ( $each['checkoutoption_logo'] ? : $each['checkoutoption_name'] ) . '</div>' ) 
+                    : ( '<img height="100" src="' . Ayoola_Application::getUrlPrefix() . '' . $each['logo'] . '" alt="' . $each['checkoutoption_name'] . '">' );     
 				if( Ayoola_Loader::loadClass( $api ) )
 				{ 
 				//	if( ! $api::isValidCurrency() ){ unset( $options[$key] ); }
