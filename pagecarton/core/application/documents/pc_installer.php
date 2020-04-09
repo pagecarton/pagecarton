@@ -28,7 +28,9 @@ defined('PS') || define('PS', PATH_SEPARATOR);
 /**
  * the document root of the server
  */
-$home = dirname(__FILE__); //  Let doc_root default to current directory
+$cwd = dirname( __FILE__ ); //  Let doc_root default to current directory
+$home = $cwd;
+$docRoot = $cwd;
 
 // Now, set the real doc root
 if (!empty($_SERVER['DOCUMENT_ROOT'])) {
@@ -112,7 +114,7 @@ defined('APPLICATION_DIR') || define('APPLICATION_DIR', $newDir2);
 //    look for this path prefix dynamically
 
 $currentDir = explode('/', str_replace(array('/', '\\'), '/', dirname($_SERVER['SCRIPT_FILENAME'])));
-$tempDir    = explode('/', str_replace(array('/', '\\'), '/', rtrim($home, '/\\')));
+$tempDir    = explode('/', str_replace(array('/', '\\'), '/', rtrim( $docRoot, '/\\')));
 
 $prefix = null;
 if ($currentDir !== $tempDir) {
