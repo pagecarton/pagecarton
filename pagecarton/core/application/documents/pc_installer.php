@@ -92,11 +92,6 @@
 
     $currentDir = explode( '/', str_replace( array( '/', '\\' ), '/', dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
     $tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $home, '/\\' ) ) );   
-
-//	var_export( $currentDir );
-//	var_export( $baseAppPath );
-//	var_export( $tempDir );
-//	exit;
 	$prefix = null;
 	if( $currentDir !== $tempDir )
 	{
