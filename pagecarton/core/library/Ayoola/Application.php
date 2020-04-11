@@ -523,10 +523,10 @@ class Ayoola_Application
 				{
 					if( ! is_dir( $domainDir ) )
 					{
-						mkdir( $domainDir, 0700, true );
-						Ayoola_Doc::recursiveCopy( $oldDomainDir, $domainDir );
+					//	mkdir( $domainDir, 0700, true );
+					//	Ayoola_Doc::recursiveCopy( $oldDomainDir, $domainDir );
 					}
-					rename( $oldDomainDir, $oldDomainDir . '.old.' . time() );
+				//	rename( $oldDomainDir, $oldDomainDir . '.old.' . time() );
 				}
 
 				$customDir = null;
@@ -547,9 +547,9 @@ class Ayoola_Application
 					{
 						if( is_dir( $oldCustomDir ) )
 						{
-							mkdir( $customDir, 0700, true );
-							Ayoola_Doc::recursiveCopy( $oldCustomDir, $customDir );
-							rename( $oldCustomDir, $oldCustomDir . '.old' );
+						//	mkdir( $customDir, 0700, true );
+						//	Ayoola_Doc::recursiveCopy( $oldCustomDir, $customDir );
+						//	rename( $oldCustomDir, $oldCustomDir . '.old' );
 						}
 					}
 					else

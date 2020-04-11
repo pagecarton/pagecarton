@@ -139,8 +139,8 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 
 			//	auto creating directories. Making multiple sites dir
 		//	mkdir( $newPath, 0777, true );
-			Ayoola_Doc::recursiveCopy( $oldPath, $newPath );
-			rename( $oldPath, $oldPath . '.old' );
+		//	Ayoola_Doc::recursiveCopy( $oldPath, $newPath );
+		//	rename( $oldPath, $oldPath . '.old' );
 	//		$pathToUse = $newPath;
 		}
 	//	elseif( is_dir( $newPath ) )
