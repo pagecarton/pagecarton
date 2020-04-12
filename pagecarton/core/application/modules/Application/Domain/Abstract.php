@@ -76,6 +76,7 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
     } 
 	
     /**
+     * 
      */
 	public function resetDefaultDomain()
     {
