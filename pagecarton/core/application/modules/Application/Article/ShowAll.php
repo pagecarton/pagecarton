@@ -335,7 +335,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		
 		$this->_xml = '';
 		$allTemplate = '';
-	//	cache_timeout
 		if( ! empty( $_GET['pc_post_list_id'] ) )
 		{
 			$postListId = $_GET['pc_post_list_id'];
@@ -375,9 +374,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$values = $storedValues['values'];
 		}
 
-	//	if( ! $storedValues || ! $this->getParameter( 'cache_post_list' ) )
 		if( ! $values || ! $this->getParameter( 'cache_post_list' ) )
-	//	if( ! $this->getParameter( 'cache_post_list' ) )
 		{   
 
 			//	This ensures that data altered by query strings is uploaded when autoloaded
@@ -401,274 +398,247 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				}
 			}			
 			//	sort
-	//		if( $this->getParameter( 'sort_column' ) )
-			{ 
-                $previousKey = null;
-                $recorded = array();
-				foreach( $values as $key => $data )
-				{
-					unset( $values[$key] );
+            $previousKey = null;
+            $recorded = array();
+            foreach( $values as $key => $data )
+            {
+                unset( $values[$key] );
 
-					//	quick fix for older posts that the dates were not set in the table
-					if( is_array( $data ) && empty( $data['article_creation_date'] ) && empty( $data['profile_modified_date'] ) && ! empty( $data['article_url'] ) )
-					{
-						if( $data = $this->retrieveArticleData( $data ) )
-						{
-							$class = Application_Article_Table::getInstance();
-							$class->update( $data, array( 'article_url' => $data['article_url'] ) );
-						}			
-					}
-					static::sanitizeData( $data );
-					$this->filterData( $data );
-					if( ! $data )
-					{
-						continue;
-					}
-					if( ! empty( $data['true_post_type'] ) || empty( $data['not_real_post'] ) )
-					{
-						if( ! $dataX = $this->retrieveArticleData( $data ) )
-						{
-							continue;
-						}
-
-						//	Some old posts does have titles in the table
-						if( empty( $data['article_title'] ) && ! empty( $dataX['article_title'] ) )
-						{
-							$class = Application_Article_Table::getInstance();
-							$class->update( $dataX, array( 'article_url' => $data['article_url'] ) );
-							$data = $dataX;
-                        }
-                        $data = is_array( $data ) ? $data : array();
-                        $dataX = is_array( $dataX ) ? $dataX : array();
-						$data += $dataX;
-					}
-
-					if( ! is_array( $data ) || ! self::isAllowedToView( $data ) )    
-					{
-						continue;
-					}
-                    $data['post_list_id'] = $postListId;
-
-                    if( ! empty( $recorded[$data['article_url']] ) )
+                //	quick fix for older posts that the dates were not set in the table
+                if( is_array( $data ) && empty( $data['article_creation_date'] ) && empty( $data['profile_modified_date'] ) && ! empty( $data['article_url'] ) )
+                {
+                    if( $data = $this->retrieveArticleData( $data ) )
+                    {
+                        $class = Application_Article_Table::getInstance();
+                        $class->update( $data, array( 'article_url' => $data['article_url'] ) );
+                    }			
+                }
+                static::sanitizeData( $data );
+                $this->filterData( $data );
+                if( ! $data )
+                {
+                    continue;
+                }
+                if( ! empty( $data['true_post_type'] ) || empty( $data['not_real_post'] ) )
+                {
+                    if( ! $dataX = $this->retrieveArticleData( $data ) )
                     {
                         continue;
                     }
-                    
-                    $recorded[$data['article_url']] = true;
 
-                    //	Switch
-					if( $this->getParameter( 'post_switch' ) )
-					{
-						$switches = array_map( 'trim', explode( ',', $this->getParameter( 'post_switch' ) ) );
-						foreach( $switches as $switch )
-						{
-							if( empty( $data[$switch] ) )
-							{
-								continue 2;
-							}
-							$data[$switch] = $switch;
-							$data['post_switch'] = $switch;
-						}
-						
-					}
-					if( $this->getParameter( 'skip_ariticles_without_cover_photo' ) && ! @$data['document_url_base64'] && ( ! Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ? : @$data['display_picture'] ) ) )
-					{
-						//	Post without image is not allowed 
-						continue;
-					}
-					elseif( $this->getParameter( 'skip_ariticles_without_this_key' ) )
-					{
-						$keys = $this->getParameter( 'skip_ariticles_without_this_key' );
-						if( is_string( $keys ) )
-						{
-							$keys = array_map( 'trim', explode( ',', $keys ) );
-						}
-						foreach( $keys as $eachKey )
-						{
-							if( ! @$data[$eachKey] )
-							{
-								//	Post without this is not allowed 
-								continue 2;
-							}
-						}
-					}
-					elseif( $this->getParameter( 'show_posts_without_this_key' ) )
-					{
-						$keys = $this->getParameter( 'show_posts_without_this_key' );
-						if( is_string( $keys ) )
-						{
-							$keys = array_map( 'trim', explode( ',', $keys ) );
-						}
-						foreach( $keys as $eachKey )
-						{
-							if( @$data[$eachKey] )
-							{
-								//	Post with this is not allowed 
-								continue 2;
-							}
-						}
-					}
-					if( ( time() - $data['article_creation_date'] ) < ( $this->getParameter( 'time_span_for_new_badge' ) ? : 2592000 ) )
-					{
-						$data['new_badge'] = $this->getParameter( 'new_badge' ) ? : 'New';
+                    //	Some old posts does have titles in the table
+                    if( empty( $data['article_title'] ) && ! empty( $dataX['article_title'] ) )
+                    {
+                        $class = Application_Article_Table::getInstance();
+                        $class->update( $dataX, array( 'article_url' => $data['article_url'] ) );
+                        $data = $dataX;
+                    }
+                    $data = is_array( $data ) ? $data : array();
+                    $dataX = is_array( $dataX ) ? $dataX : array();
+                    $data += $dataX;
+                }
 
-					}
-					if( ! empty( $data['true_post_type'] ) || empty( $data['not_real_post'] ) )
-					{
+                if( ! is_array( $data ) || ! self::isAllowedToView( $data ) )    
+                {
+                    continue;
+                }
+                $data['post_list_id'] = $postListId;
 
-						
-						if( $this->getParameter( 'price_lower_limit' ) && floatval( @$data['item_price'] ) <= floatval( $this->getParameter( 'price_lower_limit' ) ) )
-						{
-							//	freebies 
-							continue;
-						}
-						if( $this->getParameter( 'price_upper_limit' ) && floatval( @$data['item_price'] ) >= floatval( $this->getParameter( 'price_upper_limit' ) ) )
-						{
-							//	freebies 
-							continue;
-						}
-                    //	self::v( $data['new_badge'] );
-                    
-                        
-                        if( $this->getParameter( 'use_datetime' ) || $data['true_post_type'] == 'event' )
+                if( ! empty( $recorded[$data['article_url']] ) )
+                {
+                    continue;
+                }
+                
+                $recorded[$data['article_url']] = true;
+
+                //	Switch
+                if( $this->getParameter( 'post_switch' ) )
+                {
+                    $switches = array_map( 'trim', explode( ',', $this->getParameter( 'post_switch' ) ) );
+                    foreach( $switches as $switch )
+                    {
+                        if( empty( $data[$switch] ) )
                         {
+                            continue 2;
+                        }
+                        $data[$switch] = $switch;
+                        $data['post_switch'] = $switch;
+                    }
+                    
+                }
+                if( $this->getParameter( 'skip_ariticles_without_cover_photo' ) && ! @$data['document_url_base64'] && ( ! Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ? : @$data['display_picture'] ) ) )
+                {
+                    //	Post without image is not allowed 
+                    continue;
+                }
+                elseif( $this->getParameter( 'skip_ariticles_without_this_key' ) )
+                {
+                    $keys = $this->getParameter( 'skip_ariticles_without_this_key' );
+                    if( is_string( $keys ) )
+                    {
+                        $keys = array_map( 'trim', explode( ',', $keys ) );
+                    }
+                    foreach( $keys as $eachKey )
+                    {
+                        if( ! @$data[$eachKey] )
+                        {
+                            //	Post without this is not allowed 
+                            continue 2;
+                        }
+                    }
+                }
+                elseif( $this->getParameter( 'show_posts_without_this_key' ) )
+                {
+                    $keys = $this->getParameter( 'show_posts_without_this_key' );
+                    if( is_string( $keys ) )
+                    {
+                        $keys = array_map( 'trim', explode( ',', $keys ) );
+                    }
+                    foreach( $keys as $eachKey )
+                    {
+                        if( @$data[$eachKey] )
+                        {
+                            //	Post with this is not allowed 
+                            continue 2;
+                        }
+                    }
+                }
+                if( ( time() - $data['article_creation_date'] ) < ( $this->getParameter( 'time_span_for_new_badge' ) ? : 2592000 ) )
+                {
+                    $data['new_badge'] = $this->getParameter( 'new_badge' ) ? : 'New';
+
+                }
+                if( ! empty( $data['true_post_type'] ) || empty( $data['not_real_post'] ) )
+                {
+
+                    
+                    if( $this->getParameter( 'price_lower_limit' ) && floatval( @$data['item_price'] ) <= floatval( $this->getParameter( 'price_lower_limit' ) ) )
+                    {
+                        //	freebies 
+                        continue;
+                    }
+                    if( $this->getParameter( 'price_upper_limit' ) && floatval( @$data['item_price'] ) >= floatval( $this->getParameter( 'price_upper_limit' ) ) )
+                    {
+                        //	freebies 
+                        continue;
+                    }
+                    if( $this->getParameter( 'use_datetime' ) || $data['true_post_type'] == 'event' )
+                    {
+                        if( ! empty( $data['datetime'] ) )
+                        {
+                            $data['datetime'] = strtotime( $data['datetime'] );
+                            $data['article_creation_date'] = $data['datetime'];		
+                            $data['article_modified_date'] = $data['datetime'];		
+                        }
+                    }
+                    if( $this->getParameter( 'modified_time_representation' ) )
+                    {
+                        if( is_string( $this->getParameter( 'modified_time_representation' ) ) )
+                        {
+                            $timeToShow = array_map( 'trim', explode( ',', $this->getParameter( 'modified_time_representation' ) ) );
+                            $timeToShow = array_combine( $timeToShow, $timeToShow );
+                        }
+                        else
+                        {
+                            $timeToShow = (array) $this->getParameter( 'modified_time_representation' );
+                        }
+                        foreach( $timeToShow as $key => $each )
+                        {
+                            @$data['modified_time_representation_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
+                            @$data['article_modified_date_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
+                            @$data['article_creation_date_' . $key] = date( $each, $data['article_creation_date'] ? : ( time() - 1 ) );
                             if( ! empty( $data['datetime'] ) )
                             {
-                                $data['datetime'] = strtotime( $data['datetime'] );
-                                $data['article_creation_date'] = $data['datetime'];		
-                                $data['article_modified_date'] = $data['datetime'];		
-                            }
-                    //		var_export( $data['article_modified_date'] );
-                        }
-                        if( $this->getParameter( 'modified_time_representation' ) )
-                        {
-                            if( is_string( $this->getParameter( 'modified_time_representation' ) ) )
-                            {
-                                $timeToShow = array_map( 'trim', explode( ',', $this->getParameter( 'modified_time_representation' ) ) );
-                                $timeToShow = array_combine( $timeToShow, $timeToShow );
-                            }
-                            else
-                            {
-                                $timeToShow = (array) $this->getParameter( 'modified_time_representation' );
-                            }
-                            foreach( $timeToShow as $key => $each )
-                            {
-                            //	var_export( date( $each, $data['article_modified_date'] ) );
-                            //	var_export( $key );
-                                @$data['modified_time_representation_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
-                                @$data['article_modified_date_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
-                                @$data['article_creation_date_' . $key] = date( $each, $data['article_creation_date'] ? : ( time() - 1 ) );
-                                if( ! empty( $data['datetime'] ) )
-                                {
-                                    @$data['datetime_' . $key] = date( $each, $data['datetime'] );
-                                //	var_export( $data['datetime_' . $key] );
-                                }
+                                @$data['datetime_' . $key] = date( $each, $data['datetime'] );
                             }
                         }
-                    //    self::v( $data['article_modified_date'] );
-                    //    self::v( $data['article_creation_date'] );
-                            //		var_export( time() );
-                        switch( $this->getParameter( 'post_expiry_time' ) )
-                        {
-                            case 'future':
-                            //	var_export( $data['article_modified_date'] > time() );
-                            //	var_export( $data['article_modified_date'] );
-                        //		var_export( $data['article_title'] );
-                            //	var_export( time() );
-                                if( $data['article_modified_date'] < time() && empty( $data['not_real_post'] ) )
-                                {
-                                    continue 2;
-                                }
-                            break;
-                            case 'past':
-                                if( $data['article_modified_date'] > time() && empty( $data['not_real_post'] ) )
-                                {
-                                    continue 2;
-                                }
-                            break;
-                            default:
-            
-                            break;
-                        }
+                    }
+                    switch( $this->getParameter( 'post_expiry_time' ) )
+                    {
+                        case 'future':
+                            if( $data['article_modified_date'] < time() && empty( $data['not_real_post'] ) )
+                            {
+                                continue 2;
+                            }
+                        break;
+                        case 'past':
+                            if( $data['article_modified_date'] > time() && empty( $data['not_real_post'] ) )
+                            {
+                                continue 2;
+                            }
+                        break;
+                        default:
         
-					//	get number of views
-						self::getViewsCount( $data );
-						if( $this->getParameter( 'get_views_count' ) )
-						{
-							if( ! $this->viewsTable )
-							{
-								$this->viewsTable =  new Application_Article_Views();
-							}
-							$data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ddddddddddddd', 'limit' => $this->getParameter( 'limit_for_views_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_views_count_record_search' ) ? : '10' ) ) );
-						//	set_time_limit( 0 );
-						}
+                        break;
+                    }
+    
+                    //	get number of views
+                    self::getViewsCount( $data );
+                    if( $this->getParameter( 'get_views_count' ) )
+                    {
+                        if( ! $this->viewsTable )
+                        {
+                            $this->viewsTable =  new Application_Article_Views();
+                        }
+                        $data['views_count'] = count( $this->viewsTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ddddddddddddd', 'limit' => $this->getParameter( 'limit_for_views_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_views_count_record_search' ) ? : '10' ) ) );
+                    }
 
-						self::getDownloadCount( $data );
-						//	get number of downloads
-						if( $this->getParameter( 'get_download_count' ) && self::isDownloadable( $data ) )
-						{
-							if( ! $this->downloadTable )
-							{
-								$this->downloadTable =  new Application_Article_Type_Download_Table();
-							}
-							$data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'sssdefwefefs', 'limit' => $this->getParameter( 'limit_for_download_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_download_count_record_search' ) ? : '10' ) ) );
-						//	set_time_limit( 0 );
-						}
-					//	var_export( $data );
-						//	get number of downloads
-						self::getAudioPlayCount( $data );
-						if( $this->getParameter( 'get_audio_play_count' ) && $data['true_post_type'] == 'audio' )
-						{   
-							if( ! $this->audioTable )
-							{
-								$this->audioTable =  new Application_Article_Type_Audio_Table();
-							}
-							$data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
-						//	set_time_limit( 0 );
-						}
-						self::getCommentsCount( $data );
-					//	self::v( $data['comments_count'] );
-						if( $this->getParameter( 'get_comment_count' ) )
-						{   
-							if( ! $this->commentTable )
-							{
-								$this->commentTable =  new Application_CommentBox_Table();
-							}
-							$data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
-						//	set_time_limit( 0 );
-						}
-					//	self::v( $data['comments_count'] );
-					//	exit();
-						$data['engagement_count'] = intval( $data['download_count'] ) + intval( $data['views_count'] ) + intval( $data['comments_count'] ) + intval( $data['audio_play_count'] );
+                    self::getDownloadCount( $data );
+                    //	get number of downloads
+                    if( $this->getParameter( 'get_download_count' ) && self::isDownloadable( $data ) )
+                    {
+                        if( ! $this->downloadTable )
+                        {
+                            $this->downloadTable =  new Application_Article_Type_Download_Table();
+                        }
+                        $data['download_count'] = count( $this->downloadTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'sssdefwefefs', 'limit' => $this->getParameter( 'limit_for_download_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_download_count_record_search' ) ? : '10' ) ) );
+                    }
+                    //	get number of downloads
+                    self::getAudioPlayCount( $data );
+                    if( $this->getParameter( 'get_audio_play_count' ) && $data['true_post_type'] == 'audio' )
+                    {   
+                        if( ! $this->audioTable )
+                        {
+                            $this->audioTable =  new Application_Article_Type_Audio_Table();
+                        }
+                        $data['audio_play_count'] = count( $this->audioTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
+                    }
+                    self::getCommentsCount( $data );
+                    if( $this->getParameter( 'get_comment_count' ) )
+                    {   
+                        if( ! $this->commentTable )
+                        {
+                            $this->commentTable =  new Application_CommentBox_Table();
+                        }
+                        $data['comments_count'] = count( $this->commentTable->select( null, array( 'article_url' => $data['article_url'] ), array( 'ssss' => 'ssss', 'limit' => $this->getParameter( 'limit_for_audio_play_count' ) ? : '99', 'record_search_limit' => $this->getParameter( 'limit_for_audio_play_count_record_search' ) ? : '10' ) ) );
+                    }
+                    $data['engagement_count'] = intval( $data['download_count'] ) + intval( $data['views_count'] ) + intval( $data['comments_count'] ) + intval( $data['audio_play_count'] );
 
-						$data['engagement_count_total'] = intval( $data['download_count_total'] ) + intval( $data['views_count_total'] ) + intval( $data['comments_count_total'] ) + intval( $data['audio_play_count_total'] );
+                    $data['engagement_count_total'] = intval( $data['download_count_total'] ) + intval( $data['views_count_total'] ) + intval( $data['comments_count_total'] ) + intval( $data['audio_play_count_total'] );
 
 
 
-						//	don't cache base64 strings of images and download data
-						unset( $data['document_url_base64'] );
-						unset( $data['download_base64'] );  
+                    //	don't cache base64 strings of images and download data
+                    unset( $data['document_url_base64'] );
+                    unset( $data['download_base64'] );  
 
-						if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
-						{
-							$data['true_post_types'] = $postTypeInfo['article_type'];
-							$data['post_type'] = $postTypeInfo['post_type'];
-						}
-						else
-						{
-							$data['true_post_types'] = $data['article_type'];
-							$data['post_type'] = $data['article_type'];
-						}
-					}
-					$values[$key] = $data;
-				}
-			}
-	//		var_export( $singlePostPaginationInfo );
+                    if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
+                    {
+                        $data['true_post_types'] = $postTypeInfo['article_type'];
+                        $data['post_type'] = $postTypeInfo['post_type'];
+                    }
+                    else
+                    {
+                        $data['true_post_types'] = $data['article_type'];
+                        $data['post_type'] = $data['article_type'];
+                    }
+                }
+                $values[$key] = $data;
+            }
+			
 			if( $this->getParameter( 'order_by' ) )
 			{   
 				$values = self::sortMultiDimensionalArray( $values, $this->getParameter( 'order_by' ) );
-	//		self::v( $this->getParameter( 'order_by' ) );
-		//	self::v( array_pop( $values ) );
 			}
 			if( $this->getParameter( 'inverse_order' ) )
 			{   
@@ -677,15 +647,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		
 
 			//	Cache results
-		//	var_export( $this->getParameter( 'markup_template' ) );  
 			$valuesToStore = array( 'values' => $values, 'parameter' => $this->getParameter() );
 
 			// store if it's an independent request
 			if( empty( $_GET['pc_post_list_autoload'] ) )
 			{
-			//	self::v( $valuesToStore );
 				$storage->store( $valuesToStore );
-			//	self::v( $storage->retrieve() );
 			}
 		}
 		$this->_objectTemplateValues['total_no_of_posts'] = count( $values );
@@ -696,8 +663,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$maxWith = $this->getParameter( 'cover_photo_width_for_list' ) ? : ( $this->getParameter( 'cover_photo_width' ) ? : ( @$articleSettings['cover_photo_width'] ? : 600 ) );
 		$maxHeight = $this->getParameter( 'cover_photo_height_for_list' ) ? : ( $this->getParameter( 'cover_photo_height' ) ? : ( @$articleSettings['cover_photo_height'] ? : 300 ) );    
 
-	//	var_export( $values );
-
 		//	calculate  the creator link here because of Application_Article_Publisher
 		//	So it can see $this->_parameter['add_a_new_post_full_url']
 		$where =  $this->_dbWhereClause;
@@ -705,9 +670,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$newArticleType = ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
 		$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
 		@$newArticleTypeToShow = self::getItemName() ? : ( ucfirst( $postTypeInfo['post_type'] ) ? : 'Item' );
-	//		self::v( $newArticleType );
-	//	self::v( $this->_dbWhereClause );
-	//	self::v( $where );
 		$categoryForNewPost = @array_pop( $where['category_name'] );
 		$addNewPostUrl = ( static::$_newPostUrl ? : 
 							( $this->getParameter( 'add_a_new_post_link' ) ? : 
@@ -715,7 +677,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							'/widgets' ) . '/Application_Article_Creator/' )
 							) 
 							) . '?';
-	//	self::v( $addNewPostUrl );
 		if( $newArticleType )
 		{
 			$addNewPostUrl .= '&article_type=' . $newArticleType . '';
@@ -754,13 +715,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
 		if( $howManyPostsToAdd && empty( $_GET['pc_post_list_id'] ) ) 
 		{ 
-			//	var_export();
-
 			$myProfileInfo = Application_Profile_Abstract::getMyDefaultProfile();
 			do
 			{
-		//	self::v( $howManyPostsToAdd );
-		//	self::v( $addNewPostUrl	 );
                 $tempItem = array_pop( $values );
 
 
@@ -770,7 +727,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						'article_url' => $addNewPostUrl . '&pcx=' . rand( 100, 8900 ), 
 						'allow_raw_data' => true, 
 						'not_real_post' => true, 
-					//	'article_type' => $newArticleType, 
 						'always_allow_article' => $this->getParameter( 'article_types' ), 
 						'category_name' => $this->getParameter( 'category_name' ), 
 						'document_url' => $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg', 
@@ -799,22 +755,18 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					);  
 				}
 
-			//	$item ? array_unshift( $values, $item ) : null;
 				$tempItem ? array_push( $values, $tempItem ) : null;
 				$item ? array_push( $values, $item ) : null;
-			//	$tempItem ? array_unshift( $values, $tempItem ) : null;
 			}
 			while( --$howManyPostsToAdd );
 
 		}
-	//	self::v( $values );   
 		$i = 0; //	counter
 		$j = 5; //	5 is our max articles to show
 		if( intval( $this->getParameter( 'add_a_new_post' ) ) > 1 )
 		{
 			$j = $this->getParameter( 'add_a_new_post' );
 		}
-	//	var_export( $this->_viewOption );  
 		$this->_viewOption = intval( $this->_viewOption ) ? : $this->getParameter( 'no_of_post_to_show' );
 		$j = $this->_viewOption ? : $j;
 		$j = is_numeric( @$_GET['no_of_articles_to_show'] ) ? intval( $_GET['no_of_articles_to_show'] ) : $j; 
@@ -824,16 +776,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$j = $this->getParameter( 'add_a_new_post' );
 		}
-	//	var_export( $i );
-	//	var_export( $j );
 		$done = array();
 		$template = null;  
-	//	self::v( $values );   
  		
 		//	Split to chunk\
-	//	$_REQUEST['list_page_number'] = 0;
-	//	self::v( self::$_listCounter );
-	//	self::v( $_REQUEST['list_page_number'] );
 		$offset = 0;
 		$offsetDefined = false;
 		if( is_numeric( @$_REQUEST['list_page_number'] ) )
@@ -853,11 +799,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$offset = $this->getParameter( 'list_page_number_offset' );  
 			$offsetDefined = true;
 		}
-	//	self::v( $_REQUEST['list_page_number'] );
 		
-	//	var_export( $offset );
 		$chunk = array_chunk( $values , $j );
-	//	self::v( $values );  
 		if( @$chunk[$offset] )
 		{
 			$values = $chunk[$offset];
@@ -876,7 +819,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$this->autoLoadNewPosts( $postListId, $offset );
 		if( @$chunk[$offset] )
 		{
-	//		var_export( $offset );
 			$nextPageLink = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . @$offset;
 			$this->_objectTemplateValues['paginator_next_page'] = $nextPageLink;
 			$this->_objectTemplateValues['paginator_next_page_button'] = '<a class="pc-btn" href="' . $nextPageLink . '"> ' . self::__( 'Next' ) . ' &rarr;</a>';       
@@ -890,7 +832,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             $this->_objectTemplateValues['paginator_previous_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . ( @$offset - 2 );
 			$this->_objectTemplateValues['paginator_previous_page_button'] = '<a class="pc-btn" href="' . $this->_objectTemplateValues['paginator_previous_page'] . '">&larr; ' . self::__( 'Previous' ) . '</a>';
 		}
-//		var_export( $offset );
 		if( $offset != 1 )
 		{
 			$this->_objectTemplateValues['paginator_first_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=0';
@@ -914,10 +855,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_objectTemplateValues['pagination'] = $data['pagination'] = $pagination;	
 		}	
 		$this->_objectTemplateValues['post_list_id'] = $postListId;
-	//	self::v( $pagination );  
 		$values = $values ? array_unique( $values, SORT_REGULAR ) : array(); 
-	//	self::v( $values[''] );
-	//	var_export( $values );
         $singlePostPaginationInfo = array();
         $timeFilter = new Ayoola_Filter_Time();
 		while( $values )
