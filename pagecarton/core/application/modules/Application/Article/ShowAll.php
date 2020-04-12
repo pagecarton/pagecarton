@@ -342,7 +342,18 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		else
 		{
-			$postListId = 'pc_post_list_' . md5( serialize( $_GET ) . 'x-----==-.---' . serialize( $this->getParameter() ) );
+
+            $idC = '';
+            if( $this->getParameter() )
+            {
+                $idC .= serialize( $this->getParameter() );
+            }
+            //  pc_module_url_values_post_type_offset
+            if( null !== $this->getParameter( 'allow_dynamic_category_selection' ) || null !== $this->getParameter( 'pc_module_url_values_post_type_offset' ) || null !== $this->getParameter( 'pc_module_url_values_category_offset' )  )
+            {
+                $idC .= serialize( $_GET );
+            }
+			$postListId = 'post-id-' . md5( $idC );
 		}
 
 		$storage = self::getObjectStorage( array( 'id' => $postListId, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
@@ -392,7 +403,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//	sort
 	//		if( $this->getParameter( 'sort_column' ) )
 			{ 
-				$previousKey = null;
+                $previousKey = null;
+                $recorded = array();
 				foreach( $values as $key => $data )
 				{
 					unset( $values[$key] );
@@ -435,16 +447,21 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					{
 						continue;
 					}
-					$data['post_list_id'] = $postListId;
+                    $data['post_list_id'] = $postListId;
+
+                    if( ! empty( $recorded[$data['article_url']] ) )
+                    {
+                        continue;
+                    }
+                    
+                    $recorded[$data['article_url']] = true;
 
                     //	Switch
 					if( $this->getParameter( 'post_switch' ) )
 					{
 						$switches = array_map( 'trim', explode( ',', $this->getParameter( 'post_switch' ) ) );
-				//		var_export( $switches );
 						foreach( $switches as $switch )
 						{
-					//		var_export( $data[$switch] );
 							if( empty( $data[$switch] ) )
 							{
 								continue 2;
@@ -466,17 +483,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						{
 							$keys = array_map( 'trim', explode( ',', $keys ) );
 						}
-					//	var_export( $keys );
 						foreach( $keys as $eachKey )
 						{
 							if( ! @$data[$eachKey] )
 							{
-					//		var_export( $data['article_title'] );
-					//		var_export( $data[$eachKey] );
 								//	Post without this is not allowed 
 								continue 2;
 							}
-						//	var_export( $data[$eachKey] );
 						}
 					}
 					elseif( $this->getParameter( 'show_posts_without_this_key' ) )
@@ -486,20 +499,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						{
 							$keys = array_map( 'trim', explode( ',', $keys ) );
 						}
-					//	var_export( $keys );
 						foreach( $keys as $eachKey )
 						{
 							if( @$data[$eachKey] )
 							{
-					//		var_export( $data['article_title'] );
-					//		var_export( $data[$eachKey] );
 								//	Post with this is not allowed 
 								continue 2;
 							}
-						//	var_export( $data[$eachKey] );
 						}
 					}
-			//		var_export( $data['article_creation_date'] ); //2592000 //604800
 					if( ( time() - $data['article_creation_date'] ) < ( $this->getParameter( 'time_span_for_new_badge' ) ? : 2592000 ) )
 					{
 						$data['new_badge'] = $this->getParameter( 'new_badge' ) ? : 'New';
@@ -1623,13 +1631,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 			$noOfTrends = intval( $this->getParameter( 'trending' ) ) > 9 ? $this->getParameter( 'trending' ) : 100;
 			$trendingData = $table->select( null, null, array( 'limit' => $noOfTrends, 'record_search_limit' => $noOfTrends ) );
-		//	self::v( $trendingData );   
 			$trendingPost = array();
-		//	self::v( empty( $trendingData[0][$this->getIdColumn()] ) );   
-		//	self::v( empty( $trendingData[0]['article_url'] ) );   
 			if( empty( $trendingData[0][$this->getIdColumn()] ) && ! empty( $trendingData[0]['article_url'] ) )
 			{
-		//	self::v( empty( $trendingData[0]['article_url'] ) );   
 				foreach( $trendingData as $key => $each )
 				{
 					$trendingData[$key] = Application_Article_Abstract::loadPostData( $each['article_url'] );
@@ -1639,14 +1643,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						unset( $trendingData[$key] );
 					}
 
-		//	self::v( $each['article_url'] );   
 				}
-	//	self::v( $trendingData );   
 			}
 			$trendingPost = array_unique( array_column( $trendingData, $this->getIdColumn() ) );
-
-		//	self::v( $trendingPost );   
-		//	self::v( $this->getIdColumn() ); 
 			if( $trendingPost )
 			{
 				$whereClause[$this->getIdColumn()] = $trendingPost;
@@ -1655,7 +1654,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			@$this->_parameter['inverse_order'] = isset( $this->_parameter['inverse_order'] ) ? $this->_parameter['inverse_order'] : true;
 		}
 		@$postType = $this->getParameter( 'article_types' ) ? : $postType;
-	//	var_export( $postType );
 		if( $postType )
 		{
 			$whereClause['article_type'][] = $postType;
@@ -1667,8 +1665,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				}
 				$whereClause['article_type'][] = $postType;
 			}
-	//		var_export( $realPostTypePath ); 
-	//		var_export( $allOriginalPostTypes );
 			
 			@$path = $realPostTypePath . ' ' . $allOriginalPostTypes;
 		
@@ -1715,30 +1711,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$table = $this->_postTable;
 				if( empty( $whereClause ) )
 				{
-				//	var_export( $path );
-					$sortFunction = function( $filePath )
-					{
-						$values = Application_Article_Abstract::loadPostData( $filePath );
-			//			var_export( $values[\'article_title\'] );
-						if( ! $values )
-						{
-				//			var_export( $values[\'article_title\'] );
-							return false;
-						}
-						return $values['article_creation_date'] ? : $values['article_modified_date'];
-					//	var_export( $result  . "<br>");
-						return $result;
-					};
 					if( empty( $_REQUEST['pc_load_old_posts']))
 					{
 						$table = $table::getInstance( $table::SCOPE_PRIVATE );
 						$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 						$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 						$this->_dbData = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache', 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
-					//	var_export( $this->_dbData );    
-					//	var_export( get_called_class() );    
-						
-					//	var_export( count( $this->_dbData ) );    
 					}  
 					else
 					{
@@ -1749,8 +1727,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				else
 				{
 					$table = $table::getInstance();
-					$this->_dbData = $table->select( null, $whereClause, array( 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
 					$this->_dbWhereClause = $whereClause;
+					$this->_dbData = $table->select( null, $whereClause, array( 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
 				}
 			}
 			catch( Exception $e )
