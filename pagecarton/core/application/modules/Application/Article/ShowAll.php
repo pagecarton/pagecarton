@@ -961,15 +961,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				continue;
 			}
 			$data['css_class_of_inner_content'] = $this->getParameter( 'css_class_of_inner_content' );
-		//	if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
 			$data['post_link'] = $data['article_url'];
 			$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['article_url'];
 			if( @$data['article_url'] && strpos( @$data['article_url'], ':' ) === false && $data['article_url'][0] !== '?'  )
 			{
 				$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
-		//		var_export( $data['post_link'] );
 			}
-	//	var_export( $data );
 			if( @$data['article_url'] && empty( $data['document_url_base64'] )  )
 			{
 				$data['document_url'] = ( $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ) ) ? : '/img/placeholder-image.jpg'; 
@@ -978,20 +975,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['document_url_uri'] = $data['document_url']; 
 			$data['document_url_cropped'] = $data['document_url']; 
 			$data['document_url_no_resize'] = $data['document_url']; 
-		//	self::v( $data['document_url'] );  
-		//	var_export( Ayoola_Doc::uriToPath( $data['document_url'] ) );
             $data['document_url_photoviewer'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
-        //    var_export( $data['document_url'] );
 			if( @$data['document_url'][0] === '/' AND $fileP = Ayoola_Doc::uriToPath( $data['document_url'] ) )
 			{
 				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?&url=' . @$data['document_url'] . '&document_time=' . @filemtime( $fileP ) . ''; 
 				$data['document_url_cropped'] = $data['document_url_no_resize'] . '&max_width=' . $maxWith . '&max_height=' . $maxHeight . ''; 
-		///		$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] );     
 			}
 			elseif( strpos( @$data['document_url'], '//' ) === false && empty( $data['not_real_post'] ) )
 			{
 				//	This is the default now if they don't have picture, create a placeholder
-			//	$data['document_url'] = $data['document_url_base64'];
 				$data['document_url'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
 				$data['document_url_cropped'] = $data['document_url']; 
 				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] );     
@@ -1004,18 +996,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$data['document_url_no_resize'] = $data['document_url']; 
 				$data['document_url_cropped'] = $data['document_url']; 
 			}
-		//	self::v( $data['article_url'] );
-		//	self::v( '<br>'); 
-		//	self::v( $data['views_count'] );
-	//		self::v( $data['document_url_cropped'] );
 			
 			//	Can't be lowercase because of auto create link
 			$url = $data['article_url'];
 
-			//	error making last post to be part of present one
-	//		$data += is_array( $this->_objectTemplateValues ) ? $this->_objectTemplateValues : array();
-
-        //    var_export( $data );
 			$data['article_description'] = trim( $data['article_description'] );
 			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
 			{
@@ -1059,8 +1043,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					@$data['article_title'] = mb_strimwidth( $titleToUse, 0, $lengthOfTitle, "..." );
 				}
 			}
-			//		self::v( $data );
-		//	var_export( $data );
 
 			// build a list
 			if( @$data['true_post_type'] && empty( $data['not_real_post'] ) )
@@ -1073,23 +1055,18 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					$data['pc_next_post'] = $firstPost;
 					$singlePostPaginationInfo[$data['article_url']]['pc_next_post'] = $firstPost;
 				}
-
-
 				if( ! is_null( $previousKey ) )
 				{
-			//		$data['pc_previous_post'] = $previousKey;
 					$singlePostPaginationInfo[$data['article_url']]['pc_previous_post'] = $previousKey;
 					$singlePostPaginationInfo[$data['article_url']]['article_url'] = $data['article_url'];
 					$singlePostPaginationInfo[$previousKey]['pc_next_post'] = $data['article_url'];
 				}
 				
-			//	var_export( $values );
 				$previousKey = $data['article_url'];
 			}
 				
 			
 			//	content
-		//	var_export( $data );
 			if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )
 			{
                 $alt = sprintf( PageCarton_Widget::__( "%s's cover photo" ), $data['article_title'] );
@@ -1102,10 +1079,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['button_value'] = self::__( $this->getParameter( 'button_value' ) ) ? : '' . self::__( 'Details' ) . '';
 			
 			
-            //	CATEGORIES
-            
-        //  Category not array in the case of category showall
-        //    @$data['category_name'] = is_array( $data['category_name'] ) ? $data['category_name'] : array( 'Uncategorized' );
+            //	CATEGORIES 
+            //  Category not array in the case of category showall
 			$categoryTextRaw = self::getCategories( $categoryToUse, array( 'template' => $this->getParameter( 'category_template' ), 'glue' => ( $this->getParameter( 'category_template_glue' ) ? : ', ' ) ) );
 			$categoryText = $categoryTextRaw ? ' ' . $categoryTextRaw : null;
 			$data['category_text'] = $categoryText;
@@ -1118,14 +1093,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$editLinkHTML = null;
 				$editLinkHTML .= '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $editLink . '\' );">Edit...</button>';
 				$editLinkHTML .= '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Application_Article_Delete/?article_url=' . $data['article_url'] . '\' );">Delete...</button>';
-			//	$this->_objectData['edit_link'] = $editLinkHTML;
 				$data['edit_link'] = $editLinkHTML;
 			}
-		//	var_export(  $data['item_price'] );
 			if( isset( $data['item_price'] ) ) 
 			{
 				//	Filter the price to display unit
-			//	@$data['item_price'] = $data['item_price'] ? : '0.00';
 				if( empty( $data['item_price'] ) && $this->getParameter( 'use_price_option_price' ) )
 				{
 					if( ! empty( $data['price_option_price'] ) )
@@ -1157,16 +1129,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$filter = new $filter();
 				$filter::$symbol = '';
 				$data['item_price_without_currency'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
-	//			var_export( $data['item_price'] );
-	//			var_export( $data['item_price_with_currency'] );
 				$data['item_price_before_decimal'] = array_shift( explode( '.', $data['item_price_without_currency'] ) );
 				$data['item_price_after_decimal'] = array_pop( explode( '.', $data['item_price_without_currency'] ) );
-		//		var_export( $data['item_price'] );
 				$data['item_price'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
-		//		var_export( $data['item_price'] );
 			
 			}
-		//	var_export( $data['article_type'] );
 			if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( @$data['article_type'] ) )
 			{
 				$postType = @$postTypeInfo['article_type'];
@@ -1175,7 +1142,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
 				$postType = @$data['article_type'];
 			}
-		//	self::v( $postType );
 			$data['filtered_time'] = self::filterTime( $data );
 
 			//	internal forms to use
@@ -1194,7 +1160,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 			$featureCount = array();
 			$featureDone = array();
-			//		var_export( $features );
 			foreach( $features as $key => $eachPostType )
 			{	
 				$featureSuffix = @$featuresPrefix[$key];
@@ -1215,7 +1180,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				{
 					continue;
 				}
-			//	self::v( $eachPostType );
 				$featureDone[$featureCountKey] = true;
 				switch( $eachPostType )
 				{
@@ -1236,12 +1200,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					break;  
 					case 'subscription':
 					case 'product':
-				//	case 'service':
 						$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( array( 'data' => $data, 'button_value' => $this->getParameter( 'button_value' ) ? : $data['button_value'] ) );
 					break; 
 					case 'category_information':
-					//	self::v( $data );
-				//		var_export( $data['display_name'] );
 						@$data['article_title'] = $data['category_label'];
 						@$data['article_description'] = $data['category_description'];
 						@$data['document_url'] = $data['cover_photo'] ? : $data['document_url'];
@@ -1282,7 +1243,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							$result = self::splitBase64Data( $data['download_base64'] );
 							$data['file_size'] =  strlen( $result['data'] );
 						}
-				//		var_export( $data['download_base64'] );
 						$filter = new Ayoola_Filter_FileSize();
 						$data['file_size'] = $filter->filter( $data['file_size'] );
 						
@@ -1296,9 +1256,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					break;
 				}
 			}
-		//	
 			$this->_xml .= '' . self::getDefaultPostView( $data ) . '';
-		//	var_export( self::getDefaultPostView( $data )  );
 			
 			//	useful in the templates
 			$data['article_quick_links'] = self::getQuickLink( $data );
@@ -1310,57 +1268,44 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$data['category_id'] = $categoryTextRaw;
 			if( $this->getParameter( 'markup_template' ) )
 			{
-			//	foreach( $data['slideshow_images'] as $key => $each )
-				{
-					//	Calculate the max_group_no
-					
-				//	do 
-					{
-						$templateToUse = null;
-						if( ! $this->getParameter( 'max_group_no' ) )
-						{
-					//		break;
-						}
-						if( ! @$maxGroupNo || $maxGroupNo == 1 )
-						{
-						//	self::v( $maxGroupNo ); 
-						//	self::v( $data['article_title'] ); 
-							$maxGroupNo = 1;
-							$templateToUse .= $this->getParameter( 'markup_template_prefix' );
-							
-							//	never forget to include the last suffix
-							$lastSuffix = true;
-						}
-						$templateToUse .= $this->getParameter( 'markup_template' );
-						if( ( $this->getParameter( 'max_group_no' ) && $maxGroupNo == $this->getParameter( 'max_group_no' ) ) || empty( $values ) )
-						{		
-					//		self::v( $maxGroupNo ); 
-								$maxGroupNo = 0;
-								$templateToUse .= $this->getParameter( 'markup_template_suffix' );
-								$lastSuffix = false;
-						
-						}
-						$maxGroupNo++;
-					}
-			//		while( false );
-				//	var_export( $data['article_title'] );
-					$templateD = self::replacePlaceholders( $templateToUse, $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
-					
-					//	fix case where ajax auto-loading didn't fix url prefix in posts
-					$templateD = Ayoola_Page_Editor_Text::fixUrlPrefix( $templateD, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
-					$template .= $templateD;
-				}
+                $templateToUse = null;
+                if( ! $this->getParameter( 'max_group_no' ) )
+                {
+
+                }
+                if( ! @$maxGroupNo || $maxGroupNo == 1 )
+                {
+                    $maxGroupNo = 1;
+                    $templateToUse .= $this->getParameter( 'markup_template_prefix' );
+                    
+                    //	never forget to include the last suffix
+                    $lastSuffix = true;
+                }
+                $templateToUse .= $this->getParameter( 'markup_template' );
+                if( ( $this->getParameter( 'max_group_no' ) && $maxGroupNo == $this->getParameter( 'max_group_no' ) ) || empty( $values ) )
+                {		
+                        $maxGroupNo = 0;
+                        $templateToUse .= $this->getParameter( 'markup_template_suffix' );
+                        $lastSuffix = false;
+                
+                }
+                $maxGroupNo++;
+                $templateD = self::replacePlaceholders( $templateToUse, $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+                
+                //	fix case where ajax auto-loading didn't fix url prefix in posts
+                $templateD = Ayoola_Page_Editor_Text::fixUrlPrefix( $templateD, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
+                $template .= $templateD;
 			}
 			if( @$_POST['PAGECARTON_RESPONSE_WHITELIST'] )
-			{
-			
+			{			
 				//	Limit the values that is being sent
 				$whitelist = @$_POST['HTTP_PAGECARTON_RESPONSE_WHITELIST'];
 				$whitelist = is_array( $whitelist ) ? $whitelist : array_map( 'trim', explode( ',', $whitelist ) );
 				$whitelist = array_combine( $whitelist, $whitelist );
 				$data = array_intersect_key( $data, $whitelist );
-				
-			//		var_export( $data );
+                
+                //	delete so we dont do this twice
+                unset( $_POST['PAGECARTON_RESPONSE_WHITELIST'] );
 			}
 			//	Save
 			$allTemplate .= $this->_xml;
@@ -1370,17 +1315,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             $data['article_type'] = self::__( $data['article_type'] );
             $data['true_post_type'] = self::__( $data['true_post_type'] );
 			$this->_objectData[] = $data;
-			$this->_objectTemplateValues[] = $data;
-			
+			$this->_objectTemplateValues[] = $data;			
 		}
 
 		// store playlist
 		if( $this->getParameter( 'single_post_pagination' ) )
 		{
 			$storage = self::getObjectStorage( array( 'id' => $postListId . '_single_post_pagination', 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 44600, ) );
-		//	self::v( $postListId );  
-		//	self::v( $singlePostPaginationInfo );    
-			//	add it to previous because of autoload clearing this settings
+
+            //	add it to previous because of autoload clearing this settings
 			$prevSinglePostPagination = $storage->retrieve();
 			$singlePostPaginationInfo = $singlePostPaginationInfo + ( is_array( $prevSinglePostPagination ) ? $prevSinglePostPagination : array() );
 			$storage->store( $singlePostPaginationInfo );
@@ -1388,53 +1331,33 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			$class = new Application_Article_ViewPagination( array( 'no_init' => true ) );
 			$storageForSinglePosts = $class::getObjectStorage( array( 'id' => 'post_list_id' ) );
-		//	self::v( $postListId );  
 			$storageForSinglePosts->store( $postListId );
-		//	self::v( $storageForSinglePosts->retrieve() ); 
 		}
-	//	self::v( $prevSinglePostPagination );
-	//	self::v( count( $singlePostPaginationInfo ) );
-	//	self::v( $postListId );
-	//	$this->_xml = $allTemplate; //	reset
-		$this->_xml = '' . $allTemplate . '';
-//		var_export( $this->_xml );
-		//	delete so we dont do this twice
-		unset( $_POST['PAGECARTON_RESPONSE_WHITELIST'] );
-
-
-	//	if( $this->getParameter( 'pagination' ) )
+        $this->_xml = '' . $allTemplate . '';
 		
-		//	$this->_objectTemplateValues['paginator_next_page_button']
 		if( empty( $_GET['pc_post_list_autoload'] ) )
 		{
 			$this->_xml .= $pagination;
 			if( $template && $this->getParameter( 'pagination' ) )
 			{
 				$template = '' . $template . $pagination;
-	//			self::v( $pagination );
 			}
 		}
 		else
 		{
 			$this->_parameter['markup_template_append'] = null;
 			$this->_parameter['markup_template_prepend'] = null;  
-		}
-			//	self::v( $this->_objectTemplateValues['pagination'] );
-			//	self::v( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) );
-	//	var_export( $this->_parameter['markup_template'] );
-		
+		}		
 		if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false && strpos( $this->_parameter['markup_template'], '<!--{{{0}}}' ) === false )  
 		{
 			//	update the markup template
 			@$this->_parameter['markup_template'] = null;
 			
 			//	allows me to add pagination on post listing with predefined suffix
-		//	@$this->_parameter['markup_template'] .= @$this->_parameter['markup_template_prepend'];
 			@$this->_parameter['markup_template'] .= $template; 
 			@$this->_parameter['markup_template'] .= @$lastSuffix ? $this->_parameter['markup_template_suffix'] : null;
 			
 			//	Allows me to put the pagination
-		//	@$this->_parameter['markup_template'] .= @$this->_parameter['markup_template_append'];
 			$this->_parameter['markup_template_prefix'] = null;
 			$this->_parameter['markup_template_suffix'] = null;  
 		}
@@ -1446,16 +1369,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				@$this->_parameter['markup_template'] .= $linkToLoadMore;   
 			}
 		}
-		//? '<a href="' . $nextPageLink . '"><input type="button" value="Next ' . ( @count( $chunk[( @$offset )] )) . '..." /></a>' : null;
  		if( ! $i ) 
 		{
-//			var_export( count( $value ) );   
 			//	No post is eligible to be displayed. 
 			$this->showMessage();
 		}
- 	//	var_export( $this->_parameter['markup_template'] );    
-	//	var_export( count( $values ) );
-//		var_export( $this->_xml );
     } 
 		
     /**
@@ -1469,35 +1387,31 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_dbData = $data;
 			return true;
 		}
-	//	if( $this->getParameter( 'allow_dynamic_category_selection' ) )
-		{
-			if( is_numeric( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_post_type_offset' ), $_REQUEST['pc_module_url_values'] ) )
-			{
-				$postType = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_post_type_offset' ) )];
-			//	var_export( $category );
-			}
-			elseif( $this->getParameter( 'allow_dynamic_category_selection' ) )
-			{
-				@$postType = $_REQUEST['article_type'] ? : $_REQUEST['post_type'];  
-			}
-			if( is_numeric( $this->getParameter( 'pc_module_url_values_category_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_category_offset' ), $_REQUEST['pc_module_url_values'] ) )
-			{
-				$categoryId = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_category_offset' ) )];
-			//	var_export( $categoryId );
-				if( $categoryId == 'category' )
-				{
-					$categoryId = @$_REQUEST['category'];
-				}
-			//	var_export( $category );
-			}
-			elseif( @$_REQUEST['category'] &&  $this->getParameter( 'allow_dynamic_category_selection' ) )
-			{
-				$categoryId = $_REQUEST['category'];  
-			}
-		}
-	//	var_export( $this->getParameter() );
-	//	@$categoryId = $_GET['category']; 
-		if( $this->getParameter( 'ignore_category_query_string' ) )
+        if( is_numeric( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_post_type_offset' ), $_REQUEST['pc_module_url_values'] ) )
+        {
+            $postType = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_post_type_offset' ) )];
+        //	var_export( $category );
+        }
+        elseif( $this->getParameter( 'allow_dynamic_category_selection' ) )
+        {
+            @$postType = $_REQUEST['article_type'] ? : $_REQUEST['post_type'];  
+        }
+        if( is_numeric( $this->getParameter( 'pc_module_url_values_category_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_category_offset' ), $_REQUEST['pc_module_url_values'] ) )
+        {
+            $categoryId = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_category_offset' ) )];
+        //	var_export( $categoryId );
+            if( $categoryId == 'category' )
+            {
+                $categoryId = @$_REQUEST['category'];
+            }
+        //	var_export( $category );
+        }
+        elseif( @$_REQUEST['category'] &&  $this->getParameter( 'allow_dynamic_category_selection' ) )
+        {
+            $categoryId = $_REQUEST['category'];  
+        }
+
+        if( $this->getParameter( 'ignore_category_query_string' ) )
 		{
 			// switch $_GET['category'] off for this instance 
 			@$categoryId = null; 
@@ -1509,8 +1423,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$categoryId = @Ayoola_Application::$GLOBAL['post']['category_name'];
 		}
-//		var_export( $this->getParameter( 'category_name' ) );
-	//	self::v( $categoryId );
 		$categoryName = null;
         $table = Application_Category::getInstance();
         $categoryError = sprintf( PageCarton_Widget::__( 'There are no recent posts in the %s category.' ), $categoryId );
@@ -1524,14 +1436,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			//	Get the numeric category ID from the  DB
 			$category = $table->selectOne( null, array( 'category_name' => $categoryId ) );
 		
-		//	self::v( $categoryId );
 			$this->_badnews[] = $categoryError;
 			
 			if( ! $category )
 			{
-	//			$this->_dbData = array();
-	//			return false;   
-			}
+
+            }
 			else
 			{
 				$categoryId = @$category['category_id'];
@@ -1547,7 +1457,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					'description' => Ayoola_Page::getCurrentPageInfo( 'description' ) . $category['category_description'] ,
 					'title' => trim( $category['category_label'] . ' ' . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
 				);
-				//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
 			}
 		}
@@ -1555,7 +1464,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$pathToSearch = $path;
 		$output = array();
 		$whereClause = array();
-	//	var_export( Ayoola_Application::$GLOBAL );
 		if( $this->getParameter( 'show_post_by_me' ) )
 		{
 			if( ! Ayoola_Application::getUserInfo( 'username' ) )
@@ -1564,12 +1472,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$this->_dbData = array();
 				return false;
 			}
-		//	var_export( Ayoola_Application::getUserInfo( 'username' ) );
 			$this->setParameter( array( 'username_to_show' => Ayoola_Application::getUserInfo( 'username' ) ) );
 		}
 		elseif( $this->getParameter( 'show_profile_posts' ) && @Ayoola_Application::$GLOBAL['profile']['profile_url'] )
 		{
-		//	var_export( Ayoola_Application::$GLOBAL['post']['username'] );  
 			$this->setParameter( array( 'profile_to_show' => strtolower( Ayoola_Application::$GLOBAL['profile']['profile_url'] ) ) );
 		}
 		elseif( $this->getParameter( 'search_mode' ) && @$_REQUEST['q'] )
@@ -1674,7 +1580,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$whereClause['access_level'][] = $this->_parameter['access_level'];
 
 		}
-		//		self::v( $categoryName );      
 		if( $this->getParameter( 'post_with_same_true_post_type' ) && @Ayoola_Application::$GLOBAL['post']['true_post_type'] )
 		{
 			$whereClause['true_post_type'][] = @Ayoola_Application::$GLOBAL['post']['true_post_type'];
@@ -1702,43 +1607,39 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				;
 			}
 		}
-//		else
-		{
-			$classKey = __CLASS__;
-			$keyFunction = array( __CLASS__, 'filterSearch' );
-			try
-			{
-				$table = $this->_postTable;
-				if( empty( $whereClause ) )
-				{
-					if( empty( $_REQUEST['pc_load_old_posts']))
-					{
-						$table = $table::getInstance( $table::SCOPE_PRIVATE );
-						$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
-						$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
-						$this->_dbData = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache', 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
-					}  
-					else
-					{
-						$this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );
-						krsort( $this->_dbData ); 
-					}
-				}
-				else
-				{
-					$table = $table::getInstance();
-					$this->_dbWhereClause = $whereClause;
-					$this->_dbData = $table->select( null, $whereClause, array( 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
-				}
-			}
-			catch( Exception $e )
-			{ 
-				//	Sometimes we have invalid dirs that causes an exception
-				null;
-			}
-  		}
-		//	Removing dependence on Ayoola_Api for showing posts
-		
+        $classKey = __CLASS__;
+        $keyFunction = array( __CLASS__, 'filterSearch' );
+        try
+        {
+            $table = $this->_postTable;
+            if( empty( $whereClause ) )
+            {
+                if( empty( $_REQUEST['pc_load_old_posts']))
+                {
+                    $table = $table::getInstance( $table::SCOPE_PRIVATE );
+                    $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+                    $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+                    $this->_dbData = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache', 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
+                }  
+                else
+                {
+                    $this->_dbData = Ayoola_Doc::getFilesRecursive( self::getFolder() );
+                    krsort( $this->_dbData ); 
+                }
+            }
+            else
+            {
+                $table = $table::getInstance();
+                $this->_dbWhereClause = $whereClause;
+                $this->_dbData = $table->select( null, $whereClause, array( 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
+            }
+        }
+        catch( Exception $e )
+        { 
+            //	Sometimes we have invalid dirs that causes an exception
+            null;
+        }
+		//	Removing dependence on Ayoola_Api for showing posts		
  		if( ! is_null( $this->_dbData ) )
 		{ 
 		//	$this->_dbData = array();
