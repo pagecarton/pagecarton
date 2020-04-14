@@ -396,12 +396,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 						}
 
 					}
-                //    var_export(  $options );
-                //    var_export(  $where );
 					if( ! empty( $where ) )
 					{ 
-                    //    var_export(  $key );
-                    //    var_export(  $where );
 						if( array_key_exists( $key, $where ) )
 						{
                             $keyFound = true;
@@ -412,11 +408,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 						}
                         elseif( @$options['supplementary_data_key'] == $key && is_array( $fields[$key] ) )
                         {
-                            //   var_export(  $key );
-                            //   var_export(  $where );
-                            //   var_export(  $options );
-                            //   var_export(  $fields[$key] );
-                            //   var_export(  $allFields  );
                             foreach( $where as $eachKeyWhere => $valueWhere )
                             {
                                 if( in_array( $eachKeyWhere, $allFields ) )
@@ -427,8 +418,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                                 }
                                 if( array_key_exists( $eachKeyWhere, $fields[$key] ) )
                                 {
-                                //    var_export( $eachKeyWhere );
-                                //    var_export( $fields[$key][$eachKeyWhere] );
                                     $keyFound = true;
                                     if( ! self::where( $eachKeyWhere, $fields[$key][$eachKeyWhere], $where, $options ) )
                                     {
@@ -442,15 +431,12 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				while( false );
     
 				//	Retrieve values from the foreign keys
-			//	$temp = array();
 				foreach( $this->getForeignKeys() as $foreignTable => $foreignKey )
 				{
 					if( $key != $foreignKey ){ continue; }
 					$foreignWhere = array( $foreignKey => $fields[$foreignKey] );
 					if( empty( $temp[serialize( $foreignWhere )] ) )
 					{ 
-				//		var_export( $foreignTable );
-				//		var_export( $foreignWhere );
 						$temp[serialize( $foreignWhere )] = self::selectForeign( $foreignTable, $foreignWhere );
 					}
 					$foreignData = $temp[serialize( $foreignWhere )];
@@ -482,7 +468,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                 //  later found it was not causing it o
                continue;
             }
-//		$rowId = $this->_useParentNamespace ? 'parent_' . $rowId : $rowId;
 			//	Introducing a way to manipulate content of the results on this level might allow 
 			//	us to be able to limit the number of times we need to loop through the results.
 			//	Saving time or resources? Let's confirm if this is useful for programmers.
@@ -496,7 +481,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			}
 			
 			//	If the filter wants to skip this record. It just need to switch the $fields to false;
-		//	var_export( $recordMatch );
 			$fields === false || ( $recordMatch === false && ! empty( $where['*'] ) ) ? null : ( $rows[$rowId] = $fields );
 
 			if( ! empty( $options['limit'] ) && count( $rows ) >= $options['limit'] )
@@ -511,11 +495,9 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			//	
 			 
 		}
-	//	var_export( $rows );
 	
 		// cache result
 		if( empty( $options['disable_cache'] ) && $this->cache ){ $this->setCache( $rows ); }
-	//	var_export( $rows );
 		return $rows;
 	}
 	
