@@ -291,7 +291,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$rowId = self::getRecordRowId( $eachRecord );
 			$recordMatch = false;
 			$keyCount = 0;
-            $keyFound = false;
+            $keyFound = array();
 			foreach( $eachRecord->childNodes as $countField => $field )
 			{
 				$keyCount++;
@@ -308,7 +308,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				
 				$fields[$key] = self::filterDataType( $fields[$key], $this->getTableDataTypes( $key ) );
 				$searchTerm = $fields[$key];
-			//	PageCarton_Widget::v( $options );
 				$otherData = array();
 				if( ! empty( $options['key_filter_function'][$key] ) && is_callable( $options['key_filter_function'][$key] ) )
  				{
@@ -400,7 +399,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 					{ 
 						if( array_key_exists( $key, $where ) )
 						{
-                            $keyFound = true;
+                            $keyFound[$key] = true;
                             if( ! self::where( $key, $fields[$key], $where, $options ) )
                             {
                                 continue 3;
@@ -418,7 +417,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                                 }
                                 if( array_key_exists( $eachKeyWhere, $fields[$key] ) )
                                 {
-                                    $keyFound = true;
+                                    $keyFound[$key] = true;
                                     if( ! self::where( $eachKeyWhere, $fields[$key][$eachKeyWhere], $where, $options ) )
                                     {
                                         continue 4;
@@ -462,12 +461,14 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				}
 
 			}
-            if( $where && empty( $keyFound ) && @$options['supplementary_data_key'] )
+        //   if( $where && empty( $keyFound ) && @$options['supplementary_data_key'] )
+            if( count( $where ) !== count( $keyFound ) )
             {
-                // this was making some records in other files not get to the point of checking
-                //  later found it was not causing it o
-               continue;
+                //  Trying strict matching
+                //  hopefully it will help solve select errors.
+                continue;
             }
+
 			//	Introducing a way to manipulate content of the results on this level might allow 
 			//	us to be able to limit the number of times we need to loop through the results.
 			//	Saving time or resources? Let's confirm if this is useful for programmers.
