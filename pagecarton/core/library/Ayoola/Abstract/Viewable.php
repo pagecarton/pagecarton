@@ -256,15 +256,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 if( Ayoola_Application::isXmlHttpRequest() || Ayoola_Application::isClassPlayer() ){ return null; }
             }
             if( is_array( $parameter ) ){ $this->setParameter( $parameter ); }
-        //    var_export( $this->getParameter( 'device_whitelist' ) );
-        //    var_export( self::deviceIsAllowed() );
+
+
     
             if( ! $this->deviceIsAllowed() )
             {
                 return false;
             }
     
-        //	self::v( get_class( $this ) );
+
             $this->initOnce();
         }
         catch( Ayoola_Abstract_Exception $e  )
@@ -283,7 +283,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     public static function getInstance()
     {
         $class = get_called_class();
-    //    var_export( $class );
+
         if( empty( self::$_instance[$class] ) ){ self::$_instance[$class] = new $class( array( 'no_init' => true ) ); }
 		return self::$_instance[$class];
     } 	
@@ -296,7 +296,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     {
         if( $this->getParameter( 'device_whitelist' ) )
         {
-        //    var_export( PageCarton_Device::getInstance()->selectOne( null, array( 'device_name' => $this->getParameter( 'device_whitelist' ) ) ) );
+
             if( $device = PageCarton_Device::getInstance()->selectOne( null, array( 'device_name' => $this->getParameter( 'device_whitelist' ) ) ) )
             {
                 foreach( $device['environment_key'] as $key => $x )
@@ -387,14 +387,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	public static function setHook( $object, $method, & $data )
 	{
         $class = get_class( $object );
-    //    var_export( static::isSettingHook( $class ) );
+
     //    if( static::isSettingHook( $class ) )
         {
             // Finish one before embarking on another
             //  possibly avoid infinite loop
-        //    return false;
+
         }
-    //    static::$_settingHook[$class] = true;
+
         foreach( self::getHooks( $class ) as $hook )
         {
             if( ! Ayoola_Loader::loadClass( $hook ) )
@@ -403,8 +403,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             }
             $hook::hook( $object, $method, $data );
         }
-    //    static::$_settingHook[$class] = false;
-    //    var_export( static::isSettingHook( $class ) );
+
+
         return true;
     }
 
@@ -415,13 +415,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	public static function getHooks( $class = null )
 	{
 		$class = $class ? : get_called_class();
-//		var_export( $class );
+
 		if( isset( static::$_hooks[$class] ) && null !== static::$_hooks[$class] )
 		{
 			return static::$_hooks[$class];
 		}
         $hooks = array();
-    //    var_export( new PageCarton_Hook );
+
 		if( $all = PageCarton_Hook::getInstance()->select( null, array( 'class_name' => array( $class, '*' ) ) ) )
 		{
 			foreach( $all as $each )
@@ -439,7 +439,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			}
 
 		}
-	//	var_export( $hooks );
+
 		static::$_hooks[$class] = $hooks;
 		return static::$_hooks[$class];
 	}
@@ -453,10 +453,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 		if( ! $this->initiated && ! $this->getParameter( 'no_init' ) ) //	compatibility
 		{
-	//		var_export( $this->initiated );
-		//	var_export( get_class( $this ) );
-		//	self::v( $this->getParameter() );
-//			self::v( $this->getParameter( 'no_init' ) );
+
+
+
+
 
 			$this->initiated = true;
 
@@ -473,17 +473,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//		case true:
 						//	Do nothing.
 						//	 had to go through this route to process for 0.00
-				//		var_export( __LINE__ );
+
 						if( @$_REQUEST['url'] && @$_REQUEST['name'] || ( @$_REQUEST['rebuild_widget'] ) )
 						{
 							$currentUrl = $_REQUEST['url'];
 							$editorMode = true;
 							break;
 						}
-					//	return false;
+
 					break;
 					default:
-		//      var_export( $currentUrl );
+
 					break;
 				}
 			}
@@ -491,7 +491,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			{
 				$list = $this->getParameter( 'url_blacklist' );
 				$list = array_map( 'trim', explode( ',', $list ) );
-			//	var_export( $currentUrl );
+
 				if( in_array( $currentUrl, $list ) )
 				{
 					return false;
@@ -506,7 +506,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					return false;
 				}
 			}
-		//	var_export( __LINE__ );
+
 			if( $this->init() )
 			{
 
@@ -593,9 +593,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			return static::$_objectStorage[$id];
 		}
 		static::$_objectStorage[$id] = new Ayoola_Storage();
-//		var_export( get_called_class() );
+
 		static::$_objectStorage[$id]->storageNamespace = get_called_class() . '-' . $id;
-//		var_export( static::$_objectStorage[$id]->storageNamespace );
+
 		static::$_objectStorage[$id]->timeOut = @$timeOut;
 		$device ? static::$_objectStorage[$id]->setDevice( $device ) : null;
 		return static::$_objectStorage[$id];
@@ -653,7 +653,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             if( ! empty( $mailInfo['bcc'] ) )
             {
                 $header .= "bcc: {$mailInfo['bcc']}\r\n";
-            //	var_export( $header );
+
             }
             if( ! empty( $mailInfo['html'] ) || strip_tags( $mailInfo['body'] ) != $mailInfo['body'] )
             {
@@ -682,14 +682,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             }
             if( ! empty( $mailInfo['to'] ) )
             {
-        //		var_export( $mailInfo );
+
                 $sent = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], $header );
             }
             $mailInfo['to'] = array_map( 'trim', explode( ',', $mailInfo['to'] ) );
             $mailInfo['cc'] = array_map( 'trim', explode( ',', $mailInfo['cc'] ) );
             $mailInfo['bcc'] = array_map( 'trim', explode( ',', $mailInfo['bcc'] ) );
             $mailInfo['body'] = $realBody;
-        //    var_export( $mailInfo );
+
             Application_Notification::getInstance()->insert( $mailInfo );
             return $sent;
         }
@@ -708,21 +708,21 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     public static function fetchLink( $link, array $settings = null )
     {
-	//	self::V( $link );
+
 		$key = md5( $link . serialize( $settings ) );
 	//	$storage =  static::getObjectStorage( $key )
 		$storage = self::getObjectStorage( array( 'id' => $key, 'device' => 'File', 'time_out' => 10000, ) );
 		if( ! $response = $storage->retrieve() )
 		{
-	//	self::V( $response );
+
 			if( ! function_exists( 'curl_init' ) )
 			{
-				//trigger_error( __METHOD__ . ' WORKS BETTER WHEN CURL IS ENABLED. PLEASE ENABLE CURL ON YOUR SERVER.' );
+
 				return false;
-			//	return file_get_contents( $link );
+
 			}
 			$request = curl_init( $link );
-	//		curl_setopt( $request, CURLOPT_HEADER, true );
+
 			curl_setopt( $request, CURLOPT_URL, $link );
 
             //	dont check ssl
@@ -737,7 +737,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			curl_setopt( $request, CURLOPT_REFERER, @$settings['referer'] ? : $link );
 			if( @$settings['destination_file'] )
 			{
-			//	var_export( $settings );
+
 				$fp = fopen( $settings['destination_file'], 'w' );
 				curl_setopt( $request, CURLOPT_FILE, $fp );
 				curl_setopt( $request, CURLOPT_BINARYTRANSFER, true );
@@ -747,15 +747,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			{
 				curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
 			}
-	//		curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
+
 			curl_setopt( $request, CURLOPT_FOLLOWLOCATION, @$settings['follow_redirect'] === false ? false : true ); //	By default, we follow redirect
 			curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 1 );	//	Max of 1 Secs on a single request
 			curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 2 );	//	Max of 1 Secs on a single request
 			if( @$settings['post_fields'] )
 			{
 				curl_setopt( $request, CURLOPT_POST, true );
-			//	var_export( $request );
-			//	var_export( $settings['post_fields'] );
+
+
 				curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );
             }
             elseif( @$settings['post'] )
@@ -764,9 +764,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             }
 			if( @$settings['raw_response_header'] )
 			{
-			//	var_export( $settings );
+
 				$headerBuff = fopen( '/tmp/headers' . time(), 'w+' );
-				//	var_export( $headerBuff );
+
 				curl_setopt( $request, CURLOPT_WRITEHEADER, $headerBuff );
 			}
 			if( is_array( @$settings['http_header'] ) )
@@ -778,23 +778,23 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 				// close cURL resource, and free up system resources
 			curl_close( $request );
-		//	var_export( htmlentities( $response ) );
 
-			 //	var_export( $responseOptions );
-		//	exit( var_export( $responseOptions ) );
-			//	var_export( $settings['post_fields'] );
-		 //	if( ! $response || $responseOptions['http_code'] != 200 ){ return false; }
+
+
+
+
+
 			if( empty( $settings['return_error_response'] ) )
 			{
-			//	var_export( $response );
-			//	var_export( $responseOptions );
+
+
 				 if( $responseOptions['http_code'] != 200 ){ return false; }
 			}
 			if( @$settings['return_as_array'] == true )
 			{
 				if( @$settings['raw_response_header'] )
 				{
-				//	var_export( $headerBuff );
+
 					rewind($headerBuff);
 					$headers = stream_get_contents( $headerBuff );
 					@$responseOptions['raw_response_header'] = $headers;
@@ -804,7 +804,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$storage->store( $response );
 		}
 
- 		//	var_export( $response );
+
 		return $response;
     }
 
@@ -828,8 +828,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public static function hasPriviledge( $allowedLevels = null, array $options = null )
 	{
-//		var_export( Ayoola_Application::getUserInfo( 'access_level' ) );
-		//var_export( intval( Ayoola_Application::getUserInfo( 'access_level' ) ) );
+
+
 		if( is_numeric( $allowedLevels ) )
 		{
 			$allowedLevels = array( $allowedLevels );
@@ -843,15 +843,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$allowedLevels = array();
 		}
-//		var_export( in_array( 0, $allowedLevels ) );
+
 		$myLevel = intval( Ayoola_Application::getUserInfo( 'access_level' ) );
-		//	var_export( $allowedLevels );
-		//	var_export( Ayoola_Application::getUserInfo( 'email' ) );
-		//	var_export( Ayoola_Application::$GLOBAL['whitelist_email_address'] );
-		//	var_export( $myLevel );
-	//	var_export( ( in_array( 0, $allowedLevels ) && ! @$options['strict'] ) );
-	//	var_export( in_array( $myLevel, $allowedLevels ) );
-	//	var_export( $myLevel === 99 );
+
+
+
+
+
+
+
 		$username = trim( strtolower( Ayoola_Application::getUserInfo( 'username' ) ) );
 		if(
 			( $myLevel === 99 && ! @$options['strict'] ) // Super user except if its strict
@@ -862,15 +862,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 //		|| ( in_array( $_SERVER['REMOTE_ADDR' ], array( '127.0.0.1', '::1' ) ) && ! @$options['strict'] ) //	Localhost
 		)
 		{
-		//	var_export( strtolower( @Ayoola_Application::$GLOBAL['username'] ) );
-		//	var_export( $username );
+
+
 			//	We are either a super user, or has a listed allowed user or the resource is public
 			return true;
 		}
-		//	var_export( $allowedLevels );
-		//	var_export( $myLevel );
-	//		var_export( strtolower( @Ayoola_Application::$GLOBAL['username'] ) );
-	//		var_export( $username );
+
+
+
+
 
 
 	//	else		if
@@ -880,19 +880,19 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		require_once 'Ayoola/Filter/SelectListArray.php';
 	//	if( $myLevel == 5 )
 		{
-		//	var_export( $authLevel );
-		//	exit();
+
+
 		}
 		$authLevel['parent_access_level'] = @$authLevel['parent_access_level'] ? : array();
-	//	var_export( $authLevel );
+
 		foreach( $authLevel['parent_access_level'] as $each )
 		{
 			if( $each < 10 )
 			{
 			//	if( $myLevel == 5 )
 				{
-				//	var_export( $each );
-				//	exit();
+
+
 				}
 				if( in_array( $each, $allowedLevels ) )
 				{
@@ -902,15 +902,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 	//	if( $myLevel == 5 )
 		{
-		//	var_export( $authLevel );
-	//		exit();
+
+
 		}
 		$access = new Ayoola_Access();
 		$userInfo = $access->getUserInfo();
 		@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
 
-		//	$previous = Ayoola_Page::setPreviousUrl( '' );
-	//		var_export( $userInfo );
+
+
 
 		if( in_array( 98, $allowedLevels ) && ! empty( Ayoola_Application::$GLOBAL['profile_url'] ) && is_array( $userInfo['profiles'] ) && in_array( Ayoola_Application::$GLOBAL['profile_url'], $userInfo['profiles'] )  && ! @$options['strict'] ) //	profile owner
 		{
@@ -963,7 +963,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
         {
             return $defaultLocale;
         }
-    //    var_export();
+
         $storage = self::getObjectStorage( array( 'id' => 'locale' . $locale, 'time_out' => 1000000, ) );
         if( ! $locale = $storage->retrieve() )
         {
@@ -979,11 +979,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $availableLocale[] = $each['locale_code'];
             }
             //	system locale
-        //	$locale = setlocale( LC_ALL, 0 );
-    //		var_export( $localeSettings );
 
-        //	var_export( $languages );
-        //	var_export( $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
+
+
+
+
             $getPreferredLanguage = function ( array $available_languages, $http_accept_language = null )
             {
                 if( is_null( $http_accept_language ) ) 
@@ -1022,7 +1022,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $locale = array_shift( array_keys( $allPreferred ) );
             }
             $storage->store( $locale );
-        //	var_export( $locale );
+
         }
         return $locale;
 	}
@@ -1045,15 +1045,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             return static::$_translated[$id];
         }
         $translationStorage = self::getObjectStorage( array( 'id' => 'translation' . $id . 'dddss' . self::getLocale(), 'device' => 'File', 'time_out' => 1000000, ) );  
-    //	var_export( json_encode( $string ) );
-    //	var_export( $options );
-    //	var_export( $id );
-    //	var_export( $translationStorage->retrieve() );
+
+
+
+
         if( $stored = $translationStorage->retrieve() )
         {
-        //    var_export( $stored );
+
             static::$_translated[$id] = $stored; 
-        //    return $stored;
+
         }   
         if( is_array( $string ) )
         {
@@ -1067,7 +1067,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
         }
 		if( preg_match( '#(^[\s]*\{\{\{[^\{\}\s]*\}\}\}[\s]*$)|(^[\s]*\%[^%}\s]*\%[\s]*$)|(^[^a-zA-Z]+$)#', $string ) )
 		{
-        //	var_export( $string );
+
             $translationStorage->store( $string );
 			return $string;
 		}
@@ -1080,16 +1080,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( strip_tags( $string ) != $string )
 		{
 			$allStrings = preg_split( '#(\<[^<>]+\>)|(<!--)|(-->)|([\s]*\{\{\{[^\{\}\s]*\}\}\}[\s]*)#misU', $string );
-		//	$allStrings = preg_split( '#<(?!a|span|/a|/span)[\s]?[^<>]*>#', $string );
-		//	preg_match_all( '#[^<>]*(\<(?!a|span|/a|/span)[^<>]*>)?[^<>]*(\<(?!a|span|/a|/span)[^<>]*>)?[^<>]*#', $string, $matches );
-	    //	var_export( $allStrings );
+
+
+
 			if( count( $allStrings ) > 1 )
 			{
 				foreach( $allStrings as $each )
 				{
                     if( ! trim( str_ireplace( '&nbsp;', ' ', $each ), "\r\n\t\s " ) ){ continue; }
-                //    if( ! trim( $each, "\r\n\t\s " ) ){ continue; }
-                //    var_export( $each );
+
+
 					$translated = self::__( $each );
 					$string = str_ireplace( '>' . $each . '<', '>' . $translated . '<', $string );
 				}
@@ -1100,34 +1100,34 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                         $translated = self::__( $eachPlaceholder );
                         $string = str_ireplace( 'placeholder="' . $eachPlaceholder . '"', 'placeholder="' . $translated . '"', $string );
                     }
-                //	var_export( $string );
+
                     return $string;
                 }
-             //var_export( $string );
+
                 static::$_translated[$id] = $string; 
                 $translationStorage->store( $string );
 				return $string;
 			}
 		}
-    //	var_export( $string );
-	//	var_export( $arr );
-	//	$string = trim( $string );
+
+
+
 
 		do
 		{
             if( ! $locale = self::getLocale() )
             {
-            //    var_export( $options );
+
                 if( ! is_array( $options ) || ! in_array( 'autosave_new_words', $options ) )
                 {
                     continue;
                 }
             }
-            //	var_export( $string );
-            //	$translation = PageCarton_Locale_Translation::getInstance();
+
+
         
             //  don't store trimmed because of some valid spaces around html
-            //	$string = trim( $string );
+
 
 			//	cache is workaround because of insert not active until next load
 			//	was causing double inserting of words when the words are double on same page
@@ -1144,13 +1144,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                         $url = '/widgets/' . $_SERVER['HTTP_AYOOLA_PLAY_CLASS'];
                     break;
                 }
-            //    var_export( $string );
+
 				if( ! $stringInfo = $words->selectOne( null, array( 'string' => $string ) ) )
 				{
                     $trimmedString = trim( $string, " \t\r\n" );
                     if( ! $stringInfo = $words->selectOne( null, array( 'string' => $trimmedString ) ) ) 
                     {
-                        //	var_export( $string );
+
                         $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
                         if( is_array( $options ) && in_array( 'autosave_new_words', $options ) )
                         {
@@ -1185,34 +1185,34 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$stringStorage->store( $stringInfo );
 
 			}
-		//	var_export( $stringInfo );
+
 
 			if( ! empty( $stringInfo['originalstring_id'] ) )
 			{
 				$translation = PageCarton_Locale_Translation::getInstance();
 				if( ! $translatedString = $translation->selectOne( null, array( 'originalstring_id' => $stringInfo['originalstring_id'], 'locale_code' => $locale, ) ) )
 				{
-				//	$translation->insert( array( 'word' => $string, 'locale_code' => $locale, ) );
+
 				}
 				elseif( ! empty( $translatedString['translation'] ) )
 				{
 					$string = $translatedString['translation'];
                 }
-            //    self::v( $stringInfo['originalstring_id'] );
-            //    self::v( $locale );
+
+
             //    if( empty( $translatedString['translation'] ) )
             //    if( $allStringEntries = PageCarton_Locale_OriginalString::getInstance()->select( null, array( 'string' => $string ) ) )
                 {
-                //    self::v( $string );
-                //    self::v( $stringInfo );
-                //    var_export( count( $allStringEntries ) );
+
+
+
                 }
-            //    self::v( $translatedString['translation'] );
+
 			}
-		//	var_export( $stringInfo );
+
 		}
 		while( false );
-		//	var_export( $string );
+
         static::$_translated[$id] = $string; 
         $translationStorage->store( $string );
 		return $string;
@@ -1252,23 +1252,23 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];
 		@$object['option'] = $object['option'] ? : $object['view_option'];
-//		$html .= "<span data-parameter_name='view' >{$object['view']}</span>";
+
 
 		//	Implementing Object Options
 		//	So that each objects can be used for so many purposes.
 		//	E.g. One Class will be used for any object
-	//	var_export( $object );
+
 		if( method_exists( $object['class_name'], 'getClassOptions' ) )
 		{
 			$options = $object['class_name'];
 			$options = new $options( array( 'no_init' => true ) );
-	//		$options = array();
+
 			$options = (array) $options->getClassOptions();
 			$html .= '<select data-parameter_name="option">';
 			foreach( $options as $key => $value )
 			{
 				$html .=  '<option value="' . $key . '"';
-			//	var_export( $object['view'] );
+
 				if( $object['option'] == $key ){ $html .= ' selected = selected '; }
 				$html .=  '>' . $value . '</option>';
 			}
@@ -1334,7 +1334,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             || ! Ayoola_Object_PageWidget::getInstance()->select( null,  array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) ) 
         )
         {
-        	//    var_export( $parameters );
+
             if( 
             
                 ! $lostInfo = Ayoola_Object_PageWidget::getInstance()->selectOne( null,  array( 'class_name' =>  $class, 'parameters_key' =>  $parametersKey ) )
@@ -1371,9 +1371,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                     $parameters['pagewidget_id'] = $response['pagewidget_id'];
                     $whatToSave['widget_name'] = $parameters['widget_name'];
                 }
-        	//    var_export( $whatToSave );
-        	//    var_export( $response );
-        	//    var_export( $parameters );
+
+
+
 
             }
             elseif( ! empty( $lostInfo['pagewidget_id'] ) )
@@ -1382,15 +1382,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $parameters['widget_name'] = $lostInfo['widget_name']; 
                 $whatToSave['widget_name'] = $lostInfo['widget_name']; 
             }
-        	//    var_export( $lostInfo );
+
 
         }
-       // 	    var_export( $parameters );
+
         if( 
             ! empty( $parameters['pagewidget_id'] ) AND $previousWidgetInfo = Ayoola_Object_PageWidget::getInstance()->selectOne( null,  array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) ) 
         )
         {
-        //	    var_export( $previousWidgetInfo );
+
             //  save history
             $previousWidgetInfo['history'] = is_array( $previousWidgetInfo['history'] ) ? $previousWidgetInfo['history'] : array();
             $previousWidgetInfo['history'][time()] = $whatToSave['parameters'];
@@ -1403,14 +1403,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             $response = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) );
             if( $response['parameters'] !== $whatToSave['parameters'] )
             {
-                //  for some reasons, what it is still saving old data.
-                // Need this as workaround
-            //    Ayoola_Object_PageWidget::getInstance()->delete( array( 'pagewidget_id' =>  $parameters['pagewidget_id'] ) );
-            //    $response = Ayoola_Object_PageWidget::getInstance()->insert( $whatToSave );
-            //    var_export( $response );
+
             }
         }
-    //    var_export( $parameters );
     }
 
     /**
@@ -1422,24 +1417,24 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     protected static function getParameterKeys( & $parameters )
     {
 		$thisClass = get_called_class();
-//		var_export( $thisClass );
-	//	var_export( $parameters['markup_template_object_name'] );
+
+
 		$thisObjectID = md5( $thisClass . $parameters['object_unique_id'] . json_encode( $parameters ) );
 		if( ! empty( static::$_parameterKeys[$thisObjectID] ) )
 		{
 			return static::$_parameterKeys[$thisObjectID];
 		}
 		$classes = array( $thisClass );
-	//	var_export( static::getParameterKeysFromTheseOtherClasses( $parameters ) );
+
 		$parameterKeysClasses = static::getParameterKeysFromTheseOtherClasses( $parameters );
 		if( is_array( $parameterKeysClasses ) )
 		{
 			$classes = array_merge( $classes, $parameterKeysClasses );
 		}
-	//	var_export( $thisClass );
-	//	var_export( $classes );
+
+
 		$classes = array_unique( $classes );
-	//	var_export( $classes );
+
 		$content = file_get_contents( __FILE__ ) ;
 		$filter = new Ayoola_Filter_ClassToFilename();
 		foreach( $classes as $class )
@@ -1452,36 +1447,36 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				}
 				$classFile = $filter->filter( $class );
 				$classFile = Ayoola_Loader::getFullPath( $classFile );
-			//	var_export( $classFile );
+
 				$fileContent = file_get_contents( $classFile );
 				$content .= $fileContent;
 				preg_match_all( "/class\s([a-zA-Z_]*)\sextends\s([a-zA-Z_]*)/", $fileContent, $abstract );
-		//		var_export( $class );
-		//		var_export( $abstract[2][0] );
+
+
 				$class = @$abstract[2][0];
 				if( ! $class || in_array( $class, $classes ) )
 				{
-				//	var_export( $class );
+
 					break;
 				}
 				else
 				{
 					$classes[] = $class;
 				}
-			//	var_export( $abstract[2] );
+
 			}
 			while( ! empty( $abstract[2] ) );
 		}
-//		$class = get_called_class();
+
 
 
 		preg_match_all( "/getParameter\( '([a-z_-]*)' \)/", $content, $results );
-	//	var_export( $class );
+
 		$results[1] = array_unique( $results[1] );
 
 		//
 		$supplementary = array();
-	//	var_export( $parameters['markup_template_object_name'] );
+
 		if( ! empty( $parameters['markup_template_object_name'] ) && is_array( $parameters['markup_template_object_name'] ) )
 		{
 			foreach( $parameters['markup_template_object_name'] as $counter => $eachKey )
@@ -1495,8 +1490,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$supplementary[] = $each . '[' . $counter . ']';
 				}
 			}
-	//		var_export( $parameters['markup_template_object_name'] );
-	//		var_export( $supplementary );
+
+
 		}
 		$results[1][] = 'set_access_level';
 		$results[1][] = 'wrap_widget';
@@ -1505,13 +1500,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		static::$_parameterKeys[$thisObjectID] = $results[1];
 	//	if( in_array( 'Application_Profile_View', $classes ) )
 		{
-	//		var_export( $results[1] );
+
 		}
 
-	//	var_export( $results[1] );
-	//	var_export( $content );
-	//	var_export( $classFile );
-	//	exit();
+
+
+
+
 		return static::$_parameterKeys[$thisObjectID];
 	}
 
@@ -1523,10 +1518,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     protected static function getViewableObjectRepresentation( array $object )
     {
-	//	var_export( $object );
+
 		$html = null;
 		$object['object_name'] = $object['object_name'] ? : $object['class_name'];
-	//	$object['object_unique_id'] = @$object['object_unique_id'] ? : ( md5( $object['object_name'] ) . rand( 100, 1000 ) );
+
 		$advancedName = 'advanced_parameters_' . $object['object_unique_id'] . '';
 		$html .= "<div data-class_name='{$object['class_name']}' name='over_all_object_container' class='DragBox' id='" . $object['object_unique_id'] . "' title='Move this object by dragging it around - " . $object['view_parameters'] . "' data-object_name='{$object['object_name']}' >";
 		$title = ( ( $object['view_parameters'] ? : $object['object_name']::getObjectTitle() ) ? : $object['object_name'] );
@@ -1559,17 +1554,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '<div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;' . $openAdvancedOption . '" title="" class="advanced_options pc_page_object_specific_item " data-parameter_name="parent">';
 
 
-		//		$html .= '<div style="clear:both;" name="' . $advancedName . '" class=""><label>Inject some parameters to this object...</label></div>';
+
 
 			$form = new Ayoola_Form( array( 'name' => $advancedName, 'data-parameter_name' => 'advanced_parameters', 'class' => '' ) );
 			parse_str( @$object['advanced_parameters'], $advanceParameters );
-		//	$advanceParameters['advanced_parameter_value'][] = 'tested' . time();
-		//	$advanceParameters['advanced_parameter_name'][] = 'test' . time();
-		//	var_export( $advanceParameters );
-		//	var_export( $object );
+
+
+
+
 			self::sanitizeParameters( $object );
 			$object = array_merge( $advanceParameters, $object );
-				//	var_export( $object );
+
 
 			//	check it here first so that it can set the widget options
 			if( @$object['savedwidget_id'] )
@@ -1584,17 +1579,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				}
 			}
             @$object['pagewidget_id'] = @$object['pagewidget_id_switch'] ? : @$object['pagewidget_id'];
-        //    var_export( $object['pagewidget_id'] );
+
             if( @$object['pagewidget_id'] && empty( $_REQUEST['pc_page_editor_content_version'] ) )
 			{
 				if( $pageWidgetToRestore = Ayoola_Object_PageWidget::getInstance()->selectOne( null, array( 'pagewidget_id' =>  $object['pagewidget_id'], ) ) )
 				{
 					if( ! empty( $_REQUEST['rebuild_widget_box'] ) && ( @$object['pagewidget_id_switch'] || @$object['pagewidget_id_version'] ) )
 					{
-					//	var_export( $object );
-					//	var_export( $pageWidgetToRestore['parameters'] );
+
+
                         //  Set version in history
-                    //    var_export( $pageWidgetToRestore['history'][$object['pagewidget_id_version']] );
+
                         if( ! empty( $object['pagewidget_id_version'] ) && ! empty( $pageWidgetToRestore['history'][$object['pagewidget_id_version']] ) )
                         {
                             $pageWidgetToRestore['parameters'] = $pageWidgetToRestore['history'][$object['pagewidget_id_version']];
@@ -1603,20 +1598,20 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                         $object = $pageWidgetToRestore['parameters'] + array( 'class_name' => $object['class_name'] );
 						$object['widget_options'][] = 'savings';
 						$object['pagewidget_id'] = $pageWidgetToRestore['pagewidget_id'];
-					//	$object['pagewidget_id_switch'] = $pageWidgetToRestore['pagewidget_id'];
-                    //    var_export( $object );
+
+
 
 						//	avoid double saves
 						unset( $object['save_widget_as'] );
                         parse_str( @$object['advanced_parameters'], $advanceParameters );
-                    //    var_export( $object );
+
 
 					}
 					elseif( empty( $_REQUEST['rebuild_widget_box'] ) && @$object['pagewidget_id'] )
 					{
-					//	var_export( $object );
+
 						$object = $pageWidgetToRestore['parameters'];
-					//	$object['widget_options'][] = 'savings';
+
                         $object['pagewidget_id'] = $pageWidgetToRestore['pagewidget_id'];
 
 						//	avoid double saves
@@ -1625,7 +1620,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					}
 					else
 					{
-					//	var_export( $object );
+
 						$object = $object + $pageWidgetToRestore['parameters'];
 					}
 				}
@@ -1653,8 +1648,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$widgetName = $object['save_widget_as'];
 					unset( $object['save_widget_as'] );
 
-				//	var_export( $object );
-				//	var_export( $advanceParameters );
+
+
 					$whatToSave = array( 'widget_name' =>  $widgetName, 'class_name' =>  $object['class_name'], 'parameters' => $object, );
 					if( ! Ayoola_Object_SavedWidget::getInstance()->select( null,  array( 'widget_name' =>  $widgetName, 'class_name' =>  $object['class_name'] ) ) )
 					{
@@ -1674,7 +1669,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				//	PageWidgets
 
 				$pageWidgets = Ayoola_Object_PageWidget::getInstance()->select( null, array( 'class_name' =>  $object['class_name'], ) );
-			//	var_export( $pageWidgets );
+
 				$filter = new Ayoola_Filter_SelectListArray( 'pagewidget_id', 'widget_name');
 				$pageWidgets = $filter->filter( $pageWidgets );
 				$pageWidgets ? $fieldset->addElement( array( 'name' => 'pagewidget_id_switch', 'label' => ' ', 'type' => 'Select', 'value' => null ), array( '' => 'Restore Page Widgets' ) + $pageWidgets + array( '9x9' => 'New Page Widgets' ) ) : null;
@@ -1683,7 +1678,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $form->addFieldset( $fieldset );
 
                 $pageWidgetsVersionsKeys = array_keys( $pageWidgetToRestore['history'] );
-            //    var_export( $pageWidgetsVersionsKeys );
+
                 $filterTime = new Ayoola_Filter_Time();
                 $pageWidgetsVersions = array();
                 foreach( $pageWidgetsVersionsKeys as $widgetVersion )
@@ -1700,10 +1695,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 			if( @$object['savedwidget_id'] )
 			{
-			//	$savedWidgets ? $fieldset->addElement( array( 'name' => 'savedwidget_id', 'label' => ' ', 'type' => 'Select', 'value' => @$object['savedwidget_id'] ), array( '' => 'Restore Saved Widgets' ) + $savedWidgets ) : null;
+
 				if( $widgetToRestore = Ayoola_Object_SavedWidget::getInstance()->selectOne( null, array( 'savedwidget_id' =>  $object['savedwidget_id'], ) ) )
 				{
-				//	var_export( $widgetToRestore );
+
 					$object = $widgetToRestore['parameters'];
 
 					//	avoid double saves
@@ -1716,16 +1711,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$fieldset = new Ayoola_Form_Element();
 				$fieldset->addElement( array( 'name' => 'x', 'type' => 'html', ), array( 'html' => $object['class_name']::getHTMLForLayoutEditorAdvancedSettings( $object ) ) );
 				$form->addFieldset( $fieldset );
-			//	var_export( $object['class_name']::getHTMLForLayoutEditorAdvancedSettings( $object ) );
-			//	$html .= ;
+
+
 			}
 
-			//	var_export( $advanceParameters );
+
 			$form->wrapForm = false;
 
 			$form->setParameter( array( 'no_required_fieldset' => true ) );
 			$parameterOptions = array( '' => 'Select Parameter' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() ) + array( '__custom' => 'Custom Parameter' );
-		//	var_export( $advanceParameters['advanced_parameter_value'] );
+
 			if( @in_array( 'parameters', $object['widget_options'] ) || @$advanceParameters['advanced_parameter_value'] )
 			{
 				$i = 0;
@@ -1804,17 +1799,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$inlineWrapperChange = false;
 			if( $object['class_name'] == 'Ayoola_Page_Editor_Text' || $object['class_name'] == 'Ayoola_Page_Editor_Image' )
 			{
-			//	$inlineWrapperChange = true;
+
 
 			$jsChangeWrapper = '
 				var a = ayoola.div.getParent( { element: this, name: \'over_all_object_container\', counter: 10 } );
-			//	alert( a );
+
 
 				var b = this.options[this.selectedIndex].getAttribute( \'data-wrapper_prefix\' ) || \'\';
 				var c = this.options[this.selectedIndex].getAttribute( \'data-wrapper_suffix\' ) || \'\';
 				var d = a.getElementsByClassName( \'object_interior\' )[0];
 				var e  = a.getElementsByClassName( \'object_exterior\' )[0];
-			//	alert( a.getElementsByClassName( \'object_interior\' ).length );
+
 				e.innerHTML = b + d.outerHTML + c;
 
 				//	Regenerate d
@@ -1825,18 +1820,18 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				for( var f = 0; g != e; f++ )
 				{
 					g.setAttribute( \'data-parameter_name\', \'parent\' );
-				//	alert(g.outerHTML);
+
 					g = g.parentNode;
 					//	Prevent infinite loop
 					if( f > 9 ){ break; }
 				}
-			//	alert( b ); data-parameter_name="parent"
-			//	alert( c );
-			//	alert( d );
+
+
+
 
 				';
 			}
-		//	var_export( $advanceParameters );
+
 			if( @in_array( 'wrappers', $object['widget_options'] ) || @$advanceParameters['wrapper_name'] )
 		//	if( $object['wrap_widget'] || $advanceParameters['wrapper_name'] )
 			{
@@ -1845,12 +1840,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$class = Ayoola_Object_Table_Wrapper::getInstance();
 					self::$_wrapperOptions = $class->select();
 				}
-			//	var_export( @$object['wrapper_name'] );
+
 		//		$options = '<select name="wrapper_name" onChange="' . $jsChangeWrapper . '">
 				$options = '<select name="wrapper_name" onChange="">
 								<option value="">No Wrapper...</option>
 								';
-			//	@$object['wrapper_name'] ? var_export( $object['wrapper_name'] ) : null;
+
 				$currentWrapper = array();
 				foreach( self::$_wrapperOptions as $eachWrapper )
 				{
@@ -1911,8 +1906,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '</div>';	//	advanced options
 
 
-	//	$html .= '<div></div>';	//	Wrapper Prefix
-	//	$html .= '<div></div>';	//	Wrapper Suffix
+
+
 
 		//	Retrieving object "interior" from the object class
 
@@ -1932,19 +1927,19 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		if( static::$_editableTitle )
 		{
-		//	$html .= '<button href="javascript:;" title="' . static::$_editableTitle . '"  class="" onclick="ayoola.div.makeEditable( this.nextSibling ); this.nextSibling.style.display=\'block\';"> edit </button>';
-				//	var_export( $object );
-		// /		var_export( $object['editable'] );
+
+
+
 			$editableValue = '' . @$object['editable'] . '';
 			$innerSettingsContent .= '<input placeholder="' . ( static::$_editableTitle ) . '" data-parameter_name="editable" type=text value="' . $editableValue . '" >';
-		//	$html .= '<button href="javascript:;" style="display:none;" class="" title="' . static::$_editableTitle . '" onclick="this.previousSibling.style.display=\'none\';this.style.display=\'none\';"> hide </button>';
+
 		}
 
 		if( @$object['object_interior'] || static::$editorViewDefaultToPreviewMode || @in_array( 'object_interior', $advanceParameters['advanced_parameter_name'] ) )
 		{
-	//		var_export( $object );
+
 			$classToView = $object['class_name'] ? : $object['object_name'];
-	//		var_export( $classToView );
+
 			static::$editorViewDefaultToPreviewMode && $innerSettingsContent ? $html .= '<div  data-parameter_name="parent" class="pc_page_object_specific_item pc_page_object_inner_settings_area" >' . $innerSettingsContent
 /*
 			.
@@ -1963,13 +1958,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	/object/name/Ayoola_Object_Preview/?class_name=' . $classToView . '
 			$parameters = Ayoola_Page_Editor_Layout::prepareParameters( $object );
 			$html .= '<div data-parameter_name="parent" class="pc_page_object_inner_preview_area" >' . Ayoola_Abstract_Viewable::viewObject( $classToView, $parameters + array( 'rebuild_widget' => 1 ) ) . '</div>';
-	//		var_export( $object );
+
 		}
 		elseif( $innerSettingsContent )
 		{
 			$html .= $innerSettingsContent;
 		}
-		//	var_export( $object );
+
 		if( @$object['call_to_action'] )
 		{
 			$html .= '<textarea name="' . $advancedName . '" placeholder="Enter HTML for a Call-To-Action" data-parameter_name="call_to_action" style="width:100%;" onclick="">' . @$object['call_to_action'] . '</textarea>';
@@ -1991,7 +1986,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '<div name="' . $advancedName . '_interior" style="' . $openOrNot . '" title="' . $object['view_parameters'] . '" class="status_bar pc_page_object_specific_item pc_full_width">';
 
 		//	Help
-	//	$html .= '<a class="title_button" title="Seek help on how to use this page editor" name="" href="http://pagecarton.org/docs" onclick="this.target=\'_new\'">?</a>';
+
 
 		//	Export
         $html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var b = this.parentNode.parentNode.getElementsByClassName( \'import_export_content\' ); b = b[0];  if( b.style.display == \'none\' ){  b.value = this.parentNode.parentNode.outerHTML; b.style.display = \'block\'; b.focuc();  var c = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' )[0]; c.style.display = \'none\'; this.innerHTML = \'&#8635; Import\' } else {  b.style.display = \'none\'; b.value ? ( this.parentNode.parentNode.outerHTML = b.value ) : null; this.innerHTML = \'&#8635;\'; } pc_makeInnerSettingsAutoRefresh(); "><i class="fa fa-code"></i></a>';
@@ -2024,9 +2019,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		if( ! empty( $parameters['advanced_parameters'] ) )
 		{
 			parse_str( $parameters['advanced_parameters'], $advanceParameters );
-		//	var_export( $advanceParameters );
+
 			@$advanceParameters = array_combine( $advanceParameters['advanced_parameter_name'], @$advanceParameters['advanced_parameter_value'] ) ? : array();
-		//	var_export( $advanceParameters );
+
 			$parameters += $advanceParameters;
 			unset( $parameters['advanced_parameters'] );
 		}
@@ -2093,22 +2088,22 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			return $this->_parameter;
 		}
-	//	var_export( $key . $this->_parameter['parameter_suffix'] );
+
 	//	if( isset( $this->_parameter['parameter_suffix'] ) )
 		{
-		//	var_export( $key . $this->_parameter['parameter_suffix'] );
-		//	return $this->_parameter[$key];
+
+
 		}
 		if( isset( $this->_parameter['parameter_suffix'] ) && array_key_exists( $key . $this->_parameter['parameter_suffix'], $this->_parameter ) )
 		{
-		//	var_export( $key . $this->_parameter['parameter_suffix'] );
+
 			return $this->_parameter[$key . $this->_parameter['parameter_suffix']];
 		}
 		if( array_key_exists( $key, $this->_parameter ) )
 		{
 			return $this->_parameter[$key];
 		}
-	//	throw new Ayoola_Exception( 'KEY IS NOT AVAILABLE IN PARAMETERS: ' . $key );
+
 	}
 
     /**
@@ -2119,7 +2114,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     public function setViewParameter( $parameter )
 	{
-//	var_Export( __LINE__ );
+
 		$this->_viewParameter = $parameter ;
 
 		//	compatibility.
@@ -2130,7 +2125,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	{
 		$this->_viewOption = $parameter ;
 
-	//	var_export( $parameter );
+
 
 		//	compatibility.
 		$this->_parameter['option'] = $parameter;
@@ -2184,7 +2179,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             if( is_object( $content ) ){ $content = $content->view(); }
             if( ! trim( $content ) )
             {
-            //	var_export( $content );
+
                 //	don't return empty tags
                 return false;
             }
@@ -2203,8 +2198,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             { 
                 $this->_viewContentText = null;
                 $this->_viewContent = new Ayoola_Xml();
-            //	self::v( get_class( $this ) );
-            //	self::v( $this->wrapViewContent );
+
+
                 if( $this->wrapViewContent && ! $this->getParameter( 'no_view_content_wrap' ) )
                 {
                     $element = $this->getParameter( 'object_container_element' ) ? : static::$_viewContentElementContainer;
@@ -2219,7 +2214,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                         $element = 'div';
                         break;
                     }
-            //		self::v( $this->getParameter( 'object_container_element' )  );
+
                     $documentElement = $this->_viewContent->createElement( $element );
                     $documentElement->setAttribute( 'data-object-name', $this->getObjectName() );
                     $documentElement->setAttribute( 'name', $this->getObjectName() . '_container' );
@@ -2348,12 +2343,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     public static function viewObject( $objectName, $parameters = null )
 	{
-	//		var_export( $objectName );
+
 		if( ! Ayoola_Loader::loadClass( $objectName ) )
 		{
 			return false;
 		}
-//		var_export( $objectName );
+
 
 		return $objectName::viewInLine( $parameters );
 	}
@@ -2393,7 +2388,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$dataToSend = json_encode( $this->_objectData );
 
 				//	json data was being truncated
-			    //	header( 'Content-Length: ' . strlen( $dataToSend ) );
+
 				echo $dataToSend;
 
 				//	Log early before we exit
@@ -2417,7 +2412,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$this->_objectData = array_intersect_key( $this->_objectData, $whitelist );
 				}
 				$dataToSend = json_encode( $this->_objectData );
-			//	header( 'Content-Length: ' . strlen( $dataToSend ) );
+
 
 				echo $dataToSend;
 				//	Log early before we exit
@@ -2475,15 +2470,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				if( ! $template = $this->getMarkupTemplate() )
 				{
 					//	Allow page builder to be able to set a default content incase theres no data used as template markup
-			        //		$html = $this->getParameter( 'markup_template_no_data' );
+
 					if( ! $template )
 					{
 						$html = $content;
 					}
 					else
 					{
-					//	var_export( $html );
-					//	var_export( $this->getParameter( 'markup_template' ) );
+
+
 					}
 				}
 				else
@@ -2550,8 +2545,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	adding this global causes variable to be available on widgets using same variables
 					//	like username
 					#	Don't display user infor for signed out user
-				    //	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['post'] ? : array(), $this->_objectTemplateValues );
-                    //	$this->_objectTemplateValues = array_merge( @Ayoola_Application::$GLOBAL['profile'] ? : array(), $this->_objectTemplateValues );
+
+
                     //  only show widget if some parameters are true
                     if( $this->getParameter( 'required_template_variables' ) )
                     {
@@ -2578,14 +2573,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				}
 				if( $this->getParameter( 'wrapper_name' ) && $html )
 				{
-                //    var_export( $this );
+
 					$html =  '<div class="'. $this->getParameter( 'wrapper_inner_class' ) .'">' . $html . '</div>';
 					$html =  Ayoola_Object_Wrapper_Abstract::wrapContent( $html, $this->getParameter( 'wrapper_name' ) );
 				}
 				if( ( $this->getParameter( 'object_style' ) || $this->getParameter( 'object_class' ) ) && $html )
 				{
 					$html = '<div class="'. $this->getParameter( 'object_class' ) .'" style="'. $this->getParameter( 'object_style' ) . '">' . $html . '</div>';
-					//	self::v( $template );
+
 				}
                 //	Define content to clear from the screen
                 $contentToClear = $this->getParameter( 'content_to_clear' ) . ( isset( $this->_parameter['content_to_clear_internal'] ) ? $this->_parameter['content_to_clear_internal'] : "" );
@@ -2593,7 +2588,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 {
                     $search = array_map( 'trim', explode( "\n", $contentToClear ) );
                     $html = str_replace( $search, '', $html );
-                    //	self::v( $template );
+
                 }
                 try
                 {        
