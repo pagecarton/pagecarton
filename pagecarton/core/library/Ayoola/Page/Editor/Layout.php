@@ -860,6 +860,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					//	ignoring them in savemode seems to fix this.
 					if( ! $this->isSaveMode() )
 					{
+                        $eachObject['refresh_page_widget'] = false;
 						$sectionalObjectCollection .= $this->getViewableObject( $eachObject );
 					}
 
