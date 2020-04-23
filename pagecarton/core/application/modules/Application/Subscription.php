@@ -278,7 +278,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 		
 //		var_export( $newCart );
 		
-		//	Notify Admin
+/* 		//	Notify Admin
 		$mailInfo = array();
 		$mailInfo['subject'] = 'Item added to shopping cart';
 		$mailInfo['html'] = true; 
@@ -296,7 +296,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 			@self::sendMail( $mailInfo );
 		}
 		catch( Ayoola_Exception $e ){ null; }
-		return true;
+ */		return true;
     }
 	
     /**
