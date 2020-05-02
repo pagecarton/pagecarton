@@ -64,7 +64,6 @@ class Application_User_Editor extends Application_User_Abstract
 			$this->createForm( 'Save...', $data['username'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-	//		var_export( $values );  
 			
 			//	Empty password means we are not trying to update it
 			unset( $values['password2'] );
@@ -123,6 +122,7 @@ class Application_User_Editor extends Application_User_Abstract
 					}
 				break;
 				case 'file':
+				case 'private':
 					try
 					{
 						$values = $values + $data;

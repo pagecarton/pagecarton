@@ -60,7 +60,10 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 			
 			
 			//	First seek in the local flatfile
-			$table = Ayoola_Access_LocalUser::getInstance();
+            $table = "Ayoola_Access_LocalUser";
+            $table = $table::getInstance( $table::SCOPE_PROTECTED );
+            $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PROTECTED );
+            $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PROTECTED );
 			if( $info = $table->selectOne( null, $identifier ) )
 			{
 				if( $info['user_information'] )  
