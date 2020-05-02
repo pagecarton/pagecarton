@@ -245,7 +245,22 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		do
 		{
 			//	Check from local table
-
+            $table = $this->getDbTable();
+            if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
+            {
+                $database = 'file';
+            }
+            switch( $database )
+            {
+                case 'private':
+                    // Find user in the LocalUser table
+                    $table = "Ayoola_Access_LocalUser";
+                    $table = $table::getInstance( $table::SCOPE_PRIVATE );
+                    $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+                    $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+                break;
+            }
+    
 			$identifierInfo = $this->getIdentifier();
 			$where = array( $this->getIdColumn() => array( $identifierInfo[$this->getIdColumn()], strtolower( $identifierInfo[$this->getIdColumn()] ) ) );
 			if( $info = self::getUserInfo( $where ) )
@@ -256,7 +271,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			//	case 'relational':
 			if( $database === 'relational' )
 			{
-				$data = $this->getDbTable()->selectOne( null, strtolower( implode( ', ', $this->_otherTables ) ), $this->getIdentifier() );
+				$data = $table->selectOne( null, strtolower( implode( ', ', $this->_otherTables ) ), $this->getIdentifier() );
 				//	var_export( $data );
 				$this->_identifierData = $data;
 				break;

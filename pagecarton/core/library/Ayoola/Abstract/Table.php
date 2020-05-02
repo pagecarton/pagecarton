@@ -342,17 +342,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			@$b = $b[$key];
 			return is_numeric( $a ) && is_numeric( $b ) ? ( ( $a < $b ) ? -1 : ( ( $a > $b ) ? 1 : 0 ) ) : strcmp( $a, $b );
 		};
-/* 		$sortColumn = create_function  
-		(
-			'$a,$b',
-			'
-				@$a = $a["' . $key . '"];
-				@$b = $b["' . $key . '"];
-			return is_numeric( $a ) && is_numeric( $b ) ? ( ( $a < $b ) ? -1 : ( ( $a > $b ) ? 1 : 0 ) ) : strcmp( $a, $b );'
-		//	strcmp($a["fruit"], $b["fruit"]);
-		
-		);  
- */		usort( $array, $sortColumn );
+		usort( $array, $sortColumn );
 		return $array;
     } 
 	
@@ -392,7 +382,6 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
      public static function getPrimaryId( Ayoola_Dbase_Table_Interface $table, array $insertValues, array $selectValues = null, array $options = null )
     {
-		//	var_export( $insertValues );
 		$selectValues = $selectValues ? : $insertValues;
 		do
 		{

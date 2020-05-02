@@ -288,7 +288,10 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
     public static function localLogin( array & $values )
     {
 		// Find user in the LocalUser table
-        $table = Ayoola_Access_LocalUser::getInstance();
+        $table = "Ayoola_Access_LocalUser";
+        $table = $table::getInstance( $table::SCOPE_PROTECTED );
+        $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PROTECTED );
+        $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PROTECTED );
 
         if( $values['email'] )
         {
@@ -298,25 +301,17 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 		//	Retrieve the password hash
 		$access = new Ayoola_Access();
 		$hashedCredentials = $access->hashCredentials( $values );
-	//	$table->drop();
-	//	self::v( $table->select() );
         if( empty( $hashedCredentials ) )
         {
             return false;
         }
-    //    var_export( $values );
-		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
 		if( $info = $table->selectOne( null, array_map( 'strtolower', $hashedCredentials ) ) )
 		{
-		//	var_export( $info );
-		//	return false;
 			if( $info['user_information'] )
 			{
-			//	var_export( $info );
 				return self::login( $info['user_information'] );
 			}
 		}
-	//	var_export( $hashedCredentials );
 		return false;
 	}
 
@@ -370,15 +365,11 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			//	Localize information
 			try
 			{
-/* 				$table = new Ayoola_Access_LocalUser();
-				$table->delete( array( 'username' => $userInfo['username'] ) );
- */
 				//	Retrieve the password hash
 				$access = new Ayoola_Access();
 				$hashedCredentials = $access->hashCredentials( $values );
 				$newInfo = $userInfo;
 				$newInfo['password'] = $hashedCredentials['password'];
-			//	var_export( $newInfo );
 				Ayoola_Access_Localize::info( $newInfo );
 
 			}

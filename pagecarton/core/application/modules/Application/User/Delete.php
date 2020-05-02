@@ -40,46 +40,31 @@ class Application_User_Delete extends Application_User_Abstract
 			$this->createConfirmationForm( 'Delete ' . $data['username'],  'Delete User' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			$namespace = 'Application_User_';
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			
-			
-//		case 'cloud':
-			$response = Ayoola_Api_UserDelete::send( $data );
-	//		var_export( $response );
-			if( true === $response['data'] )
-			{
-				$this->setViewContent(  '' . self::__( '<p class="goodnews">User deleted successfully in the API</p>' ) . '', true  );
-			}
-//		break;
-//		case 'file':
-			// Find user in the LocalUser table
+            if( ! $values = $this->getForm()->getValues() ){ return false; }
+            
 			$table = Ayoola_Access_LocalUser::getInstance();
-		//	var_export( $data );
-
+            switch( $database )
+            {
+                case 'private':
+                    // Find user in the LocalUser table
+                    $table = "Ayoola_Access_LocalUser";
+                    $table = $table::getInstance( $table::SCOPE_PRIVATE );
+                    $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+                    $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+                break;
+            }
 			if( $info = $table->delete( array( 'username' => strtolower( $data['username'] ) ) ) )
 			{
 				$this->setViewContent(  '' . self::__( '<p class="goodnews">User deleted successfully on the local table</p>' ) . '', true  );
 			}
 			if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 			{
-			//	$database = 'cloud';
-			}
+
+            }
 			switch( $database )
 			{
 				case 'relational':
-				//	self::v( $this->deleteDb( false ) ); 					
-/* 					foreach( $this->_otherTables as $each )
-					{
-						$table = $namespace . $each;
-						$table = new $table();
-						if( ! $table->delete( $this->getIdentifier() ) )
-						{
-							self::v( $this->getIdentifier() ); 
-							$this->getForm()->setBadnews( 'Error while deleting ' . $each );
-						//	return false;
-						}
-					}
- */					if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( '<p class="goodnews">User deleted successfully</p>' ) . '', true  ); }
+				if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( '<p class="goodnews">User deleted successfully</p>' ) . '', true  ); }
 				break;
 			
 			}
