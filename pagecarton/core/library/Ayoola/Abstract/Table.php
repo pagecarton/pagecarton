@@ -561,22 +561,15 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     public function setIdentifier( Array $values = null )
     {	
 		if( null === $values ){ $values = $_REQUEST; }
-	//	$this->_identifier = is_array( $this->_identifier ) ? $this->_identifier : array();
 		if( empty( $this->_identifierKeys ) && ! empty( $this->_idColumn ) )
 		{
 			$this->_identifierKeys = array( $this->_idColumn );
 		} 
-	//	var_export( $this->_identifierKeys );
-//	var_export( $this->_identifierKeys );
-//	var_export( $this->getParameter() ); 
 
 		foreach( $this->_identifierKeys as $value )
 		{
-//	var_export( $value );
 			if( ! array_key_exists( $value, $values ) )
 			{ 
-	//			var_export( $value );
-	//			var_export( $values );
 				if( array_key_exists( Ayoola_Form::hashElementName( $value ), $values ) )
 				{
 					$values[$value] = $values[Ayoola_Form::hashElementName( $value )];

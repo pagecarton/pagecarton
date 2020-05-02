@@ -462,7 +462,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 
 			}
         //   if( $where && empty( $keyFound ) && @$options['supplementary_data_key'] )
-            if( count( $where ) !== count( $keyFound ) )
+            if( is_array( $where ) && count( $where ) !== count( $keyFound ) )
             {
                 //  Trying strict matching
                 //  hopefully it will help solve select errors.

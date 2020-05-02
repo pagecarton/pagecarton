@@ -14,9 +14,8 @@
 /**
  * @see Ayoola_Exception 
  */
- 
-require_once 'Ayoola/Exception.php';
 
+require_once 'Ayoola/Exception.php';
 
 /**
  * @user   Ayoola
@@ -27,7 +26,7 @@ require_once 'Ayoola/Exception.php';
 
 class Ayoola_Form extends Ayoola_Abstract_Playable
 {
-	
+
     /**
      * The default attributes of the form
      * 
@@ -44,34 +43,34 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      * @var string 
      */				
 	public $callToAction;
-	
+
     /**
      * Inject the next or clear command to form.
      * 
      * @var array 
      */				
 	public $actions = array();
-	
+
     /**
      * Description of the Form
      * 
      * @var string 
      */				
 	protected $_description;
-	
+
     /**
      * 
      * @var array 
      */				
 	public $requiredElements = array();
-	
+
     /**
      * Validators of the Form
      * 
      * @var array 
      */				
 	protected $_requirements = array();
-	
+
     /**
      * External form requirements
      * 
@@ -85,196 +84,196 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      * @var array 
      */				
 	protected $_attributes = array();
-	
+
     /**
      * Holds the fieldsets
      * 
      * @var array 
      */				
 	protected $_fieldsets = array();
-	
+
     /**
      * Filters of the Form
      * 
      * @var array 
      */				
 	protected $_filters = array();
-	
+
     /**
      * An array of error messages
      * 
      * @var boolean 
      */					
 	protected $_badnews = array();
-	
+
     /**
      * Names of the fields on the form
      * 
      * @var array 
      */							
 	protected $_names = array();
-	
+
     /**
      * Name/Value pairs of the fields on the form
      * 
      * @var array 
      */							
 	protected $_values = array();
-	
+
     /**
      * Imported Values from GET or POST superglobal
      * 
      * @var array 
      */							
 	protected $_global = array();
-	
+
     /**
      * Values to use as default values in elements
      * 
      * @var array 
      */							
 	protected static $_defaultValues = array();
-	
+
     /**
      * Values can be injected through this property
      * 
      * @var array
      */
 	public $fakeValues = array();
-	
+
     /**
      * 
      * 
      * @var string 
      */				
 	public $formNamespace;
-	
+
     /**
      * Value for submit button
      * 
      * @var string 
      */				
 	public $submitValue;
-	
+
     /**
      * Flag to whether to display error message before elements
      * 
      * @var boolean 
      */				
 	public $badnewsBeforeElements = false;
-	
+
     /**
      * Flag to whether to display error message before each elements
      * 
      * @var boolean 
      */				
 	public $badnewsPerElement = true;
-	
+
     /**
      * Switch to false to disable error display
      * 
      * @var boolean 
      */				
 	public $showBadnews = true;
-	
+
     /**
      * Wrap form with a div element.
      * 
      * @var boolean 
      */				
 	public $wrapForm = true;
-	
+
     /**
      * Switch to true to load each fieldset at a time
      * 
      * @var boolean 
      */					
 	public $oneFieldSetAtATime = false;
-	
+
     /**
      * Switch to true to load each fieldset at a time
      * 
      * @var boolean 
      */					
 	public $oneFieldSetAtATimeJs = false;  
-	
+
     /**
      * Switch to true to put captcha in the form
      * 
      * @var boolean 
      */							
 	public $useCaptcha = false;
-	
+
     /**
      * Stop validation on the first error
      * 
      * @var boolean 
      */						
 	protected $_breakOnFailure = false;
-	
+
     /**
      * Switch to true to indicate that form has been validated
      * 
      * @var boolean 
      */							
 	protected $_validated = false;
-	
+
     /**
      * Switch to true to indicate that completion of fieldsetAtAtime
      * 
      * @var boolean 
      */							
 	protected $_stageCompleted = false;
-	
+
     /**
      * Mark-up to display the form
      * 
      * @var string 
      */							
 	protected $_form; 
-	
+
     /**
      * whether to check and filter values
      * 
      * @var boolean 
      */							
 	protected static $_checkValues = true; 
-	
+
     /**
      * whether to check and filter values
      * 
      * @var boolean 
      */							
 	protected static $_placeholders =  array( 'badnews' => '{{{---@@@BADNEWS@@@---}}}' ); 
-	
+
     /**
      * Appended String for Submission detector Element
      * 
      * @var string 
      */					
 	const SUBMIT_DETECTOR = 'SUBMIT_DETECTOR';
-	
+
     /**
      * 
      * 
      * @var string 
      */					
 	const REFRESH_INDICATOR = 'REFRESH_INDICATOR';
-	
+
     /**
      * 
      * 
      * @var string 
      */					
 	const BACKBUTTON_INDICATOR = 'BACKBUTTON_INDICATOR';
-	
+
     /**
      * 
      * 
      * @var string 
      */					
 	const HONEY_POT = 'Delicious';
-	
+
     /**
      * Initialize a new form
      *
@@ -285,23 +284,22 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 		$this->_attributes = _Array( $attributes );
 		$this->_attributes['id'] = @$this->_attributes['id'] ? : @$this->_attributes['name'] . '_form_id';
-		
+
 		//	testing 123
-	//	$this->_attributes['action'] = '/tools/classplayer/get/object_name/' . $this->_attributes['name'] . '/';
+
 		$this->_attributes['class'] = @$this->_attributes['class'] ? : 'pc-form2';
-//	var_export( $this->_attributes['class'] );
+
 		$this->_attributes['action'] = @$this->_attributes['action'] ? : '#' . $this->_attributes['id'];
-		
+
 /* 		//	Check if form was submitted
 		if( @$_REQUEST[$this->_attributes['name'] . self::SUBMIT_DETECTOR] === $this->_attributes['name'] )
 		{
 			$this->_submitted = true;
 		}
  */	//	echo $this->getForm();
-	//	var_export( $this->_attributes );
-	//	$this->setViewContent( $this->getForm() );
+
     }
-	
+
     /**
      * Filters the values
      *
@@ -310,9 +308,9 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */
     protected function _filter( $name )
     {	
-	//	var_export( $this->_filters[$name] );
+
 		if( ! @is_array( $this->_filters[$name] ) ){ return false; }
-		
+
 		//	Filters values before validation
 		$filter = 'Ayoola_Filter_';
 		foreach( $this->_filters[$name] as $seive => $parameter )
@@ -321,7 +319,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			if( ! Ayoola_Loader::loadClass( $requiredFilter ) )
 			{ 
 				continue;
-			//	throw new Ayoola_Exception( 'INVALID FORM FILTER: ' . $requiredFilter  );
+
 			}
 			$process = new $requiredFilter;
 
@@ -332,7 +330,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			{
 				$process->autofill( $parameter );  
 			}
-			
+
 			//	The real filter process
 			if( is_array( $this->_values[$this->_names[$name]['real_name']] ) && @$process->loopFilter !== false )   
 			{
@@ -343,16 +341,14 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			}
 			else
 			{ 
-	//			var_export( strlen( $this->_values[$this->_names[$name]['real_name']] ) );
-	//			var_export( '<br />' );
-		//		var_export( $parameter );
+
 				$this->_values[$this->_names[$name]['real_name']] = $process->filter( $this->_values[$this->_names[$name]['real_name']] );
-			//	var_export( $process->filter( $this->_values[$this->_names[$name]['real_name']] ) );
+
 			}
 		}
-		
+
     }
-	
+
     /**
      * Validate the values
      *
@@ -363,8 +359,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
  		//	Extra check for non-admin
 		$allowedCoders =  Application_Settings_Abstract::getSettings( 'Forms', 'coders_access_group' ); 
-	//	var_export( $allowedCoders );  
-//		var_export( Ayoola_Form::hasPriviledge( $allowedCoders ) );
+
 		//	<a>efewwewe</a>
 	//	if( $allowedCoders && ! Ayoola_Form::hasPriviledge( $allowedCoders ) )
 
@@ -374,16 +369,15 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			//	Turning this to array allows to validate array values
 			$values = $this->_values[$this->_names[$name]['real_name']];
 			$values = is_array( $values ) ? $values : array( $values );
-			//	var_export( $values );
+
 			foreach( $values as $each )
 			{
-		//		var_export( htmlentities( $each ) );
-		//		var_export( htmlentities( strip_tags( $each ) ) );
+
 				if( $each != strip_tags( $each ) )  
 				{
-								
+
 					//	Notify Admin
-			//		$mailInfo['subject'] = 'Alert! Code Injection by user';
+
 					$mailInfo['body'] = 'Alert! Code Injction by user
 					Info: ' . var_export( $this->_values, true ) . '.
 					';
@@ -397,8 +391,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		{
 			//	Turning this to array allows to validate array values
 			$values = $this->_values[$this->_names[$name]['real_name']];
-		//	$values = is_array( $values ) ? $values : array( $values );
-			//	var_export( $values );
+
 			if( is_array( $values ) )
 			{
 				foreach( $values as $key => $each )
@@ -411,11 +404,9 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			{
 				$this->_values[$this->_names[$name]['real_name']] = self::cleanHTML( $values );
 			}
-	//		var_export( $this->_values[$this->_names[$name]['real_name']] );
 
-			
 		}
- 		
+
 		if( ! @is_array( $this->_requirements[$name] ) ){ return true; }
 		$validator = 'Ayoola_Validator_';
 		foreach( $this->_requirements[$name] as $requirement => $parameter )
@@ -428,7 +419,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				{ 
 					//	invalid validator means its always invalid
 					return false;
-				//	throw new Ayoola_Exception( 'INVALID FORM VALIDATOR: ' . $requiredValidator  );
+
 				}
 			}
 			if( ! new $requiredValidator instanceof Ayoola_Validator_Interface )
@@ -442,31 +433,30 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			//convert parameter to array and then autofill
 			if( method_exists( $check, 'autofill' ) )
 			{
-										
+
 				$check->autofill( $parameter );
 			}
-			
+
 			//	Turning this to array allows to validate array values
 			$values = $this->_values[$this->_names[$name]['real_name']];
 			$values = is_array( $values ) ? $values : array( $values );
-		//		var_export( $this->_values );
+
 			foreach( $values as $each )
 			{
-	//			var_export( $check->validate( $each ) );
+
 				if( ! $check->validate( $each ) )
 				{	
 					$label = $this->_names[$name]['label'] ? : 'This field';
 					$badnews = str_ireplace( array( '%value%', '%variable%' ), array( '"' . $label . '"', ( is_scalar( $each ) ? $each : null ) ), isset( $parameter['badnews'] ) ? $parameter['badnews'] : $check->getBadNews() );
-					
+
 					//	Allow optional elements
 				//	if( $this->_names[$name]['real_name'] === 'bbm_pin' )
 					{
-				//			self::v( $each );			
-				//			self::v( $this->_names[$name]['optional'] );			
+
 					}
 					if( isset( $this->_names[$name]['optional'] ) )
 					{
-					//	var_export( $each );
+
 						if( $each === '' )
 						{
 							continue; 
@@ -475,16 +465,16 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					else
 					{
 						$this->setBadnews( $badnews, $this->_names[$name]['real_name'] );
-						
+
 						//	Break on first failure
 						return false; 
 					}
-					
+
 				}
 			}
 		}
     }
-	
+
     /**
      * Return Fieldsets containing universal elements
      *
@@ -496,49 +486,46 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		if( $delay =  Application_Settings_Abstract::getSettings( 'Forms', 'session_delay_time' ) )
 		{
 			$sessionTime = time() - $_SESSION['PC_SESSION_START_TIME'];
-	//		var_export( $sessionTime );
-	//		var_export( '' );
-	//		var_export( $_SESSION['PC_SESSION_START_TIME'] );
-	//		var_export( '' );
+
 			if( $delay > $sessionTime )
 			{
 				$this->setBadnews( 'Please wait ' . ( $delay - $sessionTime ) . ' secs before submitting your form!', '' );
-		//		return false;
+
 			}
 		}
 		//	the settings wast working with this
 	//	if( $this->requiredFieldSet )
 		{
-	//		return $this->requiredFieldSet;
+
 		}
         $element = new Ayoola_Form_Element;
 		$element->useDivTagForElement = false;
-	//	$element->tag = "div";
+
 		if( $this->useCaptcha )
 		{
 			$element->addElement( 'name=>captcha:: type=>Captcha' );
 			$element->addRequirement( 'captcha','Captcha' );
 		}
-		//	var_export( $this->submitValue );
+
 		if( $this->submitValue && ! $this->callToAction )
 		{
-		//	var_export( $this->submitValue );
+
 			$element->addElement( array( 'name' => 'pc-submit-button', 'value' => '<i class="pc_give_space"> </i>' . self::__( $this->submitValue ) . ' <i class="fa fa-chevron-right pc_give_space "></i> <div style="clear:both;"></div> ', 'type' => 'SubmitButton', 'onclick' => 'this.form.submit(); this.value=\'Loading...\'; this.disabled=true; return false;', 'style' => 'display:block;clear:both;margin-top:1em;', 'class' => '', 'data-pc-ignore-field' => 'true' ) );    
 		}
 		foreach( $this->requiredElements as $key => $value )
 		{
-		//	var_export( $this->submitValue );
+
 			$element->addElement( array( 'name' => $key, 'value' => $value, 'type' => 'Hidden' ) );
 		}
 		$element->addElement( array( 'name' => @$this->_attributes['name'] . self::SUBMIT_DETECTOR, 'value' => @$this->_attributes['name'], 'type' => 'Hidden', 'data-pc-ignore-field' => 'true' ) );
-	//	$element->addElement( array( 'name' => 'MAX_FILE_SIZE', 'type' => 'Hidden', 'value' => '107374182', 'data-pc-ignore-field' => 'true' ) );
+
 		$element->addElement( array( 'name' => self::HONEY_POT, 'type' => 'HoneyPot', 'value' => '', 'data-pc-ignore-field' => 'true' ) );
-//		$element->addRequirement( self::HONEY_POT, array( 'Blank' ) );   
+
 		$element->addFilters( 'Trim:: Escape::Alnum' );  
 		$this->requiredFieldSet = $element; 
 		return $this->requiredFieldSet;
 	}
-	
+
     /**
      * Returns _formRequirements
      *
@@ -549,7 +536,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 		return $this->_formRequirements;
 	}
-	 
+
     /**
      * Adds form requirements
      *
@@ -558,42 +545,33 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */		
     public function setFormRequirements( $requirements )
     {
-//		var_export( $requirements );
-	
+
 		//	ADD FORM REQUIREMENTS
 		$requirements = is_string( $requirements ) ? array_map( 'trim', explode( ',', $requirements ) ) : $requirements;
-	//	$requirements = is_array( $requirements ) ? array_unique( $requirements ) : array();
+
 		$requirements = is_array( $requirements ) ? $requirements : array();
 		if( ! $requirements ){ return $requirements; }
-				
+
 		//	Test the first element to detect if each content is an array of ready content
 		$a = $requirements;
 		@$a = array_shift( $a );
 		$table = Ayoola_Form_Requirement::getInstance();
-/* 		if( $requirements && ! is_array( $a ) )  
-		{
-			$requirements = $table->select( null, array( 'requirement_name' => $requirements ) );
-		}
- *///		
-	//	var_export( $requirements );
-	//	$getFieldset = '';
-	//	$getFieldset = create_function( '$class', $getFieldset );
+
 		switch( gettype( $a ) )
 		{
 			case 'string':
 				$requirements = $table->select( null, array( 'requirement_name' => $requirements ) );
 			break;
 		}
-	//	$requirements = array();
-	//	var_export( $requirements );
+
 		if( $requirements )
 		{
-		//	$this->submitValue = $this->submitValue ? : 'Continue...';
-		}
+
+        }
+        var_export( $requirements );
 		foreach( $requirements as $each )  
 		{
-		//	continue;
-		 //	var_export( $each );
+
 			switch( gettype( $each ) )
 			{
 				case 'object':
@@ -609,28 +587,23 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				break;
 				case 'array':
 					$combinedInfo = $each;
-				//	self::v( @$combinedInfo['parameters'] );
+
 					if( ! empty( $each['requirement'] ) )
 					{
 						$b = $table->selectOne( null, array( 'requirement_name' => $each['requirement'] ) );
 						$combinedInfo = array_merge( $b, $each );
 					}
-			//		var_export( $combinedInfo );
+
 					$class = @$combinedInfo['requirement_class'];	 
-				//	continue;
-				//	var_export( $class );
-					
+
 					if( ! Ayoola_Loader::loadClass( $class ) )
 					{
 						continue 2;
-				//		throw new Ayoola_Object_Exception( 'INVALID CLASS: ' . $class );
+
 					}
-			//		$class = new $class( @self::$_requirementOptions[$combinedInfo]['parameters'] );
-				//	var_export( $combinedInfo['parameters'] );
+
 					$class = new $class( @$combinedInfo['parameters'] );
-				//	$class = new $class();
-				//	continue;
-				//	var_export( $combinedInfo );
+
 					if( ! method_exists( $class, 'createForm' ) ){ continue 2; }
 					$this->_formRequirements[] = $class;
 					$fieldsets = $class->getForm()->getFieldsets();
@@ -638,14 +611,14 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					foreach( $fieldsets as $key => $fieldset )
 					{
 						$fieldset->appendElement = false;
-				//		@$fieldset->addLegend( $this->getParameter( $each['requirement_name'] . '_fieldset_legend' ) ? : ( $combinedInfo['requirement_legend'] . ( $fieldset->getLegend() ?  ' | ' . $fieldset->getLegend() : null  ) ) );
+
 						if( @$b['requirement_goodnews'] )
 						{
-					//		$fieldset->addElement( array( 'type' => 'html', 'name' => $key . '_Xe' ), array( 'html' => '<blockquote class=""><em class="">' . str_ireplace( '@@@requirement_title@@@', @$combinedInfo['requirement_title'] , $b['requirement_goodnews'] ) . '</em></blockquote>' ) );
+
 						}
 						if( @$each['requirement_goodnews'] )
 						{
-					//		$fieldset->addElement( array( 'type' => 'html', 'name' => $key . '_e' ), array( 'html' => '<blockquote class=""><em class="">' . str_ireplace( '@@@requirement_title@@@', @$combinedInfo['requirement_title'] , $each['requirement_goodnews'] ) . '</em></blockquote>' ) );
+
 						}
 						$this->addFieldset( $fieldset );
 					}
@@ -654,7 +627,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 		return $requirements;
     }
-	
+
     /**
      * Return markup for form
      *
@@ -663,101 +636,88 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */		
     public function getForm( array $formOptions = null )
     {
-	//	var_export( $this->_form );
+
 		if( null === $this->_form ){ $this->setForm( $formOptions ); }	
         return $this->_form;
     }
-	
+
     /**
      * Creates the form
      *
      */		
     public function setForm( array $formOptions = null )
     {
-	//	var_export( __LINE__ );
-	//	array_push( $this->_fieldsets, $this->getRequiredFieldset() );
-	//	var_export( $formOptions );
+
 	//	if( is_array( $_POST['fake_values_namespace'][$this->formNamespace] ) )
 		if( is_array( @$_POST['Ayoola_Form'][$this->formNamespace]['fake_values'] ) )
 		{
 			$this->fakeValues = $_POST['Ayoola_Form'][$this->formNamespace]['fake_values'];
-			//	var_export( $this->fakeValues );
+
 		}
 		if( $this->getOneFieldSetAtATime() && isset( $_POST['Ayoola_Form'][$this->formNamespace]['one_field_set_at_a_time'] ) )
 		{
 			$this->oneFieldSetAtATime = $_POST['Ayoola_Form'][$this->formNamespace]['one_field_set_at_a_time'];
-	//		var_export( $this->fakeValues );
+
 		}
-		
+
 		$this->_attributes = $this->_attributes ? array_merge( $this->_defaultAttributes, $this->_attributes ) : $this->_defaultAttributes;
 		$this->_attributes['id'] .= $this->formNamespace;
-	//	var_export( $this->_attributes );
-		
+
 		$form = null;
 		$form .= $this->wrapForm ? "<div id='{$this->_attributes['id']}_container'>\n" : null;
 		if( $this->oneFieldSetAtATimeJs )
 		{
 			$this->_attributes['class'] .= ' pc-form-one-fieldset-at-a-time';
-		//	Application_Style::addCode( '.pc' );
+
 		}
 		if( ! $this->getParameter( 'no_form_element' ) )
 		{
-		//	$form .= '<form onsubmit="pc-submit-button.disabled = true;' . self::hashElementName( 'pc-submit-button' ) . '.disabled = true; return true;" data-pc-form=1 ';   
+
 			$form .= '<form data-pc-form=1 ';   
 			foreach( $this->_attributes as $key => $value )
 			{
 				$form .= empty( $this->_attributes[$key] ) ? null : " $key='$value' ";  
 			}
-			
+
 			$this->getGlobal();	//	Load the global
 			$form .= ">\n";
 		}
 	//	if( ! empty( $_GET['pc_inspect_widget_form'] ) )
 		{
-	//		$form .= var_export( $this->_names, true );   
+
 		}
 		$i = 0;
 		if( $this->getOneFieldSetAtATime() )
 		{
 			$values = self::getStorage( $this->_attributes['id'] )->retrieve();
-			
+
 			//	So we can also have this as global values like get and post
-		//	self::getStorage( 'global_values' )->store( $values );
+
 			$values = is_array( $values ) ? $values : array();
-			
+
 			//	So we can also have this as global values like get and post
-		//	self::getStorage( 'global_values' )->store( $values );
-	//		var_export( $_REQUEST[self::hashElementName( self::REFRESH_INDICATOR ) . "_x"] );
-	//		var_export( $_REQUEST );
-		//	var_export( $this->actions );
-		//	var_export( in_array( self::BACKBUTTON_INDICATOR, $this->actions ) );
-			
+
 			if( isset( $_REQUEST[self::REFRESH_INDICATOR] ) || in_array( self::REFRESH_INDICATOR, $this->actions ) )
 			{
-		//	var_export( $values );
-			//	unset( $values['oneFieldSetAtATime'] );
+
 				self::getStorage( $this->_attributes['id'] )->clear();
 				$_REQUEST[self::REFRESH_INDICATOR] = true;
-		//		self::getStorage( $this->_attributes['id'] )->store( array() );
-			//	self::getStorage( 'global_values' )->clear();
-				
+
 			}
 			elseif( isset( $_REQUEST[self::BACKBUTTON_INDICATOR] ) || in_array( self::BACKBUTTON_INDICATOR, $this->actions ) )
 			{
 				$_REQUEST[self::BACKBUTTON_INDICATOR] = true;
 				@array_pop( $values['oneFieldSetAtATime'] );
-			//	$_GET = $values;
-			//	var_export( $values );
+
 				self::getStorage( $this->_attributes['id'] )->store( $values );
-		//		self::getStorage( 'global_values' )->clear();
+
 			}
 		}
 	//	$fieldsets = 
-	
+
 		//	ADD POST-FORM REQUIREMENTS
 		$this->setFormRequirements( $this->getParameter( 'requirements' ) );
-		
-		
+
 		if( @$values )
 		{
 			//	form filling in progress, no need for call to action
@@ -765,41 +725,35 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 		if( $this->callToAction )
 		{
-		//	$this->getOneFieldSetAtATime() = true;
-		
+
 			//	Show call to action, disable all elements
 			$form .= $this->callToAction;
 			$form .= '<span style="display:none;">';
-		//	$this->_fieldsets = array();
+
 		}
-		
+
 		//	Fieldset groups
 		$group = null;
 		foreach( $this->_fieldsets as $fieldsetId => $fieldset )
 		{	
-				//	var_export( $fieldsetId );
+
 			if( $this->getOneFieldSetAtATime() )
 			{
 				$values = self::getStorage( $this->_attributes['id'] )->retrieve();
-			//	var_export( $values );
+
 				$values = is_array( $values ) ? $values : array();
-				
-				//	self::v( $values );
+
 				if( @$values['oneFieldSetAtATime'][$fieldsetId] )
 				{
 					//	Stage already completed
-				//	var_export( $fieldsetId );
-				//	var_export( $values[$fieldsetId] );
+
 				//	$trueValues = $values[$fieldsetId] +
-				//	self::v( $values['oneFieldSetAtATime'][$fieldsetId] );
-				//	self::v( $fieldsetId );
+
 					continue;
 				}
 /* 				elseif( $i === 1 )
 				{
-				//	self::v( $group );
-				//	self::v( $fieldsetId );
-				//	self::v( $fieldset->group );
+
 				//	if( $group == $fieldset->group )
 					{
 						//	Same Group, do it together
@@ -811,9 +765,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				}
  */				elseif( $i )
 				{
-				//	self::v( $group );
-				//	self::v( $fieldsetId );
-				//	self::v( $fieldset->group );
+
 				//	if( $group == $fieldset->group )
 					{
 						//	Same Group, do it together
@@ -832,66 +784,55 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				}
  */			//	$group = $fieldset->group;
 			}
-			
+
 			$each = $this->getElementMarkup( $fieldset );
-		//	var_export( self::getStorage( 'global_values' )->retrieve() );
+
 			if( $this->isSubmitted() && ! $this->_badnews && ! $this->_stageCompleted )
 			{
 				if( $this->getOneFieldSetAtATime() && ! isset( $_REQUEST[self::BACKBUTTON_INDICATOR] ) && ! isset( $_REQUEST[self::REFRESH_INDICATOR] ) )
 				{
-					//	var_export( $fieldsetId );
-					//	var_export( $i );
+
 					$values['oneFieldSetAtATime'][$fieldsetId] = true;
 					$values = array_merge( $values, $this->_values );
 					self::getStorage( $this->_attributes['id'] )->store( $values );
-					
+
 					//	So we can also have this as global values like get and post
-			//		self::getStorage( 'global_values' )->store( $values );
+
 					//	RE-IMPLEMENTING SESSION GLOBAL VALUES TO ACT AS PRESET VALUES IN OTHER FIELDS
 					//	So we can also have this as global values like get and post
 					$globalValues = self::getStorage( 'global_values' )->retrieve() ? : array();
-				//	var_export( $globalValues );
-				//	var_export( $this->_values );
-				//	$globalValues = array_merge( $globalValues, $this->_values );
+
 					$globalValues = $this->_values + $globalValues;
 					if( $this->_values )
 					{
-					//	var_export( $this->_values );
-					//	var_export( $globalValues );
+
 						list( $globalValues ) = array_chunk( $globalValues, 100, true );
-					//	var_export( $globalValues );
+
 						self::getStorage( 'global_values' )->store( $globalValues );
 					}
-				//	self::getStorage( 'global_values' )->store( array() );
-					
+
 					$stageCompleted = true;
 					$this->_values = array();
 					$this->_stageCompleted = true; 	//	Refresh submission
-					
-				//	--$i; //	Step backward
+
 				//	if( count( $values ) !== count( $this->_fieldsets ) )
 					{
 						continue;
 					}
-				//	$each = null; //	Don't include this again
+
 				}
 			}
 			$this->_stageCompleted = false; 	//	Refresh submission
 			$form .= $each;
-		//	var_export(  );
-		//	$form .= "<p><input type='image' value='Refresh Form'/></p>";
+
 			$i++;
-			//	continue; break;
+
 		}
 //		if( ! $this->getOneFieldSetAtATime() || ! $values['oneFieldSetAtATime'] )
 		if( ! $this->getParameter( 'no_required_fieldset' ) )   
 		{
 			$form .= $this->getElementMarkup( $this->getRequiredFieldset() );
 		}
-	//	var_export( $each );
-	//	var_export( $values['oneFieldSetAtATime'] );
-	//	self::v( $values );
-	
 
 		if( $this->isSubmitted() )
 		{
@@ -910,12 +851,11 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				}
 			}
 		}
-		
-		
+
 		if( $this->getOneFieldSetAtATime() && @$values['oneFieldSetAtATime'] )
 		{
 			$form .= '<input class="pc-btn pc-btn-small" rel="ignore" onclick="var result=confirm( \'Do you want to go back to the previous stage?\' );result?this.setAttribute( \'rel\', \'\' ):null; return result;" type="submit" title="Go back to previous form fields" name="' . self::BACKBUTTON_INDICATOR . '" value="&laquo;  Back ">';
-			
+
 			$form .= '<input class="pc-btn pc-btn-small" rel="ignore" onclick="var result=confirm( \'Do you want to start all over?\' );result?this.setAttribute( \'rel\', \'\' ):null; return result;" type="submit" name="' . self::REFRESH_INDICATOR . '" value="&laquo;&laquo; Start all over " title="Start form all over"/>';     
 		}
 		if( $this->callToAction )
@@ -955,26 +895,26 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 						}
 						else
 						{
-						//	a[b].style.display = "none";
+
 						}
 					}
 					if( ! foundNext )
 					{
-					//	alert( foundNext );
+
 						form.submit();
 					}
 				}'
 			 );
 			$form .= '<a onclick="pc_ShowNextFieldset( this.parentNode );" class="pc-submit-btn pc-btn" href="javascript:" style="margin:2em 0;">Continue...</a>';
-		//	Application_Style::addCode( '.pc' );
+
 		}
-		
+
 		if( ! $this->getParameter( 'no_form_element' ) )
 		{
 			$form .= "</form>\n ";
 		}
 		$form .= $this->wrapForm ? "</div>\n" : null;
-		
+
 		//	ON COMPLETION, EXECUTE THE REQUIREMENTS
 		if( $this->_values )
 		{
@@ -987,14 +927,12 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				$class->init();
 			}
 		}
-		
+
 		//	MERGE VALUES WITH GLOBAL REQUEST VALUES
-	//	$_REQUEST = array_merge( $_REQUEST, $this->_values );
-			//		var_export( $this->_values );
-			//		var_export( $form );
+
 		return $this->_form = $form;
     }
-	
+
     /**
      * Returns the markup for each element
      *
@@ -1037,15 +975,13 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			{
 				if( empty( $this->_names[$name]['data-pc-ignore-field'] ) )
 				{
-					
+
 					$this->_values[@$this->_names[$name]['real_name']] = isset( $this->_global[$name] ) ? $this->_global[$name] : @$this->_global[@$this->_names[$name]['real_name']];
 					$this->_filter( $name );
 					$this->_validate( $name );     
 				}
 			}
-			
-			
-	//		$form .= "<div style='display:inline;'>\n";
+
 			$replace = null;
 			if( 
 					$this->badnewsPerElement 
@@ -1064,7 +1000,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		$form .= ! @$fieldset->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "</{$fieldsetTag}>\n" : null;
 		return $form;  
     }
-	
+
     /**
      * Return $_placeholders
      *
@@ -1075,7 +1011,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 		return self::$_placeholders;
 	}
-	
+
     /**
      * Return $_global
      *
@@ -1086,10 +1022,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 		if( $this->_global )
 		{
-//			return $this->_global;
+
 		}
 		//	Determine the method
-//		var_export( $this->_attributes );
+
 /* 		$values = self::getStorage( 'global_values' )->retrieve();
 		if( $values )
 		{
@@ -1106,13 +1042,13 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 		if( $this->fakeValues )
 		{
-//		var_export( $this->_global );
+
 			$this->_global = array_merge( $this->_global, $this->fakeValues );
 		}
-	//	var_export( $this->fakeValues );
+
         return $this->_global;
     }
-	
+
     /**
      * Return values
      *
@@ -1123,7 +1059,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
         return $this->_values;
     }
-	
+
     /**
      * Return the form error
      *
@@ -1134,7 +1070,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
         return $this->_badnews;
     }
-	
+
     /**
      * Sets Error Message
      *
@@ -1143,10 +1079,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */			
     public function setBadnews( $badnews, $name = null )
     {
-	//	var_export( $badnews );
+
 		$this->_badnews[$name] = $badnews;
     }
-	
+
     /**
      * Checkes if form has been submitted
      *
@@ -1154,7 +1090,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */			
     public function isSubmitted()
     {
-//		var_export( $this->fakeValues );
+
 		if( $this->fakeValues )
 		{
 			return true;	// Fake values submission is always true
@@ -1163,8 +1099,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		$name = self::hashElementName( $name ); // Honey Pots should always be hashed
 
 		//	honeypot should always be left blank
-	//	var_export( $_REQUEST[$name] );
-	
+
 		if( ! empty( $_REQUEST[self::HONEY_POT] ) || ! empty( $_REQUEST[$name] ) )
 		{
 			return false;
@@ -1185,11 +1120,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			return true;
 		}
 		$formOptions =  Application_Settings_Abstract::getSettings( 'Forms', 'options' ); 
-//		$formOptions =  Application_Settings_Abstract::getSettings( 'Forms' ); 
-//		var_export(  $formOptions );
+
 		if( is_array( $formOptions ) && in_array( 'allow_external_form_values', $formOptions )  )
 		{
-		//	var_export(  $this->_attributes['name'] );
+
 			if( 
 				( ! empty( $_REQUEST['form_name'] ) && $_REQUEST['form_name'] === $this->_attributes['name'] ) 
 				|| ( ! empty( $_POST ) && Ayoola_Application::isClassPlayer() )
@@ -1204,9 +1138,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 
     public function addFieldset( Ayoola_Form_Element $elements )
     {
-	//				var_export( __LINE__ );
 
-	//	$fieldsetId = md5( serialize( $elements ) );
 		//	Import the useful properties from elements
 		//	Dont add empty fieldset
 		if( $elements->getNames() )
@@ -1222,14 +1154,14 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				$this->_fieldsets[] = $elements;
 			}
 		}
-		
+
 		$this->_names = $this->_names ? : $this->getRequiredFieldset()->getNames() ;
 		$this->_names = array_merge( $elements->getNames(), $this->_names );
-	//	$this->_values = array_merge( $elements->getValues(), $this->_values );
+
 		$this->_requirements = array_merge( $elements->getRequirements(), $this->_requirements );
 		$this->_filters = array_merge( $elements->getFilters(), $this->_filters );
     }
-	
+
     /**
      * Loads fieldset into form
      * 
@@ -1243,7 +1175,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			$this->addFieldset( $each );
 		}
     }
-	
+
     /**
      * Returns all the fieldsets in the form
      * 
@@ -1254,7 +1186,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 		return $this->_fieldsets;
     }
-	
+
     /**
      * Sets _defaultValues
      * 
@@ -1265,7 +1197,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 		self::$_defaultValues += $values;
     }
-	
+
     /**
      * Gets _defaultValues
      * 
@@ -1276,7 +1208,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 		return $key ? @self::$_defaultValues[$key] : self::$_defaultValues;
     }
-	
+
     /**
      * Returns all the fieldsets in the form
      * 
@@ -1287,7 +1219,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 		$this->_attributes += $attributes;
     }
-	
+
     /**
      * Checks if we want oneFieldSetAtATime
      * 
@@ -1302,7 +1234,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 		return $this->oneFieldSetAtATime;
     }
-	
+
     /**
      * Checks if we want oneFieldSetAtATime
      * 
@@ -1313,7 +1245,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 		return $this->_names;
     }
-	
+
     /**
      * Returns the storage for oneFieldSetAtATime
      * 
@@ -1326,7 +1258,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		$storage->storageNamespace = __CLASS__ . $id;
 		return $storage;
     }
-	
+
     /**
      * Hashes the element name as an antibot measure
      * 
@@ -1335,11 +1267,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */
 	public static function hashElementName( $name )
     {
-	//	$a = range( 'a', 'z' );
-	//	shuffle( $a );
+
 		return ltrim( Ayoola_Captcha::getHash( array( 'name' => $name ) ), '0123456789' );
     }
-	
+
     /**
      * Retrieves the global value of an element
      * 
@@ -1349,13 +1280,11 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */
 	public static function getGlobalValue( $name, $defaultValue = null, $ignoreSessionValues = false )
     {
-//		var_export( $_REQUEST[$name] );
-	//	var_export( $_REQUEST[Ayoola_Form::hashElementName( $name )] );
-	//	$value =  ! is_null( $defaultValue ) ? $defaultValue : false;
+
 		$value =  false;
 	//	if( isset( $this->fakeValues[$name] ) )
 		{
-	//		$value = $this->fakeValues[$name];
+
 		}
 		if( isset( $_POST[$name] ) )
 		{
@@ -1367,7 +1296,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 		elseif( $defaultValue )
 		{
-	//		$value = $defaultValue;
+
 		}
 		elseif( isset( $_REQUEST[$name] ) )
 		{
@@ -1381,24 +1310,23 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		if( $value === false && ! $ignoreSessionValues )
 		{
 			$values = self::getStorage( 'global_values' )->retrieve();
-		//	var_export( $values );
+
 		//	if( $name == 'page_options' )
 			{
-			//	self::v( $name );
-			//	self::v( $defaultValue );
+
 			}
 			if( is_null( $defaultValue ) && isset( $values[$name] )  )
 			{
-		//	$defaultValue ? : var_export( $values );
+
 				$value = $values[$name];
 			}
 		}
-		
+
 		//	register this in the global var if its in the session.
 	//	if( isset( $values[$name] ) )
 		{
 			//	Removed because its making the first value sticky
-		//	$_REQUEST[$name] = $value;
+
 		}
 		if( false === $value && ! is_null( $defaultValue ) )
 		{
@@ -1406,7 +1334,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
 		return $value;
     }
-	
+
     /**
      * View the form
      * 
@@ -1416,18 +1344,17 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 		$formContent = $this->getForm();
 		$form = null;
-	//	var_export( $this->_badnews );
+
 		if( $this->_badnews && self::isSubmitted() )
 		{
-		//	var_export( $this->_badnews );
-		//	$form .= '<ul>';
+
 			if( $this->badnewsBeforeElements )
 			{
 				foreach( array_unique( $this->_badnews ) as $message ) 
 				{
 					$form .= "<div class='badnews'>" . htmlspecialchars( $message ) . "</div>\n";
 				}
-		//		$form .= '</ul>';
+
 			}
 			elseif( $this->oneFieldSetAtATimeJs )
 			{
@@ -1435,8 +1362,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			}
 		}
 		$form .= $formContent;
-	//		var_export( $this->_badnews );
-	//		var_export( $this->_badnews );
+
 		return $form;
     }
 }
