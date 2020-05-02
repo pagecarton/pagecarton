@@ -222,7 +222,7 @@
     <TABLE_ROW ROW_ID="58">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Done]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Done]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc_check.txt&quot;,&quot;\/loading2.gif&quot;,&quot;\/apple-touch-icon-precomposed.png&quot;,&quot;\/xxx\/2019\/03\/25\/ibridgehub-marketplace-to-launch-at-e-commerce-summit-expo-2019.html&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc_check.txt&quot;,&quot;\/loading2.gif&quot;,&quot;\/apple-touch-icon-precomposed.png&quot;,&quot;\/xxx\/2019\/03\/25\/ibridgehub-marketplace-to-launch-at-e-commerce-summit-expo-2019.html&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564486020-0-58]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564486020]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1575327232]]></TABLE_FIELD>
@@ -3065,11 +3065,11 @@
     <TABLE_ROW ROW_ID="409">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[1 cron tasks processed successfully]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[1 cron tasks processed successfully]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/pc-admin&quot;,&quot;\/sample{{{document_url_uri}}}&quot;,&quot;\/pc_check.txt&quot;,&quot;\/spa.js&quot;,&quot;\/public\/2019\/12\/16\/dubai-location-jpg_3.jpg&quot;,&quot;\/apple-touch-icon-precomposed.png&quot;,&quot;\/xxx\/2019\/03\/25\/ibridgehub-marketplace-to-launch-at-e-commerce-summit-expo-2019.html&quot;,&quot;\/widgets\/Workspace_Insights&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/pc-admin&quot;,&quot;\/sample{{{document_url_uri}}}&quot;,&quot;\/pc_check.txt&quot;,&quot;\/spa.js&quot;,&quot;\/public\/2019\/12\/16\/dubai-location-jpg_3.jpg&quot;,&quot;\/apple-touch-icon-precomposed.png&quot;,&quot;\/xxx\/2019\/03\/25\/ibridgehub-marketplace-to-launch-at-e-commerce-summit-expo-2019.html&quot;,&quot;\/widgets\/Workspace_Insights&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1565991361-0-409]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1565991361]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1567193916]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[false,false]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="410">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[You have not created a whois list for domain registration.]]></TABLE_FIELD>

@@ -568,7 +568,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		{
 
         }
-        var_export( $requirements );
 		foreach( $requirements as $each )  
 		{
 

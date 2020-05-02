@@ -44,19 +44,17 @@ class Application_User_Settings extends Application_Settings_Abstract
      */
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
-	//	$settings = unserialize( @$values['settings'] );
 		$settings = @$values['data'] ? : unserialize( @$values['settings'] );
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
-	//	$form->oneFieldSetAtATime = true;
 		
 		//	User Sign in
 		$fieldset = new Ayoola_Form_Element;
 		$options = array( 'verified' => 'Email verification', 'enabled' => 'Enabled Account', 'approved' => 'Admin Approval', );
 		$fieldset->addElement( array( 'name' => 'signin-requirement', 'label' => 'Sign in requirements', 'value' => @$settings['signin-requirement'], 'type' => 'Checkbox' ), $options );
 		$dbOptions = array( 
-						//	'cloud' => 'Ayoola Cloud (recommended)', 
-							'file' => 'Flat file', 
+							'file' => 'Local Flat-file', 
+							'private' => 'Private User Flat-file', 
 							'relational' => 'Relational database' 
 							);
 		$fieldset->addElement( array( 'name' => 'database', 'label' => 'Look for users in', 'value' => @$settings['database'], 'type' => 'Checkbox' ), $dbOptions );
@@ -70,16 +68,8 @@ class Application_User_Settings extends Application_Settings_Abstract
 		$fieldset->addLegend( 'Sign up options' );
 		$fieldset->addElement( array( 'name' => 'default-database', 'label' => 'Save new users in', 'value' => @$settings['default-database'], 'type' => 'Radio' ), $dbOptions );
 		$form->addFieldset( $fieldset );
-		  
-/* 		//	Restrictions
-		$fieldset = new Ayoola_Form_Element;
-		$fieldset->addElement( array( 'name' => 'storage_size', 'label' => 'Storage Size (in bytes)', 'placeholder' => 'e.g. 1024', 'type' => 'InputText', 'value' => @$settings['storage_size'] ) );
-		$fieldset->addElement( array( 'name' => 'max_allowed_posts', 'label' => 'Maximum Allowed Posts', 'placeholder' => 'e.g. 100', 'type' => 'InputText', 'value' => @$settings['max_allowed_posts'] ) );
-		$fieldset->addElement( array( 'name' => 'max_allowed_posts_private', 'label' => 'Maximum Allowed Private Posts', 'placeholder' => 'e.g. 5', 'type' => 'InputText', 'value' => @$settings['max_allowed_posts_private'] ) );   
-		$fieldset->addLegend( 'Default User Restrictions' );
-		$form->addFieldset( $fieldset );
- */		
-		//	Other options
+
+        //	Other options
 		$fieldset = new Ayoola_Form_Element;  
 		$options = array( 	
 							'allow_level_selection' => 'Allow users to select there user groups during signup',
@@ -107,8 +97,6 @@ class Application_User_Settings extends Application_Settings_Abstract
 		$fieldset->addLegend( 'User options' );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
-		//		$form->addFieldset( $fieldset );
-	//	$this->setForm( $form );
     } 
 	// END OF CLASS
 }
