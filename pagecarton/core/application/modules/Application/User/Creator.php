@@ -215,6 +215,7 @@ class Application_User_Creator extends Application_User_Abstract
 				Application_User_Verify_Email::resetVerificationCode( $values );
 			break;
 			case 'file':
+            case 'private':
 			//	var_export( $values );
 				try
 				{

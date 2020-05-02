@@ -128,18 +128,8 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		}
 		switch( $database )
 		{
-/* 			case 'cloud':
-				$response = Ayoola_Api_UserList::send( ( $this->_dbWhereClause ? : array() ) + array( 'method' => 'select' ) );
-		//		var_export( $response );
-				if( is_array( $response['data'] ) )
-				{
-					$this->_dbData = $response['data'];
-				}
-			break;
- */			case 'relational':
+			case 'relational':
 				$data = $this->getDbTable()->select( null, strtolower( implode( ', ', $this->_otherTables ) ), $this->_dbWhereClause );
-				//	var_export( $data );
-			//	rsort( $data );
 				$this->_dbData = $data;
 			break;
 			case 'cloud':
@@ -160,14 +150,38 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
                     }
                     $key = $values["username"];	
                 }; 
-			//	$this->_dbData = array();
-		//		if( Ayoola_Application::getUserInfo( 'username' ) )
-				{
-				//	$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ), array( 'result_filter_function' => $sortFunction2 ) );
-					$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ) );
-				}
+				$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ) );	
 				$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
 				if( $this->_sortColumn )    
+				{
+					$this->_dbData = self::sortMultiDimensionalArray( $this->_dbData, $this->_sortColumn );
+				}
+				else
+				{
+					krsort( $this->_dbData );
+					$this->_dbData = array_values( $this->_dbData );
+				}
+			break;
+			case 'private':
+				// Find user in the LocalUser table
+				$table = "Ayoola_Access_LocalUser";
+				$table = $table::getInstance( $table::SCOPE_PRIVATE );
+				$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+
+				//	Filter the result to save time
+				$sortFunction2 = function( & $key, & $values )
+				{ 
+					$values = $values["user_information"];
+                    if( empty( $values["username"] ) || empty( $values["email"] ) )
+                    {
+                        $values = false;
+                    }
+                    $key = $values["username"];	
+                }; 
+				$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ) );	
+				$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
+				if( $this->_sortColumn ) 
 				{
 					$this->_dbData = self::sortMultiDimensionalArray( $this->_dbData, $this->_sortColumn );
 				}
