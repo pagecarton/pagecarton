@@ -69,7 +69,6 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 				if( $info['user_information'] )  
 				{
 					$info = $info['user_information'];
-				//	$requiredFields = array( 'firstname', 'lastname', 'sex', 'birth_date' );
 					$requiredFields = array();
 					
 					//	Super users cant do this...
