@@ -2389,7 +2389,20 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$whitelist = is_array( $whitelist ) ? $whitelist : array_map( 'trim', explode( ',', $whitelist ) );
 					$whitelist = array_combine( $whitelist, $whitelist );
 					$this->_objectData = array_intersect_key( $this->_objectData, $whitelist );
-				}
+                }
+                if( empty( $this->_objectData ) )
+                {
+                    if( ! empty( $this->_identifierData ) )
+                    {
+                        $this->_objectData = $this->_identifierData;
+                    }
+                    if( ! empty( $this->_dbData ) )
+                    {
+                        $this->_objectData = $this->_dbData;
+                    }
+                }
+            //    var_export( $this->_identifierData );
+            //    var_export( $this->getDbData() );
 				$dataToSend = json_encode( $this->_objectData );
 
 				//	json data was being truncated
