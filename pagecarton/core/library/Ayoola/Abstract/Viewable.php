@@ -2400,6 +2400,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                     {
                         $this->_objectData = $this->_dbData;
                     }
+                    if( ! empty( $this->_objectTemplateValues ) )
+                    {
+                        $this->_objectData = $this->_objectTemplateValues;
+                    }
                 }
             //    var_export( $this->_identifierData );
             //    var_export( $this->getDbData() );
