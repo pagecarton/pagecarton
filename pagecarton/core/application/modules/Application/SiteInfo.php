@@ -62,6 +62,8 @@ class Application_SiteInfo extends PageCarton_Widget
         {
             $settings['site_description'] = $settings['site_description'] ? : 'Description for this site has not been set. Site Description will appear here when they become available.';
         }
+		$settings['background_color'] = Application_Settings_Abstract::getSettings( 'Page', 'background_color' );
+        $settings['font_color'] = Application_Settings_Abstract::getSettings( 'Page', 'font_color' );
         return $key ? @$settings[$key] : $settings;
     }  
 
