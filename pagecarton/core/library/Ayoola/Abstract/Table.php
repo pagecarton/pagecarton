@@ -219,9 +219,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			return array();
 		}
         $data = $table->selectOne( null, $identifier, array( 'case_insensitive' => true ) );
-    //    var_export( ( $data['user_id'] )  );
-    //    var_export( Ayoola_Application::getUserInfo( 'user_id' ) );
-    //    var_export( ! self::hasPriviledge( 98 ) );
+
         //  lets authenticate data that has userinfo
         if( ! is_a( $this, 'Application_Article_Abstract' ) )
         {
