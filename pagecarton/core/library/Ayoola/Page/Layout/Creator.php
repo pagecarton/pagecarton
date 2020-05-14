@@ -40,7 +40,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 			$this->createForm( 'Save', 'Add a new layout theme' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
-		//	var_export( $values );
+	//		var_export( $values );
 	//		var_export( $this->getParameter( 'path' ) );
 	//		var_export( Ayoola_Loader::checkFile( $this->getParameter( 'path' ) ) );
 			

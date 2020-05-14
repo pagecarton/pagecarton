@@ -510,7 +510,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		if( $this->submitValue && ! $this->callToAction )
 		{
 
-			$element->addElement( array( 'name' => 'pc-submit-button', 'value' => '' . self::__( $this->submitValue ) . '  <i class="fa fa-chevron-right pc_give_space "></i> ', 'type' => 'SubmitButton', 'onclick' => 'this.form.submit(); this.value=\'Loading...\'; this.disabled=true; return false;', 'class' => 'pc-btn', 'data-pc-ignore-field' => 'true' ) );    
+			$element->addElement( array( 'name' => 'pc-submit-button', 'value' => '' . self::__( $this->submitValue ) . '  <i class="fa fa-chevron-right pc_give_space "></i> ', 'type' => 'SubmitButton', 'onclick' => 'this.form.submit(); this.value=\'Loading...\'; this.disabled=true; return false;', 'style' => 'display:block;margin-top:1.5em;', 'class' => 'pc-btn', 'data-pc-ignore-field' => 'true' ) );    
 		}
 		foreach( $this->requiredElements as $key => $value )
 		{
