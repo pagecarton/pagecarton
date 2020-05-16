@@ -66,19 +66,22 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
      */
 	public static function getEmails()
     {
-		//	also sent the message to all admin accounts
-	//	$users = new Application_User_List( array( 'access_level' => array( 99, 98 ) ) );
-		$userTable = 'Ayoola_Access_LocalUser';
-		$userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
-		$userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
-		$userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
-		$users = $userTable->select( null, array( 'access_level' => array( 99, 98 ) ) );
-		$emails = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
-        foreach( $users as $each )
+        //	also sent the message to all admin accounts
+        if( ! $emails = Ayoola_Application::getDomainSettings( 'email' ) )
         {
-            $emails .= ( ',' . $each['email'] );
+            $userTable = 'Ayoola_Access_LocalUser';
+            $userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
+            $userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
+            $userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
+            $users = $userTable->select( null, array( 'access_level' => array( 99 ) ) );
+            $emails = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
+            foreach( $users as $each )
+            {
+                $emails .= ( ',' . $each['email'] );
+            }
+            $emails = trim( $emails, ', ' );
         }
-		$emails = trim( $emails, ', ' );
+
 	//	var_export( $users );
 	//	var_export( $emails );
 	//	var_export( Ayoola_Access_LocalUser::getInstance()->select() );
@@ -92,11 +95,9 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
      */
 	public static function getHeader()
     {
-		$message = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain(); 
-		$message .= ', 
-		Your website; ' . Ayoola_Page::getDefaultDomain() . ' has generated an automated response to a recent activity on ' . Ayoola_Page::getCanonicalUrl() . '.		
-		';
-		return $message;
+	//	$message = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain(); 
+	//	$message .= '';
+	//	return $message;
     } 
 	
     /**
@@ -105,13 +106,7 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
      */
 	public static function getFooter()
     {
-		return '
-        You are receiving this notification because your e-mail is listed as one to receive admin notifications on the website, All emails listed are ' . Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' ) . '. This was set in PageCarton admin panel. Here is the direct link to the admin panel: ' . Ayoola_Page::getHomePageUrl() . '/pc-admin. All users with admin privileges may also receive some notifications.
-            
-        Update Notification Emails Here: ' . Ayoola_Page::getHomePageUrl() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/CompanyInformation/
-		
-		For tutorials, help on developing with PageCarton, visit http://www.pagecarton.org. PageCarton is a tool that makes it easy to build responsive websites and apps. 
-		';
+	//	return '';
     } 
 	// END OF CLASS
 }
