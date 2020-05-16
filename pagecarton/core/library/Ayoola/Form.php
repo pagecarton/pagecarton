@@ -505,7 +505,33 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		{
 			$element->addElement( 'name=>captcha:: type=>Captcha' );
 			$element->addRequirement( 'captcha','Captcha' );
-		}
+        }
+
+        $submitDetector = @$this->_attributes['name'] . self::SUBMIT_DETECTOR;
+        $authCode = self::hashElementName( $this->_attributes['name'] );
+    //    var_export( session_id() );
+        $url = '/tools/classplayer/get/name/Ayoola_Form?form=' . $this->_attributes['name'] . '&auth=' . $authCode;
+        Application_Javascript::addCode(
+            '
+                var ajax = ayoola.xmlHttp.fetchLink( { url: "' . $url . '" , noSplash: true } );
+                var activateForm = function()
+                {
+                    if( ayoola.xmlHttp.isReady( ajax ) )
+                    {	
+                        //  just a funny trick. Not fully implemented yet.
+                        //  Put off bots that cannot run JS
+                        //  In the future, we will put a real auth here
+                        
+                        var code = document.getElementsByName( "' . $submitDetector .'" )[0];
+                        code = code ? code : document.getElementsByName( "' . self::hashElementName( $submitDetector ) .'" )[0];
+                        code.value = "' . $authCode .'";
+
+                    }		
+                }
+                ayoola.events.add( ajax, "readystatechange", activateForm );
+	
+            '
+        );
 
 		if( $this->submitValue && ! $this->callToAction )
 		{
@@ -517,9 +543,11 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 
 			$element->addElement( array( 'name' => $key, 'value' => $value, 'type' => 'Hidden' ) );
 		}
-		$element->addElement( array( 'name' => @$this->_attributes['name'] . self::SUBMIT_DETECTOR, 'value' => @$this->_attributes['name'], 'type' => 'Hidden', 'data-pc-ignore-field' => 'true' ) );
-
-		$element->addElement( array( 'name' => self::HONEY_POT, 'type' => 'HoneyPot', 'value' => '', 'data-pc-ignore-field' => 'true' ) );
+        $element->addElement( array( 'name' => $submitDetector, 'value' => @$this->_attributes['name'], 'type' => 'Hidden', 'data-pc-ignore-field' => 'true' ) );
+        $element->addElement( array( 'name' => self::HONEY_POT, 'type' => 'HoneyPot', 'value' => '', 'data-pc-ignore-field' => 'true' ) );
+        
+        //  another attempt at spam filtering
+	//	$element->addElement( array( 'name' => 'skeprfkferfef', 'type' => 'Select', 'label' => 'Sum', 'value' => 'xes' ) );
 
 		$element->addFilters( 'Trim:: Escape::Alnum' );  
 		$this->requiredFieldSet = $element; 
@@ -993,7 +1021,8 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 
 			}
 			$elementMarkups .= str_ireplace( self::$_placeholders['badnews'], $replace, $markup );
-		}
+        }
+    //    var_export( __LINE__ );
 		$form .= Ayoola_Object_Wrapper_Abstract::wrapContent( $elementMarkups, @$fieldset->wrapper  );
 		$form .= @$fieldset->getPostHtml();
 		$form .= ! @$fieldset->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "</{$fieldsetTag}>\n" : null;
@@ -1056,6 +1085,11 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */		
     public function getValues()
     {
+        if( $this->isSubmitted() && $this->_values )
+        {
+            //  refresh this to refresh ids
+            session_regenerate_id();
+        }
         return $this->_values;
     }
 
@@ -1098,7 +1132,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		$name = self::hashElementName( $name ); // Honey Pots should always be hashed
 
 		//	honeypot should always be left blank
-
 		if( ! empty( $_REQUEST[self::HONEY_POT] ) || ! empty( $_REQUEST[$name] ) )
 		{
 			return false;
@@ -1108,31 +1141,41 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		{
 			return false;
 		}
- 		$name = $this->_attributes['name'] . self::SUBMIT_DETECTOR;
-		if( @$_REQUEST[$name] === $this->_attributes['name'] )
-		{
-			return true;
-		}
-		$name = self::hashElementName( $name ); // Try see if it is hashed
-		if( @$_REQUEST[$name] === $this->_attributes['name'] )
-		{
-			return true;
-		}
-		$formOptions =  Application_Settings_Abstract::getSettings( 'Forms', 'options' ); 
+         $name = $this->_attributes['name'] . self::SUBMIT_DETECTOR;
+         
+        do
+        {
+            if( @$_REQUEST[$name] === $this->_attributes['name'] )
+            {
+                break;
+            }
+            $name = self::hashElementName( $name ); // Try see if it is hashed
+            if( @$_REQUEST[$name] === self::hashElementName( $this->_attributes['name'] ) )
+            {
+                break;
+            }
+            $formOptions =  Application_Settings_Abstract::getSettings( 'Forms', 'options' ); 
 
-		if( is_array( $formOptions ) && in_array( 'allow_external_form_values', $formOptions )  )
-		{
+            if( is_array( $formOptions ) && in_array( 'allow_external_form_values', $formOptions )  )
+            {
 
-			if( 
-				( ! empty( $_REQUEST['form_name'] ) && $_REQUEST['form_name'] === $this->_attributes['name'] ) 
-				|| ( ! empty( $_POST ) && Ayoola_Application::isClassPlayer() )
-			)
-			{
-				$this->oneFieldSetAtATime = false;
-				return true;
-			}		
-		}
-		return false;
+                if( 
+                    ( ! empty( $_REQUEST['form_name'] ) && $_REQUEST['form_name'] === $this->_attributes['name'] ) 
+                    || ( ! empty( $_POST ) && Ayoola_Application::isClassPlayer() )
+                )
+                {
+                    $this->oneFieldSetAtATime = false;
+                    break;
+                }		
+            }
+            return false;
+        }
+        while( false );
+    //    var_export( session_id() );
+    //    session_regenerate_id();
+    //    session_id( ( session_id() . '*' ) ); 
+    //    var_export( session_id() );
+        return true;
     }
 
     public function addFieldset( Ayoola_Form_Element $elements )
