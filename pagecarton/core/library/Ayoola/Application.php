@@ -599,7 +599,15 @@ class Ayoola_Application
 					if( ! $userInfo = Ayoola_Access::getAccessInformation( $subDomain ) )
 					{
 						$userInfo = Application_Profile_Abstract::getProfileInfo( $subDomain );
-					}
+                    }
+                    if( $userInfo['username'] )
+                    {
+                        if( $realUserInfo = Application_User_Abstract::getUserInfo( array( 'username' => $userInfo['username'] ) ) )
+                        {
+                            $userInfo += $realUserInfo;
+                        }
+
+                    }
 					if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) && $userInfo  )
 					{
 						//	we have a user subdomain
@@ -613,7 +621,6 @@ class Ayoola_Application
 								header( 'Location: ' . $protocol . '://' . $userDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );
 								exit();
 							}
-
 						}
 
 						Ayoola_Application::$GLOBAL = $userInfo;
