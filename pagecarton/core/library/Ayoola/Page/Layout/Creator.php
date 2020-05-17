@@ -17,7 +17,6 @@
  
 require_once 'Ayoola/Page/Layout/Abstract.php';
 
-
 /**
  * @category   PageCarton
  * @package    Ayoola_Page_Layout_Creator
@@ -36,13 +35,11 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
     {
 		try
 		{ 
-		//	var_export( Ayoola_Page::getCurrentPageInfo( 'upload' ) );
+
 			$this->createForm( 'Save', 'Add a new layout theme' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
-	//		var_export( $values );
-	//		var_export( $this->getParameter( 'path' ) );
-	//		var_export( Ayoola_Loader::checkFile( $this->getParameter( 'path' ) ) );
+
 			
 			//	Import mode
 	//		if( @$values['upload'] )
@@ -57,15 +54,10 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					//	http://php.net/manual/en/ziparchive.extractto.php
 					$zip = new ZipArchive;
 					$isZip = $zip->open( $filename );
-				//	var_export( $filename );
-				//	var_export( filesize( $filename ) ); 
-				//	var_export( $isZip );
+
 					if( $isZip === TRUE && $zip->numFiles ) 
 					{
-					//	var_export( $zip['template'] );
-					//	$zip->extractTo( $tempDestination );
-					//	$zip->close();
-					//	echo 'ok';
+
 					} 
 					else   
 					{
@@ -96,15 +88,13 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					{
 						$zip->extractTo( $tempDestination );
 						$zip->close();
-					//	echo 'ok';
+
 					} 
 					else 
 					{
 						$export->extractTo( $tempDestination, null, true );
 					}	
-					
-				//	var_export( $export['index.html'] );
-				//	var_export( Ayoola_Doc::getFiles( $tempDestination ) );
+
 			
 					//	 Trying to see if its possible to upload random templates.
 					//	Before now, users need to have all the template files in the root dir of the archive. 
@@ -114,7 +104,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					{
 						if($path->isDir()) 
 						{
-						//   print($path->__toString() . PHP_EOL);
+
 						} 
 						else 
 						{
@@ -131,10 +121,9 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 							} 
 						}		
 					}
-				//	print( dirname( array_pop( $baseDirs['template'] ) ) );
-			//		var_export( $baseDirs );  
+
 					ksort( $baseDirs );
-		//			var_export( $baseDirs );
+
 					if( $baseDirs )
 					{
 						foreach( $baseDirs as $baseName => $baseNameDir )
@@ -150,7 +139,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 							$export->startBuffering();
 							$export->buildFromDirectory( $source );
 							$export->stopBuffering();
-						//	$backup->compress( Ayoola_Phar::GZ ); 
+
 						
 							try
 							{
@@ -161,7 +150,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 							{
 								null;
 							}
-					//		unset( $export['template'] );
+
 							
 							//	Do only the first one
 							break;
@@ -208,12 +197,11 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 
 				if( ! $this->insertDb( $values ) )
 				{ 
-				//	var_export( $values );
+
 					$this->setViewContent( self::__( '<p class="badnews boxednews">ERROR - COULD NOT INSERT TEMPLATE DATA INTO DATABASES.</p>.' ) ); 
 					return false; 
 				}
-			//		var_export( $values );
-			//	$export['template'] = preg_replace('#(href|src)="([^:"]*)(?:")#','$1="http://wintermute.com.au/$2"',$str);
+
 				  
 				//	Automate the creation of template files
 				if( ! isset( $export['template'] ) )  
@@ -223,14 +211,11 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					$path = isset( $export['template.html'] ) ? $export['template.html'] : ( isset( $export['index.html'] ) ? $export['index.html'] : ( isset( $export['home.html'] ) ? $export['home.html'] : null ) ); 
 					
 					$content = file_get_contents( $path );
-			//		var_export( $path );
-				//	$content = self::sanitizeTemplateFile( $content, $values );
 
 					$export['template'] = $content;
 				}
 				else
 				{
-				//		var_export( $export );
 
 				}
 /* 				//	Update Screenshot
@@ -267,15 +252,15 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 
 				//	Use the traditional file saving mechanism so as to sanitize template file
 				$values['plain_text'] = $this->getPreviousContent( $values['layout_name'] ) ? : file_get_contents( $export['template'] );  
-			//	var_export( $values );
+
 				$this->updateFile( $values );
 				unset( $export );
 
 				//	don't delete again
-			//	unlink( $filename );
+
 				
 				$this->setViewContent(  '' . self::__( '<p class="goodnews">New theme saved successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a></p>' ) . '', true  );
-			//	$this->setViewContent( self::__( '<p class=""></p>' ) );
+
 				
 				
 				//	Clean up temp dir
@@ -297,10 +282,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				}
 
 			}
-	//		$result = self::splitBase64Data( $values['screenshot'] );
-	//		$filter = new Ayoola_Filter_Name();
-	//		$filter->replace = '-';
-	//		$customName = substr( trim( $filter->filter( $values['layout_name'] ) , '-' ), 0, 70 );
+
 	
 			// save screenshot
 			if( $values['screenshot'] )
@@ -308,16 +290,11 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				$filename = dirname( $this->getMyFilename() ) . DS . 'screenshot';   
 				Ayoola_File::putContents( $filename, $values['screenshot']);
 			}
-			
-		//	var_export( $values );
-		//	var_export( $values['screenshot'] );
-			
-			
-		//	dirname( $this->getMyFilename() );		
+
 		//	if(  )	
 			if( ! empty( $values['plain_text'] ) && ! $this->insertDb( $values ) )  
 			{ 
-			//	$this->setViewContent( self::__( '<p class="badnews">Error: could not create layout template.</p>.' ) ); 
+
 				return false;
 			}
 			//	This normally would only work with an identifier data
@@ -340,12 +317,11 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				
 				</p>' ) );  
 			}
-			
-		//	$this->setViewContent( self::__( '<p class="goodnews">Layout created successfully.</p>' ) );
+
 		}
 		catch( Exception $e )
 		{ 
-		//	var_export( $e->getTraceAsString());
+
 			$this->getForm()->setBadnews( $e->getMessage() );
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false; 

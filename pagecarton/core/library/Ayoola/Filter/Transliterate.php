@@ -30,7 +30,6 @@ class Ayoola_Filter_Transliterate implements Ayoola_Filter_Interface
     public function filter( $value )
 	{
 		$value = (string) $value;
-    //	var_export( $value );
     
         $result = self::to_ascii( $value );
 
@@ -40,7 +39,6 @@ class Ayoola_Filter_Transliterate implements Ayoola_Filter_Interface
             $result = base64_encode( $value );
         }
         $value = $result;
-	//	var_export( $value );
 		return $value;
 	}
 
