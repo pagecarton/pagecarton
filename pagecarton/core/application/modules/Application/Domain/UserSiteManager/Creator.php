@@ -79,7 +79,7 @@ class Application_Domain_UserSiteManager_Creator extends Application_Profile_Cre
 		
 		//	Notify Admin
 		$mailInfo['subject'] = 'New Site Created';
-		$mailInfo['body'] = 'A new site name has been created. You can view the new profile by clicking this link: ' . $fullUrl . '
+		$mailInfo['body'] = 'A new site has just been created. You can view the new site by clicking this link: ' . $fullUrl . '
 		';
 		Application_Log_View_General::log( array( 'type' => 'New Site', 'info' => array( $mailInfo ) ) );
 		try
@@ -90,8 +90,7 @@ class Application_Domain_UserSiteManager_Creator extends Application_Profile_Cre
 
 		$mailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
 		$mailInfo['subject'] = 'Your new site';
-        $mailInfo['body'] = '
-You have successfully created your site. Next is to add content and customize it into what you want. Kindly note the following important links.
+        $mailInfo['body'] = 'You have successfully created a new site. Next thing to do is to add content and customize it into what you want. Kindly note the following important links.
 
 Site Homepage Link: ' . $fullUrl . '
 Start building the site here: ' . $fullUrl . '/new-site-wizard

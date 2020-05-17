@@ -92,7 +92,13 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 						
 			//	Notify Admin
 			$mailInfo['subject'] = 'Profile Deleted';
-			$mailInfo['body'] = 'A new profile name "' . $values['display_name'] . '", has been deleted with the profile module. 
+            $mailInfo['body'] = 'A profile has been just been deleted. Here are the details of the profile
+            
+Profile name: ' . $data['display_name'] . '
+Profile URL: ' . $data['display_name'] . '
+Deleted by: ' . Ayoola_Application::getUserInfo( 'username' ) . ' (' . Ayoola_Application::getUserInfo( 'email' ) . ')
+
+
 			';
 			try
 			{

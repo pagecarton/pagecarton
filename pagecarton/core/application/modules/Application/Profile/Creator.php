@@ -70,7 +70,7 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 		
 		//	Notify Admin
 		$mailInfo['subject'] = 'New Profile Created';
-		$mailInfo['body'] = 'A new profile name "' . $values['display_name'] . '", has been created with the profile module. 
+		$mailInfo['body'] = 'A new profile  "' . $values['display_name'] . '", has been created with the profile module. 
 		
 		You can view the new profile by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '.
 		';
@@ -85,9 +85,9 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 		$mailInfo['subject'] = 'Your new profile';
 		$mailInfo['body'] = 'A new public profile name , has been created for you.
 		
-		Display Name: "' . $values['display_name'] . '",
-		Profile URL: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '
-		Manage your profiles: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/account';
+Display Name: "' . $values['display_name'] . '",
+Profile URL: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '
+Manage your profiles: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/account';
 		self::sendMail( $mailInfo );
 
 	}
