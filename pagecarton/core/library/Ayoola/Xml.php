@@ -188,8 +188,8 @@ class Ayoola_Xml extends DOMDocument
 		{
 			if( filemtime( $tempName ) < time() - 600 )
 			{
-				unlink( $tempName );
-			//	Application_Log_View_Error::log( $tempName . ' stayed too long. It is now removed.' );
+                Ayoola_File::trash( $tempName );
+				    // unlink( $tempName );
             }
             //  no waiting because causing delay and crashing servers.
             //  Will reserve inserts
@@ -219,7 +219,6 @@ class Ayoola_Xml extends DOMDocument
 		{
 			return false;     
 		}
-	//	var_export( $path );
         @$result = parent::load( $path, $options );
 		$this->setFilename( $path );
 		return $result;
@@ -237,7 +236,9 @@ class Ayoola_Xml extends DOMDocument
 		//throw new Exception;
 		$filename = $filename ? : $this->getFilename();
 
-	//	PageCarton_Widget::v( $filename );
+        //  save a big file first
+
+
 		$tempName = $filename . '.lock';  
 		if( ! self::checkLockFile( $tempName ) )
 		{
@@ -245,10 +246,11 @@ class Ayoola_Xml extends DOMDocument
 		}
 		if( is_file( $filename ) )
 		{
-			copy( $filename, $tempName );
+            if( ! copy( $filename, $tempName ) )
+            {
+                throw new Ayoola_Xml_Exception( 'Could not create temporary file while saving XML ' . basename( $filename ) ); 
+            }
 		}
-	//	PageCarton_Widget::v( $tempName );
-	//	PageCarton_Widget::v( file_get_contents( $tempName ) );
 		
 		//	Make sure the file is saved before you give up
 		$giveUpAfter = 5; //sec
@@ -260,16 +262,9 @@ class Ayoola_Xml extends DOMDocument
         //  no waiting because causing delay and crashing servers.
         //  Will reserve inserts
     
-	//	while( ! @$result = parent::save( $filename, $options ) )
-		{ 
-	//		if( time() > $time + $giveUpAfter )
-			{ 
-	//			throw new Ayoola_Xml_Exception( 'Error while saving ' . basename( $filename ) ); 
-			}
-	//		continue; 
-		}
-		$this->setFilename( $filename );
-		@unlink( $tempName );
+        $this->setFilename( $filename );
+        Ayoola_File::trash( $tempName );
+	    //	@unlink( $tempName );
 		return $result;
     } 
 	
@@ -285,7 +280,6 @@ class Ayoola_Xml extends DOMDocument
     public function autoId( $idKey = null, $node = null )
     {
 		$node = $this->getNode( $node );
-		//if( $node->parentNode ){ $node = $node->parentNode; }
 		$id = (int) $node->getAttribute( __FUNCTION__ );
 		$id = $id ? : 1; //	One is default ID
 		$this->setId( $idKey, $node ); 

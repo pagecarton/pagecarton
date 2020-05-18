@@ -44,7 +44,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Drop extends Ayoola_Dbase_Adapter_Xml_Table
 		$filename = $this->getFilename( true );
 		if( file_exists( $filename ) )
 		{
-			$result = unlink( $filename );
+			//  $result = unlink( $filename );
+            Ayoola_File::trash( $filename );
 			$dirname = dirname( $filename );
 			require_once 'Ayoola/Doc.php';
 			$this->clearCache();

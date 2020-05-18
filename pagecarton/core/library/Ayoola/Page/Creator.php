@@ -48,7 +48,7 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 		{
 			if( is_file( $file ) )
 			{
-				unlink( $file );
+                Ayoola_File::trash( $file );
 				Ayoola_Doc::removeDirectory( basename( $file ) );
 			}
 		}

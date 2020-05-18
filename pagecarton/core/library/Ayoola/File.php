@@ -120,6 +120,33 @@ class Ayoola_File
     }
 	
     /**
+	 * Sends a file to trash instead of deleting it
+	 * 
+     * @param string $path
+     * @return boolean
+     */
+    public static function trash( $path )
+	{
+        try
+        {    
+            $x = explode( APPLICATION_DIR, $path );
+            $newDir  = $x[1] ? : $x[0];    
+            $trashDir = APPLICATION_DIR . DS . '.trash';
+            $newPath = $trashDir . DS . $newDir . DS . time() . basename( $newDir );
+            Ayoola_Doc::createDirectory( dirname( $newPath ) );
+            if( rename( $path, $newPath  ))
+            {
+                return true;
+            }
+        }
+        catch( Ayoola_Abstract_Exception $e  )
+        {
+
+        }
+        return false;
+    }
+	
+    /**
 	 * Returns the _directory property
 	 * 
      * @param void

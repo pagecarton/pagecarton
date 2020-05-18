@@ -181,9 +181,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
                 if( $tempData = unserialize( file_get_contents( $process ) ) )
                 {
                     $response = $this->init( $tempData[0], $tempData[1] );
-                //    var_export( $response );
-                //    var_export( $tempData );
-                    unlink( $process );
+
+                    //    unlink( $process );
+                    Ayoola_File::trash( $process );
+
                 }
 
             }

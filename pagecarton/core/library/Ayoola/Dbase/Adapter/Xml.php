@@ -654,11 +654,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		{
 			throw new Ayoola_Dbase_Adapter_Exception( 'COULD NOT CREATE A DATABASE - ' . dirname( $filename ) );
 		}
-
-
-	//	if( is_file( $filename ) ){ copy( $filename, $backUpFile ); } // backup file before overwritting
 		$this->getXml()->save( $filename );
-	//	if( is_file( $backUpFile ) ){ unlink( $backUpFile ); } // operation ended. Delete backup
 	}
 
     /**

@@ -70,10 +70,8 @@ class Ayoola_Page_Delete extends Ayoola_Page_Abstract
 			//	It must be a file
 		//	if( is_file( $file ) )
 			{
-				if( ! @unlink( $file ) )
-				{
-				//	throw new Ayoola_Page_Exception( 'UNABLE TO DELETE FILE: ' . $file );
-				}
+                Ayoola_File::trash( $file );
+
 				@Ayoola_Doc::removeDirectory( dirname( $file ) );
 			}
 			

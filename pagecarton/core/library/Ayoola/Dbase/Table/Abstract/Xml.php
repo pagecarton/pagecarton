@@ -279,7 +279,8 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
                 }
             }
             if (count($values) === count($this->select())) {
-                unlink($backupFile);
+                Ayoola_File::trash( $backupFile );
+            //    unlink($backupFile);
                 //    var_export( $values );
                 //    var_export( $this->select() );
                 //    copy( $backupFile,  static::$_tableInfo['filename'] ) ? : copy( $backupFile, $backupFile . '.backup' );
