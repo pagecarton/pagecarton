@@ -128,6 +128,13 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 	protected $className;
 
     /**
+     * The className
+     *
+     * @var string
+     */
+	protected $realClassName;
+
+    /**
      * Name of the Table
      *
      * @var string
@@ -142,9 +149,22 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
      */
     public function __construct( $databaseInfo = null )
     {
+    //    var_export( $databaseInfo );
 		if( ! is_null( $databaseInfo ) ){ $this->setDatabaseInfo( $databaseInfo ); }
     }
 
+    /**
+     * We didn't send the right classname on select()
+     * setting it now will break some things
+     * So this method is a workaround
+     *
+     * @param string Classname
+     */
+    public function setRealClassName( $className = null )
+	{
+		$this->realClassName =  $className;
+    }
+    
     /**
      * Selects A Database ( A valid Class in this case )
      *
@@ -156,17 +176,10 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		if( is_null( $className ) ){ $className = get_class( $this ); }
 		if( ! $class = Ayoola_Loader::loadClass( $className ) )
 		{
-	//		throw new Ayoola_Dbase_Adapter_Exception( "XMLDB not available for $className" );
-		}
-//		PageCarton_Widget::v( $className );
- //   var_export( $className );
+
+        }
 		$this->className =  $className;
 		$directory = XML_DATABASES_DIR . DS . str_ireplace( '_', DS, $className );
-	//	if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
-		{
-		//	var_export( $className );
-		//	var_export( $directory );
-		}
 		$this->setGlobalDirectory( $directory );
 	}
 
@@ -241,15 +254,18 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 
 			case self::SCOPE_PUBLIC:
 
-            //  CHANING PUBLIC DB BASE TO DEFAULT SINCE IT IS MOST CONSTANT DIR
-            //  CORE GETS DELETED ON NEW INSTALL
-            $path = SITE_APPLICATION_PATH . DS . $directory;
+                //  CHANING PUBLIC DB BASE TO DEFAULT SINCE IT IS MOST CONSTANT DIR
+                //  CORE GETS DELETED ON NEW INSTALL
+                $path = SITE_APPLICATION_PATH . DS . $directory;
+            //    var_export( $path . '<br>' );
 
 			break;
 			default:
 			break;
 
-		}
+        }
+    //    var_export( $path . '<br>' );
+
 		$this->_myDirectory = $path;
 		return $this->_myDirectory;
 
@@ -510,10 +526,6 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     {
 		if( in_array( $scope, self::$_allowedScopes ) )
 		{
-	//	if( $scope === 'PUBLIC' )
-		{
-	//		echo __LINE__;
-		}
 			$this->_accessibility = $scope;
 			return $this->_accessibility;
 		}
@@ -527,18 +539,13 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
      */
     public function getAccessibility()
     {
-		if( in_array( $this->_accessibility, self::$_allowedScopes ) ){ return $this->_accessibility; }
-	//	if( $this->_accessibility === 'PUBLIC' )
-		{
-		//	var_export( $this->_accessibility );
-		}
-	//	if( $this->_accessibility === 'PUBLIC' )
-		{
-	//		echo __LINE__;
-		}
-	//	var_export( $this->_accessibility );
-		return $this->setAccessibility( self::DEFAULT_SCOPE );
-		return $this->_accessibility;
+        if( in_array( $this->_accessibility, self::$_allowedScopes ) ){ return $this->_accessibility; }
+        $class = $this->getDatabaseInfo( 'class_name' );
+
+        $reflectionClass = new ReflectionClass( $class );
+        $properties = $reflectionClass->getDefaultProperties();
+        $defaultProperty = $properties['_accessibility'] ? : self::DEFAULT_SCOPE;
+		return $this->setAccessibility( $defaultProperty );
 	}
 
     /**
@@ -588,9 +595,11 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
             case self::SCOPE_PUBLIC;
             
                 //	There is a bug setting scope to private first by default. lets start again
+                //  this bug seem to have been fixed
+
 				$this->setMyDirectory();
 				$this->setMyfilename( $this->getTableName() );
-				$filename = $this->getMyfilename( $checkFile );
+                $filename = $this->getMyfilename( $checkFile );
 			break;
 			default:
 				throw new Ayoola_Dbase_Adapter_Xml_Exception( $scope . ' is invalid accessibility scope' );

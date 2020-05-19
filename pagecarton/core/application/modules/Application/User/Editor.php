@@ -139,9 +139,8 @@ class Application_User_Editor extends Application_User_Abstract
 					}
 					catch( Exception $e )
 					{
-					//	var_export( $e->getMessage() );
-					//	var_export( $e->getTraceAsString() );
-					}
+
+                    }
 				break;
 			
 			}

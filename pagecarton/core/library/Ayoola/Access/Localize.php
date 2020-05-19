@@ -130,7 +130,7 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 	{
 		
 		//	Localize information 
-        $table = Ayoola_Access_LocalUser::getInstance();
+        $table = Ayoola_Access_LocalUser::getInstance( "xyz" );
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
 			$database = 'file';
@@ -140,7 +140,7 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 			case 'private':
 				// Find user in the LocalUser table
 				$table = "Ayoola_Access_LocalUser";
-				$table = $table::getInstance( $table::SCOPE_PRIVATE );
+				$table = $table::getInstance( $table::SCOPE_PRIVATE . "xyz" );
 				$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 			break;

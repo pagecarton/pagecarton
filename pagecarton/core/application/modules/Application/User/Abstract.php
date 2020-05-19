@@ -136,9 +136,9 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			case 'file':
 				// Find user in the LocalUser table
 				$table = "Ayoola_Access_LocalUser";
-				$table = $table::getInstance( $table::SCOPE_PRIVATE );
-				$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
-				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+				$table = $table::getInstance( $table::SCOPE_PUBLIC );
+				$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PUBLIC );
+				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PUBLIC );
 
 				//	Filter the result to save time
 				$sortFunction2 = function( & $key, & $values )

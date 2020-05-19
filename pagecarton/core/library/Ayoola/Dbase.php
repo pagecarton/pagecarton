@@ -67,13 +67,14 @@ class Ayoola_Dbase
      */
     protected function _loadAdapter($adapterName = null)
     {
-        $adapter = $adapterName ?: $this->getDatabaseInfo('adapter');
+        $adapter = $adapterName ? : $this->getDatabaseInfo('adapter');
         $adapter = 'Ayoola_Dbase_Adapter_' . ucfirst($adapter);
         require_once 'Ayoola/Loader.php';
         if (!Ayoola_Loader::loadClass($adapter)) {
             require_once 'Ayoola/Dbase/Exception.php';
             throw new Ayoola_Dbase_Exception('Invalid Database Adapter - ' . $adapter);
         }
+    //    var_export( $adapter );
         $this->setAdapter(new $adapter($this->getDatabaseInfo()));
         return true;
     } //    ends _loadAdapter method

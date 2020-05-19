@@ -145,11 +145,24 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
     {
         //    We are using the XML Adapter
         require_once 'Ayoola/Dbase.php';
-        $database = new Ayoola_Dbase(array('adapter' => 'Xml'));
+        $database = new Ayoola_Dbase( array( 
+            'adapter' => 'Xml',
+            'class_name' => get_class( $this ),
+                'adapter_init_function' => function( $adapter )
+                {
+                    $adapter = $this->getDatabase()->getAdapter();
+                    $adapter->setTableName($this->getTableName());
+                //    var_export( $adapter);
+                    $adapter->setAccessibility($this->_accessibility);
+                    $adapter->setRelationship($this->_relationship);
+                    $adapter->_resultKeyReArrange = true;
+                }
+            ) );
         parent::__construct($database);
         $this->selectDatabase();
         $adapter = $this->getDatabase()->getAdapter();
         $adapter->setTableName($this->getTableName());
+    //    var_export( $adapter);
         $adapter->setAccessibility($this->_accessibility);
         $adapter->setRelationship($this->_relationship);
         $adapter->_resultKeyReArrange = true;
@@ -536,6 +549,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      */
     public function selectDatabase($className = null)
     {
+        $class = $className;
         if (is_null($className)) {
             $className = get_class($this);
             $className = explode('_', $className);
@@ -548,6 +562,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             }
         }
 //    if( ! $class = Ayoola_Loader::loadClass( $className ) ){ $className = null; }
+        $this->getDatabase()->getAdapter()->setRealClassName( $class );
         $this->getDatabase()->getAdapter()->select($className);
     }
 
