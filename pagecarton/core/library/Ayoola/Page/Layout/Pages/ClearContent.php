@@ -92,7 +92,7 @@ class Ayoola_Page_Layout_Pages_ClearContent extends Ayoola_Page_Layout_Pages
             {
                 $from = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $fPaths[$key];
             //  var_export( $from );
-                unlink( $from );
+                $trashed = Ayoola_File::trash( $from );
             }
 
        //     if( self::this( $url, $data['layout_name'] ) )

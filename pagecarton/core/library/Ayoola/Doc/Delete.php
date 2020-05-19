@@ -66,8 +66,10 @@ class Ayoola_Doc_Delete extends Ayoola_Doc_Abstract
 				$this->setViewContent( self::__( '<p><a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=' . $url . '">Upload new file instead</a></p>' ) ); 
 				return false;
 			}
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			if( unlink( $myPath ) )
+            if( ! $values = $this->getForm()->getValues() ){ return false; }
+            $trashed = Ayoola_File::trash( $myPath );
+
+			if( $trashed )
 			{ 
 				$this->setViewContent(  '' . self::__( '<p class="goodnews">' . $url . ' deleted successfully</p>' ) . '', true  ); 
 			}				

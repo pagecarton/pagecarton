@@ -700,8 +700,9 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			} else if (is_dir($file)) {
 				self::deleteDirectoryPlusContent($file);
 			} else {
-			//	var_export( $file );
-				unlink($file);
+			    //	var_export( $file );
+                Ayoola_File::trash( $file );
+                //  unlink($file);
 			}
 		}
 		@rmdir( $path );

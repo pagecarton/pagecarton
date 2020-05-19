@@ -95,7 +95,8 @@ switch (@$_GET['stage']) {
         chmod('.htaccess', 0644);
 
         //    Self destroy file
-        unlink($filename);
+        Ayoola_File::trash( $filename );
+        //  unlink($filename);
         //        $phar::unlinkArchive( $filename );
         //        unlink( $filename );
         //    Register this session as an administrative session

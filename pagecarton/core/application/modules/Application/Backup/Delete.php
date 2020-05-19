@@ -43,7 +43,8 @@ class Application_Backup_Delete extends Application_Backup_Abstract
 			{ 
 				$this->setViewContent(  '' . self::__( 'Backup deleted successfully' ) . '', true  ); 
 				if( ! is_file( $data['backup_filename'] ) ){ throw new Application_Backup_Exception( 'File does not exist' ); } 
-				unlink( $data['backup_filename'] );
+                Ayoola_File::trash( $data['backup_filename'] );
+			    //	unlink( $data['backup_filename'] );
 			//	Ayoola_Phar_Data::unlinkArchive( $data['backup_filename'] );
 			}
 		}

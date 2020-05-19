@@ -63,7 +63,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
             $files = Ayoola_Doc::getFiles( $themeDataDir );
             foreach( $files as $each )
             {
-                unlink( $each );
+                $trashed = Ayoola_File::trash( $each );                
             }
         }     
     }
@@ -111,8 +111,9 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
                 $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
+            $trashed = Ayoola_File::trash( $from );
 
-            if( unlink( $from ) )
+            if( $trashed )
             {
                 $this->setViewContent(  '' . self::__( '<p class="goodnews">"' . $url . '" deleted successfully.</p>' ) . '', true  ); 
 

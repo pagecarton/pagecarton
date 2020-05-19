@@ -59,8 +59,9 @@ class Application_Article_Delete extends Application_Article_Abstract
 			//	if( ! $response = Application_Article_Api_Delete::send( $data ) ){ return false; }
 			//	var_export( $response );
 			//	if( true !== $response['data'] ){ throw new Application_Article_Exception( $response ); }
-			}
-			unlink( self::getFolder() . $data['article_url'] );
+            }
+            Ayoola_File::trash( self::getFolder() . $data['article_url'] );     
+		    //	unlink( self::getFolder() . $data['article_url'] );
 			
 			@Ayoola_Doc::removeDirectory( dirname( self::getFolder() . $data['article_url'] ) );
 
