@@ -255,16 +255,22 @@ class Ayoola_Xml extends DOMDocument
 		//	Make sure the file is saved before you give up
 		$giveUpAfter = 5; //sec
         $time = time();
-        if( ! $result = parent::save( $filename, $options ) )
+
+        //  first save in a temp file 
+        $saveTmp = $filename . '.tmp';
+        if( ! $result = parent::save( $saveTmp, $options ) )
         {
 			throw new Ayoola_Xml_Exception( 'Error while saving ' . basename( $filename ) ); 
         }
+        if( ! rename( $saveTmp, $filename ) )
+        {
+            throw new Ayoola_Xml_Exception( 'Could not create temporary file while saving XML ' . basename( $filename ) ); 
+        }
         //  no waiting because causing delay and crashing servers.
         //  Will reserve inserts
-    
         $this->setFilename( $filename );
-        Ayoola_File::trash( $tempName );
-	    //	@unlink( $tempName );
+    //  Ayoola_File::trash( $tempName );
+		@unlink( $tempName );
 		return $result;
     } 
 	
