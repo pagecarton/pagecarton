@@ -60,3 +60,4 @@ pagecarton/temp
 #exclude pagecarton.json to make it safe for collaboration
 pagecarton/core/local_html/pagecarton.json
 pagecarton/core/application/databases/Application/settings.xml
+pagecarton/core/application/databases/Application/notification.xml
