@@ -513,22 +513,31 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
         $url = '/tools/classplayer/get/name/Ayoola_Form?form=' . $this->_attributes['name'] . '&auth=' . $authCode;
         Application_Javascript::addCode(
             '
-                var ajax = ayoola.xmlHttp.fetchLink( { url: "' . $url . '" , noSplash: true } );
-                var activateForm = function()
+                ayoola.events.add( window, "load", function()
                 {
-                    if( ayoola.xmlHttp.isReady( ajax ) )
-                    {	
-                        //  just a funny trick. Not fully implemented yet.
-                        //  Put off bots that cannot run JS
-                        //  In the future, we will put a real auth here
-                        
-                        var code = document.getElementsByName( "' . $submitDetector .'" )[0];
-                        code = code ? code : document.getElementsByName( "' . self::hashElementName( $submitDetector ) .'" )[0];
-                        code.value = "' . $authCode .'";
+                    var fx = document.getElementsByName( "' . $submitDetector .'" )[0];
+                    fx = fx ? fx : document.getElementsByName( "' . self::hashElementName( $submitDetector ) .'" )[0];
 
-                    }		
-                }
-                ayoola.events.add( ajax, "readystatechange", activateForm );
+                    if( ! fx )
+                    {
+                        return false;
+                    }
+                    var ajax = ayoola.xmlHttp.fetchLink( { url: "' . $url . '" , noSplash: true } );
+                    var activateForm = function()
+                    {
+                        if( ayoola.xmlHttp.isReady( ajax ) )
+                        {	
+                            //  just a funny trick. Not fully implemented yet.
+                            //  Put off bots that cannot run JS
+                            //  In the future, we will put a real auth here
+                            fx.value = "' . $authCode .'";
+    
+                        }		
+                    }
+                    ayoola.events.add( ajax, "readystatechange", activateForm );
+    
+                });
+
 	
             '
         );
