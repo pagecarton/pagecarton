@@ -129,6 +129,10 @@ class Ayoola_File
 	{
         try
         {    
+            if( ! $path || ! is_file( $path ) )
+            {
+                return false;
+            }
             $x = explode( Ayoola_Application::getDomainSettings( APPLICATION_DIR ), $path );
             $newDir  = $x[1] ? : $x[0];    
             $trashDir = Ayoola_Application::getDomainSettings( APPLICATION_DIR ) . DS . '.trash';
