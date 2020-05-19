@@ -66,7 +66,7 @@ class PageCarton_Hook_Abstract extends PageCarton_Widget
 //		$form->oneFieldSetAtATime = true;
 		$fieldset->placeholderInPlaceOfLabel = false;
         
-        $fieldset->addElement( array( 'name' => 'class_name', 'label' => 'Hook this', 'placeholder' => 'Class widget to affect by this', 'type' => 'Select', 'value' => @$values['class_name'] ), array( '' => 'Class widget to influence', '*' => 'All widgets' ) + Ayoola_Object_Embed::getWidgets() ); 
+        $fieldset->addElement( array( 'name' => 'class_name', 'label' => 'Hook this', 'placeholder' => 'Class widget to affect by this', 'type' => 'Select', 'value' => @$values['class_name'], 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Widget Class Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }' ), array( '' => 'Class widget to influence', '*' => 'All widgets' ) + Ayoola_Object_Embed::getWidgets() + array( '__custom' => 'Custom Widget' ) ); 
 
         $options = Ayoola_Object_Widget::getInstance()->select();
         //  var_export( $options );
@@ -87,7 +87,7 @@ class PageCarton_Hook_Abstract extends PageCarton_Widget
         {
             $options = array( '' => 'Class widget with the hook method' ) + $options;
         }
-        $fieldset->addElement( array( 'name' => 'hook_class_name', 'label' => 'To this', 'type' => 'Select', 'value' => @$values['hook_class_name'] ), $options ); 
+        $fieldset->addElement( array( 'name' => 'hook_class_name', 'label' => 'To this', 'type' => 'Select', 'value' => @$values['hook_class_name'], 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Widget Class Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }' ), $options + array( '__custom' => 'Custom Widget' ) ); 
         $fieldset->addRequirements( array( 'NotEmpty' => null ) );
 
 		$fieldset->addLegend( $legend );
