@@ -64,27 +64,21 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//	PageCarton_Widget::v( $result );  
 		if( ! empty( $options['filename'] ) )
 		{
-		//	var_export( $this->getMyFilename() );
 			$this->setXml();
-		//	$this->getXml()->load( $options['filename'] );
             if( ! $this->loadTableDataFromFile( $options['filename'], true ) )
             {
 
             }
 			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );
-	//		PageCarton_Widget::v( $rows );
 		}
 		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE ) // let PUBLIC PICK FROM CORE AND DEFAULT FOR COMPATIBILITY TO PREVIOUS VERSIONS THAT SAVED IN CORE
-//		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE || $this->getAccessibility() == self::SCOPE_PUBLIC )
 		{
-		//	$rows = $this->doSelect( $fieldsToFetch, $where, $options ); 
 			$files =  array_unique( array( $this->getFilenameAccordingToScope() => $this->getFilenameAccordingToScope() ) + $this->getSupplementaryFilenames() );
 			$rows = $this->loopFiles( $files, $fieldsToFetch, $where, $options );
 
 		}
 		else
 		{
-	//		var_export( $this->getMyFilename() );
 			$rows = array();
 			$files = array_unique( $this->getGlobalFilenames() );
 			$rows = $this->loopFiles( $files, $fieldsToFetch, $where, $options );
@@ -94,7 +88,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$rows = PageCarton_Widget::sortMultiDimensionalArray( $rows, $options['sort_column'] );
 		}
 		if( empty( $options['disable_cache'] ) ){ $this->setCache( $rows ); }
-//		var_export( $rows );
 		return $rows;
     }
 	

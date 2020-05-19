@@ -231,45 +231,25 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
      */
     public function setMyDirectory( $directory = null )
 	{
-	//	var_export( $directory );
-	//	var_export( APPLICATION_PATH );
-	//	var_export( self::SCOPE_PUBLIC );
-	//	var_export( $this->getAccessibility() );
 		if( is_null( $directory ) ){ $directory = $this->getGlobalDirectory(); }
-	//	var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );
-	//	exit(  );
 		switch( $this->getAccessibility() )
 		{
 			case self::SCOPE_PROTECTED:
 			case self::SCOPE_PRIVATE:
 				$path = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $directory;
-	//	var_export( $directory );
-	//	var_export( $this->getAccessibility() );
 			break;
 
 			case self::SCOPE_PUBLIC:
-      //	$path = APPLICATION_PATH . DS . $directory;
 
-        //  CHANING PUBLIC DB BASE TO DEFAULT SINCE IT IS MOST CONSTANT DIR
-        //  CORE GETS DELETED ON NEW INSTALL
-        $path = SITE_APPLICATION_PATH . DS . $directory;
+            //  CHANING PUBLIC DB BASE TO DEFAULT SINCE IT IS MOST CONSTANT DIR
+            //  CORE GETS DELETED ON NEW INSTALL
+            $path = SITE_APPLICATION_PATH . DS . $directory;
 
-	//	var_export( $directory );
-		//		Ayoola_Page_Creator::v( $path );
-	//	var_export( $path );
 			break;
 			default:
-	//	var_export( $directory );
-			//	$path = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $directory;
 			break;
 
 		}
-	//	require_once 'Ayoola/Doc.php';
-	//	if( ! Ayoola_Doc::createDirectory( $path ) )
-	//	{
-	//		throw new Ayoola_Dbase_Adapter_Exception( 'Could not create a database - ' . basename( $path ) );
-	//	}
-		//var_export( $path );
 		$this->_myDirectory = $path;
 		return $this->_myDirectory;
 
@@ -598,42 +578,19 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
     public function getFilenameAccordingToScope( $checkFile = false, $scope = null )
     {
 		if( is_null( $scope ) ){ $scope = $this->getAccessibility(); }
-		else
-		{
-		//	var_export( $scope );
-		}
-/* 		switch( $scope )
-		{
-			case self::SCOPE_PRIVATE:
-			case self::SCOPE_PROTECTED:
-				$filename = $this->getMyfilename( $checkFile );
-				break;
-			case self::SCOPE_PUBLIC;
-				$filename = $this->getFilename( $checkFile );
-				break;
-			default:
-				throw new Ayoola_Dbase_Adapter_Xml_Exception( $scope . ' is invalid accessibility scope' );
-		}
- */
+
 		switch( $scope )
 		{
 			case self::SCOPE_PRIVATE:
 			case self::SCOPE_PROTECTED:
 				$filename = $this->getMyfilename( $checkFile );
-			//	var_export( $filename );
 			break;
-			case self::SCOPE_PUBLIC;
-			//	There is a bug setting scope to private first by default. lets start again
-
-			//	$this->_myFilename = null;
-			//	$this->_myDirectory = null;
-			//	$this->select();
+            case self::SCOPE_PUBLIC;
+            
+                //	There is a bug setting scope to private first by default. lets start again
 				$this->setMyDirectory();
 				$this->setMyfilename( $this->getTableName() );
 				$filename = $this->getMyfilename( $checkFile );
-	//	trigger_error( $filename );
-			//	Ayoola_Page_Creator::v( $filename );
-			//	var_export( $checkFile );
 			break;
 			default:
 				throw new Ayoola_Dbase_Adapter_Xml_Exception( $scope . ' is invalid accessibility scope' );
