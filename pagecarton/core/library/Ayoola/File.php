@@ -134,7 +134,11 @@ class Ayoola_File
                 return false;
             }
             $x = explode( Ayoola_Application::getDomainSettings( APPLICATION_DIR ), $path );
-            $newDir  = $x[1] ? : $x[0];    
+            if( empty( $x[1] ) )
+            {
+                unlink( $path );
+            }
+            $newDir  = $x[1] ? : $x[0];  
             $trashDir = Ayoola_Application::getDomainSettings( APPLICATION_DIR ) . DS . '.trash';
             $newPath = $trashDir . $newDir . DS . time() . basename( $newDir );
             Ayoola_Doc::createDirectory( dirname( $newPath ) );

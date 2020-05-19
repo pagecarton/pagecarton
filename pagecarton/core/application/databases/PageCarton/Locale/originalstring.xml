@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="originalstring" creation_time="1569577985" modified_time="1569577985" table_version="0.1" module_version="1.00" table_class="PageCarton_Locale_OriginalString" creation_ip="0">
-  <RECORDS autoId="267">
+  <RECORDS autoId="271">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Field name e.g. full name]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Field name e.g. full name]]></TABLE_FIELD>
@@ -2739,6 +2739,46 @@
       <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_User_Creator&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1589918578-0-266]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1589918578]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="267">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Delete User]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Delete User]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_User_Delete&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1589921516-0-267]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1589921516]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="268">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Delete TESTED]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Delete TESTED]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_User_Delete&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1589921516-0-268]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1589921516]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="269">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[User Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[User Delete]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_User_Delete&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1589921517-0-269]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1589921517]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="270">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[User deleted successfully on the local table]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[User deleted successfully on the local table]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_User_Delete&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1589921518-0-270]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1589921518]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>

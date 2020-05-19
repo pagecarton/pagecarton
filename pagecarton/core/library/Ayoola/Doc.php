@@ -701,8 +701,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 				self::deleteDirectoryPlusContent($file);
 			} else {
 			    //	var_export( $file );
-                Ayoola_File::trash( $file );
-                //  unlink($file);
+                unlink($file);
 			}
 		}
 		@rmdir( $path );
