@@ -91,7 +91,7 @@ class Application_Profile_Editor extends Application_Profile_Abstract
 						
 			//	Notify Admin
 			$mailInfo['subject'] = 'Profile Edited';
-			$mailInfo['body'] = 'A new profile name "' . $values['display_name'] . '", has been edited with the profile module. 
+			$mailInfo['body'] = 'A profile "' . $values['display_name'] . '", has been edited with the profile module. 
 			
 			You can view the new profile by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '.';
 			try

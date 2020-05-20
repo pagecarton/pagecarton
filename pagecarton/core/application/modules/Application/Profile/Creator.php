@@ -81,7 +81,7 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 
 		$mailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
 		$mailInfo['subject'] = 'Your new profile';
-		$mailInfo['body'] = 'A new public profile name , has been created for you.
+		$mailInfo['body'] = 'A new public profile, has been created for you.
 		
 Display Name: "' . $values['display_name'] . '",
 Profile URL: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '

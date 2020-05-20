@@ -67,25 +67,31 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
 	public static function getEmails()
     {
         //	also sent the message to all admin accounts
-        if( ! $emails = Ayoola_Application::getDomainSettings( 'email' ) )
+        $emails = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
+        $userEmail = null;
+        if( 
+            Ayoola_Application::getUserInfo( 'access_level' ) == 99  
+            || Ayoola_Application::getUserInfo( 'access_level' ) == 98
+
+            )
+        {
+            $userEmail = Ayoola_Application::getUserInfo( 'email' );
+        }
+        elseif( ! $userEmail = Ayoola_Application::getDomainSettings( 'email' ) )
         {
             $userTable = 'Ayoola_Access_LocalUser';
             $userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
             $userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
             $userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
             $users = $userTable->select( null, array( 'access_level' => array( 99 ) ) );
-            $emails = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
             foreach( $users as $each )
             {
                 $emails .= ( ',' . $each['email'] );
             }
-            $emails = trim( $emails, ', ' );
         }
+        $emails .= ( ',' . $userEmail );
 
-	//	var_export( $users );
-	//	var_export( $emails );
-	//	var_export( Ayoola_Access_LocalUser::getInstance()->select() );
-	//	exit();
+        $emails = trim( $emails, ', ' );
 		return $emails;
     } 
 	

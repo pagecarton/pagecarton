@@ -95,7 +95,7 @@ class Application_Profile_Delete extends Application_Profile_Abstract
             $mailInfo['body'] = 'A profile has been just been deleted. Here are the details of the profile
             
 Profile name: ' . $data['display_name'] . '
-Profile URL: ' . $data['display_name'] . '
+Profile URL: ' . $data['profile_url'] . '
 Deleted by: ' . Ayoola_Application::getUserInfo( 'username' ) . ' (' . Ayoola_Application::getUserInfo( 'email' ) . ')
 
 
