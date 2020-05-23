@@ -1319,7 +1319,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 	public static function hashElementName( $name )
     {
 
-		return ltrim( Ayoola_Captcha::getHash( array( 'name' => $name ) ), '0123456789' );
+		return ltrim( Ayoola_Captcha::getHash( array( 'name' => $name, 'daily' => false ) ), '0123456789' );
     }
 
     /**

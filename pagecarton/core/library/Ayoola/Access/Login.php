@@ -277,7 +277,8 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 		{
 			$auth = new Ayoola_Access();
 			$auth->getStorage()->store( $userInfo );
-		}
+        }
+        $userInfo['email'] = $userInfo['email'];
 		return $userInfo;
 	}
 
