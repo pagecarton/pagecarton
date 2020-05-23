@@ -649,8 +649,9 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      */
     public static function getPreviousUrl( $default = '' )
     {
-		$url = empty( $_REQUEST['previous_url'] ) ? $default : $_REQUEST['previous_url'];
-		return urldecode( $url );
+        $url = empty( $_REQUEST['previous_url'] ) ? $default : $_REQUEST['previous_url'];
+        $url = urldecode( $url );
+		return $url;
     }
 	
     /**
