@@ -68,13 +68,14 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
             {
                 //  instantiate the table. 
                 //  change PageCarton_Table to your own table class name
-                $table = 'PageCarton_Table';
+                $table = 'myTestDatabase';
                 $table = new $table();
 
                 //  prepares data to send to db
                 $whatToInsert = array(
-                    'sample_field_name' => 'Ayoola',
-                    'another_sample_field' => 'Tolu',
+                    'id' => 'Oladiti',
+                    'name' => 'Sodiq',
+                    'regdate'=>'05-25-2020'
                 ); 
 
                 //  inserts data
@@ -86,7 +87,7 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
             {
                 //  instantiate the table. 
                 //  change PageCarton_Table to your own table class name
-                $table = 'PageCarton_Table';
+                $table = 'myTestDatabase';
                 $table = new $table();
 
                 //  fetches all records
@@ -101,8 +102,9 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
                 {
                     //  fetches all records
                     $where = array(
-                        'sample_field_name' => 'Ayoola',
-                        'another_sample_field' => 'Tolu',
+                      'id' => 'Oladiti',
+                      'name' => 'Sodiq',
+                      'regdate'=>'05-25-2020'
                     ); 
 
                     //  returns records where 'sample_field_name' field 
@@ -118,12 +120,14 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
                 {
                     //  update records
                     $where = array(
-                        'sample_field_name' => 'Ayoola',
-                        'another_sample_field' => 'Tolu',
+                      'id' => 'Oladiti',
+                      'name' => 'Sodiq',
+                      'regdate'=>'05-25-2020'
                     ); 
                     $updatedData = array(
-                        'sample_field_name' => 'Ayoola',
-                        'another_sample_field' => 'Falola',
+                      'id' => 'Oladiti',
+                      'name' => 'Sodiqsssssssssssss',
+                      'regdate'=>'05-26-2020'
                     ); 
 
                     //  update records where 'sample_field_name' field
@@ -169,7 +173,8 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
         {
             //  Initialize a new fieldset
             $fieldset = new Ayoola_Form_Element;
-
+            $date = new DateTime();
+           
             //  Wether to display label or not
             $fieldset->placeholderInPlaceOfLabel = false;
 
@@ -197,6 +202,8 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
             //  other input types are InputText, Hidden, Select, 
             //  Radio, Checkbox, SelectMultiple, Document, Password, TextArea
 
+            //add date and time of created form
+            $fieldset->addElement( $date->getTimestamp() );
             //  Adds the legend
             $fieldset->addLegend( $legend );
 
