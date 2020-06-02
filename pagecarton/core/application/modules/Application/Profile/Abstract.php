@@ -274,7 +274,8 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		{
 			//	main table data should be there because 
 			//	values like display_name is absent in inner data
-			$profileData = $profileData['profile_data'] + $profileData;
+            $profileData = ( is_array( $profileData['profile_data'] ) ? $profileData['profile_data'] : array()  ) 
+                            + ( is_array( $profileData ) ? $profileData : array()  );
 		}
 //			var_export( Application_Profile_Table::getInstance()->selectOne() );
 	//	self::v( $profileData );
