@@ -264,12 +264,13 @@ class Ayoola_Xml extends DOMDocument
         }
         if( ! rename( $saveTmp, $filename ) )
         {
-            throw new Ayoola_Xml_Exception( 'Could not create temporary file while saving XML ' . basename( $filename ) ); 
+            rename( $tempName, $filename . '.trouble.xml' );
+            throw new Ayoola_Xml_Exception( 'Could not copy temp while saving XML ' . basename( $filename ) ); 
         }
         //  no waiting because causing delay and crashing servers.
         //  Will reserve inserts
         $this->setFilename( $filename );
-    //  Ayoola_File::trash( $tempName );
+        //  Ayoola_File::trash( $tempName );
 		@unlink( $tempName );
 		return $result;
     } 
