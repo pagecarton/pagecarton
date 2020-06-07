@@ -17,7 +17,6 @@
  
 require_once 'Ayoola/Page/Layout/Exception.php';
 
-
 /**
  * @category   PageCarton
  * @package    Ayoola_Extension_Abstract
@@ -62,7 +61,6 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
      * @var string
      */
 	protected $_tableClass = 'Ayoola_Extension';
-	
 
     /**
      * creates the form for creating and editing subscription package
@@ -74,8 +72,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
 		
-	
-		//	Form to create a new page
+		//	
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
 		$form->setParameter( array( 'no_fieldset' => true ) );
 		$fieldset = new Ayoola_Form_Element;
@@ -87,9 +84,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 		{
 			try
 			{
-			//	$options = Ayoola_Doc::getFiles( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . '/modules', array( 'return_directories' => true ) );  
 				$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'modules';  
-			//	var_export( $directory );
 				$options = Ayoola_Doc::getFilesRecursive( $directory );  
 			}
 			catch( Exception $e )
@@ -102,8 +97,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			{
 				$directory = str_ireplace( DS, '/', $directory );
 				$file = str_ireplace( DS, '/', $file );
-	//			var_export( $directory );
-	//			var_export( $file );
+
 				$file = str_ireplace( $directory, '', $file );
 				
 				//	The label is transformed into the class value
@@ -116,17 +110,17 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			$fieldset->addElement( array( 'name' => 'modules', 'required' => 'required', 'label' => 'Widgets to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['modules'] ), $files );
 			if( $files ) 
 			{
-			//	$fieldset->addRequirement( 'modules', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the modules you want to include in the Plugin' )  ) );
+
 			}
 			$fieldset->addElement( array( 'name' => 'settings_class', 'label' => 'Settings Widgets', 'type' => 'Select', 'value' => @$values['settings_class'] ), array( '' => 'No Settings' ) + $classes );
  	
 		}
 		{
  			$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'databases';  
-		//	var_export( $options );
+
 			try
 			{
-			//	$options = Ayoola_Doc::getFiles( $options, array( 'return_directories' => true ) );  
+
 				$options = Ayoola_Doc::getFilesRecursive( $directory );  
 			}
 			catch( Exception $e )
@@ -138,8 +132,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			{
 				$directory = str_ireplace( DS, '/', $directory );
 				$file = str_ireplace( DS, '/', $file );
-	//			var_export( $directory );
-	//			var_export( $file );
+
 				$file = str_ireplace( $directory, '', $file );
 				
 				//	The label is transformed into the class value
@@ -154,13 +147,13 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			if( $files ) 
 			{
 				$fieldset->addElement( array( 'name' => 'databases', 'required' => 'required', 'label' => 'Database Data to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['databases'] ), $files );
-			//	$fieldset->addRequirement( 'databases', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select the database tables you want to include in the Plugin' )  ) );
+
 			}
  	
 		}
 		{
  			$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents';  
-		//	var_export( $options );
+
 			try
 			{
 				$options = Ayoola_Doc::getFilesRecursive( $directory ); 
@@ -174,17 +167,16 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			{
 				$directory = str_ireplace( DS, '/', $directory );
 				$file = str_ireplace( DS, '/', $file );
-	//			var_export( $directory );
-	//			var_export( $file );
+
 				$file = str_ireplace( $directory, '', $file );
 				$files[$file] = $file;
 			}
 			asort( $files );
 			$fieldset->addElement( array( 'name' => 'documents', 'required' => 'required', 'label' => 'Documents & Files  to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['documents'] ), $files );
-	//		$fieldset->addElement( array( 'name' => 'upload_document', 'label' => ' ', 'type' => 'document', 'value' => @$values['upload_document'] ) );
+
 			if( $files ) 
 			{
-			//	$fieldset->addRequirement( 'documents', array( 'ArrayKeys' => $files + array( 'badnews' => 'Please select documents you want to include in the Plugin' )  ) );
+
 			}
  	
 		}
@@ -200,7 +192,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			$fieldset->addElement( array( 'name' => 'pages', 'required' => 'required', 'label' => 'Pages to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['pages'] ), $option );
 			if( $option )     
 			{
-			//	$fieldset->addRequirement( 'pages', array( 'ArrayKeys' => $option + array( 'badnews' => 'Please select pages you want to include in the Plugin' )  ) );
+
 			}
  	
 		}

@@ -91,7 +91,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 			Ayoola_Doc::createDirectory( dirname( $annexFile ) );
 
 			rename( $filename, $annexFile );
-		//	$this->query( 'DROP' );
 			$this->setXml();
 			$this->query( 'CREATE', $tableInfo['table_info'], $tableInfo['data_types'] );
             $this->setXml();
