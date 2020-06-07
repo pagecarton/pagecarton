@@ -49,7 +49,8 @@ class Application_Log_View_Error extends Application_Log_View_Abstract
 		{
 	//		Ayoola_Application_Notification::mail( $mailInfo );
 		}
-		catch( Ayoola_Exception $e ){ null; }
+        catch( Ayoola_Exception $e ){ null; }
+        function_exists( 'http_response_code' ) ? http_response_code(500) : null;
 		$message = "There is error on this page please reload your browser to continue. If this persist, contact the administrator. You can also go back to the <a href=\'/\'>homepage</a>";
 	//	trigger_error( $message );
 		echo "<div class='badnews'>$message</div>";
