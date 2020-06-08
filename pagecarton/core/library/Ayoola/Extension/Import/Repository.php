@@ -65,8 +65,6 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 
 		if( ! empty( $_GET['install'] ) )
 		{
-       //     var_export( array( 'article_url' =>  @$_GET['install'] ) );
-         //   var_export( Ayoola_Page_PageLayout::getInstance()->select( null, array( 'article_url' =>  @$_GET['install'] ) ) );
             $class = new static::$_pluginClass( array( 'no_init' => true ) ); 
 
             $pluginInfo = $class->getDbTable()->selectOne( null, array( 'article_url' =>  @$_GET['install'] ) );
@@ -74,13 +72,11 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
             $allFeed = json_decode( $feed, true );
 
-        //    var_export( $allFeed );
             $install = 'Install';
             if( ! empty( $_GET['update'] ) )
             {
                 $install = 'Update';
             }
-            
             
             $existingPluginSettings = array();
             $fileFilter = new Ayoola_Filter_FileSize();
@@ -107,13 +103,9 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 			$this->setViewContent( self::__( '<img style="width:100%;" src="' . $photoUrl . '&width=1500&height=600" alt="">' ) );
 			$this->setViewContent( self::getMenu() );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
-            
+                        
 
             //   delete first if this is upgrade
-       //     var_export( $layout['article_url'] );
-        //    var_export( @$_GET['update'] );
-        //    var_export( $pluginInfo );
-        
             if( ! empty( $pluginInfo['article_url'] ) && $pluginInfo['article_url'] === @$_GET['update'] )
             {
                 //  dont delete for extensions
@@ -129,107 +121,8 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 
             }
 
-            $link = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $_GET['install'] . '&auto_download=1';
-        //    var_export(  $link );
-        //    exit();
 
-            $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
-            $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';
-
-            if( preg_match('/Content-Disposition: .*filename=([^0-9A-Za-z_-.]+)/', $content['options']['raw_response_header'], $matches) ) 
-            {
-                $filename .= $matches[1];
-            //    var_export( $matches );
-            }
-            else
-            {
-                $filename .= '.tar.gz';
-            }
-                
-        
-
-       //     var_export( $filename );   
-        //    var_export( $content['options'] );
-        //    exit();
-     //       var_export( strlen( $content ) );  
-            Ayoola_File::putContents( $filename, $content['response'] );
-            $values = static::getOtherInstallOptions( $filename );
-            $values += $existingPluginSettings;
-        //    var_export( $values );
-        //    copy( $filename, $filename . '.copy.tar.gz' );
-
-            // add screenshot
-            $repository = 'Ayoola_Phar_Data';
-
-            $repository = new $repository( $filename );
-            //   var_export( $allFeed['modified_time'] );
-            $repository->startBuffering(); 
-            $repository['screenshot.jpg'] = file_get_contents( $photoUrl );
-         //   var_export( $repository['layout_information'] );nul
-            try
-            {
-                
-                file_get_contents( $repository['layout_information'] );
-                if( $previousData = json_decode( file_get_contents( $repository['layout_information'] ), true ) OR $previousData = unserialize( file_get_contents( $repository['layout_information'] ) ) ) 
-                {
-
-                }
-            //    var_export( $previousData );
-
-                //  set current time to be able to calculate updates
-                $previousData['modified_time'] = time();
-                $previousData['creation_time'] = time();
-            //    var_export( $previousData );
-
-                $repository['layout_information'] = json_encode( $previousData );
-
-                $repository->stopBuffering();
-            }
-            catch( Exception $e )
-            {
-                //  Skip this stage if it is not theme
-                null;
-            }
-            try
-            {
-                
-                file_get_contents( $repository['extension_information'] );
-                if( $previousData = json_decode( file_get_contents( $repository['extension_information'] ), true ) OR $previousData = unserialize( file_get_contents( $repository['extension_information'] ) ) ) 
-                {
-
-                }
-            //    var_export( $previousData );
-
-                //  set current time to be able to calculate updates
-                $previousData['modified_time'] = time();
-                $previousData['creation_time'] = time();
-                $previousData['article_url'] = $_GET['install'];
-                //    var_export( $previousData );
-
-                $repository['extension_information'] = json_encode( $previousData );
-
-                $repository->stopBuffering();
-            }
-            catch( Exception $e )
-            {
-                //  Skip this stage if it is not plugin
-                null;
-            }
-
-            try
-            {
-                $class = new static::$_pluginClass( array( 'xno_init' => true, 'fake_values' => $values, 'path' => $filename, ) ); 
-            //    $class->fakeValues = $values;
-            //    $class->init();
-            }
-            catch( Exception $e )
-            {
-            //    echo $e->getMessage();
-            //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
-            }
-        //    var_export( $class->getForm()->getValues() );
-        //    var_export( $class->getForm()->getBadnews() );
-        //	$this->setViewContent( self::__( '<h1 class="pc-heading">' . @$_GET['title'] . '</h1>' ) );
+            $class = self::install( $_GET['install'], $existingPluginSettings );
             if( ! $class->getForm()->getBadnews() )
             {
                 
@@ -273,6 +166,96 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             parent::init();
         }
     }		
+    
+    /**
+     * 
+     * 
+     */
+	public static function install( $url, array $existingPluginSettings = null)
+    {
+
+        $link = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $url . '&auto_download=1';
+
+        $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
+        $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';
+
+        if( preg_match('/Content-Disposition: .*filename=([^0-9A-Za-z_-.]+)/', $content['options']['raw_response_header'], $matches) ) 
+        {
+            $filename .= $matches[1];
+        }
+        else
+        {
+            $filename .= '.tar.gz';
+        }
+
+        Ayoola_File::putContents( $filename, $content['response'] );
+        $values = static::getOtherInstallOptions( $filename );
+        $values['path'] = $filename;
+        $values['article_url'] = $url;
+        $values += $existingPluginSettings ? : array();
+
+        // add screenshot
+        $repository = 'Ayoola_Phar_Data';
+
+        $repository = new $repository( $filename );
+
+        $repository->startBuffering(); 
+        $photoUrl = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . $url . '';
+        $repository['screenshot.jpg'] = file_get_contents( $photoUrl );
+        try
+        {
+            
+            file_get_contents( $repository['layout_information'] );
+            if( $previousData = json_decode( file_get_contents( $repository['layout_information'] ), true ) OR $previousData = unserialize( file_get_contents( $repository['layout_information'] ) ) ) 
+            {
+
+            }
+
+            //  set current time to be able to calculate updates
+            $previousData['modified_time'] = time();
+            $previousData['creation_time'] = time();
+            $repository['layout_information'] = json_encode( $previousData );
+            $repository->stopBuffering();
+        }
+        catch( Exception $e )
+        {
+            //  Skip this stage if it is not theme
+            null;
+        }
+        try
+        {
+            
+            file_get_contents( $repository['extension_information'] );
+            if( $previousData = json_decode( file_get_contents( $repository['extension_information'] ), true ) OR $previousData = unserialize( file_get_contents( $repository['extension_information'] ) ) ) 
+            {
+
+            }
+
+            //  set current time to be able to calculate updates
+            $previousData['modified_time'] = time();
+            $previousData['creation_time'] = time();
+            $previousData['article_url'] = $url;
+
+            $repository['extension_information'] = json_encode( $previousData );
+
+            $repository->stopBuffering();
+        }
+        catch( Exception $e )
+        {
+            //  Skip this stage if it is not plugin
+            null;
+        }
+
+        try
+        {
+            $class = new static::$_pluginClass( array( 'xno_init' => true, 'fake_values' => $values, 'path' => $filename, ) ); 
+        }
+        catch( Exception $e )
+        {
+
+        }
+        return $class;
+    }
     
     /**
      * 

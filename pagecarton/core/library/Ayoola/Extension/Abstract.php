@@ -77,125 +77,135 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 		$form->setParameter( array( 'no_fieldset' => true ) );
 		$fieldset = new Ayoola_Form_Element;
 		$form->submitValue = $submitValue ;
-		$fieldset->addElement( array( 'name' => 'extension_title', 'label' => 'Plugin Name', 'placeholder' => 'e.g. My Super Plugin', 'onClick' => '', 'type' => 'InputText', 'value' => @$values['extension_title'] ) );
-		$fieldset->addRequirement( 'extension_title', array( 'WordCount' => array( 3,100, 'badnews' => 'A Plugin name should be made up of 3 to 100  alphanumeric characters.' ) ) ); 
+		$fieldset->addElement( array( 'name' => 'extension_title', 'label' => 'Give the Plugin a Name', 'placeholder' => 'e.g. My Super Plugin', 'onClick' => '', 'type' => 'InputText', 'value' => @$values['extension_title'] ) );
+		$fieldset->addRequirement( 'extension_title', array( 'WordCount' => array( 3,100, 'badnews' => 'Plugin name should be made up of 3 to 100 alphanumeric characters.' ) ) ); 
 		$filter = new Ayoola_Filter_FilenameToClassname();
-		
-		{
-			try
-			{
-				$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'modules';  
-				$options = Ayoola_Doc::getFilesRecursive( $directory );  
-			}
-			catch( Exception $e )
-			{
-				$options = array(); 
-			}
-			$files = array();
-			$classes = array();
-			foreach( $options as $file )
-			{
-				$directory = str_ireplace( DS, '/', $directory );
-				$file = str_ireplace( DS, '/', $file );
+        
+        //  widgets
+        try
+        {
+            $directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'modules';  
+            $options = Ayoola_Doc::getFilesRecursive( $directory );  
+        }
+        catch( Exception $e )
+        {
+            $options = array(); 
+        }
+        $files = array();
+        $classes = array();
+        foreach( $options as $file )
+        {
+            $directory = str_ireplace( DS, '/', $directory );
+            $file = str_ireplace( DS, '/', $file );
 
-				$file = str_ireplace( $directory, '', $file );
-				
-				//	The label is transformed into the class value
-				$className = $filter->filter( $file );
-				$files[$file] = $className;
-				$classes[$className] = $className;
-			}
-			ksort( $classes );
-			asort( $files );
-			$fieldset->addElement( array( 'name' => 'modules', 'required' => 'required', 'label' => 'Widgets to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['modules'] ), $files );
-			if( $files ) 
-			{
+            $file = str_ireplace( $directory, '', $file );
+            
+            //	The label is transformed into the class value
+            $className = $filter->filter( $file );
+            if( is_subclass_of( $className, PageCarton_Settings ) )
+            {
+                $classes[$className] = $className;
+            }
+            else
+            {
+                $files[$file] = $className;
+            }
+        }
+        ksort( $classes );
+        asort( $files );
 
-			}
-			$fieldset->addElement( array( 'name' => 'settings_class', 'label' => 'Settings Widgets', 'type' => 'Select', 'value' => @$values['settings_class'] ), array( '' => 'No Settings' ) + $classes );
+        if( $files )
+        {
+            $fieldset->addElement( array( 'name' => 'modules', 'required' => 'required', 'label' => 'Plugin Widgets', 'type' => 'SelectMultiple', 'value' => @$values['modules'] ), $files );
+        }
+
+        //  settings
+        if( $files )
+        {
+            $fieldset->addElement( array( 'name' => 'settings_class', 'label' => 'Plugin Settings Widget', 'type' => 'Select', 'value' => @$values['settings_class'] ), array( '' => 'No Settings' ) + $classes );
+        }
+
+        //  database
+        $directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'databases';  
+
+        try
+        {
+
+            $options = Ayoola_Doc::getFilesRecursive( $directory );  
+        }
+        catch( Exception $e )
+        {
+            $options = array(); 
+        }
+        $files = array();
+        foreach( $options as $file )
+        {
+            $directory = str_ireplace( DS, '/', $directory );
+            $file = str_ireplace( DS, '/', $file );
+
+            $file = str_ireplace( $directory, '', $file );
+            
+            //	The label is transformed into the class value
+            $className = $filter->filter( $file );
+            if( stripos( $className, '__' ) )
+            {
+                continue;
+            }
+            $files[$file] = $className;
+        }
+        asort( $files );
+        if( $files ) 
+        {
+            $fieldset->addElement( array( 'name' => 'databases', 'required' => 'required', 'label' => 'Plugin Databases', 'type' => 'SelectMultiple', 'value' => @$values['databases'] ), $files );
+        }
+
+        //  documents
+        $directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents';  
+
+        try
+        {
+            $options = Ayoola_Doc::getFilesRecursive( $directory ); 
+        }
+        catch( Exception $e )
+        {
+            $options = array(); 
+        }
+        $files = array();
+        foreach( $options as $file )
+        {
+            $directory = str_ireplace( DS, '/', $directory );
+            $file = str_ireplace( DS, '/', $file );
+
+            $file = str_ireplace( $directory, '', $file );
+            $files[$file] = $file;
+        }
+        asort( $files );
+        if( $files )
+        {
+            $fieldset->addElement( array( 'name' => 'documents', 'required' => 'required', 'label' => 'Plugin Documents', 'type' => 'SelectMultiple', 'value' => @$values['documents'] ), $files );
+        }
+
+
+        //  Pages
+        $option = Ayoola_Page_Page::getInstance()->select();
+        $filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
+        $option = $filter->filter( $option );
+        asort( $option );
+        if( $option )
+        {
+            $fieldset->addElement( array( 'name' => 'pages', 'required' => 'required', 'label' => 'Plugin Pages', 'type' => 'SelectMultiple', 'value' => @$values['pages'] ), $option );
+        }
+
+        //  Dependencies
+        $option = Ayoola_Extension_Import_Table::getInstance()->select();
+        $filter = new Ayoola_Filter_SelectListArray( 'article_url', 'extension_title');
+        $option = $filter->filter( $option );
+        asort( $option );
+        if( $option )
+        {
+            $fieldset->addElement( array( 'name' => 'dependencies', 'required' => 'required', 'label' => 'Plugin Dependencies', 'type' => 'SelectMultiple', 'value' => @$values['dependencies'] ), $option );
+        }
  	
-		}
-		{
- 			$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'databases';  
-
-			try
-			{
-
-				$options = Ayoola_Doc::getFilesRecursive( $directory );  
-			}
-			catch( Exception $e )
-			{
-				$options = array(); 
-			}
-			$files = array();
-			foreach( $options as $file )
-			{
-				$directory = str_ireplace( DS, '/', $directory );
-				$file = str_ireplace( DS, '/', $file );
-
-				$file = str_ireplace( $directory, '', $file );
-				
-				//	The label is transformed into the class value
-				$className = $filter->filter( $file );
-				if( stripos( $className, '__' ) )
-				{
-					continue;
-				}
-				$files[$file] = $className;
-			}
-			asort( $files );
-			if( $files ) 
-			{
-				$fieldset->addElement( array( 'name' => 'databases', 'required' => 'required', 'label' => 'Database Data to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['databases'] ), $files );
-
-			}
- 	
-		}
-		{
- 			$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents';  
-
-			try
-			{
-				$options = Ayoola_Doc::getFilesRecursive( $directory ); 
-			}
-			catch( Exception $e )
-			{
-				$options = array(); 
-			}
-			$files = array();
-			foreach( $options as $file )
-			{
-				$directory = str_ireplace( DS, '/', $directory );
-				$file = str_ireplace( DS, '/', $file );
-
-				$file = str_ireplace( $directory, '', $file );
-				$files[$file] = $file;
-			}
-			asort( $files );
-			$fieldset->addElement( array( 'name' => 'documents', 'required' => 'required', 'label' => 'Documents & Files  to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['documents'] ), $files );
-
-			if( $files ) 
-			{
-
-			}
- 	
-		}
-
-		
-		{
-			$option = new Ayoola_Page_Page;
-			$option = $option->select();
-			require_once 'Ayoola/Filter/SelectListArray.php';
-			$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
-			$option = $filter->filter( $option );
-			asort( $option );
-			$fieldset->addElement( array( 'name' => 'pages', 'required' => 'required', 'label' => 'Pages to Include in Plugin', 'type' => 'SelectMultiple', 'value' => @$values['pages'] ), $option );
-			if( $option )     
-			{
-
-			}
- 	
-		}
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );

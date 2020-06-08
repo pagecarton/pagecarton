@@ -17,7 +17,6 @@
  
 require_once 'Application/Subscription/Abstract.php';
 
-
 /**
  * @category   PageCarton
  * @package    Ayoola_Extension_Import_Status
@@ -36,55 +35,69 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 	protected static $_objectTitle = 'Plugin Status Update'; 
 	
     /**
-     * The method does the whole Class Process
+     * Switch data
      * 
      */
-	protected function init()  
+	protected static function change( $data, $currentStatus = true )  
     {
-		try{ $this->setIdentifier(); }
-		catch( Ayoola_Extension_Import_Exception $e ){ return false; }
-		if( ! $data = self::getIdentifierData() ){ return false; }
-		
-//		var_export( $data );
-		$currentStatus = true;
-		if( $this->getParameter( 'switch' ) === 'off' )
-		{
-			//	Try to switch this off whether its previously on/off
-			$data['status'] = '1';
-		}
-		switch( strtolower( strval( $data['status'] ) ) )
-		{
-			case 'enabled':
-			case '1':
-				// we currently are on
-				$currentStatus = true;
-				
-				//	Switch off				
-				$data['status'] = 'Disabled';
-				$this->createConfirmationForm( 'Disable Plugin...', 'Disable "' . $data['extension_title'] . '"', $data );
-			break;
-			default:
-				// we currently are off
-				$currentStatus = false;
-				
-				//	Switch on
-				$this->createConfirmationForm( 'Enable Plugin...', 'Enable "' . $data['extension_title'] . '"', $data );
-				$data['status'] = 'Enabled';
-			break;
-		}
-		$this->setViewContent( $this->getForm()->view(), true );
-		if( ! $values = $this->getForm()->getValues() )
-		{ 
-			if( $this->getParameter( 'switch' ) !== 'off' )
-			{
-				return false; 
-			}
-		}
-//		var_export( $data );
-//		var_export( $toDir );
-		$this->setViewContent(  '' . self::__( '<span></span> ' ) . '', true  );
+        //  manage dependencies first
+        if( ! empty( $data['dependencies'] ) )
+        {
+            //  this can take some time for some recursive dependency check
+            //  example a long list of dependencies
+        //    set_time_limit( 3600 );
+            $method = __METHOD__;
+            if( $currentStatus )
+            {
+                //  switch off depencies installed specifically for this plugin
+                $installations = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'article_url' => $data['installed_dependencies'] ));
+                foreach( $installations as $dependencyData )
+                {
+                    $method( $dependencyData, $currentStatus );
+                }
+            }
+            else
+            {
+                foreach( $data['dependencies'] as $dependency )
+                {
+                    if( ! $dependencyData = Ayoola_Extension_Import_Table::getInstance()->selectOne( null, array( 'article_url' => $dependency ) ) )
+                    {
+                        $data['installed_dependencies'][] = $dependency;
+                        $data['installed_dependencies'] = array_unique( $data['installed_dependencies'] );
+                        
+                        //  update dependency in db
+                        if( ! Ayoola_Extension_Import_Table::getInstance()->update( 
+                            array( 'installed_dependencies' => $data['installed_dependencies'] ),
+                            array( 'article_url' => $data['article_url'] )
+                         ) )
+                        {
+                            throw new Ayoola_Extension_Import_Exception( 'Dependency ' . $dependency . ' could not be added to database for ' . $data['extension_title'] );
+                        }
+                        Ayoola_Extension_Import_Repository::install( $dependency );
+                        if( ! $dependencyData = Ayoola_Extension_Import_Table::getInstance()->selectOne( null, array( 'article_url' => $dependency ) ) )
+                        {
+                            throw new Ayoola_Extension_Import_Exception( 'Dependency ' . $dependency . ' could not be installed' );
+                        }
+
+                    }
+                    $method( $dependencyData, $currentStatus );
+                }
+                $alreadyMetDepencencies = array_diff( $data['dependencies'], $data['installed_dependencies'] );
+                if( $alreadyMetDepencencies != $data['ready_dependencies'] )
+                {
+                    if( ! Ayoola_Extension_Import_Table::getInstance()->update( 
+                        array( 'ready_dependencies' => $alreadyMetDepencencies ),
+                        array( 'article_url' => $data['article_url'] )
+                        ) )
+                    {
+                        throw new Ayoola_Extension_Import_Exception( 'We were not able to set already met dependencies for ' . $data['extension_title'] );
+                    }
+                }
+            }
+        }
+        
 		$fromDir = ( @constant( 'EXTENSIONS_PATH' ) ? Ayoola_Application::getDomainSettings( EXTENSIONS_PATH ) : ( APPLICATION_DIR . DS . 'extensions' ) ) . DS . $data['extension_name'] . DS . 'application';
-		$toDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH );
+        $toDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH );
 		if( @$data['modules'] )
 		{
 			$directory =   '/modules';
@@ -108,13 +121,10 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
                 //  Supplementary files
                 $from = $fromDir . $directory . dirname( $each ) . DS . '__' . DS . array_shift( explode( '.', basename( $each ) ) );
                 $to = dirname( $databaseExtension ) . DS . '' . $data['extension_name'] . '/supplementary';
-            //    var_export( $from );
-            //    var_export( $to );
-            //    exit();
+
 				self::changeStatus( $currentStatus, $from , $to );
 			}
 		}
-//		var_export( $data['documents'] );
 		if( @$data['documents'] )
 		{
 			$directory =  '/documents';
@@ -163,7 +173,58 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 				self::changeStatus( $currentStatus, $from , $to );
 			}
 		}
+        return true;
+    }
+	
+    /**
+     * The method does the whole Class Process
+     * 
+     */
+	protected function init()  
+    {
+		try{ $this->setIdentifier(); }
+		catch( Ayoola_Extension_Import_Exception $e ){ return false; }
+		if( ! $data = self::getIdentifierData() ){ return false; }
 
+		$currentStatus = true;
+		if( $this->getParameter( 'switch' ) === 'off' )
+		{
+			//	Try to switch this off whether its previously on/off
+			$data['status'] = '1';
+		}
+		switch( strtolower( strval( $data['status'] ) ) )
+		{
+			case 'enabled':
+			case '1':
+				// we currently are on
+				$currentStatus = true;
+				
+				//	Switch off				
+				$data['status'] = 'Disabled';
+				$this->createConfirmationForm( 'Disable Plugin...', 'Disable "' . $data['extension_title'] . '"', $data );
+			break;
+			default:
+				// we currently are off
+				$currentStatus = false;
+				
+				//	Switch on
+				$this->createConfirmationForm( 'Enable Plugin...', 'Enable "' . $data['extension_title'] . '"', $data );
+				$data['status'] = 'Enabled';
+			break;
+		}
+		$this->setViewContent( $this->getForm()->view(), true );
+		if( ! $values = $this->getForm()->getValues() )
+		{ 
+			if( $this->getParameter( 'switch' ) !== 'off' )
+			{
+				return false; 
+			}
+        }
+
+        //  switch
+        self::change( $data, $currentStatus );
+
+		$this->setViewContent(  '' . self::__( '<span></span> ' ) . '', true  );
 		$settings = null;
 		if( $data['settings_class'] )
 		{ 
@@ -181,10 +242,10 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 			return false;
 		}
 		$this->setViewContent( self::__( '<p class="boxednews goodnews">Plugin switch "' . $data['status'] . '" successfully. ' . $settings . '</p>' ) );
-	//	var_Export( $data );  
+
 		//	clear cache
 		Application_Cache_Clear::viewInLine();	
-	//	$this->setViewContent( $this->getForm()->view() );
+
   
 	} 
 	
@@ -194,8 +255,6 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
      */
 	protected function changeStatus( $currentStatus, $from, $to )  
     {
-	//	echo '' . $from . '<br>';
-	//	echo  '' . $to . '<br>';
 		$file = str_ireplace( Ayoola_Application::getDomainSettings( APPLICATION_PATH ), '', $to );
 		$from = str_replace( array( '/', '\\' ), DS, $from );
 		$to = str_replace( array( '/', '\\' ), DS, $to );
@@ -204,31 +263,22 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 			case true:
 				if( ! is_link( $to ) )
 				{
-				//	var_export( is_file( $to ) );
-				//	var_export( $to );
-					$this->setViewParameter( '' . 'ERROR 1: "' . $file . '" not enabled before.' );
 					return false;
 				}				
 				elseif( $from !== readlink( $to ) && is_file( readlink( $to ) ) )
 				{
-		//			var_export( $from );
-		//			var_export( readlink( $to ) );
-					$this->setViewParameter( '' . 'ERROR 2: "' . $file . '" is in use by another Plugin.' );
 					return false;
 				}				
 				unlink( $to );
-			//	var_export( unlink( $to ) );
 				Ayoola_Doc::removeDirectory( basename( $to ) );
 			break;
 			case false:
 				if( ! file_exists( $from ) )
 				{
-					$this->setViewParameter( '' . 'ERROR 3: "' . $file . '" not found in Plugin files.' );
 					return false;
 				}					
 				elseif( file_exists( $to ) )
 				{
-					$this->setViewParameter( '' . 'ERROR 4: "' . $file . '" has a conflicting file on the server.' );
 					return false;
 				}					
 				//	create this dir if it isnt there before

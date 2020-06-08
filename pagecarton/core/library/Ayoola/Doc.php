@@ -774,6 +774,21 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 
 	/**
      * 
+     * @param string Full Path
+     * @param string Path relative to
+     * @return string directory
+     */
+    public static function getRelativePath( $path, $baseDir = PC_BASE )
+    {
+        $baseDir = str_ireplace( DS, '/', $baseDir );
+        $path = str_ireplace( DS, '/', $path );
+        
+        $path = str_ireplace( $baseDir, '', $path );
+        return $path;
+    } 
+
+	/**
+     * 
      * @param void
      * @return boolean
      */

@@ -45,15 +45,12 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 		{ 
 
 			$this->createForm( 'Continue', 'Import new plugin' );
-		//	$this->setViewContent( $this->getForm()->view(), true );
 			$this->setViewContent( $this->getForm()->view(), true );
             if( ! $values = $this->getForm()->getValues() ){ return false; } 
             $values += $this->getParameter( 'fake_values' ) ? : array();
 			unset( $values['extension_id'] );
-		//	var_export( $values );
-		//	var_export( $this->getParameter() );
+
             //	Import mode
-            
 			if( @$values['upload'] )
 			{ 
 				$result = self::splitBase64Data( $values['upload'] );
@@ -71,15 +68,11 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 			elseif( @$values['plugin_url'] )
 			{ 
 				$filename = Ayoola_Doc_Browser::getDocumentsDirectory() . DS . $values['plugin_url'];
-			//	var_export( $filename );
 			}
 			elseif( $this->getParameter( 'path' ) )
 			{ 
 				$filename = $this->getParameter( 'path' );
 			}
-            //	var_export( $values );
-            //	var_export( $filename );
-            //    var_export( file_exists( $filename ) );
 
             //  switching status clears the cache where plugin is sometimes saved
             $tempFile = Ayoola_Doc_Browser::getDocumentsDirectory() . DS . 'plugin-temp.tar.gz';
@@ -91,7 +84,6 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 			{ 
 				$export = new Ayoola_Phar_Data( $filename );
 				$extensionInfo = json_decode( file_get_contents( $export['extension_information'] ), true );
-            //    var_export( file_exists( $filename ) );
 				if( empty( $extensionInfo['extension_name'] ) )
 				{
 					return false;
@@ -99,7 +91,6 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				$result = $this->insertDb( $extensionInfo );
 				$dir = @constant( 'EXTENSIONS_PATH' ) ? Ayoola_Application::getDomainSettings( EXTENSIONS_PATH ) : ( APPLICATION_DIR . DS . 'extensions' );
 				$dir = $dir . DS . $extensionInfo['extension_name'];
-            //    var_export( file_exists( $filename ) );
 				if( $values['extension_name'] )
 				{
 					if( ! is_dir( $dir ) )
@@ -108,13 +99,8 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 						return false;
 					}
 					//	Disable extension
-                //    var_export( file_exists( $filename ) );
 					$class = new Ayoola_Extension_Import_Status( array( 'switch' => 'off', 'extension_name' => $extensionInfo['extension_name'] ) );
 					$class->init();
-                //    var_export( file_exists( $filename ) );
-					
-					//	remove files
-			//		Ayoola_Doc::removeDirectory( $dir, true );
 					
 					//	to update 
 					$update = $extensionInfo;
@@ -123,9 +109,6 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 
 					//	preserve settings
 					$update['settings'] = $previousData['settings'];
-				//	var_export( $extensionInfo );
-				//	var_export( $update );
-			//		exit();
 					$this->getDbTable()->update( $update, array( 'extension_name' => $extensionInfo['extension_name'] ) );
 				}
 				else
@@ -135,26 +118,19 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 						$this->setViewContent( self::__( '<p class="boxednews badnews">ERROR: COULD NOT SAVE PLUGIN DATA.</p>.' ) ); 
 						return false;
 					}
-				}
-				//	
-				//	var_export( $dir );
+                }
+                
 				if( ! is_dir( $dir ) )
 				{
 					Ayoola_Doc::createDirectory( $dir );
                 }
-            //    var_export( file_exists( $filename ) );
 
 				$export->extractTo( $dir, null, true );
 				unset( $export );
 				unlink( $filename );
 				
 				$this->setViewContent(  '' . self::__( '<p class="goodnews">Plugin imported successfully. New plugins are deactivated by default when they are imported. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?extension_name=' . $extensionInfo['extension_name'] . '">Turn on!</a></p>' ) . '', true  );
-			//	$this->setViewContent( self::__( '' ) );
 				
-				
-				//	Clean up temp dir
-		//		Ayoola_Doc::deleteDirectoryPlusContent( $tempDestination );
-
 				return true;  
 			}
 			else
@@ -164,7 +140,6 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 		}
 		catch( Exception $e )
 		{ 
-		//	var_export( $e->getTraceAsString());
 			$this->getForm()->setBadnews( $e->getMessage() );
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false; 
