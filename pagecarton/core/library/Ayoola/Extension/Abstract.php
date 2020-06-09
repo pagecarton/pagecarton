@@ -63,6 +63,95 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 	protected $_tableClass = 'Ayoola_Extension';
 
     /**
+     * 
+     */
+	public static function saveExtensionInfo( $values )
+    {
+        $values = self::buildValues( $values );
+
+        $ext = json_encode( $values );
+        $path = Ayoola_Application::getDomainSettings( APPLICATION_DIR ) . DS . 'extension_information';
+        Ayoola_File::putContents( $path, $ext );
+        return true;
+    }
+
+    /**
+     * 
+     */
+	public static function buildValues( $values )
+    {
+		try
+		{ 
+            $files = array();
+
+			if( @$values['settings_class'] )
+			{
+                $filter = new Ayoola_Filter_ClassToFilename();
+                $path = $filter->filter( $values['settings_class'] );
+                $base = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'modules';
+                $file = Ayoola_Doc::getRelativePath( $path, $base );
+                $values['modules'] = $file;
+            }
+            
+			if( @$values['modules'] )
+			{
+				$directory =   '/modules';
+				foreach( $values['modules'] as $each )
+				{
+					$files[] = $directory . $each;
+				}
+            }
+            
+			if( @$values['databases'] )
+			{
+				$directory =  '/databases';
+				foreach( $values['databases'] as $each )
+				{
+                    $files[] = $directory . $each;
+                    
+                    //  Supplementary files
+                    $supDir = $directory . dirname( $each ) . DS . '__' . DS . array_shift( explode( '.', basename( $each ) ) );
+                    $files[] = $supDir;
+				}
+            }
+            
+			if( @$values['documents'] )
+			{
+				$directory =  '/documents';
+				foreach( $values['documents'] as $each )
+				{
+					$files[] = $directory . $each;
+				}
+			}
+			if( @$values['pages'] )
+			{
+				$directory =  '/';
+				foreach( $values['pages'] as $uri )
+				{
+					if( $pagePaths = Ayoola_Page::getPagePaths( $uri ) )
+					{
+						foreach( $pagePaths as $each )
+						{
+							$files[] = $directory . $each;
+						}
+					}
+				}
+			}
+
+			$filter = new Ayoola_Filter_Name();
+			$filter->replace = '_';
+			$values['extension_name'] = strtolower( $filter->filter( $values['extension_title'] ) );
+			$values['files'] = $files;
+            return $values;
+		}
+		catch( Exception $e )
+		{ 
+
+		}
+    }
+		
+
+    /**
      * creates the form for creating and editing subscription package
      * 
      * param string The Value of the Submit Button

@@ -43,7 +43,7 @@ class Ayoola_Extension_Creator extends Ayoola_Extension_Abstract
     {
 		try
 		{ 
-		//	var_export( Ayoola_Page::getCurrentPageInfo( 'upload' ) );
+		//	var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );
 			$this->createForm( 'Continue', 'Build a new plugin' );
 		//	$this->setViewContent( $this->getForm()->view(), true );
 			$this->setViewContent( $this->getForm()->view(), true );
@@ -57,9 +57,11 @@ class Ayoola_Extension_Creator extends Ayoola_Extension_Abstract
 			{ 
 				$this->setViewContent( self::__( '<p class="boxednews badnews">Error: could not create plugin.</p>.' ) ); 
 				return false;
-			}
-			$this->setViewContent(  '' . self::__( '<p class="goodnews">Plugin built successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Extension_Download/?extension_name=' . $values['extension_name'] . '" class="">Download</a></p>' ) . '', true  );
-//			$this->setViewContent( self::__( '' ) );
+            }
+            
+            $this->setViewContent(  '' . self::__( '<p class="goodnews">Plugin built successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Extension_Download/?extension_name=' . $values['extension_name'] . '" class="">Download</a></p>' ) . '', true  );
+            
+            $values = self::saveExtensionInfo( $values );
 			
 		}
 		catch( Exception $e )
