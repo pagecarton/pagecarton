@@ -40,6 +40,12 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
      */
 	public static function change( $data, $currentStatus = true )  
     {
+     //   var_export( $data['extension_name'] );
+    //    var_export( $data );
+    //    $test = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'extension_name' => $data['extension_name'] ) );
+
+    //    var_export( $test );
+
         //  manage dependencies first
         $update = array();
         if( $currentStatus )
@@ -116,6 +122,7 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
         
 		$fromDir = ( @constant( 'EXTENSIONS_PATH' ) ? Ayoola_Application::getDomainSettings( EXTENSIONS_PATH ) : ( APPLICATION_DIR . DS . 'extensions' ) ) . DS . $data['extension_name'] . DS . 'application';
         $toDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH );
+
 		if( @$data['modules'] )
 		{
 			$directory =   '/modules';
@@ -299,7 +306,7 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 					return false;
 				}					
 				//	create this dir if it isnt there before
-				Ayoola_Doc::createDirectory( dirname( $to ) );
+                Ayoola_Doc::createDirectory( dirname( $to ) );
 				symlink( $from , $to );
 			break;
 		}

@@ -76,7 +76,6 @@ class Ayoola_Extension_Import_List extends Ayoola_Extension_Import_Abstract
 		$list->setNoRecordMessage( 'No plugins installed yet.' );
 		$list->createList(  
 			array(
-			//	'extension_title' => '%FIELD%',   
 				'extension_title' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Edit plugin" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?' . $this->getIdColumn() . '=%KEY%" >%FIELD%</a>', 
 				'status' => '%FIELD% <a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Change Status" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?' . $this->getIdColumn() . '=%KEY%" >change</a>', 
 				'  ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Settings" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Settings/?' . $this->getIdColumn() . '=%KEY%">Settings</a>', 

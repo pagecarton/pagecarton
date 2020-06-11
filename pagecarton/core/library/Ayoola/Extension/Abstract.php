@@ -90,7 +90,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
                 $path = $filter->filter( $values['settings_class'] );
                 $base = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'modules';
                 $file = Ayoola_Doc::getRelativePath( $path, $base );
-                $values['modules'] = $file;
+                $values['modules'][] = $file;
             }
             
 			if( @$values['modules'] )

@@ -83,7 +83,8 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 			if( file_exists( $filename ) )
 			{ 
 				$export = new Ayoola_Phar_Data( $filename );
-				$extensionInfo = json_decode( file_get_contents( $export['extension_information'] ), true );
+                $extensionInfo = json_decode( file_get_contents( $export['extension_information'] ), true );
+            //    var_export( $extensionInfo );
 				if( empty( $extensionInfo['extension_name'] ) )
 				{
 					return false;
