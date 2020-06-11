@@ -41,8 +41,6 @@ class Application_Article_List extends Application_Article_ShowAll
      */
 	protected function init()
     {
-//		$this->setViewContent( self::__( '<h3>OPTIONS:</h3>' ) );		
-	//	$this->setViewContent( self::__( '<a title="Compose an article..." rel="shadowbox;changeElementId=' . $this->getObjectName() . /'" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Creator/">+</a>' ) );
 		$this->setViewContent( $this->getList() );
     } 
 	
@@ -72,7 +70,6 @@ class Application_Article_List extends Application_Article_ShowAll
 		}
 		
 		$list->setData( $data );
-//		$list->setListOptions( array( 'Settings' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Settings/">Post Options</a>' ) );
 		$list->setListOptions( 
 								array( 
 										'Settings' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Articles/\' );" title="">Post Options</a>',
@@ -88,10 +85,9 @@ class Application_Article_List extends Application_Article_ShowAll
 		$list->setNoRecordMessage( 'You have not writen any post yet' );
 		$list->createList(  
 			array(
-				'title' => array( 'field' => 'article_title', 'value' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_View/?' . $this->getIdColumn() . '=%KEY%">Preview</a>' ), 
+				'title' => array( 'field' => 'article_title', 'value' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '%KEY%">Preview</a>' ), 
 				'type' => array( 'field' => 'article_type', 'value' => '%FIELD%' ), 
 				'by' => array( 'field' => 'username', 'value' => '%FIELD%' ),   
-//				'View' => '<a title="Preview article." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_View/?' . $this->getIdColumn() . '=%KEY%">View</a>', 
 				'edit' => array( 'field' => 'article_title', 'value' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?' . $this->getIdColumn() . '=%KEY%">Edit</a>' ), 
 				'X' => '<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
 			)
