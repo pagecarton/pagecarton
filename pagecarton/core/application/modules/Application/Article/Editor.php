@@ -102,54 +102,15 @@ class Application_Article_Editor extends Application_Article_Abstract
 			$values['user_id'] = $data['user_id'];
 			$values['username'] = $data['username'];
 			$values['article_modified_date'] = time();
-			
-			//	Save new data in the cloud
-		//	if( ! $this->updateDb( $values ) ){ return false; }
-		
-/* 			//	Set a category to specify the type of Post this is 
-			$table = new Application_Category();
-		//	@$values['article_type'] = $values['article_type'] ? : 'article';
-			if( ! $category = $table->selectOne( null, array( 'category_name' => $values['article_type'] ) ) )
-			{
-		//		$this->getForm()->setBadnews( 'Could not find a category ID in the database to save ' . $values['article_type'] );
-		//		$this->setViewContent( self::__( '' . showBadnews( $this->getForm()->getBadnews() ) . '' ) );
-		//		return false;
-			}
-			//	Changing to category_name to correct error in grep
-		//	$values['category_name'] = @$values['category_name'] ? : array();
-			if( ! @in_array( $category['category_name'], $values['category_name'] ) )
-			{
-				@array_push( $values['category_name'], $category['category_name'] );
-			}
-			is_array( $values['category_name'] ) ? array_unique( $values['category_name'] ) : null;
- */			
-			
-			//	compatibility
-/* 			$values['category_id'] = $values['category_id'] ? : array();
-			if( ! @in_array( $category['category_id'], $values['category_id'] ) ) 
-			{
-				@array_push( $values['category_id'], $category['category_id'] );
-			}
-			array_unique( $values['category_id'] );
- */			
+						
 			//	making options that have been disabled to still be active.
 			$values = array_merge( $data, $values );  
-			
-			// Save to server
-		//	if( ! $response = Application_Article_Api_Update::send( $values ) ){ return false; }
-		//	if( true !== $response['data'] ){ throw new Application_Article_Exception( $response ); }
-			
+						
 			self::saveArticle( $values );
-			
-			//	Set Hash Tags
-	//		Application_HashTag_Abstract::set( @$values['article_tags'], 'articles', $values['article_url'] );
-	//		Application_HashTag_Abstract::get();
 	
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '';
 			$this->setViewContent(  '' . self::__( '<div class="goodnews">Post successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View Post.</a></div>' ) . '', true  );
-	//		$this->setViewContent( self::__( '<div class="dpc-notify-info" title="Share this with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );   
-	//		$this->setViewContent(  '' . self::__( 'Post edited successfully. <a href="' . strtolower( $values['article_url'] ) . '">View post.</a>' ) . '', true  );
 			$this->_objectData['article_url'] = $values['article_url'];  
 		}
 		catch( Application_Article_Exception $e )

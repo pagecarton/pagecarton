@@ -17,7 +17,6 @@
  
 require_once 'Application/Article/Exception.php';
 
-
 /**
  * @category   PageCarton
  * @package    Application_Article_Abstract
@@ -151,8 +150,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			return intval( $data['views_count_total'] );
 		}
-	//	self::v( $data['article_title'] );   
-	//	self::v( $data['views_count_total'] );   
+
 		if( ! isset( $data['views_count_total'] ) )
 		{
 			$data['views_count'] = count( Application_Article_Views::getInstance()->select( null, array( 'article_url' => $data['article_url'] ) ) );
@@ -170,8 +168,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getAudioPlayCount( array & $data )   
 	{
-	//	self::v( $data['audio_play_count_total'] );
-	//	exit();
+
 		//	set this using different method
 		if( static::$_itemName )
 		{
@@ -179,15 +176,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 		if( ! isset( $data['audio_play_count_total'] ) )
 		{
-		//	self::v( $data['audio_play_count_total'] );
+
 			$data['audio_play_count'] = count( Application_Article_Type_Audio_Table::getInstance()->select( null, array( 'article_url' => $data['article_url'] ) ) );
 			$data['audio_play_count_total'] =  $data['audio_play_count'];
 			$secondaryValues = array( 'article_url' => $data['article_url'], 'audio_play_count_total' => $data['audio_play_count_total'] );
 			self::saveArticleSecondaryData( $secondaryValues );
 		}
-	//	self::v( $data['article_url'] );
-	//	self::v( $data['audio_play_count_total'] );
-	//	exit();
+
 		$data['audio_play_count'] = $data['audio_play_count_total'];
 		return intval( $data['audio_play_count_total'] );
 	}
@@ -233,8 +228,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			self::saveArticleSecondaryData( $secondaryValues );
 		}
 		$data['comments_count'] = $data['comments_count_total'];
-	//	self::v( $data['comments_count_total'] );
-	//	self::v( $data['comments_count'] );
+
 		return intval( $data['comments_count_total'] );
 	}
 	
@@ -248,9 +242,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	{
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 		$articleSettings['allowed_editors'][] = 98;
-//		$whoCan = array( 98 ) + ( $articleSettings['allowed_editors'] ? : array() );
-	//	var_export( $articleSettings['allowed_editors'] ); 
-	//	var_export( self::hasPriviledge( $articleSettings['allowed_editors'] )  ); 
+
 		if( 
 			self::isOwner( @$data['user_id'] ) 
 			|| self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) 
@@ -272,7 +264,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	{
 		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
 		{
-		//	var_export( $postTypeInfo );
+
 			if( ! empty( $postTypeInfo['view_auth_level'] ) && ! Ayoola_Abstract_Table::hasPriviledge( $postTypeInfo['view_auth_level'] ) )
 			{ 
 				return false;
@@ -296,7 +288,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{ 
 			return true; 
 		}
-		//	var_export( @$data['auth_level'] );    
+
 		return false;
 	}
 	
@@ -324,7 +316,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getFolder()  
     {
-	//	var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . AYOOLA_MODULE_FILES .  DS . static::$_moduleDir );
+
 		return Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . AYOOLA_MODULE_FILES .  DS . static::$_moduleDir; 
 	}
 	
@@ -334,7 +326,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getBackupFolder()  
     {
-	//	var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . AYOOLA_MODULE_FILES .  DS . static::$_moduleDir );
+
 		return Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . AYOOLA_MODULE_FILES . DS . 'backup' .  DS . static::$_moduleDir; 
 	}
 	
@@ -344,7 +336,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getSecondaryFolder()  
     {
-	//	var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . AYOOLA_MODULE_FILES .  DS . static::$_moduleDir );
+
 		return Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . AYOOLA_MODULE_FILES . DS . 'secondary' .  DS . static::$_moduleDir; 
 	}
 	
@@ -354,24 +346,17 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function updateProfile( $values )
     {
-	//	var_export( $values['username'] );
+
 		if( $values['profile_url'] )
 		{
 			//	Let's save some info into the owners account
 			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $values['profile_url'] ) )
 			{
-			//	self::v( $profileInfo );
-				
-			//	self::v( $profileInfo );  
+
 			}
-		//	$profilePath = Application_Profile_Abstract::getProfilePath( $values['username'] );
-		//	$profileInfo = self::loadPostData( $profilePath );
-		//	$profileInfo = @include $profilePath;
-		//	var_export( $profileInfo );
+
 			@$profileInfo['posts'] = $profileInfo['posts'] ? : array();
-		//	@$profileInfo['profile_url'] = $values['username'];
-		//	@$profileInfo['profile_url'] = $values['profile_url'];
-		//	$profileInfo['posts']['url'][$values['article_url']] = array( 'article_url' => $values['article_url'] );
+
 			$profileInfo['posts']['all'][$values['article_url']] = array( 'article_url' => $values['article_url'], 'file_size' => $values['file_size'] );
 			$profileInfo['posts']['size'][$values['article_url']] = $values['file_size'];
 			$profileInfo['posts_count_all'] = count( $profileInfo['posts']['all'] );
@@ -382,7 +367,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				$profileInfo['posts']['private'][$values['article_url']] = $values['article_url'];
 				$profileInfo['posts_count_private'] = count( $profileInfo['posts']['private'] );     
 			}
-		//	var_export( $profileInfo );
+
 			Application_Profile_Abstract::saveProfile( $profileInfo );  
 
 		}
@@ -395,16 +380,14 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public static function saveArticleSecondaryData( $values )
     {
 		$secDir = self::getSecondaryFolder() . $values['article_url'];
-	//	self::v( get_called_class() );
-	//	self::v( $values );
+
 		if( $previousData = @json_decode( file_get_contents( $secDir ), true ) )
 		{
 			$values += $previousData;
 		}
-	//	self::v( $values ); 
-	//	exit();
+
 		Ayoola_Doc::createDirectory( dirname( $secDir ) );
-	//	unset( $values['document_url_base64'], $values['download_base64'] );
+
 		$values['has_secondary_data'] = true;   
 		Ayoola_File::putContents( $secDir, json_encode( $values ) );  
 		return true;
@@ -416,7 +399,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function saveArticle( $values )
     {
-//		var_export( $values );
+
 		if( empty( $values['article_url'] ) )
 		{
 			return false;
@@ -429,12 +412,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			throw new Application_Article_Exception( $validator->getBadnews() );
 		}
-		
-		
 		self::updateProfile( $values );
-	//	$head = array_change_key_case(get_headers("http://example.com/file.ext", TRUE));
-	//	$filesize = $head['content-length'];		
-		
 		if( is_file( self::getFolder() . $values['article_url'] ) )
 		{
 			//	Back up the file before replacing it. 
@@ -442,12 +420,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			Ayoola_Doc::createDirectory( dirname( $backupFolder ) );
 			copy( self::getFolder() . $values['article_url'], $backupFolder );
 		}
- 		
-	//	if( $values['file_size'] > 5000000 )
 		if( ! empty( $values['document_url_base64'] ) ||  ! empty( $values['download_base64'] ) )
 		{
-		//	$secDir = self::getSecondaryFolder() . $values['article_url'];
-		//	Ayoola_Doc::createDirectory( dirname( $secDir ) );
+
 			$secondaryValues = array( 'article_url' => $values['article_url'], 'document_url_base64' => $values['document_url_base64'], 'download_base64' => $values['download_base64'], );
 			unset( $values['document_url_base64'], $values['download_base64'] );
 			$values['has_secondary_data'] = true;   
@@ -465,10 +440,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
         {
             $values['file_size'] = intval( filesize( @$values['download_path'] ) );
         }
-
- 	//	unset( $_POST, $_REQUEST );
-
-	 	//	we now using json
+        $values['article_modified_date'] = time();
+        
+        //	we now using json
         Ayoola_File::putContents( self::getFolder() . $values['article_url'], json_encode( $values ) ); 
 
 		// and we want to use tables for sorting categories and all
@@ -477,13 +451,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$table->delete( array( 'article_url' => $values['article_url'] ) );
 		}
-	//	var_export( $values );
 		if( ! empty( $values['profile_url'] ) )
 		{
 			$values['profile_url'] = strtolower( $values['profile_url'] );
 		}
 		$table->insert( $values );
-
 	 	return true;
 
 	}
@@ -537,20 +509,18 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			//	Check file before it is included.
             // Get the shell output from the syntax check command
             //  this check is causing so much php processes in some cpanels
-		//	$output = shell_exec('php -l "'.$data.'"');
+
 		
 			// Try to find the parse error text and chop it off
-		//	$syntaxError = preg_replace("/Errors parsing.*$/", "", $output, -1, $count);
+
 		
 			// If the error text above was matched, throw an exception containing the syntax error
-		//	var_export( $output );
-		//	var_export( $count );  
+
 			if( ! $data || $count > 0 )  
 			{
 				return false;
 			}
 			$data = include $data;
-
 
 		//	if( @$data['has_secondary_data'] )
 			{
@@ -566,8 +536,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$syntaxError = preg_replace("/Errors parsing.*$/", "", $output, -1, $count);
 				
 					// If the error text above was matched, throw an exception containing the syntax error
-				//	var_export( $output );
-				//	var_export( $count );  
+
 					if( $count > 0 )
 					{
 						return false;
@@ -582,7 +551,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			if( $data )
 			{
 				//	Change to json
-			//	var_export( __LINE__ );
+
 				try
 				{
 					self::saveArticle( $data );
@@ -590,9 +559,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				catch( Exception $e )
 				{
 					//	some error came up about table.xml not available.
-			//		var_export( $e->getMessage() );
+
 				}
-		//		var_export( __LINE__ );
+
 			}
 		}
 		else
@@ -609,12 +578,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					{
 						$data = $data2 + $data;
 					}
-				//	self::v( $data2 );
+
 				}
 			}
 		}
-	//	var_export( $jsonData );
-	//	var_export( $data );
+
 		$storage = self::getObjectStorage( array( 'id' => __CLASS__ . 'xxweeff', 'device' => 'File', 'time_out' => 10000, ) );
         $presetValues = $storage->retrieve();  
         
@@ -630,9 +598,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
             $presetValues = is_array( $presetValues ) ? $presetValues : array();
 			$data += $presetValues;
 		}
-	//	$presetValues = Application_Article_Type::getInstance()->select();
-	//	self::v( $data );
-//		self::v( $data );
 
 		return $data;
 	}
@@ -647,7 +612,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( ! $data = $this->getParameter( 'data' ) )
 		{
 			$url = Ayoola_Application::getRequestedUri();
-		//	var_export( $url );
+
 			try
 			{
 				$articleUrl = $this->getIdentifier();
@@ -656,16 +621,14 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			{
 
 			}
-		//	var_export( $articleUrl );
+
 			$url = $articleUrl[$this->getIdColumn()] ? : ( @$_GET['article_url'] ? : $url );
 			$url = $this->getParameter( 'article_url' ) ? : $url;
-		//	self::v( $url ); 
+
 			$filename = self::getFolder() . $url;
 			$data = self::loadPostData( $filename );
  		}
-//		self::v( $this->getParameter( 'article_url' ) );
-//		self::v( $url );
-//		self::v( $data );
+
 		if( ! $data )
 		{
 			return false;
@@ -684,14 +647,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			if( ! self::$_postViewed )
 			{
 				self::$_postViewed = true;
-			//	var_export( $data['article_title'] );
+
 				$pageInfo = array(
 					'description' => $description,
 					'title' => trim( $data['article_title'] . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
 				);
-		//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
+
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
-				
 
 				//	Log into the database 
 				self::getViewsCount( $data );
@@ -703,7 +665,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 								) 
 				);
 				$secondaryValues = array( 'article_url' => $data['article_url'], 'views_count_total' => @++$data['views_count_total'] );
-			//	self::v( $secondaryValues );
 				self::saveArticleSecondaryData( $secondaryValues );
 			}
 		}
@@ -731,8 +692,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( ! self::$_articleInfo )
 		{ 
             // breaking autopopulation of words 
-		//	header( 'Location: /404/' ); 
-		//	exit();
+
 		}
 		return self::$_articleInfo;
     } 
@@ -743,41 +703,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public function getQuickLink( array $data = null )
     {
-		
-/*		//	You can edit this article if you are a super user	
-		$editLink = null;
-	//	Check settings
-		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-		if( self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
-		{
-		//	@$editLink .= ' <a class="goodnews" title="Create a new post" href="' . self::getPostUrl() . '/post/creator/"> + </a> ';
-		}
-		if( self::hasPriviledge() )
-		{
-		//	$editLink .= ' <a class="badnews" rel="spotlight;width=300px;height=300px;" title="Advanced Settings" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Articles/"> settings </a> ';
-		}
-		if( ! $data )
-		{ 
-			if( ! $data = self::getIdentifierData() )
-			{ 
-				if( $editLink )
-				{ 
-					$editLink = ' <span style="display:inline-block;"> ' . $editLink . ' </span> ';
-				}	
-				return $editLink;
-			}
-		}
-		if( self::isOwner( @$data['user_id'] ) || self::hasPriviledge( $articleSettings['allowed_editors'] ) )
-		{
-			$editLink .= ' <span class="goodnews"><a  title="Edit this post" href="' . self::getPostUrl() . '/post/editor/?article_url=' . $data['article_url'] . '"> edit </a> <a class="badnews" rel="spotlight;width=300px;height=300px;" title="Delete this post" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?article_url=' . $data['article_url'] . '"> X </a></span>';
-		//	$editLink .= ' <a class="badnews" rel="spotlight;width=300px;height=300px;" title="Delete this post" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?article_url=' . $data['article_url'] . '"> X </a> ';
-		}
-		if( $editLink )
-		{ 
-			$editLink = ' <span style="display:inline-block;"> ' . $editLink . ' </span> ';
-		}	
-		return $editLink;
-*/    } 
+    } 
 	
     /**
      * Returns an HTML to display categories
@@ -787,13 +713,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public static function getCategories( $categoryIds, array $displayOptions = null )
     {
 		$html = null;
-	//	$html .= $displayOptions['template'] ? null : ' <ul style="list-style:none;display:inline-block;"><strong>Categories:</strong> ';
+
 		$class = Application_Category::getInstance();
 		$options = $class->select( null, array( 'category_name' => $categoryIds ) ) ? : array();
 		
 		//	compatibility
 		$options += $class->select( null, array( 'category_id' => $categoryIds ) ) ? : array();
-//		var_export( $displayOptions ); 
+
 		$i = 0;
 		foreach( $options as $each )
 		{
@@ -809,8 +735,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				$html .= count( $options ) === ++$i ? null : $displayOptions['glue']; 
 			}
 		}
-	//	var_export( $data['category_id'] );
-	//	$html .= $displayOptions['template'] ? null :  ' </ul> ';
+
 		return $html;
     } 
 	
@@ -823,10 +748,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public function autoLoadNewPosts( $postListId, $offset = 0 )
     {
-	//	var_export( $values );
+
 		if( empty( $_GET['pc_post_list_autoload'] ) && ( $this->getParameter( 'pagination' ) || $this->getParameter( 'pc_post_list_autoload' ) ) )
 		{
-		//	Application_Javascript::addFile( '/js/objects/infinite-scroll.js' );	
+
 			Application_Javascript::addCode
 			( 
 				'
@@ -862,7 +787,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						// 1. fetch data from the server
 						// 2. insert it into the document
 						// 3. call done when we are done
-					//	done();
+
 					};		
 				var options = 
 				{
@@ -871,7 +796,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				} 
 					
 				// setup infinite scroll
-			//	infiniteScroll(options);		
+
 				' 
 			);	
 		}
@@ -885,7 +810,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
     {
 		$html = null;
 		$html .= ' <ul style="list-style:none;display:inline-block;margin-left:0;"> ';
-	//	$html .= ' <ul style="list-style:none;display:inline-block;"><strong>Hash Tags:</strong>';
+
 		foreach( $values as $each )
 		{
 			$filter = new Ayoola_Filter_Name();
@@ -900,7 +825,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$html .= ' </li> ';
 		}
 		$html .= ' </ul> ';
-	//	var_export( count( $value ) );
+
 		return $html;
     } 
 	
@@ -928,7 +853,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$link = 'span';
 			$header = 'h1';
 		}
-	//	var_export( $data );
+
 		$html = null;
 		$html .= '<div style="-webkit-box-shadow: 0 10px 6px -6px #777;-moz-box-shadow: 0 10px 6px -6px #777;box-shadow: 0 10px 6px -6px #777; margin-bottom:3em;">';
 		$html .= '<' . $link . '>';
@@ -959,8 +884,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 		//	if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) )
 			{
-	//		var_export( $profileInfo );
-			//	$data += $profileInfo ? : array();
+
 				$html .= ( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '" class="pc_posts_option_items"> Posted By ' . ( @$data['display_name'] ? : $data['profile_url'] ) . '</a>' );
 			}
 		}
@@ -978,7 +902,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$html .= '<span class="pc_posts_option_items">' . $data['audio_play_count'] . ' <span >plays</span></span>';
 		}
 		$html .= $data['category_text'] ? '<span class="pc_posts_option_items"> in ' . $data['category_text'] . ' </span>' : null;  
-	//	var_export( self::isAllowedToEdit( $data ) ); 
 
 		$html .= self::isAllowedToEdit( $data ) && $realPost ? '  
 		<a  class="pc_posts_option_items" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?article_url=' . $data['article_url'] . '&\', \'page_refresh\' );" href="javascript:">edit</a> 
@@ -1031,16 +954,15 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
     {
 		$filter = new Ayoola_Filter_Time();
 		$html = null;
-	//	var_export( $data['article_modified_date'] );
-	//	var_export( $data['article_creation_date'] );
+
 		if( @$data['article_creation_date'] )
 		{
-		//	$html .= '<strong> Modified: </strong> ';
+
 			$html .= $filter->filter( $data['article_creation_date'] );
 		}
 		else
 		{
-		//	$html .= '<strong> Posted: </strong> ';
+
 			$html .= $filter->filter( @$data['article_modified_date'] ? : ( time() - 3 ) ); 
 		}
 		return $html;
@@ -1061,7 +983,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$html .= '<strong>Published:</strong><li style="display:inline-block;margin:0.5em;">' . ( $data['publish'] ? 'Yes' : 'No' ) . '</li>';
 		}
 		$html .= '</ul>';
-	//	var_export( count( $value ) );
+
 		return $html;
     } 
 	
@@ -1134,9 +1056,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						
 						d.push( a[b].href );
 					}
-			//		var a = document.getElementsByName( "" );
+
 					var a = document.getElementsByTagName( "textarea" );
-				//	alert( a.length );
+
 					var initCKEditor = function( target )
 					{
 						CKEDITOR.plugins.addExternal( "uploadimage", "' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/plugins/uploadimage/plugin.js", "" );
@@ -1167,7 +1089,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					}
 					var f = function( e )
 					{
-					//	alert( e ); 
+
 						try
 						{
 							try
@@ -1183,7 +1105,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							
 							}
 							var target = ayoola.events.getTarget( e );
-				//			alert( target ); 
+
 							initCKEditor( target );
 						}
 						catch( e )
@@ -1193,7 +1115,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					}
 					for( var b = 0; b < a.length; b++ )
 					{
-					//	alert( a[b].name );
+
 						switch( a[b].name  )
 						{
 							case "article_content":
@@ -1201,12 +1123,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 								initCKEditor( a[b] );
 							break;
 							default:
-							//	alert( a[b] ); 
+
 								if( ! a[b].getAttribute( "data-html" ) && a[b].getAttribute( "data-document_type" ) != "html" )
 								{
 									break;
 								}
-							//	ayoola.events.add( a[b], "click", f );
+
 								ayoola.events.add( a[b], "dblclick", f );
 							break;
 						}
@@ -1230,8 +1152,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		//	What form can we use?
 		@$formToUse = $values['form_name'] ? : $_REQUEST['form_name'];
 		@$formToUse = $values['form_name'] ? : $this->fakeValues['form_name'];
-	//	var_export( $formToUse );    
-	//	var_export( $this->fakeValues );   
+
  		$form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true, 'id' => $this->getObjectName() . @$values['article_url'] ) );   		
 		$form->setParameter( array( 'no_fieldset' => true ) );  
 		
@@ -1253,13 +1174,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$class = new Ayoola_Form_View( array( 'no_init' => true ) );
 			$class->setParameter( array( 'default_values' => $values, 'form_name' => $formToUse ) );
-		//	$class->init();
-		//	$class->view();
+
 			$class->createForm( 'Create Post', ''  );
-		//	$this->setForm( $class->getForm() );
+
 			$form2 = $class->getForm();
 			$fieldsets = $form2->getFieldsets();
-		//	$form->setAttributes( array( 'name' => $this->getObjectName() ) );
+
 			$form->requiredElements = is_array( $form->requiredElements ) ? $form->requiredElements : array() + is_array( $form2->requiredElements ) ? $form2->requiredElements : array();
 			$form->setParameter( $form2->getParameter() );
 			foreach( $fieldsets as $key => $each ) 
@@ -1276,31 +1196,26 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		else
 		{
 			//	let the form_name be saved if available
-	//		$fieldset->addElement( array( 'name' => 'form_name', 'type' => 'InputText', 'autocomplete' => 'off', 'value' => @$formToUse ) );
+
 		}
 		
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 	//	if( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
 		{ 
-	//		return false; 
+
 		}
-	//	$fieldset->placeholderInPlaceOfLabel = true;
+
 		//	Let's know the kind of post that we are working on.
-	//	var_export( $this->getParameter( 'article_types' ) ); 
-	//	self::v( $articleSettings ); 
-	//	self::v( $values['article_type'] ); 
+
 		@$values['article_type'] = $this->getParameter( 'article_types' ) ? : $values['article_type'];   
 		if( ! @$values['article_type'] || ! empty( $_REQUEST['article_type'] ) )
 		{ 
-	//	var_export( $_REQUEST[Ayoola_Form::hashElementName( 'article_type')] ); 
-	//	var_export( $_REQUEST['article_type'] ); 
-		//	@$values['article_type'] =  ? : $values['article_type']; 
+
 			@$values['article_type'] = $_REQUEST['article_type'] ? : $values['article_type']; 
 			@$values['article_type'] = $_REQUEST[Ayoola_Form::hashElementName( 'article_type')] ? : $values['article_type']; 
 		}
 		$values['article_type'] = $values['article_type'] ? : $this->getGlobalValue( 'article_type' ); 
-	//	var_export( $values['article_type'] );
-//		$values['article_type'] = $values['article_type'] ? : 'post';
+
 		
 		//	Set Article Type
 		$options = Application_Article_Type::getInstance();
@@ -1342,10 +1257,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$articleTypeWeUsing = $values['article_type'] ? : array_shift( $tempOptions );
 		
 		//	Check if post type is registered in the post db
-//		$values['true_post_type'] = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $values['article_type'] );
+
 		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $articleTypeWeUsing ) )
 		{
-		//	var_export( $postTypeInfo );
+
 			if( ! empty( $postTypeInfo['auth_level'] ) && ! Ayoola_Abstract_Table::hasPriviledge( $postTypeInfo['auth_level'] ) )
 			{ 
 				//	Current user not authorized to use this post type
@@ -1362,10 +1277,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$values['true_post_type'] = $values['article_type'];
 			$values['post_type'] = @$postTypesAvailable[$values['article_type']] ? : $values['article_type'];
 		}
-	//	self::v( $articleTypeWeUsing );
-	//	self::v( $postTypeInfo );
-	//	self::v( $options );
-	//	self::v( ( ! $postTypeInfo && ! array_key_exists( $articleTypeWeUsing, $options ) && ! array_key_exists( $articleTypeWeUsing, Application_Article_Type_TypeAbstract::$presetTypes ) && ! empty( $_REQUEST['article_type'] ) && ! empty( $_REQUEST['true_post_type'] ) && self::hasPriviledge( array( 99, 98 ) ) ) );
+
 		if( ! empty( $_REQUEST['article_type'] ) && ( ! empty( $_REQUEST['true_post_type'] ) ||  ! empty( $_REQUEST['post_type_custom_fields'] ) ) && self::hasPriviledge( array( 99, 98 ) ) )
 		{
 			//	auto setup post type
@@ -1392,32 +1304,26 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
                 || $postTypeInfoForThisPost['post_type_options_name'] != $postTypeInfo['post_type_options_name'] 
                 )
             {
-            //    var_export( $postTypeInfo );
+
                 $postTypeInfo = $postTypeInfoForThisPost + $postTypeInfo; 
                 $toUpdate = $postTypeInfo;
                 unset( $toUpdate['post_type'] );
                 $response = Application_Article_Type::getInstance()->update( $toUpdate, array( 'post_type_id' => $articleTypeWeUsing ) );
-           //     var_export( Application_Article_Type::getInstance()->select() );
-            //    var_export( $response );
-             //   var_export( $postTypeInfo );
+
             }
 
 		}
-//		var_export( $values['true_post_type'] );
-		
-	//	var_export( $options[key( $options )] );
-//		var_export( $articleTypeWeUsing );
-//		var_export( $values['post_type'] );
+
 		$values['post_type'] = $values['post_type'] ? : $articleTypeWeUsing;
 		$values['true_post_type'] = $values['true_post_type'] ? : $articleTypeWeUsing;
-	//	var_export( $values['post_type'] );
+
 		$typeDisplay = 'Select';
 		if( ! empty( $_REQUEST['article_type'] ) )
 		{
 			$typeDisplay = 'Hidden';
 		}
 		$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post Type', 'onchange'=> 'window.location.search += \'&article_type=\' + this.value + \'\';', 'type' => $typeDisplay, 'value' => $articleTypeWeUsing ), $postTypesAvailable );
-	//	$values['true_post_type'] = @$values['true_post_type'] ? : @$values['article_type'];
+
 		$fieldset->addElement( array( 'name' => 'true_post_type', 'type' => 'Hidden', 'value' => @$values['true_post_type'] ? : @$values['article_type'] ) );
 		   
 		
@@ -1431,8 +1337,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		
 		//	Title
 		$fieldset->addElement( array( 'name' => 'article_title', 'label' => $postTypeLabel . ' Title', 'placeholder' => 'Enter a title for the ' . $postTypeLabel . ' here...', 'type' => 'InputText', 'value' => @$values['article_title'] ) );
-	//	$fieldset->addElement( array( 'name' => 'cs', 'type' => 'Html' ), array( 'html' => '<div style="display:block;min-width:100%;"></div><br />' ) );
-	
 
 		$fieldset->addRequirement( 'article_title', array( 'WordCount' => array( 3,200 ) ) );
 		$fieldset->addRequirement( 'article_description', array( 'WordCount' => array( 0, 5000 ) ) );
@@ -1472,21 +1376,20 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset ); 
 
-
 		//	supplementary form
-	//	var_export( $postTypeInfo );
+
 		if( ! empty( $postTypeInfo['supplementary_form'] ) )
 		{
 			$supplementaryForm = $postTypeInfo['supplementary_form'];
 			$parameters = array( 'form_name' => $supplementaryForm, 'default_values' => $values );  
-	//		var_export( $parameters );
+
 			$orderFormClass = new Ayoola_Form_View( $parameters );
 			
 			if( $orderFormClass->getForm() )
 			{
 				foreach( $orderFormClass->getForm()->getFieldsets() as $each )  
 				{
-				//	$each->addLegend( "" );
+
 					
 					$form->addFieldset( $each );
 				}
@@ -1494,15 +1397,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			}
 		}
 
-
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->hashElementName = $this->hashFormElementName;
 
 		//	internal forms to use
 		$features = is_array( @$postTypeInfo['post_type_options'] ) && ( count( $postTypeInfo['post_type_options'] ) !== 1 || $postTypeInfo['post_type_options'][0] !== '' ) ? $postTypeInfo['post_type_options'] : static::$_defaultPostElements;  
-	//	self::v( $features );   
+
 		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
-	//	$features[] = $values['true_post_type'];
 
 		//	compatibility so article_description may be editable
 		//	when it is no longer in the post type info
@@ -1547,10 +1448,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				break;  
 				case 'cover-photo':
 					//	Cover photo
-				//	$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
+
 					$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
 					$fieldName64 = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url_base64' ) : 'document_url_base64' );
-				//	var_export( $link );
+
 					$fieldset->addElement( array( 'name' => 'document_url', 'label' => 'Cover Photo', 'placeholder' => 'Cover Photo for this ' . $postTypeLabel . '', 'type' => 'Document', 'value' => @$values['document_url'] ) );
 					$fieldset->addRequirement( 'document_url', array( 'NotEmpty' => null ) );
 				break;  
@@ -1567,7 +1468,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					if( ! empty( $userInfo['post_categories_id'] ) && ! empty( $userInfo['post_categories'] ) )
 					{
 						$categories += array_combine( $userInfo['post_categories_id'], $userInfo['post_categories'] );  
-			//			$categories['My Categories'] = array_combine( $userInfo['post_categories_id'], $userInfo['post_categories'] );  
+
 					}
 					require_once 'Ayoola/Filter/SelectListArray.php';
 					$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
@@ -1582,18 +1483,18 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 								{
 									$siteCategories[$key]['category_label'] = $siteCategories[$key]['category_name'];        
 								}
-							//	var_export( array( 'parent_category' => $siteCategories[$key]['category_name'] ) );
+
 								if( $inner = $table->select( null, array( 'parent_category' => $siteCategories[$key]['category_name'] ) ) )
 								{
 									$categories[$siteCategories[$key]['category_label']] = $filter->filter( $inner );
 								}
-							//	var_export( $inner );
+
 							}
 							$siteCategories = $filter->filter( $siteCategories );
 						}
 						else
 						{
-						//	unset( $categories['General Site Categories'] );
+
 						}
 					}
 					elseif( $siteCategories = $table->select() )
@@ -1604,8 +1505,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					{
 						$categories += $siteCategories;  
 					}
-				//	var_export( $articleSettings );
-				//	$addCategoryLink = ( '<a rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Add new Category" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Access_AccessInformation_Editor?pc_profile_info_to_edit=post_categories">My categories</a>' );     
+
 					if( self::hasPriviledge( 98 ) )
 					{
 						@$addCategoryLink .= ( '<a rel="spotlight;changeElementId=' . get_class( $this ) . '" title="Add new Category" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Articles/">Manage Categories</a>' );
@@ -1614,7 +1514,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 					if( ! empty( $_GET['category_name'] ) )
 					{
-					//	$presetCategory = $_GET['category_name'];
+
 						if( is_string( $_GET['category_name'] ) )
 						{
 							$_GET['category_name'] = array_map( 'trim', explode( ',', $_GET['category_name'] ) );
@@ -1636,7 +1536,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				case 'quiz':
 					$form->oneFieldSetAtATime = true;   
 
-				//	self::v( $values['quiz_options'] );
 					$quizOptions = array(
 											'quiz_subgroups' => 'This quiz has subgroups',
 											'random' => 'Randomize Questions',
@@ -1653,15 +1552,14 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					//	New fieldset for categories
 					$fieldset = new Ayoola_Form_Element;
 					$fieldset->hashElementName = $this->hashFormElementName;
-					
-				//	self::v( $fieldsToEdit );
+
 					//	
 					$groupIds = $this->getGlobalValue( 'quiz_subgroup_id' ) ? : @$values['quiz_subgroup_id'];
-				//	var_export( $values['quiz_subgroup_id'] );
+
 					$groupQuestions = $this->getGlobalValue( 'quiz_subgroup_question' ) ? : @$values['quiz_subgroup_question'];
 					if( in_array( 'group_questions', $fieldsToEdit ) || ( is_array( $this->getGlobalValue( 'quiz_options' ) ) && in_array( 'quiz_subgroups', $this->getGlobalValue( 'quiz_options' ) ) ) )
 					{
-					//	self::v( $fieldsToEdit );
+
 					
 						$i = 0;
 						//	Build a separate demo form for the previous group
@@ -1684,7 +1582,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							$i++;
 							$categoryFieldset->addLegend( 'Sub-group  <span name="subgroup_counter">' . $i . '</span> of <span name="subgroup_counter_total">' . ( ( count( @$values['quiz_subgroup_id'] ) ? : count( $groupQuestions ) ) ? : 1 ) . '</span>' );			   			
 							$questionForm->addFieldset( $categoryFieldset );
-						//	self::v( $i );  
+
 						}
 						while( isset( $values['quiz_subgroup_id'][$i] ) || isset( $groupQuestions[$i] ) );
 						
@@ -1692,7 +1590,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						//	Put the questions in a separate fieldset
 						$categoryFieldset = new Ayoola_Form_Element; 
 						$categoryFieldset->allowDuplication = false;
-					//	$categoryFieldset->placeholderInPlaceOfLabel = true;
+
 						$categoryFieldset->container = 'span';
 						
 						//	add previous categories if available
@@ -1730,31 +1628,29 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						$questionConfForm->wrapForm = false;
 						while( $j <= count( @$groupIds ) && $j < 9 )//	Do this for all each categories and don't forget the "uncategorized"
 						{ 
-					//	var_export( $j );
-					//	var_export( $groupIds );
+
 							
 							//	autogenerate group ids
 							if( isset( $groupIds[$j] ) )
 							{
 								//	Randomly generate IDs for group questions
 								@$groupIds[$j] = $groupIds[$j] ? : md5( $groupQuestions[$j] );
-							//	@$groupIds[$j] = $groupIds[$j] ? : intval( md5( $groupQuestions[$j] ), 36 );
+
 							}
 							else
 							{
 								//	This is causing infinite loop
-							//	$groupIds[$j] = null;
-							//	$groupQuestions[$j] = 'Uncategorized Questions';
+
 							}
-				//			var_export( $groupIds[$j] );
+
 							
 							$i = 0; // question count
 							//	Build a separate demo form for the previous group
 							$questionForm = new Ayoola_Form( array( 'name' => 'questions...' )  );
 							$questionForm->setParameter( array( 'no_fieldset' => true, 'no_form_element' => true ) );
-					//		$form->oneFieldSetAtATime = false;
+
 							$questionForm->wrapForm = false;  
-					//		self::v( $groupIds );
+
 							do
 							{
 								
@@ -1763,40 +1659,36 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 								$questionFieldset->allowDuplication = true;
 								$questionFieldset->duplicationData = array( 'add' => '+ Add New Question Below', 'remove' => '- Remove Above Question', 'counter' => 'question_counter' . $j . '', );
 								$questionFieldset->container = 'span';
-							//	$questionFieldset->wrapper = 'white-content-theme-border';   
+
 								$questionFieldset->wrapper = 'white-background';								
 
 								$questionFieldset->addElement( array( 'name' => 'quiz_question' . @$groupIds[$j], 'data-html' => '1', 'data-pc-element-whitelist-group' => 'questions_and_answers', 'multiple' => 'multiple', 'rows' => '1', 'label' => ( 'Question <span name="question_counter' . $j . '">' . ( $i + 1 ) . '</span> of <span name="question_counter' . $j . '_total">' . ( count( @$values['quiz_question' . @$groupIds[$j]] ) ? : 1 ) . '</span>' ), 'placeholder' => 'Enter question here...', 'title' => 'Double-Click here to launch the advanced editor', 'type' => 'TextArea', 'value' => @$values['quiz_question' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_question' . @$groupIds[$j], null , $i ) ) );  
-							//	$questionFieldset->addFilter( 'quiz_question', array( 'HtmlSpecialChars' => null, ) );
-							//	var_export( $this->getGlobalValue( 'quiz_question' . $groupIds[$j], null , $i ) );
+
 												
 								//	Option 1
 								$questionFieldset->addElement( array( 'name' => 'quiz_option1' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'First Option', 'placeholder' => 'Enter option 1', 'type' => 'TextArea', 'value' => @$values['quiz_option1' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_option1' . @$groupIds[$j], null , $i ) ) );
-							//	$questionFieldset->addFilter( 'quiz_option1', array( 'HtmlSpecialChars' => null, ) );
+
 								
 								//	Option 2
 								$questionFieldset->addElement( array( 'name' => 'quiz_option2' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Second Option', 'placeholder' => 'Enter option 2', 'type' => 'TextArea', 'value' => @$values['quiz_option2' . @$groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_option2' . @$groupIds[$j], null , $i ) ) );
-							//	$questionFieldset->addFilter( 'quiz_option2', array( 'HtmlSpecialChars' => null, ) );
+
 								
 								//	Option 3
 								$questionFieldset->addElement( array( 'name' => 'quiz_option3' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Third Option', 'placeholder' => 'Enter option 3', 'type' => 'TextArea', 'value' => @$values['quiz_option3' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_option3' . @$groupIds[$j], null , $i ) ) );
-							//	$questionFieldset->addFilter( 'quiz_option3', array( 'HtmlSpecialChars' => null, ) );
+
 								
 								//	Option 4
-						//		var_export( 'quiz_option4' . @$groupIds[$j] );  
+
 								$questionFieldset->addElement( array( 'name' => 'quiz_option4' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Fourth Option', 'placeholder' => 'Enter option 4', 'type' => 'TextArea', 'value' => @$values['quiz_option4' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_option4' . @$groupIds[$j], null , $i ) ) );
-							//	$questionFieldset->addFilter( 'quiz_option4', array( 'HtmlSpecialChars' => null, ) );
+
 								
 								//	Solution
-						//		var_export( $values['quiz_answer_notes' . @$groupIds[$j]][$i] );
+
 								$questionFieldset->addElement( array( 'name' => 'quiz_answer_notes' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Answer Notes and Workings', 'placeholder' => 'Enter the information that will be displayed to user as the answer workings...', 'type' => 'TextArea', 'value' => @$values['quiz_answer_notes' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_answer_notes' . @$groupIds[$j], null , $i ) ) );
-							//	$questionFieldset->addFilter( 'quiz_answer_notes', array( 'HtmlSpecialChars' => null, ) );
+
 								
 								//	Correct Answer
 								$questionFieldset->addElement( array( 'name' => 'quiz_correct_option' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'multiple' => 'multiple', 'label' => 'Correct Option', 'placeholder' => '', 'type' => 'Select', 'value' => @$values['quiz_correct_option' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_correct_option' . @$groupIds[$j], null , $i ) ), array_combine( range( 1, 4 ), range( 1, 4 ) ) );
-								
-							//	var_export( $_SESSION );
-								
 
 								//	We need to save the keys to use later so this information may save in the real fieldset
 								
@@ -1809,14 +1701,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							//	Put the questions in a separate fieldset
 							$questionFieldset = new Ayoola_Form_Element; 
 							$questionFieldset->allowDuplication = false;
-						//	$questionFieldset->placeholderInPlaceOfLabel = true;
+
 							$questionFieldset->container = 'span';
 							
 							//	add previous questions if available
 							$subGroupHeading = $groupQuestions[$j] ? '<p style="font-size:large;">Question Sub Group - #' . ( $j + 1 ) . '</p><p>Sub-group Question/Instruction:</p><p><blockquote>' . ( @$groupQuestions[$j] ? : 'Uncategorized Questions' ) . ' </blockquote> </p>' : null;
 							$subGroupHeading = Ayoola_Object_Wrapper_Abstract::wrap( $subGroupHeading, 'white-content-theme-border' );
-					//		self::v( $subGroupHeading );
-					//		exit();
+
 							$totalQuestionCount = @$totalQuestionCount ? : 0;
 							$questionCount = count( $this->getGlobalValue( 'quiz_question' . @$groupIds[$j] ) ? : array() );
 							$totalQuestionCount += $questionCount;
@@ -1829,13 +1720,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 														
 							//	Add only the last one into the main form
 							$form->addFieldset( $questionFieldset );
-					//		$categoryName = array_shift( $groupIds );
-					
 
 							//	Do this later after questions have been set so the max questions could equal total questions
 							$categoryFieldset2 = new Ayoola_Form_Element; 
 							$categoryFieldset2->container = 'span';
-					//		$categoryFieldset2->addLegend( 'Review of Questions and Categories' );			   			
+
 							$categoryFieldset2->addElement( array( 'name' => 'quiz_subgroup_question_demo', 'label' => 'Number of questions to pick from this category (' . count( $this->getGlobalValue( 'quiz_question' . @$groupIds[$j] ) ) . ' total questions set)', 'placeholder' => 'e.g. Use this information to answer the following questions', 'type' => 'TextArea', 'data-html' => '1', 'style' => 'display:block;', 'multiple' => 'multiple', 'disabled' => 'disabled', 'value' => ( @$values['quiz_subgroup_question'][$j] ? : @$groupQuestions[$j] ) ? : 'Uncategorized Questions' ) );
 							$categoryFieldset2->addElement( array( 'name' => 'quiz_subgroup_question_max', 'label' => ' ', 'placeholder' => '', 'style' => '', 'type' => 'Select', 'multiple' => 'multiple', 'value' => @$values['quiz_subgroup_question_max'][$j] ? : count( $this->getGlobalValue( 'quiz_question' . @$groupIds[$j] ) ) ), array_combine( range( 0, count( $this->getGlobalValue( 'quiz_question' . @$groupIds[$j] ) ) ),  range( 0, count( $this->getGlobalValue( 'quiz_question' . @$groupIds[$j] ) ) ) ) );
 							$questionConfForm->addFieldset( $categoryFieldset2 );    
@@ -1863,7 +1752,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 						//	Review Questions and Set  
 						$form->addFieldset( $questionConfFieldset );  
-					//	while( $j <= count( $groupIds ) );
+
 					}
 				break;
 				case 'product':
@@ -1879,7 +1768,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			//		}
 				break;
 				case 'multi-price':
-				//	var_export( $postTypeInfo );
+
 					$i = 0;
 					do
 					{
@@ -1893,7 +1782,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						$fieldsetX->addElement( array( 'name' => 'price_option_price' . $featurePrefix, 'style' => 'max-width: 40%;', 'label' => '', 'placeholder' => 'Separate Option Price', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['price_option_price' . $featurePrefix][$i] ) );
 						$fieldsetX->allowDuplication = true;  
 						$fieldsetX->placeholderInPlaceOfLabel = true;
-				//		$fieldsetX->wrapper = 'white-content-theme-border';  
+
 						$i++;
 						$fieldsetX->addLegend( 'Pricing Option <span name="pricing_option_counter">' . $i .  '</span>' );
 						$form->oneFieldSetAtATime = false;   
@@ -1905,10 +1794,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					//	Poll
 					$fieldset->addElement( array( 'name' => 'poll_question', 'type' => $values['article_type'] == 'poll' ? 'InputText' : 'Hidden', 'value' => @$values['poll_question'] ) );
 					@$values['poll_options'] = is_array( $values['poll_options'] ) ? array_combine( $values['poll_options'], $values['poll_options'] ) : array();
-					//	var_export( $values['poll_options'] );
+
 					$fieldset->addElement( array( 'name' => 'poll_options', 'type' => $values['article_type'] == 'poll' ? 'MultipleInputText' : 'Hidden', 'value' => @$values['poll_options'] ), $values['poll_options'] );
 					@$values['poll_option_preset_votes'] = is_array( $values['poll_option_preset_votes'] ) ? array_combine( $values['poll_option_preset_votes'], $values['poll_option_preset_votes'] ) : array();
-					//	var_export( $values['poll_options'] );
+
 					$fieldset->addElement( array( 'name' => 'poll_option_preset_votes', 'type' => $values['article_type'] == 'poll' ? 'MultipleInputText' : 'Hidden', 'value' => @$values['poll_option_preset_votes'] ), $values['poll_option_preset_votes'] );
 				break;
 				case 'video':
@@ -1941,7 +1830,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							break; 
 						}
 					}
-				//	self::v( $values['date'] );       
+
 					
 					//	Month
 					$options = array_combine( range( 1, 12 ), array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ) );
@@ -2031,7 +1920,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 												'require_user_info' => 'Require log-in before download', 
 												'download_notification' => 'Notify me on every download', 
 											);
-				//	$fieldset->addElement( array( 'name' => 'download_options' . $featurePrefix, 'label' => '' . $postTypeLabel . ' Options', 'type' => 'Checkbox', 'value' => @$values['download_options' . $featurePrefix] ), $downloadOptions  );
+
 					
 					$fieldset->addElement( array( 'name' => 'download_url' . $featurePrefix, 'label' => 'Download File', 'placeholder' => 'e.g. http://example.com/path/to/file.mp3', 'type' => 'Document', 'optional' => 'optional', 'value' => @$values['download_url' . $featurePrefix] ) );
 					$fieldset->addRequirement( 'download_url' . $featurePrefix, array( 'NotEmpty' => null ) );
@@ -2064,7 +1953,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$fieldset->addElement( array( 'name' => $eachField, 'type' => 'Hidden', ) );
 		}
-	//	$fieldset->addLegend( 'Other information' );
+
 		$form->addFieldset( $fieldset ); 
 		
 		//	Next Level
@@ -2094,7 +1983,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 			$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 			$profiles = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) );
-	//		$profiles = Application_Profile_Table::getInstance()->select();
+
 			$filter = new Ayoola_Filter_SelectListArray( 'profile_url', 'display_name' );
 			$profiles = $filter->filter( $profiles );
 		}
@@ -2102,16 +1991,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 		//	var_dump()
 			$fieldset->addElement( array( 'name' => 'profile_url',  'onchange' => 'ayoola.div.manageOptions( { database: "Application_Profile_Table", listWidget: "Application_Profile_ShowAll", values: "profile_url", labels: "display_name", element: this } );', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles + array( '__manage_options' => '[Manage Profiles]' ) );
-		//	$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
+
 		}
 		else
 		{
-	//		var_export( Application_Profile_Abstract::getMyDefaultProfile()  );
-		//	$fieldset->addElement( array( 'name' => 'profile_url', 'type' => 'Hidden', 'value' => @$values['profile_url'] ? : $defaultProfile ) );
-		//	$fieldset->addRequirement( 'profile_url', array( 'InArray' => array_keys( $profiles ) ) );
+
 		}
 
-	//	$fieldset->addRequirement( 'article_title', array( 'UserRestrictions' => null ) );
 		if( @$values['requirement_name'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'requirement', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )
 		{
 			$options = Ayoola_Form_Requirement::getInstance();
@@ -2127,29 +2013,24 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$options += array( 'billing_address' => 'Billing Address', 'shipping_address' => 'Shipping Address', );
 				}
 				$fieldset->addElement( array( 'name' => 'article_requirements', 'label' => 'Select information required from viewers of this ' . $postTypeLabel . ' (advanced)', 'type' => 'Checkbox', 'value' => @$values['article_requirements'] ), $options );
-				
-			//	$fieldset->addRequirement( 'article_requirements', array( 'InArray' => array_keys( $options )  ) );
+
 			}
 	
 		}
 		
 		
 		//	Publish
-//		$options = array( 'No', 'Yes' );
+
 		//	retain this because we need to bring this up in custom forms
-	//	$fieldset->addElement( array( 'name' => 'publish', 'type' => 'submit', 'value' => 'Continue...' ) );
-	//	$fieldset->addElement( array( 'name' => 'publish', 'type' => 'Hidden', 'value' => null ) );
+
 		$fieldset->addElement( array( 'name' => 'user_restrictions', 'type' => 'Hidden', 'value' => null ) );
 		$fieldset->addRequirement( 'user_restrictions', array( 'UserRestrictions' => null ) );
-	
 
 		$fieldset->addFilters( array( 'trim' => null, 'FormatArticle' => null ) );
 		$form->addFieldset( $fieldset );
-	//	var_export( $postTypeInfo );		 
-	//	self::v( $fieldsToEdit );
+
 		$form->setParameter( array( 'element_whitelist' => $fieldsToEdit ) );
 		$this->setForm( $form );
     } 
 	// END OF CLASS
 }
-

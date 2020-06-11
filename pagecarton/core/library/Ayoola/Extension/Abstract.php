@@ -184,6 +184,10 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
         $classes = array();
         foreach( $options as $file )
         {
+            if( is_link( $file ) )
+            {
+                continue;
+            }
             $directory = str_ireplace( DS, '/', $directory );
             $file = str_ireplace( DS, '/', $file );
 
@@ -229,6 +233,10 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
         $files = array();
         foreach( $options as $file )
         {
+            if( is_link( $file ) )
+            {
+                continue;
+            }
             $directory = str_ireplace( DS, '/', $directory );
             $file = str_ireplace( DS, '/', $file );
 
@@ -262,6 +270,10 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
         $files = array();
         foreach( $options as $file )
         {
+            if( is_link( $file ) )
+            {
+                continue;
+            }
             $directory = str_ireplace( DS, '/', $directory );
             $file = str_ireplace( DS, '/', $file );
 
