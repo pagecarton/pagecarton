@@ -38,33 +38,51 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
      * Switch data
      * 
      */
-	protected static function change( $data, $currentStatus = true )  
+	public static function change( $data, $currentStatus = true )  
     {
         //  manage dependencies first
+        $update = array();
+        if( $currentStatus )
+        {
+            $update['status'] = 'Disabled';
+        }
+        else
+        {
+            $update['status'] = 'Enabled';
+        }
+
         if( ! empty( $data['dependencies'] ) )
         {
             //  this can take some time for some recursive dependency check
             //  example a long list of dependencies
-        //    set_time_limit( 3600 );
             $method = __METHOD__;
             if( $currentStatus )
             {
+            //    var_export( $data );
                 //  switch off depencies installed specifically for this plugin
-                $installations = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'article_url' => $data['installed_dependencies'] ));
-                foreach( $installations as $dependencyData )
+                if( ! empty( $data['installed_dependencies'] ) )
                 {
-                    $method( $dependencyData, $currentStatus );
+                    $installations = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'article_url' => $data['installed_dependencies'] ) );
+                    //    var_export( $data['installed_dependencies'] );
+                    foreach( $installations as $dependencyData )
+                    {
+                    //       var_export( $dependencyData['extension_name'] );
+                        $method( $dependencyData, $currentStatus );
+                    }
                 }
             }
             else
             {
                 foreach( $data['dependencies'] as $dependency )
                 {
+                    if( empty( $dependency ) )
+                    {
+                        continue;
+                    }
                     if( ! $dependencyData = Ayoola_Extension_Import_Table::getInstance()->selectOne( null, array( 'article_url' => $dependency ) ) )
                     {
                         $data['installed_dependencies'][] = $dependency;
                         $data['installed_dependencies'] = array_unique( $data['installed_dependencies'] );
-                        
                         //  update dependency in db
                         if( ! Ayoola_Extension_Import_Table::getInstance()->update( 
                             array( 'installed_dependencies' => $data['installed_dependencies'] ),
@@ -172,7 +190,10 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 				$to = $toDir . $directory . $each;
 				self::changeStatus( $currentStatus, $from , $to );
 			}
-		}
+        }
+    //    var_export( array( 'status' => $data['status'] ) );
+    //    var_export( array( 'extension_name' => $data['extension_name'] ) );
+        Ayoola_Extension_Import_Table::getInstance()->update( $update, array( 'extension_name' => $data['extension_name'] ) );
         return true;
     }
 	
@@ -222,8 +243,6 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
         }
 
         //  switch
-        self::change( $data, $currentStatus );
-
 		$this->setViewContent(  '' . self::__( '<span></span> ' ) . '', true  );
 		$settings = null;
 		if( $data['settings_class'] )
@@ -234,9 +253,7 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 			}
 
 		}
-		unset( $data['extension_name'] );
-		unset( $data['extension_id'] );
- 		if( ! $this->updateDb( $data ) )
+ 		if( ! self::change( $data, $currentStatus ) )
 		{ 
 			$this->setViewContent( self::__( '<p class="badnews">Error: could not save Plugin.</p>.' ) ); 
 			return false;

@@ -44,7 +44,7 @@ class Ayoola_Extension_Import_Delete extends Ayoola_Extension_Import_Abstract
     {
         //	Disable extension
         $where = array( 'extension_name' => $extensionName );
-        if( ! $extension = Ayoola_Extension_Import_Table::getInstance()->select( null, $where ) )
+        if( ! $extension = Ayoola_Extension_Import_Table::getInstance()->selectOne( null, $where ) )
         {
             throw new Ayoola_Extension_Import_Exception( 'Extension ' . $extensionName . ' not found in the database' );
         }
@@ -67,7 +67,7 @@ class Ayoola_Extension_Import_Delete extends Ayoola_Extension_Import_Abstract
                 self::this( $dependencyData['extension_name'] );
             }
         }
-        if( ! empty( $extension['ready_dependencies'] ) )
+         if( ! empty( $extension['ready_dependencies'] ) )
         {
             foreach( $extension['ready_dependencies'] as $dependency )
             {
@@ -84,9 +84,10 @@ class Ayoola_Extension_Import_Delete extends Ayoola_Extension_Import_Abstract
                 self::this( $dependencyData['extension_name'] );
             }
         }
-
-        $class = new Ayoola_Extension_Import_Status( array( 'switch' => 'off' ) + $where );
-        $class->init();
+ 
+        Ayoola_Extension_Import_Status::change( $extension, true );
+    //    $class = new Ayoola_Extension_Import_Status( array( 'switch' => 'off' ) + $where );
+    //    $class->init();
         
         //	remove files
         $dir = @constant( 'EXTENSIONS_PATH' ) ? Ayoola_Application::getDomainSettings( EXTENSIONS_PATH ) : ( APPLICATION_DIR . DS . 'extensions' );
@@ -96,6 +97,7 @@ class Ayoola_Extension_Import_Delete extends Ayoola_Extension_Import_Abstract
             Ayoola_Doc::removeDirectory( $dir, true );
         }
         return Ayoola_Extension_Import_Table::getInstance()->delete( $where );
+    //    return true;
     }
 		
     /**
