@@ -130,7 +130,10 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 			{						
 				$from = $fromDir . $directory . $each;
 				$to = $toDir . $directory . $each;
-				self::changeStatus( $currentStatus, $from , $to );
+                if( self::changeStatus( $currentStatus, $from , $to ) )
+                {
+
+                }
 			}
 		}
 		if( @$data['databases'] )
@@ -252,6 +255,11 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
         //  switch
 		$this->setViewContent(  '' . self::__( '<span></span> ' ) . '', true  );
 		$settings = null;
+ 		if( ! self::change( $data, $currentStatus ) )
+		{ 
+			$this->setViewContent( self::__( '<p class="badnews">Error: could not save Plugin.</p>.' ) ); 
+			return false;
+		}
 		if( $data['settings_class'] )
 		{ 
 			if( Ayoola_Loader::loadClass( $data['settings_class'] ) )
@@ -259,11 +267,6 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 				$settings =  '<a href="' . Ayoola_Application::getUrlPrefix() .  '/tools/classplayer/get/name/Ayoola_Extension_Import_Settings/?extension_name=' . $data['extension_name'] . '">Manage Settings.</p>';
 			}
 
-		}
- 		if( ! self::change( $data, $currentStatus ) )
-		{ 
-			$this->setViewContent( self::__( '<p class="badnews">Error: could not save Plugin.</p>.' ) ); 
-			return false;
 		}
 		$this->setViewContent( self::__( '<p class="boxednews goodnews">Plugin switch "' . $data['status'] . '" successfully. ' . $settings . '</p>' ) );
 

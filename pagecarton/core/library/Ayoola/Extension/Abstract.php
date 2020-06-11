@@ -88,9 +88,11 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
 			{
                 $filter = new Ayoola_Filter_ClassToFilename();
                 $path = $filter->filter( $values['settings_class'] );
-                $base = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'modules';
-                $file = Ayoola_Doc::getRelativePath( $path, $base );
-                $values['modules'][] = $file;
+            //    var_export( $path );
+            //   $base = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'modules';
+            //    $file = Ayoola_Doc::getRelativePath( $path, $base );
+            //    var_export( $file );
+                $values['modules'][] = '/' . $file;
             }
             
 			if( @$values['modules'] )
