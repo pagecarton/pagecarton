@@ -975,7 +975,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					}
 				}'
 			 );
-			$form .= '<a onclick="pc_ShowNextFieldset( this.parentNode );" class="pc-submit-btn pc-btn" href="javascript:" style="margin:2em 0;">Continue...</a>';
+			$form .= '<a onclick="pc_ShowNextFieldset( this.parentNode );" class="pc-submit-btn pc-btn" href="javascript:" style="margin:2em 0;">Click to Continue</a>';
 		//	Application_Style::addCode( '.pc' );
 		}
 		

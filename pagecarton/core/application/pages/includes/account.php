@@ -19,12 +19,12 @@
 $_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
   'editable' => '<br>
 
-<h1>Account Dashboard</h1>
+<h1 style="text-align: center">Account Dashboard</h1>
 
 <br>',
   'preserved_content' => '<br>
 
-<h1>Account Dashboard</h1>
+<h1 style="text-align: center">Account Dashboard</h1>
 
 <br>',
   'url_prefix' => '',

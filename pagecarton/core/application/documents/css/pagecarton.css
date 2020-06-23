@@ -561,6 +561,10 @@ pc-form button
     background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
     background-color:#34CACA;
 }
+.pc-btn[type="submit"]:hover{
+  background-color: red;
+  color: #fff;
+}
 .pc-form2 fieldset
 {
 	border: 0;
@@ -573,7 +577,7 @@ pc-form button
     /*text-transform: uppercase;*/
 	display:inline-block;
 	margin: 1em 0 1em 0;
-    color: #000;
+    color: blue !important;
     font-weight: bold;
     display: block;
 
@@ -611,13 +615,12 @@ pc-form button
 	/*border: 1px groove #333;*/
 }
 
-
 .pc-btn-parent a, .pc-btn, .pc-element-like-btn {
-    background-color: #ccc;
+    background-color: #aaa;
     border: 1px outset #aaa;
     display: inline-block;
     cursor: pointer;
-    color: #000;
+    color: #FFFFFF;
     font-family: 'open_sansregular', sans-serif;
     padding: 8px 60px;
     text-decoration: none;
@@ -982,9 +985,11 @@ pc-form button
     max-width: 1170px;
 }
 
+
 .pc_give_space {
     margin: 1em;    
 }
+
 .pc_give_space_top_bottom { 
     margin-top: 1em;    
     margin-bottom: 1em;    

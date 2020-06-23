@@ -1,7 +1,7 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,600,300);
 .cssmenuHorizontalWhite {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 15px;
   text-transform: uppercase;
   text-align: left;
@@ -9,6 +9,7 @@
 .cssmenuHorizontalWhite > ul {
   width: auto;
   list-style-type: none;
+  text-align: center;
   padding: 0;
   margin: 0;
   background: #ffffff;
@@ -29,9 +30,9 @@
   *display: inline;
   zoom: 1;
 }
-.cssmenuHorizontalWhite > ul li.right {
+/*.cssmenuHorizontalWhite > ul li.right {
   float: right;
-}
+}*/
 .cssmenuHorizontalWhite > ul li.dropdown {
   position: relative;
 }
