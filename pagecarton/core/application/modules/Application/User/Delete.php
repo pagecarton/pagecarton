@@ -45,7 +45,7 @@ class Application_User_Delete extends Application_User_Abstract
 			$table = Ayoola_Access_LocalUser::getInstance();
 			if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 			{
-				$database = 'file';
+				$database = 'private';
 			}
             switch( $database )
             {

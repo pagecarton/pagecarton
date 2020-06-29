@@ -102,7 +102,7 @@ class Application_User_AdminCreator extends Application_User_Creator
 		$values['access_level'] = 99;
 	//	if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
-			$database = 'file';
+			$database = 'private';
 		}
 		$saved = false;
 		$message = null;

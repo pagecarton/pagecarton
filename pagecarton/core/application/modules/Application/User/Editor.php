@@ -97,7 +97,7 @@ class Application_User_Editor extends Application_User_Abstract
 			$values = array_merge( $data, $values );
 			if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 			{
-				$database = 'file';
+				$database = 'private';
 			}
 			
 			switch( $database )

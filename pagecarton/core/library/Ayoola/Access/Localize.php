@@ -133,7 +133,7 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
         $table = Ayoola_Access_LocalUser::getInstance( "xyz" );
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
-			$database = 'file';
+			$database = 'private';
 		}
 		switch( $database )
 		{

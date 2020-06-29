@@ -124,7 +124,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
-			$database = 'file';
+			$database = 'private';
 		}
 		switch( $database )
 		{
@@ -248,7 +248,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
             $table = $this->getDbTable();
             if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
             {
-                $database = 'file';
+                $database = 'private';
             }
             switch( $database )
             {

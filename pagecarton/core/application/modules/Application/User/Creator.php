@@ -185,7 +185,7 @@ class Application_User_Creator extends Application_User_Abstract
 
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
-			$database = 'file';
+			$database = 'private';
 		}
 		$saved = false;
 		$message = null;

@@ -83,51 +83,7 @@ class Application_User_UserEmail_Creator extends Application_User_UserEmail_Abst
 					$this->setViewContent(  '' . self::__( '<p class="badnews">Email was not added to our mailing list. This is likely because you are already on our list.</p>' ) . '', true  );	
 				}
 			}
-/*			
-			if( ! Ayoola_Application::getUserInfo( 'username' ) )
-			{
-				return false;
-			}
-			
-		//	var_export( $values );
-			//	Check where our user information is being saved.
-			if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
-			{
-				$database = 'cloud';
-			}
-			$list = array();
-			switch( $database ) 
-			{
-				case 'cloud':
-					$values['method'] = 'insert';
-					$values['table'] = 'Application_User_UserEmail';
-					$values['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
-		//			var_export( $values );
-					$response = Ayoola_Api_Dbase::send( $values );
-			//		var_export( $response );
-				//	var_export( $values );
-				//	if( is_array( $response['data'] ) )
-					if( true !== @$response['data'] )
-					{
-				//		$this->getForm()->setBadnews( 'Database error occurred while adding a new e-mail address to your account.' );
-						$this->setViewContent( self::__( '<p class="badnews">Database error occurred while adding a new e-mail address to your account.</p>' ) );	
-					//	$this->setViewContent( $this->getForm()->view(), true );
-						return false; 
-					}
-					
-				break;
-				case 'relational':
-					if( ! $this->insertDb() )
-					{ 
-					//	$this->getForm()->setBadnews( 'Database error occurred while adding a new e-mail address to your account.' );
-						$this->setViewContent( self::__( '<p class="badnews">Database error occurred while adding a new e-mail address to your account.</p>' ) );	
-					//	$this->setViewContent( $this->getForm()->view(), true );
-						return false; 
-					}
-				break;
-			}
-			$this->setViewContent( self::__( '<p>E-mail address saved to your account.</p>' ) );	
-*/	
+	
 		}
 		catch( Ayoola_Exception $e )
 		{ 
