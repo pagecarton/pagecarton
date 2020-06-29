@@ -259,6 +259,13 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
                     $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
                     $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
                 break;
+    			case 'file':
+                    // Find user in the LocalUser table
+                    $table = "Ayoola_Access_LocalUser";
+                    $table = $table::getInstance( $table::SCOPE_PUBLIC . "xyz" );
+                    $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PUBLIC );
+                    $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PUBLIC );
+                break;
             }
     
 			$identifierInfo = $this->getIdentifier();

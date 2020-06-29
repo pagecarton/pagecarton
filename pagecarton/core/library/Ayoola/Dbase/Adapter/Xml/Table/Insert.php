@@ -46,8 +46,9 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		$recordRowId = $options['record_row_id'];
 
         $processDir = $this->getMyTempProcessDirectory();
-     //   var_export( $this->loadTableDataFromFile( $this->_myFilename ) );
-        if( ! $this->loadTableDataFromFile( $this->_myFilename ) )
+        $scopeFile = $this->getFilenameAccordingToScope( false, $this->getAccessibility() );
+    //    var_export( $scopeFile );
+        if( ! $this->loadTableDataFromFile( $scopeFile ) )
         {
             Ayoola_Doc::createDirectory( $processDir );
             $tempData = serialize( func_get_args() );
@@ -67,10 +68,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		//	CHECK IF WE HAVE UP TOO MUCH RECORDS IN A SINGLE FILE
 		$i = 0;
 		$filename = null;
-		$filename = $this->_myFilename;
+		$filename = $scopeFile;
 
         //	Lets use filesize because some db may have many records "light" records e.g. 300000 (~300kb)
-		$dir = $this->getMySupplementaryDirectory();
+        $dir = $this->getMySupplementaryDirectory();
 		if( filesize( $filename ) > 300000 )
 		{
 			$strToUse = str_pad( $i, 3, '0', STR_PAD_LEFT );
@@ -91,6 +92,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 			Ayoola_Doc::createDirectory( dirname( $annexFile ) );
 
 			rename( $filename, $annexFile );
+		//	$this->query( 'DROP' );
 			$this->setXml();
 			$this->query( 'CREATE', $tableInfo['table_info'], $tableInfo['data_types'] );
             $this->setXml();

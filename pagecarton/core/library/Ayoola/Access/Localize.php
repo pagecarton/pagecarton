@@ -144,6 +144,13 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 				$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 			break;
+			case 'file':
+				// Find user in the LocalUser table
+				$table = "Ayoola_Access_LocalUser";
+				$table = $table::getInstance( $table::SCOPE_PUBLIC . "xyz" );
+				$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PUBLIC );
+				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PUBLIC );
+			break;
 		}
         
 
@@ -160,9 +167,7 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 			}
 			catch( Exception $e )
 			{
-		//		var_export( $e->getMessage() );  
 			}
-		//	   var_export( $userInfo['password'] );  
 			@$userInfo['password'] = $userInfo['password'] ? : $oldInfo['password'];
 			
 			
@@ -182,12 +187,8 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 		}
 		catch( Exception $e )
 		{
-		//	var_export( $table->selectOne( null, array( 'username' => array( $userInfo['username'], strtolower( $userInfo['username'] ) ) ) ) );
-		//	echo $e->getMessage();
-		}
-	//	var_export( $userInfo['username'] );
-	//	var_export( $table->selectOne( null, array( 'username' => array( $userInfo['username'], strtolower( $userInfo['username'] ) ) ) ) );
-	//	var_export( $newInfo );
+
+        }
 		return true;
 	}
 	

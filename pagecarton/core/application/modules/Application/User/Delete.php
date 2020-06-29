@@ -56,6 +56,13 @@ class Application_User_Delete extends Application_User_Abstract
                     $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
                     $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
                 break;
+                case 'file':
+                    // Find user in the LocalUser table
+                    $table = "Ayoola_Access_LocalUser";
+                    $table = $table::getInstance( $table::SCOPE_PUBLIC . "xyz" );
+                    $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PUBLIC );
+                    $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PUBLIC );
+                break;
             }
 			if( $info = $table->delete( array( 'username' => strtolower( $data['username'] ) ) ) )
 			{

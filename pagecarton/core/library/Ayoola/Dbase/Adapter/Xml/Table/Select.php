@@ -61,7 +61,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
 		$rows = array();
 	//	PageCarton_Widget::v( $options );  
-	//	PageCarton_Widget::v( $result );  
+	//	PageCarton_Widget::v( $options['filename'] );  
+	//	PageCarton_Widget::v( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );  
 		if( ! empty( $options['filename'] ) )
 		{
 			$this->setXml();
@@ -73,7 +74,9 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		}
 		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE ) // let PUBLIC PICK FROM CORE AND DEFAULT FOR COMPATIBILITY TO PREVIOUS VERSIONS THAT SAVED IN CORE
 		{
-			$files =  array_unique( array( $this->getFilenameAccordingToScope() => $this->getFilenameAccordingToScope() ) + $this->getSupplementaryFilenames() );
+            $scopeFile = $this->getFilenameAccordingToScope( false, self::SCOPE_PRIVATE );
+            $files =  array_unique( array( $scopeFile => $scopeFile ) + $this->getSupplementaryFilenames() );
+       //     var_export( $scopeFile );
 			$rows = $this->loopFiles( $files, $fieldsToFetch, $where, $options );
 
 		}

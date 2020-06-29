@@ -39,8 +39,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
     {
 		//Count the amount of records updated
 		$count = 0;
-	//	var_export( $rows );
-		$files =  array_unique( array( $this->getFilenameAccordingToScope() => $this->getFilenameAccordingToScope() ) + $this->getSupplementaryFilenames() );
+        $scopeFile = $this->getFilenameAccordingToScope( false, $this->getAccessibility() );
+		$files =  array_unique( array( $scopeFile => $scopeFile ) + $this->getSupplementaryFilenames() );
 		foreach( $files as $filename )
 		{
 		//	var_export( $this->getMyFilename() );

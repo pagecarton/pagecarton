@@ -152,7 +152,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
                 {
                     $adapter = $this->getDatabase()->getAdapter();
                     $adapter->setTableName($this->getTableName());
-                //    var_export( $adapter);
                     $adapter->setAccessibility($this->_accessibility);
                     $adapter->setRelationship($this->_relationship);
                     $adapter->_resultKeyReArrange = true;
@@ -162,25 +161,18 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
         $this->selectDatabase();
         $adapter = $this->getDatabase()->getAdapter();
         $adapter->setTableName($this->getTableName());
-    //    var_export( $adapter);
         $adapter->setAccessibility($this->_accessibility);
         $adapter->setRelationship($this->_relationship);
         $adapter->_resultKeyReArrange = true;
-        //var_export( self::$_accessibility );
-        //    var_export( $this->_accessibility );
+
         //    Attempts to create the table if not exist
         static::$_tableInfo = $this->query('TABLE', 'DESCRIBE');
 
         //    Attempts to automagically update table versions
         do {
-            //        var_export(  static::$_tableInfo );
-            //    exit();
             $backupFile = static::$_tableInfo['filename'] . '.backup';
-            //            var_export( $backupFile );
-            //      exit();
 
             if (!$this->exists() && !file_exists($backupFile))
-            //        if( ! $this->exists() )
             {
                 //   var_export(  static::$_tableInfo );
                 //    cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
@@ -225,8 +217,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
                 $backupFile = static::$_tableInfo['filename'] . '.backup';
                 if (file_exists($backupFile)) 
                 {
-                    //      self::v( $backupFile );
-
                     //    if( time() - filemtime( $backupFile ) < 86400 )
                     if( time() - filemtime($backupFile) < 86400 ) 
                     {

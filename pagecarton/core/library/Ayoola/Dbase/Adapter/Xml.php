@@ -576,13 +576,15 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
      */
     public function getFilenameAccordingToScope( $checkFile = false, $scope = null )
     {
-		if( is_null( $scope ) ){ $scope = $this->getAccessibility(); }
-
+        if( is_null( $scope ) ){ $scope = $this->getAccessibility(); }
+    
 		switch( $scope )
 		{
 			case self::SCOPE_PRIVATE:
 			case self::SCOPE_PROTECTED:
-				$filename = $this->getMyfilename( $checkFile );
+				$this->setMyDirectory();
+				$this->setMyfilename( $this->getTableName() );
+                $filename = $this->getMyfilename( $checkFile );
 			break;
             case self::SCOPE_PUBLIC;
             
