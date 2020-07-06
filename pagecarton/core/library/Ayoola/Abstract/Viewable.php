@@ -1522,8 +1522,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html = null;
 		$object['object_name'] = $object['object_name'] ? : $object['class_name'];
 
-		$advancedName = 'advanced_parameters_' . $object['object_unique_id'] . '';
-		$html .= "<div data-class_name='{$object['class_name']}' name='over_all_object_container' class='DragBox' id='" . $object['object_unique_id'] . "' title='Move this object by dragging it around - " . $object['view_parameters'] . "' data-object_name='{$object['object_name']}' >";
+		$advancedName = 'advanced_parameters_' . $object['object_unique_id'] . '' . $object['pagewidget_id'];
+		$html .= "<div data-class_name='{$object['class_name']}' name='over_all_object_container' class='DragBox' id='" . $object['object_unique_id'] . $object['pagewidget_id'] . "' title='Move this object by dragging it around - " . $object['view_parameters'] . "' data-object_name='{$object['object_name']}' >";
 		$title = ( ( $object['view_parameters'] ? : $object['object_name']::getObjectTitle() ) ? : $object['object_name'] );
 		//	title bar
 		$html .= '<div draggable=\'true\' ondragstart=\'ayoola.dragNDrop.dragMyParent(event);\' style="cursor: move; cursor: -moz-grab;cursor: -webkit-grab;" title="' . $title . '" class="title_bar pc_page_object_specific_item" data-parameter_name="parent">';
@@ -1807,7 +1807,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			if( @in_array( 'privacy', $object['widget_options'] ) || @$advanceParameters['object_access_level'] )
 		//	if( $object['set_access_level'] || $advanceParameters['object_access_level'] )
 			{
-				$fieldset->addElement( array( 'name' => 'object_access_level', 'id' => $object['object_unique_id'] . '_object_access_level', 'label' => 'Who can view widget', 'placeholder' => '', 'type' => 'SelectMultiple', 'value' => @$advanceParameters['object_access_level'] ), self::$_authLevelOptions );
+				$fieldset->addElement( array( 'name' => 'object_access_level', 'id' => $object['object_unique_id'] . '_object_access_level' . $object['pagewidget_id'], 'label' => 'Who can view widget', 'placeholder' => '', 'type' => 'SelectMultiple', 'value' => @$advanceParameters['object_access_level'] ), self::$_authLevelOptions );
 			}
 			$inlineWrapperChange = false;
 			if( $object['class_name'] == 'Ayoola_Page_Editor_Text' || $object['class_name'] == 'Ayoola_Page_Editor_Image' )
