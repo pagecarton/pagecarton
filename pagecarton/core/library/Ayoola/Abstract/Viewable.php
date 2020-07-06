@@ -1629,8 +1629,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						$object = $object + $pageWidgetToRestore['parameters'];
 					}
 				}
-			}
-
+            }
+        //    var_export( $object['class_name'] );
+            $innerSettingsContent = null;
+            $getHTMLForLayoutEditor = 'getHTMLForLayoutEditor';
+            if( method_exists( $object['class_name'], $getHTMLForLayoutEditor ) )
+            {
+                $innerSettingsContent = $object['class_name']::$getHTMLForLayoutEditor( $object );
+            }
+        //    var_export( $object['class_name'] );
+       
 
 			$availableOptions = ( static::$_widgetOptions ? : array() ) + array(
 				'wrappers' => 'Wrappers',
@@ -1642,7 +1650,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$fieldset = new Ayoola_Form_Element();
 			$fieldset->hashElementName = false;
 			$fieldset->container = 'div';
-			$fieldset->addElement( array( 'name' => 'widget_options', 'id' => $object['object_unique_id'] . '_widget_options', 'label' => ' ', 'type' => 'Checkbox', 'multiple' => 'multiple', 'value' => @$object['widget_options'], ), $availableOptions );
+			$fieldset->addElement( array( 'name' => 'widget_options', 'id' => $object['object_unique_id'] . '_widget_options' . $object['pagewidget_id'], 'label' => ' ', 'type' => 'Checkbox', 'multiple' => 'multiple', 'value' => @$object['widget_options'], ), $availableOptions );
 			$form->addFieldset( $fieldset );
 
 			if( @in_array( 'savings', $object['widget_options'] ) )
@@ -1910,10 +1918,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 		$html .= '</div>';	//	advanced options
 
-
-
-
-
 		//	Retrieving object "interior" from the object class
 
 		//	Determine if its opening or closing inside the "object".
@@ -1924,41 +1928,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 		//	just for padding.
 		$html .= '<div class="pc_page_object_specific_item" style="padding-top:0.5em; padding-bottom:0.5em;"></div>';
-		$getHTMLForLayoutEditor = 'getHTMLForLayoutEditor';
-		$innerSettingsContent = null;
-		if( method_exists( $object['class_name'], $getHTMLForLayoutEditor ) )
-		{
-			$innerSettingsContent = $object['class_name']::$getHTMLForLayoutEditor( $object );
-		}
 		if( static::$_editableTitle )
 		{
-
-
-
 			$editableValue = '' . @$object['editable'] . '';
 			$innerSettingsContent .= '<input placeholder="' . ( static::$_editableTitle ) . '" data-parameter_name="editable" type=text value="' . $editableValue . '" >';
-
 		}
-
 		if( @$object['object_interior'] || static::$editorViewDefaultToPreviewMode || @in_array( 'object_interior', $advanceParameters['advanced_parameter_name'] ) )
 		{
-
 			$classToView = $object['class_name'] ? : $object['object_name'];
 
-			static::$editorViewDefaultToPreviewMode && $innerSettingsContent ? $html .= '<div  data-parameter_name="parent" class="pc_page_object_specific_item pc_page_object_inner_settings_area" >' . $innerSettingsContent
-/*
-			.
-
-			' <button onclick="
-			var a = ayoola.div.getParentWithClass( this, \'DragBox\' );
-			var b = ayoola.div.getParameterOptions( a );
-			var c = a.getElementsByClassName( \'pc_page_object_inner_preview_area\' )[0];
-			var ajax = ayoola.xmlHttp.fetchLink( { url: \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Object_Preview/?pc_show_error=1&rebuild_widget=1&class_name=' . $classToView . '\', data: b.content, container: c } );
-			">Preview!</button>'
-*/			.
-			'</div>'
-
-			 : null;
+			static::$editorViewDefaultToPreviewMode && $innerSettingsContent ? $html .= '<div  data-parameter_name="parent" class="pc_page_object_specific_item pc_page_object_inner_settings_area" >' . $innerSettingsContent . '</div>' : null;
 
 			//	/object/name/Ayoola_Object_Preview/?class_name=' . $classToView . '
 			$parameters = Ayoola_Page_Editor_Layout::prepareParameters( $object );

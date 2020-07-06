@@ -66,8 +66,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	protected static $_widgetOptions = array( 
 		'preserve_content' => 'Disable WYSIWYG',
 		'embed_widgets' => 'Embed Widgets',
-	);
-	
+	);	
 	
     /**	
      *
@@ -331,11 +330,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 
 		//	Refreshes the url prefix just in case we have imported new site
-//	var_export( $this->getParameter( 'url_prefix' ) );
-//	var_export( Ayoola_Application::getUrlPrefix() );
-	//	var_export( strpos( $content, '//' ) );
-	//	var_export( $content );  
-//		var_export( $this->getParameter() );  
 		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() ||  Ayoola_Application::getUrlPrefix() )
 		{		
 			$content = self::fixUrlPrefix( $content, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
@@ -460,10 +454,19 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
      public static function getHTMLForLayoutEditor( & $object )
 	{
+    //    var_export( $object );
 		if( empty( $object['widget_options'] ) &&  ! empty( $object['text_widget_options'] ) )
 		{
 			$object['widget_options'] = $object['text_widget_options'];
 		}
+        if( ! empty( @$_REQUEST['pc_page_editor_layout_name'] ) && empty( $object['widget_options'] ) && empty( $object['pagewidget_id'] ) )
+        {
+            $object['widget_options'][] = 'preserve_content';
+        }
+        if( stripos( @$_REQUEST['url'], '/layout/' ) === 0 && empty( $object['widget_options'] ) && empty( $object['pagewidget_id'] ))
+        {
+            $object['widget_options'][] = 'preserve_content';
+        }
 
 		Application_Javascript::addFile( '' . Ayoola_Application::getUrlPrefix() . '/js/objects/ckeditor/ckeditor.js?x' );    
 		Application_Javascript::addCode
@@ -518,7 +521,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 											' 
 										);    
 		$html = null;
-	//	$optionsName = 'text_widget_options';
+    //	$optionsName = 'text_widget_options';
 		if( ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
 		{
 			@$object['editable'] = $object['preserved_content'] ? : ( $object['codes'] ? : $object['editable'] );
