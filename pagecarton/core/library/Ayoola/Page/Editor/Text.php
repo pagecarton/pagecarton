@@ -598,7 +598,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		//	Use this to clean the URL prefix from the codes
 		$html .= '<input data-parameter_name="url_prefix" type="hidden" value="' . Ayoola_Application::getUrlPrefix() . '" >';  
 		$html .= '<div style="clear:both;"></div>';  
-		if( ! ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
+	//	if( ! ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
 		{
 
 			Application_Javascript::addCode
@@ -608,15 +608,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 					{
 						// create textarea
 						var e = trigger.parentNode.parentNode.getElementsByTagName( \'textarea\'); 
-					//	alert( e );
-					//	alert( trigger.parentNode.parentNode.innerHTML );
-					//	if( e.length )
 						{
 							var c = false;
 							for( var b = 0; b < e.length; b++ )
 							{ 
-					//			alert( e[b].getAttribute( \'data-parameter_name\' ) );
-					//			alert( e[b].style.display );
 								if( e[b].name == \'' . __CLASS__ . '_code_editor\' )
 								{
 									var c = e[b];  
@@ -628,13 +623,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 									var fx = document.createElement( \'div\' ); 
 									fx.appendChild( f );
 									f.className = \'ckeditor\'; 
-								//	alert( f.outerHTML );
-								//	alert( f.innerHTML );
 									if( f.outerHTML )
 									{
 										f.outerHTML = \'<div data-parameter_name="editable" title="' . self::__( 'You may click to edit the content here...' ) . '" contentEditable="true" class="ckeditor"  onClick="replaceDiv( this );" onDblClick="replaceDiv( this );">\' + e[b].value +  \'</div>\';  
 									}
-							//		f. = 5; 
 									f.setAttribute( \'onClick\', \'replaceDiv( this );\' ); 
 									f.setAttribute( \'contentEditable\', \'true\' ); 
 									
@@ -650,14 +642,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 							}
 						}
 						var a = trigger.parentNode.parentNode.getElementsByClassName( \'ckeditor\'); 
-				//		alert(a.length);
-				//		alert(c);
 						if( ! c && ! a.length )
 						{
 							//	preserved content era
 							var xy = trigger.parentNode.parentNode.getElementsByClassName( \'preserved_content_view\')[0];
-						//	alert(xy);
-						//	alert(xy.innerHTML);
 							switch( xx.style.display )
 							{
 								case "none":
@@ -714,7 +702,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 								a[b].setAttribute( \'data-parameter_name\', \'\' ); 
 								c.focus(); 
 							} 
-						//	trigger.style.display = \'\'; 
 						}
 					}
 				'
