@@ -75,6 +75,8 @@ class Application_Article_Switch extends Application_Article_Abstract
 				{
 					case false:
 						$data[$switch] = $switch;
+                        $data['post_switches'][] = $switch;
+                        $data['post_switches'] = array_unique( $data['post_switches'] );
 					break;
 					default:
 						$data[$switch] = false;

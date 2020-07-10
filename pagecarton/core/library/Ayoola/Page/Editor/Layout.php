@@ -517,7 +517,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 			//		look for dangling placeholders in page theme file
 
-			$placeholdersInPageThemeFile = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $whereToGetPlaceholders );
+            $placeholdersInPageThemeFile = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $whereToGetPlaceholders );
+            
+            //    var_export( $whereToGetPlaceholders );
 
 			$danglingPlaceholders = array_merge( array_diff( $placeholdersInPageThemeFile, $placeholders ), $danglingPlaceholders );
 
@@ -1055,13 +1057,31 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						Ayoola_File::putContents( $rPaths['template'], $content['template'] );				
 						Ayoola_File::putContents( $rPaths['data_json'] , $dataToSave );
 					}
-				}
+                }
+
+                //    var_export( $variant );
+                //  exit();
+                
 				$rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 				$rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 				$rPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
-				$rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json_content';
-				$rPaths['data_page_info'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_page_info';
-				$rPaths['data-backup'] ='documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data-backup/' . time();
+				$rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json_content' ;
+                $rPaths['data_page_info'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_page_info' ;
+                $rPaths['data-backup'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data-backup/' . time();
+
+                if( ! empty( $this->_parameter['theme_page_variant'] ) )
+                {
+                    $variant = $this->_parameter['theme_page_variant'];
+                    $rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/include';
+                    $rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/template';
+
+                    unset( $rPaths['data_json'] );
+                    unset( $rPaths['data_json_content'] );
+                    unset( $rPaths['data_page_info'] );
+                    unset( $rPaths['data_json'] );
+                    unset( $rPaths['data-backup'] );
+
+                }
 			}
 			else
 			{
@@ -1085,17 +1105,16 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			}
 
 			//	save default values if no value is set so we can preload themes.
-
-            Ayoola_File::putContents( $rPaths['data_json'], $dataToSave );
-			Ayoola_File::putContents( $rPaths['data_json_content'], static::safe_json_encode( $pageContent ) );
-			Ayoola_File::putContents( $rPaths['data_page_info'], static::safe_json_encode( $pageUpdateInfo ) );
+            $rPaths['data_json'] ? Ayoola_File::putContents( $rPaths['data_json'], $dataToSave ) : null;
+			$rPaths['data_json_content'] ? Ayoola_File::putContents( $rPaths['data_json_content'], static::safe_json_encode( $pageContent ) ) : null;
+			$rPaths['data_page_info'] ? Ayoola_File::putContents( $rPaths['data_page_info'], static::safe_json_encode( $pageUpdateInfo ) ) : null;
 
 			//	back up current data and not previous one
-			if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  
+		    //	if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  
 			{
-				if( $currentData != $previousData )
+				if( $dataToSave != $previousData )
 				{
-					Ayoola_File::putContents( $rPaths['data-backup'], $currentData );
+					$rPaths['data-backup'] ? Ayoola_File::putContents( $rPaths['data-backup'], $currentData ) : null;
 				}
 			}
 

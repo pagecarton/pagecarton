@@ -18,7 +18,6 @@
  
 require_once 'Ayoola/Page/Editor/Abstract.php';
 
-
 /**
  * @category   PageCarton
  * @package    Ayoola_Page_Editor_Layout
@@ -42,7 +41,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * 
      * @var string
      */
-//	protected static $_editableTitle = "Open HTML editor";  
 
     /**
      * The View Parameter From Layout Editor
@@ -106,8 +104,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			{
 				$search = array( '"' . $prefixNow, "'" . $prefixNow, "url(" . $prefixNow, '"' . $prefixBefore, "'" . $prefixBefore, "url(" . $prefixBefore, );
 			}
-		//	var_export( $prefixNow );
-		//	var_export( $prefixBefore );
+
 			$replace = array( '"', "'", "url(", '"', "'", "url(", );
 			$content = str_ireplace( $search, $replace, $content );
 			$search = array( '"/', "'/", "url(/", $prefixNow . '//' );
@@ -142,11 +139,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		if( ( @in_array( 'preserve_content', $parameters['widget_options'] ) || @in_array( 'preserve_content', $parameters['text_widget_options'] ) ) && $parameters['preserved_content'] )
 		{
 			@$content = $parameters['codes'] ? : $parameters['preserved_content'];
-		}
+        }
         preg_match_all( '|\{-(.*)-\}|', $content, $matches );
         #   '{-Lorem Ipsum dolor-}'
-      //  self::v( $content );
-        //  self::v( $matches );
+
         $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates() ? : Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
         if( 
             empty( $previousData['dummy_title'] ) || empty( $previousData['dummy_search'] ) || empty( $previousData['dummy_replace'] )
@@ -154,32 +150,23 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         {
             $previousData = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
         }
-    //    self::v( Ayoola_Page_Layout_ReplaceText::getUpdates() );
 
-
-    //    var_export( $previousData );
         if( $matches[0] )
         {
             foreach( $matches[0] as $count => $each )
             {
-            //    self::v( $each );
+
                 $previousData['dummy_title'][] = 'Replaceable Text ' . ( $count + 1 );
                 $previousData['dummy_search'][] = $each;
                 $previousData['dummy_replace'][] = trim( $each, '{-}' );
             }
-        //    var_export( $previousData );
+
                 Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
 
         }
         //  to be executed within the widget class
-        foreach( [ 'codes', 'editable', 'preserved_content' ] as $each  )
-        {
-            if( empty( $parameters[$each] ) )
-            {
-                continue;
-            }
-            $parameters[$each] = str_ireplace( array( 'i>&nbsp;</i', 'span>&nbsp;</span', ), array( 'i></i', 'span></span', ), $parameters[$each] );
-        }
+        $content = str_ireplace( array( 'i>&nbsp;</i', 'span>&nbsp;</span', ), array( 'i></i', 'span></span', ), $content );
+        $parameters['content'] = $content;
     }
 	
     /**
@@ -191,26 +178,134 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     public function init()
     {
 		//	codes first because it wont be there if they didnt opt to enter codes
-	//	var_export( $this->_parameter );  
-		$content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
-		if( ( @in_array( 'preserve_content', $this->getParameter( 'widget_options' ) ) || @in_array( 'preserve_content', $this->getParameter( 'text_widget_options' ) ) ) && $this->getParameter( 'preserved_content' ) )
-		{
-			@$content = $this->getParameter( 'codes' ) ? : $this->getParameter( 'preserved_content' );
-		}
-		$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
+
+        if( ! $content = $this->getParameter( 'content' ) )
+        {
+            $content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
+            if( ( @in_array( 'preserve_content', $this->getParameter( 'widget_options' ) ) || @in_array( 'preserve_content', $this->getParameter( 'text_widget_options' ) ) ) && $this->getParameter( 'preserved_content' ) )
+            {
+                @$content = $this->getParameter( 'codes' ) ? : $this->getParameter( 'preserved_content' );
+            }
+        }
+        $textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
 		if( empty( $textUpdatesSettings['dummy_search'] ) )
 		{
 			$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
 		}
-	//	self::v( $textUpdatesSettings );  
+
 		$content = str_replace( $textUpdatesSettings['dummy_search'], $textUpdatesSettings['dummy_replace'], $content );
-	//	self::v( $content );  
-	//	exit();          
-	//	self::v( $textUpdatesSettings );  
-	//	exit();          
 		$content = self::__( $content );
-	//	var_export( $this->getParameter( 'markup_template_object_name' ) );
-		if( $this->getParameter( 'markup_template_object_name' ) )
+
+        $count = 0;
+
+        //  embed widget
+        while( stripos( $content, '</widget>' )  && $count < 3  )
+        {
+            preg_match_all( '#<widget([\s]*parameters=("?\'?)({[^>]*})("?\'?)[\s]*)?>(((?!</widget>).)*)</widget>#isU', $content, $widgets );
+            $count++;
+
+            if( empty( $widgets[0] ) )
+            {
+
+                preg_match_all( '|<widget([\s]parameters=("?\'?)({[^>]*})("?\'?)[\s]?)>(.*)</widget>|isU', $content, $widgets );
+
+            }
+
+            //  avoid infinite loop
+
+            for( $i = 0; $i < count( $widgets[0] ); $i++ )
+            {
+                $error = null;
+                $widgetContent = $widgets[5][$i];
+                $pText = $widgets[3][$i];
+                if( empty( $pText ) )
+                {
+                    preg_match( '|<script[^><]*>[\s]*({.*})[\s]*</script>|isU', $widgetContent, $pSection );
+                    if( $pSection )
+                    {
+                        $pText = $pSection[1];
+                    }
+                }
+                $parameters = json_decode( $pText, true ) ? : array();
+                if( empty( $pText ) )
+                {
+                    $error = '<div class="badnews">Widget Parameters Not Properly Set</div>';
+                }
+                elseif( empty( $parameters ) )
+                {
+                    $error = '<div class="badnews">Widget Parameters Not Valid JSON Format: ' . $pText . '</div>';
+                }
+                elseif( ! $class = $parameters['class'] )
+                {
+                    $error = '<div class="badnews">Widget Class Not Set In Parameters</div>';
+                }
+                elseif( ! Ayoola_Loader::loadClass( $class ) )
+                {
+                    $error = '<div class="badnews">Widget Class "' . $class . '" Not Available On This Site</div>';
+
+                }
+
+                if( $error )
+                {
+                    $content = str_ireplace( $widgets[0][$i], $error, $content );
+                    continue;
+                }
+
+                $innerWidgetBefore = array();
+                if( stripos( $widgetContent, '</widget-inner' ) )
+                {
+
+                    preg_match_all( '|(<widget-inner[^>]*>)(.*)(</widget-inner[^>]*>)|isU', $widgetContent, $innerWidgetBefore );
+                    for( $j = 0; $j < count( $innerWidgetBefore[0] ); $j++ )
+                    {
+                        //  hide inner widget so it doesn't interfere
+                        $search = $innerWidgetBefore[0][$j];
+                        $replace = $innerWidgetBefore[1][$j] . $j . $innerWidgetBefore[3][$j];
+                        $widgetContent = str_ireplace( $search, $replace, $widgetContent );
+                    }        
+
+                }
+                $parameters = is_array( $parameters ) ? $parameters : array();
+                $parameters = $parameters + array( 
+                    'markup_template' => $widgetContent, 
+                    'markup_template_namespace' => 'xx123xxx', 
+                    'markup_template_mode' => __CLASS__, 
+                    'no_init' => true, 
+                    ) 
+                    + $this->getParameter();  
+                
+                self::unsetParametersThatMayBeDuplicated( $parameters );
+                $class = new $class( $parameters );
+                $class->setParameter( $parameters );
+                $class->init();
+                $returnedContent = $class->view();
+                $this->_markupTemplateObjects[] = $class;
+
+                //  return inner widget
+                if( ! empty( $innerWidgetBefore[0] ) )
+                {
+                    preg_match_all( '|(<widget-inner[^>]*>)([\d]*)(</widget-inner[^>]*>)|isU', $returnedContent, $innerWidgetAfter );
+                    for( $j = 0; $j < count( $innerWidgetAfter[0] ); $j++ )
+                    {
+                        //  hide inner widget so it doesn't interfere
+                        $search = $innerWidgetAfter[0][$j];
+                        $replace = $innerWidgetAfter[1][$j] . $innerWidgetBefore[2][$innerWidgetAfter[2][$j]] . $innerWidgetAfter[3][$j];
+
+                        $returnedContent = str_ireplace( $search, $replace, $returnedContent );
+                    } 
+
+                    $returnedContent = str_ireplace( array( '<widget-inner', '</widget-inner', ), array( '<widget', '</widget', ), $returnedContent );
+       
+                }
+
+                //  final replacement
+                $content = str_ireplace( $widgets[0][$i], $returnedContent, $content );
+
+            }
+
+           
+        }
+        if( $this->getParameter( 'markup_template_object_name' ) )
 		{
 			$classes = (array) $this->getParameter( 'markup_template_object_name' );    
 			foreach( $classes as $counter => $each )
@@ -223,8 +318,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				//	Removing time() from namespace because it doesn't allow the post to cache
 				//	Use whole content or specified part
 				$i = 0;
-		//				var_export( $each );
-		//				var_export( $content );
+
 				$start = '<!--{{{@' . $counter . '(' . $each . ')-->';
 				$end = '<!--(' . $each . ')@' . $counter . '}}}-->';
 				if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
@@ -263,21 +357,17 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                                 $content = $class->view();
                             }
 
-                        //    var_export( $each );
-                        //    var_export( $content );
                             $this->_markupTemplateObjects[] = $class;
 						}
 					}
 				}
-			//	var_export( $each );
-			//	var_export( $start );
-			//	var_export( $end );
+
 				while( stripos( $content, $start ) !== false && stripos( $content, $end ) !== false && ++$i < 5 )
 				{
 					$started = stripos( $content, $start );
 					$length = ( stripos( $content, $end ) + strlen( $end ) )  - $started;
 					$partTemplate = substr( $content, $started, $length );
-			//		var_export( $partTemplate );
+
 					$searchY = array();
 					$replaceY = array();
 					$searchY[] = $start;
@@ -310,14 +400,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 					$content = str_ireplace( $searchC, $replaceC, $content );
 				}  
 			}
-
 			$content .= '<div style="clear:both;"></div>';  
 			$content .= '<div style="clear:both;"></div>';  
-		}
+        }
 		if( $this->getParameter( 'page_title' ) || $this->getParameter( 'page_description' )  )
 		{
 			$metaData = strip_tags( $content );
-		//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
+
 			if( $this->getParameter( 'page_title' ) )
 			{
 				$pageInfo['title'] = $metaData;
@@ -345,7 +434,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		{
 			$html = strip_tags( $html, $this->getParameter( 'strip_tags_allowed_tags' ) );  
 		}
-	//	$this->
 		$this->_parameter['no_view_content_wrap'] = true;
 		$this->setViewContent( $html );
 		if( $this->getParameter( 'javascript_code' ) )
@@ -357,8 +445,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			);
 		}					
 
-	//	var_export( $this->_parameter );
-     //   return $content . $this->getParameter( 'raw_html' );
     } 
 
     /**
@@ -454,7 +540,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
      public static function getHTMLForLayoutEditor( & $object )
 	{
-    //    var_export( $object );
+
 		if( empty( $object['widget_options'] ) &&  ! empty( $object['text_widget_options'] ) )
 		{
 			$object['widget_options'] = $object['text_widget_options'];
@@ -502,12 +588,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
 													if ( ayoola.div.wysiwygEditor )
 													{
-													//	ayoola.div.wysiwygEditor.destroy();
+
 													}
 													//	destroy all instances of ckeditor everytime state changes.
 													for( name in CKEDITOR.instances )
 													{
-													//	CKEDITOR.instances[name].destroy();
+
 													}
 													ayoola.div.wysiwygEditor = CKEDITOR.inline
 													( 
@@ -521,7 +607,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 											' 
 										);    
 		$html = null;
-    //	$optionsName = 'text_widget_options';
+
 		if( ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
 		{
 			@$object['editable'] = $object['preserved_content'] ? : ( $object['codes'] ? : $object['editable'] );
@@ -557,7 +643,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 								);
 			@$object['codes'] ? $object['codes'] = str_ireplace( $search, $replace, $object['codes'] ): null;
 			@$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, $object['editable'] ): null;
-	//		$replace = Ayoola_Application::getUrlPrefix();
+
 		}
         foreach( [ 'codes', 'editable', 'preserved_content' ] as $each  )
         {
@@ -565,7 +651,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
             {
                 continue;
             }
-        //    $object[$each] = str_ireplace( '></', '>&nbsp;</', $object[$each] );
+
         }
 
 		if( ! @$object['codes'] )
@@ -718,7 +804,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
     protected static function getParameterKeysFromTheseOtherClasses( & $parameters )
     {
-	//	var_export( $parameters['editable'] );
+
 		$classes = array();
 		if( @$parameters['markup_template_object_name'] )
 		{

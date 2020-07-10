@@ -1279,8 +1279,8 @@ class Ayoola_Application
 			//	page may just be present in the theme
 			$themeName = @$_REQUEST['pc_page_layout_name'];
 			$themeName = $themeName ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
-			$pageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
-			$pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) );
+			$realPageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
+			$pageFile = Ayoola_Loader::getFullPath( $realPageFile, array( 'prioritize_my_copy' => true ) );
 			if( ! is_file( $pageFile ) )
 			{
 				return false;
@@ -1292,22 +1292,40 @@ class Ayoola_Application
 			$PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
 			$PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
 
+
 			if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
 			{
 
-				//	save first
-                //	once page is created, let's have blank content
-                //  was causing "Editing /" in title
-                //  and blank pages
                 if( ! empty( $options['auto_init_theme_page'] ) )
                 {
-			    	$page = new Ayoola_Page_Editor_Sanitize();
-			    	$page->refresh( $uri, $themeName );
+                    $variant = filemtime( $pageFile );
+
+                    //	auto-saved file
+                    $pagePaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/include';
+                    $pagePaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/template';
+                    $PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
+                    $PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
+
+                    if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
+                    {
+        
+                        //	save first
+                        //	once page is created, let's have blank content
+                        //  was causing "Editing /" in title
+                        //  and blank pages
+                        //    if( ! empty( $options['auto_init_theme_page'] ) )
+                        {
+                            $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_page_variant' => $variant ) );
+                            $page->refresh( $uri, $themeName );
+                        }
+                    }
                 }
 
-			//	if( )
-				//	not found
-				return false;
+                if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
+                {
+                    //	not found
+                    return false;
+                }
 			}
 			return true;
 		};
@@ -1330,7 +1348,6 @@ class Ayoola_Application
 				//	use content of default theme
 				if( $previewTheme() )
 				{
-
 					$noRestriction = true;
 					break;
 				}
@@ -1359,8 +1376,13 @@ class Ayoola_Application
 						! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE
 					)
 					{
-
-						return false;
+                        //  finally, we want to be autogenerating theme pages now
+                        $noRestriction = true;
+                        if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
+                        {
+                            break;
+                        }
+                        return false;
 					}
 				}
 			}

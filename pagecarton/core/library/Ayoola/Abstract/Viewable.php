@@ -2561,11 +2561,18 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                         }
 
                     }
+                    if( $this->getParameter( 'template_sort_column' ) )
+                    {   
+                        $this->_objectTemplateValues = Ayoola_Abstract_Table::sortMultiDimensionalArray( $this->_objectTemplateValues, $this->getParameter( 'template_sort_column' ) );
+                    }
+
                             
 					//	allows me to add pagination on post listing with predefined suffix
 					$template = $this->getParameter( 'markup_template_prepend' ) . $template;
 					$template = $template . $this->getParameter( 'markup_template_append' );
-					$template = Ayoola_Abstract_Playable::replacePlaceholders( $template, $this->_objectTemplateValues + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+                    $template = Ayoola_Abstract_Playable::replacePlaceholders( $template, $this->_objectTemplateValues + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+                    
+        
 
 					//	fix case where ajax auto-loading didn't fix url prefix in posts
 					$template = Ayoola_Page_Editor_Text::fixUrlPrefix( $template, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );

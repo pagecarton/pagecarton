@@ -1285,9 +1285,35 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$this->_parameter['markup_template_append'] = null;
 			$this->_parameter['markup_template_prepend'] = null;  
-		}		
-		if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false && strpos( $this->_parameter['markup_template'], '<!--{{{0}}}' ) === false )  
+        }	
+        
+        $noPostTheme = false;
+        if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false && strpos( $this->_parameter['markup_template'], '<!--{{{0}}}' ) === false )  
+        {
+
+        }
+        else
+        {
+            $noPostTheme = true;
+        }
+   //     var_export( $this->_parameter['markup_template'] );
+   //     var_export( $noPostTheme );
+        if( $this->_parameter['markup_template'] && empty( $noPostTheme ) )  
+        {
+            $postThemeInfo = Ayoola_Abstract_Playable::getPostTheme( $this->_parameter['markup_template'] );
+         //   var_export( $postThemeInfo );
+            if( stripos( $this->_parameter['markup_template'], $postThemeInfo['start'] ) === false )
+            {
+                
+            }
+            else
+            {
+                $noPostTheme = true;
+            }
+        }
+		if( empty( $noPostTheme ) )  
 		{
+        
 			//	update the markup template
 			@$this->_parameter['markup_template'] = null;
 			
