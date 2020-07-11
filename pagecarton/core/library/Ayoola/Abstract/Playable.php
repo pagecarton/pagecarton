@@ -21,7 +21,6 @@ require_once 'Ayoola/Exception.php';
 require_once 'Ayoola/Object/Interface/Playable.php';
 require_once 'Ayoola/Abstract/Viewable.php';
 
-
 /**
  * @category   PageCarton
  * @package    Ayoola_Abstract_Playable
@@ -118,13 +117,11 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
         if( $key === 'article_content' )
         {
             $replacement = self::cleanHTML( $replacement );
-       //     $replacement = null;
-        //    var_export( $replacement );
 
         }
         elseif( stripos( $key, '_html' ) )
         {
-        //    var_export( $replacement );
+
             $replacement = self::cleanHTML( $replacement );
         }
         else
@@ -134,8 +131,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
         }
 		if( $first != $replacement )
 		{
-		//	self::v( get_called_class() );
-		//	self::v( $first );
+
 		}
 	}
 	
@@ -179,8 +175,8 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		$defaultSearch = array();
 		$defaultSearch['pc_domain'] = $defaultSearch['pc_domain'] = Ayoola_Page::getDefaultDomain();
 		$defaultSearch['pc_url_prefix'] = Ayoola_Application::getUrlPrefix();
-		$defaultSearch['pc_background_color'] = Application_Settings_Abstract::getSettings( 'Page', 'background_color' );
-        $defaultSearch['pc_font_color'] = Application_Settings_Abstract::getSettings( 'Page', 'font_color' );
+		$defaultSearch['pc_background_color'] = Application_Settings_Abstract::getSettings( 'Page', 'background_color' ) ? : '#333333';
+        $defaultSearch['pc_font_color'] = Application_Settings_Abstract::getSettings( 'Page', 'font_color' ) ? : '#cccccc';
 		$values = $values + $defaultSearch;
         $replaceInternally = false;
         $iTemplate = null;
@@ -199,14 +195,12 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 				{
 
                     $postThemeInfo = self::getPostTheme( $template );
-                //    var_export( $postTheme );
 
                     if( stripos( $template, $postThemeInfo['start'] ) !== false )
                     {
                         $postTheme = $postThemeInfo['theme'];
                         $taggedPostTheme = $postThemeInfo['start'] . $postTheme . $postThemeInfo['end'];
                         $otherPostsPlaceholder = $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'];
-                        //    var_export( $taggedPostTheme );
 
                         $search[] = $postThemeInfo['start'];
                         $replace[] = '';          
@@ -225,7 +219,6 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                             $template = @str_replace( $taggedPostTheme, '', $template );  
                         }
                     }
-                //    var_export( $postTheme );
 
 				}
 					
@@ -283,12 +276,12 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 						//	skipping index 0 makes the first on the list be info about current post on the page
 						if( $replaceInternally & is_numeric( $key ) )
 						{
-						    //	var_export( $eachValue );
+
 							$iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . '0' . $values['placeholder_suffix'];
 							$iReplace[] = $eachValue;  
 							$iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'];
 							$iReplace[] = $eachValue; 
-                            //		var_export( $iSearch ); 
+
 						}  
 						else
 						{
@@ -298,8 +291,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                             //  This kind of replacement are not able to use shorthand {{{field}}}
                             //  Because all template is tested as one and 
                             //  this may cause only the first item only to be used in all
-                            //	$jSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'];
-                            //	$jReplace[] = $eachValue; 
+
 						}
 					}
  				}
@@ -354,7 +346,6 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		@$template = preg_replace( $search, '', $template );
 		return $template;
     } 
-	
 
     /**
      * Returns $_playable 
@@ -388,7 +379,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		{
 			return true;
         }
-    //    var_export( $userId );
+
 		return false;
 	}
 	
@@ -405,16 +396,11 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		{
 			$parameter = array( 'view' => $viewParameter, 'option' => $viewOption, );
 		}
-	//	$view = new static( $parameter + array( 'no_init' => true ) );
-		$view = new static( $parameter );
-	//	$view->setViewParameter( $viewParameter );
-	//	$view->setViewOption( $viewOption );
-	//	var_export( __LINE__ );
-		$view->initOnce();
-//		var_export( get_class( $view ) );
 
-//		var_export( get_class( $view ) );
-	//	var_export( @$view->getForm()->getValues() );
+		$view = new static( $parameter );
+
+		$view->initOnce();
+
 		return isset( $viewParameter['return_as_object'] ) ? $view : $view->view();
     } 	
 	// END OF CLASS

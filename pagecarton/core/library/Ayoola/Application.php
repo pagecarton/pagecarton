@@ -874,6 +874,7 @@ class Ayoola_Application
 						}
 						else
 						{
+
 							if( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['article_type'] ) ) )
 							{
 								//	allow dedicated url for all post types like /post-viewer-article/
@@ -1292,7 +1293,6 @@ class Ayoola_Application
 			$PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
 			$PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
 
-
 			if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
 			{
 
@@ -1362,8 +1362,7 @@ class Ayoola_Application
                 }
 			//	if( $previewTheme() )
 				{
-			//		$noRestriction = true;
-			//		break;
+
 				}
 
 				// intended copy next

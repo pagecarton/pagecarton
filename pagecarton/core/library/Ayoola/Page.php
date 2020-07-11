@@ -17,7 +17,6 @@
  
 require_once 'Ayoola/Page/Abstract.php';
 
-
 /**
  * @category   PageCarton
  * @package    Ayoola_Page
@@ -125,13 +124,13 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				$table = Ayoola_Page_PageLayout::getInstance();
 				if( $cssFile = $table->selectOne( null, array( 'layout_name' => $cssFile ) ) )
 				{
-			//		var_export( $cssFile );
+
 					$cssFile = @$cssFile['document_url'];
 				}
 			}
 		}
 		return $cssFile ? : '/css/pagecarton.css';
-	//	return $cssFile;
+
     } 
 	
     /**
@@ -145,46 +144,43 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		do
 		{
 			$id = Ayoola_Application::getApplicationNameSpace() . $url;
-//			$id = $url . Ayoola_Application::getPathPrefix();
+
 			$storage = self::getObjectStorage( array( 'id' => $id,  ) );
 		//	if( $info = $storage->retrieve() )
 			{ 
 				//	The theme sometimes caches and brings stale info
-			//	break; 
+
 			}
 			
 			
 			$tableName = 'Ayoola_Page_Page';		
-		//	$table = new $tableName;		
+
 			$table = $tableName::getInstance();		
-	   // 	self::v( array( 'url' => $url ) );
-	  //  	self::v( $table->selectOne( null, array( 'url' => $url ) ) );
+
 			if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'id' => $id ) ) )
 			{
-		//		self::v( $id );
-		//		self::v( $info );
+
 				$info['cache_info'] = serialize( $storage );
 				$storage->store( $info ); 
 				break; 
 			}
 			$table = $tableName::getInstance( $tableName::SCOPE_PROTECTED );
 			$table->getDatabase()->setAccessibility( $tableName::SCOPE_PROTECTED );
-	   // 	self::v( $info );
+
 			if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'work-arround-1-333' => true ) ) )
 			{ 
 				//	remove info we dont want
 				if( @in_array( 'private', $info['page_options'] ) )
 				{
 					//	We are not allowed to access parent page.
-			//		var_export( self::$_currentPageInfo );
+
 					$info = array();
 					return false; 
-				//	throw new Ayoola_Exception( 'PAGE INHERITANCE NOT ALLOWED: ' . $url );
+
 				}
 				@$info['page_options'] = array_combine( $info['page_options'], $info['page_options'] );
 				unset( $info['title'], $info['description'], $info['layout_name'], $info['page_options']['template'], $info['cover_photo'] );
-		//		self::v( $info );
-			//		var_export( self::$_currentPageInfo );
+
 				$info['cache_info'] = serialize( $storage );
 				$storage->store( $info );
 				break; 
@@ -192,13 +188,12 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 
 			//	get info for theme pages
 			$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
-	//		self::v( Ayoola_Page_Layout_Pages_Copy::canCopy( $url, $themeName  ) );
-			if( $themeName && Ayoola_Page_Layout_Pages_Copy::canCopy( $url, $themeName ) )
+
+			if( $themeName && Ayoola_Page_Layout_Pages::isValidThemePage( $url, $themeName ) )
 			{ 
 				//	just what we need
 				@$info = array( 'url' => $url );
-				//	self::v( $info );
-				//		var_export( self::$_currentPageInfo );
+
 				$info['cache_info'] = serialize( $storage );
 				$storage->store( $info );
 				break; 
@@ -206,7 +201,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			return false;
 		}
 		while( false );
-//		self::v( $info );
+
 		return $info;
 		
     } 
@@ -219,9 +214,9 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      */
     public static function getCurrentPageInfo( $infoToGet = null )
     {		
-	//	if( is_null( self::$_currentPageInfo ) ){ self::setCurrentPageInfo(); }
+
 		if( ! self::$_currentPageInfo ){ self::setCurrentPageInfo(); }
-	//	self::setCurrentPageInfo();
+
 		if( is_null( $infoToGet ) ){ return self::$_currentPageInfo; }
 		if( array_key_exists( $infoToGet, self::$_currentPageInfo ) ){ return self::$_currentPageInfo[$infoToGet]; }
     } 
@@ -240,8 +235,6 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		
 		//	strip thet artificial get from it.
 		$url = Ayoola_Application::getPresentUri( $url );
-	//	var_export( $url );
-	//	var_export( self::getInfo( $url ) );
 
 		if( empty( self::$_currentPageInfo ) )
 		{
@@ -251,8 +244,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
         {
             $info = self::__( $info );
         }
-	//	exit( microtime( true ) - Ayoola_Application::getRuntimeSettings( 'start_time' ) . '<br />' );
-	//	var_export( self::$_currentPageInfo );
+
 		self::$_currentPageInfo = is_array( self::$_currentPageInfo ) ? array_merge( self::$_currentPageInfo, $info ) : $info;
 		return self::$_currentPageInfo;
     } 
@@ -265,7 +257,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      */
     public static function buildQueryStrings( Array $queryStrings = array(), $appendAllGet = true )
     {
-		//if( is_null( $queryStrings ) ){ $queryStrings = $_GET; }
+
 		$queryStrings = true == $appendAllGet ? array_merge( $_GET, $queryStrings ) : $queryStrings;
 		$queryStrings = http_build_query( $queryStrings );
 		return $queryStrings;
@@ -293,7 +285,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     {
 		$page = $url ? : Ayoola_Application::getPresentUri();
 		$currentUrl = rtrim( Ayoola_Application::getPresentUri(), '/' );
-      //     var_export( $page );
+
 		switch( Ayoola_Application::$mode )
 		{
 			case 'profile_url':
@@ -306,9 +298,9 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 					//	module
 			//		if( self::getInfo( '/members' ) )
 					{
-		//				$pages[] = self::getInfo( '/members' );
+
 					}
-//var_export( Ayoola_Application::$GLOBAL );
+
 					//	profile_url
 					if( Ayoola_Application::$GLOBAL['profile']['profile_url'] )
 					{
@@ -333,13 +325,13 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 					//	module
 			//		if( self::getInfo( '/members' ) )
 					{
-				//		$pages[] = self::getInfo( '/members' );
+
 					}
 					
 					//	username
 				//	if( Ayoola_Application::$GLOBAL['username'] )
 					{
-			//			$pages[] = array( 'url' => ( '/' . Ayoola_Application::$GLOBAL['username'] ), 'title' => Ayoola_Application::$GLOBAL['display_name'], 'description' => Ayoola_Application::$GLOBAL['profile_description'] );
+
 					}
 					
 					//	Page
@@ -354,11 +346,9 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				// module mode
 				$pages = self::getPageCrumbs( $page );
 
-		//		self::v( $page );
-		//		self::v( $pages );
 				
 				//	final word 
-			//	$title = ucwords( array_pop( explode( '/', Ayoola_Application::getRuntimeSettings( 'url' ) ) ) );
+
                 $title = explode( "/", strtolower( Ayoola_Application::getRuntimeSettings( 'url' ) ) );
                 $title = array_pop( $title );
                 $title = ucwords( $title );
@@ -373,15 +363,12 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 					$title = ucwords( implode( ' ', explode( '-', $title ) ) );
 					
 					//	Delete generic names
-				//	$title = ucwords( implode( ' ', explode( 'Ayoola ', $title ) ) );
-				//	$title = ucwords( implode( ' ', explode( 'Application ', $title ) ) );
-		//			$title = ucwords( implode( ' ', explode( 'Object ', $title ) ) );
-		//			$title = ucwords( implode( ' ', explode( 'Classplayer ', $title ) ) );
+
 				}
 				$pages[] = array( 'url' => Ayoola_Application::getRuntimeSettings( 'url' ), 'title' => $title, 'description' => null );
-			//	$pages[] = array( 'url' => Ayoola_Application::getRuntimeSettings( 'url' ), 'title' => , 'description' => null );
+
 				//	Category
-			//		var_export( $pages );
+
 				return $pages;
 			break;
 			case 'post':
@@ -392,13 +379,11 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				$pages[] = self::getInfo( '/' );   
 				//	Article gan gan
 				$pages[] = array( 'url' => Ayoola_Application::$GLOBAL['post']['article_url'], 'title' => Ayoola_Application::$GLOBAL['post']['article_title'] );
-			//	var_export( $categoryName );
+
 				return $pages;  
 			break;
 			default:
-		//		var_export( $currentUrl );
-		//		var_export( Ayoola_Application::getRuntimeSettings( 'real_url' ) );
-			//		var_export( Ayoola_Application::$mode );
+
 			switch( $page )
 			{
 				case '/tools/classplayer':
@@ -409,7 +394,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		//		case true:
 					//	Do nothing.
 					//	 had to go through this route to process for 0.00
-			//		var_export( __LINE__ );
+
 					if( @$_REQUEST['url'] )
                     {
                         $page = $_REQUEST['url'];
@@ -418,21 +403,20 @@ class Ayoola_Page extends Ayoola_Page_Abstract
                     }
 				break;
 				default:
-      //      var_export( $currentUrl );
+
 				break;
 			}
-				
-			//	$currentUrl = rtrim( Ayoola_Application::getPresentUri(), '/' );
+
 /*				$sections = self::splitUrl( $page );
 				$table = Ayoola_Page_Page::getInstance();
 				$pages = $table->select( null, array( 'url' => $sections ), array( 'work-arround-111' => true ) );
 				$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-			//	var_export( $currentUrl );
+
 		//			if( $moduleInfo = Ayoola_Page::getInfo( $curentPage ) )
 				$pages2 = $table->select( null, array( 'url' => $sections ), array( 'work-arround-333' => true ) );
 				$pages = self::sortMultiDimensionalArray( $pages, 'url' );
 				$pages2 = self::sortMultiDimensionalArray( $pages2, 'url' );
-			//	var_export( $pages );
+
 				$pages = $pages + $pages2;
 */			//		var_export( $pages );
 				$pages = self::getPageCrumbs( $page );
@@ -441,7 +425,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 					$pages[] = self::getInfo( '/404' );
 				}
 				//	Don't shuffle again so that we can priotize local copy.'
-			//	$pages = self::sortMultiDimensionalArray( $pages, 'url' );
+
 				return $pages;
 			break;
 		}
@@ -458,13 +442,13 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );
 		$pages = $table->select( null, array( 'url' => $sections ), array( 'work-arround-ddd111' => true ) );
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-	//	var_export( $currentUrl );
+
 //			if( $moduleInfo = Ayoola_Page::getInfo( $curentPage ) )
 		$pages2 = $table->select( null, array( 'url' => $sections ), array( 'work-arround-333' => true ) );
-	//	self::v( $pages );
+
 		$pages = self::sortMultiDimensionalArray( $pages, 'url' );
 		$pages2 = self::sortMultiDimensionalArray( $pages2, 'url' );
-	//	var_export( $pages );
+
 		$pages = $pages + $pages2;
 		return $pages;
 	}
@@ -476,15 +460,14 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     public static function splitUrl( $uri )
     {
 		$page = explode( '/', $uri );
-//		array_unshift( $page, '' );
+
 		$curentPage = null;
 		$sections = array();
 		do
 		{
 			$curentPage =  '' . rtrim( $curentPage, '/' ) . '/';
 			$curentPage = $curentPage . '' . array_shift( $page ) . '';
-		//	$curentPage .= array_shift( $page );
-		//	var_export( $curentPage );
+
 			$sections[] = $curentPage;
 		}
 		while( $page );
@@ -503,16 +486,14 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		{
 			return self::$_canonicalUri;
 		}
-	//	$uri = Ayoola_Application::getRuntimeSettings( 'url' );
+
 		$uri = $uri ? : Ayoola_Application::getRequestedUri();
-	//	var_export( $uri );
 
 		//	Look in the links table for SEO friendly and short URLS
-	//	$table = Application_Link::getInstance();
-	//\\	var_export( $table->select() );
+
 	//	if( $link = $table->selectOne( null, array( 'link_url' => $uri ) ) )
 		{
-	//		$uri = '/' . $link['link_name'] . '/';
+
 		}
 		if( $uri == Ayoola_Application::$_homePage || ! $uri || $uri == '/' )
 		{
@@ -523,7 +504,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		{
 			self::$_canonicalUri = $uri;
 		}
-	//	var_export( $url );
+
 		return $uri;
     }
 	
@@ -534,11 +515,11 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      */
     public static function getCanonicalUrl( $uri = null )
     {
-	//	$uri = Ayoola_Application::getRuntimeSettings( 'url' );
+
 		$uri = self::getCanonicalUri( $uri, false );
-				//	if( $_SERVER['SERVER_PORT'] != '80' ){ break; }
+
 		$url = self::getHomePageUrl() . $uri;  
-	//	var_export( $url );
+
 		return $url;
     }
 	
@@ -573,15 +554,15 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      */
     public static function getDefaultDomain()
     {
-	//	var_export( Ayoola_Application::getDomainSettings( 'domain_name' ) );
+
 		$domainName = Ayoola_Application::getDomainSettings( 'domain_name' );
 		if( ! @Ayoola_Application::getDomainSettings( 'dynamic_domain' ) )
 		{
 			$domainName = ( Ayoola_Application::getDomainSettings( 'enforced_destination' ) ? : Ayoola_Application::getDomainSettings( 'domain_name' ) ) ? : Ayoola_Application::getDomainName();
 		}
-	//	exit();
+
 		return $domainName;
-	//	return Ayoola_Application::getDomainName();
+
     }
 	
     /**
@@ -670,25 +651,23 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		if( @$_GET['previous_url'] )
 		{
 			$url .= 'previous_url=' . urlencode( $_GET['previous_url'] );
-		//	var_export( $url );
+
 			return $url;
 		}
-	//	$currentUrl = Ayoola_Application::getRequestedUri();
+
 		$currentUrl = self::getCurrentUrl();
-	//	var_export( $currentUrl );
+
 		$host = $_SERVER['HTTP_HOST'];
 		if( ! stripos( $host, ':' ) )
 		{
 			$host = $host .  self::getPortNumber();
 		}
-	//	var_export( $_SERVER['HTTP_HOST'] );
-	//	exit();
 
 		//	https://www.example.com/account/signin?previous_url=https://www.example.com/account 
 		//	is being blocked by some servers
 		//	probably because of xss
 		//	$_POST, $_GET was being cleared
-	//	$url .= 'previous_url=' . urlencode( Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . Ayoola_Page::getDefaultDomain() .  self::getPortNumber() . '' . $currentUrl );
+
 		$url .= 'previous_url=' . urlencode( '//' . $host . '' . $currentUrl );
 	return $url;
     }	

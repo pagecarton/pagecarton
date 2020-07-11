@@ -47,6 +47,26 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
      * 
      * 
      */
+	public static function isValidThemePage( $url, $themeName )
+    {
+        $pageThemeFileUrl = $url;
+        if( $pageThemeFileUrl == '/' )
+        {
+            $pageThemeFileUrl = '/index';
+        }
+        $pageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
+        $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) );
+        if( ! is_file( $pageFile ) )
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 
+     * 
+     */
 	public static function getPagePaths( $themeName, $pageThemeFileUrl = null )
     {
         $fPaths = array();

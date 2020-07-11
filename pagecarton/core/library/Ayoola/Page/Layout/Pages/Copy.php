@@ -48,10 +48,8 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
     {     
         //  create page if they don't exist'
         $class = new Ayoola_Page_Editor_Sanitize(  array( 'no_init' => true, 'auto_create_page' => true )  );
-  //      var_export( $pageInfo );
 
 
-    //    var_export( $tPaths );
         $pageThemeFileUrl = $url;
         if( $pageThemeFileUrl == '/' )
         {
@@ -64,7 +62,6 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
         {
             return false;
         }
-//    var_export();
 
         if( ! Ayoola_Loader::getFullPath( $fPaths['include'], array( 'prioritize_my_copy' => true ) ) )
         {

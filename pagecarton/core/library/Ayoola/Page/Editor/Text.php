@@ -129,123 +129,30 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		return $content;
 	}
 
-    /**
-     * Do a one time parameter filter within widgets
+	/**
+     * Embed PageCarton Widget in a text. Using HTML syntax API
      *
+     * @param string Content
+     * @return string Content with embeded text
      */
-	public static function filterParameters( & $parameters )
+    public static function embedWidget( $content, $baseParameters, & $classes = array() )
     {
-		$content = $parameters['codes'] ? : ( $parameters['editable'] ? : $parameters['view'] );
-		if( ( @in_array( 'preserve_content', $parameters['widget_options'] ) || @in_array( 'preserve_content', $parameters['text_widget_options'] ) ) && $parameters['preserved_content'] )
-		{
-			@$content = $parameters['codes'] ? : $parameters['preserved_content'];
-        }
-
-        // magic static texts
-        preg_match_all( '|\{-(.*)-\}|', $content, $matches );
-        #   '{-Lorem Ipsum dolor-}'
-
-        $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates() ? : Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
-        if( 
-            empty( $previousData['dummy_title'] ) || empty( $previousData['dummy_search'] ) || empty( $previousData['dummy_replace'] )
-            )
-        {
-            $previousData = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
-        }
-        foreach( $matches[0] as $count => $each )
-        {
-
-            $previousData['dummy_title'][] = 'Replaceable Text ' . ( $count + 1 );
-            $previousData['dummy_search'][] = $each;
-            $previousData['dummy_replace'][] = trim( $each, '{-}' );
-        }
-        Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
-
-        
-        //  to be executed within the widget class
-        $content = str_ireplace( array( 'i>&nbsp;</i', 'span>&nbsp;</span', ), array( 'i></i', 'span></span', ), $content );
-
-        // include other HTML here
-    //    var_export( $content );
-        preg_match_all( '|<include.*(/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*).*>|i', $content, $matches );        
-        foreach( $matches[0] as $count => $each )
-        {
-            $parameters['includes'][$matches[1][$count]] = $each;
-        }
-
-        $parameters['content'] = $content;
-    }
-	
-    /**
-     * This method
-     *
-     * @param 
-     * @return 
-     */
-    public function init()
-    {
-		//	codes first because it wont be there if they didnt opt to enter codes
-        if( ! $content = $this->getParameter( 'content' ) )
-        {
-            $content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
-            if( ( @in_array( 'preserve_content', $this->getParameter( 'widget_options' ) ) || @in_array( 'preserve_content', $this->getParameter( 'text_widget_options' ) ) ) && $this->getParameter( 'preserved_content' ) )
-            {
-                @$content = $this->getParameter( 'codes' ) ? : $this->getParameter( 'preserved_content' );
-            }
-        }
-
-        
-        //  Bring in included files
-        if( $this->getParameter( 'includes' ) )
-        {
-            //  preg_match_all( '|<include.*(/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*).*>|i', $content, $matches );
-
-        //    var_export( $this->getParameter( 'includes' ) );
-            foreach( $this->getParameter( 'includes' ) as $file => $placeholder )
-            {
-
-                $path = Ayoola_Doc::getDocumentsDirectory() . $file . '.html';
-                if( ! is_file( $path ) )
-                {
-                    continue;
-                }
-                $html = file_get_contents( $path );
-
-                $content = str_ireplace( $placeholder, $html, $content );
-            }
-
-        //    var_export( $this->getParameter( 'includes' ) );
-
-    
-        }
-
-
-        //  text update
-        $textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
-		if( empty( $textUpdatesSettings['dummy_search'] ) )
-		{
-			$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
-		}
-
-		$content = str_replace( $textUpdatesSettings['dummy_search'], $textUpdatesSettings['dummy_replace'], $content );
-		$content = self::__( $content );
-
-        $count = 0;
-
-
-        //  embed widget
         while( stripos( $content, '</widget>' )  && $count < 3  )
         {
             preg_match_all( '#<widget([\s]*parameters=("?\'?)({[^>]*})("?\'?)[\s]*)?>(((?!\</widget\>).)*)</widget>#isU', $content, $widgets );
+
+            //  avoid infinite loop
             $count++;
 
             if( empty( $widgets[0] ) )
             {
-
                 preg_match_all( '|<widget([\s]parameters=("?\'?)({[^>]*})("?\'?)[\s]?)>(.*)</widget>|isU', $content, $widgets );
             }
 
-            //  avoid infinite loop
+            if( empty( $widgets[0] ) )
+            {
+                preg_match_all( '|<widget(.*)(.*)(.*)(.*)>(.*)</widget>|isU', $content, $widgets );
+            }
 
             for( $i = 0; $i < count( $widgets[0] ); $i++ )
             {
@@ -310,14 +217,14 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                     'markup_template_mode' => __CLASS__, 
                     'no_init' => true, 
                     ) 
-                    + $this->getParameter();  
+                    + $baseParameters;  
                 
                 self::unsetParametersThatMayBeDuplicated( $parameters );
                 $class = new $className( $parameters );
                 $class->setParameter( $parameters );
                 $class->init();
                 $returnedContent = $class->view();
-                $this->_markupTemplateObjects[] = $class;
+                $classes[] = $class;
 
                 //  return inner widget
                 if( ! empty( $innerWidgetBefore[0] ) )
@@ -340,20 +247,120 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                     $returnedContent = str_ireplace( array( '<widget-inner', '</widget-inner', ), array( '<widget', '</widget', ), $returnedContent );
        
                 }
-                if( stripos( $className, 'Article_ShowAll' ) !== false )
+                if( stripos( $className, 'Application_SearchReplace' ) !== false )
                 {
-                //    var_export( $widgetContent  );
-                //    var_export( $returnedContent  );
 
                 }
 
                 //  final replacement
                 $content = str_ireplace( $widgets[0][$i], $returnedContent, $content );
-
             }
 
            
         }
+        return $content;
+	}
+
+    /**
+     * Do a one time parameter filter within widgets
+     *
+     */
+	public static function filterParameters( & $parameters )
+    {
+		$content = $parameters['codes'] ? : ( $parameters['editable'] ? : $parameters['view'] );
+		if( ( @in_array( 'preserve_content', $parameters['widget_options'] ) || @in_array( 'preserve_content', $parameters['text_widget_options'] ) ) && $parameters['preserved_content'] )
+		{
+			@$content = $parameters['codes'] ? : $parameters['preserved_content'];
+        }
+
+        // magic static texts
+        preg_match_all( '|\{-(.*)-\}|', $content, $matches );
+        #   '{-Lorem Ipsum dolor-}'
+
+        $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates() ? : Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
+        if( 
+            empty( $previousData['dummy_title'] ) || empty( $previousData['dummy_search'] ) || empty( $previousData['dummy_replace'] )
+            )
+        {
+            $previousData = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
+        }
+        foreach( $matches[0] as $count => $each )
+        {
+
+            $previousData['dummy_title'][] = 'Replaceable Text ' . ( $count + 1 );
+            $previousData['dummy_search'][] = $each;
+            $previousData['dummy_replace'][] = trim( $each, '{-}' );
+        }
+        Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
+
+        
+        //  to be executed within the widget class
+        $content = str_ireplace( array( 'i>&nbsp;</i', 'span>&nbsp;</span', ), array( 'i></i', 'span></span', ), $content );
+
+        // include other HTML here
+        preg_match_all( '|<include.*(/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*).*>|i', $content, $matches );        
+        foreach( $matches[0] as $count => $each )
+        {
+            $parameters['includes'][$matches[1][$count]] = $each;
+        }
+
+        $parameters['content'] = $content;
+    }
+	
+    /**
+     * This method
+     *
+     * @param 
+     * @return 
+     */
+    public function init()
+    {
+		//	codes first because it wont be there if they didnt opt to enter codes
+        if( ! $content = $this->getParameter( 'content' ) )
+        {
+            $content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
+            if( ( @in_array( 'preserve_content', $this->getParameter( 'widget_options' ) ) || @in_array( 'preserve_content', $this->getParameter( 'text_widget_options' ) ) ) && $this->getParameter( 'preserved_content' ) )
+            {
+                @$content = $this->getParameter( 'codes' ) ? : $this->getParameter( 'preserved_content' );
+            }
+        }
+
+        
+        //  Bring in included files
+        if( $this->getParameter( 'includes' ) )
+        {
+
+            foreach( $this->getParameter( 'includes' ) as $file => $placeholder )
+            {
+
+                $path = Ayoola_Doc::getDocumentsDirectory() . $file . '.html';
+                if( ! is_file( $path ) )
+                {
+                    continue;
+                }
+                $html = file_get_contents( $path );
+
+                $content = str_ireplace( $placeholder, $html, $content );
+            }
+
+    
+        }
+
+        //  text update
+        $textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
+		if( empty( $textUpdatesSettings['dummy_search'] ) )
+		{
+			$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
+		}
+
+		$content = str_replace( $textUpdatesSettings['dummy_search'], $textUpdatesSettings['dummy_replace'], $content );
+		$content = self::__( $content );
+
+        $count = 0;
+
+        //  embed widget
+        $content = self::embedWidget( $content, $this->getParameter(), $this->_markupTemplateObjects );
+
         if( $this->getParameter( 'markup_template_object_name' ) )
 		{
 			$classes = (array) $this->getParameter( 'markup_template_object_name' );    

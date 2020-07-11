@@ -57,7 +57,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	protected $_list;
 
-
     /**
      * Save translated strings
      *
@@ -97,7 +96,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      *
      */
 	protected $_viewParameter;
-
 
     /**
      * Integrated view, option and other parameters.
@@ -233,7 +231,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	protected static $_wrapperOptions;
 
-
     /**
      * My User Agent Name
      *
@@ -257,13 +254,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             }
             if( is_array( $parameter ) ){ $this->setParameter( $parameter ); }
 
-
     
             if( ! $this->deviceIsAllowed() )
             {
                 return false;
             }
-    
 
             $this->initOnce();
         }
@@ -404,7 +399,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             $hook::hook( $object, $method, $data );
         }
 
-
         return true;
     }
 
@@ -450,7 +444,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
 	public function restrictUrl()
 	{
-    //    return false;
+
         if( $this->getParameter( 'url_blacklist' ) || $this->getParameter( 'url_whitelist' ) )
         {
             $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
@@ -477,7 +471,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
                 break;
             }
-        //    var_export( $this->getParameter() );
 
         }
         if( $this->getParameter( 'url_blacklist' ) )
@@ -486,7 +479,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             $list = array_map( 'trim', explode( ',', $list ) );
             if( in_array( $currentUrl, $list ) || in_array( Ayoola_Application::getUrlPrefix() . $currentUrl, $list ) )
             {
-            //    var_export( $this->_parameter['markup_template'] );
+
                 return false;
             }
         }
@@ -766,7 +759,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			{
 				curl_setopt( $request, CURLOPT_POST, true );
 
-
 				curl_setopt( $request, CURLOPT_POSTFIELDS, $settings['post_fields'] );
             }
             elseif( @$settings['post'] )
@@ -790,14 +782,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				// close cURL resource, and free up system resources
 			curl_close( $request );
 
-
-
-
-
-
 			if( empty( $settings['return_error_response'] ) )
 			{
-
 
 				 if( $responseOptions['http_code'] != 200 ){ return false; }
 			}
@@ -814,7 +800,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			}
 			$storage->store( $response );
 		}
-
 
 		return $response;
     }
@@ -840,7 +825,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	public static function hasPriviledge( $allowedLevels = null, array $options = null )
 	{
 
-
 		if( is_numeric( $allowedLevels ) )
 		{
 			$allowedLevels = array( $allowedLevels );
@@ -857,12 +841,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 		$myLevel = intval( Ayoola_Application::getUserInfo( 'access_level' ) );
 
-
-
-
-
-
-
 		$username = trim( strtolower( Ayoola_Application::getUserInfo( 'username' ) ) );
 		if(
 			( $myLevel === 99 && ! @$options['strict'] ) // Super user except if its strict
@@ -874,15 +852,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		)
 		{
 
-
 			//	We are either a super user, or has a listed allowed user or the resource is public
 			return true;
 		}
-
-
-
-
-
 
 	//	else		if
 		//	MyLevel now has capabilities of inheriting from  other levels
@@ -891,7 +863,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		require_once 'Ayoola/Filter/SelectListArray.php';
 	//	if( $myLevel == 5 )
 		{
-
 
 		}
 		$authLevel['parent_access_level'] = @$authLevel['parent_access_level'] ? : array();
@@ -903,7 +874,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			//	if( $myLevel == 5 )
 				{
 
-
 				}
 				if( in_array( $each, $allowedLevels ) )
 				{
@@ -914,14 +884,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	//	if( $myLevel == 5 )
 		{
 
-
 		}
 		$access = new Ayoola_Access();
 		$userInfo = $access->getUserInfo();
 		@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
-
-
-
 
 		if( in_array( 98, $allowedLevels ) && ! empty( Ayoola_Application::$GLOBAL['profile_url'] ) && is_array( $userInfo['profiles'] ) && in_array( Ayoola_Application::$GLOBAL['profile_url'], $userInfo['profiles'] )  && ! @$options['strict'] ) //	profile owner
 		{
@@ -933,7 +899,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             //  this is making all user level have parent access of standard user
 			return true;
 		}
-
 
 		//	No way jose
 		return false;
@@ -990,10 +955,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $availableLocale[] = $each['locale_code'];
             }
             //	system locale
-
-
-
-
 
             $getPreferredLanguage = function ( array $available_languages, $http_accept_language = null )
             {
@@ -1057,9 +1018,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
         }
         $translationStorage = self::getObjectStorage( array( 'id' => 'translation' . $id . 'dddss' . self::getLocale(), 'device' => 'File', 'time_out' => 1000000, ) );  
 
-
-
-
         if( $stored = $translationStorage->retrieve() )
         {
 
@@ -1092,14 +1050,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$allStrings = preg_split( '#(\<[^<>]+\>)|(<!--)|(-->)|([\s]*\{\{\{[^\{\}\s]*\}\}\}[\s]*)#misU', $string );
 
-
-
 			if( count( $allStrings ) > 1 )
 			{
 				foreach( $allStrings as $each )
 				{
                     if( ! trim( str_ireplace( '&nbsp;', ' ', $each ), "\r\n\t\s " ) ){ continue; }
-
 
 					$translated = self::__( $each );
 					$string = str_ireplace( '>' . $each . '<', '>' . $translated . '<', $string );
@@ -1121,9 +1076,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			}
 		}
 
-
-
-
 		do
 		{
             if( ! $locale = self::getLocale() )
@@ -1135,10 +1087,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 }
             }
 
-
         
             //  don't store trimmed because of some valid spaces around html
-
 
 			//	cache is workaround because of insert not active until next load
 			//	was causing double inserting of words when the words are double on same page
@@ -1197,7 +1147,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 			}
 
-
 			if( ! empty( $stringInfo['originalstring_id'] ) )
 			{
 				$translation = PageCarton_Locale_Translation::getInstance();
@@ -1210,12 +1159,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$string = $translatedString['translation'];
                 }
 
-
             //    if( empty( $translatedString['translation'] ) )
             //    if( $allStringEntries = PageCarton_Locale_OriginalString::getInstance()->select( null, array( 'string' => $string ) ) )
                 {
-
-
 
                 }
 
@@ -1263,7 +1209,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];
 		@$object['option'] = $object['option'] ? : $object['view_option'];
-
 
 		//	Implementing Object Options
 		//	So that each objects can be used for so many purposes.
@@ -1383,9 +1328,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                     $whatToSave['widget_name'] = $parameters['widget_name'];
                 }
 
-
-
-
             }
             elseif( ! empty( $lostInfo['pagewidget_id'] ) )
             {
@@ -1393,7 +1335,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $parameters['widget_name'] = $lostInfo['widget_name']; 
                 $whatToSave['widget_name'] = $lostInfo['widget_name']; 
             }
-
 
         }
 
@@ -1429,7 +1370,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     {
 		$thisClass = get_called_class();
 
-
 		$thisObjectID = md5( $thisClass . $parameters['object_unique_id'] . json_encode( $parameters ) );
 		if( ! empty( static::$_parameterKeys[$thisObjectID] ) )
 		{
@@ -1442,7 +1382,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$classes = array_merge( $classes, $parameterKeysClasses );
 		}
-
 
 		$classes = array_unique( $classes );
 
@@ -1463,7 +1402,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$content .= $fileContent;
 				preg_match_all( "/class\s([a-zA-Z_]*)\sextends\s([a-zA-Z_]*)/", $fileContent, $abstract );
 
-
 				$class = @$abstract[2][0];
 				if( ! $class || in_array( $class, $classes ) )
 				{
@@ -1478,8 +1416,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			}
 			while( ! empty( $abstract[2] ) );
 		}
-
-
 
 		preg_match_all( "/getParameter\( '([a-z_-]*)' \)/", $content, $results );
 
@@ -1502,7 +1438,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				}
 			}
 
-
 		}
 		$results[1][] = 'set_access_level';
 		$results[1][] = 'wrap_widget';
@@ -1513,10 +1448,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 
 		}
-
-
-
-
 
 		return static::$_parameterKeys[$thisObjectID];
 	}
@@ -1538,7 +1469,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$title = ( ( $object['view_parameters'] ? : $object['object_name']::getObjectTitle() ) ? : $object['object_name'] );
 		//	title bar
 		$html .= '<div draggable=\'true\' ondragstart=\'ayoola.dragNDrop.dragMyParent(event);\' style="cursor: move; cursor: -moz-grab;cursor: -webkit-grab;" title="' . $title . '" class="title_bar pc_page_object_specific_item" data-parameter_name="parent">';
-
 
 		//	Delete button
 		$html .= '<span class="title_button close_button"  name="" href="javascript:;" class="" title="Delete this object" onclick="this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode );"> x </span>';
@@ -1564,18 +1494,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		$html .= '<div style="border: #ccc 1px solid;padding:0.5em;padding:0 0.5em 0 0.5em;' . $openAdvancedOption . '" title="" class="advanced_options pc_page_object_specific_item " data-parameter_name="parent">';
 
-
-
-
 			$form = new Ayoola_Form( array( 'name' => $advancedName, 'data-parameter_name' => 'advanced_parameters', 'class' => '' ) );
 			parse_str( @$object['advanced_parameters'], $advanceParameters );
 
-
-
-
 			self::sanitizeParameters( $object );
 			$object = array_merge( $advanceParameters, $object );
-
 
 			//	check it here first so that it can set the widget options
 			if( @$object['savedwidget_id'] )
@@ -1591,7 +1514,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			}
             @$object['pagewidget_id'] = @$object['pagewidget_id_switch'] ? : @$object['pagewidget_id'];
 
-        //    var_export( $object['refresh_page_widget'] );
             if( 
                 @$object['refresh_page_widget'] !== false 
                 && @$object['pagewidget_id'] 
@@ -1602,7 +1524,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				{
 					if( ! empty( $_REQUEST['rebuild_widget_box'] ) && ( @$object['pagewidget_id_switch'] || @$object['pagewidget_id_version'] ) )
 					{
-
 
                         //  Set version in history
 
@@ -1615,12 +1536,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 						$object['widget_options'][] = 'savings';
 						$object['pagewidget_id'] = $pageWidgetToRestore['pagewidget_id'];
 
-
-
 						//	avoid double saves
 						unset( $object['save_widget_as'] );
                         parse_str( @$object['advanced_parameters'], $advanceParameters );
-
 
 					}
 					elseif( empty( $_REQUEST['rebuild_widget_box'] ) && @$object['pagewidget_id'] )
@@ -1641,15 +1559,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					}
 				}
             }
-        //    var_export( $object['class_name'] );
+
             $innerSettingsContent = null;
             $getHTMLForLayoutEditor = 'getHTMLForLayoutEditor';
             if( method_exists( $object['class_name'], $getHTMLForLayoutEditor ) )
             {
                 $innerSettingsContent = $object['class_name']::$getHTMLForLayoutEditor( $object );
             }
-        //    var_export( $object['class_name'] );
-       
 
 			$availableOptions = ( static::$_widgetOptions ? : array() ) + array(
 				'wrappers' => 'Wrappers',
@@ -1671,8 +1587,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	avoid double saves
 					$widgetName = $object['save_widget_as'];
 					unset( $object['save_widget_as'] );
-
-
 
 					$whatToSave = array( 'widget_name' =>  $widgetName, 'class_name' =>  $object['class_name'], 'parameters' => $object, );
 					if( ! Ayoola_Object_SavedWidget::getInstance()->select( null,  array( 'widget_name' =>  $widgetName, 'class_name' =>  $object['class_name'] ) ) )
@@ -1697,7 +1611,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$filter = new Ayoola_Filter_SelectListArray( 'pagewidget_id', 'widget_name');
 				$pageWidgets = $filter->filter( $pageWidgets );
 				$pageWidgets ? $fieldset->addElement( array( 'name' => 'pagewidget_id_switch', 'label' => ' ', 'type' => 'Select', 'value' => null ), array( '' => 'Restore Page Widgets' ) + $pageWidgets + array( '9x9' => 'New Page Widgets' ) ) : null;
-
 
                 $form->addFieldset( $fieldset );
 
@@ -1736,9 +1649,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$fieldset->addElement( array( 'name' => 'x', 'type' => 'html', ), array( 'html' => $object['class_name']::getHTMLForLayoutEditorAdvancedSettings( $object ) ) );
 				$form->addFieldset( $fieldset );
 
-
 			}
-
 
 			$form->wrapForm = false;
 
@@ -1824,10 +1735,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			if( $object['class_name'] == 'Ayoola_Page_Editor_Text' || $object['class_name'] == 'Ayoola_Page_Editor_Image' )
 			{
 
-
 			$jsChangeWrapper = '
 				var a = ayoola.div.getParent( { element: this, name: \'over_all_object_container\', counter: 10 } );
-
 
 				var b = this.options[this.selectedIndex].getAttribute( \'data-wrapper_prefix\' ) || \'\';
 				var c = this.options[this.selectedIndex].getAttribute( \'data-wrapper_suffix\' ) || \'\';
@@ -1849,9 +1758,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	Prevent infinite loop
 					if( f > 9 ){ break; }
 				}
-
-
-
 
 				';
 			}
@@ -1982,7 +1888,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 		//	Help
 
-
 		//	Export
         $html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var b = this.parentNode.parentNode.getElementsByClassName( \'import_export_content\' ); b = b[0];  if( b.style.display == \'none\' ){  b.value = this.parentNode.parentNode.outerHTML; b.style.display = \'block\'; b.focuc();  var c = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' )[0]; c.style.display = \'none\'; this.innerHTML = \'&#8635; Import\' } else {  b.style.display = \'none\'; b.value ? ( this.parentNode.parentNode.outerHTML = b.value ) : null; this.innerHTML = \'&#8635;\'; } pc_makeInnerSettingsAutoRefresh(); "><i class="fa fa-code"></i></a>';
         
@@ -1996,7 +1901,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$html .= '<div style="clear:both;"></div>';
 		$html .= '</div>';	//	 status bar
 		$html .= '<div style="clear:both;"></div>';
-
 
 		$html .= "</div>";
 
@@ -2056,7 +1960,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		self::unsetParametersThatMayBeDuplicated( $this->_parameter );
 	}
 
-
     /**
 	 *
 	 *
@@ -2086,7 +1989,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 	//	if( isset( $this->_parameter['parameter_suffix'] ) )
 		{
-
 
 		}
 		if( isset( $this->_parameter['parameter_suffix'] ) && array_key_exists( $key . $this->_parameter['parameter_suffix'], $this->_parameter ) )
@@ -2119,8 +2021,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     public function setViewOption( $parameter )
 	{
 		$this->_viewOption = $parameter ;
-
-
 
 		//	compatibility.
 		$this->_parameter['option'] = $parameter;
@@ -2194,7 +2094,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $this->_viewContentText = null;
                 $this->_viewContent = new Ayoola_Xml();
 
-
                 if( $this->wrapViewContent && ! $this->getParameter( 'no_view_content_wrap' ) )
                 {
                     $element = $this->getParameter( 'object_container_element' ) ? : static::$_viewContentElementContainer;
@@ -2213,7 +2112,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                     $documentElement = $this->_viewContent->createElement( $element );
                     $documentElement->setAttribute( 'data-object-name', $this->getObjectName() );
                     $documentElement->setAttribute( 'name', $this->getObjectName() . '_container' );
-
 
                     $this->documentElementOTag = '<div>
                                                 <' . $element . ' data-object-name="' . $this->getObjectName() . '" name="' . $this->getObjectName() . '_container' . '">';
@@ -2344,7 +2242,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			return false;
 		}
 
-
 		return $objectName::viewInLine( $parameters );
 	}
 
@@ -2400,8 +2297,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                         $this->_objectData = $this->_objectTemplateValues;
                     }
                 }
-            //    var_export( $this->_identifierData );
-            //    var_export( $this->getDbData() );
+
 				$dataToSend = json_encode( $this->_objectData );
 
 				//	json data was being truncated
@@ -2429,7 +2325,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$this->_objectData = array_intersect_key( $this->_objectData, $whitelist );
 				}
 				$dataToSend = json_encode( $this->_objectData );
-
 
 				echo $dataToSend;
 				//	Log early before we exit
@@ -2494,7 +2389,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					}
 					else
 					{
-
 
 					}
 				}
@@ -2563,7 +2457,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	like username
 					#	Don't display user infor for signed out user
 
-
                     //  only show widget if some parameters are true
                     if( $this->getParameter( 'required_template_variables' ) )
                     {
@@ -2587,8 +2480,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$template = $this->getParameter( 'markup_template_prepend' ) . $template;
 					$template = $template . $this->getParameter( 'markup_template_append' );
                     $template = Ayoola_Abstract_Playable::replacePlaceholders( $template, $this->_objectTemplateValues + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
-                    
-        
 
 					//	fix case where ajax auto-loading didn't fix url prefix in posts
 					$template = Ayoola_Page_Editor_Text::fixUrlPrefix( $template, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
@@ -2607,11 +2498,20 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 				}
                 //	Define content to clear from the screen
-                $contentToClear = $this->getParameter( 'content_to_clear' ) . ( isset( $this->_parameter['content_to_clear_internal'] ) ? $this->_parameter['content_to_clear_internal'] : "" );
-                if( $contentToClear )
+                if( $contentToClear = $this->getParameter( 'content_to_clear' ) )
                 {
-                    $search = array_map( 'trim', explode( "\n", $contentToClear ) );
-                    $html = str_replace( $search, '', $html );
+                    if( ! is_array( $contentToClear ) )
+                    $contentToClear = array_map( 'trim', explode( "\n", $contentToClear ) );
+
+                    $html = str_ireplace( $contentToClear, '', $html );
+
+                }
+                if( $contentToClear = $this->_parameter['content_to_clear_internal'] )
+                {
+                    if( ! is_array( $contentToClear ) )
+                    $contentToClear = array_map( 'trim', explode( "\n", $contentToClear ) );
+
+                    $html = str_ireplace( $contentToClear, '', $html );
 
                 }
                 try
