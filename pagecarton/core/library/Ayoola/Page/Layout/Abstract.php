@@ -1012,15 +1012,15 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/]*)\.html([\'"])?#s', '=$1/$2$3', $content );
         $content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/=]*\.default_file)([\'"])?#s', '=$1PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$2$3', $content );
         
+        //  widget variables in template files
+		$content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', '$1{{{$3}}}$5', $content );
+    //    var_export( $content );
+    //    exit();
 
         //  static text in attribute values {}
-
-    //    preg_match_all( '#(<.*=[\s]*["\'].*%7B)(.*)(%7D.*["\'].*>)#', $content, $xxx );
-    //    var_export( $xxx );
-     //   exit();
-		$content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B)([^<>]*)(%7D)([^<>]*["\'][^<>]*>)#i', '$1{$3}$5', $content );
-    //    var_export( $content );
-//    exit();
+    //    preg_match_all( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B)([^<>]*)(%7D)([^<>]*["\'][^<>]*>)#', $content, $xxx );
+        $content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B)([^<>]*)(%7D)([^<>]*["\'][^<>]*>)#i', '$1{$3}$5', $content );
+        
 		
 		//	workaround for the bug causing space to be replaced with 	%5Cs in preg_replace $placeholder
 		$content = str_ireplace( self::getPlaceholders(), self::getPlaceholderValues(), $content );

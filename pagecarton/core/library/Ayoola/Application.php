@@ -1301,10 +1301,18 @@ class Ayoola_Application
                     $variant = filemtime( $pageFile );
 
                     //	auto-saved file
-                    $pagePaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/include';
-                    $pagePaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/template';
+                    $pagePaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/auto/include';
+                    $pagePaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/auto/template';
                     $PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
                     $PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
+
+                    if( ! empty( $PAGE_INCLUDE_FILE ) && filemtime( $PAGE_INCLUDE_FILE ) < $variant )
+                    {
+                        unlink( $PAGE_INCLUDE_FILE );
+                        unlink( $PAGE_TEMPLATE_FILE );
+                        $PAGE_INCLUDE_FILE = false;
+                        $PAGE_TEMPLATE_FILE = false;
+                    }
 
                     if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
                     {
@@ -1315,7 +1323,7 @@ class Ayoola_Application
                         //  and blank pages
                         //    if( ! empty( $options['auto_init_theme_page'] ) )
                         {
-                            $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_page_variant' => $variant ) );
+                            $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_page_variant' => 'auto' ) );
                             $page->refresh( $uri, $themeName );
                         }
                     }
@@ -1346,14 +1354,16 @@ class Ayoola_Application
 			{
 				//	not found
 				//	use content of default theme
-				if( $previewTheme() )
+                //  finally, we want to be autogenerating theme pages now
+                if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
+                {
+                    $noRestriction = true;
+                    break;
+                }
+			//	if( $previewTheme() )
 				{
-					$noRestriction = true;
-					break;
-				}
-				else
-				{
-
+			//		$noRestriction = true;
+			//		break;
 				}
 
 				// intended copy next
@@ -1376,12 +1386,6 @@ class Ayoola_Application
 						! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE
 					)
 					{
-                        //  finally, we want to be autogenerating theme pages now
-                        $noRestriction = true;
-                        if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
-                        {
-                            break;
-                        }
                         return false;
 					}
 				}

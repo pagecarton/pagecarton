@@ -140,6 +140,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		{
 			@$content = $parameters['codes'] ? : $parameters['preserved_content'];
         }
+
+        // magic static texts
         preg_match_all( '|\{-(.*)-\}|', $content, $matches );
         #   '{-Lorem Ipsum dolor-}'
 
@@ -150,22 +152,27 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         {
             $previousData = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
         }
-
-        if( $matches[0] )
+        foreach( $matches[0] as $count => $each )
         {
-            foreach( $matches[0] as $count => $each )
-            {
 
-                $previousData['dummy_title'][] = 'Replaceable Text ' . ( $count + 1 );
-                $previousData['dummy_search'][] = $each;
-                $previousData['dummy_replace'][] = trim( $each, '{-}' );
-            }
-
-                Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
-
+            $previousData['dummy_title'][] = 'Replaceable Text ' . ( $count + 1 );
+            $previousData['dummy_search'][] = $each;
+            $previousData['dummy_replace'][] = trim( $each, '{-}' );
         }
+        Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
+
+        
         //  to be executed within the widget class
         $content = str_ireplace( array( 'i>&nbsp;</i', 'span>&nbsp;</span', ), array( 'i></i', 'span></span', ), $content );
+
+        // include other HTML here
+    //    var_export( $content );
+        preg_match_all( '|<include.*(/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*).*>|i', $content, $matches );        
+        foreach( $matches[0] as $count => $each )
+        {
+            $parameters['includes'][$matches[1][$count]] = $each;
+        }
+
         $parameters['content'] = $content;
     }
 	
@@ -178,7 +185,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     public function init()
     {
 		//	codes first because it wont be there if they didnt opt to enter codes
-
         if( ! $content = $this->getParameter( 'content' ) )
         {
             $content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
@@ -187,6 +193,34 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                 @$content = $this->getParameter( 'codes' ) ? : $this->getParameter( 'preserved_content' );
             }
         }
+
+        
+        //  Bring in included files
+        if( $this->getParameter( 'includes' ) )
+        {
+            //  preg_match_all( '|<include.*(/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*).*>|i', $content, $matches );
+
+        //    var_export( $this->getParameter( 'includes' ) );
+            foreach( $this->getParameter( 'includes' ) as $file => $placeholder )
+            {
+
+                $path = Ayoola_Doc::getDocumentsDirectory() . $file . '.html';
+                if( ! is_file( $path ) )
+                {
+                    continue;
+                }
+                $html = file_get_contents( $path );
+
+                $content = str_ireplace( $placeholder, $html, $content );
+            }
+
+        //    var_export( $this->getParameter( 'includes' ) );
+
+    
+        }
+
+
+        //  text update
         $textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
 		if( empty( $textUpdatesSettings['dummy_search'] ) )
 		{
@@ -198,17 +232,17 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
         $count = 0;
 
+
         //  embed widget
         while( stripos( $content, '</widget>' )  && $count < 3  )
         {
-            preg_match_all( '#<widget([\s]*parameters=("?\'?)({[^>]*})("?\'?)[\s]*)?>(((?!</widget>).)*)</widget>#isU', $content, $widgets );
+            preg_match_all( '#<widget([\s]*parameters=("?\'?)({[^>]*})("?\'?)[\s]*)?>(((?!\</widget\>).)*)</widget>#isU', $content, $widgets );
             $count++;
 
             if( empty( $widgets[0] ) )
             {
 
                 preg_match_all( '|<widget([\s]parameters=("?\'?)({[^>]*})("?\'?)[\s]?)>(.*)</widget>|isU', $content, $widgets );
-
             }
 
             //  avoid infinite loop
@@ -218,6 +252,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                 $error = null;
                 $widgetContent = $widgets[5][$i];
                 $pText = $widgets[3][$i];
+
                 if( empty( $pText ) )
                 {
                     preg_match( '|<script[^><]*>[\s]*({.*})[\s]*</script>|isU', $widgetContent, $pSection );
@@ -227,6 +262,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                     }
                 }
                 $parameters = json_decode( $pText, true ) ? : array();
+
                 if( empty( $pText ) )
                 {
                     $error = '<div class="badnews">Widget Parameters Not Properly Set</div>';
@@ -235,13 +271,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                 {
                     $error = '<div class="badnews">Widget Parameters Not Valid JSON Format: ' . $pText . '</div>';
                 }
-                elseif( ! $class = $parameters['class'] )
+                elseif( ! $className = $parameters['class'] )
                 {
                     $error = '<div class="badnews">Widget Class Not Set In Parameters</div>';
                 }
-                elseif( ! Ayoola_Loader::loadClass( $class ) )
+                elseif( ! Ayoola_Loader::loadClass( $className ) )
                 {
-                    $error = '<div class="badnews">Widget Class "' . $class . '" Not Available On This Site</div>';
+                    $error = '<div class="badnews">Widget Class "' . $className . '" Not Available On This Site</div>';
 
                 }
 
@@ -256,26 +292,28 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                 {
 
                     preg_match_all( '|(<widget-inner[^>]*>)(.*)(</widget-inner[^>]*>)|isU', $widgetContent, $innerWidgetBefore );
+
                     for( $j = 0; $j < count( $innerWidgetBefore[0] ); $j++ )
                     {
                         //  hide inner widget so it doesn't interfere
                         $search = $innerWidgetBefore[0][$j];
                         $replace = $innerWidgetBefore[1][$j] . $j . $innerWidgetBefore[3][$j];
                         $widgetContent = str_ireplace( $search, $replace, $widgetContent );
+
                     }        
 
                 }
                 $parameters = is_array( $parameters ) ? $parameters : array();
                 $parameters = $parameters + array( 
                     'markup_template' => $widgetContent, 
-                    'markup_template_namespace' => 'xx123xxx', 
+                    'markup_template_namespace' => 'xx1233xxx', 
                     'markup_template_mode' => __CLASS__, 
                     'no_init' => true, 
                     ) 
                     + $this->getParameter();  
                 
                 self::unsetParametersThatMayBeDuplicated( $parameters );
-                $class = new $class( $parameters );
+                $class = new $className( $parameters );
                 $class->setParameter( $parameters );
                 $class->init();
                 $returnedContent = $class->view();
@@ -294,8 +332,19 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                         $returnedContent = str_ireplace( $search, $replace, $returnedContent );
                     } 
 
+                    if( $className == 'Application_Global' )
+                    {
+
+                    }
+
                     $returnedContent = str_ireplace( array( '<widget-inner', '</widget-inner', ), array( '<widget', '</widget', ), $returnedContent );
        
+                }
+                if( stripos( $className, 'Article_ShowAll' ) !== false )
+                {
+                //    var_export( $widgetContent  );
+                //    var_export( $returnedContent  );
+
                 }
 
                 //  final replacement

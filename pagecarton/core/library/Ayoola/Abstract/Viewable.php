@@ -448,65 +448,76 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      *
      *
      */
+	public function restrictUrl()
+	{
+    //    return false;
+        if( $this->getParameter( 'url_blacklist' ) || $this->getParameter( 'url_whitelist' ) )
+        {
+            $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
+            switch( $currentUrl )
+            {
+                case '/tools/classplayer':
+                case '/object':
+                case '/pc-admin':
+                case '/widgets':
+                case '/widget':
+                    
+                    //	Do nothing.
+                    //	 had to go through this route to process for 0.00
+
+                    if( @$_REQUEST['url'] && @$_REQUEST['name'] || ( @$_REQUEST['rebuild_widget'] ) )
+                    {
+                        $currentUrl = $_REQUEST['url'];
+                        $editorMode = true;
+                        break;
+                    }
+
+                break;
+                default:
+
+                break;
+            }
+        //    var_export( $this->getParameter() );
+
+        }
+        if( $this->getParameter( 'url_blacklist' ) )
+        {
+            $list = $this->getParameter( 'url_blacklist' );
+            $list = array_map( 'trim', explode( ',', $list ) );
+            if( in_array( $currentUrl, $list ) || in_array( Ayoola_Application::getUrlPrefix() . $currentUrl, $list ) )
+            {
+            //    var_export( $this->_parameter['markup_template'] );
+                return false;
+            }
+        }
+        elseif( $this->getParameter( 'url_whitelist' ) )
+        {
+            $list = $this->getParameter( 'url_whitelist' );
+            $list = array_map( 'trim', explode( ',', $list ) );
+            
+            if( ! in_array( $currentUrl, $list ) && ! in_array( Ayoola_Application::getUrlPrefix() . $currentUrl, $list ) )
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     *
+     *
+     */
 	protected function initOnce()
 	{
 
 		if( ! $this->initiated && ! $this->getParameter( 'no_init' ) ) //	compatibility
 		{
-
-
-
-
-
 			$this->initiated = true;
 
-			if( $this->getParameter( 'url_blacklist' ) || $this->getParameter( 'url_whitelist' ) )
-			{
-				$currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
-				switch( $currentUrl )
-				{
-					case '/tools/classplayer':
-					case '/object':
-					case '/pc-admin':
-					case '/widgets':
-					case '/widget':
-			//		case true:
-						//	Do nothing.
-						//	 had to go through this route to process for 0.00
-
-						if( @$_REQUEST['url'] && @$_REQUEST['name'] || ( @$_REQUEST['rebuild_widget'] ) )
-						{
-							$currentUrl = $_REQUEST['url'];
-							$editorMode = true;
-							break;
-						}
-
-					break;
-					default:
-
-					break;
-				}
-			}
-			if( $this->getParameter( 'url_blacklist' ) )
-			{
-				$list = $this->getParameter( 'url_blacklist' );
-				$list = array_map( 'trim', explode( ',', $list ) );
-
-				if( in_array( $currentUrl, $list ) )
-				{
-					return false;
-				}
-			}
-			elseif( $this->getParameter( 'url_whitelist' ) )
-			{
-				$list = $this->getParameter( 'url_whitelist' );
-				$list = array_map( 'trim', explode( ',', $list ) );
-				if( ! in_array( $currentUrl, $list ) )
-				{
-					return false;
-				}
-			}
-
+            if( ! $this->restrictUrl() )
+            {
+                return false;
+            }
 			if( $this->init() )
 			{
 
@@ -2346,6 +2357,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     public function view()
 	{
         if( ! $this->deviceIsAllowed() )
+        {
+            return false;
+        }
+
+        if( ! $this->restrictUrl() )
         {
             return false;
         }
