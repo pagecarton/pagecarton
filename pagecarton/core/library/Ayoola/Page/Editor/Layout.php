@@ -450,7 +450,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		}
 		$pageThemeFile = '/layout/' . $theme . '' . $pageThemeFileUrl . '.html';
 
-		$defaultPageThemeFile = '/layout/' . $theme . '/default' . '.html';
+		$defaultPageThemeFile = '/layout/' . $theme . '/default-layout' . '.html';
 
 		$whereToGetPlaceholders = $content['template'];
 
