@@ -113,7 +113,6 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		{
 			return $replacement;
         }
-        $replacement = ! is_scalar( $replacement ) ? null : html_entity_decode( $replacement );
         if( $key === 'article_content' )
         {
             $replacement = self::cleanHTML( $replacement );

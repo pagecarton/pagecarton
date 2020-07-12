@@ -478,8 +478,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      * 
      */
 	public static function loadPostData( $data )
-    {
- 		
+    {		
 		if( is_array( $data ) )
 		{
 			if( ! empty( $data['article_url'] ) )
@@ -501,7 +500,24 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 
 		//	now we using JSON for this
-		if( ! $jsonData = json_decode( file_get_contents( $data ), true ) )
+        if( ! $jsonData = json_decode( file_get_contents( $data ), true ) )
+        {
+            $ex = explode( 'module_files/articles', $data );
+            $ex = array_pop( $ex );
+            $backupFolder = self::getBackupFolder() . $ex;  
+            if( $files = Ayoola_Doc::getFilesRecursive( $backupFolder ) )
+            {
+                asort( $files );
+                $file = array_pop( $files );
+                if( ! $jsonData = json_decode( file_get_contents( $file ), true ) )
+                {
+
+                }
+            }
+        }
+     //   var_export( $jsonData );
+        
+        if( empty( $jsonData ) )
 		{
 			//	compatibility
 
@@ -629,7 +645,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$data = self::loadPostData( $filename );
  		}
 
-		if( ! $data )
+		if( ! $data || ! is_array( $data ) )
 		{
 			return false;
 		}
