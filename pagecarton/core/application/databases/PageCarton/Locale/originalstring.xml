@@ -1809,7 +1809,7 @@
       <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Home]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Home]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/account\/signin&quot;,&quot;\/404&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/pc-admin&quot;,&quot;\/&quot;,&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/Application_User_Creator&quot;,&quot;\/widgets\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/account\/signin&quot;,&quot;\/404&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/pc-admin&quot;,&quot;\/&quot;,&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/Application_User_Creator&quot;,&quot;\/widgets\/&quot;,&quot;\/blog&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1576200717-0-177]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1576200717]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1576233627]]></TABLE_FIELD>
@@ -1862,7 +1862,7 @@
       <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Home Page]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Home Page]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/account\/signin&quot;,&quot;\/404&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/Application_User_Creator&quot;,&quot;\/widgets\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/account\/signin&quot;,&quot;\/404&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/Application_User_Creator&quot;,&quot;\/widgets\/&quot;,&quot;\/blog&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1576232051-0-182]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1576232051]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1576233625]]></TABLE_FIELD>

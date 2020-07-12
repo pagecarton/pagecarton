@@ -77,7 +77,94 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      * @var string
      */
 	protected static $_newPostUrl;	
-	
+
+    /**
+     *
+     * @var array
+     */
+	public static $_parameterDefinition = array(
+        'add_a_new_post' => array( 
+            'type' => 'int',
+            'desc' => 'Defines number of placeholder datasets to put in the widget template',
+        ),
+        'allow_dynamic_category_selection' => array( 
+            'type' => 'bool',
+            'desc' => 'Set whether widget will respond category set via query strings',
+        ),
+        'article_types' => array( 
+            'type' => 'string',
+            'desc' => 'Defines post type to display',
+        ),
+        'true_post_type' => array( 
+            'type' => 'string',
+            'desc' => 'Defines PageCarton original post type to display e.g. article, product, video, download, link etc ',
+        ),
+        'cache_post_list' => array( 
+            'type' => 'bool',
+            'desc' => 'Set whether to cache the post display result',
+        ),
+        'cache_timeout' => array( 
+            'type' => 'int',
+            'desc' => 'Set time in seconds when post cache will expire',
+        ),
+        'category' => array( 
+            'type' => 'string',
+            'desc' => 'Defines category of post to display',
+        ),
+        'cover_photo_height' => array( 
+            'type' => 'int',
+            'desc' => 'Defines height for cover photo auto-cropping',
+        ),
+        'cover_photo_width' => array( 
+            'type' => 'int',
+            'desc' => 'Defines width for cover photo auto-cropping',
+        ),
+        'default_cover_photo' => array( 
+            'type' => 'string',
+            'desc' => 'Defines URL to use for default cover photo if no one is set for the post',
+        ),
+        'inverse_order' => array( 
+            'type' => 'bool',
+            'desc' => 'Inverse the order of display of the post',
+        ),
+        'length_of_description' => array( 
+            'type' => 'int',
+            'desc' => 'Truncates the post description to this length in display',
+        ),
+        'length_of_title' => array( 
+            'type' => 'int',
+            'desc' => 'Truncates the post title to this length in display',
+        ),
+        'list_page_number_offset' => array( 
+            'type' => 'int',
+            'desc' => 'Set the batch of data to show in pagination - default is 0, could set to any integer value',
+        ),
+        'no_of_post_to_show' => array( 
+            'type' => 'int',
+            'desc' => 'How many posts to show per batch',
+        ),
+        'order_by' => array( 
+            'type' => 'string',
+            'desc' => 'Defines the key/variable to use to sort the post data. Default is "article_creation_date"',
+        ),
+        'post_type_custom_fields' => array( 
+            'type' => 'array',
+            'desc' => 'Set the custom form fields to use when creating and editing post',
+        ),
+        'show_post_without_this_key' => array( 
+            'type' => 'string',
+            'desc' => 'Set a key or variable which when present in post info means the post should be ignored when displaying posts',
+        ),
+        'skip_articles_without_this_key' => array( 
+            'type' => 'string',
+            'desc' => 'Set a key or variable which when absent means the post should be ignored when displaying posts',
+        ),
+        'trending' => array( 
+            'type' => 'int',
+            'desc' => 'Display only post which has had most engagements recently. Sets the number of recent engagements to consider',
+        ),
+    );
+
     /**
      * 
      * 

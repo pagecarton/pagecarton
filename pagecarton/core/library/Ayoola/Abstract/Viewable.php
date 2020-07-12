@@ -232,6 +232,57 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	protected static $_wrapperOptions;
 
     /**
+     *
+     * @var array
+     */
+	public static $_parameterDefinition = array(
+        'content_to_clear' => array( 
+            'type' => 'array',
+            'desc' => 'Defines content to clear from the screen before outputing the widget',
+        ),
+        'device_blacklist' => array( 
+            'type' => 'array',
+            'desc' => 'Defines device types on which to not display widget',
+        ),
+        'device_whitelist' => array( 
+            'type' => 'array',
+            'desc' => 'Defines device types to display widget exclusively',
+        ),
+        'fake_values' => array( 
+            'type' => 'array',
+            'desc' => 'Pass some arbitrary values to a form',
+        ),
+        'markup_template' => array( 
+            'type' => 'string',
+            'desc' => 'Define the template to use to output widget',
+        ),
+        'required_template_variables' => array( 
+            'type' => 'array',
+            'desc' => 'Variables that must be present and has a "true" value for widget to display',
+        ),
+        'object_access_level' => array( 
+            'type' => 'array',
+            'desc' => 'Define user groups that can view this widget',
+        ),
+        'template_sort_column' => array( 
+            'type' => 'string',
+            'desc' => 'Define column to use to sort data of multidimensional arrays in supported widget',
+        ),
+        'url_blacklist' => array( 
+            'type' => 'array',
+            'desc' => 'Define which pages to hide widget',
+        ),
+        'url_whitelist' => array( 
+            'type' => 'array',
+            'desc' => 'Define which pages to show the widget exclusively',
+        ),
+        'wrapper_name' => array( 
+            'type' => 'string',
+            'desc' => 'Set wrapper name to use for widget',
+        ),
+    );
+
+    /**
      * My User Agent Name
      *
      * @var string

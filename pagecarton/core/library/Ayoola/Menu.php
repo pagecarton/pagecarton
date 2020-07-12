@@ -76,6 +76,17 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 	protected $_sortColumn = 'menu_name';
 
     /**
+     *
+     * @var array
+     */
+	public static $_parameterDefinition = array(
+        'menu_name' => array( 
+            'type' => 'string',
+            'desc' => 'Defines the menu to display. Can only contain alphanumeric characters',
+        ),
+    );
+
+    /**
      * The Menu Options
      *
      * @var array

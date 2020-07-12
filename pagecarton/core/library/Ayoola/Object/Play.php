@@ -61,13 +61,26 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 					$identifier = array( 'class_name' => $_REQUEST['pc_module_url_values'][0] );
                 //    var_export( $identifier );
 				}
-				elseif( $this->getParameter( 'list_all_widgets' ) || @$_REQUEST['list_all_widgets'] )
+				elseif( ($this->getParameter( 'list_all_widgets' ) || @$_REQUEST['list_all_widgets']) && self::hasPriviledge() )
 				{
+                    $this->setViewContent( '<br><h2>PageCarton Widgets</h2><br>' );
+
                     foreach( Ayoola_Object_Embed::getWidgets( false ) as $class ) 
                     {
-                        $this->setViewContent( '<div>' . $class . ' - <a href="?object_name=' . $class . '">content</a>  - <a href="?object_name=' . $class . '">code</a> </div>' );
+                        $this->setViewContent( '<li>' . $class . ' - <a href="?object_name=' . $class . '">content</a>  - <a href="?widget_code=' . $class . '">code</a> </li>' );
                     }
                     return false;
+				}
+				elseif( (@$_REQUEST['widget_code']) && self::hasPriviledge() )
+				{
+                    if( Ayoola_Loader::loadClass( $_REQUEST['widget_code'] ) )
+                    {
+                        $filter   = new Ayoola_Filter_ClassToFilename();
+                        $filename = $filter->filter( $_REQUEST['widget_code'] );
+                        $this->setViewContent( '<br><h2>PageCarton Widget Class Preview </h2><br>' );
+                        $this->setViewContent( highlight_file( $filename, true ) );
+                    }
+                    return true;
 				}
 				elseif( $widgetId = $this->getParameter( 'widget_id' ) ? : @$_REQUEST['widget_id'] )
 				{
