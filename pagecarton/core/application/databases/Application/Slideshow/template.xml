@@ -216,8 +216,8 @@
       <TABLE_FIELD FIELD_KEY="max_group_no"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="javascript_files"><![CDATA[[&quot;\/public\/2014\/08\/31\/jquery_nivo_slider_pack_js.js&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="javascript_code"><![CDATA[		
-			
 			$(document).ready(function() {
+				if( $('#slider{{{template_instance_count}}}').nivoSlider )
 				$('#slider{{{template_instance_count}}}').nivoSlider({
 				  prevText: '',
 				  nextText: '',

@@ -42,7 +42,6 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 
 			
 			//	Import mode
-	//		if( @$values['upload'] )
 			if( @$values['theme_url'] || Ayoola_Loader::checkFile( $this->getParameter( 'path' ) ) )
 			{ 				
 				//	let's use url so that it will be possible to put the theme on the server via filemanager
@@ -128,13 +127,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					{
 						foreach( $baseDirs as $baseName => $baseNameDir )
 						{
- 							$source = dirname( $baseNameDir );
-/*						//	$destination = dirname( $filename ) . '/test/' . basename( $source );
-							$destination = dirname( $this->getMyFilename() );
-							Ayoola_Doc::createDirectory( $destination );
-							Ayoola_Doc::recursiveCopy( $source, $destination );
-							
- */							  
+ 							$source = dirname( $baseNameDir );							  
 							$export = new Ayoola_Phar_Data( $tempDestination . 'temp.tar' );
 							$export->startBuffering();
 							$export->buildFromDirectory( $source );
@@ -149,9 +142,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 							catch( Exception $e )
 							{
 								null;
-							}
-
-							
+							}							
 							//	Do only the first one
 							break;
 						}
@@ -218,13 +209,6 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				{
 
 				}
-/* 				//	Update Screenshot
-				$screenshot = Ayoola_Doc::getDocumentsDirectory() . $values['screenshot'];
-				if( is_file( $screenshot ) )
-				{
-					$export['screenshot.jpg'] = file_get_contents( $screenshot );
-				}
- */
 				//	This normally would only work with an identifier data
 				$this->setFilename( $values );
 				
@@ -242,7 +226,9 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 						switch( $ext )
 						{
 							case 'jpg':
-							case 'jpeg':
+                            case 'jpeg':
+                                //  automatically use any available image in theme as screenshot
+                                //  if none is available
 								copy( $each, $screenshot );
 								break 2;
 							break;
@@ -260,8 +246,6 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 
 				
 				$this->setViewContent(  '' . self::__( '<p class="goodnews">New theme saved successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a></p>' ) . '', true  );
-
-				
 				
 				//	Clean up temp dir
 				Ayoola_Doc::deleteDirectoryPlusContent( $tempDestination );
@@ -294,7 +278,6 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 		//	if(  )	
 			if( ! empty( $values['plain_text'] ) && ! $this->insertDb( $values ) )  
 			{ 
-
 				return false;
 			}
 			//	This normally would only work with an identifier data

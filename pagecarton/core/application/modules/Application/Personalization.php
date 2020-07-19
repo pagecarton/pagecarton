@@ -49,15 +49,8 @@ class Application_Personalization extends Ayoola_Abstract_Table
      */
 	protected static $_stages = array
 	(
-	//	array( 'Ayoola_Access_Logout' => null ),
-	//	array( 'Ayoola_Access_AccountRequired' => array( 'legend' => 'Sign in or sign up', 'parameters' => array( 'ignore_user_check' => true  ) ) ),
-	//	array( 'Ayoola_Access_UpgradeSelf' => null ),
 		array( 'Application_Settings_Editor' => array( 'legend' => '', 'parameters' => array( 'settingsname_name' => 'SiteInfo' ) ) ),
 		array( 'Application_User_AdminCreator' => array( 'legend' => 'Create the first Admin Account', 'parameters' => null ) ),
-	//	array( 'Application_Settings_Editor' => array( 'legend' => '', 'parameters' => array( 'settingsname_name' => 'Page' ) ) ),
-	//	array( 'Application_Settings_Editor' => array( 'legend' => 'Your website contact information', 'parameters' => array( 'settingsname_name' => 'CompanyInformation' ) ) ),
-//		array( 'Application_Settings_Editor' => array( 'legend' => 'Your website contact information', 'parameters' => array( 'settingsname_name' => 'SocialMedia' ) ) ),
-	//	array( 'Ayoola_Page_Editor_Sanitize' => array( 'legend' => 'Build your pages with the selected layout template.', 'parameters' => array( 'workaround' ) ) ),
 	);
 	
     /**

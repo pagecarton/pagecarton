@@ -48,44 +48,49 @@ class Application_Article_Publisher extends Application_Article_Creator
 			}
             $html = null;
             $done = true;
+
             //  Output demo content to screen
             $defaultLayout = Application_Settings_CompanyInfo::getSettings( 'Page', 'default_layout' );
-            $dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'template';
-            $path = Ayoola_Loader::checkFile( $dir );
+            $dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'theme/template';
+            if( ! $path = Ayoola_Loader::checkFile( $dir ) )
+            {
+                $dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'theme/templateauto';
+                if( ! $path = Ayoola_Loader::checkFile( $dir ) )
+                {
+                    //  give up
+                }    
+            }
             $dir = dirname( $path );
             $basename = array( 'data_json_content', 'content.json' );
             $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir, array( 'whitelist_basename' => $basename ) ) );
             $postTypes = array();
-
-            if( time() - filemtime( $path ) < 9000 && $defaultLayout && ! $files )
+        //    var_export( $files );
+        //    var_export( $path );
+        //    var_export( self::getObjectStorage( 'sanitized' )->retrieve() );
+            if( ! self::getObjectStorage( 'sanitized' )->retrieve() && time() - filemtime( $path ) < 9000 && $defaultLayout && ! $files )
             {
+                self::getObjectStorage( 'sanitized' )->store( true );
+            //    var_export( $defaultLayout );
+
                 //  compatibiity
                 $sanitize = new Ayoola_Page_Editor_Sanitize();
-            //    var_export( $defaultLayout );
-                
                 $sanitize->sanitize( $defaultLayout );
-            //    exit();
             }
-        //    self::v( $files );
             foreach( $files as $each )
             {
-            //    $extension = array_pop( explode( "/", strtolower( $each ) ) );
                 $extension = explode( "/", strtolower( $each ) );
                 $extension = array_pop( $extension );
                 if( ! in_array( $extension, $basename ) )
                 {
                     continue;
                 }
-       //         self::v( $each );
                 $content = json_decode( file_get_contents( $each ), true ) ? : array();
-          //      self::v( $content );
                 foreach( $content as $section )
                 {
                     foreach( $section as $widget )
                     {
                         if( Ayoola_Loader::loadClass( $widget['class'] ) )
                         {
-           //     self::v( $widget['parameters'] );
                             $class = $widget['class'];
                             switch( $widget['class'] )
                             {
@@ -106,9 +111,7 @@ class Application_Article_Publisher extends Application_Article_Creator
                                     continue 2;
                                 break;
                             }
-                        //    self::sanitizeParameters( $widget['parameters'] );
                             $widget['parameters'] =  ( $widget['parameters'] ? : array() ) + array( 'add_a_new_post_classplayer' => '/tools/classplayer/get/name' );
-             //   self::v( $widget['parameters'] );
                             $class = new $class( $widget['parameters'] );
                             $widgets = array();
                             if( method_exists( $class, 'getMarkupTemplateObjects' ) )
@@ -121,8 +124,6 @@ class Application_Article_Publisher extends Application_Article_Creator
                             }
                             foreach( $widgets as $eachWidget ) 
                             {
-            //    self::v( $eachWidget->getParameter() );
-                            //    self::v( $eachWidget );
                                 $values = $eachWidget->getObjectTemplateValues();
                                 $noRequired = ( $eachWidget->getParameter( 'add_a_new_post' ) ? : 1 );
                                 $category = $eachWidget->getParameter( 'category_name' ) ? : null;
@@ -141,16 +142,11 @@ class Application_Article_Publisher extends Application_Article_Creator
                                     $kind = get_class( $eachWidget );
                                     break;
                                 }
-//                                self::v( $kind );
                                 $kind = $kind . $noRequired;
-                             //   self::v( get_class( $eachWidget ) );
-                            //    self::v( $eachWidget->getParameter( 'add_a_new_post_full_url' ) );
-                            //    self::v( $each );
                                 if( ( $kind && @$postTypes[$kind] ) || ! $eachWidget->getParameter( 'add_a_new_post_full_url' ) || @$postTypes[$eachWidget->getParameter( 'add_a_new_post_full_url' )] )
                                 {
                                     continue;
                                 }
-                            //    self::v( $kind );
                                 $postTypes[$kind] = $kind;
                                 $postTypes[$eachWidget->getParameter( 'add_a_new_post_full_url' )] = $eachWidget->getParameter( 'add_a_new_post_full_url' );
                                 $cssClass = 'goodnews';
@@ -159,7 +155,6 @@ class Application_Article_Publisher extends Application_Article_Creator
                                      $done = false;
                                      $cssClass = '';
                                 }
-                            //    var_export( get_class( $eachWidget ) );
                                 $link = '' . Ayoola_Application::getUrlPrefix() . '' . $eachWidget->getParameter( 'add_a_new_post_full_url' ) . '&close_on_success=1';
                                 $html .= '<a style="text-align:center;" class="pc-btn ' .  $cssClass  . '" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\', \'' . $this->getObjectName() . '\' );" href="javascript:" > 
                                 <br><br>
@@ -172,10 +167,8 @@ class Application_Article_Publisher extends Application_Article_Creator
                                <i  style="margin:10px;" class="fa fa-plus"></i>  Add a new ' . ucfirst( $postType ) . ' <i  style="margin:10px;" class="fa"></i>
                                <br><br>
                                </a>';
-                            //    self::v( $eachWidget->getParameter( 'add_a_new_post_full_url' ) );
                             }
 
-                       //     $this->setViewContent( $class->view() ); 
                         }
                     }
     
@@ -195,7 +188,6 @@ class Application_Article_Publisher extends Application_Article_Creator
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-        //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
             $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
@@ -209,14 +201,10 @@ class Application_Article_Publisher extends Application_Article_Creator
     {
         $percentage = 0;
         $self = new static;
-//$self::init();
 		if( $self->init()  )
 		{
 			$percentage += 100;
 		}
-	//	var_export( $percentage );
- //   var_export( self::getUpdates() );
-//    var_export( $themeInfoAll['dummy_search'] );
 		return $percentage;
 	}
 	// END OF CLASS

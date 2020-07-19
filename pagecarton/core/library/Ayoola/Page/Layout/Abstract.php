@@ -93,6 +93,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 	protected static $_placeholderValues2;		
 	
     /**
+     * 
+     * 
+     * var string
+     */
+	protected static $_refreshedTheme;		
+	
+    /**
      * Key for the id column
      * 
      * param string
@@ -105,7 +112,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
      * 
      * @return bool
      */
-	protected function updateFile( array $values = null )
+	public function updateFile( array $values = null )
     {
 		
 		if( ! $values )
@@ -127,29 +134,41 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		}
 		require_once 'Ayoola/Doc.php';
 		Ayoola_Doc::createDirectory( dirname( $this->getMyFilename() ) );
-
-/* 		//	update screenshot
-		$screenshot = ayoola_doc::getdocumentsdirectory() . $values['screenshot'];
-		if( is_file( $screenshot ) )
-		{
-			$screenshotfile = dirname( $this->getmyfilename() ) . '/screenshot.jpg';
-		}
- */		@$content = $values['plain_text'] ? : $values['wysiwyg'];
+		@$content = $values['plain_text'] ? : $values['wysiwyg'];
 
 		if( ! $content ){ return false; }
-		
+        self::buildThemeFile( $themeName, $content );
+        return true;
+    } 
+	
+    /**
+     * Inserts the Data into Storage
+     * 
+     * @return bool
+     */
+	public static function buildThemeFile( $themeName, $content )
+    {
+        $dir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS;
+        $filename = 'documents/layout/' . $themeName . '/template';
+
+        $myPath = $dir . $filename;
+		Ayoola_Doc::createDirectory( dirname( $myPath ) );
+
 		//	Save raw content
-		Ayoola_File::putContents( $this->getMyFilename() . 'raw', $content );
+		Ayoola_File::putContents( $myPath . 'raw', $content );
 
 		
 		//	Sanitize
-		$sectionsToSave = null;
+        $sectionsToSave = null;
+        
+        $values = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
+    //    var_export( $values );
 
 		$content = self::sanitizeTemplateFile( $content, $values, $sectionsToSave );
 		
 		//	 use alternate files to determine that this is a theme so that we can retain only common data
 		$alternateFile = null;
-		$dir = dirname( $this->getMyFilename() );
+		$dir = dirname( $myPath );
 		$files = Ayoola_Doc::getFiles( $dir );
 
 		foreach( $files as $each )
@@ -185,8 +204,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			$alternateFile = file_get_contents( $alternateFile );
 			$alternateFile = self::sanitizeTemplateFile( $alternateFile, $values );
-		//	pick navigation from another page in case the navigation of home page contains other content.			
-
+            
+            //	pick navigation from another page in case the navigation of home page contains other content.			
 			$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $alternateFile );
 			foreach( $matches as $count => $match )
 			{
@@ -248,14 +267,11 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			$isRealNavigation = false;     
 		}
 
-		Ayoola_File::putContents( $this->getMyFilename() . 'sections', '<?php return ' . var_export( $sectionsToSave, true ) . ';' );
-
+		Ayoola_File::putContents( $myPath . 'sections', '<?php return ' . var_export( $sectionsToSave, true ) . ';' );
+		Ayoola_File::putContents( $myPath, $content );
 		
-		Ayoola_File::putContents( $this->getMyFilename(), $content );
-		
-		//	update theme files
-		static::refreshThemePage( $values['layout_name'] );
-
+        //	update theme files
+        static::refreshThemePage( $themeName );    
 		return true;
     } 
 
@@ -265,8 +281,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
      */
     public static function refreshThemePage( $themeName )
 	{
-
-		$class = new Ayoola_Page_Editor_Layout( array( 'no_init' => true ) );
+        $id = Ayoola_Application::getPathPrefix() . $themeName;
+        if( ! empty( static::$_refreshedTheme[$id] ) )
+        {
+            return false;
+        }
+        static::$_refreshedTheme[$id] = true;
+		$class = new Ayoola_Page_Editor_Layout( array( 'no_init' => true,  'theme_variant' => 'auto' ) );
 		$class->setPageInfo( array( 'url' => '/layout/' . $themeName . '/template' ) );
 		$class->updateLayoutOnEveryLoad = true;
 		$class->setPagePaths();
@@ -940,7 +961,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 			
 				//	Dont remove, add empty space
-
 				$element->nodeValue = '&nbsp;';       
 				$i--;    
 			} 
@@ -1013,8 +1033,11 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
         $content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/=]*\.default_file)([\'"])?#s', '=$1PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$2$3', $content );
         
         //  widget variables in template files
+    //    preg_match_all( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#isU', $content, $xxx );
 		$content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', '$1{{{$3}}}$5', $content );
-    //    var_export( $content );
+		$content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', '$1{{{$3}}}$5', $content );
+        preg_match_all( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', $content, $xxx );
+    //    var_export( $xxx );
     //    exit();
 
         //  static text in attribute values {}

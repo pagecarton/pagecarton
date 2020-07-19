@@ -61,3 +61,5 @@ pagecarton/temp
 pagecarton/core/local_html/pagecarton.json
 pagecarton/core/application/databases/Application/settings.xml
 pagecarton/core/application/databases/Application/notification.xml
+pagecarton/core/application/databases/Ayoola/Object/__/pagewidget/
+pagecarton/core/application/databases/Ayoola/Object/pagewidget.xml
