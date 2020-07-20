@@ -137,8 +137,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		@$content = $values['plain_text'] ? : $values['wysiwyg'];
 
 		if( ! $content ){ return false; }
-        self::buildThemeFile( $themeName, $content );
-        return true;
+        return  self::buildThemeFile( $values['layout_name'], $content );;
     } 
 	
     /**
@@ -148,6 +147,10 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
      */
 	public static function buildThemeFile( $themeName, $content )
     {
+        if( ! $themeName )
+        {
+            return false;
+        }
         $dir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS;
         $filename = 'documents/layout/' . $themeName . '/template';
 

@@ -1059,10 +1059,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                     $rPaths['include'] .= $variant;
                     $rPaths['template'] .= $variant;
 
-                //    unset( $rPaths['data_json'] );
-                //    unset( $rPaths['data_json_content'] );
+                    $rPaths['include'] = 'documents/layout/' . $themeName . '/theme/variant/' . $variant . '/include';
+                    $rPaths['template'] = 'documents/layout/' . $themeName . '/theme/variant/' . $variant . '/template';
+                    $rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme/variant/' . $variant . '/data_json_content';
+
                     unset( $rPaths['data_page_info'] );
                     unset( $rPaths['data-backup'] );
+                    unset( $rPaths['data_json'] );
 
                 }
 			}
@@ -1081,12 +1084,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                     $variant = $this->_parameter['theme_variant'];
                     $rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/include';
                     $rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/template';
+                    $rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/data_json_content';
 
                     //  publisher uses json content
-                //    unset( $rPaths['data_json'] );
-                //    unset( $rPaths['data_json_content'] );
-                //    unset( $rPaths['data_page_info'] );
+                    unset( $rPaths['data_page_info'] );
                     unset( $rPaths['data-backup'] );
+                    unset( $rPaths['data_json'] );
 
                 }
 				if( $themeName == self::getDefaultLayout() && empty( $page['layout_name'] ) )
