@@ -45,7 +45,6 @@ pagecarton/*.malformed.xml
 #
 pagecarton/core/application/databases/Application/Log/View/*
 pagecarton/core/application/databases/PageCarton/Cron/Run/*
-#pagecarton/core/application/documents/js/objects/ckeditor/*
 pagecarton/core/application/pages/data-backup/*
 pagecarton/core/application/sub_domain/*
 pagecarton/core/application/databases/Ayoola/Access/localuser.xml
