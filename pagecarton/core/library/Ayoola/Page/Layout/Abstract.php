@@ -108,6 +108,19 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 	
 	
     /**
+     * 
+     * 
+     * @return bool
+     */
+	public static function cleanThemeVariant( $themeName, $variant = 'auto' )
+    {
+        $tPath = 'documents/layout/' . $themeName . '/theme/variant/' . $variant . '';
+        $tPath = Ayoola_Loader::getFullPath( $tPath );
+        Ayoola_Doc::deleteDirectoryPlusContent( $tPath );
+    }
+	
+	
+    /**
      * Inserts the Data into Storage
      * 
      * @return bool

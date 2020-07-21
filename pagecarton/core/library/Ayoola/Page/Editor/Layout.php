@@ -1082,9 +1082,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                 if( ! empty( $this->_parameter['theme_variant'] ) )
                 {
                     $variant = $this->_parameter['theme_variant'];
-                    $rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/include';
-                    $rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/template';
-                    $rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/' . $variant . '/data_json_content';
+                    $rPaths['include'] = 'documents/layout/' . $themeName . '/theme/variant/' . $variant . '' . $pageThemeFileUrl . '/include';
+                    $rPaths['template'] = 'documents/layout/' . $themeName . '/theme/variant/' . $variant . '' . $pageThemeFileUrl . '/template';
+                    $rPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme/variant/' . $variant . '' . $pageThemeFileUrl . '/data_json_content';
 
                     //  publisher uses json content
                     unset( $rPaths['data_page_info'] );

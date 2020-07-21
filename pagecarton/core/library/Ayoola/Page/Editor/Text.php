@@ -303,8 +303,9 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         {
             $parameters['includes'][$matches[1][$count]] = $each;
         }
-
+        $content = self::fixUrlPrefix( $content, Ayoola_Application::getUrlPrefix(), '' );
         $parameters['content'] = $content;
+        $parameters['url_prefix'] = Ayoola_Application::getUrlPrefix();
     }
 	
     /**

@@ -1285,6 +1285,7 @@ class Ayoola_Application
             {
                 $tPath = 'documents/layout/' . $themeName . '/theme/variant/auto/template';
                 $tPath = Ayoola_Loader::getFullPath( $tPath );
+                //    var_export( $tPath );
                 $pageFile = 'documents/layout/' . $themeName . '/template.html';
                 if( ! $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
                 {
@@ -1337,8 +1338,8 @@ class Ayoola_Application
                     $variant = filemtime( $pageFile );
 
                     //	auto-saved file
-                    $pagePaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/auto/include';
-                    $pagePaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/variant/auto/template';
+                    $pagePaths['include'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/include';
+                    $pagePaths['template'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/template';
                     $PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
                     $PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
 

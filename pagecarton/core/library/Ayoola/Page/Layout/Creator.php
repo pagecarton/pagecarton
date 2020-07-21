@@ -248,7 +248,8 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				$this->setViewContent(  '' . self::__( '<p class="goodnews">New theme saved successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a></p>' ) . '', true  );
 				
 				//	Clean up temp dir
-				Ayoola_Doc::deleteDirectoryPlusContent( $tempDestination );
+                Ayoola_Doc::deleteDirectoryPlusContent( $tempDestination );
+                self::cleanThemeVariant( $values['layout_name'] );
 				return true;  
 			}
 			else
