@@ -1329,7 +1329,8 @@ class Ayoola_Application
 			//	theme copy
 			$PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
 			$PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
-
+        //    var_export( $PAGE_INCLUDE_FILE );
+        //    var_export( $PAGE_TEMPLATE_FILE );
 			if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
 			{
 
@@ -1382,6 +1383,7 @@ class Ayoola_Application
 			{
 				if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
 				{
+                    $noRestriction = true;
 					break;
 				}
             }
@@ -1391,6 +1393,7 @@ class Ayoola_Application
                 //  Let's use theme content straight-up
 				if( $previewTheme() )
 				{
+                    $noRestriction = true;
 					break;
 				}
             }

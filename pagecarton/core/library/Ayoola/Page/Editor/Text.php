@@ -702,6 +702,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			@$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, $object['editable'] ): null;
 
 		}
+/*      
         foreach( [ 'codes', 'editable', 'preserved_content' ] as $each  )
         {
             if( empty( $object[$each] ) )
@@ -711,12 +712,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
         }
 
+ */
 		if( ! @$object['codes'] )
 		{
 
 			if( ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
 			{
-				$html .= '<div data-pc-preserve-content="1" class="preserved_content_view pc_html_editor" data-parameter_name="editable" title="' . self::__( 'The content has been locked from editing...' ) . '">';
+				$html .= '<div data-pc-preserve-content="1" class="preserved_content_view pc_html_editor" data-parameter_name="editable" title="' . self::__( 'The content can only be edited from Code View...' ) . '">';
 			}
 			else
 			{

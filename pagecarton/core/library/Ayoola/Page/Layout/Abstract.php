@@ -412,9 +412,15 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 	
         //	http://stackoverflow.com/questions/2869844/regex-to-replace-relative-link-with-root-relative-link
 		//	workaround for the bug causing space to be replaced with 	%5Cs in preg_replace
-		$content = preg_replace('#(href|src)[\s]*=[\s]*(["\'])([^/\#\{][^:\'"]*)(?:["\'\.])#', '$1=$2PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$3$2', $content ); 
+		$content = preg_replace('#(href|src)[\s]*=[\s]*(["\'])([^/\#\{][^:\'"]*)(?:["\'\.])#', '$1=$2#PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$3$2', $content ); 
 
-		$content = preg_replace('#url\(\'?"?([^/\#\{][^:\'"\(\);]*)\'?"?\)#', 'url(PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$1)', $content );
+        $content = preg_replace('#url\(\'?"?([^/\#\{][^:\'"\(\);]*)\'?"?\)#', 'url(PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$1)', $content );
+
+    //    preg_match_all( ';([a-zA-Z-_0-9]+)[\s]*=[\s]*(["\'])([^/#\{][^:\'"]*)(\.)(jpg|png|html)(?:["\'\.]);', $content, $matchesT ); 
+    //    var_export( $matchesT[0] );
+
+        //  match data-background="assets/img/gallery/section_bg04.jpg" attributes
+        $content = preg_replace(';([a-zA-Z-_0-9]+)[\s]*=[\s]*(["\'])([^/#\{][^:\'"]*)(\.)(jpg|png|html)(?:["\'\.]);i', '$1=$2#PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$3.$5$2', $content ); 
 
 		// Instantiate the object
 		$xml = new Ayoola_Xml();
@@ -1094,7 +1100,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 		if( $url[0] == '#' )
 		{
-			return $url;
+		//	return $url;
 		}
 		$url = array_pop( explode( '/layout/' . $themeName, $url ) );
 		$url = '' . array_shift( explode( '.html', $url ) );

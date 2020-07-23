@@ -309,12 +309,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				Application_Javascript::addCode( $this->javascript() );
             }
             
-			if( $this->_layoutRepresentation && ! $this->noLayoutView )
+			if( $this->_layoutRepresentation && ! $this->noLayoutView && ! $this->isSaveMode() )
 			{
 				Ayoola_File::putContents( $tmp, $this->_layoutRepresentation );
             //    var_export( $tmp );
 				include_once $tmp;
-				unlink( $tmp );
+                unlink( $tmp );
 
 			}
 			else
