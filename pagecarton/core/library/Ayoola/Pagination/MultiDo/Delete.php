@@ -48,7 +48,7 @@ class Ayoola_Pagination_MultiDo_Delete extends PageCarton_Widget
             $class = @$_GET['list_name'];
             if( ! Ayoola_Object_Embed::isWidget( $class, false ) )
             {
-                $this->setViewContent( '<div class="badnews">Items does not support multiple delete.</div>', true );
+                $this->setViewContent(  '' . self::__( '<div class="badnews">Items does not support multiple delete.</div>' ) . '', true  );
                 return false;
             }
             if( ! empty( $_GET['delete_class'] ) )
@@ -60,14 +60,14 @@ class Ayoola_Pagination_MultiDo_Delete extends PageCarton_Widget
                 $classNameArray = explode( '_', $class );
                 if( array_pop( $classNameArray ) != 'List' )
                 {
-                    $this->setViewContent( '<div class="badnews">Items does not support multiple delete.</div>', true );
+                    $this->setViewContent(  '' . self::__( '<div class="badnews">Items does not support multiple delete.</div>' ) . '', true  );
                     return false;
                 }
                 $deleteClass = implode( '_', $classNameArray ) . '_Delete';
             }
             if( ! Ayoola_Object_Embed::isWidget( $deleteClass, false) )
             {
-                $this->setViewContent( '<div class="badnews">Items does not support multiple delete.</div>', true );
+                $this->setViewContent(  '' . self::__( '<div class="badnews">Items does not support multiple delete.</div>' ) . '', true  );
                 return false;
             }  
 
@@ -78,14 +78,14 @@ class Ayoola_Pagination_MultiDo_Delete extends PageCarton_Widget
             if( empty( $_GET[$classId] ) || ! is_array( $_GET[$classId] ) )
             {
   //          var_export( $_GET[$classId] );
-                $this->setViewContent( '<div class="badnews">You have not selected any items</div>', true );
+                $this->setViewContent(  '' . self::__( '<div class="badnews">You have not selected any items</div>' ) . '', true  );
                 return false;
             }
             $recordIds = $_GET[$classId];
-            $this->createConfirmationForm( 'Delete',  'Delete ' . count( $recordIds ) . ' item(s)' );
+            $this->createConfirmationForm( 'Delete',  '' . sprintf( self::__( 'Delete %d item(s)' ), count( $recordIds ) ) );
             $this->setViewContent( $this->getForm()->view(), true );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
-            $this->setViewContent( '<div></div>', true );
+            $this->setViewContent(  '' . self::__( '<div></div>' ) . '', true  );
             set_time_limit( 0 );
             foreach( $recordIds as $each )
             {
@@ -104,8 +104,8 @@ class Ayoola_Pagination_MultiDo_Delete extends PageCarton_Widget
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+            $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
 	}

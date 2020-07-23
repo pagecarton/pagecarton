@@ -67,7 +67,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		{
 		if( ! $cart = self::getStorage()->retrieve() )
 		{ 
-			return $this->setViewContent( '<span class="boxednews centerednews badnews">You have no item in your shopping cart.</span>', true );
+			return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">You have no item in your shopping cart.</span>' ) . '', true  );
 		}
 	//	var_export( self::getOrderNumber() );
 	//	var_export( $cart );
@@ -81,18 +81,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		//	Dont save plaintext password
 		unset( $values['password'] );
 		unset( $values['password2'] );
-		
-	//	var_export( $values );
-		
-/* 		//	Email form values
-		$stringValues = "\r\n<br>";
-		foreach( $values as $key => $value )
-		{
-			$key = implode( ' ', array_map( 'ucfirst', explode( '_', $key ) ) );
-			$stringValues .= "<strong>$key</strong>: $value\r\n<br>";
-		}
-		$stringValues .= "\r\n<br>";
- */		
+			
 		//	Put the checkout info in the cart
 		$cart = self::getStorage()->retrieve();
 		$cart['checkout_info'] = $values;
@@ -452,8 +441,8 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			self::setFormRequirements( $form, $requirements );
 		}
 		$fieldset = new Ayoola_Form_Element();		
-	//		self::v( $cart['settings']['total'] );
-		if( ! empty( $cart['settings']['total'] ) )
+		//	self::v( $cart['settings']['total'] );
+		if( ! empty( intval( $cart['settings']['total'] ) ) )
 		{
 			$table = 'Application_Subscription_Checkout_CheckoutOption';
 			$table = $table::getInstance( $table::SCOPE_PRIVATE );
@@ -472,11 +461,12 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			foreach( $options as $key => $each )
 			{
 				$api = 'Application_Subscription_Checkout_' . $each['checkoutoption_name'];
-			//	$options[$key]['checkoutoption_logo'] = $each['checkoutoption_logo'] . htmlspecialchars( '<br />' );
-				$options[$key]['checkoutoption_logo'] = '<div style="max-width:210px; margin: 0 1em 0 1em; display:inline-block">' . ( $each['checkoutoption_logo'] ? : $each['checkoutoption_name'] ) . '</div>';     
+                $options[$key]['checkoutoption_logo'] = $each['checkoutoption_logo'] 
+                    ? ( '<div style="max-width:210px; margin: 0 1em 0 1em; display:inline-block">' . ( $each['checkoutoption_logo'] ? : $each['checkoutoption_name'] ) . '</div>' ) 
+                    : ( '<img height="100" src="' . Ayoola_Application::getUrlPrefix() . '' . $each['logo'] . '" alt="' . $each['checkoutoption_name'] . '">' );     
 				if( Ayoola_Loader::loadClass( $api ) )
 				{ 
-					if( ! $api::isValidCurrency() ){ unset( $options[$key] ); }
+				//	if( ! $api::isValidCurrency() ){ unset( $options[$key] ); }
 				}
 				if( $allowedOptions && ! in_array( $each['checkoutoption_name'], $allowedOptions ) )
 				{ 

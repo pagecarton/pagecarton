@@ -41,8 +41,28 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
      * 
      * @var string 
      */
-	protected static $_objectTitle = 'Theme Preset Pages'; 
+	protected static $_objectTitle = 'Edit Theme'; 
 		
+    /**
+     * 
+     * 
+     */
+	public static function isValidThemePage( $url, $themeName )
+    {
+        $pageThemeFileUrl = $url;
+        if( $pageThemeFileUrl == '/' )
+        {
+            $pageThemeFileUrl = '/index';
+        }
+        $pageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
+        $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) );
+        if( ! is_file( $pageFile ) )
+        {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * 
      * 
@@ -112,7 +132,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 					$url = array_shift( $each );
 					$url = '/' . $url;
 					$url = str_ireplace( array( '/index', '/home', ), array( '/', '/', ), $url );
-					$pages[null][] = array( 'url' => '' . $url );
+					$pages[null][] = array( 'url' => '' . $url, 'title' => ucwords( array_pop( explode( '/', str_replace( '-', ' ', $url ) ) ) ) );
 					$pages['list'][] = $url;
 					$pages['list-url'][$url] = $url;
 				break;
@@ -144,11 +164,12 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 			{
 		//		$pages[] = array( 'url' => '/' );
 			}
-			$pages = self::sortMultiDimensionalArray( $pages, 'url' );
-	//		var_export( $pages );
+            $pages = self::sortMultiDimensionalArray( $pages, 'url' );
+            $pages[0]['title'] = 'Home Page';
+		//	var_export( $pages );
 			$list = new Ayoola_Paginator();
 			$list->pageName = $this->getObjectName();
-			$list->listTitle = self::getObjectTitle();
+			$list->listTitle = sprintf( self::__( 'Edit "%s" theme content' ), $data['layout_label'] );
 			$list->deleteClass = 'Ayoola_Page_Layout_Pages_Delete';
 		//	$list->listTitle = $this->get;
 		//	$table = $this->getDbTable();
@@ -156,18 +177,28 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 			$list->setData( $pages );  
 			$list->setKey( 'url' );  
 			$list->setNoRecordMessage( 'This theme has no pages.' );  
-		$list->setRowOptions( 
+            $list->setListOptions( 
+                                    array( 
+                                            '<a style="" title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=/layout/' . $this->_identifier['layout_name'] . '/template\' );" href="javascript:;">Main Theme Layout</a>',
+                                            '<a style="" title="Edit with a WYSIWYG editor" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Editor/?layout_name=' . $this->_identifier['layout_name'] . '\' );" href="javascript:;">Main HTML Code</a>',
+                                            'Images' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Images/?layout_name=' . $this->_identifier['layout_name'] . '\' );" title="Update theme pictures">Images</a>' ,
+                                            '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_ReplaceText/?layout_name=' . $this->_identifier['layout_name'] . '\' );" title="">Static Texts</a>' ,
+                                            '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Links/?layout_name=' . $this->_identifier['layout_name'] . '\' );" title="">Links</a>' ,
+                                    ) 
+                                );
+		    $list->setRowOptions( 
 								array( 
-										'Copy' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Copy/?url=%KEY%&layout_name=' . $data['layout_name'] . '\' );" style="">Copy to main %KEY% page</a>' ,
-										'Preview' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '%KEY%' . ( '?pc_page_layout_name=' . $data['layout_name'] ) . '\' );" style="">Preview %KEY%</a>' ,
-										'Code' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Code/?url=%KEY%&layout_name=' . $data['layout_name'] . '\' );" style="">Code</a>' ,
+										'Copy' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Copy/?url=%KEY%&layout_name=' . $data['layout_name'] . '\' );" style="">Copy to main site page</a>' ,
+										'Preview' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '%KEY%' . ( '?pc_page_layout_name=' . $data['layout_name'] ) . '\' );" style="">Preview Page </a>' ,
+										'Code' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Code/?url=%KEY%&layout_name=' . $data['layout_name'] . '\' );" style="">Page HTML Code</a>' ,
 										'Duplicate' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Duplicate/?url=%KEY%&layout_name=' . $data['layout_name'] . '\', \'page_refresh\' );" style="">Duplicate page</a>' ,
 										'Delete Saved Content' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_ClearContent/?url=%KEY%&layout_name=' . $data['layout_name'] . '\' );" style="">Clear Saved Content</a>' ,
-										'Delete' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Delete/?url=%KEY%&layout_name=' . $data['layout_name'] . '\', \'page_refresh\' );" style="">Delete Page</a>' ,
+										'Delete' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Delete/?url=%KEY%&layout_name=' . $data['layout_name'] . '\', \'page_refresh\' );" style="">x</a>' ,
 									) 
 							);
 			$list->createList(  
 				array(
+					'title' => '%FIELD%',   
 					'url' => '%FIELD%',   
 					' ' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=%KEY%&pc_page_editor_layout_name=' . $data['layout_name'] . '\' );" style="">edit</a>',   
 			//		'' => '',   

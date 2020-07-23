@@ -143,7 +143,7 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
      * @param void
      * @return array The Path to the Page Files
      */
-    public function setPageFilesPaths( $url = null )
+    public function setPageFilesPaths( $url = null, $check = false )
     {
 		$urlToUse = $url;
 		if( is_null( $urlToUse ) )
@@ -162,7 +162,17 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		$filter = new Ayoola_Filter_UriToPath;
 		$files = $filter->filter( $urlToUse );
 		require_once 'Ayoola/Loader.php';
-		foreach( $files as $key => $file ){ $files[$key] = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $file; }
+        foreach( $files as $key => $file )
+        {
+            $bFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $file;
+        //    var_export( $check );
+            if( $check && ! is_file( $bFile ) )
+            {
+                unset( $files[$key] );
+                continue;
+            }
+            $files[$key] = $bFile; 
+        }
 	//	var_export( $files );
 		$this->_pageFilesPaths[$url] = $files;
     } 
@@ -173,13 +183,12 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
      * @param void
      * @return array The Path to the Page Files
      */
-    public function getPageFilesPaths( $url = null )
+    public function getPageFilesPaths( $url = null, $check = false )
     {
-		if( is_null( @$this->_pageFilesPaths[$url] ) ){ $this->setPageFilesPaths( $url ); }
-	//	var_export( $this->_pageFilesPaths );
-	//	var_export( $url );
-	//	var_export( $this->_pageFilesPaths[$url] );
-
+        if( empty( @$this->_pageFilesPaths[$url] ) )
+        { 
+            $this->setPageFilesPaths( $url, $check ); 
+        }
         return (array) @$this->_pageFilesPaths[$url];  
     } 
 	
@@ -214,7 +223,7 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		//var_export( $filename );
 		//exit();
 		// If file does not exist, make one
-		if( ! is_file( $filename ) ){ file_put_contents( $filename, '' ); }
+		if( ! is_file( $filename ) ){ Ayoola_File::putContents( $filename, '' ); }
 		$xml->save( $filename );
 		return true;
     } 
@@ -287,25 +296,21 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addElement( array( 'name' => 'title', 'label' => 'Page Title', 'placeholder' => 'e.g. My New Page', 'type' => 'InputText', 'onchange' => 'ayoola.addShowAutoUrl( this );', 'onkeyup' => 'ayoola.addShowAutoUrl( this );', 'value' => @$values['title'] ) );
 		if( is_null( $values ) )
 		{
-		//	$fieldset->addElement( array( 'name' => 'x', 'type' => 'Html' ), array( 'html' => 'http://' . Ayoola_Page::getDefaultDomain() . ' ' ) );
-		//	$option = array( $_SERVER['HTTP_HOST'] => 'http://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() );
-		//	$fieldset->addElement( array( 'name' => 'domain', 'style' => 'max-width:20%;', 'label' => '', 'type' => 'Select', 'value' => 'http://' . $_SERVER['HTTP_HOST'] ), $option );
-		//	$domain = 'http://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix();
-	//		$fieldset->addElement( array( 'name' => 'domain', 'style' => 'max-width:' . strlen( $domain ) . 'em; min-width:20%;', 'label' => 'URL', 'disabled' => 'disabled', 'type' => 'InputText', 'value' => $domain ) );
 			$fieldset->addElement( array( 'name' => 'url', 'class' => 'pc_page_url_field', 'style' => '', 'label' => '', 'placeholder' => '/page', 'onchange' => 'ayoola.addShowAutoUrl( this );', 'type' => 'Hidden', 'value' => @$values['url'] ) ); 
 
 		//	$url =
 
-			$fieldset->addFilter( 'url', array( 'Transliterate' => null, 'SimplyUrl' => null, 'Uri' => null, 'CharacterWhitelist' => array( 'character_list' => '^\w\-\/', 'replace' => '-', ) ) );
+            if( empty( $_REQUEST['url'] ) )
+            {
+                $fieldset->addFilter( 'url', array( 'Transliterate' => null, 'SimplyUrl' => null, 'Uri' => null, 'CharacterWhitelist' => array( 'character_list' => '^\w\-\/', 'replace' => '-', ) ) );
+            }
+
 			$fieldset->addRequirement( 'url', array( 'DuplicateRecord' => array( 'Ayoola_Page_Page', 'url', 'badnews' => '"%variable%" already exist as a page.', ),'CharacterWhitelist' => array( 'badnews' => 'The allowed characters are lower case alphabets (a-z), numbers (0-9), underscore (_) and hyphen (-).', 'character_list' => '^\w\-\/', ), 'NotEmpty' => null, 'Uri' => null ) );
-		//	$fieldset->addElement( array( 'name' => 'name', 'placeholder' => 'Give this page a name', 'type' => 'InputText', 'value' => @$values['name'] ) );
 		}
 		$fieldset->addElement( array( 'name' => 'description', 'label' => 'Page Description', 'placeholder' => 'Enter a short description of the content of this page. The description will be displayed in search results and page preview...', 'type' => 'TextArea', 'value' => @$values['description'] ) );
 		
 		//	Set the layout_name to null first to 
 		//	PREVENT EDITOR FROM STILL PARADING THE OLD TEMPLATE
-	//	$fieldset->addElement( array( 'name' => 'layout_name', 'type' => 'Hidden', 'value' => null ) );
-	//	$fieldset->addElement( array( 'name' => 'page_options[]', 'type' => 'Hidden', 'value' => null ) );
 		
 		//	Auth Level
 

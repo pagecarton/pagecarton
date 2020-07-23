@@ -42,15 +42,15 @@ class Application_Backup_Editor extends Application_Backup_Abstract
 		$this->createForm( 'Export', '', $data );
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
-	//	$this->setViewContent( '<span class="boxednews goodnews">Success.</span>', true );
-	//	$this->setViewContent( '<span class="boxednews greynews">Backup file saved successfully.</span>' );
-//		$this->setViewContent( '', true );
+	//	$this->setViewContent(  '' . self::__( '<span class="boxednews goodnews">Success.</span>' ) . '', true  );
+	//	$this->setViewContent( self::__( '<span class="boxednews greynews">Backup file saved successfully.</span>' ) );
+//		$this->setViewContent(  '' . self::__( '' ) . '', true  );
 	//	var_export( $values );
 	//	if( $values['backup_type'] === 'export' )
 		{
 			$values['export_information']['export_expiry'] = $values['export_expiry'];
 			$values['export_information']['time'] = time();
-			$this->setViewContent( '<p class="goodnews">Export URL is "http://' . DOMAIN . '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Backup_Export/?backup_id=' . $data['backup_id'] . '"</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Export URL is "http://' . DOMAIN . '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Backup_Export/?backup_id=' . $data['backup_id'] . '"</p>' ) . '', true  );
 		}
 		if( ! $this->updateDb( $values ) ){ return false; }
 		

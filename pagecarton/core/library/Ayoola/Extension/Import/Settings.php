@@ -47,7 +47,7 @@ class Ayoola_Extension_Import_Settings extends Ayoola_Extension_Import_Abstract
 	//	var_export( $identifierData );
 		if( ! $this->createForm( 'Save...', 'Settings for "' . $identifierData['extension_name'] . '"', $identifierData['settings'] ) )
 		{
-			$this->setViewContent( '<p class="badnews">This Plugin is not configured to support settings.</p>', true ); 
+			$this->setViewContent(  '' . self::__( '<p class="badnews">This Plugin is not configured to support settings.</p>' ) . '', true  ); 
 			return false;
 		}
 		$this->setViewContent( $this->getForm()->view(), true );
@@ -60,10 +60,10 @@ class Ayoola_Extension_Import_Settings extends Ayoola_Extension_Import_Abstract
 	
 		if( ! $this->updateDb( $values ) )
 		{ 
-			$this->setViewContent( '<p class="badnews">Error: could not save Plugin settings.</p>.', true ); 
+			$this->setViewContent(  '' . self::__( '<p class="badnews">Error: could not save Plugin settings.</p>.' ) . '', true  ); 
 			return false;
 		}
-		$this->setViewContent( '<p class="boxednews saved">Plugin settings saved successfully.</p>', true );
+		$this->setViewContent(  '' . self::__( '<p class="boxednews saved">Plugin settings saved successfully.</p>' ) . '', true  );
 	} 
 	
     /**

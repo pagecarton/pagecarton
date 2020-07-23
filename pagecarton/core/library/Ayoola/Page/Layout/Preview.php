@@ -46,41 +46,12 @@ class Ayoola_Page_Layout_Preview extends Ayoola_Page_Layout_Abstract
             
             header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/?pc_page_layout_name=' . $data['layout_name'] . '' );
             exit();
-
-/* 			$themeName = $data['layout_name'];
-		//	$themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
-			$pagePaths['include'] = 'documents/layout/' . $themeName . '/theme' . '/include';
-			$pagePaths['template'] = 'documents/layout/' . $themeName . '/theme' . '/template';
-			
-			//	theme copy
-			$PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
-			$PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
-			if( ! $PAGE_INCLUDE_FILE AND ! $PAGE_TEMPLATE_FILE )
-			{
-                $this->setViewContent( '<p class="badnews">Theme files not found.</p>' ); 
-				//	not found
-				return false;
-			}
-
-            //  Output demo content to screen
-            include $PAGE_INCLUDE_FILE;
-
-			$temIncludeFile = tempnam( CACHE_DIR, __CLASS__ );           
-			$content = file_get_contents( $PAGE_TEMPLATE_FILE );
-    //        var_export( $content );
-			$content = preg_replace( '/@@@([a-zA-Z_\-0-9]*)@@@/', '', $content );
-            file_put_contents( $temIncludeFile, $content );
-   //         var_export( $content );
-            include $temIncludeFile;
-            unlink( $temIncludeFile );
-            exit();
- */             // end of widget process
           
 		}  
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

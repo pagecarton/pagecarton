@@ -73,8 +73,9 @@ class Application_CommentBox_Abstract extends PageCarton_Widget
         {
             $profileData = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) ? : array();
             $data = array_merge( $profileData, $data );
-      //      var_export( $profileData );
-       //     var_export( $data );
+        //    var_export( $data );
+        //    var_export( $profileData );
+        //     var_export( $data );
             if( ! empty( $profileData['user_id'] ) )
             {
                 if( $info = Application_User_Abstract::getUserInfo( $profileData['user_id'] ) )  
@@ -84,8 +85,8 @@ class Application_CommentBox_Abstract extends PageCarton_Widget
             }
             $data['website'] =  Ayoola_Page::getHomePageUrl() . '/' . $data['profile_url'] . '';
         }
-   //     var_export( $data );
-  //      var_export( $data['display_name'] );
+    //     var_export( $data );
+    //      var_export( $data['display_name'] );
         if( empty( $data['display_name'] ) )
         {
             $data['display_name'] = $data['profile_url'];
@@ -129,9 +130,12 @@ class Application_CommentBox_Abstract extends PageCarton_Widget
 		$form->addFieldset( $fieldset ); 
 
         $access = new Ayoola_Access();
-        $userInfo = $access->getUserInfo();
 //        var_export( $this->getGlobalValue( 'display_name' ) );
-        if( ! @$userInfo['profile_url'] && ( ! $this->getGlobalValue( 'display_name' ) || ! $this->getGlobalValue( 'email' ) || ! $this->getGlobalValue( 'website' ) ) )
+        $defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
+        $defaultProfile = $defaultProfile['profile_url'];
+    //    var_export( $defaultProfile );
+        
+        if( ! $defaultProfile && ( ! $this->getGlobalValue( 'display_name' ) || ! $this->getGlobalValue( 'email' ) || ! $this->getGlobalValue( 'website' ) ) )
         {
             $fieldset = new Ayoola_Form_Element;
             $fieldset->placeholderInPlaceOfLabel = false;

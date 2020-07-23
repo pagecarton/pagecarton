@@ -72,7 +72,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 					throw new Application_Subscription_Exception( 'COULD NOT LOCATE THE SELECTED PRODUCT OR SERVICE.' );
 				}
 			}
-			if( ! $data = $this->getIdentifierData() ){ return $this->setViewContent( '<p>Subscription Package Not Found</p>', true ); }
+			if( ! $data = $this->getIdentifierData() ){ return $this->setViewContent(  '' . self::__( '<p>Subscription Package Not Found</p>' ) . '', true  ); }
 			$this->setViewContent( $this->getForm()->view(), true );
 			
 			//	workarround for infinite loop at App_Domain_Reg "no_init"
@@ -94,7 +94,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 			}
 			if( ! $this->subscribe() )
 			{ 
-			//	$this->setViewContent( '<p>Unable to add product or service to cart.</p>', true ); 
+			//	$this->setViewContent(  '' . self::__( '<p>Unable to add product or service to cart.</p>' ) . '', true  ); 
 				return;
 			}
 			$this->setViewContent( self::getConfirmation(), true );
@@ -108,9 +108,9 @@ class Application_Subscription extends Application_Subscription_Abstract
 		catch( Exception $e )
 		{ 
 	//		echo $e->getMessage();
-		//	return $this->setViewContent( '<p class="badnews boxednews centerednews">Error with subscription package.</p>', true ); 
-			$this->setViewContent( '<p class="badnews boxednews centerednews">Error with subscription package.</p>', true ); 
-			$this->setViewContent( '<p class="badnews boxednews centerednews">' . $e->getMessage() . '</p>' ); 
+		//	return $this->setViewContent(  '' . self::__( '<p class="badnews boxednews centerednews">Error with subscription package.</p>' ) . '', true  ); 
+			$this->setViewContent(  '' . self::__( '<p class="badnews boxednews centerednews">Error with subscription package.</p>' ) . '', true  ); 
+			$this->setViewContent( self::__( '<p class="badnews boxednews centerednews">' . $e->getMessage() . '</p>' ) ); 
 		}
     }
 	
@@ -173,7 +173,7 @@ class Application_Subscription extends Application_Subscription_Abstract
     {
 	//	var_export( $this->getForm()->getValues() );
 
-	//	$this->setViewContent( 'Please choose an option', true );
+	//	$this->setViewContent(  '' . self::__( 'Please choose an option' ) . '', true  );
 	//	var_export( $values );      
 	//	exit(); 
 		if( ! $values )
@@ -278,7 +278,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 		
 //		var_export( $newCart );
 		
-		//	Notify Admin
+/* 		//	Notify Admin
 		$mailInfo = array();
 		$mailInfo['subject'] = 'Item added to shopping cart';
 		$mailInfo['html'] = true; 
@@ -287,7 +287,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 							<body>
 								Someone added an item into their shopping cart. The current cart contents are as follows:
 								' . Application_Subscription_Cart::viewInLine() . '		
-								Subscription options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/subscription/.
 							</body></html>       
 		';
 		try
@@ -297,7 +296,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 			@self::sendMail( $mailInfo );
 		}
 		catch( Ayoola_Exception $e ){ null; }
-		return true;
+ */		return true;
     }
 	
     /**
@@ -382,42 +381,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 		$previousData = @$previousData['cart'][$value['subscription_name']];
   //  	var_export( $previousData );
 		
-/* 		//	INTRODUCING CALL-TO-ACTION
-		if( $this->getParameter( 'call_to_action' ) )
-		{
-			$fieldset = new Ayoola_Form_Element();		
-		//	$callToActionStorage = $this->getObjectStorage( 'call_to_action' .  $value['subscription_name'] );
-		//	$callToAction = $this->getParameter( 'call_to_action' ) ? : $callToActionStorage->retrieve();
-		//	$callToAction = $this->getParameter( 'call_to_action' ) ? : $callToActionStorage->retrieve();
-		
-			//	Post the subscription name so it could retain state
-			$fieldset->addElement( array( 'name' => 'subscription_name', 'type' => 'hidden', 'value' => null ) );
-			$fieldset->addFilter( 'subscription_name', array( 'DefiniteValue' => $value['subscription_name'] ) );
-			$fieldset->addElement( array( 'type' => 'html', 'name' => 'e' ), array( 'html' => '<span class="calltoactionnews" onClick="">' . $this->getParameter( 'call_to_action' ) . '</span>' ) );
-	//		$fieldset->addElement( array( 'type' => 'html', 'name' => 'e' ), array( 'html' => '<span class="calltoactionnews" onClick="">' . $callToAction  . '</span>' ) );
-			$form->addFieldset( $fieldset );
-	//		$callToActionStorage->store( $callToAction );
-			//	switch off standard submit
-			$form->submitValue = null;
-		}
- *//* 		elseif( $callToAction )
-		{
-			//	This will be our call_to_action
-			$form->submitValue = 'Go';
-		}
- */		/* else
-		{
-			//	This will be our call_to_action
-			$form->submitValue = 'Add to Cart';
-		} */
-/* 
-		//	Post the subscription name so it could retain state
-		$fieldset = new Ayoola_Form_Element();		
-		$fieldset->hashElementName = false;
-		$fieldset->addElement( array( 'name' => 'subscription_name', 'type' => 'hidden', 'value' => $value['subscription_name'] ) );
-		$form->addFieldset( $fieldset );
-		
- */		
 		//	First fieldset
 		$fieldset = new Ayoola_Form_Element();		
 		$priceId = $value['subscription_name'] . 'price_id';

@@ -60,7 +60,7 @@ class Ayoola_Page_Layout_Pages_Code extends Ayoola_Page_Layout_Pages
             $allPages = array_combine( $allPages, $allPages );
             if( ! in_array( $url, $allPages ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
             $realUrl = $url;
@@ -72,7 +72,7 @@ class Ayoola_Page_Layout_Pages_Code extends Ayoola_Page_Layout_Pages
         //    var_export( $from );
             if( ! $from = Ayoola_Loader::getFullPath( $from, array( 'prioritize_my_copy' => true ) ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
             $code = file_get_contents( $from );
@@ -88,9 +88,9 @@ class Ayoola_Page_Layout_Pages_Code extends Ayoola_Page_Layout_Pages
 
             if( $values['code'] )
             {
-                if( file_put_contents( $from, $values['code'] ) )
+                if( Ayoola_File::putContents( $from, $values['code'] ) )
                 {
-                    $this->setViewContent( '<p class="goodnews">Code saved successfully.</p>', true ); 
+                    $this->setViewContent(  '' . self::__( '<p class="goodnews">Code saved successfully.</p>' ) . '', true  ); 
                 }
             }
              // end of widget process
@@ -99,7 +99,7 @@ class Ayoola_Page_Layout_Pages_Code extends Ayoola_Page_Layout_Pages
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

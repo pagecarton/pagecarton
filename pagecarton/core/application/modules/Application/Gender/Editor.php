@@ -34,7 +34,7 @@ class Application_Gender_Editor extends Application_Gender_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
 
-			if( $this->updateDb( $values ) ){ $this->setViewContent( '<div class="goodnews">Data updated successfully</div>', true ); } 
+			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Data updated successfully</div>' ) . '', true  ); } 
 
              // end of widget process
           
@@ -42,8 +42,8 @@ class Application_Gender_Editor extends Application_Gender_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+            $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
 	}

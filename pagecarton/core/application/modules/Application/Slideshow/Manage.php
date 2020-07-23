@@ -43,7 +43,7 @@ class Application_Slideshow_Manage extends Application_Slideshow_Abstract
 			$this->createForm( 'Save', 'Manage ' . $data['slideshow_name'], $data );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			if( $this->updateDb( $values ) ){ $this->setViewContent( '<div class="boxednews goodnews">Slideshow saved successfully.</div>', true ); }
+			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">Slideshow saved successfully.</div>' ) . '', true  ); }
 		}
 		catch( Application_Slideshow_Exception $e ){ return false; }
     } 

@@ -50,16 +50,15 @@ class Ayoola_Doc_Upload extends Ayoola_Doc_Abstract
 		if( $url = $this->upload() )
 		{ 
 			$this->setViewContent( "<p>Document Uploaded Successfully.</p>", true );
-			$this->setViewContent( "<p><a href='$url'>Right-click to copy link or click to view file</a></p>" ); 
+			$this->setViewContent( "<p><a href= '' . self::__( '$url' ) . ''>Right-click to copy link or click to view file</a></p>"  ); 
 			$this->setViewContent( $this->getForm()->view() );		
 			
 			//	Notify Admin
 			$mailInfo = array();
 			$mailInfo['subject'] = 'Document upload successful.';
-			$mailInfo['body'] = 'A new document have been uploaded on your application with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'A new document have been uploaded on your application with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			Here is the link to the newly uploaded document: http://' . Ayoola_Page::getDefaultDomain() . $url . '/
-			Document administration options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/document/.
 			';
 			try
 			{

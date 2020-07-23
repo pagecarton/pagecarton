@@ -39,7 +39,7 @@ class Application_Article_Template_Delete extends Application_Article_Template_A
 			$this->createConfirmationForm( 'Delete', 'Delete this post template, and all its associated files? This cannot be undone.' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $this->deleteDb( false ) ){ return false; }
-			$this->setViewContent( 'Post template deleted successfully', true );
+			$this->setViewContent(  '' . self::__( 'Post template deleted successfully' ) . '', true  );
 		}
 		catch( Ayoola_Exception $e ){ return false; }
     } 

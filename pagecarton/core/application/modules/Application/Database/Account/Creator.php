@@ -38,7 +38,7 @@ class Application_Database_Account_Creator extends Application_Database_Account_
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		if( ! $this->insertDb() ){ return $this->setViewContent( $this->getForm()->view(), true ); }
-		$this->setViewContent( '<p>Database account created successfully.</p>', true );
+		$this->setViewContent(  '' . self::__( '<p>Database account created successfully.</p>' ) . '', true  );
 		$table = new Ayoola_Dbase_Adapter_Mysql();
    } 
 	// END OF CLASS

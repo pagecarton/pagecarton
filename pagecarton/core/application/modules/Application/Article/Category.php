@@ -70,11 +70,7 @@ class Application_Article_Category extends Ayoola_Abstract_Table
     {
 		try
 		{
-//		var_export( $articleSettings );
-		//	self::v( $this->_parameter['markup_template'] );
-		//	self::v( $this->getPublicDbData() );
 			$this->createConfirmationForm( 'Show all',  '' );
-		//	var_export( $this->getPublicDbData() );
 			if( ! $this->getPublicDbData() )
 			{ 
 				$this->_parameter['markup_template'] = null;
@@ -82,31 +78,25 @@ class Application_Article_Category extends Ayoola_Abstract_Table
 				//	refresh
 				//	workaround for markup template not working
 				$this->_markupTemplate = null;
-				return $this->setViewContent( '', true ); 
+				return $this->setViewContent(  '', true  ); 
 			}
-		//	$this->setViewContent( '<h4>Categories</h4>', true );
 			$this->setViewContent( self::getXml() );
-	//	self::v( $this->_parameter['markup_template'] );
 
 		}
 		catch( Application_Article_Exception $e ) 
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
 		catch( Exception $e )
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
 
 		//	refresh
 		//	workaround for markup template not working
 		$this->_markupTemplate = null;
-	//	self::v( $this->_parameter['markup_template'] );
-	//	self::v( $this->view() );
     } 
 	
     /**
@@ -116,7 +106,6 @@ class Application_Article_Category extends Ayoola_Abstract_Table
      */
 	public function getPublicDbData()
     {
-//		var_export( $articleSettings );
 		//	if available, only allowed categories are listed
 		if( $this->getParameter( 'show_only_post_categories' ) )
 		{
@@ -170,8 +159,6 @@ class Application_Article_Category extends Ayoola_Abstract_Table
 		{
 			$this->_xml .= '<li style="display:inline-block;margin:0.5em;">';
 			$i++;
-		//	var_export( $values );
-		//	$data = array_map( 'strip_tags', array_shift( $values ) );
 			$data = array_shift( $values );
 			
 			if( $this->getParameter( 'length_of_description' ) )
@@ -186,53 +173,33 @@ class Application_Article_Category extends Ayoola_Abstract_Table
 			}
 			
 			//	content
-		//	$url = Ayoola_Page::appendQueryStrings( array( 'category_name' => $data['category_name'] ) );
 			
 			$url = ( @$data['category_url'] ? : ( '' . Application_Article_Abstract::getPostUrl() . '/category/' . $data['category_name'] . '/' ) );
+			@$data['category_url'] = $data['category_url'] ? : $url;
 			$content = '<a href="' . $url . '" title="Click here to view posts in the ' . $data['category_label'] . ' category."> ' . $data['category_label'] . ' </a>';
 			$this->_xml .= @$_GET['category'] === $data['category_name'] ? "<strong>{$content}</strong>" : "<span>{$content}</span>";
 			
 			$this->_xml .= '</li>';
 			if( $this->getParameter( 'markup_template' ) )
 			{
-			//	foreach( $data['slideshow_images'] as $key => $each )
-				{
-			//		var_export( $data ); 
-					$template .= self::replacePlaceholders( $this->getParameter( 'markup_template' ), $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
-				}
+			
+				$template .= self::replacePlaceholders( $this->getParameter( 'markup_template' ), $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
+				
 			}
 			$this->_objectData[] = $data; 
 
 		}
 		//	update the markup template
 		$this->_parameter['markup_template'] = $template; 
-	//	self::v( $this->_parameter['markup_template'] );
-/* 		
-<span style="float:left;margin:0.5em; padding:0.5em; background-color:#ccc; min-width:40%;text-align:center;;">
-  	<h2>
-		<a title="{{{category_description}}}" href="{{{category_url}}}">{{{category_label}}}</a>
-  	</h2>  	
-	<!--	
-	<a title="{{{category_description}}}" href="{{{category_url}}}">
-		<img alt="{{{category_description}}}" src="{{{cover_photo}}}" /> 
-	</a>
-	-->
-</span>
-	
-	<h2>{{{category_label}}}</h2>
- */			if( self::hasPriviledge() )
-			{
-				$this->_xml .= '<span class="goodnews" >
-									<a class="" title="Add a new category" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Creator/"> + </a> 
-									<a class="badnews" title="View categories" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_List/"> - </a>
-								</span>';
-			}
-	//	$url = Ayoola_Page::appendQueryStrings( array( 'no_of_articles_to_show' => 1000 ) );
-	//	$url = '/article/?' . 'no_of_articles_to_show=1000';
-	//	$this->_xml .= '<li><a href="' . $url . '">All categories</a></li>';
+        if( self::hasPriviledge() )
+        {
+            $this->_xml .= '<span class="goodnews" >
+                                <a class="" title="Add a new category" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Creator/"> + </a> 
+                                <a class="badnews" title="View categories" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_List/"> - </a>
+                            </span>';
+        }
 		$this->_xml .= '' . $form . '';
 		$this->_xml .= '</ul>';
-	//	var_export( count( $value ) );
     } 
 	// END OF CLASS
 }

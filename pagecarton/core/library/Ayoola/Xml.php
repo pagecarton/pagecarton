@@ -188,17 +188,11 @@ class Ayoola_Xml extends DOMDocument
 		{
 			if( filemtime( $tempName ) < time() - 600 )
 			{
-				unlink( $tempName );
-			//	Application_Log_View_Error::log( $tempName . ' stayed too long. It is now removed.' );
-			}
-			while( time() < $time )
-			{
-				usleep( 100 );
-				if( ! is_file( $tempName ) )
-				{
-					return true;
-				}
-			}
+                Ayoola_File::trash( $tempName );
+				    // unlink( $tempName );
+            }
+            //  no waiting because causing delay and crashing servers.
+            //  Will reserve inserts
 		}
 		else 
 		{
@@ -216,17 +210,15 @@ class Ayoola_Xml extends DOMDocument
      */
     public function load( $filename, $options = null )
     {
-		$tempName = $filename . '.lock';
+        $tempName = $filename . '.lock';
 		if( ! self::checkLockFile( $tempName ) )
 		{
-			throw new Ayoola_Xml_Exception( 'XML FILE TOO BUSY' );
+			return false;
 		}
 		if( ! $path = Ayoola_Loader::checkFile( $filename ) )
 		{
-			require_once 'Ayoola/Xml/Exception.php';
-			throw new Ayoola_Xml_Exception( "Invalid Filename {$filename}");     
+			return false;     
 		}
-	//	var_export( $path );
         @$result = parent::load( $path, $options );
 		$this->setFilename( $path );
 		return $result;
@@ -244,31 +236,41 @@ class Ayoola_Xml extends DOMDocument
 		//throw new Exception;
 		$filename = $filename ? : $this->getFilename();
 
-	//	PageCarton_Widget::v( $filename );
+        //  save a big file first
+
+
 		$tempName = $filename . '.lock';  
 		if( ! self::checkLockFile( $tempName ) )
 		{
-			throw new Ayoola_Xml_Exception( 'XML FILE TOO BUSY' );
+			return false;
 		}
 		if( is_file( $filename ) )
 		{
-			copy( $filename, $tempName );
+            if( ! copy( $filename, $tempName ) )
+            {
+                throw new Ayoola_Xml_Exception( 'Could not create temporary file while saving XML ' . basename( $filename ) ); 
+            }
 		}
-	//	PageCarton_Widget::v( $tempName );
-	//	PageCarton_Widget::v( file_get_contents( $tempName ) );
 		
 		//	Make sure the file is saved before you give up
 		$giveUpAfter = 5; //sec
-		$time = time();
-		while( ! @$result = parent::save( $filename, $options ) )
-		{ 
-			if( time() > $time + $giveUpAfter )
-			{ 
-				throw new Ayoola_Xml_Exception( 'Error while saving ' . basename( $filename ) ); 
-			}
-			continue; 
-		}
-		$this->setFilename( $filename );
+        $time = time();
+
+        //  first save in a temp file 
+        $saveTmp = $filename . '.tmp';
+        if( ! $result = parent::save( $saveTmp, $options ) )
+        {
+			throw new Ayoola_Xml_Exception( 'Error while saving ' . basename( $filename ) ); 
+        }
+        if( ! rename( $saveTmp, $filename ) )
+        {
+            rename( $tempName, $filename . '.trouble.xml' );
+            throw new Ayoola_Xml_Exception( 'Could not copy temp while saving XML ' . basename( $filename ) ); 
+        }
+        //  no waiting because causing delay and crashing servers.
+        //  Will reserve inserts
+        $this->setFilename( $filename );
+        //  Ayoola_File::trash( $tempName );
 		@unlink( $tempName );
 		return $result;
     } 
@@ -285,7 +287,6 @@ class Ayoola_Xml extends DOMDocument
     public function autoId( $idKey = null, $node = null )
     {
 		$node = $this->getNode( $node );
-		//if( $node->parentNode ){ $node = $node->parentNode; }
 		$id = (int) $node->getAttribute( __FUNCTION__ );
 		$id = $id ? : 1; //	One is default ID
 		$this->setId( $idKey, $node ); 

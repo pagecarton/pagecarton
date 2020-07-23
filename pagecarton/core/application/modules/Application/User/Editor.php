@@ -46,7 +46,7 @@ class Application_User_Editor extends Application_User_Abstract
 			if( ! $data = self::getIdentifier() ){ return false; }
 		//	var_Export( $data );
 		//	var_Export( self::hasPriviledge( 98 ) );
-			if( $data['username'] !== Ayoola_Application::getUserInfo( 'username' ) && ! self::hasPriviledge( 98 ) )
+			if( strtolower( $data['username'] ) !== Ayoola_Application::getUserInfo( 'username' ) && ! self::hasPriviledge( 98 ) )
 			{
 				//	We are not the owner of data and we are not admin
 				return false;
@@ -54,7 +54,7 @@ class Application_User_Editor extends Application_User_Abstract
 //			var_export( $data );
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			
-			if( $data['username'] !== Ayoola_Application::getUserInfo( 'username' )  && ! self::hasPriviledge( 98 ) )
+			if( strtolower( $data['username'] ) !== Ayoola_Application::getUserInfo( 'username' )  && ! self::hasPriviledge( 98 ) )
 			{
 				//	We are not the owner of data and we are not admin
 				return false;
@@ -64,7 +64,6 @@ class Application_User_Editor extends Application_User_Abstract
 			$this->createForm( 'Save...', $data['username'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-	//		var_export( $values );  
 			
 			//	Empty password means we are not trying to update it
 			unset( $values['password2'] );
@@ -98,18 +97,16 @@ class Application_User_Editor extends Application_User_Abstract
 			$values = array_merge( $data, $values );
 			if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 			{
-				$database = 'file';
+				$database = 'private';
 			}
 			
 			switch( $database )
 			{
 				case 'cloud':
 					$response = Ayoola_Api_UserEditor::send( $values );
-			//		var_export( $response );
 					if( true === $response['data'] )
 					{
-					//	$this->setViewContent( 'User account edited successfully', true );
-						$this->setViewContent( '<div class="boxednews goodnews">User account edited successfully</div>', true );
+						$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account edited successfully</div>' ) . '', true  );
 						
 						
 						//	localize
@@ -120,11 +117,12 @@ class Application_User_Editor extends Application_User_Abstract
 				case 'relational':
 					if( $this->updateDb() )
 					{
-					//	$this->setViewContent( 'User account edited successfully', true );
-						$this->setViewContent( '<div class="boxednews goodnews">User account edited successfully</div>', true );
+					//	$this->setViewContent(  '' . self::__( 'User account edited successfully' ) . '', true  );
+						$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account edited successfully</div>' ) . '', true  );
 					}
 				break;
 				case 'file':
+				case 'private':
 					try
 					{
 						$values = $values + $data;
@@ -136,14 +134,13 @@ class Application_User_Editor extends Application_User_Abstract
 						$values = $hashedCredentials + $values;
 						if( Ayoola_Access_Localize::info( $values ) )
 						{
-							$this->setViewContent( '<div class="boxednews goodnews">User account changes saved successfully.</div>', true );
+							$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account changes saved successfully.</div>' ) . '', true  );
 						}
 					}
 					catch( Exception $e )
 					{
-					//	var_export( $e->getMessage() );
-					//	var_export( $e->getTraceAsString() );
-					}
+
+                    }
 				break;
 			
 			}

@@ -39,7 +39,7 @@ class Application_Subscription_Level_Delete extends Application_Subscription_Lev
 		if( ! $data = $this->getIdentifierData() ){ return false; }
 		$this->createDeleteForm( $data['subscriptionlevel_name'] );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->deleteDb( false ) ){ $this->setViewContent( 'Product category deleted successfully.', true ); }
+		if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Product category deleted successfully.' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

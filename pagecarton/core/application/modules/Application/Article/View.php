@@ -82,7 +82,7 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 			//	self::v( $data ); 
 			if( ! $data  
-				|| ( ! @$data['publish'] && ! self::isOwner( @$data['user_id'] ) && ! @in_array( 'publish', @$data['article_options'] ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] )   
+				|| ( ! @$data['publish'] && ! self::isOwner( @$data['user_id'] ) && ! @in_array( 'publish', @$data['article_options'] ) && Ayoola_Application::getUserInfo( 'username' ) !== strtolower( $data['username'] ) )   
 				|| ( ! self::hasPriviledge( @$data['auth_level'] ) && ! self::isOwner( @$data['user_id'] ) )
 				|| ! self::isAllowedToView( $data ) 
 			)
@@ -97,13 +97,13 @@ class Application_Article_View extends Application_Article_Abstract
 					$access = Ayoola_Access::getInstance();          
 					$access->logout();
 					$login = new Ayoola_Access_Login();  
-					$login->getObjectStorage( 'pc_coded_login_message' )->store( 'You are not authorized to view this post. Please log in with an authorized account to continue' );
+					$login->getObjectStorage( 'pc_coded_login_message' )->store( '' . self::__( 'You are not authorized to view this post. Please log in with an authorized account to continue' ) . '' . self::__( '' ) . '' );
 					
 					header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/accounts/signin/?pc_coded_login_message=1&previous_url=' . $data['article_url'] );
 					exit();
 				}
 				
-				return $this->setViewContent( '<p class="badnews">The requested article was not found on the server. Please check the URL and try again. ' . self::getQuickLink() . '</p>', true );
+				return $this->setViewContent(  '' . self::__( '<p class="badnews">The requested article was not found on the server. Please check the URL and try again.</p>' ) . '', true  );
 			//	self::setIdentifierData( $data );
 			}
 		//	var_export( self::hasPriviledge( @$data['auth_level'] ) );
@@ -112,8 +112,8 @@ class Application_Article_View extends Application_Article_Abstract
 		}
 		catch( Exception $e )
 		{ 
-			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
-			return $this->setViewContent( '<p class="badnews">Error with article package.</p>' ); 
+			$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );
+			return $this->setViewContent( self::__( '<p class="badnews">' . self::__( 'Error With Post' ) . '</p>' ) ); 
 		}
 	//	var_export( $this->_xml );
     } 
@@ -172,13 +172,7 @@ class Application_Article_View extends Application_Article_Abstract
 				$data += $userInfo;
 			}
 		}
-/* 
-		$data['article_description'] = trim( $data['article_description'] );
-		if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )
-		{
-			$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 200 );
-		}
- */
+
 		if( $this->getParameter( 'modified_time_representation' ) )
 		{
 			if( is_string( $this->getParameter( 'modified_time_representation' ) ) )
@@ -204,10 +198,10 @@ class Application_Article_View extends Application_Article_Abstract
 				}
 			}
 		}
-		@$data['article_date_M'] = date( 'M', $data['article_modified_date'] );
-		@$data['article_date_m'] = date( 'm', $data['article_modified_date'] );   
-		@$data['article_date_Y'] = date( 'Y', $data['article_modified_date'] );
-		@$data['article_date_d'] = date( 'd', $data['article_modified_date'] );   
+        @$data['article_date_M'] = strftime( '%B', $data['article_modified_date'] );
+        @$data['article_date_m'] = strftime( '%b', $data['article_modified_date'] );   
+        @$data['article_date_Y'] = strftime( '%Y', $data['article_modified_date'] );
+        @$data['article_date_d'] = strftime( '%d', $data['article_modified_date'] );   
 //	elseif( $this->getParameter( 'filter_date' ) )  
 		{
 			$filter = new Ayoola_Filter_Time();
@@ -248,7 +242,7 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 			if( $image = Ayoola_Doc::uriToDedicatedUrl( @$data['document_url'] ) )  
 			{
-				$imageLink = '<a href="' . $url . '" onClick=""><img class="' . __CLASS__ . '_IMG" style="max-width:100%;" src="' . $image . '" alt="' . $data['article_title'] . "'s cover photo 2" . '" title="' . $data['article_title'] . "'s cover photo" . '"/></a>';    
+				$imageLink = '<a href="' . $url . '" onClick=""><img class="' . __CLASS__ . '_IMG" style="max-width:100%;" src="' . $image . '" alt="' . $data['article_title'] . "" . '" title="' . $data['article_title'] . "'s cover photo" . '"/></a>';    
 				
 				//	Create this template placeholder value so we can have solve the problem of blank image tags in template markups
 				$data['cover_photo_with_link'] = $imageLink;
@@ -264,8 +258,6 @@ class Application_Article_View extends Application_Article_Abstract
 		$data['category_id'] = @$data['category_id'] ? : array();
 		$data['category_name'] = array_merge( $data['category_name'], $data['category_id'] );
 		$categoryText = self::getCategories( $data['category_name'], array( 'template' => $this->getParameter( 'category_template' ), 'glue' => ( $this->getParameter( 'category_template_glue' ) ? : ', ' ) ) );
-		$this->_objectData = $data;
-		$this->_objectTemplateValues = $data;
 		$this->_objectData['category_text'] = $categoryText;
 		$this->_objectTemplateValues['category_text'] = $categoryText;
 		$categoryText = $categoryText ? 'Category:  ' . $categoryText : null;		
@@ -289,8 +281,8 @@ class Application_Article_View extends Application_Article_Abstract
 			$editLink = '' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Editor/?article_url=' . $data['article_url'];
 			$editLinkHTML = null;
 		//	$editLinkHTML .= '<a href="' . $editLink . '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $editLink . '\' );">Edit...</button></a>';
-			$editLinkHTML .= '<a href="' . $editLink . '"><button style="">Edit Post...</button></a>';
-			$editLinkHTML .= '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Delete/?article_url=' . $data['article_url'] . '\' );">Delete Post...</button>';
+			$editLinkHTML .= '<a href="' . $editLink . '"><button style="">' . self::__( 'Edit Post' ) . '</button></a>';
+			$editLinkHTML .= '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Delete/?article_url=' . $data['article_url'] . '\' );">' . self::__( 'Delete Post' ) . '</button>';
 			$this->_objectData['edit_link'] = $editLinkHTML;
 			$this->_objectTemplateValues['edit_link'] = $editLinkHTML;
 //			$this->_xml .= $editLinkHTML;
@@ -460,9 +452,9 @@ class Application_Article_View extends Application_Article_Abstract
 					}
 					unset( $data[$imagesKey] );
 				break;  
-				case 'subscription-options':
-			//		var_export( $featureSuffix );
-			//		var_export( $data['subscription_selections' . $featureSuffix] );
+                case 'subscription-options':
+                //    self::v( $this->getParameter( 'subscription_selections_template' ) );
+                //    self::v( $data['subscription_selections' . $featureSuffix] );
 					if( $this->getParameter( 'subscription_selections_template' ) && $data['subscription_selections' . $featureSuffix] )
 					{
 						$data['subscription_selections_html' . $featureSuffix] = null;
@@ -474,8 +466,9 @@ class Application_Article_View extends Application_Article_Abstract
 							}
 							$data['subscription_selections_html' . $featureSuffix] .= str_ireplace( array( '{{{subscription_selections}}}', '{{{suffix}}}', ), array( $eachSelection, $featureSuffix ), $this->getParameter( 'subscription_selections_template' ) );
 						}
-					//	var_export( $data['subscription_selections_html' . $featurePrefix] );
 					}			
+                //    self::v( 'subscription_selections_html' . $featureSuffix );
+                //    self::v( $data['subscription_selections_html' . $featureSuffix] );
 				break;
 				case 'product':
 			//	case 'service':
@@ -549,26 +542,19 @@ class Application_Article_View extends Application_Article_Abstract
 				case 'download':
 				//	self::v( $data );
 					//	title
-					if( @$data['download_url'] )
-					{
-						if( $data['download_url'][0] === '/' )
-						{
-							//	this is still a local file we can load with Ayoola_Doc
-							$data['file_size'] =  filesize( Ayoola_Loader::checkFile(  'documents/' . $data['download_url'] ) );
-						}
-						else
-						{
-								#	we don't want to use get_headers again. Can make site slow
-						//	$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
-						//	$data['file_size'] = $head['content-length'];							
-						}
-					}
-					elseif( @$data['download_path'] )
-					{
-						$path = APPLICATION_DIR . $data['download_path'];
-						$data['file_size'] =  filesize( $path );
-					}
-					elseif( @$data['download_base64'] )
+                    if( $data['download_url'][0] === '/' )
+                    {
+                        $data['file_size'] = intval( filesize( Ayoola_Doc::getDocumentsDirectory() . @$data['download_url'] ) );
+                    }
+                    elseif( stripos( ':', $data['download_url'][0] ) !== false )
+                    {
+                        $data['file_size'] = intval( filesize( $data['download_url'][0] ) );
+                    }
+                    elseif(  @$data['download_path'] )
+                    {
+                        $data['file_size'] = intval( filesize( @$data['download_path'] ) );
+                    }
+                    if( @$data['download_base64'] )
 					{
 						$result = self::splitBase64Data( $data['download_base64'] );
 						$data['file_size'] =  strlen( $result['data'] );
@@ -581,8 +567,13 @@ class Application_Article_View extends Application_Article_Abstract
 					$this->_xml .= $data['download_button'];
 				break;
 				case 'article':
-				case 'post':
-					$this->_xml .= self::cleanHTML( @$data['article_content' . $featureSuffix] );
+                case 'post':
+                    $article = self::cleanHTML( @$data['article_content' . $featureSuffix] );
+                    if( strip_tags( $article ) === $article )
+                    {
+                        $article = nl2br( $article );
+                    }
+					$this->_xml .= $article;
 				break;
 			}
 			$this->_xml .= '</div>';
@@ -618,33 +609,12 @@ class Application_Article_View extends Application_Article_Abstract
  */		//	destroy float
 		$this->_xml .= '<div style="clear:both;"></div>';
 		
-		
+        $data['post_type'] = self::__( $data['post_type'] );
+        $data['article_type'] = self::__( $data['article_type'] );
+        $data['true_post_type'] = self::__( $data['true_post_type'] );
+        		
+		$this->_objectData = array_merge( $data ? : array(), $this->_objectData ? : array() );
 		$this->_objectTemplateValues = array_merge( $data ? : array(), $this->_objectTemplateValues ? : array() );
-		
-
-		//	Social Media
-//		$parameter = array( 'url' => $url );
-/* 		$this->_xml .= Application_GooglePlus_Share::viewInLine( $parameter );
-		$this->_xml .= Application_Facebook_Like::viewInLine( $parameter );
-		$this->_xml .= Application_Twitter_Tweet::viewInLine( $parameter );
- *///		$this->_xml .= Application_SocialMedia_Share::viewInLine( $parameter );
-	//	$this->_xml .= self::getQuickLink( $data );
-				
-/* 		//	CATEGORIES
-		@$data['category_name'] = $data['category_name'] ? : array();
-		@$data['category_id'] = $data['category_id'] ? : array(); 
-		$data['category_name'] += $data['category_id'];
-		$this->_xml .= self::getCategories( $data['category_name'] );
-				
-		//	hastags
-		$tags = array_map( 'trim', explode( ',', $data['article_tags'] ) );
-	//	var_export( $tags );
-		$this->_xml .= self::getHashTags( $tags );
-		
-		//	footer
-		$this->_xml .= self::getFooter( $data );
-		
-		$this->_xml .= '</span>';
- */    } 
+    } 
 	// END OF CLASS
 }

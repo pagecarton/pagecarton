@@ -34,9 +34,9 @@ class Ayoola_Access_AuthLevel_Creator extends Ayoola_Access_AuthLevel_Abstract
      */
 	protected function init()
     {
-		$this->createForm( 'Create', 'Create a new Access Level' );
+		$this->createForm( 'Continue', 'Create a new Access Level' );
 		$this->setViewContent( $this->getForm()->view(), true );				
-		if( $this->insertDb() ){ $this->setViewContent( 'Access Level Created Successfully', true ); }
+		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Access Level Created Successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

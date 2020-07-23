@@ -36,11 +36,11 @@ class Application_Settings_Creator extends Application_Settings_Abstract
     {
 		try
 		{ 
-			$this->createForm( 'Create', 'Create a Settings Name' );
+			$this->createForm( 'Continue', 'Create a Settings Name' );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( ! $this->insertDb( $values ) ){ return false; }
-			$this->setViewContent( 'Settings Name created successfully', true );
+			$this->setViewContent(  '' . self::__( 'Settings Name created successfully' ) . '', true  );
 		}
 		catch( Application_Settings_Exception $e ){ return false; }
     } 

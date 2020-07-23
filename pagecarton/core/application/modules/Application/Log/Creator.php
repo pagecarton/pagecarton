@@ -35,9 +35,9 @@ class Application_Log_Creator extends Application_Log_Abstract
 	protected function init()
     {
 	//	var_export( __LINE__ );
-		$this->createForm( 'Create', 'Create a new Log Package' );
+		$this->createForm( 'Continue', 'Create a new Log Package' );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->insertDb() ){ $this->setViewContent( 'Log viewer created successfully', true ); }
+		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Log viewer created successfully' ) . '', true  ); }
     } 
 	
     /**

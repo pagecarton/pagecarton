@@ -218,8 +218,31 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		{
 			return array();
 		}
-		$this->_identifierData = (array) $table->selectOne( null, $identifier );
-	//	var_export( $this->_identifierData );
+        $data = $table->selectOne( null, $identifier, array( 'case_insensitive' => true ) );
+
+        //  lets authenticate data that has userinfo
+        if( ! is_a( $this, 'Application_Article_Abstract' ) )
+        {
+            if( 
+                ! empty( $data['username'] ) 
+                && strtolower( Ayoola_Application::getUserInfo( 'username' ) ) !== strtolower( $data['username'] )
+                && ! self::hasPriviledge( 98 )
+                )
+            {
+                return false;
+            }
+
+            //  lets authenticate data that has userinfo
+            if( 
+                ! empty( $data['user_id'] ) 
+                && Ayoola_Application::getUserInfo( 'user_id' ) != $data['user_id']
+                && ! self::hasPriviledge( 98 )
+                )
+            {
+                return false;
+            }
+        }
+        $this->_identifierData = $data;
 		
 		//	this is needed in Ayoola_Abstract_Viewable::view();
 		$this->_objectTemplateValues = $this->_identifierData;
@@ -284,7 +307,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		//	power our search box
 		$this->prepareDbWhereClauseForSearch();
 		
-		$this->_dbData = (array) $table->select( null, $this->_dbWhereClause );
+		$this->_dbData = (array) $table->select( null, $this->_dbWhereClause, array( 'case_insensitive' => true ) );
 		$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
 	//	@$this->_sortColumn = ( $_REQUEST['pc_sort_column'] && $_REQUEST['pc_sort_column_table'] == get_class( $table ) ) ? $_REQUEST['pc_sort_column'] : $this->_sortColumn;
 //		var_Export( $this->_sortColumn );
@@ -317,17 +340,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			@$b = $b[$key];
 			return is_numeric( $a ) && is_numeric( $b ) ? ( ( $a < $b ) ? -1 : ( ( $a > $b ) ? 1 : 0 ) ) : strcmp( $a, $b );
 		};
-/* 		$sortColumn = create_function  
-		(
-			'$a,$b',
-			'
-				@$a = $a["' . $key . '"];
-				@$b = $b["' . $key . '"];
-			return is_numeric( $a ) && is_numeric( $b ) ? ( ( $a < $b ) ? -1 : ( ( $a > $b ) ? 1 : 0 ) ) : strcmp( $a, $b );'
-		//	strcmp($a["fruit"], $b["fruit"]);
-		
-		);  
- */		usort( $array, $sortColumn );
+		usort( $array, $sortColumn );
 		return $array;
     } 
 	
@@ -367,7 +380,6 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
      public static function getPrimaryId( Ayoola_Dbase_Table_Interface $table, array $insertValues, array $selectValues = null, array $options = null )
     {
-		//	var_export( $insertValues );
 		$selectValues = $selectValues ? : $insertValues;
 		do
 		{
@@ -428,13 +440,13 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			$class->initOnce();
 			if( ! $formV = $class->getForm()->getValues() )
 			{
-				$this->setViewContent( '<h3 style="margin: 1em 0;">Login to continue</h3>' );
+				$this->setViewContent( self::__( '<h3 style="margin: 1em 0;">Login to continue</h3>' ) );
 				$this->setViewContent( $class->view() );
 				return false;
 			}
 			else
 			{
-		//		$this->setViewContent( '<h2 style="margin: 1em 0;">Continue as @' . Ayoola_Application::getUserInfo( 'email' ) . '</h2>' );
+		//		$this->setViewContent( self::__( '<h2 style="margin: 1em 0;">Continue as @' . Ayoola_Application::getUserInfo( 'email' ) . '</h2>' ) );
 				return true;
 			}
 		}
@@ -457,14 +469,14 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			$class->initOnce();
 			if( ! $formV = $class->getForm()->getValues() )
 			{
-				$this->setViewContent( '<h2 style="margin: 1em 0;">Tell us about yourself first...</h2>' );
-				$this->setViewContent( '<p style="margin: 1em 0;">You do not have a profile on your account. Create a free public profile before you can start publishing posts.</p>' );
+				$this->setViewContent( self::__( '<h2 style="margin: 1em 0;">Tell us about yourself first...</h2>' ) );
+				$this->setViewContent( self::__( '<p style="margin: 1em 0;">You do not have a profile on your account. Create a free public profile before you can start publishing posts.</p>' ) );
 				$this->setViewContent( $class->view() );
 				return false;
 			}
 			else
 			{
-			//	$this->setViewContent( '<h2>Continue as @' . $formV['profile_url'] . '</h2>' );
+			//	$this->setViewContent( self::__( '<h2>Continue as @' . $formV['profile_url'] . '</h2>' ) );
 				return true;
 			}
 		}
@@ -478,10 +490,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
     public function setForm( Ayoola_Form $form )
     {
-		foreach( self::getHooks() as $class )
-		{
-			$class::hook( $this, __FUNCTION__, func_get_args() );
-		}
+        self::setHook( $this, __FUNCTION__, $form );
 		
 		//	INTRODUCING CALL-TO-ACTION
 		if( $this->getParameter( 'call_to_action' ) )
@@ -539,22 +548,15 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     public function setIdentifier( Array $values = null )
     {	
 		if( null === $values ){ $values = $_REQUEST; }
-	//	$this->_identifier = is_array( $this->_identifier ) ? $this->_identifier : array();
 		if( empty( $this->_identifierKeys ) && ! empty( $this->_idColumn ) )
 		{
 			$this->_identifierKeys = array( $this->_idColumn );
 		} 
-	//	var_export( $this->_identifierKeys );
-//	var_export( $this->_identifierKeys );
-//	var_export( $this->getParameter() ); 
 
 		foreach( $this->_identifierKeys as $value )
 		{
-//	var_export( $value );
 			if( ! array_key_exists( $value, $values ) )
 			{ 
-	//			var_export( $value );
-	//			var_export( $values );
 				if( array_key_exists( Ayoola_Form::hashElementName( $value ), $values ) )
 				{
 					$values[$value] = $values[Ayoola_Form::hashElementName( $value )];

@@ -56,7 +56,7 @@ class Application_SearchBox extends Ayoola_Abstract_Table
     {
 		try
 		{
-		//	$this->setViewContent( '<p></p>' );
+		//	$this->setViewContent( self::__( '<p></p>' ) );
 			$term = htmlentities( strip_tags( $_GET['q'] ), ENT_QUOTES, "UTF-8", false );
 			$html = '
 						<form data-not-playable="true" style="padding:1em 0 1em 0;" method="get" action="' . ( $this->getParameter( 'action' ) ? : '' . Ayoola_Application::getUrlPrefix() . '/search' ) . '" class="">
@@ -65,7 +65,7 @@ class Application_SearchBox extends Ayoola_Abstract_Table
 			';
 /* 			if( $this->getParameter( 'full_screen' ) )
 			{
-				$this->setViewContent( '<div style="display:block; height:100%;width:100%;padding:0.5em;background-color: ' . Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ) . ';"></div>' ); 
+				$this->setViewContent( self::__( '<div style="display:block; height:100%;width:100%;padding:0.5em;background-color: ' . Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ) . ';"></div>' ) ); 
 			}
  */			$this->setViewContent( $html ); 
 			if( $term )

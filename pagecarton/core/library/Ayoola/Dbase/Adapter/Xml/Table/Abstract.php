@@ -407,6 +407,27 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
     } 
 
     /**
+     * Load data into table
+     *
+     * @param string $filename
+     * @return bool
+     */
+    public function loadTableDataFromFile( $filename, $fallback = false )
+    {
+        if( ! $this->getXml()->load( $filename )  )
+        {
+            //  fall back to backed up lock file
+            if( $fallback && $this->getXml()->load( $filename . '.lock' ) )
+            {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
      * Gets data types of fields on a table
      *
      * @return array
@@ -420,13 +441,9 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
 		else
 		{
 		}
-	//	echo file_get_contents( $this->getFilename( true ) ); 
 		$filename = $this->getFilename( true );
 		
 		//	DEBUG
-	//	var_export( $filename );
-	//	var_export( $this->getXml()->getElementsByTagName( self::TAGNAME_DATA_TYPES ) );
-	//	var_export( $this->getXml()->view() );
 		if(	! is_file( $filename ) )
 		{
 		//	cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
@@ -434,43 +451,27 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
 		}
 		elseif(	trim( file_get_contents( $filename ) ) === '' )
 		{
-			//	Avoid errors of when this is empty
-			unlink( $filename );
-		//	Application_Log_View_Error::log( "'{$filename}' is an empty file and has been removed from the server. " );
+            //	Avoid errors of when this is empty
+            //  don't delete again. don't know if this is why some user tables are being deleted mysteriously
+		    //	unlink( $filename );
 			return array();
 		}
 		else
 		{
-		//	is_file( $filename ) ? $this->getXml()->load( $filename ) : null;
 		
 			//	Giving last chance helps in some cases
-			$this->getXml()->load( $filename );
+            if( ! $this->loadTableDataFromFile( $filename, true ) )
+            {
+
+            }
 			if( $node = $this->getXml()->getElementsByTagName( self::TAGNAME_DATA_TYPES )->item( 0 ) )
 			{
 			//	var_export( $this->getXml()->getTagAttributes( $node ) );
 				return $this->getXml()->getTagAttributes( $node ); 
 			}
-//			var_export( $this->getXml()->view() );
-	//		exit();
-			$newFilename = $filename . time() . '.malformed.xml';
-			if( ! @rename( $filename, $newFilename  ) )
-			{
-				return array();
-			}
-			@unlink( $filename );
-			try
-			{ 
-			//	Application_Log_View_Error::log( "'{$filename}' has some errors, so it has been renamed '{$newFilename}' " );
-			}
-			catch( Exception $e )
-			{
-				null;
-			}
-		}
-		
-	//	echo unlink( $this->getFilename( true ) ); 
-	//	throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( "Invalid Datatype on " . $filename ); 
-	//	throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( "Invalid Datatype on " . basename ( $this->getFilename( true ) ) );
+            Ayoola_File::trash( $filename );
+            return array();
+		}		
     } 
 
     /**
@@ -637,7 +638,7 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
      *
      * @param string The Field Key
      */
-    public static function getDataTypeKeyValue( $key )
+    public function getDataTypeKeyValue( $key )
     {
 		if( array_key_exists( $key, $this->getTableDataTypes() ) )
 		{
@@ -878,7 +879,11 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
     {
 		$dataTypes = $this->getTableDataTypes( $key );
 		$value = self::filterDataType( $value, $dataTypes  );
-		//var_export( self::retrieveReferenceKey( $dataTypes ) );
+        //var_export( self::retrieveReferenceKey( $dataTypes ) );
+        if( ! is_scalar( $value ) )
+        {
+            $value = json_encode( $value );
+        }
 		$value = is_string( $value ) ? htmlspecialchars( $value ) : $value;
 		if( self::retrieveReferenceKey( $dataTypes ) == 'UNIQUE' && $this->checkDuplicateValue( $key, $value ) )
 		{

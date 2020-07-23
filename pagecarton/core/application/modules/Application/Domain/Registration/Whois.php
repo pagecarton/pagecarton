@@ -33,13 +33,14 @@ class Application_Domain_Registration_Whois extends Ayoola_Dbase_Table_Abstract_
      *
      * @param int
      */
-    protected $_tableVersion = '0.01';
+    protected $_tableVersion = '0.02';
 
 	protected $_dataTypes = array
 	( 
 		'extension' => 'INPUTTEXT, UNIQUE',
 		'server' => 'INPUTTEXT',
 		'badnews_length' => 'INPUTTEXT',
+		'badnews_content' => 'INPUTTEXT',
 	);
 	// END OF CLASS
 }

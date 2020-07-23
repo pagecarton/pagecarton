@@ -53,12 +53,12 @@ class Ayoola_Form_Editor extends Ayoola_Form_Abstract
 			if( ! $this->updateDb( $values ) ){ return false; }
 			
 	//		var_export( $data );
-			$this->setViewContent( 'Form saved successfully', true ); 
+			$this->setViewContent(  '<p class="goodnews">' . self::__( 'Form saved successfully' ) . '</p>', true  ); 
 		}
 		catch( Exception $e )
 		{ 
 		//	return false; 
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
 		
     } 

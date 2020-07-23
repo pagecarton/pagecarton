@@ -60,7 +60,7 @@ class Ayoola_Page_Layout_Editor extends Ayoola_Page_Layout_Abstract
 			
 			if( ! $this->updateDb() )
 			{ 
-				$this->setViewContent( '<p class="badnews">Error: could not save layout template.</p>.', true ); 
+				$this->setViewContent(  '' . self::__( '<p class="badnews">Error: could not save layout template.</p>.' ) . '', true  ); 
 				if( @$_REQUEST['layout_name'] === 'novus' )
 				{
 
@@ -70,19 +70,18 @@ class Ayoola_Page_Layout_Editor extends Ayoola_Page_Layout_Abstract
 					return false;   
 				}
 			}
-			if( $this->updateFile() ){ $this->setViewContent( '<p class="boxednews goodnews">Theme file saved successfully.</p>', true ); }	
+			if( $this->updateFile() ){ $this->setViewContent(  '' . self::__( '<p class="boxednews goodnews">Theme file saved successfully.</p>' ) . '', true  ); }	
 			
-				$this->setViewContent( '<p class="">
+				$this->setViewContent(  self::__( '<p class="">
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/layout/' . $identifierData['layout_name'] . '/template" class="pc-btn pc-btn-small">Edit Theme</a>
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $identifierData['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a>
 
-				</p>' );
+				</p>' ) );
 /*
 			// save screenshot
 			if( $values['screenshot'] )
 			{
 				$filename = dirname( $this->getMyFilename() ) . DS . 'screenshot';
-				file_put_contents( $filename, $values['screenshot']);
 			}  
 */
 			// remove this so that screenshot don't get updated'   
@@ -98,7 +97,7 @@ class Ayoola_Page_Layout_Editor extends Ayoola_Page_Layout_Abstract
 			}  
 			unset( $values['screenshot_url'] );
 		
-	//	$this->setViewContent( 'Layout saved successfully' );
+	//	$this->setViewContent( self::__( 'Layout saved successfully' ) );
 		}
 		catch( Exception $e )
 		{ 

@@ -52,7 +52,7 @@ class Application_SiteInfo extends PageCarton_Widget
         @$settings['cover_photo'] = $settings['cover_photo'] ? : Ayoola_Application::getDomainSettings( 'display_picture' );
         @$settings['cover_photo'] = $settings['cover_photo'] ? : '/img/placeholder-image.jpg';
   //     self::v( $settings );      
-      if( empty( $settings['site_headline'] ) )
+        if( empty( $settings['site_headline'] ) )
         {
         //    var_export( explode( '.', DOMAIN ) );
             $settings['site_headline'] = ucwords( array_shift( explode( '.', DOMAIN ) ) ) ? : 'My Site';
@@ -62,6 +62,8 @@ class Application_SiteInfo extends PageCarton_Widget
         {
             $settings['site_description'] = $settings['site_description'] ? : 'Description for this site has not been set. Site Description will appear here when they become available.';
         }
+		$settings['background_color'] = Application_Settings_Abstract::getSettings( 'Page', 'background_color' );
+        $settings['font_color'] = Application_Settings_Abstract::getSettings( 'Page', 'font_color' );
         return $key ? @$settings[$key] : $settings;
     }  
 
@@ -77,13 +79,20 @@ class Application_SiteInfo extends PageCarton_Widget
 
             //  Output demo content to screen
 		    $settings = self::getInfo();
+            
+            if( self::hasPriviledge( 98 ) )
+            {
+                $settings['link_to_edit'] = '<a  style="font-size:x-small; color:inherit;text-transform:uppercase;display:inline-block;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SiteInfo/?' . '&xpc_form_element_whitelist=site_headline,site_description,cover_photo\', \'page_refresh\' );" href="javascript:">[' . self::__( 'edit site headline and description' ) . ']</a>';
+                $settings['pc_no_data_filter'] = true;
+
+            }
 
 //     var_export( Ayoola_Page::getCurrentsettings() );
             $html = '<div class="pc_theme_parallax_background" style="background-image:     linear-gradient(      rgba(0, 0, 0, 0.7),      rgba(0, 0, 0, 0.7)    ),    url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $settings['cover_photo'] ) . '&crop=1&max_width=1500&max_height=600\');">';
             $html .= $this->getParameter( 'css_class_of_inner_content' ) ? '<div class="' . $this->getParameter( 'css_class_of_inner_content' ) . '">' : null;
             $html .= '<h1>' . $settings['site_headline'] . '</h1>';
             $html .= $settings['site_description'] ? '<br><br><p>' . $settings['site_description'] . '</p>' : null;
-            $html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;"><a  style="color:inherit;text-transform:uppercase;" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/SiteInfo/?' . '&xpc_form_element_whitelist=site_headline,site_description,cover_photo\', \'page_refresh\' );" href="javascript:">[edit site headline and description]</a></p>' : null;
+            $html .= self::hasPriviledge( array( 99, 98 ) ) ? '<br><br><p style="font-size:x-small;">' . $settings['link_to_edit'] . '</p>' : null;
             $html .= $this->getParameter( 'css_class_of_inner_content' ) ? '</div>' : null;
             $html .= '</div>';
             $this->_objectTemplateValues = array_merge( $settings ? : array(), $this->_objectTemplateValues ? : array() );
@@ -95,7 +104,7 @@ class Application_SiteInfo extends PageCarton_Widget
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

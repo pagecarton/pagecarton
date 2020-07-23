@@ -44,7 +44,7 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 			Application_Cache_Clear::viewInLine();
 			if( $this->restore() )
 			{ 
-				$this->setViewContent( '<div class="goodnews">Back up restored successfully.</div>', true ); 
+				$this->setViewContent(  '' . self::__( '<div class="goodnews">Back up restored successfully.</div>' ) . '', true  ); 
 			}
 			Application_Cache_Clear::viewInLine();  
 		//	else
@@ -55,7 +55,7 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 		{
 		//	var_export( $e->getMessage() );
 			$this->getForm()->setBadnews( 'Invalid Backup File' );
-			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );		
+			$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );		
 			$this->setViewContent( $this->getForm()->view() );		
 			return false;
 		}
@@ -213,9 +213,12 @@ class Application_Backup_Restore extends Application_Backup_Abstract
 
 		if( ! $response = Application_User_Abstract::getUsers( array( 'access_level' => 99 ) ) )  
 		{
+            //  refresh index to allow admin creator to work
+            Ayoola_File::putContents( 'index.php', file_get_contents( 'index.php' ) );
+            
 			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Personalization' );
 			exit();
-		//	$this->setViewContent( '<div class="pc-notify-info">Back up restored successfully.</div>', true );
+		//	$this->setViewContent(  '' . self::__( '<div class="pc-notify-info">Back up restored successfully.</div>' ) . '', true  );
 		}
 		return true;
 	//	$tempBackupFilename;

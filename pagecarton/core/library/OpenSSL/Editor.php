@@ -49,12 +49,12 @@ class OpenSSL_Editor extends OpenSSL_Abstract
 			if( ! $this->updateDb( $values ) ){ return false; }
 			
 	//		var_export( $data );
-			$this->setViewContent( 'Encryption keys edited Successfully', true ); 
+			$this->setViewContent(  '' . self::__( 'Encryption keys edited Successfully' ) . '', true  ); 
 		}
 		catch( Exception $e )
 		{ 
 		//	return false; 
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
 		
     } 

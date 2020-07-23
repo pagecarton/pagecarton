@@ -45,7 +45,7 @@ class Application_User_NotificationMessage_Send_Email extends Application_User_N
 	//	try
 		{ 
 			
-		//	if( $this->sendMessage( false ) ){ $this->setViewContent( 'Notification message sent', true ); }
+		//	if( $this->sendMessage( false ) ){ $this->setViewContent(  '' . self::__( 'Notification message sent' ) . '', true  ); }
 		}
 	//	catch( Exception $e ){ return false; }
 	}

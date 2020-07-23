@@ -58,7 +58,7 @@ class Ayoola_Object_Wrapper_List extends Ayoola_Object_Wrapper_Abstract
 	//	$otherThemes = array_diff( $my, $all );
 	//	var_export( $otherThemes );
 		$this->setViewContent( $this->createPrivateList( $my ), true );		
-	//	$this->setViewContent( '<h3>All Themes</h3>' );		
+	//	$this->setViewContent( self::__( '<h3>All Themes</h3>' ) );		
 		$this->setViewContent( $this->createList( $all ) );		
     } 
 	

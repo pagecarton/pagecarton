@@ -52,6 +52,7 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 		if( self::hasPriviledge() )
 		{
 
+            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
 			set_time_limit( 0 );
 			
 			//	Reset domain
@@ -64,19 +65,24 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 			//	var_export( $stupidCache );
 			if( is_dir( $stupidCache ) )
 			{
-			//	var_export( $stupidCache );
-				Ayoola_Doc::deleteDirectoryPlusContent( $stupidCache );
+                $tempName = $stupidCache . '.' . time();
+                rename( $stupidCache, $tempName );
+				Ayoola_Doc::deleteDirectoryPlusContent( $tempName );
 			}
 			
 			//	Clear cache
 			if( is_dir( PC_TEMP_DIR ) )
 			{
-				Ayoola_Doc::deleteDirectoryPlusContent( PC_TEMP_DIR );
+                $tempName = PC_TEMP_DIR . '.' . time();
+                rename( PC_TEMP_DIR, $tempName );
+				Ayoola_Doc::deleteDirectoryPlusContent( $tempName );
 			}
+            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
 		}
 		elseif( self::hasPriviledge( array( 98 ) ) || $this->getParameter( 'clear_all' ) )
 		{
 			//	Reset domain
+            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
 			Ayoola_Application::setDomainSettings( true );
 					//	var_export( Ayoola_Application::getDomainSettings() );
 			//	Clear cache
@@ -84,14 +90,17 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 		//	if( is_dir( $cache ) )
 			if( is_dir( CACHE_DIR ) )
 			{
-				Ayoola_Doc::deleteDirectoryPlusContent( CACHE_DIR );
+                $tempName = CACHE_DIR . '.' . time();
+                rename( CACHE_DIR, $tempName );
+				Ayoola_Doc::deleteDirectoryPlusContent( $tempName );
 			}
+            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
 		}
 		
 		//	Destroy the session. User information is lost.
 	//	Ayoola_Session::destroy();
-		$this->setViewContent( '<h1 class="badnews">Cache Cleared!</h1>', true ); 
-	//	$this->setViewContent( '<p class="">Your session might have been lost. Which means you may need to sign in again.</p>' ); 
+		$this->setViewContent(  '' . self::__( '<h1 class="badnews">Cache Cleared!</h1>' ) . '', true  ); 
+	//	$this->setViewContent( self::__( '<p class="">Your session might have been lost. Which means you may need to sign in again.</p>' ) ); 
     } 
 	// END OF CLASS
 }

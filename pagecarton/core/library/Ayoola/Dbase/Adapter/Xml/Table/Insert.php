@@ -44,6 +44,20 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
     {
 	//	$recordRowId = $options['record_row_id'] ? : $options;
 		$recordRowId = $options['record_row_id'];
+
+        $processDir = $this->getMyTempProcessDirectory();
+        $scopeFile = $this->getFilenameAccordingToScope( false, $this->getAccessibility() );
+    //    var_export( $scopeFile );
+        if( ! $this->loadTableDataFromFile( $scopeFile ) )
+        {
+            Ayoola_Doc::createDirectory( $processDir );
+            $tempData = serialize( func_get_args() );
+            $tempFile = $processDir . DS . md5( $tempData . time() );
+        //    var_export( func_get_args() );
+            Ayoola_File::putContents( $tempFile, $tempData );
+            return true;
+        }
+
 		
 		// Set unset Values  to default
 		foreach( $this->getDataTypes() as $key => $value )
@@ -53,15 +67,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		
 		//	CHECK IF WE HAVE UP TOO MUCH RECORDS IN A SINGLE FILE
 		$i = 0;
-//		while( count( $this->query( 'SELECT', null, array( self::SCOPE_PRIVATE => true ) ) ) > 5 )
-//	var_export(	filesize( $this->_myFilename ) );
-//	var_export(	filesize( $this->_myFilename ) > 200000 );
-	//	$filename = $this->getMyFilename();
 		$filename = null;
-		$filename = $this->_myFilename;
-//		while( count( $this->query( 'SELECT', null, null, array( 'filename' => $filename ) ) ) > 499 || ( filesize( $filename ) > 20000 ) )
-		//	Lets use filesize because some db may have many records "light" records e.g. 300000 (~300kb)
-		$dir = $this->getMySupplementaryDirectory();
+		$filename = $scopeFile;
+
+        //	Lets use filesize because some db may have many records "light" records e.g. 300000 (~300kb)
+        $dir = $this->getMySupplementaryDirectory();
 		if( filesize( $filename ) > 300000 )
 		{
 			$strToUse = str_pad( $i, 3, '0', STR_PAD_LEFT );
@@ -85,49 +95,15 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		//	$this->query( 'DROP' );
 			$this->setXml();
 			$this->query( 'CREATE', $tableInfo['table_info'], $tableInfo['data_types'] );
-			$this->setXml();
-			$this->getXml()->load( $filename );
+            $this->setXml();
+            //    var_export( $filename );
+            if( ! $this->getXml()->load( $filename ) )
+            {
+            //    var_export( $filename );
+            }
 		}
 
-/*		while( filesize( $filename ) > 150000 )
-		{
-			++$i;
-			if( $i > static::$_maxNoOfSupplementaryFiles )
-			{
-				$badnews = 'MAXIMUM NUMBER OF SUPPLEMENTARY FILES (' . static::$_maxNoOfSupplementaryFiles . ') CREATED FOR XML_DB IN "' . $dir . '"';
-			//	Application_Log_View_Error::log( $badnews );
-				throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( $badnews );
-			}
-			$filename = $dir . DS . '' . implode( DS, str_split( $i ) ) . EXT_DATA;     
-		//	$filename = $dir . DS . '' . $i . EXT_DATA; 
-			
-	//		echo $filename;
-		//	$this->_myFilename = $filename;
-		//	var_export( $filename );
-		//	exit();
-			if( ! is_file( $filename ) )
-			{
-				Ayoola_Doc::createDirectory( dirname( $filename ) );
-				$dataTypes = $this->getDataTypes();
-			//	var_export( $dataTypes );
-				$tableInfo = $this->query( 'DESCRIBE' );
-				$tableInfo['table_info']['no_existence_check'] = true;
-				$tableInfo['table_info']['filename'] = $filename;
-			//	var_export( $tableInfo );
-		//		var_export( $this->getTableName() );
-			//	var_export( $this->_tableVersion );
-		//		var_export( $tableInfo );
-				$this->setXml();
-		//		$this->getXml()->load( $filename );
-				
-				$this->query( 'CREATE', $tableInfo['table_info'], $tableInfo['data_types'] );
-			}
-		//	var_export( $tableInfo );
-			$this->setXml();
-			$this->getXml()->load( $filename );
-		//	break;
-		}
-*/		$recordRowId = $this->getXml()->autoId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );  		
+		$recordRowId = $this->getXml()->autoId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );  		
 		$row = $this->getXml()->createElement( self::TAG_TABLE_ROW );  
 		$idColumn = $this->getTableName() . '_id';
 		$whereValue = $recordRowId ? : $values[$idColumn];
@@ -144,8 +120,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		if( empty( $values['creation_time'] ) )   
 		{
 			$values['creation_time'] = time();
-		}
-	//	var_export( $values['creation_time'] );
+        }
+        $values['__user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
+        $values['__ip'] = Ayoola_Application::getRuntimeSettings( 'user_ip' );
+    //  $values['__long_lang'] = '';
+        //	var_export( $values['creation_time'] );
 	//		var_export( $recordRowId );
 	//		var_export( $values[$idColumn] );
 		if( empty( $options['record_row_id'] ) && empty( $values[$idColumn] ) )
@@ -191,7 +170,28 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		
 	//	var_export( $values[$idColumn] );
 		$this->saveFile( $filename );
-	//	$this->clearCache();
+    //	$this->clearCache();
+    
+        if( $processes = Ayoola_Doc::getFilesRecursive( $processDir ) AND empty( $this->proccesses ) )
+        {
+            $this->proccesses = $processes;
+        //    var_export( $processes );
+        //    exit( $processes );
+            foreach( $processes as $process )
+            {
+                if( $tempData = unserialize( file_get_contents( $process ) ) )
+                {
+                    $response = $this->init( $tempData[0], $tempData[1] );
+
+                    unlink( $process );
+                    Ayoola_Doc::removeDirectory( dirname( $process ) );
+                //      Ayoola_File::trash( $process );
+
+                }
+
+            }
+        }    
+
 		return array( 'insert_id' => $whereValue, $idColumn => $whereValue );
     } 
 	// END OF CLASS

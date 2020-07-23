@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DOCUMENT_ELEMENT table_name="device" creation_time="1563920770" modified_time="1563920770" table_version="0.0" module_version="1.00" table_class="PageCarton_Device" creation_ip="0">
+  <RECORDS autoId="5">
+    <TABLE_ROW ROW_ID="1">
+      <TABLE_FIELD FIELD_KEY="device_name"><![CDATA[iPhone]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="environment_key"><![CDATA[[&quot;HTTP_USER_AGENT&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="environment_value"><![CDATA[[&quot;iPhone&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="equator"><![CDATA[[&quot;1&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="device_id"><![CDATA[1563920770-0-1]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563920770]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="2">
+      <TABLE_FIELD FIELD_KEY="device_name"><![CDATA[Android]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="environment_key"><![CDATA[[&quot;HTTP_USER_AGENT&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="environment_value"><![CDATA[[&quot;Android&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="equator"><![CDATA[[&quot;1&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="device_id"><![CDATA[1563922245-0-2]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563922245]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="3">
+      <TABLE_FIELD FIELD_KEY="device_name"><![CDATA[Mobile]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="environment_key"><![CDATA[[&quot;HTTP_USER_AGENT&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="environment_value"><![CDATA[[&quot;(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\\.browser|up\\.link|webos|wos)&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="equator"><![CDATA[[&quot;2&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="device_id"><![CDATA[1563924682-0-3]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563924682]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="4">
+      <TABLE_FIELD FIELD_KEY="device_name"><![CDATA[iOS]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="environment_key"><![CDATA[[&quot;HTTP_USER_AGENT&quot;,&quot;HTTP_USER_AGENT&quot;,&quot;HTTP_USER_AGENT&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="environment_value"><![CDATA[[&quot;iPhone&quot;,&quot;iPad&quot;,&quot;iPod&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="equator"><![CDATA[[&quot;1&quot;,&quot;1&quot;,&quot;1&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="device_id"><![CDATA[1563927651-0-4]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563927651]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+    </TABLE_ROW>
+  </RECORDS>
+  <TABLE_SETTINGS>
+    <DATA_TYPES device_name="INPUTTEXT" environment_key="JSON" environment_value="JSON" equator="JSON" device_id="INPUTTEXT" creation_time="INPUTTEXT" modified_time="INPUTTEXT"/>
+    <FOREIGN_KEYS/>
+    <RELATIVES/>
+  </TABLE_SETTINGS>
+</DOCUMENT_ELEMENT>

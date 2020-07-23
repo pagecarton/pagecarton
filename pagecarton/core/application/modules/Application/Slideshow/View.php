@@ -191,9 +191,11 @@ class Application_Slideshow_View extends Application_Slideshow_Abstract
 											) 
 											+ $this->getParameter();
 				//	var_export( $parameters );
-					$class = new Application_Article_ShowAll( $parameters );     
+                    $class = new Application_Article_ShowAll( $parameters );    
+                    $this->initiated ? : $class->init(); 
 				//	var_export( $class->_objectData );
 					$info = $class->_objectData;
+				//	var_export( $class->view() );
 				//	var_export( $info );
 
 			//		$info = self::sortMultiDimensionalArray( $info, $this->getParameter( 'sort_column' ) ? : 'article_creation_date' );

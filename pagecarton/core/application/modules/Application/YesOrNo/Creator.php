@@ -44,7 +44,7 @@ class Application_YesOrNo_Creator extends Application_YesOrNo_Abstract
 			//	Notify Admin
 			$mailInfo = array();
 			$mailInfo['subject'] = __CLASS__;
-			$mailInfo['body'] = 'Form submitted on your PageCarton Installation with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'Form submitted on your PageCarton Installation with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			';
 			try
@@ -56,7 +56,7 @@ class Application_YesOrNo_Creator extends Application_YesOrNo_Abstract
 		//	if( ! $this->insertDb() ){ return false; }
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent( '<div class="goodnews">Added successfully. </div>', true ); 
+				$this->setViewContent(  '' . self::__( '<div class="goodnews">Added successfully. </div>' ) . '', true  ); 
 			}
 		//	$this->setViewContent( $this->getForm()->view() );
             
@@ -68,8 +68,8 @@ class Application_YesOrNo_Creator extends Application_YesOrNo_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+            $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
 	}

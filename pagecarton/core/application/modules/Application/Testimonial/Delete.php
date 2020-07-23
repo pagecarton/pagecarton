@@ -39,7 +39,7 @@ class Application_Testimonial_Delete extends Application_Testimonial_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['testimonial'],  'Delete Testimonial' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Testimonial deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Testimonial deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Testimonial_Exception $e ){ return false; }
     } 

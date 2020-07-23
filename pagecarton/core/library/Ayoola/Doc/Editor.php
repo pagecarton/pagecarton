@@ -39,7 +39,7 @@ class Ayoola_Doc_Editor extends Ayoola_Doc_Abstract
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 		$this->createForm( 'Edit Document Name', 'Edit ' . $identifierData['document_name'], $identifierData );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->updateDb() ){ $this->setViewContent( 'Document edited successfully', true ); }
+		if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Document edited successfully' ) . '', true  ); }
     } 
 	
 }

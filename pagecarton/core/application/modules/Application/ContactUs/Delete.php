@@ -43,7 +43,7 @@ class Application_ContactUs_Delete extends Application_ContactUs_Abstract
 			//	Only remove from DB if file deleted.
 			if( $this->deleteDb( false ) )
 			{ 
-				$this->setViewContent( 'Contact message deleted successfully', true ); 
+				$this->setViewContent(  '' . self::__( 'Contact message deleted successfully' ) . '', true  ); 
 			}
 		}
 		catch( Application_ContactUs_Exception $e ){ return false; }

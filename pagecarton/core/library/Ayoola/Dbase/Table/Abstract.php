@@ -16,6 +16,7 @@
  */
  
 require_once 'Ayoola/Dbase/Table/Interface.php';
+require_once 'PageCarton/Widget.php';
 
 
 /**
@@ -73,7 +74,7 @@ abstract class Ayoola_Dbase_Table_Abstract  extends PageCarton_Widget implements
      */
     public function __construct( $database = null )
     {		
-		if( ! is_null( $database ) ){ $this->setDatabase( $database ); }
+		if( is_a( $database, 'Ayoola_Dbase' ) ){ $this->setDatabase( $database ); }
     }
 
     /**
@@ -217,8 +218,7 @@ abstract class Ayoola_Dbase_Table_Abstract  extends PageCarton_Widget implements
 		{
 			return call_user_func_array( array( $this->getDatabase()->getAdapter(), $name ), $arguments );
 		}
-		require_once 'Ayoola/Dbase/Table/Exception.php';
-		throw new Ayoola_Dbase_Table_Exception( 'Invalid Method For Database - ' . $name );
+		return false;
     }
 	// END OF CLASS
 }

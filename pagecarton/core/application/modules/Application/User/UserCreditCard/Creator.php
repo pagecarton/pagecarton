@@ -59,8 +59,8 @@ class Application_User_UserCreditCard_Creator extends Application_User_UserCredi
 		
 			return false; 
 		}
-		$this->setViewContent( '<h4>Credit/Debit Card Information Added.</h4>', true );		
-		$this->setViewContent( '<p>What Next? <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/verify/get/mode/CreditCard/">Verify Credit/Debit Card</a>.</p>' );		
+		$this->setViewContent(  '' . self::__( '<h4>Credit/Debit Card Information Added.</h4>' ) . '', true  );		
+		$this->setViewContent( self::__( '<p>What Next? <a href="' . Ayoola_Application::getUrlPrefix() . '/accounts/verify/get/mode/CreditCard/">Verify Credit/Debit Card</a>.</p>' ) );		
     }
 	// END OF CLASS
 }

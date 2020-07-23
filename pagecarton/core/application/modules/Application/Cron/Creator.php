@@ -39,7 +39,7 @@ class Application_Cron_Creator extends Application_Cron_Abstract
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		$this->update( array( 'insert' => $values['task'] ) );
 		if( ! $this->insertDb() ){ return $this->setViewContent( $this->getForm()->view(), true ); }
-		$this->setViewContent( '<p>Cron job scheduled successfully.</p>', true );
+		$this->setViewContent(  '' . self::__( '<p>Cron job scheduled successfully.</p>' ) . '', true  );
    } 
 	// END OF CLASS
 }

@@ -96,13 +96,23 @@ class Application_User_Creator extends Application_User_Abstract
     protected function init()
     {
 		$this->createForm( $this->getParameter( 'submit_value' ) ?  : 'Create Account', $this->getParameter( 'legend' ) );
-	//	$this->setViewContent( '<h2>Sign up for a free account.</h2>' ); 
+	//	$this->setViewContent( self::__( '<h2>Sign up for a free account.</h2>' ) ); 
 		$auth = new Ayoola_Access();
 		$urlToGo = $this->getParameter( 'return_url' ) ? : Ayoola_Page::getPreviousUrl();
 		//	var_export( $urlToGo ); 
-		Application_Javascript::header( Ayoola_Application::getUrlPrefix() . $urlToGo );
+        Application_Javascript::header( Ayoola_Application::getUrlPrefix() . $urlToGo );
+		$sOptions = Application_Settings_Abstract::getSettings( 'UserAccount', 'signup' );
+    //    var_export( $accountOptions );
+        if( @in_array( 'disable-signup', $sOptions ) && ! self::hasPriviledge( 98 ) )
+        {
+            $this->setViewContent( '<p class="badnews">' . self::__( 'New registrations has been disabled on this site.' ) . '</p>' );
+            return false;
+        }
+    //    var_export( $this->getForm()->getbadnews() );
+       
 		$this->setViewContent( $this->getForm()->view() );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
+    //    var_export( $values );
 
 		$values['creation_time'] = time();
 		if( empty( $values['password'] ) )
@@ -175,7 +185,7 @@ class Application_User_Creator extends Application_User_Abstract
 
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
-			$database = 'file';
+			$database = 'private';
 		}
 		$saved = false;
 		$message = null;
@@ -207,6 +217,7 @@ class Application_User_Creator extends Application_User_Abstract
 				Application_User_Verify_Email::resetVerificationCode( $values );
 			break;
 			case 'file':
+            case 'private':
 			//	var_export( $values );
 				try
 				{
@@ -236,16 +247,46 @@ class Application_User_Creator extends Application_User_Abstract
 		{ 
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false;
-		}
- 		$this->setViewContent( '<h2 class="goodnews">Account Confirmation</h2>', true );
- 		$this->setViewContent( '<p>New user account has been created successfully. An email has been sent to ' . $values['email'] . ' containing how to activate and verify the new account. You can login immediately.</p>' );
- 		$this->setViewContent( '<h4></h4>' );
+        }
+        
+        if( ! $this->getParameter( 'goodnews' ) )
+        {
+            $this->setViewContent( '<h2 class="pc_give_space_top_bottom">' . self::__( 'Account Confirmation' ) . '</h2>', true  );
+            $this->setViewContent( '<p class="pc_give_space_top_bottom">' . sprintf( self::__( 'New user account has been created successfully. An email has been sent to <b>%s</b> containing how to activate and verify the new account. You can login immediately.' ), $values['email'] ) . '</p>' );
+        }
+        else
+        {
+            $this->setViewContent( $this->getParameter( 'goodnews' ), true  );
+        }
 		
 		if( ! Ayoola_Application::isClassPlayer() )
 		{
- 			$this->setViewContent( '<p><a target="_parent" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl( '/account' ) . '">Continue...</a></p>' );     
+ 			$this->setViewContent( self::__( '<p><a target="_parent" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . Ayoola_Page::getPreviousUrl( '/account' ) . '">Continue <i class="fa fa-chevron-right"></i></a></p>' ) );     
 		}
+    //    var_export( $_REQUEST );
+    //    var_export( $_GET );
+        if( $_REQUEST['notify_us'] || @in_array( 'notify_us', $_GET['pc_module_url_values'] ) || @in_array( 'notify_admin_of_sign_up', Application_User_Settings::retrieve( 'user_options' ) )  )
+        {
+            $emailInfo = array(
+                                'subject' => $values['email'] . ' signed up',
+                                'body' => 'A new user has been created with the following information:
+                                    
+                                ' . self::arrayToString( $values ) . '
+                                
+                                New accounts will have a standard access to the website and will not have administrative privileges. If you would like to grant some access, consider upgrading the user by clicking the link below.
 
+                                <a href="/widgets/Application_User_Editor?username=' . $values['username'] . '">Change Account Settings</a>. 
+                                
+                                Set the access level to "Owner" to make this account admin.
+
+                                ',
+            
+            );
+            $emailInfo['to'] = Ayoola_Application_Notification::getEmails();;
+        //    var_export( $emailInfo );
+            @self::sendMail( $emailInfo );
+
+        }
 
 		//	Auto log me in now without confirmation
 		if( $this->getParameter( 'signin' ) || ! empty( $urlToGo ) ) 
@@ -258,19 +299,23 @@ class Application_User_Creator extends Application_User_Abstract
 			}
 	//		var_export( $values );  
 	//		var_export( $loginResponse );  
-	//		exit();
+    //		exit();
+            if( strpos( $urlToGo, '//') === false )
+            {
+                $urlToGo = Ayoola_Application::getUrlPrefix() . $urlToGo;
+            }
 			
 			if( $urlToGo && ! Ayoola_Application::isXmlHttpRequest() && ! $this->getParameter( 'no_redirect' )  )
 			{
-				header( 'Location: ' . Ayoola_Application::getUrlPrefix() . $urlToGo );
+				header( 'Location: ' . $urlToGo );
 				exit();
 			}
-			$this->setViewContent( '<div id="ayoola-js-redirect-whole-page"></div>' );
+			$this->setViewContent( self::__( '<div id="ayoola-js-redirect-whole-page"></div>' ) );
 		}
 		
 		if( ! @$this->_sendActivationEmail() )
 		{ 
-			$this->setViewContent( '<p class="badnews">We were unable to deliver the email to you due to system error</p>' ); 
+			$this->setViewContent( self::__( '<p class="badnews">We were unable to deliver the email to you due to system error</p>' ) ); 
 		}
 		
 		//	Referrers
@@ -332,7 +377,8 @@ class Application_User_Creator extends Application_User_Abstract
 		$valuesForReplace = $values;
 		$valuesForReplace['domain'] = $domain;
 		$email['to'] = $values['email'];
-		$email['from']  = "From: \"{$domain}\" <accounts@{$domain}>\r\n";
+		$email['username'] = $values['username'];
+	//	$email['from']  = "From: \"{$domain}\" <accounts@{$domain}>\r\n";
 	//	var_export( $email );
 		$email['body'] = self::replacePlaceholders( $email['body'], $valuesForReplace );
 	//	var_export( $values );
@@ -364,9 +410,8 @@ class Application_User_Creator extends Application_User_Abstract
 		$email = $this->getActivationEmail();
 		if( empty( $email['body'] ) ){ return false; }
 
-		$header = 	$email['from'] . "X-Mailer: PHP/" . phpversion() ;
-		$sent = mail( $email['to'], $email['subject'], $email['body'], $header );
-		//var_export( $email['to'] );
+	//	$header = 	$email['from'] . "X-Mailer: PHP/" . phpversion() ;
+		$sent = self::sendMail( $email );
 		if( ! $sent ){ return false; }
 		return true;
     } 
@@ -411,7 +456,7 @@ class Application_User_Creator extends Application_User_Abstract
 			return false;
 		}
 		
-		$this->_userId = (int) $this->getDbTable()->insertId(); // stage 1 - get user_id
+		$this->_userId = (int) $this->getDbTable()->insertId(); // stage 1 - get ƒƒ
 		$this->insertId = $this->_userId;
 		
 		$values2 = array( 'user_id' => $this->_userId, 'code' => $this->getActivationCode() ); // Input the server values and constants

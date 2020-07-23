@@ -62,7 +62,7 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 			if( $this->getDbTable()->selectOne( null, array( 'directory' => $values['directory'] ) ) )
 			{
 				$this->getForm()->setBadnews( 'Enter a different directory for this site. There is a site with the same directory: ' . $values['directory'] );
-				$this->setViewContent( '<p class="badnews">Enter a different directory for this site. There is a site with the same directory: ' . $values['directory'] . '</p>', true );		
+				$this->setViewContent(  '' . self::__( '<p class="badnews">Enter a different directory for this site. There is a site with the same directory: ' . $values['directory'] . '</p>' ) . '', true  );		
 				$this->setViewContent( $this->getForm()->view() );		
 				return false; 
 			}
@@ -71,7 +71,7 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
             if( ! self::copyFiles( $values['directory'] ) )
             {
                 $this->getForm()->setBadnews( 'Enter a different directory for this site. Specified directory is in use: ' . $values['directory'] );
-				$this->setViewContent( '<p class="badnews">Enter a different directory for this site. Specified directory is in use: ' . $values['directory'] . '</p>', true );		
+				$this->setViewContent(  '' . self::__( '<p class="badnews">Enter a different directory for this site. Specified directory is in use: ' . $values['directory'] . '</p>' ) . '', true  );		
 				$this->setViewContent( $this->getForm()->view() );		
                 return false;
             }     
@@ -81,7 +81,7 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 			$newSiteLink = '' . Ayoola_Page::getRootUrl() . '' . $values['directory'] . '/new-site-wizard';
 			$mailInfo = array();
 			$mailInfo['subject'] = 'A new site created';
-			$mailInfo['body'] = 'A new site has been created on your PageCarton Installation with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'A new site has been created on your PageCarton Installation with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			Preview the site on: ' . $link . '
 			';
@@ -94,7 +94,7 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 		//	if( ! $this->insertDb() ){ return false; }
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent( '<div class="goodnews">Site created successfully. <a class="" href="' . $link . '"> Preview</a> or <a class="" href="' . $newSiteLink . '">Create a site!</a></div>', true );  
+				$this->setViewContent(  '' . self::__( '<div class="goodnews">Site created successfully. <a class="" href="' . $link . '"> Preview</a> or <a class="" href="' . $newSiteLink . '">Create a site!</a></div>' ) . '', true  );  
 			}
 		//	$this->setViewContent( $this->getForm()->view() );
             
@@ -106,7 +106,7 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p class="badnews">Theres an error in the code</p>' ) . '', true  ); 
             return false; 
         }
 	}

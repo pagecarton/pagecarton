@@ -39,13 +39,25 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
     {
 		//Count the amount of records updated
 		$count = 0;
-	//	var_export( $rows );
-		$files =  array_unique( array( $this->getFilenameAccordingToScope() => $this->getFilenameAccordingToScope() ) + $this->getSupplementaryFilenames() );
+        $scopeFile = $this->getFilenameAccordingToScope( false, $this->getAccessibility() );
+		$files =  array_unique( array( $scopeFile => $scopeFile ) + $this->getSupplementaryFilenames() );
 		foreach( $files as $filename )
 		{
 		//	var_export( $this->getMyFilename() );
-			$this->setXml();
-			$this->getXml()->load( $filename );
+            $this->setXml();
+
+            $processDir = $this->getMyTempProcessDirectory();
+            if( ! $this->loadTableDataFromFile( $filename  ) )
+            {
+                Ayoola_Doc::createDirectory( $processDir );
+                $tempData = serialize( func_get_args() );
+                $tempFile = $processDir . DS . md5( $tempData . time() );
+            //    var_export( func_get_args() );
+            Ayoola_File::putContents( $tempFile, $tempData );
+                continue;
+            }
+    
+		//	$this->getXml()->load( $filename );
 			$this->getXml()->setId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );
 			$rows = $this->query( 'SELECT', null, $where, array( 'filename' => $filename ) );
 	//		return $rows;
@@ -54,24 +66,19 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 			{
 				$update['modified_time'] = time();
 			}
+            $update['__update_user_id'] = is_array( $update['__update_user_id'] ) ? $update['__update_user_id'] : array();
+            $update['__update_user_id'][] = Ayoola_Application::getUserInfo( 'user_id' );
 			foreach( $update as $key => $value )
 			{
 				foreach( $rows as $rowId => $row )
 				{
 					$count++;
-			//		var_export( $rowId );
 					if( ! $recordRow = $this->getXml()->getElementById( $rowId ) )
 					{
 						
 						continue 3;
-					//	require_once 'Ayoola/Dbase/Adapter/Xml/Table/Exception.php';
-					//	throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( "Cannot find the row data to update for row ID {$rowId}" );
 					}
-				//	var_export( $recordRow );
-				//	var_export( $rowId );
 					$result = $this->setRowColumnValue( $recordRow, $key, $value, true );
-					//try{ $this->setRowColumnValue( $row, $key, $value, true ); }
-					//catch( Ayoola_Dbase_Adapter_Xml_Table_Exception $e ){ null; }
 				}
 			}
 			
@@ -80,6 +87,24 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 			$result ? $this->saveFile( $filename ) : null;
 		//	$this->saveFile( $filename );
 		}
+        if( $processes = Ayoola_Doc::getFilesRecursive( $processDir ) AND empty( $this->proccesses ) )
+        {
+            $this->proccesses = $processes;
+        //    var_export( $processes );
+        //    exit( $processes );
+            foreach( $processes as $process )
+            {
+                if( $tempData = unserialize( file_get_contents( $process ) ) )
+                {
+                    $response = $this->init( $tempData[0], $tempData[1] );
+                    unlink( $process );
+                    Ayoola_Doc::removeDirectory( dirname( $process ) );
+                //      Ayoola_File::trash( $process );
+                }
+
+            }
+        }    
+
 	//	$this->clearCache();
 		return $count;
     } 

@@ -93,7 +93,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		$userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
 		$userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
 		$userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
-		$response = $userTable->select( null, array( 'access_level' => 99 ), array( 'disable_cache' => true ) );
+		$response = $userTable->select( null, $where + array( 'access_level' => 99 ), array( 'disable_cache' => true ) );
 		return $response;
     } 
 	
@@ -124,26 +124,45 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
-			$database = 'file';
+			$database = 'private';
 		}
 		switch( $database )
 		{
-/* 			case 'cloud':
-				$response = Ayoola_Api_UserList::send( ( $this->_dbWhereClause ? : array() ) + array( 'method' => 'select' ) );
-		//		var_export( $response );
-				if( is_array( $response['data'] ) )
-				{
-					$this->_dbData = $response['data'];
-				}
-			break;
- */			case 'relational':
+			case 'relational':
 				$data = $this->getDbTable()->select( null, strtolower( implode( ', ', $this->_otherTables ) ), $this->_dbWhereClause );
-				//	var_export( $data );
-			//	rsort( $data );
 				$this->_dbData = $data;
 			break;
 			case 'cloud':
 			case 'file':
+				// Find user in the LocalUser table
+				$table = "Ayoola_Access_LocalUser";
+				$table = $table::getInstance( $table::SCOPE_PUBLIC );
+				$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PUBLIC );
+				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PUBLIC );
+
+				//	Filter the result to save time
+				$sortFunction2 = function( & $key, & $values )
+				{ 
+					$values = $values["user_information"];
+                    if( empty( $values["username"] ) || empty( $values["email"] ) )
+                    {
+                        $values = false;
+                    }
+                    $key = $values["username"];	
+                }; 
+				$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ) );	
+				$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
+				if( $this->_sortColumn )    
+				{
+					$this->_dbData = self::sortMultiDimensionalArray( $this->_dbData, $this->_sortColumn );
+				}
+				else
+				{
+					krsort( $this->_dbData );
+					$this->_dbData = array_values( $this->_dbData );
+				}
+			break;
+			case 'private':
 				// Find user in the LocalUser table
 				$table = "Ayoola_Access_LocalUser";
 				$table = $table::getInstance( $table::SCOPE_PRIVATE );
@@ -151,31 +170,18 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 
 				//	Filter the result to save time
-				$sortFunction2 = create_function
-				( 
-					'& $key, & $values', 
-					'
-					//	var_export( $key );
-					//	var_export( $values );
-						$values = $values["user_information"];
-						
-				//		var_export( $values );
-						if( empty( $values["username"] ) || empty( $values["email"] ) )
-						{
-							$values = false;
-						}
-						$key = $values["username"];
-				//		var_export( $values );
-					'
-				); 
-				$this->_dbData = array();
-		//		if( Ayoola_Application::getUserInfo( 'username' ) )
-				{
-					$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ), array( 'result_filter_function' => $sortFunction2 ) );
-				}
+				$sortFunction2 = function( & $key, & $values )
+				{ 
+					$values = $values["user_information"];
+                    if( empty( $values["username"] ) || empty( $values["email"] ) )
+                    {
+                        $values = false;
+                    }
+                    $key = $values["username"];	
+                }; 
+				$this->_dbData = $table->select( null, ( $this->_dbWhereClause ? : array() ) );	
 				$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
-		//		var_export( $this->_sortColumn );
-				if( $this->_sortColumn )    
+				if( $this->_sortColumn ) 
 				{
 					$this->_dbData = self::sortMultiDimensionalArray( $this->_dbData, $this->_sortColumn );
 				}
@@ -214,16 +220,12 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		}
 		//	Check from local table
 		$table = self::getLocalTable();
-	//	var_export( $identifier );    
 
 		//	look in all lookable places for login info
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
 		
 		if( $info = $table->selectOne( null, $identifier ) )
 		{
-	//		var_export( $info );
-	//		var_export( $info );
-		//	var_export( $identifierInfo['username'] );
 			if( $info['user_information'] )  
 			{
 				$info = $info['user_information'];
@@ -239,61 +241,50 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
      */
 	public function setIdentifierData( $identifier = NULL )
     {
-		{
-		//	$database = 'cloud';
-		}
 		
 		do
 		{
 			//	Check from local table
-
+            $table = $this->getDbTable();
+            if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
+            {
+                $database = 'private';
+            }
+            switch( $database )
+            {
+                case 'private':
+                    // Find user in the LocalUser table
+                    $table = "Ayoola_Access_LocalUser";
+                    $table = $table::getInstance( $table::SCOPE_PRIVATE );
+                    $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+                    $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+                break;
+    			case 'file':
+                    // Find user in the LocalUser table
+                    $table = "Ayoola_Access_LocalUser";
+                    $table = $table::getInstance( $table::SCOPE_PUBLIC . "xyz" );
+                    $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PUBLIC );
+                    $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PUBLIC );
+                break;
+            }
+    
 			$identifierInfo = $this->getIdentifier();
 			$where = array( $this->getIdColumn() => array( $identifierInfo[$this->getIdColumn()], strtolower( $identifierInfo[$this->getIdColumn()] ) ) );
-		//	$info = self::v( $where );
 			if( $info = self::getUserInfo( $where ) )
 			{
 				$this->_identifierData = $info;
 				break;
 			}
-		//	var_export( $info );
-		//	var_export( $where );
-			
-		//	$info = array();
-			//	var_export( $table->select( null, array( 'username' => @$identifierInfo['username'] ) ) );
-		//	var_export( $identifierInfo['username'] );
-		//	var_export( $info );
-		//	var_export( array( 'username' => array( $identifierInfo['username'], strtolower( $identifierInfo['username'] ) ) ) );
-		//	var_export( $table->selectOne( null, array( 'username' => array( 'username' => strtolower( $identifierInfo['username'] ) ) ) ) );
-			//	case 'cloud':
-/* 			$response = Ayoola_Api_UserList::send( $this->getIdentifier() );
-			if( is_array( @$response['data'] ) )
-			{
-				$this->_identifierData = $response['data'];
-				
-				//	Localize information 
-		//		$table->delete( array( 'username' => array( '', $this->_identifierData['username'] ) ) );
-		//		$table->delete( array( 'username' => $this->_identifierData['username'] ) );
-		//		var_export( $this->_identifierData );
-			//	$table->insert( array( 'username' => $identifierInfo['username'], 'password' => $identifierInfo['password'], 'user_information' => $this->_identifierData, ) );		
-
-				Ayoola_Access_Localize::info( $this->_identifierData );  
-				break;
-			}
- */			
 			//	case 'relational':
 			if( $database === 'relational' )
 			{
-				$data = $this->getDbTable()->selectOne( null, strtolower( implode( ', ', $this->_otherTables ) ), $this->getIdentifier() );
+				$data = $table->selectOne( null, strtolower( implode( ', ', $this->_otherTables ) ), $this->getIdentifier() );
 				//	var_export( $data );
 				$this->_identifierData = $data;
 				break;
-			}
-	//		break;
-		
+			}		
 		}
 		while( false );
-	//	var_export( $table->drop() );
-	//	var_export( $table->select() );
     } 
 	
     /**

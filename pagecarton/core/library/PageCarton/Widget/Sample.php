@@ -21,17 +21,17 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
 
             // to outputs something to the screen
             {
-                $this->setViewContent( '<h1>Hello World</h1>' ); 
-                $this->setViewContent( '
+                $this->setViewContent( self::__( '<h1>Hello World</h1>' ) ); 
+                $this->setViewContent(  self::__( '
                 <p>This is sample PageCarton Widget. 
                 Create a widget file on 
                 <a onClick="ayoola.spotLight.showLinkInIFrame( \'' 
                 . Ayoola_Application::getUrlPrefix() .
                  '/tools/classplayer/get/name/Ayoola_Object_List/\' 
                  href="javascript:;">Widgets</a>
-                </p>' ); 
-                $this->setViewContent( '<p>Here is a sample code of 
-                what a widget could do</p>' ); 
+                </p>' ) ); 
+                $this->setViewContent(  self::__( '<p>Here is a sample code of 
+                what a widget could do</p>' ) ); 
                 $this->setViewContent( '<p style="max-height:200px; 
                 overflow:auto; font-size:smaller;">' 
                 . highlight_file( __FILE__, true ) . '</p>' ); 
@@ -57,7 +57,7 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
 
                 //  output the form data to the screen
                 //  the true parameter ensures previous data sent to screen is cleared.
-                $this->setViewContent( '<p class="goodnews">Form Submitted</p>', true ); 
+                $this->setViewContent(  '' . self::__( '<p class="goodnews">Form Submitted</p>' ) . '', true  ); 
                 $this->setViewContent( $values['demo_field_name'] ); 
 
        //         return true;
@@ -140,7 +140,7 @@ class PageCarton_Widget_Sample extends PageCarton_Widget
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p class="badnews">Theres an error in the code</p>' ) . '', true  ); 
             return false; 
         }
 	}

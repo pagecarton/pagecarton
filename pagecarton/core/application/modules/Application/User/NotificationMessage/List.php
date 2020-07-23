@@ -33,7 +33,13 @@ class Application_User_NotificationMessage_List extends Application_User_Notific
      * 
      * @var string 
      */
-	protected static $_objectTitle = 'Bulk Mail'; 
+	protected static $_objectTitle = 'Bulk Mail';  
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public static $translateInnerWidgetContent = true;
 	
     /**
      * Performs the creation process

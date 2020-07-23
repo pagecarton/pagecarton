@@ -39,7 +39,7 @@ class Application_User_NotificationMessage_Delete extends Application_User_Notif
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( $data['subject'],  'Delete notification message' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Notification message deleted', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Notification message deleted' ) . '', true  ); }
 		}
 		catch( Exception $e ){ return false; }
     } 

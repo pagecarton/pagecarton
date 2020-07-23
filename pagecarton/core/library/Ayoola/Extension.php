@@ -33,7 +33,7 @@ class Ayoola_Extension extends Ayoola_Dbase_Table_Abstract_Xml_Protected // can'
      *
      * @param int
      */
-    protected $_tableVersion = '0.17'; 
+    protected $_tableVersion = '0.22'; 
 
 	protected $_dataTypes = array
 	( 
@@ -48,7 +48,12 @@ class Ayoola_Extension extends Ayoola_Dbase_Table_Abstract_Xml_Protected // can'
 		'documents' => 'JSON',
 		'plugins' => 'JSON',
 		'pages' => 'JSON',
-		'templates' => 'JSON',
+        'templates' => 'JSON',
+        'article_url' => 'INPUTTEXT',
+        'dependencies' => 'JSON',
+        'installed_dependencies' => 'JSON',
+        'ready_dependencies' => 'JSON',
+        'tested_with' => 'JSON',
 	);
 	// END OF CLASS
 }

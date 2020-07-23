@@ -56,20 +56,22 @@ class Ayoola_Doc_Delete extends Ayoola_Doc_Abstract
 			}
 /*			elseif( is_file( $realPath ) )
 			{
-				$this->setViewContent( '<p>You cannot delete a protected file.</p>', true ); 
-				$this->setViewContent( '<p><a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=%KEY%">Replace file instead</a></p>' ); 
+				$this->setViewContent(  '' . self::__( '<p>You cannot delete a protected file.</p>' ) . '', true  ); 
+				$this->setViewContent( self::__( '<p><a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=%KEY%">Replace file instead</a></p>' ) ); 
 				return false;
 			}
 */			else
 			{
-				$this->setViewContent( '<p>File not found.</p>', true ); 
-				$this->setViewContent( '<p><a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=' . $url . '">Upload new file instead</a></p>' ); 
+				$this->setViewContent(  '' . self::__( '<p>File not found.</p>' ) . '', true  ); 
+				$this->setViewContent( self::__( '<p><a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=' . $url . '">Upload new file instead</a></p>' ) ); 
 				return false;
 			}
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			if( unlink( $myPath ) )
+            if( ! $values = $this->getForm()->getValues() ){ return false; }
+            $trashed = Ayoola_File::trash( $myPath );
+
+			if( $trashed )
 			{ 
-				$this->setViewContent( '<p class="goodnews">' . $url . ' deleted successfully</p>', true ); 
+				$this->setViewContent(  '' . self::__( '<p class="goodnews">' . $url . ' deleted successfully</p>' ) . '', true  ); 
 			}				
 			return true;
 		}

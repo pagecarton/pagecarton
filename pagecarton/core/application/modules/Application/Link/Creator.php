@@ -36,9 +36,9 @@ class Application_Link_Creator extends Application_Link_Abstract
     {
 		try
 		{ 
-			$this->createForm( 'Create', 'Create a Link' );
+			$this->createForm( 'Continue', 'Create a Link' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->insertDb() ){ $this->setViewContent( 'Link created successfully', true ); }
+			if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Link created successfully' ) . '', true  ); }
 		}
 		catch( Application_Link_Exception $e ){ return false; }
     } 

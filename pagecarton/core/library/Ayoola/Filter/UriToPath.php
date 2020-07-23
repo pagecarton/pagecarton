@@ -44,6 +44,7 @@ class Ayoola_Filter_UriToPath implements Ayoola_Filter_Interface
 								'data_php' => array( 'path' => PAGE_DATA, 'ext' => EXT  ),	//	now saving data as .php extension
 								'data_json' => array( 'path' => PAGE_DATA, 'ext' => '.json'  ),	//	now saving data as .json extension
 								'data_json_content' => array( 'path' => PAGE_DATA, 'ext' => 'content.json'  ),	//	now saving data as .json extension
+								'data_page_info' => array( 'path' => PAGE_DATA, 'ext' => 'pageinfo.json'  ),	//	now saving data as .json extension
 								'template' => array( 'path' => PAGE_TEMPLATE, 'ext' => TPL ), 
 								'include' =>  array( 'path' => PAGE_INCLUDES, 'ext' => EXT )  
 							);
@@ -159,17 +160,12 @@ class Ayoola_Filter_UriToPath implements Ayoola_Filter_Interface
     public function filter( $value )
 	{
 		$paths = $this->getPathTemplates( $value );
-		if( is_array( $value) )
-    {
-    //  throw new Exception();
-	  //  var_export( get_ );
-    }
 		$result = array();
 		require_once 'Ayoola/Loader.php';
 //	var_export( $this->getUriPlaceholder() );
 		foreach( $paths as $name => $path )
 		{
-  $result[$name] = str_ireplace( $this->getUriPlaceholder(), $value, $path );
+            $result[$name] = str_ireplace( $this->getUriPlaceholder(), $value, $path );
 			if( $filePath = Ayoola_Loader::checkFile( $result[$name] ) )
 			{
 			//	$result[$name] = $filePath;

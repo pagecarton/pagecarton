@@ -86,7 +86,17 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
 		if( @$_GET['crop_to_fit_url'] )
 		{
 			$imageInfo = Application_Slideshow_Abstract::getImageInfo( $_GET['crop_to_fit_url'] );
-		}
+        }
+        elseif( @$_GET['embed_image_url'] )
+        {
+            $uri = Ayoola_Doc::pathToUri( $paths[0] );
+            $path = Ayoola_Loader::getFullPath(  'documents' . $_GET['embed_image_url'] );
+            if( is_file( $path ) )
+            {
+                $imageInfo = Application_Slideshow_Abstract::getImageInfo( $uri );
+                $paths = array( $path );
+            }
+        }
 		if( @$_GET['width'] )
 		{
 			$imageInfo['width'] = $_GET['width'];

@@ -47,25 +47,25 @@ class Application_Subscription_Checkout_DirectDeposit extends Application_Subscr
 	//	$accounts = $table->select();
 		if( $accounts )
 		{
-			$this->setViewContent( '<h4>Make payments into any of the following bank account(s).</h4>' );
+			$this->setViewContent( self::__( '<h4>Make payments into any of the following bank account(s).</h4>' ) );
 		}
 		else
 		{
-			$this->setViewContent( '<h4>Please contact us to get our bank information.</h4>' );		
-			$this->setViewContent( '<h4>NOTE:</h4>' );
-		//	$this->setViewContent( '<p>' );
-			$this->setViewContent( '<p>Payments must be made in ' . $values['settings']['currency_abbreviation'] . '.</p>' );
-			$this->setViewContent( '<p>After payments is made, please ensure you send us the bank payment (or teller) information by contacting us.</p>' );
-			$this->setViewContent( '<h2 class="badnews">Notice!</h2>' );
-			$this->setViewContent( '<p class="badnews">Your online order is NOT yet completed until you confirm you would be making a bank deposit to us.</p>' );  
+			$this->setViewContent( self::__( '<h4>Please contact us to get our bank information.</h4>' ) );		
+			$this->setViewContent( self::__( '<h4>NOTE:</h4>' ) );
+		//	$this->setViewContent( self::__( '<p>' ) );
+			$this->setViewContent( self::__( '<p>Payments must be made in ' . $values['settings']['currency_abbreviation'] . '.</p>' ) );
+			$this->setViewContent( self::__( '<p>After payments is made, please ensure you send us the bank payment (or teller) information by contacting us.</p>' ) );
+			$this->setViewContent( self::__( '<h2 class="badnews">Notice!</h2>' ) );
+			$this->setViewContent( self::__( '<p class="badnews">Your online order is NOT yet completed until you confirm you would be making a bank deposit to us.</p>' ) );  
 		}
 		foreach( $accounts as $each )
 		{
 			$this->setViewContent( htmlspecialchars_decode( $each['account_info'] ) );
 		
 		}
-		$this->setViewContent( '<h2><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Subscription_Checkout_Confirmation/get/api/DirectDeposit/status/1/"><input name="' . __CLASS__ . '_confirm_order" onClick="ayoola.div.selectElement( this )" class="boxednews goodnews" value="Confirm order" type="button" /></a></h2>' );
-	//	$this->setViewContent( '</p>' );
+		$this->setViewContent( self::__( '<h2><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Subscription_Checkout_Confirmation/get/api/DirectDeposit/status/1/"><input name="' . __CLASS__ . '_confirm_order" onClick="ayoola.div.selectElement( this )" class="boxednews goodnews" value="Confirm order" type="button" /></a></h2>' ) );
+	//	$this->setViewContent( self::__( '</p>' ) );
 		
 		
     } 

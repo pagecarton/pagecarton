@@ -34,7 +34,7 @@ class Application_Category_Creator extends Application_Category_Abstract
      */
 	protected function init()
     {
-		$this->createForm( 'Create', 'Create a Category' );
+		$this->createForm( 'Continue', 'Create a Category' );
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		
@@ -50,7 +50,7 @@ class Application_Category_Creator extends Application_Category_Abstract
 		$access = new Ayoola_Access();
 		$values['category_name'] = trim( $filter->filter( strtolower( $values['category_name'] ) ) , '-' );
 		if( ! $this->insertDb( $values ) ){ return $this->setViewContent( $this->getForm()->view(), true ); }
-		$this->setViewContent( '<div><p class="goodnews">Category created successfully.<p></div>', true );
+		$this->setViewContent(  '' . self::__( '<div><p class="goodnews">Category created successfully.<p></div>' ) . '', true  );
 	//	$this->getForm()->oneFieldSetAtATime = false;
 	//	$this->setViewContent( $this->getForm()->view() );  
    } 

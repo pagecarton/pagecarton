@@ -79,7 +79,6 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
    //     var_export( $path );
    //     exit();
  //       $this->setViewContent( $path );
- //      $this->setViewContent( var_export( $values, true ) );
      //   var_export( $path );
         $otherFiles = array();
         $search = array();
@@ -136,7 +135,7 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
         $content = file_get_contents( $sampleFile );
         $content = str_ireplace( array_keys( $search ), array_values( $search ), $content );
         Ayoola_Doc::createDirectory( dirname( $path  ) );
-        file_put_contents( $path, $content );
+        Ayoola_File::putContents( $path, $content );
 
         foreach( $otherFiles as $each )
         {
@@ -165,18 +164,18 @@ class Ayoola_Object_CreateFile extends Ayoola_Object_Abstract
             $newFileName = $destDir . DS . basename( $each );
             if( ! is_file( $newFileName ) )
             {
-              file_put_contents( $newFileName, $content );
+                Ayoola_File::putContents( $newFileName, $content );
             }
         }
 
-    //    $this->setViewContent( '<textarea>' . $content . '</textarea>' );
-        $this->setViewContent( '<h1 class="goodnews">File created successfully</h1>', true ); 
-        $this->setViewContent( '<p>' . $nextStep . '</p>' ); 
+    //    $this->setViewContent( self::__( '<textarea>' . $content . '</textarea>' ) );
+        $this->setViewContent(  '' . self::__( '<h1 class="goodnews">File created successfully</h1>' ) . '', true  ); 
+        $this->setViewContent( self::__( '<p>' . $nextStep . '</p>' ) ); 
 
         if( self::hasPriviledge() )
         {
-            $this->setViewContent( '<p>Customize this ' . $type . ' (' . $values['class_name'] . ') by editing the file below:</p>' ); 
-            $this->setViewContent( '<p style="font-size:smaller;">' . $path . '</p>' ); 
+            $this->setViewContent( self::__( '<p>Customize this ' . $type . ' (' . $values['class_name'] . ') by editing the file below:</p>' ) ); 
+            $this->setViewContent( self::__( '<p style="font-size:smaller;">' . $path . '</p>' ) ); 
         } 
  		
     } 

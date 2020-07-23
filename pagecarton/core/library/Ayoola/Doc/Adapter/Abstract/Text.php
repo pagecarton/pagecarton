@@ -17,7 +17,6 @@
  
 require_once 'Ayoola/Doc/Adapter/Abstract.php';
 
-
 /**
  * @category   PageCarton
  * @package    Ayoola_Doc_Adapter_Abstract_Text
@@ -34,6 +33,13 @@ abstract class Ayoola_Doc_Adapter_Abstract_Text extends Ayoola_Doc_Adapter_Abstr
      * @var string
      */
 	protected $_defaultContentType = 'text/';
+
+    /**
+     * Whether to embed PageCarton Widget in Doc
+     *
+     * @var boolean
+     */
+	protected $_embedWidget = true;
 		
     /**
      * This method outputs the document inline with HTML

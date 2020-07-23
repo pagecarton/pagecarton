@@ -58,7 +58,7 @@ class Application_ContactUs_DisplayEmailAddress extends Application_ContactUs_Ab
 			$this->setViewContent( $this->_objectTemplateValues['email'], true );
 			if( self::hasPriviledge() )
 			{
-				$this->setViewContent( '<span onClick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/CompanyInformation/\' ); return false;" class="badnews" title="Change e-mail address and other organizational information"> x </span>' );
+				$this->setViewContent( self::__( '<span onClick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/CompanyInformation/\' ); return false;" class="badnews" title="Change e-mail address and other organizational information"> x </span>' ) );
 		//		$this->_objectTemplateValues['email_edit_link'] = '<span name="' . $identifier . '"></span>';
 			}
 			Application_Javascript::addCode

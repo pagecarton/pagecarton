@@ -46,7 +46,7 @@ class PageCarton_Cron_Creator extends PageCarton_Cron_Abstract
 			//	Notify Admin
 			$mailInfo = array();
 			$mailInfo['subject'] = 'A cron task created';
-			$mailInfo['body'] = 'A new cron task has been created on your PageCarton Installation with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+			$mailInfo['body'] = 'A new cron task has been created on your PageCarton Installation with the following information: "' . self::arrayToString( $values ) . '". 
 			
 			';
 			try
@@ -58,7 +58,7 @@ class PageCarton_Cron_Creator extends PageCarton_Cron_Abstract
 		//	if( ! $this->insertDb() ){ return false; }
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent( '<div class="goodnews">Cron task created successfully. </div>', true ); 
+				$this->setViewContent(  '' . self::__( '<div class="goodnews">Cron task created successfully. </div>' ) . '', true  ); 
 			}
 		//	$this->setViewContent( $this->getForm()->view() );
             
@@ -70,7 +70,7 @@ class PageCarton_Cron_Creator extends PageCarton_Cron_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p class="badnews">Theres an error in the code</p>' ) . '', true  ); 
             return false; 
         }
 	}

@@ -40,7 +40,7 @@ class Application_User_UserBankAccount_Delete extends Application_User_UserBankA
 			$this->createConfirmationForm( 'Delete ' . $data['account_name'],  'Delete Bank Account' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Bank Account Information deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Bank Account Information deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_User_UserBankAccount_Exception $e ){ return false; }
     } 

@@ -66,6 +66,11 @@ class Application_Subscription_Checkout_Order_List extends Application_Subscript
 							' ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Editor/?' . $this->getIdColumn() . '=%KEY%"> update </a>', 
 							'  ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
 			);
+        $listOptions = 	array( 
+                                'Creator' => ' ',    
+        );
+
+		$list->setListOptions( $listOptions );
 
 		if( ! self::hasPriviledge( 98 ) )
 		{

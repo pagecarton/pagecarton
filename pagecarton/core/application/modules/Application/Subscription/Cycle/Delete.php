@@ -39,7 +39,7 @@ class Application_Subscription_Cycle_Delete extends Application_Subscription_Cyc
 			if( ! $data = $this->getIdentifierData() ){ return false; }
 			$this->createDeleteForm( $data['cycle_name'] );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Billing package deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Billing package deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Subscription_Cycle_Exception $e ){ return false; }
 

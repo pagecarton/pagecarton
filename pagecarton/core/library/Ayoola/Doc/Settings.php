@@ -73,7 +73,7 @@ class Ayoola_Doc_Settings extends Application_Settings_Abstract
 						);
 		$fieldset->addElement( array( 'name' => 'options', 'label' => 'Other options', 'type' => 'Checkbox', 'value' => @$settings['options'] ), $options );
 		
-		$fieldset->addLegend( 'Document Settings' );
+		$fieldset->addLegend( 'Files Settings' );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
     } 

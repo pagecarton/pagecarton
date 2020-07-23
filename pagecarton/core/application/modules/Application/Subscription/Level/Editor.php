@@ -39,7 +39,7 @@ class Application_Subscription_Level_Editor extends Application_Subscription_Lev
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 		$this->createForm( 'Save', "Edit product category for \"{$identifierData['subscription_label']}\"", $identifierData );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->updateDb() ){ $this->setViewContent( 'Subscription Level edited successfully', true ); }
+		if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Subscription Level edited successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

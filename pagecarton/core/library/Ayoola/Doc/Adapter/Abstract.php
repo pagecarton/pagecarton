@@ -14,9 +14,6 @@
 /**
  * @see Ayoola_
  */
- 
-//require_once 'Ayoola/.php';
-
 
 /**
  * @category   PageCarton
@@ -50,6 +47,13 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
 	protected $_contentType;
 
     /**
+     * Whether to embed PageCarton Widget in Doc
+     *
+     * @var boolean
+     */
+	protected $_embedWidget = false;
+
+    /**
      * The Content of the Document
      *
      * @var string
@@ -71,8 +75,7 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
      */
     public function __construct( $paths = null )
     {
-//		var_export( $paths );
-//    exit();
+
 		$this->setPaths( $paths );		
     }
 
@@ -187,6 +190,22 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
     } 
 
     /**
+     * 
+     */
+    public static function getEmbedFilterPath( $path )
+    {
+        $fakePath = false;
+        
+        $fakePath = CACHE_DIR . DS .  __CLASS__ . DS . md5( $path );
+        Ayoola_Doc::createDirectory( dirname( $fakePath ) );
+        $content = file_get_contents( $path );
+        $content = Ayoola_Page_Editor_Text::embedWidget( $content, array( 'file_path' => $path ) );  
+        Ayoola_File::putContents( $fakePath, $content );          
+        
+        return $fakePath;
+    }
+
+    /**
      * Force the download of the document
      *
      * @param void
@@ -200,12 +219,16 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
       {
         header( 'Content-Description: File Transfer' );
 
-        //  
         header( 'Content-Type: ' . $this->getContentType( $path ) );
 
-        //  Showing livestreaming in iOS?
+        //  embed widget
+        $fakePath = null;
+        if( $this->_embedWidget )
+        {
+            $fakePath = self::getEmbedFilterPath( $path );       
+        }  
 
-    //    header( 'Content-Type: ' . ( 'application/octet-stream' ) );
+        //  Showing livestreaming in iOS?
         header( 'Content-Disposition: attachment; filename=' . ( basename( $path ) ) );
         header( 'Content-Transfer-Encoding: binary' );
         header( 'Expires: 0' );
@@ -214,16 +237,17 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
         header( 'Content-Length: ' . filesize( $path ) );
         ob_clean();
         flush();
+        
         if( isset($_SERVER['HTTP_RANGE'] ) ) 
         { 
             // do it for any device that supports byte-ranges not only iPhone
-        //	self::rangeDownload( $path );
-            self::smartReadFile( $path, basename( $path ), $this->getContentType( $path ) );
+
+            self::smartReadFile( $fakePath ? : $path, basename( $path ), $this->getContentType( $path ) );
         } 
         else 
         {
-            header( "Content-Length: " . filesize( $path ) );
-            readfile( $path );
+            header( "Content-Length: " . filesize( $fakePath ? : $path ) );
+            readfile( $fakePath ? : $path );
         }
         exit();
       }
@@ -238,6 +262,7 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
         $length = $size;           // Content length
         $start  = 0;               // Start byte
         $end    = $size - 1;       // End byte
+
         // Now that we've gotten so far without errors we send the accept range header
         /* At the moment we only support single ranges.
          * Multiple ranges requires some more work to ensure it works correctly
@@ -251,7 +276,7 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
          * as well as a boundry header to indicate the various chunks of data.
          */
         header("Accept-Ranges: 0-$length");
-        // header('Accept-Ranges: bytes');
+
         // multipart/byteranges
         // http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.2
         if (isset($_SERVER['HTTP_RANGE'])) {
@@ -381,23 +406,29 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
     public function view()
     {
 		$paths = array_unique( $this->getPaths() );
-//		var_export( $this->getPaths() );
-//		exit();   
+
 		foreach( $paths as $path )
 		{	
+            //  embed widget
+            $fakePath = null;
+            if( $this->_embedWidget )
+            {
+                $fakePath = self::getEmbedFilterPath( $path );       
+            }  
+
 			header( 'Content-Description: File Transfer' );
 			header( 'Content-Type: ' . $this->getContentType( $path ) );
 			header( 'Content-Transfer-Encoding: binary' );
-		//	header( 'Content-Length: ' . filesize( $path ) );
+
             if( isset($_SERVER['HTTP_RANGE'] ) ) 
             { 
                 // do it for any device that supports byte-ranges not only iPhone
-                self::rangeDownload( $path );
+                self::rangeDownload(  $fakePath ? : $path  );
             } 
             else 
             {
-                header( "Content-Length: " . filesize( $path ) );
-                readfile( $path );
+                header( "Content-Length: " . filesize( $fakePath ? : $path ) );
+                readfile( $fakePath ? : $path );
             }
 		}
     } 

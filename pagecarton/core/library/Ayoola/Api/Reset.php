@@ -57,7 +57,7 @@ class Ayoola_Api_Reset extends Ayoola_Api implements Ayoola_Api_Interface
 		//	var_export( $settings );
 			if( is_array( $response ) )
 			{
-				$this->setViewContent( '<p class="goodnews">API keys for ' . $values['api_url'] . ' is now reset. You should only use this keys on trusted third party apps. </p>' );
+				$this->setViewContent( self::__( '<p class="goodnews">API keys for ' . $values['api_url'] . ' is now reset. You should only use this keys on trusted third party apps. </p>' ) );
 				//	var_export( $response );
 /* 				$table = new Ayoola_Api_Api();
 				$where = array( 'api_url' => $response['api_url'] );
@@ -77,7 +77,7 @@ class Ayoola_Api_Reset extends Ayoola_Api implements Ayoola_Api_Interface
 			}
 			else
 			{
-				$this->setViewContent( '<p class="badnews">' . $response . '</p>' );
+				$this->setViewContent( self::__( '<p class="badnews">' . $response . '</p>' ) );
 			}
 	//		var_export( $response );
 		//	$this->setViewContent( $response );

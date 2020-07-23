@@ -34,6 +34,13 @@ class Ayoola_Object_List extends Ayoola_Object_Abstract
      * @var string 
      */
 	protected static $_objectTitle = 'Widgets'; 
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public static $translateInnerWidgetContent = true;
+		
 		
     /**
      * The method does the whole Class Process
@@ -62,6 +69,7 @@ class Ayoola_Object_List extends Ayoola_Object_Abstract
 										'Wrapper' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_Wrapper_List/\' );" title="">Manage Wrappers</a>',  
 										'Modules' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_Module_List/\' );" title="">Manage Modules</a>',  
 										'Saved' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_SavedWidget_List/\' );" title="">Saved Widgets</a>',  
+										'Page' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_PageWidget_List/\' );" title="">Auto-Saved Page Widgets</a>',  
 				//						'DB Table' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_Dbase_List/?file_type=table\' );" title="">My Databases</a>',  
 				//						'Widget' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_Widget_List/\' );" title="">My Widgets</a>',    
 							//			'Settings' => '<a rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Object_CreateFile/?file_type=settings\' );" title="">Create Settings File</a>',    

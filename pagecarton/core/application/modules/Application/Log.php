@@ -42,7 +42,11 @@ class Application_Log extends Application_Log_Abstract
 			Ayoola_Application::$accessLogging = false;
 
 			$this->setViewContent( $this->getForm()->view() );
-		//	var_export( __LINE__ );
+        //	var_export( __LINE__ );
+            if( ! $this->getForm()->getValues() )
+            {
+                return false;
+            }
 			$this->setViewContent( $this->getXml()->saveHTML() ); 
 		}
 		catch( Ayoola_Exception $e ){ return false; }
@@ -66,7 +70,10 @@ class Application_Log extends Application_Log_Abstract
 		$table->setAttribute( 'class', 'pc-table' );
 		
 		//	Show the name of the Log
-		$data = $xml->createElement( 'th', 'Log Information (' . $log['log_name'] . ')' );
+        $output = 'Log Information for %s';
+        $output = PageCarton_Widget::__( $output );
+        $output = sprintf( $output, $log['log_name'] );
+		$data = $xml->createElement( 'th', $output );
 		$data  = $row->appendChild( $data );
 		$classPlayer = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name';  
 	//	$identifier = http_build_query( $this->getIdentifier() );
@@ -78,7 +85,7 @@ class Application_Log extends Application_Log_Abstract
 	//	$identifier = implode( '/', $this->getIdentifier() ) . '/';
 
 		//	Begin each option on the same row with the name
-		$options = array( 'Application_Log_Creator' => 'New Log', 'Application_Log_Clear' => 'Clear Log', 'Application_Log_Editor' => 'Edit Log Viewer' );
+		$options = array( 'Application_Log_Creator' => '' . self::__( 'New Log' ) . '', 'Application_Log_Clear' => '' . self::__( 'Clear Log' ) . '', 'Application_Log_Editor' => '' . self::__( 'Edit Log Viewer' ) . '' );
 		foreach( $options as $player => $viewLink )
 		{
 			$link = $xml->createElement( 'a', $viewLink );
@@ -90,7 +97,7 @@ class Application_Log extends Application_Log_Abstract
 		}
 		
 		//	View Log
-		$link = $xml->createElement( 'a', 'View Log' );
+		$link = $xml->createElement( 'a', '' . self::__( 'View Log' ) . '' );
 		$link->setAttribute( 'href', $classPlayer . '/Application_Log_View/' . $identifier );
 		$link->setAttribute( 'rel', 'shadowbox' );
 		$data = $xml->createElement( 'td' );
@@ -118,7 +125,7 @@ class Application_Log extends Application_Log_Abstract
 		$filter = new Ayoola_Filter_SelectListArray( 'log_name', 'log_name' );
 		$logs = $filter->filter( $this->getDbData() );
 		$fieldset->hashElementName = false;
-		$fieldset->addElement( array( 'name' => 'log_name','label' => 'Choose a log', 'description' => 'Select the log to view', 'type' => 'Select' ), $logs );
+		$fieldset->addElement( array( 'name' => 'log_name','label' => 'Choose a log', 'type' => 'Select' ), $logs );
 		$fieldset->addRequirement( 'log_name', array( 'InArray' => array_keys( $logs )  ) );
 		unset( $logs );
 	//	$fieldset->addElement( array( 'name' => 'View', 'type' => 'Submit', 'value' => 'View' ) );

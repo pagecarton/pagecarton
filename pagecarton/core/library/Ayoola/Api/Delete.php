@@ -41,7 +41,7 @@ class Ayoola_Api_Delete extends Ayoola_Api_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( $this->deleteDb( false ) )
 			{ 
-				$this->setViewContent( 'Api deleted successfully', true ); 
+				$this->setViewContent(  '' . self::__( 'Api deleted successfully' ) . '', true  ); 
 			}
 		}
 		catch( Ayoola_Api_Exception $e ){ return false; }

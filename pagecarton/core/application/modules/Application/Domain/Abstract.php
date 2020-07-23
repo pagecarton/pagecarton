@@ -76,6 +76,7 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
     } 
 	
     /**
+     * 
      */
 	public function resetDefaultDomain()
     {
@@ -85,9 +86,8 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 		//	Notify Admin
 		$mailInfo = array();
 		$mailInfo['subject'] = 'Domain Information Altered';
-		$mailInfo['body'] = 'The domain table have been altered: Here is the domain information: "' . var_export( $values, true ) . '". 
+		$mailInfo['body'] = 'The domain table have been altered: Here is the domain information: "' . self::arrayToString( $values ) . '". 
 		
-		Domain options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/domain/.
 		';
 		try
 		{
@@ -110,7 +110,6 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 
 	//	var_export( $domainPath );
 
-	//	if( empty( $subDomain ) ){ throw new Application_Domain_Exception( 'NO SUBDOMAIN SPECIFIED.' ); }
 	//	$oldPath = APPLICATION_PATH . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) );
 	
 		//	Use another means to seek the old path. 
@@ -174,29 +173,11 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 			$fieldset->addFilter( 'domain_name', array( 'DomainName' => null ) );   
 			$fieldset->addRequirement( 'domain_name', array( 'WordCount' => array( 2, 100 ) ) ); 
 		}
-	//	$fieldset->addRequirement( 'directory', array( 'WordCount' => array( 2, 100 ) ) );
 		
 		
 		//	Parent Domain
-	//	$option = array( 'No', 'Yes' );
-	//	$fieldset->addElement( array( 'name' => 'sub_domain', 'label' => 'Is this a sub-domain?', 'type' => 'Radio', 'value' => @$values['sub_domain'] ), $option );
-	//	if( Ayoola_Form::getGlobalValue( 'sub_domain' ) )
-		{
-/* 			$option = new Application_Domain;
-			$option = $option->select();
-			require_once 'Ayoola/Filter/SelectListArray.php';
-			$filter = new Ayoola_Filter_SelectListArray( 'domain_name', 'domain_name');
-			$option = $filter->filter( $option );
-			$fieldset->addElement( array( 'name' => 'domain_parent', 'label' => 'Parent Domain', 'description' => 'Select parent domain, if this is a subdomain.', 'type' => 'Checkbox', 'value' => @$values['domain_parent'] ), $option );
-			$fieldset->addRequirement( 'domain_parent', array( 'InArray' => array_keys( $option ) ) );
- */		}
-//		else
 		{  
-			//	Default Domain
-/* 			$option = array( 0 => 'Standard Domain', 1 => 'Default Domain' );
-			$fieldset->addElement( array( 'name' => 'domain_default', 'label' => 'Domain Type', 'type' => 'Select', 'value' => @$values['domain_default'] ), $option );
-			$fieldset->addRequirement( 'domain_default', array( 'InArray' => array_keys( $option ) ) );
- */			
+		
 			//	Default Domain
 			$option = array( 
 								'standard_domain' => 'Standard Domain: Add an independent domain with its own settings.', 

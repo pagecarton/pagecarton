@@ -25,7 +25,17 @@
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Ayoola_Page_Menu
+class Ayoola_Page_Menu extends Ayoola_Page_Abstract
 {
+
+		
+    /**
+     * The method does the whole Class Process
+     * 
+     */
+	protected function init()
+    {
+
+    }
 	// END OF CLASS
 }

@@ -35,34 +35,36 @@ class Application_Log_View_Access_Log extends Ayoola_Dbase_Table_Abstract_Xml
      */
     protected $_tableVersion = '0.04';
 
+    /**
+     * Time to hold the cache before refreshing
+     *
+     * @param int
+     */
+    public static $cacheTimeOut = 86400;
+
 	protected $_dataTypes = array
 	( 
 		'uri' => 'INPUTTEXT',
 		'http_referer' => 'INPUTTEXT',
+		'referal_domain' => 'INPUTTEXT',
 		
 		//	NUMBER OF PAGES VIEWED IN THIS SESSION
 		'NPS' => 'INPUTTEXT',
 		
-		'ip' => 'INPUTTEXT',
-//		'server_name' => 'INPUTTEXT',
+		'ip' => 'JSON',
 		'http_host' => 'INPUTTEXT',
 		'http_user_agent' => 'INPUTTEXT',
-//		'http_request_type' => 'INPUTTEXT',
-//		'http_application_mode' => 'INPUTTEXT',
-//		'redirect_status' => 'INPUTTEXT',
-//		'server_protocol' => 'INPUTTEXT',
 		'request_method' => 'INPUTTEXT', 
-	//	'request_uri' => 'INPUTTEXT',
-//		'redirect_url' => 'INPUTTEXT',
 		'request_time' => 'INPUTTEXT',
 		'total_run_time' => 'INPUTTEXT',
 		'user_id' => 'INPUTTEXT',
-	//	'post' => 'JSON', 
-	//	'get' => 'JSON',
-	//	'request' => 'ARRAY', 
+		'username' => 'INPUTTEXT',
 		'request' => 'JSON', 
-	//	'log_time' => 'INPUTTEXT', 
-//		'session_id' => 'INPUTTEXT'
+		'utm_source' => 'INPUTTEXT',
+		'utm_medium' => 'INPUTTEXT',
+		'utm_campaign' => 'INPUTTEXT',
+		'utm_content' => 'INPUTTEXT',
+		'user_id' => 'INPUTTEXT',
 	);
 	// END OF CLASS
 }

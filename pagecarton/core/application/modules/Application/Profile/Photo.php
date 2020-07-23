@@ -81,11 +81,11 @@ class Application_Profile_Photo extends Application_Profile_Abstract
 			
 
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '/' . $data['profile_url'] . '';
-			$this->setViewContent( '<div class="boxednews greynews">Profile picture successfully saved for "'  . $data['display_name'] . '".</div>', true );
-			$this->setViewContent( '<div class="boxednews greynews" title="Share this profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+			$this->setViewContent(  '' . self::__( '<div class="boxednews greynews">Profile picture successfully saved for "'  . $data['display_name'] . '".</div>' ) . '', true  );
+			$this->setViewContent( self::__( '<div class="boxednews greynews" title="Share this profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );  
 			if( @$_GET['previous_url'] )
 			{
-				$this->setViewContent( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
+				$this->setViewContent( self::__( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' ) );
 			}
 			$this->_objectData['profile_url'] = $data['profile_url'];  
 		}

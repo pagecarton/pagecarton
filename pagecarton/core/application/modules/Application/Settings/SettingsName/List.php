@@ -41,6 +41,12 @@ class Application_Settings_SettingsName_List extends Application_Settings_Settin
      * @var string 
      */
 	protected static $_objectTitle = 'Site Options'; 
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public static $translateInnerWidgetContent = true;
 		
     /**
      * The method does the whole Class Process
@@ -65,10 +71,16 @@ class Application_Settings_SettingsName_List extends Application_Settings_Settin
 		$list->setData( $this->getDbData() );
 		$this->setIdColumn( 'settingsname_name' );
 		$list->setKey( $this->getIdColumn() );
-		$list->setNoRecordMessage( 'No settings on this application <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Creator/">Create</a>' );
+        $list->setNoRecordMessage( 'No settings on this application <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Creator/">Create</a>' );
+
+    //    $output = '%s Settings';
+    //    $output = PageCarton_Widget::__( $output );
+    //    $output = sprintf( $output, '%FIELD%' );
+        $output = '%FIELD% Settings';
+        
 		$list->createList(  
 			array(
-				'Category' => array( 'field' => 'settingsname_title', 'value' => '<a href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/' . $this->getIdColumn() . '/%KEY%/\' );">[%FIELD%]</a>' ), 
+				'Category' => array( 'field' => 'settingsname_title', 'value' => '<a href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/' . $this->getIdColumn() . '/%KEY%/\' );">' . $output . '</a>' ), 
 			//	'document_url' => '<img src="%FIELD%" width="32" height="32" />', 
 				'-' => '<a title="Change Settings" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_SettingsName_Editor/' . $this->getIdColumn() . '/%KEY%/">-</a>', 
 				'X' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_SettingsName_Delete/' . $this->getIdColumn() . '/%KEY%/">X</a>', 

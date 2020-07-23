@@ -65,8 +65,8 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 					@$urlToGo = '' . Ayoola_Application::getUrlPrefix() . '/accounts/signin/?previous_url=' . htmlentities( $data['article_url'] . '&x_url=' . $_REQUEST['x_url'] );
 	//				header( 'Location: /accounts/signin/?previous_url=' . $data['article_url'] );
 	//				exit();
-					$this->setViewContent( '<p>You are required to sign in before you can access this document.</p>', true );
-					$this->setViewContent( '<input type="button" value="Sign in to download" onClick="window.location=\'' . $urlToGo . '\'" >' );
+					$this->setViewContent(  '' . self::__( '<p>You are required to sign in before you can access this document.</p>' ) . '', true  );
+					$this->setViewContent( self::__( '<input type="button" value="Sign in to download" onClick="window.location=\'' . $urlToGo . '\'" >' ) );
 					return false;
 				}
 			}
@@ -84,7 +84,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 					$filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' );
 					$neededFunds = $filter->filter( $amount );
 
-					$this->setViewContent( '<p class="boxednews badnews">You need an additional ' . $neededFunds . ' in your wallet to download this file.</p>' );
+					$this->setViewContent( self::__( '<p class="boxednews badnews">You need an additional ' . $neededFunds . ' in your wallet to download this file.</p>' ) );
 					$this->setViewContent( Application_Wallet_Fund::viewInLine( array( 'amount' => $amount, 'checkout_requirements' => @$data['article_requirements'], 'button_value' => $this->getParameter( 'button_value' ) ? : 'Add funds to download', 'return_url' => 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $data['article_url'] ) ) );
 					return false;
 				}
@@ -125,7 +125,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 				$mailInfo['body'] = 'A document titled "' . $data['article_title'] . '", has been downloaded by a user. You can view the file by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . strtolower( $data['article_url'] ) . '.
 				
 				Here is a captured information of the user: ' . var_export( Ayoola_Application::getUserInfo(), true ) . '.
-				Here is a captured information provided by the user when accessing the file: ' . var_export( $values, true ) . '.
+				Here is a captured information provided by the user when accessing the file: ' . self::arrayToString( $values ) . '.
 				';
 				Application_Log_View_General::log( array( 'type' => 'Download', 'info' => array( $mailInfo ) ) );
 				
@@ -157,7 +157,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 					$mailInfo['to'] = $userInfo['email'];
 					$mailInfo['body'] = 'A file titled "' . $data['article_title'] . '", has been downloaded by a user. You can view the file by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . strtolower( $data['article_url'] ) . '.
 					
-					Here is a captured information provided by the user when accessing the file: ' . var_export( $values, true ) . '.
+					Here is a captured information provided by the user when accessing the file: ' . self::arrayToString( $values ) . '.
 					';
 					try
 					{
@@ -173,7 +173,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 			//		$this->setViewContent( $this->getForm()->view(), true );
 					return false;
 				}
-				static::getDownloadContent( $data );
+				$this->getDownloadContent( $data );
 			}
 			else
 			{
@@ -182,7 +182,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 		}
 		catch( Exception $e )
 		{ 
-			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );
 			$this->getForm()->setBadnews( $e->getMessage() );
 			$this->setViewContent( $this->getForm()->view() );
 			return false;

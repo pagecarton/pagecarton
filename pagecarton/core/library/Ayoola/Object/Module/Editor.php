@@ -41,7 +41,7 @@ class Ayoola_Object_Module_Editor extends Ayoola_Object_Module_Abstract
 			if( ! $identifierData = self::getIdentifierData() ){ return false; }
 			$this->createForm( 'Edit Module', 'Edit ' . $identifierData['module_name'], $identifierData );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->updateDb() ){ $this->setViewContent( 'Module Edited Successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Module Edited Successfully' ) . '', true  ); }
 		}
 		catch( Exception $e ){ return false; }
 		

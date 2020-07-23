@@ -5,6 +5,7 @@ CONTENTS OF THIS FILE
  * Requirements and notes
  * Optional server requirements
  * Installation
+ * Installation Methods
 
 REQUIREMENTS AND NOTES
 ----------------------
@@ -45,10 +46,31 @@ INSTALLATION
 
 1. Download .
 
-   You can obtain the latest PageCarton release from http://www.PageCarton.com -- the
+   You can obtain the latest PageCarton release from http://www.PageCarton.org -- the
    install script is available in .php format.
 
-3. Run the install script.
+2. Run the install script.
 
    To run the install script, point your browser to the base URL of your
    website (e.g., http://www.example.com/pc_installer.php).
+
+INSTALLATION METHODS
+--------------------
+
+There are three documented ways to install PageCarton,
+
+1. Offline Standalone Installer .
+
+	http://docs.pagecarton.org/2017/10/10 installing-pagecarton.html. Default installation method.
+
+2. Bootstrap Installer .
+	
+	https://www.pagecarton.org/2018/03/17/php-auto-installer-script.html. 
+	To use this, the server must be able to connect to the internet to
+	download the files.
+
+3. Manual Installation .
+
+	http://docs.pagecarton.org/2019/06/27/ installing-pagecarton-core-custom-directory.html. Install
+	PageCarton in a custom directory. 
+	

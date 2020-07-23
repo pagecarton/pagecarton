@@ -37,9 +37,9 @@ class Application_Message_Editor extends Application_Message_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['testimonial'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['testimonial'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->updateDb() ){ $this->setViewContent( 'Message edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Message edited successfully' ) . '', true  ); }
 		}
 		catch( Application_Message_Exception $e ){ return false; }
     } 

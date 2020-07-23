@@ -51,13 +51,13 @@ class Ayoola_Api_Editor extends Ayoola_Api_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['api_label'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['api_label'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
 			if( ! $this->updateDb( $values ) ){ return false; }
-			$this->setViewContent( 'Api link edited successfully.', true );
+			$this->setViewContent(  '' . self::__( 'Api link edited successfully.' ) . '', true  );
 		}
 		catch( Application_Blog_Exception $e ){ return false; }
      

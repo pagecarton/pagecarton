@@ -52,7 +52,7 @@ class Application_Slideshow_Editor extends Application_Slideshow_Abstract
 				}
 			//	return false; 
 			}
-			$this->createForm( 'Edit', 'Editing "' . $data['slideshow_title'] . '"', $data );
+			$this->createForm( 'Save', 'Editing "' . $data['slideshow_title'] . '"', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -60,16 +60,16 @@ class Application_Slideshow_Editor extends Application_Slideshow_Abstract
 			{ 
 				return false;
 			}
-			$this->setViewContent( '<div class="boxednews goodnews" style="clear:both;">Slideshow settings saved successfully. </div>', true ); 
+			$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews" style="clear:both;">Slideshow settings saved successfully. </div>' ) . '', true  ); 
 		//	$values['slideshow_type'] = $values['slideshow_type'] ? : 'upload';
 			switch( $values['slideshow_type'] )
 			{
 				case 'post':
-					$this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Creator?article_type=' .  @$values['slideshow_article_type'] . '&category=' .  @$values['category_name'] . '" class="boxednews pc-bg-color">Add new post</a>' );    
+					$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Creator?article_type=' .  @$values['slideshow_article_type'] . '&category=' .  @$values['category_name'] . '" class="boxednews pc-bg-color">Add new post</a>' ) );    
 				break;
 			//	case 'upload':
 				default:
-					$this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Manage/?slideshow_name=' .  ( @$values['slideshow_name'] ? : $data['slideshow_name'] ) . '" class="boxednews pc-bg-color">Update photos</a>' ); 
+					$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Manage/?slideshow_name=' .  ( @$values['slideshow_name'] ? : $data['slideshow_name'] ) . '" class="boxednews pc-bg-color">Update photos</a>' ) ); 
 				break;
 			}
 		}

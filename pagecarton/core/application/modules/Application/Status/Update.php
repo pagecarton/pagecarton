@@ -112,7 +112,7 @@ View ' . $senderInfo['display_name'] . '\'s profile: http://' . Ayoola_Page::get
 			}
 			
 			
-			$this->setViewContent( '<p class="boxednews goodnews">Status has been updated successfully.</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="boxednews goodnews">Status has been updated successfully.</p>' ) . '', true  );
 		}
 		catch( Application_Status_Exception $e ){ return false; }
     } 

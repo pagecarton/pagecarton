@@ -1,0 +1,154 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /contact
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: contact.php	Saturday 14th of December 2019 10:10:17 AM	ayoola@ayoo.la $ 
+*/
+//	Page Include Content
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_3b2e5d72eae9cc577e87341acce0fa9d = new Ayoola_Page_Editor_Text( array (
+  'editable' => '
+<div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg);">
+      <div class="container">
+        <div class="row same-height justify-content-center">
+          <div class="col-md-12 col-lg-10">
+            <div class="post-entry text-center">
+              <h1 class="">Contact Us</h1>
+              <p class="lead mb-4 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+',
+  'preserved_content' => '<div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg);">
+      <div class="container">
+        <div class="row same-height justify-content-center">
+          <div class="col-md-12 col-lg-10">
+            <div class="post-entry text-center">
+              <h1 class="">Contact Us</h1>
+              <p class="lead mb-4 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+',
+  'url_prefix' => '',
+  'pagewidget_id' => '1576318217-0-12',
+) );
+
+							}
+							else
+							{
+								
+$_3b2e5d72eae9cc577e87341acce0fa9d = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_fe872d087c1e87791438f73b3d1b5494 = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<div class="site-section bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7 mb-5">
+
+            
+
+            <form action="/widgets/PageCarton_Contact_Form" method="post" class="p-5 bg-white">
+             
+
+              <div class="row form-group">
+                <div class="col-md-6 mb-3 mb-md-0">
+                  <label class="text-black" for="fname">First Name</label>
+                  <input type="text" id="fname" class="form-control" name="contactus_firstname">
+</div>
+                <div class="col-md-6">
+                  <label class="text-black" for="lname">Phone Number</label>
+                  <input name="contactus_phone_number" type="text" id="lname" class="form-control">
+</div>
+              </div>
+
+              <div class="row form-group">
+                
+                <div class="col-md-12">
+                  <label class="text-black" for="email">Email</label> 
+                  <input name="contactus_email" type="email" id="email" class="form-control">
+</div>
+              </div>
+
+              <div class="row form-group">
+                
+                <div class="col-md-12">
+                  <label class="text-black" for="subject">Subject</label> 
+                  <input name="contactus_subject" type="subject" id="subject" class="form-control">
+</div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <label class="text-black" for="message">Message</label> 
+                  <textarea name="contactus_message" id="message" cols="30" rows="7" class="form-control" placeholder="Write your notes or questions here..."></textarea>
+</div>
+              </div>
+
+              <div class="row form-group">
+                <div class="col-md-12">
+                  <input type="submit" value="Send Message" class="btn btn-primary py-2 px-4 text-white">
+</div>
+              </div>
+
+  
+            </form>
+          </div>
+          <div class="col-md-5">
+            
+            <div class="p-4 mb-3 bg-white">
+              <p class="mb-0 font-weight-bold">Address</p>
+              <p class="mb-4">{Street Address},
+{City},
+{State},
+{Country}.</p>
+
+              <p class="mb-0 font-weight-bold">Phone</p>
+              <p class="mb-4"><a href="tel://{+234 800 000 0000}">{+234 800 000 0000}</a></p>
+
+              <p class="mb-0 font-weight-bold">Email Address</p>
+              <p class="mb-0"><a href="mailto:{info@example.com}">{info@example.com}</a></p>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+',
+  'preserved_content' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '1576318217-0-13',
+  'insert_id' => '1566897443-0-24',
+) );
+
+							}
+							else
+							{
+								
+$_fe872d087c1e87791438f73b3d1b5494 = null;
+
+							}
+							

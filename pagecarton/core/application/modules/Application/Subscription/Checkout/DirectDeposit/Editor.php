@@ -39,7 +39,7 @@ class Application_Subscription_Checkout_DirectDeposit_Editor extends Application
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 		$this->createForm( 'Edit Account Information', 'Edit ' . $identifierData['account_name'], $identifierData );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->updateDb() ){ $this->setViewContent( 'Account Information edited successfully', true ); }
+		if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Account Information edited successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

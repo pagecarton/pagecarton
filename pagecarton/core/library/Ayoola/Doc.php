@@ -119,7 +119,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public function loadFile( $path )
     {
-	//	var_export( $path );
+    //    var_export( $path );
+    //    exit();
 		require_once 'Ayoola/Loader.php';
 		if( ! $absolutePath = Ayoola_Loader::checkFile( $path, array( 'prioritize_my_copy' => true ) ) )
 		{
@@ -205,7 +206,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			{
 			//	$filePath = DOCUMENTS_DIR . $file;
 				$storage = new Ayoola_Storage(); 
-				$storage->storageNamespace = __CLASS__ . Ayoola_Application::getUrlPrefix() . $uri . 's-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
+				$storage->storageNamespace = __CLASS__ . Ayoola_Application::getUrlPrefix() . $uri . 's--d-d-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
 				$storage->setDevice( 'File' );
 			//	self::v( $storage->retrieve() );
 				if( ! $dedicatedUrl = $storage->retrieve() OR $options['disable_cache'] )  
@@ -215,7 +216,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 					$j = str_replace( '/', DS, $j::getDocumentDirectory() . $uri ); 
 				//	var_export( $j );
 		//			var_export( __LINE__ );
-					$j = filemtime( $j );
+					$j = @filemtime( Ayoola_Loader::checkFile( $j, array( 'prioritize_my_copy' => true ) ) );
+				//	var_export( $j );
 					$domain = Ayoola_Page::getDefaultDomain();
 					$domain = DOMAIN;
 		//			if( $useQueryStrings )
@@ -223,7 +225,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 					//	var_export( Ayoola_Application::getDomainSettings() );
 					//	exit();
 						$dedicatedUrl = Ayoola_Application::getDomainSettings( 'protocol' ) . "://{$domain}" . Ayoola_Application::getUrlPrefix() . "{$uri}?document_time={$j}";					
-					}	
+                    }	
+                //    var_export( $dedicatedUrl );
 					$storage->store( $dedicatedUrl );
 				}
 			}
@@ -266,6 +269,26 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     {
 		if( is_null( self::$_documentDirectory ) ){ self::setDocumentDirectory(); }
 		return self::$_documentDirectory;
+    } 
+	
+    /**
+     * This method returns the path to a document
+     *
+     * @param string URI
+     * @return string The Document PATH
+     */
+    public static function getDocumentPath( $uri )
+    {
+        $dir = self::getDocumentDirectory();
+    //    if( ! $path = Ayoola_Loader::checkFile( 'documents/__/' . $uri, array( 'prioritize_my_copy' => true ) ) )
+
+        //  looking for changed document only in the current site context so changes
+        //  pc.com changes for child sites isn't proper
+        if( ! $path = Ayoola_Doc_Browser::getDocumentsDirectory() .  '/__' . $uri OR ! is_file( $path)  )
+        {
+            $path = Ayoola_Loader::checkFile( 'documents' . $uri, array( 'prioritize_my_copy' => true )  );
+        }
+        return $path;
     } 
 	
     /**
@@ -677,8 +700,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			} else if (is_dir($file)) {
 				self::deleteDirectoryPlusContent($file);
 			} else {
-			//	var_export( $file );
-				unlink($file);
+			    //	var_export( $file );
+                unlink($file);
 			}
 		}
 		@rmdir( $path );
@@ -751,6 +774,21 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 
 	/**
      * 
+     * @param string Full Path
+     * @param string Path relative to
+     * @return string directory
+     */
+    public static function getRelativePath( $path, $baseDir = PC_BASE )
+    {
+        $baseDir = str_ireplace( DS, '/', $baseDir );
+        $path = str_ireplace( DS, '/', $path );
+        
+        $path = str_ireplace( $baseDir, '', $path );
+        return $path;
+    } 
+
+	/**
+     * 
      * @param void
      * @return boolean
      */
@@ -812,7 +850,6 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public function setViewOption( $value )
     {
-	//	var_export( $value );
 	//	var_export( is_file( $value ) );
 		$path = array();
 		$path['include'] = $value;
@@ -820,17 +857,29 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		{
 			if( ! is_file( $value ) )
 			{
-				require_once 'Ayoola/Filter/UriToPath.php';
-				$filter = new Ayoola_Filter_UriToPath();
-				$path = $filter->filter( $value );
+			//	require_once 'Ayoola/Filter/UriToPath.php';
+			//	$filter = new Ayoola_Filter_UriToPath();
+			//	$path = $filter->filter( $value );
 			}
 		}
-		$this->loadFile( $path['include'] ); 
+    //    var_export( $path );
+    //    exit();
+        $realPath = self::getDocumentPath( $value );
+        if( is_file( $value ) )
+        {
+            $realPath = $value;
+        }
+    //    var_export( $value );
+    //    var_export( $realPath );
+    //    exit();
+		$this->loadFile( $realPath ); 
+        //		$this->loadFile( $path['include'] ); 
 	//	try{ $this->loadFile( $path['include'] ); } 
 		//	Document not found
 	//	catch( Ayoola_Doc_Exception $e ){ return false; }
-	//	var_export( $path );
-		$this->_viewOption = $path;
+    //    var_export( $path );
+    //    exit();
+		$this->_viewOption = $realPath;
     } 
 	
     /**

@@ -28,22 +28,6 @@
 
 class Application_Javascript extends Ayoola_Abstract_Script
 {
-    /**
-     * @var string
-     */
-	protected static $_codesOnLoad = array();
-	
-    /**
-     * @var string
-     */
-	protected static $_filesOnLoad = array();
-	
-    /**
-     * @var string
-     */
-	protected static $_jsMode = array();
-	protected static $_filesToHead = array();
-	protected static $_codesToHead = array();
 	
     /**
      * All the Script files to include in the safe

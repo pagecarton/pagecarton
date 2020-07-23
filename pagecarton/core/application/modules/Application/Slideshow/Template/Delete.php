@@ -46,7 +46,7 @@ class Application_Slideshow_Template_Delete extends Application_Slideshow_Templa
 			{	
 				return false;
 			}
-			$this->setViewContent( 'Slideshow deleted successfully', true );
+			$this->setViewContent(  '' . self::__( 'Slideshow deleted successfully' ) . '', true  );
 		}
 		catch( Ayoola_Exception $e ){ return false; }
     } 

@@ -63,15 +63,28 @@ class Ayoola_Object_Preview extends PageCarton_Widget
                 unset( $_REQUEST['name'], $_REQUEST['object_name'], $_REQUEST['pc_module_url_values'] );
             //    return false;
             }
-    //        exit();
+            switch( $_REQUEST['content_type'] )
+            {
+                case 'js':
+                    
+                break;
+                default:
+                    if( empty( $parameters['pagewidget_id_switch'] ) )
+                    {
+                        Ayoola_Abstract_Viewable::saveWidget( $class, $parameters );
+                    }
+                break;
+            }
+            //        exit();
             set_time_limit( 0 );
             if( ! empty( $_REQUEST['rebuild_widget_box'] ) )   
             {
-            //    var_export( $_REQUEST );
+            //    var_export( $parameters + $_REQUEST );
+            //    var_export( $parameters + $_REQUEST );
              //   $classHtml .= Ayoola_Abstract_Viewable::getViewableObjectRepresentation( $_REQUEST );
 
-                //  using Ayoola_Abstract_Viewable is not allow us access the real class parameters
-                $classHtml .= $class::getViewableObjectRepresentation( $_REQUEST );
+                //  using Ayoola_Abstract_Viewable is not allowing us access the real class parameters
+                $classHtml .= $class::getViewableObjectRepresentation( $parameters + $_REQUEST);
             }
             else
             {
@@ -87,7 +100,7 @@ class Ayoola_Object_Preview extends PageCarton_Widget
                 break;
                 default:
                     unset( $parameters['editable'], $parameters['codes'] );
-		            Application_Javascript::addFile( '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '/?class_name=' . $_REQUEST['class_name'] . '&v=' . filemtime( __FILE__ ) . '&content_type=js&' . http_build_query( $parameters ) );
+                    Application_Javascript::addFile( '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . __CLASS__ . '/?class_name=' . $_REQUEST['class_name'] . '&v=' . filemtime( __FILE__ ) . '&content_type=js&' . http_build_query( $parameters ) );
                     $html .= $classHtml;
                     $html .= Application_Style::getAll(); 
                     $html .= '<!--PC-HTML-DEMARCATION-->';
@@ -109,7 +122,7 @@ class Ayoola_Object_Preview extends PageCarton_Widget
         { 
       //      echo $e->getMessage();
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

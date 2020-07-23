@@ -87,11 +87,7 @@ abstract class Application_Category_Abstract extends Ayoola_Abstract_Table
 //var_export( $articleSettings )
 		
 		//	Cover photo
-/* 		$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'cover_photo' ) : 'cover_photo' );
-	//	var_export( $link );
-		$fieldset->addElement( array( 'name' => 'cover_photo', 'label' => '<input type=\'button\' value=\'Select Photo\' />', 'placeholder' => 'Cover Photo for this category', 'onClick' => 'ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' );', 'type' => 'InputText', 'value' => @$values['cover_photo'] ) );
- */		
-	//	$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'cover_photo' ) : 'cover_photo' );
+	
 		$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'cover_photo' ) : 'cover_photo' );
 	//	var_export( $link );
 		$fieldset->addElement( array( 'name' => 'cover_photo', 'label' => 'Category Headline Image', 'placeholder' => 'Cover Photo for this category', 'type' => 'Document', 'value' => @$values['cover_photo'] ) );

@@ -33,6 +33,13 @@ class Ayoola_Menu_List  extends Ayoola_Menu_Abstract
      * @var string
      */
 	protected $_sortColumn = 'template_label'; 
+
+    /**	Whether to translate widget inner conetent
+     *
+     * @var bool
+     */
+	public static $translateInnerWidgetContent = true;
+		
 	
     /**
      * Performs the creation process

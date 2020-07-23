@@ -37,9 +37,9 @@ class Application_Link_Editor extends Application_Link_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['link_url'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['link_url'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->updateDb() ){ $this->setViewContent( 'Link edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Link edited successfully' ) . '', true  ); }
 		}
 		catch( Application_Link_Exception $e ){ return false; }
     } 

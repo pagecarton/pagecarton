@@ -39,7 +39,7 @@ class Application_Slideshow_Delete extends Application_Slideshow_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['slideshow_name'],  'Delete Slideshow' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Slideshow deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Slideshow deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Slideshow_Exception $e ){ return false; }
     } 

@@ -39,7 +39,7 @@ class Ayoola_Object_Module_Delete extends Ayoola_Object_Module_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['module_name'],  'Delete Module' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Module deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Module deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Object_Module_Exception $e ){ return false; }
     } 

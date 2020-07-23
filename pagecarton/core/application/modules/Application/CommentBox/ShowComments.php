@@ -42,7 +42,15 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
 		try
 		{ 
             //  Code that runs the widget goes here...
-            $articleUrl = Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'];
+        //    var_export( Ayoola_Application::$GLOBAL );
+       //     var_export( $_GET );
+            $articleUrl = @Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'];
+        //    var_export( $articleUrl );
+            if( empty( $articleUrl ) && Ayoola_Application::$mode === 'post' )
+            {
+                $articleUrl = Ayoola_Application::getRequestedUri();
+            }
+        //    var_export( $articleUrl );
             if( $articleUrl )
             {
                 $where = array( 'article_url' => $articleUrl );
@@ -73,6 +81,10 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
                 {
                     krsort( $data );
                 }
+            }
+            if( empty( $data ) )
+            {
+                return false;
             }
             Application_Style::addFile( '/css/comment-box.css' );
             $html = null;
@@ -173,7 +185,7 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p class="badnews">Theres an error in the code</p>' ) . '', true  ); 
             return false; 
         }
 	}

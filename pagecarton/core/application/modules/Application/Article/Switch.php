@@ -54,8 +54,9 @@ class Application_Article_Switch extends Application_Article_Abstract
 			
 			//	Only the owner can edit or priviledged user can edit
 			//	Check settings
-			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ) ){ return false; }
+            $articleSettings = Application_Article_Settings::getSettings( 'Articles' );
+            $articleSettings['allowed_editors'][] = 98;
+			if(  ! self::hasPriviledge( $articleSettings['allowed_editors'] ) ){ return false; }
 			$switch = @$_REQUEST['post_switch'] ? : 'featured';
 			$switch = $this->getParameter( 'post_switch' ) ? : $switch;			
 	//		@$data[$switch] = @$data[$switch] ? true :  $data[$switch];
@@ -74,6 +75,8 @@ class Application_Article_Switch extends Application_Article_Abstract
 				{
 					case false:
 						$data[$switch] = $switch;
+                        $data['post_switches'][] = $switch;
+                        $data['post_switches'] = array_unique( $data['post_switches'] );
 					break;
 					default:
 						$data[$switch] = false;

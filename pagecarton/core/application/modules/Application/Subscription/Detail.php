@@ -57,7 +57,7 @@ class Application_Subscription_Detail extends Application_Subscription_Abstract
     {
 		try
 		{
-			if( ! $data = $this->getIdentifierData() ){ return $this->setViewContent( 'Subscription Package Not Found', true ); }
+			if( ! $data = $this->getIdentifierData() ){ return $this->setViewContent(  '' . self::__( 'Subscription Package Not Found' ) . '', true  ); }
 			$pageInfo = array(
 				'description' => $data['subscription_description'],
 				'title' => trim( $data['subscription_label'] . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), ' -' )
@@ -67,8 +67,8 @@ class Application_Subscription_Detail extends Application_Subscription_Abstract
 		}
 		catch( Exception $e )
 		{ 
-			$this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>', true ); 
-			return $this->setViewContent( '<p>Error with subscription package</p>' ); 
+			$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  ); 
+			return $this->setViewContent( self::__( '<p>Error with subscription package</p>' ) ); 
 		}
 	//	var_export( $this->_xml );
     } 

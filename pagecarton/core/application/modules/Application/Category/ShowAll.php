@@ -136,6 +136,10 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 				$categoryId = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_parent_category_offset' ) )];
 			}
 		}
+		if( $this->getParameter( 'show_only_post_categories' ) )
+		{
+			$this->_dbWhereClause['category_name'] = Ayoola_Application::$GLOBAL['post']['category_name'];
+		}
 		//	switch templates off
 	//	$this->_parameter['markup_template'] = null; 
 		if( ! $children = self::getChildren( $categoryId ) )

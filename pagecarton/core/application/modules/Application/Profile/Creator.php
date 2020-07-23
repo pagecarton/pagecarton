@@ -56,21 +56,19 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 		{
 			$fullUrl = 'http://' . $values['profile_url'] . '.' . Ayoola_Application::getDomainName() . '';
 		}
-		$this->setViewContent( '<div class="goodnews">Profile saved successfully. 
+		$this->setViewContent(  self::__( '<div class="goodnews">Profile saved successfully. 
 						<a href="' . $fullUrl . '" target="_blank">Preview</a>							
-						</div>', true );
-//		$this->setViewContent( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+						</div>' ), true );
 		if( @$_GET['previous_url'] )
 		{
-			$this->setViewContent( '<div class="pc-info-notify"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
+			$this->setViewContent( self::__( '<div class="pc-info-notify"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' ) );
 		}
 		$this->_objectData['profile_url'] = $values['profile_url']; 
-	//	$this->setViewContent(  );
 
 		
 		//	Notify Admin
 		$mailInfo['subject'] = 'New Profile Created';
-		$mailInfo['body'] = 'A new profile name "' . $values['display_name'] . '", has been created with the profile module. 
+		$mailInfo['body'] = 'A new profile  "' . $values['display_name'] . '", has been created with the profile module. 
 		
 		You can view the new profile by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '.
 		';
@@ -83,11 +81,11 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 
 		$mailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
 		$mailInfo['subject'] = 'Your new profile';
-		$mailInfo['body'] = 'A new public profile name , has been created for you.
+		$mailInfo['body'] = 'A new public profile, has been created for you.
 		
-		Display Name: "' . $values['display_name'] . '",
-		Profile URL: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '
-		Manage your profiles: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/account';
+Display Name: "' . $values['display_name'] . '",
+Profile URL: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/' . $values['profile_url'] . '
+Manage your profiles: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/account';
 		self::sendMail( $mailInfo );
 
 	}
@@ -125,8 +123,28 @@ class Application_Profile_Creator extends Application_Profile_Abstract
 			$userInfo['profile_url'] = @$userInfo['profile_url'] ? : $values['profile_url'];
 			if( intval( $values['access_level'] ) !== 99 && intval( $userInfo['access_level'] ) !== 99 )
 			{
-				$userInfo['access_level'] = $values['access_level'] ? : $userInfo['access_level'];
-			}
+                //  No need to reset main user access level like this
+			//	$userInfo['access_level'] = $values['access_level'] ? : $userInfo['access_level'];
+            }
+
+            //  Make access level for profile defaults to current user level
+            switch( intval( $values['access_level'] ) )
+            {
+                case 0:
+                case 1:
+                    switch( intval( $userInfo['access_level'] ) )
+                    {
+                        case 97:
+                        case 98:
+                        case 99:
+
+                        break;
+                        default:
+                            $values['access_level'] = $userInfo['access_level'];
+                        break;
+                    }
+                break;
+            }
 			
 			//	save the new settings as well
 			Ayoola_Access_Login::login( $userInfo );

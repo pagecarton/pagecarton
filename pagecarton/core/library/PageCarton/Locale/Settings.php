@@ -43,16 +43,17 @@ class PageCarton_Locale_Settings extends PageCarton_Settings
         //  Sample Text Field Retrieving E-mail Address
 		$options = PageCarton_Locale::getInstance()->select();
 		$filter = new Ayoola_Filter_SelectListArray( 'locale_code', 'locale_name' );
-		$options = array( '' => 'Default' ) + ( $filter->filter( $options ) ? : array() );
-	//	var_dump()
-		$fieldset->addElement( array( 'name' => 'default_locale', 'label' => 'Default Locale', 'value' => @$settings['default_locale'], 'type' => 'Select' ), $options );
+		$options = ( $filter->filter( $options ) ? : array() );
+    //	var_dump()
+
+		$fieldset->addElement( array( 'name' => 'default_locale',  'onchange' => 'ayoola.div.manageOptions( { database: "PageCarton_Locale", listWidget: "PageCarton_Locale_List", values: "locale_code", labels: "locale_name", element: this } );', 'label' => 'Default Locale', 'value' => @$settings['default_locale'], 'type' => 'Select' ), $options + array( '__manage_options' => '[Manage Locales]', '__custom' => '[Custom Locale]' ) );
 
 
         //  Check box
 		$options = array( 
 							'auto_translate' => 'Auto Translate Output Text', 
 							'autosave_new_words' => 'Save new words', 
-							'auto-detect-user-locale' => 'Auto-Detect Locale', 
+							'auto_detect_user_locale' => 'Auto-Detect Locale', 
 							);
 		$fieldset->addElement( array( 'name' => 'locale_options', 'label' => 'Locale Options', 'value' => @$settings['locale_options'], 'type' => 'Checkbox' ), $options );
 		

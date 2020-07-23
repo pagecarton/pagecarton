@@ -113,12 +113,9 @@
         <!-- /.container -->
     </nav>
     <!-- Page Content -->
-    <div class="container">
+    <div class="xcontainer">
 
         <!-- Heading Row -->
-		<section data-pc-all-sections="1">
-		
-		</section>
         <div class="row">
 		<section id="headline">
             <div class="col-md-8">

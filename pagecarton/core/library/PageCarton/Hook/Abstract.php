@@ -65,9 +65,38 @@ class PageCarton_Hook_Abstract extends PageCarton_Widget
 		$form->submitValue = $submitValue ;
 //		$form->oneFieldSetAtATime = true;
 		$fieldset->placeholderInPlaceOfLabel = false;
-        
-        $fieldset->addElement( array( 'name' => 'class_name', 'type' => 'InputText', 'value' => @$values['class_name'] ) ); 
-        $fieldset->addElement( array( 'name' => 'hook_class_name', 'type' => 'InputText', 'value' => @$values['hook_class_name'] ) ); 
+        $widgets = Ayoola_Object_Embed::getWidgets();
+        if( empty( $widgets[@$values['class_name']] ) )
+        {
+            $widgets[@$values['class_name']] = $values['class_name'];
+        }
+        $fieldset->addElement( array( 'name' => 'class_name', 'label' => 'Hook this', 'placeholder' => 'Class widget to affect by this', 'type' => 'Select', 'value' => @$values['class_name'], 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Widget Class Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }' ), array( '' => 'Class widget to influence', '*' => 'All widgets' ) + $widgets + array( '__custom' => 'Custom Widget' ) ); 
+
+        $options = Ayoola_Object_Widget::getInstance()->select();
+        //  var_export( $options );
+        $filter = new Ayoola_Filter_SelectListArray( 'class_name', 'class_name' );
+        $options = $filter->filter( $options );
+        foreach( $options as $key => $value )
+        {
+            if( ! Ayoola_Loader::loadClass( $value ) || ! method_exists( $value, 'hook' ) )
+            {
+                unset( $options[$key] );
+            }
+        }
+        if( empty( $options ) )
+        {
+            $options[''] = 'No hooks created yet'; 
+        }
+        else
+        {
+            $options = array( '' => 'Class widget with the hook method' ) + $options;
+            if( empty( $options[@$values['hook_class_name']] ) )
+            {
+                $options[@$values['hook_class_name']] = $values['hook_class_name'];
+            }
+        }
+        $fieldset->addElement( array( 'name' => 'hook_class_name', 'label' => 'To this', 'type' => 'Select', 'value' => @$values['hook_class_name'], 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Widget Class Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }' ), $options + array( '__custom' => 'Custom Widget' ) ); 
+        $fieldset->addRequirements( array( 'NotEmpty' => null ) );
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

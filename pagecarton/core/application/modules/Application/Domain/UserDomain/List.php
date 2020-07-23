@@ -37,7 +37,7 @@ class Application_Domain_UserDomain_List extends Application_Domain_UserDomain_A
     {
       if( ! self::hasPriviledge() )
       {
-        $this->_dbWhereClause['username'] = Ayoola_Application::getUserInfo( 'username' );
+        $this->_dbWhereClause['username'] = strtolower( Ayoola_Application::getUserInfo( 'username' ) );
         $this->_dbWhereClause['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
       }
       $this->setViewContent( $this->getList() );		
@@ -56,7 +56,7 @@ class Application_Domain_UserDomain_List extends Application_Domain_UserDomain_A
 		$list->setData( $this->getDbData() );
 		$list->setListOptions( 
 								array( 
-										    'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Creator/\', \'' . $this->getObjectName() . '\' );" title="">My Domains</a>',    
+										    'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Order_List/\', \'' . $this->getObjectName() . '\' );" title="">My Domains</a>',    
 										    '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_UserDomain_Creator/?external_domain=1\', \'' . $this->getObjectName() . '\' );" title="">Link External Domain</a>',    
 										    'Register' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Registration/\', \'' . $this->getObjectName() . '\' );" title="">Register Domain Name</a>',    
 									) 

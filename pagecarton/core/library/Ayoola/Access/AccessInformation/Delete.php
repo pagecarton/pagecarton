@@ -38,7 +38,7 @@ class Ayoola_Access_AccessInformation_Delete extends Ayoola_Access_AccessInforma
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['username'],  'Delete Access Information' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Access information deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Access information deleted successfully' ) . '', true  ); }
 		}
 		catch( Ayoola_Access_AccessInformation_Exception $e ){ return false; }
     } 

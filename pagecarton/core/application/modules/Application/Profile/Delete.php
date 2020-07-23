@@ -84,15 +84,21 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 			Ayoola_Doc::deleteDirectoryPlusContent( $backup );
 			
 			@Ayoola_Doc::removeDirectory( dirname( self::getFolder() . $data['profile_url'] ) );
-			$this->setViewContent( '<div class="boxednews badnews">Profile deleted successfully</div>', true ); 
+			$this->setViewContent(  '' . self::__( '<div class="boxednews badnews">Profile deleted successfully</div>' ) . '', true  ); 
 			if( @$_GET['previous_url'] )
 			{
-				$this->setViewContent( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
+				$this->setViewContent( self::__( '<div class="boxednews greynews"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' ) );
 			}
 						
 			//	Notify Admin
 			$mailInfo['subject'] = 'Profile Deleted';
-			$mailInfo['body'] = 'A new profile name "' . $values['display_name'] . '", has been deleted with the profile module. 
+            $mailInfo['body'] = 'A profile has been just been deleted. Here are the details of the profile
+            
+Profile name: ' . $data['display_name'] . '
+Profile URL: ' . $data['profile_url'] . '
+Deleted by: ' . Ayoola_Application::getUserInfo( 'username' ) . ' (' . Ayoola_Application::getUserInfo( 'email' ) . ')
+
+
 			';
 			try
 			{

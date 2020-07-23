@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Wednesday 10th of April 2019 02:16:48 PM	ayoola@ayoo.la $ 
+* @version $Id: account.php	Saturday 14th of December 2019 09:18:43 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
+$_5d0205259c2cf515c9cf6cca2425f3c4 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<br>
 
 <h1>Account Dashboard</h1>
@@ -28,10 +28,12 @@ $_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
 
 <br>',
   'url_prefix' => '',
+  'pagewidget_id' => '1575534201-0-173',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
+  'insert_id' => '1566242675-0-12',
   '' => '',
 ) );
 
@@ -39,14 +41,74 @@ $_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_2f63bc0963e9afc89bc511de893c11fc = null;
+$_5d0205259c2cf515c9cf6cca2425f3c4 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_692509e191fac1d67c625e321c4395b7 = new Ayoola_Page_Editor_Text( array (
+$_1f640bacaa91af5b88cd27ebb94625c0 = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<a href="{{{post_link}}}"><img class="pc_give_space_top_bottom" style="width:100%;" alt="" src="{{{document_url_cropped}}}"></a>
+
+<div class="xcontainer xpc_container">
+    <h3 class="pc_give_space_top_bottom"><a href="{{{post_link}}}">{{{article_title}}}</a></h3>
+    <p class="pc_give_space_top_bottom"><a target="_blank" class="a2a_dd btn btn-default" addthis:title="{{{article_title}}}" addthis:description="{{{article_description}}}" addthis:url="{{{post_full_url}}}" href="https://www.addtoany.com/share?url={{{post_full_url}}}&amp;title={{{post_type}}} - {{{article_title}}}">
+<span style="font-size:small;"> Share </span> <i class="fa fa-facebook"></i> <i class="fa fa-twitter"></i> <i class="fa fa-whatsapp"></i> <i class="fa fa-share-alt"></i> </a></p>
+    <p style="font-size:small;" class="pc_give_space_top_bottom"><a href="/music/posts/{{{post_type_id}}}">{{{post_type}}}</a> by <a href="/music/{{{profile_url}}}">{{{display_name}}}</a> in {{{category_text}}}</p>
+       
+    <em class="pc_give_space_top_bottom">{{{article_description}}}</em>
+    <div class="pc_give_space_top_bottom">{{{article_content}}}</div>
+    <div class=""><a href="{{{post_link}}}">View <i class="fa fa-eye pc_give_space"></i> {{{views_count_total}}}   <i class="fa fa-comment pc_give_space"></i> {{{comments_count_total}}} </a></div>
+    <div class="pc_give_space_top_bottom"><span style="font-size:x-small;"><i class="fa fa-clock-o "></i> {{{article_creation_date_filtered}}}</span></div>
+</div>',
+  'preserved_content' => '',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'embed_widgets',
+    1 => 'parameters',
+    2 => 'savings',
+  ),
+  'savedwidget_id' => '',
+  'pagewidget_id_switch' => '',
+  'widget_name' => '',
+  'pagewidget_id' => '1575534201-0-174',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Article_ShowAll',
+  ),
+  'advanced_parameter_value' => 
+  array (
+    0 => '1',
+    1 => '1800',
+    2 => '1500',
+    3 => '1',
+    4 => '1',
+    5 => '6',
+    6 => '1',
+  ),
+  'pagination[0]' => '1',
+  'cover_photo_width' => '1800',
+  'cover_photo_height' => '1500',
+  'skip_ariticles_without_cover_photo[0]' => '1',
+  'add_a_new_post[0]' => '1',
+  'no_of_post_to_show[0]' => '6',
+  'show_post_by_me[0]' => '1',
+) );
+
+							}
+							else
+							{
+								
+$_1f640bacaa91af5b88cd27ebb94625c0 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_d9c85b7ec581d502ad8d1e97ae5d62fb = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div style="">Email: {{{email}}}</div>
 
 <div style="">Username: {{{username}}}</div>
@@ -60,6 +122,7 @@ $_692509e191fac1d67c625e321c4395b7 = new Ayoola_Page_Editor_Text( array (
 
 ',
   'url_prefix' => '',
+  'pagewidget_id' => '1575534202-0-175',
   'markup_template_object_name' => 
   array (
     0 => 'Ayoola_Access_Dashboard',
@@ -69,6 +132,7 @@ $_692509e191fac1d67c625e321c4395b7 = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   'wrapper_name' => 'dark',
+  'insert_id' => '1566242675-0-13',
   '' => '',
 ) );
 
@@ -76,20 +140,22 @@ $_692509e191fac1d67c625e321c4395b7 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_692509e191fac1d67c625e321c4395b7 = null;
+$_d9c85b7ec581d502ad8d1e97ae5d62fb = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
 							{
 								
-$_356f72d00671943948b1fee15fdc71ec = new Ayoola_Menu( array (
+$_85e1debfaf199a689ecda4fc12a7f75d = new Ayoola_Menu( array (
   'option' => 'MyAccount',
   'template_name' => 'WhiteSidebarMenu',
+  'pagewidget_id' => '1575534202-0-176',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
+  'insert_id' => '1566242675-0-14',
   '' => '',
 ) );
 
@@ -97,153 +163,7 @@ $_356f72d00671943948b1fee15fdc71ec = new Ayoola_Menu( array (
 							else
 							{
 								
-$_356f72d00671943948b1fee15fdc71ec = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_812a3c03c828e0fad72b06706dd89e2c = new Ayoola_Page_Editor_Text( array (
-  'editable' => '
-			<div style="">
-			<h3>My Posts<br></h3>
-			
-			</div>
-			',
-  'preserved_content' => '			<div style="">
-			<h3>My Posts<br></h3>
-			
-			</div>
-			',
-  'url_prefix' => '',
-  'advanced_parameter_value' => 
-  array (
-    0 => '',
-  ),
-  'wrapper_name' => 'dark',
-  '' => '',
-) );
-
-							}
-							else
-							{
-								
-$_812a3c03c828e0fad72b06706dd89e2c = null;
-
-							}
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_edca16dd549bfe09f69705d257712133 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<br>
-<div style="">
-<a href="{{{post_link}}}" style="text-transform:uppercase;">{{{article_title}}}</a>
-<br>
-<a class="" href="/object/name/Application_Article_Editor?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Edit Post</span> </a>  - 
-<a class="" href="/object/name/Application_Article_Delete?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Delete Post</span> </a>
-</div>
-<br>',
-  'preserved_content' => '<br>
-<div style="">
-<a href="{{{post_link}}}" style="text-transform:uppercase;">{{{article_title}}}</a>
-<br>
-<a class="" href="/object/name/Application_Article_Editor?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Edit Post</span> </a>  - 
-<a class="" href="/object/name/Application_Article_Delete?article_url={{{article_url}}}" target="_blank"> <span style="font-size:11px;">Delete Post</span> </a>
-</div>
-<br>',
-  'url_prefix' => '',
-  'markup_template_object_name' => 
-  array (
-    0 => 'Application_Article_ShowAll',
-  ),
-  'advanced_parameter_value' => 
-  array (
-    0 => '1',
-    1 => '1',
-    2 => '2',
-  ),
-  'wrapper_name' => 'well',
-  'add_a_new_post' => '1',
-  'show_post_by_me' => '1',
-  'no_of_post_to_show' => '2',
-) );
-
-							}
-							else
-							{
-								
-$_edca16dd549bfe09f69705d257712133 = null;
-
-							}
-							
-							if( Ayoola_Page::hasPriviledge( array (
-  0 => '98',
-  1 => '99',
-), array( 'strict' => true ) ) )
-							{
-								if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-								{
-									
-$_d687a55ad8784085b5b9dd53060bad5c = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<div class="container">
-<p>&nbsp;</p>
-
-<h3>Update Site</h3>
-
-<div>&nbsp;</div>
-
-<div>&nbsp;</div>
-</div>
-',
-  'preserved_content' => '			
-			<h3><br></h3><h3>Update Site</h3><div><br></div>
-			',
-  'url_prefix' => '',
-  'widget_options' => 
-  array (
-    0 => 'wrappers',
-    1 => 'privacy',
-  ),
-  'object_access_level' => 
-  array (
-    0 => '98',
-    1 => '99',
-  ),
-  'wrapper_name' => '',
-) );
-
-								}
-								else
-								{
-									
-$_d687a55ad8784085b5b9dd53060bad5c = null;
-
-								}
-							}    
-							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
-							{
-								
-$_a7e752f58e7a7c50ee706917a2a53a70 = new Ayoola_Object_Embed( array (
-  'editable' => 'PageCarton_NewSiteWizard',
-  'widget_options' => 
-  array (
-    0 => 'parameters',
-  ),
-  'advanced_parameter_value' => 
-  array (
-    0 => '1',
-  ),
-  'publisher_mode' => '1',
-) );
-
-							}
-							else
-							{
-								
-$_a7e752f58e7a7c50ee706917a2a53a70 = null;
+$_85e1debfaf199a689ecda4fc12a7f75d = null;
 
 							}
 							

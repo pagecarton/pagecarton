@@ -37,11 +37,11 @@ class Application_Database_Editor extends Application_Database_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit Database', $data );
+			$this->createForm( 'Save', 'Edit Database', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
-			if( $this->updateDb() ){ $this->setViewContent( 'Database edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Database edited successfully' ) . '', true  ); }
 			self::setDefaultDatabase( $values );
 		}
 		catch( Application_Database_Exception $e ){ return false; }

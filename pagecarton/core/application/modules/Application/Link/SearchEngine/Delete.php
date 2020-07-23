@@ -39,7 +39,7 @@ class Application_Link_SearchEngine_Delete extends Application_Link_SearchEngine
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['searchengine_name'],  'Delete search engine Information' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Search engine deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Search engine deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Link_SearchEngine_Exception $e ){ return false; }
     } 

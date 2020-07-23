@@ -39,7 +39,7 @@ class Application_Subscription_Price_Editor extends Application_Subscription_Pri
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 		$this->createForm( 'Save', 'Edit product price: ' . $identifierData['price'], $identifierData );
 		$this->setViewContent( $this->getForm()->view() );
-		if( $this->updateDb() ){ $this->setViewContent( 'Product price edited successfully.', true ); }
+		if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Product price edited successfully.' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

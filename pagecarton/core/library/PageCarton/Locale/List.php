@@ -24,7 +24,7 @@ class PageCarton_Locale_List extends PageCarton_Locale_Abstract
      * 
      * @var string 
      */
-	  protected static $_objectTitle = 'List';   
+	  protected static $_objectTitle = 'Locale List';   
 
     /**
      * Performs the creation process
@@ -50,19 +50,26 @@ class PageCarton_Locale_List extends PageCarton_Locale_Abstract
 		$list->setData( $this->getDbData() );
 		$list->setListOptions( 
 								array( 
-							//			'Sub Domains' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_SubDomainList/\' );" title="">Sub Domains</a>',    
+										'<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Settings/\' );" title="">Locale Settings</a>',    
+										'<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_OriginalString_List/\' );" title="">Words & Phrases List</a>',    
 									) 
 							);
-		$list->setKey( $this->getIdColumn() );
+        $list->setKey( $this->getIdColumn() );
+    //    var_export( PageCarton_Locale_Settings::retrieve( 'default_locale' ) );
 		$list->setNoRecordMessage( 'No data added to this table yet.' );
-		
+		$default = array(
+            PageCarton_Locale_Settings::retrieve( 'default_locale' ) => '<i class="fa fa-check"></i>',
+            'pc_paginator_default' => '<a href="javascript:" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Settings/?default_locale=%FIELD%\', \'' . $this->getObjectName() . '\' );" title="Make this the default locale">Make Default</a>',
+
+    );
+    
 		$list->createList
 		(
 			array(
                     'Locale Name' => array( 'field' => 'locale_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Native Name' => array( 'field' => 'native_name', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Locale Code' => array( 'field' => 'locale_code', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-         //         'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
+                    'Default' => array( 'field' => 'locale_code', 'header' =>  ' ', 'value' =>  '%FIELD%', 'value_representation' => $default ), 
                     array( 'field' => 'locale_code', 'value' =>  '<a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_OriginalString_List/?locale_code=%FIELD%">translations</a>', 'filter' =>  '' ), 
                     '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
                     ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 

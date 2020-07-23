@@ -33,7 +33,7 @@ class Ayoola_Object_SavedWidget_Delete extends Ayoola_Object_SavedWidget_Abstrac
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
             
-			if( $this->deleteDb() ){ $this->setViewContent( '<div class="goodnews">Data deleted successfully</div>', true ); } 
+			if( $this->deleteDb() ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Data deleted successfully</div>' ) . '', true  ); } 
 
              // end of widget process
           
@@ -41,8 +41,8 @@ class Ayoola_Object_SavedWidget_Delete extends Ayoola_Object_SavedWidget_Abstrac
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+            $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
 	}

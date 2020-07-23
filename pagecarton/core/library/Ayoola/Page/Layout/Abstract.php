@@ -18,7 +18,6 @@
  
 require_once 'Ayoola/Page/Layout/Exception.php';  
 
-
 /**
  * @category   PageCarton  
  * @package    Ayoola_Page_Layout_Abstract
@@ -113,13 +112,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 		}
-	//	if( ! @$values[self::VALUE_CONTENT] ){ return false; }
+
 		try
 		{
 			if( $identifierData = $this->getIdentifierData() )
 			{
 				$values = $values + $identifierData;
-			//	return false; 
+
 			}
 		}
 		catch( Exception $e )
@@ -134,14 +133,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		if( is_file( $screenshot ) )
 		{
 			$screenshotfile = dirname( $this->getmyfilename() ) . '/screenshot.jpg';
-			file_put_contents( $screenshotfile, file_get_contents( $screenshot ) );
 		}
  */		@$content = $values['plain_text'] ? : $values['wysiwyg'];
-	//	var_export( $content );
+
 		if( ! $content ){ return false; }
 		
 		//	Save raw content
-		file_put_contents( $this->getMyFilename() . 'raw', $content );
+		Ayoola_File::putContents( $this->getMyFilename() . 'raw', $content );
 
 		
 		//	Sanitize
@@ -153,7 +151,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$alternateFile = null;
 		$dir = dirname( $this->getMyFilename() );
 		$files = Ayoola_Doc::getFiles( $dir );
-	//	var_export( $files );
+
 		foreach( $files as $each )
 		{
 			$ext = array_pop( explode( '.', $each ) );
@@ -174,12 +172,10 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				break;
 			}
 		}
-	//	var_export( $files );
-	//	var_export( $alternateFile );
-	//	exit();
+
 		$alternateNavigation = null;
 		$altNavigationPlaceholder = null;
-	//			var_export( $alternateFile );
+
 		$navTag = '</nav>';
 		if( ! stripos( $content, $navTag ) )
 		{
@@ -195,7 +191,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			foreach( $matches as $count => $match )
 			{
 				preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $alternateFile, $placeholder );
-			//	var_export( $placeholder[1] );
+
 				if( empty( $alternateNavigation ) && stripos( $placeholder[1], $navTag ) )
 				{
 					//	check navigation
@@ -206,29 +202,17 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 		}
 		$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $content );
-//		preg_match_all( "/@@@([0-9A-Za-z_]+)@@@/", $content, $matches );
-		
-//		preg_match_all( '/{@@@\w([\S\s]*)\w@@@}/i', $content, $matches );
-	// 	var_export( $matches );
 
 		foreach( $matches as $count => $match )
 		{
 			preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $content, $placeholder );
-		//	var_export( $match );
-	//		var_export( $placeholder[1] );
-	//		var_export( $alternateFile );
-	//		var_export( $alternateNavigation );
-	//		var_export( stripos( $placeholder[1], '©' ) );
+
 			if( empty( $navigationReplaced ) && $alternateNavigation && stripos( $placeholder[1], $navTag ) )
 			{
-	//			var_export( strlen( $alternateNavigation ) );
-	//			var_export( $altNavigationPlaceholder );
-		//		var_export( $match );
-	//			var_export( strlen( $placeholder[1] ) );
-		//		var_export( $placeholder[1] );
+
 				if(  ( strlen( $alternateNavigation ) + 20 ) < strlen( $placeholder[1] ) )
 				{
-				//	$placeholder[1] = $alternateNavigation;
+
 					//	put the two navigation there.
 					$before = '{@@@' . $match . $placeholder[1] . $match . '@@@}';
 					$altMatch = $match . '_alt';
@@ -241,7 +225,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 					$content = str_ireplace( $before, $after, $content );
 					$navigationReplaced = true;
-				//	$content = str_ireplace( '@@@' . $match . '@@@', '@@@' . $altNavigationPlaceholder . '@@@', $content );
+
 				}
 				//	we have alternate navigation
 				//	check navigation
@@ -253,27 +237,25 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 
 			// Excempt the header content, and the nav and footer
-			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ( empty( $isRealNavigation ) ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy' ) && ! stripos( $placeholder[1], '&amp;copy' ) )
+            //  content with this means it is meant to be in theme file
+			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ( empty( $isRealNavigation ) ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy' ) && ! stripos( $placeholder[1], '&amp;copy' ) && ! stripos( $placeholder[1], '</nav>' ) )
 			{
-		//		var_export( stripos( $placeholder[1], '©' ) );
-		//		var_export( $match );
+
 				//	remove sections that are not common to all files
 				$content = preg_replace('/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', '', $content );
-			//	var_export( $match );
+
 			}
 			$isRealNavigation = false;     
 		}
 
-		file_put_contents( $this->getMyFilename() . 'sections', '<?php return ' . var_export( $sectionsToSave, true ) . ';' );
-	//	var_export( $sectionsToSave );
+		Ayoola_File::putContents( $this->getMyFilename() . 'sections', '<?php return ' . var_export( $sectionsToSave, true ) . ';' );
+
 		
-		file_put_contents( $this->getMyFilename(), $content );
+		Ayoola_File::putContents( $this->getMyFilename(), $content );
 		
 		//	update theme files
 		static::refreshThemePage( $values['layout_name'] );
-	//	var_export( $values['layout_name'] );
-	//	var_export( $class->getValues() );
-	//	var_export( $class->view() );
+
 		return true;
     } 
 
@@ -291,7 +273,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$class->setValues();
 		
 		$class->init(); // invoke the template update for this page.
-//		echo $class->view();
+
 	}
 
     /**
@@ -315,7 +297,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				return false;
 			}
 		}
-	//	var_export( $filename );
+
 		$dir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS;
 		
 		//	compatibility
@@ -324,7 +306,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{ 
 			//	We now store templates in the document directory.
 			//	First for newbies
-		//	$filename = DOCUMENTS_DIR . DS . 'layout' . DS . $data['layout_name'] . DS . 'template.html'; 
+
 		//	if( ! is_file( $dir . $filename ) )  
 			{ 
 				//	This is the real new template file 
@@ -336,7 +318,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 		}
 		$this->_filename = str_ireplace( '/', DS, $filename ); 
-	//	exit( $this->_filename );
+
 	}
 
     /**
@@ -384,27 +366,19 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		//	make all html links absolute
 	
 		//	This somehow make it impossible to work with other template file content. Should we retain it?
-	//	$previousContent = preg_replace( '#/layout/[a-zA-Z0-9-_]*/#', '', $previousContent );
+
 		
 		//	This was also added automatically
 		//	ADDED " so we can include links to layout path
 		$content = str_ireplace( array( '"/layout/' . $values['layout_name'] . '/', '"/layout//' ), '"', $content );
-	//	var_export( $content );
+
 	
-	//	http://stackoverflow.com/questions/2869844/regex-to-replace-relative-link-with-root-relative-link
-/* 		$linkForPrefix = "<?php echo Ayoola_Application::getUrlPrefix(); ?>";
- *///		$linkForPrefix = preg_quote( $linkForPrefix, '$' );
+        //	http://stackoverflow.com/questions/2869844/regex-to-replace-relative-link-with-root-relative-link
 		//	workaround for the bug causing space to be replaced with 	%5Cs in preg_replace
-/*		$placeholders = array( '#PC_OBJECT_URL_PREFIX', '#PC_URL_PREFIX', 'PC_URL_PREFIX', 'PC_PLACEHOLDER_FOR_ORG_LOGO', '/../' );
- 		$placeholderValues = array( "' . Ayoola_Application::getUrlPrefix() . '", "<?php echo Ayoola_Application::getUrlPrefix(); ?>", "<?php echo Ayoola_Application::getUrlPrefix(); ?>", '<?php echo Ayoola_Doc::getLogo(); ?>', '/' );
-*/ 	//	$content = str_ireplace( $placeholders, $placeholderValues, $content );
 		$content = preg_replace('#(href|src)[\s]*=[\s]*(["\'])([^/\#\{][^:\'"]*)(?:["\'\.])#', '$1=$2PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$3$2', $content ); 
-		
-		   
-		//	Fix url();  
+
 		$content = preg_replace('#url\(\'?"?([^/\#\{][^:\'"\(\);]*)\'?"?\)#', 'url(PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$1)', $content );
 
-//		var_export( $content );
 		// Instantiate the object
 		$xml = new Ayoola_Xml();
 		
@@ -455,8 +429,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 		$pAllSections = $xpath->query('//section[@data-pc-all-sections="1"]');
 		$nodes = $xpath->query('//section[@data-pc-all-sections="1"]');
-	//	var_export( $pAllSections->length );
-	//	var_export( $nodes->length );
+
 		if( $pAllSections->length ) 
 		{ 
 			$allSections = true;
@@ -465,16 +438,14 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$createSections = function( $eachSection ) use ( &$bodyChildren, &$allSections, &$firstElement )
 		{
 			$bodyChildren = array();
-		//	$allSections = false;
+
 			if( $eachSection->childNodes )
 			foreach( $eachSection->childNodes as $eachDiv )
 			{
-			//	$i++;
+
 			//	if(  $eachDiv->tagName && $eachDiv->getAttribute( "data-pc-load-inner-sections" ) )   
 				{
-				//	$func = __FUNCTION__;
-				//	var_export( $func( $eachDiv ) );
-				///	$bodyChildren = $func( $eachDiv );			
+
 				}
 				if( $eachDiv->tagName && $eachDiv->getAttribute( "data-pc-section-ignore" ) )   
 				{
@@ -493,13 +464,15 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 							continue 2;
 						}
 					case "div":
+					case "nav":
+					case "main":
 						@++$countDiv;
 				//		if( ! $eachDiv->getAttribute( "data-pc-section-name" ) && ! $eachDiv->getAttribute( "id" ) )   
 						if( ! $eachDiv->getAttribute( "data-pc-section-name" ) )   
 						{
 							@$eachDiv->setAttribute( "data-pc-section-autonamed", $countDiv );
 						}
-				//		@$eachDiv->setAttribute( "data-pc-section-name", $eachDiv->getAttribute( "data-pc-section-name" ) ? : ( $eachDiv->getAttribute( "id" ) ? : ( "pc-body-" . $countDiv ) ) );       
+
 						@$eachDiv->setAttribute( "data-pc-section-name", $eachDiv->getAttribute( "data-pc-section-name" ) ? : ( ( "pc-body-" . $countDiv ) ) );             
 						$bodyChildren[] = $eachDiv;
 
@@ -510,17 +483,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 						$hasNav = $eachDiv->getElementsByTagName( 'nav' );
 						if( $hasNav->length )
 						{
-						//	var_export( $eachDiv->getElementsByTagName( 'nav' ) );
+
 							$firstElement = $eachDiv;
 						}   
-					//	$lastElement = $eachDiv;
+
 					break;
 				}
-				//	var_export( $i );
-				//	var_export( $each->childNodes->length );
-				//	var_export( " "  );
-					//	var_export( $firstElement );
-					//	var_export( $allSections );
+
 			}
 			return $bodyChildren;
 		};
@@ -535,7 +504,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				//	reset first element
 				$firstElement = false;
 				$bodyChildren = $createSections( $eachSection );
-			//	var_export(  count( $bodyChildren ) );
+
 				if( count( $bodyChildren ) > 1 )
 				{
 					break;
@@ -562,7 +531,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 			if( $bodyChildren )
 			{
-			//	$section = $bodyChildren;
+
 			}
 		}
 		if( empty( $bodyChildren ) )
@@ -606,20 +575,18 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				{
 					//	now doing this on the fly in the Ayoola_Page_Editor_Layout 
 					//	Better we do it here. We will create db fieldname for sections for easy access in Ayoola_Page_Editor_Layout
-				//	$name = str_ireplace( array( ' ', '-' ), '_', ( $each->getAttribute( 'data-pc-section-name' ) ? : $each->getAttribute( 'id' ) ) );
+
 					$name = str_ireplace( array( ' ', '-' ), '_', ( $each->getAttribute( 'data-pc-section-name' ) ) );
 				
 					if( $each->getAttribute( 'data-pc-section-autonamed' ) && $sectionsToUse[$key] !== $bodyChildren )
 					{
 						$name = false;
 					}
-					
-				//	var_export( $name );
-				//	var_export( $each->getAttribute( 'data-pc-all-sections' ) );
+
 					if( $each->getAttribute( 'data-pc-all-sections' ) )   
 					{
 						//	can't add this here because then it hides whole section'
-				//		$each->setAttribute( 'class', $each->getAttribute( 'class' ) . ' pc_page_object_specific_item' );
+
 						$each->parentNode->insertBefore( $xml->createCDATASection( '@@@' . $allSectionsCounter . 'oneness@@@' ), $each );
 						$each->parentNode->insertBefore( $xml->createCDATASection( '@@@' . $allSectionsCounter . 'lastoneness@@@' ), $each->nextSibling );
 						//	put bootstrap sections in here
@@ -687,18 +654,18 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 							 
 								) 
 							 );  
-							// var_export( $allSectionsCounter );
+
 							$allSectionsCounter++;
 							continue;
 					}  
-				//	var_export( $name );
+
 					if( $each->getAttribute( 'data-pc-object-name' ) )
 					{						    
 						
 						//	Make all the parameters advanced parameters to allow them editable
 						$advancedParametersToUse = array();
 					//	var_expor
-				//		unset( $eachParameters['object_name'] );
+
 				
 						//	this ensures we have an object interior thats built with parameter 
 						//	simulating the way they would appear LIVE
@@ -710,23 +677,21 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 						$each->removeAttribute( 'data-pc-object-parameters' );
 						$each->removeAttribute( 'data-pc-object-name' );
 
-					//	var_export( $eachParameters );
 						
 						//	this needs to be preserved.
-				//		$each->removeAttribute( 'data-pc-markup_template_no_data' );
+
 						
 						$eachParameters['markup_template'] = $xml->saveXml( $each, LIBXML_NOEMPTYTAG );
 						
 						//	Some placeholders were causing issues so lefts hardcode them here
 						if( $name )
 						{
-						//	$placeholderValues2 = array( Ayoola_Application::getUrlPrefix(), Ayoola_Application::getUrlPrefix(), Ayoola_Application::getUrlPrefix(), Ayoola_Doc::getLogo() );
+
 							$eachParameters['markup_template'] = str_ireplace( self::getPlaceholders(), static::getPlaceholderValues2(), $eachParameters['markup_template'] );
 						}
 						else
 						{
-						//	$placeholderValues = array( "' . Ayoola_Application::getUrlPrefix() . '", "' . Ayoola_Application::getUrlPrefix() . '", "' . Ayoola_Doc::getLogo() . '" );
-					//		$placeholderValues2 = array( "", "", "" );
+
 						}
 						if( $each->getAttribute( 'data-pc-markup_template_no_data' ) )
 						{
@@ -735,7 +700,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 						if( ! $name )
 						{
 							//	if no section is defined, we should look at embedding the object
-						//	$placeholderValues = array( "' . Ayoola_Application::getUrlPrefix() . '", "' . Ayoola_Application::getUrlPrefix() . '", "' . Ayoola_Doc::getLogo() . '" );
+
 							$each->parentNode->replaceChild( 
 								$xml->createCDATASection( 
 								 '<?php echo Ayoola_Abstract_Viewable::viewObject( \'' . $objectName . '\', ' . var_export( $eachParameters, true ) . ' ); ?>' ), $each ); 
@@ -752,7 +717,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 							unset( $eachParameters );
 							$eachParameters['advanced_parameters'] = http_build_query( $advancedParametersToUse );   
 							$eachParameters['object_name'] = $objectName;   
-					//	var_export( $advancedParametersToUse );
+
 						//	reset this so that we only retain advanced_parameters.
 							$each->parentNode->replaceChild( 
 								$xml->createCDATASection( 
@@ -765,8 +730,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					{
 						continue;
 					}
-					
-				//	var_export( $each->tagName );
+
 				
 					//	ensure we don't have nested editable regions
 					foreach( array( $each->getElementsByTagName( 'section' ), $each->getElementsByTagName( 'header' ), $each->getElementsByTagName( 'footer' ) ) as $eachSectionGroup )
@@ -796,8 +760,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					}
 					$each->parentNode->insertBefore( $xml->createCDATASection( "\r\n@@@{$name}@@@\r\n" ), $each );   
 					$each->parentNode->insertBefore( $xml->createCDATASection( "\r\n{@@@{$name}\r\n" ), $each );
-			
-				//	$each->setAttribute( 'data-pc-section-created', '1' );
+
 					$each->removeAttribute( 'data-pc-section-autonamed' );
 					$each->removeAttribute( 'data-pc-section-created' );
 					$each->removeAttribute( 'data-pc-section-name' );
@@ -813,6 +776,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			$each->insertBefore( $xml->createCDATASection( "<?php include_once( LAYOUT_PATH . DS . 'header' . TPL ) ?>" ), $each->firstChild );
 			$each->appendChild( $xml->createCDATASection( "<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>" ) );
 			$each->appendChild( $xml->createCDATASection( "<?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?>" ) );
+			$each->appendChild( $xml->createCDATASection( "\r\n@@@pc_section_after_js@@@\r\n" ) );
 		}
 		
 		//	build links
@@ -821,11 +785,11 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			$links = $xml->getElementsByTagName( 'a' );
 		}
-	//		var_export( $links );  		
+
 		foreach( $links as $navCount => $each )
 		{
 			$url = $each->getAttribute( 'href' );
-		//	var_export( $url );
+
 			if( ! self::isThemePage( $url, $values['layout_name'] ) )
 			{
 				continue;
@@ -833,7 +797,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 			//	change links with /page.html to /page
 			$url = self::themePageToUrl( $url, $values['layout_name'] );
-		//		var_export( $url );
+
 			$each->setAttribute( 'href', 'PC_URL_PREFIX' . $url . '' );
 
 		}
@@ -853,7 +817,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			{
 				continue;
 			}
-		//	var_export( $menuName );
+
 			//	clear interior first
 			//	no need to clear interior again
 			
@@ -874,11 +838,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 						$idForMenu = $ulParent->getAttribute( 'id' );
 					}
 					$each->setAttribute( 'data-pc-menu-id-list', $each->getAttribute( 'data-pc-menu-id-list' ) . ',' . $ulParent->getAttribute( 'id' ) );
-				//	$each->setAttribute( 'data-pc-menu-id-in', $each->getAttribute( 'data-pc-menu-id-list' ) . ',' . $ulParent->getAttribute( 'id' ) );
-					
-			//		$content = $xml->saveHTML();
-					
-				//	$eachChild = $each->firstChild;
+
 				//	if( strtolower( @$eachChild->tagName ) === 'ul' )
 					{
 						//	Save the class names and other information
@@ -931,8 +891,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					$ulId = $each->getAttribute( 'data-pc-menu-ul-id-' . $idForMenu ) ? : '';  
 					$xml->setId( 'id' );
 					$ulParent = $xml->getElementById( $idForMenu );
-				//	var_export( $idForMenu );
-				//	var_export( $ulParent );
+
 					if( ! $ulParent )
 					{
 						continue;
@@ -943,8 +902,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 			else
 			{
-			
-			//	$each->innerHTML = '';
+
 				$activeClass = $each->getAttribute( 'data-pc-menu-li-active-class' ) ? : 'active';
 				$ulClass = $each->getAttribute( 'data-pc-menu-ul-class' ) ? : '';
 				$each->appendChild( $xml->createCDATASection( "<?php echo Ayoola_Menu_Demo::viewInLine( array( 'option' => '{$menuName}', 'li-active-class' => '{$activeClass}', 'ul-class' => '{$ulClass}', )  ); ?>" ) ); 
@@ -967,7 +925,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		}
 		
 		// empty anchor not doing well in CKEDITOR
-//		$anchor = $xml->getElementsByTagName( 'a' );
+
 	//	foreach( $anchor as $each )
 		{
 			//	check if empty
@@ -979,18 +937,17 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			$i = $empty_anchors->length - 1; 
 			while ($i > -1) { 
 				$element = $empty_anchors->item($i);  
-			//	$element->parentNode->removeChild($element); 
+
 			
 				//	Dont remove, add empty space
-			//	var_export( $element );
-			//	$element->appendChild( $xml->createElement( '' ) );       
+
 				$element->nodeValue = '&nbsp;';       
 				$i--;    
 			} 
 		}
 		
 		//	 empty icons not doing well in CKEDITOR
-	//	$icons = $xml->getElementsByTagName( 'i' );
+
 	//	foreach( $icons as $each )
 		{
 			//	check if empty
@@ -1009,7 +966,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		}
 		
 		//	 empty icons in span of "skel" not doing well in CKEDITOR
-	//	$icons = $xml->getElementsByTagName( 'span' );   
+
 //		foreach( $icons as $each )
 		{
 			//	check if empty
@@ -1032,12 +989,11 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		foreach( $meta as $each )  
 		{	
 			$a = strtolower( $each->getAttribute( 'name' ) );
-		//	var_export( $each->getAttribute( 'name' ) );
-		//	var_export( $a );
+
 			switch( $a )
 			{
 				case '':
-//					$each->parentNode->removeChild( $each );
+
 				break;
 				case 'keywords':
 					$each->parentNode->removeChild( $each );
@@ -1048,18 +1004,27 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 		}
 		$content = $xml->saveHTML();
-	//	var_export( $content );
 
 		//	refresh docs on update
 		/*$content = preg_replace( '|(#)?PC_URL_PREFIX([^\#\{][^:"]*)(")|', '<?php echo Ayoola_Doc::uriToDedicatedUrl( \'$2\' ); ?>$4', $content );*/ 
 
 		//	replace all embedded html links
 		$content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/]*)\.html([\'"])?#s', '=$1/$2$3', $content );
-		$content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/=]*\.default_file)([\'"])?#s', '=$1PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$2$3', $content );
+        $content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/=]*\.default_file)([\'"])?#s', '=$1PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$2$3', $content );
+        
+        //  widget variables in template files
+		$content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', '$1{{{$3}}}$5', $content );
+    //    var_export( $content );
+    //    exit();
+
+        //  static text in attribute values {}
+    //    preg_match_all( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B)([^<>]*)(%7D)([^<>]*["\'][^<>]*>)#', $content, $xxx );
+        $content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B)([^<>]*)(%7D)([^<>]*["\'][^<>]*>)#i', '$1{$3}$5', $content );
+        
 		
 		//	workaround for the bug causing space to be replaced with 	%5Cs in preg_replace $placeholder
 		$content = str_ireplace( self::getPlaceholders(), self::getPlaceholderValues(), $content );
-	//	var_export( $content );
+
 		return $content;
 	}
 	
@@ -1087,7 +1052,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			return $url;
 		}
-	//	var_export( $url );
+
 		if( $url[0] == '#' )
 		{
 			return $url;
@@ -1095,7 +1060,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$url = array_pop( explode( '/layout/' . $themeName, $url ) );
 		$url = '' . array_shift( explode( '.html', $url ) );
 		$url = str_ireplace( array( '/index', '/home', '/.php', '/.php', '/index.php/', '//', ), '/', '/' . trim( $url, '/' ) );
-	//	var_export( $url ); 
+
 		return $url ;
 	}
 	
@@ -1115,15 +1080,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			//	compatibility
 			$previousContent = @file_get_contents( $this->getMyFilename() );
-			
-			
-		//	var_export( $this->getMyFilename() );
+
 			
 			//	Strip the php content from it.
 			$previousContent = preg_replace( '#<\?.*?(\?>|$)#s', '', $previousContent );
 			
 			//	This somehow make it impossible to work with other template file content. Should we retain it?
-		//	$previousContent = preg_replace( '#/layout/[a-zA-Z0-9-_]*/#', '', $previousContent );
+
 			
 			//	This was also added automatically
 			$previousContent = str_ireplace( array( '/layout/' . $themeName . '/', '/layout//' ), '', $previousContent );
@@ -1186,10 +1149,9 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				$options += array( 'upload' => 'Upload ZIP/Tar Archive', );
 			}
 		//	if( @$_REQUEST['layout_type'] )
-			$options ? $fieldset->addElement( array( 'name' => 'layout_type', 'label' => 'How are you adding a new theme', 'onClick' => 'this.form.submit();', 'type' => ( @$_REQUEST['layout_type'] || @$values ) ? 'Hidden' : 'Radio', 'value' => @$values['layout_type'] ? : 'plain_text' ), $options ) : null;
+			$options ? $fieldset->addElement( array( 'name' => 'layout_type', 'label' => 'How are you adding a new theme', 'onClick' => 'this.form.submit();', 'type' => ( @$_REQUEST['layout_type'] || @$values ) ? 'Hidden' : 'Radio', 'value' => ( @$_REQUEST['layout_type'] ) ? : ( @$values['layout_type'] ? : 'plain_text' ) ), $options ) : null;
 			$fieldset->addRequirement( 'layout_type', array( 'ArrayKeys' => $options ) );
-		//	$previousContent = file_get_contents( $this->getMyFilename() );
-		//	var_export( $_POST );
+
 			//	Choose a layout type first  
 			
 				//	Labels are expected to be inside uploaded document.
@@ -1198,13 +1160,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 			//	Load this before we break so some image JS can run
 			//	Screenshot
-		//	var_export( $values['screenshot_url'] );
+
 			$preview = @$values['screenshot_url'] ? : '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=' . $values['layout_name'];
 			$values ? $fieldset->addElement( array( 'name' => 'screenshot_url', 'label' => 'Theme screenshot', 'data-document_type' => 'image', 'type' => 'Document', 'data-previous-url' => $preview, 'value' => null, 'autocomplete' => 'off' ) ) : null;
-//			$fieldset->addElement( array( 'name' => 'screenshot', 'label' => 'Theme screenshot', 'data-allow_base64' => true, 'data-document_type' => 'image', 'type' => 'Document', 'data-previous-url' => '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_PhotoViewer/?layout_name=' . $values['layout_name'], 'value' => null, 'autocomplete' => 'off' ) );
+
 			if( ! $this->getGlobalValue( 'layout_type' ) )
 			{
-			//	break;
+
 			}
 			
 			//	All types now need labels
@@ -1215,31 +1177,28 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				//	Now doing it within the creator
 			//	if( is_null( $values ) )
 				{		
-				//	$fieldset->addElement( array( 'name' => 'layout_name', 'type' => 'Hidden', 'value' => @$values['layout_name'] ) );
-				//	$fieldset->addFilter( 'layout_name', array( 'DefiniteValue' => $this->getGlobalValue( 'layout_label' ) ,'Name' => null ) );
+
 					
 				}
 			}
 			
 			//	use raw template as previous content where available
 			@$previousContent = $this->getPreviousContent( $values['layout_name'] );
-			
-			//	var_export( $previousContent );
+
 			$fieldset->addElement( array( 'name' => self::VALUE_CONTENT, 'type' => 'Hidden', 'value' => null ) );
 			switch( $this->getGlobalValue( 'layout_type' ) ? : @$_REQUEST['layout_type'] )  
 			{
 				case 'wysiwyg':
 					$fieldset->addElement( array( 'name' => 'wysiwyg', 'label' => 'Use this editor to design your layout template', 'rows' => 10, 'placeholder' => 'Enter the template text here...', 'type' => 'Textarea', 'value' => $previousContent ) );
-			// 		$fieldset->addRequirement( 'wysiwyg', array( 'WordCount' => array( 10,50000 ) ) );
+
 					$fieldset->addFilter( self::VALUE_CONTENT, array( 'DefiniteValue' => $this->getGlobalValue( 'wysiwyg' ) ) );  
 				break;
 				case 'upload':
-			//		$fieldset->addElement( array( 'name' => 'upload', 'label' => 'Theme file (.zip, .tar or .tar.gz archives)', 'data-allow_base64' => true, 'data-document_type' => '', 'type' => 'Document', 'data-previous-url' => '' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/file-8x.png', 'value' => @$values['upload'] ) );
 					$fieldset->addElement( array( 'name' => 'theme_url', 'label' => 'Theme file (.zip, .tar or .tar.gz archives)', 'data-document_type' => '', 'type' => 'Document', 'data-previous-url' => '' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/file-8x.png', 'value' => @$values['theme_url'] ) );  
 				break; 
 				default:
 			//	case 'plain_text':
-			//	var_export( $previousContent );
+
 					$boilerplate = '<!DOCTYPE html>
 <html>
 	<head>
@@ -1326,9 +1285,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					$fieldset->addElement( array( 'name' => 'plain_text', 'label' => 'HTML Code', 'rows' => 10, 'style' => 'width:100%;height:200px;', 'placeholder' => $defaultHTML, 'type' => 'Textarea', 'value' => $previousContent ? : $boilerplate ) );
 					
 					$filter = new Ayoola_Filter_HighlightCode();    
-					
-			//		$fieldset->addElement( array( 'name' => 'internal', 'label' => 'Internal HTML Used', 'readonly' => 'readonly', 'rows' => 10, 'style' => 'width:100%;', 'placeholder' => 'Enter the template text here...', 'type' => 'Html', 'value' => null ), array( 'html' => '<div style="max-height:200px;overflow:scroll;border: 2px solid #eee;">' . @$filter->filter( file_get_contents( $this->getMyFilename() . '' ), true ) . '</div>' ) );            
-				//	$fieldset->addRequirement( 'plain_text', array( 'WordCount' => array( 10,50000 ) ) );
+
 					$fieldset->addFilter( self::VALUE_CONTENT, array( 'DefiniteValue' => $this->getGlobalValue( 'plain_text' ) ) );
 				break;  
 			}
@@ -1339,8 +1296,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 							'auto_section' => 'Build editable sections from "' . htmlentities( '<section>' ) . ' tag" automatically',  
 							'auto_menu' => 'Integrate navigations automatically' 
 							); 
-							
-	//	var_export( $values['layout_options'] );
+
 		$defaultOptions = @$values['layout_options'];
 		if( is_null( $values ) )
 		{

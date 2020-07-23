@@ -144,7 +144,7 @@ class Application_Message_ShowAll extends Application_Message_Abstract
 		$myProfiles = array_map( 'strtolower', Ayoola_Application::getUserInfo( 'profiles' ) );
 		if( in_array( strtolower( $to ), $myProfiles ) )
 		{ 
-			$this->setViewContent( '<div class="badnews">You cannot send message to yourself</div>', true );
+			$this->setViewContent(  '' . self::__( '<div class="badnews">You cannot send message to yourself</div>' ) . '', true  );
 			return false;
 		}
 		if( ! empty( $to ) AND $profileInfoTo = Application_Profile_Abstract::getProfileInfo( $to ) )

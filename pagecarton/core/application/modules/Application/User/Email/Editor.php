@@ -38,7 +38,7 @@ class Application_User_Email_Editor extends Application_User_Email_Abstract
 		try
 		{
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['email'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['email'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			if( $values['password'] != $values['password2'] )
@@ -70,11 +70,11 @@ class Application_User_Email_Editor extends Application_User_Email_Abstract
 					//	var_export( $response );
 					if( ! empty( $response['data'] ) )
 					{
-						$this->setViewContent( 'Email Account Edited Successfully', true ); 
+						$this->setViewContent(  '' . self::__( 'Email Account Edited Successfully' ) . '', true  ); 
 					}
 				break;
 				case 'self':
-					if( $this->updateDb( $values ) ){ $this->setViewContent( 'Email Account Edited Successfully', true ); }
+					if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( 'Email Account Edited Successfully' ) . '', true  ); }
 				break;
 			
 			}

@@ -34,31 +34,8 @@ class Application_Slideshow_ManageImage extends Application_Slideshow_Abstract
      */
 	protected function init()
     {
-/*		try
-		{ 
 
-			$this->_createDefaultSlideshow();
-			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Save', 'Manage ' . $data['slideshow_name'], $data );
-			$this->setViewContent( '<h4>Editing images on "' . $data['slideshow_name'] . '".</h4>', true );
-			$this->setViewContent( '<p>NOTE: You can select from uploaded <a rel="spotlight;height=300px;width=300px;classPlayerUrl=/tools/classplayer/get/object_name/Ayoola_Doc_Upload/;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/ayoola/document/">images in application documents. Click here to upload a new image.</a> </p>' );
-			$this->setViewContent( '<p> <a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Editor/?' . $this->getIdColumn() . '=' . ( $this->_viewParameter ? : self::DEFAULT_NAME ) . '" title="Advanced settings for ' . $data['slideshow_name'] . '">#</a> | <a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Delete/?' . $this->getIdColumn() . '=' . ( $this->_viewParameter ? : self::DEFAULT_NAME ) . '" title="Delete ' . $data['slideshow_name'] . '">x</a></p>' );
-			$this->setViewContent( '<h4>Select the images from the list.</h4>' );
-			$this->setViewContent( $this->getForm()->view() );
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			
-			//	arrange the images
-			$image = array();
-			for( $i = 1; $i < $data['image_limit']; $i++ )
-			{
-				if( ! $values['slideshow_image' . $i] ){ break; }
-				$images[$i] = array( 'slideshow_image' => $values['slideshow_image' . $i], 'image_description' => $values['image_description' . $i] );
-			}
-			$values['slideshow_images'] = serialize( $images );
-			if( $this->updateDb( $values ) ){ $this->setViewContent( 'Slideshow saved successfully.', true ); }
-		}
-		catch( Application_Slideshow_Exception $e ){ return false; }
-*/    } 
+    } 
 	
     /**
      * creates the form

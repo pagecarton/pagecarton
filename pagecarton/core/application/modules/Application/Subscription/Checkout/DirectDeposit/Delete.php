@@ -39,7 +39,7 @@ class Application_Subscription_Checkout_DirectDeposit_Delete extends Application
 			if( ! $data = $this->getIdentifierData() ){ return false; }
 			$this->createDeleteForm( $data['account_name'] );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Account Info deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Account Info deleted successfully' ) . '', true  ); }
 		}
 		catch( Application_Subscription_Checkout_DirectDeposit_Exception $e ){ return false; }
 

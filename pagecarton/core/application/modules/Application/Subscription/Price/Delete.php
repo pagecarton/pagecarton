@@ -39,7 +39,7 @@ class Application_Subscription_Price_Delete extends Application_Subscription_Pri
 		if( ! $data = $this->getIdentifierData() ){ return false; }
 		$this->createDeleteForm( $data['price'] );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->deleteDb( false ) ){ $this->setViewContent( 'Price deleted successfully', true ); }
+		if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Price deleted successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

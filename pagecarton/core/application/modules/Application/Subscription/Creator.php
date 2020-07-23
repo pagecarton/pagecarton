@@ -45,7 +45,7 @@ class Application_Subscription_Creator extends Application_Subscription_Abstract
 		$values['subscription_name'] = strtolower( $filter->filter( $values['subscription_label'] ) );
 		if( ! $this->insertDb( $values ) ){ return false; }
 		
-		$this->setViewContent( 'Product or service added successfully', true );
+		$this->setViewContent(  '' . self::__( 'Product or service added successfully' ) . '', true  );
 		//	Create Sitemap link for SEO
 	//	var_export( $values );
 		try

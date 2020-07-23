@@ -42,8 +42,8 @@ class Application_Subscription_Checkout_Default extends Application_Subscription
 	protected function init()
     {		
 		if( ! $values = self::getStorage()->retrieve() ){ return; }
-		$this->setViewContent( '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Subscription_Checkout_Confirmation/get/api/' . __CLASS__ . '/status/1/"> Confirm order</a>' );  
-	//	$this->setViewContent( '</p>' );
+		$this->setViewContent( self::__( '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Subscription_Checkout_Confirmation/get/api/' . __CLASS__ . '/status/1/"> Confirm order</a>' ) );  
+	//	$this->setViewContent( self::__( '</p>' ) );
 		
 		
     } 

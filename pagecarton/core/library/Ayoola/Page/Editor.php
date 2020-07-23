@@ -52,7 +52,7 @@ class Ayoola_Page_Editor extends Ayoola_Page_Abstract
 			//	return false; 
 			}
 	 //		var_export( $data ); 
-			$this->createForm( 'Continue...', 'Edit ' . $data['url'], $data );     
+			$this->createForm( 'Save...', 'Editing "' . $data['url'] . '" Page', $data );     
 			$this->setViewContent( $this->getForm()->view(), true );
 		//	var_export( $_POST );
 			$isLayoutPage = stripos( $data['url'], '/layout/' ) === 0;
@@ -73,23 +73,13 @@ class Ayoola_Page_Editor extends Ayoola_Page_Abstract
 			self::resetCacheForPage( $data['url'] );
 			
 	//		var_export( $data );
-			$this->setViewContent( '<p class="goodnews">Page Option Edited Successfully</p>', true );   
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Page option saved successfully</p>' ) . '', true  );   
 			
-/* 			require_once 'Ayoola/Xml.php';
-			$data['url'] = rtrim( $data['url'], '/' );
-			$this->setPageFilesPaths( $data['url'] );
-			$files = $this->getPageFilesPaths();
-			$filename = $files['data'];
-			$xml = new Ayoola_Xml();
-			$xml->load( $filename );
-			$xml->arrayAsCData( $values );
-			$xml->save( $filename );
- */			//	if( $this->_createXml() ){ $this->setViewContent( 'Page Option Edited Successfully', true ); }
 		}
 		catch( Exception $e )
 		{ 
 		//	return false; 
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
 		
     } 

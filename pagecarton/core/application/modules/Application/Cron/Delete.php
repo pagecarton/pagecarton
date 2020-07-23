@@ -43,7 +43,7 @@ class Application_Cron_Delete extends Application_Cron_Abstract
 			
 			//	Delete 
 			$this->update( array( 'delete' => $data['task'] ) );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Cron deleted successfully.', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Cron deleted successfully.' ) . '', true  ); }
 		}
 		catch( Application_Cron_Exception $e ){ return false; }
     } 

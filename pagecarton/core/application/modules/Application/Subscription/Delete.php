@@ -40,7 +40,7 @@ class Application_Subscription_Delete extends Application_Subscription_Abstract
 			$this->createDeleteForm( $data['subscription_name'] );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( !  $this->deleteDb( false ) ){ return false; }
-			$this->setViewContent( 'Subscription package deleted successfully', true );
+			$this->setViewContent(  '' . self::__( 'Subscription package deleted successfully' ) . '', true  );
 			try
 			{
 				$url = '/onlinestore/subscribe/get/subscription_name/' . $data['subscription_name'] . '/';

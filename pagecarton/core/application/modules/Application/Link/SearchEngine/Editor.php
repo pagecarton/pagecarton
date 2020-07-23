@@ -37,9 +37,9 @@ class Application_Link_SearchEngine_Editor extends Application_Link_SearchEngine
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['searchengine_url'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['searchengine_url'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->updateDb() ){ $this->setViewContent( 'Search engine edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Search engine edited successfully' ) . '', true  ); }
 		}
 		catch( Application_Link_SearchEngine_Exception $e ){ return false; }
     } 

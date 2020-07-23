@@ -27,6 +27,14 @@ require_once 'Ayoola/Page/Menu/Edit/Exception.php';
 
 abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 {
+	
+ 	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Site navigation options'; 
  	
     /**
      * The column name of the primary key
@@ -90,48 +98,61 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;
-		$fieldset = new Ayoola_Form_Element;
+        $fieldset = new Ayoola_Form_Element;
 		
 		//	We don't allow editing UNIQUE Keys
 		$fieldset->addElement( array( 'name' => 'option_name', 'label' => 'Link Name', 'placeholder' => 'e.g. Contact Us', 'type' => 'InputText', 'value' => @$values['option_name'] ) );
 		$fieldset->addRequirement( 'option_name', array( 'WordCount' => array( 1, 500 ) ) );
 		$pages = Ayoola_Page::getAll();
 	//	var_export( $pages );
-		$pages = array_combine( $pages, $pages );
+		$pages = array_combine( $pages, $pages ) ? : array( '/' => '/' );
 		if( @$values['url'] )
 		{
 			$pages[$values['url']] = $values['url'];
-		}
-		$fieldset->addElement( array( 'name' => 'url', 'label' => 'URL', 'onchange' => 'if( this.value == \'\' ){ a = prompt( \'New Url\', \'/url\' ); if( ! a ) return false; var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'placeholder' => $url, 'type' => 'Select', 'value' => @$values['url'] ), array_unique( $pages + array( '' => 'Custom URL' ) ) );
-	//	$fieldset->addElement( array( 'name' => 'url', 'placeholder' => 'e.g. /site/contact', 'type' => 'InputText', 'value' => @$values['url'] ) );
-		$options =  array( 
-							'logged_in' => 'Show this menu option to logged inn users', 
-							'logged_out' => 'Show this menu option to logged out users', 
-							'append_previous_url' => 'Attach previous url to this link', 
-					//		'disable' => 'Disable Link', 
-							'spotlight' => 'Pop-up this link in Modal Box', 
-							'new_window' => 'Open this link in a new window', 
-					//		'advanced' => 'Show Advanced Settings',
-					//		'sub_menu' => 'This option has a sub-menu', 
-							);
-		$fieldset->addElement( array( 'name' => 'link_options', 'label' => 'Link Options', 'type' => 'Checkbox', 'value' => @$values['link_options'] ? : array( 'logged_in', 'logged_out' ) ), $options );
+		} 
+        $fieldset->addElement( array( 'name' => 'url', 'label' => 'Link URL',  'onchange' => 'ayoola.div.manageOptions( { database: "Ayoola_Page_Page", listWidget: "Ayoola_Page_List", values: "url", labels: "url", element: this } );', 'placeholder' => $url, 'type' => 'Select', 'value' => @$values['url'] ), array_unique( $pages + array( '__manage_options' => '[Manage Pages]', '__custom' => '[Custom URL]' ) ) );
+        
+        
+        $options = new Ayoola_Page_Menu_Menu;
+        $menuItems = $options->select();
+        if( $identifier = $this->getIdentifier() )
+        {
+            $fieldset->addElement( array( 'name' => 'menu_id', 'type' => 'Hidden' ) );
+            $fieldset->addFilter( 'menu_id', array( 'DefiniteValue' => $identifier['menu_id'] ) );
+            //	var_export( $identifier );
+            $fieldset->addLegend( $legend );
+        }
+        else
+        {
+            //	Sub menu
+            $table = new Ayoola_Page_Menu_Menu;
+            //	look in parent tables
+            $table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
+            $menuItems = $table->select();
+            $menuList = array();
+            foreach( $menuItems as $each )
+            {
+                $menuList[$each['menu_id']] = $each['menu_label'];
+            }
+            $fieldset->addElement( array( 'name' => 'menu_id', 'label' => 'Add link option to', 'type' => 'Select', 'value' => @$values['menu_id'] ? : '0-0-19' ), $menuList );
+        }
+
+        if( $values )
+        {
+
+            $options =  array( 
+                                'logged_in' => 'Visible to logged inn users', 
+                                'logged_out' => 'Visible to logged out users', 
+                                'append_previous_url' => 'Attach previous url to this link', 
+                                'spotlight' => 'Pop-up this link in Modal Box', 
+                                'new_window' => 'Open this link in a new window', 
+                            );
+            $fieldset->addElement( array( 'name' => 'link_options', 'label' => 'Link Options', 'type' => 'Checkbox', 'value' => @$values['link_options'] ? : array( 'logged_in', 'logged_out' ) ), $options );
+
+            
+            $fieldset->addFilters( array( 'Trim' => null ) );
 
 		
-		$fieldset->addElement( array( 'name' => 'menu_id', 'type' => 'Hidden' ) );
-		$fieldset->addFilters( array( 'Trim' => null ) );
-		//$this->setIdentifier();  
-		$identifier = $this->getIdentifier();
-		$fieldset->addFilter( 'menu_id', array( 'DefiniteValue' => $identifier['menu_id'] ) );
-		//var_export( $identifier );
-		$fieldset->addLegend( $legend );
-	//	$form->addFieldset( $fieldset );
-
-		//	Advanced
-	//	if( is_array( $this->getGlobalValue( 'link_options' ) ) && in_array( 'advanced', $this->getGlobalValue( 'link_options' ) ) )
-		{
-		
-//			$fieldset = new Ayoola_Form_Element;
-//			$fieldset->addLegend( 'Advanced options for menu link.' );
 			$authLevel = new Ayoola_Access_AuthLevel;
 			$authLevel = $authLevel->select();
 			require_once 'Ayoola/Filter/SelectListArray.php';
@@ -140,61 +161,31 @@ abstract class Ayoola_Page_Menu_Edit_Abstract extends Ayoola_Page_Menu_Abstract
 
 			
 			//	compatibility		
-		//	var_export( $values['auth_level'] );  
-		//	$values['auth_level'] = is_array( $values['auth_level'] ) ? $values['auth_level'] : array( $values['auth_level'] );
 			$authLevel[99] = 'Admin';
 			$authLevel[98] = 'Owner';
 			$authLevel[1] = 'Signed in users';
 			$authLevel[0] = 'Everyone';
-	//		var_export( $values['auth_level'] );
-			$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? (array) $values['auth_level'] : array_keys( $authLevel ) ), $authLevel );
+			$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Who can see this option', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? (array) $values['auth_level'] : array_keys( $authLevel ) ), $authLevel );
 			$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $authLevel ) ) );
-		//	unset( $authLevel ); 
-	//		$fieldset->addElement( array( 'name' => 'title', 'placeholder' => 'e.g. Home Page', 'type' => 'InputText', 'value' => @$values['title'] ) );
 
-		}
+                //	Sub menu
+            $menuList = array();
+            foreach( $menuItems as $each )
+            {
+                if( $each['menu_id'] == $identifier['menu_id'] )
+                {
+                    continue;
+                }
+                $menuList[$each['menu_name']] = $each['menu_label'];
+            }
+            $time = time();
+            $menuList = array(  '' => 'NONE', 'sub_menu_' . $time => 'New Menu' ) + $menuList;	
 
-		//	Advanced
-//		if( @$values['sub_menu_name'] || is_array( $this->getGlobalValue( 'link_options' ) ) && in_array( 'sub_menu', $this->getGlobalValue( 'link_options' ) ) )
-		{
+
+            //	Dont allow the parent menu to be selectable to avoid infinite loop
+            $menuList ? $fieldset->addElement( array( 'name' => 'sub_menu_name', 'label' => 'Sub Menu', 'type' => 'Select', 'value' => @$values['sub_menu_name'] ), $menuList ) : null;
+        }
 		
-	//		$fieldset = new Ayoola_Form_Element;
-	//		$fieldset->addLegend( 'Select a menu to use as submenu for this option' );
-
-			//	Sub menu
-			$options = new Ayoola_Page_Menu_Menu;
-			$options = $options->select();
-			$menuList = array();
-			foreach( $options as $each )
-			{
-				if( $each['menu_id'] == $identifier['menu_id'] )
-				{
-					continue;
-				}
-				$menuList[$each['menu_name']] = $each['menu_label'];
-			}
-//			require_once 'Ayoola/Filter/SelectListArray.php';
-//			$filter = new Ayoola_Filter_SelectListArray( 'menu_name', 'menu_label' );
-			$time = time();
-	//		$options = array( 'new_menu_' => $newSubmenuName, '' => 'NONE' ) + $filter->filter( $options );	
-			$menuList = array(  '' => 'NONE', 'sub_menu_' . $time => 'New Menu' ) + $menuList;	
-
-			//	Dont allow the parent menu to be selectable to avoid infinite loop
-			$data = $this->getIdentifierData();
-	//		var_export( $identifier );  
-	//		var_export( $data );
-	//		unset( $options[$data['menu_name']] );
-			$fieldset->addElement( array( 'name' => 'sub_menu_name', 'label' => 'Sub Menu', 'type' => 'Select', 'value' => @$values['sub_menu_name'] ), $menuList );
-//			$fieldset->addElement( array( 'name' => 'sub_menu_name', 'label' => 'Sub Menu (<a rel="spotLight" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Page_Menu_List/">Manage Menu</a>)', 'type' => 'Select', 'value' => @$values['sub_menu_name'] ), $menuList );
-		//	$fieldset->addRequirement( 'sub_menu_name', array( 'InArray' => array_keys( $menuList )  ) );
-	//		$form->addFieldset( $fieldset );
-		}
-/* 		else
-		{
-			$fieldset->addElement( array( 'name' => 'auth_level', 'type' => 'Hidden', 'value' => '0' ) );
-			$fieldset->addElement( array( 'name' => 'sub_menu_name', 'type' => 'Hidden', 'value' => null ) );
-		}
- */		
  		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
     } 

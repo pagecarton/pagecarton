@@ -17,7 +17,6 @@
  
 require_once 'Ayoola/Page/Menu/Abstract.php';
 
-
 /**
  * @category   PageCarton
  * @package    Ayoola_Menu
@@ -77,6 +76,17 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 	protected $_sortColumn = 'menu_name';
 
     /**
+     *
+     * @var array
+     */
+	public static $_parameterDefinition = array(
+        'menu_name' => array( 
+            'type' => 'string',
+            'desc' => 'Defines the menu to display. Can only contain alphanumeric characters',
+        ),
+    );
+
+    /**
      * The Menu Options
      *
      * @var array
@@ -95,12 +105,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
      */
 	public function init()
     {
-	//	var_export( '23342' );
-	//
-
-		//	var_export( self::hasPriviledge() );
-	//	self::v( $this->getParameter( 'new_menu_name' ) );
-//	self::v( $this->getParameter( 'raw-options' ) );
+    //    var_export( $this->_parameter['markup_template'] );
 		$menuName = $this->getViewOption() ? : $this->getParameter( 'menu_name' );
  		if( ! $this->getParameter( 'raw-options' ) )
 		{
@@ -113,11 +118,9 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			$menuName = strtolower( $filter->filter( $this->getParameter( 'new_menu_name' ) ) );
 		}
 		$this->setParameter( array( 'markup_template_no_cache' => true, 'menu_name' => $menuName  ) ); 
-	//	self::v( $this->getParameter( 'new_menu_name' ) );
-		
+
 		$this->setMenu( $menuName );		
-		
-		//	var_export( $this->_parameter['markup_template'] );
+
 		if( ! empty( $this->_parameter['markup_template'] ) )
 		{
 			$x = true;   
@@ -176,9 +179,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		{
 			return false;    
 		}
-	//	self::v( $menu );
-	//	if( empty( $menu[$this->getIdColumn()] ) && empty( $menu['enabled'] ) ){ return false; }
-	//	if( isset( $menu['enabled'] ) && empty( $menu['enabled'] ) ){ return false; }
+
 		$optionTable = new Ayoola_Page_Menu_Option();
 		if( @$menu[$this->getIdColumn()] )
 		{
@@ -192,7 +193,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 					'& $key, & $values', 
 					'
 						$key = $values["url"];
-					//	var_export( $key );
+
 					'
 				); 
 			}
@@ -202,8 +203,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 			if( $this->getParameter( 'scope' ) === $optionTable::SCOPE_PRIVATE || in_array( 'private', $menuOption ) )
 			{
-			//	self::v( $menu );
-			//	var_export( $this->getParameter( 'scope' ) );
+
 				$optionTable->getDatabase()->setAccessibility( $optionTable::SCOPE_PRIVATE );
 				
 				//	Workaround to fix cache error array( 'fix' )
@@ -213,8 +213,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			{
 				$options = $optionTable->select( null, array( $this->getIdColumn() => $menu[$this->getIdColumn()] ), array( 'result_filter_function' => $sortFunction2, 'disable_cache' => false ) );    
 			}
-		//	self::v( $options );  
-	//		var_export( $sortOrder );  
+
 			if( empty( $sortOrder ) )
 			{
 				$options = self::sortMultiDimensionalArray( $options, 'url' );
@@ -234,12 +233,11 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 					unset( $options[$each] );
 					
 				}
-			//	var_export( $newOptions );
+
 				$options = array_merge( $newOptions, $options );
 			}
 		}
-	//	var_export( $options );
-		//	self::v( $menu['category_name'] );
+
 		$category = @$menu['category_name'] ? : $this->getParameter( 'category_name' );
 		if( $this->getParameter( 'allow_dynamic_category_selection' ) )
 		{
@@ -254,43 +252,40 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 					//	Allow request to define value
 					$category = $_REQUEST['category'];
 				}
-			//	var_export( $category );
+
 			}
 			elseif( @$_REQUEST['category'] )
 			{
 				$category = $_REQUEST['category'];
 			}
 		}
-	//	var_export( $category );
+
 		$table = Application_Category::getInstance();
 		if( ! $category && @$menu['menu_options'] && in_array( 'category', @$menu['menu_options'] ) )
 		{
 			//	Defaults to all categories available
 			$categories = Application_Category_ShowAll::getPostCategories();
-		//	var_export( $category );
+
 		}
 		elseif( $category )
 		{
-		//	$menu['category_name'] = @$menu['category_name'] ? : $this->getParameter( 'category_name' );
+
 			$categories = $table->select( null, array( 'category_name' => $category ) );
-	//	var_export( $categories );
+
 			
 			if( @count( $categories ) === 1 )
 			{
 
 				if( $childCategories = $table->select( null, array( 'parent_category' => $category ), array( 'x' ) ) )
 				{
-			//		$categories = $childCategories;
+
 				}
-			//	var_export( $category );
-			//	var_export( $categories );
-		//		$categories = $table->select();
-		//		var_export( $categories );
+
 			}
 		}
 		if( @$categories )	
 		{
-	//		self::v( $categories );
+
 			@$menu['category_url'] = trim( $this->getParameter( 'category_url' ) ? : @$menu['category_url'] );
 			@$menu['url_integration_type'] = $this->getParameter( 'url_integration_type' ) ? : @$menu['url_integration_type'];
 			
@@ -300,11 +295,11 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				$subCategories = $table->select( null, array( 'parent_category' => $each['category_name'] ) );   
 				if( ! empty( $subCategories ) && ! empty( $each['child_category_name'] ) && is_array( $each['child_category_name'] ) )
 				{
-			//		var_export( $each['child_category_name'] );
+
 					$subCategories2 = $table->select( null, array( 'category_name' => $each['child_category_name'] ) ); 
 					$subCategories += array_merge( $subCategories, $subCategories2 );
 				}
-			//	$subCategories = $table->select( null, array( 'child_category_name' => $each['category_name'] ) );   
+
 				$subMenuOptions = array();
 				foreach( $subCategories as $eachSub )
 				{
@@ -324,7 +319,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 						}
 						
 					}
-			//		var_export( $eachSub['category_url'] );  
+
 					$subMenuOptions[$eachSub['category_name']] = array( 'option_name' => $eachSub['category_label'], 'rel' => '', 'url' => $urlToUseForEach, 'title' => $eachSub['category_description'], 'logged_in' => 1, 'logged_out' => 1, 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => 0, 'menu_id' => 0, 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ), ) + $eachSub ? : array();
 				}
 				$urlToUseForEach = Application_Article_Abstract::getPostUrl() . '/category/' . $each['category_name'] . '/';
@@ -345,13 +340,12 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				$options[] = array( 'option_name' => $each['category_label'], 'rel' => '', 'url' => $urlToUseForEach, 'title' => $each['category_description'], 'sub_menu_options' => $subMenuOptions, 'logged_in' => 1, 'logged_out' => 1, 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => 0, 'menu_id' => 0, 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ), ) + $each ? : array();
 				
 			}
-		//	self::v( $options );
+
 		}
 		if( self::hasPriviledge( array( 99, 98 ) ) && @$menu['menu_id'] )
 		{
-	//		var_export( self::hasPriviledge( array( 99, 98 ) ) );
-	//		var_export( self::hasPriviledge() );
-			$options[] = array( 'option_name' => $this->getParameter( 'edit_option_text' ) ? : '[Manage ' . $menu['menu_label']  . ' Menu]', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_List/menu_id/' . $menu['menu_id'] . '/', 'title' => 'Edit menu options', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => $menu['menu_id'], 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in','logged_out' ), ); 
+
+			$options[] = array( 'option_name' => $this->getParameter( 'edit_option_text' ) ? : '...', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_List/menu_id/' . $menu['menu_id'] . '/', 'title' => '' . self::__( 'Edit Menu Option' ) . '', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => $menu['menu_id'], 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in','logged_out' ), ); 
 		}
 		$this->_options = $options;
     } 	
@@ -365,7 +359,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
     public function getOptions()
     {
 		if( is_null( $this->_options ) ){ $this->setOptions(); }
-		//var_export( $this->_options );
+
         return (array) $this->_options;
     } 	
 	
@@ -399,13 +393,12 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
     public function setMenu( $menuName )
     {
 		$table = $this->getDbTable();
-	//	self::v( $this->getParameter( 'new_menu_name' ) );
-	//	self::v( $menuName );  
+
 		$menu = $table->selectOne( null, array( 'menu_name' => $menuName ) );
 		if( empty( $menu[$this->getIdColumn()] ) || empty( $menu['menu_name'] ) )
 		{ 
 			$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-			$menu = $table->selectOne( null, array( 'menu_name' => $menuName ), array( 'work-arrewfdfound-333' => true ) );
+			$menu = $table->selectOne( null, array( 'menu_name' => array( $menuName, strtolower( $menuName ) ) ), array( 'work-arrewfdfound-333' => true ) );
 			if( empty( $menu[$this->getIdColumn()] ) || empty( $menu['menu_name'] ) )
 			{ 	
 				return false; 
@@ -413,7 +406,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		}
 		list( $menu['document_name'], ) = explode( '.', basename( $menu['document_url'] ) );
 		$this->_menu = $menu;
-		//var_export( $this->_menu );
+
 		return true;
 	} 	
 	
@@ -471,22 +464,18 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
      */
     public function render()
     {
-	//	self::v( $this->getParameter() );
-//		var_export( $this->getOptions() );
-		//	var_export( $this->getParameter( 'raw-options' ) );
-	//	self::v( $this->getParameter( 'new_menu_name' ) );
-		//	var_export( self::hasPriviledge() );
+
 		if( ! $menuInfo = $this->getMenu() )
 		{ 
 			//	lets find out if we are injecting options
 			if( ! $this->getParameter( 'raw-options' ) && ! $this->getOptions() )
 			{
-				//	var_export( self::hasPriviledge() );
+
 				$menuName = $this->getParameter( 'menu_label' ) ? : $this->getParameter( 'menu_name' );
 				if( self::hasPriviledge( array( 99, 98 ) ) && $menuName )
 				{
 					$options = array();
-					$options[] = array( 'option_name' => $this->getParameter( 'sub_menu' ) ? 'Add sub-menu' : 'Set up new menu here', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Creator/?menu_name=' . ( $menuName ) . '', 'title' => 'Add another menu option', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in' ), );
+					$options[] = array( 'option_name' => $this->getParameter( 'sub_menu' ) ? '' . self::__( 'Add sub-menu' ) . '' : '' . self::__( 'Set up new menu here' ) . '', 'rel' => 'spotlight;', 'url' => '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Creator/?menu_name=' . ( $menuName ) . '', 'title' => '' . self::__( 'Add another menu option' ) . '', 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'spotlight','logged_in' ), );
 					$this->setOptions( $options );      
 				}
 				else
@@ -496,13 +485,11 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 			else
 			{
-			//	var_export( __LINE__ );
+
 				$this->setOptions( $this->getParameter( 'raw-options' ) );
 			}
 		}
-	//	var_export( __LINE__ );
-		//	var_export( $options );
-		//	var_export( $menuInfo );
+
 		require_once 'Ayoola/Access.php';
 		$access = new Ayoola_Access();
 		$counter = 0;
@@ -522,7 +509,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		$cssLink->setAttribute( 'rel', 'stylesheet' );
 		$cssLink->setAttribute( 'type', 'text/css' );
 		$menu->appendChild( $cssLink ); */
-	//	var_export( $this->getOptions() );
+
 		@Application_Style::addFile( $menuInfo['document_url'] );
 		   
 		//	Using menu template?
@@ -532,8 +519,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			$options = $options->selectOne( null, array( 'template_name' => $this->getParameter( 'template_name' ) ) );
 			$options['markup_template_prefix'] = self::replacePlaceholders( $options['markup_template_prefix'], $menuInfo + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) ); 
 			$options['markup_template_suffix'] = self::replacePlaceholders( $options['markup_template_suffix'], $menuInfo + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) ); 
-	//		var_export( $menuInfo );
-	//		var_export( $options );
+
 		//	markup_template_namespace
 			$this->setParameter( ( $options ? : array() ) + array(  'markup_template_no_cache' => true, 'markup_template_namespace' => $this->getParameter( 'template_name' ) . $this->getParameter( 'markup_template_namespace' ) ) );
 			if( @$options['javascript_files'] )
@@ -557,10 +543,23 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 			if( @$options['css_code'] )
 			{
-				Application_Javascript::addCode( $options['css_code'] );
+				Application_Style::addCode( $options['css_code'] );
 			}
 		}
-	//	VAR_EXPORT( $this->getOptions() );
+
+        if( $this->getParameter( 'markup_template' ) )
+        {
+            $iTemplate = $this->getParameter( 'markup_template' );
+            if( ! stripos( $iTemplate, '{{{ayoola_spotlight}}}' ) && ! stripos( $iTemplate, 'onclick' ) )
+            {
+                $iTemplate = str_ireplace( '<a ', '<a onclick="{{{ayoola_spotlight}}}" ', $iTemplate );
+            }
+            if( ! stripos( $iTemplate, '{{{target}}}' ) && ! stripos( $iTemplate, 'target' ) )
+            {
+                $iTemplate = str_ireplace( '<a ', '<a target="{{{target}}}" ', $iTemplate );
+            }
+        }
+
 		foreach( $this->getOptions() as $values ) 
 		{
 			
@@ -574,7 +573,6 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				}
 				$values[$each] = @in_array( $each, $values['link_options'] ) ? true : $values[$each];
 			}
-	//		var_export( $values );
 	
 			if( is_int( $values['auth_level'] ) )
 			{
@@ -583,17 +581,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			
 			//	compatibility		
 			$values['auth_level'] = is_array( $values['auth_level'] ) ? $values['auth_level'] : array( $values['auth_level'] );
-		//	self::v( $values['auth_level'] );
-	//		self::v( $values['url'] );     
-	//		self::v( $values['logged_in'] );     
-	//		self::v( $values['logged_out'] );     
-	//		var_export( $_SERVER['REMOTE_ADDR' ] );           
-/*			if(	
-				( ! $values['logged_in']  && $access->isLoggedIn() && ! Ayoola_Application::isLocalServer()  ) || 
-				( ! $values['logged_out'] && ! $access->isLoggedIn() && ! Ayoola_Application::isLocalServer() ) || //	Show all menu on local host
-				( ! Ayoola_Abstract_Playable::hasPriviledge( $values['auth_level'] ) )
-			)
-*/			if(	
+			if(	
 				( ! $values['logged_in']  && $access->isLoggedIn()   ) || 
 				( ! $values['logged_out'] && ! $access->isLoggedIn() ) || //	Show all menu on local host
 				( ! Ayoola_Abstract_Playable::hasPriviledge( $values['auth_level'] ) )
@@ -601,7 +589,6 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			{   
  				continue;
 			}
-		//	var_export( $values );
 			$option = $xml->createElement( 'li' );
 			$optionClass = null;
 			$linkClass = null;
@@ -609,14 +596,8 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			{
 				@$optionClass .= ' ' . __CLASS__ . $menuInfo['document_name'];
 			}
-	//		self::v( rtrim( Ayoola_Application::getRequestedUri(), '/' ) );
-	//		self::v( '_______' );
-	//		self::v( rtrim( $values['url'], '/' ) );
-	//		self::v( rtrim( Ayoola_Application::getRequestedUri(), '/' ) );
-	//		self::v( rtrim( $values['url'], '/' ) );
 			if( rtrim( Ayoola_Application::getRequestedUri(), '/' ) === rtrim( $values['url'], '/' ) )
 			{
-			//	self::v( $values['url'] );
 				$optionClass .= 'SelectedOption ';
 				$optionClass .= ' ayoolaMenuSelectedOption ';
 				$optionClass .= ' ' . $this->getParameter( 'li-active-class' ) . ' ';
@@ -628,11 +609,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			{
 				$values['li-active-class'] = null;
 				$values['a-active-class'] = null;
-			//	$this->setParameter( array( 'li-active-class' => null, 'a-active-class' => null, ) );
 			}
-	//		$option->setAttribute( 'class', $this->getParameter( 'li-ul-class' ) );
-		//	var_export( get_class( $this ) );
-		//	var_export( __CLASS__ );
 			if( get_class( $this ) === __CLASS__ ) //	Demo menus will not have classes
 			{
 				$optionClass .= ' ' . __CLASS__ . @$menuInfo['document_name'] . ' ';
@@ -641,10 +618,9 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			{
 				@$values['option_name'] = strlen( $values['option_name'] ) < $this->getParameter( 'length_of_option_name' ) ? $values['option_name'] : ( trim( substr( $values['option_name'], 0, $this->getParameter( 'length_of_option_name' ) ) ) . '...' );
 			}
-		
+            $values['option_name'] = self::__( $values['option_name'] );
 			$link = @$xml->createElement( 'a', $values['option_name'] );
 			
-		//	$values['url'] = ! empty( $values['url'] ) ? Ayoola_Page::appendQueryStrings( array( 'menu_option' => $values['option_id'] ), $values['url'], false ) : null;
 			if( Ayoola_Application::getUrlPrefix() && $values['url'][0] === '/' )
 			{
 				$values['url'] = Ayoola_Application::getUrlPrefix() . $values['url'];
@@ -659,16 +635,15 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				$link->setAttribute( 'onClick', $values['ayoola_spotlight'] );
 				
 				$values['url'] = 'javascript:';
-			//	$link->setAttribute( 'href', 'javascript:' );
 			}
 			elseif( is_array( $values['link_options'] ) && in_array( 'new_window', $values['link_options'] ) )
 			{
+				$values['target'] = $values['option_name'];
 				$link->setAttribute( 'target', $values['option_name'] );
 			}
 			else
 			{
 			
-				// self::hasPriviledge() && 
 				if( $this->getParameter( 'auto_sub_menu' ) || @in_array( 'auto_sub_menu', $menuInfo['menu_options'] ) )
 				{
 					if( empty( $values['sub_menu_name'] ) && empty( $values['sub_menu_options'] ) )  
@@ -680,26 +655,20 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				}
 			}
 			$link->setAttribute( 'href', $values['url'] );
-		//	$link->setAttribute( 'rel', @$values['rel'] );
-		//	$link->setAttribute( 'href', $values['url'] );
-			$link->setAttribute( 'title', $values['title'] ? : $values['option_name']  );
+			$link->setAttribute( 'title', self::__( $values['title'] ? : $values['option_name'] ) );
 			$link->setAttribute( 'class', $linkClass );
 			if( empty( $values['url'] ) )
 			{ 
-				$link = $xml->createHTMLElement( $values['option_name'] ); 
+				$link = $xml->createHTMLElement( self::__( $values['option_name'] ) ); 
 			}
 			$option->appendChild( $link );
 			$values['li-ul-class'] = null;
-	//		var_export( $menuInfo );
-	//		var_export( $values );
-	//		exit();
 			if( ( ! empty( $values['sub_menu_name'] ) || ! empty( $values['sub_menu_options'] ) ) && $values['sub_menu_name'] !== $menuInfo['menu_name'] )
 			{
 				$class = 'Ayoola_Menu_Demo';
 				if( $subMenu = $class::viewInLine( array( 'option' => @$values['sub_menu_name'], 'raw-options' => @$values['sub_menu_options'], 'ul-class' => $this->getParameter( 'ul-1-class' ), 'ul-1-class' => 'dropdown-menu', 'li-ul-class' => 'dropdown', 'a-ul-class' => 'dropdown-toggle', 'sub_menu' => 'true', ) ) )
 				{
 					$values['li-ul-class'] = $this->getParameter( 'li-ul-class' ) ? : 'dropdown';
-				//	self::v( $values );  
 					$link->setAttribute( 'class', $this->getParameter( 'a-ul-class' ) );
 					if( $this->getParameter( 'a-ul-append' ) )
 					{
@@ -713,8 +682,6 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 						}
 					}
 					$optionClass .= $this->getParameter( 'li-ul-class' );
-				//	var_export( $values );
-				//	$class = get_class( $this );
 					$values['sub_menu'] = $subMenu;
 					$subMenu = $xml->createCDATASection( $subMenu );  
 					$option->appendChild( $subMenu );
@@ -724,13 +691,15 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			$menu->appendChild( $option );
 			if( $this->getParameter( 'markup_template' ) )
 			{
-				$template .= self::replacePlaceholders( $this->getParameter( 'markup_template' ), $values + ( $this->getParameter() ? : array() ) + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', 'pc_no_data_filter' => true, ) );
-			}
+				$template .= self::replacePlaceholders( $iTemplate, $values + ( $this->getParameter() ? : array() ) + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', 'pc_no_data_filter' => true, ) );
+            }
+
+			$this->_objectData[] = $values;
+
 		}
 		//	update the markup template
 		$this->_parameter['markup_template'] = $template;
 		
-	//	var_export( $xml->saveHTML() );
 		$xml->appendChild( $menu );
 		return $xml->saveHTML();
     } 	
@@ -747,7 +716,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 
 		//	look in parent tables
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-	//	var_export( $this->getParameter( ) );
+
 		if( $this->getParameter( 'include_parent_menu' ) )
 		{
 			$all = $table->select();
@@ -795,11 +764,11 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
      */
     public function setViewOption( $value )
     {
-		//var_export( $value );
+
 		$this->_viewOption = $value;
 		try
 		{
-		//	$this->setMenu( $this->getViewOption() );		
+
 		}
 		catch( Ayoola_Menu_Exception $e )
 		{
@@ -819,18 +788,15 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];
 		@$object['option'] = $object['option'] ? : $object['view_option'];
-	//	$object['xx'] = 'xxx';
-	//	$html .= "<span data-parameter_name='view' >{$object['view']}</span>";
+
 		
 		//	Implementing Object Options
 		//	So that each objects can be used for so many purposes.
 		//	E.g. One Class will be used for any object
-	//	var_export( $object['include_parent_menu'] );
+
 		$options = $object['class_name'];
 		$options = new $options( array( 'no_init' => true ) + $object );
-//		$options = array();
-	//	$html .= '<span style=""> Show  </span>';
-	//	$newMenuName = null;
+
 		$newMenuName = 'menu_' . time();
 		static::$_counter++;
 		if( ! empty( $object['include_parent_menu'] ) )
@@ -840,7 +806,6 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			//	look in parent tables
 			$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
 			$all = $table->select( null, null, array( 'sss' => 'ss' ) );
-	//		var_export( $all );
 
 			$options = array();
 			foreach( $all as $value )
@@ -854,7 +819,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		}
 		if( ! empty( $object['option'] ) && ! array_key_exists( $object['option'], $options ) )  
 		{
-			//	 look for it in parent tables; 
+
 			$parentSeek = new Ayoola_Page_Menu_Menu();
 
 			//	look in parent tables
@@ -863,17 +828,17 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			if( $data = $parentSeek->selectOne( null, array( 'menu_name' => $object['option'] ), array( 'cc33' => true ) ) )
 			{ 
 				$options[$data['menu_name']] = $data['menu_label'];
-			//	var_export( $options ); 
+
 			}
 			
 		}
 
 	//	if( $options = (array) $options->getClassOptions() )
 		{
-			$html .= '<span style=""> Menu:  </span>';
-	//		$options = (array) $options->getClassOptions();
+			$html .= '<span style=""> ' . self::__( 'Menu' ) . ':  </span>';
+
 			$html .= '<select data-parameter_name="option">';
-			$html .= '<option value="' . $newMenuName . '">New Menu</option>';
+			$html .= '<option value="' . $newMenuName . '">' . self::__( 'New Menu' ) . '</option>';
 			if( empty( $object['option'] ) && ! empty( $object['new_menu_name'] ) )  
 			{
 				$filter = new Ayoola_Filter_Name();
@@ -889,25 +854,23 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			{
 				$object['template_name'] = 'HorizontalGrayish'; 
 			}
-		//	var_export( $object['option'] );      
+
 			foreach( $options as $key => $value )
 			{ 
 				$html .=  '<option value="' . $key . '"';  
-			//	var_export( $object['view'] );
+
 				if( $object['option'] == $key  ){ $html .= ' selected = selected '; }
 				$html .=  '>' . $value . '</option>';  
 			}
 			$html .= '</select>';
-			
-		//	$html .= '<span style=""> or </span>';
+
 		}
 	//	else
 		{
-	//		$newMenuName = 'menu_' . static::$_counter;
+
 		}
-	//	$html .= '<span style=""> new menu:  </span>';
-	//	$html .= '<input value="' . ( $newMenuName ) . '" type="text" placeholder="new menu name in lowercase" data-parameter_name="new_menu_name">';
-		$html .= '<span style=""> Style: </span>';
+
+		$html .= '<span style=""> ' . self::__( 'Style' ) . ': </span>';
 		
 		$options = new Ayoola_Menu_Template;
 		$options = $options->select();
@@ -919,13 +882,12 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';   
-		//	var_export( $object['view'] );
+
 			if( @$object['template_name'] == $key ){ $html .= ' selected = selected '; }
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>';
-	//	$html .= '<span style=""> style. </span>'; 
-	//	$html .= '<button onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Creator/\' );">New Menu</button>'; 
+
 		return $html;
 	}
 
@@ -944,43 +906,8 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
      */
     public static function getInstance( array $parameter = null )
     {
-	//	if( is_null( self::$_instance ) ){ self::$_instance = new self; }
-	//	return self::$_instance;
+
 		return new static( $parameter );
     } 	
-	
-    /**
-     * This echos a menu
-     *
-     * @param string menu name
-     */
-/*     public static function viewInLine( $viewParameter = null, $viewOption = null )
-    {
-		$parameter = $viewParameter;
-		if( ! is_array( $viewParameter ) )
-		{
-			$parameter = array( 'view' => $viewParameter, 'option' => $viewOption, );
-		}
-		$view = new static( $parameter );
-	//	$view->setViewParameter( $viewParameter );
-	//	$view->setViewOption( $viewOption );
-	//	var_export( __LINE__ );
-		$view->initOnce();
 
-//		var_export( get_class( $view ) );
-	//	var_export( @$view->getForm()->getValues() );
-		return isset( $viewParameter['return_as_object'] ) ? $view : $view->view();
-    } 	
- *//*     public static function viewInLine( $viewParameter = null, $viewOption = null )
-    {
-		if( is_null( $viewParameter ) && is_null( $viewOption ) )
-		{
-			//throw new Ayoola_Doc_Exception( 'We must have either a view parameter or option to run this method' );
-		}
-		$menuView = self::getInstance( array( 'option' => $viewOption, 'view' => $viewParameter ) );
-	//	$menuView->setParameter( array( 'option' => $viewOption, 'view' => $viewParameter ) );
-		$menuView->initOnce();
-		return $menuView->view();
-    } 		
- */	// END OF CLASS
 }

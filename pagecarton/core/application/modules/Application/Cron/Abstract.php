@@ -111,7 +111,7 @@ abstract class Application_Cron_Abstract extends Ayoola_Abstract_Table
 	protected static function save( $cron )
     {
 		$filename = tempnam( 'cron_' . microtime() , '.txt' );
-		file_put_contents( $filename, $cron );
+		Ayoola_File::putContents( $filename, $cron );
 		$before = self::getCron();
 		$output = shell_exec( "crontab {$filename}" );
 		unlink( $filename );

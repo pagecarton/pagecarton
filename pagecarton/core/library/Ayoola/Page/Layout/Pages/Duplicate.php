@@ -67,7 +67,7 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
             $allPages = array_combine( $allPages, $allPages );
             if( ! in_array( $url, $allPages ) )
             {
-           //     $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+           //     $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
             //    return false;   
             }
             
@@ -90,7 +90,7 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
             $values['new_page'] = '/' . $values['new_page'];
             if( ! $values['new_page'] )
             {
-                $this->setViewContent( '<p class="badnews">Invalid page name</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Invalid page name</p>' ) ); 
                 return false;   
             }
         //    var_export( $values );
@@ -113,14 +113,14 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
 
             if( ! $from = Ayoola_Loader::getFullPath( $from, array( 'prioritize_my_copy' => true ) ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
             $to = Ayoola_Doc_Browser::getDocumentsDirectory() . '/layout/' . $themeName . '' . $values['new_page'] . '.html';
 
             if( is_file( $to ) )
             {
-                $this->setViewContent( '<p class="badnews">Page already exist.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page already exist.</p>' ) ); 
                 return false;   
             }
 
@@ -130,7 +130,7 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
 
             if( copy( $from, $to ) )
             {
-                $this->setViewContent( '<p class="goodnews">"' . $values['new_page'] . '" theme page created successfully.</p>', true ); 
+                $this->setViewContent(  '' . self::__( '<p class="goodnews">"' . $values['new_page'] . '" theme page created successfully.</p>' ) . '', true  ); 
                 $fPaths = array();
                 $tPaths = array();
                 $fPaths = static::getPagePaths( $themeName, $values['old_page'] );
@@ -147,7 +147,7 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
             }
             else
             {
-                $this->setViewContent( '<p class="badnews">Theme Page could not be duplicated.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Theme Page could not be duplicated.</p>' ) ); 
             }
 
              // end of widget process
@@ -156,7 +156,7 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

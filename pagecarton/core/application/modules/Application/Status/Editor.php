@@ -37,9 +37,9 @@ class Application_Status_Editor extends Application_Status_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['testimonial'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['testimonial'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->updateDb() ){ $this->setViewContent( 'Status edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Status edited successfully' ) . '', true  ); }
 		}
 		catch( Application_Status_Exception $e ){ return false; }
     } 

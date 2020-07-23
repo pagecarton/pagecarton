@@ -43,13 +43,18 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
             $each = new Application_Settings_Editor( array( 'settingsname_name' => 'Page' ) );
-            $each->fakeValues = array( 'default_layout' => $data['layout_name'] );
+            $settings = Ayoola_Page_Settings::retrieve();
+            $settings['default_layout'] = $data['layout_name'];
+            $each->fakeValues = $settings;
+        //  $each->fakeValues = array( 'default_layout' => $data['layout_name'] );
             if( ! $each->init() )
             {
-                $this->setViewContent( '<p class="badnews">An error was encountered while changing the theme.</p>' ); 
+                
+                $this->setViewContent( self::__( '<p class="badnews">An error was encountered while changing the theme.</p>' ) ); 
+                $this->setViewContent( $each->view() ); 
                 return false;
             }
-            $this->setViewContent( '<p class="goodnews">Theme successfully set as main site theme. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/PageCarton_NewSiteWizard">New Website Wizard</a></p>', true );   
+            $this->setViewContent(  '' . self::__( '<p class="goodnews">Theme successfully set as main site theme. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/PageCarton_NewSiteWizard">New Website Wizard</a></p>' ) . '', true  );   
 
             //  some pages were not working fine after this
             Application_Cache_Clear::viewInLine();
@@ -59,7 +64,7 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

@@ -45,7 +45,7 @@ class Application_Subscription_Price_Creator extends Application_Subscription_Pr
 		if( ! $data = $table->selectOne( null, $this->getIdentifier() ) ){ return false; }
 		$this->createForm( 'Add', 'Add a new Price for category "' . $data['subscriptionlevel_name'] . '"' );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->insertDb() ){ $this->setViewContent( 'Price added for product category successfully.', true ); }
+		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Price added for product category successfully.' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

@@ -56,7 +56,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			$docSettings = Ayoola_Doc_Settings::getSettings( 'Documents' );
 			//		var_export( $docSettings );
 
-		//	$this->_objectData['status'][] = $docSettings;
 			if( ! @$_POST['image'] && ! @$_POST['document'] ) 
 			{
 				if( @$_FILES['upload']['tmp_name'] ) 
@@ -65,7 +64,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					move_uploaded_file( $_FILES['upload']['tmp_name'], $tempFilename );
 					$_POST['name'] = $_FILES['upload']['name'];
 					$_POST['mime_type'] = $_FILES['upload']['type'];
-				//	$_POST['document'] = 'data:' . $_POST['mime_type'] . ';base64,' . base64_encode( file_get_contents( $tempFilename ) );
 					$_POST['document'] = base64_encode( file_get_contents( $tempFilename ) );
 				}
 				else
@@ -73,9 +71,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					//	debug some machines don't populate post
 					if( $response = file_get_contents( "php://input") )
 					{
-				//		var_export( http_response_code() );
-				//		http_response_code( 200 );
-				//		var_export( http_response_code() );
 						header('HTTP/1.1 200 Found');
 						
 						parse_str( $response, $result );
@@ -166,7 +161,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				}
 			
 				//	We cant upload to /ayoola/ 
-			//	var_export( strtolower( array_pop( explode( '.', trim( $_POST['suggested_url'], '.' ) ) ) ) );
+			    //	var_export( strtolower( array_pop( explode( '.', trim( $_POST['suggested_url'], '.' ) ) ) ) );
 				if( array_shift( explode( '/', trim( $_POST['suggested_url'], '/' ) ) ) == 'ayoola' )
 				{
 					throw new Ayoola_Doc_Upload_Exception( 'UPLOADING IN /ayoola/ NOT ALLOWED' );
@@ -176,7 +171,19 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			//	$url = $_POST['suggested_url'];
 				$url = '';
 				$dir .= $url;
-				$path = $dir . $_POST['suggested_url'];
+                $path = $dir . $_POST['suggested_url'];
+
+                //  Now store file replacement but don't replace actual file of suggestion
+                if( is_file( $path ) )
+                {
+                    $path = $dir . '/__' . $_POST['suggested_url'];
+                    $nextPath = $dir . '/__' . '/data-backup' . $_POST['suggested_url'] . '/' . time() . '.' . $extension;
+                    if( is_file( $path ) ) 
+                    {
+                        Ayoola_Doc::createDirectory( dirname( $nextPath ) );
+                        copy( $path, $nextPath );
+                    }
+                }
 				$url = $url . $_POST['suggested_url'];
 				Ayoola_Doc::createDirectory( dirname( $path ) );
 				
@@ -307,7 +314,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			}
 			
 		//	var_export( $_POST['name'] );
-			$success = file_put_contents( $path, $data );
+			$success = Ayoola_File::putContents( $path, $data );
 			
 			//	refresh cache again after successful upload.
 			if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( $url, array( 'disable_cache' => true ) ) )  

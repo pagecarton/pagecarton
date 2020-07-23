@@ -34,7 +34,7 @@ class Application_User_UserBankAccount_Card_List extends Application_User_UserBa
      */
 	protected function init()
     {
-		$this->setViewContent( '<h4>Credit/Debit Cards. <span class="goodnews"><a title="Add new Credit/Debit Card" rel="spotlight;height=300px;width=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_UserBankAccount_Creator/mode/Card/file/Creator/">+</a></span></h4>' );
+		$this->setViewContent( self::__( '<h4>Credit/Debit Cards. <span class="goodnews"><a title="Add new Credit/Debit Card" rel="spotlight;height=300px;width=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_UserBankAccount_Creator/mode/Card/file/Creator/">+</a></span></h4>' ) );
 		$this->setViewContent( $this->getList() );
     } 
 	

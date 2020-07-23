@@ -50,8 +50,12 @@ class Application_Article_Editor extends Application_Article_Abstract
 			//	Only the owner can edit or priviledged user can edit
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToView( $data )  && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }  
+			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToView( $data )  && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) && Ayoola_Application::getUserInfo( 'username' ) !== strtolower( $data['username'] ) ){ return false; }  
 		//		self::v( $data );
+            if( ! $this->requireRegisteredAccount() )
+            {
+                return false;
+            }
 			if( ! $this->requireProfile() )
 			{
 				return false;
@@ -60,7 +64,7 @@ class Application_Article_Editor extends Application_Article_Abstract
 		//	self::v( $data );
 			//			var_export( $data['quiz_correct_option'] );
 			$this->createForm( 'Continue...', 'Editing "' . $data['article_title'] . '"', $data );
-//			$this->setViewContent( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' );
+//			$this->setViewContent( self::__( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' ) );
 			$this->setViewContent( $this->getForm()->view() );
 		//	self::v( $this->getForm()->getValues() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -98,54 +102,15 @@ class Application_Article_Editor extends Application_Article_Abstract
 			$values['user_id'] = $data['user_id'];
 			$values['username'] = $data['username'];
 			$values['article_modified_date'] = time();
-			
-			//	Save new data in the cloud
-		//	if( ! $this->updateDb( $values ) ){ return false; }
-		
-/* 			//	Set a category to specify the type of Post this is 
-			$table = new Application_Category();
-		//	@$values['article_type'] = $values['article_type'] ? : 'article';
-			if( ! $category = $table->selectOne( null, array( 'category_name' => $values['article_type'] ) ) )
-			{
-		//		$this->getForm()->setBadnews( 'Could not find a category ID in the database to save ' . $values['article_type'] );
-		//		$this->setViewContent( '' . showBadnews( $this->getForm()->getBadnews() ) . '' );
-		//		return false;
-			}
-			//	Changing to category_name to correct error in grep
-		//	$values['category_name'] = @$values['category_name'] ? : array();
-			if( ! @in_array( $category['category_name'], $values['category_name'] ) )
-			{
-				@array_push( $values['category_name'], $category['category_name'] );
-			}
-			is_array( $values['category_name'] ) ? array_unique( $values['category_name'] ) : null;
- */			
-			
-			//	compatibility
-/* 			$values['category_id'] = $values['category_id'] ? : array();
-			if( ! @in_array( $category['category_id'], $values['category_id'] ) ) 
-			{
-				@array_push( $values['category_id'], $category['category_id'] );
-			}
-			array_unique( $values['category_id'] );
- */			
+						
 			//	making options that have been disabled to still be active.
 			$values = array_merge( $data, $values );  
-			
-			// Save to server
-		//	if( ! $response = Application_Article_Api_Update::send( $values ) ){ return false; }
-		//	if( true !== $response['data'] ){ throw new Application_Article_Exception( $response ); }
-			
+						
 			self::saveArticle( $values );
-			
-			//	Set Hash Tags
-	//		Application_HashTag_Abstract::set( @$values['article_tags'], 'articles', $values['article_url'] );
-	//		Application_HashTag_Abstract::get();
 	
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '';
-			$this->setViewContent( '<div class="goodnews">Post successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View Post.</a></div>', true );
-	//		$this->setViewContent( '<div class="dpc-notify-info" title="Share this with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );   
-	//		$this->setViewContent( 'Post edited successfully. <a href="' . strtolower( $values['article_url'] ) . '">View post.</a>', true );
+			$this->setViewContent(  '' . self::__( '<div class="goodnews">Post successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View Post.</a></div>' ) . '', true  );
 			$this->_objectData['article_url'] = $values['article_url'];  
 		}
 		catch( Application_Article_Exception $e )

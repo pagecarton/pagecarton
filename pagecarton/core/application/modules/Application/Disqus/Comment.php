@@ -36,7 +36,7 @@ class Application_Disqus_Comment extends Application_Disqus_Abstract
 	public function init()
     {
 		self::load();
-		$this->setViewContent(  '<div id="disqus_thread"></div>', true );
+		$this->setViewContent(   '' . self::__( '<div id="disqus_thread"></div>' ) . '', true  );
     } 
 	// END OF CLASS
 }

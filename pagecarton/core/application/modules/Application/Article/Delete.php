@@ -46,7 +46,7 @@ class Application_Article_Delete extends Application_Article_Abstract
 		//	var_export( __LINE__ );
 			//	Only the owner or priviledged users can delete
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) && Ayoola_Application::getUserInfo( 'username' ) !== $data['username'] ){ return false; }  
+			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) && Ayoola_Application::getUserInfo( 'username' ) !== strtolower( $data['username'] ) ){ return false; }  
 			
 			$this->createConfirmationForm( 'Delete ' . $data['article_title'],  'Delete information and files of this post' );
 			$this->setViewContent( $this->getForm()->view(), true );
@@ -59,8 +59,9 @@ class Application_Article_Delete extends Application_Article_Abstract
 			//	if( ! $response = Application_Article_Api_Delete::send( $data ) ){ return false; }
 			//	var_export( $response );
 			//	if( true !== $response['data'] ){ throw new Application_Article_Exception( $response ); }
-			}
-			unlink( self::getFolder() . $data['article_url'] );
+            }
+            Ayoola_File::trash( self::getFolder() . $data['article_url'] );     
+		    //	unlink( self::getFolder() . $data['article_url'] );
 			
 			@Ayoola_Doc::removeDirectory( dirname( self::getFolder() . $data['article_url'] ) );
 
@@ -68,7 +69,7 @@ class Application_Article_Delete extends Application_Article_Abstract
 			$table = Application_Article_Table::getInstance();
 			$table->delete( array( 'article_url' => $data['article_url'] ) );
 
-			$this->setViewContent( '<p class="goodnews">Post deleted successfully</p>', true ); 
+			$this->setViewContent(  '' . self::__( '<p class="goodnews">Post deleted successfully</p>' ) . '', true  ); 
 		}
 		catch( Exception $e )
 		{ 

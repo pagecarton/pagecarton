@@ -16,6 +16,7 @@
  */
  
 require_once 'Ayoola/Dbase/Table/Abstract/Xml.php';
+require_once 'Ayoola/Dbase/Table/Abstract/Xml/Public.php';
 
 
 /**

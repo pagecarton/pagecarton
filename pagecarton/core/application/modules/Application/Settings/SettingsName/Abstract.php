@@ -69,69 +69,17 @@ abstract class Application_Settings_SettingsName_Abstract extends Ayoola_Abstrac
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$fieldset = new Ayoola_Form_Element;
 		$form->submitValue = $submitValue;
-		//	We don't allow editing UNIQUE Keys
-		if( is_null( $values ) )
-		{		
-	//		$fieldset->addElement( array( 'name' => 'settingsname_name', 'label' => 'Give this settings a name', 'type' => 'InputText', 'value' => @$values['settingsname_name'] ) );
-		}
-
-	//	$fieldset->addElement( array( 'name' => 'document_url', 'description' => 'Thumbnail for this settings', 'type' => 'InputText', 'value' => @$values['document_url'] ) );
-		
-/* 		$list = new Ayoola_Object_Table_ViewableObject();
-		$list = $list->select();
-		require_once 'Ayoola/Filter/SelectListArray.php';
-		$filter = new Ayoola_Filter_SelectListArray( 'object_name', 'class_name');
-		$list = $filter->filter( $list );
-		$fieldset->addElement( array( 'name' => 'object_name', 'description' => 'Which object will play this settings', 'type' => 'Select', 'value' => @$values['object_name'] ), array( 0 => 'Select Object' ) + $list );
-		$fieldset->addRequirement( 'object_name', array( 'InArray' => array_keys( $list )  ) );
-		unset( $list );
- */		
+	
  		$fieldset->addElement( array( 'name' => 'settingsname_title', 'placeholder' => 'Settings Title', 'type' => 'InputText', 'value' => @$values['settingsname_title'] ? : @$values['settingsname_name']  ) );
-		$fieldset->addRequirement( 'settingsname_title', array( 'WordCount' => array( 3, 50 ) ) );
-/* 
-		$filter = new Ayoola_Filter_FilenameToClassname();
-			try
-			{
-				$directory = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'modules';  
-			//	var_export( $directory );
-				$options = array();  
-				if( is_dir( $directory ) )
-				{
-					$options += Ayoola_Doc::getFilesRecursive( $directory ) ? : array();  
+        $fieldset->addRequirement( 'settingsname_title', array( 'WordCount' => array( 3, 50 ) ) );
+        
+        $options = Ayoola_Object_Embed::getWidgets() + array( '__custom' => 'Custom Widget' );
+        if( @$values['class_name'] && empty( $options[$values['class_name']] ) )
+        {
+            $options[$values['class_name']] = $values['class_name'];
+        }
 
-				}
-				$directory = Ayoola_Application::getDomainSettings( APPLICATION_DIR ) . DS . 'library';  
-				if( is_dir( $directory ) )
-				{
-					$options += Ayoola_Doc::getFilesRecursive( $directory ) ? : array();  
-				}
-		//		var_export( $options );
-			}
-			catch( Exception $e )
-			{
-				$options = array(); 
-			}
-			$files = array();
-			$classes = array();
-			foreach( $options as $file )
-			{
-				$directory = str_ireplace( DS, '/', $directory );
-				$file = str_ireplace( DS, '/', $file );
-	//			var_export( $directory );
-	//			var_export( $file );
-				$file = str_ireplace( $directory, '', $file );
-				
-				//	The label is transformed into the class value
-				$className = $filter->filter( $file );
-	//			$files[$file] = $className;
-				$classes[$className] = $className;
-			}
-		ksort( $classes );
- */ 		$fieldset->addElement( array( 'name' => 'class_name', 'placeholder' => 'Class name', 'type' => 'Select', 'value' => @$values['class_name'] ), Ayoola_Object_Embed::getWidgets() );
-		if( is_null( $values ) )
-		{		
-	//		$fieldset->addRequirement( 'settingsname_name', array( 'Name' => null, 'WordCount' => array( 3,100 )  ) );
-		}
+  		$fieldset->addElement( array( 'name' => 'class_name',  'onchange' => "if( this.value == '__custom' ){  var a = prompt( 'Custom Parameter Name', '' ); if( ! a ){ this.value = ''; return false; } var option = document.createElement( 'option' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }", 'label' => 'Settings Widget', 'type' => 'Select', 'value' => @$values['class_name'] ), $options );
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );

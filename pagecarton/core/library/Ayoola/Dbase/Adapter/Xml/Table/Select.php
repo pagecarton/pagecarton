@@ -45,8 +45,9 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
     /**
      * Selects record into from db table
      *
-     * @param array Fields of Data to select from the table
-     * @param array Filter with field values
+     * @param array Fields to fetch
+     * @param array Where clause as array
+     * @param array Select options
      */
     public function init( Array $fieldsToFetch = null, Array $where = null, Array $options = null )
     {
@@ -60,26 +61,27 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
 		$rows = array();
 	//	PageCarton_Widget::v( $options );  
-	//	PageCarton_Widget::v( $result );  
+	//	PageCarton_Widget::v( $options['filename'] );  
+	//	PageCarton_Widget::v( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );  
 		if( ! empty( $options['filename'] ) )
 		{
-		//	var_export( $this->getMyFilename() );
 			$this->setXml();
-			$this->getXml()->load( $options['filename'] );
+            if( ! $this->loadTableDataFromFile( $options['filename'], true ) )
+            {
+
+            }
 			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $this->doSelect( $fieldsToFetch, $where, $options ) ) : $rows + $this->doSelect( $fieldsToFetch, $where, $options );
-	//		PageCarton_Widget::v( $rows );
 		}
 		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE ) // let PUBLIC PICK FROM CORE AND DEFAULT FOR COMPATIBILITY TO PREVIOUS VERSIONS THAT SAVED IN CORE
-//		elseif( $this->getAccessibility() == self::SCOPE_PRIVATE || $this->getAccessibility() == self::SCOPE_PUBLIC )
 		{
-		//	$rows = $this->doSelect( $fieldsToFetch, $where, $options ); 
-			$files =  array_unique( array( $this->getFilenameAccordingToScope() => $this->getFilenameAccordingToScope() ) + $this->getSupplementaryFilenames() );
+            $scopeFile = $this->getFilenameAccordingToScope( false, self::SCOPE_PRIVATE );
+            $files =  array_unique( array( $scopeFile => $scopeFile ) + $this->getSupplementaryFilenames() );
+       //     var_export( $scopeFile );
 			$rows = $this->loopFiles( $files, $fieldsToFetch, $where, $options );
 
 		}
 		else
 		{
-	//		var_export( $this->getMyFilename() );
 			$rows = array();
 			$files = array_unique( $this->getGlobalFilenames() );
 			$rows = $this->loopFiles( $files, $fieldsToFetch, $where, $options );
@@ -89,14 +91,16 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$rows = PageCarton_Widget::sortMultiDimensionalArray( $rows, $options['sort_column'] );
 		}
 		if( empty( $options['disable_cache'] ) ){ $this->setCache( $rows ); }
-//		var_export( $rows );
 		return $rows;
     }
 	
     /**
      * Does the work
      *
-     * @param void
+     * @param array Files of DB
+     * @param array Fields to fetch
+     * @param array Where clause as array
+     * @param array Select options
      */
     public function loopFiles( Array $files, Array $fieldsToFetch = null, Array $where = null, Array $options = null  )
     {
@@ -131,7 +135,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	//			Ayoola_Page::v( $filename );
 		//	var_export( $this->getMyFilename() );
 			$this->setXml();
-			$this->getXml()->load( $filename );
+		//	$this->getXml()->load( $filename );
+            if( ! $this->loadTableDataFromFile( $filename, true ) )
+            {
+
+            }
 			$rowsInThisFile = $this->doSelect( $fieldsToFetch, $where, $innerOptions );
 			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $rowsInThisFile ) : $rows + $rowsInThisFile;
 			$totalRows = count( $rows );
@@ -140,21 +148,129 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 	}
 
     /**
-     * Does the work
+     * Inject the where clause
      *
-     * @param void
+     * @param string Field Where key
+     * @param mixed Field value to compare
+     * @param array Where clause as array
+     * @param array Select options
+     */
+    public static function where( $key, $fieldValue, Array $where, Array $options = null )
+    {
+    //    var_export( func_get_args() );
+        if( ! empty( $options['case_insensitive'] ) && is_string( $where[$key] ) && is_string( $fieldValue ) )
+        {
+            $fieldValue = strtolower( $fieldValue );
+            $where[$key] = strtolower( $where[$key] );
+        }
+        if( ! is_array( $fieldValue ) )
+        {
+            switch (@$options[$key . '_operator']) 
+            {
+                case 'range':
+                //    var_export( $fieldValue );
+                //    var_export( $where );
+                    if( ! empty( $where[$key][0] ) && ! empty( $where[$key][1] ) )
+                    {
+                        $filter = new Ayoola_Filter_Time();
+                        //   var_export( $filter->filter( $fieldValue ) );
+                    //    var_export( range( $where[$key][0], $where[$key][1] ) );
+
+                        if( 
+                            ( $fieldValue >= $where[$key][1] && $fieldValue <= $where[$key][0] )
+
+                            ||
+
+                            ( $fieldValue <= $where[$key][1] && $fieldValue >= $where[$key][0] )
+                        )
+                        {
+                            break;
+                        }
+                    }   
+                    return false;
+                break;
+                case '!=':
+                    if( ! is_array( $where[$key] ) && $where[$key] == $fieldValue )
+                    { 
+                        return false; 
+                    }
+                    elseif( is_array( $where[$key] ) && in_array( $fieldValue, $where[$key] ) )
+                    {
+                        return false; 
+                    }
+                break;
+                default:
+                //    var_export( $where[$key] );
+                //    var_export( $fieldValue );
+                    if( ! is_array( $where[$key] ) && $where[$key] != $fieldValue )
+                    { 
+                        return false; 
+                    }
+                    elseif( is_array( $where[$key] ) && ! in_array( $fieldValue, $where[$key] ) )
+                    {
+                        return false; 
+                    }
+                break;
+            }
+        }
+        else
+        {
+            //	An array is matched if a single member is present.
+            switch( @$options[$key . '_operator'] )
+            {
+                case '!=':
+                    if( ! is_array( $where[$key] ) && in_array( $where[$key], $fieldValue ) )
+                    {
+                        //	only the record is array
+                        return false; 
+                    }
+                    elseif( is_array( $where[$key] ) && array_intersect( $where[$key], $fieldValue) )
+                    {
+                        return false; 
+                    }
+                break;
+                default:
+                    if( ! is_array( $where[$key] ) && ! in_array( $where[$key],$fieldValue ) )
+                    {
+                        //	only the record is array
+                        return false; 
+                    }
+                    elseif( is_array( $where[$key] ) && ! array_intersect( $where[$key], $fieldValue ) )
+                    {
+                        //	both element are arrays
+                        return false; 
+                    }
+                break;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Does the select work
+     *
+     * @param array Fields to fetch
+     * @param array Where clause as array
+     * @param array Select options
      */
     public function doSelect( Array $fieldsToFetch = null, Array $where = null, Array $options = null )
     {
 		//	Calculate the total fields on the table, extended
 		$allFields = $this->query( 'FIELDLIST' );
 
-		if( is_null( $fieldsToFetch ) ){ $fieldsToFetch = $allFields; }
+        if( is_null( $fieldsToFetch ) )
+        { 
+            $fieldsToFetch = $allFields; 
+        }
+        elseif( is_array( $fieldsToFetch ) &&  is_array( $where ) )
+        {
+            $fieldsToFetch = array_unique( array_merge( $fieldsToFetch, array_keys( $where ) ) );
+        }
 		$rows = array();
 	//	var_export( $this->getRecords()->childNodes->length );
 
-		$nextRecord = $this->getRecords()->lastChild;
-		while( $nextRecord )
+        $nextRecord = $this->getRecords()->lastChild;
+        while( $nextRecord )
 //		foreach( $this->getRecords()->childNodes as $eachRecord )
 		{
 			$eachRecord = $nextRecord;
@@ -171,6 +287,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$rowId = self::getRecordRowId( $eachRecord );
 			$recordMatch = false;
 			$keyCount = 0;
+            $keyFound = array();
 			foreach( $eachRecord->childNodes as $countField => $field )
 			{
 				$keyCount++;
@@ -187,7 +304,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				
 				$fields[$key] = self::filterDataType( $fields[$key], $this->getTableDataTypes( $key ) );
 				$searchTerm = $fields[$key];
-			//	PageCarton_Widget::v( $options );
 				$otherData = array();
 				if( ! empty( $options['key_filter_function'][$key] ) && is_callable( $options['key_filter_function'][$key] ) )
  				{
@@ -202,7 +318,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 					{
 						$fields += $otherData;
 					}
-				}
+                }
 				do
 				{
 					if( ! empty( $where['*'] ) )
@@ -225,28 +341,43 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 							}
 							else
 							{
-								$phrase = implode( '', $where['*'] );
-								$searchTermSlim = str_replace( ' ', '', $searchTerm );
- 		//						PageCarton_Widget::v( $searchTermSlim ); 
+                                $slimer = array( ' ', ',', '-', '_', '"', '\'' );
+								$phrase = implode( ' ', $where['*'] );
+								$phrase = str_replace( $slimer, '', $phrase );
+								$searchTermSlim = str_replace( $slimer, '', $searchTerm );
+ 							//	PageCarton_Widget::v( $searchTermSlim ); 
+ 							//	PageCarton_Widget::v( $where ); 
+ 							//	PageCarton_Widget::v( $phrase ); 
 								if( stripos( $searchTermSlim, $phrase ) !== false )
 								{ 
+								//	PageCarton_Widget::v( $key ); 
 								//	PageCarton_Widget::v( $phrase ); 
 								//	PageCarton_Widget::v( $searchTermSlim ); 
-									$fields['pc_search_score'] += 10;
+								//	PageCarton_Widget::v( stripos( $searchTermSlim, $phrase ) ); 
+									$fields['pc_search_score'] += 200;
 									//	var_export( $searchTermSlim );
 							//	var_export( $fields );
 						//	var_export( $fields[$key] );
 									$recordMatch = true;
 								//	break 3;  
 								}
-							foreach( $where['*'] as $keyword )
+							    foreach( $where['*'] as $keyword )
 								{
 									if( stripos( $searchTerm, $keyword ) !== false )
 									{ 
-										$fields['pc_search_score'] += 1;
-										//	var_export( $where );
-								//	var_export( $fields );
-							//	var_export( $fields[$key] );
+                                        $fields['pc_search_score'] += ( 2 * strlen( $keyword ) );
+                                        if('article_title' === $key )
+                                        {
+                                            $fields['pc_search_score'] +=  ( 5 * strlen( $keyword ) );
+                                        }
+                                        elseif( stripos( '_title', $key ) !== false )
+                                        {
+                                            $fields['pc_search_score'] += ( 2 * strlen( $keyword ) );
+                                        }
+                                        elseif( stripos( '_name', $key ) !== false )
+                                        {
+                                            $fields['pc_search_score'] +=  ( 2 * strlen( $keyword ) );
+                                        }
 										$recordMatch = true;
 									//	break 3;  
 									}
@@ -264,51 +395,43 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 					{ 
 						if( array_key_exists( $key, $where ) )
 						{
-							if( ! is_array( $fields[$key] ) )
-							{
-								if( ! is_array( $where[$key] ) && $where[$key] != $fields[$key] )
-								{ 
-									continue 3; 
-								}
-								elseif( is_array( $where[$key] ) && ! in_array( $fields[$key], $where[$key] ) )
-								{
-								//	var_export( $fields[$key] );
-									continue 3; 
-								}
-							}
-							else
-							{
-								//	An array is matched if a single member is present.
-								if( ! is_array( $where[$key] ) && ! in_array( $where[$key], $fields[$key] ) )
-								{
-									//	only the record is array
-									continue 3; 
-								}
-								elseif( is_array( $where[$key] ) && ! array_intersect( $where[$key], $fields[$key]) )
-								{
-									//	both element are arrays
-								//	var_export( $fields[$key] );
-									continue 3; 
-								}
-							//	var_export( $where[$key] );
-							//	var_export( $fields[$key] );
-							//	continue 2; 
-							}
+                            $keyFound[$key] = true;
+                            if( ! self::where( $key, $fields[$key], $where, $options ) )
+                            {
+                                continue 3;
+                            }
 						}
+                        elseif( @$options['supplementary_data_key'] == $key && is_array( $fields[$key] ) )
+                        {
+                            foreach( $where as $eachKeyWhere => $valueWhere )
+                            {
+                                if( in_array( $eachKeyWhere, $allFields ) )
+                                {
+                                    //  this is supplementary search
+                                    //  don't check what is going to be checked later in normal search
+                                    continue;
+                                }
+                                if( array_key_exists( $eachKeyWhere, $fields[$key] ) )
+                                {
+                                    $keyFound[$key] = true;
+                                    if( ! self::where( $eachKeyWhere, $fields[$key][$eachKeyWhere], $where, $options ) )
+                                    {
+                                        continue 4;
+                                    }
+                                }
+                            }
+                        }
 					}
 				}
 				while( false );
-				
+    
 				//	Retrieve values from the foreign keys
-			//	$temp = array();
 				foreach( $this->getForeignKeys() as $foreignTable => $foreignKey )
 				{
 					if( $key != $foreignKey ){ continue; }
 					$foreignWhere = array( $foreignKey => $fields[$foreignKey] );
 					if( empty( $temp[serialize( $foreignWhere )] ) )
 					{ 
-				//		var_export( $foreignTable );
-				//		var_export( $foreignWhere );
 						$temp[serialize( $foreignWhere )] = self::selectForeign( $foreignTable, $foreignWhere );
 					}
 					$foreignData = $temp[serialize( $foreignWhere )];
@@ -334,7 +457,14 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				}
 
 			}
-	//		$rowId = $this->_useParentNamespace ? 'parent_' . $rowId : $rowId;
+        //   if( $where && empty( $keyFound ) && @$options['supplementary_data_key'] )
+            if( is_array( $where ) && count( $where ) !== count( $keyFound ) )
+            {
+                //  Trying strict matching
+                //  hopefully it will help solve select errors.
+                continue;
+            }
+
 			//	Introducing a way to manipulate content of the results on this level might allow 
 			//	us to be able to limit the number of times we need to loop through the results.
 			//	Saving time or resources? Let's confirm if this is useful for programmers.
@@ -348,7 +478,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			}
 			
 			//	If the filter wants to skip this record. It just need to switch the $fields to false;
-		//	var_export( $recordMatch );
 			$fields === false || ( $recordMatch === false && ! empty( $where['*'] ) ) ? null : ( $rows[$rowId] = $fields );
 
 			if( ! empty( $options['limit'] ) && count( $rows ) >= $options['limit'] )
@@ -363,11 +492,9 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			//	
 			 
 		}
-	//	var_export( $rows );
 	
 		// cache result
 		if( empty( $options['disable_cache'] ) && $this->cache ){ $this->setCache( $rows ); }
-	//	var_export( $rows );
 		return $rows;
 	}
 	
@@ -391,7 +518,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		$file = $this->getCacheFilename();
 	//	var_export( $file );
 		Ayoola_Doc::createDirectory( dirname( $file ) );
-		return @file_put_contents( $file, serialize( $result ) );
+		return @Ayoola_File::putContents( $file, serialize( $result ) );
     } 
 		
     /**
@@ -441,11 +568,19 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			//	PageCarton_Widget::v( $classCachePeriod + $fileMTime < $cTime );  
 
 			}
-			if( $cacheTime <= $fileMTime && ( ! $classCachePeriod || $classCachePeriod + $fileMTime <= $cTime ) )
+			if( $cacheTime <= $fileMTime && ( ! $classCachePeriod || ( $classCachePeriod + $fileMTime <= $cTime & stripos( $tableFile, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) !== false ) ) )
 			{ 
+             //   $filter = new Ayoola_Filter_Time();
+			//	var_export( $tableFile );
+			//	var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );
+			//	var_export( $filter->filter( $fileMTime ) );
+			//	var_export( $filter->filter( $cacheTime ) );
+			//	var_export( $classCachePeriod . '<br>' );
 			//	var_export( $cacheTime . '<br>' );
 			//	var_export( $fileMTime . '<br>' );  
-			//	var_export( $tableFile );
+			//	var_export( $cTime . '<br>' );  
+			//	var_export( $filter->filter( $classCachePeriod + $fileMTime ) );
+			//	var_export( $filter->filter( $cTime )  );
 			//	var_export( $cacheFile );
 				@unlink( $cacheFile ); 
 				break;

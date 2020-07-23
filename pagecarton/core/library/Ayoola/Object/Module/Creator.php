@@ -36,7 +36,7 @@ class Ayoola_Object_Module_Creator extends Ayoola_Object_Module_Abstract
     {
 		$this->createForm( 'Create Module', 'Create a new Module' );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->insertDb() ){ $this->setViewContent( 'Module Created', true ); }
+		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Module Created' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

@@ -56,32 +56,50 @@ class Application_Domain_Order_Process extends Application_Domain_Order_Abstract
 				case '100':
 					if( $this->insertDb( $values ) )
 					{ 
-						$this->setViewContent( '<div class="goodnews">' . $parameters['domain_name'] . ' added to your account</div>', true ); 
+						$this->setViewContent( '<div class="goodnews">' . sprintf( self::__( 'Domain name "%s" has been added to your account successfully.' ), $parameters['domain_name'] ) . '</div>', true  ); 
 					}
 					$domainArray = explode( '.', $values['domain_name'] );
 					$firstPart = array_shift( $domainArray );
 					$ext = implode( '.', $domainArray );
 					$apiInfo = Application_Domain_Registration_Api::getInstance()->select( null, array( 'extension' => $ext ) );
-	//		var_export( $ext );
-	//		var_export( $apiInfo );
+		//	var_export( $ext );
+		//	var_export( $apiInfo );
 					foreach( $apiInfo as $eachApi )
 					{
-						if( empty( $eachApi['class_name'] ) )
-						{
-							continue;
-						}
 						if( ! Ayoola_Loader::loadClass( $eachApi['class_name'] ) )
 						{ 
 							continue;
 						}
 						$class = $eachApi['class_name'];
-						$class = new $class( $parameters );
-			//			var_export( $this->getDbTable()->select() );  
-						$this->setViewContent( $class->view() ); 
-                        if( $this->getDbTable()->update( array( 'api' => $eachApi['class_name'] ), array( 'domain_name' => $values['domain_name'] ) ) )
-                        { 
+					//	$class = new $class( $parameters );
+                        if( $class::register( $values ) )
+                        {
+                            $this->setViewContent( '<div class="goodnews">' . sprintf( self::__( '%s has been activated successfully.' ), $parameters['domain_name'] ) . '</div>', true );
+                       //     var_export( $this->getDbData() );
+                            if( $this->getDbTable()->update( array( 'active' => 1, 'api' => $class ), array( 'domain_name' => $values['domain_name'] ) ) )
+                            { 
+                                
+                            }
+                            if( ! static::getInfo( $values ) )
+                            {
+                                return false;
+                            }
                             
+                            //	set default DNS
+                            $class::setDNS( $values );
+                            $class::setEmailForwarding( $values );
                         }
+                        else
+                        {
+                            $this->setViewContent( '<div class="goodnews">' . sprintf( self::__( '%s is currently being processed.' ), $parameters['domain_name'] ) . '</div>', true );
+                            if( $this->getDbTable()->update( array( 'api' => $eachApi['class_name'] ), array( 'domain_name' => $values['domain_name'] ) ) )
+                            { 
+                                
+                            }
+                        }
+                //			var_export( $this->getDbTable()->select() );  
+			//			var_export( $this->getDbTable()->select() );  
+					//	$this->setViewContent( $class->view() ); 
 						break;
 					}
 			
@@ -112,8 +130,8 @@ class Application_Domain_Order_Process extends Application_Domain_Order_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+            $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
 	}

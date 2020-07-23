@@ -36,7 +36,7 @@ class Application_Facebook_Like extends Application_Facebook_Abstract
 	public function init()
     {
 		self::load();
-		$this->setViewContent( '<div style="display:inline;" class="fb-like" data-href="' . $this->getUrl() . '" data-show-faces="false"  data-layout="button_count" data-width="2"></div>', true );
+		$this->setViewContent(  '' . self::__( '<div style="display:inline;" class="fb-like" data-href="' . $this->getUrl() . '" data-show-faces="false"  data-layout="button_count" data-width="2"></div>' ) . '', true  );
     } 
 	// END OF CLASS
 }

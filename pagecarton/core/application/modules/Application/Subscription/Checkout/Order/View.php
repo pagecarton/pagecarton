@@ -50,20 +50,20 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
 
 		#
-		$this->setViewContent( '<h2>Order number '  . $identifierData['order_id'] . '</h2>', true );
+		$this->setViewContent(  '' . self::__( '<h2>Order number '  . $identifierData['order_id'] . '</h2>' ) . '', true  );
 
 
-		$this->setViewContent( '<h3>Details</h3>' );
+		$this->setViewContent( self::__( '<h3>Details</h3>' ) );
 //		var_export( $identifierData );   
 //		var_export( $identifierData['order']['checkout_info'] );
 		$class = new Application_Subscription_Cart( array( 'cart' => $identifierData['order'] ) );
 		$this->setViewContent( $class->view() );
 		$data = Application_Subscription_Checkout_CheckoutOption::getInstance()->selectOne( null, array( 'checkoutoption_name' => $identifierData['order_api'] ) );
-		$this->setViewContent( '<h3>Payment Method</h3>' );
-		$this->setViewContent( '<div>'  . $data['checkoutoption_name'] . '<br> '  . $data['checkoutoption_logo'] . '</div>' );
-		$this->setViewContent( '<h3>Order  Status</h3>' );
-		$this->setViewContent( '<p>'  . self::$checkoutStages[$identifierData['order_status']] . '</p>' );
-		$this->setViewContent( '<h3>Customer Information</h3>' ); 
+		$this->setViewContent( self::__( '<h3>Payment Method</h3>' ) );
+		$this->setViewContent( self::__( '<div>'  . $data['checkoutoption_name'] . '<br> '  . $data['checkoutoption_logo'] . '</div>' ) );
+		$this->setViewContent( self::__( '<h3>Order  Status</h3>' ) );
+		$this->setViewContent( self::__( '<p>'  . self::$checkoutStages[$identifierData['order_status']] . '</p>' ) );
+		$this->setViewContent( self::__( '<h3>Customer Information</h3>' ) ); 
 	//	var_export( $identifierData );
 		$orderForm = Application_Settings_CompanyInfo::getSettings( 'Payments', 'order_form' );
 	//	var_export( $identifierData['order'] );
@@ -97,7 +97,7 @@ class Application_Subscription_Checkout_Order_View extends Application_Subscript
 //		var_export( $data );
 
 
-//		if( $this->updateDb() ){ $this->setViewContent( 'Order edited successfully', true ); }
+//		if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Order edited successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

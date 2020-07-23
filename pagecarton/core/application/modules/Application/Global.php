@@ -70,7 +70,7 @@ class Application_Global extends Ayoola_Abstract_Table
 							$myInfo['my_'.$k] = $v;
 							unset($myInfo[$k]);
 						}
-						Ayoola_Application::$GLOBAL += $myInfo;
+						$this->_objectTemplateValues += $myInfo;
 					}
 				}
 				catch( Exception $e )
@@ -79,6 +79,11 @@ class Application_Global extends Ayoola_Abstract_Table
 				//	var_export( $articleInfo['username'] );
 				}
 			}
+		}
+		if( $this->getParameter( 'include_request' ) )
+		{
+		    $this->_objectTemplateValues += $_REQUEST;
+        //    var_export( Ayoola_Application::$GLOBAL );
 		}
 	//	self::v( Ayoola_Application::$GLOBAL );
 	}

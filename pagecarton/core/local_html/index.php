@@ -9,7 +9,12 @@
 
 
 		//    look for this path prefix dynamically
-		$root = dirname( __FILE__ );
+        /**
+         * the document root of the server
+         **/
+        $cwd = dirname( __FILE__ ); //  Let doc_root default to current directory
+        $root = $cwd;
+        $docRoot = $cwd;
 		if( ! empty( $_SERVER['DOCUMENT_ROOT'] ) )
 		{
 			$docRoot = realpath( $_SERVER['DOCUMENT_ROOT'] ) ? : $_SERVER['DOCUMENT_ROOT'];
@@ -18,24 +23,44 @@
 				$root = $docRoot;
 			}
 		}
+
+	//	var_export( $home );
+	//	var_export( $docRoot );
+	//	var_export( $root );
+	//	var_export( $_SERVER['DOCUMENT_ROOT'] );
+	//	exit();
 		$dir = $oldDir = $baseAppPath = dirname( $root );
 		$currentDir = explode( '/', str_replace( array( '/', '\\' ), '/', dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
-		$tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $root, '/\\' ) ) );
+		$tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $docRoot, '/\\' ) ) );
+	//	var_export( $_SERVER['SCRIPT_FILENAME'] );
+	//	var_export( $tempDir );
 
 		$prefix = null;
 		if( $currentDir !== $tempDir )
 		{
+			//	var_export( $_SERVER['SCRIPT_FILENAME'] );
+		//	var_export( $currentDir );
+		//	var_export( $tempDir );
+		//	var_export( $prefix );
+
 			//	fix issue where prefix is /countdown and user is going to /countdown/countdown page
 			//	System seeing it like there is a directory called /countdown/countdown
 			//	workaround this here
 			$testCurrentDir = implode( DS, $currentDir );
+		//	var_export( is_link( $testCurrentDir ) );
+		//	var_export( is_link( dirname( $testCurrentDir ) ) );
 			while( is_link( $testCurrentDir ) && is_link( dirname( $testCurrentDir ) )  )
 			{
+				//	$filename = basename( $testCurrentDir );
+
 				$testCurrentDir = dirname( $testCurrentDir );
 				$currentDir = explode( DS, $testCurrentDir );
 			}
-			$prefix = array_diff( $currentDir, $tempDir );
 
+		//	var_export( $testCurrentDir );
+		//	var_export( $currentDir );
+		//	var_export( $tempDir );
+			$prefix = array_diff( $currentDir, $tempDir );
 
 			if( implode( '/', $currentDir ) === implode( '/', $tempDir + $prefix ) && trim( implode( '/', $prefix ) ) )
 			{
@@ -48,13 +73,23 @@
 			#	http://199.192.23.45/~nustreamscentre/pc_installer.php?stage=start
 			$prefix = $_SERVER['CONTEXT_PREFIX'] . $prefix;
 		}
+		
+		//		var_export( $tempDir );
+		//	var_export( $prefix );
+		//	EXIT();
 		defined( 'PATH_PREFIX' ) || define( 'PATH_PREFIX', $prefix );
 		defined( 'PC_PATH_PREFIX' ) || define( 'PC_PATH_PREFIX', $prefix );
-
+//	var_export( PATH_PREFIX );
 		$oldDir = dirname( $root );
 		$oldDir = realpath( $oldDir ) ? : $oldDir;
 
-        //	Check if the new compact dir is available, overides the old structure.
+			//	var_export( $_SERVER['DOCUMENT_ROOT'] );
+	//	var_export( dirname( $_SERVER['DOCUMENT_ROOT'] ) );
+	//	var_export( $oldDir );
+
+	//	exit();
+	
+		//	Check if the new compact dir is available, overides the old structure.
 		$newDir = $oldDir . DS . 'pagecarton';
 
 
@@ -134,7 +169,7 @@
 				//Ayoola should help provide more context to this (i.e. some error handler or
 				//so), instead of just pumping error to user's face :)
 				//TODO: have a cutom error handler (hint: Php Monolog library)
-				exit("Sorry, the server could not write to the your custom core directory: <i>{$pcConfig['PC_BASE']}</i>. Please provide the server with necessary permissions to this folder.");
+				exit( "Sorry, the server could not write to the your custom core directory: <i>{$pcConfig['PC_BASE']}</i>. Please provide the server with necessary permissions to this folder.");
 			}
 		}
 	//	var_export( $oldDir );

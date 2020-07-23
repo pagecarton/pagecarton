@@ -66,7 +66,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		if( ! $identifier = $this->getIdentifier() ){ return false; }
 		if( ! $cart = self::getStorage()->retrieve() )
 		{ 
-			return $this->setViewContent( '<p class="badnews">ERROR - You need to have an item in your shopping cart to confirm checkout</p>', true );
+			return $this->setViewContent(  '' . self::__( '<p class="badnews">ERROR - You need to have an item in your shopping cart to confirm checkout</p>' ) . '', true  );
 		}
 			
 	//	self::v( $cart );

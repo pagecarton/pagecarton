@@ -42,7 +42,7 @@ class Application_Database_Account_Delete extends Application_Database_Account_A
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
 			//	Delete 
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Database account deleted successfully.', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Database account deleted successfully.' ) . '', true  ); }
 		}
 		catch( Application_Database_Account_Exception $e ){ return false; }
     } 

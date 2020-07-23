@@ -67,14 +67,9 @@ abstract class Application_Article_Type_Abstract extends Application_Article_Abs
      * Form to display Download
      * 
      */
-	public static function getDownloadContent( $data )
+	public function getDownloadContent( $data )
     {
-		foreach( self::getHooks() as $class )
-		{
-			$class::hook( $this, __FUNCTION__, $data );
-		}
-	//	self::v( $data );
-		//				exit();  
+        self::setHook( $this, __FUNCTION__, $data );
 
 		if( ! self::isDownloadable( $data ) )
 		{
@@ -136,7 +131,7 @@ abstract class Application_Article_Type_Abstract extends Application_Article_Abs
 		{
 			case 'ENCRYPTION':
 			case 'JSON':
-				$this->_objectData = $data; 
+			//	$this->_objectData = $data; 
 			break;
 			default:
 				if( @$path )

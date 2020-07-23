@@ -53,7 +53,7 @@ class Ayoola_Access_Logout extends Ayoola_Access_Abstract
 		require_once 'Ayoola/Access.php'; 
 		$auth = new Ayoola_Access();
 		require_once 'Ayoola/Page.php'; 
-		$urlToGo = Ayoola_Page::getPreviousUrl() ? : ( '' . Ayoola_Application::getUrlPrefix() . '/account' );
+		$urlToGo = Ayoola_Page::getPreviousUrl() ? : ( '/account' );
 	//	var_export( $urlToGo );
 	//	exit( $urlToGo );
 		$userInfo = $auth->getUserInfo();
@@ -71,15 +71,19 @@ class Ayoola_Access_Logout extends Ayoola_Access_Abstract
      //   exit();
 		if( ! empty( $userInfo['logout_url'] ) )
         {
-            if( strpos( $urlToGo, ':' ) === false )
+            if( strpos( $urlToGo, '//' ) === false )
             {
-                $urlToGo = Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . Ayoola_Page::getDefaultDomain() . '' . $urlToGo;
+                $urlToGo = Ayoola_Page::getHomePageUrl() . $urlToGo;
             }
             header( 'Location: ' . $userInfo['logout_url'] . '?previous_url=' . $urlToGo );
 
         }
         else
         {
+            if( strpos( $urlToGo, '//' ) === false )
+            {
+                Ayoola_Page::getHomePageUrl() . '' . $urlToGo;
+            }
 		    header( 'Location: ' . $urlToGo );
         }
         exit();

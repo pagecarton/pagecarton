@@ -123,13 +123,13 @@ class Application_User_Verify_Email extends Application_User_Verify_Abstract
 				$mailInfo['from']  = "\"{$data['domainName']} Accounts\" <accounts@{$data['domainName']}>\r\n";
 
 				$mailInfo = self::replacePlaceholders( $mailInfo, $data );
-				$this->setViewContent( '<p>Thank you for taking your time to verify your e-mail address. Email verification has been completed successfully. Many more services have been unlocked for you.</p>	' );
+				$this->setViewContent( self::__( '<p>Thank you for taking your time to verify your e-mail address. Email verification has been completed successfully. Many more services have been unlocked for you.</p>	' ) );
 			//	var_export( $mailInfo );
 				@$this->sendMail( $mailInfo );
 				return true;
 			}
 			while( false );
-			$this->setViewContent( '<p>' . $message . '</p>' );
+			$this->setViewContent( self::__( '<p>' . $message . '</p>' ) );
 		//	var_export( 'j' );
 		}
 		catch( Exception $e ){ return false; }
@@ -164,7 +164,7 @@ class Application_User_Verify_Email extends Application_User_Verify_Abstract
 		switch( $database )
 		{
 			case 'cloud':
-				throw new Application_User_Verify_Exception( 'YOU CANNOT RESET VERIFICATION CODE FROM THIS APPLICATION.' );
+			//	throw new Application_User_Verify_Exception( 'YOU CANNOT RESET VERIFICATION CODE FROM THIS APPLICATION.' );
 			break;
 			case 'relational':
 				//	You are welcome

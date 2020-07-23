@@ -63,15 +63,15 @@ class Application_Domain_UserSiteManager_Creator extends Application_Profile_Cre
 		
 		$fullUrl = 'http://' . $values['profile_url'] . '.' . Ayoola_Application::getDomainName() . '';
 		
-        $this->setViewContent( '
+        $this->setViewContent(  self::__( '
         <div class="goodnews">
             New site created successfully. 
             <a href="' . $fullUrl . '/new-site-wizard" target="_blank">New Website Wizard</a>
-        </div>', true );
-//		$this->setViewContent( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' );  
+        </div>' ), true );
+//		$this->setViewContent( self::__( '<div class="" title="Share this new profile page with your contacts...">' . self::getShareLinks( $fullUrl ) . '</div>' ) );  
 		if( @$_GET['previous_url'] )
 		{
-			$this->setViewContent( '<div class="pc-info-notify"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' );
+			$this->setViewContent( self::__( '<div class="pc-info-notify"><a href="' . $_GET['previous_url'] . '"><img style="margin-right:0.5em;" alt="Edit" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-left-2x.png">Go Back</a></div>' ) );
 		}
 		$this->_objectData['profile_url'] = $values['profile_url']; 
 	//	$this->setViewContent(  );
@@ -79,7 +79,7 @@ class Application_Domain_UserSiteManager_Creator extends Application_Profile_Cre
 		
 		//	Notify Admin
 		$mailInfo['subject'] = 'New Site Created';
-		$mailInfo['body'] = 'A new site name has been created. You can view the new profile by clicking this link: ' . $fullUrl . '
+		$mailInfo['body'] = 'A new site has just been created. You can view the new site by clicking this link: ' . $fullUrl . '
 		';
 		Application_Log_View_General::log( array( 'type' => 'New Site', 'info' => array( $mailInfo ) ) );
 		try
@@ -90,11 +90,11 @@ class Application_Domain_UserSiteManager_Creator extends Application_Profile_Cre
 
 		$mailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
 		$mailInfo['subject'] = 'Your new site';
-		$mailInfo['body'] = 'You have successfully created your site. Next is to add content and build it.
-		
-		Site Homepage Link: ' . $fullUrl . '
-		Start building the site here: ' . $fullUrl . '/new-site-wizard
-		Manage your sites: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/account';
+        $mailInfo['body'] = 'You have successfully created a new site. Next thing to do is to add content and customize it into what you want. Kindly note the following important links.
+
+Site Homepage Link: ' . $fullUrl . '
+Start building the site here: ' . $fullUrl . '/new-site-wizard
+Manage all your sites: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '/account';
 		self::sendMail( $mailInfo );
 
 	}

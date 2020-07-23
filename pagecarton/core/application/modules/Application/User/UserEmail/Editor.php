@@ -38,11 +38,11 @@ class Application_User_UserEmail_Editor extends Application_User_UserEmail_Abstr
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
 		//	var_export( $data );
-			$this->createForm( 'Edit', 'Address Information', $data );
+			$this->createForm( 'Save', 'Address Information', $data );
 			$this->setViewContent( "<h4>Editing {$data['street_address']}</h4>" );
-		//	$this->setViewContent( '<p>You will need to verify this Credit/Debit card if edited.</p>' );
+		//	$this->setViewContent( self::__( '<p>You will need to verify this Credit/Debit card if edited.</p>' ) );
 			$this->setViewContent( $this->getForm()->view() );
-			if( $this->updateDb() ){ $this->setViewContent( 'Address information edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Address information edited successfully' ) . '', true  ); }
 		}
 		catch( Application_User_UserEmail_Exception $e ){ return false; }
     } 

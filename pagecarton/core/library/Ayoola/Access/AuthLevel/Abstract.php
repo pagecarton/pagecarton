@@ -40,7 +40,7 @@ abstract class Ayoola_Access_AuthLevel_Abstract extends Ayoola_Abstract_Table
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 99, 98 );
+	protected static $_accessLevel = array( 99 );
 	
     /**
      * Default Database Table

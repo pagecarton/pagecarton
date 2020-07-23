@@ -40,11 +40,6 @@ class Application_CommentBox_Table_List extends Application_CommentBox_Table_Abs
 		$list->pageName = $this->getObjectName();
 		$list->listTitle = self::getObjectTitle();
 		$list->setData( $this->getDbData() );
-		$list->setListOptions( 
-								array( 
-							//			'Sub Domains' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_SubDomainList/\' );" title="">Sub Domains</a>',    
-									) 
-							);
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No data added to this table yet.' );
 		

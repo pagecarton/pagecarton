@@ -40,7 +40,7 @@ class Ayoola_Object_Creator extends Ayoola_Object_Abstract
 		if( ! $values = $this->getForm()->getValues() ){ return false; } 
 		$filter = new Ayoola_Filter_Name();
 		$values['object_name'] = strtolower( $filter->filter( $values['class_name'] ) );
-		if( $this->insertDb( $values ) ){ $this->setViewContent( '<p class="boxednews goodnews">Widget Created</p>', true ); }
+		if( $this->insertDb( $values ) ){ $this->setViewContent(  '' . self::__( '<p class="boxednews goodnews">Widget Created</p>' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

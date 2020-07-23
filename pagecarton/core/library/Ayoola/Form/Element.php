@@ -134,9 +134,11 @@ class Ayoola_Form_Element extends Ayoola_Form
     //    $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $element['name'] ) );	
 			
 		$element['real_name'] = $element['name'];
-		@$element['title'] = trim( $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) ) , ':' );
+		@$element['title'] = trim( $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) ), ':' );
 		@$element['placeholder'] = ( $element['placeholder'] ? : $element['label'] ) ? : ucwords( str_replace( '_', ' ', $element['name'] ) );
 		$element['hashed_name'] = self::hashElementName( $element['name'] );
+    //    var_export( $element['title'] );
+    //    var_export( $element['placeholder'] );
 		if( $this->hashElementName )
 		{
 			$element['name'] = $element['hashed_name'];
@@ -148,7 +150,9 @@ class Ayoola_Form_Element extends Ayoola_Form
 		//	set value to GET or POST equivalent if available
 		if( $element['type'] != 'submit' )
 		{
+        //    var_export( $element['value'] );
 			@$element['value'] = ! is_null( $element['value'] ) ? $element['value'] : Ayoola_Form::getDefaultValues( $element['real_name'] );
+         //   var_export( $element['value'] );
 		}
 	//	self::v( $element['value'] );
 		
@@ -204,7 +208,12 @@ class Ayoola_Form_Element extends Ayoola_Form
 				unset( $element['type'] );
 			}
 			$element['name'] = @$element['multiple'] ? ( $element['name'] . '[]' ) : $element['name']; 
-			unset( $element['multiple'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
+            unset( $element['multiple'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
+            if( ! empty( $values ) && empty( $values['html'] ) )
+            {
+            //    var_export( $values );
+                $values = self::__( $values );
+            }
 			$markup .= $this->$method( $element, $values );
 		}
 		$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;	
@@ -219,10 +228,15 @@ class Ayoola_Form_Element extends Ayoola_Form
 			case 'addinputtext':
 			case 'addtextarea':
 			case 'addselect':
+			case 'addcheckbox':
+			case 'addradio':
+			case 'addselectmultiple':
 			//	self::v( $method );
 				//	Set Element ID and Label to default if undeclared
-				$element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $realName ) );	
-			break;
+                $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $realName ) );
+                $element['title'] = self::__( trim( $element['title'], ': ' ) );
+                $element['placeholder'] = self::__( $element['placeholder'] );
+            break;
 			case 'addhidden':
 				$element['label'] = null;	
 			break;
@@ -233,6 +247,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
+            $element['label'] = self::__( $element['label'] );
 			@$markup = "<label style=\"{$element['label_style']}\" for=\"{$element['name']}\">{$element['label']}</label>{$markup}";
 		}
 		if( strtolower( $method ) == 'adddocument' )
@@ -403,9 +418,11 @@ class Ayoola_Form_Element extends Ayoola_Form
      */
     public function getPostHtml()
     {
-		$html = null;
-		$html .= $this->allowDuplication ? "<div><a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "Duplicate this fieldset" ) . "' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.parentNode.cloneNode( true ); var fieldtags= [ \"input\", \"textarea\", \"select\"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= \"\"; } } this.parentNode.parentNode.parentNode.insertBefore( fieldset, this.parentNode.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name=\"\"; ayoola.div.refreshVisibleCounter( \"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['add'] ? : " + " ) . "</a>\n" : null; 
-		$html .= $this->allowDuplication ? "<a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "Remove this fieldset" ) . "' onClick='confirm( \"Delete all the elements in these fieldset?\") ? this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode ) : null; ayoola.div.refreshVisibleCounter(\"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['remove'] ? : " - " ) . "</a></div>\n" : null; 
+        $html = null;
+        @$this->duplicationData['add'] = "" . self::__( $this->duplicationData['add'] ) . "";
+        @$this->duplicationData['remove'] = "" . self::__( $this->duplicationData['remove'] ) . "";
+		$html .= $this->allowDuplication ? "<div><a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "" . self::__( 'Duplicate this fieldset' ) . "" ) . "' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.parentNode.cloneNode( true ); var fieldtags= [ \"input\", \"textarea\", \"select\"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= \"\"; } } this.parentNode.parentNode.parentNode.insertBefore( fieldset, this.parentNode.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name=\"\"; ayoola.div.refreshVisibleCounter( \"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['add'] ? : " + " ) . "</a>\n" : null; 
+		$html .= $this->allowDuplication ? "<a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "" . self::__( 'Remove this fieldset' ) . "" ) . "' onClick='confirm( \"" . self::__( 'Delete all the fields in this set' ) . "\") ? this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode ) : null; ayoola.div.refreshVisibleCounter(\"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['remove'] ? : " - " ) . "</a></div>\n" : null; 
 //		$html .= ! @$this->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "</{$fieldsetTag}>\n" : null;
 		$html .= @$this->container ? "</{$this->container}>\n" : null;
 		return $html;
@@ -498,6 +515,113 @@ class Ayoola_Form_Element extends Ayoola_Form
 		 return $html;
     }
 	
+    public function addDatetime( array & $element )
+    {
+    //    var_export( $element );
+        $values = array();
+        $elementName = $this->_names[trim( $element['name'], '[]' )]['real_name'];
+        if( ! @$defaultValue = $element['value'] )
+        {
+            $defaultValue = date( "Y-m-d H:i:s" );
+        }
+        else
+        {
+            $defaultValue = date( "Y-m-d H:i:s", $defaultValue );
+        }
+        $defaultValueDigits = str_replace( array( '-', ' ', ':' ), '', $defaultValue );
+        $values[$elementName . '_year'] = $defaultValueDigits[0] . $defaultValueDigits[1] . $defaultValueDigits[2] . $defaultValueDigits[3];
+        $values[$elementName . '_month'] = $defaultValueDigits[4] . $defaultValueDigits[5];
+        $values[$elementName . '_day'] = $defaultValueDigits[6] . $defaultValueDigits[7];
+        $values[$elementName . '_hours'] = $defaultValueDigits[8] . $defaultValueDigits[9];
+        $values[$elementName . '_minutes'] = $defaultValueDigits[10] . $defaultValueDigits[11];
+        //	self::v( $defaultValue );       
+        
+        //	Month
+        $optionsX = array_combine( range( 1, 12 ), array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ) );
+        $monthValue = intval( @strlen( $values[$elementName . '_month'] ) === 1 ? ( '0' . @$values[$elementName . '_month'] ) : @$values[$elementName . '_month'] );
+        $monthValue = intval( $monthValue ?  : $this->getGlobalValue( $elementName . '_month' ) );
+    //	var_export( $monthValue );
+    //	var_export( $this->getGlobalValue( $elementName . '_month' ) );
+        $this->addElement( array( 'name' => $elementName . '_month', 'label' => $element['label'], 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $monthValue ), array( 'Month' ) + $optionsX ); 
+        $this->addRequirement( $elementName . '_month', array( 'InArray' => array_keys( $optionsX ) ) );
+        if( strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 )
+        {
+            $this->addFilter( $elementName . '_month', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_month' ) ) );
+        }
+        
+        //	Day
+        $optionsX = range( 1, 31 );
+        $optionsX = array_combine( $optionsX, $optionsX );
+        $DayValue = intval( @strlen( $values[$elementName . '_day'] ) === 1 ? ( '0' . @$values[$elementName . '_day'] ) : @$values[$elementName . '_day'] );
+        $DayValue = intval( $DayValue ?  : $this->getGlobalValue( $elementName . '_day' ) );
+        $this->addElement( array( 'name' => $elementName . '_day', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $DayValue ), array( 'Day' ) + $optionsX );
+        $this->addRequirement( $elementName . '_day', array( 'InArray' => array_keys( $optionsX ) ) );
+        if( strlen( $this->getGlobalValue( $elementName . '_day' ) ) === 1 )
+        {
+            $this->addFilter( $elementName . '_day', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_day' ) ) );
+        }
+        
+        //	Year
+        //	10 years and 10 years after todays date
+        $optionsX = range( date( 'Y' ) + 100, date( 'Y' ) - 100 );
+        $optionsX = array_combine( $optionsX, $optionsX );
+        $this->addElement( array( 'name' => $elementName . '_year', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values[$elementName . '_year'] ? : '' ), array( 'Year' ) + $optionsX );
+        $this->addRequirement( $elementName . '_year', array( 'InArray' => array_keys( $optionsX ) ) );
+        $date = $this->getGlobalValue( $elementName . '_year' );
+        $date .= '-';
+        $date .= strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_month' ) ) : $this->getGlobalValue( $elementName . '_month' );
+        $date .= '-';
+        $date .= strlen( $this->getGlobalValue( $elementName . '_day' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_day' ) ) : $this->getGlobalValue( $elementName . '_day' );
+        $this->addElement( array( 'name' => $elementName . '_date', 'label' => 'Timestamp', 'placeholder' => 'YYYY-MM-DD HH:MM', 'type' => 'Hidden', 'value' => @$values[$elementName . '_date'] ) );
+        $this->addFilter( $elementName . '_date', array( 'DefiniteValue' => $date ) );
+        $this->addFilter( $elementName, array( 'DefiniteValue' => $date ) );
+    //  if( 'datetime' == $formInfo['element_type'][$i] )
+        {
+            $optionsX = range( 0, 23 );
+            foreach( $optionsX as $eachKey => $each )
+            {
+                if( strlen( $optionsX[$eachKey] ) < 2 )  
+                {
+                    $optionsX[$eachKey] = '0' . $optionsX[$eachKey];
+                }
+            }
+            $this->addElement( array( 'name' => $elementName . '_hours', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_hours'] ), array( 'Hour' ) +  array_combine( $optionsX, $optionsX ) );
+            $this->addRequirement( $elementName . '_hours', array( 'InArray' => array_keys( $optionsX ) ) );
+            $optionsX = range( 0, 59 );
+            foreach( $optionsX as $eachKey => $each )
+            {
+                if( strlen( $optionsX[$eachKey] ) < 2 )    
+                {
+                    $optionsX[$eachKey] = '0' . $optionsX[$eachKey];
+                }
+            }
+            $this->addElement( array( 'name' => $elementName . '_minutes', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_minutes'] ), array( 'Minute' ) + array_combine( $optionsX, $optionsX ) );
+            $this->addRequirement( $elementName . '_minutes', array( 'InArray' => array_keys( $optionsX ) ) );
+
+            //	datetime combined
+            $datetime = $date;
+            $datetime .= ' ';
+            $datetime .= strlen( $this->getGlobalValue( $elementName . '_hours' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_hours' ) ) : $this->getGlobalValue( $elementName . '_hours' );
+            $datetime .= ':';
+            $datetime .= strlen( $this->getGlobalValue( $elementName . '_minutes' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_minutes' ) ) : $this->getGlobalValue( $elementName . '_minutes' );
+        //    var_export( $date );
+        //    var_export( $datetime );
+        //    var_export( $elementName );
+            $this->addElement( array( 'name' => $elementName . '', 'type' => 'Hidden', 'value' => @$values[$elementName . ''] ) );
+            $this->addElement( array( 'name' => $elementName . '_datetime', 'type' => 'Hidden', 'value' => @$values[$elementName . '_datetime'] ) );
+            $this->addFilter( $elementName . '_datetime', array( 'DefiniteValue' => $datetime ) );
+            $timestamp = strtotime( $datetime );
+            $this->addElement( array( 'name' => $elementName . '_timestamp', 'type' => 'Hidden', 'value' => @$values[$elementName . '_timestamp'] ) );
+            $this->addFilter( $elementName . '_timestamp', array( 'DefiniteValue' => $timestamp ) );
+            $this->addFilter( $elementName, array( 'DefiniteValue' => $timestamp ) );
+        //    $this->addFilter( $elementName,  );
+        //    var_export( $datetime );
+        }
+
+        $element['label'] = null;
+        return '';
+    }
+	
     public function addDocument(array $element, $values = array() )
     {
 	//	var_export( $element );
@@ -519,7 +643,6 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 			$link .= '&unique_id=' . $uniqueIDForElement;
 		}
-//		$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . $element['name'];
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 		
 		//	Need to be up so as to serve the JS
@@ -575,15 +698,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				{
 					@$each = array_shift( $valuesForPreview );
 					$valuePreview = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . @$each . '&crop=1&max_width=64&max_height=64';
-
-			//		var_export( $element['value'] );
-					
-/*					$html .= '
-					<span class="" style="max-height:50px;display:inline-block;vertical-align:middle;" onclick="var a = this.parentNode.getElementsByTagName( \'input\' ); for( var b = 0; b < a.length; b++ ){var c = a[b].type; if( c == \'text\' ){ a[b].type = \'hidden\' }else{ a[b].type = \'text\'; }  a[b].style.display=\'\';  a[b].focus();  a[b].click(); }" title="The preview thumbnail image for the uploaded file will show here...">    
-						<img onerror="this.src=\'' . $defaultPix . '\';this.onerror=\'/\';" alt="" style="max-height:50px" name="' . $uniqueIDForElement . '_preview_zone_image' . '" src="' . ( @$element['data-previous-url'] ? : ( ( @$each && is_scalar( $each ) ? $valuePreview : Ayoola_Form::getGlobalValue( $element['name'] ) ) ? : '' . $defaultPix . '' ) ) . '"  class="" onClick=""  > 
-					</span>
-					';
-*/				}
+				}
 				while( $valuesForPreview );
 				if( @$element['data-allow_base64'] )
 				{
@@ -594,24 +709,13 @@ class Ayoola_Form_Element extends Ayoola_Form
  				$html .= '<div style="">';
 				if( @$element['data-allow_base64']  )
 				{ 
-/*				//	if( @$element['data-allow_base64'] )
-					{
-						$html .= '
-						<span title="Click to upload new photo" style="cursor: pointer;max-height:100px;vertical-align:middle;display:inline-block;" class="" onClick="ayoola.image.formElement = this; ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\'; ayoola.image.fieldNameValue = \'url\'; ayoola.image.formElement = this.parentNode.getElementsByTagName( \'input\' ).item(0); ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
-							<img  style="max-height:32px;" alt="Upload" src="' . Ayoola_Application::getUrlPrefix() . '/open-iconic/png/arrow-circle-top-8x.png" >
-						</span>
-						'; 
-					}
-				//	else
-					{  
-					//	return ;
-					}
-*/				}
+
+				}
 				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ? : 98 )  )
 				{
 					$html .= '
-					<a  title="Upload new file" style="cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
-						<i class="fa fa-arrow-up pc_give_space"></i>	Upload
+					<a  title="' . self::__( 'Upload new file' ) . '" style="padding: 2px;font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
+                    ' . self::__( 'Upload' ) . ' <i class="fa fa-arrow-up" style="margin-left:1em;"></i>
 					</a>
 					'; 
 				}
@@ -621,8 +725,8 @@ class Ayoola_Form_Element extends Ayoola_Form
  				if( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_viewers'] ? : 98 ) && ! @$element['data-allow_base64'] )
 				{ 
 					$html .= '
-					<a title="Browse Existing files on site" style="cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
-					<i class="fa fa-eye pc_give_space"></i>	Browse
+					<a title="' . self::__( 'Browse existing files on the site' ) . '" style="padding: 2px;font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
+                    ' . self::__( 'Browse' ) . ' <i class="fa fa-eye" style="margin-left:1em;"></i>
 					</a>
 					
 					'; 
@@ -792,7 +896,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		$html .= self::$_placeholders['badnews'];
 		$counter = 0;
 		//		var_export( $element['value'] );
-       	$html .= '<div style="display:inline-block;">';
+       	$html .= '<div style="display:inline-block; ' . $element['style'] . '">';
 		foreach( $values as $value => $label )
 		{ 
 		//	var_export( $label );
@@ -831,7 +935,15 @@ class Ayoola_Form_Element extends Ayoola_Form
 		$html .= "<span>\n";
 	//	var_export( $values );
 	//	var_export( $element['value'] );
-		$values = array_unique( ( $values ? : array() ) + ( $element['value'] ? : array() ) ); 
+    //	var_export( $element['label'] );
+        try
+        {
+            $values = array_unique( ( $values ? : array() ) + ( $element['value'] ? : array() ) ); 
+        }
+        catch( Error $e )
+        {
+
+        }
 	//	var_export( $values );
 		if( $this->placeholderInPlaceOfLabel || ! trim( $element['label'] ) )
 		{
@@ -1057,7 +1169,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 	
     public function addLegend( $legend )
     {
-		$this->_legend = (string) $legend;
+		$this->_legend = '' . self::__( $legend ) . '';
     }
     public function getLegend(  )
     {

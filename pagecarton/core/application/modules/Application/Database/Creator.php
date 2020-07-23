@@ -39,7 +39,7 @@ class Application_Database_Creator extends Application_Database_Abstract
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		if( ! $this->insertDb() ){ return $this->setViewContent( $this->getForm()->view(), true ); }
 		self::setDefaultDatabase( $values );
-		$this->setViewContent( '<p>Database created successfully.</p>', true );
+		$this->setViewContent(  '' . self::__( '<p>Database created successfully.</p>' ) . '', true  );
 	} 
 	// END OF CLASS
 }

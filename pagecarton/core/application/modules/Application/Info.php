@@ -80,7 +80,7 @@ class Application_Info extends Ayoola_Abstract_Playable
 		$row  = $table->appendChild( $row );
 		
 		//	Show the name of the Info
-		$data = $xml->createHTMLElement( 'th', 'PageCarton Version' );
+		$data = $xml->createHTMLElement( 'th', '' . self::__( 'PageCarton Version' ) . '' );
 	//	$data->setAttribute( 'colspan', 2 );
 		$data  = $row->appendChild( $data );
 		
@@ -89,10 +89,11 @@ class Application_Info extends Ayoola_Abstract_Playable
 		$installationInfo = unserialize( $installationInfo );
 		$installationInfo = @$installationInfo['backup_name'] ? : filemtime( __FILE__ );
 		
-		$data = $xml->createHTMLElement( 'td', 'PageCarton ' . PageCarton::VERSION . ' ( ' . $installationInfo . ' )' );
+		$data = $xml->createHTMLElement( 'td', '' . self::__( 'PageCarton' ) . ' ' . PageCarton::VERSION . ' ( ' . $installationInfo . ' )' );
 		$data  = $row->appendChild( $data );
 		$backup = new Application_Backup_Backup();
-		$backup = array_pop( $backup->select() );
+		$backup = $backup->select();
+		$backup = array_pop( $backup );
 		$filterTime = new Ayoola_Filter_Time();
 		if( ! empty( $backup['backup_creation_date'] ) )
 		{
@@ -100,7 +101,7 @@ class Application_Info extends Ayoola_Abstract_Playable
 		//	$filterTime = new Ayoola_Filter_Time();
 			$backup = $filterTime->filter( $backup );
 		}
-		else{ $backup = 'NEVER'; }
+		else{ $backup = '' . self::__( 'Never' ) . ''; }
 		$users = 0;
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
@@ -145,14 +146,14 @@ class Application_Info extends Ayoola_Abstract_Playable
  */		
 			$options = array(
 							'Default Domain' => Ayoola_Page::getDefaultDomain(), 
-							'Last Backup' => "<a href='" . Ayoola_Application::getUrlPrefix() . "/ayoola/backup/'>$backup</a>", 
-							'Total Signed Up Accounts' => "<a href='" . Ayoola_Application::getUrlPrefix() . "/ayoola/accounts/'>$users</a>", 
+							'Last Backup' => "", 
+							'Total Signed Up Accounts' => "", 
 					//		'Disk Space Used' => $diskspace . ' (' . $this->getObjectStorage( array( 'id' => 'file_count', 'device' => 'File', 'time_out' => 86400, ) )->retrieve() . ' files; ' . $filterTime->filter( $this->getObjectStorage( array( 'id' => 'time', 'device' => 'File', 'time_out' => 86400, ) )->retrieve() ) . ') ',
 							'Upgrade' => '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Upgrade/" class="pc-btn pc-bg-color pc-btn-small">Upgrade PageCarton</a>'
 						);
 						
 		$dataX['domain'] = Ayoola_Page::getDefaultDomain();
-		$dataX['homepage'] = $dataX['domain'] . Ayoola_Application::getUrlPrefix();
+		$dataX['homepage'] = Ayoola_Page::getHomePageUrl();
 		$dataX['last_backup'] = $backup;
 		$dataX['user_count'] = $users;
 		$dataX['pagecarton_version'] = PageCarton::VERSION;
@@ -184,11 +185,15 @@ class Application_Info extends Ayoola_Abstract_Playable
 		
 		$this->_objectData = $dataX;
 		$this->_objectTemplateValues = $dataX;
-		
+/* 		
 		foreach( $options as $key => $value )
 		{
-			$row = $xml->createElement( 'tr' );
-			$row  = $table->appendChild( $row );
+            $row = $xml->createElement( 'tr' );
+            if( ! $row  = $table->appendChild( $row ) )
+            {
+                continue;
+            }
+			
 			$data = $xml->createElement( 'th', $key );
 		//	$data->setAttribute( 'colspan', 1 );
 			$data  = $row->appendChild( $data );
@@ -196,7 +201,7 @@ class Application_Info extends Ayoola_Abstract_Playable
 		//	$data->setAttribute( 'colspan', 1 );
 			$data  = $row->appendChild( $data );
 		}
-		return $xml;
+ */		return $xml;
 	}
 	  
     /**

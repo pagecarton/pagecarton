@@ -51,8 +51,8 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 		try
 		{ 
 			$this->createForm( 'Reset Password' );
-	//		$this->setViewContent( '<h3>Reset Password</h3>' );
-			$this->setViewContent( '<p class="pc-notify-info">Fill the following information to reset your password</p>' );
+	//		$this->setViewContent( self::__( '<h3>Reset Password</h3>' ) );
+			$this->setViewContent( self::__( '<p class="pc-notify-info">Fill the following information to reset your password</p>' ) );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
@@ -60,13 +60,15 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 			
 			
 			//	First seek in the local flatfile
-			$table = Ayoola_Access_LocalUser::getInstance();
+            $table = "Ayoola_Access_LocalUser";
+            $table = $table::getInstance( $table::SCOPE_PROTECTED );
+            $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PROTECTED );
+            $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PROTECTED );
 			if( $info = $table->selectOne( null, $identifier ) )
 			{
 				if( $info['user_information'] )  
 				{
 					$info = $info['user_information'];
-				//	$requiredFields = array( 'firstname', 'lastname', 'sex', 'birth_date' );
 					$requiredFields = array();
 					
 					//	Super users cant do this...
@@ -74,7 +76,7 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 					{
 						$this->getForm()->setBadnews( 'Invalid Request' );
 						$this->setViewContent( $this->getForm()->view(), true );
-						return false;
+						$info = array();
 					}
 					
 					foreach( $requiredFields as $each )
@@ -84,7 +86,7 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 					//		$this->getForm()->setBadnews( 'Invalid Information - ' . $each . ' - ' . $info[$each] . ' - ' . $values[$each] );
 							$this->getForm()->setBadnews( 'Invalid Information' );
 							$this->setViewContent( $this->getForm()->view(), true );
-							return false;
+                            $info = array();
 						}
 					}
 				}
@@ -145,9 +147,10 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 				{
 					if( $info )
 					{
+                        $informationToSend['email'] = $info['email'];
 						$mailInfo = array( 'to' => $info['email'] );
 						$mailInfo['body'] = null;
-						$mailInfo['subject'] = 'Account Information Update';
+						$mailInfo['subject'] = 'Password Update';
 						foreach( $informationToSend as $key => $value )
 						{
 							$mailInfo['body'] .= ucfirst( $key ) . ': ' . $value . "\r\n";
@@ -157,18 +160,22 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 						$data['result'] = 'success';
 						Application_Log_View_ForgetUsernameOrPassword::log( $data );
 
-				//			var_export( $mailInfo );
+						//	var_export( $info );
+						//	var_export( $mailInfo );
 						$this->sendMail( $mailInfo );
 						$info = array_merge( $info, $informationToUpdate );
 						
 						unset( $values['password2'] );
-				//		var_export( $informationToSend );
+					//	var_export( $info );
 						if( Ayoola_Access_Localize::info( $info ) )
 						{
-							$this->setViewContent( 'Password reset was successful; a new password has been sent to your email address.', true );
-						//	$this->setViewContent( '<div class="boxednews goodnews">User account edited successfully</div>', true );
+							$this->setViewContent(  '' . sprintf( self::__( 'Password reset was successful; a new password has been sent to your email address %s. If you cannot find it in the inbox, kindly check the SPAM or JUNK folder of the mailbox.' ), $mailInfo['to'] ) . '', true  );
 						}
-					}
+                    }
+                    else
+                    {
+                        $this->setViewContent(  '<div class="badnews">' . sprintf( self::__( 'Password for this account could not be reset through this method. Kindly contact one of the technical administrators of the website for help to retrieve your account.' ) ) . '</div>', true  );
+                    }
 				}
 				catch( Exception $e )
 				{
@@ -179,8 +186,7 @@ class Application_User_Help_ForgotUsernameOrPassword extends Application_User_He
 				return true;
 			}
 			while( false );
-			$this->getForm()->setBadnews( 'Invalid Information. Please try again.' );
-			$this->setViewContent( $this->getForm()->view(), true );
+            $this->setViewContent(  '' . sprintf( self::__( 'Password for %s could not be reset through this method. Kindly contact one of the technical administrators of the website for help to retrieve your account.' ), $mailInfo['to'] ) . '', true  );
 			
 			//	Log Failure
 			$values['result'] = 'failed';

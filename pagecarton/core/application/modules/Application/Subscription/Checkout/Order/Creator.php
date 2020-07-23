@@ -36,7 +36,7 @@ class Application_Subscription_Checkout_Order_Creator extends Application_Subscr
     {
 		$this->createForm( 'Create an Order', 'Create a new Order' );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->insertDb() ){ $this->setViewContent( 'Order created successfully', true ); }
+		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Order created successfully' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

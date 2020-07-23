@@ -44,12 +44,12 @@ class Application_Domain_Editor extends Application_Domain_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['domain_name'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['domain_name'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			$this->resetDefaultDomain();
 			if( $this->updateDb() )
 			{ 
-				$this->setViewContent( 'Domain edited successfully', true );   
+				$this->setViewContent(  '' . self::__( 'Domain edited successfully' ) . '', true  );   
 				
 				//	clear domain cache
 				Ayoola_File_Storage::purgeDomain( $data['domain_name'] );

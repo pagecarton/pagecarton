@@ -44,13 +44,13 @@ class OpenSSL_Delete extends OpenSSL_Abstract
 		//	var_export( $values );
 			if( $this->deleteDb( false ) )
 			{ 
-				$this->setViewContent( 'Encryption keys deleted successfully', true ); 
+				$this->setViewContent(  '' . self::__( 'Encryption keys deleted successfully' ) . '', true  ); 
 			} 
 		}
 		catch( Exception $e )
 		{ 
 		//	return false; 
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
     } 
 }

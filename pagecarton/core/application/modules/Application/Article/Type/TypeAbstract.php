@@ -109,21 +109,16 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 
         $options = 	array( 
                             '' => 'Select Feature', 
-                            'article' => 'Article', 
-                            'video' => 'Video Embed URL', 
-                            'download' => 'Download URL', 
-                            'product' => 'Price', 
                             'multi-price' => 'Multiple Pricing', 
                             'subscription-options' => 'Subscription Options', 
                             'datetime' => 'Date and Time', 
                             'location' => 'Location', 
                             'audio' => 'Play Audio', 
                             'gallery' => 'Gallery Images', 
-                            'category' => 'Categories', 
                             'privacy' => 'Privacy Options', 
                             'description' => 'Short Description', 
                             'cover-photo' => 'Cover Photo', 
-                            'category' => 'Categories', 
+                            'category' => 'Categories',  
                             );
 
 
@@ -141,7 +136,7 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 			$featureFieldset->duplicationData = array( 'add' => '+ Add feature', 'remove' => '- Remove feature', 'counter' => 'preset_counter', );
 			$featureFieldset->container = 'span';
 		
-			$featureFieldset->addElement( array( 'name' => 'post_type_options', 'label' => '', 'style' => 'width:45%;', 'type' => 'Select', 'multiple' => 'multiple', 'value' => @$values['post_type_options'][$i], ), $options ); 
+			$featureFieldset->addElement( array( 'name' => 'post_type_options', 'label' => '', 'style' => 'width:45%;', 'type' => 'Select', 'multiple' => 'multiple', 'value' => @$values['post_type_options'][$i], ), $options + self::$presetTypes ); 
 			$featureFieldset->addElement( array( 'name' => 'post_type_options_name', 'label' => '', 'placeholder' => 'Field name suffix (optional)', 'style' => 'width:45%;', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['post_type_options_name'][$i], ) ); 
 
 			$i++;

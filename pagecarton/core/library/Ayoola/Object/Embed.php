@@ -62,6 +62,12 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 	protected static $_widgets;
 	
     /**
+     * 
+     * @var array
+     */
+	protected static $_embedInstances = array();
+	
+    /**
      * The method does the whole Class Process
      * 
      */
@@ -75,10 +81,19 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			//	One way or the other, leaving this causes a situation 
 			//	where classes are played twice
 			unset( $this->_parameter['editable'] );
+		//	unset( $this->_parameter['pagewidget_id'] );
 			unset( $this->_parameter['view'] );
 
-			//	don't run when page editor is invoked.
-	//		var_export( $this->getParameter() );
+            //	don't run when page editor is invoked.
+        //    if( $this->getParameter( 'pagewidget_id' ) )
+        //    throw new Ayoola_Exception();
+            $id = md5( serialize( $this->getParameter() ) );
+            if( in_array( $id, static::$_embedInstances ) )
+            {
+            //    return false;
+            }
+            static::$_embedInstances[] = $id;
+        //   var_export( $this->getParameter() );
 
 			//	var_Export( $classes );
 			$this->initiated = false; //	compatibility
@@ -88,29 +103,23 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				case null:
 				case false:
 				default:
-				//	var_export( $classes);
 					if( ! is_array( $classes ) )
 					{
 						$classes = array_map( 'trim', explode( ',', strip_tags( $classes ) ) );
 					}
-				//	self::v( $classes);
 					foreach( $classes as $class )
 					{
 						if( ! $class ){ continue; }
+						if( $class === __CLASS__ ){ continue; }
 						if( in_array( $class, self::$_ignoredClasses ) ){ continue; }
-				//		var_export( $class );
-				//		var_export( self::$_ignoredClasses );
-					//	$parameters = 
 						$this->play( $class, $this->getParameter() );
-					//	$this->play( $class ); 
 					}
-				//	$this->clearParametersThatMayBeDuplicated();
 				break;
 			}
 		}
 		catch( Ayoola_Exception $e )
 		{ 
-		//	echo $e->getMessage(); 
+			echo $e->getTraceAsString(); 
 		}
     } 
 	
@@ -249,12 +258,40 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 	
     /**
 	 * 
+	 * Verifies if a class is valid DB table
+	 * 		
+     * @param mixed Object
+     * @return bool
+     */
+    public static function isXMLTable( $className )
+	{
+		if( ! Ayoola_Loader::loadClass( $className ) )
+		{
+			return false;
+		}
+		if( ! method_exists( $className, 'insert' ) )
+		{
+			return false;
+		}
+		if( ! method_exists( $className, 'select' ) )
+		{
+			return false;
+		}
+		if( ! is_subclass_of( $className, 'Ayoola_Dbase_Table_Abstract_Xml' ) )
+		{
+			return false;
+		}
+		return true;
+	}
+	
+    /**
+	 * 
 	 * 		
      * @return array widgets
      */
-    public static function getWidgets()
+    public static function getWidgets( $deepCheck = true, array $settings = null )
 	{
-		$keyZ = md5( __METHOD__ . serialize( func_get_args() ) . 'fff=-' );
+		$keyZ = md5( __METHOD__ . serialize( func_get_args() ) . 'ff-f=-' );
 		
 	//	if( ! empty( $options['cache'] ) )
 		{
@@ -290,11 +327,22 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				$options = Ayoola_Doc::getFilesRecursive( $directory );  
 				foreach( $options as $file )
 				{
-					$className = $filter->filter( $file );
-					if( self::isWidget( $className ) )
-					{
-						$files[$className] = $className;
-					}
+                    $className = $filter->filter( $file );
+                    switch( $settings['type'] )
+                    {
+                        case 'database':
+                            if( self::isXMLTable( $className ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                        default:
+                            if( self::isWidget( $className, $deepCheck ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                    }
 				}
 			}
 	//			var_export( $directory );
@@ -307,10 +355,21 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				foreach( $options as $file )
 				{
 					$className = $filter->filter( $file );
-					if( self::isWidget( $className ) )
-					{
-						$files[$className] = $className;
-					}
+                    switch( $settings['type'] )
+                    {
+                        case 'database':
+                            if( self::isXMLTable( $className ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                        default:
+                            if( self::isWidget( $className, $deepCheck ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                    }
 				}
 			}
 
@@ -322,14 +381,21 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 				foreach( $options as $file )
 				{
 					$className = $filter->filter( $file );
-					if( self::isWidget( $className ) )
-					{
-						if( stripos( $className, 'Ayoola' ) === 0 )
-						{
-					//		continue;
-						}
-						$files[$className] = $className;
-					}
+                    switch( $settings['type'] )
+                    {
+                        case 'database':
+                            if( self::isXMLTable( $className ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                        default:
+                            if( self::isWidget( $className, $deepCheck ) )
+                            {
+                                $files[$className] = $className;
+                            }
+                        break;
+                    }
 				}
 			}
 			asort( $files );
@@ -374,7 +440,7 @@ class Ayoola_Object_Embed extends Ayoola_Object_Abstract
 			{
 				$html .= '<option value="' . $object['editable'] . '" selected = selected>' . $object['editable'] . '</option> '; 
 			}
-			$html .= '<option value="__custom">Custom Widget</option> '; 
+			$html .= '<option value="__custom">' . self::__( 'Custom Widget' ) . '</option> '; 
 			$html .= '</select>';
 			
 		//	$html .= '<span style=""> or </span>';

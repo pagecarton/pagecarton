@@ -96,8 +96,8 @@ class Ayoola_Access_AccessInformation_Editor extends Ayoola_Access_AccessInforma
 	//	if( ! $this->updateDb( $values ) ){ return false; }
 		
 	//	var_export( $data );
-		$this->setViewContent( '<p class="boxednews normalnews">Profile information has been updated successfully.</p>', true ); 
-		$this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['username'] . '" class="boxednews goodnews">View Profile.</a>' ); 
+		$this->setViewContent(  '' . self::__( '<p class="boxednews normalnews">Profile information has been updated successfully.</p>' ) . '', true  ); 
+		$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['username'] . '" class="boxednews goodnews">View Profile.</a>' ) ); 
     } 
 	// END OF CLASS
 }

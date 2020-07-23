@@ -43,8 +43,8 @@ class Application_Subscription_Level_List extends Application_Subscription_Level
      */	
     public function init()
     {
-	//	$this->setViewContent( '<h3>Options:</h3>' );		
-	//	$this->setViewContent( '<h4></h4>' );		
+	//	$this->setViewContent( self::__( '<h3>Options:</h3>' ) );		
+	//	$this->setViewContent( self::__( '<h4></h4>' ) );		
 		$this->setViewContent( $this->getList() );		
     } 
 	

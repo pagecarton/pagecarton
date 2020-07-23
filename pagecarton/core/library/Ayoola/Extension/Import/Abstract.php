@@ -111,6 +111,7 @@ abstract class Ayoola_Extension_Import_Abstract extends Ayoola_Abstract_Table
 		while( false );
 	//	$fieldset->addElement( array( 'name' => 'upload', 'label' => 'Plugin File (.tar.gz archive)', 'data-allow_base64' => true, 'data-document_type' => 'application', 'type' => 'Document', 'value' => @$values['upload'] ) );
 		$fieldset->addElement( array( 'name' => 'plugin_url', 'label' => 'Plugin File (.tar.gz archive)', 'data-document_type' => 'application', 'type' => 'Document', 'value' => @$values['plugin_url'] ) );
+		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'hidden', 'value' => @$values['article_url'] ) );
 		$form->addFieldset( $fieldset );
 		
 		$this->setForm( $form );

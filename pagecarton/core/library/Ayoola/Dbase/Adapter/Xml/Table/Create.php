@@ -67,6 +67,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Create extends Ayoola_Dbase_Adapter_Xml_Tab
 		{ 
 			$dataTypes['modified_time'] = 'INPUTTEXT'; 
 		}
+        $dataTypes['__user_id'] = 'INPUTTEXT'; 
+        $dataTypes['__update_user_id'] = 'JSON'; 
+        $dataTypes['__user_agent_id'] = 'INPUTTEXT'; 
+        $dataTypes['__ip'] = 'JSON'; 
+    //  $dataTypes['__long_lang'] = 'JSON'; 
 		
 		//	Refresh Xml Memory to start a new Document
 		require_once 'Ayoola/Xml.php';

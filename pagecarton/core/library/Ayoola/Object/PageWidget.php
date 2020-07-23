@@ -25,7 +25,7 @@ class Ayoola_Object_PageWidget extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.2';  
+    protected $_tableVersion = '0.3';  
 
     /**
      * Table data types and declaration
@@ -36,6 +36,7 @@ class Ayoola_Object_PageWidget extends PageCarton_Table
 	protected $_dataTypes = array (
   'class_name' => 'INPUTTEXT',
   'url' => 'INPUTTEXT',
+  'section_name' => 'INPUTTEXT',
   'parameters' => 'JSON',
   'parameters_key' => 'INPUTTEXT',
   'widget_name' => 'INPUTTEXT',

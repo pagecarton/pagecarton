@@ -64,7 +64,7 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 			$values['contactus_subject'] = $values['contactus_subject'] ? : $values['contactus_message'];
 			if( ! $this->insertDb( $values ) ){ return false; }
 			//	self::v( $values );
-			$this->setViewContent( 'Thank you! Your message has reached us, we will get back to you as soon as possible.', true );
+			$this->setViewContent(  '' . self::__( 'Thank you! Your message has reached us, we will get back to you as soon as possible.' ) . '', true  );
 			
 			$emailAddress = array();
 			if( Ayoola_Application::getUserInfo( 'email' ) )
@@ -79,35 +79,27 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 			
 			if( $emailAddress )
 			{
-			
+            
+                unset( $values['contactus_creator_user_id'] );
+                unset( $values['contactus_creation_date'] );
 
 				$emailInfo = array(
-									'subject' => 'Contact Message Received!',
-									'body' => 'We have received the message with the following information:
-									' . var_export( $values, true ) . '
+									'subject' => 'Re: ' . $values['contactus_subject'],
+									'body' => 'We have received the message with the following information from the contact form:
+									' . self::arrayToString( $values ) . '
 									',
 				
 				);
 				$emailInfo['to'] = implode( ',', array_unique( $emailAddress ) );
-				$emailInfo['bcc'] = Ayoola_Application_Notification::getEmails();
+			//	$emailInfo['bcc'] = Ayoola_Application_Notification::getEmails();
 			//	$emailInfo['html'] = true; 
 				@self::sendMail( $emailInfo );
-			//	self::v( $emailInfo );
+            //    self::v( $emailInfo );
+                $emailInfo['to'] = Ayoola_Application_Notification::getEmails();;
+				@self::sendMail( $emailInfo );
 				
 			}
-			
-/* 			//	Notify Admin
-			$mailInfo['subject'] = 'New Contact Message';
-			$mailInfo['body'] = 'Someone left a message titled "' . $values['contactus_subject'] . '", using the contact form. 
-			
-			You can view the new message by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/.
-			';
-			try
-			{
-				Ayoola_Application_Notification::mail( $mailInfo );
-			}
-			catch( Ayoola_Exception $e ){ null; }
- */		}
+		}
 		catch( Application_ContactUs_Exception $e ){ return false; }
     } 
 	// END OF CLASS

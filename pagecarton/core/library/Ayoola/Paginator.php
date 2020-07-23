@@ -313,7 +313,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 	//	$html = str_ireplace( '{{{---@@@BADNEWS@@@---}}}', '', $html );
 	//	$html .='<p>Showing ' . $this->_noOfPageRecords . ' out of ' . $this->_noOfRecords . ' Record(s). Show ' . $noToShow .'</p>';
 		require_once 'Ayoola/Page.php';
-		$html .='<table class="pc-table">
+		$html .='<table style="background-color:#666;" class="pc-table">
 					<tr>';
 		$html .= is_null( $this->_firstPage ) ? NULL : ( '<td>
 							<a name="paginator_navigation" class="pc-btn" rel="classPlayerUrl=' . $classPlayer . 'page/' . $this->_firstPage . '/;changeElementId=' . $this->pageName . '" href="' . Ayoola_Page::appendQueryStrings( array( 'page' => $this->_firstPage ) ) . '">' . $first. '
@@ -547,8 +547,12 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 
 				}
 			//	self::filterReplacement( $value );
-		//		var_export( $value );
-				$value = self::__( $value );    
+            //	var_export( $value );
+                if( false === stripos( $value, '%FIELD%' ) )
+                {
+                //	var_export( $value );
+                    $value = self::__( $value );    
+                }
 				if( array_key_exists( $field, $row ) )
 				{
 					
@@ -569,7 +573,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
  					elseif( is_array( $row[$field] ) )
 					{ 
 					//	var_export( $value );
-						$row[$field] = print_r( $row[$field], true ); 
+					//	$row[$field] = print_r( $row[$field], true ); 
 					}
 					elseif( is_object( $row[$field] ) )
 					{ 
@@ -577,10 +581,14 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 						$row[$field] = print_r( (array) $row[$field], true ); 
 					}
 				//	$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, $value );
-					$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, is_scalar( $value ) ? $value : null );
+                //	$value = str_replace( '%FIELD%', is_scalar( $row[$field] ) ? $row[$field] : null, is_scalar( $value ) ? $value : null );
 					if( isset( $rawFieldValues['value_representation'][$value] ) )
 					{
-						$value = $rawFieldValues['value_representation'][$value];
+                        $value = $rawFieldValues['value_representation'][$value];
+					}
+					elseif( isset( $rawFieldValues['value_representation'][$row[$field]] ) )
+					{
+                        $value = $rawFieldValues['value_representation'][$row[$field]];
 					}
 					elseif( isset( $rawFieldValues['value_representation']['pc_paginator_default'] ) )
 					{
@@ -589,10 +597,28 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					elseif( isset( $rawFieldValues['value_representation'] ) )
 					{
 						$value = null;
-					}
-					$value = str_replace( '%KEY%', @$row[$key], $value );
-					$value = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $value );
-					$value = str_replace( $columnSearch, $columnReplace, $value );
+                    }
+                    $markupX = $value;
+                    $value = null;
+                    foreach( (array) $row[$field] as $rowField )
+                    {
+                    //    var_export( $this->pageName );
+                    //    var_export( $this->pageName::$translateInnerWidgetContent );
+                        $pageName = $this->pageName;
+
+                        $markup = str_replace( array( '%KEY%', '%FIELD%' ), array( $row[$key], $rowField ), $markupX );
+                        $markup = str_replace( '%PC-TABLES-ROW-OPTIONS%', $optionsHtml, $markup );
+                        $markup = str_replace( $columnSearch, $columnReplace, $markup );
+                        if( $pageName && Ayoola_Object_Embed::isWidget( $pageName ) && $pageName::$translateInnerWidgetContent  )
+                        {                          
+                            //    var_export( $markup );
+                            //   var_export( $rowField );
+                            //    $row[$key] = self::__( $row[$key] );
+                            $markup = self::__( $markup );
+                        }
+                    //    var_export( $markup );
+                        $value .= ' ' . $markup;
+                    }
 				//	var_export( $value );
 			//		if( $this->crossColumnFields )
 
@@ -620,7 +646,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			}
 			if( $this->getRowOptions() && ! @$this->noOptionsColumn )
 			{
-				$records .='<td style="text-align:center;"><a onclick="var a = this.parentNode.parentNode.nextElementSibling; a.style.display = ( a.style.display == \'none\' ) ? \'\'  : \'none\';" href="javascript:"> options </a></td>';
+				$records .='<td style="text-align:center;"><a onclick="var a = this.parentNode.parentNode.nextElementSibling; a.style.display = ( a.style.display == \'none\' ) ? \'\'  : \'none\';" href="javascript:"> ' . self::__( 'options' ) . ' </a></td>';
 			}
 			$records .= '</tr>';
 			if( $this->getRowOptions() )
@@ -662,7 +688,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		}
 		$multiDoOption[] = array( 
 									'url' => Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Pagination_MultiDo_Delete/' . ( $deletePrefix ) . '',
-									'name' => 'Delete',
+									'name' => '' . self::__( 'Delete' ) . '',
 									);
 
 		$html .='<div class="pc-btn-parent pc-paginator-multioption-area" style="background-color:#d4d4d4;display:none;">';		
@@ -727,8 +753,9 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      * @param mixed
      * @return null
      */
-    public function setListOptions( $option )
+    public function setListOptions( $option, $translate = true )
     {	
+        $option = $translate ? self::__( $option ) : $option;
 		is_array( $option ) ? $this->_listOptions = array_merge( $this->_listOptions, $option ) : $this->_listOptions[] = $option;
     }
 
@@ -751,6 +778,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      */
     public function setRowOptions( $option )
     {	
+        $option = self::__( $option );
 		is_array( $option ) ? $this->_rowOptions = array_merge( $this->_rowOptions, $option ) : $this->_rowOptions[] = $option;
     }
 	
@@ -776,6 +804,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
      */
     public function setNoRecordMessage( $msg )
     {	
+        $msg = self::__( $msg );
 		$this->_noRecordMessage	= strlen( $msg ) > 7 ? $msg : $this->_noRecordMessage;
     }
 	
@@ -852,8 +881,9 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
     {	
 		$list = $this->getList();
 		$content = null;  
-		$content .= $this->listTitle ? '<div><h3 class="pc-heading">' . $this->listTitle . '</h3></div>' : null;     
-		$content .= '<div style="background-color:#d4d4d4;">';     		
+        $this->listTitle = self::__( $this->listTitle );
+		$content .= $this->listTitle ? '<div><h3 class="pc-heading">' . $this->listTitle . ' (' . $this->_noOfRecords . ')</h3></div>' : null;     
+		$content .= '<div style="background-color:#d4d4d4;padding: 1em 0;">';     		
 		if( $this->_noOfPageRecords !== $this->_noOfRecords )     
 		{	
 //			$content .='<p style="font-size:smaller;">Showing ' . $this->_noOfPageRecords . ' out of ' . $this->_noOfRecords . ' Record(s). Show ' . $noToShow .' ' . $order .'</p>';
@@ -908,7 +938,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					//	var_export( array_keys( $row ) );
 						ksort( $row );
 						$header = $row;
-						fputcsv( $out, array_keys( $header ), ',', '"' );
+						fputcsv( $out, array_keys( $header ), ",\t", '"' );
 					//	var_export( $this->fields );
 					//	fputcsv( $out, array_keys( $this->fields ), ',', '"' ); 
 						$flag = true;
@@ -922,7 +952,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					$row = array_intersect_key( $row, $header );
 					ksort( $row );
 					array_walk( $row, __NAMESPACE__ . '\cleanData' );
-					fputcsv( $out, array_values( $row ), ',', '"' );
+					fputcsv( $out, array_values( $row ), ",\t", '"' );
 				//	var_export( $row );
 					//	fputcsv( $out, array_values( $row ), ',', '"' );
 				}
@@ -937,33 +967,15 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			$creatorClass = implode( '_', $creatorClass );
 			if( ! isset( $this->_listOptions['Creator'] ) )  
 			{
-				$this->setListOptions( array( 'Creator' => '<a rel="" href="javascript:;" title="Add new to the list" class="" style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/' . $creatorClass . '/\', \'' . $this->pageName . '\' )">Add new</a>' ) ); 
+                $output = 'Add new item to %s';
+                $output = PageCarton_Widget::__( $output );
+                $output = sprintf( $output, $this->listTitle );
+				$this->setListOptions( array( 'Creator' => '<a rel="" href="javascript:;" title="Add new to the list" class="" style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/' . $creatorClass . '/\', \'' . $this->pageName . '\' )">' . $output . '</a>' ), false ); 
 			}
 		}
 		$noToShow = null;
 		$order = null;
 		$content .= ' <div style="" class="pc-btn-parent">';			
-		if( $this->_noOfRecords > 10 ) 
-		{
-		
-			$noToShow = '<select class="pc-element-like-btn" onChange="window.location.search = window.location.search + \'&noPerPage=\' + this.value;">
-						<option>' . $this->_noOfPageRecords . ' out of ' . $this->_noOfRecords . '</option>  O
-						<option>10</option>
-						<option>20</option>
-						<option>50</option>
-						<option>100</option>
-						<option>200</option>
-						<option>300</option>
-						<option>500</option>
-					</select>
-					';
-			$order = '<select class="pc-element-like-btn" onChange="window.location.search = window.location.search + \'&pc_sort_order_inverse=\' + this.value;">
-						<option>Order...</option>  
-						<option value=' . ( @$_GET['pc_sort_order_inverse'] ? '0' : '1' ) . '>Inverse</option>
-					</select>
-					';
-			$content .='' . $noToShow .' ' . $order .'';
-		}  
 		if( $this->_listOptions )
 		{
 		//	$content .= '<h4>OPTIONS:</h4>';
@@ -982,33 +994,63 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		if( $this->_noOfPageRecords !== $this->_noOfRecords )     
 		{	
 			if( $this->showPagination  ){ $content .= $this->getPagination(); }
-		}
-		if( $this->showSearchBox  )
-		{ 
-			$keys = @array_keys( array_pop( $this->getData() ) );
-			if( $keys  )
-			{ 
-				//	Put search 
-				$keys = array_combine( $keys, $keys );
-				$newForm = new Ayoola_Form( array( 'name' => 'xxx', 'class' => 'xxx', 'data-not-playable' => true, 'method' => 'GET', 'action' => '?' . http_build_query( $_GET ), ) );
-				$newForm->setParameter( array( 'no_fieldset' => true, 'no_required_fieldset' => true, ) );
-				$newFieldSet = new Ayoola_Form_Element;
-				$newFieldSet->container = 'span';
-				$newFieldSet->hashElementName = false;
-				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_value',  'label' => '',  'multiple' => 'multiple', 'placeholder' => 'Search ' . $this->listTitle . '...', 'style' => 'width:100%; max-width:500px;text-transform:none;cursor:auto', 'class' => 'pc-element-like-btn', 'type' => 'InputText', 'value' => null ) );
-				$newFieldSet->addElement( array( 'name' => 'db_where_clause_field_name', 'onchange' => 'this.form.submit()', 'class' => 'pc-element-like-btn', 'style' => 'width:100%; max-width:300px;cursor:auto',  'label' => '  ',  'multiple' => 'multiple', 'type' => 'Select', 'value' => null ), array( 'Select Search Column...' ) + $keys );
-				$newForm->addFieldset( $newFieldSet );  
-				
-				$newFieldSet = new Ayoola_Form_Element;
-				$newFieldSet->container = 'span';
-				$newFieldSet->hashElementName = false;
-				$newFieldSet->addElement( array( 'name' => 'search-object', 'type' => 'Hidden', 'value' => $this->pageName ) );
-				$newForm->addFieldset( $newFieldSet );     
-				$content .= $newForm->view();  
-			}
-		}
+        }
+        
+		if( $this->_noOfRecords > 10 ) 
+		{
+            $output = '%d out of %d records in %s. Click to show more...';
+            $output = PageCarton_Widget::__( $output );
+            $output = sprintf( $output, $this->_noOfPageRecords, $this->_noOfRecords, $this->listTitle );
+
+			$noToShow = '<select style=";" onChange="window.location.search = window.location.search + \'&noPerPage=\' + this.value;">
+						<option>' . $output . '</option>
+						<option>10</option>
+						<option>20</option>
+						<option>50</option>
+						<option>100</option>
+						<option>200</option>
+						<option>300</option>
+						<option>500</option>
+					</select>
+					';
+		//    $content .= $noToShow;
+			$order = '<select style=";" onChange="window.location.search = window.location.search + \'&pc_sort_order_inverse=\' + this.value;">
+						<option>' . self::__( 'Change List Order' ) . '</option>  
+						<option value=' . ( @$_GET['pc_sort_order_inverse'] ? '0' : '1' ) . '>' . self::__( 'Inverse Order' ) . '</option>
+					</select>
+					';
+           $searchFormHtml = null;
+            
+        //  if( $this->showSearchBox  )
+            { 
+                $keys = @array_keys( array_pop( $this->getData() ) );
+                if( $keys  )
+                { 
+                    //	Put search 
+                    $keys = array_combine( $keys, $keys );
+                    $newForm = new Ayoola_Form( array( 'name' => 'xxx', 'class' => 'pc-form2', 'data-not-playable' => true, 'method' => 'GET', 'action' => '?' . http_build_query( $_GET ), ) );
+                    $newForm->setParameter( array( 'no_fieldset' => true, 'no_required_fieldset' => true, ) );
+                    $newFieldSet = new Ayoola_Form_Element;
+                    $newFieldSet->container = 'span';
+                    $newFieldSet->hashElementName = false;
+                    $newFieldSet->addElement( array( 'name' => 'xxx', 'type' => 'Html', 'value' => null ), array( 'html' => $noToShow . $order ) );
+                    $newFieldSet->addElement( array( 'name' => 'db_where_clause_field_value',  'label' => '',  'multiple' => 'multiple', 'placeholder' => 'Search ' . $this->listTitle . '...', 'style' => '', 'type' => 'InputText', 'value' => null ) );
+                    $newFieldSet->addElement( array( 'name' => 'db_where_clause_field_name', 'onchange' => 'this.form.submit()', 'class' => '', 'style' => '',  'label' => '  ',  'multiple' => 'multiple', 'type' => 'Select', 'value' => null ), array( 'Select Search Column...' ) + $keys );
+                    $newForm->addFieldset( $newFieldSet );  
+                    
+                    
+                    $newFieldSet = new Ayoola_Form_Element;
+                    $newFieldSet->container = 'span';
+                    $newFieldSet->hashElementName = false;
+                    $newFieldSet->addElement( array( 'name' => 'search-object', 'type' => 'Hidden', 'value' => $this->pageName ) );
+                    $newForm->addFieldset( $newFieldSet );     
+                    $searchFormHtml .= $newForm->view();  
+                }
+            }
+		}  
 		$content .= '</div>';     		
 		$content .= $list;
+		@$content .= $searchFormHtml;
 		return $content;
     }
 	

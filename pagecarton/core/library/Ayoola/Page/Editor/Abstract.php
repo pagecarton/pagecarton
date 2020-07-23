@@ -223,7 +223,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 			$pageThemeFileUrl = '/index';
 		}
 		$defaulThemeDataFile = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
-		if( $themeName && is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $defaulThemeDataFile ) )
+		if( $themeName && is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $defaulThemeDataFile )  && empty( $_REQUEST['pc_get_main_page_data'] ) && empty( $_REQUEST['pc_edit_main_site_page'] ) )
 		{
 			//	dont allow main page content slip here.
 			$rPaths['data_json'] = $defaulThemeDataFile;
@@ -288,9 +288,10 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 				$rPaths['data_php'] = $oldPath;
 			}
 		}
-		elseif( $this->getPageEditorLayoutName() )
+		elseif( $this->getPageEditorLayoutName() && empty( $_REQUEST['pc_get_main_page_data'] ) )
 		{
-			$themeName = strtolower( $this->getPageEditorLayoutName() );
+            $themeName = strtolower( $this->getPageEditorLayoutName() );
+        //    var_export( $themeName );
 			$file = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
 	//		if( is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $file ) )
 			{
@@ -316,14 +317,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 				$rPaths['data_json'] = $backupFile;
 			}
 		}
-/* 		elseif( $themeName && is_file( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $defaulThemeDataFile ) )
-		{
-			//	dont allow main page content slip here.
-			$rPaths['data_json'] = $defaulThemeDataFile;
-			$rPaths['data_php'] = null;
-			$rPaths['data_php'] = null;
-		}
- */		//	now using json to store this data
+		//	now using json to store this data
 //	var_export( $rPaths );
 		$newFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths['data_json'];
 	//	var_export( $newFile );
@@ -331,6 +325,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		if( is_file( $newFile ) )
 		{
 	//		var_export( file_get_contents( $newFile ) );
+	//		var_export( ( $newFile ) );
 			$values = json_decode( file_get_contents( $newFile ), true );
 	//		var_export( $values );
 			return $values;

@@ -27,6 +27,14 @@ require_once 'Ayoola/Page/Abstract.php';
 class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 {
 	
+ 	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Create a page'; 
+	
     /**
      * Attempts to delete a file
      *
@@ -40,7 +48,7 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 		{
 			if( is_file( $file ) )
 			{
-				unlink( $file );
+                Ayoola_File::trash( $file );
 				Ayoola_Doc::removeDirectory( basename( $file ) );
 			}
 		}
@@ -88,8 +96,9 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 			$this->createForm( 'Continue..', 'Create a new page' );
 			$this->setViewContent( $this->getForm()->view() );
 		//	self::v( $_POST );
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
-	//		self::v( $values );
+			if( ! $values = $this->getForm()->getValues() OR ! $values['url'] ){ return false; }
+        //    self::v( $this->getForm()->getbadnews() );
+            
 			//	Default settings 
 			$values['auth_level'] = (array) ( isset( $values['auth_level'] ) ? $values['auth_level'] : 0 );
 		//	self::v( $values );
@@ -100,7 +109,7 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 				//	Notify Admin
 				$mailInfo = array();
 				$mailInfo['subject'] = 'A new page created';
-				$mailInfo['body'] = 'A new page have been created on your application with the following information: "' . htmlspecialchars_decode( var_export( $values, true ) ) . '". 
+				$mailInfo['body'] = 'A new page have been created on your application with the following information: "' . self::arrayToString( $values ) . '". 
 				
 				Preview the page on: http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . $values['url'] . '';
 				try
@@ -122,36 +131,22 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 			
 			//	let's allow only page editor create this files
 			//	the themes are also created this way... we don't want that
-	//		if( $this->_createFile() )
-		//	if( $this->insertDb() )
-	//		{
-/* 				$class = new Ayoola_Page_Editor_Layout();
-				$class->setPageInfo( array( 'url' => $values['url'] ) );
-				$class->setPagePaths();
-				$class->setValues();
-				$class->updateLayoutOnEveryLoad = true;
-				$class->init(); // invoke the template update for this page.
- */		
+	
 				//	once page is created, let's have blank content
 				$page = new Ayoola_Page_Editor_Sanitize();
 				$page->refresh( $values['url'] );
 
-				$this->setViewContent( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>', array( 'translate' => true, 'refresh_content' => true ) );   
-				$this->setViewContent( '<p>
-																		<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '"><i class="fa fa-edit pc_give_space"></i> Add Content!</a>
-																		<a class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $values['url'] . '"> <i class="fa fa-cog pc_give_space"></i> Settings</a>
-				</p>', array( 'translate' => true, 'xrefresh_content' => true ) ); 
-	//		}
-	//		else
-	//		{ 
-		//		$this->getForm()->setBadnews( 'Error encountered while creating a new page' ); 
-	//		}
+				$this->setViewContent( self::__( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>' ), true  );   
+				$this->setViewContent( self::__( '<p>
+																		<a target="_blank" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '">Add Content <i class="fa fa-edit pc_give_space"></i></a>
+																		<a target="_blank" class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Menu_Edit_Creator/?url=' . $values['url'] . '"> Add to site navigation <i class="fa fa-cog pc_give_space"></i></a>
+																		<a target="_blank" class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $values['url'] . '"> Settings <i class="fa fa-cog pc_give_space"></i></a>
+				</p>' ) ); 
 		}
 		catch( Exception $e )
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true  );
 		}
     } 
 	
@@ -218,10 +213,10 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 			if( $filePath = Ayoola_Loader::checkFile( $default[$key] ) ){ $default[$key] = $filePath; }
 			if( ! is_file( $file ) )
 			{
-				if( ! file_put_contents( $file, preg_replace( '/{?[%@]{2,3}([a-zA-Z1-9]{3,18})[%@]{2,3}}?/', '', @file_get_contents( $default[$key] ) ) ) )
+				if( ! Ayoola_File::putContents( $file, preg_replace( '/{?[%@]{2,3}([a-zA-Z1-9]{3,18})[%@]{2,3}}?/', '', @file_get_contents( $default[$key] ) ) ) )
 				{
 					// If copying fail, open new file
-					if( false === file_put_contents( $file, '' ) )
+					if( false === Ayoola_File::putContents( $file, '' ) )
 					{						
 						// Attempts a rollback
 						$this->rollback();

@@ -37,7 +37,7 @@ class Ayoola_Doc_Download extends Ayoola_Doc_Abstract
 		try
 		{
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->setViewContent( 'Your download will start in a moment...', true );
+			$this->setViewContent(  '' . self::__( 'Your download will start in a moment...' ) . '', true  );
 /* 			$this->createConfirmationForm( 'Download ' . $data['document_name'],  'Download document' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }

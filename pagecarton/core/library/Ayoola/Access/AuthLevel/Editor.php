@@ -38,7 +38,7 @@ class Ayoola_Access_AuthLevel_Editor extends Ayoola_Access_AuthLevel_Abstract
 		{ 
 			return false; 
 		}
-		$this->createForm( 'Edit', 'Edit ' . $data['auth_name'], $data );
+		$this->createForm( 'Save', 'Edit ' . $data['auth_name'], $data );
 		$this->setViewContent( $this->getForm()->view(), true );
 	//	var_export( $_POST );
 	//	var_export( $this->getForm()->getValues() );
@@ -47,7 +47,7 @@ class Ayoola_Access_AuthLevel_Editor extends Ayoola_Access_AuthLevel_Abstract
 		if( ! $this->updateDb( $values ) ){ return false; }
 		
 	//	var_export( $data );
-		$this->setViewContent( 'Auth level updated successfully.', true ); 
+		$this->setViewContent(  '' . self::__( 'Auth level updated successfully.' ) . '', true  ); 
     } 
 	// END OF CLASS
 }

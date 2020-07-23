@@ -48,10 +48,8 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
     {     
         //  create page if they don't exist'
         $class = new Ayoola_Page_Editor_Sanitize(  array( 'no_init' => true, 'auto_create_page' => true )  );
-  //      var_export( $pageInfo );
 
 
-    //    var_export( $tPaths );
         $pageThemeFileUrl = $url;
         if( $pageThemeFileUrl == '/' )
         {
@@ -64,7 +62,6 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
         {
             return false;
         }
-//    var_export();
 
         if( ! Ayoola_Loader::getFullPath( $fPaths['include'], array( 'prioritize_my_copy' => true ) ) )
         {
@@ -158,7 +155,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             
             if( ! in_array( $url, self::getPages( $data['layout_name'], 'list' ) ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
             
@@ -187,11 +184,11 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
 
             if( self::this( $url, $data['layout_name'] ) )
             {
-                $this->setViewContent( '<p class="goodnews">"' . $url . '" page copied successfully.</p>', true ); 
+                $this->setViewContent(  '' . self::__( '<p class="goodnews">"' . $url . '" page copied successfully.</p>' ) . '', true  ); 
             }
             else
             {
-                $this->setViewContent( '<p class="badnews">Page could not be copied.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page could not be copied.</p>' ) ); 
             }
 
              // end of widget process
@@ -200,7 +197,7 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

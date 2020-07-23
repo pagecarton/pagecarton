@@ -73,11 +73,11 @@ class Application_Domain_UserDomain_Abstract extends PageCarton_Widget
         {
             $table = "Application_Domain_Order";
             $table = $table::getInstance();
-            $domains = $table->select( null, array( 'username' => Ayoola_Application::getUserInfo( 'username' ) ) );
+            $domains = $table->select( null, array( 'username' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ) ) );
 			$filter = new Ayoola_Filter_SelectListArray( 'domain_name', 'domain_name' );
             $domains = $filter->filter( $domains );
             
-            $fieldset->addElement( array( 'name' => 'domain_name', 'label' => 'Domain Name', 'placeholder' => 'e.g. example.com', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$values['domain_name'] ), array( '' => 'Select Domain' ) + $domains + array( '__custom' => 'Custom Domain' ) );   
+            $fieldset->addElement( array( 'name' => 'domain_name', 'label' => 'Domain', 'placeholder' => 'e.g. example.com', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Parameter Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$values['domain_name'] ), array( '' => 'Select Domain' ) + $domains + array( '__custom' => 'Custom Domain' ) );   
         }
         $fieldset->addRequirement( 'domain_name', array( 'NotEmpty' => null, 'DuplicateRecord' => array( 'Application_Domain_UserDomain', 'domain_name' ) ) ); 
    //   $fieldset->addElement( array( 'name' => 'user_id', 'type' => 'InputText', 'value' => @$values['user_id'] ) ); 
@@ -120,9 +120,8 @@ class Application_Domain_UserDomain_Abstract extends PageCarton_Widget
                 }
             '
         );
-//		$fieldset->addElement( array( 'name' => 'profile_url', 'style' => '', 'label' => 'Profile Handle', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'placeholder' => 'e.g. MyProfileUrl', 'type' => 'InputText', 'value' => @$values['profile_url'] ) ); 
-		$fieldset->addElement( array( 'name' => 'profile_url', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'label' => 'Linked Profile', 'type' => 'Select', 'value' => @$values['profile_url'] ? : Application_Profile_Abstract::getMyDefaultProfile() ), array( '' => 'Select Profile' ) + $profiles );
-        $fieldset->addRequirement( 'profile_url', array( 'ArrayKeys' => $profiles, 'DuplicateRecord' => array( 'Application_Domain_UserDomain', 'profile_url' ) ) ); 
+		$fieldset->addElement( array( 'name' => 'profile_url', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'label' => 'Site', 'type' => 'Select', 'value' => @$values['profile_url'] ? : Application_Profile_Abstract::getMyDefaultProfile() ), array( '' => 'Select Profile' ) + $profiles );
+        $fieldset->addRequirement( 'profile_url', array( 'ArrayKeys' => $profiles ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

@@ -42,12 +42,13 @@ class Application_Subscription_Checkout_CheckoutOption extends Ayoola_Dbase_Tabl
      *
      * @param int
      */
-    protected $_tableVersion = '0.03';
+    protected $_tableVersion = '0.04';
 
 	protected $_dataTypes = array
 	( 
 		'checkoutoption_name' => 'INPUTTEXT, UNIQUE',
 		'checkoutoption_logo' => 'TEXTAREA',
+		'logo' => 'INPUTTEXT',
 		'object_name' => 'INPUTTEXT',
 		'checkout_type' => 'INPUTTEXT',  
 		'default_parameter_fields' => 'JSON',  

@@ -38,7 +38,7 @@ class Ayoola_Access_AuthLevel_Delete extends Ayoola_Access_AuthLevel_Abstract
 			if( ! $data = self::getIdentifierData() ){ return false; }
 			$this->createConfirmationForm( 'Delete ' . $data['auth_name'],  'Delete Access Level' );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Access Level deleted successfully', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Access Level deleted successfully' ) . '', true  ); }
 		}
 		catch( Ayoola_Access_AuthLevel_Exception $e ){ return false; }
     } 

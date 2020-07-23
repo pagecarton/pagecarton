@@ -41,14 +41,14 @@ class Application_Subscription_Checkout_CashOnDelivery extends Application_Subsc
      */
 	protected function init()
     {		
-	//	$this->setViewContent( '<h4>NOTE:</h4>' );
-	//	$this->setViewContent( '<p>' );
-	//	$this->setViewContent( '<p>Payments must be made in ' . $values['settings']['currency_abbreviation'] . '.</p>' );
-	//	$this->setViewContent( '<p>Please ensure p <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/site/contact/">contacting us</a>.</p>' );
-		$this->setViewContent( '<h2 class="badnews">Notice!</h2>' );
-		$this->setViewContent( '<p class="badnews">Your online order is NOT yet completed until you confirm you will be making payment on the point of delivery.</p>' );
-		$this->setViewContent( '<h2><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Subscription_Checkout_Confirmation/get/api/CashOnDelivery/status/1/"><input name="' . __CLASS__ . '_confirm_order" onClick="ayoola.div.selectElement( this )" class="boxednews goodnews" value="Confirm order" type="button" /></a></h2>' );
-	//	$this->setViewContent( '</p>' );   
+	//	$this->setViewContent( self::__( '<h4>NOTE:</h4>' ) );
+	//	$this->setViewContent( self::__( '<p>' ) );
+	//	$this->setViewContent( self::__( '<p>Payments must be made in ' . $values['settings']['currency_abbreviation'] . '.</p>' ) );
+	//	$this->setViewContent( self::__( '<p>Please ensure p <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/site/contact/">contacting us</a>.</p>' ) );
+		$this->setViewContent( self::__( '<h2 class="badnews">Notice!</h2>' ) );
+		$this->setViewContent( self::__( '<p class="badnews">Your online order is NOT yet completed until you confirm you will be making payment on the point of delivery.</p>' ) );
+		$this->setViewContent( self::__( '<h2><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Subscription_Checkout_Confirmation/get/api/CashOnDelivery/status/1/"><input name="' . __CLASS__ . '_confirm_order" onClick="ayoola.div.selectElement( this )" class="boxednews goodnews" value="Confirm order" type="button" /></a></h2>' ) );
+	//	$this->setViewContent( self::__( '</p>' ) );   
 		
 		
     } 

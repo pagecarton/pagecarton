@@ -51,8 +51,8 @@ class Application_User_Help_ChangePassword extends Application_User_Help_Abstrac
 		try
 		{ 
 			$this->createForm( 'Change Password' );
-			$this->setViewContent( '<h4>Change Password</h4>' );   
-		//	$this->setViewContent( '' );
+			$this->setViewContent( self::__( '<h4>Change Password</h4>' ) );   
+		//	$this->setViewContent( self::__( '' ) );
 			$this->setViewContent( $this->getForm()->view() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
@@ -80,7 +80,7 @@ class Application_User_Help_ChangePassword extends Application_User_Help_Abstrac
 			}
 			if( self::changePassword( $identifier, $info, $values['password'] ) )
 			{
-				$this->setViewContent( 'New password saved successfully.', true );
+				$this->setViewContent(  '' . self::__( 'New password saved successfully.' ) . '', true  );
 				return true;
 			}
 			$this->getForm()->setBadnews( 'Invalid Information. Please try again.' );
@@ -155,8 +155,8 @@ class Application_User_Help_ChangePassword extends Application_User_Help_Abstrac
 				//		var_export( $info );  
 					if( Ayoola_Access_Localize::info( $info ) )
 					{
-					//	$this->setViewContent( 'New password saved successfully.', true );
-					//	$this->setViewContent( '<div class="boxednews goodnews">User account edited successfully</div>', true );
+					//	$this->setViewContent(  '' . self::__( 'New password saved successfully.' ) . '', true  );
+					//	$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account edited successfully</div>' ) . '', true  );
 					}
 				}
 			}

@@ -4,8 +4,9 @@
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Payments]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[1]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Payments]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Payment]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Settings_Payment]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563790690]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="2">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[SiteInfo]]></TABLE_FIELD>
@@ -22,38 +23,44 @@
     <TABLE_ROW ROW_ID="4">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Page]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[6]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Pages]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Page]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Page_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563790684]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="5">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[UserAccount]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[8]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[User Accounts]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[User Account]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_User_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563830150]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="6">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Articles]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[10]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Posts]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Post]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Article_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563830021]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="7">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Documents]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[11]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Documents]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Document]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Doc_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563829650]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="8">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Domains]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[7]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Domains]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Domain]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Domain_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563829814]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="9">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Profiles]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[1077]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Profiles]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Profile]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Profile_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563830050]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="10">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Security]]></TABLE_FIELD>
@@ -61,31 +68,20 @@
       <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Security]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Settings_Security]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="11">
-      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[E-mail]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[10978]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[E-mail]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_User_Email_Settings]]></TABLE_FIELD>
-    </TABLE_ROW>
     <TABLE_ROW ROW_ID="12">
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Forms]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[02378]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Forms]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Form]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Form_Settings]]></TABLE_FIELD>
-    </TABLE_ROW>
-    <TABLE_ROW ROW_ID="13">
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Environment]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Application_Settings_Environment]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[environment]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[0]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1526319838]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563829918]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="14">
-      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Locale]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[PageCarton_Locale_Settings]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[locale]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Locale]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[1559818234]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1559818234]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_title"><![CDATA[Locale]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[PageCarton_Locale_Settings]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563958301]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

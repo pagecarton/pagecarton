@@ -219,11 +219,11 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 			if( $linksData )
 			{
 				$this->setViewContent( $form->view(), true ); 
-				$this->setViewContent( '<div class="pc-notify-info">Please take caution while using this tool as it is still experimental. </div>' ); 
+				$this->setViewContent( self::__( '<div class="pc-notify-info">Please take caution while using this tool as it is still experimental. </div>' ) ); 
 			}
 			else
 			{
-				$this->setViewContent( '<div class="badnews">There are no editable links on this theme.</div>', true ); 
+				$this->setViewContent(  '' . self::__( '<div class="badnews">There are no editable links on this theme.</div>' ) . '', true  ); 
 			}
 			if( ! $values = $form->getValues() ){ return false; }
 		//	var_export( $form->getValues() );
@@ -347,10 +347,10 @@ class Ayoola_Page_Layout_Links extends Ayoola_Page_Layout_Abstract
 		//	exit();
 			$newContent = json_encode( $contentArray );
 		//	var_export( $contentArray );
-			file_put_contents( $path, $newContent );
+			Ayoola_File::putContents( $path, $newContent );
 		//	$this->updateFile( array( 'plain_text' => $xml->saveHTML() ) );
 			static::refreshThemePage( $data['layout_name'] );
-			$this->setViewContent( '<p class="boxednews goodnews">Theme links saved successfully.</p>', true );
+			$this->setViewContent(  '' . self::__( '<p class="boxednews goodnews">Theme links saved successfully.</p>' ) . '', true  );
 			
 		//	echo $xml->view();
 		//	exit();

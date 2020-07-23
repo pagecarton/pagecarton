@@ -45,7 +45,7 @@ class Application_Subscription_Level_Creator extends Application_Subscription_Le
 		if( ! $data = $table->selectOne( null, $this->getIdentifier() ) ){ return false; }
 		$this->createForm( 'Add', "Add a new category for \"{$data['subscription_label']}\"" );
 		$this->setViewContent( $this->getForm()->view(), true );
-		if( $this->insertDb() ){ $this->setViewContent( 'Product category added successfully.', true ); }
+		if( $this->insertDb() ){ $this->setViewContent(  '' . self::__( 'Product category added successfully.' ) . '', true  ); }
     } 
 	// END OF CLASS
 }

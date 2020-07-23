@@ -53,7 +53,7 @@ class Application_Article_Type_Creator extends Application_Article_Type_TypeAbst
 		{ 
 			return $this->setViewContent( $this->getForm()->view(), true ); 
 		}
-		$this->setViewContent( '<p>New post type saved successfully.</p>', true );
+		$this->setViewContent(  '' . self::__( '<p>New post type saved successfully.</p>' ) . '', true  );
    } 
 	// END OF CLASS
 }

@@ -55,7 +55,7 @@ class Application_User_Help_ResetPassword extends Application_User_Help_ChangePa
 				return false;
 			}
 			$this->createForm( 'Reset Password' );
-			$this->setViewContent( '<h4>Reset Password</h4>' );   
+			$this->setViewContent( self::__( '<h4>Reset Password</h4>' ) );   
 			$this->setViewContent( $this->getForm()->view() );
 			
 			
@@ -91,7 +91,7 @@ class Application_User_Help_ResetPassword extends Application_User_Help_ChangePa
 			
 			if( self::changePassword( $identifier, $info, $values['password'] ) )
 			{
-				$this->setViewContent( '<p class="goodnews boxednews">New password saved successfully.</p>', true );
+				$this->setViewContent(  '' . self::__( '<p class="goodnews boxednews">New password saved successfully.</p>' ) . '', true  );
 				$this->setViewContent( $this->getForm()->view() );
 				return true;
 			}

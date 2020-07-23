@@ -15,7 +15,7 @@
  * @see Ayoola_
  */
  
-//require_once 'Ayoola/.php';
+require_once 'Ayoola/File.php';
 
 
 /**
@@ -132,8 +132,7 @@ class Ayoola_File_Storage extends Ayoola_File
 		$path = $this->getFile()->getPath();
 		Ayoola_Doc::createDirectory( dirname( $path ) );
         //	PageCarton_Widget::v( $path );
-	//	file_put_contents( $path, '<?php return ' . var_export( $data, true ) . ';' );     
-		file_put_contents( $path, json_encode( $data ) );     
+		Ayoola_File::putContents( $path, json_encode( $data ) );     
     } 
 	
     /**
@@ -145,16 +144,23 @@ class Ayoola_File_Storage extends Ayoola_File
     public function read()
     {
 		$path = $this->getFile()->getPath();
-		$timeOut = intval( $this->timeOut );
+        $timeOut = intval( $this->timeOut );
+        @$ctime = filectime( $path ) . filemtime( $path );
+        $key = $path . $ctime;
+        if( null !== @$this->readMCache[$key] )
+        {
+            return $this->readMCache[$key];
+        }
 	//	var_export( $this );
 		if( is_file( $path ) )
 		{
             if( $timeOut )
             {
                 //	Check the time out 
-                if( $timeOut < time() - filectime( $path ) )
+                if( $timeOut < time() - $ctime )
                 {
                     unlink( $path );
+                    $this->readMCache[$key] = false;
                     return false;
                 }
             }
@@ -166,9 +172,11 @@ class Ayoola_File_Storage extends Ayoola_File
                 $data = json_decode( $content, true );
             }
     //        var_export( $data );
+            $this->readMCache[$key] = $data;
             return $data;
 			
 		}
+        $this->readMCache[$key] = false;
         return false;
     } 
 	
@@ -240,6 +248,7 @@ class Ayoola_File_Storage extends Ayoola_File
 		{ 
 			$namespace = __CLASS__; 
 		}
+        require_once 'Ayoola/Filter/Alnum.php';
 		$filter = new Ayoola_Filter_Alnum();
 		$filter->replace = DS;
 		$namespace = $filter->filter( $namespace );

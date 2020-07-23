@@ -121,7 +121,7 @@ class Application_Article_PhotoViewer extends Application_Article_Abstract
 					}			//		var_export( $_REQUEST['document_time'] );
 					header( 'Content-Type: ' . $type );
 
-					file_put_contents( $path, $xX ); 
+					Ayoola_File::putContents( $path, $xX ); 
 		//			var_export( array( 'path' => $path ) );  
 					Application_IconViewer::viewInLine( array( 'path' => $path ) );
 					exit();

@@ -96,3 +96,40 @@ ayoola.js =
 		}
 	},
 }
+ayoola.storage =
+{
+    store: function( key, value )
+    {
+        if( typeof( Storage ) !== "undefined" )
+        {
+            return localStorage.setItem( key, JSON.stringify( value ) );
+        }
+    },
+    merge: function( key, value )
+    {
+    //    alert( key );
+    //    alert( value );
+    //    alert( typeof( value ) );
+        if( typeof( Storage ) !== "undefined" )
+        {
+            var a = ayoola.storage.retrieve( key );
+            if( ! a  || ! a.indexOf )
+            {
+                a = [];
+            }
+            if( a.indexOf( value ) == -1 )
+            {
+                a.unshift( value );
+            }
+            
+            return ayoola.storage.store( key, a );
+        }
+    },
+    retrieve: function( key )
+    {
+        if( typeof( Storage ) !== "undefined" )
+        {
+            return JSON.parse( localStorage.getItem( key ) );
+        }
+    }
+}

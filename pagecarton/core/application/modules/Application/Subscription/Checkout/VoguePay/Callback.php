@@ -38,7 +38,6 @@ class Application_Subscription_Checkout_VoguePay_Callback extends Application_Su
 	
 		//	RETRIEVE THE XML OF THE ORDER INFO FROM 
 		$url = "https://voguepay.com/?v_transaction_id={$_REQUEST['v_transaction_id']}&type=xml";
-	//	$url = "http://ayoola/test.xml";
 		$xml = new Ayoola_Xml();
 		$xml->loadXml( self::fetchLink( $url ) );
 		$response = $xml->getTextNodesData();

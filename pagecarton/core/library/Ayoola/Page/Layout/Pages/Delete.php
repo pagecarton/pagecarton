@@ -63,7 +63,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
             $files = Ayoola_Doc::getFiles( $themeDataDir );
             foreach( $files as $each )
             {
-                unlink( $each );
+                $trashed = Ayoola_File::trash( $each );                
             }
         }     
     }
@@ -88,12 +88,12 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
             $allPages = array_combine( $allPages, $allPages );
             if( ! in_array( $url, $allPages ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
             if( $url === '/' )
             {
-                $this->setViewContent( '<p class="badnews">You can not delete the index page.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">You can not delete the index page.</p>' ) ); 
                 return false;   
             }
             
@@ -108,13 +108,14 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
         //    var_export( $from );
             if( ! $from = Ayoola_Loader::getFullPath( $from, array( 'prioritize_my_copy' => true ) ) )
             {
-                $this->setViewContent( '<p class="badnews">Page not found in theme.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Page not found in theme.</p>' ) ); 
                 return false;   
             }
+            $trashed = Ayoola_File::trash( $from );
 
-            if( unlink( $from ) )
+            if( $trashed )
             {
-                $this->setViewContent( '<p class="goodnews">"' . $url . '" deleted successfully.</p>', true ); 
+                $this->setViewContent(  '' . self::__( '<p class="goodnews">"' . $url . '" deleted successfully.</p>' ) . '', true  ); 
 
                 //	let's remove dangling theme pages not completely deleted
                 Ayoola_Page_Layout_Pages_Delete::deleteThemePageSupplementaryFiles( $url, $data['layout_name'] );
@@ -122,7 +123,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
             }
             else
             {
-                $this->setViewContent( '<p class="badnews">Theme Page could not be deleted.</p>' ); 
+                $this->setViewContent( self::__( '<p class="badnews">Theme Page could not be deleted.</p>' ) ); 
             }
 
              // end of widget process
@@ -131,7 +132,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

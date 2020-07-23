@@ -25,14 +25,14 @@ class Application_Domain_Order_Abstract extends PageCarton_Widget
      * 
      * @var array
      */
-	protected $_identifierKeys = array( 'order_id' );
+	protected $_identifierKeys = array( 'domain_name' );
  	
     /**
      * The column name of the primary key
      *
      * @var string
      */
-	protected $_idColumn = 'order_id';
+	protected $_idColumn = 'domain_name';
 	
     /**
      * Identifier for the column to edit
@@ -46,7 +46,7 @@ class Application_Domain_Order_Abstract extends PageCarton_Widget
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 99, 98 );
+	protected static $_accessLevel = array( 1 );
 
 
     /**
@@ -65,20 +65,27 @@ class Application_Domain_Order_Abstract extends PageCarton_Widget
 
 		$fieldset = new Ayoola_Form_Element;
 	//	$fieldset->placeholderInPlaceOfLabel = false;
-
-        $fieldset->addElement( array( 'name' => 'domain_name' . @$values['domain_name'], 'label' => 'Domain Name', 'type' => 'InputText', 'readonly' => 'readonly', 'value' => @$values['domain_name'] ) ); 
-        $fieldset->addElement( array( 'name' => 'username', 'type' => 'InputText', 'value' => @$values['username'] ) ); 
-        $fieldset->addElement( array( 'name' => 'user_id', 'type' => 'InputText', 'value' => @$values['user_id'] ) ); 
-        $fieldset->addElement( array( 'name' => 'email', 'type' => 'InputText', 'value' => @$values['email'] ) ); 
-        $fieldset->addElement( array( 'name' => 'street_address', 'type' => 'InputText', 'value' => @$values['street_address'] ) ); 
-        $fieldset->addElement( array( 'name' => 'street_address2', 'type' => 'InputText', 'value' => @$values['street_address2'] ) ); 
-        $fieldset->addElement( array( 'name' => 'city', 'type' => 'InputText', 'value' => @$values['city'] ) ); 
-        $fieldset->addElement( array( 'name' => 'province', 'type' => 'InputText', 'value' => @$values['province'] ) ); 
-        $fieldset->addElement( array( 'name' => 'country', 'type' => 'InputText', 'value' => @$values['country'] ) ); 
-        $fieldset->addElement( array( 'name' => 'zip', 'type' => 'InputText', 'value' => @$values['zip'] ) ); 
-        $fieldset->addElement( array( 'name' => 'active', 'type' => 'Select', 'value' => @$values['active'] ), array( 'No', 'Yes' ) ); 
-        $fieldset->addElement( array( 'name' => 'api', 'type' => 'InputText', 'value' => @$values['api'] ) ); 
-
+        if( strtolower( $values['username'] ) === Ayoola_Application::getUserInfo( 'username' ) || self::hasPriviledge() )
+        {
+            if( empty( $values ) )
+            {
+                $fieldset->addElement( array( 'name' => 'domain_name' . @$values['domain_name'], 'label' => 'Domain Name', 'type' => 'InputText', 'value' => @$values['domain_name'] ) ); 
+            }
+            if( self::hasPriviledge() )
+            {
+                $fieldset->addElement( array( 'name' => 'username', 'type' => 'InputText', 'value' => @$values['username'] ) ); 
+                $fieldset->addElement( array( 'name' => 'user_id', 'type' => 'InputText', 'value' => @$values['user_id'] ) ); 
+                $fieldset->addElement( array( 'name' => 'active', 'type' => 'Select', 'value' => @$values['active'] ), array( 'No', 'Yes' ) ); 
+                $fieldset->addElement( array( 'name' => 'api', 'type' => 'InputText', 'value' => @$values['api'] ) ); 
+            }
+            $fieldset->addElement( array( 'name' => 'email', 'type' => 'InputText', 'value' => @$values['email'] ) ); 
+            $fieldset->addElement( array( 'name' => 'street_address', 'type' => 'InputText', 'value' => @$values['street_address'] ) ); 
+            $fieldset->addElement( array( 'name' => 'street_address2', 'type' => 'InputText', 'value' => @$values['street_address2'] ) ); 
+            $fieldset->addElement( array( 'name' => 'city', 'type' => 'InputText', 'value' => @$values['city'] ) ); 
+            $fieldset->addElement( array( 'name' => 'province', 'type' => 'InputText', 'value' => @$values['province'] ) ); 
+            $fieldset->addElement( array( 'name' => 'country', 'type' => 'InputText', 'value' => @$values['country'] ) ); 
+            $fieldset->addElement( array( 'name' => 'zip', 'type' => 'InputText', 'value' => @$values['zip'] ) ); 
+        }
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   
 		$this->setForm( $form );

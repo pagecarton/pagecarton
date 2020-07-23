@@ -58,7 +58,7 @@ class Application_Domain_UserSiteManager extends PageCarton_Widget
             //  Code that runs the widget goes here...
             if( ! self::hasPriviledge() )
             {
-                $this->_dbWhereClause['username'] = Ayoola_Application::getUserInfo( 'username' );
+                $this->_dbWhereClause['username'] = strtolower( Ayoola_Application::getUserInfo( 'username' ) );
                 $this->_dbWhereClause['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
             }
             $this->setViewContent( $this->getList() );		
@@ -68,8 +68,8 @@ class Application_Domain_UserSiteManager extends PageCarton_Widget
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-        //    $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+        //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
 	}

@@ -37,9 +37,9 @@ class Application_Testimonial_Editor extends Application_Testimonial_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-			$this->createForm( 'Edit', 'Edit ' . $data['testimonial'], $data );
+			$this->createForm( 'Save', 'Edit ' . $data['testimonial'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
-			if( $this->updateDb() ){ $this->setViewContent( 'Testimonial edited successfully', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( 'Testimonial edited successfully' ) . '', true  ); }
 		}
 		catch( Application_Testimonial_Exception $e ){ return false; }
     } 

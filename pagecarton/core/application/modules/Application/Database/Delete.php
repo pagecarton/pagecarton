@@ -41,7 +41,7 @@ class Application_Database_Delete extends Application_Database_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
-			if( $this->deleteDb( false ) ){ $this->setViewContent( 'Database deleted successfully.', true ); }
+			if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Database deleted successfully.' ) . '', true  ); }
 		}
 		catch( Application_Database_Exception $e ){ return false; }
     } 

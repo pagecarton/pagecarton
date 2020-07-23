@@ -50,10 +50,10 @@ class Application_Log_Clear extends Application_Log_Abstract
 			{
 				if( ! is_writable( $path ) )
 				{ 
-					$this->setViewContent( 'PROTECTED LOG CANNOT BE MODIFIED', true );
+					$this->setViewContent(  '' . self::__( 'PROTECTED LOG CANNOT BE MODIFIED' ) . '', true  );
 					return false;
 				}
-				file_put_contents( $path, null );
+				Ayoola_File::putContents( $path, null );
 			}
 			else
 			{
@@ -65,12 +65,12 @@ class Application_Log_Clear extends Application_Log_Abstract
 		//		self::v( $logViewer ); 
 				$log = $logViewer::clearLog();
 			}
-			$this->setViewContent( 'Log Cleared Successfully', true );
+			$this->setViewContent(  '' . self::__( 'Log Cleared Successfully' ) . '', true  );
 	//		return;
 		}
 		catch( Exception $e )
 		{ 
-			$this->setViewContent( '<span class="badnews boxednews">' . $e->getMessage() . '</span>' );
+			$this->setViewContent( self::__( '<span class="badnews boxednews">' . $e->getMessage() . '</span>' ) );
 			return false; 
 		}
     } 

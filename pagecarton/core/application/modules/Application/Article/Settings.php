@@ -75,43 +75,10 @@ class Application_Article_Settings extends Application_Settings_Abstract
 		unset( $authLevel[97] );
 		unset( $authLevel[98] );
 		
-		$fieldset->addElement( array( 'name' => 'allowed_writers', 'required' => 'required', 'label' => 'Who can create posts?', 'type' => 'SelectMultiple', 'value' => @$settings['allowed_writers'] ), $authLevel );
+		$fieldset->addElement( array( 'name' => 'allowed_writers', 'label' => 'Who can create any kind of posts', 'type' => 'SelectMultiple', 'value' => @$settings['allowed_writers'] ), $authLevel );
+		$fieldset->addElement( array( 'name' => 'restricted_writers', 'label' => 'Who can create only some restricted types of post', 'type' => 'SelectMultiple', 'value' => @$settings['restricted_writers'] ), $authLevel );
 		$fieldset->addElement( array( 'name' => 'allowed_editors', 'label' => 'Who can edit and manage all posts?', 'type' => 'SelectMultiple', 'value' => @$settings['allowed_editors'] ), $authLevel );
-		
-/* 		$i = 0;
-		//	Build a separate demo form for the previous group
-		$innerForm = new Ayoola_Form( array( 'name' => 'access_level' )  );
-		$innerForm->setParameter( array( 'no_fieldset' => true, 'no_form_element' => true ) );
-		$innerForm->wrapForm = false;
-		
-		do
-		{
 			
-			//	Put the questions in a separate fieldset
-			$innerFildset = new Ayoola_Form_Element; 
-			$innerFildset->allowDuplication = true;
-			$innerFildset->wrapper = 'white-content-theme-border';   
-		//	$innerFildset->wrapper = 'white-background';
-			$innerFildset->duplicationData = array( 'add' => 'New User-Group-Restriction', 'remove' => 'Remove Above User-Group-Restriction', 'counter' => 'user_group_counter', );
-			$innerFildset->container = 'span';
-			   
-			$innerFildset->addElement( array( 'name' => 'user_group_restrictions', 'label' => 'User Group', 'type' => 'Select', 'multiple' => 'multiple', 'value' => @$values['user_group_restrictions'][$i] ), $authLevel );
-			$innerFildset->addElement( array( 'name' => 'storage_size', 'label' => 'Storage Size (in bytes)', 'placeholder' => 'e.g. 1024', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['storage_size'][$i] ) );
-			$innerFildset->addElement( array( 'name' => 'max_allowed_posts', 'label' => 'Maximum Allowed Posts', 'placeholder' => 'e.g. 100', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['max_allowed_posts'][$i] ) );
-			$innerFildset->addElement( array( 'name' => 'max_allowed_posts_private', 'label' => 'Maximum Allowed Private Posts', 'placeholder' => 'e.g. 5', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['max_allowed_posts_private'][$i] ) );
-									
-			$i++;
-			$innerFildset->addLegend( 'User-Group-Specific Restrictions  <span name="user_group_counter">' . $i . '</span> of <span name="user_group_counter_total">' . ( ( count( @$values['user_group_restrictions'] ) ) ? : 1 ) . '</span>' );			   			
-			$innerForm->addFieldset( $innerFildset );     
-		//	self::v( $i );  
-		}
-		while( isset( $values['user_group_restrictions'][$i] ) );
-		
-		
-		
-		//	add previous categories if available
-		$fieldset->addElement( array( 'name' => 'group', 'type' => 'Html', 'value' => '' ), array( 'html' => $innerForm->view(), 'fields' => 'user_group_restrictions,storage_size,max_allowed_posts,max_allowed_posts_private' ) );
- */		
 		
 		//	Allowed Categories
 		$options = new Application_Category;

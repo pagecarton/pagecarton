@@ -51,8 +51,6 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 			$auth = new Ayoola_Access();
 			require_once 'Ayoola/Page.php'; 
 			$userInfo = $auth->getUserInfo();   
-		//	var_export( $userInfo );
-		//	var_export( self::hasPriviledge() );
 			$defaultUserInfo = array();
 			
 			//	Reset user info
@@ -61,7 +59,6 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 			if( ! self::hasPriviledge() )
 			{
 				$response = Ayoola_Api_UserList::send( array( 'access_level' => 99 ) );
-			//	var_export( $response );
 				if( ! is_array( $response['data'] ) )
 				{
 					//	The Ayoola_Api is not working
@@ -69,7 +66,6 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 					if( is_file( Ayoola_Application::$installer ) &&  is_writable( Ayoola_Application::$installer ) )
 					{ 
 						//	SELF DESTRUCT THE INSTALLER
-					//	if( ! unlink( Ayoola_Application::$installer ) ){ return false; }  
 						$defaultUserInfo = array( 'user_id' => '0', 'creation_date' => time(), 'creation_ip' => $_SERVER['HTTP_HOST'], 'applicationusersettings_id' => '0', 'application_id' => '1007', 'access_level' => '99', 'enabled' => '1', 'approved' => '1', 'verified' => '1', 'modified_date' => time(), 'modified_ip' => '0', 'userpassword_id' => '0', 'password' => NULL, 'userpersonalinfo_id' => '0', 'firstname' => 'Administrator', 'lastname' => 'Webmaster', 'middlename' => '', 'sex' => 'M', 'birth_date' => '0000-00-00', 'useremail_id' => '0', 'email' => $this->getGlobalValue( 'email' ), 'emailtype_id' => '1', 'email_verification_status' => '0', 'email_verification_code' => '0', 'socialmediauser_id' => NULL, 'socialmedia_id' => NULL, 'socialmediauser_info' => NULL, 'socialmediauser_foreign_id' => NULL, );
 						
 					}
@@ -80,7 +76,6 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 					throw new Ayoola_Access_Exception( 'ATTEMPT TO LOCALIZE A NON-ADMINISTRATIVE USER "' . $userInfo['username'] . '" ' );
 				}
 			} 
-		//	var_export( $defaultUserInfo );
 			$userInfo = array_merge( $defaultUserInfo, $userInfo ? : array() ); 
 			if( ! $this->getGlobalValue( 'password' ) )
 			{
@@ -93,25 +88,19 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 			$userInfo['username'] = @$userInfo['username'] ? : $this->getGlobalValue( 'username' ); 
 			if( ! $userInfo['password'] )
 			{
-			//	if( ! $values = $this->getForm()->getValues() ){ return false; }
-			}
+
+            }
 			
 			//	Retrieve the password hash
 			$access = new Ayoola_Access();
 			$hashedCredentials = $access->hashCredentials( $userInfo );
-		//	var_export( $hashedCredentials );
 		
 			//	some scripts still need my password set but i must clear for security reasons
 			$userInfo['password'] = $hashedCredentials['password'];
-	//		unset( $userInfo['password'] );
 			
 			// Insert the new user information into the LocalUser table
 			try
 			{
-	//			$table = new Ayoola_Access_LocalUser();
-		//		$table->delete( array( 'username' => $userInfo['username'] ) );
-			//	$table->insert( array( 'username' => $userInfo['username'], 'password' => $userInfo['password'], 'user_information' => $userInfo, ) );
-				//	exit( 'wed3wd' );
 				self::info( $userInfo );
 			}
 			catch( Exception $e )
@@ -139,21 +128,35 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
      */
     public static function info( array $userInfo )
 	{
-	//	ini_set( 'display_errors', "1" );	
-		//   var_export( $userInfo['password'] );
-		 //  var_export( $oldInfo['password'] );  
 		
 		//	Localize information 
-		$table = Ayoola_Access_LocalUser::getInstance();
+        $table = Ayoola_Access_LocalUser::getInstance( "xyz" );
+		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
+		{
+			$database = 'private';
+		}
+		switch( $database )
+		{
+			case 'private':
+				// Find user in the LocalUser table
+				$table = "Ayoola_Access_LocalUser";
+				$table = $table::getInstance( $table::SCOPE_PRIVATE . "xyz" );
+				$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+			break;
+			case 'file':
+				// Find user in the LocalUser table
+				$table = "Ayoola_Access_LocalUser";
+				$table = $table::getInstance( $table::SCOPE_PUBLIC . "xyz" );
+				$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PUBLIC );
+				$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PUBLIC );
+			break;
+		}
+        
+
 		if( $oldInfo = $table->selectOne( null, array( 'username' => array( $userInfo['username'], strtolower( $userInfo['username'] ) ) ) ) )
 		{
 		
-/* 		var_export( $userInfo );
-		var_export( array( 'username' => array( '', $userInfo['username'], strtolower( $userInfo['username'] ) ) ) );
-		var_export( $table->delete( array( 'username' => strtolower( $userInfo['username'] ) ) ) );
-		return; 
- */		//	var_export( $userInfo );
-		//	   var_export( array( 'username' => array( '', $userInfo['username'], strtolower( $userInfo['username'] ) ) ) );       
 			try
 			{
 				if( ! $table->delete( array( 'username' => array( '', $userInfo['username'], strtolower( $userInfo['username'] ) ) ) ) )
@@ -164,9 +167,7 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 			}
 			catch( Exception $e )
 			{
-		//		var_export( $e->getMessage() );  
 			}
-		//	   var_export( $userInfo['password'] );  
 			@$userInfo['password'] = $userInfo['password'] ? : $oldInfo['password'];
 			
 			
@@ -177,7 +178,7 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 		
 		$newInfo = $userInfo;
 		unset( $newInfo['password'] );
-		$defaultUserInfo = array( 'user_id' => microtime( true ), );
+		$defaultUserInfo = array( 'user_id' => strval( microtime( true ) ), );
 		$newInfo = array_merge( $defaultUserInfo, $newInfo ? : array() );      
 		//	
  		try
@@ -186,12 +187,8 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 		}
 		catch( Exception $e )
 		{
-		//	var_export( $table->selectOne( null, array( 'username' => array( $userInfo['username'], strtolower( $userInfo['username'] ) ) ) ) );
-		//	echo $e->getMessage();
-		}
-	//	var_export( $userInfo['username'] );
-	//	var_export( $table->selectOne( null, array( 'username' => array( $userInfo['username'], strtolower( $userInfo['username'] ) ) ) ) );
-	//	var_export( $newInfo );
+
+        }
 		return true;
 	}
 	

@@ -43,7 +43,7 @@ class Ayoola_Page_Menu_Edit_Editor extends Ayoola_Page_Menu_Edit_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
 			
 		//	self::v( $values ); 
-			if( $this->updateDb() ){ $this->setViewContent( '<p class="goodnews">Option edited successfully</p>', true ); }
+			if( $this->updateDb() ){ $this->setViewContent(  '' . self::__( '<p class="goodnews">Option edited successfully</p>' ) . '', true  ); }
 		}
 		catch( Ayoola_Page_Menu_Edit_Exception $e ){ return false; }    
 	} 

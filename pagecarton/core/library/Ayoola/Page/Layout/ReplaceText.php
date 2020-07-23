@@ -99,7 +99,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
      * 
      * @var string 
      */
-	protected static $_objectTitle = 'Update Text';     
+	protected static $_objectTitle = 'Update Site Static Text';     
 	
     /**
      * 
@@ -132,9 +132,14 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         $themeName =  ( ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
     //    var_export( $themeName );
         $themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
-        $settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ) );
+
+        //  Add default info
+/*         $themeInfo['dummy_title'] = array_merge( $themeInfo['dummy_title'] ? : array(), static::$_defaultTexts['dummy_title'] ? : array() );
+        $themeInfo['dummy_search'] = array_merge( $themeInfo['dummy_search'] ? : array(), static::$_defaultTexts['dummy_search'] ? : array() );
+        $themeInfo['dummy_replace'] = array_merge( $themeInfo['dummy_replace'] ? : array(), static::$_defaultTexts['dummy_replace'] ? : array() );
+ */
+//    $settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ) );
     //    var_export( $getSiteData );
-     //   var_export( $settings );
     //    var_export( $themeInfo );
     //    var_export( Ayoola_Page_PageLayout::getInstance( 'xx' )->select() );
         if( $getSiteData AND $previousData = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ) ) )
@@ -142,7 +147,8 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
     //      var_export( $settingsName );
         //  var_export( $previousData['settings'] );
             $previousData =  $previousData['data'] ? : ( json_decode( $previousData['settings'], true ) ? : unserialize( base64_decode( base64_encode( $previousData['settings'] ) ) ) );
-    //    var_export( $previousData );
+        //    var_export( $previousData );
+        //    var_export( $themeInfo );
            if( is_array( $previousData['dummy_title'] ) && is_array( $previousData['dummy_search'] ) && is_array( $previousData['dummy_replace'] ) )
             {
                 $themeInfo['dummy_title'] = array_merge( $previousData['dummy_title'] ? : array(), $themeInfo['dummy_title'] ? : array() );
@@ -162,10 +168,80 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 }
             }
         }    
-        static::$_textUpdates = $themeInfo;
-    //    var_export( $themeInfo );
-   //     var_export( $previousData );
-    return $themeInfo;   
+        static::$_textUpdates[$getSiteData] = $themeInfo;
+        //    var_export( $themeInfo );
+    //     var_export( $previousData );
+        return static::$_textUpdates[$getSiteData];   
+    }
+
+    /**
+     * Clear Values
+     * 
+     */
+	public static function clearTexts( $themeName = null )
+    {
+        $themeName =  ( ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
+        unset( $values['layout_name'] );
+        $previousData = Ayoola_Page_PageLayout::getInstance()->selectOne( array( 'layout_name' => $themeName ) );
+    //    $previousData['dummy_title'] = array();
+    //    $previousData['dummy_search'] = array();
+        $previousData['dummy_replace'] = array_fill_keys( $previousData['dummy_replace'], null );
+        Ayoola_Page_PageLayout::getInstance()->update( $previousData, array( 'layout_name' => $themeName ) );
+        Application_Settings::getInstance()->delete( array( 'settingsname_name' => __CLASS__ ) );
+    }
+
+    /**
+     * Save Values
+     * 
+     */
+	public static function saveTexts( $values, $themeName = null )
+    {
+        $themeName =  ( ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
+        unset( $values['layout_name'] );
+        Ayoola_Page_PageLayout::getInstance()->update( $values, array( 'layout_name' => $themeName ) );
+        $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
+        $table = Application_Settings::getInstance();
+    //    self::v( $values );
+    //    self::v( $themeName );
+
+        //  merge now with settings
+        if( $previousData )
+        {
+            $table->delete( array( 'settingsname_name' => __CLASS__ ) );
+            $values['dummy_title'] = array_merge( $values['dummy_title'] ? : array(), $previousData['dummy_title'] ? : array() );
+            $values['dummy_search'] = array_merge( $values['dummy_search'] ? : array(), $previousData['dummy_search'] ? : array() );
+            $values['dummy_replace'] = array_merge( $values['dummy_replace'] ? : array(), $previousData['dummy_replace'] ? : array() );
+        }
+        $record = array();
+//            var_export( $values );
+
+        //  delete duplicates
+        foreach( $values['dummy_search'] as $key => $each )
+        {
+            if( ! empty( $record[$values['dummy_search'][$key]] ) )
+            {
+                unset( $values['dummy_title'][$key] );
+                unset( $values['dummy_search'][$key] );
+                unset( $values['dummy_replace'][$key] );
+            }
+            $record[$values['dummy_search'][$key]] = true;
+
+        }
+        //    var_export( $values );
+        if( count( $values['dummy_replace'] ) !== count( $values['dummy_search'] ) )
+        {
+        //    var_export( $values );
+            return false;
+        }
+        else
+        {
+        //    var_export( $values );
+            
+            $response = $table->insert( array( 'data' => $values, 'settings' => json_encode( $values ), 'settingsname_name' => __CLASS__ ) );
+        //    var_export( $response );
+            return true;
+        //    $this->setViewContent( $this->getForm()->view() );
+        }
     }
 
     /**
@@ -189,15 +265,27 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $this->_identifier['layout_name'] = Ayoola_Page_Editor_Layout::getDefaultLayout();
             //	return false; 
             }
+            if( @$_GET['editing_dummy_text'] === 'ddd' )
+            {
+                $this->createConfirmationForm( 'Delete Static Text', 'Delete Static Text Contents..' );
+                $this->setViewContent( $this->getForm()->view() );
+                if( ! $values = $this->getForm()->getValues() ){ return false; }
+                self::clearTexts( $this->_identifier['layout_name'] );
+                return false;
+            }
             if( ! $identifierData = self::getIdentifierData() ){ return false; }
         //    var_export( $identifierData );
-            $settingsName = __CLASS__;
 
             $this->createForm( 'Continue..', '' );
 			$this->setViewContent( $this->getForm()->view() );
             if( empty( $_GET['editing_dummy_text'] ) )
             {
-                $this->setViewContent( '<div class="pc-notify-info" style="text-align:center;">Update text on the site! <a style="font-size:smaller;" onclick="location.search+=\'&editing_dummy_text=1\'" href="javascript:">Advanced mode</a></div>' );
+                $this->setViewContent( self::__( '
+                <div class="pc-notify-info" style="text-align:center;">
+                    Update text on the site! 
+                <a style="font-size:smaller;" onclick="location.search+=\'&editing_dummy_text=1\'" href="javascript:">Advanced mode</a> or 
+                <a style="font-size:smaller;" onclick="location.search+=\'&editing_dummy_text=ddd\'" href="javascript:">Clear saved information</a>
+                </div>' ) );
             }
 		//	self::v( $_POST );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -213,6 +301,12 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             {
                 $dataForHiddenFields = static::$_defaultTexts + $dataForHiddenFields;
             //    var_export( $data );
+            }
+            elseif( ! empty( $_GET['editing_dummy_text'] ) )
+            {
+                $dataForHiddenFields['dummy_title'] = array_merge( static::$_defaultTexts['dummy_title'] ? : array(), $dataForHiddenFields['dummy_title'] ? : array() );
+                $dataForHiddenFields['dummy_search'] = array_merge( static::$_defaultTexts['dummy_search'] ? : array(), $dataForHiddenFields['dummy_search'] ? : array() );
+                $dataForHiddenFields['dummy_replace'] = array_merge( static::$_defaultTexts['dummy_replace'] ? : array(), $dataForHiddenFields['dummy_replace'] ? : array() );
             }
             foreach( $values['dummy_replace'] as $key => $each )
             {
@@ -230,51 +324,21 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $values['dummy_replace'][$key] = trim( $values['dummy_replace'][$key] );
                 if( '' === $each )
                 {
-                    $values['dummy_replace'][$key] = trim( $values['dummy_search'][$key], '{}' );
+                    $values['dummy_replace'][$key] = trim( $values['dummy_search'][$key], '{-}' );
                 }
 
             }
         //  self::v( $values );
-            Ayoola_Page_PageLayout::getInstance()->update( $values, $this->getIdentifier() );
-        //    $this->updateDb( $values );
-            $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
-            $table = Application_Settings::getInstance();
-        //    var_export( $previousData );
-
-            //  merge now with settings
-            if( $previousData )
-            {
-                $table->delete( array( 'settingsname_name' => $settingsName ) );
-                $values['dummy_title'] = array_merge( $values['dummy_title'] ? : array(), $previousData['dummy_title'] ? : array() );
-                $values['dummy_search'] = array_merge( $values['dummy_search'] ? : array(), $previousData['dummy_search'] ? : array() );
-                $values['dummy_replace'] = array_merge( $values['dummy_replace'] ? : array(), $previousData['dummy_replace'] ? : array() );
-            }
-            $record = array();
-//            var_export( $values );
-
-            //  delete duplicates
-            foreach( $values['dummy_search'] as $key => $each )
-            {
-                if( ! empty( $record[$values['dummy_search'][$key]] ) )
-                {
-                    unset( $values['dummy_title'][$key] );
-                    unset( $values['dummy_search'][$key] );
-                    unset( $values['dummy_replace'][$key] );
-                }
-                $record[$values['dummy_search'][$key]] = true;
-
-            }
-            //    var_export( $values );
-            if( count( $values['dummy_replace'] ) !== count( $values['dummy_search'] ) )
+           //    var_export( $values );
+            if( ! self::saveTexts( $values, $this->_identifier['layout_name'] ) )
             {
             //    var_export( $values );
-                $this->setViewContent( '<div class="badnews" style="xtext-align:center;">Something went wrong. Please go back and try again. </div>', true );
+                $this->setViewContent(  '' . self::__( '<div class="badnews" style="xtext-align:center;">Something went wrong. Please go back and try again. </div>' ) . '', true  );
                 $this->setViewContent( $this->getForm()->view() );
             }
             else
             {
-                $table->insert( array( 'data' => $values, 'settings' => json_encode( $values ), 'settingsname_name' => $settingsName ) );
-                $this->setViewContent( '<div class="goodnews" style="xtext-align:center;">Update saved successfully. Further text update could be done in <a href="/tools/classplayer/get/name/Ayoola_Page_List">Pages</a>. </div>', true );
+                $this->setViewContent(  '' . self::__( '<div class="goodnews" style="xtext-align:center;">Update saved successfully. Further text update could be done in <a href="/tools/classplayer/get/name/Ayoola_Page_List">Pages</a>. </div>' ) . '', true  );
             //    $this->setViewContent( $this->getForm()->view() );
             }
         //    var_export( $values );
@@ -286,8 +350,8 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-        //    $this->setViewContent( '<p class="badnews">' . $e->getMessage() . '</p>' ); 
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>' ); 
+        //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
 	}
@@ -314,6 +378,12 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         {
             $data = static::$_defaultTexts + $data;
         //    var_export( $data );
+        }
+        elseif( ! empty( $_REQUEST['editing_dummy_text'] ) )
+        {
+            $data['dummy_title'] = array_merge( static::$_defaultTexts['dummy_title'] ? : array(), $data['dummy_title'] ? : array() );
+            $data['dummy_search'] = array_merge( static::$_defaultTexts['dummy_search'] ? : array(), $data['dummy_search'] ? : array() );
+            $data['dummy_replace'] = array_merge( static::$_defaultTexts['dummy_replace'] ? : array(), $data['dummy_replace'] ? : array() );
         }
     //    var_export( $data );
 
@@ -343,7 +413,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $fieldset->addElement( array( 'name' => 'dummy_search', 'multiple' => 'multiple', 'label' => 'Dummy Text', 'placeholder' => @$data['dummy_search'][$i], 'type' => 'TextArea', 'value' => @$data['dummy_search'][$i] ) );
             }
 
-            $data['dummy_replace'][$i] = ( @$data['dummy_replace'][$i] || ! empty( $_REQUEST['editing_dummy_text'] ) ) ? $data['dummy_replace'][$i] : trim( @$data['dummy_search'][$i], '{}' );
+            $data['dummy_replace'][$i] = ( @$data['dummy_replace'][$i] || ! empty( $_REQUEST['editing_dummy_text'] ) ) ? $data['dummy_replace'][$i] : trim( @$data['dummy_search'][$i], '{-}' );
 
             //  always default to own prefilled data
          //   var_export( $allMyData );
@@ -390,20 +460,32 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
     {
         $percentage = 0;
         $themeInfo = self::getUpdates();
+        $themeInfoX = self::getUpdates( true );
         $themeInfoAll = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => __CLASS__ ) );
         @$themeInfoAll = $themeInfoAll['data'];
 		if( empty( $themeInfo['dummy_search'] ) )
 		{
 		//	$percentage += 100;
 		}
-		elseif( ! @array_diff( $themeInfo['dummy_search'], $themeInfoAll['dummy_search'] ) )
+        elseif( 
+            ( array_intersect_assoc( $themeInfo['dummy_replace'], $themeInfoAll['dummy_replace'] ) === $themeInfoAll['dummy_replace'] && $themeInfoAll['dummy_replace'] !== $themeInfo['dummy_replace'] ) 
+            || array_intersect( $themeInfo['dummy_replace'], $themeInfoX['dummy_replace'] ) !== $themeInfo['dummy_replace'] )
+		{
+		//	$percentage += 100;
+		}
+		elseif( array_intersect( $themeInfo['dummy_replace'], $themeInfoX['dummy_replace'] ) === $themeInfo['dummy_replace'] )
 		{
 	    //	var_export( $percentage );
 			$percentage += 100;
 		}
 	//	var_export( $percentage );
- //   var_export( self::getUpdates() );
-//    var_export( $themeInfoAll['dummy_search'] );
+//   var_export( $themeInfo['dummy_search'] );
+//   var_export( $themeInfoAll['dummy_search'] );
+//   var_export( $themeInfoAll['dummy_replace'] );
+//   var_export( $themeInfo['dummy_replace'] );
+//   var_export( $themeInfoX['dummy_replace'] );
+ //  var_export( array_intersect_assoc( $themeInfo['dummy_replace'], $themeInfoAll['dummy_replace'] ) );
+//    var_export( $themeInfoAll['dummy_replace'] );
 		return $percentage;
 	}
 	// END OF CLASS

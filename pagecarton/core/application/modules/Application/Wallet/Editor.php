@@ -36,7 +36,8 @@ class Application_Wallet_Editor extends Application_Wallet_Abstract
     {
 		try
 		{ 
-			if( ! $data = self::getIdentifierData() ){ null; }
+            if( ! $data = self::getIdentifierData() OR empty( $data['user_information'] ) ){ return false; }
+            $data = $data['user_information'];
 /* 			if( empty( $data['username'] ) )
 			{
 				$data['username'] = $this->getIdentifier( 'username' );
@@ -58,9 +59,7 @@ class Application_Wallet_Editor extends Application_Wallet_Abstract
 			// update access
 		//	Ayoola_Access::setAccessInformation( $values );
 
-			$values = $values + $data;
-		//	var_export( $data );
-			if( Ayoola_Access::setAccessInformation( $values ) ){ $this->setViewContent( 'Wallet balance updated successfully.', true ); }
+			if( Ayoola_Access_Localize::info( array( 'username' => $data['username'], 'wallet_balance' => $values['wallet_balance'], ) ) ){ $this->setViewContent(  '' . self::__( 'Wallet balance updated successfully.' ) . '', true  ); }
 		}
 		catch( Application_Wallet_Exception $e ){ return false; }
     } 

@@ -60,6 +60,10 @@ class Application_IconViewer extends PageCarton_Widget
         //          exit();
         //          return false;
                 }
+                elseif( Ayoola_Loader::checkFile( '/documents/__' . $url ) )
+                {
+                    $url = '/__' . $url;
+                } 
                 //  Code that runs the widget goes here...
                 $realExt = explode( '.', $url );
                 $realExt = array_pop( $realExt );
@@ -227,7 +231,7 @@ class Application_IconViewer extends PageCarton_Widget
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( 'Theres an error in the code', true ); 
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}

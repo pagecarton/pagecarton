@@ -86,6 +86,8 @@ class Ayoola_Captcha
      */
     public static function getHash( array $randomizationOptions = null )
     {
+        @$randomizationOptions['session_id()'] = session_id();
+        
 		$rand = md5( json_encode( $randomizationOptions ) );
 		if( ! empty( self::$_hashList[$rand] ) )
 		{
@@ -94,6 +96,7 @@ class Ayoola_Captcha
 	//	var_export( $rand );
 	//	var_export( "\r\n" );
 		$randomnizer = $randomizationOptions['name'];
+		$randomnizer .= session_id();
 		
 		//	Default is refresh dailt
 		if( false !== @$randomizationOptions['daily'] )

@@ -43,15 +43,15 @@ class Application_Article_Template_Creator extends Application_Article_Template_
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent( '<span class="boxednews normalnews centerednews">Post template created successfully. </span>', true ); 
+				$this->setViewContent(  '' . self::__( '<span class="boxednews normalnews centerednews">Post template created successfully. </span>' ) . '', true  ); 
 			}
 			
 		}
 		catch( Exception $e )
 		{ 
 			$this->_parameter['markup_template'] = null;
-			$this->setViewContent( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>', true );
-		//	return $this->setViewContent( '<p class="blockednews badnews centerednews">Error with article package.</p>' ); 
+			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
+		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
     } 
 }

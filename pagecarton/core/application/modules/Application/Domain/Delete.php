@@ -57,7 +57,6 @@ class Application_Domain_Delete extends Application_Domain_Abstract
 			$mailInfo['subject'] = 'Domain Information Deleted';
 			$mailInfo['body'] = 'The domain table have been altered: Here is the domain information: "' . htmlspecialchars_decode( var_export( $data, true ) ) . '". 
 			
-			Domain options are available on: http://' . Ayoola_Page::getDefaultDomain() . '/ayoola/domain/.
 			';
 			try
 			{
@@ -69,12 +68,12 @@ class Application_Domain_Delete extends Application_Domain_Abstract
 			{
 				if( Ayoola_Doc::removeDirectory( self::getSubDomainDirectory( $data['domain_name'] ), true ) )
 				{
-					if( $this->deleteDb( false ) ){ $this->setViewContent( 'Domain deleted successfully', true ); }
+					if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Domain deleted successfully' ) . '', true  ); }
 				}
 			}
 			else
 			{
-				if( $this->deleteDb( false ) ){ $this->setViewContent( 'Domain deleted successfully', true ); }
+				if( $this->deleteDb( false ) ){ $this->setViewContent(  '' . self::__( 'Domain deleted successfully' ) . '', true  ); }
 			}
 			
 			//	reset domain

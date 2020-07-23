@@ -51,7 +51,7 @@ class Application_CommentBox_HideComment extends Application_CommentBox_Abstract
 
             if( $this->updateDb( array( 'hidden' => 1 ) ) )
             { 
-                $this->setViewContent( '<p class="goodnews">Comment successfully hidden</p>', true ); 
+                $this->setViewContent(  '' . self::__( '<p class="goodnews">Comment successfully hidden</p>' ) . '', true  ); 
             }
             //  Code that runs the widget goes here...
 
@@ -61,7 +61,7 @@ class Application_CommentBox_HideComment extends Application_CommentBox_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p class="badnews">Theres an error in the code</p>' ) . '', true  ); 
             return false; 
         }
 	}

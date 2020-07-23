@@ -76,8 +76,8 @@ class Ayoola_Page_Layout_Repository extends Ayoola_Extension_Import_Repository
         }
         else
         {
-        //    $this->setViewContent( '<h2 class="">Upload theme manually</h2>', true );
-            $this->setViewContent( '<p class="pc-notify-info">Connect to the internet to download themes directly from <a target="_blank" href="https://themes.pagecarton.org">PageCarton Themes </a> or download manually and upload here. <a target="_blank" href="https://themes.pagecarton.org"><i class="fa fa-external-link pc_give_space"></i> PageCarton Themes </a></p>' );
+        //    $this->setViewContent(  '' . self::__( '<h2 class="">Upload theme manually</h2>' ) . '', true  );
+            $this->setViewContent( self::__( '<p class="pc-notify-info">Connect to the internet to download themes directly from <a target="_blank" href="https://themes.pagecarton.org">PageCarton Themes </a> or download manually and upload here. <a target="_blank" href="https://themes.pagecarton.org"><i class="fa fa-external-link pc_give_space"></i> PageCarton Themes </a></p>' ) );
             $this->setViewContent( Ayoola_Page_Layout_Creator::viewInLine() );
             return false;
         }

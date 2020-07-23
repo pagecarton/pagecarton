@@ -217,7 +217,6 @@ class Application_Personalization extends Ayoola_Abstract_Table
 				Ayoola_Application::setDomainSettings( true );
 				//	Go through the process again to set the info for the personalized app dir
 				//	similate install to allow Ayoola_Access_UpgradeSelf
-				//		file_put_contents( Ayoola_Application::$installer, __CLASS__ );
 				//	Always Log out to allow login again
 				require_once 'Ayoola/Access.php'; 
 				$auth = new Ayoola_Access();
@@ -238,10 +237,10 @@ class Application_Personalization extends Ayoola_Abstract_Table
 			{
 				@Ayoola_Doc::deleteDirectoryPlusContent( CACHE_DIR );
 			}
-			$this->setViewContent( '<h2 class="">Basic Settings Saved</h2>', true );   
-			$this->setViewContent( '<p>Welcome to endless possibilities! PageCarton helps to publish great content to the web fast, easy using award-winning secure methods. You can make stunning websites easily and apps with PageCarton.</p>' );
+			$this->setViewContent(  '' . self::__( '<h2 class="">Basic Settings Saved</h2>' ) . '', true  );   
+			$this->setViewContent( self::__( '<p>Welcome to endless possibilities! PageCarton helps to publish great content to the web fast, easy using award-winning secure methods. You can make stunning websites easily and apps with PageCarton.</p>' ) );
 
-			$this->setViewContent( '<h4 class="xpc-notify-info">What to do next?</h4>' ); 
+			$this->setViewContent( self::__( '<h4 class="xpc-notify-info">What to do next?</h4>' ) ); 
 			$this->setViewContent
 			( 
 				'<ul>
@@ -257,7 +256,7 @@ class Application_Personalization extends Ayoola_Abstract_Table
 				//	SELF DESTRUCT THE INSTALLER
 				if( ! unlink( Ayoola_Application::$installer ) )
 				{
-					$this->setViewContent( '<p class="badnews">ERROR: Please re-install or manually remove the installer.</p>' ); 
+					$this->setViewContent( self::__( '<p class="badnews">ERROR: Please re-install or manually remove the installer.</p>' ) ); 
 				//	return false; 
 				}
 			}

@@ -63,8 +63,6 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 //  download main core
 
                 $config = PageCarton::getDomainSettings( 'site_configuraton' );
-            //    var_export( $config );
-            //    exit();
 
                 if( empty( $config['repository'] ) )
                 {
@@ -78,7 +76,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';  
     
                 $filename .= '.zip';
-                file_put_contents( $filename, $content['response'] );  
+                Ayoola_File::putContents( $filename, $content['response'] );  
 
                 //  extract to temp
                 $tempDir = CACHE_DIR . DS . __CLASS__ . PageCarton::VERSION;
@@ -98,21 +96,15 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
 
                 $backup = new $phar( $tFile );
                 $backup->startBuffering(); 
-
-           //     var_export( APPLICATION_DIR );
                 
                 $dirPcBase = Ayoola_Doc::getDirectories( $tempDir );
                 $dirPcBase = array_pop( $dirPcBase );
 
                 $from = $dirPcBase . '/pagecarton/core';
                 $to = APPLICATION_DIR . '';
-            //    var_export( $from );
-            //    var_export( $to );
                 Ayoola_Doc::createDirectory( $to );
                 Ayoola_Doc::recursiveCopy( $to, $to . '-' . PageCarton::VERSION );    
-           //     $to = rename( $to, $to . '-' . PageCarton::VERSION );
                 Ayoola_Doc::deleteDirectoryPlusContent( $to );
-            //    $to = $to . 'x';
                 Ayoola_Doc::createDirectory( $to );
                 Ayoola_Doc::recursiveCopy( $from, $to );    
       
@@ -128,17 +120,15 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $content = self::fetchLink( $coreLink, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
     
                 @unlink( $coreZip );
-            //    rmdir();
                 Ayoola_Doc::createDirectory( dirname( $coreZip ) );  
-                file_put_contents( $coreZip, $content['response'] );
+                Ayoola_File::putContents( $coreZip, $content['response'] );
                 if( ! empty( $_REQUEST['pc_recreate_installer'] ) )   
                 {
-                    exit( 'pc_recreate_installer done!' );  
+                    exit( $config['repository'] . ' pc_recreate_installer done!' );  
                 }
     
 
             }
-       //         exit();
 
             if( @$_GET['pc_core_only'] )
             {

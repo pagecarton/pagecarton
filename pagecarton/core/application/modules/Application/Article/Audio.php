@@ -87,7 +87,7 @@ class Application_Article_Audio extends Application_Article_Abstract
                     }
                     else
                     {
-                        $this->setViewContent( '<p class=""><a class="pc-btn" href="' . $url . '">Play All <i class="fa fa-play-circle-o" aria-hidden="true"></i></a></p>', true ); 
+                        $this->setViewContent(  '' . self::__( '<p class=""><a class="pc-btn" href="' . $url . '">' . self::__( 'Play All' ) . '<i class="fa fa-play-circle-o" aria-hidden="true"></i></a></p>' ) . '', true  ); 
                     }
 
 				}
@@ -98,7 +98,7 @@ class Application_Article_Audio extends Application_Article_Abstract
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( '<p class="badnews">Theres an error in the code</p>', true ); 
+            $this->setViewContent(  '' . self::__( '<p class="badnews">' . self::__( 'Theres an error in the code' ) . '</p>' ) . '', true  ); 
             return false; 
         }
 	}

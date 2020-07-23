@@ -39,8 +39,8 @@ class Application_GooglePlus_Badge extends Application_GooglePlus_Abstract
 		$username = self::getSettings();
 	//	if( empty( $usernames['googleplus_id'] ) ){ return; }
 		$username = @$username['googleplus_id'];
-	//	$this->setViewContent( '<div class="g-plus" data-width="195" data-height="69" data-href="' . Ayoola_Application::getUrlPrefix() . '//plus.google.com/' . $username . '" data-rel="publisher"></div>', true );
-		$this->setViewContent( '<div class="g-plusone" data-href="' . $this->getUrl() . '" ></div>', true );
+	//	$this->setViewContent(  '' . self::__( '<div class="g-plus" data-width="195" data-height="69" data-href="' . Ayoola_Application::getUrlPrefix() . '//plus.google.com/' . $username . '" data-rel="publisher"></div>' ) . '', true  );
+		$this->setViewContent(  '' . self::__( '<div class="g-plusone" data-href="' . $this->getUrl() . '" ></div>' ) . '', true  );
     } 
 	// END OF CLASS
 }

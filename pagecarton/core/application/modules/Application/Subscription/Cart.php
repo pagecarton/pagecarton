@@ -88,9 +88,9 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$this->cartUpdate();
 		if( ! $data = $this->getCartContents() )
 		{ 
-			return $this->setViewContent( '<span class="boxednews centerednews badnews">Your shopping cart is empty.</span>', true );
+			return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">Your shopping cart is empty.</span>' ) . '', true  );
 		}
-		$this->setViewContent( '<div class="">' . self::getXml()->saveHTML() . '</div>', true );
+		$this->setViewContent(  '' . self::__( '<div class="">' . self::getXml()->saveHTML() . '</div>' ) . '', true  );
 	//	$this->setViewContent( Application_Subscription_Checkout::viewInLine() );
 	//	var_export( $this->_xml );
     } 
@@ -152,7 +152,6 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$table->setAttribute( 'class', 'pc-table'  );
 		if( ! $data = $this->getCartContents() )
 		{ 
-		//	return $this->setViewContent( '<span class="boxednews centerednews badnews">You have no item in your shopping cart.</span>', true );
 			$columnNode = $this->_xml->createElement( 'td', 'There is no item in the shopping cart' );
 			$row->appendChild( $columnNode );
 			return $this->_xml->appendChild( $table );
@@ -160,7 +159,6 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$values = $data['cart'];
 		$deleteMessage = null;
 		if( $data['settings']['read_only'] ){ $deleteMessage = 'Read-only carts cannot be edited on this website.'; }
-	//	var_export( $data );
 		$mode = @$_GET[$this->getObjectName()];
 		switch( $mode )
 		{
@@ -184,28 +182,22 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				$row->appendChild( $columnNode );
 			break;
 			default:
-		//		$tableColumns = array( 'item', 'price', 'cycle_name', 'multiple', 'total' );
 				$tableColumns = array( 'item', 'price', 'multiple', 'total' );
 			break;
 		}
-		if( ! @$tableColumns ){ return $this->_xml->appendChild( $table ); }
-		//	var_export( $this->getParameter() );
-				
+		if( ! @$tableColumns ){ return $this->_xml->appendChild( $table ); }				
 
 		foreach( $tableColumns as $column )
 		{
-		//
 			$columnNode = $this->_xml->createElement( 'th', ! is_null( $this->getParameter( $column . '_label' ) ) ? $this->getParameter( $column . '_label' ) : $column );    
 			$row->appendChild( $columnNode );
 		}
 		$cartID = md5( serialize( $values ) );
-	//	var_export( $deleteMessage );
-	//	var_export( $data['settings']['edit_cart_url'] );
-		$deleteUrl = $deleteMessage ? $data['settings']['edit_cart_url'] : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'empty', 'cart_id' => $cartID  ) );
+
+        $deleteUrl = $deleteMessage ? $data['settings']['edit_cart_url'] : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'empty', 'cart_id' => $cartID  ) );
 		$columnNode = @$this->_xml->createHTMLElement( 'td', '<a href="' . $deleteUrl . '" title="' . $deleteMessage . ' Empty Cart">x</a>' );
 		$columnNode->setAttribute( 'align', 'center'  );
 		$row->appendChild( $columnNode );
-	//	$table->appendChild( $caption );
 		$filter = 'Ayoola_Filter_Currency';
 		$filter::$symbol = $data['settings']['currency_abbreviation'] ? : ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$' );
 		$filter::$symbol .=  '';
@@ -214,10 +206,10 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		//	Calculate culmulative price
 		$totalPrice = 0.00;
 		$noOfItems = 0;
-	//	var_export( $values );
 		foreach( $values as $name => $value )
 		{
-			$cartID = md5( serialize( $value ) );
+            $cartID = md5( serialize( $value ) );
+            
 			//	Count the number of items
 			++$this->_noOfDinstinctItems; 
 			$noOfItems += $value['multiple'];
@@ -228,21 +220,20 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			$value['total'] = (float) floatval( $value['price'] ) * floatval( $value['multiple'] );
 			$totalPrice = (float) $value['total'] + $totalPrice;
 			$row = $this->_xml->createElement( 'tr' );
-	//		var_export( $value['subscription_label'] );
-			$link = $this->_xml->createElement( 'a', htmlspecialchars( $value['subscription_label'] ) );
+
+            $link = $this->_xml->createElement( 'a', htmlspecialchars( $value['subscription_label'] ) );
 			$columnNode = $this->_xml->createElement( 'td' );
 			$text = $this->_xml->createTextNode( $value['subscription_label'] );
 			$columnNode->appendChild( $text );
-		//	var_export( $value );
 			
 			$value['item_link'] = @$itemLink =  $value['url'] ? : 'javascript:;' ;
 			if( ! @$value['classplayer_url'] && @$value['subscription_object_name'] )
 			{
-	//			$value['classplayer_url'] = '/tools/classplayer/get/object_name/' .  $value['subscription_object_name'] . '/';
-			}
+
+            }
 			@$value['classplayer_url'] = $value['classplayer_url'] ? ';classPlayerUrl=' . $value['classplayer_url'] . ';' . 'spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() : null;
-		//		var_export( $value['classplayer_url'] );
-			$link->setAttribute( 'href', $value['item_link'] );
+
+            $link->setAttribute( 'href', $value['item_link'] );
 			$link->setAttribute( 'rel', $value['classplayer_url'] );
 			$link->setAttribute( 'title', @$value['subscription_description'] );   
 			$columnNode = $this->_xml->createElement( 'td' );
@@ -250,14 +241,12 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			$row->appendChild( $columnNode );
 			$value['price'] = $filter->filter( $value['price'] );
 			$value['total'] = $filter->filter( $value['total'] );
-	//		if( ! @$value['cycle_label'] ){ var_export( $value ); }
-			$value['multiple'] = $value['multiple'] . ' ' . $value['cycle_label'];
+
+            $value['multiple'] = $value['multiple'] . ' ' . $value['cycle_label'];
 			foreach( $tableColumns as $column )
 			{
 				if( array_key_exists( $column, $value ) )
 				{
-		//	var_export( $column );
-		//	var_export( $value[$column] );
 					$columnNode = $this->_xml->createElement( 'td' );
 					$text = $this->_xml->createTextNode( $value[$column] );
 					$columnNode->appendChild( $text );
@@ -265,8 +254,6 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 					$row->appendChild( $columnNode );
 				}
 			}
-		//	var_export( $value );
-		//	var_export( md5( serialize( $value ) ) );
 			$value['delete_url'] = $deleteUrl2 = $deleteMessage ? $deleteMessage : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'delete', 'cart_id' => $cartID  ) );
 			$columnNode = @$this->_xml->createHTMLElement( 'td',  '<a href="' . $value['delete_url'] . '" title="' . $deleteMessage . ' Delete: ' . $value['subscription_label'] . '">x</a>' );
 			$columnNode->setAttribute( 'align', 'center'  );

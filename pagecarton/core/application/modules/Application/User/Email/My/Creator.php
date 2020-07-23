@@ -37,7 +37,7 @@ class Application_User_Email_My_Creator extends Application_User_Email_My_Abstra
 	//	$table = new Application_User_Email_My( new Ayoola_Dbase(  ) );
 	//	$table->setTableName( 'users' );
 	//	var_export( get_current_user() );
-		$this->createForm( 'Create', 'Create a new email' );
+		$this->createForm( 'Continue', 'Create a new email' );
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		//	Save the user in the default user db table
@@ -57,7 +57,7 @@ class Application_User_Email_My_Creator extends Application_User_Email_My_Abstra
 				{
 					$response = $response['data'];
 					$values['email'] = strtolower( $values['username'] . '@' . $values['domain'] );
-					$this->setViewContent( "Email '{$values['email']}' has been created successfully.", true );
+					$this->setViewContent( self::__( "Email '{$values['email']}' ) has been created successfully.", true ) );
 					break;
 			//		var_export( $response );
 				}
@@ -110,7 +110,7 @@ class Application_User_Email_My_Creator extends Application_User_Email_My_Abstra
 			//	var_export( $values );
 			//	var_export( $values );
 				$this->setDbTable();
-				if( $this->insertDb( $values ) ){ $this->setViewContent( "Email '{$values['email']}' has been created successfully.", true ); }
+				if( $this->insertDb( $values ) ){ $this->setViewContent( self::__( "Email '{$values['email']}' ) has been created successfully.", true ) ); }
 			break;
 		
 		}
