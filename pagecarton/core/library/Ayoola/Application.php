@@ -1387,7 +1387,7 @@ class Ayoola_Application
 					break;
 				}
             }
-            else
+            elseif( $uri !== '/' )
             {
                 //  new
                 //  Let's use theme content straight-up
