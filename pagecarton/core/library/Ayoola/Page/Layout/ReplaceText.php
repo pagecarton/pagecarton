@@ -468,7 +468,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 		//	$percentage += 100;
 		}
         elseif( 
-            ( array_intersect_assoc( $themeInfo['dummy_replace'], $themeInfoAll['dummy_replace'] ) === $themeInfoAll['dummy_replace'] && $themeInfoAll['dummy_replace'] !== $themeInfo['dummy_replace'] ) 
+            ( @array_intersect_assoc( $themeInfo['dummy_replace'], $themeInfoAll['dummy_replace'] ) === $themeInfoAll['dummy_replace'] && $themeInfoAll['dummy_replace'] !== $themeInfo['dummy_replace'] ) 
             || array_intersect( $themeInfo['dummy_replace'], $themeInfoX['dummy_replace'] ) !== $themeInfo['dummy_replace'] )
 		{
 		//	$percentage += 100;

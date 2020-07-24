@@ -885,10 +885,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						$sectionalObjectCollection .= $this->getViewableObject( $eachObject );
 					}
 
-				//	Inject the parameters.
-
+				    //	Inject the parameters.
 					//	Calculate advanced parameters at this level so that access levels might work
-
 					$parameters = self::prepareParameters( $parameters );
 					if( $this->isSaveMode() )
 					{
@@ -922,7 +920,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					@$parametersArray['wrapper_name'] = $parametersArray['wrapper_name'] ? : null;
 					if( @$parametersArray['object_access_level'] )
 					{
-					//	Begin to populate the content of the template file
+					    //	Begin to populate the content of the template file
 						$accessLevelStr = var_export( $parametersArray['object_access_level'], true );
 						$sectionContent['include'] .= "
 							if( Ayoola_Page::hasPriviledge( {$accessLevelStr}, array( 'strict' => true ) ) )
@@ -1148,7 +1146,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			
 
 			//	Sanitize theme pages!
-			if( stripos( $page['url'], '/layout/' ) === 0 )     
+			if( stripos( $page['url'], '/layout/' ) === 0 && empty( $this->_parameter['theme_variant'] ) )     
 			{
 				$class = new Ayoola_Page_Editor_Sanitize(); 
 

@@ -1347,6 +1347,7 @@ class Ayoola_Application
 
                 if( ! empty( $options['auto_init_theme_page'] ) )
                 {
+                //    var_export( $uri );
                     $variant = filemtime( $pageFile );
                     //	auto-saved file
                     $pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/include';
@@ -1363,26 +1364,29 @@ class Ayoola_Application
                         $pagePaths['template'] = $pagePathsX['template'];
                     }
 
-                    if( empty( $include ) || ! is_file( $include ) || filemtime( $include ) < $variant )
-                    {
-                        @unlink( $PAGE_INCLUDE_FILE );
-                        @unlink( $PAGE_TEMPLATE_FILE );
-                        $PAGE_INCLUDE_FILE = false;
-                        $PAGE_TEMPLATE_FILE = false;
-                    }
-
-                    if( empty( $include ) OR ! is_file( $include ) OR ! is_file( $template ) )
+                    if( empty( $include ) || ! is_file( $include ) || ! is_file( $template ) || filemtime( $include ) < $variant )
                     {
         
                         //	save first
                         //	once page is created, let's have blank content
                         //  was causing "Editing /" in title
                         //  and blank pages
-                        //    if( ! empty( $options['auto_init_theme_page'] ) )
+                    //    var_export( $uri );
+                        
+                        $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => 'auto' ) );
+                        $d = $page->refresh( $uri, $themeName );
+
+                        $include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
+                        $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
+                        if( $include && $template )
                         {
-                            $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => 'auto' ) );
-                            $d = $page->refresh( $uri, $themeName );
+                            $PAGE_INCLUDE_FILE = $include;
+                            $PAGE_TEMPLATE_FILE = $template;
+                            $pagePaths['include'] = $pagePathsX['include'];
+                            $pagePaths['template'] = $pagePathsX['template'];
                         }
+    
+                        
                     }
                 }
 

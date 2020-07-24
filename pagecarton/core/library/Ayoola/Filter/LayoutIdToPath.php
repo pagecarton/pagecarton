@@ -64,12 +64,12 @@
         //    var_export( $themeDir );
         //    var_export( $options );
         //    var_export( Ayoola_Loader::getFullPath( $themeDir ) );
-			if( $path = Ayoola_Loader::getFullPath( $themeDir ) )
+			if( $path = Ayoola_Loader::getFullPath( $themeDir, ! empty( $options['always_blacklist'] ) ? $options : null ) )
 			{
 				$fileC[] = $path;
 
             }
-			elseif( $path = Ayoola_Loader::getFullPath( $themeDir ) )
+			elseif( $path = Ayoola_Loader::getFullPath( $themeDir, ! empty( $options['always_blacklist'] ) ? $options : null ) )
 			{
                 //  don't
 			    //	$fileC[] = $path;
@@ -213,7 +213,11 @@
                     //	we have a parent template. lets make sure that's what is being used.
                     //	strip APPLICATION_PATH so that we don't store full url'   
 
-                    $templateFile = self::getThemeIncludeFile( $themeName, array( 'path_blacklist' => $myPath, 'always_blacklist' => true ), 'template' );                    
+                    $templateFile = self::getThemeIncludeFile( $themeName, array( 'path_blacklist' => $myPath, 'always_blacklist' => true ), 'template' );  
+                    
+                //    var_export( $myPath );
+                //    var_export( $templateFile );
+
                     //	use global temp folder because of progenies
                     $temIncludeFile = tempnam( CACHE_DIR, __CLASS__ );           
                     if( is_file( $templateFile ) )
@@ -243,13 +247,15 @@
 				}
 				if( ! is_file( $dir . @$layoutData['pagelayout_filename'] ) )
 				{
+                //    var_export( $dir );
+                //    var_export( $layoutData );
+
                     //	Use the parent layout file
 					if( ! $value ){ return false; }
 
 					$class = new Ayoola_Page_Layout_Creator();
 					$class->setFilename( array( 'layout_name' => $value ) );
 					$value = $class->getFilename();
-
 					
 				}
 				else
