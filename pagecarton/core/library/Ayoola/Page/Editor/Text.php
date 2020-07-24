@@ -296,14 +296,17 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         
         //  to be executed within the widget class
         $content = str_ireplace( array( 'i>&nbsp;</i', 'span>&nbsp;</span', ), array( 'i></i', 'span></span', ), $content );
+        $content = self::fixUrlPrefix( $content, Ayoola_Application::getUrlPrefix(), '' );
 
         // include other HTML here
-        preg_match_all( '|<include.*(/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*).*>|i', $content, $matches );        
+        preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"](/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
+    //    var_export( $matches );     
+      
         foreach( $matches[0] as $count => $each )
         {
             $parameters['includes'][$matches[1][$count]] = $each;
         }
-        $content = self::fixUrlPrefix( $content, Ayoola_Application::getUrlPrefix(), '' );
+   //     var_export( $parameters['includes'] );     
         $parameters['content'] = $content;
         $parameters['url_prefix'] = Ayoola_Application::getUrlPrefix();
     }
@@ -330,7 +333,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         //  Bring in included files
         if( $this->getParameter( 'includes' ) )
         {
-
+        //    var_export( $this->getParameter( 'includes' ) );
             foreach( $this->getParameter( 'includes' ) as $file => $placeholder )
             {
 
@@ -340,7 +343,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                     continue;
                 }
                 $html = file_get_contents( $path );
-
+                Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $html, dirname( $file ) );
                 $content = str_ireplace( $placeholder, $html, $content );
             }
 
@@ -702,17 +705,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			@$object['editable'] ? $object['editable'] = str_ireplace( $search, $replace, $object['editable'] ): null;
 
 		}
-/*      
-        foreach( [ 'codes', 'editable', 'preserved_content' ] as $each  )
-        {
-            if( empty( $object[$each] ) )
-            {
-                continue;
-            }
 
-        }
-
- */
 		if( ! @$object['codes'] )
 		{
 

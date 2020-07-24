@@ -1266,13 +1266,13 @@ class Ayoola_Application
 		$pagePaths = Ayoola_Page::getPagePaths( $uri );
 
 		$PAGE_INCLUDE_FILE = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pagePaths['include'];
-		$PAGE_TEMPLATE_FILE = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pagePaths['template'];
+        $PAGE_TEMPLATE_FILE = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pagePaths['template'];
+
+        
 
 	    $noRestriction = false;
 		$previewTheme = function( array $options = null ) use ( $pagePaths, $uri, &$PAGE_INCLUDE_FILE, &$PAGE_TEMPLATE_FILE )
 		{
-            //    var_export( $pagePaths );
-            //    var_export( $uri );
 
 			//	page may just be present in the theme
 			$themeName = @$_REQUEST['pc_page_layout_name'];
@@ -1323,28 +1323,47 @@ class Ayoola_Application
 			{
 				return false;
 			}
-			$pagePaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
-			$pagePaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
+			$pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
+			$pagePathsX['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 
 			//	theme copy
-			$PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
-			$PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
-        //    var_export( $PAGE_INCLUDE_FILE );
-        //    var_export( $PAGE_TEMPLATE_FILE );
-			if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
+			$include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
+            $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
+
+            if( $include && $template )
+            {
+                $PAGE_INCLUDE_FILE = $include;
+                $PAGE_TEMPLATE_FILE = $template;
+                $pagePaths['include'] = $pagePathsX['include'];
+                $pagePaths['template'] = $pagePathsX['template'];
+            }
+			if
+			(
+				! is_file( $include ) OR ! is_file( $template )
+			)
 			{
+            //    var_export( $PAGE_INCLUDE_FILE );
+            //    var_export( $options );
 
                 if( ! empty( $options['auto_init_theme_page'] ) )
                 {
                     $variant = filemtime( $pageFile );
-
                     //	auto-saved file
-                    $pagePaths['include'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/include';
-                    $pagePaths['template'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/template';
-                    $PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $pagePaths['include'], array( 'prioritize_my_copy' => true ) );
-                    $PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $pagePaths['template'], array( 'prioritize_my_copy' => true ) );
+                    $pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/include';
+                    $pagePathsX['template'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/template';
 
-                    if( empty( $PAGE_INCLUDE_FILE ) || ! is_file( $PAGE_INCLUDE_FILE ) || filemtime( $PAGE_INCLUDE_FILE ) < $variant )
+                    $include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
+                    $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
+
+                    if( $include && $template )
+                    {
+                        $PAGE_INCLUDE_FILE = $include;
+                        $PAGE_TEMPLATE_FILE = $template;
+                        $pagePaths['include'] = $pagePathsX['include'];
+                        $pagePaths['template'] = $pagePathsX['template'];
+                    }
+
+                    if( empty( $include ) || ! is_file( $include ) || filemtime( $include ) < $variant )
                     {
                         @unlink( $PAGE_INCLUDE_FILE );
                         @unlink( $PAGE_TEMPLATE_FILE );
@@ -1352,7 +1371,7 @@ class Ayoola_Application
                         $PAGE_TEMPLATE_FILE = false;
                     }
 
-                    if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
+                    if( empty( $include ) OR ! is_file( $include ) OR ! is_file( $template ) )
                     {
         
                         //	save first
@@ -1363,13 +1382,11 @@ class Ayoola_Application
                         {
                             $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => 'auto' ) );
                             $d = $page->refresh( $uri, $themeName );
-                        //    var_export( $d );
-                        //    exit();
                         }
                     }
                 }
 
-                if( ! $PAGE_INCLUDE_FILE OR ! $PAGE_TEMPLATE_FILE )
+                if( empty( $include ) OR ! is_file( $include ) OR ! is_file( $template ) )
                 {
                     //	not found
                     return false;
@@ -1379,7 +1396,7 @@ class Ayoola_Application
 		};
 		do
 		{
-			if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
+		//	if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
 			{
 				if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
 				{
@@ -1387,17 +1404,6 @@ class Ayoola_Application
 					break;
 				}
             }
-            elseif( $uri !== '/' )
-            {
-                //  new
-                //  Let's use theme content straight-up
-				if( $previewTheme() )
-				{
-                    $noRestriction = true;
-					break;
-				}
-            }
-
 			if
 			(
 				! is_file( $PAGE_INCLUDE_FILE ) OR ! is_file( $PAGE_TEMPLATE_FILE )
@@ -1472,7 +1478,6 @@ class Ayoola_Application
         {
             return false;
         }
-
 		//	Put in Access Restriction
 		$pagePaths['no_restrictions'] ? : self::restrictAccess();
 

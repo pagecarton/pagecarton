@@ -178,7 +178,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
         $sectionsToSave = null;
         
         $values = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
-    //    var_export( $values );
 
 		$content = self::sanitizeTemplateFile( $content, $values, $sectionsToSave );
 		
@@ -319,10 +318,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
      */
     public function setFilename( $data = null )
 	{
-	//	if( ! $values = $this->getForm()->getValues() )
-		{
-			
-		}
 		if( ! $data )
 		{ 
 			try
@@ -388,6 +383,24 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		preg_match_all( "/@@@([0-9A-Za-z-_]+)@@@/", $content, $placeholdersInPageThemeFile );
 		return @$placeholdersInPageThemeFile[1];
 	}
+	
+    /**
+     * 
+     * 
+     * @return bool
+     */
+	public static function filterThemeContentUrls( & $content, $prefix )
+    {
+        //	http://stackoverflow.com/questions/2869844/regex-to-replace-relative-link-with-root-relative-link
+		//	workaround for the bug causing space to be replaced with 	%5Cs in preg_replace
+		$content = preg_replace('#(href|src)[\s]*=[\s]*(["\'])([^/\#\{][^:\'"]*)(?:["\'\.])#', '$1=$2' . $prefix . '/$3$2', $content ); 
+
+        $content = preg_replace('#url\(\'?"?([^/\#\{][^:\'"\(\);]*)\'?"?\)#', 'url(' . $prefix . '/$1)', $content );
+
+        //  match data-background="assets/img/gallery/section_bg04.jpg" attributes
+        $content = preg_replace(';([a-zA-Z-_0-9]+)[\s]*=[\s]*(["\'])([^/#\{][^:\'"]*)(\.)(jpg|png|html)(?:["\'\.]);i', '$1=$2' . $prefix . '/$3.$5$2', $content ); 
+    } 
+
 
     /**
 	 * 
@@ -409,18 +422,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		//	ADDED " so we can include links to layout path
 		$content = str_ireplace( array( '"/layout/' . $values['layout_name'] . '/', '"/layout//' ), '"', $content );
 
-	
-        //	http://stackoverflow.com/questions/2869844/regex-to-replace-relative-link-with-root-relative-link
-		//	workaround for the bug causing space to be replaced with 	%5Cs in preg_replace
-		$content = preg_replace('#(href|src)[\s]*=[\s]*(["\'])([^/\#\{][^:\'"]*)(?:["\'\.])#', '$1=$2#PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$3$2', $content ); 
-
-        $content = preg_replace('#url\(\'?"?([^/\#\{][^:\'"\(\);]*)\'?"?\)#', 'url(PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$1)', $content );
-
-    //    preg_match_all( ';([a-zA-Z-_0-9]+)[\s]*=[\s]*(["\'])([^/#\{][^:\'"]*)(\.)(jpg|png|html)(?:["\'\.]);', $content, $matchesT ); 
-    //    var_export( $matchesT[0] );
-
-        //  match data-background="assets/img/gallery/section_bg04.jpg" attributes
-        $content = preg_replace(';([a-zA-Z-_0-9]+)[\s]*=[\s]*(["\'])([^/#\{][^:\'"]*)(\.)(jpg|png|html)(?:["\'\.]);i', '$1=$2#PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$3.$5$2', $content ); 
+    
+        self::filterThemeContentUrls( $content, '#PC_URL_PREFIX/layout/' . $values['layout_name'] );
 
 		// Instantiate the object
 		$xml = new Ayoola_Xml();
@@ -613,7 +616,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 						break;
 					}
 				}
-			//	$sectionsToUse[$key]
 				foreach( $section as $each )
 				{
 					//	now doing this on the fly in the Ayoola_Page_Editor_Layout 
@@ -707,8 +709,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 						
 						//	Make all the parameters advanced parameters to allow them editable
 						$advancedParametersToUse = array();
-					//	var_expor
-
 				
 						//	this ensures we have an object interior thats built with parameter 
 						//	simulating the way they would appear LIVE
@@ -824,10 +824,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		
 		//	build links
 		$links = array();
-	//	if( ! empty( $values['layout_options'] ) && in_array( 'auto_menu', $values['layout_options'] ) )   
-		{
-			$links = $xml->getElementsByTagName( 'a' );
-		}
+		$links = $xml->getElementsByTagName( 'a' );
 
 		foreach( $links as $navCount => $each )
 		{
@@ -865,7 +862,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			//	no need to clear interior again
 			
 			//	get the inner parent of ul, if present.
-		//	while( $each->hasChildNodes() ) 
 			if( $each->getElementsByTagName( 'ul' ) )
 			{
 				foreach( $each->getElementsByTagName( 'ul' ) as $ulCount => $eachChild ) 
@@ -882,38 +878,37 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					}
 					$each->setAttribute( 'data-pc-menu-id-list', $each->getAttribute( 'data-pc-menu-id-list' ) . ',' . $ulParent->getAttribute( 'id' ) );
 
-				//	if( strtolower( @$eachChild->tagName ) === 'ul' )
-					{
-						//	Save the class names and other information
-						$each->setAttribute( 'data-pc-menu-ul-class-' . $idForMenu, $eachChild->getAttribute( 'class' ) );
-						$eachChild->getAttribute( 'id' ) ? $each->setAttribute( 'data-pc-menu-ul-id-' . $idForMenu, $eachChild->getAttribute( 'id' ) ) : null;
-						
-						//	Go deaper to look for class names of li and sub menus
-						while( $eachChild->hasChildNodes() ) 
-						{
-							$ulChild = $eachChild->firstChild;
-							if( strtolower( @$ulChild->tagName ) === 'li' )
-							{
-								//	Save the class names and other information
-								$ulChild->getAttribute( 'class' ) ? $each->setAttribute( 'data-pc-menu-li-active-class-' . $idForMenu, $ulChild->getAttribute( 'class' ) ) : null;
-										
-								//	Go deaper to look for sub menus
-								while( $ulChild->hasChildNodes() ) 
-								{
-									$liChild = $ulChild->firstChild;
-									if( strtolower( @$liChild->tagName ) === 'ul' )
-									{
-										//	Save the class names and other information
-										$liChild->getAttribute( 'class' ) ? $each->setAttribute( 'data-pc-menu-li-ul-class-' . $idForMenu, $liChild->getAttribute( 'class' ) ) : null;
-										
-										
-									}
-									$ulChild->removeChild( $liChild );
-								}						
-							}
-							$eachChild->removeChild( $ulChild );
-						}						
-					}
+					
+                    //	Save the class names and other information
+                    $each->setAttribute( 'data-pc-menu-ul-class-' . $idForMenu, $eachChild->getAttribute( 'class' ) );
+                    $eachChild->getAttribute( 'id' ) ? $each->setAttribute( 'data-pc-menu-ul-id-' . $idForMenu, $eachChild->getAttribute( 'id' ) ) : null;
+                    
+                    //	Go deaper to look for class names of li and sub menus
+                    while( $eachChild->hasChildNodes() ) 
+                    {
+                        $ulChild = $eachChild->firstChild;
+                        if( strtolower( @$ulChild->tagName ) === 'li' )
+                        {
+                            //	Save the class names and other information
+                            $ulChild->getAttribute( 'class' ) ? $each->setAttribute( 'data-pc-menu-li-active-class-' . $idForMenu, $ulChild->getAttribute( 'class' ) ) : null;
+                                    
+                            //	Go deaper to look for sub menus
+                            while( $ulChild->hasChildNodes() ) 
+                            {
+                                $liChild = $ulChild->firstChild;
+                                if( strtolower( @$liChild->tagName ) === 'ul' )
+                                {
+                                    //	Save the class names and other information
+                                    $liChild->getAttribute( 'class' ) ? $each->setAttribute( 'data-pc-menu-li-ul-class-' . $idForMenu, $liChild->getAttribute( 'class' ) ) : null;
+                                    
+                                    
+                                }
+                                $ulChild->removeChild( $liChild );
+                            }						
+                        }
+                        $eachChild->removeChild( $ulChild );
+                    }						
+					
 					$ulParent->removeChild( $eachChild );
 				}	
 			}
@@ -963,13 +958,11 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					$each->setAttribute( 'src', "PC_PLACEHOLDER_FOR_ORG_LOGO" );	
 				break;
 				//	This won't work in dom
-/* 				$each->setAttribute( 'src', "<?php echo Ayoola_Doc::getLogo(); ?>" );
- */			}
+    		}
 		}
 		
 		// empty anchor not doing well in CKEDITOR
 
-	//	foreach( $anchor as $each )
 		{
 			//	check if empty
 			
@@ -1048,7 +1041,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		$content = $xml->saveHTML();
 
 		//	refresh docs on update
-		/*$content = preg_replace( '|(#)?PC_URL_PREFIX([^\#\{][^:"]*)(")|', '<?php echo Ayoola_Doc::uriToDedicatedUrl( \'$2\' ); ?>$4', $content );*/ 
 
 		//	replace all embedded html links
 		$content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/]*)\.html([\'"])?#s', '=$1/$2$3', $content );

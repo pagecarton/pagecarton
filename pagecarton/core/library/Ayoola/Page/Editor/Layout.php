@@ -767,7 +767,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                                 }
 
                                 //  content with this means it is meant to be in theme file
-								if( stripos( $originalFile, $check  ) || stripos( $check, '©' ) || stripos( $check, '&copy;' ) || stripos( $check, '&amp;copy' ) || stripos( $check, '</nav>' ) )
+								if( stripos( $originalFile, $check  ) || stripos( $check, '©' ) || stripos( $check, '&copy;' ) || stripos( $check, '&amp;copy' ) )
 								{
 									//	Don't duplicate whats in theme file and navigation'
 
@@ -780,10 +780,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 								//	clean the code out here so that <php dont show in new themes
 
 							}
+                        //    var_export( $defaultPlaceHolder );
 
 							//	only show this if  && empty( $values )
 						//	if( )
-
+                        //    var_export( $values );
 							if( ! empty( $_GET['pc_load_theme_defaults'] ) || empty( $values ) || @$values[0] === false )
 							{
 
@@ -796,7 +797,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 									$i = $maxObjectsPerSection;
 									$defaultPlaceHolder = str_ireplace( Ayoola_Page_Layout_Abstract::getPlaceholderValues(), Ayoola_Page_Layout_Abstract::getPlaceholderValues2(), $defaultPlaceHolder );
 
-									$templateDefaults = array( 'editable' => $defaultPlaceHolder,  );
+									$templateDefaults = array( 'editable' => $defaultPlaceHolder );
 									$sectionalValues[$numberedSectionName . '_template_defaults'] = $templateDefaults;
 									$sectionalValues[$numberedSectionName] = 'Ayoola_Page_Editor_Text';
 								}

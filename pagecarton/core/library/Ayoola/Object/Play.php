@@ -125,7 +125,11 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 						if( isset( $_SERVER['HTTP_AYOOLA_PLAY_MODE'] ) )
 						{
 							$playMode = $_SERVER['HTTP_AYOOLA_PLAY_MODE'] ? : $this->_playMode;
-						}
+                        }
+						if( isset( $_SERVER['HTTP_PC_WIDGET_OUTPUT_METHOD'] ) )
+						{
+							$playMode = $_SERVER['HTTP_PC_WIDGET_OUTPUT_METHOD'] ? : $this->_playMode;
+                        }
 						if( isset( $_REQUEST['pc_widget_output_method'] ) )
 						{
 							$playMode = $_REQUEST['pc_widget_output_method'];
