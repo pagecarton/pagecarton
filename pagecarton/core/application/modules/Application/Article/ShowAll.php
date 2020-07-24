@@ -756,7 +756,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
 		$newArticleType = ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
 		$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
-		@$newArticleTypeToShow = self::getItemName() ? : ( ucfirst( $postTypeInfo['post_type'] ) ? : 'Item' );
+		@$newArticleTypeToShow = self::getItemName() ? : ucwords( ( $postTypeInfo['post_type'] ) ? : str_replace( '-', ' ', $newArticleType ) );
+		@$newArticleTypeToShow = $newArticleTypeToShow ? : 'Item';
 		$categoryForNewPost = @array_pop( $where['category_name'] );
 		$addNewPostUrl = ( static::$_newPostUrl ? : 
 							( $this->getParameter( 'add_a_new_post_link' ) ? : 

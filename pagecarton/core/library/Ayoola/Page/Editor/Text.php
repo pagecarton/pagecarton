@@ -343,7 +343,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                     continue;
                 }
                 $html = file_get_contents( $path );
-                Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $html, dirname( $file ) );
+                $prefix = dirname( $file );
+            //    var_export( $prefix );
+                Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $html, $prefix );
+                $html = preg_replace(';(href)[\s]*=[\s]*(["\'])' . $prefix . '([^.]*)\.html(?:["\'\.]);i', '$1=$2$3$2', $html ); 
+
                 $content = str_ireplace( $placeholder, $html, $content );
             }
 

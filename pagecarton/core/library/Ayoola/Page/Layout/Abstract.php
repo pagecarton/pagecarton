@@ -459,6 +459,14 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			$each->parentNode->removeChild( $each );
 		}
+		$link = $xml->getElementsByTagName( 'link' );
+		foreach( $link as $each )
+		{
+            if( stripos( $each->getAttribute( 'rel' ), 'icon' ) !== false )
+            {
+                $each->parentNode->removeChild( $each );
+            }
+		}
 		$body = $xml->getElementsByTagName( 'body' );
 		if( ! $body->length )
 		{
