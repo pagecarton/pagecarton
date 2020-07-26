@@ -317,9 +317,6 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$personal->id = __CLASS__ . 'personal';
 			$personal->addElement( array( 'name' => 'firstname', 'placeholder' => 'Your given name', 'type' => 'InputText', 'value' => @$values['firstname'] ) );
 			$personal->addRequirement( 'firstname','Name:: WordCount=>2;;20' );
-	//		$personal->addElement( array( 'name' => 'middlename', 'placeholder' => 'Other name', 'type' => 'InputText', 'value' => @$values['middlename'] ) );
-	//		$personal->addElement( array( 'name' => 'phonenumber', 'placeholder' => 'Mobile Number', 'type' => 'InputText', 'value' => @$values['phonenumber'] ) );
-	//		$personal->addFilter( 'middlename','Name' );
 			$personal->addElement( array( 'name' => 'lastname', 'placeholder' => 'Your family name', 'type' => 'InputText', 'value' => @$values['lastname'] ) );
 			$personal->addRequirement( 'lastname','Name:: WordCount=>2;;20' );
 			$option = array( 'M' => 'Male', 'F' => 'Female' );
@@ -340,16 +337,12 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 					break; 
 				}
 			}
-		//	self::v( $values['birth_date'] );       
 			
 			//	Month
 			$options = array_combine( range( 1, 12 ), array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ) );
 			$birthMonthValue = intval( @strlen( $values['birth_month'] ) === 1 ? ( '0' . @$values['birth_month'] ) : @$values['birth_month'] );
 			$birthMonthValue = intval( $birthMonthValue ?  : $this->getGlobalValue( 'birth_month' ) );
-		//	var_export( $birthMonthValue );
-		//	var_export( $this->getGlobalValue( 'birth_month' ) );
 			$personal->addElement( array( 'name' => 'birth_month', 'label' => 'Date of Birth', 'style' => 'min-width:10%;max-width:25%;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $birthMonthValue ), array( 'Month' ) + $options ); 
-	//		$personal->addRequirement( 'birth_month', array( 'InArray' => array_keys( $options ) ) );
 			if( strlen( $this->getGlobalValue( 'birth_month' ) ) === 1 )
 			{
 				$personal->addFilter( 'birth_month', array( 'DefiniteValue' => '0' . $this->getGlobalValue( 'birth_month' ) ) );
@@ -361,7 +354,6 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$birthDayValue = intval( @strlen( $values['birth_day'] ) === 1 ? ( '0' . @$values['birth_day'] ) : @$values['birth_day'] );
 			$birthDayValue = intval( $birthDayValue ?  : $this->getGlobalValue( 'birth_day' ) );
 			$personal->addElement( array( 'name' => 'birth_day', 'label' => '', 'style' => 'min-width:10%;max-width:25%;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $birthDayValue ), array( 'Day' ) +$options );
-	//		$personal->addRequirement( 'birth_day', array( 'InArray' => array_keys( $options ) ) );
 			if( strlen( $this->getGlobalValue( 'birth_day' ) ) === 1 )
 			{
 				$personal->addFilter( 'birth_day', array( 'DefiniteValue' => '0' . $this->getGlobalValue( 'birth_day' ) ) );
@@ -372,22 +364,17 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$options = range( date( 'Y' ) - 13, 1900 );
 			$options = array_combine( $options, $options );
 			$personal->addElement( array( 'name' => 'birth_year', 'label' => '', 'style' => 'min-width:10%;max-width:25%;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values['birth_year'] ), array( 'Year' ) + $options );
-		//	$personal->addRequirement( 'birth_year', array( 'InArray' => array_keys( $options ) ) );
 			
 			//	Birthday combined
 			$personal->addElement( array( 'name' => 'birth_date', 'label' => 'Date of Birth', 'placeholder' => 'YYYY-MM-DD', 'type' => 'Hidden', 'value' => @$values['birth_date'] ) );
-		//	$personal->addRequirement( 'birth_date','Date=>YYYYMMDD' );
 			$dob = $this->getGlobalValue( 'birth_year' );
 			$dob .= strlen( $this->getGlobalValue( 'birth_month' ) ) === 1 ? ( '0' . $this->getGlobalValue( 'birth_month' ) ) : $this->getGlobalValue( 'birth_month' );
 			$dob .= strlen( $this->getGlobalValue( 'birth_day' ) ) === 1 ? ( '0' . $this->getGlobalValue( 'birth_day' ) ) : $this->getGlobalValue( 'birth_day' );
 			$personal->addFilter( 'birth_date', array( 'DefiniteValue' => $dob ) );
-	//		$personal->addFilters( 'Trim' );
-//			$personal->addFilters( 'Trim::Escape' );
 			$this->getParameter( 'no_legend' ) ?  null : $personal->addLegend( "$legend Personal Information" );
 		}
 		$account = new Ayoola_Form_Element;
 		$account->id = __CLASS__ . 'account';
-	//	$account->placeholderInPlaceOfLabel = true;
 		$description = 'Leave blank if you don\'t intend to change password.';   
 		if( is_null( $values ) )
 		{ 
@@ -403,58 +390,8 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			{ 
 
 				$account->addElement( array( 'name' => 'username', 'label' => 'Username', 'placeholder' => 'Choose a username', 'type' => 'InputText', 'onchange' => 'ayoola.addShowProfileUrl( this );', 'onfocus' => 'ayoola.addShowProfileUrl( this );', 'onkeyup' => 'ayoola.addShowProfileUrl( this );', 'value' => @$values['username'] ) );
-			//	var_export( in_array( 'user_subdomains', Ayoola_Application::getDomainSettings( 'domain_options' ) ) );
-		//		in_array( 'user_subdomains', Ayoola_Application::getDomainSettings( 'domain_options' ) )
-/*				if( @in_array( 'user_subdomains', Ayoola_Application::getDomainSettings( 'domain_options' ) ) )
-				{
-					Application_Javascript::addCode
-					(
-						'
-							ayoola.addShowProfileUrl = function( target )
-							{
-								var element = document.getElementById( "element_to_show_profile_url" );
-								element = element ? element : document.createElement( "div" );
-								element.id = "element_to_show_profile_url";
-								var a = false;
-								var xry = target.value;
-								xry = xry.toLowerCase();
-								xry = xry.replace( /[^a-zA-Z0-9\/]/gi, "-" );
-								xry = xry.replace( /([-])+/gi, "-" );
-								xry = xry.replace( /[-\/]$/gi, "" );
-								xry = xry.replace( /^[-\/]/gi, "" );
-							//	xry = "/" + xry;
-								if( xry )
-								{
-									a = true;
-								}
-								var xm = "Please enter a valid name in the space provided... (e.g. My New Site)";
-								if( a )
-								{
-									xm = "The permanent domain name will be: <a target=\"_blank\" href=\'' . Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . '" + xry + ".' . Ayoola_Application::getDomainName() . '\'>' . Ayoola_Application::getDomainSettings( 'protocol' ) . '://' . '" + xry + ".' . Ayoola_Application::getDomainName() . '</a>";
-								}  
-								element.innerHTML = "<span style=\'font-size:x-small;\' class=\'\'>" + xm + "</span>";
-								target.parentNode.insertBefore( element, target.nextSibling );
-							}
-						'
-					);
-				}
-				else
-				{
-					Application_Javascript::addCode
-					(
-						'
-							ayoola.addShowProfileUrl = function( target )
-							{
-								return false;
-							}
-						'
-					);
-				}
-*/				$account->addRequirement( 'username', array( 'Username' => null, 'DuplicateUser' => array( 'username' ) ) );
-			}	
-			
-		//	$account->addRequirement( 'username', array( 'Username' => null ) );
-	//		$description = null;
+				$account->addRequirement( 'username', array( 'Username' => null, 'DuplicateUser' => array( 'username' ) ) );
+			}			
 			if( ! $this->getParameter( 'no_password' ) )
 			{ 
 

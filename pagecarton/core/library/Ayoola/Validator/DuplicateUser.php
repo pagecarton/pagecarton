@@ -52,7 +52,6 @@ class Ayoola_Validator_DuplicateUser extends Ayoola_Validator_DuplicateRecord
     {
 		if( ! $value ){ return false; }
 		if( in_array( $value, self::$_blacklist ) ){ return false; }
-		if( is_numeric( $value[0] ) ){ return false; }
 		$this->_value = $value;
 		$data = array();
 		switch( strtolower( $this->columnName ) )

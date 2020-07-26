@@ -60,7 +60,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 	protected $_objectData = array();
 	
     /**
-     * Array of data response to send as JSON or PHP Serial or other standard form Response
+     * Response mode 
      *
      * @var array
      */
