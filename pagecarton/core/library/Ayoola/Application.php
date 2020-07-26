@@ -1283,9 +1283,9 @@ class Ayoola_Application
             //  don't autogenerate if we already have the manual saved copy
             if( ! $rPath = Ayoola_Loader::getFullPath( $rPath ) )
             {
-                $tPath = 'documents/layout/' . $themeName . '/theme/variant/auto/template';
-                $tPath = Ayoola_Loader::getFullPath( $tPath );
-                //    var_export( $tPath );
+                $rPath = 'documents/layout/' . $themeName . '/theme/variant/auto/template';
+                $rPath = Ayoola_Loader::getFullPath( $rPath );
+                //    var_export( $rPath );
                 $pageFile = 'documents/layout/' . $themeName . '/template.html';
                 if( ! $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
                 {
@@ -1302,7 +1302,7 @@ class Ayoola_Application
                 }
                 if( $pageFile )
                 {
-                    if( ! $tPath || filemtime( $tPath ) < filemtime( $pageFile ) )
+                    if( ! $rPath || filemtime( $rPath ) < filemtime( $pageFile ) )
                     {
                         $themeValues = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
                         Ayoola_Page_Layout_Abstract::buildThemeFile( $themeName, file_get_contents( $pageFile ) );
@@ -1349,6 +1349,7 @@ class Ayoola_Application
                 {
                 //    var_export( $uri );
                     $variant = filemtime( $pageFile );
+
                     //	auto-saved file
                     $pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/include';
                     $pagePathsX['template'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/template';
@@ -1363,15 +1364,13 @@ class Ayoola_Application
                         $pagePaths['include'] = $pagePathsX['include'];
                         $pagePaths['template'] = $pagePathsX['template'];
                     }
-
-                    if( empty( $include ) || ! is_file( $include ) || ! is_file( $template ) || filemtime( $include ) < $variant )
+                    if( empty( $include ) || ! is_file( $include ) || ! is_file( $template ) || filemtime( $include ) < $variant || filemtime( $include ) < filemtime( $rPath ) )
                     {
         
                         //	save first
                         //	once page is created, let's have blank content
                         //  was causing "Editing /" in title
                         //  and blank pages
-                    //    var_export( $uri );
                         
                         $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => 'auto' ) );
                         $d = $page->refresh( $uri, $themeName );
