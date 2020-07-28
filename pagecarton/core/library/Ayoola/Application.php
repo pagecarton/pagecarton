@@ -1252,7 +1252,6 @@ class Ayoola_Application
     }
 
     /**
-
      * Get the Include required file to view page
      *
      * @param string URI to view
