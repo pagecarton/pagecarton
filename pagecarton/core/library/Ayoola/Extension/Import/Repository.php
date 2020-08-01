@@ -354,11 +354,8 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
                                      'template_name' => 'HorizontalGrayish',
                                //     'raw-options' => $data,
             ) );            
-//       var_export( $data );
         
 		return $menu;
-      //  self::v( $allFeed['channel']->item[0] );
-     //   self::v( $allFeed['channel']->item[1] );
 
 	}
     
@@ -383,7 +380,6 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 			return true;
         }
         $options = array_keys( self::getMenuOptions() );
-    //    self::v( $options );
         $category = ( @$_GET['category'] ? : $this->getDefaultCategory() );
         if( ! in_array( $category, $options ) )
         {
@@ -394,47 +390,36 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
         {
             $featured = '&post_switch=featured';
         }
-		$storage = self::getObjectStorage( array( 'id' => 'cssdcf-fw' . $category . $featured, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
+		$storage = self::getObjectStorage( array( 'id' => '-fw' . $category . $featured, 'device' => 'File', 'time_out' => $this->getParameter( 'cache_timeout' ) ? : 446000, ) );
 		if( ! $data = $storage->retrieve() )
         {
-        //    &category=' . 
             $site = 'https://' . static::$_site . '';
 
             $url = $site . '/widgets/Application_Article_RSS?category=' . $category . $featured;
             $feed = self::fetchLink( $url, array( 'time_out' => 28800, 'connect_time_out' => 28800, ) );
             $allFeed = (array) simplexml_load_string( $feed );
-       //   self::v($feed_to_array);
-        //   self::v($url);
-    //     $allFeed['channel'] = (array) $allFeed['channel'];
             $data = array();
+            $getData = $_GET;
+            unset( $getData['install'] );
+            unset( $getData['layout_type'] );
+            unset( $getData['title'] );
             foreach( $allFeed['channel']->item as  $each )
             {
                 $each = (array) $each;
-            //    self::v( $each );  
-            //    if( empty( $each['featured'] ) )
-                {
-                //    continue; 
-                }
 
                 $data[] = array(
-                    'article_url' => '?title=' . $each['title'] . '&layout_type=upload&install=' . $each['guid'] . '&' . http_build_query( $_GET ),
-                //   'article_url' => $each['link'], 
+                    'article_url' => '?title=' . $each['title'] . '&layout_type=upload&install=' . $each['guid'] . '&' . http_build_query( $getData ),
                     'guid' => $each['guid'],
                     'article_title' => $each['title'],
                     'article_description' => $each['description'],
                     'article_creation_date' => strtotime( $each['pubDate'] ),
                     'article_modified_date' => strtotime( $each['pubDate'] ),
                 );
-        //       var_export( $each );
             }
             $storage->store( $data );
         }
-//       var_export( $data );
         
 		$this->_dbData = $data;
-      //  self::v( $allFeed['channel']->item[0] );
-     //   self::v( $allFeed['channel']->item[1] );
-
 	}
 			
     /**
@@ -442,7 +427,6 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
      */
 	public static function sanitizeData( &$data )
     {
-	//	var_export( $data );
 		$data['not_real_post'] = true; 
         $site = 'https://' . static::$_site . '';
         //  'h-ttps://' . static::$_site . ''
@@ -450,7 +434,6 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
 		$data['document_url'] = $site . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=850&max_height=540&article_url=' . @$data['guid'];
 		$data['publish'] = '1'; 
 		$data['auth_level'] = '0';   
-	//	$data['allow_raw_data'] = true;    
 	}
 	// END OF CLASS
 }

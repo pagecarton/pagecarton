@@ -38,7 +38,6 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 		//	Make the application know we are using class player
         $_SERVER['HTTP_APPLICATION_MODE'] = $this->getObjectName();
         //   var_export( $this->getParameter() );
-        //   var_export( $_REQUEST );
 		try
 		{
 			{
@@ -50,7 +49,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 					$identifier = array( 'class_name' => $_REQUEST['object_name'] );
                 //    var_export( $identifier );
 				}
-				elseif( ! empty( $_REQUEST['pc_module_url_values'][0] ) )
+				elseif( ! empty( $_REQUEST['pc_module_url_values'][0] ) && $_REQUEST['pc_module_url_values'][0] !== 'name' && $_REQUEST['pc_module_url_values'][0] !== 'object_name' )
 				{
 					$identifier = array( 'class_name' => $_REQUEST['pc_module_url_values'][0] );
 				}
