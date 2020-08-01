@@ -2351,38 +2351,18 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 				$dataToSend = json_encode( $this->_objectData );
 
-				//	json data was being truncated
-
-				echo $dataToSend;
+                //	json data was being truncated
 
 				//	Log early before we exit
 				Ayoola_Application::log();
-				{
-					exit();
-				}
-			break;
-			case static::PLAY_MODE_JSONP:
-				error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
-				ini_set( 'display_errors', "0" );
 
-				header( 'Content-Type: application/javascript;' );
-				if( @$_POST['PAGECARTON_RESPONSE_WHITELIST'] )
-				{
-
-					//	Limit the values that is being sent
-					$whitelist = @$_POST['PAGECARTON_RESPONSE_WHITELIST'];
-					$whitelist = is_array( $whitelist ) ? $whitelist : array_map( 'trim', explode( ',', $whitelist ) );
-					$whitelist = array_combine( $whitelist, $whitelist );
-					$this->_objectData = array_intersect_key( $this->_objectData, $whitelist );
-				}
-				$dataToSend = json_encode( $this->_objectData );
-
+                if( $this->getParameter( 'return_json' ) )
+                {
+                    return $dataToSend;
+                }
 				echo $dataToSend;
-				//	Log early before we exit
-				Ayoola_Application::log();
-				{
-					exit();
-				}
+				exit();
+				
 			break;
 			case 'ENCRYPTION':
 

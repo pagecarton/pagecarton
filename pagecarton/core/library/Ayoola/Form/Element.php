@@ -130,9 +130,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		if( @$element['type'] )
 		{
 		}
-		//	Set Element ID and Label to default if undeclared
-    //    $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $element['name'] ) );	
-			
+		//	Set Element ID and Label to default if undeclared			
 		$element['real_name'] = $element['name'];
 		@$element['title'] = trim( $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) ), ':' );
 		@$element['placeholder'] = ( $element['placeholder'] ? : $element['label'] ) ? : ucwords( str_replace( '_', ' ', $element['name'] ) );

@@ -50,11 +50,8 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
     {
 		try
 		{
-			$this->_objectData['status'][] = 'received.';
-		//	var_export( $_FILES );
-		//	var_export( $_POST );
+			$this->_objectData['status'][] = 'received';
 			$docSettings = Ayoola_Doc_Settings::getSettings( 'Documents' );
-			//		var_export( $docSettings );
 
 			if( ! @$_POST['image'] && ! @$_POST['document'] ) 
 			{
@@ -81,12 +78,13 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					}
 					else
 					{
+                        $this->_objectData['status'][] = 'failed';
+                        $this->_objectData['badnews'][] = 'No content sent';
 						return false;
 					}
 
 				}
 			}
-
 			@$_POST['name'] = $_POST['name'] ? : '_file_';
 			$filter = new Ayoola_Filter_Transliterate();
 			$_POST['name'] = $filter->filter( $_POST['name'] );
@@ -94,7 +92,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			$filter = new Ayoola_Filter_SimplyUrl();
 			$_POST['name'] = $filter->filter( $_POST['name'] );
 
-//			if( ! Ayoola_Abstract_Table::hasPriviledge( ) )
 			$filenameToUse = null;
 			@$docSettings['allowed_uploaders'] = @$docSettings['allowed_uploaders'] ? : array();
 			@$docSettings['allowed_uploaders'][] = 98;	// allow us to user domain owners
@@ -325,9 +322,8 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			
 			//	Server-side resize
 			// include ImageManipulator class
-		//	require_once('ImageManipulator.php');
+		    //	require_once('ImageManipulator.php');
 		 
-		//	foreach ($_FILES as $file) 
 			do
 			{
 				// array of valid extensions
@@ -350,15 +346,8 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					$maxWith = @intval( $_POST['max_width'] ) ? : 3000;
 					$maxHeight = @intval( $_POST['max_height'] ) ? : 3000; 
 					
-			//		var_export( $width );
-			//		var_export( $maxWith );
-			//		var_export( $height );
-			//		var_export( $maxHeight );  
-			//		var_export( $_REQUEST['crop'] );
-					
 					if( $width != $maxWith || $height != $maxHeight )
 					{
-		//			var_export( $_REQUEST['crop'] );  
 						if( ! empty( $_REQUEST['crop'] ) )
 						{
 							ImageManipulator::makeThumbnail( $path, $maxWith, $maxHeight, $path );
@@ -367,7 +356,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 						break;
 					}
 					
-			//		var_export( __CLASS__ );
 					
 					// our dimensions will be 200x130
 					$x1 = $centreX - ( $maxWith / 2 ); 
@@ -412,8 +400,9 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			$this->setViewContent( $message );
 			return true;
 		}
-		catch( Application_Slideshow_Exception $e )
+		catch( Exception $e )
 		{ 
+            $this->_objectData['badnews'][2] = $e->getMessage();
 			return false; 
 		}
 	}

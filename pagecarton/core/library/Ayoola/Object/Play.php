@@ -50,16 +50,13 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 					$identifier = array( 'class_name' => $_REQUEST['object_name'] );
                 //    var_export( $identifier );
 				}
-				elseif( @$_REQUEST['name'] )
-				{
-				//	var_export( $_REQUEST['name'] );
-					$identifier = array( 'class_name' => $_REQUEST['name'] );
-                //    var_export( $identifier );
-				}
 				elseif( ! empty( $_REQUEST['pc_module_url_values'][0] ) )
 				{
 					$identifier = array( 'class_name' => $_REQUEST['pc_module_url_values'][0] );
-                //    var_export( $identifier );
+				}
+				elseif( @$_REQUEST['name'] )
+				{
+					$identifier = array( 'class_name' => $_REQUEST['name'] );
 				}
 				elseif( ($this->getParameter( 'list_all_widgets' ) || @$_REQUEST['list_all_widgets']) && self::hasPriviledge() )
 				{
@@ -114,13 +111,14 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 			}
 			if( Ayoola_Loader::loadClass( @$identifier['class_name'] ) )
 			{ 
+
 				if( $identifier['class_name']::isPlayable() )
 				{
 					$identifier['object_name'] = $identifier['class_name'];
-					$identifier['auth_level'] = $identifier['class_name']::getAccessLevel();
+                    $identifier['auth_level'] = $identifier['class_name']::getAccessLevel();
+
 					if( self::checkObject( $identifier ) )
 					{
-				//	var_export( $identifier );
 						$_SERVER['HTTP_AYOOLA_PLAY_CLASS'] = $identifier['class_name'];
 						if( isset( $_SERVER['HTTP_AYOOLA_PLAY_MODE'] ) )
 						{
@@ -133,7 +131,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 						if( isset( $_REQUEST['pc_widget_output_method'] ) )
 						{
 							$playMode = $_REQUEST['pc_widget_output_method'];
-						}
+                        }
 						$classToPlay = new $identifier['class_name'];
 						$classToPlay->setParameter( array( 'play_mode' => @$playMode ) );
 						$classToPlay->initOnce();

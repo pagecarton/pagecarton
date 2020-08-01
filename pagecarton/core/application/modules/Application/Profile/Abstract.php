@@ -361,7 +361,6 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
         $authTable->getDatabase()->getAdapter()->setRelationship( $authTable::SCOPE_PRIVATE );
 		if( ! static::isSubDomain() )
 		{
-		//	$fieldset->addRequirement( 'display_picture', array( 'NotEmpty' => array( 'badnews' => 'Please select a valid file to upload...', ) ) );
 			
 			//	Profile type
 			$authLevel = $authTable->select( null, null, array( 'xx' => 'ss') );
@@ -377,7 +376,6 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			if( ! @$_REQUEST['access_level'] && $options )
 			{
 				$account = new Ayoola_Form_Element;
-			//	$account->id = __CLASS__ . 'level';
 				$account->addElement( array( 'name' => 'access_level', 'label' => 'Profile Category', 'onchange' => 'location.search+=\'&access_level=\'+ this.value;', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), array( 'Select Profile Type' ) + $options );  
 				$account->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
 				$account->addLegend( $legend );
@@ -404,13 +402,10 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			//	$fieldset->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
             }
 			$accessLevel = ( @$_REQUEST['access_level'] ? : $this->getGlobalValue( 'access_level' ) ) ? : $values['access_level'];
-	//		var_export( $accessLevel );
-	//		var_export( $values['access_level'] );
 			$customForm = false;
 			if( $accessLevel )
 			{
 				$authLevel = $authTable->selectOne( null, array( 'auth_level' => $accessLevel ) );
-		//		var_export( $authLevel );
 				if( ! empty( $authLevel['additional_forms'] ) && is_array( $authLevel['auth_options'] ) && in_array( 'attach_forms', $authLevel['auth_options'] ) ) 
 				{
 
@@ -433,7 +428,6 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 				}
 				
 			}
-		//	var_export( $customForm );
 			if( @$_REQUEST['form_name'] )     
 			{
 				is_array( $values ) ? Ayoola_Form::setDefaultValues( $values ) : null;
@@ -444,7 +438,6 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 				//	continue;
 				}
 				$customForms = $class->getForm()->getFieldsets();   
-			//	$form->addFieldset( $fieldset ); 
 				foreach( $customForms as $each ) 
 				{
 					$each->addLegend( $legend );
@@ -465,7 +458,6 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 				$fieldset->addElement( array( 'name' => 'display_picture', 'data-document_type' => 'image', 'label' => 'Display Picture', 'type' => 'Document', 'value' => @$values['display_picture'], ) ); 
 
 				$fieldset->addLegend( $legend );
-		//		$form->addFieldset( $fieldset ); 
 			}
 			else
 			{
