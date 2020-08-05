@@ -219,12 +219,10 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					$filter = new Ayoola_Filter_Name(); 
 					$filter->replace = '-'; 
 					
-				//	var_export( strtolower( array_pop( explode( '.', trim( $_POST['suggested_url'], '.' ) ) ) ) );
 					if( ! in_array( strlen( $extension ), range( 1, 4 ) ) )
 					{
 						throw new Ayoola_Doc_Upload_Exception( 'INVALID EXTENSION ' . $extension );
 					}
-				//	$_POST['name'] = array_shift( explode( '.', $_POST['name'] ) );
 					$_POST['name'] = substr( $_POST['name'], 0, 30 );
 					$_POST['name'] = $_POST['name'] ? : uniqid();
 					$_POST['name'] = str_replace( '.', '-', $_POST['name'] );
@@ -255,7 +253,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					$url = $url . $filename;
 				}
 			}
-	//		define( 'UPLOAD_DIR', 'D:/Desktop/Graphics/uploads/' );
 	
 			//	uploading only image for now
 			@$img = $_POST['image'] ? : $_POST['document'];
@@ -267,9 +264,15 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			//	For empty mime name
 			$img = str_replace( 'data:;base64,', '', $img );
 			$img = str_replace( ' ', '+', $img );
-			
-		//	var_export( $img );
-			$data = base64_decode( $img );
+
+            if( stripos( $img, 'http://' ) === 0 || stripos( $img, 'https://' ) === 0 )
+            {
+                $data = file_get_contents( $img );
+            }
+            else
+            {
+                $data = base64_decode( $img );
+            }
 			$this->_objectData['file_info']['path'] = $path;
 			$this->_objectData['file_info']['url'] = $url;
 			$this->_objectData['file_info']['dedicated_url'] = $url;
@@ -300,7 +303,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				$langCode = $_GET['langCode'] ;
 				// Optional: compare it with the value of `ckCsrfToken` sent in a cookie to protect your server side uploader against CSRF.
 				// Available since CKEditor 4.5.6.
-		//		$token = $_POST['ckCsrfToken'] ;
 
 				// Check the $_FILES array and save the file. Assign the correct path to a variable ($url).
 				$url = $this->_objectData['file_info']['dedicated_url'];

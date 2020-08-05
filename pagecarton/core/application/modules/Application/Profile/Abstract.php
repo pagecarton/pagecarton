@@ -277,25 +277,22 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
             $profileData = ( is_array( $profileData['profile_data'] ) ? $profileData['profile_data'] : array()  ) 
                             + ( is_array( $profileData ) ? $profileData : array()  );
 		}
-//			var_export( Application_Profile_Table::getInstance()->selectOne() );
-	//	self::v( $profileData );
 		$table = Ayoola_Access_AuthLevel::getInstance();
 		if( @$profileData['access_level'] != 1 && @$profileData['access_level'] != 0 )
 		{
 			$authInfo = $table->selectOne( null, array( 'auth_level' => $profileData['access_level'] ) );
-	//		var_export( $authInfo );
-	//		var_export( $profileData );
 			$profileData +=  is_array( $authInfo ) ? $authInfo : array();
-		}
+        }
+        if( $userInfo = Application_User_Abstract::getUserInfo( $profileData['user_id'] ) )
+        {
+			$profileData +=  is_array( $userInfo ) ? $userInfo : array();
+        }
 		switch( @$profileData['access_level'] )
 		{
 			case 1:
-	//			$profileData['auth_name'] = 'Standard';
-			break;
-		}
-		//	var_export( array( 'profile_url' => $profileUrL ) );
-		//	var_export( Application_Profile_Table::getInstance()->select() );
 
+            break;
+		}
         if( @$profileData['profile_url'] && @$profileData['display_name'] )
 		{
 			if( ! @$profileData['display_picture'] )
@@ -304,12 +301,12 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			}
 			if( ! @$profileData['display_name'] )
 			{
-			//	$profileData['display_name'] = $profileData['profile_url'];
-			}
+
+            }
 			if( ! @$profileData['profile_description'] )
 			{
-			//	$profileData['profile_description'] = $profileData['profile_url'];
-			}
+                
+            }
 		}
 		return $profileData;
 	}

@@ -37,6 +37,8 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
     {
 		//	Make the application know we are using class player
         $_SERVER['HTTP_APPLICATION_MODE'] = $this->getObjectName();
+
+
         //   var_export( $this->getParameter() );
 		try
 		{
@@ -47,19 +49,22 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 				if( @$_REQUEST['object_name'] )
 				{ 
 					$identifier = array( 'class_name' => $_REQUEST['object_name'] );
-                //    var_export( $identifier );
+                    $this->_objectData['identifier'] = $identifier;
 				}
 				elseif( ! empty( $_REQUEST['pc_module_url_values'][0] ) && $_REQUEST['pc_module_url_values'][0] !== 'name' && $_REQUEST['pc_module_url_values'][0] !== 'object_name' )
 				{
 					$identifier = array( 'class_name' => $_REQUEST['pc_module_url_values'][0] );
+                    $this->_objectData['identifier'] = $identifier;
 				}
 				elseif( @$_REQUEST['name'] )
 				{
 					$identifier = array( 'class_name' => $_REQUEST['name'] );
+                    $this->_objectData['identifier'] = $identifier;
 				}
 				elseif( ($this->getParameter( 'list_all_widgets' ) || @$_REQUEST['list_all_widgets']) && self::hasPriviledge() )
 				{
                     $this->setViewContent( '<br><h2>PageCarton Widgets</h2><br>' );
+                    $this->_objectData['widgets'] = Ayoola_Object_Embed::getWidgets( false );
 
                     foreach( Ayoola_Object_Embed::getWidgets( false ) as $class ) 
                     {
@@ -75,20 +80,17 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
                         $filename = $filter->filter( $_REQUEST['widget_code'] );
                         $this->setViewContent( '<br><h2>PageCarton Widget Class Preview </h2><br>' );
                         $this->setViewContent( highlight_file( $filename, true ) );
+                        $this->_objectData['highlight_file'] = highlight_file( $filename, true );
                     }
                     return true;
 				}
 				elseif( $widgetId = $this->getParameter( 'widget_id' ) ? : @$_REQUEST['widget_id'] )
 				{
-                //    var_export( Ayoola_Object_PageWidget::getInstance()->select() );
-                //    var_export( $widgetId );
-                //    unset( $_REQUEST['widget_id'] );
+                    $this->_objectData['widget_id'] = $widgetId;
                     if( $widget = Ayoola_Object_PageWidget::getInstance()->selectOne( null,  array( 'pagewidget_id' => $widgetId ) ) )
                     {
-                    //    var_export( $widget );
                         $class = $widget['class_name'];
                         $class = new $class( array( 'pagewidget_id' => $widgetId ) + $widget['parameters'] );
-                     //    var_export( $widget );
                        $this->setViewContent( '' . $class->view() . '' );
                         return true;
                     }
@@ -102,7 +104,6 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 				}
 				$this->setIdentifierData( $identifier );
 			}
-        //   var_export( $this->getParameter() );
 			//	I want to allow a convenient way of playing class
 			if( $identifier['class_name'] === __CLASS__ )
 			{
@@ -179,17 +180,12 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 								);
 							}
 						}
-					//	$classToPlay	$this->setViewContent( $identifier['class_name']::viewInLine(  ), true );
 						if( ! $title = $identifier['class_name']::getObjectTitle() )
 						{
 							$title = $identifier['class_name'];
 							$title = str_ireplace( array( 'Ayoola_', 'Application_', 'Article_', 'Object_', 'Classplayer_', ), '', $title );  
 							$title = ucwords( implode( ' ', explode( '_', $title ) ) );
 							$title = ucwords( implode( ' ', explode( '-', $title ) ) );
-							
-							//	Delete generic names
-						//	$title = ucwords( implode( ' ', explode( 'Ayoola ', $title ) ) );
-						//	$title = ucwords( implode( ' ', explode( 'Application ', $title ) ) );
 						}
 						if( strpos( Ayoola_Page::getCurrentPageInfo( 'title' ), $title ) === false )
 						{
@@ -199,32 +195,48 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
 							Ayoola_Page::setCurrentPageInfo( $pageInfo );
 						}
 					}
-					else
-					{
-					}
-				//	var_export( self::checkObject( $identifier ) );
-				//	var_export( $identifier['class_name']::viewInLine() );
 					return true;
 				}
 			}
 		}
 		catch( Ayoola_Exception $e )
 		{
-		//	var_export( $identifier );
-	//		var_export( $identifier );
-	//		var_export( $this->getParameter() );
-	//		var_export( $e->getMessage() );
+            if( $this->getParameter( 'play_mode' ) )
+            {
+                $this->_playMode = $this->getParameter( 'play_mode' );
+            }
+            elseif( isset( $_SERVER['HTTP_AYOOLA_PLAY_MODE'] ) )
+            {
+                $this->_playMode = $_SERVER['HTTP_AYOOLA_PLAY_MODE'];
+            }
+            elseif( isset( $_SERVER['HTTP_PC_WIDGET_OUTPUT_METHOD'] ) )
+            {
+                $this->_playMode = $_SERVER['HTTP_PC_WIDGET_OUTPUT_METHOD'];
+            }
+    
 			$this->setViewContent( self::__( '<h2 class="badnews">WIDGET ERROR</h2>' ) );
 			$this->setViewContent( self::__( '<p class="pc-notify">' . $e->getMessage() . '</p>' ) );
-	//		throw new Ayoola_Exception( 'OBJECT TO BE PLAYED NOT FOUND' );
- 	//		$this->setViewContent(  '' . self::__( '<h4>ERROR:</h4>' ) . '', true  );
-			
- 	//		header( 'Location: /404/' ); 
-	//		exit();
+            $this->_objectData['badnews'] = $e->getMessage();
+            $this->_objectData['http_code'] = 500;
 			return false;
 		}
 		if( ! $this->getParameter( 'silent_when_object_not_found' ) )
 		{
+            if( $this->getParameter( 'play_mode' ) )
+            {
+                $this->_playMode = $this->getParameter( 'play_mode' );
+            }
+            elseif( isset( $_SERVER['HTTP_AYOOLA_PLAY_MODE'] ) )
+            {
+                $this->_playMode = $_SERVER['HTTP_AYOOLA_PLAY_MODE'];
+            }
+            elseif( isset( $_SERVER['HTTP_PC_WIDGET_OUTPUT_METHOD'] ) )
+            {
+                $this->_playMode = $_SERVER['HTTP_PC_WIDGET_OUTPUT_METHOD'];
+            }
+    
+            $this->_objectData['badnews'] = "No valid widget embedded";
+            $this->_objectData['http_code'] = 404;
 			$this->setViewContent( self::__( '<p class="badnews">No valid widget embedded.</p>' ) );
 		}
 		

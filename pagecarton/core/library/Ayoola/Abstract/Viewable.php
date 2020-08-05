@@ -2349,17 +2349,26 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                     }
                 }
 
+                if( ! empty( $this->_objectData['http_code'] ) )
+                {
+                    http_response_code( $this->_objectData['http_code'] );
+                }
+                if( $this->getParameter( 'return_object_data' ) )
+                {
+                    return $this->_objectData;
+                }
+
 				$dataToSend = json_encode( $this->_objectData );
 
                 //	json data was being truncated
-
-				//	Log early before we exit
-				Ayoola_Application::log();
-
                 if( $this->getParameter( 'return_json' ) )
                 {
                     return $dataToSend;
                 }
+
+				//	Log early before we exit
+				Ayoola_Application::log();
+
 				echo $dataToSend;
 				exit();
 				
