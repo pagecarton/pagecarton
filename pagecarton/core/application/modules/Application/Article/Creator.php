@@ -108,8 +108,6 @@ class Application_Article_Creator extends Application_Article_Abstract
     {
 		try
 		{ 
-		//	var_export( Application_Profile_Abstract::getMyDefaultProfile() );
-
 
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );  
@@ -125,7 +123,6 @@ class Application_Article_Creator extends Application_Article_Abstract
 			{
 				return false;
 			}
-			
 			$this->createForm( 'Save', $this->getParameter( 'form_legend' ) ? : 'New ' . $postType );
 			if( $this->getParameter( 'class_to_play_when_completed' ) )
 			{

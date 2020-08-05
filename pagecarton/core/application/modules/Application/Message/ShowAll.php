@@ -65,7 +65,6 @@ class Application_Message_ShowAll extends Application_Message_Abstract
 		//	No cache for the template engine
 		$this->setParameter( array( 'markup_template_no_cache' => true ) ); 
 		$this->getHtml();
-	//	$this->setViewContent( $this->getHtml(), true );
     } 
 	
     /**
@@ -91,33 +90,49 @@ class Application_Message_ShowAll extends Application_Message_Abstract
      */
 	public function getHtml()
     {
-		$sendMessageForm = Application_Message_Creator::viewInLine();
-		$profileInfo = Application_Profile_Abstract::getMyDefaultProfile();
+        $sendMessageForm = Application_Message_Creator::viewInLine();
+		$profiles = array();
+        $profiles = Application_Profile_Abstract::getMyProfiles();
+        if( ! empty( @$_GET['message_reference'] ) )
+        {
+            $profiles = array();
+			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( @$_GET['message_reference'] ) )
+			{
+                $profiles[] = $profileInfo['profile_url'];
+                if( $profileInfo['username'] !== Ayoola_Application::getUserInfo( 'username' ) )
+                {
+                    return false;
+                }
+            }
+        }
  		switch( $this->getParameter( 'messages_to_show' ) )
 		{
 			case 'mine':
 				//	hard-coded message page
-				$this->_dbWhereClause = array( 'reference' => $profileInfo['profile_url'] );
+				$this->_dbWhereClause = array( 'reference' => $profiles );
 			break;
 			case 'received':
 				//	hard-coded message page
-				$this->_dbWhereClause = array( 'to' => $profileInfo['profile_url'] );
+				$this->_dbWhereClause = array( 'to' => $profiles );
 			break;
-			default:
-				$reference = array_map( 'strtolower', array( $profileInfo['profile_url'], @Ayoola_Application::$GLOBAL['profile']['profile_url'], @$_GET['to'] ) );
+            default:
+                
+                if( ! empty( Ayoola_Application::$GLOBAL['profile']['profile_url'] ) )
+                {
+                    $profiles[] = Ayoola_Application::$GLOBAL['profile']['profile_url']; 
+                }
+				$reference = array_map( 'strtolower', $profiles );
 				$this->_dbWhereClause = array( 
-												'from' => $reference,
-												'to' => $reference,
-												'reference' => strtolower( $profileInfo['profile_url'] ),
+												'reference' => $reference,
 											);
 			break;
 		}
-		$updates = $this->getDbData();
+        $updates = $this->getDbData();
+        $this->_objectData = $updates;
 	//	krsort( $updates );
 	//	$updates = $table->select();
 		
 	//	self::v( $updates );
-	//	var_export( $this->_dbWhereClause );
 		
 		if( ! @$this->_parameter['markup_template'] ) 
 		{

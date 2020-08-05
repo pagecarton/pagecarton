@@ -134,39 +134,12 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		{
 			return self::$_myProfiles;
 		}
-		$access = new Ayoola_Access();
-		$userInfo = $access->getUserInfo();
-	//	var_export( $userInfo );
-	//	@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
-	//	var_export( $userInfo );
-//		if( ! $userInfo['profiles'] )
-		{
-			$table = Application_Profile_Table::getInstance();
-			$profiles = $table->select( null, array( 'username' => $userInfo['username'] ) );
-	//		self::v( $table->select() );
-			foreach( $profiles as $profileInfo )
-			{
-				self::$_myProfiles[] = $profileInfo['profile_url'];
-			}
-		}
-/*		else
-		{
-			foreach( $userInfo['profiles'] as $url )
-			{
-				$values = self::getProfileInfo( $url );
-	//		var_export( $url );
-	//		var_export( $values );
-				if( ! $values )
-				{
-					continue;
-				}
-				self::$_myProfiles[] = $url;
-			} 
-		}
-*/
-		
-	//	var_export( $profiles );
-
+        $table = Application_Profile_Table::getInstance();
+        $profiles = $table->select( null, array( 'username' => Ayoola_Application::getUserInfo( 'username' ) ) );
+        foreach( $profiles as $profileInfo )
+        {
+            self::$_myProfiles[] = $profileInfo['profile_url'];
+        }
 		return self::$_myProfiles;
 	}
 	
@@ -177,8 +150,6 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 	public static function getMyDefaultProfile()
     {
 		$profile = Ayoola_Application::getUserInfo( 'profile_url' );
-	//	var_export( $profile );
-	//	var_export( Ayoola_Application::getUserInfo() );
 		if( ! $profileInfo = self::getProfileInfo( $profile, true ) )
 		{
 		 	if( $others = self::getMyProfiles() )

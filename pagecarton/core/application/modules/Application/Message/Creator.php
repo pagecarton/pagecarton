@@ -60,31 +60,24 @@ class Application_Message_Creator extends Application_Message_Abstract
 			}
 			$this->createForm( 'Send', 'Send a private message' );
 			$this->setViewContent( $this->getForm()->view(), true );
-		//	var_export( Ayoola_Application::$GLOBAL );
-	//		var_export( Ayoola_Application::getUserInfo() );
 			
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-		//	var_export( $values );
 			
 			
 			@$values['from'] = strtolower( $values['from'] ? : Ayoola_Application::getUserInfo( 'profile_url' ) );
 			@$values['to'] = strtolower( $values['to'] ? : Ayoola_Application::$GLOBAL['profile']['profile_url'] );
 			
 			//	There must be a valid sender
-	//		Application_Profile_Abstract::getMyDefaultProfile()
 			if( ! $senderInfo = Application_Profile_Abstract::getProfileInfo( $values['from'] ) )
 			{
 				$this->setViewContent( self::__( '<p class="badnews">Invalid sender.</p>' ) );
 				return false;
-			//	throw new Application_Message_Exception( 'UNABLE TO POST AN UPDATE BECAUSE USER IS INVALID.' );
 			}
 			if( ! $receiverInfo = Application_Profile_Abstract::getProfileInfo( $values['to'] ) )
 			{
 				$this->setViewContent( self::__( '<p class="badnews">Invalid receiver information.</p>' ) );
 				return false;
-			//	throw new Application_Message_Exception( 'UNABLE TO POST AN UPDATE BECAUSE USER IS INVALID.' );
 			}
-	//		var_export( $receiverInfo );
 			@$values['timestamp'] = $values['timestamp'] ? : time();
 			@$values['reference'] = $values['reference'] ? ( (array) $values['reference'] ) : array();
 			$values['reference']['from'] = $values['from'];
@@ -92,13 +85,10 @@ class Application_Message_Creator extends Application_Message_Abstract
 			if( $values['from'] == $values['to'] )
 			{
 				return false;
-			//	throw new Application_Message_Exception( 'PRIVATE MESSAGE CANNOT BE SENT TO ONESELF.' );
 			}
 			if( ! $this->insertDb( $values ) ){ return $this->setViewContent( $this->getForm()->view(), true ); }
 			
 			//	Send a message to the receiver
-		//	$table = new Application_User_NotificationMessage();
-		//	$emailInfo = $table->selectOne( null, array( 'subject' => 'Private Message Received' ) ); 
 			$emailInfo = array
 			(
 								'subject' => 'Private Message Received', 
@@ -114,16 +104,14 @@ http://' . Ayoola_Page::getDefaultDomain() . '/' . $senderInfo['profile_url'] . 
 			); 
 			
 			$values = array( 
-							//	'firstname' => $receiverInfo['firstname'], 
 								'domainName' => Ayoola_Page::getDefaultDomain(), 
 							);
 			
 			$emailInfo = self::replacePlaceholders( $emailInfo, $values + $receiverInfo );
-		//	var_export( $emailInfo );
 			$emailInfo['to'] = $receiverInfo['email'];
 			$emailInfo['from'] = '' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . '<no-reply@' . Ayoola_Page::getDefaultDomain() . '>';
 			@self::sendMail( $emailInfo );
-			
+			$this->_objectData['goodnews'] = 'Private message has been sent successfully';
 			$this->setViewContent(  '' . self::__( '<p class="goodnews">Private message has been sent successfully.</p>' ) . '', true  );
 		}
 		catch( Application_Message_Exception $e ){ return false; }
