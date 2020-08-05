@@ -408,6 +408,10 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
      */
     public static function sanitizeTemplateFile( $content, $values, & $sectionsToSave = array() )
 	{
+        if( empty( $content ) )
+        {
+            return false;
+        }
 		//	Strip the php content from it.
 		$content = preg_replace( '#<\?.*?(\?>|$)#s', '', $content );
 
@@ -435,7 +439,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		
 		//	Append css and other things to the head
 		$head = $xml->getElementsByTagName( 'head' );
-		if( ! $head->length )
+		if( ! $head->length && $xml->documentElement )
 		{
 			$newHead = $xml->createElement( 'head' );
 			try
@@ -468,7 +472,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
             }
 		}
 		$body = $xml->getElementsByTagName( 'body' );
-		if( ! $body->length )
+		if( ! $body->length && $xml->documentElement )
 		{
 			$newBody = $xml->createElement( 'body' );
 			$xml->documentElement->appendChild( $newBody );    
@@ -497,10 +501,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			foreach( $eachSection->childNodes as $eachDiv )
 			{
 
-			//	if(  $eachDiv->tagName && $eachDiv->getAttribute( "data-pc-load-inner-sections" ) )   
-				{
-
-				}
 				if( $eachDiv->tagName && $eachDiv->getAttribute( "data-pc-section-ignore" ) )   
 				{
 					continue;
