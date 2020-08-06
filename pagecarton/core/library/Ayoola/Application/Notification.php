@@ -61,7 +61,6 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
     } 
 	
     /**
-     * What to prepend to all notification messages
      * 
      */
 	public static function getEmails()
