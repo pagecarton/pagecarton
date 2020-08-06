@@ -69,18 +69,17 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
         //	also sent the message to all admin accounts
         $emails = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' );
         $userEmail = null;
-        if( 
-            Ayoola_Application::getUserInfo( 'access_level' ) == 99  
-            || Ayoola_Application::getUserInfo( 'access_level' ) == 98
 
-            )
+        if( ! empty( Ayoola_Application::$GLOBAL['user']['email'] ) )
+        {
+            $userEmail = Ayoola_Application::$GLOBAL['user']['email'];
+        }
+        elseif( 
+                Ayoola_Application::getUserInfo( 'access_level' ) == 99  
+                || Ayoola_Application::getUserInfo( 'access_level' ) == 98
+        )
         {
             $userEmail = Ayoola_Application::getUserInfo( 'email' );
-        }
-        elseif( ! empty( Ayoola_Application::$GLOBALS['user']['email'] ) )
-        {
-            $userEmail = Ayoola_Application::$GLOBALS['user']['email'];
-            var_export( $userEmail );
         }
         elseif( ! $userEmail = Ayoola_Application::getDomainSettings( 'email' ) )
         {
