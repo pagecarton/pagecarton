@@ -50,8 +50,6 @@ class Application_Article_Type_Quiz_ScoreBoard extends Application_Article_Type_
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			if( ! self::isOwner( $data['user_id'] ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ) && Ayoola_Application::getUserInfo( 'username' ) !== strtolower( $data['username'] ) )
 			{ 
-			//	var_export( Ayoola_Application::getUserInfo( 'username' ) );
-		//		var_export( Ayoola_Application::$GLOBAL['username'] );
 				return false; 
 			}
 			

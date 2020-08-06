@@ -321,19 +321,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 					
 					//	Home
 					$pages[] = self::getInfo( '/' );
-					
-					//	module
-			//		if( self::getInfo( '/members' ) )
-					{
-
-					}
-					
-					//	username
-				//	if( Ayoola_Application::$GLOBAL['username'] )
-					{
-
-					}
-					
+										
 					//	Page
 					$pageInfo = self::getInfo( Ayoola_Application::getRuntimeSettings( 'real_url' ) );
 					$pageInfo['url'] = $page;

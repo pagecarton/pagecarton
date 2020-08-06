@@ -47,9 +47,9 @@ class Application_User_ShowAll extends Application_User_Abstract
 		switch( $this->getParameter( 'profile_type' ) )
 		{
 			case 'same':
-				if( ! empty( Ayoola_Application::$GLOBAL['access_level'] ) )
+				if( ! empty( Ayoola_Application::$GLOBAL['user']['access_level'] ) )
 				{
-					$this->_dbWhereClause['access_level'] = Ayoola_Application::$GLOBAL['access_level'];   
+					$this->_dbWhereClause['access_level'] = Ayoola_Application::$GLOBAL['user']['access_level'];   
 				}
 			break;
 			case 'string':

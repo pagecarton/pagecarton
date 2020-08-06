@@ -895,7 +895,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$username = trim( strtolower( Ayoola_Application::getUserInfo( 'username' ) ) );
 		if(
 			( $myLevel === 99 && ! @$options['strict'] ) // Super user except if its strict
-		|| ( in_array( 98, $allowedLevels ) && $username && $username === strtolower( @Ayoola_Application::$GLOBAL['username'] )  && ! @$options['strict'] ) //	Profile owner means he is authorized
+		|| ( in_array( 98, $allowedLevels ) && $username && $username === strtolower( @Ayoola_Application::$GLOBAL['user']['username'] )  && ! @$options['strict'] ) //	Profile owner means he is authorized
 		|| ( in_array( 97, $allowedLevels ) && $username && ( in_array( strtolower( Ayoola_Application::getUserInfo( 'email' ) ), array_map( 'strtolower', @Ayoola_Application::$GLOBAL['post']['whitelist_email_address'] ? : array() ) ) || $username === strtolower( @Ayoola_Application::$GLOBAL['post']['username'] ) ) ) //	We were invited to view a post/article
 		|| ( in_array( 0, $allowedLevels ) && ! @$options['strict'] ) //	Public means everyone is welcome except if its strict
 		|| in_array( $myLevel, $allowedLevels ) //	We are explicitly allowed
@@ -922,25 +922,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			if( $each < 10 )
 			{
-			//	if( $myLevel == 5 )
-				{
-
-				}
 				if( in_array( $each, $allowedLevels ) )
 				{
 					return true;
 				}
 			}
 		}
-	//	if( $myLevel == 5 )
-		{
-
-		}
 		$access = new Ayoola_Access();
 		$userInfo = $access->getUserInfo();
 		@$userInfo['profiles'] = is_array( $userInfo['profiles'] ) ? $userInfo['profiles'] : array();
 
-		if( in_array( 98, $allowedLevels ) && ! empty( Ayoola_Application::$GLOBAL['profile_url'] ) && is_array( $userInfo['profiles'] ) && in_array( Ayoola_Application::$GLOBAL['profile_url'], $userInfo['profiles'] )  && ! @$options['strict'] ) //	profile owner
+		if( in_array( 98, $allowedLevels ) && ! empty( Ayoola_Application::$GLOBAL['user']['profile_url'] ) && is_array( $userInfo['profiles'] ) && in_array( Ayoola_Application::$GLOBAL['user']['profile_url'], $userInfo['profiles'] )  && ! @$options['strict'] ) //	profile owner
 		{
 			return true;
 		}

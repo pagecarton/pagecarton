@@ -50,7 +50,6 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
      */
     public function init()
     {
-	//	var_export( Ayoola_Application::$GLOBAL );
 		if( ! $userInfo = Ayoola_Application::getUserInfo() )
 		{
 			return false;
