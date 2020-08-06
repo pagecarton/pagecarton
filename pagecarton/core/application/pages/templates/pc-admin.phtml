@@ -9,36 +9,30 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Saturday 14th of December 2019 04:58:47 PM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Thursday 6th of August 2020 01:26:43 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
-						<?php 
-						//		var_export( array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) );
-					//			var_export( __FILE__ );
-					//			var_export( CACHE_DIR );
-					//			var_export( stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) );
-								//	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
-								//	THEY WON'T HAVE CORRECT APPDIR
-//								var_export( stripos( __FILE__,CACHE_DIR ) );
-			//					var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );
-			//					var_export( Ayoola_Application::getDomainSettings() );
-							if
-							( 
+                    <?php 
 
-								$x_1576342727 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'novus', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
-							)
-							{
-							//	var_export( $x_1576342727 );
-							//	echo file_get_contents( $x_1576342727 );
-								foreach( $x_1576342727 as $each )
-								{	
-									include_once $each;
-								}
-							}
-		//					var_export( $x_1576342727 );
-						?>
-						 <?php
+                            //	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
+                            //	THEY WON'T HAVE CORRECT APPDIR
+                        if
+                        ( 
+
+                            $x_1596677203 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'novus', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                        )
+                        {
+
+                            if( $x_1596677203 )
+                            foreach( $x_1596677203 as $each )
+                            {	
+                                include_once $each;
+                            }
+                        }
+
+                    ?>
+                     <?php
 /**
 * PageCarton Page Generator
 *
@@ -127,9 +121,9 @@ echo ( ! empty( $_acd6c67e7aeba849612416a4d14168e1 ) &&  is_object( $_acd6c67e7a
 
 //nav_one Ends Here
 ?><?php
-//nav_one Begins Here
+//nav_one /pc-admin Begins Here
 
-//nav_one Ends Here
+//nav_one /pc-admin Ends Here
 ?>
 
 
@@ -186,30 +180,30 @@ echo ( ! empty( $_7dd175ad4ab7614d4cc6b13e510bd274 ) &&  is_object( $_7dd175ad4a
 
 //oneness Ends Here
 ?><?php
-//oneness Begins Here
+//oneness /pc-admin Begins Here
 
-echo ( ! empty( $_0c31198ab8134b66fc7a6a729689ad1e ) &&  is_object( $_0c31198ab8134b66fc7a6a729689ad1e ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_0c31198ab8134b66fc7a6a729689ad1e->view(), '' ) : null );
+echo ( ! empty( $_183a467e23cc670297e6c5bd0c5c0829 ) &&  is_object( $_183a467e23cc670297e6c5bd0c5c0829 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_183a467e23cc670297e6c5bd0c5c0829->view(), '' ) : null );
 
-echo ( ! empty( $_26a4384ebf0e9ca07bbc60f3df847c8b ) &&  is_object( $_26a4384ebf0e9ca07bbc60f3df847c8b ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_26a4384ebf0e9ca07bbc60f3df847c8b->view(), '' ) : null );
+echo ( ! empty( $_dd6c65cbd2cd676c37a9abfde6efd317 ) &&  is_object( $_dd6c65cbd2cd676c37a9abfde6efd317 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_dd6c65cbd2cd676c37a9abfde6efd317->view(), '' ) : null );
 
-echo ( ! empty( $_a5aa57c39772cebde1fff97f73dc5103 ) &&  is_object( $_a5aa57c39772cebde1fff97f73dc5103 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_a5aa57c39772cebde1fff97f73dc5103->view(), '' ) : null );
+echo ( ! empty( $_a0d1dbe8cd91f74655801013c1a9fded ) &&  is_object( $_a0d1dbe8cd91f74655801013c1a9fded ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_a0d1dbe8cd91f74655801013c1a9fded->view(), '' ) : null );
 
 							if( Ayoola_Page::hasPriviledge( array (
   0 => '99',
-), array( 'strict' => true ) ) && ! empty( $_7e3ed0a5d2f967efa56477075a9f3bec ) && is_object( $_7e3ed0a5d2f967efa56477075a9f3bec ) )
+), array( 'strict' => true ) ) && ! empty( $_812e2aa44bc048b65f0488edd3206e29 ) && is_object( $_812e2aa44bc048b65f0488edd3206e29 ) )
 							{
-								echo $_7e3ed0a5d2f967efa56477075a9f3bec->view();
+								echo $_812e2aa44bc048b65f0488edd3206e29->view();
 							}
 							
-echo ( ! empty( $_5795f2af0334c6567383585ed4bda459 ) &&  is_object( $_5795f2af0334c6567383585ed4bda459 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_5795f2af0334c6567383585ed4bda459->view(), 'white-well' ) : null );
+echo ( ! empty( $_103e5ff7f83a41a3e7e18f307a3876ea ) &&  is_object( $_103e5ff7f83a41a3e7e18f307a3876ea ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_103e5ff7f83a41a3e7e18f307a3876ea->view(), 'white-well' ) : null );
 
-echo ( ! empty( $_5d8b8384509636edca9a1682938343eb ) &&  is_object( $_5d8b8384509636edca9a1682938343eb ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_5d8b8384509636edca9a1682938343eb->view(), '' ) : null );
+echo ( ! empty( $_720295cbdf8d3b2b8ecc0c0c37aca03a ) &&  is_object( $_720295cbdf8d3b2b8ecc0c0c37aca03a ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_720295cbdf8d3b2b8ecc0c0c37aca03a->view(), '' ) : null );
 
-echo ( ! empty( $_0cdc55584796284b6ab2ffa1f70e3c89 ) &&  is_object( $_0cdc55584796284b6ab2ffa1f70e3c89 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_0cdc55584796284b6ab2ffa1f70e3c89->view(), 'white-well' ) : null );
+echo ( ! empty( $_4e8fd3c1ce6442243ee625dc127bf58a ) &&  is_object( $_4e8fd3c1ce6442243ee625dc127bf58a ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_4e8fd3c1ce6442243ee625dc127bf58a->view(), 'white-well' ) : null );
 
-echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3ed3dbb233d013989a9586b7 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_097c066c3ed3dbb233d013989a9586b7->view(), '' ) : null );
+echo ( ! empty( $_6e0c10910d5fbb6ad4e9ead328450193 ) &&  is_object( $_6e0c10910d5fbb6ad4e9ead328450193 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_6e0c10910d5fbb6ad4e9ead328450193->view(), '' ) : null );
 
-//oneness Ends Here
+//oneness /pc-admin Ends Here
 ?><section data-pc-all-sections="1">	
 									<div class="">
 										<div class="row">
@@ -224,9 +218,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //middlebar Ends Here
 ?><?php
-//middlebar Begins Here
+//middlebar /pc-admin Begins Here
 
-//middlebar Ends Here
+//middlebar /pc-admin Ends Here
 ?>
 										   </div>
 										</div> 
@@ -242,9 +236,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //twosome1 Ends Here
 ?><?php
-//twosome1 Begins Here
+//twosome1 /pc-admin Begins Here
 
-//twosome1 Ends Here
+//twosome1 /pc-admin Ends Here
 ?>
 											</div>
 											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -258,9 +252,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //twosome2 Ends Here
 ?><?php
-//twosome2 Begins Here
+//twosome2 /pc-admin Begins Here
 
-//twosome2 Ends Here
+//twosome2 /pc-admin Ends Here
 ?>
 											</div> 
 										</div> 
@@ -276,9 +270,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //threesome1 Ends Here
 ?><?php
-//threesome1 Begins Here
+//threesome1 /pc-admin Begins Here
 
-//threesome1 Ends Here
+//threesome1 /pc-admin Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -292,9 +286,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //threesome2 Ends Here
 ?><?php
-//threesome2 Begins Here
+//threesome2 /pc-admin Begins Here
 
-//threesome2 Ends Here
+//threesome2 /pc-admin Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -308,9 +302,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //threesome3 Ends Here
 ?><?php
-//threesome3 Begins Here
+//threesome3 /pc-admin Begins Here
 
-//threesome3 Ends Here
+//threesome3 /pc-admin Ends Here
 ?>
 											</div> 
 										</div> 
@@ -326,9 +320,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //foursome1 Ends Here
 ?><?php
-//foursome1 Begins Here
+//foursome1 /pc-admin Begins Here
 
-//foursome1 Ends Here
+//foursome1 /pc-admin Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -342,9 +336,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //foursome2 Ends Here
 ?><?php
-//foursome2 Begins Here
+//foursome2 /pc-admin Begins Here
 
-//foursome2 Ends Here
+//foursome2 /pc-admin Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
@@ -358,9 +352,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //foursome3 Ends Here
 ?><?php
-//foursome3 Begins Here
+//foursome3 /pc-admin Begins Here
 
-//foursome3 Ends Here
+//foursome3 /pc-admin Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
@@ -374,9 +368,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //foursome4 Ends Here
 ?><?php
-//foursome4 Begins Here
+//foursome4 /pc-admin Begins Here
 
-//foursome4 Ends Here
+//foursome4 /pc-admin Ends Here
 ?>
 											</div> 
 										</div> 
@@ -392,9 +386,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //leftbar Ends Here
 ?><?php
-//leftbar Begins Here
+//leftbar /pc-admin Begins Here
 
-//leftbar Ends Here
+//leftbar /pc-admin Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -408,9 +402,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //leftbarright Ends Here
 ?><?php
-//leftbarright Begins Here
+//leftbarright /pc-admin Begins Here
 
-//leftbarright Ends Here
+//leftbarright /pc-admin Ends Here
 ?>
 											</div> 
 										</div> 
@@ -426,9 +420,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //rightbarleft Ends Here
 ?><?php
-//rightbarleft Begins Here
+//rightbarleft /pc-admin Begins Here
 
-//rightbarleft Ends Here
+//rightbarleft /pc-admin Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -442,9 +436,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //rightbar Ends Here
 ?><?php
-//rightbar Begins Here
+//rightbar /pc-admin Begins Here
 
-//rightbar Ends Here
+//rightbar /pc-admin Ends Here
 ?>
 											</div>   
 										</div> 
@@ -459,9 +453,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //lastoneness Ends Here
 ?><?php
-//lastoneness Begins Here
+//lastoneness /pc-admin Begins Here
 
-//lastoneness Ends Here
+//lastoneness /pc-admin Ends Here
 ?></section>
 <?php
 //row_one Begins Here
@@ -473,9 +467,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //row_one Ends Here
 ?><?php
-//row_one Begins Here
+//row_one /pc-admin Begins Here
 
-//row_one Ends Here
+//row_one /pc-admin Ends Here
 ?>
 
 
@@ -490,9 +484,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //charts Ends Here
 ?><?php
-//charts Begins Here
+//charts /pc-admin Begins Here
 
-//charts Ends Here
+//charts /pc-admin Ends Here
 ?>
 
 
@@ -507,9 +501,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //three Ends Here
 ?><?php
-//three Begins Here
+//three /pc-admin Begins Here
 
-//three Ends Here
+//three /pc-admin Ends Here
 ?>
 
 
@@ -524,9 +518,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //four Ends Here
 ?><?php
-//four Begins Here
+//four /pc-admin Begins Here
 
-//four Ends Here
+//four /pc-admin Ends Here
 ?>
 
 
@@ -541,9 +535,9 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //five Ends Here
 ?><?php
-//five Begins Here
+//five /pc-admin Begins Here
 
-//five Ends Here
+//five /pc-admin Ends Here
 ?>
 
 
@@ -564,11 +558,11 @@ echo ( ! empty( $_097c066c3ed3dbb233d013989a9586b7 ) &&  is_object( $_097c066c3e
                 
 //footer Ends Here
 ?><?php
-//footer Begins Here
+//footer /pc-admin Begins Here
 
-echo ( ! empty( $_eeb3b955e392533b3850e947803473e8 ) &&  is_object( $_eeb3b955e392533b3850e947803473e8 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_eeb3b955e392533b3850e947803473e8->view(), '' ) : null );
+echo ( ! empty( $_8f94b54f70cde9623d9cc279007489dd ) &&  is_object( $_8f94b54f70cde9623d9cc279007489dd ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_8f94b54f70cde9623d9cc279007489dd->view(), '' ) : null );
 
-//footer Ends Here
+//footer /pc-admin Ends Here
 ?>
 
 

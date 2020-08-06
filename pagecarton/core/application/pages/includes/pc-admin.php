@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Saturday 14th of December 2019 04:58:47 PM	ayoola@ayoo.la $ 
+* @version $Id: pc-admin.php	Thursday 6th of August 2020 01:26:43 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_0c31198ab8134b66fc7a6a729689ad1e = new Ayoola_Object_Embed( array (
+$_183a467e23cc670297e6c5bd0c5c0829 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Breadcrumb',
   'widget_options' => 
   array (
@@ -24,7 +24,6 @@ $_0c31198ab8134b66fc7a6a729689ad1e = new Ayoola_Object_Embed( array (
     1 => 'savings',
   ),
   'pagewidget_id_switch' => '',
-  'pagewidget_id_version' => '',
   'widget_name' => 'Breadcrumb',
   'pagewidget_id' => '1575286110-0-153',
   'advanced_parameter_value' => 
@@ -38,14 +37,14 @@ $_0c31198ab8134b66fc7a6a729689ad1e = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_0c31198ab8134b66fc7a6a729689ad1e = null;
+$_183a467e23cc670297e6c5bd0c5c0829 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_26a4384ebf0e9ca07bbc60f3df847c8b = new Ayoola_Object_Embed( array (
+$_dd6c65cbd2cd676c37a9abfde6efd317 = new Ayoola_Object_Embed( array (
   'editable' => 'Ayoola_Object_Play',
   'widget_options' => 
   array (
@@ -68,33 +67,36 @@ $_26a4384ebf0e9ca07bbc60f3df847c8b = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_26a4384ebf0e9ca07bbc60f3df847c8b = null;
+$_dd6c65cbd2cd676c37a9abfde6efd317 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_a5aa57c39772cebde1fff97f73dc5103 = new Ayoola_Page_Editor_Text( array (
+$_a0d1dbe8cd91f74655801013c1a9fded = new Ayoola_Page_Editor_Text( array (
   'codes' => '			
-			<h3><br></h3><div><br></div>
+			<h3><br>&nbsp;</h3><div><br>&nbsp;</div>
 			',
   'preserved_content' => '			
-			<h3><br></h3><div><br></div>
+			<h3><br>&nbsp;</h3><div><br>&nbsp;</div>
 			',
-  'url_prefix' => '/index.php',
+  'url_prefix' => '',
   'widget_options' => 
   array (
     0 => 'preserve_content',
   ),
   'pagewidget_id' => '1575286110-0-155',
+  'content' => '			
+			<h3><br>&nbsp;</h3><div><br>&nbsp;</div>
+			',
 ) );
 
 							}
 							else
 							{
 								
-$_a5aa57c39772cebde1fff97f73dc5103 = null;
+$_a0d1dbe8cd91f74655801013c1a9fded = null;
 
 							}
 							
@@ -105,7 +107,7 @@ $_a5aa57c39772cebde1fff97f73dc5103 = null;
 								if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 								{
 									
-$_7e3ed0a5d2f967efa56477075a9f3bec = new Ayoola_Object_Embed( array (
+$_812e2aa44bc048b65f0488edd3206e29 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Upgrade_Check',
   'widget_options' => 
   array (
@@ -128,7 +130,7 @@ $_7e3ed0a5d2f967efa56477075a9f3bec = new Ayoola_Object_Embed( array (
 								else
 								{
 									
-$_7e3ed0a5d2f967efa56477075a9f3bec = null;
+$_812e2aa44bc048b65f0488edd3206e29 = null;
 
 								}
 							}    
@@ -136,7 +138,7 @@ $_7e3ed0a5d2f967efa56477075a9f3bec = null;
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_5795f2af0334c6567383585ed4bda459 = new Ayoola_Object_Embed( array (
+$_103e5ff7f83a41a3e7e18f307a3876ea = new Ayoola_Object_Embed( array (
   'editable' => 'PageCarton_NewSiteWizard',
   'widget_options' => 
   array (
@@ -157,14 +159,14 @@ $_5795f2af0334c6567383585ed4bda459 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_5795f2af0334c6567383585ed4bda459 = null;
+$_103e5ff7f83a41a3e7e18f307a3876ea = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
 							{
 								
-$_5d8b8384509636edca9a1682938343eb = new Ayoola_Menu( array (
+$_720295cbdf8d3b2b8ecc0c0c37aca03a = new Ayoola_Menu( array (
   'option' => 'admin',
   'template_name' => 'HorizontalWhite',
   'widget_options' => 
@@ -183,14 +185,14 @@ $_5d8b8384509636edca9a1682938343eb = new Ayoola_Menu( array (
 							else
 							{
 								
-$_5d8b8384509636edca9a1682938343eb = null;
+$_720295cbdf8d3b2b8ecc0c0c37aca03a = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_0cdc55584796284b6ab2ffa1f70e3c89 = new Ayoola_Page_Editor_Text( array (
+$_4e8fd3c1ce6442243ee625dc127bf58a = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div class="col-md-12 stats-info widget" style="width: 100%;">
 <div class="stats-title">
 <h4 class="title">Dashboard</h4>
@@ -198,8 +200,8 @@ $_0cdc55584796284b6ab2ffa1f70e3c89 = new Ayoola_Page_Editor_Text( array (
 
 <div class="stats-body">
 <ul class="list-unstyled">
-	<li>Home Page<a href="http://{{{homepage}}}" target="_blank"><span class="pull-right">{{{homepage}}}</span></a></li>
-	<li>Last Back Up<span class="pull-right">{{{last_backup}}}</span></li>
+	<li>Home Page<a href="http://{{{homepage}}}" target="_blank"><span class="pull-right">{{{homepage}}}</span>&nbsp;</a>&nbsp;</li>
+	<li>Last Back Up<span class="pull-right">{{{last_backup}}}</span>&nbsp;</li>
 </ul>
 </div>
 </div>
@@ -211,13 +213,13 @@ $_0cdc55584796284b6ab2ffa1f70e3c89 = new Ayoola_Page_Editor_Text( array (
 
 <div class="stats-body">
 <ul class="list-unstyled">
-	<li>Home Page<a href="http://{{{homepage}}}" target="_blank"><span class="pull-right">{{{homepage}}}</span></a></li>
-	<li>Last Back Up<span class="pull-right">{{{last_backup}}}</span></li>
+	<li>Home Page<a href="http://{{{homepage}}}" target="_blank"><span class="pull-right">{{{homepage}}}</span>&nbsp;</a>&nbsp;</li>
+	<li>Last Back Up<span class="pull-right">{{{last_backup}}}</span>&nbsp;</li>
 </ul>
 </div>
 </div>
 ',
-  'url_prefix' => '/index.php',
+  'url_prefix' => '',
   'widget_options' => 
   array (
     0 => 'preserve_content',
@@ -235,20 +237,33 @@ $_0cdc55584796284b6ab2ffa1f70e3c89 = new Ayoola_Page_Editor_Text( array (
     0 => 'Application_Info',
   ),
   'wrapper_name' => 'white-well',
+  'content' => '<div class="col-md-12 stats-info widget" style="width: 100%;">
+<div class="stats-title">
+<h4 class="title">Dashboard</h4>
+</div>
+
+<div class="stats-body">
+<ul class="list-unstyled">
+	<li>Home Page<a href="http://{{{homepage}}}" target="_blank"><span class="pull-right">{{{homepage}}}</span>&nbsp;</a>&nbsp;</li>
+	<li>Last Back Up<span class="pull-right">{{{last_backup}}}</span>&nbsp;</li>
+</ul>
+</div>
+</div>
+',
 ) );
 
 							}
 							else
 							{
 								
-$_0cdc55584796284b6ab2ffa1f70e3c89 = null;
+$_4e8fd3c1ce6442243ee625dc127bf58a = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_097c066c3ed3dbb233d013989a9586b7 = new Ayoola_Page_Editor_Text( array (
+$_6e0c10910d5fbb6ad4e9ead328450193 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<section id="row-one" data-pc-section-created="1">
     <div class="row-one">
         <div class="col-md-4 widget">
@@ -307,7 +322,7 @@ $_097c066c3ed3dbb233d013989a9586b7 = new Ayoola_Page_Editor_Text( array (
         <div class="clearfix"> </div>
     </div>
 </section>',
-  'url_prefix' => '/index.php',
+  'url_prefix' => '',
   'widget_options' => 
   array (
     0 => 'preserve_content',
@@ -321,36 +336,66 @@ $_097c066c3ed3dbb233d013989a9586b7 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'Application_Info',
   ),
+  'content' => '<section id="row-one" data-pc-section-created="1">
+    <div class="row-one">
+        <div class="col-md-4 widget">
+            <div class="stats-left ">
+                <h5>USER</h5>
+                <h4>Accounts</h4>
+            </div>
+            <div class="stats-right"> <label>{{{user_count}}}</label> </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="col-md-4 widget states-mdl">
+            <div class="stats-left">
+                <h5>ALL</h5>
+                <h4>Posts</h4>
+            </div>
+            <div class="stats-right"> <label>{{{post_count}}}</label> </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="col-md-4 widget states-last">
+            <div class="stats-left">
+                <h5>MY</h5>
+                <h4>Pages</h4>
+            </div>
+            <div class="stats-right"> <label>{{{page_count}}}</label> </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="clearfix"> </div>
+    </div>
+</section>',
 ) );
 
 							}
 							else
 							{
 								
-$_097c066c3ed3dbb233d013989a9586b7 = null;
+$_6e0c10910d5fbb6ad4e9ead328450193 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_eeb3b955e392533b3850e947803473e8 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<section data-pc-section-created="1" id="footer"><p>© 2019 <a href="http://www.PageCarton.com">PageCarton</a>. All Rights Reserved.<br></p></section>',
-  'preserved_content' => '<section data-pc-section-created="1" id="footer"><p>© 2019 <a href="http://www.PageCarton.com">PageCarton</a>. All Rights Reserved.<br></p></section>',
-  'url_prefix' => '/index.php',
+$_8f94b54f70cde9623d9cc279007489dd = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<section data-pc-section-created="1" id="footer"><p>© <script>document.write(new Date().getFullYear());</script> <a href="http://www.PageCarton.com">PageCarton</a>. All Rights Reserved.<br>&nbsp;</p>&nbsp;</section>',
+  'preserved_content' => '<section data-pc-section-created="1" id="footer"><p>© <script>document.write(new Date().getFullYear());</script> <a href="http://www.PageCarton.com">PageCarton</a>. All Rights Reserved.<br>&nbsp;</p>&nbsp;</section>',
+  'url_prefix' => '',
   'pagewidget_id' => '1575286111-0-161',
   'advanced_parameter_value' => 
   array (
     0 => '',
   ),
   '' => '',
+  'content' => '<section data-pc-section-created="1" id="footer"><p>© <script>document.write(new Date().getFullYear());</script> <a href="http://www.PageCarton.com">PageCarton</a>. All Rights Reserved.<br>&nbsp;</p>&nbsp;</section>',
 ) );
 
 							}
 							else
 							{
 								
-$_eeb3b955e392533b3850e947803473e8 = null;
+$_8f94b54f70cde9623d9cc279007489dd = null;
 
 							}
 							
