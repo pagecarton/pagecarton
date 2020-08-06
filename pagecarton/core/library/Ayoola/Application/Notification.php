@@ -77,6 +77,11 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
         {
             $userEmail = Ayoola_Application::getUserInfo( 'email' );
         }
+        elseif( ! empty( Ayoola_Application::$GLOBALS['user']['email'] ) )
+        {
+            $userEmail = Ayoola_Application::$GLOBALS['user']['email'];
+            var_export( $userEmail );
+        }
         elseif( ! $userEmail = Ayoola_Application::getDomainSettings( 'email' ) )
         {
             $userTable = 'Ayoola_Access_LocalUser';
