@@ -765,7 +765,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
     {
 
 		$key = md5( $link . serialize( $settings ) );
-	//	$storage =  static::getObjectStorage( $key )
 		$storage = self::getObjectStorage( array( 'id' => $key, 'device' => 'File', 'time_out' => 10000, ) );
 		if( ! $response = $storage->retrieve() )
 		{
