@@ -153,6 +153,11 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
             {
                 $startText = '<repeat>';
                 $endText = '</repeat>';
+                if( strpos( $template, $startText ) === false && $key !== 0 )
+                {
+                    $startText = '<!--{{{0}}}';
+                    $endText = '{{{0}}}-->';
+                }    
             }    
         }
         $start = strpos( $template, $startText ) + strlen( $startText );
@@ -188,13 +193,16 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 				@$values['pc_no_data_filter'] ? : self::filterReplacement( $value, $key );
 				$replace[] = $value;	
 			}
-			elseif( is_array( $value ) && array_values( $value ) != $value )
+			elseif( is_array( $value ) )
 			{
 				if( empty( $postTheme ) )
 				{
-
-                    $postThemeInfo = self::getPostTheme( $template );
-
+                    $postKey = null;
+                    if( ! is_numeric( $key ) )
+                    {
+                        $postKey = $key;
+                    }
+                    $postThemeInfo = self::getPostTheme( $template, $postKey );
                     if( stripos( $template, $postThemeInfo['start'] ) !== false )
                     {
                         $postTheme = $postThemeInfo['theme'];
@@ -205,6 +213,13 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                         $replace[] = '';          
                         $search[] = $postThemeInfo['end'];
                         $replace[] = '';          
+                        if( ! empty( $postKey ) )
+                        {
+                           $func = __METHOD__;
+                            $taggedPostThemeY = $func( $postTheme, $value + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) ); 
+                            $template = str_replace( $taggedPostTheme, $taggedPostThemeY, $template );
+                            continue;
+                        }
                         if( stripos( $template, $otherPostsPlaceholder ) !== false || stripos( $template, $values['placeholder_prefix'] . 'pc_post_item_' ) !== false )
                         {
                             $replaceInternally = true;
@@ -302,7 +317,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 						@$values['pc_no_data_filter'] ? : self::filterReplacement( $cccc );
 						$iReplace[] = $cccc;
 					}
-					$iData = @str_replace( $iSearch, $iReplace, $postTheme );  
+                    $iData = @str_replace( $iSearch, $iReplace, $postTheme );
 					$iTemplate .= $iData;  
 
 					//	deal with {{{pc_post_item_1}}}

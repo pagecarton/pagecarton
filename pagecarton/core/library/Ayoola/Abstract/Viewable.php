@@ -2232,13 +2232,22 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$markup = $this->getParameter( 'markup_template_prefix' );
 		$markup .= $this->getParameter( 'markup_template' );
 		$markup .= $this->getParameter( 'markup_template_suffix' );
+     //   echo( 'documents/layout/' .  Ayoola_Page_Editor_Layout::getDefaultLayout() . '/' . str_replace( '_', '/', get_class( $this ) ) . '.html' );
 
-		//	Site Wide Storage of this value
+         //	Site Wide Storage of this value
 		$storage = $this->getObjectStorage( array( 'id' => $storageNamespace, 'device' => 'File', 'time_out' => 100, ) );
 		if( $this->getParameter( 'markup_template' ) )
 		{
 			$this->_markupTemplate = $markup;
 			$storage->retrieve() != $this->_markupTemplate && $this->getParameter( 'markup_template_cache' ) ? $storage->store( $this->_markupTemplate ) : null;
+		}
+		elseif( $path = Ayoola_Loader::getFullPath( 'documents/layout/' .  Ayoola_Page_Editor_Layout::getDefaultLayout() . '/' . str_replace( '_', '/', get_class( $this ) ) . '.html' , array( 'prioritize_my_copy' => true ) ) )
+		{
+			$this->_markupTemplate =  file_get_contents( $path );
+		}
+		elseif( $path = Ayoola_Loader::getFullPath( 'documents/layout/default/' . str_replace( '_', '/', get_class( $this ) ) . '.html' , array( 'prioritize_my_copy' => true ) ) )
+		{
+			$this->_markupTemplate =  file_get_contents( $path );
 		}
 		elseif( $storage->retrieve() && ( $this->getParameter( 'markup_template_namespace' ) || Ayoola_Application::getRuntimeSettings( 'real_url' ) == '/tools/classplayer' ) )
 		{
@@ -2315,7 +2324,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			case static::PLAY_MODE_JSON:
 				error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
 				ini_set( 'display_errors', "0" );
-				header( 'Content-Type: application/json; charset=utf-8' );
 				if( @$_POST['PAGECARTON_RESPONSE_WHITELIST'] )
 				{
 
@@ -2361,14 +2369,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				//	Log early before we exit
 				Ayoola_Application::log();
 
+				header( 'Content-Type: application/json; charset=utf-8' );
 				echo $dataToSend;
 				exit();
 				
 			break;
 			case 'ENCRYPTION':
 
-				header( "Content-Disposition: attachment;filename=encryption" );
-				header( 'Content-Type: application/octet-stream' );
 				//	Introduce timeout to prevent a replay attack.
 			//	if( isset( $_POST['pagecarton_request_timezone'], $_POST['pagecarton_request_time'], $_POST['pagecarton_request_timeout'] ) )
 				{
@@ -2388,6 +2395,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 				$dataToSend = json_encode( $this->_objectData );
 				$encrypted = OpenSSL::encrypt( $dataToSend, $_SERVER['HTTP_PAGECARTON_RESPONSE_ENCRYPTION'] );
+				header( "Content-Disposition: attachment;filename=encryption" );
+				header( 'Content-Type: application/octet-stream' );
                 echo $encrypted;
                 
 				//	Log early before we exit

@@ -1062,19 +1062,13 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 
 		}
 		//	Determine the method
-
-/* 		$values = self::getStorage( 'global_values' )->retrieve();
-		if( $values )
-		{
-			$this->_global = array_merge( $this->_global, $values );
-		}
- */		switch( strtoupper( @$this->_attributes['method'] ) )
+		switch( strtoupper( @$this->_attributes['method'] ) )
 		{
 			case 'GET':
 				$this->_global = array_merge( $this->_global, $_GET );
 			break;
 			default:
-				$this->_global = array_merge( $this->_global, $_POST );
+				$this->_global = array_merge( $this->_global, $_POST ? : array() );
 			break;
 		}
 		if( $this->fakeValues )

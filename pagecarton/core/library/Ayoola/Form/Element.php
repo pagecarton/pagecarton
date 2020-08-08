@@ -81,7 +81,6 @@ class Ayoola_Form_Element extends Ayoola_Form
 	
 	protected static $_elementCounter = 0;
 
-
     /**
      * Constructor
      *
@@ -104,7 +103,7 @@ class Ayoola_Form_Element extends Ayoola_Form
     public function getAttributesHtml( Array $element )
     {
 		$inner = null;
-	//	self::v( $element );
+
 		unset( $element['label'] );
 		foreach( $element as $key => $each )
 		{
@@ -124,7 +123,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
         if( empty( $element['name'] ) )
 		{
-		//	var_export( $element );
+
 			trigger_error(  'You must enter a name for the Form Element' );
 		}
 		if( @$element['type'] )
@@ -135,43 +134,31 @@ class Ayoola_Form_Element extends Ayoola_Form
 		@$element['title'] = trim( $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) ), ':' );
 		@$element['placeholder'] = ( $element['placeholder'] ? : $element['label'] ) ? : ucwords( str_replace( '_', ' ', $element['name'] ) );
 		$element['hashed_name'] = self::hashElementName( $element['name'] );
-    //    var_export( $element['title'] );
-    //    var_export( $element['placeholder'] );
 		if( $this->hashElementName )
 		{
 			$element['name'] = $element['hashed_name'];
 		}
 		@$element['id'] = $element['id'] ? : $element['name'];
-	//	var_export( $element['real_name'] );
-	//		var_export( __LINE__ );
 							
 		//	set value to GET or POST equivalent if available
 		if( $element['type'] != 'submit' )
 		{
-        //    var_export( $element['value'] );
+
 			@$element['value'] = ! is_null( $element['value'] ) ? $element['value'] : Ayoola_Form::getDefaultValues( $element['real_name'] );
-         //   var_export( $element['value'] );
 		}
-	//	self::v( $element['value'] );
 		
 		if( @$element['autocomplete'] !== 'off' )
 		{
 			$element['value'] = self::getGlobalValue( $element['real_name'], $element['value'], true ) ? : $element['value'];
 		}
 
-			//	self::v( $element['value'] );
-
 		if( is_scalar( @$element['value'] ) )
-		{
-	//		$element['value'] = htmlentities( $element['value'], ENT_QUOTES, "UTF-8", false );	
-			
+		{			
 			//	ENT_SUBSTITUTE allows non-utf encoding to go past this point
 			if ( ! defined( 'ENT_SUBSTITUTE') ) define( 'ENT_SUBSTITUTE', ENT_QUOTES );
 			$element['value'] = htmlentities( $element['value'], ENT_SUBSTITUTE, "UTF-8", true );						
 		}
-	//	self::v( $element['value'] );    
-		
-	//	$element['name'] = md5( $element['name'] );
+
 		$name = $element['name'];
 		$realName = $element['real_name'];
 		if( $this->hashElementName )
@@ -186,64 +173,71 @@ class Ayoola_Form_Element extends Ayoola_Form
 		
 		// 	Covert to html object and add description 
 		$footnote = @$element["footnote"];
-//		$description = @$element["description"];
-		$markup = null;
-//		self::v( $element['real_name'] );
-//		self::v( $element['type'] );
+		$markup = null; 
 		if( $element['type'] )
 		{
+            switch( strtolower( $element['type'] ) )
+            {
+                case 'inputtext':
+                case 'textarea':
+                case 'select':
+                case 'checkbox':
+                case 'radio':
+                case 'selectmultiple':
+    
+                    //	Set Element ID and Label to default if undeclared
+                    $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $realName ) );
+                    $element['title'] = self::__( trim( $element['title'], ': ' ) );
+                    $element['placeholder'] = self::__( $element['placeholder'] );
+                break;
+                case 'hidden':
+                    $element['label'] = null;	
+                break;
+            }
+    
 			$method = 'add' . @$element['type'];
+			$typeClass = null;
 			if( ! method_exists( __CLASS__, $method ) )
 			{
-			//	$adderEx
-				$method = 'addInputText';
-			//	$element .= $description ? "<span> {$description} </span>" : null;		
-			//	$element = "<span>{$element}</span>";		
-				//	exit();
+                $method = 'addInputText';
+                $dynamicType = Ayoola_Form_Element_Type::getInstance()->selectOne( null, array( 'type_name' => $element['type'] ) );
+                if( Ayoola_Loader::loadClass( $dynamicType['type_widget'] ) )
+                {
+                    $typeClass = $dynamicType['type_widget'];
+                }
 			}
 			else
 			{
-				unset( $element['type'] );
-			}
+                unset($element['type']);
+            }
 			$element['name'] = @$element['multiple'] ? ( $element['name'] . '[]' ) : $element['name']; 
-            unset( $element['multiple'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
             if( ! empty( $values ) && empty( $values['html'] ) )
             {
-            //    var_export( $values );
+
                 $values = self::__( $values );
             }
-			$markup .= $this->$method( $element, $values );
+            if( $typeClass )
+            {
+                $markup .= $typeClass::viewInLine( $element + array( 'values' => $values ) );
+            }
+            else
+            {
+                unset( $element['multiple'], $element['description'], $element['real_name'], $element['hashed_name'], $element['event'] );
+                $markup .= $this->$method( $element, $values );
+            }
 		}
 		$markup .= $footnote ? "<br>{$footnote}<br>\n" : null;	
-//		var_export( $method );	
+
 		if( ! empty( $_GET['pc_inspect_widget_form'] ) && stripos( $realName, 'submit-' ) === false && stripos( $realName, 'SUBMIT_DETECTOR' ) === false )
 		{
 			$markup .= ' <div style="font-size:smaller; padding-top:1em; padding-bottom:1em;"><br> The name attribute of the element above is "' . $realName . '"<br></div>';   
 		}
-	//	self::v( $element );
-		switch( strtolower( $method ) )
-		{
-			case 'addinputtext':
-			case 'addtextarea':
-			case 'addselect':
-			case 'addcheckbox':
-			case 'addradio':
-			case 'addselectmultiple':
-			//	self::v( $method );
-				//	Set Element ID and Label to default if undeclared
-                $element['label'] = isset( $element['label'] ) ? $element['label'] : ucwords( str_replace( '_', ' ', $realName ) );
-                $element['title'] = self::__( trim( $element['title'], ': ' ) );
-                $element['placeholder'] = self::__( $element['placeholder'] );
-            break;
-			case 'addhidden':
-				$element['label'] = null;	
-			break;
-		}
+
 		if( $this->placeholderInPlaceOfLabel || ! trim( @$element['label'] ) )
 		{
 		
 		}
-		else
+		elseif( empty( $typeClass ) )
 		{
             $element['label'] = self::__( $element['label'] );
 			@$markup = "<label style=\"{$element['label_style']}\" for=\"{$element['name']}\">{$element['label']}</label>{$markup}";
@@ -263,7 +257,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		
 		// Register Html object to fieldlist
-	//	var_export( $div );
+
 		return $markup;
 		
     }
@@ -283,8 +277,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 			$name = self::hashElementName( $name );
 		}
-	//	var_export( $name );
-	//	var_export( $requirement );
+
 		if( array_key_exists( $name, $this->_values ) )
 		{	
 			$this->_requirements[$name] = empty( $this->_requirements[$name] ) ? 
@@ -294,7 +287,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-		//	throw new Ayoola_Form_Exception( $name . ' does not exist in fieldlist' );
+
 		}
 		
     }
@@ -314,8 +307,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 			$name = self::hashElementName( $name );
 		}
-//		var_export( $name );
-	//	var_export( $filters );
+
 		if( array_key_exists( $name, $this->_values ) )
 		{	
 			$this->_filters[$name] = empty( $this->_filters[$name] ) ? 
@@ -324,7 +316,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-		//	throw new Ayoola_Form_Exception( $name . ' does not exist in fieldlist' );
+
 		}
 		
     }
@@ -403,7 +395,6 @@ class Ayoola_Form_Element extends Ayoola_Form
 		$html .= @$this->container ? "<{$this->container}>\n" : null;
 		$fieldsetTag = @$this->tag ? : "fieldset";
 
-	//	$html .= ! @$this->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "<{$fieldsetTag} class='pc-form-fieldset-{$this->counter}'>\n" : null;
 		$html .= $this->getLegend() ? "\n<legend>{$this->getLegend()}</legend>\n" : null;
 		return $html;
     } 	
@@ -421,7 +412,7 @@ class Ayoola_Form_Element extends Ayoola_Form
         @$this->duplicationData['remove'] = "" . self::__( $this->duplicationData['remove'] ) . "";
 		$html .= $this->allowDuplication ? "<div><a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "" . self::__( 'Duplicate this fieldset' ) . "" ) . "' onClick='try{ ayoola.xmlHttp.callAfterStateChangeCallbacks(); }catch( e ){}var fieldset = this.parentNode.parentNode.cloneNode( true ); var fieldtags= [ \"input\", \"textarea\", \"select\"]; for ( var tagi= fieldtags.length; tagi-->0; ) { var fields = fieldset.getElementsByTagName( fieldtags[tagi] ); for( var i = fields.length; i-->0; ){ fields[i].value= \"\"; } } this.parentNode.parentNode.parentNode.insertBefore( fieldset, this.parentNode.parentNode.nextSibling ); ayoola.xmlHttp.callAfterStateChangeCallbacks(); this.name=\"\"; ayoola.div.refreshVisibleCounter( \"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['add'] ? : " + " ) . "</a>\n" : null; 
 		$html .= $this->allowDuplication ? "<a class='pc-btn pc-btn-small' href='javascript:' title='" . ( @$this->duplicationData['add'] ? : "" . self::__( 'Remove this fieldset' ) . "" ) . "' onClick='confirm( \"" . self::__( 'Delete all the fields in this set' ) . "\") ? this.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode ) : null; ayoola.div.refreshVisibleCounter(\"" . @$this->duplicationData['counter'] . "\", ayoola.div.getParentWithTagName( this, \"form\" ) );'>" . ( @$this->duplicationData['remove'] ? : " - " ) . "</a></div>\n" : null; 
-//		$html .= ! @$this->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "</{$fieldsetTag}>\n" : null;
+
 		$html .= @$this->container ? "</{$this->container}>\n" : null;
 		return $html;
     } 	
@@ -451,35 +442,32 @@ class Ayoola_Form_Element extends Ayoola_Form
 		foreach( $fields as $field )
 		{
 			if( ! $field ){ continue; }
-		//	var_export( $field );
+
 		
 			$this->addElement( array( 'name' => $field ) + ( @$values['parameters'] ? : array() ) );
 		}
-	//	var_export( $this->_names );
+
 		return @$values['html'];
 		
     }
 
     public function addCaptcha(array $element )
     {
-		//$html = file_get_contents('http://default/tools/captcha/');
-	//	return $html;
+
     }
 	
     public function addInputText(array $element, $values = array() )
     {
-	//	var_export( $element );
-		
-	//	@$element['required'] = $element['required'] ? "required='{$element['required']}'" : null;
+
     	$html = null;
-    //	$html = $this->useDivTagForElement ? "<div id='{$element['id']}_container'>\n" : null;
+
 		if( $this->placeholderInPlaceOfLabel || ! trim( $element['label'] ) )
 		{
 		
 		}
 		else
 		{
-	//		$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		}
 		if( is_array( $element['value'] ) )
 		{
@@ -487,7 +475,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 /* 			$a = md5( $element['name'] );
 			if( ! is_numeric( @static::$_fieldCount[$a] ) || ( static::$_fieldCount[$a] ) <= 0 )
 			{
-			//	static::$_fieldCount = array();
+
 				static::$_fieldCount[$a] = count( $element['value'] );
 			}
 			var_export( static::$_fieldCount[$a] );
@@ -499,23 +487,22 @@ class Ayoola_Form_Element extends Ayoola_Form
 			
 		}
 		$html .= self::$_placeholders['badnews'];
-	//	var_export( $element );
+
 		//	
-//$element['value'] = htmlspecialchars( $element['value'] );
+
 		unset( $element['label'] );
 		if( empty( $element['type'] ) )
 		{
 			$element['type'] = 'text';
 		}
 		$html .= "<input " . self::getAttributesHtml( $element ) . " />\n";
-	//	$html .= $this->useDivTagForElement ? "</div>\n" : null;
 
 		 return $html;
     }
 	
     public function addDatetime( array & $element )
     {
-    //    var_export( $element );
+
         $values = array();
         $elementName = $this->_names[trim( $element['name'], '[]' )]['real_name'];
         if( ! @$defaultValue = $element['value'] )
@@ -532,14 +519,13 @@ class Ayoola_Form_Element extends Ayoola_Form
         $values[$elementName . '_day'] = $defaultValueDigits[6] . $defaultValueDigits[7];
         $values[$elementName . '_hours'] = $defaultValueDigits[8] . $defaultValueDigits[9];
         $values[$elementName . '_minutes'] = $defaultValueDigits[10] . $defaultValueDigits[11];
-        //	self::v( $defaultValue );       
+
         
         //	Month
         $optionsX = array_combine( range( 1, 12 ), array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ) );
         $monthValue = intval( @strlen( $values[$elementName . '_month'] ) === 1 ? ( '0' . @$values[$elementName . '_month'] ) : @$values[$elementName . '_month'] );
         $monthValue = intval( $monthValue ?  : $this->getGlobalValue( $elementName . '_month' ) );
-    //	var_export( $monthValue );
-    //	var_export( $this->getGlobalValue( $elementName . '_month' ) );
+
         $this->addElement( array( 'name' => $elementName . '_month', 'label' => $element['label'], 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $monthValue ), array( 'Month' ) + $optionsX ); 
         $this->addRequirement( $elementName . '_month', array( 'InArray' => array_keys( $optionsX ) ) );
         if( strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 )
@@ -602,9 +588,7 @@ class Ayoola_Form_Element extends Ayoola_Form
             $datetime .= strlen( $this->getGlobalValue( $elementName . '_hours' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_hours' ) ) : $this->getGlobalValue( $elementName . '_hours' );
             $datetime .= ':';
             $datetime .= strlen( $this->getGlobalValue( $elementName . '_minutes' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_minutes' ) ) : $this->getGlobalValue( $elementName . '_minutes' );
-        //    var_export( $date );
-        //    var_export( $datetime );
-        //    var_export( $elementName );
+
             $this->addElement( array( 'name' => $elementName . '', 'type' => 'Hidden', 'value' => @$values[$elementName . ''] ) );
             $this->addElement( array( 'name' => $elementName . '_datetime', 'type' => 'Hidden', 'value' => @$values[$elementName . '_datetime'] ) );
             $this->addFilter( $elementName . '_datetime', array( 'DefiniteValue' => $datetime ) );
@@ -612,8 +596,7 @@ class Ayoola_Form_Element extends Ayoola_Form
             $this->addElement( array( 'name' => $elementName . '_timestamp', 'type' => 'Hidden', 'value' => @$values[$elementName . '_timestamp'] ) );
             $this->addFilter( $elementName . '_timestamp', array( 'DefiniteValue' => $timestamp ) );
             $this->addFilter( $elementName, array( 'DefiniteValue' => $timestamp ) );
-        //    $this->addFilter( $elementName,  );
-        //    var_export( $datetime );
+
         }
 
         $element['label'] = null;
@@ -622,11 +605,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 	
     public function addDocument(array $element, $values = array() )
     {
-	//	var_export( $element );
+
 		$uniqueIDForElement = $element['name'] . '_' . self::$_elementCounter;
-	//	@$element['required'] = $element['required'] ? "required='{$element['required']}'" : null;
+
     	$html = null;
-    //	$html = $this->useDivTagForElement ? "<div id='{$element['id']}_container'>\n" : null;
+
     	$html .= "<div>";
 		if( $this->placeholderInPlaceOfLabel || ! $element['label'] )
 		{
@@ -634,7 +617,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-		//	$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		}
 		$link = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Doc_Browser/?field_name=' . $element['name'];
 		if( ! @$element['data-multiple'] )
@@ -645,28 +628,14 @@ class Ayoola_Form_Element extends Ayoola_Form
 		
 		//	Need to be up so as to serve the JS
 		$uploader = Ayoola_Doc_Upload_Link::viewInLine( array( 'image_preview' => ( @$element['value'] ? : Ayoola_Form::getGlobalValue( $element['name'] ) ), 'field_name' => $element['name'], 'width' => @$articleSettings['cover_photo_width'] ? : '900', 'height' => @$articleSettings['cover_photo_height'] ? : '300', 'crop' => true, 'field_name_value' => @$element['data-field_name_value'] ? : 'url', 'preview_text' => 'Cover Photo', 'file_types_to_accept' => 'image/*', 'call_to_action' => 'Change ' . @$element['label'] ) );
-	//	var_export( $element['real_name'] );
-	//	var_export( $this->_names[$element['name']]['real_name'] );
 		switch( $this->_names[trim( $element['name'], '[]' )]['real_name'] )
 		{
-	//		case 'document_url_base64':
-/*			case 'document_url':
-			case self::hashElementName( 'document_url' ):
-			case 'cover_photo':
-			case self::hashElementName( 'cover_photo' ):
-				
-				
-				//	Give me cover photo
-			//	$html .= Ayoola_Doc_Upload_Link::viewInLine( array( 'image_preview' => ( @$element['value'] ? : Ayoola_Form::getGlobalValue( $element['name'] ) ), 'field_name' => $element['name'], 'width' => @$element['data-image_width'], 'height' => @$element['data-image_height'], 'crop' => true, 'field_name_value' => @$element['data-field_name_value'] ? : 'url', 'preview_text' => 'Cover Photo', 'call_to_action' => @$element['label'] ) );
-				$html .= $uploader;    
-			break;
-*/			case 'display_picture':
+			case 'display_picture':
 			case 'display_picture_base64':
 			case self::hashElementName( 'display_picture' ):
 				$width = '300';
 				$height = '300';
 				$element['data-document_type'] = 'image';
-		//		var_export( $width );
 			case 'document_url':
 			case self::hashElementName( 'document_url' ):
 			case 'cover_photo':
@@ -686,12 +655,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 				@$width = $width ? : $element['data-pc-upload-image-width'];
 				@$height = $height ? : $element['data-pc-upload-image-height'];
 				$docSettings = Ayoola_Doc_Settings::getSettings( 'Documents' );
-			//	var_export( $docSettings );
+
 				$defaultPix = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( ( $element['data-document_type'] == 'image' ) ? '/img/placeholder-image.jpg' : '/open-iconic/png/document-8x.png' ) . '&crop=1&max_width=64&max_height=64';
 				$valuesForPreview = (array) $element['value'];
 				$html .= '<div></div>';  
-			//	var_export( $valuesForPreview );
-			//	var_export( $element['value'] );
+
 				do
 				{
 					@$each = array_shift( $valuesForPreview );
@@ -703,7 +671,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 					$uploadJsText = 'ayoola.image.upLoadOnSelect = false; ayoola.image.fieldNameValue = \'base\';';
 				}
 			//	if( ! Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] )  )
-			//	var_export( @$uniqueIDForElement );  
+
  				$html .= '<div style="">';
 				if( @$element['data-allow_base64']  )
 				{ 
@@ -734,15 +702,13 @@ class Ayoola_Form_Element extends Ayoola_Form
 			break;
 		}
 		$html .= self::$_placeholders['badnews'];
-	//	self::v( $element );
+
 		//	
-//$element['value'] = htmlspecialchars( $element['value'] );
+
 		unset( $element['label'] ); 
 		unset( $element['id'] );
 		$element['id'] = $uniqueIDForElement;
-	//	$element['value'] = $element['id'];
-//		var_export( $element['value'] );  
-	//	@$element['value'] = (array) $element['value'];
+
 		if( ! is_array( @$element['value'] ) )
 		{
 			$element['value'] = array( @$element['value'] );
@@ -770,7 +736,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 			}
 			$html .= "<input type=\"hidden\" value=\"" . $each . "\" " . self::getAttributesHtml( $element ) . " />\n";
 		}
-	//	$html .= $this->useDivTagForElement ? "</div>\n" : null;
+
     	$html .= "</div>";
 
 		 return $html;
@@ -793,7 +759,7 @@ class Ayoola_Form_Element extends Ayoola_Form
     }
     public function addHidden(array $element )
     {
-	//	self::v( $element );
+
     	$html = null;
 		$html .= self::$_placeholders['badnews'];
 		@$html .= "<input type='hidden' " . self::getAttributesHtml( $element ) . " />\n";
@@ -802,25 +768,25 @@ class Ayoola_Form_Element extends Ayoola_Form
     public function addInputPassword(array $element )
     {
     	$html = null;
-    //	$html = $this->useDivTagForElement ? "<div id='{$element['id']}_container'>\n" : null;
+
 		if( $this->placeholderInPlaceOfLabel || ! $element['label'] )
 		{
 			$element['placeholder'] = $element['placeholder'] ? : $element['label'];
 		}
 		else
 		{
-		//	$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		}
 		$html .= self::$_placeholders['badnews'];
 		@$html .= "<input type='password' placeholder='{$element['placeholder']}' id='{$element['id']}' name='{$element['name']}' />\n";
-	//	$html .= $this->useDivTagForElement ? "</div>\n" : null;
+
 		 return $html;
     }
    
 	public function addTextArea( array $element, $values = array() )
     {
 		@$element['name'] = $values ? ( $element['name'] . '[]' ) : $element['name'];
-	//	@$element['required'] = $element['required'] ? "required='{$element['required']}'" : null;
+
         $html = "\n";
 		if( $this->placeholderInPlaceOfLabel || ! $element['label'] )
 		{
@@ -828,7 +794,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 		else
 		{
-		//	$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		}
 		$html .= self::$_placeholders['badnews'];
 		$value = is_scalar( $element['value'] ) ? $element['value'] : null;
@@ -840,7 +806,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 	public function addFile( array $element )
     {
     	$html = $this->useDivTagForElement ? "<div id='{$element['id']}_container'>\n" : null;
-   //     $html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		$html .= self::$_placeholders['badnews'];
 		$html .= "<input id='{$element['id']}' name='{$element['name']}' type='file' >\n";
 		$html .= $this->useDivTagForElement ? "</div>\n" : null;
@@ -849,25 +815,23 @@ class Ayoola_Form_Element extends Ayoola_Form
 	
     public function addSubmit(array $element)
     {
-	//	var_export( $element );
+
     	$html = null;
-  //  	$html = $this->useDivTagForElement ? "<span id='{$element['id']}_container'>\n" : null;
+
 		$html .= "<input " . self::getAttributesHtml( $element ) . " type='submit' >\n";
-//		$html .= $this->useDivTagForElement ? "</span>\n" : null;
+
 		return $html;
     }
 	
     public function addSubmitButton(array $element)
     {
-	//	var_export( $element );
+
     	$html = null;
-  //  	$html = $this->useDivTagForElement ? "<span id='{$element['id']}_container'>\n" : null;
+
 		$value = html_entity_decode( $element['value'] );
 		unset( $element['value'] );
-//		var_export( htmlentities( $value ) );
+
 		$html .= ( "<button " . self::getAttributesHtml( $element ) . " type='submit'>" . $value . "</button>" );
-//		$html .= $this->useDivTagForElement ? "</span>\n" : null;
-// var_export( htmlentities( $html ) );
 
 		return $html;
     }
@@ -889,27 +853,24 @@ class Ayoola_Form_Element extends Ayoola_Form
 		//	Setting the [] from the class level causes some trouble.
 		$element['name'] = trim( $element['name'], '[]' ) . '[]';
        $html = null;
- //      @$html = "<label style='{$element['label_style']}' for='{$element['name']}'>{$element['label']}\n";
- //      $html .= "</label>\n";
+
 		$html .= self::$_placeholders['badnews'];
 		$counter = 0;
-		//		var_export( $element['value'] );
+
        	$html .= '<div style="display:inline-block; ' . $element['style'] . '">';
 		foreach( $values as $value => $label )
 		{ 
-		//	var_export( $label );
+
 			$label = $label !== '' ? $label : $value;
-		//	var_export( $value );
+
 			$counter++;
 			$checked = null; 
-			//	@var_export( $value );
+
 			if( isset( $element['value'] ) && is_array( $element['value'] ) )
 			{ 
 				if( in_array( $value, $element['value'] ) )
 				{
-				//	var_export( $value ); 
-				//	var_export( $label ); 
-				//	var_export( $element['value'] ); 
+
 					$checked = "checked='true'";
 				}
 			} 
@@ -926,14 +887,12 @@ class Ayoola_Form_Element extends Ayoola_Form
 	
     public function addMultipleInputText( array $element, $values = array() )
     {
-		//		var_export( $values );
+
 		//	Setting the [] from the class level causes some trouble.
     	$html = null;
-    //	$html = $this->useDivTagForElement ? "<div id='{$element['id']}_container'>\n" : null;
+
 		$html .= "<span>\n";
-	//	var_export( $values );
-	//	var_export( $element['value'] );
-    //	var_export( $element['label'] );
+
         try
         {
             $values = array_unique( ( $values ? : array() ) + ( $element['value'] ? : array() ) ); 
@@ -942,19 +901,19 @@ class Ayoola_Form_Element extends Ayoola_Form
         {
 
         }
-	//	var_export( $values );
+
 		if( $this->placeholderInPlaceOfLabel || ! trim( $element['label'] ) )
 		{
-		//	@$element['placeholder'] = $element['placeholder'] ? : $element['label'];
+
 		}
 		elseif( ! $values )
 		{
 			$values = array( '' => '' );
-	//		$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		}
 		else
 		{
-		//	$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		}
 		$element['name'] = trim( $element['name'], '[]' ) . '[]';
 		$html .= self::$_placeholders['badnews'];
@@ -986,23 +945,23 @@ class Ayoola_Form_Element extends Ayoola_Form
 		//	Setting the [] from the class level causes some trouble.
 		$element['name'] = trim( $element['name'], '[]' ) . '[]';
     	$html = null;
-    //	$html = $this->useDivTagForElement ? "<div id='{$element['id']}_container'>\n" : null;
+
 		if( $this->placeholderInPlaceOfLabel || ! $element['label'] )
 		{
 			@$element['placeholder'] = $element['placeholder'] ? : $element['label'];
 		}
 		else
 		{
-	//		$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		}
 		$html .= self::$_placeholders['badnews'];
 		$counter = 0;
-		//		var_export( $element['value'] );
+
 		foreach( $values as $value => $label )
 		{ 
 			$counter++;
 			$checked = null; 
-			//	@var_export( $value );
+
 			if( isset( $element['value'] ) && is_array( $element['value'] ) )
 			{ 
 				if( in_array( $value, $element['value'] ) )
@@ -1026,11 +985,9 @@ class Ayoola_Form_Element extends Ayoola_Form
 	
     public function addRadio(array $element,Array $values = array())
     {
-	//	self::v( $element );
+
 		//	debug making "/tools/classplayer/get/object_name/Ayoola_Page_Editor/?url=/" to display nonsense title
-	//	unset( $element['title'] );
-  //      $html = "<label for='{$element['name']}'>{$element['label']}\n";
-  //     $html .= "</label>\n";
+
 		$html .= self::$_placeholders['badnews'];
 		$i = 0;
 		unset( $element['label'] );
@@ -1066,17 +1023,17 @@ class Ayoola_Form_Element extends Ayoola_Form
     {
 		//	Setting the [] from the class level causes some trouble.
 		$element['name'] = trim( $element['name'], '[]' ) . '[]';
-	//	var_export( $_POST[$element["name"]] );
+
         $html = "";
 		if( $this->placeholderInPlaceOfLabel || ! trim( $element['label'] ) )
 		{
-	//		$element['placeholder'] = $element['placeholder'] ? : $element['label'];
+
 		}
 		else
 		{
-	//		$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		}
-      ///  $html = "<div id='{$element['id']}_container'><label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		$html .= self::$_placeholders['badnews'];
         $html .= "<select id='{$element['id']}' name='{$element['name']}' multiple='multiple' > \n";
 		if( isset( $_POST[$element["name"]] ) ) 
@@ -1099,8 +1056,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 			{
 				$title = $title !== '' ? $title : $value;
 				$html.= "<option value='{$value}'";
-		//		var_export( $value );
-		//		var_export( $element["value"] );
+
 				if( is_array( $element["value"] ) && in_array( $value, $element["value"] ) ) 
 				{ 
 					$html.= 'selected="selected"'; 
@@ -1129,15 +1085,15 @@ class Ayoola_Form_Element extends Ayoola_Form
     	$html = $this->useDivTagForElement ? "<div id='{$element['id']}_container'>\n" : null . ' ';
 		if( $this->placeholderInPlaceOfLabel || ! trim( $element['label'] ) )
 		{
-	//		$element['placeholder'] = $element['placeholder'] ? : $element['label'];
+
 		}
 		else
 		{
-	//		$html .= "<label for='{$element['name']}'>{$element['label']}</label>\n";
+
 		}
 		$html .= self::$_placeholders['badnews'];
         $html .= "<select " . self::getAttributesHtml( $element ) . "> \n";
-	//	var_export( $values );
+
 		foreach( $values as $value => $title )
 		{
 			$title = $title !== '' ? $title : $value;
@@ -1150,14 +1106,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 				$html.= ' selected="selected" '; 
 /* 			if( is_array( $element["value"] ) ) 
 			{
-		//		var_export( $element["name"] );
-		//		var_export( $element["value"] );
+
 			}
  */			$html.= "> \n";
 			$html.= $title;
 			$html.= "</option> \n";
-			//		 var_export( $title );
-			//		 var_export( $value );
 
 		}
 		$html.= "</select> \n";
