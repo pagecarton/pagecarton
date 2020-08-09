@@ -53,7 +53,6 @@ class Application_SiteInfo extends PageCarton_Widget
         {
             $settings['site_headline'] = ucwords( array_shift( explode( '.', DOMAIN ) ) ) ? : 'My Site';
         }
-
         if( empty( $settings['site_description'] ) && self::hasPriviledge( array( 99, 98 ) ) )
         {
             $settings['site_description'] = $settings['site_description'] ? : 'Description for this site has not been set. Site Description will appear here when they become available.';
