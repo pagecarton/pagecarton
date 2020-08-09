@@ -90,21 +90,20 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 			$values = array( 'settings' => serialize( $values ), 'data' => $values );
 					//		self::v( $this->getIdentifierData() ); 
 			$table = Application_Settings::getInstance();
-			$previousData = $table->select( null, array( 'settingsname_name' => $settingsNameToUse ) );
-			if( count( $previousData ) > 1 )
-			{
-				foreach( $previousData as $key => $each )
-				{
-					if( ! $key )
-					{
-						//	skip one, delete the rest
-						continue;
+            $previousData = $table->select( null, array( 'settingsname_name' => $settingsNameToUse ) );
+            
+            @$onePrevious = array_shift( $previousData );
+            foreach( $previousData as $key => $each )
+            {
+                if( ! $key )
+                {
+                    //	skip one, delete the rest
+                    continue;
 
-					}
-					$table->delete( array( 'settings_id' => $each['settings_id'] ) );
-				}
-			}
-			if( $previousData )
+                }
+                $table->delete( array( 'settings_id' => $each['settings_id'] ) );
+            }
+			if( $onePrevious )
 			{
 				if( ! $table->update( $values, array( 'settingsname_name' => $settingsNameToUse ) ) ){ return false; }
 			}
@@ -121,7 +120,7 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 			{
 			//	var_export( $data['class_name'] );
 				$class = $data['class_name'];
-				$class::callback();
+				$class::callback( $onePrevious, $values );
 			}
 			//			var_export( __LINE__ );
 			if( @$_GET['previous_url'] )

@@ -46,15 +46,11 @@ class Application_SiteInfo extends PageCarton_Widget
 	public static function getInfo( $key = null )
     {  
         $settings = Application_Settings_Abstract::getSettings( 'SiteInfo' );
-     //   self::v( Ayoola_Application::getDomainSettings() );
         @$settings['site_headline'] = $settings['site_headline'] ? : Ayoola_Application::getDomainSettings( 'display_name' );
-    //    @$settings['site_description'] = $settings['site_description'] ? : Ayoola_Application::getDomainSettings( 'profile_description' );
         @$settings['cover_photo'] = $settings['cover_photo'] ? : Ayoola_Application::getDomainSettings( 'display_picture' );
         @$settings['cover_photo'] = $settings['cover_photo'] ? : '/img/placeholder-image.jpg';
-  //     self::v( $settings );      
         if( empty( $settings['site_headline'] ) )
         {
-        //    var_export( explode( '.', DOMAIN ) );
             $settings['site_headline'] = ucwords( array_shift( explode( '.', DOMAIN ) ) ) ? : 'My Site';
         }
 

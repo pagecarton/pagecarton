@@ -40,7 +40,6 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; } 
 
-			
 			//	Import mode
 			if( @$values['theme_url'] || Ayoola_Loader::checkFile( $this->getParameter( 'path' ) ) )
 			{ 				
@@ -244,8 +243,15 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 
 				//	don't delete again
 
-				
-				$this->setViewContent(  '' . self::__( '<p class="goodnews">New theme saved successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a></p>' ) . '', true  );
+                if( ! empty( $_GET['site_setup'] ) || $this->getParameter( 'site_setup' ) )
+                {
+                    Ayoola_Page_Layout_MakeDefault::this( $values['layout_name'] );
+                    $this->setViewContent(  '' . self::__( '<p class="goodnews">Theme saved successfully and installed.</p>' ) . '', true  );
+                }
+                else
+                {
+                    $this->setViewContent(  '' . self::__( '<p class="goodnews">New theme saved successfully. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Set as Default Theme</a></p>' ) . '', true  );
+                }
 				
 				//	Clean up temp dir
                 Ayoola_Doc::deleteDirectoryPlusContent( $tempDestination );

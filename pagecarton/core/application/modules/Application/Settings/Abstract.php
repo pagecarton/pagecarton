@@ -67,7 +67,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
      * Calls this after every successful settings change
      * 
      */ 
-	public static function callback()
+	public static function callback( $previousData, $newData )
     {
 
 	}

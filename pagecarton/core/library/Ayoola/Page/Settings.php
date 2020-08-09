@@ -31,13 +31,16 @@ class Ayoola_Page_Settings extends PageCarton_Settings
     /**
      * Calls this after every successful settings change
      * 
-     */
-	public static function callback()
+     */ 
+	public static function callback( $previousData, $newData )
     {
- 		$defaultPages = array( '/', '/post/view', '/widgets', '/account', '/account/signin', '/404', '/posts', '/search', '/cart', '/profile', );	
+        if( $previousData['data']['default_layout'] === $newData['data']['default_layout'] )
+        {
+            return false;
+        }
+  		$defaultPages = array( '/', '/post/view', '/widgets', '/account', '/account/signin', '/404', '/posts', '/search', '/cart', '/profile', );	
 		  
 		$table = Ayoola_Page_Page::getInstance();
-	//	unset( $_POST );
 		foreach( $defaultPages as $page )      
 		{
 			try
@@ -49,11 +52,6 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 				//	must initialize each time so that each page can be handled.
                 Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
 				$sanitizeClass = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $page, 'auto_create_page' => true ) );  
-            //    if( ! $response = $sanitizeClass->sourcePage( $page ) )
-                {
-                    //  Auto create
-                //    $table->insert( array( 'url' => $page, 'system' => '1' ) );
-                }
                 Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
 				if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
 				{
@@ -62,51 +60,24 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 											'url' => $page,
 					);
 					$class = new Ayoola_Page_Delete( $parameters );
-                //    $class->init();
-
-                    //  upgrade cache
-				//	Application_Cache_Clear::viewInLine();
-				//	$deleted = $table->delete( array( 'url' => $page, 'system' => '1' ) );
-				//	var_export( $page );   
-				//	var_export( $class->view() );   
                 }
                 Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
-                //  Application_Cache_Clear::viewInLine();
+                $response = $sanitizeClass->sourcePage( $page );
 
-                    $response = $sanitizeClass->sourcePage( $page );
-
-                    // sanitize so it could refresh with latest template
-                //	$class = new Ayoola_Page_Editor_Sanitize();
-
-                    //	create this page if not available.
-                    $sanitizeClass->refresh( $page );	     		
-
-			//	self::v( $page );   
-			//	self::v( $response );   
-		//		var_export( $response );   
+                // sanitize so it could refresh with latest template
+                //	create this page if not available.
+                $sanitizeClass->refresh( $page );	     		
 			}
 			catch( Exception $e )
 			{
-            //    echo $e->getMessage();
 				null;
 			}
 		}
-	//	return false;
 		//	copy page content from theme
 		$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
-	//	var_export( $themeName );
-	//	$pages = Ayoola_Page_Layout_Pages::getPages( $themeName, 'list' );
-	//	foreach( $pages as $url )
-		{
-			// dont autocreate page again because its creating too many pages
-		//	Ayoola_Page_Layout_Pages_Copy::this( $url, $themeName );
-		}
-
-
- 	//	var_export( __LINE__ );  
 		$class2 = new Ayoola_Page_Editor_Sanitize(); 
 		$class2->sanitize( $themeName ); 
-	}    
+ 	}    
 	
     /**
      * creates the form for creating and editing
@@ -117,9 +88,6 @@ class Ayoola_Page_Settings extends PageCarton_Settings
      */
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
-	//	$values = unserialize( @$values['settings'] );
-	//	$settings = unserialize( @$values['settings'] );
-	//	$settings = @$values['data'] ? : unserialize( @$values['settings'] );
 		$values = @$values['data'] ? : unserialize( @$values['settings'] );
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );  
 		$form->setParameter( array( 'no_fieldset' => true ) );
@@ -129,7 +97,6 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 		
 		//	Default Layout
 		$fieldset = new Ayoola_Form_Element;
-	//	$fieldset->placeholderInPlaceOfLabel = true;
 		
 		$table = new Ayoola_Page_PageLayout;
         $table = $table::getInstance( $table::SCOPE_PRIVATE );
@@ -147,10 +114,8 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 						<div class="xpc_give_space" style="padding:1em;height:2em;overflow:hidden;background:#eee;color:#000;"> ' . $each['layout_label'] . ' </div>
 					</div>
 				';
-//			$layouts[$each['layout_name']] = $each['layout_name'];
 		}
 		$fieldset->addElement( array( 'name' => 'default_layout', 'label' => 'Default Theme', 'title' => 'Select this', 'type' => 'Select', 'style' => 'xdisplay:none;', 'value' => @$values['default_layout'] ), $layouts );
-	//	$fieldset->addRequirement( 'default_layout','InArray=>' . implode( ';;', array_keys( $layouts ) ) );
 		
 		
 		

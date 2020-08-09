@@ -30,6 +30,39 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
      * Performs the whole widget running process
      * 
      */
+	public function this( $themeName )
+    {    
+		try
+		{ 
+            
+            //  Code that runs the widget goes here...
+
+            $each = new Application_Settings_Editor( array( 'settingsname_name' => 'Page' ) );
+            $settings = Ayoola_Page_Settings::retrieve();
+            $settings['default_layout'] = $themeName;
+            $each->fakeValues = $settings;
+            if( ! $each->init() )
+            {
+                return false;
+            }
+
+            //  some pages were not working fine after this
+            Application_Cache_Clear::viewInLine();
+             // end of widget process
+          
+		}  
+		catch( Exception $e )
+        { 
+            //  Alert! Clear the all other content and display whats below.
+            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
+            return false; 
+        }
+	}
+
+    /**
+     * Performs the whole widget running process
+     * 
+     */
 	public function init()
     {    
 		try
@@ -42,14 +75,8 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
 			$this->setViewContent( $this->getForm()->view(), true);
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
-            $each = new Application_Settings_Editor( array( 'settingsname_name' => 'Page' ) );
-            $settings = Ayoola_Page_Settings::retrieve();
-            $settings['default_layout'] = $data['layout_name'];
-            $each->fakeValues = $settings;
-        //  $each->fakeValues = array( 'default_layout' => $data['layout_name'] );
-            if( ! $each->init() )
+            if( ! self::this( $data['layout_name'] ) )
             {
-                
                 $this->setViewContent( self::__( '<p class="badnews">An error was encountered while changing the theme.</p>' ) ); 
                 $this->setViewContent( $each->view() ); 
                 return false;

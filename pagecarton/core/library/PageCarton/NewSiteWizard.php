@@ -49,8 +49,8 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             //    Application_Personalization::viewInLine();
             $stages = array(
                 array('key' => self::__( 'Update Basic Info' ), 'title' => '' . self::__( 'Set site basic branding information' ) . '', 'class' => 'Application_Personalization'),
-                array('key' => '' . self::__( 'Browse themes' ) . '', 'title' => '' . self::__( 'Choose from hundreds of great themes for your site' ) . '', 'class' => 'Ayoola_Page_Layout_Repository'),
-                array('key' => '' . self::__( 'Choose a theme' ) . '', 'title' => '' . self::__( 'Make a theme the default site theme' ) . '', 'class' => 'Ayoola_Page_Settings'),
+                array('key' => '' . self::__( 'Choose theme' ) . '', 'title' => '' . self::__( 'Choose from hundreds of great themes for your site' ) . '', 'class' => 'Ayoola_Page_Layout_Repository'),
+                array('key' => '' . self::__( 'Choose color' ) . '', 'title' => '' . self::__( 'Make a theme the default site theme' ) . '', 'class' => 'Ayoola_Page_Settings'),
                 array('key' => '' . self::__( 'Set static content' ) . '', 'title' => '' . self::__( 'Update site static/dummy text content' ) . '', 'class' => 'Ayoola_Page_Layout_ReplaceText'),
                 array('key' => '' . self::__( 'Update pictures' ) . '', 'title' => '' . self::__( 'Change some of the theme dummy pictures' ) . '', 'class' => 'Ayoola_Page_Layout_Images'),
                 array('key' => '' . self::__( 'Publish Content' ) . '', 'title' => '' . self::__( 'Start building up the site by adding some structured posts' ) . '', 'class' => 'Application_Article_Publisher'),
@@ -84,7 +84,6 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             {
                 $xT[$each['class']]       = $each;
                 $xT[$each['class']]['id'] = $key;
-                //    $html .= '<li><a rel="" href="?stage=' . $each['class'] . '">' . $each['title'] . '</a></li>';
                 $percentageText = '';
                 $percentage     = 0;
                 if( Ayoola_Loader::loadClass( $each['class'] ) ) 
@@ -98,14 +97,14 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                 if( ( $percentage == 100 && ! $break ) ) 
                 {
                     $lastCompleted = true;
-                    $html .= '<li class="visited"><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;">' . $each['key'] . '</a></li>';
+                    $html .= '<li class="visited"><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?mini_info=1&close_on_success=1&site_setup=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;">' . $each['key'] . '</a></li>';
                 } 
                 elseif( ( $lastCompleted == true || $key === 0 ) || in_array( $each['class'], $storedStages ) ) 
                 {
                     $class         = $each['class'];
                     $lastCompleted = false;
                     $break         = true;
-                    $html .= '<li class="current"><em><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;">' . $each['key'] . '</a></em></li>';
+                    $html .= '<li class="current"><em><a onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $each['class'] . '?mini_info=1&close_on_success=1&site_setup=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;">' . $each['key'] . '</a></em></li>';
                 } 
                 else 
                 {
@@ -123,7 +122,6 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                 return false;
             }
             //  Output demo content to screen
-        //    $this->setViewContent($html, true);
             if( Ayoola_Loader::loadClass( $class ) ) 
             {
                 $query = $_GET;
@@ -135,7 +133,7 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
               <br><br>
               ' . $html . ' <br><br>
                ' . $xT[$class]['title'] . ' <br><br>
-                <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '?mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;">  ' . $xT[$class]['key'] . ' <i  style="margin:5px;" class="fa fa-external-link"></i></a>
+                <a class="pc-btn" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . $xT[$class]['class'] . '?mini_info=1&close_on_success=1&site_setup=1\', \'' . $this->getObjectName() . '\' );" href="javascript:;">  ' . $xT[$class]['key'] . ' <i  style="margin:5px;" class="fa fa-external-link"></i></a>
                 
                 <br><br>
                 <p style="text-transform:uppercase;font-size:x-small;">
