@@ -782,43 +782,13 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				if( @$values['oneFieldSetAtATime'][$fieldsetId] )
 				{
 					//	Stage already completed
-
-				//	$trueValues = $values[$fieldsetId] +
-
 					continue;
 				}
-/* 				elseif( $i === 1 )
+				elseif( $i )
 				{
-
-				//	if( $group == $fieldset->group )
-					{
-						//	Same Group, do it together
-					}
-				//	else
-					{
 						continue;
-					}
 				}
- */				elseif( $i )
-				{
 
-				//	if( $group == $fieldset->group )
-					{
-						//	Same Group, do it together
-					}
-				//	else
-					{
-						continue;
-					}
-				}
-/* 				else( $fieldset->group )
-				{
-					if( $group == $fieldset->group )
-					{
-						//	Same Group, do it together
-					}
-				}
- */			//	$group = $fieldset->group;
 			}
 
 			$each = $this->getElementMarkup( $fieldset );
@@ -851,12 +821,13 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					$this->_values = array();
 					$this->_stageCompleted = true; 	//	Refresh submission
 
-				//	if( count( $values ) !== count( $this->_fieldsets ) )
-					{
-						continue;
-					}
+					continue;
 
-				}
+                }
+                else
+                {
+                    self::getStorage( 'global_values' )->store( $this->_values );
+                }
 			}
 			$this->_stageCompleted = false; 	//	Refresh submission
 			$form .= $each;
@@ -1354,24 +1325,13 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 
 		if( $value === false && ! $ignoreSessionValues )
 		{
-			$values = self::getStorage( 'global_values' )->retrieve();
-
-		//	if( $name == 'page_options' )
-			{
-
-			}
+            $values = self::getStorage( 'global_values' )->retrieve();
+            var_export( $values );
 			if( is_null( $defaultValue ) && isset( $values[$name] )  )
 			{
 
 				$value = $values[$name];
 			}
-		}
-
-		//	register this in the global var if its in the session.
-	//	if( isset( $values[$name] ) )
-		{
-			//	Removed because its making the first value sticky
-
 		}
 		if( false === $value && ! is_null( $defaultValue ) )
 		{

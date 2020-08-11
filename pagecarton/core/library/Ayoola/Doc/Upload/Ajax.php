@@ -273,11 +273,13 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
             {
                 $data = base64_decode( $img );
             }
+			$urlPrefix = Ayoola_Application::getUrlPrefix();
 			$this->_objectData['file_info']['path'] = $path;
 			$this->_objectData['file_info']['url'] = $url;
+			$this->_objectData['file_info']['url_prefix'] = $urlPrefix;
 			$this->_objectData['file_info']['dedicated_url'] = $url;
 			$this->_objectData['file_info']['domain'] = Ayoola_Page::getDefaultDomain();
-			$urlPrefix = Ayoola_Application::getUrlPrefix();
+			$this->_objectData['file_info']['root_url'] = Ayoola_Page::getHomePageUrl();
 		
 			
 			//	refresh cache
