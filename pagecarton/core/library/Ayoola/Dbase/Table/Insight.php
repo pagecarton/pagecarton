@@ -44,7 +44,6 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
 
     protected static $_chartTypes = array( 'line', 'pie', 'bar', 'radar', 'bubble', 'doughnut', 'polarArea', );
 
-
     /**
      * Performs the whole widget running process
      * 
@@ -56,16 +55,17 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
             //  Code that runs the widget goes here...
 
             set_time_limit( 0 );
-        // ( $_POST );
-        //    $this->setParameter( $_POST );
+
+            $timeStart = time();
+            $timeLimit = $this->getParameter( 'time_limit' ) ? : 60;
+
             $class = $this->getParameter( 'table_class' ) ;
             $class = Ayoola_Loader::loadClass( $class ) ? $class : @$_POST['table_class'];
             $class = Ayoola_Loader::loadClass( $class ) ? $class : 'Application_Log_View_Access_Log';
             if( ! Ayoola_Loader::loadClass( $class ) || ! method_exists( $class, 'select' ))
             {
                 $class = 'Application_Log_View_Access_Log';
-            //    $this->setViewContent( '<p class="badnews">' . sprintf( self::__( 'Table data insights cannot load because "%s" is not a valid database table class' ), $class ) . '</p>' ); 
-            //    return false;
+
             }
 
             $label = $this->getParameter( 'table_label' ) ? : explode( '_', str_ireplace( '_Table', '', $class ) ); 
@@ -75,14 +75,13 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
             }
             $label = implode( ' ', $label );
 
-        //    $timeVariation = $this->getParameter( 'time_variation' ) ? : 'minute';
             $timeVariation = $this->getParameter( 'time_variation' );
             $timeVariation = @$_POST['time_variation'] ? : $timeVariation;
             $timeVariation = $timeVariation ? : 'minute';
             $rowKey = $this->getParameter( 'row_key' );
             $timeTable = self::$_timeTable;
             $timeVariationSec = $timeTable[$timeVariation] ? : 60;
-        //    $noOfDatasets = $this->getParameter( 'no_of_datasets' ) ? : 10;
+
             $noOfDatasets = $this->getParameter( 'no_of_datasets' ) ;
             $noOfDatasets = @$_POST['no_of_datasets'] ? : $noOfDatasets;
             $noOfDatasets = $noOfDatasets ? : 5;
@@ -92,8 +91,6 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 $currentTime = $this->getParameter( 'start_time' ) ? : time();
                 $storage->store( $currentTime );
             }
-
-            
 
             $currentDataTime = $currentTime;
             $data = array();
@@ -120,6 +117,12 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 $from = $currentDataTime;
                 $currentDataTime = $currentDataTime - $timeVariationSec;
                 $to = $currentDataTime;
+                if( time() - $timeStart > $timeLimit )
+                {
+                    $this->_parameter['markup_template'] = null;
+                    $this->setViewContent( '<p>Data for insight is not yet available. It was taking too long to populate the data so the process was aborted</p>' );
+                    return false;
+                }
                 $result = $class::getInstance()->select( null, array( 'creation_time' => array( $from, $to ) ), array( 'creation_time_operator' => 'range' ) );
                 if( $i >= $noOfDatasets )
                 {  
@@ -134,15 +137,15 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 {
                     $fieldsToExhibit = array_keys( $result[0] ); 
                 }
-            //    var_export( $fieldsToExhibit );
+
                 if( ! empty( $fieldsToExhibit ) )
                 {
                     foreach( $fieldsToExhibit as $field )
                     {
-                    //    var_export( $field );
+
                         foreach( $result as $each )
                         {
-                        //    var_export( $valueArray );
+
                             if( ! is_scalar( $field ) || ! is_scalar( $each[$field] ) || stripos( $field, '_id' ) || stripos( $field, '_ip' ) || stripos( $field, '_time' ) || stripos( $field, '_date' ) )
                             {
                                 continue;
@@ -155,10 +158,10 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                                 if( ! is_numeric( $eachKey ) )
                                 {
                                     //  no assoc array
-                                //    break;
+
                                     $fieldToUse = $eachKey;
                                     $fieldsToExhibit[$eachKey] = $eachKey;
-                                //    var_export( $eachKey );
+
                                 }
                                 if( ! is_scalar( $eachValue ) )
                                 {
@@ -168,13 +171,10 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                                 $records[$fieldToUse][$eachValue] = @$records[$fieldToUse][$eachValue] ? : 0;
                                 $records[$fieldToUse][$eachValue]++;
                             }
-                            
 
                             if( is_numeric( $value ) )
                             {
-                            //    var_export( $rowKey );
-                            //   var_export( $value );
-                            //    var_export( $each['url'] );
+
                                 $values[$field][] = intval( $value );
                                 $keyToUse = empty( $each[$rowKey] ) ? null : $each[$rowKey];
                                 $keyToUse = $keyToUse ? : $each['username'];
@@ -182,24 +182,17 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                                 $keyToUse = $keyToUse ? : $each['url'];
                                 $keyToUse = $keyToUse ? : $each['uri'];
                                 $keyToUse = $keyToUse ? : $each['article_url'];
-                            //    $keyToUse = $keyToUse ? : $each[$class::getInstance()->getTableName() . '_id'];
+
                                 $rowKeys[$field][] = $keyToUse;
                             }
-                            
-
 
                         }
                     }
                 }
 
-            //    $result = $class::getInstance()->select(  );
-            //    var_export( $values );
-             //   var_export( $rowKeys );
-                
-           //     $labels[] = $filter->filter( $to );
                 $recordCount = count( $result );
                 $totalRecords += $recordCount;
-            //    $data[] = $recordCount;
+
                 array_unshift( $data, $recordCount );
                 array_unshift( $labels, $filter->filter( $to ) );
                 $c1 = rand( 0, 255 );
@@ -208,13 +201,13 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 $bgColor[] = $this->getParameter( 'background_color_' . $i ) ? : 'rgba( ' . $c1 . ', ' . $c2 . ', ' . $c3 . ', 0.2 )';
                 $borderColor[] = $this->getParameter( 'border_color_' . $i ) ? : 'rgba( ' . $c1 . ', ' . $c2 . ', ' . $c3 . ', 1 )';
             }
-            //    var_export( $values );
+
             $this->_objectData['no_of_datasets'] = $noOfDatasets;
             $this->_objectData['time_variation'] = $timeVariation;
             $this->_objectData['start_time'] = date( 'd M Y H:i ', $currentTime );
             $this->_objectData['end_time'] = date( 'd M Y H:i ', $currentDataTime );
             $this->_objectData['total'] = $totalRecords;
-        //    var_export( $this->_objectData );
+
             $this->_objectData['average'] = intval( array_sum( $data ) / ( count( $data ) ? : 1 ) );
             $this->_objectData['max'] = intval( max( $data ) );
             $this->_objectData['min'] = intval( min( $data ) );
@@ -234,8 +227,6 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
             }
             $this->_objectTemplateValues = $this->_objectData;
 
-        //  var_export( $this->_objectData );
-        //    $chartType = $this->getParameter( 'chart_type' );
             $chartType = $this->getParameter( 'chart_type' ) ;
             $chartType = @$_POST['chart_type'] ? : $chartType;
             $chartType = $chartType ? : 'line';
@@ -278,17 +269,12 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 ' 
             );
 
-        //    var_export($values );
-            //    var_export( $values );
-             //   var_export( $rowKeys );
-
             //  top field values
             $topHtml = null;
             $maxTopFields = ( $this->getParameter( 'max_top_fields' ) ? : 6 );
             foreach( $fieldsToExhibit as $field )
             {
-                
-            //    var_export( $records[$field] );
+
                 if( ! empty( $records[$field] ) && count( ( $records[$field] ) ) > 1 )
                 {
     
@@ -335,7 +321,6 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                     $topHtml .= '<div class="col-md-3"><br><br><canvas id="' . $chartName . '" width="400" height="400"></canvas></div>'; 
                 }
 
-
                 if( ! empty( $values[$field] ) )
                 {
                     asort( $values[$field] );
@@ -349,9 +334,6 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                         unset( $values[$field][$id] );
                         unset( $rowKeys[$field][$id] );
                     }
-    
-                //    var_export( $values[$field] );
-                //    var_export( $rowKeys[$field] );
 
                     $chartName = 'myChart_high' . $field . __CLASS__;
                     $chatData = "{
@@ -377,7 +359,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 }
             }
             $formHTML = null;
-        //    var_export( $this->getParameter( 'table_class' )  );
+
                 $form = new Ayoola_Form( array( 'method' => 'POST', 'class' => 'pc-form2' ) );
                 $element = new Ayoola_Form_Element();
                 $element->hashElementName = false;
@@ -435,13 +417,11 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                                         
                                     </div>
 
-
                                     </div>
                                         ';
             @$this->_parameter['content_to_clear_internal'] .= ' <span style="font-size:1em;color:green; display:inline-block;"><i class="fa fa-arrow-up"></i> %</span>' . "\r\n";
             @$this->_parameter['content_to_clear_internal'] .= '<span style="font-size:1em;color:red; display:inline-block;"><i class="fa fa-arrow-down"></i> %</span>' . "\r\n";
             $this->setViewContent( $html ); 
-
 
     
              // end of widget process
@@ -450,7 +430,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-        //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+
             $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }
@@ -486,7 +466,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
             }
             $html .=  '>' . $value . '</option>';   
         }
-//		var_export( $object );
+
         if( empty( $present ) )
         {
             $html .= '<option value="' . $object['table_class'] . '" selected = selected>' . $object['table_class'] . '</option> '; 
@@ -513,7 +493,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
             }
             $html .=  '>' . $value . '</option>';   
         }
-//		var_export( $object );
+
         if( empty( $present ) )
         {
             $html .= '<option value="' . $object['time_variation'] . '" selected = selected>' . $object['time_variation'] . '</option> '; 
@@ -541,7 +521,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 }
                 $html .=  '>' . $value . '</option>';   
             }
-    //		var_export( $object );
+
             if( empty( $present ) )
             {
                 $html .= '<option value="' . $object['no_of_datasets'] . '" selected = selected>' . $object['no_of_datasets'] . '</option> '; 
@@ -577,7 +557,7 @@ class Ayoola_Dbase_Table_Insight extends PageCarton_Widget
                 }
                 $html .=  '>' . $value . '</option>';   
             }
-    //		var_export( $object );
+
             if( empty( $present ) )
             {
                 $html .= '<option value="' . $object['chart_type'] . '" selected = selected>' . $object['chart_type'] . '</option> '; 

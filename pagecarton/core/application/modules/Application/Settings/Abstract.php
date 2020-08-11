@@ -17,7 +17,6 @@
  
 require_once 'Ayoola/Abstract/Playable.php';
 
-
 /**
  * @category   PageCarton
  * @package    Application_Settings_Abstract
@@ -101,7 +100,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 		}
         self::$_settings[$class][$id] = false;
         return self::$_settings[$class][$id];
-//	var_export(  $settingsNameToUse );
+
 	}
 	
     /**
@@ -111,10 +110,10 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 	public static function getSettings( $settingsName, $key = null )
     {
 		$id = Ayoola_Application::getUrlPrefix() . Ayoola_Application::getApplicationNameSpace() . $settingsName . $key;
-	//	var_export( $id );
+
 		if( $settingsName == 'Page' )
 		{
-		//	var_export( $id );
+
 		}
 		if( is_null( @self::$_settings[$settingsName][$id] ) )
 		{
@@ -128,15 +127,13 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 					//	Not found in site settings. 
 					//	Now lets look in the extension settings
 					$table = Ayoola_Extension_Import_Table::getInstance( $id );
-			//		var_export( $table->select() );
-			//		var_export( $settingsName );
+
 					if( ! $extensionInfo = $table->selectOne( null,  array( 'extension_name' => $settingsName ) ) )
 					{
 						self::$_settings[$settingsName][$id]  = false;
-					//	return false; 
+
 					}
-				//	var_export( $settingsName );
-				//	var_export( $extensionInfo );
+
 					if( empty( $extensionInfo['settings'] ) )
 					{
 					//	settings getting lost in the subdomains with username
@@ -145,7 +142,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 						if( ! empty( $domainSettings['main_domain'] ) && $domainSettings['main_domain'] != $domainSettings['domain_name'] )
 						{
 							$settings = Application_Settings::getInstance( $id )->selectOne( null, array( 'settingsname_name' => $settingsName ), array( 'disable_cache' => true ) );
-					//		var_export( $settings );
+
 							if( ! empty( $settings['data'] ) )
 							{
 								static::$_settings[$settingsName][$id] = $settings['data'];
@@ -153,14 +150,14 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 							elseif( ! empty( $settings['settings'] ) )
 							{
 								static::$_settings[$settingsName][$id] = unserialize( $settings['settings'] );
-							//	self::v( static::$_settings );
+
 							}
 							else
 							{
 								static::$_settings[$settingsName][$id] = false;
 							}
 						}
-					//	self::v( $settings );
+
 					}
 					else
 					{
@@ -179,17 +176,16 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			}
 			
 		}
-	//	self::v( self::$_settings[$id] );
+
 		if( static::$_settings[$settingsName][$id] && is_string( static::$_settings[$settingsName][$id] ) )
 		{
 			static::$_settings[$settingsName][$id] = unserialize( static::$_settings[$settingsName][$id] );  
 		}
 
-//		self::v( self::$_settings );
 	//	if( is_array( self::$_settings[$id] ) && array_key_exists( $key, self::$_settings[$id] ) )
 		if( ! is_null( $key ) )
 		{
-		//	self::v( self::$_settings[$id][$key] );
+
 			return @self::$_settings[$settingsName][$id][$key];
 		}
 		else
@@ -209,14 +205,10 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
     {
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->setParameter( array( 'no_fieldset' => true ) );
-		
-//		var_export( $values );
-		
-	//	$form->oneFieldSetAtATime = true;
+
 		do
 		{
 			$formAvailable = false;
-			//	self::v( $values );
 
 			if( empty( $values['class_name'] ) || ! class_exists( $values['class_name'] ) )
 			{
@@ -232,7 +224,7 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 				$player->createForm( null, null, $values );
 				$fieldsets = $player->getForm()->getFieldsets();
 			}
-		//	self::v( $form );   
+
 			foreach( $fieldsets as $fieldset ){ $form->addFieldset( $fieldset ); }
 			$formAvailable = true;
 			$form->submitValue = 'Save';

@@ -2231,7 +2231,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$markup = $this->getParameter( 'markup_template_prefix' );
 		$markup .= $this->getParameter( 'markup_template' );
 		$markup .= $this->getParameter( 'markup_template_suffix' );
-     //   echo( 'documents/layout/' .  Ayoola_Page_Editor_Layout::getDefaultLayout() . '/' . str_replace( '_', '/', get_class( $this ) ) . '.html' );
 
          //	Site Wide Storage of this value
 		$storage = $this->getObjectStorage( array( 'id' => $storageNamespace, 'device' => 'File', 'time_out' => 100, ) );

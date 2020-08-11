@@ -17,7 +17,6 @@
  
 require_once 'Ayoola/Abstract/Playable.php';
 
-
 /**
  * @category   PageCarton
  * @package    Ayoola_Page_Settings
@@ -47,7 +46,7 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 			{
 				//	if its still a system page, delete and create again
 				//	this is causing problems deleting the home page
-                //	continue;
+
 				//	create this page if not available.
 				//	must initialize each time so that each page can be handled.
                 Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();

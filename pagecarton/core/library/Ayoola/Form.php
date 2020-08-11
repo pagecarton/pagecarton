@@ -1326,7 +1326,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		if( $value === false && ! $ignoreSessionValues )
 		{
             $values = self::getStorage( 'global_values' )->retrieve();
-            var_export( $values );
 			if( is_null( $defaultValue ) && isset( $values[$name] )  )
 			{
 

@@ -17,7 +17,6 @@
  
 require_once 'Application/Profile/Exception.php';
 
-
 /**
  * @category   PageCarton
  * @package    Application_Profile_Abstract
@@ -172,7 +171,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
      */
 	public static function saveProfile( $values )
     {
-	//	var_export( $values );
+
 		if( empty( $values['profile_url'] ) ) 
 		{
 			return false;
@@ -188,7 +187,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		}
 		$values['modified_time'][] = time();
 		$values['modified_ip'][] = $_SERVER['REMOTE_ADDR'];
-	//	var_export( self::getProfileInfo( $values['profile_url'] ) );
+
 		$values['profile_data'] = $values;
 		$values['profile_url'] = strtolower( $values['profile_url'] );
 		if( self::getProfileInfo( $values['profile_url'] ) )
@@ -299,19 +298,18 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			{
 
 			}
-		//	var_export( $profileUrl );
+
 			$url = $profileUrl[$this->getIdColumn()] ? : ( @$_GET['profile_url'] ? : ( Ayoola_Application::$GLOBAL['profile']['profile_url'] ? : Ayoola_Application::$GLOBAL['post']['profile_url'] ) );  
-		//	var_export( $url );
+
 			$data = self::getProfileInfo( $url );
-		//	var_export( $data );
 		}
-		//	var_export( $filename );
+
 		if( ! $data  
 			|| ( ! @$data['publish'] && ! self::isOwner( @$data['user_id'] ) )   
 			|| ! self::hasPriviledge( $data['auth_level'] )
 		)
 		{
-	//		return array();
+
 		}
 		$this->_identifierData = $data;
     } 
@@ -320,7 +318,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )
 	{
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . @$_REQUEST['access_level'] . @$values['profile_url'], 'data-not-playable' => true ) );      
-      //  $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
+
 		$form->oneFieldSetAtATime = false;
 		$form->submitValue = $submitValue ;
 		$fieldset = new Ayoola_Form_Element;
@@ -367,7 +365,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
                 unset( $options[99], $options['99'], $options[98], $options['98'], $options[97], $options['97'], $options[0], $options['0'] );
                 $account->addElement( array( 'name' => 'access_level', 'label' => 'Profile Category', 'onchange' => 'location.search+=\'&access_level=\'+ this.value;', 'type' => 'Select', 'required' => 'required', 'value' => ( @$values['access_level'] ? : $this->getParameter( 'access_level' ) ) ), array( 'Select Profile Type' ) + $options );  
 				$form->addFieldset( $account ); 
-			//	$fieldset->addRequirement( 'access_level', array( 'InArray' => array_keys( $options )  ) );
+
             }
 			$accessLevel = ( @$_REQUEST['access_level'] ? : $this->getGlobalValue( 'access_level' ) ) ? : $values['access_level'];
 			$customForm = false;
@@ -384,7 +382,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 						$class = new Ayoola_Form_View( array( 'form_name' => $formName, 'default_values' => $values ) );
 						if( ! $class->getIdentifierData() )
 						{  
-						//	var_export( $formName );  
+
 							continue;
 						}
 						$customForms = $class->getForm()->getFieldsets();
@@ -402,8 +400,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 				$class = new Ayoola_Form_View( array( 'form_name' => $_REQUEST['form_name'], 'default_values' => $values ) );
 				if( ! $class->getIdentifierData() )
 				{  
-				//	var_export( $formName );  
-				//	continue;
+
 				}
 				$customForms = $class->getForm()->getFieldsets();   
 				foreach( $customForms as $each ) 
@@ -438,7 +435,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		}
 		else
 		{
-		//	$form->addFieldset( $fieldset ); 
+
 		}
 		Application_Javascript::addCode
 		(
@@ -477,8 +474,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 							element.id = "element_to_show_profile_url";
 							var a = false;
 							var xx = target.value;
-					//		alert( xx.replace(/[^a-zA-Z0-9_]*/g, "" ) );
-					//		target.value = xx.replace(/[^a-zA-Z0-9_]*/g, "" );
+
 							if( target.value )
 							{
 								a = true;
@@ -489,7 +485,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 							}  
 							else
 							{
-							//	element.innerHTML = "<span class=\'badnews\'>Please enter a valid profile URL in the space provided... (e.g. MyStyle) </span>";  
+
 							}
 							target.parentNode.insertBefore( element, target.nextSibling );
 						}
@@ -517,7 +513,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 							}  
 							else
 							{
-							//	element.innerHTML = "<span class=\'badnews\'>Please enter a valid profile URL in the space provided... (e.g. MyStyle) </span>";  
+
 							}
 							target.parentNode.insertBefore( element, target.nextSibling );
 						}
@@ -535,9 +531,6 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
                 $fieldset->addFilter( 'profile_url', array( 'Transliterate' => null, 'CharacterWhitelist' => array( 'character_list' => '^\w\-\/', 'replace' => '_', ) ) );
             }
 
-		//	self::v( $profileSettings );
-
-		//	$fieldset->addElement( array( 'name' => 'name', 'placeholder' => 'Give this page a name', 'type' => 'InputText', 'value' => @$values['name'] ) );   
 			
 		}
 		$profileSettings = Application_Profile_Settings::retrieve(); 
