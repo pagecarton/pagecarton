@@ -283,16 +283,16 @@
     <TABLE_ROW ROW_ID="33">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[There are no recent posts in the %s category.]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[There are no recent posts in the %s category.]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/&quot;,&quot;\/widgets\/Ayoola_Page_Layout_MakeDefault&quot;,&quot;\/&quot;,&quot;\/widgets\/Application_Article_ShowAll&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/&quot;,&quot;\/widgets\/Ayoola_Page_Layout_MakeDefault&quot;,&quot;\/&quot;,&quot;\/widgets\/Application_Article_ShowAll&quot;,&quot;\/account&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485798-0-33]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485798]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565119607]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[false,false,false,false]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="34">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Create a new post]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Create a new post]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/widgets\/&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/widgets\/&quot;,&quot;\/&quot;,&quot;\/account&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485798-0-34]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485798]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1575222469]]></TABLE_FIELD>
@@ -301,7 +301,7 @@
     <TABLE_ROW ROW_ID="35">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Post new %s]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Post new %s]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/widgets\/&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/widgets\/&quot;,&quot;\/&quot;,&quot;\/account&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485798-0-35]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485798]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1575222470]]></TABLE_FIELD>
@@ -310,7 +310,7 @@
     <TABLE_ROW ROW_ID="36">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[The short description for the new %s  will appear here. The short description should be between 100 and 300 characters.]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[The short description for the new %s  will appear here. The short description should be between 100 and 300 characters.]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/widgets\/&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/widgets\/&quot;,&quot;\/&quot;,&quot;\/account&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485798-0-36]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485798]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1575222471]]></TABLE_FIELD>
@@ -319,7 +319,7 @@
     <TABLE_ROW ROW_ID="37">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[%s's cover photo]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[%s's cover photo]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/widgets\/&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/widgets\/&quot;,&quot;\/&quot;,&quot;\/account&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485798-0-37]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485798]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1575222474]]></TABLE_FIELD>
@@ -328,7 +328,7 @@
     <TABLE_ROW ROW_ID="38">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Details]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Details]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/widgets\/&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/blog&quot;,&quot;\/widgets\/&quot;,&quot;\/&quot;,&quot;\/account&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485798-0-38]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485798]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1575222476]]></TABLE_FIELD>
@@ -382,7 +382,7 @@
     <TABLE_ROW ROW_ID="44">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Edit Menu Option]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Edit Menu Option]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/posts&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Extension_Import_Delete&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/404&quot;,&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;,&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/&quot;,&quot;\/pc-tutorials\/l10n&quot;,&quot;\/widgets\/Ayoola_Form_View&quot;,&quot;\/widgets\/Ayoola_Dbase_Table_Insight&quot;,&quot;\/widgets\/&quot;,&quot;\/widgets\/Application_Article_Creator&quot;,&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/Application_User_Creator&quot;,&quot;\/blog&quot;,&quot;\/widgets\/Ayoola_Form_Element_Type_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/posts&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Extension_Import_Delete&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/404&quot;,&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;,&quot;\/widgets\/PageCarton_Contact_Form&quot;,&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/&quot;,&quot;\/pc-tutorials\/l10n&quot;,&quot;\/widgets\/Ayoola_Form_View&quot;,&quot;\/widgets\/Ayoola_Dbase_Table_Insight&quot;,&quot;\/widgets\/&quot;,&quot;\/widgets\/Application_Article_Creator&quot;,&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/Application_User_Creator&quot;,&quot;\/blog&quot;,&quot;\/widgets\/Ayoola_Form_Element_Type_Creator&quot;,&quot;\/account\/signin&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485800-0-44]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485800]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565119585]]></TABLE_FIELD>
@@ -545,7 +545,7 @@
     <TABLE_ROW ROW_ID="64">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[My Account]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[My Account]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/account&quot;,&quot;\/pc-admin&quot;,&quot;\/account\/signin&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/account&quot;,&quot;\/pc-admin&quot;,&quot;\/account\/signin&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/&quot;,&quot;\/404&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1564485809-0-64]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1564485809]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565119586]]></TABLE_FIELD>

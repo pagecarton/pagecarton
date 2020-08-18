@@ -128,6 +128,12 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 		//	Try to login with the form
 		if( ! $values = $this->getForm()->getValues() )
 		{
+			if( Ayoola_Page::getPreviousUrl() )
+			{
+                header("HTTP/1.1 401 Unauthorized");
+                $this->_objectData['badnews'] = 'Current user is unauthorized';
+                $this->_objectData['http_code'] = 401;
+            }
 			return false;
 		}
 	//	var_export( $values );
