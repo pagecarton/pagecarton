@@ -37,31 +37,12 @@ class Ayoola_Page_Settings extends PageCarton_Settings
         {
             return false;
         }
-  		$defaultPages = array( '/', '/post/view', '/widgets', '/account', '/account/signin', '/404', '/posts', '/search', '/cart', '/profile', );	
+  		$defaultPages = Ayoola_Page_Editor_Sanitize::$defaultPages;	
 		  
-		$table = Ayoola_Page_Page::getInstance();
 		foreach( $defaultPages as $page )      
 		{
 			try
 			{
-				//	if its still a system page, delete and create again
-				//	this is causing problems deleting the home page
-
-				//	create this page if not available.
-				//	must initialize each time so that each page can be handled.
-                Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
-				$sanitizeClass = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $page, 'auto_create_page' => true ) );  
-                Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
-				if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
-				{
-					$parameters = array( 
-											'fake_values' => array( 'auto_submit' => true ),
-											'url' => $page,
-					);
-					$class = new Ayoola_Page_Delete( $parameters );
-                }
-                Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
-                $response = $sanitizeClass->sourcePage( $page );
 
                 // sanitize so it could refresh with latest template
                 //	create this page if not available.

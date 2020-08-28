@@ -195,8 +195,9 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$cartID = md5( serialize( $values ) );
 
         $deleteUrl = $deleteMessage ? $data['settings']['edit_cart_url'] : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'empty', 'cart_id' => $cartID  ) );
-		$columnNode = @$this->_xml->createHTMLElement( 'td', '<a href="' . $deleteUrl . '" title="' . $deleteMessage . ' Empty Cart">x</a>' );
+		$columnNode = @$this->_xml->createHTMLElement( 'td', '<a style="color:red" href="' . $deleteUrl . '" title="' . $deleteMessage . ' Empty Cart"><i class="fa fa-times" aria-hidden="true"></i></a>' );
 		$columnNode->setAttribute( 'align', 'center'  );
+		$columnNode->setAttribute( 'style', ' background: pink; color: red; text-align: center;'  );
 		$row->appendChild( $columnNode );
 		$filter = 'Ayoola_Filter_Currency';
 		$filter::$symbol = $data['settings']['currency_abbreviation'] ? : ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$' );
@@ -255,8 +256,9 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				}
 			}
 			$value['delete_url'] = $deleteUrl2 = $deleteMessage ? $deleteMessage : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'delete', 'cart_id' => $cartID  ) );
-			$columnNode = @$this->_xml->createHTMLElement( 'td',  '<a href="' . $value['delete_url'] . '" title="' . $deleteMessage . ' Delete: ' . $value['subscription_label'] . '">x</a>' );
+			$columnNode = @$this->_xml->createHTMLElement( 'td',  '<a  style="color:red" href="' . $value['delete_url'] . '" title="' . $deleteMessage . ' Delete: ' . $value['subscription_label'] . '"><i class="fa fa-times" aria-hidden="true"></i></a>' );
 			$columnNode->setAttribute( 'align', 'center'  );
+            $columnNode->setAttribute( 'style', ' background: pink; color: red; text-align: center;'  );
 			$row->appendChild( $columnNode );
 			$table->appendChild( $row );
 			$this->_objectTemplateValues[] = $value;   

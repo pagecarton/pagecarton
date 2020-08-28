@@ -95,14 +95,10 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 		{
 			$this->createForm( 'Continue..', 'Create a new page' );
 			$this->setViewContent( $this->getForm()->view() );
-		//	self::v( $_POST );
 			if( ! $values = $this->getForm()->getValues() OR ! $values['url'] ){ return false; }
-        //    self::v( $this->getForm()->getbadnews() );
             
 			//	Default settings 
 			$values['auth_level'] = (array) ( isset( $values['auth_level'] ) ? $values['auth_level'] : 0 );
-		//	self::v( $values );
-		//	return false;
 		
 			if( empty( $values['system'] ) )
 			{
@@ -114,7 +110,6 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 				Preview the page on: http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() . $values['url'] . '';
 				try
 				{
-			//		var_export( $mailInfo );
 					@Ayoola_Application_Notification::mail( $mailInfo );
 				}
 				catch( Ayoola_Exception $e ){ null; }
@@ -131,17 +126,19 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 			
 			//	let's allow only page editor create this files
 			//	the themes are also created this way... we don't want that
-	
-				//	once page is created, let's have blank content
-				$page = new Ayoola_Page_Editor_Sanitize();
-				$page->refresh( $values['url'] );
 
-				$this->setViewContent( self::__( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>' ), true  );   
-				$this->setViewContent( self::__( '<p>
-																		<a target="_blank" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '">Add Content <i class="fa fa-edit pc_give_space"></i></a>
-																		<a target="_blank" class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Menu_Edit_Creator/?url=' . $values['url'] . '"> Add to site navigation <i class="fa fa-cog pc_give_space"></i></a>
-																		<a target="_blank" class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $values['url'] . '"> Settings <i class="fa fa-cog pc_give_space"></i></a>
-				</p>' ) ); 
+            //	once page is created, let's have blank content
+            //  being sanitize causes sanitize twice 
+            //  when saving new theme page
+            //    $page = new Ayoola_Page_Editor_Sanitize();
+            //    $response = $page->refresh( $values['url'] );
+
+            $this->setViewContent( self::__( '<p class="goodnews">Page created successfully. It is not yet accessible until you add content.</p>' ), true  );   
+            $this->setViewContent( self::__( '<p>
+                                                                    <a target="_blank" class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=' . $values['url'] . '">Add Content <i class="fa fa-edit pc_give_space"></i></a>
+                                                                    <a target="_blank" class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Menu_Edit_Creator/?url=' . $values['url'] . '"> Add to site navigation <i class="fa fa-cog pc_give_space"></i></a>
+                                                                    <a target="_blank" class="pc-btn"" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor/?url=' . $values['url'] . '"> Settings <i class="fa fa-cog pc_give_space"></i></a>
+            </p>' ) ); 
 		}
 		catch( Exception $e )
 		{ 
@@ -188,7 +185,6 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 		$table = Ayoola_Page_Page::getInstance();
 		$pageInfo = $table->selectOne( null, array( 'url' => $values['url'] ) );
 
-		//	var_export( $pageInfo );
 		$pageInfo['pagelayout_filename'] = self::getLayoutTemplateFilePath( $pageInfo );
 		$default = self::getDefaultPageFiles( @$values['default_url'] );
 		
@@ -200,11 +196,7 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 			//	clear all placeholders
 			$default['template'] = preg_replace( '/{?@@@([.]*)@@@}?/', '', $default['template'] );   
 		}
-	//	$values['default_url'] = $values['default_url'] == '/' ? '' : $values['default_url'];
 		$files = $this->getPageFilesPaths();
-	//	var_export( $pageInfo );
-	//	var_export( $values );
-	//	var_export( $default );
 		require_once 'Ayoola/Loader.php';  
 		foreach( $files as $key => $file )
 		{			

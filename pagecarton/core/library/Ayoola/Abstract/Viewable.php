@@ -1931,7 +1931,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		//	Help
 
 		//	Export
-        $html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var b = this.parentNode.parentNode.getElementsByClassName( \'import_export_content\' ); b = b[0];  if( b.style.display == \'none\' ){  b.value = this.parentNode.parentNode.outerHTML; b.style.display = \'block\'; b.focuc();  var c = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' )[0]; c.style.display = \'none\'; this.innerHTML = \'&#8635; Import\' } else {  b.style.display = \'none\'; b.value ? ( this.parentNode.parentNode.outerHTML = b.value ) : null; this.innerHTML = \'&#8635;\'; } pc_makeInnerSettingsAutoRefresh(); "><i class="fa fa-code"></i></a>';
+        $html .= '<a class="title_button" title="Import or export object" name="" href="javascript:;" onclick="var b = this.parentNode.parentNode.getElementsByClassName( \'import_export_content\' ); b = b[0];  if( b.style.display == \'none\' ){  b.value = this.parentNode.parentNode.outerHTML; b.style.display = \'block\'; b.focus();  var c = this.parentNode.parentNode.getElementsByClassName( \'object_exterior\' )[0]; c.style.display = \'none\'; this.innerHTML = \'&#8635; Import\' } else {  b.style.display = \'none\'; b.value ? ( this.parentNode.parentNode.outerHTML = b.value ) : null; this.innerHTML = \'&#8635;\'; } pc_makeInnerSettingsAutoRefresh(); "><i class="fa fa-code"></i></a>';
         
         if( @$object['pagewidget_id'] )
         {

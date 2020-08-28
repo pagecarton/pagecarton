@@ -212,7 +212,6 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		$values = array();
 		// Retrieve the previous layout data from the page data file
 		
-//		var_export( $paths );
 		$rPaths = Ayoola_Page::getPagePaths( $url );
 		
 		//	first default content to determine now is the default layout saved content
@@ -230,7 +229,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 			$rPaths['data_php'] = null;
 			$rPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 			$rPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
-		}
+        }
 		return $rPaths;
 	}
 	
@@ -242,20 +241,16 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
      */
     public function getValuesFromDataFile()
     {
-		$values = array();
+        $values = array();
+        
 		// Retrieve the previous layout data from the page data file
-		
-		
 		if( ! $paths = $this->getPagePaths() )
 		{
 			return false;
 		}
-//		var_export( $paths );
 
 		//	Get new relative paths
 		$page = $this->getPageInfo();
-
-	//	$rPaths = Ayoola_Page::getPagePaths( $page['url'] );
 		
 		//	first default content to determine now is the default layout saved content
 		$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
@@ -265,8 +260,6 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		{
 			$pageThemeFileUrl = '/index';
 		}
-	//	var_export( $rPaths );
-	//	$defaulThemeDataFile = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
  		if( stripos( $page['url'], '/layout/' ) === 0 )
 		{
 			list(  , $themeName ) = explode( '/', trim( $page['url'], '/' ) );
@@ -318,31 +311,21 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 			}
 		}
 		//	now using json to store this data
-//	var_export( $rPaths );
 		$newFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths['data_json'];
-	//	var_export( $newFile );
 		
 		if( is_file( $newFile ) )
 		{
-	//		var_export( file_get_contents( $newFile ) );
-	//		var_export( ( $newFile ) );
 			$values = json_decode( file_get_contents( $newFile ), true );
-	//		var_export( $values );
 			return $values;
 		}
 		elseif( $this->getPageEditorLayoutName()  )
 		{
 			return false;
 		}
-		//	compatibility
-		
-	//	var_export( $rPaths );
-		
+		//	compatibility		
 		//	Get my localized file. else, we will have double content in theme of progenies
 		$myRealFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths['data_php'];
 		
-	//	if( ! $dataDir = Ayoola_Loader::getFullPath( $rPaths['data'], array( 'prioritize_my_copy' => true ) ) )
-	//	if( ! $dataDir = Ayoola_Loader::getFullPath( $rPaths['data_php'], array( 'prioritize_my_copy' => true ) ) )
 		if( ! is_file( $myRealFile ) )
 		{
 			//	we may still have old data types
@@ -350,7 +333,6 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		}
 
 		@$values = include $myRealFile;
-	//		var_export( $values );
 		if( is_array( $values ) )
 		{
 			return $values;
@@ -363,22 +345,12 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 			//	We cant load empty file in XML. it throws error  
 			return false;
 		}
-/* 		if( ! $dataDir = Ayoola_Loader::getFullPath( $rPaths['data'], array( 'prioritize_my_copy' => true ) ) )
-		{
-			return false;
-		}
- */		require_once 'Ayoola/Xml.php';
 		$xml = new Ayoola_Xml();
-	//	var_export( $dataDir );
 		$xml->load( $myRealFile );
-	//	var_export( $values );
 		$layoutData = (array) $xml->getCDataValues();
 		if( @$layoutData['pageLayout'] ) 
 		{
-		//	var_export( $layoutData['pageLayout'] );
 			$values = json_decode( $layoutData['pageLayout'], true );
-		//	var_export( $values );
-		//	var_export( "\r\n" );
 		}
 		else	//	Compatibility
 		{
@@ -388,7 +360,6 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 				$hashSectionName = self::hashSectionName( $key );
 				$numberedSectionName = $hashSectionName . $objectCounter;
 				$layoutOnFile = array();
-	//	var_export( $layoutData[$key . '_view_parameters'] );
 				// 	viewParameters
 				$layoutOnFile['view_parameters'] = ! empty( $layoutData[$key . '_view_parameters'] ) ? $layoutData[$key . '_view_parameters'] : null;
 
@@ -507,10 +478,14 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 				$this->_dbWhereClause['page_id'] = $id;
 			}
 			//	using urls too
-			if( ! empty( $_GET['url'] ) )
+			if( $this->getParameter( 'url' ) )
+			{
+				$this->_dbWhereClause['url'] = $this->getParameter( 'url' );
+			}
+			elseif( ! empty( $_GET['url'] ) )
 			{
 				$this->_dbWhereClause['url'] = $_GET['url'];;
-			}
+            }
 		}
 		else
 		{
@@ -544,20 +519,11 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		}
 		$table = Ayoola_Page_Page::getInstance( Ayoola_Application::getApplicationNameSpace() );
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );
-	//	var_export( $whereClause ); 
 		if( ! $whereClause )
 		{
 			return false;
 		}
 		$data = $table->selectOne( null, $whereClause, array( 'work-around to avoid cache' => Ayoola_Application::getApplicationNameSpace() ) );
-	//	if( $whereClause['url'] === '/how-to' )
-		{
-		//	$e = new \Exception;
-	//	var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );			
-	//	var_export( $table->select() );			
-		//	var_export( $page );
-		}
-	//	var_export( $data );
 		if( ! $data )
 		{
 			$this->setBadnews( __CLASS__ . '- No record was found in the database or DB error');
@@ -573,11 +539,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
      */
     public function getPageInfo( $pageId = null )
     {
-	//	if( null != $pageId )
-		{
-	//		$this->setPageInfo( $pageId );
-		}
-	//	var_
+
 		if( ! $this->_pageInfo ) 
 		{
 			$this->setPageInfo(); // Singleton will not work because of sanitation of pages I am implementing

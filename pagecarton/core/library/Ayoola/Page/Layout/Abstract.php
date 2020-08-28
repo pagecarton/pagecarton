@@ -991,8 +991,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		
 		//	 empty icons not doing well in CKEDITOR
 
-	//	foreach( $icons as $each )
-		{
 			//	check if empty
 			
 			//	http://stackoverflow.com/questions/29714291/removing-elements-with-no-children-dom-php
@@ -1006,12 +1004,9 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				$element->nodeValue = '&nbsp;';       
 				$i--;    
 			} 
-		}
 		
 		//	 empty icons in span of "skel" not doing well in CKEDITOR
 
-//		foreach( $icons as $each )
-		{
 			//	check if empty
 			
 			//	http://stackoverflow.com/questions/29714291/removing-elements-with-no-children-dom-php
@@ -1025,7 +1020,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				$element->nodeValue = '&nbsp;';       
 				$i--;    
 			} 
-		}
 
 		//	remove description and keywords tags
 		$meta = $xml->getElementsByTagName( 'meta' );
@@ -1055,15 +1049,11 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
         $content = preg_replace( '#[\s]*[=][\s]*(["\'])([^\#/][a-zA-Z0-9-_/=]*\.default_file)([\'"])?#s', '=$1PC_URL_PREFIX/layout/' . $values['layout_name'] . '/$2$3', $content );
         
         //  widget variables in template files
-    //    preg_match_all( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#isU', $content, $xxx );
 		$content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', '$1{{{$3}}}$5', $content );
 		$content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', '$1{{{$3}}}$5', $content );
         preg_match_all( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', $content, $xxx );
-    //    var_export( $xxx );
-    //    exit();
 
         //  static text in attribute values {}
-    //    preg_match_all( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B)([^<>]*)(%7D)([^<>]*["\'][^<>]*>)#', $content, $xxx );
         $content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B)([^<>]*)(%7D)([^<>]*["\'][^<>]*>)#i', '$1{$3}$5', $content );
         
 		

@@ -32,9 +32,17 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
     /**
      * To end infinite loop in refreshing
      * 
-     * @var boolean 
+     * @var array 
      */
 	protected static $_refreshed = array();
+	
+	
+    /**
+     * 
+     * 
+     * @var array 
+     */
+	protected static $defaultPages = array( '/', '/post/view', '/widgets', '/account', '/account/signin', '/404', '/posts', '/search', '/cart', '/profile', );
 	
     /**
      * Switch whether to update layout on page load
@@ -52,7 +60,6 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		$this->createConfirmationForm( 'Sanitize Pages', 'Sanitize all page files and information' );
 		$this->setViewContent(  '' . self::__( '<h3>NOTE:</h3>' ) . '', true  );		
 		$this->setViewContent( self::__( '<p>This process will create a fresh copy of all the pages. A fresh copy of the layout template will be used in generating the new pages. A backup of the application is recommended.</p>' ) );		
-	//	$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/ayoola/backup" class="pc-btn pc-btn-small">Backup Now!</a>' ) );
 		$this->setViewContent( $this->getForm()->view() );
         if( ! $values = $this->getForm()->getValues() ){ return false; }
 		if( $this->sanitize() ){ $this->setViewContent(  '' . self::__( 'Pages Sanitized Successfully' ) . '', true  ); }
@@ -69,12 +76,9 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		ignore_user_abort();
 		$pages = new Ayoola_Page();
 		$where = array();		
-		$defaultPages = array();		
 		if( $themeName )
 		{
 			$where['layout_name'] = array( $themeName );
-		//	var_export( $themeName );
-		//	var_export( Ayoola_Page_Editor_Layout::getDefaultLayout() );
 			if( strtolower( $themeName ) === strtolower( Ayoola_Page_Editor_Layout::getDefaultLayout() ) )
 			{
 				$where['layout_name'][] = '';
@@ -87,12 +91,9 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 			$themePages = Ayoola_Page_Layout_Pages::getPages( $themeName );
 			foreach( $themePages as $page )
 			{
-			//	var_export( $page );
 				if( is_array( $page ) && ! empty( $page['url'] ) )
 				{
 					$page = $page['url'];
-				//  throw new Exception();
-				  //  var_export( get_ );
 				}
 
 				//	strictly do this to ensure this only saves if we have our own copy
@@ -114,7 +115,6 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 				{
 					continue;
 				}
-			//	var_export( $from );
 				$page = is_string( $page ) ? $page : $page['url'];
 				$this->_parameter['page_editor_layout_name'] = $themeName;
 				$this->refresh( $page );   
@@ -126,19 +126,17 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		//	let's see if this solves it.
 
 		$pages = $pages->getDbTable()->select( null, $where );
-		$pages = array_merge( $pages, $defaultPages );
-	//	var_export( self::getDefaultLayout() );
-	//	var_export( $pages );
-	//	var_export( $where );
+		$pages = array_merge( $pages, self::$defaultPages );
+        $done = array();
 		foreach( $pages as $page )    
 		{
 			$page = is_string( $page ) ? $page : $page['url'];
-			if( stripos( $page, '/layout/' ) === 0 || stripos( $page, '/default-layout' ) === 0 )
+			if( stripos( $page, '/layout/' ) === 0 || stripos( $page, '/default-layout' ) === 0 || ! empty( $done[$page] ) )
 			{
 				//	dont cause unfinite loop by updating theme when a theme is being sanitized
 				continue;
-			}
-			//	var_export( $page );
+            }
+            $done[$page] = true;
 			//	sanitize now on theme level
 			$this->_parameter['page_editor_layout_name'] = null;
 
@@ -151,8 +149,6 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 
         	//	let's remove dangling theme pages not completely deleted
 			Ayoola_Page_Layout_Pages_Delete::deleteThemePageSupplementaryFiles( $pageThemeFileUrl, $themeName );
-			//	var_export( $page );
-
 			$this->refresh( $page );   
 		}
 		return true;
@@ -166,38 +162,49 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
      */	
     public function refresh( $page, $themeName = null ) 
     {
-		if( ! empty( $themeName ) )
+        if( stripos( $page, '/layout/' ) === 0 || stripos( $page, '/default-layout' ) === 0 )     
+        {
+            return false;
+        }
+        if( ! empty( $themeName ) )
 		{
 			$this->_parameter['page_editor_layout_name'] = $themeName;
-		}
+        }
+        elseif( in_array( $page, self::$defaultPages ) )
+        {
+            //	if its still a system page, delete and create again
+            //	this is causing problems deleting the home page
+
+            //	create this page if not available.
+            //	must initialize each time so that each page can be handled.
+            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
+            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
+            $table = Ayoola_Page_Page::getInstance();
+            if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
+            {
+                $parameters = array( 
+                                        'fake_values' => array( 'auto_submit' => true ),
+                                        'url' => $page,
+                );
+                $class = new Ayoola_Page_Delete( $parameters );
+            }
+            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
+            $response = $this->sourcePage( $page );
+        }
 		$id = $page . Ayoola_Application::getApplicationNameSpace();
 		if( ! empty( static::$_refreshed[$id] ) )
 		{
-		//		var_export( $page );
-		//	if( $page === '/' )
-			{
-			//	$e = new \Exception;
-			//	var_dump($e->getTraceAsString());			
-			//	var_export( $page );
-			}
 			return false;
 		}
-	//	var_export( $page );
-		static::$_refreshed[$id] = true;
+        static::$_refreshed[$id] = true;
+        $this->setParameter( array( 'url' => $page, 'exec_scope' => 'refresh-' . $themeName ) );
 		$this->setPageInfo( array( 'url' => $page ) );
-	//	var_export( $page );
 		$this->setPagePaths();
 		$this->setValues();
 		$this->_updateLayoutOnEveryLoad = true;
 		$this->noLayoutView = true;
-	//	if( $page === '/how-to' )
-		{
-		//	$e = new \Exception;
-		//	var_export( $this->getPageInfo() );			
-		//	var_export( $page );
-		}
 
-		parent::init(); // invoke the template update for this page.           
+        $response = parent::init(); // invoke the template update for this page. 
 		return true;
     } 
 	// END OF CLASS
