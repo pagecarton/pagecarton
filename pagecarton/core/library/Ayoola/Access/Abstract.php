@@ -93,8 +93,6 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 		{
 			$this->setAuthMechanism( $credentials['auth_mechanism'] );
 		}
-	//	var_export( $credentials );
-	//	var_export( $this->getCredentialColumns() );
 		require_once 'Ayoola/Filter/Hash.php'; // For credentials that requires hashing
 		$hashedCredentials = array();
 		foreach( $this->getCredentialColumns() as $column => $hash )
@@ -108,7 +106,6 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 				$hashedCredentials[$column] = $filter->filter( $credentials[$column] );
 			}
 		}
-//		var_export( $hashedCredentials );
 		return $hashedCredentials;
 		return array_merge( $credentials, $hashedCredentials );
     } 
@@ -180,20 +177,7 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 		}
         return $this->_credentialColumns; 
     } 
-	
-    /**
-     * Sets the column for credentials
-     * The reason I am making this an array is so that I can have a column match the hashing needed.
-     * e.g. Array( $column => $hashNeeded, etc )
-     * @param array | string
-     * @return 
-     */
-/*     public function setCredentialColumns( $columns )
-    {
-		$columns = _Array( $columns ); // Converts my style of laziness to array
-        $this->_credentialColumns = (array) $column;
-    } 
- */	
+		
     /**
      * Calculate the value for the persistent cookie
 	 *
@@ -202,14 +186,11 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
      */
     public static function hashPassWord( $password, $time )
     {
-	//		var_export( $userInfo );
 		$serverSalt = date( "M Y" ) . '32a]\.,.,-=12' . date( "M Y" ) . '&qwd1235^@-=@11' . date( "M Y" ) . $time; // Creates a new server salt every month
 		
 		//	Use the user password, server salt and browser info to generate a cookiepassword
 		$cookiePassword = sha1( $password . $serverSalt . $_SERVER['HTTP_USER_AGENT'] . DOMAIN );
-	//	var_export( $userInfo['user_id'] . ':' . $cookiePassword . ':' . time() );
 		return $cookiePassword; 
-		
     }  
 	
     /**
@@ -236,120 +217,41 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 			{
 				return false;
 			}
-/* 			switch( gettype( $username ) )
-			{
-				case 'array':
-				default:
-					$username = Ayoola_Application::getUserInfo( 'username' );
-				break;
-				
-			}	
- */			$where = array( 'username' => strtolower( $username ) );
+			$where = array( 'username' => strtolower( $username ) );
 			$userInfo = $userInfo ? : $where;
  			if( ! @$options['skip_user_check'] )
 			{
 				//	Check the user
-			//	self::v( $username );
-			//	$class = new Application_User_Editor( $where );
-			//	self::v( $username );
-		//		$class->setIdentifier( $where );
-				
-				//	dont know why it is catching this data
-			//	$class->setIdentifierData();
-		//		$tabl();
-
-			//	$userInfo = $class->getIdentifierData();
 				$userInfo = Application_User_Abstract::getUserInfo( $where );
-		//		var_export( $where );
-		//		var_export( $username );
-		//		var_export( $userInfo );  
-				
-				//	hide super users
-		//		if( ! $userInfo || $userInfo['access_level'] == 99 )
+
+                //	hide super users
 				if( ! $userInfo  || ! $username )
 				{
 					return false;
-				//	throw new Ayoola_Access_Exception( 'INVALID USER: ' . $username ); 
 				}
 			}
-		//	self::v( $where );
-		//	self::v( $userInfo );
 			$table = Ayoola_Access_AccessInformation::getInstance();
-	//		if( ! $previousInfo = $table->selectOne( null, $where ) )
-			{
-			
-				//	Populate the Ayoola_Access_AccessInformation
-			//	$table->insert( $userInfo );
-			}
-	//		$previousInfo = Application_Profile_Abstract::getProfileInfo( $username );
 
-/*			$filename = Application_Profile_Abstract::getProfilePath( $username );
-			if( ! $previousInfo = @include $filename )
-			{
-				//	compatibility - we used to save some info here
-				if( ! $previousInfo = $table->selectOne( null, $where ) )
-				{
-				
-					//	Populate the Ayoola_Access_AccessInformation
-				//	$table->insert( $where );
-				}
-				else
-				{
-					//	We can safely remove from old db here because we will soon save in the profile path
-				//	$table->delete( $where );
-				}
-			}
-*/
 			$authOptions = array();		
-	//		var_export( $userInfo['access_level'] );
  			if( @$userInfo['access_level'] )
 			{
 				//	Get information about the user group
 				$authOptions = new Ayoola_Access_AuthLevel();
 				$authOptions = $authOptions->selectOne( null, array( 'auth_level' => $userInfo['access_level'] ) );
-		//		var_export( $authOptions ); 
 			}
- 		//	self::v( $previousInfo );
-		//	$userInfo['profile_url'] = 
-			
-		
 			$info = array_merge( $authOptions ? : array(),  $userInfo ? : array(), @$previousInfo ? : array() );
-/* 	//		@$info['display_picture'] = $info['display_picture'] ? : 'http://placehold.it/600x600&text=No Picture';
-			if( $info['display_picture'] = Ayoola_Doc::uriToDedicatedUrl( $info['display_picture'] ) )  
-			{
-
-			}
-			if( $options['display_picture_base64'] )
- */			{
-				if( empty( $info['display_picture'] ) )  
-				{ 
-					@$info['display_picture'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_PhotoViewer/profile_url/' . @$info['profile_url'] . '/document_time/' . filemtime( Application_Profile_Abstract::getProfilePath( @$info['profile_url'] ) ) . '?max_width=300&max_height=300&extension=png';
-				}
-				else
-				{
-					@$info['display_picture'] = Ayoola_Application::getUrlPrefix() . $info['display_picture'];
-				}
-			//	$options['options'] = $userInfo['display_picture_base64'];
-			}
-		//	self::v( $info );
-			
+		
+            if( empty( $info['display_picture'] ) )  
+            { 
+                @$info['display_picture'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_PhotoViewer/profile_url/' . @$info['profile_url'] . '/document_time/' . filemtime( Application_Profile_Abstract::getProfilePath( @$info['profile_url'] ) ) . '?max_width=300&max_height=300&extension=png';
+            }
+            else
+            {
+                @$info['display_picture'] = Ayoola_Application::getUrlPrefix() . $info['display_picture'];
+            }		
 			@$info['display_name'] = trim( $info['display_name'] ? : ( $info['firstname'] . ' ' . $info['lastname'] ) );
 			@$info['profile_description'] = $info['profile_description'] ? : ( @$info['display_name'] . ' has an account on ' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . ', but have not updated their description yet.' );
-/* 			if( @$info['profile_url'] )  
-			{
-				$filename = Application_Profile_Abstract::getProfilePath( $info['profile_url'] );
-				$data = @include $filename;
-				if( is_array( $data ) )
-				{
-				//	var_export( $data );
-					if( $data['display_picture_base64'] )
-					{
-						$data['display_picture'] = $data['display_picture_base64'];
-					}
-					$info = array_merge( $info, $data );
-				}
-			}
- */ 			return $info;
+ 			return $info;
 		}
 		catch( Application_Access_Exception $e ){ return false; }
 	}
@@ -365,11 +267,9 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 		{ 
 			if( empty( $information['username'] ) )
 			{
-				$information['username'] = Ayoola_Application::getUserInfo( 'username' );
+				return false;
 			}	
-			//	var_export( $information ); 
-			
-			
+
 			//	Check the user
 			$class = new Application_User_Editor( array( 'no_init' => true ) );
 			$where = array( 'username' => strtolower( $information['username'] ) );
@@ -377,20 +277,16 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 			if( ! $userInfo = $class->getIdentifierData() )
 			{
 				return false;
-			//	throw new Ayoola_Access_Exception( 'INVALID USER: ' . $information['username'] ); 
-			}
-			
-		//		var_export( $userInfo ); 
-			$filename = Application_Profile_Abstract::getProfilePath( $information['username'] );
-			if( ! $previousInfo = @include $filename )           
+            }
+            //  var_export( $userInfo );
+            //  return false;
+/* 			if( ! $previousInfo = @include $filename )           
 			{
 				//	compatibility - we used to save some info here
 				$table = Ayoola_Access_AccessInformation::getInstance();
 				if( ! $previousInfo = $table->selectOne( null, $where ) )
-				{
-				
+				{			
 					//	Populate the Ayoola_Access_AccessInformation
-				//	$table->insert( $where );
 				}
 				else
 				{
@@ -398,37 +294,10 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 					$table->delete( $where );
 				}
 			}
-		//	if( ! $values = $this->getForm()->getValues() )
-		//	{ return false; }
-		
-			$information = array_merge( $previousInfo ? : array(), $information );
- 		//	self::v( $information );
-		//	unset( $information['accessinformation_id'] );
-		//	unset( $information['username'] );
-		//	var_export( $information ); 
-		
-			//	only save relevant data
-		//	$userOptions = Application_Settings_Abstract::getSettings( 'UserAccount', 'allowed_access_information' ) ? : array();
-	//		$allowedInformation = array_merge( self::$_allowedAccessInformation, $userOptions ); 
-		//	self::v( $allowedInformation );
-		//	self::v( $userOptions );
-	//		$information = array_intersect_key( $information, array_combine( $allowedInformation, $allowedInformation ) );
-			
-		//	if( $table->update( array( 'access_information' => $information ), $where ) )
-		
-			//	We now save access information in the profile path
-			$information['profile_url'] = $information['username'];
-			if( Application_Profile_Abstract::saveProfile( $information ) )
-			{ 
-				return true;
-			}
-			return false;
+ */			return false;
 		}
 		catch( Exception $e )
 		{ 
-		//		var_export( $information );
-			//	var_export( $e->getMessage() );
-		//	var_export( $e );
 			return false; 
 		}
     }  
@@ -441,17 +310,12 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
      */
     public static function getPersistentCookieValue( $username, $password, $time = null ) 
     {
-	//	$auth = new Ayoola_Access();
-	//	$userInfo = $auth->getUserInfo();
-		
-	//	var_export( $userInfo['password'] );
 		$password = $username . $password;
 
 		//	Use the user password, server salt and browser info to generate a cookiepassword
 		$time = $time ? : time();
 		$cookiePassword = self::hashPassWord( $password, $time );
 		$strictCookiePassword = self::hashPassWord( $password . ( $_SERVER['REMOTE_ADDR'] ? :  $_SERVER['REMOTE_HOST'] ), $time );
-	//	var_export( $userInfo['user_id'] . ':' . $cookiePassword . ':' . time() );
 		return base64_encode( $username . ':' . $cookiePassword . ':' . $time . ':' . $strictCookiePassword ); 
 		
     } 

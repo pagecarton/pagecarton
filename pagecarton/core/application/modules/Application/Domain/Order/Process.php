@@ -40,11 +40,9 @@ class Application_Domain_Order_Process extends Application_Domain_Order_Abstract
 				return false;
 			}
 			$parameters['domain_name'] = strtolower( $parameters['domain_name'] );
-		//	$parameters['domain_name'] = $parameters['domain_name'] . time();
 			$values = $parameters;
 			$values['username'] = $values['full_order_info']['username'];
 			$values['user_id'] = $values['full_order_info']['user_id'];
-		//	var_export( $values );
 			if( $this->getDbTable()->select( null, array( 'domain_name' => $values['domain_name'], 'active' => 1 ) ) )
 			{ 
 				return false;
@@ -62,8 +60,6 @@ class Application_Domain_Order_Process extends Application_Domain_Order_Abstract
 					$firstPart = array_shift( $domainArray );
 					$ext = implode( '.', $domainArray );
 					$apiInfo = Application_Domain_Registration_Api::getInstance()->select( null, array( 'extension' => $ext ) );
-		//	var_export( $ext );
-		//	var_export( $apiInfo );
 					foreach( $apiInfo as $eachApi )
 					{
 						if( ! Ayoola_Loader::loadClass( $eachApi['class_name'] ) )
@@ -71,11 +67,9 @@ class Application_Domain_Order_Process extends Application_Domain_Order_Abstract
 							continue;
 						}
 						$class = $eachApi['class_name'];
-					//	$class = new $class( $parameters );
                         if( $class::register( $values ) )
                         {
                             $this->setViewContent( '<div class="goodnews">' . sprintf( self::__( '%s has been activated successfully.' ), $parameters['domain_name'] ) . '</div>', true );
-                       //     var_export( $this->getDbData() );
                             if( $this->getDbTable()->update( array( 'active' => 1, 'api' => $class ), array( 'domain_name' => $values['domain_name'] ) ) )
                             { 
                                 
@@ -97,9 +91,6 @@ class Application_Domain_Order_Process extends Application_Domain_Order_Abstract
                                 
                             }
                         }
-                //			var_export( $this->getDbTable()->select() );  
-			//			var_export( $this->getDbTable()->select() );  
-					//	$this->setViewContent( $class->view() ); 
 						break;
 					}
 			

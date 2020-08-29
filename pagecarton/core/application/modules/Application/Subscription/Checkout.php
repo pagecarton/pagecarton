@@ -61,102 +61,77 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
      */
 	protected function init()
     {
-	//	$response = self::fetchLink( 'http://pmcsms.com/' );
-	//	var_export( $response );
 		try
 		{
-		if( ! $cart = self::getStorage()->retrieve() )
-		{ 
-			return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">You have no item in your shopping cart.</span>' ) . '', true  );
-		}
-	//	var_export( self::getOrderNumber() );
-	//	var_export( $cart );
-		//	Record in the orders table
-		$notes = Application_Settings_Abstract::getSettings( 'Payments', 'order_notes' );
+            if( ! $cart = self::getStorage()->retrieve() )
+            { 
+                return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">You have no item in your shopping cart.</span>' ) . '', true  );
+            }
 
-		$notes ? $this->setViewContent( $notes ) : null;
-		$this->setViewContent( $this->getForm()->view() );
-		if( ! $values = $this->getForm()->getValues() ){ return false; }
+            //	Record in the orders table
+            $notes = Application_Settings_Abstract::getSettings( 'Payments', 'order_notes' );
 
-		//	Dont save plaintext password
-		unset( $values['password'] );
-		unset( $values['password2'] );
-			
-		//	Put the checkout info in the cart
-		$cart = self::getStorage()->retrieve();
-		$cart['checkout_info'] = $values;
-		self::getStorage()->store( $cart );
-		
-		//	Notify Admin
-		$mailInfo = array();
-		$mailInfo['subject'] = 'Checkout Attempted';
-		$mailInfo['html'] = true; 
-		$mailInfo['body'] = '   
-						Someone just attempted to checkout. Here is the cart content<br>
-						' . Application_Subscription_Cart::viewInLine() . '<br>
-						The information entered by the user is as follows:
-						' . self::arrayToString( $values ) . '<br>			
-		';
-		try
-		{
-		//	var_export( $newCart );
-			$mailInfo['to'] = Ayoola_Application_Notification::getEmails();
-			@self::sendMail( $mailInfo );
-	//		Ayoola_Application_Notification::mail( $mailInfo );
-		}
-		catch( Ayoola_Exception $e ){ null; }
-		
-	//	var_export( $orderInfo );
-		//	Refresh order number on every attempt to checkout
-		$checkoutInfo = array();
-		if( ! $api = self::getApi( $values['checkoutoption_name'] ) )
-		{
-			$table = Application_Subscription_Checkout_CheckoutOption::getInstance();
-			$checkoutInfo = $table->selectOne( null, array( 'checkoutoption_name' => $values['checkoutoption_name'] ) );
-			
-		
-			switch( $checkoutInfo['checkout_type'] )
-			{
-				case 'http_post':
-					$api = 'Application_Subscription_Checkout_HttpPost';  
-				break;
-				default:
-					$api = $checkoutInfo['object_name'];  
-		//			$this->setViewContent( $api::viewInLine( $checkoutInfo ), true );
-				break;
-			}
-		}
-		else
-		{
-		//	$this->setViewContent( $api::viewInLine(), true );
-		}
-	//	var_export( $values['checkoutoption_name'] );
-		if( empty( $values['checkoutoption_name'] ) )
-		{
-			$api = $values['checkoutoption_name'] = 'Application_Subscription_Checkout_Default';
-		}
-		Application_Subscription_Checkout::getOrderNumber( $values['checkoutoption_name'], true );     
-//		$this->setViewContent( $api::viewInLine( $checkoutInfo ), true );
+            $notes ? $this->setViewContent( $notes ) : null;
+            $this->setViewContent( $this->getForm()->view() );
+            if( ! $values = $this->getForm()->getValues() ){ return false; }
 
-		
-		if( $api && Ayoola_Loader::loadClass( $api ) )
-		{ 
-			
-			$this->setViewContent( $api::viewInLine( $checkoutInfo ), true );
-		//	throw new Application_Subscription_Exception( 'INVALID CALLBACK - ' . $eachCallback );
-		}
-
-		
-	//	if( ! $values = $this->getForm()->getValues() )
-		{ 
-		//	$this->setViewContent( $this->getForm()->view() );
-		}
-
+            //	Dont save plaintext password
+            unset( $values['password'] );
+            unset( $values['password2'] );
+                
+            //	Put the checkout info in the cart
+            $cart = self::getStorage()->retrieve();
+            $cart['checkout_info'] = $values;
+            self::getStorage()->store( $cart );
+            
+            //	Notify Admin
+            $mailInfo = array();
+            $mailInfo['subject'] = 'Checkout Attempted';
+            $mailInfo['html'] = true; 
+            $mailInfo['body'] = '   
+                            Someone just attempted to checkout. Here is the cart content<br>
+                            ' . Application_Subscription_Cart::viewInLine() . '<br>
+                            The information entered by the user is as follows:
+                            ' . self::arrayToString( $values ) . '<br>			
+            ';
+            try
+            {
+                $mailInfo['to'] = Ayoola_Application_Notification::getEmails();
+                @self::sendMail( $mailInfo );
+            }
+            catch( Ayoola_Exception $e ){ null; }
+            
+            //	Refresh order number on every attempt to checkout
+            $checkoutInfo = array();
+            if( ! $api = self::getApi( $values['checkoutoption_name'] ) )
+            {
+                $table = Application_Subscription_Checkout_CheckoutOption::getInstance();
+                $checkoutInfo = $table->selectOne( null, array( 'checkoutoption_name' => $values['checkoutoption_name'] ) );
+                
+            
+                switch( $checkoutInfo['checkout_type'] )
+                {
+                    case 'http_post':
+                        $api = 'Application_Subscription_Checkout_HttpPost';  
+                    break;
+                    default:
+                        $api = $checkoutInfo['object_name'];  
+                    break;
+                }
+            }
+            if( empty( $values['checkoutoption_name'] ) )
+            {
+                $api = $values['checkoutoption_name'] = 'Application_Subscription_Checkout_Default';
+            }
+            Application_Subscription_Checkout::getOrderNumber( $values['checkoutoption_name'], true );
+            if( $api && Ayoola_Loader::loadClass( $api ) )
+            { 
+                $this->setViewContent( $api::viewInLine( $checkoutInfo ), true );
+		    }
 		}
 		catch( Exception $e )
 		{
 			$this->getForm()->setBadnews( $e->getMessage() ); 
-		//	$this->getForm()->setBadnews( $e->getTraceAsString() ); 
 			$this->setViewContent( $this->getForm()->view(), true );
 		}
     } 
@@ -167,7 +142,6 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
      */
 	public static function changeStatus( $response )
     {
-		//	var_export( $response );
 		$table = Application_Subscription_Checkout_Order::getInstance();
 		if( ! $orderInfo = $table->selectOne( null, array( 'order_id' => $response['order_id'] ) ) )
 		{ 
@@ -179,25 +153,27 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		{ 
 			return false; 
 		}
-//		var_export( $orderInfo );
-		//	Treat the callback methods
+
+        //	Treat the callback methods
 		if( ! is_array( $orderInfo['order'] ) )
 		{
 			//	compatibility
 			$orderInfo['order'] = unserialize( $orderInfo['order'] );			
 		}
-		$values = $orderInfo['order'];
+	    //  	$values = $orderInfo['order'];
 		$output = null;
-		foreach( $values['cart'] as $each )
+		foreach( $orderInfo['order']['cart'] as $cartKey => $each )
 		{ 
 			//	call backs
-			if( ! isset( $each['callback'] ) ){ continue; }
+            if( ! isset( $each['callback'] ) ){ continue; }
 			$each['full_order_info'] = $orderInfo;
 			$each['order_status'] = $response['order_status'];
 			$each['transactionmethod'] =  $orderInfo['order_api'];
-			$each['currency_abbreviation'] = $values['settings']['currency_abbreviation'];
-			$callback = array_map( 'trim', explode( ',', $each['callback'] ) );
-		//	var_export( $callback );
+            $each['currency_abbreviation'] = $values['settings']['currency_abbreviation'];
+            if( is_scalar( $each['callback'] ) )
+            {
+                $callback = array_map( 'trim', explode( ',', $each['callback'] ) );
+            }
 			foreach( $callback as $eachCallback )
 			{
 				//	Let's treat callbacks'
@@ -205,19 +181,23 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 				if( ! Ayoola_Loader::loadClass( $eachCallback ) )
 				{ 
 					continue;
-				}
+                }
+                $parameters = $each;
 				if( method_exists( $eachCallback, 'callback' ) )
 				{
-					$eachCallback::callback( $each ); 
-			//		var_export( $eachCallback );
+                    $eachCallback::callback( $parameters ); 
 				}
 				else
 				{
-					$eachCallback = new $eachCallback( $each );
+					$eachCallback = new $eachCallback( $parameters );
 					$eachCallback->initOnce();
-				//	var_export( $eachCallback->view() );
 					$output .= $eachCallback->view();
-				}
+                }
+                if( $parameters !== $each )
+                {
+                    //  callback can change the parameters. Let it reflect in cart
+                    $orderInfo['order']['cart'][$cartKey] = $parameters;
+                }
 			}
 			
 		}

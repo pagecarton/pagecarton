@@ -73,8 +73,6 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
     {
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		$suggestions = array_merge( @$values['suggestions'] ? : array(), @$values['unavailable'] ? : array() );
-	//	var_export( $this->getGlobalValue( 'suggestions' ) );
-	//	var_export( $values );
 		if( ! empty( $suggestions ) )
 		{
 			foreach( $suggestions as $each )
@@ -93,16 +91,13 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 				$values['domain_name'] = $each;
 				$values['subscription_name'] = "{$each} (Domain Name Registration)";
 				$values['subscription_label'] = $values['subscription_name'];
-			//	$values['item'] = $values['account_id'];
 				$values['price'] = $price;
-		//		$values['currency_abbreviation'] = $values['currency_abbreviation'];
 				$values['cycle_name'] = 'Per/Year';
 				$values['cycle_label'] = 'year(s)';
 				$values['price_id'] = $each . '_' . $values['price'];
 				$values['subscription_description'] = "Domain name registration charges for ({$each})";
 				$values['url'] = "javascript:;";
 				$values['callback'] = "Application_Domain_Order_Process";
-			//	$values['checkout_requirements'] = "billing_address";
 				
 				//	After we checkout this is where we want to come to
 				$values['classplayer_link'] = "/tools/classplayer/get/object_name/Application_Domain_Registration/";
@@ -112,13 +107,11 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 				
 				//	PRIVATE REG
 				$domainSettings = Application_Settings_Abstract::getSettings( 'Domains' ) ? : array();
-			//	var_export( $domainSettings['domain_registration_options'] );
 				if( @$values['options_for_' . $each] && in_array( 'private_domain_registration', $values['options_for_' . $each] ) )
 				{
 					$values['subscription_name'] = "{$each} (Private Registration)";
 					$values['subscription_label'] = $values['subscription_name'];
 					$values['price'] = $domainSettings['private_domain_registration_price'];
-			//		$values['currency_abbreviation'] = $values['currency_abbreviation'];
 					$values['cycle_name'] = 'Per/Year';
 					$values['cycle_label'] = 'year(s)';
 					$values['price_id'] = $each . '_private_';
@@ -127,7 +120,6 @@ class Application_Domain_Registration extends Application_Domain_Registration_Ab
 					
 					//	After we checkout this is where we want to come to
 					$values['classplayer_link'] = "/tools/classplayer/get/object_name/Application_Domain_Registration/";
-				//	$values['object_id'] = $each;
 					$values['multiple'] = $values['no_of_yrs_for_' . $each];
 					$class->subscribe( $values );
 				}

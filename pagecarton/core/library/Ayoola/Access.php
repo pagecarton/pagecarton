@@ -102,15 +102,11 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 	 */
 	public function authenticate( $credentials = null )
 	{
-	//	var_export( $credentials );
 		$credentials = array_merge( $this->hashCredentials( $credentials ), $this->getCredentials() );
-	//	var_export( $credentials );
-	//	var_export( $this->getAdapter()->authenticate( $credentials ) );
-		if( ! $this->getAdapter()->authenticate( $credentials ) ){ return false; }
+
+        if( ! $this->getAdapter()->authenticate( $credentials ) ){ return false; }
 		$result = $this->getAdapter()->getResultRow();
-	//	echo session_id(); exit();
 		session_regenerate_id();
-	//	echo session_id(); exit();
 		$this->getStorage()->store( $result );
 		return true;
 	} 
@@ -125,7 +121,6 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 	{
 		$userInfo = $this->getUserInfo();
 		$priviledges = range( 0, @$userInfo['access_level'] ); 
-		//var_export( $userInfo );
 		return in_array( $authLevel, $priviledges );
 	} 
 	
@@ -168,11 +163,7 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 			//	we cant outright allow all these to skip restriction
 			//  we allow theme pages only for now. Because they dont have pageinfo
 
-			
-
 		}
-	//	var_export( $pageInfo );
-	//	exit;
 		if( is_null( $pageAccessLevel ) )
 		{
 			require_once 'Ayoola/Page.php';
@@ -191,13 +182,8 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 			$pageInfo['auth_level'][] = 98;
 			$authLevel = $pageInfo['auth_level']; 
 			$pageAccessLevel = $authLevel; 
-		//	var_export( $pageInfo );
-		//	var_export( $authLevel );
- 		// 	exit();
 		}
 		$pageAccessLevel = is_array( $pageAccessLevel ) ? $pageAccessLevel : array( $pageAccessLevel );
- //   var_export( $pageInfo );
-//	exit();
 		$objectPlay = false;
 		switch( $pageInfo['url'] )
 		{ 
@@ -211,8 +197,6 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 					{
 						return true;  
 					}
-		//		    var_export( $className::getAccessLevel() );
-		//		    exit( $className );
 				} 
 			break;
 		} 
@@ -235,8 +219,6 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 				
 				if( $each && Ayoola_Loader::loadClass( $each ) )
 				{
-		   //          var_export(  $each::viewInLine() );
-			   //     echo $each::viewInLine();
 					$each::viewInLine();
 					$access = self::getInstance();
 					if( $access->isLoggedIn() )
@@ -263,56 +245,26 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 		}
 		$urlToGo = Ayoola_Page::setPreviousUrl( $urlToGo ); 
 		$access = self::getInstance();
-   //     var_export( $pageInfo );
-    //    var_export( $urlToGo );
-	//	var_export( $objectPlay );
-   //    var_export( Ayoola_Application::isClassPlayer()  );
-	//    exit();
-	//	exit();
 		if( ! $access->isLoggedIn() )   
 		{ 
-			//	$access->logout();
-			
-			//	must log out first to avoid redirct at the login page.
-			
+			//	must log out first to avoid redirct at the login page.			
 			$encodeLoginMessage = new Ayoola_Access_Login();
 			$encodeLoginMessage->getObjectStorage( 'pc_coded_login_message' )->store( 'Please login to continue...' );
-			
-//            var_export( $urlToGo );
-//            exit();
-
 			$jsCode = 'ayoola ? ( ayoola.div.getParent( window, 5 ).location = "' . $urlToGo . '?pc_coded_login_message=1&previous_url=" + encodeURIComponent( ayoola.div.getParent( window, 5 ).location ) ) : ( window.location = "' . $urlToGo . '?pc_coded_login_message=1&previous_url=" + encodeURIComponent( window.location ) );';
 			Application_Javascript::addCode( $jsCode );
-
-	//		if(  ! Ayoola_Application::isClassPlayer() )
-		//	if( ! $objectPlay )
-			{
-				header( 'Location: ' . $urlToGo );	
-				exit();
-			}
+        
+            header( 'Location: ' . $urlToGo );	
+            exit();
+			
 		}
 		elseif( ! Ayoola_Application::isClassPlayer() )  
 		{			
 			$access = self::getInstance();
 			$access->logout();
-		//	if( ! $objectPlay )
-			{
-				header( 'Location: ' . $urlToGo );	
-				exit();
-			}
+            header( 'Location: ' . $urlToGo );	
+            exit();
 		}
-		else
-		{
-			
-		}
-		
-	//	echo 'You need to be signed into your account to continue. <a target="_parent" onClick="' . $jsCode . '" href="' . $urlToGo . '">Click here to sign in...</a>';
-		
-	//	echo Application_Javascript::getAll();
-		
 		return false;
-		
-	//	var_export( $pageAccessLevel );
 	} 
 	
 	/**

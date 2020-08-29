@@ -56,31 +56,26 @@ final class Application_Wallet extends Application_Wallet_Abstract
 			{
 				if( ! $senderInfo = Ayoola_Access::getAccessInformation( $transferInfo['from'] ) )
 				{
-					//	throw new Application_Exception( 'INVALID SENDER: ' . $transferInfo['from'] );
 						return false;
 				}
 			
 				//	Check funds
 				if( @$senderInfo['wallet_balance'] < $transferInfo['amount'] )
 				{
-			//		throw new Application_Exception( 'INSUFFICIENT FUNDS: YOU NEED ADDITIONAL ' . ( $transferInfo['amount'] - @$senderInfo['wallet_balance'] ) );
 					return false;
 				}
 				else
 				{
 					$senderInfo['wallet_balance'] = $senderInfo['wallet_balance'] - $transferInfo['amount'];
-					$senderInfo['username'] = $transferInfo['from'];
-				//	var_export( $senderInfo );
-				//	var_export( $senderInfo );
-					Ayoola_Access::setAccessInformation( $senderInfo ); // deductions first for security reasons.
+                    $senderInfo['username'] = $transferInfo['from'];
+                    Ayoola_Access_Localize::info( $senderInfo );
+                    // deductions first for security reasons.
 				}
 			}
-			
 			
 			//	Get the info of the reciever
 			if( ! $receiverInfo = Ayoola_Access::getAccessInformation( $transferInfo['to'] ) )
 			{
-		//		throw new Application_Exception( 'INVALID RECEIVER: ' . $transferInfo['to'] );
 				return false;
 			}
 			
@@ -88,9 +83,8 @@ final class Application_Wallet extends Application_Wallet_Abstract
 			$receiverInfo['wallet_balance'] = @$receiverInfo['wallet_balance'] + $transferInfo['amount'];
 			
 			//	save settings
-			$receiverInfo['username'] = $transferInfo['to'];
-			Ayoola_Access::setAccessInformation( $receiverInfo );
-		//	var_export( $receiverInfo );
+            $receiverInfo['username'] = $transferInfo['to'];
+            Ayoola_Access_Localize::info( $receiverInfo );
 		
 			//	Notify Admin
 			$mailInfo = array();
@@ -98,12 +92,9 @@ final class Application_Wallet extends Application_Wallet_Abstract
 			$mailInfo['body'] = '"' . var_export( $transferInfo, true ) . '"';
 			try
 			{
-			//	var_export( $newCart );
 				@Ayoola_Application_Notification::mail( $mailInfo );
 			}
-			catch( Ayoola_Exception $e ){ null; }
-			
-			
+			catch( Ayoola_Exception $e ){ null; }						
 			return true;
 		}
 		catch( Exception $e )

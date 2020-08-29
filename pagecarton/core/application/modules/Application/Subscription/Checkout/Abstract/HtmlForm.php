@@ -85,20 +85,16 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
     {		
 		//	Initialize array for the POST parameters
 		$parameters = array();
-		$parameters['notify_url'] = '' . Ayoola_Page::getRootUrl() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Callback/api/' . self::$_apiName . '/order_id/' . Application_Subscription_Checkout::getOrderNumber( '' . self::$_apiName . '' ) . '/';
-		$parameters['success_url'] = '' . Ayoola_Page::getRootUrl() .  '/widgets/Application_Subscription_Checkout_Confirmation/api/' . self::$_apiName . '/status/1/';
-		$parameters['fail_url'] = '' . Ayoola_Page::getRootUrl() .  '/widgets/Application_Subscription_Checkout_Confirmation/api/' . self::$_apiName . '/status/0/';
-		$parameters['edit_url'] = '' . Ayoola_Page::getRootUrl() . '/onlinestore/cart/';
+		$parameters['notify_url'] = '' . Ayoola_Page::getHomePageUrl() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Callback/api/' . self::$_apiName . '/order_id/' . Application_Subscription_Checkout::getOrderNumber( '' . self::$_apiName . '' ) . '/';
+		$parameters['success_url'] = '' . Ayoola_Page::getHomePageUrl() .  '/widgets/name/Application_Subscription_Checkout_Confirmation/api/' . self::$_apiName . '/status/1/';
+		$parameters['fail_url'] = '' . Ayoola_Page::getHomePageUrl() .  '/widgets/name/Application_Subscription_Checkout_Confirmation/api/' . self::$_apiName . '/status/0/';
+		$parameters['edit_url'] = '' . Ayoola_Page::getHomePageUrl() . '/cart';
 		$parameters['total'] = 0.00;
 		$parameters['product_name'] = '';
 		$parameters['product_description'] = '';   
 		$parameters['order_number'] = Application_Subscription_Checkout::getOrderNumber( '' . self::$_apiName . '' );
 		$parameters['logo'] = Ayoola_Doc::uriToDedicatedUrl( '/img/logo.png' );
 		$parameters['customer_email'] = Ayoola_Application::getUserInfo( 'email' );
-		
-	//	self::v( $parameters );
-		
-		//	$this->setViewContent( $this->getForm()->view() );
 		return $parameters;
     } 
 	
@@ -108,7 +104,6 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
      */
 	protected static function getFormAction()
     {		
-		//	$this->setViewContent( $this->getForm()->view() );
 		return static::$_formAction;
     } 
 	
@@ -123,8 +118,6 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
 		{
 			return false;
 		}
-		//	Code to change check status goes heres
-	//	if( )
 		return true;
     } 
 	
@@ -149,7 +142,6 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
 			$defaultParameters = Application_Subscription_Checkout_Abstract_HtmlForm::getDefaultParameters();
 			if( ! $cart = self::getStorage()->retrieve() ){ return; }
 			$values = $cart['cart'];
-		//	var_export( $values );
 			foreach( $values as $name => $value )
 			{
 				if( ! isset( $value['price'] ) )

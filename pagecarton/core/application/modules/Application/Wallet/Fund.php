@@ -54,7 +54,6 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			$class = new Application_Subscription();
-		//	$confirmation = $class::getConfirmation();
 			$data['subscription_name'] = 'Add funds to wallet';
             $data['subscription_label'] = sprintf( self::__( 'Add %s to your account wallet.' ), ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$' ) . $values['amount'] );
             self::getObjectStorage( 'amount' )->store( $values['amount'] );
@@ -63,19 +62,18 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
 			$data['cycle_label'] = '';
 			$data['price_id'] = $data['subscription_name'];
 			$data['username'] = Ayoola_Application::getUserInfo( 'username' );
-			$data['classplayer_link'] = '/tools/classplayer/get/object_name/' . __CLASS__ . '/';
+			$data['classplayer_link'] = Ayoola_Application::getUrlPrefix() . '/widgets/' . __CLASS__ . '/';
 			$data['url'] = $this->getParameter( 'return_url' ) ? : $data['classplayer_link'];
 			$data['checkout_requirements'] = $this->getParameter( 'checkout_requirements' ); //"billing_address";
-			//	''
-			//	After we checkout this is where we want to come to
+
+            //	After we checkout this is where we want to come to
 			$data['return_url'] = $data['url'];
 			$data['callback'] = __CLASS__;
 			$data['classplayer_link'] = $data['url'];
 			$data['object_id'] = $data['subscription_name'];
 			$data['multiple'] = 1;
 			$class->subscribe( $data );
-		//	var_export( $data );
-        //	$this->setViewContent( $class::getConfirmation(), true );
+
             header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/cart' );
 		}
 		catch( Exception $e )
@@ -84,7 +82,6 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
 			$this->setViewContent(  '' . self::__( '<p class="badnews boxednews">' . $e->getMessage() . '</p>' ) . '', true  ); 
 			$this->setViewContent( self::__( '<p class="badnews boxednews">Error with Wallet package</p>' ) ); 
 		}
-	//	var_export( $this->getDbData() );
     } 
 	
     /**
@@ -92,19 +89,27 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
      * 
      * param array Order information
      */
-	public static function callback( $orderInfo )
+	public static function callback(& $orderInfo )
     {
-	//	var_export( $orderInfo );
-		switch( $orderInfo['order_status'] )
-		{
-			case 'Payment Successful':
+        switch( strtolower( $orderInfo['order_status'] ) )
+        { 
+            case 'payment successful':
+            case '99':
+            case '100':
+
+                if( ! empty( $orderInfo['transfer_completed'] ) )
+                {
+                    //  don't transfer twice
+                    break;
+                }
 				$transferInfo = array();
 				$transferInfo['allow_ghost_sender'] = true;
 				$transferInfo['to'] = $orderInfo['username'];
 				$transferInfo['from'] = null;
 				$transferInfo['amount'] = $orderInfo['price'] * ( $orderInfo['multiple'] ? : 1 );
-			//	$transferInfo['notes'] = '';
-				Application_Wallet::transfer( $transferInfo );
+			    $transferInfo['notes'] = 'Via auto wallet fund';
+                $response = Application_Wallet::transfer( $transferInfo );
+                $orderInfo['transfer_completed'] = $response;
 			break;
 		}
 	}
@@ -120,8 +125,6 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
     {
 		//	Form to create a new page
 		$form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
-  //	$form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
-	//	$form->submitValue = $this->getParameter( 'button_value' ) ? : 'Add funds' ;
 		$fieldset = new Ayoola_Form_Element;
 		$html = null;
 		$html .= '' . ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$ ' ) . '';

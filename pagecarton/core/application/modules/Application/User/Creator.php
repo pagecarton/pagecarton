@@ -218,7 +218,6 @@ class Application_User_Creator extends Application_User_Abstract
 			break;
 			case 'file':
             case 'private':
-			//	var_export( $values );
 				try
 				{
 					unset( $values['password2'] );
@@ -230,15 +229,13 @@ class Application_User_Creator extends Application_User_Abstract
 				}
 				catch( Exception $e )
 				{
-				//	var_export( $e->getMessage() );
-				//	var_export( $e->getTraceAsString() );
-				}
-			//	var_export( $values );
+
+                }
 				$saved = true;
  				
 				//	Send Verification E-mail
 				//	not yet working for flat files
-			//	Application_User_Verify_Email::resetVerificationCode( $values );
+			    //	Application_User_Verify_Email::resetVerificationCode( $values );
 			break;
 		
 		}
