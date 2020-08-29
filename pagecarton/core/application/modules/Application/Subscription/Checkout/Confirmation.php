@@ -75,13 +75,18 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		$className = $data['object_name'];
 
         $orderNumber = self::getOrderNumber( $identifier['api'] );
+		if( $setOrderInfo = Application_Subscription_Checkout_Order::getInstance()->selectOne( null, array( 'order_id' => $orderNumber ) ) )
+		{ 
+            $identifier['status'] = $setOrderInfo['order_status'];
+        }
+    //    var_export( $setOrderInfo  );
+    //    return false;
 		if( Ayoola_Loader::loadClass( $className ) )
 		{ 
 			if( method_exists( $className, 'checkStatus' ) )
 			{
 				if( $orderInfo = $className::checkStatus( $orderNumber ) )
 				{
-					$identifier['status'] = 0;
 					switch( strtolower( $orderInfo['order_status'] ) )
 					{ 
 						case 'payment successful':
@@ -96,7 +101,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 
 
 		$this->setViewContent( "<br><h3>Thank you! Order Confirmed! </h3><br>" );
-		$this->setViewContent( "<h4>STATUS: "  . self::$_status[intval( $identifier['status'] )] . "</h4><br>" );
+		$this->setViewContent( "<h4>STATUS: "  . self::$checkoutStages[intval( $identifier['status'] )] . "</h4><br>" );
 		$this->setViewContent( "<h4>ORDER NUMBER: " . $orderNumber . "</h4><br>" );
 		$this->setViewContent( "<p>" . ( Application_Settings_Abstract::getSettings( 'Payments', 'order_confirmation_message' ) ? : "You can print this page for your records. Your order number is a unique identifier that should be mentioned when referencing this order." ) . "</p><br>" );
 		$this->setViewContent( "<h4>Payment Option</h4><br>" );   

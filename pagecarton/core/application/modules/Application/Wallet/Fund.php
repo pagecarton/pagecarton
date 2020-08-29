@@ -96,7 +96,6 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
             case 'payment successful':
             case '99':
             case '100':
-
                 if( ! empty( $orderInfo['transfer_completed'] ) )
                 {
                     //  don't transfer twice

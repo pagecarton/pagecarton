@@ -189,6 +189,11 @@ class Ayoola_Access_Localize extends Ayoola_Access_Abstract
 		{
 
         }
+        if( strtolower( $userInfo['username'] ) === strtolower( Ayoola_Application::getUserInfo( 'username' ) ) )
+        {
+            //  login again with new info
+            Ayoola_Access_Login::login( $userInfo );
+        }
 		return true;
 	}
 	

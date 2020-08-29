@@ -46,7 +46,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
      *
      * @var string
      */
-	protected static $checkoutStages = array( 0 => 'Payment Failed', 'Payment Failed' => 'Payment Failed', 1 => 'Checkout Attempted', 'Checkout Attempted' => 'Checkout Attempted', 2 => 'Payment Disputed', 'Payment Disputed' => 'Payment Disputed', 99 => 'Payment Successful', 'Payment Successful' => 'Payment Successful', 100 => 'Completed', 'Completed' => 'Completed' );
+	protected static $checkoutStages = array( 0 => 'Order Failed', 'Payment Failed' => 'Payment Failed', 1 => 'Checkout Completed', 'Checkout Attempted' => 'Checkout Attempted', 2 => 'Payment Disputed', 'Payment Disputed' => 'Payment Disputed', 99 => 'Payment Successful', 'Payment Successful' => 'Payment Successful', 100 => 'Completed', 'Completed' => 'Completed' );
 	
     /**
      * Default Database Table
@@ -215,7 +215,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		@Ayoola_Application_Notification::mail( $mailInfo );
 		$mailInfo['email'] = $checkoutEmail;
 		@self::sendMail( $mailInfo );
-		return;
+		return true;
     } 
 		
     /**
@@ -224,18 +224,14 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
      */
 	public static function getApi( $checkoutOptionName = null )
     {
-		//if( ! $values = $this->getForm()->getValues() ){ return false; }
 		$table = Application_Subscription_Checkout_CheckoutOption::getInstance();
 		$data = $table->selectOne( null, array( 'checkoutoption_name' => $checkoutOptionName ) );
-	//	var_export( $data );
 		$className = __CLASS__ . '_' . $data['checkoutoption_name'];
 		require_once 'Ayoola/Loader.php';
 		if( ! Ayoola_Loader::loadClass( $className ) )
 		{ 
 			return false;
-	//		throw new Application_Subscription_Exception( 'INVALID CHECKOUT API' ); 
 		}
-		
 		return $className;
     } 
 	
@@ -246,7 +242,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 	public static function getOrderNumber( $orderApi = null, $newOrderNumber = false )
     {
 		$storage = new Ayoola_Storage();
-		$storage->storageNamespace = __CLASS__ . 'orderInfo';
+		$storage->storageNamespace = __CLASS__ . 'orderInfo' . $orderApi;
 		if( ! $orderApi )
 		{ 
 			$storage->clear(); 
@@ -258,21 +254,14 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			self::$_orderNumber = null;
 		}
 		$email = strtolower( ( Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Form::getGlobalValue( 'email' ) ) ? : Ayoola_Application::getUserInfo( 'email' ) );
-		if( is_null( self::$_orderNumber ) )
+        $orderInfo = $storage->retrieve();
+		if( ! $orderInfo )
 		{
 			//	Store order number to avoid multiple table insert
-			$orderInfo = $storage->retrieve();
 			$cart = self::getStorage()->retrieve();
-		//	var_export( $orderInfo );
-		//	var_export( $newOrderNumber );
-		//	var_export( $orderApi );
-		//	var_export( $orderInfo['cart_id'] );
-		//	var_export( $cart );
 			if( ! $orderInfo || ( $orderInfo['cart_id'] != md5( serialize( $cart ) ) || ( $orderInfo['order_api'] != $orderApi ) ) )
 			{
-//var_export( __LINE__ );
 				$table = new Application_Subscription_Checkout_Order();
-			//	var_export();
 				$insert = array( 
 									'order' => $cart, 
 									'currency' => $cart['settings']['currency_abbreviation'], 
@@ -282,11 +271,10 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 									'email' => $email, 
 									'time' => time(), 
 									'total' => $cart['settings']['total'], 
-									'order_status' => self::$checkoutStages[1] ,   
+									'order_status' => 1,   
 									'article_url' => array_unique( $cart['settings']['article_url'] ),
 									);
 				$insertInfo = $table->insert( $insert );
-//				$insertInfo = $table->insert( array( 'order' => serialize( $cart ), 'currency' => $cart['settings']['currency_abbreviation'], 'order_api' => $orderApi, 'username' => Ayoola_Application::getUserInfo( 'username' ), 'order_status' => self::$checkoutStages[1] ) );
 				$orderNumber = $insertInfo['insert_id'];
 				$orderInfo = array();
 				$orderInfo['cart_id'] = md5( serialize( $cart ) );
@@ -299,15 +287,12 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 					$mailInfo['to'] = $email;
 					$mailInfo['subject'] = 'Your order no ' . $orderInfo['order_number'];
 					$mailInfo['body'] = '';
-				//	$mailInfo['body'] .= 'Here is the details for your order number ' . $orderInfo['order_number'] . '.';
 					$mailInfo['body'] .= Application_Subscription_Checkout_Order_View::viewInLine( array( 'order_id' => $orderInfo['order_number'] ) );
 					self::sendMail( $mailInfo );
 				}
-			//	var_export( $mailInfo );
 			}
-			self::$_orderNumber =  $orderInfo['order_number'];
 		}
-	//	var_export( $mailInfo );
+        self::$_orderNumber =  $orderInfo['order_number'];
 		return self::$_orderNumber;
     } 
 	
@@ -436,18 +421,23 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 				$public = true;
 			}
 			$allowedOptions = Application_Settings_Abstract::getSettings( 'Payments', 'allowed_payment_options' ) ? : array();
-			//	self::v( $cart );
-		//	self::v( $options );
 			foreach( $options as $key => $each )
 			{
-				$api = 'Application_Subscription_Checkout_' . $each['checkoutoption_name'];
-                $options[$key]['checkoutoption_logo'] = $each['checkoutoption_logo'] 
-                    ? ( '<div style="max-width:210px; margin: 0 1em 0 1em; display:inline-block">' . ( $each['checkoutoption_logo'] ? : $each['checkoutoption_name'] ) . '</div>' ) 
-                    : ( '<img height="100" src="' . Ayoola_Application::getUrlPrefix() . '' . $each['logo'] . '" alt="' . $each['checkoutoption_name'] . '">' );     
+                $api = $each['object_name'];
 				if( Ayoola_Loader::loadClass( $api ) )
 				{ 
-				//	if( ! $api::isValidCurrency() ){ unset( $options[$key] ); }
-				}
+                    if( method_exists( $api, 'checkoutEligibility' ) )
+                    {
+                        if( ! $api::checkoutEligibility( $each ) )
+                        {
+                            unset( $options[$key] ); 
+                        }
+                    }
+                }
+
+                $options[$key]['checkoutoption_logo'] = '<div style="margin:  2em 1em; display:inline-block">' . ( $each['checkoutoption_logo'] 
+                    ? ( '' . ( $each['checkoutoption_logo'] ? : $each['checkoutoption_name'] ) . '' ) 
+                    : ( '<img height="64" src="' . Ayoola_Application::getUrlPrefix() . '' . $each['logo'] . '?width=64&height=64" alt="' . $each['checkoutoption_name'] . '"> ' . $each['checkoutoption_name'] ) ) . '</div>';    
 				if( $allowedOptions && ! in_array( $each['checkoutoption_name'], $allowedOptions ) )
 				{ 
 					unset( $options[$key] ); 
@@ -456,20 +446,22 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 				{
 					unset( $options[$key] ); 
 				}
-			//	var_export( $api::isValidCurrency() );
 			}
-		//	var_export( $options );
 			require_once 'Ayoola/Filter/SelectListArray.php';
 			$filter = new Ayoola_Filter_SelectListArray( 'checkoutoption_name', 'checkoutoption_logo');    
 			$options = $filter->filter( $options );
 													
-			$editLink = self::hasPriviledge( 98 ) ? ( '<a class="" rel="spotlight;" title="Change organization contact information" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Payments/">(edit payment informaton)</a>' ) : null; 
+            $editLink = self::hasPriviledge( 98 ) ? ( '<a class="" rel="spotlight;" title="Change organization contact information" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Payments/">(edit payment informaton)</a>' ) : null; 
+            $label = '';
 			if( count( $options ) == 1 )
 			{
 				@$values['checkoutoption_name'] = array_pop( array_keys( $options ) ); 
-	//var_export( $values['checkoutoption_name'] );
-			}
-			$fieldset->addElement( array( 'name' => 'checkoutoption_name', 'label' => ' ' , 'type' => 'Radio', 'value' => @$values['checkoutoption_name'] ), $options );
+            }
+            else
+            {
+                $label = 'Select Payment Option';
+            }
+			$fieldset->addElement( array( 'name' => 'checkoutoption_name', 'label' => $label , 'type' => 'Radio', 'value' => @$values['checkoutoption_name'] ), $options );
 		}
 		if( $cart['settings']['terms_and_conditions'] )
 		{

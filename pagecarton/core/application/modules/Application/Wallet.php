@@ -50,13 +50,12 @@ final class Application_Wallet extends Application_Wallet_Abstract
 			{
 				return false;
 			}
-
 			//	Get the info of the sender
 			if( ! @$transferInfo['allow_ghost_sender'] )
 			{
 				if( ! $senderInfo = Ayoola_Access::getAccessInformation( $transferInfo['from'] ) )
 				{
-						return false;
+					return false;
 				}
 			
 				//	Check funds
