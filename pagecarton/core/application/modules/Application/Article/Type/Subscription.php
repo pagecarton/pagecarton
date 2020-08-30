@@ -104,6 +104,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$values['cycle_name'] = 'each'; 
 			$values['cycle_label'] = '';
 			$values['price_id'] = $data['article_url'];
+            $values['cart_item_type'] = $data['true_post_type'];
 			$values['subscription_description'] = $data['article_description'];
 			$values['url'] = Ayoola_Application::getUrlPrefix() . ( @$data['cart_url'] ? : $data['article_url'] );     
 			@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
@@ -126,31 +127,23 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$this->setViewContent( self::__( '<span class="badnews" name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_badnews" style="display:none;"></span>' ) );
 			$this->setViewContent( $form );
 			$this->setViewContent( self::__( '<span name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_confirmation" style="display:none;">' . $confirmation . '</span>' ) );
-			//	var_export( $data );
-			//	return false; 
 		}
 		elseif( $this->getForm()  AND  $values = $this->getForm()->getValues() )
 		{
-		//	var_export( $values );
-		//	exit();
 			$_GET['article_url'] = $values['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
 			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
 			do
 			{
-		//			exit();		
 				$added = false;	
 				if( @$data['price_option_title'] )   
 				{
-
-		//		var_export( $values );
 					foreach( $data['price_option_title'] as $key => $each )
 					{
 
 						$pricing = $data['price_option_price'][$key];  
 						$pricing = str_replace( array( ',', ' ' ), '', $pricing );
 
-						//	$data['item_price']
 						if( empty( $data['price_option_price'][$key] ) && ! empty( $data['item_price'] ) )
 						{
 							$pricing = $data['item_price'];
@@ -178,11 +171,11 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 						}
 						
 						
-			//			$values['subscription_label'] = ( $values['subscription_selections'] ? ( $values['subscription_selections'] . ' | ' ) : null ) . $data['price_option_title'][$key] . ' - ' . $data['article_title'];
 						$values['price'] = str_replace( array( ',', ' ' ), '', $pricing );
 						$values['cycle_name'] = 'each';   
 						$values['cycle_label'] = '';
 						$values['price_id'] = $values['subscription_name'];
+                        $values['cart_item_type'] = $data['true_post_type'];
 						$values['subscription_description'] = $data['price_option_title'][$key] . ' - ' . $data['article_description'];
 						$values['url'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
 						@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
@@ -194,32 +187,23 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 						$class->subscribe( $values );
 						$added = true;	
 
+    
 					}
 				}
-
-	//			var_export( $added );
-	//			exit();
 
 				if( $added ) 
 				{
 					break;
 				}
-				
-				//	var_export( $data );
-				
 				//	data
 				$this->_objectData['quantity'] = $values['quantity'];	
-				//	var_export( $data );
-				//	add main item to cart
+
+                //	add main item to cart
 				switch( $data['item_price'] )
 				{
 					case false:
 					case null:
 					case '':
-			//		case true:
-						//	Do nothing.
-						//	 had to go through this route to process for 0.00
-				//		var_export( __LINE__ );
 					break;
 					default:
 					$values += $data;
@@ -243,20 +227,18 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					$values['product_option'] = @$values['product_option'];
 					$values['cycle_name'] = 'each';
 					$values['cycle_label'] = '';
-					$values['price_id'] = $data['article_url'];
+                    $values['price_id'] = $data['article_url'];
+                    $values['cart_item_type'] = $data['true_post_type'];
 					$values['subscription_description'] = $data['article_description'];
 					$values['url'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
 					@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
-					//	''
-					//	After we checkout this is where we want to come to
+
+                    //	After we checkout this is where we want to come to
 					$values['classplayer_link'] = "javascript:;";
 					$values['object_id'] = $data['article_url'];
 					$values['multiple'] = $values['quantity'];
 					$class->subscribe( $values );
 					$added = true;	
-
-		//			var_export( $values );
-		//			exit();
 					break;
 				}
 			}
@@ -274,13 +256,8 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$this->setViewContent( self::__( '<span name="' . $this->getObjectName() . '' . $subscriptionData['article_url'] . '_confirmation" style="">' . $confirmation . '</span>' ) );
 			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/cart' );
 			exit();
-			//	self::saveArticle( $data );
 			
 		}
-
-		//	Display Graph
-	//	var_export( $data );
-	//	var_export( $SubscriptionData );
     } 
 
     /**
@@ -293,9 +270,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		{
 			$_GET['article_url'] = $this->getGlobalValue( 'article_url' );
 			$subscriptionData = $this->getParameter( 'data' ) ? : $this->getIdentifierData(); 
-		//	var_export( $subscriptionData );
 		}
-	//	var_export( $subscriptionData );
 
 		//	Build a new Add To Cart button
 		$onSubmit = '
@@ -320,7 +295,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 						
 						//	Sets Ajax but dont send yet
 						ayoola.xmlHttp.fetchLink( { url: "' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/' . $this->getObjectName() . '/", id: uniqueNameForAjax, data: formValues, skipSend: true } );
-					//	alert( arguments.length );
 						var ajax = ayoola.xmlHttp.objects[uniqueNameForAjax];
 						ajax.setRequestHeader( "AYOOLA-PLAY-MODE", "JSON" ); 
 						var ajaxCallback = function()
@@ -348,7 +322,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 									response = {};
 									response.quantity = 1;
 								}
-							//	var response = JSON.parse( ajax.responseText );
 								if( response.quantity )
 								{
 									//	response.quantity (NUM) added to cart
@@ -369,7 +342,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 									
 									//	Show confirmation
 									var a = document.getElementsByName( form.id + "_badnews" );
-								//	alert( response.badnews );
 									var c = "";
 									for( var key in response.badnews )
 									{
@@ -396,22 +368,13 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					}
 					';
 		
- 	//	Application_Javascript::addCode( $addToCartFunction );  
- 	//	Application_Javascript::addCode( $onSubmit );
-		
 		//	Add to cart
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . $subscriptionData['article_url'] . self::$_counter , 'data-not-playable' => true, 'action' => '' . Ayoola_Application::getUrlPrefix() . '' . $subscriptionData['article_url'] ) ); 
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->hashElementName = true;
-	//	$form->submitValue = $submitValue ;
-	//	$fieldset->placeholderInPlaceOfLabel = true;
-	//	$subscriptionData = $this->getParameter( 'data' );
-	//	self::v( $subscriptionData );
-	//	var_export( $subscriptionData['no_of_items_in_stock'] );
 		$showQuantity = 'Hidden';
 
 		// this cause empty zero box in multi options
-	//	$optionsForSelect = array( 0 );
 		$optionsForSelect = array();
 		if( @intval( $subscriptionData['no_of_items_in_stock'] ) > 1 )
 		{
@@ -419,7 +382,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		}
 		elseif( is_numeric( $this->getParameter( 'min_quantity' ) ) ||  is_numeric( $this->getParameter( 'max_quantity' ) ) )
 		{
-		//	var_export( $subscriptionData['item_min_quantity'] );
 			$min = 1;
 			if( is_numeric( $this->getParameter( 'min_quantity' ) ) )
 			{
@@ -457,22 +419,14 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 				
 			}
 			$showQuantity = 'Select';
-//			self::v( $min );
 			$range = range( $min, $max, $step );
-		//	self::v( $range );
 
 			array_unshift( $range, 0 ); 
 			$optionsForSelect += array_combine( $range, $range );
-		//	if( ! in_array( 0, $optionsForSelect ) )
-			{
-	//			$optionsForSelect[0] = 0;
-			}
 		} 
 		//	internal forms to use
-		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $subscriptionData['article_type'] ) )
-		{
-
-		}
+		$postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $subscriptionData['article_type'] );
+		
 		$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : array();
 		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
 		$features[] = $subscriptionData['true_post_type'];
@@ -508,7 +462,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 							}
 							$optionsMenu[$eachOption] = $eachOption;
 						}
-				//		self::v( $optionsMenu );
 						if( $optionsMenu )
 						{
 							$fieldset->addElement( array( 'name' => 'subscription_selections' . $featurePrefix, 'label' => 'Options ' . $featurePrefix, 'type' => 'Select', 'value' => @$subscriptionData['subscription_selections' . $featurePrefix] ), $optionsMenu );
@@ -519,12 +472,8 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			} 
 		}
 		$fieldset->addElement( array( 'name' => 'supplementary_subscription_selections', 'type' => 'Hidden', 'value' => implode( ',', $selections ) ) );
-
-	//	var_export( $showQuantity );
-	//	var_export( $options );
 		$filter = 'Ayoola_Filter_Currency';
 		$filter = new $filter();
-	//	var_export( $this->getParameter( 'multi-price' ) );
 		if( ! $this->getParameter( 'multi-price' ) )
 		{	
 			//	skip empty prices
@@ -534,7 +483,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			}
 			$fieldset->addElement( array( 'name' => 'quantity', 'id' => 'quantity_' . md5( @$subscriptionData['article_url'] ), 'label' => 'Quantity', 'style' => 'min-width:20px;max-width:60px;display:inline;margin-right:0;', 'type' => $showQuantity, 'value' => @$values['quantity'] ? : 1 ), $optionsForSelect );  
 			$filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
-		//	$data['currency'] = $filter::$symbol;
 			if( @$subscriptionData['option_name'] )  
 			{
 				$optionsMenu = array();
@@ -551,7 +499,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					$price = $subscriptionData['option_price'][$key] ? $filter->filter( $subscriptionData['option_price'][$key] ) : null;
 					$optionsMenu[$subscriptionData['option_price'][$key]] = $subscriptionData['option_name'][$key] . ' (' . $price . ') ';
 				}
-		//		self::v( $optionsMenu );
 				$optionsMenu ? $fieldset->addElement( array( 'name' => 'product_option', 'label' => 'Options', 'type' => 'Checkbox', 'value' => @$subscriptionData['product_option'] ), $optionsMenu ) : null;
 			}
 		} 

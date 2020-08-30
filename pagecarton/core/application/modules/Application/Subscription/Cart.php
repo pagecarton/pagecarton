@@ -91,8 +91,6 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">Your shopping cart is empty.</span>' ) . '', true  );
 		}
 		$this->setViewContent(  '' . self::__( '<div class="">' . self::getXml()->saveHTML() . '</div>' ) . '', true  );
-	//	$this->setViewContent( Application_Subscription_Checkout::viewInLine() );
-	//	var_export( $this->_xml );
     } 
 	
     /**
@@ -266,7 +264,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		
 		//	surcharges
 		$paymentSettings = Application_Settings_Abstract::getSettings( 'Payments' );
-		$totalSurcharge = 0.00;
+        $totalSurcharge = 0.00;
 
 		if( ! empty( $paymentSettings['surcharge_title'] ) )
 		{
@@ -276,9 +274,13 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				{
 					continue;
 				}
+				if( ! empty( $paymentSettings['cart_item_type'][$key] ) && $paymentSettings['cart_item_type'][$key] !== $data['settings']['password'] )
+				{
+					continue;
+				}
 				$surchargeText = '';
 				$surchargePrice = 0;
-				$paymentSettings['surcharge_value'][$key] = intval( $paymentSettings['surcharge_value'][$key] );
+				$paymentSettings['surcharge_value'][$key] = doubleval( $paymentSettings['surcharge_value'][$key] );
 				switch( @$paymentSettings['surcharge_type'][$key] )
 				{
 					case 'percentage':   
@@ -292,27 +294,23 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 					case 'constant':
 						if( ! empty( $paymentSettings['surcharge_value'][$key] ) )
 						{  
-							$surchargeText .= '+ ' . $filter->filter( $paymentSettings['surcharge_value'][$key] ) . ' fixed charge.';
+                            $surchargeText .= '+ ' . $filter->filter( $paymentSettings['surcharge_value'][$key] ) . ' fixed charge';
 							$surchargePrice += $paymentSettings['surcharge_value'][$key];
 							$surchargePricText = $this->_xml->createTextNode( $filter->filter( $surchargePrice ) );
 						}
 					break;
 					case 'not-calculated':
 						$surchargeText .= 'Not Calculated.  ' . $paymentSettings['surcharge_value'][$key] . '';
-					//	$surchargePrice += $paymentSettings['surcharge_value'][$key];
 						$surchargePricText = $this->_xml->createTextNode( '--' );
 					break;
 				}
-			//	var_export( $surchargeText );
 				$surchargeText = $surchargeText ? $paymentSettings['surcharge_title'][$key] . ' (' . $surchargeText . ')' : $paymentSettings['surcharge_title'][$key];
-		//		var_export( $surchargeText );
 				$row = $this->_xml->createElement( 'tr' );
 				
-				$columnNode = @$this->_xml->createHTMLElement( 'td', $surchargeText );
+				$columnNode = @$this->_xml->createElement( 'td', $surchargeText );
 				$columnNode->setAttribute( 'colspan', count( $tableColumns ) - 1 );
 				$row->appendChild( $columnNode );
 				$columnNode = $this->_xml->createElement( 'td' );
-			//	$surchargePrice = $filter->filter( $surchargePrice );
 				$totalSurcharge += $surchargePrice;
 				$columnNode->appendChild( $surchargePricText );
 				$columnNode->setAttribute( 'align', 'center'  );
@@ -320,24 +318,20 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				$table->appendChild( $row );
 			}
 		}
-		
+
 		//	Total
 		$row = $this->_xml->createElement( 'tr' );
 		$columnNode = $this->_xml->createElement( 'td' );
 		$columnNode->setAttribute( 'colspan', count( $tableColumns ) - 1 );
 		$row->appendChild( $columnNode );
-		$columnNode = $this->_xml->createElement( 'th' );
-		
-	//	$totalPrice += $surchargePrice;
+		$columnNode = $this->_xml->createElement( 'th' );		
 		$grandTotalPrice = $totalPrice + $totalSurcharge;
-	//	$totalPrice = $filter->filter( $totalPrice );
 		$text = $this->_xml->createTextNode( $filter->filter( $grandTotalPrice ) );
 		$columnNode->appendChild( $text );
 		$columnNode->setAttribute( 'align', 'center'  );
 		$row->appendChild( $columnNode );
 		$table->appendChild( $row );
-		
-		
+
 		$this->_xml->appendChild( $div );
 		$this->_objectTemplateValues['no_of_distinct_items'] = $this->_noOfDinstinctItems;
 		$this->_objectTemplateValues['no_of_items'] = $noOfItems;
@@ -347,7 +341,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$this->_objectTemplateValues['empty_cart_url'] = $deleteUrl;
 		$this->_objectTemplateValues['total_discount'] = 0.00;
 		$this->_objectTemplateValues['delivery_price'] = 0.00;
-
+        $this->_objectData = $this->_objectTemplateValues;
     } 
 	// END OF CLASS
 }

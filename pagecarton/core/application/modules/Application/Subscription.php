@@ -171,11 +171,6 @@ class Application_Subscription extends Application_Subscription_Abstract
      */
 	public function subscribe( array $values = null )
     {
-	//	var_export( $this->getForm()->getValues() );
-
-	//	$this->setViewContent(  '' . self::__( 'Please choose an option' ) . '', true  );
-	//	var_export( $values );      
-	//	exit(); 
 		if( ! $values )
 		{
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -187,8 +182,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 		
 		@$settings['currency_abbreviation'] = $values['currency_abbreviation'] ? : Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' );
 		@$settings['return_url'] = $values['return_url'] ? : 'http://' . Ayoola_Page::getDefaultDomain() . '/';
-	//	@$settings['total'] = (double) $values['price'];
-//		var_export( $settings['total'] );        
 		@$settings['read_only'] = $values['read_only'];
 		@$settings['edit_cart_url'] = $values['edit_cart_url'] ? : 'javascript:';
 		
@@ -196,7 +189,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 		@$settings['password'] = $values['cart_password'] ? : 'default_password';
 		$values['item_time'] = time();	//	Also useful for randomization of cart item
 		
-		//
 		if( ! @$values['subscription_name'] )
 		{
 			$data = $this->getIdentifierData();
@@ -206,7 +198,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 		@$values['multiple'] = $values['multiple'] ? : $values[$values['subscription_name'] . 'multiple'];	//	
 		@$values['url'] = $values['url'] ? : ( $values['subscription_name'] ? '/' .  strtolower( $values['subscription_name'] ) . '/' : null );	//	
 		@$values['classplayer_url'] = $data['subscription_object_name'] ? '/tools/classplayer/get/object_name/' .  $data['subscription_object_name'] . '/' : null;	//	
-//	var_export( $values['classplayer_url'] );
 		
 		//	Store in a session
 		$previousData = $this->getStorage()->retrieve() ? : array();
@@ -214,7 +205,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 		// Inconsistent currency
 		if( @$previousData['settings']['currency_abbreviation'] && $previousData['settings']['currency_abbreviation'] != $settings['currency_abbreviation'] )
 		{ 
-		//	throw new Application_Subscription_Exception( 'CART DOES NOT SUPPORT AMBIGOUS CURRENCIES - YOUR SHOPPING CART HAS BEEN CLEARED/REFRESHED' ); 
 			$this->getStorage()->store( array() );
 			$previousData = array();
 		}

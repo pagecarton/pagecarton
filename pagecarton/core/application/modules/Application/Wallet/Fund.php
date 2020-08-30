@@ -69,6 +69,8 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
             //	After we checkout this is where we want to come to
 			$data['return_url'] = $data['url'];
 			$data['callback'] = __CLASS__;
+			$data['cart_item_type'] = __CLASS__;
+			$data['cart_password'] = __CLASS__;
 			$data['classplayer_link'] = $data['url'];
 			$data['object_id'] = $data['subscription_name'];
 			$data['multiple'] = 1;
@@ -78,7 +80,6 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
 		}
 		catch( Exception $e )
 		{ 
-		
 			$this->setViewContent(  '' . self::__( '<p class="badnews boxednews">' . $e->getMessage() . '</p>' ) . '', true  ); 
 			$this->setViewContent( self::__( '<p class="badnews boxednews">Error with Wallet package</p>' ) ); 
 		}

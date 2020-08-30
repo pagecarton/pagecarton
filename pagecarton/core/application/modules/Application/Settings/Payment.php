@@ -68,13 +68,10 @@ class Application_Settings_Payment extends PageCarton_Settings
 		$fieldset = new Ayoola_Form_Element;
 		$options = new Application_Subscription_Checkout_CheckoutOption(); 
 		$options = $options->select();
-//		var_export( $options );
 		foreach( $options as $key => $each )
 		{
 			$api = 'Application_Subscription_Checkout_' . $each['checkoutoption_name'];
 			$options[$key]['checkoutoption_logo'] = $each['checkoutoption_logo'];
-		//	if( ! $api::isValidCurrency() ){ unset( $options[$key] ); }
-		//	var_export( $api );
 		}
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'checkoutoption_name', 'checkoutoption_name');    
@@ -115,7 +112,6 @@ class Application_Settings_Payment extends PageCarton_Settings
 			$surchargeFieldset->container = 'div';   
 			
 			$surchargeFieldset->addElement( array( 'name' => 'surcharge_title', 'label' => ' ', 'placeholder' => 'Title e.g. Sales Tax', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$settings['surcharge_title'][$i] ) );
-		//	$surchargeFieldset->addElement( array( 'name' => 'surcharge_fixed_constant_rate', 'label' =>  ' ', 'placeholder' => 'Constant Rate e.g. 500', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$settings['surcharge_fixed_constant_rate'][$i] ) );
 			$surchargeTypes = array(
 				'' => 'Select Surcharge Type...',
 				'percentage' => 'Percentage of Total Order',
@@ -124,24 +120,19 @@ class Application_Settings_Payment extends PageCarton_Settings
 			);
 			$surchargeFieldset->addElement( array( 'name' => 'surcharge_type', 'label' =>  ' ', 'type' => 'Select', 'multiple' => 'multiple', 'value' => @$settings['surcharge_type'][$i] ), $surchargeTypes );   
 			$surchargeFieldset->addElement( array( 'name' => 'surcharge_value', 'label' => ' ', 'placeholder' => 'Surcharge Value', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$settings['surcharge_value'][$i] ) );  
+			$surchargeFieldset->addElement( array( 'name' => 'cart_item_type', 'label' => ' ', 'placeholder' => 'Cart Item Type to Apply Surcharge to (Leave Blank for All)', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$settings['cart_item_type'][$i] ) );  
 									
 			$i++;
 			$surchargeFieldset->addLegend( 'Surchage  <span name="subgroup_counter">' . $i . '</span> of <span name="subgroup_counter_total">' . ( ( count( @$settings['surcharge_title'] ) ) ? : 1 ) . '</span>' );			   			
 			$surchargeForm->addFieldset( $surchargeFieldset );
-		//	self::v( $i );  
 		}
 		while( isset( $settings['surcharge_title'][$i] ) );
 		
 		
 		//	Put the questions in a separate fieldset
-	//	$categoryFieldset = new Ayoola_Form_Element; 
-	//	$categoryFieldset->allowDuplication = false;
-	//	$categoryFieldset->placeholderInPlaceOfLabel = true;
-	//	$categoryFieldset->container = 'span';
-	//	var_export( $settings );
 		
 		//	add previous categories if available
-		$fieldset->addElement( array( 'name' => 'group', 'type' => 'Html', 'value' => '' ), array( 'html' => $surchargeForm->view(), 'fields' => 'surcharge_title,surcharge_type,surcharge_value' ) );
+		$fieldset->addElement( array( 'name' => 'group', 'type' => 'Html', 'value' => '' ), array( 'html' => $surchargeForm->view(), 'fields' => 'surcharge_title,surcharge_type,surcharge_value,cart_item_type' ) );
 
 		$fieldset->addLegend( 'Surcharges - Taxes, etc.' );
 		
