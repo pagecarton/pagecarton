@@ -428,6 +428,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
                         if( ! $api::checkoutEligibility( $each ) )
                         {
                             unset( $options[$key] ); 
+                            continue;
                         }
                     }
                 }
