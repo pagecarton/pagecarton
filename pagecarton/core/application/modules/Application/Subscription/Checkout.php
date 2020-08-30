@@ -421,6 +421,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
             {
                 $options = $privateOptions;
             }
+            var_export( $options );
 			foreach( $options as $key => $each )
 			{
                 $api = $each['object_name'];
@@ -430,7 +431,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
                     {
                         if( ! $api::checkoutEligibility( $each ) )
                         {
-                        //    unset( $options[$key] ); 
+                            unset( $options[$key] ); 
                         }
                     }
                 }
@@ -451,7 +452,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 													
             $editLink = self::hasPriviledge( 98 ) ? ( '<a class="" rel="spotlight;" title="Change organization contact information" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Payments/">(edit payment informaton)</a>' ) : null; 
             $label = '';
-			if( count( $options ) == 1 )
+			if( count( $options ) >= 1 )
 			{
 				@$values['checkoutoption_name'] = array_pop( array_keys( $options ) ); 
             }
