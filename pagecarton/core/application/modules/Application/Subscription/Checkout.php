@@ -399,7 +399,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			}
 			else
 			{
-				$form->submitValue = 'Continue checkout...';
+				$form->submitValue = 'Continue checkout...'; 
 			}
 			self::setFormRequirements( $form, $requirements );
 		}
