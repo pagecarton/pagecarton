@@ -440,11 +440,11 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
                     : ( '<img height="64" src="' . Ayoola_Application::getUrlPrefix() . '' . $each['logo'] . '?width=64&height=64" alt="' . $each['checkoutoption_name'] . '"> ' . $each['checkoutoption_name'] ) ) . '</div>';    
 				if( $allowedOptions && ! in_array( $each['checkoutoption_name'], $allowedOptions ) )
 				{ 
-					unset( $options[$key] ); 
+				//	unset( $options[$key] ); 
 				}
 				elseif( $public & ! $allowedOptions )
 				{
-					unset( $options[$key] ); 
+				//	unset( $options[$key] ); 
 				}
 			}
 			require_once 'Ayoola/Filter/SelectListArray.php';
