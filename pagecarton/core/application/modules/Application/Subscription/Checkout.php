@@ -413,14 +413,14 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			$table = $table::getInstance( $table::SCOPE_PRIVATE );
 			$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 			$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
-			$public = false;
-			if( ! $options = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) ) )
-			{
-				$options = $table::getInstance();
-				$options = $options->select();
-				$public = true;
-			}
-			$allowedOptions = Application_Settings_Abstract::getSettings( 'Payments', 'allowed_payment_options' ) ? : array();
+            $privateOptions = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) );
+            $publicOptions = $table::getInstance()->select();
+            $allowedOptions = Application_Settings_Abstract::getSettings( 'Payments', 'allowed_payment_options' ) ? : array();
+            $options = $publicOptions;
+            if( empty( $allowedOptions )  )
+            {
+                $options = $privateOptions;
+            }
 			foreach( $options as $key => $each )
 			{
                 $api = $each['object_name'];
@@ -440,11 +440,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
                     : ( '<img height="64" src="' . Ayoola_Application::getUrlPrefix() . '' . $each['logo'] . '?width=64&height=64" alt="' . $each['checkoutoption_name'] . '"> ' . $each['checkoutoption_name'] ) ) . '</div>';    
 				if( $allowedOptions && ! in_array( $each['checkoutoption_name'], $allowedOptions ) )
 				{ 
-				//	unset( $options[$key] ); 
-				}
-				elseif( $public & ! $allowedOptions )
-				{
-				//	unset( $options[$key] ); 
+					unset( $options[$key] ); 
 				}
 			}
 			require_once 'Ayoola/Filter/SelectListArray.php';
@@ -474,10 +470,6 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 				$fieldset->addRequirement( 'checkterms', array( 'NotEmpty' => array( 'badnews' => 'You must agree to the terms and conditions before completing your order' ) ) );
 			}
 		}
-	//	$fieldset->addRequirements( array( 'NotEmpty' => null  ) );
-
-//		$fieldset->addElement( array( 'name' => 'api-checkout', 'value' => 'Checkout', 'type' => 'Submit' ) );
-	//	$fieldset->addLegend( 'Please select your preferred payment method ' . $editLink );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
     }
