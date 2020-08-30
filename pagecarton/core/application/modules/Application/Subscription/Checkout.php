@@ -401,12 +401,9 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			{
 				$form->submitValue = 'Continue checkout...';
 			}
-
-		//	var_export( $requirements );
 			self::setFormRequirements( $form, $requirements );
 		}
 		$fieldset = new Ayoola_Form_Element();		
-		//	self::v( $cart['settings']['total'] );
 		if( ! empty( intval( $cart['settings']['total'] ) ) )
 		{
 			$table = 'Application_Subscription_Checkout_CheckoutOption';
@@ -421,7 +418,6 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
             {
                 $options = $privateOptions;
             }
-            var_export( $options );
 			foreach( $options as $key => $each )
 			{
                 $api = $each['object_name'];
@@ -441,8 +437,6 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
                     : ( '<img height="64" src="' . Ayoola_Application::getUrlPrefix() . '' . $each['logo'] . '?width=64&height=64" alt="' . $each['checkoutoption_name'] . '"> ' . $each['checkoutoption_name'] ) ) . '</div>';    
 				if( $allowedOptions && ! in_array( $options[$key]['checkoutoption_name'], $allowedOptions ) )
 				{ 
-                    var_export( $options[$key]['checkoutoption_name'] );
-                    var_export( $allowedOptions );
 					unset( $options[$key] ); 
 				}
 			}
