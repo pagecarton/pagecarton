@@ -19,7 +19,6 @@
 require_once 'Ayoola/Exception.php';
 require_once 'Ayoola/Abstract/Playable.php';
 
-
 /**       
  * @category   PageCarton
  * @package    Ayoola_Abstract_Table
@@ -72,11 +71,18 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 	protected $_dbData;
 	
     /**
-     * Where clause to select data from the Database
+     * Where clause to select data from the Database 
      *
      * @var array
      */
 	protected $_dbWhereClause;
+	
+    /**
+     * 
+     *
+     * @var array
+     */
+	protected $_dbSelectOptions = array( 'case_insensitive' => true );
 	
     /**
      * Data from the Database that matches the _identifier criteria
@@ -142,7 +148,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 	public function getTableClass()
     {
 		if( ! is_null( $this->_tableClass ) ){ return $this->_tableClass; }
-	//	var_export( get_class( $this ) );
+
 		require_once 'Ayoola/Exception.php';
 		throw new Ayoola_Exception( 'CLASS FOR TABLE IS NOT SET FOR ' . get_class( $this )  );
     } 
@@ -208,7 +214,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     {
 		if( is_null( $identifier ) ){ $identifier = $this->getIdentifier(); }
 		$table = $this->getDbTable();
-	//	var_export( $identifier );
+
 		if( is_array( $this->_dbWhereClause ) )
 		{
 			$identifier = $identifier ? : array();
@@ -243,11 +249,9 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
             }
         }
         $this->_identifierData = $data;
-		
-		//	this is needed in Ayoola_Abstract_Viewable::view();
+
 		$this->_objectTemplateValues = $this->_identifierData;
-	//	var_export( $identifier );
-	//	var_export( $this->_identifierData );
+
    } 
 	
     /**
@@ -292,7 +296,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			}
 			$dbWhereClause = array_combine( $field, $value );
 			$this->_dbWhereClause = array_merge( $dbWhereClause ? : array(), $this->_dbWhereClause ? : array() );
-		//	self::v( $this->_dbWhereClause );   
+
 		}
 	}
     /**
@@ -301,23 +305,20 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
 	protected function setDbData()
     {
-		$table = $this->getDbTable();
-//		var_Export( $this->_dbWhereClause );
-		
+        $table = $this->getDbTable();
+        
 		//	power our search box
 		$this->prepareDbWhereClauseForSearch();
 		
-		$this->_dbData = (array) $table->select( null, $this->_dbWhereClause, array( 'case_insensitive' => true ) );
+		$this->_dbData = (array) $table->select( null, $this->_dbWhereClause, $this->_dbSelectOptions );
 		$this->_sortColumn = $this->getParameter( 'sort_column' ) ? : $this->_sortColumn;
-	//	@$this->_sortColumn = ( $_REQUEST['pc_sort_column'] && $_REQUEST['pc_sort_column_table'] == get_class( $table ) ) ? $_REQUEST['pc_sort_column'] : $this->_sortColumn;
-//		var_Export( $this->_sortColumn );
+
 		if( $this->_sortColumn )    
 		{
 			$this->_dbData = self::sortMultiDimensionalArray( $this->_dbData, $this->_sortColumn );
 		}
 		else
 		{
-	//		krsort( $this->_dbData );
 			$this->_dbData = array_values( $this->_dbData );
 		}
     } 
@@ -368,7 +369,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		{
 			throw new Ayoola_Exception( 'TABLE CLASS NOT FOUND ' . $table );
 		}
-		//	var_export( static::$_dbInfo );
+
 		$table = new $table( new Ayoola_Dbase( self::$_dbInfo ) );
 		$this->_dbTable = $table;
 		return $this->_dbTable;
@@ -386,7 +387,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			//	Check where our user information is being saved.
 			if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 			{
-			//	$database = 'cloud';
+
 			}
 			$primaryId = rand( 19999, 10000000 );
 			switch( $database )
@@ -398,7 +399,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 						throw new Ayoola_Abstract_Exception( $table . ' CANNOT BE USED WITH AYOOLA API' );
 					}
 					$response = Ayoola_Api_PrimaryId::send( array( 'table' => $table, 'insert' => $insertValues, 'select' => $selectValues  ) );
-				//	var_export( $response );
+
 					if( is_numeric( $response['data'] ) )
 					{
 						$primaryId = $response['data'];
@@ -407,22 +408,22 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 				case 'relational':
 					if( ! $primaryId = $table->selectOne( null, null, $selectValues ) )
 					{
-			//			var_export( $insertValues );
+
 						$table->insert( $insertValues );
 						$primaryId = $table->getLastInsertId();
-			//			var_export( __LINE__ );
+
 						break;
 					}
 					$primaryId = $primaryId[$table->getTableName() . '_id'];
 				break;
 			}
-			//	var_export( $this->_dbInfo );
+
 			
 		}
 		while( false );			
 		if( ! $primaryId )
 		{
-	//		throw new Ayoola_Abstract_Exception( 'COULD NOT RETRIEVE A PRIMARY ID' );
+
 		}
 		return $primaryId;
 	} 
@@ -446,7 +447,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			}
 			else
 			{
-		//		$this->setViewContent( self::__( '<h2 style="margin: 1em 0;">Continue as @' . Ayoola_Application::getUserInfo( 'email' ) . '</h2>' ) );
+
 				return true;
 			}
 		}
@@ -462,8 +463,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     {
 		if( ! $profileInfo = Application_Profile_Abstract::getMyDefaultProfile() )
 		{
-	//		self::v( Application_Profile_Abstract::getMyProfiles() ); 
-	//		var_export( Application_Profile_Abstract::getMyDefaultProfile() );
+
 			//	profile now required for posts
 			$class = new Application_Profile_Creator();
 			$class->initOnce();
@@ -476,7 +476,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			}
 			else
 			{
-			//	$this->setViewContent( self::__( '<h2>Continue as @' . $formV['profile_url'] . '</h2>' ) );
+
 				return true;
 			}
 		}
@@ -514,7 +514,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			$form->setParameter( @$formParameters ? : array() );
 			$form->setAttributes( @$formParameters['attributes'] ? : array() );
 		}
-	//	var_export( 'rgrtg' );
+
 		$this->_form = $form;
     }
 	
@@ -560,18 +560,18 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 				if( array_key_exists( Ayoola_Form::hashElementName( $value ), $values ) )
 				{
 					$values[$value] = $values[Ayoola_Form::hashElementName( $value )];
-				//	$value = Ayoola_Form::hashElementName( $value );
+
 				}
 				elseif( null === $this->getParameter( $value ) )
 				{
 					return false;
-				//	throw new Ayoola_Exception( 'ID column is not available' ); 
+
 				}
 				else
 				{
 					//	Allow identifier to be passable with parameter
 					$values[$value] = $this->getParameter( $value );
-				//	$_GET[$value] = $values[$value];
+
 					
 				}
 			}
@@ -599,14 +599,14 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     protected function verifyIdentifier()
     {		
 		$identifier = $this->getIdentifier();
-		//	var_export( $identifier );
+
 		foreach( $this->_identifierKeysToVerify as $columnName => $tableClass )
 		{
 			$tableClass = new $tableClass();
 			$found = $tableClass->selectOne( null, null, array( $columnName => $identifier[$columnName], 'user_id' => Ayoola_Application::getUserInfo( 'user_id' ) ) );
-		//	var_export( $identifier );
+
 			if( ! $found ){ throw new Ayoola_Exception( "USER IS NOT AUTHORIZED TO USE IDENTIFER {$columnName}" ); }
-		//	var_export( $found );
+
 		}
 		return true;
     } 
@@ -618,8 +618,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
 	protected function sendConfirmationMail( Array $values = null )
     {
-	//	$values = $this->getForm()->getValues();
-	//	if( is_array( $autoValues ) ){ $values = $autoValues; }
+
 		//	confirmation email
 		if( $this->getParameter( 'pc_send_confirmation_mail' ) && $this->getParameter( 'body' ) && $this->getParameter( 'to' ) && array_key_exists( $this->getParameter( 'to' ), $values ) )
 		{
@@ -636,7 +635,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
 	protected function insertDb( Array $autoValues = null )
     {
-	//	var_export( $autoValues );
+
 		$values = $this->getForm()->getValues();
 		if( is_array( $autoValues ) ){ $values = $autoValues; }
 		if( ! $values ){ return false; }
@@ -650,13 +649,13 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		}
 		catch( Ayoola_Dbase_Adapter_Xml_Table_Exception $e )
 		{
-			//$class = get_class( $this->getDbTable()->getDatabase()->getAdapter() );
+
 			if( $e->getMessage() == Ayoola_Dbase_Adapter_Xml_Table_Abstract::ERROR_INSERT_AMBIGUOUS )
 			{
 				$this->getForm()->setBadnews( self::MESSAGE_AMBIGUOUS );
 				$this->setViewContent( $this->getForm()->view(), true );
 			}
-		//	var_export( $e->getMessage() );			
+
 			return false;
 		}
     } 
@@ -678,7 +677,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		} 
 		catch( Ayoola_Dbase_Adapter_Xml_Table_Exception $e )
 		{ 
-		//	echo $e->getMessage();
+
 			$this->getForm()->setBadnews( 'Error - Cannot alter a protected resource' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false;
@@ -706,16 +705,12 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		$name =  $name ? : 'Continue...';
 		
 		//	This allows the form to go through because the 'data-pc-ignore-field' => 'true' has made the form requirements invisible.
-		//	Invisble fields make the form validation always return false;    
+
 		$fieldset->addElement( array( 'name' => 'confirmation-trigger', 'description' =>  $description, 'type' => 'Hidden' ), $options );
 		$description ? $fieldset->addElement( array( 'name' => 'confirmation', 'label' => $description, 'type' => 'Radio' ), $options ) : null;
-	//	$fieldset->addRequirement( 'action_confirmation', array( 'WordCount' => array( 10, 100 ) ) );
-	//	$fieldset->addRequirement( 'confirmation', array( 'DefiniteValue' => 'Yes' ) );
-	//	$fieldset->addLegend( $name );
-//	var_export( $_POST );
 
         $form->submitValue = $name;
-	//	$fieldset->addRequirement( __METHOD__, array( 'DefiniteValue' => $name ) );
+
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
     } 
@@ -734,22 +729,20 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 			}
 			elseif( $values = $this->getForm()->getValues() )
 			{
-			//	;
+
 			}
 			if( ! $values ){ return false; }
-	//		var_export( $autoValues );
-	//		var_export( $this->getIdentifier() );
-	//		var_export( $values );
+
 			if( $response = $this->getDbTable()->update( $values, $this->getIdentifier() ) )
 			{
-	//		var_export( $response );
+
 				return $response;
 			}
-	//	var_export( $response );
+
 		}
 		catch( Ayoola_Dbase_Adapter_Xml_Table_Exception $e )
 		{ 
-		//	echo $e->getMessage();
+
 			$this->getForm()->setBadnews( 'Error - Cannot alter a protected resource' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			return false;
@@ -765,7 +758,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
     protected static function setUserRecord( Ayoola_Dbase_Table_Interface $table, array $values )
     {		
-	//	$table = new Application_User_UserKolo;
+
 		$values['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
 		if( ! $table->insert( $values ) ){ return false; }
 		return true;
@@ -778,7 +771,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
     public static function getUserRecord( Ayoola_Dbase_Table_Interface $table, array $identifier = null )
     {		
-	//	$table = new Application_User_UserKolo;
+
 		$where = array();
 		if( is_array( $identifier ) ){ $where = $identifier; }
 		$where['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
@@ -794,16 +787,16 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      */
     public static function splitBase64Data( $data )   
     {		
-	//	var_export( $data );
+
 		$baseArray = explode( ',', $data );
 		$baseExt = null;
 		if( count( $baseArray ) > 1 )
 		{
 			$data = base64_decode( array_pop( $baseArray ) );
 			$baseExt = array_pop( $baseArray );
-//	var_export( array_shift( explode( ';', array_pop( explode( '/', $baseExt ) ) ) ) ); 
+
 			$baseExt = array_shift( explode( ';', array_pop( explode( '/', $baseExt ) ) ) );
-	//		var_export( $baseExt ); 
+
 		}
 		else
 		{
@@ -821,26 +814,22 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     {		
 	//	argu
 		$this->fakeValues = $this->fakeValues ? : $this->getParameter( 'fake_values' );
-	//	var_export( $defaultValue );
+
 		if( isset( $this->fakeValues[$name] ) )
 		{
 			$value = $this->fakeValues[$name];
-		//	var_export( $value ); 
+
 		}   
 		else
 		{
 			$value = Ayoola_Form::getGlobalValue( $name, $defaultValue );
-	//	var_export( $value ); 
+
 		}
 	//	if( $name == 'page_options' )
 		{
-		//	self::v( $this->fakeValues );
-		//	self::v( $name );
-		//	self::v( $defaultValue );
-		//	self::v( $value );
-		//	self::v( Ayoola_Form::getGlobalValue( $name, $defaultValue ) );  
+
 		}
-	//	var_export( $defaultValue );
+
 		return ! is_null( $arrayKey ) ? @$value[$arrayKey] : $value;
     }    
 	// END OF CLASS

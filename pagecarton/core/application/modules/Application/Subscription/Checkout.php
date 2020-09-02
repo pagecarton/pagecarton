@@ -318,11 +318,8 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			)
 		) 
 		{
-			
 			return true;
-		}
-		
-		//	$this->setViewContent( $this->getForm()->view() );
+		}		
 		return false;
     } 
 	
@@ -363,7 +360,6 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		$cart = self::getStorage()->retrieve();
 		if( ! empty ( $cart['cart'] ) )
 		{ 
-			
 			//	Look for checkout requirements
 			$requirements = array();
 			foreach( $cart['cart'] as $name => $value )
@@ -375,7 +371,6 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 					$orderFormClass = new Ayoola_Form_View( $parameters );
 					foreach( $orderFormClass->getForm()->getFieldsets() as $each )
 					{
-						
 						$form->addFieldset( $each );
 					}
 					$form->submitValue = 'Continue checkout...';
