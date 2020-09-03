@@ -542,34 +542,15 @@ pc_full_width {
 .pc-element-like-btn,
 .pc-btn,
 .pc-form button {
-  align-items: flex-start;
+  color: #333;
+  background-color: #ccc;
+  border: 1px solid #aaa;
+  padding: 1em;
   text-align: center;
-  cursor: default;
-  box-sizing: border-box;
-  border-image: initial;
-  text-rendering: auto;
-  letter-spacing: normal;
-  word-spacing: normal;
-  text-transform: none;
-  text-indent: 0px;
-  text-shadow: none;
-  display: inline-block;
-  text-align: start;
-  margin: 0em;
-  font: 400 11px system-ui;
-  color: grey;
-  background-color: white;
-  border: 1px solid grey;
-  border-radius: 6px;
-  text-align: center;
-  font-size: 16px;
-  padding:0.5em;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s;
-  /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
+  font-size: 12px;
   text-decoration: none;
+  cursor: pointer;
+  flex-basis: 50%;
 }
 
 .pc-btn-parent a:before, .pc-btn:before {
@@ -812,7 +793,6 @@ pc_full_width {
 .pc-btn-parent a:after,
 .noRecord:after,
 .pc-heading:after {
-  content: " ";
   font-style: normal;
   font-weight: 400;
   display: inline-block;
@@ -831,12 +811,17 @@ pc_full_width {
 }
 
 .pc-heading:before {
-  content: "\f02e";
+  content: "\f05a";
+  display: none;
   margin-right: 1em;
-  margin-left: 1em;
-  padding:1em;
+  margin-left: 0;
+  padding:1em 0;
 }
 
+.pc-heading {
+    padding:1.5em 0;
+}
+  
 .goodnews:before {
   content: '\f00c';
 }
@@ -872,14 +857,9 @@ pc_full_width {
 
 .badnews,
 .noRecord {
-  color: #D8000C;
-  background-color: #FFBABA;
-}
-
-.pc-heading {
-  background-color: gray;
-  border: 1px solid #333;
-  color: #FFFFFF;
+    color: #D8000C;
+    background-color: #FFBABA45;
+    border: 1px solid #FFBABAA3;
 }
 
 .pc-well {
@@ -1344,16 +1324,19 @@ ul {
 
 .pc-table th,
 .pc-table td {
-  padding: 0.5em;
+  padding: 1em 1em;
   text-align: left;
-  font-size: small;
 }
 
 .pc-table th {
-  background-color: #444;
-  color: #fff;
+  background-color: #fff;
+  color: #333;
   text-transform: uppercase;
   text-align: left;
+  padding: 1.5em 1em;
+}
+.pc-table td {
+  font-size: small;
 }
 
 

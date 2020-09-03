@@ -71,7 +71,7 @@ class Ayoola_Page_Menu_List extends Ayoola_Page_Menu_Abstract
 		}
 
 		$list->setKey( $this->getIdColumn() );
-		$list->setNoRecordMessage( 'No Menu yet on this application.' ); 
+		$list->setNoRecordMessage( 'No navigation menu has been created on this site' ); 
 		$list->setListOptions( 
 								array( 
 										'Manage Menu Templates' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Menu_List/\' );" title=""> Manage Menu Templates </a>',
@@ -85,7 +85,7 @@ class Ayoola_Page_Menu_List extends Ayoola_Page_Menu_Abstract
 		//		'document_url' => null,
 				' ' => '<a title="Add a link option to this menu." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Creator/?' . $this->getIdColumn() . '=%KEY%">Add Link Option</a>', 
 				'  ' => '<a title="Edit Menu Information" title="Edit Menu Information" title="Edit Menu Information" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Editor/?' . $this->getIdColumn() . '=%KEY%">Manage Options</a>', 
-				'X' => '<a title="Delete Menu from application." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'X' => '<a title="Delete Menu from site." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
 			)
 		);
 		//var_export( $list );
