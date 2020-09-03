@@ -405,7 +405,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			$table = $table::getInstance( $table::SCOPE_PRIVATE );
 			$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 			$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
-            $privateOptions = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) );
+            $privateOptions = $table->select( null, null, array( 'workaround-to-avoid-cache' ) );
             $publicOptions = $table::getInstance()->select();
             $allowedOptions = Application_Settings_Abstract::getSettings( 'Payments', 'allowed_payment_options' ) ? : array();
             $options = $publicOptions;

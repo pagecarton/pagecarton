@@ -61,7 +61,7 @@ class Ayoola_Api_List  extends Ayoola_Api_Abstract
 			(
 				'api_label' => '<a title="Click to edit" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Api_Editor/?' . $this->getIdColumn() . '=%KEY%">[%FIELD%]</a>',
 				'-' => '<a title="Generate Authentication Hash" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Api_GenerateHash/?' . $this->getIdColumn() . '=%KEY%">-</a>', 
-				'X' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Api_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>',
+				'<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Api_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>',
 			)
 		);
 		return $list;

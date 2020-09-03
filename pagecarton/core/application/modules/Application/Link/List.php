@@ -55,7 +55,7 @@ class Application_Link_List extends Application_Link_Abstract
 			array(
 				'link_name' => '<a rel="spotlight;height=300px;width=600px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Link_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
 				'link_priority' => null, 
-				'X' => '<a title="Delete" rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Link_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a title="Delete" rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Link_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

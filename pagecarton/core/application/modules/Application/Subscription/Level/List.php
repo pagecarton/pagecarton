@@ -80,7 +80,7 @@ class Application_Subscription_Level_List extends Application_Subscription_Level
 				'document_url' => '<img height="32" alt="%FIELD%" title="%FIELD%" src="%FIELD%" />',
 				'+' => '<a  title="Add a price for this product category." rel="shadowbox;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Price_Creator/subscriptionlevel_id/%KEY%/">+</a>', 
 				'-' => '<a title="Show available prices for this product category." rel="shadowbox;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Price_List/subscriptionlevel_id/%KEY%/">-</a>', 
-				'X' => '<a title="Delete this product category." rel="shadowbox;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Level_Delete/subscriptionlevel_id/%KEY%/?' . http_build_query( $this->getIdentifier() ) . '">X</a>', 
+				'<a title="Delete this product category." rel="shadowbox;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Level_Delete/subscriptionlevel_id/%KEY%/?' . http_build_query( $this->getIdentifier() ) . '"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

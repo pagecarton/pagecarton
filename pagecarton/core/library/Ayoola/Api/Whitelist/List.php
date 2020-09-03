@@ -61,7 +61,7 @@ class Ayoola_Api_Whitelist_List  extends Ayoola_Api_Whitelist_Abstract
 			(
 	//			'api_label' => '[%FIELD%]',
 				'api_label' => '<a title="Click to edit" rel="shadowbox;height=300px;width=600px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Api_Whitelist_Editor/?' . $this->getIdColumn() . '=%KEY%">[%FIELD%]</a>',
-				'X' => '<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Api_Whitelist_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>',
+				'<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Api_Whitelist_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>',
 			)
 		);
 		return $list;

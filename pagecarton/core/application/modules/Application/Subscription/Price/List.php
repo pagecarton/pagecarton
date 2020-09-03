@@ -77,7 +77,7 @@ class Application_Subscription_Price_List extends Application_Subscription_Price
 		$list->createList(  
 			array(
 				'price' => '<a title="%FIELD%" rel="shadowbox;height=300px;width=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Price_Editor/?' . $this->getIdColumn() . '=%KEY%&' . http_build_query( $this->getIdentifier() ) . '">%FIELD%</a>', 
-				'X' => '<a rel="shadowbox;height=300px;width=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Price_Delete/?' . $this->getIdColumn() . '=%KEY%&' . http_build_query( $this->getIdentifier() ) . '">X</a>', 
+				'<a rel="shadowbox;height=300px;width=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Price_Delete/?' . $this->getIdColumn() . '=%KEY%&' . http_build_query( $this->getIdentifier() ) . '"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

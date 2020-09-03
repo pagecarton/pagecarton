@@ -56,7 +56,7 @@ class Ayoola_Doc_List extends Ayoola_Doc_Abstract
 				'document_name' => '<a rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
 				'document_url' => '<a rel="shadowbox" href="%FIELD%">%FIELD%</a>', 
 				'Download' => '<a rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Download/?' . $this->getIdColumn() . '=%KEY%">Download</a>', 
-				'X' => '<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

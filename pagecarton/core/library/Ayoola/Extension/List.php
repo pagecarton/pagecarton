@@ -77,7 +77,7 @@ class Ayoola_Extension_List extends Ayoola_Extension_Abstract
 			//	'extension_title' => '%FIELD%',   
 				'extension_title' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" title="Edit plugin" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Editor/?' . $this->getIdColumn() . '=%KEY%" href="javascript:;">%FIELD%</a>', 
 				'download' => '<a title="Download Plugin" onClick="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Download/?' . $this->getIdColumn() . '=%KEY%">Download</a>', 
-				'x' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+				'<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

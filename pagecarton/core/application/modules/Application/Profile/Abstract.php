@@ -240,7 +240,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 		{
 			$table = $table::getInstance();
 		}
-		if( $profileData = $table->selectOne( null, array( 'profile_url' => $profileUrL ), array( 'x' => 'work-around-to-avoid-stupid-cache' ) ) )
+		if( $profileData = $table->selectOne( null, array( 'profile_url' => $profileUrL ), array( 'work-around-to-avoid-stupid-cache' ) ) )
 		{
 			//	main table data should be there because 
 			//	values like display_name is absent in inner data

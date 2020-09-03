@@ -69,7 +69,7 @@ class Ayoola_Page_Menu_Edit_List extends Ayoola_Page_Menu_Edit_Abstract
 				'option_name' => '%FIELD%', 
 				'url' => '%FIELD%', 
 				' ' => '<a title="Edit" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Editor/?' . $this->getIdColumn() . '=%KEY%&' . $identifier . '\', \'page_refresh\' );" href="javascript:">[Edit]</a>',   
-				'x' => '<a title="Delete" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Delete/?' . $this->getIdColumn() . '=%KEY%&' . $identifier . '\', \'page_refresh\' );" href="javascript:">x</a>',   
+				'<a title="Delete" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Delete/?' . $this->getIdColumn() . '=%KEY%&' . $identifier . '\', \'page_refresh\' );" href="javascript:"><i class="fa fa-trash" aria-hidden="true"></i></a>',   
 			)
 		);
 	//	var_export( $list );

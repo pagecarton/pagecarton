@@ -56,7 +56,7 @@ class Application_Category_List extends Application_Category_Abstract
 			array(
 				'category_label' => '%FIELD% <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Editor/?' . $this->getIdColumn() . '=%KEY%">[edit]</a>', 
 				'category_name' => '%FIELD%</a>', 
-				'X' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

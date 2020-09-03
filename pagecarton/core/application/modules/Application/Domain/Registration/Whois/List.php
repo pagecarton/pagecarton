@@ -62,7 +62,7 @@ class Application_Domain_Registration_Whois_List extends Application_Domain_Regi
 				'extension' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Registration_Whois_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
 		//		'server' => null, 
 				'price' => '<a rel="shadowbox;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Registration_Price_Editor/?' . $this->getIdColumn() . '=%KEY%">' . $currency . '</a>', 
-				'X' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Registration_Whois_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Registration_Whois_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

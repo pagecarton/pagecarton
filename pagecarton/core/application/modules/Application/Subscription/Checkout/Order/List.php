@@ -64,7 +64,7 @@ class Application_Subscription_Checkout_Order_List extends Application_Subscript
 							'total' => $cur . ' %FIELD%', 
 							'time' => array( 'field' => 'time', 'value' => '%FIELD%', 'filter' => 'Ayoola_Filter_Time' ), 
 							' ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Editor/?' . $this->getIdColumn() . '=%KEY%"> update </a>', 
-							'  ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+							'  ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			);
         $listOptions = 	array( 
                                 'Creator' => ' ',    

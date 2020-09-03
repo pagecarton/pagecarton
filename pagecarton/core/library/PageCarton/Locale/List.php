@@ -71,8 +71,8 @@ class PageCarton_Locale_List extends PageCarton_Locale_Abstract
                     'Locale Code' => array( 'field' => 'locale_code', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Default' => array( 'field' => 'locale_code', 'header' =>  ' ', 'value' =>  '%FIELD%', 'value_representation' => $default ), 
                     array( 'field' => 'locale_code', 'value' =>  '<a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_OriginalString_List/?locale_code=%FIELD%">translations</a>', 'filter' =>  '' ), 
-                    '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
-                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+                    '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Editor/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 
+                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Locale_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 				)
 		);
 		return $list;

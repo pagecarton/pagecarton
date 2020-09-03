@@ -1187,7 +1187,7 @@ margin-bottom:1em;
 margin-top:1em;
 	  "><div  title="HTML Text" style=" padding-top:0.5em;padding-bottom:0.5em;cursor: default;" name="advanced_parameters_d037e4103e83a1b0065888e24b8faaa9649_interior" class="object_interior" data-parameter_name="parent"><div data-parameter_name="editable" title="You may click to edit the content here..." contentEditable="true" class="ckeditor" onDblClick="replaceDiv( this );"><p><span style="font-size:10px;">{{{article_type}}}</span><br>
 {{{article_title}}}<br>
-<span style="font-size:10px;"><a href="{{{pc_url_prefix}}}{{{article_url}}}" rel="spotlight">View</a> - <a href="{{{pc_url_prefix}}}/object/name/Application_Article_Editor/?article_url={{{article_url}}}" rel="spotlight">Edit</a><a href="{{{pc_url_prefix}}}/article/post/editor/?article_url={{{article_url}}}" rel="spotlight"> </a>- <a href="{{{pc_url_prefix}}}/object/name/Application_Article_Delete/?article_url={{{article_url}}}" rel="spotlight">Delete</a></span></p>
+<span style="font-size:10px;"><a href="{{{pc_url_prefix}}}{{{article_url}}}" rel="spotlight">View</a> - <a href="{{{pc_url_prefix}}}/object/name/Application_Article_Editor/?article_url={{{article_url}}}" rel="spotlight"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a><a href="{{{pc_url_prefix}}}/article/post/editor/?article_url={{{article_url}}}" rel="spotlight"> </a>- <a href="{{{pc_url_prefix}}}/object/name/Application_Article_Delete/?article_url={{{article_url}}}" rel="spotlight">Delete</a></span></p>
 
 <hr></div><div style="clear:both;"></div></div>	  
 <div style="clear:both;">	  

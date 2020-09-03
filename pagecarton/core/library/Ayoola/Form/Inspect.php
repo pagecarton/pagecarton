@@ -61,21 +61,15 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 			}
 			if( ! $data )     
 			{
-		//		if( ! $data = $this->getIdentifierData() ){  }
 				if(  ! self::hasPriviledge() )
 				{
-				//	var_export( $data );
 					$this->setViewContent(  '' . self::__( '<p class="boxednews badnews">The requested form was not found on the server. Please check the URL and try again. </p>' ) . '', true  );
 					return false;
-				//	self::setIdentifierData( $data );
 				}
-			//	var_export( $this->getDbData() );
-			//	var_export( $data );
 				$table = Ayoola_Form_Table_Data::getInstance();
 				$this->setViewContent( $table->view(), true );
 				return false;
 			}
-		//	var_export( $data );
 			$list = new Ayoola_Paginator();
 			$list->pageName = $this->getObjectName();
 			$list->deleteClass = 'Ayoola_Form_Table_Delete';
@@ -88,19 +82,14 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 			( 
 				'& $key, & $values', 
 				'
-		//			var_export( $values );
 					$time = $values["creation_time"];
 					$values = $values["form_data"] + $values;
-				//	$values["creation_time"] = $time;
-				//	$key = $values["username"]; 
 				'
 			); 
 			$formData = $table->select( null, array( 'form_name' => $data['form_name'] ), array( 'result_filter_function' => $sortFunction2 ) );
 			$formData = self::sortMultiDimensionalArray( $formData, 'creation_time' );
 			
 
-	//		var_export( $table->select() );
-	//		var_export( $formData );
 			krsort( $formData );
 			$list->setData( $formData );
 			$list->setListOptions( 
@@ -112,6 +101,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 			$list->pageName = $this->getObjectName();
 			$list->setNoRecordMessage( 'There are no responses to this form yet.' );
 
+            $count = 0;
 			foreach( $data['element_title'] as $key => $each )
 			{
 				switch( $data['element_type'][$key] )
@@ -126,13 +116,19 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 					default:
 						$value = '%FIELD%';
 					break;
-				}
-				$listColumn[$each] = array( 'value' => $value, 'field' => $data['element_name'][$key] ? : $each );
+                }
+                
+                $listColumn[$each] = array( 'value' => $value, 'field' => $data['element_name'][$key] ? : $each );
+                if( ++$count >= 2 )
+                {
+                    break;
+                }
 			}
-			$listColumn['creation_time'] = array( 'value' => '%FIELD%', 'filter' => 'Ayoola_Filter_Time' );
-			$listColumn['  '] = array( 'value' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?data_id=%FIELD%&form_name=' . $data['form_name'] . '">update</a>', 'field' => 'data_id' );  
-			$listColumn[' '] = array( 'value' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Table_Delete/?data_id=%FIELD%&form_name=' . $data['form_name'] . '">X</a>', 'field' => 'data_id' );  
-	//		var_export( $listColumn );
+			$listColumn[] = array( 'field' => 'creation_time', 'value' => '%FIELD%', 'filter' => 'Ayoola_Filter_Time' );
+			$listColumn[] = array( 'value' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?data_id=%FIELD%&form_name=' . $data['form_name'] . '"><i class="fa fa-eye" aria-hidden="true"></i></a>', 'field' => 'data_id' );  
+			$listColumn[] = array( 'value' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?data_id=%FIELD%&form_name=' . $data['form_name'] . '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 'field' => 'data_id' );  
+			$listColumn[] = array( 'value' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Table_Delete/?data_id=%FIELD%&form_name=' . $data['form_name'] . '"><i class="fa fa-trash" aria-hidden="true"></i>
+            </a>', 'field' => 'data_id' );  
 			
 			$list->createList
 			(

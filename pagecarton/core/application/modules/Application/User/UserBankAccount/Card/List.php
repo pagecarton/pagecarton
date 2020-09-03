@@ -63,7 +63,7 @@ class Application_User_UserBankAccount_Card_List extends Application_User_UserBa
 				'card_number' => '<a title="Edit Credit/Debit card Information" rel="spotlight;height=300px;width=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_UserBankAccount_Creator/mode/Card/file/Editor/?' . $this->getIdColumn() . '=%KEY%&">%FIELD%</a>',
 				
 				'verified' => '<a title="Verify Account" href="' . Ayoola_Application::getUrlPrefix() . '/accounts/verify/get/mode/CreditCard/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
-				'X' => '<a title="Delete" rel="spotlight;height=300px;width=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_UserBankAccount_Creator/mode/Card/file/Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a title="Delete" rel="spotlight;height=300px;width=300px;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_UserBankAccount_Creator/mode/Card/file/Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

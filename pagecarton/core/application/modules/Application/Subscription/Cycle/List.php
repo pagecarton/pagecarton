@@ -55,7 +55,7 @@ class Application_Subscription_Cycle_List extends Application_Subscription_Cycle
 		$list->createList(  
 			array(
 				'cycle_name' => '<a title="%FIELD%" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Cycle_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
-				'X' => '<a rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Cycle_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Cycle_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

@@ -64,7 +64,7 @@ class Application_User_UserBankAccount_List extends Application_User_UserBankAcc
 		//		'Set Email' => '<a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/userEmail/?' . $this->getIdColumn() . '=%KEY%">-</a>',
 				
 				'verified' => '<a title="Verify Account" href="' . Ayoola_Application::getUrlPrefix() . '/accounts/verify/get/mode/BankAccount/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
-				'X' => '<a title="Delete" rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_UserCreditCard_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a title="Delete" rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_UserCreditCard_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

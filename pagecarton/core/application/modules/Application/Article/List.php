@@ -88,8 +88,8 @@ class Application_Article_List extends Application_Article_ShowAll
 				'title' => array( 'field' => 'article_title', 'value' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '%KEY%">Preview</a>' ), 
 				'type' => array( 'field' => 'article_type', 'value' => '%FIELD%' ), 
 				'by' => array( 'field' => 'username', 'value' => '%FIELD%' ),   
-				'edit' => array( 'field' => 'article_title', 'value' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?' . $this->getIdColumn() . '=%KEY%">Edit</a>' ), 
-				'X' => '<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				array( 'field' => 'article_title', 'value' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' ), 
+				'<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

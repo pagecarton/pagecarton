@@ -723,7 +723,7 @@ pc_full_width {
 .pc-btn-small-parent a,
 .pc-btn-small {
   font-size: smaller;
-  padding: 0.2em;
+  padding: 0.5em;
   margin-top: 0.2em;
   margin-bottom: 0.2em;
 }
@@ -793,6 +793,7 @@ pc_full_width {
 .pc-btn-parent a:after,
 .noRecord:after,
 .pc-heading:after {
+  content: " ";
   font-style: normal;
   font-weight: 400;
   display: inline-block;
@@ -1376,10 +1377,6 @@ forcing form up the page will not cause distortion
   min-height: 100px;
 }
 
-#Ayoola_Access_Login_form_id_container {
-
-    
-}
 
 #Ayoola_Access_Login_form_id_container form {
   padding: 3em;

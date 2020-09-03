@@ -62,10 +62,10 @@ class PageCarton_Cron_List extends PageCarton_Cron_Abstract
                     'Widget' => array( 'field' => 'class_name', 'value' =>  '%FIELD%' ), 
                     'Parameters' => array( 'field' => 'cron_parameters', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_JsonEncode' ), 
                     'Interval' => array( 'field' => 'cron_interval', 'value' =>  '%FIELD%', 'value_representation' =>  static::$_intervalOptions ), 
-                    '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Cron_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
+                    '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Cron_Editor/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 
                     '   ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Cron_Run/?' . $this->getIdColumn() . '=%KEY%">run</a>', 
                     '  ' => array( 'value' =>  '<a style="font-size:smaller;" rel="shadowbox;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Cron_Run_Table_List/?' . $this->getIdColumn() . '=%KEY%">history</a>', 'filter' =>  '' ),
-                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Cron_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Cron_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 				)
 		);
 		return $list;

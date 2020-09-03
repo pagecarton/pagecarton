@@ -55,10 +55,10 @@ class Application_Article_Type_List extends Application_Article_Type_TypeAbstrac
 		$list->createList
 		(  
 			array(
-				'post_type' => '%FIELD% <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
+				'post_type' => '%FIELD% <a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Editor/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 
 				'post_type_id' => '%FIELD%', 
 				' ' => array( 'field' => 'post_type', 'value' => '<a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Creator/?article_type=%KEY%">Create New %FIELD%</a>' ), 
-				'   ' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'   ' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

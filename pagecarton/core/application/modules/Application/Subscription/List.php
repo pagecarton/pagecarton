@@ -62,7 +62,7 @@ class Application_Subscription_List extends Application_Subscription_Abstract
 				'document_url' => '<img height="32" alt="%FIELD%" title="%FIELD%" src="%FIELD%" />',
 				'+' => '<a title="Add a category for this product or service." rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Level_Creator/' . $this->getIdColumn() . '/%KEY%/">+</a>', 
 				'--' => '<a title="List available categories for this product or service" rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Level_List/' . $this->getIdColumn() . '/%KEY%/">--</a>', 
-				'X' => '<a  title="Delete product or service." rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Delete/' . $this->getIdColumn() . '/%KEY%/">X</a>', 
+				'<a  title="Delete product or service." rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Delete/' . $this->getIdColumn() . '/%KEY%/"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

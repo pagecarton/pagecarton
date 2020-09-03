@@ -46,15 +46,6 @@
       <TABLE_FIELD FIELD_KEY="requirement_goodnews"><![CDATA[The first step in creating your website is getting your Domain Name. Your domain name is your Internet address. Check the availability of the domain name you would use with the selected service.]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="requirement_dependencies"><![CDATA[]]></TABLE_FIELD>
     </TABLE_ROW>
-    <TABLE_ROW ROW_ID="2">
-      <TABLE_FIELD FIELD_KEY="requirement_label"><![CDATA[Other User Info]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="requirement_class"><![CDATA[Application_User_RequestOtherInfo]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="requirement_legend"><![CDATA[Optional User Information]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="requirement_goodnews"><![CDATA[The following fields are optional. We encourage you to fill them to enable us serve you better. Thank you!]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="requirement_dependencies"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="requirement_name"><![CDATA[other-user-info]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="requirement_id"><![CDATA[997-0-2]]></TABLE_FIELD>
-    </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>
     <DATA_TYPES requirement_name="INPUTTEXT,UNIQUE" requirement_label="INPUTTEXT" requirement_class="INPUTTEXT" requirement_goodnews="INPUTTEXT" requirement_dependencies="ARRAY" requirement_legend="INPUTTEXT" requirement_id="INPUTTEXT"/>

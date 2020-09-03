@@ -920,7 +920,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$html .= $data['category_text'] ? '<span class="pc_posts_option_items"> in ' . $data['category_text'] . ' </span>' : null;  
 
 		$html .= self::isAllowedToEdit( $data ) && $realPost ? '  
-		<a  class="pc_posts_option_items" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?article_url=' . $data['article_url'] . '&\', \'page_refresh\' );" href="javascript:">edit</a> 
+		<a  class="pc_posts_option_items" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?article_url=' . $data['article_url'] . '&\', \'page_refresh\' );" href="javascript:"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
 		<a  class="pc_posts_option_items" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?article_url=' . $data['article_url'] . '&\', \'page_refresh\' );" href="javascript:"> delete </a>
 		' : null;
 		
@@ -1998,7 +1998,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$table = $table::getInstance( $table::SCOPE_PRIVATE );
 			$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 			$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
-			$profiles = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) );
+			$profiles = $table->select( null, null, array( 'workaround-to-avoid-cache' ) );
 
 			$filter = new Ayoola_Filter_SelectListArray( 'profile_url', 'display_name' );
 			$profiles = $filter->filter( $profiles );

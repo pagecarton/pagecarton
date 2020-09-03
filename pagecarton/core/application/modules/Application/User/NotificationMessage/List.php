@@ -73,8 +73,8 @@ class Application_User_NotificationMessage_List extends Application_User_Notific
 		//		'mode_name' => null, 
 			//	'send' => '<a rel="changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_NotificationMessage_Send/?' . $this->getIdColumn() . '=%KEY%">send</a>', 
 				'send' => '<a rel="changeElementId=' . $this->getObjectName() . '" href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_NotificationMessage_Send/?' . $this->getIdColumn() . '=%KEY%\' );">send</a>', 
-		//		'X' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_NotificationMessage_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
-				'X' => '<a rel="changeElementId=' . $this->getObjectName() . '" href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_NotificationMessage_Delete/?' . $this->getIdColumn() . '=%KEY%\' );">X</a>', 
+		//		'<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_NotificationMessage_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
+				'<a rel="changeElementId=' . $this->getObjectName() . '" href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_NotificationMessage_Delete/?' . $this->getIdColumn() . '=%KEY%\' );"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 //		var_export( $list );

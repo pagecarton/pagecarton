@@ -61,8 +61,8 @@ class PageCarton_Device_List extends PageCarton_Device_Abstract
 			array(
                     'device_name' => array( 'field' => 'device_name', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'environment_key' => array( 'field' => 'environment_key', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'environment_value' => array( 'field' => 'environment_value', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'equator' => array( 'field' => 'equator', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
-                    '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Device_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
-                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Device_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+                    '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Device_Editor/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 
+                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/PageCarton_Device_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 				)
 		);
 		return $list;

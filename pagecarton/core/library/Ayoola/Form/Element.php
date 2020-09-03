@@ -891,7 +891,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		//	Setting the [] from the class level causes some trouble.
     	$html = null;
 
-		$html .= "<span>\n";
+		$html .= "<div>\n";
 
         try
         {
@@ -928,14 +928,14 @@ class Ayoola_Form_Element extends Ayoola_Form
 			}
 			$counter++;
 			@$html .= "
-						<div style='xdisplay:none;' name='{$element['name']}container'>
+						<div name='{$element['name']}container'>
 							<input onchange='this.name = this.name != \"{$element['name']}\" ? \"{$element['name']}\" : \"{$element['name']}\"; ' type='text' style='{$element['style']}' id='{$element['id']}$counter' value='{$label}' name='{$tempName}' " . self::getAttributesHtml( $element ) . " />
-							<span class='pc-btn' onClick='this.parentNode.parentNode.insertBefore( this.parentNode.cloneNode( true ), this.parentNode );' title='Add new {$element['label']}'>+</span>
-							<span class='pc-btn' onClick='confirm( \"Delete this option?\" ) ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;' title='Delete this option for {$element['label']}'>-</span>
+							<a class='pc-btn' onClick='this.parentNode.parentNode.insertBefore( this.parentNode.cloneNode( true ), this.parentNode );' title='Add new {$element['label']}'>+</a>
+							<a class='pc-btn' onClick='confirm( \"Delete this option?\" ) ? this.parentNode.parentNode.removeChild( this.parentNode ) : null;' title='Delete this option for {$element['label']}'>-</a>
 						</div>\n";
 		}
 		unset( $values );
-		$html .= "</span>\n";
+		$html .= "</div>\n";
 		 
 		return $html;
     }

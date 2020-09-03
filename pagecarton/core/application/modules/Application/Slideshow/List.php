@@ -67,7 +67,7 @@ class Application_Slideshow_List extends Application_Slideshow_Abstract
 		$list->createList(      
 			array(
 				'slideshow_title' => '<a title="Edit slideshow information" rel="shadowbox;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Editor/?' . $this->getIdColumn() . '=%KEY%">[%FIELD%]</a>', 
-				'X' => '<a title="Delete slideshow" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a title="Delete slideshow" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

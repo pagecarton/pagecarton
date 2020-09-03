@@ -79,8 +79,8 @@ class Application_Domain_List extends Application_Domain_Abstract
 			array(
 				'domain_name' => '%FIELD% <a style="font-size:smaller;" title="Click to preview" rel="shadowbox;" href="http://%FIELD%' . Ayoola_Application::getUrlPrefix() . '/">preview</a>',  
 				'admin' => array( 'field' => 'domain_name', 'value' => '<a title="Click to preview" rel="shadowbox;" href="http://%FIELD%' . Ayoola_Application::getUrlPrefix() . '/pc-admin">Admin Panel</a>' ),    
-				' ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
-				'   ' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				' ' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Editor/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 
+				'   ' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

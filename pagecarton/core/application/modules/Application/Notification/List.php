@@ -61,8 +61,8 @@ class Application_Notification_List extends Application_Notification_Abstract
 			array(
                     'username' => array( 'field' => 'username', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'from' => array( 'field' => 'from', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'body' => array( 'field' => 'body', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'to' => array( 'field' => 'to', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'cc' => array( 'field' => 'cc', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'bcc' => array( 'field' => 'bcc', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
-                    '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Notification_Editor/?' . $this->getIdColumn() . '=%KEY%">edit</a>', 
-                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Notification_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+                    '' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Notification_Editor/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 
+                    ' ' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Notification_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 				)
 		);
 		return $list;

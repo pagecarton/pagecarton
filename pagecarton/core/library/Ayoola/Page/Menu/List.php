@@ -85,7 +85,7 @@ class Ayoola_Page_Menu_List extends Ayoola_Page_Menu_Abstract
 		//		'document_url' => null,
 				' ' => '<a title="Add a link option to this menu." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Edit_Creator/?' . $this->getIdColumn() . '=%KEY%">Add Link Option</a>', 
 				'  ' => '<a title="Edit Menu Information" title="Edit Menu Information" title="Edit Menu Information" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Editor/?' . $this->getIdColumn() . '=%KEY%">Manage Options</a>', 
-				'X' => '<a title="Delete Menu from site." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a title="Delete Menu from site." rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Menu_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

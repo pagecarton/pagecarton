@@ -62,7 +62,7 @@ class Application_Subscription_Checkout_List extends Application_Subscription_Ch
 			array(
 				'checkoutoption_name' => '<a title="%FIELD%" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
 	//			'object_name' => null, 
-				'X' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

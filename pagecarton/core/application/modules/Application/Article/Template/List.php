@@ -77,7 +77,7 @@ class Application_Article_Template_List  extends Application_Article_Template_Ab
 			array
 			(
 				'template_label' => '<a title="Click to edit" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Template_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>',
-				'X' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Template_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>',
+				'<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Template_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>',
 			)
 		);
 		return $list;

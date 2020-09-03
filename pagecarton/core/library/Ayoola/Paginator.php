@@ -458,7 +458,8 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				{
 					$head = self::__( $head );
 					self::filterReplacement( $head );
-					$html .='<th>' . $head . ' <a href="javascript:;" onClick="window.location.search = window.location.search + \'&pc_sort_column=\' + \'' . ( $field ) . '\';" > &#8645; </a></th>';
+					$html .='<th>' . $head . ' <a href="javascript:;" style="margin-left:1em;" onClick="window.location.search = window.location.search + \'&pc_sort_column=\' + \'' . ( $field ) . '\';" > <i class="fa fa-sort" aria-hidden="true"></i>
+                    </a></th>';
 				}
 				else
 				{

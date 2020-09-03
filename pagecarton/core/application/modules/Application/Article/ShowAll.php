@@ -1671,7 +1671,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
                     $table = $table::getInstance( $table::SCOPE_PRIVATE );
                     $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
                     $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
-                    $this->_dbData = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache', 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
+                    $this->_dbData = $table->select( null, null, array( 'workaround-to-avoid-cache', 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
                 }  
                 else
                 {

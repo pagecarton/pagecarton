@@ -60,7 +60,7 @@ class Application_User_Email_My_List extends Application_User_Email_My_Abstract
 			array(
 				'email' => '<a title="Edit %FIELD%" rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Email_My_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
 				'-' => '<a rel="spotlight;" href="' . Ayoola_Application::getUrlPrefix() . '/squirrelmail/">Check</a>', 
-				'X' => '<a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Email_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a rel="spotlight;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_User_Email_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 //		var_export( $list );

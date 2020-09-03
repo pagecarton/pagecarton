@@ -193,14 +193,14 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 										'Code' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Code/?url=%KEY%&layout_name=' . $data['layout_name'] . '\' );" style="">Page HTML Code</a>' ,
 										'Duplicate' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Duplicate/?url=%KEY%&layout_name=' . $data['layout_name'] . '\', \'page_refresh\' );" style="">Duplicate page</a>' ,
 										'Delete Saved Content' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_ClearContent/?url=%KEY%&layout_name=' . $data['layout_name'] . '\' );" style="">Clear Saved Content</a>' ,
-										'Delete' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Delete/?url=%KEY%&layout_name=' . $data['layout_name'] . '\', \'page_refresh\' );" style="">x</a>' ,
+										'Delete' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Pages_Delete/?url=%KEY%&layout_name=' . $data['layout_name'] . '\', \'page_refresh\' );" style=""><i class="fa fa-trash" aria-hidden="true"></i></a>' ,
 									) 
 							);
 			$list->createList(  
 				array(
 					'title' => '%FIELD%',   
 					'url' => '%FIELD%',   
-					' ' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=%KEY%&pc_page_editor_layout_name=' . $data['layout_name'] . '\' );" style="">edit</a>',   
+					' ' => '<a href="javascript:" class="" name="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Editor_Layout/?url=%KEY%&pc_page_editor_layout_name=' . $data['layout_name'] . '\' );" style=""><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>',   
 			//		'' => '',   
 				)
 			);

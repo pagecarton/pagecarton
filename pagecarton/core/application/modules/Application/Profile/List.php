@@ -52,7 +52,7 @@ class Application_Profile_List extends Application_Profile_Abstract
 		$table = $table::getInstance( $table::SCOPE_PRIVATE );
 		$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 		$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
-		$data = $table->select( null, null, array( 'x' => 'workaround-to-avoid-cache' ) );
+		$data = $table->select( null, null, array( 'workaround-to-avoid-cache' ) );
 	//	self::v( $data );
 		$list->setData( $data );  
 		$this->setIdColumn( 'profile_url' );
@@ -62,7 +62,7 @@ class Application_Profile_List extends Application_Profile_Abstract
 			array(
 				'profile_url' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
 				' ' => '<a title="View profile" target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/%KEY%">preview</a>', 
-				'X' => '<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

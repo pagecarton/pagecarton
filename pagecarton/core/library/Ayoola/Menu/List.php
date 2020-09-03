@@ -77,7 +77,7 @@ class Ayoola_Menu_List  extends Ayoola_Menu_Abstract
 			array
 			(
 				'template_label' => '<a title="Click to edit" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Menu_Editor/?' . $this->getIdColumn() . '=%KEY%">[%FIELD%]</a>',
-				'X' => '<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Menu_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>',
+				'<a title="Delete" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Menu_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>',
 			)
 		);
 		return $list;

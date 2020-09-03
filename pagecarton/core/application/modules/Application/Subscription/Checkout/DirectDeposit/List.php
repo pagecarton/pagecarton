@@ -57,7 +57,7 @@ class Application_Subscription_Checkout_DirectDeposit_List extends Application_S
 				'account_name' => '<a title="%FIELD%" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_DirectDeposit_Editor/?' . $this->getIdColumn() . '=%KEY%">%FIELD%</a>', 
 				'account_currency' => null, 
 				'account_country_code' => null, 
-				'X' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_DirectDeposit_Delete/?' . $this->getIdColumn() . '=%KEY%">X</a>', 
+				'<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_DirectDeposit_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );
