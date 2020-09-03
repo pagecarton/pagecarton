@@ -106,7 +106,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		$recordRowId = $this->getXml()->autoId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );  		
 		$row = $this->getXml()->createElement( self::TAG_TABLE_ROW );  
 		$idColumn = $this->getTableName() . '_id';
-		$whereValue = $recordRowId ? : $values[$idColumn];
+        $whereValue = $recordRowId ? : $values[$idColumn];
 		if( ! empty( $values[$idColumn] ) )
 		{
 			//	Removing this as it might slow things down in large tables like access logs
@@ -133,29 +133,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 			//	add app id to record id so as to remove duplicate IDs
 			$appId = new Ayoola_Api_Api();
 			$appId = $appId->selectOne();
-			$appId = strval( intval( $appId ? $appId['application_id'] : time() ) );
+			$appId = strval( intval( $appId['application_id'] ) );
 		//	$recordRowId = $appId . $recordRowId
-			$whereValue = '' . $appId . '-' . $i . '-' . $recordRowId;
-			
-		//	var_export( array( $idColumn => $whereValue ) );
-			//	Removing this as it might slow things down in large tables like access logs
-		//	while( $select = $this->query( 'SELECT', null, array( $idColumn => $whereValue ) ) )
-			{
-			//	++$recordRowId;
-			//	var_export( $select );
-		//	var_export( $whereValue );
-			//	$whereValue = $appId . '_' . $recordRowId;
-				$whereValue = '' . $appId . '-' . $i . '-' . $recordRowId;
-			//	var_export( $appId . '_' . $recordRowId );
-		//		exit();
-			}
+			$whereValue = '' . $appId . '-' . time() . '-' . $recordRowId;
 		}
-		
-	//	var_export( $appId );
-		
+				
 		//	Do not assign the recordRowId that is used by the parent table or previous supplement
 	//	$whereValue = $appId . '_' . $recordRowId;
-	//	var_export( $whereValue );
 	//	exit( $whereValue );
 		
 		$row = self::setRecordRowId( $row, $recordRowId );
