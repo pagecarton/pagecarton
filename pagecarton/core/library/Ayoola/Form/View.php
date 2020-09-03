@@ -141,11 +141,12 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 	//		if( $data['form_options'] && in_array( 'database', $data['form_options'] ) )
 			{
 				$table = Ayoola_Form_Table_Data::getInstance();
-				$infoToInsert = array( 'form_name' => $data['form_name'], 'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 'form_data' => $values );
+				$infoToInsert = array( 'form_name' => $data['form_name'], 'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 'form_data' => $values  );
 
 				if( $previousData && ! in_array( 'disable_updates', $data['form_options'] ) )
 				{
-                    $table->update( $infoToInsert, array( 'data_id' => $_REQUEST['data_id'] ) );
+                    $newDataToInsert = $values + $previousData;
+                    $table->update( array( 'form_data' => $newDataToInsert ), array( 'data_id' => $_REQUEST['data_id'] ) );
                     $dataId = $_REQUEST['data_id'];
 				}
 				else

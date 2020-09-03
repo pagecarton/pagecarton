@@ -75,31 +75,62 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 			$list->deleteClass = 'Ayoola_Form_Table_Delete';
 			$list->showExportLink = true;
 			$list->listTitle = $data['form_title'] . ' Responses';
-			$table = Ayoola_Form_Table_Data::getInstance();
+            $table = Ayoola_Form_Table_Data::getInstance();
+            
+            $buildQuery = null;
+            $v = null;
+            if( ! empty( $_GET['entry_categories'] ) )
+            {
+                foreach( $_GET['entry_categories'] as $each )
+                {               
+                    $v .= '<span class="badge badge-primary pc_give_space">' . $each . '</span>';
+                    $buildQuery .= '&entry_categories[]=' . $each . '&';
+                }
+            }
+            $list->setNoRecordMessage( 'There are no responses to this form yet.' );
+            if( $v )
+            {
+                $list->setNoRecordMessage( 'No response to this form match the set criteria' );
+                $this->setViewContent( 'Filters: ' . $v, true );
+            }
 
 			//	Filter the result to save time
 			$sortFunction2 = create_function
 			( 
 				'& $key, & $values', 
-				'
-					$time = $values["creation_time"];
-					$values = $values["form_data"] + $values;
+                '
+                    if( ! empty( $_GET["entry_categories"] ) )
+                    {
+                        if( empty( $values["form_data"]["entry_categories"] ) || array_diff( $_GET["entry_categories"], $values["form_data"]["entry_categories"] )  )
+                        {
+                            $values = false;
+                            return;
+                        }
+                    }
+                    $values = $values["form_data"] + $values;
 				'
 			); 
-			$formData = $table->select( null, array( 'form_name' => $data['form_name'] ), array( 'result_filter_function' => $sortFunction2 ) );
+			$formData = $table->select( null, array( 'form_name' => $data['form_name'] ), array( 'result_filter_function' => $sortFunction2, 'rand' => $_GET["entry_categories"] ) );
 			$formData = self::sortMultiDimensionalArray( $formData, 'creation_time' );
 			
 
 			krsort( $formData );
-			$list->setData( $formData );
+            $list->setData( $formData );
+            $listOptions = array();
+            foreach( $data['entry_categories'] as $each )
+            {               
+                if( ! in_array( $each, $_GET['entry_categories'] ) )
+                {
+                    $listOptions[$each] = '<a  href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Inspect/?form_name=' . $data['form_name'] . '&entry_categories[]=' . $each . '' . $buildQuery . '\', \'' . $this->getObjectName() . '\' )">' . $each . ' <i class="fa fa-external-link pc_give_space" aria-hidden="true"></i></a>';
+                }
+            }
+            
+
 			$list->setListOptions( 
-									array( 
-								//			'Form Settings' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Settings_Editor/settingsname_name/Forms/\' );" title="Update form settings.">Form Settings </a>',    
-										) 
+                                    $listOptions
 								);
 			$list->setKey( $this->getIdColumn() );
 			$list->pageName = $this->getObjectName();
-			$list->setNoRecordMessage( 'There are no responses to this form yet.' );
 
             $count = 0;
 			foreach( $data['element_title'] as $key => $each )
@@ -124,17 +155,30 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
                     break;
                 }
 			}
+			$listColumn[] = array( 'field' => 'entry_categories', 'value' => '<span class="badge badge-primary">%FIELD%</span>' );
 			$listColumn[] = array( 'field' => 'creation_time', 'value' => '%FIELD%', 'filter' => 'Ayoola_Filter_Time' );
-			$listColumn[] = array( 'value' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?data_id=%FIELD%&form_name=' . $data['form_name'] . '"><i class="fa fa-eye" aria-hidden="true"></i></a>', 'field' => 'data_id' );  
-			$listColumn[] = array( 'value' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?data_id=%FIELD%&form_name=' . $data['form_name'] . '"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 'field' => 'data_id' );  
-			$listColumn[] = array( 'value' => '<a title="" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Table_Delete/?data_id=%FIELD%&form_name=' . $data['form_name'] . '"><i class="fa fa-trash" aria-hidden="true"></i>
+			$listColumn[] = array( 'value' => '<a  href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?data_id=%FIELD%&form_name=' . $data['form_name'] . '\', \'' . $this->getObjectName() . '\' ) "><i class="fa fa-eye" aria-hidden="true"></i></a>', 'field' => 'data_id' );  
+			$listColumn[] = array( 'value' => '<a    href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_View/?data_id=%FIELD%&form_name=' . $data['form_name'] . '\', \'' . $this->getObjectName() . '\' ) "><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 'field' => 'data_id' );  
+			$listColumn[] = array( 'value' => '<a   href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Table_Delete/?data_id=%FIELD%&form_name=' . $data['form_name'] . '\', \'' . $this->getObjectName() . '\' ) "><i class="fa fa-trash" aria-hidden="true"></i>
             </a>', 'field' => 'data_id' );  
-			
+
+            $rowOptions = array();
+			foreach( $data['entry_categories'] as $each )
+			{               
+                $rowOptions[$each] = '<a  href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Table_Entry/?data_id=%KEY%&form_name=' . $data['form_name'] . '&category=' . $each . '&mini_info=1&close_on_success=1\', \'' . $this->getObjectName() . '\' )">' . $each . ' <i class="fa fa-edit pc_give_space" aria-hidden="true"></i>
+                </a>';
+			}
+
+            $list->setRowOptions( 
+                $rowOptions 
+            );
+
 			$list->createList
 			(
 				$listColumn
-			);
-			$this->setViewContent( $list->view(), true );
+            );
+            
+			$this->setViewContent( $list->view() );
 			return true;
 		}
 		catch( Exception $e )
