@@ -17,7 +17,6 @@
  
 require_once 'Application/User/Exception.php';
 
-
 /**
  * @user   Ayoola
  * @package    Application_User_Abstract
@@ -279,7 +278,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			if( $database === 'relational' )
 			{
 				$data = $table->selectOne( null, strtolower( implode( ', ', $this->_otherTables ) ), $this->getIdentifier() );
-				//	var_export( $data );
+
 				$this->_identifierData = $data;
 				break;
 			}		
@@ -304,10 +303,9 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		}
 		
 		$form->submitValue = $submitValue ;
-	//	$form->oneFieldSetAtATime = $this->getParameter( 'show_all_fieldsets_at_once' ) ? false : true;
-	//	$form->oneFieldSetAtATime = false;
+
 		$form->formNamespace = get_class( $this ) . $values['user_id'];
-		//$form->setCaptcha( true ); // Adds captcha
+
 		require_once 'Ayoola/Form/Element.php';
 
 		$additionalForms = array();
@@ -404,10 +402,9 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				if( $this->getGlobalValue( 'password2' ) ) //	If I am using fake values
 				{ 
 					$account->addRequirement( 'password2', array( 'DefiniteValueSilent' => $this->getGlobalValue( 'password' ) ) );
-				//	var_export( $this->getGlobalValue( 'password' ) ); 
+
 				}
 			}
-		//	var_export( $_REQUEST['password'] );
 			$this->getParameter( 'no_legend' ) ?  null : $account->addLegend( "$legend" );
 			$ip = sprintf( "%u", ip2long( long2ip( ip2long( $_SERVER['REMOTE_ADDR'] ) ) ) );
 			$ipType = is_null( $values ) ? 'creation_ip' : 'modified_ip';
@@ -415,22 +412,21 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$account->addFilter( $ipType, 'DefiniteValue=>' . $ip );
 			$account->addFilter( 'email', 'Trim' );
 			$account->addFilter( 'username', 'Trim' );
-	//		$account->addFilters( 'Trim' );
+
 		}
 	
 		if( ! $database = Application_Settings_Abstract::getSettings( 'UserAccount', 'default-database' ) )
 		{
-		//	$database = 'cloud';
+
 		}
 		if( $database !== 'cloud' || is_null( $values ) )
 		{
 			if( $userOptions = Application_Settings_Abstract::getSettings( 'UserAccount', 'user_options' ) )
 			{
-			//	var_export( $userOptions );
-			//	$database = 'cloud';
+
 			}
 			$userGroupToCreate = ( @$values['access_level'] ? : $this->getParameter( 'user_group' ) ) ? : @$_REQUEST['user_group'];
-	//		var_export( $values );
+
 			if( $userGroupToCreate )
 			{
 
@@ -444,7 +440,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				{
 					if( is_array( $each['auth_options'] ) && in_array( 'allow_signup', $each['auth_options'] ) )
 					{
-					//	$options[$each['auth_level']] =  "{$each['auth_name']}: {$each['auth_description']}";
+
 						$options[$each['auth_level']] =  "{$each['auth_name']}"; 
 
 						if( $each['auth_level'] == $userGroupToCreate )  
@@ -471,8 +467,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 				{
 					$account->addElement( array( 'name' => 'user_group', 'type' => 'Hidden', 'value' =>  $userGroupToCreate ) );  
 				}
-			//	$account->addLegend( "Please choose a user Group you want to belong" );
-		//		$form->addFieldset( $account );
+
 			}
 			else 
 			{
@@ -480,31 +475,8 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			}
 			$form->addFieldset( $account );
 			
-/*			if( $this->getGlobalValue( 'user_group' ) && is_array( $userOptions ) && in_array( 'allow_level_selection', $userOptions ) )
-			{
-				$authLevel = new Ayoola_Access_AuthLevel;
-				$authLevel = $authLevel->selectOne( null, array( 'auth_level' => $this->getGlobalValue( 'user_group' ) ) );
-				if( ! empty( $authLevel['additional_forms'] ) && is_array( $authLevel['auth_options'] ) && in_array( 'attach_forms', $authLevel['auth_options'] ) ) 
-				{
-					foreach( $authLevel['additional_forms'] as $formName )
-					{
-						if( empty( $formName ) )
-						{
-							continue;
-						}
-						$class = new Ayoola_Form_View( array( 'form_name' => $formName ) );
-						$fieldsets = $class->getForm()->getFieldsets();
-						foreach( $fieldsets as $fieldset ) 
-						{
-							$fieldset->appendElement = false;
-							$form->addFieldset( $fieldset );
-						}
-					}
-				}
-				
-			}
-*/			@$personal ? $form->addFieldset( $personal ) : null;
-	//		var_export( $additionalForms );  
+			@$personal ? $form->addFieldset( $personal ) : null;
+
 			foreach( $additionalForms as $formName )
 			{
 				if( empty( $formName ) )
@@ -512,9 +484,9 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 					continue;
 				}
 				$parameters = array( 'form_name' => $formName, 'default_values' => $values );  
-		//		var_export( $parameters );
+
 				$class = new Ayoola_Form_View( $parameters );
-		//		$class = new Ayoola_Form_View( array( 'form_name' => $formName ) );
+
 				$fieldsets = $class->getForm()->getFieldsets();
 				foreach( $fieldsets as $fieldset ) 
 				{
@@ -522,7 +494,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 					$form->addFieldset( $fieldset );
 				}
 			}
-	//		$form->oneFieldSetAtATime = true;
+
 		}
 		if( ! is_null( $values ) && self::hasPriviledge( 98 ) )
 		{
@@ -549,19 +521,17 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		}
 		$supplementaryForm = Application_Settings_CompanyInfo::getSettings( 'UserAccount', 'supplementary_form' );
 
-	//	var_export( $supplementaryForm );  
-
 		if( $supplementaryForm )
 		{
 			$parameters = array( 'form_name' => $supplementaryForm, 'default_values' => $values );  
-	//		var_export( $parameters );
+
 			$orderFormClass = new Ayoola_Form_View( $parameters );
 			
 			if( $orderFormClass->getForm() )
 			{
 				foreach( $orderFormClass->getForm()->getFieldsets() as $each )  
 				{
-				//	$each->addLegend( "" );
+
 					
 					$form->addFieldset( $each );
 				}

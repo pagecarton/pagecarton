@@ -43,16 +43,26 @@ class Application_User_Editor extends Application_User_Abstract
     {
 		try
 		{ 
-			if( ! $data = self::getIdentifier() ){ return false; }
-		//	var_Export( $data );
-		//	var_Export( self::hasPriviledge( 98 ) );
+            if( ! $data = self::getIdentifier() )
+            { 
+                if( ! Ayoola_Application::getUserInfo( 'username' ) || self::hasPriviledge() )
+                {
+                    return false;
+                }
+            }
 			if( strtolower( $data['username'] ) !== Ayoola_Application::getUserInfo( 'username' ) && ! self::hasPriviledge( 98 ) )
 			{
 				//	We are not the owner of data and we are not admin
 				return false;
 			}
-//			var_export( $data );
-			if( ! $data = self::getIdentifierData() ){ return false; }
+            if( ! $data = self::getIdentifierData() )
+            { 
+                if( self::hasPriviledge() )
+                {
+                    return false;
+                }
+                $data = Ayoola_Application::getUserInfo();
+            }
 			
 			if( strtolower( $data['username'] ) !== Ayoola_Application::getUserInfo( 'username' )  && ! self::hasPriviledge( 98 ) )
 			{
@@ -60,7 +70,6 @@ class Application_User_Editor extends Application_User_Abstract
 				return false;
 			}
 				
-	//		var_export( $data );
 			$this->createForm( 'Save...', $data['username'], $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
@@ -71,7 +80,6 @@ class Application_User_Editor extends Application_User_Abstract
 			{ 
 				unset( $values['password'] );   
 			}
-	//		var_export( $values );  
 			
 			if( $values['access_level'] == 99 )
 			{
@@ -89,7 +97,6 @@ class Application_User_Editor extends Application_User_Abstract
 									'domainName' => Ayoola_Page::getDefaultDomain(), 
 								);
 				$emailInfo = self::replacePlaceholders( $emailInfo, $replacements );
-			//	var_export( $emailInfo );
 				$emailInfo['to'] = $data['email'];
 				$emailInfo['from'] = 'no-reply@' . Ayoola_Page::getDefaultDomain();
 				@self::sendMail( $emailInfo );
