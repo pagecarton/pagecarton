@@ -2354,7 +2354,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
                 //  allow view to be filtered or maninpulated by hooks
                 self::setHook( $this, __FUNCTION__, $this->_objectData );
-
                 if( $this->getParameter( 'return_object_data' ) )
                 {
                     return $this->_objectData;
