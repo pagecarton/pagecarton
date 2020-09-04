@@ -113,7 +113,7 @@ class Application_User_Editor extends Application_User_Abstract
 					$response = Ayoola_Api_UserEditor::send( $values );
 					if( true === $response['data'] )
 					{
-						$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account edited successfully</div>' ) . '', true  );
+						$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account changes saved successfully</div>' ) . '', true  );
 						
 						
 						//	localize
@@ -125,7 +125,7 @@ class Application_User_Editor extends Application_User_Abstract
 					if( $this->updateDb() )
 					{
 					//	$this->setViewContent(  '' . self::__( 'User account edited successfully' ) . '', true  );
-						$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account edited successfully</div>' ) . '', true  );
+						$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews">User account changes saved successfully</div>' ) . '', true  );
 					}
 				break;
 				case 'file':
