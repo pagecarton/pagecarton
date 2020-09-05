@@ -295,12 +295,6 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 					//	Home
 					$pages[] = self::getInfo( '/' );
 					
-					//	module
-			//		if( self::getInfo( '/members' ) )
-					{
-
-					}
-
 					//	profile_url
 					if( Ayoola_Application::$GLOBAL['profile']['profile_url'] )
 					{
@@ -372,41 +366,29 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			break;
 			default:
 
-			switch( $page )
-			{
-				case '/tools/classplayer':
-				case '/object':
-				case '/pc-admin':
-				case '/widgets':
-				case '/widget':
-		//		case true:
-					//	Do nothing.
-					//	 had to go through this route to process for 0.00
+                switch( $page )
+                {
+                    case '/tools/classplayer':
+                    case '/object':
+                    case '/pc-admin':
+                    case '/widgets':
+                    case '/widget':
+            //		case true:
+                        //	Do nothing.
+                        //	 had to go through this route to process for 0.00
 
-					if( @$_REQUEST['url'] )
-                    {
-                        $page = $_REQUEST['url'];
-                        $editorMode = true;
-                        break;
-                    }
-				break;
-				default:
+                        if( @$_REQUEST['url'] )
+                        {
+                            $page = $_REQUEST['url'];
+                            $editorMode = true;
+                            break;
+                        }
+                    break;
+                    default:
 
-				break;
-			}
+                    break;
+                }
 
-/*				$sections = self::splitUrl( $page );
-				$table = Ayoola_Page_Page::getInstance();
-				$pages = $table->select( null, array( 'url' => $sections ), array( 'work-arround-111' => true ) );
-				$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-
-		//			if( $moduleInfo = Ayoola_Page::getInfo( $curentPage ) )
-				$pages2 = $table->select( null, array( 'url' => $sections ), array( 'work-arround-333' => true ) );
-				$pages = self::sortMultiDimensionalArray( $pages, 'url' );
-				$pages2 = self::sortMultiDimensionalArray( $pages2, 'url' );
-
-				$pages = $pages + $pages2;
-*/			//		var_export( $pages );
 				$pages = self::getPageCrumbs( $page );
 				if( Ayoola_Application::getRuntimeSettings( 'real_url' ) == '/404' )
 				{
@@ -431,7 +413,6 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		$pages = $table->select( null, array( 'url' => $sections ), array( 'work-arround-ddd111' => true ) );
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
 
-//			if( $moduleInfo = Ayoola_Page::getInfo( $curentPage ) )
 		$pages2 = $table->select( null, array( 'url' => $sections ), array( 'work-arround-333' => true ) );
 
 		$pages = self::sortMultiDimensionalArray( $pages, 'url' );

@@ -49,7 +49,6 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			if( ! empty( $_REQUEST['parent_comment'] ) )
 			{
 				$data = $this->getDbTable()->selectOne( null, array( 'table_id' => $_REQUEST['parent_comment'] ) );
-		//		var_export( $data );
 				$fieldset = $data['comment'];
 				$submitValue = 'Post Reply';
 			}
@@ -57,19 +56,21 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			$this->setViewContent( $this->getForm()->view() );
 
 		//	self::v( $_POST );
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			if( empty( $values['profile_url'] ) )
-			{
-				$values['display_name'] = $values['display_name'] ? : $this->getGlobalValue( 'display_name' );	
-				$values['email'] = $values['email'] ? : $this->getGlobalValue( 'email' );	
-				$values['website'] = $values['website'] ? : $this->getGlobalValue( 'website' );	
-			}
+            if( ! $values = $this->getForm()->getValues() ){ return false; }
+            $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
+            $values['article_url'] = Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'];
+            $values['url'] = $currentUrl;
+
+
+            $values['display_name'] = $values['display_name'] ? : $this->getGlobalValue( 'display_name' );	
+            $values['email'] = $values['email'] ? : $this->getGlobalValue( 'email' );	
+            $values['website'] = $values['website'] ? : $this->getGlobalValue( 'website' );	
+			
 
             $values['creation_time'] = time();
             $values['parent_comment'] = $_REQUEST['parent_comment'];
 
 			$url = $values['url'] ? : $values['article_url'];
-	//		var_export( $values );
 			
 			if( $values['article_url'] )
 			{
@@ -88,11 +89,8 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			}
             $defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
             $defaultProfile = $defaultProfile['profile_url'];
-        //    var_export( $defaultProfile );
 			$values['profile_url'] = $defaultProfile;
             
-			
-
 			
 			//	Notify Admin
 			$link = '' . Ayoola_Page::getHomePageUrl() . '' . $url;

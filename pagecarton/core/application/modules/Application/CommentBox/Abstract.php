@@ -115,25 +115,16 @@ class Application_CommentBox_Abstract extends PageCarton_Widget
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->placeholderInPlaceOfLabel = false;
 
-    //      var_export( Ayoola_Application::getUrlPrefix() );
         $fieldset->addElement( array( 'name' => 'comment', 'style' => '', 'label' => '', 'placeholder' => 'Add a comment', 'type' => 'TextArea', 'value' => @$values['comment'] ) ); 
-//$fieldset->addFilter( 'directory','Username' );
         $fieldset->addRequirement( 'comment', array( 'NotEmpty' => array( 'badnews' => 'Comment cannot be left blank.', ),'WordCount' => array( 2, 1000 ), ) );
-        $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
-//         var_export( $currentUrl );
-        $fieldset->addElement( array( 'name' => 'url', 'type' => 'Hidden', 'value' => $currentUrl ) );
-        $articleUrl = Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'];
-        $fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden', 'value' => $articleUrl ) ); 
         
 		$fieldset->addLegend( $legend );
 		$fieldset->addFilters( 'StripTags::Trim' );
 		$form->addFieldset( $fieldset ); 
 
         $access = new Ayoola_Access();
-//        var_export( $this->getGlobalValue( 'display_name' ) );
         $defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
         $defaultProfile = $defaultProfile['profile_url'];
-    //    var_export( $defaultProfile );
         
         if( ! $defaultProfile && ( ! $this->getGlobalValue( 'display_name' ) || ! $this->getGlobalValue( 'email' ) || ! $this->getGlobalValue( 'website' ) ) )
         {

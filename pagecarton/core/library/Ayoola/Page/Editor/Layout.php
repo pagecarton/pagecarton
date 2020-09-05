@@ -1105,7 +1105,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
             //	if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  
             if( $dataToSave != $previousData )
             {
-                $rPaths['data-backup'] ? Ayoola_File::putContents( $rPaths['data-backup'], $currentData ) : null;
+                $rPaths['data-backup'] ? Ayoola_File::putContents( $rPaths['data-backup'], $dataToSave ) : null;
             }
 			
 

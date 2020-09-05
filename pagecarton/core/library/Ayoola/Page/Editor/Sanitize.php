@@ -42,7 +42,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
      * 
      * @var array 
      */
-	protected static $defaultPages = array( '/', '/post/view', '/widgets', '/account', '/account/signin', '/404', '/posts', '/search', '/cart', '/profile', );
+	public static $defaultPages = array( '/', '/post/view', '/widgets', '/account', '/account/signin', '/404', '/posts', '/search', '/cart', '/profile', );
 	
     /**
      * Switch whether to update layout on page load

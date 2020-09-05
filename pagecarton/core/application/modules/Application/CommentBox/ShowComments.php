@@ -77,6 +77,7 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
             }
             if( $data = $this->getDbTable()->select( null, $where ) )
             {
+            //    var_export( $data );
                 if( ! $this->getParameter( 'show_all_site_comments' ) )
                 {
                     krsort( $data );
@@ -94,7 +95,7 @@ class Application_CommentBox_ShowComments extends Application_CommentBox_Abstrac
       //      var_export( $this->getDbTable()->select() );
             $filter = new Ayoola_Filter_Time();
         //    $this->_objectTemplateValues = $data
-            $limit = $this->getParameter( 'no_of_post_to_show' ) ? : 10;
+            $limit = $this->getParameter( 'no_of_post_to_show' ) ? : 30;
             $counter = 0;
             $done = array();
             foreach( $data as $each )

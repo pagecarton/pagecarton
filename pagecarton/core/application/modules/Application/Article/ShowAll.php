@@ -797,10 +797,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		if( $howManyPostsToAdd > 20 ) 
 		{
 			$howManyPostsToAdd = 20;
-
 		}
 
-
+        $noOfPosts = count( $values );
+        $howManyPostsToAdd = $howManyPostsToAdd - $noOfPosts;
+        if(  $howManyPostsToAdd < 1 )
+        {
+            $howManyPostsToAdd = 0;
+        }
 		if( $howManyPostsToAdd && empty( $_GET['pc_post_list_id'] ) ) 
 		{ 
 			$myProfileInfo = Application_Profile_Abstract::getMyDefaultProfile();
@@ -847,7 +851,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$item ? array_push( $values, $item ) : null;
 			}
 			while( --$howManyPostsToAdd );
-
 		}
 		$i = 0; //	counter
 		$j = 5; //	5 is our max articles to show
@@ -869,8 +872,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
  		
 		//	Split to chunk\
 		$offset = 0;
+		$realOffset = 0;
 		$offsetDefined = false;
-		if( is_numeric( @$_REQUEST['list_page_number'] ) )
+		if( $this->getParameter( 'list_page_number_offset' ) )
+		{
+			$offset = $this->getParameter( 'list_page_number_offset' );  
+			$offsetDefined = true;
+		}
+		elseif( is_numeric( @$_REQUEST['list_page_number'] ) )
 		{
 			if( self::$_listCounter != intval( @$_REQUEST['list_counter'] ) && empty( $_GET['pc_post_list_id'] ) )
 			{
@@ -882,12 +891,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$offsetDefined = true;
 			}
 		}
-		if( $this->getParameter( 'list_page_number_offset' ) )
-		{
-			$offset = $this->getParameter( 'list_page_number_offset' );  
-			$offsetDefined = true;
-		}
-		
+		$realOffset = $offset;
 		$chunk = array_chunk( $values , $j );
 		if( @$chunk[$offset] )
 		{
@@ -903,11 +907,48 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$values = $chunk;
 			$values = array_pop( $values );
-		}
-		$this->autoLoadNewPosts( $postListId, $offset );
+        }
+        $q = '?';
+        if( $_GET )
+        {
+            $q .= http_build_query( $_GET ) . '&';
+        }
+        $dd = count( $chunk );
+        $maxPbefore = intval( $this->getParameter( 'max_paginator_before' ) ? : 5 );
+        $maxPAfter = intval( $this->getParameter( 'max_paginator_after' ) ? : 5 );
+        $this->_objectTemplateValues['paginator_before'] = array();
+        $this->_objectTemplateValues['paginator_after'] = array();
+
+        $start = $realOffset - $maxPbefore;
+        if( $start < 0 )
+        {
+            $start = 0;
+        } 
+        $end = $realOffset + $maxPAfter + 1;
+        for( $d = $start; $d < $end; $d++ )
+        {
+            if( $d < $realOffset && isset( $chunk[$d] ) )
+            {
+                if( count( $this->_objectTemplateValues['paginator_before'] ) >= $maxPbefore )
+                {
+                    $d = $realOffset;
+                    continue;
+                }
+                $this->_objectTemplateValues['paginator_before'][] = array( 'pagination_url' => '' . $q . 'list_counter=' . self::$_listCounter . '&list_page_number=' . $d, 'pagination_number' => $d + 1 );
+            }
+            elseif( $d > $realOffset && isset( $chunk[$d] ) )
+            {
+                if( count( $this->_objectTemplateValues['paginator_after'] ) >= $maxPAfter )
+                {
+                    break;
+                }
+               $this->_objectTemplateValues['paginator_after'][] = array( 'pagination_url' => '' . $q . 'list_counter=' . self::$_listCounter . '&list_page_number=' . $d, 'pagination_number' => $d + 1 );
+            }
+        }
+        $this->autoLoadNewPosts( $postListId, $offset );
 		if( @$chunk[$offset] )
 		{
-			$nextPageLink = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . @$offset;
+			$nextPageLink = '' . $q . 'list_counter=' . self::$_listCounter . '&list_page_number=' . @$offset;
 			$this->_objectTemplateValues['paginator_next_page'] = $nextPageLink;
 			$this->_objectTemplateValues['paginator_next_page_button'] = '<a class="pc-btn" href="' . $nextPageLink . '"> ' . self::__( 'Next' ) . ' &rarr;</a>';       
 			if( empty( $_GET['pc_post_list_autoload'] ) && $this->getParameter( 'pagination' ) && ! $this->getParameter( 'hide_pagination_buttons' ) )
@@ -917,17 +958,18 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		if( @$chunk[( @$offset - 2 )] )
 		{
-            $this->_objectTemplateValues['paginator_previous_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . ( @$offset - 2 );
+            $this->_objectTemplateValues['paginator_previous_page'] = '' . $q . 'list_counter=' . self::$_listCounter . '&list_page_number=' . ( @$offset - 2 );
 			$this->_objectTemplateValues['paginator_previous_page_button'] = '<a class="pc-btn" href="' . $this->_objectTemplateValues['paginator_previous_page'] . '">&larr; ' . self::__( 'Previous' ) . '</a>';
 		}
 		if( $offset != 1 )
 		{
-			$this->_objectTemplateValues['paginator_first_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=0';
+			$this->_objectTemplateValues['paginator_first_page'] = '' . $q . 'list_counter=' . self::$_listCounter . '&list_page_number=0';
 		}
 		if( $offset != ( @count( $chunk ) ) )
 		{
-			$this->_objectTemplateValues['paginator_last_page'] = '?&list_counter=' . self::$_listCounter . '&list_page_number=' . ( @count( $chunk ) - 1 );
+			$this->_objectTemplateValues['paginator_last_page'] = '' . $q . 'list_counter=' . self::$_listCounter . '&list_page_number=' . ( @count( $chunk ) - 1 );
 		}
+		$this->_objectTemplateValues['paginator_current_page_number'] = $realOffset + 1;
 		$this->_objectTemplateValues['paginator_last_page_number'] = ( @count( $chunk ) );
 		$this->_objectTemplateValues = $this->_objectTemplateValues ? : array();
 
@@ -946,6 +988,29 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$values = $values ? array_unique( $values, SORT_REGULAR ) : array(); 
         $singlePostPaginationInfo = array();
         $timeFilter = new Ayoola_Filter_Time();
+
+        $wellDefinedPostTheme = false;
+        if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false && strpos( $this->_parameter['markup_template'], '<!--{{{0}}}' ) === false )  
+        {
+
+        }
+        else
+        {
+            $wellDefinedPostTheme = true;
+        }
+        if( $this->_parameter['markup_template'] && empty( $wellDefinedPostTheme ) )  
+        {
+            $postThemeInfo = Ayoola_Abstract_Playable::getPostTheme( $this->_parameter['markup_template'] );
+            if( stripos( $this->_parameter['markup_template'], $postThemeInfo['start'] ) === false )
+            {
+                
+            }
+            else
+            {
+                $wellDefinedPostTheme = true;
+            }
+        }
+
 		while( $values )
 		{
 			if( $i >= $j )
@@ -1004,7 +1069,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             $data['document_url_photoviewer'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
 			if( @$data['document_url'][0] === '/' AND $fileP = Ayoola_Doc::uriToPath( $data['document_url'] ) )
 			{
-				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?&url=' . @$data['document_url'] . '&document_time=' . @filemtime( $fileP ) . ''; 
+				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?url=' . @$data['document_url'] . '&document_time=' . @filemtime( $fileP ) . ''; 
 				$data['document_url_cropped'] = $data['document_url_no_resize'] . '&max_width=' . $maxWith . '&max_height=' . $maxHeight . ''; 
 			}
 			elseif( strpos( @$data['document_url'], '//' ) === false && empty( $data['not_real_post'] ) )
@@ -1292,7 +1357,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			//	compatibility
 			$data['category_id'] = $categoryTextRaw;
-			if( $this->getParameter( 'markup_template' ) )
+			if( $this->getParameter( 'markup_template' ) && empty( $wellDefinedPostTheme ) )
 			{
                 $templateToUse = null;
                 if( ! $this->getParameter( 'max_group_no' ) )
@@ -1375,31 +1440,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_parameter['markup_template_prepend'] = null;  
         }	
         
-        $noPostTheme = false;
-        if( strpos( $this->_parameter['markup_template'], '}}}{{{0}}}' ) === false && strpos( $this->_parameter['markup_template'], '<!--{{{0}}}' ) === false )  
-        {
-
-        }
-        else
-        {
-            $noPostTheme = true;
-        }
-   //     var_export( $this->_parameter['markup_template'] );
-   //     var_export( $noPostTheme );
-        if( $this->_parameter['markup_template'] && empty( $noPostTheme ) )  
-        {
-            $postThemeInfo = Ayoola_Abstract_Playable::getPostTheme( $this->_parameter['markup_template'] );
-         //   var_export( $postThemeInfo );
-            if( stripos( $this->_parameter['markup_template'], $postThemeInfo['start'] ) === false )
-            {
-                
-            }
-            else
-            {
-                $noPostTheme = true;
-            }
-        }
-		if( empty( $noPostTheme ) )  
+		if( empty( $wellDefinedPostTheme ) )  
 		{
         
 			//	update the markup template

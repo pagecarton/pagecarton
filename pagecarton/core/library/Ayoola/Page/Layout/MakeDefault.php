@@ -30,7 +30,7 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
      * Performs the whole widget running process
      * 
      */
-	public function this( $themeName )
+	public static function this( $themeName )
     {    
 		try
 		{ 
@@ -49,12 +49,12 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
             //  some pages were not working fine after this
             Application_Cache_Clear::viewInLine();
              // end of widget process
+             return true;
           
 		}  
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent(  '' . self::__( 'Theres an error in the code' ) . '', true  ); 
             return false; 
         }
 	}
@@ -78,7 +78,6 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
             if( ! self::this( $data['layout_name'] ) )
             {
                 $this->setViewContent( self::__( '<p class="badnews">An error was encountered while changing the theme.</p>' ) ); 
-                $this->setViewContent( $each->view() ); 
                 return false;
             }
             $this->setViewContent(  '' . self::__( '<p class="goodnews">Theme successfully set as main site theme. <a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/PageCarton_NewSiteWizard">New Website Wizard</a></p>' ) . '', true  );   

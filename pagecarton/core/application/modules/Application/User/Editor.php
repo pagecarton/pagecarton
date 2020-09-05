@@ -168,15 +168,7 @@ class Application_User_Editor extends Application_User_Abstract
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 		if( ! $data = self::getIdentifierData() ){ return false; }
 		
-	//	var_export( $values['password'] );
-	//	return;
-	//	var_export( $this->getIdentifier() );
-/* 		if( ! $this->getDbTable()->update( $values, $this->getIdentifier() ) )
-		{
-			$this->getForm()->setBadnews( 'System error from - ' . $this->getObjectName() );
-			return false;
-		}
- */		$this->_otherTables = array_combine( array_values( $this->_otherTables ), $this->_otherTables ); 
+		$this->_otherTables = array_combine( array_values( $this->_otherTables ), $this->_otherTables ); 
 		if( ! $values['password'] ){ unset( $this->_otherTables['UserPassword'] ); }
 		else
 		{
@@ -186,9 +178,8 @@ class Application_User_Editor extends Application_User_Abstract
 		
 		}
 		unset( $this->_otherTables['UserActivation'] );
-	//	var_export( $values['password'] );
-	//	var_export( $this->_otherTables );
-		$namespace = 'Application_User_';
+
+        $namespace = 'Application_User_';
 		foreach( $this->_otherTables as $each )
 		{
 			$table = $namespace . $each;

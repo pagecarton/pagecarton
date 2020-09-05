@@ -141,8 +141,17 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
      * @param int $key
      * @return string 
      */
-	public static function getPostTheme( $template, $key = 0 )
+	public static function getPostTheme( $template, $key = 0, $namespace = null )
     {
+        
+        if( ! is_numeric( $key ) && empty( $namespace ) && $key !== null )
+        {
+            $namespace = $key;
+        }
+        if( $namespace )
+        {
+            $namespace .= '-'; 
+        }
         $startText = '<!--{{{' . $key . '}}}';
         $endText = '{{{' . $key . '}}}-->';
         if( strpos( $template, $startText ) === false )
@@ -151,12 +160,12 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
             $endText = '</data-' . $key . '>';
             if( strpos( $template, $startText ) === false )
             {
-                $startText = '<repeat>';
-                $endText = '</repeat>';
+                $startText = '<' . $namespace . 'repeat>';
+                $endText = '</' . $namespace . 'repeat>';
                 if( strpos( $template, $startText ) === false && $key !== 0 )
                 {
-                    $startText = '<!--{{{0}}}';
-                    $endText = '{{{0}}}-->';
+                    $startText = '<!--{{{' . $namespace . '0}}}';
+                    $endText = '{{{' . $namespace . '0}}}-->';
                 }    
             }    
         }
@@ -174,35 +183,42 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
     {
 		$search = array();
 		$replace = array();
-		$values['placeholder_prefix'] = @$values['placeholder_prefix'] ? : '@@@';      
-		$values['placeholder_suffix'] = @$values['placeholder_suffix'] ? : '@@@';
 		$defaultSearch = array();
 		$defaultSearch['pc_domain'] = $defaultSearch['pc_domain'] = Ayoola_Page::getDefaultDomain();
 		$defaultSearch['pc_url_prefix'] = Ayoola_Application::getUrlPrefix();
+		$defaultSearch['placeholder_prefix'] = @$values['placeholder_prefix'] ? : '@@@';
+		$defaultSearch['placeholder_suffix'] = @$values['placeholder_suffix'] ? : '@@@';
 		$defaultSearch['pc_background_color'] = Application_Settings_Abstract::getSettings( 'Page', 'background_color' ) ? : '#333333';
         $defaultSearch['pc_font_color'] = Application_Settings_Abstract::getSettings( 'Page', 'font_color' ) ? : '#cccccc';
+        //  comment some content till real output
+        $defaultSearch['<!--//'] = '';
+        $defaultSearch['//-->'] = '';
+        $defaultSearch['<repeat>'] = '';
+        $defaultSearch['</repeat>'] = '';
 		$values = $values + $defaultSearch;
         $replaceInternally = false;
         $iTemplate = null;
         $postTheme = null;
 		foreach( $values as $key => $value )
 		{
-			if( ! is_array( $value ) )
+			if( ! is_array( $value ) && stripos( $template, $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] ) )
 			{
 				$search[] = $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
 				@$values['pc_no_data_filter'] ? : self::filterReplacement( $value, $key );
-				$replace[] = $value;	
+                $replace[] = $value;	
+            //    var_export( $key );
+            //    var_export( $value );
 			}
 			elseif( is_array( $value ) )
 			{
-				if( empty( $postTheme ) )
+				if( empty( $postTheme ) && is_numeric( $key ) )
 				{
                     $postKey = null;
                     if( ! is_numeric( $key ) )
                     {
                         $postKey = $key;
                     }
-                    $postThemeInfo = self::getPostTheme( $template, $postKey );
+                    $postThemeInfo = self::getPostTheme( $template, $postKey, $values['pc_replace_namespace'] );
                     if( stripos( $template, $postThemeInfo['start'] ) !== false )
                     {
                         $postTheme = $postThemeInfo['theme'];
@@ -213,7 +229,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                         $replace[] = '';          
                         $search[] = $postThemeInfo['end'];
                         $replace[] = '';          
-                        if( ! empty( $postKey ) )
+                        if( ! empty( $postKey ) && count(array_filter(array_keys($value), 'is_string')) > 0 )
                         {
                            $func = __METHOD__;
                             $taggedPostThemeY = $func( $postTheme, $value + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) ); 
@@ -234,8 +250,41 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                         }
                     }
 
-				}
-					
+                }
+            //    var_export( $value ) ;
+                $postThemeInfo = self::getPostTheme( $template, $key, $values['pc_replace_namespace'] );
+                $func = __METHOD__;
+            //    var_export( count(array_filter(array_keys($value), 'is_string')) > 0 ) ;
+
+                if( stripos( $template, $postThemeInfo['start'] ) !== false )
+                {
+                    $taggedPostThemeXxx = $postThemeInfo['start'] . $postThemeInfo['theme'] . $postThemeInfo['end'];
+                    if( ! is_numeric( $key ) && ! count(array_filter(array_keys($value), 'is_string')) > 0 && ! count(array_filter(array_values($value), 'is_array')) > 0 )
+                    {
+                        foreach( $value as $eKey => $eValue )
+                        {
+                            $value[$eKey] = array( $key => $eValue );
+                        } 
+                        $value['pc_replace_namespace'] = $key;
+                    }
+                    elseif( is_numeric( $key ) && count(array_filter(array_keys($value), 'is_string')) > 0 )
+                    {
+                     //   var_export( $key ) ;
+                      //  var_export( $value ) ;
+                    }
+                    elseif( ! is_numeric( $key ) )
+                    {
+                        $value['pc_replace_namespace'] = $key;
+                    }
+                    $taggedPostThemeYyy = $func( $postThemeInfo['theme'], $value + $defaultSearch );   
+                    $template = str_replace( $taggedPostThemeXxx, $taggedPostThemeYyy, $template );
+                    continue;
+                }
+                elseif( ! is_numeric( $key ) )
+                {
+                   continue;
+                }
+  
 				//	CLEAR HTML comments like <!--{{{0}}} {{{0}}}-->
 				$search[] = '<!--' . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] . '';
 				$replace[] = '';  
@@ -250,26 +299,49 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 				$iReplace = array();
 				$jSearch = array();
 				$jReplace = array();
-
+                $taggedPostThemeYy = null;
+                $numberedPostTheme = null;
                 foreach( $value as $eachKey => $eachValue )
 				{
 					@$values['pc_no_data_filter'] ? : self::filterReplacement( $eachValue, $eachKey );
 					if( is_array( $eachValue ) )
 					{
-                        $postThemeInfo = self::getPostTheme( $template, $eachKey );
-                        if( stripos( $template, $postThemeInfo['start'] ) !== false )
+                        $postThemeInfo = self::getPostTheme( $template, $eachKey, $values['pc_replace_namespace'] );
+                        $templateToUse = $template;
+                        if( stripos( $template, $postThemeInfo['start'] ) === false  )
+                        {
+                            $postThemeInfo = self::getPostTheme( $postTheme, $eachKey, $values['pc_replace_namespace'] );
+                            if( stripos( $postTheme, $postThemeInfo['start'] ) !== false  )
+                            {
+                                $templateToUse = $postTheme;
+                                $numberedPostTheme = $postTheme;
+                            //    var_export( $eachKey );
+                            //    var_export( $eachValue );
+                            }
+                        }
+
+                        
+                        if( stripos( $template, $postThemeInfo['start'] ) !== false && count(array_filter(array_keys($eachValue), 'is_string')) > 0 )
                         {
                             $func = __METHOD__;
-                            $taggedPostThemeX = $postThemeInfo['start'] . $postTheme . $postThemeInfo['end'];
-                            $taggedPostThemeY = $func( $postThemeInfo['theme'], $eachValue );   
-                            $template = str_replace( $taggedPostThemeX, $taggedPostThemeY, $template );
-
+                            $taggedPostThemeXx = $postThemeInfo['start'] . $postThemeInfo['theme'] . $postThemeInfo['end'];
+                            $taggedPostThemeYy = $func( $postThemeInfo['theme'], $eachValue + $defaultSearch );   
+                            $template = str_replace( $taggedPostThemeXx, $taggedPostThemeYy, $template );
                         }
-                        else
+                        elseif( stripos( $template, $values['placeholder_prefix'] . $eachKey ) !== false )
                         {
                             foreach( $eachValue as $vKey => $eachValueV )
                             {
-                                if( $replaceInternally & is_numeric( $key ) )
+                                if( ! is_scalar( $eachValueV ) )
+                                {
+                                    continue; 
+                                }
+                                if( stripos( $template, $postThemeInfo['start'] ) !== false )
+                                {
+                                    $taggedPostThemeXx = $postThemeInfo['start'] . $postThemeInfo['theme'] . $postThemeInfo['end'];
+                                    $taggedPostThemeYy .= str_replace( $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'], $eachValueV , $postThemeInfo['theme'] );   
+                                }
+                                elseif( $replaceInternally & is_numeric( $key )  )
                                 {
                                     $iSearch[] = $values['placeholder_prefix'] . $eachKey . '_' . $vKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . '0' . $values['placeholder_suffix'];
                                     @$values['pc_no_data_filter'] ? : self::filterReplacement( $eachValueV );
@@ -278,38 +350,86 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                                 else
                                 {
                                     $jSearch[] = $values['placeholder_prefix'] . $eachKey . '_' . $vKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
-                                    $jReplace[] = $eachValue;  	
+                                    $jReplace[] = $eachValueV;  	
                                 }    
                             }
-                            }    
+                            if( $taggedPostThemeYy )
+                            {
+                                $template = str_replace( $taggedPostThemeXx, $taggedPostThemeYy, $template );
+                            }
+
+                        }    
+                        elseif( stripos( $numberedPostTheme, $values['placeholder_prefix'] . $eachKey ) !== false )
+                        {
+                            foreach( $eachValue as $vKey => $eachValueV )
+                            {
+                                if( ! is_scalar( $eachValueV ) )
+                                {
+                                    continue; 
+                                }
+                             //   var_export( $eachKey );
+                              //  var_export( $eachValueV );
+                                if( stripos( $numberedPostTheme, $postThemeInfo['start'] ) !== false )
+                                {
+                                    $taggedPostThemeXx = $postThemeInfo['start'] . $postThemeInfo['theme'] . $postThemeInfo['end'];
+                                    $taggedPostThemeYy .= str_replace( $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'], $eachValueV , $postThemeInfo['theme'] );   
+                                }
+                                elseif( $replaceInternally & is_numeric( $key )  )
+                                {
+                                    $iSearch[] = $values['placeholder_prefix'] . $eachKey . '_' . $vKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . '0' . $values['placeholder_suffix'];
+                                    @$values['pc_no_data_filter'] ? : self::filterReplacement( $eachValueV );
+                                    $iReplace[] = $eachValueV; 
+                                }
+                                else
+                                {
+                                    $jSearch[] = $values['placeholder_prefix'] . $eachKey . '_' . $vKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
+                                    $jReplace[] = $eachValueV;  	
+                                }    
+                            }
+                            if( $taggedPostThemeYy )
+                            {
+                                $numberedPostTheme = str_replace( $taggedPostThemeXx, $taggedPostThemeYy, $numberedPostTheme );
+                            }
+
+                        }    
 					}
 					else
 					{
+    
 						//	placeholder now {{{key}}}{{{0}}}
 					    //	if( $replaceInternally & $key > 0 )
 						//	skipping index 0 makes the first on the list be info about current post on the page
-						if( $replaceInternally & is_numeric( $key ) )
+						if( $replaceInternally & is_numeric( $key ) && $eachKey && stripos( $postTheme, $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] ) )
 						{
-
-							$iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . '0' . $values['placeholder_suffix'];
-							$iReplace[] = $eachValue;  
-							$iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'];
-							$iReplace[] = $eachValue; 
+                            if( stripos( $postTheme, $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . '0' . $values['placeholder_suffix'] ) !== false )
+                            {
+                                $iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . '0' . $values['placeholder_suffix'];
+                                $iReplace[] = $eachValue;  
+                            }
+                            if( stripos( $postTheme, $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] ) !== false )
+                            {
+                                $iSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'];
+                                $iReplace[] = $eachValue; 
+                            }
 
 						}  
-						else
+                        elseif( @$replaceInternally & ! is_numeric( $key ) && stripos( $postThemeInfo['theme'], $values['placeholder_prefix'] . $key ) !== false )
+                        {
+                               $iTemplate .= str_replace( $values['placeholder_prefix'] . $key . $values['placeholder_suffix'], $eachValue , $postThemeInfo['theme'] );   
+                        }
+						elseif( stripos( $template, $values['placeholder_prefix'] . $eachKey ) !== false )
 						{
-                            $jSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
+                           $jSearch[] = $values['placeholder_prefix'] . $eachKey . $values['placeholder_suffix'] . $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
                             $jReplace[] = $eachValue;  	
                             
                             //  This kind of replacement are not able to use shorthand {{{field}}}
                             //  Because all template is tested as one and 
                             //  this may cause only the first item only to be used in all
 
-						}
+                        }
 					}
  				}
-				if( @$replaceInternally && $iSearch )
+                if( @$replaceInternally && $iSearch )
 				{
 					foreach( $defaultSearch as $ckey => $cccc )
 					{
@@ -317,7 +437,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 						@$values['pc_no_data_filter'] ? : self::filterReplacement( $cccc );
 						$iReplace[] = $cccc;
 					}
-                    $iData = @str_replace( $iSearch, $iReplace, $postTheme );
+                    $iData = @str_replace( $iSearch, $iReplace, $numberedPostTheme ? : $postTheme );
 					$iTemplate .= $iData;  
 
 					//	deal with {{{pc_post_item_1}}}
@@ -332,7 +452,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 
 					}
 					else
-					{
+					{    
 						$template = str_replace( $jSearch, $jReplace, $template );    
 					}
 				}
@@ -341,23 +461,21 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		}
 		foreach( $defaultSearch as $ckey => $cccc )
 		{
-			$search[] = $values['placeholder_prefix'] . $ckey . $values['placeholder_suffix'];
-			@$values['pc_no_data_filter'] ? : self::filterReplacement( $cccc );
-			$replace[] = $cccc;
+            if( stripos( $template, $values['placeholder_prefix'] . $ckey ) !== false )
+            {
+                $search[] = $values['placeholder_prefix'] . $ckey . $values['placeholder_suffix'];
+                @$values['pc_no_data_filter'] ? : self::filterReplacement( $cccc );
+                $replace[] = $cccc;
+            }
 		}
 		$search[] = $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'];
-        $replace[] = @$iTemplate;  
-        
-        //  comment some content till real output
-        $search[] = '<!--//';
-        $replace[] = '';  
-        $search[] = '//-->';
-        $replace[] = '';  
+        $replace[] = @$iTemplate;
 		$template = @str_replace( $search, $replace, $template );  
 		$search = array();
 		$search[] = '/' . $values['placeholder_prefix'] . '([\w+]+)' . $values['placeholder_suffix'] . '/';
         $search[] = '/<!--([.]+)-->/';    
-		@$template = preg_replace( $search, '', $template );
+        @$template = preg_replace( $search, '', $template );
+    //    var_export( $template );
 		return $template;
     } 
 

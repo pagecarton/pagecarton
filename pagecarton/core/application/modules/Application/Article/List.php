@@ -76,8 +76,7 @@ class Application_Article_List extends Application_Article_ShowAll
 										'Type' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_List/\' );" title="">Post Types</a>',
 										'Category' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_List/\' );" title="">Categories</a>',
 										'Profiles' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_List/\' );" title="">User Profiles</a>',
-										'Styles' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Template_List/\' );" title="">Post Display Styles</a>',
-							//			'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_New/\' );" title="">Create new post</a>' 
+										'Styles' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Template_List/\' );" title="">Post Display Templates</a>',
 									) 
 							);
 		$this->setIdColumn( 'article_url' );
@@ -85,11 +84,11 @@ class Application_Article_List extends Application_Article_ShowAll
 		$list->setNoRecordMessage( 'You have not writen any post yet' );
 		$list->createList(  
 			array(
-				'title' => array( 'field' => 'article_title', 'value' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '%KEY%">Preview</a>' ), 
+				'title' => array( 'field' => 'article_title', 'value' => '%FIELD% <a style="font-size:smaller;" href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '%KEY%\', \'' . $this->getObjectName() . '\' ) " >Preview</a>' ), 
 				'type' => array( 'field' => 'article_type', 'value' => '%FIELD%' ), 
 				'by' => array( 'field' => 'username', 'value' => '%FIELD%' ),   
-				array( 'field' => 'article_title', 'value' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' ), 
-				'<a title="Delete" rel="shadowbox;height=300px;width=300px;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
+				array( 'field' => 'article_title', 'value' => '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' ) "><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' ), 
+				'<a title="Delete"  href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' ) "><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

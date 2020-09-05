@@ -46,7 +46,7 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 
                 // sanitize so it could refresh with latest template
                 //	create this page if not available.
-                $sanitizeClass->refresh( $page );	     		
+                //    $sanitizeClass->refresh( $page );	     		
 			}
 			catch( Exception $e )
 			{

@@ -333,18 +333,19 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         //  Bring in included files
         if( $this->getParameter( 'includes' ) )
         {
-        //    var_export( $this->getParameter( 'includes' ) );
             foreach( $this->getParameter( 'includes' ) as $file => $placeholder )
             {
 
                 $path = Ayoola_Doc::getDocumentsDirectory() . $file . '.html';
                 if( ! is_file( $path ) )
                 {
-                    continue;
+                    if( ! $path = Ayoola_Loader::getFullPath( 'documents' . $file . '.html' ) )
+                    {
+                        continue;
+                    }
                 }
                 $html = file_get_contents( $path );
                 $prefix = dirname( $file );
-            //    var_export( $prefix );
                 Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $html, $prefix );
                 $html = preg_replace(';(href)[\s]*=[\s]*(["\'])' . $prefix . '([^.]*)\.html(?:["\'\.]);i', '$1=$2$3$2', $html ); 
 
