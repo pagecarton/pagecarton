@@ -35,18 +35,15 @@ pagecarton/temp/*
 
 # cache
 pagecarton/backups/*
-pagecarton/core/application/documents/layout/*/theme/data-backup/*
 pagecarton/*.tmp
 pagecarton/*.gz
 pagecarton/*.zip
 pagecarton/*.backup
 pagecarton/*.malformed.xml
 
-#
+#   databases
 pagecarton/core/application/databases/Application/Log/View/*
 pagecarton/core/application/databases/PageCarton/Cron/Run/*
-pagecarton/core/application/pages/data-backup/*
-pagecarton/core/application/sub_domain/*
 pagecarton/core/application/databases/Ayoola/Access/localuser.xml
 pagecarton/core/application/databases/PageCarton/MultiSite/*
 pagecarton/core/application/databases/PageCarton/MultiSite/table.xml
@@ -55,6 +52,7 @@ pagecarton/core/application/databases/PageCarton/MultiSite/*
 # When developing locally, do not include the automatically created site folders
 pagecarton/sites
 pagecarton/temp
+pagecarton/core/application/sub_domain/*
 
 #exclude pagecarton.json to make it safe for collaboration
 pagecarton/core/local_html/pagecarton.json
@@ -62,4 +60,8 @@ pagecarton/core/application/databases/Application/settings.xml
 pagecarton/core/application/databases/Application/notification.xml
 pagecarton/core/application/databases/Ayoola/Object/__/pagewidget/
 pagecarton/core/application/databases/Ayoola/Object/pagewidget.xml
+
+# page and template data backups
+pagecarton/core/application/pages/data-backup/*
 pagecarton/core/application/documents/layout/*/theme/*/data-backup/
+pagecarton/core/application/documents/layout/*/theme/data-backup/*
