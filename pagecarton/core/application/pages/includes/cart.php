@@ -9,17 +9,17 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: cart.php	Saturday 14th of December 2019 09:18:34 AM	ayoola@ayoo.la $ 
+* @version $Id: cart.php	Saturday 5th of September 2020 11:06:29 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_f80a10b51087fc6feb948b6ff548fdd9 = new Ayoola_Page_Editor_Text( array (
+$_72695e711f8fb6fd27ff426f3d8c5bbd = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h1>Shopping Cart</h1>
 ',
-  'url_prefix' => '/x/index.php',
+  'url_prefix' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -28,20 +28,22 @@ $_f80a10b51087fc6feb948b6ff548fdd9 = new Ayoola_Page_Editor_Text( array (
   'insert_id' => '1566242672-0-18',
   'pagewidget_id' => '1575534209-0-4',
   '' => '',
+  'content' => '<h1>Shopping Cart</h1>
+',
 ) );
 
 							}
 							else
 							{
 								
-$_f80a10b51087fc6feb948b6ff548fdd9 = null;
+$_72695e711f8fb6fd27ff426f3d8c5bbd = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Application_Subscription_Cart' ) )
 							{
 								
-$_09b24ebc8e2e2fcd26f9cdae5eba313c = new Application_Subscription_Cart( array (
+$_935dd3d6e0cc85fee8b541146ed7fa22 = new Application_Subscription_Cart( array (
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -58,17 +60,17 @@ $_09b24ebc8e2e2fcd26f9cdae5eba313c = new Application_Subscription_Cart( array (
 							else
 							{
 								
-$_09b24ebc8e2e2fcd26f9cdae5eba313c = null;
+$_935dd3d6e0cc85fee8b541146ed7fa22 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_1aac9a93ab20446fbf67f4b97f105eeb = new Ayoola_Page_Editor_Text( array (
+$_eeb501f955d5c45e95ed4e97f4c7d442 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h2>Checkout</h2>
 ',
-  'url_prefix' => '/x/index.php',
+  'url_prefix' => '',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -77,20 +79,22 @@ $_1aac9a93ab20446fbf67f4b97f105eeb = new Ayoola_Page_Editor_Text( array (
   'insert_id' => '1566242672-0-20',
   'pagewidget_id' => '1575534209-0-6',
   '' => '',
+  'content' => '<h2>Checkout</h2>
+',
 ) );
 
 							}
 							else
 							{
 								
-$_1aac9a93ab20446fbf67f4b97f105eeb = null;
+$_eeb501f955d5c45e95ed4e97f4c7d442 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_b44a4f9bffd776c901a78926b23fa26f = new Ayoola_Object_Embed( array (
+$_7ed276139802b774216170fc44b3858f = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Subscription_Checkout',
   'advanced_parameter_value' => 
   array (
@@ -106,7 +110,7 @@ $_b44a4f9bffd776c901a78926b23fa26f = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_b44a4f9bffd776c901a78926b23fa26f = null;
+$_7ed276139802b774216170fc44b3858f = null;
 
 							}
 							

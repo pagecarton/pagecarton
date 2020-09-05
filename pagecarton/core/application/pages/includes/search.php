@@ -9,35 +9,35 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: search.php	Saturday 14th of December 2019 09:18:44 AM	ayoola@ayoo.la $ 
+* @version $Id: search.php	Saturday 5th of September 2020 11:06:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_c896bfa2e89afa88b6b57d529f18bc56 = new Ayoola_Page_Editor_Text( array (
+$_e90c57a46504076dd6f4c11db23dd9c0 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div class="container">
-<p><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span></p>
+<p><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span>&nbsp;</p>
 
 <p>You searched for</p>
 
 <h1>{{{q}}}</h1>
 
-<div></div>
+<div>&nbsp;</div>
 
-<div>&nbsp;Here are the top results:<span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span></div><div><br></div>
+<div>&nbsp;Here are the top results:<span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span></div><div><br></div>
 </div>',
   'preserved_content' => '<div class="container">
-<p><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span></p>
+<p><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span>&nbsp;</p>
 
 <p>You searched for</p>
 
 <h1>{{{q}}}</h1>
 
-<div></div>
+<div>&nbsp;</div>
 
-<div>&nbsp;Here are the top results:<span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span></div><div><br></div>
+<div>&nbsp;Here are the top results:<span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span></div><div><br></div>
 </div>',
   'url_prefix' => '',
   'widget_options' => 
@@ -60,20 +60,31 @@ $_c896bfa2e89afa88b6b57d529f18bc56 = new Ayoola_Page_Editor_Text( array (
   'wrapper_name' => 'dark',
   'include_request[0]' => '1',
   'required_template_variables[0]' => 'q',
+  'content' => '<div class="container">
+<p><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span>&nbsp;</p>
+
+<p>You searched for</p>
+
+<h1>{{{q}}}</h1>
+
+<div>&nbsp;</div>
+
+<div>&nbsp;Here are the top results:<span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span></div><div><br></div>
+</div>',
 ) );
 
 							}
 							else
 							{
 								
-$_c896bfa2e89afa88b6b57d529f18bc56 = null;
+$_e90c57a46504076dd6f4c11db23dd9c0 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_93035f8777828a3b63a02387f4a4d611 = new Ayoola_Object_Embed( array (
+$_5fcc604b55cca1d4c9405badf0bb4939 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_SearchBox',
   'pagewidget_id' => '1575534208-0-1',
   'advanced_parameter_value' => 
@@ -87,14 +98,14 @@ $_93035f8777828a3b63a02387f4a4d611 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_93035f8777828a3b63a02387f4a4d611 = null;
+$_5fcc604b55cca1d4c9405badf0bb4939 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_3759731477ff9af421fb064fec14a266 = new Ayoola_Page_Editor_Text( array (
+$_cf38cfcaaadf4c77fd272763a75d99f0 = new Ayoola_Page_Editor_Text( array (
   'codes' => '<p><a href="{{{post_link}}}"><img alt="" src="{{{document_url_uri}}}?width=100&amp;height=100" style=" border-radius: 50%; float:right;"></a></p>
 
 <h2><a href="{{{post_link}}}">{{{article_title}}}</a></h2>
@@ -103,10 +114,10 @@ $_3759731477ff9af421fb064fec14a266 = new Ayoola_Page_Editor_Text( array (
 
 <i>{{{post_type}}}</i>
 
-<div style="clear:both;"></div>
+<div style="clear:both;">&nbsp;</div>
 
 <hr>
-<p></p>
+<p>&nbsp;</p>
 ',
   'preserved_content' => '',
   'url_prefix' => '',
@@ -133,20 +144,33 @@ $_3759731477ff9af421fb064fec14a266 = new Ayoola_Page_Editor_Text( array (
   'inverse_order[0]' => '1',
   'pagination' => '1',
   'no_of_post_to_show[0]' => '12',
+  'content' => '<p><a href="{{{post_link}}}"><img alt="" src="{{{document_url_uri}}}?width=100&amp;height=100" style=" border-radius: 50%; float:right;"></a></p>
+
+<h2><a href="{{{post_link}}}">{{{article_title}}}</a></h2>
+
+<p>{{{article_description}}}</p>
+
+<i>{{{post_type}}}</i>
+
+<div style="clear:both;">&nbsp;</div>
+
+<hr>
+<p>&nbsp;</p>
+',
 ) );
 
 							}
 							else
 							{
 								
-$_3759731477ff9af421fb064fec14a266 = null;
+$_cf38cfcaaadf4c77fd272763a75d99f0 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_d00718071d6f0ef7f2736c1f206bffea = new Ayoola_Page_Editor_Text( array (
+$_b32defe207938e4e6b3ceb85189d7562 = new Ayoola_Page_Editor_Text( array (
   'codes' => '<h3>Recent Searches</h3>
 <ul class="pc_same_height_container">
 <!--{{{0}}}
@@ -167,13 +191,19 @@ $_d00718071d6f0ef7f2736c1f206bffea = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'Application_SearchBox_Table',
   ),
+  'content' => '<h3>Recent Searches</h3>
+<ul class="pc_same_height_container">
+<!--{{{0}}}
+<li><a href="/search?q={{{query}}}">{{{query}}}</a></li>
+{{{0}}}-->
+</ul>	',
 ) );
 
 							}
 							else
 							{
 								
-$_d00718071d6f0ef7f2736c1f206bffea = null;
+$_b32defe207938e4e6b3ceb85189d7562 = null;
 
 							}
 							

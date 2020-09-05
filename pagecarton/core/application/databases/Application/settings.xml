@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="settings" creation_time="1563905853" modified_time="1563905853" table_version="0.0.7" module_version="1.00" table_class="Application_Settings" creation_ip="0">
-  <RECORDS autoId="4">
+  <RECORDS autoId="179">
     <TABLE_ROW ROW_ID="2">
       <TABLE_FIELD FIELD_KEY="settings"><![CDATA[a:2:{s:14:&quot;default_locale&quot;;s:0:&quot;&quot;;s:14:&quot;locale_options&quot;;a:3:{i:0;s:14:&quot;auto_translate&quot;;i:1;s:18:&quot;autosave_new_words&quot;;i:2;s:23:&quot;auto_detect_user_locale&quot;;}}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="data"><![CDATA[{&quot;default_locale&quot;:&quot;&quot;,&quot;locale_options&quot;:[&quot;auto_translate&quot;,&quot;autosave_new_words&quot;,&quot;auto_detect_user_locale&quot;]}]]></TABLE_FIELD>

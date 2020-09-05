@@ -9,14 +9,14 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: posts.php	Saturday 14th of December 2019 09:18:37 AM	ayoola@ayoo.la $ 
+* @version $Id: posts.php	Saturday 5th of September 2020 11:06:22 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_b4e2bca575bd6d3aefe5828c58005eee = new Ayoola_Object_Embed( array (
+$_3656dfc60fdb8b17da2a74e1cdbada81 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_Category_View',
   'category_name' => '',
   'pc_module_url_values_category_offset' => '?',
@@ -38,14 +38,14 @@ $_b4e2bca575bd6d3aefe5828c58005eee = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_b4e2bca575bd6d3aefe5828c58005eee = null;
+$_3656dfc60fdb8b17da2a74e1cdbada81 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_123e4c1aa1e87ec563a666e390ed73dd = new Ayoola_Page_Editor_Text( array (
+$_d137c0781f268d08fc4dd0c4966e1415 = new Ayoola_Page_Editor_Text( array (
   'editable' => '
 			
 			<h3><br></h3><div><br></div>
@@ -53,20 +53,24 @@ $_123e4c1aa1e87ec563a666e390ed73dd = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '1575534206-0-186',
+  'content' => '
+			
+			<h3><br></h3><div><br></div>
+			',
 ) );
 
 							}
 							else
 							{
 								
-$_123e4c1aa1e87ec563a666e390ed73dd = null;
+$_d137c0781f268d08fc4dd0c4966e1415 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
 							{
 								
-$_83486cc88adcfeec8136e8738425fb1b = new Ayoola_Menu( array (
+$_b69721fe0cd7e9b64c6dbac7caf5d0e9 = new Ayoola_Menu( array (
   'option' => 'menu_2',
   'template_name' => 'WhiteSidebarMenu',
   'pagewidget_id' => '1575534206-0-187',
@@ -82,14 +86,14 @@ $_83486cc88adcfeec8136e8738425fb1b = new Ayoola_Menu( array (
 							else
 							{
 								
-$_83486cc88adcfeec8136e8738425fb1b = null;
+$_b69721fe0cd7e9b64c6dbac7caf5d0e9 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
 							{
 								
-$_ffd76c31c4cc225a13d2e6f3435718f6 = new Application_Article_ShowAll( array (
+$_b25448002023eba7e4eb94ab6a3a6603 = new Application_Article_ShowAll( array (
   'option' => '5',
   'category_name' => '',
   'article_types' => '',
@@ -119,7 +123,7 @@ $_ffd76c31c4cc225a13d2e6f3435718f6 = new Application_Article_ShowAll( array (
 							else
 							{
 								
-$_ffd76c31c4cc225a13d2e6f3435718f6 = null;
+$_b25448002023eba7e4eb94ab6a3a6603 = null;
 
 							}
 							

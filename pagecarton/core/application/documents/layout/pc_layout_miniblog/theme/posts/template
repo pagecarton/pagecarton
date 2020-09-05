@@ -5,11 +5,11 @@
 * LICENSE
 *
 * @category PageCarton
-* @package /contact
+* @package /posts
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: contact.php	Saturday 5th of September 2020 11:06:01 PM	ayoola@ayoo.la $ 
+* @version $Id: posts.php	Saturday 5th of September 2020 11:06:04 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -20,12 +20,12 @@
                         if
                         ( 
 
-                            $x_1599347161 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1599347164 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1599347161 )
-                            foreach( $x_1599347161 as $each )
+                            if( $x_1599347164 )
+                            foreach( $x_1599347164 as $each )
                             {	
                                 include_once $each;
                             }
@@ -82,9 +82,9 @@ echo ( ! empty( $_474612ea2c4114e6c4a6f67f7d1d56c3 ) &&  is_object( $_474612ea2c
 
 //pc_body_1 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//pc_body_1 /contact Begins Here
+//pc_body_1 /posts Begins Here
 
-//pc_body_1 /contact Ends Here
+//pc_body_1 /posts Ends Here
 ?>
 
 
@@ -103,9 +103,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
 
 //pc_body_2 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//pc_body_2 /contact Begins Here
+//pc_body_2 /posts Begins Here
 
-//pc_body_2 /contact Ends Here
+//pc_body_2 /posts Ends Here
 ?>
 
 
@@ -119,9 +119,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //oneness /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//oneness /contact Begins Here
+//oneness /posts Begins Here
 
-//oneness /contact Ends Here
+//oneness /posts Ends Here
 ?><section data-pc-all-sections="1" class="container">	
 									<div class="">
 										<div class="row">
@@ -136,9 +136,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //middlebar /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//middlebar /contact Begins Here
+//middlebar /posts Begins Here
 
-//middlebar /contact Ends Here
+//middlebar /posts Ends Here
 ?>
 										   </div>
 										</div> 
@@ -154,9 +154,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //twosome1 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//twosome1 /contact Begins Here
+//twosome1 /posts Begins Here
 
-//twosome1 /contact Ends Here
+//twosome1 /posts Ends Here
 ?>
 											</div>
 											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -170,9 +170,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //twosome2 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//twosome2 /contact Begins Here
+//twosome2 /posts Begins Here
 
-//twosome2 /contact Ends Here
+//twosome2 /posts Ends Here
 ?>
 											</div> 
 										</div> 
@@ -188,9 +188,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //threesome1 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//threesome1 /contact Begins Here
+//threesome1 /posts Begins Here
 
-//threesome1 /contact Ends Here
+//threesome1 /posts Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -204,9 +204,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //threesome2 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//threesome2 /contact Begins Here
+//threesome2 /posts Begins Here
 
-//threesome2 /contact Ends Here
+//threesome2 /posts Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -220,9 +220,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //threesome3 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//threesome3 /contact Begins Here
+//threesome3 /posts Begins Here
 
-//threesome3 /contact Ends Here
+//threesome3 /posts Ends Here
 ?>
 											</div> 
 										</div> 
@@ -238,9 +238,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //foursome1 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//foursome1 /contact Begins Here
+//foursome1 /posts Begins Here
 
-//foursome1 /contact Ends Here
+//foursome1 /posts Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -254,9 +254,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //foursome2 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//foursome2 /contact Begins Here
+//foursome2 /posts Begins Here
 
-//foursome2 /contact Ends Here
+//foursome2 /posts Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
@@ -270,9 +270,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //foursome3 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//foursome3 /contact Begins Here
+//foursome3 /posts Begins Here
 
-//foursome3 /contact Ends Here
+//foursome3 /posts Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
@@ -286,9 +286,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //foursome4 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//foursome4 /contact Begins Here
+//foursome4 /posts Begins Here
 
-//foursome4 /contact Ends Here
+//foursome4 /posts Ends Here
 ?>
 											</div> 
 										</div> 
@@ -304,9 +304,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //leftbar /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//leftbar /contact Begins Here
+//leftbar /posts Begins Here
 
-//leftbar /contact Ends Here
+//leftbar /posts Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -320,9 +320,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //leftbarright /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//leftbarright /contact Begins Here
+//leftbarright /posts Begins Here
 
-//leftbarright /contact Ends Here
+//leftbarright /posts Ends Here
 ?>
 											</div> 
 										</div> 
@@ -338,9 +338,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //rightbarleft /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//rightbarleft /contact Begins Here
+//rightbarleft /posts Begins Here
 
-//rightbarleft /contact Ends Here
+//rightbarleft /posts Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -354,9 +354,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //rightbar /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//rightbar /contact Begins Here
+//rightbar /posts Begins Here
 
-//rightbar /contact Ends Here
+//rightbar /posts Ends Here
 ?>
 											</div>   
 										</div> 
@@ -371,9 +371,9 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //lastoneness /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//lastoneness /contact Begins Here
+//lastoneness /posts Begins Here
 
-//lastoneness /contact Ends Here
+//lastoneness /posts Ends Here
 ?>
 <?php
 //pc_body_3 /layout/pc_layout_miniblog/template Begins Here
@@ -385,11 +385,11 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //pc_body_3 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//pc_body_3 /contact Begins Here
+//pc_body_3 /posts Begins Here
 
-echo ( ! empty( $_025f19284397312ed04a86205f397d9f ) &&  is_object( $_025f19284397312ed04a86205f397d9f ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_025f19284397312ed04a86205f397d9f->view(), '' ) : null );
+echo ( ! empty( $_15bf3081bb0016c6639cdabe4610d211 ) &&  is_object( $_15bf3081bb0016c6639cdabe4610d211 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_15bf3081bb0016c6639cdabe4610d211->view(), '' ) : null );
 
-//pc_body_3 /contact Ends Here
+//pc_body_3 /posts Ends Here
 ?>
 
 
@@ -406,11 +406,11 @@ echo ( ! empty( $_025f19284397312ed04a86205f397d9f ) &&  is_object( $_025f192843
                 
 //pc_body_4 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//pc_body_4 /contact Begins Here
+//pc_body_4 /posts Begins Here
 
-echo ( ! empty( $_b39a8b5303443b07f6c140e3497e64bc ) &&  is_object( $_b39a8b5303443b07f6c140e3497e64bc ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_b39a8b5303443b07f6c140e3497e64bc->view(), '' ) : null );
+echo ( ! empty( $_4a5d5d053d0f41ae64c7b5cb334b00ea ) &&  is_object( $_4a5d5d053d0f41ae64c7b5cb334b00ea ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_4a5d5d053d0f41ae64c7b5cb334b00ea->view(), '' ) : null );
 
-//pc_body_4 /contact Ends Here
+//pc_body_4 /posts Ends Here
 ?>
 
 
@@ -427,9 +427,9 @@ echo ( ! empty( $_b39a8b5303443b07f6c140e3497e64bc ) &&  is_object( $_b39a8b5303
                 
 //pc_body_5 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//pc_body_5 /contact Begins Here
+//pc_body_5 /posts Begins Here
 
-//pc_body_5 /contact Ends Here
+//pc_body_5 /posts Ends Here
 ?>
 
 
@@ -447,9 +447,9 @@ echo ( ! empty( $_b39a8b5303443b07f6c140e3497e64bc ) &&  is_object( $_b39a8b5303
                 
 //pc_body_6 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//pc_body_6 /contact Begins Here
+//pc_body_6 /posts Begins Here
 
-//pc_body_6 /contact Ends Here
+//pc_body_6 /posts Ends Here
 ?>
 
 
@@ -469,9 +469,9 @@ echo ( ! empty( $_2cfd005375ab9fe4addf27e6c57d38eb ) &&  is_object( $_2cfd005375
 
 //pc_body_7 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//pc_body_7 /contact Begins Here
+//pc_body_7 /posts Begins Here
 
-//pc_body_7 /contact Ends Here
+//pc_body_7 /posts Ends Here
 ?>
 
 
@@ -490,9 +490,9 @@ echo ( ! empty( $_2cfd005375ab9fe4addf27e6c57d38eb ) &&  is_object( $_2cfd005375
                 
 //pc_section_after_js /layout/pc_layout_miniblog/template Ends Here
 ?><?php
-//pc_section_after_js /contact Begins Here
+//pc_section_after_js /posts Begins Here
 
-//pc_section_after_js /contact Ends Here
+//pc_section_after_js /posts Ends Here
 ?>
 
 </body>

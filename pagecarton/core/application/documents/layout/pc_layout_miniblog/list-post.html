@@ -1,0 +1,54 @@
+<div class="site-section bg-white">
+    <div class="container">
+        <widget parameters='{ "class": "Application_Article_ShowAll", "add_a_new_post": 9, "length_of_description": 200, "pc_module_url_values_category_offset": 0, "pc_module_url_values_request_fallback": true, "allow_dynamic_category_selection": true }'>
+            <div class="row">
+                <repeat>
+                    <div class="col-lg-4 mb-4">
+                        <div class="entry2">
+                            <a href="{{{post_link}}}"><img
+                                    src="{{{document_url_uri}}}?crop_to_fit_url=/layout/pc_layout_miniblog/images/img_1.jpg"
+                                    alt="Image" class="img-fluid rounded"></a>
+                            <div class="excerpt">
+                                <data-category_name>
+                                    <span class="post-category text-white bg-secondary mb-3">
+                                        {{{category_name}}}
+                                    </span>
+                                </data-category_name>
+
+                                <h2><a href="{{{post_link}}}">{{{article_title}}}</a></h2>
+                                <div class="post-meta align-items-center text-left clearfix">
+                                    <figure class="author-figure mb-0 mr-3 float-left"><img
+                                            src="/layout/pc_layout_miniblog/images/person_1.jpg?embed_image_url={{{display_picture}}}"
+                                            alt="Image" class="img-fluid"></figure><span class="d-inline-block mt-1">By
+                                        <a href="/{{{profile_url}}}">{{{display_name}}}</a></span>
+                                    <span>{{{article_date_M}}} {{{article_date_d}}}, {{{article_date_Y}}}</span>
+                                </div>
+
+                                <p>{{{article_description}}}</p>
+                                <p><a href="{{{post_link}}}">Read More</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </repeat>
+                {{{pc_other_posts_goes_here}}}
+            </div>
+            <div class="row text-center pt-5 border-top">
+                <div class="col-md-12">
+                    <div class="custom-pagination">
+                        <data-paginator_before>
+                            <!--{{{paginator_before-0}}}
+                                <a href="{{{pagination_url}}}">{{{pagination_number}}}</a>
+                            {{{paginator_before-0}}}-->
+                        </data-paginator_before>
+                        <span>{{{paginator_current_page_number}}}</span>
+                        <data-paginator_after>
+                            <!--{{{paginator_after-0}}}
+                                <a href="{{{pagination_url}}}">{{{pagination_number}}}</a>
+                            {{{paginator_after-0}}}-->
+                        </data-paginator_after>
+                    </div>
+                </div>
+            </div>
+        </widget>
+    </div>
+</div>

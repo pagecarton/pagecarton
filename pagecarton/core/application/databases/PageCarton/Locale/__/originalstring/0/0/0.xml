@@ -167,12 +167,12 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="19">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Options]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563977840-0-476]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563977840]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1575068557]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="20">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[ 
@@ -1050,19 +1050,21 @@
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="127">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[NOTE:]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Sanitize&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Sanitize&quot;,&quot;\/category&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905899-0-368]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905899]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1599307781]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="128">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[This process will create a fresh copy of all the pages. A fresh copy of the layout template will be used in generating the new pages. A backup of the application is recommended.]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Sanitize&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Sanitize&quot;,&quot;\/category&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905899-0-367]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905899]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1599307783]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="129">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[You need to select a default page &quot;template&quot; layout. ]]></TABLE_FIELD>
@@ -1836,12 +1838,12 @@ Visit: http://localhost:8888   and please help share!]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="220">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Category]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_SettingsName_List&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Editor&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Page_Layout_MakeDefault&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_SettingsName_List&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Editor&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Page_Layout_MakeDefault&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Creator&quot;,&quot;\/category&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905888-0-275]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905888]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565174080]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="221">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[%s Settings]]></TABLE_FIELD>
@@ -2058,11 +2060,12 @@ Visit: http://localhost:8888   and please help share!]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="247">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Admin]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Domain_List&quot;,&quot;\/widgets\/Ayoola_Page_Menu_Edit_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Domain_List&quot;,&quot;\/widgets\/Ayoola_Page_Menu_Edit_Editor&quot;,&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905884-0-248]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905884]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1567196030]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="248">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Domain Name]]></TABLE_FIELD>
@@ -2218,12 +2221,12 @@ Visit: http://localhost:8888   and please help share!]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="267">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Posts]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_List&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Editor&quot;,&quot;\/widgets\/Ayoola_Page_Layout_MakeDefault&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Article_List&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Editor&quot;,&quot;\/widgets\/Ayoola_Page_Layout_MakeDefault&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Creator&quot;,&quot;\/category&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905883-0-228]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905883]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563977839]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="268">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[You have not writen any post yet]]></TABLE_FIELD>
@@ -2400,12 +2403,12 @@ Visit: http://localhost:8888   and please help share!]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="290">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Delete]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/post\/view&quot;,&quot;\/widgets\/Ayoola_Page_Layout_List&quot;,&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Pagination_MultiDo_Delete&quot;,&quot;\/widgets\/PageCarton_Locale_OriginalString_Delete&quot;,&quot;\/widgets\/&quot;,&quot;\/widgets\/Application_Article_Template_List&quot;,&quot;\/widgets\/PageCarton_Country_List&quot;,&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/widgets\/Ayoola_Object_Dbase_List&quot;,&quot;\/widgets\/Ayoola_Object_Widget_List&quot;,&quot;\/widgets\/Ayoola_Object_PageWidget_List&quot;,&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/Ayoola_Doc_Browser&quot;,&quot;\/widgets\/Ayoola_Page_List&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/post\/view&quot;,&quot;\/widgets\/Ayoola_Page_Layout_List&quot;,&quot;\/widgets\/PageCarton_Locale_OriginalString_List&quot;,&quot;\/pc-admin&quot;,&quot;\/widgets\/Ayoola_Pagination_MultiDo_Delete&quot;,&quot;\/widgets\/PageCarton_Locale_OriginalString_Delete&quot;,&quot;\/widgets\/&quot;,&quot;\/widgets\/Application_Article_Template_List&quot;,&quot;\/widgets\/PageCarton_Country_List&quot;,&quot;\/widgets\/Application_Domain_Registration_Whois_List&quot;,&quot;\/widgets\/Ayoola_Object_Dbase_List&quot;,&quot;\/widgets\/Ayoola_Object_Widget_List&quot;,&quot;\/widgets\/Ayoola_Object_PageWidget_List&quot;,&quot;\/widgets\/Application_User_List&quot;,&quot;\/widgets\/Ayoola_Doc_Browser&quot;,&quot;\/widgets\/Ayoola_Page_List&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Pages&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Pages_Delete&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905872-0-205]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905872]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1563905901]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="291">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[ Information]]></TABLE_FIELD>
@@ -2508,12 +2511,12 @@ Visit: http://localhost:8888   and please help share!]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="303">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Shopping Cart]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/cart&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Editor&quot;,&quot;\/widgets\/Ayoola_Page_Layout_MakeDefault&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Creator&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/cart&quot;,&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Editor&quot;,&quot;\/widgets\/Ayoola_Page_Layout_MakeDefault&quot;,&quot;\/widgets\/Ayoola_Page_Layout_Creator&quot;,&quot;\/category&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1563905870-0-192]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1563905870]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1565166765]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078,1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
     <TABLE_ROW ROW_ID="304">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[%d yrs ]]></TABLE_FIELD>

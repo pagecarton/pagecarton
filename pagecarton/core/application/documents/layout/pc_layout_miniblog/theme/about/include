@@ -9,29 +9,31 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: about.php	Saturday 14th of December 2019 10:10:16 AM	ayoola@ayoo.la $ 
+* @version $Id: about.php	Saturday 5th of September 2020 11:05:56 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_358f347f7f970c153ea58a826af1b89f = new Ayoola_Page_Editor_Text( array (
-  'editable' => '
-<div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg);">
-      <div class="container">
-        <div class="row same-height justify-content-center">
-          <div class="col-md-12 col-lg-10">
-            <div class="post-entry text-center">
-              <h1 class="">About Us</h1>
-              <p class="lead mb-4 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci?</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+$_a33fb331c4338ea8146e714e575471ed = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<widget parameters=\'{ "class": "Ayoola_Page_Info", "use_site_defaults": true }\'>
+    <div class="site-cover site-cover-sm same-height overlay single-page"
+        style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg?embed_image_url={{{cover_photo}}});">
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="post-entry text-center">
 
-',
+                        <h1 class="">{{{title}}}</h1>
+                        <p class="lead mb-4 text-white">{{{description}}} {{{link_to_edit}}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</widget>',
   'preserved_content' => '<div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg);">
       <div class="container">
         <div class="row same-height justify-content-center">
@@ -48,240 +50,221 @@ $_358f347f7f970c153ea58a826af1b89f = new Ayoola_Page_Editor_Text( array (
 ',
   'url_prefix' => '',
   'pagewidget_id' => '1576318216-0-8',
+  'content' => '<widget parameters=\'{ "class": "Ayoola_Page_Info", "use_site_defaults": true }\'>
+    <div class="site-cover site-cover-sm same-height overlay single-page"
+        style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg?embed_image_url={{{cover_photo}}});">
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="post-entry text-center">
+
+                        <h1 class="">{{{title}}}</h1>
+                        <p class="lead mb-4 text-white">{{{description}}} {{{link_to_edit}}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</widget>',
 ) );
 
 							}
 							else
 							{
 								
-$_358f347f7f970c153ea58a826af1b89f = null;
+$_a33fb331c4338ea8146e714e575471ed = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_80a8fd34b8e051decf096d9b560fa50d = new Ayoola_Page_Editor_Text( array (
-  'codes' => '
-<div class="site-section bg-light">
+$_ce1b174a09b5f2a44b314761413a4ca1 = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<div class="site-section bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 order-md-2">
             <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
-</div>
+          </div>
           <div class="col-md-5 mr-auto order-md-1">
             <h2>About {Organization Name}</h2>
             <p>{Background History Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea consequat.}</p>
             <ul class="ul-check list-unstyled success">
-<li>Onsectetur adipisicing elit</li>
-              <li>Dolorem saepe non eligendi possimus</li>
-              <li>Voluptate odit corrupti vitae</li>
+                <widget parameters=\'{ "class": "Application_Article_ShowAll", "add_a_new_post": 3, "article_types": "feature" }\'>
+                    <li>{{{article_title}}}</li>
+                </widget>
             </ul>
-</div>
+          </div>
         </div>
       </div>
     </div>
 
 ',
-  'preserved_content' => '<div class="site-section bg-light">
+  'preserved_content' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '1576318217-0-9',
+  'content' => '<div class="site-section bg-light">
       <div class="container">
         <div class="row">
           <div class="col-md-6 order-md-2">
             <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
-</div>
+          </div>
           <div class="col-md-5 mr-auto order-md-1">
-            <h2>We Love To Explore</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea voluptate odit corrupti vitae cupiditate explicabo, soluta quibusdam necessitatibus, provident reprehenderit, dolorem saepe non eligendi possimus autem repellendus nesciunt, est deleniti libero recusandae officiis. Voluptatibus quisquam voluptatum expedita recusandae architecto quibusdam.</p>
+            <h2>About {Organization Name}</h2>
+            <p>{Background History Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea consequat.}</p>
             <ul class="ul-check list-unstyled success">
-<li>Onsectetur adipisicing elit</li>
-              <li>Dolorem saepe non eligendi possimus</li>
-              <li>Voluptate odit corrupti vitae</li>
+                <widget parameters=\'{ "class": "Application_Article_ShowAll", "add_a_new_post": 3, "article_types": "feature" }\'>
+                    <li>{{{article_title}}}</li>
+                </widget>
             </ul>
-</div>
+          </div>
         </div>
       </div>
     </div>
 
 ',
-  'url_prefix' => '',
-  'pagewidget_id' => '1576318217-0-9',
 ) );
 
 							}
 							else
 							{
 								
-$_80a8fd34b8e051decf096d9b560fa50d = null;
+$_ce1b174a09b5f2a44b314761413a4ca1 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_d8ee4dd44dde3e82833d5b02216c7db1 = new Ayoola_Page_Editor_Text( array (
-  'codes' => '
-<div class="site-section">
-      <div class="container">
-        <div class="row mb-5 justify-content-center">
-          <div class="col-md-5 text-center">
-            <h2>Meet The Team</h2>
-            <p>{More About Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.}</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-5 text-center">
-            <img src="/layout/pc_layout_miniblog/images/person_1.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-4"><h2 class="mb-3 h5">Kate Hampton</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum neque nobis eos quam necessitatibus rerum aliquid est tempore, cupiditate iure at voluptatum dolore, voluptates. Debitis accusamus, beatae ipsam excepturi mollitia.</p>
-
-            <p class="mt-5">
-              <a href="#" class="p-3"><span class="icon-facebook"></span></a>
-              <a href="#" class="p-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="p-3"><span class="icon-twitter"></span></a>
-            </p>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5 text-center">
-            <img src="/layout/pc_layout_miniblog/images/person_2.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-4"><h2 class="mb-3 h5">Richard Cook</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum neque nobis eos quam necessitatibus rerum aliquid est tempore, cupiditate iure at voluptatum dolore, voluptates. Debitis accusamus, beatae ipsam excepturi mollitia.</p>
-
-            <p class="mt-5">
-              <a href="#" class="p-3"><span class="icon-facebook"></span></a>
-              <a href="#" class="p-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="p-3"><span class="icon-twitter"></span></a>
-            </p>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5 text-center">
-            <img src="/layout/pc_layout_miniblog/images/person_3.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-4"><h2 class="mb-3 h5">Kevin Peters</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum neque nobis eos quam necessitatibus rerum aliquid est tempore, cupiditate iure at voluptatum dolore, voluptates. Debitis accusamus, beatae ipsam excepturi mollitia.</p>
-
-            <p class="mt-5">
-              <a href="#" class="p-3"><span class="icon-facebook"></span></a>
-              <a href="#" class="p-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="p-3"><span class="icon-twitter"></span></a>
-            </p>
-          </div>
+$_cea555ac6b03343d8d1724a08254cc0a = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<div class="site-section">
+    <div class="container">
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-5 text-center">
+          <h2>Meet The Team</h2>
+          <p>{More About Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.}</p>
         </div>
       </div>
-    </div>
-
-',
-  'preserved_content' => '<div class="site-section">
-      <div class="container">
-        <div class="row mb-5 justify-content-center">
-          <div class="col-md-5 text-center">
-            <h2>Meet The Team</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus commodi blanditiis, soluta magnam atque laborum ex qui recusandae</p>
-          </div>
+      <div class="row">
+        <widget parameters=\'{ "class": "Application_Profile_All", "add_a_new_post": 3, "length_of_description": 150 }\'>
+        <repeat>
+        <div class="col-md-6 col-lg-4 mb-5 text-center">
+          <img src="/layout/pc_layout_miniblog/images/person_1.jpg?embed_image_url={{{document_url_uri}}}" alt="Image" class="img-fluid w-50 rounded-circle mb-4"><h2 class="mb-3 h5">{{{article_title}}}</h2>
+          <p>{{{article_description}}}</p>
+          <p class="mt-5">
+            <a href="{{{facebook_url}}}" class="p-3"><span class="icon-facebook">&nbsp;</span></a>
+            <a href="{{{instagram_url}}}" class="p-3"><span class="icon-instagram">&nbsp;</span></a>
+            <a href="{{{twitter_url}}}" class="p-3"><span class="icon-twitter">&nbsp;</span></a>
+          </p>
         </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4 mb-5 text-center">
-            <img src="/layout/pc_layout_miniblog/images/person_1.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-4"><h2 class="mb-3 h5">Kate Hampton</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum neque nobis eos quam necessitatibus rerum aliquid est tempore, cupiditate iure at voluptatum dolore, voluptates. Debitis accusamus, beatae ipsam excepturi mollitia.</p>
-
-            <p class="mt-5">
-              <a href="#" class="p-3"><span class="icon-facebook"></span></a>
-              <a href="#" class="p-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="p-3"><span class="icon-twitter"></span></a>
-            </p>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5 text-center">
-            <img src="/layout/pc_layout_miniblog/images/person_2.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-4"><h2 class="mb-3 h5">Richard Cook</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum neque nobis eos quam necessitatibus rerum aliquid est tempore, cupiditate iure at voluptatum dolore, voluptates. Debitis accusamus, beatae ipsam excepturi mollitia.</p>
-
-            <p class="mt-5">
-              <a href="#" class="p-3"><span class="icon-facebook"></span></a>
-              <a href="#" class="p-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="p-3"><span class="icon-twitter"></span></a>
-            </p>
-          </div>
-
-          <div class="col-md-6 col-lg-4 mb-5 text-center">
-            <img src="/layout/pc_layout_miniblog/images/person_3.jpg" alt="Image" class="img-fluid w-50 rounded-circle mb-4"><h2 class="mb-3 h5">Kevin Peters</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum neque nobis eos quam necessitatibus rerum aliquid est tempore, cupiditate iure at voluptatum dolore, voluptates. Debitis accusamus, beatae ipsam excepturi mollitia.</p>
-
-            <p class="mt-5">
-              <a href="#" class="p-3"><span class="icon-facebook"></span></a>
-              <a href="#" class="p-3"><span class="icon-instagram"></span></a>
-              <a href="#" class="p-3"><span class="icon-twitter"></span></a>
-            </p>
-          </div>
-        </div>
+        </repeat>
+        </widget>
       </div>
     </div>
+  </div>
 
 ',
+  'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '1576318217-0-10',
+  'content' => '<div class="site-section">
+    <div class="container">
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-5 text-center">
+          <h2>Meet The Team</h2>
+          <p>{More About Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.}</p>
+        </div>
+      </div>
+      <div class="row">
+        <widget parameters=\'{ "class": "Application_Profile_All", "add_a_new_post": 3, "length_of_description": 150 }\'>
+        <repeat>
+        <div class="col-md-6 col-lg-4 mb-5 text-center">
+          <img src="/layout/pc_layout_miniblog/images/person_1.jpg?embed_image_url={{{document_url_uri}}}" alt="Image" class="img-fluid w-50 rounded-circle mb-4"><h2 class="mb-3 h5">{{{article_title}}}</h2>
+          <p>{{{article_description}}}</p>
+          <p class="mt-5">
+            <a href="{{{facebook_url}}}" class="p-3"><span class="icon-facebook">&nbsp;</span></a>
+            <a href="{{{instagram_url}}}" class="p-3"><span class="icon-instagram">&nbsp;</span></a>
+            <a href="{{{twitter_url}}}" class="p-3"><span class="icon-twitter">&nbsp;</span></a>
+          </p>
+        </div>
+        </repeat>
+        </widget>
+      </div>
+    </div>
+  </div>
+
+',
 ) );
 
 							}
 							else
 							{
 								
-$_d8ee4dd44dde3e82833d5b02216c7db1 = null;
+$_cea555ac6b03343d8d1724a08254cc0a = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_232ae178eef9fd9c405808e3cfcba1b4 = new Ayoola_Page_Editor_Text( array (
-  'codes' => '
-<div class="site-section bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
-</div>
-          <div class="col-md-5 ml-auto">
-            <h2>More About us</h2>
-            <p class="mb-4">{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}
+$_d5dffafdd1d5e54e38f1dd04c749720f = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<div class="site-section bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-md-5 ml-auto">
+          <h2>More About us</h2>
+          <p class="mb-4">{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}
 
-</p>
-            
-            <ul class="ul-check list-unstyled success">
-<li>Onsectetur adipisicing elit</li>
-              <li>Dolorem saepe non eligendi possimus</li>
-              <li>Voluptate odit corrupti vitae</li>
-            </ul>
-</div>
+         </p>
+          
+          <ul class="ul-check list-unstyled success">
+            <widget parameters=\'{ "class": "Application_Article_ShowAll", "add_a_new_post": 3, "article_types": "feature", "list_page_number_offset": 1 }\'>
+                <li>{{{article_title}}}</li>
+            </widget>
+        </ul>
         </div>
       </div>
     </div>
+  </div>
 
 ',
-  'preserved_content' => '<div class="site-section bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
-</div>
-          <div class="col-md-5 ml-auto">
-            <h2>Learn From Us</h2>
-            <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea voluptate odit corrupti vitae cupiditate explicabo, soluta quibusdam necessitatibus, provident reprehenderit, dolorem saepe non eligendi possimus autem repellendus nesciunt, est deleniti libero recusandae officiis. Voluptatibus quisquam voluptatum expedita recusandae architecto quibusdam.</p>
-            
-            <ul class="ul-check list-unstyled success">
-<li>Onsectetur adipisicing elit</li>
-              <li>Dolorem saepe non eligendi possimus</li>
-              <li>Voluptate odit corrupti vitae</li>
-            </ul>
-</div>
-        </div>
-      </div>
-    </div>
-
-',
+  'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '1576318217-0-11',
+  'content' => '<div class="site-section bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
+        </div>
+        <div class="col-md-5 ml-auto">
+          <h2>More About us</h2>
+          <p class="mb-4">{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}
+
+         </p>
+          
+          <ul class="ul-check list-unstyled success">
+            <widget parameters=\'{ "class": "Application_Article_ShowAll", "add_a_new_post": 3, "article_types": "feature", "list_page_number_offset": 1 }\'>
+                <li>{{{article_title}}}</li>
+            </widget>
+        </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+',
 ) );
 
 							}
 							else
 							{
 								
-$_232ae178eef9fd9c405808e3cfcba1b4 = null;
+$_d5dffafdd1d5e54e38f1dd04c749720f = null;
 
 							}
 							

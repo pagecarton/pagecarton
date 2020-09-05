@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Saturday 14th of December 2019 10:08:37 AM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Saturday 5th of September 2020 11:05:18 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -25,11 +25,11 @@
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_ee37a6dc2a5b24c3be9d530a053c8a10 = new Ayoola_Page_Editor_Text( array (
+$_474612ea2c4114e6c4a6f67f7d1d56c3 = new Ayoola_Page_Editor_Text( array (
   'codes' => '<div class="site-mobile-menu">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle"></span>
+          <span class="icon-close2 js-menu-toggle">&nbsp;</span>
         </div>
       </div>
       <div class="site-mobile-menu-body"><ul class="site-nav-wrap">
@@ -41,7 +41,7 @@ $_ee37a6dc2a5b24c3be9d530a053c8a10 = new Ayoola_Page_Editor_Text( array (
 <!--(Application_Category_ShowAll)@0}}}-->
 <!-- Place this code in code view -->
 
-                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search"></span></a></li>
+                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search">&nbsp;</span></a></li>
               </ul></div>
     </div>
 
@@ -62,13 +62,33 @@ $_ee37a6dc2a5b24c3be9d530a053c8a10 = new Ayoola_Page_Editor_Text( array (
     0 => '3',
   ),
   'add_a_new_post[0]' => '3',
+  'content' => '<div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle">&nbsp;</span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"><ul class="site-nav-wrap">
+<li><a href="/">Home</a></li>
+
+<!-- How to embed Application_Category_ShowAll -->
+<!--{{{@0(Application_Category_ShowAll)-->
+                <li><a href="{{{post_link}}}">{{{article_title]]]</a></li>
+<!--(Application_Category_ShowAll)@0}}}-->
+<!-- Place this code in code view -->
+
+                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search">&nbsp;</span></a></li>
+              </ul></div>
+    </div>
+
+',
 ) );
 
 							}
 							else
 							{
 								
-$_ee37a6dc2a5b24c3be9d530a053c8a10 = null;
+$_474612ea2c4114e6c4a6f67f7d1d56c3 = null;
 
 							}
 							
@@ -84,18 +104,18 @@ $_ee37a6dc2a5b24c3be9d530a053c8a10 = null;
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_0e64ce9c09425ed530ef9fbc9e13132b = new Ayoola_Page_Editor_Text( array (
+$_2ff07f92152067abe063cd346477b0d8 = new Ayoola_Page_Editor_Text( array (
   'codes' => '<header class="site-navbar" role="banner"><div class="container-fluid">
         <div class="row align-items-center">
           
           <div class="col-12 search-form-wrap js-search-form">
             <form method="get" action="/search">
-              <input type="text" id="s" class="form-control" placeholder="Search..." name="q"><button class="search-btn" type="submit"><span class="icon-search"></span></button>
+              <input type="text" id="s" class="form-control" placeholder="Search..." name="q"><button class="search-btn" type="submit"><span class="icon-search">&nbsp;</span></button>
             </form>
           </div>
 
           <div class="col-4 site-logo">
-            <a href="/" class="text-black h2 mb-0"><img style="max-height:100px;" src="/img/logo.png" alt="{Organization Name}"></a>
+            <a href="/" class="text-black h2 mb-0"><img style="max-height:50px;" src="/img/logo.png" alt="{Organization Name}"></a>
           </div>
 
           <div class="col-8 text-right">
@@ -106,8 +126,8 @@ $_0e64ce9c09425ed530ef9fbc9e13132b = new Ayoola_Page_Editor_Text( array (
                 <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
 <!--(Application_Category_ShowAll)@0}}}-->
 <!-- Place this code in code view -->
-                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search"></span></a></li>
-              </ul></nav><a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3"></span></a>
+                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search">&nbsp;</span></a></li>
+              </ul></nav><a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3">&nbsp;</span></a>
 </div>
           </div>
 
@@ -131,13 +151,42 @@ $_0e64ce9c09425ed530ef9fbc9e13132b = new Ayoola_Page_Editor_Text( array (
     0 => '3',
   ),
   'add_a_new_post[0]' => '3',
+  'content' => '<header class="site-navbar" role="banner"><div class="container-fluid">
+        <div class="row align-items-center">
+          
+          <div class="col-12 search-form-wrap js-search-form">
+            <form method="get" action="/search">
+              <input type="text" id="s" class="form-control" placeholder="Search..." name="q"><button class="search-btn" type="submit"><span class="icon-search">&nbsp;</span></button>
+            </form>
+          </div>
+
+          <div class="col-4 site-logo">
+            <a href="/" class="text-black h2 mb-0"><img style="max-height:50px;" src="/img/logo.png" alt="{Organization Name}"></a>
+          </div>
+
+          <div class="col-8 text-right">
+            <nav class="site-navigation" role="navigation" data-pc-menu-ignore="1"><ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
+<li><a href="/">Home</a></li>
+<!-- How to embed Application_Category_ShowAll -->
+<!--{{{@0(Application_Category_ShowAll)-->
+                <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
+<!--(Application_Category_ShowAll)@0}}}-->
+<!-- Place this code in code view -->
+                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search">&nbsp;</span></a></li>
+              </ul></nav><a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3">&nbsp;</span></a>
+</div>
+          </div>
+
+      </div>
+    </header>
+',
 ) );
 
 							}
 							else
 							{
 								
-$_0e64ce9c09425ed530ef9fbc9e13132b = null;
+$_2ff07f92152067abe063cd346477b0d8 = null;
 
 							}
 							
@@ -333,7 +382,7 @@ $_0e64ce9c09425ed530ef9fbc9e13132b = null;
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_0e754f7955781fbc149c24df666284bd = new Ayoola_Page_Editor_Text( array (
+$_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
   'codes' => '<div class="site-footer">
       <div class="container">
         <div class="row mb-5">
@@ -352,6 +401,7 @@ $_0e754f7955781fbc149c24df666284bd = new Ayoola_Page_Editor_Text( array (
             </ul>
 <ul class="list-unstyled float-left">
 <!-- How to embed Ayoola_Menu -->
+              <li><a href="/about">About</a></li>
 <!--{{{@1(Ayoola_Menu)-->
               <li><a href="{{{url}}}" onclick="{{{ayoola_spotlight}}}">{{{option_name}}}</a></li>
 <!--(Ayoola_Menu)@1}}}-->
@@ -364,11 +414,11 @@ $_0e754f7955781fbc149c24df666284bd = new Ayoola_Page_Editor_Text( array (
             <div>
               <h3 class="footer-heading mb-4">Connect With Us</h3>
               <p>
-                <a href="{https://www.facebook.com/PageCarton}"><span class="icon-facebook pt-2 pr-2 pb-2 pl-0"></span></a>
-                <a href="{https://www.twitter.com/PageCarton}"><span class="icon-twitter p-2"></span></a>
-                <a href="{https://www.instagram.com/PageCarton}"><span class="icon-instagram p-2"></span></a>
-                <a href="#"><span class="icon-rss p-2"></span></a>
-                <a href="#"><span class="icon-envelope p-2"></span></a>
+                <a href="{https://www.facebook.com/PageCarton}"><span class="icon-facebook pt-2 pr-2 pb-2 pl-0">&nbsp;</span></a>
+                <a href="{https://www.twitter.com/PageCarton}"><span class="icon-twitter p-2">&nbsp;</span></a>
+                <a href="{https://www.instagram.com/PageCarton}"><span class="icon-instagram p-2">&nbsp;</span></a>
+                <a href="#"><span class="icon-rss p-2">&nbsp;</span></a>
+                <a href="#"><span class="icon-envelope p-2">&nbsp;</span></a>
               </p>
             </div>
           </div>
@@ -377,7 +427,7 @@ $_0e754f7955781fbc149c24df666284bd = new Ayoola_Page_Editor_Text( array (
           <div class="col-12 text-center">
             <p>
               <!-- Link back to Colorlib can\'t be removed. Template is licensed under CC BY 3.0. -->
-              Copyright © <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+              Copyright © <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true">&nbsp;</i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> | Powered by <a href="https://www.pagecarton.org" target="_blank">PageCarton</a>
               <!-- Link back to Colorlib can\'t be removed. Template is licensed under CC BY 3.0. -->
               </p>
           </div>
@@ -404,13 +454,66 @@ $_0e754f7955781fbc149c24df666284bd = new Ayoola_Page_Editor_Text( array (
     0 => 'MyAccount',
   ),
   'menu_name[1]' => 'MyAccount',
+  'content' => '<div class="site-footer">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md-4">
+            <h3 class="footer-heading mb-4">About Us</h3>
+            <p>{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}</p>
+          </div>
+          <div class="col-md-3 ml-auto">
+            <!-- <h3 class="footer-heading mb-4">Navigation</h3> -->
+            <ul class="list-unstyled float-left mr-5">
+<!-- How to embed Ayoola_Menu -->
+<!--{{{@0(Ayoola_Menu)-->
+              <li><a href="{{{url}}}" onclick="{{{ayoola_spotlight}}}">{{{option_name}}}</a></li>
+<!--(Ayoola_Menu)@0}}}-->
+<!-- Place this code in code view -->
+            </ul>
+<ul class="list-unstyled float-left">
+<!-- How to embed Ayoola_Menu -->
+              <li><a href="/about">About</a></li>
+<!--{{{@1(Ayoola_Menu)-->
+              <li><a href="{{{url}}}" onclick="{{{ayoola_spotlight}}}">{{{option_name}}}</a></li>
+<!--(Ayoola_Menu)@1}}}-->
+<!-- Place this code in code view -->
+            </ul>
+</div>
+          <div class="col-md-4">
+            
+
+            <div>
+              <h3 class="footer-heading mb-4">Connect With Us</h3>
+              <p>
+                <a href="{https://www.facebook.com/PageCarton}"><span class="icon-facebook pt-2 pr-2 pb-2 pl-0">&nbsp;</span></a>
+                <a href="{https://www.twitter.com/PageCarton}"><span class="icon-twitter p-2">&nbsp;</span></a>
+                <a href="{https://www.instagram.com/PageCarton}"><span class="icon-instagram p-2">&nbsp;</span></a>
+                <a href="#"><span class="icon-rss p-2">&nbsp;</span></a>
+                <a href="#"><span class="icon-envelope p-2">&nbsp;</span></a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-center">
+            <p>
+              <!-- Link back to Colorlib can\'t be removed. Template is licensed under CC BY 3.0. -->
+              Copyright © <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true">&nbsp;</i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> | Powered by <a href="https://www.pagecarton.org" target="_blank">PageCarton</a>
+              <!-- Link back to Colorlib can\'t be removed. Template is licensed under CC BY 3.0. -->
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+',
 ) );
 
 							}
 							else
 							{
 								
-$_0e754f7955781fbc149c24df666284bd = null;
+$_2cfd005375ab9fe4addf27e6c57d38eb = null;
 
 							}
 							

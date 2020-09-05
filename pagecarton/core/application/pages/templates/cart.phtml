@@ -9,36 +9,30 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: cart.php	Saturday 14th of December 2019 09:18:34 AM	ayoola@ayoo.la $ 
+* @version $Id: cart.php	Saturday 5th of September 2020 11:06:29 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
-						<?php 
-						//		var_export( array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ) );
-					//			var_export( __FILE__ );
-					//			var_export( CACHE_DIR );
-					//			var_export( stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) );
-								//	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
-								//	THEY WON'T HAVE CORRECT APPDIR
-//								var_export( stripos( __FILE__,CACHE_DIR ) );
-			//					var_export( Ayoola_Application::getDomainSettings( APPLICATION_DIR ) );
-			//					var_export( Ayoola_Application::getDomainSettings() );
-							if
-							( 
+                    <?php 
 
-								$x_1576315114 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
-							)
-							{
-							//	var_export( $x_1576315114 );
-							//	echo file_get_contents( $x_1576315114 );
-								foreach( $x_1576315114 as $each )
-								{	
-									include_once $each;
-								}
-							}
-		//					var_export( $x_1576315114 );
-						?>
-						 <?php
+                            //	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
+                            //	THEY WON'T HAVE CORRECT APPDIR
+                        if
+                        ( 
+
+                            $x_1599347189 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'bootstrapbasic', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                        )
+                        {
+
+                            if( $x_1599347189 )
+                            foreach( $x_1599347189 as $each )
+                            {	
+                                include_once $each;
+                            }
+                        }
+
+                    ?>
+                     <?php
 /**
 * PageCarton Page Generator
 *
@@ -100,9 +94,9 @@ echo ( ! empty( $_37de1278686bad05803e50ef40b938dc ) &&  is_object( $_37de127868
 
 //pc_body_1 Ends Here
 ?><?php
-//pc_body_1 Begins Here
+//pc_body_1 /cart Begins Here
 
-//pc_body_1 Ends Here
+//pc_body_1 /cart Ends Here
 ?>
 
 
@@ -111,9 +105,9 @@ echo ( ! empty( $_37de1278686bad05803e50ef40b938dc ) &&  is_object( $_37de127868
 
 //oneness Ends Here
 ?><?php
-//oneness Begins Here
+//oneness /cart Begins Here
 
-//oneness Ends Here
+//oneness /cart Ends Here
 ?><section data-pc-all-sections="1" class="container">	
 									<div class="">
 										<div class="row">
@@ -123,17 +117,17 @@ echo ( ! empty( $_37de1278686bad05803e50ef40b938dc ) &&  is_object( $_37de127868
 
 //middlebar Ends Here
 ?><?php
-//middlebar Begins Here
+//middlebar /cart Begins Here
 
-echo ( ! empty( $_f80a10b51087fc6feb948b6ff548fdd9 ) &&  is_object( $_f80a10b51087fc6feb948b6ff548fdd9 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_f80a10b51087fc6feb948b6ff548fdd9->view(), '' ) : null );
+echo ( ! empty( $_72695e711f8fb6fd27ff426f3d8c5bbd ) &&  is_object( $_72695e711f8fb6fd27ff426f3d8c5bbd ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_72695e711f8fb6fd27ff426f3d8c5bbd->view(), '' ) : null );
 
-echo ( ! empty( $_09b24ebc8e2e2fcd26f9cdae5eba313c ) &&  is_object( $_09b24ebc8e2e2fcd26f9cdae5eba313c ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_09b24ebc8e2e2fcd26f9cdae5eba313c->view(), '' ) : null );
+echo ( ! empty( $_935dd3d6e0cc85fee8b541146ed7fa22 ) &&  is_object( $_935dd3d6e0cc85fee8b541146ed7fa22 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_935dd3d6e0cc85fee8b541146ed7fa22->view(), '' ) : null );
 
-echo ( ! empty( $_1aac9a93ab20446fbf67f4b97f105eeb ) &&  is_object( $_1aac9a93ab20446fbf67f4b97f105eeb ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_1aac9a93ab20446fbf67f4b97f105eeb->view(), '' ) : null );
+echo ( ! empty( $_eeb501f955d5c45e95ed4e97f4c7d442 ) &&  is_object( $_eeb501f955d5c45e95ed4e97f4c7d442 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_eeb501f955d5c45e95ed4e97f4c7d442->view(), '' ) : null );
 
-echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bffd776c901a78926b23fa26f ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_b44a4f9bffd776c901a78926b23fa26f->view(), '' ) : null );
+echo ( ! empty( $_7ed276139802b774216170fc44b3858f ) &&  is_object( $_7ed276139802b774216170fc44b3858f ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_7ed276139802b774216170fc44b3858f->view(), '' ) : null );
 
-//middlebar Ends Here
+//middlebar /cart Ends Here
 ?>
 										   </div>
 										</div> 
@@ -144,9 +138,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //twosome1 Ends Here
 ?><?php
-//twosome1 Begins Here
+//twosome1 /cart Begins Here
 
-//twosome1 Ends Here
+//twosome1 /cart Ends Here
 ?>
 											</div>
 											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -155,9 +149,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //twosome2 Ends Here
 ?><?php
-//twosome2 Begins Here
+//twosome2 /cart Begins Here
 
-//twosome2 Ends Here
+//twosome2 /cart Ends Here
 ?>
 											</div> 
 										</div> 
@@ -168,9 +162,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //threesome1 Ends Here
 ?><?php
-//threesome1 Begins Here
+//threesome1 /cart Begins Here
 
-//threesome1 Ends Here
+//threesome1 /cart Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -179,9 +173,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //threesome2 Ends Here
 ?><?php
-//threesome2 Begins Here
+//threesome2 /cart Begins Here
 
-//threesome2 Ends Here
+//threesome2 /cart Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -190,9 +184,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //threesome3 Ends Here
 ?><?php
-//threesome3 Begins Here
+//threesome3 /cart Begins Here
 
-//threesome3 Ends Here
+//threesome3 /cart Ends Here
 ?>
 											</div> 
 										</div> 
@@ -203,9 +197,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //foursome1 Ends Here
 ?><?php
-//foursome1 Begins Here
+//foursome1 /cart Begins Here
 
-//foursome1 Ends Here
+//foursome1 /cart Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -214,9 +208,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //foursome2 Ends Here
 ?><?php
-//foursome2 Begins Here
+//foursome2 /cart Begins Here
 
-//foursome2 Ends Here
+//foursome2 /cart Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
@@ -225,9 +219,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //foursome3 Ends Here
 ?><?php
-//foursome3 Begins Here
+//foursome3 /cart Begins Here
 
-//foursome3 Ends Here
+//foursome3 /cart Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
@@ -236,9 +230,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //foursome4 Ends Here
 ?><?php
-//foursome4 Begins Here
+//foursome4 /cart Begins Here
 
-//foursome4 Ends Here
+//foursome4 /cart Ends Here
 ?>
 											</div> 
 										</div> 
@@ -249,9 +243,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //leftbar Ends Here
 ?><?php
-//leftbar Begins Here
+//leftbar /cart Begins Here
 
-//leftbar Ends Here
+//leftbar /cart Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -260,9 +254,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //leftbarright Ends Here
 ?><?php
-//leftbarright Begins Here
+//leftbarright /cart Begins Here
 
-//leftbarright Ends Here
+//leftbarright /cart Ends Here
 ?>
 											</div> 
 										</div> 
@@ -273,9 +267,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //rightbarleft Ends Here
 ?><?php
-//rightbarleft Begins Here
+//rightbarleft /cart Begins Here
 
-//rightbarleft Ends Here
+//rightbarleft /cart Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -284,9 +278,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //rightbar Ends Here
 ?><?php
-//rightbar Begins Here
+//rightbar /cart Begins Here
 
-//rightbar Ends Here
+//rightbar /cart Ends Here
 ?>
 											</div>   
 										</div> 
@@ -296,9 +290,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //lastoneness Ends Here
 ?><?php
-//lastoneness Begins Here
+//lastoneness /cart Begins Here
 
-//lastoneness Ends Here
+//lastoneness /cart Ends Here
 ?>
         <!-- /.row -->
 
@@ -309,9 +303,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //pc_body_2 Ends Here
 ?><?php
-//pc_body_2 Begins Here
+//pc_body_2 /cart Begins Here
 
-//pc_body_2 Ends Here
+//pc_body_2 /cart Ends Here
 ?>
 
 
@@ -321,9 +315,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //pc_body_3 Ends Here
 ?><?php
-//pc_body_3 Begins Here
+//pc_body_3 /cart Begins Here
 
-//pc_body_3 Ends Here
+//pc_body_3 /cart Ends Here
 ?>
 
 
@@ -337,9 +331,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //pc_body_4 Ends Here
 ?><?php
-//pc_body_4 Begins Here
+//pc_body_4 /cart Begins Here
 
-//pc_body_4 Ends Here
+//pc_body_4 /cart Ends Here
 ?>
 
 
@@ -354,9 +348,9 @@ echo ( ! empty( $_b44a4f9bffd776c901a78926b23fa26f ) &&  is_object( $_b44a4f9bff
 
 //pc_section_after_js Ends Here
 ?><?php
-//pc_section_after_js Begins Here
+//pc_section_after_js /cart Begins Here
 
-//pc_section_after_js Ends Here
+//pc_section_after_js /cart Ends Here
 ?>
 
 </body>

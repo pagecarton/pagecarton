@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <DOCUMENT_ELEMENT table_name="originalstring" creation_time="1599134773" modified_time="1599134773" table_version="0.1" module_version="1.00" table_class="PageCarton_Locale_OriginalString" creation_ip="0">
-  <RECORDS autoId="14">
+  <RECORDS autoId="60">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="string"><![CDATA[Address]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Address]]></TABLE_FIELD>
@@ -149,6 +149,623 @@
       <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Form_Requirement_Delete&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[1599134918-0-13]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599134918]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="14">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[There are no responses to this form yet.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[There are no responses to this form yet.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Form_Inspect&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167627-14]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167626]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="15">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Feedback Form Responses]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Feedback Form Responses]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Form_Inspect&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167627-15]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167627]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="16">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Form Inspect]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Form Inspect]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Form_Inspect&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167627-16]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167627]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="17">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Allow HTML Codes from]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Allow HTML Codes from]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167646-17]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167646]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="18">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Registered Users]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Registered Users]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167649-18]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167649]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="19">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Time to wait before accepting form values (secs): e.g. 30]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Time to wait before accepting form values (secs): e.g. 30]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167655-19]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167655]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="20">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[e.g. 30]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[e.g. 30]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167655-20]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167655]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="21">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Time to wait before accepting form values (secs)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Time to wait before accepting form values (secs)]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167656-21]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167656]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="22">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Allow values from external forms]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Allow values from external forms]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Application_Settings_Editor&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167660-22]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167660]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="23">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167981-23]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167981]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="24">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599167982-24]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599167982]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="25">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599209249-25]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599209249]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="26">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599209249-26]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599209249]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="27">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Sample]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Sample]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599250745-27]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599250745]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="28">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599250754-28]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599250754]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="29">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599250755-29]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599250755]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="30">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599253556-30]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599253556]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="31">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599253556-31]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599253556]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="32">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599261193-32]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599261193]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="33">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599261194-33]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599261194]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="34">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[HTML codes here...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[HTML codes here...]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Layout_Pages_Code&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599299239-34]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599299239]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="35">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Save Code]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Save Code]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Layout_Pages_Code&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599299240-35]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599299240]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="36">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Code theme page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Code theme page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Layout_Pages_Code&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599299240-36]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599299240]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="37">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Copy]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Copy]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Layout_Pages_Duplicate&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599300297-37]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599300297]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="38">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Duplicate Page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Duplicate Page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Layout_Pages_Duplicate&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599300299-38]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599300299]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="39">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Duplicate a theme page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Duplicate a theme page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Layout_Pages_Duplicate&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599300299-39]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599300299]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="40">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Code saved successfully.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Code saved successfully.]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Layout_Pages_Code&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599300370-40]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599300370]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="41">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Clear content from Theme Page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Clear content from Theme Page]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Layout_Pages_ClearContent&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599302062-41]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599302062]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="42">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Category description here.. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam error eius quo, officiis non maxime quos reiciendis perferendis doloremque maiores!]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Category description here.. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam error eius quo, officiis non maxime quos reiciendis perferendis doloremque maiores!]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/category&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599307804-42]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599307804]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="43">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Page files for %s could not be created]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Page files for %s could not be created]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599308554-43]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599308554]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="44">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599309032-44]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599309032]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="45">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599309033-45]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599309033]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="46">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599309837-46]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599309837]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="47">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599309838-47]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599309838]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="48">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599322951-48]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599322951]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="49">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599322952-49]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599322952]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="50">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599334985-50]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599334985]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="51">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599334986-51]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599334986]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="52">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599340618-52]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599340618]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="53">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599340619-53]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599340619]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="54">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599343765-54]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599343765]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="55">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599343767-55]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599343767]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="56">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599345047-56]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599345047]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="57">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599345048-57]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599345048]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="58">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on 
+                ]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[This is sample PageCarton Widget. 
+                Create a widget file on]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599347155-58]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599347155]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+    </TABLE_ROW>
+    <TABLE_ROW ROW_ID="59">
+      <TABLE_FIELD FIELD_KEY="string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="trimmed_string"><![CDATA[Here is a sample code of 
+                what a widget could do]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="pages"><![CDATA[[&quot;\/widgets\/Ayoola_Page_Editor_Layout&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="originalstring_id"><![CDATA[0-1599347156-59]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1599347156]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
