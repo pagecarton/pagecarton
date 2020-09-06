@@ -9,43 +9,49 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: new-site-wizard.php	Saturday 14th of December 2019 09:18:33 AM	ayoola@ayoo.la $ 
+* @version $Id: new-site-wizard.php	Sunday 6th of September 2020 02:21:06 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_60aceb99a8fd256af315711dff83a557 = new Ayoola_Page_Editor_Text( array (
+$_c4d914064ec19a4e55e94291d545adb4 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<h3 style="text-align: center;">New Site Wizard</h3>
 
 <p style="text-align: center;">Complete a new website with these simple steps</p>
 
-<p style="text-align: center;"></p>
+<p style="text-align: center;">&nbsp;</p>
 ',
   'preserved_content' => '<h3 style="text-align: center;">New Site Wizard</h3>
 
 <p style="text-align: center;">Complete a new website with these simple steps</p>
 
-<p style="text-align: center;"></p>
+<p style="text-align: center;">&nbsp;</p>
 ',
   'url_prefix' => '',
   'pagewidget_id' => '1575534213-0-19',
   'insert_id' => '1566242671-0-15',
+  'content' => '<h3 style="text-align: center;">New Site Wizard</h3>
+
+<p style="text-align: center;">Complete a new website with these simple steps</p>
+
+<p style="text-align: center;">&nbsp;</p>
+',
 ) );
 
 							}
 							else
 							{
 								
-$_60aceb99a8fd256af315711dff83a557 = null;
+$_c4d914064ec19a4e55e94291d545adb4 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_0144bdc2a0f77dbb895856be397ef42f = new Ayoola_Object_Embed( array (
+$_bc578534928bf0c3433575dfb1ad2818 = new Ayoola_Object_Embed( array (
   'editable' => 'PageCarton_NewSiteWizard',
   'widget_options' => 
   array (
@@ -60,7 +66,7 @@ $_0144bdc2a0f77dbb895856be397ef42f = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_0144bdc2a0f77dbb895856be397ef42f = null;
+$_bc578534928bf0c3433575dfb1ad2818 = null;
 
 							}
 							
