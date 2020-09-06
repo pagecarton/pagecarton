@@ -1,4 +1,10 @@
-/* Base */
+/* Base
+<widget parameters='{ "class":  "Application_Global" }'>
+
+<widget-inner parameters='{ "class":  "Application_SearchReplace", "search":  ["#2f89fc", "#..."], "replace":  "{{{pc_background_color}}}" }'>
+#2f89fc - {{{pc_background_color}}}
+
+*/
 body {
   line-height: 1.7;
   color: gray;
@@ -14,6 +20,12 @@ body {
 ::selection {
   background: #000;
   color: #fff; }
+
+  .btn-primary {
+    color: #fff;
+    background-color: #2f89fc;
+    border-color: #2f89fc;
+    }
 
 a {
   -webkit-transition: .3s all ease;
@@ -1236,3 +1248,6 @@ h1, h2, h3, h4, h5,
       outline: none; }
   .search-form-wrap form .form-control {
     border: none; }
+/* 
+</widget-inner>
+</widget> */

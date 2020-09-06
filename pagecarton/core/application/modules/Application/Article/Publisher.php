@@ -179,8 +179,8 @@ class Application_Article_Publisher extends Application_Article_Creator
                 $this->setViewContent( Application_Article_Creator::viewInLine() ); 
                 $done = Application_Article_Table::getInstance()->select();
             }
-            $this->setViewContent( self::__( '<div style="text-align:center;">' . $html . '</div>' ) ); 
-            $this->setViewContent( self::__( '<div style="text-align:center;"><br><br><a style="text-align:center;" class="" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Article_List\', \'page_refresh\' );" href="javascript:;" ><i  style="margin:10px;" class="fa fa-external-link"></i>  Manage posts  </a><br><br></div>' ) ); 
+            $this->setViewContent( self::__( '<div style="text-align:center; display:flex;">' . $html . '</div>' ) ); 
+            $this->setViewContent( self::__( '<div style="text-align:center;"><br><br><a style="text-align:center;" class="" onclick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Article_List\', \'page_refresh\' );" href="javascript:;" ><i  style="margin:10px;" class="fa fa-external-link"></i>  Manage all posts  </a><br><br></div>' ) ); 
             return $done;
             // end of widget process
           

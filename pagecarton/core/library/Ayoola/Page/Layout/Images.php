@@ -88,9 +88,9 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 		//	Show files uploaded normally
 		if( self::getPercentageCompleted() == 100 )
 		{
-			$uploadedFiles = Ayoola_Doc_Table::getInstance()->select();
-			$uploadedFiles = array_unique( array_column( $uploadedFiles, 'url', 'url' ) );
-			$files = array_unique( $uploadedFiles + $files );
+		//	$uploadedFiles = Ayoola_Doc_Table::getInstance()->select();
+		//	$uploadedFiles = array_unique( array_column( $uploadedFiles, 'url', 'url' ) );
+		//	$files = array_unique( $uploadedFiles + $files );
 		}
 		//	var_export( $uploadedFiles );  
 	//	var_export( $directory );
@@ -106,11 +106,11 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 			if( ! in_array( $extension, self::$_imageExtensions ) )
 			{
 				continue;
-			}
+            }
 			$uri = Ayoola_Doc::pathToUri( $each );
 			
 			$eachFile = Ayoola_Doc::getDocumentsDirectory() . $uri;
-			if( ! is_file( $eachFile ) || ! empty( $done[$uri] ) )
+			if( ! empty( $done[$uri] ) )
 			{
 				continue;
 			}
@@ -120,71 +120,10 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 				continue;
 			}
 			$done[$uri] = true;
-//	var_export( $uri );
 			$html .= '<a style="display:inline-block;xbackground:#fff;margin:10px;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=' . $uri . '&crop=1\', \'page_refresh\' );" href="javascript:"><img alt="' . $uri . '" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=100&max_height=60&url=' . $uri . '" ></a>';
 		}
-//		$data = self::sortMultiDimensionalArray( $data, 'filename' );
-	//	$html .= ;
-
 		return $html;
     } 
-	
-    /**
-     * creates the list of the available subscription packages on the application
-     * 
-     */
-/* 	public function createList()
-    {
-		require_once 'Ayoola/Paginator.php';
-		$list = new Ayoola_Paginator();
-		$list->pageName = $this->getObjectName();
-		if( ! $identifierData = self::getIdentifierData() ){ return false; }
-		$list->listTitle = self::getObjectTitle() . ': "' . $identifierData['layout_label'] . '"';
-		
-		
-		$directory = dirname( Ayoola_Loader::checkFile( $this->getFilename() ) );
-		$files = array_unique( Ayoola_Doc::getFilesRecursive( $directory ) );
-//		var_export( $files );
-	//	asort( $files );
-		$data = array();
-		foreach( $files as $each )
-		{
-			$extension = array_pop( explode( ".", strtolower( $each ) ) );
-			switch( $extension )
-			{
-				case "jpg":
-				case "jpeg":
-				case "gif":
-				case "png":
-				case "bmp":
-				case "ico":
-				//	var_export( $extension );
-				break;
-				default:
-					continue 2;
-				break;
-			}
-			$uri = Ayoola_Doc::pathToUri( $each );
-		//	var_export( $uri );
-			$localPath = Ayoola_Loader::checkFile( DOCUMENTS_DIR . $uri );
-			$data[] = array( 'path' => $uri, 'filename' => basename( $uri ), 'directory' => dirname( $uri ), 'full_path' => $each, 'local_path' => $localPath, 'my_own_copy' => $localPath == $each ? 'NO' : 'YES', );
-		}
-		$data = self::sortMultiDimensionalArray( $data, 'filename' );
-		$list->setData( $data );
-		$list->setKey( 'path' );  
-	//	$list->setImagesOptions( array( 'Creator' => '<a class="goodnews" rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Creator/" title="Create a new layout template">+</a>' ) );
-		$list->setNoRecordMessage( 'No images in this theme.' );
-		$list->createList(  
-			array(
-				'filename' => '<img alt="" src="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?max_width=60&max_height=60&url=%KEY%" style="max-height:48px; vertical-align:middle;" > <br> %FIELD%  ',    
-				'  ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Upload_Link/?image_url=%KEY%&crop=1"> Replace </a>', 
-				' ' => '<a rel="spotlight;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Doc_Delete/?uri=%KEY%"> X </a>', 
-			)
-		);
-		//var_export( $list );
-		return $list;
-    } 
- */	
 		
     /**
      * 
@@ -199,14 +138,16 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 			{
 				$dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'template';
 				$dir = dirname( Ayoola_Loader::checkFile( $dir ) );
-				$files = array_unique( Ayoola_Doc::getFilesRecursive( $dir ) );
+                if( ! $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir ) ) )
+                {
+                    return 100;
+                }
 				$images = array();
 				foreach( $files as $each )
 				{
-				//	$extension = array_pop( explode( ".", strtolower( $each ) ) );
 					$extension = explode( ".", strtolower( $each ) );
 					$extension = array_pop( $extension );
-						if( ! in_array( $extension, self::$_imageExtensions ) )
+					if( ! in_array( $extension, self::$_imageExtensions ) )
 					{
 						continue;
 					}
@@ -215,15 +156,14 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 				}
 				if( $uploaded = Ayoola_Doc_Table::getInstance()->select( null, array( 'url' => $images ) ) )
 				{
-					$percentage += 100;
+					$percentage = 100;
 				}
 			}
-		}
-	//	var_export( $uploaded );
-	//	var_export( $files );
-	//	var_export( $images );
- //   var_export( self::getUpdates() );
-//    var_export( $themeInfoAll['dummy_search'] );
+        }
+        if( empty( $images ) )
+        {
+            $percentage = 100;
+        }
 		return $percentage;
 	}
 	// END OF CLASS

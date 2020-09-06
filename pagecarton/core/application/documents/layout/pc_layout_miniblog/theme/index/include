@@ -9,10 +9,26 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: includes.php	Saturday 5th of September 2020 11:05:21 PM	ayoola@ayoo.la $ 
+* @version $Id: includes.php	Saturday 5th of September 2020 11:52:52 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
+							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
+							{
+								
+$_17dee64a2448b86dcfefab3d1cdbc9e8 = new Ayoola_Object_Embed( array (
+  'editable' => 'PageCarton_NewSiteWizard',
+  'pagewidget_id' => '0-1599349921-2',
+) );
+
+							}
+							else
+							{
+								
+$_17dee64a2448b86dcfefab3d1cdbc9e8 = null;
+
+							}
+							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
