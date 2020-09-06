@@ -89,7 +89,6 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			{
 				$accountPage = $defaultAccountPage;
 			}
-
 		}
 		if( ! $this->getParameter( 'no_redirect' )  )
 		{
