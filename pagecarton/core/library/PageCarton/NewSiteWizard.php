@@ -139,7 +139,7 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                 $query = http_build_query( $query );
                 $this->setViewContent( '<div style="text-align:center;">
                 <br><br>
-                ' . sprintf( PageCarton_Widget::__( ' Step %d of %d' ), $weAreOn, count( $stages ) ) . '
+                ' . sprintf( PageCarton_Widget::__( ' Site Customization Step %d of %d' ), $weAreOn, count( $stages ) ) . '
               <br><br>
               ' . $html . ' <br><br>
                ' . $xT[$class]['title'] . ' <br><br>
