@@ -91,7 +91,6 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			}
 
 		}
-	//	var_export( $accountPage );
 		if( ! $this->getParameter( 'no_redirect' )  )
 		{
 			$urlToGo = '/account';

@@ -39,7 +39,11 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
         {
             //  Code that runs the widget goes here...
             if (!self::hasPriviledge(98) && !Ayoola_Application::isFirstAdminUser()) {
-                $this->setViewContent(Ayoola_Access_Login::viewInLine(array('no_redirect' => true)));
+
+                if( ! Ayoola_Application::getUserInfo( 'username' ) )
+                {
+                    $this->setViewContent(Ayoola_Access_Login::viewInLine(array('no_redirect' => true)));
+                }
                 if (!self::hasPriviledge(98)) {
                     return false;
                 }
