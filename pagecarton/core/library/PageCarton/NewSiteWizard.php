@@ -42,7 +42,13 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
 
                 if( ! Ayoola_Application::getUserInfo( 'username' ) )
                 {
-                    $this->setViewContent(Ayoola_Access_Login::viewInLine(array('no_redirect' => true)));
+                    $url = Ayoola_Page::setPreviousUrl( '/account/signin' ); 
+
+                    $this->setViewContent( '<div style="text-align:center;padding:1em;"><a style="display:inline-block" href="' . Ayoola_Application::getUrlPrefix() . $url . '" class="btn btn-primary "><i class="fa fa-chevron-right pc_give_space"></i> Login <i class="fa fa-sign-in pc_give_space"></i></a></div>' );
+                }
+                else
+                {
+                    $this->setViewContent( '<div style="text-align:center;padding:1em;">Welcome ' . Ayoola_Application::getUserInfo( 'username' ) . '! <a href="' . Ayoola_Application::getUrlPrefix() . '/account"><i class="fa fa-chevron-right pc_give_space"></i> My Account <i class=" pc_give_space"></i></a></div>' );
                 }
                 if (!self::hasPriviledge(98)) {
                     return false;
