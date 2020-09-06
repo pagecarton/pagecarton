@@ -550,7 +550,7 @@ pc_full_width {
   font-size: 12px;
   text-decoration: none;
   cursor: pointer;
-  flex-basis: 50%;
+  flex-basis: 25%;
 }
 
 .pc-btn-parent a:before, .pc-btn:before {

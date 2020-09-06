@@ -24,13 +24,13 @@
       <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="widget_name"><![CDATA[PageCarton_NewSiteWizard]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="parameters"><![CDATA[{&quot;editable&quot;:&quot;PageCarton_NewSiteWizard&quot;,&quot;class_name&quot;:&quot;Ayoola_Object_Embed&quot;,&quot;object_name&quot;:&quot;objectEmbed&quot;,&quot;viewableobject_id&quot;:&quot;190&quot;,&quot;view_parameters&quot;:&quot;[Other Widgets]&quot;,&quot;module&quot;:null,&quot;advanced_parameters&quot;:&quot;pagewidget_id=0-1599349921-2&quot;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="parameters_key"><![CDATA[d39859f79beb1317aad997fd06be8ae4]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="url"><![CDATA[/]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Object_Embed]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="section_name"><![CDATA[middlebar]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="history"><![CDATA[{&quot;1599349972&quot;:{&quot;editable&quot;:&quot;PageCarton_NewSiteWizard&quot;,&quot;class_name&quot;:&quot;Ayoola_Object_Embed&quot;,&quot;object_name&quot;:&quot;objectEmbed&quot;,&quot;viewableobject_id&quot;:&quot;190&quot;,&quot;view_parameters&quot;:&quot;[Other Widgets]&quot;,&quot;module&quot;:null,&quot;advanced_parameters&quot;:&quot;pagewidget_id=0-1599349921-2&quot;}}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1599349972]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parameters"><![CDATA[{&quot;editable&quot;:&quot;PageCarton_NewSiteWizard&quot;,&quot;widget_options&quot;:[&quot;parameters&quot;]}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="parameters_key"><![CDATA[d29d60e92dbeca1c8e6dd530af253416]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[Ayoola_Object_Embed]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="history"><![CDATA[{&quot;1599349972&quot;:{&quot;editable&quot;:&quot;PageCarton_NewSiteWizard&quot;,&quot;class_name&quot;:&quot;Ayoola_Object_Embed&quot;,&quot;object_name&quot;:&quot;objectEmbed&quot;,&quot;viewableobject_id&quot;:&quot;190&quot;,&quot;view_parameters&quot;:&quot;[Other Widgets]&quot;,&quot;module&quot;:null,&quot;advanced_parameters&quot;:&quot;pagewidget_id=0-1599349921-2&quot;},&quot;1599352134&quot;:{&quot;editable&quot;:&quot;PageCarton_NewSiteWizard&quot;,&quot;widget_options&quot;:[&quot;parameters&quot;]}}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1599352134]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
