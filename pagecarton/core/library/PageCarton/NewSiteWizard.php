@@ -72,7 +72,6 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             } else {
                 #   Remove image from new site wizard, retain in publisher mode
                 #   We have not figured how updating images will enable a smooth progress
-            //    unset($stages[4]);
             }
             //  reset keys because those that left
             $stages = array_values($stages);
@@ -80,15 +79,12 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
             $html .= '<ol class="cd-multi-steps text-bottom count">';
             $lastCompleted = false;
             $break         = false;
-            //  $class = $stages[0]['class'];
-           // $setStage = @$_GET['stage'];
             $storedStages = (array) self::getObjectStorage( 'my-stages' )->retrieve() ? : array();
             if( Ayoola_Loader::loadClass( @$_GET['stage'] ) ) 
             {
                 $storedStages[] = $_GET['stage'];
                 self::getObjectStorage( 'my-stages' )->store( $storedStages );
             }
-        //    var_export( $setStage );
 
             foreach( $stages as $key => $each) 
             {
@@ -154,15 +150,12 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
                 <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/" target="_blank">  <i  style="margin:5px;" class="fa fa-external-link"></i> ' . self::__( 'Preview Site' ) . ' </a><br><br>
                 </p>
                 </div>');
-                //    $this->setViewContent( $class::viewInLine() );
             }
             // end of widget process
 
         }
         catch (Exception $e) 
         {
-            //  Alert! Clear the all other content and display whats below.
-        //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) );
             $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) );
             return false;
         }
