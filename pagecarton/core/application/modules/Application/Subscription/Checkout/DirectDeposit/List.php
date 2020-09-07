@@ -48,7 +48,7 @@ class Application_Subscription_Checkout_DirectDeposit_List extends Application_S
 		require_once 'Ayoola/Paginator.php';
 		$list = new Ayoola_Paginator();
 		$list->pageName = $this->getObjectName();
-		$list->listTitle = 'List of Bank Account Information on this Application';
+		$list->listTitle = 'Direct Deposit Bank Account';
 		$list->setData( $this->getDbData() );
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'There are no bank account information on this application yet.' );

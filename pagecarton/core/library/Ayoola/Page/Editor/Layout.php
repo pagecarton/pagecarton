@@ -336,7 +336,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				return $defaultLayout;
 			}
 		}
-		return 'bootstrapbasic';
+		return 'pc_layout_miniblog';
 	}
 
     /**
@@ -431,7 +431,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
         }
 		if( ! $filePath )
 		{ 
-			$filePath = Ayoola_Loader::checkFile( $filter->filter( 'bootstrapbasic') );
+			$filePath = Ayoola_Loader::checkFile( $filter->filter( 'pc_layout_miniblog') );
         }
 
 		$page['pagelayout_filename'] = $filePath; 
