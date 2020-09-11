@@ -209,7 +209,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             $adapter->setAccessibility(self::SCOPE_PRIVATE);
             $adapter->setRelationship(self::SCOPE_PRIVATE);
             $adapter->cache = false;
-            $values         = $this->select();
+            $values= $this->select();
 
             //    Backup the previous table
             if (!empty(static::$_tableInfo['filename'])) 
@@ -263,9 +263,8 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             //    exit( __LINE__ );
             set_time_limit(86400); //    We may need time to update a very large table
             //    ignore_user_abort( true );
-            foreach( $values as $each ) 
+            foreach( $values as $key => $each ) 
             {
-            //    var_export( $each );
                 //    $this->insert( $each, array( 'record_row_id' => $each[$this->getTableName() . '_id'] ) );
                 //    set_time_limit( 30 );
                 try
@@ -273,9 +272,11 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 
                     //  sometimes, cache won't allow insert to go through
                     //  workaround
-                    $each['cache_work_around_xyz'] = time();
-
+                    $each['cache_work_around_xyz'] = microtime() . $key;
                     $resultInsert = $this->insert( $each );
+                    //    var_export( $this->select() );
+                    //    var_export( $each );
+
 
                 } catch (Exception $e) {
                 //    var_export( $e );
@@ -283,10 +284,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             }
             if (count($values) === count($this->select())) {
                 Ayoola_File::trash( $backupFile );
-            //    unlink($backupFile);
-                //    var_export( $values );
-                //    var_export( $this->select() );
-                //    copy( $backupFile,  static::$_tableInfo['filename'] ) ? : copy( $backupFile, $backupFile . '.backup' );
             } else {
                 //        var_export( $values );
                 //        var_export( $this->select() );
@@ -429,9 +426,9 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
         } else {
             //    var_export( $this->exists() );
         }
-        $values                                = $this->filterValues($values);
-        $result                                = $this->query('TABLE', 'INSERT', $values, $options);
-        static::$_alreadyRan[get_class($this)] = true;
+
+        $values = $this->filterValues($values);
+        $result = $this->query('TABLE', 'INSERT', $values, $options);
         return $result;
     }
 
@@ -449,8 +446,8 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             //    cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
             return false;
         }
-        $values                                = $this->filterValues($values);
-        $result                                = $this->query('TABLE', 'UPDATE', $values, $where);
+        $values = $this->filterValues($values);
+        $result = $this->query('TABLE', 'UPDATE', $values, $where);
         static::$_alreadyRan[get_class($this)] = true;
         return $result;
     }
@@ -482,10 +479,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
     public function create(array $dataTypes = null)
     {
         if (is_null($dataTypes)) {$dataTypes = $this->getDataTypes();}
-        //    exit( get_class( $this ) );
-        //    exit( var_export( $dataTypes ) );
-        //var_export( $this->_tableVersion );
-        //    var_export( $dataTypes );
         $result = $this->query('TABLE', 'CREATE', array('table_name' => $this->getTableName(),
             'table_version'                                              => $this->_tableVersion,
             'module_version'                                             => self::$_version,
@@ -517,7 +510,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      */
     public function drop()
     {
-        $result                                = $this->query('TABLE', 'DROP');
+        $result = $this->query('TABLE', 'DROP');
         static::$_alreadyRan[get_class($this)] = true;
         return $result;
     }
@@ -545,13 +538,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             $className = explode('_', $className);
             array_pop($className);
             $className = implode('_', $className);
-            //    if( Ayoola_Application::getUserInfo( 'access_level' ) == 99 )
-            {
-                //        var_export( $className );
-                //        var_export( get_class( $this ) );
-            }
         }
-//    if( ! $class = Ayoola_Loader::loadClass( $className ) ){ $className = null; }
         $this->getDatabase()->getAdapter()->setRealClassName( $class );
         $this->getDatabase()->getAdapter()->select($className);
     }

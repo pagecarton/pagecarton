@@ -762,7 +762,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		$addNewPostUrl = ( static::$_newPostUrl ? : 
 							( $this->getParameter( 'add_a_new_post_link' ) ? : 
 							( ( $this->getParameter( 'add_a_new_post_classplayer' ) ? :  
-							'/widgets' ) . '/Application_Article_Creator/' )
+							'/tools/classplayer/get/name' ) . '/Application_Article_Creator/' )
 							) 
 							) . '?';
 		if( $newArticleType )

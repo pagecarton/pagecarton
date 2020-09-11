@@ -54,18 +54,19 @@ class Application_Article_Publisher extends Application_Article_Creator
             $dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'theme/template';
             if( ! $path = Ayoola_Loader::checkFile( $dir ) )
             {
-                $dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'theme/templateauto';
+                $dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'theme/variant/auto/template';
                 if( ! $path = Ayoola_Loader::checkFile( $dir ) )
                 {
                     //  give up
                 }    
             }
+        //    var_export( $dir );
             $dir = dirname( $path );
             $basename = array( 'data_json_content', 'content.json' );
             $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir, array( 'whitelist_basename' => $basename ) ) );
             $postTypes = array();
-        //    var_export( $files );
-        //    var_export( $path );
+         //   var_export( $files );
+        //   var_export( $path );
         //    var_export( self::getObjectStorage( 'sanitized' )->retrieve() );
             if( ! self::getObjectStorage( 'sanitized' )->retrieve() && time() - filemtime( $path ) < 9000 && $defaultLayout && ! $files )
             {
@@ -84,11 +85,15 @@ class Application_Article_Publisher extends Application_Article_Creator
                 {
                     continue;
                 }
+            //    var_export( $each );
                 $content = json_decode( file_get_contents( $each ), true ) ? : array();
                 foreach( $content as $section )
                 {
                     foreach( $section as $widget )
                     {
+                        //    var_export( $widget['class'] );
+
+                        $widgets = array();
                         if( Ayoola_Loader::loadClass( $widget['class'] ) )
                         {
                             $class = $widget['class'];
@@ -101,10 +106,20 @@ class Application_Article_Publisher extends Application_Article_Creator
 
                                 break;
                                 case 'Ayoola_Page_Editor_Text':
+                                    //    var_export( $widget['parameters']['content'] );
                                     if( !  @array_intersect( $widget['parameters']['markup_template_object_name'], array( 'Application_Article_ShowAll', 'Application_Category_ShowAll', 'Application_Profile_ShowAll' ) ) )
                                     {
-                                        continue 2;
+                                        
+                                        $widgets = array();
+                                        Ayoola_Page_Editor_Text::embedWidget( $widget['parameters']['content'], array(), $widgets );
+                                        
+                                        if( empty( $widgets ) )
+                                        {
+                                            continue 2;
+                                        }
+    
                                     }
+                                    
                 
                                 break;
                                 default:
@@ -113,10 +128,10 @@ class Application_Article_Publisher extends Application_Article_Creator
                             }
                             $widget['parameters'] =  ( $widget['parameters'] ? : array() ) + array( 'add_a_new_post_classplayer' => '/tools/classplayer/get/name' );
                             $class = new $class( $widget['parameters'] );
-                            $widgets = array();
+                            
                             if( method_exists( $class, 'getMarkupTemplateObjects' ) )
                             {
-                                $widgets = $class->getMarkupTemplateObjects();
+                                $widgets = $widgets + $class->getMarkupTemplateObjects();
                             }
                             else
                             {
@@ -126,8 +141,8 @@ class Application_Article_Publisher extends Application_Article_Creator
                             {
                                 $values = $eachWidget->getObjectTemplateValues();
                                 $noRequired = ( $eachWidget->getParameter( 'add_a_new_post' ) ? : 1 );
-                                $category = $eachWidget->getParameter( 'category_name' ) ? : null;
-
+                                $category = $eachWidget->getParameter( 'category_name' ) ? : $eachWidget->getParameter( 'category' );
+                            //    var_export( $category );
                                 switch( get_class( $eachWidget ) )
                                 {
                                     case 'Application_Article_ShowAll':
