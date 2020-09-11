@@ -684,11 +684,12 @@ class Ayoola_Application
 				self::setIncludePath( SITE_APPLICATION_PATH );
 				self::setIncludePath( SITE_APPLICATION_PATH . DS . 'modules' );
 			}
-
+            $storage->store( $data );  
 		}
 		//	Allows the sub-domains to have an include path too.
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] . '/modules' );
+        self::$_domainSettings = $data['domain_settings'];
 
 
 
@@ -707,8 +708,6 @@ class Ayoola_Application
                 }
             }
         }
-        self::$_domainSettings = $data['domain_settings'];
-        $storage->store( $data );  
 		return true;
     }
 
