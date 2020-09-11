@@ -399,10 +399,6 @@ class Ayoola_Application
 
 				}
             }
-        //    if( @$where['domain_name'] === 'xxx.com.ng' )
-            {
-
-            }
 
 			if( ! @$subDomain && @strlen( $data['domain_settings']['enforced_destination'] ) > 3 && empty( $domainSettings['no_redirect'] ) )
 			{
@@ -423,7 +419,6 @@ class Ayoola_Application
 			{
 				//	don't use ip domain
 
-		//		va
 				//	make IP work but don't store it
 				$subDomain = null;
 			}
@@ -690,17 +685,18 @@ class Ayoola_Application
 				self::setIncludePath( SITE_APPLICATION_PATH . DS . 'modules' );
 			}
 
-			$storage->store( $data );  
 		}
 		//	Allows the sub-domains to have an include path too.
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] . '/modules' );
 
-        self::$_domainSettings = $data['domain_settings'];
+
 
         //  redirect ssl last 
         //  so it wont be auto issue ssl for domains we dont need for autossl settings
-        if( isset( $data['domain_settings']['domain_options'] ) && in_array( 'ssl', $data['domain_settings']['domain_options'] ) ) 
+
+        //  now we need https to be always encouraged
+    //    if( isset( $data['domain_settings']['domain_options'] ) && in_array( 'ssl', $data['domain_settings']['domain_options'] ) ) 
         {
             if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) )
             {
@@ -711,7 +707,8 @@ class Ayoola_Application
                 }
             }
         }
-
+        self::$_domainSettings = $data['domain_settings'];
+        $storage->store( $data );  
 		return true;
     }
 
@@ -1342,49 +1339,17 @@ class Ayoola_Application
 				! is_file( $include ) OR ! is_file( $template )
 			)
 			{
-                if( empty( $options['auto_init_theme_page'] ) )
+            //    var_export( $PAGE_INCLUDE_FILE );
+            //    var_export( $options );
+
+                if( ! empty( $options['auto_init_theme_page'] ) )
                 {
-                    $fileContent = file_get_contents( $pageFile );
+                //    var_export( $uri );
+                    $variant = filemtime( $pageFile );
 
-                    //  auto init if any is available
-                    if( 
-                        ! stripos( $fileContent, '</widget>' )  
-                        && ! stripos( $fileContent, '<include' ) 
-                        && ! stripos( $fileContent, '{Organization Name}' ) 
-                        && ! stripos( $fileContent, '/widgets/' ) 
-                    )
-                    {
-                        return false;
-                    }
-
-                }
-
-
-                $variant = filemtime( $pageFile );
-
-                //	auto-saved file
-                $pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '' . $pageThemeFileUrl . '/include';
-                $pagePathsX['template'] = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '' . $pageThemeFileUrl . '/template';
-
-                $include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
-                $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
-                if( $include && $template )
-                {
-                    $PAGE_INCLUDE_FILE = $include;
-                    $PAGE_TEMPLATE_FILE = $template;
-                    $pagePaths['include'] = $pagePathsX['include'];
-                    $pagePaths['template'] = $pagePathsX['template'];
-                }
-                if( empty( $include ) || ! is_file( $include ) || ! is_file( $template ) || filemtime( $include ) < $variant || filemtime( $include ) < filemtime( $rPath ) )
-                {
-    
-                    //	save first
-                    //	once page is created, let's have blank content
-                    //  was causing "Editing /" in title
-                    //  and blank pages
-                    
-                    $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
-                    $d = $page->refresh( $uri, $themeName );
+                    //	auto-saved file
+                    $pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '' . $pageThemeFileUrl . '/include';
+                    $pagePathsX['template'] = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '' . $pageThemeFileUrl . '/template';
 
                     $include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
                     $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
@@ -1395,8 +1360,29 @@ class Ayoola_Application
                         $pagePaths['include'] = $pagePathsX['include'];
                         $pagePaths['template'] = $pagePathsX['template'];
                     }
+                    if( empty( $include ) || ! is_file( $include ) || ! is_file( $template ) || filemtime( $include ) < $variant || filemtime( $include ) < filemtime( $rPath ) )
+                    {
+        
+                        //	save first
+                        //	once page is created, let's have blank content
+                        //  was causing "Editing /" in title
+                        //  and blank pages
+                        
+                        $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
+                        $d = $page->refresh( $uri, $themeName );
 
-                    
+                        $include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
+                        $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
+                        if( $include && $template )
+                        {
+                            $PAGE_INCLUDE_FILE = $include;
+                            $PAGE_TEMPLATE_FILE = $template;
+                            $pagePaths['include'] = $pagePathsX['include'];
+                            $pagePaths['template'] = $pagePathsX['template'];
+                        }
+    
+                        
+                    }
                 }
 
                 if( empty( $include ) OR ! is_file( $include ) OR ! is_file( $template ) )
@@ -1409,17 +1395,9 @@ class Ayoola_Application
 		};
 		do
 		{
-			if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
+		//	if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
 			{
 				if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
-				{
-                    $noRestriction = true;
-					break;
-				}
-            }
-            else
-            {
-				if( $previewTheme() )
 				{
                     $noRestriction = true;
 					break;
@@ -1709,8 +1687,9 @@ class Ayoola_Application
     {
 		if( is_null( self::$_userInfo ) || $key === false )
 		{
-			self::$_userInfo = new Ayoola_Access();
-            if( self::$_userInfo = self::$_userInfo->getUserInfo() )
+            $access = new Ayoola_Access();
+            //    var_export( $access->getUserInfo() );
+            if( self::$_userInfo = $access->getUserInfo() )
             {
                 self::$_userInfo['username'] = strtolower( self::$_userInfo['username'] );
                 self::$_userInfo['email'] = strtolower( self::$_userInfo['email'] );

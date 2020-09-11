@@ -134,7 +134,17 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			return self::$_myProfiles;
 		}
         $table = Application_Profile_Table::getInstance();
-        $profiles = $table->select( null, array( 'username' => Ayoola_Application::getUserInfo( 'username' ) ) );
+
+        //  some username were stored with mixed cases
+        $access = new Ayoola_Access();
+        $userInfo = $access->getUserInfo();
+
+
+        $profileUser = array(
+            Ayoola_Application::getUserInfo( 'username' ),
+            $userInfo['username']
+        );
+        $profiles = $table->select( null, array( 'username' => $profileUser ) );
         foreach( $profiles as $profileInfo )
         {
             self::$_myProfiles[] = $profileInfo['profile_url'];

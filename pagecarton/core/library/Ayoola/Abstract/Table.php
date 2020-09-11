@@ -463,6 +463,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     {
 		if( ! $profileInfo = Application_Profile_Abstract::getMyDefaultProfile() )
 		{
+            
 
 			//	profile now required for posts
 			$class = new Application_Profile_Creator();

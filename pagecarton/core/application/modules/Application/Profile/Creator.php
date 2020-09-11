@@ -113,7 +113,7 @@ Manage your profiles: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_A
 
 			$access = new Ayoola_Access();
 			$userInfo = $access->getUserInfo();
-			$values['username'] = $userInfo['username'];
+			$values['username'] = strtolower( $userInfo['username'] );
 			$values['user_id'] = $userInfo['user_id'];
 			
 			//	Save this information locally for easier lookup
