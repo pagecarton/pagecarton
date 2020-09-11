@@ -60,23 +60,22 @@ class Application_Article_Publisher extends Application_Article_Creator
                     //  give up
                 }    
             }
-        //    var_export( $dir );
             $dir = dirname( $path );
             $basename = array( 'data_json_content', 'content.json' );
             $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir, array( 'whitelist_basename' => $basename ) ) );
-            $postTypes = array();
-         //   var_export( $files );
-        //   var_export( $path );
-        //    var_export( self::getObjectStorage( 'sanitized' )->retrieve() );
+
             if( ! self::getObjectStorage( 'sanitized' )->retrieve() && time() - filemtime( $path ) < 9000 && $defaultLayout && ! $files )
             {
                 self::getObjectStorage( 'sanitized' )->store( true );
-            //    var_export( $defaultLayout );
 
                 //  compatibiity
                 $sanitize = new Ayoola_Page_Editor_Sanitize();
                 $sanitize->sanitize( $defaultLayout );
+                $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir, array( 'whitelist_basename' => $basename ) ) );
             }
+
+            $postTypes = array();
+
             foreach( $files as $each )
             {
                 $extension = explode( "/", strtolower( $each ) );
