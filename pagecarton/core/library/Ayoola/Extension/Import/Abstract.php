@@ -87,9 +87,6 @@ abstract class Ayoola_Extension_Import_Abstract extends Ayoola_Abstract_Table
 								'new' => 'Upload new Plugin',
 								'update' => 'Update existing Plugin',
 							);
-		//	$fieldset->addElement( array( 'name' => 'import_type', 'label' => 'What are you trying to do?', 'required' => 'required', 'type' => 'Radio', 'value' => @$values['import_type'] ? : 'new' ), $options );
-		//	$fieldset->addRequirement( 'import_type', array( 'ArrayKeys' => $options + array( 'badnews' => 'Please select what you are trying to do...' ) ) );
-		//	var_export( $this->getGlobalValue( 'import_type' ) );
 			if( @$_REQUEST['extension_name'] )
 			{
 				$option = new Ayoola_Extension_Import_Table;
@@ -109,7 +106,6 @@ abstract class Ayoola_Extension_Import_Abstract extends Ayoola_Abstract_Table
 			}
 		}
 		while( false );
-	//	$fieldset->addElement( array( 'name' => 'upload', 'label' => 'Plugin File (.tar.gz archive)', 'data-allow_base64' => true, 'data-document_type' => 'application', 'type' => 'Document', 'value' => @$values['upload'] ) );
 		$fieldset->addElement( array( 'name' => 'plugin_url', 'label' => 'Plugin File (.tar.gz archive)', 'data-document_type' => 'application', 'type' => 'Document', 'value' => @$values['plugin_url'] ) );
 		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'hidden', 'value' => @$values['article_url'] ) );
 		$form->addFieldset( $fieldset );

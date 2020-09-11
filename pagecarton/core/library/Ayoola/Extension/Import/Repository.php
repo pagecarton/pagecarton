@@ -102,9 +102,9 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             }
             $photoUrl = 'https://' . static::$_site . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . $_GET['install'] . '';
 			$this->setViewContent( self::__( '<img style="width:100%;" src="' . $photoUrl . '&width=1500&height=600" alt="">' ) );
-			$this->setViewContent( self::getMenu() );
-            if( ! $values = $this->getForm()->getValues() ){ return false; }
-                        
+            $this->setViewContent( self::getMenu() );
+
+            if( ! $values = $this->getForm()->getValues() ){ return false; }                       
 
             //   delete first if this is upgrade
             if( ! empty( $pluginInfo['article_url'] ) && $pluginInfo['article_url'] === @$_GET['update'] )
@@ -176,7 +176,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
     {
         $site = 'https://' . static::$_site . '';
 
-        $link = $site . '/tools/classplayer/get/object_name/Application_Article_Type_Download/?article_url=' . $url . '&auto_download=1';
+        $link = $site . '/tools/classplayer/get/object_name/Application_Article_Type_Download/?xxx&article_url=' . $url . '&auto_download=1';
 
         $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
         $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';
@@ -189,7 +189,6 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
         {
             $filename .= '.tar.gz';
         }
-
         Ayoola_File::putContents( $filename, $content['response'] );
         $values = static::getOtherInstallOptions( $filename );
         $values['path'] = $filename;

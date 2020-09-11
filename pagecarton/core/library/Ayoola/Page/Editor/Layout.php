@@ -594,16 +594,24 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
         }
 
-		rsort( $danglingPlaceholders );
+	//	rsort( $danglingPlaceholders );
 		// inject the dangling placeholders here. 
-		//	this made some placeholder to be double under lastoneness
+        //	this made some placeholder to be double under lastoneness
+        $lastPlaceholder = $placeholders[count( $placeholders )-3];
+    //    var_export( $placeholders );
+    //    var_export( $lastPlaceholder );
+        $basePlaceholder = $lastPlaceholder;
+        if( ! stripos( $content['template'], $basePlaceholder ) )
+        {
+            $basePlaceholder = 'lastoneness';
+            if( ! stripos( $content['template'], $basePlaceholder ) )
+            {
+                $basePlaceholder = 'oneness';
+            }
+        }
+        $basePlaceholder = '@@@' . $basePlaceholder . '@@@';
 		foreach( $danglingPlaceholders as $key => $each )
 		{
-			$basePlaceholder = '@@@lastoneness@@@';
-			if( ! stripos( $content['template'], $basePlaceholder ) )
-			{
-				$basePlaceholder = '@@@oneness@@@';
-			}
 			$newPlaceholder = '@@@' . $each . '@@@';
 			$placeholders[] = $each;
 			$searchFor = array();
@@ -616,9 +624,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			}
 
 			$searchFor[] = $basePlaceholder;
-			$replaceWith[] = $basePlaceholder . ' ' . $newPlaceholder;
+			$replaceWith[] =   $basePlaceholder . ' ' . $newPlaceholder ;
 			$content['template'] = str_ireplace( $searchFor, $replaceWith,  $content['template'] );
-		}
+        }
+    //    var_export( $content['template'] );
 		$navTag = '</nav>';
 		if( ! stripos( $content['template'], $navTag ) )
 		{

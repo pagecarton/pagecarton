@@ -1342,17 +1342,49 @@ class Ayoola_Application
 				! is_file( $include ) OR ! is_file( $template )
 			)
 			{
-            //    var_export( $PAGE_INCLUDE_FILE );
-            //    var_export( $options );
-
-                if( ! empty( $options['auto_init_theme_page'] ) )
+                if( empty( $options['auto_init_theme_page'] ) )
                 {
-                //    var_export( $uri );
-                    $variant = filemtime( $pageFile );
+                    $fileContent = file_get_contents( $pageFile );
 
-                    //	auto-saved file
-                    $pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '' . $pageThemeFileUrl . '/include';
-                    $pagePathsX['template'] = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '' . $pageThemeFileUrl . '/template';
+                    //  auto init if any is available
+                    if( 
+                        ! stripos( $fileContent, '</widget>' )  
+                        && ! stripos( $fileContent, '<include' ) 
+                        && ! stripos( $fileContent, '{Organization Name}' ) 
+                        && ! stripos( $fileContent, '/widgets/' ) 
+                    )
+                    {
+                        return false;
+                    }
+
+                }
+
+
+                $variant = filemtime( $pageFile );
+
+                //	auto-saved file
+                $pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '' . $pageThemeFileUrl . '/include';
+                $pagePathsX['template'] = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '' . $pageThemeFileUrl . '/template';
+
+                $include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
+                $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
+                if( $include && $template )
+                {
+                    $PAGE_INCLUDE_FILE = $include;
+                    $PAGE_TEMPLATE_FILE = $template;
+                    $pagePaths['include'] = $pagePathsX['include'];
+                    $pagePaths['template'] = $pagePathsX['template'];
+                }
+                if( empty( $include ) || ! is_file( $include ) || ! is_file( $template ) || filemtime( $include ) < $variant || filemtime( $include ) < filemtime( $rPath ) )
+                {
+    
+                    //	save first
+                    //	once page is created, let's have blank content
+                    //  was causing "Editing /" in title
+                    //  and blank pages
+                    
+                    $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
+                    $d = $page->refresh( $uri, $themeName );
 
                     $include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
                     $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
@@ -1363,29 +1395,8 @@ class Ayoola_Application
                         $pagePaths['include'] = $pagePathsX['include'];
                         $pagePaths['template'] = $pagePathsX['template'];
                     }
-                    if( empty( $include ) || ! is_file( $include ) || ! is_file( $template ) || filemtime( $include ) < $variant || filemtime( $include ) < filemtime( $rPath ) )
-                    {
-        
-                        //	save first
-                        //	once page is created, let's have blank content
-                        //  was causing "Editing /" in title
-                        //  and blank pages
-                        
-                        $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
-                        $d = $page->refresh( $uri, $themeName );
 
-                        $include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
-                        $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
-                        if( $include && $template )
-                        {
-                            $PAGE_INCLUDE_FILE = $include;
-                            $PAGE_TEMPLATE_FILE = $template;
-                            $pagePaths['include'] = $pagePathsX['include'];
-                            $pagePaths['template'] = $pagePathsX['template'];
-                        }
-    
-                        
-                    }
+                    
                 }
 
                 if( empty( $include ) OR ! is_file( $include ) OR ! is_file( $template ) )
@@ -1398,9 +1409,17 @@ class Ayoola_Application
 		};
 		do
 		{
-		//	if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
+			if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
 			{
 				if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
+				{
+                    $noRestriction = true;
+					break;
+				}
+            }
+            else
+            {
+				if( $previewTheme() )
 				{
                     $noRestriction = true;
 					break;

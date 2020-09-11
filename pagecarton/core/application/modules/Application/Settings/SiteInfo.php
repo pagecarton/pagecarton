@@ -45,7 +45,7 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
      * Calls this after every successful settings change
      * 
      */
-	public static function callback()
+	public static function callback( $previousData, $newData )
     {
         $settings = self::retrieve();
         $from = Ayoola_Doc_Browser::getDocumentsDirectory() . $settings['logo'];
