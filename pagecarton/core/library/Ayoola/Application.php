@@ -296,7 +296,7 @@ class Ayoola_Application
 		require_once 'Ayoola/Storage.php';
 		$storage = new Ayoola_Storage();
 		$protocol = 'http';
-		if( $_SERVER['SERVER_PORT'] == 443 && ! empty( $_SERVER['HTTPS'] ) )
+		if( ( $_SERVER['SERVER_PORT'] == 443 && ! empty( $_SERVER['HTTPS'] ) ) || $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
 		{
 			$protocol = 'https';
 		}
@@ -699,11 +699,11 @@ class Ayoola_Application
         //  now we need https to be always encouraged
     //    if( isset( $data['domain_settings']['domain_options'] ) && in_array( 'ssl', $data['domain_settings']['domain_options'] ) ) 
         {
-            if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) )
+            if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' )
             {
-                if( PageCarton_Widget::fetchLink( 'https://' . $domainName . Ayoola_Application::getUrlPrefix() . '/pc_check.txt?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) === 'pc' )
+                if( PageCarton_Widget::fetchLink( 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . '/pc_check.txt?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) === 'pc' )
                 {
-                    header( 'Location: https://' . $domainName . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
+                    header( 'Location: https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
                     exit();
                 }
             }
