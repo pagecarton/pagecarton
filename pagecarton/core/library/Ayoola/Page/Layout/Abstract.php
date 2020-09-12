@@ -241,7 +241,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $content, $placeholder );
 
-			if( empty( $navigationReplaced ) && $alternateNavigation && stripos( $placeholder[1], $navTag ) )
+/* 			if( empty( $navigationReplaced ) && $alternateNavigation && stripos( $placeholder[1], $navTag ) )
 			{
 
 				if(  ( strlen( $alternateNavigation ) + 20 ) < strlen( $placeholder[1] ) )
@@ -264,7 +264,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				//	we have alternate navigation
 				//	check navigation
 			}
-			if( empty( $realNavigationDone ) && stripos( $placeholder[1], $navTag ) )
+ */			if( empty( $realNavigationDone ) && stripos( $placeholder[1], $navTag ) )
 			{
 				$isRealNavigation = true;
 				$realNavigationDone = true;

@@ -188,7 +188,12 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		$defaultSearch['pc_url_prefix'] = Ayoola_Application::getUrlPrefix();
 		$defaultSearch['placeholder_prefix'] = @$values['placeholder_prefix'] ? : '@@@';
 		$defaultSearch['placeholder_suffix'] = @$values['placeholder_suffix'] ? : '@@@';
-		$defaultSearch['pc_background_color'] = Application_Settings_Abstract::getSettings( 'Page', 'background_color' ) ? : '#333333';
+        $defaultSearch['pc_background_color'] = Application_Settings_Abstract::getSettings( 'Page', 'background_color' ) ? : '#333333';
+        if( stripos( $template, "pc_background_color_rgb" ) )
+        {
+            list($r, $g, $b) = sscanf( $defaultSearch['pc_background_color'], "#%02x%02x%02x" );
+            $defaultSearch['pc_background_color_rgb'] = $r . ',' . $g . ',' . $b;
+        }
         $defaultSearch['pc_font_color'] = Application_Settings_Abstract::getSettings( 'Page', 'font_color' ) ? : '#cccccc';
         //  comment some content till real output
         $defaultSearch['<!--//'] = '';

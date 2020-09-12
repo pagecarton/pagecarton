@@ -101,22 +101,28 @@ class Ayoola_Page_Info extends PageCarton_Widget
                 $pageInfo = Ayoola_Page::getInfo( $this->getParameter( 'url' ) ? : $currentUrl );
             }
 
+            if( empty( $pageInfo['description'] ) && self::hasPriviledge( array( 99, 98 ) ) )
+            {
+                @$pageInfo['description'] = $pageInfo['description'] ? : '' . self::__( 'Description for this page has not been set. Page Description will appear here when they become available.' ) . '';
+            }
+            if( empty( $pageInfo['title'] ) && self::hasPriviledge( array( 99, 98 ) ) )
+            {
+                @$pageInfo['title'] = $pageInfo['title'] ? : '' . self::__( 'Page Title Here' ) . '';
+            }
+
             if( $this->getParameter( 'use_site_defaults' ) )
             {
-
                 if( empty( $pageInfo['title'] ) )
                 {
-                    $pageInfo['title'] = $settings['site_headline'];
+                    $pageInfo['title'] = $settings['site_headline'] ? : '...';
                 }
-    
                 if( empty( $pageInfo['cover_photo'] ) )
                 {
                     $pageInfo['cover_photo'] = $settings['cover_photo'];
                 }
-    
                 if( empty( $pageInfo['description'] ) )
                 {
-                    $pageInfo['description'] = $settings['site_description'] ;
+                    $pageInfo['description'] = $settings['site_description'];
                 }
              //   var_export( $pageInfo );
             }
@@ -137,11 +143,6 @@ class Ayoola_Page_Info extends PageCarton_Widget
             if( empty( $pageInfo['cover_photo'] ) )
             {
                 $pageInfo['cover_photo'] = $settings['cover_photo'] ? : ( $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg' );
-            }
-
-            if( empty( $pageInfo['description'] ) && self::hasPriviledge( array( 99, 98 ) ) )
-            {
-                @$pageInfo['description'] = $pageInfo['description'] ? : '' . self::__( 'Description for this page has not been set. Page Description will appear here when they become available.' ) . '';
             }
         //    self::v( $pageInfo );   
             

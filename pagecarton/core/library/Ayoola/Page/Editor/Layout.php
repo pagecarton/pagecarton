@@ -559,7 +559,18 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			}
 			//	load all js and css that is not in index file whereToGetPlaceholders
 			preg_match_all( "/<script[\s\S]*?>[\s\S]*?<\/script>/i", $originalFile, $originalScripts );
-			preg_match_all( "/<script[\s\S]*?>[\s\S]*?<\/script>/i", $whereToGetPlaceholders, $pageScripts );
+            preg_match_all( "/<script[\s\S]*?>[\s\S]*?<\/script>/i", $whereToGetPlaceholders, $pageScripts );
+            
+
+
+			preg_match( "/<body[\s\S]*?>/i", $originalFile, $originalBodyTag );
+            preg_match( "/<body[\s\S]*?>/i", $whereToGetPlaceholders, $pageBodyTag );
+            
+            if( $originalBodyTag[0] !== $pageBodyTag[0] )
+            {
+                $content['template'] = str_ireplace( $originalBodyTag[0], $pageBodyTag[0], $content['template'] );
+            }
+
 
 			//	remove scripts that are not needed on the page
 			//	some where causing issues on sb-mart
