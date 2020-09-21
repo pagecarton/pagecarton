@@ -156,7 +156,7 @@ Basic Style
       margin: 0;
     }
     .cd-multi-steps li.visited::after {
-      background-color: #96c03d;
+      background-color: #a7ef0e;
     }
     .cd-multi-steps li > *, .cd-multi-steps li.current > * {
       position: relative;
@@ -392,7 +392,7 @@ pc_full_width
 	font-weight:bolder;
 	display:block;
 	margin: 1em 0 1em 0;
-    color: #000;
+    color: rgb(83, 45, 45);
 }     
 
 .pc-form input[type=text],
@@ -492,7 +492,7 @@ pc-form button
 }
 .pc-form2 legend, .pc-form2 h2{
     background: inherit;
-    text-transform: uppercase;
+    text-transform: capitalize;
     /* font-family: 'open_sansregular', sans-serif; */
     color: inherit;
     font-size: 21px;
@@ -613,11 +613,11 @@ pc-form button
 
 
 .pc-btn-parent a, .pc-btn, .pc-element-like-btn {
-    background-color: #ccc;
+    background-color: #8a9491;
     border: 1px outset #aaa;
     display: inline-block;
-    cursor: pointer;
-    color: #000;
+    cursor: no-drop;
+    color: rgb(172, 15, 15);
     font-family: 'open_sansregular', sans-serif;
     padding: 8px 60px;
     text-decoration: none;
@@ -1127,7 +1127,7 @@ ul {
 }
 
 .pc-table tr {
-    color: #000;
+    color: rgb(27, 59, 33);
 }
 
 .pc-table .pc-table-row1 {
@@ -1135,7 +1135,7 @@ ul {
 }
 
 .pc-table .pc-table-row2 {
-    background-color: #ccc;
+    background-color: rgb(191, 173, 173);
 }
 
 .pc-table th, .pc-table td {
@@ -1148,7 +1148,7 @@ ul {
 	background-color: #444;
 	color: #fff;
 	text-transform: uppercase;
-	text-align: left;  
+	text-align: center;  
 }
  
 
