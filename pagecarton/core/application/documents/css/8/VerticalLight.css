@@ -62,7 +62,7 @@
 .Ayoola_MenuVerticalLightSelectedOption a:focus
 {
 	background-color: #FFF;
-	color: green;
+	color: #0540F2;
 }
 
 
@@ -79,6 +79,6 @@
 {
 	text-decoration: none;
 	color:#FFd;
-	background-color:#172c43;
+	background-color:#F24130;
 	padding-left: 10px;
 }

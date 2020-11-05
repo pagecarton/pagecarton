@@ -10,7 +10,7 @@ Basic Style
     /* max-width: 768px; */
     padding: 0.5em 1em;
     margin: 1em auto;
-    background-color: #edeff0;
+    background-color:#3D6AF2;
     border-radius: .25em;
   }
   .cd-breadcrumb::after, .cd-multi-steps::after {
@@ -28,7 +28,7 @@ Basic Style
     display: inline-block;
     content: '\00bb';
     margin: 0 .6em;
-    color: #959fa5;
+    color: #fff;
   }
   .cd-breadcrumb li:last-of-type::after, .cd-multi-steps li:last-of-type::after {
     /* hide separator after the last item */
@@ -42,11 +42,11 @@ Basic Style
   }
   .cd-breadcrumb li.current > *, .cd-multi-steps li.current > * {
     /* selected step */
-    color: #96c03d;
+    color: #0540F2;
   }
   .no-touch .cd-breadcrumb a:hover, .no-touch .cd-multi-steps a:hover {
     /* steps already visited */
-    color: #96c03d;
+    color: #0540F2;
   }
   .cd-breadcrumb.custom-separator li::after, .cd-multi-steps.custom-separator li::after {
     /* replace the default separator with a custom icon */
@@ -156,7 +156,7 @@ Basic Style
       margin: 0;
     }
     .cd-multi-steps li.visited::after {
-      background-color: #96c03d;
+      background-color: #0540F2;
     }
     .cd-multi-steps li > *, .cd-multi-steps li.current > * {
       position: relative;
@@ -166,7 +166,7 @@ Basic Style
     .cd-multi-steps.custom-separator li::after {
       /* reset style */
       height: 4px;
-      background: #edeff0;
+      background: #02732A;
     }
   
     .cd-multi-steps.text-center li::after {
@@ -190,7 +190,7 @@ Basic Style
     }
     .cd-multi-steps.text-center li.current > *, .cd-multi-steps.text-center li.visited > * {
       color: #ffffff;
-      background-color: #96c03d;
+      background-color: #0540F2;
     }
     .cd-multi-steps.text-center.custom-icons li.visited a::before {
       /* change the custom icon for the visited item - check icon */
@@ -228,10 +228,10 @@ Basic Style
     .cd-multi-steps.text-top li.visited > *::before,
     .cd-multi-steps.text-top li.current > *::before, .cd-multi-steps.text-bottom li.visited > *::before,
     .cd-multi-steps.text-bottom li.current > *::before {
-      background-color: #96c03d;
+      background-color: #0540F2;
     }
     .no-touch .cd-multi-steps.text-top a:hover, .no-touch .cd-multi-steps.text-bottom a:hover {
-      color: #96c03d;
+      color: #fff;
     }
     .no-touch .cd-multi-steps.text-top a:hover::before, .no-touch .cd-multi-steps.text-bottom a:hover::before {
       box-shadow: 0 0 0 3px rgba(150, 192, 61, 0.3);
@@ -309,7 +309,7 @@ Basic Style
     }
   }
 
-pc_full_width 
+.pc_full_width 
 {
     width: 100%;
     width: -moz-available;          /* WebKit-based browsers will ignore this. */
@@ -318,7 +318,7 @@ pc_full_width
 }
 
 .pc_message_box{
-    background-color:#eee;
+    background-color:#F2E205;
     float:left; 
     padding: 0.5em;  
     margin: 0.5em;
@@ -340,7 +340,7 @@ pc_full_width
 }
 
 .pc_message_box_mine{
-    background-color:#bbb;
+    background-color:#F2E205;
     float:right;
 }
 
@@ -360,9 +360,12 @@ pc_full_width
     padding:0;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
+    display: flex;
+    align-items: baseline;
+    justify-content: flex-end;
 }
 .pc-breadcrumb > li {
-    display: inline-block;
+    margin-right: 15px;
 }
 .pc-breadcrumb > li + li::before {  
     padding-left: 0.5em;
@@ -427,14 +430,14 @@ pc_full_width
 
 .pc-form input[type="submit"] 
 {
-  background-color:#999;   
+  background-color:#02732A;   
   padding: .5em;
   color: #fff;
   border: none;
 }
 .pc-form input[type="submit"]:hover
 {
-	background:#333333;
+	background:#0ace4e;
 }
 .pc-form fieldset
 {
@@ -449,7 +452,7 @@ pc_full_width
 	margin-bottom:1em;
 	max-width: 100%;
 }
-pc-form button
+.pc-form button
 {
     align-items: flex-start;
     text-align: center;
@@ -607,17 +610,17 @@ pc-form button
 /* CLASSES */
 .Ayoola_Page_Layout_Edit_File_middle{
 	padding:1em;
-	background-color: #eee;
+	background-color: #8effb5;
 	/*border: 1px groove #333;*/
 }
 
 
 .pc-btn-parent a, .pc-btn, .pc-element-like-btn {
-    background-color: #ccc;
-    border: 1px outset #aaa;
+    background-color: #02732A;
+    border: 1px outset #02732A;
     display: inline-block;
     cursor: pointer;
-    color: #000;
+    color: #fff;
     font-family: 'open_sansregular', sans-serif;
     padding: 8px 60px;
     text-decoration: none;
@@ -644,8 +647,8 @@ pc-form button
 
 
 .pc-btn-parent a:hover, .pc-btn:hover, .pc-element-like-btn:hover {
-  background:linear-gradient(to bottom, #eee 5%, #ccc 100%);
-  background-color:#eee;
+  background:linear-gradient(to bottom, #02732A 5%, #99f5b9 100%);
+  background-color:#02732A;
 
 }
 .pc-hide-children-parent:hover > .pc-hide-children-children
@@ -718,12 +721,12 @@ pc-form button
     background-color: #DFF2BF;
 }
 .pc-notify-warning {
-    color: #9F6000;
+    color: #F20732;
     background-color: #FEEFB3;
 }
 .badnews, .noRecord {
-    color: #D8000C;
-    background-color: #FFBABA;
+    color: #07038C;
+    background-color:#056CF2;
 }
 
 .pc-heading{
