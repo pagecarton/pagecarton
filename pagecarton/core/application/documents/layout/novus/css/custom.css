@@ -3,14 +3,17 @@
 }
 #page-wrapper {
     padding:7em 2em 2.5em;
-	background-color: #F1F1F1;
+	background-color: #262626;
 }
 .navbar-top-links {
     margin-right: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .navbar-top-links li {
-    display: inline-block;
+    flex: 1;
 }
 
 .navbar-top-links li:last-child {
@@ -18,7 +21,7 @@
 }
 
 .navbar-top-links li a {
-    padding: 15px;
+    padding: 18px;
     min-height: 50px;
 }
 
