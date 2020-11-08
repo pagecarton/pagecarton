@@ -137,9 +137,10 @@ Content Size: ' . strlen( $data ) . '
                     @Ayoola_Application_Notification::mail( $mailInfo );
                 }
                 catch( Ayoola_Exception $e ){ null; }
+                Ayoola_Doc::createDirectory( dirname( $lockDiskFile ) );
+                file_put_contents( $lockDiskFile, $path );
 
             }
-            file_put_contents( $lockDiskFile, $path );
 
             return $response;
         }
