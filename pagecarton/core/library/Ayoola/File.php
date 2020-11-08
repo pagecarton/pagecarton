@@ -165,13 +165,13 @@ Content Size: ' . strlen( $data ) . '
                 return false;
             }
             $x = explode( Ayoola_Application::getDomainSettings( APPLICATION_DIR ), $path );
+            $trashDir = Ayoola_Application::getDomainSettings( APPLICATION_DIR ) . DS . '.trash';
             if( empty( $x[1] ) )
             {
                 //    unlink( $path );
-                return false;
+                $trashDir = CACHE_DIR . DS . '.trash';
             }
             $newDir  = $x[1] ? : $x[0];  
-            $trashDir = Ayoola_Application::getDomainSettings( APPLICATION_DIR ) . DS . '.trash';
             $newPath = $trashDir . $newDir . DS . time() . basename( $newDir );
             Ayoola_Doc::createDirectory( dirname( $newPath ) );
             if( rename( $path, $newPath  ))
