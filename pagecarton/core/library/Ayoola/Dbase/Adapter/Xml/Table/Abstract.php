@@ -442,9 +442,9 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
 		{
 		}
 		$filename = $this->getFilename( true );
-		
+
 		//	DEBUG
-		if(	! is_file( $filename ) )
+		if(	empty( $filename) || ! is_file( $filename ) )
 		{
 		//	cannot throw error again since we are not auto-creating tables again. There's possibility that table isn't available
 			return array();
@@ -466,7 +466,7 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
             }
 			if( $node = $this->getXml()->getElementsByTagName( self::TAGNAME_DATA_TYPES )->item( 0 ) )
 			{
-			//	var_export( $this->getXml()->getTagAttributes( $node ) );
+			    //    if( ! stripos( $filename, '/Form/table.xml' ) )
 				return $this->getXml()->getTagAttributes( $node ); 
 			}
             Ayoola_File::trash( $filename );

@@ -169,7 +169,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 
                     unlink( $process );
                     Ayoola_Doc::removeDirectory( dirname( $process ) );
-                //      Ayoola_File::trash( $process );
 
                 }
 

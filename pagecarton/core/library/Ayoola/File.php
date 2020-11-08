@@ -99,21 +99,52 @@ class Ayoola_File
      */
     public static function putContents( $path, $data )
 	{
-    //    var_export( $path );
-    //    var_export( $data );
         $x = array( 'path' => $path, 'data' => $data, 'response' => true );
         try
         {        
+            $lockDiskFile = CACHE_DIR . DS .  __CLASS__ . DS . 'lockdisk';
+
+            if( is_file( $lockDiskFile ) )
+            {
+                return false;
+            }
+
             //  hook file writing so we can write plugin to manipulate file writing result;
             //  setting hooks causes infinite loop
             //  probably because it involves also writing files
-        //    PageCarton_Widget::setHook( self::getInstance(), __FUNCTION__, $x );
-            $response = file_put_contents( $x['path'], $x['data'] );
+            if( ! $response = file_put_contents( $x['path'], $x['data'] ) )
+            {
+
+                //  can't write
+                //  is disk full? clear cache
+                Application_Cache_Clear::viewInLine( array( 'clear_all' => true ) );
+
+
+                //	Notify Admin
+                $mailInfo = array();
+                $mailInfo['subject'] = "Write to disk failed";
+                $mailInfo['body'] = 'Some content could not be written to disk on the server. We have locked the disk against further writing to prevent data loss.
+
+Path: ' . $path . ',
+Content Size: ' . strlen( $data ) . '
+                
+                ';
+                $log = array( 'error_message' => $mailInfo['subject'] . ' - ' . $mailInfo['body'], 'error_time' => time() );
+                Application_Log_View_Error_Log::getInstance()->insert(  );
+
+                try
+                {
+                    @Ayoola_Application_Notification::mail( $mailInfo );
+                }
+                catch( Ayoola_Exception $e ){ null; }
+
+            }
+            file_put_contents( $lockDiskFile, $path );
+
             return $response;
         }
         catch( Ayoola_Abstract_Exception $e  )
         {
-        //    var_export( $x );
             //  now hooks can avoid execution of a class method by throwing an exception
             return $x['response'];
         }

@@ -84,10 +84,8 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 			//	Reset domain
             Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
 			Ayoola_Application::setDomainSettings( true );
-					//	var_export( Ayoola_Application::getDomainSettings() );
-			//	Clear cache
-	//		$cache = CACHE_DIR . DS . 'STORAGE' . DS . Ayoola_Application::getDomainSettings( 'username' );
-		//	if( is_dir( $cache ) )
+
+            //	Clear cache
 			if( is_dir( CACHE_DIR ) )
 			{
                 $tempName = CACHE_DIR . '.' . time();
@@ -97,10 +95,7 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
             Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
 		}
 		
-		//	Destroy the session. User information is lost.
-	//	Ayoola_Session::destroy();
 		$this->setViewContent(  '' . self::__( '<h1 class="badnews">Cache Cleared!</h1>' ) . '', true  ); 
-	//	$this->setViewContent( self::__( '<p class="">Your session might have been lost. Which means you may need to sign in again.</p>' ) ); 
     } 
 	// END OF CLASS
 }

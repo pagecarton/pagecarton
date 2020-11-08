@@ -200,9 +200,10 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
         Ayoola_Doc::createDirectory( dirname( $fakePath ) );
         $content = file_get_contents( $path );
         $content = Ayoola_Page_Editor_Text::embedWidget( $content, array( 'file_path' => $path ) );  
-        Ayoola_File::putContents( $fakePath, $content );          
-        
-        return $fakePath;
+        if( Ayoola_File::putContents( $fakePath, $content ) )       
+        {
+            return $fakePath;
+        }
     }
 
     /**

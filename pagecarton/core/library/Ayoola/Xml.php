@@ -270,7 +270,6 @@ class Ayoola_Xml extends DOMDocument
         //  no waiting because causing delay and crashing servers.
         //  Will reserve inserts
         $this->setFilename( $filename );
-        //  Ayoola_File::trash( $tempName );
 		@unlink( $tempName );
 		return $result;
     } 

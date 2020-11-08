@@ -99,7 +99,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
                     $response = $this->init( $tempData[0], $tempData[1] );
                     unlink( $process );
                     Ayoola_Doc::removeDirectory( dirname( $process ) );
-                //      Ayoola_File::trash( $process );
                 }
 
             }
