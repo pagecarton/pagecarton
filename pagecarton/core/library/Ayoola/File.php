@@ -167,7 +167,8 @@ Content Size: ' . strlen( $data ) . '
             $x = explode( Ayoola_Application::getDomainSettings( APPLICATION_DIR ), $path );
             if( empty( $x[1] ) )
             {
-                unlink( $path );
+                //    unlink( $path );
+                return false;
             }
             $newDir  = $x[1] ? : $x[0];  
             $trashDir = Ayoola_Application::getDomainSettings( APPLICATION_DIR ) . DS . '.trash';
