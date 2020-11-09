@@ -1338,12 +1338,20 @@ class Ayoola_Application
 				! is_file( $include ) OR ! is_file( $template )
 			)
 			{
-            //    var_export( $PAGE_INCLUDE_FILE );
-            //    var_export( $options );
-
                 if( ! empty( $options['auto_init_theme_page'] ) )
                 {
-                //    var_export( $uri );
+                    if( $uri == '/' && is_file( $PAGE_INCLUDE_FILE ) )
+                    {
+                        $content = file_get_contents( $pageFile );
+                        if( stripos( '</widget>', $content ) === false && stripos( '<include', $content ) === false )
+                        {
+                            $options['auto_init_theme_page'] = false;
+                        }
+                    }
+                }
+    
+                if( ! empty( $options['auto_init_theme_page'] ) )
+                {
                     $variant = filemtime( $pageFile );
 
                     //	auto-saved file
