@@ -1346,6 +1346,7 @@ class Ayoola_Application
                         if( stripos( '</widget>', $content ) === false && stripos( '<include', $content ) === false )
                         {
                             $options['auto_init_theme_page'] = false;
+                            
                         }
                     }
                 }
