@@ -734,7 +734,9 @@ class Ayoola_Application
 		// create_function is deprecated: use closuers instead
 		require_once 'Application/Log/View/Error.php';
 		set_exception_handler( function($object) {
-			Application_Log_View_Error::log( "Uncaught Exception " . get_class( $object ) . " with message " . $object->getMessage() . " in  " . $object->getFile() . " on line " . $object->getLine() . " Stack trace: " . $object->getTraceAsString() );
+            $message = "Uncaught Exception " . get_class( $object ) . " with message " . $object->getMessage() . " in  " . $object->getFile() . " on line " . $object->getLine() . " Stack trace: " . $object->getTraceAsString();
+        //    var_export( $message );
+			Application_Log_View_Error::log( $message );
 		});
 
 		//	Handle encryption

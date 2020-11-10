@@ -728,7 +728,11 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		// Simple copy for a file
 		if (is_file($source)) {
 			return copy($source, $dest);
-		}
+        }
+        elseif( ! is_dir( $source ) )
+        {
+            return false;
+        }
 
 		// Make destination directory
 		if (!is_dir($dest)) {
