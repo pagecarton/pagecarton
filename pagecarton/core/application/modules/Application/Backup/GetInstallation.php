@@ -109,6 +109,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 Ayoola_Doc::recursiveCopy( $from, $to );    
       
                 $parameters = array( 'backup_type' => 'installer', 'no_init' => true );
+                require_once 'Application/Backup/Creator.php';
                 $class = new Application_Backup_Creator( $parameters );
                 $class->fakeValues = $parameters;
                 $class->init();
