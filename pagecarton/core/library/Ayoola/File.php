@@ -115,6 +115,7 @@ class Ayoola_File
 
             if( ! $response = file_put_contents( $x['path'], $x['data'] ) )
             {
+                //  this is not full disk
                 if( empty( $data ) || ! is_dir( dirname( $x['path'] ) ) || ! is_writable( dirname( $x['path'] ) ) )
                 {
                     return false; 
@@ -122,7 +123,7 @@ class Ayoola_File
     
                 //  can't write
                 //  is disk full? clear cache
-                Application_Cache_Clear::viewInLine( array( 'clear_all' => true ) );
+                Application_Cache_Clear::viewInLine( array( 'strict_clear_all' => true, 'clear_all' => true ) );
 
 
                 //	Notify Admin
@@ -174,8 +175,8 @@ Content Size: ' . strlen( $data ) . '
             $trashDir = Ayoola_Application::getDomainSettings( APPLICATION_DIR ) . DS . '.trash';
             if( empty( $x[1] ) )
             {
-                //    unlink( $path );
-                $trashDir = CACHE_DIR . DS . '.trash';
+                unlink( $path );
+            //    $trashDir = CACHE_DIR . DS . '.trash';
             }
             $newDir  = $x[1] ? : $x[0];  
             $newPath = $trashDir . $newDir . DS . time() . basename( $newDir );

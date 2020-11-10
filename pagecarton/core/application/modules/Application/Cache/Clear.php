@@ -49,7 +49,7 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 	protected function init()
     {
 
-		if( self::hasPriviledge() )
+		if( self::hasPriviledge() || $this->getParameter( 'strict_clear_all' ) )
 		{
 
             Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
