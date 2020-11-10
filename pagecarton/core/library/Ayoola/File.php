@@ -130,7 +130,7 @@ Content Size: ' . strlen( $data ) . '
                 
                 ';
                 $log = array( 'error_message' => $mailInfo['subject'] . ' - ' . $mailInfo['body'], 'error_time' => time() );
-                Application_Log_View_Error_Log::getInstance()->insert(  );
+                Application_Log_View_Error_Log::getInstance()->insert( $log );
 
                 try
                 {
