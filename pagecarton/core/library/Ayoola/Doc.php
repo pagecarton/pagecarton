@@ -667,7 +667,10 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		if( ! $deleteContent )
 		{
 			// Remove dir recursively
-			while( is_dir( $dir ) && rmdir( $dir ) ){ $dir = dirname( $dir ); }
+            while( is_dir( $dir ) && rmdir( $dir ) )
+            { 
+                $dir = dirname( $dir );
+            }
 		}
 		else
 		{
