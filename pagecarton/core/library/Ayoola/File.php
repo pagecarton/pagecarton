@@ -112,6 +112,11 @@ class Ayoola_File
             //  hook file writing so we can write plugin to manipulate file writing result;
             //  setting hooks causes infinite loop
             //  probably because it involves also writing files
+
+            if( empty( $data ) || ! is_dir( dirname( $x['path'] ) ) || ! is_writable( dirname( $x['path'] ) ) )
+            {
+                return false;
+            }
             if( ! $response = file_put_contents( $x['path'], $x['data'] ) )
             {
 

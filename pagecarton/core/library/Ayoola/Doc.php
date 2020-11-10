@@ -736,7 +736,10 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		}
 
 		// Loop through the folder
-		$dir = dir($source);
+        if( ! $dir = dir($source) )
+        {
+            return false;
+        }
 		while (false !== $entry = $dir->read()) {
 			// Skip pointers
 			if ($entry == '.' || $entry == '..') {
