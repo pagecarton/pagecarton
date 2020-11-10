@@ -1343,10 +1343,9 @@ class Ayoola_Application
                     if( $uri == '/' && is_file( $PAGE_INCLUDE_FILE ) )
                     {
                         $content = file_get_contents( $pageFile );
-                        if( stripos( '</widget>', $content ) === false && stripos( '<include', $content ) === false )
+                        if( stripos( $content, '</widget>' ) === false && stripos( $content, '<include' ) === false )
                         {
                             $options['auto_init_theme_page'] = false;
-                            
                         }
                     }
                 }
