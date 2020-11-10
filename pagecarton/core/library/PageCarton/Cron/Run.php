@@ -59,12 +59,8 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                 $tasks = PageCarton_Cron_Table::getInstance()->select();
                 $u = 0;
                 $cTime = time();
-              //   var_export( $tasks );
                 foreach( $tasks as $data )
                 {
-              //     var_export( $data );
-              //      var_export( $data['cron_next_run_time'] . '<br>' );
-             //       var_export( time() );
                     if( $runHistory = PageCarton_Cron_Run_Table::getInstance()->select( null, array( 'cron_id' => $data['table_id'], ), array( 'sort_column' => 'runtime' ) ) )
                     {
                         $lastRunInfo = array_pop( $runHistory );
@@ -75,21 +71,11 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                     {
                         $nextRunTime = $cTime;
                     }
-
-               //      var_export( $data['table_id'] );
-            //         var_export( $runHistory );
                     $filter = new Ayoola_Filter_Time();
-                //     var_export( $filter->filter( $lastRunTime ) );
-               //      var_export( $data['cron_interval'] );
-                //    var_export( $filter->filter( $nextRunTime ) );
-               //      var_export( $nextRunTime < $cTime );
-                //     var_export( empty( $data['cron_interval'] ) );
-                //    var_export( PageCarton_Cron_Run_Table::getInstance()->select() );
                     if( $nextRunTime > $cTime )
                     {
                         continue;
                     }
-                  //   var_export( $data );
                     if( $html = self::task( $data ) )
                     {
                         $this->setViewContent( $html, true );
