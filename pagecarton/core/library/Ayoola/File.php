@@ -113,13 +113,13 @@ class Ayoola_File
             //  setting hooks causes infinite loop
             //  probably because it involves also writing files
 
-            if( empty( $data ) || ! is_dir( dirname( $x['path'] ) ) || ! is_writable( dirname( $x['path'] ) ) )
-            {
-                return false;
-            }
             if( ! $response = file_put_contents( $x['path'], $x['data'] ) )
             {
-
+                if( empty( $data ) || ! is_dir( dirname( $x['path'] ) ) || ! is_writable( dirname( $x['path'] ) ) )
+                {
+                    return false; 
+                }
+    
                 //  can't write
                 //  is disk full? clear cache
                 Application_Cache_Clear::viewInLine( array( 'clear_all' => true ) );
