@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Saturday 5th of September 2020 11:05:18 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Wednesday 11th of November 2020 09:26:26 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -120,7 +120,10 @@ $_2ff07f92152067abe063cd346477b0d8 = new Ayoola_Page_Editor_Text( array (
 
           <div class="col-8 text-right">
             <nav class="site-navigation" role="navigation" data-pc-menu-ignore="1"><ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
-<li><a href="/">Home</a></li>
+<li><a href="/">Home</a></li>  
+<!--{{{@1(Ayoola_Menu)-->
+                <li><a href="{{{url}}}">{{{option_name}}}</a></li>
+<!--(Ayoola_Menu)@1}}}-->
 <!-- How to embed Application_Category_ShowAll -->
 <!--{{{@0(Application_Category_ShowAll)-->
                 <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
@@ -145,6 +148,7 @@ $_2ff07f92152067abe063cd346477b0d8 = new Ayoola_Page_Editor_Text( array (
   'markup_template_object_name' => 
   array (
     0 => 'Application_Category_ShowAll',
+    1 => 'Ayoola_Menu',
   ),
   'advanced_parameter_value' => 
   array (
@@ -167,6 +171,9 @@ $_2ff07f92152067abe063cd346477b0d8 = new Ayoola_Page_Editor_Text( array (
           <div class="col-8 text-right">
             <nav class="site-navigation" role="navigation" data-pc-menu-ignore="1"><ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
 <li><a href="/">Home</a></li>
+<!--{{{@1(Ayoola_Menu)-->
+                <li><a href="{{{url}}}">{{{option_name}}}</a></li>
+<!--(Ayoola_Menu)@1}}}-->
 <!-- How to embed Application_Category_ShowAll -->
 <!--{{{@0(Application_Category_ShowAll)-->
                 <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>

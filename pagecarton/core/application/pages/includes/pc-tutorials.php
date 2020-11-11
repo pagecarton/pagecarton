@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-tutorials.php	Sunday 6th of September 2020 02:21:04 AM	ayoola@ayoo.la $ 
+* @version $Id: pc-tutorials.php	Wednesday 11th of November 2020 09:27:28 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
