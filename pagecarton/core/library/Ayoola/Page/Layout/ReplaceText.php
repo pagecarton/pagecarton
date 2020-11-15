@@ -27,6 +27,12 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 	protected static $_accessLevel = array( 98 );
 	
     /**
+     * 
+     * @var int
+     */
+	protected static $_dataVersion = 1;
+	
+    /**
      * Access level for player. Defaults to everyone
      *
      * @var boolean
@@ -123,38 +129,23 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
      */
 	public static function getUpdates( $getSiteData = false )
     { 
-        if( null !== @static::$_textUpdates[$getSiteData] )
+        if( null !== @static::$_textUpdates[$getSiteData][self::$_dataVersion] )
         {
-            return static::$_textUpdates[$getSiteData];
+            return static::$_textUpdates[$getSiteData][self::$_dataVersion];
         }
         $settingsName = __CLASS__;
-    //    $table = Application_Settings::getInstance();
         $themeName =  ( ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
-    //    var_export( $themeName );
         $themeInfo = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
 
         //  Add default info
-/*         $themeInfo['dummy_title'] = array_merge( $themeInfo['dummy_title'] ? : array(), static::$_defaultTexts['dummy_title'] ? : array() );
-        $themeInfo['dummy_search'] = array_merge( $themeInfo['dummy_search'] ? : array(), static::$_defaultTexts['dummy_search'] ? : array() );
-        $themeInfo['dummy_replace'] = array_merge( $themeInfo['dummy_replace'] ? : array(), static::$_defaultTexts['dummy_replace'] ? : array() );
- */
-//    $settings = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ) );
-    //    var_export( $getSiteData );
-    //    var_export( $themeInfo );
-    //    var_export( Ayoola_Page_PageLayout::getInstance( 'xx' )->select() );
         if( $getSiteData AND $previousData = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => $settingsName ) ) )
         {
-    //      var_export( $settingsName );
-        //  var_export( $previousData['settings'] );
             $previousData =  $previousData['data'] ? : ( json_decode( $previousData['settings'], true ) ? : unserialize( base64_decode( base64_encode( $previousData['settings'] ) ) ) );
-        //    var_export( $previousData );
-        //    var_export( $themeInfo );
            if( is_array( $previousData['dummy_title'] ) && is_array( $previousData['dummy_search'] ) && is_array( $previousData['dummy_replace'] ) )
             {
                 $themeInfo['dummy_title'] = array_merge( $previousData['dummy_title'] ? : array(), $themeInfo['dummy_title'] ? : array() );
                 $themeInfo['dummy_search'] = array_merge( $previousData['dummy_search'] ? : array(), $themeInfo['dummy_search'] ? : array() );
                 $themeInfo['dummy_replace'] = array_merge( $previousData['dummy_replace'] ? : array(), $themeInfo['dummy_replace'] ? : array() );
-            //    $record = array();
                 foreach( $themeInfo['dummy_search'] as $key => $each )
                 {
                     if( ! empty( $record[$themeInfo['dummy_search'][$key]] ) )
@@ -163,15 +154,12 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                         unset( $themeInfo['dummy_search'][$key] );
                         unset( $themeInfo['dummy_replace'][$key] );
                     }
-               //     $record[$themeInfo['dummy_search'][$key]] = true;
 
                 }
             }
         }    
-        static::$_textUpdates[$getSiteData] = $themeInfo;
-        //    var_export( $themeInfo );
-    //     var_export( $previousData );
-        return static::$_textUpdates[$getSiteData];   
+        static::$_textUpdates[$getSiteData][self::$_dataVersion] = $themeInfo;
+        return static::$_textUpdates[$getSiteData][self::$_dataVersion];   
     }
 
     /**
@@ -183,11 +171,10 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         $themeName =  ( ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
         unset( $values['layout_name'] );
         $previousData = Ayoola_Page_PageLayout::getInstance()->selectOne( array( 'layout_name' => $themeName ) );
-    //    $previousData['dummy_title'] = array();
-    //    $previousData['dummy_search'] = array();
         $previousData['dummy_replace'] = array_fill_keys( $previousData['dummy_replace'], null );
         Ayoola_Page_PageLayout::getInstance()->update( $previousData, array( 'layout_name' => $themeName ) );
         Application_Settings::getInstance()->delete( array( 'settingsname_name' => __CLASS__ ) );
+        self::$_dataVersion++;
     }
 
     /**
@@ -201,8 +188,6 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         Ayoola_Page_PageLayout::getInstance()->update( $values, array( 'layout_name' => $themeName ) );
         $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
         $table = Application_Settings::getInstance();
-    //    self::v( $values );
-    //    self::v( $themeName );
 
         //  merge now with settings
         if( $previousData )
@@ -213,7 +198,6 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             $values['dummy_replace'] = array_merge( $values['dummy_replace'] ? : array(), $previousData['dummy_replace'] ? : array() );
         }
         $record = array();
-//            var_export( $values );
 
         //  delete duplicates
         foreach( $values['dummy_search'] as $key => $each )
@@ -227,21 +211,17 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             $record[$values['dummy_search'][$key]] = true;
 
         }
-        //    var_export( $values );
         if( count( $values['dummy_replace'] ) !== count( $values['dummy_search'] ) )
         {
-        //    var_export( $values );
             return false;
         }
         else
         {
-        //    var_export( $values );
             
             $response = $table->insert( array( 'data' => $values, 'settings' => json_encode( $values ), 'settingsname_name' => __CLASS__ ) );
-        //    var_export( $response );
             return true;
-        //    $this->setViewContent( $this->getForm()->view() );
         }
+        self::$_dataVersion++;
     }
 
     /**
@@ -389,6 +369,7 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 
         $i = 0;
         $record = array();
+        $allMyData = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
         do
         {
             $fieldset = new Ayoola_Form_Element;
@@ -416,17 +397,12 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             $data['dummy_replace'][$i] = ( @$data['dummy_replace'][$i] || ! empty( $_REQUEST['editing_dummy_text'] ) ) ? $data['dummy_replace'][$i] : trim( @$data['dummy_search'][$i], '{-}' );
 
             //  always default to own prefilled data
-         //   var_export( $allMyData );
-            $allMyData = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
-        //   var_export( $allMyData );
-        //    exit();
             if( ! empty( $allMyData['dummy_search'] ) && empty( $_GET['clear_user_settings'] )  )
             {
                 $myReplacementKey = array_search( $data['dummy_search'][$i], $allMyData['dummy_search'] );
             //    var_export( $myReplacementKey );
                 if( $myReplacementKey !== false && ! empty( $allMyData['dummy_replace'][$myReplacementKey] ) )
                 {
-        //    var_export( $allMyData['dummy_replace'][$myReplacementKey] );
                    $data['dummy_replace'][$i] = $allMyData['dummy_replace'][$myReplacementKey];
                 }
             }

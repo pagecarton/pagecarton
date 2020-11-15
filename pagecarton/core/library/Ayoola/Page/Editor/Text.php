@@ -277,21 +277,25 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         preg_match_all( '|\{-(.*)-\}|', $content, $matches );
         #   '{-Lorem Ipsum dolor-}'
 
-        $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates() ? : Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
+        $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates( true ) ? : Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
         if( 
             empty( $previousData['dummy_title'] ) || empty( $previousData['dummy_search'] ) || empty( $previousData['dummy_replace'] )
             )
         {
             $previousData = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
         }
+        $newData = $previousData;
         foreach( $matches[0] as $count => $each )
         {
 
-            $previousData['dummy_title'][] = 'Replaceable Text ' . ( $count + 1 );
-            $previousData['dummy_search'][] = $each;
-            $previousData['dummy_replace'][] = trim( $each, '{-}' );
+            $newData['dummy_title'][] = 'Replaceable Text ' . ( $count + 1 );
+            $newData['dummy_search'][] = $each;
+            $newData['dummy_replace'][] = trim( $each, '{-}' );
         }
-        Ayoola_Page_Layout_ReplaceText::saveTexts( $previousData );
+        if( $newData !== $previousData )
+        {
+            Ayoola_Page_Layout_ReplaceText::saveTexts( $newData );
+        }
 
         //  to be executed within the widget class
         $content = str_ireplace( array( 'i>&nbsp;</i', 'span>&nbsp;</span', ), array( 'i></i', 'span></span', ), $content );
@@ -299,13 +303,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
         // include other HTML here
         preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"](/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
-    //    var_export( $matches );     
       
         foreach( $matches[0] as $count => $each )
         {
             $parameters['includes'][$matches[1][$count]] = $each;
         }
-   //     var_export( $parameters['includes'] );     
         $parameters['content'] = $content;
         $parameters['url_prefix'] = Ayoola_Application::getUrlPrefix();
     }
