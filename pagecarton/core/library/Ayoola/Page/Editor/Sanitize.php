@@ -193,18 +193,12 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                 //    We only need to delete saved page files.
                 //    To avoid complications of deleting whole page and creating again
                 $pagePaths = Ayoola_Page::getPagePaths( $page );
-                //    var_export( $pagePaths );      
-
                 foreach( $pagePaths as  $pageFile )
                 {
                     $pageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pageFile;
-                    //    var_export( $pageFile );      
-                   
                     if( is_file( $pageFile ) )
                     {
                         unlink( $pageFile );
-                        var_export( $pageFile );      
-                        var_export( "<br>" );      
                     }
                 }
             }
