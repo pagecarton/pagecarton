@@ -73,6 +73,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
      */	
     public function sanitize( $themeName = null ) 
     {
+        Ayoola_Application::$appNamespace .= $themeName;
 		ignore_user_abort();
 		$pages = new Ayoola_Page();
 		$where = array();		
@@ -124,7 +125,6 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		//	let normal pages go first so that 
 		//	theres error where old page was being restored after theme update
 		//	let's see if this solves it.
-
 		$pages = $pages->getDbTable()->select( null, $where );
 		$pages = array_merge( $pages, self::$defaultPages );
         $done = array();
@@ -136,6 +136,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 				//	dont cause unfinite loop by updating theme when a theme is being sanitized
 				continue;
             }
+                //   var_export( $page );
             $done[$page] = true;
 			//	sanitize now on theme level
 			$this->_parameter['page_editor_layout_name'] = null;
@@ -177,19 +178,37 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 
             //	create this page if not available.
             //	must initialize each time so that each page can be handled.
-            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
-            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
             $table = Ayoola_Page_Page::getInstance();
             if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
             {
-                $parameters = array( 
-                                        'fake_values' => array( 'auto_submit' => true ),
-                                        'url' => $page,
-                );
-                $class = new Ayoola_Page_Delete( $parameters );
+                //$parameters = array( 
+                //                        'fake_values' => array( 'auto_submit' => true ),
+                //                        'url' => $page,
+                //);
+
+                //  Why are we deleting sef?
+                //  $class = new Ayoola_Page_Delete( $parameters );
+
+                //    We need to delete to enable refresh of default pages during upgrade
+                //    We only need to delete saved page files.
+                //    To avoid complications of deleting whole page and creating again
+                $pagePaths = Ayoola_Page::getPagePaths( $page );
+                //    var_export( $pagePaths );      
+
+                foreach( $pagePaths as  $pageFile )
+                {
+                    $pageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pageFile;
+                    //    var_export( $pageFile );      
+                   
+                    if( is_file( $pageFile ) )
+                    {
+                        unlink( $pageFile );
+                        var_export( $pageFile );      
+                        var_export( "<br>" );      
+                    }
+                }
             }
-            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
-            $response = $this->sourcePage( $page );
+          //  $response = $this->sourcePage( $page );
         }
 		$id = $page . Ayoola_Application::getApplicationNameSpace();
 		if( ! empty( static::$_refreshed[$id] ) )

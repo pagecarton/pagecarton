@@ -38,21 +38,7 @@ class Ayoola_Page_Settings extends PageCarton_Settings
             return false;
         }
   		$defaultPages = Ayoola_Page_Editor_Sanitize::$defaultPages;	
-		  
-		foreach( $defaultPages as $page )      
-		{
-			try
-			{
-
-                // sanitize so it could refresh with latest template
-                //	create this page if not available.
-                //    $sanitizeClass->refresh( $page );	     		
-			}
-			catch( Exception $e )
-			{
-				null;
-			}
-		}
+		
 		//	copy page content from theme
 		$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
 		$class2 = new Ayoola_Page_Editor_Sanitize(); 
