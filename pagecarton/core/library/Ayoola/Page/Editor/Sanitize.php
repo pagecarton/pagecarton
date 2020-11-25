@@ -179,6 +179,10 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
             //	create this page if not available.
             //	must initialize each time so that each page can be handled.
             $table = Ayoola_Page_Page::getInstance();
+            if( ! $table->selectOne( null, array( 'url' => $page ) ) )
+            {
+                $response = $this->sourcePage( $page );
+            }
             if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
             {
                 //$parameters = array( 
@@ -195,14 +199,15 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                 $pagePaths = Ayoola_Page::getPagePaths( $page );
                 foreach( $pagePaths as  $pageFile )
                 {
-                    $pageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pageFile;
-                    if( is_file( $pageFile ) )
+                    $myPageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pageFile;
+                    $corePageFile = APPLICATION_PATH . DS .  $pageFile;
+                    if( is_file( $corePageFile ) )
                     {
-                        unlink( $pageFile );
+                        copy( $corePageFile, $myPageFile );
+                        //  unlink( $pageFile );
                     }
                 }
             }
-          //  $response = $this->sourcePage( $page );
         }
 		$id = $page . Ayoola_Application::getApplicationNameSpace();
 		if( ! empty( static::$_refreshed[$id] ) )

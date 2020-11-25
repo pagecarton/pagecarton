@@ -172,7 +172,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			{
 				foreach( Ayoola_Page::getPagePaths( $page['url'] ) as $key => $each )
 				{
-				//	if( $each = Ayoola_Loader::checkFile( $each ) )
+					if( $parentContent[$key] )
 					{
 						$savePath = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $each;
 
