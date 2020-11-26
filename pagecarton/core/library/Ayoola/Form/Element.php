@@ -527,7 +527,7 @@ class Ayoola_Form_Element extends Ayoola_Form
         $monthValue = intval( $monthValue ?  : $this->getGlobalValue( $elementName . '_month' ) );
 
         $this->addElement( array( 'name' => $elementName . '_month', 'label' => $element['label'], 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $monthValue ), array( 'Month' ) + $optionsX ); 
-        $this->addRequirement( $elementName . '_month', array( 'InArray' => array_keys( $optionsX ) ) );
+    //    $this->addRequirement( $elementName . '_month', array( 'InArray' => array_keys( $optionsX ) ) );
         if( strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 )
         {
             $this->addFilter( $elementName . '_month', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_month' ) ) );
@@ -539,7 +539,7 @@ class Ayoola_Form_Element extends Ayoola_Form
         $DayValue = intval( @strlen( $values[$elementName . '_day'] ) === 1 ? ( '0' . @$values[$elementName . '_day'] ) : @$values[$elementName . '_day'] );
         $DayValue = intval( $DayValue ?  : $this->getGlobalValue( $elementName . '_day' ) );
         $this->addElement( array( 'name' => $elementName . '_day', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $DayValue ), array( 'Day' ) + $optionsX );
-        $this->addRequirement( $elementName . '_day', array( 'InArray' => array_keys( $optionsX ) ) );
+    //    $this->addRequirement( $elementName . '_day', array( 'InArray' => array_keys( $optionsX ) ) );
         if( strlen( $this->getGlobalValue( $elementName . '_day' ) ) === 1 )
         {
             $this->addFilter( $elementName . '_day', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_day' ) ) );
@@ -550,15 +550,16 @@ class Ayoola_Form_Element extends Ayoola_Form
         $optionsX = range( date( 'Y' ) + 100, date( 'Y' ) - 100 );
         $optionsX = array_combine( $optionsX, $optionsX );
         $this->addElement( array( 'name' => $elementName . '_year', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values[$elementName . '_year'] ? : '' ), array( 'Year' ) + $optionsX );
-        $this->addRequirement( $elementName . '_year', array( 'InArray' => array_keys( $optionsX ) ) );
+    //    $this->addRequirement( $elementName . '_year', array( 'InArray' => array_keys( $optionsX ) ) );
         $date = $this->getGlobalValue( $elementName . '_year' );
         $date .= '-';
         $date .= strlen( $this->getGlobalValue( $elementName . '_month' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_month' ) ) : $this->getGlobalValue( $elementName . '_month' );
         $date .= '-';
         $date .= strlen( $this->getGlobalValue( $elementName . '_day' ) ) === 1 ? ( '0' . $this->getGlobalValue( $elementName . '_day' ) ) : $this->getGlobalValue( $elementName . '_day' );
         $this->addElement( array( 'name' => $elementName . '_date', 'label' => 'Timestamp', 'placeholder' => 'YYYY-MM-DD HH:MM', 'type' => 'Hidden', 'value' => @$values[$elementName . '_date'] ) );
-        $this->addFilter( $elementName . '_date', array( 'DefiniteValue' => $date ) );
-        $this->addFilter( $elementName, array( 'DefiniteValue' => $date ) );
+        $date = trim( $date, '- ' );
+        $date ? $this->addFilter( $elementName . '_date', array( 'DefiniteValue' => $date ) ) : null;
+        $date ? $this->addFilter( $elementName, array( 'DefiniteValue' => $date ) ) : null;
     //  if( 'datetime' == $formInfo['element_type'][$i] )
         {
             $optionsX = range( 0, 23 );
@@ -570,7 +571,7 @@ class Ayoola_Form_Element extends Ayoola_Form
                 }
             }
             $this->addElement( array( 'name' => $elementName . '_hours', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_hours'] ), array( 'Hour' ) +  array_combine( $optionsX, $optionsX ) );
-            $this->addRequirement( $elementName . '_hours', array( 'InArray' => array_keys( $optionsX ) ) );
+        //    $this->addRequirement( $elementName . '_hours', array( 'InArray' => array_keys( $optionsX ) ) );
             $optionsX = range( 0, 59 );
             foreach( $optionsX as $eachKey => $each )
             {
@@ -580,7 +581,7 @@ class Ayoola_Form_Element extends Ayoola_Form
                 }
             }
             $this->addElement( array( 'name' => $elementName . '_minutes', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_minutes'] ), array( 'Minute' ) + array_combine( $optionsX, $optionsX ) );
-            $this->addRequirement( $elementName . '_minutes', array( 'InArray' => array_keys( $optionsX ) ) );
+        //    $this->addRequirement( $elementName . '_minutes', array( 'InArray' => array_keys( $optionsX ) ) );
 
             //	datetime combined
             $datetime = $date;
@@ -591,11 +592,11 @@ class Ayoola_Form_Element extends Ayoola_Form
 
             $this->addElement( array( 'name' => $elementName . '', 'type' => 'Hidden', 'value' => @$values[$elementName . ''] ) );
             $this->addElement( array( 'name' => $elementName . '_datetime', 'type' => 'Hidden', 'value' => @$values[$elementName . '_datetime'] ) );
-            $this->addFilter( $elementName . '_datetime', array( 'DefiniteValue' => $datetime ) );
+            $datetime ? $this->addFilter( $elementName . '_datetime', array( 'DefiniteValue' => $datetime ) ) : null;
             $timestamp = strtotime( $datetime );
             $this->addElement( array( 'name' => $elementName . '_timestamp', 'type' => 'Hidden', 'value' => @$values[$elementName . '_timestamp'] ) );
-            $this->addFilter( $elementName . '_timestamp', array( 'DefiniteValue' => $timestamp ) );
-            $this->addFilter( $elementName, array( 'DefiniteValue' => $timestamp ) );
+            $timestamp ? $this->addFilter( $elementName . '_timestamp', array( 'DefiniteValue' => $timestamp ) ) : null ;
+            $timestamp ? $this->addFilter( $elementName, array( 'DefiniteValue' => $timestamp ) ) : null;
 
         }
 
