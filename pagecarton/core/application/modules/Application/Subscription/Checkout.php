@@ -333,16 +333,18 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		$formIncluded = array();
 		
 		$orderForm = Application_Settings_CompanyInfo::getSettings( 'Payments', 'order_form' );
-	//	var_export( $orderForm );
-		if( $orderForm )
-		{
-			$parameters = array( 'form_name' => $orderForm );
-			$formIncluded[] = $orderForm;
-			$orderFormClass = new Ayoola_Form_View( $parameters );
-			
+    //	var_export( $orderForm );
+        $orderFormClass = null;
+        if( $orderForm )
+        {
+            $parameters = array( 'form_name' => $orderForm );
+            $formIncluded[] = $orderForm;
+            $orderFormClass = new Ayoola_Form_View( $parameters );
+        }
+		if( $orderFormClass && $orderFormClass->getForm() && $orderFormClass->getForm()->getFieldsets() )
+		{        
 			foreach( $orderFormClass->getForm()->getFieldsets() as $each )
 			{
-				
 				$form->addFieldset( $each );
 			}
 			$form->submitValue = 'Continue checkout...';
