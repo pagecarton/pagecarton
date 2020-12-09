@@ -90,6 +90,7 @@ class Ayoola_Form_MultiOptions_Abstract extends PageCarton_Widget
         if( Ayoola_Loader::loadClass( $database ) )
         {
             $options = array_keys( $database::getInstance()->getDataTypes() );
+            $options[] = strtolower( array_pop( array_map( 'trim', explode( '_', $database ) ) ) ) . '_id';
             $options = array_combine( $options, $options );
             $fieldset->addElement( array( 'name' => 'values_field', 'label' => 'Values Field', 'type' => 'Select', 'value' => @$values['values_field'] ), $options ); 
             $fieldset->addRequirement( 'values_field', array( 'InArray' => array_keys( $options )  ) ); 

@@ -309,7 +309,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		require_once 'Ayoola/Form/Element.php';
 
 		$additionalForms = array();
-		if( ! empty( $_REQUEST['personal_info'] ) || $this->getParameter( 'personal_info' ) || @$values['firstname'] )
+/* 		if( ! empty( $_REQUEST['personal_info'] ) || $this->getParameter( 'personal_info' ) || @$values['firstname'] )
 		{
 			$personal = new Ayoola_Form_Element;
 			$personal->id = __CLASS__ . 'personal';
@@ -371,7 +371,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			$personal->addFilter( 'birth_date', array( 'DefiniteValue' => $dob ) );
 			$this->getParameter( 'no_legend' ) ?  null : $personal->addLegend( "$legend Personal Information" );
 		}
-		$account = new Ayoola_Form_Element;
+ */		$account = new Ayoola_Form_Element;
 		$account->id = __CLASS__ . 'account';
 		$description = 'Leave blank if you don\'t intend to change password.';   
 		if( is_null( $values ) )
