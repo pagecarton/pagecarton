@@ -538,10 +538,11 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
                         $elementInfo['onchange'] = 'ayoola.div.manageOptions( { database: "' . $multiOptions['db_table_class'] . '", values: "' . $multiOptions['values_field'] . '", labels: "' . $multiOptions['label_field'] . '", element: this } );';
                         $multiOptionsRecord = $multiOptionsRecord + array( '__manage_options' => '[Manage Multi-Options]' );
                     }
+                    $multiOptionsRecord = array( '' => 'Please Select...' ) +  $multiOptionsRecord;
                 }
             }
 			}
-            $fieldsets[$key]->addElement( $options + $elementInfo , array( '' => 'Please Select...' ) +  $multiOptionsRecord );
+            $fieldsets[$key]->addElement( $options + $elementInfo , $multiOptionsRecord );
             foreach( $filters as $eachFilter )
             {
                 $fieldsets[$key]->addFilter( $elementName, $eachFilter );
