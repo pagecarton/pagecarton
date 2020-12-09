@@ -516,39 +516,32 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			$multiOptionsRecord = array();
 			if( $formInfo['element_multioptions'][$i] )
 			{
-			if( $multiOptions = Ayoola_Form_MultiOptions::getInstance()->selectOne( null, array( 'multioptions_name' => $formInfo['element_multioptions'][$i] ) ) )
-				{
+            if ($multiOptions = Ayoola_Form_MultiOptions::getInstance()->selectOne(null, array( 'multioptions_name' => $formInfo['element_multioptions'][$i] ))) {
+                $tableDb = $multiOptions['db_table_class'];
+                if (Ayoola_Loader::loadClass($tableDb) && $tableDb::getInstance() instanceof Ayoola_Dbase_Table_Interface) {
+                    $scope = $tableDb::SCOPE_PRIVATE === $multiOptions['accessibility'] ? $tableDb::SCOPE_PRIVATE : $tableDb::SCOPE_PROTECTED;
+                    $tableDb = $tableDb::getInstance($scope);
+                    $tableDb->getDatabase()->getAdapter()->setAccessibility($scope);
+                    $tableDb->getDatabase()->getAdapter()->setRelationship($scope);
 
-					$tableDb = $multiOptions['db_table_class'];
-					if( Ayoola_Loader::loadClass( $tableDb ) && $tableDb::getInstance() instanceof Ayoola_Dbase_Table_Interface  )
-					{
+                    $where = null;
+                    if (! empty($multiOptions['db_where']) && ! empty($multiOptions['db_where_value'][0])) {
+                        $where = array_combine($multiOptions['db_where'], $multiOptions['db_where_value']);
+                    }
+                    $multiOptionsRecord = $tableDb->select(null, $where);
+                    require_once 'Ayoola/Filter/SelectListArray.php';
+                    $filter = new Ayoola_Filter_SelectListArray($multiOptions['values_field'], $multiOptions['label_field']);
+                    $multiOptionsRecord = $filter->filter($multiOptionsRecord);
+                    asort($multiOptionsRecord);
 
-						$scope = $tableDb::SCOPE_PRIVATE === $multiOptions['accessibility'] ? $tableDb::SCOPE_PRIVATE : $tableDb::SCOPE_PROTECTED;
-						$tableDb = $tableDb::getInstance( $scope );
-						$tableDb->getDatabase()->getAdapter()->setAccessibility( $scope );
-						$tableDb->getDatabase()->getAdapter()->setRelationship( $scope );
-
-						$where = null;
-						if( ! empty( $multiOptions['db_where'] ) && ! empty( $multiOptions['db_where_value'][0] ) )
-						{
-							$where = array_combine( $multiOptions['db_where'], $multiOptions['db_where_value'] );
-
-						}
-						$multiOptionsRecord = $tableDb->select( null, $where );
-						require_once 'Ayoola/Filter/SelectListArray.php';
-						$filter = new Ayoola_Filter_SelectListArray( $multiOptions['values_field'], $multiOptions['label_field'] );
-						$multiOptionsRecord = $filter->filter( $multiOptionsRecord );  
-						asort( $multiOptionsRecord );
-
-						if( self::hasPriviledge( 98 ) )
-						{
-							$elementInfo['onchange'] = 'ayoola.div.manageOptions( { database: "' . $multiOptions['db_table_class'] . '", values: "' . $multiOptions['values_field'] . '", labels: "' . $multiOptions['label_field'] . '", element: this } );';
-							$multiOptionsRecord = $multiOptionsRecord + array( '__manage_options' => '[Manage Multi-Options]' );
-						}
-					}
-				}
+                    if (self::hasPriviledge(98)) {
+                        $elementInfo['onchange'] = 'ayoola.div.manageOptions( { database: "' . $multiOptions['db_table_class'] . '", values: "' . $multiOptions['values_field'] . '", labels: "' . $multiOptions['label_field'] . '", element: this } );';
+                        $multiOptionsRecord = $multiOptionsRecord + array( '__manage_options' => '[Manage Multi-Options]' );
+                    }
+                }
+            }
 			}
-            $fieldsets[$key]->addElement( $options + $elementInfo , $multiOptionsRecord );
+            $fieldsets[$key]->addElement( $options + $elementInfo , array( '' => 'Please Select...' ) +  $multiOptionsRecord );
             foreach( $filters as $eachFilter )
             {
                 $fieldsets[$key]->addFilter( $elementName, $eachFilter );
