@@ -341,13 +341,6 @@ class Ayoola_Application
 
 			$domainName = @$domainSettings['domain'] ? :  self::getDomainName();
 
-			//	Ignore localhosts
-
-			if( '127.0.0.1' == $_SERVER['REMOTE_ADDR'] )
-			{
-
-			}
-
 			require_once 'Application/Domain.php';
 			$domain = Application_Domain::getInstance();
 
@@ -358,11 +351,10 @@ class Ayoola_Application
 			{
 				if( '127.0.0.1' == $_SERVER['REMOTE_ADDR'] )
 				{
-
 					break;
 				}
-					$tempDomainName = explode( '.', $tempDomainName );
-				if( count( $tempDomainName ) < 2 ){ break; }
+				$tempDomainName = explode( '.', $tempDomainName );
+			    //	if( count( $tempDomainName ) < 2 ){ break; }
 				$subDomain = array_shift( $tempDomainName );	// Fix wildcard domainnames
 				$tempDomainName = implode( '.', $tempDomainName );
 				$tempWhere = array( 'domain_name' => $tempDomainName );
@@ -444,7 +436,7 @@ class Ayoola_Application
 				$data['domain_settings'] = $where;
 			}
 
-			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && $domainName !== $_SERVER['SERVER_ADDR'] && empty( $domainSettings['no_redirect'] ) && empty( $_SERVER['CONTEXT_PREFIX'] )  )
+			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && empty( $domainSettings['no_redirect'] ) && empty( $_SERVER['CONTEXT_PREFIX'] )  )
 			{
 
 				if( $primaryDomainInfo['domain_name'] )
@@ -463,7 +455,6 @@ class Ayoola_Application
 			{
 				//	We have found our domain name
 				//	Inventing a personal APPLICATION_PATH also for the "default" Installation
-
 				//	Get settings for the primary domain for inheritance
 
 				$oldDomainDir = Application_Domain_Abstract::getSubDomainDirectory( @$primaryDomainInfo['domain_name'] ? : Ayoola_Page::getDefaultDomain() );

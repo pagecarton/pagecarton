@@ -287,7 +287,7 @@ class Application_Article_View extends Application_Article_Abstract
 			$this->_objectTemplateValues['edit_link'] = $editLinkHTML;
 //			$this->_xml .= $editLinkHTML;
 		}
-		$data['css_class_of_inner_content'] = $this->getParameter( 'css_class_of_inner_content' );
+        $data['css_class_of_inner_content'] = $this->getParameter( 'css_class_of_inner_content' );
 	//	var_export( $data['article_content'] );
 //		$this->_xml .= '</div>'; 
 		$leastPrice = false;
@@ -568,12 +568,12 @@ class Application_Article_View extends Application_Article_Abstract
 				break;
 				case 'article':
                 case 'post':
-                    $article = self::cleanHTML( @$data['article_content' . $featureSuffix] );
-                    if( strip_tags( $article ) === $article )
+                    $data['article_content' . $featureSuffix] = self::cleanHTML( @$data['article_content' . $featureSuffix] );
+                    if( strip_tags( $data['article_content' . $featureSuffix] ) === $data['article_content' . $featureSuffix] )
                     {
-                        $article = nl2br( $article );
+                        $data['article_content' . $featureSuffix] = nl2br( $data['article_content' . $featureSuffix] );
                     }
-					$this->_xml .= $article;
+					$this->_xml .= $data['article_content' . $featureSuffix];
 				break;
 			}
 			$this->_xml .= '</div>';
@@ -612,7 +612,10 @@ class Application_Article_View extends Application_Article_Abstract
         $data['post_type'] = self::__( $data['post_type'] );
         $data['article_type'] = self::__( $data['article_type'] );
         $data['true_post_type'] = self::__( $data['true_post_type'] );
-        		
+        if( ! empty( $data['article_content'] ) )
+        {
+            $data['article_content'] = '<div class="pc-article-content">' . $data['article_content'] . '</div>';
+        }            
 		$this->_objectData = array_merge( $data ? : array(), $this->_objectData ? : array() );
 		$this->_objectTemplateValues = array_merge( $data ? : array(), $this->_objectTemplateValues ? : array() );
     } 

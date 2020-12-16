@@ -1109,12 +1109,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 					@$data['article_description'] = mb_strimwidth( $data['article_description'], 0, $lengthOfDescription, "..." );
 				}
 			}
-            {
-                @$data['article_modified_date_filtered'] = $timeFilter->filter( $data['article_modified_date'] );
-            }
-            {
-                $data['article_creation_date_filtered'] = $timeFilter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
-            }
+            
+            @$data['article_modified_date_filtered'] = $timeFilter->filter( $data['article_modified_date'] );
+            $data['article_creation_date_filtered'] = $timeFilter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
+            
             @$data['article_date_M'] = strftime( '%B', $data['article_modified_date'] );
             @$data['article_date_m'] = strftime( '%b', $data['article_modified_date'] );   
             @$data['article_date_Y'] = strftime( '%Y', $data['article_modified_date'] );
@@ -1406,6 +1404,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             $data['post_type'] = self::__( $data['post_type'] );
             $data['article_type'] = self::__( $data['article_type'] );
             $data['true_post_type'] = self::__( $data['true_post_type'] );
+            if( ! empty( $data['article_content'] ) )
+            {
+                $data['article_content'] = '<div class="pc-article-content">' . $data['article_content'] . '</div>';
+            }
 			$this->_objectData[] = $data;
 			$this->_objectTemplateValues[] = $data;			
 		}

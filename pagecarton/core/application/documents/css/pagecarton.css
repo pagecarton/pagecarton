@@ -5,6 +5,51 @@ Basic Style
 
 -------------------------------- */
 
+
+.pc-article-content p
+{
+    margin: 1.5em 0;
+}
+.pc-article-content h1
+{
+    margin: 2em 0;
+}
+.pc-article-content h2
+{
+    margin: 1.5em 0;
+}
+.pc-article-content h3
+{
+    margin: 1.5em 0;
+}
+.pc-article-content h4
+{
+    margin: 1em 0;
+}
+.pc-article-content h5
+{
+    margin: 1em 0;
+}
+.pc-article-content h6
+{
+    margin: 1em 0;
+}
+
+.pc-article-content li 
+{
+    list-style: unset;
+    display: list-item;
+    line-height: 1.6;
+    font-size: .9em;
+    margin: 0.5em 0;
+}
+
+.pc-article-content img 
+{
+    height: unset;
+    width: unset;
+}
+
 .cd-breadcrumb,
 .cd-multi-steps {
   width: 90%;
