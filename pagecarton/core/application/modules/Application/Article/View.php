@@ -393,14 +393,17 @@ class Application_Article_View extends Application_Article_Abstract
 			$this->_xml = self::getDefaultPostView( $data );
 		}
 
+        if( ! empty( $data['article_content'] ) )
+        {
+            $data['article_content'] = '<div class="pc-article-content">' . $data['article_content'] . '</div>';
+        }            
 
 		//	internal forms to use
 	//	var_export( $postTypeInfo );
-		if( empty( @$postTypeInfo['post_type_options'][0] )  )
-		{
-			unset( $postTypeInfo['post_type_options'] );
-			unset( $postTypeInfo['post_type_options_name'] );
-		}
+        if (empty(@$postTypeInfo['post_type_options'][0])) {
+            unset($postTypeInfo['post_type_options']);
+            unset($postTypeInfo['post_type_options_name']);
+        }
 		$features = is_array( @$postTypeInfo['post_type_options'] ) ? $postTypeInfo['post_type_options'] : static::$_defaultPostElements;
 		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
 		if( ! in_array( @$data['true_post_type'], $features ) )
@@ -432,7 +435,7 @@ class Application_Article_View extends Application_Article_Abstract
 				continue;
 			}
 		//	self::v( $eachPostType );
-			$featureDone[$featureCountKey] = true;
+            $featureDone[$featureCountKey] = true;       
 			$this->_xml .= '<div class="pc_give_space_top_bottom">';
 
 			switch( $eachPostType )
@@ -612,10 +615,6 @@ class Application_Article_View extends Application_Article_Abstract
         $data['post_type'] = self::__( $data['post_type'] );
         $data['article_type'] = self::__( $data['article_type'] );
         $data['true_post_type'] = self::__( $data['true_post_type'] );
-        if( ! empty( $data['article_content'] ) )
-        {
-            $data['article_content'] = '<div class="pc-article-content">' . $data['article_content'] . '</div>';
-        }            
 		$this->_objectData = array_merge( $data ? : array(), $this->_objectData ? : array() );
 		$this->_objectTemplateValues = array_merge( $data ? : array(), $this->_objectTemplateValues ? : array() );
     } 

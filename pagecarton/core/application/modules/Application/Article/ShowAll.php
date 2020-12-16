@@ -1249,7 +1249,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$featuresPrefix[] = '';
 			}
 			$featureCount = array();
-			$featureDone = array();
+            $featureDone = array();
+            if( ! empty( $data['article_content'] ) )
+            {
+                $data['article_content'] = '<div class="pc-article-content">' . $data['article_content'] . '</div>';
+            }
 			foreach( $features as $key => $eachPostType )
 			{	
 				$featureSuffix = @$featuresPrefix[$key];
@@ -1404,10 +1408,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             $data['post_type'] = self::__( $data['post_type'] );
             $data['article_type'] = self::__( $data['article_type'] );
             $data['true_post_type'] = self::__( $data['true_post_type'] );
-            if( ! empty( $data['article_content'] ) )
-            {
-                $data['article_content'] = '<div class="pc-article-content">' . $data['article_content'] . '</div>';
-            }
 			$this->_objectData[] = $data;
 			$this->_objectTemplateValues[] = $data;			
 		}
