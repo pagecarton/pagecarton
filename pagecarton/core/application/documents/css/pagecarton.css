@@ -6,7 +6,8 @@ Basic Style
 -------------------------------- */
 
 
-.pc-article-content p
+.pc-article-content p,
+.pc-article-content blockquote
 {
     margin: 1.5em 0; 
 }
