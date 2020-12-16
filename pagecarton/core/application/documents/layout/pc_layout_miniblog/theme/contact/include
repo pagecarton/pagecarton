@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: contact.php	Wednesday 11th of November 2020 09:54:58 AM	ayoola@ayoo.la $ 
+* @version $Id: contact.php	Wednesday 16th of December 2020 12:23:49 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -17,14 +17,14 @@
 							{
 								
 $_025f19284397312ed04a86205f397d9f = new Ayoola_Page_Editor_Text( array (
-  'editable' => '
+  'codes' => '
 <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg);">
       <div class="container">
         <div class="row same-height justify-content-center">
           <div class="col-md-12 col-lg-10">
             <div class="post-entry text-center">
               <h1 class="">Contact Us</h1>
-              <p class="lead mb-4 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci?</p>
+              <p class="lead mb-4 text-white">Get contact information and details to reach {Organization Name} here.</p>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@ $_025f19284397312ed04a86205f397d9f = new Ayoola_Page_Editor_Text( array (
           <div class="col-md-12 col-lg-10">
             <div class="post-entry text-center">
               <h1 class="">Contact Us</h1>
-              <p class="lead mb-4 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci?</p>
+              <p class="lead mb-4 text-white">Get contact information and details to reach {Organization Name} here.</p>
             </div>
           </div>
         </div>
@@ -156,7 +156,6 @@ $_b39a8b5303443b07f6c140e3497e64bc = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '1576318217-0-13',
-  'insert_id' => '1566897443-0-24',
   'content' => '<div class="site-section bg-light">
       <div class="container">
         <div class="row">

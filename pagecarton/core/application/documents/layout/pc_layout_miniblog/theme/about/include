@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: about.php	Wednesday 11th of November 2020 09:54:52 AM	ayoola@ayoo.la $ 
+* @version $Id: about.php	Wednesday 16th of December 2020 12:23:43 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -34,20 +34,7 @@ $_a33fb331c4338ea8146e714e575471ed = new Ayoola_Page_Editor_Text( array (
         </div>
     </div>
 </widget>',
-  'preserved_content' => '<div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg);">
-      <div class="container">
-        <div class="row same-height justify-content-center">
-          <div class="col-md-12 col-lg-10">
-            <div class="post-entry text-center">
-              <h1 class="">About Us</h1>
-              <p class="lead mb-4 text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem, adipisci?</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-',
+  'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '1576318216-0-8',
   'content' => '<widget parameters=\'{ "class": "Ayoola_Page_Info", "use_site_defaults": true }\'>
@@ -142,7 +129,7 @@ $_cea555ac6b03343d8d1724a08254cc0a = new Ayoola_Page_Editor_Text( array (
     <div class="container">
       <div class="row mb-5 justify-content-center">
         <div class="col-md-5 text-center">
-          <h2>Meet The Team</h2>
+          <h2>Meet {Organization Name} Team</h2>
           <p>{More About Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.}</p>
         </div>
       </div>
@@ -172,7 +159,7 @@ $_cea555ac6b03343d8d1724a08254cc0a = new Ayoola_Page_Editor_Text( array (
     <div class="container">
       <div class="row mb-5 justify-content-center">
         <div class="col-md-5 text-center">
-          <h2>Meet The Team</h2>
+          <h2>Meet {Organization Name} Team</h2>
           <p>{More About Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.}</p>
         </div>
       </div>
@@ -216,7 +203,7 @@ $_d5dffafdd1d5e54e38f1dd04c749720f = new Ayoola_Page_Editor_Text( array (
           <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
         </div>
         <div class="col-md-5 ml-auto">
-          <h2>More About us</h2>
+          <h2>More About {Organization Name}</h2>
           <p class="mb-4">{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}
 
          </p>
@@ -242,7 +229,7 @@ $_d5dffafdd1d5e54e38f1dd04c749720f = new Ayoola_Page_Editor_Text( array (
           <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
         </div>
         <div class="col-md-5 ml-auto">
-          <h2>More About us</h2>
+          <h2>More About {Organization Name}</h2>
           <p class="mb-4">{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}
 
          </p>

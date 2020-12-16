@@ -5,40 +5,6 @@
 * LICENSE
 *
 * @category PageCarton
-* @package /accounts/signout
-* @generated Ayoola_Page_Editor_Layout
-* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
-* @license    http://www.PageCarton.com/license.txt
-* @version $Id: signout.php	Wednesday 16th of December 2020 12:24:51 PM	ayoola@ayoo.la $ 
-*/
-//	Template Content ?>
-
-                    <?php 
-
-                            //	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
-                            //	THEY WON'T HAVE CORRECT APPDIR
-                        if
-                        ( 
-
-                            $x_1608121491 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
-                        )
-                        {
-
-                            if( $x_1608121491 )
-                            foreach( $x_1608121491 as $each )
-                            {	
-                                include_once $each;
-                            }
-                        }
-
-                    ?>
-                     <?php
-/**
-* PageCarton Page Generator
-*
-* LICENSE
-*
-* @category PageCarton
 * @package /default-layout
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
@@ -119,11 +85,7 @@ echo ( ! empty( $_474612ea2c4114e6c4a6f67f7d1d56c3 ) &&  is_object( $_474612ea2c
 //pc_body_1 /default-layout Begins Here
 
 //pc_body_1 /default-layout Ends Here
-?><?php
-//pc_body_1 /accounts/signout Begins Here
-
-//pc_body_1 /accounts/signout Ends Here
-?>
+?>@@@pc_body_1@@@
 
 
 
@@ -146,11 +108,7 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
 echo ( ! empty( $_f07b8fc6580bff292f9c4105144addf2 ) &&  is_object( $_f07b8fc6580bff292f9c4105144addf2 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_f07b8fc6580bff292f9c4105144addf2->view(), '' ) : null );
 
 //pc_body_2 /default-layout Ends Here
-?><?php
-//pc_body_2 /accounts/signout Begins Here
-
-//pc_body_2 /accounts/signout Ends Here
-?>
+?>@@@pc_body_2@@@
 
 
 <?php
@@ -166,13 +124,7 @@ echo ( ! empty( $_f07b8fc6580bff292f9c4105144addf2 ) &&  is_object( $_f07b8fc658
 //oneness /default-layout Begins Here
 
 //oneness /default-layout Ends Here
-?><?php
-//oneness /accounts/signout Begins Here
-
-echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977f91bacc67e31643abd7437 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_46755a2977f91bacc67e31643abd7437->view(), '' ) : null );
-
-//oneness /accounts/signout Ends Here
-?><section data-pc-all-sections="1" class="container">	
+?>@@@oneness@@@<section data-pc-all-sections="1" class="container">	
 									<div class="">
 										<div class="row">
 											<div class="pc_page_layout_grid col-md-12 12u">
@@ -189,11 +141,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //middlebar /default-layout Begins Here
 
 //middlebar /default-layout Ends Here
-?><?php
-//middlebar /accounts/signout Begins Here
-
-//middlebar /accounts/signout Ends Here
-?>
+?>@@@middlebar@@@
 										   </div>
 										</div> 
 										<div class="row">
@@ -211,11 +159,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //twosome1 /default-layout Begins Here
 
 //twosome1 /default-layout Ends Here
-?><?php
-//twosome1 /accounts/signout Begins Here
-
-//twosome1 /accounts/signout Ends Here
-?>
+?>@@@twosome1@@@
 											</div>
 											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
@@ -231,11 +175,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //twosome2 /default-layout Begins Here
 
 //twosome2 /default-layout Ends Here
-?><?php
-//twosome2 /accounts/signout Begins Here
-
-//twosome2 /accounts/signout Ends Here
-?>
+?>@@@twosome2@@@
 											</div> 
 										</div> 
 										<div class="row">
@@ -253,11 +193,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //threesome1 /default-layout Begins Here
 
 //threesome1 /default-layout Ends Here
-?><?php
-//threesome1 /accounts/signout Begins Here
-
-//threesome1 /accounts/signout Ends Here
-?>
+?>@@@threesome1@@@
 										   </div>
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
@@ -273,11 +209,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //threesome2 /default-layout Begins Here
 
 //threesome2 /default-layout Ends Here
-?><?php
-//threesome2 /accounts/signout Begins Here
-
-//threesome2 /accounts/signout Ends Here
-?>
+?>@@@threesome2@@@
 											</div> 
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
@@ -293,11 +225,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //threesome3 /default-layout Begins Here
 
 //threesome3 /default-layout Ends Here
-?><?php
-//threesome3 /accounts/signout Begins Here
-
-//threesome3 /accounts/signout Ends Here
-?>
+?>@@@threesome3@@@
 											</div> 
 										</div> 
 										<div class="row">
@@ -315,11 +243,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //foursome1 /default-layout Begins Here
 
 //foursome1 /default-layout Ends Here
-?><?php
-//foursome1 /accounts/signout Begins Here
-
-//foursome1 /accounts/signout Ends Here
-?>
+?>@@@foursome1@@@
 										   </div>
 											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
@@ -335,11 +259,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //foursome2 /default-layout Begins Here
 
 //foursome2 /default-layout Ends Here
-?><?php
-//foursome2 /accounts/signout Begins Here
-
-//foursome2 /accounts/signout Ends Here
-?>
+?>@@@foursome2@@@
 											</div> 
 											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
@@ -355,11 +275,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //foursome3 /default-layout Begins Here
 
 //foursome3 /default-layout Ends Here
-?><?php
-//foursome3 /accounts/signout Begins Here
-
-//foursome3 /accounts/signout Ends Here
-?>
+?>@@@foursome3@@@
 											</div> 
 											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
 												<?php
@@ -375,11 +291,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //foursome4 /default-layout Begins Here
 
 //foursome4 /default-layout Ends Here
-?><?php
-//foursome4 /accounts/signout Begins Here
-
-//foursome4 /accounts/signout Ends Here
-?>
+?>@@@foursome4@@@
 											</div> 
 										</div> 
 										<div class="row">
@@ -397,11 +309,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //leftbar /default-layout Begins Here
 
 //leftbar /default-layout Ends Here
-?><?php
-//leftbar /accounts/signout Begins Here
-
-//leftbar /accounts/signout Ends Here
-?>
+?>@@@leftbar@@@
 										   </div>
 											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
@@ -417,11 +325,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //leftbarright /default-layout Begins Here
 
 //leftbarright /default-layout Ends Here
-?><?php
-//leftbarright /accounts/signout Begins Here
-
-//leftbarright /accounts/signout Ends Here
-?>
+?>@@@leftbarright@@@
 											</div> 
 										</div> 
 										<div class="row">
@@ -439,11 +343,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //rightbarleft /default-layout Begins Here
 
 //rightbarleft /default-layout Ends Here
-?><?php
-//rightbarleft /accounts/signout Begins Here
-
-//rightbarleft /accounts/signout Ends Here
-?>
+?>@@@rightbarleft@@@
 											</div> 
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
 												<?php
@@ -459,11 +359,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //rightbar /default-layout Begins Here
 
 //rightbar /default-layout Ends Here
-?><?php
-//rightbar /accounts/signout Begins Here
-
-//rightbar /accounts/signout Ends Here
-?>
+?>@@@rightbar@@@
 											</div>   
 										</div> 
 									</div> 
@@ -480,11 +376,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //lastoneness /default-layout Begins Here
 
 //lastoneness /default-layout Ends Here
-?><?php
-//lastoneness /accounts/signout Begins Here
-
-//lastoneness /accounts/signout Ends Here
-?>
+?>@@@lastoneness@@@
 <?php
 //pc_body_3 /layout/pc_layout_miniblog/template Begins Here
 
@@ -498,11 +390,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //pc_body_3 /default-layout Begins Here
 
 //pc_body_3 /default-layout Ends Here
-?><?php
-//pc_body_3 /accounts/signout Begins Here
-
-//pc_body_3 /accounts/signout Ends Here
-?>
+?>@@@pc_body_3@@@
 
 
 
@@ -521,11 +409,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //pc_body_4 /default-layout Begins Here
 
 //pc_body_4 /default-layout Ends Here
-?><?php
-//pc_body_4 /accounts/signout Begins Here
-
-//pc_body_4 /accounts/signout Ends Here
-?>
+?>@@@pc_body_4@@@
 
 
 
@@ -544,11 +428,7 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //pc_body_5 /default-layout Begins Here
 
 //pc_body_5 /default-layout Ends Here
-?><?php
-//pc_body_5 /accounts/signout Begins Here
-
-//pc_body_5 /accounts/signout Ends Here
-?>
+?>@@@pc_body_5@@@
 
 
 
@@ -568,19 +448,11 @@ echo ( ! empty( $_46755a2977f91bacc67e31643abd7437 ) &&  is_object( $_46755a2977
 //pc_body_6 /default-layout Begins Here
 
 //pc_body_6 /default-layout Ends Here
-?><?php
-//pc_body_6 /accounts/signout Begins Here
-
-//pc_body_6 /accounts/signout Ends Here
-?> <?php
+?>@@@pc_body_6@@@ <?php
 //pc_body_8 /default-layout Begins Here
 
 //pc_body_8 /default-layout Ends Here
-?><?php
-//pc_body_8 /accounts/signout Begins Here
-
-//pc_body_8 /accounts/signout Ends Here
-?>
+?>@@@pc_body_8@@@
 
 
 
@@ -602,11 +474,7 @@ echo ( ! empty( $_2cfd005375ab9fe4addf27e6c57d38eb ) &&  is_object( $_2cfd005375
 //pc_body_7 /default-layout Begins Here
 
 //pc_body_7 /default-layout Ends Here
-?><?php
-//pc_body_7 /accounts/signout Begins Here
-
-//pc_body_7 /accounts/signout Ends Here
-?>
+?>@@@pc_body_7@@@
 
 
 
@@ -627,11 +495,7 @@ echo ( ! empty( $_2cfd005375ab9fe4addf27e6c57d38eb ) &&  is_object( $_2cfd005375
 //pc_section_after_js /default-layout Begins Here
 
 //pc_section_after_js /default-layout Ends Here
-?><?php
-//pc_section_after_js /accounts/signout Begins Here
-
-//pc_section_after_js /accounts/signout Ends Here
-?>
+?>@@@pc_section_after_js@@@
 
 </body>
 </html>

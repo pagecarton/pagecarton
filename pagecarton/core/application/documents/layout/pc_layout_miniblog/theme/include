@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Wednesday 11th of November 2020 09:54:14 AM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Wednesday 16th of December 2020 12:23:32 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -394,12 +394,13 @@ $_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-4">
-            <h3 class="footer-heading mb-4">About Us</h3>
+            <h3 class="footer-heading mb-4">About {Organization Name}</h3>
             <p>{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}</p>
           </div>
           <div class="col-md-3 ml-auto">
             <!-- <h3 class="footer-heading mb-4">Navigation</h3> -->
             <ul class="list-unstyled float-left mr-5">
+              <li><a href="/contact">Contact</a></li>
 <!-- How to embed Ayoola_Menu -->
 <!--{{{@0(Ayoola_Menu)-->
               <li><a href="{{{url}}}" onclick="{{{ayoola_spotlight}}}">{{{option_name}}}</a></li>
@@ -419,7 +420,7 @@ $_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
             
 
             <div>
-              <h3 class="footer-heading mb-4">Connect With Us</h3>
+              <h3 class="footer-heading mb-4">Connect With {Organization Name}</h3>
               <p>
                 <a href="{https://www.facebook.com/PageCarton}"><span class="icon-facebook pt-2 pr-2 pb-2 pl-0">&nbsp;</span></a>
                 <a href="{https://www.twitter.com/PageCarton}"><span class="icon-twitter p-2">&nbsp;</span></a>
@@ -465,12 +466,13 @@ $_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-4">
-            <h3 class="footer-heading mb-4">About Us</h3>
+            <h3 class="footer-heading mb-4">About {Organization Name}</h3>
             <p>{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}</p>
           </div>
           <div class="col-md-3 ml-auto">
             <!-- <h3 class="footer-heading mb-4">Navigation</h3> -->
             <ul class="list-unstyled float-left mr-5">
+              <li><a href="/contact">Contact</a></li>
 <!-- How to embed Ayoola_Menu -->
 <!--{{{@0(Ayoola_Menu)-->
               <li><a href="{{{url}}}" onclick="{{{ayoola_spotlight}}}">{{{option_name}}}</a></li>
@@ -490,7 +492,7 @@ $_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
             
 
             <div>
-              <h3 class="footer-heading mb-4">Connect With Us</h3>
+              <h3 class="footer-heading mb-4">Connect With {Organization Name}</h3>
               <p>
                 <a href="{https://www.facebook.com/PageCarton}"><span class="icon-facebook pt-2 pr-2 pb-2 pl-0">&nbsp;</span></a>
                 <a href="{https://www.twitter.com/PageCarton}"><span class="icon-twitter p-2">&nbsp;</span></a>

@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: includes.php	Wednesday 11th of November 2020 09:54:18 AM	ayoola@ayoo.la $ 
+* @version $Id: includes.php	Wednesday 16th of December 2020 12:23:35 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -20,12 +20,12 @@
                         if
                         ( 
 
-                            $x_1605088458 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1608121415 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1605088458 )
-                            foreach( $x_1605088458 as $each )
+                            if( $x_1608121415 )
+                            foreach( $x_1608121415 as $each )
                             {	
                                 include_once $each;
                             }
@@ -43,7 +43,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Wednesday 11th of November 2020 09:54:14 AM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Wednesday 16th of December 2020 12:23:32 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <!DOCTYPE html>

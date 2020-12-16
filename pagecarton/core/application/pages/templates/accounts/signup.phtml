@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signup.php	Wednesday 11th of November 2020 09:55:53 AM	ayoola@ayoo.la $ 
+* @version $Id: signup.php	Wednesday 16th of December 2020 12:24:46 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -20,12 +20,46 @@
                         if
                         ( 
 
-                            $x_1605088553 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1608121486 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1605088553 )
-                            foreach( $x_1605088553 as $each )
+                            if( $x_1608121486 )
+                            foreach( $x_1608121486 as $each )
+                            {	
+                                include_once $each;
+                            }
+                        }
+
+                    ?>
+                     <?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /default-layout
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: default-layout.php	Wednesday 16th of December 2020 11:45:15 AM	ayoola@ayoo.la $ 
+*/
+//	Template Content ?>
+
+                    <?php 
+
+                            //	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
+                            //	THEY WON'T HAVE CORRECT APPDIR
+                        if
+                        ( 
+
+                            $x_1608119115 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                        )
+                        {
+
+                            if( $x_1608119115 )
+                            foreach( $x_1608119115 as $each )
                             {	
                                 include_once $each;
                             }
@@ -82,6 +116,10 @@ echo ( ! empty( $_474612ea2c4114e6c4a6f67f7d1d56c3 ) &&  is_object( $_474612ea2c
 
 //pc_body_1 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//pc_body_1 /default-layout Begins Here
+
+//pc_body_1 /default-layout Ends Here
+?><?php
 //pc_body_1 /accounts/signup Begins Here
 
 //pc_body_1 /accounts/signup Ends Here
@@ -103,6 +141,12 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
 
 //pc_body_2 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//pc_body_2 /default-layout Begins Here
+
+echo ( ! empty( $_f07b8fc6580bff292f9c4105144addf2 ) &&  is_object( $_f07b8fc6580bff292f9c4105144addf2 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_f07b8fc6580bff292f9c4105144addf2->view(), '' ) : null );
+
+//pc_body_2 /default-layout Ends Here
+?><?php
 //pc_body_2 /accounts/signup Begins Here
 
 //pc_body_2 /accounts/signup Ends Here
@@ -118,6 +162,10 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 }
                 
 //oneness /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//oneness /default-layout Begins Here
+
+//oneness /default-layout Ends Here
 ?><?php
 //oneness /accounts/signup Begins Here
 
@@ -135,6 +183,10 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 }
                 
 //middlebar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//middlebar /default-layout Begins Here
+
+//middlebar /default-layout Ends Here
 ?><?php
 //middlebar /accounts/signup Begins Here
 
@@ -154,6 +206,10 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //twosome1 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//twosome1 /default-layout Begins Here
+
+//twosome1 /default-layout Ends Here
+?><?php
 //twosome1 /accounts/signup Begins Here
 
 //twosome1 /accounts/signup Ends Here
@@ -169,6 +225,10 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 }
                 
 //twosome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//twosome2 /default-layout Begins Here
+
+//twosome2 /default-layout Ends Here
 ?><?php
 //twosome2 /accounts/signup Begins Here
 
@@ -188,6 +248,10 @@ echo ( ! empty( $_2ff07f92152067abe063cd346477b0d8 ) &&  is_object( $_2ff07f9215
                 
 //threesome1 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//threesome1 /default-layout Begins Here
+
+//threesome1 /default-layout Ends Here
+?><?php
 //threesome1 /accounts/signup Begins Here
 
 echo ( ! empty( $_add614b1399eb4e44e9fbbfb6a644920 ) &&  is_object( $_add614b1399eb4e44e9fbbfb6a644920 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_add614b1399eb4e44e9fbbfb6a644920->view(), '' ) : null );
@@ -205,6 +269,10 @@ echo ( ! empty( $_add614b1399eb4e44e9fbbfb6a644920 ) &&  is_object( $_add614b139
                 }
                 
 //threesome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//threesome2 /default-layout Begins Here
+
+//threesome2 /default-layout Ends Here
 ?><?php
 //threesome2 /accounts/signup Begins Here
 
@@ -226,6 +294,10 @@ echo ( ! empty( $_92f19eb400940884c1ee63d9bee1aaad ) &&  is_object( $_92f19eb400
                 
 //threesome3 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//threesome3 /default-layout Begins Here
+
+//threesome3 /default-layout Ends Here
+?><?php
 //threesome3 /accounts/signup Begins Here
 
 echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164387f663fde975d297d551f ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_1434ec8164387f663fde975d297d551f->view(), '' ) : null );
@@ -246,6 +318,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 
 //foursome1 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//foursome1 /default-layout Begins Here
+
+//foursome1 /default-layout Ends Here
+?><?php
 //foursome1 /accounts/signup Begins Here
 
 //foursome1 /accounts/signup Ends Here
@@ -261,6 +337,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 }
                 
 //foursome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome2 /default-layout Begins Here
+
+//foursome2 /default-layout Ends Here
 ?><?php
 //foursome2 /accounts/signup Begins Here
 
@@ -278,6 +358,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 
 //foursome3 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//foursome3 /default-layout Begins Here
+
+//foursome3 /default-layout Ends Here
+?><?php
 //foursome3 /accounts/signup Begins Here
 
 //foursome3 /accounts/signup Ends Here
@@ -293,6 +377,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 }
                 
 //foursome4 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome4 /default-layout Begins Here
+
+//foursome4 /default-layout Ends Here
 ?><?php
 //foursome4 /accounts/signup Begins Here
 
@@ -312,6 +400,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 
 //leftbar /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//leftbar /default-layout Begins Here
+
+//leftbar /default-layout Ends Here
+?><?php
 //leftbar /accounts/signup Begins Here
 
 //leftbar /accounts/signup Ends Here
@@ -327,6 +419,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 }
                 
 //leftbarright /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//leftbarright /default-layout Begins Here
+
+//leftbarright /default-layout Ends Here
 ?><?php
 //leftbarright /accounts/signup Begins Here
 
@@ -346,6 +442,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 
 //rightbarleft /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//rightbarleft /default-layout Begins Here
+
+//rightbarleft /default-layout Ends Here
+?><?php
 //rightbarleft /accounts/signup Begins Here
 
 //rightbarleft /accounts/signup Ends Here
@@ -361,6 +461,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 }
                 
 //rightbar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//rightbar /default-layout Begins Here
+
+//rightbar /default-layout Ends Here
 ?><?php
 //rightbar /accounts/signup Begins Here
 
@@ -379,6 +483,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 
 //lastoneness /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//lastoneness /default-layout Begins Here
+
+//lastoneness /default-layout Ends Here
+?><?php
 //lastoneness /accounts/signup Begins Here
 
 //lastoneness /accounts/signup Ends Here
@@ -392,6 +500,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 }
                 
 //pc_body_3 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_3 /default-layout Begins Here
+
+//pc_body_3 /default-layout Ends Here
 ?><?php
 //pc_body_3 /accounts/signup Begins Here
 
@@ -412,6 +524,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 
 //pc_body_4 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//pc_body_4 /default-layout Begins Here
+
+//pc_body_4 /default-layout Ends Here
+?><?php
 //pc_body_4 /accounts/signup Begins Here
 
 //pc_body_4 /accounts/signup Ends Here
@@ -430,6 +546,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 }
                 
 //pc_body_5 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_5 /default-layout Begins Here
+
+//pc_body_5 /default-layout Ends Here
 ?><?php
 //pc_body_5 /accounts/signup Begins Here
 
@@ -451,9 +571,21 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
                 
 //pc_body_6 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
+//pc_body_6 /default-layout Begins Here
+
+//pc_body_6 /default-layout Ends Here
+?><?php
 //pc_body_6 /accounts/signup Begins Here
 
 //pc_body_6 /accounts/signup Ends Here
+?> <?php
+//pc_body_8 /default-layout Begins Here
+
+//pc_body_8 /default-layout Ends Here
+?><?php
+//pc_body_8 /accounts/signup Begins Here
+
+//pc_body_8 /accounts/signup Ends Here
 ?>
 
 
@@ -472,6 +604,10 @@ echo ( ! empty( $_1434ec8164387f663fde975d297d551f ) &&  is_object( $_1434ec8164
 echo ( ! empty( $_2cfd005375ab9fe4addf27e6c57d38eb ) &&  is_object( $_2cfd005375ab9fe4addf27e6c57d38eb ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_2cfd005375ab9fe4addf27e6c57d38eb->view(), '' ) : null );
 
 //pc_body_7 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_7 /default-layout Begins Here
+
+//pc_body_7 /default-layout Ends Here
 ?><?php
 //pc_body_7 /accounts/signup Begins Here
 
@@ -493,6 +629,10 @@ echo ( ! empty( $_2cfd005375ab9fe4addf27e6c57d38eb ) &&  is_object( $_2cfd005375
                 }
                 
 //pc_section_after_js /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_section_after_js /default-layout Begins Here
+
+//pc_section_after_js /default-layout Ends Here
 ?><?php
 //pc_section_after_js /accounts/signup Begins Here
 

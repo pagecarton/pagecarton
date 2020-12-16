@@ -1,0 +1,66 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /default-layout
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: default-layout.php	Wednesday 16th of December 2020 11:45:15 AM	ayoola@ayoo.la $ 
+*/
+//	Page Include Content
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_f07b8fc6580bff292f9c4105144addf2 = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<widget parameters=\'{ "class": "Ayoola_Page_Info", "use_site_defaults": true }\'>
+    <div class="site-cover site-cover-sm same-height overlay single-page"
+        style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg?embed_image_url={{{cover_photo}}});">
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="post-entry text-center">
+
+                        <h1 class="">{{{title}}}</h1>
+                        <p class="lead mb-4 text-white">{{{description}}} {{{link_to_edit}}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</widget>',
+  'preserved_content' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '1576318216-0-8',
+  'content' => '<widget parameters=\'{ "class": "Ayoola_Page_Info", "use_site_defaults": true }\'>
+    <div class="site-cover site-cover-sm same-height overlay single-page"
+        style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg?embed_image_url={{{cover_photo}}});">
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="post-entry text-center">
+
+                        <h1 class="">{{{title}}}</h1>
+                        <p class="lead mb-4 text-white">{{{description}}} {{{link_to_edit}}}</p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</widget>',
+) );
+
+							}
+							else
+							{
+								
+$_f07b8fc6580bff292f9c4105144addf2 = null;
+
+							}
+							
