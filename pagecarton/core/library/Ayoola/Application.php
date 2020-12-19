@@ -642,7 +642,7 @@ class Ayoola_Application
                         if(  Ayoola_Page::getInfo( Ayoola_Application::getPresentUri() )  )
                         {
                             self::setPresentUri( '/domain-not-found' );
-                            self::$_runtimeSetting['url'];
+                            self::$_runtimeSetting['url'] = '/domain-not-found';
                         }
 					}
 					elseif( empty( $domainSettings['no_redirect'] ) )
@@ -656,7 +656,7 @@ class Ayoola_Application
                         if(  Ayoola_Page::getInfo( Ayoola_Application::getPresentUri() )  )
                         {
                             self::setPresentUri( '/domain-not-found' );
-                            self::$_runtimeSetting['url'];
+                            self::$_runtimeSetting['url'] = '/domain-not-found';
                         }
 
 					}
@@ -752,7 +752,6 @@ class Ayoola_Application
 		require_once 'Application/Log/View/Error.php';
 		set_exception_handler( function($object) {
             $message = "Uncaught Exception " . get_class( $object ) . " with message " . $object->getMessage() . " in  " . $object->getFile() . " on line " . $object->getLine() . " Stack trace: " . $object->getTraceAsString();
-        //    var_export( $message );
 			Application_Log_View_Error::log( $message );
 		});
 
@@ -1768,7 +1767,6 @@ class Ayoola_Application
         {
 			return self::$_presentUri[$url];
         }
-
         return self::setPresentUri( $url );
     }
 
