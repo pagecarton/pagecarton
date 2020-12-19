@@ -352,7 +352,7 @@ class Ayoola_Application
 			{
                 //  check for sub domain
 
-				if( is_numeric( str_replace( '.', '', $_SERVER['REMOTE_ADDR'] ) ) )
+				if( is_numeric( str_replace( '.', '', $domainName ) ) )
 				{
                     // ip addresses don't have subdomain
 					break;
