@@ -641,7 +641,8 @@ class Ayoola_Application
                         //	exit( 'USER DOMAIN NOT ACTIVE' );
                         if(  Ayoola_Page::getInfo( Ayoola_Application::getPresentUri() )  )
                         {
-                            self::view( '/domain-not-found' );
+                            self::setPresentUri( '/domain-not-found' );
+                            self::$_runtimeSetting['url'];
                         }
 					}
 					elseif( empty( $domainSettings['no_redirect'] ) )
@@ -654,7 +655,8 @@ class Ayoola_Application
                         //  exit( 'DOMAIN NOT IN USE' );
                         if(  Ayoola_Page::getInfo( Ayoola_Application::getPresentUri() )  )
                         {
-                            self::view( '/domain-not-found' );
+                            self::setPresentUri( '/domain-not-found' );
+                            self::$_runtimeSetting['url'];
                         }
 
 					}
