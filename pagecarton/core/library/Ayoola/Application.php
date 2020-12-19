@@ -983,7 +983,7 @@ class Ayoola_Application
                         if( in_array( 'user_subdomains', $domainOptions ) )
                         {
                             $urlY = 'http://' . $nameForModule . '.' . self::getDomainSettings( 'domain_name' );
-                            $urlY = self::appendCurrentQueryStrings( $urlY );
+                            $urlY = self::appendCurrentQueryStrings( $urlY ); 
                             header( 'Location: ' . $urlY );
                             exit();
                         }
