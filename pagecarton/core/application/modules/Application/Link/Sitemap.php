@@ -132,7 +132,10 @@ class Application_Link_Sitemap extends Application_Link_Abstract
 
 		//	pages
 
-		$table = new Ayoola_Page_Page();
+		$table =  'Ayoola_Page_Page';
+        $table = $table::getInstance( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 		$table = $table->select();
 
 		$innerUl = $this->_html->createElement( 'ul' );
@@ -171,7 +174,10 @@ class Application_Link_Sitemap extends Application_Link_Abstract
 		}
 
 		//	categories
-		$table = new Application_Category();
+		$table =  'Application_Category';
+        $table = $table::getInstance( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 		$table = $table->select();
 
 		$innerUl = $this->_html->createElement( 'ul' );
@@ -204,7 +210,10 @@ class Application_Link_Sitemap extends Application_Link_Abstract
 		}
 
 		// post types
-		$table = new Application_Article_Type();
+		$table =  'Application_Article_Type';
+        $table = $table::getInstance( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 		$table = $table->select();
 
 		$innerUl = $this->_html->createElement( 'ul' );
@@ -274,7 +283,10 @@ class Application_Link_Sitemap extends Application_Link_Abstract
 		
 
 		//	posts
-		$table = new Application_Article_Table();
+		$table =  'Application_Article_Table';
+        $table = $table::getInstance( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 		$table = $table->select();
 
 		$innerUl = $this->_html->createElement( 'ul' );
