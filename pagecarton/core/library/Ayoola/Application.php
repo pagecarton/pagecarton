@@ -637,16 +637,16 @@ class Ayoola_Application
 
                         $urlY = $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                         $urlY = self::appendCurrentQueryStrings( $urlY );
-                        //    header( 'Location: ' . $urlY );
-                        //	exit( 'USER DOMAIN NOT ACTIVE' );
-                        if(  Ayoola_Page::getInfo( Ayoola_Application::getPresentUri() )  )
+                        header( 'Location: ' . $urlY );
+                        exit( 'USER DOMAIN NOT ACTIVE' );
+/*                         if(  Ayoola_Page::getInfo( Ayoola_Application::getPresentUri() )  )
                         {
                             //    self::setPresentUri( '/domain-not-found' );
                             //    self::$_runtimeSetting['url'] = '/domain-not-found';
                             self::view( '/domain-not-found' );
                             exit();
                         }
-					}
+ */					}
 					elseif( empty( $domainSettings['no_redirect'] ) )
 					{
 
@@ -654,15 +654,6 @@ class Ayoola_Application
                         $urlY = self::appendCurrentQueryStrings( $urlY );
                         header( 'Location: ' . $urlY );
             
-                        //  exit( 'DOMAIN NOT IN USE' );
-                        if(  Ayoola_Page::getInfo( Ayoola_Application::getPresentUri() )  )
-                        {
-                            //    self::setPresentUri( '/domain-not-found' );
-                            //    self::$_runtimeSetting['url'] = '/domain-not-found';
-                            self::view( '/domain-not-found' );
-                            exit();
-                        }
-
 					}
 				}
 			}
