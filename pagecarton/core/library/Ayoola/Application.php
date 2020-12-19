@@ -301,7 +301,7 @@ class Ayoola_Application
 			$protocol = 'https';
 		}
 
-		@$storage->storageNamespace = '' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
+		@$storage->storageNamespace = 'xiu' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve();
 		if( $data && ! $forceReset && ( isset($_GET['reset_domain_information']) && !$_GET['reset_domain_information']) )
@@ -564,6 +564,7 @@ class Ayoola_Application
 						$data['domain_settings'] = $subDomainInfo;
 						$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $primaryDomainInfo['domain_name'];
 						$data['domain_settings']['domain_name'] = $subDomain . '.' . $primaryDomainInfo['domain_name'];
+						$data['domain_settings']['parent'] = @$data['parent_domain_settings'] ? : $primaryDomainInfo;
 
 						$subDomainDir = $subDomainInfo['application_dir'] ? : $subDomainInfo['domain_name'];
 						$subDomainDir = Application_Domain_Abstract::getSubDomainDirectory( $subDomainDir );
@@ -624,6 +625,7 @@ class Ayoola_Application
 						$data['domain_settings']['main_domain'] = $data['domain_settings']['main_domain'] ? : $tempWhere['domain_name'];
 						$data['domain_settings']['domain_name'] = Ayoola_Application::getDomainName();
 						$data['domain_settings']['dynamic_domain'] = true;
+						$data['domain_settings']['parent'] = @$data['parent_domain_settings'] ? : $primaryDomainInfo;
 
 						$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] . DS . AYOOLA_MODULE_FILES .  DS . 'profiles' . DS . strtolower( implode( DS, str_split( $subDomain, 2 ) ) );
 						$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_DIR] . DS . 'application';
@@ -982,7 +984,8 @@ class Ayoola_Application
                         $domainOptions = self::getDomainSettings( 'domain_options' );
                         if( in_array( 'user_subdomains', $domainOptions ) )
                         {
-                            $urlY = 'http://' . $nameForModule . '.' . self::getDomainSettings( 'domain_name' );
+                            $parentDomainOptions = self::getDomainSettings( 'parent' );
+                            $urlY = 'http://' . $nameForModule . '.' . ( $parentDomainOptions['domain_name'] ? : self::getDomainSettings( 'domain_name' ) );
                             $urlY = self::appendCurrentQueryStrings( $urlY ); 
                             header( 'Location: ' . $urlY );
                             exit();
