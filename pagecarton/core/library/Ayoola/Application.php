@@ -637,9 +637,9 @@ class Ayoola_Application
 
                         $urlY = $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                         $urlY = self::appendCurrentQueryStrings( $urlY );
-                        header( 'Location: ' . $urlY );
-
-						exit( 'USER DOMAIN NOT ACTIVE' );
+                    //    header( 'Location: ' . $urlY );
+                    //	exit( 'USER DOMAIN NOT ACTIVE' );
+                        self::view( '/domain-not-found' );
 					}
 					elseif( empty( $domainSettings['no_redirect'] ) )
 					{
@@ -1486,8 +1486,10 @@ class Ayoola_Application
     public static function view( $uriToView = null )
     {
 
-		$uri = $uriToView;
-		if( ! $uri )
+        $uri = $uriToView;
+        $pageInfo = Ayoola_Page::getInfo( $uri );
+
+		if( ! $uri || ! $pageInfo )
 		{
 			$uri =  self::$_notFoundPage;
 			self::$_runtimeSetting['real_url'] = self::$_notFoundPage;
@@ -1508,7 +1510,6 @@ class Ayoola_Application
 		$pagePaths['no_restrictions'] ? : self::restrictAccess();
 
 		//	check if redirect
-		$pageInfo = Ayoola_Page::getInfo( $uri );
 
 		if( @$pageInfo['redirect_url'] && ! @$_REQUEST['pc_redirect_url'] )
 		{
