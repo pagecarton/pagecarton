@@ -400,7 +400,6 @@ class Ayoola_Application
 			{
 
 				$enforcedDestination = $data['domain_settings']['enforced_destination'];
-
 				if( count( explode( '.', $enforcedDestination ) ) >= 2 )
 				{
 					if( strtolower( $_SERVER['HTTP_HOST'] ) !== strtolower( trim( $enforcedDestination ) ) )
@@ -983,7 +982,7 @@ class Ayoola_Application
                         $domainOptions = self::getDomainSettings( 'domain_options' );
                         if( in_array( 'user_subdomains', $domainOptions ) )
                         {
-                            $urlY = 'http://' . $nameForModule . self::getDomainSettings( 'domain_name' );
+                            $urlY = 'http://' . $nameForModule . '.' . self::getDomainSettings( 'domain_name' );
                             $urlY = self::appendCurrentQueryStrings( $urlY );
                             header( 'Location: ' . $urlY );
                             exit();
