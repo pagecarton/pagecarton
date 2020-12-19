@@ -346,15 +346,19 @@ class Ayoola_Application
 
 			$where = array( 'domain_name' => $domainName );
 			$tempDomainName = $domainName;
-			$tempWhere = $where;
+            $tempWhere = $where;
+            
 			while( ! $data['domain_settings'] = $domain->selectOne( null, $tempWhere ) )
 			{
-				if( '127.0.0.1' == $_SERVER['REMOTE_ADDR'] )
+                //  check for sub domain
+
+				if( is_numeric( str_replace( '.', '', $_SERVER['REMOTE_ADDR'] ) ) )
 				{
+                    // ip addresses don't have subdomain
 					break;
 				}
 				$tempDomainName = explode( '.', $tempDomainName );
-			    //	if( count( $tempDomainName ) < 2 ){ break; }
+			    if( count( $tempDomainName ) < 2 ){ break; }
 				$subDomain = array_shift( $tempDomainName );	// Fix wildcard domainnames
 				$tempDomainName = implode( '.', $tempDomainName );
 				$tempWhere = array( 'domain_name' => $tempDomainName );
@@ -401,8 +405,10 @@ class Ayoola_Application
 				{
 					if( strtolower( $_SERVER['HTTP_HOST'] ) !== strtolower( trim( $enforcedDestination ) ) )
 					{
-						header( 'Location: ' . $protocol . '://' . $enforcedDestination . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
-						exit();
+                        $urlY = $protocol . '://' . $enforcedDestination . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                        $urlY = self::appendCurrentQueryStrings( $urlY );
+                        header( 'Location: ' . $urlY );
+                        exit();
 					}
 				}
 
@@ -441,8 +447,9 @@ class Ayoola_Application
 
 				if( $primaryDomainInfo['domain_name'] )
 				{
-					header( 'Location: ' . $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );
-
+                    $urlY = $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                    $urlY = self::appendCurrentQueryStrings( $urlY );
+                    header( 'Location: ' . $urlY );
 					exit( 'DOMAIN NOT FOUND' );
 				}
 				else
@@ -530,8 +537,7 @@ class Ayoola_Application
 						break;
 					}
 
-				//	For backward compatibility, the directory must be "consciously" set
-
+				    //	For backward compatibility, the directory must be "consciously" set
 					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = str_replace( '/', DS, $domainDir );
 					$data['domain_settings'][APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'application';
 					@$data['domain_settings'][EXTENSIONS_PATH] = @$primaryDomainInfo[EXTENSIONS_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'extensions';
@@ -549,7 +555,6 @@ class Ayoola_Application
 			}
 
 			//	check subdomain
-
 			if( isset($subDomain) && $subDomain && empty( $_SERVER['CONTEXT_PREFIX'] ) )
 			{
 				if( $subDomainInfo = $domain->selectOne( null, array( 'domain_name' => $subDomain ) ) )
@@ -606,8 +611,10 @@ class Ayoola_Application
 							//	link it to the profile
 							if( empty( $userDomain ) && empty( $_REQUEST['pc_clean_url_check'] ) && PageCarton_Widget::fetchLink( 'http://' . $userDomainInfo['domain_name'] . '/pc_check.txt?pc_clean_url_check=1' ) )
 							{
-								header( 'Location: ' . $protocol . '://' . $userDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );
-								exit();
+                                $urlY = $protocol . '://' . $userDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                                $urlY = self::appendCurrentQueryStrings( $urlY );
+                                header( 'Location: ' . $urlY );
+                                exit();
 							}
 						}
 
@@ -627,14 +634,19 @@ class Ayoola_Application
 					elseif( ! empty( $tempWhere['domain_name'] ) && $tempWhere['domain_name'] != self::getDomainName() && empty( $domainSettings['no_redirect'] )  )
 					{
 
-						header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );
+                        $urlY = $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                        $urlY = self::appendCurrentQueryStrings( $urlY );
+                        header( 'Location: ' . $urlY );
 
 						exit( 'USER DOMAIN NOT ACTIVE' );
 					}
 					elseif( empty( $domainSettings['no_redirect'] ) )
 					{
 
-						header( 'Location: ' . $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET )  );
+                        $urlY = $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                        $urlY = self::appendCurrentQueryStrings( $urlY );
+                        header( 'Location: ' . $urlY );
+            
 						exit( 'DOMAIN NOT IN USE' );
 					}
 				}
@@ -651,11 +663,11 @@ class Ayoola_Application
 		if( @is_array( $data['domain_settings']['domain_options'] ) && in_array( 'redirect', $data['domain_settings']['domain_options'] ) && ! @$_REQUEST['ignore_domain_redirect'] && ! @$_SESSION['ignore_domain_redirect'] && empty( $domainSettings['no_redirect'] ) )
 		{
 			header( 'HTTP/1.1 ' . $data['domain_settings']['redirect_code'] );
-			$toGo = $protocol . '://' . $data['domain_settings']['redirect_destination'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET );
-			header( 'Location: ' . $toGo );
-
-			exit( 'REDIRECTING TO' );
-		}
+            $urlY = $protocol . '://' . $data['domain_settings']['redirect_destination'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+            $urlY = self::appendCurrentQueryStrings( $urlY );
+            header( 'Location: ' . $urlY );
+            exit();
+        }
 		elseif( @$_REQUEST['ignore_domain_redirect'] || @$_SESSION['ignore_domain_redirect'] )
 		{
 			$_SESSION['ignore_domain_redirect'] = true;
@@ -694,8 +706,11 @@ class Ayoola_Application
             {
                 if( PageCarton_Widget::fetchLink( 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . '/pc_check.txt?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) === 'pc' )
                 {
-                    header( 'Location: https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri() . '?' . http_build_query( $_GET ) );
+                    $urlY = 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                    $urlY = self::appendCurrentQueryStrings( $urlY );
+                    header( 'Location: ' . $urlY );
                     exit();
+
                 }
             }
         }
@@ -959,12 +974,20 @@ class Ayoola_Application
                         $nameForModule = array_shift( $a );
                     }
 
+
                     $userInfo = $nameForModule ? Application_Profile_Abstract::getProfileInfo( $nameForModule ) : null;
 
                     //	Hide superusers
                     if( $userInfo && $userInfo['access_level'] != 99 )
                     {
-
+                        $domainOptions = self::getDomainSettings( 'domain_options' );
+                        if( in_array( 'user_subdomains', $domainOptions ) )
+                        {
+                            $urlY = 'http://' . $nameForModule . self::getDomainSettings( 'domain_name' );
+                            $urlY = self::appendCurrentQueryStrings( $urlY );
+                            header( 'Location: ' . $urlY );
+                            exit();
+                        }
                         $url = rtrim( '/profile' );
                         self::$mode = 'profile';
                         $url = rtrim( '/profile/' . implode( '/', $a ), '/' );
@@ -1524,6 +1547,21 @@ class Ayoola_Application
 
 		return true;
 	}
+
+    /**
+     * 
+     *
+     * @param string url
+     * @return string url with query strings
+     */
+    public static function appendCurrentQueryStrings( $url )
+    {
+        if( empty( $_GET ) )
+        {
+            return $url;
+        }
+        return $url . '?' . http_build_query( $_GET );
+    }
 
     /**
      * Restrict Access to Application
