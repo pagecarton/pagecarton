@@ -150,7 +150,6 @@ class Application_Link_Sitemap extends Application_Link_Abstract
 			{  
 				continue;
 			}
-//			var_export( $data );
 			$url = $this->_xml->createElement( 'url' );
 			$url = $urlset->appendChild( $url );
 			$data['url'] = '' . Ayoola_Page::getHomePageUrl() . $data['url'];
@@ -238,8 +237,11 @@ class Application_Link_Sitemap extends Application_Link_Abstract
 		}
 
 		//	profiles
-		$table = new Application_Profile_Table();
-		$table = $table->select();
+		$table =  'Application_Profile_Table';
+        $table = $table::getInstance( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+        $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+        $table = $table->select();
 
 		$innerUl = $this->_html->createElement( 'ul' );
 		$innerUl = $li->appendChild( $innerUl );
