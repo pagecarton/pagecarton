@@ -94,7 +94,7 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
                 }
             }
             $emails .= ( ',' . $userEmail );
-        }
+        } 
 
         $emails = trim( $emails, ', ' );
 		return $emails;
