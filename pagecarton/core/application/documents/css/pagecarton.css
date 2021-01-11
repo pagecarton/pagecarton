@@ -36,6 +36,10 @@ Basic Style
     margin: 1em 0;
 }
 
+.pc-article-content ul, .pc-article-content ol
+{
+    margin-left: 2em;
+}
 .pc-article-content li 
 {
     list-style: unset;
@@ -49,6 +53,21 @@ Basic Style
 {
     height: unset;
     width: unset;
+}
+.pc-article-content table p
+{
+    margin: 0;
+}
+.pc-article-content table 
+{
+    width: 100% !important;
+    border: 0;
+}
+.pc-article-content table td, .pc-article-content table th
+{
+    padding: 0.5em;
+    border: 2px solid #ccc;
+    vertical-align: top;
 }
 
 .cd-breadcrumb,
