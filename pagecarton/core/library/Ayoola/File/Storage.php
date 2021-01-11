@@ -42,6 +42,20 @@ class Ayoola_File_Storage extends Ayoola_File
 	protected static $_name = 'AyoolaCmfFileId';
 	
     /**
+     * 
+     *
+     * @var array
+     */
+	protected static $_memCache;
+	
+    /**
+     * 
+     *
+     * @var array
+     */
+	protected static $_falseList;
+	
+    /**
      * File object
      *
      * @var Ayoola_File
@@ -74,12 +88,8 @@ class Ayoola_File_Storage extends Ayoola_File
      */
     public function purgeNamespace( $namespace = null )
     {
-	//	var_export( $namespace );
 		$this->setNamespace( $namespace );
-	//	var_export( $this->getNamespace() );
 		$dir = dirname( $this->getFile()->getPath() );
-	//	var_export( $dir );
-	//	$dir = $class->getFile()->getDirectory() . DS . __CLASS__ . DS;
 		Ayoola_Doc::deleteDirectoryPlusContent( $dir );
     } 
 	
@@ -96,29 +106,11 @@ class Ayoola_File_Storage extends Ayoola_File
 		$filter = new Ayoola_Filter_DomainName();
 		$domain = $filter->filter( $domain );
 		
-/*		$filter = new Ayoola_Filter_Alnum();
-		$filter->replace = DS;
-
-		//	we cant use Ayoola_Application::getDomainName( array( 'no_cache' => true ) ) because it causes infinite loop
-		$domain = $filter->filter( $domain );
-		$firstPart = array_shift( explode( DS, $domain ) );
-		
-		$dir = $class->getFile()->getDirectory() . DS . 'STORAGE' . DS . $firstPart;
-*/
         $cacheDestination = dirname( CACHE_DIR ) . DS . $domain;  
         Ayoola_Doc::deleteDirectoryPlusContent( $cacheDestination);
         $cacheDestination = dirname( CACHE_DIR ) . DS . 'www.' . $domain;  
         Ayoola_Doc::deleteDirectoryPlusContent( $cacheDestination);
-/*	//	var_export( $dir );
-		if( strlen( $domain ) < 1 || ! is_dir( $dir ) )
-		{
-			return false;
-		}
-	//	var_export( $dir );
-	//	$dir = $class->getFile()->getDirectory() . DS . __CLASS__ . DS;
-		Ayoola_Doc::deleteDirectoryPlusContent( $dir );
-
-*/		return true;
+		return true;
     } 
 	
     /**
@@ -132,7 +124,18 @@ class Ayoola_File_Storage extends Ayoola_File
 		$path = $this->getFile()->getPath();
 		Ayoola_Doc::createDirectory( dirname( $path ) );
         //	PageCarton_Widget::v( $path );
-		Ayoola_File::putContents( $path, json_encode( $data ) );     
+        unset( self::$_memCache[$path] );
+
+        if( ! $data )
+        {
+            return self::setToFalseList( $path, $data );
+        }
+
+
+        self::deleteFromFalseList( $path );
+
+        Ayoola_File::putContents( $path, json_encode( $data ) );  
+        return true;       
     } 
 	
     /**
@@ -147,11 +150,16 @@ class Ayoola_File_Storage extends Ayoola_File
         $timeOut = intval( $this->timeOut );
         @$ctime = filectime( $path ) . filemtime( $path );
         $key = $path . $ctime;
-        if( null !== @$this->readMCache[$key] )
+        if( null !== self::$_memCache[$path] )
         {
-            return $this->readMCache[$key];
+            return self::$_memCache[$path];
         }
-	//	var_export( $this );
+
+        if( ! $falseResult = self::getFromFalseList( $path ) )
+        {
+            return $falseResult; 
+        }
+
 		if( is_file( $path ) )
 		{
             if( $timeOut )
@@ -160,25 +168,113 @@ class Ayoola_File_Storage extends Ayoola_File
                 if( $timeOut < time() - $ctime )
                 {
                     unlink( $path );
-                    $this->readMCache[$key] = false;
+                    self::$_memCache[$path] = false;
                     return false;
                 }
             }
-        //	Ayoola_Document::createDirectory( dirname( $path ) );
-        //	$data = include $path;
+
             $data = false;
             if( $content = file_get_contents( $path ) )   
             {
                 $data = json_decode( $content, true );
             }
-    //        var_export( $data );
-            $this->readMCache[$key] = $data;
+            self::$_memCache[$path] = $data;
             return $data;
 			
 		}
-        $this->readMCache[$key] = false;
+        self::$_memCache[$path] = false;
         return false;
     } 
+	
+    /**
+     * 
+     *
+     * @param void
+     * @return string
+     */
+    public static function getFalseListFile()
+    {
+        $flFile = CACHE_DIR . DS . Ayoola_Application::getUrlPrefix() . DS . 'a-false-list.json';
+    //    unlink( $flFile );
+        Ayoola_Doc::createDirectory( dirname( $flFile ) );
+        return $flFile;
+    }
+	
+    /**
+     * 
+     *
+     * @param void
+     * @return string
+     */
+    public static function initFalseList()
+    {
+        if( empty( self::$_falseList ) )
+        {
+            self::$_falseList = array();
+            if( is_file( self::getFalseListFile() ) )
+            {
+                self::$_falseList = json_decode( file_get_contents( self::getFalseListFile() ), true ) ? : array();
+            }
+        }
+
+    }
+	
+    /**
+     *  false list, to limit disk io for cache of false data
+     *
+     * @param string
+     * @param mixed
+     * @return bool
+     */
+    public static function setToFalseList( $path, $data )
+    {
+        if( ! $data )
+        {
+            //  false list, to limit disk io for cache of false data
+            self::initFalseList();
+            if( array_key_exists( $path, self::$_falseList ) )
+            {
+                return true;
+            }
+            self::$_falseList[$path] = $data;
+            Ayoola_File::putContents( self::getFalseListFile(), json_encode( self::$_falseList ) );   
+            return true;
+        }
+        return false;
+    }
+	
+    /**
+     *  false list, to limit disk io for cache of false data
+     *
+     * @param string
+     * @return string
+     */
+    public static function getFromFalseList( $path )
+    {
+        self::initFalseList();
+        if( array_key_exists( $path, self::$_falseList ) )
+        {
+            return self::$_falseList[$path]; 
+        }
+        return true;
+    }
+	
+    /**
+     *  false list, to limit disk io for cache of false data
+     *
+     * @param string
+     * @return string
+     */
+    public static function deleteFromFalseList( $path )
+    {
+        self::initFalseList();
+        if( array_key_exists( $path, self::$_falseList ) )
+        {
+            unset( self::$_falseList[$path] );
+            Ayoola_File::putContents( self::getFalseListFile(), json_encode( self::$_falseList ) ); 
+        }
+        return true;
+    }
 	
     /**
      * Retrieves Ayoola_File

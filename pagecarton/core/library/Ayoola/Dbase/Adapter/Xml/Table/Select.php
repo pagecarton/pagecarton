@@ -499,9 +499,18 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
      */
     public function setCache( $result )
     {
-		$file = $this->getCacheFilename();
+        $file = $this->getCacheFilename();
+        
+        
+        //  reduce disk io
+        if( ! $result )
+        {
+            return Ayoola_File_Storage::setToFalseList( $file, $result );
+        }
+        Ayoola_File_Storage::deleteFromFalseList( $file );
 
-		Ayoola_Doc::createDirectory( dirname( $file ) );
+
+        Ayoola_Doc::createDirectory( dirname( $file ) );
 		return @Ayoola_File::putContents( $file, serialize( $result ) );
     } 
 		
@@ -519,8 +528,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			{
 				$classCachePeriod = $classCachePeriod::$cacheTimeOut;
 			}
-		}
-
+        }
 		$cTime = time();
 
 		foreach( $this->getGlobalFilenames() as $tableFile )
@@ -535,21 +543,18 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			{
 				continue;
 			}
-		//	if( Ayoola_Application::getRequestedUri() == '/AyoolaX' && stripos( $tableFile, '/Application/Profile/table.xml' ) )
-			{
-
-			}
-			if( $classCachePeriod )
-			{
-
-			}
 			if( $cacheTime <= $fileMTime && ( ! $classCachePeriod || ( $classCachePeriod + $fileMTime <= $cTime & stripos( $tableFile, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) !== false ) ) )
 			{ 
+                Ayoola_File_Storage::deleteFromFalseList( $cacheFile );
 
 				@unlink( $cacheFile ); 
 				break;
 			}
-		}
+        }
+        if( ! $falseResult = Ayoola_File_Storage::getFromFalseList( $cacheFile ) )
+        {
+            return $falseResult; 
+        }
 		return @unserialize( file_get_contents( $cacheFile ) );
     } 
 	// END OF CLASS

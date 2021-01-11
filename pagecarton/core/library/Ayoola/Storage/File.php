@@ -50,7 +50,6 @@ class Ayoola_Storage_File implements Ayoola_Storage_Interface
      */
     public function store( $data )
 	{
-
 		$this->getFileStorage()->write( $data );
 	}
 	
