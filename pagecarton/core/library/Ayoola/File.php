@@ -50,6 +50,20 @@ class Ayoola_File
 	protected static $_instance;
 	
     /**
+     * 
+     *
+     * @var bool
+     */
+	protected static $_lockDisk;
+	
+    /**
+     * 
+     *
+     * @var array
+     */
+	protected static $_writtenFiles;
+	
+    /**
 	 * Sets the _path property
 	 * 
      * @param string Path
@@ -102,12 +116,23 @@ class Ayoola_File
         $x = array( 'path' => $path, 'data' => $data, 'response' => true );
         try
         {        
-            $lockDiskFile = CACHE_DIR . DS .  __CLASS__ . DS . 'lockdisk';
+            $lockDiskFile = 'write-protect';
 
-            if( is_file( $lockDiskFile ) )
+            $er = strlen( $data );
+            if( self::$_writtenFiles[$path] !=  $er)
+            {
+                self::$_writtenFiles[$path] = $er;
+            }
+            else
             {
                 return false;
             }
+
+            if( self::$_lockDisk || is_file( $lockDiskFile ) )
+            {
+                return false;
+            }
+
 
             //  hook file writing so we can write plugin to manipulate file writing result;
             //  setting hooks causes infinite loop
@@ -115,6 +140,8 @@ class Ayoola_File
 
             if( ! $response = file_put_contents( $x['path'], $x['data'] ) )
             {
+                self::$_lockDisk = true;
+
                 //  this is not full disk
                 if( empty( $data ) || ! is_dir( dirname( $x['path'] ) ) || ! is_writable( dirname( $x['path'] ) ) )
                 {
@@ -138,13 +165,14 @@ Content Size: ' . strlen( $data ) . '
                 $log = array( 'error_message' => $mailInfo['subject'] . ' - ' . $mailInfo['body'], 'error_time' => time() );
                 Application_Log_View_Error_Log::getInstance()->insert( $log );
 
+                file_put_contents( $lockDiskFile, $path );
+
                 try
                 {
                     @Ayoola_Application_Notification::mail( $mailInfo );
                 }
                 catch( Ayoola_Exception $e ){ null; }
                 Ayoola_Doc::createDirectory( dirname( $lockDiskFile ) );
-                file_put_contents( $lockDiskFile, $path );
 
             }
 
