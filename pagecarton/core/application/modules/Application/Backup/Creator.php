@@ -34,11 +34,6 @@ class Application_Backup_Creator extends Application_Backup_Abstract
      */
 	protected function init()
     {
-	//	var_export( getcwd() );
-	//	var_export( basename( dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
-	//	var_export( $_SERVER['SCRIPT_FILENAME'] );
-		//	$dir = Ayoola_Application::getDomainSettings( APPLICATION_DIR );
-	//	var_export( APPLICATION_DIR );
 		try
 		{
 
@@ -64,7 +59,6 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 					//	This one needs to always be in the core
 					$installerFilenamePhp = $coreDocumentsDir . DS . $simpleFilename;
 
-			//		var_export( $installerFilenamePhp );
 
 
 					Ayoola_Doc::createDirectory( dirname( $installerFilenameGz ) );
@@ -72,7 +66,6 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 					@unlink( $installerFilenameGz );
 					
 					//	dont remove this again so it can be useful for upgrade.
-				//	@unlink( $installerFilenamePhp );
 				
 					$year = date( 'Y' );
 					$date = date( "m:d:Y g:ia" );
@@ -80,19 +73,15 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 					$domain = Ayoola_Page::getDefaultDomain();
 					$filename = self::getInstallerLink(); 
 					$version = PageCarton::VERSION; 
-		//	each
-					//	Build installer into the zipped document so that it always have the fresh content
-		//			Ayoola_File::putContents( $installerFilenamePhp, $installerText );
-		//			dont do this here again since we switching to upgrades.pagecarton.org
+                    //	each
+                                //	Build installer into the zipped document so that it always have the fresh content
+                    //			Ayoola_File::putContents( $installerFilenamePhp, $installerText );
+                    //			dont do this here again since we switching to upgrades.pagecarton.org
 					
 					if( ! $info  = $this->createFile() ){ return false; }
 					rename( $info['backup_filename'], $installerFilenameGz );
-					
-					//	Save a draft in local_html to use for upgrade
-			//		copy( $installerFilenamePhp, APPLICATION_DIR . DS . 'local_html' );
-					
+										
 					$this->setViewContent(  '' . self::__( '<p class="goodnews">Archive for installation has been created successfully. It is now accessible publicly for download at <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Backup_GetInstallation/">' . 'http://' . Ayoola_Page::getDefaultDomain() . Ayoola_Application::getUrlPrefix() .  '/widgets/Application_Backup_GetInstallation/</a></p>' ) . '', true  );
-	//				$this->setViewContent(  '' . self::__( '<p class="goodnews">Archive for installation has been created successfully. It is now accessible publicly for download at <a href="' . self::getInstallerLink() . '?r=' . time() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() .  self::getInstallerLink() . '</a></p>' ) . '', true  );
 					$this->setViewContent( self::__( '<p class="">The script to install the archive on a new server has been auto-generated and could be found on this link <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/' . $simpleFilename . '?r=' . time() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() . '/' . $simpleFilename . '</a></p>' ) );
 				break;
 				case 'export':
@@ -105,7 +94,6 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 				break;
 				default:
 					if( ! $values  = $this->createFile() ){ return false; }
-			//		var_export( $values );
 					if( ! $this->insertDb( $values ) ){ return false; }
 					$this->setViewContent(  '' . self::__( '<p class="boxednews goodnews">Backup created successfully.</p>' ) . '', true  );  
 				break;
@@ -139,7 +127,6 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		//	use basename. That's what we want to use to locate files henceforth
 		//	The internal filename may change e.g via export
 		$values['basename'] = basename( $values['backup_filename'] );
-	//	if( ! $this->insertDb( $values ) ){ return null; }
 		
 		//	remove duplicate names
 		$phar = 'Ayoola_Phar_Data';
@@ -149,15 +136,10 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		//	remove "cache dir" this is causing issues.
 		//	Clear cache
 		$stupidCache = dirname( $_SERVER['SCRIPT_FILENAME'] ) . '/cache';
-	//	var_export( $stupidCache );
 		if( is_dir( $stupidCache ) )
 		{
-	//	var_export( $stupidCache );
 			Ayoola_Doc::deleteDirectoryPlusContent( $stupidCache );
 		}
-		
-		
-		
 		
 		//	Cwd is also required
 		$requiredList = array( '/' . basename( dirname( $_SERVER['SCRIPT_FILENAME'] ) ) . '/', '/local_html/', '/license.txt', '/changelog.txt', '/readme.txt', '/application/configs/', '/application/functions/', '/pagecarton/local_html/', '/pagecarton/license.txt', '/pagecarton/changelog.txt', '/pagecarton/copyright.txt', '/pagecarton/readme.txt', '/pagecarton/application/configs/', '/pagecarton/application/functions/' );
@@ -169,63 +151,44 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		$userList = array_intersect( array_keys( self::$_exportList ), $values['backup_export_list'] );
 
 		//	multisites
-	//	$siteList = array();
-	//	foreach( $values['backup_export_list'] as $site )
-		{
-		//	$siteList[] = '' . $site . '';
-		}
 		$totalList = array_merge( $requiredList, $userList, $values['backup_export_multisites'] ? : array() );
-	//	var_export( self::$_exportList );
-	//	var_export( $values['backup_export_list'] );
-	//	var_export( $totalList );
 		$dir = Ayoola_Application::getDomainSettings( APPLICATION_DIR );
-//		var_export( $dir );
-//		$f = '/home/server4101/www/avalanchenigeria.com/public_html/ayoola_cmf_controller.php';
-//		$f = '/home/server4101/www/avalanchenigeria.com/public_html/.htaccess';
 		$f = $dir . '/public_html/ayoola_cmf_controller.php';
-	//	var_export( $dir );
-	//	var_export( $f );
 	
 		//	Fixes a bug where a symlink breaks the backup process.
 		if( is_link( $f ) )
 		{
-		//	var_export( file_get_contents( $f ) );
 			$c = file_get_contents( $f );
 			unlink( $f );
 			$f = Ayoola_File::putContents( $f, $c );
-		//	var_export( $f );
 		}
 		
 		//	for heavy files
 		set_time_limit( 0 );
 		ignore_user_abort( true );
-//		ini_set( 'memory_limit', "256M" );
  		switch( $values['backup_type'] )
 		{
 			case 'export':
-		//		$dir = APPLICATION_DIR;  
-			break;
+
+            break;
 			case 'installer':
 				$dir = APPLICATION_DIR;
 			break;
 			case 'simple':
 			default:
-		//		$dir = APPLICATION_PATH;
-			break;
+
+            break;
 		}
 
 		//	Build a regex to remove the excluded from the export
 		$regex = null;
 		foreach( $totalList as $each )
 		{
-		//	$each = str_replace( DS, '/', $dir . $each );
 			$each = basename( $dir ) . $each;
 			$regex .= "({$each})|";			
 		}
 		$regex = trim( $regex, '|' ); 
 		$regex = "#{$regex}#";
-	//	var_export( $regex );
-	//	exit();
 		try
 		{
 
@@ -236,7 +199,6 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		}
 		$backup->buildFromDirectory( $dir, $regex );  
 		$backup['backup_information'] = serialize( $values );
-	//	var_export( $regex );
  		switch( $values['backup_type'] )
 		{
 			case 'export':
@@ -244,7 +206,7 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 			break;
 			case 'installer':
 
-			//	Remove this sensitive files for install type
+			    //	Remove this sensitive files for install type
 				$files = array(
 					'application/databases/Application/domain.xml',
 					'application/databases/Application/settings.xml',
@@ -276,7 +238,6 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		$backup->compress( Ayoola_Phar::GZ ); 
 		unset( $backup );
 		$phar::unlinkArchive( $values['filename'] );
-//		set_time_limit( 30 );
 		return $values;
     } 
 	// END OF CLASS

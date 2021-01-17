@@ -69,7 +69,6 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
         if( ! $emails = Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'email' ) )
         {
             $userEmail = null;
-
             if( ! empty( Ayoola_Application::$GLOBAL['user']['email'] ) )
             {
                 $userEmail = Ayoola_Application::$GLOBAL['user']['email'];

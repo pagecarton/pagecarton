@@ -127,26 +127,29 @@ class Ayoola_File
             {
                 return false;
             }
-
+            if( is_file( $lockDiskFile ) && ( filemtime( $lockDiskFile ) + 86400 ) < time() )
+            {
+                rename( $lockDiskFile, $lockDiskFile . '-removed' );
+            }
             if( self::$_lockDisk || is_file( $lockDiskFile ) )
             {
                 return false;
+            }
+
+            //  this is not full disk
+            if( empty( $data ) || ! is_dir( dirname( $x['path'] ) ) || ! is_writable( dirname( $x['path'] ) ) )
+            {
+                return false; 
             }
 
 
             //  hook file writing so we can write plugin to manipulate file writing result;
             //  setting hooks causes infinite loop
             //  probably because it involves also writing files
-
-            if( ! $response = file_put_contents( $x['path'], $x['data'] ) )
+            $response = file_put_contents( $x['path'], $x['data'] );
+            if( $response === false )
             {
                 self::$_lockDisk = true;
-
-                //  this is not full disk
-                if( empty( $data ) || ! is_dir( dirname( $x['path'] ) ) || ! is_writable( dirname( $x['path'] ) ) )
-                {
-                    return false; 
-                }
     
                 //  can't write
                 //  is disk full? clear cache
