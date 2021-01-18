@@ -90,7 +90,11 @@ class Ayoola_File_Storage extends Ayoola_File
     {
 		$this->setNamespace( $namespace );
 		$dir = dirname( $this->getFile()->getPath() );
-		Ayoola_Doc::deleteDirectoryPlusContent( $dir );
+        Ayoola_Doc::deleteDirectoryPlusContent( $dir );
+        if( function_exists( 'apcu_clear_cache' ) )
+        {
+            apcu_clear_cache();
+        }
     } 
 	
     /**
@@ -110,6 +114,11 @@ class Ayoola_File_Storage extends Ayoola_File
         Ayoola_Doc::deleteDirectoryPlusContent( $cacheDestination);
         $cacheDestination = dirname( CACHE_DIR ) . DS . 'www.' . $domain;  
         Ayoola_Doc::deleteDirectoryPlusContent( $cacheDestination);
+
+        if( function_exists( 'apcu_clear_cache' ) )
+        {
+            apcu_clear_cache();
+        }
 		return true;
     } 
 	
@@ -126,12 +135,17 @@ class Ayoola_File_Storage extends Ayoola_File
         
         self::$_memCache[$path] = $data;
 
+        //  Cache this
+        //  apc
+        if( function_exists( 'apcu_store' ) )
+        {
+            apcu_store( $path, $data );
+        }
+
         if( ! $data )
         {
             return self::setToFalseList( $path, $data );
         }
-
-
         self::deleteFromFalseList( $path );
 
         Ayoola_File::putContents( $path, json_encode( $data ) );  
@@ -150,6 +164,18 @@ class Ayoola_File_Storage extends Ayoola_File
         $timeOut = intval( $this->timeOut );
         @$ctime = filectime( $path ) . filemtime( $path );
         $key = $path . $ctime;
+
+        //  apc
+        if( function_exists( 'apcu_fetch' ) )
+        {
+            $data = apcu_fetch( $path, $success );
+            if( $success )
+            {
+                return $data;
+            }
+        }
+
+
         if( null !== self::$_memCache[$path] )
         {
             return self::$_memCache[$path];
@@ -306,7 +332,12 @@ class Ayoola_File_Storage extends Ayoola_File
 		$class = new self();
 	//	$dir = $class->getFile()->getDirectory() . DS . __CLASS__ . DS;
 		$dir = $class->getFile()->getDirectory() . DS . 'STORAGE' . DS;
-		Ayoola_Doc::deleteDirectoryPlusContent( $dir );
+        Ayoola_Doc::deleteDirectoryPlusContent( $dir );
+        if( function_exists( 'apcu_clear_cache' ) )
+        {
+            apcu_clear_cache();
+        }
+
     } 
 	
     /**
