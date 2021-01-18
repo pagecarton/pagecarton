@@ -142,7 +142,6 @@ class Ayoola_File
                 return false; 
             }
 
-
             //  hook file writing so we can write plugin to manipulate file writing result;
             //  setting hooks causes infinite loop
             //  probably because it involves also writing files

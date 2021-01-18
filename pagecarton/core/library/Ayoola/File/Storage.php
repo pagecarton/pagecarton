@@ -123,8 +123,8 @@ class Ayoola_File_Storage extends Ayoola_File
     {
 		$path = $this->getFile()->getPath();
 		Ayoola_Doc::createDirectory( dirname( $path ) );
-        //	PageCarton_Widget::v( $path );
-        unset( self::$_memCache[$path] );
+        
+        self::$_memCache[$path] = $data;
 
         if( ! $data )
         {
@@ -195,7 +195,6 @@ class Ayoola_File_Storage extends Ayoola_File
     public static function getFalseListFile()
     {
         $flFile = CACHE_DIR . DS . Ayoola_Application::getUrlPrefix() . DS . 'a-false-list.json';
-    //    unlink( $flFile );
         Ayoola_Doc::createDirectory( dirname( $flFile ) );
         return $flFile;
     }
