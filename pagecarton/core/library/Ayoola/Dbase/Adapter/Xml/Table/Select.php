@@ -503,11 +503,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
         
         
         //  reduce disk io
-        if( ! $result )
+        //    if( ! $result )
         {
-            return Ayoola_File_Storage::setToFalseList( $file, $result );
+        //    return Ayoola_File_Storage::setToFalseList( $file, $result );
         }
-        Ayoola_File_Storage::deleteFromFalseList( $file );
+        //    Ayoola_File_Storage::deleteFromFalseList( $file );
 
 
         Ayoola_Doc::createDirectory( dirname( $file ) );
@@ -545,15 +545,15 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			}
 			if( $cacheTime <= $fileMTime && ( ! $classCachePeriod || ( $classCachePeriod + $fileMTime <= $cTime & stripos( $tableFile, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) !== false ) ) )
 			{ 
-                Ayoola_File_Storage::deleteFromFalseList( $cacheFile );
+                //    Ayoola_File_Storage::deleteFromFalseList( $cacheFile );
 
 				@unlink( $cacheFile ); 
 				break;
 			}
         }
-        if( ! $falseResult = Ayoola_File_Storage::getFromFalseList( $cacheFile ) )
+        //    if( ! $falseResult = Ayoola_File_Storage::getFromFalseList( $cacheFile ) )
         {
-            return $falseResult; 
+        //        return $falseResult; 
         }
 		return @unserialize( file_get_contents( $cacheFile ) );
     } 

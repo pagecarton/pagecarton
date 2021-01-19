@@ -220,7 +220,7 @@ class Ayoola_File_Storage extends Ayoola_File
      */
     public static function getFalseListFile()
     {
-        $flFile = CACHE_DIR . DS . Ayoola_Application::getUrlPrefix() . DS . 'a-false-list.json';
+        $flFile = CACHE_DIR . DS . Ayoola_Application::getUrlPrefix() . DS . 'a-x-false-list.json';
         Ayoola_Doc::createDirectory( dirname( $flFile ) );
         return $flFile;
     }
