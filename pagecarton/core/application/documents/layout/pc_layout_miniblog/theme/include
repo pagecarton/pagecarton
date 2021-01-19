@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Wednesday 16th of December 2020 12:23:32 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Tuesday 19th of January 2021 09:25:06 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -37,7 +37,7 @@ $_474612ea2c4114e6c4a6f67f7d1d56c3 = new Ayoola_Page_Editor_Text( array (
 
 <!-- How to embed Application_Category_ShowAll -->
 <!--{{{@0(Application_Category_ShowAll)-->
-                <li><a href="{{{post_link}}}">{{{article_title]]]</a></li>
+                <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
 <!--(Application_Category_ShowAll)@0}}}-->
 <!-- Place this code in code view -->
 
@@ -73,7 +73,7 @@ $_474612ea2c4114e6c4a6f67f7d1d56c3 = new Ayoola_Page_Editor_Text( array (
 
 <!-- How to embed Application_Category_ShowAll -->
 <!--{{{@0(Application_Category_ShowAll)-->
-                <li><a href="{{{post_link}}}">{{{article_title]]]</a></li>
+                <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
 <!--(Application_Category_ShowAll)@0}}}-->
 <!-- Place this code in code view -->
 

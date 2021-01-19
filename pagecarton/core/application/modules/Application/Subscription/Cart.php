@@ -69,13 +69,6 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 	protected $_noOfDinstinctItems = 0;
 	
     /**
-     * The total price amount of items in the cart
-     * 
-     * @var double
-     */
-//	protected $_cummulativePrice = 0.00;
-	
-    /**
      * The method does the whole Class Process
      * 
      */
