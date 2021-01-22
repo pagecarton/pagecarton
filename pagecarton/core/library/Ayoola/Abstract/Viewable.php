@@ -803,8 +803,8 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			}
 
 			curl_setopt( $request, CURLOPT_FOLLOWLOCATION, @$settings['follow_redirect'] === false ? false : true ); //	By default, we follow redirect
-			curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 1 );	//	Max of 1 Secs on a single request
-			curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 2 );	//	Max of 1 Secs on a single request
+			curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, @$settings['connect_time_out'] ? : 10 );	//	Max of 1 Secs on a single request
+			curl_setopt( $request, CURLOPT_TIMEOUT, @$settings['time_out'] ? : 50 );	//	Max of 1 Secs on a single request
 			if( @$settings['post_fields'] )
 			{
 				curl_setopt( $request, CURLOPT_POST, true );
@@ -2313,6 +2313,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             return false;
         }
 
+        if( $this->getParameter( 'return_object_data' ) )
+        {
+            return $this->_objectData;
+        }
+
+
 		$this->_playMode = $this->getParameter( 'play_mode' ) ? : $this->_playMode;
 		switch( $this->_playMode )
 		{
@@ -2354,10 +2360,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
                 //  allow view to be filtered or maninpulated by hooks
                 self::setHook( $this, __FUNCTION__, $this->_objectData );
-                if( $this->getParameter( 'return_object_data' ) )
-                {
-                    return $this->_objectData;
-                }
 
 				$dataToSend = json_encode( $this->_objectData );
 
