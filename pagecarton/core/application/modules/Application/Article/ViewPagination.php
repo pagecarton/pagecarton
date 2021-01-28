@@ -115,7 +115,6 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 				$postListData = $postListData->retrieve();
 
 				{
-                    var_export( $postListData );
 					$presentArticle = $data['article_url'];
                     {
 
