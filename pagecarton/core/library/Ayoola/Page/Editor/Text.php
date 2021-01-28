@@ -489,13 +489,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		{		
 			$content = self::fixUrlPrefix( $content, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
         }
-        if( stripos( $content, '{{{' ) !== false )
+/*         if( stripos( $content, '{{{' ) !== false )
         {
             $search = array();
             $search[] = '/{{{([\w+]+)}}}/';
             @$content = preg_replace( $search, '', $content );
         }
-
+ */
 		
 		$this->setParameter( array( 'editable' => $content ) );
 		$html = $this->getParameter( 'editable' ) . $this->getParameter( 'raw_html' );

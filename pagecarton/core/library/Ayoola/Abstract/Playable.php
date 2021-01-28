@@ -472,7 +472,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
         $replace[] = @$iTemplate;
 		$template = @str_replace( $search, $replace, $template );  
 		$search = array();
-		//  $search[] = '/' . $values['placeholder_prefix'] . '([\w+]+)' . $values['placeholder_suffix'] . '/';
+		$search[] = '/' . $values['placeholder_prefix'] . '([\w+]+)' . $values['placeholder_suffix'] . '/';
         $search[] = '/<!--([.]+)-->/';    
         @$template = preg_replace( $search, '', $template );
 
