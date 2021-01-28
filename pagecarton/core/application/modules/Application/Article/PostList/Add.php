@@ -90,6 +90,8 @@ class Application_Article_PostList_Add extends Application_Article_PostList
             {
                 $post = array(
                     'article_title' => $values['new'],
+                    'document_url' => '/img/placeholder-image.jpg',
+                    'article_content' => $values['new'],
                     'article_type' => $_REQUEST['article_type'] ? : 'post-list',
                 );
                 $post['post_list'][] = $data['article_url'];
