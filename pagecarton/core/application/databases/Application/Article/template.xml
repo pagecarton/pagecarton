@@ -125,7 +125,7 @@
       <TABLE_FIELD FIELD_KEY="template_name"><![CDATA[SearchStyle]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="markup_template"><![CDATA[&lt;p&gt;&lt;a href=&quot;{{{post_link}}}&quot;&gt;&lt;img alt=&quot;&quot; src=&quot;{{{document_url_uri}}}?width=100&amp;amp;height=100&quot; style=&quot; border-radius: 50%; float:right;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2&gt;&lt;a href=&quot;{{{post_link}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/h2&gt;
+&lt;h3&gt;&lt;a href=&quot;{{{post_link}}}&quot;&gt;{{{article_title}}}&lt;/a&gt;&lt;/h3&gt;
 
 &lt;p&gt;{{{article_description}}}&lt;/p&gt;
 

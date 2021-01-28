@@ -85,6 +85,25 @@ class Application_Article_PostList_Add extends Application_Article_PostList
             
 
             $this->setViewContent( '<p class="goodnews">' . self::__( 'Lists saved' ) . '</p>', true ); 
+
+            if( $values['new'] )
+            {
+                $post = array(
+                    'article_title' => $values['new'],
+                    'article_type' => $_REQUEST['article_type'] ? : 'post-list',
+                );
+                $post['post_list'][] = $data['article_url'];
+                $class = new Application_Article_Creator( array( 'fake_values' => $post ) );
+                $class->initOnce();
+                if( $class->getForm()->getBadnews() )
+                {
+                    $this->setViewContent( '<a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Creator?article_type=' . $post['article_type'] . '" class="pc-notify-info">' . sprintf( self::__( 'List could not be automatically created. Click here to create it manually.' ), $post['article_title'] ) . '</a>' ); 
+                }
+                else
+                {
+                    $this->setViewContent( $class->view() ); 
+                }
+            }
             foreach( $values['lists'] as $each )
             {
                 $post = self::loadPostData( $each );
@@ -140,18 +159,31 @@ class Application_Article_PostList_Add extends Application_Article_PostList
         {
             $ref[$each['article_url']] = $each['article_title'];
         }
-
-        $fieldset->addElement( 
-            array( 
-            'name' => 'lists', 
-            'label' => 'Select Lists to Add Post To', 
-            'multiple' => 'multiple', 
-            'type' => 'SelectMultiple'
-            )
-            ,
-            $ref
-        ); 
-        $fieldset->addRequirements( array( 'NotEmpty' => null ) );
+        if( $ref )
+        {
+            $fieldset->addElement( 
+                array( 
+                'name' => 'lists', 
+                'label' => 'Add to Existing lists', 
+                'multiple' => 'multiple', 
+                'type' => 'SelectMultiple'
+                )
+                ,
+                $ref
+            ); 
+        }
+        if( empty( $ref ) || $_REQUEST['new_list'] )
+        {
+            $fieldset->addElement( 
+                array( 
+                'name' => 'new', 
+                'label' => 'Create New list', 
+                'placeholder' => "List name e.g. Bello's Favorite", 
+                'type' => 'InputText'
+                )
+            ); 
+    
+        }
 
 
 		$fieldset->addLegend( $legend );

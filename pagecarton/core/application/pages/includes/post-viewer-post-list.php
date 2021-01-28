@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: post-viewer-post-list.php	Thursday 28th of January 2021 02:33:01 AM	ayoola@ayoo.la $ 
+* @version $Id: post-viewer-post-list.php	Thursday 28th of January 2021 02:34:22 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -161,7 +161,7 @@ $_61467833b1c1a619d0ca7469696fff90 = null;
 								
 $_0cf304b273ecb75409095cc554bc9f4e = new Ayoola_Page_Editor_Text( array (
   'codes' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
-<h3>Similar to {{{post_type}}}</h3>
+<p>Similar to {{{post_type}}}</p>
 </widget>',
   'preserved_content' => '',
   'url_prefix' => '',
@@ -172,7 +172,7 @@ $_0cf304b273ecb75409095cc554bc9f4e = new Ayoola_Page_Editor_Text( array (
   'pagewidget_id' => '0-1611800769-9',
   'wrapper_name' => 'well',
   'content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
-<h3>Similar to {{{post_type}}}</h3>
+<p>Similar to {{{post_type}}}</p>
 </widget>',
 ) );
 
