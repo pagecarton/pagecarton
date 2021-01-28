@@ -164,7 +164,7 @@ class Application_Article_PostList extends Application_Article_ShowAll
             ,
             $v
         ); 
-        $fieldset->addRequirements( array( 'NotEmpty' => null ) );
+    //    $fieldset->addRequirements( array( 'NotEmpty' => null ) );
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   
