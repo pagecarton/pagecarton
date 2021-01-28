@@ -111,11 +111,11 @@ class Application_Article_PostList_Add extends Application_Article_PostList
                 {
                     $post['post_list'][] = $data['article_url'];
                     self::saveArticle( $post );
-                    $this->setViewContent( '<p class="pc-notify-info">' . sprintf( self::__( 'Post added to %s' ), $post['article_title'] ) . '</p>' ); 
+                    $this->setViewContent( '<p class="">' . sprintf( self::__( 'Post added to %s' ), '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $post['article_url'] . '">' . $post['article_title'] . '</a>' ) . '</p>' ); 
                 }
                 else
                 {
-                    $this->setViewContent( '<p class="pc-notify-info">' . sprintf( self::__( 'Post already in %s' ), $post['article_title'] ) . '</p>' ); 
+                    $this->setViewContent( '<p class="">' . sprintf( self::__( 'Post already in %s' ), '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $post['article_url'] . '">' . $post['article_title'] . '</a>' ) . '</p>' ); 
                 }
 
             }
