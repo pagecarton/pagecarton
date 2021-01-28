@@ -60,7 +60,6 @@ class Application_Redirect extends Ayoola_Abstract_Table
 		{ 
 			$url = trim( $_REQUEST['url'] );
 			$pathInfo = parse_url( $url );
-			var_export( $pathInfo );
 			if( ! $url )
 			{
 				$this->setViewContent( self::__( '<div class="badnews">The link appears to be broken.</div>' ) ); 

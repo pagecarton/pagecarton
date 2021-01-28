@@ -208,10 +208,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 				//	$this->_playMode = static::PLAY_MODE_JSON;
 				//	echo $dataToSend;
 				//	exit();
-		/* 			var_export( $gotRight );
-					var_export( $_POST );
-					var_export( $this->getIdentifierData() );
-	 */			
+			
 				}
 
 				return false;

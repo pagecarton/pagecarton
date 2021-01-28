@@ -67,7 +67,6 @@ class Application_XmlTableViewer extends Ayoola_Abstract_Table
 		}
 		catch( Ayoola_Exception $e )
 		{ 
-			var_export( $e->getMessage() );
 			return false; 
 		}
 	}
