@@ -74,8 +74,11 @@ class Application_Article_Type_Video extends Application_Article_Type_Abstract
         }
         elseif( stripos( $data['video_url'], '?v=' ) !== false )
         {
+            var_export( $x );
             $x = array_pop( explode( '?v=', $data['video_url'] ) );
+            var_export( $x );
             $x = array_shift( explode( '&', $x ) );
+            var_export( $x );
 
             $data['video_url'] = 'https://youtube.com/embed/' . $x;
         }
