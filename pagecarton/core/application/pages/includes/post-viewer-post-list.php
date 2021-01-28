@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: post-viewer-post-list.php	Thursday 28th of January 2021 02:34:22 AM	ayoola@ayoo.la $ 
+* @version $Id: post-viewer-post-list.php	Thursday 28th of January 2021 11:55:35 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -71,6 +71,7 @@ $_a241e31eedca3550957404a8509cd91d = new Ayoola_Page_Editor_Text( array (
 <widget parameters=\'{ "class": "Application_Article_View" }\'>
 <a href="/widgets/Application_Article_Editor?article_url={{{article_url}}}" class="btn btn-primary pc_give_space_top_bottom">Update from list</a>
 <a href="/widgets/Application_Article_PostList_Sort?article_url={{{article_url}}}" class="btn btn-default pc_give_space_top_bottom">Sort List</a>
+<a href="/widgets/Application_Article_Creator?article_type={{{article_type}}}" class="btn btn-default pc_give_space_top_bottom">Create a new List</a>
 </widget>',
   'preserved_content' => '',
   'url_prefix' => '',
@@ -78,7 +79,7 @@ $_a241e31eedca3550957404a8509cd91d = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'parameters',
   ),
-  'pagewidget_id' => '0-1611800063-4',
+  'pagewidget_id' => '0-1611834935-11',
   'advanced_parameter_value' => 
   array (
     0 => '',
@@ -94,6 +95,7 @@ $_a241e31eedca3550957404a8509cd91d = new Ayoola_Page_Editor_Text( array (
 <widget parameters=\'{ "class": "Application_Article_View" }\'>
 <a href="/widgets/Application_Article_Editor?article_url={{{article_url}}}" class="btn btn-primary pc_give_space_top_bottom">Update from list</a>
 <a href="/widgets/Application_Article_PostList_Sort?article_url={{{article_url}}}" class="btn btn-default pc_give_space_top_bottom">Sort List</a>
+<a href="/widgets/Application_Article_Creator?article_type={{{article_type}}}" class="btn btn-default pc_give_space_top_bottom">Create a new List</a>
 </widget>',
 ) );
 
