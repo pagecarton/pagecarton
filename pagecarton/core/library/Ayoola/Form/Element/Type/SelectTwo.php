@@ -41,11 +41,17 @@ class Ayoola_Form_Element_Type_SelectTwo extends PageCarton_Widget
     {    
 		try
 		{ 
-            //    var_export( $this->getParameter() );
             $valueX = array();
             foreach( $this->getParameter( 'values' ) as $key => $value )
             {
-                $valueX[] = array( 'key' => $key, 'value' => $value );
+                $selected = null;
+                if( $value === $this->getParameter( 'value' ) || 
+                    ( is_array( $this->getParameter( 'value' ) ) && in_array( $value, $this->getParameter( 'value' ) ) )
+                )
+                {
+                    $selected = 'selected';
+                }
+                $valueX[] = array( 'key' => $key, 'value' => $value, 'selected' => $selected );
             }
             Application_Style::addFile( 'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css' );
             Application_Javascript::addFile( 'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js' );
@@ -62,11 +68,9 @@ class Ayoola_Form_Element_Type_SelectTwo extends PageCarton_Widget
                 $this->_objectTemplateValues['multiple'] = 'multiple';
             }
 
-		}  
+        }  
 		catch( Exception $e )
         { 
-            //  Alert! Clear the all other content and display whats below.
-        //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
             $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }

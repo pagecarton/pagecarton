@@ -63,27 +63,15 @@ class Application_SearchBox extends Ayoola_Abstract_Table
 						  <input style="width:80%;padding:1em;background-color:inherit; color:inherit;" name="q" type="search" value="' . $term . '" placeholder="' . htmlentities( $this->getParameter( 'placeholder' ) ? : 'What are you looking for?', ENT_QUOTES, "UTF-8", false ) . '"><button type="submit" style="width:20%;padding:1em;">Go</button>
 						</form>
 			';
-/* 			if( $this->getParameter( 'full_screen' ) )
-			{
-				$this->setViewContent( self::__( '<div style="display:block; height:100%;width:100%;padding:0.5em;background-color: ' . Application_Settings_CompanyInfo::getSettings( 'Page', 'background_color' ) . ';"></div>' ) ); 
-			}
- */			$this->setViewContent( $html ); 
+    		$this->setViewContent( $html ); 
 			if( $term )
 			{
 				$pageInfo = array(
 					'title' => trim( $term . ' - ' .  Ayoola_Page::getCurrentPageInfo( 'title' ), '- ' )
 				);
-		//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
 				Application_SearchBox_Table::getInstance()->insert( array( 'keywords' => array_map( 'trim', explode( ' ', $term ) ), 'query' => $term, 'username' => Ayoola_Application::getUserInfo( 'username' ), 'user_id' => Ayoola_Application::getUserInfo( 'user_id' ) ) );  
 			}
-			//	make SearchBoxr
-		//	copy( $installerFilenamePhp, Ayoola_Application::$SearchBoxr );
-			
-		//	header( 'Location: /' . Ayoola_Application::$SearchBoxr );
-		//	exit();
-			
-	//		file_get_contents( Ayoola_Application::$SearchBoxr );
 		}
 		catch( Ayoola_Exception $e ){ return false; }
 	}

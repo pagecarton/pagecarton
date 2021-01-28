@@ -4,7 +4,7 @@
     <TABLE_ROW ROW_ID="2">
       <TABLE_FIELD FIELD_KEY="settings"><![CDATA[a:2:{s:14:&quot;default_locale&quot;;s:0:&quot;&quot;;s:14:&quot;locale_options&quot;;a:3:{i:0;s:14:&quot;auto_translate&quot;;i:1;s:18:&quot;autosave_new_words&quot;;i:2;s:23:&quot;auto_detect_user_locale&quot;;}}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="data"><![CDATA[{&quot;default_locale&quot;:&quot;&quot;,&quot;locale_options&quot;:[&quot;auto_translate&quot;,&quot;autosave_new_words&quot;,&quot;auto_detect_user_locale&quot;]}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[Locale]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[xLocale]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settings_id"><![CDATA[1565119550-0-2]]></TABLE_FIELD>

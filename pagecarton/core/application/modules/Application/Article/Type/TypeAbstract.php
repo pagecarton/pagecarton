@@ -54,7 +54,7 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
      * 
      * @var array
      */
-	public static $presetTypes = array( 'article' => 'Article', 'audio' => 'Audio', 'video' => 'Embed YouTube Video', 'quiz' => 'Online Quiz', 'poll' => 'Online Poll', 'download' => 'Downloadables', 'link' => 'External Web Link', 'event' => 'Event', 'product' => 'Product', 'service' => 'Service', 'book' => 'Book', );
+	public static $presetTypes = array( 'article' => 'Article', 'audio' => 'Audio', 'video' => 'Embed YouTube Video', 'quiz' => 'Online Quiz', 'poll' => 'Online Poll', 'download' => 'Downloadables', 'link' => 'External Web Link', 'event' => 'Event', 'product' => 'Product', 'service' => 'Service', 'book' => 'Book' );
 	
     /**
      * Id Column
@@ -105,10 +105,17 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
         }
                 
         $fieldset->addElement( array( 'name' => 'post_type', 'label' => 'Type Name', 'title' => 'Enter post type name, e.g. Article', 'placeholder' => 'e.g. Article', 'type' => 'InputText', 'value' => @$values['post_type'], ) ); 
-        $fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post is similar to', 'title' => 'Choose the kind of post this is...', 'type' => 'Select', 'value' => @$values['article_type'], ), self::$presetTypes );  
+
+        $all = $this->getDbData();
+        $presets = self::$presetTypes;
+        foreach( $all as $each )
+        {
+            $presets[$each['post_type_id']] = $each['post_type'];
+        }
+        asort( $presets );
+        $fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post Main Feature', 'title' => 'Choose the kind of post this is...', 'type' => 'Select', 'value' => @$values['article_type'], ), $presets );  
 
         $options = 	array( 
-                            '' => 'Select Feature', 
                             'multi-price' => 'Multiple Pricing', 
                             'subscription-options' => 'Subscription Options', 
                             'datetime' => 'Date and Time', 
@@ -119,8 +126,11 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
                             'description' => 'Short Description', 
                             'cover-photo' => 'Cover Photo', 
                             'category' => 'Categories',  
+                            'post-list' => 'Post List',  
                             );
 
+        $options = $options + self::$presetTypes;
+        asort( $options );
 
 		//	preset values     
 		$i = 0;
@@ -136,15 +146,14 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 			$featureFieldset->duplicationData = array( 'add' => '+ Add feature', 'remove' => '- Remove feature', 'counter' => 'preset_counter', );
 			$featureFieldset->container = 'span';
 		
-			$featureFieldset->addElement( array( 'name' => 'post_type_options', 'label' => '', 'style' => 'width:45%;', 'type' => 'Select', 'multiple' => 'multiple', 'value' => @$values['post_type_options'][$i], ), $options + self::$presetTypes ); 
+			$featureFieldset->addElement( array( 'name' => 'post_type_options', 'label' => '', 'style' => 'width:45%;', 'type' => 'Select', 'multiple' => 'multiple', 'value' => @$values['post_type_options'][$i], ), array( '' => 'Select Feature' ) + $options ); 
 			$featureFieldset->addElement( array( 'name' => 'post_type_options_name', 'label' => '', 'placeholder' => 'Field name suffix (optional)', 'style' => 'width:45%;', 'type' => 'InputText', 'multiple' => 'multiple', 'value' => @$values['post_type_options_name'][$i], ) ); 
 
 			$i++;
 			$featureForm->addFieldset( $featureFieldset );
 		}
 		while( isset( $values['post_type_options'][$i] ) );    
-		$fieldset->addElement( array( 'name' => 'xxxxx', 'type' => 'Html', 'value' => '', 'data-pc-element-whitelist-group' => 'post_type_options' ), array( 'html' => '<label style="display:block;">Post Type Features</label>' . $featureForm->view() . '', 'fields' => 'post_type_options,post_type_options_name' ) );	
-   //     $fieldset->addElement( array( 'name' => 'post_type_options', 'label' => 'Other Options available to post type', 'title' => '', 'type' => 'Checkbox', 'value' => @$values['post_type_options'], ), $options );      
+		$fieldset->addElement( array( 'name' => 'xxxxx', 'type' => 'Html', 'value' => '', 'data-pc-element-whitelist-group' => 'post_type_options' ), array( 'html' => '<label style="display:block;">Other Post Type Features</label>' . $featureForm->view() . '', 'fields' => 'post_type_options,post_type_options_name' ) );	
         
         //	supplementary form for creating post
         $options = new Ayoola_Form_Table(); 
@@ -165,7 +174,11 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 		$authLevel = $filter->filter( $authLevel );
         $fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Who can create a post of this type', 'type' => 'SelectMultiple', 'value' => @$values['auth_level'] ? : array( 0 ) ), $authLevel ); 
         
-		$fieldset->addElement( array( 'name' => 'view_auth_level', 'label' => 'Who can view a post of this type', 'type' => 'SelectMultiple', 'value' => @$values['view_auth_level'] ? : array( 0 ) ), $authLevel ); 
+        $fieldset->addElement( array( 'name' => 'view_auth_level', 'label' => 'Who can view a post of this type', 'type' => 'SelectMultiple', 'value' => @$values['view_auth_level'] ? : array( 0 ) ), $authLevel ); 
+
+        $widgets = Ayoola_Object_Embed::getWidgets();
+        
+		$fieldset->addElement( array( 'name' => 'view_widget', 'label' => 'Widget to handle the view', 'type' => 'Select', 'onchange' => 'if( this.value == \'__custom\' ){ var a = prompt( \'Custom Widget Class Name\', \'\' ); if( ! a ){ this.value = \'\'; return false; } var option = document.createElement( \'option\' ); option.text = a; option.value = a; this.add( option ); this.value = a;  }', 'value' => @$values['view_widget'] ? : '' ), array( '' => 'Application_Article_View (default)') + $widgets ); 
 
 //		$i++;
         $fieldset->addLegend( $legend );

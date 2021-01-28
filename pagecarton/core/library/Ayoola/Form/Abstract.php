@@ -139,6 +139,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
                         'hidden' => 'Hidden Field', 
                         'radio' => 'Radio Button', 
                         'select' => 'Select Option', 
+                        'select2' => 'Select2 Option', 
                         'checkbox' => 'Checkbox', 
                         'email' => 'Email Input', 
                         'textarea' => 'Text Area', 

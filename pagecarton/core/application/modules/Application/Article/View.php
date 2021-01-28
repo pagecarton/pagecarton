@@ -17,7 +17,6 @@
  
 require_once 'Application/Article/Abstract.php';    
 
-
 /**
  * @category   PageCarton
  * @package    Application_Article_View
@@ -70,7 +69,6 @@ class Application_Article_View extends Application_Article_Abstract
     {
 		try
 		{
-			//	self::v( $this->getIdentifierData() ); 
 			if( ! $data = $this->getIdentifierData() )
 			{
 				return false;				
@@ -80,16 +78,12 @@ class Application_Article_View extends Application_Article_Abstract
 				$this->_parameter['markup_template'] = null; 
 				return false;				
 			}
-			//	self::v( $data ); 
 			if( ! $data  
 				|| ( ! @$data['publish'] && ! self::isOwner( @$data['user_id'] ) && ! @in_array( 'publish', @$data['article_options'] ) && Ayoola_Application::getUserInfo( 'username' ) !== strtolower( $data['username'] ) )   
 				|| ( ! self::hasPriviledge( @$data['auth_level'] ) && ! self::isOwner( @$data['user_id'] ) )
 				|| ! self::isAllowedToView( $data ) 
 			)
 			{
-		//		var_export( @$data['user_id'] );
-		//		exit();
-			//	var_export( self::hasPriviledge( @$data['auth_level'] ) );
 				if( Ayoola_Application::$GLOBAL['post']['article_url'] === $data['article_url'] )
 				{
 					
@@ -104,9 +98,9 @@ class Application_Article_View extends Application_Article_Abstract
 				}
 				
 				return $this->setViewContent(  '' . self::__( '<p class="badnews">The requested article was not found on the server. Please check the URL and try again.</p>' ) . '', true  );
-			//	self::setIdentifierData( $data );
+
 			}
-		//	var_export( self::hasPriviledge( @$data['auth_level'] ) );
+
 			$this->setViewContent( self::getXml(), true );
 
 		}
@@ -115,7 +109,7 @@ class Application_Article_View extends Application_Article_Abstract
 			$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );
 			return $this->setViewContent( self::__( '<p class="badnews">' . self::__( 'Error With Post' ) . '</p>' ) ); 
 		}
-	//	var_export( $this->_xml );
+
     } 
 	
     /**
@@ -137,10 +131,9 @@ class Application_Article_View extends Application_Article_Abstract
     {
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' ); 		
 		$data = $this->getIdentifierData();
-	//	self::v( $data );
-	//	$this->_xml = '<span class="' . __CLASS__ . '_UL" style="list-style:none;">';
+
 		$url = $data['article_url'];
-	//	var_export( $data['article_content'] );
+
 		if( $this->getParameter( 'use_datetime' ) )
 		{
 			if( ! empty( $data['datetime'] ) )
@@ -149,7 +142,7 @@ class Application_Article_View extends Application_Article_Abstract
 
 				$data['article_modified_date'] = $data['datetime'];
 				$data['article_creation_date'] = $data['datetime'];
-		//		var_export( $data['article_modified_date'] );
+
 			}
 			
 		}
@@ -157,9 +150,9 @@ class Application_Article_View extends Application_Article_Abstract
 		{
 			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) )
 			{
-			//	self::v( $profileInfo );
+
 				$data += $profileInfo ? : array();
-			//	self::v( $profileInfo );  
+
 			}
 		}
 			
@@ -186,15 +179,14 @@ class Application_Article_View extends Application_Article_Abstract
 			}
 			foreach( $timeToShow as $key => $each )
 			{
-			//	var_export( date( $each, $data['article_modified_date'] ) );
-			//	var_export( $key );
+
 				@$data['modified_time_representation_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
 				@$data['article_modified_date_' . $key] = date( $each, $data['article_modified_date'] ? : ( time() - 1 ) );
 				@$data['article_creation_date_' . $key] = date( $each, $data['article_creation_date'] ? : ( time() - 1 ) );
 				if( ! empty( $data['datetime'] ) )
 				{
 					@$data['datetime_' . $key] = date( $each, $data['datetime'] );
-				//	var_export( $data['datetime_' . $key] );
+
 				}
 			}
 		}
@@ -202,14 +194,11 @@ class Application_Article_View extends Application_Article_Abstract
         @$data['article_date_m'] = strftime( '%b', $data['article_modified_date'] );   
         @$data['article_date_Y'] = strftime( '%Y', $data['article_modified_date'] );
         @$data['article_date_d'] = strftime( '%d', $data['article_modified_date'] );   
-//	elseif( $this->getParameter( 'filter_date' ) )  
 		{
 			$filter = new Ayoola_Filter_Time();
-		//	if( @$data['article_modified_date'] )
 			{
 				$data['article_modified_date_filtered'] = $filter->filter( $data['article_modified_date'] );
 			}
-		//	else
 			{
 				$data['article_creation_date_filtered'] = $filter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
 			}
@@ -222,7 +211,7 @@ class Application_Article_View extends Application_Article_Abstract
 		
 		if( @$data['document_url_base64'] && ! @$data['document_url'] && @$data['article_url'] )
 		{
-		//	$data['document_url'] = $data['document_url_base64'];
+
 			$data['document_url'] = '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . filemtime( self::getFolder() . @$data['article_url'] );
 		}
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
@@ -246,12 +235,12 @@ class Application_Article_View extends Application_Article_Abstract
 				
 				//	Create this template placeholder value so we can have solve the problem of blank image tags in template markups
 				$data['cover_photo_with_link'] = $imageLink;
-		//		$this->_xml .= '<img class="' . __CLASS__ . '_IMG" style="max-width:100%;" src="' . $image . '" alt="" title="' . $data['article_title'] . "'s cover photo" . '"/>';
+
 			}
 		}
 		//	CATEGORIES
         //  Category not array in the case of category showall
-	//	@$data['category_name'] = is_array( $data['category_name'] ) ? $data['category_name'] : array( 'Uncategorized' );
+
 		@$data['category_id'] = is_array( $data['category_id'] ) ? $data['category_id'] : array(); 
 
 		$data['category_name'] = @$data['category_name'] ? : array();
@@ -265,31 +254,25 @@ class Application_Article_View extends Application_Article_Abstract
 			
 		//	Social Media
 		$parameter = array( 'url' => Ayoola_Application::getUrlPrefix() . $url, 'title' => $data['article_title'] );
-	//	$this->_xml .= Application_GooglePlus_Share::viewInLine( $parameter );
-	//	$this->_xml .= Application_Facebook_Like::viewInLine( $parameter );
-	//	$this->_xml .= '<hr />';
-//		$this->_xml .= '<div>';
-	//	$this->_xml .= '<button style="" onClick="this.nextSibling.style.display=\'\';">Share...</button>';
-	///	$this->_xml .= '<div style="display:none;">' . Application_SocialMedia_Share::viewInLine( $parameter ) . '</div>';  
+
 		$shareLinks = '<div style="font-size:x-small; margin: 2em 0 2em 0;">' . self::getShareLinks( Ayoola_Page::getCanonicalUrl( $url ) ) . '</div>';  
-	//	$this->_xml .= $shareLinks;  
+
 		$this->_objectData['share_link'] = $shareLinks;
 		$this->_objectTemplateValues['share_link'] = $shareLinks;
 		if( self::isOwner( $data['user_id'] ) || self::isAllowedToEdit( $data ) || self::hasPriviledge( array( 98 ) ) || self::hasPriviledge( $articleSettings['allowed_editors'] ) )
 		{
-		//	var_export( __LINE__ );
+
 			$editLink = '' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Editor/?article_url=' . $data['article_url'];
 			$editLinkHTML = null;
-		//	$editLinkHTML .= '<a href="' . $editLink . '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $editLink . '\' );">Edit...</button></a>';
+
 			$editLinkHTML .= '<a href="' . $editLink . '"><button style="">' . self::__( 'Edit Post' ) . '</button></a>';
 			$editLinkHTML .= '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Delete/?article_url=' . $data['article_url'] . '\' );">' . self::__( 'Delete Post' ) . '</button>';
 			$this->_objectData['edit_link'] = $editLinkHTML;
 			$this->_objectTemplateValues['edit_link'] = $editLinkHTML;
-//			$this->_xml .= $editLinkHTML;
+
 		}
         $data['css_class_of_inner_content'] = $this->getParameter( 'css_class_of_inner_content' );
-	//	var_export( $data['article_content'] );
-//		$this->_xml .= '</div>'; 
+
 		$leastPrice = false;
 		if( isset( $data['item_price'] ) )
 		{
@@ -318,11 +301,11 @@ class Application_Article_View extends Application_Article_Abstract
 			$filter = new $filter();
 			@$data['item_old_price'] = $data['item_old_price'] ? $filter->filter( $data['item_old_price'] ) : null;
 			$data['item_price_without_currency'] = $data['item_price'];
-		//	$data['item_price'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
+
 			
 			//	Split to naira / kobo
 			$filter = new $filter();
-	//		$filter::$symbol = '';
+
 			$data['item_price_with_currency'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
 			$data['item_price_before_decimal'] = array_shift( explode( '.', $data['item_price_without_currency'] ) );
 			$data['item_price_after_decimal'] = array_pop( explode( '.', $data['item_price_without_currency'] ) );
@@ -343,10 +326,9 @@ class Application_Article_View extends Application_Article_Abstract
 		if( @$data['article_url'] && strpos( @$data['article_url'], ':' ) === false && $data['article_url'][0] !== '?'  )
 		{
 			$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
-	//		var_export( $data['post_link'] );
+
 		}
-	
-	//	var_export( $postTypeInfo );
+
 		if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
 		{
 			$postType = $postTypeInfo['article_type'];
@@ -363,7 +345,6 @@ class Application_Article_View extends Application_Article_Abstract
 		$categoryText = $categoryTextRaw ? ' ' . $categoryTextRaw : null;
 		$data['category_text'] = $categoryText;
 		//	
-	 //	self::v( $data );
 
 		//	get number of views
 		if( $this->getParameter( 'get_views_count' ) )
@@ -376,8 +357,8 @@ class Application_Article_View extends Application_Article_Abstract
 		{
 			self::getDownloadCount( $data );
 		}
-	//	self::v( $data );
-		//	get number of downloads
+
+        //	get number of downloads
 		if( $this->getParameter( 'get_audio_play_count' ) && $data['true_post_type'] == 'audio' )
 		{   
 			self::getAudioPlayCount( $data );
@@ -387,7 +368,6 @@ class Application_Article_View extends Application_Article_Abstract
 			self::getCommentsCount( $data );
 		}
 
-	//	var_export( $this->getParameter( 'hide_default_post_view' ) );
 		if( ! $this->getParameter( 'hide_default_post_view' ) )
 		{
 			$this->_xml = self::getDefaultPostView( $data );
@@ -399,7 +379,7 @@ class Application_Article_View extends Application_Article_Abstract
         }            
 
 		//	internal forms to use
-	//	var_export( $postTypeInfo );
+
         if (empty(@$postTypeInfo['post_type_options'][0])) {
             unset($postTypeInfo['post_type_options']);
             unset($postTypeInfo['post_type_options_name']);
@@ -413,7 +393,7 @@ class Application_Article_View extends Application_Article_Abstract
 		}
 		$featureCount = array();
 		$featureDone = array();
-		//		var_export( $features );
+
 		foreach( $features as $key => $eachPostType )
 		{	
 			$featureSuffix = $featuresPrefix[$key];
@@ -434,7 +414,7 @@ class Application_Article_View extends Application_Article_Abstract
 			{
 				continue;
 			}
-		//	self::v( $eachPostType );
+
             $featureDone[$featureCountKey] = true;       
 			$this->_xml .= '<div class="pc_give_space_top_bottom">';
 
@@ -456,8 +436,6 @@ class Application_Article_View extends Application_Article_Abstract
 					unset( $data[$imagesKey] );
 				break;  
                 case 'subscription-options':
-                //    self::v( $this->getParameter( 'subscription_selections_template' ) );
-                //    self::v( $data['subscription_selections' . $featureSuffix] );
 					if( $this->getParameter( 'subscription_selections_template' ) && $data['subscription_selections' . $featureSuffix] )
 					{
 						$data['subscription_selections_html' . $featureSuffix] = null;
@@ -470,14 +448,9 @@ class Application_Article_View extends Application_Article_Abstract
 							$data['subscription_selections_html' . $featureSuffix] .= str_ireplace( array( '{{{subscription_selections}}}', '{{{suffix}}}', ), array( $eachSelection, $featureSuffix ), $this->getParameter( 'subscription_selections_template' ) );
 						}
 					}			
-                //    self::v( 'subscription_selections_html' . $featureSuffix );
-                //    self::v( $data['subscription_selections_html' . $featureSuffix] );
 				break;
 				case 'product':
-			//	case 'service':
 				case 'subscription':
-			//	case 'event':
-			//	case 'events':
 					//	By
 					
 					//	title
@@ -486,14 +459,12 @@ class Application_Article_View extends Application_Article_Abstract
 					{
 						//	don't let least price get into the cart'
 						$baseData['item_price'] = '';
-					//	unset( $data['item_price'] );
+
 					}
-			//		var_export( $baseData );
-			//		var_export( $baseData + $data );
 					$parameterX = array( 'data' => $baseData + $data, 'button_value' => $this->getParameter( 'button_value' ), 'min_quantity' => $this->getParameter( 'min_quantity' ), 'max_quantity' => $this->getParameter( 'max_quantity' ) );
 					$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( $parameterX );
 					$this->_xml .= $data['button_add_to_cart'];
-					// $this->_xml .= @$data['article_content'];
+
 				break;
 				case 'multi-price':
 					//	By
@@ -504,36 +475,35 @@ class Application_Article_View extends Application_Article_Abstract
 					{
 						//	don't let least price get into the cart'
 						$baseData['item_price'] = '';
-					//	unset( $data['item_price'] );
+
 					}
-			//		var_export( $baseData );
-			//		var_export( $baseData + $data );
+
 					$parameterX = array( 'data' => $baseData + $data, 'button_value' => $this->getParameter( 'button_value' ), 'multi-price' => true, 'min_quantity' => $this->getParameter( 'min_quantity' ), 'max_quantity' => $this->getParameter( 'max_quantity' ) );
 					$data['button_add_to_cart'] = Application_Article_Type_Subscription::viewInLine( $parameterX );
 					$this->_xml .= $data['button_add_to_cart'];
-					// $this->_xml .= @$data['article_content'];
+
 				break;
 				case 'video':
 					$data['video_content'] = Application_Article_Type_Video::viewInLine( array( 'data' => $data ) );
 					$this->_xml .= $data['video_content'];
-					// $this->_xml .= @$data['article_content'];  
+
 				break;
 				case 'audio':
 					$data['audio_content'] = Application_Article_Type_Audio::viewInLine( array( 'data' => $data ) );
 					$this->_xml .= $data['audio_content'];
-					// $this->_xml .= @$data['article_content'];  
+
 				break;
 				case 'link':
 					$this->_xml .= '<a target="_blank" href="' . $data['link_url'] . '" class="pc-btn pc-bg-color">Visit Link</a>';
-					// $this->_xml .= @$data['article_content'];
+
 				break;
 				case 'poll':
-					// $this->_xml .= @$data['article_content'];
+
 					@$data['poll'] = Application_Article_Type_Poll::viewInLine( array( 'data' => $data ) );
 					$this->_xml .= @$data['poll'];
 				break;
 				case 'quiz':
-					// $this->_xml .= @$data['article_content'];
+
 					$this->_xml .= Application_Article_Type_Quiz::viewInLine( array( 'data' => $data ) );
 				break;
 				case 'audio':
@@ -543,7 +513,7 @@ class Application_Article_View extends Application_Article_Abstract
 				case 'document':
 				case 'file':
 				case 'download':
-				//	self::v( $data );
+
 					//	title
                     if( $data['download_url'][0] === '/' )
                     {
@@ -562,10 +532,10 @@ class Application_Article_View extends Application_Article_Abstract
 						$result = self::splitBase64Data( $data['download_base64'] );
 						$data['file_size'] =  strlen( $result['data'] );
 					}
-			//		var_export( $data['download_base64'] );
+
 					$filter = new Ayoola_Filter_FileSize();
 					$data['file_size'] = $filter->filter( $data['file_size'] );
-					// $this->_xml .= @$data['article_content'];
+
 					$data['download_button'] = Application_Article_Type_Download::viewInLine( array( 'data' => $data ) );
 					$this->_xml .= $data['download_button'];
 				break;
@@ -577,7 +547,17 @@ class Application_Article_View extends Application_Article_Abstract
                         $data['article_content' . $featureSuffix] = nl2br( $data['article_content' . $featureSuffix] );
                     }
 					$this->_xml .= $data['article_content' . $featureSuffix];
-				break;
+                break;
+                
+                default:
+                $eachPostTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $eachPostType );
+                if( ! empty( $eachPostTypeInfo['view_widget'] ) && Ayoola_Object_Embed::isWidget( $eachPostTypeInfo['view_widget'] ) )
+                {
+                    $class = new $eachPostTypeInfo['view_widget']( array( 'data' => $data ) );
+                    $class->initOnce();
+                    $this->_xml .= $class->view();
+                }
+                break;
 			}
 			$this->_xml .= '</div>';
 
@@ -587,14 +567,13 @@ class Application_Article_View extends Application_Article_Abstract
 			$filesizeLevel = array( 'bytes', 'KB', 'MB', 'GB' );
 			$denomenator = 1; 
 			$newFilesize = $data['file_size'];
-	//		var_export( $data['file_size'] );
+
 			while( $denomenator < $newFilesize && $filesizeLevel )
 			{
 				$suffixFilesize = array_shift( $filesizeLevel );
 				$newFilesize = intval( $newFilesize ) / $denomenator;
 				$newFilesizeString = floatval( round( $newFilesize, 1 ) ) . $suffixFilesize;
-		//		var_export( $newFilesize . '<br>' );
-		//		var_export( $newFilesizeString . '<br>' );
+
 				
 				$denomenator = 1024;
 			}
@@ -606,8 +585,7 @@ class Application_Article_View extends Application_Article_Abstract
 			$table = Application_Article_Type_Download_Table::getInstance();
 			$count = $table->select( null, array( 'article_url' => $data['article_url'] ) );
 			$data['download_count'] = count( $count );
-		//	self::v( array( 'article_url' => $data['article_url'] ) );
-		//	self::v( $count );
+
 		}
  */		//	destroy float
 		$this->_xml .= '<div style="clear:both;"></div>';

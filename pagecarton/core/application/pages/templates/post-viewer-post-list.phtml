@@ -5,11 +5,11 @@
 * LICENSE
 *
 * @category PageCarton
-* @package /post/view
+* @package /post-viewer-post-list
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Thursday 28th of January 2021 12:07:39 AM	ayoola@ayoo.la $ 
+* @version $Id: post-viewer-post-list.php	Thursday 28th of January 2021 02:07:49 AM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -20,12 +20,12 @@
                         if
                         ( 
 
-                            $x_1611792459 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1611799669 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1611792459 )
-                            foreach( $x_1611792459 as $each )
+                            if( $x_1611799669 )
+                            foreach( $x_1611799669 as $each )
                             {	
                                 include_once $each;
                             }
@@ -120,9 +120,9 @@ echo ( ! empty( $_474612ea2c4114e6c4a6f67f7d1d56c3 ) &&  is_object( $_474612ea2c
 
 //pc_body_1 /default-layout Ends Here
 ?><?php
-//pc_body_1 /post/view Begins Here
+//pc_body_1 /post-viewer-post-list Begins Here
 
-//pc_body_1 /post/view Ends Here
+//pc_body_1 /post-viewer-post-list Ends Here
 ?>
 
 
@@ -147,9 +147,9 @@ echo ( ! empty( $_f07b8fc6580bff292f9c4105144addf2 ) &&  is_object( $_f07b8fc658
 
 //pc_body_2 /default-layout Ends Here
 ?><?php
-//pc_body_2 /post/view Begins Here
+//pc_body_2 /post-viewer-post-list Begins Here
 
-//pc_body_2 /post/view Ends Here
+//pc_body_2 /post-viewer-post-list Ends Here
 ?>
 
 
@@ -167,9 +167,9 @@ echo ( ! empty( $_f07b8fc6580bff292f9c4105144addf2 ) &&  is_object( $_f07b8fc658
 
 //oneness /default-layout Ends Here
 ?><?php
-//oneness /post/view Begins Here
+//oneness /post-viewer-post-list Begins Here
 
-//oneness /post/view Ends Here
+//oneness /post-viewer-post-list Ends Here
 ?><section data-pc-all-sections="1" class="container">	
 									<div class="">
 										<div class="row">
@@ -188,11 +188,9 @@ echo ( ! empty( $_f07b8fc6580bff292f9c4105144addf2 ) &&  is_object( $_f07b8fc658
 
 //middlebar /default-layout Ends Here
 ?><?php
-//middlebar /post/view Begins Here
+//middlebar /post-viewer-post-list Begins Here
 
-echo ( ! empty( $_8eccaa7e0a95bfe06f5ebffc31ee8f0f ) &&  is_object( $_8eccaa7e0a95bfe06f5ebffc31ee8f0f ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_8eccaa7e0a95bfe06f5ebffc31ee8f0f->view(), '' ) : null );
-
-//middlebar /post/view Ends Here
+//middlebar /post-viewer-post-list Ends Here
 ?>
 										   </div>
 										</div> 
@@ -212,21 +210,13 @@ echo ( ! empty( $_8eccaa7e0a95bfe06f5ebffc31ee8f0f ) &&  is_object( $_8eccaa7e0a
 
 //twosome1 /default-layout Ends Here
 ?><?php
-//twosome1 /post/view Begins Here
+//twosome1 /post-viewer-post-list Begins Here
 
-echo ( ! empty( $_85c670985c03815dd9f45362c1c9b988 ) &&  is_object( $_85c670985c03815dd9f45362c1c9b988 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_85c670985c03815dd9f45362c1c9b988->view(), 'well' ) : null );
+echo ( ! empty( $_df31865e69a975a3db920b03c85eeabb ) &&  is_object( $_df31865e69a975a3db920b03c85eeabb ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_df31865e69a975a3db920b03c85eeabb->view(), '' ) : null );
 
-echo ( ! empty( $_b107e295260b4f99579dc21f30ce47cb ) &&  is_object( $_b107e295260b4f99579dc21f30ce47cb ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_b107e295260b4f99579dc21f30ce47cb->view(), '' ) : null );
+echo ( ! empty( $_0c09c67ba3a7fb201e3e77716069f24a ) &&  is_object( $_0c09c67ba3a7fb201e3e77716069f24a ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_0c09c67ba3a7fb201e3e77716069f24a->view(), '' ) : null );
 
-							if( Ayoola_Page::hasPriviledge( array (
-  0 => '98',
-  1 => '99',
-), array( 'strict' => true ) ) && ! empty( $_2ef3917fcdce6be10601f99ac5e4d1ac ) && is_object( $_2ef3917fcdce6be10601f99ac5e4d1ac ) )
-							{
-								echo $_2ef3917fcdce6be10601f99ac5e4d1ac->view();
-							}
-							
-//twosome1 /post/view Ends Here
+//twosome1 /post-viewer-post-list Ends Here
 ?>
 											</div>
 											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -244,13 +234,9 @@ echo ( ! empty( $_b107e295260b4f99579dc21f30ce47cb ) &&  is_object( $_b107e29526
 
 //twosome2 /default-layout Ends Here
 ?><?php
-//twosome2 /post/view Begins Here
+//twosome2 /post-viewer-post-list Begins Here
 
-echo ( ! empty( $_034db1ec16982a829003894d7fbb2d91 ) &&  is_object( $_034db1ec16982a829003894d7fbb2d91 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_034db1ec16982a829003894d7fbb2d91->view(), '' ) : null );
-
-echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efadc0829f15ead54700c8d4e ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_c117484efadc0829f15ead54700c8d4e->view(), '' ) : null );
-
-//twosome2 /post/view Ends Here
+//twosome2 /post-viewer-post-list Ends Here
 ?>
 											</div> 
 										</div> 
@@ -270,9 +256,9 @@ echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efa
 
 //threesome1 /default-layout Ends Here
 ?><?php
-//threesome1 /post/view Begins Here
+//threesome1 /post-viewer-post-list Begins Here
 
-//threesome1 /post/view Ends Here
+//threesome1 /post-viewer-post-list Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -290,9 +276,9 @@ echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efa
 
 //threesome2 /default-layout Ends Here
 ?><?php
-//threesome2 /post/view Begins Here
+//threesome2 /post-viewer-post-list Begins Here
 
-//threesome2 /post/view Ends Here
+//threesome2 /post-viewer-post-list Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -310,9 +296,9 @@ echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efa
 
 //threesome3 /default-layout Ends Here
 ?><?php
-//threesome3 /post/view Begins Here
+//threesome3 /post-viewer-post-list Begins Here
 
-//threesome3 /post/view Ends Here
+//threesome3 /post-viewer-post-list Ends Here
 ?>
 											</div> 
 										</div> 
@@ -332,9 +318,9 @@ echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efa
 
 //foursome1 /default-layout Ends Here
 ?><?php
-//foursome1 /post/view Begins Here
+//foursome1 /post-viewer-post-list Begins Here
 
-//foursome1 /post/view Ends Here
+//foursome1 /post-viewer-post-list Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -352,9 +338,9 @@ echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efa
 
 //foursome2 /default-layout Ends Here
 ?><?php
-//foursome2 /post/view Begins Here
+//foursome2 /post-viewer-post-list Begins Here
 
-//foursome2 /post/view Ends Here
+//foursome2 /post-viewer-post-list Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
@@ -372,9 +358,9 @@ echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efa
 
 //foursome3 /default-layout Ends Here
 ?><?php
-//foursome3 /post/view Begins Here
+//foursome3 /post-viewer-post-list Begins Here
 
-//foursome3 /post/view Ends Here
+//foursome3 /post-viewer-post-list Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
@@ -392,9 +378,9 @@ echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efa
 
 //foursome4 /default-layout Ends Here
 ?><?php
-//foursome4 /post/view Begins Here
+//foursome4 /post-viewer-post-list Begins Here
 
-//foursome4 /post/view Ends Here
+//foursome4 /post-viewer-post-list Ends Here
 ?>
 											</div> 
 										</div> 
@@ -414,9 +400,9 @@ echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efa
 
 //leftbar /default-layout Ends Here
 ?><?php
-//leftbar /post/view Begins Here
+//leftbar /post-viewer-post-list Begins Here
 
-//leftbar /post/view Ends Here
+//leftbar /post-viewer-post-list Ends Here
 ?>
 										   </div>
 											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -434,9 +420,9 @@ echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efa
 
 //leftbarright /default-layout Ends Here
 ?><?php
-//leftbarright /post/view Begins Here
+//leftbarright /post-viewer-post-list Begins Here
 
-//leftbarright /post/view Ends Here
+//leftbarright /post-viewer-post-list Ends Here
 ?>
 											</div> 
 										</div> 
@@ -456,11 +442,9 @@ echo ( ! empty( $_c117484efadc0829f15ead54700c8d4e ) &&  is_object( $_c117484efa
 
 //rightbarleft /default-layout Ends Here
 ?><?php
-//rightbarleft /post/view Begins Here
+//rightbarleft /post-viewer-post-list Begins Here
 
-echo ( ! empty( $_871a4683bca92fa0998151c939f71ec1 ) &&  is_object( $_871a4683bca92fa0998151c939f71ec1 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_871a4683bca92fa0998151c939f71ec1->view(), '' ) : null );
-
-//rightbarleft /post/view Ends Here
+//rightbarleft /post-viewer-post-list Ends Here
 ?>
 											</div> 
 											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
@@ -478,9 +462,9 @@ echo ( ! empty( $_871a4683bca92fa0998151c939f71ec1 ) &&  is_object( $_871a4683bc
 
 //rightbar /default-layout Ends Here
 ?><?php
-//rightbar /post/view Begins Here
+//rightbar /post-viewer-post-list Begins Here
 
-//rightbar /post/view Ends Here
+//rightbar /post-viewer-post-list Ends Here
 ?>
 											</div>   
 										</div> 
@@ -499,19 +483,11 @@ echo ( ! empty( $_871a4683bca92fa0998151c939f71ec1 ) &&  is_object( $_871a4683bc
 
 //lastoneness /default-layout Ends Here
 ?><?php
-//lastoneness /post/view Begins Here
+//lastoneness /post-viewer-post-list Begins Here
 
-echo ( ! empty( $_1ec416705cd18b9267d8b10cbe7c2851 ) &&  is_object( $_1ec416705cd18b9267d8b10cbe7c2851 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_1ec416705cd18b9267d8b10cbe7c2851->view(), '' ) : null );
+echo ( ! empty( $_dcb2368f994d871d30b09185f61350e2 ) &&  is_object( $_dcb2368f994d871d30b09185f61350e2 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_dcb2368f994d871d30b09185f61350e2->view(), '' ) : null );
 
-echo ( ! empty( $_10e0583681d44099c1a9e038384b653f ) &&  is_object( $_10e0583681d44099c1a9e038384b653f ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_10e0583681d44099c1a9e038384b653f->view(), '' ) : null );
-
-echo ( ! empty( $_85c9419042cf5eb1948aad0e9e8aeb75 ) &&  is_object( $_85c9419042cf5eb1948aad0e9e8aeb75 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_85c9419042cf5eb1948aad0e9e8aeb75->view(), '' ) : null );
-
-echo ( ! empty( $_6dee86d34f712929d5fa8e80f452cdc8 ) &&  is_object( $_6dee86d34f712929d5fa8e80f452cdc8 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_6dee86d34f712929d5fa8e80f452cdc8->view(), 'well' ) : null );
-
-echo ( ! empty( $_547150e4df0861c8fe81c9b00f82114d ) &&  is_object( $_547150e4df0861c8fe81c9b00f82114d ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_547150e4df0861c8fe81c9b00f82114d->view(), 'white-well' ) : null );
-
-//lastoneness /post/view Ends Here
+//lastoneness /post-viewer-post-list Ends Here
 ?>
 <?php
 //pc_body_3 /layout/pc_layout_miniblog/template Begins Here
@@ -527,9 +503,9 @@ echo ( ! empty( $_547150e4df0861c8fe81c9b00f82114d ) &&  is_object( $_547150e4df
 
 //pc_body_3 /default-layout Ends Here
 ?><?php
-//pc_body_3 /post/view Begins Here
+//pc_body_3 /post-viewer-post-list Begins Here
 
-//pc_body_3 /post/view Ends Here
+//pc_body_3 /post-viewer-post-list Ends Here
 ?>
 
 
@@ -550,9 +526,9 @@ echo ( ! empty( $_547150e4df0861c8fe81c9b00f82114d ) &&  is_object( $_547150e4df
 
 //pc_body_4 /default-layout Ends Here
 ?><?php
-//pc_body_4 /post/view Begins Here
+//pc_body_4 /post-viewer-post-list Begins Here
 
-//pc_body_4 /post/view Ends Here
+//pc_body_4 /post-viewer-post-list Ends Here
 ?>
 
 
@@ -573,9 +549,9 @@ echo ( ! empty( $_547150e4df0861c8fe81c9b00f82114d ) &&  is_object( $_547150e4df
 
 //pc_body_5 /default-layout Ends Here
 ?><?php
-//pc_body_5 /post/view Begins Here
+//pc_body_5 /post-viewer-post-list Begins Here
 
-//pc_body_5 /post/view Ends Here
+//pc_body_5 /post-viewer-post-list Ends Here
 ?>
 
 
@@ -597,17 +573,17 @@ echo ( ! empty( $_547150e4df0861c8fe81c9b00f82114d ) &&  is_object( $_547150e4df
 
 //pc_body_6 /default-layout Ends Here
 ?><?php
-//pc_body_6 /post/view Begins Here
+//pc_body_6 /post-viewer-post-list Begins Here
 
-//pc_body_6 /post/view Ends Here
+//pc_body_6 /post-viewer-post-list Ends Here
 ?> <?php
 //pc_body_8 /default-layout Begins Here
 
 //pc_body_8 /default-layout Ends Here
 ?><?php
-//pc_body_8 /post/view Begins Here
+//pc_body_8 /post-viewer-post-list Begins Here
 
-//pc_body_8 /post/view Ends Here
+//pc_body_8 /post-viewer-post-list Ends Here
 ?>
 
 
@@ -631,9 +607,9 @@ echo ( ! empty( $_2cfd005375ab9fe4addf27e6c57d38eb ) &&  is_object( $_2cfd005375
 
 //pc_body_7 /default-layout Ends Here
 ?><?php
-//pc_body_7 /post/view Begins Here
+//pc_body_7 /post-viewer-post-list Begins Here
 
-//pc_body_7 /post/view Ends Here
+//pc_body_7 /post-viewer-post-list Ends Here
 ?>
 
 
@@ -656,9 +632,9 @@ echo ( ! empty( $_2cfd005375ab9fe4addf27e6c57d38eb ) &&  is_object( $_2cfd005375
 
 //pc_section_after_js /default-layout Ends Here
 ?><?php
-//pc_section_after_js /post/view Begins Here
+//pc_section_after_js /post-viewer-post-list Begins Here
 
-//pc_section_after_js /post/view Ends Here
+//pc_section_after_js /post-viewer-post-list Ends Here
 ?>
 
 </body>

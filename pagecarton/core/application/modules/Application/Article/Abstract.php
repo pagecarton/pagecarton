@@ -515,7 +515,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
                 }
             }
         }
-     //   var_export( $jsonData );
         
         if( empty( $jsonData ) )
 		{
@@ -583,7 +582,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		else
 		{
 			$data = $jsonData;
-		//	if( @$data['has_secondary_data'] )
 			{
 				$filename = self::getSecondaryFolder() . $data['article_url'];
 				if( is_file( $filename ) )
@@ -650,7 +648,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			return false;
 		}
 
-	//	if( get_class( $this ) === 'Application_Article_View' && ( ! $this->getParameter( 'markup_template_object_name' ) || $this->getParameter( 'update_meta_data' ) ) )
 		if( get_class( $this ) === 'Application_Article_View' )
 		{
 			
@@ -702,7 +699,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public static function getArticleInfo( $articleUrl = null )
     {
 		if( self::$_articleInfo ){ return self::$_articleInfo; }
-	//	$class = get_cla
 		$class = new Application_Article_View();
 		self::$_articleInfo = $class->getIdentifierData();
 		if( ! self::$_articleInfo )
@@ -993,7 +989,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
     {
 		$html = null;
 		$html .= '<ul style="margin:0;padding:0;list-style:none;display:inline-block;">';
-	//	foreach( $values as $each )
 		{
 			$html .= '<li style="display:inline-block;margin:0.5em;" title="Articles not published are only visible to the writer.">' . self::filterTime( $data ) . '</li>';
 			$html .= '<strong>Published:</strong><li style="display:inline-block;margin:0.5em;">' . ( $data['publish'] ? 'Yes' : 'No' ) . '</li>';
@@ -1216,10 +1211,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 		
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-	//	if( ! self::hasPriviledge( @$articleSettings['allowed_writers'] ) )
-		{ 
-
-		}
 
 		//	Let's know the kind of post that we are working on.
 
@@ -1337,18 +1328,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		if( ! empty( $_REQUEST['article_type'] ) )
 		{
 			$typeDisplay = 'Hidden';
-		}
+        }
+        asort( $postTypesAvailable );
+
 		$fieldset->addElement( array( 'name' => 'article_type', 'label' => 'Post Type', 'onchange'=> 'window.location.search += \'&article_type=\' + this.value + \'\';', 'type' => $typeDisplay, 'value' => $articleTypeWeUsing ), $postTypesAvailable );
 
 		$fieldset->addElement( array( 'name' => 'true_post_type', 'type' => 'Hidden', 'value' => @$values['true_post_type'] ? : @$values['article_type'] ) );
-		   
 		
-	//	if( is_null( $values ) )
-		{
-/* 			//	Category allows one to enter a category that will be discretely entered.
-			$values['category'] = $this->getParameter( 'category' ) ? : @$_REQUEST['category'];
-			$fieldset->addElement( array( 'name' => 'category', 'type' => 'Hidden', 'value' => $values['category'] ) );
- */		}
 		$postTypeLabel = $this->getParameter( 'post_type_label' ) ? : ucwords( $values['post_type'] );
 		
 		//	Title
@@ -1405,11 +1391,25 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			{
 				foreach( $orderFormClass->getForm()->getFieldsets() as $each )  
 				{
-
-					
 					$form->addFieldset( $each );
 				}
-				$form->submitValue = 'Continue...';
+				$form->submitValue = 'Save...';
+			}
+		}
+        if( ! empty( $postTypeInfo['view_widget'] ) && Ayoola_Object_Embed::isWidget( $postTypeInfo['view_widget'] ) )
+		{
+			$supplementaryForm = $postTypeInfo['supplementary_form'];
+            $parameters = array( 'default_values' => $values );  
+
+			$orderFormClass = new $postTypeInfo['view_widget']( $parameters );
+			$orderFormClass->createForm( null, null, $values );
+			if( $orderFormClass->getForm() )
+			{
+				foreach( $orderFormClass->getForm()->getFieldsets() as $each )  
+				{
+					$form->addFieldset( $each );
+				}
+				$form->submitValue = 'Save...';
 			}
 		}
 
@@ -1433,7 +1433,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$features[] = @$values['true_post_type'];
 			$featuresPrefix[] = '';
 		}
-		$featureCount = array();
+        $featureCount = array();
+
 		foreach( $features as $key => $eachPostType )
 		{	
 			$featurePrefix = @$featuresPrefix[$key];
@@ -1462,7 +1463,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'Select', 'value' => @$values['auth_level'] ? : 0 ), $options );
 					$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $options ) ) );
 				break;  
-				case 'cover-photo':
+                case 'cover-photo':
+                    
 					//	Cover photo
 
 					$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
@@ -1931,7 +1933,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				case 'file':
 				case 'download':
 					//	Downloads
-					
 					$downloadOptions = array( 
 												'require_user_info' => 'Require log-in before download', 
 												'download_notification' => 'Notify me on every download', 
@@ -1941,9 +1942,27 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$fieldset->addElement( array( 'name' => 'download_url' . $featurePrefix, 'label' => 'Download File', 'placeholder' => 'e.g. http://example.com/path/to/file.mp3', 'type' => 'Document', 'optional' => 'optional', 'value' => @$values['download_url' . $featurePrefix] ) );
 					$fieldset->addRequirement( 'download_url' . $featurePrefix, array( 'NotEmpty' => null ) );
 				break;
-				default:
-					
-				break;
+                default:
+
+                    if( $eachPostTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $eachPostType ) )
+                    {
+            
+                        
+                    }
+                    if( $postTypeInfo['view_widget'] !== $eachPostTypeInfo['view_widget'] && ! empty( $eachPostTypeInfo['view_widget'] ) && Ayoola_Object_Embed::isWidget( $eachPostTypeInfo['view_widget'] ) )
+                    {
+                        $orderFormClass = new $eachPostTypeInfo['view_widget']();
+                        $orderFormClass->createForm( null, null, $values );
+                        if( $orderFormClass->getForm() )
+                        {
+                            foreach( $orderFormClass->getForm()->getFieldsets() as $each )  
+                            {
+                                $form->addFieldset( $each );
+                            }
+                            $form->submitValue = 'Save...';
+                        }
+                    }
+                break;
 			}
 		}
 		if( ! empty( $postTypeInfo['post_type_custom_fields'] ) )

@@ -73,7 +73,10 @@ class Ayoola_Page_Layout_MakeDefault extends Ayoola_Page_Layout_Abstract
                         
 			$this->createConfirmationForm( 'Confirm', 'Set  "' . $data['layout_label'] . '" as the main site theme' );
 			$this->setViewContent( $this->getForm()->view(), true);
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
+            if( ! $values = $this->getForm()->getValues() )
+            { 
+                return false; 
+            }
 
             if( ! self::this( $data['layout_name'] ) )
             {

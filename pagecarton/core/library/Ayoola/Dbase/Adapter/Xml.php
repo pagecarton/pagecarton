@@ -694,8 +694,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			( is_file( $this->_myFilename ) ? filemtime( $this->_myFilename ) : "" ) .
 			( is_file( $defaultFile ) ? filemtime( $defaultFile ) : "" ) .
 			( isset( $fmTime ) ? $fmTime : "" ) );
-
-		$storage = PageCarton_Widget::getObjectStorage( array( 'id' => __CLASS__ . '---wefwfff' . $hash, 'device' => 'File', 'time_out' => 1000000, ) );
+        $storage = PageCarton_Widget::getObjectStorage( array( 'id' => __CLASS__ . '---wefwfff' . $hash, 'device' => 'File', 'time_out' => 1000000, ) );
 		$result = $storage->retrieve();
 		if( false !== $result )
 		{
@@ -705,7 +704,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		else
 		{
 
-		}
+        }
 
 		$class = __CLASS__ . '_' . $keyword;
 		require_once 'Ayoola/Loader.php';

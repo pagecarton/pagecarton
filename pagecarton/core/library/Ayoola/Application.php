@@ -885,6 +885,7 @@ class Ayoola_Application
 						else
 						{
 
+                            //     var_export( Ayoola_Page::getInfo( '/post-viewer' ) );
 							if( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['article_type'] ) ) )
 							{
 								//	allow dedicated url for all post types like /post-viewer-article/

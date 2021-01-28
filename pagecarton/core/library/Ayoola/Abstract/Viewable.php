@@ -2238,6 +2238,10 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$this->_markupTemplate = $markup;
 			$storage->retrieve() != $this->_markupTemplate && $this->getParameter( 'markup_template_cache' ) ? $storage->store( $this->_markupTemplate ) : null;
+        }
+        elseif( false === $this->getParameter( 'markup_template' ) )
+		{
+			$this->_markupTemplate = $this->getParameter( 'markup_template_no_data' );
 		}
 		elseif( $path = Ayoola_Loader::getFullPath( 'documents/layout/' .  Ayoola_Page_Editor_Layout::getDefaultLayout() . '/' . str_replace( '_', '/', get_class( $this ) ) . '.html' , array( 'prioritize_my_copy' => true ) ) )
 		{
@@ -2274,6 +2278,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
      */
     public function getObjectTemplateValues()
 	{
+		return $this->_objectTemplateValues ? : array();
+	}
+    /**
+     * @param void
+     * @return array
+     */
+    public function setObjectTemplateValues( array $values )
+	{
+        $this->_objectTemplateValues = $this->_objectTemplateValues ? : array();
+        $this->_objectTemplateValues += $values;
 		return $this->_objectTemplateValues ? : array();
 	}
 
@@ -2317,7 +2331,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
         {
             return $this->_objectData;
         }
-
 
 		$this->_playMode = $this->getParameter( 'play_mode' ) ? : $this->_playMode;
 		switch( $this->_playMode )
@@ -2525,8 +2538,12 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					$template = $template . $this->getParameter( 'markup_template_append' );
                     $template = Ayoola_Abstract_Playable::replacePlaceholders( $template, $this->_objectTemplateValues + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
 
-					//	fix case where ajax auto-loading didn't fix url prefix in posts
-					$template = Ayoola_Page_Editor_Text::fixUrlPrefix( $template, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
+                    //	fix case where ajax auto-loading didn't fix url prefix in posts
+                    
+                    if( ! $this->getParameter( 'no_auto_url_prefix' ) )
+                    {
+                        $template = Ayoola_Page_Editor_Text::fixUrlPrefix( $template, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
+                    }
 
 					$html = $template;
 				}

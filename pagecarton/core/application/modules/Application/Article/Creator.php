@@ -247,7 +247,10 @@ class Application_Article_Creator extends Application_Article_Abstract
 		
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . ''; 
-			$this->setViewContent(  '' . self::__( '<div class="goodnews">' . ucfirst( $joinedType ) . ' successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View ' . $joinedType . '</a> or <a href="' . Ayoola_Page::getPreviousUrl() . '">Go Back</a></div>' ) . '', true  );
+			$this->setViewContent(  '<div class="goodnews">' . sprintf( self::__( '%s successfully saved.' ), ucfirst( $joinedType ) ) . '</div>', true  );
+			$this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">' . sprintf( self::__( 'View  %s' ), $joinedType ) . '</a>'  );
+			$this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_Article_PostList_Add?article_url=' . $values['article_url'] . '">' . sprintf( self::__( 'Add to list' ) ) . '</a>'  );
+			$this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Page::getPreviousUrl() . '">' . sprintf( self::__( 'Go Back' ) ) . '</a>'  );
 						
 			//	Notify Admin
 			$mailInfo['subject'] = 'New ' . $joinedType . ' created';

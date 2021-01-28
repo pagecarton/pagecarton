@@ -17,7 +17,6 @@
  
 require_once 'Application/Article/Abstract.php';   
 
-
 /**
  * @category   PageCarton
  * @package    Application_Article_ShowAll
@@ -180,24 +179,18 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      */
 	protected function init()
     {
-	//	if( DOMAIN === 'funfactory.pagecarton.com' )
-		{
-		//	self::v( $this->getParameter() );
-		//	exit();
-		}
-	//	exit();
 
 		try
 		{
+
 			if( $this->getParameter( 'template_name' ) )
 			{
-			//	self::v( $this->getParameter( 'template_name' ) );
 				$options = Application_Article_Template::getInstance();
 				if( $options = $options->selectOne( null, array( 'template_name' => $this->getParameter( 'template_name' ) ) ) )
 				{
 					
 				}
-			//	markup_template_namespace
+			    //	markup_template_namespace
 				if( $this->getParameter( 'max_group_no' ) )
 				{
 					//	allow us to override max_group_no
@@ -213,7 +206,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				}
 				if( @$options['javascript_code'] )
 				{
-				//	$options['javascript_code'] = self::replacePlaceholders( $options['javascript_code'], $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
 					Application_Javascript::addCode( $options['javascript_code'] );
 				}
 				if( @$options['css_files'] )
@@ -235,41 +227,32 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			<div class="sale-box1"><span style="border-bottom: 0;" class="on_sale title_shop pc-bg-color "></span></div>
 			<div class="price-number"><p><span class="rupees"></span></p></div>
 			';
-		//	var_export( 'ewe' );
 			try
 			{
-			//	var_export( $this->getParameter() );
 				switch( @$_GET['post'] )
 				{
 					default:
 						$this->show();
-				//		var_export( $this->getMarkupTemplate() );
-				//		var_export( $this->_parameter['markup_template'] );
 					break;
 				}
-		//		echo $this->getViewContent();
 			}
 			catch( Application_Article_Exception $e )
 			{ 
 				$this->_parameter['markup_template'] = null;
 				$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
-			//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 			}
 			catch( Exception $e )
 			{ 
 				$this->_parameter['markup_template'] = null;
 				$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
-			//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 			}
 		}
 		catch( Exception $e )
 		{
             //  Alert! Clear the all other content and display whats below.
-        //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
             $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
 		}
-	//	var_export( $this->getDbData() );
     } 
 	
     /**
@@ -277,16 +260,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      * 
      * @return string
      */
-//	public function getLinkForNewPost()
 	public function buildQueryForRequestedPosts( $link )
     {
-	//	$link = self::getPostUrl() . '/post/creator/?';
 		$categoryId = @$_GET['category'] ? : $this->getParameter( 'category' );  
 		$categoryId = $this->getParameter( 'category_name' ) ? : $categoryId;
 		$articleInfo = array();
 		if( is_string( $this->getParameter( 'article_types' ) ) )
 		{
-		//	var_export( $this->getParameter( 'article_types' ) );
+
 			$articleInfo += array( 'article_type' => $this->getParameter( 'article_types' ) );
 		}
 		if( $categoryId )
@@ -294,8 +275,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$articleInfo += array( 'category' => $categoryId );
 		}
 		$link .= http_build_query( $articleInfo );  
-	//	var_export( $this->getParameter() );
-	//	var_export( $link );
 		return $link;
 	}
 	
@@ -306,7 +285,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      */
 	public function showMessage()
     {
-	//	$this->_parameter['markup_template'] = null;
+
 		if( empty( $_GET['pc_post_list_id'] ) )
 		{
 			$message = array_pop( $this->_badnews ) ? : 'Posts will be displayed here when they become available.';
@@ -318,16 +297,15 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_parameter['markup_template_no_data'] = null; 
 			$message = '...';
 		}
-		
-	//	$message = $this->getParameter( 'badnews' ) ? : null;
+
 	//	if( ! $values )
 		{
 			//	switch templates off
-	//		$this->_parameter['markup_template'] = null; 
+
 		}
 		
 		$this->setViewContent(  '' . self::__( '<p style="clear: both;" class="pc-notify-normal pc_no_post_to_show pc_give_space_top_bottom"> ' . $message . ' ' . self::getQuickLink() . '</p>' ) . '', true  );
-	//	$message ? $this->setViewContent(  '' . self::__( ' ' . $message . ' ' ) . '', true  ) : null;
+
 		
 		//	Check settings
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' ); 
@@ -338,7 +316,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$addPostMessage = is_numeric( $this->getParameter( 'add_a_new_post' ) ) ? self::__( 'Create a new post' ) : $this->getParameter( 'add_a_new_post' );
 		}
 		else
-	//	if( ! $values )
 		{
 			//	switch templates off
 			$this->_parameter['markup_template'] = null; 
@@ -355,10 +332,9 @@ class Application_Article_ShowAll extends Application_Article_Abstract
  		if( ! $this->getDbData() )
 		{ 
 			$this->showMessage();
-	//		return;
+
 		}
- 	//	var_export( $this->getDbData() );
- 	//	var_export( self::getXml() );
+
 		$this->setViewContent( self::getXml() );   
     } 
 	
@@ -380,27 +356,24 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      */
 	public function retrieveArticleData( $data )
     {
-		//	self::v( $data );
+
 			
 		//	Allow injection of data
 		switch( @$data['article_url'] )
 		{
-/* 			case $this->buildQueryForRequestedPosts( self::getPostUrl() . '/post/creator/?' ):
-				
-			break;
- */			default:
+			default:
 				if( is_array( $data ) )
 				{
 					$data = array_merge( $data ? : array(),  $this->getParameter( 'data_to_merge' ) ? : array() );
 				}
 				if( is_array( $data ) && empty( $data['allow_raw_data'] ) )
 				{ 
-			//		var_export( $data );
+
 					$data = $data['article_url']; 
 				}
 				
 				//	Module can now send full path
-				//	$path = $data;
+
 				if( ! is_array( $data ) )
 				{
 					
@@ -477,7 +450,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			else
 			{   
 				
-				if( $values )
+				if( $values && $this->getParameter( $this->getIdColumn() ) !== $values )
 				{
 					$sortColumn = @$values[0]['profile_creation_date'] ? 'profile_creation_date' : 'article_creation_date';
 					$values = self::sortMultiDimensionalArray( $values, $sortColumn );
@@ -514,7 +487,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
                     }
 
                     //	Some old posts does have titles in the table
-                    if( empty( $data['article_title'] ) && ! empty( $dataX['article_title'] ) )
+                    if( empty( $data['article_title'] ) && ! empty( $dataX['article_title'] )&& ! empty( $data['article_url'] ) )
                     {
                         $class = Application_Article_Table::getInstance();
                         $class->update( $dataX, array( 'article_url' => $data['article_url'] ) );
@@ -703,8 +676,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
                     $data['engagement_count_total'] = intval( $data['download_count_total'] ) + intval( $data['views_count_total'] ) + intval( $data['comments_count_total'] ) + intval( $data['audio_play_count_total'] );
 
-
-
                     //	don't cache base64 strings of images and download data
                     unset( $data['document_url_base64'] );
                     unset( $data['download_base64'] );  
@@ -731,7 +702,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{   
 				krsort( $values );
 			}
-		
 
 			//	Cache results
 			$valuesToStore = array( 'values' => $values, 'parameter' => $this->getParameter() );
@@ -812,7 +782,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
                 $tempItem = array_pop( $values );
 
-
 				if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) ) 
 				{
 					$item = array( 
@@ -853,7 +822,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			while( --$howManyPostsToAdd );
 		}
 		$i = 0; //	counter
-		$j = 5; //	5 is our max articles to show
+		$j = 6; //	6 is our max articles to show
 		if( intval( $this->getParameter( 'add_a_new_post' ) ) > 1 )
 		{
 			$j = $this->getParameter( 'add_a_new_post' );
@@ -1142,7 +1111,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				//	by default, next is first post
 				if( $data['article_url'] !==  $firstPost ) 
 				{
-					$data['pc_next_post'] = $firstPost;
+                    $data['pc_next_post'] = $firstPost;
 					$singlePostPaginationInfo[$data['article_url']]['pc_next_post'] = $firstPost;
 				}
 				if( ! is_null( $previousKey ) )
@@ -1323,8 +1292,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							else
 							{
 								#	we don't want to use get_headers again. Can make site slow
-							//	$head = array_change_key_case(get_headers( $data['download_url'], TRUE));
-							//	$data['file_size'] = $head['content-length'];							
+
 							}
 						}
 						elseif( @$data['download_path'] )
@@ -1409,7 +1377,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             $data['article_type'] = self::__( $data['article_type'] );
             $data['true_post_type'] = self::__( $data['true_post_type'] );
 			$this->_objectData[] = $data;
-			$this->_objectTemplateValues[] = $data;			
+            $this->_objectTemplateValues[] = $data;	
 		}
 
 		// store playlist
@@ -1419,7 +1387,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
             //	add it to previous because of autoload clearing this settings
 			$prevSinglePostPagination = $storage->retrieve();
-			$singlePostPaginationInfo = $singlePostPaginationInfo + ( is_array( $prevSinglePostPagination ) ? $prevSinglePostPagination : array() );
+            $singlePostPaginationInfo = $singlePostPaginationInfo + ( is_array( $prevSinglePostPagination ) ? $prevSinglePostPagination : array() );
+
 			$storage->store( $singlePostPaginationInfo );
 
 			
@@ -1442,10 +1411,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_parameter['markup_template_append'] = null;
 			$this->_parameter['markup_template_prepend'] = null;  
         }	
-        
+
+       
 		if( empty( $wellDefinedPostTheme ) )  
 		{
-        
 			//	update the markup template
 			@$this->_parameter['markup_template'] = null;
 			
@@ -1482,11 +1451,16 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$this->_dbData = $data;
 			return true;
+        }
+        if( $this->getParameter( $this->getIdColumn() ) && is_array( $this->getParameter( $this->getIdColumn() ) ) )
+		{
+            $this->_dbData = $this->getParameter( $this->getIdColumn() );
+            return false;
 		}
+
         if( is_numeric( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_post_type_offset' ), $_REQUEST['pc_module_url_values'] ) )
         {
             $postType = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_post_type_offset' ) )];
-        //	var_export( $category );
         }
         elseif( $this->getParameter( 'allow_dynamic_category_selection' ) )
         {
@@ -1495,12 +1469,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
         if( is_numeric( $this->getParameter( 'pc_module_url_values_category_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_category_offset' ), $_REQUEST['pc_module_url_values'] ) )
         {
             $categoryId = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_category_offset' ) )];
-        //	var_export( $categoryId );
             if( $categoryId == 'category' )
             {
                 $categoryId = @$_REQUEST['category'];
             }
-        //	var_export( $category );
         }
         elseif( @$_REQUEST['category'] &&  $this->getParameter( 'allow_dynamic_category_selection' ) )
         {
@@ -1574,12 +1546,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		{
 			$this->setParameter( array( 'profile_to_show' => strtolower( Ayoola_Application::$GLOBAL['profile']['profile_url'] ) ) );
 		}
-		elseif( $this->getParameter( 'search_mode' ) && @$_REQUEST['q'] )
+		elseif( $this->getParameter( 'search_mode' ) && ( $this->getParameter( 'q' ) || @$_REQUEST['q'] ) )
 		{
+            $q = $this->getParameter( 'q' ) ? : @$_REQUEST['q'];
 			switch( $this->getParameter( 'search_mode' ) )
 			{
 				case 'keyword':
-					$keywords = array_map( 'trim', explode( ' ', $_REQUEST['q'] ) );
+					$keywords = array_map( 'trim', explode( ' ', $q ) );
 					$keywordPaths = null;
 					while( $keywords )
 					{
@@ -1590,7 +1563,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				break;
 				case 'phrase':
 				default:      
-					$whereClause['*'] = $_REQUEST['q'];
+					$whereClause['*'] = $q;
 				break;
 			}
 		}
@@ -1654,7 +1627,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			}
 			@$this->_parameter['order_by'] = $this->_parameter['order_by'] ? : 'engagement_count';
 			@$this->_parameter['inverse_order'] = isset( $this->_parameter['inverse_order'] ) ? $this->_parameter['inverse_order'] : true;
-		}
+        }
+
 		@$postType = $this->getParameter( 'article_types' ) ? : $postType;
 		if( $postType )
 		{
@@ -1674,7 +1648,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		elseif( @$this->_parameter['access_level'] )
 		{
 			$whereClause['access_level'][] = $this->_parameter['access_level'];
-
 		}
 		if( $this->getParameter( 'post_with_same_true_post_type' ) && @Ayoola_Application::$GLOBAL['post']['true_post_type'] )
 		{
@@ -1729,6 +1702,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
                 $this->_dbWhereClause = $whereClause;
                 $this->_dbData = $table->select( null, $whereClause, array( 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
             }
+
         }
         catch( Exception $e )
         { 
@@ -1738,7 +1712,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	Removing dependence on Ayoola_Api for showing posts		
  		if( ! is_null( $this->_dbData ) )
 		{ 
-		//	$this->_dbData = array();
+
 			return true; 
 		}
 		else
@@ -1761,38 +1735,37 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];
 		@$object['option'] = $object['option'] ? : $object['view_option'];
 		@$object['option'] = $object['option'] ? : 5;
-	//	$html .= "<span data-parameter_name='view' >{$object['view']}</span>";
+
 		
 		//	Implementing Object Options
 		//	So that each objects can be used for so many purposes.
 		//	E.g. One Class will be used for any object
-	//	var_export( $object );
+
 		$options = get_called_class();
 
 		if( ! Ayoola_Loader::loadClass( $options ) )
 		{
 			return false;
 		}
-	//	var_export( $options );
-//		var_export( get_called_class() );
+
 		$options = new $options( array( 'no_init' => true ) );
-//		$options = array();
+
 		$options = (array) $options->getClassOptions();
-//		$options = (array) $options->getClassOptions();
+
         $html .= '<select data-parameter_name="option">';
         $html .=  '<option value="">' . self::__( 'No of Posts to Show' ) . '</option>';  
 
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';  
-		//	var_export( $object['view'] );
+
 			if( $object['option'] == $key ){ $html .= ' selected = selected '; }
 			$html .=  '>' . $value . '</option>';  
 		}
 		$html .= '</select>';
 		
 		$options = Application_Category_ShowAll::getPostCategories();
-	//	var_export( $options );
+
 		$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
 		$options = array( '' => 'All' ) + $filter->filter( $options );
 		
@@ -1801,7 +1774,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';  
-		//	var_export( $object['view'] );
+
 			if( @$object['category_name'] == $key ){ $html .= ' selected = selected '; }
 			$html .=  '>' . self::__( '' . $value . '' ) . '</option>';  
 		}
@@ -1810,7 +1783,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	Article Types
 		$options = Application_Article_Type::getInstance();
 		$options = $options->select();
-	//	$options = $options ? : Application_Article_Type_TypeAbstract::$presetTypes;
+
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'post_type_id', 'post_type');
 		$options = $filter->filter( $options );
@@ -1822,7 +1795,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';  
-		//	var_export( $object['view'] );
+
 			if( @$object['article_types'] == $key ){ $html .= ' selected = selected '; }
 			$html .=  '>' . self::__( '' . $value . '' ) . '</option>';  
 		}
@@ -1838,7 +1811,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';  
-		//	var_export( $object['view'] );
+
 			if( @$object['template_name'] == $key ){ $html .= ' selected = selected '; }
 			$html .=  '>' . self::__( '' . $value . '' ) . '</option>';  
 		}
@@ -1865,7 +1838,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      */
     protected static function getParameterKeysFromTheseOtherClasses( & $parameters )
     {
-	//	var_export( $parameters['editable'] );
+
 		return array( __CLASS__, 'Application_Article_Abstract' );
 	}
 

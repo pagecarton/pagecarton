@@ -121,14 +121,10 @@ class Ayoola_Form_Element extends Ayoola_Form
 		{
 			$element = _Array( $element );
 		}
-        if( empty( $element['name'] ) )
-		{
+       
+    //    var_export( $values );
+    //    var_export( $element['value'] );
 
-			trigger_error(  'You must enter a name for the Form Element' );
-		}
-		if( @$element['type'] )
-		{
-		}
 		//	Set Element ID and Label to default if undeclared			
 		$element['real_name'] = $element['name'];
 		@$element['title'] = trim( $element['title'] ? : str_replace( array( '_', '-' ), ' ', htmlentities( $element['label'] . ': ' . $element['placeholder'] ) ), ':' );
@@ -218,7 +214,7 @@ class Ayoola_Form_Element extends Ayoola_Form
             }
             if( $typeClass )
             {
-                $markup .= $typeClass::viewInLine( $element + array( 'values' => $values ) );
+                $markup .= $typeClass::viewInLine( $element + array( 'values' => $values, 'no_auto_url_prefix' => true ) );
             }
             else
             {

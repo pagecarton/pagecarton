@@ -5,18 +5,18 @@
 * LICENSE
 *
 * @category PageCarton
-* @package /post-viewer-article
+* @package /post-viewer
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: post-viewer-article.php	Wednesday 27th of January 2021 10:55:40 PM	ayoola@ayoo.la $ 
+* @version $Id: post-viewer.php	Wednesday 27th of January 2021 10:50:52 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_5121235a04596eb77ad9079b080610a3 = new Ayoola_Page_Editor_Text( array (
+$_c3bd84a71fa6d32aa48782f3fd03d05f = new Ayoola_Page_Editor_Text( array (
   'editable' => '<widget parameters="{ &quot;class&quot;: &quot;Application_Article_View&quot; }">
     <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_2.jpg?embed_image_url={{{document_url_uri}}});">
         <div class="container">
@@ -108,21 +108,21 @@ $_5121235a04596eb77ad9079b080610a3 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_5121235a04596eb77ad9079b080610a3 = null;
+$_c3bd84a71fa6d32aa48782f3fd03d05f = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_6aec71fca40b604abceb4fec83d71452 = new Ayoola_Page_Editor_Text( array (
+$_ada0f7c1a240ee5a075e17c99fedd94c = new Ayoola_Page_Editor_Text( array (
   'editable' => '<widget parameters="{ &quot;class&quot;: &quot;Application_Article_View&quot; }">
     <section class="site-section py-lg">
         <div class="container">
             <div class="row blog-entries element-animate">
                 <div class="col-md-12 col-lg-8 main-content">
                     <div class="post-content-body">
-                        {{{article_content}}}
+                        <widget parameters="{ &quot;class&quot;: &quot;Application_Article_View&quot;, &quot;hide_default_post_view&quot;: true }"></widget>
                     </div>
                     <div class="pt-5">
                         <p>Categories: 
@@ -134,7 +134,7 @@ $_6aec71fca40b604abceb4fec83d71452 = new Ayoola_Page_Editor_Text( array (
                         </p>
                     </div>
                     <!-- AddToAny BEGIN -->
-                    <a class="a2a_dd" href="https://www.addtoany.com/share#url=http%3A%2F%2Flocalhost%3A8888%2Ftools%2Fclassplayer%2Fget%2Fname%2FAyoola_Page_Editor_Layout%2F%3Furl%3D%2Fpost-viewer-article%26pc_page_editor_layout_name%3Dpc_layout_miniblog&amp;title=Editing%20%22%2Fpost-viewer-article%22"><img src="https://static.addtoany.com/buttons/share_save_171_16.png" alt="Share" srcset="https://static.addtoany.com/buttons/share_save_342_32.png 2x" width="171" height="16" border="0"></a>
+                    <a class="a2a_dd" href="https://www.addtoany.com/share#url=http%3A%2F%2Flocalhost%3A8888%2Ftools%2Fclassplayer%2Fget%2Fname%2FAyoola_Page_Editor_Layout%2F%3Furl%3D%2Fpost-viewer%26pc_page_editor_layout_name%3Dpc_layout_miniblog&amp;title=Editing%20%22%2Fpost-viewer%22"><img src="https://static.addtoany.com/buttons/share_save_171_16.png" alt="Share" srcset="https://static.addtoany.com/buttons/share_save_342_32.png 2x" width="171" height="16" border="0"></a>
                     <script async="" src="https://static.addtoany.com/menu/page.js"></script>
                     <!-- AddToAny END -->
 
@@ -227,9 +227,8 @@ $_6aec71fca40b604abceb4fec83d71452 = new Ayoola_Page_Editor_Text( array (
             <div class="row blog-entries element-animate">
                 <div class="col-md-12 col-lg-8 main-content">
                     <div class="post-content-body">
-                        {{{article_content}}}
+                        <widget-inner parameters=\'{ "class": "Application_Article_View", "hide_default_post_view": true }\'></widget-inner>
                         <widget-inner parameters=\'{ "class": "Application_Article_ViewPagination" }\'></widget-inner>
-
                     </div>
                     <div class="pt-5">
                         <p>Categories: 
@@ -343,9 +342,8 @@ $_6aec71fca40b604abceb4fec83d71452 = new Ayoola_Page_Editor_Text( array (
             <div class="row blog-entries element-animate">
                 <div class="col-md-12 col-lg-8 main-content">
                     <div class="post-content-body">
-                        {{{article_content}}}
+                        <widget-inner parameters=\'{ "class": "Application_Article_View", "hide_default_post_view": true }\'></widget-inner>
                         <widget-inner parameters=\'{ "class": "Application_Article_ViewPagination" }\'></widget-inner>
-
                     </div>
                     <div class="pt-5">
                         <p>Categories: 
@@ -453,14 +451,14 @@ $_6aec71fca40b604abceb4fec83d71452 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_6aec71fca40b604abceb4fec83d71452 = null;
+$_ada0f7c1a240ee5a075e17c99fedd94c = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_eaf4fdd599bd85dc44d201eb9b73d7f8 = new Ayoola_Page_Editor_Text( array (
+$_1f8b1c139e4e6b1bce44e5fb83a59d9f = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div class="site-section bg-light">
     <div class="container">
 
@@ -522,7 +520,7 @@ $_eaf4fdd599bd85dc44d201eb9b73d7f8 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_eaf4fdd599bd85dc44d201eb9b73d7f8 = null;
+$_1f8b1c139e4e6b1bce44e5fb83a59d9f = null;
 
 							}
 							

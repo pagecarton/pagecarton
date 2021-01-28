@@ -9,32 +9,49 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Tuesday 19th of January 2021 09:26:53 PM	ayoola@ayoo.la $ 
+* @version $Id: view.php	Thursday 28th of January 2021 12:07:39 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '<p><img src="{{{document_url}}}" alt="Image" style="width:100%"></p>
+$_8eccaa7e0a95bfe06f5ebffc31ee8f0f = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div><br></div><div><br></div>',
+  'preserved_content' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '0-1611791946-9',
+  'content' => '<div><br></div><div><br></div>',
+) );
 
-<div class="container">
+							}
+							else
+							{
+								
+$_8eccaa7e0a95bfe06f5ebffc31ee8f0f = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_85c670985c03815dd9f45362c1c9b988 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div class="xcontainer">
 
 <h1 class="pc_give_space_top_bottom">{{{article_title}}}</h1>
 
-<p class="pc_give_space_top_bottom">{{{article_description}}}</p>
-
+<p>{{{article_description}}}</p>
+<br>
 </div>
-',
-  'preserved_content' => '<p><img src="{{{document_url}}}" alt="Image" style="width:100%"></p>
-
-<div class="container">
+<img src="{{{document_url}}}" alt="Image" style="width:100%">
+<br>
+<br>',
+  'preserved_content' => '<div class="xcontainer">
 
 <h1 class="pc_give_space_top_bottom">{{{article_title}}}</h1>
 
-<blockquote class=\'pc_give_space_top_bottom\'>{{{article_description}}}</blockquote>
-
+<p>{{{article_description}}}</p>
+<br>
 </div>
 ',
   'url_prefix' => '',
@@ -42,10 +59,10 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'preserve_content',
     1 => 'embed_widgets',
-    2 => 'parameters',
+    2 => 'wrappers',
+    3 => 'parameters',
   ),
   'pagewidget_id' => '1575534199-0-167',
-  'widget_name' => '',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_View',
@@ -54,16 +71,14 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => '<p class=\'pc_give_space_top_bottom\'></p>',
   ),
-  'insert_id' => '1566242674-0-5',
+  'wrapper_name' => 'well',
   'content_to_clear[0]' => '<p class=\'pc_give_space_top_bottom\'></p>',
-  'content' => '<p><img src="{{{document_url}}}" alt="Image" style="width:100%"></p>
-
-<div class="container">
+  'content' => '<div class="xcontainer">
 
 <h1 class="pc_give_space_top_bottom">{{{article_title}}}</h1>
 
-<blockquote class=\'pc_give_space_top_bottom\'>{{{article_description}}}</blockquote>
-
+<p>{{{article_description}}}</p>
+<br>
 </div>
 ',
 ) );
@@ -72,38 +87,52 @@ $_3fa21d2b3d9c77ddfd69616a823104e6 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_3fa21d2b3d9c77ddfd69616a823104e6 = null;
+$_85c670985c03815dd9f45362c1c9b988 = null;
 
 							}
 							
-							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_ccfcd65b00854efe614caba97537085f = new Ayoola_Object_Embed( array (
-  'editable' => 'Application_Article_View',
-  'pagewidget_id' => '1575534199-0-168',
-  'widget_name' => '',
+$_b107e295260b4f99579dc21f30ce47cb = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div class="xcontainer">
+
+<h1 class="pc_give_space_top_bottom">{{{article_title}}}</h1>
+
+<p>{{{article_description}}}</p>
+<br>
+</div>
+<img src="{{{document_url}}}" alt="Image" style="width:100%">
+<br>
+<br>',
+  'preserved_content' => '<img src="{{{document_url}}}" alt="Image" style="width:100%">',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'preserve_content',
+    1 => 'embed_widgets',
+    2 => 'wrappers',
+    3 => 'parameters',
+  ),
+  'pagewidget_id' => '1575534199-0-167',
+  'markup_template_object_name' => 
+  array (
+    0 => 'Application_Article_View',
+  ),
   'advanced_parameter_value' => 
   array (
-    0 => '1',
-    1 => '1',
-    2 => '1',
-    3 => '1',
-    4 => '1',
+    0 => '<p class=\'pc_give_space_top_bottom\'></p>',
   ),
-  'insert_id' => '1566242674-0-6',
-  'get_views_count' => '1',
-  'get_audio_play_count' => '1',
-  'get_download_count' => '1',
-  'thumbnail' => '1',
-  'hide_default_post_view' => '1',
+  'wrapper_name' => '',
+  'content_to_clear[0]' => '<p class=\'pc_give_space_top_bottom\'></p>',
+  'content' => '<img src="{{{document_url}}}" alt="Image" style="width:100%">',
 ) );
 
 							}
 							else
 							{
 								
-$_ccfcd65b00854efe614caba97537085f = null;
+$_b107e295260b4f99579dc21f30ce47cb = null;
 
 							}
 							
@@ -115,7 +144,7 @@ $_ccfcd65b00854efe614caba97537085f = null;
 								if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 								{
 									
-$_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
+$_2ef3917fcdce6be10601f99ac5e4d1ac = new Ayoola_Page_Editor_Text( array (
   'editable' => '<section class="xcontainer" style="padding:2em 1em 2em 1em; ">
     <p style="text-align: center;"><span style="font-size:11px;">Manage {{{post_type}}}</span></p>
     <br>
@@ -144,7 +173,6 @@ $_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
 </section>',
   'url_prefix' => '',
   'pagewidget_id' => '1575534199-0-169',
-  'widget_name' => '',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_View',
@@ -160,7 +188,6 @@ $_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
     1 => '99',
   ),
   'wrapper_name' => 'well',
-  'insert_id' => '1566242674-0-7',
   'object_class' => 'pc_give_space_top_bottom',
   'content' => '<section class="xcontainer" style="padding:2em 1em 2em 1em; ">
     <p style="text-align: center;"><span style="font-size:11px;">Manage {{{post_type}}}</span></p>
@@ -181,19 +208,158 @@ $_000ba5e12fc767f708845d66c62fb715 = new Ayoola_Page_Editor_Text( array (
 								else
 								{
 									
-$_000ba5e12fc767f708845d66c62fb715 = null;
+$_2ef3917fcdce6be10601f99ac5e4d1ac = null;
 
 								}
 							}    
 							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
+							{
+								
+$_034db1ec16982a829003894d7fbb2d91 = new Ayoola_Object_Embed( array (
+  'editable' => 'Application_Article_View',
+  'pagewidget_id' => '1575534199-0-168',
+  'advanced_parameter_value' => 
+  array (
+    0 => '1',
+    1 => '1',
+    2 => '1',
+    3 => '1',
+    4 => '1',
+  ),
+  'get_views_count' => '1',
+  'get_audio_play_count' => '1',
+  'get_download_count' => '1',
+  'thumbnail' => '1',
+  'hide_default_post_view' => '1',
+) );
+
+							}
+							else
+							{
+								
+$_034db1ec16982a829003894d7fbb2d91 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
+							{
+								
+$_c117484efadc0829f15ead54700c8d4e = new Ayoola_Object_Embed( array (
+  'editable' => 'Application_CommentBox_ShowComments',
+  'pagewidget_id' => '0-1611792239-11',
+) );
+
+							}
+							else
+							{
+								
+$_c117484efadc0829f15ead54700c8d4e = null;
+
+							}
+							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_16296832673663f047e30a609ffd4836 = new Ayoola_Page_Editor_Text( array (
+$_871a4683bca92fa0998151c939f71ec1 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+',
+  'preserved_content' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '0-1611792467-12',
+  'content' => '<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+',
+) );
+
+							}
+							else
+							{
+								
+$_871a4683bca92fa0998151c939f71ec1 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
+							{
+								
+$_1ec416705cd18b9267d8b10cbe7c2851 = new Ayoola_Object_Embed( array (
+  'editable' => 'Application_CommentBox',
+  'widget_options' => 
+  array (
+    0 => 'parameters',
+  ),
+  'pagewidget_id' => '0-1611792215-10',
+  'advanced_parameter_value' => 
+  array (
+    0 => 'container',
+  ),
+  'object_class' => 'container',
+) );
+
+							}
+							else
+							{
+								
+$_1ec416705cd18b9267d8b10cbe7c2851 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
+							{
+								
+$_10e0583681d44099c1a9e038384b653f = new Ayoola_Object_Embed( array (
+  'editable' => 'Application_Article_ViewPagination',
+  'widget_options' => 
+  array (
+    0 => 'parameters',
+  ),
+  'pagewidget_id' => '0-1611785396-7',
+  'advanced_parameter_value' => 
+  array (
+    0 => 'container',
+  ),
+  'object_class' => 'container',
+) );
+
+							}
+							else
+							{
+								
+$_10e0583681d44099c1a9e038384b653f = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_85c9419042cf5eb1948aad0e9e8aeb75 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div><br></div><div><br></div>',
+  'preserved_content' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '0-1611791946-9',
+  'content' => '<div><br></div><div><br></div>',
+) );
+
+							}
+							else
+							{
+								
+$_85c9419042cf5eb1948aad0e9e8aeb75 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_6dee86d34f712929d5fa8e80f452cdc8 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div class="container">
 <p>&nbsp;</p>
 
-<h3>Other {{{post_type}}} similar to {{{article_title}}}</h3>
+<h3>Similar {{{post_type}}}<br></h3>
 
 <p>&nbsp;</p>
 </div>
@@ -201,7 +367,7 @@ $_16296832673663f047e30a609ffd4836 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '<div class="container">
 <p>&nbsp;</p>
 
-<h3>Other {{{post_type}}} similar to {{{article_title}}}</h3>
+<h3>Similar {{{post_type}}}<br></h3>
 
 <p>&nbsp;</p>
 </div>
@@ -214,7 +380,6 @@ $_16296832673663f047e30a609ffd4836 = new Ayoola_Page_Editor_Text( array (
     2 => 'parameters',
   ),
   'pagewidget_id' => '1575534199-0-170',
-  'widget_name' => '',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Article_View',
@@ -223,13 +388,12 @@ $_16296832673663f047e30a609ffd4836 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => '',
   ),
-  'wrapper_name' => 'dark',
-  'insert_id' => '1566242674-0-8',
+  'wrapper_name' => 'well',
   '' => '',
   'content' => '<div class="container">
 <p>&nbsp;</p>
 
-<h3>Other {{{post_type}}} similar to {{{article_title}}}</h3>
+<h3>Similar {{{post_type}}}<br></h3>
 
 <p>&nbsp;</p>
 </div>
@@ -240,32 +404,30 @@ $_16296832673663f047e30a609ffd4836 = new Ayoola_Page_Editor_Text( array (
 							else
 							{
 								
-$_16296832673663f047e30a609ffd4836 = null;
+$_6dee86d34f712929d5fa8e80f452cdc8 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
 							{
 								
-$_72d6251312d1901e8b57f2e6638cdc45 = new Application_Article_ShowAll( array (
+$_547150e4df0861c8fe81c9b00f82114d = new Application_Article_ShowAll( array (
   'option' => '6',
   'category_name' => '',
   'article_types' => '',
-  'template_name' => 'ProductsforSale',
+  'template_name' => 'SearchStyle',
   'widget_options' => 
   array (
     0 => 'wrappers',
     1 => 'parameters',
   ),
   'pagewidget_id' => '1575534199-0-171',
-  'widget_name' => '',
   'advanced_parameter_value' => 
   array (
     0 => '1',
     1 => 'container',
   ),
-  'wrapper_name' => 'well',
-  'insert_id' => '1566242674-0-9',
+  'wrapper_name' => 'white-well',
   'post_with_same_true_post_type' => '1',
   'wrapper_inner_class' => 'container',
 ) );
@@ -274,7 +436,7 @@ $_72d6251312d1901e8b57f2e6638cdc45 = new Application_Article_ShowAll( array (
 							else
 							{
 								
-$_72d6251312d1901e8b57f2e6638cdc45 = null;
+$_547150e4df0861c8fe81c9b00f82114d = null;
 
 							}
 							

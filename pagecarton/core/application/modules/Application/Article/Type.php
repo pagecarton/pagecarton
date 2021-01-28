@@ -25,7 +25,7 @@ require_once 'Application/Article/Abstract.php';
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Application_Article_Type extends Ayoola_Dbase_Table_Abstract_Xml_Private  
+class Application_Article_Type extends Ayoola_Dbase_Table_Abstract_Xml_Protected  
 {
 
     /**
@@ -33,7 +33,7 @@ class Application_Article_Type extends Ayoola_Dbase_Table_Abstract_Xml_Private
      *
      * @param int
      */
-    protected $_tableVersion = '0.10';
+    protected $_tableVersion = '0.11';
 
 	protected $_dataTypes = array
 	( 
@@ -46,6 +46,7 @@ class Application_Article_Type extends Ayoola_Dbase_Table_Abstract_Xml_Private
 		'preset_values' => 'JSON',
 		'supplementary_form' => 'INPUTTEXT',
 		'post_type_custom_fields' => 'INPUTTEXT',
+		'view_widget' => 'INPUTTEXT',
 		'auth_level' => 'JSON',
 		'view_auth_level' => 'JSON',
 	);

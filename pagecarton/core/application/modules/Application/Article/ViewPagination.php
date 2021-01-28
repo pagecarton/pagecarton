@@ -17,7 +17,6 @@
  
 require_once 'Application/Article/Abstract.php';    
 
-
 /**
  * @category   PageCarton
  * @package    Application_Article_ViewPagination
@@ -69,23 +68,19 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
      */
 	protected function init()
     {
-	//	self::v( $this->getParameter() ); 
+
 		try
 		{
-		//	self::v( $this->getIdentifierData() ); 
+
 			if( ! $data = $this->getIdentifierData() )
 			{
 				return false;				
 			}
-		//		self::v( $data ); 
+
 			if( ! self::isAllowedToView( $data ) )
 			{				
 				return false;
 			}
-		//	self::v( $data ); 
-	//	$storageForSinglePosts = self::getObjectStorage( array( 'id' => 'post_list_id' ) );
-	//	self::v( $storageForSinglePosts->retrieve() ); 
-	//	self::v( $storageForSinglePosts ); 
 
 			{
 				$pagination = null;
@@ -100,10 +95,6 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 					
 					$postListId = $storageForSinglePosts->retrieve();
 					$postListData = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId . '_single_post_pagination', 'device' => 'File' ) );
-			//		self::v( $postListId  );   
-			//		self::v( $postListData->retrieve()  );   
-			//		self::v( $postListData  );   
-     //       PageCarton_Widget::v( Ayoola_Application::getPathPrefix() );
 
 					if( ! $postListId || ! $postListData->retrieve() )
 					{
@@ -112,25 +103,22 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 						{
 							$parameters['category_name'] = Ayoola_Application::$GLOBAL['post']['category_name'];
 						}
-					//	self::V( $parameters );
+
 						$class = new Application_Article_ShowAll( $parameters );
 						$class->initOnce();
 						$postListId = $storageForSinglePosts->retrieve();
 					}
                 }
-			//	self::v( $postListId );
 
 				$postListData = Application_Article_ShowAll::getObjectStorage( array( 'id' => $postListId . '_single_post_pagination', 'device' => 'File' ) );
-			//	var_export( $postListId );
-		//		self::v( $postListData->retrieve() );
+
 				$postListData = $postListData->retrieve();
-		//		self::v( $postListData );
-		//		if( ! empty( $postListData['single_post_pagination'] ) )
+
 				{
+                    var_export( $postListData );
 					$presentArticle = $data['article_url'];
-               //     do
                     {
-                //     var_export( $postList['single_post_pagination'] );
+
 						if( empty( $postListData[$presentArticle] ) )
 						{
 							$presentArticle = array_shift( array_keys( $postListData ) );
@@ -138,13 +126,9 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 						$postList = $postListData[$presentArticle];
                        	$postData = self::loadPostData( $postList );
 						$presentArticle = $postList['pc_next_post'];
-					//	var_export( $data['article_url'] );
-					//	var_export( $postListData );
-					//	var_export( $data );
-					//	var_export( $postList );
-					//	var_export( $postData );
+
                     }
-					//           while( ! $postData );
+
 					if( ! empty( $postList['pc_next_post'] ) )
 					{
 						$nextPost = $postList['pc_next_post'];
@@ -152,15 +136,13 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 						if( ! $nextPost = self::loadPostData( $nextPost ) )
 						{
 							//	if next is not valid article
-						//	$postList['pc_next_post'] = $postListData[$postList['pc_next_post']]['pc_next_post'];
-						//	$nextPost = self::loadPostData( $postList['pc_next_post'] );
+
 						}
-				//		var_export( $nextPost );
+
 						$this->_objectTemplateValues['pc_next_post_title'] = $nextPost['article_title'];
 						$this->_objectTemplateValues['pc_next_post_cover_photo'] = $nextPost['document_url'] ? : '/img/placeholder-image.jpg';
 						$this->_objectTemplateValues['paginator_next_page'] = Ayoola_Application::getUrlPrefix() . $postList['pc_next_post'];
 						$this->_objectTemplateValues['paginator_next_page_button'] = '<a onclick="this.href=this.href + location.search;" class="pc_paginator_next_page_button pc-btn" href="' . $this->_objectTemplateValues['paginator_next_page'] . '">"' . $nextPost['article_title'] . '" Next  &rarr; </a>';       
-			//			var_export( $nextPost );
 
 					}
 					$postList['pc_previous_post'] = $postList['pc_previous_post'] ? : $postList['pc_next_post'];
@@ -169,7 +151,7 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 						
 						if( $previousPost = self::loadPostData( $postList['pc_previous_post'] ) )
 						{
-				//	var_export( $previousPost );
+
 							$this->_objectTemplateValues['pc_previous_post_title'] = $previousPost['article_title'];
 							$this->_objectTemplateValues['pc_previous_post_cover_photo'] = $previousPost['document_url'] ? : '/img/placeholder-image.jpg';
 							$this->_objectTemplateValues['paginator_previous_page'] = Ayoola_Application::getUrlPrefix() . $postList['pc_previous_post'];
@@ -183,18 +165,18 @@ class Application_Article_ViewPagination extends Application_Article_Abstract
 					$pagination = '<div class="pc_posts_distinguish_sets" id="' . $postListId . '">' . $pagination . '</div>';
 
 				}
-			//	var_export( $this->_objectTemplateValues );
+
 				$this->setViewContent( $pagination );
 			}
 
 		}
 		catch( Exception $e )
 		{ 
-		//	var_export( $e->getMessage() );
+
 			$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );
 			return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
-	//	var_export( $this->_xml );
+
     } 
 	// END OF CLASS
 }

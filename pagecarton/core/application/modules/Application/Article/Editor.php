@@ -43,15 +43,12 @@ class Application_Article_Editor extends Application_Article_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-		//	var_export( Application_HashTag_Abstract::get( 'articles' ) );
-		
-		//		self::v( $data );
-			
-			//	Only the owner can edit or priviledged user can edit
+
+            //	Only the owner can edit or priviledged user can edit
 			//	Check settings
 			$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
 			if( ! self::isOwner( $data['user_id'] ) && ! self::isAllowedToView( $data )  && ! self::isAllowedToEdit( $data ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) && Ayoola_Application::getUserInfo( 'username' ) !== strtolower( $data['username'] ) ){ return false; }  
-		//		self::v( $data );
+
             if( ! $this->requireRegisteredAccount() )
             {
                 return false;
@@ -61,14 +58,9 @@ class Application_Article_Editor extends Application_Article_Abstract
 				return false;
 			}
 			
-		//	self::v( $data );
-			//			var_export( $data['quiz_correct_option'] );
-			$this->createForm( 'Continue...', 'Editing "' . $data['article_title'] . '"', $data );
-//			$this->setViewContent( self::__( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' ) );
+			$this->createForm( 'Save...', 'Editing "' . $data['article_title'] . '"', $data );
 			$this->setViewContent( $this->getForm()->view() );
-		//	self::v( $this->getForm()->getValues() );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-		//	var_export( $values );
 			
 			if( empty( $values['document_url_base64'] ) )
 			{
@@ -90,7 +82,6 @@ class Application_Article_Editor extends Application_Article_Abstract
 				//	we are not interested in changing download doc
 				unset( $values['download_base64'] );
 			}
-		//	self::v( $values );
 			$access = new Ayoola_Access();
 			if( $userInfo = $access->getUserInfo() )
 			{
@@ -110,8 +101,21 @@ class Application_Article_Editor extends Application_Article_Abstract
 	
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '';
-			$this->setViewContent(  '' . self::__( '<div class="goodnews">Post successfully saved. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">View Post.</a></div>' ) . '', true  );
+			$this->setViewContent(  '<div class="goodnews">' . self::__( 'Post successfully saved.' ) . '</div>', true  );
 			$this->_objectData['article_url'] = $values['article_url'];  
+            $this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">' . sprintf( self::__( 'View  %s' ), $joinedType ) . '</a>'  );
+            
+            $eachPostTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] );
+            if( $eachPostTypeInfo['article_type'] === 'post-list' || in_array( 'post-list', $eachPostTypeInfo['post_type_options'] ) )
+            {
+                $this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_PostList_Sort?article_url=' . $values['article_url'] . '">' . sprintf( self::__( 'Sort list' ) ) . '</a>'  );
+
+            }
+            else
+            {
+                $this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_PostList_Add?article_url=' . $values['article_url'] . '">' . sprintf( self::__( 'Add post to list' ) ) . '</a>'  );
+
+            }
 		}
 		catch( Application_Article_Exception $e )
 		{ 

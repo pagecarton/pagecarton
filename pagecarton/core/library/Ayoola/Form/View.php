@@ -364,6 +364,9 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				case 'textarea': 
 					$type = 'TextArea'; 
 				break;
+				case 'select2': 
+					$type = 'Select2'; 
+				break;
 				case 'submit': 
 					$type = 'submit'; 
 				break;

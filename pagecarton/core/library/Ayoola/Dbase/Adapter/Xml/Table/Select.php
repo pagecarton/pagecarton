@@ -440,8 +440,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 					$fields = array_merge( $foreignData, $fields );
 				}
 
-			}
-            if( is_array( $where ) && count( $where ) !== count( $keyFound ) )
+            }
+            $whereX = $where;
+            unset( $whereX['*'] );
+            if( is_array( $whereX ) && count( $whereX ) !== count( $keyFound ) )
             {
                 //  Trying strict matching
                 //  hopefully it will help solve select errors.

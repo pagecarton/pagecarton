@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+<style>
+.pc-sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+.pc-sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; display: block; }
+.pc-sortable li span { position: absolute; margin-left: -1.3em; }
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+.ui-icon
+{
+    margin-top: 0.5em;
+}
+.sort-title
+{
+    margin: 1em 0;
+}
+</style>
+<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<h3 class="sort-title">Sort "{{{article_title}}}" List</h3>
+<p class="sort-title">List saves automatically as you drags items around</p>
+<ul id="{{{id}}}" class="pc-sortable">
+    <data-list>
+        <list-repeat>
+            <li class="ui-state-default {{{item_class}}}" id="{{{article_url}}}"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{{article_title}}}</li>
+        </list-repeat>
+    </data-list>
+</ul>
+
+<a href="/widgets/Application_Article_Editor?article_url={{{article_url}}}" class="btn btn-primary sort-title">Add or remove item from list</a>
+<a href="{{{pc_url_prefix}}}{{{article_url}}}" class="btn btn-default sort-title">Go to List Page</a>
