@@ -72,7 +72,7 @@ class Application_Article_Type_Video extends Application_Article_Type_Abstract
         {
             $data['video_url'] = 'https://youtube.com/embed/' . array_pop( explode( '/', $data['video_url'] ) );
         }
-        elseif( stripos( $data['video_url'], 'youtu.be' ) !== false )
+        elseif( stripos( $data['video_url'], '?v=' ) !== false )
         {
             $x = array_pop( explode( '?v=', $data['video_url'] ) );
             $x = array_shift( explode( '&', $x ) );
