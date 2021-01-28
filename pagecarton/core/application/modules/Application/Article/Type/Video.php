@@ -68,17 +68,14 @@ class Application_Article_Type_Video extends Application_Article_Type_Abstract
 				$data = $this->getIdentifierData();
 			}
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );
-        if( stripos( $data['video_url'], 'youtu.be' ) !== false )
+        if( stripos( $data['video_url'], 'youtu.be/' ) !== false )
         {
             $data['video_url'] = 'https://youtube.com/embed/' . array_pop( explode( '/', $data['video_url'] ) );
         }
         elseif( stripos( $data['video_url'], '?v=' ) !== false )
         {
-            var_export( $x );
             $x = array_pop( explode( '?v=', $data['video_url'] ) );
-            var_export( $x );
             $x = array_shift( explode( '&', $x ) );
-            var_export( $x );
 
             $data['video_url'] = 'https://youtube.com/embed/' . $x;
         }
