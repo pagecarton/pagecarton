@@ -265,7 +265,6 @@ class Application_Article_Creator extends Application_Article_Abstract
             elseif( $eachPostTypeInfo['article_type'] === 'post-list' || in_array( 'post-list', $eachPostTypeInfo['post_type_options'] ) )
             {
                 $this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_PostList_Sort?article_url=' . $values['article_url'] . '">' . sprintf( self::__( 'Sort list' ) ) . '</a>'  );
-
             }
             else
             {
