@@ -77,7 +77,7 @@ class Application_Article_Type_Quiz_ScoreBoard extends Application_Article_Type_
 			$scores = array();
 		//	if( Ayoola_Application::getUserInfo( 'username' ) )
 			{
-				$scores = $table->select( null, array( 'article_url' => $_REQUEST['article_url'] ), array( 'result_filter_function' => $sortFunction2, 'disable_cache' => true ) );
+				$scores = $table->select( null, array( 'article_url' => $_REQUEST['article_url'] ), array( 'result_filter_function' => $sortFunction2 ) );
 			}
 			$scores = self::sortMultiDimensionalArray( $scores, $this->getParameter( 'sort_column' ) ? : 'timestamp' );
 			krsort( $scores );     
