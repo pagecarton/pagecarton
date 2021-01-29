@@ -69,11 +69,6 @@ class Application_Article_Type_Quiz_ScoreBoard extends Application_Article_Type_
 							$info = $info["user_information"];  
 						}
 					}
-					else
-					{
-						$values = false;  
-						return false;
-					}
 					$values = ( $values ? : array() ) + ( ( $info ) ? : array() );
 				'
 			); 
