@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: post-viewer-post-list.php	Friday 29th of January 2021 09:42:39 AM	ayoola@ayoo.la $ 
+* @version $Id: post-viewer-post-list.php	Friday 29th of January 2021 12:15:56 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -18,7 +18,7 @@
 								
 $_7e8536ad0889aa87ff44bb6c8e34cf6b = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div><br></div><div><br></div>',
-  'preserved_content' => '',
+  'preserved_content' => '<div><br></div><div><br></div>',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611800230-7',
   'content' => '<div><br></div><div><br></div>',
@@ -112,7 +112,7 @@ $_a241e31eedca3550957404a8509cd91d = null;
 								
 $_82d3cc274801f7b6e361e93e8a37257a = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div><br></div><div><br></div>',
-  'preserved_content' => '',
+  'preserved_content' => '<div><br></div><div><br></div>',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611800230-7',
   'content' => '<div><br></div><div><br></div>',
@@ -150,7 +150,7 @@ $_febabc8c2d69bc7e0b7e363a7c4cdeb2 = null;
 								
 $_a34eedd518cb43f2e2d58a4405212700 = new Ayoola_Page_Editor_Text( array (
   'editable' => '<div><br></div><div><br></div>',
-  'preserved_content' => '',
+  'preserved_content' => '<div><br></div><div><br></div>',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611800230-7',
   'content' => '<div><br></div><div><br></div>',
@@ -201,7 +201,9 @@ $_7b4898fcd80ad44c53f6e1b4031da6b9 = null;
 								
 $_0cf304b273ecb75409095cc554bc9f4e = new Ayoola_Page_Editor_Text( array (
   'codes' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
-<p>Similar to {{{post_type}}}</p>
+<br>
+<p>Posts similar to {{{post_type}}}</p>
+<br>
 </widget>',
   'preserved_content' => '',
   'url_prefix' => '',
@@ -212,7 +214,9 @@ $_0cf304b273ecb75409095cc554bc9f4e = new Ayoola_Page_Editor_Text( array (
   'pagewidget_id' => '0-1611800769-9',
   'wrapper_name' => 'well',
   'content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
-<p>Similar to {{{post_type}}}</p>
+<br>
+<p>Posts similar to {{{post_type}}}</p>
+<br>
 </widget>',
 ) );
 

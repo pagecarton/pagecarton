@@ -1546,7 +1546,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$fieldset->addElement( array( 'name' => 'article_description', 'label' => '' . $postTypeLabel . ' Description', 'placeholder' => 'Describe this ' . $postTypeLabel . ' in a few words...', 'type' => 'TextArea', 'value' => @$values['article_description'] ) );
 				break;  
 				case 'privacy':
-					$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'Select', 'value' => @$values['auth_level'] ? : 0 ), $authOptions );
+					$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'Select', 'value' => is_numeric( @$values['auth_level'] ) ? $values['auth_level'] : 0 ), $authOptions );
 					$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $authOptions ) ) );
 				break;  
                 case 'cover-photo':
@@ -1657,15 +1657,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
                     //	time
 					$fieldsetOption->addElement( array( 'name' => 'quiz_time', 'placeholder' => 'e.g. 900', 'label' => 'Maximum Test Time (in secs)', 'type' => 'InputText', 'value' => @$values['quiz_time'] ) );
                     $fieldsetOption->addFilter( 'quiz_time', array( 'Int' => null ) );
-                    
-                    $fieldsetOption->addElement( array( 'name' => 'questions_auth_level', 'label' => 'Who can contribute to questions', 'type' => 'Select', 'value' => @$values['questions_auth_level'] ? : 98 ), $authOptions );
+                    //  var_export( $values['questions_auth_level'] );
+                    $fieldsetOption->addElement( array( 'name' => 'questions_auth_level', 'label' => 'Who can contribute to questions', 'type' => 'Select', 'value' => is_numeric( $values['questions_auth_level'] ) ? $values['questions_auth_level'] : 98 ), $authOptions );
 					
 				    $form->addFieldset( $fieldsetOption );
 					
-					//	New fieldset for categories
-				    $fieldset = new Ayoola_Form_Element;
-				    $fieldset->hashElementName = $this->hashFormElementName;
-
 					$groupIds = $this->getGlobalValue( 'quiz_subgroup_id' ) ? : @$values['quiz_subgroup_id'];
 
 					$groupQuestions = $this->getGlobalValue( 'quiz_subgroup_question' ) ? : @$values['quiz_subgroup_question'];
@@ -1728,8 +1724,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						//	Do this later after questions have been set so the max questions could equal total questions
 						$questionConfForm = new Ayoola_Form( array( 'name' => 'categories-conf...' )  );
 						$questionConfForm->setParameter( array( 'no_fieldset' => true, 'no_form_element' => true ) );
-						$questionConfForm->wrapForm = false;
-						while( $j <= count( @$groupIds ) && $j < 9 )//	Do this for all each categories and don't forget the "uncategorized"
+                        $questionConfForm->wrapForm = false;
+
+                        //	Do this for all each categories and don't forget the "uncategorized"
+						while( $j <= count( @$groupIds ) && $j < 9 )
 						{
 							//	autogenerate group ids
 							if( isset( $groupIds[$j] ) )
@@ -1779,20 +1777,20 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							$j++;
 						}
 						//	Put the questions in a separate fieldset
-						$questionConfFieldset = new Ayoola_Form_Element; 
-                        $questionConfFieldset->hashElementName = $this->hashFormElementName;
+						$questionConfFieldsetX = new Ayoola_Form_Element; 
+                        $questionConfFieldsetX->hashElementName = $this->hashFormElementName;
 												
 						//	Now lets review category questions
-						$questionConfFieldset->addElement( array( 'name' => 'previous_forms', 'data-pc-ignore-field' => true, 'type' => 'Html', 'value' => '' ), array( 'html' => ( '<h3>How many questions per test per subgroup?</h3>' . $questionConfForm->view() ), 'fields' => 'quiz_subgroup_question_max' ) );
+						$questionConfFieldsetX->addElement( array( 'name' => 'previous_forms', 'data-pc-ignore-field' => true, 'type' => 'Html', 'value' => '' ), array( 'html' => ( '<h3>How many questions per test per subgroup?</h3>' . $questionConfForm->view() ), 'fields' => 'quiz_subgroup_question_max' ) );
 						
-						$questionConfFieldset->addElement( array( 'name' => 'total_question_count', 'data-pc-element-whitelist-group' => 'questions_and_answers', 'type' => 'Hidden', 'value' => null ) );
-						$questionConfFieldset->addFilter( 'total_question_count', array( 'DefiniteValue' => $totalQuestionCount ) );
+						$questionConfFieldsetX->addElement( array( 'name' => 'total_question_count', 'data-pc-element-whitelist-group' => 'questions_and_answers', 'type' => 'Hidden', 'value' => null ) );
+						$questionConfFieldsetX->addFilter( 'total_question_count', array( 'DefiniteValue' => $totalQuestionCount ) );
 						
-						$questionConfFieldset->addElement( array( 'name' => 'total_question_displayed', 'data-pc-element-whitelist-group' => '', 'type' => 'Hidden', 'value' => null ) );
-						$questionConfFieldset->addFilter( 'total_question_displayed', array( 'DefiniteValue' => array_sum( $this->getGlobalValue( 'quiz_subgroup_question_max' ) ) ) );
+						$questionConfFieldsetX->addElement( array( 'name' => 'total_question_displayed', 'data-pc-element-whitelist-group' => '', 'type' => 'Hidden', 'value' => null ) );
+						$questionConfFieldsetX->addFilter( 'total_question_displayed', array( 'DefiniteValue' => array_sum( $this->getGlobalValue( 'quiz_subgroup_question_max' ) ) ) );
 
 						//	Review Questions and Set  
-						$form->addFieldset( $questionConfFieldset );
+						$form->addFieldset( $questionConfFieldsetX );
 					}
 				break;
 				case 'product':
@@ -2007,13 +2005,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		{
 			$fieldset->addElement( array( 'name' => $eachField, 'type' => 'Hidden', ) );
 		}
-
-		$form->addFieldset( $fieldset ); 
-		
-		//	Next Level
-		
-		$fieldset = new Ayoola_Form_Element;
-		$fieldset->hashElementName = $this->hashFormElementName;
 		//	Use tiny editor
 
 		static::initHTMLEditor();

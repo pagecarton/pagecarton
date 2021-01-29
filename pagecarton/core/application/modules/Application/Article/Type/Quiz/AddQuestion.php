@@ -32,7 +32,7 @@ class Application_Article_Type_Quiz_AddQuestion extends Application_Article_Type
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 1, 98 );
+	protected static $_accessLevel = array( 0 );
 	
     /**
      * The method does the whole Class Process
@@ -43,7 +43,7 @@ class Application_Article_Type_Quiz_AddQuestion extends Application_Article_Type
 		try
 		{
             if( ! $data = self::getIdentifierData() ){ return false; }
-            if( ! self::hasPriviledge( $data['questions_auth_level'] ? : 98 ) && ! self::isAllowedToEdit( $data ) )
+            if( ! self::hasPriviledge( $data['questions_auth_level'] ) && ! self::isAllowedToEdit( $data ) )
             {
                 return false;
             }
@@ -105,8 +105,6 @@ class Application_Article_Type_Quiz_AddQuestion extends Application_Article_Type
                 }
                 $lastCount = count( $data[$key] );
             }
-        //    var_export( $data );
-
             if( $data  )
             {
                 self::saveArticle( $data );

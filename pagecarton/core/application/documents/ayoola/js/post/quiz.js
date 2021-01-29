@@ -476,7 +476,8 @@ ayoola.post.quiz =
 		span.appendChild( showAllQuestions() );
 		var element = document.createElement( 'input' );
 		element.setAttribute( 'type', 'button' );
-		element.setAttribute( 'value', 'Submit' );
+		element.setAttribute( 'value', 'Submit Answers' );
+		element.setAttribute( 'style', 'padding:2em;' );
 		span.appendChild( element );
 		ayoola.events.add( element, 'click', submit );
 		ayoola.post.quiz.setToContainer( span, ayoola.post.quiz.container );

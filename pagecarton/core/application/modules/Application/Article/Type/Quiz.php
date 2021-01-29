@@ -321,7 +321,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
             {
                 $this->setViewContent(  '<p class=" pc_give_space_top_bottom badnews">' . self::__( 'There are no questions set for this quiz yet' ) . '</p>' );
             }
-            if( self::hasPriviledge( $data['questions_auth_level'] ? : 98 ) || self::isAllowedToEdit( $data ) )
+            if( self::hasPriviledge( $data['questions_auth_level'] ) || self::isAllowedToEdit( $data ) )
             {
                 $options .= '<a style="flex-basis: 50%;" class="pc-btn" href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Quiz_AddQuestion/?article_url=' . $data['article_url'] . '\', \'page_refresh\' );">' . self::__( 'Contribute Question' ) . '</a>';
             }
