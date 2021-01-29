@@ -79,7 +79,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 				
 				
 				//	Save Test Scores in DB
-				if( ! empty( $data['quiz_correct_option'] ) )   
+				if( ! empty( $data['quiz_correct_option'] ) && Ayoola_Application::getUserInfo( 'username' ) )   
 				{
 					//	Log into the database
 					$table = Application_Article_Type_Quiz_Table::getInstance();
