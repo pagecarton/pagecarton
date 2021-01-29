@@ -97,7 +97,7 @@ class Application_Article_Type_Quiz_ScoreBoard extends Application_Article_Type_
 					'firstname' => '%FIELD%', 
 					'lastname' => '%FIELD%', 
 					'score' => '%FIELD%', 
-					'timestamp' => array( 'filter' => 'Ayoola_Filter_Time', ),    
+					'timestamp' => array( 'field' => 'timestamp', 'value' => '%FIELD%', 'filter' => 'Ayoola_Filter_Time' ),    
 				)
 			);
 			$this->setViewContent( $list, true );  
