@@ -113,7 +113,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 					
 					The user scored ' . $dataToSend['quiz_score'] . '. You can view the result sheet of the test by clicking this link: ' . $dataToSend['link_to_result_sheet'] . '
 					
-					You may view, edit and administer the online test by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . strtolower( $data['article_url'] ) . '
+					You may view, edit and administer the online test by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . strtolower( $data['article_url'] ) . '
 					
 					';
 					if( $data['username'] )
@@ -121,8 +121,15 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 						$class = new Application_User_List();
 						$class->setIdentifier( array( 'username' => $data['username'] ) );
 						$userInfo = $class->getIdentifierData();
-						$mailInfo['to'] = $userInfo['email'];
-					}
+                        $mailInfo['to'] = $userInfo['email'];
+                        try
+                        {
+                            @self::sendMail( $mailInfo );
+                        }
+                        catch( Ayoola_Exception $e ){ null; }
+                    }
+                    
+
 					//	SEND THE CANDIDATE AN EMAIL IF HE IS LOGGED INN
 					if( $access->isLoggedIn() )
 					{
@@ -135,7 +142,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 											'TOTAL_NO_OF_QUESTIONS' => count( $data['quiz_correct_option'] ), 
 											'SCORE' => $dataToSend['quiz_score'], 
 											'PERCENTAGE' => $dataToSend['quiz_percentage'] . '%', 
-											'ARTICLE_LINK' => 'http://' . Ayoola_Page::getDefaultDomain() . '' . strtolower( $data['article_url'] ), 
+											'ARTICLE_LINK' => 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . strtolower( $data['article_url'] ), 
 										);
 						$emailInfo = self::replacePlaceholders( $emailInfo, $values );
 						$emailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
@@ -156,12 +163,6 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 						$class->fakeValues = $status; 
 						$class->init();
 					}
-
-					try
-					{
-						@self::sendMail( $mailInfo );
-					}
-					catch( Ayoola_Exception $e ){ null; }
 					$this->_objectData = $dataToSend;
 			
 				}
