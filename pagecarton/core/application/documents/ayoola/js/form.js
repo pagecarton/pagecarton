@@ -18,16 +18,12 @@ ayoola.form =
 		element = typeof elementObject.element == 'string' ? document.getElementById(  elementObject.element ) :  elementObject.element;
 		if( ! element ){ return false; }
 		//	Type must be properly set
-	//	if( ! element.type ){ return false; }
-	//	var target = ayoola.events.getTarget( e );
 		var clone = element.cloneNode( true ); 
 		var id = 'elements_' + clone.id;
 		
 		ayoola.form.counter[id] = ayoola.form.counter[id] ? ayoola.form.counter[id] : 1;
 		clone.id += '_' + ++ayoola.form.counter[id];
 		clone.value = '';
-	//	alert( element.nodeName );
-	//	alert( element.nodeType );
 		var label = document.createTextNode( '' ); //	This is to make the option always available
 		if( clone.nodeName.toLowerCase() == 'fieldset' )
 		{
@@ -124,6 +120,8 @@ ayoola.form =
 		form.setAttribute( 'data-not-playable', 'not-playable' );
 		formObject.name ? form.setAttribute( 'name', formObject.name ) : null;
 		formObject.id ? form.setAttribute( 'id', formObject.id ) : null;
+		formObject.class ? form.setAttribute( 'class', formObject.class ) : null;
+		formObject.style ? form.setAttribute( 'style', formObject.style ) : null;
 		
 		//	Sets the elements into a form object
 		var sendToForm = function( element, fieldset )
@@ -141,14 +139,11 @@ ayoola.form =
 				fieldsets[fieldset].element.setAttribute( 'style', fieldsets[fieldset].style || '' );
 				var legend = document.createElement( 'legend' );
 				legend.innerHTML = fieldsets[fieldset].legend || '';
-			//	legend.setAttribute( 'for', key );
-			//	legend.appendChild( document.createTextNode( fieldsets[fieldset].legend || '' ) );
 				
 				fieldsets[fieldset].element.appendChild( legend );
 				if( fieldsets[fieldset].prependedHtml )
 				{
 					var span = document.createElement( 'span' );
-			//		label.setAttribute( 'for', key );
 					span.innerHTML = fieldsets[fieldset].prependedHtml;
 					form.appendChild( span );
 				}
@@ -156,7 +151,6 @@ ayoola.form =
 				if( fieldsets[fieldset].appendedHtml )
 				{
 					var span = document.createElement( 'span' );
-			//		label.setAttribute( 'for', key );
 					span.innerHTML = fieldsets[fieldset].appendedHtml;
 					form.appendChild( span );
 				}
@@ -167,16 +161,13 @@ ayoola.form =
 		if( formObject.appendedHtml )
 		{
 			var span = document.createElement( 'span' );
-	//		label.setAttribute( 'for', key );
 			span.innerHTML = formObject.appendedHtml;
 			sendToForm( span  );
-		//	form.appendChild( span );
 		}
 
 		for( var key in elements )
 		{
 			var innerObject = elements[key];
-		//	alert( innerObject );
 			if( ! innerObject || ! innerObject.type ){ continue; }
 			
 			//	Label
@@ -188,10 +179,8 @@ ayoola.form =
 				default:
 					var label = document.createElement( 'label' );
 					label.setAttribute( 'for', key );
-				//	label.appendChild( document.createTextNode( innerObject.label || key ) );
 					label.innerHTML = innerObject.label || key;
 					sendToForm( label, innerObject.fieldset || '' );
-				//	form.appendChild( label );
 				break;
 			}
 			switch( innerObject.type.toLowerCase() )
@@ -203,13 +192,11 @@ ayoola.form =
 					element.setAttribute( 'style', innerObject.style || '' );
 					element.setAttribute( 'name', innerObject.name || key );
 					elements[key].element = element;
-				//	form.appendChild( element );
 				break;
 				case 'html':
 					var element = document.createElement( 'span' );
 					element.innerHTML = innerObject.value;
 					elements[key].element = element;
-				//	form.appendChild( element );
 				break;
 				case 'select':
 					var element = document.createElement( 'select' );

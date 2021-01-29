@@ -812,8 +812,99 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				' 
 			);	
 		}
-	}
-	
+    }
+    
+    
+		
+    /**
+     * 
+     * 
+     */
+	public static function getMyAuthProfiles()
+    {
+        if( ! self::hasPriviledge( $articleSettings['allowed_editors'] ) )
+        {
+            $profiles = Application_Profile_Abstract::getMyProfiles();
+            if( ! empty( $values['profile_url'] ) && ! in_array( $values['profile_url'], $profiles ) )
+            {
+                $profiles[] = $values['profile_url'];
+            }
+            $profiles = array_combine( $profiles, $profiles );
+        }
+        else
+        {
+            $table = "Application_Profile_Table";
+            $table = $table::getInstance( $table::SCOPE_PRIVATE );
+            $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+            $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+            $profiles = $table->select( null, null, array( 'workaround-to-avoid-cache' ) );
+    
+            $filter = new Ayoola_Filter_SelectListArray( 'profile_url', 'display_name' );
+            $profiles = $filter->filter( $profiles );
+        }
+        return $profiles;    
+    }
+
+		
+    /**
+     * 
+     * 
+     */
+	public static function quizQuestions( $values, $groupIds = null, $j = null )
+    {
+
+        $i = 0; // question count
+
+        //	Build a separate demo form for the previous group
+        $questionForm = new Ayoola_Form( array( 'name' => 'questions...' )  );
+        $questionForm->setParameter( array( 'no_fieldset' => true, 'no_form_element' => true ) );
+        $questionForm->wrapForm = false;  
+        $authProfiles = self::getMyAuthProfiles();
+        do
+        {
+            //	Put the questions in a separate fieldset
+            $questionFieldset = new Ayoola_Form_Element; 
+            $questionFieldset->allowDuplication = true;
+            $questionFieldset->duplicationData = array( 'add' => '+ Add New Question Below', 'remove' => '- Remove Above Question', 'counter' => 'question_counter' . $j . '', );
+            $questionFieldset->container = 'span';
+
+            $questionFieldset->wrapper = 'white-background';								
+
+            //  who added this?
+            $defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
+            $defaultProfile = $defaultProfile['profile_url'];
+    
+            $questionFieldset->addElement( array( 'name' => 'question_profile_url', 'multiple' => 'multiple', 'onchange' => 'ayoola.div.manageOptions( { database: "Application_Profile_Table", listWidget: "Application_Profile_ShowAll", values: "profile_url", labels: "display_name", element: this } );', 'label' => 'Post Question As', 'type' => count( $profiles ) > 1 ? 'Select' : 'Hidden', 'value' => @$values['question_profile_url'] ? : $defaultProfile ), $authProfiles + array( '__manage_options' => '[Manage Profiles]' ) );
+
+            $questionFieldset->addElement( array( 'name' => 'quiz_question' . @$groupIds[$j], 'data-html' => '1', 'data-pc-element-whitelist-group' => 'questions_and_answers', 'multiple' => 'multiple', 'rows' => '1', 'label' => ( 'Question <span name="question_counter' . $j . '">' . ( $i + 1 ) . '</span> of <span name="question_counter' . $j . '_total">' . ( count( @$values['quiz_question' . @$groupIds[$j]] ) ? : 1 ) . '</span>' ), 'placeholder' => 'Enter question here...', 'title' => 'Double-Click here to launch the advanced editor', 'type' => 'TextArea', 'value' => @$values['quiz_question' . $groupIds[$j]][$i] ? : Ayoola_Form::getGlobalValue( 'quiz_question' . @$groupIds[$j], null , $i ) ) );  
+
+            //	Option 1
+            $questionFieldset->addElement( array( 'name' => 'quiz_option1' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'First Option', 'placeholder' => 'Enter option 1', 'type' => 'TextArea', 'value' => @$values['quiz_option1' . $groupIds[$j]][$i] ? : Ayoola_Form::getGlobalValue( 'quiz_option1' . @$groupIds[$j], null , $i ) ) );
+
+            //	Option 2
+            $questionFieldset->addElement( array( 'name' => 'quiz_option2' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Second Option', 'placeholder' => 'Enter option 2', 'type' => 'TextArea', 'value' => @$values['quiz_option2' . @$groupIds[$j]][$i] ? : Ayoola_Form::getGlobalValue( 'quiz_option2' . @$groupIds[$j], null , $i ) ) );
+            
+            //	Option 3
+            $questionFieldset->addElement( array( 'name' => 'quiz_option3' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Third Option', 'placeholder' => 'Enter option 3', 'type' => 'TextArea', 'value' => @$values['quiz_option3' . $groupIds[$j]][$i] ? : Ayoola_Form::getGlobalValue( 'quiz_option3' . @$groupIds[$j], null , $i ) ) );
+
+            //	Option 4
+            $questionFieldset->addElement( array( 'name' => 'quiz_option4' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Fourth Option', 'placeholder' => 'Enter option 4', 'type' => 'TextArea', 'value' => @$values['quiz_option4' . $groupIds[$j]][$i] ? : Ayoola_Form::getGlobalValue( 'quiz_option4' . @$groupIds[$j], null , $i ) ) );
+
+            //	Solution
+            $questionFieldset->addElement( array( 'name' => 'quiz_answer_notes' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Answer Notes and Workings', 'placeholder' => 'Enter the information that will be displayed to user as the answer workings...', 'type' => 'TextArea', 'value' => @$values['quiz_answer_notes' . $groupIds[$j]][$i] ? : Ayoola_Form::getGlobalValue( 'quiz_answer_notes' . @$groupIds[$j], null , $i ) ) );
+            
+            //	Correct Answer
+            $questionFieldset->addElement( array( 'name' => 'quiz_correct_option' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'multiple' => 'multiple', 'label' => 'Correct Option', 'placeholder' => '', 'type' => 'Select', 'value' => @$values['quiz_correct_option' . $groupIds[$j]][$i] ? : Ayoola_Form::getGlobalValue( 'quiz_correct_option' . @$groupIds[$j], null , $i ) ), array_combine( range( 1, 4 ), range( 1, 4 ) ) );
+
+            //	We need to save the keys to use later so this information may save in the real fieldset
+            $i++;
+            
+            $questionForm->addFieldset( $questionFieldset );
+        }
+        while( isset( $values['quiz_question' . @$groupIds[$j]][$i] ) );
+        return $questionForm;
+    }
+
     /**
      * Returns an HTML to display #hashtags
      * 
@@ -894,11 +985,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$html .= '<span class="pc_posts_option_items">' . self::filterTime( $data ) . '</span>';
 		if( ! empty( $data['profile_url'] ) )
 		{
-		//	if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $data['profile_url'] ) )
-			{
-
-				$html .= ( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '" class="pc_posts_option_items"> Posted By ' . ( @$data['display_name'] ? : $data['profile_url'] ) . '</a>' );
-			}
+			$html .= ( '<a href="' . Ayoola_Application::getUrlPrefix() . '/' . $data['profile_url'] . '" class="pc_posts_option_items"> Posted By ' . ( @$data['display_name'] ? : $data['profile_url'] ) . '</a>' );
 		}
 		
 		if( isset( $data['views_count'] ) )
@@ -1434,6 +1521,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$featuresPrefix[] = '';
 		}
         $featureCount = array();
+        $authOptions = array( 0 => 'Public', 97 => 'Private (Invited viewers only)', 98 => 'Only Me' );
+
 
 		foreach( $features as $key => $eachPostType )
 		{	
@@ -1449,7 +1538,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$featurePrefix = $featureCount[$eachPostType];
 				}
 				$featureCount[$eachPostType]++;
-			}
+            }
 			switch( $eachPostType )
 			{
 				case 'description':
@@ -1457,11 +1546,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					$fieldset->addElement( array( 'name' => 'article_description', 'label' => '' . $postTypeLabel . ' Description', 'placeholder' => 'Describe this ' . $postTypeLabel . ' in a few words...', 'type' => 'TextArea', 'value' => @$values['article_description'] ) );
 				break;  
 				case 'privacy':
-					{
-						$options = array( 0 => 'Public', 97 => 'Private (Invited viewers only)', 98 => 'Only Me' );
-					}
-					$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'Select', 'value' => @$values['auth_level'] ? : 0 ), $options );
-					$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $options ) ) );
+					$fieldset->addElement( array( 'name' => 'auth_level', 'label' => 'Privacy', 'type' => 'Select', 'value' => @$values['auth_level'] ? : 0 ), $authOptions );
+					$fieldset->addRequirement( 'auth_level', array( 'InArray' => array_keys( $authOptions ) ) );
 				break;  
                 case 'cover-photo':
                     
@@ -1551,8 +1637,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				break;  
 				case 'examination':
 				case 'test':
-				case 'quiz':
+                case 'quiz':
+                    
 					$form->oneFieldSetAtATime = true;   
+
+                    $fieldsetOption = new Ayoola_Form_Element;
+				    $fieldsetOption->hashElementName = $this->hashFormElementName;
 
 					$quizOptions = array(
 											'quiz_subgroups' => 'This quiz has subgroups',
@@ -1562,23 +1652,25 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 											'no_correction' => 'Hide correction from the user when test is concluded',
 											'hide_result' => 'Hide the test results from user after submission',
 										);
-					$fieldset->addElement( array( 'name' => 'quiz_options', 'label' => 'Quiz Options', 'type' => 'Checkbox', 'value' => @$values['quiz_options'] ? : array( 'save_results', 'random', 'edit_questions' ) ), $quizOptions );
+                    $fieldsetOption->addElement( array( 'name' => 'quiz_options', 'label' => 'Quiz Options', 'type' => 'Checkbox', 'value' => @$values['quiz_options'] ? : array( 'save_results', 'random', 'edit_questions' ) ), $quizOptions );
+                        
+                    //	time
+					$fieldsetOption->addElement( array( 'name' => 'quiz_time', 'placeholder' => 'e.g. 900', 'label' => 'Maximum Test Time (in secs)', 'type' => 'InputText', 'value' => @$values['quiz_time'] ) );
+                    $fieldsetOption->addFilter( 'quiz_time', array( 'Int' => null ) );
+                    
+                    $fieldsetOption->addElement( array( 'name' => 'questions_auth_level', 'label' => 'Who can contribute to questions', 'type' => 'Select', 'value' => @$values['questions_auth_level'] ? : 98 ), $authOptions );
 					
-					
-					$form->addFieldset( $fieldset );
+				    $form->addFieldset( $fieldsetOption );
 					
 					//	New fieldset for categories
-					$fieldset = new Ayoola_Form_Element;
-					$fieldset->hashElementName = $this->hashFormElementName;
+				    $fieldset = new Ayoola_Form_Element;
+				    $fieldset->hashElementName = $this->hashFormElementName;
 
-					//	
 					$groupIds = $this->getGlobalValue( 'quiz_subgroup_id' ) ? : @$values['quiz_subgroup_id'];
 
 					$groupQuestions = $this->getGlobalValue( 'quiz_subgroup_question' ) ? : @$values['quiz_subgroup_question'];
 					if( in_array( 'group_questions', $fieldsToEdit ) || ( is_array( $this->getGlobalValue( 'quiz_options' ) ) && in_array( 'quiz_subgroups', $this->getGlobalValue( 'quiz_options' ) ) ) )
 					{
-
-					
 						$i = 0;
 						//	Build a separate demo form for the previous group
 						$questionForm = new Ayoola_Form( array( 'name' => 'categories...' )  );
@@ -1587,7 +1679,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						
 						do
 						{
-							
 							//	Put the questions in a separate fieldset
 							$categoryFieldset = new Ayoola_Form_Element; 
 							$categoryFieldset->allowDuplication = true;
@@ -1604,15 +1695,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						}
 						while( isset( $values['quiz_subgroup_id'][$i] ) || isset( $groupQuestions[$i] ) );
 						
-						
 						//	Put the questions in a separate fieldset
 						$categoryFieldset = new Ayoola_Form_Element; 
 						$categoryFieldset->allowDuplication = false;
-
 						$categoryFieldset->container = 'span';
 						
 						//	add previous categories if available
-						$categoryFieldset->addElement( array( 'name' => 'group_questions', 'type' => 'Html', 'value' => '' ), array( 'html' => $questionForm->view(), 'fields' => 'quiz_subgroup_id,quiz_subgroup_question' ) );
+						$categoryFieldset->addElement( array( 'name' => 'group_questions', 'data-pc-ignore-field' => true, 'type' => 'Html', 'value' => '' ), array( 'html' => $questionForm->view(), 'fields' => 'quiz_subgroup_id,quiz_subgroup_question' ) );
 						
 						//	Autogenerate group ids
 						if( $groupIds )
@@ -1628,93 +1717,33 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						}
 						//	Add only the last one into the main form
 						$form->addFieldset( $categoryFieldset );
-					}
-					
-					//	New fieldset for questions
-					$fieldset = new Ayoola_Form_Element;
-					$fieldset->hashElementName = $this->hashFormElementName;
-					
+					}					
 					
 					if( in_array( 'questions_and_answers', $fieldsToEdit ) || ( is_array( $this->getGlobalValue( 'quiz_options' ) ) && in_array( 'edit_questions', $this->getGlobalValue( 'quiz_options' ) ) ) )
-				//	if( ! $values || $this->getGlobalValue( 'edit_questions' ) )
 					{
-						$j = 0; // group count
+                        $j = 0; 
+                        
+                        // group count
 						//	Separate form for category confirmation
 						//	Do this later after questions have been set so the max questions could equal total questions
 						$questionConfForm = new Ayoola_Form( array( 'name' => 'categories-conf...' )  );
 						$questionConfForm->setParameter( array( 'no_fieldset' => true, 'no_form_element' => true ) );
 						$questionConfForm->wrapForm = false;
 						while( $j <= count( @$groupIds ) && $j < 9 )//	Do this for all each categories and don't forget the "uncategorized"
-						{ 
-
-							
+						{
 							//	autogenerate group ids
 							if( isset( $groupIds[$j] ) )
 							{
 								//	Randomly generate IDs for group questions
 								@$groupIds[$j] = $groupIds[$j] ? : md5( $groupQuestions[$j] );
-
 							}
 							else
 							{
 								//	This is causing infinite loop
-
 							}
 
-							
-							$i = 0; // question count
-							//	Build a separate demo form for the previous group
-							$questionForm = new Ayoola_Form( array( 'name' => 'questions...' )  );
-							$questionForm->setParameter( array( 'no_fieldset' => true, 'no_form_element' => true ) );
 
-							$questionForm->wrapForm = false;  
-
-							do
-							{
-								
-								//	Put the questions in a separate fieldset
-								$questionFieldset = new Ayoola_Form_Element; 
-								$questionFieldset->allowDuplication = true;
-								$questionFieldset->duplicationData = array( 'add' => '+ Add New Question Below', 'remove' => '- Remove Above Question', 'counter' => 'question_counter' . $j . '', );
-								$questionFieldset->container = 'span';
-
-								$questionFieldset->wrapper = 'white-background';								
-
-								$questionFieldset->addElement( array( 'name' => 'quiz_question' . @$groupIds[$j], 'data-html' => '1', 'data-pc-element-whitelist-group' => 'questions_and_answers', 'multiple' => 'multiple', 'rows' => '1', 'label' => ( 'Question <span name="question_counter' . $j . '">' . ( $i + 1 ) . '</span> of <span name="question_counter' . $j . '_total">' . ( count( @$values['quiz_question' . @$groupIds[$j]] ) ? : 1 ) . '</span>' ), 'placeholder' => 'Enter question here...', 'title' => 'Double-Click here to launch the advanced editor', 'type' => 'TextArea', 'value' => @$values['quiz_question' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_question' . @$groupIds[$j], null , $i ) ) );  
-
-												
-								//	Option 1
-								$questionFieldset->addElement( array( 'name' => 'quiz_option1' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'First Option', 'placeholder' => 'Enter option 1', 'type' => 'TextArea', 'value' => @$values['quiz_option1' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_option1' . @$groupIds[$j], null , $i ) ) );
-
-								
-								//	Option 2
-								$questionFieldset->addElement( array( 'name' => 'quiz_option2' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Second Option', 'placeholder' => 'Enter option 2', 'type' => 'TextArea', 'value' => @$values['quiz_option2' . @$groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_option2' . @$groupIds[$j], null , $i ) ) );
-
-								
-								//	Option 3
-								$questionFieldset->addElement( array( 'name' => 'quiz_option3' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Third Option', 'placeholder' => 'Enter option 3', 'type' => 'TextArea', 'value' => @$values['quiz_option3' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_option3' . @$groupIds[$j], null , $i ) ) );
-
-								
-								//	Option 4
-
-								$questionFieldset->addElement( array( 'name' => 'quiz_option4' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Fourth Option', 'placeholder' => 'Enter option 4', 'type' => 'TextArea', 'value' => @$values['quiz_option4' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_option4' . @$groupIds[$j], null , $i ) ) );
-
-								
-								//	Solution
-
-								$questionFieldset->addElement( array( 'name' => 'quiz_answer_notes' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'data-html' => '1', 'multiple' => 'multiple', 'rows' => '1', 'label' => 'Answer Notes and Workings', 'placeholder' => 'Enter the information that will be displayed to user as the answer workings...', 'type' => 'TextArea', 'value' => @$values['quiz_answer_notes' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_answer_notes' . @$groupIds[$j], null , $i ) ) );
-
-								
-								//	Correct Answer
-								$questionFieldset->addElement( array( 'name' => 'quiz_correct_option' . @$groupIds[$j], 'data-pc-element-whitelist-group' => 'questions_and_answers', 'multiple' => 'multiple', 'label' => 'Correct Option', 'placeholder' => '', 'type' => 'Select', 'value' => @$values['quiz_correct_option' . $groupIds[$j]][$i] ? : $this->getGlobalValue( 'quiz_correct_option' . @$groupIds[$j], null , $i ) ), array_combine( range( 1, 4 ), range( 1, 4 ) ) );
-
-								//	We need to save the keys to use later so this information may save in the real fieldset
-								
-								$i++;
-								
-								$questionForm->addFieldset( $questionFieldset );
-							}
-							while( isset( $values['quiz_question' . @$groupIds[$j]][$i] ) );
+                            $questionForm = self::quizQuestions( $values, $groupIds, $j );
 							
 							//	Put the questions in a separate fieldset
 							$questionFieldset = new Ayoola_Form_Element; 
@@ -1734,7 +1763,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							$questionFieldset->addFilter( 'question_count' . @$groupIds[$j], array( 'DefiniteValue' => $questionCount ) );
 
 							$questionElementList = 'quiz_question' . @$groupIds[$j] . ',quiz_option1' . @$groupIds[$j] . ',quiz_option2' . @$groupIds[$j] . ',quiz_option3' . @$groupIds[$j] . ',quiz_option4' . @$groupIds[$j] . ',quiz_correct_option' . @$groupIds[$j] . ',quiz_answer_notes' . @$groupIds[$j];
-							$questionFieldset->addElement( array( 'name' => 'questions_and_answers', 'data-pc-element-whitelist-group' => 'questions_and_answers', 'type' => 'Html', 'value' => '' ), array( 'html' => ( $subGroupHeading . $questionForm->view() ), 'parameters' => array( 'data-pc-element-whitelist-group' => 'questions_and_answers' ), 'fields' => $questionElementList ) );
+							$questionFieldset->addElement( array( 'name' => 'questions_and_answers', 'data-pc-ignore-field' => true, 'data-pc-element-whitelist-group' => 'questions_and_answers', 'type' => 'Html', 'value' => '' ), array( 'html' => ( $subGroupHeading . $questionForm->view() ), 'parameters' => array( 'data-pc-element-whitelist-group' => 'questions_and_answers' ), 'fields' => $questionElementList ) );
 														
 							//	Add only the last one into the main form
 							$form->addFieldset( $questionFieldset );
@@ -1749,18 +1778,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 					
 							$j++;
 						}
-						
 						//	Put the questions in a separate fieldset
 						$questionConfFieldset = new Ayoola_Form_Element; 
-						$questionConfFieldset->allowDuplication = false;
-						$questionConfFieldset->container = 'span';
-						
-						//	time
-						$questionConfFieldset->addElement( array( 'name' => 'quiz_time', 'placeholder' => 'e.g. 900', 'label' => 'Maximum Test Time (in secs)', 'type' => 'InputText', 'value' => @$values['quiz_time'] ) );
-						$questionConfFieldset->addFilter( 'quiz_time', array( 'Int' => null ) );
-						
+                        $questionConfFieldset->hashElementName = $this->hashFormElementName;
+												
 						//	Now lets review category questions
-						$questionConfFieldset->addElement( array( 'name' => 'previous_forms', 'type' => 'Html', 'value' => '' ), array( 'html' => ( '<h3>How many questions per test per subgroup?</h3>' . $questionConfForm->view() ), 'fields' => 'quiz_subgroup_question_max' ) );
+						$questionConfFieldset->addElement( array( 'name' => 'previous_forms', 'data-pc-ignore-field' => true, 'type' => 'Html', 'value' => '' ), array( 'html' => ( '<h3>How many questions per test per subgroup?</h3>' . $questionConfForm->view() ), 'fields' => 'quiz_subgroup_question_max' ) );
 						
 						$questionConfFieldset->addElement( array( 'name' => 'total_question_count', 'data-pc-element-whitelist-group' => 'questions_and_answers', 'type' => 'Hidden', 'value' => null ) );
 						$questionConfFieldset->addFilter( 'total_question_count', array( 'DefiniteValue' => $totalQuestionCount ) );
@@ -1769,21 +1792,17 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 						$questionConfFieldset->addFilter( 'total_question_displayed', array( 'DefiniteValue' => array_sum( $this->getGlobalValue( 'quiz_subgroup_question_max' ) ) ) );
 
 						//	Review Questions and Set  
-						$form->addFieldset( $questionConfFieldset );  
-
+						$form->addFieldset( $questionConfFieldset );
 					}
 				break;
 				case 'product':
-			//	case 'service':
 				case 'subscription':
 					$fieldset->addElement( array( 'name' => 'item_old_price' . $featurePrefix, 'label' => 'Old price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_old_price' . $featurePrefix] ) );
 					$fieldset->addElement( array( 'name' => 'item_price' . $featurePrefix, 'label' => 'Current price', 'placeholder' => '0.00', 'type' => 'InputText', 'value' => @$values['item_price' . $featurePrefix] ) );
 					$fieldset->addElement( array( 'name' => 'no_of_items_in_stock' . $featurePrefix, 'type' => 'InputText', 'value' => @$values['no_of_items_in_stock' . $featurePrefix] ) );   
 				break;
 				case 'subscription-options':
-			//		{
-						$fieldset->addElement( array( 'name' => 'subscription_selections' . $featurePrefix, 'label' => $postTypeLabel . ' Options ' . $featurePrefix, 'placeholder' => 'e.g. blue', 'type' => 'MultipleInputText', 'value' => @$values['subscription_selections' . $featurePrefix] ), @$values['subscription_selections' . $featurePrefix] );
-			//		}
+                    $fieldset->addElement( array( 'name' => 'subscription_selections' . $featurePrefix, 'label' => $postTypeLabel . ' Options ' . $featurePrefix, 'placeholder' => 'e.g. blue', 'type' => 'MultipleInputText', 'value' => @$values['subscription_selections' . $featurePrefix] ), @$values['subscription_selections' . $featurePrefix] );
 				break;
 				case 'multi-price':
 
@@ -2001,37 +2020,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 		$defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
 		$defaultProfile = $defaultProfile['profile_url'];
-		$articleSettings['allowed_editors'][] = 98;
-		if( ! self::hasPriviledge( $articleSettings['allowed_editors'] ) )
-		{
-			$profiles = Application_Profile_Abstract::getMyProfiles();
-			if( ! empty( $values['profile_url'] ) && ! in_array( $values['profile_url'], $profiles ) )
-			{
-				$profiles[] = $values['profile_url'];
-			}
-			$profiles = array_combine( $profiles, $profiles );
-		}
-		else
-		{
-			$table = "Application_Profile_Table";
-			$table = $table::getInstance( $table::SCOPE_PRIVATE );
-			$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
-			$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
-			$profiles = $table->select( null, null, array( 'workaround-to-avoid-cache' ) );
 
-			$filter = new Ayoola_Filter_SelectListArray( 'profile_url', 'display_name' );
-			$profiles = $filter->filter( $profiles );
-		}
-		if( count( $profiles )  > 1 )
-		{
-		//	var_dump()
-			$fieldset->addElement( array( 'name' => 'profile_url',  'onchange' => 'ayoola.div.manageOptions( { database: "Application_Profile_Table", listWidget: "Application_Profile_ShowAll", values: "profile_url", labels: "display_name", element: this } );', 'label' => 'Post as', 'type' => 'Select', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles + array( '__manage_options' => '[Manage Profiles]' ) );
+        $profiles = self::getMyAuthProfiles();
 
-		}
-		else
-		{
+        
+		$fieldset->addElement( array( 'name' => 'profile_url',  'onchange' => 'ayoola.div.manageOptions( { database: "Application_Profile_Table", listWidget: "Application_Profile_ShowAll", values: "profile_url", labels: "display_name", element: this } );', 'label' => 'Post as', 'type' => count( $profiles ) > 1 ? 'Select' : 'Hidden', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles + array( '__manage_options' => '[Manage Profiles]' ) );
 
-		}
 
 		if( @$values['requirement_name'] || ( is_array( Ayoola_Form::getGlobalValue( 'article_options' ) ) && in_array( 'requirement', Ayoola_Form::getGlobalValue( 'article_options' ) ) ) )
 		{

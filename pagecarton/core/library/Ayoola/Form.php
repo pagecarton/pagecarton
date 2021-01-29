@@ -285,18 +285,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		$this->_attributes = _Array( $attributes );
 		$this->_attributes['id'] = @$this->_attributes['id'] ? : @$this->_attributes['name'] . '_form_id';
 
-		//	testing 123
-
 		$this->_attributes['class'] = @$this->_attributes['class'] ? : 'pc-form2';
 
 		$this->_attributes['action'] = @$this->_attributes['action'] ? : '#' . $this->_attributes['id'];
 
-/* 		//	Check if form was submitted
-		if( @$_REQUEST[$this->_attributes['name'] . self::SUBMIT_DETECTOR] === $this->_attributes['name'] )
-		{
-			$this->_submitted = true;
-		}
- */	//	echo $this->getForm();
 
     }
 
@@ -449,11 +441,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					$label = $this->_names[$name]['label'] ? : 'This field';
 					$badnews = str_ireplace( array( '%value%', '%variable%' ), array( '"' . $label . '"', ( is_scalar( $each ) ? $each : null ) ), isset( $parameter['badnews'] ) ? $parameter['badnews'] : $check->getBadNews() );
 
-					//	Allow optional elements
-				//	if( $this->_names[$name]['real_name'] === 'bbm_pin' )
-					{
-
-					}
 					if( isset( $this->_names[$name]['optional'] ) )
 					{
 
@@ -493,11 +480,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 
 			}
 		}
-		//	the settings wast working with this
-	//	if( $this->requiredFieldSet )
-		{
-
-		}
         $element = new Ayoola_Form_Element;
 		$element->useDivTagForElement = false;
 
@@ -509,8 +491,8 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 
         $submitDetector = @$this->_attributes['name'] . self::SUBMIT_DETECTOR;
         $authCode = self::hashElementName( $this->_attributes['name'] );
-    //    var_export( session_id() );
-        $url = '/tools/classplayer/get/name/Ayoola_Form?form=' . $this->_attributes['name'] . '&auth=' . $authCode;
+
+        $url = '' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Form?form=' . $this->_attributes['name'] . '&auth=' . $authCode;
         Application_Javascript::addCode(
             '
                 ayoola.events.add( window, "load", function()
@@ -554,9 +536,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		}
         $element->addElement( array( 'name' => $submitDetector, 'value' => @$this->_attributes['name'], 'type' => 'Hidden', 'data-pc-ignore-field' => 'true' ) );
         $element->addElement( array( 'name' => self::HONEY_POT, 'type' => 'HoneyPot', 'value' => '', 'data-pc-ignore-field' => 'true' ) );
-        
-        //  another attempt at spam filtering
-	//	$element->addElement( array( 'name' => 'skeprfkferfef', 'type' => 'Select', 'label' => 'Sum', 'value' => 'xes' ) );
 
 		$element->addFilters( 'Trim:: Escape::Alnum' );  
 		$this->requiredFieldSet = $element; 
@@ -635,7 +614,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					if( ! Ayoola_Loader::loadClass( $class ) )
 					{
 						continue 2;
-
 					}
 
 					$class = new $class( @$combinedInfo['parameters'] );
@@ -647,15 +625,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					foreach( $fieldsets as $key => $fieldset )
 					{
 						$fieldset->appendElement = false;
-
-						if( @$b['requirement_goodnews'] )
-						{
-
-						}
-						if( @$each['requirement_goodnews'] )
-						{
-
-						}
 						$this->addFieldset( $fieldset );
 					}
 				break;
@@ -684,7 +653,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     public function setForm( array $formOptions = null )
     {
 
-	//	if( is_array( $_POST['fake_values_namespace'][$this->formNamespace] ) )
 		if( is_array( @$_POST['Ayoola_Form'][$this->formNamespace]['fake_values'] ) )
 		{
 			$this->fakeValues = $_POST['Ayoola_Form'][$this->formNamespace]['fake_values'];
@@ -718,10 +686,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			$this->getGlobal();	//	Load the global
 			$form .= ">\n";
 		}
-	//	if( ! empty( $_GET['pc_inspect_widget_form'] ) )
-		{
-
-		}
 		$i = 0;
 		if( $this->getOneFieldSetAtATime() )
 		{
@@ -749,7 +713,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 
 			}
 		}
-	//	$fieldsets = 
 
 		//	ADD POST-FORM REQUIREMENTS
 		$this->setFormRequirements( $this->getParameter( 'requirements' ) );
@@ -786,7 +749,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				}
 				elseif( $i )
 				{
-						continue;
+					continue;
 				}
 
 			}
@@ -835,7 +798,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			$i++;
 
 		}
-//		if( ! $this->getOneFieldSetAtATime() || ! $values['oneFieldSetAtATime'] )
 		if( ! $this->getParameter( 'no_required_fieldset' ) )   
 		{
 			$form .= $this->getElementMarkup( $this->getRequiredFieldset() );
@@ -962,9 +924,12 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		else
 		{
 			$whiteList = $this->getParameter( 'element_whitelist' );
-		}
+        }
+    //    var_export( $whiteList );
 		foreach( $allElements as $name => $markup )
 		{
+        //    var_export( @$this->_names[$name] );
+
 			//	If we have a whitelist, we only want to see some elements and discard the rest
 			if( ! empty( $this->_names[$name]['data-pc-ignore-field'] ) )
 			{
@@ -974,15 +939,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 			{
 				continue;
 			}
-			else
-			{
-
-            }
 			if( $this->isSubmitted() )
 			{
 				if( empty( $this->_names[$name]['data-pc-ignore-field'] ) )
 				{
-
 					$this->_values[@$this->_names[$name]['real_name']] = isset( $this->_global[$name] ) ? $this->_global[$name] : @$this->_global[@$this->_names[$name]['real_name']];
 					$this->_filter( $name );
 					$this->_validate( $name );     
@@ -1145,10 +1105,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
             return false;
         }
         while( false );
-    //    var_export( session_id() );
-    //    session_regenerate_id();
-    //    session_id( ( session_id() . '*' ) ); 
-    //    var_export( session_id() );
         return true;
     }
 

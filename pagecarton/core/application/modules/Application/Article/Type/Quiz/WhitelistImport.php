@@ -97,15 +97,7 @@ class Application_Article_Type_Quiz_WhitelistImport extends Application_Article_
 	
     } 
 	
-    /**
-     * Used to sanitize a status update
-     * 
-     */
-/* 	public function sanitizeStatus( $statusInfo )
-    {
-		$statusInfo
-	}
- */	
+
     /**
      * Form to display poll
      * 

@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: post-viewer-post-list.php	Thursday 28th of January 2021 03:10:02 PM	ayoola@ayoo.la $ 
+* @version $Id: post-viewer-post-list.php	Friday 29th of January 2021 09:42:39 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -126,10 +126,48 @@ $_82d3cc274801f7b6e361e93e8a37257a = null;
 
 							}
 							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_febabc8c2d69bc7e0b7e363a7c4cdeb2 = new Ayoola_Page_Editor_Text( array (
+  'codes' => '<widget parameters=\'{ "class": "Application_Article_View", "hide_default_post_view": true }\'></widget>',
+  'preserved_content' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '0-1611865178-13',
+  'content' => '<widget parameters=\'{ "class": "Application_Article_View", "hide_default_post_view": true }\'></widget>',
+) );
+
+							}
+							else
+							{
+								
+$_febabc8c2d69bc7e0b7e363a7c4cdeb2 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_a34eedd518cb43f2e2d58a4405212700 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div><br></div><div><br></div>',
+  'preserved_content' => '',
+  'url_prefix' => '',
+  'pagewidget_id' => '0-1611800230-7',
+  'content' => '<div><br></div><div><br></div>',
+) );
+
+							}
+							else
+							{
+								
+$_a34eedd518cb43f2e2d58a4405212700 = null;
+
+							}
+							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_a71f00e33e268ec88c2d1c7d673d00b4 = new Ayoola_Object_Embed( array (
+$_9b41e83eb7b024f6a2582f59a33f3962 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_CommentBox_ShowComments',
   'pagewidget_id' => '0-1611800059-2',
 ) );
@@ -138,14 +176,14 @@ $_a71f00e33e268ec88c2d1c7d673d00b4 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_a71f00e33e268ec88c2d1c7d673d00b4 = null;
+$_9b41e83eb7b024f6a2582f59a33f3962 = null;
 
 							}
 							
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
 								
-$_61467833b1c1a619d0ca7469696fff90 = new Ayoola_Object_Embed( array (
+$_7b4898fcd80ad44c53f6e1b4031da6b9 = new Ayoola_Object_Embed( array (
   'editable' => 'Application_CommentBox',
   'pagewidget_id' => '0-1611800024-1',
 ) );
@@ -154,7 +192,7 @@ $_61467833b1c1a619d0ca7469696fff90 = new Ayoola_Object_Embed( array (
 							else
 							{
 								
-$_61467833b1c1a619d0ca7469696fff90 = null;
+$_7b4898fcd80ad44c53f6e1b4031da6b9 = null;
 
 							}
 							

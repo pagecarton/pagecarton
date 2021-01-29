@@ -972,10 +972,8 @@ pc_full_width {
 .fullnews,
 .centerednews {
   display: inline-block;
-  border: 1em solid white;
-  border-radius: 0.5em;
-  padding: 0.1em;
-  max-width: 100%;
+  border: 1px solid transparent;
+  border-radius: 0.1em;
 }
 
 .section_editable {
@@ -993,10 +991,6 @@ pc_full_width {
 }
 
 .boxednews {
-  /* 	border-color: #90F;
-	color: #000;
-	background: #fff;
- */
   cursor: pointer;
   margin: 0.5em;
   padding: 0.5em;
@@ -1018,7 +1012,7 @@ pc_full_width {
 }
 
 .selectednews {
-  border-color: #172c43;
+  border-color: #ccc;
   color: #000;
   background: #eee;
 }

@@ -116,7 +116,7 @@ class Ayoola_Page_Layout_List extends Ayoola_Page_Layout_Abstract
 		$list->setKey( $this->getIdColumn() );  
 		$default = array(
 				Ayoola_Page_Editor_Layout::getDefaultLayout() => '<i class="fa fa-check"></i>',
-				'pc_paginator_default' => '<a href="javascript:" rel="" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="' . self::__( 'Make this theme default for all pages' ) . '">' . self::__( 'Make Default' ) . '</a>',
+				'pc_paginator_default' => '<a href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_MakeDefault/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" title="' . self::__( 'Make this theme default for all pages' ) . '">' . self::__( 'Make Default' ) . '</a>',
 
 		);
 		$list->createList(  

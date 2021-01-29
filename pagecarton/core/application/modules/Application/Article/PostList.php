@@ -97,6 +97,7 @@ class Application_Article_PostList extends Application_Article_ShowAll
             {
                 $parameters['single_post_pagination'] = true;
                 $parameters['post_list_article_url'] = $data['article_url'];
+                $parameters['no_init'] = true;
     
     
                 $class = new Application_Article_ShowAll( $parameters );

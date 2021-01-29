@@ -17,7 +17,6 @@
  
 require_once 'Application/Article/Abstract.php';
 
-
 /**
  * @category   PageCarton
  * @package    Application_Article_Type_Quiz
@@ -43,13 +42,15 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 		try
 		{
 			$access = new Ayoola_Access();
-		//	var_export( $_POST );
-			//	self::v( $data );
-			if( $_POST && @$_POST['article_url'] )
+
+            if( $_POST && @$_POST['article_url'] )
 			{	
-				//	Allow the identifierData to be loaded automatically
-				$_GET['article_url'] = @$_POST['article_url'];
-				if( ! $data = $this->getIdentifierData() ){ return false; }
+				//	Allow the identifierData to be loaded automatically         
+                $this->setParameter( array( 'article_url' => $_POST['article_url'] ) );
+                if( ! $data = $this->getIdentifierData() )
+                { 
+                    return false; 
+                }
 				
 				
 				//	In case we have previously sent random data, lets use it for marking the results.
@@ -63,41 +64,8 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 				else
 				{
 					return false;
-				//	throw new Application_Article_Type_Exception( "TEST DOESN'T HAVE A VALID SESSION" );
 				}
-				
-/* 				do
-				{
-					$billExaminer = true;  //	Bill the examiner for? Add to settings later for flexibility.
-					if( ! $billExaminer  )
-					{
-						break;
-					}
-					
-					//	Bill only in private exams. Add to settings later for flexibility.
-					if( ! in_array( 97, array_map( 'intval', (array) $data['auth_level'] ) ) )
-					{
-						break;
-					}
-					
-					// bills
-					// bill the user
-					// send to the admin
-					$transferInfo['to'] = 'joywealth';
-				//	$transferInfo['from'] = Ayoola_Application::getUserInfo( 'username' );
-					$transferInfo['from'] = $data['username'];
-					$transferInfo['amount'] = '1000';
-					$transferInfo['notes'] = 'Test fees for "' . Ayoola_Application::getUserInfo( 'email' ) . '" from ' . $data['username'] . '. Test title is "' . $data['article_title'] . '".' ;
-					if( ! Application_Wallet::transfer( $transferInfo ) )
-					{
-						return false;
-					}
-					
-					
-				}
-				while( false );
- */				
-		//		echo $data;
+		
 				//	Prepare result to send to client-side
 				$dataToSend = array();
 				
@@ -126,19 +94,15 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 				
 				//	Retrieve the answered questions
 				//	Send the score
-				$dataToSend['link_to_result_sheet'] = 'http://' . Ayoola_Page::getDefaultDomain() . '' . strtolower( $data['article_url'] ) . '?' . http_build_query( array( 'a' => $_POST ) );
+				$dataToSend['link_to_result_sheet'] = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . strtolower( $data['article_url'] ) . '?' . http_build_query( array( 'a' => $_POST ) );
 				
 				if( 
 						! empty( $data['quiz_correct_option'] ) 
-				//		&& ! in_array( 'no_correction', $data['quiz_options'] ) 
 						&& ! in_array( 'hide_result', $data['quiz_options'] ) 
 				)
 				{
-				//	var_export( $data['quiz_correct_option'] );
-			//		var_export( $_POST );
 					unset( $_POST['article_url'] );
 					
-			//		var_export( $data );
 					$dataToSend['quiz_score'] = $data['quiz_score'];
 					$dataToSend['quiz_percentage'] = $data['quiz_percentage'];
 
@@ -157,10 +121,8 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 						$class = new Application_User_List();
 						$class->setIdentifier( array( 'username' => $data['username'] ) );
 						$userInfo = $class->getIdentifierData();
-				//		self::v( $userInfo );
 						$mailInfo['to'] = $userInfo['email'];
 					}
-								//	var_export( $mailInfo );
 					//	SEND THE CANDIDATE AN EMAIL IF HE IS LOGGED INN
 					if( $access->isLoggedIn() )
 					{
@@ -176,7 +138,6 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 											'ARTICLE_LINK' => 'http://' . Ayoola_Page::getDefaultDomain() . '' . strtolower( $data['article_url'] ), 
 										);
 						$emailInfo = self::replacePlaceholders( $emailInfo, $values );
-					//	var_export( $emailInfo );
 						$emailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
 						$emailInfo['from'] = 'no-reply@' . Ayoola_Page::getDefaultDomain();
 						@self::sendMail( $emailInfo );
@@ -188,7 +149,6 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 											'reference' => array
 											(
 												'article_url' => $data['article_url'],
-										//		'score' => $dataToSend['quiz_percentage'],
 											), 
 										); 
 						$parameters = array( 'fake_values' => $status );
@@ -200,21 +160,16 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 					try
 					{
 						@self::sendMail( $mailInfo );
-					//	@Ayoola_Application_Notification::mail( $mailInfo );
 					}
 					catch( Ayoola_Exception $e ){ null; }
-				//	$dataToSend = json_encode( $dataToSend );
 					$this->_objectData = $dataToSend;
-				//	$this->_playMode = static::PLAY_MODE_JSON;
-				//	echo $dataToSend;
-				//	exit();
 			
 				}
 
 				return false;
 			}
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
-			//	self::v( $data ); 
+
 			if( 
 				! is_array( $data ) || 
 				! self::isAllowedToView( $data )
@@ -222,12 +177,10 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 			{
 				
 				return $this->setViewContent(  '' . self::__( '<p class="badnews">The requested article was not found on the server. Please check the URL and try again. ' . self::getQuickLink() . '</p>' ) . '', true  );
-			//	self::setIdentifierData( $data );
 			}
 			
 			//	Client side
 			//	Send JSON Object to client side
-	//		$dataToSend = array( 'quiz_question' => $data['quiz_question'], 'quiz_question' => $data['quiz_question'], 'quiz_question' => $data['quiz_question'], 'quiz_question' => $data['quiz_question'], 'quiz_question' => $data['quiz_question'], 'quiz_question' => $data['quiz_question'],  );
 		
 			//	init this so that we can just build them up per group
 			$testInfo = array();
@@ -243,7 +196,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 					{
 
 						//	DONT ALLOW MORE THAN 50 QUESTIONS IN QUIZ
-						//	self::v( $data ); 
+
 						
 						//	50 is not a default, we may set another value in the article editor
 						if( empty( $data['quiz_max_no_of_question'] ) || intval( $data['quiz_max_no_of_question'] ) > 500 )
@@ -254,7 +207,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 						{
 							$data['quiz_max_no_of_question'] = 2;
 						}
-						//	self::v( $data );
+
 						//	compatibility
 						//	Let old test go through this
 						$data['quiz_subgroup_question_max'][$i] = $data['quiz_max_no_of_question'];
@@ -268,22 +221,19 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 					{
 						$data['quiz_subgroup_question_max'][$i] = count( $data['quiz_question' . $eachGroupId] );
 					}
-			//		var_export( 'quiz_question' . $eachGroupId . "<br> \r\n" );
-				//	var_export( count( $data['quiz_question' . $eachGroupId] ) );
-				//	var_export( $data['quiz_subgroup_question_max'][$i] );
+
 					
 					$randomKeys = (array) array_rand( $data['quiz_question' . $eachGroupId], $data['quiz_subgroup_question_max'][$i] );
-				//	var_export( $randomKeys );  
+
 					shuffle( $randomKeys );
-					
-			//		var_export( $randomKeys );
+
 					$randomKeys = array_combine( $randomKeys, $randomKeys );
 					
 					//	Take care of group questions
 					$questions = array_values( array_intersect_key( $data['quiz_question' . $eachGroupId], $randomKeys ) );				
 					if( ! trim( @$data['quiz_subgroup_question'][$i] ) )
 					{
-					//	var_export( $data['quiz_subgroup_question'][$i] . "\r\n" );
+
 						foreach( $questions as &$eachQuestion )
 						{
 							$eachQuestion = '<blockquote>' . $data['quiz_subgroup_question'][$i] . "</blockquote>\r\n" . $eachQuestion . "\r\n <br>";
@@ -303,15 +253,13 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 					$i++;
 				}
 			}
-		//	self::v( $data );
+
 			
 			$dataToSend = array_merge( $data, $testInfo );
 			$dataToSend['container'] = $this->getParameter( 'question_container' ) ? : md5( __CLASS__ ); 
 			$dataToSend['question_type'] = md5( serialize( $testInfo ) ); 
-		//	var_export( $dataToSend );
 			
 			//	SAVE THIS QUESTIONS IN THE SESSION
-		//	self::v( $data );
 			//	In case we have previously sent random data, lets use it for marking the results.
 			//	Site Wide Storage of this value so we don't have to worry about session timeouts
 			$storageNamespace = 'random_questions_' . $data['article_url'] . @$dataToSend['question_type'];
@@ -324,113 +272,79 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 			{
 				$dataToSend['a'] = $_GET['a'];
 			}
+            $this->setViewContent(  '<h3 class="pc_give_space_top_bottom">' . sprintf( self::__( '%s Quiz' ), $data['article_title'] ) . '</h3>', true  );
+            $options = null;
 
-		//	self::v( $dataToSend );
-			$dataToSendJson = json_encode( $dataToSend );
-			Application_Javascript::addCode
-			( 
-				'
-				//	alert( "You are welcome..." );
-				ayoola.post.quiz.container = "' . $dataToSend['container'] . '"; 
-				ayoola.post.quiz.jsonObjectFromServerForInit = ' . $dataToSendJson . '; 
-				
-				//	Wait till this is loaded before user can click to start exam.
-				document.getElementById( ayoola.post.quiz.container ).innerHTML = \'' . ( $this->getParameter( 'call_to_action' ) ? : '<button class="goodnews boxednews" onClick="ayoola.post.quiz.init( ayoola.post.quiz.jsonObjectFromServerForInit );">Total of ' . count( $testInfo['quiz_question'] ) . ' questions loaded! Click here to start test... (' . Ayoola_Filter_Time::splitSeconds( $dataToSend['quiz_time'] ? : 0, 2 ) . ') </button>' ) . '\';
-				' 
-			); 
-		//	self::v( $dataToSend );
-			Application_Javascript::addFile( '/ayoola/js/post/quiz.js' );
-			Application_Javascript::addFile( '/ayoola/js/form.js' );
-			Application_Javascript::addFile( '/ayoola/js/countdown.js' );
-		//	var_export( @$dataToSend['container']);
-		//	$this->setViewContent( self::__( '<p>' . $data['article_description'] . '</p>' ) );   
-			//	Prompt user to login before they continue test
-			
-		//	if( ! $access->isLoggedIn() )
-			{ 
-		//		$this->setViewContent( self::__( '<h2 class="badnews">Notice!</h2>' ) );
-		//		$this->setViewContent( self::__( '<p class="badnews boxednews">To save your score and other information about this test, please login with your username and password before you start the test.</p>' ) );
-		//		$this->setViewContent( Ayoola_Access_AccountRequired::viewInLine() );
-			}
-			$this->setViewContent
-			( 
-				'
-				<div id="' . @$dataToSend['container'] . '">
-					<button class="badnews boxednews" onClick="alert( \'Please wait while the question loads...\' );">Please wait while ' . count( $dataToSend['quiz_question'] ) . ' question loads...</button>
-				</div>' 
-			);
+            if( count( $dataToSend['quiz_question'] ) )
+            {
+                $timeX = Ayoola_Filter_Time::splitSeconds( $dataToSend['quiz_time'] ? : 0, 2 );
+                $timeString = $timeX ? ( '(' . $timeX . ')' ) : null;
+                $dataToSendJson = json_encode( $dataToSend );
+                $options .= '<a style="flex-basis: 50%;" href="javascript:" class="pc-btn" onClick="if( ayoola.post.quiz.jsonObjectFromServerForInit ){ ayoola.post.quiz.init( ayoola.post.quiz.jsonObjectFromServerForInit ); this.parentNode.removeChild( this );}">Start Quiz...</a>';
+                $this->setViewContent(  '<p class="pc_give_space_top_bottom">
+                Total Questions: ' . count( $dataToSend['quiz_question'] ) . '<br>
+                Allocated Time: ' . $timeX . '<br>
+                </p>'  );
+    
+                Application_Javascript::addCode
+                ( 
+                    '
+    
+                    ayoola.post.quiz.container = "' . $dataToSend['container'] . '"; 
+                    ayoola.post.quiz.jsonObjectFromServerForInit = ' . $dataToSendJson . '; 
+                    
+                    //	Wait till this is loaded before user can click to start exam.
+                    document.getElementById( ayoola.post.quiz.container ).innerHTML = \'\';
+                    ' 
+                ); 
+                Application_Style::addCode
+                ( 
+                    '
+                        .pc_quiz_timer
+                        {
+                            font-size:3em;
+                        }
+                    ' 
+                ); 
+                Application_Javascript::addFile( '/ayoola/js/post/quiz.js' );
+                Application_Javascript::addFile( '/ayoola/js/form.js' );
+                Application_Javascript::addFile( '/ayoola/js/countdown.js' );
+                $this->setViewContent
+                ( 
+                    '
+                    <div id="' . @$dataToSend['container'] . '">
+                        <p class="pc-notify-info" onClick="alert( \'Please wait while quiz questions load...\' );">Please wait while quiz questions load completely...</p>
+                    </div>' 
+                );
+            }
+            else
+            {
+                $this->setViewContent(  '<p class=" pc_give_space_top_bottom badnews">' . self::__( 'There are no questions set for this quiz yet' ) . '</p>' );
+            }
+            if( self::hasPriviledge( $data['questions_auth_level'] ? : 98 ) || self::isAllowedToEdit( $data ) )
+            {
+                $options .= '<a style="flex-basis: 50%;" class="pc-btn" href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Quiz_AddQuestion/?article_url=' . $data['article_url'] . '\', \'page_refresh\' );">' . self::__( 'Contribute Question' ) . '</a>';
+            }
+            if( self::isAllowedToEdit( $data ) )
+            {
+                $options .= ' <a style="flex-basis: 50%;" class="pc-btn" href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Editor/?article_url=' . $data['article_url'] . '\', \'page_refresh\' );">' . self::__( 'Manage Quiz' ) . '</a>';
+                $options .= ' <a style="flex-basis: 50%;" class="pc-btn" href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_Type_Quiz_ScoreBoard/?article_url=' . $data['article_url'] . '\' );">' . self::__( 'Score Board' ) . '</a>';
+            }
+
+            
+
+            $this->setViewContent(  '<p style="display:flex;" class="pc_give_space_top_bottom">' . $options . '</p>'  );
 		
-	//	var_export( $dataToSend );
-//		$this->createForm( 'Continue', 'Quiz' );
-	//	$form = $this->getForm()->view();
-	//	$values = $this->getForm()->getValues();
-	//	var_export( $_POST );
-/* 		if( ! $values = $this->getForm()->getValues() )
-		{ 
-			//	var_export( 123 );
-			//	show form
-			
-			$this->setViewContent( $form );
-			//	return false; 
-		}
-		else
-		{
-			
-		}
- */	//	$this->setViewContent( self::__( '<p>' . $data['article_description'] . '</p>' ) );
-	//	var_export( $data );
-	//	var_export( $pollData );
 		}
 		catch( Application_Article_Exception $e )
 		{ 
-		//	$this->_parameter['markup_template'] = null;
 			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
-		//	return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
 		catch( Exception $e )
 		{ 
-			//	self::v( $e->getMessage() );
-		//	$this->_parameter['markup_template'] = null;
 			$this->setViewContent(  '' . self::__( '<p class="blockednews badnews centerednews">' . $e->getMessage() . '</p>' ) . '', true  );
-		//	return $this->setViewContent( self::__( '<p class="blockednews badnews centerednews">Error with article package.</p>' ) ); 
 		}
 	
     } 
-	
-    /**
-     * Used to sanitize a status update
-     * 
-     */
-/* 	public function sanitizeStatus( $statusInfo )
-    {
-		$statusInfo
-	}
- */	
-    /**
-     * Form to display poll
-     * 
-     */
-	public function createForm( $submitValue = null, $legend = null, Array $values = null )
-    {
-		//	Form to create a new page
-        $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
-		$fieldset = new Ayoola_Form_Element;
-		$fieldset->hashElementName = true;
-		$form->submitValue = $submitValue ;
-	//	$fieldset->placeholderInPlaceOfLabel = true;
-		$pollData = $this->getParameter( 'data' );
-		$pollData['poll_options'] = is_array( $pollData['poll_options'] ) ? array_combine( array_map( 'self::getOptionId', $pollData['poll_options'] ), $pollData['poll_options'] ) : array();
-//		var_export( $pollData['poll_options'] );
-		
-		//	Question
-		$fieldset->addElement( array( 'name' => 'poll_answer', 'label' => @$pollData['poll_question'], 'type' => 'Radio', 'value' => @$values['poll_answer'] ), $pollData['poll_options'] );
-		$fieldset->addElement( array( 'name' => 'article_url', 'type' => 'Hidden', 'value' => @$pollData['article_url'] ) );
-	//	$fieldset->addRequirement( 'poll_answer', array( 'ArrayKeys' => $pollData['poll_options'] ) );
-		$fieldset->addLegend( $legend );
-		$form->addFieldset( $fieldset );
-		$this->setForm( $form );
-
-    } 
-	
 	// END OF CLASS
 }

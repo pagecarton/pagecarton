@@ -9,7 +9,7 @@ ayoola.post.quiz =
 	url: '/tools/classplayer/get/object_name/Application_Article_Type_Quiz/',
 	ajax: null,
 	formData: null,
-	counter: {},
+	counter: function(){},
 	splashScreen: {},
 	
 	//	Information about the current quiz
@@ -30,7 +30,6 @@ ayoola.post.quiz =
 	//	Starts a quiz
 	init: function( jsonObject )
 	{
-	//	alert( jsonObject.quiz_question );
 		
 		//	Record this in the history
 		ayoola.post.quiz.history.questions[jsonObject.article_id] = jsonObject; 
@@ -45,7 +44,6 @@ ayoola.post.quiz =
 			ayoola.post.quiz.counter = ayoola.countdown.init
 			({
 				secondsLeft: jsonObject.quiz_time,
-			//	secondsLeft: 10,
 				container: ayoola.post.quiz.counterContainer,
 				callbacks: new Array
 				(
@@ -62,10 +60,10 @@ ayoola.post.quiz =
 	//	Returns the DOM to display a question
 	getQuestionNode: function( article_id, question )
 	{
-	//	alert( question );
+
 		if( ! article_id ){ article_id = ayoola.post.quiz.current.article_id; }
 		if( undefined == question ){ question = ayoola.post.quiz.current.question; }
-	//	if( ! question ){ question = ayoola.post.quiz.current.question; }
+
 		var history = ayoola.post.quiz.history;
 		//	Retrieves the next question
 		var quiz_question = history.questions[article_id].quiz_question[question];
@@ -81,12 +79,11 @@ ayoola.post.quiz =
 			var d = history.questions[article_id].quiz_option2[a];
 			var e = history.questions[article_id].quiz_option3[a];
 			var f = history.questions[article_id].quiz_option4[a];
-		//	alert( a );
-		//	alert( b );
+
 			//	If no next question is not available, we have completed text
 			if( ! b || ! c || ! d || ! e || ! f )
 			{
-			//	return false;
+
 			}
 			
 			if( ! b && ! c && ! d && ! e && ! f )
@@ -102,32 +99,27 @@ ayoola.post.quiz =
 		
 		var getOptionClass = function( option )
 		{
-	//		if( ! a ){ a = question; }
+
 			var e = 'normalnews boxednews';	
 			var d = history.quiz_correct_options[article_id];
-		//	var d = history.quiz_correct_options[article_id];
-/* 			if( ! d || ! d[question] )
-			{
-	//			return 'normalnews boxednews';				
-			}
- */			
+	
 			var c = d ? d[question] : undefined;
 			var a = history.answers[article_id][question];			
 			if( a == option )
 			{
-			//	return 'selectednews boxednews';				
+
 				e = 'selectednews boxednews';
 			}
 			
 			
 			if( d && d[question] && c == option )
 			{
-			//	return 'goodnews boxednews';
+
 				e = 'goodnews boxednews';
 			}
 			else if( d && d[question] && c != option && a == option )
 			{
-			//	return 'goodnews boxednews';
+
 				e = 'badnews boxednews';
 			}
 			//	Find from question list
@@ -137,27 +129,24 @@ ayoola.post.quiz =
 		//	If no next question is not available, we have completed text
 		if( ! isValidQuestion( question ) )
 		{
-		//	return ayoola.post.quiz.setCompleted();
+
 			//	Dont auto submit again
 			return false;
 		}
 				
 		//	Record current question
 		ayoola.post.quiz.current.question = question;
-/* 
-		alert( quiz_question );
-		alert( quiz_option1 );
-		alert( quiz_option2 );
-		alert( quiz_option3 );
- */		var form = ayoola.form.init
+    
+        var form = ayoola.form.init
 		({ 
 			name: 'ayoola_post_quiz_' + question,
 			id: 'ayoola_post_quiz_' + question,
+            style: 'border: 1px solid #eee; padding: 1em; margin: 1em 0;', 
 			fieldsets:
 			{
 				quiz_questions:
 				{
-					legend: '<span> <strong>Question ' + ( question + 1 ) + ' of ' + ayoola.post.quiz.history.questions[article_id].quiz_question.length + ':</strong>   </span>'
+					legend: 'Question ' + ( question + 1 ) + ' of ' + ayoola.post.quiz.history.questions[article_id].quiz_question.length + ':'
 				}
 			},
 			elements:
@@ -173,24 +162,7 @@ ayoola.post.quiz =
 						{
 							callback: function( e )
 							{
-							//	alert( 'Not clickable' );
-							}, 
-							when: 'click'
-						}
-					)
-				},
-				quiz_answer_notes:
-				{
-					type: 'html', 
-					label: ' ', 
-					fieldset: 'quiz_questions',
-					value: ( history.quiz_correct_options[article_id] && history.quiz_correct_options[article_id][question] && ayoola.post.quiz.history.questions[article_id].quiz_answer_notes && ayoola.post.quiz.history.questions[article_id].quiz_answer_notes[question] ) ? '<a href="' + ayoola.post.quiz.history.questions[article_id].article_url + '?x_url=/quiz/post/answer-notes&question_id=' + ayoola.post.quiz.history.questions[article_id].quiz_answer_notes[question] + '">View answer notes</a>' : '', 
-					callbacks: new Array
-					(
-						{
-							callback: function( e )
-							{
-							//	alert( history.quiz_correct_options[article_id][question] );
+
 							}, 
 							when: 'click'
 						}
@@ -199,11 +171,10 @@ ayoola.post.quiz =
 				quiz_answer:
 				{
 					type: 'radio', 
-				//	style: 'display:none;', 
+
 					style: '', 
 					labelStyle: 'display:inline-block;', 
 					name: 'quiz_answer[]', 
-				//	label: 'Select the answer from the following options: ', 
 					label: ' ', 
 					className: ' ', 
 					value: ayoola.post.quiz.history.answers[article_id][question] || '', 
@@ -226,18 +197,17 @@ ayoola.post.quiz =
 							callback: function( e )
 							{
 								var target = ayoola.events.getTarget( e );
-							//	target.form.submit();
+
 								ayoola.post.quiz.history.answers[article_id][question] = target.value;
 								
 								//	Record current question
-						//		ayoola.post.quiz.current.question = question;
+
 						
 								
 								//	Move to the next question
-						//		question++;
-							//	alert( target.value );
+
 								ayoola.post.quiz.pagination = true;
-							//	ayoola.post.quiz.next( article_id, question + 1 );
+
 							}, 
 							when: 'click'
 						}
@@ -245,10 +215,9 @@ ayoola.post.quiz =
 					select: new Array
 					(
 					{ 
-			//			className: getOptionClass( '1' ),
 						elementCoverName: 'quiz_option_for_' + question + '_cover', 
 						elementCoverStyle: quiz_option1 != '' ? 'display:inline-block;' : 'display:none;', 
-					//	elementCoverOnClick: 'ayoola.div.selectElement( { element: this, disableUnSelect: true, selectMultiple: false, name: \'quiz_option_for_' + question + '_cover\' } );', 
+
 						elementCoverClass: getOptionClass( '1' ), 
 						value: '1', 
 						label: '<a name="quiz_option_for_' + question + '" class="" onClick="this.parentNode.click();" title="Click here to select this option as the answer...">' + quiz_option1 + '</a>'
@@ -256,43 +225,55 @@ ayoola.post.quiz =
 						//	Set classname to badnews if the selection is wrong
 					},
 					{ 
-			//			className: getOptionClass( '2' ),
 						elementCoverName: 'quiz_option_for_' + question + '_cover', 
 						elementCoverStyle: quiz_option2 != '' ? 'display:inline-block;' : 'display:none;', 
-					//	elementCoverOnClick: 'ayoola.div.selectElement( { element: this, disableUnSelect: true, selectMultiple: false, name: \'quiz_option_for_' + question + '_cover\' } );', 
+
 						elementCoverClass: getOptionClass( '2' ), 
 						value: '2', 
 						label: '<a name="quiz_option_for_' + question + '" class="" onClick="this.parentNode.click();" title="Click here to select this option as the answer...">' + quiz_option2 + '</a>'
-//						label: quiz_option2
 					},
 					{ 
-		//				className: getOptionClass( '3' ),
 						elementCoverName: 'quiz_option_for_' + question + '_cover', 
 						elementCoverStyle: quiz_option3 != '' ? 'display:inline-block;' : 'display:none;', 
-					//	elementCoverOnClick: 'ayoola.div.selectElement( { element: this, disableUnSelect: true, selectMultiple: false, name: \'quiz_option_for_' + question + '_cover\' } );', 
+
 						elementCoverClass: getOptionClass( '3' ), 
 						value: '3', 
 						label: '<a name="quiz_option_for_' + question + '" class="" onClick="this.parentNode.click();" title="Click here to select this option as the answer...">' + quiz_option3 + '</a>'
-				//		label: quiz_option3
 					},
 					{ 
-			//			className: getOptionClass( '4' ),
 						elementCoverName: 'quiz_option_for_' + question + '_cover', 
 						elementCoverStyle: quiz_option4 != '' ? 'display:inline-block;' : 'display:none;', 
-					//	elementCoverOnClick: 'ayoola.div.selectElement( { element: this, disableUnSelect: true, selectMultiple: false, name: \'quiz_option_for_' + question + '_cover\' } );', 
+
 						elementCoverClass: getOptionClass( '4' ), 
 						value: '4', 
 						label: '<a name="quiz_option_for_' + question + '" class="" onClick="this.parentNode.click();" title="Click here to select this option as the answer...">' + quiz_option4 + '</a>'
-			//			label: quiz_option4 
 					}
-					)  
+				    )  
+                },
+                quiz_answer_notes:
+				{
+					type: 'html', 
+					label: ' ', 
+					fieldset: 'quiz_questions',
+					value: ( history.quiz_correct_options[article_id] && history.quiz_correct_options[article_id][question] && ayoola.post.quiz.history.questions[article_id].quiz_answer_notes && ayoola.post.quiz.history.questions[article_id].quiz_answer_notes[question] ) ? ( '<br><p>Answer notes: <br> ' + ayoola.post.quiz.history.questions[article_id].quiz_answer_notes[question] + '</p><br>' ) : '', 
+					callbacks: new Array
+					(
+						{
+							callback: function( e )
+							{
+
+							}, 
+							when: 'click'
+						}
+					)
 				},
 				previous:
 				{
 					type: 'button', 
 					hide: ayoola.post.quiz.pagination ? false : true, 
 					id: 'quiz_previous_question', 
-					value: isValidQuestion( question - 1 ) ? 'Back to no. ' + ( question ) + ''  : null, 
+					style: 'margin-right: 1em;padding:1em;', 
+					value: isValidQuestion( question - 1 ) ? 'Back to No. ' + ( question ) + ''  : null, 
 					callbacks: new Array
 					(
 						{
@@ -301,8 +282,7 @@ ayoola.post.quiz =
 								var target = ayoola.events.getTarget( e );
 								
 								//	Move to the previous question
-							//	question--;
-							//	alert( target.value );
+
 								ayoola.post.quiz.next( article_id, question - 1 );
 								if( e.preventDefault ){ e.preventDefault(); }
 							}, 
@@ -315,6 +295,7 @@ ayoola.post.quiz =
 					type: 'submit', 
 					hide: ayoola.post.quiz.pagination ? false : true, 
 					id: 'quiz_submit_question', 
+					style: 'margin-right: 1em;padding:1em;', 
 					value: 'Submit', 
 					callbacks: new Array
 					(
@@ -324,9 +305,7 @@ ayoola.post.quiz =
 								var target = ayoola.events.getTarget( e );
 								
 								//	Move to the previous question
-							//	question++;
-							//	alert( target.value );
-						//		ayoola.post.quiz.next( article_id, question + 1 );
+
 								if( e.preventDefault ){ e.preventDefault(); }
 								return ayoola.post.quiz.setCompleted();
 							}, 
@@ -338,8 +317,8 @@ ayoola.post.quiz =
 				{
 					type: 'button', 
 					hide: ayoola.post.quiz.pagination ? false : true, 
-					value: isValidQuestion( question + 1 ) ? 'Proceed to no. ' + ( question + 2 ) + '' : null, 
-				//	value: 'Go to Question ' + ( question + 1 ), 
+					value: isValidQuestion( question + 1 ) ? 'Proceed to No. ' + ( question + 2 ) + '' : null, 
+					style: 'padding:1em;', 
 					id: 'quiz_next_question', 
 					callbacks: new Array
 					(
@@ -349,8 +328,7 @@ ayoola.post.quiz =
 								var target = ayoola.events.getTarget( e );
 								
 								//	Move to the previous question
-							//	question++;
-							//	alert( target.value );
+
 								ayoola.post.quiz.next( article_id, question + 1 );
 								if( e.preventDefault ){ e.preventDefault(); }
 							}, 
@@ -361,7 +339,7 @@ ayoola.post.quiz =
 			},
 			callbacks: new Array()
 		});
-//		alert( form.innerHTML );
+
 		return form;
 	},
 	
@@ -381,7 +359,7 @@ ayoola.post.quiz =
 		
 	setCompleted: function( noConfirmation )
 	{
-	//	confirm( 'Do you want to submit this test?' );
+
 		//	Show all the questions and answer
 		var article_id = ayoola.post.quiz.current.article_id;
 		var questions = ayoola.post.quiz.history.questions[article_id].quiz_question;
@@ -405,36 +383,21 @@ ayoola.post.quiz =
 			{
 				ayoola.post.quiz.formData += '&' + b + '=' + ( ayoola.post.quiz.history.answers[article_id][b] || '' );
 			}
-	//		alert( ayoola.post.quiz.formData );
 			
-		//	ayoola.xmlHttp.fetchLink( ayoola.post.quiz.url, uniqueNameForAjax, ayoola.post.quiz.formData );
-			var xx = ayoola.xmlHttp.fetchLink( { url: ayoola.post.quiz.url, id: uniqueNameForAjax, data: ayoola.post.quiz.formData, skipSend: true } );
-		//	alert( arguments.length );
+			ayoola.xmlHttp.fetchLink( { url: ayoola.pcPathPrefix + ayoola.post.quiz.url, id: uniqueNameForAjax, data: ayoola.post.quiz.formData, skipSend: true } );
 			var ajax = ayoola.post.quiz.ajax = ayoola.xmlHttp.objects[uniqueNameForAjax];
 			
 			//	return json
 			ajax.setRequestHeader( 'AYOOLA-PLAY-MODE', 'JSON' );
-			//	alert( ajax );	
-			//	alert( xx );	
-			//	alert( ayoola.xmlHttp.isReady( ajax ) );	
 			var ajaxCallback = function()
 			{
-			//	alert( ajax );
-			//	alert( ajax.readyState ); 
-			//	alert( ajax.status ); 
 				if( ayoola.xmlHttp.isReady( ajax ) )
 				{
 					var span = document.createElement( 'span' );
-				//	span.appendChild( document.createTextNode( 'Test Completed' ) );
-					var h = document.createElement( 'h2' );
+					var h = document.createElement( 'h5' );
 					h.appendChild( document.createTextNode( 'Test Submitted Successfully!' ) );
- 	//				h.focus();
-	//				h.scrollIntoView();
-			//		return ayoola.post.quiz.setToContainer( ajax.responseText, ayoola.post.quiz.container );
-			//		alert( ajax.responseText );
 
  					span.appendChild( h );
-			//		alert( ajax.responseText );
 					try
 					{
 						var response = JSON.parse( ajax.responseText );
@@ -447,8 +410,6 @@ ayoola.post.quiz =
 						// An error has occured, handle it, by e.g. logging it
 						console.log( e );
 					}
-								//		
-				//	alert( response );
 					if( ajax.responseText )
 					{
 						if( response.quiz_score )
@@ -458,39 +419,31 @@ ayoola.post.quiz =
 							span1.innerHTML = '<p>You Scored: ' + response.quiz_score + '/' + questions.length + ' (' + percentage + '%)</p>';  
 							span.appendChild( span1 );
 							ayoola.post.quiz.history.scores[article_id] = response.quiz_score;
-					//		p.scrollIntoView();
 						}
 						if( response.quiz_correct_option )
 						{
 							var span2 = document.createElement( 'span' );
 							span2.innerHTML = '<p>Please review the questions to find out what the correct options are. Use the following color codes to navigate the corrections.</p>\
-							<p><span class="goodnews boxednews">Correct option</span> <span class="badnews boxednews">Incorrect selection</span> <span class="boxednews">Other options</span> <span class="selectednews boxednews">New selection</span></p>';
+							<p><span class="goodnews boxednews">Correct option</span> <span class="badnews boxednews">Incorrect selection</span> <span class="boxednews">Other options</span></p>';
 							span.appendChild( span2 );
 							ayoola.post.quiz.history.quiz_correct_options[article_id] = response.quiz_correct_option;
 							span.appendChild( showAllQuestions() );
 						}
 					}
-			//		showAllQuestions();
-				//	alert( ajax.responseText ); 
-				//	alert( "Template Saved." ); 
 					ayoola.post.quiz.setToContainer( span, ayoola.post.quiz.container );
 					
 					//	stop countdown
-					ayoola.post.quiz.counter.stop();
+					ayoola.post.quiz.counter.stop ? ayoola.post.quiz.counter.stop() : null;
 					
 					//	Close the splash screen
 					ayoola.post.quiz.splashScreen.close ? ayoola.post.quiz.splashScreen.close() : null; 
 					
 				} 
 			}
-		//	ajaxCallback();
 			ayoola.events.add( ajax, "readystatechange", ajaxCallback );
 			
 			//	Send ajax request
 			ajax.send( ayoola.post.quiz.formData );
-		//	document.getElementById( 'ayoola_post_categories' ).innerHTML
-			
-		//	ayoola.post.quiz.setToContainer( document.createTextNode( 'Submiting test...' ), ayoola.post.quiz.container );
 		
 			//	Set a splash screen to indicate that we are loading.
 			var splash = ayoola.spotLight.splashScreen();
@@ -507,8 +460,6 @@ ayoola.post.quiz =
 			ayoola.post.quiz.pagination = false;
 			for( var b = 0; b < questions.length; b++ )
 			{
-			//	alert( b );
-			//	b = b == 0 ? undefined : b;
 				var next = ayoola.post.quiz.getQuestionNode( article_id, b );
 				if( next )
 				{
@@ -517,30 +468,33 @@ ayoola.post.quiz =
 			}
 			return span;
 		}
-		var span = document.createElement( 'span' );
-		var h = document.createElement( 'h1' );
-		h.innerHTML = 'Please review all the questions before final submission';
+		var span = document.createElement( 'div' );
+		var h = document.createElement( 'h5' );
+		h.innerHTML = 'Review Your Answers';
+		h.className = 'pc_give_space_top_bottom';
 		span.appendChild( h );
 		span.appendChild( showAllQuestions() );
-	//	var span = showAllQuestions();
 		var element = document.createElement( 'input' );
 		element.setAttribute( 'type', 'button' );
 		element.setAttribute( 'value', 'Submit' );
 		span.appendChild( element );
 		ayoola.events.add( element, 'click', submit );
 		ayoola.post.quiz.setToContainer( span, ayoola.post.quiz.container );
-	//	showAllQuestions();
-	//	alert( span.innerHTML );
 		
 	},
 		
 	//	Sets a view to the container
 	setToContainer: function( view )
 	{
-		//	Header 
+        //	Header 
+        if( ayoola.post.quiz.counterContainer.setAttribute )
+        {
+            ayoola.post.quiz.counterContainer.setAttribute( 'class', 'pc_quiz_timer' );
+        }
+
 		var a = ayoola.div.setToContainer( ayoola.post.quiz.counterContainer, ayoola.post.quiz.container );
 		var b = ayoola.div.setToContainer( view, ayoola.post.quiz.container, true );
-		var c = document.createElement( 'span' );
+        var c = document.createElement( 'span' );
 		var d = b.parentNode;
 		d.appendChild( c );
 		c.appendChild( a );
