@@ -1311,22 +1311,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$values['article_type'] = $values['article_type'] ? : $this->getGlobalValue( 'article_type' ); 
 
 		
-		//	Set Article Type
-		$options = Application_Article_Type::getInstance();
-		$options = $options->select();
-		foreach( $options as $eachTypeKey => $eachType )
-		{
-			if( ! empty( $eachType['auth_level'] ) && ! Ayoola_Abstract_Table::hasPriviledge( $eachType['auth_level'] ) )
-			{ 
-				//	Current user not authorized to use this post type
-				unset( $options[$eachTypeKey] );
-				unset( Application_Article_Type_TypeAbstract::$presetTypes[$eachType['post_type_id']] );
-			}
-		}
-		require_once 'Ayoola/Filter/SelectListArray.php';
-		$filter = new Ayoola_Filter_SelectListArray( 'post_type_id', 'post_type');
-		$options = $filter->filter( $options );
-		$postTypesAvailable = Application_Article_Type_TypeAbstract::$presetTypes + $options;
+		$postTypesAvailable = Application_Article_Type_TypeAbstract::getMyAllowedPostTypes();
 
 		if( ! empty( $_REQUEST['article_type'] ) )
 		{

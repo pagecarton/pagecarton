@@ -72,8 +72,6 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 
     /**
      * 
-     * param string Post Type to checj
-     * return array Default Values
      */
 	public static function getOriginalPostTypeInfo( $postType ) 
     {
@@ -84,7 +82,32 @@ abstract class Application_Article_Type_TypeAbstract extends Ayoola_Abstract_Tab
 		}
 		return false;
 	}
-	
+    
+    /**
+     * 
+     */
+	public static function getMyAllowedPostTypes() 
+    {
+		
+		//	Set Article Type
+		$options = Application_Article_Type::getInstance();
+		$options = $options->select();
+		foreach( $options as $eachTypeKey => $eachType )
+		{
+			if( ! empty( $eachType['auth_level'] ) && ! Ayoola_Abstract_Table::hasPriviledge( $eachType['auth_level'] ) )
+			{ 
+				//	Current user not authorized to use this post type
+				unset( $options[$eachTypeKey] );
+				unset( Application_Article_Type_TypeAbstract::$presetTypes[$eachType['post_type_id']] );
+			}
+		}
+		$filter = new Ayoola_Filter_SelectListArray( 'post_type_id', 'post_type');
+		$options = $filter->filter( $options );
+        $postTypesAvailable = Application_Article_Type_TypeAbstract::$presetTypes + $options;
+        return $postTypesAvailable;
+	}
+
+
     /**
      * creates the form
      * 

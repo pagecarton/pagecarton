@@ -247,11 +247,22 @@ class Application_Article_Creator extends Application_Article_Abstract
 		
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . ''; 
-			$this->setViewContent(  '<div class="goodnews">' . sprintf( self::__( '%s successfully saved.' ), ucfirst( $joinedType ) ) . '</div>', true  );
+			$this->setViewContent(  '<div class="goodnews pc_give_space_top_bottom">' . sprintf( self::__( '%s successfully saved.' ), ucfirst( $joinedType ) ) . '</div>', true  );
             $this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">' . sprintf( self::__( 'View  %s' ), $joinedType ) . '</a>'  );
             
             $eachPostTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $values['article_type'] );
-            if( $eachPostTypeInfo['article_type'] === 'post-list' || in_array( 'post-list', $eachPostTypeInfo['post_type_options'] ) )
+
+            if( ! empty( $_REQUEST['post_list'] ) )
+            {
+                $post = self::loadPostData( $_REQUEST['post_list'] );
+                if( ! in_array( $values['article_url'], $post['post_list'] ) )
+                {
+                    $post['post_list'][] = $values['article_url'];
+                    self::saveArticle( $post );
+                    $this->setViewContent( '<p class="pc_give_space_top_bottom">' . sprintf( self::__( 'Post added to %s' ), '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $post['article_url'] . '">' . $post['article_title'] . '</a>' ) . '</p>' ); 
+                }
+            }
+            elseif( $eachPostTypeInfo['article_type'] === 'post-list' || in_array( 'post-list', $eachPostTypeInfo['post_type_options'] ) )
             {
                 $this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_PostList_Sort?article_url=' . $values['article_url'] . '">' . sprintf( self::__( 'Sort list' ) ) . '</a>'  );
 

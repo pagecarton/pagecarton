@@ -59,17 +59,20 @@ class Application_Article_Search extends PageCarton_Widget
             }
 
             $parameters = array( 
-                                    'search_mode' => 'phrase', 
+                                    'article_types' => $_GET['article_type'], 
                                     'return_object_data' => true, 
+                                    'no_init' => true, 
+                                    'search_mode' => true,
+                                    'no_of_post_to_show' => 50, 
                                     'q' => $_GET['q'] 
                                 );
                             
             $class = new Application_Article_ShowAll( $parameters );
-            $class->initOnce() ;
+            $class->init() ;
             
             $response = $class->view();
-        //    var_export( $parameters );
-        //    var_export( $response );
+             //   var_export( $parameters );
+            //   var_export( $response );
             if( empty( $_GET['raw_response'] ) )
             {
                 $ref = array();

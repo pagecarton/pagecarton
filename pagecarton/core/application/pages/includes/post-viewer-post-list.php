@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: post-viewer-post-list.php	Friday 29th of January 2021 12:15:56 PM	ayoola@ayoo.la $ 
+* @version $Id: post-viewer-post-list.php	Friday 29th of January 2021 04:02:41 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -68,10 +68,17 @@ $_a241e31eedca3550957404a8509cd91d = new Ayoola_Page_Editor_Text( array (
     </repeat>
     </ol>
 </widget>
+
 <widget parameters=\'{ "class": "Application_Article_View" }\'>
-<a href="/widgets/Application_Article_Editor?article_url={{{article_url}}}" class="btn btn-primary pc_give_space_top_bottom">Update list</a>
+
+<a href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame(\'/tools/classplayer/get/name/Application_Article_Creator?article_type={{{list_post_type}}}&post_list={{{article_url}}}\', \'page_refresh\');"  class="btn btn-success pc_give_space_top_bottom">Add new item</a>
+
+<a href="/widgets/Application_Article_Creator?article_type={{{article_type}}}"  class="btn btn-default pc_give_space_top_bottom">Create a new List</a>
+
+</widget>
+<widget parameters=\'{ "class": "Application_Article_View", "show_to_editors_only": true }\'>
 <a href="/widgets/Application_Article_PostList_Sort?article_url={{{article_url}}}" class="btn btn-default pc_give_space_top_bottom">Sort List</a>
-<a href="/widgets/Application_Article_Creator?article_type={{{article_type}}}" class="btn btn-default pc_give_space_top_bottom">Create a new List</a>
+<a href="/widgets/Application_Article_Editor?article_url={{{article_url}}}" class="btn btn-default pc_give_space_top_bottom">Update list</a>
 </widget>',
   'preserved_content' => '',
   'url_prefix' => '',
@@ -92,10 +99,17 @@ $_a241e31eedca3550957404a8509cd91d = new Ayoola_Page_Editor_Text( array (
     </repeat>
     </ol>
 </widget>
+
 <widget parameters=\'{ "class": "Application_Article_View" }\'>
-<a href="/widgets/Application_Article_Editor?article_url={{{article_url}}}" class="btn btn-primary pc_give_space_top_bottom">Update list</a>
+
+<a href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame(\'/tools/classplayer/get/name/Application_Article_Creator?article_type={{{list_post_type}}}&post_list={{{article_url}}}\', \'page_refresh\');"  class="btn btn-success pc_give_space_top_bottom">Add new item</a>
+
+<a href="/widgets/Application_Article_Creator?article_type={{{article_type}}}"  class="btn btn-default pc_give_space_top_bottom">Create a new List</a>
+
+</widget>
+<widget parameters=\'{ "class": "Application_Article_View", "show_to_editors_only": true }\'>
 <a href="/widgets/Application_Article_PostList_Sort?article_url={{{article_url}}}" class="btn btn-default pc_give_space_top_bottom">Sort List</a>
-<a href="/widgets/Application_Article_Creator?article_type={{{article_type}}}" class="btn btn-default pc_give_space_top_bottom">Create a new List</a>
+<a href="/widgets/Application_Article_Editor?article_url={{{article_url}}}" class="btn btn-default pc_give_space_top_bottom">Update list</a>
 </widget>',
 ) );
 

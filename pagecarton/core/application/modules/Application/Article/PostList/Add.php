@@ -109,15 +109,19 @@ class Application_Article_PostList_Add extends Application_Article_PostList
             foreach( $values['lists'] as $each )
             {
                 $post = self::loadPostData( $each );
-                if( ! in_array( $data['article_url'], $post['post_list'] ) )
+                if( $post['list_post_type'] && $data['article_type'] !== $post['list_post_type'] )
+                {
+                    $this->setViewContent( '<p class="pc_give_space_top_bottom">' . sprintf( self::__( '%s does not accept %s type of post, it only accept %s. ' ), '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $post['article_url'] . '">' . $post['article_title'] . '</a>', $data['article_type'], $post['list_post_type'] ) . '</p>' ); 
+                }
+                elseif( ! in_array( $data['article_url'], $post['post_list'] ) )
                 {
                     $post['post_list'][] = $data['article_url'];
                     self::saveArticle( $post );
-                    $this->setViewContent( '<p class="pc_give_space_top_bottom">' . sprintf( self::__( 'Post added to %s' ), '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $post['article_url'] . '">' . $post['article_title'] . '</a>' ) . '</p>' ); 
+                    $this->setViewContent( '<p class="pc_give_space_top_bottom">' . sprintf( self::__( '%s added to %s' ), '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $data['article_url'] . '">' . $data['article_title'] . '</a>', '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $post['article_url'] . '">' . $post['article_title'] . '</a>' ) . '</p>' ); 
                 }
                 else
                 {
-                    $this->setViewContent( '<p class="pc_give_space_top_bottom">' . sprintf( self::__( 'Post already in %s' ), '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $post['article_url'] . '">' . $post['article_title'] . '</a>' ) . '</p>' ); 
+                    $this->setViewContent( '<p class="pc_give_space_top_bottom">' . sprintf( self::__( '%s already in %s' ), '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $data['article_url'] . '">' . $data['article_title'] . '</a>', '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $post['article_url'] . '">' . $post['article_title'] . '</a>' ) . '</p>' ); 
                 }
 
             }

@@ -51,6 +51,11 @@ class Application_Article_PostList extends Application_Article_ShowAll
 				$this->_parameter['markup_template'] = false; 
 				return false;				
 			}
+            if( empty( $data['post_list'] ) )
+            {
+				$this->_parameter['markup_template'] = false; 
+				return $this->setViewContent(  '' . self::__( '<p class="badnews">This list is empty</p>' ) . '', true  );
+            }
 			if( ! $data  
 				|| ( ! @$data['publish'] && ! self::isOwner( @$data['user_id'] ) && ! @in_array( 'publish', @$data['article_options'] ) && Ayoola_Application::getUserInfo( 'username' ) !== strtolower( $data['username'] ) )   
 				|| ( ! self::hasPriviledge( @$data['auth_level'] ) && ! self::isOwner( @$data['user_id'] ) )
@@ -145,6 +150,22 @@ class Application_Article_PostList extends Application_Article_ShowAll
                 $v[$each] = $record['article_title'];
             }
         }
+        $postTypesAvailable = Application_Article_Type_TypeAbstract::getMyAllowedPostTypes();
+        asort( $postTypesAvailable );
+        $type = @$_REQUEST['list_post_type'] ? : $values['list_post_type'];
+
+        $fieldset->addElement( 
+            array( 
+            'name' => 'list_post_type', 
+            'label' => 'List Content Type', 
+            'type' => 'Select',
+            'onchange' => 'location.search = \'\' + location.search + \'&list_post_type=\' + this.value;',
+            'value' => $type
+            )
+            ,
+            array( '' => 'Any type' ) + $postTypesAvailable
+        ); 
+
 
         $fieldset->addElement( 
             array( 
@@ -152,7 +173,7 @@ class Application_Article_PostList extends Application_Article_ShowAll
             'label' => 'List', 
             'config' => array( 
                 'ajax' => array( 
-                    'url' => '' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Search',
+                    'url' => '' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Search?article_type=' . $type,
                     'delay' => 1000
                 ),
                 'placeholder' => 'e.g. Post Title',
