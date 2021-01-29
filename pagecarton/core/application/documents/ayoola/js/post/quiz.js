@@ -470,7 +470,7 @@ ayoola.post.quiz =
 		}
 		var span = document.createElement( 'div' );
 		var h = document.createElement( 'h5' );
-		h.innerHTML = 'Review Your Answers';
+		h.innerHTML = 'Review Your Answers Before Submission';
 		h.className = 'pc_give_space_top_bottom';
 		span.appendChild( h );
 		span.appendChild( showAllQuestions() );
