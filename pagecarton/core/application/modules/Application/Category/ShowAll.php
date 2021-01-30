@@ -161,8 +161,12 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
     {
 		if( $this->getParameter( 'category_page' ) )
 		{
-			$data['article_url'] = '' . $this->getParameter( 'category_page' ) . '?category=' . $data['category_name']; 
-		} 
+			$data['article_url'] = '/' . trim( $this->getParameter( 'category_page' ), '/' ) . '/?category=' . $data['category_name']; 
+        }
+        else
+        {
+            $data['article_url'] = '' . self::getPostUrl() . '/' . $data['category_name']; 
+        }
 	}
 			
     /**
@@ -187,11 +191,9 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 		{
 			$data = false;
 		}
-		$data['article_url'] = '' . self::getPostUrl() . '?category=' . $data['category_name']; 
 		$data['article_description'] = $data['category_description']; 
 		$data['publish'] = '1'; 
 		$data['auth_level'] = '0';   
-	//	$data['allow_raw_data'] = true; 
 	}
 
      /**

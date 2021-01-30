@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: personalize.php	Saturday 30th of January 2021 08:31:40 PM	ayoola@ayoo.la $ 
+* @version $Id: personalize.php	Saturday 30th of January 2021 08:39:06 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -20,12 +20,12 @@
                         if
                         ( 
 
-                            $x_1612038700 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1612039146 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1612038700 )
-                            foreach( $x_1612038700 as $each )
+                            if( $x_1612039146 )
+                            foreach( $x_1612039146 as $each )
                             {	
                                 include_once $each;
                             }
@@ -43,7 +43,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: default-layout.php	Saturday 30th of January 2021 08:31:39 PM	ayoola@ayoo.la $ 
+* @version $Id: default-layout.php	Saturday 30th of January 2021 08:39:05 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -54,12 +54,12 @@
                         if
                         ( 
 
-                            $x_1612038699 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1612039145 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1612038699 )
-                            foreach( $x_1612038699 as $each )
+                            if( $x_1612039145 )
+                            foreach( $x_1612039145 as $each )
                             {	
                                 include_once $each;
                             }
@@ -77,7 +77,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Saturday 30th of January 2021 08:31:36 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Saturday 30th of January 2021 08:39:04 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 <!DOCTYPE html>
@@ -112,8 +112,6 @@
                     echo $eachSitePageWidget->view();
                 }
                 
-echo ( ! empty( $_474612ea2c4114e6c4a6f67f7d1d56c3 ) &&  is_object( $_474612ea2c4114e6c4a6f67f7d1d56c3 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_474612ea2c4114e6c4a6f67f7d1d56c3->view(), '' ) : null );
-
 //pc_body_1 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
 //pc_body_1 /default-layout Begins Here

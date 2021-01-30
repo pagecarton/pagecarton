@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Saturday 30th of January 2021 08:31:36 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Saturday 30th of January 2021 08:39:04 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -22,78 +22,6 @@
                     $_sitePageWidget_pc_body_1 = array();
                 }
                 
-							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
-							{
-								
-$_474612ea2c4114e6c4a6f67f7d1d56c3 = new Ayoola_Page_Editor_Text( array (
-  'codes' => '<div class="site-mobile-menu">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle">&nbsp;</span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"><ul class="site-nav-wrap">
-<li><a href="/">Home</a></li>
-
-<!-- How to embed Application_Category_ShowAll -->
-<!--{{{@0(Application_Category_ShowAll)-->
-                <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
-<!--(Application_Category_ShowAll)@0}}}-->
-<!-- Place this code in code view -->
-
-                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search">&nbsp;</span></a></li>
-              </ul></div>
-    </div>
-
-',
-  'preserved_content' => '',
-  'url_prefix' => '',
-  'widget_options' => 
-  array (
-    0 => 'embed_widgets',
-  ),
-  'pagewidget_id' => '0-1612038697-19',
-  'markup_template_object_name' => 
-  array (
-    0 => 'Application_Category_ShowAll',
-  ),
-  'advanced_parameter_value' => 
-  array (
-    0 => '3',
-    1 => '/category',
-  ),
-  'add_a_new_post[0]' => '3',
-  'category_page' => '/category',
-  'content' => '<div class="site-mobile-menu">
-      <div class="site-mobile-menu-header">
-        <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle">&nbsp;</span>
-        </div>
-      </div>
-      <div class="site-mobile-menu-body"><ul class="site-nav-wrap">
-<li><a href="/">Home</a></li>
-
-<!-- How to embed Application_Category_ShowAll -->
-<!--{{{@0(Application_Category_ShowAll)-->
-                <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
-<!--(Application_Category_ShowAll)@0}}}-->
-<!-- Place this code in code view -->
-
-                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search">&nbsp;</span></a></li>
-              </ul></div>
-    </div>
-
-',
-) );
-
-							}
-							else
-							{
-								
-$_474612ea2c4114e6c4a6f67f7d1d56c3 = null;
-
-							}
-							
                 if( method_exists( 'Ayoola_Page_Editor_Layout', 'getSiteWideWidgets' ) )
                 {
                     $_sitePageWidget_pc_body_2 = Ayoola_Page_Editor_Layout::getSiteWideWidgets( 'pc_body_2' );
@@ -146,7 +74,7 @@ $_2ff07f92152067abe063cd346477b0d8 = new Ayoola_Page_Editor_Text( array (
     0 => 'embed_widgets',
     1 => 'parameters',
   ),
-  'pagewidget_id' => '0-1612038697-20',
+  'pagewidget_id' => '0-1612039144-1',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Category_ShowAll',
@@ -155,8 +83,10 @@ $_2ff07f92152067abe063cd346477b0d8 = new Ayoola_Page_Editor_Text( array (
   'advanced_parameter_value' => 
   array (
     0 => '3',
+    1 => '/category',
   ),
   'add_a_new_post[0]' => '3',
+  'category_page[0]' => '/category',
   'content' => '<header class="site-navbar" role="banner"><div class="container-fluid">
         <div class="row align-items-center">
           
