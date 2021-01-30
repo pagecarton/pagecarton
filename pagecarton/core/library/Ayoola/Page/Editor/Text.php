@@ -309,7 +309,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
             $parameters['includes'][$matches[1][$count]] = $each;
         }
         $parameters['content'] = $content;
-        $parameters['url_prefix'] = Ayoola_Application::getUrlPrefix();
+
+        //  is this changing the url prefix when installed?
+        // it actually was.
+        //$parameters['url_prefix'] = Ayoola_Application::getUrlPrefix();
     }
 	
     /**
@@ -482,20 +485,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				$pageInfo['description'] = $metaData;
 			}
 			Ayoola_Page::setCurrentPageInfo( $pageInfo );
-		}
+        }
 
-		//	Refreshes the url prefix just in case we have imported new site
+        //	Refreshes the url prefix just in case we have imported new site
 		if( $this->getParameter( 'url_prefix' ) !== Ayoola_Application::getUrlPrefix() ||  Ayoola_Application::getUrlPrefix() )
 		{		
 			$content = self::fixUrlPrefix( $content, $this->getParameter( 'url_prefix' ), Ayoola_Application::getUrlPrefix() );
         }
-/*         if( stripos( $content, '{{{' ) !== false )
-        {
-            $search = array();
-            $search[] = '/{{{([\w+]+)}}}/';
-            @$content = preg_replace( $search, '', $content );
-        }
- */
 		
 		$this->setParameter( array( 'editable' => $content ) );
 		$html = $this->getParameter( 'editable' ) . $this->getParameter( 'raw_html' );
@@ -686,9 +682,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			@$object['editable'] = $object['preserved_content'] ? : ( $object['codes'] ? : $object['editable'] );
 		}
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];    
-		@$object['option'] = $object['option'] ? : $object['view_option'];
+        @$object['option'] = $object['option'] ? : $object['view_option'];
 		if( @$object['url_prefix'] !== Ayoola_Application::getUrlPrefix() ||  Ayoola_Application::getUrlPrefix() )
-	//	if( @$object['url_prefix'] !== Ayoola_Application::getUrlPrefix() && strpos( $content, '//' ) === false )
 		{
 			$search = array( 
 								'"' . @$object['url_prefix'], 
