@@ -216,10 +216,6 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                 }
             }
         }
-        echo( $page );
-        echo( "\r\n" );
-        echo Ayoola_Application::getApplicationNameSpace();
-        echo( "\r\n" );
 
         $this->setParameter( array( 'url' => $page, 'exec_scope' => 'refresh-' . $themeName ) );
 		$this->setPageInfo( array( 'url' => $page ) );
