@@ -93,7 +93,7 @@ class Ayoola_File_Storage extends Ayoola_File
         Ayoola_Doc::deleteDirectoryPlusContent( $dir );
         if( function_exists( 'apcu_clear_cache' ) )
         {
-            apcu_clear_cache();
+        //    apcu_clear_cache();
         }
     } 
 	
@@ -117,7 +117,7 @@ class Ayoola_File_Storage extends Ayoola_File
 
         if( function_exists( 'apcu_clear_cache' ) )
         {
-            apcu_clear_cache();
+        //    apcu_clear_cache();
         }
 		return true;
     } 
@@ -139,7 +139,7 @@ class Ayoola_File_Storage extends Ayoola_File
         //  apc
         if( function_exists( 'apcu_store' ) )
         {
-            apcu_store( $path, $data );
+        //    apcu_store( $path, $data );
         }
 
         if( ! $data )
@@ -168,10 +168,10 @@ class Ayoola_File_Storage extends Ayoola_File
         //  apc
         if( function_exists( 'apcu_fetch' ) )
         {
-            $data = apcu_fetch( $path, $success );
-            if( $success )
+            //$data = apcu_fetch( $path, $success );
+            //if( $success )
             {
-                return $data;
+            //    return $data;
             }
         }
 
@@ -335,7 +335,7 @@ class Ayoola_File_Storage extends Ayoola_File
         Ayoola_Doc::deleteDirectoryPlusContent( $dir );
         if( function_exists( 'apcu_clear_cache' ) )
         {
-            apcu_clear_cache();
+            //apcu_clear_cache();
         }
 
     } 

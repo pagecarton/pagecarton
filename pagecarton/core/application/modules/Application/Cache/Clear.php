@@ -96,7 +96,7 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 		}
         if( function_exists( 'apcu_clear_cache' ) )
         {
-            apcu_clear_cache();
+        //    apcu_clear_cache();
         }
 		
 		$this->setViewContent(  '' . self::__( '<h1 class="badnews">Cache Cleared!</h1>' ) . '', true  ); 
