@@ -114,25 +114,26 @@ class Application_Article_Type_Quiz_AddQuestion extends Application_Article_Type
 
                 //	Send e-mail to the quiz provider
                 $mailInfo['subject'] = 'Quiz Question Contribution';
-                $mailInfo['body'] = 'A online quiz titled "' . $data['article_title'] . '", has a new question set by a contributor. 
-                
-                ' . ( Ayoola_Application::getUserInfo( 'username' ) ? '
-                ...
-                CONTRIBUTOR DETAILS
-                ...
+                $mailInfo['body'] = 
+'A online quiz titled "' . $data['article_title'] . '", has a new question set by a contributor. 
 
-                Username: ' . Ayoola_Application::getUserInfo( 'username' ) . ' 
-                Email: ' . Ayoola_Application::getUserInfo( 'email' ) : null  ) . '
+' . ( Ayoola_Application::getUserInfo( 'username' ) ? '
+...
+CONTRIBUTOR DETAILS
+...
+
+Username: ' . Ayoola_Application::getUserInfo( 'username' ) . ' 
+Email: ' . Ayoola_Application::getUserInfo( 'email' ) : null  ) . '
+
+...
+CONTRIBUTION
+...
+
+' . var_export( $values, true ) . '
                 
-                ...
-                CONTRIBUTION
-                ...
-                
-                ' . var_export( $values, true ) . '
-                                
-                You may view, edit and administer the online test by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . strtolower( $data['article_url'] ) . '
-                
-                ';
+You may view, edit and administer the online test by clicking this link: http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . strtolower( $data['article_url'] ) . '
+
+';
                 $mailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
                 if( $data['username'] )
                 {
