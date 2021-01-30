@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Tuesday 19th of January 2021 09:25:06 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Saturday 30th of January 2021 08:31:36 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -52,7 +52,7 @@ $_474612ea2c4114e6c4a6f67f7d1d56c3 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'embed_widgets',
   ),
-  'pagewidget_id' => '1576318117-1-1',
+  'pagewidget_id' => '0-1612038697-19',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Category_ShowAll',
@@ -60,8 +60,10 @@ $_474612ea2c4114e6c4a6f67f7d1d56c3 = new Ayoola_Page_Editor_Text( array (
   'advanced_parameter_value' => 
   array (
     0 => '3',
+    1 => '/category',
   ),
   'add_a_new_post[0]' => '3',
+  'category_page' => '/category',
   'content' => '<div class="site-mobile-menu">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
@@ -144,7 +146,7 @@ $_2ff07f92152067abe063cd346477b0d8 = new Ayoola_Page_Editor_Text( array (
     0 => 'embed_widgets',
     1 => 'parameters',
   ),
-  'pagewidget_id' => '1576318117-0-2',
+  'pagewidget_id' => '0-1612038697-20',
   'markup_template_object_name' => 
   array (
     0 => 'Application_Category_ShowAll',
@@ -451,7 +453,7 @@ $_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
     0 => 'embed_widgets',
     1 => 'parameters',
   ),
-  'pagewidget_id' => '1576318117-0-3',
+  'pagewidget_id' => '0-1612038697-21',
   'markup_template_object_name' => 
   array (
     0 => 'Ayoola_Menu',

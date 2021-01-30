@@ -159,7 +159,6 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
      */
 	public function filterData( &$data )
     {
-	//	var_export( $data );
 		if( $this->getParameter( 'category_page' ) )
 		{
 			$data['article_url'] = '' . $this->getParameter( 'category_page' ) . '?category=' . $data['category_name']; 
@@ -171,7 +170,6 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
      */
 	public static function sanitizeData( &$data )
     {
-	//	var_export( $data );
 		$data['not_real_post'] = true; 
 		$data['document_url'] = $data['cover_photo'];
 		$data['article_title'] = $data['category_label'] ? : $data['category_name']; 
@@ -181,7 +179,6 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
 		{
 
 			$data['total_no_of_posts'] = Application_Article_Table::getInstance()->select( null, array( 'category_name' => $data['category_name'] ) );
-	//		var_export( $data['total_no_of_posts'] );
 			$data['total_no_of_posts'] = count( $data['total_no_of_posts'] );
 			$storage->store( $data['total_no_of_posts'] );
 		}

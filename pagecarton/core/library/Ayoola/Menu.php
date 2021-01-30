@@ -794,7 +794,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 		//	So that each objects can be used for so many purposes.
 		//	E.g. One Class will be used for any object
 
-		$options = $object['class_name'];
+		$options = __CLASS__;
 		$options = new $options( array( 'no_init' => true ) + $object );
 
 		$newMenuName = 'menu_' . time();
@@ -813,7 +813,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				$options[$value['menu_name']] = $value['menu_label'];
 			}
 		}
-		else
+		elseif( method_exists( $options, 'getClassOptions' ) )
 		{
 			$options = (array) $options->getClassOptions();
 		}
