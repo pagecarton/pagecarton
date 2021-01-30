@@ -48,7 +48,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
      * @param array Where clause as array
      * @param array Select options
      */
-    public function init( Array $fieldsToFetch = null, Array $where = null, Array $options = null )
+    public function init( $fieldsToFetch = null, Array $where = null, Array $options = null )
     {
 
 		/**
@@ -99,7 +99,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
      * @param array Where clause as array
      * @param array Select options
      */
-    public function loopFiles( Array $files, Array $fieldsToFetch = null, Array $where = null, Array $options = null  )
+    public function loopFiles( Array $files, $fieldsToFetch = null, Array $where = null, Array $options = null  )
     {
 		$rows = array();
  		$totalRows = 0;
@@ -238,7 +238,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
      * @param array Where clause as array
      * @param array Select options
      */
-    public function doSelect( Array $fieldsToFetch = null, Array $where = null, Array $options = null )
+    public function doSelect( $fieldsToFetch = null, Array $where = null, Array $options = null )
     {
 		//	Calculate the total fields on the table, extended
 		$allFields = $this->query( 'FIELDLIST' );
@@ -276,25 +276,37 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			{
 				$keyCount++;
 				$key = self::getFieldKey( $field );
-				if( ! in_array( $key, $fieldsToFetch ) ){ continue; }
+                if( is_array( $fieldsToFetch ) && ! in_array( $key, $fieldsToFetch ) )
+                {
+                    continue; 
+                }
+                if( is_string( $fieldsToFetch ) && $key !== $fieldsToFetch )
+                {
+                    if( empty( $options['row_id_column'] ) || $key !== $options['row_id_column'] )
+                    {
+                        continue; 
+                    }
+                }
+                $fieldValue = null;		
+
 				foreach( $field->childNodes as $value )
 				{ 
 					if( $value instanceof DOMCDATASection )
 					{ 
-						$fields[$key] = is_string( $value->data ) ? htmlspecialchars_decode( $value->data ) : $value->data;
+						$fieldValue = is_string( $value->data ) ? htmlspecialchars_decode( $value->data ) : $value->data;
 						break; 
 					} 
 				}
 				
-				$fields[$key] = self::filterDataType( $fields[$key], $this->getTableDataTypes( $key ) );
-				$searchTerm = $fields[$key];
+				$fieldValue = self::filterDataType( $fieldValue, $this->getTableDataTypes( $key ) );
+				$searchTerm = $fieldValue;
 				$otherData = array();
 				if( ! empty( $options['key_filter_function'][$key] ) && is_callable( $options['key_filter_function'][$key] ) )
  				{
 					//	manipulate them before finally recording them
 					$filterFunction = $options['key_filter_function'][$key];
 
-					call_user_func_array( $filterFunction, array( &$fields[$key], &$otherData, &$searchTerm )  );
+					call_user_func_array( $filterFunction, array( &$fieldValue, &$otherData, &$searchTerm )  );
 
 					if( is_array( $otherData ) )
 					{
@@ -366,7 +378,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 						if( array_key_exists( $key, $where ) )
 						{
                             $keyFound[$key] = true;
-                            if( ! self::where( $key, $fields[$key], $where, $options ) )
+                            if( ! self::where( $key, $fieldValue, $where, $options ) )
                             {
                                 if( $options['where_join_operator'] === '||' )
                                 {
@@ -378,7 +390,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                                 }
                             }
 						}
-                        elseif( @$options['supplementary_data_key'] == $key && is_array( $fields[$key] ) )
+                        elseif( @$options['supplementary_data_key'] == $key && is_array( $fieldValue ) )
                         {
                             foreach( $where as $eachKeyWhere => $valueWhere )
                             {
@@ -388,10 +400,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                                     //  don't check what is going to be checked later in normal search
                                     continue;
                                 }
-                                if( array_key_exists( $eachKeyWhere, $fields[$key] ) )
+                                if( array_key_exists( $eachKeyWhere, $fieldValue ) )
                                 {
                                     $keyFound[$key] = true;
-                                    if( ! self::where( $eachKeyWhere, $fields[$key][$eachKeyWhere], $where, $options ) )
+                                    if( ! self::where( $eachKeyWhere, $fieldValue[$eachKeyWhere], $where, $options ) )
                                     {
                                         if( $options['where_join_operator'] === '||' )
                                         {
@@ -439,6 +451,17 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 					}
 					$fields = array_merge( $foreignData, $fields );
 				}
+                if( ! empty( $options['row_id_column'] ) && $key === $options['row_id_column'] )
+                {
+                    $rowId = $fieldValue; 
+                }
+
+                if( is_string( $fieldsToFetch ) && $fieldsToFetch === $key )
+                {
+                    $fields = $fieldValue;
+                    continue;
+                }
+                $fields[$key] = $fieldValue;
 
             }
             $whereX = $where;

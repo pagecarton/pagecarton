@@ -1603,24 +1603,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				case 'comments':
 					$table = Application_CommentBox_Table::getInstance();
 				break;
-			}
+            }
 			$noOfTrends = intval( $this->getParameter( 'trending' ) ) > 9 ? $this->getParameter( 'trending' ) : 100;
-			$trendingData = $table->select( null, null, array( 'limit' => $noOfTrends, 'record_search_limit' => $noOfTrends ) );
-			$trendingPost = array();
-			if( empty( $trendingData[0][$this->getIdColumn()] ) && ! empty( $trendingData[0]['article_url'] ) )
-			{
-				foreach( $trendingData as $key => $each )
-				{
-					$trendingData[$key] = Application_Article_Abstract::loadPostData( $each['article_url'] );
-					$trendingData[$key][$this->getIdColumn()] = strtolower( $trendingData[$key][$this->getIdColumn()] );
-					if( empty( $trendingData[$key][$this->getIdColumn()] ) )
-					{
-						unset( $trendingData[$key] );
-					}
-
-				}
-			}
-			$trendingPost = array_unique( array_column( $trendingData, $this->getIdColumn() ) );
+            //    var_export( $noOfTrends );
+            $trendingPost = array_values( $table->select( 'article_url', null, array( 'row_id_column' => 'article_url', 'limit' => $noOfTrends, 'record_search_limit' => $noOfTrends ) ) );
 			if( $trendingPost )
 			{
 				$whereClause[$this->getIdColumn()] = $trendingPost;

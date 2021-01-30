@@ -97,7 +97,9 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 					if( ! $this->insertDb( $values ) ){ return false; }
 					$this->setViewContent(  '' . self::__( '<p class="boxednews goodnews">Backup created successfully.</p>' ) . '', true  );  
 				break;
-			}
+            }
+            ignore_user_abort( false ); 
+           
 		}
 		catch( Exception $e )  
 		{
@@ -161,11 +163,7 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 			$c = file_get_contents( $f );
 			unlink( $f );
 			$f = Ayoola_File::putContents( $f, $c );
-		}
-		
-		//	for heavy files
-		set_time_limit( 0 );
-		ignore_user_abort( true );
+		}		
  		switch( $values['backup_type'] )
 		{
 			case 'export':

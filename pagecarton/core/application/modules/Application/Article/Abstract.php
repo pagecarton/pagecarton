@@ -669,7 +669,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				Ayoola_Page::setCurrentPageInfo( $pageInfo );
 
 				//	Log into the database 
-				self::getViewsCount( $data );
+                self::getViewsCount( $data );
 				$table = Application_Article_Views::getInstance();
 				$table->insert( array(
 										'username' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ),

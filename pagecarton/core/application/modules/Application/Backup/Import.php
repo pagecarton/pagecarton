@@ -133,7 +133,8 @@ class Application_Backup_Import extends Application_Backup_Abstract
 				$fileToUpload = $tempName;
 			//	rename( $fileToUpload, $newFilename );
 				copy( $fileToUpload, $newFilename );
-			}
+            }
+            ignore_user_abort( false ); 
 			$this->setViewContent(  '' . self::__( '<div class="goodnews">Success! "' .$information['backup_name']. '" imported.</div>' ) . '', true  );
 		}
   		catch( Exception $e )

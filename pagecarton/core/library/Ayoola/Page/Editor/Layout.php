@@ -85,24 +85,20 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      */	
     public function sourcePage( $url = null )
     {
-		set_time_limit( 0 );
+	    //	set_time_limit( 0 );
 		if( $url )
 		{ 
 			//	source for this specific url
 			$this->_dbWhereClause['url'] = $url;
         }
-    //    var_export( $this->getPageInfo() );
 		if( ! $page = $this->getPageInfo() )
 		{			
             //	Page not found, see if we can create a local copy of this page
-        //    var_export( $this->_dbWhereClause['url'] );
-        //    var_export( $this->getParameter( 'url' ) );
 			if( ! $this->_dbWhereClause['url'] )
 			{
                 if( $this->getParameter( 'url' ) )
                 {
                     $this->_dbWhereClause['url'] = $this->getParameter( 'url' );
-                    //    var_export( $this->_dbWhereClause['url'] );
                 }
 				elseif( ! $url )
 				{
@@ -159,10 +155,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$class->fakeValues = $pageToCopy;
             $class->init();
             
-            //    var_export( $class->view() );
 			if( ! $class->getForm()->getValues() || $class->getForm()->getBadnews() )
 			{
-                //    var_export( $class->getForm()->getBadnews() );
 				$this->setViewContent(  '' . self::__( '<p>A new page could not be created because: ' . array_shift( $class->getForm()->getBadnews() ) . '. Please go to <a rel="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Creator/?url=' . $this->_dbWhereClause['url'] . '">Create a fresh page at ' . $this->_dbWhereClause['url'] . '.</a></p>' ) . '', true  );
 				return false;
 			}
@@ -638,7 +632,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$replaceWith[] =   $basePlaceholder . ' ' . $newPlaceholder ;
 			$content['template'] = str_ireplace( $searchFor, $replaceWith,  $content['template'] );
         }
-    //    var_export( $content['template'] );
 		$navTag = '</nav>';
 		if( ! stripos( $content['template'], $navTag ) )
 		{
@@ -653,9 +646,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		$totalPlaceholders = count( $placeholders );
 
 		//	record remainders so we stop loosing contents if sections missing
-
 		$this->_layoutRepresentation = $content['template'];
-
         $pageContent = array();  
         if( $this->isSaveMode() )
         {
@@ -665,7 +656,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
             }
         }
         $pageUpdateInfo = array();
-
 		foreach( $placeholders as $section => $v )
 		{
 			$section = strtolower( $section );
@@ -676,7 +666,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	We are working on two files
 			$sectionContent['template'] = null;
             $sectionContent['include'] = null;
-            //    method_exists(  )
             if( stripos( $page['url'], '/layout/' ) === 0 )
             {
                 $siteObjectName = '_sitePageWidget_' . $section;
@@ -742,7 +731,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 						}
 						//	compatibility
                         $numberedSectionName = $section . $i;
-                        //    var_export( $values[$numberedSectionName] );
 						if( ! isset( $values[$numberedSectionName] ) )
 						{
                             preg_match( '/{@@@' . $section . '([\S\s]*)' . $section . '@@@}/i', $whereToGetPlaceholders, $sectionPlaceholder );
@@ -881,8 +869,14 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                         //  widget may want to perform a one-time filter onsubmit
                         $eachObject['class_name']::filterParameters( $parameters );
 
-						$parametersToSave = $parameters + $eachObject;
-                        Ayoola_Abstract_Viewable::saveWidget( $eachObject['class_name'], $parametersToSave, $page['url'], $section );
+                        $parametersToSave = $parameters + $eachObject;
+                        
+                        //  takes time to do this
+                        //  so don't do this on autosave
+                        if( ! $this->isAutoSaveMode() )
+                        {
+                            Ayoola_Abstract_Viewable::saveWidget( $eachObject['class_name'], $parametersToSave, $page['url'], $section );
+                        }
 
                         if( empty( $parameters['pagewidget_id'] ) || $parameters['pagewidget_id'] !== $parametersToSave['pagewidget_id'] )
                         {
@@ -1023,10 +1017,12 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		if( $this->isSaveMode() ) //	create template for POSTed data
 		{
 			//	Clear our the orphan placeholders
-			$dataToSave = static::safe_json_encode( $values ? : $sectionalValues );
+            $dataToSave = static::safe_json_encode( $values ? : $sectionalValues );
+            
 			//	Get new relative paths
 			$rPaths = Ayoola_Page::getPagePaths( $page['url'] );
-			$rPaths['data-backup'] = self::getPageContentsBackupLocation( $page['url'] ) . DS . time();
+            $rPaths['data-backup'] = self::getPageContentsBackupLocation( $page['url'] ) . DS . time();
+            
 			//	change the place themes are being saved.
 			if( stripos( $page['url'], '/layout/' ) === 0 )
 			{
@@ -1120,18 +1116,31 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$rPaths['data_page_info'] ? Ayoola_File::putContents( $rPaths['data_page_info'], static::safe_json_encode( $pageUpdateInfo ) ) : null;
 
 			//	back up current data and not previous one
-            //	if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  
-		    //	if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  
-            //	if( $currentData = @file_get_contents( $rPaths['data_json'] ) )  
             if( $dataToSave != $previousData )
             {
                 $rPaths['data-backup'] ? Ayoola_File::putContents( $rPaths['data-backup'], $dataToSave ) : null;
             }
 			
 
+            if( 
+                ( stripos( $page['url'], '/default-layout' ) === 0 ) 
+                && empty( $this->_parameter['theme_variant'] ) 
+            )     
+			{
+
+                //	autosanitize pages
+                unset($_REQUEST['pc_page_editor_layout_name']);
+                unset($_GET['pc_page_editor_layout_name']);
+                $class = new Ayoola_Page_Editor_Sanitize();
+
+                //  don't put theme name
+                //  so it sanitize just normal pages
+                //  so it doesn't cause infinite loop
+                $ex = $class->sanitize();
+            }
 			//	Sanitize theme pages!
 			if( 
-                ( stripos( $page['url'], '/layout/' ) === 0 || stripos( $page['url'], '/default-layout' ) === 0 ) 
+                ( stripos( $page['url'], '/layout/' ) === 0 ) 
                 && empty( $this->_parameter['theme_variant'] ) 
             )     
 			{
@@ -1162,8 +1171,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					{
 
 						Ayoola_Application::reset( array( 'path' => $site['directory'] ) );
-						Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName ); 
-
+                        //  Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName ); 
+                        $class = new Ayoola_Page_Editor_Sanitize(); 
+                        $ex = $class->sanitize( $themeName ); 
 					}
 					Ayoola_Application::reset();
 				}
@@ -1182,7 +1192,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 							continue;
 						}
 
-						Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName );  
+                        //  Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName ); 
+                        $class = new Ayoola_Page_Editor_Sanitize(); 
+                        $ex = $class->sanitize( $themeName ); 
 
 					}
 					Ayoola_Application::reset();

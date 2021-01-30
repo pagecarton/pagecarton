@@ -262,7 +262,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 
             //    exit( __LINE__ );
             set_time_limit(86400); //    We may need time to update a very large table
-            //    ignore_user_abort( true );
             foreach( $values as $key => $each ) 
             {
                 //    $this->insert( $each, array( 'record_row_id' => $each[$this->getTableName() . '_id'] ) );
@@ -373,7 +372,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      * @param Array The Criteria
      * @return Array
      */
-    public function select(array $fieldsToSelect = null, array $where = null, array $options = null)
+    public function select( $fieldsToSelect = null, array $where = null, array $options = null)
     {
         try
         {
@@ -400,7 +399,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
      * @param Array The Criteria
      * @return Array
      */
-    public function selectOne(array $fieldsToSelect = null, array $where = null, array $options = null)
+    public function selectOne( $fieldsToSelect = null, array $where = null, array $options = null)
     {
         $options['limit'] = 1;
         $data             = $this->select($fieldsToSelect, $where, $options);

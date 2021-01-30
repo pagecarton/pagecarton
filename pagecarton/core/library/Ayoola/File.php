@@ -205,7 +205,6 @@ Content Size: ' . strlen( $data ) . '
             if( empty( $x[1] ) )
             {
                 unlink( $path );
-            //    $trashDir = CACHE_DIR . DS . '.trash';
             }
             $newDir  = $x[1] ? : $x[0];  
             $newPath = $trashDir . $newDir . DS . time() . basename( $newDir );
@@ -248,10 +247,8 @@ Content Size: ' . strlen( $data ) . '
         $class = get_called_class();
         if( empty( self::$_instance[$class] ) )
         { 
-        //    var_export( __LINE__ );
             self::$_instance[$class] = new $class(); 
         }
-    //    var_export( $class );
 		return self::$_instance[$class];
     } 	
 	

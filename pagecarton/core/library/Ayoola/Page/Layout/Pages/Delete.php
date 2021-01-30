@@ -55,8 +55,6 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
     //	var_export( $themeDataDir );
         if( ! is_file( $themePageFile ) && is_dir( $themeDataDir ) )
         {
-        //	var_export( $themeDataDir );
-        //    Ayoola_Doc::deleteDirectoryPlusContent( $themeDataDir );
 
             // don't delete backup data
             //  just delete current files

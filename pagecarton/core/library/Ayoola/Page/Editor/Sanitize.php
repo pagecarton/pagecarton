@@ -73,8 +73,13 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
      */	
     public function sanitize( $themeName = null ) 
     {
-        Ayoola_Application::$appNamespace .= $themeName;
-		ignore_user_abort();
+        $id = $themeName . Ayoola_Application::getApplicationNameSpace();
+        if( ! empty( self::$_refreshed[$id] ) )
+		{
+			return false;
+		}
+        self::$_refreshed[$id] = true;
+
 		$pages = new Ayoola_Page();
 		$where = array();		
 		if( $themeName )
@@ -124,34 +129,37 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 
 		//	let normal pages go first so that 
 		//	theres error where old page was being restored after theme update
-		//	let's see if this solves it.
-		$pages = $pages->getDbTable()->select( null, $where );
-		$pages = array_merge( $pages, self::$defaultPages );
-        $done = array();
-		foreach( $pages as $page )    
-		{
-			$page = is_string( $page ) ? $page : $page['url'];
-			if( stripos( $page, '/layout/' ) === 0 || stripos( $page, '/default-layout' ) === 0 || ! empty( $done[$page] ) )
-			{
-				//	dont cause unfinite loop by updating theme when a theme is being sanitized
-				continue;
-            }
-                //   var_export( $page );
-            $done[$page] = true;
-			//	sanitize now on theme level
-			$this->_parameter['page_editor_layout_name'] = null;
-
-			//	old theme page needs to be deletee
-			$pageThemeFileUrl = $page;
-			if( $pageThemeFileUrl == '/' )
-			{
-				$pageThemeFileUrl = '/index';  
-			}
-
-        	//	let's remove dangling theme pages not completely deleted
-			Ayoola_Page_Layout_Pages_Delete::deleteThemePageSupplementaryFiles( $pageThemeFileUrl, $themeName );
-			$this->refresh( $page );   
-		}
+        //	let's see if this solves it.
+        if( ! $themeName || $themeName === Ayoola_Page_Editor_Layout::getDefaultLayout() )
+        {
+            $pages = $pages->getDbTable()->select( null, $where );
+            $pages = array_merge( $pages, self::$defaultPages );
+            $done = array();
+            foreach( $pages as $page )    
+            {
+                $page = is_string( $page ) ? $page : $page['url'];
+                if( stripos( $page, '/layout/' ) === 0 || stripos( $page, '/default-layout' ) === 0 || ! empty( $done[$page] ) )
+                {
+                    //	dont cause unfinite loop by updating theme when a theme is being sanitized
+                    continue;
+                }
+                    //   var_export( $page );
+                $done[$page] = true;
+                //	sanitize now on theme level
+                $this->_parameter['page_editor_layout_name'] = null;
+    
+                //	old theme page needs to be deletee
+                $pageThemeFileUrl = $page;
+                if( $pageThemeFileUrl == '/' )
+                {
+                    $pageThemeFileUrl = '/index';  
+                }
+    
+                //	let's remove dangling theme pages not completely deleted
+                Ayoola_Page_Layout_Pages_Delete::deleteThemePageSupplementaryFiles( $pageThemeFileUrl, $themeName );
+                $this->refresh( $page );   
+            }            
+        }
 		return true;
     }
 		
@@ -163,15 +171,18 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
      */	
     public function refresh( $page, $themeName = null ) 
     {
-        if( stripos( $page, '/layout/' ) === 0 || stripos( $page, '/default-layout' ) === 0 )     
-        {
-            return false;
-        }
         if( ! empty( $themeName ) )
 		{
 			$this->_parameter['page_editor_layout_name'] = $themeName;
         }
-        elseif( in_array( $page, self::$defaultPages ) )
+        $id = $themeName . $page . Ayoola_Application::getApplicationNameSpace();
+		if( ! empty( self::$_refreshed[$id] ) )
+		{
+			return false;
+		}
+        self::$_refreshed[$id] = true;
+
+        if( in_array( $page, self::$defaultPages ) )
         {
             //	if its still a system page, delete and create again
             //	this is causing problems deleting the home page
@@ -185,10 +196,6 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
             }
             if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
             {
-                //$parameters = array( 
-                //                        'fake_values' => array( 'auto_submit' => true ),
-                //                        'url' => $page,
-                //);
 
                 //  Why are we deleting sef?
                 //  $class = new Ayoola_Page_Delete( $parameters );
@@ -209,12 +216,11 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                 }
             }
         }
-		$id = $page . Ayoola_Application::getApplicationNameSpace();
-		if( ! empty( static::$_refreshed[$id] ) )
-		{
-			return false;
-		}
-        static::$_refreshed[$id] = true;
+        echo( $page );
+        echo( "\r\n" );
+        echo Ayoola_Application::getApplicationNameSpace();
+        echo( "\r\n" );
+
         $this->setParameter( array( 'url' => $page, 'exec_scope' => 'refresh-' . $themeName ) );
 		$this->setPageInfo( array( 'url' => $page ) );
 		$this->setPagePaths();

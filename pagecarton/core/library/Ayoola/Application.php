@@ -258,7 +258,7 @@ class Ayoola_Application
      */
 	public static function getApplicationNameSpace()
     {
-		$appPath = md5( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . self::$appNamespace );
+		$appPath = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . self::$appNamespace;
 		$name = Ayoola_Application::getPathPrefix() . DS . $appPath;
 		return $name;
 	}
