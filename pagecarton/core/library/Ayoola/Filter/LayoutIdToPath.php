@@ -63,7 +63,17 @@
             $themeDirV = 'documents/layout/' . $themeName . '/theme/variant/auto/' . $type . '';
 			if( $paths = Ayoola_Loader::getValidIncludePaths( $themeDir, ! empty( $options['always_blacklist'] ) ? $options : null ) )
 			{
-				$fileC = array_merge( $fileC, $paths );
+                if( $type === 'template' )
+                {
+                    $path = Ayoola_Loader::getFullPath( $themeDir, ! empty( $options['always_blacklist'] ) ? $options : null );
+                    $fileC[] = $path;
+                }
+                else
+                {
+				    $fileC = array_merge( $fileC, $paths );
+                }
+
+
             }
 			elseif( $path = Ayoola_Loader::getFullPath( $themeDir, ! empty( $options['always_blacklist'] ) ? $options : null ) )
 			{
@@ -73,7 +83,6 @@
             }
             elseif( $path = Ayoola_Loader::getFullPath( $themeDirV, ! empty( $options['always_blacklist'] ) ? $options : null ) )
             {
-            //    var_export( $path );
 				$fileC[] = $path;
             }
             $themeName = strtolower( $themeName );
@@ -85,6 +94,7 @@
 			{
 				$fileC[] = $path;
             }
+
 			if( $fileC )
 			{
 				if( $type === 'include' && ! empty( $options['multiple'] ) )
@@ -227,9 +237,10 @@
                             if
                             ( 
                                 \$x_{$time} = {$myClassName}
-                                ::getThemeIncludeFile( '{$themeName}', array( 'path_blacklist' => '{$myPath}' ) ) 
+                                ::getThemeIncludeFile( '{$themeName}', array( 'path_blacklist' => '{$myPath}', 'always_blacklist' => true ) ) 
                             )
                             {
+                                //    PageCarton_Widget::v( '{$myPath}' );
                                 //    PageCarton_Widget::v( \$x_{$time} );
                                 include_once \$x_{$time};
                             }
@@ -238,7 +249,7 @@
                     //    PageCarton_Widget::v( $temIncludeFile );
                     //    echo "\r\n";
                     //    PageCarton_Widget::v( $templateFile );
-                   //     echo "\r\n";
+                     //   echo "\r\n";
         
                         $value = $temIncludeFile;     
                         return $value;
