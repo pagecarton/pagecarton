@@ -1307,6 +1307,7 @@ class Ayoola_Application
             $autoName = 'auto';
             if( ! $rPath = Ayoola_Loader::getFullPath( $rPath ) )
             {
+
                 $rPath = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '/template';
                 $rPath = Ayoola_Loader::getFullPath( $rPath );
                 //    var_export( $rPath );
@@ -1349,14 +1350,15 @@ class Ayoola_Application
 				return false;
             }
             $myPageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $realPageFile;
-        //    var_export( is_file( $myPageFile ));
-        //    var_export( ( $options ));
 
 
             if( empty( $options['auto_init_theme_page'] ) && ! is_file( $myPageFile ) )
             {
                 return false;
             }
+        //    var_export( is_file( $myPageFile ));
+        //    var_export( ( $options ));
+
 
 			$pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 			$pagePathsX['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
@@ -1441,7 +1443,10 @@ class Ayoola_Application
 		};
 		do
 		{
-			if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
+            //  leaving this one have a way of allowing home page ignore 
+            //  widgets-embedded theme page
+            //  does not allow autogeneration of theme page  for index
+		//	if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
 			{
 				if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
 				{
