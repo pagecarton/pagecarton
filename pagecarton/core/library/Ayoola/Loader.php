@@ -75,7 +75,7 @@ class Ayoola_Loader
      * @param string Filename
      * @return array Array Containing The Full Paths of Available Files
      */
-    public static function getValidIncludePaths($relativePath, array $options = array())
+    public static function getValidIncludePaths($relativePath, array $options = null)
     {
         $pathsId = md5($relativePath . get_include_path() . Ayoola_Application::getPathPrefix() . json_encode($options));
         if (!empty(self::$_validIncludePaths[$pathsId]) && empty($options['refresh_list'])) {

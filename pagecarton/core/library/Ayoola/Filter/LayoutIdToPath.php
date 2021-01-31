@@ -61,13 +61,9 @@
             //	use default designed layout if available
             $themeDir = 'documents/layout/' . $themeName . '/theme/' . $type . '';
             $themeDirV = 'documents/layout/' . $themeName . '/theme/variant/auto/' . $type . '';
-        //    var_export( $themeDir );
-        //    var_export( $options );
-        //    var_export( Ayoola_Loader::getFullPath( $themeDir ) );
-			if( $path = Ayoola_Loader::getFullPath( $themeDir, ! empty( $options['always_blacklist'] ) ? $options : null ) )
+			if( $paths = Ayoola_Loader::getValidIncludePaths( $themeDir, ! empty( $options['always_blacklist'] ) ? $options : null ) )
 			{
-				$fileC[] = $path;
-
+				$fileC = array_merge( $fileC, $paths );
             }
 			elseif( $path = Ayoola_Loader::getFullPath( $themeDir, ! empty( $options['always_blacklist'] ) ? $options : null ) )
 			{
@@ -218,6 +214,7 @@
                 //    var_export( $myPath );
                 //    var_export( $templateFile );
 
+    
                     //	use global temp folder because of progenies
                     $temIncludeFile = tempnam( CACHE_DIR, __CLASS__ );           
                     if( is_file( $templateFile ) )
@@ -233,11 +230,16 @@
                                 ::getThemeIncludeFile( '{$themeName}', array( 'path_blacklist' => '{$myPath}' ) ) 
                             )
                             {
+                                //    PageCarton_Widget::v( \$x_{$time} );
                                 include_once \$x_{$time};
                             }
                         ?>
                         " . ' ' . file_get_contents( $templateFile ) );      
-
+                    //    PageCarton_Widget::v( $temIncludeFile );
+                    //    echo "\r\n";
+                    //    PageCarton_Widget::v( $templateFile );
+                   //     echo "\r\n";
+        
                         $value = $temIncludeFile;     
                         return $value;
                     }    
