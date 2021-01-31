@@ -1335,6 +1335,7 @@ class Ayoola_Application
     
             }
 
+
             //  now try to locate individual theme page
 			$pageThemeFileUrl = $uri;
 			if( $pageThemeFileUrl == '/' )
@@ -1346,7 +1347,17 @@ class Ayoola_Application
 			if( ! is_file( $pageFile ) )
 			{
 				return false;
-			}
+            }
+            $myPageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $realPageFile;
+        //    var_export( is_file( $myPageFile ));
+        //    var_export( ( $options ));
+
+
+            if( empty( $options['auto_init_theme_page'] ) && ! is_file( $myPageFile ) )
+            {
+                return false;
+            }
+
 			$pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
 			$pagePathsX['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 
@@ -1430,7 +1441,7 @@ class Ayoola_Application
 		};
 		do
 		{
-		//	if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
+			if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
 			{
 				if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
 				{
@@ -1551,7 +1562,7 @@ class Ayoola_Application
 		date_default_timezone_set( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'time_zone' ) ? : 'UTC' );
 
 		//	Send content type to avoid mozilla reloading when theres and error message
-		header("Content-Type: text/html; charset=utf-8");
+        header("Content-Type: text/html; charset=utf-8");
 
 		include_once $pagePaths['include'];
 
