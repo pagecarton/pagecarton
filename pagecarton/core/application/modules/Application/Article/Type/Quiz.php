@@ -149,7 +149,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 						$emailInfo['from'] = 'no-reply@' . Ayoola_Page::getDefaultDomain();
 						@self::sendMail( $emailInfo );
 						
-						//	Status update
+/* 						//	Status update
 						$class = new Application_Status_Update();
 						$status = array( 
 											'status' => ( 'Scored ' . $dataToSend['quiz_percentage'] . '% in <a title="Click here to view the online test questions and answers" href="' . $data['article_url'] . '">' . $data['article_title'] . '.</a>' ), 
@@ -161,7 +161,8 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 						$parameters = array( 'fake_values' => $status );
 						$class->setParameter( $parameters );  
 						$class->fakeValues = $status; 
-						$class->init();
+                        $class->init();
+                         */
 					}
 					$this->_objectData = $dataToSend;
 			
@@ -177,7 +178,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 			)
 			{
 				
-				return $this->setViewContent(  '' . self::__( '<p class="badnews">The requested article was not found on the server. Please check the URL and try again. ' . self::getQuickLink() . '</p>' ) . '', true  );
+				return $this->setViewContent(  '' . self::__( '<p class="badnews">The requested article was not found on the server. Please check the URL and try again.</p>' ) . '', true  );
 			}
 			
 			//	Client side

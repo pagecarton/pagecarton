@@ -2567,7 +2567,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                     $html = str_ireplace( $contentToClear, '', $html );
 
                 }
-                if( $contentToClear = $this->_parameter['content_to_clear_internal'] )
+                if( $contentToClear = @$this->_parameter['content_to_clear_internal'] )
                 {
                     if( ! is_array( $contentToClear ) )
                     $contentToClear = array_map( 'trim', explode( "\n", $contentToClear ) );

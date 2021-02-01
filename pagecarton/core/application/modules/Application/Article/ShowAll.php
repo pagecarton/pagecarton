@@ -304,7 +304,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
 		}
 		
-		$this->setViewContent(  '' . self::__( '<p style="clear: both;" class="pc-notify-normal pc_no_post_to_show pc_give_space_top_bottom"> ' . $message . ' ' . self::getQuickLink() . '</p>' ) . '', true  );
+		$this->setViewContent(  '' . self::__( '<p style="clear: both;" class="pc-notify-normal pc_no_post_to_show pc_give_space_top_bottom"> ' . $message . '</p>' ) . '', true  );
 
 		
 		//	Check settings
@@ -1321,7 +1321,6 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_xml .= '' . self::getDefaultPostView( $data ) . '';
 			
 			//	useful in the templates
-			$data['article_quick_links'] = self::getQuickLink( $data );
 			$data['comments_count'] = intval( $data['comments_count'] ) ? : '0';
 			$data['category_html'] = $categoryTextRaw;
 			$data['record_count'] = $i + 1; 

@@ -80,14 +80,13 @@ class Application_Share extends Application_Share_Abstract
         //    var_export( $_SERVER['HTTP_APPLICATION_MODE'] );
 			if( $url && @$_SERVER['HTTP_APPLICATION_MODE'] == 'Ayoola_Object_Play' )
 			{ 
+                $url = '/' . trim( $url, '/' );
 				$this->getDbTable()->insert( $values );
 				header( 'Location: https://www.addtoany.com/share#url=' . htmlentities( Ayoola_Page::getHomePageUrl() . $url ) . '&title=' . htmlentities( $title ) . '' );
 				exit();
 			}
 			else
 			{
-	//			$currentUrl = $this->getParameter( 'url' ) ? : ( rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/' );
-		//         var_export( $currentUrl );
 				if( $articleUrl = $this->getParameter( 'article_url' ) ? : ( Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'] ) )
 				{
 					$currentUrl = '';

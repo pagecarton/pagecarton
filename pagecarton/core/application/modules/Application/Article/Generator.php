@@ -97,13 +97,7 @@ class Application_Article_Generator extends Application_Article_Abstract
 				break;
 			}
 			
-		//	$this->setViewContent( self::getQuickLink() );
-		//	$this->setViewContent( self::__( '<script src="/js/objects/tinymce/tinymce.min.js"></script>' ) );
-/* 			if( empty( $values ) )
-			{
-				return false;
-			}
- */			
+		
 			
 		}
 		catch( Application_Article_Exception $e )

@@ -119,7 +119,7 @@ class Ayoola_File
             $lockDiskFile = 'write-protect';
 
             $er = strlen( $data );
-            if( self::$_writtenFiles[$path] !=  $er)
+            if( isset( self::$_writtenFiles[$path] ) && self::$_writtenFiles[$path] != $er)
             {
                 self::$_writtenFiles[$path] = $er;
             }

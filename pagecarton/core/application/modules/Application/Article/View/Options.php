@@ -37,15 +37,12 @@ class Application_Article_View_Options extends Application_Article_View_Abstract
 		try
 		{
 			if( ! $data = self::getArticleInfo() ){ return; }
-		//	var_export( Ayoola_Page::getCurrentPageInfo( 'title' ) );
-			$this->setViewContent( self::getQuickLink( $data ), true );
+			$this->setViewContent( '<p style="display:flex;   " class="pc-btn-parent">' . self::getQuickPostLinks( $data ) . '</p>', true );
 		}
 		catch( Exception $e )
 		{ 
-		//	$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );
 			return $this->setViewContent( self::__( '<p class="badnews">Error with article package.</p>' ) ); 
 		}
-	//	var_export( $this->_xml );
     } 
 	
 	// END OF CLASS

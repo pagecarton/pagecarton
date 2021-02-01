@@ -994,7 +994,7 @@ class Ayoola_Application
                         if( in_array( 'user_subdomains', $domainOptions ) )
                         {
                             $parentDomainOptions = self::getDomainSettings( 'parent' );
-                            $urlY = 'http://' . $nameForModule . '.' . ( $parentDomainOptions['domain_name'] ? : self::getDomainSettings( 'domain_name' ) );
+                            $urlY = 'http://' . $nameForModule . '.' . ( @$parentDomainOptions['domain_name'] ? : self::getDomainSettings( 'domain_name' ) );
                             $urlY = self::appendCurrentQueryStrings( $urlY ); 
                             header( 'Location: ' . $urlY );
                             exit();
@@ -1566,8 +1566,11 @@ class Ayoola_Application
 		//	Set TimeZone
 		date_default_timezone_set( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'time_zone' ) ? : 'UTC' );
 
-		//	Send content type to avoid mozilla reloading when theres and error message
-        header("Content-Type: text/html; charset=utf-8");
+        //	Send content type to avoid mozilla reloading when theres and error message
+        if( ! headers_sent() )
+        {
+            header("Content-Type: text/html; charset=utf-8");
+        }
 
 		include_once $pagePaths['include'];
 

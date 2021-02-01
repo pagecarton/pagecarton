@@ -101,22 +101,11 @@ class Application_Article_Editor extends Application_Article_Abstract
 	
 			// Share
 			$fullUrl = 'http://' . Ayoola_Page::getDefaultDomain() . '' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '';
-			$this->setViewContent(  '<div class="goodnews">' . self::__( 'Post successfully saved.' ) . '</div>', true  );
+			$this->setViewContent(  '<div class="goodnews pc_give_space_top_bottom">' . self::__( 'Post successfully saved.' ) . '</div>', true  );
 			$this->_objectData['article_url'] = $values['article_url'];  
-            $this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">' . sprintf( self::__( 'View  %s' ), $joinedType ) . '</a>'  );
-            
-            $eachPostTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] );
-            if( $eachPostTypeInfo['article_type'] === 'post-list' || in_array( 'post-list', $eachPostTypeInfo['post_type_options'] ) )
-            {
-                $this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_PostList_Sort?article_url=' . $values['article_url'] . '">' . sprintf( self::__( 'Sort list' ) ) . '</a>'  );
 
-            }
-            else
-            {
-                $this->setViewContent(  '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_PostList_Add?article_url=' . $values['article_url'] . '">' . sprintf( self::__( 'Add post to list' ) ) . '</a>'  );
-
-            }
-		}
+            $this->setViewContent( '<div class="pc_give_space_top_bottom pc-btn-parent">' . self::getQuickPostLinks( $values ) . '</div>' );
+        }
 		catch( Application_Article_Exception $e )
 		{ 
 			$this->getForm()->oneFieldSetAtATime = false;

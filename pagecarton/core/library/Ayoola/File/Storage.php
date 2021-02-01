@@ -176,7 +176,7 @@ class Ayoola_File_Storage extends Ayoola_File
         }
 
 
-        if( null !== self::$_memCache[$path] )
+        if( isset( self::$_memCache[$path] ) )
         {
             return self::$_memCache[$path];
         }

@@ -602,6 +602,12 @@ pc_full_width {
   max-width: 100%;
 }
 
+.pc-btn-parent {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
 .pc-btn-parent a,
 .pc-btn,
 .pc-element-like-btn,
@@ -615,7 +621,7 @@ pc_full_width {
   font-size: 12px;
   text-decoration: none;
   cursor: pointer;
-  flex-basis: 25%;
+  flex-basis: 33.33%;
   display: inline-block;
 }
 

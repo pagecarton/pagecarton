@@ -309,7 +309,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
     {  
 
 	}
-	
+		
     /**
      * returns the article folder
      * 
@@ -347,7 +347,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public static function updateProfile( $values )
     {
 
-		if( $values['profile_url'] )
+/* 		if( $values['profile_url'] )
 		{
 			//	Let's save some info into the owners account
 			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $values['profile_url'] ) )
@@ -371,7 +371,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			Application_Profile_Abstract::saveProfile( $profileInfo );  
 
 		}
-	}
+ */	}
 	
     /**
      * Save the article
@@ -406,13 +406,13 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 		$values['file_size'] = intval( strlen( var_export( $values, true ) ) );
 		
-		$validator = new Ayoola_Validator_UserRestrictions();
+/* 		$validator = new Ayoola_Validator_UserRestrictions();
 		$validator->username = $values['username'];
 		if( ! $validator->validate( null ) )
 		{
 			throw new Application_Article_Exception( $validator->getBadnews() );
 		}
-		self::updateProfile( $values );
+ */		//  self::updateProfile( $values );
 		if( is_file( self::getFolder() . $values['article_url'] ) )
 		{
 			//	Back up the file before replacing it. 
@@ -440,6 +440,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
         {
             $values['file_size'] = intval( filesize( @$values['download_path'] ) );
         }
+
         $values['article_modified_date'] = time();
         
         //	we now using json
@@ -713,8 +714,45 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      * Returns Quick link for article
      * 
      */
-	public function getQuickLink( array $data = null )
+	public function getQuickPostLinks( array $values = null )
     {
+        $links = '';
+        if (self::isAllowedToView($values)) 
+        {
+            $eachPostTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo($values['article_type']);
+
+            $links .= '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">' . sprintf(self::__('View  %s'), $eachPostTypeInfo['post_type']) . '<i class="fa fa-eye pc_give_space"></i></a>';
+            
+
+            $links .= '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Creator?article_type=' . $values['article_type'] . '">' . sprintf(self::__('Create new %s post'), $eachPostTypeInfo['post_type']) . '<i class="fa fa-plus pc_give_space"></i></a>';
+            $links .= '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Share?article_url=' . $values['article_url'] . '">' . sprintf(self::__('Share %s '), $eachPostTypeInfo['post_type']) . '<i class="fa fa-share pc_give_space"></i><i class="fa fa-facebook pc_give_space"></i><i class="fa fa-instagram pc_give_space"></i><i class="fa fa-twitter pc_give_space"></i><i class="fa fa-whatsapp pc_give_space"></i></a>';
+
+            if (! empty($_REQUEST['post_list'])) {
+                $post = self::loadPostData($_REQUEST['post_list']);
+                if (! in_array($values['article_url'], $post['post_list'])) {
+                    $post['post_list'][] = $values['article_url'];
+                    self::saveArticle($post);
+                    $links .= '' . sprintf(self::__('%s added to %s'), '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">' . $values['article_title'] . '</a>', '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $post['article_url'] . '">' . $post['article_title'] . '</a>') . '';
+                }
+            } elseif ($eachPostTypeInfo['article_type'] === 'post-list' || in_array('post-list', $eachPostTypeInfo['post_type_options'])) {
+                $links .= '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_PostList_Sort?article_url=' . $values['article_url'] . '">' . sprintf(self::__('Sort %s'), $eachPostTypeInfo['post_type']) . '<i class="fa fa-sort pc_give_space"></i></a>';
+            } else {
+                $links .= '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_PostList_Add?article_url=' . $values['article_url'] . '">' . sprintf(self::__('Add this %s to a list'), $eachPostTypeInfo['post_type']) . '<i class="fa fa-plus pc_give_space"></i></a>';
+            }
+
+            if (self::isAllowedToEdit($values)) {
+                $links .= '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Editor?article_url=' . $values['article_url'] . '">' . sprintf(self::__('Edit %s'), $eachPostTypeInfo['post_type']) . '<i class="fa fa-edit pc_give_space"></i></a>';
+
+                $links .= '<a class="pc-btn badnews" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Delete?article_url=' . $values['article_url'] . '">' . sprintf(self::__('Delete %s'), $eachPostTypeInfo['post_type']) . '<i class="fa fa-trash pc_give_space"></i></a>';
+            }
+
+
+            if (Ayoola_Page::getPreviousUrl()) {
+                $links .= '<a class="pc-btn" href="' . Ayoola_Page::getPreviousUrl() . '"><i class="fa fa-chevron-left pc_give_space"></i>' . sprintf(self::__('Go Back')) . '</a>';
+            }
+        }
+        return $links;
+
     } 
 	
     /**
@@ -847,7 +885,9 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 		
     /**
+     * Returns form for quiz post questions
      * 
+     * @return Ayoola_Form
      * 
      */
 	public static function quizQuestions( $values, $groupIds = null, $j = null )
@@ -1083,7 +1123,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$html .= '</ul>';
 
 		return $html;
-    } 
+    }
 	
     /**
      * Returns an HTML to display footer for messages

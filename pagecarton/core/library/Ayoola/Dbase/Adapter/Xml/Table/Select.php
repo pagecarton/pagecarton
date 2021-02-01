@@ -380,7 +380,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                             $keyFound[$key] = true;
                             if( ! self::where( $key, $fieldValue, $where, $options ) )
                             {
-                                if( $options['where_join_operator'] === '||' )
+                                if( isset( $options['where_join_operator'] ) && $options['where_join_operator'] === '||' )
                                 {
                                     $whereNotFound[] = $key;
                                 }
