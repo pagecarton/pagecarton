@@ -454,6 +454,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                 if( ! empty( $options['row_id_column'] ) && $key === $options['row_id_column'] )
                 {
                     $rowId = $fieldValue; 
+                    if( isset( $rows[$rowId] ) )
+                    {
+                        break;
+                    }
                 }
 
                 if( is_string( $fieldsToFetch ) && $fieldsToFetch === $key )

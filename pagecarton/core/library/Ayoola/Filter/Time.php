@@ -47,6 +47,13 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
      * @var string
      */
 	public $prefix = 'ago';
+	
+    /**
+     * 
+     *
+     * @var array
+     */
+	public $timeSegments = array();
 
     /**
      * Prefix to use for the filtered value
@@ -92,7 +99,7 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
                     $this->prefix = $this->futurePrefix;
                     $timeDifference = -$timeDifference;
                 }
-                $time = self::splitSeconds( $timeDifference, $this->precision );
+                $time = $this->splitSeconds( $timeDifference, $this->precision );
                 $output = '%s ' . $this->prefix;
                 $output = PageCarton_Widget::__( $output );
                 $output = sprintf( $output, $time );
@@ -107,36 +114,36 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
      * @param int Seconds to evaluate
      * @return array
      */
-    public static function splitSeconds( $seconds, $precision = 1 )
+    public function splitSeconds( $seconds, $precision = 1 )
     {
-	//	var_export( $value );
-	//	var_export( $timeDifference );
-   // 	switch( $settings['mode'] )
-		{
-		//	case 'gm':
+        $timeSegments = array( 'secs', 'mins', 'hrs', 'days', 'wks', 'months', 'yrs' );
+        krsort( $timeSegments );
+        $time = null;
+        $counter = 0;
+        foreach( $timeSegments as $each )
+        {
+            list( $noOfSegment, $remSec ) = self::getTimeSegment( $seconds, $each );
+            $seconds = $remSec;
+            if( $remSec === 0 ){ break; }
+            if( $noOfSegment == 0 ){ continue; }
+            if( $noOfSegment == 1 ){ $each = rtrim( $each, 's' ); }
+            if( isset( $this->timeSegments[$each] ) )
+            {
+                $each = $this->timeSegments[$each];
+            }
+            else
+            {
+                $each = ' ' . $each . ' ';
 
-	//		default:
-			$timeSegments = array( 'secs', 'mins', 'hrs', 'days', 'wks', 'months', 'yrs' );
-			krsort( $timeSegments );
-			$time = null;
-			$counter = 0;
-			foreach( $timeSegments as $each )
-			{
-				list( $noOfSegment, $remSec ) = self::getTimeSegment( $seconds, $each );
-				$seconds = $remSec;
-				if( $remSec === 0 ){ break; }
-				if( $noOfSegment == 0 ){ continue; }
-				if( $noOfSegment == 1 ){ $each = rtrim( $each, 's' ); }
-                $output = '%d ' . $each . ' ';
-                $output = PageCarton_Widget::__( $output );
-                $output = sprintf( $output, $noOfSegment );
-				
-				$time .= $output;
-//				$time .= $noOfSegment . ' ' . $each . ' ';
-				$counter++;
-				if( $counter >= $precision ){ break; }
-			}
-		}
+            }
+            $output = '%d' . $each . '';
+            $output = PageCarton_Widget::__( $output );
+            $output = sprintf( $output, $noOfSegment );
+            
+            $time .= $output;
+            $counter++;
+            if( $counter >= $precision ){ break; }
+        }
 		return trim( $time );
     } 
 
