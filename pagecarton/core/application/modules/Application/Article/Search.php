@@ -71,8 +71,6 @@ class Application_Article_Search extends PageCarton_Widget
             $class->init() ;
             
             $response = $class->view();
-             //   var_export( $parameters );
-            //   var_export( $response );
             if( empty( $_GET['raw_response'] ) )
             {
                 $ref = array();

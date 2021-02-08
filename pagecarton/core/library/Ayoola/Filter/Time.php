@@ -99,7 +99,7 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
                     $this->prefix = $this->futurePrefix;
                     $timeDifference = -$timeDifference;
                 }
-                $time = $this->splitSeconds( $timeDifference, $this->precision );
+                $time = self::splitSeconds( $timeDifference, $this->precision, $this->timeSegments );
                 $output = '%s ' . $this->prefix;
                 $output = PageCarton_Widget::__( $output );
                 $output = sprintf( $output, $time );
@@ -114,7 +114,7 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
      * @param int Seconds to evaluate
      * @return array
      */
-    public function splitSeconds( $seconds, $precision = 1 )
+    public static function splitSeconds( $seconds, $precision = 1, $segment = array() )
     {
         $timeSegments = array( 'secs', 'mins', 'hrs', 'days', 'wks', 'months', 'yrs' );
         krsort( $timeSegments );
@@ -127,9 +127,9 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
             if( $remSec === 0 ){ break; }
             if( $noOfSegment == 0 ){ continue; }
             if( $noOfSegment == 1 ){ $each = rtrim( $each, 's' ); }
-            if( isset( $this->timeSegments[$each] ) )
+            if( isset( $segment[$each] ) )
             {
-                $each = $this->timeSegments[$each];
+                $each = $segment[$each];
             }
             else
             {
