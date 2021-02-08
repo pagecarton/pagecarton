@@ -92,6 +92,13 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 	protected $_identifierData;
 	
     /**
+     * Perform extra user check on identifier data
+     *
+     * @var bool
+     */
+	protected $_xSecureIdentifierData = true;
+	
+    /**
      * Default Database Table
      *
      * @var string
@@ -227,7 +234,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
         $data = $table->selectOne( null, $identifier, array( 'case_insensitive' => true ) );
 
         //  lets authenticate data that has userinfo
-        if( ! is_a( $this, 'Application_Article_Abstract' ) )
+        if( $this->_xSecureIdentifierData && ! is_a( $this, 'Application_Article_Abstract' ) )
         {
             if( 
                 ! empty( $data['username'] ) 

@@ -148,6 +148,21 @@ class Ayoola_File
             $response = file_put_contents( $x['path'], $x['data'] );
             if( $response === false )
             {
+
+                //  resolve cases where this is just a temporary error.
+                if( ! is_dir( dirname( $x['path'] ) ) || ! is_writable( dirname( $x['path'] ) ) )
+                {
+                    return false; 
+                }
+
+                //  is disk really full?
+                if( copy( 'index.php', 'index.php.test' ) )
+                {
+                    unlink( 'index.php.test' );
+                    return false;
+                }
+                @unlink( 'index.php.test' );
+
                 self::$_lockDisk = true;
     
                 //  can't write
