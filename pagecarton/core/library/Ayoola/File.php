@@ -131,7 +131,7 @@ class Ayoola_File
             {
                 rename( $lockDiskFile, $lockDiskFile . '-removed' );
             }
-            if( self::$_lockDisk || is_file( $lockDiskFile ) )
+            if( self::$_lockDisk  )
             {
                 return false;
             }
@@ -167,9 +167,13 @@ class Ayoola_File
     
                 //  can't write
                 //  is disk full? clear cache
-                Application_Cache_Clear::viewInLine( array( 'strict_clear_all' => true, 'clear_all' => true ) );
+                //Application_Cache_Clear::viewInLine( array( 'strict_clear_all' => true, 'clear_all' => true ) );
 
-
+                if( is_file( $lockDiskFile ) )
+                {
+                    return false;
+                }
+    
                 //	Notify Admin
                 $mailInfo = array();
                 $mailInfo['subject'] = "Write to disk failed";
@@ -182,7 +186,7 @@ Content Size: ' . strlen( $data ) . '
                 $log = array( 'error_message' => $mailInfo['subject'] . ' - ' . $mailInfo['body'], 'error_time' => time() );
                 Application_Log_View_Error_Log::getInstance()->insert( $log );
 
-                file_put_contents( $lockDiskFile, $path );
+                  file_put_contents( $lockDiskFile, $path );
 
                 try
                 {
