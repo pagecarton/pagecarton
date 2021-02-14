@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Saturday 30th of January 2021 08:39:06 PM	ayoola@ayoo.la $ 
+* @version $Id: signin.php	Sunday 14th of February 2021 07:03:50 AM	ayoola.falola@yahoo.com $ 
 */
 //	Page Include Content
 
@@ -40,7 +40,7 @@ $_f89ed25eb8000a8632b9039a7a07a7ec = null;
 								
 $_f47d74d2e3820ecf6d805a5f37d546a8 = new Ayoola_Page_Editor_Text( array (
   'editable' => 'Forgot Password? <a rel="spotlight;" href="/x/index.php/object/name/Application_User_Help_ForgotUsernameOrPassword">Sign in Help</a>!',
-  'url_prefix' => '',
+  'url_prefix' => '/x/index.php',
   'advanced_parameter_value' => 
   array (
     0 => '',
