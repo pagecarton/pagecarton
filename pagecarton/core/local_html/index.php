@@ -188,7 +188,8 @@
 	//	var_export( PC_TEMP_DIR );
 		//	port number mess up cache
 		//	don't use prefix because of nginx issues'
-		$tempDir = str_replace( '/', DS, str_replace( ':', DS, 'cache' . DS . $_SERVER['HTTP_HOST'] ) );
+	//	$tempDir = str_replace( '/', DS, str_replace( ':', DS, 'cache' . DS . $_SERVER['HTTP_HOST'] ) );
+		$tempDir = str_replace( '/', DS, str_replace( ':', DS, 'cache' ) );
 //		$tempDir = str_replace( '/', DS, str_replace( ':', DS, 'cache' . DS . $_SERVER['HTTP_HOST'] ) . $prefix );
 		defined( 'CACHE_DIR' ) || define( 'CACHE_DIR', PC_TEMP_DIR . DS . $tempDir );
 
