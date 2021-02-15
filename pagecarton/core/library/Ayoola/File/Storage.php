@@ -314,10 +314,11 @@ class Ayoola_File_Storage extends Ayoola_File
 			$this->_file = new Ayoola_File();
 			$filter = new Ayoola_Filter_Alnum();
 			$filter->replace = DS;
+            $domain = $filter->filter( Ayoola_Application::getDomainName( array( 'no_cache' => true ) ) );
 			$name = $filter->filter( $this->getNamespace() );
-			$domain = $filter->filter( Ayoola_Application::getDomainName( array( 'no_cache' => true ) ) );
-         //   PageCarton_Widget::v( Ayoola_Application::getPathPrefix() );
-			$this->_file->setPath( 'STORAGE' . DS . $domain . Ayoola_Application::getPathPrefix() .  DS . $name . md5( $name ) );     
+            
+
+            $this->_file->setPath( 'STORAGE' . DS . Ayoola_Application::getPathPrefix() .  DS . $name . md5( $name . $domain ) );     
 		}
         return $this->_file;
     } 
