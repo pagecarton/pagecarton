@@ -155,14 +155,6 @@ class Ayoola_File
                     return false; 
                 }
 
-                //  is disk really full?
-                if( copy( 'index.php', 'index.php.test' ) )
-                {
-                    unlink( 'index.php.test' );
-                    return false;
-                }
-                @unlink( 'index.php.test' );
-
                 self::$_lockDisk = true;
     
                 //  can't write
@@ -186,7 +178,7 @@ Content Size: ' . strlen( $data ) . '
                 $log = array( 'error_message' => $mailInfo['subject'] . ' - ' . $mailInfo['body'], 'error_time' => time() );
                 Application_Log_View_Error_Log::getInstance()->insert( $log );
 
-                  file_put_contents( $lockDiskFile, $path );
+                file_put_contents( $lockDiskFile, $path );
 
                 try
                 {
