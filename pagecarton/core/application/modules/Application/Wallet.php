@@ -45,7 +45,17 @@ final class Application_Wallet extends Application_Wallet_Abstract
 			$transferInfo['time'] = time();
 			$table->insert( $transferInfo );
 			 
-			//	You cant send to self.
+			//	You cant send to the air.
+			if( empty( @$transferInfo['to'] ) )
+			{
+				return false;
+            }
+			//	You cant send empty value.
+			if( empty( @$transferInfo['amount'] ) )
+			{
+				return false;
+            }
+            
 			if( @$transferInfo['from'] == @$transferInfo['to'] )
 			{
 				return false;
@@ -73,10 +83,9 @@ final class Application_Wallet extends Application_Wallet_Abstract
 			}
 			
 			//	Get the info of the reciever
-			if( ! $receiverInfo = Ayoola_Access::getAccessInformation( $transferInfo['to'] ) )
-			{
-				return false;
-			}
+            if (! $receiverInfo = Ayoola_Access::getAccessInformation($transferInfo['to'])) {
+                return false;
+            }
 			
 			//	Transfer
 			$receiverInfo['wallet_balance'] = @$receiverInfo['wallet_balance'] + $transferInfo['amount'];
