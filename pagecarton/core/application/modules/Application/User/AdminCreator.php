@@ -108,7 +108,7 @@ class Application_User_AdminCreator extends Application_User_Creator
 		$message = null;
 		switch( $database )
 		{
-			case 'file':
+			default:
 			//	var_export( $values );
 				try
 				{
