@@ -91,18 +91,11 @@ class Application_Link_Sitemap extends Application_Link_Abstract
 				break;
 				default:
 					$this->setViewContent( $this->_html->saveHTML() );
-/*					$content = '<p>Site Map</p><ul>';
-					$content .= '<li><a href="?mode=html">HTML</a></li>';
-					$content .= '<li><a href="?mode=xml">XML</a></li>';
-					$content .= '</ul>';
-					$this->setViewContent( $content );
-*/				break;
+				break;
 			}
-	//		exit();
 
 		}
 		catch( Exception $e ){ return false; }
-	//	var_export( $this->getDbData() );
     } 
 	
     /**

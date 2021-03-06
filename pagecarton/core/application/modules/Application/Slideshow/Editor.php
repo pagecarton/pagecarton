@@ -43,14 +43,11 @@ class Application_Slideshow_Editor extends Application_Slideshow_Abstract
 				self::setIdentifierData();
 				if( ! $data = self::getIdentifierData() )
 				{ 
-				//	var_export( $data );
 					if( self::hasPriviledge( 98 ) )
 					{
 						$data = $this->_identifier;
 					}
-				//	return false; 
 				}
-			//	return false; 
 			}
 			$this->createForm( 'Save', 'Editing "' . $data['slideshow_title'] . '"', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
@@ -61,13 +58,11 @@ class Application_Slideshow_Editor extends Application_Slideshow_Abstract
 				return false;
 			}
 			$this->setViewContent(  '' . self::__( '<div class="boxednews goodnews" style="clear:both;">Slideshow settings saved successfully. </div>' ) . '', true  ); 
-		//	$values['slideshow_type'] = $values['slideshow_type'] ? : 'upload';
 			switch( $values['slideshow_type'] )
 			{
 				case 'post':
 					$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_Creator?article_type=' .  @$values['slideshow_article_type'] . '&category=' .  @$values['category_name'] . '" class="boxednews pc-bg-color">Add new post</a>' ) );    
 				break;
-			//	case 'upload':
 				default:
 					$this->setViewContent( self::__( '<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Slideshow_Manage/?slideshow_name=' .  ( @$values['slideshow_name'] ? : $data['slideshow_name'] ) . '" class="boxednews pc-bg-color">Update photos</a>' ) ); 
 				break;

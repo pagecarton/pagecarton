@@ -825,7 +825,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			if( is_array( @$settings['http_header'] ) )
 			{
 				curl_setopt( $request, CURLOPT_HTTPHEADER, $settings['http_header'] );
-			}
+            }
+
+            //  handle the gzip files
+            curl_setopt( $request, CURLOPT_ENCODING, '' );
+
 			$response = curl_exec( $request );
 			$responseOptions = curl_getinfo( $request );
 
