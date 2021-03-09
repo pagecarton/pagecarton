@@ -64,6 +64,8 @@ class Ayoola_Doc_Settings extends Application_Settings_Abstract
 		
 		//	editing privileges
 		$fieldset->addElement( array( 'name' => 'allowed_viewers', 'label' => 'Pick user levels that can use the file manager to view files on this website.', 'type' => 'Checkbox', 'value' => @$settings['allowed_viewers'] ), $options );
+
+		$fieldset->addElement( array( 'name' => 'max_upload_filesize', 'label' => 'Max Upload Size', 'type' => 'InputText', 'value' => @$settings['max_upload_filesize'] ) );
 		
 		//	Enable Personal Folder
 		$options = array(

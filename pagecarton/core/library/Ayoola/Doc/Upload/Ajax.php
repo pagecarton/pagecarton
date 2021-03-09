@@ -280,8 +280,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			$this->_objectData['file_info']['dedicated_url'] = $url;
 			$this->_objectData['file_info']['domain'] = Ayoola_Page::getDefaultDomain();
 			$this->_objectData['file_info']['root_url'] = Ayoola_Page::getHomePageUrl();
-		
-			
+
 			//	refresh cache
 			if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( $url, array( 'disable_cache' => true ) ) )  
 			{
@@ -293,7 +292,8 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			$this->_objectData['url'] = $urlPrefix . $this->_objectData['file_info']['dedicated_url'];
 			$this->_objectData['fileName'] = $_POST['name'];
 			$this->_objectData['error'] = @array_pop( $this->_objectData['badnews'] );
-			$this->_playMode = static::PLAY_MODE_JSON;			
+			$this->_playMode = static::PLAY_MODE_JSON;
+			
 			if( isset( $_GET['CKEditorFuncNum'] ) )
 			{
 				$this->_playMode = static::PLAY_MODE_HTML;			
@@ -314,7 +314,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				$this->setViewContent( $html, true );				
 			}
 			
-		//	var_export( $_POST['name'] );
 			$success = Ayoola_File::putContents( $path, $data );
 			
 			//	refresh cache again after successful upload.
@@ -327,7 +326,8 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			//	Server-side resize
 			// include ImageManipulator class
 		    //	require_once('ImageManipulator.php');
-		 
+            $maxFilesize = intval( Ayoola_Doc_Settings::retrieve( 'max_upload_filesize' ) );
+
 			do
 			{
 				// array of valid extensions
@@ -349,17 +349,45 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					//	Setting the default to my screensize
 					$maxWith = @intval( $_POST['max_width'] ) ? : 3000;
 					$maxHeight = @intval( $_POST['max_height'] ) ? : 3000; 
+
+
+
 					
 					if( $width != $maxWith || $height != $maxHeight )
 					{
 						if( ! empty( $_REQUEST['crop'] ) )
 						{
+                            $width = $maxWith;
+                            $height = $maxHeight;
 							ImageManipulator::makeThumbnail( $path, $maxWith, $maxHeight, $path );
 						}
-						//	No need for manipulation
+                        clearstatcache();
+                        $filesize = filesize( $path );
+                        if( $maxFilesize && $filesize > $maxFilesize )
+                        {
+                            $xWidth = $width;
+                            $xHeight = $height;
+                       
+                            do
+                            {
+                                $ratio = $maxFilesize / $filesize;
+                                $xWidth = $xWidth * $ratio;
+                                $xHeight = $xHeight * $ratio;  
+                                  
+
+                            
+                                ImageManipulator::makeThumbnail( $path, intval( $xWidth ), intval( $xHeight ), $path );
+                                clearstatcache();
+                                $filesize = filesize( $path );
+                            }
+                            while( $filesize > $maxFilesize );
+                        }    
+
+                        //	No need for manipulation
 						break;
 					}
-					
+
+
 					
 					// our dimensions will be 200x130
 					$x1 = $centreX - ( $maxWith / 2 ); 
@@ -372,9 +400,9 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 					//	This does the actual cropping
 					//	 expand small pictures
 					//	not doing anything the top one isnt doing
-				//	$newImage = $manipulator->crop($x1, $y1, $x2, $y2);
+				    //	$newImage = $manipulator->crop($x1, $y1, $x2, $y2);
 					// saving file to uploads folder
-				//	$manipulator->save( $path );
+				    //	$manipulator->save( $path );
 			
 					//	refresh cache after resize
 					if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( $url, array( 'disable_cache' => true ) ) )  
@@ -388,6 +416,21 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				}
 			}	
 			while( false );
+
+            clearstatcache();
+            $filesize = filesize( $path );
+            if( $maxFilesize && $filesize > $maxFilesize )
+            {
+                unlink( $path );
+                $message = 'Filesize too large; allowed filesize is ' . $maxFilesize . ' bytes and you uploaded ' . $filesize . ' bytes.';
+                $this->_objectData['file_info'] = array();
+                $this->_objectData['badnews'][] = $message;
+                $this->_objectData['error'] = @array_pop( $this->_objectData['badnews'] );
+                $this->_objectData['status'][] = 'failed';
+                $this->setViewContent( $message );
+
+            }    
+
 
 			//	Put this in the Documents DB Table 
 			$table = Ayoola_Doc_Table::getInstance();

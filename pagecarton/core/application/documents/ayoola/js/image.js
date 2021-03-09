@@ -217,8 +217,11 @@ ayoola.image =
 						//	close progresss if available
 						ayoola.image.removeProgress[fileObject.file.name] ? ayoola.image.removeProgress[fileObject.file.name]() : null;
 					}
-					ayoola.image.files[fileObject.id]['status'] = 'Uploaded'; 
-					ayoola.image.callAfterStateChangeCallbacks( fileObject.id );
+                    else
+                    {
+                        ayoola.image.files[fileObject.id]['status'] = 'Uploaded'; 
+                        ayoola.image.callAfterStateChangeCallbacks( fileObject.id );
+                    }
 				} 
 			}
 			ayoola.events.add( ajax, "readystatechange", ajaxCallback );
