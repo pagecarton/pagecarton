@@ -280,7 +280,7 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
      * The method does the whole Class Process
      * 
      */
-	protected function changeStatus( $currentStatus, $from, $to )  
+	protected static function changeStatus( $currentStatus, $from, $to )  
     {
 		$file = str_ireplace( Ayoola_Application::getDomainSettings( APPLICATION_PATH ), '', $to );
 		$from = str_replace( array( '/', '\\' ), DS, $from );

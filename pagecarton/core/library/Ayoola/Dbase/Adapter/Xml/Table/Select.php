@@ -87,7 +87,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		{
 			$rows = PageCarton_Widget::sortMultiDimensionalArray( $rows, $options['sort_column'] );
 		}
-		if( empty( $options['disable_cache'] ) ){ $this->setCache( $rows ); }
+        if( empty( $options['disable_cache'] ) && $this->cache ){ $this->setCache( $rows ); }
 		return $rows;
     }
 	
@@ -131,10 +131,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
             {
 
             }
-			$rowsInThisFile = $this->doSelect( $fieldsToFetch, $where, $innerOptions );
-			$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $rowsInThisFile ) : $rows + $rowsInThisFile;
+			$this->doSelect( $fieldsToFetch, $where, $innerOptions, $rows );
+			//$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $rowsInThisFile ) : $rows + $rowsInThisFile;
 			$totalRows = count( $rows );
 		}
+        		// cache result
 		return $rows;
 	}
 
@@ -238,7 +239,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
      * @param array Where clause as array
      * @param array Select options
      */
-    public function doSelect( $fieldsToFetch = null, Array $where = null, Array $options = null )
+    public function doSelect( $fieldsToFetch = null, Array $where = null, Array $options = null, & $rows )
     {
 		//	Calculate the total fields on the table, extended
 		$allFields = $this->query( 'FIELDLIST' );
@@ -251,8 +252,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
         {
             $fieldsToFetch = array_unique( array_merge( $fieldsToFetch, array_keys( $where ) ) );
         }
-		$rows = array();
-
         $nextRecord = $this->getRecords()->lastChild;
         while( $nextRecord )
 		{
@@ -508,10 +507,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				@$innerOptions['limit'] = $options['limit'] - $totalRows;
 			}
 		}
-	
-		// cache result
-		if( empty( $options['disable_cache'] ) && $this->cache ){ $this->setCache( $rows ); }
-		return $rows;
 	}
 	
     /**
