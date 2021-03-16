@@ -466,7 +466,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                 if( is_string( $fieldsToFetch ) && $fieldsToFetch === $key )
                 {
                     $fields = $fieldValue;
-                    continue;
+                    break;
                 }
                 $fields[$key] = $fieldValue;
 

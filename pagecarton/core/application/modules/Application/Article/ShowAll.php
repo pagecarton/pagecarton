@@ -1605,7 +1605,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             }
 			$noOfTrends = intval( $this->getParameter( 'trending' ) ) > 9 ? $this->getParameter( 'trending' ) : 100;
             //    var_export( $noOfTrends );
-            $trendingPost = array_values( $table->select( 'article_url', null, array( 'row_id_column' => 'article_url', 'limit' => $noOfTrends, 'record_search_limit' => $noOfTrends ) ) );
+            $trendingPost = $table->select( 'article_url', null, array( 'row_id_column' => 'article_url', 'limit' => $noOfTrends, 'record_search_limit' => $noOfTrends ) );
 			if( $trendingPost )
 			{
 				$whereClause[$this->getIdColumn()] = $trendingPost;
