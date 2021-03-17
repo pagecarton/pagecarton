@@ -2041,7 +2041,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
         {
             $profiles = array();
         }
-
         
 		$fieldset->addElement( array( 'name' => 'profile_url',  'onchange' => 'ayoola.div.manageOptions( { database: "Application_Profile_Table", listWidget: "Application_Profile_ShowAll", values: "profile_url", labels: "display_name", element: this } );', 'label' => 'Post as', 'type' => count( $profiles ) > 1 ? 'Select' : 'Hidden', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles + array( '__manage_options' => '[Manage Profiles]' ) );
 
