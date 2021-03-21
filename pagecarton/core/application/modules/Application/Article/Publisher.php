@@ -84,7 +84,7 @@ class Application_Article_Publisher extends Application_Article_Creator
                 {
                     continue;
                 }
-            //    var_export( $each );
+
                 $content = json_decode( file_get_contents( $each ), true ) ? : array();
                 foreach( $content as $section )
                 {
@@ -110,10 +110,13 @@ class Application_Article_Publisher extends Application_Article_Creator
                                     {
                                         
                                         $widgets = array();
-                                        Ayoola_Page_Editor_Text::embedWidget( $widget['parameters']['content'], array(), $widgets );
-                                        
+                                        $content = $widget['parameters']['content'];
+                                        $includes = Ayoola_Page_Editor_Text::getContentIncludes( $content );
+                                        $content = Ayoola_Page_Editor_Text::setContentIncludes( $content, $includes );
+                                        Ayoola_Page_Editor_Text::embedWidget( $content, array(), $widgets );
                                         if( empty( $widgets ) )
                                         {
+                                            //var_export( $widget['parameters'] );
                                             continue 2;
                                         }
     
@@ -127,7 +130,6 @@ class Application_Article_Publisher extends Application_Article_Creator
                             }
                             $widget['parameters'] =  ( $widget['parameters'] ? : array() ) + array( 'add_a_new_post_classplayer' => '/tools/classplayer/get/name' );
                             $class = new $class( $widget['parameters'] );
-                            
                             if( method_exists( $class, 'getMarkupTemplateObjects' ) )
                             {
                                 $widgets = $widgets + $class->getMarkupTemplateObjects();

@@ -130,6 +130,52 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	}
 
 	/**
+     * This method
+     *
+     * @param 
+     * @return 
+     */
+    public static function getContentIncludes( $content )
+    {
+        // include other HTML here
+        preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"](/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
+    
+        $includes = array();
+        foreach( $matches[0] as $count => $each )
+        {
+            $includes[$matches[1][$count]] = $each;
+        }
+		return $includes;
+	}
+
+	/**
+     * This method
+     *
+     * @param 
+     * @return 
+     */
+    public static function setContentIncludes( $content, $includes )
+    {
+        foreach( $includes as $file => $placeholder )
+        {
+            $path = Ayoola_Doc::getDocumentsDirectory() . $file . '.html';
+            if( ! is_file( $path ) )
+            {
+                if( ! $path = Ayoola_Loader::getFullPath( 'documents' . $file . '.html' ) )
+                {
+                    continue;
+                }
+            }
+            $html = file_get_contents( $path );
+            $prefix = dirname( $file );
+            Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $html, $prefix );
+            $html = preg_replace(';(href)[\s]*=[\s]*(["\'])' . $prefix . '([^.]*)\.html(?:["\'\.]);i', '$1=$2$3$2', $html ); 
+            $content = str_ireplace( $placeholder, $html, $content );
+        }
+        return $content;
+	}
+
+	/**
      * Embed PageCarton Widget in a text. Using HTML syntax API
      *
      * @param string Content
@@ -303,11 +349,9 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
         // include other HTML here
         preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"](/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
-      
-        foreach( $matches[0] as $count => $each )
-        {
-            $parameters['includes'][$matches[1][$count]] = $each;
-        }
+
+        $parameters['includes'] = self::getContentIncludes( $content );
+
         $parameters['content'] = $content;
 
         //  is this changing the url prefix when installed?
@@ -337,26 +381,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         //  Bring in included files
         if( $this->getParameter( 'includes' ) )
         {
-            foreach( $this->getParameter( 'includes' ) as $file => $placeholder )
-            {
-
-                $path = Ayoola_Doc::getDocumentsDirectory() . $file . '.html';
-                if( ! is_file( $path ) )
-                {
-                    if( ! $path = Ayoola_Loader::getFullPath( 'documents' . $file . '.html' ) )
-                    {
-                        continue;
-                    }
-                }
-                $html = file_get_contents( $path );
-                $prefix = dirname( $file );
-                Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $html, $prefix );
-                $html = preg_replace(';(href)[\s]*=[\s]*(["\'])' . $prefix . '([^.]*)\.html(?:["\'\.]);i', '$1=$2$3$2', $html ); 
-
-                $content = str_ireplace( $placeholder, $html, $content );
-            }
-
-    
+            $content = self::setContentIncludes( $content, $this->getParameter( 'includes' ) );
         }
 
         //  text update
