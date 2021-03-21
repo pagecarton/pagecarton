@@ -1333,7 +1333,21 @@ class Ayoola_Application
                         Ayoola_Page_Layout_Abstract::buildThemeFile( $themeName, file_get_contents( $pageFile ) );
                     }
                 }
-    
+
+
+                // default-layout
+                $pageFile = 'documents/layout/' . $themeName . '/default-layout.html';
+                if( $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
+                {
+                    $vPath = 'documents/layout/' . $themeName . '/theme/default-layout/template';
+                    $vPath = Ayoola_Loader::getFullPath( $vPath );
+                    if( ! $vPath || filemtime( $vPath ) < filemtime( $pageFile ) )
+                    {
+                        $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
+                        $d = $page->refresh( '/default-layout', $themeName );
+                    }
+                }
+
             }
 
 

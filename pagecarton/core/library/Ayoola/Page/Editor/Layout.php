@@ -1024,6 +1024,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
             $rPaths['data-backup'] = self::getPageContentsBackupLocation( $page['url'] ) . DS . time();
             
 			//	change the place themes are being saved.
+			if( stripos( $page['url'], '/default-layout' ) === 0 && ! empty( $this->_parameter['theme_variant'] ) )
+			{
+                $this->_parameter['theme_variant'] = null;
+            }
 			if( stripos( $page['url'], '/layout/' ) === 0 )
 			{
 				list(  , $themeName ) = explode( '/', trim( $page['url'], '/' ) );
@@ -1120,11 +1124,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
             {
                 $rPaths['data-backup'] ? Ayoola_File::putContents( $rPaths['data-backup'], $dataToSave ) : null;
             }
-			
+
 
             if( 
                 ( stripos( $page['url'], '/default-layout' ) === 0 ) 
-                && empty( $this->_parameter['theme_variant'] ) 
+                //&& empty( $this->_parameter['theme_variant'] ) 
             )     
 			{
 
