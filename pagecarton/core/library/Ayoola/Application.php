@@ -1384,7 +1384,7 @@ class Ayoola_Application
                     if( $uri == '/' && is_file( $PAGE_INCLUDE_FILE ) )
                     {
                         $content = file_get_contents( $pageFile );
-                        if( stripos( $content, '</widget>' ) === false && stripos( $content, '<include' ) === false )
+                        if( stripos( $content, '</widget>' ) === false && stripos( $content, '<include' ) === false && empty( $_REQUEST['pc_page_layout_name'] ) )
                         {
                             $options['auto_init_theme_page'] = false;
                         }

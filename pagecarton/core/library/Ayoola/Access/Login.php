@@ -79,7 +79,6 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
      */
     public function init()
     {
-	//	var_export( __LINE__ );
 		require_once 'Ayoola/Access.php';
 		require_once 'Ayoola/Page.php';
 		$accountPage = '/account';
@@ -102,7 +101,6 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			Application_Javascript::header( $urlToGo );
 		}
 
-//		var_export( $urlToGo );
 		$logResult = array( 'medium' => 'cookie', 'result' => 'fail', 'message' => null );
 
 		//	Check if there is a logged in user
@@ -134,8 +132,6 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
             }
 			return false;
 		}
-	//	var_export( $values );
-	//	exit();
 
 		//	Check if user sent a username or an email
 		$validator = new Ayoola_Validator_EmailAddress();
@@ -175,7 +171,6 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 
 			if( self::apiLogin( $validUserInfo ) )
 			{
-	//			var_export( $validUserInfo );
 				break;
 			}
 
@@ -189,13 +184,11 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			}
 		}
 		while( false );
-	//	var_export( $settings );
 		if( $userInfo = $auth->getStorage()->retrieve() )
 		{
 			//	Log success
 			$logResult['result'] = 'success';
 			$logResult['medium'] = 'form';
-//			$values['password'] = sha1( $cookie . '0-1-2-3' );
 			$values['user_id'] = $userInfo['user_id'] || $_SERVER['USERNAME'];
 			$this->log( array_merge( $values, $logResult ) );
 
@@ -233,9 +226,7 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 
 		//	LOG FAILURE
 		$logResult['medium'] = 'form';
-	//	var_export( $values );
 		$values['user_id'] = ! empty( $values['username'] ) ? $values['username'] : $values['email'];
-//		var_export( $values['user_id'] );
 		$this->log( array_merge( $values, $logResult ) );
 
 		$this->getForm()->setBadnews( 'Invalid Login Information' );
@@ -262,7 +253,6 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 		{
 			foreach( $settings as $each )
 			{
-	//	var_export( $userInfo[$each] );
 				if( empty( $userInfo[$each] ) && ! in_array( $userInfo['access_level'], array( 99, 98 ) )  )
 				{
 					return false;
@@ -270,13 +260,9 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 			}
 		}
 		$userInfo['access_level'] = $userInfo['access_level'] ? : 1;
-	//	var_export( $userInfo );
-	//	self::v( $userInfo );
-	//	exit();
 
 		//	Add access info
 		$userInfo += self::getAccessInformation( $userInfo['username'], array( 'skip_user_check' => true ) ) ? : array();
-	//	var_export( $userInfo );
 		if( self::$loginOnAuthentication )
 		{
 			$auth = new Ayoola_Access();
@@ -327,19 +313,15 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
     public static function apiLogin( array & $values )
     {
 		//	first try cloud sign in
-	//	$data['options'] = array( 'request_type' => 'SignIn', 'domain_name' => Ayoola_Page::getDefaultDomain() );
 		$data['data'] = $values;
 		$userInfo = array();
 		$data = Ayoola_Api_SignIn::send( $data );
-//		var_export( $data );
 		if( is_array( $data['data'] ) )
 		{
-	//	var_export( $data );
 			$data = $data['data'];
 
 			if( isset( $data['username'] ) )
 			{
-		//	var_export( $data );
 				if( empty( $data['applicationusersettings_id'] ) )
 				{
 					unset( $data['enabled'], $data['verified'], $data['approved'] );
@@ -350,7 +332,6 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
 						{
 							// Look for the user information once again
 							$data = Ayoola_Api_SignIn::send( $values );
-					//		var_export( $data );
 							$data = $data['data'];
 
 							//	Register the user in the storage.\

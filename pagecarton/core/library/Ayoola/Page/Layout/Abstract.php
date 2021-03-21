@@ -495,6 +495,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 							continue 2;
 						}
 					case "div":
+					case "widget":
+					case "include":
 					case "nav":
 					case "main":
 						@++$countDiv;
