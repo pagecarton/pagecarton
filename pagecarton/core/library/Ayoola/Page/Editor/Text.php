@@ -344,7 +344,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         }
 
         //  to be executed within the widget class
-        $content = str_ireplace( array( 'i>&nbsp;</i', 'span>&nbsp;</span', ), array( 'i></i', 'span></span', ), $content );
+        $content = str_ireplace( array( '>&nbsp;</i>', '>&nbsp;</span>', ), array( 'i></i>', '></span>', ), $content );
         $content = self::fixUrlPrefix( $content, Ayoola_Application::getUrlPrefix(), '' );
 
         // include other HTML here
