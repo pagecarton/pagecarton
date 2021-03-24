@@ -55,7 +55,6 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			$this->createForm( $submitValue, $fieldset );
 			$this->setViewContent( $this->getForm()->view() );
 
-		//	self::v( $_POST );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
             $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
             $values['article_url'] = Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'];

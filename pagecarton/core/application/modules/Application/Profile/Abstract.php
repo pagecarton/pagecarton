@@ -129,6 +129,10 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getMyProfiles()
     {   
+        if( ! Ayoola_Application::getUserInfo( 'username' ) )
+        {
+            return false;
+        }
 		if( ! is_null( self::$_myProfiles ) )
 		{
 			return self::$_myProfiles;
