@@ -55,16 +55,32 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			$this->createForm( $submitValue, $fieldset );
 			$this->setViewContent( $this->getForm()->view() );
 
-            if( ! $values = $this->getForm()->getValues() ){ return false; }
+            if( ! $values = $this->getObjectStorage( 'comment' )->retrieve() )
+            {
+                if( ! $values = $this->getForm()->getValues() ){ return false; }
+
+                $this->getObjectStorage( 'comment' )->store( $values );                
+            }
+			$this->setViewContent( '<br>', true );
+
+            if( ! $this->requireRegisteredAccount() )
+            {
+                return false;
+            }
+            if( ! $this->requireProfile() )
+            {
+                return false;
+            }
+
             $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
             $values['article_url'] = Ayoola_Application::$GLOBAL['post']['article_url'] ? : $_REQUEST['article_url'];
             $values['url'] = $currentUrl;
 
 
-            $values['display_name'] = $values['display_name'] ? : $this->getGlobalValue( 'display_name' );	
+/*          $values['display_name'] = $values['display_name'] ? : $this->getGlobalValue( 'display_name' );	
             $values['email'] = $values['email'] ? : $this->getGlobalValue( 'email' );	
             $values['website'] = $values['website'] ? : $this->getGlobalValue( 'website' );	
-			
+ */			
 
             $values['creation_time'] = time();
             $values['parent_comment'] = $_REQUEST['parent_comment'];
@@ -112,6 +128,7 @@ class Application_CommentBox extends Application_CommentBox_Abstract
 			{ 
 				$this->createForm( 'Post Another Comment', $fieldset );
 				$this->setViewContent( $this->getForm()->view(), true );
+                $this->getObjectStorage( 'comment' )->clear();
 				$this->setViewContent( self::__( '<div class="goodnews">Comment added successfully.</div>' ) ); 
 				if( empty( $values['profile_url'] ) )
 				{

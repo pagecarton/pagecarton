@@ -120,9 +120,24 @@ class Application_CommentBox_Abstract extends PageCarton_Widget
         
 		$fieldset->addLegend( $legend );
 		$fieldset->addFilters( 'StripTags::Trim' );
+
+        $defaultProfileC = Application_Profile_Abstract::getMyDefaultProfile();
+        $profiles = array();
+       // var_export( $defaultProfileC );
+		if( $defaultProfile = $defaultProfileC['profile_url'] )
+        {
+            if( ! $profiles = Application_Article_Abstract::getMyAuthProfiles() )
+            {
+                $profiles = array();
+            }
+        }
+
+        
+		$fieldset->addElement( array( 'name' => 'profile_url',  'onchange' => 'ayoola.div.manageOptions( { database: "Application_Profile_Table", listWidget: "Application_Profile_ShowAll", values: "profile_url", labels: "display_name", element: this } );', 'label' => 'Post as', 'type' => count( $profiles ) > 1 ? 'Select' : 'Hidden', 'value' => @$values['profile_url'] ? : $defaultProfile ), $profiles + array( '__manage_options' => '[Manage Profiles]' ) );
+
 		$form->addFieldset( $fieldset ); 
 
-        $access = new Ayoola_Access();
+/*         $access = new Ayoola_Access();
         $defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();
         $defaultProfile = $defaultProfile['profile_url'];
         
@@ -139,7 +154,7 @@ class Application_CommentBox_Abstract extends PageCarton_Widget
             $fieldset->addFilters( 'StripTags::Trim' );
             $form->addFieldset( $fieldset ); 
         }
-
+ */
         
 
 		$this->setForm( $form );

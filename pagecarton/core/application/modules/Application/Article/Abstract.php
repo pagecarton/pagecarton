@@ -876,10 +876,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
             $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
             $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
             $profiles = $table->select( null, null, array( 'workaround-to-avoid-cache' ) );
-    
             $filter = new Ayoola_Filter_SelectListArray( 'profile_url', 'display_name' );
             $profiles = $filter->filter( $profiles );
         }
+
         return $profiles;    
     }
 
