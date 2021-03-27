@@ -259,6 +259,9 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$eachRecord = $nextRecord;
 		 	$nextRecord = $eachRecord->previousSibling;
 			$this->recordCount = @$this->recordCount ? : 0;
+            $recordWhere = $where;
+            $alternativeWhereToFind = array();
+            $alternativeWhereMap = array();
 
 			if( ! empty( $options['record_search_limit'] ) && $this->recordCount >= $options['record_search_limit'] )
 			{
@@ -284,7 +287,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                 {
                     if( empty( $options['row_id_column'] ) || $key !== $options['row_id_column'] )
                     {
-                        if( is_array( $where ) && ! array_key_exists( $key, $where ) )
+                        if( is_array( recordWhere ) && ! array_key_exists( $key, recordWhere ) )
                         {
                             continue; 
                         }
@@ -318,14 +321,14 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                 }
 				do
 				{
-					if( ! empty( $where['*'] ) )
+					if( ! empty( $recordWhere['*'] ) )
 					{
 						$recordMatch = $recordMatch ? : false;
 						if( ! is_array( $searchTerm ) )
 						{
-							if( ! is_array( $where['*'] ) ) 
+							if( ! is_array( $recordWhere['*'] ) ) 
 							{
-								if( stripos( $searchTerm, $where['*'] ) !== false )
+								if( stripos( $searchTerm, $recordWhere['*'] ) !== false )
 								{ 
 									$fields['pc_search_score'] += 1;
 									$recordMatch = true;
@@ -339,7 +342,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 							else
 							{
                                 $slimer = array( ' ', ',', '-', '_', '"', '\'' );
-								$phrase = implode( ' ', $where['*'] );
+								$phrase = implode( ' ', $recordWhere['*'] );
 								$phrase = str_replace( $slimer, '', $phrase );
 								$searchTermSlim = str_replace( $slimer, '', $searchTerm );
 
@@ -351,7 +354,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 									$recordMatch = true;
 
 								}
-							    foreach( $where['*'] as $keyword )
+							    foreach( $recordWhere['*'] as $keyword )
 								{
 									if( stripos( $searchTerm, $keyword ) !== false )
 									{ 
@@ -376,12 +379,12 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 							}
 						}
 					}
-					if( ! empty( $where ) )
+					if( ! empty( $recordWhere ) )
 					{ 
-						if( array_key_exists( $key, $where ) )
+						if( array_key_exists( $key, $recordWhere ) )
 						{
                             $keyFound[$key] = true;
-                            if( ! self::where( $key, $fieldValue, $where, $options ) )
+                            if( ! self::where( $key, $fieldValue, $recordWhere, $options ) )
                             {
                                 if( isset( $options['where_join_operator'] ) && $options['where_join_operator'] === '||' )
                                 {
@@ -389,13 +392,43 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                                 }
                                 else
                                 {
-                                    continue 3;
+                                    if( ! empty( $options['where_alternative'][$key] && is_array( $options['where_alternative'][$key] ) ) )
+                                    {
+                                        $alternativeWhereToFind[$key] = $options['where_alternative'][$key];
+                                        foreach( $options['where_alternative'][$key] as $alternativeWhere => $alternativeValue )
+                                        {
+                                            $alternativeWhereMap[$alternativeWhere][] = $key;
+                                            if( ! empty( $fields[$alternativeWhere] ) )
+                                            {
+                                                if( self::where( $alternativeWhere, $fields[$alternativeWhere], $recordWhere + array( $alternativeWhere => $alternativeValue ), $options ) )
+                                                {
+                                                    unset( $alternativeWhereToFind[$key] );
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        continue 3;
+                                    }
                                 }
                             }
 						}
+                        elseif( array_key_exists( $key, $alternativeWhereMap ) )
+                        {
+                            foreach( $alternativeWhereMap[$key] as $eachFieldWithAlternative )
+                            {
+                                $alternativeValue = $options['where_alternative'][$eachFieldWithAlternative][$key];
+                                if( self::where( $key, $fieldValue, $recordWhere + array( $key => $alternativeValue ), $options ) )
+                                {
+                                    //var_export( $fieldValue );
+                                    unset( $alternativeWhereToFind[$eachFieldWithAlternative] );
+                                }    
+                            }
+                        }
                         elseif( @$options['supplementary_data_key'] == $key && is_array( $fieldValue ) )
                         {
-                            foreach( $where as $eachKeyWhere => $valueWhere )
+                            foreach( $recordWhere as $eachKeyWhere => $valueWhere )
                             {
                                 if( in_array( $eachKeyWhere, $allFields ) )
                                 {
@@ -406,7 +439,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                                 if( array_key_exists( $eachKeyWhere, $fieldValue ) )
                                 {
                                     $keyFound[$key] = true;
-                                    if( ! self::where( $eachKeyWhere, $fieldValue[$eachKeyWhere], $where, $options ) )
+                                    if( ! self::where( $eachKeyWhere, $fieldValue[$eachKeyWhere], $recordWhere, $options ) )
                                     {
                                         if( $options['where_join_operator'] === '||' )
                                         {
@@ -414,7 +447,25 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                                         }
                                         else
                                         {
-                                            continue 4;
+                                            if( ! empty( $options['where_alternative'][$key] && is_array( $options['where_alternative'][$key] ) ) )
+                                            {
+                                                $alternativeWhereToFind[$key] = $options['where_alternative'][$key];
+                                                foreach( $options['where_alternative'][$key] as $alternativeWhere => $alternativeValue )
+                                                {
+                                                    $alternativeWhereMap[$alternativeWhere][] = $key;
+                                                    if( ! empty( $fields[$alternativeWhere] ) )
+                                                    {
+                                                        if( self::where( $alternativeWhere, $fields[$alternativeWhere], $recordWhere + array( $alternativeWhere => $alternativeValue ), $options ) )
+                                                        {
+                                                            unset( $alternativeWhereToFind[$key] );
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                continue 4;
+                                            }
                                         }
                                     }
                                 }
@@ -434,17 +485,17 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 						$temp[serialize( $foreignWhere )] = self::selectForeign( $foreignTable, $foreignWhere );
 					}
 					$foreignData = $temp[serialize( $foreignWhere )];
-					if( ! empty( $where ) )
+					if( ! empty( $recordWhere ) )
 					{ 
 						foreach( $foreignData as $foreignDataKey => $foreignDataValue )
 						{
-							if( array_key_exists( $foreignDataKey, $where ) )
+							if( array_key_exists( $foreignDataKey, $recordWhere ) )
 							{
-								if( ! is_array( $where[$foreignDataKey] ) && $where[$foreignDataKey] != $foreignData[$foreignDataKey] )
+								if( ! is_array( $recordWhere[$foreignDataKey] ) && $recordWhere[$foreignDataKey] != $foreignData[$foreignDataKey] )
 								{ 
 									continue 4; 
 								}
-								elseif( is_array( $where[$foreignDataKey] ) && ! in_array( $foreignData[$foreignDataKey], $where[$foreignDataKey] ) )
+								elseif( is_array( $recordWhere[$foreignDataKey] ) && ! in_array( $foreignData[$foreignDataKey], $recordWhere[$foreignDataKey] ) )
 								{
 
 									continue 2; 
@@ -471,7 +522,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                 $fields[$key] = $fieldValue;
 
             }
-            $whereX = $where;
+            $whereX = $recordWhere;
             unset( $whereX['*'] );
             if( is_array( $whereX ) && count( $whereX ) !== count( $keyFound ) )
             {
@@ -482,8 +533,15 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 
             //  || search
             //  late search query effect
-            if( $options['where_join_operator'] === '||' && ! empty( $whereNotFound ) && count( $whereNotFound ) >= count( $where ) )
+            if( $options['where_join_operator'] === '||' && ! empty( $whereNotFound ) && count( $whereNotFound ) >= count( $recordWhere ) )
             {
+                continue;
+            }
+
+            //  we couldn't find alternative field value for a where clause with alternative
+            if( ! empty( $options['where_alternative'] ) && ! empty( $alternativeWhereToFind ) )
+            {
+                //var_export();
                 continue;
             }
 
@@ -497,7 +555,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				$filterFunction( $rowId, $fields );   
 			}
 
-			$fields === false || ( $recordMatch === false && ! empty( $where['*'] ) ) ? null : ( $rows[$rowId] = $fields );
+			$fields === false || ( $recordMatch === false && ! empty( $recordWhere['*'] ) ) ? null : ( $rows[$rowId] = $fields );
 
 			if( ! empty( $options['limit'] ) && count( $rows ) >= $options['limit'] )
 			{
