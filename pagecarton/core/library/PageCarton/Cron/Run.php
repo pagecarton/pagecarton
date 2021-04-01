@@ -82,6 +82,10 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                     }
                     $u++;
                     $runData = array( 'cron_id' => $data['table_id'], 'runtime' => $cTime, );
+                    if( count( $runHistory ) > 5 )
+                    {
+                        PageCarton_Cron_Run_Table::getInstance()->delete( array( 'cron_id' => $data['table_id'] ) );
+                    }
                     PageCarton_Cron_Run_Table::getInstance()->insert( $runData );
                 }
                 $this->setViewContent( self::__( '<div class="goodnews">' . sprintf( PageCarton_Widget::__( "%s cron tasks processed successfully" ), $u ) . '</div>' ) );

@@ -219,8 +219,8 @@ class Ayoola_Application
     {
 		//	set path
 		$domainSettings = array( 'no_redirect' => true );
-//		if( ! empty( $settings['path'] ) )
-		{
+
+        {
 			self::$_pathPrefix = $settings['path'];
 
 			self::setUrlPrefix( self::$_pathPrefix );
@@ -709,7 +709,7 @@ class Ayoola_Application
         //  so it wont be auto issue ssl for domains we dont need for autossl settings
 
         //  now we need https to be always encouraged
-    //    if( isset( $data['domain_settings']['domain_options'] ) && in_array( 'ssl', $data['domain_settings']['domain_options'] ) ) 
+
         {
             if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' )
             {
@@ -791,6 +791,7 @@ class Ayoola_Application
 		}
 
     }
+
     public static function run()
     {
 
@@ -814,14 +815,15 @@ class Ayoola_Application
 
 		//	Domain settings
 
-	//	run cron
+        //	run cron
 		self::$_conf = self::getDomainSettings( 'site_configuraton' );
 
 		if( empty( self::$_conf['disable_auto_cron'] ) )
 		{
 			$result = PageCarton_Cron_Run::viewInLine();
-
 		}
+        //var_export( microtime( true ) - $time_start );
+        //exit();
 
 		self::display();
 
@@ -830,12 +832,7 @@ class Ayoola_Application
 		self::$_runtimeSetting['total_runtime'] = $time_end - $time_start; //	Record total runtime
 
 		//	Ignore localhosts and super users
- //		if( ! Ayoola_Page::hasPriviledge() )
-
- 	//	if( ! in_array( $_SERVER['REMOTE_ADDR' ], array( '127.0.0.1', '::1' ) ) )
-		{
-			self::log();
-		}
+		self::log();
 
     }
 
@@ -1182,6 +1179,8 @@ class Ayoola_Application
 
             break;            
         }
+
+
         if( self::view( $url ) )
         {
             return true;
@@ -1645,7 +1644,6 @@ class Ayoola_Application
 					error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
 					ini_set( 'display_errors', "1" );
 				}
-	//			else
 			break;
 		}
 		require_once 'Ayoola/Access.php';
@@ -1653,11 +1651,9 @@ class Ayoola_Application
 
 		//	general restriction
 
-//		if( $_SERVER['REMOTE_ADDR' ] !== '127.0.0.1' )
 		{
 			$auth->restrict();
 		}
-	//	else
 		{
 
 		}
