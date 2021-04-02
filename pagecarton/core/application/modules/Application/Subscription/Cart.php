@@ -274,6 +274,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				$surchargeText = '';
 				$surchargePrice = 0;
 				$paymentSettings['surcharge_value'][$key] = doubleval( $paymentSettings['surcharge_value'][$key] );
+                $surchargePricText = $this->_xml->createTextNode( '0.00' );
 				switch( @$paymentSettings['surcharge_type'][$key] )
 				{
 					case 'percentage':   
