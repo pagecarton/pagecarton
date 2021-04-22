@@ -70,8 +70,7 @@ class Ayoola_Doc_Settings extends Application_Settings_Abstract
 		//	Enable Personal Folder
 		$options = array(
 							'private_directory' => 'Enable distinct directories for users.', 
-							'allow_profile_pictures' => 'Allow users to upload a profile picture.', 
-							
+							'link_doc_to_web_root' => 'Link Document to Web Root', 							
 						);
 		$fieldset->addElement( array( 'name' => 'options', 'label' => 'Other options', 'type' => 'Checkbox', 'value' => @$settings['options'] ), $options );
 		

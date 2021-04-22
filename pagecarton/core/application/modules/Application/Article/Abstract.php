@@ -1551,6 +1551,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 		foreach( $features as $key => $eachPostType )
 		{	
+            $eachPostType = strtolower( trim( $eachPostType ) );
 			$featurePrefix = @$featuresPrefix[$key];
 			if( empty( $featureCount[$eachPostType] ) )
 			{

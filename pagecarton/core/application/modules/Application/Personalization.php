@@ -172,7 +172,7 @@ class Application_Personalization extends Ayoola_Abstract_Table
 			//	Clear cache
 			if( is_dir( CACHE_DIR ) )
 			{
-				@Ayoola_Doc::deleteDirectoryPlusContent( CACHE_DIR );
+                Application_Cache_Clear::do();
 			}
 			$this->setViewContent(  '' . self::__( '<h2 class="">Basic Settings Saved</h2>' ) . '', true  );   
 			$this->setViewContent( self::__( '<p>Welcome to endless possibilities! PageCarton helps to publish great content to the web fast, easy using award-winning secure methods. You can make stunning websites easily and apps with PageCarton.</p>' ) );

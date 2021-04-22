@@ -245,9 +245,7 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 							//	Avoid an infinite loop on a first duplicate try.
 						}
 						$filename = $newName . '.' . $extension;  
-						$path = $dir . $filename;
-					//	var_export( $filename );
-						
+						$path = $dir . $filename;						
 					}
 					while( is_file( $path ) );
 					$url = $url . $filename;
@@ -410,7 +408,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 						$this->_objectData['file_info']['dedicated_url'] = $dedicatedUri;
 						$this->_objectData['file_info']['dedicated'] = $dedicatedUri;
 					}  
-				//	echo 'Done ...';
 				} else {
 				//	echo 'You must upload an image...';
 				}

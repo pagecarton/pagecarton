@@ -197,12 +197,37 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
         $fakePath = false;
         
         $fakePath = CACHE_DIR . DS .  __CLASS__ . DS . md5( $path );
-        Ayoola_Doc::createDirectory( dirname( $fakePath ) );
         $content = file_get_contents( $path );
-        $content = Ayoola_Page_Editor_Text::embedWidget( $content, array( 'file_path' => $path ) );  
-        if( Ayoola_File::putContents( $fakePath, $content ) )       
+        $newContent = Ayoola_Page_Editor_Text::embedWidget( $content, array( 'file_path' => $path ) );  
+
+        if( $content === $newContent )
+        {
+            //  redundancy
+            return false;
+        }
+        Ayoola_Doc::createDirectory( dirname( $fakePath ) );
+        if( Ayoola_File::putContents( $fakePath, $newContent ) )       
         {
             return $fakePath;
+        }
+    }
+
+    /**
+     * 
+     */
+    public static function linkToWebRoot( $pathToGo, $link )
+    {
+        if( $docOptions = Ayoola_Doc_Settings::retrieve( 'options' ) AND is_array( $docOptions ) AND in_array( 'link_doc_to_web_root', $docOptions )  )
+        {
+            if( ! Ayoola_Loader::checkFile( 'documents' . $link ) )
+            {
+                return false;
+            }
+            
+            $link = trim( $link, '/ ' );
+            Ayoola_Doc::createDirectory( dirname( $link ) );
+
+            symlink( $pathToGo, $link );
         }
     }
 
@@ -238,11 +263,10 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
         header( 'Content-Length: ' . filesize( $path ) );
         ob_clean();
         flush();
-        
+
         if( isset($_SERVER['HTTP_RANGE'] ) ) 
         { 
             // do it for any device that supports byte-ranges not only iPhone
-
             self::smartReadFile( $fakePath ? : $path, basename( $path ), $this->getContentType( $path ) );
         } 
         else 
@@ -250,6 +274,7 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
             header( "Content-Length: " . filesize( $fakePath ? : $path ) );
             readfile( $fakePath ? : $path );
         }
+
         exit();
       }
     } 
@@ -295,7 +320,7 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
                 header('HTTP/1.1 416 Requested Range Not Satisfiable');
                 header("Content-Range: bytes $start-$end/$size");
                 // (?) Echo some info to the client?
-                exit;
+                return false;
             }
             // If the range starts with an '-' we start from the beginning
             // If not, we forward the file pointer
@@ -320,7 +345,7 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
                 header('HTTP/1.1 416 Requested Range Not Satisfiable');
                 header("Content-Range: bytes $start-$end/$size");
                 // (?) Echo some info to the client?
-                exit;
+                return false;
             }
             $start  = $c_start;
             $end    = $c_end;
@@ -398,6 +423,7 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
         $cur+=1024*16;
       }
     }
+
 	/**
      * This method outputs the document
      *
@@ -420,17 +446,22 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
 			header( 'Content-Description: File Transfer' );
 			header( 'Content-Type: ' . $this->getContentType( $path ) );
 			header( 'Content-Transfer-Encoding: binary' );
+            $pathToGo = $fakePath ? : $path;
+
+            self::linkToWebRoot( $pathToGo, Ayoola_Application::getRequestedUri() );
 
             if( isset($_SERVER['HTTP_RANGE'] ) ) 
             { 
                 // do it for any device that supports byte-ranges not only iPhone
-                self::rangeDownload(  $fakePath ? : $path  );
+                self::rangeDownload(  $pathToGo );
             } 
             else 
             {
                 header( "Content-Length: " . filesize( $fakePath ? : $path ) );
-                readfile( $fakePath ? : $path );
+                readfile( $pathToGo );
             }
+
+    
 		}
     } 
 	// END OF CLASS

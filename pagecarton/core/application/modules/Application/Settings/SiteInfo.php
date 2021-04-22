@@ -58,6 +58,11 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
             //    var_export( $to );
                 Ayoola_Doc::createDirectory( dirname( $to ) );
                 copy( $from, $to );
+                if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( '/img/logo.png', array( 'disable_cache' => true ) ) )  
+                {
+                    
+                }  
+        
             }
         }
         $from = Ayoola_Doc_Browser::getDocumentsDirectory() . $settings['favicon'];
@@ -70,8 +75,14 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
             //    var_export( $to );
                 Ayoola_Doc::createDirectory( dirname( $to ) );
                 copy( $from, $to );
+                if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( '/favicon.ico', array( 'disable_cache' => true ) ) )  
+                {
+                    
+                }  
+
             }
         }
+
         
     }
 

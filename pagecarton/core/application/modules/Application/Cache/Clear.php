@@ -41,7 +41,73 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
      * @var boolean
      */
 	protected static $_accessLevel = array( 99, 98 );
-	
+
+	/**
+     * The method does the whole Class Process
+     * 
+     */
+	protected static function removeBrokenLink( $dir )
+    {
+        foreach(scandir( $dir ) as $entry) {
+            $path = $dir . DIRECTORY_SEPARATOR . $entry;
+            if (is_link($path) && !file_exists($path)) {
+                unlink($path);
+            }
+            elseif( is_dir( $path ) && $entry !== '.' && $entry !== '..' )
+            {
+                self::removeBrokenLink( $path );
+            }
+        }
+        @unlink( $dir );
+    }
+
+    
+	/**
+     * The method does the whole Class Process
+     * 
+     */
+	protected static function do( $dir = null )
+    {
+        switch( $dir )
+        {
+            case PC_TEMP_DIR:
+            case CACHE_DIR:
+            break;
+            default:
+                $dir = CACHE_DIR;
+            break;
+
+        }
+        Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
+        set_time_limit( 0 );
+        
+        //	Reset domain
+        Ayoola_Application::setDomainSettings( true );
+        
+        //	remove "cache dir" this is causing issues.
+        //	Clear cache
+        $ourDir = realpath( dirname( $_SERVER['SCRIPT_FILENAME'] ) );
+        $stupidCache = $ourDir . '/cache';
+        
+        //	var_export( $stupidCache );
+        if( is_dir( $stupidCache ) )
+        {
+            $tempName = $stupidCache . '.' . time();
+            rename( $stupidCache, $tempName );
+            Ayoola_Doc::deleteDirectoryPlusContent( $tempName );
+        }
+        
+        //	Clear cache
+        if( is_dir( $dir ) )
+        {
+            $tempName = $dir . '.' . time();
+            rename( $dir, $tempName );
+            Ayoola_Doc::deleteDirectoryPlusContent( $tempName );
+        }
+        Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
+        self::removeBrokenLink( $ourDir );
+    }
+
     /**
      * The method does the whole Class Process
      * 
@@ -51,48 +117,11 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 
 		if( self::hasPriviledge() || $this->getParameter( 'strict_clear_all' ) )
 		{
-
-            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
-			set_time_limit( 0 );
-			
-			//	Reset domain
-			Ayoola_Application::setDomainSettings( true );
-			
-			//	remove "cache dir" this is causing issues.
-			//	Clear cache
-			$stupidCache = realpath( dirname( $_SERVER['SCRIPT_FILENAME'] ) ) . '/cache';
-			
-			//	var_export( $stupidCache );
-			if( is_dir( $stupidCache ) )
-			{
-                $tempName = $stupidCache . '.' . time();
-                rename( $stupidCache, $tempName );
-				Ayoola_Doc::deleteDirectoryPlusContent( $tempName );
-			}
-			
-			//	Clear cache
-			if( is_dir( PC_TEMP_DIR ) )
-			{
-                $tempName = PC_TEMP_DIR . '.' . time();
-                rename( PC_TEMP_DIR, $tempName );
-				Ayoola_Doc::deleteDirectoryPlusContent( $tempName );
-			}
-            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
+            self::do( PC_TEMP_DIR );
 		}
 		elseif( self::hasPriviledge( array( 98 ) ) || $this->getParameter( 'clear_all' ) )
 		{
-			//	Reset domain
-            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
-			Ayoola_Application::setDomainSettings( true );
-
-            //	Clear cache
-			if( is_dir( CACHE_DIR ) )
-			{
-                $tempName = CACHE_DIR . '.' . time();
-                rename( CACHE_DIR, $tempName );
-				Ayoola_Doc::deleteDirectoryPlusContent( $tempName );
-			}
-            Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
+			self::do( CACHE_DIR );
 		}
         if( function_exists( 'apcu_clear_cache' ) )
         {

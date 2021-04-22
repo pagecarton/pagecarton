@@ -287,7 +287,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                 {
                     if( empty( $options['row_id_column'] ) || $key !== $options['row_id_column'] )
                     {
-                        if( is_array( recordWhere ) && ! array_key_exists( $key, recordWhere ) )
+                        if( is_array( $recordWhere ) && ! array_key_exists( $key, $recordWhere ) )
                         {
                             continue; 
                         }

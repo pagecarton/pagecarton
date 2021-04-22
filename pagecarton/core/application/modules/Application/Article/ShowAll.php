@@ -1193,7 +1193,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$data['item_price'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
 			
 			}
-			if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( @$data['article_type'] ) )
+            $data['article_type'] = strtolower( trim( $data['article_type'] ) );
+			if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
 			{
 				$postType = @$postTypeInfo['article_type'];
 			}
@@ -1225,6 +1226,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             }
 			foreach( $features as $key => $eachPostType )
 			{	
+                $eachPostType = strtolower( trim( $eachPostType ) );
 				$featureSuffix = @$featuresPrefix[$key];
 				if( empty( $featureCount[$eachPostType] ) )
 				{
@@ -1615,6 +1617,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
         }
 
 		@$postType = $this->getParameter( 'article_types' ) ? : $postType;
+        $postType = strtolower( trim( $postType ) );
 		if( $postType )
 		{
 			$whereClause['article_type'][] = $postType;

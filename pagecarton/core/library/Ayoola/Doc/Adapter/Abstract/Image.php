@@ -80,9 +80,8 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
     public function view()
     {
 		$paths = array_unique( $this->getPaths() );
-//		var_export( $this->getPaths() );
-//		exit();   
-		$imageInfo = array();
+
+        $imageInfo = array();
 		if( @$_GET['crop_to_fit_url'] )
 		{
 			$imageInfo = Application_Slideshow_Abstract::getImageInfo( $_GET['crop_to_fit_url'] );
@@ -106,9 +105,7 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
 			$imageInfo['height'] = $_GET['height'];
 		}
 
-	//	var_export( $imageInfo );
-	//	exit();   
-		foreach( $paths as $path )
+        foreach( $paths as $path )
 		{	
 			if( ! empty( $imageInfo['width'] ) && ! empty( $imageInfo['height'] ) )
 			{
@@ -120,8 +117,9 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
 					header( 'Content-Description: File Transfer' );
 					header( 'Content-Type: ' . $this->getContentType( $path ) );
 					header( 'Content-Transfer-Encoding: binary' );
-			//		header( 'Content-Length: ' . filesize( $path ) );
-					readfile( $path );
+                    self::linkToWebRoot( $path, Ayoola_Application::getRequestedUri() );
+
+                    readfile( $path );
 			}
 		}
     } 

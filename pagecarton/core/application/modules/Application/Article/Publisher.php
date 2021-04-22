@@ -132,7 +132,10 @@ class Application_Article_Publisher extends Application_Article_Creator
                             $class = new $class( $widget['parameters'] );
                             if( method_exists( $class, 'getMarkupTemplateObjects' ) )
                             {
-                                $widgets = $widgets + $class->getMarkupTemplateObjects();
+                                if( is_array( $widgets ) && is_array( $class->getMarkupTemplateObjects() ) )
+                                {
+                                    $widgets = $widgets + $class->getMarkupTemplateObjects();
+                                }
                             }
                             else
                             {

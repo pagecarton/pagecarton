@@ -988,7 +988,7 @@ class Ayoola_Application
                     if( $userInfo && $userInfo['access_level'] != 99 )
                     {
                         $domainOptions = self::getDomainSettings( 'domain_options' );
-                        if( in_array( 'user_subdomains', $domainOptions ) )
+                        if( is_array( $domainOptions ) && in_array( 'user_subdomains', $domainOptions ) )
                         {
                             $parentDomainOptions = self::getDomainSettings( 'parent' );
                             $urlY = 'http://' . $nameForModule . '.' . ( @$parentDomainOptions['domain_name'] ? : self::getDomainSettings( 'domain_name' ) );

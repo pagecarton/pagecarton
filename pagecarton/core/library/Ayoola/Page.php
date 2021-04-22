@@ -358,7 +358,9 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				$pages = array();
 				
 				//	Home
-				$pages[] = self::getInfo( '/' );   
+				$pages[] = self::getInfo( '/' );
+                
+                
 				//	Article gan gan
 				$pages[] = array( 'url' => Ayoola_Application::$GLOBAL['post']['article_url'], 'title' => Ayoola_Application::$GLOBAL['post']['article_title'] );
 

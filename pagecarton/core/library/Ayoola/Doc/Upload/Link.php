@@ -51,55 +51,42 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 		try
 		{
 			$docSettings = Ayoola_Doc_Settings::getSettings( 'Documents' );
-		//		self::v( $docSettings ); 
 			
 			//	everyone must have a viewer 
 			@$docSettings['allowed_viewers'] = @$docSettings['allowed_viewers'] ? : array();
 			@$docSettings['allowed_viewers'][] = 98;	// allow us to user domain owners
 			if( ! Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_viewers'] ) )
 			{ 
-			//	$message = 'You are not allowed to use the file manager.';
 				$message = '';
 				$this->_objectData['badnews'][1] = '' . self::__( 'You are not allowed to use the file manager' ) . '';
 				$this->setViewContent( $message );
-			//	throw new Ayoola_Doc_Upload_Exception( $message );
 				return false;
 			}
 			$plainUrl = @$_REQUEST['image_url'] ? : ( $this->getParameter( 'suggested_url' ) ? : $this->getParameter( 'image_url' ) );
 			$imageUrl = $plainUrl;    
 			$path = Ayoola_Loader::checkFile( 'documents' . $imageUrl );
-	//		var_export( $path );
 			if( Ayoola_Application::getUrlPrefix() && $plainUrl[0] === '/' )
 			{
 				$imageUrl = Ayoola_Application::getUrlPrefix() . $plainUrl;
 			}
-	//		var_export( $plainUrl ); 
-	//		var_export( $imageUrl ); 
-			switch( @array_pop( explode( '.', strtolower( $imageUrl ) ) ) )
+
+            switch( @array_pop( explode( '.', strtolower( $imageUrl ) ) ) )
 			{
 				case 'jpg':
 				case 'jpeg':
 				case 'png':  
 				case 'gif':
-		//		var_export( $imageUrl );
-		//		var_export( array_pop( explode( '.', strtolower( $imageUrl ) ) ) );
-		//		var_export( Application_Slideshow_Abstract::getImageInfo( $plainUrl ) );
-					//	var_export( Application_Slideshow_Abstract::getImageInfo( $imageUrl ) );
 					if( $imageUrl AND $imageInfo = Application_Slideshow_Abstract::getImageInfo( $plainUrl ) )
 					{
-					//	var_export( $imageInfo );
 						if( ! empty( $imageInfo['width'] ) && ! empty( $imageInfo['height'] ) )
 						{ 
 							$imageInfo['image_preview'] = $imageUrl; 
 							$imageInfo['suggested_url'] = $plainUrl; 
 							if( ! empty( $_REQUEST['crop'] ) )
 							{
-								 $imageInfo['crop'] = true; 
+								$imageInfo['crop'] = true; 
 							}
-						//	if( isset( $_REQUEST['preview_text'] ) )
-							{
-								 $imageInfo['preview_text'] = $this->getParameter( 'preview_text' ) . ' ' . @$_REQUEST['preview_text'] . ' ' . $imageInfo['width'] . ' x ' . $imageInfo['height']; 
-							}
+							$imageInfo['preview_text'] = $this->getParameter( 'preview_text' ) . ' ' . @$_REQUEST['preview_text'] . ' ' . $imageInfo['width'] . ' x ' . $imageInfo['height']; 
 						}
 						$this->setParameter( $imageInfo );
 					}
@@ -115,8 +102,6 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 					$this->setParameter( $imageInfo );
 				break;
 			}
-	//		self::v( $this->getParameter() );
-	//		var_export( $this->getParameter() );    
 			$name = $this->getParameter( 'field_name' );
 			$imageId = 'x' . md5( $name . microtime() );
 			$js = null;
@@ -125,10 +110,8 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 				$js .= 'ayoola.image.maxWidth = \'' . $this->getParameter( 'width' ) . '\'; ';
 				$js .= 'ayoola.image.maxHeight = \'' . $this->getParameter( 'height' ) . '\';';
 			}
-	//		var_export( $this->getParameter( 'suggested_url' ) );
-	//		var_export( $imageInfo['suggested_url'] );
-		//	var_export( $plainUrl );
-			@$suggestedUrl = ( $this->getParameter( 'suggested_url' ) ? : $imageInfo['suggested_url'] );
+
+            @$suggestedUrl = ( $this->getParameter( 'suggested_url' ) ? : $imageInfo['suggested_url'] );
 			if( $plainUrl && ! $suggestedUrl )
 			{
 				if( $dedicatedUri = Ayoola_Doc::uriToDedicatedUrl( $plainUrl ) )   
@@ -141,10 +124,9 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 				
 			//	use image id to ensure only one preview change when update is made
 			$js .= 'ayoola.image.imageId = \'' . $imageId . '\';'; 
-//		var_export( $js );
 			
 			//	Make the upload link
-		//	Application_Javascript::addFile( '/js/objects/spin.min.js' );
+		    //	Application_Javascript::addFile( '/js/objects/spin.min.js' );
  			Application_Javascript::addCode( 
 											'
 												ayoola.events.add
@@ -160,11 +142,8 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 											);
 			$jsSetFieldName = 'ayoola.image.fieldName=\'' . $this->getParameter( 'field_name' ) . '\'; ayoola.image.fieldNameValue=\'' . $this->getParameter( 'field_name_value' ) . '\'; ' . $js;
 			$optionName = $name . '_option';
-	//		$previewName = $name . '_preview';
-			
-			//{ accept: \'' . @$element['data-document_type'] . '/*\' }
-		//	$jsSelectElement = ' ayoola.div.selectElement( { element: this, disableUnSelect: true, name: \'' . $optionName . '\', } ); ';
-			$dropZoneName = $name . '_drop_zone';
+
+            $dropZoneName = $name . '_drop_zone';
 			$previewZoneName = $imageId . '_preview_zone';
 			$previewImageName = $imageId . '_preview_zone_image'; 
 
@@ -213,13 +192,11 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
  			
 			$dropZoneJs = ' var a = document.getElementsByName(\'' . $dropZoneName . '\'); for( var b = 0; b < a.length; b++ ){ ayoola.image.setDropZone( a[b] ); a[b].style.display == \'none\' ? a[b].style.display=\'block\' : a[b].style.display=\'none\'; } ';
 			$showMenuJs = ' var a = document.getElementsByName(\'' . $optionName . '\'); for( var b = 0; b < a.length; b++ ){ a[b].style.display == \'none\' ? a[b].style.display=\'inline-block\' : a[b].style.display=\'none\'; }  this.style.display=\'inline-block\';  this.innerHTML=\'' . self::__( 'Show/Hide Upload Options' ) . '...\';';
-		//	var_export( $this->getParameter( 'field_name' ) );
-		//	var_export( $this->getGlobalValue( $this->getParameter( 'field_name' ) ) ); 
-			$uri = $plainUrl;
+
+            $uri = $plainUrl;
 			$uri = Ayoola_Application::getUrlPrefix() . '/widgets/Application_IconViewer?url=' . $plainUrl;
-		//	var_export( $this->getParameter( 'image_preview' ) );
-		//	var_export( $uri );
-			if( ! is_string( $uri ) )
+
+            if( ! is_string( $uri ) )
 			{
 				$uri = null;
 			}

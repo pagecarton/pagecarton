@@ -186,11 +186,9 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public static function uriToDedicatedUrl( $uri, array $options = null )
     {
-	//	var_export( $uri );
 		$useQueryStrings = true;
 		do
 		{
-		//	break;
 			if( ! $uri || ! is_string( $uri ) ){ break; }
 			if( strpos( $uri, '//' ) !== false ){ break; }   
 			
@@ -198,52 +196,37 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			if( ! strpos( $_SERVER['HTTP_HOST'], '.' ) )
 			{
 				$useQueryStrings = true;
-		//		break; 
 			}
-		//	if( $_SERVER['SERVER_PORT'] != '80' ){ break; }
-//	var_export( $uri . '<br>' );
 			try
 			{
-			//	$filePath = DOCUMENTS_DIR . $file;
 				$storage = new Ayoola_Storage(); 
 				$storage->storageNamespace = __CLASS__ . Ayoola_Application::getUrlPrefix() . $uri . 's--d-d-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
 				$storage->setDevice( 'File' );
-			//	self::v( $storage->retrieve() );
 				if( ! $dedicatedUrl = $storage->retrieve() OR $options['disable_cache'] )  
 				{
-				//	var_export( $uri );
+                   
+                    //  delete web root link
+                    $link = trim( $uri, '/ ' );
+                    if( is_link( $link ) )
+                    {
+                        unlink( $link );
+                    }
 					$j = new Ayoola_Doc( array( 'option' => $uri ) );
 					$j = str_replace( '/', DS, $j::getDocumentDirectory() . $uri ); 
-				//	var_export( $j );
-		//			var_export( __LINE__ );
 					$j = @filemtime( Ayoola_Loader::checkFile( $j, array( 'prioritize_my_copy' => true ) ) );
-				//	var_export( $j );
 					$domain = Ayoola_Page::getDefaultDomain();
 					$domain = DOMAIN;
-		//			if( $useQueryStrings )
-					{
-					//	var_export( Ayoola_Application::getDomainSettings() );
-					//	exit();
-						$dedicatedUrl = Ayoola_Application::getDomainSettings( 'protocol' ) . "://{$domain}" . Ayoola_Application::getUrlPrefix() . "{$uri}?document_time={$j}";					
-                    }	
-                //    var_export( $dedicatedUrl );
+					$dedicatedUrl = Ayoola_Application::getDomainSettings( 'protocol' ) . "://{$domain}" . Ayoola_Application::getUrlPrefix() . "{$uri}?document_time={$j}";					
 					$storage->store( $dedicatedUrl );
 				}
 			}
 			catch( Exception $e )
 			{ 
-			//	echo $e->getMessage();
 				null; 
 			}
 		}
 		while( false );
 		@$dedicatedUrl = $dedicatedUrl ? : $uri;    	
-/*		if( Ayoola_Application::getUrlPrefix() && $dedicatedUrl[0] === '/' && stripos( $url, Ayoola_Application::getUrlPrefix() ) !== 0 )
-		{
-		//	var_export( $dedicatedUrl );
-			$dedicatedUrl = Ayoola_Application::getUrlPrefix() . $dedicatedUrl;
-		}
-*/	//	var_export( $dedicatedUrl );
 		return $dedicatedUrl;
     } 
 	
