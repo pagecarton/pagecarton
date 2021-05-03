@@ -1369,8 +1369,6 @@ class Ayoola_Application
             {
                 return false;
             }
-        //    var_export( is_file( $myPageFile ));
-        //    var_export( ( $options ));
 
 
 			$pagePathsX['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
@@ -1459,7 +1457,7 @@ class Ayoola_Application
             //  leaving this one have a way of allowing home page ignore 
             //  widgets-embedded theme page
             //  does not allow autogeneration of theme page  for index
-		//	if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
+		    //	if( ! empty( $_REQUEST['pc_page_layout_name'] ) )
 			{
 				if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
 				{

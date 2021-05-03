@@ -323,7 +323,6 @@ class Application_User_Creator extends Application_User_Abstract
 				break;
 			}
 			@$referrer = $_REQUEST['pc_referrer'] ? : $_COOKIE['pc_referrer'];
-		//	$userInfo = Ayoola_Application::getUserInfo();		
 			if( ! $userInfo = Ayoola_Access::getAccessInformation( $referrer ) )
 			{
 				break;
