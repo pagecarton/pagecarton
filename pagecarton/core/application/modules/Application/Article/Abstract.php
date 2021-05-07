@@ -768,7 +768,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$options = $class->select( null, array( 'category_name' => $categoryIds ) ) ? : array();
 		
 		//	compatibility
-		$options += $class->select( null, array( 'category_id' => $categoryIds ) ) ? : array();
+		//$options += $class->select( null, array( 'category_id' => $categoryIds ) ) ? : array();
 
 		$i = 0;
 		foreach( $options as $each )

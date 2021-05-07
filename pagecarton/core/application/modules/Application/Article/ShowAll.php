@@ -1140,8 +1140,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
             //	CATEGORIES 
             //  Category not array in the case of category showall
-			$categoryTextRaw = self::getCategories( $categoryToUse, array( 'template' => $this->getParameter( 'category_template' ), 'glue' => ( $this->getParameter( 'category_template_glue' ) ? : ', ' ) ) );
-			$categoryText = $categoryTextRaw ? ' ' . $categoryTextRaw : null;
+			$categoryTextRaw = self::getCategories( $data['category_name'], array( 'template' => $this->getParameter( 'category_template' ), 'glue' => ( $this->getParameter( 'category_template_glue' ) ? : ', ' ) ) );
+			$categoryText = $categoryTextRaw ? '' . $categoryTextRaw : null;
 			$data['category_text'] = $categoryText;
 			
 			//	Social Media
