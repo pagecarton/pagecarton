@@ -32,12 +32,13 @@ class Application_Subscription_Checkout_Order extends Ayoola_Dbase_Table_Abstrac
      *
      * @param int
      */
-    protected $_tableVersion = '0.05';
+    protected $_tableVersion = '0.06';
 
 	protected $_dataTypes = array
 	( 
 		'order' => 'JSON',
 		'order_api' => 'INPUTTEXT',  
+		'order_message' => 'INPUTTEXT',  
 		'order_status' => 'INPUTTEXT',
 		'order_random_code' => 'INPUTTEXT',
 		'total' => 'INPUTTEXT',

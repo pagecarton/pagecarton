@@ -72,28 +72,46 @@ abstract class Application_Subscription_Checkout_Order_Abstract extends Applicat
 		
 		$fieldset->addElement( array( 'name' => 'username', 'type' => 'InputText', 'value' => @$values['username'] ) );
 		$fieldset->addElement( array( 'name' => 'email', 'type' => 'InputText', 'value' => @$values['email'] ) );
-//		$fieldset->addElement( array( 'name' => 'order', 'description' => 'Order', 'type' => 'TextArea', 'value' => @var_export( $values['order'], true ) ) );
-        $fieldset->addElement( array( 'name' => 'order_api', 'description' => 'Payment', 'type' => 'InputText', 'value' => @$values['order_api'] ) );
+
+        if( empty( $values['order_api'] ) )
+        {
+            $fieldset->addElement( array( 'name' => 'order_api', 'description' => 'Payment', 'type' => 'InputText', 'value' => @$values['order_api'] ) );
+        }
         
-    //    var_export( $values['order_status'] );
-    //    var_export( static::$checkoutStages );
 
         $stages = array_unique( static::$checkoutStages );
 
 
         if( ! array_key_exists( $values['order_status'], $stages ) && in_array( $values['order_status'], $stages ) )
         {
-        //    array_column();
             $keyStages = array_flip( $stages );
             $values['order_status'] = $keyStages[$values['order_status']];
         }
 
-		$fieldset->addElement( array( 'name' => 'order_status', 'type' => 'Select', 'value' => @$values['order_status'] ), $stages );
-//		$fieldset->addElement( array( 'name' => 'order_random_code', 'type' => 'InputText', 'value' => @$values['order_random_code'] ) );
-//		$fieldset->addElement( array( 'name' => 'currency', 'type' => 'InputText', 'value' => @$values['currency'] ) );
-		
-	//	$fieldset->addFilters( 'enabled', array( 'HtmlSpecialCharsDecode' => null  ) );
-		$fieldset->addFilters( array( 'Trim' => null, 'Escape' => null ) );
+        //var_export( $stages );
+        if( $dynamicStages = Application_Subscription_Checkout_Order_Status::getInstance()->select() )
+        {
+            foreach( $dynamicStages as $each )
+            {
+                $stages[$each['code']] = $each['title'];
+            }
+
+        }
+        if( isset( $_REQUEST['status_change'] ) )
+        {
+            $values['order_status'] = $_REQUEST['status_change'];
+
+            if( $stageInfo = Application_Subscription_Checkout_Order_Status::getInstance()->selectOne( null, array( 'code' => $values['order_status'] ) ) )
+            {
+                $fieldset->addElement( array( 'name' => 'order_message', 'type' => 'TextArea', 'label' => 'Order Status Message', 'placeholder' => 'Enter notification message to send to customer...', 'value' =>  $stageInfo['message'] ? : @$values['order_message'] ) );
+            }
+        }
+
+		$fieldset->addElement( array( 'name' => 'order_status', 'type' => 'Select', 'onchange' => 'location.search += \'&status_change=\'+this.value', 'value' => @$values['order_status'] ), $stages );
+
+        
+
+        $fieldset->addFilters( array( 'Trim' => null, 'Escape' => null ) );
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );

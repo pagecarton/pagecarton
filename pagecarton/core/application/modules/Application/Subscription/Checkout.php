@@ -148,7 +148,6 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 			return false; 
 		}
 
-		$stages = Application_Subscription_Checkout::$checkoutStages;
 		if( $orderInfo['order_status'] == $response['order_status'] )
 		{ 
 			return false; 
@@ -205,16 +204,35 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		$update = array_merge( $orderInfo, $update);  
 		$table->update( $update, array( 'order_id' => $response['order_id'] )  );
 
+        $title = null;
+        $message = null;
+        if( $stageInfo = Application_Subscription_Checkout_Order_Status::getInstance()->selectOne( null, array( 'code' => $response['order_status'] ) ) )
+        {
+
+            $title = ' (' . $stageInfo['title'] . ') ';
+            
+            $message = $stageInfo['message'];
+            if( strip_tags( $message ) === $message )
+            {
+                $message = nl2br( $message );
+            }
+            $message = self::replacePlaceholders( $message, $response );
+            $title = self::replacePlaceholders( $title, $response );
+        }
+
+
 		//	Notify shopper
 		$mailInfo = array();
-		$mailInfo['subject'] = 'Status change for order no ' . $response['order_id'];
+		$mailInfo['subject'] = 'Status change for order no ' . $response['order_id'] . $title;
 		$mailInfo['body'] = null;
-		$mailInfo['body'] .= '' . self::arrayToString( $orderInfo ) . '';
+		$mailInfo['body'] .= $message ? : ( '' . self::arrayToString( $orderInfo ) . '' );
 		$mailInfo['body'] .= $output;
 		@$checkoutEmail = $cart['checkout_info']['email'] ? : $cart['checkout_info']['email_address'];
 		@Ayoola_Application_Notification::mail( $mailInfo );
 		$mailInfo['email'] = $checkoutEmail;
 		@self::sendMail( $mailInfo );
+        //var_export( $mailInfo );
+
 		return true;
     } 
 		

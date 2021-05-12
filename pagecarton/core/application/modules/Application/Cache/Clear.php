@@ -66,7 +66,7 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
      * The method does the whole Class Process
      * 
      */
-	protected static function do( $dir = null )
+	public static function do( $dir = null )
     {
         switch( $dir )
         {

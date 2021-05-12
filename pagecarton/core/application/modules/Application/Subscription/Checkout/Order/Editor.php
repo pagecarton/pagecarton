@@ -37,14 +37,14 @@ class Application_Subscription_Checkout_Order_Editor extends Application_Subscri
 		try{ $this->setIdentifier(); }
 		catch( Application_Subscription_Checkout_Order_Exception $e ){ return false; }
 		if( ! $identifierData = self::getIdentifierData() ){ return false; }
-		$this->createForm( 'Save Order', 'Edit ' . $identifierData['order_id'], $identifierData );
+		$this->createForm( 'Save', 'Edit Order' . $identifierData['order_id'], $identifierData );
 		$this->setViewContent( $this->getForm()->view(), true );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
 
 		self::changeStatus( $values + $identifierData );
 		if( $this->updateDb() )
 		{ 
-			$this->setViewContent(  '' . self::__( '<div class="goodnews">Order edited successfully</div>' ) . '', true  ); 
+			$this->setViewContent(  '' . self::__( '<div class="goodnews">Order information saved successfully</div>' ) . '', true  ); 
 			$this->setViewContent( $this->getForm()->view() );
 		}
     } 
