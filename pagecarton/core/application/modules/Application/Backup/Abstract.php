@@ -90,7 +90,6 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
 		$name = $filter->filter( $name );
 		$domain = $filter->filter( Ayoola_Page::getDefaultDomain() ); 
 		$name = $directory . DS . $name . '_CMF_' . $domain . '_' . time() . '.tar'; 
-	//	var_export( $name );
 		return $name;
 	}
 	
@@ -100,7 +99,6 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getBackupDirectory()
     {
-	//	return APPLICATION_DIR . DS . 'backup';
 		return Ayoola_Application::getDomainSettings( APPLICATION_DIR ) . DS . 'backup';
 	}
 	
@@ -130,26 +128,16 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
 		if( is_null( $values ) )
 		{
 			$fieldset->addElement( array( 'name' => 'backup_name', 'placeholder' => 'Name this Backup', 'type' => 'Hidden', 'value' => @$values['backup_name'] ) );  
-        //	if( Ayoola_Form::getGlobalValue( 'backup_type' ) === 'export' )
-            {
-                //	We allow options in export
-            //	$options = array( 'databases', 'functions', 'modules', 'pages', 'documents', 'library' );
-            //	$options = array_combine( self::$_exportList, self::$_exportList );
-                $fieldset->addRequirement( 'backup_export_list', array( 'NotEmpty' => null ) );
-            }
+
+            //	We allow options in export
+            $fieldset->addRequirement( 'backup_export_list', array( 'NotEmpty' => null ) );
 		}
-	//	$link = ;
-	//	$options = array( 'simple' => 'Simple Backup: creates an archive of my website for safe keep.', 'installer' => 'Installer: creates a archive of this website to install on another server. Some security settings are wiped out in the created archive. This archive will be available for download at <a target="_blank" href="' . self::getInstallerLink() . '">' . 'http://' . Ayoola_Page::getDefaultDomain() . self::getInstallerLink() . '</a>', 'export' => 'Export: creates a archive of your site that can be imported on another location.' );
 		$options = array( 
                             'simple' => 'Simple Backup', 
                             'installer' => 'Installer', 
                             'export' => 'Create Export Link' ); 
-    //    var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );
-    //    var_export( APPLICATION_PATH );
         if( ( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) === APPLICATION_PATH || Ayoola_Page::getDefaultDomain() == 'updates.pagecarton.org' ) && self::hasPriviledge() )
         {
-        //    unset( $options['simple'] );
-        //    unset( $options['export'] );
             if( ! empty( $values['backup_name'] ) )
             {
                 $fieldset->addElement( array( 'name' => 'export_expiry', 'label' => 'Link Expiry', 'type' => 'Select', 'value' => @$values['export_expiry'] ? : array_keys( self::$_exportList ) ), array( '3600' => '1 hr', '36000' => '10 hrs' ) );
@@ -180,7 +168,6 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
             }
             else
             {
-        //        if( Ayoola_Form::getGlobalValue( 'backup_type' ) === 'export' )
                 {
                     $fieldset->addElement( array( 'name' => 'export_expiry', 'label' => 'Link Expiry', 'type' => 'Select', 'value' => @$values['export_expiry'] ? : array_keys( self::$_exportList ) ), array( '3600' => '1 hr', '36000' => '10 hrs' ) );
                     $fieldset->addRequirement( 'export_expiry', array( 'NotEmpty' => null ) );
@@ -190,13 +177,8 @@ abstract class Application_Backup_Abstract extends Ayoola_Abstract_Table
         } 
 		$fieldset->addElement( array( 'name' => 'backup_type', 'label' => 'Mode', 'type' => 'Select', 'value' => @$values['backup_type'] ? : 'simple' ), $options );
 		$fieldset->addElement( array( 'name' => 'backup_description', 'placeholder' => 'Describe this Backup', 'type' => 'TextArea', 'value' => @$values['backup_description'] ) );
-		
-	//	var_export( Ayoola_Form::getGlobalValue( 'backup_type' ) );
-	
-		
 		$fieldset->addRequirements( array( 'WordCount' => array( 0,300 ) ) );
 		$fieldset->addFilters( array( 'trim' => null ) );
-	//	$fieldset->addElement( array( 'name' => __CLASS__, 'value' => $submitValue, 'type' => 'Submit' ) );
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
