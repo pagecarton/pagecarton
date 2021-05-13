@@ -53,8 +53,6 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $file1 = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $loc;
             }
             $coreZip = dirname( $file1 ) . DS . 'pagecarton.zip';
-            
-            return false;
 
             if( ! file_exists( $file1 ) || ! empty( $_REQUEST['pc_recreate_installer'] ) )   
             {
