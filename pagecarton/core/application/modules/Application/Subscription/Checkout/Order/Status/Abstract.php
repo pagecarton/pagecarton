@@ -61,13 +61,11 @@ class Application_Subscription_Checkout_Order_Status_Abstract extends PageCarton
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
 		$form->submitValue = $submitValue ;
-//		$form->oneFieldSetAtATime = true;
 
 		$fieldset = new Ayoola_Form_Element;
-	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'code', 'type' => 'InputText', 'value' => @$values['code'] ) );         
-        $fieldset->addElement( array( 'name' => 'title', 'type' => 'InputText', 'value' => @$values['title'] ) );         
-        $fieldset->addElement( array( 'name' => 'message', 'type' => 'TextArea', 'value' => @$values['message'] ) ); 
+        $fieldset->addElement( array( 'name' => 'code', 'label' => 'Status Code', 'placeholder' => 'e.g. 24', 'type' => 'InputText', 'value' => @$values['code'] ) );         
+        $fieldset->addElement( array( 'name' => 'title', 'label' => 'Status Title', 'placeholder' => 'e.g. Order Shipped', 'type' => 'InputText', 'value' => @$values['title'] ) );         
+        $fieldset->addElement( array( 'name' => 'message', 'label' => 'Order Status Message', 'placeholder' => 'Enter template message to send to customer when order status is set to this one...', 'type' => 'TextArea', 'value' => @$values['message'] ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

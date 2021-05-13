@@ -24,7 +24,7 @@ class Application_Subscription_Checkout_Order_Status_Creator extends Application
      * 
      * @var string 
      */
-	protected static $_objectTitle = 'Add new'; 
+	protected static $_objectTitle = 'Add new Order Status Code'; 
 
     /**
      * Performs the whole widget running process
@@ -35,10 +35,9 @@ class Application_Subscription_Checkout_Order_Status_Creator extends Application
 		try
 		{ 
             //  Code that runs the widget goes here...
-			$this->createForm( 'Submit...', 'Add new' );
+			$this->createForm( 'Submit...', 'Add new Order Status Code' );
 			$this->setViewContent( $this->getForm()->view() );
 
-		//	self::v( $_POST );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
 			//	Notify Admin
@@ -49,19 +48,13 @@ class Application_Subscription_Checkout_Order_Status_Creator extends Application
 			';
 			try
 			{
-		//		var_export( $mailInfo );
 				@Ayoola_Application_Notification::mail( $mailInfo );
 			}
 			catch( Ayoola_Exception $e ){ null; }
-		//	if( ! $this->insertDb() ){ return false; }
 			if( $this->insertDb( $values ) )
 			{ 
 				$this->setViewContent(  '' . self::__( '<div class="goodnews">Added successfully. </div>' ) . '', true  ); 
 			}
-		//	$this->setViewContent( $this->getForm()->view() );
-            
-
-
             // end of widget process
           
 		}  

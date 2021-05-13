@@ -108,6 +108,7 @@ abstract class Application_Subscription_Checkout_Order_Abstract extends Applicat
         }
 
 		$fieldset->addElement( array( 'name' => 'order_status', 'type' => 'Select', 'onchange' => 'location.search += \'&status_change=\'+this.value', 'value' => @$values['order_status'] ), $stages );
+		$fieldset->addElement( array( 'name' => 'manage', 'type' => 'html', 'value' => @$values['order_status'] ), array( 'html' => '<a href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Status_List/\' );">Manage Order Status Codes</a>' ) );
 
         
 

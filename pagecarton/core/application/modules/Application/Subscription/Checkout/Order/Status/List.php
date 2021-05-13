@@ -24,7 +24,7 @@ class Application_Subscription_Checkout_Order_Status_List extends Application_Su
      * 
      * @var string 
      */
-	  protected static $_objectTitle = 'List';   
+	  protected static $_objectTitle = 'Order Status Codes';   
 
     /**
      * Performs the creation process
@@ -59,7 +59,9 @@ class Application_Subscription_Checkout_Order_Status_List extends Application_Su
 		$list->createList
 		(
 			array(
-                    'code' => array( 'field' => 'code', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'title' => array( 'field' => 'title', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'message' => array( 'field' => 'message', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                    'code' => array( 'field' => 'code', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
+                    'title' => array( 'field' => 'title', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
+                    'message' => array( 'field' => 'message', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
                     'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
                     '%FIELD% <a style="font-size:smaller;"  href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Status_Editor/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 
                     '%FIELD% <a style="font-size:smaller;" href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Subscription_Checkout_Order_Status_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );"><i class="fa fa-trash" aria-hidden="true"></i></a>', 

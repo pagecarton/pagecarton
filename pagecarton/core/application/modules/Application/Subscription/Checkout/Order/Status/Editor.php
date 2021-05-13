@@ -29,7 +29,7 @@ class Application_Subscription_Checkout_Order_Status_Editor extends Application_
 		{ 
             //  Code that runs the widget goes here...
 			if( ! $data = $this->getIdentifierData() ){ return false; }
-			$this->createForm( 'Save', 'Edit', $data );
+			$this->createForm( 'Save', 'Edit Order Status Code', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
