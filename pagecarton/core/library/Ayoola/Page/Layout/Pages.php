@@ -70,7 +70,6 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 	public static function getPagePaths( $themeName, $pageThemeFileUrl = null )
     {
         $fPaths = array();
-    //    $themeName = strtolower( $data['layout_name'] );
 		if(  $pageThemeFileUrl === '/' )
 		{
 			$pageThemeFileUrl = '/index';
@@ -87,12 +86,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
      */
 	public static function getPageFile( $themeName, $pageThemeFileUrl = null )  
     {
-     //   $fPaths = array();
-	//    $themeName = strtolower( $data['layout_name'] );
 		$pageThemeFileUrl = trim( $pageThemeFileUrl, '/' );
-
-
-	//	var_export( $pageThemeFileUrl );
         $fPath = 'documents/layout/' . $themeName . '/' . ( $pageThemeFileUrl ? : 'index' ) . '.html';
 		return $fPath;
 	}
@@ -103,23 +97,17 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
      */
 	public static function getPages( $themeName, $type = null )
     {
-	//	if( ! $data = $this->getIdentifierData() ){ return array(); }
-	//	$dir = dirname( $this->getMyFilename() );
-	//	if( ! is_dir( $dir ) ) 
-		{
-			$globalFile = Ayoola_Loader::checkFile( 'documents/layout/' . $themeName . '/template' );
-			if( ! is_file( $globalFile ) )
-			{
-				return array();
-			}
-			$dir = dirname( $globalFile );
-		}
+		
+        $globalFile = Ayoola_Loader::checkFile( 'documents/layout/' . $themeName . '/template' );
+        if( ! is_file( $globalFile ) )
+        {
+            return array();
+        }
+        $dir = dirname( $globalFile );
+		
         $ext = array( 'html', 'htm' );
-    //        $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir, array( 'whitelist_basename' => $basename ) ) );
 		$files = Ayoola_Doc::getFiles( $dir, array( 'whitelist_extension' => $ext ) );
-//		var_export( $files );   
 		$pages = array();   
-	//	sort( $files );
 		foreach( $files as $each )
 		{
 			$ext = explode( '.', $each );
@@ -150,31 +138,23 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
     {
 		try
 		{ 
-		//	var_export( $this->setIdentifier() );
 			if( ! $this->getIdentifier() )
 			{
 				$this->_identifier['layout_name'] = Ayoola_Page_Editor_Layout::getDefaultLayout();
 			}
-		//	var_export( $this->_identifier );
 			if( ! $data = $this->getIdentifierData() ){ return false; }
-		//	var_export( $data );
-		
-	//		var_export( $this->getMyFilename() );
 			if( ! $pages = self::getPages( $data['layout_name'] ) )
 			{
-		//		$pages[] = array( 'url' => '/' );
-			}
+
+            }
             $pages = self::sortMultiDimensionalArray( $pages, 'url' );
             $pages[0]['title'] = 'Home Page';
-		//	var_export( $pages );
 			$list = new Ayoola_Paginator();
 			$list->pageName = $this->getObjectName();
 			$list->listTitle = sprintf( self::__( 'Edit "%s" theme content' ), $data['layout_label'] );
 			$list->deleteClass = 'Ayoola_Page_Layout_Pages_Delete';
-		//	$list->listTitle = $this->get;
-		//	$table = $this->getDbTable();
-		//	$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );   
-			$list->setData( $pages );  
+
+            $list->setData( $pages );  
 			$list->setKey( 'url' );  
 			$list->setNoRecordMessage( 'This theme has no pages.' );  
             $list->setListOptions( 
@@ -206,11 +186,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 			);
 			$this->setViewContent( $list, true ); 
 		
-/*			$parameters = array();
-			$parameters['pages'] = $pages;
-			$class = new Ayoola_Page_List( $parameters );
-			$this->setViewContent( $class->view(), true ); 
-*/		}
+		}
 		catch( Ayoola_Page_Layout_Exception $e ){ return false; }
     } 
 	// END OF CLASS

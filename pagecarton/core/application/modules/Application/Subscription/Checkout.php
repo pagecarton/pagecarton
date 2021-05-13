@@ -227,11 +227,10 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		$mailInfo['body'] = null;
 		$mailInfo['body'] .= $message ? : ( '' . self::arrayToString( $orderInfo ) . '' );
 		$mailInfo['body'] .= $output;
-		@$checkoutEmail = $cart['checkout_info']['email'] ? : $cart['checkout_info']['email_address'];
+		@$checkoutEmail = ( ( $response['order']['checkout_info']['email'] ? : $response['order']['checkout_info']['email_address'] ) ? : $response['order']['checkout_info']['Email Address'] ) ? : $response['email'];
 		@Ayoola_Application_Notification::mail( $mailInfo );
-		$mailInfo['email'] = $checkoutEmail;
+		$mailInfo['to'] = $checkoutEmail;
 		@self::sendMail( $mailInfo );
-        //var_export( $mailInfo );
 
 		return true;
     } 

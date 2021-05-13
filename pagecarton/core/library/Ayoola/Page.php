@@ -145,14 +145,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		{
 			$id = Ayoola_Application::getApplicationNameSpace() . $url;
 
-			$storage = self::getObjectStorage( array( 'id' => $id,  ) );
-		//	if( $info = $storage->retrieve() )
-			{ 
-				//	The theme sometimes caches and brings stale info
-
-			}
-			
-			
+			$storage = self::getObjectStorage( array( 'id' => $id,  ) );			
 			$tableName = 'Ayoola_Page_Page';		
 
 			$table = $tableName::getInstance();		
@@ -193,7 +186,15 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			{ 
 				//	just what we need
 				@$info = array( 'url' => $url );
-
+                $file = 'documents/layout/' . $themeName . '/pagesettings';
+                $globalFile = Ayoola_Loader::checkFile( $file );
+                if( is_file( $globalFile ) )
+                if( $settings = json_decode( file_get_contents( $globalFile ), true ) )
+                if( ! empty( $settings[$url] ) && is_array( $settings[$url] ) )
+                {
+                    $info += $settings[$url];
+                }
+        
 				$info['cache_info'] = serialize( $storage );
 				$storage->store( $info );
 				break; 
