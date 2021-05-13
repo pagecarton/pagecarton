@@ -1,5 +1,5 @@
 {
-    "/category": {
+    "/category-x": {
         "title": "Testing to include page settings in themes",
         "page_options": ["module"]
     }
