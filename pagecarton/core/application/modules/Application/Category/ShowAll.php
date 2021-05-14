@@ -159,13 +159,14 @@ class Application_Category_ShowAll extends Application_Article_ShowAll
      */
 	public function filterData( &$data )
     {
-		if( $this->getParameter( 'category_page' ) )
+        $link = $this->getParameter( 'category_page' ) ? : self::getPostUrl();
+		if( $this->getParameter( 'url_integration_type' ) === 'pc_module_url_values_offset' )
 		{
-			$data['article_url'] = '/' . trim( $this->getParameter( 'category_page' ), '/' ) . '/?category=' . $data['category_name']; 
+            $data['article_url'] = '/' . trim( $link, '/' ) . '/' . $data['category_name']; 
         }
         else
         {
-            $data['article_url'] = '' . self::getPostUrl() . '/' . $data['category_name']; 
+			$data['article_url'] = '/' . trim( $link, '/' ) . '/?category=' . $data['category_name']; 
         }
 	}
 			

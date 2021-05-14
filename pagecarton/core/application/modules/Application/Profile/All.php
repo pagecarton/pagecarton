@@ -76,12 +76,8 @@ class Application_Profile_All extends Application_Article_ShowAll
      */
 	public function filterData( &$data )
     {
-	//	var_export( $data );
-	//	if( $this->getParameter( 'category' ) )
-		{
-		//	$data['article_url'] = '' . $this->getParameter( 'category_page' ) . '?category=' . $data['category_name']; 
-		} 
-	}
+
+    }
 			
     /**
      * 
