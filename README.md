@@ -75,3 +75,6 @@ MORE INFORMATION
 
  * See the PageCarton site:
    http://www.PageCarton.org/
+
+ * Online platform:
+    http://pagecarton.com
