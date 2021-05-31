@@ -82,6 +82,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		{
 			$rows = array();
 			$files = array_unique( $this->getGlobalFilenames() );
+            //var_export( $files );
 			$rows = $this->loopFiles( $files, $fieldsToFetch, $where, $options );
 		}
 		if( ! empty( $options['sort_column'] ) )
@@ -132,7 +133,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
             {
 
             }
+
 			$this->doSelect( $fieldsToFetch, $where, $innerOptions, $rows );
+            //var_export( $filename );
+            //var_export( $rows );
 			//$rows = $this->selectResultKeyReArrange == true ? array_merge( $rows, $rowsInThisFile ) : $rows + $rowsInThisFile;
 			$totalRows = count( $rows );
 		}
@@ -271,6 +275,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$fields = array();		
 			$searchResultIsHere = false;
 			$rowId = self::getRecordRowId( $eachRecord );
+			$rowKey = null;
 			$recordMatch = false;
 			$keyCount = 0;
             $keyFound = array();
@@ -507,8 +512,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				}
                 if( ! empty( $options['row_id_column'] ) && $key === $options['row_id_column'] )
                 {
-                    $rowId = $fieldValue; 
-                    if( isset( $rows[$rowId] ) )
+                    $rowKey = $fieldValue; 
+                    if( isset( $rows[$rowKey] ) )
                     {
                         continue 2;
                     }
@@ -555,7 +560,22 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 				$filterFunction( $rowId, $fields );   
 			}
 
-			$fields === false || ( $recordMatch === false && ! empty( $recordWhere['*'] ) ) ? null : ( $rows[$rowId] = $fields );
+			if( $fields === false || ( $recordMatch === false && ! empty( $recordWhere['*'] ) ) )
+            {
+
+            }
+            else
+            {
+
+                if( ! is_null( $rowKey ) )
+                {
+                    $rows[$rowKey] = $fields;
+                }
+                else
+                {
+                    $rows[] = $fields;
+                }
+            }
 
 			if( ! empty( $options['limit'] ) && count( $rows ) >= $options['limit'] )
 			{
