@@ -1022,7 +1022,8 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
         if( $this->isSubmitted() && $this->_values )
         {
             //  refresh this to refresh ids
-            session_regenerate_id();
+            // do this only once during the session
+            //session_regenerate_id();
         }
         return $this->_values;
     }
