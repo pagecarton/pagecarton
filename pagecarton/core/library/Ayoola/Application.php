@@ -114,13 +114,6 @@ class Ayoola_Application
 	public static $mode;
 
     /**
-     * Ayoola Framework software version
-     *
-     * @var string
-     */
-	public static $version = '1.6.1';
-
-    /**
      * Ayoola Framework software installer
      *
      * @var string
