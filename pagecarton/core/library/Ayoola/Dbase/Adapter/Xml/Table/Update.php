@@ -43,7 +43,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 		$files =  array_unique( array( $scopeFile => $scopeFile ) + $this->getSupplementaryFilenames() );
 		foreach( $files as $filename )
 		{
-		//	var_export( $this->getMyFilename() );
             $this->setXml();
 
             $processDir = $this->getMyTempProcessDirectory();
@@ -52,15 +51,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
                 Ayoola_Doc::createDirectory( $processDir );
                 $tempData = serialize( func_get_args() );
                 $tempFile = $processDir . DS . md5( $tempData . time() );
-            //    var_export( func_get_args() );
-            Ayoola_File::putContents( $tempFile, $tempData );
+                Ayoola_File::putContents( $tempFile, $tempData );
                 continue;
             }
     
 		//	$this->getXml()->load( $filename );
 			$this->getXml()->setId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );
-			$rows = $this->query( 'SELECT', null, $where, array( 'filename' => $filename ) );
-	//		return $rows;
+			$rows = $this->query( 'SELECT', null, $where, array( 'filename' => $filename, 'populate_record_number' => true ) );
 			$result = false;
 			if( empty( $update['modified_time'] ) )   
 			{
