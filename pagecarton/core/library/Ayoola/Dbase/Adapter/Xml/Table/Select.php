@@ -275,7 +275,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			$fields = array();		
 			$searchResultIsHere = false;
 			$rowId = self::getRecordRowId( $eachRecord );
+
 			$rowKey = null;
+
+            if( ! empty( $options['populate_record_number'] ) )
+            {
+                $rowKey = $rowId;
+            }
 			$recordMatch = false;
 			$keyCount = 0;
             $keyFound = array();

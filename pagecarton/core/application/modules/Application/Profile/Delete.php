@@ -55,7 +55,6 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 					return false; 
 				}
 			}
-		//	var_export( $data );
 			
 			//	Only the owner or priviledged users can delete
 			$profileSettings = Application_Profile_Settings::getSettings( 'Profiles' );
@@ -68,18 +67,14 @@ class Application_Profile_Delete extends Application_Profile_Abstract
 			//	Only remove from DB if file deleted.
 			if( is_readable( self::getFolder() . $data['profile_url'] ) )
 			{
-				// Save to server
-			//	if( ! $response = Application_Profile_Api_Delete::send( $data ) ){ return false; }
-			//	var_export( $response );
-			//	if( true !== $response['data'] ){ throw new Application_Profile_Exception( $response ); }
-			}
-		//	$filename = self::getProfilePath( $url );
-			self::getProfileTable()->delete( array( 'profile_url' => strtolower( $data['profile_url'] ) ) );
 
-			unlink( self::getProfilePath( $data['profile_url'] ) );
+            }
+			$response = self::getProfileTable()->delete( array( 'profile_url' => ( $data['profile_url'] ) ) );
+		    unlink( self::getProfilePath( $data['profile_url'] ) );
         	$userDir = Application_Profile_Abstract::getProfileFilesDir( $data['profile_url'] ) . DS . 'application';
-		//		var_export( $userDir );
-			Ayoola_Doc::deleteDirectoryPlusContent( $userDir );
+            //var_export( $userDir );
+
+            Ayoola_Doc::deleteDirectoryPlusContent( $userDir );
         	$backup = Application_Profile_Abstract::getProfileFilesDir( $data['profile_url'] ) . DS . 'backup';
 			Ayoola_Doc::deleteDirectoryPlusContent( $backup );
 			
