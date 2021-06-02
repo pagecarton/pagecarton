@@ -21,7 +21,7 @@ class PageCarton extends Ayoola_Application
 {
 	
     /**
-     * Current supported version is 1.9; 1.8 is no longer supported
+     * Current supported version is 1.9; 1.8 is no longer supported 
      * 
      * 
      * @var string
