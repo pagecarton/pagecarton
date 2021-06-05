@@ -43,6 +43,7 @@ class Application_Article_Type_Quiz_AddQuestion extends Application_Article_Type
 		try
 		{
             if( ! $data = self::getIdentifierData() ){ return false; }
+            $dataBefore = $data;
             if( ! self::hasPriviledge( $data['questions_auth_level'] ) && ! self::isAllowedToEdit( $data ) )
             {
                 return false;
@@ -56,8 +57,35 @@ class Application_Article_Type_Quiz_AddQuestion extends Application_Article_Type
 			{
 				return false;
 			}
-			
-			$this->createForm( 'Save Questions...', 'Add a question to "' . $data['article_title'] . '"', $data );
+
+            $formData = null;
+            if( ! empty( $_GET['all'] ) && self::isAllowedToEdit( $data ) )
+            {
+                $formData = $data;  
+                $this->createForm( 'Save Questions...', 'Review all Questions on "' . $data['article_title'] . '"', $formData );
+            }
+            elseif( ! empty( $_GET['review'] ) && self::isAllowedToEdit( $data ) )
+            {
+                $formData = $data['to_review'];  
+                $this->createForm( 'Save Questions...', 'Review Contributed Questions on "' . $data['article_title'] . '"', $formData );
+  
+            }
+            else
+            {
+                $this->createForm( 'Save Questions...', 'Add a question to "' . $data['article_title'] . '"', $formData );
+            }
+    
+
+
+            if( self::isAllowedToEdit( $data ) )
+            {
+                $this->setViewContent( '
+                <a class="pc-btn" href="?article_url=' . $data['article_url'] . '&all=1">Review All Questions</a>
+                <a class="pc-btn" href="?article_url=' . $data['article_url'] . '&review=1">Review Contributed Questions</a>
+                <a class="pc-btn" href="?article_url=' . $data['article_url'] . '&new=1">Add New Questions</a>
+                ' );
+            }
+
 			$this->setViewContent( $this->getForm()->view() );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
             
@@ -73,8 +101,10 @@ class Application_Article_Type_Quiz_AddQuestion extends Application_Article_Type
             } 
 
             $lastCount = null;
+            //  var_export( $values );
             foreach( $values as $key => $value )
             {
+    
                 if( ! is_array( $data[$key] ) )
                 {
                     $data[$key] = array();
@@ -86,20 +116,36 @@ class Application_Article_Type_Quiz_AddQuestion extends Application_Article_Type
                     unset( $values[$key][$each] );
                 }
 
-                if( ! empty( $_GET['all'] ) )
+                if( ! empty( $_GET['all'] ) && self::isAllowedToEdit( $data ) )
                 {
                     $data[$key] = $value;
                 }
                 else
                 {
-                    $data[$key] = array_merge( $data[$key], $values[$key] );
+                    if( ! self::isAllowedToEdit( $data ) )
+                    {
+                        if( ! is_array( $data['to_review'][$key] ) )
+                        {
+                            $data['to_review'][$key] = array();
+                        }
+                        $data['to_review'][$key] = array_merge( $data['to_review'][$key], $values[$key] );
+                    }
+                    else
+                    {
+                        if( ! empty( $_GET['review'] ) && self::isAllowedToEdit( $data ) )
+                        {
+                            unset( $data['to_review'] );
+                        }
+        
+                        $data[$key] = array_merge( $data[$key], $values[$key] );
+                    }
                 }
                 if( is_int( $lastCount ) )
                 {
                     if( $lastCount !== count( $data[$key] ) )
                     {
                         //  data corrupt?
-                        $data = false;
+                        $data = $dataBefore;
                         break;
                     }
                 }
@@ -170,20 +216,7 @@ You may view, edit and administer the online test by clicking this link: http://
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
-    
-        if( ! empty( $_GET['all'] ) )
-        {
-            if( ! self::isOwner( $values['user_id'] )  && ! self::isAllowedToEdit( $values ) && ! self::hasPriviledge( $articleSettings['allowed_editors'] ? : 98 ) && Ayoola_Application::getUserInfo( 'username' ) !== strtolower( $values['username'] ) )
-            { 
-                //  don't expose existing 
-                $values = false;
-            }  
-        }
-        else
-        {
-            $values = false;
-        }
-
+        
 		
 		//	Put the questions in a separate fieldset
 		$fieldset = new Ayoola_Form_Element; 

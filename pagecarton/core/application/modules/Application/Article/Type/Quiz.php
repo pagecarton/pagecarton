@@ -191,7 +191,7 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 			$randomKeys = array();
 			if( ! $_POST )
 			{
-				while( $i <= count( @$data['quiz_subgroup_id'] ) && $i < 9 )
+				while( $i <= @count( @$data['quiz_subgroup_id'] ) && $i < 9 )
 				{
 					$eachGroupId = @$data['quiz_subgroup_id'][$i];
 					if( empty( $data['quiz_subgroup_id'] ) && empty( $data['quiz_subgroup_question_max'][$i] ) ) 
