@@ -42,18 +42,15 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
      */       
     public function init( $values, $options = null )
     {
-	//	$recordRowId = $options['record_row_id'] ? : $options;
 		$recordRowId = $options['record_row_id'];
 
         $processDir = $this->getMyTempProcessDirectory();
         $scopeFile = $this->getFilenameAccordingToScope( false, $this->getAccessibility() );
-    //    var_export( $scopeFile );
         if( ! $this->loadTableDataFromFile( $scopeFile ) )
         {
             Ayoola_Doc::createDirectory( $processDir );
             $tempData = serialize( func_get_args() );
             $tempFile = $processDir . DS . md5( $tempData . time() );
-        //    var_export( func_get_args() );
             Ayoola_File::putContents( $tempFile, $tempData );
             return true;
         }
@@ -87,19 +84,16 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 			$tableInfo = $this->query( 'DESCRIBE' );
 			$tableInfo['table_info']['no_existence_check'] = true;
 			$tableInfo['table_info']['filename'] = $filename;
-		//	PageCarton_Widget::v( $annexFile );
 
 			Ayoola_Doc::createDirectory( dirname( $annexFile ) );
 
 			rename( $filename, $annexFile );
-		//	$this->query( 'DROP' );
 			$this->setXml();
 			$this->query( 'CREATE', $tableInfo['table_info'], $tableInfo['data_types'] );
             $this->setXml();
-            //    var_export( $filename );
             if( ! $this->getXml()->load( $filename ) )
             {
-            //    var_export( $filename );
+
             }
 		}
 
@@ -109,24 +103,14 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
         $whereValue = $recordRowId ? : $values[$idColumn];
 		if( ! empty( $values[$idColumn] ) )
 		{
-			//	Removing this as it might slow things down in large tables like access logs
-		//	if( $select = $this->query( 'SELECT', null, array( $idColumn => $values[$idColumn] ) ) )
-			{
-				//	unset( $values[$idColumn] );
-		//		throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( 'PRIMARY ID "' . $idColumn . '" ALREADY HAS "' . $values[$idColumn] . '"' );
-			}
-		}
-	//	var_export( $values['creation_time'] );
+
+        }
 		if( empty( $values['creation_time'] ) )   
 		{
 			$values['creation_time'] = time();
         }
         $values['__user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
         $values['__ip'] = Ayoola_Application::getRuntimeSettings( 'user_ip' );
-    //  $values['__long_lang'] = '';
-        //	var_export( $values['creation_time'] );
-	//		var_export( $recordRowId );
-	//		var_export( $values[$idColumn] );
 		if( empty( $options['record_row_id'] ) && empty( $values[$idColumn] ) )
 		{
 			
@@ -134,33 +118,25 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 			$appId = new Ayoola_Api_Api();
 			$appId = $appId->selectOne();
 			$appId = strval( intval( $appId['application_id'] ) );
-		//	$recordRowId = $appId . $recordRowId
 			$whereValue = '' . $appId . '-' . time() . '-' . $recordRowId;
 		}
 				
 		//	Do not assign the recordRowId that is used by the parent table or previous supplement
-	//	$whereValue = $appId . '_' . $recordRowId;
-	//	exit( $whereValue );
 		
 		$row = self::setRecordRowId( $row, $recordRowId );
 		
 		$values[$idColumn] = $values[$idColumn] ? : $whereValue;
-	//	var_export( $values );
 		foreach( $values as $key => $value )
 		{
 			$this->setRowColumnValue( $row, $key, $value );
 			$this->setRecords( $row );	
 		}
 		
-	//	var_export( $values[$idColumn] );
 		$this->saveFile( $filename );
-    //	$this->clearCache();
     
         if( $processes = Ayoola_Doc::getFilesRecursive( $processDir ) AND empty( $this->proccesses ) )
         {
             $this->proccesses = $processes;
-        //    var_export( $processes );
-        //    exit( $processes );
             foreach( $processes as $process )
             {
                 if( $tempData = unserialize( file_get_contents( $process ) ) )
