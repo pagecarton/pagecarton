@@ -137,14 +137,19 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
         if( $processes = Ayoola_Doc::getFilesRecursive( $processDir ) AND empty( $this->proccesses ) )
         {
             $this->proccesses = $processes;
+            $cxi = 0;
             foreach( $processes as $process )
             {
+                if( $cxi++ > 10 )
+                {
+                    break;
+                }
                 if( $tempData = unserialize( file_get_contents( $process ) ) )
                 {
                     $response = $this->init( $tempData[0], $tempData[1] );
 
                     unlink( $process );
-                    Ayoola_Doc::removeDirectory( dirname( $process ) );
+                    @Ayoola_Doc::removeDirectory( dirname( $process ) );
 
                 }
 

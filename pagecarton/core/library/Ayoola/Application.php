@@ -1525,7 +1525,7 @@ class Ayoola_Application
         $uri = $uriToView;
         $pageInfo = Ayoola_Page::getInfo( $uri );
 
-		if( ! $uri || ! $pageInfo )
+		if( ! $uri || $uri === '/404' )
 		{
 			$uri =  self::$_notFoundPage;
 			self::$_runtimeSetting['real_url'] = self::$_notFoundPage;
@@ -1537,7 +1537,6 @@ class Ayoola_Application
 		}
 		//	now because of situation where we have username domains
 		//	we should be able to overide page inheritance
-
         if( ! $pagePaths = self::getViewFiles( $uri ) )
         {
             return false;

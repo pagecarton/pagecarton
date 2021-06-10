@@ -89,13 +89,18 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
             $this->proccesses = $processes;
         //    var_export( $processes );
         //    exit( $processes );
+            $cxi = 0;
             foreach( $processes as $process )
             {
+                if( $cxi++ > 10 )
+                {
+                    break;
+                }
                 if( $tempData = unserialize( file_get_contents( $process ) ) )
                 {
                     $response = $this->init( $tempData[0], $tempData[1] );
                     unlink( $process );
-                    Ayoola_Doc::removeDirectory( dirname( $process ) );
+                    @Ayoola_Doc::removeDirectory( dirname( $process ) );
                 }
 
             }
