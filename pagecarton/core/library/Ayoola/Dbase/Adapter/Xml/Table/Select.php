@@ -278,7 +278,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 
 			$rowKey = null;
 
-            if( ! empty( $options['populate_record_number'] ) )
+            if( ! empty( $options['populate_record_number'] ) )  
             {
                 $rowKey = $rowId;
             }
