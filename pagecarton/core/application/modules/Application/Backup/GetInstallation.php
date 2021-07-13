@@ -93,12 +93,12 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 //  save tar
                 $phar = 'Ayoola_Phar_Data';
                 $tFile = str_ireplace( '.tar.gz', '.tar', $file1 );
-                Ayoola_Doc::createDirectory( dirname( $file1 ) );
+                Ayoola_Doc::createDirectory( dirname( $file1 ) ); 
 
                 $backup = new $phar( $tFile );
                 $backup->startBuffering(); 
                 
-                $dirPcBase = Ayoola_Doc::getDirectories( $tempDir );
+                $dirPcBase = Ayoola_Doc::getDirectories( $tempDir ); 
                 $dirPcBase = array_pop( $dirPcBase );
 
                 $from = $dirPcBase . '/pagecarton/core';
