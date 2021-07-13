@@ -104,6 +104,8 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 Ayoola_Doc::createDirectory( $to );
                 rename( $from, $to );
       
+                var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );
+                var_export( APPLICATION_PATH );
                 if( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) === APPLICATION_PATH )
                 {
                     //  save tar
@@ -119,6 +121,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                     $class = new Application_Backup_Creator( $parameters );
                     $class->fakeValues = $parameters;
                     $class->init();
+                    var_export( $class->view() );
                 }
                 if( ! empty( $_REQUEST['pc_recreate_installer'] ) )   
                 {
