@@ -104,8 +104,10 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $from = $dirPcBase . '/pagecarton/core';
                 $to = APPLICATION_DIR . '';
 
-                //Ayoola_Doc::recursiveCopy( $to, $to . '-' . PageCarton::VERSION );    
-                rename( $to, $to . '-' . PageCarton::VERSION . DS . time() );    
+                //Ayoola_Doc::recursiveCopy( $to, $to . '-' . PageCarton::VERSION ); 
+                $toto = $to . '-' . PageCarton::VERSION . DS . time();
+                Ayoola_Doc::createDirectory( $toto );
+                rename( $to, $toto );    
                 //Ayoola_Doc::deleteDirectoryPlusContent( $to );
 
                 Ayoola_Doc::createDirectory( $to );
