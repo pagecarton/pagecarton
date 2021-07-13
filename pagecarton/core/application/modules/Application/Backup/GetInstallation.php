@@ -90,13 +90,6 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                     $zip2->close();
                 } 
 
-                //  save tar
-                $phar = 'Ayoola_Phar_Data';
-                $tFile = str_ireplace( '.tar.gz', '.tar', $file1 );
-                Ayoola_Doc::createDirectory( dirname( $file1 ) ); 
-
-                $backup = new $phar( $tFile );
-                $backup->startBuffering(); 
                 
                 $dirPcBase = Ayoola_Doc::getDirectories( $tempDir ); 
                 $dirPcBase = array_pop( $dirPcBase );
@@ -104,18 +97,23 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $from = $dirPcBase . '/pagecarton/core';
                 $to = APPLICATION_DIR . '';
 
-                //Ayoola_Doc::recursiveCopy( $to, $to . '-' . PageCarton::VERSION ); 
                 $toto = $to . '-' . PageCarton::VERSION . DS . time();
                 Ayoola_Doc::createDirectory( $toto );
                 rename( $to, $toto );    
-                //Ayoola_Doc::deleteDirectoryPlusContent( $to );
 
                 Ayoola_Doc::createDirectory( $to );
-                //Ayoola_Doc::recursiveCopy( $from, $to );    
                 rename( $from, $to );
       
                 if( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) === APPLICATION_PATH )
                 {
+                    //  save tar
+                    $phar = 'Ayoola_Phar_Data';
+                    $tFile = str_ireplace( '.tar.gz', '.tar', $file1 );
+                    Ayoola_Doc::createDirectory( dirname( $file1 ) ); 
+
+                    $backup = new $phar( $tFile );
+                    $backup->startBuffering(); 
+
                     $parameters = array( 'backup_type' => 'installer', 'no_init' => true );
                     require_once 'Application/Backup/Creator.php';
                     $class = new Application_Backup_Creator( $parameters );
