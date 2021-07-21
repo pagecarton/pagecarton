@@ -299,7 +299,11 @@ class Application_Article_View extends Application_Article_Abstract
 			$filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
 			$data['currency'] = $filter::$symbol;
 			$filter = new $filter();
-			@$data['item_old_price'] = $data['item_old_price'] ? $filter->filter( $data['item_old_price'] ) : null;
+            if( $data['item_old_price'] )
+            {
+                @$data['price_percentage_savings'] =  intval( ( ( $data['item_old_price'] - $data['item_price'] ) / $data['item_old_price'] ) * 100 ) . '';
+                @$data['item_old_price'] = $data['item_old_price'] ? $filter->filter( $data['item_old_price'] ) : null;
+            }            
 			$data['item_price_without_currency'] = $data['item_price'];
 
 			

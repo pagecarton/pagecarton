@@ -598,19 +598,23 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			}
 		}
 
-		$storage = self::getObjectStorage( array( 'id' => __CLASS__ . 'xxweeff', 'device' => 'File', 'time_out' => 10000, ) );
-        $presetValues = $storage->retrieve();  
+		//$storage = self::getObjectStorage( array( 'id' => __CLASS__ . 'xxweeff' . $data['article_type'], 'device' => 'File', 'time_out' => 10000, ) );
+        //$presetValues = $storage->retrieve();  
         
-		if( ! is_array( $presetValues ) )
+		//if( ! is_array( $presetValues ) )
 		{
-			$presetValues = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $data['article_type'] ) );
-			$storage->store( $presetValues );
+			$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $data['article_type'] ) );
+            $data['true_post_type'] = $postTypeInfo['article_type'];
+			//$storage->store( $presetValues );
 		}
-		if( ! empty( $presetValues['preset_keys'] ) && ! empty( $presetValues['preset_values'] ) )
+        //var_export( Application_Article_Type::getInstance()->select() );
+
+		if( ! empty( $postTypeInfo['preset_keys'] ) && ! empty( $postTypeInfo['preset_values'] ) )
 		{
-            $presetValues = array_combine( $presetValues['preset_keys'], $presetValues['preset_values'] );
+            $presetValues = array_combine( $postTypeInfo['preset_keys'], $postTypeInfo['preset_values'] );
             $data = is_array( $data ) ? $data : array();
             $presetValues = is_array( $presetValues ) ? $presetValues : array();
+           // var_export( $presetValues );
 			$data += $presetValues;
 		}
 
