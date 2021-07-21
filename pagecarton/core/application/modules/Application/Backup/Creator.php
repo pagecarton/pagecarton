@@ -195,6 +195,18 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		{
 
 		}
+
+        // briefly turn off plugins
+        //  plugins leave behind orphan symlinks
+        $installedPlugins = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'status' => 'Enabled' ) );
+        foreach( $installedPlugins as $each )
+        {
+            $result = Ayoola_Extension_Import_Status::viewInLine( array(
+                'fake_values' => array( 'true' => 1 ),
+                'extension_name' => $each['extension_name']
+            ) );
+        }
+
 		$backup->buildFromDirectory( $dir, $regex );  
 		$backup['backup_information'] = serialize( $values );
  		switch( $values['backup_type'] )
@@ -232,7 +244,16 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		}
 		  
 		$backup->stopBuffering();
-		
+
+        // turn plugins back on
+        foreach( $installedPlugins as $each )
+        {
+            $result = Ayoola_Extension_Import_Status::viewInLine( array(
+                'fake_values' => array( 'true' => 1 ),
+                'extension_name' => $each['extension_name']
+            ) );
+        }
+
 		$backup->compress( Ayoola_Phar::GZ ); 
 		unset( $backup );
 		$phar::unlinkArchive( $values['filename'] );
