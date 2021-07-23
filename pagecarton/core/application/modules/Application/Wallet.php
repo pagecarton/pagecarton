@@ -77,8 +77,6 @@ final class Application_Wallet extends Application_Wallet_Abstract
 				{
 					$senderInfo['wallet_balance'] = $senderInfo['wallet_balance'] - $transferInfo['amount'];
                     $senderInfo['username'] = $transferInfo['from'];
-                    Ayoola_Access_Localize::info( $senderInfo );
-                    // deductions first for security reasons.
 				}
 			}
 			
@@ -86,7 +84,9 @@ final class Application_Wallet extends Application_Wallet_Abstract
             if (! $receiverInfo = Ayoola_Access::getAccessInformation($transferInfo['to'])) {
                 return false;
             }
-			
+            // deductions first for security reasons.
+            Ayoola_Access_Localize::info( $senderInfo );
+
 			//	Transfer
 			$receiverInfo['wallet_balance'] = @$receiverInfo['wallet_balance'] + $transferInfo['amount'];
 			
