@@ -196,13 +196,14 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 
 		}
 
-        // briefly turn off plugins
+        //  briefly turn off plugins
         //  plugins leave behind orphan symlinks
         $installedPlugins = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'status' => 'Enabled' ) );
         foreach( $installedPlugins as $each )
         {
             $result = Ayoola_Extension_Import_Status::viewInLine( array(
                 'fake_values' => array( 'true' => 1 ),
+                'leave_cache' => true,
                 'extension_name' => $each['extension_name']
             ) );
         }
@@ -250,6 +251,7 @@ class Application_Backup_Creator extends Application_Backup_Abstract
         {
             $result = Ayoola_Extension_Import_Status::viewInLine( array(
                 'fake_values' => array( 'true' => 1 ),
+                'leave_cache' => true,
                 'extension_name' => $each['extension_name']
             ) );
         }

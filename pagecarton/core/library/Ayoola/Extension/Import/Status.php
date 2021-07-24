@@ -271,8 +271,10 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 		$this->setViewContent( self::__( '<p class="boxednews goodnews">Plugin switch "' . $data['status'] . '" successfully. ' . $settings . '</p>' ) );
 
 		//	clear cache
-		Application_Cache_Clear::viewInLine();	
-
+        if( ! $this->getParameter( 'leave_cache' ) )
+		{
+            Application_Cache_Clear::viewInLine();	
+		}
   
 	} 
 	
