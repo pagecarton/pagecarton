@@ -155,7 +155,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 }
                 else
                 {
-                    $file = $file1;
+                    $file = $file1; 
                     header( 'Content-Disposition: attachment; filename="pagecarton-' . PageCarton::VERSION . '.tar.gz"' );
                     header('Content-Type: application/x-gzip');
                 }
