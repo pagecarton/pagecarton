@@ -125,7 +125,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
 
             if( ! file_exists( $file1 ) || ! empty( $_REQUEST['pc_recreate_installer'] ) )   
             {
-                @unlink( $coreZip );
+                @unlink( $coreZip ); 
 
                 $createInstaller();
 
