@@ -54,9 +54,9 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             }
             $coreZip = dirname( $file1 ) . DS . 'pagecarton.zip';
 
-            if( ! file_exists( $file1 ) || ! empty( $_REQUEST['pc_recreate_installer'] ) )   
+            // create installer
+            $createInstaller = function()
             {
-                @unlink( $coreZip );
 
                 set_time_limit( 0 );
                 $version = explode( '.', PageCarton::VERSION );
@@ -120,6 +120,15 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                     $class->fakeValues = $parameters;
                     $class->init();
                 }
+
+            };
+
+            if( ! file_exists( $file1 ) || ! empty( $_REQUEST['pc_recreate_installer'] ) )   
+            {
+                @unlink( $coreZip );
+
+                $createInstaller();
+
                 if( ! empty( $_REQUEST['pc_recreate_installer'] ) )   
                 {
                     exit( $config['repository'] . ' pc_recreate_installer done!' );  
