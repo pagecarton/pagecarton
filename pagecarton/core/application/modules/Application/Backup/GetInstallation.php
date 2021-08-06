@@ -54,6 +54,12 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             }
             $coreZip = dirname( $file1 ) . DS . 'pagecarton.zip';
 
+            $config = PageCarton::getDomainSettings( 'site_configuraton' );
+            if( empty( $config['repository'] ) )
+            {
+                $config['repository'] = 'https://github.com/pagecarton/pagecarton/archive/' . $version . '.zip'; 
+            }
+
             // create installer
             $createInstaller = function()
             {
@@ -64,11 +70,6 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                 $version = implode( '.', $version ) . '.x';
 
                 //  download main core
-                $config = PageCarton::getDomainSettings( 'site_configuraton' );
-                if( empty( $config['repository'] ) )
-                {
-                    $config['repository'] = 'https://github.com/pagecarton/pagecarton/archive/' . $version . '.zip'; 
-                }
 
                 if( ! $content = self::fetchLink( $config['repository'], array( 'rand' => time(), 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) ) )
                 {
