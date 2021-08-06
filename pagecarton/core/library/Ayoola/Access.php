@@ -141,6 +141,45 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 		@session_regenerate_id( true );
 	} 	
 	
+    /**
+     * Overides the parent class
+     * 
+     */
+	public function getUserInfoByIdentifier( $identifier )
+    {
+		if( ! is_array( $identifier ) )
+		{
+			$identifier = array( 'user_id' => $identifier );
+		}
+
+        $info = $identifier;
+
+        //  let's see if the hook could filter the info to desired result
+        self::setHook( $this, __FUNCTION__, $info );
+
+        if( $info === $identifier )
+        {
+            //var_export( $info );
+            //	Check from local table
+            $table = Ayoola_Access_LocalUser::getInstance();
+
+            //	look in all lookable places for login info
+            $table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
+            //var_export( $table->select() );
+
+            if( $info = $table->selectOne( null, $identifier ) )
+            {
+                if( $info['user_information'] )  
+                {
+                    $info = $info['user_information'];
+                }
+            }
+
+        }
+		return $info;
+
+	}
+	
 	/**
 	 * Returns true of an ID is present in the Storage
 	 *

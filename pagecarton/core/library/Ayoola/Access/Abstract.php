@@ -280,21 +280,7 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
             }
             //  var_export( $userInfo );
             //  return false;
-/* 			if( ! $previousInfo = @include $filename )           
-			{
-				//	compatibility - we used to save some info here
-				$table = Ayoola_Access_AccessInformation::getInstance();
-				if( ! $previousInfo = $table->selectOne( null, $where ) )
-				{			
-					//	Populate the Ayoola_Access_AccessInformation
-				}
-				else
-				{
-					//	We can safely remove from old db here because we will soon save in the profile path
-					$table->delete( $where );
-				}
-			}
- */			return false;
+    		return false;
 		}
 		catch( Exception $e )
 		{ 
