@@ -79,7 +79,6 @@ class Application_Cache_Clear extends Ayoola_Abstract_Table
 
         }
         Ayoola_Application::$appNamespace .= rand( 0, 99999 ) . microtime();
-        set_time_limit( 0 );
         
         //	Reset domain
         Ayoola_Application::setDomainSettings( true );

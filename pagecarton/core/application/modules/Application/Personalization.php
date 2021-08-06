@@ -59,14 +59,13 @@ class Application_Personalization extends Ayoola_Abstract_Table
      */
 	public function init()
     {		
-		set_time_limit( 0 );
 		$startTime = microtime( true );
 		//	Reset domain
 		  
 		//	Clear cache
 		if( ( ! empty( $_REQUEST['rebuild_widget'] ) || ! $this->getParameter( 'rebuild_widget' ) ) )
 		{
-			Application_Cache_Clear::viewInLine();
+			//Application_Cache_Clear::viewInLine();
 			Ayoola_Application::setDomainSettings( true );
 		}
 		
@@ -131,48 +130,44 @@ class Application_Personalization extends Ayoola_Abstract_Table
 			}
 			
 		}
-		else
-		{
-		}
 		
 		try
 		{ 
 			//	Always Log out to allow login again
 			require_once 'Ayoola/Access.php'; 
-			{
-			}
 			// Avoid personalization for localhost
-			{
-				$this->createForm();
-				$this->setViewContent( $this->getForm()->view() ); 
-				$values = $this->getForm()->getValues();
-				if( ! $values )
-				{ 
-					return false; 
-				}
+			
+            $this->createForm();
+            $this->setViewContent( $this->getForm()->view() ); 
+            $values = $this->getForm()->getValues();
+            if( ! $values )
+            { 
+                return false; 
+            }
 
-				//	Reset domain
-				Ayoola_Application::setDomainSettings( true );
-				//	Go through the process again to set the info for the personalized app dir
-				//	similate install to allow Ayoola_Access_UpgradeSelf
-				//	Always Log out to allow login again
-				require_once 'Ayoola/Access.php'; 
-				$auth = new Ayoola_Access();
+            //	Reset domain
+            Ayoola_Application::setDomainSettings( true );
 
-				foreach( self::$_stages as $class )
-				{
-					foreach( $class as $each => $parameters )
-					{
-						$each = new $each( $parameters['parameters'] );
-						$each->fakeValues = $values;
-						$each->init();
-					}
-				}
-			}
+            //	Go through the process again to set the info for the personalized app dir
+            //	similate install to allow Ayoola_Access_UpgradeSelf
+            //	Always Log out to allow login again
+            require_once 'Ayoola/Access.php'; 
+            $auth = new Ayoola_Access();
+
+            foreach( self::$_stages as $class )
+            {
+                foreach( $class as $each => $parameters )
+                {
+                    $each = new $each( $parameters['parameters'] );
+                    $each->fakeValues = $values;
+                    $each->init();
+                }
+            }
+			
 			//	Clear cache
 			if( is_dir( CACHE_DIR ) )
 			{
-                Application_Cache_Clear::do();
+                //Application_Cache_Clear::do();
 			}
 			$this->setViewContent(  '' . self::__( '<h2 class="">Basic Settings Saved</h2>' ) . '', true  );   
 			$this->setViewContent( self::__( '<p>Welcome to endless possibilities! PageCarton helps to publish great content to the web fast, easy using award-winning secure methods. You can make stunning websites easily and apps with PageCarton.</p>' ) );
