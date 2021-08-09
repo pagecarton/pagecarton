@@ -61,7 +61,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             }
 
             // create installer
-            $createInstaller = function()
+            $createInstaller = function() use ( $config )
             {
 
                 set_time_limit( 0 );
