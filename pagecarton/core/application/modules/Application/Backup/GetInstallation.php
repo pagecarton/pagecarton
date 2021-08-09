@@ -54,6 +54,11 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             }
             $coreZip = dirname( $file1 ) . DS . 'pagecarton.zip';
 
+            $version = explode( '.', PageCarton::VERSION );
+            $minor = array_pop( $version );
+            $version = implode( '.', $version ) . '.x';
+
+
             $config = PageCarton::getDomainSettings( 'site_configuraton' );
             if( empty( $config['repository'] ) )
             {
@@ -65,9 +70,6 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             {
 
                 set_time_limit( 0 );
-                $version = explode( '.', PageCarton::VERSION );
-                $minor = array_pop( $version );
-                $version = implode( '.', $version ) . '.x';
 
                 //  download main core
 
