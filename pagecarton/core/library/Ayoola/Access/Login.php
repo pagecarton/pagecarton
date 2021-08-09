@@ -296,6 +296,12 @@ class Ayoola_Access_Login extends Ayoola_Access_Abstract
         {
             return false;
         }
+        $access = new Ayoola_Access();
+        if( $userInfo = $access->getUserInfoByIdentifier( $hashedCredentials ) )
+        {
+            return self::login( $userInfo );
+        }
+
 		if( $info = $table->selectOne( null, array_map( 'strtolower', $hashedCredentials ) ) )
 		{
 			if( $info['user_information'] )

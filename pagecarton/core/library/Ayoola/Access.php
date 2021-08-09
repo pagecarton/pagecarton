@@ -159,13 +159,11 @@ class Ayoola_Access extends Ayoola_Access_Abstract
 
         if( $info === $identifier )
         {
-            //var_export( $info );
             //	Check from local table
             $table = Ayoola_Access_LocalUser::getInstance();
 
             //	look in all lookable places for login info
             $table->getDatabase()->setAccessibility( $table::SCOPE_PROTECTED );
-            //var_export( $table->select() );
 
             if( $info = $table->selectOne( null, $identifier ) )
             {
