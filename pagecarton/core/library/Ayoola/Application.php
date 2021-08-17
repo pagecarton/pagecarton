@@ -711,7 +711,7 @@ class Ayoola_Application
         //  now we need https to be always encouraged
 
         {
-            if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' && empty( $_SERVER['HTTP_CDN_LOOP'] ) )
+            if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' && ! stripos( $_SERVER['HTTP_CF_VISITOR'], 'https' ) )
             {
                 if( PageCarton_Widget::fetchLink( 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . '/pc_check.txt?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) === 'pc' )
                 {
