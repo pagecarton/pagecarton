@@ -708,7 +708,7 @@ class Ayoola_Application
         //  redirect ssl last 
         //  so it wont be auto issue ssl for domains we dont need for autossl settings
 
-        //  now we need https to be always encouraged
+        //  now we need https to be always encouraged 
 
         {
             if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' && ! stripos( $_SERVER['HTTP_CF_VISITOR'], 'https' ) )
