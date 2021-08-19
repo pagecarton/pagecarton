@@ -22,3 +22,5 @@ User-Agent: proximic
 Disallow: / 
 User-agent: spbot
 Disallow: /
+User-agent: PetalBot
+Disallow: /
