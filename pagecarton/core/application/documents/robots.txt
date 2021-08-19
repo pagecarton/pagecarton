@@ -6,6 +6,8 @@ Disallow: /tools/
 Disallow: /object/
 Disallow: /widgets/
 Disallow: /pc-admin/
+User-agent: * 
+Crawl-Delay: 10
 User-Agent: MJ12bot
 Disallow: /
 User-Agent: AhrefsBot
