@@ -1607,9 +1607,13 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             }
 			$noOfTrends = intval( $this->getParameter( 'trending' ) ) > 9 ? $this->getParameter( 'trending' ) : 100;
             //    var_export( $noOfTrends );
-            $trendingPost = $table->select( 'article_url', null, array( 'row_id_column' => 'article_url', 'limit' => $noOfTrends, 'record_search_limit' => $noOfTrends ) );
+            $trendingPost = $table->select( 'article_url', null, array( 'row_id_column' => 'article_url', 'record_search_limit' => $noOfTrends ) );
 			if( $trendingPost )
 			{
+                if( count( $trendingPost ) < intval( $this->getParameter( 'add_a_new_post' ) ) )
+                {
+                    $this->_parameter['add_a_new_post'] = count( $trendingPost );
+                }    
 				$whereClause[$this->getIdColumn()] = $trendingPost;
 			}
 			@$this->_parameter['order_by'] = $this->_parameter['order_by'] ? : 'engagement_count';

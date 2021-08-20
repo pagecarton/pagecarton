@@ -141,12 +141,13 @@ class Application_Article_Publisher extends Application_Article_Creator
                             {
                                 $widgets[] = $class;
                             }
+                            $kindWithNoReq = array();
+                            $content = array();
                             foreach( $widgets as $eachWidget ) 
                             {
                                 $values = $eachWidget->getObjectTemplateValues();
                                 $noRequired = ( $eachWidget->getParameter( 'add_a_new_post' ) ? : 1 );
                                 $category = $eachWidget->getParameter( 'category_name' ) ? : $eachWidget->getParameter( 'category' );
-                            //    var_export( $category );
                                 switch( get_class( $eachWidget ) )
                                 {
                                     case 'Application_Article_ShowAll':
@@ -161,6 +162,13 @@ class Application_Article_Publisher extends Application_Article_Creator
                                     $kind = get_class( $eachWidget );
                                     break;
                                 }
+                                if( isset( $kindWithNoReq[$kind] ) && intval( $kindWithNoReq[$kind] ) >  $noRequired )
+                                {
+                                    continue;
+                                }
+
+                                $kindWithNoReq[$kind] = $noRequired;
+
                                 $kind = $kind . $noRequired;
                                 if( ( $kind && @$postTypes[$kind] ) || ! $eachWidget->getParameter( 'add_a_new_post_full_url' ) || @$postTypes[$eachWidget->getParameter( 'add_a_new_post_full_url' )] )
                                 {
@@ -175,7 +183,8 @@ class Application_Article_Publisher extends Application_Article_Creator
                                      $cssClass = '';
                                 }
                                 $link = '' . Ayoola_Application::getUrlPrefix() . '' . $eachWidget->getParameter( 'add_a_new_post_full_url' ) . '&close_on_success=1';
-                                $html .= '<a style="text-align:center;" class="pc-btn ' .  $cssClass  . '" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\', \'' . $this->getObjectName() . '\' );" href="javascript:" > 
+                                $content[$kind] = 
+                                '<a style="text-align:center;" class="pc-btn ' .  $cssClass  . '" onclick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\', \'' . $this->getObjectName() . '\' );" href="javascript:" > 
                                 <br><br>
                                 ' . ucfirst( $postType ) . ' ' . ( $category ? ' [' . $category . '] ' : $category ) . '
                                 
@@ -187,7 +196,10 @@ class Application_Article_Publisher extends Application_Article_Creator
                                <br><br>
                                </a>';
                             }
-
+                            if( $content )
+                            {
+                                $html .= implode( "\r\n", $content );
+                            }
                         }
                     }
     
