@@ -64,10 +64,10 @@ if (!is_dir($dir)) {
     //ensure we have the access before creating dirs
     if (is_writable(dirname($dir))) {
         if (!mkdir($dir, 0777, true)) {
-            $badnews = "Error creating directory: <code class='annotated'>$dir</code>";
+            $badnews .= "Error creating directory: <code class='annotated'>$dir</code>";
         }
     } else {
-        $badnews = "<p>The directory <code class='annotated'>" . dirname($dir) . "</code> is not writeable. Please grant access to the directory and try again.</p>";
+        $badnews .= "<p>The directory <code class='annotated'>" . dirname($dir) . "</code> is not writeable. Please grant access to the directory and try again.</p>";
     }
 
     if (is_dir($oldDir . DS . 'application')) {
@@ -84,10 +84,10 @@ if (!is_dir($newDir2)) {
     //ensure we have the access before creating dirs
     if (is_writable(dirname($newDir2))) {
         if (!mkdir($newDir2, 0777, true)) {
-            $badnews = "Error creating directory: <code class='annotated'>$newDir2</code>";
+            $badnews = ."Error creating directory: <code class='annotated'>$newDir2</code>";
         }
     } else {
-        $badnews = "
+        $badnews .= "
         <p>
         PageCarton installer could not create <code class='annotated'>$newDir2</code> because
 		there is no access to create <code class='annotated'>" . basename(dirname($newDir2)) . "</code> folder inside
@@ -106,7 +106,7 @@ if (!is_dir($newDir2)) {
 //$filename signifies the file that downloaded installation will be written to in the current directory. Hence, it
 //is important that curr dir is writeable to PHP
 if (!is_writable(__DIR__)) {
-    $badnews = "The current directory <code class='annotated'>" . realpath(__DIR__) . "</code> is not writeable for your web server process. Please check this folder permission and try again.";
+    $badnews .= "The current directory <code class='annotated'>" . realpath(__DIR__) . "</code> is not writeable for your web server process. Please check this folder permission and try again.";
 }
 
 defined('APPLICATION_DIR') || define('APPLICATION_DIR', $newDir2);
@@ -131,6 +131,12 @@ if (!empty($_SERVER['CONTEXT_PREFIX'])) {
     $prefix = $_SERVER['CONTEXT_PREFIX'] . $prefix;
 }
 
+if (version_compare(PHP_VERSION, '7.0.0') >= 0) {
+    //    echo 'I am at least PHP version 5.3.0, my version: ' . PHP_VERSION . "\n";
+} else {
+    $badnews .= '<p>PageCarton requires PHP 7.0 or later. You are running version <code class="annotated">' . PHP_VERSION . '</code>. We recommend PHP 7.0 or later.</p>';
+}
+
 //    Preserve some of this data before deleting some files
 $dbDir        = '/application/databases/';
 $preserveList = array
@@ -149,10 +155,9 @@ $function_dependencies = array(
     'dom_import_simplexml' => 'PHP DOM XML',
     'curl_version'         => 'PHP CURL',
     'imagegd'              => 'PHP GD',
-    'zip_open'             => 'PHP ZIP',
 );
 
-$class_dependencies = ["PharData"];
+$class_dependencies = array( "PharData", "ZipArchive" );
 
 foreach ($function_dependencies as $key => $each) {
     if (!function_exists($key)) {
@@ -166,11 +171,6 @@ foreach ($class_dependencies as $class_dependency) {
     }
 }
 
-if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
-    //    echo 'I am at least PHP version 5.3.0, my version: ' . PHP_VERSION . "\n";
-} else {
-    $badnews .= '<p>PageCarton requires PHP 5.3 or later. You are running version <code class="annotated">' . PHP_VERSION . '</code>. We recommend PHP 7.0 or later.</p>';
-}
 
 //    Now use back-up server
 if (!$res = fetchLink($remoteSite . '/pc_check.txt')) {
