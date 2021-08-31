@@ -23,17 +23,10 @@
 				$root = $docRoot;
 			}
 		}
-
-	//	var_export( $home );
-	//	var_export( $docRoot );
-	//	var_export( $root );
-	//	var_export( $_SERVER['DOCUMENT_ROOT'] );
-	//	exit();
+    
 		$dir = $oldDir = $baseAppPath = dirname( $root );
 		$currentDir = explode( '/', str_replace( array( '/', '\\' ), '/', dirname( $_SERVER['SCRIPT_FILENAME'] ) ) );
 		$tempDir = explode( '/', str_replace( array( '/', '\\' ), '/', rtrim( $docRoot, '/\\' ) ) );
-	//	var_export( $_SERVER['SCRIPT_FILENAME'] );
-	//	var_export( $tempDir );
 
 		$prefix = null;
 		if( $currentDir !== $tempDir )
@@ -48,11 +41,11 @@
 				$testCurrentDir = dirname( $testCurrentDir );
 				$currentDir = explode( DS, $testCurrentDir );
 			}
-			$prefix = array_diff( $currentDir, $tempDir );
+			$prefixA = array_diff( $currentDir, $tempDir );
 
-			if( implode( '/', $currentDir ) === implode( '/', $tempDir + $prefix ) && trim( implode( '/', $prefix ) ) )
+			if( implode( '/', $currentDir ) === implode( '/', $tempDir + $prefixA ) && trim( implode( '/', $prefixA ) ) )
 			{
-				$prefix = '/' . implode( '/', $prefix );
+				$prefix = '/' . implode( '/', $prefixA );
 			}
 		}
 		if( ! empty( $_SERVER['CONTEXT_PREFIX'] ) )
@@ -150,9 +143,8 @@
 				exit( "Sorry, the server could not write to the your custom core directory: <i>{$pcConfig['PC_BASE']}</i>. Please provide the server with necessary permissions to this folder.");
 			}
 		}
-	//	var_export( $oldDir );
-	//	var_export( $newDir );
-		//	introducing separate core dir to make this one easily replaceable during upgrades
+
+        //	introducing separate core dir to make this one easily replaceable during upgrades
 		$newDir2 = $pcBase . DS . 'core';
 
 		if( is_dir( $newDir2 ) )
@@ -185,12 +177,10 @@
 	//	$tempDir = $oldDir . DS . 'temp' . DS';
 
 		defined( 'PC_TEMP_DIR' ) || define( 'PC_TEMP_DIR', $pcBase . DS . 'temp' );
-	//	var_export( PC_TEMP_DIR );
-		//	port number mess up cache
+
+        //	port number mess up cache
 		//	don't use prefix because of nginx issues'
-	//	$tempDir = str_replace( '/', DS, str_replace( ':', DS, 'cache' . DS . $_SERVER['HTTP_HOST'] ) );
 		$tempDir = str_replace( '/', DS, str_replace( ':', DS, 'cache' ) );
-//		$tempDir = str_replace( '/', DS, str_replace( ':', DS, 'cache' . DS . $_SERVER['HTTP_HOST'] ) . $prefix );
 		defined( 'CACHE_DIR' ) || define( 'CACHE_DIR', PC_TEMP_DIR . DS . $tempDir );
 
 		//   Define value of extension for files
@@ -203,34 +193,33 @@
 		defined( 'FILE_CSS' ) || define( 'FILE_CSS', '.css' );
 
 
-	//	Define application environment
+	    //	Define application environment
 		defined( 'APPLICATION_ENV' ) || define( 'APPLICATION_ENV', (getenv( 'APPLICATION_ENV' ) ? getenv( 'APPLICATION_ENV' ) : 'production' ));
 
 
-	//   Define path to pages
+	    //   Define path to pages
 		defined( 'PAGE_PATH' ) || define( 'PAGE_PATH', 'pages' );
 		defined( 'PAGE_INCLUDES' ) || define( 'PAGE_INCLUDES', PAGE_PATH  . DS . 'includes' );
 		defined( 'PAGE_DATA' ) || define( 'PAGE_DATA', PAGE_PATH  . DS . 'data' );
 		defined( 'PAGE_TEMPLATE' ) || define( 'PAGE_TEMPLATE', PAGE_PATH  . DS . 'templates' );
 
-	//   Define path to layout
+	    //   Define path to layout
 		defined( 'LAYOUT_PATH' ) || define( 'LAYOUT_PATH', PAGE_PATH  . DS . 'layouts' );
 		defined( 'LAYOUT_FILE' ) || define( 'LAYOUT_FILE', LAYOUT_PATH  . DS . 'body' . TPL);
 
-	//   Define path to classes
+	    //   Define path to classes
 		defined( 'MODULES_PATH' ) || define( 'MODULES_PATH', APPLICATION_PATH  . DS . 'modules' );
 
 
-	//   Define path to libraries
-		//defined( 'DOCUMENTS_DIR' ) || define( 'DOCUMENTS_DIR', APPLICATION_PATH  . DS . 'documents' );
+	    //   Define path to libraries
 		defined( 'DOCUMENTS_DIR' ) || define( 'DOCUMENTS_DIR', 'documents' );
 		defined( 'AYOOLA_MODULE_FILES' ) || define( 'AYOOLA_MODULE_FILES', 'module_files' );
 		defined( 'XML_DATABASES_DIR' ) || define( 'XML_DATABASES_DIR', 'databases' );
 
-	//   Specify the beginning of GET parameters in URLs
+        //   Specify the beginning of GET parameters in URLs
 		defined( 'GET' ) || define( 'GET', '/get/' );
 
-	//	The Domain Name
+        //	The Domain Name
 		defined( 'DOMAIN' ) || define( 'DOMAIN', $_SERVER['HTTP_HOST'] );
 
 		//	Bring in our libraries.
@@ -241,19 +230,18 @@
 
 		}
 
-	//	Detects the Url and path
+        //	Detects the Url and path
 		require_once 'Ayoola/Application.php';
 		defined( 'URI' ) || define( 'URI', Ayoola_Application::getPresentUri() );
 
 		require_once 'Ayoola/Page.php';
 		$pagePaths = Ayoola_Page::getPagePaths( URI );
-	//	var_export( $pagePaths );
 		defined( 'PAGE_INCLUDE_FILE' ) || define( 'PAGE_INCLUDE_FILE', $pagePaths['include'] );
 		defined( 'PAGE_TEMPLATE_FILE' ) || define( 'PAGE_TEMPLATE_FILE', $pagePaths['template'] );
 		defined( 'PAGE_DATA_FILE' ) || define( 'PAGE_DATA_FILE', $pagePaths['data'] );
 
-	//	echo "<br />\n"; foreach($_SERVER as $key=>$val) {echo  '$_SERVER['.$key."] = $val<br />\n";}
-	//   Include prerequisite
-	//	don't run if the installer is active and we are not the admin
+        //	echo "<br />\n"; foreach($_SERVER as $key=>$val) {echo  '$_SERVER['.$key."] = $val<br />\n";}
+        //   Include prerequisite
+        //	don't run if the installer is active and we are not the admin
 		require_once 'Ayoola/Application.php';
 		Ayoola_Application::run();

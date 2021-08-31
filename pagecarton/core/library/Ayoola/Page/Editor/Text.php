@@ -185,6 +185,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     {
         while( stripos( $content, '</widget>' )  && $count < 3  )
         {
+            // this was causing issue in a server
+            //  making preg_match_all crash apache
+            //  figured it is because of stack size
+            ini_set ("pcre.recursion_limit", "524");
+
             preg_match_all( '#<widget([\s]*parameters=("?\'?)({[^>]*})("?\'?)[\s]*)?>(((?!\</widget\>).)*)</widget>#isU', $content, $widgets );
 
             //  avoid infinite loop

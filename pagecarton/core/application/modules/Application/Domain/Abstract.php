@@ -102,23 +102,17 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
      */
 	public static function getSubDomainDirectory( $subDomain = null )
     {
-	//	var_export( $subDomain );
 		if( is_null( $subDomain ) ){ $subDomain = Ayoola_Application::getDomainSettings( 'sub_domain' ); }
 		if( empty( $subDomain ) ){ return null; }  
 
 		$domainPath = trim( str_ireplace( 'www.', '', strtolower( $subDomain ) ), '\\/' . DS );
 
-	//	var_export( $domainPath );
-
-	//	$oldPath = APPLICATION_PATH . DS . 'sub_domain' . DS . str_ireplace( 'www.', '', strtolower( $subDomain ) );
-	
-		//	Use another means to seek the old path. 
+        //	Use another means to seek the old path. 
 		$myPath = Ayoola_Application::getRealPathPrefix();
-//		$myPath = str_replace( @$_SERVER['CONTEXT_PREFIX'], '', Ayoola_Application::getPathPrefix() );
 	
 		$oldPath = dirname( APPLICATION_DIR ) . DS . 'application'  . DS . 'sub_domain' . DS . $domainPath . $myPath;
-//		var_export( ! is_dir( $oldPath ) );    
-		if( ! is_dir( $oldPath ) )
+
+        if( ! is_dir( $oldPath ) )
 		{
 			$oldPath = APPLICATION_DIR . DS . 'application'  . DS . 'sub_domain' . DS . $domainPath . $myPath;  
 		}
@@ -127,29 +121,13 @@ abstract class Application_Domain_Abstract extends Ayoola_Abstract_Table
 		$pathToUse = $oldPath;
 		    
 		//	compatibility, send to new path
-	//	var_export( PC_BASE );
-	//	var_export( defined( 'PC_BASE' ) );   
-//		var_export( is_dir( $oldPath )  );
-//		var_export( ! is_dir( $newPath )  );  
-//		var_export( $newPath );  
-//		var_export( $oldPath );  
 		$pathToUse = $newPath;
+
 		if( defined( 'PC_BASE' ) && is_dir( $oldPath ) && ! is_dir( $newPath ) )
 		{
-		//	var_export( $newPath );
 
-			//	auto creating directories. Making multiple sites dir
-		//	mkdir( $newPath, 0777, true );
-		//	Ayoola_Doc::recursiveCopy( $oldPath, $newPath );
-		//	rename( $oldPath, $oldPath . '.old' );
-	//		$pathToUse = $newPath;
-		}
-	//	elseif( is_dir( $newPath ) )
-		{
-	//		$pathToUse = $newPath;
-		}
+        }
 		$pathToUse = str_replace( '/', DS, $pathToUse );
-	//	var_export( $pathToUse );
 		return $pathToUse;
 	}
 	
