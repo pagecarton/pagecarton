@@ -169,7 +169,7 @@ class Application_Article_Publisher extends Application_Article_Creator
 
                                 $kindWithNoReq[$kind] = $noRequired;
 
-                                $kind = $kind . $noRequired;
+                                //$kind = $kind . $noRequired;
                                 if( ( $kind && @$postTypes[$kind] ) || ! $eachWidget->getParameter( 'add_a_new_post_full_url' ) || @$postTypes[$eachWidget->getParameter( 'add_a_new_post_full_url' )] )
                                 {
                                     continue;
