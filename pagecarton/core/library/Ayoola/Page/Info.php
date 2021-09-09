@@ -107,7 +107,7 @@ class Ayoola_Page_Info extends PageCarton_Widget
             }
             if( empty( $pageInfo['title'] ) && self::hasPriviledge( array( 99, 98 ) ) )
             {
-                @$pageInfo['title'] = $pageInfo['title'] ? : '' . self::__( 'Page Title Here' ) . '';
+                @$pageInfo['title'] = $pageInfo['title'] ? : '' . self::__( 'Set This Page Title Here' ) . '';
             }
 
             if( $this->getParameter( 'use_site_defaults' ) )
