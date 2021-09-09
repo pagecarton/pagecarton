@@ -59,9 +59,10 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 					//	This one needs to always be in the core
 					$installerFilenamePhp = $coreDocumentsDir . DS . $simpleFilename;
 
-                    var_export( dirname( $installerFilenameGz ) );
+
 
 					Ayoola_Doc::createDirectory( dirname( $installerFilenameGz ) );
+					Ayoola_Doc::createDirectory( dirname( $installerFilenamePhp ) );
 					@unlink( $installerFilenameGz );
 					
 					//	dont remove this again so it can be useful for upgrade.
@@ -258,7 +259,6 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 		$backup->compress( Ayoola_Phar::GZ ); 
 		unset( $backup );
 		$phar::unlinkArchive( $values['filename'] );
-        var_export( $values );
 		return $values;
     } 
 	// END OF CLASS
