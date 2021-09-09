@@ -796,8 +796,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						'auth_level' => $articleSettings['allowed_writers'], 
 						'display_name' => Ayoola_Application::getUserInfo( 'username' ), 
 						'username' => Ayoola_Application::getUserInfo( 'username' ), 
-						'article_title' => sprintf( PageCarton_Widget::__( 'Post new %s' ), $newArticleTypeToShow ), 
-						'article_description' => sprintf( PageCarton_Widget::__( 'The short description for the new %s  will appear here. The short description should be between 100 and 300 characters.' ), $newArticleTypeToShow ), 
+						'article_title' => sprintf( PageCarton_Widget::__( 'Add new "%s" here' ), $newArticleTypeToShow ), 
+						'article_description' => sprintf( PageCarton_Widget::__( 'The short description for the new "%s" you add will appear here. The short description should be between 100 and 300 characters.' ), $newArticleTypeToShow ), 
 					)  + ( $myProfileInfo ? : array() );  
 				}
 				else
