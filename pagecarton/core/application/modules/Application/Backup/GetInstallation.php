@@ -115,6 +115,8 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
                     $class = new Application_Backup_Creator( $parameters );
                     $class->fakeValues = $parameters;
                     $class->init();
+                    var_export( $class->view() . "<br>" );
+
                 }
 
             };
@@ -122,7 +124,7 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
             if( ! file_exists( $file1 ) || ! empty( $_REQUEST['pc_recreate_installer'] ) )   
             {
                 @unlink( $coreZip ); 
-
+                var_export( __LINE__ . "<br>" );
                 $createInstaller();
 
                 if( ! empty( $_REQUEST['pc_recreate_installer'] ) )   
