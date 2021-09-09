@@ -106,7 +106,9 @@ class Application_Backup_GetInstallation extends Application_Backup_Abstract
 
                 Ayoola_Doc::createDirectory( $to );
                 rename( $from, $to );
-      
+                var_export( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) );
+                var_export( APPLICATION_PATH );
+
                 if( Ayoola_Application::getDomainSettings( APPLICATION_PATH ) === APPLICATION_PATH )
                 {
                     //  save tar
