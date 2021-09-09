@@ -228,12 +228,12 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 				{
 					try
 					{
-						$backup->delete( $each );
+						//$backup->delete( $each );
 					}
 					catch( Exception $e ){ null; }
 					try
 					{
-						$backup->delete( 'pagecarton/core/' . $each );  
+						//$backup->delete( 'pagecarton/core/' . $each );  
 					}
 					catch( Exception $e ){ null; }
 				}
