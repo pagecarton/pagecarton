@@ -84,7 +84,7 @@ if (!is_dir($newDir2)) {
     //ensure we have the access before creating dirs
     if (is_writable(dirname($newDir2))) {
         if (!mkdir($newDir2, 0777, true)) {
-            $badnews = ."Error creating directory: <code class='annotated'>$newDir2</code>";
+            $badnews .= "Error creating directory: <code class='annotated'>$newDir2</code>";
         }
     } else {
         $badnews .= "
