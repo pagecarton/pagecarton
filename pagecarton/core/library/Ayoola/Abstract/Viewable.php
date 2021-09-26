@@ -686,7 +686,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
         try
         {
 
-            self::setHook( static::getInstance(), __FUNCTION__, $mailInfo );
 
             if( empty( $mailInfo['body'] ) || empty( $mailInfo['to'] ))
             {
@@ -744,9 +743,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $headers[] = "Content-type:text/html;charset=UTF-8";
 
             }
-            if( ! empty( $mailInfo['to'] ) )
+            self::setHook( static::getInstance(), __FUNCTION__, $mailInfo );
+
+            if( empty( $mailInfo['sent'] ) )
             {
-                $sent = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], implode("\r\n", $headers) );
+                $mailInfo['sent'] = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], implode("\r\n", $headers) );
             }
             $mailInfo['to'] = array_map( 'trim', explode( ',', $mailInfo['to'] ) );
             $mailInfo['body'] = $realBody;
@@ -763,7 +764,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
             Application_Notification::getInstance()->insert( $mailInfo );
 
-            return $sent;
+            return $mailInfo['sent'];
         }
         catch( Ayoola_Abstract_Exception $e  )
         {
