@@ -688,7 +688,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
             self::setHook( static::getInstance(), __FUNCTION__, $mailInfo );
 
-            if( empty( $mailInfo['body'] ) )
+            if( empty( $mailInfo['body'] ) || empty( $mailInfo['to'] ))
             {
                 return false;
             }
@@ -702,14 +702,23 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             {
                 $mailInfo['subject'] = 'E-mail Notification';
             }
-            $header = 'From: ' . $mailInfo['from'] . "\r\n";
-            $header .= "Return-Path: " . @$mailInfo['return-path'] ? : $mailInfo['from'] . "\r\n";
+            $headers = array();
+            $headers[] = 'From: ' . $mailInfo['from'] . "";
+            if( empty( $mailInfo['return-path'] ) )
+            {
+                $mailInfo['return-path'] = 'info@' . Ayoola_Application::getDomainName() . '';
+            }
+            $headers[] = "Return-Path: " . @$mailInfo['return-path'];
 
             if( ! empty( $mailInfo['bcc'] ) )
             {
-                $header .= "bcc: {$mailInfo['bcc']}\r\n";
-
+                $headers[] = "bcc: {$mailInfo['bcc']}";
             }
+            if( ! empty( $mailInfo['cc'] ) )
+            {
+                $headers[] = "cc: {$mailInfo['bcc']}";
+            }
+
             if( ! empty( $mailInfo['html'] ) || strip_tags( $mailInfo['body'] ) != $mailInfo['body'] )
             {
                 if( stripos( $mailInfo['body'], '<body>' ) === false )
@@ -731,21 +740,29 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                                                 ' . $mailInfo['body'] . '
                                             </html>';
                 }
-                $header .= "MIME-Version: 1.0\r\n";
-                $header .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers[] = "MIME-Version: 1.0";
+                $headers[] = "Content-type:text/html;charset=UTF-8";
 
             }
             if( ! empty( $mailInfo['to'] ) )
             {
-
-                $sent = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], $header );
+                $sent = mail( $mailInfo['to'], $mailInfo['subject'], $mailInfo['body'], implode("\r\n", $headers) );
             }
             $mailInfo['to'] = array_map( 'trim', explode( ',', $mailInfo['to'] ) );
-            $mailInfo['cc'] = array_map( 'trim', explode( ',', $mailInfo['cc'] ) );
-            $mailInfo['bcc'] = array_map( 'trim', explode( ',', $mailInfo['bcc'] ) );
             $mailInfo['body'] = $realBody;
 
+            if( ! empty( $mailInfo['cc'] ) )
+            {
+                $mailInfo['cc'] = array_map( 'trim', explode( ',', $mailInfo['cc'] ) );
+            }
+
+            if( ! empty( $mailInfo['bcc'] ) )
+            {
+                $mailInfo['bcc'] = array_map( 'trim', explode( ',', $mailInfo['bcc'] ) );
+            }
+
             Application_Notification::getInstance()->insert( $mailInfo );
+
             return $sent;
         }
         catch( Ayoola_Abstract_Exception $e  )

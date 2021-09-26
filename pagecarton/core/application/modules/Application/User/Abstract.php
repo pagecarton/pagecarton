@@ -277,10 +277,11 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 			//	case 'relational':
 			if( $database === 'relational' )
 			{
-				$data = $table->selectOne( null, strtolower( implode( ', ', $this->_otherTables ) ), $this->getIdentifier() );
-
-				$this->_identifierData = $data;
-				break;
+                //  no longer using cmf
+                
+				//$data = $table->selectOne( null, strtolower( implode( ', ', $this->_otherTables ) ), $this->getIdentifier() );
+				//$this->_identifierData = $data;
+				//break;
 			}		
 		}
 		while( false );
