@@ -283,6 +283,10 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			
 			foreach( $categories as $each )
 			{
+                if( ! empty( $each['parent_category'] ) )
+                {
+                    continue;
+                }
 				$subCategories = $table->select( null, array( 'parent_category' => $each['category_name'] ) );   
 				if( ! empty( $subCategories ) && ! empty( $each['child_category_name'] ) && is_array( $each['child_category_name'] ) )
 				{
@@ -302,7 +306,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 					{
 						if( $eachSub['url_integration_type'] == 'pc_module_url_values_offset' )
 						{
-							$urlToUseForEach = rtrim( $eachSub['category_url'], '/' ) . '/' . $each['category_name'] . '/' . $eachSub['category_name'];
+							$urlToUseForEach = rtrim( $eachSub['category_url'], '/' ) . '/' . $eachSub['category_name'];
 						}
 						else
 						{
@@ -328,7 +332,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				}
 				
 				
-				$options[] = array( 'option_name' => $each['category_label'], 'rel' => '', 'url' => $urlToUseForEach, 'title' => $each['category_description'], 'sub_menu_options' => $subMenuOptions, 'logged_in' => 1, 'logged_out' => 1, 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => 0, 'menu_id' => 0, 'option_id' => 0, 'link_options' => array( 'logged_in' ), ) + $each ? : array();
+				$options[] = array( 'option_name' => $each['category_label'], 'rel' => '', 'url' => $urlToUseForEach, 'title' => $each['category_description'], 'sub_menu_options' => $subMenuOptions, 'logged_in' => 1, 'logged_out' => 1, 'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => 0, 'menu_id' => 0, 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ), ) + $each ? : array();
 				
 			}
 
