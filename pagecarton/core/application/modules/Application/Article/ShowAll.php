@@ -286,7 +286,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	public function showMessage()
     {
 
-		if( empty( $_GET['pc_post_list_id'] ) )
+		if( empty( $_GET['pc_post_list_id'] ) && ! $this->getParameter( 'add_a_new_post' ) )
 		{
 			$message = array_pop( $this->_badnews ) ? : 'Posts will be displayed here when they become available.';
 			$message = $this->getParameter( 'badnews' ) ? : $message;
