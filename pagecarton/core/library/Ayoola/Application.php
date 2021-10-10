@@ -286,6 +286,25 @@ class Ayoola_Application
     /**
      * Returns the settings of the current domain
      *
+     * @return array
+     */
+	public static function checkIfSameApp( $url )
+    {
+        $checkFile = 'pc_check.txt';
+        if( ! is_file( $checkFile ) || file_get_contents( $checkFile ) - filemtime( $checkFile ) > 5 )
+        {
+            file_put_contents( $checkFile, time() );
+        }
+        if( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) - filemtime( $checkFile ) < 5 )
+        {
+            return true;
+        }
+        return false;
+	}
+
+    /**
+     * Returns the settings of the current domain
+     *
      * @param boolean Whether to force a reset
      * @return array
      */
@@ -304,7 +323,8 @@ class Ayoola_Application
 		@$storage->storageNamespace = 'xiu' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve();
-		if( $data && ! $forceReset && ( isset($_GET['reset_domain_information']) && !$_GET['reset_domain_information']) )
+
+		if( $data && ! $forceReset )
 		{
 
  			//	Allows the sub-domains to have an include path too.
@@ -609,7 +629,7 @@ class Ayoola_Application
 						if( $userDomainInfo = Application_Domain_UserDomain::getInstance()->selectOne( null, array( 'profile_url' => strtolower( $subDomain ) ) ) )
 						{
 							//	link it to the profile
-							if( empty( $userDomain ) && empty( $_REQUEST['pc_clean_url_check'] ) && PageCarton_Widget::fetchLink( 'http://' . $userDomainInfo['domain_name'] . '/pc_check.txt?pc_clean_url_check=1' ) )
+							if( empty( $userDomain ) && empty( $_REQUEST['pc_clean_url_check'] ) && self::checkIfSameApp( 'http://' . $userDomainInfo['domain_name'] ) )
 							{
                                 $urlY = $protocol . '://' . $userDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                                 $urlY = self::appendCurrentQueryStrings( $urlY );
@@ -713,7 +733,7 @@ class Ayoola_Application
         {
             if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' && ! stripos( $_SERVER['HTTP_CF_VISITOR'], 'https' ) )
             {
-                if( PageCarton_Widget::fetchLink( 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . '/pc_check.txt?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) === 'pc' )
+                if( self::checkIfSameApp( 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . '' ) )
                 {
                     $urlY = 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                     $urlY = self::appendCurrentQueryStrings( $urlY );
@@ -1959,17 +1979,20 @@ class Ayoola_Application
 		$storage->storageNamespace = __CLASS__  . 'url_prefix-x' . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$response = $storage->retrieve();
+
  		if( ! $response  )
 		{
  			//	Detect if we have mod-rewrite
-            $urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt?pc_clean_url_check=1';
+            //$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt?pc_clean_url_check=1';
+            $url = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix();
 
-    		$response = PageCarton_Widget::fetchLink( $urlToLocalInstallerFile );
+    		//$response = PageCarton_Widget::fetchLink( $urlToLocalInstallerFile );
+            $response = self::checkIfSameApp( $url );
 
  			$storage->store( $response );
         }
 
-		if( $response === 'pc' )
+		if( $response )
 		{
             //  this isn't suppose to be there
             //  causing index.php to appear

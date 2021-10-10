@@ -286,7 +286,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	public function showMessage()
     {
 
-		if( empty( $_GET['pc_post_list_id'] ) && ! $this->getParameter( 'add_a_new_post' ) )
+        if( ! $this->getParameter( 'add_a_new_post' ) )
+        {
+
+        }
+		elseif( empty( $_GET['pc_post_list_id'] ) )
 		{
 			$message = array_pop( $this->_badnews ) ? : 'Posts will be displayed here when they become available.';
 			$message = $this->getParameter( 'badnews' ) ? : $message;
@@ -296,14 +300,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_parameter['markup_template'] = null; 
 			$this->_parameter['markup_template_no_data'] = null; 
 			$message = '...';
-		}
-
-	//	if( ! $values )
-		{
-			//	switch templates off
-
-		}
-		
+		}	
 		$this->setViewContent(  '' . self::__( '<p style="clear: both;" class="pc-notify-normal pc_no_post_to_show pc_give_space_top_bottom"> ' . $message . '</p>' ) . '', true  );
 
 		
