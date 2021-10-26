@@ -295,7 +295,9 @@ class Ayoola_Application
         {
             file_put_contents( $checkFile, time() );
         }
-        if( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) - filemtime( $checkFile ) < 5 )
+
+        $result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) );
+        if( $result >= filemtime( $checkFile ) && $result - filemtime( $checkFile ) < 5 )
         {
             return true;
         }

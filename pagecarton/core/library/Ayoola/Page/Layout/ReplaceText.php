@@ -210,6 +210,15 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             }
             $record[$values['dummy_search'][$key]] = true;
 
+            // this needs to be more tested.
+            if( 
+                ! empty( $values['dummy_replace'][$key] ) 
+                && strip_tags( $values['dummy_replace'][$key] ) === $values['dummy_replace'][$key] 
+                && strpos( trim( $values['dummy_replace'][$key] ), "\n" )
+            )
+            {
+                $values['dummy_replace'][$key] = trim( nl2br( $values['dummy_replace'][$key] ) );
+            }
         }
         if( count( $values['dummy_replace'] ) !== count( $values['dummy_search'] ) )
         {
