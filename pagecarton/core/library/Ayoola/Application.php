@@ -353,7 +353,7 @@ class Ayoola_Application
 				self::$GLOBAL['domain'] = $data['domain_settings'];
 
 			}
-			return true;
+			//return true;
 		}
 
 		//	Search the domain name in the domain table
@@ -734,6 +734,42 @@ class Ayoola_Application
 
                     }
                 }
+            }
+
+            //  check if xml sitemap is set in robot.txt
+            $personalRobotsTxtFile = Ayoola_Doc_Browser::getDocumentsDirectory() . '/robots.txt';
+
+            //  don't save in the url prefix document
+            //  robot.txt have to be in the root dir
+            if( $myPrefix = Ayoola_Application::getUrlPrefix() )   
+            {
+                $personalRobotsTxtFile = SITE_APPLICATION_PATH . DS . 'documents' . DS . 'robots.txt';
+            }      
+
+
+            //var_export( $personalRobotsTxtFile );
+
+            $coreRobots = PC_CORE_DIR . '/application/documents/' . 'robots.txt';
+            if( ! is_file( $coreRobots ) OR ! $coreRobotsText = file_get_contents( $coreRobots ) )
+            {
+                $coreRobotsText = "\r\n" . '#' . "\r\n";
+            }    
+            if( ! is_file( $personalRobotsTxtFile ) OR ! $robotTxt = file_get_contents( $personalRobotsTxtFile ) )
+            {
+                $robotTxt = $coreRobotsText;
+            }
+            elseif( filemtime( $personalRobotsTxtFile ) < filemtime( $coreRobots ) )
+            {
+                $robotTxt = $coreRobotsText . preg_replace( '|\#-PageCarton(.*)-\#|s', '', $robotTxt );
+                file_put_contents( $personalRobotsTxtFile, $robotTxt );
+            }
+
+            $sitemapLink =   Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '/sitemap?mode=xml';
+            if( false === strpos( $robotTxt, $sitemapLink ) )
+            {
+                $robotTxt .= "\r\n" . 'Sitemap: ' . $sitemapLink . "";
+                Ayoola_Doc::createDirectory( dirname( $personalRobotsTxtFile ) );
+                file_put_contents( $personalRobotsTxtFile, $robotTxt );
             }
             $storage->store( $data );  
 		}

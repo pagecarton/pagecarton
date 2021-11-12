@@ -1,9 +1,11 @@
+#-PageCarton Robots Directive Starts
 User-agent: *
 Disallow: /cgi-bin/ 
 Disallow: /tmp/
 Disallow: /ayoola/
 Disallow: /tools/
 Disallow: /object/
+Disallow: /profile
 Disallow: /widgets/
 Disallow: /pc-admin/
 User-agent: * 
@@ -26,3 +28,4 @@ User-agent: spbot
 Disallow: /
 User-agent: PetalBot
 Disallow: /
+#PageCarton Robots Directive Ends Here-#

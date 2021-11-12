@@ -291,8 +291,8 @@ class Application_Link_Sitemap extends Application_Link_Abstract
 		$innerInnerUl = $innerLi->appendChild( $innerInnerUl );
 		foreach( $table as $data )
 		{
-		//	var_export( $data );
-			if( 0 !== $data['auth_level'] )
+	
+			if( 0 !== $data['auth_level'] && ( is_array( $data['auth_level'] ) && ! in_array( 0, $data['auth_level'] ) ) )
 			{
 				continue;
 			}
