@@ -188,7 +188,11 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
             // this was causing issue in a server
             //  making preg_match_all crash apache
             //  figured it is because of stack size
-            ini_set ("pcre.recursion_limit", "524");
+
+            //  apparently, this new settings won't work with "E-shop" theme. 
+            // add to remove this settigns ot set the value to 52400 to make it work
+            //ini_set ("pcre.recursion_limit", "524");
+            ini_set ("pcre.recursion_limit", "52400");
 
             preg_match_all( '#<widget([\s]*parameters=("?\'?)({[^>]*})("?\'?)[\s]*)?>(((?!\</widget\>).)*)</widget>#isU', $content, $widgets );
 

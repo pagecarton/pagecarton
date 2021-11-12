@@ -322,7 +322,7 @@ class Ayoola_Application
 			$protocol = 'https';
 		}
 
-		@$storage->storageNamespace = 'xiu' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
+		@$storage->storageNamespace = 'x' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve();
 
@@ -691,7 +691,11 @@ class Ayoola_Application
 
 		//	Check if theres a forwarding needed.
 
-		if( @is_array( $data['domain_settings']['domain_options'] ) && in_array( 'redirect', $data['domain_settings']['domain_options'] ) && ! @$_REQUEST['ignore_domain_redirect'] && ! @$_SESSION['ignore_domain_redirect'] && empty( $domainSettings['no_redirect'] ) )
+		if( @$_REQUEST['ignore_domain_redirect'] || @$_SESSION['ignore_domain_redirect'] )
+		{
+			$_SESSION['ignore_domain_redirect'] = true;
+		}
+        elseif( @is_array( $data['domain_settings']['domain_options'] ) && in_array( 'redirect', $data['domain_settings']['domain_options'] ) && ! @$_REQUEST['ignore_domain_redirect'] && ! @$_SESSION['ignore_domain_redirect'] && empty( $domainSettings['no_redirect'] ) )
 		{
 			header( 'HTTP/1.1 ' . $data['domain_settings']['redirect_code'] );
             $urlY = $protocol . '://' . $data['domain_settings']['redirect_destination'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
@@ -699,10 +703,6 @@ class Ayoola_Application
             header( 'Location: ' . $urlY );
             exit();
         }
-		elseif( @$_REQUEST['ignore_domain_redirect'] || @$_SESSION['ignore_domain_redirect'] )
-		{
-			$_SESSION['ignore_domain_redirect'] = true;
-		}
 		else
 		{
 
@@ -718,33 +718,29 @@ class Ayoola_Application
 				self::setIncludePath( SITE_APPLICATION_PATH );
 				self::setIncludePath( SITE_APPLICATION_PATH . DS . 'modules' );
 			}
+
+            //  redirect ssl last 
+            //  so it wont be auto issue ssl for domains we dont need for autossl settings
+            //  now we need https to be always encouraged 
+            {
+                if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' && ! stripos( $_SERVER['HTTP_CF_VISITOR'], 'https' ) )
+                {
+                    if( self::checkIfSameApp( 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . '' ) )
+                    {
+                        $urlY = 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                        $urlY = self::appendCurrentQueryStrings( $urlY );
+                        header( 'Location: ' . $urlY );
+                        exit();
+
+                    }
+                }
+            }
             $storage->store( $data );  
 		}
 		//	Allows the sub-domains to have an include path too.
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] . '/modules' );
         self::$_domainSettings = $data['domain_settings'];
-
-
-
-        //  redirect ssl last 
-        //  so it wont be auto issue ssl for domains we dont need for autossl settings
-
-        //  now we need https to be always encouraged 
-
-        {
-            if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' && ! stripos( $_SERVER['HTTP_CF_VISITOR'], 'https' ) )
-            {
-                if( self::checkIfSameApp( 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . '' ) )
-                {
-                    $urlY = 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
-                    $urlY = self::appendCurrentQueryStrings( $urlY );
-                    header( 'Location: ' . $urlY );
-                    exit();
-
-                }
-            }
-        }
 		return true;
     }
 
