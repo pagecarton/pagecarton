@@ -1138,22 +1138,28 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                 $class = new Ayoola_Page_Editor_Sanitize();
 
                 //  don't put theme name
-                //  so it sanitize just normal pages
+                //  so it sanitize just normal pages and not theme pages
+                //  /default-layout is meant to serve just normal page
                 //  so it doesn't cause infinite loop
                 $ex = $class->sanitize();
             }
 			//	Sanitize theme pages!
 			if( 
                 ( stripos( $page['url'], '/layout/' ) === 0 ) 
-                && empty( $this->_parameter['theme_variant'] ) 
+                //&& empty( $this->_parameter['theme_variant'] ) 
             )     
 			{
+                $themeToSanitize = $themeName;
+                if( ! empty( $this->_parameter['theme_variant'] )  )
+                {
+                    $themeToSanitize = null;
+                }
 
                 //	autosanitize pages
                 unset( $_REQUEST['pc_page_editor_layout_name'] );
                 unset( $_GET['pc_page_editor_layout_name'] );
 			    $class = new Ayoola_Page_Editor_Sanitize(); 
-			    $ex = $class->sanitize( $themeName ); 
+			    $ex = $class->sanitize( $themeToSanitize ); 
 
                 //	Sanitize multi sites
 				$table = new PageCarton_MultiSite_Table();
@@ -1175,9 +1181,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					{
 
 						Ayoola_Application::reset( array( 'path' => $site['directory'] ) );
-                        //  Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName ); 
+                        //  Ayoola_Page_Layout_Abstract::refreshThemePage( $themeToSanitize ); 
                         $class = new Ayoola_Page_Editor_Sanitize(); 
-                        $ex = $class->sanitize( $themeName ); 
+                        $ex = $class->sanitize( $themeToSanitize ); 
 					}
 					Ayoola_Application::reset();
 				}
@@ -1196,9 +1202,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 							continue;
 						}
 
-                        //  Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName ); 
+                        //  Ayoola_Page_Layout_Abstract::refreshThemePage( $themeToSanitize ); 
                         $class = new Ayoola_Page_Editor_Sanitize(); 
-                        $ex = $class->sanitize( $themeName ); 
+                        $ex = $class->sanitize( $themeToSanitize ); 
 
 					}
 					Ayoola_Application::reset();

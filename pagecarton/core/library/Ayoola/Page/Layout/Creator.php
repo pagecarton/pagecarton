@@ -292,7 +292,10 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 			
 			if( $this->updateFile( $values ) )
 			{ 
-				$indexFile = dirname( $this->getMyFilename() ) . '/index.html';
+				//  $indexFile = dirname( $this->getMyFilename() ) . '/index.html';
+
+                //  make the default file 
+				$indexFile = dirname( $this->getMyFilename() ) . '/templateraw';
 				if( ! is_file( $indexFile ) && ! empty( $values['plain_text'] ) )
 				{
 					//	Auto generate index

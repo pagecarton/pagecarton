@@ -80,17 +80,6 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		}
         self::$_refreshed[$id] = true;
 
-		$pages = new Ayoola_Page();
-		$where = array();		
-		if( $themeName )
-		{
-			$where['layout_name'] = array( $themeName );
-			if( strtolower( $themeName ) === strtolower( Ayoola_Page_Editor_Layout::getDefaultLayout() ) )
-			{
-				$where['layout_name'][] = '';
-			}
-		}
-
 		//	now  sanitize theme after normal pages
 		if( $themeName )
 		{
@@ -136,6 +125,17 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
         //	let's see if this solves it.
         if( ! $themeName || $themeName === Ayoola_Page_Editor_Layout::getDefaultLayout() )
         {
+            $pages = new Ayoola_Page();
+            $where = array();		
+            if( $themeName )
+            {
+                $where['layout_name'] = array( $themeName );
+                if( strtolower( $themeName ) === strtolower( Ayoola_Page_Editor_Layout::getDefaultLayout() ) )
+                {
+                    $where['layout_name'][] = '';
+                }
+            }
+    
             $pages = $pages->getDbTable()->select( null, $where );
             $pages = array_merge( $pages, self::$defaultPages );
             $done = array();
