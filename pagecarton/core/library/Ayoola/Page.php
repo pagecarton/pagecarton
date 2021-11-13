@@ -508,14 +508,33 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     }
 	
     /**
+     * 
+     *
+     * @return string
+     */
+    public static function getProtocol()
+    {
+        if( ! $protocol = Ayoola_Application::getDomainSettings( 'protocol' ) )
+        {
+            $protocol = 'http';
+            if( ( $_SERVER['SERVER_PORT'] == 443 && ! empty( $_SERVER['HTTPS'] ) ) || $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
+            {
+                $protocol = 'https';
+            }    
+        }
+        return $protocol;
+    }
+	
+    /**
      * Returns the home page url
      *
      * @return string
      */
     public static function getRootUrl()
     {
+
 		$domain = self::getDefaultDomain();
-		$url = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $domain . self::getPortNumber() . @$_SERVER['CONTEXT_PREFIX'];   
+		$url = self::getProtocol() . '://' . $domain . self::getPortNumber() . @$_SERVER['CONTEXT_PREFIX'];   
 		return $url;
     }
 	

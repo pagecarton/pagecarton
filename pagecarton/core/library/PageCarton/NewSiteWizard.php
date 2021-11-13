@@ -42,9 +42,9 @@ class PageCarton_NewSiteWizard extends PageCarton_Widget
 
                 if( ! Ayoola_Application::getUserInfo( 'username' ) )
                 {
-                    $url = Ayoola_Page::setPreviousUrl( '/account/signin' ); 
+                    //$url = Ayoola_Page::setPreviousUrl( '/account/signin' ); 
 
-                    $this->setViewContent( '<div style="text-align:center;padding:1em;"><a style="display:inline-block" href="' . Ayoola_Application::getUrlPrefix() . $url . '" class="btn btn-primary "><i class="fa fa-chevron-right pc_give_space"></i> Login <i class="fa fa-sign-in pc_give_space"></i></a></div>' );
+                   // $this->setViewContent( '<div style="text-align:center;padding:1em;"><a style="display:inline-block" href="' . Ayoola_Application::getUrlPrefix() . $url . '" class="btn btn-primary "><i class="fa fa-chevron-right pc_give_space"></i> Login <i class="fa fa-sign-in pc_give_space"></i></a></div>' );
                 }
                 else
                 {

@@ -468,7 +468,7 @@ class Ayoola_Application
 
 				if( $primaryDomainInfo['domain_name'] )
 				{
-                    $urlY = $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                    $urlY = $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Page::getPortNumber() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                     $urlY = self::appendCurrentQueryStrings( $urlY );
                     header( 'Location: ' . $urlY );
 					exit( 'DOMAIN NOT FOUND' );
@@ -633,7 +633,7 @@ class Ayoola_Application
 							//	link it to the profile
 							if( empty( $userDomain ) && empty( $_REQUEST['pc_clean_url_check'] ) && self::checkIfSameApp( 'http://' . $userDomainInfo['domain_name'] ) )
 							{
-                                $urlY = $protocol . '://' . $userDomainInfo['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                                $urlY = $protocol . '://' . $userDomainInfo['domain_name'] . Ayoola_Page::getPortNumber() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                                 $urlY = self::appendCurrentQueryStrings( $urlY );
                                 header( 'Location: ' . $urlY );
                                 exit();
@@ -659,8 +659,6 @@ class Ayoola_Application
 
                         $urlY = $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                         $urlY = self::appendCurrentQueryStrings( $urlY );
-                        //    header( 'Location: ' . $urlY );
-                        //	exit( 'USER DOMAIN NOT ACTIVE' );
                         if(  Ayoola_Page::getInfo( Ayoola_Application::getPresentUri() )  )
                         {
                             self::view( '/domain-not-found' );
@@ -669,7 +667,7 @@ class Ayoola_Application
 					elseif( empty( $domainSettings['no_redirect'] ) )
 					{
 
-                        $urlY = $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                        $urlY = $protocol . '://' . $tempWhere['domain_name'] . Ayoola_Page::getPortNumber() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                         $urlY = self::appendCurrentQueryStrings( $urlY );
                         header( 'Location: ' . $urlY );
             
@@ -727,7 +725,7 @@ class Ayoola_Application
                 {
                     if( self::checkIfSameApp( 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . '' ) )
                     {
-                        $urlY = 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
+                        $urlY = 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Page::getPortNumber() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                         $urlY = self::appendCurrentQueryStrings( $urlY );
                         header( 'Location: ' . $urlY );
                         exit();
@@ -736,41 +734,51 @@ class Ayoola_Application
                 }
             }
 
-            //  check if xml sitemap is set in robot.txt
-            $personalRobotsTxtFile = Ayoola_Doc_Browser::getDocumentsDirectory() . '/robots.txt';
-
-            //  don't save in the url prefix document
-            //  robot.txt have to be in the root dir
-            if( $myPrefix = Ayoola_Application::getUrlPrefix() )   
+            do
             {
-                $personalRobotsTxtFile = SITE_APPLICATION_PATH . DS . 'documents' . DS . 'robots.txt';
-            }      
+                if( 'localhost' == $_SERVER['SERVER_NAME'] || $_SERVER['SERVER_NAME'] == $_SERVER['SERVER_ADDR'] )
+                {
+                    break;
+                }
+                //  check if xml sitemap is set in robot.txt
+                $personalRobotsTxtFile = Ayoola_Doc_Browser::getDocumentsDirectory() . '/robots.txt';
+
+                //  don't save in the url prefix document
+                //  robot.txt have to be in the root dir
+                if( $myPrefix = Ayoola_Application::getUrlPrefix() )   
+                {
+                    $personalRobotsTxtFile = SITE_APPLICATION_PATH . DS . 'documents' . DS . 'robots.txt';
+                }      
 
 
-            //var_export( $personalRobotsTxtFile );
+                //var_export( $personalRobotsTxtFile );
 
-            $coreRobots = PC_CORE_DIR . '/application/documents/' . 'robots.txt';
-            if( ! is_file( $coreRobots ) OR ! $coreRobotsText = file_get_contents( $coreRobots ) )
-            {
-                $coreRobotsText = "\r\n" . '#' . "\r\n";
-            }    
-            if( ! is_file( $personalRobotsTxtFile ) OR ! $robotTxt = file_get_contents( $personalRobotsTxtFile ) )
-            {
-                $robotTxt = $coreRobotsText;
+                $coreRobots = PC_CORE_DIR . '/application/documents/' . 'robots.txt';
+                if( ! is_file( $coreRobots ) OR ! $coreRobotsText = file_get_contents( $coreRobots ) )
+                {
+                    $coreRobotsText = "\r\n" . '#' . "\r\n";
+                }    
+                if( ! is_file( $personalRobotsTxtFile ) OR ! $robotTxt = file_get_contents( $personalRobotsTxtFile ) )
+                {
+                    $robotTxt = $coreRobotsText;
+                }
+                elseif( filemtime( $personalRobotsTxtFile ) < filemtime( $coreRobots ) )
+                {
+                    $robotTxt = $coreRobotsText . preg_replace( '|\#-PageCarton(.*)-\#|s', '', $robotTxt );
+                    file_put_contents( $personalRobotsTxtFile, $robotTxt );
+                }
+
+                $sitemapLink =   Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '/sitemap?mode=xml';
+                $checkText =   '://' . Ayoola_Page::getDefaultDomain() . Ayoola_Page::getPortNumber() . Ayoola_Application::getUrlPrefix() . '/sitemap?mode=xml';
+                if( false === strpos( $robotTxt, $checkText ) )
+                {
+                    $robotTxt .= "\r\n" . 'Sitemap: ' . $sitemapLink . "";
+                    Ayoola_Doc::createDirectory( dirname( $personalRobotsTxtFile ) );
+                    file_put_contents( $personalRobotsTxtFile, $robotTxt );
+                }
             }
-            elseif( filemtime( $personalRobotsTxtFile ) < filemtime( $coreRobots ) )
-            {
-                $robotTxt = $coreRobotsText . preg_replace( '|\#-PageCarton(.*)-\#|s', '', $robotTxt );
-                file_put_contents( $personalRobotsTxtFile, $robotTxt );
-            }
+            while( false );
 
-            $sitemapLink =   Ayoola_Page::getRootUrl() . Ayoola_Application::getUrlPrefix() . '/sitemap?mode=xml';
-            if( false === strpos( $robotTxt, $sitemapLink ) )
-            {
-                $robotTxt .= "\r\n" . 'Sitemap: ' . $sitemapLink . "";
-                Ayoola_Doc::createDirectory( dirname( $personalRobotsTxtFile ) );
-                file_put_contents( $personalRobotsTxtFile, $robotTxt );
-            }
             $storage->store( $data );  
 		}
 		//	Allows the sub-domains to have an include path too.
@@ -1045,7 +1053,7 @@ class Ayoola_Application
                         if( is_array( $domainOptions ) && in_array( 'user_subdomains', $domainOptions ) )
                         {
                             $parentDomainOptions = self::getDomainSettings( 'parent' );
-                            $urlY = 'http://' . $nameForModule . '.' . ( @$parentDomainOptions['domain_name'] ? : self::getDomainSettings( 'domain_name' ) );
+                            $urlY = 'http://' . $nameForModule . '.' . ( @$parentDomainOptions['domain_name'] ? : self::getDomainSettings( 'domain_name' ) ) . Ayoola_Page::getPortNumber();
                             $urlY = self::appendCurrentQueryStrings( $urlY ); 
                             header( 'Location: ' . $urlY );
                             exit();
