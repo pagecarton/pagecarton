@@ -567,7 +567,46 @@ class Application_Article_ShowAll extends Application_Article_Abstract
                 }
                 if( ! empty( $data['true_post_type'] ) || empty( $data['not_real_post'] ) )
                 {
-
+                    if( isset( $data['item_price'] ) ) 
+                    {
+                        //	Filter the price to display unit
+                        if( empty( $data['item_price'] ) && $this->getParameter( 'use_price_option_price' ) )
+                        {
+                            if( ! empty( $data['price_option_price'] ) )
+                            {
+                                $allOptionPrices = $data['price_option_price'];
+                                asort( $allOptionPrices );
+                                do
+                                {
+                                    $leastPrice = array_shift( $allOptionPrices );
+                                }
+                                while( ! $leastPrice && $allOptionPrices );
+                                $data['item_price'] = '' . $leastPrice;
+                            }
+        
+                        }
+                        $filter = 'Ayoola_Filter_Currency';
+                        $filter::$symbol = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
+                        $data['currency'] = $filter::$symbol;
+                        $filter = new $filter();
+                        
+                        if( $data['item_old_price'] )
+                        {
+                            @$data['price_percentage_savings'] =  intval( ( ( $data['item_old_price'] - $data['item_price'] ) / $data['item_old_price'] ) * 100 ) . '';
+                            @$data['item_old_price'] = $data['item_old_price'] ? $filter->filter( $data['item_old_price'] ) : null;
+                        }
+                        $data['item_price_with_currency'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
+                        
+                        //	Split to naira / kobo
+                        $filter = 'Ayoola_Filter_Currency';
+                        $filter = new $filter();
+                        $filter::$symbol = '';
+                        $data['item_price_without_currency'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
+                        $data['item_price_before_decimal'] = array_shift( explode( '.', $data['item_price_without_currency'] ) );
+                        $data['item_price_after_decimal'] = array_pop( explode( '.', $data['item_price_without_currency'] ) );
+                        $data['item_price'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
+                    }
+        
                     
                     if( $this->getParameter( 'price_lower_limit' ) && floatval( @$data['item_price'] ) <= floatval( $this->getParameter( 'price_lower_limit' ) ) )
                     {
@@ -1151,7 +1190,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$editLinkHTML .= '<button style="" onClick="ayoola.spotLight.showLinkInIFrame( \'/tools/classplayer/get/object_name/Application_Article_Delete/?article_url=' . $data['article_url'] . '\' );">Delete...</button>';
 				$data['edit_link'] = $editLinkHTML;
 			}
-			if( isset( $data['item_price'] ) ) 
+/* 			if( isset( $data['item_price'] ) ) 
 			{
 				//	Filter the price to display unit
 				if( empty( $data['item_price'] ) && $this->getParameter( 'use_price_option_price' ) )
@@ -1190,6 +1229,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$data['item_price'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
 			
 			}
+ */            
             $data['article_type'] = strtolower( trim( $data['article_type'] ) );
 			if( $postTypeInfo = Application_Article_Type_Abstract::getOriginalPostTypeInfo( $data['article_type'] ) )
 			{

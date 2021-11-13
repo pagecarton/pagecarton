@@ -353,7 +353,7 @@ class Ayoola_Application
 				self::$GLOBAL['domain'] = $data['domain_settings'];
 
 			}
-			//return true;
+			return true;
 		}
 
 		//	Search the domain name in the domain table
