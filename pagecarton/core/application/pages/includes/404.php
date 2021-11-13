@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: 404.php	Sunday 14th of February 2021 07:03:50 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: 404.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -30,6 +30,9 @@ $_839ecb3efc70cb6eb1bbb7b7f8b29574 = new Ayoola_Page_Editor_Text( array (
   'wrapper_name' => 'well',
   'insert_id' => '1566242676-0-20',
   '' => '',
+  'includes' => 
+  array (
+  ),
   'content' => '<h1>Error 404 - Page Not Found</h1>
 ',
 ) );
@@ -59,6 +62,9 @@ $_c7269e6f48bd5c84816662981df32805 = new Ayoola_Page_Editor_Text( array (
   'wrapper_name' => 'white-background',
   'insert_id' => '1566242676-0-21',
   '' => '',
+  'includes' => 
+  array (
+  ),
   'content' => '<p>You are seeing this page because you have requested a page that is not available. Please check the URL and try again.</p>
 ',
 ) );

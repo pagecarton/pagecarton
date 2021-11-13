@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: search.php	Sunday 14th of February 2021 07:03:50 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: search.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -60,8 +60,11 @@ $_e90c57a46504076dd6f4c11db23dd9c0 = new Ayoola_Page_Editor_Text( array (
   'wrapper_name' => 'dark',
   'include_request[0]' => '1',
   'required_template_variables[0]' => 'q',
+  'includes' => 
+  array (
+  ),
   'content' => '<div class="container">
-<p><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span>&nbsp;</p>
+<p><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span>&nbsp;</p>
 
 <p>You searched for</p>
 
@@ -69,7 +72,7 @@ $_e90c57a46504076dd6f4c11db23dd9c0 = new Ayoola_Page_Editor_Text( array (
 
 <div>&nbsp;</div>
 
-<div>&nbsp;Here are the top results:<span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span><span style="display: none;">&nbsp;</span></div><div><br></div>
+<div>&nbsp;Here are the top results:<span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span><span style="display: none;"></span></div><div><br></div>
 </div>',
 ) );
 
@@ -144,6 +147,9 @@ $_cf38cfcaaadf4c77fd272763a75d99f0 = new Ayoola_Page_Editor_Text( array (
   'inverse_order[0]' => '1',
   'pagination' => '1',
   'no_of_post_to_show[0]' => '12',
+  'includes' => 
+  array (
+  ),
   'content' => '<p><a href="{{{post_link}}}"><img alt="" src="{{{document_url_uri}}}?width=100&amp;height=100" style=" border-radius: 50%; float:right;"></a></p>
 
 <h2><a href="{{{post_link}}}">{{{article_title}}}</a></h2>
@@ -190,6 +196,9 @@ $_b32defe207938e4e6b3ceb85189d7562 = new Ayoola_Page_Editor_Text( array (
   'markup_template_object_name' => 
   array (
     0 => 'Application_SearchBox_Table',
+  ),
+  'includes' => 
+  array (
   ),
   'content' => '<h3>Recent Searches</h3>
 <ul class="pc_same_height_container">

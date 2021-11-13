@@ -64,9 +64,26 @@ class Ayoola_Object_PageWidget_Abstract extends PageCarton_Widget
 //		$form->oneFieldSetAtATime = true;
 
 		$fieldset = new Ayoola_Form_Element;
-	//	$fieldset->placeholderInPlaceOfLabel = false;       
+
+        if( $code = $values['parameters']['content'] ? : $values['parameters']['codes'] )
+        {
+            $code = Ayoola_Page_Editor_Text::oldWidgetConvert( $code, $values['parameters'] );
+        }
+        else
+        {
+            $code = 
+'<widget>
+    <script type="application/json">
+    ' . json_encode( $values['parameters'] ) . '
+    </script>
+</widget>
+';
+            
+        }
+
         $fieldset->addElement( array( 'name' => 'class_name', 'type' => 'InputText', 'value' => @$values['class_name'] ) );        
         $fieldset->addElement( array( 'name' => 'parameters', 'type' => 'TextArea', 'value' => json_encode( $values['parameters'] ) ) );       
+        $fieldset->addElement( array( 'name' => 'html_embed_code', 'type' => 'TextArea', 'value' => $code ) );       
         $fieldset->addElement( array( 'name' => 'widget_name', 'type' => 'InputText', 'value' => @$values['widget_name'] ) ); 
         $fieldset->addElement( array( 'name' => 'url', 'type' => 'InputText', 'value' => @$values['url'] ) ); 
         $fieldset->addElement( array( 'name' => 'section_name', 'type' => 'InputText', 'value' => @$values['section_name'] ) ); 

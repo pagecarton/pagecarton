@@ -506,7 +506,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				$danglingPlaceholders[] = $each;
 			}
 		}
-
+        $pageThemeFileX = $pageThemeFile;
 		if( 
 			//	now always run this path because we are trying to get lost js and css every time. 
 			//	( empty( $values ) || ! empty( $_REQUEST['pc_load_theme_defaults'] ) )
@@ -516,7 +516,14 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				AND
 
 				(
-					$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFile )
+                    //  first check if i have a local copy of themefile
+					$pageThemeFile = Ayoola_Loader::checkFile( Ayoola_Doc_Browser::getDocumentsDirectory() . $pageThemeFileX )
+
+					OR
+
+                    //  check if core have a theme file
+                    //  because we now want to use theme page file for default themes
+					$pageThemeFile = Ayoola_Loader::checkFile( APPLICATION_PATH . '/documents/' . $pageThemeFileX )
 
 					OR
 
@@ -535,11 +542,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$whereToGetPlaceholders = Ayoola_Page_Layout_Abstract::sanitizeTemplateFile( $whereToGetPlaceholders, $themeInfo  );
 
 			//		look for dangling placeholders in page theme file
-
             $placeholdersInPageThemeFile = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $whereToGetPlaceholders );
             
             //    var_export( $whereToGetPlaceholders );
-
 			$danglingPlaceholders = array_merge( array_diff( $placeholdersInPageThemeFile, $placeholders ), $danglingPlaceholders );
 
 			krsort( $danglingPlaceholders );			
@@ -547,10 +552,19 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	compare the contents here with the original file to discard information that's present in the theme file
 			$originalFile = Ayoola_Doc_Browser::getDocumentsDirectory() . '/layout/' . $theme . '/template';
 
-			if( $originalFile = file_get_contents( $originalFile ) )
+			if( ! is_file( $originalFile ) )
 			{
 
-			}
+                // we reverted to core file in "$pageThemeFile". 
+                //  We need to prepare for it here also
+                //  So we don't duplicate theme content in pages
+                $originalFile = APPLICATION_PATH . '/documents/' . '/layout/' . $theme . '/template';
+            }
+            if( ! $originalFile = file_get_contents( $originalFile ) )
+            {
+
+            }
+
 			//	load all js and css that is not in index file whereToGetPlaceholders
 			preg_match_all( "/<script[\s\S]*?>[\s\S]*?<\/script>/i", $originalFile, $originalScripts );
             preg_match_all( "/<script[\s\S]*?>[\s\S]*?<\/script>/i", $whereToGetPlaceholders, $pageScripts );
@@ -564,7 +578,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
             {
                 $content['template'] = str_ireplace( $originalBodyTag[0], $pageBodyTag[0], $content['template'] );
             }
-
 
 			//	remove scripts that are not needed on the page
 			//	some where causing issues on sb-mart

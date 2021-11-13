@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: new-site-wizard.php	Sunday 14th of February 2021 07:03:49 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: new-site-wizard.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -32,6 +32,9 @@ $_c4d914064ec19a4e55e94291d545adb4 = new Ayoola_Page_Editor_Text( array (
   'url_prefix' => '',
   'pagewidget_id' => '1575534213-0-19',
   'insert_id' => '1566242671-0-15',
+  'includes' => 
+  array (
+  ),
   'content' => '<h3 style="text-align: center;">New Site Wizard</h3>
 
 <p style="text-align: center;">Complete a new website with these simple steps</p>

@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Sunday 14th of February 2021 07:03:50 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: signin.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -49,6 +49,9 @@ $_f47d74d2e3820ecf6d805a5f37d546a8 = new Ayoola_Page_Editor_Text( array (
   'insert_id' => '1566242676-0-19',
   'pagewidget_id' => '1575534222-0-30',
   '' => '',
+  'includes' => 
+  array (
+  ),
   'content' => 'Forgot Password? <a rel="spotlight;" href="/x/index.php/object/name/Application_User_Help_ForgotUsernameOrPassword">Sign in Help</a>!',
 ) );
 

@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signup.php	Sunday 14th of February 2021 07:03:50 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: signup.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -26,6 +26,9 @@ $_add614b1399eb4e44e9fbbfb6a644920 = new Ayoola_Page_Editor_Text( array (
 			',
   'url_prefix' => '',
   'pagewidget_id' => '1575534220-0-25',
+  'includes' => 
+  array (
+  ),
   'content' => '
 			
 			<h3><br></h3><div><br></div>
@@ -82,6 +85,9 @@ $_92f19eb400940884c1ee63d9bee1aaad = new Ayoola_Page_Editor_Text( array (
   'pagewidget_id' => '1575534221-0-27',
   'wrapper_name' => 'dark',
   'insert_id' => '1566242676-0-16',
+  'includes' => 
+  array (
+  ),
   'content' => '<p>Already have an account?<br>
 <br>
 <a class="pc-btn" href="/account/signin">Login...</a></p>
@@ -109,6 +115,9 @@ $_1434ec8164387f663fde975d297d551f = new Ayoola_Page_Editor_Text( array (
 			',
   'url_prefix' => '',
   'pagewidget_id' => '1575534220-0-25',
+  'includes' => 
+  array (
+  ),
   'content' => '
 			
 			<h3><br></h3><div><br></div>

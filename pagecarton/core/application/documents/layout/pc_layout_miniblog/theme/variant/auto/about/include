@@ -1,0 +1,253 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /about
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: about.php	Saturday 13th of November 2021 10:55:34 PM	ayoola@ayoo.la $ 
+*/
+//	Page Include Content
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_48b99420873efc6b0deb2b1668af38eb = new Ayoola_Page_Editor_Text( array (
+  '' => NULL,
+  'editable' => '
+<widget parameters=\'{ "class": "Ayoola_Page_Info", "use_site_defaults": true }\'><div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg?embed_image_url={{{cover_photo}}});">
+            <div class="container">
+                <div class="row same-height justify-content-center">
+                    <div class="col-md-12 col-lg-10">
+                        <div class="post-entry text-center">
+    
+                            <h1 class="">{{{title}}}</h1>
+                            <p class="lead mb-4 text-white">{{{description}}} {{{link_to_edit}}}</p>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </widget>
+',
+  'includes' => 
+  array (
+  ),
+  'content' => '
+<widget parameters=\'{ "class": "Ayoola_Page_Info", "use_site_defaults": true }\'><div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg?embed_image_url={{{cover_photo}}});">
+            <div class="container">
+                <div class="row same-height justify-content-center">
+                    <div class="col-md-12 col-lg-10">
+                        <div class="post-entry text-center">
+    
+                            <h1 class="">{{{title}}}</h1>
+                            <p class="lead mb-4 text-white">{{{description}}} {{{link_to_edit}}}</p>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </widget>
+',
+  'pagewidget_id' => NULL,
+) );
+
+							}
+							else
+							{
+								
+$_48b99420873efc6b0deb2b1668af38eb = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_f4bf105fea205d74a01e6201e1057857 = new Ayoola_Page_Editor_Text( array (
+  '' => NULL,
+  'editable' => '
+<div class="site-section bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 order-md-2">
+              <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
+</div>
+            <div class="col-md-5 mr-auto order-md-1">
+              <h2>About {Organization Name}</h2>
+              <p>{Background History Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea consequat.}</p>
+              <ul class="ul-check list-unstyled success"><widget parameters=\'{ "class": "Application_Article_ShowAll", "add_a_new_post": 3, "article_types": "feature" }\'><li>{{{article_title}}}</li>
+                  </widget></ul>
+</div>
+          </div>
+        </div>
+      </div>
+
+',
+  'includes' => 
+  array (
+  ),
+  'content' => '
+<div class="site-section bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6 order-md-2">
+              <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
+</div>
+            <div class="col-md-5 mr-auto order-md-1">
+              <h2>About {Organization Name}</h2>
+              <p>{Background History Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea consequat.}</p>
+              <ul class="ul-check list-unstyled success"><widget parameters=\'{ "class": "Application_Article_ShowAll", "add_a_new_post": 3, "article_types": "feature" }\'><li>{{{article_title}}}</li>
+                  </widget></ul>
+</div>
+          </div>
+        </div>
+      </div>
+
+',
+  'pagewidget_id' => NULL,
+) );
+
+							}
+							else
+							{
+								
+$_f4bf105fea205d74a01e6201e1057857 = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_85d662a3947334b558a498325a806c5e = new Ayoola_Page_Editor_Text( array (
+  '' => NULL,
+  'editable' => '
+<div class="site-section">
+        <div class="container">
+          <div class="row mb-5 justify-content-center">
+            <div class="col-md-5 text-center">
+              <h2>Meet {Organization Name} Team</h2>
+              <p>{More About Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.}</p>
+            </div>
+          </div>
+          <div class="row">
+            <widget parameters=\'{ "class": "Application_Profile_All", "add_a_new_post": 3, "length_of_description": 150 }\'><repeat><div class="col-md-6 col-lg-4 mb-5 text-center">
+              <img src="/layout/pc_layout_miniblog/images/person_1.jpg?embed_image_url={{{document_url_uri}}}" alt="Image" class="img-fluid w-50 rounded-circle mb-4"><h2 class="mb-3 h5">{{{article_title}}}</h2>
+              <p>{{{article_description}}}</p>
+              <p class="mt-5">
+                <a href="{{{facebook_url}}}" class="p-3"><span class="icon-facebook">&nbsp;</span></a>
+                <a href="{{{instagram_url}}}" class="p-3"><span class="icon-instagram">&nbsp;</span></a>
+                <a href="{{{twitter_url}}}" class="p-3"><span class="icon-twitter">&nbsp;</span></a>
+              </p>
+            </div>
+            </repeat></widget>
+</div>
+        </div>
+      </div>
+
+',
+  'includes' => 
+  array (
+  ),
+  'content' => '
+<div class="site-section">
+        <div class="container">
+          <div class="row mb-5 justify-content-center">
+            <div class="col-md-5 text-center">
+              <h2>Meet {Organization Name} Team</h2>
+              <p>{More About Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.}</p>
+            </div>
+          </div>
+          <div class="row">
+            <widget parameters=\'{ "class": "Application_Profile_All", "add_a_new_post": 3, "length_of_description": 150 }\'><repeat><div class="col-md-6 col-lg-4 mb-5 text-center">
+              <img src="/layout/pc_layout_miniblog/images/person_1.jpg?embed_image_url={{{document_url_uri}}}" alt="Image" class="img-fluid w-50 rounded-circle mb-4"><h2 class="mb-3 h5">{{{article_title}}}</h2>
+              <p>{{{article_description}}}</p>
+              <p class="mt-5">
+                <a href="{{{facebook_url}}}" class="p-3"><span class="icon-facebook"></span></a>
+                <a href="{{{instagram_url}}}" class="p-3"><span class="icon-instagram"></span></a>
+                <a href="{{{twitter_url}}}" class="p-3"><span class="icon-twitter"></span></a>
+              </p>
+            </div>
+            </repeat></widget>
+</div>
+        </div>
+      </div>
+
+',
+  'pagewidget_id' => NULL,
+) );
+
+							}
+							else
+							{
+								
+$_85d662a3947334b558a498325a806c5e = null;
+
+							}
+							
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_3e028a6709996466b7755a49a06f64fa = new Ayoola_Page_Editor_Text( array (
+  '' => NULL,
+  'editable' => '
+<div class="site-section bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
+</div>
+            <div class="col-md-5 ml-auto">
+              <h2>More About {Organization Name}</h2>
+              <p class="mb-4">{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}
+    
+             </p>
+              
+              <ul class="ul-check list-unstyled success"><widget parameters=\'{ "class": "Application_Article_ShowAll", "add_a_new_post": 3, "article_types": "feature", "list_page_number_offset": 1 }\'><li>{{{article_title}}}</li>
+                </widget></ul>
+</div>
+          </div>
+        </div>
+      </div>
+
+',
+  'includes' => 
+  array (
+  ),
+  'content' => '
+<div class="site-section bg-light">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <img src="/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid">
+</div>
+            <div class="col-md-5 ml-auto">
+              <h2>More About {Organization Name}</h2>
+              <p class="mb-4">{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}
+    
+             </p>
+              
+              <ul class="ul-check list-unstyled success"><widget parameters=\'{ "class": "Application_Article_ShowAll", "add_a_new_post": 3, "article_types": "feature", "list_page_number_offset": 1 }\'><li>{{{article_title}}}</li>
+                </widget></ul>
+</div>
+          </div>
+        </div>
+      </div>
+
+',
+  'pagewidget_id' => NULL,
+) );
+
+							}
+							else
+							{
+								
+$_3e028a6709996466b7755a49a06f64fa = null;
+
+							}
+							

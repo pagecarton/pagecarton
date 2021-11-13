@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Sunday 14th of February 2021 07:03:48 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: template.php	Saturday 13th of November 2021 03:46:35 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -42,22 +42,14 @@ $_474612ea2c4114e6c4a6f67f7d1d56c3 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'embed_widgets',
   ),
-  'pagewidget_id' => '0-1612038697-19',
-  'markup_template_object_name' => 
+  'pagewidget_id' => '0-1636816910-1',
+  'includes' => 
   array (
-    0 => 'Application_Category_ShowAll',
   ),
-  'advanced_parameter_value' => 
-  array (
-    0 => '3',
-    1 => '/category',
-  ),
-  'add_a_new_post[0]' => '3',
-  'category_page' => '/category',
   'content' => '<div class="site-mobile-menu">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
-          <span class="icon-close2 js-menu-toggle">&nbsp;</span>
+          <span class="icon-close2 js-menu-toggle"></span>
         </div>
       </div>
       <div class="site-mobile-menu-body"></div>
@@ -87,37 +79,41 @@ $_474612ea2c4114e6c4a6f67f7d1d56c3 = null;
 							{
 								
 $_2ff07f92152067abe063cd346477b0d8 = new Ayoola_Page_Editor_Text( array (
-  'codes' => '<header class="site-navbar" role="banner"><div class="container-fluid">
+  'codes' => '<header class="site-navbar" role="banner">
+    <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="col-12 search-form-wrap js-search-form">
-            <form method="get" action="/search">
-              <input type="text" id="s" class="form-control" placeholder="Search..." name="q"><button class="search-btn" type="submit"><span class="icon-search">&nbsp;</span></button>
-            </form>
-          </div>
+            <div class="col-12 search-form-wrap js-search-form">
+                <form method="get" action="/search">
+                    <input type="text" id="s" class="form-control" placeholder="Search..." name="q"><button
+                        class="search-btn" type="submit"><span class="icon-search">&nbsp;</span></button>
+                </form>
+            </div>
 
-          <div class="col-4 site-logo">
-            <a href="/" class="text-black h2 mb-0"><img style="max-height:66px;" src="/img/logo.png" alt="{Organization Name}"></a>
-          </div>
+            <div class="col-4 site-logo">
+                <a href="/" class="text-black h2 mb-0"><img style="max-height:66px;" src="/img/logo.png"
+                        alt="{Organization Name}"></a>
+            </div>
 
-          <div class="col-8 text-right">
-            <nav class="site-navigation" role="navigation" data-pc-menu-ignore="1"><ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
-<li><a href="/">Home</a></li>
-<!--{{{@1(Ayoola_Menu)-->
-                <li><a href="{{{url}}}">{{{option_name}}}</a></li>
-<!--(Ayoola_Menu)@1}}}-->
-<!-- How to embed Application_Category_ShowAll -->
-<!--{{{@0(Application_Category_ShowAll)-->
-                <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
-<!--(Application_Category_ShowAll)@0}}}-->
-<!-- Place this code in code view -->
-                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search">&nbsp;</span></a></li>
-              </ul></nav><a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3">&nbsp;</span></a>
-</div>
-          </div>
+            <div class="col-8 text-right">
+                <nav class="site-navigation" role="navigation" data-pc-menu-ignore="1">
+                    <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
+                        <li><a href="/">Home</a></li>
+                        <widget parameters=\'{ "class": "Ayoola_Menu" }\'>
+                            <li><a href="{{{url}}}">{{{option_name}}}</a></li>
+                        </widget>
+                        <widget parameters=\'{ "class": "Application_Category_ShowAll", "category_page": "/category", "add_a_new_post": 3, "url_integration_type": "pc_module_url_values_offset" }\'>
+                            <li><a href="{{{post_link}}}">{{{article_title}}} ({{{total_no_of_posts}}})</a></li>
+                        </widget>
+                        <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span
+                                    class="icon-search">&nbsp;</span></a></li>
+                    </ul>
+                </nav><a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span
+                        class="icon-menu h3">&nbsp;</span></a>
+            </div>
+        </div>
 
-      </div>
-    </header>
-',
+    </div>
+</header>',
   'preserved_content' => '',
   'url_prefix' => '',
   'widget_options' => 
@@ -125,48 +121,45 @@ $_2ff07f92152067abe063cd346477b0d8 = new Ayoola_Page_Editor_Text( array (
     0 => 'embed_widgets',
     1 => 'parameters',
   ),
-  'pagewidget_id' => '0-1612038697-20',
-  'markup_template_object_name' => 
+  'pagewidget_id' => '0-1636817293-4',
+  'includes' => 
   array (
-    0 => 'Application_Category_ShowAll',
-    1 => 'Ayoola_Menu',
   ),
-  'advanced_parameter_value' => 
-  array (
-    0 => '3',
-  ),
-  'add_a_new_post[0]' => '3',
-  'content' => '<header class="site-navbar" role="banner"><div class="container-fluid">
+  'content' => '<header class="site-navbar" role="banner">
+    <div class="container-fluid">
         <div class="row align-items-center">
-          <div class="col-12 search-form-wrap js-search-form">
-            <form method="get" action="/search">
-              <input type="text" id="s" class="form-control" placeholder="Search..." name="q"><button class="search-btn" type="submit"><span class="icon-search">&nbsp;</span></button>
-            </form>
-          </div>
+            <div class="col-12 search-form-wrap js-search-form">
+                <form method="get" action="/search">
+                    <input type="text" id="s" class="form-control" placeholder="Search..." name="q"><button
+                        class="search-btn" type="submit"><span class="icon-search"></span></button>
+                </form>
+            </div>
 
-          <div class="col-4 site-logo">
-            <a href="/" class="text-black h2 mb-0"><img style="max-height:66px;" src="/img/logo.png" alt="{Organization Name}"></a>
-          </div>
+            <div class="col-4 site-logo">
+                <a href="/" class="text-black h2 mb-0"><img style="max-height:66px;" src="/img/logo.png"
+                        alt="{Organization Name}"></a>
+            </div>
 
-          <div class="col-8 text-right">
-            <nav class="site-navigation" role="navigation" data-pc-menu-ignore="1"><ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
-<li><a href="/">Home</a></li>
-<!--{{{@1(Ayoola_Menu)-->
-                <li><a href="{{{url}}}">{{{option_name}}}</a></li>
-<!--(Ayoola_Menu)@1}}}-->
-<!-- How to embed Application_Category_ShowAll -->
-<!--{{{@0(Application_Category_ShowAll)-->
-                <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
-<!--(Application_Category_ShowAll)@0}}}-->
-<!-- Place this code in code view -->
-                <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search">&nbsp;</span></a></li>
-              </ul></nav><a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3">&nbsp;</span></a>
-</div>
-          </div>
+            <div class="col-8 text-right">
+                <nav class="site-navigation" role="navigation" data-pc-menu-ignore="1">
+                    <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
+                        <li><a href="/">Home</a></li>
+                        <widget parameters=\'{ "class": "Ayoola_Menu" }\'>
+                            <li><a href="{{{url}}}">{{{option_name}}}</a></li>
+                        </widget>
+                        <widget parameters=\'{ "class": "Application_Category_ShowAll", "category_page": "/category", "add_a_new_post": 3, "url_integration_type": "pc_module_url_values_offset" }\'>
+                            <li><a href="{{{post_link}}}">{{{article_title}}} ({{{total_no_of_posts}}})</a></li>
+                        </widget>
+                        <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span
+                                    class="icon-search"></span></a></li>
+                    </ul>
+                </nav><a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span
+                        class="icon-menu h3"></span></a>
+            </div>
+        </div>
 
-      </div>
-    </header>
-',
+    </div>
+</header>',
 ) );
 
 							}
@@ -380,22 +373,23 @@ $_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
           <div class="col-md-3 ml-auto">
             <!-- <h3 class="footer-heading mb-4">Navigation</h3> -->
             <ul class="list-unstyled float-left mr-5">
-              <li><a href="/contact">Contact</a></li>
-<!-- How to embed Ayoola_Menu -->
-<!--{{{@0(Ayoola_Menu)-->
-              <li><a href="{{{url}}}" onclick="{{{ayoola_spotlight}}}">{{{option_name}}}</a></li>
-<!--(Ayoola_Menu)@0}}}-->
-<!-- Place this code in code view -->
+              <widget parameters=\'{ "class": "Ayoola_Menu" }\'>
+                <li><a href="{{{url}}}">{{{option_name}}}</a></li>
+              </widget>
+              <widget parameters=\'{ "class": "Application_Category_ShowAll", "category_page": "/category", "length_of_title": 20, "add_a_new_post": 1, "no_of_post_to_show": 10, "url_integration_type": "pc_module_url_values_offset" }\'>
+                <li><a href="{{{post_link}}}">{{{article_title}}} ({{{total_no_of_posts}}})</a></li>
+              </widget>
+                <li><a href="/contact">Contact</a></li>
             </ul>
-<ul class="list-unstyled float-left">
-<!-- How to embed Ayoola_Menu -->
+            <ul class="list-unstyled float-left">
+            <!-- How to embed Ayoola_Menu -->
               <li><a href="/about">About</a></li>
-<!--{{{@1(Ayoola_Menu)-->
-              <li><a href="{{{url}}}" onclick="{{{ayoola_spotlight}}}">{{{option_name}}}</a></li>
-<!--(Ayoola_Menu)@1}}}-->
-<!-- Place this code in code view -->
+              <widget parameters=\'{ "class": "Ayoola_Menu", "menu_name": "MyAccount" }\'>
+                <li><a href="{{{url}}}">{{{option_name}}}</a></li>
+              </widget>
+              <li><a href="/sitemap">Sitemap</a></li>
             </ul>
-</div>
+          </div>
           <div class="col-md-4">
             
 
@@ -405,8 +399,8 @@ $_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
                 <a href="{https://www.facebook.com/PageCarton}"><span class="icon-facebook pt-2 pr-2 pb-2 pl-0">&nbsp;</span></a>
                 <a href="{https://www.twitter.com/PageCarton}"><span class="icon-twitter p-2">&nbsp;</span></a>
                 <a href="{https://www.instagram.com/PageCarton}"><span class="icon-instagram p-2">&nbsp;</span></a>
-                <a href="#"><span class="icon-rss p-2">&nbsp;</span></a>
-                <a href="#"><span class="icon-envelope p-2">&nbsp;</span></a>
+                <a href="/widgets/Application_Article_RSS"><span class="icon-rss p-2">&nbsp;</span></a>
+                <a href="mailto:{info@example.com}"><span class="icon-envelope p-2">&nbsp;</span></a>
               </p>
             </div>
           </div>
@@ -431,17 +425,10 @@ $_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
     0 => 'embed_widgets',
     1 => 'parameters',
   ),
-  'pagewidget_id' => '0-1612038697-21',
-  'markup_template_object_name' => 
+  'pagewidget_id' => '0-1636818396-9',
+  'includes' => 
   array (
-    0 => 'Ayoola_Menu',
-    1 => 'Ayoola_Menu',
   ),
-  'advanced_parameter_value' => 
-  array (
-    0 => 'MyAccount',
-  ),
-  'menu_name[1]' => 'MyAccount',
   'content' => '<div class="site-footer">
       <div class="container">
         <div class="row mb-5">
@@ -452,33 +439,34 @@ $_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
           <div class="col-md-3 ml-auto">
             <!-- <h3 class="footer-heading mb-4">Navigation</h3> -->
             <ul class="list-unstyled float-left mr-5">
-              <li><a href="/contact">Contact</a></li>
-<!-- How to embed Ayoola_Menu -->
-<!--{{{@0(Ayoola_Menu)-->
-              <li><a href="{{{url}}}" onclick="{{{ayoola_spotlight}}}">{{{option_name}}}</a></li>
-<!--(Ayoola_Menu)@0}}}-->
-<!-- Place this code in code view -->
+              <widget parameters=\'{ "class": "Ayoola_Menu" }\'>
+                <li><a href="{{{url}}}">{{{option_name}}}</a></li>
+              </widget>
+              <widget parameters=\'{ "class": "Application_Category_ShowAll", "category_page": "/category", "length_of_title": 20, "add_a_new_post": 1, "no_of_post_to_show": 10, "url_integration_type": "pc_module_url_values_offset" }\'>
+                <li><a href="{{{post_link}}}">{{{article_title}}} ({{{total_no_of_posts}}})</a></li>
+              </widget>
+                <li><a href="/contact">Contact</a></li>
             </ul>
-<ul class="list-unstyled float-left">
-<!-- How to embed Ayoola_Menu -->
+            <ul class="list-unstyled float-left">
+            <!-- How to embed Ayoola_Menu -->
               <li><a href="/about">About</a></li>
-<!--{{{@1(Ayoola_Menu)-->
-              <li><a href="{{{url}}}" onclick="{{{ayoola_spotlight}}}">{{{option_name}}}</a></li>
-<!--(Ayoola_Menu)@1}}}-->
-<!-- Place this code in code view -->
+              <widget parameters=\'{ "class": "Ayoola_Menu", "menu_name": "MyAccount" }\'>
+                <li><a href="{{{url}}}">{{{option_name}}}</a></li>
+              </widget>
+              <li><a href="/sitemap">Sitemap</a></li>
             </ul>
-</div>
+          </div>
           <div class="col-md-4">
             
 
             <div>
               <h3 class="footer-heading mb-4">Connect With {Organization Name}</h3>
               <p>
-                <a href="{https://www.facebook.com/PageCarton}"><span class="icon-facebook pt-2 pr-2 pb-2 pl-0">&nbsp;</span></a>
-                <a href="{https://www.twitter.com/PageCarton}"><span class="icon-twitter p-2">&nbsp;</span></a>
-                <a href="{https://www.instagram.com/PageCarton}"><span class="icon-instagram p-2">&nbsp;</span></a>
-                <a href="#"><span class="icon-rss p-2">&nbsp;</span></a>
-                <a href="#"><span class="icon-envelope p-2">&nbsp;</span></a>
+                <a href="{https://www.facebook.com/PageCarton}"><span class="icon-facebook pt-2 pr-2 pb-2 pl-0"></span></a>
+                <a href="{https://www.twitter.com/PageCarton}"><span class="icon-twitter p-2"></span></a>
+                <a href="{https://www.instagram.com/PageCarton}"><span class="icon-instagram p-2"></span></a>
+                <a href="/widgets/Application_Article_RSS"><span class="icon-rss p-2"></span></a>
+                <a href="mailto:{info@example.com}"><span class="icon-envelope p-2"></span></a>
               </p>
             </div>
           </div>
@@ -487,7 +475,7 @@ $_2cfd005375ab9fe4addf27e6c57d38eb = new Ayoola_Page_Editor_Text( array (
           <div class="col-12 text-center">
             <p>
               <!-- Link back to Colorlib can\'t be removed. Template is licensed under CC BY 3.0. -->
-              Copyright © <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true">&nbsp;</i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> | Powered by <a href="https://www.pagecarton.org" target="_blank">PageCarton</a>
+              Copyright © <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"i></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> | Powered by <a href="https://www.pagecarton.org" target="_blank">PageCarton</a>
               <!-- Link back to Colorlib can\'t be removed. Template is licensed under CC BY 3.0. -->
               </p>
           </div>

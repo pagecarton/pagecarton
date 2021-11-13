@@ -369,6 +369,111 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     }
 	
     /**
+     * 
+     *
+     */
+	public static function oldWidgetConvert( $content, $parametersX )
+    {
+        unset( $parametersX['codes'] );
+        unset( $parametersX['preserved_content'] );
+        unset( $parametersX['widget_options'] );
+        unset( $parametersX['viewableobject_id'] );
+        unset( $parametersX['content'] );
+        unset( $parametersX['class_name'] );
+        unset( $parametersX['object_name'] );
+        unset( $parametersX['view_parameters'] );
+        unset( $parametersX['module'] );
+        unset( $parametersX['advanced_parameters'] );
+        unset( $parametersX['advanced_parameter_value'] );
+        unset( $parametersX['includes'] );
+
+        if( ! empty( $parametersX['markup_template_object_name'] ) )
+		{
+			$classes = (array) $parametersX['markup_template_object_name']; 
+            unset( $parametersX['markup_template_object_name'] );
+   
+			foreach( $classes as $counter => $each )
+			{	
+				if( ! Ayoola_Loader::loadClass( $each ) )
+				{
+					continue;
+				}
+
+				//	Removing time() from namespace because it doesn't allow the post to cache
+				//	Use whole content or specified part
+				$i = 0;
+
+				$start = '<!--{{{@' . $counter . '(' . $each . ')-->';
+				$end = '<!--(' . $each . ')@' . $counter . '}}}-->';
+				if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
+				{
+					$start = '{{{@' . $counter . '(' . $each . ')';
+					$end = '(' . $each . ')@' . $counter . '}}}';
+				}
+				if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
+				{
+					$start = '{{{@(' . $each . ')';
+					$end = '(' . $each . ')@}}}';
+					if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
+					{
+						$start = '{{{@' . $each . '';
+						$end = '' . $each . '@}}}';
+						if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
+						{
+							$parameters = array( 'parameter_suffix' => '[' . $counter . ']' ) + $parametersX;  
+                            $exportable =
+'<widget>
+    <script type="application/json">
+    ' . json_encode( $parameters + array( 'class' => $each ) ) . '
+    </script>
+' . $content . '
+</widget>
+';
+                            $content = $exportable;
+						}
+					}
+				}
+
+				while( stripos( $content, $start ) !== false && stripos( $content, $end ) !== false && ++$i < 5 )
+				{
+					$started = stripos( $content, $start );
+					$length = ( stripos( $content, $end ) + strlen( $end ) )  - $started;
+					$partTemplate = substr( $content, $started, $length );
+
+					$searchY = array();
+					$replaceY = array();
+					$searchY[] = $start;
+					$replaceY[] = '';
+					$searchY[] = $end;
+					$replaceY[] = '';
+					$partTemplateToUse = str_ireplace( $searchY, $replaceY, $partTemplate );
+					$parameters = array(	
+                                        'parameter_suffix' => '[' . $counter . ']', 
+						            )
+                                    + $parametersX;  
+                
+
+                    $exportable =
+'<widget>
+    <script type="application/json">
+    ' . json_encode( $parameters + array( 'class' => $each ) ) . '
+    </script>
+
+' . $partTemplateToUse . '
+
+</widget>';					
+					$searchC = array();
+					$replaceC = array();
+					$searchC[] = $partTemplate;
+					$replaceC[] = $exportable;
+					$content = str_ireplace( $searchC, $replaceC, $content );
+				}  
+			}
+        }
+        return $content;
+    }
+
+    /**
      * This method
      *
      * @param 
@@ -405,107 +510,17 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
         $count = 0;
 
-        //  embed widget
-        $content = self::embedWidget( $content, $this->getParameter(), $this->_markupTemplateObjects );
-
         if( $this->getParameter( 'markup_template_object_name' ) )
 		{
-			$classes = (array) $this->getParameter( 'markup_template_object_name' );    
-			foreach( $classes as $counter => $each )
-			{	
-				if( ! Ayoola_Loader::loadClass( $each ) )
-				{
-					continue;
-				}
-
-				//	Removing time() from namespace because it doesn't allow the post to cache
-				//	Use whole content or specified part
-				$i = 0;
-
-				$start = '<!--{{{@' . $counter . '(' . $each . ')-->';
-				$end = '<!--(' . $each . ')@' . $counter . '}}}-->';
-				if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
-				{
-					$start = '{{{@' . $counter . '(' . $each . ')';
-					$end = '(' . $each . ')@' . $counter . '}}}';
-				}
-				if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
-				{
-					$start = '{{{@(' . $each . ')';
-					$end = '(' . $each . ')@}}}';
-					if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
-					{
-						$start = '{{{@' . $each . '';
-						$end = '' . $each . '@}}}';
-						if( stripos( $content, $start ) === false || stripos( $content, $end ) === false )
-						{
-							$parameters = array( 
-												'markup_template' => $content, 
-												'markup_template_namespace' => 'x1234', 
-												'markup_template_mode' => __CLASS__, 
-												'no_init' => true, 
-												'parameter_suffix' => '[' . $counter . ']', 
-										//		'editable' => $each 
-												) 
-												+ $this->getParameter();  
-							self::unsetParametersThatMayBeDuplicated( $parameters );
-                            $class = new $each( $parameters );
-                            $class->setParameter( $parameters );
-                            if( false === $class->init() )
-                            {
-                                $content = null;
-                            }
-                            else
-                            {
-                                $content = $class->view();
-                            }
-
-                            $this->_markupTemplateObjects[] = $class;
-						}
-					}
-				}
-
-				while( stripos( $content, $start ) !== false && stripos( $content, $end ) !== false && ++$i < 5 )
-				{
-					$started = stripos( $content, $start );
-					$length = ( stripos( $content, $end ) + strlen( $end ) )  - $started;
-					$partTemplate = substr( $content, $started, $length );
-
-					$searchY = array();
-					$replaceY = array();
-					$searchY[] = $start;
-					$replaceY[] = '';
-					$searchY[] = $end;
-					$replaceY[] = '';
-					$partTemplateToUse = str_ireplace( $searchY, $replaceY, $partTemplate );
-					$parameters = array( 
-						'markup_template' => $partTemplateToUse, 
-                        'markup_template_namespace' => 'x1234', 
-                        'markup_template_mode' => __CLASS__, 
-                        'no_init' => true, 
-						'parameter_suffix' => '[' . $counter . ']', 
-					//	'editable' => $each 
-						) 
-						+ $this->getParameter();  
-					
-					self::unsetParametersThatMayBeDuplicated( $parameters );
-                    $class = new $each( $parameters );
-                    $class->setParameter( $parameters );
-                    $class->init();
-                    $returnedContent = $class->view();
-					$this->_markupTemplateObjects[] = $class;
-					$returnedContent = str_ireplace( $searchY, $replaceY, $returnedContent );
-					
-					$searchC = array();
-					$replaceC = array();
-					$searchC[] = $partTemplate;
-					$replaceC[] = $returnedContent;
-					$content = str_ireplace( $searchC, $replaceC, $content );
-				}  
-			}
+            $content = self::oldWidgetConvert( $content, $this->getParameter() );
+            
 			$content .= '<div style="clear:both;"></div>';  
 			$content .= '<div style="clear:both;"></div>';  
         }
+        //  embed widget
+        $content = self::embedWidget( $content, $this->getParameter(), $this->_markupTemplateObjects );
+
+
 		if( $this->getParameter( 'page_title' ) || $this->getParameter( 'page_description' )  )
 		{
 			$metaData = strip_tags( $content );
@@ -675,7 +690,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 															[
 														//		{ items: [ "Source", "-", "Save", "NewPage", "Preview", "Print", "-", "Templates" ] },
 																{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "-", "RemoveFormat" ] },
-//																{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
+															//	{ name: "basicstyles", groups: [ "basicstyles", "cleanup" ], items: [ "Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat" ] },
 																{ name: "paragraph", groups: [ "list", "indent", "blocks", "align" ], items: [ "NumberedList", "BulletedList", "-", "Outdent", "Indent", "-", "Blockquote", "-", "CreateDiv", "-", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "-" ] },
 																{ name: "links", items: [ "Link", "Unlink", "Anchor" ] },
 																{ name: "styles", items: [ "Format", "Font", "FontSize" ] },
@@ -778,7 +793,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		//	Use this to clean the URL prefix from the codes
 		$html .= '<input data-parameter_name="url_prefix" type="hidden" value="' . Ayoola_Application::getUrlPrefix() . '" >';  
 		$html .= '<div style="clear:both;"></div>';  
-	//	if( ! ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
+	    //	if( ! ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
 		{
 
 			Application_Javascript::addCode

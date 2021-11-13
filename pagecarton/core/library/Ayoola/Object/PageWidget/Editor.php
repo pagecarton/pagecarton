@@ -33,7 +33,7 @@ class Ayoola_Object_PageWidget_Editor extends Ayoola_Object_PageWidget_Abstract
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
-            $values['parameters'] - json_decode( $values['parameters'], true );
+            $values['parameters'] = json_decode( $values['parameters'], true );
 			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Data updated successfully</div>' ) . '', true  ); } 
 
              // end of widget process

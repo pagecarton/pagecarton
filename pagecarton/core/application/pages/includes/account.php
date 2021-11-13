@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Sunday 14th of February 2021 07:03:50 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: account.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -35,6 +35,9 @@ $_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
   ),
   'insert_id' => '1566242675-0-12',
   '' => '',
+  'includes' => 
+  array (
+  ),
   'content' => '<br>
 
 <h1>Account Dashboard</h1>
@@ -100,6 +103,9 @@ $_0a8d876c1a5bdfa414e91126c8475772 = new Ayoola_Page_Editor_Text( array (
   'add_a_new_post[0]' => '1',
   'no_of_post_to_show[0]' => '6',
   'show_post_by_me[0]' => '1',
+  'includes' => 
+  array (
+  ),
   'content' => '<a href="{{{post_link}}}"><img class="pc_give_space_top_bottom" style="width:100%;" alt="" src="{{{document_url_cropped}}}"></a>
 
 <div class="xcontainer xpc_container">
@@ -152,6 +158,9 @@ $_7aac6aa09cee3843d266ebfb57a2baf1 = new Ayoola_Page_Editor_Text( array (
   'wrapper_name' => 'dark',
   'insert_id' => '1566242675-0-13',
   '' => '',
+  'includes' => 
+  array (
+  ),
   'content' => '<div style="">Email: {{{email}}}</div>
 
 <div style="">Username: {{{username}}}</div>

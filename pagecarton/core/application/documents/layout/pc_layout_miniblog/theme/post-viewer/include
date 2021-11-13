@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: post-viewer.php	Sunday 14th of February 2021 07:03:50 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: post-viewer.php	Saturday 13th of November 2021 03:46:38 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -75,6 +75,9 @@ $_c3bd84a71fa6d32aa48782f3fd03d05f = new Ayoola_Page_Editor_Text( array (
     0 => 'preserve_content',
   ),
   'pagewidget_id' => '0-1599326426-15',
+  'includes' => 
+  array (
+  ),
   'content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
     <div class="site-cover site-cover-sm same-height overlay single-page"
         style="background-image: url(/layout/pc_layout_miniblog/images/img_2.jpg?embed_image_url={{{document_url_uri}}});">
@@ -336,6 +339,9 @@ $_ada0f7c1a240ee5a075e17c99fedd94c = new Ayoola_Page_Editor_Text( array (
     0 => 'preserve_content',
   ),
   'pagewidget_id' => '0-1599326427-16',
+  'includes' => 
+  array (
+  ),
   'content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
     <section class="site-section py-lg">
         <div class="container">
@@ -372,7 +378,7 @@ $_ada0f7c1a240ee5a075e17c99fedd94c = new Ayoola_Page_Editor_Text( array (
                     <div class="sidebar-box search-form-wrap">
                         <form action="/search" class="search-form">
                             <div class="form-group">
-                                <span class="icon fa fa-search">&nbsp;</span>
+                                <span class="icon fa fa-search"></span>
                                 <input type="text" class="form-control" name="q" id="s"
                                     placeholder="Type a keyword and hit enter">
                             </div>
@@ -388,10 +394,10 @@ $_ada0f7c1a240ee5a075e17c99fedd94c = new Ayoola_Page_Editor_Text( array (
                                 <p class="mb-4">{{{profile_description}}}</p>
                                 <p><a href="{{{pc_url_prefix}}}/{{{profile_url}}}" class="btn btn-primary btn-sm rounded px-4 py-2">Read my bio</a></p>
                                 <p class="social">
-                                    <a href="#" class="p-2"><span class="fa fa-facebook">&nbsp;</span></a>
-                                    <a href="#" class="p-2"><span class="fa fa-twitter">&nbsp;</span></a>
-                                    <a href="#" class="p-2"><span class="fa fa-instagram">&nbsp;</span></a>
-                                    <a href="#" class="p-2"><span class="fa fa-youtube-play">&nbsp;</span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
                                 </p>
                             </div>
                         </div>

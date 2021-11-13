@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Sunday 14th of February 2021 07:03:49 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: signin.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -25,6 +25,9 @@ $_1823d82978b6248da233ba22f90dfff5 = new Ayoola_Page_Editor_Text( array (
   'url_prefix' => '',
   'pagewidget_id' => '1575534203-0-177',
   'insert_id' => '1566242673-0-30',
+  'includes' => 
+  array (
+  ),
   'content' => '
 			
 			<h3><br></h3><div><br></div>
@@ -51,6 +54,9 @@ $_819b0d226cfbe09b764ec0d18e3de388 = new Ayoola_Page_Editor_Text( array (
   'url_prefix' => '',
   'pagewidget_id' => '1575534203-0-178',
   'insert_id' => '1566242673-0-31',
+  'includes' => 
+  array (
+  ),
   'content' => '
 			
 			<h3><br></h3><div><br></div>
@@ -103,6 +109,9 @@ $_29dee3838ed48fbd1732353450c0ade7 = new Ayoola_Page_Editor_Text( array (
   'wrapper_name' => 'well',
   'insert_id' => '1566242673-0-33',
   '' => '',
+  'includes' => 
+  array (
+  ),
   'content' => '<div style="text-align: center;"><a href="/tools/classplayer/get/name/Application_User_Help_ForgotUsernameOrPassword" rel="spotlight;">Forgot password</a> <span style="color:#808080;"><span style="font-size:20px;">|</span></span> <a href="/widgets/Application_User_Creator" onclick="this.href=this.href + location.search;">Create a new account</a></div>
 ',
 ) );
@@ -127,6 +136,9 @@ $_a8a7a9b2921b861baf512f69102991b3 = new Ayoola_Page_Editor_Text( array (
   'url_prefix' => '',
   'pagewidget_id' => '1575534203-0-181',
   'insert_id' => '1566242674-0-34',
+  'includes' => 
+  array (
+  ),
   'content' => '
 			
 			<h3><br></h3><div><br></div>

@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-admin.php	Sunday 14th of February 2021 07:03:49 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: pc-admin.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -87,6 +87,9 @@ $_a0d1dbe8cd91f74655801013c1a9fded = new Ayoola_Page_Editor_Text( array (
     0 => 'preserve_content',
   ),
   'pagewidget_id' => '1575286110-0-155',
+  'includes' => 
+  array (
+  ),
   'content' => '			
 			<h3><br>&nbsp;</h3><div><br>&nbsp;</div>
 			',
@@ -237,6 +240,9 @@ $_4e8fd3c1ce6442243ee625dc127bf58a = new Ayoola_Page_Editor_Text( array (
     0 => 'Application_Info',
   ),
   'wrapper_name' => 'white-well',
+  'includes' => 
+  array (
+  ),
   'content' => '<div class="col-md-12 stats-info widget" style="width: 100%;">
 <div class="stats-title">
 <h4 class="title">Dashboard</h4>
@@ -336,6 +342,9 @@ $_6e0c10910d5fbb6ad4e9ead328450193 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'Application_Info',
   ),
+  'includes' => 
+  array (
+  ),
   'content' => '<section id="row-one" data-pc-section-created="1">
     <div class="row-one">
         <div class="col-md-4 widget">
@@ -388,6 +397,9 @@ $_8f94b54f70cde9623d9cc279007489dd = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   '' => '',
+  'includes' => 
+  array (
+  ),
   'content' => '<section data-pc-section-created="1" id="footer"><p>© <script>document.write(new Date().getFullYear());</script> <a href="http://www.PageCarton.com">PageCarton</a>. All Rights Reserved.<br>&nbsp;</p>&nbsp;</section>',
 ) );
 

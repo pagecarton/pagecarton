@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: plugin.php	Sunday 14th of February 2021 07:03:49 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: plugin.php	Saturday 13th of November 2021 06:34:24 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -319,6 +319,9 @@ $_be52de7bd6cdef876aa721a6b16621a0 = new Ayoola_Page_Editor_Text( array (
 ',
   'url_prefix' => '',
   'pagewidget_id' => '1575534212-0-15',
+  'includes' => 
+  array (
+  ),
   'content' => '<h1>Creating PageCarton Plugins</h1>
 
 <p>&nbsp;</p>

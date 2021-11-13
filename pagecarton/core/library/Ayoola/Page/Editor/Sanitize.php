@@ -216,6 +216,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                     $corePageFile = APPLICATION_PATH . DS .  $pageFile;
                     if( is_file( $corePageFile ) )
                     {
+                        Ayoola_Doc::createDirectory( dirname( $myPageFile ) );
                         copy( $corePageFile, $myPageFile );
                         //  unlink( $pageFile );
                     }

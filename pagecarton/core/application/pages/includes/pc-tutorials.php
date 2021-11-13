@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-tutorials.php	Sunday 14th of February 2021 07:03:49 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: pc-tutorials.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -535,6 +535,9 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
     0 => 'Application_Global',
   ),
   'wrapper_name' => 'white-well',
+  'includes' => 
+  array (
+  ),
   'content' => '<div>
 <p>&nbsp;</p>
 

@@ -1420,14 +1420,15 @@ class Ayoola_Application
 			}
 			$realPageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
             $pageFile = Ayoola_Loader::getFullPath( $realPageFile, array( 'prioritize_my_copy' => true ) );
+
 			if( ! is_file( $pageFile ) )
 			{
 				return false;
             }
             $myPageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $realPageFile;
+            $corePageFile = APPLICATION_PATH . DS . $realPageFile;
 
-
-            if( empty( $options['auto_init_theme_page'] ) && ! is_file( $myPageFile ) )
+            if( empty( $options['auto_init_theme_page'] ) && ! is_file( $myPageFile ) && ! is_file( $corePageFile ) )
             {
                 return false;
             }
@@ -1474,6 +1475,7 @@ class Ayoola_Application
 
                     $include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
                     $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
+                   // var_export( Ayoola_Loader::getValidIncludePaths( $pagePathsX['template'] ) );
                     if( $include && $template )
                     {
                         $PAGE_INCLUDE_FILE = $include;
@@ -1488,6 +1490,8 @@ class Ayoola_Application
                         //	once page is created, let's have blank content
                         //  was causing "Editing /" in title
                         //  and blank pages
+                        //  var_export( $template );
+
                         
                         $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
                         $d = $page->refresh( $uri, $themeName );

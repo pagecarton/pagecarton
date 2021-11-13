@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: view.php	Sunday 14th of February 2021 07:03:50 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: view.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -21,6 +21,9 @@ $_8eccaa7e0a95bfe06f5ebffc31ee8f0f = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611791946-9',
+  'includes' => 
+  array (
+  ),
   'content' => '<div><br></div><div><br></div>',
 ) );
 
@@ -73,6 +76,9 @@ $_85c670985c03815dd9f45362c1c9b988 = new Ayoola_Page_Editor_Text( array (
   ),
   'wrapper_name' => 'well',
   'content_to_clear[0]' => '<p class=\'pc_give_space_top_bottom\'></p>',
+  'includes' => 
+  array (
+  ),
   'content' => '<div class="xcontainer">
 
 <h1 class="pc_give_space_top_bottom">{{{article_title}}}</h1>
@@ -125,6 +131,9 @@ $_b107e295260b4f99579dc21f30ce47cb = new Ayoola_Page_Editor_Text( array (
   ),
   'wrapper_name' => '',
   'content_to_clear[0]' => '<p class=\'pc_give_space_top_bottom\'></p>',
+  'includes' => 
+  array (
+  ),
   'content' => '<img src="{{{document_url}}}" alt="Image" style="width:100%">',
 ) );
 
@@ -189,6 +198,9 @@ $_2ef3917fcdce6be10601f99ac5e4d1ac = new Ayoola_Page_Editor_Text( array (
   ),
   'wrapper_name' => 'well',
   'object_class' => 'pc_give_space_top_bottom',
+  'includes' => 
+  array (
+  ),
   'content' => '<section class="xcontainer" style="padding:2em 1em 2em 1em; ">
     <p style="text-align: center;"><span style="font-size:11px;">Manage {{{post_type}}}</span></p>
     <br>
@@ -269,6 +281,9 @@ $_871a4683bca92fa0998151c939f71ec1 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611792467-12',
+  'includes' => 
+  array (
+  ),
   'content' => '<p>&nbsp;</p>
 
 <p>&nbsp;</p>
@@ -341,6 +356,9 @@ $_85c9419042cf5eb1948aad0e9e8aeb75 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611791946-9',
+  'includes' => 
+  array (
+  ),
   'content' => '<div><br></div><div><br></div>',
 ) );
 
@@ -390,6 +408,9 @@ $_6dee86d34f712929d5fa8e80f452cdc8 = new Ayoola_Page_Editor_Text( array (
   ),
   'wrapper_name' => 'well',
   '' => '',
+  'includes' => 
+  array (
+  ),
   'content' => '<div class="container">
 <p>&nbsp;</p>
 

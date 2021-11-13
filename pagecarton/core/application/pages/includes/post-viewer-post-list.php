@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: post-viewer-post-list.php	Sunday 14th of February 2021 07:03:49 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: post-viewer-post-list.php	Saturday 13th of November 2021 06:34:24 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -21,6 +21,9 @@ $_7e8536ad0889aa87ff44bb6c8e34cf6b = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '<div><br></div><div><br></div>',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611800230-7',
+  'includes' => 
+  array (
+  ),
   'content' => '<div><br></div><div><br></div>',
 ) );
 
@@ -43,6 +46,9 @@ $_9ed35f44f7b66165630d635239200a26 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611800063-3',
+  'includes' => 
+  array (
+  ),
   'content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
 <h2 class="pc_give_space_top_bottom">{{{article_title}}}</h2>
 <p>{{{article_description}}}</p>
@@ -92,6 +98,9 @@ $_a241e31eedca3550957404a8509cd91d = new Ayoola_Page_Editor_Text( array (
     0 => '',
   ),
   '' => '',
+  'includes' => 
+  array (
+  ),
   'content' => '<widget parameters=\'{ "class": "Application_Article_PostList", "no_of_post_to_show": 100 }\'>
     <ol>
     <repeat>
@@ -129,6 +138,9 @@ $_82d3cc274801f7b6e361e93e8a37257a = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '<div><br></div><div><br></div>',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611800230-7',
+  'includes' => 
+  array (
+  ),
   'content' => '<div><br></div><div><br></div>',
 ) );
 
@@ -148,6 +160,9 @@ $_febabc8c2d69bc7e0b7e363a7c4cdeb2 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611865178-13',
+  'includes' => 
+  array (
+  ),
   'content' => '<widget parameters=\'{ "class": "Application_Article_View", "hide_default_post_view": true }\'></widget>',
 ) );
 
@@ -167,6 +182,9 @@ $_a34eedd518cb43f2e2d58a4405212700 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '<div><br></div><div><br></div>',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611800230-7',
+  'includes' => 
+  array (
+  ),
   'content' => '<div><br></div><div><br></div>',
 ) );
 
@@ -227,6 +245,9 @@ $_0cf304b273ecb75409095cc554bc9f4e = new Ayoola_Page_Editor_Text( array (
   ),
   'pagewidget_id' => '0-1611800769-9',
   'wrapper_name' => 'well',
+  'includes' => 
+  array (
+  ),
   'content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
 <br>
 <p>Posts similar to {{{post_type}}}</p>
@@ -252,6 +273,9 @@ $_219e73c5d3d5910ae8aa4ae07f999e81 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611801048-10',
+  'includes' => 
+  array (
+  ),
   'content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
 <img src="{{{document_url_cropped}}}" alt="{{{article_title}}} cover photo">
 </widget>',
@@ -303,6 +327,9 @@ $_dcb2368f994d871d30b09185f61350e2 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '<div><br></div><div><br></div>',
   'url_prefix' => '',
   'pagewidget_id' => '0-1611800063-5',
+  'includes' => 
+  array (
+  ),
   'content' => '<div><br></div><div><br></div>',
 ) );
 

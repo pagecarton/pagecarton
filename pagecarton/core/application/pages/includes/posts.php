@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: posts.php	Sunday 14th of February 2021 07:03:49 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: posts.php	Saturday 13th of November 2021 06:34:25 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -53,6 +53,9 @@ $_47e4a3f96aa384912ed3890fa39a2b72 = new Ayoola_Page_Editor_Text( array (
     0 => 'preserve_content',
   ),
   'pagewidget_id' => '0-1612035533-15',
+  'includes' => 
+  array (
+  ),
   'content' => '<widget parameters=\'{ "class": "Application_Category_View", "pc_module_url_values_category_offset": 0, "pc_module_url_values_request_fallback": true, "allow_dynamic_category_selection": true }\'>
   <div class="py-5 bg-light">
     <div class="container">
@@ -87,6 +90,9 @@ $_d137c0781f268d08fc4dd0c4966e1415 = new Ayoola_Page_Editor_Text( array (
   'preserved_content' => '',
   'url_prefix' => '',
   'pagewidget_id' => '0-1612036263-18',
+  'includes' => 
+  array (
+  ),
   'content' => '<div><br></div><div><br></div>',
 ) );
 
