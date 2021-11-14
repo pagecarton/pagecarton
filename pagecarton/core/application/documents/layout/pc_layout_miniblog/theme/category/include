@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: category.php	Saturday 13th of November 2021 03:46:37 PM	ayoola@ayoo.la $ 
+* @version $Id: category.php	Sunday 14th of November 2021 10:44:13 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -17,21 +17,21 @@
 							{
 								
 $_c4c8c7d9ad74d1365afda99a6467e2d7 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '
-<div class="py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <span>Category</span>
-            <h3>Sports</h3>
-            <p>Category description here.. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam error eius quo, officiis non maxime quos reiciendis perferendis doloremque maiores!</p>
-          </div>
+  'editable' => '<widget parameters="{ &quot;class&quot;: &quot;Application_Category_View&quot;, &quot;pc_module_url_values_category_offset&quot;: 0, &quot;pc_module_url_values_request_fallback&quot;: true, &quot;allow_dynamic_category_selection&quot;: true }">
+  <div class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <span>Category</span>
+          <h3>{{{category_label}}}</h3>
+          <p>{{{category_description}}}</p>
         </div>
       </div>
     </div>
-
+  </div>
+</widget>
 ',
-  'preserved_content' => '<widget parameters=\'{ "class": "Application_Category_View", "pc_module_url_values_category_offset": 0, "pc_module_url_values_request_fallback": true, "allow_dynamic_category_selection": true }\'>
+  'preserved_content' => '<widget parameters=\'{ "class": "Application_Category_View", "pc_module_url_values_category_offset": 0, "pc_module_url_values_request_fallback": true, "allow_dynamic_category_selection": true, "build_meta_data": true }\'>
   <div class="py-5 bg-light">
     <div class="container">
       <div class="row">
@@ -50,11 +50,11 @@ $_c4c8c7d9ad74d1365afda99a6467e2d7 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'preserve_content',
   ),
-  'pagewidget_id' => '0-1599312165-7',
+  'pagewidget_id' => '0-1636886654-15',
   'includes' => 
   array (
   ),
-  'content' => '<widget parameters=\'{ "class": "Application_Category_View", "pc_module_url_values_category_offset": 0, "pc_module_url_values_request_fallback": true, "allow_dynamic_category_selection": true }\'>
+  'content' => '<widget parameters=\'{ "class": "Application_Category_View", "pc_module_url_values_category_offset": 0, "pc_module_url_values_request_fallback": true, "allow_dynamic_category_selection": true, "build_meta_data": true }\'>
   <div class="py-5 bg-light">
     <div class="container">
       <div class="row">
@@ -82,28 +82,11 @@ $_c4c8c7d9ad74d1365afda99a6467e2d7 = null;
 							{
 								
 $_71059dc0cbbf442f10840b55ad638d70 = new Ayoola_Page_Editor_Text( array (
-  'editable' => '
-<div class="site-section bg-white">
-      <div class="container">
-        <div class="row">
-            <include href="/layout/pc_layout_miniblog/list-post.html"></include>
-</div>
-        <div class="row text-center pt-5 border-top">
-          <div class="col-md-12">
-            <div class="custom-pagination">
-              <span>1</span>
-              <a href="#">2</a>
-              <a href="#">3</a>
-              <a href="#">4</a>
-              <span>...</span>
-              <a href="#">15</a>
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
-
-',
+  'editable' => '<div class="site-section bg-white">
+    <div class="container">
+        <include href="/layout/pc_layout_miniblog/list-post.html">
+    </include></div>
+</div>',
   'preserved_content' => '<div class="site-section bg-white">
     <div class="container">
         <include href="/layout/pc_layout_miniblog/list-post.html">
@@ -114,7 +97,7 @@ $_71059dc0cbbf442f10840b55ad638d70 = new Ayoola_Page_Editor_Text( array (
   array (
     0 => 'preserve_content',
   ),
-  'pagewidget_id' => '0-1599316816-14',
+  'pagewidget_id' => '0-1636886654-16',
   'includes' => 
   array (
     '/layout/pc_layout_miniblog/list-post' => '<include href="/layout/pc_layout_miniblog/list-post.html">',
