@@ -192,7 +192,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
             //  apparently, this new settings won't work with "E-shop" theme. 
             // add to remove this settigns ot set the value to 52400 to make it work
             //ini_set ("pcre.recursion_limit", "524");
-            ini_set ("pcre.recursion_limit", "52400");
+
+            //  52400 crashed bootstrap file on an interworx server
+            //  reverting back to 524 helped
+            ini_set ("pcre.recursion_limit", "524");
 
             preg_match_all( '#<widget([\s]*parameters=("?\'?)({[^>]*})("?\'?)[\s]*)?>(((?!\</widget\>).)*)</widget>#isU', $content, $widgets );
 
@@ -512,6 +515,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
         if( $this->getParameter( 'markup_template_object_name' ) )
 		{
+            //  convert old widget construct to new construct
             $content = self::oldWidgetConvert( $content, $this->getParameter() );
             
 			$content .= '<div style="clear:both;"></div>';  
