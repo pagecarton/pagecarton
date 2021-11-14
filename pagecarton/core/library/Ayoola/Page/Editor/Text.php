@@ -183,7 +183,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
     public static function embedWidget( $content, $baseParameters, & $classes = array() )
     {
-        while( stripos( $content, '</widget>' )  && $count < 3  )
+        //  making it count up to 10 times solves problem of some of the matches not found due to recursion limit set at 524
+        while( stripos( $content, '</widget>' ) && $count < 10  )
         {
             // this was causing issue in a server
             //  making preg_match_all crash apache
@@ -377,7 +378,14 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
 	public static function oldWidgetConvert( $content, $parametersX )
     {
+        if( stripos( $content, '</widget>') )
+        {
+            //  not doing this was causing infinite loop in  some docs
+            return $content;
+        }
         unset( $parametersX['codes'] );
+        unset( $parametersX['view'] );
+        unset( $parametersX['editable'] );
         unset( $parametersX['preserved_content'] );
         unset( $parametersX['widget_options'] );
         unset( $parametersX['viewableobject_id'] );
