@@ -71,7 +71,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
         $dir = $this->getMySupplementaryDirectory();
 		if( filesize( $filename ) > 300000 )
 		{
-			$strToUse = str_pad( $i, 3, '0', STR_PAD_LEFT );
+			$strToUse = $strToUseX = str_pad( $i, 3, '0', STR_PAD_LEFT );
 			$annexFile = $dir . DS . '' . implode( DS, str_split( $strToUse ) ) . EXT_DATA;     
 			while( is_file( $annexFile ) )
 			{
@@ -82,7 +82,12 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
             if( is_file( $annexFile ) )
             {
                 //  archive files? 
-                rename( $dir, $dir . DS . 'z/z/z' );
+                $xtDir = $dir . '/z/z/z';
+                Ayoola_Doc::createDirectory( dirname( $xtDir ) );
+                if( rename( $dir, $xtDir ) )
+                {
+                    $annexFile = $dir . DS . '' . implode( DS, str_split( $strToUseX ) ) . EXT_DATA;
+                }
             }
 				
 			$dataTypes = $this->getDataTypes();
