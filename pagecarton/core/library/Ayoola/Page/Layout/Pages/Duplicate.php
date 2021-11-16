@@ -55,7 +55,7 @@ class Ayoola_Page_Layout_Pages_Duplicate extends Ayoola_Page_Layout_Pages
 		
 		//	var_export( $this->getFilename() );
             $url = @$_REQUEST['url'];
-            $themeName = strtolower( $data['layout_name'] ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) );
+            $themeName = strtolower( $data['layout_name'] ? : Ayoola_Page_Editor_Layout::getDefaultLayout() );
             if( ! $themeName )
             {
                 return false;

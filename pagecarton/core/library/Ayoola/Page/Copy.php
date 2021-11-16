@@ -90,7 +90,7 @@ class Ayoola_Page_Copy extends Ayoola_Page_Abstract
 			//	var_export( $class->view() );
 
             //    $fPaths = Ayoola_Page_Layout_Pages_Duplicate::getPagePaths( $themeName, $values['old_page'] );
-				$tPaths = Ayoola_Page_Layout_Pages::getPagePaths( Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ), $values['destination'] );
+				$tPaths = Ayoola_Page_Layout_Pages::getPagePaths( Ayoola_Page_Editor_Layout::getDefaultLayout(), $values['destination'] );
 			//	var_export( $values);
 			//	var_export( $tPaths);
 			//	var_export( $origin);

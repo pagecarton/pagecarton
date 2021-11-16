@@ -103,7 +103,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		$filter = new Ayoola_Filter_SelectListArray( 'url', 'url');
 		$pages = $filter->filter( $pages );
 
-		$pages += Ayoola_Page_Layout_Pages::getPages( @$data['layout_name'] ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ), 'list-url' ) ? : array();
+		$pages += Ayoola_Page_Layout_Pages::getPages( @$data['layout_name'] ? : Ayoola_Page_Editor_Layout::getDefaultLayout(), 'list-url' ) ? : array();
 		asort( $pages );
 		return array_unique( $pages );
 	}
@@ -119,7 +119,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		$cssFile = self::getCurrentPageInfo( 'document_url' );
 		if( ! $cssFile )
 		{
-			if( $cssFile = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) )
+			if( $cssFile = Ayoola_Page_Editor_Layout::getDefaultLayout() )
 			{
 				$table = Ayoola_Page_PageLayout::getInstance();
 				if( $cssFile = $table->selectOne( null, array( 'layout_name' => $cssFile ) ) )
@@ -180,7 +180,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			}
 
 			//	get info for theme pages
-			$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+			$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
 
 			if( $themeName && Ayoola_Page_Layout_Pages::isValidThemePage( $url, $themeName ) )
 			{ 

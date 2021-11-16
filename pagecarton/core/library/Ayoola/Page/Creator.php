@@ -162,7 +162,7 @@ class Ayoola_Page_Creator extends Ayoola_Page_Abstract
 		}
 		if( ! $filePath = Ayoola_Loader::checkFile( $pageInfo['pagelayout_filename'] ) )
 		{ 
-			if( $defaultLayout = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) )
+			if( $defaultLayout = Ayoola_Page_Editor_Layout::getDefaultLayout() )
 			{
 				$filePath = Ayoola_Loader::checkFile( $filter->filter( $defaultLayout ) );
 			}

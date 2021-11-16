@@ -215,7 +215,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		$rPaths = Ayoola_Page::getPagePaths( $url );
 		
 		//	first default content to determine now is the default layout saved content
-		$themeName = $themeName ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+		$themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
 		$pageThemeFileUrl = $url;
 		if( $pageThemeFileUrl == '/' )
 		{
@@ -253,7 +253,7 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		$page = $this->getPageInfo();
 		
 		//	first default content to determine now is the default layout saved content
-		$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+		$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
 		$rPaths = self::getDefaultPageFilesToUse( $page['url'], $themeName );
  		$pageThemeFileUrl = $page['url'];
 		if( $pageThemeFileUrl == '/' )

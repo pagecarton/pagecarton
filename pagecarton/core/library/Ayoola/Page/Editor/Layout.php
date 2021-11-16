@@ -44,6 +44,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
     /**
      * 
+     * 
+     * @var array 
+     */
+	protected static $_defaultLayout; 
+
+    /**
+     * 
      * The objects available as viewable
      *
      * @var string Mark-Up to Display Viewable Objects List
@@ -129,7 +136,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				}				
 
 				//	Copy the parent files
-				$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+				//$themeName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+                $themeName = self::getDefaultLayout();
                 $rPaths = self::getDefaultPageFilesToUse( $pageToCopy['url'], $themeName );
 				foreach( $rPaths as $key => $eachX )
 				{
@@ -317,20 +325,33 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
     /**
      * 
+     * @return null
+     */
+    public static function resetDefaultLayout()   
+    {
+        self::$_defaultLayout = null;
+    }
+
+    /**
+     * 
      * @param void
      * @return string
      */
     public static function getDefaultLayout()   
     {
-
+        if( ! empty( self::$_defaultLayout ) )
+        {
+            return self::$_defaultLayout;
+        }
+        self::$_defaultLayout = 'pc_layout_miniblog';
 		if( $defaultLayout = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) )     
 		{
 			if( Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $defaultLayout ) ) )
 			{
-				return $defaultLayout;
+                self::$_defaultLayout = $defaultLayout;
 			}
 		}
-		return 'pc_layout_miniblog';
+		return self::$_defaultLayout;
 	}
 
     /**

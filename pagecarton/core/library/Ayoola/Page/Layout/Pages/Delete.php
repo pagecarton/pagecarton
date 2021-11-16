@@ -49,7 +49,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
         //	let's remove dangling theme pages not completely deleted
         //  case issue in page sanitize
         //  where when theme page is deleted, still comes up in normal page left not deleted
-        $themeName = $themeName ? : Application_Settings_Abstract::getSettings( 'Page', 'default_layout' );
+        $themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
         $themeDataDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '';
         $themePageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
     //	var_export( $themeDataDir );

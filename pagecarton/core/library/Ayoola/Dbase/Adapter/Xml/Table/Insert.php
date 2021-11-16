@@ -79,6 +79,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 				$strToUse = str_pad( $i, 3, '0', STR_PAD_LEFT );
 				$annexFile = $dir . DS . '' . implode( DS, str_split( $strToUse ) ) . EXT_DATA;     
 			}
+            if( is_file( $annexFile ) )
+            {
+                //  archive files? 
+                rename( $dir, $dir . DS . 'z/z/z' );
+            }
 				
 			$dataTypes = $this->getDataTypes();
 			$tableInfo = $this->query( 'DESCRIBE' );

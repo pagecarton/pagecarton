@@ -37,6 +37,8 @@ class Ayoola_Page_Settings extends PageCarton_Settings
         {
             return false;
         }
+
+        
   		$defaultPages = Ayoola_Page_Editor_Sanitize::$defaultPages;	
 		
 		//	copy page content from theme
