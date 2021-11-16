@@ -24,8 +24,8 @@
 			</div>
 		</div>
 	</div>
-<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?>
 </body>
 </html>
 <?php endif; ?>
