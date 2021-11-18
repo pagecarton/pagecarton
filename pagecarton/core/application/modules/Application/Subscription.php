@@ -180,14 +180,10 @@ class Application_Subscription extends Application_Subscription_Abstract
 		//	Clear plain text password for security reasons
 		unset( $values['password'], $values['password2'] );
 		
-		@$settings['currency_abbreviation'] = $values['currency_abbreviation'] ? : Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' );
-		@$settings['return_url'] = $values['return_url'] ? : 'http://' . Ayoola_Page::getDefaultDomain() . '/';
-		@$settings['read_only'] = $values['read_only'];
-		@$settings['edit_cart_url'] = $values['edit_cart_url'] ? : 'javascript:';
-		
-		//	Introducing passwords for cart, so we can deal with ambigiuty
-		@$settings['password'] = $values['cart_password'] ? : 'default_password';
-		$values['item_time'] = time();	//	Also useful for randomization of cart item
+        if( empty( $values['refreshable'] ) )
+        {
+            $values['item_time'] = time();	//	Also useful for randomization of cart item
+        }
 		
 		if( ! @$values['subscription_name'] )
 		{
@@ -203,19 +199,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 		$previousData = $this->getStorage()->retrieve() ? : array();
 
 
-		// Inconsistent currency
-		if( @$previousData['settings']['currency_abbreviation'] && $previousData['settings']['currency_abbreviation'] != $settings['currency_abbreviation'] )
-		{ 
-			$this->getStorage()->store( array() );
-			$previousData = array();
-		}
-		
-		//	Inconsistent Password or we want to refresh cart
-		if( ( @$previousData['settings']['password'] && $previousData['settings']['password'] != $settings['password'] ) || ! empty( $values['refresh_cart'] ) )
-		{ 
-			$this->getStorage()->store( array() );
-			$previousData = array();
-		}
 		if( ! isset( $values['multiple'] ) )
 		{ 
 			$values['multiple'] = '1';
@@ -224,13 +207,58 @@ class Application_Subscription extends Application_Subscription_Abstract
 		{ 
 			return false;
 		}
+		return self::reset( $values );
+    }
+	
+    /**
+     * Creates the form for subscription
+     * 
+     */
+	public static function reset( $values = null )
+    {
+		//	Store in a session
+		$previousData = self::getStorage()->retrieve() ? : array();
 
-        $newCart = array( $values['subscription_name'] => $values );
+        $newCart = array();
+        if( ! empty( $values ) )
+        {
+            @$settings['currency_abbreviation'] = $values['currency_abbreviation'] ? : Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' );
+            @$settings['return_url'] = $values['return_url'] ? : 'http://' . Ayoola_Page::getDefaultDomain() . '/';
+            @$settings['read_only'] = $values['read_only'];
+            @$settings['edit_cart_url'] = $values['edit_cart_url'] ? : 'javascript:';
+            
+            //	Introducing passwords for cart, so we can deal with ambigiuty
+            @$settings['password'] = $values['cart_password'] ? : 'default_password';
+
+            // Inconsistent currency
+            if( @$previousData['settings']['currency_abbreviation'] && $previousData['settings']['currency_abbreviation'] != $settings['currency_abbreviation'] )
+            { 
+                $this->getStorage()->store( array() );
+                $previousData = array();
+            }
+            
+            //	Inconsistent Password or we want to refresh cart
+            if( ( @$previousData['settings']['password'] && $previousData['settings']['password'] != $settings['password'] ) || ! empty( $values['refresh_cart'] ) )
+            { 
+                $this->getStorage()->store( array() );
+                $previousData = array();
+            }
+    
+            $newCart = array( $values['subscription_name'] => $values );
+
+
+        }
+        if( empty( $newCart ) && empty( $previousData ) )
+        {
+            //  don't set up default if there is nothing in cart
+            return false;
+        }  
+
 		
 		@$newCart = is_array( $previousData['cart'] ) ? array_merge( $previousData['cart'], $newCart ) : $newCart;
 		
 		//	When multiple, is 0, we are deleting the item from the subscription list
-		if( $newCart[$values['subscription_name']]['multiple'] == 0 )
+		if(  ! empty( $values ) && $newCart[$values['subscription_name']]['multiple'] == 0 )
         { 
             unset( $newCart[$values['subscription_name']] ); 
         }
@@ -262,24 +290,38 @@ class Application_Subscription extends Application_Subscription_Abstract
 				$settings['terms_and_conditions'] .= $eachItem['item_terms_and_conditions'] . "\r\n" . "\r\n";
 			}  
 
-            //  refresh promo codes
+/* 
             if( 
                 $eachItem['refreshable'] 
-                && $values['refreshable'] != $eachItem['refreshable'] 
-                && empty( $values['refreshing_cart_item'] )
+                && ( empty( $values ) || $values['subscription_name'] != $eachItem['subscription_name']  )
+                && (  empty( $values ) || empty( $values['refreshing_cart_item'] ) )
             )
             {
-                $eachItem['refreshing_cart_item'] = time();
-                $refreshList[$eachItem['refreshable']] = $eachItem;
+             
+                $eachItem['refreshing_cart_item'] = time() . ' - ' . $eachItem['subscription_name'];
+                $refreshList[$eachItem['subscription_name']] = $eachItem;
+                unset( $newCart[$name] );
+                //var_export( true );
+
+            }
+
+ */       
+
+            if( ! empty( $newCart[$name]['refreshable'] ) )
+            {
+                unset($newCart[$name] );
+
+                continue;
             }
 
 			@$newCart[$name]['item_total'] = $eachItem['price'] * $eachItem['multiple'];
+            //var_export( $newCart[$name]['subscription_name'] );
             //var_export( $newCart[$name]['item_total'] );
             //var_export( '<br>' );
 			@$settings['total'] += $newCart[$name]['item_total'];
 		}
 
-    //  if( empty( $previousData ) )
+
         {
             //	surcharges
             $paymentSettings = Application_Settings_Abstract::getSettings( 'Payments' );
@@ -344,11 +386,21 @@ class Application_Subscription extends Application_Subscription_Abstract
         }
 
 		$settings['article_url'] = array_unique( $settings['article_url'] );
-		$this->getStorage()->store( array( 'cart' => $newCart, 'settings' => $settings ) );
+
+        $wholeCart = array( 'cart' => $newCart, 'settings' => $settings );
+
+       // var_export( __FUNCTION__ );
+        self::setHook( static::getInstance(), __FUNCTION__, $wholeCart );
+
+       //var_export( $wholeCart );
+
+		self::getStorage()->store( $wholeCart );
+       // var_export( $values );
         //var_export( $refreshList );
 
-        foreach( $refreshList as $method => $item )
+/*      foreach( $refreshList as $name => $item )
         {
+            $method = $item['refreshable'];
             //var_export( $name );
             if( is_callable( $method ) )
             {
@@ -358,13 +410,11 @@ class Application_Subscription extends Application_Subscription_Abstract
             {
                 // remove item that cannot be refreshed
                 $item['multiple'] = 0;
-                $this->subscribe( $item );
+                self::reset( $item );
             }
-            //var_export( $response );
-
     
         }
-        //exit();
+ */
 
 		return true;
     }

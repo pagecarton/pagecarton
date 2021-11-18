@@ -166,7 +166,12 @@ abstract class Application_Subscription_Abstract extends Ayoola_Abstract_Table
                         if( md5( serialize( $value ) ) == $_GET['cart_id'] )
                         {
                             @$data['settings']['total'] -= $items[$name]['price'] * $items[$name]['multiple'];
-                            unset( $items[$name] ); 
+                            if( $method = $items[$name]['delete_method'] AND is_callable( $method ) )
+                            {
+                                //var_export( $items[$name] );
+                                $method( $items[$name] );
+                            }
+                            unset( $items[$name] );
                         }
 					}
 					break;
@@ -193,6 +198,7 @@ abstract class Application_Subscription_Abstract extends Ayoola_Abstract_Table
 		//	var_export( $items );
 		$data = $items ? array( 'cart' => $items, 'settings' => $settings ) : array(); 
 		$this->getStorage()->store( $data ); 
+        Application_Subscription::reset();
     } 
 	
     /**

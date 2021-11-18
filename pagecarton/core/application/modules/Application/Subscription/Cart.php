@@ -74,6 +74,8 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
      */
 	protected function init()
     {
+        //Application_Subscription::reset();
+
 		$this->_objectTemplateValues['no_of_distinct_items'] = 0;
 		$this->_objectTemplateValues['no_of_items'] = 0;
 		$this->_objectTemplateValues['total_price'] = 0;
@@ -83,6 +85,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		{ 
 			return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">Your shopping cart is empty.</span>' ) . '', true  );
 		}
+        //var_export( $data );
 
         //
         self::getXml()->saveHTML();
