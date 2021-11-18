@@ -392,7 +392,7 @@ class Application_Article_View extends Application_Article_Abstract
 		$featuresPrefix = is_array( @$postTypeInfo['post_type_options_name'] ) ? $postTypeInfo['post_type_options_name'] : array();
 		if( ! in_array( @$data['true_post_type'], $features ) )
 		{
-			$features[] = @$data['true_post_type'];
+			$features[] = @$data['true_post_type'] ? : $data['article_type'];
 			$featuresPrefix[] = '';
 		}
 		$featureCount = array();

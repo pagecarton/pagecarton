@@ -55,8 +55,8 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 				$_GET['article_url'] = $this->getGlobalValue( 'article_url' );
 			}
 			$subscriptionData = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
-		//	var_export( $subscriptionData );
 		}
+
 	//	var_export( $subscriptionData );
 		$this->createForm( $this->getParameter( 'button_value' ) ? : ( @$subscriptionData['call_to_action'] ? : 'Add to cart' ), '' );
 		$form = $this->getForm() ? $this->getForm()->view() : null;
@@ -67,6 +67,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		//	var_export( $_POST );
 		if( @$_REQUEST['add_to_cart'] )
 		{
+            
 			$_GET['article_url'] = $subscriptionData['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
 			//	var_export( $data );
@@ -130,8 +131,10 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 		}
 		elseif( $this->getForm()  AND  $values = $this->getForm()->getValues() )
 		{
+    
 			$_GET['article_url'] = $values['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
+            
 			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
 			do
 			{
@@ -206,7 +209,14 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					case '':
 					break;
 					default:
+
+                    //  values get the url prefix in the article_url
+                    //  lose it before transfering data
+                    $values['article_url'] = $data['article_url'];
+
+
 					$values += $data;
+                    
 					unset( $values['document_url_base64'], $values['download_base64'] ); 
 					$values['subscription_name'] = $data['article_url'];
 					$values['subscription_label'] = $data['article_title'];
@@ -237,6 +247,7 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 					$values['classplayer_link'] = "javascript:;";
 					$values['object_id'] = $data['article_url'];
 					$values['multiple'] = $values['quantity'];
+        
 					$class->subscribe( $values );
 					$added = true;	
 					break;

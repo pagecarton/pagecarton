@@ -201,7 +201,8 @@ class Application_Subscription extends Application_Subscription_Abstract
 		
 		//	Store in a session
 		$previousData = $this->getStorage()->retrieve() ? : array();
-		
+
+
 		// Inconsistent currency
 		if( @$previousData['settings']['currency_abbreviation'] && $previousData['settings']['currency_abbreviation'] != $settings['currency_abbreviation'] )
 		{ 
@@ -215,38 +216,39 @@ class Application_Subscription extends Application_Subscription_Abstract
 			$this->getStorage()->store( array() );
 			$previousData = array();
 		}
-
-//		var_export( '' );
-//		var_export( $settings['total'] );        
-//		var_export( '' );        
-		
-		//	Invalid Multiple
-	//	var_export( strval( intval( $values['multiple'] ) ) );
 		if( ! isset( $values['multiple'] ) )
 		{ 
 			$values['multiple'] = '1';
 		}
-//		var_export( $values['multiple'] );
 		if( $values['multiple'] != strval( intval( $values['multiple'] ) ) )
 		{ 
-	//		throw new Application_Subscription_Exception( 'MULTIPLE MUST BE AN INTEGER FOR ' . $values['subscription_name'] ); 
 			return false;
 		}
+
+        $newCart = array( $values['subscription_name'] => $values );
 		
-		$newCart = array( $values['subscription_name'] => $values );
 		@$newCart = is_array( $previousData['cart'] ) ? array_merge( $previousData['cart'], $newCart ) : $newCart;
 		
 		//	When multiple, is 0, we are deleting the item from the subscription list
-		if( $newCart[$values['subscription_name']]['multiple'] == 0 ){ unset( $newCart[$values['subscription_name']] ); }
+		if( $newCart[$values['subscription_name']]['multiple'] == 0 )
+        { 
+            unset( $newCart[$values['subscription_name']] ); 
+        }
 
 		//	calculate the total price
-	//	$settings['total'] += (double) @$previousData['settings']['total'];
 		$settings['total'] = 0.00; 
 		$settings['article_url'] = array();
 		$settings['terms_and_conditions'] = '';
+        $refreshList = array();
 		foreach( $newCart as $name => $eachItem )
 		{
-			if( ! isset( $eachItem['price'] ) )
+			if( ! empty( $eachItem['exclusive'] ) )
+			{
+                //  don't add default payment
+				continue;
+			}  
+
+			if( ! isset( $eachItem['price'] ) && $eachItem['price_id'] )
 			{
 				$eachItem = array_merge( self::getPriceInfo( $eachItem['price_id'] ), $eachItem );
 			}  
@@ -259,34 +261,112 @@ class Application_Subscription extends Application_Subscription_Abstract
 				$settings['terms_and_conditions'] .= strtoupper( $eachItem['article_title'] ) . "\r\n" . "\r\n";
 				$settings['terms_and_conditions'] .= $eachItem['item_terms_and_conditions'] . "\r\n" . "\r\n";
 			}  
-			@$settings['total'] += $eachItem['price'] * $eachItem['multiple'];
+
+            //  refresh promo codes
+            if( 
+                $eachItem['refreshable'] 
+                && $values['refreshable'] != $eachItem['refreshable'] 
+                && empty( $values['refreshing_cart_item'] )
+            )
+            {
+                $eachItem['refreshing_cart_item'] = time();
+                $refreshList[$eachItem['refreshable']] = $eachItem;
+            }
+
+			@$newCart[$name]['item_total'] = $eachItem['price'] * $eachItem['multiple'];
+            //var_export( $newCart[$name]['item_total'] );
+            //var_export( '<br>' );
+			@$settings['total'] += $newCart[$name]['item_total'];
 		}
+
+    //  if( empty( $previousData ) )
+        {
+            //	surcharges
+            $paymentSettings = Application_Settings_Abstract::getSettings( 'Payments' );
+            $totalSurcharge = 0.00;
+    
+            if( ! empty( $paymentSettings['surcharge_title'] ) )
+            {
+                foreach( $paymentSettings['surcharge_title'] as $key => $eachSurcharge )
+                {
+                    if( empty( $paymentSettings['surcharge_title'][$key] ) )
+                    {
+                        continue;
+                    }
+                    if( ! empty( $paymentSettings['cart_item_type'][$key] ) && $paymentSettings['cart_item_type'][$key] !== $data['settings']['password'] )
+                    {
+                        continue;
+                    }
+                    $surchargeText = '';
+                    $surchargePrice = 0;
+                    $paymentSettings['surcharge_value'][$key] = doubleval( $paymentSettings['surcharge_value'][$key] );
+                    $surchargePricTextX = '0.00';
+                    switch( @$paymentSettings['surcharge_type'][$key] )
+                    {
+                        case 'percentage':   
+                            if( ! empty( $paymentSettings['surcharge_value'][$key] ) && intval( $paymentSettings['surcharge_value'][$key] ) <= 100 )
+                            {  
+                                $surchargeText .= '+ ' . $paymentSettings['surcharge_value'][$key] . '% of total order';
+                                $surchargePrice += ( $paymentSettings['surcharge_value'][$key]/100 ) * $settings['total'];
+                            }
+                        break;
+                        case 'constant':
+                            if( ! empty( $paymentSettings['surcharge_value'][$key] ) )
+                            {  
+                                $filter = 'Ayoola_Filter_Currency';
+                                $filter::$symbol = $data['settings']['currency_abbreviation'] ? : ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$' );
+                                $filter::$symbol .=  '';
+                                $filter = new $filter;
+                        
+                                $surchargeText .= '+ ' . $filter->filter( $paymentSettings['surcharge_value'][$key] ) . ' fixed charge';
+                                $surchargePrice += $paymentSettings['surcharge_value'][$key];
+                            }
+                        break;
+                        case 'not-calculated':
+                            $surchargeText .= 'Not Calculated.  ' . $paymentSettings['surcharge_value'][$key] . '';
+                        break;
+                    }
+                    $surchargeText = $surchargeText ? $paymentSettings['surcharge_title'][$key] . ' (' . $surchargeText . ')' : $paymentSettings['surcharge_title'][$key];
+
+                    $surchargeValue = array();
+                    @$surchargeValue['price_id'] = $surchargeText;	//	
+                    @$surchargeValue['multiple'] = 1;	//	
+                    @$surchargeValue['price'] = $surchargePrice;	//	
+                    @$surchargeValue['readonly'] = $surchargePrice;	//	
+                    @$surchargeValue['exclusive'] = true;	//	
+                    $surchargeValue['subscription_name'] = $surchargeText;
+                    $surchargeValue['subscription_label'] = $surchargeText;
+                    //$settings['total'] += $surchargePrice;
+                    unset( $newCart[$surchargeText] );
+                    $newCart[$surchargeText] = $surchargeValue;
+                }
+            }
+        }
+
 		$settings['article_url'] = array_unique( $settings['article_url'] );
-	//	var_export( $settings['total'] );
-	//	var_export( '' );  
 		$this->getStorage()->store( array( 'cart' => $newCart, 'settings' => $settings ) );
-		
-//		var_export( $newCart );
-		
-/* 		//	Notify Admin
-		$mailInfo = array();
-		$mailInfo['subject'] = 'Item added to shopping cart';
-		$mailInfo['html'] = true; 
-		$mailInfo['body'] = '
-							<html>
-							<body>
-								Someone added an item into their shopping cart. The current cart contents are as follows:
-								' . Application_Subscription_Cart::viewInLine() . '		
-							</body></html>       
-		';
-		try
-		{
-		//	var_export( $newCart );
-			$mailInfo['to'] = Ayoola_Application_Notification::getEmails();;
-			@self::sendMail( $mailInfo );
-		}
-		catch( Ayoola_Exception $e ){ null; }
- */		return true;
+        //var_export( $refreshList );
+
+        foreach( $refreshList as $method => $item )
+        {
+            //var_export( $name );
+            if( is_callable( $method ) )
+            {
+                $response = $method( $item );
+            }
+            else
+            {
+                // remove item that cannot be refreshed
+                $item['multiple'] = 0;
+                $this->subscribe( $item );
+            }
+            //var_export( $response );
+
+    
+        }
+        //exit();
+
+		return true;
     }
 	
     /**

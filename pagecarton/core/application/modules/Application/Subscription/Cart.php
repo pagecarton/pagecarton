@@ -83,7 +83,10 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		{ 
 			return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">Your shopping cart is empty.</span>' ) . '', true  );
 		}
-		$this->setViewContent(  '' . self::__( '<div class="">' . self::getXml()->saveHTML() . '</div>' ) . '', true  );
+
+        //
+        self::getXml()->saveHTML();
+		$this->setViewContent(  '' . self::__( '<div class="">' . $this->cartDiv . '</div>' ) . '', true  );
     } 
 	
     /**
@@ -133,7 +136,6 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 	public function setXml()
     {
 		$this->_xml = new Ayoola_Xml();
-	//	$values = array();
 		$div = $this->_xml->createElement( 'div' );
 		$div->setAttribute( 'style', 'overflow:auto;max-width:100%;'  );
 		$table = $this->_xml->createElement( 'table' );
@@ -173,7 +175,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				$row->appendChild( $columnNode );
 			break;
 			default:
-				$tableColumns = array( 'item', 'price', 'multiple', 'total' );
+				$tableColumns = array( '', 'item', 'total' );
 			break;
 		}
 		if( ! @$tableColumns ){ return $this->_xml->appendChild( $table ); }				
@@ -186,9 +188,10 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$cartID = md5( serialize( $values ) );
 
         $deleteUrl = $deleteMessage ? $data['settings']['edit_cart_url'] : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'empty', 'cart_id' => $cartID  ) );
-		$columnNode = @$this->_xml->createHTMLElement( 'td', '<a style="color:red" href="' . $deleteUrl . '" title="' . $deleteMessage . ' Empty Cart"><i class="fa fa-times" aria-hidden="true"></i></a>' );
+        
+		$columnNode = @$this->_xml->createHTMLElement( 'td', '<a style="color:red" href="' . $deleteUrl . '" title="' . $deleteMessage . ' Empty Cart"><i class="fa fa-trash" aria-hidden="true"></i></a>' );
 		$columnNode->setAttribute( 'align', 'center'  );
-		$columnNode->setAttribute( 'style', ' background: pink; color: red; text-align: center;'  );
+		$columnNode->setAttribute( 'style', 'color: red; text-align: center;'  );
 		$row->appendChild( $columnNode );
 		$filter = 'Ayoola_Filter_Currency';
 		$filter::$symbol = $data['settings']['currency_abbreviation'] ? : ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$' );
@@ -198,9 +201,53 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		//	Calculate culmulative price
 		$totalPrice = 0.00;
 		$noOfItems = 0;
-		foreach( $values as $name => $value )
+
+        $cartDiv = '
+        <style>
+        .pc-cart-row
+        {
+            display: flex;
+            justify-content: space-between;
+            padding:1em;
+            font-size:smaller;
+        }
+        .pc-cart-row > div
+        {
+            border: 1px solid #ccc;
+            padding: 1em;
+        }
+
+        .pc-cart-row > div.multiple-cart-column
+        {
+            flex-basis:15%;
+            text-align: left;
+        }
+        .pc-cart-row > div.item-cart-column
+        {  
+            flex-basis:30%;
+            text-align: left;
+        }
+        .pc-cart-row > div.delete-cart-column
+        {  
+            text-align: center;
+            flex-basis:5%;
+
+        }
+        .pc-cart-row > div.x-cart-column
+        {  
+            flex-basis:30%;
+            max-width: 30%;
+            overflow: auto;
+            text-align: right;;
+        }
+
+
+        </style>
+        ';
+        foreach( $values as $name => $value )
 		{
             $cartID = md5( serialize( $value ) );
+            $divRow = '';
             
 			//	Count the number of items
 			++$this->_noOfDinstinctItems; 
@@ -213,12 +260,25 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			$totalPrice = (float) $value['total'] + $totalPrice;
 			$row = $this->_xml->createElement( 'tr' );
 
+			$columnNode = $this->_xml->createElement( 'td' );
+			$text = $this->_xml->createTextNode( $value['multiple'] . ' x' );
+			$columnNode->appendChild( $text );
+            $row->appendChild( $columnNode );
+			$value['item_link'] = @$itemLink =  $value['url'] ? : 'javascript:;' ;
+            
+            $eLink = '';
+            if( empty( $value['readonly'] ) )
+            {
+                $eLink = '<a href="' . $value['item_link'] . '">' . $value['multiple'] .  '</a>';
+            }
+
+            $divRow .= '<div class="multiple-cart-column">' . $eLink . '</div>';
+
             $link = $this->_xml->createElement( 'a', htmlspecialchars( $value['subscription_label'] ) );
 			$columnNode = $this->_xml->createElement( 'td' );
 			$text = $this->_xml->createTextNode( $value['subscription_label'] );
 			$columnNode->appendChild( $text );
-			
-			$value['item_link'] = @$itemLink =  $value['url'] ? : 'javascript:;' ;
+
 			if( ! @$value['classplayer_url'] && @$value['subscription_object_name'] )
 			{
 
@@ -231,6 +291,17 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			$columnNode = $this->_xml->createElement( 'td' );
 			$columnNode->appendChild( $link );
 			$row->appendChild( $columnNode );
+
+            $eLink = '' . $value['subscription_label'] .  '';
+            if( empty( $value['readonly'] ) )
+            {
+                $eLink = '<a href="' . $value['item_link'] . '">' . $value['subscription_label'] .  '</a>';
+            }
+
+
+            $divRow .= '<div class="item-cart-column">' . $eLink . '</div>';
+
+
 			$value['price'] = $filter->filter( $value['price'] );
 			$value['total'] = $filter->filter( $value['total'] );
 
@@ -244,18 +315,30 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 					$columnNode->appendChild( $text );
 					$columnNode->setAttribute( 'align', 'center'  );
 					$row->appendChild( $columnNode );
+                    $divRow .= '<div class="x-cart-column">' . $value[$column] .  '</div>';
+
 				}
 			}
 			$value['delete_url'] = $deleteUrl2 = $deleteMessage ? $deleteMessage : Ayoola_Page::appendQueryStrings( array( 'cart_action' => 'delete', 'cart_id' => $cartID  ) );
-			$columnNode = @$this->_xml->createHTMLElement( 'td',  '<a  style="color:red" href="' . $value['delete_url'] . '" title="' . $deleteMessage . ' Delete: ' . $value['subscription_label'] . '"><i class="fa fa-times" aria-hidden="true"></i></a>' );
+			$columnNode = @$this->_xml->createHTMLElement( 'td',  '<a  style="color:red" href="' . $value['delete_url'] . '" title="' . $deleteMessage . ' Delete: ' . $value['subscription_label'] . '"><i class="fa fa-trash" aria-hidden="true"></i></a>' );
 			$columnNode->setAttribute( 'align', 'center'  );
-            $columnNode->setAttribute( 'style', ' background: pink; color: red; text-align: center;'  );
+            $columnNode->setAttribute( 'style', 'color: red; text-align: center;'  );
 			$row->appendChild( $columnNode );
+
+            $del = '<i class="fa fa-trash" aria-hidden="true"></i>';
+            if( empty( $value['readonly'] ) )
+            {
+                $del = '<a  style="color:red" href="' . $value['delete_url'] . '" title="' . $deleteMessage . ' Delete: ' . $value['subscription_label'] . '"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+            }
+            $divRow .= '<div class="delete-cart-column">' . $del . '</div>';
+
 			$table->appendChild( $row );
-			$this->_objectTemplateValues[] = $value;   
+			$this->_objectTemplateValues[] = $value;  
+            $divRow = '<div class="pc-cart-row">' . $divRow . '</div>'; 
+            $cartDiv .= $divRow;
 		}
 		
-		//	surcharges
+/* 		//	surcharges
 		$paymentSettings = Application_Settings_Abstract::getSettings( 'Payments' );
         $totalSurcharge = 0.00;
 
@@ -274,7 +357,8 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				$surchargeText = '';
 				$surchargePrice = 0;
 				$paymentSettings['surcharge_value'][$key] = doubleval( $paymentSettings['surcharge_value'][$key] );
-                $surchargePricText = $this->_xml->createTextNode( '0.00' );
+                $surchargePricTextX = '0.00';
+                $surchargePricText = $this->_xml->createTextNode( $surchargePricTextX );
 				switch( @$paymentSettings['surcharge_type'][$key] )
 				{
 					case 'percentage':   
@@ -304,15 +388,26 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				$columnNode = @$this->_xml->createElement( 'td', $surchargeText );
 				$columnNode->setAttribute( 'colspan', count( $tableColumns ) - 1 );
 				$row->appendChild( $columnNode );
+
 				$columnNode = $this->_xml->createElement( 'td' );
 				$totalSurcharge += $surchargePrice;
 				$columnNode->appendChild( $surchargePricText );
 				$columnNode->setAttribute( 'align', 'center'  );
 				$row->appendChild( $columnNode );
+
+
 				$table->appendChild( $row );
+
+                $divRow = '<div class="multiple-cart-column"> </div>';
+                $divRow .= '<div class="item-cart-column">' . $surchargeText  .  '</div>';
+                $divRow .= '<div class="x-cart-column">' . $filter->filter( $surchargePrice )  .  '</div>';
+                $divRow .= '<div class="delete-cart-column"> </div>';
+                $divRow = '<div class="pc-cart-row">' . $divRow . '</div>'; 
+                $cartDiv .= $divRow;
+        
 			}
 		}
-
+ */
 		//	Total
 		$row = $this->_xml->createElement( 'tr' );
 		$columnNode = $this->_xml->createElement( 'td' );
@@ -324,6 +419,16 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$columnNode->appendChild( $text );
 		$columnNode->setAttribute( 'align', 'center'  );
 		$row->appendChild( $columnNode );
+        $divRow = '<div class="multiple-cart-column"></div>';
+        $divRow .= '<div class="item-cart-column">Total Due</div>';
+        $divRow .= '<div class="x-cart-column">' . $filter->filter( $grandTotalPrice )  .  '</div>';
+        $divRow .= '<div class="delete-cart-column">' . '<a style="color:red" href="' . $deleteUrl . '" title="' . $deleteMessage . ' Empty Cart"><i class="fa fa-trash" aria-hidden="true"></i></a>'  .  '</div>';
+
+        $divRow = '<div class="pc-cart-row">' . $divRow . '</div>'; 
+        $cartDiv .= $divRow;
+
+        $this->cartDiv = $cartDiv;
+
 		$table->appendChild( $row );
 
 		$this->_xml->appendChild( $div );
