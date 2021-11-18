@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
     <link rel="stylesheet" href="css/aos.css">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css"> 
   </head>
   <body>
   
@@ -50,7 +50,7 @@
                 <div class="col-8 text-right">
                     <nav class="site-navigation" role="navigation" data-pc-menu-ignore="1">
                         <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
-                            <li><a href="/">Home</a></li>
+                            <li class="active"><a href="/">Home</a></li>     
                             <widget parameters='{ "class": "Ayoola_Menu" }'>
                                 <li><a href="{{{url}}}">{{{option_name}}}</a></li>
                             </widget>
@@ -386,7 +386,7 @@
               <p>{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}</p>
             </div>
             <div class="col-md-3 ml-auto">
-              <!-- <h3 class="footer-heading mb-4">Navigation</h3> -->
+              <!-- <h3 class="footer-heading mb-4">Navigation</h3> --> 
               <ul class="list-unstyled float-left mr-5">
                 <widget parameters='{ "class": "Ayoola_Menu" }'>
                   <li><a href="{{{url}}}">{{{option_name}}}</a></li>
