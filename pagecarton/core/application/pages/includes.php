@@ -5,10 +5,10 @@
 * LICENSE
 *
 * @category PageCarton
-* @package /img/placeholder-image-jpg
+* @package /
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: placeholder-image-jpg.php	Thursday 18th of November 2021 07:25:57 AM	ayoola@ayoo.la $ 
+* @version $Id: includes.php	Thursday 18th of November 2021 07:25:44 AM	ayoola@ayoo.la $ 
 */
 //	Page Include Content

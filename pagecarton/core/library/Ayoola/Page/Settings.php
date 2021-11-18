@@ -35,13 +35,13 @@ class Ayoola_Page_Settings extends PageCarton_Settings
     {
         if( $previousData['data']['default_layout'] === $newData['data']['default_layout'] )
         {
-            return false;
+            //return false;
         }
 
-        
   		$defaultPages = Ayoola_Page_Editor_Sanitize::$defaultPages;	
 		
 		//	copy page content from theme
+		Ayoola_Page_Editor_Layout::resetDefaultLayout();
 		$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
 		$class2 = new Ayoola_Page_Editor_Sanitize(); 
 		$class2->sanitize( $themeName ); 
