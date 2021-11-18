@@ -360,17 +360,20 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      * @param string $section
      * @return array
      */
-    public static function getSiteWideWidgets( $section )   
+    public static function getSiteWideWidgets( $section, $url = null )   
     {
         try
         {
-            $widgets = Ayoola_Object_PageWidget::getInstance()->select( null, array( 'section_name' => $section, 'url' =>  '/sitewide-page-widgets' ) );
+            $data['section'] = $section;
+            $data['url'] = $url;
 
-            self::setHook( static::getInstance(), __FUNCTION__, $widgets );
+            $data['widgets'] = Ayoola_Object_PageWidget::getInstance()->select( null, array( 'section_name' => $section, 'url' =>  '/sitewide-page-widgets' ) );
+
+            self::setHook( static::getInstance(), __FUNCTION__, $data );
 
             $classes = array();
 
-            foreach( $widgets as $widget )
+            foreach( $data['widgets'] as $widget )
             {
                 $class = $widget['class_name'];
                 if( ! Ayoola_Loader::loadClass( $class ) )
@@ -706,7 +709,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                 $sectionContent['include'] .= "
                 if( method_exists( '" . __CLASS__ . "', 'getSiteWideWidgets' ) )
                 {
-                    \${$siteObjectName} = " . __CLASS__ . "::getSiteWideWidgets( '" . $section . "' );
+                    \${$siteObjectName} = " . __CLASS__ . "::getSiteWideWidgets( '" . $section . "', Ayoola_Application::getPresentUri() );
                 }
                 else
                 {
