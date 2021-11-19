@@ -159,7 +159,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		switch( $mode )
 		{
 			case 'mini':
-				$tableColumns = array( 'item', 'price', 'total' );
+				$tableColumns = array( 'item', 'total' );
 			break;
 			case 'cart_no_of_items':
 				$columnNode = $this->_xml->createElement( 'th', 'Item Count' );
@@ -178,7 +178,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				$row->appendChild( $columnNode );
 			break;
 			default:
-				$tableColumns = array( '', 'item', 'total' );
+				$tableColumns = array( 'item', 'total' );
 			break;
 		}
 		if( ! @$tableColumns ){ return $this->_xml->appendChild( $table ); }				
