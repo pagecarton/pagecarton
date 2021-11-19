@@ -271,7 +271,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                 }
                 $parameters = is_array( $parameters ) ? $parameters : array();
                 $parameters = $parameters + array( 
-                    'markup_template' => $widgetContent, 
+                    'markup_template' => trim( $widgetContent ) ? $widgetContent : '', 
                     'markup_template_namespace' => 'xx1233xxx', 
                     'markup_template_mode' => __CLASS__, 
                     'no_init' => true, 
@@ -462,8 +462,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                                         'parameter_suffix' => '[' . $counter . ']', 
 						            )
                                     + $parametersX;  
-                
-
+                    
                     $exportable =
 '<widget>
     <script type="application/json">
