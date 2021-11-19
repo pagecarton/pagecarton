@@ -121,6 +121,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
         }
         $values['__user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
         $values['__ip'] = Ayoola_Application::getRuntimeSettings( 'user_ip' );
+        $values['__duuid'] = @$_COOKIE['__duuid'];
 		if( empty( $options['record_row_id'] ) && empty( $values[$idColumn] ) )
 		{
 			
