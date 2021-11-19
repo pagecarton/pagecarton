@@ -211,7 +211,6 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
         {
             display: flex;
             justify-content: space-between;
-            padding:1em;
             font-size:smaller;
         }
         .pc-cart-row > div

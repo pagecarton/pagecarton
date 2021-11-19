@@ -597,7 +597,6 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     {
 		$queryString = self::buildQueryStrings();
 		$currentUrl = rtrim( Ayoola_Application::getRequestedUri(), '/' );
-	//	if
 		switch( Ayoola_Application::$mode )
 		{
 			case 'document':
