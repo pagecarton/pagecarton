@@ -223,7 +223,7 @@ class Application_Subscription extends Application_Subscription_Abstract
         if( ! empty( $values ) )
         {
             @$settings['currency_abbreviation'] = $values['currency_abbreviation'] ? : Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' );
-            @$settings['return_url'] = $values['return_url'] ? : 'http://' . Ayoola_Page::getDefaultDomain() . '/';
+            @$settings['return_url'] = $values['return_url'] ? : '' . Ayoola_Page::getHomePageUrl() . '';
             @$settings['read_only'] = $values['read_only'];
             @$settings['edit_cart_url'] = $values['edit_cart_url'] ? : 'javascript:';
             

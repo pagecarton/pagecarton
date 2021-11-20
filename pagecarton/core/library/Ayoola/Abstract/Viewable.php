@@ -434,13 +434,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	{
         $class = get_class( $object );
 
-    //    if( static::isSettingHook( $class ) )
-        {
-            // Finish one before embarking on another
-            //  possibly avoid infinite loop
-
-        }
-
         foreach( self::getHooks( $class ) as $hook )
         {
             if( ! Ayoola_Loader::loadClass( $hook ) )

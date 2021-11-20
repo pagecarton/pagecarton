@@ -32,7 +32,7 @@ class Application_Subscription_Checkout_Order extends Ayoola_Dbase_Table_Abstrac
      *
      * @param int
      */
-    protected $_tableVersion = '0.06';
+    protected $_tableVersion = '0.08';
 
 	protected $_dataTypes = array
 	( 

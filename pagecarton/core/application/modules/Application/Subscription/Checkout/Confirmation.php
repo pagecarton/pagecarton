@@ -79,8 +79,6 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		{ 
             $identifier['status'] = $setOrderInfo['order_status'];
         }
-    //    var_export( $setOrderInfo  );
-    //    return false;
 		if( Ayoola_Loader::loadClass( $className ) )
 		{ 
 			if( method_exists( $className, 'checkStatus' ) )
@@ -99,14 +97,24 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 			}
 		}
 
-
-		$this->setViewContent( "<br><h3>Thank you! Order Confirmed! </h3><br>" );
-		$this->setViewContent( "<h4>STATUS: "  . self::$checkoutStages[intval( $identifier['status'] )] . "</h4><br>" );
-		$this->setViewContent( "<h4>ORDER NUMBER: " . $orderNumber . "</h4><br>" );
+		$this->setViewContent( "<br><h2>Thank you! Order Confirmed! </h2><br>" );
+		$this->setViewContent( "
+        <p><b>STATUS</b>: "  . self::$checkoutStages[intval( $identifier['status'] )] . " <br>
+        <b>ORDER NUMBER</b>: " . $orderNumber . "</p><br>" 
+        );
 		$this->setViewContent( "<p>" . ( Application_Settings_Abstract::getSettings( 'Payments', 'order_confirmation_message' ) ? : "You can print this page for your records. Your order number is a unique identifier that should be mentioned when referencing this order." ) . "</p><br>" );
-		$this->setViewContent( "<h4>Payment Option</h4><br>" );   
-		$data['checkoutoption_logo'] = htmlspecialchars_decode( $data['checkoutoption_logo'] );
-		$this->setViewContent( "<p>{$data['checkoutoption_logo']}</p><br>" );		
+		
+        if( ! empty( $data['logo'] ) )
+        {
+            $data['checkoutoption_logo'] = '<img height="100px" src="' . Ayoola_Application::getUrlPrefix() . $data['logo'] . '" alt="' . $data['checkoutoption_name'] . ' logo" >';		
+        }
+		
+        if( ! empty( $data['checkoutoption_logo'] ) )
+        {
+            $this->setViewContent( "<h4>Payment Option</h4><br>" );   
+            $data['checkoutoption_logo'] = htmlspecialchars_decode( $data['checkoutoption_logo'] );
+            $this->setViewContent( "<p>{$data['checkoutoption_logo']}</p><br>" );		
+        }
 		if( $identifier['status'] )
 		{
 			$this->setViewContent( "<h4>Order Details</h4><br>" );
@@ -120,7 +128,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 									);
 			$notes = Application_Settings_Abstract::getSettings( 'Payments', 'order_notes' );
 
-			Application_Subscription_Cart::clear();
+			//Application_Subscription_Cart::clear();
 
 			$notes ? $this->setViewContent( "<h4>Note:</h4><br>" ) : null;
 			$notes ? $this->setViewContent( $notes ) : null;          
@@ -129,8 +137,8 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		{
 			$this->setViewContent( "<h4>What Next???</h4><br><p>You can checkout with other payment methods.</p><br>" );
 			$this->setViewContent( Application_Subscription_Checkout::viewInLine() );
-			$this->setViewContent( "<h4>Order Details</h4><br>" );
-			$this->setViewContent( Application_Subscription_Cart::viewInLine() );
+			$this->setViewContent( "<br><br><h4>Order Details</h4><br>" );
+			$this->setViewContent( Application_Subscription_Cart::viewInLine() . "<br><br><br><br>");
 		}
 		//	SEND THE user AN EMAIL IF HE IS LOGGED INN
 		$emailAddress = array();

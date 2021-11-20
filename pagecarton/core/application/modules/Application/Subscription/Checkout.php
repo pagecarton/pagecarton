@@ -123,7 +123,8 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
             {
                 $api = $values['checkoutoption_name'] = 'Application_Subscription_Checkout_Default';
             }
-            Application_Subscription_Checkout::getOrderNumber( $values['checkoutoption_name'], true );
+            //  generate order number
+            $orderNumberGenerated = Application_Subscription_Checkout::getOrderNumber( $values['checkoutoption_name'] );
             if( $api && Ayoola_Loader::loadClass( $api ) )
             { 
                 $this->setViewContent( $api::viewInLine( $checkoutInfo ), true );
@@ -251,19 +252,27 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		}
 		return $className;
     } 
-	
+		
+    /**
+     * Returns the current order number
+     * 
+     */
+	public static function getCurrentOrderInfo()
+    {
+		return self::getObjectStorage( 'order_info' )->retrieve() ? : array();
+    }
+
     /**
      * Returns the current order number
      * 
      */
 	public static function getOrderNumber( $orderApi = null, $newOrderNumber = false )
     {
-		$storage = new Ayoola_Storage();
-		$storage->storageNamespace = __CLASS__ . 'orderInfo' . $orderApi;
+		$storage = self::getObjectStorage( 'order_info' );
 		if( ! $orderApi )
 		{ 
-			$storage->clear(); 
-			return;
+			//$storage->clear(); 
+			//return;
 		}
 		if( $newOrderNumber )
 		{ 
@@ -272,43 +281,48 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		}
 		$email = strtolower( ( Ayoola_Form::getGlobalValue( 'email_address' ) ? : Ayoola_Form::getGlobalValue( 'email' ) ) ? : Ayoola_Application::getUserInfo( 'email' ) );
         $orderInfo = $storage->retrieve();
-		if( ! $orderInfo )
-		{
-			//	Store order number to avoid multiple table insert
-			$cart = self::getStorage()->retrieve();
-			if( ! $orderInfo || ( $orderInfo['cart_id'] != md5( serialize( $cart ) ) || ( $orderInfo['order_api'] != $orderApi ) ) )
-			{
-				$table = new Application_Subscription_Checkout_Order();
-				$insert = array( 
-									'order' => $cart, 
-									'currency' => $cart['settings']['currency_abbreviation'], 
-									'order_api' => $orderApi, 
-									'username' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ), 
-									'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 
-									'email' => $email, 
-									'time' => time(), 
-									'total' => $cart['settings']['total'], 
-									'order_status' => 1,   
-									'article_url' => array_unique( $cart['settings']['article_url'] ),
-									);
-				$insertInfo = $table->insert( $insert );
-				$orderNumber = $insertInfo['insert_id'];
-				$orderInfo = array();
-				$orderInfo['cart_id'] = md5( serialize( $cart ) );
-				$orderInfo['order_number'] = $orderNumber;
-				$orderInfo['order_api'] = $orderApi;
-				
-				$storage->store( $orderInfo );
-				if( $email )
-				{
-					$mailInfo['to'] = $email;
-					$mailInfo['subject'] = 'Your order no ' . $orderInfo['order_number'];
-					$mailInfo['body'] = '';
-					$mailInfo['body'] .= Application_Subscription_Checkout_Order_View::viewInLine( array( 'order_id' => $orderInfo['order_number'] ) );
-					self::sendMail( $mailInfo );
-				}
-			}
-		}
+		
+        //	Store order number to avoid multiple table insert
+        $cart = self::getStorage()->retrieve();
+        if( 
+            ! $orderInfo
+            || empty( $orderInfo['order_number'] )
+            || $orderInfo['cart_id'] != md5( serialize( $cart ) ) 
+            //  it doesn't make sense to have new order number because of the change of payment method
+            //|| ( $orderInfo['order_api'] != $orderApi )
+        )
+        {
+            $table = new Application_Subscription_Checkout_Order();
+            $insert = array( 
+                                'order' => $cart, 
+                                'currency' => $cart['settings']['currency_abbreviation'], 
+                                'order_api' => $orderApi, 
+                                'username' => strtolower( Ayoola_Application::getUserInfo( 'username' ) ), 
+                                'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 
+                                'email' => $email, 
+                                'time' => time(), 
+                                'total' => $cart['settings']['total'], 
+                                'order_status' => 1,   
+                                'article_url' => array_unique( $cart['settings']['article_url'] ),
+                                );
+            $insertInfo = $table->insert( $insert );
+            $orderNumber = $insertInfo['insert_id'];
+            $orderInfo = array();
+            $orderInfo['cart_id'] = md5( serialize( $cart ) );
+            $orderInfo['order_number'] = $orderNumber;
+            $orderInfo['order_api'] = $orderApi;
+
+            $storage->store( $orderInfo );
+            if( $email )
+            {
+                $mailInfo['to'] = $email;
+                $mailInfo['subject'] = 'Your order no ' . $orderInfo['order_number'];
+                $mailInfo['body'] = '';
+                $mailInfo['body'] .= Application_Subscription_Checkout_Order_View::viewInLine( array( 'order_id' => $orderInfo['order_number'] ) );
+                self::sendMail( $mailInfo );
+            }
+        }
+
         self::$_orderNumber =  $orderInfo['order_number'];
 		return self::$_orderNumber;
     } 
@@ -350,7 +364,6 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		$formIncluded = array();
 		
 		$orderForm = Application_Settings_CompanyInfo::getSettings( 'Payments', 'order_form' );
-    //	var_export( $orderForm );
         $orderFormClass = null;
         if( $orderForm )
         {
@@ -469,7 +482,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
             {
                 $label = 'Select Payment Option';
             }
-			$fieldset->addElement( array( 'name' => 'checkoutoption_name', 'label' => $label , 'type' => 'Radio', 'value' => @$values['checkoutoption_name'] ), $options );
+			$options ? $fieldset->addElement( array( 'name' => 'checkoutoption_name', 'label' => $label , 'type' => 'Radio', 'value' => @$values['checkoutoption_name'] ), $options ) : null;
 		}
 		if( $cart['settings']['terms_and_conditions'] )
 		{
