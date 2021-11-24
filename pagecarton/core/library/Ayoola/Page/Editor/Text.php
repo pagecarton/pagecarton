@@ -224,6 +224,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                     preg_match( '|<script[^><]*>[\s]*({.*})[\s]*</script>|isU', $widgetContent, $pSection );
                     if( $pSection )
                     {
+                        $widgetContent = str_ireplace( $pSection[0], '', $widgetContent );
                         $pText = $pSection[1];
                     }
                 }
