@@ -403,7 +403,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                                 }
                                 else
                                 {
-                                    if( ! empty( $options['where_alternative'][$key] && is_array( $options['where_alternative'][$key] ) ) )
+                                    if( ! empty( $options['where_alternative'][$key] ) && is_array( $options['where_alternative'][$key] ) )
                                     {
                                         $alternativeWhereToFind[$key] = $options['where_alternative'][$key];
                                         foreach( $options['where_alternative'][$key] as $alternativeWhere => $alternativeValue )
