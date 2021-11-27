@@ -47,7 +47,7 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
         $log = array();
 	//	$log['total_run_time'] = microtime( true ) - $log['request_time'];
 		$log['total_run_time'] = Ayoola_Application::getRuntimeSettings( 'total_runtime' );
-	//	var_export( $log['total_run_time'] );  
+		//var_export( $log['total_run_time'] );  
 	//	var_export( $log ); 
 		$timestamp = date( "Y-m-d H:i:s" ); // this line is for demonstration
 

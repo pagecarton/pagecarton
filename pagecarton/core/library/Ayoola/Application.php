@@ -148,7 +148,7 @@ class Ayoola_Application
      */
 	public static function getRuntimeSettings( $key = null )
     {
-		return ! array_key_exists( $key, self::$_runtimeSetting ) ? (array) self::$_runtimeSetting : self::$_runtimeSetting[$key];
+		return is_null( $key ) ? (array) self::$_runtimeSetting : self::$_runtimeSetting[$key];
     }
 
     /**
@@ -1763,7 +1763,7 @@ class Ayoola_Application
      */
     public static function log()
     {
-		self::$accessLogging ? Application_Log_View_Access::log() : null; //	Log request
+		Application_Log_View_Access::log();
     }
 
     /**
