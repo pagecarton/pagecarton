@@ -57,7 +57,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
                 $delay = 0;
             }
         }
-        if( ( ! $this->loadTableDataFromFile( $scopeFile ) || $delay ) && ! $this->proccesses )
+        if( ( ! $this->loadTableDataFromFile( $scopeFile ) || $delay ) AND empty( $this->proccesses ) )
         {
             Ayoola_Doc::createDirectory( $processDir );
             //var_export( $processDir );

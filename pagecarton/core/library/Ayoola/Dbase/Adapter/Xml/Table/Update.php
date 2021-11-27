@@ -45,8 +45,20 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 		{
             $this->setXml();
 
+            $delay = 0;
+            if( $class = $this->getTableInfo( 'table_class' ) AND Ayoola_Loader::loadClass( $class ) AND property_exists( $class, 'insertDelay' ) AND $m = filemtime( $filename ) )
+            {
+                $delay = intval( $class::$insertDelay );
+                $difference = time() - $m;
+                if( $difference > $delay )
+                {
+                    $delay = 0;
+                }
+            }
+    
             $processDir = $this->getMyTempProcessDirectory();
-            if( ! $this->loadTableDataFromFile( $filename  ) )
+            //if( ! $this->loadTableDataFromFile( $filename ) )
+            if( ( ! $this->loadTableDataFromFile( $filename ) || $delay ) AND empty( $this->proccesses ) )
             {
                 Ayoola_Doc::createDirectory( $processDir );
                 $tempData = serialize( func_get_args() );
@@ -80,15 +92,12 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 			}
 			
 			//	Save only when an editing was done
-		//	var_export( $result );
 			$result ? $this->saveFile( $filename ) : null;
-		//	$this->saveFile( $filename );
+		    //	$this->saveFile( $filename );
 		}
         if( $processes = Ayoola_Doc::getFilesRecursive( $processDir ) AND empty( $this->proccesses ) )
         {
             $this->proccesses = $processes;
-        //    var_export( $processes );
-        //    exit( $processes );
             $cxi = 0;
             foreach( $processes as $process )
             {
