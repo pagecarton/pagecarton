@@ -57,7 +57,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
             }
     
             $processDir = $this->getMyTempProcessDirectory();
-            //if( ! $this->loadTableDataFromFile( $filename ) )
             if( ( ! $this->loadTableDataFromFile( $filename ) || $delay ) AND empty( $this->proccesses ) )
             {
                 Ayoola_Doc::createDirectory( $processDir );
