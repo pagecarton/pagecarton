@@ -46,11 +46,25 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 
         $processDir = $this->getMyTempProcessDirectory();
         $scopeFile = $this->getFilenameAccordingToScope( false, $this->getAccessibility() );
-        if( ! $this->loadTableDataFromFile( $scopeFile ) )
+        //var_export( $this->getTableInfo() );
+        $delay = 0;
+        if( $class = $this->getTableInfo( 'table_class' ) AND Ayoola_Loader::loadClass( $class ) AND property_exists( $class, 'insertDelay' ) AND $m = filemtime( $scopeFile ) )
+        {
+            $delay = intval( $class::$insertDelay );
+            $difference = time() - $m;
+            if( $difference > $delay )
+            {
+                $delay = 0;
+            }
+        }
+        if( ( ! $this->loadTableDataFromFile( $scopeFile ) || $delay ) && ! $this->proccesses )
         {
             Ayoola_Doc::createDirectory( $processDir );
+            //var_export( $processDir );
+
             $tempData = serialize( func_get_args() );
-            $tempFile = $processDir . DS . md5( $tempData . time() );
+
+            $tempFile = $processDir . DS . md5( $tempData . microtime() );
             Ayoola_File::putContents( $tempFile, $tempData );
             return true;
         }
@@ -106,7 +120,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 
             }
 		}
-
 		$recordRowId = $this->getXml()->autoId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );  		
 		$row = $this->getXml()->createElement( self::TAG_TABLE_ROW );  
 		$idColumn = $this->getTableName() . '_id';
@@ -144,7 +157,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		}
 		
 		$this->saveFile( $filename );
-    
+
         if( $processes = Ayoola_Doc::getFilesRecursive( $processDir ) AND empty( $this->proccesses ) )
         {
             $this->proccesses = $processes;
