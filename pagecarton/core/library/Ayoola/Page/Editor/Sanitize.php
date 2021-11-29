@@ -149,6 +149,12 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                     //	dont cause unfinite loop by updating theme when a theme is being sanitized
                     continue;
                 }
+                if( stripos( $page, '/sitewide-page-widgets' ) === 0 )
+                {
+                    //	doing this avoids clearing site widget from dbase
+                    continue;
+                }
+
                 //   var_export( $page );
                 $done[$page] = true;
                 //	sanitize now on theme level
