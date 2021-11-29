@@ -954,9 +954,16 @@ class Ayoola_Application
 				do
 				{
 					self::$mode = 'document';
+
+
                     $fn = DOCUMENTS_DIR . $uri;
 
+
                     if( $fn = Ayoola_Loader::checkFile( $fn ) )
+                    {
+                        return $uri;
+                    }
+                    elseif( Ayoola_Doc::getDocumentPath( $uri ) )
                     {
                         return $uri;
                     }
@@ -1145,6 +1152,10 @@ class Ayoola_Application
                     {
                         $fn = $changedFile;
                     }
+                }
+                elseif( $realPath = Ayoola_Doc::getDocumentPath( $uri ) )
+                {
+                    $fn = $realPath;
                 }
 
                 //	cache some files forever to reduce connection rates

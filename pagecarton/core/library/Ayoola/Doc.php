@@ -17,7 +17,6 @@
 
 require_once 'Ayoola/Doc/Abstract.php';  
 
-
 /**
  * @category   PageCarton
  * @package    Ayoola_Doc
@@ -91,8 +90,6 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public function init()
     {
-	//	$paths = (array) $this->getParameter( 'option' );
-	//	var_export( $this->getParameter() );
 /* 		foreach( $paths as $path )
 		{
 			$path ? $this->loadFile( $path ) : null;
@@ -107,7 +104,6 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public static function getInstance()
     {
-		//if( is_null( self::$_instance ) ){ self::$_instance = new self; }
 		return new self;
     } 	
 	
@@ -119,30 +115,26 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public function loadFile( $path )
     {
-    //    var_export( $path );
-    //    exit();
+        if( ! $path )
+        {
+            return false;
+        }
+
 		require_once 'Ayoola/Loader.php';
 		if( ! $absolutePath = Ayoola_Loader::checkFile( $path, array( 'prioritize_my_copy' => true ) ) )
 		{
-	//	var_export( $path );
 			require_once 'Ayoola/Doc/Exception.php';
 			throw new Ayoola_Doc_Exception( basename( $path ) . ' Not Found' );	
 			return false;
 		}
-//		var_export(  Ayoola_Loader::getValidIncludePaths( $path ) );
-//		var_export( $absolutePath );
-//		exit();
+
 		if( $includePaths = array_keys( Ayoola_Loader::getValidIncludePaths( $path ) ) )
 		{
 			$documentDirectory = array_shift( $includePaths );
 			$documentDirectory = $documentDirectory . DS . DOCUMENTS_DIR;
 			self::setDocumentDirectory( $documentDirectory );
-						//var_export( self::getDocumentDirectory() );
-					//	var_export( $documentDirectory );
 		}
-//		var_export( $absolutePath );
-//		var_export( var_export( $documentDirectory ) );
-//		exit();
+
 		$this->setPaths( $absolutePath );
     } 
 	
@@ -155,9 +147,10 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public function setAdapter( $paths = null )
     {
+
 		$paths = $paths ? : $this->getPaths();
 		require_once 'Ayoola/Doc/Adapter.php';
-//		var_export( $paths );
+
         $this->_adapter = new Ayoola_Doc_Adapter( $paths );
     } 
 	
@@ -174,7 +167,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		{
 			$this->setAdapter( $paths );
 		}
-		//var_export( $this->_adapter );
+
 		return $this->_adapter;
     } 
 	
@@ -200,7 +193,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			try
 			{
 				$storage = new Ayoola_Storage(); 
-				$storage->storageNamespace = __CLASS__ . Ayoola_Application::getUrlPrefix() . $uri . 's--d-d-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
+				$storage->storageNamespace = __CLASS__ . Ayoola_Application::getUrlPrefix() . $uri . 's-d-d-d-sw' . Ayoola_Application::getDomainSettings( 'protocol' );
 				$storage->setDevice( 'File' );
 				if( ! $dedicatedUrl = $storage->retrieve() OR $options['disable_cache'] )  
 				{
@@ -211,9 +204,11 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
                     {
                         unlink( $link );
                     }
-					$j = new Ayoola_Doc( array( 'option' => $uri ) );
-					$j = str_replace( '/', DS, $j::getDocumentDirectory() . $uri ); 
-					$j = @filemtime( Ayoola_Loader::checkFile( $j, array( 'prioritize_my_copy' => true ) ) );
+                    if( ! $m = self::getDocumentPath( $uri ) )
+                    {
+                        return $uri;
+                    }
+					$j = filemtime( $m );
 					$domain = Ayoola_Page::getDefaultDomain();
 					$domain = DOMAIN;
 					$dedicatedUrl = Ayoola_Application::getDomainSettings( 'protocol' ) . "://{$domain}" . Ayoola_Application::getUrlPrefix() . "{$uri}?document_time={$j}";					
@@ -263,13 +258,30 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     public static function getDocumentPath( $uri )
     {
         $dir = self::getDocumentDirectory();
-    //    if( ! $path = Ayoola_Loader::checkFile( 'documents/__/' . $uri, array( 'prioritize_my_copy' => true ) ) )
+        //    if( ! $path = Ayoola_Loader::checkFile( 'documents/__/' . $uri, array( 'prioritize_my_copy' => true ) ) )
 
         //  looking for changed document only in the current site context so changes
         //  pc.com changes for child sites isn't proper
-        if( ! $path = Ayoola_Doc_Browser::getDocumentsDirectory() .  '/__' . $uri OR ! is_file( $path)  )
+        if( stripos( $uri, '/__/' ) === 0 )
         {
-            $path = Ayoola_Loader::checkFile( 'documents' . $uri, array( 'prioritize_my_copy' => true )  );
+            $docLoc = explode( '/__/', $uri );
+
+            $uriX = array_pop( $docLoc );
+            if( $path = Ayoola_Loader::checkFile( 'documents' . '/' . $uriX, array( 'prioritize_my_copy' => true )  ) )
+            {
+                array_shift( $docLoc );
+                if( $docLoc )
+                {
+                    $_GET['__docloc'] = $docLoc;
+                }
+            }
+        }
+        elseif( ! $path = Ayoola_Doc_Browser::getDocumentsDirectory() .  '/__' . $uri OR ! is_file( $path)  )
+        {
+            if( ! $path = Ayoola_Loader::checkFile( 'documents' . $uri, array( 'prioritize_my_copy' => true )  ) )
+            {
+
+            }
         }
         return $path;
     } 
@@ -291,6 +303,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public function setPaths( $paths )
     {
+
 		if( is_array( $paths ) )
 		{
 			$this->_paths = array_merge( $this->getPaths(), $paths );
@@ -323,11 +336,10 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			$path = str_ireplace( DS, '/', $path );		
 			$dirPath = str_ireplace( DS, '/', $dirPath );		
 			$uri = str_ireplace( $dirPath, '', $path );
-		//	var_export( $dirPath );
+
 			if( $uri != $path ){ break; }
 		}
-		//var_export( self::getDocumentDirectory() );
-		//var_export( $path );
+
 		return $uri;
     } 
 	
@@ -339,6 +351,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     static public function uriToPath( $uri )
     {	
+
 		//	Retrieve the url from the path
 		require_once 'Ayoola/Loader.php';
 		$fullDirPath = Ayoola_Loader::checkFile( DOCUMENTS_DIR . $uri );
@@ -362,7 +375,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			$value = self::pathToUri( $value );
 			$values[$key] = $value;
 		}
-		//var_export( $uris );
+
 		return $values;
     } 
 	
@@ -375,8 +388,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     static public function getFiles( $directory, array $options = null )
     {
 		$keyZ = md5( __METHOD__ . serialize( func_get_args() ) . 'fff=-' );
-//		$storageInfo = array( 'id' => $keyZ, 'device' => 'File', 'time_out' => 100000, );
-	//	$storage = static::getObjectStorage( $storageInfo );
+
 		
 		if( empty( $options['no_cache'] ) )
 		{
@@ -384,38 +396,33 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			{
 				return static::$_properties[__METHOD__][$keyZ];
 			}
-	//		if( $storage->retrieve() !== false )
+	    //		if( $storage->retrieve() !== false )
 			{
 				//	dont know if this won't cause serious side effects'
-		//		return $storage->retrieve();
+
 			}
 		}
-	//		var_export( $storage->retrieve() );
-	//	var_export( $directory );
-		
-	//	$storage->store( array() );		
+
 		static::$_properties[__METHOD__][$keyZ] = array();
 
-	//	var_export( get_called_class() );
 		$files = array();    
-	//	var_export( $directory );
+
 		if ( ! is_dir( $directory ) ) 
 		{
-		//	var_export( $directory );
+
 			return $files;
-		//	throw new Ayoola_Doc_Exception( 'Invalid Directory - ' . $directory );   
+
 		}
 		if ( ! ( $handle = opendir( $directory ) ) ) 
 		{
 			return $files;
-//			throw new Ayoola_Doc_Exception( 'Directory cannot be opened  for reading - ' . $directory );
+
 		}
 		while ( ( $filename = readdir( $handle ) ) !== false ) 
 		{
 			$file = $directory . DS . $filename;
 			$file = str_replace( DS, '/', $file );
-						//var_export( $file );
-		//	self::v( $file ); 
+
 			if( is_file( $file ) )
 			{
 				if( in_array( $file, $files ) )
@@ -433,7 +440,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
                 {
                     continue;
                 }
-	//			$files[$file] = $file; 
+
 				$key = $file;
 				if( ! empty( $options['key_function'] ) )
 				{
@@ -441,7 +448,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 					$key = $key( $file );
 					if( $key === false )
 					{
-				//		var_export( $key );
+
 						continue;
 					}
 				}
@@ -458,7 +465,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 							@$oldKey = $oldKey ? : $key;
 							$key = $oldKey . @$counterI++;
 						}
-				//		self::v( $key ); 
+
 					}
 				}
 				$key = str_replace( DS, '/', $key );
@@ -472,10 +479,10 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			
 			if( $filePath = Ayoola_Loader::checkFile( $file ) )
 			{ 
-				//	self::v( $filePath );
+
  				if( in_array( $filePath, $files ) )
 				{
-				//	self::v( $filePath );
+
 					continue;
 				}
                 $extension = array_pop( explode( ".", strtolower( $file ) ) );
@@ -488,7 +495,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
                 {
                     continue;
                 }
-				//	self::v( $options['key_function'] ); 
+
  				$key = $filePath;
 				if( ! empty( $options['key_function'] ) )
 				{
@@ -502,7 +509,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 						if( is_numeric( $key ) )
 						{
 							$key = strval( $key + ++self::$_counter + microtime( false) );
-						//	self::v( $filePath ); 
+
 						}
 						else
 						{
@@ -514,17 +521,17 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 				$key = str_replace( DS, '/', $key );
 				$filePath = str_replace( DS, '/', $filePath );
 				$files[$key] = $filePath; 
-		//		var_export( $key );
+
 			}
 		}
 		closedir( $handle );
 		ksort( $files, SORT_NUMERIC );
-	//	( $files );
+
 		$files = array_unique( $files );
-	//	self::v( $files );
+
 		if( empty( $options['no_cache'] ) )
 		{
-		//	$storage->store( $files );		
+
 		}
 		static::$_properties[__METHOD__][$keyZ] = $files;
 		return $files;
@@ -539,22 +546,19 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     static public function getFilesRecursive( $directory, array $options = null )
     {
 		$files = self::getFiles( $directory, $options );
-	//	var_export( $files );
+
 		$directories = self::getDirectoriesRecursive( $directory );
-	//	if( stripos( $directory, 'localuser' ) )
+	    //	if( stripos( $directory, 'localuser' ) )
 		{
-	//		PageCarton_Widget::v( $files );
-	//		PageCarton_Widget::v( $directories );
+
 		}
 		foreach( $directories as $directory )
 		{
-		//	$files = array_merge( $files, self::getFiles( $directory, $options ) );
-		//	$files = @array_merge( $files, self::getFiles( $directory, $options ) ) ? : array();
-		//	self::v( self::getFiles( $directory, $options ) );
+
 			$files = @array_merge( $files, self::getFiles( $directory, $options ) ) ? : array();
-		//	$files += self::getFiles( $directory, $options ) ? : array();
+
 		}
-	//	self::v( $files );
+
 		ksort( $files, SORT_NUMERIC );
 		return $files;
     } 
@@ -568,32 +572,26 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     static public function getDirectories( $directory )
     {
 		$directories = array();
-  //      if( basename( $directory ) === 'data' )
+        //      if( basename( $directory ) === 'data' )
         {
-   //    PageCarton_Widget::v( $directory );
-  //     PageCarton_Widget::v( is_dir( trim( $directory ) ) );
-    //   PageCarton_Widget::v( $directories );
+
         }
 		if ( ! is_dir( $directory )) 
 		{
 			return array();
-		//	throw new Ayoola_Doc_Exception( 'Invalid Directory - ' . $directory );
+
 		}
 		if ( ! ( $handle = opendir( $directory ) ) ) 
 		{
 			return array();
-		//	throw new Ayoola_Doc_Exception( 'Directory cannot be opened  for reading - ' . $directory );
+
 		}
 		while ( ( $innerDirectoryBaseName = readdir( $handle ) ) !== false ) 
 		{
 			$innerDirectory = $directory . DS . $innerDirectoryBaseName;
 		//	if( basename( $directory ) === 'data' )
 			{
-		//		PageCarton_Widget::v( $innerDirectoryBaseName );
-		//		PageCarton_Widget::v( is_dir( $innerDirectory ) );
-		//		PageCarton_Widget::v( trim( $innerDirectoryBaseName, '.' ) );
-	//     PageCarton_Widget::v( is_dir( trim( $directory ) ) );
-		//   PageCarton_Widget::v( $directories );
+
 			}
 			if ( trim( $innerDirectoryBaseName, '.' ) !== '' &&  is_dir( $innerDirectory )  )
 			{ 
@@ -601,14 +599,11 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			}
 		}
 		closedir( $handle );
-  //      if( basename( $directory ) === 'data' )
+        //      if( basename( $directory ) === 'data' )
         {
-   	//	    PageCarton_Widget::v( $directory );
-   	//	    PageCarton_Widget::v( $directories );
-  //     PageCarton_Widget::v( is_dir( trim( $directory ) ) );
-    //   PageCarton_Widget::v( $directories );
+
         }
-		//var_export( $directories );
+
 		return $directories;
     } 
 	
@@ -624,8 +619,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		$directories = self::getDirectories( $directory );
         if( basename( $directory ) === 'data' )
         {
-    //   PageCarton_Widget::v( $directory );
-    //   PageCarton_Widget::v( $directories );
+
         }
 
 		foreach( $directories as $directory )
@@ -635,7 +629,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 			$recursiveDirectories = array_merge( $recursiveDirectories, $directorySDirectory );
 		}
 		$recursiveDirectories = array_merge( $directories, $recursiveDirectories );
-		//var_export( $directory );
+
 		return $recursiveDirectories;
     } 
 	
@@ -671,7 +665,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 	public static function deleteDirectoryPlusContent($path) {
 		if (!is_dir($path)) {
 			return false;
-		//	throw new Ayoola_Doc_Exception("$path is not a directory");
+
 		}
 		if (substr($path, strlen($path) - 1, 1) != '/') {
 			$path .= '/';
@@ -679,14 +673,14 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		$dotfiles = glob($path . '.*', GLOB_MARK);
 		$files = glob($path . '*', GLOB_MARK);
 		$files = array_merge($files, $dotfiles);
-	//	var_export( '' . count( $files ) . '' );
+
 		foreach ($files as $file) {
 			if (basename($file) == '.' || basename($file) == '..') {
 				continue;
 			} else if (is_dir($file)) {
 				self::deleteDirectoryPlusContent($file);
 			} else {
-			    //	var_export( $file );
+
                 unlink($file);
 			}
 		}
@@ -757,7 +751,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		{
 			if( ! mkdir( $dir, $permission, true ) )
 			{
-			//	var_export( $dir );    
+
 				return false; 
 			}
 		}
@@ -803,10 +797,10 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'document_url', 'document_name');
 		$options = $filter->filter( $options );
-//		var_export( $options );
+
 		$options = self::pathsToUris( $options );
 		$this->_classOptions = (array) $options;
-//		var_export( $this->_classOptions );
+
 	} 	
 	
     /**
@@ -821,7 +815,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 		{
 			$this->setClassOptions();
 		}
-		//var_export( $this->_classOptions );
+
 		return (array) $this->_classOptions;
     } 	
 	
@@ -843,35 +837,25 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public function setViewOption( $value )
     {
-	//	var_export( is_file( $value ) );
 		$path = array();
 		$path['include'] = $value;
 		if( $value )
 		{
 			if( ! is_file( $value ) )
 			{
-			//	require_once 'Ayoola/Filter/UriToPath.php';
-			//	$filter = new Ayoola_Filter_UriToPath();
-			//	$path = $filter->filter( $value );
+
 			}
 		}
-    //    var_export( $path );
-    //    exit();
         $realPath = self::getDocumentPath( $value );
+
         if( is_file( $value ) )
         {
             $realPath = $value;
         }
-    //    var_export( $value );
-    //    var_export( $realPath );
-    //    exit();
+
 		$this->loadFile( $realPath ); 
-        //		$this->loadFile( $path['include'] ); 
-	//	try{ $this->loadFile( $path['include'] ); } 
+
 		//	Document not found
-	//	catch( Ayoola_Doc_Exception $e ){ return false; }
-    //    var_export( $path );
-    //    exit();
 		$this->_viewOption = $realPath;
     } 
 	
@@ -883,6 +867,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public function setViewParameter( $parameter )
 	{
+
 		//	If there is a view parameter, we should be in inline mode
 		$this->getAdapter()->setInlineViewMode( true );
 		$this->getAdapter()->title = $parameter;
@@ -914,10 +899,8 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public function view()
     {	
-//		self::v( $this->getPaths() );
-//		exit();
 		$this->getAdapter()->setPaths( $this->getPaths()  );
-	//	self::v( $this->getAdapter()->getLoaders() );
+
 		return $this->getAdapter()->view();
     } 
 	

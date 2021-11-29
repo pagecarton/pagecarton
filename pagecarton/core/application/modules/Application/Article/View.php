@@ -435,7 +435,7 @@ class Application_Article_View extends Application_Article_Abstract
 						}
 						$eachImageKey = $imagesKey . '_' . $imageCounter;
 						$data[$eachImageKey] = $eachImage;
-						$data[$eachImageKey . '_cropped'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&url=' . $eachImage; 
+						$data[$eachImageKey . '_cropped'] = Ayoola_Application::getUrlPrefix() . '/__/' . $maxWith . 'x' . $maxHeight . '/__' . $eachImage;
 					}
 					unset( $data[$imagesKey] );
 				break;  

@@ -46,19 +46,12 @@ class Application_IconViewer extends PageCarton_Widget
 
             if( ! $path = $this->getParameter( 'path' ) OR ! is_file( $path ) )
             {
-       //         var_export( $path );
-      //          var_export( $path );
-       //         var_export( $this->getParameter( 'path' ) );
-      //          exit();
 
                 $url = $this->getParameter( 'url' ) ? : @$_REQUEST['url'];
 
                 if( empty( $url ) || ! Ayoola_Loader::checkFile( '/documents' . $url ) )
                 {
                     
-        //         Ayoola_Application::view();
-        //          exit();
-        //          return false;
                 }
                 elseif( Ayoola_Loader::checkFile( '/documents/__' . $url ) )
                 {
@@ -71,7 +64,7 @@ class Application_IconViewer extends PageCarton_Widget
                 $ext = @$_REQUEST['extension'] ? : $realExt;  
                 if( $realExt == $url )
                 {
-        //         $ext = null;
+
                 }
                 $defaultWidth = 600;
                 $defaultHeight = 600;
@@ -80,8 +73,6 @@ class Application_IconViewer extends PageCarton_Widget
                     case 'jpg':
                     case 'jpeg':
                     case 'gif':
-            //        case 'ico':
-        //         case 'bmp':
                     case 'png':
                         //  The url is same
                         $url = $url ? : '/img/placeholder-image.jpg';
@@ -133,28 +124,18 @@ class Application_IconViewer extends PageCarton_Widget
                     break;
                 }
                 $url = $url ? : '/img/file-icon.png';
-    //          var_export( $realExt );
-    //          var_export( $url );
-    //          exit();
-        //        header( 'Location: ' . $url );
                 if( ! $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
                 {  
                     $url = '/img/error-icon.png';
                     if( ! $path = Ayoola_Loader::checkFile( 'documents' . $url ) )
                     {  
                         $errorMessage = '<p class="badnews">Document does not  exist</p>';
-                    //    var_export( $path );
                         echo $errorMessage;
-                    //  $this->setViewContent( $errorMessage, true );              
-                    //    return false;
                     }
                 }
             }
             $maxWith = $maxWith ? : $defaultHeight;
             $maxHeight = $maxHeight ? : $defaultHeight; 
-    //      var_export( $maxWith );
-    //      var_export( $maxHeight );
-     //       exit();
 			
             //  cache me
             if( $_REQUEST['document_time'] )
@@ -167,21 +148,15 @@ class Application_IconViewer extends PageCarton_Widget
                 header( "Cache-Control: maxage=" . $expires );
                 header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', time() + $expires ) . ' GMT' );
                 Ayoola_Application::$accessLogging = false;
-        //		var_export( $_REQUEST['document_time'] );
-        //		exit( $_REQUEST['document_time'] );
             }
             else
             {
-			//	$fn = DOCUMENTS_DIR . DS . $url;
                 if( $path )
                 {
                     header('Cache-Control: private');
 
                     $docTime = filemtime( $path );
 
-            //        var_export( $docTime );
-     //               var_export( $path );
-        //            exit();
 
                     // Checking if the client is validating his cache and if it is current.
                     if( isset( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) && ( strtotime( $_SERVER['HTTP_IF_MODIFIED_SINCE'] ) == $docTime ) ) 
@@ -197,27 +172,19 @@ class Application_IconViewer extends PageCarton_Widget
                     }
                 }
                 //  browser keep expecting more when we resize and download has different size
-          //      header( 'Content-Length: ' . filesize( $path ) );
+                //      header( 'Content-Length: ' . filesize( $path ) );
                 
             }
-         //      var_export( $maxWith );  
-          //     var_export( $maxHeight );
-         //      var_export( $path );
-         //      exit();
+
             if( $path AND ( $maxHeight || $maxWith ) AND empty( $noImageManipulation ) AND function_exists( 'imagecreatetruecolor' ) )
             {
-         //      var_export( $maxWith );  
-          //     var_export( $maxHeight );
-         //      var_export( $path );
-         //       exit();
                 ImageManipulator::makeThumbnail( $path, $maxWith, $maxHeight );
                 exit();
                 //	default
             }
             elseif( $url )
             {
-                $doc = new Ayoola_Doc( array( 'option' => $url ) );
-                $doc->view();
+                header( 'Location: ' . Ayoola_Application::getUrlPrefix() . $url . '?' . http_build_query( $_GET ), '301' );
                 exit();
             }
             elseif( $path )

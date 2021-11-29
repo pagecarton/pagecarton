@@ -149,7 +149,6 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      */
 	public function init()
     {
-//		var_export( static::$_type );
 		header('Content-Type: ' . static::$_type . '; charset=utf-8');
 		
 		$content = "/* " . __CLASS__ . " */\r\n";
@@ -251,6 +250,7 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
 		foreach( static::$_files as $file )
 		{
 			if( ! $file ){ continue; }
+
 			$file = Ayoola_Doc::uriToDedicatedUrl( $file );
 			if( ! $file ){ continue; }
 			$files .= str_ireplace( array( static::CONTENT_PLACEHOLDER, static::TYPE_PLACEHOLDER, static::ID_PLACEHOLDER ),

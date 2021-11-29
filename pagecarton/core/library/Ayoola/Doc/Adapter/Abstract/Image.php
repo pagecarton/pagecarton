@@ -57,8 +57,6 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
 			{
 				$uri = $dedicatedUri;
 			} 
-		//	var_export( $path );
-		//	var_export( $uri );
 			$image = $xml->createElement( 'img' );
 			$image->setAttribute( 'style', 'max-width:100%;' );
 			$image->setAttribute( 'title', $title );
@@ -70,7 +68,7 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
 		//exit( var_export( $xml->saveHTML() ) );
 		return $xml->saveHTML(); 
     } 
-	
+ 
 	/**
      * This method outputs the document
      *
@@ -79,6 +77,7 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
      */
     public function view()
     {
+        
 		$paths = array_unique( $this->getPaths() );
 
         $imageInfo = array();
@@ -104,23 +103,30 @@ abstract class Ayoola_Doc_Adapter_Abstract_Image extends Ayoola_Doc_Adapter_Abst
 		{
 			$imageInfo['height'] = $_GET['height'];
 		}
+        if( ! empty( $_GET['__docloc'][0] ) )
+        {
+            list( $imageInfo['width'], $imageInfo['height'] ) = explode( 'x', $_GET['__docloc'][0] );
+        }
 
         foreach( $paths as $path )
 		{	
 			if( ! empty( $imageInfo['width'] ) && ! empty( $imageInfo['height'] ) )
 			{
+                $_GET['width'] = $imageInfo['width'];
+                $_GET['height'] = $imageInfo['height'];
+        
                 ImageManipulator::makeThumbnail( $path, $imageInfo['width'], $imageInfo['height'] );
-                exit();
 			}
 			else
 			{
 					header( 'Content-Description: File Transfer' );
 					header( 'Content-Type: ' . $this->getContentType( $path ) );
 					header( 'Content-Transfer-Encoding: binary' );
-                    self::linkToWebRoot( $path, Ayoola_Application::getRequestedUri() );
 
                     readfile( $path );
 			}
+            self::linkToWebRoot( $path, Ayoola_Application::getRequestedUri() );
+
 		}
     } 
 	// END OF CLASS

@@ -1074,16 +1074,18 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             $data['document_url_photoviewer'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
 			if( @$data['document_url'][0] === '/' AND $fileP = Ayoola_Doc::uriToPath( $data['document_url'] ) )
 			{
-				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?url=' . @$data['document_url'] . '&document_time=' . @filemtime( $fileP ) . ''; 
-				$data['document_url_cropped'] = $data['document_url_no_resize'] . '&max_width=' . $maxWith . '&max_height=' . $maxHeight . ''; 
+				$xTy = '/__/' . @$data['document_url_uri']; 
+				$xTyG = '/__/' . $maxWith . 'x' . $maxHeight . $xTy; 
+				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . $xTy; 
+				$data['document_url_cropped'] = Ayoola_Application::getUrlPrefix() . $xTyG; 
 			}
 			elseif( strpos( @$data['document_url'], '//' ) === false && empty( $data['not_real_post'] ) )
 			{
 				//	This is the default now if they don't have picture, create a placeholder
-				$data['document_url'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] ); 
-				$data['document_url_cropped'] = $data['document_url']; 
-				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Article_PhotoViewer/?article_url=' . @$data['article_url'] . '&document_time=' . @filemtime( self::getFolder() . @$data['article_url'] );     
-				
+				$xTy = '/__/' . '/img/placeholder-image.jpg'; 
+				$xTyG = '/__/' . $maxWith . 'x' . $maxHeight . $xTy; 
+				$data['document_url_no_resize'] = Ayoola_Application::getUrlPrefix() . $xTy; 
+				$data['document_url_cropped'] = Ayoola_Application::getUrlPrefix() . $xTyG; 
 			}
 			else
 			{
@@ -1296,7 +1298,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 							}
 							$eachImageKey = $imagesKey . '_' . $imageCounter;
 							$data[$eachImageKey] = $eachImage;
-							$data[$eachImageKey . '_cropped'] = Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_IconViewer/?max_width=' . $maxWith . '&max_height=' . $maxHeight . '&url=' . $eachImage; 
+							$data[$eachImageKey . '_cropped'] = Ayoola_Application::getUrlPrefix() . '/__/' . $maxWith . 'x' . $maxHeight . '/__' . $eachImage; 
 						}
 						unset( $data[$imagesKey] );
 					break;  

@@ -197,11 +197,27 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
         $fakePath = false;
         
         $fakePath = CACHE_DIR . DS .  __CLASS__ . DS . md5( $path );
+
+        if( ! $falseResult = Ayoola_File_Storage::getFromFalseList( $fakePath ) )
+        {
+            return $falseResult; 
+        }
+
+        Ayoola_File_Storage::setToFalseList( $fakePath, false );
+
+        if( is_file( $fakePath ) )
+        {
+            return $fakePath;
+        }
+
+
         $content = file_get_contents( $path );
         $newContent = Ayoola_Page_Editor_Text::embedWidget( $content, array( 'file_path' => $path ) );  
 
         if( $content === $newContent )
         {
+            Ayoola_File_Storage::setToFalseList( $fakePath, false );
+            
             //  redundancy
             return false;
         }
@@ -219,15 +235,26 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
     {
         if( $docOptions = Ayoola_Doc_Settings::retrieve( 'options' ) AND is_array( $docOptions ) AND in_array( 'link_doc_to_web_root', $docOptions )  )
         {
-            if( ! Ayoola_Loader::checkFile( 'documents' . $link ) )
+            if( ! $realPath = Ayoola_Doc::getDocumentPath( $link ) )
             {
                 return false;
             }
+            elseif( stripos( $link, '/__/' ) !== 0 )
+            {
+                $padding = '/__';
+                if( ! empty( intval( $_GET['width'] ) ) && ! empty( intval( $_GET['height'] ) ) )
+                {
+                    $padding .= '/' . intval( $_GET['width'] ) . 'x' . intval( $_GET['height'] ) . '/__';  
+                }
+                header( 'Location: ' .  Ayoola_Application::getUrlPrefix() . $padding . $link, '' );
+                exit();
+            }
             
+            //  '/__/public/path/to/doc.css'
+            //  '/__/1000x2000/__/public/path/to/image.jpg'
             $link = trim( $link, '/ ' );
-            Ayoola_Doc::createDirectory( dirname( $link ) );
-
-            symlink( $pathToGo, $link );
+            Ayoola_Doc::createDirectory( dirname( $link ) );    
+            copy( $pathToGo, $link );
         }
     }
 
