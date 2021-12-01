@@ -530,6 +530,11 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                     $fields = $fieldValue;
                     break;
                 }
+                elseif( is_string( $fieldsToFetch ) )
+                {
+                    $fields = false;
+                    continue;
+                }
                 $fields[$key] = $fieldValue;
 
             }
