@@ -203,8 +203,6 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
             return $falseResult; 
         }
 
-        Ayoola_File_Storage::setToFalseList( $fakePath, false );
-
         if( is_file( $fakePath ) )
         {
             return $fakePath;
@@ -221,6 +219,8 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
             //  redundancy
             return false;
         }
+        Ayoola_File_Storage::deleteFromFalseList( $fakePath );
+
         Ayoola_Doc::createDirectory( dirname( $fakePath ) );
         if( Ayoola_File::putContents( $fakePath, $newContent ) )       
         {
@@ -469,7 +469,6 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
             {
                 $fakePath = self::getEmbedFilterPath( $path );       
             }  
-
 			header( 'Content-Description: File Transfer' );
 			header( 'Content-Type: ' . $this->getContentType( $path ) );
 			header( 'Content-Transfer-Encoding: binary' );
