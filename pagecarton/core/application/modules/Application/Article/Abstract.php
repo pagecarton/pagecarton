@@ -1266,12 +1266,15 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 							break;
 							default:
 
-								if( ! a[b].getAttribute( "data-html" ) && a[b].getAttribute( "data-document_type" ) != "html" )
+								if( a[b].getAttribute( "data-html" ) )
 								{
-									break;
+                                    ayoola.events.add( a[b], "dblclick", f );
+								}
+								if( a[b].getAttribute( "data-document_type" ) == "html" )
+								{
+									initCKEditor( a[b] );
 								}
 
-								ayoola.events.add( a[b], "dblclick", f );
 							break;
 						}
 					}
