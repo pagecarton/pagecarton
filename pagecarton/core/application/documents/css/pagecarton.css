@@ -1,10 +1,4 @@
 @charset "utf-8";
-/* --------------------------------
-
-Basic Style
-
--------------------------------- */
-
 
 .pc-article-content p,
 .pc-article-content blockquote
@@ -1416,9 +1410,6 @@ ul {
   font-style: normal;
 }
 
-
-/*POSTS*/
-
 .pc_posts_option_items {
   color: inherit;
   margin-right: 2em;
@@ -1427,22 +1418,9 @@ ul {
   display: inline-block;
 }
 
-
-/*
-
-MAKE LOGIN FORM CONSPICOUS AT ALL TIMES
-
-layout form such that even when no much content on page when login box displayed,
-forcing form up the page will not cause distortion
-
-    --> .row conflicts with bootstrap and other popular library classes
-
-*/
-
 .pc-row {
   min-height: 100px;
 }
-
 
 #Ayoola_Access_Login_form_id_container form {
   padding: 3em;

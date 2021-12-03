@@ -711,11 +711,25 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $headers[] = "cc: {$mailInfo['bcc']}";
             }
 
+
             if( ! empty( $mailInfo['html'] ) || strip_tags( $mailInfo['body'] ) != $mailInfo['body'] )
             {
+                if( empty( $mailInfo['preview'] ) )
+                {
+                    $mailInfo['preview'] = strip_tags( $mailInfo['body'] );
+                }
+                $mailInfo['preview'] = '
+                <div style="display: none; max-height: 0px; overflow: hidden;">
+                ' . $mailInfo['preview'] . '.
+                </div>
+                 
+                <!-- Insert &#847;&zwnj;&nbsp; hack after hidden preview text -->
+                <div style="display: none; max-height: 0px; overflow: hidden;">
+                &#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+                </div>';
                 if( stripos( $mailInfo['body'], '<body>' ) === false )
                 {
-                    $mailInfo['body'] = '<body>' . $mailInfo['body'] . '</body>';
+                    $mailInfo['body'] = '<body>' . $mailInfo['preview'] . '' . $mailInfo['body'] . '</body>';
                 }
                 $mailInfo['body'] = Ayoola_Page_Editor_Text::addDomainToAbsoluteLinks( $mailInfo['body'] );
                 $realBody = $mailInfo['body'];
@@ -723,14 +737,18 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 {
                     $styleFile = Ayoola_Loader::checkFile( 'documents/css/pagecarton.css' );
                     $mailInfo['body'] = '
-                                            <html>
-                                                <head>
-                                                    <style>
-                                                        ' . file_get_contents( $styleFile ) . '
-                                                    </style>
-                                                </head>
-                                                ' . $mailInfo['body'] . '
-                                            </html>';
+                    <html>
+                        <head>
+                            <title>' . $mailInfo['subject'] . '</title>
+                            <meta http–equiv=“Content-Type” content=“text/html; charset=UTF-8” />
+                            <meta http–equiv=“X-UA-Compatible” content=“IE=edge” />
+                            <meta name=“viewport” content=“width=device-width, initial-scale=1.0 “ />
+                            <style type=”text/css”>
+                                ' . file_get_contents( $styleFile ) . '
+                            </style>
+                        </head>
+                        ' . $mailInfo['body'] . '
+                    </html>';
                 }
                 $headers[] = "MIME-Version: 1.0";
                 $headers[] = "Content-type:text/html;charset=UTF-8";
