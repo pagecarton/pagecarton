@@ -571,15 +571,18 @@ function deleteDirectoryPlusContent($eachDir)
     }
     $dotfiles    = glob($eachDir . '.*', GLOB_MARK);
     $insideFiles = glob($eachDir . '*', GLOB_MARK);
-    $insideFiles = array_merge($insideFiles, $dotfiles);
-    foreach ($insideFiles as $insideFile) {
-        //    set_time_limit( 30 );
-        if (basename($insideFile) == '.' || basename($insideFile) == '..') {
-            continue;
-        } else if (is_dir($insideFile)) {
-            deleteDirectoryPlusContent($insideFile);
-        } else {
-            unlink($insideFile);
+    if( is_array( $insideFiles ) && is_array( $dotfiles ) )
+    {
+        $insideFiles = array_merge($insideFiles, $dotfiles);
+        foreach ($insideFiles as $insideFile) {
+            //    set_time_limit( 30 );
+            if (basename($insideFile) == '.' || basename($insideFile) == '..') {
+                continue;
+            } else if (is_dir($insideFile)) {
+                deleteDirectoryPlusContent($insideFile);
+            } else {
+                unlink($insideFile);
+            }
         }
     }
     @rmdir($eachDir);
