@@ -322,7 +322,7 @@ class Ayoola_Application
 			$protocol = 'https';
 		}
 
-		@$storage->storageNamespace = 'xduiooo' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
+		@$storage->storageNamespace = 'v' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve();
 
@@ -330,7 +330,6 @@ class Ayoola_Application
 		{
 
  			//	Allows the sub-domains to have an include path too.
-
 			if( ! empty( $data['parent_domain_settings'][APPLICATION_PATH] ) && $data['parent_domain_settings'][APPLICATION_PATH] !== $data['domain_settings'][APPLICATION_PATH] )
 			{
 				self::setIncludePath( $data['parent_domain_settings'][APPLICATION_PATH] );
@@ -565,7 +564,7 @@ class Ayoola_Application
 				}
 
 				//	How do we allow the user accounts in the primary domain visible here?
- 			//	if( @$primaryDomainInfo['domain_name'] !== @$data['domain_settings']['domain_name'] )
+ 			    //	if( @$primaryDomainInfo['domain_name'] !== @$data['domain_settings']['domain_name'] )
 				{
 					$data['parent_domain_settings'] = $primaryDomainInfo;
 					self::setIncludePath( $data['parent_domain_settings'][APPLICATION_PATH] );
@@ -737,6 +736,7 @@ class Ayoola_Application
             // device id
             self::getDeviceUId();
 
+            //  robots sitemap
             do
             {
                 if( 'localhost' == $_SERVER['SERVER_NAME'] || $_SERVER['SERVER_NAME'] == $_SERVER['SERVER_ADDR'] )
@@ -783,6 +783,34 @@ class Ayoola_Application
             }
             while( false );
 
+            // make sure enabled plugins are still enabled
+            $plugins = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'status' => array( 'Enabled' ) ) );
+            foreach( $plugins as $plugin )
+            {
+                foreach( $plugin['modules'] as $value )
+                {
+                    $value = trim( str_replace( '/', '_', $value ), '_' );
+                    $value = explode( '.', $value );
+                    $value = array_shift( $value );
+                    //var_export( $value );
+                    if( ! Ayoola_Loader::loadClass( $value ) )
+                    {
+                        $mailInfo = array();
+                        $mailInfo['subject'] = $plugin['extension_title'] . ' plugin reactivated';
+                        $mailInfo['body'] = 'We found out "' . $value . '" is not active. Which means the plugin "' . $plugin['extension_title'] . '" was inactive for some reasons but it has just been reactivated.';
+                        try
+                        {
+                            @Ayoola_Application_Notification::mail( $mailInfo );
+                        }
+                        catch( Ayoola_Exception $e ){ null; }
+        
+                        $result = Ayoola_Extension_Import_Status::change( $plugin, false );
+                        break;
+                    }
+                    
+                }
+            }
+            
             $storage->store( $data );  
 		}
 		//	Allows the sub-domains to have an include path too.

@@ -40,11 +40,6 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
      */
 	public static function change( $data, $currentStatus = true )  
     {
-     //   var_export( $data['extension_name'] );
-    //    var_export( $data );
-    //    $test = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'extension_name' => $data['extension_name'] ) );
-
-    //    var_export( $test );
 
         //  manage dependencies first
         $update = array();
@@ -56,7 +51,7 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
         {
             $update['status'] = 'Enabled';
         }
-
+                
         if( ! empty( $data['dependencies'] ) )
         {
             //  this can take some time for some recursive dependency check
