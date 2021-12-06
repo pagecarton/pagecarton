@@ -312,7 +312,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
             $orderInfo['order_number'] = $orderNumber;
             $orderInfo['order_api'] = $orderApi;
 
-            $storage->store( $orderInfo );
+            $storage->store( $orderInfo ); 
             if( $email )
             {
                 $mailInfo['to'] = $email;
