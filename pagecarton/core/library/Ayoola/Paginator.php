@@ -519,11 +519,6 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 						$field = $value['field'];
 					}
 					$value['value'] = @$value['value'] ? : $row[$field];
-			//		if( ! empty( $value['filter'] ) && $value['filter'] implements Ayoola_Filter_Interface )
-				//	if( ! Ayoola_Loader::loadClass( $options ) )
-					{
-
-					}
 					if( ! empty( $value['filter'] ) && Ayoola_Loader::loadClass( $value['filter'] ) )
 					{
 						$filter = new $value['filter'];

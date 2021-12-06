@@ -89,7 +89,7 @@ class Ayoola_Filter_Time implements Ayoola_Filter_Interface
     	switch( $settings['mode'] )
 		{
 			case 'full':
-                return date( "D M j Y g:i A ", $value );
+                return date( "g:iA, D M j Y ", $value );
 			default:
                 $timeDifference = time() - $value;
             //	$timeDifference = $value - time();
