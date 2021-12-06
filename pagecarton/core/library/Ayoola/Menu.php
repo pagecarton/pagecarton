@@ -484,6 +484,15 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 		}
 
+        if( empty( $menuInfo ) )
+        {
+            $menuInfo = array();
+        }
+        if( empty( $menuInfo['menu_label'] ) )
+        {
+            $menuInfo['menu_label'] = $menuName ? : ( $this->getParameter( 'menu_label' ) ? : $this->getParameter( 'menu_name' ) );
+        }
+
 		require_once 'Ayoola/Access.php';
 		$access = new Ayoola_Access();
 		$counter = 0;
@@ -498,11 +507,6 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			
 			@$menu->setAttribute( 'class', __CLASS__ . $menuInfo['document_name'] . 'Container' );
 		}
-		/* $cssLink = $xml->createElement( 'link' );
-		$cssLink->setAttribute( 'href', $menuInfo['document_url'] );
-		$cssLink->setAttribute( 'rel', 'stylesheet' );
-		$cssLink->setAttribute( 'type', 'text/css' );
-		$menu->appendChild( $cssLink ); */
 
 		@Application_Style::addFile( $menuInfo['document_url'] );
 		   
