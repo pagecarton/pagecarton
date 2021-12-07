@@ -65,17 +65,17 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
                 Ayoola_File::putContents( $tempFile, $tempData );
                 continue;
             }
-    
-		//	$this->getXml()->load( $filename );
-			$this->getXml()->setId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );
-			$rows = $this->query( 'SELECT', null, $where, array( 'filename' => $filename, 'populate_record_number' => true ) );
-			$result = false;
-			if( empty( $update['modified_time'] ) )   
+            
+            if( empty( $update['modified_time'] ) )   
 			{
 				$update['modified_time'] = time();
 			}
             $update['__update_user_id'] = is_array( $update['__update_user_id'] ) ? $update['__update_user_id'] : array();
-            $update['__update_user_id'][] = Ayoola_Application::getUserInfo( 'user_id' );
+            $update['__update_user_id'][time()] = Ayoola_Application::getUserInfo( 'user_id' );
+
+			$this->getXml()->setId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );
+			$rows = $this->query( 'SELECT', null, $where, array( 'filename' => $filename, 'populate_record_number' => true ) );
+			$result = false;
 			foreach( $update as $key => $value )
 			{
 				foreach( $rows as $rowId => $row )

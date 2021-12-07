@@ -57,6 +57,16 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
                 $delay = 0;
             }
         }
+
+        //  set this default table values
+        if( empty( $values['creation_time'] ) )   
+		{
+			$values['creation_time'] = time();
+        }
+        $values['__user_id'] = $values['__user_id'] ? : Ayoola_Application::getUserInfo( 'user_id' );
+        $values['__ip'] = $values['__ip'] ? : Ayoola_Application::getRuntimeSettings( 'user_ip' );
+        $values['__duuid'] = $values['__duuid'] ? : Ayoola_Application::getDeviceUId();
+
         if( ( ! $this->loadTableDataFromFile( $scopeFile ) || $delay ) AND empty( $this->proccesses ) )
         {
             Ayoola_Doc::createDirectory( $processDir );
@@ -128,13 +138,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		{
 
         }
-		if( empty( $values['creation_time'] ) )   
-		{
-			$values['creation_time'] = time();
-        }
-        $values['__user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
-        $values['__ip'] = Ayoola_Application::getRuntimeSettings( 'user_ip' );
-        $values['__duuid'] = Ayoola_Application::getDeviceUId();
 		if( empty( $options['record_row_id'] ) && empty( $values[$idColumn] ) )
 		{
 			
