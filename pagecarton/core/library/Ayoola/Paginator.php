@@ -292,13 +292,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		
 		// Set representations to null if they are null
         $current = $this->_currentPage;
-/*      
-		$first = is_null( $this->_firstPage ) ? NULL : $this->_rep['first'];
-		$last = is_null( $this->_lastPage ) ? NULL : $this->_rep['last'];
-		$next = is_null( $this->_nextPage ) ? NULL : $this->_rep['next'];
-		$previous = is_null( $this->_previousPage ) ? NULL : $this->_rep['previous'];
-
- */     
+    
  		$first = $this->_rep['first'];
 		$last = $this->_rep['last'];
 		$next = $this->_rep['next'];
@@ -373,6 +367,10 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 		elseif( isset( $_COOKIE['noPerPage'] ) )
 		{
 			$this->_noPerPage = (int) $_COOKIE['noPerPage'];
+		}
+		elseif( isset( $this->noPerPage ) )
+		{
+			$this->_noPerPage = $this->noPerPage;
 		}
 		if( isset( $_GET['page'] ) && is_numeric( $_GET['page'] ) )
 		{
@@ -510,7 +508,6 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			foreach( $fields as $field => $value )
 			{
 				$rawFieldValues  = is_array( $value ) ? $value : array();
-			//	if( is_array( $row ) && array_key_exists( $field, $row ) )
 
 				if( is_array( $value ) && ( ! empty( $value['value'] ) || ! empty( $value['filter'] ) ) )
 				{
@@ -614,14 +611,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 
 					$records .='<td> ' . $value . '</td>';
 				}
-/*				
-				if( ! empty( $value['options'] )  )
-				{
-					// I made this to allow for links like delete, edit, etc
-
-					$records .='<td> Options </td>';
-				}
-*/				
+				
 			}
 			if( $this->getRowOptions() && ! @$this->noOptionsColumn )
 			{
@@ -961,7 +951,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 			if( $this->showPagination  ){ $content .= $this->getPagination(); }
         }
         
-		if( $this->_noOfRecords > 10 ) 
+		if( $this->_noOfRecords > 10 && $this->showPagination ) 
 		{
             $output = '%d out of %d records in %s. Click to show more...';
             $output = PageCarton_Widget::__( $output );
@@ -986,7 +976,7 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 					';
            $searchFormHtml = null;
             
-        //  if( $this->showSearchBox  )
+            //  if( $this->showSearchBox  )
             { 
                 $keys = @array_keys( array_pop( $this->getData() ) );
                 if( $keys  )

@@ -181,7 +181,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
         $content = self::fetchLink( $link, array( 'time_out' => 28800, 'connect_time_out' => 28800, 'raw_response_header' => true, 'return_as_array' => true, ) );
         $filename = tempnam( CACHE_DIR, __CLASS__ ) . '';
 
-        if( preg_match('/Content-Disposition: .*filename=([^0-9A-Za-z_-.]+)/', $content['options']['raw_response_header'], $matches) ) 
+        if( @preg_match('/Content-Disposition: .*filename=([^0-9A-Za-z_-.]+)/', $content['options']['raw_response_header'], $matches) ) 
         {
             $filename .= $matches[1];
         }
