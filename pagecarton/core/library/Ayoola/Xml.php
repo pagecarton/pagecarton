@@ -237,8 +237,6 @@ class Ayoola_Xml extends DOMDocument
 		$filename = $filename ? : $this->getFilename();
 
         //  save a big file first
-
-
 		$tempName = $filename . '.lock';  
 		if( ! self::checkLockFile( $tempName ) )
 		{
@@ -264,8 +262,8 @@ class Ayoola_Xml extends DOMDocument
         }
         if( ! rename( $saveTmp, $filename ) )
         {
-            rename( $tempName, $filename . '.trouble.xml' );
-            throw new Ayoola_Xml_Exception( 'Could not copy temp while saving XML ' . basename( $filename ) ); 
+            rename( $tempName, $filename );
+            return false;
         }
         //  no waiting because causing delay and crashing servers.
         //  Will reserve inserts

@@ -277,7 +277,6 @@ class Ayoola_Application
 			self::$_domainSettings[APPLICATION_PATH] = APPLICATION_PATH;
 			@self::$_domainSettings[EXTENSIONS_PATH] = EXTENSIONS_PATH;
 			self::setDomainSettings();
-
 		}
 
 		return $key ? ( isset( self::$_domainSettings[$key] ) ? self::$_domainSettings[$key] : "" ) : self::$_domainSettings;
