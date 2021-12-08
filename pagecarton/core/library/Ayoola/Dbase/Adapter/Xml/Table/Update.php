@@ -28,6 +28,8 @@ require_once 'Ayoola/Dbase/Adapter/Xml/Table/Abstract.php';
 class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Table_Abstract
 {
 
+    protected static $_processing = array();
+
     /**
      * Updates a record on a db table
      *
@@ -41,15 +43,18 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 		$count = 0;
         $scopeFile = $this->getFilenameAccordingToScope( false, $this->getAccessibility() );
 		$files =  array_unique( array( $scopeFile => $scopeFile ) + $this->getSupplementaryFilenames() );
+        $class = $this->getTableInfo( 'table_class' );
 		foreach( $files as $filename )
 		{
             $this->setXml();
 
             $delay = 0;
-            if( $class = $this->getTableInfo( 'table_class' ) AND Ayoola_Loader::loadClass( $class ) AND property_exists( $class, 'insertDelay' ) AND $m = filemtime( $filename ) )
+            if( $class AND Ayoola_Loader::loadClass( $class ) AND property_exists( $class, 'insertDelay' ) AND $m = filemtime( $filename ) )
             {
+
                 $delay = intval( $class::$insertDelay );
                 $difference = time() - $m;
+
                 if( $difference > $delay )
                 {
                     $delay = 0;
@@ -57,19 +62,22 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
             }
     
             $processDir = $this->getMyTempProcessDirectory();
-            if( ( ! $this->loadTableDataFromFile( $filename ) || $delay ) AND empty( $this->proccesses ) )
+
+            if( empty( self::$_processing[$class] ) && ( ! $this->loadTableDataFromFile( $filename ) || $delay ) )
             {
+
                 Ayoola_Doc::createDirectory( $processDir );
                 $tempData = serialize( func_get_args() );
                 $tempFile = $processDir . DS . md5( $tempData . time() );
                 Ayoola_File::putContents( $tempFile, $tempData );
-                continue;
+                return true;
             }
             
             if( empty( $update['modified_time'] ) )   
 			{
 				$update['modified_time'] = time();
 			}
+            
             $update['__update_user_id'] = is_array( $update['__update_user_id'] ) ? $update['__update_user_id'] : array();
             $update['__update_user_id'][time()] = Ayoola_Application::getUserInfo( 'user_id' );
 
@@ -94,15 +102,17 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
 			$result ? $this->saveFile( $filename ) : null;
 		    //	$this->saveFile( $filename );
 		}
-        if( $processes = Ayoola_Doc::getFilesRecursive( $processDir ) AND empty( $this->proccesses ) )
+
+        if( empty( self::$_processing[$class] ) && self::$_processing[$class] = Ayoola_Doc::getFilesRecursive( $processDir, array( 'no_cache' => true ) ) )
         {
-            $this->proccesses = $processes;
+
             $cxi = 0;
-            foreach( $processes as $process )
+
+            foreach( self::$_processing[$class] as $keyX => $process )
             {
-                if( $cxi++ > 10 )
+                if( $cxi++ > 500 )
                 {
-                    break;
+                   // break;
                 }
                 if( $tempData = unserialize( file_get_contents( $process ) ) )
                 {
@@ -110,7 +120,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
                     unlink( $process );
                     @Ayoola_Doc::removeDirectory( dirname( $process ) );
                 }
-
+                unset( self::$_processing[$class][$keyX] );
             }
         }    
 

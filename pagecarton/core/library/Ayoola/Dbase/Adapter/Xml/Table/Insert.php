@@ -35,6 +35,9 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
      */
     public static $_maxNoOfSupplementaryFiles = 200;
 
+    protected static $_processing = array();
+
+
     /**
      * Inserts record into a db table
      *
@@ -67,7 +70,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
         $values['__ip'] = $values['__ip'] ? : Ayoola_Application::getRuntimeSettings( 'user_ip' );
         $values['__duuid'] = $values['__duuid'] ? : Ayoola_Application::getDeviceUId();
 
-        if( ( ! $this->loadTableDataFromFile( $scopeFile ) || $delay ) AND empty( $this->proccesses ) )
+        if( empty( self::$_processing[$class] ) && ( ! $this->loadTableDataFromFile( $scopeFile ) || $delay ) )
         {
             Ayoola_Doc::createDirectory( $processDir );
             //var_export( $processDir );
@@ -96,7 +99,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		if( filesize( $filename ) > 300000 )
 		{
 			$strToUse = $strToUseX = str_pad( $i, 3, '0', STR_PAD_LEFT );
-			$annexFile = $dir . DS . '' . implode( DS, str_split( $strToUse ) ) . EXT_DATA;     
+			$annexFile = $dir . DS . '' . implode( DS, str_split( $strToUse ) ) . EXT_DATA;  
+
 			while( is_file( $annexFile ) )
 			{
 				++$i;
@@ -161,25 +165,27 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		
 		$this->saveFile( $filename );
 
-        if( $processes = Ayoola_Doc::getFilesRecursive( $processDir ) AND empty( $this->proccesses ) )
+        if( empty( self::$_processing[$class] ) AND self::$_processing[$class] = Ayoola_Doc::getFilesRecursive( $processDir ) )
         {
-            $this->proccesses = $processes;
             $cxi = 0;
-            foreach( $processes as $process )
+
+            foreach( self::$_processing[$class] as $process )
             {
-                if( $cxi++ > 10 )
+                if( $cxi++ > 500 )
                 {
                     break;
                 }
+
                 if( $tempData = unserialize( file_get_contents( $process ) ) )
                 {
                     $response = $this->init( $tempData[0], $tempData[1] );
 
                     unlink( $process );
+
                     @Ayoola_Doc::removeDirectory( dirname( $process ) );
 
                 }
-
+                unset( self::$_processing[$class][$keyX] );
             }
         }    
 
