@@ -63,7 +63,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
     
             $processDir = $this->getMyTempProcessDirectory();
 
-            if( empty( self::$_processing[$class] ) && ( ! $this->loadTableDataFromFile( $filename ) || $delay ) )
+            if( 
+                empty( self::$_processing[$class] ) && 
+                ( 
+                    ( ! $this->loadTableDataFromFile( $scopeFile ) && $this->loadTableDataFromFile( $scopeFile, true ) )  
+                    || $delay 
+                ) 
+            )
             {
 
                 Ayoola_Doc::createDirectory( $processDir );

@@ -668,6 +668,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 
 		$keyword = array_shift( $arguments );
 		$keyword = ucfirst( strtolower( $keyword ) );
+        //var_export( $arguments[0] );
 
 		//  TRACK CORE CHANGES
 		$coreFile = APPLICATION_PATH . DS . $this->_globalDirectory . DS . basename( $this->_myFilename );
@@ -696,7 +697,7 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 			( isset( $fmTime ) ? $fmTime : "" ) . __CLASS__ );
         $storage = PageCarton_Widget::getObjectStorage( array( 'id' => $hash, 'device' => 'File', 'time_out' => 1000000, ) );
 		$result = $storage->retrieve();
-		if( false !== $result )
+		if( false !== $result && $arguments[0] !== 'CREATE' )
 		{
 			return $result;
 		}

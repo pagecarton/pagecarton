@@ -36,23 +36,14 @@ class Ayoola_Dbase_Adapter_Xml_Table_Create extends Ayoola_Dbase_Adapter_Xml_Tab
      */
     public function init( $tableInfo = null, Array $dataTypes = array(), DOMNode $records = null )
     {
-	//	var_export( func_get_args() );
-	//	var_export( $this->getMyFilename() );
 		$tableName = is_array( $tableInfo ) ? $tableInfo['table_name'] : $tableInfo;
 		if( ! is_null( $tableName ) ){ $this->setTableName( $tableName ); }
-	//		var_export( $tableName );
-	//	var_export( $this->getMyFilename() );
 		$this->_myFilename = @$tableInfo['filename'] ? : $this->_myFilename;
 		if( empty( $tableInfo['no_existence_check'] ) && $this->query( 'EXISTS' ) )
 		{ 
-			//	var_export( $tableName );
-			//	if(  ){}
 			require_once 'Ayoola/Dbase/Adapter/Xml/Table/Exception.php';
 			throw new Ayoola_Dbase_Adapter_Xml_Table_Exception( "Table ($tableName) Already Exists" );
 		}
-	//	var_export( $tableInfo['table_version'] );
-	//	var_export( $tableInfo['filename'] );
-	//	if( empty( $dataTypes[$this->getTableName() . '_id'] ) ){ $dataTypes[$this->getTableName() . '_id'] = 'INT'; }
 	
 		//	CHANGE TO INPUTTEXT AS WORKAROUND FOR AMBIGUITY IN SUPPLEMENTARY TABLES.
 		if( empty( $dataTypes[$this->getTableName() . '_id'] ) )
@@ -72,7 +63,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Create extends Ayoola_Dbase_Adapter_Xml_Tab
         $dataTypes['__user_agent_id'] = 'INPUTTEXT'; 
         $dataTypes['__ip'] = 'JSON'; 
         $dataTypes['__duuid'] = 'INPUTTEXT'; 
-    //  $dataTypes['__long_lang'] = 'JSON'; 
 		
 		//	Refresh Xml Memory to start a new Document
 		require_once 'Ayoola/Xml.php';
@@ -91,14 +81,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Create extends Ayoola_Dbase_Adapter_Xml_Tab
         $node->appendChild( $this->setForeignKeys() );
         $node->appendChild( $this->setRelatives() );
 		
-		//var_export( $records->childNodes->length );
 		$documentNode->appendChild( $this->setRecords( $records ) );
         $documentNode->appendChild( $node );
 		$this->getXml()->appendChild( $documentNode );
-	//	$this->clearCache();
-		$this->saveFile( @$tableInfo['filename'] );
-	//	var_export( $tableInfo['table_version'] );
-		return true;
+
+        $this->saveFile( @$tableInfo['filename'] );
+
+        return true;
     } 
 	// END OF CLASS
 }

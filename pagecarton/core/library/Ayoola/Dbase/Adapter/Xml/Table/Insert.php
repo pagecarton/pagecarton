@@ -49,7 +49,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 
         $processDir = $this->getMyTempProcessDirectory();
         $scopeFile = $this->getFilenameAccordingToScope( false, $this->getAccessibility() );
-        //var_export( $this->getTableInfo() );
+
         $delay = 0;
         if( $class = $this->getTableInfo( 'table_class' ) AND Ayoola_Loader::loadClass( $class ) AND property_exists( $class, 'insertDelay' ) AND $m = filemtime( $scopeFile ) )
         {
@@ -60,7 +60,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
                 $delay = 0;
             }
         }
-
         //  set this default table values
         if( empty( $values['creation_time'] ) )   
 		{
@@ -70,10 +69,15 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
         $values['__ip'] = $values['__ip'] ? : Ayoola_Application::getRuntimeSettings( 'user_ip' );
         $values['__duuid'] = $values['__duuid'] ? : Ayoola_Application::getDeviceUId();
 
-        if( empty( self::$_processing[$class] ) && ( ! $this->loadTableDataFromFile( $scopeFile ) || $delay ) )
+        if( 
+            empty( self::$_processing[$class] ) && 
+            ( 
+                ( ! $this->loadTableDataFromFile( $scopeFile ) && $this->loadTableDataFromFile( $scopeFile, true ) )  
+                || $delay 
+            ) 
+        )
         {
             Ayoola_Doc::createDirectory( $processDir );
-            //var_export( $processDir );
 
             $tempData = serialize( func_get_args() );
 
@@ -96,7 +100,8 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 
         //	Lets use filesize because some db may have many records "light" records e.g. 300000 (~300kb)
         $dir = $this->getMySupplementaryDirectory();
-		if( filesize( $filename ) > 300000 )
+
+		if( is_file( $filename ) && filesize( $filename ) > 300000 )
 		{
 			$strToUse = $strToUseX = str_pad( $i, 3, '0', STR_PAD_LEFT );
 			$annexFile = $dir . DS . '' . implode( DS, str_split( $strToUse ) ) . EXT_DATA;  
@@ -134,6 +139,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 
             }
 		}
+        
 		$recordRowId = $this->getXml()->autoId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );  		
 		$row = $this->getXml()->createElement( self::TAG_TABLE_ROW );  
 		$idColumn = $this->getTableName() . '_id';
@@ -162,8 +168,9 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 			$this->setRowColumnValue( $row, $key, $value );
 			$this->setRecords( $row );	
 		}
-		
+
 		$this->saveFile( $filename );
+
 
         if( empty( self::$_processing[$class] ) AND self::$_processing[$class] = Ayoola_Doc::getFilesRecursive( $processDir ) )
         {
