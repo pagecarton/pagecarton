@@ -98,17 +98,10 @@ class Application_Subscription extends Application_Subscription_Abstract
 				return;
 			}
 			$this->setViewContent( self::getConfirmation(), true );
-/* 			if( ! $data['subscription_object_name'] )
-			{ 
-				$this->setViewContent( self::getConfirmation(), true );
-				return;
-			}
- */
+
 		}
 		catch( Exception $e )
 		{ 
-	//		echo $e->getMessage();
-		//	return $this->setViewContent(  '' . self::__( '<p class="badnews boxednews centerednews">Error with subscription package.</p>' ) . '', true  ); 
 			$this->setViewContent(  '' . self::__( '<p class="badnews boxednews centerednews">Error with subscription package.</p>' ) . '', true  ); 
 			$this->setViewContent( self::__( '<p class="badnews boxednews centerednews">' . $e->getMessage() . '</p>' ) ); 
 		}
@@ -149,19 +142,13 @@ class Application_Subscription extends Application_Subscription_Abstract
 	public static function getConfirmation()
     {
 		if( self::$_confirmation ){ return self::$_confirmation; }
-/* 			<span>
-				<a onClick="window.parent.location.href=this.href;" href="' . Ayoola_Application::getUrlPrefix() . '/onlinestore/">
-					<input name="' . __CLASS__ . '_next_steps" onClick="ayoola.div.selectElement( this )" class="boxednews" value="See products and services" type="button" /></a>
-			</span> 
- */ 
+ 
 		self::$_confirmation = '<p class="goodnews">Product or service has been added to your shopping cart. <a href="' . Ayoola_Application::getUrlPrefix() . '/cart/">View Shopping Cart</a></p>
 		<div>
 			<span>
 				
 			</span>
 		</div>';
- 	//	self::$_confirmation .= Ayoola_Menu::viewInLine( null, 'onlinestore' );
-//		self::$_confirmation .= Application_Subscription_Cart::viewInLine();
 		return self::$_confirmation;
     }
 	
@@ -196,7 +183,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 		@$values['classplayer_url'] = $data['subscription_object_name'] ? '/tools/classplayer/get/object_name/' .  $data['subscription_object_name'] . '/' : null;	//	
 		
 		//	Store in a session
-		$previousData = $this->getStorage()->retrieve() ? : array();
+		//$previousData = $this->getStorage()->retrieve() ? : array();
 
 
 		if( ! isset( $values['multiple'] ) )
@@ -288,24 +275,7 @@ class Application_Subscription extends Application_Subscription_Abstract
 			{
 				$settings['terms_and_conditions'] .= strtoupper( $eachItem['article_title'] ) . "\r\n" . "\r\n";
 				$settings['terms_and_conditions'] .= $eachItem['item_terms_and_conditions'] . "\r\n" . "\r\n";
-			}  
-
-/* 
-            if( 
-                $eachItem['refreshable'] 
-                && ( empty( $values ) || $values['subscription_name'] != $eachItem['subscription_name']  )
-                && (  empty( $values ) || empty( $values['refreshing_cart_item'] ) )
-            )
-            {
-             
-                $eachItem['refreshing_cart_item'] = time() . ' - ' . $eachItem['subscription_name'];
-                $refreshList[$eachItem['subscription_name']] = $eachItem;
-                unset( $newCart[$name] );
-                //var_export( true );
-
-            }
-
- */       
+			}       
 
             if( ! empty( $newCart[$name]['refreshable'] ) )
             {
@@ -315,9 +285,6 @@ class Application_Subscription extends Application_Subscription_Abstract
             }
 
 			@$newCart[$name]['item_total'] = $eachItem['price'] * $eachItem['multiple'];
-            //var_export( $newCart[$name]['subscription_name'] );
-            //var_export( $newCart[$name]['item_total'] );
-            //var_export( '<br>' );
 			@$settings['total'] += $newCart[$name]['item_total'];
 		}
 
@@ -389,33 +356,10 @@ class Application_Subscription extends Application_Subscription_Abstract
 
         $wholeCart = array( 'cart' => $newCart, 'settings' => $settings );
 
-       // var_export( __FUNCTION__ );
         self::setHook( static::getInstance(), __FUNCTION__, $wholeCart );
 
-       //var_export( $wholeCart );
 
 		self::getStorage()->store( $wholeCart );
-       // var_export( $values );
-        //var_export( $refreshList );
-
-/*      foreach( $refreshList as $name => $item )
-        {
-            $method = $item['refreshable'];
-            //var_export( $name );
-            if( is_callable( $method ) )
-            {
-                $response = $method( $item );
-            }
-            else
-            {
-                // remove item that cannot be refreshed
-                $item['multiple'] = 0;
-                self::reset( $item );
-            }
-    
-        }
- */
-
 		return true;
     }
 	
@@ -431,12 +375,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 		$html = null;
 		@$object['view'] = $object['view'] ? : $object['view_parameters'];
 		@$object['option'] = $object['option'] ? : $object['view_option'];
-	//	$html .= "<span data-parameter_name='view' >{$object['view']}</span>";
-		
-		//	Implementing Object Options
-		//	So that each objects can be used for so many purposes.
-		//	E.g. One Class will be used for any object
-	//	var_export( $object );
 		$html .= '<span style=""> Show subscription option for </span>';
 		
 		$options = new Application_Subscription_Subscription;
@@ -449,7 +387,6 @@ class Application_Subscription extends Application_Subscription_Abstract
 		foreach( $options as $key => $value )
 		{ 
 			$html .=  '<option value="' . $key . '"';  
-		//	var_export( $object['view'] );
 			if( @$object['subscription_name'] == $key ){ $html .= ' selected = selected '; }
 			$html .=  '>' . $value . '</option>';  
 		}
@@ -464,11 +401,9 @@ class Application_Subscription extends Application_Subscription_Abstract
 	public function createForm( $submitValue = null, $legend = NULL, array $values = NULL )
     {
 		$priceList = new Application_Subscription_Price;
-//		var_export( $priceList->select() );
 		$priceList = $priceList->select( null, $this->getIdentifier() );
 		$values = array();
 		$newPriceList = array();
-	//	var_export( $priceList );
 		$form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		if( ! $priceList )
 		{ 
@@ -495,31 +430,22 @@ class Application_Subscription extends Application_Subscription_Abstract
 		$form->oneFieldSetAtATime = true;
 		$form->formNamespace = get_class( $this ) . $value['subscription_name'];
 		$form->submitValue = 'Continue checkout';
-	//	var_export( $newPriceList );
 		$previousData = $this->getStorage()->retrieve();
-  //  	var_export( $previousData );
 		$previousData = @$previousData['cart'][$value['subscription_name']];
-  //  	var_export( $previousData );
 		
 		//	First fieldset
 		$fieldset = new Ayoola_Form_Element();		
 		$priceId = $value['subscription_name'] . 'price_id';
-	//	var_export( $_GET );
-	//	var_export( $previousData['price_id'] );
 		$outputType = count( $values ) > 5 ? 'Select' : 'Radio';
 		$fieldset->addElement( array( 'name' => $priceId, 'label' => 'Choose "' . $value['subscription_label'] . '" option :', 'type' => $outputType, 'value' => @$previousData['price_id'] ), $values );
 		
 		//	Post the subscription name so it could retain state
 		$fieldset->addElement( array( 'name' => 'subscription_name', 'type' => 'hidden', 'value' => $value['subscription_name'] ) );
 		$fieldset->addRequirement( $priceId, array( 'InArray' => array_keys( $values ) ) );
-	//	$fieldset->addFilter( $priceId, array( 'Int' => null ) );
 		$fieldset->addLegend( 'Choose option for "' . $value['subscription_label'] . '"' );
-	//	$form->addFieldset( $fieldset );
 		
 		//	second fieldset
 		$priceIdValue = $this->getGlobalValue( $priceId ) ? : array();
-	//	@$_POST[$priceId] = $_POST[$priceId] ? : $_POST[Ayoola_Form::hashElementName( $priceId )];
-	//	@$value = $newPriceList[$_POST[$priceId]];
 		@$minQuantity = (int) $newPriceList[$priceIdValue]['min_quantity'] ? : 0;
 		@$maxQuantity = (int) $newPriceList[$priceIdValue]['max_quantity'] ? : 5;
 		@$allowedMultiples = (int) $newPriceList[$priceIdValue]['allowed_multiples'] ? : 1;
@@ -528,11 +454,9 @@ class Application_Subscription extends Application_Subscription_Abstract
 		$amount[$quantity] = $quantity;
 		while( $quantity <= $maxQuantity )
 		{
-		//	var_export( $allowedMultiples * $minQuantity );
 			$amount[$quantity] = $quantity;
 			$quantity += $allowedMultiples;
 		}
-	//	$amount = array_combine( range( 1, 5 ), range( 1, 5 ) );
 		
 		$uniqueNameForStorage = $value['subscription_name'] . $value['price_id'];
 		if( ! $storage = $this->getObjectStorage( $uniqueNameForStorage )->retrieve() )
@@ -549,15 +473,10 @@ class Application_Subscription extends Application_Subscription_Abstract
 		$subscriptionName = $value['subscription_name'] . 'subscription_name';
 		$fieldset->addElement( array( 'name' => $subscriptionName, 'type' => 'Hidden' ) );
 		$fieldset->addFilter( $subscriptionName, array( 'DefiniteValue' => $value['subscription_name'] ) );
-	//		var_export( $value );
 		
 		if( $storage && $minQuantity )
-//		if( $storage )
 		{
-		//	$fieldset = new Ayoola_Form_Element();		
 			@$multipleLabel = $storage['price_info']['cycle_label'] ? : 'Multiples:';
-		//	var_export( $value );
-		//	if 
 			$fieldset->addElement( array( 'name' => $multiple, 'label' => 'How many ' . $multipleLabel, 'type' => 'Radio', 'value' => @$previousData['multiple'] ), $storage['amount'] );
 			@$fieldset->addRequirement( $multiple, array( 'Int' => null, 'ArrayKeys' => $storage['amount'] ) );
 			$fieldset->addElement( array( 'name' => 'unit_price', 'type' => 'Hidden', 'value' => '' ) );
@@ -571,57 +490,15 @@ class Application_Subscription extends Application_Subscription_Abstract
 			$fieldset->addElement( array( 'name' => 'subscription_label', 'type' => 'hidden', 'value' => null ) );
 			$fieldset->addFilter( 'subscription_label', array( 'DefiniteValue' => @$storage['price_info']['subscription_label'] ) );
 			$fieldset->addLegend( 'Add "' . $value['subscription_label'] . '" to shopping cart' );
-		//	$form->addFieldset( $fieldset );
 			
 		}
 		$form->addFieldset( $fieldset );
-	//	var_export( $storage['price_info'] );
-	//	var_export( $newPriceList[$priceIdValue] );
-
 		if( ! empty( $storage['price_info']['subscription_requirements'] ) )
 		{
 			$form->submitValue = $form->submitValue ? 'Continue checkout' : $form->submitValue;
 			
 			self::setFormRequirements( $form, $storage['price_info']['subscription_requirements'] );
-/* 			
-			//	Regular form elements
-			$form->setFormRequirements( $storage['price_info']['subscription_requirements'] );
-			
-			//	settle internal requirements
-			$requirements = array();
-			foreach( $storage['price_info']['subscription_requirements'] as $each )
-			{
-				if( self::$_requirementOptions[$each]['class'] )
-				{
-					$requirements[] = array(
-												array( 'requirement_class' => self::$_requirementOptions[$each]['class'], 'requirement_legend' => self::$_requirementOptions[$each]['legend'], 'parameters' => self::$_requirementOptions[$each]['parameters'], 'requirement_goodnews' => str_ireplace( '@@@SUBSCRIPTION_LABEL@@@', $value['subscription_label'] , self::$_requirementOptions[$each]['goodnews'] ) ), 
-											);
-				}
-			}
-			$form->setFormRequirements( $requirements );
- *//* 			$requirements = $storage['price_info']['subscription_requirements'];
-			foreach( $requirements as $each )
-			{
-		//		continue;
-				$class = self::$_requirementOptions[$each]['class'];	
-				
-				if( ! Ayoola_Loader::loadClass( $class ) )
-				{
-					continue;
-				//	throw new Ayoola_Object_Exception( 'INVALID CLASS: ' . $class );
-				}
-				$class = new $class( @self::$_requirementOptions[$each]['parameters'] );
-				if( ! method_exists( $class, 'createForm' ) ){ continue; }
-				$fieldsets = $class->getForm()->getFieldsets();
-				foreach( $fieldsets as $fieldset )
-				{
-					$fieldset->appendElement = false;
-					$fieldset->addLegend( self::$_requirementOptions[$each]['legend'] );
-					$fieldset->addElement( array( 'type' => 'html', 'name' => 'e' ), array( 'html' => '<blockquote class=""><em class="">' . str_ireplace( '@@@SUBSCRIPTION_LABEL@@@', $value['subscription_label'] , self::$_requirementOptions[$each]['goodnews'] ) . '</em></blockquote>' ) );
-					$form->addFieldset( $fieldset );
-				}
-			}
- */		
+		
 		}
 		
 		//	Begin to go through the subscription requirements

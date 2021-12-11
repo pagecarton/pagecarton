@@ -494,36 +494,42 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
     /**
      * Set the form object
      *
-     * @param Ayoola_Form
+     * @param object Ayoola_Form
+     * @param array Form values
      */
-    public function setForm( Ayoola_Form $form )
+    public function setForm( Ayoola_Form $form, array $values = null )
     {
-        self::setHook( $this, __FUNCTION__, $form );
+
+        //   we need to have values here too so it can serve in the hook
+        $data['form'] = $form;
+        $data['values'] = $values;
+
+        self::setHook( $this, __FUNCTION__, $data );
 		
 		//	INTRODUCING CALL-TO-ACTION
 		if( $this->getParameter( 'call_to_action' ) )
 		{
-			$form->callToAction = $this->getParameter( 'call_to_action' );
+			$data['form']->callToAction = $this->getParameter( 'call_to_action' );
 		}
 		$this->fakeValues = $this->fakeValues ? : $this->getParameter( 'fake_values' );
 		if( ! empty( $this->fakeValues ) )
 		{ 
-			$form->fakeValues = $this->fakeValues; 
-			$form->oneFieldSetAtATime = false; 
+			$data['form']->fakeValues = $this->fakeValues; 
+			$data['form']->oneFieldSetAtATime = false; 
 		}
 		
 		//	For markup templates, we need the forms to process once.
 		if( $this->getMarkupTemplate() )
 		{
-			$form->oneFieldSetAtATime = false; 
+			$data['form']->oneFieldSetAtATime = false; 
 		}
 		if( $formParameters = $this->getParameter( 'form' ) )
 		{ 
-			$form->setParameter( @$formParameters ? : array() );
-			$form->setAttributes( @$formParameters['attributes'] ? : array() );
+			$data['form']->setParameter( @$formParameters ? : array() );
+			$data['form']->setAttributes( @$formParameters['attributes'] ? : array() );
 		}
 
-		$this->_form = $form;
+		$this->_form = $data['form'];
     }
 	
     /**

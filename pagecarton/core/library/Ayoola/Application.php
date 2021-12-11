@@ -1600,7 +1600,7 @@ class Ayoola_Application
 			{
 				if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
 				{
-                    $noRestriction = true;
+                    $noRestriction = Ayoola_Page::getInfo( $uri ) ? false : true ;
 					break;
 				}
             }
@@ -1614,7 +1614,7 @@ class Ayoola_Application
                 //  finally, we want to be autogenerating theme pages now
                 if( $previewTheme( array( 'auto_init_theme_page' => true ) ) )
                 {
-                    $noRestriction = true;
+                    $noRestriction = Ayoola_Page::getInfo( $uri ) ? false : true ;
                     break;
                 }
 

@@ -1498,7 +1498,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$form->addFieldset( $fieldset ); 
 
 		//	supplementary form
-
 		if( ! empty( $postTypeInfo['supplementary_form'] ) )
 		{
 			$supplementaryForm = $postTypeInfo['supplementary_form'];
@@ -1517,7 +1516,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
         if( ! empty( $postTypeInfo['view_widget'] ) && Ayoola_Object_Embed::isWidget( $postTypeInfo['view_widget'] ) )
 		{
-			$supplementaryForm = $postTypeInfo['supplementary_form'];
             $parameters = array( 'default_values' => $values );  
 
 			$orderFormClass = new $postTypeInfo['view_widget']( $parameters );
@@ -2085,7 +2083,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$form->addFieldset( $fieldset );
 
 		$form->setParameter( array( 'element_whitelist' => $fieldsToEdit ) );
-		$this->setForm( $form );
+		$this->setForm( $form, $values );
     } 
 	// END OF CLASS
 }

@@ -68,6 +68,10 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
                 return $this->setViewContent(  '' . self::__( '<span class="boxednews centerednews badnews">You have no item in your shopping cart.</span>' ) . '', true  );
             }
 
+            $userInfo = Ayoola_Application::getUserInfo();
+
+            $this->createForm( null, null , $userInfo );
+
             //	Record in the orders table
             $notes = Application_Settings_Abstract::getSettings( 'Payments', 'order_notes' );
 
@@ -83,6 +87,15 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
             $cart = self::getStorage()->retrieve();
             $cart['checkout_info'] = $values;
             self::getStorage()->store( $cart );
+
+            //  save checkout info to user account
+            if( $userInfo )
+            {
+                $userInfo['checkout_info'] = $values;
+                Ayoola_Access_Localize::info( $userInfo );
+            }
+    
+
             
             //	Notify Admin
             $mailInfo = array();
@@ -285,9 +298,15 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
         //	Store order number to avoid multiple table insert
         $cart = self::getStorage()->retrieve();
         if( 
-            ! $orderInfo
-            || empty( $orderInfo['order_number'] )
-            || $orderInfo['cart_id'] != md5( serialize( $cart ) ) 
+            (
+                ! $orderInfo
+                || empty( $orderInfo['order_number'] )
+                || $orderInfo['cart_id'] != md5( serialize( $cart ) )
+            )
+            &&
+            (
+                ! empty( $orderApi )
+            ) 
             //  it doesn't make sense to have new order number because of the change of payment method
             //|| ( $orderInfo['order_api'] != $orderApi )
         )

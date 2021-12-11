@@ -63,22 +63,37 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 	protected function init()
     {		
 		//	Identifiers are required
-		if( ! $identifier = $this->getIdentifier() ){ return false; }
+		//if( ! $identifier = $this->getIdentifier() ){ return false; }
+        $status = 0;
 		if( ! $cart = self::getStorage()->retrieve() )
 		{ 
-			return $this->setViewContent(  '' . self::__( '<p class="badnews">ERROR - You need to have an item in your shopping cart to confirm checkout</p>' ) . '', true  );
+			return $this->setViewContent( '<p class="badnews">' . self::__( 'ERROR - You need to have an item in your shopping cart to confirm checkout' ) . '</p>', true  );
 		}
 			
-		$data = Application_Subscription_Checkout_CheckoutOption::getInstance()->selectOne( null, array( 'checkoutoption_name' => $identifier['api'] ) );
 
-		//	lets see if we can ask the gateway for status
-		$className = $data['object_name'];
+        ;
+		if( ! $orderInfo = Application_Subscription_Checkout::getObjectStorage( 'order_info' )->retrieve() )
+		{ 
+			return $this->setViewContent( '<p class="badnews">' . self::__( 'Order have not been placed yet' ) . '</p>', true  );
+		}
 
-        $orderNumber = self::getOrderNumber( $identifier['api'] );
+        $api = $orderInfo['order_api'];
+
+        $orderNumber = $orderInfo['order_number'];
+
 		if( $setOrderInfo = Application_Subscription_Checkout_Order::getInstance()->selectOne( null, array( 'order_id' => $orderNumber ) ) )
 		{ 
-            $identifier['status'] = $setOrderInfo['order_status'];
+            //  pick latest status
+            $status = $setOrderInfo['order_status'];
         }
+
+        $api = $orderInfo['order_api'];
+
+        $data = Application_Subscription_Checkout_CheckoutOption::getInstance()->selectOne( null, array( 'checkoutoption_name' => $api ) );
+
+		$className = $data['object_name'];
+
+        //	lets see if we can ask the gateway for status
 		if( Ayoola_Loader::loadClass( $className ) )
 		{ 
 			if( method_exists( $className, 'checkStatus' ) )
@@ -90,7 +105,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 						case 'payment successful':
 						case '99':
 						case '100':
-							$identifier['status'] = 1;
+							$status = 1;
 						break;   
 					}
 				}
@@ -99,11 +114,12 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 
 		$this->setViewContent( "<br><h2>Thank you! Order Confirmed! </h2><br>" );
 		$this->setViewContent( "
-        <p><b>STATUS</b>: "  . self::$checkoutStages[intval( $identifier['status'] )] . " <br>
+        <p><b>STATUS</b>: "  . self::$checkoutStages[intval( $status )] . " <br>
         <b>ORDER NUMBER</b>: " . $orderNumber . "</p><br>" 
         );
 		$this->setViewContent( "<p>" . ( Application_Settings_Abstract::getSettings( 'Payments', 'order_confirmation_message' ) ? : "You can print this page for your records. Your order number is a unique identifier that should be mentioned when referencing this order." ) . "</p><br>" );
 		
+
         if( ! empty( $data['logo'] ) )
         {
             $data['checkoutoption_logo'] = '<img height="100px" src="' . Ayoola_Application::getUrlPrefix() . $data['logo'] . '" alt="' . $data['checkoutoption_name'] . ' logo" >';		
@@ -115,7 +131,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
             $data['checkoutoption_logo'] = htmlspecialchars_decode( $data['checkoutoption_logo'] );
             $this->setViewContent( "<p>{$data['checkoutoption_logo']}</p><br>" );		
         }
-		if( $identifier['status'] )
+		if( $status )
 		{
 			$this->setViewContent( "<h4>Order Details</h4><br>" );
 			$this->setViewContent( Application_Subscription_Cart::viewInLine() );
@@ -128,7 +144,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 									);
 			$notes = Application_Settings_Abstract::getSettings( 'Payments', 'order_notes' );
 
-			//Application_Subscription_Cart::clear();
+			Application_Subscription_Cart::clear();
 
 			$notes ? $this->setViewContent( "<h4>Note:</h4><br>" ) : null;
 			$notes ? $this->setViewContent( $notes ) : null;          
@@ -140,6 +156,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 			$this->setViewContent( "<br><br><h4>Order Details</h4><br>" );
 			$this->setViewContent( Application_Subscription_Cart::viewInLine() . "<br><br><br><br>");
 		}
+
 		//	SEND THE user AN EMAIL IF HE IS LOGGED INN
 		$emailAddress = array();
 		if( Ayoola_Application::getUserInfo( 'email' ) )
@@ -159,12 +176,12 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		);
 		$emailInfo['to'] = implode( ',', array_unique( $emailAddress ) );
 		$emailInfo['html'] = true; 
+
 		if( $emailAddress )
 		{		
-			@self::sendMail( $emailInfo );
-		//	self::v( $emailInfo );
-			
+			@self::sendMail( $emailInfo );			
 		}
+
 		//	Notify Admin
 		$emailInfo['to'] = 	Ayoola_Application_Notification::getEmails();
 
@@ -177,9 +194,7 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
 		';
 		try
 		{
-		//	var_export( $emailInfo );
 			@self::sendMail( $emailInfo );
-		//	Ayoola_Application_Notification::mail( $emailInfo );
 		}
 		catch( Ayoola_Exception $e ){ null; }
 		

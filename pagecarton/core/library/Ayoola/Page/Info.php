@@ -52,15 +52,12 @@ class Ayoola_Page_Info extends PageCarton_Widget
             //  Output demo content to screen
 		    $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
 		    $settings = Application_Settings_Abstract::getSettings( 'SiteInfo' );  
-         //   if( )
 
 			switch( $currentUrl )
 			{
 				case '/tools/classplayer':
 				case '/object':
-		//		case '/pc-admin':
 				case '/widgets':
-		//		case true:
 					//	Do nothing.
 					//	 had to go through this route to process for 0.00
 					if( @$_REQUEST['url'] )
@@ -80,7 +77,6 @@ class Ayoola_Page_Info extends PageCarton_Widget
                         $title = ucwords( implode( ' ', explode( '_', $title ) ) );
                         $title = ucwords( implode( ' ', explode( '-', $title ) ) );
                     }
-                //    var_export( $title );
                 break;
 				default:
 
@@ -88,13 +84,8 @@ class Ayoola_Page_Info extends PageCarton_Widget
 			}
 
             //  Output demo content to screen
-     //       self::v( $settings );   
             $url = $this->getParameter( 'url' ) ? : $currentUrl;
             $pageInfo = Ayoola_Page::getInfo( $url );
-        //    $pageInfo = Ayoola_Page_Page::getInstance()->selectOne( null, array( 'url' => $url ) );
-            
-   //        self::v( $this->getParameter( 'url' ) );   
-   //       self::v( $currentUrl );   
             if( ! $pageInfo['url'] )
             {
                 $currentUrl = rtrim( Ayoola_Application::getRuntimeSettings( 'real_url' ), '/' ) ? : '/';
@@ -124,27 +115,24 @@ class Ayoola_Page_Info extends PageCarton_Widget
                 {
                     $pageInfo['description'] = $settings['site_description'];
                 }
-             //   var_export( $pageInfo );
             }
 
 
 
             if( empty( $pageInfo['title'] ) )
             {
-            //    $pageInfo['title'] = ucwords( str_replace( '-', ' ', basename( $pageInfo['url'] ? : $currentUrl ) ) ? : 'Home Page' );
+
             }
 
             if( ! empty( $title ) )
             {
                 $pageInfo['title'] = $title;
             }
-        //    var_export( $pageInfo );
 
             if( empty( $pageInfo['cover_photo'] ) )
             {
                 $pageInfo['cover_photo'] = $settings['cover_photo'] ? : ( $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg' );
             }
-        //    self::v( $pageInfo );   
             
             if( self::hasPriviledge( 98 ) )
             {
@@ -152,7 +140,6 @@ class Ayoola_Page_Info extends PageCarton_Widget
                 $pageInfo['pc_no_data_filter'] = true;
             }
 
-//     var_export( Ayoola_Page::getCurrentPageInfo() );
             $html = '<div class="pc_theme_parallax_background" style="background-image:     linear-gradient( rgba(0, 0, 0, 0.5),      rgba(0, 0, 0, 0.5)    ), url(\'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Application_IconViewer/?url=' . ( $pageInfo['cover_photo'] ? : $settings['cover_photo'] ) . '&crop=1&max_width=1500&max_height=600\');">'; 
             $html .= $this->getParameter( 'css_class_of_inner_content' ) ? '<div class="' . $this->getParameter( 'css_class_of_inner_content' ) . '">' : null;
             $html .= '<h1>' . @$pageInfo['title'] . '</h1>';
@@ -184,9 +171,7 @@ class Ayoola_Page_Info extends PageCarton_Widget
      */
     public static function getHTMLForLayoutEditor( & $object )
 	{
-	//	$html = null;
-     //   $html .= self::viewInLine( array( 'url' => @$_REQUEST['url'] ) ); 
-	//	return $html;
-	}
+
+    }
 	// END OF CLASS
 }

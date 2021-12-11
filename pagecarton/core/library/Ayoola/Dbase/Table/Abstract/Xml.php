@@ -291,11 +291,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             $adapter->setRelationship( $previousRelationship );
         } while ( false );
 
-        //     var_export(  $_GET['show_class_data'] === get_class( $this  ) );
-        //     PageCarton_Widget::v( $_GET['show_class_data'] );
-        //     PageCarton_Widget::v( get_class( $this  ) );
-        //     PageCarton_Widget::v( $this->getParameter() );
-
         if( 
             ( isset( $_GET['show_class_data'] ) && ( $_GET['show_class_data'] === get_class( $this ) ) ) 
             || $this->getParameter( 'markup_template_mode' ) 
@@ -306,9 +301,7 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             {
                 $where = json_decode( $this->getParameter( 'where_clause_json' ), true );
                 $where = is_array( $where ) ? $where : array();
-            //    var_export( json_decode( $this->getParameter( 'where_clause_json' ) ) );
-            //    var_export( $where );
-             }
+            }
             if( $this->getParameter( 'where_clause_user_data' ) )
             {
                 if( empty( Ayoola_Application::getUserInfo( $this->getParameter( 'where_clause_user_data' ) ) ) )
@@ -317,7 +310,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
                 }
                 $where[$this->getParameter( 'where_clause_user_data' )] = (string) Ayoola_Application::getUserInfo( $this->getParameter( 'where_clause_user_data' ) );
             }
-             //   var_export( $records );
              @$options = array( 'limit' => $this->getParameter( 'limit' ) ? : 50 );
              @static::$_defaultSelectOptions = is_array( static::$_defaultSelectOptions ) ? static::$_defaultSelectOptions : array();
              $options = $options + static::$_defaultSelectOptions;
@@ -327,20 +319,13 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
                 $selectOption = is_array( $selectOption ) ? $selectOption : array();
                 $options += $selectOption;
              }
-         //  var_export( static::$_defaultSelectOptions );
               $records = $this->query( 'TABLE', 'FETCH', null, $where, $options );
-             //   var_export( $records );
 
             if (!empty($_GET['pc_form_values']) && !empty($_GET['pc_form_labels'])) {
-                //    var_export( $_GET['pc_form_values'] );
                 $filter  = new Ayoola_Filter_SelectListArray($_GET['pc_form_values'], $_GET['pc_form_labels']);
                 $records = $filter->filter($records);
             }
-            //    var_export( $records );
-            //    var_export( $_GET );
-            //    krsort( $records );
             $this->_objectTemplateValues = $this->_objectData = $records;
-            //    var_export( $this->getParameter() );
             $this->setViewContent( $this->query( 'TABLE', 'VIEW', $fieldsKey ) );
         } 
         elseif( isset( $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] ) && ( $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] === get_class( $this ) ) ) 
@@ -351,7 +336,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
 
             $this->setViewContent(  '' . self::__( '<a class="pc-btn" href="?show_class_data=' . get_class($this) . '">' . $output . '</a>' ) . '' );
         }
-        //    var_export( $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] );
 
     }
 

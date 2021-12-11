@@ -161,23 +161,35 @@ abstract class Application_Subscription_Abstract extends Ayoola_Abstract_Table
 			switch( $_GET['cart_action'] )
 			{
 				case 'delete':
+                case 'edit':
 					foreach( $items as $name => $value )
 					{
                         if( md5( serialize( $value ) ) == $_GET['cart_id'] )
                         {
-                            @$data['settings']['total'] -= $items[$name]['price'] * $items[$name]['multiple'];
-                            if( $method = $items[$name]['delete_method'] AND is_callable( $method ) )
+                            if( $_GET['cart_action'] == 'delete' )
                             {
-                                //var_export( $items[$name] );
-                                $method( $items[$name] );
+                                @$data['settings']['total'] -= $items[$name]['price'] * $items[$name]['multiple'];
+                                if( $method = $items[$name]['delete_method'] AND is_callable( $method ) )
+                                {
+                                    $method( $items[$name] );
+                                }
+                                unset( $items[$name] );
                             }
-                            unset( $items[$name] );
+                            elseif( $_GET['cart_action'] == 'edit' )
+                            {
+                                $items[$name]['multiple'] = intval( $_GET['edit'] );
+                                
+                                unset( $_GET['cart_action'] );
+                                //$s = new Application_Subscription();
+                                //$s->subscribe( $items[$name] );
+                                //return true;
+                            }
                         }
 					}
-					break;
+				break;
 				case 'empty':
 					if( md5( serialize( $items ) ) == $_GET['cart_id'] ){ $items = array(); }
-					break;
+				break;
             }
             
 			$this->cartSave( $items, @$data['settings'] );

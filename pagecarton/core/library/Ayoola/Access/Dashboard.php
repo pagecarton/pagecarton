@@ -54,31 +54,16 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
 		{
 			return false;
 		}
-	// 	var_export( $userInfo ); 
 
 		$style = 'min-width:25%;max-width:50%;line-height:2em;display:inline-block;';
 		$header = $style . 'font-weight:bold;';
 		
 		//	Account Information
-/* 
-		<img src="{{{display_picture}}}" style="float:right;max-height:160px;" >
-		<h2>Account Summary</h2> 
-		<p><strong>{{{auth_name}}}</strong></p> 
-		<p>{{{auth_description}}}</p> 
-		<p>Account has been in existence since {{{creation_date}}}.</p>
-		<div style="clear:both;"></div>
-		
-		<br>
-		<span style="float:right;">
-		<h3>Wallet Balance</h3>
-		<h2>{{{wallet_balance}}}</h2>
-		</span>
- */		//	Account Settings
+		//	Account Settings
 		$this->setViewContent( "<span style='{$header}'>Access Level: </span>" );
 		
 		//	Get information about the user access information
 		$options = self::getAccessInformation( $userInfo['username'] );
-	//	var_export( $options );  
 		if( empty( $options['display_name'] ) )
 		{
 			if( ! empty( $options['firstname'] ) )
@@ -101,7 +86,6 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
 		$this->_objectTemplateValues = array_merge( $options ? : array(), $this->_objectTemplateValues ? : array() );   
 		
 		
-	//	$userInfo['access_level'] ?   
 		@$userInfo['wallet_balance'] = $userInfo['wallet_balance'] ? $userInfo['wallet_balance'] : '0.00';
 		@$this->setViewContent( "<span style='{$style}'>{$options['auth_name']}</span>" );
 		
@@ -114,11 +98,6 @@ class Ayoola_Access_Dashboard extends Ayoola_Access_Abstract
 			$this->setViewContent( "<span style='{$style}'>{$userInfo[$each]}</span>" );
 		}
 		$this->_objectTemplateValues = array_merge( $userInfo ? : array(), $this->_objectTemplateValues ? : array() );
-	//	var_export( $this->_objectTemplateValues );  
-	//	self::v( $this->_objectTemplateValues );  
-		
-		// Set Default
-	//	self::v( $this->_objectTemplateValues );
     } 
 	// END OF CLASS
 }

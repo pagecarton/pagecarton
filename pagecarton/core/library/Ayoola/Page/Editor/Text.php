@@ -325,6 +325,22 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      * Do a one time parameter filter within widgets
      *
      */
+	public static function doTextUpdate( & $content )
+    {
+        //  text update
+        $textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
+		if( empty( $textUpdatesSettings['dummy_search'] ) )
+		{
+			$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
+		}
+
+		$content = str_replace( $textUpdatesSettings['dummy_search'], $textUpdatesSettings['dummy_replace'], $content );
+    }
+
+    /**
+     * Do a one time parameter filter within widgets
+     *
+     */
 	public static function filterParameters( & $parameters )
     {
 		$content = $parameters['codes'] ? : ( $parameters['editable'] ? : $parameters['view'] );
@@ -434,13 +450,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 						{
 							$parameters = array( 'parameter_suffix' => '[' . $counter . ']' ) + $parametersX;  
                             $exportable =
-'<widget>
-    <script type="application/json">
-    ' . json_encode( $parameters + array( 'class' => $each ) ) . '
-    </script>
-' . $content . '
-</widget>
-';
+                            '<widget>
+                                <script type="application/json">
+                                ' . json_encode( $parameters + array( 'class' => $each ) ) . '
+                                </script>
+                            ' . $content . '
+                            </widget>
+                            ';
                             $content = $exportable;
 						}
 					}
@@ -465,14 +481,14 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                                     + $parametersX;  
                     
                     $exportable =
-'<widget>
-    <script type="application/json">
-    ' . json_encode( $parameters + array( 'class' => $each ) ) . '
-    </script>
+                    '<widget>
+                        <script type="application/json">
+                        ' . json_encode( $parameters + array( 'class' => $each ) ) . '
+                        </script>
 
-' . $partTemplateToUse . '
+                    ' . $partTemplateToUse . '
 
-</widget>';					
+                    </widget>';					
 					$searchC = array();
 					$replaceC = array();
 					$searchC[] = $partTemplate;
@@ -510,13 +526,8 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         }
 
         //  text update
-        $textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
-		if( empty( $textUpdatesSettings['dummy_search'] ) )
-		{
-			$textUpdatesSettings = Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
-		}
+        self::doTextUpdate( $content );
 
-		$content = str_replace( $textUpdatesSettings['dummy_search'], $textUpdatesSettings['dummy_replace'], $content );
 		$content = self::__( $content );
 
         $count = 0;

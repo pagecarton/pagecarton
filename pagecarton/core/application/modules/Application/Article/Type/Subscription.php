@@ -46,6 +46,58 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
      * The method does the whole Class Process
      * 
      */
+	public static function subscribe( $values )
+    {
+
+        unset( $values['document_url_base64'], $values['download_base64'] ); 
+			
+        //	data
+        $values['quantity'] = intval( @$_REQUEST['quantity'] ) ? : 1;	
+        if( ! empty( $values['subscription_minimum_order'] ) && intval( $values['subscription_minimum_order'] ) > $values['quantity'] )
+        {
+            $values['quantity'] = $values['subscription_minimum_order'];
+        }
+
+        $values['subscription_name'] = $values['article_url'];
+        $values['subscription_label'] = $values['article_title'];
+        if( @$_REQUEST['supplementary_subscription_selections'] )
+        {
+            $selections = array_map( 'trim', explode( ',', $_REQUEST['supplementary_subscription_selections'] ) );
+            foreach( $selections as $eachSelection )
+            {
+                $values['subscription_label'] = ( $_REQUEST['subscription_selections' . $eachSelection] ? ( $_REQUEST['subscription_selections' . $eachSelection] . ' | ' ) : null ) . $values['subscription_label'];
+                $values['subscription_selections' . $eachSelection] = $_REQUEST['subscription_selections' . $eachSelection];
+            }
+        }
+        elseif( ! empty( $_REQUEST['subscription_selections'] ) )
+        {
+            $values['subscription_label'] = ( $_REQUEST['subscription_selections'] ? ( $_REQUEST['subscription_selections'] . ' | ' ) : null ) . $values['subscription_label'];
+        }
+        $values['item_price'] = str_replace( array( ',', ' ' ), '', $values['item_price'] );
+
+        $values['price'] = $values['item_price'] + floatval( array_sum( $values['product_option'] ? : array() ) );
+        $values['product_option'] = $values['product_option'];
+        $values['cycle_name'] = 'each'; 
+        $values['cycle_label'] = '';
+        $values['price_id'] = $values['article_url'];
+        $values['cart_item_type'] = $values['true_post_type'];
+        $values['subscription_description'] = $values['article_description'];
+        $values['url'] = Ayoola_Application::getUrlPrefix() . ( @$values['cart_url'] ? : $values['article_url'] );     
+        @$values['checkout_requirements'] = $values['article_requirements']; //"billing_address";
+
+        //	After we checkout this is where we want to come to
+        $values['classplayer_link'] = "javascript:;";
+        $values['object_id'] = $values['article_url'];
+        $values['multiple'] = $values['quantity'];
+
+        $class = new Application_Subscription();   
+        $class->subscribe( $values );
+    }
+	
+    /**
+     * The method does the whole Class Process
+     * 
+     */
 	protected function init()
     {
 		if( ! $subscriptionData = $this->getParameter( 'data' ) )
@@ -57,7 +109,6 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$subscriptionData = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
 		}
 
-	//	var_export( $subscriptionData );
 		$this->createForm( $this->getParameter( 'button_value' ) ? : ( @$subscriptionData['call_to_action'] ? : 'Add to cart' ), '' );
 		$form = $this->getForm() ? $this->getForm()->view() : null;
 		$class = new Application_Subscription();   
@@ -71,50 +122,12 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
 			$_GET['article_url'] = $subscriptionData['article_url'];
 			$data = $this->getParameter( 'data' ) ? : $this->getIdentifierData();
 			//	var_export( $data );
-			$values = $data;
-			unset( $values['document_url_base64'], $values['download_base64'] ); 
-			
-			//	data
-			$values['quantity'] = intval( @$_REQUEST['quantity'] ) ? : 1;	
-			if( ! empty( $values['subscription_minimum_order'] ) && intval( $values['subscription_minimum_order'] ) > $values['quantity'] )
-			{
-				$values['quantity'] = $values['subscription_minimum_order'];
-			}
-			$this->_objectData['quantity'] = $values['quantity'];	
-			
-			//	Domain Reg
-			$values['subscription_name'] = $data['article_url'];
-			$values['subscription_label'] = $data['article_title'];
-			if( @$_REQUEST['supplementary_subscription_selections'] )
-			{
-				$selections = array_map( 'trim', explode( ',', $_REQUEST['supplementary_subscription_selections'] ) );
-				foreach( $selections as $eachSelection )
-				{
-					$values['subscription_label'] = ( $_REQUEST['subscription_selections' . $eachSelection] ? ( $_REQUEST['subscription_selections' . $eachSelection] . ' | ' ) : null ) . $values['subscription_label'];
-					$values['subscription_selections' . $eachSelection] = $_REQUEST['subscription_selections' . $eachSelection];
-				}
-			}
-			elseif( ! empty( $_REQUEST['subscription_selections'] ) )
-			{
-				$values['subscription_label'] = ( $_REQUEST['subscription_selections'] ? ( $_REQUEST['subscription_selections'] . ' | ' ) : null ) . $values['subscription_label'];
-			}
-			$data['item_price'] = str_replace( array( ',', ' ' ), '', $data['item_price'] );
+            
+            //   subscribe here
+            self::subscribe( $data );
+            $this->_objectData['quantity'] = $data['quantity'];	
 
-			$values['price'] = $data['item_price'] + floatval( array_sum( $values['product_option'] ? : array() ) );
-			$values['product_option'] = $values['product_option'];
-			$values['cycle_name'] = 'each'; 
-			$values['cycle_label'] = '';
-			$values['price_id'] = $data['article_url'];
-            $values['cart_item_type'] = $data['true_post_type'];
-			$values['subscription_description'] = $data['article_description'];
-			$values['url'] = Ayoola_Application::getUrlPrefix() . ( @$data['cart_url'] ? : $data['article_url'] );     
-			@$values['checkout_requirements'] = $data['article_requirements']; //"billing_address";
-			//	''
-			//	After we checkout this is where we want to come to
-			$values['classplayer_link'] = "javascript:;";
-			$values['object_id'] = $data['article_url'];
-			$values['multiple'] = $values['quantity'];
-			$class->subscribe( $values );
+
 			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/cart' );
 			exit();
 		//	$this->_objectData['confirmation'] = $confirmation;	

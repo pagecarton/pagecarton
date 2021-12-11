@@ -55,9 +55,21 @@ class Ayoola_Form_Element_Type_SelectTwo extends PageCarton_Widget
             }
             Application_Style::addFile( 'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css' );
             Application_Javascript::addFile( 'https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js' );
+
+            $config = $this->getParameter( 'config' );
+            if( ! is_string( $config ) )
+            {
+                if( ! empty( $config['ajax']['url'] ) && Ayoola_Application::getUrlPrefix() && stripos( $config['ajax']['url'], Ayoola_Application::getUrlPrefix() ) !== 0 )
+                {
+                    $config['ajax']['url'] = Ayoola_Application::getUrlPrefix() . $config['ajax']['url'];
+                }
+                $config = json_encode( $config );
+            }
+            $this->_parameter['id'] = $this->getParameter( 'id' ) ? : 'select2-x';
+
             Application_Javascript::addCode( '
                 $(document).ready(function() {
-                    $(".js-example-basic-single-' . $this->getParameter( 'id' ) . '").select2( ' . json_encode( $this->getParameter( 'config' ) ) . ' );
+                    $(".' . $this->getParameter( 'id' ) . '").select2( ' . $config . ' );
                 });
             ' 
             );
@@ -67,7 +79,6 @@ class Ayoola_Form_Element_Type_SelectTwo extends PageCarton_Widget
             {
                 $this->_objectTemplateValues['multiple'] = 'multiple';
             }
-
         }  
 		catch( Exception $e )
         { 
