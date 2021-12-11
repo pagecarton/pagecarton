@@ -94,8 +94,6 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
                 $userInfo['checkout_info'] = $values;
                 Ayoola_Access_Localize::info( $userInfo );
             }
-    
-
             
             //	Notify Admin
             $mailInfo = array();

@@ -41,23 +41,18 @@ class Application_Log_View_Error extends Application_Log_View_Abstract
      */
 	public static function log( $message )
 	{
-		var_export( $message );
+		//var_export( $message );
 		$log = array( 'error_message' => $message, 'error_time' => time() );
 		$mailInfo["subject"] = "Application Error";
 		$mailInfo["body"] = $message;
 		try
 		{
-	//		Ayoola_Application_Notification::mail( $mailInfo );
 		}
         catch( Ayoola_Exception $e ){ null; }
         function_exists( 'http_response_code' ) ? http_response_code(500) : null;
 		$message = "There is error on this page please reload your browser to continue. If this persist, contact the administrator. You can also go back to the <a href=\'/\'>homepage</a>";
-	//	trigger_error( $message );
 		echo "<div class='badnews'>$message</div>";
-	//	echo $message;
-	//	var_export( static::getLogTable() );
 		$result = self::getLogTable()->insert( $log );
- 	//	var_export( $result );
-   }
+    }
 	// END OF CLASS
 }
