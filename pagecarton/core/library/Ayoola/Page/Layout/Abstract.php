@@ -948,49 +948,49 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
     		}
 		}
 		
-		    // empty anchor not doing well in CKEDITOR
-			//	check if empty
-			//	http://stackoverflow.com/questions/29714291/removing-elements-with-no-children-dom-php
-			$xpath = new DOMXpath($xml);
-			$empty_anchors = $xpath->evaluate('//a[not(*) and not(text()[normalize-space()])]');
-			$i = $empty_anchors->length - 1; 
-			while ($i > -1) { 
-				$element = $empty_anchors->item($i);  
+        // empty anchor not doing well in CKEDITOR
+        //	check if empty
+        //	http://stackoverflow.com/questions/29714291/removing-elements-with-no-children-dom-php
+        $xpath = new DOMXpath($xml);
+        $empty_anchors = $xpath->evaluate('//a[not(*) and not(text()[normalize-space()])]');
+        $i = $empty_anchors->length - 1; 
+        while ($i > -1) { 
+            $element = $empty_anchors->item($i);  
 
-			
-				//	Dont remove, add empty space
-				$element->nodeValue = '&nbsp;';       
-				$i--;    
-			} 
-		    //	 empty icons not doing well in CKEDITOR
-			//	check if empty
-			//	http://stackoverflow.com/questions/29714291/removing-elements-with-no-children-dom-php
-			$xpath = new DOMXpath($xml);
+        
+            //	Dont remove, add empty space
+            $element->nodeValue = '&nbsp;';       
+            $i--;    
+        } 
+        //	 empty icons not doing well in CKEDITOR
+        //	check if empty
+        //	http://stackoverflow.com/questions/29714291/removing-elements-with-no-children-dom-php
+        $xpath = new DOMXpath($xml);
 
-			$empty_anchors = $xpath->evaluate('//i[not(*) and not(text()[normalize-space()])]');
-			$i = $empty_anchors->length - 1; 
-			while ($i > -1) 
-			{ 
-				$element = $empty_anchors->item($i);  
-				$element->nodeValue = '&nbsp;';       
-				$i--;    
-			} 
-		
-		    //	 empty icons in span of "skel" not doing well in CKEDITOR
+        $empty_anchors = $xpath->evaluate('//i[not(*) and not(text()[normalize-space()])]');
+        $i = $empty_anchors->length - 1; 
+        while ($i > -1) 
+        { 
+            $element = $empty_anchors->item($i);  
+            $element->nodeValue = '&nbsp;';       
+            $i--;    
+        } 
+    
+        //	 empty icons in span of "skel" not doing well in CKEDITOR
 
-			//	check if empty
-			
-			//	http://stackoverflow.com/questions/29714291/removing-elements-with-no-children-dom-php
-			$xpath = new DOMXpath($xml);
+        //	check if empty
+        
+        //	http://stackoverflow.com/questions/29714291/removing-elements-with-no-children-dom-php
+        $xpath = new DOMXpath($xml);
 
-			$empty_anchors = $xpath->evaluate('//span[not(*) and not(text()[normalize-space()])]');
-			$i = $empty_anchors->length - 1; 
-			while ($i > -1) 
-			{ 
-				$element = $empty_anchors->item($i);  
-				$element->nodeValue = '&nbsp;';       
-				$i--;    
-			} 
+        $empty_anchors = $xpath->evaluate('//span[not(*) and not(text()[normalize-space()])]');
+        $i = $empty_anchors->length - 1; 
+        while ($i > -1) 
+        { 
+            $element = $empty_anchors->item($i);  
+            $element->nodeValue = '&nbsp;';       
+            $i--;    
+        } 
 
 		//	remove description and keywords tags
 		$meta = $xml->getElementsByTagName( 'meta' );

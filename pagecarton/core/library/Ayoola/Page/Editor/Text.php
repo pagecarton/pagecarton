@@ -141,6 +141,10 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"](/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
     
         $includes = array();
+        if( empty( $matches[0] ) )
+        {
+            preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"](/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
+        }
         foreach( $matches[0] as $count => $each )
         {
             $includes[$matches[1][$count]] = $each;
@@ -167,10 +171,21 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                 }
             }
             $html = file_get_contents( $path );
+
+            $htmlX = $html;
+            Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $htmlX, dirname( $file ) );
+            if( $nextedIncludes = self::getContentIncludes( $htmlX ) )
+            {
+                //  do the same thing recursively.
+                $html = self::setContentIncludes( $htmlX, $nextedIncludes );
+            }
+
             $prefix = dirname( $file );
             Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $html, $prefix );
             $html = preg_replace(';(href)[\s]*=[\s]*(["\'])' . $prefix . '([^.]*)\.html(?:["\'\.]);i', '$1=$2$3$2', $html ); 
             $content = str_ireplace( $placeholder, $html, $content );
+
+
         }
         return $content;
 	}
@@ -378,7 +393,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         $content = self::fixUrlPrefix( $content, Ayoola_Application::getUrlPrefix(), '' );
 
         // include other HTML here
-        preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"](/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
+        //preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"](/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
 
         $parameters['includes'] = self::getContentIncludes( $content );
 
