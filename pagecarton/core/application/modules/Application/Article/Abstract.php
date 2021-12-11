@@ -406,13 +406,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		}
 		$values['file_size'] = intval( strlen( var_export( $values, true ) ) );
 		
-/* 		$validator = new Ayoola_Validator_UserRestrictions();
-		$validator->username = $values['username'];
-		if( ! $validator->validate( null ) )
-		{
-			throw new Application_Article_Exception( $validator->getBadnews() );
-		}
- */		//  self::updateProfile( $values );
 		if( is_file( self::getFolder() . $values['article_url'] ) )
 		{
 			//	Back up the file before replacing it. 
