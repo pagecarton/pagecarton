@@ -142,27 +142,16 @@ ayoola.spotLight =
 	popUp: function( htmlText, changeElementId )
 	{		
 		var background = ayoola.spotLight.getBackground();
-	//	background.innerHTML = '';
 		
 		//	Workaround to rebuild parameters for the current element
 		if( ! ayoola.spotLight.isPlayable(  ) ){ null; }
 		
-	//	e
 		var elementContainer = document.createElement( 'div' );
-	//	alert( ayoola.spotLight.parameters.changeElementId );
-	//	var changeElementId = ayoola.spotLight.parameters.changeElementId;
 		var changeElement = document.getElementById( changeElementId );
 
 		ayoola.style.addClass( elementContainer, ayoola.spotLight.spotLightContainerClassName );
-	//	var element = ayoola.spotLight.getSpotLight();
 		var element = ayoola.spotLight.SpotLight = document.createElement( 'div' ); 
 		ayoola.style.addClass( element, ayoola.spotLight.spotLightClassName );
-	//	element.style.cssText = 'position:absolute;padding:1em; margin:1em; background:#fff; overflow:auto; max-width:90%; max-height:90%;';
-	//	element.setAttribute( 'align', 'right' ); 
-		//	Check if there is a classPlayerUrl
-	//	var barHtmlText = '<div style="width:100%;background-color:#fff;line-height:1em;cursor:move;border:1em groove #ccc;z-index:200000;color:#60F;position:fixed;top:0px;">close</div>';
-	//	alert( changeElementId );
-		//	onclick="this.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild( this.parentNode.parentNode.parentNode.parentNode ); ayoola.xmlHttp.refreshElement( \'' + changeElementId + '\' ); 			ayoola.style.removeClass( document.body, \'pc_no_scroll\' );ayoola.style.removeClass( document.body.parentNode, \'pc_no_scroll\' );"
 		var deleteButtonId = 'deletButtonForSpotLight' + Math.random();
 		element.innerHTML = '<div style="opacity:0.8; visibility:hidden;" title="" class="title_bar">\
 		<div class="pc_container">\
@@ -188,8 +177,6 @@ ayoola.spotLight =
 		var titleBar = false;
 		for( cx= 0; cx < cc.length; cx++ )
 		{
-	//		alert( cc[cx].tagName.toLowerCase() );
-		//	alert( cc[cx].className.search( /title_bar/ ) );
 			if( cc[cx].tagName.toLowerCase() == 'iframe' )
 			{
 				iframe = cc[cx];
@@ -197,7 +184,6 @@ ayoola.spotLight =
 				//	start blank
 				// no need. iframe always start blank
 				//	doing it here may make loading seem slow
-			//	iframe.style.display = "none";
 			}
 			else if( cc[cx].className.search( /title_bar/ ) >= 0 )
 			{
@@ -212,22 +198,14 @@ ayoola.spotLight =
 			target.focus();
 			if( target.contentDocument.title )  
 			{
-/*				var title = document.createElement( 'span' );
-				title.className = 'pc_content_title';	
-				title.innerHTML = target.contentDocument.title + ' ';
-*/				var x = titleBar.getElementsByClassName( 'pc_content_title' )[0];
+				var x = titleBar.getElementsByClassName( 'pc_content_title' )[0];
 				x.innerHTML = "";
 				x.style.backgroundImage = "none";
 				var sdd = document.createTextNode( target.contentDocument.title );
 				x.appendChild( sdd );
-			//	for( y= 0; y < x.length; y++ )
-				{
-				//	x[y].parentNode.removeChild( x[y] );
-				}
 				target.style.visibility = "visible";
 				titleBar.style.visibility = "visible";
 				background.style.backgroundImage = "none";
-		//		titleBar.insertBefore( title, titleBar.firstChild ); 
 			}
 			else
 			{
@@ -256,29 +234,18 @@ ayoola.spotLight =
 		
 		}
 		
-		
-		
-	//	alert( element.src );
 		element.name =  ayoola.spotLight.name;
 		var deleteButton = ayoola.div.getDelete( element, elementContainer, background );
-	//	var deleteButton = ayoola.div.getDelete( elementContainer, background );
-	//	changeElement.submit();
-	//	ayoola.events.add( deleteButton, 'click', function(){ ayoola.spotLight.close(); } );
-	//	var_export( changeElementId );
 		var deleteIt = function()
 		{ 
-		//	alert( changeElementId );
 			ayoola.style.removeClass( document.body, "pc_no_scroll" );
 			ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
-			ayoola.xmlHttp.refreshElement( changeElementId ); 
+			//ayoola.xmlHttp.refreshElement( changeElementId ); 
 			ayoola.xmlHttp.refreshElement( changeElement );
 			elementContainer.parentNode.removeChild( elementContainer ); 
 		}
 		ayoola.spotLight.delete = deleteIt;	
 		ayoola.events.add( deleteButton, 'click', deleteIt ); 
-	//	target.href = 'javascript:'; 
-	//	var elementPosition = ayoola.spotLight.setPosition( element );
-	//	ayoola.events.add( deleteButton, 'click', function(){ ayoola.xmlHttp.refreshElement( changeElement ); } );
 		var weff = function()
 		{ 
 			if( confirm( "Close the modal box?" ) )
@@ -291,18 +258,12 @@ ayoola.spotLight =
 		ayoola.events.add( background, 'dblclick', weff );
 		ayoola.events.add( elementContainer, 'dblclick', weff );
 		
-	//	elementContainer.appendChild( deleteButton );
 		elementContainer.appendChild( element );
 		elementContainer.appendChild( background );
-	//	background.appendChild( ayoola.div.getDelete( element, background ) );
-	//	document.body.appendChild( background );
 		ayoola.style.addClass( document.body, "pc_no_scroll" );
 		ayoola.style.addClass( document.body.parentNode, "pc_no_scroll" );
 		document.body.appendChild( elementContainer ); // on
-	//	if( e.preventDefault ){ e.preventDefault(); }
 		ayoola.spotLight.setPosition( element ); 
-	//	alert(  );
-	//	alert( element.outerWidth() );
 		var deletButtonRaw = document.getElementById( deleteButtonId );
 		ayoola.events.add( deletButtonRaw, 'click', deleteIt ); 
 		ayoola.spotLight.instance = { container: elementContainer, element: element, background: background, deleteButtonElement: deletButtonRaw, deleteButtonElementId: deleteButtonId };
@@ -348,10 +309,8 @@ ayoola.spotLight =
 	showLinkInIFrame: function( url, changeElementId )
 	{
 		//	Pops up and let's know we are loading
-	//	var popup = ayoola.spotLight.popUp( 'Loading...' );
 		
 		//	build html
-//		var htmlText = '<iframe name="ayoola_spotlight_showlinkiniframe" style="width: 100% ! important; border: medium none ! important; overflow: auto ! important; height: 504px ! important;" role="complementary" allowtransparency="true" frameborder="0" verticalscrolling="no" horizontalscrolling="no" scrolling="no" width="100%" src="' + url + '"></iframe>';
 		var htmlText = '<iframe name="ayoola_spotlight_showlinkiniframe" style="' + ayoola.spotLight.iframeStyle + '" role="complementary" allowtransparency="true" frameborder="0" width="100%" src="' + url + '"></iframe>';
 		popup = ayoola.spotLight.popUp( htmlText, changeElementId );
 		return popup;

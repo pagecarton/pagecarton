@@ -79,6 +79,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	protected $_markupTemplate;
 
     /**
+     * Markup template to sent from layout template for this view
+     *
+     * @var string
+     */
+	protected $_markupTemplateFile;
+
+    /**
      * Whether to wrap _viewContent in a tag
      *
      * @var boolean
@@ -2276,7 +2283,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			$this->_markupTemplate = $this->getParameter( 'markup_template_no_data' );
 		}
-		elseif( $path = Ayoola_Loader::getFullPath( 'documents/layout/' .  Ayoola_Page_Editor_Layout::getDefaultLayout() . '/' . str_replace( '_', '/', get_class( $this ) ) . '.html' , array( 'prioritize_my_copy' => true ) ) )
+		elseif( $this->_markupTemplateFile AND $path = Ayoola_Loader::getFullPath( 'documents' .  $this->_markupTemplateFile  , array( 'prioritize_my_copy' => true ) ) )
+		{
+			$this->_markupTemplate =  file_get_contents( $path );
+		}
+        elseif( $path = Ayoola_Loader::getFullPath( 'documents/layout/' .  Ayoola_Page_Editor_Layout::getDefaultLayout() . '/' . str_replace( '_', '/', get_class( $this ) ) . '.html' , array( 'prioritize_my_copy' => true ) ) )
 		{
 			$this->_markupTemplate =  file_get_contents( $path );
 		}

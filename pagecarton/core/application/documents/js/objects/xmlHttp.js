@@ -17,7 +17,6 @@ ayoola.xmlHttp =
 	{
 		for( var a = 0; a < document.forms.length; a++ )   
 		{
-	//		continue;   
 			var formElement = document.forms[a];
 			var callback = ayoola.xmlHttp.sendForm;
 			if( formElement.enctype == 'multipart/form-data' ){ callback = ayoola.xmlHttp.simulateSendFormWithIframe; }
@@ -38,14 +37,12 @@ ayoola.xmlHttp =
 				ayoola.events.add( links[a], 'click', ayoola.xmlHttp.play ); 
 			}
 		}
-	//	ayoola.xmlHttp.setAfterStateChangeCallback( ayoola.xmlHttp.init );
 		
 	},
 	
 	//	Return a new XmlHttp Object when called
 	getObject: function( uniqueNameForObject )
 	{
-	//	alert( uniqueNameForObject );
 		var object = false;
 		object = window.XMLHttpRequest ? new XMLHttpRequest() : object;
  		try{ object = new XMLHttpRequest(); }
@@ -75,30 +72,20 @@ ayoola.xmlHttp =
 		var target = ayoola.events.getTarget( e );
 		var method = target.getAttribute( 'method' ) || 'GET';
 		var name = target.getAttribute( 'name' );
-	//	var parent = ayoola.div.getParent( target, 2 ); // Two steps backward
 		var parents = document.getElementsByName( name + "_container" ); // Gets containers
-	//	alert( parents.length );
-	//	alert( target.getAttribute( 'action' ) );
 		
 		//	Allows me to be able to delete rich text editors before getting form values
 		ayoola.xmlHttp.callBeforeStateChangeCallbacks();
 		
 		//	Play the class silently
-	//	alert( target.action );
-	//	alert( target.action.search( /\/\// ) );
 		if( target.action && ! target.action.search( /#/ ) )  
 		{
 			return true;
 		}
 		var formValues = ayoola.div.getFormValues( target );
 		var url = ayoola.xmlHttp.getClassPlayerUrl() + 'get/object_name/' + name + '/' + ayoola.artificialQueryString;
-	//	alert( formValues );
 		var queryString = location.search ? location.search : '?'; // Put ? at the end of an empty query string
 		url += method.toLowerCase() == 'get' ? queryString + '&' + formValues : '';
-/* 		alert( method );
-		alert( url );
-		alert( location.search );
- */		
 		ajax.open( method, url, true );
 		var contentType = target.getAttribute( 'enctype' ) || 'application/x-www-form-urlencoded';
 		ajax.setRequestHeader( 'Content-Type', contentType );
@@ -115,23 +102,15 @@ ayoola.xmlHttp =
 				if( parents )
 				{
 					//	change for each container on the page
-				//	alert( parents.length );
 					//	workaround for a bug that is causing infinite loop when parents.length autogrow
 					var c = parents.length;
 					for( var a = 0; a < c; a++ )
 					{
-					//	alert( parents.length );
 						var parent = parents[a];
-				//			alert( a );
-					//		alert( parents[a] );
-				//			alert( parent.name );
 							
 							//	workaround for a bug that is causing infinite loop
 							if( a > 3 ){ break; }
 							
-					//		alert( ayoola.scrollToViewMargin );
-					//		parent.style.marginTop = ayoola.scrollToViewMargin; 
-					//		alert( parent.style.marginTop );
 							parent.scrollIntoView(); 
 							parent.focus(); 
 							if( parent.parentNode )
@@ -185,7 +164,6 @@ ayoola.xmlHttp =
 		ajax.send( formValues );
 		if( e.preventDefault ){ e.preventDefault(); }
 		if( result == true ){ return true; }
-	//	ayoola.xmlHttp.simulateSendFormWithIframe( e );
 		return false;
 	},
 	
@@ -194,7 +172,6 @@ ayoola.xmlHttp =
 	{
 		var target = ayoola.events.getTarget( e );
 		var name = target.getAttribute( 'name' ) || 'GET';
-	//	var parent = document.getElementById( name ) || ayoola.div.getParent( target, 3 ); // Two steps backward
 		var parent = ayoola.div.getParent( target, 2 ); // Two steps backward
 		var iframe = document.createElement( 'iframe' );
 		iframe.name = 'ayoola.xmlHttp.sendForm.' + name;
@@ -219,8 +196,9 @@ ayoola.xmlHttp =
 	},
 	
 	//	Use Iframe to simulate fetching content with ajaxs
-/* 	Fetches data from a link and puts it in an element
- */	simulateFetchContentWithIframe: function( link, element )
+    /* 	Fetches data from a link and puts it in an element
+    */	
+    simulateFetchContentWithIframe: function( link, element )
 	{
 		var iframe = document.createElement( 'iframe' );
 		iframe.name = 'ayoola.xmlHttp.similator.fetch.' + name;
@@ -229,46 +207,29 @@ ayoola.xmlHttp =
 		document.body.appendChild( iframe );
 		var changeContent = function( ev )
 		{
-	//		alert( iframe.contentDocument );
-		//	alert( iframe.contentDocument.documentElement );
 			var iframeParent = iframe.contentDocument || window.frames[iframe.name].document.firstChild;
 			element.innerHTML = iframeParent.innerHTML;
-		//	ayoola.xmlHttp.callAfterStateChangeCallbacks();
-		//	ayoola.xmlHttp.init();
-		//	iframe.parentNode.removeChild( iframe ); //	self destruct
 		}
 		ayoola.events.add( iframe, 'load', changeContent )
-	//	alert( iframe );
-	//	if( e.preventDefault ){ e.preventDefault(); }
 		return false;
 	},
 	
 	//	Retrieves a link via ajax
 	fetchLink: function( linkObject, uniqueNameForObject, dataToSend )
 	{
-	//	alert( linkObject );
-	//	alert( typeof linkObject );
 		switch( typeof linkObject )
 		{
 			//	Compatibility
 			case 'string':
 				linkObject = { url: linkObject, id: uniqueNameForObject, data: dataToSend }
-		//		alert( linkObject );
-/* 				linkObject.url = linkObject;
-				linkObject.id = uniqueNameForObject;
-				linkObject.data = dataToSend;
- */			break;
+ 			break;
 			case 'object':
 			
 			break;
 		}
 		var method = linkObject.data ? 'POST' : 'GET';
 		method = linkObject.method ? linkObject.method : method;
-/* 		alert( linkObject.url );
-		alert( linkObject.id ); 
-		alert( linkObject.data );
- */		var ajax = ayoola.xmlHttp.getObject( linkObject.id );
-	//	alert( ajax );
+		var ajax = ayoola.xmlHttp.getObject( linkObject.id );
 		ajax.open( method , linkObject.url, true );
 		ajax = ayoola.xmlHttp.setDefault( ajax );
 		if( ajax.setRequestHeader && linkObject.contentType )
@@ -296,8 +257,6 @@ ayoola.xmlHttp =
 					{ 
 						return false;
 					}
-				//	alert( ajax.responseText );
-				//	alert( ajax.responseXML );
 					linkObject.callback( ajax );
 					splash ? splash.close() : null;
 				} 
@@ -372,7 +331,6 @@ ayoola.xmlHttp =
 		{
 			ajax.setRequestHeader( 'AYOOLA_PLAY_MODE', linkObject.playMode );
 		}
-	//		ajax.send( dataObject.data );
 		ajax = ayoola.xmlHttp.setDefault( ajax );
 		! linkObject.skipSend ? ajax.send( linkObject.data ) : null;
 		return ajax;
@@ -384,22 +342,14 @@ ayoola.xmlHttp =
 		for( var a = 0; a < arguments.length; a++ )
 		{
 			var ajax = ayoola.xmlHttp.getObject();
-			var element = arguments[a]; //
-		//		alert( element );
+			var element = arguments[a];
 			if( typeof element == 'string' )
 			{
-			//	var f = b[0].getAttribute( 'data-object-name' );
 				var b = document.getElementsByName( element + '_container' );
-		//		alert( rel.changeElementId );
-		//		alert( element );
 				if( ! b.length )
 				{ 
 					if( element == 'page_refresh' )
 					{
-					//	var x = window.location.href;
-				//		x = x.split( '#' );
-					//	window.location.href = x[0];
-					//	alert( window.location.href );
 						ayoola.spotLight.splashScreen();
 						window.location.href = window.location.href.split( '#' )[0];
 					}
@@ -407,11 +357,9 @@ ayoola.xmlHttp =
 				}
 				if( ! b[0].getAttribute( 'data-object-name' ) ){ return false; }
 				var url = ayoola.xmlHttp.getClassPlayerUrl() + 'get/object_name/' + b[0].getAttribute( 'data-object-name' ) + '/' + location.search;
-			//	element = document.getElementById( element );
 			}
 			else if( element )
 			{
-		//	if( ! element ){ continue; }
 				if( ! element.getAttribute( 'data-object-name' ) ){ return false; }
 				var url = ayoola.xmlHttp.getClassPlayerUrl() + 'get/object_name/' + element.getAttribute( 'data-object-name' ) + '/' + location.search;
 			}
@@ -425,9 +373,7 @@ ayoola.xmlHttp =
 					{
 						for( var a = 0; a < b.length; a++ )
 						{
-					//		alert( b.length );
 							var c = b[a];
-						//	c.innerHTML = ajax.responseText; 
 							var d = document.createElement( 'span' );
 							d.innerHTML = ajax.responseText;
 							var e = c.parentNode;
