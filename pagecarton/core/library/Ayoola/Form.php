@@ -1074,9 +1074,11 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 
  		if( isset( $_REQUEST[self::BACKBUTTON_INDICATOR] ) )
 		{
+			
 			return false;
 		}
-         $name = $this->_attributes['name'] . self::SUBMIT_DETECTOR;
+        $name = $this->_attributes['name'] . self::SUBMIT_DETECTOR;
+
          
         do
         {
@@ -1084,8 +1086,8 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
             {
                 break;
             }
-            $name = self::hashElementName( $name ); // Try see if it is hashed
-            if( @$_REQUEST[$name] === self::hashElementName( $this->_attributes['name'] ) )
+           	$name = self::hashElementName( $name ); // Try see if it is hashed
+            if( @$_REQUEST[$name] === $this->_attributes['name'] )
             {
                 break;
             }
@@ -1103,6 +1105,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
                     break;
                 }		
             }
+
             return false;
         }
         while( false );

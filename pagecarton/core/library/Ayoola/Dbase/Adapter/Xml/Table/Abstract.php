@@ -193,7 +193,7 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
      */
     public static function getCacheDirectory()
     {
-		return CACHE_DIR . DS . 'XMLDB' . Ayoola_Application::getApplicationNameSpace();
+		return CACHE_DIR . DS . 'XMLDB' . md5( Ayoola_Application::getApplicationNameSpace() );
     }
 		
     /**
@@ -202,10 +202,10 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
      */
     public function getTableCacheDirectory( $tableName )
     {
-		$name = explode( '_', get_class( $this ) );
-    $accessibility = $this->getAccessibility();
-  //  var_export( $accessibility );
-		return self::getCacheDirectory() . DS  . array_pop( $name ) . DS . str_ireplace( '_', DS, $this->className . DS . $tableName ) . DS . $accessibility;
+      $name = explode( '_', get_class( $this ) );
+      $accessibility = $this->getAccessibility();
+
+      return self::getCacheDirectory() . DS  . array_pop( $name ) . DS . str_ireplace( '_', DS, $this->className . DS . $tableName ) . DS . $accessibility;
     }
 		
     /**
@@ -214,16 +214,12 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
      */
     public function setCacheFilename()
     {
-	//	var_export( get_class( $this ) );
-		$arguments = md5( serialize( func_get_args() ) . '' . $_SERVER['HTTP_HOST'] );
-		
-	//	require_once 'Ayoola/Filter/Name.php';
-	//	$filter = new Ayoola_Filter_Name();
-	//	$file = $filter->filter( $arguments );
-		$file = strtolower( $arguments );
-//		$file = strtolower( implode( DS, str_split( $arguments, 2 ) ) );
-		$file = $this->getTableCacheDirectory( $this->getTableName() ) . DS . $file;
-		$this->_cacheFilename = $file;
+      $arguments = md5( serialize( func_get_args() ) . '' . $_SERVER['HTTP_HOST'] );
+      
+      $file = strtolower( $arguments );
+      $file = $this->getTableCacheDirectory( $this->getTableName() ) . DS . $file;
+
+      $this->_cacheFilename = $file;
     }
 		
     /**

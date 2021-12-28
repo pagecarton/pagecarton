@@ -747,16 +747,18 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
      */
     public static function createDirectory( $dir, $permission = 0700, $recursive = true )
     {
-		if( ! is_dir( $dir ) )
-		{
-			if( ! mkdir( $dir, $permission, true ) )
-			{
-
-				return false; 
-			}
-		}
-		//	Returns true altogether because this is not required per say
-		return true;
+      if( ! is_dir( $dir ) )
+      {
+        if( ! mkdir( $dir, $permission, true ) )
+        {
+          //var_export( $dir );
+          //var_export( debug_print_backtrace() );
+          //exit();
+          return false; 
+        }
+      }
+      //	Returns true altogether because this is not required per say
+      return true;
     } 
 
 	/**

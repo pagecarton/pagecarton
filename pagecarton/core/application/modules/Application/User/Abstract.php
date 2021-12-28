@@ -310,69 +310,7 @@ abstract class Application_User_Abstract extends Ayoola_Abstract_Table
 		require_once 'Ayoola/Form/Element.php';
 
 		$additionalForms = array();
-/* 		if( ! empty( $_REQUEST['personal_info'] ) || $this->getParameter( 'personal_info' ) || @$values['firstname'] )
-		{
-			$personal = new Ayoola_Form_Element;
-			$personal->id = __CLASS__ . 'personal';
-			$personal->addElement( array( 'name' => 'firstname', 'placeholder' => 'Your given name', 'type' => 'InputText', 'value' => @$values['firstname'] ) );
-			$personal->addRequirement( 'firstname','Name:: WordCount=>2;;20' );
-			$personal->addElement( array( 'name' => 'lastname', 'placeholder' => 'Your family name', 'type' => 'InputText', 'value' => @$values['lastname'] ) );
-			$personal->addRequirement( 'lastname','Name:: WordCount=>2;;20' );
-			$option = array( 'M' => 'Male', 'F' => 'Female' );
-			$personal->addElement( array( 'name' => 'sex', 'type' => 'Select', 'value' => @$values['sex'] ), $option );
-			$personal->addRequirement( 'sex','InArray=>' . implode( ';;', array_keys( $option ) ) . ':: WordCount=>1;;1' );
-			//	retrieve birthday
-			if( @$values['birth_date'] )
-			{
-				switch( strlen( $values['birth_date'] ) )
-				{
-					case 8:
-						$values['birth_year'] = $values['birth_date'][0] . $values['birth_date'][1] . $values['birth_date'][2] . $values['birth_date'][3];
-						$values['birth_month'] = $values['birth_date'][4] . $values['birth_date'][5];
-						$values['birth_day'] = $values['birth_date'][6] . $values['birth_date'][7];
-					break;
-					default:
-						@list( $values['birth_year'], $values['birth_month'], $values['birth_day'] ) = explode( '-', $values['birth_date'] );
-					break; 
-				}
-			}
-			
-			//	Month
-			$options = array_combine( range( 1, 12 ), array( 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ) );
-			$birthMonthValue = intval( @strlen( $values['birth_month'] ) === 1 ? ( '0' . @$values['birth_month'] ) : @$values['birth_month'] );
-			$birthMonthValue = intval( $birthMonthValue ?  : $this->getGlobalValue( 'birth_month' ) );
-			$personal->addElement( array( 'name' => 'birth_month', 'label' => 'Date of Birth', 'style' => 'min-width:10%;max-width:25%;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $birthMonthValue ), array( 'Month' ) + $options ); 
-			if( strlen( $this->getGlobalValue( 'birth_month' ) ) === 1 )
-			{
-				$personal->addFilter( 'birth_month', array( 'DefiniteValue' => '0' . $this->getGlobalValue( 'birth_month' ) ) );
-			}
-			
-			//	Day
-			$options = range( 1, 31 );
-			$options = array_combine( $options, $options );
-			$birthDayValue = intval( @strlen( $values['birth_day'] ) === 1 ? ( '0' . @$values['birth_day'] ) : @$values['birth_day'] );
-			$birthDayValue = intval( $birthDayValue ?  : $this->getGlobalValue( 'birth_day' ) );
-			$personal->addElement( array( 'name' => 'birth_day', 'label' => '', 'style' => 'min-width:10%;max-width:25%;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $birthDayValue ), array( 'Day' ) +$options );
-			if( strlen( $this->getGlobalValue( 'birth_day' ) ) === 1 )
-			{
-				$personal->addFilter( 'birth_day', array( 'DefiniteValue' => '0' . $this->getGlobalValue( 'birth_day' ) ) );
-			}
-			
-			//	Year
-			//	Age must start from 13 yrs
-			$options = range( date( 'Y' ) - 13, 1900 );
-			$options = array_combine( $options, $options );
-			$personal->addElement( array( 'name' => 'birth_year', 'label' => '', 'style' => 'min-width:10%;max-width:25%;display:inline-block;margin-right:0;', 'type' => 'Select', 'value' => @$values['birth_year'] ), array( 'Year' ) + $options );
-			
-			//	Birthday combined
-			$personal->addElement( array( 'name' => 'birth_date', 'label' => 'Date of Birth', 'placeholder' => 'YYYY-MM-DD', 'type' => 'Hidden', 'value' => @$values['birth_date'] ) );
-			$dob = $this->getGlobalValue( 'birth_year' );
-			$dob .= strlen( $this->getGlobalValue( 'birth_month' ) ) === 1 ? ( '0' . $this->getGlobalValue( 'birth_month' ) ) : $this->getGlobalValue( 'birth_month' );
-			$dob .= strlen( $this->getGlobalValue( 'birth_day' ) ) === 1 ? ( '0' . $this->getGlobalValue( 'birth_day' ) ) : $this->getGlobalValue( 'birth_day' );
-			$personal->addFilter( 'birth_date', array( 'DefiniteValue' => $dob ) );
-			$this->getParameter( 'no_legend' ) ?  null : $personal->addLegend( "$legend Personal Information" );
-		}
- */		$account = new Ayoola_Form_Element;
+		$account = new Ayoola_Form_Element;
 		$account->id = __CLASS__ . 'account';
 		$description = 'Leave blank if you don\'t intend to change password.';   
 		if( is_null( $values ) )

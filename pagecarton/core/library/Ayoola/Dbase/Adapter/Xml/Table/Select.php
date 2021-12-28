@@ -617,15 +617,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
     public function setCache( $result )
     {
         $file = $this->getCacheFilename();
-        
-        
-        //  reduce disk io
-        //    if( ! $result )
-        {
-        //    return Ayoola_File_Storage::setToFalseList( $file, $result );
-        }
-        //    Ayoola_File_Storage::deleteFromFalseList( $file );
-
 
         Ayoola_Doc::createDirectory( dirname( $file ) );
 		return @Ayoola_File::putContents( $file, serialize( $result ) );
