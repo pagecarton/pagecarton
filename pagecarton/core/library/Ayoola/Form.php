@@ -1082,12 +1082,11 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
          
         do
         {
-            if( @$_REQUEST[$name] === $this->_attributes['name'] )
-            {
-                break;
-            }
-           	$name = self::hashElementName( $name ); // Try see if it is hashed
-            if( @$_REQUEST[$name] === $this->_attributes['name'] )
+            if( 
+				@$_REQUEST[$name] === $this->_attributes['name'] 
+				||  @$_REQUEST[self::hashElementName( $name )] === $this->_attributes['name']
+				||  @$_REQUEST[self::hashElementName( $name )] === self::hashElementName( $this->_attributes['name'] )
+			)
             {
                 break;
             }
