@@ -677,7 +677,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 				elseif( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_uploaders'] ? : 98 )  )
 				{
 					$html .= '
-					<a  title="' . self::__( 'Upload new file' ) . '" style="padding: 2px;font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
+					<a  title="' . self::__( 'Upload new file' ) . '" style="font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.image.formElement = this;  ayoola.image.maxWidth = ' . ( @$width ? : 0 ) . '; ayoola.image.maxHeight = ' . ( @$height ? : 0 ) . '; ayoola.image.imageId = \'' . ( @$uniqueIDForElement ) . '\';  ayoola.image.fieldNameValue = \'url\';  ayoola.image.formElement = this.parentNode.parentNode.getElementsByTagName( \'input\' ).item(0);  ' . @$uploadJsText . ' ayoola.image.clickBrowseButton( { accept: \'' . @$element['data-document_type'] . '/*\', multiple: \'' . @$element['data-multiple'] . '\' } );">  
                     ' . self::__( 'Upload' ) . ' <i class="fa fa-arrow-up" style="margin-left:1em;"></i>
 					</a>
 					'; 
@@ -688,7 +688,7 @@ class Ayoola_Form_Element extends Ayoola_Form
  				if( Ayoola_Abstract_Table::hasPriviledge( @$docSettings['allowed_viewers'] ? : 98 ) && ! @$element['data-allow_base64'] )
 				{ 
 					$html .= '
-					<a title="' . self::__( 'Browse existing files on the site' ) . '" style="padding: 2px;font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
+					<a title="' . self::__( 'Browse existing files on the site' ) . '" style="font-size: small;cursor: pointer;vertical-align:middle;display:inline-block;" class="pc-btn" onClick="ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' ); return true;"> 
                     ' . self::__( 'Browse' ) . ' <i class="fa fa-eye" style="margin-left:1em;"></i>
 					</a>
 					

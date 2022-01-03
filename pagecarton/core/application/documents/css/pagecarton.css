@@ -617,6 +617,7 @@ pc_full_width {
   cursor: pointer;
   flex-basis: 33.33%;
   display: inline-block;
+  padding-left: 4em;
 }
 
 .pc-btn-parent a:before, .pc-btn:before {
