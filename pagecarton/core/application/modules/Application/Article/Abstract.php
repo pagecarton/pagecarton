@@ -1318,12 +1318,10 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			$form2 = $class->getForm();
 			$fieldsets = $form2->getFieldsets();
 
-			$form->requiredElements = is_array( $form->requiredElements ) ? $form->requiredElements : array() + is_array( $form2->requiredElements ) ? $form2->requiredElements : array();
+			$form->requiredElements = (is_array( $form->requiredElements ) ? $form->requiredElements : array() + is_array( $form2->requiredElements ) ) ? $form2->requiredElements : array();
 			$form->setParameter( $form2->getParameter() );
 			foreach( $fieldsets as $key => $each ) 
-			{
-			//	var_export( $key )
-				
+			{				
 				$each->hashElementName = $this->hashFormElementName;
 				$each->addElement( array( 'name' => 'form_name', 'type' => 'Hidden', 'value' => @$formToUse ) );
 				$form->addFieldset( $each );

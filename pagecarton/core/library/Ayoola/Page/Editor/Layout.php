@@ -281,7 +281,15 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
             }
         }
 
-        $page = $this->sourcePage();
+		if( empty( $this->_parameter['theme_variant'] ) )
+		{		
+			$page = $this->sourcePage();
+		}
+		else
+		{
+			$page = $this->getPageInfo();
+		}
+
  		if( ! $page )
 		{
             $this->setViewContent(  '' . sprintf( self::__( '<p class="badnews">Page files for %s could not be created</p>' ), $url ) . ''  );
@@ -476,24 +484,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
         $defaultPageThemeFile = '/layout/' . $theme . '/default' . '.html';
         
-/*         
         
-        
-        //  was CAUSING TROUBLE
-        //  MAKING THE THEME CONTENT SHOW IN NEW PAGES
-        $filenameF = 'documents/layout/' . $theme . '/template';
-
-    //    $myPathF = $dirF . $filenameF;
-        if( stripos( $page['url'], '/layout/' ) === 0 )
-        {
-            $filenameF = 'documents' . $page['url'];
-        }
-        if( $whereToGetPlaceholders = Ayoola_Loader::getFullPath( $filenameF ) )
-        {
-            $whereToGetPlaceholders = file_get_contents( $whereToGetPlaceholders );
-        }
-        if( ! $whereToGetPlaceholders )
- */        
         {
             $whereToGetPlaceholders = $content['template'];
         }
@@ -565,10 +556,14 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
 			$whereToGetPlaceholders = Ayoola_Page_Layout_Abstract::sanitizeTemplateFile( $whereToGetPlaceholders, $themeInfo  );
 
+
 			//		look for dangling placeholders in page theme file
             $placeholdersInPageThemeFile = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $whereToGetPlaceholders );
             
-            //    var_export( $whereToGetPlaceholders );
+			//var_export( $page );
+			//var_export( $placeholders );
+			//var_export( $placeholdersInPageThemeFile );
+
 			$danglingPlaceholders = array_merge( array_diff( $placeholdersInPageThemeFile, $placeholders ), $danglingPlaceholders );
 
 			krsort( $danglingPlaceholders );			
@@ -582,7 +577,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                 // we reverted to core file in "$pageThemeFile". 
                 //  We need to prepare for it here also
                 //  So we don't duplicate theme content in pages
-                $originalFile = APPLICATION_PATH . '/documents/' . '/layout/' . $theme . '/template';
+                $originalFile = APPLICATION_PATH . '/documents' . '/layout/' . $theme . '/template';
             }
             if( ! $originalFile = file_get_contents( $originalFile ) )
             {
@@ -670,7 +665,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			$content['template'] = str_ireplace( $searchFor, $replaceWith,  $content['template'] );
         }
 		$navTag = '</nav>';
-		if( ! stripos( $content['template'], $navTag ) )
+		if( ! stripos( $originalFile, $navTag ) )
 		{
 			$navTag = '</ul>';
 		}
@@ -773,10 +768,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                             preg_match( '/{@@@' . $section . '([\S\s]*)' . $section . '@@@}/i', $whereToGetPlaceholders, $sectionPlaceholder );
 
 							$defaultPlaceHolder = @$sectionPlaceholder[1];
+							$defaultPlaceHolder = preg_replace('/<\\?.*(\\?>|$)/Us', '',$defaultPlaceHolder);
+							
                             //    var_export( $section );
                             //    var_export( $defaultPlaceHolder );
 							if( ! empty( $originalFile ) && @$sectionPlaceholder[1]  )
 							{
+
 								$check = $sectionPlaceholder[1];
 								if( stripos( $check, $navTag ) && empty( $firstNav ) )
 								{
@@ -1125,7 +1123,10 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					//	saving as well to main pages
 					//	don't copy again because we are now loading theme pages automatically
 					//	activated again because of index and co that is still autocopied
-					if( is_file( $yPath['include'] ) && is_file( $yPath['template'] ) &&  is_file( $yPath['data_json'] )  )
+					if( is_file( $yPath['include'] ) && is_file( $yPath['template'] ) && is_file( $yPath['data_json'] ) 
+						// don't update with auto created theme pages
+						&& empty( $this->_parameter['theme_variant'] )	  
+					)
 					{
 						//	only update if files exist already
 						Ayoola_File::putContents( $yPath['include'], $content['include'] );
@@ -1401,7 +1402,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			}
 			$pageVersionHTML .= '</select></span>';
 		}
-	//	foreach
 
 		// Add object from checkbox to selectlist
 		$js = '
@@ -1706,57 +1706,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			{
 
 			} 
-/*			var addParameterOptions = function( x )
-			{
-				var p = "";
-				var q = Array();
-				for( var c = 0; c < x.childNodes.length; c++ ) 
-				{
-					var parameterOrOption = x.childNodes[c];
-					if( ! parameterOrOption || parameterOrOption.nodeName == "#text" ){ continue; }
-					if( ! parameterOrOption.dataset || ! parameterOrOption.dataset.parameter_name )
-					{ 
-						continue; 
-					}
-					if( parameterOrOption.dataset.parameter_name == "parent"  )
-					{
-						var g = addParameterOptions( parameterOrOption );
-						if( g.content ) 
-						{
-							p += g.content;
-						}
-						if( g.list ) 
-						{
-							q = q.concat( g.list );
-						}
-
-						continue;
-					}
-					var parameterName = parameterOrOption.dataset.parameter_name;
-					p += "&" + numberedSectionName + parameterName + "=";
-
-					var pattern = /\(/ig;
-					var pattern = "x-x-x-xXXXxx";
-					if( parameterOrOption.value != undefined )
-					{ 
-						//	encode so that & in links wont be affected.
-						p += encodeURIComponent( parameterOrOption.value ).replace( pattern, "PC_SAFE_ITEMS_OPENING_BRACKET" ); 
-					}
-					else if( parameterOrOption.tagName.toLowerCase() == "form" )
-					{ 
-
-						p += encodeURIComponent( ayoola.div.getFormValues( { form: parameterOrOption, dontDisable: true } ) ).replace( pattern, "PC_SAFE_ITEMS_OPENING_BRACKET" ); 
-					}
-					else
-					{ 
-						p += encodeURIComponent( parameterOrOption.innerHTML ).replace( pattern, "PC_SAFE_ITEMS_OPENING_BRACKET" ); 
-					}
-					q.push( parameterName );
-				}
-
-				return { content: p, list: q };
-			}
-*/			var url = location.href;
+			var url = location.href;
 			var postContent = "";
 			var sectionListForPreservation = "";
 			for( var a = 0; a < sections.length; a++ )

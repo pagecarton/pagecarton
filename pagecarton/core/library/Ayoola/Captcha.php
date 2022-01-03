@@ -168,7 +168,7 @@ class Ayoola_Captcha
 			50 + rand(0, 10),
 			$color,
 			'arial.ttf',
-			$code{$i}
+			$code[$i]
 			);
 		}
 		/* Adding some random distortions */

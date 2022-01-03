@@ -204,10 +204,10 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 			$html = '
 				<div title="' . self::__( 'This is a LIVE preview of the selected file' ) . '" style="display:block;clear:both; text-align:center;max-height:80%;" class="" >
 					<img name="' . $previewImageName . '" src="' . 
-					( ( $uri ? 
+					( ( ( ( $uri ? 
 					$uri : 
-					( is_string( $this->getParameter( 'field_name' ) ) ? 
-					@$this->getGlobalValue( $this->getParameter( 'field_name' ) ) : null ) ? : 'http://placehold.it/' . 
+					( is_string( $this->getParameter( 'field_name' ) ) ) ? 
+					@$this->getGlobalValue( $this->getParameter( 'field_name' ) ) : null ) ) ? : 'http://placehold.it/' . 
 					( $this->getParameter( 'width' ) ? : '300' ) . 'x' .
 					( $this->getParameter( 'height' ) ? : '300' ) . '&text=' .   
 					

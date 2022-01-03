@@ -194,7 +194,11 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		}
         self::$_refreshed[$id] = true;
 
-        if( in_array( $page, self::$defaultPages ) )
+        if( in_array( $page, self::$defaultPages ) 
+            
+            //  don't create page when theme page is been refreshed
+            && empty( $themeName )
+        )
         {
             //	if its still a system page, delete and create again
             //	this is causing problems deleting the home page
