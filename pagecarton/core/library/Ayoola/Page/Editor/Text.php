@@ -220,7 +220,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
             if( empty( $widgets[0] ) )
             {
-                preg_match_all( '|<widget([\s]parameters=("?\'?)({[^>]*})("?\'?)[\s]?)>(.*)</widget>|isU', $content, $widgets );
+                preg_match_all( '|<widget([\s]*parameters[\s]*=[\s]*("?\'?)[\s]*({[^>]*})[\s]*("?\'?)[\s]*)>(.*)</widget>|isU', $content, $widgets );
             }
 
             if( empty( $widgets[0] ) )

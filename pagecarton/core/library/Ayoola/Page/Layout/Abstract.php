@@ -262,7 +262,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				$content = preg_replace('/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', '', $content );
 				$contentLte = preg_replace(
 						'/{@@@' . $match . '(\s*)(\<[\S\s]*\>)(\s*)' . $match . '@@@}/i', 
-						'$1<section data-pc-section-name=""><!-- ' . $match . ' --></section>$3', 
+						'$1<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>$3', 
 						$contentLte );
 			}
 			$contentLte= str_ireplace(
@@ -283,7 +283,12 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 		
 		Ayoola_File::putContents( $myPath . 'raw', $contentLte );
-		Ayoola_File::putContents( $myPath . 'raw-original', $contentRawLite );
+
+		if( ! is_file( $myPath . 'raw-original' ) )
+		{
+			//	don't overwrite original once it is written once
+			Ayoola_File::putContents( $myPath . 'raw-original', $contentRawLite );
+		}
 
 		
         //	update theme files
@@ -1083,6 +1088,15 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			$content = str_ireplace( self::getPlaceholders(), self::getPlaceholderValues(), $content );
 	
 		}
+
+		//  widget variables in template files
+		$content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', '$1{{{$3}}}$5', $content );
+		$content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', '$1{{{$3}}}$5', $content );
+		preg_match_all( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B%7B%7B)([^<>]*)(%7D%7D%7D)([^<>]*["\'][^<>]*>)#i', $content, $xxx );
+
+		//  static text in attribute values {}
+		$content = preg_replace( '#(<[^<>]*=[\s]*["\'][^<>]*)(%7B)([^<>]*)(%7D)([^<>]*["\'][^<>]*>)#i', '$1{$3}$5', $content );
+			
 
 		return $content;
 	}
