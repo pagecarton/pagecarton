@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -20,24 +20,31 @@
     <link rel="stylesheet" href="css/style.css"> 
   </head>
   <body data-pc-section-name="body">
-
+  
   <div class="site-wrap" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
 
-    <section data-pc-section-placeholder="pc_body_2"><!-- DO NOT REMOVE THIS SECTION --></section>
-
-    <header class="site-navbar" role="banner">  
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+    
+    <header class="site-navbar" role="banner">
         <div class="container-fluid">
-            <div class="row align-items-center"> 
+            <div class="row align-items-center">
                 <div class="col-12 search-form-wrap js-search-form">
                     <form method="get" action="/search">
                         <input type="text" id="s" class="form-control" placeholder="Search..." name="q"><button class="search-btn" type="submit"><span class="icon-search">&nbsp;</span></button>
                     </form>
                 </div>
-
+    
                 <div class="col-4 site-logo">
                     <a href="/" class="text-black h2 mb-0"><img style="max-height:66px;" src="/img/logo.png" alt="{Organization Name}"></a>
-                </div> 
-
+                </div>
+    
                 <div class="col-8 text-right">
                     <nav class="site-navigation" role="navigation" data-pc-menu-ignore="1">
                         <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block mb-0">
@@ -45,7 +52,7 @@
                             <widget parameters='{ "class": "Ayoola_Menu" }'>
                                 <li><a href="{{{url}}}">{{{option_name}}}</a></li>
                             </widget>
-                            <widget parameters='{ "class": "Application_Category_ShowAll", "category_page": "/category", "add_a_new_post": 3, "url_integration_type": "pc_module_url_values_offset", "content_to_clear": ["()"] }'>
+                            <widget parameters='{ "class": "Application_Category_ShowAll", "category_page": "/category", "add_a_new_post": 3, "url_integration_type": "pc_module_url_values_offset, "content_to_clear": [ "()" ] }'>
                                 <li><a href="{{{post_link}}}">{{{article_title}}} ({{{total_no_of_posts}}})</a></li> 
                             </widget>
                             <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search">&nbsp;</span></a></li>
@@ -53,18 +60,23 @@
                     </nav><a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none"><span class="icon-menu h3">&nbsp;</span></a> 
                 </div>
             </div>
-
+    
         </div>
     </header>    
-
+    
     <section data-pc-section-placeholder="pc_body_4"><!-- DO NOT REMOVE THIS SECTION --></section>
+
 
     <section data-pc-section-placeholder="pc_body_5"><!-- DO NOT REMOVE THIS SECTION --></section>
 
+
     <section data-pc-section-placeholder="pc_body_6"><!-- DO NOT REMOVE THIS SECTION --></section>
 
-    <section data-pc-section-placeholder="pc_body_7"><!-- DO NOT REMOVE THIS SECTION --></section>
 
+
+    <section data-pc-section-placeholder="pc_body_7"><!-- DO NOT REMOVE THIS SECTION --></section>
+    
+    
     <div class="site-footer">
         <div class="container">
           <div class="row mb-5">
@@ -117,6 +129,19 @@
         </div>
     </div>
 
+
+
+
+
+
+
+
+
+
+
+
+  
+      
   </div>
 
   <script src="js/jquery-3.3.1.min.js"></script>
@@ -132,6 +157,7 @@
   <script src="js/aos.js"></script>
 
   <script src="js/main.js"></script>
+
 
   </body>
 </html>

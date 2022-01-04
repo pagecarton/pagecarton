@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: includes.php	Sunday 2nd of January 2022 09:12:28 PM	ayoola@ayoo.la $ 
+* @version $Id: includes.php	Tuesday 4th of January 2022 02:06:00 PM	ayoola@ayoo.la $ 
 */
 //	Page Include Content
 
@@ -18,8 +18,7 @@
 								
 $_9b6b22d4fd0e62534b01e58c90ce9114 = new Ayoola_Page_Editor_Text( array (
   '' => NULL,
-  'editable' => '
-<div class="site-mobile-menu">
+  'editable' => '<div class="site-mobile-menu">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
           <span class="icon-close2 js-menu-toggle">&nbsp;</span>
@@ -27,13 +26,11 @@ $_9b6b22d4fd0e62534b01e58c90ce9114 = new Ayoola_Page_Editor_Text( array (
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
-
 ',
   'includes' => 
   array (
   ),
-  'content' => '
-<div class="site-mobile-menu">
+  'content' => '<div class="site-mobile-menu">
       <div class="site-mobile-menu-header">
         <div class="site-mobile-menu-close mt-3">
           <span class="icon-close2 js-menu-toggle"></span>
@@ -41,7 +38,6 @@ $_9b6b22d4fd0e62534b01e58c90ce9114 = new Ayoola_Page_Editor_Text( array (
       </div>
       <div class="site-mobile-menu-body"></div>
     </div>
-
 ',
   'pagewidget_id' => NULL,
 ) );
@@ -59,8 +55,7 @@ $_9b6b22d4fd0e62534b01e58c90ce9114 = null;
 								
 $_05aac6126f720e3a154047248880fe86 = new Ayoola_Page_Editor_Text( array (
   '' => NULL,
-  'editable' => '
-<div class="site-section bg-light">
+  'editable' => '<div class="site-section bg-light">
         <div class="container">
           <div class="row align-items-stretch retro-layout-2">
     <!-- How to embed Application_Article_ShowAll -->
@@ -137,13 +132,11 @@ $_05aac6126f720e3a154047248880fe86 = new Ayoola_Page_Editor_Text( array (
           </div>
         </div>
       </div>
-
 ',
   'includes' => 
   array (
   ),
-  'content' => '
-<div class="site-section bg-light">
+  'content' => '<div class="site-section bg-light">
         <div class="container">
           <div class="row align-items-stretch retro-layout-2">
     <!-- How to embed Application_Article_ShowAll -->
@@ -220,7 +213,6 @@ $_05aac6126f720e3a154047248880fe86 = new Ayoola_Page_Editor_Text( array (
           </div>
         </div>
       </div>
-
 ',
   'pagewidget_id' => NULL,
 ) );
@@ -238,8 +230,7 @@ $_05aac6126f720e3a154047248880fe86 = null;
 								
 $_cc3dbc39f0e4a6aec7c3b2ab355a6c2b = new Ayoola_Page_Editor_Text( array (
   '' => NULL,
-  'editable' => '
-<div class="site-section">
+  'editable' => '<div class="site-section">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-12">
@@ -250,15 +241,13 @@ $_cc3dbc39f0e4a6aec7c3b2ab355a6c2b = new Ayoola_Page_Editor_Text( array (
         </include>
 </div>
     </div>
-
 ',
   'includes' => 
   array (
     '/layout/pc_layout_miniblog/list-post' => '<include href="/layout/pc_layout_miniblog/list-post.html">
         </include>',
   ),
-  'content' => '
-<div class="site-section">
+  'content' => '<div class="site-section">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-12">
@@ -269,7 +258,6 @@ $_cc3dbc39f0e4a6aec7c3b2ab355a6c2b = new Ayoola_Page_Editor_Text( array (
         </include>
 </div>
     </div>
-
 ',
   'pagewidget_id' => NULL,
 ) );
@@ -287,28 +275,24 @@ $_cc3dbc39f0e4a6aec7c3b2ab355a6c2b = null;
 								
 $_91c417bcdba8309ed50098632bfeadd0 = new Ayoola_Page_Editor_Text( array (
   '' => NULL,
-  'editable' => '
-<div class="site-section bg-light">
+  'editable' => '<div class="site-section bg-light">
         <div class="container">
             <include href="/layout/pc_layout_miniblog/list-similar-post.html">
         </include>
 </div>
     </div>
-
 ',
   'includes' => 
   array (
     '/layout/pc_layout_miniblog/list-similar-post' => '<include href="/layout/pc_layout_miniblog/list-similar-post.html">
         </include>',
   ),
-  'content' => '
-<div class="site-section bg-light">
+  'content' => '<div class="site-section bg-light">
         <div class="container">
             <include href="/layout/pc_layout_miniblog/list-similar-post.html">
         </include>
 </div>
     </div>
-
 ',
   'pagewidget_id' => NULL,
 ) );
