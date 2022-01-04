@@ -260,11 +260,16 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				//var_export( $placeholder[1] );
 				//	remove sections that are not common to all files
 				$content = preg_replace('/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', '', $content );
+				
+				//	format templateraw file for easy editing
 				$contentLte = preg_replace(
 						'/{@@@' . $match . '(\s*)(\<[\S\s]*\>)(\s*)' . $match . '@@@}/i', 
 						'$1<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>$3', 
 						$contentLte );
+	
 			}
+
+			//	format templateraw file for easy editing
 			$contentLte= str_ireplace(
 				array(
 					'@@@' . $match . '@@@',
@@ -275,6 +280,12 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			);
 			$isRealNavigation = false;     
 		}
+
+		//	remove multiple lines from templateraw file for easy editing
+		$contentLte = preg_replace(
+			'/^[ \t]*[\r\n]+/m', 
+			"\r\n", 
+			$contentLte );
 
 
 
