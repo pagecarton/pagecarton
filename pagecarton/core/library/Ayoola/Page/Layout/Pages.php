@@ -98,7 +98,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
 	public static function getPages( $themeName, $type = null )
     {
 		
-        $globalFile = Ayoola_Loader::checkFile( 'documents/layout/' . $themeName . '/template' );
+        $globalFile = Ayoola_Loader::checkFile( 'documents/layout/' . $themeName . '/screenshot.jpg' );
         if( ! is_file( $globalFile ) )
         {
             return array();
