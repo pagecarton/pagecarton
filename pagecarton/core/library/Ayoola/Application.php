@@ -787,6 +787,7 @@ class Ayoola_Application
             foreach( $plugins as $plugin )
             {
                 $installed = false;
+                $offender = null;
                 foreach( $plugin['modules'] as $value )
                 {
                     $value = trim( str_replace( '/', '_', $value ), '_' );
@@ -800,23 +801,24 @@ class Ayoola_Application
                         $installed = true;
                         break;
                     }
+                    else
+                    {
+                        $offender = $value;
+                    }
                     
                 } 
-                if( ! $installed )
+                if( ! $installed && $offender )
                 {
                     $mailInfo = array();
                     $mailInfo['subject'] = $plugin['extension_title'] . ' plugin reactivated';
-                    $mailInfo['body'] = 'We found out "' . $value . '" is not active. Which means the plugin "' . $plugin['extension_title'] . '" was inactive for some reasons but it has just been reactivated.';
+                    $mailInfo['body'] = 'We found out "' . $offender . '" is not active. Which means the plugin "' . $plugin['extension_title'] . '" was inactive for some reasons but it has just been reactivated.';
                     try
                     {
                         @Ayoola_Application_Notification::mail( $mailInfo );
                     }
                     catch( Ayoola_Exception $e ){ null; }
-    
                     $result = Ayoola_Extension_Import_Status::change( $plugin, false );
-                    break;
                 }
-
             }
             
             $storage->store( $data );  
