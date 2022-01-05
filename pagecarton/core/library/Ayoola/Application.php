@@ -786,28 +786,37 @@ class Ayoola_Application
             $plugins = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'status' => array( 'Enabled' ) ) );
             foreach( $plugins as $plugin )
             {
+                $installed = false;
                 foreach( $plugin['modules'] as $value )
                 {
                     $value = trim( str_replace( '/', '_', $value ), '_' );
                     $value = explode( '.', $value );
                     $value = array_shift( $value );
                     //var_export( $value );
-                    if( ! Ayoola_Loader::loadClass( $value ) )
+                    if( Ayoola_Loader::loadClass( $value ) )
                     {
-                        $mailInfo = array();
-                        $mailInfo['subject'] = $plugin['extension_title'] . ' plugin reactivated';
-                        $mailInfo['body'] = 'We found out "' . $value . '" is not active. Which means the plugin "' . $plugin['extension_title'] . '" was inactive for some reasons but it has just been reactivated.';
-                        try
-                        {
-                            @Ayoola_Application_Notification::mail( $mailInfo );
-                        }
-                        catch( Ayoola_Exception $e ){ null; }
-        
-                        $result = Ayoola_Extension_Import_Status::change( $plugin, false );
+                        //  we are installed 
+                        //  if at least once class is active
+                        $installed = true;
                         break;
                     }
                     
                 }
+                if( ! $installed )
+                {
+                    $mailInfo = array();
+                    $mailInfo['subject'] = $plugin['extension_title'] . ' plugin reactivated';
+                    $mailInfo['body'] = 'We found out "' . $value . '" is not active. Which means the plugin "' . $plugin['extension_title'] . '" was inactive for some reasons but it has just been reactivated.';
+                    try
+                    {
+                        @Ayoola_Application_Notification::mail( $mailInfo );
+                    }
+                    catch( Ayoola_Exception $e ){ null; }
+    
+                    $result = Ayoola_Extension_Import_Status::change( $plugin, false );
+                    break;
+                }
+
             }
             
             $storage->store( $data );  
