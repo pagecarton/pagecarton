@@ -801,7 +801,7 @@ class Ayoola_Application
                         break;
                     }
                     
-                }
+                } 
                 if( ! $installed )
                 {
                     $mailInfo = array();
