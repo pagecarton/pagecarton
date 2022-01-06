@@ -31,7 +31,7 @@ class OpenSSL
      * 
      *
      * @param string Encryption Name
-     * @return void
+     * @return string
      */	
     public static function encrypt( $data, $name )
     {
@@ -93,7 +93,7 @@ class OpenSSL
      * 
      *
      * @param string Encryption Name
-     * @return void
+     * @return string
      */	
     public static function decrypt( $data, $name )
     {

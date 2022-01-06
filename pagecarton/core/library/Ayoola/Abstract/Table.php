@@ -356,7 +356,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      * This method retrieves the DB Table from the object
      *
      * @param void
-     * @return Ayoola_Dbase_Table_Interface
+     * @return Ayoola_Dbase_Table_Abstract
      */
     protected function getDbTable()
     {
@@ -386,7 +386,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      * This method inserts a record if record does not exist and retrieve the id
      *
      */
-     public static function getPrimaryId( Ayoola_Dbase_Table_Interface $table, array $insertValues, array $selectValues = null, array $options = null )
+     public static function getPrimaryId( Ayoola_Dbase_Table_Abstract $table, array $insertValues, array $selectValues = null, array $options = null )
     {
 		$selectValues = $selectValues ? : $insertValues;
 		do
@@ -536,7 +536,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      * returns the form object
      *
      * @param void
-     * @return string
+     * @return Ayoola_Form
      */
     public function getForm()
     {	
@@ -554,6 +554,17 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		return $this->_form;
     }
 	
+    /**
+     * returns the form object
+     *
+     * @param void
+     * @return null
+     */
+	public function createForm( $submitValue = null, $legend = NULL, array $values = NULL )
+	{
+
+	}
+
     /**
      * Sets the value of the ID used in identifying a particular package
      *
@@ -770,7 +781,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      * @param Ayoola_Dbase_Table_Interface
      * @param array Values to insert
      */
-    protected static function setUserRecord( Ayoola_Dbase_Table_Interface $table, array $values )
+    protected static function setUserRecord( Ayoola_Dbase_Table_Abstract $table, array $values )
     {		
 
 		$values['user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
@@ -783,7 +794,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
      *
      * @param Ayoola_Dbase_Table_Interface
      */
-    public static function getUserRecord( Ayoola_Dbase_Table_Interface $table, array $identifier = null )
+    public static function getUserRecord( Ayoola_Dbase_Table_Abstract $table, array $identifier = null )
     {		
 
 		$where = array();

@@ -220,14 +220,14 @@ class Application_Subscription extends Application_Subscription_Abstract
             // Inconsistent currency
             if( @$previousData['settings']['currency_abbreviation'] && $previousData['settings']['currency_abbreviation'] != $settings['currency_abbreviation'] )
             { 
-                $this->getStorage()->store( array() );
+                self::getStorage()->store( array() );
                 $previousData = array();
             }
             
             //	Inconsistent Password or we want to refresh cart
             if( ( @$previousData['settings']['password'] && $previousData['settings']['password'] != $settings['password'] ) || ! empty( $values['refresh_cart'] ) )
             { 
-                $this->getStorage()->store( array() );
+                self::getStorage()->store( array() );
                 $previousData = array();
             }
     
@@ -302,7 +302,7 @@ class Application_Subscription extends Application_Subscription_Abstract
                     {
                         continue;
                     }
-                    if( ! empty( $paymentSettings['cart_item_type'][$key] ) && $paymentSettings['cart_item_type'][$key] !== $data['settings']['password'] )
+                    if( ! empty( $paymentSettings['cart_item_type'][$key] ) && $paymentSettings['cart_item_type'][$key] !== $settings['password'] )
                     {
                         continue;
                     }
@@ -323,7 +323,7 @@ class Application_Subscription extends Application_Subscription_Abstract
                             if( ! empty( $paymentSettings['surcharge_value'][$key] ) )
                             {  
                                 $filter = 'Ayoola_Filter_Currency';
-                                $filter::$symbol = $data['settings']['currency_abbreviation'] ? : ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$' );
+                                $filter::$symbol = $settings['currency_abbreviation'] ? : ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$' );
                                 $filter::$symbol .=  '';
                                 $filter = new $filter;
                         

@@ -87,12 +87,11 @@ abstract class Ayoola_Dbase_Table_Abstract  extends PageCarton_Widget implements
     /**
      * Get the table info
      *
-     * @return array
+     * @return static
      */
     public static function getInstance( $key = null )
     {
         $class = get_called_class() . Ayoola_Application::getApplicationNameSpace() . $key; 
-     //   var_export( get_called_class() );
         if( ! empty( static::$_instance[$class] ) )
         {
           return static::$_instance[$class];    

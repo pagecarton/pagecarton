@@ -1894,17 +1894,6 @@ class Ayoola_Application
     }
 
     /**
-     * Return _mode
-     *
-     * @param void
-     * @return string
-     */
-    public static function getMode()
-    {
-		return self::$_mode;
-    }
-
-    /**
      * Returns the $_userInfo
      *
      * @param string Key to the Info to return
@@ -1934,8 +1923,8 @@ class Ayoola_Application
     /**
      * This method basically removes the /get/ seo query from the requested Uri
      *
-     * @param void
-     * @return null
+     * @param string
+     * @return string
      */
     public static function getPresentUri( $url = null )
     {
@@ -1950,8 +1939,8 @@ class Ayoola_Application
     /**
      * This method basically removes the /get/ seo query from the requested Uri
      *
-     * @param void
-     * @return null
+     * @param string
+     * @return string
      */
     public static function setPresentUri( $url = null )
     {
@@ -1967,7 +1956,7 @@ class Ayoola_Application
      * This method returns the requested Uri
      *
      * @param void
-     * @return null
+     * @return string
      */
     public static function getRequestedUri()
     {
@@ -1979,8 +1968,8 @@ class Ayoola_Application
     /**
      * This method returns the requested Uri
      *
-     * @param void
-     * @return null
+     * @param string
+     * @return string
      */
     public static function setRequestedUri( $requestedUri = null )
     {
@@ -2060,7 +2049,8 @@ class Ayoola_Application
 
     /**
      *
-     *
+     * @param void
+     * @return string
      */
 	public static function getUrlSuffix()
     {
@@ -2076,6 +2066,8 @@ class Ayoola_Application
     /**
      *
      *
+     * @param void
+     * @return string
      */
 	public static function getUrlPrefix()
     {
@@ -2091,6 +2083,8 @@ class Ayoola_Application
     /**
      *
      *
+     * @param string
+     * @return string
      */
 	public static function setUrlPrefix( $prefix = null )
     {
@@ -2143,6 +2137,8 @@ class Ayoola_Application
     /**
      *
      *
+     * @param void
+     * @return string
      */
 	public static function getPathPrefix()
     {
@@ -2157,6 +2153,8 @@ class Ayoola_Application
     /**
      *
      *
+     * @param string
+     * @return string
      */
 	public static function getRealPathPrefix()
     {
@@ -2167,6 +2165,8 @@ class Ayoola_Application
     /**
      *
      *
+     * @param string
+     * @return string
      */
 	public static function getUrlPrefixController()
     {
@@ -2181,6 +2181,8 @@ class Ayoola_Application
     /**
      *
      *
+     * @param string
+     * @return mixed
      */
 	public static function getUserAccountInfo( $key = null )
     {
