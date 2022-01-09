@@ -101,7 +101,7 @@ class Application_Article_View extends Application_Article_Abstract
 
 			}
 
-			$this->setViewContent( self::getXml(), true );
+			$this->setViewContent( $this->getXml(), true );
 
 		}
 		catch( Exception $e )
@@ -425,7 +425,7 @@ class Application_Article_View extends Application_Article_Abstract
 			switch( $eachPostType )
 			{
 				case 'gallery':
-					$imagesKey = 'images' . $featurePrefix;
+					$imagesKey = 'images' . $featureSuffix;
 					$images = $data[$imagesKey];
 					foreach( $images as $imageCounter => $eachImage )
 					{

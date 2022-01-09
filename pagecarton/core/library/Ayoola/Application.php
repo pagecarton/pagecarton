@@ -144,7 +144,7 @@ class Ayoola_Application
     /**
      * Returns the current runtime settings
      *
-     * @return array
+     * @return mixed
      */
 	public static function getRuntimeSettings( $key = null )
     {
@@ -154,7 +154,7 @@ class Ayoola_Application
     /**
      * Set the runtime settings
      *
-     * @return array
+     * @return null
      */
 	public static function setRuntimeSettings( $key, $value )
     {
@@ -783,7 +783,13 @@ class Ayoola_Application
             while( false );
 
             // make sure enabled plugins are still enabled
-            $plugins = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'status' => array( 'Enabled' ) ) );
+            $table = "Ayoola_Extension_Import_Table";
+
+            //  setting table to private to prevent child sites from turning this off
+            $table = $table::getInstance( $table::SCOPE_PRIVATE );
+            $table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+            $table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+            $plugins = $table->select( null, array( 'status' => array( 'Enabled' ) ) );
             foreach( $plugins as $plugin )
             {
                 $installed = false;
@@ -820,7 +826,6 @@ class Ayoola_Application
                     $result = Ayoola_Extension_Import_Status::change( $plugin, false );
                 }
             }
-            
             $storage->store( $data );  
 		}
 		//	Allows the sub-domains to have an include path too.

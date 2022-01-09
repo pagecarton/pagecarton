@@ -718,7 +718,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 $headers[] = "cc: {$mailInfo['bcc']}";
             }
 
-
             if( ! empty( $mailInfo['html'] ) || strip_tags( $mailInfo['body'] ) != $mailInfo['body'] )
             {
                 if( empty( $mailInfo['preview'] ) )
@@ -2060,7 +2059,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	 * Return $parameters
 	 *
      * @param string If set, method returns value of $parameters[$key]
-     * @return array $parameters
+     * @return mixed $parameters
      */
     public function getParameter( $key = null )
 	{
