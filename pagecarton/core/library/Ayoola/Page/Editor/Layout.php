@@ -158,7 +158,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	Ayoola_Page_Page
 			//	make sure this is a system file.
 			$pageToCopy = array_merge( $pageToCopy ? : $page, array( 'system' => 1 ) );
-
+		
             $class = new Ayoola_Page_Creator( array( 'no_init' => true, 'fake_values' => $pageToCopy ) );
 			$class->fakeValues = $pageToCopy;
             $class->init();
@@ -280,14 +280,21 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
             }
         }
+		$ux = $url ? : $this->getParameter( 'url' );
 
-		if( empty( $this->_parameter['theme_variant'] ) )
-		{		
-			$page = $this->sourcePage();
+		$pageX = Ayoola_Page::getInfo( $ux );
+		//var_export( $pageX );
+		//var_export( $ux );
+		if( 
+			! empty( $this->_parameter['theme_variant'] ) 
+			|| ! empty( $this->_parameter['preserve_pageinfo'] )
+		)
+		{	
+			$page = $pageX ? : array( 'url' => $ux );
 		}
 		else
 		{
-			$page = $this->getPageInfo();
+			$page = $this->sourcePage();
 		}
 
  		if( ! $page )

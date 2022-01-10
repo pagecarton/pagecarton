@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: includes.php	Tuesday 4th of January 2022 02:06:00 PM	ayoola@ayoo.la $ 
+* @version $Id: includes.php	Monday 10th of January 2022 11:50:20 AM	 $ 
 */
 //	Template Content ?>
 
@@ -20,12 +20,12 @@
                         if
                         ( 
 
-                            $x_1641305160 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1641815420 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1641305160 )
-                            foreach( $x_1641305160 as $each )
+                            if( $x_1641815420 )
+                            foreach( $x_1641815420 as $each )
                             {	
                                 include_once $each;
                             }
@@ -43,7 +43,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Tuesday 4th of January 2022 02:05:54 PM	ayoola@ayoo.la $ 
+* @version $Id: template.php	Monday 10th of January 2022 11:49:26 AM	 $ 
 */
 //	Template Content ?>
 <!DOCTYPE html>
@@ -89,7 +89,6 @@ echo ( ! empty( $_9b6b22d4fd0e62534b01e58c90ce9114 ) &&  is_object( $_9b6b22d4fd
 
 //pc_body_2 / Ends Here
 ?>
-
 
     <?php
 //pc_body_3 /layout/pc_layout_miniblog/template Begins Here
@@ -439,7 +438,6 @@ echo ( ! empty( $_91c417bcdba8309ed50098632bfeadd0 ) &&  is_object( $_91c417bcdb
 //pc_body_7 / Ends Here
 ?>
 
-
     <?php
 //pc_body_8 /layout/pc_layout_miniblog/template Begins Here
 
@@ -456,8 +454,6 @@ echo ( ! empty( $_274f1f7e068d8ec9b8ec0a58942072c2 ) &&  is_object( $_274f1f7e06
 
 //pc_body_8 / Ends Here
 ?>
-
-
 
   </div>
 

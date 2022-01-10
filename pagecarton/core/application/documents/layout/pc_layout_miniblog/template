@@ -27,7 +27,6 @@
 
     @@@pc_body_2@@@
 
-
     @@@pc_body_3@@@{@@@pc_body_3<header class="site-navbar" role="banner">  
         <div class="container-fluid">
             <div class="row align-items-center"> 
@@ -125,7 +124,6 @@
 
     @@@pc_body_7@@@
 
-
     @@@pc_body_8@@@{@@@pc_body_8<div class="site-footer">
         <div class="container">
           <div class="row mb-5">
@@ -178,8 +176,6 @@
         </div>
     </div>
 pc_body_8@@@}
-
-
 
   </div>
 

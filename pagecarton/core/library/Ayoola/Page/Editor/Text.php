@@ -138,12 +138,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     public static function getContentIncludes( $content )
     {
         // include other HTML here
-        preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"](/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
+        preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"][/a-zA-Z0-9_-]*(/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
     
         $includes = array();
         if( empty( $matches[0] ) )
         {
-            preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"](/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
+            preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"][/a-zA-Z0-9_-]*(/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
         }
         foreach( $matches[0] as $count => $each )
         {
@@ -523,6 +523,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
     public function init()
     {
+		//var_export( $this->getParameter() );
 		//	codes first because it wont be there if they didnt opt to enter codes
         if( ! $content = $this->getParameter( 'content' ) )
         {

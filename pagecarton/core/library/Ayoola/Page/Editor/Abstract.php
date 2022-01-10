@@ -512,7 +512,10 @@ abstract class Ayoola_Page_Editor_Abstract extends Ayoola_Abstract_Table
 		}
 		
 		//	We don't want themes saved in the pages table anymore
-		if( stripos( $whereClause['url'], '/layout/' ) === 0 || $this->getPageEditorLayoutName() && ! $this->getParameter( 'auto_create_page' ) )
+		if( 
+			( stripos( $whereClause['url'], '/layout/' ) === 0 || $this->getPageEditorLayoutName() ) 
+				&& ! $this->getParameter( 'auto_create_page' ) 
+		)
 		{
 			$this->_pageInfo = (array) $whereClause;
 			return;

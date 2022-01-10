@@ -141,68 +141,73 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      */
     public static function getInfo( $url = null )
     {		
-		do
-		{
-			$id = Ayoola_Application::getApplicationNameSpace() . $url;
+      do
+      {
 
-			$storage = self::getObjectStorage( array( 'id' => $id,  ) );			
-			$tableName = 'Ayoola_Page_Page';		
+        $id = Ayoola_Application::getApplicationNameSpace() . $url;
 
-			$table = $tableName::getInstance();		
+        $storage = self::getObjectStorage( array( 'id' => $id,  ) );			
+        $tableName = 'Ayoola_Page_Page';		
 
-			if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'id' => $id ) ) )
-			{
-				$info['cache_info'] = serialize( $storage );
-				$storage->store( $info ); 
-				break; 
-			}
-			$table = $tableName::getInstance( $tableName::SCOPE_PROTECTED );
-			$table->getDatabase()->setAccessibility( $tableName::SCOPE_PROTECTED );
+        $table = $tableName::getInstance();		
 
-			if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'work-arround-1-333' => true ) ) )
-			{ 
-				//	remove info we dont want
-				if( @in_array( 'private', $info['page_options'] ) )
-				{
-					//	We are not allowed to access parent page.
+        if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'id' => $id ) ) )
+        {
+          $info['cache_info'] = serialize( $storage );
+          $storage->store( $info ); 
+          break; 
+        }
+        $table = $tableName::getInstance( $tableName::SCOPE_PROTECTED );
+        $table->getDatabase()->setAccessibility( $tableName::SCOPE_PROTECTED );
 
-					$info = array();
-					return false; 
 
-				}
-				@$info['page_options'] = array_combine( $info['page_options'], $info['page_options'] );
-				unset( $info['title'], $info['description'], $info['layout_name'], $info['page_options']['template'], $info['cover_photo'] );
+        if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'work-arround-1-333' => true ) ) )
+        { 
+          //	remove info we dont want
+          if( @in_array( 'private', $info['page_options'] ) )
+          {
+            //	We are not allowed to access parent page.
 
-				$info['cache_info'] = serialize( $storage );
-				$storage->store( $info );
-				break; 
-			}
+            $info = array();
+            return false; 
 
-			//	get info for theme pages
-			$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
+          }
 
-			if( $themeName && Ayoola_Page_Layout_Pages::isValidThemePage( $url, $themeName ) )
-			{ 
-				//	just what we need
-				@$info = array( 'url' => $url );
-                $file = 'documents/layout/' . $themeName . '/pagesettings';
-                $globalFile = Ayoola_Loader::checkFile( $file );
-                if( is_file( $globalFile ) )
-                if( $settings = json_decode( file_get_contents( $globalFile ), true ) )
-                if( ! empty( $settings[$url] ) && is_array( $settings[$url] ) )
-                {
-                    $info += $settings[$url];
-                }
-        
-				$info['cache_info'] = serialize( $storage );
-				$storage->store( $info );
-				break; 
-			}
-			return false;
-		}
-		while( false );
+          @$info['page_options'] = array_combine( $info['page_options'], $info['page_options'] );
 
-		return $info;
+          //  had to remove this beecause it removes set layout for page in plugins
+          //unset( $info['title'], $info['description'], $info['layout_name'], $info['page_options']['template'], $info['cover_photo'] );
+
+          $info['cache_info'] = serialize( $storage );
+          $storage->store( $info );
+          break; 
+        }
+
+        //	get info for theme pages
+        $themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
+
+        if( $themeName && Ayoola_Page_Layout_Pages::isValidThemePage( $url, $themeName ) )
+        { 
+          //	just what we need
+          @$info = array( 'url' => $url );
+                  $file = 'documents/layout/' . $themeName . '/pagesettings';
+                  $globalFile = Ayoola_Loader::checkFile( $file );
+                  if( is_file( $globalFile ) )
+                  if( $settings = json_decode( file_get_contents( $globalFile ), true ) )
+                  if( ! empty( $settings[$url] ) && is_array( $settings[$url] ) )
+                  {
+                      $info += $settings[$url];
+                  }
+          
+          $info['cache_info'] = serialize( $storage );
+          $storage->store( $info );
+          break; 
+        }
+        return false;
+      }
+      while( false );
+
+      return $info;
 		
     } 
 	
@@ -215,10 +220,10 @@ class Ayoola_Page extends Ayoola_Page_Abstract
     public static function getCurrentPageInfo( $infoToGet = null )
     {		
 
-		if( ! self::$_currentPageInfo ){ self::setCurrentPageInfo(); }
+      if( ! self::$_currentPageInfo ){ self::setCurrentPageInfo(); }
 
-		if( is_null( $infoToGet ) ){ return self::$_currentPageInfo; }
-		if( array_key_exists( $infoToGet, self::$_currentPageInfo ) ){ return self::$_currentPageInfo[$infoToGet]; }
+      if( is_null( $infoToGet ) ){ return self::$_currentPageInfo; }
+      if( array_key_exists( $infoToGet, self::$_currentPageInfo ) ){ return self::$_currentPageInfo[$infoToGet]; }
     } 
 	
     /**
@@ -665,7 +670,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
      * Returns the path to a particular page
      *
      * @param string The Uri to the Page
-     * @return string The path to the Page
+     * @return array The paths to the Page files
      */
     public static function getPagePaths( $pageUri = null )
     {

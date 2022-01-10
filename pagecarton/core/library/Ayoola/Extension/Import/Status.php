@@ -181,9 +181,12 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 						$to = $toDir . $directory . $each;
 						self::changeStatus( $currentStatus, $from , $to );
 					}
+				}			
+				if( empty( $currentStatus ) )
+				{
+					$sanitizeClass = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $uri, 'auto_create_page' => true, 'preserve_pageinfo' => true ) );  
+					$sanitizeClass->refresh( $uri );	     		
 				}
-                $sanitizeClass = new Ayoola_Page_Editor_Sanitize( array( 'no_init' => true, 'url' => $uri, 'auto_create_page' => true ) );  
-                $sanitizeClass->refresh( $uri );	     		
 			}
 		}
 		if( @$data['templates'] )
@@ -196,8 +199,6 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 				self::changeStatus( $currentStatus, $from , $to );
 			}
         }
-    //    var_export( array( 'status' => $data['status'] ) );
-    //    var_export( array( 'extension_name' => $data['extension_name'] ) );
         Ayoola_Extension_Import_Table::getInstance()->update( $update, array( 'extension_name' => $data['extension_name'] ) );
         return true;
     }
@@ -279,20 +280,22 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
      */
 	protected static function changeStatus( $currentStatus, $from, $to )  
     {
-		$file = str_ireplace( Ayoola_Application::getDomainSettings( APPLICATION_PATH ), '', $to );
 		$from = str_replace( array( '/', '\\' ), DS, $from );
 		$to = str_replace( array( '/', '\\' ), DS, $to );
 		switch( $currentStatus )
 		{
 			case true:
-				if( ! is_link( $to ) )
+				if( ! is_file( $from . '.copy' ) )
 				{
-					return false;
-				}				
-				elseif( $from !== readlink( $to ) && is_file( readlink( $to ) ) )
-				{
-					return false;
-				}				
+					if( ! is_link( $to ) )
+					{
+						return false;
+					}				
+					elseif( $from !== readlink( $to ) && is_file( readlink( $to ) ) )
+					{
+						return false;
+					}				
+				}
 				unlink( $to );
 				Ayoola_Doc::removeDirectory( basename( $to ) );
 			break;
@@ -307,7 +310,12 @@ class Ayoola_Extension_Import_Status extends Ayoola_Extension_Import_Abstract
 				}					
 				//	create this dir if it isnt there before
                 Ayoola_Doc::createDirectory( dirname( $to ) );
-				symlink( $from , $to );
+				
+				if( ! symlink( $from , $to ) )
+				{
+					Ayoola_File::putContents( $from . '.copy', $to );
+					copy( $from, $to );
+				}
 			break;
 		}
 		return true;

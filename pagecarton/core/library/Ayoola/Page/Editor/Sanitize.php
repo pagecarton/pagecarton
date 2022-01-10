@@ -206,10 +206,11 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
             //	create this page if not available.
             //	must initialize each time so that each page can be handled.
             $table = Ayoola_Page_Page::getInstance();
-            if( ! $table->selectOne( null, array( 'url' => $page ) ) )
+            if( ! Ayoola_Page::getInfo( $page ) )
             {
                 $response = $this->sourcePage( $page );
             }
+
             if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
             {
 
