@@ -468,16 +468,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		if( is_array( $element['value'] ) )
 		{
 			$element['value'] = null;
-/* 			$a = md5( $element['name'] );
-			if( ! is_numeric( @static::$_fieldCount[$a] ) || ( static::$_fieldCount[$a] ) <= 0 )
-			{
-
-				static::$_fieldCount[$a] = count( $element['value'] );
-			}
-			var_export( static::$_fieldCount[$a] );
-			$element['value'] = $element['value'][static::$_fieldCount[$a]];
-			static::$_fieldCount[$a]--;
- */		}
+		}
 		elseif( is_scalar( $element['value'] ) )
 		{
 			

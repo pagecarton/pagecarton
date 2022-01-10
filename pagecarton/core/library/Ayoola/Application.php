@@ -1476,9 +1476,10 @@ class Ayoola_Application
                             
                     }
                 }
+
                 if( $pageFile )
                 {
-                    if( ! $rPath || filemtime( $rPath ) < filemtime( $pageFile ) )
+                    if( ! $rPath || filemtime( $rPath ) <= filemtime( $pageFile ) )
                     {
                         $themeValues = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
                         Ayoola_Page_Layout_Abstract::buildThemeFile( $themeName, file_get_contents( $pageFile ) );
@@ -1492,7 +1493,7 @@ class Ayoola_Application
                 {
                     $vPath = 'documents/layout/' . $themeName . '/theme/default-layout/template';
                     $vPath = Ayoola_Loader::getFullPath( $vPath );
-                    if( ! $vPath || filemtime( $vPath ) < filemtime( $pageFile ) )
+                    if( ! $vPath || filemtime( $vPath ) <= filemtime( $pageFile ) )
                     {
                         $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
                         $d = $page->refresh( '/default-layout', $themeName );
@@ -1572,7 +1573,7 @@ class Ayoola_Application
                         $pagePaths['include'] = $pagePathsX['include'];
                         $pagePaths['template'] = $pagePathsX['template'];
                     }
-                    if( empty( $include ) || ! is_file( $include ) || ! is_file( $template ) || filemtime( $include ) < $variant || filemtime( $include ) < filemtime( $rPath ) )
+                    if( empty( $include ) || ! is_file( $include ) || ! is_file( $template ) || filemtime( $include ) <= $variant || filemtime( $include ) <= filemtime( $rPath ) )
                     {
         
                         //	save first
