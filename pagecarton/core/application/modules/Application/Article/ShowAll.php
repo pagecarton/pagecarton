@@ -1392,6 +1392,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
                 
                 }
                 $maxGroupNo++;
+				$data['markup_template_data_filters'] = $this->getParameter( 'markup_template_data_filters' );
                 $templateD = self::replacePlaceholders( $templateToUse, $data + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
                 
                 //	fix case where ajax auto-loading didn't fix url prefix in posts

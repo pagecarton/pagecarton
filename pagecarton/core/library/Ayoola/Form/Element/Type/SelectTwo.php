@@ -42,7 +42,12 @@ class Ayoola_Form_Element_Type_SelectTwo extends PageCarton_Widget
 		try
 		{ 
             $valueX = array();
-            foreach( $this->getParameter( 'values' ) as $key => $value )
+            $v = array();
+            if( is_array( $this->getParameter( 'values' ) ) )
+            {
+                $v = $this->getParameter( 'values' );
+            }
+            foreach( $v as $key => $value )
             {
                 $selected = null;
                 if( $value === $this->getParameter( 'value' ) || 

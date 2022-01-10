@@ -106,7 +106,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
      * Filter for xss
      * 
      */
-	public static function filterReplacement( & $replacement, $key = null )
+	public static function filterReplacement( & $replacement, $key = null, array $filters = null )
     {
 		$first = $replacement;
 		if( ! is_scalar( $replacement )  )
@@ -132,6 +132,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 		{
 
 		}
+        $replacement = self::filterTemplateData( $key, $replacement, $filters );
 	}
 	
     /** 
@@ -176,6 +177,27 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
     }
 	
     /** 
+     * 
+     * 
+     */
+	public static function filterTemplateData( &$dataKey, &$dataValue, array &$filters = null )
+    {
+        // $values['markup_template_data_filters']
+        if( ! empty( $filters[$dataKey] ) AND is_array( $filters[$dataKey] ) )
+        {
+            foreach( $filters[$dataKey] as $eachFilter )
+            {
+                if( ! is_callable( $eachFilter ) )
+                {
+                    continue;
+                }
+                $dataValue = $eachFilter( $dataValue );
+            }  
+        }
+        return $dataValue;
+    }
+    
+    /** 
      * Replace placeholders in notification Info
      * 
      */
@@ -209,7 +231,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 			if( ! is_array( $value ) && stripos( $template, $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] ) )
 			{
 				$search[] = $values['placeholder_prefix'] . $key . $values['placeholder_suffix'];
-				@$values['pc_no_data_filter'] ? : self::filterReplacement( $value, $key );
+				@$values['pc_no_data_filter'] ? : self::filterReplacement( $value, $key, $values['markup_template_data_filters'] );
                 $replace[] = $value;	
 
 			}
@@ -305,7 +327,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                 $numberedPostTheme = null;
                 foreach( $value as $eachKey => $eachValue )
 				{
-					@$values['pc_no_data_filter'] ? : self::filterReplacement( $eachValue, $eachKey );
+					@$values['pc_no_data_filter'] ? : self::filterReplacement( $eachValue, $eachKey, $values['markup_template_data_filters'] );
 					if( is_array( $eachValue ) )
 					{
                         $postThemeInfo = self::getPostTheme( $template, $eachKey, $values['pc_replace_namespace'] );
@@ -469,6 +491,8 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
             }
 		}
 		$search[] = $values['placeholder_prefix'] . 'pc_other_posts_goes_here' . $values['placeholder_suffix'];
+
+
         $replace[] = @$iTemplate;
 		$template = @str_replace( $search, $replace, $template );  
 		$search = array();

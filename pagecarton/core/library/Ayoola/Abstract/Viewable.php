@@ -2579,6 +2579,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					//	allows me to add pagination on post listing with predefined suffix
 					$template = $this->getParameter( 'markup_template_prepend' ) . $template;
 					$template = $template . $this->getParameter( 'markup_template_append' );
+
+    				$this->_objectTemplateValues['markup_template_data_filters'] = $this->getParameter( 'markup_template_data_filters' );
+
                     $template = Ayoola_Abstract_Playable::replacePlaceholders( $template, $this->_objectTemplateValues + array( 'placeholder_prefix' => '{{{', 'placeholder_suffix' => '}}}', ) );
 
                     //	fix case where ajax auto-loading didn't fix url prefix in posts
