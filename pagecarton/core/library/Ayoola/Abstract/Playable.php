@@ -185,13 +185,19 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
         // $values['markup_template_data_filters']
         if( ! empty( $filters[$dataKey] ) AND is_array( $filters[$dataKey] ) )
         {
-            foreach( $filters[$dataKey] as $eachFilter )
+            foreach( $filters[$dataKey] as $eachFilter => $arguments )
             {
+                if( is_numeric( $eachFilter ) && is_string( $arguments ) )
+                {
+                    $eachFilter = $arguments;
+                }
                 if( ! is_callable( $eachFilter ) )
                 {
                     continue;
                 }
-                $dataValue = $eachFilter( $dataValue );
+                array_unshift( $arguments, $dataValue );
+                //echo ENT_QUOTES;
+                $dataValue = call_user_func_array( $eachFilter, $arguments );
             }  
         }
         return $dataValue;
