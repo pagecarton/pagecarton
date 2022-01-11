@@ -43,12 +43,10 @@ class Application_Profile_Logon extends Application_Profile_Abstract
 		try
 		{ 
 			if( ! $data = self::getIdentifierData() ){ return false; }
-		//	var_export( Application_HashTag_Abstract::get( 'profiles' ) );
 			
 			$this->createConfirmationForm( 'Logon',  'Log on as : "'  . $data['display_name'] . '"' );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-		//	var_export( $data );
 			//	Only the owner can edit or priviledged user can edit
 			//	Check settings
 			$profileSettings = Application_Profile_Settings::getSettings( 'Profiles' );
