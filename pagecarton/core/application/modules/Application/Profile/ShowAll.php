@@ -61,13 +61,13 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 				}
 				$values['full_profile_url'] = Ayoola_Page::getHomePageUrl() . '/' . $values['profile_url'] . '';
 				$values['logon_url'] = Ayoola_Page::setPreviousUrl( '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Application_Profile_Logon/' ) . '&profile_url=' . $values['profile_url'];
-				if( $url == $userInfo['profile_url'] )
+				if( strtolower( $url ) == strtolower( Ayoola_Application::getUserInfo( 'profile_url' ) ) )
 				{
-					$values['logon_link'] = 'Default';
+					$values['logon_link'] = 1;
 				}
 				else
 				{
-					$values['logon_link'] = '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_LogOn/?profile_url=%KEY%\', \'' . __CLASS__ . '\' );" href="javascript:">Set as Default</a>';
+					$values['logon_link'] = 2;
 				}
 				$values['edit_url'] = Ayoola_Page::setPreviousUrl( '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Application_Profile_Editor/' ) . '&profile_url=' . $values['profile_url'];
 				$values['delete_url'] = Ayoola_Page::setPreviousUrl( '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Application_Profile_Delete/' ) . '&profile_url=' . $values['profile_url'];
@@ -105,9 +105,9 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 			array(
 				'URL' => array( 'field' => 'profile_url', 'value' => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/%FIELD%\' );" href="javascript:">/%FIELD%</a>' ), 
 				'Type' => array( 'field' => 'auth_name', 'value' => '%FIELD%' ), 
-				' ' => array( 'field' => 'logon_link', 'value' => '%FIELD%' ), 
-				'     ' => array( 'field' => 'profile_url', 'value' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Editor/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' ), 
-				'    ' => '<a title="Delete" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" href="javascript:"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
+				array( 'field' => 'logon_link', 'value' => '%FIELD%', 'value_representation' => array( 1 => 'Default', 2 => '<a onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_LogOn/?profile_url=%KEY%\', \'' . __CLASS__ . '\' );" href="javascript:">Set as Default</a>' ) ), 
+				array( 'field' => 'profile_url', 'value' => '<a rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Editor/?' . $this->getIdColumn() . '=%KEY%"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>' ), 
+				'<a title="Delete" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Profile_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );" href="javascript:"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
 			)
 		);
 		//var_export( $list );

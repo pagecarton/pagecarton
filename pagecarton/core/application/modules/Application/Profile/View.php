@@ -95,15 +95,13 @@ class Application_Profile_View extends Application_Profile_Abstract
             background-image: url(\'\');
             ';    
 			$this->_objectTemplateValues = array_merge( $data ? : array(), $this->_objectTemplateValues ? : array() );
+			$this->_objectTemplateValues['document_url_uri'] = $this->_objectTemplateValues['display_picture'];
 			$this->_objectTemplateValues['display_picture'] = $this->_objectTemplateValues['display_picture'] ?  Ayoola_Application::getUrlPrefix() . $this->_objectTemplateValues['display_picture'] : null;
 			$this->_objectTemplateValues['profile_banner'] = $this->_objectTemplateValues['profile_banner'] ? Ayoola_Application::getUrlPrefix() . $this->_objectTemplateValues['profile_banner'] : null;
 			$this->_objectTemplateValues['profile_link'] = Ayoola_Page::getHomePageUrl() . '/' . $this->_objectTemplateValues['profile_url'];
-      //      var_export( Ayoola_Application::getPresentUri() );
-       //     self::v( $data );
             if( Ayoola_Application::getPresentUri() !== $data['profile_url'] )
             {
 		    	$this->_objectTemplateValues['link_to_view_profile'] = '<a style="font-size:x-small;" href="' . $this->_objectTemplateValues['profile_link']  . '"> ' . $this->_objectTemplateValues['profile_link'] . '</a>';
-		//	var_export( $this->_objectTemplateValues );
             }
 
             // store
@@ -113,7 +111,6 @@ class Application_Profile_View extends Application_Profile_Abstract
 		{ 
 			$this->setViewContent(  '' . self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) . '', true  );
 		}
-	//	var_export( $this->_xml );
     } 
 	// END OF CLASS
 }
