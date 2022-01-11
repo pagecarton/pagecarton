@@ -60,7 +60,7 @@ class Application_Profile_ShowAll extends Application_Profile_Abstract
 					continue;
 				}
 				$values['full_profile_url'] = Ayoola_Page::getHomePageUrl() . '/' . $values['profile_url'] . '';
-				$values['logon_url'] = Ayoola_Page::setPreviousUrl( '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Application_Profile_Logon/' ) . '&profile_url=' . $values['profile_url'];
+				$values['logon_url'] = Ayoola_Page::setPreviousUrl( '' . Ayoola_Page::getDefaultDomain() .   '/widgets/Application_Profile_LogOn/' ) . '&profile_url=' . $values['profile_url'];
 				if( strtolower( $url ) == strtolower( Ayoola_Application::getUserInfo( 'profile_url' ) ) )
 				{
 					$values['logon_link'] = 1;

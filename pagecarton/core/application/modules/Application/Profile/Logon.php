@@ -5,7 +5,7 @@
  * LICENSE
  *
  * @category   PageCarton
- * @package    Application_Profile_Logon
+ * @package    Application_Profile_LogOn
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  * @version    $Id: Logon.php 4.17.2012 7.55am ayoola $
@@ -20,12 +20,12 @@ require_once 'Application/Profile/Abstract.php';
 
 /**
  * @category   PageCarton
- * @package    Application_Profile_Logon
+ * @package    Application_Profile_LogOn
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 
-class Application_Profile_Logon extends Application_Profile_Abstract
+class Application_Profile_LogOn extends Application_Profile_Abstract
 {
     /**
      * Using another layer of auth for this one
