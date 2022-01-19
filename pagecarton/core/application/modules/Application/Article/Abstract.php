@@ -798,24 +798,24 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 		if( empty( $_GET['pc_post_list_autoload'] ) && ( $this->getParameter( 'pagination' ) || $this->getParameter( 'pc_post_list_autoload' ) ) )
 		{
-
+			$idx  = md5( $postListId );
 			Application_Javascript::addCode
 			( 
 				'
-				var pc_autoloadPostPageNumber_' . $postListId . ' = "' . $offset . '";
-				var pc_autoloadFunc_' . $postListId . ' = function( done ) 
+				var pc_autoloadPostPageNumber_' . $idx . ' = "' . $offset . '";
+				var pc_autoloadFunc_' . $idx . ' = function( done ) 
 					{
 						var a = document.createElement( "div" ); 
 						a.innerHTML = "<div title=\"Loading more...\" style=\"text-align: center;\"><img style=\"width:unset;max-width:unset;\" alt=\"Loading more...\" src=\"' . Ayoola_Application::getUrlPrefix() . '/loading.gif?document_time=1\" ></div>";
-						var b = document.getElementById( "' . $postListId . '_pagination" );
+						var b = document.getElementById( "' . $idx . '_pagination" );
 						b.appendChild( a );
-						var url = "' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . get_class( $this ) . '/?pc_post_list_autoload=1&pc_post_list_id=' . $postListId . '&list_page_number=" + pc_autoloadPostPageNumber_' . $postListId . ';
+						var url = "' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/' . get_class( $this ) . '/?pc_post_list_autoload=1&pc_post_list_id=' . $postListId . '&list_page_number=" + pc_autoloadPostPageNumber_' . $idx . ';
 						var ajax = ayoola.xmlHttp.fetchLink( { url: url, container: b, noSplash: true, insertBefore: true } );
 						var v = function()
 						{
 							if( ayoola.xmlHttp.isReady( ajax ) )
 							{	
-								var b = document.getElementById( "' . $postListId . '_pagination" );
+								var b = document.getElementById( "' . $idx . '_pagination" );
 								b.innerHTML = "";
 								if( ! ajax.responseText )
 								{ 
@@ -826,7 +826,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 									return false;
 								}
 								
-								pc_autoloadPostPageNumber_' . $postListId . '++;
+								pc_autoloadPostPageNumber_' . $idx . '++;
 								done();
 							}		
 						}	
@@ -839,7 +839,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				var options = 
 				{
 					distance: ' . ( $this->getParameter( 'autoload_distance' ) ? : 5000 ) . ',
-					callback: pc_autoloadFunc_' . $postListId . '
+					callback: pc_autoloadFunc_' . $idx . '
 				} 
 					
 				// setup infinite scroll

@@ -190,27 +190,29 @@ class Ayoola_Page extends Ayoola_Page_Abstract
         { 
           //	just what we need
           @$info = array( 'url' => $url );
-                  $file = 'documents/layout/' . $themeName . '/pagesettings';
-                  $globalFile = Ayoola_Loader::checkFile( $file );
-                  if( is_file( $globalFile ) )
-                  if( $settings = json_decode( file_get_contents( $globalFile ), true ) )
-                  if( ! empty( $settings[$url] ) && is_array( $settings[$url] ) )
-                  {
-                      $info += $settings[$url];
-                      if( empty( $info['auth_level'] ) )
-                      {
-                        $info['auth_level'] = array( 0 );
-                      }
-                  }
+          $file = 'documents/layout/' . $themeName . '/pagesettings';
+          $globalFile = Ayoola_Loader::checkFile( $file );
+          if( is_file( $globalFile ) )
+          if( $settings = json_decode( file_get_contents( $globalFile ), true ) )
+          if( ! empty( $settings[$url] ) && is_array( $settings[$url] ) )
+          {
+              $info += $settings[$url];
+          }
           
           $info['cache_info'] = serialize( $storage );
           $storage->store( $info );
+          if( empty( $info['auth_level'] ) )
+          {
+            $info['auth_level'] = array( 0 );
+          }
+
           break; 
         }
         return false;
       }
       while( false );
-
+      //var_export( $info );
+      //exit();
       return $info;
 		
     } 

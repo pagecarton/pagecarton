@@ -240,8 +240,7 @@ ayoola.spotLight =
 		{ 
 			ayoola.style.removeClass( document.body, "pc_no_scroll" );
 			ayoola.style.removeClass( document.body.parentNode, "pc_no_scroll" );
-			//ayoola.xmlHttp.refreshElement( changeElementId ); 
-			ayoola.xmlHttp.refreshElement( changeElement );
+			ayoola.xmlHttp.refreshElement( changeElement ? changeElement : changeElementId );
 			elementContainer.parentNode.removeChild( elementContainer ); 
 		}
 		ayoola.spotLight.delete = deleteIt;	

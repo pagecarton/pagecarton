@@ -321,7 +321,7 @@ class Ayoola_Application
 			$protocol = 'https';
 		}
 
-		@$storage->storageNamespace = 'v' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
+		@$storage->storageNamespace = 'vx-y' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve();
 
@@ -409,7 +409,7 @@ class Ayoola_Application
 					//	link it to the profile
 					$subDomain = $userDomainInfo['profile_url'];
 					$userDomain = true;
-					$data['domain_settings'] = $userDomainInfo;
+					$data['domain_settings']['user'] = $userDomainInfo;
 					$data['domain_settings']['domain_options'] = array( 'user_subdomains' );
 					$data['domain_settings']['main_domain'] = $where['domain_name'];
 
@@ -638,7 +638,8 @@ class Ayoola_Application
 							}
 						}
 
-						self::$GLOBAL['user'] = $userInfo;
+                        $data['domain_settings']['user'] = $userInfo;
+
 						$data['domain_settings'] = $data['domain_settings'] ? : array();
 						$data['domain_settings'] += $userInfo;
 
@@ -832,6 +833,7 @@ class Ayoola_Application
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] . '/modules' );
         self::$_domainSettings = $data['domain_settings'];
+        self::$GLOBAL['domain'] =  self::$_domainSettings;
 		return true;
     }
 
