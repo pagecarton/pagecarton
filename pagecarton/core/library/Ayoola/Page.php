@@ -197,6 +197,10 @@ class Ayoola_Page extends Ayoola_Page_Abstract
                   if( ! empty( $settings[$url] ) && is_array( $settings[$url] ) )
                   {
                       $info += $settings[$url];
+                      if( empty( $info['auth_level'] ) )
+                      {
+                        $info['auth_level'] = array( 0 );
+                      }
                   }
           
           $info['cache_info'] = serialize( $storage );
