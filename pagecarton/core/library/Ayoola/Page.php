@@ -144,7 +144,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
       do
       {
 
-        $id = Ayoola_Application::getApplicationNameSpace() . $url;
+        $id = md5( Ayoola_Application::getApplicationNameSpace() . $url );
 
         $storage = self::getObjectStorage( array( 'id' => $id,  ) );			
         $tableName = 'Ayoola_Page_Page';		

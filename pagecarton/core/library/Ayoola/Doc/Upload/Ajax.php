@@ -85,7 +85,12 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 
 				}
 			}
-			@$_POST['name'] = $_POST['name'] ? : '_file_';
+			if( empty( $_POST['name'] ) )
+			{
+				$this->_objectData['status'][] = 'failed';
+				$this->_objectData['badnews'][] = 'No file name set. Probably upload limit reached';
+				return false;
+			}
 			$filter = new Ayoola_Filter_Transliterate();
 			$_POST['name'] = $filter->filter( $_POST['name'] );
 

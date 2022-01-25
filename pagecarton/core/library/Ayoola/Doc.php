@@ -749,7 +749,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
     {
       if( ! is_dir( $dir ) )
       {
-        if( ! mkdir( $dir, $permission, true ) )
+        if( ! mkdir( $dir, $permission, $recursive ) )
         {
           //var_export( $dir );
           //var_export( debug_print_backtrace() );
