@@ -266,7 +266,7 @@ class Ayoola_Application
     /**
      * Returns the settings of the current domain
      *
-     * @return array
+     * @return mixed
      */
 	public static function getDomainSettings( $key = null )
     {
@@ -1495,10 +1495,22 @@ class Ayoola_Application
                 {
                     $vPath = 'documents/layout/' . $themeName . '/theme/default-layout/template';
                     $vPath = Ayoola_Loader::getFullPath( $vPath );
+                        
+                    if( ! $vPath && ! empty( $options['auto_init_theme_page'] ) )
+                    {
+                        $variant = filemtime( $pageFile );
+
+                        //	auto-saved file
+                        $pagePathsXy = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '/default-layout' . '/include';
+
+                        $vPath = Ayoola_Loader::getFullPath( $pagePathsXy, array( 'prioritize_my_copy' => true ) );
+                        
+                    }
                     if( ! $vPath || filemtime( $vPath ) <= filemtime( $pageFile ) )
                     {
+                        //Ayoola_Application::$appNamespace .= '-xyx-default-layout';
                         $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
-                        $d = $page->refresh( '/default-layout', $themeName );
+                        $page->refresh( '/default-layout', $themeName );
                     }
                 }
 

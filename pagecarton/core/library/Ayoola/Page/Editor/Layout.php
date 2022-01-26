@@ -638,12 +638,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
         }
 
-	//	rsort( $danglingPlaceholders );
 		// inject the dangling placeholders here. 
         //	this made some placeholder to be double under lastoneness
         $lastPlaceholder = $placeholders[count( $placeholders )-3];
-    //    var_export( $placeholders );
-    //    var_export( $lastPlaceholder );
         $basePlaceholder = $lastPlaceholder;
         if( ! stripos( $content['template'], $basePlaceholder ) )
         {
@@ -1068,7 +1065,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	change the place themes are being saved.
 			if( stripos( $page['url'], '/default-layout' ) === 0 && ! empty( $this->_parameter['theme_variant'] ) )
 			{
-                $this->_parameter['theme_variant'] = null;
+				//	don't remember why theme variants are not being used for default layout
+				//	need to test it now.
+                //$this->_parameter['theme_variant'] = null;
             }
 			if( stripos( $page['url'], '/layout/' ) === 0 )
 			{
@@ -1186,6 +1185,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
                 //  so it sanitize just normal pages and not theme pages
                 //  /default-layout is meant to serve just normal page
                 //  so it doesn't cause infinite loop
+
+				//	make it run normal pages even if it has been run by main layout
+				$class->objNamespace = 'default-layout';
                 $ex = $class->sanitize();
             }
 			//	Sanitize theme pages!
@@ -1195,9 +1197,11 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
             )     
 			{
                 $themeToSanitize = $themeName;
-                if( ! empty( $this->_parameter['theme_variant'] )  )
+
+				//	this was causing default layout not to work in first try
+                //if( ! empty( $this->_parameter['theme_variant'] )  )
                 {
-                    $themeToSanitize = null;
+                    //$themeToSanitize = null;
                 }
 
                 //	autosanitize pages
@@ -1258,7 +1262,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
         }
 		$this->_layoutRepresentation = str_ireplace( '</body>', '<div style="display:none;">'. $this->getViewableObjects() . '</div></body>', $this->_layoutRepresentation );
-    return $this->_layoutRepresentation;
+    	return $this->_layoutRepresentation;
     } 
 
     public static function safe_json_encode ($value, $options = 0, $depth = 512, $utfErrorFlag = false) {
@@ -1824,147 +1828,147 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		a.innerHTML = "' . self::__( 'Preview' ) . '";  
 		topBarForButtons.appendChild( a );		
 		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '' . $page['url'] . '' . ( $this->getPageEditorLayoutName() ? ( '?pc_page_layout_name=' . $page['layout_name'] ) : null ) . '\' ); } );
-'
-.
-		( 
-			! $this->getPageEditorLayoutName() 
-
-			? 
-
-			null 
-
-			: 
-
-'			
-		//	button to load layout defaults HTML
-		var a = document.createElement( "a" );
-		a.style.cssText = "";
-		a.href = "javascript:window.location.search = window.location.search + \'&pc_load_theme_defaults=1\'";
-		a.onclick = "";
-		a.title = "Load default HTML Content to this theme";
-		a.className = "pc-hide-children-children pc-btn";  
-		a.innerHTML = "' . self::__( 'Load Default' ) . '";  
-		topBarForButtons.appendChild( a );
-'			
-		)
-.
-
-'
-
-		//	button to edit template
-		var a = document.createElement( "a" );
-		a.style.cssText = "";
-		a.href = "javascript:";
-		a.className = "pc-hide-children-children pc-btn";  
-		a.innerHTML = "' . self::__( 'Theme' ) . '";  
-		topBarForButtons.appendChild( a );
-		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/layout/' . strtolower( $page['layout_name'] ) . '/template\' ); } );
-
-		'  
-		:
-
 		'
-		//	button to preview page
-		var a = document.createElement( "a" );
-		a.style.cssText = "";
-		a.title = "Click here to preview the LIVE version on this theme.";
-		a.href = "javascript:";
+		.
+				( 
+					! $this->getPageEditorLayoutName() 
 
-		a.className = "pc-hide-children-children pc-btn";  
-		a.innerHTML = "' . self::__( 'Preview' ) . '";  
-		topBarForButtons.appendChild( a );		
-		ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Page_Layout_Preview/?layout_name=' . $page['layout_name'] . '\' ); } );
+					? 
 
-		//	button to load layout defaults HTML
-		var loadButton = document.createElement( "a" );
-		loadButton.style.cssText = "";
-		loadButton.href = "javascript:window.location.search = window.location.search + \'&pc_load_theme_defaults=1\'";
-		loadButton.onclick = "";
-		loadButton.title = "Load default HTML Content to this theme";
-		loadButton.className = "pc-hide-children-children pc-btn";  
-		loadButton.innerHTML = "' . self::__( 'Load Default' ) . '";  
-		topBarForButtons.appendChild( loadButton );
+					null 
 
-		'		
+					: 
 
-		)
-
+		'			
+				//	button to load layout defaults HTML
+				var a = document.createElement( "a" );
+				a.style.cssText = "";
+				a.href = "javascript:window.location.search = window.location.search + \'&pc_load_theme_defaults=1\'";
+				a.onclick = "";
+				a.title = "Load default HTML Content to this theme";
+				a.className = "pc-hide-children-children pc-btn";  
+				a.innerHTML = "' . self::__( 'Load Default' ) . '";  
+				topBarForButtons.appendChild( a );
+		'			
+				)
 		.
 
-		'		
+		'
 
-		//	Display Widgets Editor
-		var optionbar = document.createElement( "span" );
-		optionbar.innerHTML = \'' . self::__( 'Widget Options' ) . '\';
-		optionbar.className = " pc-btn";
-		optionbar.title = "Show or hide widget options";
-		optionbar.onclick = function()
-		{
-			var a = document.body;
-			if( ayoola.style.hasClass( a, "pc_page_widgetmode" ) )  
-			{
-				ayoola.style.removeClass( a, "pc_page_widgetmode" );
-				this.innerHTML = \'' . self::__( 'Show Widget Options' ) . '\';      
-			}
-			else
-			{
-				this.innerHTML = \'' . self::__( 'Hide Widget Options' ) . '\';
-				ayoola.style.addClass( a, "pc_page_widgetmode" ); 
-			}
-		};
-		topBarForButtons.appendChild( optionbar );
+				//	button to edit template
+				var a = document.createElement( "a" );
+				a.style.cssText = "";
+				a.href = "javascript:";
+				a.className = "pc-hide-children-children pc-btn";  
+				a.innerHTML = "' . self::__( 'Theme' ) . '";  
+				topBarForButtons.appendChild( a );
+				ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Editor_Layout/?url=/layout/' . strtolower( $page['layout_name'] ) . '/template\' ); } );
 
-		//	Display options
-		var optionbar = document.createElement( "span" );
-		optionbar.innerHTML = \'...\';
-		optionbar.className = " pc-btn pc-hide-children-children";
-		optionbar.title = "Pop-up widget options";
-		optionbar.onclick = function()
-		{
-			var a = document.body;
-			if( ayoola.style.hasClass( a, "pc_page_widgetmode_popup" ) )  
-			{
-				ayoola.style.removeClass( a, "pc_page_widgetmode_popup" );
-			}
-			else
-			{
-				ayoola.style.addClass( a, "pc_page_widgetmode_popup" ); 
-			}
+				'  
+				:
 
-		};
-		topBarForButtons.appendChild( optionbar );
+				'
+				//	button to preview page
+				var a = document.createElement( "a" );
+				a.style.cssText = "";
+				a.title = "Click here to preview the LIVE version on this theme.";
+				a.href = "javascript:";
 
-		//	Add options bar
-		var optionbar = document.createElement( "span" );
-		optionbar.innerHTML = \' ' . $pageVersionHTML . '\';
-		optionbar.className = "pc-hide-children-children";
-		optionbar.title = "Select page content version";
-		topBarForButtons.appendChild( optionbar );
+				a.className = "pc-hide-children-children pc-btn";  
+				a.innerHTML = "' . self::__( 'Preview' ) . '";  
+				topBarForButtons.appendChild( a );		
+				ayoola.events.add( a, "click", function(){ ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Page_Layout_Preview/?layout_name=' . $page['layout_name'] . '\' ); } );
 
-		//	Add show more options button
-		var optionbar = document.createElement( "span" );
-		optionbar.innerHTML = \'&raquo;&raquo;\';
-		optionbar.className = " pc-btn";
-		optionbar.title = "Show or hide more options";
-		optionbar.onclick = function()
-		{
-			var a = this.parentNode.getElementsByClassName( "pc-hide-children-children" );
-			for( var b = 0; b < a.length; b++ )  
-			{
-				switch( a[b].style.display )
+				//	button to load layout defaults HTML
+				var loadButton = document.createElement( "a" );
+				loadButton.style.cssText = "";
+				loadButton.href = "javascript:window.location.search = window.location.search + \'&pc_load_theme_defaults=1\'";
+				loadButton.onclick = "";
+				loadButton.title = "Load default HTML Content to this theme";
+				loadButton.className = "pc-hide-children-children pc-btn";  
+				loadButton.innerHTML = "' . self::__( 'Load Default' ) . '";  
+				topBarForButtons.appendChild( loadButton );
+
+				'		
+
+				)
+
+				.
+
+				'		
+
+				//	Display Widgets Editor
+				var optionbar = document.createElement( "span" );
+				optionbar.innerHTML = \'' . self::__( 'Widget Options' ) . '\';
+				optionbar.className = " pc-btn";
+				optionbar.title = "Show or hide widget options";
+				optionbar.onclick = function()
 				{
-					case "inline-block":
-						a[b].style.display = "";
-						this.innerHTML = \'&raquo;&raquo;\';      
-					break;
-					default:
-						a[b].style.display = "inline-block";
-						this.innerHTML = \'&laquo;&laquo;\';
-					break;
-				}
-			}
-		};
-		topBarForButtons.appendChild( optionbar );
+					var a = document.body;
+					if( ayoola.style.hasClass( a, "pc_page_widgetmode" ) )  
+					{
+						ayoola.style.removeClass( a, "pc_page_widgetmode" );
+						this.innerHTML = \'' . self::__( 'Show Widget Options' ) . '\';      
+					}
+					else
+					{
+						this.innerHTML = \'' . self::__( 'Hide Widget Options' ) . '\';
+						ayoola.style.addClass( a, "pc_page_widgetmode" ); 
+					}
+				};
+				topBarForButtons.appendChild( optionbar );
+
+				//	Display options
+				var optionbar = document.createElement( "span" );
+				optionbar.innerHTML = \'...\';
+				optionbar.className = " pc-btn pc-hide-children-children";
+				optionbar.title = "Pop-up widget options";
+				optionbar.onclick = function()
+				{
+					var a = document.body;
+					if( ayoola.style.hasClass( a, "pc_page_widgetmode_popup" ) )  
+					{
+						ayoola.style.removeClass( a, "pc_page_widgetmode_popup" );
+					}
+					else
+					{
+						ayoola.style.addClass( a, "pc_page_widgetmode_popup" ); 
+					}
+
+				};
+				topBarForButtons.appendChild( optionbar );
+
+				//	Add options bar
+				var optionbar = document.createElement( "span" );
+				optionbar.innerHTML = \' ' . $pageVersionHTML . '\';
+				optionbar.className = "pc-hide-children-children";
+				optionbar.title = "Select page content version";
+				topBarForButtons.appendChild( optionbar );
+
+				//	Add show more options button
+				var optionbar = document.createElement( "span" );
+				optionbar.innerHTML = \'&raquo;&raquo;\';
+				optionbar.className = " pc-btn";
+				optionbar.title = "Show or hide more options";
+				optionbar.onclick = function()
+				{
+					var a = this.parentNode.getElementsByClassName( "pc-hide-children-children" );
+					for( var b = 0; b < a.length; b++ )  
+					{
+						switch( a[b].style.display )
+						{
+							case "inline-block":
+								a[b].style.display = "";
+								this.innerHTML = \'&raquo;&raquo;\';      
+							break;
+							default:
+								a[b].style.display = "inline-block";
+								this.innerHTML = \'&laquo;&laquo;\';
+							break;
+						}
+					}
+				};
+				topBarForButtons.appendChild( optionbar );
 		';
 		;
 

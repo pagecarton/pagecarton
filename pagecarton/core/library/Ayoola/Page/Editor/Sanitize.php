@@ -73,7 +73,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
      */	
     public function sanitize( $themeName = null ) 
     {
-        $id = $themeName . Ayoola_Application::getApplicationNameSpace();
+        $id = @$this->objNamespace . $themeName . Ayoola_Application::getApplicationNameSpace();
         if( ! empty( self::$_refreshed[$id] ) )
 		{
 			return false;
@@ -115,7 +115,6 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 				}
 				$page = is_string( $page ) ? $page : $page['url'];
 				$this->_parameter['page_editor_layout_name'] = $themeName;
-
 				$this->refresh( $page );   
 			}
 		}
@@ -135,10 +134,29 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                     $where['layout_name'][] = '';
                 }
             }
-    
             $pages = $pages->getDbTable()->select( null, $where );
             $pages = array_merge( $pages, self::$defaultPages );
             $done = array();
+
+            if( $themeName )
+            {
+                //  means we are trying to reset a main theme layout
+    
+                $pageFile = 'documents/layout/' . $themeName . '/default-layout' . '.html';
+                $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) );
+                if( is_file( $pageFile ) )
+                {
+                    //  we have default layout, 
+                    //  no need to sanitize pages
+                    //  default layout will do that later
+                    $pages = array();
+                }
+    
+            }
+
+            //var_export( $themeName );
+            //var_export( $this->objNamespace );
+            //var_export( count( $pages ) );
             foreach( $pages as $page )    
             {
                 $page = is_string( $page ) ? $page : $page['url'];
@@ -187,7 +205,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		{
 			$this->_parameter['page_editor_layout_name'] = $themeName;
         }
-        $id = $themeName . $page . Ayoola_Application::getApplicationNameSpace();
+        $id = @$this->objNamespace . $themeName . $page . Ayoola_Application::getApplicationNameSpace();
 		if( ! empty( self::$_refreshed[$id] ) )
 		{
 			return false;

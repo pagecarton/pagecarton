@@ -86,23 +86,6 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
 
         //  page does not need to exit to be able to copy
         //  to allow Ayoola_Page::getInfo to work for theme pages
-    //    if( ! $pageInfo = $class->sourcePage( $url ) )
-        {
-    //         return false;
-        }
-        if( ! empty( $pageInfo['layout_name'] ) && $pageInfo['layout_name'] != $themeName )
-        {
-             return false;
-        }
-    //    foreach( $fPaths as $key => $each )
-        {
-     //       if( $from = Ayoola_Loader::getFullPath( $each, array( 'prioritize_my_copy' => true ) ) )
-            {
-            //    var_export( $key . '<br>');
-            //    var_export( $from . '<br>');
-            //    copy( $from, $to );
-            }
-        }
         return true;
     }
 
@@ -162,16 +145,6 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
 			$this->createConfirmationForm( 'Copy', 'Copy contents of  "' . $url . '" in "' . $data['layout_label'] . '" to main page' );
 			$this->setViewContent( $this->getForm()->view(), true);
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
-/*
-            
-            //	update theme files
-            $class = new Ayoola_Page_Editor_Layout( array( 'no_init' => true ) );
-            $class->setPageInfo( array( 'url' => $url ) );
-            $class->updateLayoutOnEveryLoad = true;
-            $class->setPagePaths();
-            $class->setValues();
-            $class->init(); // invoke the template update for this page.
-*/        //    $paths = $this->getPageFilesPaths( $values['origin'] );
 
 
             //  create here for compatibility. Pages copied before will keep asking for password

@@ -53,12 +53,20 @@
 
 			$fileC = array();
 			$fPaths = Ayoola_Page_Layout_Pages::getPagePaths( $themeName, '/default-layout' );
-			if( $path = Ayoola_Loader::getFullPath( $fPaths[$type], $options ) )
+			if( ! $path = Ayoola_Loader::getFullPath( $fPaths[$type], $options ) )
 			{
-				$fileC[] = $path;
+				$fPaths[$type] = 'documents/layout/' . $themeName . '/theme/variant/auto/default-layout/' . $type;
+				if( $path = Ayoola_Loader::getFullPath( $fPaths[$type], $options ) )
+				{
 
+				}
 			}
-            //	use default designed layout if available
+			$fileC[] = $path;
+
+			//var_export( $fileC );
+			//var_export( $fPaths );
+
+			//	use default designed layout if available
             $themeDir = 'documents/layout/' . $themeName . '/theme/' . $type . '';
             $themeDirV = 'documents/layout/' . $themeName . '/theme/variant/auto/' . $type . '';
 			if( $paths = Ayoola_Loader::getValidIncludePaths( $themeDir, ! empty( $options['always_blacklist'] ) ? $options : null ) )

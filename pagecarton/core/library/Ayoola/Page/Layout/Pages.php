@@ -77,6 +77,12 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
         $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
         $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
 		$fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
+		if( ! Ayoola_Loader::getFullPath( $fPaths['include'], array( 'prioritize_my_copy' => true ) ) )
+		{
+			$fPaths['include'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/include';
+			$fPaths['template'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/template';
+			$fPaths['data_json_content'] = 'documents/layout/' . $themeName . '/theme/variant/auto' . $pageThemeFileUrl . '/data_json_content';
+}
 		return $fPaths;
 	}
 		
