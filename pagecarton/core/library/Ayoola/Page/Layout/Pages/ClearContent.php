@@ -47,13 +47,10 @@ class Ayoola_Page_Layout_Pages_ClearContent extends Ayoola_Page_Layout_Pages
 	public function init()
     {    
 		try
-		{ 
-            //  Code that runs the widget goes here...
-
+		{
             //  Output demo content to screen
 			if( ! $data = $this->getIdentifierData() ){ return false; }
 		
-		//	var_export( $this->getFilename() );
             $url = $_REQUEST['url'];
             
             if( ! in_array( $url, self::getPages( $data['layout_name'], 'list' ) ) )
@@ -62,50 +59,54 @@ class Ayoola_Page_Layout_Pages_ClearContent extends Ayoola_Page_Layout_Pages
                 return false;   
             }
             $pageThemeFileUrl = $url;
-        //    $pageThemeFileUrl = $data['layout_name'];
             if( $pageThemeFileUrl == '/' )
             {
                 $pageThemeFileUrl = '/index';
             }
             $fPaths = array();
             $themeName = strtolower( $data['layout_name'] );
-/*             $fPaths['include'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/include';
-            $fPaths['template'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/template';
-            $fPaths['data_json'] = 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '/data_json';
- */            
+            
             $fPaths = static::getPagePaths( $themeName, $pageThemeFileUrl );
             $from = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $fPaths['include'];
-      //      var_export( $from );
-            if( ! is_file( $from ) )
+
+            if( ! is_file( $from ) && $pageThemeFileUrl != '/template' )
             {
                 //  don't create this page unless it's saved
                 $this->setViewContent( self::__( '<p class="badnews">Theme page has no saved content</p>' ) ); 
                 return false;
             }
-            
-			$this->createConfirmationForm( 'Clear', 'Delete contents of  "' . $url . '" in "' . $data['layout_label'] . '"' );
-			$this->setViewContent( $this->getForm()->view(), true);
+
+            $message = 'Delete contents of  "' . $url . '" in "' . $data['layout_label'] . '".';
+
+            if( $pageThemeFileUrl == '/template' )
+            {
+                $message .= ' WARNING!! Because you are deleting /template, This will also WIPE all saved data of this theme, not just the theme page.';
+            }
+			$this->createConfirmationForm( 'Clear', $message );
+
+            $this->setViewContent( $this->getForm()->view(), true);
+
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
-    //     return false;
             foreach( $fPaths as $key => $each )
             {
                 $from = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $fPaths[$key];
-            //  var_export( $from );
-                $trashed = Ayoola_File::trash( $from );
+                Ayoola_File::trash( $from );
+            }
+            if( $pageThemeFileUrl == '/template' )
+            {
+                $all = 'documents/layout/' . $themeName . '/theme';
+                $all = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $all;
+                $files = Ayoola_Doc::getFilesRecursive( $all );
+                foreach( $files as $each )
+                {
+                    Ayoola_File::trash( $each );
+                }
             }
 
-       //     if( self::this( $url, $data['layout_name'] ) )
-            {
-                $this->setViewContent(  '' . self::__( '<p class="goodnews">"' . $url . '" page cleared successfully.</p>' ) . '', true  ); 
-            }
-         //   else
-            {
-          //      $this->setViewContent( self::__( '<p class="badnews">Page could not be copied.</p>' ) ); 
-            }
 
-             // end of widget process
-          
+            $this->setViewContent(  '' . self::__( '<p class="goodnews">"' . $url . '" page cleared successfully.</p>' ) . '', true  );
+            // - end of widget process
 		}  
 		catch( Exception $e )
         { 

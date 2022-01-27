@@ -31,7 +31,7 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
      * 
      * @var string 
      */
-	protected static $_objectTitle = 'Duplicate a theme page'; 
+	protected static $_objectTitle = 'Delete a theme page'; 
 
     /**
      * 
@@ -52,7 +52,6 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
         $themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
         $themeDataDir = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $themeName . '/theme' . $pageThemeFileUrl . '';
         $themePageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
-    //	var_export( $themeDataDir );
         if( ! is_file( $themePageFile ) && is_dir( $themeDataDir ) )
         {
 
@@ -79,7 +78,6 @@ class Ayoola_Page_Layout_Pages_Delete extends Ayoola_Page_Layout_Pages
             //  Output demo content to screen
 			if( ! $data = $this->getIdentifierData() ){ return false; }
 		
-		//	var_export( $this->getIdentifier() );
             $url = $this->getParameter( 'url' ) ? : @$_REQUEST['url'];
             
             $allPages = self::getPages( $data['layout_name'], 'list' );

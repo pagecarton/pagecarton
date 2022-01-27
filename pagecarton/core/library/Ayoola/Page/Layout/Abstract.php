@@ -301,6 +301,12 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			Ayoola_File::putContents( $myPath . 'raw-original', $contentRawLite );
 		}
 
+		if( ! is_file( $myPath . 'template.html' ) )
+		{
+			//	don't overwrite original once it is written once
+			Ayoola_File::putContents( $myPath . 'template.html', $contentLte );
+		}
+
 		
         //	update theme files
         static::refreshThemePage( $themeName );    
