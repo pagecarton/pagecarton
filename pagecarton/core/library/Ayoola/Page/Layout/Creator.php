@@ -203,6 +203,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					$content = file_get_contents( $path );
 
 					$export['template'] = $content;
+					$export['template.html'] = $content;
 				}
 				else
 				{
