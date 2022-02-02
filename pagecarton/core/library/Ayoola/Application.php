@@ -1464,10 +1464,10 @@ class Ayoola_Application
                 $rPath = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '/template';
                 $rPath = Ayoola_Loader::getFullPath( $rPath );
                 //    var_export( $rPath );
-                $pageFile = 'documents/layout/' . $themeName . '/template.html';
+                $pageFile = 'documents/layout/' . $themeName . '/templateraw';
                 if( ! $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
                 {
-                    $pageFile = 'documents/layout/' . $themeName . '/templateraw';
+                    $pageFile = 'documents/layout/' . $themeName . '/template.html';
                     if( ! $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
                     {
                         $pageFile = 'documents/layout/' . $themeName . '/index.html';
