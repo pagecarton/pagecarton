@@ -89,7 +89,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 
 				if( is_array( $page ) && ! empty( $page['url'] ) )
 				{
-					$page = $page['url'];
+					$page = $page['url']; 
 				}
 
 				//	strictly do this to ensure this only saves if we have our own copy

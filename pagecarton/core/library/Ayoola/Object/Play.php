@@ -39,7 +39,7 @@ class Ayoola_Object_Play extends Ayoola_Object_Abstract
         $_SERVER['HTTP_APPLICATION_MODE'] = $this->getObjectName();
 
 
-        //   var_export( $this->getParameter() );
+        //var_export( $this->getParameter() );
 		try
 		{
 			{
