@@ -294,6 +294,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 		
 		Ayoola_File::putContents( $myPath . 'raw', $contentLte );
+		//  sleep so it can leave a second in between the two filemtime
+		sleep( 1 );
 
 		if( ! is_file( $myPath . 'raw-original' ) )
 		{
