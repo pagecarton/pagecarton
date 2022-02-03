@@ -1753,7 +1753,6 @@ class Ayoola_Application
         }
 
 		include_once $pagePaths['include'];
-
 		include_once $pagePaths['template'];
 
 		return true;

@@ -87,22 +87,26 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
             $update['__update_user_id'] = is_array( $update['__update_user_id'] ) ? $update['__update_user_id'] : array();
             $update['__update_user_id'][time()] = Ayoola_Application::getUserInfo( 'user_id' );
 
+            $this->getXml()->load( $filename );
+
 			$this->getXml()->setId( self::ATTRIBUTE_ROW_ID, $this->getRecords() );
+
 			$rows = $this->query( 'SELECT', null, $where, array( 'filename' => $filename, 'populate_record_number' => true ) );
 			$result = false;
-			foreach( $update as $key => $value )
-			{
-				foreach( $rows as $rowId => $row )
-				{
-					$count++;
-					if( ! $recordRow = $this->getXml()->getElementById( $rowId ) )
-					{
-						
-						continue 3;
-					}
-					$result = $this->setRowColumnValue( $recordRow, $key, $value, true );
-				}
-			}
+
+            foreach( $rows as $rowId => $row )
+            {
+                if( ! $recordRow = $this->getXml()->getElementById( $rowId ) )
+                {    
+                    continue;
+                }
+                $count++;
+                foreach( $update as $key => $value )
+                {   
+                    $result = $this->setRowColumnValue( $recordRow, $key, $value, true );
+                }
+            }
+			
 			
 			//	Save only when an editing was done
 			$result ? $this->saveFile( $filename ) : null;
@@ -130,7 +134,6 @@ class Ayoola_Dbase_Adapter_Xml_Table_Update extends Ayoola_Dbase_Adapter_Xml_Tab
             }
         }    
 
-	//	$this->clearCache();
 		return $count;
     } 
 	// END OF CLASS
