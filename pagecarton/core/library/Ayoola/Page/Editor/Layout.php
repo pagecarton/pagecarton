@@ -133,6 +133,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				if( $defaultPage = Ayoola_Page::getInfo( '/' . trim( $this->_dbWhereClause['url'] . '/default', '/' ) ) )
 				{  
 					$pageToCopy = $defaultPage;
+
+					//	this was making /default copy to child / in pc.com
+					unset( $pageToCopy['layout_name'] );
 				}				
 
 				//	Copy the parent files

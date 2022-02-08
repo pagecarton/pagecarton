@@ -111,8 +111,6 @@ abstract class Ayoola_Page_Abstract extends Ayoola_Abstract_Table
 		$url = $defaultUrl ? : '/default';
 		$filter = new Ayoola_Filter_UriToPath;
 		$defaultDataFiles =  $filter->filter( ( $url == '/' ? '' : $url ) );
-	//	var_export( $defaultUrl );
-	//	var_export( $defaultDataFiles );
 		foreach( $defaultDataFiles as $key => $defaultDataFile )
 		{
 			if( $filePath = Ayoola_Loader::checkFile( $defaultDataFile ) )

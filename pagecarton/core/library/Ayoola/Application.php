@@ -1544,7 +1544,6 @@ class Ayoola_Application
 			//	theme copy
 			$include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
             $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
-
             if( $include && $template )
             {
                 $PAGE_INCLUDE_FILE = $include;
@@ -1635,6 +1634,7 @@ class Ayoola_Application
 					break;
 				}
             }
+            
 			if
 			(
 				! is_file( $PAGE_INCLUDE_FILE ) OR ! is_file( $PAGE_TEMPLATE_FILE )
@@ -1653,6 +1653,7 @@ class Ayoola_Application
 				$intendedCopyPaths = Ayoola_Page::getPagePaths( '/' . trim( $uri . '/default', '/' ) );
 				$PAGE_INCLUDE_FILE = Ayoola_Loader::getFullPath( $intendedCopyPaths['include'], array( 'prioritize_my_copy' => true ) );
 				$PAGE_TEMPLATE_FILE = Ayoola_Loader::getFullPath( $intendedCopyPaths['template'], array( 'prioritize_my_copy' => true ) );
+
 
 				if
 				(
