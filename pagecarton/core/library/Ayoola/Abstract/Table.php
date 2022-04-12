@@ -680,6 +680,10 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 				$this->getForm()->setBadnews( self::MESSAGE_AMBIGUOUS );
 				$this->setViewContent( $this->getForm()->view(), true );
 			}
+			else
+			{
+				$this->getForm()->setBadnews( $e->getMessage() );
+			}
 
 			return false;
 		}
