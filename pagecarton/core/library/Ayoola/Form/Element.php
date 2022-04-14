@@ -957,11 +957,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 					$checked = "checked='true'";
 				}
 			}
-/* 			@$html .= "<span style='display:inline-block;'>
-							<label style='display:inline;font-weight:normal;' for='{$element['id']}{$counter}'>{$label} </label>
-							<input type='text' style='{$element['style']}' id='{$element['id']}$counter' value='{$value}' name='{$element['name']}' {$checked} />
-						</span>\n";
- */			@$html .= "<span style='display:inline-block;'>
+			@$html .= "<span style='display:inline-block;'>
 							<label style='display:inline;font-weight:normal;' for='{$element['id']}{$counter}'>{$element['label']} {$counter} </label>
 							<textarea style='{$element['style']}' id='{$element['id']}$counter' name='{$element['name']}'>{$label}</textarea>
 						</span>\n";
@@ -1023,7 +1019,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 		}
 
 		$html .= self::$_placeholders['badnews'];
-        $html .= "<select id='{$element['id']}' name='{$element['name']}' multiple='multiple' > \n";
+        $html .= "<select " . self::getAttributesHtml( $element ) . " multiple='multiple' > \n";
 		if( isset( $_POST[$element["name"]] ) ) 
 		{ 
 			$element["value"] = (array) $_POST[$element["name"]]; 

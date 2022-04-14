@@ -67,6 +67,10 @@ class Ayoola_Page_Info extends PageCarton_Widget
                     $title = explode( "/", Ayoola_Application::getRuntimeSettings( 'url' ) );
                     $title = array_pop( $title );
                     $title = ucwords( $title );
+                    if( ! empty( $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] ) )
+                    {
+                        $title = $_SERVER['HTTP_AYOOLA_PLAY_CLASS'];
+                    }
                     if( class_exists( $title ) && method_exists( $title, 'getObjectTitle' ) && $title::getObjectTitle() )
                     {
                         $title = $title::getObjectTitle() ? : $title;
