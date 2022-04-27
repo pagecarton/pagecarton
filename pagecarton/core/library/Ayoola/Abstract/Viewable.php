@@ -566,6 +566,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			{
 
 			}
+            
+            if( PHP_SAPI === 'cli' ) 
+            {
+                $this->_playMode = static::PLAY_MODE_JSON;
+            }
+    
+
 		}
 	}
 
@@ -2427,10 +2434,17 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 				//	Log early before we exit
 				Ayoola_Application::log();
+                if( PHP_SAPI !== 'cli' ) 
+                {
+                    header( 'Content-Type: application/json; charset=utf-8' );
+                }
 
-				header( 'Content-Type: application/json; charset=utf-8' );
 				echo $dataToSend;
-				exit();
+
+                if( PHP_SAPI !== 'cli' ) 
+                {
+				    exit();
+                }
 				
 			break;
 			case 'ENCRYPTION':

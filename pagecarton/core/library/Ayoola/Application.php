@@ -463,13 +463,17 @@ class Ayoola_Application
 
 			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && empty( $domainSettings['no_redirect'] ) && empty( $_SERVER['CONTEXT_PREFIX'] )  )
 			{
-
 				if( $primaryDomainInfo['domain_name'] )
 				{
                     $urlY = $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Page::getPortNumber() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                     $urlY = self::appendCurrentQueryStrings( $urlY );
-                    header( 'Location: ' . $urlY );
-					exit( 'DOMAIN NOT FOUND' );
+
+                    if( PHP_SAPI !== 'cli' ) 
+                    {
+                        header( 'Location: ' . $urlY );
+                        exit( 'DOMAIN NOT FOUND' );
+                    }
+    
 				}
 				else
 				{
@@ -1754,8 +1758,12 @@ class Ayoola_Application
         }
 
 		include_once $pagePaths['include'];
-		include_once $pagePaths['template'];
 
+        if( PHP_SAPI !== 'cli' ) 
+        {
+            //   TBD... do we need templates on cli?
+            include_once $pagePaths['template'];
+        }
 		return true;
 	}
 
@@ -1997,6 +2005,11 @@ class Ayoola_Application
         {
             $requestedUri = self::$_homePage;	// Default
 
+            if( ! empty( $_SERVER['argv'][1] ) )
+            {
+                $requestedUri = $_SERVER['argv'][1];	// Default
+            }
+
             //	because of url prefix that has space in them
             @$requestedUriDecoded = $_SERVER['REQUEST_URI'];
 
@@ -2166,7 +2179,6 @@ class Ayoola_Application
 		{
 			self::$_pathPrefix = constant( 'PC_PATH_PREFIX' ) ? : '';
 		}
-
 		return self::$_pathPrefix;
 	}
 
