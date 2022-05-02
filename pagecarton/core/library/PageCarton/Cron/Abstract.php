@@ -53,6 +53,7 @@ class PageCarton_Cron_Abstract extends PageCarton_Widget
      * @var boolean
      */
 	protected static $_intervalOptions = array(
+                            '1' => 'Every Time',
                             '3600' => '1 hr',
                             '43200' => '12 hrs',
                             '86400' => '1 day',
