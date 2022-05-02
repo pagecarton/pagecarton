@@ -25,7 +25,7 @@ class PageCarton_Cron_Run_Table extends PageCarton_Table_Private
      *
      * @param string
      */
-    protected $_tableVersion = '0.0';  
+    protected $_tableVersion = '0.1';  
 
     /**
      * Table data types and declaration
@@ -36,6 +36,7 @@ class PageCarton_Cron_Run_Table extends PageCarton_Table_Private
 	protected $_dataTypes = array (
   'cron_id' => 'INPUTTEXT',
   'runtime' => 'INT',
+  'done' => 'INT',
 );
 
 

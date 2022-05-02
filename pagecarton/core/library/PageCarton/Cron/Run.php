@@ -92,6 +92,21 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                 $cTime = time();
                 foreach( $tasks as $data )
                 {
+                    //  check if we have any pending job
+                    if( $unfinshed = PageCarton_Cron_Run_Table::getInstance()->selectOne( null, array( 'cron_id' => $data['table_id'], 'done' => 0 ) ) )
+                    {
+                        if( ( $cTime - ( 60 * 60 * 1 ) ) > $unfinshed['runtime'] )
+                        {
+                            //  continue if it seems like a zombie process
+                            //  after one hour
+                        }
+                        else
+                        {
+                            //  we have a pending job
+                            continue;
+                        }
+                    }
+
                     if( $runHistory = PageCarton_Cron_Run_Table::getInstance()->select( null, array( 'cron_id' => $data['table_id'], ), array( 'sort_column' => 'runtime' ) ) )
                     {
                         $lastRunInfo = array_pop( $runHistory );
@@ -105,19 +120,20 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                     $filter = new Ayoola_Filter_Time();
                     if( $nextRunTime > $cTime )
                     {
-                        continue;
+                       continue;
                     }
+                    if( count( $runHistory ) > 10 )
+                    {
+                        PageCarton_Cron_Run_Table::getInstance()->delete( array( 'cron_id' => $data['table_id'] ) );
+                    }
+                    $runData = array( 'cron_id' => $data['table_id'], 'runtime' => $cTime, );
+                    $runI = PageCarton_Cron_Run_Table::getInstance()->insert( $runData );
                     if( $html = self::task( $data ) )
                     {
                         $this->setViewContent( $html, true );
                     }
+                    PageCarton_Cron_Run_Table::getInstance()->update( array( 'done' => 1 ), array( 'table_id' => $runI['table_id'] ) );
                     $u++;
-                    $runData = array( 'cron_id' => $data['table_id'], 'runtime' => $cTime, );
-                    if( count( $runHistory ) > 5 )
-                    {
-                        PageCarton_Cron_Run_Table::getInstance()->delete( array( 'cron_id' => $data['table_id'] ) );
-                    }
-                    PageCarton_Cron_Run_Table::getInstance()->insert( $runData );
                 }
                 $this->setViewContent( self::__( '<div class="goodnews">' . sprintf( PageCarton_Widget::__( "%s cron tasks processed successfully" ), $u ) . '</div>' ) );
             }
