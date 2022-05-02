@@ -321,7 +321,7 @@ class Ayoola_Application
 			$protocol = 'https';
 		}
 
-		@$storage->storageNamespace = 'vx-y' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
+		@$storage->storageNamespace = 'vxd-y' . $_SERVER['HTTP_HOST'] . $domainSettings['domain'] . $protocol . Ayoola_Application::getPathPrefix();
 		$storage->setDevice( 'File' );
 		$data = $storage->retrieve();
 
@@ -461,14 +461,15 @@ class Ayoola_Application
 				$data['domain_settings'] = $where;
 			}
 
-			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && empty( $domainSettings['no_redirect'] ) && empty( $_SERVER['CONTEXT_PREFIX'] )  )
+
+			if( ! $data['domain_settings'] && '127.0.0.1' !== $_SERVER['REMOTE_ADDR'] && empty( $domainSettings['no_redirect'] ) && empty( $_SERVER['CONTEXT_PREFIX'] ) && PHP_SAPI !== 'cli' )
 			{
 				if( $primaryDomainInfo['domain_name'] )
 				{
                     $urlY = $protocol . '://' . $primaryDomainInfo['domain_name'] . Ayoola_Page::getPortNumber() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                     $urlY = self::appendCurrentQueryStrings( $urlY );
 
-                    if( PHP_SAPI !== 'cli' ) 
+                    //if( PHP_SAPI !== 'cli' ) 
                     {
                         header( 'Location: ' . $urlY );
                         exit( 'DOMAIN NOT FOUND' );
@@ -489,26 +490,39 @@ class Ayoola_Application
 
 				$oldDomainDir = Application_Domain_Abstract::getSubDomainDirectory( @$primaryDomainInfo['domain_name'] ? : Ayoola_Page::getDefaultDomain() );
 
+
 				//	we need to change this to main dir
 				$domainDir = Application_Domain_Abstract::getSubDomainDirectory( 'default' );
+
 				$data['domain_settings']['site_configuraton'] = array();
 				$configurationFile = $domainDir . DS .  'pagecarton.json';
 
-				if( ! file_exists( $configurationFile ) )
-				{
-					$configurationFile = 'pagecarton.json';
-				}
+
+                $conf = array();
+
 				if( file_exists( $configurationFile ) )
 				{
-					if( $conf = file_get_contents( $configurationFile ) )
+                    if( $confX = file_get_contents( $configurationFile ) )
 					{
-						if( $conf = json_decode( $conf, true ) )
+						if( $conf += (array) json_decode( $confX, true ) )
 						{
-							$data['domain_settings']['site_configuraton'] = $conf;
+							
+						}
+					}
+
+				}
+                $configurationFile = 'pagecarton.json';
+				if( file_exists( $configurationFile ) )
+				{
+					if( $confX = file_get_contents( $configurationFile ) )
+					{
+						if( $conf += (array) json_decode( $confX, true ) )
+						{
+							
 						}
 					}
 				}
-
+                $data['domain_settings']['site_configuraton'] = $conf;
 				if( is_dir( $oldDomainDir ) )
 				{
 					if( ! is_dir( $domainDir ) )
@@ -559,7 +573,6 @@ class Ayoola_Application
 					{
 						break;
 					}
-
 				    //	For backward compatibility, the directory must be "consciously" set
 					$data['domain_settings'][APPLICATION_DIR] = $primaryDomainInfo[APPLICATION_DIR] = str_replace( '/', DS, $domainDir );
 					$data['domain_settings'][APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_PATH] = $primaryDomainInfo[APPLICATION_DIR] . DS . 'application';
@@ -685,6 +698,7 @@ class Ayoola_Application
 			}
 		}
 		while( false );
+
 		@$data['domain_settings'][APPLICATION_DIR] = $data['domain_settings'][APPLICATION_DIR] ? : APPLICATION_DIR;
 		@$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_PATH] ? : APPLICATION_PATH;
 		@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][EXTENSIONS_PATH] ? : EXTENSIONS_PATH;
@@ -964,11 +978,8 @@ class Ayoola_Application
 
         //	run cron
 		self::$_conf = self::getDomainSettings( 'site_configuraton' );
-
-		if( empty( self::$_conf['disable_auto_cron'] ) )
-		{
-			$result = PageCarton_Cron_Run::viewInLine();
-		}
+        //var_export( self::$_conf );
+        //var_export( self::getDomainSettings(  ) );
         //var_export( microtime( true ) - $time_start );
         //exit();
 
@@ -1757,6 +1768,11 @@ class Ayoola_Application
             header("Content-Type: text/html; charset=utf-8");
         }
 
+		if( empty( self::$_conf['disable_auto_cron'] ) )
+		{
+			$result = PageCarton_Cron_Run::viewInLine( array( 'mode' => 'onsite' ) );
+		}
+
 		include_once $pagePaths['include'];
 
         if( PHP_SAPI !== 'cli' ) 
@@ -1766,6 +1782,44 @@ class Ayoola_Application
         }
 		return true;
 	}
+
+    /**
+     * Returns site config
+     *
+     * @param string config key
+     * @return mixed Config Info
+     */
+    public static function getConfig( $key )
+    {
+        if( ! empty( self::$_conf[$key] ) )
+		{
+			return self::$_conf[$key];
+		}
+    }
+
+    /**
+     *
+     * @param array Config to set
+     * @return bool
+     */
+	public static function setSiteConfiguration( array $conf )
+    {
+        $domainDir = Application_Domain_Abstract::getSubDomainDirectory( 'default' );
+        $configurationFile = $domainDir . DS .  'pagecarton.json';
+        if( file_exists( $configurationFile ) )
+        {
+            if( $confX = file_get_contents( $configurationFile ) )
+            {
+                if( $conf += (array) json_decode( $confX, true ) )
+                {
+                    
+                }
+            }
+        }
+        Ayoola_Doc::createDirectory( $domainDir );
+        file_put_contents( $configurationFile, json_encode( $conf, JSON_PRETTY_PRINT ) );
+        self::setDomainSettings( array( 'force_reset' => true ) );
+    }
 
     /**
      * 

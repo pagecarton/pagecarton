@@ -22,10 +22,17 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
     /**
      * Access level for player. Defaults to everyone
      *
-     * @var boolean
+     * @var array
      */
 	protected static $_accessLevel = array( 0 );
+			
+    /**
+     *
+     * @var boolean
+     */
+	protected static $_ran = false;
 		
+
     /**
      * 
      * 
@@ -42,6 +49,30 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
 		try
 		{ 
             //  Code that runs the widget goes here...
+
+            if( self::$_ran )
+            {
+                //  don't do this more than once in a row
+                return false;
+            }
+
+            if( $this->getParameter( 'mode') === 'onsite' && stripos( Ayoola_Application::getRuntimeSettings( 'url' ), __CLASS__ )  )
+            {
+                return false;
+            }
+
+            self::$_ran = true;
+
+
+            if( PHP_SAPI === 'cli' && $_SERVER['HTTP_AYOOLA_PLAY_CLASS'] === __CLASS__ && ! Ayoola_Application::getConfig( 'disable_auto_cron' ) ) 
+            {
+                //  detect if this is a native cron run
+                //  then switch off normal onsite run
+                Ayoola_Application::setSiteConfiguration( array(
+                    'disable_auto_cron' => true
+                ) );
+            }
+
             if( ! empty( $_REQUEST['table_id'] ) && self::hasPriviledge( 98 ) )
             {
 			    if( ! $data = $this->getIdentifierData() ){ return false; }
