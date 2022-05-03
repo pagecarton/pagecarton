@@ -198,7 +198,15 @@ class Application_Backup_Creator extends Application_Backup_Abstract
 
         //  briefly turn off plugins
         //  plugins leave behind orphan symlinks
-        $installedPlugins = Ayoola_Extension_Import_Table::getInstance()->select( null, array( 'status' => 'Enabled' ) );
+
+		// make sure enabled plugins are still enabled
+		$table = "Ayoola_Extension_Import_Table";
+
+		//  setting table to private to prevent child sites from turning this off
+		$table = $table::getInstance( $table::SCOPE_PRIVATE );
+		$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
+		$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
+        $installedPlugins = $table->select( null, array( 'status' => 'Enabled' ) );
         foreach( $installedPlugins as $each )
         {
             $result = Ayoola_Extension_Import_Status::viewInLine( array(

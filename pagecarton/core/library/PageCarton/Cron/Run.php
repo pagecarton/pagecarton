@@ -103,10 +103,9 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                         else
                         {
                             //  we have a pending job
-                            continue;
+                            continue; 
                         }
                     }
-
                     if( $runHistory = PageCarton_Cron_Run_Table::getInstance()->select( null, array( 'cron_id' => $data['table_id'], ), array( 'sort_column' => 'runtime' ) ) )
                     {
                         $lastRunInfo = array_pop( $runHistory );
@@ -121,7 +120,7 @@ class PageCarton_Cron_Run extends PageCarton_Cron_Abstract
                     if( $nextRunTime > $cTime )
                     {
                        continue;
-                    }
+                    }             
                     if( count( $runHistory ) > 10 )
                     {
                         PageCarton_Cron_Run_Table::getInstance()->delete( array( 'cron_id' => $data['table_id'] ) );
