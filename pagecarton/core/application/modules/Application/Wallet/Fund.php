@@ -63,11 +63,13 @@ class Application_Wallet_Fund extends Application_Wallet_Abstract
 			$data['price_id'] = $data['subscription_name'];
 			$data['username'] = Ayoola_Application::getUserInfo( 'username' );
 			$data['classplayer_link'] = Ayoola_Application::getUrlPrefix() . '/widgets/' . __CLASS__ . '/';
-			$data['url'] = $this->getParameter( 'return_url' ) ? : $data['classplayer_link'];
+			$data['url'] = $this->getParameter( 'return_url' ) ? : '/account';
 			$data['checkout_requirements'] = $this->getParameter( 'checkout_requirements' ); //"billing_address";
 
             //	After we checkout this is where we want to come to
 			$data['return_url'] = $data['url'];
+			$data['return_url_phrase'] = $this->getParameter( 'return_url_phrase' ) ? : 'Check Wallet Balance';
+			$data['confirm_on_return_url'] = $this->getParameter( 'confirm_on_return_url' ) ? : false;
 			$data['callback'] = __CLASS__;
 			$data['cart_item_type'] = __CLASS__;
 			$data['cart_password'] = __CLASS__;

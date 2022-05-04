@@ -211,6 +211,8 @@ class Application_Subscription extends Application_Subscription_Abstract
         {
             @$settings['currency_abbreviation'] = $values['currency_abbreviation'] ? : Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' );
             @$settings['return_url'] = $values['return_url'] ? : '' . Ayoola_Page::getHomePageUrl() . '';
+            @$settings['return_url_phrase'] = $values['return_url_phrase'] ? : 'Go Back to Home'; 
+            @$settings['confirm_on_return_url'] = $values['confirm_on_return_url'] ? : null; 
             @$settings['read_only'] = $values['read_only'];
             @$settings['edit_cart_url'] = $values['edit_cart_url'] ? : 'javascript:';
             

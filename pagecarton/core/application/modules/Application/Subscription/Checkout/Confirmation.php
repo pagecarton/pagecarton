@@ -133,15 +133,23 @@ class Application_Subscription_Checkout_Confirmation extends Application_Subscri
         }
 		if( $status )
 		{
+			if( ! empty( $cart['settings']['confirm_on_return_url'] ) && ! empty( $cart['settings']['return_url'] ) )
+			{
+				//	go straight to return url
+				header( 'Location: ' . $cart['settings']['return_url'] );
+				exit();
+			}
 			$this->setViewContent( "<h4>Order Details</h4><br>" );
 			$this->setViewContent( Application_Subscription_Cart::viewInLine() );
 			$this->setViewContent( "
 									<h4>What Next???</h4>
 									<br>
-									<p><a href='" . Ayoola_Application::getUrlPrefix() . "/widgets/Application_Subscription_Checkout_Order_View?order_id=" . $orderNumber . "'>Check order status</a>.</p>
-									<p><a href='{$cart['settings']['return_url']}'>Go back</a>.</p>
+									<ul>
+										<li><a href='{$cart['settings']['return_url']}'>{$cart['settings']['return_url_phrase']}</a><br></li>
+										<li><a href='" . Ayoola_Application::getUrlPrefix() . "/widgets/Application_Subscription_Checkout_Order_View?order_id=" . $orderNumber . "'>Check order status</a><br></li>
+									</ul>
 									" 
-									);
+									); 
 			$notes = Application_Settings_Abstract::getSettings( 'Payments', 'order_notes' );
 
 			Application_Subscription_Cart::clear();

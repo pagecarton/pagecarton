@@ -239,7 +239,7 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 				$authOptions = new Ayoola_Access_AuthLevel();
 				$authOptions = $authOptions->selectOne( null, array( 'auth_level' => $userInfo['access_level'] ) );
 			}
-			$info = array_merge( $authOptions ? : array(),  $userInfo ? : array(), @$previousInfo ? : array() );
+			$info = array_merge( $authOptions ? : array(),  $userInfo ? : array() );
 		
             if( empty( $info['display_picture'] ) )  
             { 
@@ -253,7 +253,7 @@ abstract class Ayoola_Access_Abstract extends Ayoola_Abstract_Table
 			@$info['profile_description'] = $info['profile_description'] ? : ( @$info['display_name'] . ' has an account on ' . ( Application_Settings_CompanyInfo::getSettings( 'CompanyInformation', 'company_name' ) ? : Ayoola_Page::getDefaultDomain() ) . ', but have not updated their description yet.' );
  			return $info;
 		}
-		catch( Application_Access_Exception $e ){ return false; }
+		catch( Ayoola_Access_Exception $e ){ return false; }
 	}
 	
     /**

@@ -67,7 +67,7 @@ final class Application_Wallet extends Application_Wallet_Abstract
 				{
 					return false;
 				}
-			
+
 				//	Check funds
 				if( @$senderInfo['wallet_balance'] < $transferInfo['amount'] )
 				{
@@ -84,6 +84,7 @@ final class Application_Wallet extends Application_Wallet_Abstract
             if (! $receiverInfo = Ayoola_Access::getAccessInformation($transferInfo['to'])) {
                 return false;
             }
+
             // deductions first for security reasons.
             Ayoola_Access_Localize::info( $senderInfo );
 
