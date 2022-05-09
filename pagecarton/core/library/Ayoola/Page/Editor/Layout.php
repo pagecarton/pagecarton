@@ -946,44 +946,37 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					    //	Begin to populate the content of the template file
 						$accessLevelStr = var_export( $parametersArray['object_access_level'], true );
 						$sectionContent['include'] .= "
+							\n\${$objectName} = null;\n
 							if( Ayoola_Page::hasPriviledge( {$accessLevelStr}, array( 'strict' => true ) ) )
 							{
 								if( Ayoola_Loader::loadClass( '{$eachObject['class_name']}' ) )
 								{
 									\n\${$objectName} = new {$eachObject['class_name']}( {$parameters} );\n
 								}
-								else
-								{
-									\n\${$objectName} = null;\n
-								}
 							}    
-							";
-						//	Insert the view method in the "template"
-						$sectionContent['template'] .= "
-							if( Ayoola_Page::hasPriviledge( {$accessLevelStr}, array( 'strict' => true ) ) && ! empty( \${$objectName} ) && is_object( \${$objectName} ) )
-							{
-								echo \${$objectName}->view();
-							}
 							";
 					}
 					else
 					{
 						//	Begin to populate the content of the template file
 						$sectionContent['include'] .= "
+							\n\${$objectName} = null;\n
 							if( Ayoola_Loader::loadClass( '{$eachObject['class_name']}' ) )
 							{
 								\n\${$objectName} = new {$eachObject['class_name']}( {$parameters} );\n
 							}
-							else
-							{
-								\n\${$objectName} = null;\n
-							}
-							";  
-
-						//	Insert the view method in the "template"
-						$sectionContent['template'] .= "\necho ( ! empty( \${$objectName} ) &&  is_object( \${$objectName} ) ? Ayoola_Object_Wrapper_Abstract::wrap( \${$objectName}->view(), '{$parametersArray['wrapper_name']}' ) : null );\n";
+							";
 					} 
+					//	Insert the view method in the "template"
+					$sectionContent['template'] .= "
+					if( empty( \${$objectName} ) || ! is_object( \${$objectName} ) )
+					{
+						\$page = new Ayoola_Page_Editor_Sanitize();
+                        \$page->refresh( {$page['url']} );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( \${$objectName}->view(), '{$parametersArray['wrapper_name']}' );
 
+					";
 					//	We need to work on the layout template file if there is any
 				}
 

@@ -1473,6 +1473,7 @@ class Ayoola_Application
             $rPath = 'documents/layout/' . $themeName . '/theme/template';
             //  don't autogenerate if we already have the manual saved copy
             $autoName = 'auto';
+
             if( ! $rPath = Ayoola_Loader::getFullPath( $rPath ) )
             {
 
@@ -1525,12 +1526,11 @@ class Ayoola_Application
                     {
                         //Ayoola_Application::$appNamespace .= '-xyx-default-layout';
                         $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
-                        $page->refresh( '/default-layout', $themeName );
+                       $page->refresh( '/default-layout', $themeName );
                     }
                 }
 
             }
-
 
             //  now try to locate individual theme page
 			$pageThemeFileUrl = $uri;
@@ -1593,7 +1593,7 @@ class Ayoola_Application
 
                     $include = Ayoola_Loader::getFullPath( $pagePathsX['include'], array( 'prioritize_my_copy' => true ) );
                     $template = Ayoola_Loader::getFullPath( $pagePathsX['template'], array( 'prioritize_my_copy' => true ) );
-                   // var_export( Ayoola_Loader::getValidIncludePaths( $pagePathsX['template'] ) );
+
                     if( $include && $template )
                     {
                         $PAGE_INCLUDE_FILE = $include;
@@ -1609,8 +1609,6 @@ class Ayoola_Application
                         //  was causing "Editing /" in title
                         //  and blank pages
                         //  var_export( $template );
-
-                        
                         $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
                         $d = $page->refresh( $uri, $themeName );
 
