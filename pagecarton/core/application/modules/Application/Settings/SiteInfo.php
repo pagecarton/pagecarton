@@ -95,22 +95,15 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
      */
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )
     {
-    //    $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
-//		self::v( $values );
-	//	$settings = unserialize( @$values['settings'] );
 		$settings = @$values['data'] ? : unserialize( @$values['settings'] );
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;
-		
-//		var_export( $settings );  
-		
+				
 		//	Company Info
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->addElement( array( 'name' => 'site_headline', 'placeholder' => 'E.g. My Web', 'label' => 'Headline', 'value' => @$settings['site_headline'], 'type' => 'InputText' ) );
 		$fieldset->addElement( array( 'name' => 'site_description', 'label' => 'Description', 'placeholder' => 'What is this site about?', 'value' => @$settings['site_description'], 'type' => 'TextArea' ) );
-
-    //    var_export();
 
         if( Ayoola_Abstract_Table::hasPriviledge( array( 99, 98 ) ) )
         {        
@@ -120,17 +113,10 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
         }
 
         $options = Ayoola_Page_Layout_Repository::getMenuOptions();
-  //      var_export( $options );
 		$fieldset->addElement( array( 'name' => 'site_type', 'label' => 'Theme Type', 'value' => @$settings['site_type'], 'type' => 'Select' ), array( '' => 'Generic' ) + array_column( $options, 'title', 'category_name' ) ? : array() );
 		$fieldset->addLegend( 'Site Information' );  
 		$form->addFieldset( $fieldset );
-		
-	//	$form->addFieldset( $fieldset );
-				
-//		var_export( $fieldsets );
 		$this->setForm( $form );
-		//		$form->addFieldset( $fieldset );
-	//	$this->setForm( $form );
     } 
 	// END OF CLASS
 }

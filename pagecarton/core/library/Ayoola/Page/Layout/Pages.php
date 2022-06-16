@@ -42,7 +42,49 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
      * @var string 
      */
 	protected static $_objectTitle = 'Edit Theme'; 
-		
+	
+	
+    /**
+     * Performs the whole widget running process
+     * 
+     */
+	public static function isSetUpCorrectly( $pageThemeFileUrl, $themeName )
+	{
+		if( $pageThemeFileUrl == '/' )
+		{
+			$pageThemeFileUrl = '/index';
+		}
+
+
+		if( ! self::isValidThemePage( $pageThemeFileUrl, $themeName ) )
+		{
+			return false;
+		}
+
+		if( Ayoola_Page_Layout_Pages_Copy::canCopy( $pageThemeFileUrl, $themeName ) )
+		{
+			return true;
+		}
+
+		$realPageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
+		$pageFile = Ayoola_Loader::getFullPath( $realPageFile, array( 'prioritize_my_copy' => true ) );
+
+		$content = file_get_contents( $pageFile );
+
+		if( stripos( $content, '</widget>' ) !== false || stripos( $content, '<include' ) !== false )
+		{
+			if( stripos( $content, '</html>' ) !== false )
+			{
+				//	include pages are not pages
+				return true;
+			}
+		}
+
+		//var_export( $pageThemeFileUrl );
+
+		return false;
+	}
+
     /**
      * 
      * 

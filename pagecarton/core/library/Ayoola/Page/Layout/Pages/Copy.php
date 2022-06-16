@@ -106,7 +106,6 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             $pageThemeFileUrl = '/index';
         }
         $fPaths = static::getPagePaths( $themeName, $pageThemeFileUrl );
-    //    var_export(  $fPaths );
 
         foreach( $fPaths as $key => $each )
         {
@@ -133,7 +132,6 @@ class Ayoola_Page_Layout_Pages_Copy extends Ayoola_Page_Layout_Pages
             //  Output demo content to screen
 			if( ! $data = $this->getIdentifierData() ){ return false; }
 		
-		//	var_export( $this->getFilename() );
             $url = $_REQUEST['url'];
             
             if( ! in_array( $url, self::getPages( $data['layout_name'], 'list' ) ) )

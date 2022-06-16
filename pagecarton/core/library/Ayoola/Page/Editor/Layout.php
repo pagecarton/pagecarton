@@ -1167,7 +1167,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
             if( 
                 ( stripos( $page['url'], '/default-layout' ) === 0 ) 
-                //&& empty( $this->_parameter['theme_variant'] ) 
+                //&& empty( $this->_parameter['page_refresh_mode'] )
             )     
 			{
 

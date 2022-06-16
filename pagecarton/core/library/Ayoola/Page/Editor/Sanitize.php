@@ -80,6 +80,8 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		}
         self::$_refreshed[$id] = true;
 
+        $done = array();
+
 		//	now  sanitize theme after normal pages
 		if( $themeName )
 		{
@@ -87,10 +89,12 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 			foreach( $themePages as $page )
 			{
 
+
 				if( is_array( $page ) && ! empty( $page['url'] ) )
 				{
 					$page = $page['url']; 
 				}
+
 
 				//	strictly do this to ensure this only saves if we have our own copy
 				//	of the page include file. 
@@ -100,19 +104,25 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 				{
 					$pageThemeFileUrl = '/index';
 				}
-				$fPaths = Ayoola_Page_Layout_Pages_Copy::getPagePaths( $themeName, $pageThemeFileUrl );
-        		$from = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $fPaths['include'];
-                //var_export( $from );
-
-				if( ! is_file( $from ) )
-				{
-					continue;
-				}
 
 				if( ! Ayoola_Page_Layout_Pages_Copy::canCopy( $page, $themeName ) )
 				{
-					continue;
+                    //var_export( $page );
+                    //var_export( Ayoola_Page_Layout_Pages::isSetUpCorrectly( $page, $themeName ) );
+                    if( ! Ayoola_Page_Layout_Pages::isSetUpCorrectly( $page, $themeName ) )
+                    {
+                        continue;
+                    } 
+
+                    //  likely an auto page
+                    //  We need them also sanitized 
+                    //  because of /default-layout
+                    $this->_parameter['theme_variant'] = 'auto';
+                    //continue;//  
 				}
+
+                $done[$page] = true;
+
 				$page = is_string( $page ) ? $page : $page['url'];
 				$this->_parameter['page_editor_layout_name'] = $themeName;
 				$this->refresh( $page );   
@@ -122,9 +132,13 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 		//	let normal pages go first so that 
 		//	theres error where old page was being restored after theme update
         //	let's see if this solves it.
-        if( ! $themeName || $themeName === Ayoola_Page_Editor_Layout::getDefaultLayout() )
+
+        //  allow normal pages to be sanitized,
+        //  Even when themes are being santized
+        //  so that /widgets etc could be refreshed
+        if( ! $themeName || ( $themeName && $themeName === Ayoola_Page_Editor_Layout::getDefaultLayout() ) )
         {
-            $pages = new Ayoola_Page();
+            //$pages = new Ayoola_Page();
             $where = array();		
             if( $themeName )
             {
@@ -134,47 +148,54 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                     $where['layout_name'][] = '';
                 }
             }
-            $pages = $pages->getDbTable()->select( null, $where );
+            $pages = Ayoola_Page_Page::getInstance()->select( null, $where );
             $pages = array_merge( $pages, self::$defaultPages );
-            $done = array();
+
+            //  allow normal pages to be sanitized,
+            //  Even when themes are being santized
+            //  so that /widgets etc could be refreshed
 
             if( $themeName )
             {
                 //  means we are trying to reset a main theme layout
-    
-                $pageFile = 'documents/layout/' . $themeName . '/default-layout' . '.html';
-                $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) );
-                if( is_file( $pageFile ) )
+                //  so we should not sanitize pages again - potential infinite loop
+                $pageFileX = 'documents/layout/' . $themeName . '/default-layout' . '.html';
+                $pageFile = Ayoola_Loader::getFullPath( $pageFileX, array( 'prioritize_my_copy' => true ) );
+
+                if( Ayoola_Page_Layout_Pages::isSetUpCorrectly( '/default-layout', $themeName ) )
                 {
                     //  we have default layout, 
                     //  no need to sanitize pages
                     //  default layout will do that later
+
+                    //var_export( $themeName );
+                    //var_export( $pageFileX );
                     $pages = array();
                 }
-    
             }
 
-            //var_export( $themeName );
-            //var_export( $this->objNamespace );
-            //var_export( count( $pages ) );
             foreach( $pages as $page )    
             {
                 $page = is_string( $page ) ? $page : $page['url'];
-                if( stripos( $page, '/layout/' ) === 0 || stripos( $page, '/default-layout' ) === 0 || ! empty( $done[$page] ) )
+                if( stripos( $page, '/layout/' ) === 0 || stripos( $page, '/default-layout' ) === 0 )
                 {
-                    //var_export( $page );
-
                     //	dont cause unfinite loop by updating theme when a theme is being sanitized
                     continue;
                 }
+                if( ! empty( $done[$page] ) )
+                {
+                    //	No duplicate pages sanitization
+                    continue;
+                }
+
                 if( stripos( $page, '/sitewide-page-widgets' ) === 0 )
                 {
                     //	doing this avoids clearing site widget from dbase
                     continue;
                 }
 
-                //   var_export( $page );
                 $done[$page] = true;
+
                 //	sanitize now on theme level
                 $this->_parameter['page_editor_layout_name'] = null;
     
@@ -187,6 +208,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
     
                 //	let's remove dangling theme pages not completely deleted
                 Ayoola_Page_Layout_Pages_Delete::deleteThemePageSupplementaryFiles( $pageThemeFileUrl, $themeName );
+
                 $this->refresh( $page );   
             }            
         }
@@ -211,13 +233,20 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 			return false;
 		}
         self::$_refreshed[$id] = true;
+        //var_export( $page );
 
         if( in_array( $page, self::$defaultPages ) 
             
             //  don't create page when theme page is been refreshed
-            && empty( $themeName )
+
+            //  why can't we create page when theme page is being refreshed?
+            //  What about /widget page and others that need to always be refreshed per theme
+            //&& empty( $themeName )
         )
         {
+
+            //var_export( $page );
+
             //	if its still a system page, delete and create again
             //	this is causing problems deleting the home page
 
@@ -227,7 +256,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
             if( ! Ayoola_Page::getInfo( $page ) )
             {
                 $response = $this->sourcePage( $page );
-            }
+            } 
 
             if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
             {
@@ -252,7 +281,10 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                 }
             }
         }
-        $this->setParameter( array( 'url' => $page, 'exec_scope' => 'refresh-' . $themeName ) );
+
+        //var_export( $page );
+
+        $this->setParameter( array( 'url' => $page, 'exec_scope' => 'refresh-' . $themeName, 'page_refresh_mode' => true ) );
 		$this->setPageInfo( array( 'url' => $page ) );
 		$this->setPagePaths();
 		$this->setValues();
