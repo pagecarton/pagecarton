@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: widgets.php	Monday 10th of January 2022 12:06:04 PM	ayoola.falola@yahoo.com $ 
+* @version $Id: widgets.php	Monday 9th of May 2022 02:11:35 PM	ayoola@ayoo.la $ 
 */
 //	Template Content ?>
 
@@ -20,12 +20,12 @@
                         if
                         ( 
 
-                            $x_1641816364 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1652105495 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1641816364 )
-                            foreach( $x_1641816364 as $each )
+                            if( $x_1652105495 )
+                            foreach( $x_1652105495 as $each )
                             {	
                                 include_once $each;
                             }
@@ -184,8 +184,13 @@ echo ( ! empty( $_536a3be1f1e3fa26cbfe948ec17d302a ) &&  is_object( $_536a3be1f1
 ?><?php
 //middlebar /widgets Begins Here
 
-echo ( ! empty( $_c090ed53b443428c31984cd34d305eba ) &&  is_object( $_c090ed53b443428c31984cd34d305eba ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_c090ed53b443428c31984cd34d305eba->view(), '' ) : null );
+					if( empty( $_c090ed53b443428c31984cd34d305eba ) || ! is_object( $_c090ed53b443428c31984cd34d305eba ) )
+					{
+						Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_c090ed53b443428c31984cd34d305eba->view(), '' );
 
+					
 //middlebar /widgets Ends Here
 ?>
 										   </div>

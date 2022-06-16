@@ -971,8 +971,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					$sectionContent['template'] .= "
 					if( empty( \${$objectName} ) || ! is_object( \${$objectName} ) )
 					{
-						\$page = new Ayoola_Page_Editor_Sanitize();
-                        \$page->refresh( {$page['url']} );
+						//Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName );
 					}
 					echo Ayoola_Object_Wrapper_Abstract::wrap( \${$objectName}->view(), '{$parametersArray['wrapper_name']}' );
 

@@ -925,44 +925,45 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		{
 			$whiteList = $this->getParameter( 'element_whitelist' );
         }
-    //    var_export( $whiteList );
-		foreach( $allElements as $name => $markup )
+		foreach( $allElements as $elementX )
 		{
-        //    var_export( @$this->_names[$name] );
-
-			//	If we have a whitelist, we only want to see some elements and discard the rest
-			if( ! empty( $this->_names[$name]['data-pc-ignore-field'] ) )
+			foreach( $elementX as $name => $markup )
 			{
-				//	You are always on the whitelist
-			}   
-			elseif( $whiteList && ! in_array( $this->_names[$name]['real_name'], $whiteList ) && ! in_array( @$this->_names[$name]['data-pc-element-whitelist-group'], $whiteList ) )       
-			{
-				continue;
-			}
-			if( $this->isSubmitted() )
-			{
-				if( empty( $this->_names[$name]['data-pc-ignore-field'] ) )
+	
+				//	If we have a whitelist, we only want to see some elements and discard the rest
+				if( ! empty( $this->_names[$name]['data-pc-ignore-field'] ) )
 				{
-					$this->_values[@$this->_names[$name]['real_name']] = isset( $this->_global[$name] ) ? $this->_global[$name] : @$this->_global[@$this->_names[$name]['real_name']];
-					$this->_filter( $name );
-					$this->_validate( $name );     
+					//	You are always on the whitelist
+				}   
+				elseif( $whiteList && ! in_array( $this->_names[$name]['real_name'], $whiteList ) && ! in_array( @$this->_names[$name]['data-pc-element-whitelist-group'], $whiteList ) )       
+				{
+					continue;
 				}
+				if( $this->isSubmitted() )
+				{
+					if( empty( $this->_names[$name]['data-pc-ignore-field'] ) )
+					{
+						$this->_values[@$this->_names[$name]['real_name']] = isset( $this->_global[$name] ) ? $this->_global[$name] : @$this->_global[@$this->_names[$name]['real_name']];
+						$this->_filter( $name );
+						$this->_validate( $name );     
+					}
+				}
+	
+				$replace = null;
+				if( 
+						$this->badnewsPerElement 
+					&& ( @$this->_badnews[$name] || @$this->_badnews[@$this->_names[$name]['real_name']] )
+					&& ( isset( $this->_global[$name] ) || isset( $this->_global[@$this->_names[$name]['real_name']] ) || isset( $this->_names[$name]['required'] ) ) 
+					)
+				{
+					$this->_badnews[$name] = @$this->_badnews[$name] ? : @$this->_badnews[@$this->_names[$name]['real_name']];
+					$replace = "<div style='margin-top:0.5em;margin-bottom:0.5em' class='badnews'>{$this->_badnews[$name]}</div>\n";
+	
+				}
+				$elementMarkups .= str_ireplace( self::$_placeholders['badnews'], $replace, $markup );
 			}
-
-			$replace = null;
-			if( 
-					$this->badnewsPerElement 
-				&& ( @$this->_badnews[$name] || @$this->_badnews[@$this->_names[$name]['real_name']] )
-				&& ( isset( $this->_global[$name] ) || isset( $this->_global[@$this->_names[$name]['real_name']] ) || isset( $this->_names[$name]['required'] ) ) 
-				)
-			{
-				$this->_badnews[$name] = @$this->_badnews[$name] ? : @$this->_badnews[@$this->_names[$name]['real_name']];
-				$replace = "<div style='margin-top:0.5em;margin-bottom:0.5em' class='badnews'>{$this->_badnews[$name]}</div>\n";
-
-			}
-			$elementMarkups .= str_ireplace( self::$_placeholders['badnews'], $replace, $markup );
-        }
-    //    var_export( __LINE__ );
+	
+		}
 		$form .= Ayoola_Object_Wrapper_Abstract::wrapContent( $elementMarkups, @$fieldset->wrapper  );
 		$form .= @$fieldset->getPostHtml();
 		$form .= ! @$fieldset->noFieldset && ! $this->getParameter( 'no_fieldset' ) ? "</{$fieldsetTag}>\n" : null;

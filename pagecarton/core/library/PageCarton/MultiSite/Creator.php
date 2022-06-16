@@ -67,7 +67,7 @@ class PageCarton_MultiSite_Creator extends PageCarton_MultiSite_Abstract
 				return false; 
 			}
             $values['creation_time'] = time();
-
+			
             if( ! self::copyFiles( $values['directory'] ) )
             {
                 $this->getForm()->setBadnews( 'Enter a different directory for this site. Specified directory is in use: ' . $values['directory'] );

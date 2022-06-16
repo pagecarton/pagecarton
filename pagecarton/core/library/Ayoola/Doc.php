@@ -194,7 +194,7 @@ class Ayoola_Doc extends Ayoola_Doc_Abstract
 				$storage = new Ayoola_Storage();
 				$storage->storageNamespace = __CLASS__ . Ayoola_Application::getUrlPrefix() . $uri . 's-d-d-d-sw' . Ayoola_Application::getDomainSettings('protocol');
 				$storage->setDevice('File');
-				if (!$dedicatedUrl = $storage->retrieve() or $options['disable_cache']) {
+				if (!$dedicatedUrl = $storage->retrieve() or @$options['disable_cache']) {
 
 					//  delete web root link
 					$link = trim($uri, '/ ');

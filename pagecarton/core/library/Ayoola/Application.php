@@ -1499,7 +1499,6 @@ class Ayoola_Application
                 {
                     if( ! $rPath || filemtime( $rPath ) <= filemtime( $pageFile ) )
                     {
-                        $themeValues = Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $themeName ) );
                         Ayoola_Page_Layout_Abstract::buildThemeFile( $themeName, file_get_contents( $pageFile ) );
                     }
                 }
@@ -1522,11 +1521,12 @@ class Ayoola_Application
                         $vPath = Ayoola_Loader::getFullPath( $pagePathsXy, array( 'prioritize_my_copy' => true ) );
                         
                     }
+                    //var_export( $vPath );
                     if( ! $vPath || filemtime( $vPath ) <= filemtime( $pageFile ) )
                     {
                         //Ayoola_Application::$appNamespace .= '-xyx-default-layout';
                         $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
-                       $page->refresh( '/default-layout', $themeName );
+                        $page->refresh( '/default-layout', $themeName );
                     }
                 }
 
@@ -1776,7 +1776,7 @@ class Ayoola_Application
         if( PHP_SAPI !== 'cli' ) 
         {
             //   TBD... do we need templates on cli?
-            include_once $pagePaths['template'];
+            include_once $pagePaths['template']; 
         }
 		return true;
 	}

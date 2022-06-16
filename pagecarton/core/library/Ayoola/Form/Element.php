@@ -67,7 +67,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 	protected $_values =array();
 	
 	protected $_names =array();
-	
+
 	protected $_description;
 	
 	protected $_elements = array();
@@ -245,11 +245,14 @@ class Ayoola_Form_Element extends Ayoola_Form
 		$this->setHtml( $markup );
 		if( $this->appendElement )
 		{
-			$this->_elements[$name] = $markup;
+			//$this->_elements[] = array( $name=> $markup );
+			array_push( $this->_elements, array( $name=> $markup ) );
+
 		}
 		else
 		{
-			$this->_elements = array( $name => $markup ) + $this->_elements;
+			//$this->_elements = array( $name => $markup ) + $this->_elements;
+			array_unshift( $this->_elements, array( $name=> $markup ) );
 		}
 		
 		// Register Html object to fieldlist
@@ -262,7 +265,7 @@ class Ayoola_Form_Element extends Ayoola_Form
     {
         foreach( $elements as $each )
 		{
-			$this-addElement( $element[$each], $values );
+			$this->addElement( $each, $values );
 		}
 		return $this;
     }
@@ -972,7 +975,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 
 		//	debug making "/tools/classplayer/get/object_name/Ayoola_Page_Editor/?url=/" to display nonsense title
 
-		$html .= self::$_placeholders['badnews'];
+		$html = self::$_placeholders['badnews'];
 		$i = 0;
 		unset( $element['label'] );
        	$html .= '<div style="display:inline-block;">';

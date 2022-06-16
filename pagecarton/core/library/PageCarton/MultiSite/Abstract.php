@@ -101,17 +101,25 @@ class PageCarton_MultiSite_Abstract extends PageCarton_Widget
             return false; 
         }
         $files = self::getSiteFiles();
-    //    var_export( getcwd() );
-    //    var_export( $newSite );  
         if( ! symlink( getcwd(), $newSite ) )
         {
-            return false; 
+            // symlink does not work on xammp. 
+            //  permission denied
+            if( ! Ayoola_Doc::createDirectory( $newSite ) )
+            {
+                return false;
+            }
+            $configFile = 'pagecarton.json';
+            if( is_file( $configFile ) )
+            {
+                $files[] = $configFile;
+            }
+            foreach( $files as $each )   
+            {
+                $copied = copy( $each, $newSite . DS . basename( $each ) );
+            }
         }
-    //  Ayoola_Doc::createDirectory( $newSite );   
-    //   foreach( $files as $each )   
-        {
-        //    copy( $each, $newSite . DS . basename( $each ) );
-        }
+
         return true;
     }
 	
