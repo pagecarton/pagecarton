@@ -149,7 +149,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                 }
             }
             $pages = Ayoola_Page_Page::getInstance()->select( null, $where );
-            $pages = array_merge( $pages, self::$defaultPages );
+            //$pages = array_merge( $pages, self::$defaultPages );
 
             //  allow normal pages to be sanitized,
             //  Even when themes are being santized
