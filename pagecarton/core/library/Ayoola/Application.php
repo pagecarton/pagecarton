@@ -1561,25 +1561,12 @@ class Ayoola_Application
                         //	auto-saved file
                         $pagePathsXy = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '/default-layout' . '/include';
 
-                        $vPath = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $pagePathsXy;
-
-                        if( ! is_file( $vPath ) && ! empty( $options['auto_init_theme_page'] ) )
-                        {
-                            $variant = filemtime( $pageFile );
-
-                            //	auto-saved file
-                            $pagePathsXy = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '/default-layout' . '/include';
-
-                            $vPath = Ayoola_Loader::getFullPath( $pagePathsXy, array( 'prioritize_my_copy' => true ) );
-                            
-
-                            
-                        }
+                        $vPath = Ayoola_Loader::getFullPath( $pagePathsXy, array( 'prioritize_my_copy' => true ) );
+                        
                     }
-
+                    //var_export( $vPath );
                     if( ! $vPath || filemtime( $vPath ) <= filemtime( $pageFile ) )
                     {
-
                         //Ayoola_Application::$appNamespace .= '-xyx-default-layout';
                         $page = new Ayoola_Page_Editor_Sanitize( array( 'theme_variant' => '' . $autoName . '' ) );
                         $page->refresh( '/default-layout', $themeName );
