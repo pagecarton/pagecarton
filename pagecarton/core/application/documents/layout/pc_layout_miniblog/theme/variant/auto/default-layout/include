@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: default-layout.php	Friday 17th of June 2022 12:50:18 PM	projects@comeriver.com $ 
+* @version $Id: default-layout.php	Friday 17th of June 2022 02:33:38 PM	joywealth@hotmail.com $ 
 */
 //	Page Include Content
 
@@ -62,7 +62,7 @@ $_f08919130e564f1d757a848674a358d7 = new Ayoola_Page_Editor_Text( array (
                   <div class="col-md-12 col-lg-10">
                       <div class="post-entry text-center">
   
-                          <h1 class="">{{{title}}} 123</h1>
+                          <h1 class="">{{{title}}}</h1>
                           <p class="lead mb-4 text-white">{{{description}}} {{{link_to_edit}}}</p>
   
                       </div>
@@ -81,7 +81,7 @@ $_f08919130e564f1d757a848674a358d7 = new Ayoola_Page_Editor_Text( array (
                   <div class="col-md-12 col-lg-10">
                       <div class="post-entry text-center">
   
-                          <h1 class="">{{{title}}} 123</h1>
+                          <h1 class="">{{{title}}}</h1>
                           <p class="lead mb-4 text-white">{{{description}}} {{{link_to_edit}}}</p>
   
                       </div>
