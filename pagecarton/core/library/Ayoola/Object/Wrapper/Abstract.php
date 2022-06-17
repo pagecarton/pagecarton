@@ -88,7 +88,6 @@ abstract class Ayoola_Object_Wrapper_Abstract extends Ayoola_Abstract_Table
 				$textToWrap = $data['wrapper_prefix'] . $textToWrap . $data['wrapper_suffix'];
 			}
 		} 
-	//	var_export( $data );
 		   
 		return $textToWrap;
 	}
@@ -99,7 +98,17 @@ abstract class Ayoola_Object_Wrapper_Abstract extends Ayoola_Abstract_Table
      */
 	public static function wrap( $textToWrap, $wrapNameID )
 	{
+		if( is_null( $textToWrap )  )
+		{
+			
+		}
+		elseif( is_object( $textToWrap ) && is_a( $textToWrap, 'Ayoola_Abstract_Viewable' ) )
+		{
+			$textToWrap = $textToWrap->view();
+		}
+
 		//	Function is now deprecated. Fix By sanitizing all pages.
+		//	back to useful because of is_object
 		return $textToWrap;
 	}
 	
@@ -118,7 +127,6 @@ abstract class Ayoola_Object_Wrapper_Abstract extends Ayoola_Abstract_Table
 		$fieldset->addRequirements( array( 'WordCount' => array( 1,2000 ) ) );
 		$fieldset->addFilters( array( 'trim' => null ) );
 		$fieldset->addRequirement( 'wrapper_label', array( 'WordCount' => array( 3,100 ), ) );
-	//	$fieldset->addElement( array( 'name' => __CLASS__, 'value' => $submitValue, 'type' => 'Submit' ) );
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );  
 		$form->submitValue = $submitValue;

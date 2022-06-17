@@ -303,7 +303,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             $site = 'https://' . static::$_site . '';
 
             $url = $site . '/tools/classplayer/get/name/Application_Category_ShowAll?pc_widget_output_method=JSON&no_of_post_to_show=10';
-            $feed = self::fetchLink( $url, array( 'time_out' => 288000, 'connect_time_out' => 288000, ) );
+            $feed = self::fetchLink( $url, array( 'time_out' => 5, 'connect_time_out' => 1, ) );
             $allFeed = json_decode( $feed, true );
             //   var_export( $url );
             //   var_export( $allFeed );

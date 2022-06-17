@@ -272,10 +272,6 @@ class Ayoola_Application
     {
 		if( is_null( self::$_domainSettings ) )
 		{
-			// This is needed in Application_Domain Table
-			self::$_domainSettings[APPLICATION_DIR] = APPLICATION_DIR;
-			self::$_domainSettings[APPLICATION_PATH] = APPLICATION_PATH;
-			@self::$_domainSettings[EXTENSIONS_PATH] = EXTENSIONS_PATH;
 			self::setDomainSettings();
 		}
 
@@ -327,6 +323,11 @@ class Ayoola_Application
 
 		if( $data && ! $forceReset )
 		{
+            if( empty( $data['domain_settings'] ) )
+            {
+                self::setRequestedUri( '/domain-not-found' );
+                self::setPresentUri( '/domain-not-found' );
+            }
 
  			//	Allows the sub-domains to have an include path too.
 			if( ! empty( $data['parent_domain_settings'][APPLICATION_PATH] ) && $data['parent_domain_settings'][APPLICATION_PATH] !== $data['domain_settings'][APPLICATION_PATH] )
@@ -346,13 +347,24 @@ class Ayoola_Application
 			self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] . '/modules' );
 
 			self::$_domainSettings =  $data['domain_settings'];
-			if( ! empty( $data['domain_settings']['username'] ) )
+            //var_export( self::$_domainSettings );
+            //var_export( get_include_path() ); 
+
+            if( ! empty( $data['domain_settings']['username'] ) )
 			{
 				self::$GLOBAL['domain'] = $data['domain_settings'];
 
 			}
 			return true;
 		}
+
+        // This is needed in Application_Domain Table
+        //  This is also making bad domain run as cron
+        //  So maybe we can unset it later if domain is not true
+        self::$_domainSettings[APPLICATION_DIR] = APPLICATION_DIR;
+        self::$_domainSettings[APPLICATION_PATH] = APPLICATION_PATH;
+        @self::$_domainSettings[EXTENSIONS_PATH] = EXTENSIONS_PATH;
+
 
 		//	Search the domain name in the domain table
 		do
@@ -496,7 +508,6 @@ class Ayoola_Application
 
 				$data['domain_settings']['site_configuraton'] = array();
 				$configurationFile = $domainDir . DS .  'pagecarton.json';
-
 
                 $conf = array();
 
@@ -677,7 +688,15 @@ class Ayoola_Application
                         $urlY = self::appendCurrentQueryStrings( $urlY );
                         if(  Ayoola_Page::getInfo( Ayoola_Application::getPresentUri() )  )
                         {
-                            self::view( '/domain-not-found' );
+                            //  DON'T ALLOW US TO RUN AS CORE
+                            //  EXCEPT IT IS IN CONFIG
+                            @$data['domain_settings'][APPLICATION_DIR] = '';
+                            @$data['domain_settings'][APPLICATION_PATH] = '';
+                            @$data['domain_settings'][EXTENSIONS_PATH] = '';
+        
+                            self::setRequestedUri( '/domain-not-found' );
+                            self::setPresentUri( '/domain-not-found' );
+                            break;
                         }
 					}
 					elseif( empty( $domainSettings['no_redirect'] ) )
@@ -690,19 +709,39 @@ class Ayoola_Application
                         //  exit( 'DOMAIN NOT IN USE' );
                         if(  Ayoola_Page::getInfo( Ayoola_Application::getPresentUri() )  )
                         {
-                            self::view( '/domain-not-found' );
-                        }
+                             //  DON'T ALLOW US TO RUN AS CORE
+                            //  EXCEPT IT IS IN CONFIG
+                            @$data['domain_settings'][APPLICATION_DIR] = '';
+                            @$data['domain_settings'][APPLICATION_PATH] = '';
+                            @$data['domain_settings'][EXTENSIONS_PATH] = ''; 
 
+                            self::setRequestedUri( '/domain-not-found' );
+                            self::setPresentUri( '/domain-not-found' );
+                            break; 
+                        }
 					}
 				}
 			}
 		}
 		while( false );
 
+        //var_export( $data['domain_settings'] );  
+
 		@$data['domain_settings'][APPLICATION_DIR] = $data['domain_settings'][APPLICATION_DIR] ? : APPLICATION_DIR;
 		@$data['domain_settings'][APPLICATION_PATH] = $data['domain_settings'][APPLICATION_PATH] ? : APPLICATION_PATH;
 		@$data['domain_settings'][EXTENSIONS_PATH] = $data['domain_settings'][EXTENSIONS_PATH] ? : EXTENSIONS_PATH;
 		$data['domain_settings']['protocol'] = $protocol;
+
+        if( 
+            empty( $data['domain_settings']['site_configuraton']['run_as_core'] ) 
+            && $data['domain_settings'][APPLICATION_DIR] === APPLICATION_DIR
+        )
+        {
+            //  DON'T ALLOW US TO RUN AS CORE
+            //  EXCEPT IT IS IN CONFIG
+            @$data = false;
+        }
+
 
 		//	Check if theres a forwarding needed.
 
@@ -850,6 +889,8 @@ class Ayoola_Application
 		//	Allows the sub-domains to have an include path too.
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
 		self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] . '/modules' );
+        //var_export( $domainSettings );  
+        //var_export( $data['domain_settings'] );
         self::$_domainSettings = $data['domain_settings'];
         self::$GLOBAL['domain'] =  self::$_domainSettings;
 		return true;
@@ -1468,6 +1509,8 @@ class Ayoola_Application
 			//	page may just be present in the theme
 			$themeName = @$_REQUEST['pc_page_layout_name'] ? : $pageInfo['layout_name'];
             $themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
+
+            //var_export( $themeName );
 
             //  Check if theme file needs to be autogenerated
             $rPath = 'documents/layout/' . $themeName . '/theme/template';

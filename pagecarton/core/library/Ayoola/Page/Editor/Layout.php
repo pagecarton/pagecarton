@@ -98,6 +98,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			//	source for this specific url
 			$this->_dbWhereClause['url'] = $url;
         }
+		
 		if( ! $page = $this->getPageInfo() )
 		{			
             //	Page not found, see if we can create a local copy of this page
@@ -255,6 +256,13 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		Ayoola_Object_Embed::ignoreClass( __CLASS__ );
 		Ayoola_Object_Embed::ignoreClass( 'Ayoola_Object_Play' );
 
+		// bad domains will not have app path
+		if( ! Ayoola_Application::getDomainSettings( APPLICATION_PATH ) )
+		{
+			return false;
+		}
+
+
 		//	Allows the htmlHeader to get the correct layout name to use for <base>
         $url = @$_REQUEST['url'];
         if( $url && stripos( $url, '/layout/' ) !== 0 && ! $this->isSaveMode())
@@ -286,8 +294,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		$ux = $url ? : $this->getParameter( 'url' );
 
 		$pageX = Ayoola_Page::getInfo( $ux );
-		//var_export( $pageX );
-		//var_export( $ux );
+		//var_export( $ux ); 
 		if( 
 			! empty( $this->_parameter['theme_variant'] ) 
 			|| ! empty( $this->_parameter['preserve_pageinfo'] )
@@ -297,8 +304,9 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		}
 		else
 		{
-			$page = $this->sourcePage();
+			$page = $this->sourcePage( @$pageX['url'] );
 		}
+
 
  		if( ! $page )
 		{
@@ -422,7 +430,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
     {
 
 		$page = $this->getPageInfo();
-
+		//var_export( $page );
 		$values = $this->getValues();
 
 		//	debug 
@@ -973,7 +981,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					{
 						//Ayoola_Page_Layout_Abstract::refreshThemePage( $themeName );
 					}
-					echo Ayoola_Object_Wrapper_Abstract::wrap( \${$objectName}->view(), '{$parametersArray['wrapper_name']}' );
+					echo Ayoola_Object_Wrapper_Abstract::wrap( \${$objectName}, '{$parametersArray['wrapper_name']}' );
 
 					";
 					//	We need to work on the layout template file if there is any
@@ -1048,11 +1056,14 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		{
 			$this->noExistingContent = true;
         }
+
 		if( $this->isSaveMode() ) //	create template for POSTed data
 		{
+
 			//	Clear our the orphan placeholders
             $dataToSave = static::safe_json_encode( $values ? : $sectionalValues );
-            
+
+
 			//	Get new relative paths
 			$rPaths = Ayoola_Page::getPagePaths( $page['url'] );
             $rPaths['data-backup'] = self::getPageContentsBackupLocation( $page['url'] ) . DS . time();
@@ -1131,7 +1142,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 					{
 						//	only update if files exist already
 						Ayoola_File::putContents( $yPath['include'], $content['include'] );
-						Ayoola_File::putContents( $yPath['template'], $content['template'] );				
+						Ayoola_File::putContents( $yPath['template'], $content['template'] );		
 						Ayoola_File::putContents( $yPath['data_json'] , $dataToSave );
 					}
                 }
@@ -1144,6 +1155,23 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 				@Ayoola_Doc::createDirectory( dirname( $rPaths[$eachItem] ) );
 			}
 
+			//var_export( $rPaths['include'] . '<br>');  
+			//var_export( $rPaths['template'] . '<br>  ' );
+
+			// if( stripos( $rPaths['include'], 'core' ) )
+			// {
+			// 	unset( $this->_layoutRepresentation );
+			// 	unset( $this->_viewableObjects );
+			// 	unset( $this->_viewableSelect );
+			// 	unset( $this->hashListForJs );
+			// 	unset( $this->hashListForJsFunction ); 
+			// 	$trace = debug_backtrace();
+			// 	$trace['domain'] = Ayoola_Application::getDomainSettings();   
+			// 	$trace['xxx'] = DOMAIN;   
+			// 	$content['include'] = var_export( $trace, true );
+			// 	//echo $content['include'];
+			// 	//exit();
+			// }
 			Ayoola_File::putContents( $rPaths['include'], $content['include'] );
 			Ayoola_File::putContents( $rPaths['template'], $content['template'] );				
 
