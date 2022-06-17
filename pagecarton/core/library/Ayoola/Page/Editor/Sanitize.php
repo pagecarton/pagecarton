@@ -117,7 +117,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                     //  likely an auto page
                     //  We need them also sanitized 
                     //  because of /default-layout
-                    $this->_parameter['theme_variant'] = 'auto';
+                    //$this->_parameter['theme_variant'] = 'auto';
                     //continue;//  
 				}
 
@@ -149,7 +149,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                 }
             }
             $pages = Ayoola_Page_Page::getInstance()->select( null, $where );
-            $pages = array_merge( $pages, self::$defaultPages );
+            //$pages = array_merge( $pages, self::$defaultPages );
 
             //  allow normal pages to be sanitized,
             //  Even when themes are being santized
@@ -182,6 +182,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                     //	dont cause unfinite loop by updating theme when a theme is being sanitized
                     continue;
                 }
+                
                 if( ! empty( $done[$page] ) )
                 {
                     //	No duplicate pages sanitization
@@ -208,6 +209,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
     
                 //	let's remove dangling theme pages not completely deleted
                 Ayoola_Page_Layout_Pages_Delete::deleteThemePageSupplementaryFiles( $pageThemeFileUrl, $themeName );
+                //var_export( $page . '<br>' );
 
                 $this->refresh( $page );   
             }            
@@ -233,7 +235,8 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 			return false;
 		}
         self::$_refreshed[$id] = true;
-        //var_export( $page );
+
+        //var_export( $page . '<br>' );
 
         if( in_array( $page, self::$defaultPages ) 
             
@@ -245,7 +248,7 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
         )
         {
 
-            //var_export( $page );
+            ///var_export( $page );
 
             //	if its still a system page, delete and create again
             //	this is causing problems deleting the home page
@@ -253,12 +256,18 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
             //	create this page if not available.
             //	must initialize each time so that each page can be handled.
             $table = Ayoola_Page_Page::getInstance();
-            if( ! Ayoola_Page::getInfo( $page ) )
+            if( ! $before = $table->selectOne( null, array( 'url' => $page ) ) )
             {
-                $response = $this->sourcePage( $page );
+                //$response = $this->sourcePage( $page );
+
             } 
 
-            if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
+            //var_export( $before );
+            //var_export( $response );
+
+            //var_export( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ), array( 'xxxxx' => 'workaround' ) ) );
+            
+            if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ), array( 'xxxxx' => 'workaround' . $page ) ) )
             {
 
                 //  Why are we deleting sef?
@@ -268,30 +277,39 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
                 //    We only need to delete saved page files.
                 //    To avoid complications of deleting whole page and creating again
                 $pagePaths = Ayoola_Page::getPagePaths( $page );
+                //var_export( $pagePaths );
+
                 foreach( $pagePaths as  $pageFile )
                 {
                     $myPageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pageFile;
                     $corePageFile = APPLICATION_PATH . DS .  $pageFile;
+
                     if( is_file( $corePageFile ) )
                     {
                         Ayoola_Doc::createDirectory( dirname( $myPageFile ) );
-                        copy( $corePageFile, $myPageFile );
+                        $result = copy( $corePageFile, $myPageFile );
+
                         //  unlink( $pageFile );
                     }
                 }
             }
         }
 
-        //var_export( $page );
+        //  var_export( $page );
+        //  When this $class was $this
+        //  caused a lot of problems
+        //  Where one value persisted
+        $xParameters = array( 'no_init' => true, 'url' => $page, 'exec_scope' => 'refresh-' . $themeName, 'page_refresh_mode' => true, 'theme_variant' => $this->_parameter['theme_variant'], 'page_editor_layout_name' => $this->_parameter['page_editor_layout_name'] );
+        $class = new Ayoola_Page_Editor_Layout( $xParameters );
+        $class->setParameter( $xParameters );
+		$class->setPageInfo( array( 'url' => $page ) );
+		$class->setPagePaths();
+		$class->setValues();
+		$class->updateLayoutOnEveryLoad = true;
+		$class->noLayoutView = true;
 
-        $this->setParameter( array( 'url' => $page, 'exec_scope' => 'refresh-' . $themeName, 'page_refresh_mode' => true ) );
-		$this->setPageInfo( array( 'url' => $page ) );
-		$this->setPagePaths();
-		$this->setValues();
-		$this->_updateLayoutOnEveryLoad = true;
-		$this->noLayoutView = true;
+        $response = $class->init(); // invoke the template update for this page. 
 
-        $response = parent::init(); // invoke the template update for this page. 
 		return true;
     } 
 	// END OF CLASS

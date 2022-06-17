@@ -413,7 +413,7 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 
             return $classes;
         }
-        catch( Ayoola_Page_Editor_Exception $e  )
+        catch( Ayoola_Page_Exception $e  )
         {
             //  now hooks can avoid execution of a class init method
         }
@@ -1071,6 +1071,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
             $rPaths['data-backup'] = self::getPageContentsBackupLocation( $page['url'] ) . DS . time();
             
 			//	change the place themes are being saved.
+
+
 			if( stripos( $page['url'], '/default-layout' ) === 0 && ! empty( $this->_parameter['theme_variant'] ) )
 			{
 				//	don't remember why theme variants are not being used for default layout
