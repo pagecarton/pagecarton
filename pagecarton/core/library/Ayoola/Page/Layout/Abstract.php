@@ -241,8 +241,11 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				}
 			}
 		}
+
 		$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $content );
 
+		//var_export( $matches );
+		$toRemoveFromAllFiles = array();
 		foreach( $matches as $count => $match )
 		{
 			preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $content, $placeholder );
@@ -252,6 +255,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				$isRealNavigation = true;
 				$realNavigationDone = true;
 			}
+
 
 			// Excempt the header content, and the nav and footer
             //  content with this means it is meant to be in theme file
@@ -266,8 +270,15 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 						'/{@@@' . $match . '(\s*)(\<[\S\s]*\>)(\s*)' . $match . '@@@}/i', 
 						'$1<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>$3', 
 						$contentLte );
+
 	
 			}
+			elseif( $placeholder[1] )
+			{
+				$toRemoveFromAllFiles[] = $placeholder[1];
+								
+			}
+			
 
 			//	format templateraw file for easy editing
 			$contentLte= str_ireplace(
@@ -281,12 +292,89 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			$isRealNavigation = false;     
 		}
 
+		if( $toRemoveFromAllFiles )
+		{
+			$pages =  Ayoola_Page_Layout_Pages::getPages( $themeName );
+			foreach( $pages as $themePageInfo )
+			{
+				$pageThemeFileUrl = $themePageInfo['url'];
+				if(  $pageThemeFileUrl === '/' )
+				{
+					$pageThemeFileUrl = '/index';
+				}
+		
+				$pageFileX = 'documents/layout/' . $themeName . $pageThemeFileUrl . '.html';
+				$pageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $pageFileX;
+				$globalFile = Ayoola_Loader::checkFile( $pageFileX );
+
+				//var_export( $pageFile );
+
+                if( ! is_file( $globalFile ) )
+                {
+					continue;
+				}
+				$cContent = file_get_contents( $globalFile );
+				$sContent = $xContent = self::sanitizeTemplateFile( $cContent, $values + array( 'lite' => true ) );
+				$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $sContent );
+
+				foreach( $matches as $count => $match )
+				{
+					preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $sContent, $placeholder );
+				
+		
+					//var_export( $placeholder );
+					
+					// Excempt the header content, and the nav and footer
+					//  content with this means it is meant to be in theme file
+					if( stripos( $placeholder[1], '©' ) || stripos( $placeholder[1], '&copy' ) || stripos( $placeholder[1], '&amp;copy' ) || stripos( $placeholder[1], '</nav>' ) )
+					{
+
+						$sContent = str_ireplace( $placeholder[1], '<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
+						//var_export( $placeholder[1] );
+						//var_export( $cContent );
+						//	remove sections that are not common to all files
+					
+		
+			
+					}
+					elseif( in_array( $placeholder[1], $toRemoveFromAllFiles ) )
+					{
+						$sContent = str_ireplace( $placeholder[1], '<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
+					}
+					//	format  file for easy editing
+					$sContent = str_ireplace(
+						array(
+							'@@@' . $match . '@@@',
+							'{@@@' . $match . '',
+							'' . $match . '@@@}'
+						), 
+						'', $sContent 
+					);
+
+				}
+
+				//var_export( $pageFile ); 
+				//var_export( $cContent );
+
+				if( $sContent !== $xContent )
+				{
+					//var_export( $sContent );
+
+					//	do not deploy yet
+					//	make sure it is well tested
+					//file_put_contents( $pageFile, $sContent );
+				}
+
+			}
+		}
+
+		//exit();
+
 		//	remove multiple lines from templateraw file for easy editing
 		$contentLte = preg_replace(
 			'/^[ \t]*[\r\n]+/m', 
 			"\r\n", 
 			$contentLte );
-
 
 
 		Ayoola_File::putContents( $myPath . 'sections', '<?php return ' . var_export( $sectionsToSave, true ) . ';' );
