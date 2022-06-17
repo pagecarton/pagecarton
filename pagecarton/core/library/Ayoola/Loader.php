@@ -82,7 +82,6 @@ class Ayoola_Loader
             return self::$_validIncludePaths[$pathsId];
         }
         $availableFullPaths = array();
-    //    var_export( $relativePath );
         if (is_readable($relativePath)) {
             //throw new Ayoola_Loader_Exception( 'Invalid File - ' . $relativePath );
             $availableFullPaths['.'] = $relativePath;
@@ -109,8 +108,15 @@ class Ayoola_Loader
             }
         }
         if (@$options['path_blacklist']) {
-            unset($availableFullPaths[$options['path_blacklist']]);
-            unset($availableFullPaths[PC_BASE . $options['path_blacklist']]);
+            if( is_string($options['path_blacklist']))
+            {
+                $options['path_blacklist'] = array_map( 'trim', explode( ',', $options['path_blacklist'] ) );
+            }
+            foreach( $options['path_blacklist'] as $each )
+            {
+                unset($availableFullPaths[$each]);
+                unset($availableFullPaths[PC_BASE . $each]);    
+            }
         }
 
         // End of ZF Code
@@ -129,8 +135,16 @@ class Ayoola_Loader
         $relativePath = str_replace(array('/', '\\'), DS, $relativePath);
         $all          = self::getValidIncludePaths($relativePath, $options ?: array());
         if (@$options['path_blacklist']) {
-            unset($all[$options['path_blacklist']]);
-            unset($all[PC_BASE . $options['path_blacklist']]);
+
+            if( is_string($options['path_blacklist']))
+            {
+                $options['path_blacklist'] = array_map( 'trim', explode( ',', $options['path_blacklist'] ) );
+            }
+            foreach( $options['path_blacklist'] as $each )
+            {
+                unset($all[$each]);
+                unset($all[PC_BASE . $each]);    
+            }
         }
         if (@$options['prioritize_my_copy'] && @$all[Ayoola_Application::getDomainSettings(APPLICATION_PATH)]) {
             return $all[Ayoola_Application::getDomainSettings(APPLICATION_PATH)];

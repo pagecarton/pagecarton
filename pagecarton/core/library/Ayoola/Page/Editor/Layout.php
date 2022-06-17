@@ -433,6 +433,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//var_export( $page );
 		$values = $this->getValues();
 
+
+
 		//	debug 
 		if( $values == array ( 0 => false, ) )
 		{
