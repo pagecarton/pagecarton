@@ -1,0 +1,113 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /category
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: category.php	Friday 17th of June 2022 12:42:22 PM	projects@comeriver.com $ 
+*/
+//	Page Include Content
+
+							
+$_c4c8c7d9ad74d1365afda99a6467e2d7 = null;
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_c4c8c7d9ad74d1365afda99a6467e2d7 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<widget parameters="{ &quot;class&quot;: &quot;Application_Category_View&quot;, &quot;pc_module_url_values_category_offset&quot;: 0, &quot;pc_module_url_values_request_fallback&quot;: true, &quot;allow_dynamic_category_selection&quot;: true }">
+  <div class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <span>Category</span>
+          <h3>{{{category_label}}}</h3>
+          <p>{{{category_description}}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</widget>
+',
+  'preserved_content' => '<widget parameters=\'{ "class": "Application_Category_View", "pc_module_url_values_category_offset": 0, "pc_module_url_values_request_fallback": true, "allow_dynamic_category_selection": true, "build_meta_data": true }\'>
+  <div class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <span>Category</span>
+          <h3>{{{category_label}}}</h3>
+          <p>{{{category_description}}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</widget>
+',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'preserve_content',
+  ),
+  'pagewidget_id' => '0-1636886654-15',
+  'includes' => 
+  array (
+  ),
+  'content' => '<widget parameters=\'{ "class": "Application_Category_View", "pc_module_url_values_category_offset": 0, "pc_module_url_values_request_fallback": true, "allow_dynamic_category_selection": true, "build_meta_data": true }\'>
+  <div class="py-5 bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <span>Category</span>
+          <h3>{{{category_label}}}</h3>
+          <p>{{{category_description}}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</widget>
+',
+) );
+
+							}
+							
+							
+$_71059dc0cbbf442f10840b55ad638d70 = null;
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_71059dc0cbbf442f10840b55ad638d70 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div class="site-section bg-white">
+    <div class="container">
+        <include href="/layout/pc_layout_miniblog/list-post.html">
+    </include></div>
+</div>',
+  'preserved_content' => '<div class="site-section bg-white">
+    <div class="container">
+        <include href="/layout/pc_layout_miniblog/list-post.html">
+    </div>
+</div>',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'preserve_content',
+  ),
+  'pagewidget_id' => '0-1636886654-16',
+  'includes' => 
+  array (
+    '/layout/pc_layout_miniblog/list-post' => '<include href="/layout/pc_layout_miniblog/list-post.html">',
+  ),
+  'content' => '<div class="site-section bg-white">
+    <div class="container">
+        <include href="/layout/pc_layout_miniblog/list-post.html">
+    </div>
+</div>',
+) );
+
+							}
+							

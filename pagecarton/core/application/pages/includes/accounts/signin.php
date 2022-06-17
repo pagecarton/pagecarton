@@ -9,9 +9,12 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Monday 10th of January 2022 12:06:11 PM	ayoola.falola@yahoo.com $ 
+* @version $Id: signin.php	Friday 17th of June 2022 12:50:26 PM	projects@comeriver.com $ 
 */
 //	Page Include Content
+
+							
+$_f89ed25eb8000a8632b9039a7a07a7ec = null;
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Access_Login' ) )
 							{
@@ -28,13 +31,10 @@ $_f89ed25eb8000a8632b9039a7a07a7ec = new Ayoola_Access_Login( array (
 ) );
 
 							}
-							else
-							{
-								
-$_f89ed25eb8000a8632b9039a7a07a7ec = null;
-
-							}
 							
+							
+$_f47d74d2e3820ecf6d805a5f37d546a8 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -54,12 +54,6 @@ $_f47d74d2e3820ecf6d805a5f37d546a8 = new Ayoola_Page_Editor_Text( array (
   ),
   'content' => 'Forgot Password? <a rel="spotlight;" href="/x/index.php/object/name/Application_User_Help_ForgotUsernameOrPassword">Sign in Help</a>!',
 ) );
-
-							}
-							else
-							{
-								
-$_f47d74d2e3820ecf6d805a5f37d546a8 = null;
 
 							}
 							

@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: classplayer.php	Monday 10th of January 2022 12:06:12 PM	ayoola.falola@yahoo.com $ 
+* @version $Id: classplayer.php	Friday 17th of June 2022 12:50:27 PM	projects@comeriver.com $ 
 */
 //	Template Content ?>
 <?php if( ! Ayoola_Application::isXmlHttpRequest() && $_SERVER['HTTP_USER_AGENT'] !== Ayoola_Abstract_Viewable::$userAgent ): // Only show this if this is not a ajax call ?>
@@ -31,8 +31,13 @@
 					<?php
 //header /tools/classplayer Begins Here
 
-echo ( ! empty( $_11d61e8ba20d257d844c00a0eaa5f04d ) &&  is_object( $_11d61e8ba20d257d844c00a0eaa5f04d ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_11d61e8ba20d257d844c00a0eaa5f04d->view(), '' ) : null );
+					if( empty( $_11d61e8ba20d257d844c00a0eaa5f04d ) || ! is_object( $_11d61e8ba20d257d844c00a0eaa5f04d ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_11d61e8ba20d257d844c00a0eaa5f04d, '' );
 
+					
 //header /tools/classplayer Ends Here
 ?>
 					<?php

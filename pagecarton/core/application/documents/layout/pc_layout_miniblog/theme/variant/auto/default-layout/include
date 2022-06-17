@@ -1,0 +1,97 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /default-layout
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: default-layout.php	Friday 17th of June 2022 12:50:18 PM	projects@comeriver.com $ 
+*/
+//	Page Include Content
+
+							
+$_a6bab01c3343c87b57263e96fe4b393b = null;
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_a6bab01c3343c87b57263e96fe4b393b = new Ayoola_Page_Editor_Text( array (
+  '' => NULL,
+  'editable' => '<div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle">&nbsp;</span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+',
+  'includes' => 
+  array (
+  ),
+  'content' => '<div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+',
+  'pagewidget_id' => NULL,
+) );
+
+							}
+							
+							
+$_f08919130e564f1d757a848674a358d7 = null;
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_f08919130e564f1d757a848674a358d7 = new Ayoola_Page_Editor_Text( array (
+  '' => NULL,
+  'editable' => '<widget parameters=\'{ "class": "Ayoola_Page_Info", "use_site_defaults": true }\'>
+      <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg?embed_image_url={{{cover_photo}}});">
+          <div class="container">
+              <div class="row same-height justify-content-center">
+                  <div class="col-md-12 col-lg-10">
+                      <div class="post-entry text-center">
+  
+                          <h1 class="">{{{title}}} 123</h1>
+                          <p class="lead mb-4 text-white">{{{description}}} {{{link_to_edit}}}</p>
+  
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </widget>',
+  'includes' => 
+  array (
+  ),
+  'content' => '<widget parameters=\'{ "class": "Ayoola_Page_Info", "use_site_defaults": true }\'>
+      <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg?embed_image_url={{{cover_photo}}});">
+          <div class="container">
+              <div class="row same-height justify-content-center">
+                  <div class="col-md-12 col-lg-10">
+                      <div class="post-entry text-center">
+  
+                          <h1 class="">{{{title}}} 123</h1>
+                          <p class="lead mb-4 text-white">{{{description}}} {{{link_to_edit}}}</p>
+  
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </widget>',
+  'pagewidget_id' => NULL,
+) );
+
+							}
+							

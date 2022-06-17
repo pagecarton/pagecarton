@@ -9,9 +9,12 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: about.php	Monday 10th of January 2022 11:52:00 AM	ayoola.falola@yahoo.com $ 
+* @version $Id: about.php	Friday 17th of June 2022 12:42:21 PM	projects@comeriver.com $ 
 */
 //	Page Include Content
+
+							
+$_8da0753266bd4808a88c4d9be2d23a92 = null;
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
@@ -43,13 +46,10 @@ $_8da0753266bd4808a88c4d9be2d23a92 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_8da0753266bd4808a88c4d9be2d23a92 = null;
-
-							}
 							
+							
+$_f4bf105fea205d74a01e6201e1057857 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -94,13 +94,10 @@ $_f4bf105fea205d74a01e6201e1057857 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_f4bf105fea205d74a01e6201e1057857 = null;
-
-							}
 							
+							
+$_85d662a3947334b558a498325a806c5e = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -151,13 +148,10 @@ $_85d662a3947334b558a498325a806c5e = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_85d662a3947334b558a498325a806c5e = null;
-
-							}
 							
+							
+$_3e028a6709996466b7755a49a06f64fa = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -222,13 +216,10 @@ $_3e028a6709996466b7755a49a06f64fa = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_3e028a6709996466b7755a49a06f64fa = null;
-
-							}
 							
+							
+$_3a67e41463269ca34e58a8e979f89885 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -283,12 +274,6 @@ $_3a67e41463269ca34e58a8e979f89885 = new Ayoola_Page_Editor_Text( array (
 ',
   'pagewidget_id' => NULL,
 ) );
-
-							}
-							else
-							{
-								
-$_3a67e41463269ca34e58a8e979f89885 = null;
 
 							}
 							

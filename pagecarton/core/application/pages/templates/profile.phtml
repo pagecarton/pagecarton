@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: profile.php	Monday 10th of January 2022 12:06:02 PM	ayoola.falola@yahoo.com $ 
+* @version $Id: profile.php	Friday 17th of June 2022 12:50:22 PM	projects@comeriver.com $ 
 */
 //	Template Content ?>
 
@@ -20,12 +20,12 @@
                         if
                         ( 
 
-                            $x_1641816362 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1655470222 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1641816362 )
-                            foreach( $x_1641816362 as $each )
+                            if( $x_1655470222 )
+                            foreach( $x_1655470222 as $each )
                             {	
                                 include_once $each;
                             }
@@ -43,7 +43,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: default-layout.php	Monday 10th of January 2022 12:05:56 PM	ayoola.falola@yahoo.com $ 
+* @version $Id: default-layout.php	Friday 17th of June 2022 12:50:18 PM	projects@comeriver.com $ 
 */
 //	Template Content ?>
 
@@ -54,12 +54,12 @@
                         if
                         ( 
 
-                            $x_1641816356 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1655470218 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1641816356 )
-                            foreach( $x_1641816356 as $each )
+                            if( $x_1655470218 )
+                            foreach( $x_1655470218 as $each )
                             {	
                                 include_once $each;
                             }
@@ -77,7 +77,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Monday 10th of January 2022 11:49:26 AM	 $ 
+* @version $Id: template.php	Friday 17th of June 2022 12:42:19 PM	projects@comeriver.com $ 
 */
 //	Template Content ?>
 <!DOCTYPE html>
@@ -119,6 +119,13 @@
 ?><?php
 //pc_body_2 /default-layout Begins Here
 
+					if( empty( $_a6bab01c3343c87b57263e96fe4b393b ) || ! is_object( $_a6bab01c3343c87b57263e96fe4b393b ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_a6bab01c3343c87b57263e96fe4b393b, '' );
+
+					
 //pc_body_2 /default-layout Ends Here
 ?><?php
 //pc_body_2 /profile Begins Here
@@ -134,13 +141,16 @@
                     echo $eachSitePageWidget->view();
                 }
                 
-echo ( ! empty( $_d76bf097f38f533b4a962980bc13892a ) &&  is_object( $_d76bf097f38f533b4a962980bc13892a ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_d76bf097f38f533b4a962980bc13892a->view(), '' ) : null );
+					if( empty( $_d76bf097f38f533b4a962980bc13892a ) || ! is_object( $_d76bf097f38f533b4a962980bc13892a ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_d76bf097f38f533b4a962980bc13892a, '' );
 
+					
 //pc_body_3 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
 //pc_body_3 /default-layout Begins Here
-
-echo ( ! empty( $_536a3be1f1e3fa26cbfe948ec17d302a ) &&  is_object( $_536a3be1f1e3fa26cbfe948ec17d302a ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_536a3be1f1e3fa26cbfe948ec17d302a->view(), '' ) : null );
 
 //pc_body_3 /default-layout Ends Here
 ?><?php
@@ -184,18 +194,27 @@ echo ( ! empty( $_536a3be1f1e3fa26cbfe948ec17d302a ) &&  is_object( $_536a3be1f1
 ?><?php
 //middlebar /profile Begins Here
 
-echo ( ! empty( $_5624cf8c5adba1f8d7bdb295e1423e72 ) &&  is_object( $_5624cf8c5adba1f8d7bdb295e1423e72 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_5624cf8c5adba1f8d7bdb295e1423e72->view(), '' ) : null );
+					if( empty( $_5624cf8c5adba1f8d7bdb295e1423e72 ) || ! is_object( $_5624cf8c5adba1f8d7bdb295e1423e72 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_5624cf8c5adba1f8d7bdb295e1423e72, '' );
 
-							if( Ayoola_Page::hasPriviledge( array (
-  0 => '98',
-  1 => '99',
-), array( 'strict' => true ) ) && ! empty( $_4271e658c6bccc97ba5b3cf6db86f81a ) && is_object( $_4271e658c6bccc97ba5b3cf6db86f81a ) )
-							{
-								echo $_4271e658c6bccc97ba5b3cf6db86f81a->view();
-							}
-							
-echo ( ! empty( $_51ad269b2804228e073d6ded3588f388 ) &&  is_object( $_51ad269b2804228e073d6ded3588f388 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_51ad269b2804228e073d6ded3588f388->view(), '' ) : null );
+					
+					if( empty( $_4271e658c6bccc97ba5b3cf6db86f81a ) || ! is_object( $_4271e658c6bccc97ba5b3cf6db86f81a ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_4271e658c6bccc97ba5b3cf6db86f81a, 'well' );
 
+					
+					if( empty( $_51ad269b2804228e073d6ded3588f388 ) || ! is_object( $_51ad269b2804228e073d6ded3588f388 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_51ad269b2804228e073d6ded3588f388, '' );
+
+					
 //middlebar /profile Ends Here
 ?>
 										   </div>
@@ -218,8 +237,13 @@ echo ( ! empty( $_51ad269b2804228e073d6ded3588f388 ) &&  is_object( $_51ad269b28
 ?><?php
 //twosome1 /profile Begins Here
 
-echo ( ! empty( $_166a149c8ae9cfb5621fc376dd6613a1 ) &&  is_object( $_166a149c8ae9cfb5621fc376dd6613a1 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_166a149c8ae9cfb5621fc376dd6613a1->view(), 'white-well' ) : null );
+					if( empty( $_166a149c8ae9cfb5621fc376dd6613a1 ) || ! is_object( $_166a149c8ae9cfb5621fc376dd6613a1 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_166a149c8ae9cfb5621fc376dd6613a1, 'white-well' );
 
+					
 //twosome1 /profile Ends Here
 ?>
 											</div>
@@ -240,8 +264,13 @@ echo ( ! empty( $_166a149c8ae9cfb5621fc376dd6613a1 ) &&  is_object( $_166a149c8a
 ?><?php
 //twosome2 /profile Begins Here
 
-echo ( ! empty( $_d41c138d6ef884c18d72b5e988f6e6c2 ) &&  is_object( $_d41c138d6ef884c18d72b5e988f6e6c2 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_d41c138d6ef884c18d72b5e988f6e6c2->view(), 'well' ) : null );
+					if( empty( $_d41c138d6ef884c18d72b5e988f6e6c2 ) || ! is_object( $_d41c138d6ef884c18d72b5e988f6e6c2 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_d41c138d6ef884c18d72b5e988f6e6c2, 'well' );
 
+					
 //twosome2 /profile Ends Here
 ?>
 											</div> 
@@ -491,10 +520,20 @@ echo ( ! empty( $_d41c138d6ef884c18d72b5e988f6e6c2 ) &&  is_object( $_d41c138d6e
 ?><?php
 //lastoneness /profile Begins Here
 
-echo ( ! empty( $_5b583620a69a1074ce34c80deaf8c812 ) &&  is_object( $_5b583620a69a1074ce34c80deaf8c812 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_5b583620a69a1074ce34c80deaf8c812->view(), '' ) : null );
+					if( empty( $_5b583620a69a1074ce34c80deaf8c812 ) || ! is_object( $_5b583620a69a1074ce34c80deaf8c812 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_5b583620a69a1074ce34c80deaf8c812, '' );
 
-echo ( ! empty( $_007a086925f4447b298f90a895538b81 ) &&  is_object( $_007a086925f4447b298f90a895538b81 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_007a086925f4447b298f90a895538b81->view(), '' ) : null );
+					
+					if( empty( $_007a086925f4447b298f90a895538b81 ) || ! is_object( $_007a086925f4447b298f90a895538b81 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_007a086925f4447b298f90a895538b81, '' );
 
+					
 //lastoneness /profile Ends Here
 ?>    
 
@@ -510,6 +549,13 @@ echo ( ! empty( $_007a086925f4447b298f90a895538b81 ) &&  is_object( $_007a086925
 ?><?php
 //pc_body_4 /default-layout Begins Here
 
+					if( empty( $_f08919130e564f1d757a848674a358d7 ) || ! is_object( $_f08919130e564f1d757a848674a358d7 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_f08919130e564f1d757a848674a358d7, '' );
+
+					
 //pc_body_4 /default-layout Ends Here
 ?><?php
 //pc_body_4 /profile Begins Here
@@ -572,14 +618,6 @@ echo ( ! empty( $_007a086925f4447b298f90a895538b81 ) &&  is_object( $_007a086925
 //pc_body_7 /profile Begins Here
 
 //pc_body_7 /profile Ends Here
-?> <?php
-//pc_body_9 /default-layout Begins Here
-
-//pc_body_9 /default-layout Ends Here
-?><?php
-//pc_body_9 /profile Begins Here
-
-//pc_body_9 /profile Ends Here
 ?>
 
     <?php
@@ -590,8 +628,13 @@ echo ( ! empty( $_007a086925f4447b298f90a895538b81 ) &&  is_object( $_007a086925
                     echo $eachSitePageWidget->view();
                 }
                 
-echo ( ! empty( $_274f1f7e068d8ec9b8ec0a58942072c2 ) &&  is_object( $_274f1f7e068d8ec9b8ec0a58942072c2 ) ? Ayoola_Object_Wrapper_Abstract::wrap( $_274f1f7e068d8ec9b8ec0a58942072c2->view(), '' ) : null );
+					if( empty( $_274f1f7e068d8ec9b8ec0a58942072c2 ) || ! is_object( $_274f1f7e068d8ec9b8ec0a58942072c2 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_274f1f7e068d8ec9b8ec0a58942072c2, '' );
 
+					
 //pc_body_8 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
 //pc_body_8 /default-layout Begins Here

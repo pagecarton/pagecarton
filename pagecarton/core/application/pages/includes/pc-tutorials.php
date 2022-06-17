@@ -9,9 +9,12 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: pc-tutorials.php	Monday 10th of January 2022 12:05:59 PM	ayoola.falola@yahoo.com $ 
+* @version $Id: pc-tutorials.php	Friday 17th of June 2022 12:50:20 PM	projects@comeriver.com $ 
 */
 //	Page Include Content
+
+							
+$_62811ae5aaaa125443b3142baae4a203 = null;
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
@@ -794,13 +797,10 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_62811ae5aaaa125443b3142baae4a203 = null;
-
-							}
 							
+							
+$_e2bfc504239e8d32ae90e710ee38d29b = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
 							{
 								
@@ -810,12 +810,6 @@ $_e2bfc504239e8d32ae90e710ee38d29b = new Ayoola_Menu( array (
   'pagewidget_id' => '1575534213-0-18',
   'insert_id' => '1567195628-0-2',
 ) );
-
-							}
-							else
-							{
-								
-$_e2bfc504239e8d32ae90e710ee38d29b = null;
 
 							}
 							

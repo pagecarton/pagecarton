@@ -1,0 +1,525 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /post-viewer-article
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: post-viewer-article.php	Friday 17th of June 2022 12:42:39 PM	projects@comeriver.com $ 
+*/
+//	Page Include Content
+
+							
+$_5121235a04596eb77ad9079b080610a3 = null;
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_5121235a04596eb77ad9079b080610a3 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<widget parameters="{ &quot;class&quot;: &quot;Application_Article_View&quot; }">
+    <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_2.jpg?embed_image_url={{{document_url_uri}}});">
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="post-entry text-center">
+                            <data-category_name>
+                                <category_name-repeat>
+                                    <span class="post-category text-white bg-success mb-3">
+                                        {{{category_name}}}
+                                    </span>
+                                </category_name-repeat>
+                            </data-category_name>
+                        <h1 class="mb-4"><a href="#">{{{article_title}}}</a></h1>
+                        <div class="post-meta align-items-center text-center">
+                            <figure class="author-figure mb-0 mr-3 d-inline-block"><img src="/layout/pc_layout_miniblog/images/person_1.jpg?embed_image_url={{{display_picture}}}" alt="Image" class="img-fluid">
+                            </figure><span class="d-inline-block mt-1">By {{{display_name}}}</span>
+                            <span>&nbsp;-&nbsp; {{{article_date_M}}} {{{article_date_d}}}, {{{article_date_Y}}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</widget>',
+  'preserved_content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
+    <div class="site-cover site-cover-sm same-height overlay single-page"
+        style="background-image: url(/layout/pc_layout_miniblog/images/img_2.jpg?embed_image_url={{{document_url_uri}}});">
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="post-entry text-center">
+                            <data-category_name>
+                                <category_name-repeat>
+                                    <span class="post-category text-white bg-success mb-3">
+                                        {{{category_name}}}
+                                    </span>
+                                </category_name-repeat>
+                            </data-category_name>
+                        <h1 class="mb-4"><a href="#">{{{article_title}}}</a></h1>
+                        <div class="post-meta align-items-center text-center">
+                            <figure class="author-figure mb-0 mr-3 d-inline-block"><img
+                                    src="/layout/pc_layout_miniblog/images/person_1.jpg?embed_image_url={{{display_picture}}}" alt="Image" class="img-fluid">
+                            </figure><span class="d-inline-block mt-1">By {{{display_name}}}</span>
+                            <span>&nbsp;-&nbsp; {{{article_date_M}}} {{{article_date_d}}}, {{{article_date_Y}}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</widget>',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'preserve_content',
+  ),
+  'pagewidget_id' => '0-1599326426-15',
+  'includes' => 
+  array (
+  ),
+  'content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
+    <div class="site-cover site-cover-sm same-height overlay single-page"
+        style="background-image: url(/layout/pc_layout_miniblog/images/img_2.jpg?embed_image_url={{{document_url_uri}}});">
+        <div class="container">
+            <div class="row same-height justify-content-center">
+                <div class="col-md-12 col-lg-10">
+                    <div class="post-entry text-center">
+                            <data-category_name>
+                                <category_name-repeat>
+                                    <span class="post-category text-white bg-success mb-3">
+                                        {{{category_name}}}
+                                    </span>
+                                </category_name-repeat>
+                            </data-category_name>
+                        <h1 class="mb-4"><a href="#">{{{article_title}}}</a></h1>
+                        <div class="post-meta align-items-center text-center">
+                            <figure class="author-figure mb-0 mr-3 d-inline-block"><img
+                                    src="/layout/pc_layout_miniblog/images/person_1.jpg?embed_image_url={{{display_picture}}}" alt="Image" class="img-fluid">
+                            </figure><span class="d-inline-block mt-1">By {{{display_name}}}</span>
+                            <span>&nbsp;-&nbsp; {{{article_date_M}}} {{{article_date_d}}}, {{{article_date_Y}}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</widget>',
+) );
+
+							}
+							
+							
+$_6aec71fca40b604abceb4fec83d71452 = null;
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_6aec71fca40b604abceb4fec83d71452 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<widget parameters="{ &quot;class&quot;: &quot;Application_Article_View&quot; }">
+    <section class="site-section py-lg">
+        <div class="container">
+            <div class="row blog-entries element-animate">
+                <div class="col-md-12 col-lg-8 main-content">
+                    <div class="post-content-body">
+                        {{{article_content}}}
+                    </div>
+                    <div class="pt-5">
+                        <p>Categories: 
+                            <data-category_name>
+                                <category_name-repeat>
+                                    <a href="/posts/{{{category_name}}}">{{{category_name}}}</a>      
+                                </category_name-repeat>
+                            </data-category_name>
+                        </p>
+                    </div>
+                    <!-- AddToAny BEGIN -->
+                    <a class="a2a_dd" href="https://www.addtoany.com/share#url=http%3A%2F%2Flocalhost%3A8888%2Ftools%2Fclassplayer%2Fget%2Fname%2FAyoola_Page_Editor_Layout%2F%3Furl%3D%2Fpost-viewer-article%26pc_page_editor_layout_name%3Dpc_layout_miniblog&amp;title=Editing%20%22%2Fpost-viewer-article%22"><img src="https://static.addtoany.com/buttons/share_save_171_16.png" alt="Share" srcset="https://static.addtoany.com/buttons/share_save_342_32.png 2x" width="171" height="16" border="0"></a>
+                    <script async="" src="https://static.addtoany.com/menu/page.js"></script>
+                    <!-- AddToAny END -->
+
+                    <div class="pt-5">
+                        <h3 class="mb-5">{{{comments_count}}} Comments</h3>
+                        <widget-inner parameters="{ &quot;class&quot;: &quot;Application_CommentBox&quot; }"></widget-inner>
+                        <widget-inner parameters="{ &quot;class&quot;: &quot;Application_CommentBox_ShowComments&quot; }"></widget-inner>
+                    </div>
+                </div>
+
+                <!-- END main-content -->
+
+                <div class="col-md-12 col-lg-4 sidebar">
+                    <div class="sidebar-box search-form-wrap">
+                        <form action="/search" class="search-form">
+                            <div class="form-group">
+                                <span class="icon fa fa-search">&nbsp;</span>
+                                <input type="text" class="form-control" name="q" id="s" placeholder="Type a keyword and hit enter">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END sidebar-box -->
+                    <div class="sidebar-box">
+                        <div class="bio text-center">
+                            <img src="/layout/pc_layout_miniblog/images/person_2.jpg?embed_image_url={{{display_picture}}}" alt="Image Placeholder" class="img-fluid mb-5">
+                            <div class="bio-body">
+                                <h2>{{{display_name}}}</h2>
+                                <p class="mb-4">{{{profile_description}}}</p>
+                                <p><a href="{{{pc_url_prefix}}}/{{{profile_url}}}" class="btn btn-primary btn-sm rounded px-4 py-2">Read my bio</a></p>
+                                <p class="social">
+                                    <a href="#" class="p-2"><span class="fa fa-facebook">&nbsp;</span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-twitter">&nbsp;</span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-instagram">&nbsp;</span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-youtube-play">&nbsp;</span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END sidebar-box -->
+                    <div class="sidebar-box">
+                        <h3 class="heading">Popular Posts</h3>
+                        <div class="post-entry-sidebar">
+                            <ul>
+                                <widget-inner parameters="{ &quot;class&quot;: &quot;Application_Article_ShowAll&quot;, &quot;add_a_new_post&quot;: 3, &quot;trending&quot;: true }">
+                                <li>
+                                    <a href="{{{post_link}}}">
+                                        <img style="max-width: unset;" src="/layout/pc_layout_miniblog/images/img_1.jpg?embed_image_url={{{document_url_uri}}}" alt="Image placeholder" class="mr-4">
+                                        <div class="text">
+                                            <h4>{{{article_title}}}</h4>
+                                            <div class="post-meta">
+                                                <span class="mr-2">{{{article_date_M}}} {{{article_date_d}}}, {{{article_date_Y}}} </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                </widget-inner>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- END sidebar-box -->
+
+                    <div class="sidebar-box">
+                        <h3 class="heading">Categories</h3>
+                        <ul class="categories">
+                            <widget-inner parameters="{ &quot;class&quot;: &quot;Application_Category_ShowAll&quot;, &quot;add_a_new_post&quot;: 6 }">
+                                <li><a href="{{{post_link}}}">{{{article_title}}} <span>({{{total_no_of_posts}}})</span></a></li>
+                            </widget-inner>
+                        </ul>
+                    </div>
+                    <!-- END sidebar-box -->
+
+                    <div class="sidebar-box">
+                        <h3 class="heading">Tags</h3>
+                        <ul class="tags">
+                            <widget-inner parameters="{ &quot;class&quot;: &quot;Application_Category_ShowAll&quot;, &quot;add_a_new_post&quot;: 6 }">
+                                <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
+                            </widget-inner>
+                        </ul>
+                    </div>
+                </div>
+                <!-- END sidebar -->
+
+            </div>
+        </div>
+    </section>
+</widget>',
+  'preserved_content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
+    <section class="site-section py-lg">
+        <div class="container">
+            <div class="row blog-entries element-animate">
+                <div class="col-md-12 col-lg-8 main-content">
+                    <div class="post-content-body">
+                        {{{article_content}}}
+                        <widget-inner parameters=\'{ "class": "Application_Article_ViewPagination" }\'></widget-inner>
+
+                    </div>
+                    <div class="pt-5">
+                        <p>Categories: 
+                            <data-category_name>
+                                <category_name-repeat>
+                                    <a href="/posts/{{{category_name}}}">{{{category_name}}}</a>      
+                                </category_name-repeat>
+                            </data-category_name>
+                        </p>
+                    </div>
+                    <!-- AddToAny BEGIN -->
+                    <a class="a2a_dd" href="https://www.addtoany.com/share"><img src="https://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share"></a>
+                    <script async src="https://static.addtoany.com/menu/page.js"></script>
+                    <!-- AddToAny END -->
+
+                    <div class="pt-5">
+                        <h3 class="mb-5">{{{comments_count}}} Comments</h3>
+                        <widget-inner parameters=\'{ "class": "Application_CommentBox" }\'></widget-inner>
+                        <widget-inner parameters=\'{ "class": "Application_CommentBox_ShowComments" }\'></widget-inner>
+                    </div>
+                </div>
+
+                <!-- END main-content -->
+
+                <div class="col-md-12 col-lg-4 sidebar">
+                    <div class="sidebar-box search-form-wrap">
+                        <form action="/search" class="search-form">
+                            <div class="form-group">
+                                <span class="icon fa fa-search">&nbsp;</span>
+                                <input type="text" class="form-control" name="q" id="s"
+                                    placeholder="Type a keyword and hit enter">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END sidebar-box -->
+                    <div class="sidebar-box">
+                        <div class="bio text-center">
+                            <img src="/layout/pc_layout_miniblog/images/person_2.jpg?embed_image_url={{{display_picture}}}" alt="Image Placeholder"
+                                class="img-fluid mb-5">
+                            <div class="bio-body">
+                                <h2>{{{display_name}}}</h2>
+                                <p class="mb-4">{{{profile_description}}}</p>
+                                <p><a href="{{{pc_url_prefix}}}/{{{profile_url}}}" class="btn btn-primary btn-sm rounded px-4 py-2">Read my bio</a></p>
+                                <p class="social">
+                                    <a href="#" class="p-2"><span class="fa fa-facebook">&nbsp;</span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-twitter">&nbsp;</span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-instagram">&nbsp;</span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-youtube-play">&nbsp;</span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END sidebar-box -->
+                    <div class="sidebar-box">
+                        <h3 class="heading">Popular Posts</h3>
+                        <div class="post-entry-sidebar">
+                            <ul>
+                                <widget-inner parameters=\'{ "class": "Application_Article_ShowAll", "add_a_new_post": 3, "trending": true }\'>
+                                <li>
+                                    <a href="{{{post_link}}}">
+                                        <img style="max-width: unset;" src="/layout/pc_layout_miniblog/images/img_1.jpg?embed_image_url={{{document_url_uri}}}" alt="Image placeholder"
+                                            class="mr-4">
+                                        <div class="text">
+                                            <h4>{{{article_title}}}</h4>
+                                            <div class="post-meta">
+                                                <span class="mr-2">{{{article_date_M}}} {{{article_date_d}}}, {{{article_date_Y}}} </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                </widget-inner>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- END sidebar-box -->
+
+                    <div class="sidebar-box">
+                        <h3 class="heading">Categories</h3>
+                        <ul class="categories">
+                            <widget-inner parameters=\'{ "class": "Application_Category_ShowAll", "add_a_new_post": 6 }\'>
+                                <li><a href="{{{post_link}}}">{{{article_title}}} <span>({{{total_no_of_posts}}})</span></a></li>
+                            </widget-inner>
+                        </ul>
+                    </div>
+                    <!-- END sidebar-box -->
+
+                    <div class="sidebar-box">
+                        <h3 class="heading">Tags</h3>
+                        <ul class="tags">
+                            <widget-inner parameters=\'{ "class": "Application_Category_ShowAll", "add_a_new_post": 6 }\'>
+                                <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
+                            </widget-inner>
+                        </ul>
+                    </div>
+                </div>
+                <!-- END sidebar -->
+
+            </div>
+        </div>
+    </section>
+</widget>',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'preserve_content',
+  ),
+  'pagewidget_id' => '0-1599326427-16',
+  'includes' => 
+  array (
+  ),
+  'content' => '<widget parameters=\'{ "class": "Application_Article_View" }\'>
+    <section class="site-section py-lg">
+        <div class="container">
+            <div class="row blog-entries element-animate">
+                <div class="col-md-12 col-lg-8 main-content">
+                    <div class="post-content-body">
+                        {{{article_content}}}
+                        <widget-inner parameters=\'{ "class": "Application_Article_ViewPagination" }\'></widget-inner>
+
+                    </div>
+                    <div class="pt-5">
+                        <p>Categories: 
+                            <data-category_name>
+                                <category_name-repeat>
+                                    <a href="/posts/{{{category_name}}}">{{{category_name}}}</a>      
+                                </category_name-repeat>
+                            </data-category_name>
+                        </p>
+                    </div>
+                    <!-- AddToAny BEGIN -->
+                    <a class="a2a_dd" href="https://www.addtoany.com/share"><img src="https://static.addtoany.com/buttons/share_save_171_16.png" width="171" height="16" border="0" alt="Share"></a>
+                    <script async src="https://static.addtoany.com/menu/page.js"></script>
+                    <!-- AddToAny END -->
+
+                    <div class="pt-5">
+                        <h3 class="mb-5">{{{comments_count}}} Comments</h3>
+                        <widget-inner parameters=\'{ "class": "Application_CommentBox" }\'></widget-inner>
+                        <widget-inner parameters=\'{ "class": "Application_CommentBox_ShowComments" }\'></widget-inner>
+                    </div>
+                </div>
+
+                <!-- END main-content -->
+
+                <div class="col-md-12 col-lg-4 sidebar">
+                    <div class="sidebar-box search-form-wrap">
+                        <form action="/search" class="search-form">
+                            <div class="form-group">
+                                <span class="icon fa fa-search"></span>
+                                <input type="text" class="form-control" name="q" id="s"
+                                    placeholder="Type a keyword and hit enter">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- END sidebar-box -->
+                    <div class="sidebar-box">
+                        <div class="bio text-center">
+                            <img src="/layout/pc_layout_miniblog/images/person_2.jpg?embed_image_url={{{display_picture}}}" alt="Image Placeholder"
+                                class="img-fluid mb-5">
+                            <div class="bio-body">
+                                <h2>{{{display_name}}}</h2>
+                                <p class="mb-4">{{{profile_description}}}</p>
+                                <p><a href="{{{pc_url_prefix}}}/{{{profile_url}}}" class="btn btn-primary btn-sm rounded px-4 py-2">Read my bio</a></p>
+                                <p class="social">
+                                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
+                                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END sidebar-box -->
+                    <div class="sidebar-box">
+                        <h3 class="heading">Popular Posts</h3>
+                        <div class="post-entry-sidebar">
+                            <ul>
+                                <widget-inner parameters=\'{ "class": "Application_Article_ShowAll", "add_a_new_post": 3, "trending": true }\'>
+                                <li>
+                                    <a href="{{{post_link}}}">
+                                        <img style="max-width: unset;" src="/layout/pc_layout_miniblog/images/img_1.jpg?embed_image_url={{{document_url_uri}}}" alt="Image placeholder"
+                                            class="mr-4">
+                                        <div class="text">
+                                            <h4>{{{article_title}}}</h4>
+                                            <div class="post-meta">
+                                                <span class="mr-2">{{{article_date_M}}} {{{article_date_d}}}, {{{article_date_Y}}} </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                                </widget-inner>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- END sidebar-box -->
+
+                    <div class="sidebar-box">
+                        <h3 class="heading">Categories</h3>
+                        <ul class="categories">
+                            <widget-inner parameters=\'{ "class": "Application_Category_ShowAll", "add_a_new_post": 6 }\'>
+                                <li><a href="{{{post_link}}}">{{{article_title}}} <span>({{{total_no_of_posts}}})</span></a></li>
+                            </widget-inner>
+                        </ul>
+                    </div>
+                    <!-- END sidebar-box -->
+
+                    <div class="sidebar-box">
+                        <h3 class="heading">Tags</h3>
+                        <ul class="tags">
+                            <widget-inner parameters=\'{ "class": "Application_Category_ShowAll", "add_a_new_post": 6 }\'>
+                                <li><a href="{{{post_link}}}">{{{article_title}}}</a></li>
+                            </widget-inner>
+                        </ul>
+                    </div>
+                </div>
+                <!-- END sidebar -->
+
+            </div>
+        </div>
+    </section>
+</widget>',
+) );
+
+							}
+							
+							
+$_eaf4fdd599bd85dc44d201eb9b73d7f8 = null;
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_eaf4fdd599bd85dc44d201eb9b73d7f8 = new Ayoola_Page_Editor_Text( array (
+  'editable' => '<div class="site-section bg-light">
+    <div class="container">
+
+      <div class="row mb-5">
+        <div class="col-12">
+          <h2>More Related Posts</h2>
+        </div>
+      </div>
+
+      <include href="/layout/pc_layout_miniblog/list-similar-post.html">
+
+    </include></div>
+  </div>
+
+',
+  'preserved_content' => '<div class="site-section bg-light">
+    <div class="container">
+
+      <div class="row mb-5">
+        <div class="col-12">
+          <h2>More Related Posts</h2>
+        </div>
+      </div>
+
+      <include href="/layout/pc_layout_miniblog/list-similar-post.html">
+
+    </div>
+  </div>
+
+',
+  'url_prefix' => '',
+  'widget_options' => 
+  array (
+    0 => 'preserve_content',
+  ),
+  'pagewidget_id' => '0-1599326428-1',
+  'includes' => 
+  array (
+    '/layout/pc_layout_miniblog/list-similar-post' => '<include href="/layout/pc_layout_miniblog/list-similar-post.html">',
+  ),
+  'content' => '<div class="site-section bg-light">
+    <div class="container">
+
+      <div class="row mb-5">
+        <div class="col-12">
+          <h2>More Related Posts</h2>
+        </div>
+      </div>
+
+      <include href="/layout/pc_layout_miniblog/list-similar-post.html">
+
+    </div>
+  </div>
+
+',
+) );
+
+							}
+							

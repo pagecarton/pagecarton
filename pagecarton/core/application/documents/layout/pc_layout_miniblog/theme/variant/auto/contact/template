@@ -1,0 +1,505 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /contact
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: contact.php	Friday 17th of June 2022 12:42:22 PM	projects@comeriver.com $ 
+*/
+//	Template Content ?>
+
+                    <?php 
+
+                            //	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
+                            //	THEY WON'T HAVE CORRECT APPDIR
+                        if
+                        ( 
+
+                            $x_1655469742 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                        )
+                        {
+
+                            if( $x_1655469742 )
+                            foreach( $x_1655469742 as $each )
+                            {	
+                                include_once $each;
+                            }
+                        }
+
+                    ?>
+                     <?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /layout/pc_layout_miniblog/template
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: template.php	Friday 17th of June 2022 12:42:19 PM	projects@comeriver.com $ 
+*/
+//	Template Content ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700%7CPlayfair+Display:400,700,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/magnific-popup.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/jquery-ui.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/aos.css">
+
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/style.css"> 
+  </head>
+  <body data-pc-section-name="body">
+<?php include_once( LAYOUT_PATH . DS . 'header' . TPL ) ?>
+
+  <div class="site-wrap" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
+
+    <?php
+//pc_body_2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_2 /contact Begins Here
+
+//pc_body_2 /contact Ends Here
+?>
+
+    <?php
+//pc_body_3 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+					if( empty( $_d76bf097f38f533b4a962980bc13892a ) || ! is_object( $_d76bf097f38f533b4a962980bc13892a ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_d76bf097f38f533b4a962980bc13892a, '' );
+
+					
+//pc_body_3 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_3 /contact Begins Here
+
+					if( empty( $_025f19284397312ed04a86205f397d9f ) || ! is_object( $_025f19284397312ed04a86205f397d9f ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_025f19284397312ed04a86205f397d9f, '' );
+
+					
+//pc_body_3 /contact Ends Here
+?><?php
+//oneness /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_oneness as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//oneness /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//oneness /contact Begins Here
+
+//oneness /contact Ends Here
+?><section data-pc-all-sections="1" class="container">	
+									<div class="">
+										<div class="row">
+											<div class="pc_page_layout_grid col-md-12 12u">
+												<?php
+//middlebar /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_middlebar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//middlebar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//middlebar /contact Begins Here
+
+//middlebar /contact Ends Here
+?>
+										   </div>
+										</div> 
+										<div class="row">
+											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//twosome1 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_twosome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//twosome1 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//twosome1 /contact Begins Here
+
+//twosome1 /contact Ends Here
+?>
+											</div>
+											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//twosome2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_twosome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//twosome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//twosome2 /contact Begins Here
+
+//twosome2 /contact Ends Here
+?>
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)"> 
+												<?php
+//threesome1 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_threesome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//threesome1 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//threesome1 /contact Begins Here
+
+//threesome1 /contact Ends Here
+?>
+										   </div>
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//threesome2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_threesome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//threesome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//threesome2 /contact Begins Here
+
+//threesome2 /contact Ends Here
+?>
+											</div> 
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//threesome3 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_threesome3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//threesome3 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//threesome3 /contact Begins Here
+
+//threesome3 /contact Ends Here
+?>
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//foursome1 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome1 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome1 /contact Begins Here
+
+//foursome1 /contact Ends Here
+?>
+										   </div>
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//foursome2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome2 /contact Begins Here
+
+//foursome2 /contact Ends Here
+?>
+											</div> 
+											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//foursome3 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome3 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome3 /contact Begins Here
+
+//foursome3 /contact Ends Here
+?>
+											</div> 
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
+												<?php
+//foursome4 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome4 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome4 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome4 /contact Begins Here
+
+//foursome4 /contact Ends Here
+?>
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//leftbar /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_leftbar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//leftbar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//leftbar /contact Begins Here
+
+//leftbar /contact Ends Here
+?>
+										   </div>
+											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//leftbarright /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_leftbarright as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//leftbarright /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//leftbarright /contact Begins Here
+
+//leftbarright /contact Ends Here
+?>
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//rightbarleft /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_rightbarleft as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//rightbarleft /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//rightbarleft /contact Begins Here
+
+//rightbarleft /contact Ends Here
+?>
+											</div> 
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//rightbar /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_rightbar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//rightbar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//rightbar /contact Begins Here
+
+//rightbar /contact Ends Here
+?>
+											</div>   
+										</div> 
+									</div> 
+									</section><?php
+//lastoneness /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_lastoneness as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//lastoneness /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//lastoneness /contact Begins Here
+
+//lastoneness /contact Ends Here
+?>    
+
+    <?php
+//pc_body_4 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_4 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_4 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_4 /contact Begins Here
+
+					if( empty( $_b39a8b5303443b07f6c140e3497e64bc ) || ! is_object( $_b39a8b5303443b07f6c140e3497e64bc ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_b39a8b5303443b07f6c140e3497e64bc, '' );
+
+					
+//pc_body_4 /contact Ends Here
+?>
+
+    <?php
+//pc_body_5 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_5 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_5 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_5 /contact Begins Here
+
+//pc_body_5 /contact Ends Here
+?>
+
+    <?php
+//pc_body_6 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_6 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_6 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_6 /contact Begins Here
+
+//pc_body_6 /contact Ends Here
+?>
+
+    <?php
+//pc_body_7 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_7 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_7 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_7 /contact Begins Here
+
+//pc_body_7 /contact Ends Here
+?>
+
+    <?php
+//pc_body_8 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_8 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+					if( empty( $_274f1f7e068d8ec9b8ec0a58942072c2 ) || ! is_object( $_274f1f7e068d8ec9b8ec0a58942072c2 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_274f1f7e068d8ec9b8ec0a58942072c2, '' );
+
+					
+//pc_body_8 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_8 /contact Begins Here
+
+//pc_body_8 /contact Ends Here
+?>
+
+  </div>
+
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery-3.3.1.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery-ui.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/popper.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/bootstrap.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/owl.carousel.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery.stellar.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery.countdown.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery.magnific-popup.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/bootstrap-datepicker.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/aos.js"></script>
+
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/main.js"></script>
+
+  <?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?><?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?><?php
+//pc_section_after_js /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_section_after_js as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_section_after_js /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_section_after_js /contact Begins Here
+
+//pc_section_after_js /contact Ends Here
+?>
+</body>
+</html>

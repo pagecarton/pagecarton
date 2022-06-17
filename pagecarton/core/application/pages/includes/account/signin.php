@@ -9,9 +9,12 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: signin.php	Monday 10th of January 2022 12:06:03 PM	ayoola.falola@yahoo.com $ 
+* @version $Id: signin.php	Friday 17th of June 2022 12:50:22 PM	projects@comeriver.com $ 
 */
 //	Page Include Content
+
+							
+$_1823d82978b6248da233ba22f90dfff5 = null;
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
@@ -35,13 +38,10 @@ $_1823d82978b6248da233ba22f90dfff5 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_1823d82978b6248da233ba22f90dfff5 = null;
-
-							}
 							
+							
+$_819b0d226cfbe09b764ec0d18e3de388 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -64,13 +64,10 @@ $_819b0d226cfbe09b764ec0d18e3de388 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_819b0d226cfbe09b764ec0d18e3de388 = null;
-
-							}
 							
+							
+$_e288e0ae88eb247332f74b296fc90f41 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Access_Login' ) )
 							{
 								
@@ -85,13 +82,10 @@ $_e288e0ae88eb247332f74b296fc90f41 = new Ayoola_Access_Login( array (
 ) );
 
 							}
-							else
-							{
-								
-$_e288e0ae88eb247332f74b296fc90f41 = null;
-
-							}
 							
+							
+$_29dee3838ed48fbd1732353450c0ade7 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -117,13 +111,10 @@ $_29dee3838ed48fbd1732353450c0ade7 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_29dee3838ed48fbd1732353450c0ade7 = null;
-
-							}
 							
+							
+$_a8a7a9b2921b861baf512f69102991b3 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -144,12 +135,6 @@ $_a8a7a9b2921b861baf512f69102991b3 = new Ayoola_Page_Editor_Text( array (
 			<h3><br></h3><div><br></div>
 			',
 ) );
-
-							}
-							else
-							{
-								
-$_a8a7a9b2921b861baf512f69102991b3 = null;
 
 							}
 							

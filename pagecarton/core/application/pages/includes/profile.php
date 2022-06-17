@@ -9,9 +9,12 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: profile.php	Monday 10th of January 2022 12:06:02 PM	ayoola.falola@yahoo.com $ 
+* @version $Id: profile.php	Friday 17th of June 2022 12:50:22 PM	projects@comeriver.com $ 
 */
 //	Page Include Content
+
+							
+$_5624cf8c5adba1f8d7bdb295e1423e72 = null;
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Object_Embed' ) )
 							{
@@ -28,13 +31,10 @@ $_5624cf8c5adba1f8d7bdb295e1423e72 = new Ayoola_Object_Embed( array (
 ) );
 
 							}
-							else
-							{
-								
-$_5624cf8c5adba1f8d7bdb295e1423e72 = null;
-
-							}
 							
+							
+$_4271e658c6bccc97ba5b3cf6db86f81a = null;
+
 							if( Ayoola_Page::hasPriviledge( array (
   0 => '98',
   1 => '99',
@@ -88,14 +88,11 @@ $_4271e658c6bccc97ba5b3cf6db86f81a = new Ayoola_Page_Editor_Text( array (
 ) );
 
 								}
-								else
-								{
-									
-$_4271e658c6bccc97ba5b3cf6db86f81a = null;
-
-								}
 							}    
 							
+							
+$_51ad269b2804228e073d6ded3588f388 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -117,13 +114,10 @@ $_51ad269b2804228e073d6ded3588f388 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_51ad269b2804228e073d6ded3588f388 = null;
-
-							}
 							
+							
+$_166a149c8ae9cfb5621fc376dd6613a1 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -153,13 +147,10 @@ $_166a149c8ae9cfb5621fc376dd6613a1 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_166a149c8ae9cfb5621fc376dd6613a1 = null;
-
-							}
 							
+							
+$_d41c138d6ef884c18d72b5e988f6e6c2 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -189,13 +180,10 @@ $_d41c138d6ef884c18d72b5e988f6e6c2 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_d41c138d6ef884c18d72b5e988f6e6c2 = null;
-
-							}
 							
+							
+$_5b583620a69a1074ce34c80deaf8c812 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -217,13 +205,10 @@ $_5b583620a69a1074ce34c80deaf8c812 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_5b583620a69a1074ce34c80deaf8c812 = null;
-
-							}
 							
+							
+$_007a086925f4447b298f90a895538b81 = null;
+
 							if( Ayoola_Loader::loadClass( 'Application_Article_ShowAll' ) )
 							{
 								
@@ -248,12 +233,6 @@ $_007a086925f4447b298f90a895538b81 = new Application_Article_ShowAll( array (
   'content_to_clear' => '<span class="pc_posts_option_items" style="text-decoration:line-through;" ></span>',
   'object_class' => 'container',
 ) );
-
-							}
-							else
-							{
-								
-$_007a086925f4447b298f90a895538b81 = null;
 
 							}
 							

@@ -9,9 +9,12 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: account.php	Monday 10th of January 2022 12:06:08 PM	ayoola.falola@yahoo.com $ 
+* @version $Id: account.php	Friday 17th of June 2022 12:50:25 PM	projects@comeriver.com $ 
 */
 //	Page Include Content
+
+							
+$_2f63bc0963e9afc89bc511de893c11fc = null;
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
@@ -46,13 +49,10 @@ $_2f63bc0963e9afc89bc511de893c11fc = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_2f63bc0963e9afc89bc511de893c11fc = null;
-
-							}
 							
+							
+$_0a8d876c1a5bdfa414e91126c8475772 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -122,13 +122,10 @@ $_0a8d876c1a5bdfa414e91126c8475772 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_0a8d876c1a5bdfa414e91126c8475772 = null;
-
-							}
 							
+							
+$_7aac6aa09cee3843d266ebfb57a2baf1 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
@@ -170,13 +167,10 @@ $_7aac6aa09cee3843d266ebfb57a2baf1 = new Ayoola_Page_Editor_Text( array (
 ) );
 
 							}
-							else
-							{
-								
-$_7aac6aa09cee3843d266ebfb57a2baf1 = null;
-
-							}
 							
+							
+$_1e879530f660cb8dced12756d01cc160 = null;
+
 							if( Ayoola_Loader::loadClass( 'Ayoola_Menu' ) )
 							{
 								
@@ -191,12 +185,6 @@ $_1e879530f660cb8dced12756d01cc160 = new Ayoola_Menu( array (
   'insert_id' => '1566242675-0-14',
   '' => '',
 ) );
-
-							}
-							else
-							{
-								
-$_1e879530f660cb8dced12756d01cc160 = null;
 
 							}
 							
