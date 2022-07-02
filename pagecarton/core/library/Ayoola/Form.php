@@ -1024,7 +1024,12 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
         {
             //  refresh this to refresh ids
             // do this only once during the session
-            //session_regenerate_id();
+			// to combat spam, let us regenerate this once in the session
+			// especially for users not signed in
+			if( ! Ayoola_Application::getUserInfo() )
+			{
+				session_regenerate_id();
+			}
         }
         return $this->_values;
     }

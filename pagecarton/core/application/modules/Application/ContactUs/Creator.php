@@ -55,8 +55,6 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
 			//
-		//	var_export( $values );
-		//	return;
 			$access = new Ayoola_Access();
 			$userInfo = $access->getUserInfo();
 			$values['contactus_creator_user_id'] = $userInfo['user_id'];
@@ -82,20 +80,28 @@ class Application_ContactUs_Creator extends Application_ContactUs_Abstract
             
                 unset( $values['contactus_creator_user_id'] );
                 unset( $values['contactus_creation_date'] );
+	
+				//	make it nonusable for spam
+				//	By not making 
+				$emailInfo = array(
+									'subject' => 'Contact Confirmation',
+									'body' => 'Someone used this email address to submit a contact message on ' . Ayoola_Page::getHomePageUrl() . '. The message was successfully submited and has been relayed to the administrators. 
+									
+									If you have any questions, please leave a follow-up message on ' . Ayoola_Page::getHomePageUrl() . '/widgets/' . __CLASS__,
+				);
+
+				$emailInfo['to'] = implode( ',', array_unique( $emailAddress ) );
+
+				@self::sendMail( $emailInfo );
 
 				$emailInfo = array(
-									'subject' => 'Re: ' . $values['contactus_subject'],
-									'body' => 'We have received the message with the following information from the contact form:
-									' . self::arrayToString( $values ) . '
-									',
-				
+					'subject' => 'Re: ' . $values['contactus_subject'],
+					'body' => 'We have received the message with the following information from the contact form:
+					' . self::arrayToString( $values ) . '
+					',
 				);
-				$emailInfo['to'] = implode( ',', array_unique( $emailAddress ) );
-			//	$emailInfo['bcc'] = Ayoola_Application_Notification::getEmails();
-			//	$emailInfo['html'] = true; 
-				@self::sendMail( $emailInfo );
-            //    self::v( $emailInfo );
-                $emailInfo['to'] = Ayoola_Application_Notification::getEmails();;
+
+				$emailInfo['to'] = Ayoola_Application_Notification::getEmails();;
 				@self::sendMail( $emailInfo );
 				
 			}

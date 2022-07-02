@@ -93,8 +93,6 @@ class Ayoola_Captcha
 		{
 			return self::$_hashList[$rand];
 		}
-	//	var_export( $rand );
-	//	var_export( "\r\n" );
 		$randomnizer = $randomizationOptions['name'];
 		$randomnizer .= session_id();
 		

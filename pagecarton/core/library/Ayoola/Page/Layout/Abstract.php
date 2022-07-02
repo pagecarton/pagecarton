@@ -201,15 +201,28 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					{
 						case 'index.html':
 						case 'home.html':
+						case 'template.html':
 
 						break;
 						default:
+						if( empty( $alternateFile ) )
+						{
 							$alternateFile = $each;
-							break 3;
+							//break 3;									
+						}
 						break;
+					}
+					// duplicate the files
+					$backupDir = $dir . DS . 'backup';
+					$backupFile = $backupDir . DS . basename( $each );
+					if( ! file_exists( $backupFile ) )
+					{
+						Ayoola_Doc::createDirectory( $backupDir );
+						$copied = copy( $each, $backupFile );	
 					}
 				break;
 			}
+			
 		}
 
 		$alternateNavigation = null;
@@ -223,14 +236,14 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		if( $alternateFile )
 		{
 			$alternateFileX = file_get_contents( $alternateFile );
-			$alternateFile = self::sanitizeTemplateFile( $alternateFileX, $values );
+			$alternateFileContent = self::sanitizeTemplateFile( $alternateFileX, $values );
 			$aContentLte = self::sanitizeTemplateFile( $alternateFileX, $values + array( 'lite' => true ) );
             
             //	pick navigation from another page in case the navigation of home page contains other content.			
-			$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $alternateFile );
+			$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $alternateFileContent );
 			foreach( $matches as $count => $match )
 			{
-				preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $alternateFile, $placeholder );
+				preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $alternateFileContent, $placeholder );
 
 				if( empty( $alternateNavigation ) && stripos( $placeholder[1], $navTag ) )
 				{
@@ -250,6 +263,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $content, $placeholder );
 
+			preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $contentLte, $placeholderLite );
+
 			if( empty( $realNavigationDone ) && stripos( $placeholder[1], $navTag ) )
 			{
 				$isRealNavigation = true;
@@ -259,7 +274,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 			// Excempt the header content, and the nav and footer
             //  content with this means it is meant to be in theme file
-			if( $placeholder[1] && ! stripos( $alternateFile, $placeholder[1] ) && ( empty( $isRealNavigation ) ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy' ) && ! stripos( $placeholder[1], '&amp;copy' ) && ! stripos( $placeholder[1], '</nav>' ) )
+			if( $placeholder[1] && ( empty( $alternateFileContent ) || ! stripos( $alternateFileContent, $placeholder[1] ) ) && ( empty( $isRealNavigation ) ) && ! stripos( $placeholder[1], '©' ) && ! stripos( $placeholder[1], '&copy' ) && ! stripos( $placeholder[1], '&amp;copy' ) && ! stripos( $placeholder[1], '</nav>' ) )
 			{
 				//var_export( $placeholder[1] );
 				//	remove sections that are not common to all files
@@ -275,8 +290,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 			elseif( $placeholder[1] )
 			{
-				$toRemoveFromAllFiles[] = $placeholder[1];
-								
+				$toRemoveFromAllFiles[] = $placeholderLite[1];		
 			}
 			
 
@@ -292,9 +306,14 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			$isRealNavigation = false;     
 		}
 
+		//var_export( $toRemoveFromAllFiles );
+
 		if( $toRemoveFromAllFiles )
 		{
 			$pages =  Ayoola_Page_Layout_Pages::getPages( $themeName );
+			//var_export( $themeName );
+			//var_export( $pages );
+
 			foreach( $pages as $themePageInfo )
 			{
 				$pageThemeFileUrl = $themePageInfo['url'];
@@ -307,12 +326,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				$pageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $pageFileX;
 				$globalFile = Ayoola_Loader::checkFile( $pageFileX );
 
-				//var_export( $pageFile );
+				//var_export( $globalFile );
 
                 if( ! is_file( $globalFile ) )
                 {
 					continue;
 				}
+				
 				$cContent = file_get_contents( $globalFile );
 				$sContent = $xContent = self::sanitizeTemplateFile( $cContent, $values + array( 'lite' => true ) );
 				$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $sContent );
@@ -321,8 +341,8 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				{
 					preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $sContent, $placeholder );
 				
-		
-					//var_export( $placeholder );
+					//var_export( $placeholder[1] ); 
+
 					
 					// Excempt the header content, and the nav and footer
 					//  content with this means it is meant to be in theme file
@@ -339,7 +359,12 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					}
 					elseif( in_array( $placeholder[1], $toRemoveFromAllFiles ) )
 					{
+						//var_export( $pageThemeFileUrl );
+						//var_export( $placeholder[1] ); 
+
 						$sContent = str_ireplace( $placeholder[1], '<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
+						//var_export( $sContent );
+
 					}
 					//	format  file for easy editing
 					$sContent = str_ireplace(
@@ -353,8 +378,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 				}
 
-				//var_export( $pageFile ); 
-				//var_export( $cContent );
 
 				if( $sContent !== $xContent )
 				{
@@ -362,7 +385,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 					//	do not deploy yet
 					//	make sure it is well tested
-					//file_put_contents( $pageFile, $sContent );
+					file_put_contents( $pageFile, $sContent );
 				}
 
 			}
