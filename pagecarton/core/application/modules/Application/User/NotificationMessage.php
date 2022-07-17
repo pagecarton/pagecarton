@@ -33,7 +33,7 @@ class Application_User_NotificationMessage extends Ayoola_Dbase_Table_Abstract_X
 		'to' => 'INPUTTEXT', 
 		'subject' => 'INPUTTEXT', 
 		'body' => 'TEXTAREA', 
-		'mode_id' => 'INT, FOREIGN_KEYS = Application_User_NotificationMessage_Mode',
+		'mode_id' => 'INPUTTEXT, FOREIGN_KEYS = Application_User_NotificationMessage_Mode',
 		'creation_date' => 'INT', 'modified_date' => 'INT',
 	);
 	// END OF CLASS

@@ -1581,7 +1581,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				$this->_dbData = array();
 				return false;
 			}
-			$this->setParameter( array( 'username_to_show' => Ayoola_Application::getUserInfo( 'username' ) ) );
+			$usernameToShow = array();
+			$usernameToShow[] = Ayoola_Application::getUserInfo( 'username' );
+			$usernameToShow[] = strtolower( Ayoola_Application::getUserInfo( 'username' ) );
+			$this->setParameter( array( 'username_to_show' => $usernameToShow ) );
 		}
 		elseif( $this->getParameter( 'show_profile_posts' ) && @Ayoola_Application::$GLOBAL['profile']['profile_url'] )
 		{
@@ -1610,7 +1613,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		if( $this->getParameter( 'username_to_show' ) )
 		{
-			$whereClause['username'][] = $this->getParameter( 'username_to_show' );
+			if( is_array( $this->getParameter( 'username_to_show' ) ) )
+			{
+				$whereClause['username'] = $this->getParameter( 'username_to_show' );	
+			}
+			else
+			{
+				$whereClause['username'][] = $this->getParameter( 'username_to_show' );
+			}
 		} 
 		if( $this->getParameter( 'profile_to_show' ) )
 		{

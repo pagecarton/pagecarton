@@ -195,7 +195,7 @@ class Application_Article_Creator extends Application_Article_Abstract
 				$values['article_url'] = substr( trim( $filter->filter( strtolower( $values['article_url'] ) ) , '-' ), 0, 70 ) ? : microtime();
 			}
 			$values['user_id'] = $userInfo['user_id'];
-			$values['username'] = $userInfo['username'];
+			$values['username'] = strtolower( $userInfo['username'] );
 			
 			//	default to my default profile
 			$defaultProfile = Application_Profile_Abstract::getMyDefaultProfile();

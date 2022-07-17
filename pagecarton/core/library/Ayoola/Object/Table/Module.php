@@ -33,11 +33,11 @@ class Ayoola_Object_Table_Module extends Ayoola_Dbase_Table_Abstract_Xml_Protect
      *
      * @param int
      */
-    protected $_tableVersion = '0.01';
+    protected $_tableVersion = '0.1';
 
 	protected $_dataTypes = array
 	( 
-		'module_id' => 'INT',
+		'module_id' => 'INPUTTEXT',
 		'module_name' => 'INPUTTEXT, UNIQUE ',
 	);
 	// END OF CLASS

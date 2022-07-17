@@ -298,21 +298,24 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			$contentLte= str_ireplace(
 				array(
 					'@@@' . $match . '@@@',
-					'{@@@' . $match . '',
-					'' . $match . '@@@}'
+					//'{@@@' . $match . '',
+					//'' . $match . '@@@}'
 				), 
 				'', $contentLte 
 			);
 			$isRealNavigation = false;     
 		}
+		$sx = array(
+			'#\{@@@[a-zA-Z0-9_]*#',
+			'#[a-zA-Z0-9_]*@@@\}#',
+		);
 
+		$contentLte = preg_replace( $sx, '', $contentLte );
+		
 		//var_export( $toRemoveFromAllFiles );
-
 		if( $toRemoveFromAllFiles )
 		{
 			$pages =  Ayoola_Page_Layout_Pages::getPages( $themeName );
-			//var_export( $themeName );
-			//var_export( $pages );
 
 			foreach( $pages as $themePageInfo )
 			{
@@ -335,13 +338,12 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				
 				$cContent = file_get_contents( $globalFile );
 				$sContent = $xContent = self::sanitizeTemplateFile( $cContent, $values + array( 'lite' => true ) );
+
 				$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $sContent );
 
 				foreach( $matches as $count => $match )
 				{
 					preg_match( '/{@@@' . $match . '([\S\s]*)' . $match . '@@@}/i', $sContent, $placeholder );
-				
-					//var_export( $placeholder[1] ); 
 
 					
 					// Excempt the header content, and the nav and footer
@@ -350,7 +352,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					{
 
 						$sContent = str_ireplace( $placeholder[1], '<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
-						//var_export( $placeholder[1] );
 						//var_export( $cContent );
 						//	remove sections that are not common to all files
 					
@@ -360,7 +361,6 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					elseif( in_array( $placeholder[1], $toRemoveFromAllFiles ) )
 					{
 						//var_export( $pageThemeFileUrl );
-						//var_export( $placeholder[1] ); 
 
 						$sContent = str_ireplace( $placeholder[1], '<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
 						//var_export( $sContent );
@@ -370,25 +370,29 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					$sContent = str_ireplace(
 						array(
 							'@@@' . $match . '@@@',
-							'{@@@' . $match . '',
-							'' . $match . '@@@}'
+							//'{@@@' . $match . '',
+							//'' . $match . '@@@}'
 						), 
 						'', $sContent 
 					);
 
 				}
 
-
+				$sx = array(
+					'#\{@@@[a-zA-Z0-9_]*#',
+					'#[a-zA-Z0-9_]*@@@\}#',
+				);
+				$sContent = preg_replace( $sx, '', $sContent );
 				if( $sContent !== $xContent )
 				{
-					//var_export( $sContent );
-
 					//	do not deploy yet
 					//	make sure it is well tested
 					file_put_contents( $pageFile, $sContent );
 				}
-
+	
 			}
+
+
 		}
 
 		//exit();

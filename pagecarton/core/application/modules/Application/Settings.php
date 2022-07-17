@@ -33,7 +33,7 @@ class Application_Settings extends Ayoola_Dbase_Table_Abstract_Xml_Private
      *
      * @param int
      */
-    protected $_tableVersion = '0.0.7';
+    protected $_tableVersion = '0.0.8';
 
 	protected $_dataTypes = array
 	(  
@@ -41,8 +41,7 @@ class Application_Settings extends Ayoola_Dbase_Table_Abstract_Xml_Private
 		'settings' => 'INPUTTEXT',
 		'settingsname_name' => 'INPUTTEXT',
 		'class_name' => 'INPUTTEXT',
-//		'settingsname_id' => 'INT, UNIQUE, FOREIGN_KEYS = Application_Settings_SettingsName',
-		'settingsname_id' => 'INT, UNIQUE',  
+		'settingsname_id' => 'INPUTTEXT, UNIQUE',  
 	);
 	// END OF CLASS
 }

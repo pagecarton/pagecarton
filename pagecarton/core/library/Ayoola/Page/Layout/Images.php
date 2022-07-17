@@ -38,9 +38,9 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
     /**
      * 
      * 
-     * @var string 
+     * @var array 
      */
-	protected static $_imageExtensions = array( 'jpg', 'jepg', 'png', 'gif', 'bmp', 'ico', 'tiff', ); 
+	protected static $_imageExtensions = array( 'jpg', 'jpeg', 'png', 'gif', 'bmp', 'ico', 'tiff', ); 
 	
     /**
      * Performs the creation process
@@ -84,7 +84,7 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
     {		
 		$directory = dirname( Ayoola_Loader::checkFile( $this->getFilename() ) );
 		$files = array_unique( Ayoola_Doc::getFilesRecursive( $directory, array( 'whitelist_extension' => self::$_imageExtensions ) ) );
-		
+
 		//	Show files uploaded normally
 		if( self::getPercentageCompleted() == 100 )
 		{
@@ -92,10 +92,6 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 		//	$uploadedFiles = array_unique( array_column( $uploadedFiles, 'url', 'url' ) );
 		//	$files = array_unique( $uploadedFiles + $files );
 		}
-		//	var_export( $uploadedFiles );  
-	//	var_export( $directory );
-	//	var_export( $this->getFilename() );
-	//	asort( $files );
 		$dirForCheck = dirname( $this->getFilename() );
 
 		$done = array();
@@ -109,7 +105,7 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
             }
 			$uri = Ayoola_Doc::pathToUri( $each );
 			
-			$eachFile = Ayoola_Doc::getDocumentsDirectory() . $uri;
+			$eachFile = Ayoola_Doc::getDocumentsDirectory() . str_ireplace( '/', DS, $uri );
 			if( ! empty( $done[$uri] ) )
 			{
 				continue;
@@ -145,14 +141,18 @@ class Ayoola_Page_Layout_Images extends Ayoola_Page_Layout_Abstract
 				$images = array();
 				foreach( $files as $each )
 				{
+					$each = str_replace( '/', DS, $each);
+
 					$extension = explode( ".", strtolower( $each ) );
 					$extension = array_pop( $extension );
 					if( ! in_array( $extension, self::$_imageExtensions ) )
 					{
 						continue;
 					}
+					//var_export($each);
+
 					list( , $url ) = explode( '' . DS . 'application' . DS . 'documents' . DS . '', $each );
-					$images[] = DS . $url;
+					$images[] = str_ireplace( '\\', '/', '/' . $url );
 				}
 				if( $uploaded = Ayoola_Doc_Table::getInstance()->select( null, array( 'url' => $images ) ) )
 				{

@@ -138,7 +138,6 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			unset( $values['password'], $values['password2'], $values['document_url_base64'], $values['download_url_base64'] );
 		
 			//	Save to table
-	//		if( $data['form_options'] && in_array( 'database', $data['form_options'] ) )
 			{
 				$table = Ayoola_Form_Table_Data::getInstance();
 				$infoToInsert = array( 'form_name' => $data['form_name'], 'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 'form_data' => $values  );
@@ -307,7 +306,6 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		}
 
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . @$formInfo['form_name'] ) );
-		$fieldset = new Ayoola_Form_Element;
 
     
         if( ! empty( $formInfo['form_options'] ) && in_array( 'disable_updates', $formInfo['form_options'] ) && ! self::hasPriviledge( 98 ) && ! empty( $values ) )
@@ -333,12 +331,17 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			if( empty( $fieldsets[$key] ) )
 			{
                 $fieldsets[$key] = new Ayoola_Form_Element; 
-
+				if( is_bool( $this->getParameter( 'hashElementName' ) ) )
+				{
+					$fieldsets[$key]->hashElementName = $this->getParameter( 'hashElementName' );
+				}
+				elseif( is_bool( $this->getParameter( 'hash_element_name' ) ) )
+				{
+					$fieldsets[$key]->hashElementName = $this->getParameter( 'hash_element_name' );
+				}
 			}
             $filters = array();
-		
-			//	Question
-			
+					
 			$requirement = null;
 			$options = array();
 			$type = $formInfo['element_type'][$i]; 
@@ -511,7 +514,7 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				break;
 			}
 
-			$elementInfo = array( 'name' => $elementName, 'label' => $formInfo['element_title'][$i], 'data-document_type' => $formInfo['element_type'][$i], 'placeholder' => $formInfo['element_placeholder'][$i], 'type' => $type, 'value' => $defaultValue );
+			$elementInfo = array( 'name' => $elementName, 'label' => $formInfo['element_title'][$i], 'data-document_type' => $formInfo['element_type'][$i], 'placeholder' => $formInfo['element_placeholder'][$i], 'type' => $type, 'value' => $defaultValue, 'class' => $this->getParameter( 'element_class' ) );
 			if( $formInfo['element_importance'][$i] == 'required' )
 			{
 				$elementInfo['required'] = true;
@@ -519,34 +522,34 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			$multiOptionsRecord = array();
 			if( $formInfo['element_multioptions'][$i] )
 			{
-            if ($multiOptions = Ayoola_Form_MultiOptions::getInstance()->selectOne(null, array( 'multioptions_name' => $formInfo['element_multioptions'][$i] ))) {
-                $tableDb = $multiOptions['db_table_class'];
-                if (Ayoola_Loader::loadClass($tableDb) && $tableDb::getInstance() instanceof Ayoola_Dbase_Table_Interface) {
-                    $scope = $tableDb::SCOPE_PRIVATE === $multiOptions['accessibility'] ? $tableDb::SCOPE_PRIVATE : $tableDb::SCOPE_PROTECTED;
-                    $tableDb = $tableDb::getInstance($scope);
-                    $tableDb->getDatabase()->getAdapter()->setAccessibility($scope);
-                    $tableDb->getDatabase()->getAdapter()->setRelationship($scope);
+				if ($multiOptions = Ayoola_Form_MultiOptions::getInstance()->selectOne(null, array( 'multioptions_name' => $formInfo['element_multioptions'][$i] ))) {
+					$tableDb = $multiOptions['db_table_class'];
+					if (Ayoola_Loader::loadClass($tableDb) && $tableDb::getInstance() instanceof Ayoola_Dbase_Table_Interface) {
+						$scope = $tableDb::SCOPE_PRIVATE === $multiOptions['accessibility'] ? $tableDb::SCOPE_PRIVATE : $tableDb::SCOPE_PROTECTED;
+						$tableDb = $tableDb::getInstance($scope);
+						$tableDb->getDatabase()->getAdapter()->setAccessibility($scope);
+						$tableDb->getDatabase()->getAdapter()->setRelationship($scope);
 
-                    $where = null;
-                    if (! empty($multiOptions['db_where']) && ! empty($multiOptions['db_where_value'][0])) {
-                        $where = array_combine($multiOptions['db_where'], $multiOptions['db_where_value']);
-                    }
-                    $multiOptionsRecord = $tableDb->select(null, $where);
-                    require_once 'Ayoola/Filter/SelectListArray.php';
-                    $filter = new Ayoola_Filter_SelectListArray($multiOptions['values_field'], $multiOptions['label_field']);
-                    $multiOptionsRecord = $filter->filter($multiOptionsRecord);
-                    asort($multiOptionsRecord);
+						$where = null;
+						if (! empty($multiOptions['db_where']) && ! empty($multiOptions['db_where_value'][0])) {
+							$where = array_combine($multiOptions['db_where'], $multiOptions['db_where_value']);
+						}
+						$multiOptionsRecord = $tableDb->select(null, $where);
+						require_once 'Ayoola/Filter/SelectListArray.php';
+						$filter = new Ayoola_Filter_SelectListArray($multiOptions['values_field'], $multiOptions['label_field']);
+						$multiOptionsRecord = $filter->filter($multiOptionsRecord);
+						asort($multiOptionsRecord);
 
-                    if (self::hasPriviledge(98)) {
-                        $elementInfo['onchange'] = 'ayoola.div.manageOptions( { database: "' . $multiOptions['db_table_class'] . '", values: "' . $multiOptions['values_field'] . '", labels: "' . $multiOptions['label_field'] . '", element: this } );';
-                        $multiOptionsRecord = $multiOptionsRecord + array( '__manage_options' => '[Manage Multi-Options]' );
-                    }
-                    if( strtolower( $type ) === 'select')
-                    {
-                        $multiOptionsRecord = array( '' => 'Please Select...' ) +  $multiOptionsRecord;
-                    }
-                }
-            }
+						if (self::hasPriviledge(98)) {
+							$elementInfo['onchange'] = 'ayoola.div.manageOptions( { database: "' . $multiOptions['db_table_class'] . '", values: "' . $multiOptions['values_field'] . '", labels: "' . $multiOptions['label_field'] . '", element: this } );';
+							$multiOptionsRecord = $multiOptionsRecord + array( '__manage_options' => '[Manage Multi-Options]' );
+						}
+						if( strtolower( $type ) === 'select')
+						{
+							$multiOptionsRecord = array( '' => 'Please Select...' ) +  $multiOptionsRecord;
+						}
+					}
+				}
 			}
             $fieldsets[$key]->addElement( $options + $elementInfo , $multiOptionsRecord );
             foreach( $filters as $eachFilter )
@@ -585,7 +588,6 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 		//	Add all fieldsets
 		foreach( $fieldsets as $each )
 		{
-
 			$form->addFieldset( $each );
 		}
 		$this->setForm( $form );

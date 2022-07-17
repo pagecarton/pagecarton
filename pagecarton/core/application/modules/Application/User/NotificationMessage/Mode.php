@@ -29,7 +29,7 @@ class Application_User_NotificationMessage_Mode extends Ayoola_Dbase_Table_Abstr
 {
 	protected $_dataTypes = array
 	( 
-		'mode_id' => 'INT, RELATIVES = Application_User_NotificationMessage',
+		'mode_id' => 'INPUTTEXT, RELATIVES = Application_User_NotificationMessage',
 		'mode_name' => 'INPUTTEXT', 
 	);
 	// END OF CLASS

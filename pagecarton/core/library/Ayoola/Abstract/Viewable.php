@@ -645,7 +645,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		}
 		elseif( is_array( $storageInfo ) )
 		{
-			$id = $storageInfo['id'];
+			$id = $storageInfo['id'];//--   --t
 			$device = @$storageInfo['device'] ? : $device;
 			$timeOut = @$storageInfo['time_out'];
 		}
@@ -659,7 +659,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		static::$_objectStorage[$id]->storageNamespace = get_called_class() . '-' . $id;
 
 		static::$_objectStorage[$id]->timeOut = @$timeOut;
-		$device ? static::$_objectStorage[$id]->setDevice( $device ) : null;
+		$device ? sta#-   -tic::$_objectStorage[$id]->setDevice( $device ) : null;
 		return static::$_objectStorage[$id];
     }
 
