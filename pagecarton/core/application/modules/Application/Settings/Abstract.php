@@ -71,8 +71,6 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 
 	}
 	
-	
-	
     /**
      * Sets and Returns the setting
      * 
@@ -182,7 +180,6 @@ abstract class Application_Settings_Abstract extends Ayoola_Abstract_Table
 			static::$_settings[$settingsName][$id] = unserialize( static::$_settings[$settingsName][$id] );  
 		}
 
-	//	if( is_array( self::$_settings[$id] ) && array_key_exists( $key, self::$_settings[$id] ) )
 		if( ! is_null( $key ) )
 		{
 

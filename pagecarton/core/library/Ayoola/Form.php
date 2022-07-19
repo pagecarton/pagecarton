@@ -1263,7 +1263,6 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     {
 
 		$value =  false;
-	//	if( isset( $this->fakeValues[$name] ) )
 		{
 
 		}

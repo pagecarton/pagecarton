@@ -50,6 +50,8 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 				$class = get_class( $this );
 				if( $settingsNameInfo = $settings->selectOne( null, array( 'class_name' => $class ) ) )
 				{
+					//var_export( $settings->select( null, array( 'class_name' => $class ) ) ); 
+
 					$settingsNameToUse = $settingsNameInfo['settingsname_name'];
 				}
 				else
@@ -64,8 +66,10 @@ class Application_Settings_Editor extends Application_Settings_Abstract
 			$settingsInfo = array();
 			if( @$settingsNameInfo['settingsname_id'] )
 			{
+
 				$settings = new Application_Settings();
 				$settingsInfo = $settings->selectOne( null, array( 'settingsname_id' => $settingsNameInfo['settingsname_id'] ) );
+
 				$data = $settingsNameInfo + $settingsInfo;
 			}
 			if( ! $settingsInfo )

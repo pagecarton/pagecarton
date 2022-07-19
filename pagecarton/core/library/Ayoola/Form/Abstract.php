@@ -78,6 +78,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 
 		$fieldset->addElement( array( 'name' => 'form_title', 'placeholder' => 'Enter a title...', 'type' => 'InputText', 'value' => @$values['form_title'] ) );
 		$fieldset->addRequirement( 'form_title', array( 'WordCount' => array( 3, 50 )  ) );
+
 		if( is_null( $values ) )
 		{		
 			$filter = new Ayoola_Filter_Name();
@@ -128,12 +129,12 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 
 					$newFieldSet->wrapper = 'white-background';
 
-					$newFieldSet->addElement( array( 'name' => 'element', 'type' => 'Html', 'value' => null ), array( 'html' => '<div style="padding: 1em 0 1em 0;">Field <span name="field_counter"> ' . ( $i + 1 ) . '</span></div>' ) );
-					$newFieldSet->addElement( array( 'name' => 'element_title',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Element title e.g. Full Name', 'type' => 'InputText', 'value' => @$values['element_title'][$i] ) ); 
-					$newFieldSet->addElement( array( 'name' => 'element_name',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Unique Name e.g. full_name', 'type' => 'InputText', 'value' => @$values['element_name'][$i] ) );
-					$newFieldSet->addElement( array( 'name' => 'element_default_value',  'multiple' => 'multiple', 'label' => ' ', 'style' => 'max-width: 240px;', 'placeholder' => 'Default Value e.g. John C. Smith', 'type' => 'InputText', 'value' => @$values['element_default_value'][$i] ) );
+					$newFieldSet->addElement( array( 'name' => 'element', 'type' => 'Html', 'value' => null, 'data-pc-element-whitelist-group' => 'element_info' ), array( 'html' => '<div style="padding: 1em 0 1em 0;">Field <span name="field_counter"> ' . ( $i + 1 ) . '</span></div>' ) );
+					$newFieldSet->addElement( array( 'name' => 'element_title',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Element title e.g. Full Name', 'type' => 'InputText', 'value' => @$values['element_title'][$i], 'data-pc-element-whitelist-group' => 'element_info' ) ); 
+					$newFieldSet->addElement( array( 'name' => 'element_name',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Unique Name e.g. full_name', 'type' => 'InputText', 'value' => @$values['element_name'][$i], 'data-pc-element-whitelist-group' => 'element_info') );
+					$newFieldSet->addElement( array( 'name' => 'element_default_value',  'multiple' => 'multiple', 'label' => ' ', 'style' => 'max-width: 240px;', 'placeholder' => 'Default Value e.g. John C. Smith', 'type' => 'InputText', 'value' => @$values['element_default_value'][$i], 'data-pc-element-whitelist-group' => 'element_info' ) );
 
-                    $newFieldSet->addElement( array( 'name' => 'element_placeholder',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Placeholder e.g. John Smith', 'type' => 'InputText', 'value' => @$values['element_placeholder'][$i] ) );
+                    $newFieldSet->addElement( array( 'name' => 'element_placeholder',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'placeholder' => 'Placeholder e.g. John Smith', 'type' => 'InputText', 'value' => @$values['element_placeholder'][$i], 'data-pc-element-whitelist-group' => 'element_info' ) );
                     $types = array( 
                         'text' => 'Text Input', 
                         'hidden' => 'Hidden Field', 
@@ -150,25 +151,24 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
                         'document-multiple' => 'Multiple Documents', 
                         'image' => 'Image', 
                         'image-multiple' => 'Multiple Images', 
-                    //	'profile_picture' => 'Profile Picture', 
                         'audio' => 'Audio',
                         'date' => 'Date',
                         'datetime' => 'Date & Time',
                     );
                     asort( $types );
-					$newFieldSet->addElement( array( 'name' => 'element_type',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'type' => 'Select', 'value' => @$values['element_type'][$i] ), $types );
-					$this->getGlobalValue( 'group_names' ) ? $newFieldSet->addElement( array( 'name' => 'element_group_name',  'multiple' => 'multiple', 'label' => 'Group Name (Optional)', 'type' => 'Select', 'value' => @$values['element_group_name'][$i] ), array_combine( $this->getGlobalValue( 'group_ids' ), $this->getGlobalValue( 'group_names' ) ) ) : null; 
+					$newFieldSet->addElement( array( 'name' => 'element_type',  'multiple' => 'multiple', 'label' => '  ', 'style' => 'max-width: 240px;', 'type' => 'Select', 'value' => @$values['element_type'][$i], 'data-pc-element-whitelist-group' => 'element_info' ), $types );
+					$this->getGlobalValue( 'group_names' ) ? $newFieldSet->addElement( array( 'name' => 'element_group_name',  'multiple' => 'multiple', 'label' => 'Group Name (Optional)', 'type' => 'Select', 'value' => @$values['element_group_name'][$i], 'data-pc-element-whitelist-group' => 'element_info' ), array_combine( $this->getGlobalValue( 'group_ids' ), $this->getGlobalValue( 'group_names' ) ) ) : null; 
 					
-					$newFieldSet->addElement( array( 'name' => 'element_validators', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_validators'][$i] ), $reqOptions );   
+					$newFieldSet->addElement( array( 'name' => 'element_validators', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_validators'][$i], 'data-pc-element-whitelist-group' => 'element_info' ), $reqOptions );   
 					
-					$newFieldSet->addElement( array( 'name' => 'element_multioptions', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple',  'onchange' => 'ayoola.div.manageOptions( { database: "Ayoola_Form_MultiOptions", values: "multioptions_name", labels: "multioptions_title", element: this } );', 'type' => 'Select', 'value' => @$values['element_multioptions'][$i] ), array( '' => 'No Multi-Options' ) + $multiOptions + array( '__manage_options' => '[Manage Multi-Options]' ) );    
+					$newFieldSet->addElement( array( 'name' => 'element_multioptions', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple',  'onchange' => 'ayoola.div.manageOptions( { database: "Ayoola_Form_MultiOptions", values: "multioptions_name", labels: "multioptions_title", element: this } );', 'type' => 'Select', 'value' => @$values['element_multioptions'][$i], 'data-pc-element-whitelist-group' => 'element_info' ), array( '' => 'No Multi-Options' ) + $multiOptions + array( '__manage_options' => '[Manage Multi-Options]' ) );    
 					
 					$importanceOptions = array(
 												'' => 'Optional',
 												'required' => 'Required',
 					);
 
-					$newFieldSet->addElement( array( 'name' => 'element_access_level', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_access_level'][$i] ), array( '' => 'Privacy' ) + $authLevel );   
+					$newFieldSet->addElement( array( 'name' => 'element_access_level', 'label' => '  ', 'style' => 'max-width: 240px;',  'multiple' => 'multiple', 'type' => 'Select', 'value' => @$values['element_access_level'][$i], 'data-pc-element-whitelist-group' => 'element_info' ), array( '' => 'Privacy' ) + $authLevel );   
 					$newForm->addFieldset( $newFieldSet );    
 
 					$i++;
@@ -177,7 +177,7 @@ abstract class Ayoola_Form_Abstract extends Ayoola_Abstract_Table
 
 			    //	$fieldset = new Ayoola_Form_Element;
 
-				$fieldset->addElement( array( 'name' => 'xxxx', 'type' => 'Html', 'value' => '' ), array( 'html' => '' . $newForm->view(), 'fields' => 'element_title,element_name,element_group_name,element_default_value,element_placeholder,element_type,element_validators,element_access_level,element_multioptions' ) );
+				$fieldset->addElement( array( 'name' => 'element_info', 'type' => 'Html', 'value' => '' ), array( 'html' => '' . $newForm->view(), 'fields' => 'element_title,element_name,element_group_name,element_default_value,element_placeholder,element_type,element_validators,element_access_level,element_multioptions', 'parameters' => array( 'data-pc-element-whitelist-group' => 'element_info' ) ) );
 
 			    //	$form->addFieldset( $fieldset );   
 				

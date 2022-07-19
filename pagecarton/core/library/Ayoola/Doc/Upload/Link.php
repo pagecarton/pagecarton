@@ -70,7 +70,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 				$imageUrl = Ayoola_Application::getUrlPrefix() . $plainUrl;
 			}
 
-            switch( @array_pop( explode( '.', strtolower( $imageUrl ) ) ) )
+			switch( @array_pop( explode( '.', strtolower( $imageUrl ) ) ) )
 			{
 				case 'jpg':
 				case 'jpeg':
@@ -203,15 +203,7 @@ class Ayoola_Doc_Upload_Link extends Ayoola_Doc_Upload_Abstract
 			$filter = new Ayoola_Filter_FileSize();
 			$html = '
 				<div title="' . self::__( 'This is a LIVE preview of the selected file' ) . '" style="display:block;clear:both; text-align:center;max-height:80%;" class="" >
-					<img name="' . $previewImageName . '" src="' . 
-					( ( ( ( $uri ? 
-					$uri : 
-					( is_string( $this->getParameter( 'field_name' ) ) ) ? 
-					@$this->getGlobalValue( $this->getParameter( 'field_name' ) ) : null ) ) ? : 'http://placehold.it/' . 
-					( $this->getParameter( 'width' ) ? : '300' ) . 'x' .
-					( $this->getParameter( 'height' ) ? : '300' ) . '&text=' .   
-					
-					( 'Preview' ) . '' ) ) . '"  class="" onClick="" style="max-height:50vh;"  > 
+					<img name="' . $previewImageName . '" src="' . $uri . '"  class="" onClick="" style="max-height:50vh;"  > 
 					<div style="margin:1em; font-size:x-small;">
 						' . ( is_file( $path ) ? ( '
 						' . self::__( 'FILE URL' ) . ': <a target="_blank" href="' . ( $imageUrl ) . '">' .  $plainUrl . '</a><br>
