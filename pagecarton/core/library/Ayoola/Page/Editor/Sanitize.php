@@ -239,7 +239,9 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 			return false;
 		}
         self::$_refreshed[$id] = true;
-        //var_export( $page );
+
+
+        //var_export( $page );  
 
         if( in_array( $page, self::$defaultPages ) 
             
