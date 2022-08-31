@@ -444,7 +444,13 @@ if (
             if (is_writable($_SERVER['SCRIPT_FILENAME'])) {
                 //    if( $f = @fopen( $remoteSite . '/pc_installer.php?do_not_highlight_file=1', 'r' ) )
                 if ($f = fetchLink($remoteSite . '/pc_installer.php?do_not_highlight_file=1')) {
-                    file_put_contents('pc_installer.php', $f);
+
+                    //  sometimes, there is an error
+                    //  make sure the refreshed file is not html
+                    if( stripos( $f, '<?php' ) !== false )
+                    {
+                        file_put_contents('pc_installer.php', $f);
+                    }
                 }
             } else {
                 //    Upgrade no longer required to cater for offline installers
