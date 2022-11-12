@@ -943,6 +943,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$myLevel = intval( Ayoola_Application::getUserInfo( 'access_level' ) );
 
 		$username = trim( strtolower( Ayoola_Application::getUserInfo( 'username' ) ) );
+        
 		if(
 			( $myLevel === 99 && ! @$options['strict'] ) // Super user except if its strict
 		|| ( in_array( 98, $allowedLevels ) && $username && $username === strtolower( @Ayoola_Application::$GLOBAL['domain']['user']['username'] )  && ! @$options['strict'] ) //	Profile owner means he is authorized

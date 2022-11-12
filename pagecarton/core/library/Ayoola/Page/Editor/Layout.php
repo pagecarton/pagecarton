@@ -365,19 +365,28 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      */
     public static function getDefaultLayout()   
     {
-        if( ! empty( self::$_defaultLayout ) )
+
+		//	setting wrong layout for subsites
+        //if( ! empty( self::$_defaultLayout ) )
         {
-            return self::$_defaultLayout;
+            //return self::$_defaultLayout;
         }
-        self::$_defaultLayout = 'pc_layout_miniblog';
-		if( $defaultLayout = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) )     
+		
+        $coreDefault = 'pc_layout_miniblog';
+		$defaultLayout = $coreDefault;
+		if( $layoutName = Application_Settings_Abstract::getSettings( 'Page', 'default_layout' ) )     
 		{
-			if( Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $defaultLayout ) ) )
+			if( Ayoola_Page_PageLayout::getInstance()->selectOne( null, array( 'layout_name' => $layoutName ) ) )
 			{
-                self::$_defaultLayout = $defaultLayout;
+                //self::$_defaultLayout = $defaultLayout;
+				$defaultLayout = $layoutName;
+				return $defaultLayout;
+
 			}
 		}
-		return self::$_defaultLayout;
+		//var_export( $layoutName );
+
+		return $defaultLayout;
 	}
 
     /**

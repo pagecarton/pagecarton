@@ -38,20 +38,7 @@ class Application_Wallet_Editor extends Application_Wallet_Abstract
 		{ 
             if( ! $data = self::getIdentifierData() OR empty( $data['user_information'] ) ){ return false; }
             $data = $data['user_information'];
-/* 			if( empty( $data['username'] ) )
-			{
-				$data['username'] = $this->getIdentifier( 'username' );
-				
-				//	Check the user
-				$class = new Application_User_Editor();
-				$class->setIdentifier( array( 'username' => $data['username'] ) );
-				$userInfo = $class->getIdentifierData();
-				
-				//	Populate the Ayoola_Access_AccessInformation
-				$this->getDbTable()->insert( $userInfo );
-			}
- */		//	var_export( $data );
-		//	var_export(  );
+
 			$this->createForm( 'Update', 'Update wallet balance for ' . ( @$data['username'] ? : $this->getIdentifier( 'username' ) ), $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
