@@ -288,22 +288,23 @@ if (
             try
             {
                 $backup = new $phar($filename);
+
+                try
+                {
+                    $backup->extractTo(APPLICATION_DIR, null, true);
+                }
+                catch( Exception $e )
+                {
+                    $badnews = 'Unable to extract the installer file - ' . $e->getMessage();
+                    unlink( $filename );
+                }
+        
             }
             catch( Exception $e )
             {
                 $badnews = 'There is an error with the installer file - ' . $e->getMessage();
                 unlink( $filename );
             }
-            try
-            {
-                $backup->extractTo(APPLICATION_DIR, null, true);
-            }
-            catch( Exception $e )
-            {
-                $badnews = 'Unable to extract the installer file - ' . $e->getMessage();
-                unlink( $filename );
-            }
-
             //    return preserved data
             //    ini_set('max_execution_time', 200*60);
             foreach ($preserveList as $eachDir) {
