@@ -297,6 +297,7 @@ if (
                 {
                     $badnews = 'Unable to extract the installer file - ' . $e->getMessage();
                     unlink( $filename );
+                    break;
                 }
         
             }
@@ -304,6 +305,8 @@ if (
             {
                 $badnews = 'There is an error with the installer file - ' . $e->getMessage();
                 unlink( $filename );
+                break;
+
             }
             //    return preserved data
             //    ini_set('max_execution_time', 200*60);
