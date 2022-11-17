@@ -70,7 +70,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 
             $userInfo = Ayoola_Application::getUserInfo();
 
-            $this->createForm( null, null , $userInfo );
+            $this->createForm( null, null , $userInfo ? : null );
 
             //	Record in the orders table
             $notes = Application_Settings_Abstract::getSettings( 'Payments', 'order_notes' );
