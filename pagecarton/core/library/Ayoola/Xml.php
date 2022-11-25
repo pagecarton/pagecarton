@@ -77,7 +77,7 @@ class Ayoola_Xml extends DOMDocument
      * @param string
      * 
      */
-    public function __construct( $xml = null, $version = '1.0', $encoding = 'utf-8' )
+    public function __construct( $xml = '' ?? 'default', $version = '1.0', $encoding = 'utf-8' )
     {
 		parent::__construct( $version, $encoding );
 		$this->formatOutput = true;
@@ -231,7 +231,7 @@ class Ayoola_Xml extends DOMDocument
      * @param int Options
      * @return int No of Bytes written
      */
-    public function save( $filename = null, $options = null )
+    public function save( $filename, $options = 0 ) : int|false
     {
 		//throw new Exception;
 		$filename = $filename ? : $this->getFilename();

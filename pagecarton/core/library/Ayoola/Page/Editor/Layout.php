@@ -1186,7 +1186,16 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			Ayoola_File::putContents( $rPaths['include'], $content['include'] );
 			Ayoola_File::putContents( $rPaths['template'], $content['template'] );				
 
-			if( $previousData = @file_get_contents( $rPaths['data_json'] ) )  
+			if ( empty( $rPaths['data_json'] ) || ! is_string( $rPaths['data_json'] ) )
+			{
+				$getFilePath = 'default';
+			}
+			else
+			{
+				$getFilePath = $rPaths['data_json'];
+			}
+
+			if( $previousData = @file_get_contents( $getFilePath  ) )  
 			{
 				//	now saving current data instead of previous data
 

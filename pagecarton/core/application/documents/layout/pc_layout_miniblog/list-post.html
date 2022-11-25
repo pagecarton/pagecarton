@@ -1,13 +1,14 @@
-<div class="site-section bg-white">
-    <div class="container">
-        <widget parameters='{ "class": "Application_Article_ShowAll", "add_a_new_post": 9, "length_of_description": 200, "pc_module_url_values_category_offset": 0, "pc_module_url_values_request_fallback": true, "allow_dynamic_category_selection": true }'>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html>
+<head></head>
+<body data-pc-section-name="body"><div class="site-section bg-white" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
+    <div class="container" data-pc-section-autonamed="2" data-pc-section-name="pc-body-2">
+        <widget parameters='{ "class": "Application_Article_ShowAll", "add_a_new_post": 9, "length_of_description": 200, "pc_module_url_values_category_offset": 0, "pc_module_url_values_request_fallback": true, "allow_dynamic_category_selection": true }' data-pc-section-autonamed="3" data-pc-section-name="pc-body-3">
             <div class="row">
                 <repeat>
                     <div class="col-lg-4 mb-4">
                         <div class="entry2">
-                            <a href="{{{post_link}}}"><img
-                                    src="{{{document_url_uri}}}?crop_to_fit_url=/layout/pc_layout_miniblog/images/img_1.jpg"
-                                    alt="Image" class="img-fluid rounded"></a>
+                            <a href="{{{post_link}}}"><img src="{{{document_url_uri}}}?crop_to_fit_url=/layout/pc_layout_miniblog/images/img_1.jpg" alt="Image" class="img-fluid rounded"></a>
                             <div class="excerpt">
                                 <data-category_name>
                                     <span class="post-category text-white bg-secondary mb-3">
@@ -17,9 +18,7 @@
 
                                 <h2><a href="{{{post_link}}}">{{{article_title}}}</a></h2>
                                 <div class="post-meta align-items-center text-left clearfix">
-                                    <figure class="author-figure mb-0 mr-3 float-left"><img
-                                            src="/layout/pc_layout_miniblog/images/person_1.jpg?embed_image_url={{{display_picture}}}"
-                                            alt="Image" class="img-fluid"></figure><span class="d-inline-block mt-1">By
+                                    <figure class="author-figure mb-0 mr-3 float-left"><img src="/layout/pc_layout_miniblog/images/person_1.jpg?embed_image_url={{{display_picture}}}" alt="Image" class="img-fluid"></figure><span class="d-inline-block mt-1">By
                                         <a href="/{{{profile_url}}}">{{{display_name}}}</a></span>
                                     <span>{{{article_date_M}}} {{{article_date_d}}}, {{{article_date_Y}}}</span>
                                 </div>
@@ -32,6 +31,12 @@
                 </repeat>
                 {{{pc_other_posts_goes_here}}}
             </div>
+
+
+
+
+
+
             <div class="row text-center pt-5 border-top">
                 <div class="col-md-12">
                     <div class="custom-pagination">
@@ -49,6 +54,13 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+
+
         </widget>
     </div>
-</div>
+</div></body>
+</html>

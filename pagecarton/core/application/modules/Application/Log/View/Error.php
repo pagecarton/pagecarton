@@ -41,7 +41,7 @@ class Application_Log_View_Error extends Application_Log_View_Abstract
      */
 	public static function log( $message )
 	{
-		//var_export( $message );
+		var_export( $message );
 		$log = array( 'error_message' => $message, 'error_time' => time() );
 		$mailInfo["subject"] = "Application Error";
 		$mailInfo["body"] = $message;

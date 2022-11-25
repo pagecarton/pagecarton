@@ -199,6 +199,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     public static function embedWidget( $content, $baseParameters, & $classes = array() )
     {
         //  making it count up to 10 times solves problem of some of the matches not found due to recursion limit set at 524
+		$count = '';
         while( stripos( $content, '</widget>' ) && $count < 10  )
         {
             // this was causing issue in a server
@@ -359,7 +360,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	public static function filterParameters( & $parameters )
     {
 		$content = $parameters['codes'] ? : ( $parameters['editable'] ? : $parameters['view'] );
-		if( ( @in_array( 'preserve_content', $parameters['widget_options'] ) || @in_array( 'preserve_content', $parameters['text_widget_options'] ) ) && $parameters['preserved_content'] )
+		$widgetOptions = (! is_array($parameters['widget_options']) ) ? array() : $parameters['widget_options'];
+		$textWidgetOption =(! is_array($parameters['text_widget_options'])) ? array() : $parameters['text_widget_options'];
+		if( 
+			( @in_array( 'preserve_content', $widgetOptions ) || 
+			@in_array( 'preserve_content', $textWidgetOption ) ) && 
+			$parameters['preserved_content'] )
 		{
 			@$content = $parameters['codes'] ? : $parameters['preserved_content'];
         }
@@ -527,8 +533,24 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		//	codes first because it wont be there if they didnt opt to enter codes
         if( ! $content = $this->getParameter( 'content' ) )
         {
+			if( ! is_array($this->getParameter( 'widget_options' )) )
+			{
+				$getParameterWidgetOption = array();
+			}
+			else
+			{
+				$getParameterWidgetOption = $this->getParameter( 'widget_options' );
+			}
+			if( ! is_array($this->getParameter( 'text_widget_options' )) )
+			{
+				$getParameterTextWidgetOption = array();
+			}
+			else
+			{
+				$getParameterTextWidgetOption = $this->getParameter( 'text_widget_options' );
+			}
             $content = $this->getParameter( 'codes' ) ? : ( $this->getParameter( 'editable' ) ? : $this->getParameter( 'view' ) );
-            if( ( @in_array( 'preserve_content', $this->getParameter( 'widget_options' ) ) || @in_array( 'preserve_content', $this->getParameter( 'text_widget_options' ) ) ) && $this->getParameter( 'preserved_content' ) )
+            if( ( @in_array( 'preserve_content', $getParameterWidgetOption ) || @in_array( 'preserve_content', $getParameterTextWidgetOption ) ) && $this->getParameter( 'preserved_content' ) )
             {
                 @$content = $this->getParameter( 'codes' ) ? : $this->getParameter( 'preserved_content' );
             }
@@ -825,6 +847,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 		}
 		elseif( @$object['codes']  )
 		{
+			$hiddenStyle = '';
 			$html .= '<textarea rows="5" class="xpc_page_object_specific_item" data-parameter_name="codes" style="' . $hiddenStyle . 'width:100%; background-color:inherit; color:inherit;" title="' . self::__( 'You may click to edit the content here...' ) . '" >' . htmlspecialchars( @$object['codes'] ? : $object['editable'] ) . '</textarea>';     
 		}
 		$html .= '<textarea class="" data-parameter_name="preserved_content" style="display:none;" title="" >' . htmlspecialchars( @$object['editable'] ) . '</textarea>';     

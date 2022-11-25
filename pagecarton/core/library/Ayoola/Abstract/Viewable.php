@@ -1100,6 +1100,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	public static function __( $string )
     {
         $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
+		if( ! is_array( $options ) )
+		{
+			$options = array(); 
+		}
+	
         if( ! self::getLocale() && ! @in_array( 'auto_translate', $options ) )
 		{
 			//	was slowing down app
@@ -2172,7 +2177,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 //	don't return empty tags
                 return false;
             }
-            if( $options && ! is_array( $options ) )
+            if( ! is_array( $options ) )
             {
                 $ix = $options;
                 $options = array();

@@ -1278,7 +1278,13 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		else
 		{
 			//	compatibility
-			$previousContent = @file_get_contents( $this->getMyFilename() );
+			$filenameX = $this->getMyFilename();
+			if( empty( $filenameX ) || ! is_string( $filenameX ) )
+			{
+				return null;
+			}
+
+			$previousContent = @file_get_contents( $filenameX );
 
 			
 			//	Strip the php content from it.

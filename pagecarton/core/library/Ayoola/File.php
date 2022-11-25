@@ -95,7 +95,7 @@ class Ayoola_File
      * @param string Path to Directory
      * @return null
      */
-    public function setDirectory( $dir = null )
+    public function setDirectory( $dir = '' ?? 'default' )
 	{
 		$this->_directory = $dir;
 		if( ! is_dir( $dir ) )
