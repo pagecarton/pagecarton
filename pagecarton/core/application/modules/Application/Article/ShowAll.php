@@ -859,7 +859,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		$i = 0; //	counter
 		$j = 6; //	6 is our max articles to show
-		if( intval( $this->getParameter( 'add_a_new_post' ) ) > 1 )
+		if( intval( $this->getParameter( 'add_a_new_post' ) ) > 0 )
 		{
 			$j = $this->getParameter( 'add_a_new_post' );
 		}

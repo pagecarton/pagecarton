@@ -45,7 +45,7 @@
                             <widget parameters='{ "class": "Ayoola_Menu" }'>
                                 <li><a href="{{{url}}}">{{{option_name}}}</a></li>
                             </widget>
-                            <widget parameters='{ "class": "Application_Category_ShowAll", "category_page": "/category", "add_a_new_post": 3, "url_integration_type": "pc_module_url_values_offset", "content_to_clear": ["()"] }'>
+                            <widget parameters='{ "class": "Application_Category_ShowAll", "category_page": "/category", "add_a_new_post": 1, "no_of_post_to_show": 3, "url_integration_type": "pc_module_url_values_offset", "content_to_clear": ["()"] }'>
                                 <li><a href="{{{post_link}}}">{{{article_title}}} ({{{total_no_of_posts}}})</a></li> 
                             </widget>
                             <li class="d-none d-lg-inline-block"><a href="#" class="js-search-toggle"><span class="icon-search">&nbsp;</span></a></li>

@@ -176,10 +176,10 @@ class Application_Personalization extends Ayoola_Abstract_Table
 			$this->setViewContent
 			( 
 				'<ul>
-					<li>Try <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/PageCarton_NewSiteWizard/">Simple Web Builder</a> (Recommended)</li>
-					<li>Go to <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/">Home Page</a> - ' . Ayoola_Page::getCanonicalUrl( '/' ) .  '</li>
-					<li>Go to <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/pc-admin">PageCarton Admin  Panel</a> - ' . Ayoola_Page::getCanonicalUrl( '/pc-admin' ) .  '</li>
-					<li>Study <a target="_blank" href="http://docs.pagecarton.org">PageCarton Documentation</a> - http://docs.pagecarton.org</li>
+					<li>Try <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/PageCarton_NewSiteWizard/">Simple Web Builder - an Easy way to Build a Website</a>  (Recommended)</li>
+					<li>Go to <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/">Home Page</a> - <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/">' . Ayoola_Page::getCanonicalUrl( '/' ) .  '</a></li>
+					<li>Go to <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/pc-admin">PageCarton Admin  Panel</a> - <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/pc-admin">' . Ayoola_Page::getCanonicalUrl( '/pc-admin' ) .  ',/a></li>
+					<li>Study <a target="_blank" href="http://docs.pagecarton.org">PageCarton Documentation</a> - <a target="_blank" href="http://docs.pagecarton.org">http://docs.pagecarton.org</a></li>
 				</ul>' 
 			); 
 
@@ -237,8 +237,6 @@ class Application_Personalization extends Ayoola_Abstract_Table
 				$each = new $each( $parameters['parameters'] );
 				if( ! method_exists( $each, 'createForm' ) ){ continue; }
 				$fieldsets = $each->getForm()->getFieldsets();
-			//	var_export( count( $fieldsets ) );
-			//	var_export( $fieldsets );
 				foreach( $fieldsets as $fieldset )
 				{
 					$parameters['legend'] ? 
