@@ -1,0 +1,13 @@
+version: "1"
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.development
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www
+      - ./pagecarton/core/local_html:/var/www/html
+    environment:
+      - APP_KEY=SomeRandomStringToAddSecurity123
