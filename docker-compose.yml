@@ -1,6 +1,8 @@
-version: "1"
+version: "2"
 services:
   webapp:
+    container_name: pagecarton
+    image: pagecarton
     build:
       context: .
       dockerfile: ./Dockerfile.development

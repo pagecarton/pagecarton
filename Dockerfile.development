@@ -4,6 +4,7 @@ FROM php:7.4-apache
 
 # Setup Apache2 config
 #COPY 000-default.conf /etc/apache2/sites-available/000-default.conf
+
 RUN a2enmod rewrite
 
 RUN apt-get update -y && apt-get install -y libpng-dev libzip-dev
@@ -11,5 +12,7 @@ RUN apt-get update -y && apt-get install -y libpng-dev libzip-dev
 RUN docker-php-ext-install zip
 
 RUN docker-php-ext-install gd
+
+COPY pagecarton.php.ini /usr/local/etc/php/conf.d/pagecarton.php.ini
 
 CMD ["apache2-foreground"]

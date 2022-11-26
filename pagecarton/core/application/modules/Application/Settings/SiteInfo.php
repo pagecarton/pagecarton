@@ -114,7 +114,7 @@ class Application_Settings_SiteInfo extends Application_Settings_Abstract
 
         $options = Ayoola_Page_Layout_Repository::getMenuOptions();
 		$fieldset->addElement( array( 'name' => 'site_type', 'label' => 'Theme Type', 'value' => @$settings['site_type'], 'type' => 'Select' ), array( '' => 'Generic' ) + array_column( $options, 'title', 'category_name' ) ? : array() );
-		$fieldset->addLegend( 'Site Information' );  
+		$fieldset->addLegend( 'Setup Site Information' );  
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
     } 

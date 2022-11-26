@@ -99,6 +99,12 @@ class Application_User_AdminCreator extends Application_User_Creator
 			return false;
 		}
 
+		if( $this->getParameter( 'new_site_setup' ) )
+		{
+			header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/personalize' );
+			exit();
+		}
+
 		$this->createForm( '' . self::__( 'Create admin account' ) . '' );
  		$this->setViewContent( $this->getForm()->view() );
 		
