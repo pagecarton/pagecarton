@@ -199,6 +199,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     public static function embedWidget( $content, $baseParameters, & $classes = array() )
     {
         //  making it count up to 10 times solves problem of some of the matches not found due to recursion limit set at 524
+		$count = 1;
         while( stripos( $content, '</widget>' ) && $count < 10  )
         {
             // this was causing issue in a server

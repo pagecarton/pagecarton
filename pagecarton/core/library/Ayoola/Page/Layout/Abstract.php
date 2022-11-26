@@ -330,13 +330,26 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				$globalFile = Ayoola_Loader::checkFile( $pageFileX );
 
 				//var_export( $globalFile );
+				if( $globalFile  !== $pageFile )
+                {
+					//	do this only for my own files
+					break;
+				}
 
                 if( ! is_file( $globalFile ) )
                 {
 					continue;
 				}
-				
+
 				$cContent = file_get_contents( $globalFile );
+	
+				if( stripos( $cContent, '</html>' ) === false )
+				{
+					//	skip widget include files
+					//	or any other files that are not full html files
+					continue;
+				}
+
 				$sContent = $xContent = self::sanitizeTemplateFile( $cContent, $values + array( 'lite' => true ) );
 
 				$matches = Ayoola_Page_Layout_Abstract::getThemeFilePlaceholders( $sContent );
