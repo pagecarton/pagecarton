@@ -285,6 +285,16 @@ class Ayoola_Application
      */
 	public static function checkIfSameApp( $url )
     {
+        $storage = new Ayoola_Storage();
+		$storage->storageNamespace = __CLASS__  . 'url_prefix-x-y' . Ayoola_Application::getPathPrefix();
+		$storage->setDevice( 'File' );
+		$response = $storage->retrieve();
+
+ 		if( $response && isset( $response['result'] ) )
+		{
+ 			return $response['result'];
+        }
+
         $checkFile = 'pc_check.txt';
         if( ! is_file( $checkFile ) || file_get_contents( $checkFile ) - filemtime( $checkFile ) > 5 )
         {
@@ -292,10 +302,15 @@ class Ayoola_Application
         }
 
         $result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) );
+
+
         if( $result >= filemtime( $checkFile ) && $result - filemtime( $checkFile ) < 5 )
         {
+            $storage->store( array( 'result' => true ) );
             return true;
         }
+
+        $storage->store( array( 'result' => false ) );
         return false;
 	}
 
