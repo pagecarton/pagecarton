@@ -301,7 +301,10 @@ class Ayoola_Application
             file_put_contents( $checkFile, time() );
         }
 
-        $result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) );
+        //$result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) );
+
+        //  why do we need verify_ssl here?
+        $result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1' ) );
 
 
         if( $result >= filemtime( $checkFile ) && $result - filemtime( $checkFile ) < 5 )
