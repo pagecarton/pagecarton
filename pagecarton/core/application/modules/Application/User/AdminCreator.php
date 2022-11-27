@@ -39,7 +39,7 @@ class Application_User_AdminCreator extends Application_User_Creator
      *
      * 
      */
-    protected static function checkInstallStatus()
+    public static function isNewInstall()
     {
 		$table = new PageCarton_MultiSite_Table();
 		if( $response = $table->selectOne( null, array( 'directory' => Ayoola_Application::getPathPrefix() ) ) )
@@ -94,7 +94,7 @@ class Application_User_AdminCreator extends Application_User_Creator
     protected function init()
     {
 
-		if( ! self::checkInstallStatus() )
+		if( ! self::isNewInstall() )
 		{
 			return false;
 		}
@@ -180,7 +180,7 @@ class Application_User_AdminCreator extends Application_User_Creator
 		$form = new Ayoola_Form( 'name=>' . $this->getObjectName() );
 		$this->setForm( $form );
 		
-		if( ! self::checkInstallStatus() )
+		if( ! self::isNewInstall() )
 		{
 			return false;
 		}
