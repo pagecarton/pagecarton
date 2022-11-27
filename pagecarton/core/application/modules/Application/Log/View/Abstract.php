@@ -45,7 +45,6 @@ abstract class Application_Log_View_Abstract implements Application_Log_View_Int
     /**
      * DB Table where log goes to
      * 
-     * @var string
      */
 	protected static $_logTable;
 		
@@ -62,8 +61,6 @@ abstract class Application_Log_View_Abstract implements Application_Log_View_Int
 			if( ! $class = Ayoola_Loader::loadClass( static::$_logTable ) ){ throw new Application_Log_View_Exception( $errorMessage ); }
             $table = static::$_logTable;
 			static::$_logTable = $table::getInstance();
-//		exit( var_export( __LINE__ ) );
-//		var_export( static::$_logTable );
 			if( ! static::$_logTable instanceof Ayoola_Dbase_Table_Interface ){ throw new Application_Log_View_Exception( $errorMessage ); }
 		}
 		return static::$_logTable;
