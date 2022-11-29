@@ -1518,13 +1518,21 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_dbData = $data;
 			return true;
         }
+		if( ! is_array($_REQUEST['pc_module_url_values']) )
+		{
+			$pcModuleUrlValue = array();
+		}
+		else
+		{
+			$pcModuleUrlValue = $_REQUEST['pc_module_url_values'];
+		}
         if( $this->getParameter( $this->getIdColumn() ) && is_array( $this->getParameter( $this->getIdColumn() ) ) )
 		{
             $this->_dbData = $this->getParameter( $this->getIdColumn() );
             return false;
 		}
 
-        if( is_numeric( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_post_type_offset' ), $_REQUEST['pc_module_url_values'] ) )
+        if( is_numeric( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_post_type_offset' ), $pcModuleUrlValue ) )
         {
             $postType = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_post_type_offset' ) )];
         }
@@ -1532,7 +1540,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
         {
             @$postType = $_REQUEST['article_type'] ? : $_REQUEST['post_type'];  
         }
-        if( is_numeric( $this->getParameter( 'pc_module_url_values_category_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_category_offset' ), $_REQUEST['pc_module_url_values'] ) )
+        if( is_numeric( $this->getParameter( 'pc_module_url_values_category_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_category_offset' ), $pcModuleUrlValue ) )
         {
             $categoryId = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_category_offset' ) )];
             if( $categoryId == 'category' )

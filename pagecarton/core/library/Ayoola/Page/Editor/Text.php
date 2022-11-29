@@ -360,8 +360,23 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	public static function filterParameters( & $parameters )
     {
 		$content = $parameters['codes'] ? : ( $parameters['editable'] ? : $parameters['view'] );
-		$widgetOptions = (! is_array($parameters['widget_options']) ) ? array() : $parameters['widget_options'];
-		$textWidgetOption =(! is_array($parameters['text_widget_options'])) ? array() : $parameters['text_widget_options'];
+		if(! is_array($parameters['widget_options']) )
+		{
+			$widgetOptions = array();
+		}
+		else
+		{
+			$widgetOptions = $parameters['widget_options'];
+		}
+		if (! is_array($parameters['text_widget_options']))
+		{
+			$textWidgetOption = array();
+		}
+		else
+		{
+			$textWidgetOption = $parameters['text_widget_options'];
+		}
+		
 		if( 
 			( @in_array( 'preserve_content', $widgetOptions ) || 
 			@in_array( 'preserve_content', $textWidgetOption ) ) && 
@@ -637,7 +652,23 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 	{
 
 		$html = null;
-		if( ( @in_array( 'embed_widgets', $object['widget_options'] ) || @in_array( 'embed_widgets', $object['text_widget_options'] ) ) || @$object['markup_template_object_name'] )
+		if( ! is_array($object['widget_options']) )
+		{
+			$widgetOptionObject = array();
+		}
+		else
+		{
+			$widgetOptionObject =  $object['widget_options'];
+		}
+		if( ! is_array($object['text_widget_options']) )
+		{
+			$textWidgetOption = array();
+		}
+		else
+		{
+			$textWidgetOption = $object['text_widget_options'];
+		}
+		if( ( @in_array( 'embed_widgets', $widgetOptionObject ) || @in_array( 'embed_widgets', $textWidgetOption ) ) || @$object['markup_template_object_name'] )
 		{
 			$object['markup_template_object_name'] = (array) $object['markup_template_object_name'];
 			$widgets = Ayoola_Object_Embed::getWidgets();
@@ -787,7 +818,23 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 										);    
 		$html = null;
 
-		if( ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
+		if( ! is_array($object['widget_options']) )
+            {
+                $widgetOptionsX = array();
+            }
+            else
+            {
+                $widgetOptionsX = $object['widget_options'];
+            }
+			if( ! is_array($object['text_widget_options']) )
+			{
+				$textWidgetOptionX = array();
+			}
+			else
+			{
+				$textWidgetOptionX = $object['text_widget_options']; 
+			}
+		if( ( @in_array( 'preserve_content', $widgetOptionsX ) || @in_array( 'preserve_content', $textWidgetOptionX ) ) )
 		{
 			@$object['editable'] = $object['preserved_content'] ? : ( $object['codes'] ? : $object['editable'] );
 		}
