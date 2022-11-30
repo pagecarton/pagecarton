@@ -2417,7 +2417,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			break;
 			case static::PLAY_MODE_JSON:
 				error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
-				ini_set( 'display_errors', "0" );
+				ini_set( 'display_errors', "1" );
 				if( @$_POST['PAGECARTON_RESPONSE_WHITELIST'] )
 				{
 

@@ -95,16 +95,12 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                 $filter = new Ayoola_Filter_ClassToFilename();
 				$classFile = $filter->filter( $class );
 				$classFile = Ayoola_Loader::getFullPath( $classFile );
-			//	var_export( $classFile );
 				$fileContent = file_get_contents( $classFile );
                 $link = '/widgets/' . $class;
                 Ayoola_Application::setRuntimeSettings( 'real_url', $link );
-            //    var_export( $output[2] );
 
                 //  set words set right
                 preg_match_all( "|self::__\( ?'([^:>']*)' ?\)|", $fileContent, $output );
-            //    var_export( $output[1] );
-            //    exit();
                 foreach( $output[1] as $phrase )
                 {
 
@@ -143,13 +139,29 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                 
                 )
                 {
-                    $class::viewInLine( array( 'play_mode' => static::PLAY_MODE_HTML ) );
+                    if( ! empty( $_SESSION[$classFile] ) )
+                    {
+                        continue;
+                    }
+                    try
+                    {
+                        $class::viewInLine( array( 'play_mode' => static::PLAY_MODE_HTML ) );
+                        $_SESSION[$classFile] = true;    
+                    }
+                    catch( Error $e )
+                    { 
+                        //  Alert! Clear the all other content and display whats below.
+                        
+                        $this->setViewContent( self::__( '<p class="badnews">' . $classFile . ' - '.$e->getMessage() . $e->getTraceAsString() . '</p>' ) );
+                        $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
+                        //return false; 
+                    }
+            
                 }
                 $this->setViewContent( '<li class=""><a target="_blank" href="' . Ayoola_Page::getHomePageUrl() . $link . '">' . $class . '</a>  widget viewed successfully</li>' );
             }
             Ayoola_Application::setRuntimeSettings( 'real_url', $currentUrl );
 
-        //    var_export( $pages );
             
 
              // end of widget process
@@ -158,7 +170,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-            $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
+            $this->setViewContent( ( '<p class="badnews">' . $e->getMessage() . $e->getTraceAsString() . '</p>' ) ); 
             $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }

@@ -68,7 +68,12 @@ class PageCarton_Locale_Abstract extends PageCarton_Widget
         $fieldset->addElement( array( 'name' => 'locale_name', 'type' => 'InputText', 'placeholder' => 'e.g. Yoruba', 'value' => @$values['locale_name'] ) ); 
         $fieldset->addElement( array( 'name' => 'native_name', 'type' => 'InputText', 'placeholder' => 'e.g. Yorùbá', 'value' => @$values['native_name'] ) ); 
 
-        $options = ResourceBundle::getLocales( '' );
+        $options = array();
+        if( class_exists( 'ResourceBundle') )
+        {
+            $options = ResourceBundle::getLocales( '' );
+        }
+
         $options = array_combine( $options, $options );
         $fieldset->addElement( array( 'name' => 'locale_code',  'onchange' => 'ayoola.div.manageOptions( { database: "", listWidget: "", values: "", labels: "", element: this } );', 'type' => 'Select', 'value' => @$values['locale_code'] ), array( '' => 'Please Select' ) + $options + array( '__custom' => '[Custom Locale Code]' ) ); 
 

@@ -142,17 +142,19 @@ class Ayoola_Dbase_Adapter_Mysql extends Ayoola_Dbase_Adapter_Abstract
 	{
 		$query = (string) $query;
 		$this->_lastQuery = $query;
-	//	print( $query );
-	//	print( $query );  
-		$result = mysqli_query( $this->getLink(), $query );
+    
+        $result = false;
+        if( function_exists( 'mysqli_query') )
+        {
+            $result = mysqli_query( $this->getLink(), $query );
+        }
+
 		$this->_lastResult = $result;
 		if( $result )
 		{
 			$this->_lastResult = $result;
 			return $result;
 		}
-	//	print( mysqli_error( $this->getLink() ) ); 
-	//	print( $query ); 
 		require_once 'Ayoola/Dbase/Adapter/Exception.php';    
 		throw new Ayoola_Dbase_Adapter_Exception( 'DATABASE QUERY IS NOT SUCCESSFUL' );
 	}
