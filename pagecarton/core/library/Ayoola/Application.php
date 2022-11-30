@@ -1185,6 +1185,9 @@ class Ayoola_Application
                 $module = '/' . $nameForModule;
 
             }
+
+            $moduleInfo = Ayoola_Page::getInfo( $module );
+
             if( ! is_array($moduleInfo['page_options']) )
             {
                 $inforPageOptions = array();
@@ -1193,7 +1196,7 @@ class Ayoola_Application
             {
                 $inforPageOptions = $moduleInfo['page_options'];
             }
-            $moduleInfo = Ayoola_Page::getInfo( $module );
+
             if( ( ! empty( $moduleInfo ) && @in_array( 'module', $inforPageOptions ) ) || $module === '/article' )
             {
                 $url = $module;
@@ -2269,11 +2272,17 @@ class Ayoola_Application
             //$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt?pc_clean_url_check=1';
             $url = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix();
 
+            //var_export( $url );
+
     		//$response = PageCarton_Widget::fetchLink( $urlToLocalInstallerFile );
             $response = self::checkIfSameApp( $url );
 
+            //var_export( $response );
+
  			$storage->store( $response );
         }
+
+        //var_export( $_SERVER['PATH_INFO'] );
 
 		if( $response )
 		{
@@ -2281,7 +2290,12 @@ class Ayoola_Application
             //  causing index.php to appear
 		    self::$_urlPrefix .= Ayoola_Application::getPathPrefix();
 		}
-		elseif( isset( $_SERVER['PATH_INFO'] ) && $_SERVER['PATH_INFO'] != '/' )
+        //  need to remove && $_SERVER['PATH_INFO'] != '/' 
+        //  becauase for some reasons, it is not allow us to have something like 
+        //  /index.php/layout/pc_layout_bookkeeping/fonts/icomoon/style.css in home page
+        //  in systems without mod_rewrite
+		//elseif( isset( $_SERVER['PATH_INFO'] ) && $_SERVER['PATH_INFO'] != '/' )
+		elseif( isset( $_SERVER['PATH_INFO'] ) )
 		{
 			self::$_urlPrefix .= $_SERVER['SCRIPT_NAME'];
 		}
