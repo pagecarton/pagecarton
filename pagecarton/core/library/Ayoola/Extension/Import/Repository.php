@@ -316,7 +316,10 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
                }
 
                 $data[$each['category_name']] = array(
-                    'url' => '?category=' . $each['category_name'] . '&' . http_build_query( $_REQUEST ) . '',
+                    //  removed below because it was showing wrong object_name in query strings
+                    //  do not know why
+                    //'url' => '?category=' . $each['category_name'] . '&' . http_build_query( $_REQUEST ) . '',
+                    'url' => '?category=' . $each['category_name'] . '',
                     'option_name' => $each['article_title'],
                     'title' => $each['article_title'],
                    
