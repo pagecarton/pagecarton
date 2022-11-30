@@ -170,7 +170,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				}
 				
 				//	We now have the chance to suggest URL if we are admin
-			//	$url = $_POST['suggested_url'];
 				$url = '';
 				$dir .= $url;
                 $path = $dir . $_POST['suggested_url'];

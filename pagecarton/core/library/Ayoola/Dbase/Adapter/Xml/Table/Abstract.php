@@ -96,11 +96,20 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
      */
 	protected $_tableForeignKeys;
 
-    /**
-     * Error Message to throw if inserting an ambiguous value into a unique field
-     *
-     * @var string
-     */
+
+  /**
+   *
+   *
+   * @param array
+   */
+  protected $_tableInfo;
+
+
+  /**
+   * Error Message to throw if inserting an ambiguous value into a unique field
+   *
+   * @var string
+   */
 	const ERROR_INSERT_AMBIGUOUS = 'Ambiguous value on a unique column';
 
     /**

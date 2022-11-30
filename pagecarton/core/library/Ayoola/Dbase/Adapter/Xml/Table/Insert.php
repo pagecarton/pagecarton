@@ -45,7 +45,17 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
      */       
     public function init( $values, $options = null )
     {
-		$recordRowId = $options['record_row_id'];
+        if( ! is_array( $options ) )
+        {
+            $options = array();
+        }
+
+        $recordRowId = null;
+
+        if( ! empty( $options['record_row_id'] ) )   
+		{
+            $recordRowId = $options['record_row_id'];
+        }
 
         $processDir = $this->getMyTempProcessDirectory();
         $scopeFile = $this->getFilenameAccordingToScope( false, $this->getAccessibility() );
@@ -65,9 +75,20 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		{
 			$values['creation_time'] = time();
         }
-        $values['__user_id'] = $values['__user_id'] ? : Ayoola_Application::getUserInfo( 'user_id' );
-        $values['__ip'] = $values['__ip'] ? : Ayoola_Application::getRuntimeSettings( 'user_ip' );
-        $values['__duuid'] = $values['__duuid'] ? : Ayoola_Application::getDeviceUId();
+        if( empty( $values['__duuid'] ) )   
+		{
+            $values['__duuid'] = Ayoola_Application::getDeviceUId();
+        }
+        if( empty( $values['__user_id'] ) )   
+		{
+            $values['__user_id'] = Ayoola_Application::getUserInfo( 'user_id' );
+        }
+        if( empty( $values['__ip'] ) )   
+		{
+            $values['__ip'] = Ayoola_Application::getRuntimeSettings( 'user_ip' );
+        }
+
+
 
         if( 
             empty( self::$_processing[$class] ) && 

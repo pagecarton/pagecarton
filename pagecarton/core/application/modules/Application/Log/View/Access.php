@@ -53,7 +53,11 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 		$log['total_run_time'] = Ayoola_Application::getRuntimeSettings( 'total_runtime' );
 		$timestamp = date( "Y-m-d H:i:s" ); // this line is for demonstration
 
-		$log['total_run_time'] = number_format( $log['total_run_time'], 2 );
+		if( is_numeric( $log['total_run_time'] ) )
+		{
+			$log['total_run_time'] = number_format( $log['total_run_time'], 2 );
+		}
+
 		$log['ip'] = Ayoola_Application::getRuntimeSettings( 'user_ip' );
 		$log['request_time'] = $timestamp;
 		if( strlen( serialize( $_POST ) ) < 10000 )
@@ -65,7 +69,11 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
         @$log['NPS'] = ++$_SESSION['NPS']; 
         
         
-        $referer = parse_url( @$log['http_referer'] );
+		if( isset( $log['http_referer'] ) && is_string( $log['http_referer'] ) )
+		{
+			$referer = parse_url( $log['http_referer'] );
+		}
+
         $log['log_time'] = time();
           
 		$log['referal_domain'] = @$referer['host'];  

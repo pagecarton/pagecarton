@@ -42,7 +42,6 @@ abstract class Ayoola_Doc_Upload_Abstract extends Ayoola_Doc_Upload
 		$fieldset = new Ayoola_Form_Element;
 		$fieldset->addElement( array( 'name' => 'document_name', 'description' => 'Name this Doc', 'type' => 'InputText', 'value' => @$values['document_name'] ) );
 		
-	//	$fieldset->addElement( array( 'name' => 'Doc_options', 'description' => 'Select what to back up', 'type' => 'selectMultiple', 'value' => @$values['Doc_options'] ), self::getAvailableDocOptions() );
 		$fieldset->addRequirements( array( 'WordCount' => array( 1,200 ) ) );
 		$fieldset->addFilters( array( 'trim' => null ) );
 		$fieldset->addElement( array( 'name' => __CLASS__, 'value' => $submitValue, 'type' => 'Submit' ) );

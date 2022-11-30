@@ -148,7 +148,16 @@ class Ayoola_Application
      */
 	public static function getRuntimeSettings( $key = null )
     {
-		return is_null( $key ) ? (array) self::$_runtimeSetting : self::$_runtimeSetting[$key];
+        if( is_null( $key ) )
+        {
+            return (array) self::$_runtimeSetting;
+        }
+        elseif( is_array( self::$_runtimeSetting ) && array_key_exists( $key, self::$_runtimeSetting ) )
+        {
+            return self::$_runtimeSetting[$key];
+        }
+        return false;
+		//return is_null( $key ) ? (array) self::$_runtimeSetting : self::$_runtimeSetting[$key];
     }
 
     /**
