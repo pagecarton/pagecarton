@@ -8,8 +8,17 @@ class Ayoola_Validator_NotEmpty extends Ayoola_Validator_Abstract
 	
     public function validate( $value )
     {
-	//	var_export( $value );
-		if( @in_array( $value, $this->validationParameters['blacklist'] ) )
+		// var_export( $value );
+		// var_export( $this->validationParameters['blacklist']);
+		if( ! is_array( $this->validationParameters['blacklist']) )
+		{
+			$vaildateParametes =  array();
+		}
+		else
+		{
+			$vaildateParametes =  $this->validationParameters['blacklist'];
+		}
+		if( @in_array( $value, $vaildateParametes ) )
 		{
 			return false;
 		}

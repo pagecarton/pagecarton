@@ -9,7 +9,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: includes.php	Friday 17th of June 2022 12:42:19 PM	projects@comeriver.com $ 
+* @version $Id: includes.php	Tuesday 29th of November 2022 10:45:00 AM	adio4sure@comeriver.com $ 
 */
 //	Template Content ?>
 
@@ -20,12 +20,12 @@
                         if
                         ( 
 
-                            $x_1655469739 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                            $x_1669718700 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
                         )
                         {
 
-                            if( $x_1655469739 )
-                            foreach( $x_1655469739 as $each )
+                            if( $x_1669718700 )
+                            foreach( $x_1669718700 as $each )
                             {	
                                 include_once $each;
                             }
@@ -43,7 +43,7 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: template.php	Friday 17th of June 2022 12:42:19 PM	projects@comeriver.com $ 
+* @version $Id: template.php	Thursday 24th of November 2022 05:28:45 PM	 $ 
 */
 //	Template Content ?>
 <!DOCTYPE html>
@@ -85,11 +85,11 @@
 ?><?php
 //pc_body_2 / Begins Here
 
-					if( empty( $_9b6b22d4fd0e62534b01e58c90ce9114 ) || ! is_object( $_9b6b22d4fd0e62534b01e58c90ce9114 ) )
+					if( empty( $_0f0be4a30aa1f1ebbf633c86ac768f92 ) || ! is_object( $_0f0be4a30aa1f1ebbf633c86ac768f92 ) )
 					{
 						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
 					}
-					echo Ayoola_Object_Wrapper_Abstract::wrap( $_9b6b22d4fd0e62534b01e58c90ce9114, '' );
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_0f0be4a30aa1f1ebbf633c86ac768f92, '' );
 
 					
 //pc_body_2 / Ends Here
@@ -103,17 +103,24 @@
                     echo $eachSitePageWidget->view();
                 }
                 
-					if( empty( $_d76bf097f38f533b4a962980bc13892a ) || ! is_object( $_d76bf097f38f533b4a962980bc13892a ) )
+					if( empty( $_39ffedcc9aba2e82f64c0faea7d3e115 ) || ! is_object( $_39ffedcc9aba2e82f64c0faea7d3e115 ) )
 					{
 						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
 					}
-					echo Ayoola_Object_Wrapper_Abstract::wrap( $_d76bf097f38f533b4a962980bc13892a, '' );
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_39ffedcc9aba2e82f64c0faea7d3e115, '' );
 
 					
 //pc_body_3 /layout/pc_layout_miniblog/template Ends Here
 ?><?php
 //pc_body_3 / Begins Here
 
+					if( empty( $_977e06b5c62dd1b8211a8a851110fbcf ) || ! is_object( $_977e06b5c62dd1b8211a8a851110fbcf ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_977e06b5c62dd1b8211a8a851110fbcf, '' );
+
+					
 //pc_body_3 / Ends Here
 ?><?php
 //oneness /layout/pc_layout_miniblog/template Begins Here
@@ -394,11 +401,11 @@
 ?><?php
 //pc_body_4 / Begins Here
 
-					if( empty( $_05aac6126f720e3a154047248880fe86 ) || ! is_object( $_05aac6126f720e3a154047248880fe86 ) )
+					if( empty( $_d031c75e3ca69528175c25bc89daa20d ) || ! is_object( $_d031c75e3ca69528175c25bc89daa20d ) )
 					{
 						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
 					}
-					echo Ayoola_Object_Wrapper_Abstract::wrap( $_05aac6126f720e3a154047248880fe86, '' );
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_d031c75e3ca69528175c25bc89daa20d, '' );
 
 					
 //pc_body_4 / Ends Here
@@ -416,11 +423,11 @@
 ?><?php
 //pc_body_5 / Begins Here
 
-					if( empty( $_cc3dbc39f0e4a6aec7c3b2ab355a6c2b ) || ! is_object( $_cc3dbc39f0e4a6aec7c3b2ab355a6c2b ) )
+					if( empty( $_2ff19389d50b078c04eb00ef4dfa1d41 ) || ! is_object( $_2ff19389d50b078c04eb00ef4dfa1d41 ) )
 					{
 						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
 					}
-					echo Ayoola_Object_Wrapper_Abstract::wrap( $_cc3dbc39f0e4a6aec7c3b2ab355a6c2b, '' );
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_2ff19389d50b078c04eb00ef4dfa1d41, '' );
 
 					
 //pc_body_5 / Ends Here
@@ -438,11 +445,11 @@
 ?><?php
 //pc_body_6 / Begins Here
 
-					if( empty( $_91c417bcdba8309ed50098632bfeadd0 ) || ! is_object( $_91c417bcdba8309ed50098632bfeadd0 ) )
+					if( empty( $_d42241a6b6035826885995b883157537 ) || ! is_object( $_d42241a6b6035826885995b883157537 ) )
 					{
 						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
 					}
-					echo Ayoola_Object_Wrapper_Abstract::wrap( $_91c417bcdba8309ed50098632bfeadd0, '' );
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_d42241a6b6035826885995b883157537, '' );
 
 					
 //pc_body_6 / Ends Here
@@ -460,6 +467,13 @@
 ?><?php
 //pc_body_7 / Begins Here
 
+					if( empty( $_a410075b489666357ad37a412bdf9b7c ) || ! is_object( $_a410075b489666357ad37a412bdf9b7c ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_a410075b489666357ad37a412bdf9b7c, '' );
+
+					
 //pc_body_7 / Ends Here
 ?>
 
@@ -471,11 +485,11 @@
                     echo $eachSitePageWidget->view();
                 }
                 
-					if( empty( $_274f1f7e068d8ec9b8ec0a58942072c2 ) || ! is_object( $_274f1f7e068d8ec9b8ec0a58942072c2 ) )
+					if( empty( $_ae0ff9ef789ab70f1331b346bc29d7ec ) || ! is_object( $_ae0ff9ef789ab70f1331b346bc29d7ec ) )
 					{
 						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
 					}
-					echo Ayoola_Object_Wrapper_Abstract::wrap( $_274f1f7e068d8ec9b8ec0a58942072c2, '' );
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_ae0ff9ef789ab70f1331b346bc29d7ec, '' );
 
 					
 //pc_body_8 /layout/pc_layout_miniblog/template Ends Here

@@ -1185,8 +1185,16 @@ class Ayoola_Application
                 $module = '/' . $nameForModule;
 
             }
+            if( ! is_array($moduleInfo['page_options']) )
+            {
+                $inforPageOptions = array();
+            }
+            else 
+            {
+                $inforPageOptions = $moduleInfo['page_options'];
+            }
             $moduleInfo = Ayoola_Page::getInfo( $module );
-            if( ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) || $module === '/article' )
+            if( ( ! empty( $moduleInfo ) && @in_array( 'module', $inforPageOptions ) ) || $module === '/article' )
             {
                 $url = $module;
                 self::$mode = 'module';
@@ -2365,7 +2373,15 @@ class Ayoola_Application
      */
     public static function isXmlHttpRequest()
     {
-		$pointer = array_map( 'trim', explode( ',', @$_SERVER['HTTP_REQUEST_TYPE'] ) );
+        if( empty(@$_SERVER['HTTP_REQUEST_TYPE']) )
+        {
+            $httpServerRequest = '';
+        }
+        else
+        {
+            $httpServerRequest = @$_SERVER['HTTP_REQUEST_TYPE'];
+        }
+		$pointer = array_map( 'trim', explode( ',', $httpServerRequest ) );
 
 		if
 		(

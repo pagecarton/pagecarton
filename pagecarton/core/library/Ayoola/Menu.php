@@ -647,8 +647,16 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 			else
 			{
+				if(! is_array($menuInfo['menu_options']) )
+				{
+					$menuOptions = array();
+				}
+				else
+				{
+					$menuOptions = $menuInfo['menu_options'];
+				}
 			
-				if( $this->getParameter( 'auto_sub_menu' ) || @in_array( 'auto_sub_menu', $menuInfo['menu_options'] ) )
+				if( $this->getParameter( 'auto_sub_menu' ) || @in_array( 'auto_sub_menu', $menuOptions ) )
 				{
 					if( empty( $values['sub_menu_name'] ) && empty( $values['sub_menu_options'] ) )  
 					{

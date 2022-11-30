@@ -103,7 +103,15 @@ class Application_User_Creator extends Application_User_Abstract
         Application_Javascript::header( Ayoola_Application::getUrlPrefix() . $urlToGo );
 		$sOptions = Application_Settings_Abstract::getSettings( 'UserAccount', 'signup' );
     //    var_export( $accountOptions );
-        if( @in_array( 'disable-signup', $sOptions ) && ! self::hasPriviledge( 98 ) )
+		if( ! is_array( $sOptions ) )
+		{
+			$soptionS = array();
+		}
+		else
+		{
+			$soptionS = $sOptions;
+		}
+        if( @in_array( 'disable-signup', $soptionS ) && ! self::hasPriviledge( 98 ) )
         {
             $this->setViewContent( '<p class="badnews">' . self::__( 'New registrations has been disabled on this site.' ) . '</p>' );
             return false;
@@ -262,7 +270,23 @@ class Application_User_Creator extends Application_User_Abstract
 		}
     //    var_export( $_REQUEST );
     //    var_export( $_GET );
-        if( $_REQUEST['notify_us'] || @in_array( 'notify_us', $_GET['pc_module_url_values'] ) || @in_array( 'notify_admin_of_sign_up', Application_User_Settings::retrieve( 'user_options' ) )  )
+		if( ! is_array($_GET['pc_module_url_values']) )
+		{
+			$pcmoduleUrlValue = array();
+		}
+		else
+		{
+			$pcmoduleUrlValue = $_GET['pc_module_url_values'];
+		}
+		if(! is_array(Application_User_Settings::retrieve( 'user_options' )) )
+		{
+			$retrieveUserOption = array();
+		}
+		else
+		{
+			$retrieveUserOption = Application_User_Settings::retrieve( 'user_options' );
+		}
+        if( $_REQUEST['notify_us'] || @in_array( 'notify_us', $pcmoduleUrlValue ) || @in_array( 'notify_admin_of_sign_up', $retrieveUserOption )  )
         {
             $emailInfo = array(
                                 'subject' => $values['email'] . ' signed up',

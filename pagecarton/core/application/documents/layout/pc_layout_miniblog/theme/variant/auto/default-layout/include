@@ -9,17 +9,17 @@
 * @generated Ayoola_Page_Editor_Layout
 * @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
 * @license    http://www.PageCarton.com/license.txt
-* @version $Id: default-layout.php	Friday 17th of June 2022 02:33:38 PM	joywealth@hotmail.com $ 
+* @version $Id: default-layout.php	Thursday 24th of November 2022 05:31:44 PM	 $ 
 */
 //	Page Include Content
 
 							
-$_a6bab01c3343c87b57263e96fe4b393b = null;
+$_f3f9fee76ddaa947e1eaaebbcdf3739a = null;
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_a6bab01c3343c87b57263e96fe4b393b = new Ayoola_Page_Editor_Text( array (
+$_f3f9fee76ddaa947e1eaaebbcdf3739a = new Ayoola_Page_Editor_Text( array (
   '' => NULL,
   'editable' => '<div class="site-mobile-menu">
       <div class="site-mobile-menu-header">
@@ -48,12 +48,30 @@ $_a6bab01c3343c87b57263e96fe4b393b = new Ayoola_Page_Editor_Text( array (
 							}
 							
 							
-$_f08919130e564f1d757a848674a358d7 = null;
+$_09609e0780045d25f4dbd93040ef9d82 = null;
 
 							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
 							{
 								
-$_f08919130e564f1d757a848674a358d7 = new Ayoola_Page_Editor_Text( array (
+$_09609e0780045d25f4dbd93040ef9d82 = new Ayoola_Page_Editor_Text( array (
+  '' => NULL,
+  'editable' => '<section data-pc-section-placeholder="pc_body_3"><!-- DO NOT REMOVE THIS SECTION --></section>',
+  'includes' => 
+  array (
+  ),
+  'content' => '<section data-pc-section-placeholder="pc_body_3"><!-- DO NOT REMOVE THIS SECTION --></section>',
+  'pagewidget_id' => NULL,
+) );
+
+							}
+							
+							
+$_1a913aa2388ac4f57f40ce71888d32ba = null;
+
+							if( Ayoola_Loader::loadClass( 'Ayoola_Page_Editor_Text' ) )
+							{
+								
+$_1a913aa2388ac4f57f40ce71888d32ba = new Ayoola_Page_Editor_Text( array (
   '' => NULL,
   'editable' => '<widget parameters=\'{ "class": "Ayoola_Page_Info", "use_site_defaults": true }\'>
       <div class="site-cover site-cover-sm same-height overlay single-page" style="background-image: url(/layout/pc_layout_miniblog/images/img_4.jpg?embed_image_url={{{cover_photo}}});">

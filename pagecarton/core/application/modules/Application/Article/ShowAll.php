@@ -759,12 +759,37 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		//	calculate  the creator link here because of Application_Article_Publisher
 		//	So it can see $this->_parameter['add_a_new_post_full_url']
 		$where =  $this->_dbWhereClause;
-		$truePostType = @array_pop( $where['true_post_type'] ) ? : $this->getParameter( 'true_post_type' );
-		$newArticleType = ( @array_pop( $where['article_type'] ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
+		if(! is_array($where['true_post_type'])) 
+		{ 
+			$truePost = array(); 
+		}
+		else
+		{
+			$truePost = $where['true_post_type'];
+		}
+		if(! is_array($where['article_type'])) 
+		{ 
+			$articleType = array(); 
+		}
+		else
+		{
+			$articleType = $where['article_type'];
+		}
+		if(! is_array($where['category_name'])) 
+		{ 
+			$categoryName = array(); 
+		}
+		else
+		{
+			$categoryName = $where['category_name'];
+		}
+
+		$truePostType = @array_pop( $truePost ) ? : $this->getParameter( 'true_post_type' );
+		$newArticleType = ( @array_pop( $articleType ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
 		$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
 		@$newArticleTypeToShow = self::getItemName() ? : ucwords( ( $postTypeInfo['post_type'] ) ? : str_replace( '-', ' ', $newArticleType ) );
 		@$newArticleTypeToShow = $newArticleTypeToShow ? : 'Item';
-		$categoryForNewPost = @array_pop( $where['category_name'] );
+		$categoryForNewPost = @array_pop( $categoryName );
 		$addNewPostUrl = ( static::$_newPostUrl ? : 
 							( $this->getParameter( 'add_a_new_post_link' ) ? : 
 							( ( $this->getParameter( 'add_a_new_post_classplayer' ) ? :  
@@ -1493,13 +1518,21 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			$this->_dbData = $data;
 			return true;
         }
+		if( ! is_array($_REQUEST['pc_module_url_values']) )
+		{
+			$pcModuleUrlValue = array();
+		}
+		else
+		{
+			$pcModuleUrlValue = $_REQUEST['pc_module_url_values'];
+		}
         if( $this->getParameter( $this->getIdColumn() ) && is_array( $this->getParameter( $this->getIdColumn() ) ) )
 		{
             $this->_dbData = $this->getParameter( $this->getIdColumn() );
             return false;
 		}
 
-        if( is_numeric( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_post_type_offset' ), $_REQUEST['pc_module_url_values'] ) )
+        if( is_numeric( $this->getParameter( 'pc_module_url_values_post_type_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_post_type_offset' ), $pcModuleUrlValue ) )
         {
             $postType = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_post_type_offset' ) )];
         }
@@ -1507,7 +1540,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
         {
             @$postType = $_REQUEST['article_type'] ? : $_REQUEST['post_type'];  
         }
-        if( is_numeric( $this->getParameter( 'pc_module_url_values_category_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_category_offset' ), $_REQUEST['pc_module_url_values'] ) )
+        if( is_numeric( $this->getParameter( 'pc_module_url_values_category_offset' ) ) && @array_key_exists( $this->getParameter( 'pc_module_url_values_category_offset' ), $pcModuleUrlValue ) )
         {
             $categoryId = $_REQUEST['pc_module_url_values'][intval( $this->getParameter( 'pc_module_url_values_category_offset' ) )];
             if( $categoryId == 'category' )

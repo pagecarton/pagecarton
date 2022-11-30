@@ -53,9 +53,11 @@ class Application_Article_Type_Quiz_RecentTests extends Application_Article_Type
 			$table = Application_Article_Type_Quiz_Table::getInstance( );
 			
 			//	Filter the result to save time
-			$sortFunction2 = create_function
-			( 
-				'& $key, & $values', 
+			//create_function( ‘$a’, ‘return trim($a, “\\”\’\\n\\r “);’ ),
+			//function( $a ) { return trim($a, “\”‘\\n\\r “); },
+			$sortFunction2 = function( & $key, & $values)
+			{
+				return 
 				'
 				//	var_export( $key );
 				//	var_export( $values );
@@ -84,8 +86,9 @@ class Application_Article_Type_Quiz_RecentTests extends Application_Article_Type
 						$values["score"] = "";
 					}
 			//		var_export( $values );
-				'
-			); 
+				';
+			};
+
 			$scores = array();
 			if( Ayoola_Application::getUserInfo( 'username' ) )
 			{
