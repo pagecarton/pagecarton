@@ -873,6 +873,14 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 
 		if( ! @$object['codes'] )
 		{
+			if( ! is_array( $object['widget_options'] ) )
+			{
+				$object['widget_options'] = array();
+			}
+			if( ! is_array( $object['text_widget_options'] ) )
+			{
+				$object['text_widget_options'] = array();
+			}
 
 			if( ( @in_array( 'preserve_content', $object['widget_options'] ) || @in_array( 'preserve_content', $object['text_widget_options'] ) ) )
 			{

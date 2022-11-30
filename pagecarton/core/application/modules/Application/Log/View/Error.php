@@ -57,7 +57,7 @@ class Application_Log_View_Error extends Application_Log_View_Abstract
         function_exists( 'http_response_code' ) ? http_response_code(500) : null;
 
 
-		$pMessage = "There is error on this page please reload your browser to continue. If this persist, contact the administrator or hosting support. You can also go back to the <a href='/'>Home</a>.";
+		$pMessage = "There is error on this page please reload your browser to continue. If this persist, contact the administrator or hosting support. You can also go back to the <a href='/'>Home</a>. The error has been has also been logged into the site log.";
 		echo "<p class='badnews'>$pMessage</p>";
 
 		$result = self::getLogTable()->insert( $log );
