@@ -149,6 +149,13 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      */
 	public function init()
     {
+
+		//	don't affect autopopulation of widget languages
+		if( $this->getParameter( 'play_mode' ) )
+		{
+			return null;
+		}
+
 		header('Content-Type: ' . static::$_type . '; charset=utf-8');
 		
 		$content = "/* " . __CLASS__ . " */\r\n";
