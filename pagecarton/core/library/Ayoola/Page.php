@@ -163,8 +163,16 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 
         if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'work-arround-1-333' => true ) ) )
         { 
+          if( ! is_array($info['page_options']) )
+          {
+            $pageOption = array();
+          }
+          else
+          {
+            $pageOption = $info['page_options'];
+          }
           //	remove info we dont want
-          if( @in_array( 'private', $info['page_options'] ) )
+          if( @in_array( 'private', $pageOption ) )
           {
             //	We are not allowed to access parent page.
 
@@ -173,7 +181,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 
           }
 
-          @$info['page_options'] = array_combine( $info['page_options'], $info['page_options'] );
+          @$info['page_options'] = array_combine( $pageOption, $pageOption );
 
           //  had to remove this beecause it removes set layout for page in plugins
           //unset( $info['title'], $info['description'], $info['layout_name'], $info['page_options']['template'], $info['cover_photo'] );
