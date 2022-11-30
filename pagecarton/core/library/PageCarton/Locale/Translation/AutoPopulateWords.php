@@ -143,7 +143,7 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                 
                 )
                 {
-                    $class::viewInLine();
+                    $class::viewInLine( array( 'play_mode' => static::PLAY_MODE_HTML ) );
                 }
                 $this->setViewContent( '<li class=""><a target="_blank" href="' . Ayoola_Page::getHomePageUrl() . $link . '">' . $class . '</a>  widget viewed successfully</li>' );
             }
