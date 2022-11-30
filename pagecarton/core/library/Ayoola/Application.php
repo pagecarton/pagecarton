@@ -1542,25 +1542,31 @@ class Ayoola_Application
             //  don't autogenerate if we already have the manual saved copy
             $autoName = 'auto';
 
-            if( ! $rPath = Ayoola_Loader::getFullPath( $rPath ) )
+            if( ! $rPath = Ayoola_Loader::checkFile( $rPath ) )
             {
 
                 $rPath = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '/template';
-                $rPath = Ayoola_Loader::getFullPath( $rPath );
-                //    var_export( $rPath );
+                $rPath = Ayoola_Loader::checkFile( $rPath );
                 $pageFile = 'documents/layout/' . $themeName . '/templateraw';
-                if( ! $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
+                if( ! $pageFile = Ayoola_Loader::checkFile( $pageFile, array( 'prioritize_my_copy' => true ) ) )
                 {
                     $pageFile = 'documents/layout/' . $themeName . '/template.html';
-                    if( ! $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
+                    if( ! $pageFile = Ayoola_Loader::checkFile( $pageFile, array( 'prioritize_my_copy' => true ) ) )
                     {
                         $pageFile = 'documents/layout/' . $themeName . '/index.html';
-                        if( ! $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
+                        if( ! $pageFile = Ayoola_Loader::checkFile( $pageFile, array( 'prioritize_my_copy' => true ) ) )
                         {
                             
                         }
                             
                     }
+                }
+
+                //var_export( $rPath );
+                //var_export( filemtime( $rPath ) );
+                if( is_dir( $rPath ) )
+                {
+                    //   sometimes this is a dir for some reasons
                 }
 
                 if( $pageFile )

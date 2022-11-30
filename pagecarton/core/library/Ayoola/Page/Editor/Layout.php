@@ -1163,7 +1163,18 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			{
 				//	hardcode the localized  filename
 				$rPaths[$eachItem] = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths[$eachItem];
-				@Ayoola_Doc::createDirectory( dirname( $rPaths[$eachItem] ) );
+				//var_export( $rPaths[$eachItem] );
+
+
+				$dirToCreate = dirname( $rPaths[$eachItem] );
+				if( stripos( $dirToCreate, 'variant/auto/template' ) )
+				{
+					//	/theme/variant/auto/template/data_json_content is causing issues
+					//	creating /theme/variant/auto/template folder
+					//	we will most likely need to discontine page template.html
+					continue;
+				}
+				@Ayoola_Doc::createDirectory( $dirToCreate );
 			}
 
 			//var_export( $rPaths['include'] . '<br>');  

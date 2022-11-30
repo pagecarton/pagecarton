@@ -1122,6 +1122,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			
 			//	Can't be lowercase because of auto create link
 			$url = $data['article_url'];
+			if( ! is_string( $data['article_description'] ) )
+			{
+				$data['article_description'] = '';
+			}
 
 			$data['article_description'] = trim( $data['article_description'] );
 			if( empty( $data['article_description'] ) && ! empty( $data['article_content'] ) )

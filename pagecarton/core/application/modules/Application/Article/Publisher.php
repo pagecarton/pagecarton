@@ -52,16 +52,24 @@ class Application_Article_Publisher extends Application_Article_Creator
             //  Output demo content to screen
             $defaultLayout = Application_Settings_CompanyInfo::getSettings( 'Page', 'default_layout' );
             $dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'theme/template';
+
             if( ! $path = Ayoola_Loader::checkFile( $dir ) )
             {
                 $dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'theme/variant/auto/template';
+
+                //var_export( Ayoola_Loader::checkFile( $dir ) ); 
+
                 if( ! $path = Ayoola_Loader::checkFile( $dir ) )
                 {
                     //  give up
                 }    
             }
+
+
             $dir = dirname( $path );
             $basename = array( 'data_json_content', 'content.json' );
+
+
             $files = array_unique( Ayoola_Doc::getFilesRecursive( $dir, array( 'whitelist_basename' => $basename ) ) );
 
             if( ! self::getObjectStorage( 'sanitized' )->retrieve() && time() - filemtime( $path ) < 9000 && $defaultLayout && ! $files )
@@ -75,7 +83,6 @@ class Application_Article_Publisher extends Application_Article_Creator
             }
 
             $postTypes = array();
-
             foreach( $files as $each )
             {
                 $extension = explode( "/", strtolower( $each ) );
@@ -106,6 +113,10 @@ class Application_Article_Publisher extends Application_Article_Creator
                                 break;
                                 case 'Ayoola_Page_Editor_Text':
                                     //    var_export( $widget['parameters']['content'] );
+                                    if( ! is_array( $widget['parameters']['markup_template_object_name'] ) )
+                                    {
+                                        $widget['parameters']['markup_template_object_name'] = array();
+                                    }
                                     if( !  @array_intersect( $widget['parameters']['markup_template_object_name'], array( 'Application_Article_ShowAll', 'Application_Category_ShowAll', 'Application_Profile_ShowAll' ) ) )
                                     {
                                         
