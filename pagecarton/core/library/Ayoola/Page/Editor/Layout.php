@@ -1162,7 +1162,18 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			{
 				//	hardcode the localized  filename
 				$rPaths[$eachItem] = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $rPaths[$eachItem];
-				@Ayoola_Doc::createDirectory( dirname( $rPaths[$eachItem] ) );
+				//var_export( $rPaths[$eachItem] );
+
+
+				$dirToCreate = dirname( $rPaths[$eachItem] );
+				if( stripos( $dirToCreate, 'variant/auto/template' ) )
+				{
+					//	/theme/variant/auto/template/data_json_content is causing issues
+					//	creating /theme/variant/auto/template folder
+					//	we will most likely need to discontine page template.html
+					continue;
+				}
+				@Ayoola_Doc::createDirectory( $dirToCreate );
 			}
 
 			//var_export( $rPaths['include'] . '<br>');  
@@ -1185,7 +1196,16 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 			Ayoola_File::putContents( $rPaths['include'], $content['include'] );
 			Ayoola_File::putContents( $rPaths['template'], $content['template'] );				
 
-			if( $previousData = @file_get_contents( $rPaths['data_json'] ) )  
+			if ( empty( $rPaths['data_json'] ) || ! is_string( $rPaths['data_json'] ) )
+			{
+				$getFilePath = 'default';
+			}
+			else
+			{
+				$getFilePath = $rPaths['data_json'];
+			}
+
+			if( $previousData = @file_get_contents( $getFilePath  ) )  
 			{
 				//	now saving current data instead of previous data
 

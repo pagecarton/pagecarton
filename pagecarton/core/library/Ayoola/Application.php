@@ -148,7 +148,16 @@ class Ayoola_Application
      */
 	public static function getRuntimeSettings( $key = null )
     {
-		return is_null( $key ) ? (array) self::$_runtimeSetting : self::$_runtimeSetting[$key];
+        if( is_null( $key ) )
+        {
+            return (array) self::$_runtimeSetting;
+        }
+        elseif( is_array( self::$_runtimeSetting ) && array_key_exists( $key, self::$_runtimeSetting ) )
+        {
+            return self::$_runtimeSetting[$key];
+        }
+        return false;
+		//return is_null( $key ) ? (array) self::$_runtimeSetting : self::$_runtimeSetting[$key];
     }
 
     /**
@@ -285,17 +294,35 @@ class Ayoola_Application
      */
 	public static function checkIfSameApp( $url )
     {
+        $storage = new Ayoola_Storage();
+		$storage->storageNamespace = __CLASS__  . 'url_prefix-x-y' . Ayoola_Application::getPathPrefix();
+		$storage->setDevice( 'File' );
+		$response = $storage->retrieve();
+
+ 		if( $response && isset( $response['result'] ) )
+		{
+ 			return $response['result'];
+        }
+
         $checkFile = 'pc_check.txt';
         if( ! is_file( $checkFile ) || file_get_contents( $checkFile ) - filemtime( $checkFile ) > 5 )
         {
             file_put_contents( $checkFile, time() );
         }
 
-        $result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) );
+        //$result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) );
+
+        //  why do we need verify_ssl here?
+        $result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1' ) );
+
+
         if( $result >= filemtime( $checkFile ) && $result - filemtime( $checkFile ) < 5 )
         {
+            $storage->store( array( 'result' => true ) );
             return true;
         }
+
+        $storage->store( array( 'result' => false ) );
         return false;
 	}
 
@@ -1167,8 +1194,19 @@ class Ayoola_Application
                 $module = '/' . $nameForModule;
 
             }
+
             $moduleInfo = Ayoola_Page::getInfo( $module );
-            if( ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) || $module === '/article' )
+
+            if( ! is_array($moduleInfo['page_options']) )
+            {
+                $inforPageOptions = array();
+            }
+            else 
+            {
+                $inforPageOptions = $moduleInfo['page_options'];
+            }
+
+            if( ( ! empty( $moduleInfo ) && @in_array( 'module', $inforPageOptions ) ) || $module === '/article' )
             {
                 $url = $module;
                 self::$mode = 'module';
@@ -1516,25 +1554,31 @@ class Ayoola_Application
             //  don't autogenerate if we already have the manual saved copy
             $autoName = 'auto';
 
-            if( ! $rPath = Ayoola_Loader::getFullPath( $rPath ) )
+            if( ! $rPath = Ayoola_Loader::checkFile( $rPath ) )
             {
 
                 $rPath = 'documents/layout/' . $themeName . '/theme/variant/' . $autoName . '/template';
-                $rPath = Ayoola_Loader::getFullPath( $rPath );
-                //    var_export( $rPath );
+                $rPath = Ayoola_Loader::checkFile( $rPath );
                 $pageFile = 'documents/layout/' . $themeName . '/templateraw';
-                if( ! $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
+                if( ! $pageFile = Ayoola_Loader::checkFile( $pageFile, array( 'prioritize_my_copy' => true ) ) )
                 {
                     $pageFile = 'documents/layout/' . $themeName . '/template.html';
-                    if( ! $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
+                    if( ! $pageFile = Ayoola_Loader::checkFile( $pageFile, array( 'prioritize_my_copy' => true ) ) )
                     {
                         $pageFile = 'documents/layout/' . $themeName . '/index.html';
-                        if( ! $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) ) )
+                        if( ! $pageFile = Ayoola_Loader::checkFile( $pageFile, array( 'prioritize_my_copy' => true ) ) )
                         {
                             
                         }
                             
                     }
+                }
+
+                //var_export( $rPath );
+                //var_export( filemtime( $rPath ) );
+                if( is_dir( $rPath ) )
+                {
+                    //   sometimes this is a dir for some reasons
                 }
 
                 if( $pageFile )
@@ -2237,11 +2281,17 @@ class Ayoola_Application
             //$urlToLocalInstallerFile = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix() . '/pc_check.txt?pc_clean_url_check=1';
             $url = ( Ayoola_Application::getDomainSettings( 'protocol' ) ? : 'http' ) . '://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getPathPrefix();
 
+            //var_export( $url );
+
     		//$response = PageCarton_Widget::fetchLink( $urlToLocalInstallerFile );
             $response = self::checkIfSameApp( $url );
 
+            //var_export( $response );
+
  			$storage->store( $response );
         }
+
+        //var_export( $_SERVER['PATH_INFO'] );
 
 		if( $response )
 		{
@@ -2249,7 +2299,12 @@ class Ayoola_Application
             //  causing index.php to appear
 		    self::$_urlPrefix .= Ayoola_Application::getPathPrefix();
 		}
-		elseif( isset( $_SERVER['PATH_INFO'] ) && $_SERVER['PATH_INFO'] != '/' )
+        //  need to remove && $_SERVER['PATH_INFO'] != '/' 
+        //  becauase for some reasons, it is not allow us to have something like 
+        //  /index.php/layout/pc_layout_bookkeeping/fonts/icomoon/style.css in home page
+        //  in systems without mod_rewrite
+		//elseif( isset( $_SERVER['PATH_INFO'] ) && $_SERVER['PATH_INFO'] != '/' )
+		elseif( isset( $_SERVER['PATH_INFO'] ) )
 		{
 			self::$_urlPrefix .= $_SERVER['SCRIPT_NAME'];
 		}
@@ -2347,7 +2402,15 @@ class Ayoola_Application
      */
     public static function isXmlHttpRequest()
     {
-		$pointer = array_map( 'trim', explode( ',', @$_SERVER['HTTP_REQUEST_TYPE'] ) );
+        if( empty(@$_SERVER['HTTP_REQUEST_TYPE']) )
+        {
+            $httpServerRequest = '';
+        }
+        else
+        {
+            $httpServerRequest = @$_SERVER['HTTP_REQUEST_TYPE'];
+        }
+		$pointer = array_map( 'trim', explode( ',', $httpServerRequest ) );
 
 		if
 		(

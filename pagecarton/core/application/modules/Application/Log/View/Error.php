@@ -42,6 +42,11 @@ class Application_Log_View_Error extends Application_Log_View_Abstract
 	public static function log( $message )
 	{
 		//var_export( $message );
+
+		echo '<style>h2, p, pre{ max-width: 900px; margin: 0 auto; padding: 1em; overflow:auto; }</style>';
+		echo '<h2></h2>';
+		echo '<h2>Critical Error</h2>';
+
 		$log = array( 'error_message' => $message, 'error_time' => time() );
 		$mailInfo["subject"] = "Application Error";
 		$mailInfo["body"] = $message;
@@ -50,9 +55,17 @@ class Application_Log_View_Error extends Application_Log_View_Abstract
 		}
         catch( Ayoola_Exception $e ){ null; }
         function_exists( 'http_response_code' ) ? http_response_code(500) : null;
-		$message = "There is error on this page please reload your browser to continue. If this persist, contact the administrator. You can also go back to the <a href=\'/\'>homepage</a>";
-		echo "<div class='badnews'>$message</div>";
+
+
+		$pMessage = "There is error on this page please reload your browser to continue. If this persist, contact the administrator or hosting support. You can also go back to the <a href='/'>Home</a>. The error has been has also been logged into the site log.";
+		echo "<p class='badnews'>$pMessage</p>";
+
 		$result = self::getLogTable()->insert( $log );
+
+		if( Application_User_AdminCreator::isNewInstall() || PageCarton_Widget::hasPriviledge( 99 ) )
+		{
+			echo "<pre>Error Details: $message</pre>";
+		}
     }
 	// END OF CLASS
 }

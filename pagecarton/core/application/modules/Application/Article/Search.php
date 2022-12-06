@@ -54,7 +54,12 @@ class Application_Article_Search extends PageCarton_Widget
             {
                 $this->_objectData['badnews'] = 'No post title has been typed in for autocomplete';
                 $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
-                $this->setViewContent( $this->getForm()->view() );
+
+                $form = $this->getForm();
+                if( is_object( $form ) && method_exists( $form, 'view' ) )
+                {
+                    $this->setViewContent( $form->view() );
+                }
                 return false;
             }
 

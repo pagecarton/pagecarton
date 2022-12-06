@@ -70,8 +70,17 @@ class Application_Facebook_Abstract extends Application_SocialMedia_Abstract
 			@self::$_settings = unserialize( $settings['settings'] );
 		}
 	//	var_export( self::$_settings );
+        $self = self::$_settings;
+        if( ! is_array($self))
+        {
+            $selfSetting = array();
+        }
+        else
+        {
+            $selfSetting = self::$_settings;
+        }
 		if( is_null( $key ) ){ $key = 'wsfr3w4rwqedrwer'; } //	workarround
-		return @array_key_exists( $key, self::$_settings ) ? self::$_settings[$key] : self::$_settings;
+		return @array_key_exists( $key, $selfSetting ) ? self::$_settings[$key] : self::$_settings;
     } 
 	
     /**

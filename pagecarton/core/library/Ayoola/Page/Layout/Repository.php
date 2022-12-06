@@ -111,12 +111,10 @@ class Ayoola_Page_Layout_Repository extends Ayoola_Extension_Import_Repository
 	public static function getPercentageCompleted()
     {
         $percentage = 0;
-    //    Ayoola_Page_PageLayout::getInstance();
         $table = Ayoola_Page_PageLayout::getInstance( Ayoola_Page_PageLayout::SCOPE_PRIVATE );
 		$table->getDatabase()->getAdapter()->setAccessibility( $table::SCOPE_PRIVATE );
 		$table->getDatabase()->getAdapter()->setRelationship( $table::SCOPE_PRIVATE );
 		$response = $table->select();
-     //   var_export( $response );
 		if( $table->select() )
 		{
 			$percentage += 100;

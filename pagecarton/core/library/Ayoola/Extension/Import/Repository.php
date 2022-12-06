@@ -314,22 +314,21 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
                {
                     continue;
                }
-            //   var_export( $each );
 
                 $data[$each['category_name']] = array(
-                    'url' => '?category=' . $each['category_name'] . '&' . http_build_query( $_GET ) . '',
+                    //  removed below because it was showing wrong object_name in query strings
+                    //  do not know why
+                    //'url' => '?category=' . $each['category_name'] . '&' . http_build_query( $_REQUEST ) . '',
+                    'url' => '?category=' . $each['category_name'] . '',
                     'option_name' => $each['article_title'],
                     'title' => $each['article_title'],
                    
                     'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),  
                 ) + $each;
-            //    $data += $each;
             }
-          //     var_export( $data );
 
             $storage->store( $data );
         }
-     //   var_export( $data );
         return $data;
     }
     
@@ -348,11 +347,11 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             'append_previous_url' => 0, 'enabled' => 1, 'auth_level' => array( 99, 98 ), 'menu_id' => '1', 'option_id' => 0, 'link_options' => array( 'logged_in','logged_out' ),
         );
 
-            $menu = Ayoola_Menu::viewInLine( array(
-                                    'raw-options' => $data,
-                                     'template_name' => 'HorizontalGrayish',
-                               //     'raw-options' => $data,
-            ) );            
+        $menu = Ayoola_Menu::viewInLine( array(
+                                'raw-options' => $data,
+                                    'template_name' => 'HorizontalGrayish',
+                            //     'raw-options' => $data,
+        ) );            
         
 		return $menu;
 

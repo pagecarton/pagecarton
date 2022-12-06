@@ -1,0 +1,22 @@
+{
+    "name": "pagecarton/pagecarton",
+    "type": "project",
+    "description": "With PageCarton, anyone could build a great website and app!",
+    "keywords": ["pagecarton", "cms", "cmf", "web framework", "web builder", "app builder"],
+    "homepage": "https://github.com/pagecarton/pagecarton",
+    "license": "GPL-2.0+",
+    "config": {
+        "optimize-autoloader": true,
+        "platform": {
+            "php": "7.0.0"
+        },
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "vendor-dir": "libraries/vendor"
+    },
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

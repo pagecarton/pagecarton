@@ -43,5 +43,9 @@ class Application_Javascript extends Ayoola_Abstract_Script
      */
 	protected static $_codes = array();	
 
+    /**
+     * Class uses echo and exit(); directly
+     * 
+     */
 	// END OF CLASS
 }

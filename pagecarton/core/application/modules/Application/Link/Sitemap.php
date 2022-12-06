@@ -142,7 +142,23 @@ class Application_Link_Sitemap extends Application_Link_Abstract
 
 		foreach( $table as $data )
 		{
-			if( ! @in_array( '0', $data['auth_level'] ) || @in_array( 'module', $data['page_options'] ) )
+			if( ! is_array($data['auth_level']) )
+			{
+				$authLevel = array();
+			}
+			else
+			{
+				$authLevel = $data['auth_level'];
+			}
+			if( ! is_array($data['page_options']) )
+			{
+				$pageOption = array();
+			}
+			else
+			{
+				$pageOption = $data['page_options'];
+			}
+			if( ! @in_array( '0', $authLevel ) || @in_array( 'module', $pageOption ) )
 			{  
 				continue;
 			}

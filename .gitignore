@@ -66,3 +66,4 @@ pagecarton/core/application/pages/data-backup/*
 pagecarton/core/application/documents/layout/*/theme/*/data-backup/
 pagecarton/core/application/documents/layout/*/theme/data-backup/*
 pagecarton/core/local_html/pc_check.txt
+html

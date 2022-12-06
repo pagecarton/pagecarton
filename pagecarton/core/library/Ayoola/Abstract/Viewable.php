@@ -1100,6 +1100,11 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 	public static function __( $string )
     {
         $options = PageCarton_Locale_Settings::retrieve( 'locale_options' );
+		if( ! is_array( $options ) )
+		{
+			$options = array(); 
+		}
+	
         if( ! self::getLocale() && ! @in_array( 'auto_translate', $options ) )
 		{
 			//	was slowing down app
@@ -1673,8 +1678,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$fieldset->container = 'div';
 			$fieldset->addElement( array( 'name' => 'widget_options', 'id' => $object['object_unique_id'] . '_widget_options' . $object['pagewidget_id'], 'label' => ' ', 'type' => 'Checkbox', 'multiple' => 'multiple', 'value' => @$object['widget_options'], ), $availableOptions );
 			$form->addFieldset( $fieldset );
+            if( ! is_array($object['widget_options']) )
+            {
+                $objectWidgetOptions = array();
+            }
+            else
+            {
+                $objectWidgetOptions = $object['widget_options'];
+            }
 
-			if( @in_array( 'savings', $object['widget_options'] ) )
+			if( @in_array( 'savings', $objectWidgetOptions ) )
 			{
 				if( $object['save_widget_as'] )
 				{
@@ -1750,7 +1763,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$form->setParameter( array( 'no_required_fieldset' => true ) );
 			$parameterOptions = array( '' => 'Select Parameter' ) + ( array_combine( static::getParameterKeys( $object ), static::getParameterKeys( $object ) ) ? : array() ) + array( '__custom' => 'Custom Parameter' );
 
-			if( @in_array( 'parameters', $object['widget_options'] ) || @$advanceParameters['advanced_parameter_value'] )
+			if( @in_array( 'parameters', $objectWidgetOptions ) || @$advanceParameters['advanced_parameter_value'] )
 			{
 				$i = 0;
 				do
@@ -1820,7 +1833,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			}
 			$fieldset = new Ayoola_Form_Element;
 			$fieldset->hashElementName = false;
-			if( @in_array( 'privacy', $object['widget_options'] ) || @$advanceParameters['object_access_level'] )
+			if( @in_array( 'privacy', $objectWidgetOptions ) || @$advanceParameters['object_access_level'] )
 		//	if( $object['set_access_level'] || $advanceParameters['object_access_level'] )
 			{
 				$fieldset->addElement( array( 'name' => 'object_access_level', 'id' => $object['object_unique_id'] . '_object_access_level' . $object['pagewidget_id'], 'label' => 'Who can view widget', 'placeholder' => '', 'type' => 'SelectMultiple', 'value' => @$advanceParameters['object_access_level'] ), self::$_authLevelOptions );
@@ -1856,7 +1869,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				';
 			}
 
-			if( @in_array( 'wrappers', $object['widget_options'] ) || @$advanceParameters['wrapper_name'] )
+			if( @in_array( 'wrappers', $objectWidgetOptions ) || @$advanceParameters['wrapper_name'] )
 		//	if( $object['wrap_widget'] || $advanceParameters['wrapper_name'] )
 			{
 				if( ! self::$_wrapperOptions )
@@ -1889,7 +1902,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 				$options .= '</select>';
 				$fieldset->addElement( array( 'name' => 'wrapper_label', 'type' => 'Html' ), array( 'html' => '<p><label>Wrapper</label>' . $options . '</p>', 'fields' => 'wrapper_name' ) );
             }
-			if( @in_array( 'devices', $object['widget_options'] ) || @$advanceParameters['device_whitelist'] || @$advanceParameters['device_blacklist'] )
+			if( @in_array( 'devices', $objectWidgetOptions ) || @$advanceParameters['device_whitelist'] || @$advanceParameters['device_blacklist'] )
 			{
                 $options = '<label>Choose Device to Show Widget To...</label>
                             <select name="device_whitelist" onChange="">
@@ -1944,7 +1957,15 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$editableValue = '' . @$object['editable'] . '';
 			$innerSettingsContent .= '<input placeholder="' . ( static::$_editableTitle ) . '" data-parameter_name="editable" type=text value="' . $editableValue . '" >';
 		}
-		if( @$object['object_interior'] || static::$editorViewDefaultToPreviewMode || @in_array( 'object_interior', $advanceParameters['advanced_parameter_name'] ) )
+        if(! is_array($advanceParameters['advanced_parameter_name']))
+        {
+            $advanceParameterName = array();
+        }
+        else
+        {
+            $advanceParameterName = $advanceParameters['advanced_parameter_name'];
+        }
+		if( @$object['object_interior'] || static::$editorViewDefaultToPreviewMode || @in_array( 'object_interior', $advanceParameterName ) )
 		{
 			$classToView = $object['class_name'] ? : $object['object_name'];
 
@@ -2172,7 +2193,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
                 //	don't return empty tags
                 return false;
             }
-            if( $options && ! is_array( $options ) )
+            if( ! is_array( $options ) )
             {
                 $ix = $options;
                 $options = array();
@@ -2396,7 +2417,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			break;
 			case static::PLAY_MODE_JSON:
 				error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
-				ini_set( 'display_errors', "0" );
+				ini_set( 'display_errors', "1" );
 				if( @$_POST['PAGECARTON_RESPONSE_WHITELIST'] )
 				{
 

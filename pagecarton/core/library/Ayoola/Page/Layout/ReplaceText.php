@@ -408,7 +408,15 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             //  always default to own prefilled data
             if( ! empty( $allMyData['dummy_search'] ) && empty( $_GET['clear_user_settings'] )  )
             {
-                $myReplacementKey = array_search( $data['dummy_search'][$i], $allMyData['dummy_search'] );
+                if( ! is_array($allMyData['dummy_search'] ) )
+                {
+                    $allMyDataDummySearch = array();
+                }
+                else
+                {
+                    $allMyDataDummySearch = $allMyData['dummy_search'];
+                }
+                $myReplacementKey = array_search( $data['dummy_search'][$i], $allMyDataDummySearch);
             //    var_export( $myReplacementKey );
                 if( $myReplacementKey !== false && ! empty( $allMyData['dummy_replace'][$myReplacementKey] ) )
                 {
@@ -448,17 +456,36 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         $themeInfoX = self::getUpdates( true );
         $themeInfoAll = Application_Settings::getInstance()->selectOne( null, array( 'settingsname_name' => __CLASS__ ) );
         @$themeInfoAll = $themeInfoAll['data'];
+
+        if( ! is_array($themeInfoAll['dummy_replace']) )
+        {
+            $themeInfoDummyReplace = array();
+        }
+        else
+        {
+            $themeInfoDummyReplace = $themeInfoAll['dummy_replace'];
+        }
+        if( !is_array($themeInfo['dummy_replace']) )
+        {
+            $infoDummyReplace = array();
+        }
+        else
+        {
+            $infoDummyReplace = $themeInfo['dummy_replace'];
+        }
+
 		if( empty( $themeInfo['dummy_search'] ) )
 		{
 		//	$percentage += 100;
 		}
+       
         elseif( 
-            ( @array_intersect_assoc( $themeInfo['dummy_replace'], $themeInfoAll['dummy_replace'] ) === $themeInfoAll['dummy_replace'] && $themeInfoAll['dummy_replace'] !== $themeInfo['dummy_replace'] ) 
-            || array_intersect( $themeInfo['dummy_replace'], $themeInfoX['dummy_replace'] ) !== $themeInfo['dummy_replace'] )
+            ( @array_intersect_assoc( $infoDummyReplace, $themeInfoDummyReplace ) === $themeInfoAll['dummy_replace'] && $themeInfoAll['dummy_replace'] !== $themeInfo['dummy_replace'] ) 
+            || array_intersect( $infoDummyReplace, $themeInfoX['dummy_replace'] ) !== $themeInfo['dummy_replace'] )
 		{
 		//	$percentage += 100;
 		}
-		elseif( array_intersect( $themeInfo['dummy_replace'], $themeInfoX['dummy_replace'] ) === $themeInfo['dummy_replace'] )
+		elseif( array_intersect( $infoDummyReplace, $themeInfoX['dummy_replace'] ) === $themeInfo['dummy_replace'] )
 		{
 	    //	var_export( $percentage );
 			$percentage += 100;

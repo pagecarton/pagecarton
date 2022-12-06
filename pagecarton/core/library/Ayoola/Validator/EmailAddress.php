@@ -10,7 +10,7 @@ class Ayoola_Validator_EmailAddress extends Ayoola_Validator_Abstract
 	
     public function validate( $value )
     {
-	//	var_export( $value );
+
 		if( ! is_string( $value ) )
 			return false;
 		if( substr_count( $value, '@' )  > 1 )		
@@ -41,7 +41,7 @@ class Ayoola_Validator_EmailAddress extends Ayoola_Validator_Abstract
 		list( $this->_username, $this->_hostname ) = explode( '@', $value, 2 );
 		
 		//	Check against allowed lenght
-		if( strlen( $this->_username ) > 64 || $this->_hostname > 255 )		
+		if( strlen( $this->_username ) > 64 || strlen($this->_hostname ) > 255 )		
 			return false;
 		
 		return true;

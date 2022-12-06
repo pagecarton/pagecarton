@@ -170,7 +170,6 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				}
 				
 				//	We now have the chance to suggest URL if we are admin
-			//	$url = $_POST['suggested_url'];
 				$url = '';
 				$dir .= $url;
                 $path = $dir . $_POST['suggested_url'];
@@ -199,7 +198,11 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 				//	format extension
 				$extension = explode( '.', $_POST['name'] );
 				$extension = strtolower( array_pop( $extension ) );
-				
+				if( ! is_array( $docSettings['options'] ) )
+				{
+					$docSettings['options'] = array();
+				}
+	  
 				if( @in_array( 'private_directory', $docSettings['options'] ) && Ayoola_Application::getUserInfo( 'username' ) ) 
 				{
 					$personalDir = implode( DS, str_split( strval( Ayoola_Application::getUserInfo( 'user_id' ) ) ) );
@@ -294,7 +297,10 @@ class Ayoola_Doc_Upload_Ajax extends Ayoola_Doc_Upload_Abstract
 			$this->_objectData['uploaded'] = 1;
 			$this->_objectData['url'] = $urlPrefix . $this->_objectData['file_info']['dedicated_url'];
 			$this->_objectData['fileName'] = $_POST['name'];
-			$this->_objectData['error'] = @array_pop( $this->_objectData['badnews'] );
+			if( is_array( $this->_objectData['badnews'] ) )
+			{
+				$this->_objectData['error'] = @array_pop( $this->_objectData['badnews'] );
+			}
 			$this->_playMode = static::PLAY_MODE_JSON;
 			
 			if( isset( $_GET['CKEditorFuncNum'] ) )

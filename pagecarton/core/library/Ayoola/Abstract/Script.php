@@ -149,6 +149,13 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
      */
 	public function init()
     {
+
+		//	don't affect autopopulation of widget languages
+		if( $this->getParameter( 'play_mode' ) )
+		{
+			return null;
+		}
+
 		header('Content-Type: ' . static::$_type . '; charset=utf-8');
 		
 		$content = "/* " . __CLASS__ . " */\r\n";
@@ -168,8 +175,12 @@ abstract class Ayoola_Abstract_Script extends PageCarton_Widget
         header('Pragma: public');
         header('Cache-Control: max-age=86400');
         header('Expires: '. gmdate('D, d M Y H:i:s \G\M\T', time() + 86400));
-        echo $content;
-		exit();
+
+		if( ! $this->getParameter( 'play_mode' ) )
+		{
+			echo $content;
+			exit();	
+		}
 	}
 	
     /**

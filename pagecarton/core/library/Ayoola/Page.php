@@ -23,80 +23,80 @@ require_once 'Ayoola/Page/Abstract.php';
  * @copyright  Copyright (c) 2011-2016 PageCarton (http://www.pagecarton.com)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
-    
+		
 class Ayoola_Page extends Ayoola_Page_Abstract
 {
 	
-    /**       
-     * The Page Info
-     * 
-     * @var array 
-     */
+	/**       
+	 * The Page Info
+	 * 
+	 * @var array 
+	 */
 	protected static $_currentPageInfo; 
 	
-    /**
-     * 
-     * @var string 
-     */
+	/**
+	 * 
+	 * @var string 
+	 */
 	protected static $_canonicalUri;
 	
-    /**
-     * Page Title
-     * 
-     * @var string 
-     */
+	/**
+	 * Page Title
+	 * 
+	 * @var string 
+	 */
 	public static $title;
 
-    /**
-     * Data storage device
-     *
-     * @var string e.g. Session, File
-     */
+	/**
+	 * Data storage device
+	 *
+	 * @var string e.g. Session, File
+	 */
 	protected static $_objectStorageDevice = 'File';
 	
-    /**
-     * Page Description
-     * 
-     * @var string 
-     */
+	/**
+	 * Page Description
+	 * 
+	 * @var string 
+	 */
 	public static $description;
 	
-    /**
-     * Link for the thumbnail for the page
-     * 
-     * @var string 
-     */
+	/**
+	 * Link for the thumbnail for the page
+	 * 
+	 * @var string 
+	 */
 	public static $thumbnail;
 	
-    /**
-     * Link for the favicon for the page
-     * 
-     * @var string 
-     */
+	/**
+	 * Link for the favicon for the page
+	 * 
+	 * @var string 
+	 */
 	public static $favicon;
 	
-    /**
-     * Allows the htmlHeader to get the correct layout name to use for <base> 
-     * 
-     * @var string 
-     */
+	/**
+	 * Allows the htmlHeader to get the correct layout name to use for <base> 
+	 * 
+	 * @var string 
+	 */
 	public static $layoutName;
 	
-    /**
-     * Set to true if we are in home page
-     * 
-     * @var boolean 
-     */
+	/**
+	 * Set to true if we are in home page
+	 * 
+	 * @var boolean 
+	 */
 	public static $isHome = false;
 	
-    /**
-     * 
-     *
-     * @param void
-     * @return array 
-     */
-    public static function getAll( array $data = null )
-    {		
+	/**
+	 * 
+	 *
+	 * @param void
+	 * @return array 
+	 */
+	public static function getAll( array $data = null )
+	{		
 		$pages = Ayoola_Page_Page::getInstance();
 		$pages = $pages->select();
 		require_once 'Ayoola/Filter/SelectListArray.php';
@@ -107,15 +107,15 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		asort( $pages );
 		return array_unique( $pages );
 	}
-	
-    /**
-     * Get Page Info as available in $_currentPageInfo class property
-     *
-     * @param void
-     * @return array The Page Info
-     */
-    public static function getPageCssFile()
-    {		
+
+	/**
+	 * Get Page Info as available in $_currentPageInfo class property
+	 *
+	 * @param void
+	 * @return array The Page Info
+	 */
+	public static function getPageCssFile()
+	{		
 		$cssFile = self::getCurrentPageInfo( 'document_url' );
 		if( ! $cssFile )
 		{
@@ -131,114 +131,120 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		}
 		return $cssFile ? : '/css/pagecarton.css';
 
-    } 
+	} 
 	
-    /**
-     * GET THE PAGE INFO FROM THE DATABASE
-     *
-     * @param string URL
-     * @return array The Page Info
-     */
-    public static function getInfo( $url = null )
-    {		
-      do
-      {
+	/**
+	 * GET THE PAGE INFO FROM THE DATABASE
+	 *
+	 * @param string URL
+	 * @return array The Page Info
+	 */
+	public static function getInfo( $url = null )
+	{		
+		do
+		{
 
-        $id = md5( Ayoola_Application::getApplicationNameSpace() . $url );
+			$id = md5( Ayoola_Application::getApplicationNameSpace() . $url );
 
-        $storage = self::getObjectStorage( array( 'id' => $id,  ) );			
-        $tableName = 'Ayoola_Page_Page';		
+			$storage = self::getObjectStorage( array( 'id' => $id,  ) );			
+			$tableName = 'Ayoola_Page_Page';		
 
-        $table = $tableName::getInstance();		
+			$table = $tableName::getInstance();		
 
-        if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'id' => $id ) ) )
-        {
-          $info['cache_info'] = serialize( $storage );
-          $storage->store( $info ); 
-          break; 
-        }
-        $table = $tableName::getInstance( $tableName::SCOPE_PROTECTED );
-        $table->getDatabase()->setAccessibility( $tableName::SCOPE_PROTECTED );
+			if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'id' => $id ) ) )
+			{
+				$info['cache_info'] = serialize( $storage );
+				$storage->store( $info ); 
+				break; 
+			}
+			$table = $tableName::getInstance( $tableName::SCOPE_PROTECTED );
+			$table->getDatabase()->setAccessibility( $tableName::SCOPE_PROTECTED );
 
 
-        if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'work-arround-1-333' => true ) ) )
-        { 
-          //	remove info we dont want
-          if( @in_array( 'private', $info['page_options'] ) )
-          {
-            //	We are not allowed to access parent page.
+			if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'work-arround-1-333' => true ) ) )
+			{ 
 
-            $info = array();
-            return false; 
+				if( ! is_array( $info['page_options'] ) )
+				{
+					$info['page_options'] = array();
+				}
 
-          }
+				//	remove info we dont want
+				if( @in_array( 'private', $info['page_options'] ) )
+				{
+					//	We are not allowed to access parent page.
 
-          @$info['page_options'] = array_combine( $info['page_options'], $info['page_options'] );
+					$info = array();
+					return false; 
 
-          //  had to remove this beecause it removes set layout for page in plugins
-          //unset( $info['title'], $info['description'], $info['layout_name'], $info['page_options']['template'], $info['cover_photo'] );
+				}
 
-          $info['cache_info'] = serialize( $storage );
-          $storage->store( $info );
-          break; 
-        }
+				@$info['page_options'] = array_combine( $info['page_options'], $info['page_options'] );
 
-        //	get info for theme pages
-        $themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
+				//  had to remove this beecause it removes set layout for page in plugins
+				//unset( $info['title'], $info['description'], $info['layout_name'], $info['page_options']['template'], $info['cover_photo'] );
 
-        if( $themeName && Ayoola_Page_Layout_Pages::isValidThemePage( $url, $themeName ) )
-        { 
-          //	just what we need
-          @$info = array( 'url' => $url );
-          $file = 'documents/layout/' . $themeName . '/pagesettings';
-          $globalFile = Ayoola_Loader::checkFile( $file );
-          if( is_file( $globalFile ) )
-          if( $settings = json_decode( file_get_contents( $globalFile ), true ) )
-          if( ! empty( $settings[$url] ) && is_array( $settings[$url] ) )
-          {
-              $info += $settings[$url];
-          }
-          
-          $info['cache_info'] = serialize( $storage );
-          $storage->store( $info );
-          if( empty( $info['auth_level'] ) )
-          {
-            $info['auth_level'] = array( 0 );
-          }
+				$info['cache_info'] = serialize( $storage );
+				$storage->store( $info );
+				break; 
+			}
 
-          break; 
-        }
-        return false;
-      }
-      while( false );
-      //var_export( $info );
-      //exit();
-      return $info;
-		
-    } 
+			//	get info for theme pages
+			$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
+
+			if( $themeName && Ayoola_Page_Layout_Pages::isValidThemePage( $url, $themeName ) )
+			{ 
+				//	just what we need
+				@$info = array( 'url' => $url );
+				$file = 'documents/layout/' . $themeName . '/pagesettings';
+				$globalFile = Ayoola_Loader::checkFile( $file );
+				if( is_file( $globalFile ) )
+				if( $settings = json_decode( file_get_contents( $globalFile ), true ) )
+				if( ! empty( $settings[$url] ) && is_array( $settings[$url] ) )
+				{
+						$info += $settings[$url];
+				}
+				
+				$info['cache_info'] = serialize( $storage );
+				$storage->store( $info );
+				if( empty( $info['auth_level'] ) )
+				{
+					$info['auth_level'] = array( 0 );
+				}
+
+				break; 
+			}
+			return false;
+		}
+		while( false );
+		//var_export( $info );
+		//exit();
+		return $info;
 	
-    /**
-     * Get Page Info as available in $_currentPageInfo class property
-     *
-     * @param void
-     * @return array The Page Info
-     */
-    public static function getCurrentPageInfo( $infoToGet = null )
-    {		
-
-      if( ! self::$_currentPageInfo ){ self::setCurrentPageInfo(); }
-
-      if( is_null( $infoToGet ) ){ return self::$_currentPageInfo; }
-      if( array_key_exists( $infoToGet, self::$_currentPageInfo ) ){ return self::$_currentPageInfo[$infoToGet]; }
-    } 
+	} 
 	
-    /**
-     * Sets Page Info and save it as a class property $_currentPageInfo
-     *
-     * @param array Info
-     */
-    public static function setCurrentPageInfo( Array $info = array() )
-    {
+	/**
+	 * Get Page Info as available in $_currentPageInfo class property
+	 *
+	 * @param void
+	 * @return array The Page Info
+	 */
+	public static function getCurrentPageInfo( $infoToGet = null )
+	{		
+
+		if( ! self::$_currentPageInfo ){ self::setCurrentPageInfo(); }
+
+		if( is_null( $infoToGet ) ){ return self::$_currentPageInfo; }
+		if( array_key_exists( $infoToGet, self::$_currentPageInfo ) ){ return self::$_currentPageInfo[$infoToGet]; }
+	} 
+
+	/**
+	 * Sets Page Info and save it as a class property $_currentPageInfo
+	 *
+	 * @param array Info
+	 */
+	public static function setCurrentPageInfo( Array $info = array() )
+	{
 		// Open the XML file
 		require_once 'Ayoola/Xml.php';
 		$xml = new Ayoola_Xml();
@@ -250,50 +256,49 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		if( empty( self::$_currentPageInfo ) )
 		{
 			self::$_currentPageInfo = self::getInfo( $url );
-        }
-        elseif( ! empty( $info ) )
-        {
-            $info = self::__( $info );
-        }
+				}
+				elseif( ! empty( $info ) )
+				{
+						$info = self::__( $info );
+				}
 
 		self::$_currentPageInfo = is_array( self::$_currentPageInfo ) ? array_merge( self::$_currentPageInfo, $info ) : $info;
 		return self::$_currentPageInfo;
-    } 
-	
-    /**
-     * Build Query Strings
-     *
-     * @param array Query Strings
-     * @return string Query Strings
-     */
-    public static function buildQueryStrings( Array $queryStrings = array(), $appendAllGet = true )
-    {
+	} 
 
+	/**
+	 * Build Query Strings
+	 *
+	 * @param array Query Strings
+	 * @return string Query Strings
+	 */
+	public static function buildQueryStrings( Array $queryStrings = array(), $appendAllGet = true )
+	{
 		$queryStrings = true == $appendAllGet ? array_merge( $_GET, $queryStrings ) : $queryStrings;
 		$queryStrings = http_build_query( $queryStrings );
 		return $queryStrings;
-    }
+	}
 	
-    /**
-     * Append Query Strings to the End of the Current URL
-     *
-     * @return string The URL with the query String appended
-     */
-    public static function appendQueryStrings( Array $queryStrings = array(), $uri = null, $appendAllGet = true )
-    {
+	/**
+	 * Append Query Strings to the End of the Current URL
+	 *
+	 * @return string The URL with the query String appended
+	 */
+	public static function appendQueryStrings( Array $queryStrings = array(), $uri = null, $appendAllGet = true )
+	{
 		if( is_null( $uri ) ){ $uri = Ayoola_Application::getPresentUri(); }
 		$queryString = self::buildQueryStrings( $queryStrings, $appendAllGet );
 		$url = Ayoola_Application::getUrlPrefix() . rtrim( $uri, '/' ) . '/?' . $queryString;
 		return $url;
-    }
-	
-    /**
-     * 
-     *
-     * @return string
-     */
-    public static function getBreadcrumb( $url = null )
-    {
+	}
+
+	/**
+	 * 
+	 *
+	 * @return string
+	 */
+	public static function getBreadcrumb( $url = null )
+	{
 		$page = $url ? : Ayoola_Application::getPresentUri();
 		$currentUrl = rtrim( Ayoola_Application::getPresentUri(), '/' );
 
@@ -342,9 +347,9 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				
 				//	final word 
 
-                $title = explode( "/", strtolower( Ayoola_Application::getRuntimeSettings( 'url' ) ) );
-                $title = array_pop( $title );
-                $title = ucwords( $title );
+								$title = explode( "/", strtolower( Ayoola_Application::getRuntimeSettings( 'url' ) ) );
+								$title = array_pop( $title );
+								$title = ucwords( $title );
 				if( class_exists( $title ) && method_exists( $title, 'getObjectTitle' ) && $title::getObjectTitle() )
 				{
 					$title = $title::getObjectTitle() ? : $title;
@@ -370,8 +375,8 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 				
 				//	Home
 				$pages[] = self::getInfo( '/' );
-                
-                
+								
+								
 				//	Article gan gan
 				$pages[] = array( 'url' => Ayoola_Application::$GLOBAL['post']['article_url'], 'title' => Ayoola_Application::$GLOBAL['post']['article_title'] );
 
@@ -379,28 +384,28 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 			break;
 			default:
 
-                switch( $page )
-                {
-                    case '/tools/classplayer':
-                    case '/object':
-                    case '/pc-admin':
-                    case '/widgets':
-                    case '/widget':
-            //		case true:
-                        //	Do nothing.
-                        //	 had to go through this route to process for 0.00
+								switch( $page )
+								{
+										case '/tools/classplayer':
+										case '/object':
+										case '/pc-admin':
+										case '/widgets':
+										case '/widget':
+						//		case true:
+												//	Do nothing.
+												//	 had to go through this route to process for 0.00
 
-                        if( @$_REQUEST['url'] )
-                        {
-                            $page = $_REQUEST['url'];
-                            $editorMode = true;
-                            break;
-                        }
-                    break;
-                    default:
+												if( @$_REQUEST['url'] )
+												{
+														$page = $_REQUEST['url'];
+														$editorMode = true;
+														break;
+												}
+										break;
+										default:
 
-                    break;
-                }
+										break;
+								}
 
 				$pages = self::getPageCrumbs( $page );
 				if( Ayoola_Application::getRuntimeSettings( 'real_url' ) == '/404' )
@@ -414,12 +419,12 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		}
 	}
 	
-    /**
-     *
-     * @return string
-     */
-    public static function getPageCrumbs( $page )
-    {
+	/**
+	 *
+	 * @return string
+	 */
+	public static function getPageCrumbs( $page )
+	{
 		$sections = self::splitUrl( $page );
 		$table = Ayoola_Page_Page::getInstance( __METHOD__ );
 		$table->getDatabase()->setAccessibility( $table::SCOPE_PRIVATE );
@@ -435,12 +440,12 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		return $pages;
 	}
 	
-    /**
-     *
-     * @return string
-     */
-    public static function splitUrl( $uri )
-    {
+	/**
+	 *
+	 * @return string
+	 */
+	public static function splitUrl( $uri )
+	{
 		$page = explode( '/', $uri );
 
 		$curentPage = null;
@@ -456,13 +461,13 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		return $sections;
 	}
 	
-    /**
-     * Returns the canonical url
-     *
-     * @return string
-     */
-    public static function getCanonicalUri( $uri = null, $setMainCanonicalUri = true )
-    {
+	/**
+	 * Returns the canonical url
+	 *
+	 * @return string
+	 */
+	public static function getCanonicalUri( $uri = null, $setMainCanonicalUri = true )
+	{
 		//	Sending a uri param will reset canonical url
 		if( ! is_null( self::$_canonicalUri ) && ! $uri )
 		{
@@ -473,10 +478,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 
 		//	Look in the links table for SEO friendly and short URLS
 
-	//	if( $link = $table->selectOne( null, array( 'link_url' => $uri ) ) )
-		{
 
-		}
 		if( $uri == Ayoola_Application::$_homePage || ! $uri || $uri == '/' )
 		{
 			self::$isHome = true;
@@ -488,73 +490,72 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		}
 
 		return $uri;
-    }
+	}
 	
-    /**
-     * Returns the canonical url
-     *
-     * @return string
-     */
-    public static function getCanonicalUrl( $uri = null )
-    {
+	/**
+	 * Returns the canonical url
+	 *
+	 * @return string
+	 */
+	public static function getCanonicalUrl( $uri = null )
+	{
 
 		$uri = self::getCanonicalUri( $uri, false );
 
 		$url = self::getHomePageUrl() . $uri;  
 
 		return $url;
-    }
+	}
 	
-    /**
-     * Returns the home page url
-     *
-     * @return string
-     */
-    public static function getHomePageUrl()
-    {
+	/**
+	 * Returns the home page url
+	 *
+	 * @return string
+	 */
+	public static function getHomePageUrl()
+	{
 		$domain = self::getDefaultDomain();
 		$url = self::getRootUrl() . Ayoola_Application::getRealPathPrefix();  
 		return $url; 
-    }
+	}
 	
-    /**
-     * 
-     *
-     * @return string
-     */
-    public static function getProtocol()
-    {
-        if( ! $protocol = Ayoola_Application::getDomainSettings( 'protocol' ) )
-        {
-            $protocol = 'http';
-            if( ( $_SERVER['SERVER_PORT'] == 443 && ! empty( $_SERVER['HTTPS'] ) ) || $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
-            {
-                $protocol = 'https';
-            }    
-        }
-        return $protocol;
-    }
+	/**
+	 * 
+	 *
+	 * @return string
+	 */
+	public static function getProtocol()
+	{
+		if( ! $protocol = Ayoola_Application::getDomainSettings( 'protocol' ) )
+		{
+				$protocol = 'http';
+				if( ( $_SERVER['SERVER_PORT'] == 443 && ! empty( $_SERVER['HTTPS'] ) ) || $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
+				{
+						$protocol = 'https';
+				}    
+		}
+		return $protocol;
+	}
 	
-    /**
-     * Returns the home page url
-     *
-     * @return string
-     */
-    public static function getRootUrl()
-    {
-
+	/**
+	 * Returns the home page url
+	 *
+	 * @return string
+	 */
+	public static function getRootUrl()
+	{
 		$domain = self::getDefaultDomain();
 		$url = self::getProtocol() . '://' . $domain . self::getPortNumber() . @$_SERVER['CONTEXT_PREFIX'];   
 		return $url;
-    }
-	
-    /**
-     * Returns the default domain name
-     *
-     * @return string
-     */
-    public static function getDefaultDomain()
-    {
+	}
+
+	/**
+	 * Returns the default domain name
+	 *
+	 * @return string
+	 */
+	public static function getDefaultDomain()
+	{
 
 		$domainName = Ayoola_Application::getDomainSettings( 'domain_name' );
 		if( ! @Ayoola_Application::getDomainSettings( 'dynamic_domain' ) )
@@ -564,47 +565,47 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 
 		return $domainName;
 
-    }
-	
-    /**
-     * Returns the default domain name
-     *
-     * @return string
-     */
-    public static function getPortNumber()  
-    {
+	}
+
+	/**
+	 * Returns the default domain name
+	 *
+	 * @return string
+	 */
+	public static function getPortNumber()  
+	{
 		return ( $_SERVER['SERVER_PORT'] == '80' || $_SERVER['SERVER_PORT'] == '443' ? '' : ( ':' . $_SERVER['SERVER_PORT'] ) );
-    }
-	
-    /**
-     * Returns the link for thumbnail for the page
-     *
-     * @return string
-     */
-    public static function getThumbnail()
-    {
+	}
+
+	/**
+	 * Returns the link for thumbnail for the page
+	 *
+	 * @return string
+	 */
+	public static function getThumbnail()
+	{
 		if( is_null( self::$thumbnail ) ){ self::$thumbnail = '/img/logo.png'; }
 		return Ayoola_Doc::uriToDedicatedUrl( self::$thumbnail );
-    }
-	
-    /**
-     * Returns the link for thumbnail for the page
-     *
-     * @return string
-     */
-    public static function getFavicon() 
-    {
+	}
+
+	/**
+	 * Returns the link for thumbnail for the page
+	 *
+	 * @return string
+	 */
+	public static function getFavicon() 
+	{
 		if( is_null( self::$favicon ) ){ self::$favicon = '/favicon.ico'; }
 		return Ayoola_Doc::uriToDedicatedUrl( self::$favicon );  
-    }
-	
-    /**
-     * Returns the current url with query string
-     *
-     * @return string
-     */
-    public static function getCurrentUrl()
-    {
+	}
+
+	/**
+	 * Returns the current url with query string
+	 *
+	 * @return string
+	 */
+	public static function getCurrentUrl()
+	{
 		$queryString = self::buildQueryStrings();
 		$currentUrl = rtrim( Ayoola_Application::getRequestedUri(), '/' );
 		switch( Ayoola_Application::$mode )
@@ -621,28 +622,28 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		}
 		$currentUrl =  '' . Ayoola_Application::getUrlPrefix() . '' . $currentUrl . '?' . $queryString;
 		return $currentUrl;
-    }
-	
-    /**
-     * Returns the Previous url usually saved as a url parameter
-     *
-     * @return string
-     */
-    public static function getPreviousUrl( $default = '' )
-    {
-        $url = empty( $_REQUEST['previous_url'] ) ? $default : $_REQUEST['previous_url'];
-        $url = urldecode( $url );
+	}
+
+	/**
+	 * Returns the Previous url usually saved as a url parameter
+	 *
+	 * @return string
+	 */
+	public static function getPreviousUrl( $default = '' )
+	{
+		$url = empty( $_REQUEST['previous_url'] ) ? $default : $_REQUEST['previous_url'];
+		$url = urldecode( $url );
 		return $url;
-    }
-	
-    /**
-     * Sets the Previous url usually saved as a url parameter
-     *
-     * @param string
-     * @return string
-     */
-    public static function setPreviousUrl( $url = null )
-    {
+	}
+
+	/**
+	 * Sets the Previous url usually saved as a url parameter
+	 *
+	 * @param string
+	 * @return string
+	 */
+	public static function setPreviousUrl( $url = null )
+	{
 		if( $url )
 		{
 			$url .= stripos( $url, '?' ) ? '&' : '?';
@@ -669,22 +670,22 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 		//	$_POST, $_GET was being cleared
 
 		$url .= 'previous_url=' . urlencode( '//' . $host . '' . $currentUrl );
-	return $url;
-    }	
-	
-    /**
-     * Returns the path to a particular page
-     *
-     * @param string The Uri to the Page
-     * @return array The paths to the Page files
-     */
-    public static function getPagePaths( $pageUri = null )
-    {
+		return $url;
+	}	
+
+	/**
+	 * Returns the path to a particular page
+	 *
+	 * @param string The Uri to the Page
+	 * @return array The paths to the Page files
+	 */
+	public static function getPagePaths( $pageUri = null )
+	{
 		if( is_null( $pageUri ) ){ $pageUri = Ayoola_Application::getPresentUri(); }
 		if( $pageUri === '/' ){ $pageUri = ''; }
 		require_once 'Ayoola/Filter/UriToPath.php';
 		$filter = new Ayoola_Filter_UriToPath;
 		return $filter->filter( $pageUri );
-    }
-    
+	}
+		
 }
