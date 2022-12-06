@@ -265,7 +265,6 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             foreach( $values as $key => $each ) 
             {
                 //    $this->insert( $each, array( 'record_row_id' => $each[$this->getTableName() . '_id'] ) );
-                //    set_time_limit( 30 );
                 try
                 {
 

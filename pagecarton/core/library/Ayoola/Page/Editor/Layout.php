@@ -92,7 +92,6 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      */	
     public function sourcePage( $url = null )
     {
-	    //	set_time_limit( 0 );
 		if( $url )
 		{ 
 			//	source for this specific url
