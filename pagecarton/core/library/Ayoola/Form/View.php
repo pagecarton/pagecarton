@@ -142,6 +142,11 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 				$table = Ayoola_Form_Table_Data::getInstance();
 				$infoToInsert = array( 'form_name' => $data['form_name'], 'user_id' => Ayoola_Application::getUserInfo( 'user_id' ), 'form_data' => $values  );
 
+				if( empty( $data['form_options'] ) || ! is_array( $data['form_options'] ) )
+				{
+					$data['form_options'] = array();
+				}
+	
 				if( $previousData && ! in_array( 'disable_updates', $data['form_options'] ) )
 				{
                     $newDataToInsert = $values + $previousData;
@@ -188,6 +193,10 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 			}
             catch( Ayoola_Exception $e ){ null; }
             $updateLink = null;
+			if( empty( $data['form_options'] ) || ! is_array( $data['form_options'] ) )
+			{
+				$data['form_options'] = array();
+			}
             if( ! @in_array( 'disable_updates', $data['form_options'] )	)
             {
                 $updateLink = '<a class="pc-btn" href="' . Ayoola_Page::getHomePageUrl() . '/widgets/' . __CLASS__ . '?form_name=' . $data['form_name'] . '&data_id=' . $dataId . '&data_key=' . md5( json_encode( $values ) ) . '">' . self::__( 'Update Form Entry' ) . '</a>';
@@ -307,7 +316,11 @@ class Ayoola_Form_View extends Ayoola_Form_Abstract
 
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'id' => $this->getObjectName() . @$formInfo['form_name'] ) );
 
-    
+		if( empty( $data['form_options'] ) || ! is_array( $data['form_options'] ) )
+		{
+			$data['form_options'] = array();
+		}
+
         if( ! empty( $formInfo['form_options'] ) && in_array( 'disable_updates', $formInfo['form_options'] ) && ! self::hasPriviledge( 98 ) && ! empty( $values ) )
         {
 

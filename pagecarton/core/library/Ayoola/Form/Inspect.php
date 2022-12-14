@@ -95,21 +95,35 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
             }
 
 			//	Filter the result to save time
-			$sortFunction2 = create_function
-			( 
-				'& $key, & $values', 
-                '
-                    if( ! empty( $_GET["entry_categories"] ) )
-                    {
-                        if( empty( $values["form_data"]["entry_categories"] ) || array_diff( $_GET["entry_categories"], $values["form_data"]["entry_categories"] )  )
-                        {
-                            $values = false;
-                            return;
-                        }
-                    }
-                    $values = $values["form_data"] + $values;
-				'
-			); 
+			// $sortFunction2 = create_function
+			// ( 
+			// 	'& $key, & $values', 
+            //     '
+            //         if( ! empty( $_GET["entry_categories"] ) )
+            //         {
+            //             if( empty( $values["form_data"]["entry_categories"] ) || array_diff( $_GET["entry_categories"], $values["form_data"]["entry_categories"] )  )
+            //             {
+            //                 $values = false;
+            //                 return;
+            //             }
+            //         }
+            //         $values = $values["form_data"] + $values;
+			// 	'
+			// ); 
+
+			$sortFunction2 = function( & $key, & $values )
+			{
+				if( ! empty( $_GET["entry_categories"] ) )
+				{
+					if( empty( $values["form_data"]["entry_categories"] ) || array_diff( $_GET["entry_categories"], $values["form_data"]["entry_categories"] )  )
+					{
+						$values = false;
+						return;
+					}
+				}
+				$values = $values["form_data"] + $values;
+			};
+
 			$formData = $table->select( null, array( 'form_name' => $data['form_name'] ), array( 'result_filter_function' => $sortFunction2, 'rand' => $_GET["entry_categories"] ) );
 			$formData = self::sortMultiDimensionalArray( $formData, 'creation_time' );
 			
