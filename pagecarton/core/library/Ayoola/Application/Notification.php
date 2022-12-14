@@ -86,7 +86,7 @@ class Ayoola_Application_Notification extends Ayoola_Abstract_Table
                 $userTable = $userTable::getInstance( $userTable::SCOPE_PROTECTED );
                 $userTable->getDatabase()->getAdapter()->setAccessibility( $userTable::SCOPE_PROTECTED );
                 $userTable->getDatabase()->getAdapter()->setRelationship( $userTable::SCOPE_PROTECTED );
-                $users = $userTable->select( null, array( 'access_level' => array( 99 ) ) );
+                $users = $userTable->select( null, array( 'access_level' => array( 99, 98 ) ) );
                 foreach( $users as $each )
                 {
                     $emails .= ( ',' . $each['email'] );

@@ -392,7 +392,6 @@ abstract class Ayoola_Doc_Adapter_Abstract implements Ayoola_Doc_Adapter_Interfa
                 // read past the length
                 $buffer = $end - $p + 1;
             }
-            set_time_limit(0); // Reset time limit for big files
             echo fread($fp, $buffer);
             flush(); // Free up memory. Otherwise large files will trigger PHP's memory limit.
         }

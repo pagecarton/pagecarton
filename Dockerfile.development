@@ -15,4 +15,8 @@ RUN docker-php-ext-install gd
 
 COPY pagecarton.php.ini /usr/local/etc/php/conf.d/pagecarton.php.ini
 
+RUN chmod 777 /var/www
+
+#RUN chown -hR www-data:www-data /var/www/pagecarton
+
 CMD ["apache2-foreground"]

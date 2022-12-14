@@ -75,18 +75,13 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                     continue;
                 }
                 $link  = Ayoola_Page::getHomePageUrl() . $page['url'];
-//                self::v( $link );
-//                continue;
                 if( ! $pagePaths = Ayoola_Application::getViewFiles( $page['url'] ) )
                 {
-                //    self::v( $link );
                     continue;
                 }
                 Ayoola_Application::setRuntimeSettings( 'real_url', $page['url'] );
                 include_once( $pagePaths['include'] );
                 $this->setViewContent(  '<li class=""><a  target="_blank" href="' . $link . '">' . $link . '</a>  viewed successfully</li>' );
-                //                self::v( $link );
-            //    self::fetchLink( $link );
             }
             Ayoola_Application::setRuntimeSettings( 'real_url', $currentUrl );
 
@@ -104,14 +99,12 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                 foreach( $output[1] as $phrase )
                 {
 
-                //    self::v( $phrase );
                     $phrase = trim( $phrase );
                     if( false === strpos( trim( $phrase ), ' ' ) )
                     {
                         continue;
                     }
                     self::__( $phrase );
-                //    $this->setViewContent( $phrase );
                 }
 
                 //  other words
@@ -124,7 +117,6 @@ class PageCarton_Locale_Translation_AutoPopulateWords extends PageCarton_Locale_
                         continue;
                     }
                    self::__( $phrase );
-                //    $this->setViewContent( $phrase );
                 }
 
                 if( false === stripos( $fileContent, 'exit(' ) 
