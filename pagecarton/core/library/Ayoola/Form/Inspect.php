@@ -79,7 +79,7 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
             
             $buildQuery = null;
             $v = null;
-            if( ! empty( $_GET['entry_categories'] ) )
+            if( ! empty( $_GET['entry_categories'] ) && is_array( $_GET['entry_categories'] ) )
             {
                 foreach( $_GET['entry_categories'] as $each )
                 {               
@@ -124,16 +124,37 @@ class Ayoola_Form_Inspect extends Ayoola_Form_Abstract
 				$values = $values["form_data"] + $values;
 			};
 
-			$formData = $table->select( null, array( 'form_name' => $data['form_name'] ), array( 'result_filter_function' => $sortFunction2, 'rand' => $_GET["entry_categories"] ) );
+			//$xxc = json_encode( $sortFunction2 );
+			//var_export( $xxc ); 
+
+			$ourOptions = array( 'result_filter_function' => $sortFunction2, 
+				'rand' => json_encode( $_GET["entry_categories"] ) . time(),
+				'disable_cache' => true
+			);
+			
+			$formData = $table->select( null, array( 'form_name' => $data['form_name'] ), $ourOptions );
+			//var_export( $formData ); 
+			//var_export( $ourOptions ); 
 			$formData = self::sortMultiDimensionalArray( $formData, 'creation_time' );
 			
 
 			krsort( $formData );
             $list->setData( $formData );
             $listOptions = array();
+			$getCategories = array();
+			if( ! empty( $_GET['entry_categories'] ) && is_array( $_GET['entry_categories'] ) )
+			{
+				$getCategories = $_GET['entry_categories'];
+			}
+			
+			if( empty( $data['entry_categories'] ) || ! is_array( $data['entry_categories'] ) )
+			{
+				$data['entry_categories'] = array();
+			}
+
             foreach( $data['entry_categories'] as $each )
             {               
-                if( ! in_array( $each, $_GET['entry_categories'] ) )
+                if( ! in_array( $each, $getCategories ) )
                 {
                     $listOptions[$each] = '<a  href="javascript:"  onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Form_Inspect/?form_name=' . $data['form_name'] . '&entry_categories[]=' . $each . '' . $buildQuery . '\', \'' . $this->getObjectName() . '\' )">' . $each . ' <i class="fa fa-external-link pc_give_space" aria-hidden="true"></i></a>';
                 }

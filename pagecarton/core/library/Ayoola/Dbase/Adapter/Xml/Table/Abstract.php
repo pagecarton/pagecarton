@@ -223,7 +223,7 @@ abstract class Ayoola_Dbase_Adapter_Xml_Table_Abstract extends Ayoola_Dbase_Adap
      */
     public function setCacheFilename()
     {
-      $arguments = md5( serialize( func_get_args() ) . '' . $_SERVER['HTTP_HOST'] );
+      $arguments = md5( json_encode( func_get_args() ) . '' . $_SERVER['HTTP_HOST'] );
       
       $file = strtolower( $arguments );
       $file = $this->getTableCacheDirectory( $this->getTableName() ) . DS . $file;

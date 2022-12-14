@@ -56,8 +56,19 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 		 * The reason for the protected scope is to be able to select prIvate files
 		 */
 		$result = null;
-		$result = $this->getCache( func_get_args() );
+        try
+        {
+            $result = $this->getCache( func_get_args() );
+        }
+        catch( Exception $e )
+        {
+            //var_export( $e->getTraceAsString() );
+            //var_export( $e->getMessage() );
+        }
+
 		if( is_array( $result ) && empty( $options['disable_cache'] ) && $this->cache ){ return $result; }
+
+
 		$rows = array();
 
 		if( ! empty( $options['filename'] ) )
@@ -594,7 +605,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 			}
 			else
 			{
-				@$innerOptions['limit'] = $options['limit'] - $totalRows;
+				//@$innerOptions['limit'] = $options['limit'] - $totalRows;
 			}
 		}
 	}
@@ -619,7 +630,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
         $file = $this->getCacheFilename();
 
         Ayoola_Doc::createDirectory( dirname( $file ) );
-		return @Ayoola_File::putContents( $file, serialize( $result ) );
+		return @Ayoola_File::putContents( $file, json_encode( $result ) );
     } 
 		
     /**
@@ -663,7 +674,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
         {
         //        return $falseResult; 
         }
-		return @unserialize( file_get_contents( $cacheFile ) );
+		return @json_decode( file_get_contents( $cacheFile ) );
     } 
 	// END OF CLASS
 }
