@@ -2034,6 +2034,14 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		{
 			parse_str( $parameters['advanced_parameters'], $advanceParameters );
 
+            if( empty( $advanceParameters['advanced_parameter_name'] ) )
+            {
+                $advanceParameters['advanced_parameter_name'] = array();
+            }
+            if( empty( $advanceParameters['advanced_parameter_value'] ) )
+            {
+                $advanceParameters['advanced_parameter_value'] = array();
+            }
 			@$advanceParameters = array_combine( $advanceParameters['advanced_parameter_name'], @$advanceParameters['advanced_parameter_value'] ) ? : array();
 
 			$parameters += $advanceParameters;
