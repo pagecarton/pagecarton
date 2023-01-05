@@ -386,7 +386,10 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
     {
         $options['limit'] = 1;
         $data             = $this->select($fieldsToSelect, $where, $options);
-        if (!empty($data)) {$data = array_shift($data);}
+        if (!empty($data))
+        {
+            $data = (array) array_shift($data);
+        }
         return $data;
     }
 
