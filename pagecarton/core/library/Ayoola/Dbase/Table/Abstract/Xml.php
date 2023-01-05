@@ -362,17 +362,13 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
             @$options = $options ? : array();
             @static::$_defaultSelectOptions = is_array( static::$_defaultSelectOptions ) ? static::$_defaultSelectOptions : array();
             $options = $options + static::$_defaultSelectOptions;
-        //    var_export( $options );
+
             $result = $this->query( 'TABLE', 'FETCH', $fieldsToSelect, $where, $options );
         } 
         catch( Exception $e ) 
         {
             return array();
         }
-
-        //    krsort( $result );
-
-        //      return array_map( 'unserialize', array_unique( array_map( 'serialize', $result ) ) );
         return $result;
     }
 

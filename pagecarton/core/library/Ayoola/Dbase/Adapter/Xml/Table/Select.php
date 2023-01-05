@@ -588,6 +588,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
             }
             else
             {
+                $fields = (array) $fields;
 
                 if( ! is_null( $rowKey ) )
                 {
@@ -674,7 +675,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
         {
         //        return $falseResult; 
         }
-		return @json_decode( file_get_contents( $cacheFile ) );
+		return @json_decode( file_get_contents( $cacheFile ), true );
     } 
 	// END OF CLASS
 }
