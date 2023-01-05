@@ -346,11 +346,12 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 		{
 			$a = (array) $a;
 			$b = (array) $b;
-			
+
 			@$a = $a[$key];
 			@$b = $b[$key];
 			return is_numeric( $a ) && is_numeric( $b ) ? ( ( $a < $b ) ? -1 : ( ( $a > $b ) ? 1 : 0 ) ) : strcmp( $a, $b );
 		};
+		
 		usort( $array, $sortColumn );
 		return $array;
     } 

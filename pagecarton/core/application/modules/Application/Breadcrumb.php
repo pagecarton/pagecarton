@@ -57,7 +57,6 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
     {
 		try
 		{
-		//	var_export( $this->_parameter );
 			$this->setParameter( array( 'markup_template_no_cache' => true ) ); 
 			$breadcrumb = Ayoola_Page::getBreadcrumb();
 			if( count( $breadcrumb ) < 2 )
@@ -65,12 +64,10 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 				return false;
 			}
 			
-		//	var_export( $breadcrumb );
 			$homeDone = true;
 			if( ! @$this->_parameter['markup_template'] ) 
 			{
 				$this->_parameter['markup_template_prefix'] = '<ol class="pc-breadcrumb">';
-			//	var_export( Ayoola_Application::getUrlPrefix() );
 				if( Ayoola_Application::getUrlPrefix() && Ayoola_Application::getUrlPrefix() !== '/index.php' ) 
 				{
 					$this->_parameter['markup_template_prefix'] .= '<li><a href="/" title="' . self::__( 'Home Page' ) . '">' . self::__( 'Home' ) . '</a></li>';
@@ -102,9 +99,10 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 			$j = is_numeric( $this->getParameter( 'no_of_items_to_show' ) ) ? intval( $this->getParameter( 'no_of_items_to_show' ) ) : $j;
 			$urlLog = array();
 			$presentUri = Ayoola_Application::getPresentUri();
-		//	self::v( $breadcrumb );
 			foreach( $breadcrumb as $each )
 			{
+				$each = (array) $each;
+
 				if( $i++ >= $j )
 				{ 
 					break; 
@@ -127,9 +125,6 @@ class Application_Breadcrumb extends Ayoola_Abstract_Table
 				$urlLog[$each['url']] = $each['url'];
 				if( $template )
 				{
-					//	var_export( $each['url'] );
-					//	var_export( trim( $each['url'], '/' ) );
-					//	var_export( trim( $presentUri, '/' ) );
 					if( ( trim( $each['url'], '/' ) === trim( $presentUri, '/' ) || trim( $each['url'], '/' ) == '404' ) && @$this->_parameter['markup_template_active'] )
 					{ 
 						$tempTemplate = @$this->_parameter['markup_template_active']; 

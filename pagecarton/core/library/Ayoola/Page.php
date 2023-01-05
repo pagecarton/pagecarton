@@ -295,7 +295,7 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 	/**
 	 * 
 	 *
-	 * @return string
+	 * @return array
 	 */
 	public static function getBreadcrumb( $url = null )
 	{
