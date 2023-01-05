@@ -2167,6 +2167,16 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		if( ! empty( $parameters['advanced_parameters'] ) )
 		{ 
 			parse_str( $parameters['advanced_parameters'], $advanceParameters );
+			
+			if( empty( $advanceParameters['advanced_parameter_name'] ) )
+            {
+                $advanceParameters['advanced_parameter_name'] = array();
+            }
+            if( empty( $advanceParameters['advanced_parameter_value'] ) )
+            {
+                $advanceParameters['advanced_parameter_value'] = array();
+            }
+
 			@$injectedValues = array_combine( $advanceParameters['advanced_parameter_name'], @$advanceParameters['advanced_parameter_value'] ) ? : array();
 			unset( $advanceParameters['advanced_parameter_name'] );
 
