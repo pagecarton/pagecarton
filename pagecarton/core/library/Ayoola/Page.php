@@ -163,7 +163,8 @@ class Ayoola_Page extends Ayoola_Page_Abstract
 
 			if( $info = $table->selectOne( null, array( 'url' => $url ), array( 'work-arround-1-333' => true ) ) )
 			{ 
-
+				var_export( $info );
+				
 				if( ! is_array( $info['page_options'] ) )
 				{
 					$info['page_options'] = array();
