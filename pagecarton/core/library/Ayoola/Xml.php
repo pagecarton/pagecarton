@@ -229,7 +229,7 @@ class Ayoola_Xml extends DOMDocument
      *
      * @param string Filename
      * @param int Options
-     * @return int No of Bytes written
+     * @return int|false No of Bytes written
      */
     public function save( $filename, $options = 0 )
     {
