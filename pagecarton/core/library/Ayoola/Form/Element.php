@@ -229,7 +229,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 			$markup .= ' <div style="font-size:smaller; padding-top:1em; padding-bottom:1em;"><br> The name attribute of the element above is "' . $realName . '"<br></div>';   
 		}
 
-		if( $this->placeholderInPlaceOfLabel || ! trim( @$element['label'] ) )
+		if( $this->placeholderInPlaceOfLabel || empty( $element['label'] ) || ! trim( @$element['label'] ) )
 		{
 		
 		}

@@ -372,7 +372,7 @@ class Ayoola_Application
 				self::setIncludePath( SITE_APPLICATION_PATH . DS . 'modules' );
 			}
 
-            if( $data['domain_settings'] )
+            if( ! empty( $data['domain_settings'] ) )
             {
                 //	Allows the sub-domains to have an include path too.
                 self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
@@ -1547,9 +1547,13 @@ class Ayoola_Application
 	    $noRestriction = false;
 		$previewTheme = function( array $options = null ) use ( $pagePaths, $uri, &$PAGE_INCLUDE_FILE, &$PAGE_TEMPLATE_FILE )
 		{
-            $pageInfo = Ayoola_Page::getInfo( $uri );
-			//	page may just be present in the theme
-			$themeName = @$_REQUEST['pc_page_layout_name'] ? : $pageInfo['layout_name'];
+            $themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
+            if( $pageInfo = Ayoola_Page::getInfo( $uri ) )
+            {
+                //	page may just be present in the theme
+                $themeName = @$_REQUEST['pc_page_layout_name'] ? : $pageInfo['layout_name'];
+
+            }
             $themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
 
 
@@ -1630,7 +1634,7 @@ class Ayoola_Application
 			}
 			$realPageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
             $pageFile = Ayoola_Loader::getFullPath( $realPageFile, array( 'prioritize_my_copy' => true ) );
-			if( ! is_file( $pageFile ) )
+			if( empty( $pageFile ) || ! is_file( $pageFile ) )
 			{
 				return false;
             }

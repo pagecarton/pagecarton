@@ -949,7 +949,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 					}
 				}
 	
-				$replace = null;
+				$replace = '';
 				if( 
 						$this->badnewsPerElement 
 					&& ( @$this->_badnews[$name] || @$this->_badnews[@$this->_names[$name]['real_name']] )

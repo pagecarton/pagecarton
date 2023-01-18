@@ -98,7 +98,7 @@ class Ayoola_Page_Layout_Pages extends Ayoola_Page_Layout_Abstract
         }
         $pageFile = 'documents/layout/' . $themeName . '' . $pageThemeFileUrl . '.html';
         $pageFile = Ayoola_Loader::getFullPath( $pageFile, array( 'prioritize_my_copy' => true ) );
-        if( ! is_file( $pageFile ) )
+        if( empty( $pageFile )|| ! is_file( $pageFile ) )
         {
             return false;
         }
