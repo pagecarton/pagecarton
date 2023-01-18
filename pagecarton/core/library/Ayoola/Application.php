@@ -354,10 +354,13 @@ class Ayoola_Application
             {
                 self::setRequestedUri( '/domain-not-found' );
                 self::setPresentUri( '/domain-not-found' );
+
+                return false;
             }
 
+
  			//	Allows the sub-domains to have an include path too.
-			if( ! empty( $data['parent_domain_settings'][APPLICATION_PATH] ) && $data['parent_domain_settings'][APPLICATION_PATH] !== $data['domain_settings'][APPLICATION_PATH] )
+			if( ! empty( $data['parent_domain_settings'][APPLICATION_PATH] ) && ! empty( $data['domain_settings'][APPLICATION_PATH] ) && $data['parent_domain_settings'][APPLICATION_PATH] !== $data['domain_settings'][APPLICATION_PATH] )
 			{
 				self::setIncludePath( $data['parent_domain_settings'][APPLICATION_PATH] );
 				self::setIncludePath( $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' );
