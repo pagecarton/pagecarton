@@ -355,12 +355,11 @@ class Ayoola_Application
                 self::setRequestedUri( '/domain-not-found' );
                 self::setPresentUri( '/domain-not-found' );
 
-                return false;
             }
 
 
  			//	Allows the sub-domains to have an include path too.
-			if( ! empty( $data['parent_domain_settings'][APPLICATION_PATH] ) && ! empty( $data['domain_settings'][APPLICATION_PATH] ) && $data['parent_domain_settings'][APPLICATION_PATH] !== $data['domain_settings'][APPLICATION_PATH] )
+			if( ! empty( $data['parent_domain_settings'][APPLICATION_PATH] ) && ( empty( $data['domain_settings'][APPLICATION_PATH] ) || $data['parent_domain_settings'][APPLICATION_PATH] !== $data['domain_settings'][APPLICATION_PATH] ) )
 			{
 				self::setIncludePath( $data['parent_domain_settings'][APPLICATION_PATH] );
 				self::setIncludePath( $data['parent_domain_settings'][APPLICATION_PATH] . '/modules' );
@@ -372,19 +371,21 @@ class Ayoola_Application
 				self::setIncludePath( SITE_APPLICATION_PATH );
 				self::setIncludePath( SITE_APPLICATION_PATH . DS . 'modules' );
 			}
-			//	Allows the sub-domains to have an include path too.
-			self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
-			self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] . '/modules' );
 
-			self::$_domainSettings =  $data['domain_settings'];
-            //var_export( self::$_domainSettings );
-            //var_export( get_include_path() ); 
+            if( $data['domain_settings'] )
+            {
+                //	Allows the sub-domains to have an include path too.
+                self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] );
+                self::setIncludePath( $data['domain_settings'][APPLICATION_PATH] . '/modules' );
 
-            if( ! empty( $data['domain_settings']['username'] ) )
-			{
-				self::$GLOBAL['domain'] = $data['domain_settings'];
+                self::$_domainSettings =  $data['domain_settings'];
 
-			}
+                if( ! empty( $data['domain_settings']['username'] ) )
+                {
+                    self::$GLOBAL['domain'] = $data['domain_settings'];
+
+                }
+            }
 			return true;
 		}
 
