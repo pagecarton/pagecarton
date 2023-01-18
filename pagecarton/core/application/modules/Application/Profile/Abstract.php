@@ -267,7 +267,7 @@ abstract class Application_Profile_Abstract extends Ayoola_Abstract_Table
 			$authInfo = $table->selectOne( null, array( 'auth_level' => $profileData['access_level'] ) );
 			$profileData +=  is_array( $authInfo ) ? $authInfo : array();
         }
-        if( $userInfo = Application_User_Abstract::getUserInfo( $profileData['user_id'] ) )
+        if( isset( $profileData['user_id'] ) AND $userInfo = Application_User_Abstract::getUserInfo( $profileData['user_id'] ) )
         {
 			$profileData +=  is_array( $userInfo ) ? $userInfo : array();
         }

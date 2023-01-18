@@ -668,7 +668,7 @@ class Ayoola_Application
 					{
 						$userInfo = Application_Profile_Abstract::getProfileInfo( $subDomain );
                     }
-                    if( $userInfo['username'] )
+                    if( ! empty( $userInfo['username'] ) )
                     {
                         if( $realUserInfo = Application_User_Abstract::getUserInfo( array( 'username' => $userInfo['username'] ) ) )
                         {
@@ -676,7 +676,7 @@ class Ayoola_Application
                         }
 
                     }
-					if( @in_array( 'user_subdomains', @$data['domain_settings']['domain_options'] ) && $userInfo  )
+					if( isset( $data['domain_settings']['domain_options'] ) && is_array( $data['domain_settings']['domain_options'] ) &&  in_array( 'user_subdomains', $data['domain_settings']['domain_options'] ) && is_array( $userInfo ) && ! empty( $userInfo )   )
 					{
 						//	we have a user subdomain
 						//	do we have a custom domain?
