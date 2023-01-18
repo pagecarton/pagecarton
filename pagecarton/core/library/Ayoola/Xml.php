@@ -231,6 +231,7 @@ class Ayoola_Xml extends DOMDocument
      * @param int Options
      * @return int|false No of Bytes written
      */
+	#[\ReturnTypeWillChange]
     public function save( $filename, $options = 0 )
     {
 		//throw new Exception;
