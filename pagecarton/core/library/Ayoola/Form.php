@@ -470,15 +470,16 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
      */	
     public function getRequiredFieldset()
     {
-		if( $delay =  Application_Settings_Abstract::getSettings( 'Forms', 'session_delay_time' ) )
+		$sessionTime = time() - intval( $_SESSION['PC_SESSION_START_TIME'] );
+		$delay =  Application_Settings_Abstract::getSettings( 'Forms', 'session_delay_time' );
+		if( isset( $this->_attributes['name'] ) && $this->_attributes['name'] === 'Ayoola_Access_Login' )
 		{
-			$sessionTime = time() - $_SESSION['PC_SESSION_START_TIME'];
-
-			if( $delay > $sessionTime )
-			{
-				$this->setBadnews( 'Please wait ' . ( $delay - $sessionTime ) . ' secs before submitting your form!', '' );
-
-			}
+			//	don't delay on login
+			//sleep( 30 );
+		}
+		elseif( ! self::hasPriviledge( array( 99, 98 ) ) && $delay > $sessionTime )
+		{
+			$this->setBadnews( 'Please wait ' . ( $delay - $sessionTime ) . ' secs before submitting your form!', '' );
 		}
         $element = new Ayoola_Form_Element;
 		$element->useDivTagForElement = false;
