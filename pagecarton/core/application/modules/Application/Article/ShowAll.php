@@ -844,12 +844,19 @@ class Application_Article_ShowAll extends Application_Article_Abstract
                 $tempItem = array_pop( $values );
 
 				$customFields = array();
-				if( ! empty( $postTypeInfo ['post_type_custom_fields'] ) )
+				$xCustomFields = $this->getParameter( 'post_type_custom_fields' );
+				if( empty( $xCustomFields ) && ! empty( $postTypeInfo ['post_type_custom_fields'] ) )
 				{
-					$customFields = array_map( 'trim', explode( ',', $postTypeInfo ['post_type_custom_fields'] ) );
+					$xCustomFields = $postTypeInfo ['post_type_custom_fields'];
+
+				}
+				if( $xCustomFields )
+				{
+					$customFields = array_map( 'trim', explode( ',', $xCustomFields ) );
 					foreach( $customFields as $customFieldsKey => $customFieldsValue )
 					{
 						$customFields[$customFieldsValue] = ucwords( str_replace( array( '_', '-' ), ' ', $customFieldsValue ) );
+						unset( $customFields[$customFieldsKey] );
 					}
 				}
 
