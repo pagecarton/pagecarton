@@ -173,9 +173,13 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
 		{
 			
 			//	add app id to record id so as to remove duplicate IDs
-			$appId = new Ayoola_Api_Api();
-			$appId = $appId->selectOne();
-			$appId = strval( intval( $appId['application_id'] ) );
+			$appIdX = new Ayoola_Api_Api();
+            $appId = 0;
+			if( $appIdX = $appIdX->selectOne() )
+            {
+                $appId = strval( intval( $appIdX['application_id'] ) );
+            }
+            
 			$whereValue = '' . $appId . '-' . time() . '-' . $recordRowId;
 		}
 				
@@ -197,7 +201,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Insert extends Ayoola_Dbase_Adapter_Xml_Tab
         {
             $cxi = 0;
 
-            foreach( self::$_processing[$class] as $process )
+            foreach( self::$_processing[$class] as $keyX => $process )
             {
                 if( $cxi++ > 500 )
                 {

@@ -555,6 +555,7 @@ abstract class Ayoola_Abstract_Table extends Ayoola_Abstract_Playable
 				$this->_form = new Ayoola_Form();
 			}
 		}
+		//var_export( $this->_form );
 		return $this->_form;
     }
 	
