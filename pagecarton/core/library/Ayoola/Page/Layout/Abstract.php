@@ -1116,7 +1116,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			// 				continue;
 			// 			}
 						
-/* 			// 			$ulParent->appendChild( $xml->createCDATASection( "<?php echo Ayoola_Menu_Demo::viewInLine( array( 'option' => '{$menuName}', 'li-active-class' => '{$activeClass}', 'ul-class' => '{$ulClass}', 'ul-id' => '{$ulId}', )  ); ?>" ) ); 
+				/* 			// 			$ulParent->appendChild( $xml->createCDATASection( "<?php echo Ayoola_Menu_Demo::viewInLine( array( 'option' => '{$menuName}', 'li-active-class' => '{$activeClass}', 'ul-class' => '{$ulClass}', 'ul-id' => '{$ulId}', )  ); ?>" ) ); 
 			// 		}
 			// 	}
 			// 	else
