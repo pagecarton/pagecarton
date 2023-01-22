@@ -283,7 +283,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				//	format templateraw file for easy editing
 				$contentLte = preg_replace(
 						'/{@@@' . $match . '(\s*)(\<[\S\s]*\>)(\s*)' . $match . '@@@}/i', 
-						'$1<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>$3', 
+						'$1<section class="pc-element-with-no-space" data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>$3', 
 						$contentLte );
 
 	
@@ -364,7 +364,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					if( stripos( $placeholder[1], '©' ) || stripos( $placeholder[1], '&copy' ) || stripos( $placeholder[1], '&amp;copy' ) || stripos( $placeholder[1], '</nav>' ) )
 					{
 
-						$sContent = str_ireplace( $placeholder[1], '<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
+						$sContent = str_ireplace( $placeholder[1], '<section class="pc-element-with-no-space" data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
 						//var_export( $cContent );
 						//	remove sections that are not common to all files
 					
@@ -375,7 +375,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					{
 						//var_export( $pageThemeFileUrl );
 
-						$sContent = str_ireplace( $placeholder[1], '<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
+						$sContent = str_ireplace( $placeholder[1], '<section class="pc-element-with-no-space" data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
 						//var_export( $sContent );
 
 					}
@@ -737,7 +737,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			{
 				$newElement = $xml->createElement( "section" );
 				$newElement->setAttribute( "data-pc-all-sections", "1" );
-				$newElement->setAttribute( "class", "container" );
+				$newElement->setAttribute( "class", "container pc-element-with-no-space" );
 				try
 				{
 					$eachSection->insertBefore( $newElement, $firstElement->nextSibling );    
@@ -756,7 +756,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			$newElement = $xml->createElement( "section" );
 			$newElement->setAttribute( "data-pc-all-sections", "1" );
-			$newElement->setAttribute( "class", "container" );
+			$newElement->setAttribute( "class", "container pc-element-with-no-space" );
 			$body[0]->appendChild( $newElement );    
 			
 		}

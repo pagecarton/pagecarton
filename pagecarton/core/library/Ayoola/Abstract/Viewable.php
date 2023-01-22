@@ -2654,6 +2654,13 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 				}
                 //	Define content to clear from the screen
+                if( $contentToClear = $this->getParameter( 'content_search_replace' ) )
+                {
+                    if( ! empty( $contentToClear ) && is_array( $contentToClear ) )
+                    {
+                        $html = str_ireplace( array_keys( $contentToClear ), array_values( $contentToClear ), $html );
+                    }
+                }
                 if( $contentToClear = $this->getParameter( 'content_to_clear' ) )
                 {
                     if( ! is_array( $contentToClear ) )

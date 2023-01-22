@@ -171,7 +171,11 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
         $themeName =  ( ( @$_REQUEST['pc_page_editor_layout_name'] ? : @$_REQUEST['pc_page_layout_name'] ) ? : @$_REQUEST['layout_name'] ) ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
         unset( $values['layout_name'] );
         $previousData = Ayoola_Page_PageLayout::getInstance()->selectOne( array( 'layout_name' => $themeName ) );
-        $previousData['dummy_replace'] = array_fill_keys( $previousData['dummy_replace'], null );
+        if( isset( $previousData['dummy_replace'] ) && is_array( $previousData['dummy_replace'] ) )
+        {
+            $previousData['dummy_replace'] = array_fill_keys( $previousData['dummy_replace'], null );
+
+        }
         Ayoola_Page_PageLayout::getInstance()->update( $previousData, array( 'layout_name' => $themeName ) );
         Application_Settings::getInstance()->delete( array( 'settingsname_name' => __CLASS__ ) );
         self::$_dataVersion++;
@@ -260,6 +264,9 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
                 $this->setViewContent( $this->getForm()->view() );
                 if( ! $values = $this->getForm()->getValues() ){ return false; }
                 self::clearTexts( $this->_identifier['layout_name'] );
+
+                $this->setViewContent(  '' . self::__( '<div class="goodnews" style="xtext-align:center;">Static texts cleared.</div>' ) . '', true  );
+
                 return false;
             }
             if( ! $identifierData = self::getIdentifierData() ){ return false; }
