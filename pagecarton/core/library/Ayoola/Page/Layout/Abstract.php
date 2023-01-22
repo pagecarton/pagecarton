@@ -283,7 +283,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 				//	format templateraw file for easy editing
 				$contentLte = preg_replace(
 						'/{@@@' . $match . '(\s*)(\<[\S\s]*\>)(\s*)' . $match . '@@@}/i', 
-						'$1<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>$3', 
+						'$1<section class="pc-element-with-no-space" data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>$3', 
 						$contentLte );
 
 	
@@ -364,7 +364,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					if( stripos( $placeholder[1], '©' ) || stripos( $placeholder[1], '&copy' ) || stripos( $placeholder[1], '&amp;copy' ) || stripos( $placeholder[1], '</nav>' ) )
 					{
 
-						$sContent = str_ireplace( $placeholder[1], '<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
+						$sContent = str_ireplace( $placeholder[1], '<section class="pc-element-with-no-space" data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
 						//var_export( $cContent );
 						//	remove sections that are not common to all files
 					
@@ -375,7 +375,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 					{
 						//var_export( $pageThemeFileUrl );
 
-						$sContent = str_ireplace( $placeholder[1], '<section data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
+						$sContent = str_ireplace( $placeholder[1], '<section class="pc-element-with-no-space" data-pc-section-placeholder="' . $match . '"><!-- DO NOT REMOVE THIS SECTION --></section>' . "\r\n" , $sContent );
 						//var_export( $sContent );
 
 					}
@@ -737,7 +737,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			{
 				$newElement = $xml->createElement( "section" );
 				$newElement->setAttribute( "data-pc-all-sections", "1" );
-				$newElement->setAttribute( "class", "container" );
+				$newElement->setAttribute( "class", "container pc-element-with-no-space" );
 				try
 				{
 					$eachSection->insertBefore( $newElement, $firstElement->nextSibling );    
@@ -756,7 +756,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 		{
 			$newElement = $xml->createElement( "section" );
 			$newElement->setAttribute( "data-pc-all-sections", "1" );
-			$newElement->setAttribute( "class", "container" );
+			$newElement->setAttribute( "class", "container pc-element-with-no-space" );
 			$body[0]->appendChild( $newElement );    
 			
 		}
@@ -1022,109 +1022,112 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 			}
 			
 			//	Build navigation system
-			$nav = array();
-			if( ! empty( $values['layout_options'] ) && in_array( 'auto_menu', $values['layout_options'] ) )   
-			{
-				$nav = $xml->getElementsByTagName( 'nav' );
-			}
-			foreach( $nav as $navCount => $each )
-			{
-				//	The name must not have spaces   
-				$filter = new Ayoola_Filter_Name();
-				$menuName = $filter->filter( ( ( $each->getAttribute( 'data-pc-menu-name' ) ? : $each->getAttribute( 'name' ) ) ? : $each->getAttribute( 'id' ) ) ? : $each->getAttribute( 'class' ) );
-				if( ! $menuName || $each->getAttribute( 'data-pc-menu-ignore' ) )   
-				{
-					continue;
-				}
+			//	no longer needed.
+			//	turning off completely
+			// $nav = array();
+			// if( ! empty( $values['layout_options'] ) && in_array( 'auto_menu', $values['layout_options'] ) )   
+			// {
+			// 	$nav = $xml->getElementsByTagName( 'nav' );
+			// }
+			// foreach( $nav as $navCount => $each )
+			// {
+			// 	//	The name must not have spaces   
+			// 	$filter = new Ayoola_Filter_Name();
+			// 	$menuName = $filter->filter( ( ( $each->getAttribute( 'data-pc-menu-name' ) ? : $each->getAttribute( 'name' ) ) ? : $each->getAttribute( 'id' ) ) ? : $each->getAttribute( 'class' ) );
+			// 	if( ! $menuName || $each->getAttribute( 'data-pc-menu-ignore' ) )   
+			// 	{
+			// 		continue;
+			// 	}
 
-				//	clear interior first
-				//	no need to clear interior again
+			// 	//	clear interior first
+			// 	//	no need to clear interior again
 				
-				//	get the inner parent of ul, if present.
-				if( $each->getElementsByTagName( 'ul' ) )
-				{
-					foreach( $each->getElementsByTagName( 'ul' ) as $ulCount => $eachChild ) 
-					{
-						$ulParent = $eachChild->parentNode;
-						$idForMenu = 'pc-menu-' . $menuName . $navCount . '-' . $ulCount;
-						if( ! $ulParent->getAttribute( 'id' ) )
-						{
-							$ulParent->setAttribute( 'id', $idForMenu );
-						}
-						else
-						{
-							$idForMenu = $ulParent->getAttribute( 'id' );
-						}
-						$each->setAttribute( 'data-pc-menu-id-list', $each->getAttribute( 'data-pc-menu-id-list' ) . ',' . $ulParent->getAttribute( 'id' ) );
+			// 	//	get the inner parent of ul, if present.
+			// 	if( $each->getElementsByTagName( 'ul' ) )
+			// 	{
+			// 		foreach( $each->getElementsByTagName( 'ul' ) as $ulCount => $eachChild ) 
+			// 		{
+			// 			$ulParent = $eachChild->parentNode;
+			// 			$idForMenu = 'pc-menu-' . $menuName . $navCount . '-' . $ulCount;
+			// 			if( ! $ulParent->getAttribute( 'id' ) )
+			// 			{
+			// 				$ulParent->setAttribute( 'id', $idForMenu );
+			// 			}
+			// 			else
+			// 			{
+			// 				$idForMenu = $ulParent->getAttribute( 'id' );
+			// 			}
+			// 			$each->setAttribute( 'data-pc-menu-id-list', $each->getAttribute( 'data-pc-menu-id-list' ) . ',' . $ulParent->getAttribute( 'id' ) );
 
 						
-						//	Save the class names and other information
-						$each->setAttribute( 'data-pc-menu-ul-class-' . $idForMenu, $eachChild->getAttribute( 'class' ) );
-						$eachChild->getAttribute( 'id' ) ? $each->setAttribute( 'data-pc-menu-ul-id-' . $idForMenu, $eachChild->getAttribute( 'id' ) ) : null;
+			// 			//	Save the class names and other information
+			// 			$each->setAttribute( 'data-pc-menu-ul-class-' . $idForMenu, $eachChild->getAttribute( 'class' ) );
+			// 			$eachChild->getAttribute( 'id' ) ? $each->setAttribute( 'data-pc-menu-ul-id-' . $idForMenu, $eachChild->getAttribute( 'id' ) ) : null;
 						
-						//	Go deaper to look for class names of li and sub menus
-						while( $eachChild->hasChildNodes() ) 
-						{
-							$ulChild = $eachChild->firstChild;
-							if( strtolower( @$ulChild->tagName ) === 'li' )
-							{
-								//	Save the class names and other information
-								$ulChild->getAttribute( 'class' ) ? $each->setAttribute( 'data-pc-menu-li-active-class-' . $idForMenu, $ulChild->getAttribute( 'class' ) ) : null;
+			// 			//	Go deaper to look for class names of li and sub menus
+			// 			while( $eachChild->hasChildNodes() ) 
+			// 			{
+			// 				$ulChild = $eachChild->firstChild;
+			// 				if( strtolower( @$ulChild->tagName ) === 'li' )
+			// 				{
+			// 					//	Save the class names and other information
+			// 					$ulChild->getAttribute( 'class' ) ? $each->setAttribute( 'data-pc-menu-li-active-class-' . $idForMenu, $ulChild->getAttribute( 'class' ) ) : null;
 										
-								//	Go deaper to look for sub menus
-								while( $ulChild->hasChildNodes() ) 
-								{
-									$liChild = $ulChild->firstChild;
-									if( strtolower( @$liChild->tagName ) === 'ul' )
-									{
-										//	Save the class names and other information
-										$liChild->getAttribute( 'class' ) ? $each->setAttribute( 'data-pc-menu-li-ul-class-' . $idForMenu, $liChild->getAttribute( 'class' ) ) : null;
+			// 					//	Go deaper to look for sub menus
+			// 					while( $ulChild->hasChildNodes() ) 
+			// 					{
+			// 						$liChild = $ulChild->firstChild;
+			// 						if( strtolower( @$liChild->tagName ) === 'ul' )
+			// 						{
+			// 							//	Save the class names and other information
+			// 							$liChild->getAttribute( 'class' ) ? $each->setAttribute( 'data-pc-menu-li-ul-class-' . $idForMenu, $liChild->getAttribute( 'class' ) ) : null;
 										
 										
-									}
-									$ulChild->removeChild( $liChild );
-								}						
-							}
-							$eachChild->removeChild( $ulChild );
-						}						
+			// 						}
+			// 						$ulChild->removeChild( $liChild );
+			// 					}						
+			// 				}
+			// 				$eachChild->removeChild( $ulChild );
+			// 			}						
 						
-						$ulParent->removeChild( $eachChild );
-					}	
-				}
-				else
-				{
+			// 			$ulParent->removeChild( $eachChild );
+			// 		}	
+			// 	}
+			// 	else
+			// 	{
 				
-				}
-				if( $menuList = array_map( 'trim', explode( ',', $each->getAttribute( 'data-pc-menu-id-list' ) ) ) )
-				{
-					foreach( $menuList as $idForMenu )
-					{
-						if( ! $idForMenu )
-						{
-							continue;
-						}
-						$activeClass = $each->getAttribute( 'data-pc-menu-li-active-class-' . $idForMenu ) ? : 'active';
-						$ulClass = $each->getAttribute( 'data-pc-menu-ul-class-' . $idForMenu ) ? : '';
-						$ulId = $each->getAttribute( 'data-pc-menu-ul-id-' . $idForMenu ) ? : '';  
-						$xml->setId( 'id' );
-						$ulParent = $xml->getElementById( $idForMenu );
+			// 	}
+			// 	if( $menuList = array_map( 'trim', explode( ',', $each->getAttribute( 'data-pc-menu-id-list' ) ) ) )
+			// 	{
+			// 		foreach( $menuList as $idForMenu )
+			// 		{
+			// 			if( ! $idForMenu )
+			// 			{
+			// 				continue;
+			// 			}
+			// 			$activeClass = $each->getAttribute( 'data-pc-menu-li-active-class-' . $idForMenu ) ? : 'active';
+			// 			$ulClass = $each->getAttribute( 'data-pc-menu-ul-class-' . $idForMenu ) ? : '';
+			// 			$ulId = $each->getAttribute( 'data-pc-menu-ul-id-' . $idForMenu ) ? : '';  
+			// 			$xml->setId( 'id' );
+			// 			$ulParent = $xml->getElementById( $idForMenu );
 
-						if( ! $ulParent )
-						{
-							continue;
-						}
+			// 			if( ! $ulParent )
+			// 			{
+			// 				continue;
+			// 			}
 						
-						$ulParent->appendChild( $xml->createCDATASection( "<?php echo Ayoola_Menu_Demo::viewInLine( array( 'option' => '{$menuName}', 'li-active-class' => '{$activeClass}', 'ul-class' => '{$ulClass}', 'ul-id' => '{$ulId}', )  ); ?>" ) ); 
-					}
-				}
-				else
-				{
+				/* 			// 			$ulParent->appendChild( $xml->createCDATASection( "<?php echo Ayoola_Menu_Demo::viewInLine( array( 'option' => '{$menuName}', 'li-active-class' => '{$activeClass}', 'ul-class' => '{$ulClass}', 'ul-id' => '{$ulId}', )  ); ?>" ) ); 
+			// 		}
+			// 	}
+			// 	else
+			// 	{
 
-					$activeClass = $each->getAttribute( 'data-pc-menu-li-active-class' ) ? : 'active';
-					$ulClass = $each->getAttribute( 'data-pc-menu-ul-class' ) ? : '';
-					$each->appendChild( $xml->createCDATASection( "<?php echo Ayoola_Menu_Demo::viewInLine( array( 'option' => '{$menuName}', 'li-active-class' => '{$activeClass}', 'ul-class' => '{$ulClass}', )  ); ?>" ) ); 
-				}
-			}
+			// 		$activeClass = $each->getAttribute( 'data-pc-menu-li-active-class' ) ? : 'active';
+			// 		$ulClass = $each->getAttribute( 'data-pc-menu-ul-class' ) ? : '';
+			// 		$each->appendChild( $xml->createCDATASection( "<?php echo Ayoola_Menu_Demo::viewInLine( array( 'option' => '{$menuName}', 'li-active-class' => '{$activeClass}', 'ul-class' => '{$ulClass}', )  ); ?>" ) ); 
+			// 	}
+			// } */
+
 			//	Build logo
 			$img = $xml->getElementsByTagName( 'img' );
 			foreach( $img as $each )

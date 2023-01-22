@@ -635,7 +635,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			}
 			if( is_array( $values['link_options'] ) && in_array( 'spotlight', $values['link_options'] ) )
 			{ 
-				$values['ayoola_spotlight'] = 'ayoola.spotLight.showLinkInIFrame( \'' . $values['url'] . '\', \'page_refresh\' );';
+				$values['ayoola_spotlight'] = 'ayoola.spotLight.showLinkInIFrame( \'' . $values['url'] . '\', \'page_refresh\' ); return false;';
 				$link->setAttribute( 'onClick', $values['ayoola_spotlight'] );
 				
 				$values['url'] = 'javascript:';

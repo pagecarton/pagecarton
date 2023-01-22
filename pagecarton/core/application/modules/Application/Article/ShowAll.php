@@ -843,6 +843,23 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
                 $tempItem = array_pop( $values );
 
+				$customFields = array();
+				$xCustomFields = $this->getParameter( 'post_type_custom_fields' );
+				if( empty( $xCustomFields ) && ! empty( $postTypeInfo ['post_type_custom_fields'] ) )
+				{
+					$xCustomFields = $postTypeInfo ['post_type_custom_fields'];
+
+				}
+				if( $xCustomFields )
+				{
+					$customFields = array_map( 'trim', explode( ',', $xCustomFields ) );
+					foreach( $customFields as $customFieldsKey => $customFieldsValue )
+					{
+						$customFields[$customFieldsValue] = ucwords( str_replace( array( '_', '-' ), ' ', $customFieldsValue ) );
+						unset( $customFields[$customFieldsKey] );
+					}
+				}
+
 				if( self::hasPriviledge( @$articleSettings['allowed_writers'] ? : 98 ) ) 
 				{
 					$item = array( 
@@ -859,7 +876,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						'username' => Ayoola_Application::getUserInfo( 'username' ), 
 						'article_title' => sprintf( PageCarton_Widget::__( 'Add new "%s" here' ), $newArticleTypeToShow ), 
 						'article_description' => sprintf( PageCarton_Widget::__( 'The short description for the new "%s" you add will appear here. The short description should be between 100 and 300 characters.' ), $newArticleTypeToShow ), 
-					)  + ( $myProfileInfo ? : array() );  
+					)  + ( $myProfileInfo ? : array() ) + $customFields;  
 				}
 				else
 				{
@@ -874,7 +891,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						'auth_level' => $articleSettings['allowed_writers'], 
 						'article_title' => '...', 
 						'article_description' => sprintf( PageCarton_Widget::__( 'The short description for the new %s  will appear here. The short description should be between 100 and 300 characters.' ), $newArticleTypeToShow ), 
-					);  
+					) + $customFields;  
 				}
 
 				$tempItem ? array_push( $values, $tempItem ) : null;
@@ -1132,7 +1149,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
 				$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 501 ) . '';
 			}
-			$lengthOfDescription = $this->getParameter( 'length_of_description' ) ? : 500;
+			$lengthOfDescription = $this->getParameter( 'length_of_description' ) ? : 200;
 			if( $lengthOfDescription )
 			{
 				if( ! function_exists( 'mb_strimwidth' ) )

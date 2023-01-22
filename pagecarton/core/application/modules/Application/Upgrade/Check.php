@@ -122,8 +122,12 @@ class Application_Upgrade_Check extends PageCarton_Widget
                     $url = 'https://themes.pagecarton.org/tools/classplayer/get/name/Application_Article_View?article_url=' . $layout['article_url'] . '&pc_widget_output_method=JSON';
                     $feed = self::fetchLink( $url, array( 'time_out' => 2, 'connect_time_out' => 2, ) );
                     $layoutInfo = json_decode( $feed, true );
-                    $version = count( $layoutInfo['article_editor_username'] );
-                    $lastEdited = $layoutInfo['article_modified_date'];
+                    $version = 0;
+                    if( ! empty( $layoutInfo['article_editor_username'] ) )
+                    {
+                        $version = count( $layoutInfo['article_editor_username'] );
+                        $lastEdited = $layoutInfo['article_modified_date'];    
+                    }
                     if( $lastEdited > $layout['modified_time'] )
                     {
                         $this->setViewContent( '<div  style="font-size:smaller;" class="badnews">' . sprintf( self::__( '%s theme version %s is available. ' ), '' . $layout['layout_label'] . '', $version ) . ' <a style="font-size:smaller;" onClick="ayoola.spotLight.showLinkInIFrame( this.href, \'page_refresh\' ); return false;" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/name/Ayoola_Page_Layout_Repository?title=' . $layout['layout_label'] . '&layout_type=upload&install=' . $layout['article_url'] . '&update=' . $layout['article_url'] . '" class="">' . self::__( 'Update Now' ) . '</a>   </div>' ); 

@@ -1183,10 +1183,10 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
     /**
      * Gets _defaultValues
      * 
-     * @param array
-     * @return null
+     * @param string
+     * @return mixed
      */
-    public function getDefaultValues( $key = null )
+    public static function getDefaultValues( $key = null )
     {
 		return $key ? @self::$_defaultValues[$key] : self::$_defaultValues;
     }

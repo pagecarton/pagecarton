@@ -731,7 +731,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
                     self::saveArticle($post);
                     $links .= '' . sprintf(self::__('%s added to %s'), '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $values['article_url'] . '">' . $values['article_title'] . '</a>', '<a href="' . Ayoola_Application::getUrlPrefix() . '' . $post['article_url'] . '">' . $post['article_title'] . '</a>') . '';
                 }
-            } elseif ($eachPostTypeInfo['article_type'] === 'post-list' || in_array('post-list', $eachPostTypeInfo['post_type_options'])) {
+            } elseif ($eachPostTypeInfo['article_type'] === 'post-list' || ( isset( $eachPostTypeInfo['post_type_options'] ) && is_array( $eachPostTypeInfo['post_type_options'] ) && in_array('post-list', $eachPostTypeInfo['post_type_options'] ) ) ) {
                 $links .= '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_PostList_Sort?article_url=' . $values['article_url'] . '">' . sprintf(self::__('Sort %s'), $eachPostTypeInfo['post_type']) . '<i class="fa fa-sort pc_give_space"></i></a>';
             } else {
                 $links .= '<a class="pc-btn" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Application_Article_PostList_Add?article_url=' . $values['article_url'] . '">' . sprintf(self::__('Add this %s to a list'), $eachPostTypeInfo['post_type']) . '<i class="fa fa-plus pc_give_space"></i></a>';
