@@ -1149,7 +1149,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
 				$data['article_description'] = substr( strip_tags( $data['article_content'] ), 0, 501 ) . '';
 			}
-			$lengthOfDescription = $this->getParameter( 'length_of_description' ) ? : 500;
+			$lengthOfDescription = $this->getParameter( 'length_of_description' ) ? : 200;
 			if( $lengthOfDescription )
 			{
 				if( ! function_exists( 'mb_strimwidth' ) )
