@@ -410,7 +410,10 @@ class Ayoola_Application
 			$where = array( 'domain_name' => $domainName );
 			$tempDomainName = $domainName;
             $tempWhere = $where;
-            
+
+            //var_export( $tempWhere ); 
+            //var_export( $domain->select() );
+
 			while( ! $data['domain_settings'] = $domain->selectOne( null, $tempWhere ) )
 			{
                 //  check for sub domain
@@ -425,6 +428,7 @@ class Ayoola_Application
 				$subDomain = array_shift( $tempDomainName );	// Fix wildcard domainnames
 				$tempDomainName = implode( '.', $tempDomainName );
 				$tempWhere = array( 'domain_name' => $tempDomainName );
+                var_export( $tempWhere ); 
 
 			}
 			if( ! empty( $data['domain_settings']['sub_domain'] ) || @$data['domain_settings']['domain_type'] === 'sub_domain' )
@@ -1662,7 +1666,7 @@ class Ayoola_Application
             }
 			if
 			(
-				! is_file( $include ) OR ! is_file( $template )
+			    empty( $include ) OR empty( $template ) OR ! is_file( $include ) OR ! is_file( $template )
 			)
 			{
                 if( ! empty( $options['auto_init_theme_page'] ) )
