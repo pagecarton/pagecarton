@@ -540,7 +540,7 @@ class Ayoola_Form_Element extends Ayoola_Form
         $optionsX = array_combine( $optionsX, $optionsX );
         $DayValue = intval( @strlen( $values[$elementName . '_day'] ) === 1 ? ( '0' . @$values[$elementName . '_day'] ) : @$values[$elementName . '_day'] );
         $DayValue = intval( $DayValue ?  : $this->getGlobalValue( $elementName . '_day' ) );
-        $this->addElement( array( 'name' => $elementName . '_day', 'label' => '', 'style' => 'min-width:0px;width:100px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $DayValue ), array( 'Day' ) + $optionsX );
+        $this->addElement( array( 'name' => $elementName . '_day', 'label' => '', 'style' => 'min-width:0px;width:60px;display:inline-block;;margin-right:0;', 'type' => 'Select', 'value' => $DayValue ), array( 'Day' ) + $optionsX );
         if( strlen( $this->getGlobalValue( $elementName . '_day' ) ) === 1 )
         {
             $this->addFilter( $elementName . '_day', array( 'DefiniteValue' => '0' . $this->getGlobalValue( $elementName . '_day' ) ) );
@@ -569,7 +569,7 @@ class Ayoola_Form_Element extends Ayoola_Form
                     $optionsX[$eachKey] = '0' . $optionsX[$eachKey];
                 }
             }
-            $this->addElement( array( 'name' => $elementName . '_hours', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_hours'] ), array( 'Hour' ) +  array_combine( $optionsX, $optionsX ) );
+            $this->addElement( array( 'name' => $elementName . '_hours', 'label' => ' ', 'style' => 'min-width:0px;width:60px;', 'type' => 'Select', 'value' => @$values[$elementName . '_hours'] ), array( 'Hour' ) +  array_combine( $optionsX, $optionsX ) );
             $optionsX = range( 0, 59 );
             foreach( $optionsX as $eachKey => $each )
             {
@@ -578,7 +578,7 @@ class Ayoola_Form_Element extends Ayoola_Form
                     $optionsX[$eachKey] = '0' . $optionsX[$eachKey];
                 }
             }
-            $this->addElement( array( 'name' => $elementName . '_minutes', 'label' => ' ', 'style' => 'min-width:0px;width:100px;', 'type' => 'Select', 'value' => @$values[$elementName . '_minutes'] ), array( 'Minute' ) + array_combine( $optionsX, $optionsX ) );
+            $this->addElement( array( 'name' => $elementName . '_minutes', 'label' => ' ', 'style' => 'min-width:0px;width:60px;', 'type' => 'Select', 'value' => @$values[$elementName . '_minutes'] ), array( 'Minute' ) + array_combine( $optionsX, $optionsX ) );
 
             //	datetime combined
             $datetime = $date;
