@@ -922,9 +922,13 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 		{
 			$whiteList = array_map( 'trim', explode( ',', $_REQUEST['pc_form_element_whitelist'] ) );
 		}
-		else
+		elseif( $whiteList = $this->getParameter( 'element_whitelist' ) )
 		{
-			$whiteList = $this->getParameter( 'element_whitelist' );
+			
+			if( ! is_array( $whiteList ) )
+			{
+				$whiteList = array_map( 'trim', explode( ',', $whiteList ) );
+			}
         }
 		foreach( $allElements as $elementX )
 		{

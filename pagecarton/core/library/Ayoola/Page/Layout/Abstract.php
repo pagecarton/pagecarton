@@ -1529,7 +1529,7 @@ abstract class Ayoola_Page_Layout_Abstract extends Ayoola_Abstract_Table
 
 		$fieldset->addFilters( array( 'Trim' => null ) );
 		$fieldset->addLegend( $legend );
-		$form->addFieldset( $fieldset );
+		$form->addFieldset( $fieldset ); 
 		$this->setForm( $form );
     } 
 	// END OF CLASS
