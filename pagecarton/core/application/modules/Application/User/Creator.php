@@ -96,13 +96,11 @@ class Application_User_Creator extends Application_User_Abstract
     protected function init()
     {
 		$this->createForm( $this->getParameter( 'submit_value' ) ?  : 'Create Account', $this->getParameter( 'legend' ) );
-	//	$this->setViewContent( self::__( '<h2>Sign up for a free account.</h2>' ) ); 
 		$auth = new Ayoola_Access();
 		$urlToGo = $this->getParameter( 'return_url' ) ? : Ayoola_Page::getPreviousUrl();
 		//	var_export( $urlToGo ); 
         Application_Javascript::header( Ayoola_Application::getUrlPrefix() . $urlToGo );
 		$sOptions = Application_Settings_Abstract::getSettings( 'UserAccount', 'signup' );
-    //    var_export( $accountOptions );
 		if( ! is_array( $sOptions ) )
 		{
 			$soptionS = array();
@@ -116,11 +114,9 @@ class Application_User_Creator extends Application_User_Abstract
             $this->setViewContent( '<p class="badnews">' . self::__( 'New registrations has been disabled on this site.' ) . '</p>' );
             return false;
         }
-    //    var_export( $this->getForm()->getbadnews() );
        
 		$this->setViewContent( $this->getForm()->view() );
 		if( ! $values = $this->getForm()->getValues() ){ return false; }
-    //    var_export( $values );
 
 		$values['creation_time'] = time();
 		if( empty( $values['password'] ) )
@@ -160,20 +156,14 @@ class Application_User_Creator extends Application_User_Abstract
 			}
 
 		}
-	//	var_export( $values );	
 		//	Save the user in the default user db table
 		$userOptions = Application_Settings_Abstract::getSettings( 'UserAccount', 'user_options' );
 		if( @$values['user_group'] )
 		{
-		//	var_export( $userOptions );
-		//	var_export( $values );
-		//	$database = 'cloud';
 			if( is_array( $userOptions ) && ( in_array( 'allow_level_selection', $userOptions ) || in_array( 'allow_level_injection', $userOptions ) ) )
 			{
 				$authLevel = new Ayoola_Access_AuthLevel;
 				$authLevel = $authLevel->selectOne( null, array( 'auth_level' => $values['user_group'] ) );
-			//	$options = array();
-		//		foreach( $authLevel as $each )
 				{
 					if( is_array( $authLevel['auth_options'] ) && in_array( 'allow_signup', $authLevel['auth_options'] ) && $values['user_group'] != 99  )
 					{
@@ -182,7 +172,6 @@ class Application_User_Creator extends Application_User_Abstract
 					}
 				}
 			}
-		//	var_export( $values );
 
 		}
 
@@ -202,7 +191,6 @@ class Application_User_Creator extends Application_User_Abstract
 			case 'cloud':
 				//	If this is our first signup after we install, we could be made a super user
 				$response = Ayoola_Api_SignUp::send( $values );
-			//	var_export( $response );
 				if( is_array( $response ) )
 				{
 					$saved = true;
