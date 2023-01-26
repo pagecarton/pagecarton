@@ -428,7 +428,7 @@ class Ayoola_Application
 				$subDomain = array_shift( $tempDomainName );	// Fix wildcard domainnames
 				$tempDomainName = implode( '.', $tempDomainName );
 				$tempWhere = array( 'domain_name' => $tempDomainName );
-                var_export( $tempWhere ); 
+                //var_export( $tempWhere ); 
 
 			}
 			if( ! empty( $data['domain_settings']['sub_domain'] ) || @$data['domain_settings']['domain_type'] === 'sub_domain' )
