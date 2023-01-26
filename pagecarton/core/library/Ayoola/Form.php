@@ -812,7 +812,7 @@ class Ayoola_Form extends Ayoola_Abstract_Playable
 				//	To save required elements values - not working
 				$tempValues = $this->_values ? : array();
 				$this->_values = array(); 
-				if( count( @$values['oneFieldSetAtATime'] ) === count( $this->_fieldsets ) )
+				if( ! empty( @$values['oneFieldSetAtATime'] ) && count( @$values['oneFieldSetAtATime'] ) === count( $this->_fieldsets ) )
 				{
 					unset( $values['oneFieldSetAtATime'] ); //	disturbing my db
 					unset( $values[''] ); //	disturbing my db
