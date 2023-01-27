@@ -243,52 +243,52 @@ class Ayoola_Page_Editor_Sanitize extends Ayoola_Page_Editor_Layout
 
         //var_export( $page );  
 
-        if( in_array( $page, self::$defaultPages ) 
+        // if( in_array( $page, self::$defaultPages ) 
             
-            //  don't create page when theme page is been refreshed
+        //     //  don't create page when theme page is been refreshed
 
-            //  why can't we create page when theme page is being refreshed?
-            //  What about /widget page and others that need to always be refreshed per theme
-            //&& empty( $themeName )
-        )
-        {
+        //     //  why can't we create page when theme page is being refreshed?
+        //     //  What about /widget page and others that need to always be refreshed per theme
+        //     //&& empty( $themeName )
+        // )
+        // {
 
-            //var_export( $page );
+        //     //var_export( $page );
 
-            //	if its still a system page, delete and create again
-            //	this is causing problems deleting the home page
+        //     //	if its still a system page, delete and create again
+        //     //	this is causing problems deleting the home page
 
-            //	create this page if not available.
-            //	must initialize each time so that each page can be handled.
-            $table = Ayoola_Page_Page::getInstance();
-            if( ! Ayoola_Page::getInfo( $page ) )
-            {
-                $response = $this->sourcePage( $page );
-            } 
+        //     //	create this page if not available.
+        //     //	must initialize each time so that each page can be handled.
+        //     $table = Ayoola_Page_Page::getInstance();
+        //     if( ! Ayoola_Page::getInfo( $page ) )
+        //     {
+        //         $response = $this->sourcePage( $page );
+        //     } 
 
-            if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
-            {
+        //     if( $table->selectOne( null, array( 'url' => $page, 'system' => '1' ) ) )
+        //     {
 
-                //  Why are we deleting sef?
-                //  $class = new Ayoola_Page_Delete( $parameters );
+        //         //  Why are we deleting sef?
+        //         //  $class = new Ayoola_Page_Delete( $parameters );
 
-                //    We need to delete to enable refresh of default pages during upgrade
-                //    We only need to delete saved page files.
-                //    To avoid complications of deleting whole page and creating again
-                $pagePaths = Ayoola_Page::getPagePaths( $page );
-                foreach( $pagePaths as  $pageFile )
-                {
-                    $myPageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pageFile;
-                    $corePageFile = APPLICATION_PATH . DS .  $pageFile;
-                    if( is_file( $corePageFile ) )
-                    {
-                        Ayoola_Doc::createDirectory( dirname( $myPageFile ) );
-                        copy( $corePageFile, $myPageFile );
-                        //  unlink( $pageFile );
-                    }
-                }
-            }
-        }
+        //         //    We need to delete to enable refresh of default pages during upgrade
+        //         //    We only need to delete saved page files.
+        //         //    To avoid complications of deleting whole page and creating again
+        //         $pagePaths = Ayoola_Page::getPagePaths( $page );
+        //         foreach( $pagePaths as  $pageFile )
+        //         {
+        //             $myPageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pageFile;
+        //             $corePageFile = APPLICATION_PATH . DS .  $pageFile;
+        //             if( is_file( $corePageFile ) )
+        //             {
+        //                 Ayoola_Doc::createDirectory( dirname( $myPageFile ) );
+        //                 //copy( $corePageFile, $myPageFile );
+        //                 //  unlink( $pageFile );
+        //             }
+        //         }
+        //     }
+        // }
 
         //var_export( $page );
 

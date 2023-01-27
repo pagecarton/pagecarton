@@ -2086,6 +2086,15 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
      */
     protected function getViewableObject( $object )
     {
+
+		//	don't get viewable object when there is no real view
+		if( $this->isAutoSaveMode() || $this->isSaveMode() )
+		{
+			//	help avoid some issues
+			//	may also quicken automated some automated processes
+			return null;
+		}
+
 		// We can accept object name too
 		$object =  is_string( $object ) ? $this->getObjectInfo( $object ) : $object;
 
