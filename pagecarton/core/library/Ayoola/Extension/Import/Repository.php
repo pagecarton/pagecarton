@@ -109,6 +109,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             //   delete first if this is upgrade
             if( ! empty( $pluginInfo['article_url'] ) && $pluginInfo['article_url'] === @$_GET['update'] )
             {
+
                 //  dont delete for extensions
                 //  extensions hav their own way of update
                 if( empty( $pluginInfo['extension_name'] ) )
@@ -126,9 +127,7 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
             $class = self::install( $_GET['install'], $existingPluginSettings );
             if( ! $class->getForm()->getBadnews() )
             {
-                
                 $this->setViewContent( $class->view(), true );
-             //   $this->setViewContent( self::__( '<p class="badnews">' . array_pop( $class->getForm()->getBadnews() ) . '</p>' ) );
             }
             else
             {
@@ -251,6 +250,8 @@ class Ayoola_Extension_Import_Repository extends Application_Article_ShowAll
         try
         {
             $class = new static::$_pluginClass( array( 'xno_init' => true, 'fake_values' => $values, 'path' => $filename, ) ); 
+
+
         }
         catch( Exception $e )
         {

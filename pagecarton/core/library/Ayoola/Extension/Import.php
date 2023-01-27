@@ -84,14 +84,27 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 			{ 
 				$export = new Ayoola_Phar_Data( $filename );
                 $extensionInfo = json_decode( file_get_contents( $export['extension_information'] ), true );
-            //    var_export( $extensionInfo );
 				if( empty( $extensionInfo['extension_name'] ) )
 				{
 					return false;
 				}
-				$result = $this->insertDb( $extensionInfo );
+
+				$result = false;
+
+				try
+				{
+					$this->getDbTable()->insert( $extensionInfo );
+					//$result = $this->insertDb( $extensionInfo );
+				}
+				catch( Exception $e )
+				{
+
+				}
+
+
 				$dir = @constant( 'EXTENSIONS_PATH' ) ? Ayoola_Application::getDomainSettings( EXTENSIONS_PATH ) : ( APPLICATION_DIR . DS . 'extensions' );
 				$dir = $dir . DS . $extensionInfo['extension_name'];
+				
 				if( $values['extension_name'] )
 				{
 					if( ! is_dir( $dir ) )
@@ -105,12 +118,17 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 					
 					//	to update 
 					$update = $extensionInfo;
+
+
 					unset( $update['extension_name'] );
 					$previousData = $this->getDbTable()->selectOne( null, array( 'extension_name' => $extensionInfo['extension_name'] ) );
 
+
 					//	preserve settings
 					$update['settings'] = $previousData['settings'];
-					$this->getDbTable()->update( $update, array( 'extension_name' => $extensionInfo['extension_name'] ) );
+
+					$this->getDbTable()->update( $update, array( 'extension_name' => $extensionInfo['extension_name'] ) );					
+					
 				}
 				else
 				{
@@ -129,9 +147,10 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 				$export->extractTo( $dir, null, true );
 				unset( $export );
 				unlink( $filename );
-				
+
 				$this->setViewContent(  '' . self::__( '<p class="goodnews">Plugin imported successfully. New plugins are deactivated by default when they are imported. <a class="" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Extension_Import_Status/?extension_name=' . $extensionInfo['extension_name'] . '">Turn on!</a></p>' ) . '', true  );
-				
+				//var_export( $extensionInfo );
+
 				return true;  
 			}
 			else
