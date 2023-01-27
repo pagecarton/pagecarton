@@ -69,7 +69,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
     {
         $values = self::buildValues( $values );
 
-        $ext = json_encode( $values );
+        $ext = json_encode( $values, JSON_PRETTY_PRINT );
         $path = Ayoola_Application::getDomainSettings( APPLICATION_DIR ) . DS . 'extension_information';
         Ayoola_File::putContents( $path, $ext );
         return true;
@@ -197,7 +197,7 @@ abstract class Ayoola_Extension_Abstract extends Ayoola_Abstract_Table
             
             //	The label is transformed into the class value
             $className = $filter->filter( $file );
-            if( is_subclass_of( $className, PageCarton_Settings ) )
+            if( is_subclass_of( $className, 'PageCarton_Settings' ) )
             {
                 $classes[$className] = $className;
             }
