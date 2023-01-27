@@ -53,14 +53,48 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 	
 					continue;
 				}
-				$pageSanitizer = new Ayoola_Page_Editor_Sanitize();
 	
+
+				$pageInfo = Ayoola_Page_Page::getInstance()->selectOne( null, array( 'url' => $page ) );
+				$pageSanitizer = new Ayoola_Page_Editor_Sanitize();
+
+				if( empty( $pageInfo ) )
+				{
+					//	create a fresh page
+					$pageSanitizer->sourcePage( $page );
+					Ayoola_Application::$appNamespace .= $page;
+				}
+				elseif( empty( $pageInfo['system'] ) )
+				{
+					continue;
+				}
+
+				
+
+				//  Why are we deleting sef?
+				//  $class = new Ayoola_Page_Delete( $parameters );
+
+				//    We need to delete to enable refresh of default pages during upgrade
+				//    We only need to delete saved page files.
+				//    To avoid complications of deleting whole page and creating again
+				$pagePaths = Ayoola_Page::getPagePaths( $page );
+				foreach( $pagePaths as  $pageFile )
+				{
+					$myPageFile = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS .  $pageFile;
+					$corePageFile = APPLICATION_PATH . DS .  $pageFile;
+					if( is_file( $corePageFile ) )
+					{
+						Ayoola_Doc::createDirectory( dirname( $myPageFile ) );
+						copy( $corePageFile, $myPageFile );
+						//  unlink( $pageFile );
+					}
+				}
+				
 				$pageSanitizer->refresh( $page );
 			}	
 		}
 		
 		//	copy page content from theme
-		Ayoola_Page_Editor_Layout::resetDefaultLayout();
 		$class2 = new Ayoola_Page_Editor_Sanitize(); 
 		$class2->sanitize( $themeName ); 
  	}    

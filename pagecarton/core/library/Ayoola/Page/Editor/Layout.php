@@ -2090,6 +2090,8 @@ class Ayoola_Page_Editor_Layout extends Ayoola_Page_Editor_Abstract
 		//	don't get viewable object when there is no real view
 		if( $this->isAutoSaveMode() || $this->isSaveMode() )
 		{
+			//	help avoid some issues
+			//	may also quicken automated some automated processes
 			return null;
 		}
 
