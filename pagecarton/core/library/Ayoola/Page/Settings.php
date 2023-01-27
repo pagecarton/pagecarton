@@ -55,7 +55,7 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 				}
 				$pageSanitizer = new Ayoola_Page_Editor_Sanitize();
 	
-				$pageSanitizer->refresh( $page, $themeName );
+				$pageSanitizer->refresh( $page );
 			}	
 		}
 		
