@@ -33,16 +33,34 @@ class Ayoola_Page_Settings extends PageCarton_Settings
      */ 
 	public static function callback( $previousData, $newData )
     {
+		$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
+
         if( $previousData['data']['default_layout'] === $newData['data']['default_layout'] )
         {
             //return false;
         }
 
-  		$defaultPages = Ayoola_Page_Editor_Sanitize::$defaultPages;	
+		if( isset( $newData['data']['options'] ) && in_array( 'regenerate_default_pages', $newData['data']['options'] ) )
+		{
+			$defaultPages = Ayoola_Page_Editor_Sanitize::$defaultPages;	
+			foreach( $defaultPages as $page )
+			{
+				if( Ayoola_Page_Layout_Pages::isSetUpCorrectly( $page, $themeName ) )
+				{
+					//  we have default layout, 
+					//  no need to sanitize pages
+					//  default layout will do that later
+	
+					continue;
+				}
+				$pageSanitizer = new Ayoola_Page_Editor_Sanitize();
+	
+				$pageSanitizer->refresh( $page, $themeName );
+			}	
+		}
 		
 		//	copy page content from theme
 		Ayoola_Page_Editor_Layout::resetDefaultLayout();
-		$themeName = Ayoola_Page_Editor_Layout::getDefaultLayout();
 		$class2 = new Ayoola_Page_Editor_Sanitize(); 
 		$class2->sanitize( $themeName ); 
  	}    
@@ -83,6 +101,7 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 					</div>
 				';
 		}
+
 		$fieldset->addElement( array( 'name' => 'default_layout', 'label' => 'Default Theme', 'title' => 'Select this', 'type' => 'Select', 'style' => 'xdisplay:none;', 'value' => @$values['default_layout'] ), $layouts );
 		
 		
@@ -92,12 +111,20 @@ class Ayoola_Page_Settings extends PageCarton_Settings
 		//	Personalization
 		Application_Javascript::addFile( '/js/objects/mcColorPicker/mcColorPicker.js' );
 		Application_Style::addFile( '/js/objects/mcColorPicker/mcColorPicker.css' );
-		$fieldset->addElement( array( 'name' => 'background_color', 'label' => 'Background color', 'style' => 'max-width:300px;', 'placeholder' => '#FFBB33', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['background_color'] ) );
+
+		$fieldset->addElement( array( 'name' => 'background_color', 'label' => 'Theme color', 'style' => 'max-width:300px;', 'placeholder' => '#FFBB33', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['background_color'] ) );
 		
-		{
- 			$fieldset->addElement( array( 'name' => 'font_color', 'label' => 'Color of Fonts', 'style' => 'max-width:300px;', 'placeholder' => '#FF0033', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['font_color'] ) ); 
-			$form->addFieldset( $fieldset );
-		}
+		
+ 		//$fieldset->addElement( array( 'name' => 'font_color', 'label' => 'Color of Fonts', 'style' => 'max-width:300px;', 'placeholder' => '#FF0033', 'type' => 'InputText', 'class' => 'color', 'value' => @$values['font_color'] ) );
+
+		$themeOptions = array(
+			'regenerate_default_pages' => 'Regenerate Default Pages'
+		);
+
+ 		$fieldset->addElement( array( 'name' => 'options', 'label' => 'Theme Options', 'type' => 'Checkbox', 'value' => @$values['options'] ), $themeOptions );
+
+		$form->addFieldset( $fieldset );
+		
 		 
 		$this->setForm( $form );
     } 
