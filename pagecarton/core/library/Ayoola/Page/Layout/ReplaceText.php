@@ -124,8 +124,9 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
     }
 
     /**
-     * Performs the whole widget running process
+     * get replaceable text
      * 
+     * @return array
      */
 	public static function getUpdates( $getSiteData = false )
     { 
@@ -286,9 +287,6 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 		//	self::v( $_POST );
             if( ! $values = $this->getForm()->getValues() ){ return false; }
          //   self::v( $identifierData );
-    //        $identifierData += $values;
-        //    self::v( $values );
-        //    exit();
             $dataForHiddenFields = Ayoola_Page_Layout_ReplaceText::getUpdates( ! empty( $_GET['editing_dummy_text'] ) );
         //    self::v( $dataForHiddenFields );
          //   exit();
@@ -364,11 +362,8 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 		//	
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() . $values['page_id'] . $values['url'], 'data-not-playable' => true ) );
 		$form->submitValue = $submitValue ;
-	//	$form->oneFieldSetAtATimeJs = true;
 
-    //    if( ! $data = self::getIdentifierData() ){ return false; }
         $data = Ayoola_Page_Layout_ReplaceText::getUpdates( ! empty( $_GET['editing_dummy_text'] ) );
-    //    var_export( $data );
         
         if( empty( $data['dummy_search'] ) )
         {
@@ -381,7 +376,6 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
             $data['dummy_search'] = array_merge( static::$_defaultTexts['dummy_search'] ? : array(), $data['dummy_search'] ? : array() );
             $data['dummy_replace'] = array_merge( static::$_defaultTexts['dummy_replace'] ? : array(), $data['dummy_replace'] ? : array() );
         }
-    //    var_export( $data );
 
         $i = 0;
         $record = array();
@@ -497,14 +491,6 @@ class Ayoola_Page_Layout_ReplaceText extends Ayoola_Page_Layout_Abstract
 	    //	var_export( $percentage );
 			$percentage += 100;
 		}
-	//	var_export( $percentage );
-//   var_export( $themeInfo['dummy_search'] );
-//   var_export( $themeInfoAll['dummy_search'] );
-//   var_export( $themeInfoAll['dummy_replace'] );
-//   var_export( $themeInfo['dummy_replace'] );
-//   var_export( $themeInfoX['dummy_replace'] );
- //  var_export( array_intersect_assoc( $themeInfo['dummy_replace'], $themeInfoAll['dummy_replace'] ) );
-//    var_export( $themeInfoAll['dummy_replace'] );
 		return $percentage;
 	}
 	// END OF CLASS

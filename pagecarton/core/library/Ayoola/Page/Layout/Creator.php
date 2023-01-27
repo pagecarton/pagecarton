@@ -163,10 +163,23 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					{
 						if( $previousData['layout_name'] )
 						{
-							//	send all content because of text update
+
+							$oldReplaceableTexts = Ayoola_Page_Layout_ReplaceText::getUpdates( true );
+							$preservedTexts = array_combine( $oldReplaceableTexts['dummy_search'], $oldReplaceableTexts['dummy_replace'] );
+
                             foreach( $previousData['dummy_replace'] as $key => $each )
                             {
-                                $previousData['dummy_replace'][$key] = trim( $previousData['dummy_search'][$key], '{-}' );
+
+								//	see if the content of the replace is available on the site already
+								if( isset( $preservedTexts[$previousData['dummy_search'][$key]] ) )
+								{
+									$previousData['dummy_replace'][$key] = $preservedTexts[$previousData['dummy_search'][$key]];
+								}
+								else
+								{
+									//	use default if not
+									$previousData['dummy_replace'][$key] = trim( $previousData['dummy_search'][$key], '{-}' );
+								}
                             }
 							$values += $previousData;
 						}
@@ -283,7 +296,6 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 				Ayoola_File::putContents( $filename, $values['screenshot']);
 			}
 
-		//	if(  )	
 			if( ! empty( $values['plain_text'] ) && ! $this->insertDb( $values ) )  
 			{ 
 				return false;
@@ -303,6 +315,7 @@ class Ayoola_Page_Layout_Creator extends Ayoola_Page_Layout_Abstract
 					Ayoola_File::putContents( $indexFile, $values['plain_text'] );
 
 				}
+
 				$this->setViewContent(  '' . self::__( '<p class="boxednews goodnews">New theme saved successfully.</p>' ) . '', true  );
 				$this->setViewContent(  self::__( '<p class="">
 				<a href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Ayoola_Page_Layout_Editor/?layout_name=' . $values['layout_name'] . '" class="pc-btn pc-btn-small">Edit Codes Again</a>
