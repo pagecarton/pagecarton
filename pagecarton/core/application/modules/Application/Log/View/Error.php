@@ -60,7 +60,16 @@ class Application_Log_View_Error extends Application_Log_View_Abstract
 		$pMessage = "There is error on this page please reload your browser to continue. If this persist, contact the administrator or hosting support. You can also go back to the <a href='/'>Home</a>. The error has been has also been logged into the site log.";
 		echo "<p class='badnews'>$pMessage</p>";
 
-		$result = self::getLogTable()->insert( $log );
+		try
+		{
+			self::getLogTable()->insert( $log );
+		}
+		catch( Exception $e )
+		{
+			$message .= "\r\n \r\n Another error was encountered when logging this error: \r\n \r\n" . $e->getMessage();
+			$message .= "\r\n \r\n Error Details: \r\n \r\n" . $e->getTraceAsString();
+		}
+
 
 		if( Application_User_AdminCreator::isNewInstall() || PageCarton_Widget::hasPriviledge( 99 ) )
 		{

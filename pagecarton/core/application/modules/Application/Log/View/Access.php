@@ -53,7 +53,7 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 		$log['total_run_time'] = Ayoola_Application::getRuntimeSettings( 'total_runtime' );
 		$timestamp = date( "Y-m-d H:i:s" ); // this line is for demonstration
 
-		if( is_numeric( $log['total_run_time'] ) )
+		if( isset( $log['total_run_time'] ) &&  is_numeric( $log['total_run_time'] ) )
 		{
 			$log['total_run_time'] = number_format( $log['total_run_time'], 2 );
 		}
@@ -66,17 +66,24 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 		}
 		
 		//	NUMBER OF PAGES VIEWED IN THIS SESSION
-        @$log['NPS'] = ++$_SESSION['NPS']; 
+		if( isset( $_SESSION['NPS'] ) &&  is_numeric( $_SESSION['NPS'] ) )
+		{
+			@$log['NPS'] = ++$_SESSION['NPS']; 
+		}
+		else
+		{
+			$_SESSION['NPS'] = 0;
+		}
         
         
 		if( isset( $log['http_referer'] ) && is_string( $log['http_referer'] ) )
 		{
 			$referer = parse_url( $log['http_referer'] );
+			$log['referal_domain'] = @$referer['host'];  
 		}
 
         $log['log_time'] = time();
           
-		$log['referal_domain'] = @$referer['host'];  
 		
 		unset( $log['request']['password'], $log['request']['password2'], $log['request'][Ayoola_Form::hashElementName( 'password' )], $log['request'][Ayoola_Form::hashElementName( 'password2' )], $log['request']['local_password'], $log['request'][Ayoola_Form::hashElementName( 'local_password' )] );
 		$log['uri'] = Ayoola_Application::getPresentUri(); 
@@ -90,10 +97,13 @@ class Application_Log_View_Access extends Application_Log_View_Abstract
 			break;
 		}
 		$access = new Ayoola_Access();
-		$userInfo = $access->getUserInfo();
 
-		$log['user_id'] = $userInfo['user_id']; 
-		$log['username'] = $userInfo['username']; 
+		if( $userInfo = $access->getUserInfo() )
+		{
+			$log['user_id'] = $userInfo['user_id']; 
+			$log['username'] = $userInfo['username']; 	
+		}
+
 		foreach( self::getLogTable()->getDataTypes() as $key => $value )
 		{
             if( empty( $log[$key] ) && ! empty( $_SERVER[strtoupper( $key )] ) )
