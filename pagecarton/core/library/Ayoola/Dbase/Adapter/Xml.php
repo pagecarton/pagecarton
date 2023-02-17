@@ -248,7 +248,18 @@ class Ayoola_Dbase_Adapter_Xml extends Ayoola_Dbase_Adapter_Abstract
 		{
 			case self::SCOPE_PROTECTED:
 			case self::SCOPE_PRIVATE:
-				$path = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . $directory;
+
+			$homepath = Ayoola_Application::getDomainSettings( APPLICATION_PATH );
+
+			if( ! $homepath )
+			{
+				//  there is a case where this is not set
+				//  still looking for the cause of this.
+
+			}
+
+				$path = $homepath . DS . $directory;
+
 			break;
 
 			case self::SCOPE_PUBLIC:
