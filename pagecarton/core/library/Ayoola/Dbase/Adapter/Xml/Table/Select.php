@@ -536,14 +536,16 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
                     }
                 }
 
-                if( is_string( $fieldsToFetch ) && $fieldsToFetch === $key )
+                if( is_string( $fieldsToFetch ) )
                 {
-                    $fields = $fieldValue;
-                    break;
-                }
-                elseif( is_string( $fieldsToFetch ) )
-                {
-                    $fields = false;
+                    if( $fieldsToFetch === $key )
+                    {
+                        $fields = $fieldValue;
+
+                        //  continue not break 
+                        //  because we may have row id to check
+                        continue;
+                    }
                     continue;
                 }
                 $fields[$key] = $fieldValue;
@@ -588,8 +590,10 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
             }
             else
             {
-                $fields = (array) $fields;
-
+                //  we can have non array fields
+                //  so leave this off
+                //$fields = (array) $fields;
+                
                 if( ! is_null( $rowKey ) )
                 {
                     $rows[$rowKey] = $fields;
