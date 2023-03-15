@@ -841,6 +841,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
 				$fp = fopen( $settings['destination_file'], 'w' );
 				curl_setopt( $request, CURLOPT_FILE, $fp );
+				curl_setopt( $request, CURLOPT_BINARYTRANSFER, true );
 				curl_setopt( $request, CURLOPT_HEADER, 0 );
 			}
 			else
@@ -863,9 +864,9 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
             }
 			if( @$settings['raw_response_header'] )
 			{
-
-				$headerBuff = fopen( '/tmp/headers' . time(), 'w+' );
-
+                $sysTemp = sys_get_temp_dir() . DS . 'pagecarton' . DS . microtime();
+                Ayoola_Doc::createDirectory( $sysTemp );
+				$headerBuff = fopen( $sysTemp . DS . 'headers', 'w+' );
 				curl_setopt( $request, CURLOPT_WRITEHEADER, $headerBuff );
 			}
 			if( is_array( @$settings['http_header'] ) )
