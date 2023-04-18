@@ -563,6 +563,7 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 			
 			//	compatibility
 			$options = array( 'logged_in', 'logged_out', 'append_previous_url' );
+			//var_export( $values );
 			foreach( $options as $each )
 			{
 				if( @is_array( $values['link_options'] ) && ! in_array( $each, $values['link_options'] ) )
@@ -571,8 +572,8 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				}
 				$values[$each] = @in_array( $each, $values['link_options'] ) ? true : $values[$each];
 			}
-	
-			if( is_int( $values['auth_level'] ) )
+			//var_export( $values );
+			if( is_numeric( $values['auth_level'] ) )
 			{
 				$values['auth_level'] = array( $values['auth_level'] );
 			}
@@ -585,7 +586,6 @@ class Ayoola_Menu extends Ayoola_Page_Menu_Abstract
 				( ! Ayoola_Abstract_Playable::hasPriviledge( $values['auth_level'] ) )
 			)
 			{   
-                //var_export( $values );
  				continue;
 			}
 			$option = $xml->createElement( 'li' );
