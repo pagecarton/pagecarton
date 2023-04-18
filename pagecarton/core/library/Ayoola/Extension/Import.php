@@ -93,7 +93,7 @@ class Ayoola_Extension_Import extends Ayoola_Extension_Import_Abstract
 
 				try
 				{
-					$this->getDbTable()->insert( $extensionInfo );
+					$result = $this->getDbTable()->insert( $extensionInfo );
 					//$result = $this->insertDb( $extensionInfo );
 				}
 				catch( Exception $e )
