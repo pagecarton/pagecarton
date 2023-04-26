@@ -215,6 +215,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
             {
                 $template[$eachTemplateKey] = self::replacePlaceholders( $eachTemplate, $values );
             }
+            return $template;
         }
 
 		$search = array();
