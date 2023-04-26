@@ -209,6 +209,14 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
      */
 	public static function replacePlaceholders( $template, array $values )
     {
+        if( is_array( $template ) )
+        {
+            foreach( $template as $eachTemplateKey => $eachTemplate )
+            {
+                $template[$eachTemplateKey] = self::replacePlaceholders( $eachTemplate, $values );
+            }
+        }
+
 		$search = array();
 		$replace = array();
 		$defaultSearch = array();
