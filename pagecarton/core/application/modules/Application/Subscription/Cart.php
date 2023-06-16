@@ -79,6 +79,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$this->_objectTemplateValues['no_of_distinct_items'] = 0;
 		$this->_objectTemplateValues['no_of_items'] = 0;
 		$this->_objectTemplateValues['total_price'] = 0;
+		$this->_objectTemplateValues['grand_total_price'] = 0;
 		$this->_objectTemplateValues['currency'] = ( Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$' );
 		$this->cartUpdate();
 		if( ! $data = $this->getCartContents() )
