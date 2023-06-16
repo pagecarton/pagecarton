@@ -299,6 +299,11 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
             $divRow = '<div class="pc-cart-row">' . $divRow . '</div>'; 
             $cartDiv .= $divRow;
 		}
+
+		if( empty( $totalSurcharge ) )
+		{
+			$totalSurcharge = 0;
+		}
 		
 		//	Total
 		$row = $this->_xml->createElement( 'tr' );
