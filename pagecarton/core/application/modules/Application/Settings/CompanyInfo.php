@@ -106,14 +106,14 @@ class Application_Settings_CompanyInfo extends Application_Settings_Abstract
 	
 	//	var_export( $settings );
 		
-		$class = new Application_User_UserLocation_Creator( array( 'form_preset_values' => $settings, 'no_init' => true ) );
-		if( $fieldsets = $class->getForm()->getFieldsets() )
-		{
-			foreach( $fieldsets as $each )
-			{
-				$form->addFieldset( $each );  
-			}
-		}
+		// $class = new Application_User_UserLocation_Creator( array( 'form_preset_values' => $settings, 'no_init' => true ) );
+		// if( $fieldsets = $class->getForm()->getFieldsets() )
+		// {
+		// 	foreach( $fieldsets as $each )
+		// 	{
+		// 		$form->addFieldset( $each );  
+		// 	}
+		// }
 		
 	//	$fieldset->addLegend( 'Contact Information' );
 	//	$form->addFieldset( $fieldset );
