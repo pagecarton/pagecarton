@@ -52,7 +52,10 @@ class Application_Article_Type_Subscription extends Application_Article_Type_Abs
         unset( $values['document_url_base64'], $values['download_base64'] ); 
 			
         //	data
-        $values['quantity'] = intval( @$_REQUEST['quantity'] ) ? : 1;	
+		if( empty( $values['quantity'] ) )
+		{
+			$values['quantity'] = intval( @$_REQUEST['quantity'] ) ? : 1;	
+		}
         if( ! empty( $values['subscription_minimum_order'] ) && intval( $values['subscription_minimum_order'] ) > $values['quantity'] )
         {
             $values['quantity'] = $values['subscription_minimum_order'];

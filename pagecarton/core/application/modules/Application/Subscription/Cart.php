@@ -96,7 +96,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
      * The method does the whole Class Process
      * 
      */
-	protected function getCartContents()
+	public function getCartContents()
     {
 		//	We can now preload cart from code
 		if( ! $data = $this->getParameter( 'cart' ) )
