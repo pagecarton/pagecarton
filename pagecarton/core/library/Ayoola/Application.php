@@ -835,6 +835,14 @@ class Ayoola_Application
                 {
                     break;
                 }
+
+                // if domain is not stored, ignore it. 
+                // avoid strange domain getting into robots file
+                if( ! Application_Domain::getInstance()->select( null, array( 'domain_name' => Ayoola_Page::getDefaultDomain() ) ) )
+                {
+                    break;
+                }
+                
                 //  check if xml sitemap is set in robot.txt
                 $personalRobotsTxtFile = Ayoola_Doc_Browser::getDocumentsDirectory() . '/robots.txt';
 
