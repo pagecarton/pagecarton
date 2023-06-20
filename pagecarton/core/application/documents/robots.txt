@@ -1,5 +1,7 @@
 #-PageCarton Robots Directive Starts
 User-agent: *
+Crawl-Delay: 10
+
 Disallow: /cgi-bin/ 
 Disallow: /tmp/
 Disallow: /ayoola/
@@ -8,8 +10,7 @@ Disallow: /object/
 Disallow: /profile
 Disallow: /widgets/
 Disallow: /pc-admin/
-User-agent: * 
-Crawl-Delay: 10
+
 User-Agent: MJ12bot
 Disallow: /
 User-Agent: AhrefsBot
