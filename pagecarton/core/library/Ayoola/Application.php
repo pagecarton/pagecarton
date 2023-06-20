@@ -851,12 +851,15 @@ class Ayoola_Application
                 if( $myPrefix = Ayoola_Application::getUrlPrefix() )   
                 {
                     $personalRobotsTxtFile = SITE_APPLICATION_PATH . DS . 'documents' . DS . 'robots.txt';
-                }      
-
-
-                //var_export( $personalRobotsTxtFile );
+                }
 
                 $coreRobots = PC_CORE_DIR . '/application/documents/' . 'robots.txt';
+
+                if( $coreRobots === $personalRobotsTxtFile )
+                {
+                    $personalRobotsTxtFile = SITE_APPLICATION_PATH . DS . 'documents' . DS . 'robots.txt';
+                }
+
                 if( ! is_file( $coreRobots ) OR ! $coreRobotsText = file_get_contents( $coreRobots ) )
                 {
                     $coreRobotsText = "\r\n" . '#' . "\r\n";
