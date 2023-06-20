@@ -2,14 +2,14 @@
 User-agent: *
 Crawl-Delay: 10
 
-Disallow: /cgi-bin/ 
-Disallow: /tmp/
-Disallow: /ayoola/
-Disallow: /tools/
-Disallow: /object/
+Disallow: /cgi-bin
+Disallow: /tmp
+Disallow: /ayoola
+Disallow: /tools
+Disallow: /object
 Disallow: /profile
-Disallow: /widgets/
-Disallow: /pc-admin/
+Disallow: /widgets
+Disallow: /pc-admin
 
 User-Agent: MJ12bot
 Disallow: /
