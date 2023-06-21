@@ -292,7 +292,7 @@ class Ayoola_Application
      *
      * @return array
      */
-	public static function checkIfSameApp( $url )
+	public static function checkIfSameApp( $url, $options = array() )
     {
         $storage = new Ayoola_Storage();
 		$storage->storageNamespace = __CLASS__  . 'url_prefix-x-y' . Ayoola_Application::getPathPrefix();
@@ -313,7 +313,7 @@ class Ayoola_Application
         //$result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1', array( 'verify_ssl' => true ) ) );
 
         //  why do we need verify_ssl here?
-        $result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1' ) );
+        $result = intval( PageCarton_Widget::fetchLink( $url . '/' . $checkFile . '?pc_clean_url_check=1', $options ) );
 
 
         if( $result >= filemtime( $checkFile ) && $result - filemtime( $checkFile ) < 5 )
@@ -814,7 +814,7 @@ class Ayoola_Application
             {
                 if( $protocol != 'https' && empty( $domainSettings['no_redirect'] ) && empty( $_REQUEST['pc_clean_url_check'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] !== 'https' && ! stripos( $_SERVER['HTTP_CF_VISITOR'], 'https' ) )
                 {
-                    if( self::checkIfSameApp( 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . '' ) )
+                    if( self::checkIfSameApp( 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Application::getUrlPrefix() . '', array( 'verify_ssl' => true ) ) )
                     {
                         $urlY = 'https://' . $_SERVER['HTTP_HOST'] . Ayoola_Page::getPortNumber() . Ayoola_Application::getUrlPrefix() . Ayoola_Application::getPresentUri();
                         $urlY = self::appendCurrentQueryStrings( $urlY );
