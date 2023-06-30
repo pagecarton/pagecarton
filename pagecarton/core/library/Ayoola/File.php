@@ -206,7 +206,22 @@ Content Size: ' . strlen( $data ) . '
     public static function trash( $path )
 	{
         try
-        {    
+        {   
+			//	Notify Admin
+			$mailInfo = array();
+			$mailInfo['subject'] = 'Trashing ' . $path;
+			$mailInfo['body'] = 
+            'Path - ' . $path . '
+            Domain - ' . DOMAIN . '
+            Backtrace: ' . var_export( debug_backtrace(), true ) . '
+            SERVER: ' . var_export( $_SERVER, true ) . '
+			';
+			try
+			{
+				@Ayoola_Application_Notification::mail( $mailInfo );
+			}
+            catch( Ayoola_Exception $e ){ null; }
+
             if( ! $path || ! is_file( $path ) )
             {
                 return false;
