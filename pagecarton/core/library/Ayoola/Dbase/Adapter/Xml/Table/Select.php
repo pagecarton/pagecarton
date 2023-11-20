@@ -561,7 +561,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
 
             //  || search
             //  late search query effect
-            if( $options['where_join_operator'] === '||' && ! empty( $whereNotFound ) && count( $whereNotFound ) >= count( $recordWhere ) )
+            if( @$options['where_join_operator'] === '||' && ! empty( $whereNotFound ) && count( $whereNotFound ) >= count( $recordWhere ) )
             {
                 continue;
             }

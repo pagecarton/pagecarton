@@ -339,7 +339,7 @@ class Ayoola_Application
 		require_once 'Ayoola/Storage.php';
 		$storage = new Ayoola_Storage();
 		$protocol = 'http';
-		if( ( $_SERVER['SERVER_PORT'] == 443 && ! empty( $_SERVER['HTTPS'] ) ) || $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
+		if( ( @$_SERVER['SERVER_PORT'] == 443 && ! empty( $_SERVER['HTTPS'] ) ) || @$_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' )
 		{
 			$protocol = 'https';
 		}
