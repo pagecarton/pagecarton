@@ -1342,7 +1342,7 @@ class Ayoola_Application
                         }
                     break;
                 }
-                if( $_REQUEST['document_time'] )
+                if( ! empty( $_REQUEST['document_time'] ) )
                 {
                     //	files already using document time
                     $catchForever = true;
