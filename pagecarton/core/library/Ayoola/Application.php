@@ -1332,7 +1332,7 @@ class Ayoola_Application
                         $catchForever = true;
                     break;
                     case 'layout':
-                        
+
                         $extension = strtolower( array_pop( explode( '.', trim( $uri, '.' ) ) ) );
 
                         switch( $extension )
@@ -1569,7 +1569,7 @@ class Ayoola_Application
             if( $pageInfo = Ayoola_Page::getInfo( $uri ) )
             {
                 //	page may just be present in the theme
-                $themeName = @$_REQUEST['pc_page_layout_name'] ? : $pageInfo['layout_name'];
+                $themeName = @$_REQUEST['pc_page_layout_name'] ? : @$pageInfo['layout_name'];
 
             }
             $themeName = $themeName ? : Ayoola_Page_Editor_Layout::getDefaultLayout();
