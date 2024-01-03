@@ -25,6 +25,6 @@ class PageCarton extends Ayoola_Application
      *
      * @var string
      */
-	const VERSION = '1.9.39';
+	const VERSION = '1.9.40';
 	// END OF CLASS
 }
