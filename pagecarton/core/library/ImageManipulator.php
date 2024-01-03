@@ -256,11 +256,11 @@ class ImageManipulator
             //cut point by height
             $h_point = (($height - $height_new) / 2);
             //copy image
-            imagecopyresampled($dst_img, $src_img, 0, 0, 0, $h_point, $max_width, $max_height, $width, $height_new);
+            @imagecopyresampled($dst_img, $src_img, 0, 0, 0, $h_point, $max_width, $max_height, $width, $height_new);
         }else{
             //cut point by width
             $w_point = (($width - $width_new) / 2);
-            imagecopyresampled($dst_img, $src_img, 0, 0, $w_point, 0, $max_width, $max_height, $width_new, $height);
+            @imagecopyresampled($dst_img, $src_img, 0, 0, $w_point, 0, $max_width, $max_height, $width_new, $height);
         }
 
         if( 

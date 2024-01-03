@@ -1332,6 +1332,9 @@ class Ayoola_Application
                         $catchForever = true;
                     break;
                     case 'layout':
+                        
+                        $extension = strtolower( array_pop( explode( '.', trim( $uri, '.' ) ) ) );
+
                         switch( $extension )
                         {
                             case 'css':
