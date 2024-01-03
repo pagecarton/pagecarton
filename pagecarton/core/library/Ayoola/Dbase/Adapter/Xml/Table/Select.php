@@ -255,7 +255,7 @@ class Ayoola_Dbase_Adapter_Xml_Table_Select extends Ayoola_Dbase_Adapter_Xml_Tab
      * @param array Where clause as array
      * @param array Select options
      */
-    public function doSelect( $fieldsToFetch = null, Array $where = null, Array $options = null, & $rows )
+    public function doSelect( $fieldsToFetch = null, Array $where = null, Array $options = null, & $rows = array() )
     {
 		//	Calculate the total fields on the table, extended
 		$allFields = $this->query( 'FIELDLIST' );
