@@ -75,12 +75,6 @@ abstract class Application_Subscription_Level_Abstract extends Ayoola_Abstract_T
 		$fieldset->addElement( array( 'name' => 'enabled', 'description' => 'Enable subscription to this category?', 'type' => 'Select', 'value' => @$values['enabled'] ), $options );
 		
 		//	Cover photo
-//		$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . Ayoola_Form::hashElementName( 'document_url' );
-	//	var_export( $link );
-	//	$fieldset->addElement( array( 'name' => 'document_url', 'label' => '<input style=\'margin-bottom:0;\' type=\'button\' value=\'Select Photo\' />', 'placeholder' => 'Screen shot for product or service level', 'onClick' => 'ayoola.spotLight.showLinkInIFrame( \'' . $link . '\' );', 'type' => 'InputText', 'value' => @$values['document_url'] ) );
-	
-		//	Cover photo
-	//	$link = '/ayoola/thirdparty/Filemanager/index.php?field_name=' . ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
 		$fieldName = ( $fieldset->hashElementName ? Ayoola_Form::hashElementName( 'document_url' ) : 'document_url' );
 	//	var_export( $link );
 		$fieldset->addElement( array( 'name' => 'document_url', 'label' => '', 'placeholder' => 'Screen shot for product or service level', 'type' => 'Hidden', 'value' => @$values['document_url'] ) );
