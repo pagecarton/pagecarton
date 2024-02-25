@@ -2334,10 +2334,17 @@ class Ayoola_Application
 		{
 			self::$_urlPrefix .= $_SERVER['SCRIPT_NAME'];
 		}
+        elseif( $_SERVER['REQUEST_URI'] === '/' && $_SERVER['PHP_SELF'] === '/index.php' )
+		{
+            //  handle PHP 8.2.11 Development Server
+            //  where home page doesnt set the right url prefix
+			self::$_urlPrefix .= $_SERVER['SCRIPT_NAME'];
+		}
 		elseif( @self::getPathPrefix() )
 		{
 			self::$_urlPrefix .= self::getPathPrefix();
 		}
+
 
 		return self::$_urlPrefix;
 	}
