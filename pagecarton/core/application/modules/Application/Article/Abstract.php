@@ -1947,6 +1947,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 
 					//	datetime combined
 					$fieldset->addElement( array( 'name' => 'datetime' . $featurePrefix, 'label' => 'Timestamp', 'placeholder' => 'YYYY-MM-DD HH:MM', 'type' => 'Hidden', 'value' => @$values['datetime' . $featurePrefix] ) );
+					$fieldset->addElement( array( 'name' => 'end_time' . $featurePrefix, 'label' => $postTypeLabel . ' End Time', 'placeholder' => 'YYYY-MM-DD HH:MM', 'type' => 'DateTime', 'value' => @$values['end_time' . $featurePrefix] ) );
 					$datetime = $this->getGlobalValue( 'year' . $featurePrefix );
 					$datetime .= '-';
 					$datetime .= strlen( $this->getGlobalValue( 'month' . $featurePrefix ) ) === 1 ? ( '0' . $this->getGlobalValue( 'month' . $featurePrefix ) ) : $this->getGlobalValue( 'month' . $featurePrefix );

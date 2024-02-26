@@ -251,6 +251,10 @@ class Application_Article_Creator extends Application_Article_Abstract
 			$values['profile_url'] = $values['profile_url'] ? : $defaultProfile;
 			$values['profile_url'] = strtolower( $values['profile_url'] ) ;
 			$values['article_creation_date'] = time();
+			if( isset( $values['datetime'] ) )
+			{
+				$values['article_creation_date'] = strtotime( $values['datetime'] );
+			}
 			$values['article_modified_date'] = time();
 			@$values['publish'] = ( ! isset( $values['publish'] ) && ! is_array( @$values['article_options'] ) ) ? '1' :  $values['publish'];
 			@$values['auth_level'] = is_array( $values['auth_level'] ) ? $values['auth_level'] : array( 0 );			
