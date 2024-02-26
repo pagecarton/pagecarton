@@ -379,6 +379,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
      */
 	public static function saveArticleSecondaryData( $values )
     {
+		Ayoola_Doc::createDirectory( dirname( self::getFolder() . $values['article_url'] ) );
+
 		$secDir = self::getSecondaryFolder() . $values['article_url'];
 
 		if( $previousData = @json_decode( file_get_contents( $secDir ), true ) )
@@ -437,7 +439,11 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
         $values['article_modified_date'] = time();
         
         //	we now using json
-        Ayoola_File::putContents( self::getFolder() . $values['article_url'], json_encode( $values ) ); 
+
+		$filename = self::getFolder() . $values['article_url'];
+
+		Ayoola_Doc::createDirectory( dirname( $filename ) );
+        Ayoola_File::putContents( $filename, json_encode( $values ) ); 
 
 		// and we want to use tables for sorting categories and all
 		$table = Application_Article_Table::getInstance();

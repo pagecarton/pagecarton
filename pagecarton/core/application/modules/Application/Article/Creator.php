@@ -99,7 +99,65 @@ class Application_Article_Creator extends Application_Article_Abstract
         $options += $postTypeInfo ? : array();
         return $options;
     }
-	
+
+		
+    /**
+     * The method does the whole Class Process
+     * 
+     */
+	public static function generateArticleUrl( & $values )
+    {
+		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );  
+		$articleSettings['extension'] = @$articleSettings['extension'] ? : 'html';			
+
+		$filter = new Ayoola_Filter_Transliterate();
+		$values['article_url'] = $filter->filter( $values['article_title'] );
+
+		$filter = new Ayoola_Filter_SimplyUrl();
+		$values['article_url'] = $filter->filter( $values['article_url'] );
+
+		$filter = new Ayoola_Filter_Name();
+		$filter->replace = '-';
+		if( function_exists( 'mb_substr') )
+		{
+			$values['article_url'] = mb_substr( trim( $filter->filter( strtolower( $values['article_url'] ) ) , '-' ), 0, 70 ) ? : microtime();
+		}
+		else
+		{
+			$values['article_url'] = substr( trim( $filter->filter( strtolower( $values['article_url'] ) ) , '-' ), 0, 70 ) ? : microtime();
+		}
+		//	Check availability of article url
+		$time = null;
+		do
+		{
+
+			$postDate = $values['datetime'] ? strtotime( $values['datetime'] )  : time();
+		
+			$newUrl = date( '/Y/m/d/', $postDate ) . '' . $values['article_url'] . $time . '.' . $articleSettings['extension'];
+			$path = Application_Article_Abstract::getFolder() . $newUrl;
+			$time = '-' . $values['article_creation_date'] . '';
+			if( is_file( $path ) )
+			{
+				if( $thatPost = self::loadPostData( $newUrl ) )
+				{
+					$keysToCheck = array( 'article_title', 'article_description', 'document_url', 'article_type', 'profile_url', );
+					foreach( $keysToCheck as $eachKey )
+					{
+						if( @$thatPost[$eachKey] !== @$values[$eachKey] )
+						{
+							continue 2;
+						}
+					}
+					return false;
+
+				}
+			}
+		}
+		while( is_file( $path ) );
+		$values['article_url'] =  $newUrl;
+		return true;
+	}
+
     /**
      * The method does the whole Class Process
      * 
@@ -178,21 +236,11 @@ class Application_Article_Creator extends Application_Article_Abstract
 			}
 			$access = new Ayoola_Access();
 			$userInfo = $access->getUserInfo();
-			$filter = new Ayoola_Filter_Transliterate();
-			$values['article_url'] = $filter->filter( $values['article_title'] );
 
-			$filter = new Ayoola_Filter_SimplyUrl();
-			$values['article_url'] = $filter->filter( $values['article_url'] );
-	
-			$filter = new Ayoola_Filter_Name();
-			$filter->replace = '-';
-			if( function_exists( 'mb_substr') )
+			if( ! self::generateArticleUrl( $values ) )
 			{
-				$values['article_url'] = mb_substr( trim( $filter->filter( strtolower( $values['article_url'] ) ) , '-' ), 0, 70 ) ? : microtime();
-			}
-			else
-			{
-				$values['article_url'] = substr( trim( $filter->filter( strtolower( $values['article_url'] ) ) , '-' ), 0, 70 ) ? : microtime();
+				$this->setViewContent(  '' . self::__( '<div class="badnews">' . ucfirst( $joinedType ) . ' With the same info exists. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $newUrl . '">View ' . $joinedType . '</a> or <a href="' . Ayoola_Page::getPreviousUrl() . '">Go Back</a></div>' ) . '', true  );
+				return false;
 			}
 			$values['user_id'] = $userInfo['user_id'];
 			$values['username'] = strtolower( $userInfo['username'] );
@@ -206,39 +254,9 @@ class Application_Article_Creator extends Application_Article_Abstract
 			$values['article_modified_date'] = time();
 			@$values['publish'] = ( ! isset( $values['publish'] ) && ! is_array( @$values['article_options'] ) ) ? '1' :  $values['publish'];
 			@$values['auth_level'] = is_array( $values['auth_level'] ) ? $values['auth_level'] : array( 0 );			
-			$articleSettings['extension'] = @$articleSettings['extension'] ? : 'html';			
 			
-			//	Check availability of article url
-			$time = null;
-			do
-			{
-			
-				$newUrl = date( '/Y/m/d/' ) . '' . $values['article_url'] . $time . '.' . $articleSettings['extension'];
-				$path = Application_Article_Abstract::getFolder() . $newUrl;
-				$time = '-' . $values['article_creation_date'] . '';
-				if( is_file( $path ) )
-				{
-					if( $thatPost = self::loadPostData( $newUrl ) )
-					{
-						$keysToCheck = array( 'article_title', 'article_description', 'document_url', 'username', 'user_id', 'article_type', 'profile_url', );
-						foreach( $keysToCheck as $eachKey )
-						{
-							if( @$thatPost[$eachKey] !== @$values[$eachKey] )
-							{
-								continue 2;
-							}
-						}
-						$this->setViewContent(  '' . self::__( '<div class="badnews">' . ucfirst( $joinedType ) . ' With the same info exists. <a href="' . Ayoola_Application::getUrlPrefix() . '' . $newUrl . '">View ' . $joinedType . '</a> or <a href="' . Ayoola_Page::getPreviousUrl() . '">Go Back</a></div>' ) . '', true  );
-						return false;
-
-					}
-				}
-			}
-			while( is_file( $path ) );
-			$values['article_url'] =  $newUrl;
 						
 			//	write to file
-            Ayoola_Doc::createDirectory( dirname( self::getFolder() . $values['article_url'] ) );
             
 			self::saveArticle( $values );
 
