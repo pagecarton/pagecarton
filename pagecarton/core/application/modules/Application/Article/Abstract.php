@@ -275,7 +275,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 				( 
 					trim( @$data['publish'] )
 					|| self::isOwner( @$data['user_id'] ) 
-					|| @in_array( 'publish', @$data['article_options'] ) 
+					|| ( isset( $data['article_options'] ) && is_array( $data['article_options'] ) && in_array( 'publish', $data['article_options'] ) )
 					|| strtolower( Ayoola_Application::getUserInfo( 'username' ) ) === strtolower( $data['username']  )
 				)
 			&&
