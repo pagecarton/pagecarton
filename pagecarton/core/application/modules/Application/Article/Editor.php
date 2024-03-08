@@ -92,6 +92,10 @@ class Application_Article_Editor extends Application_Article_Abstract
 			//	Old owner is still the new owner
 			$values['user_id'] = $data['user_id'];
 			$values['username'] = $data['username'];
+			if( isset( $values['datetime'] ) )
+			{
+				$values['article_creation_date'] = strtotime( $values['datetime'] );
+			}
 			$values['article_modified_date'] = time();
 						
 			//	making options that have been disabled to still be active.
