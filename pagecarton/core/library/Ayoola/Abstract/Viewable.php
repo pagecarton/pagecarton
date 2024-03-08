@@ -865,8 +865,16 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			{
                 $sysTemp = sys_get_temp_dir() . DS . 'pagecarton' . DS . microtime();
                 Ayoola_Doc::createDirectory( $sysTemp );
-				$headerBuff = fopen( $sysTemp . DS . 'headers', 'w+' );
-				curl_setopt( $request, CURLOPT_WRITEHEADER, $headerBuff );
+				if( ! $headerBuff = fopen( $sysTemp . DS . 'headers', 'w+' ) )
+                {
+    
+    				if( ! $headerBuff = fopen( CACHE_DIR . DS . 'headers', 'w+' ) )
+                    {
+                        
+                    }
+                
+                }
+				$headerBuff ? curl_setopt( $request, CURLOPT_WRITEHEADER, $headerBuff ) : null;
 			}
 			if( is_array( @$settings['http_header'] ) )
 			{
