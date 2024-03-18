@@ -200,6 +200,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     {
         //  making it count up to 10 times solves problem of some of the matches not found due to recursion limit set at 524
 		$count = 1;
+		
+		$defaultLayout = Application_Settings_CompanyInfo::getSettings( 'Page', 'default_layout' );
+		$dir = DOCUMENTS_DIR . DS . 'layout' . DS . $defaultLayout . DS . 'theme/template';
+		$sections = Ayoola_Application::getDomainSettings( APPLICATION_PATH ) . DS . dirname( $dir ) . DS . 'pagewidgetsettings';
+		$summit = json_decode( file_get_contents( $sections ), true ) ? : array();
+
         while( stripos( $content, '</widget>' ) && $count < 10  )
         {
             // this was causing issue in a server
@@ -261,7 +267,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                 elseif( ! Ayoola_Loader::loadClass( $className ) )
                 {
                     $error = '<div class="badnews">Widget Class "' . $className . '" Not Available On This Site</div>';
-
                 }
 
                 if( $error )
@@ -292,10 +297,31 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
                     'markup_template_namespace' => 'xx1233xxx', 
                     'markup_template_mode' => __CLASS__, 
                     'no_init' => true, 
-                    ) 
-                    + $baseParameters;  
-                
+                    );  
+	
+				$widgetId = md5( json_encode( $parameters ) . $className );
+
+				// if( $parameters['article_types'] === 'event')
+				// {
+				// 	var_export( $widgetId );
+				// 	var_export( $parameters );
+				// 	exit();
+				// }
+				if( isset( $summit[ Ayoola_Application::getPresentUri()][$widgetId] ) )
+				{
+					foreach( $summit[ Ayoola_Application::getPresentUri()][$widgetId]  as $parameter => $value )
+					{
+						//var_export( $parameters );
+						//var_export( $widgetId );
+						// exit();
+						$parameters[$parameter] = $value;
+					}
+				}
+				$parameters['widget_id'] = $widgetId;
+
+				$parameters += $baseParameters;
                 self::unsetParametersThatMayBeDuplicated( $parameters );
+
                 $class = new $className( $parameters );
                 $class->setParameter( $parameters );
                 $class->init();
@@ -544,7 +570,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
     public function init()
     {
-		//var_export( $this->getParameter() );
 		//	codes first because it wont be there if they didnt opt to enter codes
         if( ! $content = $this->getParameter( 'content' ) )
         {
@@ -578,9 +603,6 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
             $content = self::setContentIncludes( $content, $this->getParameter( 'includes' ) );
         }
 
-        //  text update
-        self::doTextUpdate( $content );
-
 		$content = self::__( $content );
 
         $count = 0;
@@ -593,8 +615,12 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 			$content .= '<div style="clear:both;"></div>';  
 			$content .= '<div style="clear:both;"></div>';  
         }
+		///var_export( $this->getParameter() );
         //  embed widget
         $content = self::embedWidget( $content, $this->getParameter(), $this->_markupTemplateObjects );
+
+        //  text update
+        self::doTextUpdate( $content );
 
 
 		if( $this->getParameter( 'page_title' ) || $this->getParameter( 'page_description' )  )

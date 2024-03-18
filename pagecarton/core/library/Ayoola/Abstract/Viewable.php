@@ -1550,11 +1550,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 		$results[1] = array_merge( $results[1], $supplementary );
 		sort( $results[1] );
 		static::$_parameterKeys[$thisObjectID] = $results[1];
-	//	if( in_array( 'Application_Profile_View', $classes ) )
-		{
-
-		}
-
 		return static::$_parameterKeys[$thisObjectID];
 	}
 
@@ -1841,7 +1836,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			$fieldset = new Ayoola_Form_Element;
 			$fieldset->hashElementName = false;
 			if( @in_array( 'privacy', $objectWidgetOptions ) || @$advanceParameters['object_access_level'] )
-		//	if( $object['set_access_level'] || $advanceParameters['object_access_level'] )
 			{
 				$fieldset->addElement( array( 'name' => 'object_access_level', 'id' => $object['object_unique_id'] . '_object_access_level' . $object['pagewidget_id'], 'label' => 'Who can view widget', 'placeholder' => '', 'type' => 'SelectMultiple', 'value' => @$advanceParameters['object_access_level'] ), self::$_authLevelOptions );
 			}
@@ -1849,7 +1843,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			if( $object['class_name'] == 'Ayoola_Page_Editor_Text' || $object['class_name'] == 'Ayoola_Page_Editor_Image' )
 			{
 
-			$jsChangeWrapper = '
+			    $jsChangeWrapper = '
 				var a = ayoola.div.getParent( { element: this, name: \'over_all_object_container\', counter: 10 } );
 
 				var b = this.options[this.selectedIndex].getAttribute( \'data-wrapper_prefix\' ) || \'\';
@@ -1877,7 +1871,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 			}
 
 			if( @in_array( 'wrappers', $objectWidgetOptions ) || @$advanceParameters['wrapper_name'] )
-		//	if( $object['wrap_widget'] || $advanceParameters['wrapper_name'] )
 			{
 				if( ! self::$_wrapperOptions )
 				{
@@ -1885,7 +1878,6 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 					self::$_wrapperOptions = $class->select();
 				}
 
-		//		$options = '<select name="wrapper_name" onChange="' . $jsChangeWrapper . '">
 				$options = '<select name="wrapper_name" onChange="">
 								<option value="">No Wrapper...</option>
 								';

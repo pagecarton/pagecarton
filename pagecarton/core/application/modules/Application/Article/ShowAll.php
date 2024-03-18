@@ -288,6 +288,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 
         if( ! $this->getParameter( 'add_a_new_post' ) )
         {
+			if( $this->getParameter( 'add_a_new_post' ) === '0' || $this->getParameter( 'add_a_new_post' ) === 0 )
+			{
+				$this->_parameter['markup_template'] = null;
+				return false;
+			}
 
         }
 		elseif( empty( $_GET['pc_post_list_id'] ) )
@@ -834,6 +839,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
         $howManyPostsToAdd = $howManyPostsToAdd - $noOfPosts;
         if(  $howManyPostsToAdd < 1 )
         {
+			if( $this->getParameter( 'add_a_new_post' ) === '0' || $this->getParameter( 'add_a_new_post' ) === 0 )
+			{
+				$this->_parameter['markup_template'] = null;
+				return false;
+			}
             $howManyPostsToAdd = 0;
         }
 		if( $howManyPostsToAdd && empty( $_GET['pc_post_list_id'] ) ) 
