@@ -388,8 +388,8 @@ if (
             $filesToCopy = array(
                 'index.php',
                 '.htaccess',
-                'web.config',
-            );
+                //'web.config',
+            ); 
             foreach ($filesToCopy as $eachFile) {
                 $backupFile = $eachFile . '.pc_backup';
                 if (is_file($eachFile) && !is_file($backupFile)) {
