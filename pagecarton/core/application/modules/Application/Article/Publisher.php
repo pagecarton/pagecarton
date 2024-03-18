@@ -299,7 +299,7 @@ class Application_Article_Publisher extends Application_Article_Creator
                                 </select>
                                 <br><br>
                                 <span style="padding:1em;' .  $style  . '">
-                                ' . $values['total_no_of_posts'] . ( $values['total_no_of_posts'] > $noRequired ? null : null  ) . ' added
+                                ' . intval( $values['total_no_of_posts'] ) . ' added
                                 </span>
                                 <br>
 
