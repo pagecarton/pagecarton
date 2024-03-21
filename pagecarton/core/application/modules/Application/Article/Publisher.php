@@ -133,9 +133,9 @@ class Application_Article_Publisher extends Application_Article_Creator
                 }
 
 
-                $html .= '<div style=" margin:1em; font-size:small;" >';
-                $html .= '<h2 style="float:left;">Page ' . ++$count . ' </h2>';
-                $html .= '<p style="float:right;"> 
+                $html .= '<div style=" margin:0 1em; font-size:small;" >';
+                $html .= '<h2 style="float:left;margin:0;">Page ' . ++$count . ' </h2>';
+                $html .= '<p style="float:right;margin:0;"> 
                                 > <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '' . ( dirname( $pageUrl ) ) . '">' . Ayoola_Page::getHomePageUrl() . '' . ( dirname( $pageUrl ) ) . '</a> 
                                 <br>
                                 > <a target="_blank" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/Ayoola_Page_Editor?url=' . ( dirname( $pageUrl ) ) . '">Page Settings</a>
@@ -253,7 +253,13 @@ class Application_Article_Publisher extends Application_Article_Creator
                                 $cssClass = 'goodnews';
                                 $style = 'color: #4F8A10;
                                 background-color: #DFF2BF;';
-                                if( $values['total_no_of_posts'] < $noRequired )
+                                $widgetId = $eachWidget->getParameter( 'widget_id' );
+
+                                if( isset($summit[dirname( $pageUrl )][$widgetId]['add_a_new_post']) )
+                                {
+                                    $noRequired = $summit[dirname( $pageUrl )][$widgetId]['add_a_new_post'];
+                                }
+                                if( intval($values['total_no_of_posts']) < intval($noRequired) )
                                 {
                                      $done = false;
                                      $cssClass = 'badnews';
@@ -263,7 +269,6 @@ class Application_Article_Publisher extends Application_Article_Creator
                                 }
                                 $link = '' . Ayoola_Application::getUrlPrefix() . '' . $eachWidget->getParameter( 'add_a_new_post_full_url' ) . '&close_on_success=1';
 
-                                $widgetId = $eachWidget->getParameter( 'widget_id' );
 
                                 // if( $postType == 'event')
                                 // {
@@ -273,10 +278,7 @@ class Application_Article_Publisher extends Application_Article_Creator
 
                                 // }
                                 //var_export( $summit[dirname( $pageUrl )][$widgetId] );
-                                if( isset($summit[dirname( $pageUrl )][$widgetId]['add_a_new_post']) )
-                                {
-                                    $noRequired = $summit[dirname( $pageUrl )][$widgetId]['add_a_new_post'];
-                                }
+
                                 $options = '';
                                 foreach( range( 1, 50 ) as $each )
                                 {

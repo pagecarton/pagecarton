@@ -629,7 +629,7 @@ pc_full_width {
 }
 
 .pc-btn-parent a:before, .pc-btn:before {
-    content: "\f0c1";
+    /* content: "\f0c1"; */
     padding:4px;
     margin-right: 0.5em;
   }
