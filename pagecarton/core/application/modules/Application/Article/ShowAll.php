@@ -1177,7 +1177,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             $data['article_creation_date_filtered'] = $timeFilter->filter( @$data['article_creation_date'] ? : ( time() - 3 ) ); 
             
             @$data['article_date_M'] = strftime( '%B', $data['article_modified_date'] );
-            @$data['article_date_m'] = strftime( '%b', $data['article_modified_date'] );   
+            @$data['article_date_m'] = strftime( '%m', $data['article_modified_date'] );   
             @$data['article_date_Y'] = strftime( '%Y', $data['article_modified_date'] );
             @$data['article_date_y'] = strftime( '%y', $data['article_modified_date'] );
             @$data['article_date_d'] = strftime( '%d', $data['article_modified_date'] );   
