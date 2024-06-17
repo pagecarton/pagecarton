@@ -412,7 +412,7 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
         }
 
         // magic static texts
-        preg_match_all( '|\{-(.*)-\}|', $content, $matches );
+        preg_match_all( '|\{-(.*)-\}|isU', $content, $matches );
         #   '{-Lorem Ipsum dolor-}'
 
         $previousData = Ayoola_Page_Layout_ReplaceText::getUpdates( true ) ? : Ayoola_Page_Layout_ReplaceText::getDefaultTexts();
