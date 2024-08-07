@@ -191,10 +191,11 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 			$randomKeys = array();
 			if( ! $_POST )
 			{
-				while( $i <= @count( @$data['quiz_subgroup_id'] ) && $i < 9 )
+				$toCount = @$data['quiz_subgroup_id'] ? : array();
+				while( $i <= @count( $toCount ) && $i < 9 )
 				{
-					$eachGroupId = @$data['quiz_subgroup_id'][$i];
-					if( empty( $data['quiz_subgroup_id'] ) && empty( $data['quiz_subgroup_question_max'][$i] ) ) 
+					$eachGroupId = $toCount[$i];
+					if( empty( $toCount ) && empty( $data['quiz_subgroup_question_max'][$i] ) ) 
 					{
 
 						//	DONT ALLOW MORE THAN 50 QUESTIONS IN QUIZ
