@@ -357,32 +357,24 @@ class Application_Article_ShowAll extends Application_Article_Abstract
      * @return array
      */
 	public function retrieveArticleData( $data )
-    {
-
-			
+    {	
 		//	Allow injection of data
-		switch( @$data['article_url'] )
+		if( is_array( $data ) )
 		{
-			default:
-				if( is_array( $data ) )
-				{
-					$data = array_merge( $data ? : array(),  $this->getParameter( 'data_to_merge' ) ? : array() );
-				}
-				if( is_array( $data ) && empty( $data['allow_raw_data'] ) )
-				{ 
-
-					$data = $data['article_url']; 
-				}
-				
-				//	Module can now send full path
-
-				if( ! is_array( $data ) )
-				{
-					
-					$data = self::loadPostData( $data );
-				}
-			break;
+			$data = array_merge( $data ? : array(),  $this->getParameter( 'data_to_merge' ) ? : array() );
 		}
+		if( is_array( $data ) && empty( $data['allow_raw_data'] ) )
+		{ 
+			$data = $data['article_url']; 
+		}
+		
+		//	Module can now send full path
+		if( ! is_array( $data ) )
+		{
+			
+			$data = self::loadPostData( $data );
+		}
+
 		return $data;
     } 
 	
