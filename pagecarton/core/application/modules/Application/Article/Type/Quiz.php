@@ -191,7 +191,14 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 			$randomKeys = array();
 			if( ! $_POST )
 			{
-				$toCount = @$data['quiz_subgroup_id'] ? : array();
+				if( empty( $data['quiz_subgroup_id'] ) || ! is_array( $data['quiz_subgroup_id'] ) )
+				{
+					$toCount = array();
+				}
+				else
+				{
+					$toCount = $data['quiz_subgroup_id'];
+				}
 				while( $i <= @count( $toCount ) && $i < 9 )
 				{
 					$eachGroupId = $toCount[$i];
@@ -215,25 +222,34 @@ class Application_Article_Type_Quiz extends Application_Article_Type_Abstract
 						//	Let old test go through this
 						$data['quiz_subgroup_question_max'][$i] = $data['quiz_max_no_of_question'];
 					}
-					if( empty( $data['quiz_subgroup_question_max'][$i] ) || ! count( $data['quiz_question' . $eachGroupId] ) ) 
+					if( empty( $data['quiz_question' . $eachGroupId] ) || ! is_array( $data['quiz_question' . $eachGroupId] ) )
+					{
+						$toCount2 = array();
+					}
+					else
+					{
+						$toCount2 = $data['quiz_question' . $eachGroupId];
+					}
+
+					if( empty( $data['quiz_subgroup_question_max'][$i] ) || ! count( $toCount2 ) ) 
 					{
 						$i++;
 						continue;
 					}
-					elseif( $data['quiz_subgroup_question_max'][$i] > count( $data['quiz_question' . $eachGroupId] ) ) 
+					elseif( $data['quiz_subgroup_question_max'][$i] > count( $toCount2 ) ) 
 					{
-						$data['quiz_subgroup_question_max'][$i] = count( $data['quiz_question' . $eachGroupId] );
+						$data['quiz_subgroup_question_max'][$i] = count( $toCount2 );
 					}
 
 					
-					$randomKeys = (array) array_rand( $data['quiz_question' . $eachGroupId], $data['quiz_subgroup_question_max'][$i] );
+					$randomKeys = (array) array_rand( $toCount2, $data['quiz_subgroup_question_max'][$i] );
 
 					shuffle( $randomKeys );
 
 					$randomKeys = array_combine( $randomKeys, $randomKeys );
 					
 					//	Take care of group questions
-					$questions = array_values( array_intersect_key( $data['quiz_question' . $eachGroupId], $randomKeys ) );				
+					$questions = array_values( array_intersect_key( $toCount2, $randomKeys ) );				
 					if( ! trim( @$data['quiz_subgroup_question'][$i] ) )
 					{
 
