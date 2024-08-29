@@ -25,12 +25,12 @@ class PageCartonCLI
         file_put_contents( 'php.ini', $ini . "\r\n" . file_get_contents( 'pagecarton.php.ini' ) );
         $args = $_SERVER['argv'];
         $command = $args[1] ?? null;
-        echo PHP_BINDIR;
-        echo "\r\n";
-        echo php_ini_loaded_file();
-        echo "\r\n";
-        echo ini_get( 'extension_dir' );
-        echo "\r\n"; 
+        // echo PHP_BINDIR;
+        // echo "\r\n";
+        // echo php_ini_loaded_file();
+        // echo "\r\n";
+        // echo ini_get( 'extension_dir' );
+        // echo "\r\n"; 
 
         switch ($command) {
             case 'serve':
