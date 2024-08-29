@@ -9,6 +9,20 @@ class PageCartonCLI
 {
     public function run()
     {
+
+        $ini = file_get_contents( php_ini_loaded_file() );
+
+        $reqextensions = array(
+            'zip',
+            'gd'
+        );
+
+        foreach( $reqextensions as $value )
+        {
+            $ini = str_ireplace( ';extension=' . $value, 'extension=' . $value, $ini );
+        }
+
+        file_put_contents( 'php.ini', $ini . "\r\n" . file_get_contents( 'pagecarton.php.ini' ) );
         $args = $_SERVER['argv'];
         $command = $args[1] ?? null;
         echo PHP_BINDIR;
@@ -77,6 +91,6 @@ class ServeCommand
         echo "Please note that this server is meant for development purpose and should never be used in production. \n";
 
         // Start PHP's built-in server
-        exec("php -S {$host}:{$port} -t public");
+        exec("php -S {$host}:{$port} -t public -c php.ini");
     }
 }
