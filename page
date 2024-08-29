@@ -13,13 +13,17 @@ class PageCartonCLI
         $ini = file_get_contents( php_ini_loaded_file() );
 
         $reqextensions = array(
+            'curl',
             'zip',
             'gd'
         );
 
         foreach( $reqextensions as $value )
         {
-            $ini = str_ireplace( ';extension=' . $value, 'extension=' . $value, $ini );
+            if( ! in_array( $value, get_loaded_extensions() ) )
+            {
+                $ini = str_ireplace( ';extension=' . $value, 'extension=' . $value, $ini );
+            }
         }
 
         file_put_contents( 'php.ini', $ini . "\r\n" . file_get_contents( 'pagecarton.php.ini' ) );
