@@ -1,0 +1,82 @@
+#!/usr/bin/env php
+<?php
+
+// Autoload dependencies (if using Composer)
+require __DIR__ . '/vendor/autoload.php';
+
+
+class PageCartonCLI
+{
+    public function run()
+    {
+        $args = $_SERVER['argv'];
+        $command = $args[1] ?? null;
+        echo PHP_BINDIR;
+        echo "\r\n";
+        echo php_ini_loaded_file();
+        echo "\r\n";
+        echo ini_get( 'extension_dir' );
+        echo "\r\n"; 
+
+        switch ($command) {
+            case 'serve':
+                $serveCommand = new ServeCommand();
+                $serveCommand->handle();
+                break;
+
+            default:
+                $this->showHelp();
+                break;
+        }
+    }
+
+    private function showHelp()
+    {
+        echo PHP_BINDIR;
+        echo "PageCarton CLI\n";
+        echo "Usage:\n";
+        echo "  serve [--host=127.0.0.1] [--port=8000]\n";
+        echo "Options:\n";
+        echo "  --host    Specify the host (default: 127.0.0.1)\n";
+        echo "  --port    Specify the port (default: 8000)\n";
+    }
+}
+
+$cli = new PageCartonCLI();
+$cli->run();
+
+
+class ServeCommand
+{
+    public function handle()
+    {
+        $host = '127.0.0.1';
+        $port = '8002';
+
+        $argsC = array();
+        if( isset( $_SERVER['argv'] ) )
+        {
+            $argsC = $_SERVER['argv'];
+        }
+        foreach ( $argsC as $arg) {
+            if (strpos($arg, '--host=') === 0) {
+                $host = substr($arg, 7);
+            } elseif (strpos($arg, '--port=') === 0) {
+                $port = substr($arg, 7);
+            }
+        }
+        
+
+        if( ! is_dir( 'public') )
+        {
+            mkdir( 'public' );
+        }
+        copy( 'pagecarton/core/local_html/index.php', 'public/index.php' );
+        copy( 'pagecarton/core/local_html/.htaccess', 'public/.htaccess' );
+        echo "PageCarton development server started on http://{$host}:{$port}\n";
+        echo "Please note that this server is meant for development purpose and should never be used in production. \n";
+
+        // Start PHP's built-in server
+        exec("php -S {$host}:{$port} -t public");
+    }
+}
