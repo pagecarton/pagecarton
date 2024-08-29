@@ -534,7 +534,16 @@ abstract class Ayoola_Dbase_Table_Abstract_Xml extends Ayoola_Dbase_Table_Abstra
     {
         static::$_tableInfo = $this->query('TABLE', 'DESCRIBE');
         foreach ($values as $key => $value) {
-            if (!array_key_exists($key, static::$_tableInfo['data_types'])) {unset($values[$key]);}
+
+            $dataTypes = array();
+            if( ! empty( static::$_tableInfo['data_types'] ) )
+            {
+                $dataTypes = static::$_tableInfo['data_types'];
+            }
+            if ( ! array_key_exists( $key, $dataTypes )) 
+            {
+                unset( $values[$key] );
+            }
         }
         return $values;
     }
