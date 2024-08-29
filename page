@@ -89,6 +89,8 @@ class ServeCommand
         copy( 'pagecarton/core/local_html/.htaccess', 'public/.htaccess' );
         echo "PageCarton development server started on http://{$host}:{$port}\n";
         echo "Please note that this server is meant for development purpose and should never be used in production. \n";
+        echo "PageCarton homepage is http://{$host}:{$port}\n";
+        echo "PageCarton admin panel is http://{$host}:{$port}/pc-admin\n";
 
         // Start PHP's built-in server
         exec("php -S {$host}:{$port} -t public -c php.ini");
