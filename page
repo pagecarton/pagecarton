@@ -4,13 +4,22 @@
 // Autoload dependencies (if using Composer)
 require __DIR__ . '/vendor/autoload.php';
 
-
 class PageCartonCLI
 {
     public function run()
     {
+        // Reading the ini file with error handling
+        $iniFile = php_ini_loaded_file();
+        if (!$iniFile || !is_readable($iniFile)) {
+            echo "Error: Unable to read the php.ini file.\n";
+            exit(1);
+        }
 
-        $ini = file_get_contents( php_ini_loaded_file() );
+        $ini = file_get_contents($iniFile);
+        if ($ini === false) {
+            echo "Error: Failed to read the contents of php.ini.\n";
+            exit(1);
+        }
 
         $reqextensions = array(
             'curl',
@@ -18,23 +27,21 @@ class PageCartonCLI
             'gd'
         );
 
-        foreach( $reqextensions as $value )
-        {
-            if( ! in_array( $value, get_loaded_extensions() ) )
-            {
-                $ini = str_ireplace( ';extension=' . $value, 'extension=' . $value, $ini );
+        foreach ($reqextensions as $value) {
+            if (!in_array($value, get_loaded_extensions())) {
+                $ini = str_ireplace(';extension=' . $value, 'extension=' . $value, $ini);
             }
         }
 
-        file_put_contents( 'php.ini', $ini . "\r\n" . file_get_contents( 'pagecarton.php.ini' ) );
+        // Writing the custom php.ini with error handling
+        $customIni = $ini . "\r\n" . file_get_contents('pagecarton.php.ini');
+        if (file_put_contents('php.ini', $customIni) === false) {
+            echo "Error: Failed to write the custom php.ini file.\n";
+            exit(1);
+        }
+
         $args = $_SERVER['argv'];
         $command = $args[1] ?? null;
-        // echo PHP_BINDIR;
-        // echo "\r\n";
-        // echo php_ini_loaded_file();
-        // echo "\r\n";
-        // echo ini_get( 'extension_dir' );
-        // echo "\r\n"; 
 
         switch ($command) {
             case 'serve':
@@ -63,7 +70,6 @@ class PageCartonCLI
 $cli = new PageCartonCLI();
 $cli->run();
 
-
 class ServeCommand
 {
     public function handle()
@@ -72,31 +78,48 @@ class ServeCommand
         $port = '8002';
 
         $argsC = array();
-        if( isset( $_SERVER['argv'] ) )
-        {
+        if (isset($_SERVER['argv'])) {
             $argsC = $_SERVER['argv'];
         }
-        foreach ( $argsC as $arg) {
+        foreach ($argsC as $arg) {
             if (strpos($arg, '--host=') === 0) {
                 $host = substr($arg, 7);
             } elseif (strpos($arg, '--port=') === 0) {
                 $port = substr($arg, 7);
             }
         }
-        
 
-        if( ! is_dir( 'public') )
-        {
-            mkdir( 'public' );
+        // Create the 'public' directory with error handling
+        if (!is_dir('public')) {
+            if (!mkdir('public')) {
+                echo "Error: Failed to create the 'public' directory.\n";
+                exit(1);
+            }
         }
-        copy( 'pagecarton/core/local_html/index.php', 'public/index.php' );
-        copy( 'pagecarton/core/local_html/.htaccess', 'public/.htaccess' );
+
+        // Copy necessary files with error handling
+        if (!copy('pagecarton/core/local_html/index.php', 'public/index.php')) {
+            echo "Error: Failed to copy index.php to the 'public' directory.\n";
+            exit(1);
+        }
+
+        if (!copy('pagecarton/core/local_html/.htaccess', 'public/.htaccess')) {
+            echo "Error: Failed to copy .htaccess to the 'public' directory.\n";
+            exit(1);
+        }
+
         echo "PageCarton development server started on http://{$host}:{$port}\n";
         echo "Please note that this server is meant for development purpose and should never be used in production. \n";
         echo "PageCarton homepage is http://{$host}:{$port}\n";
         echo "PageCarton admin panel is http://{$host}:{$port}/pc-admin\n";
 
-        // Start PHP's built-in server
-        exec("php -S {$host}:{$port} -t public -c php.ini");
+        // Start PHP's built-in server with error handling
+        $command = "php -S {$host}:{$port} -t public -c php.ini";
+        $serverStarted = exec($command, $output, $returnVar);
+
+        if ($returnVar !== 0) {
+            echo "Error: Failed to start the PHP development server on http://{$host}:{$port}.\n";
+            exit(1);
+        }
     }
 }
