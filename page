@@ -108,10 +108,11 @@ class ServeCommand
             exit(1);
         }
 
-        echo "PageCarton development server started on http://{$host}:{$port}\n";
+        echo "PageCarton Development Server started on http://{$host}:{$port}\n";
         echo "Please note that this server is meant for development purpose and should never be used in production. \n";
-        echo "PageCarton homepage is http://{$host}:{$port}\n";
-        echo "PageCarton admin panel is http://{$host}:{$port}/pc-admin\n";
+        echo "Personalize PageCarton by going to http://{$host}:{$port}/personalize\n";
+        echo "PageCarton Homepage is http://{$host}:{$port}\n";
+        echo "PageCarton Admin Panel is http://{$host}:{$port}/pc-admin\n";
 
         // Start PHP's built-in server with error handling
         $command = "php -S {$host}:{$port} -t public -c php.ini";
