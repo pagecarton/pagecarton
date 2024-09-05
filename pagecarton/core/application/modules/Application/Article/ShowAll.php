@@ -587,10 +587,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
                         $data['currency'] = $filter::$symbol;
                         $filter = new $filter();
                         
-                        if( intval( $data['item_old_price'] ) )
+                        if( is_numeric( $data['item_old_price'] ) )
                         {
-							$data['item_old_price'] = intval( $data['item_old_price'] );
-                            @$data['price_percentage_savings'] =  intval( ( ( $data['item_old_price'] - $data['item_price'] ) / $data['item_old_price'] ) * 100 ) . '';
+							$data['item_old_price'] = doubleval( $data['item_old_price'] );
+                            @$data['price_percentage_savings'] =  intval( ( ( $data['item_old_price'] - doubleval( $data['item_price'] ) ) / $data['item_old_price'] ) * 100 ) . '';
                             @$data['item_old_price'] = $data['item_old_price'] ? $filter->filter( $data['item_old_price'] ) : null;
                         }
                         $data['item_price_with_currency'] = $data['item_price'] ? $filter->filter( $data['item_price'] ) : null;
