@@ -1723,7 +1723,7 @@ abstract class Ayoola_Abstract_Viewable implements Ayoola_Object_Interface_Viewa
 
                 $form->addFieldset( $fieldset );
 
-                $pageWidgetsVersionsKeys = array_keys( $pageWidgetToRestore['history'] );
+                $pageWidgetsVersionsKeys = array_keys( $pageWidgetToRestore['history'] ? : array() );
 
                 $filterTime = new Ayoola_Filter_Time();
                 $pageWidgetsVersions = array();
