@@ -230,9 +230,16 @@ class Ayoola_Application
 		$domainSettings = array( 'no_redirect' => true );
 
         {
-			self::$_pathPrefix = $settings['path'];
+			self::$_pathPrefix = self::$_pathPrefix . $settings['path'];
 
-			self::setUrlPrefix( self::$_pathPrefix );
+            $urlPrefix = $settings['path'];
+
+            if( self::getUrlPrefix() && stripos( $settings['path'], self::getUrlPrefix() ) === false )
+            {
+                $urlPrefix = self::getUrlPrefix() . $settings['path'];
+            }
+
+			self::setUrlPrefix( $urlPrefix );
 		}
 		if( ! empty( $settings['domain'] ) )
 		{

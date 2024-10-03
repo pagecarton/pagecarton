@@ -25,7 +25,7 @@ class Application_Article_Table extends PageCarton_Table_Private
      *
      * @param string
      */
-    protected $_tableVersion = '0.6';  
+    protected $_tableVersion = '0.7';  
 
     /**
      * Table data types and declaration
@@ -36,6 +36,7 @@ class Application_Article_Table extends PageCarton_Table_Private
 	protected $_dataTypes = array (
   'article_title' => 'INPUTTEXT',
   'article_url' => 'INPUTTEXT',
+  'post_slug' => 'INPUTTEXT',
   'category_name' => 'JSON',
   'username' => 'INPUTTEXT',
   'user_id' => 'INPUTTEXT',
