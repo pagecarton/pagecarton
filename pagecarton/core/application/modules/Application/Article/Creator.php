@@ -99,7 +99,6 @@ class Application_Article_Creator extends Application_Article_Abstract
         $options += $postTypeInfo ? : array();
         return $options;
     }
-
 		
     /**
      * The method does the whole Class Process
@@ -107,25 +106,15 @@ class Application_Article_Creator extends Application_Article_Abstract
      */
 	public static function generateArticleUrl( & $values )
     {
+
 		$articleSettings = Application_Article_Settings::getSettings( 'Articles' );  
 		$articleSettings['extension'] = @$articleSettings['extension'] ? : 'html';			
 
-		$filter = new Ayoola_Filter_Transliterate();
-		$values['article_url'] = $filter->filter( $values['article_title'] );
 
-		$filter = new Ayoola_Filter_SimplyUrl();
-		$values['article_url'] = $filter->filter( $values['article_url'] );
+		self::generateSlug( $values );
 
-		$filter = new Ayoola_Filter_Name();
-		$filter->replace = '-';
-		if( function_exists( 'mb_substr') )
-		{
-			$values['article_url'] = mb_substr( trim( $filter->filter( strtolower( $values['article_url'] ) ) , '-' ), 0, 70 ) ? : microtime();
-		}
-		else
-		{
-			$values['article_url'] = substr( trim( $filter->filter( strtolower( $values['article_url'] ) ) , '-' ), 0, 70 ) ? : microtime();
-		}
+		$values['article_url'] = $values['post_slug'];
+
 		//	Check availability of article url
 		$time = null;
 		do

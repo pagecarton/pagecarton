@@ -1095,6 +1095,68 @@ class Ayoola_Application
 
     }
 
+    public static function getArticleViewUrl( $uri )
+    {
+        //	Check if this is an article
+        $article = Application_Article_Abstract::getFolder() . $uri;
+        if( is_file( $article ) )
+        {
+            self::$mode = 'post';
+            $articleInfo = Application_Article_Abstract::loadPostData( $article );
+
+            //	introducing x_url so that user can determine the url to display a post
+            if( @$_REQUEST['x_url'] )
+            {
+                $moduleInfo = Ayoola_Page::getInfo( $_REQUEST['x_url'] );
+                if( ( ! empty( $moduleInfo ) ) )
+                {
+                    $url = $_REQUEST['x_url'];
+                }
+            }
+            else
+            {
+
+                //     var_export( Ayoola_Page::getInfo( '/post-viewer' ) );
+                if( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['article_type'] ) ) )
+                {
+                    //	allow dedicated url for all post types like /post-viewer-article/
+                    $url = '/post-viewer-'  . $articleInfo['article_type'];
+                }
+                elseif( ( ! empty( $articleInfo['true_post_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['true_post_type'] ) ) )
+                {
+                    //	allow dedicated url for all post types like /post-viewer-article/
+                    $url = '/post-viewer-'  . $articleInfo['true_post_type'];
+                }
+                elseif( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer' ) )
+                {
+                    //	allow dedicated url for all post types like /post-viewer-article/
+                    $url = '/post-viewer';
+                }
+                elseif( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/' . $articleInfo['article_type'] . '/post' ) ) AND ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) )
+                {
+                    //	allow dedicated url for all post types like /download/posts/
+                    $url = '/' . $articleInfo['article_type'] . '/post';
+                }
+                elseif( ( ! empty( $articleInfo['true_post_type'] ) ) AND  ( $moduleInfo = Ayoola_Page::getInfo( '/' . $articleInfo['true_post_type'] . '/post' ) ) AND ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) )
+                {
+                    //	allow dedicated url for all post types like /download/posts/
+                    $url = '/' . $articleInfo['true_post_type'] . '/post';
+                }
+                else
+                {
+                    $url = '/post/view';
+                    $moduleInfo = Ayoola_Page::getInfo( $url );
+                }
+            }
+
+            if( self::getViewFiles( $url ) )
+            {
+                return $url;
+            }
+
+        }
+    }
+
     /**
      * Converts URI to real URI that is viewable
      *
@@ -1128,65 +1190,9 @@ class Ayoola_Application
                     {
                         return $uri;
                     }
-    
-					//	Check if this is an article
-					$article = Application_Article_Abstract::getFolder() . $uri;
-					if( is_file( $article ) )
-					{
-						self::$mode = 'post';
-						$articleInfo = Application_Article_Abstract::loadPostData( $article );
-
-						//	introducing x_url so that user can determine the url to display a post
-						if( @$_REQUEST['x_url'] )
-						{
-							$moduleInfo = Ayoola_Page::getInfo( $_REQUEST['x_url'] );
-							if( ( ! empty( $moduleInfo ) ) )
-							{
-								$url = $_REQUEST['x_url'];
-							}
-						}
-						else
-						{
-
-                            //     var_export( Ayoola_Page::getInfo( '/post-viewer' ) );
-							if( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['article_type'] ) ) )
-							{
-								//	allow dedicated url for all post types like /post-viewer-article/
-								$url = '/post-viewer-'  . $articleInfo['article_type'];
-							}
-							elseif( ( ! empty( $articleInfo['true_post_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer-'  . $articleInfo['true_post_type'] ) ) )
-							{
-								//	allow dedicated url for all post types like /post-viewer-article/
-								$url = '/post-viewer-'  . $articleInfo['true_post_type'];
-							}
-							elseif( $moduleInfo = Ayoola_Page::getInfo( '/post-viewer' ) )
-							{
-								//	allow dedicated url for all post types like /post-viewer-article/
-								$url = '/post-viewer';
-							}
-							elseif( ( ! empty( $articleInfo['article_type'] ) ) AND ( $moduleInfo = Ayoola_Page::getInfo( '/' . $articleInfo['article_type'] . '/post' ) ) AND ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) )
-							{
-								//	allow dedicated url for all post types like /download/posts/
-								$url = '/' . $articleInfo['article_type'] . '/post';
-							}
-							elseif( ( ! empty( $articleInfo['true_post_type'] ) ) AND  ( $moduleInfo = Ayoola_Page::getInfo( '/' . $articleInfo['true_post_type'] . '/post' ) ) AND ( ! empty( $moduleInfo ) && @in_array( 'module', $moduleInfo['page_options'] ) ) )
-							{
-								//	allow dedicated url for all post types like /download/posts/
-								$url = '/' . $articleInfo['true_post_type'] . '/post';
-							}
-							else
-							{
-								$url = '/post/view';
-								$moduleInfo = Ayoola_Page::getInfo( $url );
-							}
-                        }
-
-                        if( self::getViewFiles( $url ) )
-                        {
-
-                           return $url;
-                        }
-
+                    if( $articleUrl = self::getArticleViewUrl( $uri ) )
+                    {
+                        return $articleUrl;
                     }
 				}
 				while( false );
@@ -1288,6 +1294,16 @@ class Ayoola_Application
                 }
 
             }
+
+            if( $post = Application_Article_Table::getInstance()->selectOne( null, array( 'post_slug' => $nameForModule ) ) )
+            {
+                if( $articleUrl = self::getArticleViewUrl( $post['article_url'] ) )
+                {
+                    return $articleUrl;
+                }
+
+            }
+
         }
         while( false );
         return $url;

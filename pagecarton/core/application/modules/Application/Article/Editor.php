@@ -100,6 +100,8 @@ class Application_Article_Editor extends Application_Article_Abstract
 						
 			//	making options that have been disabled to still be active.
 			$values = array_merge( $data, $values );  
+
+			self::generateSlug( $values );
 						
 			self::saveArticle( $values );
 	

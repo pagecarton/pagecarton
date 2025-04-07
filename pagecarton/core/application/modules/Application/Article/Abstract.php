@@ -689,6 +689,41 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		$this->_identifierData = $data;  
     } 
 	
+	/**
+     * The method does the whole Class Process
+     * 
+     */
+	public static function generateSlug( & $values )
+    {
+		if( $values['post_slug'] )
+		{
+			return false;
+		}
+
+		$filter = new Ayoola_Filter_Transliterate();
+		$values['post_slug'] = $filter->filter( $values['article_title'] );
+
+		$filter = new Ayoola_Filter_SimplyUrl();
+		$values['post_slug'] = $filter->filter( $values['post_slug'] );
+
+		$filter = new Ayoola_Filter_Name();
+		$filter->replace = '-';
+		if( function_exists( 'mb_substr') )
+		{
+			$values['post_slug'] = mb_substr( trim( $filter->filter( strtolower( $values['post_slug'] ) ) , '-' ), 0, 100 ) ? : microtime();
+		}
+		else
+		{
+			$values['post_slug'] = substr( trim( $filter->filter( strtolower( $values['post_slug'] ) ) , '-' ), 0, 100 ) ? : microtime();
+		}
+
+		if( Application_Article_Table::getInstance()->select( null, array( 'post_slug' => $values['post_slug'] ) ) )
+		{
+			$values['post_slug'] .= microtime();
+		}
+
+	}
+
     /**
      * Article info
      * 

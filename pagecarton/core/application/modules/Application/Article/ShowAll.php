@@ -1102,12 +1102,20 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				continue;
 			}
 			$data['css_class_of_inner_content'] = $this->getParameter( 'css_class_of_inner_content' );
-			$data['post_link'] = $data['article_url'];
-			$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['article_url'];
-			if( @$data['article_url'] && strpos( @$data['article_url'], ':' ) === false && $data['article_url'][0] !== '?'  )
+
+			if( empty( $data['post_link'] ) )
+			{
+				$data['post_link'] = $data['article_url'];
+				if( ! empty( $data['post_slug'] ) )
+				{
+					$data['post_link'] = $data['post_slug'];
+				}	
+			}
+			if( @$data['post_link'] && strpos( @$data['post_link'], ':' ) === false && $data['post_link'][0] !== '?'  )
 			{
 				$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
 			}
+			$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['article_url'];
 			if( @$data['article_url'] && empty( $data['document_url_base64'] )  )
 			{
 				$data['document_url'] = ( $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ) ) ? : '/img/placeholder-image.jpg'; 
@@ -1542,8 +1550,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			// switch $_GET['category'] off for this instance 
 			@$categoryId = null; 
 		}
-		@$categoryId = $this->getParameter( 'category' ) ? : $categoryId;
-		@$categoryId = $this->getParameter( 'category_id' ) ? : $categoryId;
+		@$categoryId = Application_Category_Creator::filterCategoryName( $this->getParameter( 'category' ) ) ? : $categoryId;
+		@$categoryId = Application_Category_Creator::filterCategoryName( $this->getParameter( 'category_id' ) ) ? : $categoryId;
 		@$categoryId = Application_Category_Creator::filterCategoryName( $this->getParameter( 'category_name' ) ) ? : $categoryId;
 		if( $this->getParameter( 'post_with_same_category' ) && @Ayoola_Application::$GLOBAL['post']['category_name'] )
 		{
@@ -1759,7 +1767,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
             {
                 $table = $table::getInstance();
                 $this->_dbWhereClause = $whereClause;
-                $this->_dbData = $table->select( null, $whereClause, array( 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
+
+				$this->_dbData = $table->select( null, $whereClause, array( 'key_filter_function' => array( 'article_url' => $keyFunction ) ) );
             }
 
         }
