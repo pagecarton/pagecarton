@@ -263,12 +263,12 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 	public function buildQueryForRequestedPosts( $link )
     {
 		$categoryId = @$_GET['category'] ? : $this->getParameter( 'category' );  
-		$categoryId = $this->getParameter( 'category_name' ) ? : $categoryId;
+		$categoryId = Application_Category_Creator::filterCategoryName( $this->getParameter( 'category_name' ) ) ? : $categoryId;
 		$articleInfo = array();
 		if( is_string( $this->getParameter( 'article_types' ) ) )
 		{
 
-			$articleInfo += array( 'article_type' => $this->getParameter( 'article_types' ) );
+			$articleInfo += array( 'article_type' => Application_Category_Creator::filterCategoryName( $this->getParameter( 'article_types' ) ) );
 		}
 		if( $categoryId )
 		{
@@ -869,8 +869,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						'article_url' => $addNewPostUrl . '&pcx=' . rand( 100, 8900 ), 
 						'allow_raw_data' => true, 
 						'not_real_post' => true, 
-						'always_allow_article' => $this->getParameter( 'article_types' ), 
-						'category_name' => $this->getParameter( 'category_name' ), 
+						'always_allow_article' => Application_Category_Creator::filterCategoryName( $this->getParameter( 'article_types' ) ), 
+						'category_name' => Application_Category_Creator::filterCategoryName( $this->getParameter( 'category_name' ) ), 
 						'document_url' => $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg', 
 						'user_id' => Ayoola_Application::getUserInfo( 'user_id' ),
 						'publish' => true, 
@@ -887,8 +887,8 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 						'article_url' => '#' . rand( 100, 8900 ) . ';',  
 						'allow_raw_data' => true, 
 						'not_real_post' => true, 
-						'always_allow_article' => $this->getParameter( 'article_types' ), 
-						'category_name' => $this->getParameter( 'category_name' ), 
+						'always_allow_article' =>Application_Category_Creator::filterCategoryName( $this->getParameter( 'article_types' ) ), 
+						'category_name' => Application_Category_Creator::filterCategoryName( $this->getParameter( 'category_name' ) ), 
 						'document_url' => $this->getParameter( 'default_cover_photo' ) ? : '/img/placeholder-image.jpg', 
 						'publish' => true, 
 						'auth_level' => $articleSettings['allowed_writers'], 
@@ -1544,7 +1544,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 		@$categoryId = $this->getParameter( 'category' ) ? : $categoryId;
 		@$categoryId = $this->getParameter( 'category_id' ) ? : $categoryId;
-		@$categoryId = $this->getParameter( 'category_name' ) ? : $categoryId;
+		@$categoryId = Application_Category_Creator::filterCategoryName( $this->getParameter( 'category_name' ) ) ? : $categoryId;
 		if( $this->getParameter( 'post_with_same_category' ) && @Ayoola_Application::$GLOBAL['post']['category_name'] )
 		{
 			$categoryId = @Ayoola_Application::$GLOBAL['post']['category_name'];
@@ -1687,7 +1687,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			@$this->_parameter['inverse_order'] = isset( $this->_parameter['inverse_order'] ) ? $this->_parameter['inverse_order'] : true;
         }
 
-		@$postType = $this->getParameter( 'article_types' ) ? : $postType;
+		@$postType = Application_Category_Creator::filterCategoryName( $this->getParameter( 'article_types' ) ) ? : $postType;
         $postType = strtolower( trim( $postType ) );
 		if( $postType )
 		{

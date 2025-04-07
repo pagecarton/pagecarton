@@ -61,6 +61,18 @@ abstract class Application_Category_Abstract extends Ayoola_Abstract_Table
      * @var string
      */
 	protected $_tableClass = 'Application_Category';
+
+			
+    /**
+     * The method does the whole Class Process
+     * 
+     */
+	public static function filterCategoryName( $name )
+    {
+		$filter = new Ayoola_Filter_Name();
+		$filter->replace = '-';
+		return trim( $filter->filter( strtolower( $name ) ) , '-' );
+	}
 	
     /**
      * creates the form

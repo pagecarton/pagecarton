@@ -42,17 +42,13 @@ class Application_Category_Creator extends Application_Category_Abstract
 		{
 			$values['parent_category_name'] = $_REQUEST['parent_category_name']; 
 		}
-	//	var_export( $values );
+
 		$values['category_name'] = @$values['category_name'] ? : $values['category_label'];
-	//	var_export( $values );
-		$filter = new Ayoola_Filter_Name();
-		$filter->replace = '-';
-		$access = new Ayoola_Access();
-		$values['category_name'] = trim( $filter->filter( strtolower( $values['category_name'] ) ) , '-' );
+
+		$values['category_name'] = self::filterCategoryName( $values['category_name'] );
 		if( ! $this->insertDb( $values ) ){ return $this->setViewContent( $this->getForm()->view(), true ); }
 		$this->setViewContent(  '' . self::__( '<div><p class="goodnews">Category created successfully.<p></div>' ) . '', true  );
-	//	$this->getForm()->oneFieldSetAtATime = false;
-	//	$this->setViewContent( $this->getForm()->view() );  
-   } 
+
+	} 
 	// END OF CLASS
 }
