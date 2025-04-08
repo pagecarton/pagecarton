@@ -61,17 +61,15 @@ class Application_Article_Settings extends Application_Settings_Abstract
 		$form->oneFieldSetAtATime = true;
 		$fieldset = new Ayoola_Form_Element;
 		
-	//	self::v( $_POST );
-		
 		//	auth levels
 		$authLevel = new Ayoola_Access_AuthLevel;
 		$authLevel = $authLevel->select();
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'auth_level', 'auth_name');
 		$authLevel = $filter->filter( $authLevel );
-	//	var_export( $authLevel );
+
 		ksort( $authLevel );
-	//	var_export( $authLevel );
+
 		unset( $authLevel[97] );
 		unset( $authLevel[98] );
 		
@@ -90,16 +88,25 @@ class Application_Article_Settings extends Application_Settings_Abstract
 				$options[$key]['category_label'] = $options[$key]['category_name'];        
 			}
 		}
+
 		require_once 'Ayoola/Filter/SelectListArray.php';
 		$filter = new Ayoola_Filter_SelectListArray( 'category_name', 'category_label');
 		$options = $filter->filter( $options );
 		$fieldset->addElement( array( 'name' => 'allowed_categories', 'label' => 'Select site-wide categories available for users when creating posts <a rel="spotlight;changeElementId=page_refresh" title="Manage Categories" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Category_List/"> Manage All Categories</a>', 'value' => @$settings['allowed_categories'], 'type' => 'Checkbox' ), $options );
+
+
+		$urlFormat = array(
+			'slug' => '/{{{post_slug}}}',
+			'post-type-slug' => '/{{{post_type}}}/{{{post_slug}}}',
+			'date-slug' => '/year/month/date/{{{post_slug}}}.html',
+		);
+
+		$fieldset->addElement( array( 'name' => 'post_url_format', 'label' => 'Choose post url format', 'type' => 'Radio', 'value' => @$settings['post_url_format'] ), $urlFormat );
 		
 		$fieldset->addLegend( 'Post Settings' );
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
-		//		$form->addFieldset( $fieldset );
-	//	$this->setForm( $form );
-    } 
+
+	} 
 	// END OF CLASS
 }

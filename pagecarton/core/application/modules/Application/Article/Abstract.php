@@ -347,31 +347,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 	public static function updateProfile( $values )
     {
 
-/* 		if( $values['profile_url'] )
-		{
-			//	Let's save some info into the owners account
-			if( $profileInfo = Application_Profile_Abstract::getProfileInfo( $values['profile_url'] ) )
-			{
 
-			}
-
-			@$profileInfo['posts'] = $profileInfo['posts'] ? : array();
-
-			$profileInfo['posts']['all'][$values['article_url']] = array( 'article_url' => $values['article_url'], 'file_size' => $values['file_size'] );
-			$profileInfo['posts']['size'][$values['article_url']] = $values['file_size'];
-			$profileInfo['posts_count_all'] = count( $profileInfo['posts']['all'] );
-			$profileInfo['posts_file_size'] = array_sum( $profileInfo['posts']['size'] );
-			
-			if( intval( $values['auth_level'] ) === 97 )
-			{
-				$profileInfo['posts']['private'][$values['article_url']] = $values['article_url'];
-				$profileInfo['posts_count_private'] = count( $profileInfo['posts']['private'] );     
-			}
-
-			Application_Profile_Abstract::saveProfile( $profileInfo );  
-
-		}
- */	}
+	}
 	
     /**
      * Save the article
@@ -515,7 +492,8 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
                 }
             }
         }
-        
+
+
         if( empty( $jsonData ) )
 		{
 			//	compatibility
@@ -537,7 +515,7 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			}
 			$data = include $data;
 
-		//	if( @$data['has_secondary_data'] )
+			//	if( @$data['has_secondary_data'] )
 			{
 				$filename = self::getSecondaryFolder() . $data['article_url'];
 				if( is_file( $filename ) )
@@ -597,9 +575,12 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			}
 		}
 
-		//$storage = self::getObjectStorage( array( 'id' => __CLASS__ . 'xxweeff' . $data['article_type'], 'device' => 'File', 'time_out' => 10000, ) );
-        //$presetValues = $storage->retrieve();  
-        
+		if( empty( $data['post_slug'] ) )
+		{
+			self::generateSlug( $data );
+			self::saveArticle( $data );
+		}
+		
 		//if( ! is_array( $presetValues ) )
 		{
 			$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $data['article_type'] ) );
@@ -629,22 +610,43 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 		// Comes from a file
 		if( ! $data = $this->getParameter( 'data' ) )
 		{
-			$url = Ayoola_Application::getRequestedUri();
+
+
+			$url = null;
 
 			try
 			{
 				$articleUrl = $this->getIdentifier();
+
 			}
 			catch( Exception $e )
 			{
 
 			}
+			if( ! empty( $articleUrl[$this->getIdColumn()] ) )
+			{
+				$url = $articleUrl[$this->getIdColumn()];
+			}
+			if( ! empty( $_GET['article_url'] ) )
+			{
+				$url = $_GET['article_url'];
+			}
+			if( $this->getParameter( 'article_url' ) )
+			{
+				$url = $this->getParameter( 'article_url' );
+			}
 
-			$url = $articleUrl[$this->getIdColumn()] ? : ( @$_GET['article_url'] ? : $url );
-			$url = $this->getParameter( 'article_url' ) ? : $url;
 
-			$filename = self::getFolder() . $url;
-			$data = self::loadPostData( $filename );
+			if( ! empty( $url ) )
+			{
+				$filename = self::getFolder() . $url;
+				$data = self::loadPostData( $filename );	
+			}
+			elseif( ! empty( Ayoola_Application::$GLOBAL['post'] ) )
+			{
+				$data = Ayoola_Application::$GLOBAL['post'];
+			}
+
  		}
 
 		if( ! $data || ! is_array( $data ) )
@@ -889,8 +891,6 @@ abstract class Application_Article_Abstract extends Ayoola_Abstract_Table
 			);	
 		}
     }
-    
-    
 		
     /**
      * 

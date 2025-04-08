@@ -1067,8 +1067,11 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{ 
 				break; 
 			}
-			$data = array_shift( $values );
 
+			$data = array_shift( $values );
+			$rawData = $data;
+
+			//var_export( $rawData );
 			
 			switch( @$data['article_url'] )
 			{
@@ -1106,16 +1109,28 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			if( empty( $data['post_link'] ) )
 			{
 				$data['post_link'] = $data['article_url'];
-				if( ! empty( $data['post_slug'] ) )
+
+				switch( Application_Article_Settings::retrieve( 'post_url_format' ) )
 				{
-					$data['post_link'] = $data['post_slug'];
-				}	
+					case 'post-type-slug':
+						$data['post_link'] = '/' . $data['article_type'] . '/' . $data['post_slug'];
+					break;
+					case 'slug':
+						$data['post_link'] = '/' . $data['post_slug'];
+					break;
+					case 'date-slug':
+						//	default
+					break;
+				}
 			}
+
+			$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['post_link'];
+
 			if( @$data['post_link'] && strpos( @$data['post_link'], ':' ) === false && $data['post_link'][0] !== '?'  )
 			{
-				$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['article_url'];
+				$data['post_link'] = Ayoola_Application::getUrlPrefix() . $data['post_link'];
 			}
-			$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['article_url'];
+
 			if( @$data['article_url'] && empty( $data['document_url_base64'] )  )
 			{
 				$data['document_url'] = ( $data['document_url'] ? : $this->getParameter( 'default_cover_photo' ) ) ? : '/img/placeholder-image.jpg'; 

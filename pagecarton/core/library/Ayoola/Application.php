@@ -1151,6 +1151,33 @@ class Ayoola_Application
 
             if( self::getViewFiles( $url ) )
             {
+
+                switch( Application_Article_Settings::retrieve( 'post_url_format' ) )
+				{
+					case 'post-type-slug':
+
+						self::setRequestedUri( '/' . $articleInfo['article_type'] . '/' . $articleInfo['post_slug'] . '' );
+
+					break;
+					case 'slug':
+
+						self::setRequestedUri( '/' . $articleInfo['post_slug'] . '' );
+
+					break;
+
+					case 'date-slug':
+
+
+						//	default
+                    default:
+
+                        self::setRequestedUri( '' . $articleInfo['article_url'] . '' );
+
+						//	default
+					break;
+
+	
+				}
                 return $url;
             }
 
@@ -1163,7 +1190,7 @@ class Ayoola_Application
      * @param uri
      * @return void
      */
-    public static function getUriToView( $uri )
+    public static function getUriToView(& $uri )
     {
 		//	Handle Files and Documents differently, as per type of file
 		$uri = trim( $uri );
@@ -1220,7 +1247,8 @@ class Ayoola_Application
             }
 
             //	Check if this is a module url that carries $_GET parameters e.g. /article/category/business/
-            $a = explode( '/', $uri );
+            $ab = $a = explode( '/', $uri );
+
             $nameForModule = array_shift( $a );
             $module = '/' . $nameForModule;
 
@@ -1295,14 +1323,29 @@ class Ayoola_Application
 
             }
 
-            if( $post = Application_Article_Table::getInstance()->selectOne( null, array( 'post_slug' => $nameForModule ) ) )
+
+            $postCriteria = array(); 
+
+            if( count( $ab ) === 2 )
             {
+                $postCriteria = array( 'post_slug' => $ab[1] );
+            }
+
+            if( count( $ab ) === 3 )
+            {
+                $postCriteria = array( 'article_type' => $ab[1], 'post_slug' => $ab[2] );
+            }
+
+            if( $post = Application_Article_Table::getInstance()->selectOne( null, $postCriteria ) )
+            {
+                $uri = $post['article_url'];
                 if( $articleUrl = self::getArticleViewUrl( $post['article_url'] ) )
                 {
                     return $articleUrl;
                 }
 
             }
+
 
         }
         while( false );
@@ -1328,7 +1371,7 @@ class Ayoola_Application
         {
             case 'document':
 
-            //	Enable Cache for Documents
+                //	Enable Cache for Documents
                 // seconds, minutes, hours, days
                 $expires = 60 * 60 * 24 * 14; // 14 days
                 require_once 'Ayoola/Doc.php';
@@ -1429,6 +1472,7 @@ class Ayoola_Application
             break;
             case 'article':
             case 'post':
+                //var_export(  $uri );
                 $articleInfo = Application_Article_Abstract::loadPostData( $uri );
                 if( $articleInfo['username'] )
                 {
@@ -1445,6 +1489,7 @@ class Ayoola_Application
                     }
                 }
                 self::$GLOBAL['post'] = is_array( $articleInfo ) ? $articleInfo : array(); // store this in the global var
+               // var_export(  self::$GLOBAL['post'] );
 
             break;
         }
