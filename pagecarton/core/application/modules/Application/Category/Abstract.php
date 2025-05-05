@@ -69,6 +69,10 @@ abstract class Application_Category_Abstract extends Ayoola_Abstract_Table
      */
 	public static function filterCategoryName( $name )
     {
+		if( ! is_string( $name ) )
+		{
+			return $name;
+		}
 		$filter = new Ayoola_Filter_Name();
 		$filter->replace = '-';
 		return trim( $filter->filter( strtolower( $name ) ) , '-' );
