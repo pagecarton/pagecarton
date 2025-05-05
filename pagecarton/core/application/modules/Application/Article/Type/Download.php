@@ -57,7 +57,7 @@ class Application_Article_Type_Download extends Application_Article_Type_Abstrac
 			}
 			
 			//	check if we must be logged inn
-			if( @in_array( 'require_user_info', $data['download_options'] ) || intval( @$data['item_price'] ) )
+			if( ! empty( $data['download_options'] ) && is_array( $data['download_options'] ) && @in_array( 'require_user_info', $data['download_options'] ) || intval( @$data['item_price'] ) )
 			{
 			//	var_export( @$data['download_options'] );
 				if( ! Ayoola_Application::getUserInfo() ) 
