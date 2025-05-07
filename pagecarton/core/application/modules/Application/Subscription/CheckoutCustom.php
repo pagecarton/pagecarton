@@ -82,7 +82,7 @@ class Application_Subscription_CheckoutCustom extends Application_Subscription_C
             {
                 $nextUrl = Ayoola_Page::getHomePageUrl() . '/widgets/' . __CLASS__ . 'Payment';
             }
-            header( $nextUrl );
+            header( 'Location: ' . $nextUrl );
 
 
         }
