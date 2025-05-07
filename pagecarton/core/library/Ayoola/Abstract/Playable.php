@@ -300,7 +300,8 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 
                 var_export( $key );
                 var_export( $value );
-                var_export( $postThemeInfo['start'] );
+                var_export( $postThemeInfo );
+                var_export( $template );
 
 
                 if( stripos( $template, $postThemeInfo['start'] ) !== false )
