@@ -43,6 +43,8 @@ class Application_Subscription_CheckoutCustomPayment extends Application_Subscri
             }
 
             $api = $cart['checkout_info']['checkoutoption_name'];
+
+            $this->_objectTemplateValues = array_merge( $cart['checkout_info'], $this->_objectTemplateValues );
             
             $api = self::filterApi( $api );
         
