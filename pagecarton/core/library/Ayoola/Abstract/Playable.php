@@ -345,6 +345,8 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 					@$values['pc_no_data_filter'] ? : self::filterReplacement( $eachValue, $eachKey, $values['markup_template_data_filters'] );
 					if( is_array( $eachValue ) )
 					{
+                        var_export( $eachValue );
+                        
                         $postThemeInfo = self::getPostTheme( $template, $eachKey, $values['pc_replace_namespace'] );
                         $templateToUse = $template;
                         if( stripos( $template, $postThemeInfo['start'] ) === false  )

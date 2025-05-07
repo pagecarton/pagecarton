@@ -69,9 +69,14 @@ class Application_Subscription_CheckoutCustom extends Application_Subscription_C
             }
             $this->_objectTemplateValues = array_merge( $values, $this->_objectTemplateValues );
 
-            $this->_objectTemplateValues['payment_methods'] = Application_Subscription_Checkout_CheckoutOption::getInstance()->select();
+            $methods = array();
+            foreach( Application_Subscription_Checkout_CheckoutOption::getInstance()->select() as $each )
+            {
+                $methods[] = $each;
+            }
+            $this->_objectTemplateValues['payment_methods'] = $methods;
 
-            var_export( $this->_objectTemplateValues );
+            self::v( $this->_objectTemplateValues );
 
             if( ! $nextUrl = $this->getParameter( 'next_url' ) )
             {
