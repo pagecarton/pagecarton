@@ -298,10 +298,6 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                 $postThemeInfo = self::getPostTheme( $template, $key, $values['pc_replace_namespace'] );
                 $func = __METHOD__;
 
-                var_export( $key );
-                var_export( $value );
-                var_export( $postThemeInfo );
-                var_export( $template );
 
 
                 if( stripos( $template, $postThemeInfo['start'] ) !== false )
@@ -309,6 +305,12 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                     $taggedPostThemeXxx = $postThemeInfo['start'] . $postThemeInfo['theme'] . $postThemeInfo['end'];
                     if( ! is_numeric( $key ) && ! count(array_filter(array_keys($value), 'is_string')) > 0 && ! count(array_filter(array_values($value), 'is_array')) > 0 )
                     {
+                        var_export( __LINE__ );
+                        var_export( $key );
+                        var_export( $value );
+                        var_export( $postThemeInfo );
+                        var_export( $template );
+
                         foreach( $value as $eKey => $eValue )
                         {
                             $value[$eKey] = array( $key => $eValue );
@@ -321,6 +323,12 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                     }
                     elseif( ! is_numeric( $key ) )
                     {
+                        var_export( __LINE__ );
+                        var_export( $key );
+                        var_export( $value );
+                        var_export( $postThemeInfo );
+                        var_export( $template );
+        
                         $value['pc_replace_namespace'] = $key;
                     }
                     $taggedPostThemeYyy = $func( $postThemeInfo['theme'], $value + $defaultSearch );   
