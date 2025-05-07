@@ -148,6 +148,39 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 		}
     } 
 
+    
+    /**
+     * Filter API
+     * 
+     */
+	public static function filterApi( & $apiX )
+    {
+        //	Refresh order number on every attempt to checkout
+        $checkoutInfo = array();
+        if( ! $api = self::getApi( $apiX ) )
+        {
+            $table = Application_Subscription_Checkout_CheckoutOption::getInstance();
+            $checkoutInfo = $table->selectOne( null, array( 'checkoutoption_name' => $apiX ) );
+            
+        
+            switch( $checkoutInfo['checkout_type'] )
+            {
+                case 'http_post':
+                    $api = 'Application_Subscription_Checkout_HttpPost';  
+                break;
+                default:
+                    $api = $checkoutInfo['object_name'];  
+                break;
+            }
+        }
+        if( empty( $apiX ) )
+        {
+            $api = 'Application_Subscription_Checkout_Default';
+        }
+        return $api;
+    } 
+
+
     /**
      * Plays the API that is selected
      * 
