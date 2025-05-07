@@ -155,9 +155,14 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
      */
 	public static function filterApi( & $apiX )
     {
+
         //	Refresh order number on every attempt to checkout
         $checkoutInfo = array();
-        if( ! $api = self::getApi( $apiX ) )
+        if( empty( $apiX ) )
+        {
+            $api = 'Application_Subscription_Checkout_Default';
+        }
+        elseif( ! $api = self::getApi( $apiX ) )
         {
             $table = Application_Subscription_Checkout_CheckoutOption::getInstance();
             $checkoutInfo = $table->selectOne( null, array( 'checkoutoption_name' => $apiX ) );
@@ -173,11 +178,13 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
                 break;
             }
         }
-        if( empty( $apiX ) )
+
+        if( ! empty( $api ) && Ayoola_Loader::loadClass( $api ) )
         {
-            $api = 'Application_Subscription_Checkout_Default';
+            return $api;
         }
-        return $api;
+
+        return false;
     } 
 
 
@@ -286,15 +293,28 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
      */
 	public static function getApi( $checkoutOptionName = null )
     {
+        
+        if( ! empty( $checkoutOptionName ) && Ayoola_Loader::loadClass( $checkoutOptionName ) )
+        {
+            return $checkoutOptionName;
+        }
+
+
 		$table = Application_Subscription_Checkout_CheckoutOption::getInstance();
 		$data = $table->selectOne( null, array( 'checkoutoption_name' => $checkoutOptionName ) );
+
+        if( ! empty( $data['object_name'] ) && Ayoola_Loader::loadClass( $data['object_name'] ) )
+        {
+            return $data['object_name'];
+        }
+
 		$className = __CLASS__ . '_' . $data['checkoutoption_name'];
 		require_once 'Ayoola/Loader.php';
 		if( ! Ayoola_Loader::loadClass( $className ) )
 		{ 
-			return false;
+			return $className;
 		}
-		return $className;
+		return false;
     } 
 		
     /**

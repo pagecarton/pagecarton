@@ -63,7 +63,7 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
      */
 	protected function init()
     {		
-	//	var_export( $this->getParameter() );
+
 		
 		self::$_apiName = $this->getParameter( 'checkoutoption_name' ) ? : array_pop( explode( '_', get_class( $this ) ) );
 		if( ! $values = self::getStorage()->retrieve() ){ return; }
@@ -73,7 +73,7 @@ abstract class Application_Subscription_Checkout_Abstract_HtmlForm extends Appli
 		// 	$this->setViewContent( "<p class= '' . self::__( 'badnews' ) . ''>Please select other payment methods.</p>"  ); 
 		// 	return;  
 		// }
-	//	$this->setViewContent( self::__( '<p></p><h4></h4>' ) );
+
 		$this->setViewContent( $this->getForm()->view() );
     } 
 	
