@@ -1326,25 +1326,32 @@ class Ayoola_Application
 
             $postCriteria = array(); 
 
-            if( count( $ab ) === 2 )
+            switch( count( $ab ) )
             {
-                $postCriteria = array( 'post_slug' => $ab[1] );
+                case 2:
+                    $postCriteria = array( 'post_slug' => $ab[1] );
+                break;
+                case 3:
+                    $postCriteria = array( 'article_type' => $ab[1], 'post_slug' => $ab[2] );
+                break;
             }
 
-            if( count( $ab ) === 3 )
+            if( $postCriteria )
             {
-                $postCriteria = array( 'article_type' => $ab[1], 'post_slug' => $ab[2] );
-            }
-
-            if( $post = Application_Article_Table::getInstance()->selectOne( null, $postCriteria ) )
-            {
-                $uri = $post['article_url'];
-                if( $articleUrl = self::getArticleViewUrl( $post['article_url'] ) )
+                if( $post = Application_Article_Table::getInstance()->selectOne( null, $postCriteria ) )
                 {
-                    return $articleUrl;
+                    var_export( $post );
+    
+                    $uri = $post['article_url'];
+                    if( $articleUrl = self::getArticleViewUrl( $post['article_url'] ) )
+                    {
+                        return $articleUrl;
+                    }
+    
                 }
-
+    
             }
+
 
 
         }

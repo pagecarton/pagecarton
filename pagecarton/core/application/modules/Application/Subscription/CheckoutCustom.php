@@ -27,6 +27,14 @@ require_once 'Application/Subscription/Abstract.php';
 
 class Application_Subscription_CheckoutCustom extends Application_Subscription_Checkout
 {
+     	
+    /**
+     * 
+     * 
+     * @var string 
+     */
+	protected static $_objectTitle = 'Checkout';       
+
 
     /**
      * The method does the whole Class Process
