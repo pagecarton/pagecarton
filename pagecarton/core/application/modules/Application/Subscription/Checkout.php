@@ -304,7 +304,7 @@ class Application_Subscription_Checkout extends Application_Subscription_Abstrac
 
         if( ! empty( $checkoutOptionName ) && Ayoola_Loader::loadClass( $checkoutOptionName ) )
         {
-            return $checkoutOptionName;
+            return $checkoutOptionName; 
         }
 
 		$className = __CLASS__ . '_' . $data['checkoutoption_name'];
