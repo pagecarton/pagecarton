@@ -371,6 +371,9 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                         {
                             foreach( $eachValue as $vKey => $eachValueV )
                             {
+                                var_export( $eachKey );
+                                var_export( $eachValue );
+                                var_export( $vKey );
                                 var_export( $eachValueV );
 
                                 if( ! is_scalar( $eachValueV ) )
