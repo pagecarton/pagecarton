@@ -45,7 +45,6 @@ class Application_Subscription_CheckoutCustom extends Application_Subscription_C
             $values = array();
             if( ! empty( $_POST ) && ! empty( $_POST['checkoutoption_name'] ) )
             {
-                var_export( $_POST );
                 $values = $_POST;
                 foreach( $values as $key => $each )
                 {
@@ -53,6 +52,12 @@ class Application_Subscription_CheckoutCustom extends Application_Subscription_C
                 }
                 $cart['checkout_info'] = $values;
                 self::getStorage()->store( $cart );  
+
+                if( ! $nextUrl = $this->getParameter( 'next_url' ) )
+                {
+                    $nextUrl = Ayoola_Page::getHomePageUrl() . '/widgets/' . __CLASS__ . 'Payment';
+                }
+                $nextUrl ? header( 'Location: ' . $nextUrl ) : null;
             }
 
             $this->_objectTemplateValues = array_merge( $this->_objectTemplateValues, $this->_objectTemplateValues );
@@ -76,13 +81,7 @@ class Application_Subscription_CheckoutCustom extends Application_Subscription_C
             }
             $this->_objectTemplateValues['payment_methods'] = $methods;
 
-            var_export( $this->_objectTemplateValues );
 
-            if( ! $nextUrl = $this->getParameter( 'next_url' ) )
-            {
-                $nextUrl = Ayoola_Page::getHomePageUrl() . '/widgets/' . __CLASS__ . 'Payment';
-            }
-            header( 'Location: ' . $nextUrl );
 
 
         }
