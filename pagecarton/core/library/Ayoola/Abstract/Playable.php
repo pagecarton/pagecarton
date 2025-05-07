@@ -346,6 +346,10 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 					if( is_array( $eachValue ) )
 					{
                         
+                        var_export( $key );
+                        var_export( $eachKey );
+                        var_export( $eachValue );
+
                         $postThemeInfo = self::getPostTheme( $template, $eachKey, $values['pc_replace_namespace'] );
                         $templateToUse = $template;
                         if( stripos( $template, $postThemeInfo['start'] ) === false  )
@@ -402,14 +406,11 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
                         }    
                         elseif( stripos( $numberedPostTheme, $values['placeholder_prefix'] . $eachKey ) !== false )
                         {
-                            var_export( $key );
-                            var_export( $eachKey );
-                            var_export( $eachValue );
 
                             foreach( $eachValue as $vKey => $eachValueV )
                             {
-                                var_export( $vKey );
-                                var_export( $eachValueV );
+                                // var_export( $vKey );
+                                // var_export( $eachValueV );
 
                                 if( ! is_scalar( $eachValueV ) )
                                 {
