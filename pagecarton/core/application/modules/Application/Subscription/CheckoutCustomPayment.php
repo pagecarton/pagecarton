@@ -45,7 +45,7 @@ class Application_Subscription_CheckoutCustomPayment extends Application_Subscri
             $api = $cart['checkout_info']['checkoutoption_name'];
             
             var_export( $api );
-            self::filterApi( $api );
+            $api = self::filterApi( $api );
             var_export( $api );
 
         
