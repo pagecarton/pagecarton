@@ -51,6 +51,9 @@ class Application_Subscription_CheckoutCustomPayment extends Application_Subscri
 
             $api = $cart['checkout_info']['checkoutoption_name'];
 
+            $table = Application_Subscription_Checkout_CheckoutOption::getInstance();
+            $checkoutInfo = $table->selectOne( null, array( 'checkoutoption_name' => $api ) );
+
             $this->_objectTemplateValues = array_merge( $cart['checkout_info'], $this->_objectTemplateValues );
             
             $api = self::filterApi( $api );
@@ -61,7 +64,7 @@ class Application_Subscription_CheckoutCustomPayment extends Application_Subscri
                 return false;
             }
         
-            $this->setViewContent( $api::viewInLine(), true );
+            $this->setViewContent( $api::viewInLine( $checkoutInfo ), true );
             
         }
 		catch( Exception $e )
