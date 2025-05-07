@@ -46,6 +46,12 @@ class Application_Subscription_CheckoutCustomPayment extends Application_Subscri
 
             self::filterApi( $api );
 
+            if( empty( $api ) || ! class_exists( $api ) )
+            {
+                $this->setViewContent( 'Invalid payment information', true );
+                return false;
+            }
+        
             $this->setViewContent( $api::viewInLine(), true );
             
         }

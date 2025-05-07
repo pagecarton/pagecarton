@@ -68,6 +68,8 @@ class Application_Subscription_CheckoutCustom extends Application_Subscription_C
             }
             $this->_objectTemplateValues = array_merge( $values, $this->_objectTemplateValues );
 
+            $this->_objectTemplateValues['payment_methods'] = Application_Subscription_Checkout_CheckoutOption::getInstance()->select();
+
             if( ! $nextUrl = $this->getParameter( 'next_url' ) )
             {
                 $nextUrl = Ayoola_Page::getHomePageUrl() . '/widgets/' . __CLASS__ . 'Payment';
