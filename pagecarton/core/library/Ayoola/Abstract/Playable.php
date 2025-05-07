@@ -243,8 +243,6 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
         $postTheme = null;
 		foreach( $values as $key => $value )
 		{
-            var_export( $key );
-            var_export( $value );
 
 			if( ! is_array( $value ) && stripos( $template, $values['placeholder_prefix'] . $key . $values['placeholder_suffix'] ) )
 			{
@@ -255,6 +253,7 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 			}
 			elseif( is_array( $value ) )
 			{
+    
 				if( empty( $postTheme ) && is_numeric( $key ) )
 				{
                     $postKey = null;
@@ -298,6 +297,11 @@ abstract class Ayoola_Abstract_Playable extends Ayoola_Abstract_Viewable impleme
 
                 $postThemeInfo = self::getPostTheme( $template, $key, $values['pc_replace_namespace'] );
                 $func = __METHOD__;
+
+                var_export( $key );
+                var_export( $value );
+                var_export( $postThemeInfo['start'] );
+
 
                 if( stripos( $template, $postThemeInfo['start'] ) !== false )
                 {
