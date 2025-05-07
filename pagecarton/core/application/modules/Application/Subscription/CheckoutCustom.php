@@ -45,7 +45,7 @@ class Application_Subscription_CheckoutCustom extends Application_Subscription_C
             $values = array();
             if( ! empty( $_POST ) && ! empty( $_POST['checkoutoption_name'] ) )
             {
-                var_export( $_POST );
+                //var_export( $_POST );
                 $values = $_POST;
                 foreach( $values as $key => $each )
                 {
@@ -76,7 +76,7 @@ class Application_Subscription_CheckoutCustom extends Application_Subscription_C
             }
             $this->_objectTemplateValues['payment_methods'] = $methods;
 
-            self::v( $this->_objectTemplateValues );
+            //self::v( $this->_objectTemplateValues );
 
             if( ! $nextUrl = $this->getParameter( 'next_url' ) )
             {
