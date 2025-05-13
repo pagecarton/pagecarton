@@ -268,7 +268,7 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	<li><a class="pc-btn" href="/pc-admin/Ayoola_Form_List" target="_blank">Custom Forms Data</a></li>
 	<li><a class="pc-btn" href="/pc-admin/Application_ContactUs_List" target="_blank">Contact Us Form Data</a></li>
 	<li><a class="pc-btn" href="/pc-admin/Application_Subscription_Checkout_Order_List" target="_blank">Product &amp; Service Orders</a></li>
-	<li><a class="pc-btn" href="/pc-admin/Application_User_UserEmail_Table" target="_blank">Email Opt-In</a></li>
+	<li><a class="pc-btn" href="/pc-admin/Application_User_UserEmail_MailingList" target="_blank">Email Opt-In</a></li>
 </ul>
 
 <p>&nbsp;</p>
@@ -521,7 +521,7 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	<li><a class="pc-btn" href="/pc-admin/Ayoola_Form_List" target="_blank">Custom Forms Data</a></li>
 	<li><a class="pc-btn" href="/pc-admin/Application_ContactUs_List" target="_blank">Contact Us Form Data</a></li>
 	<li><a class="pc-btn" href="/pc-admin/Application_Subscription_Checkout_Order_List" target="_blank">Product &amp; Service Orders</a></li>
-	<li><a class="pc-btn" href="/pc-admin/Application_User_UserEmail_Table" target="_blank">Email Opt-In</a></li>
+	<li><a class="pc-btn" href="/pc-admin/Application_User_UserEmail_MailingList" target="_blank">Email Opt-In</a></li>
 </ul>
 
 <p>&nbsp;</p>
@@ -789,7 +789,7 @@ $_62811ae5aaaa125443b3142baae4a203 = new Ayoola_Page_Editor_Text( array (
 	<li><a class="pc-btn" href="/pc-admin/Ayoola_Form_List" target="_blank">Custom Forms Data</a></li>
 	<li><a class="pc-btn" href="/pc-admin/Application_ContactUs_List" target="_blank">Contact Us Form Data</a></li>
 	<li><a class="pc-btn" href="/pc-admin/Application_Subscription_Checkout_Order_List" target="_blank">Product &amp; Service Orders</a></li>
-	<li><a class="pc-btn" href="/pc-admin/Application_User_UserEmail_Table" target="_blank">Email Opt-In</a></li>
+	<li><a class="pc-btn" href="/pc-admin/Application_User_UserEmail_MailingList" target="_blank">Email Opt-In</a></li>
 </ul>
 
 <p>&nbsp;</p>

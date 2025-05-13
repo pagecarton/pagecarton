@@ -88,7 +88,7 @@ $_acd6c67e7aeba849612416a4d14168e1 = new Ayoola_Page_Editor_Text( array (
             </li>
             <li>
                 <a
-                    href="?name=Application_User_UserEmail_MailingList">Mailing
+                    href="?name=Application_User_UserEmail_MailingList&show_class_data=Application_User_UserEmail_MailingList&noPerPage=300">Mailing
                     List</a>
             </li>
             <li>
