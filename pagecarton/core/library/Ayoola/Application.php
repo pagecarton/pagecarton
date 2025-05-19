@@ -1340,7 +1340,6 @@ class Ayoola_Application
             {
                 if( $post = Application_Article_Table::getInstance()->selectOne( null, $postCriteria ) )
                 {
-                    var_export( $post );
     
                     $uri = $post['article_url'];
                     if( $articleUrl = self::getArticleViewUrl( $post['article_url'] ) )
