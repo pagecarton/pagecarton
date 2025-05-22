@@ -220,7 +220,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				
 				break;
 				default:
-					if( ! empty( $values['surcharges'] ) )
+					if( ! empty( $value['surcharges'] ) )
 					{
 						continue;
 					}
@@ -231,7 +231,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			{
 				case true:
 				case 1:
-					if( empty( $values['surcharges'] ) )
+					if( empty( $value['surcharges'] ) )
 					{
 						continue;
 					}
