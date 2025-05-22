@@ -370,6 +370,9 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 
 		$table->appendChild( $row );
 
+		var_export( $noOfItems );
+		var_export( $noOfSurchargeItems );
+
 		$this->_xml->appendChild( $div );
 		$this->_objectTemplateValues['no_of_distinct_items'] = $this->_noOfDinstinctItems;
 		$this->_objectTemplateValues['no_of_items'] = $noOfItems;
