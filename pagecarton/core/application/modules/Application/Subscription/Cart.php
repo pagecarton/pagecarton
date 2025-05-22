@@ -213,6 +213,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
             $cartID = md5( serialize( $value ) );
             $divRow = '';
 
+			var_export( $value );
 			switch( $this->getParameter( 'include_surcharges' ) )
 			{
 				case true:
