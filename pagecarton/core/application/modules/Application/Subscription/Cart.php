@@ -206,6 +206,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$totalPrice = 0.00;
 		$totalSurcharge = 0.00;
 		$noOfItems = 0;
+		$noOfSurchargeItems = 0;
 
         $cartDiv = '';
         foreach( $values as $name => $value )
@@ -218,7 +219,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			{
 				case true:
 				case 1:
-				
+					$noOfSurchargeItems += $value['multiple'];
 				break;
 				default:
 					if( ! empty( $value['surcharge'] ) )
@@ -245,6 +246,8 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			//	Count the number of items
 			++$this->_noOfDinstinctItems; 
 			$noOfItems += $value['multiple'];
+
+
 			if( ! isset( $value['price'] ) )
 			{
 				$value = array_merge( self::getPriceInfo( $value['price_id'] ), $value );
@@ -370,6 +373,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		$this->_xml->appendChild( $div );
 		$this->_objectTemplateValues['no_of_distinct_items'] = $this->_noOfDinstinctItems;
 		$this->_objectTemplateValues['no_of_items'] = $noOfItems;
+		$this->_objectTemplateValues['no_of_real_items'] = $noOfItems - $noOfSurchargeItems;
 		$this->_objectTemplateValues['total_surcharge'] = $totalSurcharge;
 		$this->_objectTemplateValues['total_price'] = $totalPrice;
 		$this->_objectTemplateValues['grand_total_price'] = $grandTotalPrice;
