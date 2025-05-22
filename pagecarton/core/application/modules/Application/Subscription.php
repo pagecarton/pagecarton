@@ -358,7 +358,11 @@ class Application_Subscription extends Application_Subscription_Abstract
 		$settings['article_url'] = array_unique( $settings['article_url'] );
 
         $wholeCart = array( 'cart' => $newCart, 'settings' => $settings );
-
+		if( ! empty( $previousData['checkout_info'] ) )
+		{
+			//	preserve checkout info
+			$wholeCart['checkout_info'] = $previousData['checkout_info'];
+		}
         self::setHook( static::getInstance(), __FUNCTION__, $wholeCart );
 
 
