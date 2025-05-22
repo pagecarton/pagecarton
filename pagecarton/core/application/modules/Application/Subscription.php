@@ -345,6 +345,7 @@ class Application_Subscription extends Application_Subscription_Abstract
                     @$surchargeValue['price'] = $surchargePrice;	//	
                     @$surchargeValue['readonly'] = $surchargePrice;	//	
                     @$surchargeValue['exclusive'] = true;	//	
+                    @$surchargeValue['surcharge'] = true;	//	
                     $surchargeValue['subscription_name'] = $surchargeText;
                     $surchargeValue['subscription_label'] = $surchargeText;
                     //$settings['total'] += $surchargePrice;

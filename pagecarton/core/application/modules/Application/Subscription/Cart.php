@@ -204,6 +204,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		
 		//	Calculate culmulative price
 		$totalPrice = 0.00;
+		$totalSurcharge = 0.00;
 		$noOfItems = 0;
 
         $cartDiv = '';
@@ -211,6 +212,34 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 		{
             $cartID = md5( serialize( $value ) );
             $divRow = '';
+
+			switch( $this->getParameter( 'include_surcharges' ) )
+			{
+				case true:
+				case 1:
+				
+				break;
+				default:
+					if( ! empty( $values['surcharges'] ) )
+					{
+						continue;
+					}
+				break;
+			}
+
+			switch( $this->getParameter( 'show_surcharges_only' ) )
+			{
+				case true:
+				case 1:
+					if( empty( $values['surcharges'] ) )
+					{
+						continue;
+					}
+				break;
+				default:
+				break;
+			}
+
             
 			//	Count the number of items
 			++$this->_noOfDinstinctItems; 
@@ -220,7 +249,15 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				$value = array_merge( self::getPriceInfo( $value['price_id'] ), $value );
 			}
 			$value['total'] = (float) floatval( $value['price'] ) * floatval( $value['multiple'] );
-			$totalPrice = (float) $value['total'] + $totalPrice;
+
+			if( empty( $value['surcharges'] ) )
+			{
+				$totalPrice = (float) $value['total'] + $totalPrice;
+			}
+			else
+			{
+				$totalSurcharge = (float) $value['total'] + $totalSurcharge;
+			}
 			$row = $this->_xml->createElement( 'tr' );
 
 			$columnNode = $this->_xml->createElement( 'td' );
