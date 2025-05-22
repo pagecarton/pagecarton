@@ -228,7 +228,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				break;
 			}
 
-			switch( $this->getParameter( 'show_surcharges_only' ) )
+			switch( $this->getParameter( 'surcharges_only' ) )
 			{
 				case true:
 				case 1:
