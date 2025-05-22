@@ -219,7 +219,10 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			{
 				case true:
 				case 1:
-					$noOfSurchargeItems += $value['multiple'];
+					if( ! empty( $value['surcharge'] ) )
+					{
+						$noOfSurchargeItems += $value['multiple'];
+					}
 				break;
 				default:
 					if( ! empty( $value['surcharge'] ) )
