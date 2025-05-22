@@ -221,7 +221,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 				
 				break;
 				default:
-					if( ! empty( $value['surcharges'] ) )
+					if( ! empty( $value['surcharge'] ) )
 					{
 						continue;
 					}
@@ -232,7 +232,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			{
 				case true:
 				case 1:
-					if( empty( $value['surcharges'] ) )
+					if( empty( $value['surcharge'] ) )
 					{
 						continue;
 					}
@@ -251,7 +251,7 @@ class Application_Subscription_Cart extends Application_Subscription_Abstract
 			}
 			$value['total'] = (float) floatval( $value['price'] ) * floatval( $value['multiple'] );
 
-			if( empty( $value['surcharges'] ) )
+			if( empty( $value['surcharge'] ) )
 			{
 				$totalPrice = (float) $value['total'] + $totalPrice;
 			}
