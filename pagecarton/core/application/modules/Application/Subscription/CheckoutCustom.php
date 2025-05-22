@@ -80,6 +80,10 @@ class Application_Subscription_CheckoutCustom extends Application_Subscription_C
                     }
                 }
             }
+            if( empty( $values ) && ! empty( $cart['checkout_info'] ) )
+            {
+                $values = $cart['checkout_info'];
+            }
             $this->_objectTemplateValues = array_merge( $values, $this->_objectTemplateValues );
 
             $methods = array();
