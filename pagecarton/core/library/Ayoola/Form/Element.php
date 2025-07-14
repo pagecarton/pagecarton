@@ -122,8 +122,6 @@ class Ayoola_Form_Element extends Ayoola_Form
 			$element = _Array( $element );
 		}
        
-    //    var_export( $values );
-    //    var_export( $element['value'] );
 
 		//	Set Element ID and Label to default if undeclared			
 		$element['real_name'] = $element['name'];
@@ -1098,11 +1096,7 @@ class Ayoola_Form_Element extends Ayoola_Form
 			}
 			elseif( isset( $element["value"] ) && is_scalar( $element["value"] ) && !( strcmp( $value, $element["value"] ) ) )
 				$html.= ' selected="selected" '; 
-/* 			if( is_array( $element["value"] ) ) 
-			{
-
-			}
- */			$html.= "> \n";
+			$html.= "> \n";
 			$html.= $title;
 			$html.= "</option> \n";
 

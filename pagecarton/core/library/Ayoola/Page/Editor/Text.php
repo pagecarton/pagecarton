@@ -322,37 +322,45 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
 				$parameters += $baseParameters;
                 self::unsetParametersThatMayBeDuplicated( $parameters );
 
-                $class = new $className( $parameters );
-                $class->setParameter( $parameters );
-                $class->init();
-                $returnedContent = $class->view();
-                $classes[] = $class;
 
-                //  return inner widget
-                if( ! empty( $innerWidgetBefore[0] ) )
-                {
-                    preg_match_all( '|(<widget-inner[^>]*>)([\d]*)(</widget-inner[^>]*>)|isU', $returnedContent, $innerWidgetAfter );
-                    for( $j = 0; $j < count( $innerWidgetAfter[0] ); $j++ )
-                    {
-                        //  hide inner widget so it doesn't interfere
-                        $search = $innerWidgetAfter[0][$j];
-                        $replace = $innerWidgetAfter[1][$j] . $innerWidgetBefore[2][$innerWidgetAfter[2][$j]] . $innerWidgetAfter[3][$j];
+				//  if the widget is not viewable for the current user, then skip it
+				if( isset( $parameters['object_access_level'] ) && ! Ayoola_Page::hasPriviledge( $parameters['object_access_level'], array( 'strict' => true ) ) )
+				{
+					$returnedContent = false;
 
-                        $returnedContent = str_ireplace( $search, $replace, $returnedContent );
-                    } 
+				}
+				else
+				{
+					$class = new $className( $parameters );
+					$class->setParameter( $parameters );
 
-                    if( $className == 'Application_Global' )
-                    {
+					$class->init();
+					$returnedContent = $class->view();
+					$classes[] = $class;
 
-                    }
+					                //  return inner widget
+					if( ! empty( $innerWidgetBefore[0] ) )
+					{
+						preg_match_all( '|(<widget-inner[^>]*>)([\d]*)(</widget-inner[^>]*>)|isU', $returnedContent, $innerWidgetAfter );
+						for( $j = 0; $j < count( $innerWidgetAfter[0] ); $j++ )
+						{
+							//  hide inner widget so it doesn't interfere
+							$search = $innerWidgetAfter[0][$j];
+							$replace = $innerWidgetAfter[1][$j] . $innerWidgetBefore[2][$innerWidgetAfter[2][$j]] . $innerWidgetAfter[3][$j];
 
-                    $returnedContent = str_ireplace( array( '<widget-inner', '</widget-inner', ), array( '<widget', '</widget', ), $returnedContent );
-       
-                }
-                if( stripos( $className, 'Application_SearchReplace' ) !== false )
-                {
+							$returnedContent = str_ireplace( $search, $replace, $returnedContent );
+						} 
 
-                }
+						if( $className == 'Application_Global' )
+						{
+
+						}
+
+						$returnedContent = str_ireplace( array( '<widget-inner', '</widget-inner', ), array( '<widget', '</widget', ), $returnedContent );
+			
+					}
+							
+				}
 
                 //  final replacement
                 $content = str_ireplace( $widgets[0][$i], $returnedContent, $content );

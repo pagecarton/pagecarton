@@ -127,15 +127,10 @@ class Application_Article_PostList extends Application_Article_ShowAll
 	}
 
     /**
-     * creates the form for creating and editing page
      * 
-     * param string The Value of the Submit Button
-     * param string Value of the Legend
-     * param array Default Values
      */
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )  
     {
-		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
 		$form->submitValue =  'Save List';
 
