@@ -2047,21 +2047,21 @@ class Ayoola_Application
 			case 0:
 				//	By default, don't display error'
 				{
-					error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
+					error_reporting( E_ALL & ~E_NOTICE & ~E_USER_NOTICE );
 					ini_set( 'display_errors', "0" );
 				}
 
 				//	If the mode is selected, we don't want to see errors.
 				if( $userInfo['access_level'] > 98 || '127.0.0.1' == $_SERVER['REMOTE_ADDR'] )
 				{
-					error_reporting( E_ALL & ~E_STRICT );
+					error_reporting( E_ALL );
 
 				}
 
 				//	We explicitly asked for it. So let's have it.'
 				if( ! empty( $_REQUEST['pc_show_error'] ) )
 				{
-					error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
+					error_reporting( E_ALL & ~E_NOTICE & ~E_USER_NOTICE );
 					ini_set( 'display_errors', "1" );
 				}
 			break;

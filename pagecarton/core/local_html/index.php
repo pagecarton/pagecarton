@@ -1,7 +1,7 @@
 <?php
 
 		//	Report all PHP errors
-		error_reporting( E_ALL & ~E_STRICT & ~E_NOTICE & ~E_USER_NOTICE );
+		error_reporting( E_ALL & ~E_NOTICE & ~E_USER_NOTICE );
 		ini_set( 'display_errors', "0" );
 		ini_set( "memory_limit","512M" );
 		defined( 'DS' ) || define( 'DS', DIRECTORY_SEPARATOR);

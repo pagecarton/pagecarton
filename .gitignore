@@ -71,3 +71,4 @@ html
 /vendor/
 public/
 php.ini
+examples/
