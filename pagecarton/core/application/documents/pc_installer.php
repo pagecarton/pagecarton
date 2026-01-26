@@ -54,8 +54,8 @@ $oldAppPath  = null;
 $filename    = 'pc_installer.php.tar.gz';
 $content     = null;
 $badnews     = null;
-$remoteSite  = 'http://updates.pagecarton.org';
-$remoteSite2 = 'http://s1.updates.pagecarton.org';
+$remoteSite2 = 'http://updates.pagecarton.org';
+$remoteSite = 'http://s1.updates.pagecarton.org';
 $remoteSite3 = 'http://s2.updates.pagecarton.org';
 
 //    Create dir
@@ -173,9 +173,13 @@ foreach ($class_dependencies as $class_dependency) {
 
 
 //    Now use back-up server
-if (!$res = fetchLink($remoteSite . '/pc_check.txt')) {
+if ( ! $pc = fetchLink($remoteSite . '/pc_check.txt') ) {
+
+
     $remoteSite = $remoteSite2;
-    if (!fetchLink($remoteSite . '/pc_check.txt')) {
+    if ( 'pc' !== fetchLink($remoteSite . '/pc_check.txt')) {
+        var_export( $pc);
+
         $remoteSite = $remoteSite3;
     }
 }
