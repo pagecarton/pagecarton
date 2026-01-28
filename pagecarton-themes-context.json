@@ -1,0 +1,1426 @@
+{
+  "spec_metadata": {
+    "identity": "PageCarton_Theme_Compiler_And_AI_Training_Standard",
+    "base_version": "1.0",
+    "effective_version": "1.0.7",
+    "compiler_mode": "STRICT_HTML5",
+    "hi_fi_mode": true,
+    "framework_stack": [
+      {
+        "name": "Bootstrap",
+        "version": "5.3",
+        "category": "UI Framework",
+        "role": "Core responsive layout, grid system, and UI components",
+        "cdn_required": true,
+        "usage_policy": "Must be loaded via CDN in all projects. Local copies are forbidden.",
+        "dependencies": ["Popper"]
+      },
+      {
+        "name": "FontAwesome",
+        "version": "6",
+        "category": "Icons",
+        "role": "Iconography and UI symbols",
+        "cdn_required": true,
+        "usage_policy": "Icons must be served via CDN to ensure consistency and licensing compliance."
+      },
+      {
+        "name": "Bootstrap Icons",
+        "version": "1.x",
+        "category": "Icons",
+        "role": "Optional lightweight icon set aligned with Bootstrap UI",
+        "cdn_required": true,
+        "usage_policy": "When used, must be delivered via CDN."
+      },
+
+      {
+        "name": "jQuery",
+        "version": "3.x",
+        "category": "JavaScript Core",
+        "role": "DOM manipulation and dependency for legacy UI plugins",
+        "cdn_required": true,
+        "usage_policy": "Must be loaded via CDN and before dependent libraries."
+      },
+      {
+        "name": "Popper",
+        "version": "2.x",
+        "category": "JavaScript Utility",
+        "role": "Positioning engine for dropdowns, popovers, and tooltips",
+        "cdn_required": true,
+        "usage_policy": "Required when Bootstrap interactive components are enabled."
+      },
+
+      {
+        "name": "OwlCarousel",
+        "version": "2.x",
+        "category": "UI Component",
+        "role": "Carousel and slider engine for products and featured content",
+        "cdn_required": true,
+        "usage_policy": "Must be delivered via CDN when used in projects.",
+        "dependencies": ["jQuery"]
+      },
+      {
+        "name": "Animate.css",
+        "version": "4.x",
+        "category": "Animation",
+        "role": "CSS animation utility for UI motion effects",
+        "cdn_required": true,
+        "usage_policy": "Animations must be sourced from CDN to prevent version drift."
+      },
+
+      {
+        "name": "AOS",
+        "version": "2.x",
+        "category": "Animation",
+        "role": "Scroll-based animation triggers",
+        "cdn_required": true,
+        "usage_policy": "When used, must rely on CDN and avoid local bundling."
+      },
+
+      {
+        "name": "Swiper",
+        "version": "9.x",
+        "category": "UI Component",
+        "role": "Touch-optimized sliders and carousels",
+        "cdn_required": true,
+        "usage_policy": "Alternative to OwlCarousel. Must not be used concurrently unless explicitly required."
+      },
+
+      {
+        "name": "Isotope",
+        "version": "3.x",
+        "category": "Layout Utility",
+        "role": "Dynamic filtering and masonry layouts",
+        "cdn_required": true,
+        "usage_policy": "Must be loaded via CDN when grid filtering is required."
+      },
+
+      {
+        "name": "GLightbox",
+        "version": "3.x",
+        "category": "Media Viewer",
+        "role": "Lightbox for images and videos",
+        "cdn_required": true,
+        "usage_policy": "Must be consumed via CDN."
+      },
+
+      {
+        "name": "Chart.js",
+        "version": "4.x",
+        "category": "Data Visualization",
+        "role": "Lightweight charts for dashboards and reports",
+        "cdn_required": true,
+        "usage_policy": "Charts must use CDN delivery in project environments."
+      },
+
+      {
+        "name": "SweetAlert",
+        "version": "2.x",
+        "category": "UI Feedback",
+        "role": "Enhanced alert and confirmation dialogs",
+        "cdn_required": true,
+        "usage_policy": "Modal alerts must be sourced from CDN."
+      },
+
+      {
+        "name": "Moment.js",
+        "version": "2.x",
+        "category": "Date Utility",
+        "role": "Date parsing and formatting",
+        "cdn_required": true,
+        "usage_policy": "Use only when required. Must be CDN-based."
+      }
+    ],
+    "ai_assumption": "ZERO_PAGECARTON_KNOWLEDGE",
+    "training_goal": "Teach AI how to exploit PageCarton widgets, logic blocks, placeholders, and preview rules",
+    "output_target": "STATIC_THEME_HTML",
+    "knowledge_status": "FULLY_DECLARED"
+  },
+
+  "core_governance": {
+    "zero_knowledge_override": true,
+    "logic_restriction": "Strict HTML5 only. No server-side scripting. All dynamic behavior must be PageCarton widgets.",
+    "invented_assets": "FORBIDDEN",
+    "invented_widgets": "FORBIDDEN",
+    "invented_parameters": "FORBIDDEN",
+    "mandatory_preview_integrity": {
+      "rule": "ALL collection widgets MUST include add_a_new_post which will have integer value equal to the minimum number of placeholder datasets needed for preview.",
+      "reason": "Ensure themes render correctly on fresh installations"
+    }
+  },
+
+  "ui_ux_atomic_rules": {
+    "replaceable_text": {
+      "syntax": "{TEXT_CONTENT}",
+      "rule": "100% of non-dynamic text must be replaceable. Use standard replaceable texts wherever possible. Invented static text must use {-TEXT-} syntax but is discouraged.",
+      "static_text_exception": "Invented static text must use {-TEXT-} syntax.",
+      "standard_texts_must_be_used_as_is": true
+    },
+    "variable_injection": {
+      "syntax": "{{{variable_name}}}",
+      "when_to_use": "Variables must be used wherever dynamic content is expected inside a widget tags only. Widget variables must be used as is without modification as they are populated by the system.Within the widget tags, no invented variables are allowed. Do not use variables outside widget tags.",
+      "forbidden": [
+        "dot.notation"
+      ],
+      "media_rules": {
+        "allowed_source": "{{{document_url_uri}}}",
+        "auto_crop_allowed": true,
+        "auto_crop_example": "{{{document_url_uri}}}?width=1029&height=600",
+        "object_fit_rule": "Images in grids MUST use object-fit: cover with fixed height or aspect-ratio"
+      }
+    }
+  },
+
+  "standard_replaceable_texts": {
+    "organization_information": {
+      "organization_name": "{Organization Name}",
+      "short_description": "{Short About Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius repellat, dicta at laboriosam, nemo exercitationem itaque eveniet architecto cumque, deleniti commodi molestias repellendus quos sequi hic fugiat asperiores illum. Atque, in, fuga excepturi corrupti error corporis aliquam unde nostrum quas.}",
+      "more_about": "{More About Accusantium dolor ratione maiores est deleniti nihil? Dignissimos est, sunt nulla illum autem in, quibusdam cumque recusandae, laudantium minima repellendus.}",
+      "background_history": "{Background History Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt labore et magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea consequat.}"
+    },
+
+    "contact_information": {
+      "street_address": "{Street Address}",
+      "city": "{City}",
+      "state": "{State}",
+      "country": "{Country}",
+      "phone_number_1": "{+234 800 000 0000}",
+      "phone_number_2": "{2348054449535}",
+      "email": "{info@example.com}"
+    },
+
+    "social_media": {
+      "facebook": "{https://www.facebook.com/PageCarton}",
+      "twitter": "{https://www.twitter.com/PageCarton}",
+      "instagram": "{https://www.instagram.com/PageCarton}",
+      "linkedin": "{https://www.linkedin.com/company/PageCarton}",
+      "youtube": "{https://www.youtube.com/channel/UCMjkDODU47J8iKKbaidQpEw?view_as=subscriber}"
+    },
+
+    "media": {
+      "descriptive_video": "{https://vimeo.com/channels/staffpicks/93951774}",
+      "google_maps_embed": "{https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.7573964262942!2d3.862950314775586!3d7.381062994674082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10398d11e9ff4445%3A0x27cd60c4ec4cbd97!2sNustreams+Conference+%26+Culture+Centre!5e0!3m2!1sen!2sng!4v1550769560125}"
+    },
+
+    "ecommerce": {
+      "shipping_information": "{-Free Shipping Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.-}",
+      "returns_information": "{-Returns Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.-}",
+      "support_information": "{-Support Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.-}"
+    },
+
+    "newsletter": {
+      "write_up": "{-Be the first to be notified when we have exciting offers and discounts. Sign up for our newsletter!-}"
+    },
+
+    "descriptive_sections": {
+      "about_team": "{-Meet the awesome personalities who make up our team-}",
+      "about_services": "{-We offer the best in quality services. That is why we are the No. 1 in the industry-}"
+    }
+  },
+  
+  "widget_embedding_instructions": {
+    "intent": "Teach AI how to embed PageCarton widgets in raw HTML without prior platform knowledge",
+
+    "core_concepts": {
+      "widget_definition": "A widget is a dynamic PageCarton component embedded inside static HTML using custom HTML tags",
+      "processing_rule": "Widget syntax is removed at render time, leaving pure HTML with injected data",
+      "strict_html_rule": "Widget syntax is allowed only as HTML tags and JSON blocks. No server-side scripting is permitted."
+    },
+
+    "basic_widget_embedding": {
+      "syntax": "<widget> ... </widget>",
+      "rule": "All dynamic content MUST be wrapped inside a <widget> element",
+      "example": {
+        "description": "Minimal widget structure",
+        "code": "<widget> <!-- dynamic content --> </widget>"
+      }
+    },
+
+    "passing_parameters": {
+      "rule": "All widgets MUST declare a 'class' parameter to identify the widget",
+      "parameter_format": "Valid JSON object",
+
+      "methods": {
+        "attribute_method": {
+          "usage_rule": "Allowed but NOT recommended for complex parameters",
+          "syntax": "<widget parameters='{ \"class\": \"Widget_Class\" }'> ... </widget>",
+          "note": "JSON must use double quotes; HTML attribute must use single quotes",
+          "example": {
+            "code": "<widget parameters='{ \"class\": \"Application_Subscription_Cart\" }'>{{{no_of_distinct_items}}}</widget>"
+          }
+        },
+
+        "script_tag_method": {
+          "usage_rule": "RECOMMENDED method for passing parameters",
+          "syntax": "<script type=\"application/json\"> { ... } </script>",
+          "example": {
+            "code": "<widget><script type=\"application/json\">{\"class\":\"Application_SiteInfo\"}</script><h1>{{{site_headline}}}</h1></widget>"
+          }
+        }
+      }
+    },
+
+    "widget_variables": {
+      "syntax": "{{{variable_name}}}",
+      "rule": "Variables MUST NOT use dot notation",
+      "scope_rule": "Variables are only available inside the widget that defines them",
+      "example": {
+        "article_view": {
+          "widget_class": "Application_Article_View",
+          "variables": [
+            "{{{article_title}}}",
+            "{{{article_description}}}",
+            "{{{article_content}}}"
+          ]
+        }
+      }
+    },
+
+    "recursive_widgets": {
+      "rule": "Widgets MAY be nested inside other widgets",
+      "processing_order": "Inner widgets are processed before outer widgets by default",
+
+      "widget_inner_override": {
+        "purpose": "Force outer widget to process first. Useful for layout wrappers and if you need variables inside an outer widget to be used inside inner widget e.g. as parameters.",
+        "syntax": "<widget-inner> ... </widget-inner>",
+        "nesting_rule": "Suffix '-inner' may be repeated to control depth",
+        "example": {
+          "code": "<widget><widget-inner><widget-inner-inner>...</widget-inner-inner></widget-inner></widget>"
+        }
+      }
+    },
+
+    "multidimensional_data_rendering": {
+      "supported_widgets": "Only widgets that expose multidimensional datasets",
+
+      "repeat_syntax": {
+        "purpose": "Repeat identical HTML structure for each dataset item",
+        "syntax": "<repeat> ... </repeat>",
+        "example": {
+          "code": "<repeat><h2>{{{article_title}}}</h2><p>{{{article_description}}}</p></repeat>"
+        }
+      },
+
+      "data_n_syntax": {
+        "purpose": "Access the nth dataset directly",
+        "syntax": "<data-n> ... </data-n>",
+        "rule": "n starts from 0",
+        "example": {
+          "code": "<data-0><h3>{{{article_title}}}</h3></data-0>"
+        }
+      },
+
+      "pc_post_item_alias": {
+        "purpose": "Alternative shorthand for <data-n>",
+        "syntax": "{{{pc_post_item_n}}}",
+        "example": {
+          "code": "{{{pc_post_item_3}}}"
+        }
+      }
+    },
+
+    "include_directive": {
+      "purpose": "Reuse HTML fragments across multiple files",
+      "syntax": "<include href=\"file.html\">",
+      "rule": "Includes may be recursive",
+      "example": {
+        "code": "<include href=\"header.html\">"
+      }
+    },
+
+    "non_html_embedding": {
+      "rule": "Widgets MAY be embedded inside CSS or JS files using comments",
+      "use_case": "Dynamic color replacement and theming",
+      "example": {
+        "code": "/* <widget parameters='{ \"class\":\"Application_Global\" }'><widget-inner parameters='{ \"class\":\"Application_SearchReplace\",\"search\":[\"#F7941D\"],\"replace\":\"{{{pc_background_color}}}\" }'> */"
+      }
+    },
+
+    "canonical_examples": {
+      "site_info": {
+        "description": "Display site headline and description",
+        "code": "<widget><script type=\"application/json\">{\"class\":\"Application_SiteInfo\"}</script><h1>{{{site_headline}}}</h1><p>{{{site_description}}}</p></widget>"
+      },
+
+      "post_collection": {
+        "description": "Display recent blog posts",
+        "code": "<widget><script type=\"application/json\">{\"class\":\"Application_Article_ShowAll\",\"article_types\":\"blog-post\",\"add_a_new_post\":3}</script><repeat><h2>{{{article_title}}}</h2><p>{{{article_description}}}</p></repeat></widget>"
+      },
+
+      "menu_system": {
+        "description": "Dynamic navigation menu",
+        "code": "<widget parameters='{ \"class\":\"Ayoola_Menu\" }'><li><a href=\"{{{url}}}\">{{{option_name}}}</a></li></widget>"
+      },
+
+      "conditional_rendering": {
+        "description": "URL-based visibility control",
+        "code": "<widget parameters='{ \"class\":\"Application_Global\",\"url_whitelist\":\"/test\" }'><p>Visible only on /test</p></widget>"
+      }
+    },
+
+    "widget_section_wrapping_rule": {
+      "purpose": "Ensure widget-powered sections can be fully disabled from the PageCarton backend",
+      "scope": "ALL widget-powered sections",
+
+      "core_principle": {
+        "rule": "When a section is powered by a widget, ALL HTML content belonging to that section MUST be wrapped inside the <widget> tag.",
+        "reason": "Widgets can be turned off in the PageCarton backend. Any content outside the widget tag will still render even when the widget is disabled."
+      },
+
+      "mandatory_structure": {
+        "description": "The widget tag must act as the outermost container for the section.",
+        "required_order": [
+          "<widget>",
+          "  <script type=\"application/json\">",
+          "    { widget parameters }",
+          "  </script>",
+          "  <section> ... </section>",
+          "</widget>"
+        ]
+      },
+
+      "forbidden_structure": {
+        "description": "Placing the widget inside a section container is forbidden.",
+        "reason": "Disabling the widget will leave surrounding layout and headings visible.",
+        "example_pattern": [
+          "<section>",
+          "  <widget> ... </widget>",
+          "</section>"
+        ]
+      },
+
+      "correct_example": {
+        "description": "Entire section is controlled by the widget and disappears when disabled.",
+        "example_markup": [
+          "<widget>",
+          "  <script type=\"application/json\">",
+          "    {",
+          "      \"class\":\"Application_Article_ShowAll\",",
+          "      \"article_types\":\"product\",",
+          "      \"add_a_new_post\":6",
+          "    }",
+          "  </script>",
+          "",
+          "  <section class=\"container py-5\">",
+          "    <h2>{-Featured Products-}</h2>",
+          "    <div class=\"owl-carousel\">",
+          "      <repeat> ... </repeat>",
+          "    </div>",
+          "  </section>",
+          "</widget>"
+        ]
+      },
+
+      "incorrect_example": {
+        "description": "Only the dynamic content is controlled by the widget.",
+        "problem": "Section heading and layout remain visible when widget is disabled.",
+        "example_markup": [
+          "<section class=\"container py-5\">",
+          "  <h2>{-Featured Products-}</h2>",
+          "  <widget> ... </widget>",
+          "</section>"
+        ]
+      },
+
+      "edge_case_guidelines": {
+        "shared_layouts": [
+          "If multiple widgets share a single section, each widget must wrap only the content it exclusively controls",
+          "Do not wrap unrelated static sections inside a widget"
+        ],
+        "nested_widgets": [
+          "Nested widgets are allowed, but the outermost widget must still wrap the entire section"
+        ]
+      },
+
+      "ai_enforcement_rules": [
+        "WIDGET_MUST_WRAP_SECTION_CONTAINER",
+        "DO_NOT_PLACE_WIDGET_INSIDE_SECTION",
+        "ASSUME_WIDGET_CAN_BE_DISABLED_AT_RUNTIME",
+        "ENSURE_ZERO_RESIDUAL_HTML_WHEN_WIDGET_IS_OFF"
+      ]
+    },
+
+    "ai_enforcement_rules": [
+      "ALWAYS_DECLARE_WIDGET_CLASS",
+      "PREFER_SCRIPT_TAG_PARAMETER_METHOD",
+      "DO_NOT_INVENT_WIDGET_SYNTAX",
+      "ENSURE_ADD_A_NEW_POST_FOR_COLLECTION_WIDGETS",
+      "DO_NOT_USE_DOT_NOTATION_IN_VARIABLES",
+      "ASSUME_ZERO_EXISTING_POSTS_IN_PREVIEW"
+    ]
+  },
+
+  "widget_master_classes": {
+    "Application_Article_ShowAll": {
+      "description": "Primary collection widget for displaying posts of a specific type.",
+      "mandatory_parameters": [
+        "class",
+        "article_types",
+        "add_a_new_post"
+      ],
+      "all_parameters": {
+        "add_a_new_post": {
+          "type": "int",
+          "desc": "Number of placeholder datasets for preview."
+        },
+        "allow_dynamic_category_selection": {
+          "type": "bool",
+          "desc": "Enable category selection via query strings."
+        },
+        "article_types": {
+          "type": "string",
+          "desc": "Post type to display e.g. blog-post, service, slideshow, metric."
+        },
+        "true_post_type": {
+          "type": "string",
+          "desc": "Original PageCarton post type, e.g. article, product, video. More like category of post types"
+        },
+        "cache_post_list": {
+          "type": "bool",
+          "desc": "Enable caching of displayed posts."
+        },
+        "cache_timeout": {
+          "type": "int",
+          "desc": "Cache expiration time in seconds."
+        },
+        "category_name": {
+          "type": "string",
+          "desc": "Category filter for posts."
+        },
+        "category": {
+          "type": "string",
+          "desc": "Shortcut for category_name."
+        },
+        "cover_photo_height": {
+          "type": "int",
+          "desc": "Height for cover photo auto-crop."
+        },
+        "cover_photo_width": {
+          "type": "int",
+          "desc": "Width for cover photo auto-crop."
+        },
+        "default_cover_photo": {
+          "type": "string",
+          "desc": "Default cover photo URL to use if any of the added post doesn't have a cover photo."
+        },
+        "inverse_order": {
+          "type": "bool",
+          "desc": "Normally, post display newest posts first. This parameter, if set to true will reverse display order of posts."
+        },
+        "length_of_description": {
+          "type": "int",
+          "desc": "Truncate post description to this length."
+        },
+        "length_of_title": {
+          "type": "int",
+          "desc": "Truncate post title to this length."
+        },
+        "list_page_number_offset": {
+          "type": "int",
+          "desc": "Offset batch for pagination."
+        },
+        "no_of_post_to_show": {
+          "type": "int",
+          "desc": "Number of posts per batch."
+        },
+        "order_by": {
+          "type": "string",
+          "desc": "Field to sort by. Default is 'article_creation_date'."
+        },
+        "post_type_custom_fields": {
+          "type": "array",
+          "desc": "Custom fields used when creating/editing posts."
+        },
+        "show_post_without_this_key": {
+          "type": "string",
+          "desc": "Ignore posts with this key present."
+        },
+        "skip_articles_without_this_key": {
+          "type": "string",
+          "desc": "Ignore posts if this key is missing."
+        },
+        "trending": {
+          "type": "int",
+          "desc": "Show only posts with most recent engagements. Number sets engagement window."
+        }
+      },
+      "available_variables": [
+        "{{{article_title}}}",
+        "{{{article_description}}}",
+        "{{{article_content}}}",
+        "{{{post_link}}}",
+        "{{{document_url_uri}}}",
+        "{{{item_price_with_currency}}}"
+      ],
+      "multi_dimensional_data_support": true,
+      "repeat_syntax": "<repeat> ... </repeat>",
+      "data_n_syntax": "<data-n> ... </data-n>",
+      "standard_post_types_registry": {
+        "training_intent": "Teach AI the correct, survivable way to embed PageCarton post collections using standard post types and their exact widget parameters so that content created in one theme continues to work across future themes.",
+
+        "core_principle": {
+          "rule": "Themes MUST prefer standard post type parameters when embedding widgets.",
+          "reason": "Standard post types ensure cross-theme compatibility and prevent content loss when users switch themes.",
+          "fallback_policy": "If unsure, AI MUST select the closest standard post type from this registry rather than inventing a new one."
+        },
+
+        "strict_enforcement": {
+          "enumeration_only": true,
+          "forbidden_actions": [
+            "Inventing post types",
+            "Pluralizing post types",
+            "Renaming standard post types",
+            "Using semantic alternatives (e.g. services instead of service)"
+          ],
+          "forbidden_post_types": [
+            "services",
+            "blogs",
+            "metrics_list",
+            "portfolio_items"
+          ]
+        },
+
+        "post_types": {
+          "service": {
+            "label": "Our Services / What We Do",
+            "description": "Business services offered to clients.",
+            "widget_parameters": {
+              "article_types": "service"
+            },
+            "recommended_sections": [
+              "Homepage services section",
+              "Services page",
+              "Capabilities overview"
+            ],
+            "layout_patterns": [
+              "Icon + title + description",
+              "Service cards grid"
+            ]
+          },
+
+          "team_member": {
+            "label": "Team Members",
+            "description": "Profiles of individuals within an organization.",
+            "widget_parameters": {
+              "article_types": "team-member",
+              "post_type_custom_fields": "position,full_name,facebook_url,twitter_url,instagram_url,linkedin_url"
+            },
+            "recommended_sections": [
+              "About Us page",
+              "Leadership section"
+            ],
+            "layout_patterns": [
+              "Profile cards",
+              "Carousel team slider"
+            ]
+          },
+
+          "product": {
+            "label": "Products",
+            "description": "Sellable items with pricing and cart integration.",
+            "widget_parameters": {
+              "true_post_type": "product"
+            },
+            "recommended_sections": [
+              "Shop page",
+              "Homepage featured products",
+              "Pricing tables"
+            ],
+            "layout_patterns": [
+              "Product grid",
+              "Pricing cards"
+            ]
+          },
+
+          "blog_post": {
+            "label": "Blog Posts / Articles",
+            "description": "Editorial or informational content.",
+            "widget_parameters": {
+              "article_types": "blog-post",
+              "true_post_type": "article"
+            },
+            "recommended_sections": [
+              "Blog index page",
+              "Homepage latest posts"
+            ],
+            "layout_patterns": [
+              "Blog card grid",
+              "Featured article + list"
+            ]
+          },
+
+          "portfolio": {
+            "label": "Portfolio / Projects",
+            "description": "Showcase of completed work or projects.",
+            "widget_parameters": {
+              "article_types": "portfolio",
+              "true_post_type": "link"
+            },
+            "recommended_sections": [
+              "Portfolio page",
+              "Case studies section"
+            ],
+            "layout_patterns": [
+              "Image grid",
+              "Project cards"
+            ]
+          },
+
+          "slideshow": {
+            "label": "Slideshow / Hero Carousel",
+            "description": "Carousel-based visual content, usually for hero sections.",
+            "widget_parameters": {
+              "article_types": "slideshow"
+            },
+            "required_variables": [
+              "{{{document_url_uri}}}"
+            ],
+            "recommended_sections": [
+              "Homepage hero section",
+              "Landing page banners"
+            ],
+            "layout_patterns": [
+              "Full-width carousel",
+              "Text overlay slider"
+            ]
+          },
+
+          "testimonial": {
+            "label": "Testimonials",
+            "description": "Customer reviews or endorsements.",
+            "widget_parameters": {
+              "article_types": "testimonial",
+              "post_type_custom_fields": "position,full_name"
+            },
+            "recommended_sections": [
+              "Homepage social proof",
+              "Service credibility blocks"
+            ],
+            "layout_patterns": [
+              "Quote cards",
+              "Testimonial slider"
+            ]
+          },
+
+          "metric": {
+            "label": "Metrics / Counters",
+            "description": "Numerical achievements or statistics.",
+            "widget_parameters": {
+              "article_types": "metric",
+              "post_type_custom_fields": "number"
+            },
+            "required_variables": [
+              "{{{number}}}"
+            ],
+            "recommended_sections": [
+              "Homepage statistics",
+              "About Us achievements"
+            ],
+            "layout_patterns": [
+              "Animated counters",
+              "Stat blocks"
+            ]
+          },
+
+          "gallery": {
+            "label": "Gallery",
+            "description": "Collections of images.",
+            "widget_parameters": {
+              "article_types": "gallery-item"
+            },
+            "recommended_sections": [
+              "Gallery page",
+              "Event highlights"
+            ],
+            "layout_patterns": [
+              "Responsive image grid",
+              "Lightbox gallery"
+            ]
+          },
+
+          "feature": {
+            "label": "Features / Why Choose Us",
+            "description": "Value propositions or differentiators.",
+            "widget_parameters": {
+              "article_types": "feature"
+            },
+            "recommended_sections": [
+              "Homepage value proposition",
+              "Landing pages"
+            ],
+            "layout_patterns": [
+              "Icon-feature grid",
+              "Checklist features"
+            ]
+          },
+
+          "pricing": {
+            "label": "Pricing",
+            "description": "Pricing plans or packages.",
+            "widget_parameters": {
+              "article_types": "pricing",
+              "true_post_type": "product",
+              "post_type_custom_fields": "feature_1,feature_2,feature_3,feature_4,feature_5"
+            },
+            "recommended_sections": [
+              "Pricing page",
+              "Homepage pricing preview"
+            ],
+            "layout_patterns": [
+              "Pricing cards",
+              "Comparison tables"
+            ]
+          },
+
+          "call_to_action": {
+            "label": "Call To Action",
+            "description": "Conversion-focused links or buttons.",
+            "widget_parameters": {
+              "article_types": "call-to-action",
+              "true_post_type": "link"
+            },
+            "recommended_sections": [
+              "Hero buttons",
+              "Mid-page conversion sections"
+            ],
+            "layout_patterns": [
+              "Primary CTA buttons",
+              "Banner CTAs"
+            ],
+            "integration_rule": "Often embedded as widget-inner inside other widgets"
+          }
+        },
+
+        "ai_directives": [
+          "ALWAYS use widget_parameters exactly as defined",
+          "NEVER invent or rename post types",
+          "PREFER standard post types to preserve content across themes",
+          "ENSURE add_a_new_post is present when using collection widgets",
+          "MATCH required_variables where specified"
+        ]
+      },
+      "pagination_system": {
+        "scope": "Application_Article_ShowAll",
+        "purpose": "Enable URL-driven pagination for post and product listings",
+
+        "activation_rules": {
+          "required_parameters": {
+            "no_of_post_to_show": {
+              "type": "int",
+              "example": 9,
+              "description": "Number of posts rendered per page"
+            }
+          },
+          "optional_parameters": {
+          }
+        },
+
+        "basic_paginated_collection_example": {
+          "description": "Minimal paginated post list with preview-safe placeholders",
+          "widget_parameters_example": {
+            "class": "Application_Article_ShowAll",
+            "article_types": "blog-post",
+            "add_a_new_post": 3,
+            "no_of_post_to_show": 9,
+            "length_of_description": 200,
+            "pc_module_url_values_category_offset": 0,
+            "pc_module_url_values_request_fallback": true
+          },
+          "rendering_example": {
+            "post_list": "<repeat> ... </repeat>",
+            "pagination_container": "data-paginator_before, paginator_current_page_number, data-paginator_after"
+          }
+        },
+
+        "paginator_datasets": {
+          "data-paginator_before": {
+            "type": "collection",
+            "description": "Pages before the current page",
+            "example_rendering": {
+              "html_pattern": "<data-paginator_before><repeat><a href=\"{{{pagination_url}}}\">{{{pagination_number}}}</a></repeat></data-paginator_before>"
+            }
+          },
+          "paginator_current_page_number": {
+            "type": "scalar",
+            "description": "Current active page",
+            "example_rendering": {
+              "html_pattern": "<span>{{{paginator_current_page_number}}}</span>"
+            }
+          },
+          "data-paginator_after": {
+            "type": "collection",
+            "description": "Pages after the current page",
+            "example_rendering": {
+              "html_pattern": "<data-paginator_after><repeat><a href=\"{{{pagination_url}}}\">{{{pagination_number}}}</a></repeat></data-paginator_after>"
+            }
+          }
+        },
+
+        "full_pagination_ui_example": {
+          "description": "Complete pagination block placed after a post grid",
+          "example_markup": [
+            "<div class=\"custom-pagination\">",
+            "  <data-paginator_before>",
+            "    <repeat>",
+            "      <a href=\"{{{pagination_url}}}\">{{{pagination_number}}}</a>",
+            "    </repeat>",
+            "  </data-paginator_before>",
+            "",
+            "  <span>{{{paginator_current_page_number}}}</span>",
+            "",
+            "  <data-paginator_after>",
+            "    <repeat>",
+            "      <a href=\"{{{pagination_url}}}\">{{{pagination_number}}}</a>",
+            "    </repeat>",
+            "  </data-paginator_after>",
+            "</div>"
+          ]
+        },
+
+        "category_aware_pagination_example": {
+          "description": "Pagination that adapts when categories are selected via URL",
+          "widget_parameters_example": {
+            "class": "Application_Article_ShowAll",
+            "article_types": "product",
+            "add_a_new_post": 6,
+            "no_of_post_to_show": 12,
+            "allow_dynamic_category_selection": true,
+            "pc_module_url_values_category_offset": 0,
+            "pc_module_url_values_request_fallback": true
+          },
+          "behavior_notes": [
+            "Pagination links preserve selected category",
+            "Page offsets are automatically adjusted per category",
+            "No additional parameters are required"
+          ]
+        },
+
+        "preview_behavior_examples": {
+          "example_1": {
+            "condition": "add_a_new_post <= no_of_post_to_show",
+            "result": "Paginator datasets may be empty",
+            "expected_behavior": "Pagination UI renders safely without links"
+          },
+          "example_2": {
+            "condition": "add_a_new_post > no_of_post_to_show",
+            "result": "Multiple pagination links are generated",
+            "expected_behavior": "Paginator before/after datasets populate correctly"
+          }
+        },
+
+        "common_mistakes_to_avoid": [
+          "Inventing page numbers manually",
+          "Calculating offsets in HTML or JavaScript",
+          "Using pagination datasets outside Application_Article_ShowAll widget",
+          "Omitting add_a_new_post on paginated collections"
+        ],
+
+        "ai_enforcement_rules": [
+          "USE_ONLY data-paginator_before, paginator_current_page_number, data-paginator_after",
+          "ALWAYS_BIND pagination to no_of_post_to_show",
+          "DO_NOT_MANUALLY_COMPUTE pagination logic",
+          "ASSUME URL-DRIVEN pagination model"
+        ]
+      },
+      
+      "page_settings_and_category_resolution": {
+        "page_settings_file": {
+          "description": "Themes may define route-level page behavior using a JSON file named \"pagesettings\" located at the root of the theme folder.",
+          "filename": "pagesettings",
+          "format": "JSON",
+          "purpose": [
+            "Define page metadata such as title and description",
+            "Enable module behavior on specific routes",
+            "Allow dynamic URL segment handling"
+          ],
+          "example": {
+            "/category": {
+              "title": "",
+              "page_options": ["module"]
+            },
+            "/products": {
+              "title": "Our products",
+              "page_options": ["module"]
+            },
+            "/contact": {
+              "title": "Contact us",
+              "description": "Reach us to ask any questions you like."
+            }
+          }
+        },
+
+        "automatic_category_detection": {
+          "description": "When a post list widget is used, the category identifier can be resolved automatically from the URL depending on widget configuration and page settings.",
+          "source": "URL",
+          "resolution_type": [
+            "category_id",
+            "category_name"
+          ]
+        },
+
+        "category_filtering_methods": {
+          "overview": "Category filtering for post or product listing widgets can be applied using one or more of the methods below.",
+
+          "method_1_fixed_category": {
+            "description": "Apply a fixed category filter directly in the widget configuration.",
+            "widget_parameters": {
+              "category_name": "string"
+            },
+            "behavior": "Only posts belonging to the specified category will be displayed, regardless of URL."
+          },
+
+          "method_2_dynamic_category_from_url": {
+            "description": "Allow the widget to automatically resolve the category from the URL.",
+            "required_widget_parameters": {
+              "allow_dynamic_category_selection": true
+            },
+            "required_page_settings": {
+              "page_options": ["module"]
+            },
+
+            "url_patterns": {
+              "pattern_a_explicit_category_segment": {
+                "description": "Category is passed via a category segment in the URL.",
+                "examples": [
+                  "/blog/category/5",
+                  "/blog/category/technology"
+                ],
+                "resolution_behavior": {
+                  "/blog/category/technology": {
+                    "resolved_as": "/blog?category=technology",
+                    "populated_get_array": {
+                      "category": "technology"
+                    }
+                  }
+                }
+              },
+
+              "pattern_b_implicit_segment_mapping": {
+                "description": "Category is inferred from URL path segments without the explicit 'category' keyword.",
+                "examples": [
+                  "/blog/technology",
+                  "/blog/technology/solar"
+                ],
+                "required_widget_parameters": {
+                  "pc_module_url_values_category_offset": "integer"
+                },
+                "offset_mapping_example": {
+                  "/blog/technology/solar": {
+                    "technology": 0,
+                    "solar": 1
+                  }
+                }
+              }
+            }
+          },
+
+          "method_3_combined_fixed_and_dynamic": {
+            "description": "Combine fixed category filtering with dynamic URL-based overrides.",
+            "behavior": [
+              "The fixed category set in the widget configuration acts as the default",
+              "If a category is detected from the URL, it overrides the default"
+            ],
+            "required_widget_parameters": {
+              "category_name": "string",
+              "allow_dynamic_category_selection": true
+            }
+          }
+        },
+
+        "ai_enforcement_rules": [
+          "PAGESETTINGS_FILE_MUST_BE_JSON",
+          "MODULE_PAGES_ALLOW_DYNAMIC_URL_SEGMENTS",
+          "CATEGORY_CAN_BE_RESOLVED_FROM_ID_OR_NAME",
+          "URL_BASED_CATEGORY_OVERRIDES_FIXED_CATEGORY_WHEN_ENABLED",
+          "pc_module_url_values_category_offset_REQUIRED_FOR_IMPLICIT_URL_MAPPING"
+        ]
+      }
+
+    },
+
+    "Application_Article_View": {
+      "description": "Displays a single post content.",
+      "mandatory_parameters": [
+        "class",
+        "article_url"
+      ],
+      "available_variables": [
+        "{{{article_title}}}",
+        "{{{document_url_uri}}}",
+        "{{{article_description}}}",
+        "{{{article_content}}}"
+      ]
+    },
+
+    "Application_SiteInfo": {
+      "description": "Displays site-wide metadata.",
+      "available_variables": [
+        "{{{site_headline}}}",
+        "{{{site_description}}}",
+        "{{{cover_photo}}}"
+      ]
+    },
+    "Ayoola_Page_Info": {
+      "description": "Displays page wide metadata.",
+      "available_variables": [
+        "{{{title}}}",
+        "{{{description}}}",
+        "{{{cover_photo}}}"
+      ]
+
+    },
+
+    "Ayoola_Menu": {
+      "description": "Dynamic menu widget.",
+      "mandatory_parameters": [
+        "class"
+      ],
+      "optional_parameters": [
+        "menu_name"
+      ],
+      "available_variables": [
+        "{{{url}}}",
+        "{{{option_name}}}"
+      ],
+      "nested_menu_support": true
+    },
+
+    "Application_Category_ShowAll": {
+      "description": "Displays categories as a multi-dimensional dataset.",
+      "mandatory_parameters": [
+        "class",
+        "add_a_new_post"
+      ],
+      "available_variables": [
+        "{{{category_name}}}",
+        "{{{category_label}}}",
+        "{{{category_description}}}",
+        "{{{post_link}}}",
+        "{{{document_url_uri}}}",
+        "{{{article_title}}}",
+        "{{{article_description}}}"
+      ],
+      "multi_dimensional_data_support": true,
+      "nested_widget_support": true
+    },
+
+    "Application_Subscription_Cart": {
+      "description": "Displays shopping cart contents.",
+      "available_variables": [
+        "{{{no_of_distinct_items}}}",
+        "{{{total_price}}}",
+        "{{{currency}}}",
+        "{{{subscription_label}}}",
+        "{{{url}}}",
+        "{{{delete_url}}}",
+        "{{{multiple}}}"
+      ]
+    },
+
+    "Application_Global": {
+      "description": "Conditionally display content based on URL whitelist/blacklist.",
+      "optional_parameters": [
+        "url_whitelist",
+        "url_blacklist"
+      ],
+      "available_variables": []
+    }
+
+  },
+
+  "logo_handling": {
+    "description": "Standardized handling of organization logos in PageCarton themes.",
+    "logo_url": "/img/logo.png",
+    "guarantees": [
+      "The logo URL is always available at /img/logo.png",
+      "The logo may be auto-generated or replaced by the site owner"
+    ],
+    "image_processing": {
+      "auto_crop_supported": true,
+      "query_parameters": [
+        "height",
+        "width"
+      ],
+      "examples": [
+        "/img/logo.png?height=100",
+        "/img/logo.png?width=200",
+        "/img/logo.png?width=200&height=100"
+      ]
+    },
+    "recommended_html_usage": {
+      "tag": "img",
+      "attributes": {
+        "src": "/img/logo.png",
+        "alt": "{Organization Name}"
+      }
+    },
+    "ai_generation_rules": [
+      "ALWAYS_USE_/img/logo.png_FOR_LOGO",
+      "DO_NOT_INLINE_OR_EMBED_LOGO",
+      "USE_QUERY_PARAMS_FOR_RESIZING",
+      "ALT_TEXT_SHOULD_USE_ORGANIZATION_NAME"
+    ]
+  },
+
+  "html_form_integration": {
+    "description": "Rules for linking external or theme-based HTML forms to PageCarton’s internal form processing system.",
+    "prerequisites": {
+      "admin_setting": {
+        "path": "Admin Panel > Custom Forms > Form Settings",
+        "required_option": "Allow values from external forms",
+        "default_state": false,
+        "must_be_enabled": true
+      }
+    },
+
+    "widget_form_endpoints": {
+      "description": "Built-in PageCarton widget form endpoints and their HTTP methods.",
+      "endpoints": [
+        {
+          "name": "Login Form",
+          "class": "PageCarton_Signin",
+          "url": "/widgets/PageCarton_Signin",
+          "method": "POST"
+        },
+        {
+          "name": "Sign Up Form",
+          "class": "PageCarton_Signup",
+          "url": "/widgets/PageCarton_Signup",
+          "method": "POST"
+        },
+        {
+          "name": "Contact Form",
+          "class": "PageCarton_Contact_Form",
+          "url": "/widgets/PageCarton_Contact_Form",
+          "method": "POST"
+        },
+        {
+          "name": "Post Creation Form",
+          "class": "PageCarton_Post",
+          "url": "/widgets/PageCarton_Post",
+          "method": "POST"
+        },
+        {
+          "name": "Email Opt-in Form",
+          "class": "PageCarton_Email_OptIn",
+          "url": "/widgets/PageCarton_Email_OptIn",
+          "method": "POST"
+        },
+        {
+          "name": "Search Box",
+          "url": "/search",
+          "method": "GET"
+        }
+      ]
+    },
+
+    "url_prefix_handling": {
+      "description": "Widget URLs must respect the PageCarton installation URL prefix if present.",
+      "prefix_sources": [
+        "Installation directory",
+        "index.php when URL rewriting is disabled"
+      ],
+      "examples": [
+        {
+          "homepage": "example.com",
+          "widget_url": "/widgets/PageCarton_Signin"
+        },
+        {
+          "homepage": "example.com/dir",
+          "widget_url": "/dir/widgets/PageCarton_Signin"
+        },
+        {
+          "homepage": "example.com/dir/index.php",
+          "widget_url": "/dir/index.php/widgets/PageCarton_Signin"
+        }
+      ]
+    },
+
+    "custom_forms": {
+      "description": "Custom PageCarton forms use their Share Link as the form action.",
+      "source": "Admin Panel > Custom Forms",
+      "action_url": "Share Link"
+    },
+
+    "form_field_name_mapping": {
+      "description": "HTML form element name attributes must match PageCarton widget field names.",
+      "inspection_tool": {
+        "query_parameter": "pc_inspect_widget_form=name",
+        "usage_example": "/widgets/PageCarton_Signin?pc_inspect_widget_form=name"
+      },
+      "example_fields": [
+        {
+          "input_type": "text",
+          "name": "username"
+        },
+        {
+          "input_type": "password",
+          "name": "password"
+        }
+      ]
+    },
+
+    "form_action_rules": {
+      "description": "The form action must point directly to the PageCarton widget or custom form endpoint.",
+      "html_example": {
+        "form": {
+          "action": "/widgets/PageCarton_Signin",
+          "method": "POST"
+        }
+      }
+    },
+
+    "ai_enforcement_rules": [
+      "FORMS_MUST_POST_TO_WIDGET_OR_SHARE_LINK",
+      "METHOD_MUST_MATCH_WIDGET_DEFINITION",
+      "FORM_FIELD_NAMES_MUST_MATCH_WIDGET_FIELDS",
+      "URL_PREFIX_MUST_BE_RESPECTED",
+      "EXTERNAL_FORMS_SETTING_MUST_BE_ENABLED"
+    ]
+  },
+  "post_viewer_and_default_layout": {
+    "post_viewer_template": {
+      "description": "Defines the theme pages used to display single posts or specific post types.",
+      "base_page": "/single",
+      "duplication_rules": [
+        {
+          "target_page": "/post-viewer",
+          "purpose": "General viewer for all posts regardless of type",
+          "widget_integration": {
+            "widget_class": "Application_Article_View",
+            "required_parameters": ["class"],
+            "usage": "Create a page with URL /post-viewer. Embed Application_Article_View on the page to retrieve and display post content dynamically. No need to specify post type or to put the article_url parameter as this will be resolved automatically based on the URL."
+          }
+        },
+        {
+          "target_page_pattern": "/post-viewer-{{{post_type}}}",
+          "purpose": "Viewer page for a specific post type",
+          "example": "/post-viewer-article",
+          "widget_integration": {
+            "widget_class": "Application_Article_View",
+            "required_parameters": ["class"],
+            "usage": "Create the page in the root of the theme. Embed Application_Article_View on the page to retrieve and display post content dynamically. This will display the post of the specified post type only when a user clicks to view the post. The article_url parameter will be dynamically retrieved from the post based on the URL. No need to set the article_url parameter manually."
+          }
+        }
+      ],
+      "ai_enforcement_rules": [
+        "POST_VIEWER_PAGE_MUST_DUPLICATE_BASE_PAGE",
+        "APPLICATION_ARTICLE_VIEW_WIDGET_MUST_BE_EMBEDDED",
+        "POST_TYPE_PLACEHOLDER_MUST_BE_USED_CORRECTLY_FOR_SPECIFIC_TYPES"
+      ]
+    },
+
+    "default_layout_page": {
+      "description": "Provides a fallback layout for all system pages not explicitly included in the theme.",
+      "page_name": "/default-layout",
+      "creation_rules": [
+        "Duplicate an existing theme page",
+        "Rename the duplicate to /default-layout",
+        "Set it as the layout to use for any system page not included in the theme",
+        "It will also be the default layout for creating/editing new pages when the theme is active"
+      ],
+      "ai_enforcement_rules": [
+        "DEFAULT_LAYOUT_PAGE_MUST_EXIST_IN_THEME",
+        "DEFAULT_LAYOUT_PAGE_CAN_BE_DUPLICATED_FROM_ANY_EXISTING_PAGE",
+        "DEFAULT_LAYOUT_PAGE_MUST_BE_USED_FOR_UNDEFINED_SYSTEM_PAGES"
+      ]
+    }
+  },
+
+  "theme_output_enforcement": {
+    "description": "Forces AI to respond ONLY with a JSON representation of a ZIP-ready theme directory, including a suggested theme name and all files required at the theme root.",
+    "theme_naming": {
+      "required": true,
+      "rules": [
+        "AI must suggest a concise, human-readable theme name",
+        "Theme name must be unique, lowercase, and filesystem-safe when slugified",
+        "Theme name must be included in the output under the key 'theme_name'"
+      ],
+      "example": {
+        "theme_name": "ayoola-portfolio-elegance"
+      }
+    },
+    "rules": {
+      "output_format": "JSON_ONLY",
+      "root_zip_structure": true,
+      "file_representation": {
+        "name": "Relative path from the theme root (used to recreate folders)",
+        "kind": "File type (HTML, CSS, JS, JSON, image, font, etc.)",
+        "content_type": "text or base64",
+        "content": "Required. Raw text for text files or base64 string for binary files."
+      },
+      "alphabetical_order": "All file entries MUST be sorted alphabetically by the 'name' field",
+      "folder_handling": "Folders must NOT be listed separately; folder structure is inferred from file paths",
+      "mandatory_fields_per_file": [
+        "name",
+        "kind",
+        "content_type",
+        "content"
+      ],
+      "binary_handling": {
+        "rule": "All binary files MUST be base64 encoded",
+        "applies_to": ["image", "font", "video", "audio"]
+      },
+      "text_handling": {
+        "rule": "All text-based files MUST be raw, unescaped text",
+        "applies_to": ["HTML", "CSS", "JS", "JSON", "TXT", "MD"]
+      },
+      "ai_enforcement": [
+        "NO_TEXT_OUTSIDE_JSON",
+        "THEME_NAME_REQUIRED",
+        "FLATTENED_FILE_LIST_ONLY",
+        "ALPHABETICAL_ORDER_REQUIRED",
+        "ALL_FILES_MUST_INCLUDE_CONTENT",
+        "BINARY_FILES_BASE64_ONLY",
+        "TEXT_FILES_RAW_TEXT_ONLY"
+      ],
+      "example_output": {
+        "theme_name": "super-portfolio-elegance",
+        "files": [
+          {
+            "name": "assets/css/style.css",
+            "kind": "CSS",
+            "content_type": "text",
+            "content": "body { margin: 0; font-family: Arial, sans-serif; }"
+          },
+          {
+            "name": "assets/js/script.js",
+            "kind": "JS",
+            "content_type": "text",
+            "content": "console.log('Theme loaded');"
+          },
+          {
+            "name": "img/logo.png",
+            "kind": "image",
+            "content_type": "base64",
+            "content": "iVBORw0KGgoAAAANSUhEUgAAAAUA\nAAAFCAYAAACNbyblAAAAHElEQVQI12P4\n//8/w38GIAXDIBKE0DHxgljNBAAO\n9TXL0Y4OHwAAAABJRU5ErkJggg=="
+          },
+          {
+            "name": "index.html",
+            "kind": "HTML",
+            "content_type": "text",
+            "content": "<!DOCTYPE html>\n<html>\n<head>\n<title>Portfolio</title>\n<link rel=\"stylesheet\" href=\"assets/css/style.css\">\n</head>\n<body>\n<h1>Ayoola Falola</h1>\n<script src=\"assets/js/script.js\"></script>\n</body>\n</html>"
+          },
+          {
+            "name": "pagesettings.json",
+            "kind": "JSON",
+            "content_type": "text",
+            "content": "{\n  \"theme\": \"ayoola-portfolio-elegance\",\n  \"version\": \"1.0.0\"\n}"
+          }
+        ]
+      }
+    },
+    "purpose": "Ensures AI-generated themes are deterministic, ZIP-convertible, PageCarton-compatible, and production-ready without post-processing."
+  },
+
+  "compiler_validation_checklist": [
+    "ALL_VERSION_1_RULES_PRESENT",
+    "ALL_VERSION_7_RULES_PRESENT",
+    "NO_STATIC_ASSETS_ASSUMED",
+    "ALL_IMAGES_USE_DOCUMENT_URL_URI",
+    "ALL_TEXT_REPLACEABLE",
+    "ADD_A_NEW_POST_PRESENT",
+    "SYSTEM_PLACEHOLDERS_PRESENT",
+    "PAGINATION_THREE_STATE_COMPLIANT",
+    "NO_DOT_NOTATION_IN_VARIABLES"
+  ]
+}
