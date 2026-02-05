@@ -783,9 +783,14 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 		}
 
 		$truePostType = @array_pop( $truePost ) ? : $this->getParameter( 'true_post_type' );
-		$newArticleType = ( @array_pop( $articleType ) ? : ( $this->getParameter( 'article_types' ) ? : $truePostType ) );
+		$postTypesX = (array) $this->getParameter( 'article_types' );
+
+
+		$newArticleType = ( @array_pop( $articleType ) ? : ( $postTypesX[0] ? : $truePostType ) );
 		$postTypeInfo = Application_Article_Type::getInstance()->selectOne( null, array( 'post_type_id' => $newArticleType ) );
-		@$newArticleTypeToShow = self::getItemName() ? : ucwords( ( $postTypeInfo['post_type'] ) ? : str_replace( '-', ' ', $newArticleType ) );
+		$postTypes = (array) $postTypeInfo['post_type'];
+
+		@$newArticleTypeToShow = self::getItemName() ? : ucwords( $postTypes[0] ? : str_replace( '-', ' ', $newArticleType[0] ) );
 		@$newArticleTypeToShow = $newArticleTypeToShow ? : 'Item';
 		$categoryForNewPost = @array_pop( $categoryName );
 		$addNewPostUrl = ( static::$_newPostUrl ? : 
@@ -1711,7 +1716,10 @@ class Application_Article_ShowAll extends Application_Article_Abstract
         }
 
 		@$postType = Application_Category_Creator::filterCategoryName( $this->getParameter( 'article_types' ) ) ? : $postType;
-        $postType = strtolower( trim( $postType ) );
+
+		$postType = (array) $postType;
+        $postType = array_map( 'trim',  $postType );
+        $postType = array_map( 'strtolower',  $postType );
 		if( $postType )
 		{
 			$whereClause['article_type'][] = $postType;
@@ -1723,9 +1731,7 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 				}
 				$whereClause['article_type'][] = $postType;
 			}
-			
-			@$path = $realPostTypePath . ' ' . $allOriginalPostTypes;
-		
+					
 		} //	For profiles
 		elseif( @$this->_parameter['access_level'] )
 		{
