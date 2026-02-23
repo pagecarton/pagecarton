@@ -1257,7 +1257,11 @@
       "EXTERNAL_FORMS_SETTING_MUST_BE_ENABLED"
     ]
   },
-  "post_viewer_and_default_layout": {
+  "template_files": {
+    "main_site_template": {
+      "description": "Defines the main theme content in pure HTML/CSS/JS, usually contains the header and the footer and other content that would go across all the other pages. If this page is not present, index.html is used to autogenerate template.html internally.",
+      "base_page": "/template"
+    },
     "post_viewer_template": {
       "description": "Defines the theme pages used to display single posts or specific post types.",
       "base_page": "/single",
