@@ -143,30 +143,17 @@
     "invented_widgets": "FORBIDDEN",
     "invented_parameters": "FORBIDDEN",
     "mandatory_preview_integrity": {
-      "rule": "ALL collection widgets MUST include add_a_new_post which will have integer value equal to the minimum number of placeholder datasets needed for preview.",
-      "reason": "Ensure themes render correctly on fresh installations"
+      "rule": "ALL collection widgets MUST include add_a_new_post with an integer value equal to the exact minimum number of placeholder datasets needed to fill the initial horizontal layout (above-the-fold) for preview. Do NOT use arbitrary defaults.",
+      "reason": "Ensure themes render correctly on fresh installations and avoid empty preview rows"
     }
   },
 
   "ui_ux_atomic_rules": {
     "replaceable_text": {
       "syntax": "{TEXT_CONTENT}",
-      "rule": "100% of non-dynamic text must be replaceable. Use standard replaceable texts wherever possible. Invented static text must use {-TEXT-} syntax but is discouraged.",
+      "rule": "Static texts should use standard replaceable texts wherever possible to enable the text to be customized by users easily. Standard replaceable texts must be used as-is. Not shortened nor modified in anyway. Invented static text must use {-TEXT-} syntax but only where standard replaceable texts are not available. ",
       "static_text_exception": "Invented static text must use {-TEXT-} syntax.",
       "standard_texts_must_be_used_as_is": true
-    },
-    "variable_injection": {
-      "syntax": "{{{variable_name}}}",
-      "when_to_use": "Variables must be used wherever dynamic content is expected inside a widget tags only. Widget variables must be used as is without modification as they are populated by the system.Within the widget tags, no invented variables are allowed. Do not use variables outside widget tags.",
-      "forbidden": [
-        "dot.notation"
-      ],
-      "media_rules": {
-        "allowed_source": "{{{document_url_uri}}}",
-        "auto_crop_allowed": true,
-        "auto_crop_example": "{{{document_url_uri}}}?width=1029&height=600",
-        "object_fit_rule": "Images in grids MUST use object-fit: cover with fixed height or aspect-ratio"
-      }
     }
   },
 
@@ -199,22 +186,14 @@
     "media": {
       "descriptive_video": "{https://vimeo.com/channels/staffpicks/93951774}",
       "google_maps_embed": "{https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.7573964262942!2d3.862950314775586!3d7.381062994674082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10398d11e9ff4445%3A0x27cd60c4ec4cbd97!2sNustreams+Conference+%26+Culture+Centre!5e0!3m2!1sen!2sng!4v1550769560125}"
-    },
-
-    "ecommerce": {
-      "shipping_information": "{-Free Shipping Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.-}",
-      "returns_information": "{-Returns Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.-}",
-      "support_information": "{-Support Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at iaculis quam. Integer accumsan tincidunt fringilla.-}"
-    },
-
-    "newsletter": {
-      "write_up": "{-Be the first to be notified when we have exciting offers and discounts. Sign up for our newsletter!-}"
-    },
-
-    "descriptive_sections": {
-      "about_team": "{-Meet the awesome personalities who make up our team-}",
-      "about_services": "{-We offer the best in quality services. That is why we are the No. 1 in the industry-}"
     }
+  },
+
+  "invented_replaceable_texts": {
+    "sample_invented_texts": {
+      "example_1": "{-Invented Text 1-}",
+      "example_2": "{-Invented Text 2-}"
+    },
   },
   
   "widget_embedding_instructions": {
@@ -445,6 +424,7 @@
       "DO_NOT_INVENT_WIDGET_SYNTAX",
       "ENSURE_ADD_A_NEW_POST_FOR_COLLECTION_WIDGETS",
       "DO_NOT_USE_DOT_NOTATION_IN_VARIABLES",
+      "NO_VARIABLES_OUTSIDE_WIDGET_TAGS",
       "ASSUME_ZERO_EXISTING_POSTS_IN_PREVIEW"
     ]
   },
@@ -460,7 +440,7 @@
       "all_parameters": {
         "add_a_new_post": {
           "type": "int",
-          "desc": "Number of placeholder datasets for preview."
+          "desc": "Number of placeholder datasets for preview. Must be the exact minimum required to fill the initial horizontal layout (e.g., columns per row) above the fold; never use arbitrary defaults."
         },
         "allow_dynamic_category_selection": {
           "type": "bool",
@@ -1336,7 +1316,7 @@
         "Theme name must be included in the output under the key 'theme_name'"
       ],
       "example": {
-        "theme_name": "ayoola-portfolio-elegance"
+        "theme_name": "my-personal-portfolio-elegance"
       }
     },
     "rules": {
@@ -1398,13 +1378,19 @@
             "name": "index.html",
             "kind": "HTML",
             "content_type": "text",
-            "content": "<!DOCTYPE html>\n<html>\n<head>\n<title>Portfolio</title>\n<link rel=\"stylesheet\" href=\"assets/css/style.css\">\n</head>\n<body>\n<h1>Ayoola Falola</h1>\n<script src=\"assets/js/script.js\"></script>\n</body>\n</html>"
+            "content": "<!DOCTYPE html>\n<html>\n<head>\n<title>Portfolio</title>\n<link rel=\"stylesheet\" href=\"assets/css/style.css\">\n</head>\n<body>\n<h1>Welcome to my website</h1>\n<script src=\"assets/js/script.js\"></script>\n</body>\n</html>"
           },
           {
-            "name": "pagesettings.json",
+            "name": "pagesettings",
             "kind": "JSON",
             "content_type": "text",
-            "content": "{\n  \"theme\": \"ayoola-portfolio-elegance\",\n  \"version\": \"1.0.0\"\n}"
+            "content": "{\n  \"/\": {\n      \"title\": \"\",\n      \"page_options\": [\"module\"]\n  },\n\"/category\": {\n      \"title\": \"\",\n      \"page_options\": [\"module\"]\n  }\n,\n\"/about\": {\n      \"title\": \"About us\"\n  }\n}"
+          },
+          {
+            "name": "template.html",
+            "kind": "HTML",
+            "content_type": "text",
+            "content": "<!DOCTYPE html>\n<html>\n<head>\n<title>Portfolio</title>\n<link rel=\"stylesheet\" href=\"assets/css/style.css\">\n</head>\n<body>\n<h1>My web portfolio is here</h1>\n<script src=\"assets/js/script.js\"></script>\n</body>\n</html>"
           }
         ]
       }
