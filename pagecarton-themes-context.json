@@ -142,6 +142,10 @@
     "invented_assets": "FORBIDDEN",
     "invented_widgets": "FORBIDDEN",
     "invented_parameters": "FORBIDDEN",
+    "template_content_anchor": {
+      "rule": "template.html MUST include a dedicated content anchor section exactly as shown: <section data-pc-all-sections=\"1\"></section>. This is where custom user content will be inserted.",
+      "layout_note": "Content before this section is the header region. Content after this section is the footer region."
+    },
     "mandatory_preview_integrity": {
       "rule": "ALL collection widgets MUST include add_a_new_post with an integer value equal to the exact minimum number of placeholder datasets needed to fill the initial horizontal layout (above-the-fold) for preview. Do NOT use arbitrary defaults.",
       "reason": "Ensure themes render correctly on fresh installations and avoid empty preview rows"
