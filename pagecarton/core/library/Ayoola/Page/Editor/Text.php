@@ -138,12 +138,13 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
     public static function getContentIncludes( $content )
     {
         // include other HTML here
-        preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"][/a-zA-Z0-9_-]*(/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
+        $pattern = '|<include[\s]*href[\s]*=[\s]*[\'"]([/a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*)\.html[\'"][\s]*>([\s]*</include>)?|i';
+        preg_match_all( $pattern, $content, $matches );  
     
         $includes = array();
         if( empty( $matches[0] ) )
         {
-            preg_match_all( '|<include[\s]*href[\s]*=[\s]*[\'"][/a-zA-Z0-9_-]*(/layout/[a-zA-Z0-9_\-]*/[a-zA-Z0-9_\-]*)\.html[\'"][\s]*>([\s]*</include>)?|i', $content, $matches );  
+            preg_match_all( $pattern, $content, $matches );  
         }
         foreach( $matches[0] as $count => $each )
         {
@@ -160,12 +161,32 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
      */
     public static function setContentIncludes( $content, $includes )
     {
+		//var_export($includes);
+		//exit();
         foreach( $includes as $file => $placeholder )
         {
-            $path = Ayoola_Doc::getDocumentsDirectory() . $file . '.html';
+            $resolvedFile = $file;
+            $path = Ayoola_Doc::getDocumentsDirectory() . $resolvedFile . '.html';
             if( ! is_file( $path ) )
             {
-                if( ! $path = Ayoola_Loader::getFullPath( 'documents' . $file . '.html' ) )
+                if( stripos( $resolvedFile, '/layout/' ) !== 0 )
+                {
+                    $defaultLayout = Application_Settings_CompanyInfo::getSettings( 'Page', 'default_layout' );
+                    if( $defaultLayout )
+                    {
+                        $candidate = '/layout/' . $defaultLayout . '/' . ltrim( $resolvedFile, '/' );
+                        $candidatePath = Ayoola_Doc::getDocumentsDirectory() . $candidate . '.html';
+                        if( is_file( $candidatePath ) )
+                        {
+                            $resolvedFile = $candidate;
+                            $path = $candidatePath;
+                        }
+                    }
+                }
+            }
+            if( ! is_file( $path ) )
+            {
+                if( ! $path = Ayoola_Loader::getFullPath( 'documents' . $resolvedFile . '.html' ) )
                 {
                     continue;
                 }
@@ -173,14 +194,14 @@ class Ayoola_Page_Editor_Text extends Ayoola_Page_Editor_Abstract
             $html = file_get_contents( $path );
 
             $htmlX = $html;
-            Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $htmlX, dirname( $file ) );
+            Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $htmlX, dirname( $resolvedFile ) );
             if( $nextedIncludes = self::getContentIncludes( $htmlX ) )
             {
                 //  do the same thing recursively.
                 $html = self::setContentIncludes( $htmlX, $nextedIncludes );
             }
 
-            $prefix = dirname( $file );
+            $prefix = dirname( $resolvedFile );
             Ayoola_Page_Layout_Abstract::filterThemeContentUrls( $html, $prefix );
             $html = preg_replace(';(href)[\s]*=[\s]*(["\'])' . $prefix . '([^.]*)\.html(?:["\'\.]);i', '$1=$2$3$2', $html ); 
             $content = str_ireplace( $placeholder, $html, $content );

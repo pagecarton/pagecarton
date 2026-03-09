@@ -1115,19 +1115,32 @@ class Application_Article_ShowAll extends Application_Article_Abstract
 			{
 				$data['post_link'] = $data['article_url'];
 
-				switch( Application_Article_Settings::retrieve( 'post_url_format' ) )
+
+				//
+				//
+				//
+				if( $data['post_link'][0] === '/' )
 				{
-					case 'post-type-slug':
-						$data['post_link'] = '/' . $data['article_type'] . '/' . $data['post_slug'];
-					break;
-					case 'slug':
-						$data['post_link'] = '/' . $data['post_slug'];
-					break;
-					case 'date-slug':
-						//	default
-					break;
+					switch( Application_Article_Settings::retrieve( 'post_url_format' ) )
+					{
+						case 'post-type-slug':
+							$data['post_link'] = '/' . $data['article_type'] . '/' . $data['post_slug'];
+						break;
+						case 'slug':
+							$data['post_link'] = '/' . $data['post_slug'];
+						break;
+						case 'date-slug':
+							//	default
+						break;
+					}
 				}
+
+
 			}
+
+			// var_export( $data['post_link'] );
+			// var_export( $data['article_url'] );
+			
 
 			$data['post_full_url'] = Ayoola_Page::getHomePageUrl() . $data['post_link'];
 
