@@ -883,6 +883,10 @@ class Ayoola_Paginator extends Ayoola_Abstract_Table
 				{
 					function cleanData(&$str)
 					{
+						if( ! is_scalar( $str ) )
+						{
+							return false;
+						}
 						if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
 					}
 				}
